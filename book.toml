@@ -1,0 +1,6 @@
+[book]
+authors = ["msaug"]
+language = "en"
+multilingual = false
+src = "src"
+title = "The Cairo Programming Language"
