@@ -12,5 +12,10 @@
   - [Hello, World!](ch01-02-hello-world.md)
   - [Hello, Scarb!](ch01-03-hello-scarb.md)
 
+- [Common Programming Concepts](ch02-00-common-programming-concepts.md)
+
+  - [Comments](ch02-04-comments.md)
+
 - [Appendix](appendix-00.md)
+
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)

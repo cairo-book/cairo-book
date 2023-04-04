@@ -1,10 +1,10 @@
 # Hello, Scarb
 
-Scarb is the Cairo package manager and heavily inspired by [Cargo](https://doc.rust-lang.org/cargo/), a Rust’s build system and package manager.
+Scarb is the Cairo package manager and heavily inspired by [Cargo](https://doc.rust-lang.org/cargo/), Rust’s build system and package manager.
 
-Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or StarkNet contracts), downloading the libraries your code depends on, and building those libraries.
+Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, and building those libraries.
 
-If we had built the “Hello, world!” project with Scarb, it would only use the part of Scarb that handles building your code. As you write more complex Cairo programs, you’ll add dependencies, and if you start a project using Scarb, adding dependencies will be much easier to do.
+If we were to build the 'Hello, world!' project using Scarb, only the part of Scarb that handles building the code would be utilized, since the program doesn't require any external dependencies. As you write more complex Cairo programs, you’ll add dependencies, and if you start a project using Scarb, adding dependencies will be much easier to do.
 
 Let's start by installing Scarb.
 
@@ -79,7 +79,7 @@ The next two lines set the configuration information Scarb needs to compile your
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
-The other file is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later
+The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
 ```rust
 mod hello_scarb;
@@ -96,11 +96,12 @@ fn main() {
 }
 ```
 
-So what we have just done is to create the file `lib.cairo` contains a module declaration that references another module named `hello_scarb`, and the file `hello_scarb.cairo` which contains the implementation details of the `hello_scarb` module.
+We have just created a file called lib.cairo, which contains a module declaration referencing another module named "hello_scarb", as well as the file hello_scarb.cairo, containing the implementation details of the "hello_scarb" module.
 
-Furthermore, Scarb expects your source files to live inside the src directory.
+Scarb requires your source files to be located within the src directory.
 
-The top-level project directory is just for README files, license information, configuration files, and anything else not related to your code. Using Scarb helps you organize your projects. There’s a place for everything, and everything is in its place.
+The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
+Scarb ensures a designated location for all project components, maintaining a structured organization.
 
 If you started a project that doesn’t use Scarb, as we did with the “Hello, world!” project, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate `Scarb.toml` file.
 
@@ -125,7 +126,7 @@ $ cairo-run -- src/lib.cairo
 Run completed successfully, returning []
 ```
 
-We just built a project with scarb build, now let run it directly with `cairo-run`, but we can also use `scarb run` to run cairo code directly.
+We just built a project using 'scarb build'; now, let's run it directly with 'cairo-run'. We can also use 'scarb run' to execute custom shell scripts.
 
 Add the following line to your `Scarb.toml` file:
 
