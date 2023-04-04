@@ -32,12 +32,11 @@ In Cairo, if you don't specify the type of a variable or argument, its type defa
 
 The most important difference between integers and field elements is division: Division of field elements (and therefore division in Cairo) is not the integer division you have in many programming languages, where the integral part of the quotient is returned (so you get `7 / 3 = 2`). As long as the numerator is a multiple of the denominator, it will behave as you expect (`6 / 3 = 2`). If this is not the case, for example when we divide `7/3`, it will result in a field element `x` that will satisfy `3 * x = 7`. It won’t be `2.3333` because x has to be an integer. IIf this seems implausible, keep in mind that if 3 * x falls outside the range -P/2 < x < P/2, an overflow occurs, potentially bringing the result down to 7 It is a widely acknowledged mathematical principle that, unless the denominator is zero, there will always be a value x such that denominator * x = numerator
 
-The felt252 type is a fundamental type that serves as the basis for creating custom types in the core library. All other types, except felt252, are built on top of this foundational type by combining felts with additional security features.
-
-It is highly recommended for programmers to use the custom types instead of the felt252 type whenever possible, as the custom types come with added security features that provide extra protection against potential vulnerabilities in the code. By utilizing these custom types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
-
 #### Integer Types
 
+The felt252 type is a fundamental type that serves as the basis for creating integer types in the core library.
+
+It is highly recommended for programmers to use the custom types instead of the felt252 type whenever possible, as the custom types come with added security features that provide extra protection against potential vulnerabilities in the code. By utilizing these custom types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
 An *integer* is a number without a fractional component. This type declaration indicates the number of bytes the programmer can use to store the integer. 
 Table 3-1 shows
 the built-in integer types in Cairo. We can use any of these variants to declare
