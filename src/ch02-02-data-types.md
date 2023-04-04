@@ -36,7 +36,7 @@ The most important difference between integers and field elements is division: D
 
 The felt252 type is a fundamental type that serves as the basis for creating integer types in the core library.
 
-It is highly recommended for programmers to use the custom types instead of the felt252 type whenever possible, as the custom types come with added security features that provide extra protection against potential vulnerabilities in the code. By utilizing these custom types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
+It is highly recommended for programmers to use the core types instead of the felt252 type whenever possible, as the core types come with added security features that provide extra protection against potential vulnerabilities in the code. By using these core types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
 An *integer* is a number without a fractional component. This type declaration indicates the number of bytes the programmer can use to store the integer. 
 Table 3-1 shows
 the built-in integer types in Cairo. We can use any of these variants to declare
