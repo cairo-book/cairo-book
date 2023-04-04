@@ -10,7 +10,7 @@ names, in which all letters are lowercase and underscores separate words.
 Here’s a program that contains an example function definition:
 
 
-```Rust
+```rust
 use debug::PrintTrait;
 
 fn another_function() {
@@ -60,13 +60,15 @@ function.
 
 In this version of `another_function` we add a parameter:
 
-```Rust
+```rust
+use debug::PrintTrait;
+
 fn main() {
     another_function(5);
 }
 
-fn another_function(x: felt) {
-    debug::print_felt(x);
+fn another_function(x: felt252) {
+    x.print();
 }
 ```
 
@@ -74,12 +76,12 @@ Try running this program; you should get the following output:
 
 ```console
 $ cairo-run main.cairo
-5
+[DEBUG]                                 (raw: 5)
 ```
 
 The declaration of `another_function` has one parameter named `x`. The type of
-`x` is specified as `felt`. When we pass `5` in to `another_function`, the
-`debug::print_felt!` macro puts `5` in the output console.
+`x` is specified as `felt252`. When we pass `5` in to `another_function`, the
+`.print()` macro puts `5` in the output console.
 
 In function signatures, you *must* declare the type of each parameter. This is
 a deliberate decision in Cairo’s design: requiring type annotations in function
@@ -90,28 +92,30 @@ more helpful error messages if it knows what types the function expects.
 When defining multiple parameters, separate the parameter declarations with
 commas, like this:
 
-```Rust
+```rust
+use debug::PrintTrait;
+
 fn main() {
     another_function(5,6);
 }
 
-fn another_function(x: felt, y:felt) {
-    debug::print_felt(x);
-    debug::print_felt(y);
+fn another_function(x: felt252, y:felt252) {
+    x.print();
+    y.print();
 }
 ```
 
 This example creates a function named `another_function` with two
-parameters. The first parameter is named `x` and is an `felt`. The second is
-named `y` and is type `felt` too. The function then prints the content of the felt `x` and then the content of the felt `y`.
+parameters. The first parameter is named `x` and is an `felt252`. The second is
+named `y` and is type `felt252` too. The function then prints the content of the felt `x` and then the content of the felt `y`.
 
 Let’s try running this code. Replace the program currently in your *functions*
 project’s *src/main.cairo* file with the preceding example and run it using `cairo-run main.cairo`:
 
 ```console
 $ cairo-run main.cairo
-5
-6
+[DEBUG]                                 (raw: 5)
+[DEBUG]                                 (raw: 6)
 ```
 
 Because we called the function with `5` as the value for `x` and `6` as
@@ -135,7 +139,7 @@ We’ve actually already used statements and expressions. Creating a variable an
 assigning a value to it with the `let` keyword is a statement. In Listing 3-1,
 `let y = 6;` is a statement.
 
-```Rust
+```rust
 fn main() {
     let y = 6;
 }
@@ -149,7 +153,7 @@ statement in itself.
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
-```Rust
+```rust
 fn main() {
     let x = (let y = 6);
 }
@@ -192,19 +196,20 @@ expression. Calling a macro is an expression. A new scope block created with
 curly brackets is an expression, for example:
 
 
-```Rust
+```rust
+use debug::PrintTrait;
 fn main() {
     let y = {
         let x = 3;
         x + 1
     };
 
-    debug::print_felt(y);
+    y.print();
 }
 ```
 
 This expression:
-```Rust
+```rust
 {
     let x = 3;
     x + 1
@@ -226,54 +231,76 @@ function by using the `return` keyword and specifying a value, but most
 functions return the last expression implicitly. Here’s an example of a
 function that returns a value:
 
-```Rust
-fn five() -> i32 {
-    5
+```rust
+use debug::PrintTrait;
+
+fn five() -> u32 {
+    5_u32
 }
 
 fn main() {
     let x = five();
-    debug::print_felt(x);
+    x.print();
 }
 ```
 There are no function calls, macros, or even `let` statements in the `five`
 function—just the number `5` by itself. That’s a perfectly valid function in
-Cairo. Note that the function’s return type is specified too, as `-> i32`. Try
+Cairo. Note that the function’s return type is specified too, as `-> u32`. Try
 running this code; the output should look like this:
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/output.txt}}
+$ cairo-run main.cairo
+[DEBUG]                                 (raw: 5)
 ```
 The `5` in `five` is the function’s return value, which is why the return type
-is `i32`. Let’s examine this in more detail. There are two important bits:
+is `u32`. Let’s examine this in more detail. There are two important bits:
 first, the line `let x = five();` shows that we’re using the return value of a
 function to initialize a variable. Because the function `five` returns a `5`,
 that line is the same as the following:
-```Cairo
+```rust
 let x = 5;
 ```
 Second, the `five` function has no parameters and defines the type of the
 return value, but the body of the function is a lonely `5` with no semicolon
 because it’s an expression whose value we want to return.
 Let’s look at another example:
-<span class="filename">Filename: src/main.rs</span>
-```Cairo
-{{#Cairodoc_include ../listings/ch03-common-programming-concepts/no-listing-22-function-parameter-and-return/src/main.rs}}
+
+```rust
+use debug::PrintTrait;
+
+fn main() {
+    let x = plus_one(5_u32);
+
+    x.print();
+}
+
+fn plus_one(x: u32) -> u32 {
+    x + 1_u32
+}
 ```
-Running this code will print `The value of x is: 6`. But if we place a
+Running this code will print `[DEBUG]                    (raw: 6)`. But if we place a
 semicolon at the end of the line containing `x + 1`, changing it from an
 expression to a statement, we’ll get an error:
-<span class="filename">Filename: src/main.rs</span>
-```Cairo,ignore,does_not_compile
-{{#Cairodoc_include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/src/main.rs}}
+
+```rust
+use debug::PrintTrait;
+
+fn main() {
+    let x = plus_one(5_u32);
+
+    x.print();
+}
+
+fn plus_one(x: u32) -> u32 {
+    x + 1_u32;
+}
 ```
+
 Compiling this code produces an error, as follows:
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/output.txt}}
+error: Unexpected return type. Expected: "core::integer::u32", found: "()".
 ```
-The main error message, `mismatched types`, reveals the core issue with this
+The main error message, `Unexpected return type`, reveals the core issue with this
 code. The definition of the function `plus_one` says that it will return an
-`i32`, but statements don’t evaluate to a value, which is expressed by `()`,
+`u32`, but statements don’t evaluate to a value, which is expressed by `()`,
 the unit type. Therefore, nothing is returned, which contradicts the function
-definition and results in an error. In this output, Cairo provides a message to
-possibly help rectify this issue: it suggests removing the semicolon, which
-would fix the error.
+definition and results in an error.
