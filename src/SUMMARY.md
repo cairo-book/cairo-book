@@ -11,6 +11,7 @@
   - [Installation](ch01-01-installation.md)
   - [Hello, World!](ch01-02-hello-world.md)
   - [Hello, Scarb!](ch01-03-hello-scarb.md)
+## Common Programming Concepts
 - [Common Programming Concepts](ch02-00-common-programming-concepts.md)
   - [Variables and Mutability](ch02-01-variables-and-mutability.md)
   - [Data Types](ch02-02-data-types.md)
