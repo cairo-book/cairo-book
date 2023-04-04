@@ -1,33 +1,40 @@
 ## Data Types
 
 Every value in Cairo is of a certain *data type*, which tells Cairo what kind of
-data is being specified so it knows how to work with that data. his section covers two subsets of data types: scalars and compounds.
+data is being specified so it knows how to work with that data. This section covers two subsets of data types: scalars and compounds.
 
 Keep in mind that Cairo is a *statically typed* language, which means that it
 must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases
 when many types are possible, we can use a cast method where we specify the desired output type.
 
 ```Rust
-let guess = cast("42",u32);
+use traits::TryInto;
+use option::OptionTrait;
+fn main(){
+    let x = 3;
+    let y:u32 = x.try_into().unwrap();
+}
 ```
 
 You’ll see different type annotations for other data types.
 
-### Felts Type
-
-In Cairo when you don't specify the type of a variable/argument, its type is a field element (represented by the keyword `felt`). In the context of Cairo, when we say “a field element” we mean an integer in the range -P/2 < x < P/2 
- where 
- is a very large (prime) number (currently it is a 252-bit number, which is a number with 76 decimal digits). When we add, subtract or multiply and the result is outside the range above, there is an overflow, and the appropriate multiple of P
- is added or subtracted to bring the result back into this range (in other words, the result is computed modulo P).
-
-The most important difference between integers and field elements is division: Division of field elements (and therefore division in Cairo) is not the integer division you have in many programming languages, where the integral part of the quotient is returned (so you get `7 / 3 = 2`). As long as the numerator is a multiple of the denominator, it will behave as you expect (`6 / 3 = 2`). If this is not the case, for example when we divide `7/3`, it will result in a field element `x` that will satisfy `3 * x = 7`. It won’t be `2.3333` because x has to be an integer. If this seems impossible, remember that if `3 * x` is outside the range -P/2 < x < P/2 
-, an overflow will occur which can bring the result down to 7. It’s a well-known mathematical fact that unless the denominator is zero, there will always be a value x satisfying `denominator * x = numerator`.
 
 ### Scalar Types
 
 A *scalar* type represents a single value. Cairo has three primary scalar types:
 integers, booleans, and characters. You may recognize
 these from other programming languages. Let’s jump into how they work in Cairo.
+
+#### Felt Type
+
+In Cairo, if you don't specify the type of a variable or argument, its type defaults to a field element, represented by the keyword `felt252`. In the context of Cairo, when we say “a field element” we mean an integer in the range -P/2 < x < P/2 
+ where P is a very large (prime) number (currently it is a 252-bit number, which is a number with 76 decimal digits). When adding, subtracting, or multiplying, if the result falls outside the specified range of the prime number, an overflow occurs, and an appropriate multiple of P is added or subtracted to bring the result back within the range (i.e., the result is computed modulo P).
+
+The most important difference between integers and field elements is division: Division of field elements (and therefore division in Cairo) is not the integer division you have in many programming languages, where the integral part of the quotient is returned (so you get `7 / 3 = 2`). As long as the numerator is a multiple of the denominator, it will behave as you expect (`6 / 3 = 2`). If this is not the case, for example when we divide `7/3`, it will result in a field element `x` that will satisfy `3 * x = 7`. It won’t be `2.3333` because x has to be an integer. IIf this seems implausible, keep in mind that if 3 * x falls outside the range -P/2 < x < P/2, an overflow occurs, potentially bringing the result down to 7 It is a widely acknowledged mathematical principle that, unless the denominator is zero, there will always be a value x such that denominator * x = numerator
+
+The felt252 type is a fundamental type that serves as the basis for creating custom types in the core library. All other types, except felt252, are built on top of this foundational type by combining felts with additional security features.
+
+It is highly recommended for programmers to use the custom types instead of the felt252 type whenever possible, as the custom types come with added security features that provide extra protection against potential vulnerabilities in the code. By utilizing these custom types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
 
 #### Integer Types
 
@@ -46,26 +53,19 @@ the type of an integer value.
 | 64-bit    | `u64`    |
 | 128-bit   | `u128`   |
 | 256-bit   | `u256`   |
-|arch(32bit)| `usize`  |
+| 32-bit    | `usize`  |
 
 Each variant has an explicit size.
 As variables are unsigned, they can't contain a negative number. This code will cause the program to panic: 
-```Swift
+```rust
 fn sub_u8s(x: u8, y: u8) -> u8 {
     x - y
 }
 
-main() {
+fn main() {
     sub_u8s(1,3)
 }
 ```
-Unsigned ints can store numbers from 0 to 2<sup>n</sup> - 1,
-so a `u8` can store numbers from 0 to 2<sup>8</sup> - 1, which equals 0 to 255.
-
-Additionally, the `usize` type depends on the architecture of the
-computer your program is running on, which is denoted in the table as “arch”:
-64 bits if you’re on a 64-bit architecture and 32 bits if you’re on a 32-bit
-architecture.
 
 You can write integer literals in any of the forms shown in Table 3-2. Note
 that number literals that can be multiple numeric types allow a type suffix,
@@ -77,48 +77,37 @@ such as `57_u8`, to designate the type.
 |------------------|---------------|
 | Decimal          | `98222`       |
 | Hex              | `0xff`        |
+| Octal            | `0o04321`     |
+| Binary           | `0b01`        |
 
 So how do you know which type of integer to use? Try to estimate the max value your int can have and choose the good size.
 The primary situation in which you’d use `usize` is when indexing some sort of collection.
 
-[//]: # "TODO: write panic chapter"
-
-> ##### Integer Overflow
->
-> Let’s say you have a variable of type `u8` that can hold values between 0 and
-> 255. If you try to change the variable to a value outside that range, such as
-> 256, *integer overflow* will occur, which can result in one of two behaviors.
-> When you’re compiling in debug mode, Cairo includes checks for integer overflow
-> that cause your program to *panic* at runtime if this behavior occurs. Cairo
-> uses the term *panicking* when a program exits with an error; we’ll discuss
-> panics in more depth in the [“Unrecoverable Errors with
-> `panic!`”][unrecoverable-errors-with-panic]<!-- ignore --> section in Chapter
-> 9.
 
 #### Numeric Operations
 
-Cairo supports the basic mathematical operations you’d expect for all the number
-types: addition, subtraction, multiplication, division, and remainder. Integer
+Cairo supports the basic mathematical operations you’d expect for all the integer
+types: addition, subtraction, multiplication, division, and remainder (u256 doesn't support division and remainder yet). Integer
 division truncates toward zero to the nearest integer. The following code shows
 how you’d use each numeric operation in a `let` statement:
 
 ```rust
 fn main() {
      // addition
-    let sum = 5 + 10;
+    let sum = 5_u128 + 10_u128;
 
     // subtraction
-    let difference = 95 - 4;
+    let difference = 95_u128 - 4_u128;
 
     // multiplication
-    let product = 4 * 30;
+    let product = 4_u128 * 30_u128;
 
     // division
-    let quotient = 56 / 32; //result is 1
-    let quotient = 64 / 32; //result is 2
+    let quotient = 56_u128 / 32_u128; //result is 1
+    let quotient = 64_u128 / 32_u128; //result is 2
 
     // remainder
-    let remainder = 43 % 5; // result is 3
+    let remainder = 43_u128 % 5_u128; // result is 3
 }
 ```
 
@@ -149,7 +138,7 @@ Flow”][control-flow]<!-- ignore --> section.
 
 #### The Short String Type
 
-Cairo’s `short sting` type is the language’s most primitive alphabetic type, the length is at most 31 characters as they are stored in a felt. Here are
+Cairo doesn't have a native type for strings, but you can store characters forming what we call a "short string" inside `felt252`s. Here are
 some examples of declaring values by puting them beteen single quotes:
 
 
@@ -184,14 +173,15 @@ The variable `tup` binds to the entire tuple because a tuple is considered a
 single compound element. To get the individual values out of a tuple, we can
 use pattern matching to destructure a tuple value, like this:
 
-```Rust
+```rust
+use debug::PrintTrait;
 fn main() {
     let tup = (500, 6, true);
 
     let (x, y, z) = tup;
 
     if y == 6 {
-        debug::print_felt('y is six!');
+        'y is six!'.print();
     }
 }
 ```
@@ -199,13 +189,13 @@ fn main() {
 This program first creates a tuple and binds it to the variable `tup`. It then
 uses a pattern with `let` to take `tup` and turn it into three separate
 variables, `x`, `y`, and `z`. This is called *destructuring* because it breaks
-the single tuple into three parts. Finally, the program prints the value of
-`y`, which is `6.4`.
+the single tuple into three parts. Finally, the program prints `y is six` as the value of
+`y` is `6`.
 
 We can also declare the tuple with value and name at the same time.
 For example:
 
-```Rust
+```rust
 fn main() {
     let tup: (x: felt, y: felt) = (2,3);
 }
@@ -234,12 +224,13 @@ Another way to have a collection of multiple values is with an *array*. Unlike
 a tuple, every element of an array must have the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
 
 An important thing to note is that arrays are append-only. This means that you can only add elements to the end of an array.
+Arrays are, in fact, queues.
 You cannot modify an elements in an array.
 This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it.
 
 Here is an example of creation of an array with 3 elements:
 
-```Rust
+```rust
 use array::ArrayTrait;
 
 fn main() {
@@ -251,29 +242,43 @@ fn main() {
 ```
 
 It is possible to remove an element of an array by doing: 
-```Rust
-    let mut a = create_array();
+```rust
 
-    a.pop_front().unwrap();
+use option::OptionTrait;
+use array::ArrayTrait;
+use debug::PrintTrait;
+
+fn main() {
+    let mut a = ArrayTrait::new();
+    a.append(10);
+    a.append(1);
+    a.append(2);
+
+    let first_value = a.pop_front().unwrap();
+    first_value.print();
+
+}
 ```
-[//]: # "TODO: stack and heap"
-Arrays are useful when you want your data allocated on the stack rather than
-the heap (we will discuss the stack and the heap more in [Chapter
-4][stack-and-heap]<!-- ignore -->).
+The above code will print `10` as we remove the first element that was added.
 
-You write an array’s type by passing the type like this: 
+You can pass the expected type of items inside the array when instantiating the array like this
 
-```Rust
-let mut arr = array_new::<u128>();
+```rust
+let mut arr = ArrayTrait::<u128>::new();
 ```
 
 ##### Accessing Array Elements
 
-You can access elements of an array using indexing,
-like this:
+You can access elements of an array using indexing.
+You can use `get()` or `at()` which have different functionning.
 
+The `get` function returns an `Option<Box<@T>>`, which means it returns a pointer to a box containing a reference to the element at the specified index if that element exists in the array. If the element doesn't exist, get returns `None`. This allows checking if the index is valid before accessing the element, which can help avoid segmentation faults.
 
-```Rust
+The `at` function, on the other hand, directly returns a reference to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. This function is more concise than `get`, but it doesn't provide any index checking, so it's more prone to segmentation faults.
+
+In summary, `get` is safer because it returns an `Option` that allows checking if the index is valid, while at is more concise but can cause segmentation faults if the index is out of bounds.
+
+```rust
 fn main() {
     let mut a = ArrayTrait::new();
     a.append(0);
@@ -290,23 +295,20 @@ the value `1` from index `1` in the array.
 
 ##### Invalid Array Element Access
 
-By using the ArrayTrait::get() function because it returns an Option type, meaning that if you're trying to access an index out of bounds, it will return None instead of exiting your program, meaning that you can implement error management functionalities.
+By using the `ArrayTrait::get()` function because it returns an Option type, meaning that if you're trying to access an index out of bounds, it will return None instead of exiting your program, meaning that you can implement error management functionalities.
 
 
 
 ```Rust
 use array::ArrayTrait;
-// While the core library declares the drop implementation for felt arrays,
-// u128 are not supported yet. We can declare it ourself like this:
-impl ArrayU128Drop of Drop::<Array::<u128>>;
-
+use box::BoxTrait;
 fn main() -> u128 {
-    let mut arr = array_new::<u128>();
+    let mut arr = ArrayTrait::<u128>::new();
     arr.append(100_u128);
     let length = arr.len();
     match arr.get(length - 1_usize) {
         Option::Some(x) => {
-            x
+            *x.unbox()
         },
         Option::None(_) => {
             let mut data = ArrayTrait::new();
@@ -316,3 +318,5 @@ fn main() -> u128 {
     } // returns 100
 }
 ```
+
+[control-flow]: ch02-05-control-flow.html
