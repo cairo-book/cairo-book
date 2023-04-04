@@ -1,12 +1,10 @@
 ## Data Types
 
 Every value in Cairo is of a certain *data type*, which tells Cairo what kind of
-data is being specified so it knows how to work with that data. We’ll look at
-two data type subsets: scalar and compound.
+data is being specified so it knows how to work with that data. his section covers two subsets of data types: scalars and compounds.
 
 Keep in mind that Cairo is a *statically typed* language, which means that it
-must know the types of all variables at compile time. The compiler can usually
-infer what type we want to use based on the value and how we use it. In cases
+must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases
 when many types are possible, we can use a cast method where we specify the desired output type.
 
 ```Rust
@@ -17,7 +15,7 @@ You’ll see different type annotations for other data types.
 
 ### Felts Type
 
-In Cairo when you don’t specify a type of a variable/argument, its type is a field element (represented by the keyword `felt`). In the context of Cairo, when we say “a field element” we mean an integer in the range -P/2 < x < P/2 
+In Cairo when you don't specify the type of a variable/argument, its type is a field element (represented by the keyword `felt`). In the context of Cairo, when we say “a field element” we mean an integer in the range -P/2 < x < P/2 
  where 
  is a very large (prime) number (currently it is a 252-bit number, which is a number with 76 decimal digits). When we add, subtract or multiply and the result is outside the range above, there is an overflow, and the appropriate multiple of P
  is added or subtracted to bring the result back into this range (in other words, the result is computed modulo P).
@@ -33,7 +31,7 @@ these from other programming languages. Let’s jump into how they work in Cairo
 
 #### Integer Types
 
-An *integer* is a number without a fractional component. This type declaration indicates the number of bytes we can use to store the integer. 
+An *integer* is a number without a fractional component. This type declaration indicates the number of bytes the programmer can use to store the integer. 
 Table 3-1 shows
 the built-in integer types in Cairo. We can use any of these variants to declare
 the type of an integer value.
@@ -64,7 +62,7 @@ main() {
 Unsigned ints can store numbers from 0 to 2<sup>n</sup> - 1,
 so a `u8` can store numbers from 0 to 2<sup>8</sup> - 1, which equals 0 to 255.
 
-Additionally, the `usize` type depend on the architecture of the
+Additionally, the `usize` type depends on the architecture of the
 computer your program is running on, which is denoted in the table as “arch”:
 64 bits if you’re on a 64-bit architecture and 32 bits if you’re on a 32-bit
 architecture.
@@ -75,7 +73,7 @@ such as `57_u8`, to designate the type.
 
 <span class="caption">Table 3-2: Integer Literals in Cairo</span>
 
-| Number literals  | Example       |
+| Numeric literals | Example       |
 |------------------|---------------|
 | Decimal          | `98222`       |
 | Hex              | `0xff`        |
