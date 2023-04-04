@@ -1,7 +1,11 @@
 ## Variables and Mutability
 
-Cairo uses an immutable memory model, meaning that once a memory cell is written to, it can't be overwritten but only read from. To reflect this immutable memory model, variables in Cairo are immutable by default.
-However, the language abstracts this model and gives you the option to make your variables mutable. Let’s explore how and why Cairo enforces immutability, and how you can make your variables mutable.
+Cairo uses an immutable memory model, meaning that once a memory cell is written to,
+it can't be overwritten but only read from. To reflect this immutable memory model,
+variables in Cairo are immutable by default.
+However, the language abstracts this model and gives you the option to make your
+variables mutable. Let’s explore how and why Cairo enforces immutability, and how
+you can make your variables mutable.
 
 When a variable is immutable, once a value is bound to a name, you can’t change
 that value. To illustrate this, generate a new project called _variables_ in
@@ -211,7 +215,7 @@ fn main() {
 }
 ```
 
-The first `x` variable has a u64 type while the second 'x' variable has a felt252 type.
+The first `x` variable has a `u64` type while the second `x` variable has a `felt252` type.
 Shadowing thus spares us from having to come up with different names, such as `x_u64`
 and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try to use
 `mut` for this, as shown here, we’ll get a compile-time error:
