@@ -10,6 +10,7 @@
 
   - [Installation](ch01-01-installation.md)
   - [Hello, World!](ch01-02-hello-world.md)
+  - [Data Types](ch02-02-data-types.md)
 
 - [Appendix](appendix-00.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
