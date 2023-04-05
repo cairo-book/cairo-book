@@ -34,14 +34,14 @@ called from inside the `main` function. Note that we defined `another_function`
 as well. Cairo doesn’t care where you define your functions, only that they’re
 defined somewhere in a scope that can be seen by the caller.
 
-Let’s start a new binary project named *functions* to explore functions
-further. Place the `another_function` example in *src/main.cairo* and run it. You
+Let’s start a new project with Scarb named *functions* to explore functions
+further. Place the `another_function` example in *src/lib.cairo* and run it. You
 should see the following output:
 
 ```console
-$ cairo-run main.cairo
-Hello, world!
-Another function.
+$ cairo-run src/lib.cairo
+[DEBUG] Hello, world!                (raw: 5735816763073854953388147237921)
+[DEBUG] Another function.            (raw: 22265147635379277118623944509513687592494)
 ```
 
 The lines execute in the order in which they appear in the `main` function.
@@ -75,13 +75,13 @@ fn another_function(x: felt252) {
 Try running this program; you should get the following output:
 
 ```console
-$ cairo-run main.cairo
+$ cairo-run src/lib.cairo
 [DEBUG]                                 (raw: 5)
 ```
 
 The declaration of `another_function` has one parameter named `x`. The type of
 `x` is specified as `felt252`. When we pass `5` in to `another_function`, the
-`.print()` macro puts `5` in the output console.
+`.print()` function outputs `5` in the console.
 
 In function signatures, you *must* declare the type of each parameter. This is
 a deliberate decision in Cairo’s design: requiring type annotations in function
@@ -110,10 +110,10 @@ parameters. The first parameter is named `x` and is an `felt252`. The second is
 named `y` and is type `felt252` too. The function then prints the content of the felt `x` and then the content of the felt `y`.
 
 Let’s try running this code. Replace the program currently in your *functions*
-project’s *src/main.cairo* file with the preceding example and run it using `cairo-run main.cairo`:
+project’s *src/lib.cairo* file with the preceding example and run it using `cairo-run src/lib.cairo`:
 
 ```console
-$ cairo-run main.cairo
+$ cairo-run src/lib.cairo
 [DEBUG]                                 (raw: 5)
 [DEBUG]                                 (raw: 6)
 ```
@@ -160,24 +160,24 @@ fn main() {
 ```
 When you run this program, the error you’ll get looks like this:
 ```console
-$ cairo-run main.cairo
+$ cairo-run src/lib.cairo
 error: Missing token TerminalRParen.
- --> main.cairo:2:14
+ --> src/lib.cairo:2:14
     let x = (let y = 6);
              ^
 
 error: Missing token TerminalSemicolon.
- --> main.cairo:2:14
+ --> src/lib.cairo:2:14
     let x = (let y = 6);
              ^
 
 error: Missing token TerminalSemicolon.
- --> main.cairo:2:14
+ --> src/lib.cairo:2:14
     let x = (let y = 6);
                       ^
 
 error: Skipped tokens. Expected: statement.
- --> main.cairo:2:14
+ --> src/lib.cairo:2:14
     let x = (let y = 6);
 ```
 
@@ -192,7 +192,7 @@ you’ll write in Cairo. Consider a math operation, such as `5 + 6`, which is an
 expression that evaluates to the value `11`. Expressions can be part of
 statements: in Listing 3-1, the `6` in the statement `let y = 6;` is an
 expression that evaluates to the value `6`. Calling a function is an
-expression. Calling a macro is an expression. A new scope block created with
+expression. A new scope block created with
 curly brackets is an expression, for example:
 
 
@@ -243,12 +243,12 @@ fn main() {
     x.print();
 }
 ```
-There are no function calls, macros, or even `let` statements in the `five`
+There are no function calls, or even `let` statements in the `five`
 function—just the number `5` by itself. That’s a perfectly valid function in
 Cairo. Note that the function’s return type is specified too, as `-> u32`. Try
 running this code; the output should look like this:
 ```console
-$ cairo-run main.cairo
+$ cairo-run src/lib.cairo
 [DEBUG]                                 (raw: 5)
 ```
 The `5` in `five` is the function’s return value, which is why the return type
