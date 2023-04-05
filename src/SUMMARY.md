@@ -17,6 +17,7 @@
   - [Data Types](ch02-02-data-types.md)
   - [Functions](ch02-03-functions.md)
   - [Comments](ch02-04-comments.md)
+  - [Control Flow](ch02-05-control-flow.md)
 
 - [Appendix](appendix-00.md)
 
