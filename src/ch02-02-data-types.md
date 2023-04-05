@@ -22,7 +22,7 @@ You’ll see different type annotations for other data types.
 ### Scalar Types
 
 A *scalar* type represents a single value. Cairo has three primary scalar types:
-integers, booleans, and characters. You may recognize
+felts, integers, and booleans. You may recognize
 these from other programming languages. Let’s jump into how they work in Cairo.
 
 #### Felt Type
@@ -268,14 +268,13 @@ let mut arr = ArrayTrait::<u128>::new();
 
 ##### Accessing Array Elements
 
-You can access elements of an array using indexing.
-You can use `get()` or `at()` which have different functionning.
+To access array elements, you can use `get()` or `at()` which have different functionning.
 
-The `get` function returns an `Option<Box<@T>>`, which means it returns a pointer to a box containing a reference to the element at the specified index if that element exists in the array. If the element doesn't exist, get returns `None`. This allows checking if the index is valid before accessing the element, which can help avoid segmentation faults.
+The `get` function returns an `Option<Box<@T>>`, which means it returns a pointer to a box containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, get returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics.
 
-The `at` function, on the other hand, directly returns a reference to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. This function is more concise than `get`, but it doesn't provide any index checking, so it's more prone to segmentation faults.
+The `at` function, on the other hand, directly returns a snapshot to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. You should only use at when you want the program to panic if the provided index is out of the array's bounds, which can prevent unexpected behavior.
 
-In summary, `get` is safer because it returns an `Option` that allows checking if the index is valid, while at is more concise but can cause segmentation faults if the index is out of bounds.
+In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
 ```rust
 fn main() {
@@ -283,8 +282,8 @@ fn main() {
     a.append(0);
     a.append(1);
 
-    let first = a.get(0_usize);
-    let second = a.get(1_usize);
+    let first = *a.at(0_usize);
+    let second = *a.at(1_usize);
 }
 ```
 
@@ -292,13 +291,7 @@ In this example, the variable named `first` will get the value `0` because that
 is the value at index `0` in the array. The variable named `second` will get
 the value `1` from index `1` in the array.
 
-##### Invalid Array Element Access
-
-By using the `ArrayTrait::get()` function because it returns an Option type, meaning that if you're trying to access an index out of bounds, it will return None instead of exiting your program, meaning that you can implement error management functionalities.
-
-
-
-```Rust
+```rust
 use array::ArrayTrait;
 use box::BoxTrait;
 fn main() -> u128 {
@@ -317,5 +310,7 @@ fn main() -> u128 {
     } // returns 100
 }
 ```
+
+The above example shows how we can do an error management by using the `get` instead of the `at` method.
 
 [control-flow]: ch02-05-control-flow.html
