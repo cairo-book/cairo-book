@@ -2,7 +2,7 @@
 
 Structs are similar to tuples, discussed in [The Data Types](ch02-02-data-types.md) section, in that both hold multiple related values. Like tuples, the pieces of a struct can be different types. Unlike with tuples, in a struct you’ll name each piece of data so it’s clear what the values mean. Adding these names means that structs are more flexible than tuples: you don’t have to rely on the order of the data to specify or access the values of an instance.
 
-To define a struct, we enter the keyword struct and name the entire struct. A struct’s name should describe the significance of the pieces of data being grouped together. Then, inside curly brackets, we define the names and types of the pieces of data, which we call fields. For example, Listing 4-1 shows a struct that stores information about a user account.
+To define a struct, we enter the keyword `struct` and name the entire struct. A struct’s name should describe the significance of the pieces of data being grouped together. Then, inside curly brackets, we define the names and types of the pieces of data, which we call fields. For example, Listing 4-1 shows a struct that stores information about a user account.
 
 <span class="filename">Filename: structs.cairo</span>
 
@@ -45,9 +45,7 @@ fn main() {
 
 <span class="caption">Listing 4-2: Creating an instance of the `User` struct</span>
 
-To get a specific value from a struct, we use dot notation. For example, to access this user’s email address, we use `user1.email`
-
-If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field. Listing 4-3 shows how to change the value in the `email` field of a mutable `User` instance.
+To get a specific value from a struct, we use dot notation. For example, to access this user’s email address, we use `user1.email`. If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field. Listing 4-3 shows how to change the value in the `email` field of a mutable `User` instance.
 
 <span class="filename">Filename: structs.cairo</span>
 
@@ -108,7 +106,3 @@ fn build_user(email: felt252, username: felt252) -> User {
 <span class="caption">Listing 4-5: A `build_user` function that uses field init shorthand because the `username` and `email` parameters have the same name as struct fields</span>
 
 Here, we’re creating a new instance of the `User` struct, which has a field named `email`. We want to set the `email` field’s value to the value in the `email` parameter of the `build_user` function. Because the `email` field and the `email` parameter have the same name, we only need to write `email` rather than `email: email`.
-
-# TODO
-
-- [ ] Assessing Ownership of Struct Data with lifetimes feature
