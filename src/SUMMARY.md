@@ -33,6 +33,7 @@
 - [Using Structs to Structure Related Data](ch04-00-using-structs-to-structure-related-data.md)
   - [Defining and Instantiating Structs](ch04-01-defining-and-instantiating-structs.md)
   - [An Example Program Using Structs](ch04-02-an-example-program-using-structs.md)
+  - [Method Syntax](ch04-03-method-syntax.md)
 
 ## Enums and Pattern Matching
 
