@@ -26,6 +26,11 @@
 - [Using Structs to Structure Related Data](ch04-00-using-structs-to-structure-related-data.md)
   - [Defining and Instantiating Structs](ch04-01-defining-and-instantiating-structs.md)
   - [An Example Program Using Structs](ch04-02-an-example-program-using-structs.md)
+
+## Enums and Pattern Matching
+
+- [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md)
+  - [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
 - [Appendix](appendix-00.md)
 
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
