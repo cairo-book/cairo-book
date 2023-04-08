@@ -6,7 +6,7 @@ Enums, short for "enumerations," are a way to define a custom data type that con
 
 Here's a simple example of an enum:
 
-```cairo
+```rs
 #[derive(Drop)]
 enum Direction {
     North : (),
@@ -18,7 +18,7 @@ enum Direction {
 
 Unlike other languages like Rust, every variant has a type. In this example, we've defined an enum called `Direction` with four variants: `North`, `East`, `South`, and `West`. The naming convention is to use PascalCase for enum variants. Each variant represents a distinct value of the Direction type and is associated with a unit type `()`. One variant can be instanciated using this syntax:
 
-```cairo
+```rs
 let direction = Direction::North(());
 ```
 
@@ -26,7 +26,7 @@ It's easy to write code that acts differently depending on the variant of an enu
 
 ## Enums Combined with Custom Types
 Enums can also be used to store more interesting data associated with each variant. For example:
-```cairo
+```rs
 enum Animal {
     Elephant : (u128, u128),
     Ant : (),
@@ -43,7 +43,7 @@ The `Giraffe` variant holds three `u128` values, which could represent the weigh
 ## Trait Implementations for Enums
 In Cairo, you can define traits and implement them for your custom enums. This allows you to define methods and behaviors associated with the enum. Here's an example of defining a trait and implementing it for the previous `Animal` enum:
 
-```cairo
+```rs
 trait AnimalWeight {
     fn get_weight(self: Animal) -> u128;
 }
@@ -88,7 +88,7 @@ To give you an example, here is a function which returns the index of the first 
 
 > Note: in the future it would be nice to replace this example by something simpler using a loop and without gas related code. 
 
-```cairo
+```rs
 fn find_value_recursive(
     arr: @Array<felt252>, value: felt252, index: usize
 ) -> Option<usize> implicits(RangeCheck, GasBuiltin) {
