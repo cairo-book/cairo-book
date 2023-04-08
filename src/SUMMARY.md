@@ -30,6 +30,7 @@
 ## Enums and Pattern Matching
 
 - [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md)
+  - [Enums](ch05-01-enums.md)
   - [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
 - [Appendix](appendix-00.md)
 
