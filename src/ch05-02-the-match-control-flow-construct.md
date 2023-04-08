@@ -18,10 +18,10 @@ enum Coin {
 
 fn value_in_cents(coin: Coin) -> felt252 {
     match coin {
-        Coin::Penny(()) => 1,
-        Coin::Nickel(()) => 5,
-        Coin::Dime(()) => 10,
-        Coin::Quarter(())=> 25,
+        Coin::Penny(_) => 1,
+        Coin::Nickel(_) => 5,
+        Coin::Dime(_) => 10,
+        Coin::Quarter(_)=> 25,
     }
 }
 ```
@@ -30,7 +30,7 @@ Listing 5-3: An enum and a match expression that has the variants of the enum as
 
 Let’s break down the `match` in the `value_in_cents` function. First we list the `match` keyword followed by an expression, which in this case is the value `coin`. This seems very similar to a conditional expression used with if, but there’s a big difference: with if, the condition needs to evaluate to a Boolean value, but here it can be any type. The type of coin in this example is the `Coin` enum that we defined on the first line.
 
-Next are the `match` arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value `Coin::Penny` and then the `=>` operator that separates the pattern and the code to run. The code in this case is just the value `1`. Each arm is separated from the next with a comma.
+Next are the `match` arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value `Coin::Penny(_)` and then the `=>` operator that separates the pattern and the code to run. The code in this case is just the value `1`. Each arm is separated from the next with a comma.
 
 When the `match` expression executes, it compares the resultant value against the pattern of each arm, in order. If a pattern matches the value, the code associated with that pattern is executed. If that pattern doesn’t match the value, execution continues to the next arm, much as in a coin-sorting machine. We can have as many arms as we need: in the above example, our match has four arms.
 
@@ -43,13 +43,13 @@ We don’t typically use curly brackets if the match arm code is short, as it is
 ```rust
 fn value_in_cents(coin: Coin) -> felt252 {
     match coin {
-        Coin::Penny(()) => {
+        Coin::Penny(_) => {
             ('Lucky penny!').print();
             1
         },
-        Coin::Nickel(()) => 5,
-        Coin::Dime(()) => 10,
-        Coin::Quarter(())=> 25,
+        Coin::Nickel(_) => 5,
+        Coin::Dime(_) => 10,
+        Coin::Quarter(_)=> 25,
     }
 }
 ```
@@ -85,9 +85,9 @@ In the match expression for this code, we add a variable called `state` to the p
 ```rust
 fn value_in_cents(coin: Coin) -> felt252 {
     match coin {
-        Coin::Penny(()) => 1,
-        Coin::Nickel(()) => 5,
-        Coin::Dime(()) => 10,
+        Coin::Penny(_) => 1,
+        Coin::Nickel(_) => 5,
+        Coin::Dime(_) => 10,
         Coin::Quarter(state)=> {
             state.print();
             25
@@ -96,20 +96,20 @@ fn value_in_cents(coin: Coin) -> felt252 {
 }
 ```
 
-To print the value of a variant of an enum in Cairo, we need to add an implementation for the `print` function:
+To print the value of a variant of an enum in Cairo, we need to add an implementation for the `print` function for the `debug::PrintTrait`:
 
 ```rust
 impl UsStatePrintImpl of PrintTrait::<UsState> {
     fn print(self: UsState) {
         match self {
-            UsState::Alabama(()) => ('Alabama').print(),
-            UsState::Alaska(()) => ('Alaska').print(),
+            UsState::Alabama(_) => ('Alabama').print(),
+            UsState::Alaska(_) => ('Alaska').print(),
         }
     }
 }
 ```
 
-If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska(())))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for state will be the value `UsState::Alaska`. We can then use that binding in the printTrait, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
+If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska(())))`, `coin` would be `Coin::Quarter(UsState::Alaska())`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for state will be the value `UsState::Alaska()`. We can then use that binding in the `PrintTrait`, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
 
 ## Matching with Options
 
