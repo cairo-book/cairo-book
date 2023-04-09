@@ -130,7 +130,6 @@ fn test_increase_amount() {
     match result {
         Option::Some(index) => {
             if index == 1_usize {
-                // it worked should get printed
                 'it worked'.print();
             }
         },
@@ -140,3 +139,5 @@ fn test_increase_amount() {
     }
 }
 ```
+
+When ran on my machine, the output was: 'it worked'
