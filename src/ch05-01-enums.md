@@ -35,7 +35,7 @@ enum Animal {
 }
 ```
 
-In this example, the Animal enum has three variants: `Elephant`, `Ant` and `Giraffe`.
+In this example, the `Animal` enum has three variants: `Elephant`, `Ant` and `Giraffe`.
 
 The `Elephant` variant holds two `u128` values, which could represent the weight of the elephant in kilograms and the length of its trunk in centimeters.
 The `Ant` variant holds a unit type value `()`, which might represent that the attributes of the ant are negligible and not relevant to our use case.
