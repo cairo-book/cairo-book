@@ -26,6 +26,7 @@ It's easy to write code that acts differently depending on the variant of an enu
 
 ## Enums Combined with Custom Types
 Enums can also be used to store more interesting data associated with each variant. For example:
+
 ```rs
 enum Animal {
     Elephant : (u128, u128),
@@ -82,6 +83,7 @@ enum Option<T> {
     None: (),
 }
 ```
+
 The `Option` enum is helpful because it allows you to explicitly represent the possibility of a value being absent, making your code more expressive and easier to reason about. Using `Option` can also help prevent bugs caused by using uninitialized or unexpected `null` values.
 
 To give you an example, here is a function which returns the index of the first element of an array with a given value, or None if the element is not present.
@@ -138,4 +140,3 @@ fn test_increase_amount() {
     }
 }
 ```
-
