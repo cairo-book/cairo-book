@@ -66,7 +66,7 @@ impl AnimalWeightImpl of AnimalWeight {
 }
 ```
 
-In this example, we implemented the `AnimalWeight` trait for `Animal`, providing a way to get the weigth of an Animal instance in kilograms. Here is how it could be used to print the weight of Toto the ant:
+In this example, we implemented the `AnimalWeight` trait for `Animal`, providing a way to get the weigth of an Animal instance in kilograms. We used underscores _ to represent the data we were not interested in (like neck size), it's a convention. Here is how it could be used to print the weight of Toto the ant:
 
 ```rs
 let toto = Animal::Ant(());
