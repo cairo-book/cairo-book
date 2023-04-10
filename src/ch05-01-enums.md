@@ -28,50 +28,55 @@ It's easy to write code that acts differently depending on the variant of an enu
 Enums can also be used to store more interesting data associated with each variant. For example:
 
 ```rs
-enum Animal {
-    Elephant : (u128, u128),
-    Ant : (),
-    Giraffe : (u128, u128, u128),
+#[derive(Drop)]
+enum Message {
+    Quit : (),
+    Echo : (felt252),
+    Move : (u128, u128),
 }
 ```
 
-In this example, the `Animal` enum has three variants: `Elephant`, `Ant` and `Giraffe`.
+In this example, the `Message` enum has three variants: `Quit`, `Echo` and `Move`, all with different types:
 
-The `Elephant` variant holds two `u128` values, which could represent the weight of the elephant in kilograms and the length of its trunk in centimeters.
-The `Ant` variant holds a unit type value `()`, which might represent that the attributes of the ant are negligible and not relevant to our use case.
-The `Giraffe` variant holds three `u128` values, which could represent the weight of the giraffe in kilograms, the length of its neck in centimeters, and the length of its legs in centimeters.
+- `Quit` has no data associated with it at all.
+- `Echo` includes a single felt.
+- `Move` includes two u128 values.
+
+You could even use a Struct or another Enum you defined inside one of your Enum variants.
 
 ## Trait Implementations for Enums
-In Cairo, you can define traits and implement them for your custom enums. This allows you to define methods and behaviors associated with the enum. Here's an example of defining a trait and implementing it for the previous `Animal` enum:
+In Cairo, you can define traits and implement them for your custom enums. This allows you to define methods and behaviors associated with the enum. Here's an example of defining a trait and implementing it for the previous `Message` enum:
 
 ```rs
-trait AnimalWeight {
-    fn get_weight(self: Animal) -> u128;
+trait Processing {
+    fn process(self: Message);
 }
 
-impl AnimalWeightImpl of AnimalWeight {
-    fn get_weight(self: Animal) -> u128 {
+impl ProcessingImpl of Processing {
+    fn process(self: Message) {
         match self {
-            Animal::Elephant((weight, _)) => {
-                weight
+            Message::Quit(()) => {
+                'quitting'.print();
             },
-            Animal::Ant(()) => {
-                0_u128
+            Message::Echo(value) => {
+                value.print();
             },
-            Animal::Giraffe((weight, _, _)) => {
-                weight
+            Message::Move((x, y)) => {
+                'moving'.print();
             },
         }
     }
 }
 ```
 
-In this example, we implemented the `AnimalWeight` trait for `Animal`, providing a way to get the weigth of an Animal instance in kilograms. We used underscores _ to represent the data we were not interested in (like neck size), it's a convention. Here is how it could be used to print the weight of Toto the ant:
+In this example, we implemented the `Processing` trait for `Message`. Here is how it could be used to process a Quit message:
 
 ```rs
-let toto = Animal::Ant(());
-toto.get_weight().print();
+let msg: Message = Message::Quit(());
+msg.process();
 ```
+
+When ran on my machine, the output was: ``quitting``
 
 
 ## The Option Enum and Its Advantages
