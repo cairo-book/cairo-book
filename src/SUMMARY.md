@@ -21,6 +21,13 @@
   - [Comments](ch02-04-comments.md)
   - [Control Flow](ch02-05-control-flow.md)
 
+
+## Understanding Ownership
+
+- [Understanding Ownership](ch03-00-understanding-ownership.md)
+  - [What is Ownership?](ch03-01-what-is-ownership.md)
+  - [References and Snapshots](ch03-02-references-and-borrowing.md)
+
 ## Using Structs to Structure Related Data
 
 - [Using Structs to Structure Related Data](ch04-00-using-structs-to-structure-related-data.md)
