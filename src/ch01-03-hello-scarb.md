@@ -75,7 +75,7 @@ This file is in the [TOML](https://toml.io/) (Tom’s Obvious, Minimal Language)
 
 The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other sections.
 
-The next two lines set the configuration information Scarb needs to compile your program: the name, the version, and the edition of Cairo to use.
+The next two lines set the configuration information Scarb needs to compile your program: the name and the version of Scarb to use.
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
@@ -96,7 +96,7 @@ fn main() {
 }
 ```
 
-We have just created a file called lib.cairo, which contains a module declaration referencing another module named "hello_scarb", as well as the file hello_scarb.cairo, containing the implementation details of the "hello_scarb" module.
+We have just created a file called `lib.cairo`, which contains a module declaration referencing another module named "hello_scarb", as well as the file `hello_scarb.cairo`,containing the implementation details of the "hello_scarb" module.
 
 Scarb requires your source files to be located within the src directory.
 
