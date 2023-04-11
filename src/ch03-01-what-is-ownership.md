@@ -6,6 +6,12 @@ This helps prevent common operations that can produce runtime errors, such as il
 references or multiple writes to the same memory address, and ensures the soundness of Cairo programs
 by checking at compile time that all the dictionaries are squashed.
 
+Now that we’re past basic Cairo syntax, we won’t include all the `fn main() {`
+code in examples, so if you’re following along, make sure to put the following
+examples inside a `main` function manually. As a result, our examples will be a
+bit more concise, letting us focus on the actual details rather than
+boilerplate code.
+
 ### Ownership Rules
 
 First, let’s take a look at the ownership rules. Keep these rules in mind as we
@@ -16,12 +22,6 @@ work through the examples that illustrate them:
 - When the owner goes out of scope, the value will be _dropped_.
 
 ### Variable Scope
-
-Now that we’re past basic Cairo syntax, we won’t include all the `fn main() {`
-code in examples, so if you’re following along, make sure to put the following
-examples inside a `main` function manually. As a result, our examples will be a
-bit more concise, letting us focus on the actual details rather than
-boilerplate code.
 
 As a first example of ownership, we’ll look at the _scope_ of some variables. A
 scope is the range within a program for which an item is valid. Take the
@@ -63,7 +63,7 @@ than those we covered in the [“Data Types”][data-types]<!-- ignore --> secti
 of Chapter 3. The types covered previously are of a known size, can be
 quickly and trivially copied to make a new, independent instance if another
 part of code needs to use the same value in a different scope, and can easily
-be dropped when they're no longuer used. But we want to look at data whose size
+be dropped when they're no longer used. But we want to look at data whose size
 is unknown at compile time and can't be trivially copied: the `Array` type.
 
 In Cairo, each memory cell can only be written to once. Arrays are represented in memory by
@@ -95,14 +95,24 @@ use array::ArrayTrait;
 fn foo(arr: Array<u128>) {
 }
 
+fn bar(arr:Array<u128>){
+
+}
+
 fn main() {
     let mut arr = ArrayTrait::<u128>::new();
     foo(arr);
-    foo(arr);
+    bar(arr);
 }
 ```
 
-Running this code will result in a compile-time error:
+In this case, we pass the same array instance `arr` by value to the functions `foo` and `bar`, which means that the parameter used in both function calls is the same instance of the array. If you append a value to the array `foo`, and
+then try to append another value to the same array in `bar`, what would happen is that
+you would attempt to try to write to the same memory cell twice, which is not allowed in Cairo.
+To prevent this, the ownership of the `arr` variable moves from the `main` function to the `foo` function. When trying to call `bar` with `arr` as a parameter, the ownership of `arr` was already moved to the first call. The ownership system thus prevents us from
+using the same instance of `arr` in `foo`.
+
+Running the code above will result in a compile-time error:
 
 ```console
 error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
@@ -111,19 +121,11 @@ error: Variable was previously moved. Trait has no implementation in context: co
         ^*****^
 ```
 
-In this case, we pass the same array instance `arr` by value to the function `foo`, which means that the parameter both function calls
-will use is the same instance of the array. If you append a value to the array in such a function, and
-then try to append another value to the same array in another function, what would happen is that
-you would attempt to try to write to the same memory cell twice, which is not allowed in Cairo.
-To prevent this, the ownership of the `arr` variable moves from the `main` function to the `foo` function when it is first called. When trying to call `foo` with `arr` as a parameter again, the
-ownership of `arr` was already moved to the first call, so the ownership system prevents us from
-using the same instance of `arr` in `foo`.
-
 ### The `Copy` Trait
 
-While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
 If a type implements the `Copy` trait, passing it to a function will not move the ownership of the value to the function called, but will instead pass a copy of the value.
 You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components don't implement the Copy trait.
+While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
 
 ```rust
 #[derive(Copy, Drop)]
@@ -148,11 +150,10 @@ If you remove the `Copy` trait derivation from the `Point` type, you will get a 
 
 ### The `Drop` Trait
 
-You may have noticed that the `Point` type in the previous example also implements the `Drop` trait.
-By default, a value may not go out of scope unless it was previously moved. For example, the following code does not compile:
+You may have noticed that the `Point` type in the previous example also implements the `Drop` trait. In Cairo, a value cannot go out of scope unless it has been previously moved.
+For example, the following code will not compile, because the struct `A` is not moved before it goes out of scope:
 
 ```rust
-#[derive(Copy)]
 struct A {}
 
 fn main() {
@@ -160,8 +161,18 @@ fn main() {
 }
 ```
 
-The `Drop` trait is implemented for types that can be trivially dropped.
-The `Drop` implementation can be derived for all types, except for dictionaries (`Felt252Dict`) and types containing dictionaries.
+This is to ensure the soundness of Cairo programs. Soundness refers to the fact that if a
+statement during the execution of the program is false, no cheating prover can convince an
+honest verifier that it is true. In our case, we want to ensure the consistency of
+consecutive dictionary key updates during program execution, which is only checked when
+the dictionaries are`squashed` - which moves the ownership of the dictionary to the
+`squash` method, thus allowing the dictionary to go out of scope. Unsquashed dictionaries
+are dangerous, as a malicious prover could prove the correctness of inconsistent updates.
+
+However, types that implement the `Drop` trait are allowed to go out of scope without being explicitly moved. When a value of a type that implements the `Drop` trait goes out of scope, the `Drop` implementation is called on the type, which moves the value to the `drop` function, allowing it to go out of scope - This is what we call "dropping" a value.
+It is important to note that the implementation of drop is a "no-op", meaning that it doesn't perform any actions other than allowing the value to go out of scope.
+
+The `Drop` implementation can be derived for all types, allowing them to be dropped when goint out of scope, except for dictionaries (`Felt252Dict`) and types containing dictionaries.
 For example, the following code compiles:
 
 ```rust
@@ -173,8 +184,53 @@ fn main() {
 }
 ```
 
-As previously stated, every value in Cairo is dropped when it goes out of scope. However, dictionaries must be explicitly squashed
-before the end of a Cairo program, in order to verify the consistency of the key updates. Unsquashed dictionaries are dangerous, as a malicious prover could prove the correctness of inconsistent updates. Calling the `squash` method on a dictionary will move ownership to the squash function, and return a value of type `SquashedFelt252Dict`, which implements the `Drop` trait and can be dropped.
+### The `Destruct` Trait
+
+Manually calling the `squash` method on a dictionary is not very convenient, and it is easy to forget to do so. To make it easier to use dictionaries, Cairo provides the `Destruct` trait, which allows you to specify the behavior of a type when it goes out of scope. While Dictionaries don't implement the `Drop` trait, they do implement the `Destruct` trait, which allows them to automatically be `squashed` when they go out of scope. This means that you can use dictionaries without having to manually call the `squash` method.
+
+Consider the following example, in which we define a custom type that contains a dictionary:
+
+```rust
+use dict::Felt252DictTrait;
+
+struct A {
+    dict: Felt252Dict<u128>
+}
+
+fn main() {
+    A {
+        dict: Felt252DictTrait::new()
+    };
+}
+```
+
+If you try to run this code, you will get a compile-time error:
+
+```console
+error: Variable not dropped. Trait has no implementation in context: core::traits::Drop::<temp7::temp7::A>. Trait has no implementation in context: core::traits::Destruct::<temp7::temp7::A>.
+ --> temp7.cairo:7:5
+    A {
+    ^*^
+```
+
+When A goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
+
+```rust
+use dict::Felt252DictTrait;
+
+#[derive(Destruct)]
+struct A {
+    dict: Felt252Dict<u128>
+}
+
+fn main() {
+    A {
+        dict: Felt252DictTrait::new()
+    }; // No error here
+}
+```
+
+Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
 
 #### Copy Array data with Clone
 
@@ -212,12 +268,12 @@ showing where variables go into and out of scope.
 
 ```rust
 #[derive(Drop)]
-struct A{}
+struct MyStruct{}
 
 fn main() {
-    let a = A{};  // a comes into scope
+    let my_struct = MyStruct{};  // my_struct comes into scope
 
-    takes_ownership(a);             // a's value moves into the function...
+    takes_ownership(my_struct);             // my_struct's value moves into the function...
                                     // ... and so is no longer valid here
 
     let x = 5_u128;                 // x comes into scope
@@ -226,11 +282,11 @@ fn main() {
                                     // but u128 implements Copy, so it's okay to still
                                     // use x afterward
 
-} // Here, x goes out of scope and is dropped. But because a's value was moved, nothing
+} // Here, x goes out of scope and is dropped. But because my_struct's value was moved, nothing
 // special happens.
 
-fn takes_ownership(a_struct: A) { // a_struct comes into scope
-} // Here, a_struct goes out of scope and `drop` is called.
+fn takes_ownership(some_struct: A) { // some_struct comes into scope
+} // Here, some_struct goes out of scope and `drop` is called.
 
 fn makes_copy(some_uinteger: u128) { // some_uinteger comes into scope
 } // Here, some_integer goes out of scope and is dropped.
@@ -239,9 +295,9 @@ fn makes_copy(some_uinteger: u128) { // some_uinteger comes into scope
 <span class="caption">Listing 4-3: Functions with ownership and scope
 annotated</span>
 
-If we tried to use `a` after the call to `takes_ownership`, Cairo would throw a
+If we tried to use `my_struct` after the call to `takes_ownership`, Cairo would throw a
 compile-time error. These static checks protect us from mistakes. Try adding
-code to `main` that uses `a` and `x` to see where you can use them and where
+code to `main` that uses `my_struct` and `x` to see where you can use them and where
 the ownership rules prevent you from doing so.
 
 ### Return Values and Scope
