@@ -232,7 +232,7 @@ fn main() {
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
 
-#### Copy Array data with Clone
+### Copy Array data with Clone
 
 If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 5, but because methods are a common feature in many
 programming languages, you’ve probably seen them before.
