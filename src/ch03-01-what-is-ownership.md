@@ -137,7 +137,7 @@ struct Point {
 fn main() {
     let p1 = Point { x: 5, y: 10 };
     foo(p1);
-    foo(p2);
+    foo(p1);
 }
 
 fn foo(p: Point) {
@@ -145,7 +145,7 @@ fn foo(p: Point) {
 }
 ```
 
-In this example, we can pass `p1` and `p2` to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, and the ownership of `p1` remains with the main function.
+In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, and the ownership of `p1` remains with the main function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
 ### The `Drop` Trait
