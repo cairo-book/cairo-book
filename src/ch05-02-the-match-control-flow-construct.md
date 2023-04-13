@@ -179,7 +179,7 @@ Combining `match` and enums is useful in many situations. You’ll see this patt
 There’s one other aspect of match we need to discuss: the arms’ patterns must cover all possibilities. Consider this version of our `plus_one` function, which has a bug and won’t compile:
 
 ```bash
-    $ cargo run
+    $ cairo-run src/test.cairo
         error: Unsupported match. Currently, matches require one arm per variant,
         in the order of variant definition.
         --> test.cairo:34:5
