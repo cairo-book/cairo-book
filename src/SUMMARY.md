@@ -21,7 +21,6 @@
   - [Comments](ch02-04-comments.md)
   - [Control Flow](ch02-05-control-flow.md)
 
-
 ## Understanding Ownership
 
 - [Understanding Ownership](ch03-00-understanding-ownership.md)
@@ -39,6 +38,17 @@
 - [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md)
   - [Enums](ch05-01-enums.md)
   - [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
+
+## Generic Data Types
+
+- [Generic Data Types](ch6-00-generic-data-types.md)
+  - [Generic Functions](ch6-01-generic-functions.md)
+  - [Generic Structs](ch6-02-generic-structs.md)
+  - [Generic Enums](ch6-03-generic-enums.md)
+  - [Generic Methods](ch6-04-generic-methods.md)
+
+## Appendix
+
 - [Appendix](appendix-00.md)
 
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
