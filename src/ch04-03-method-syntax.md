@@ -3,11 +3,11 @@
 _Methods_ are similar to functions: we declare them with the `fn` keyword and a
 name, they can have parameters and a return value, and they contain some code
 that’s run when the method is called from somewhere else. Unlike functions,
-methods are defined within the context of a struct and their first parameter is
-always `self`, which represents the instance of the struct the method is being
+methods are defined within the context of a type and their first parameter is
+always `self`, which represents the instance of the type the method is being
 called on. For those familiar with Rust, Cairo's approach might be confusing,
-as methods cannot be defined directly on structs. Instead, you must define a trait
-and an implementation associated with the struct for which the method is intended.
+as methods cannot be defined directly on types. Instead, you must define a trait
+and an implementation associated with the type for which the method is intended.
 
 ### Defining Methods
 
@@ -42,26 +42,27 @@ fn main() {
 }
 ```
 
-<span class="caption">Listing 5-13: Defining an `area` method to use on the
+<span class="caption">Listing 4-13: Defining an `area` method to use on the
 `Rectangle` </span>
 
 To define the function within the context of `Rectangle`, we start by definining a `trait`
 block with the signature of the method that we want to implement. Traits are not linked to
-a specific struct; only the `self` parameter of the method defines which type it can be used
+a specific type; only the `self` parameter of the method defines which type it can be used
 with. Then, we define an `impl` (implementation) block for `RectangleTrait`, that defines
 the behavior of the methods implemented. Everything within this `impl` block will be
 associated with the type of the `self` parameter of the method called.
 Then we move the `area` function within the `impl` curly brackets and change the first (and in this case, only)
 parameter to be `self` in the signature and everywhere within the body. In
 `main`, where we called the `area` function and passed `rect1` as an argument,
-we can instead use _method syntax_ to call the `area` method on our `Rectangle`
+we can instead use the _method syntax_ to call the `area` method on our `Rectangle`
 instance. The method syntax goes after an instance: we add a dot followed by
 the method name, parentheses, and any arguments.
 
 Methods must have a parameter named `self` of the type they will be applied to for their first parameter.
 Note that we used the `@` snapshot operator in front of the `Rectangle` type in the function signature.
-By doing so, we indicate that this method borrows an immutable snapshot of the `Rectangle` instance.
-Methods can take ownership of `self`, borrow `self` immutably using snapshots as we’ve done here, or borrow `self` mutably,
+By doing so, we indicate that this method takes an immutable snapshot of the `Rectangle` instance, which is
+automatically created by the compiler when passing the instance to the method.
+Methods can take ownership of `self`, use `self` with snapshots as we’ve done here, or use a mutable reference to `self`
 using the `ref self: T` syntax, just as they can any other parameter.
 
 We chose `self: @Rectangle` here for the same reason we used `@Rectangle` in the function
@@ -224,14 +225,11 @@ desired output. Methods can take multiple parameters that we add to the
 signature after the `self` parameter, and those parameters work just like
 parameters in functions.
 
-### Associated Functions
+### Accessing implementation functions
 
-All functions defined within an `impl` block are called _associated functions_
-because they’re associated with the type corresponding to the `self` argument. We can define
-associated functions that don’t have `self` as their first parameter (and thus
-are not methods) because they don’t need an instance of the type to work with.
-
-Associated functions that aren’t methods are often used for constructors that
+All functions defined within a `trait` and `impl` block are can be directly addressed
+using the `::` operator on the implementation name.
+Functions in traits that aren’t methods are often used for constructors that
 will return a new instance of the struct. These are often called `new`, but
 `new` isn’t a special name and isn’t built into the language. For example, we
 could choose to provide an associated function named `square` that would have
@@ -253,10 +251,12 @@ impl RectangleImpl of RectangleTrait {
 }
 ```
 
-To call this associated function, we use the `::` syntax with the implementation name;
+To call this function, we use the `::` syntax with the implementation name;
 `let square = RectangleImpl::square(10_u64);` is an example. This function is namespaced by
-the implementation: the `::` syntax is used for both associated functions and
+the implementation: the `::` syntax is used for both trait functions and
 namespaces created by modules. We’ll discuss modules in [Chapter 7][modules]<!-- ignore -->.
+
+> Note: It is also possible to call this function using the trait name, with `RectangleTrait::square(10_u64)`.
 
 ### Multiple `impl` Blocks
 
@@ -297,8 +297,7 @@ useful in Chapter 10, where we discuss generic types and traits.
 Structs let you create custom types that are meaningful for your domain. By
 using structs, you can keep associated pieces of data connected to each other
 and name each piece to make your code clear. In `trait` and `impl` blocks, you can define
-functions that are associated with your type, and methods are a kind of
-associated function that let you specify the behavior that instances of your
+metohds that are functions that are associated with your type that let you specify the behavior that instances of your
 structs have.
 
 But structs aren’t the only way you can create custom types: let’s turn to
@@ -308,4 +307,3 @@ Cairo’s enum feature to add another tool to your toolbox.
 [trait-objects]: ch17-02-trait-objects.md
 [public]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#exposing-paths-with-the-pub-keyword
 [modules]: ch07-02-defining-modules-to-control-scope-and-privacy.html
-    
