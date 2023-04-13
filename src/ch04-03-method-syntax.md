@@ -78,12 +78,10 @@ Observe the use of the desnap operator `*` within the area method when accessing
 This is necessary because the struct is passed as a snapshot, and all of its field values are of type `@T`,
 requiring them to be desnapped in order to manipulate them.
 
-The main reason for using methods instead of functions, in addition to
-providing method syntax and not having to repeat the type of `self` in every
-method’s signature, is for organization. We’ve put all the things we can do
-with an instance of a type in one combination of `trait` & `impl` blocks, rather than making future users
+The main reason for using methods instead of functions is for organization and code clarity. We’ve put all the things we can do with an instance of a type in one combination of `trait` & `impl` blocks, rather than making future users
 of our code search for capabilities of `Rectangle` in various places in the
-library we provide.
+library we provide. However, we can define multiple combinations of `trait` & `impl` blocks for the same type at different places, which can be useful for more a more granular code organization. For example, you could implement
+the `Add` trait for your type in one `impl` block, and the `Sub` trait in another block.
 
 Note that we can choose to give a method the same name as one of the struct’s
 fields. For example, we can define a method on `Rectangle` that is also named
