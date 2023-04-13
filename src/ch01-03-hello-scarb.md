@@ -105,7 +105,7 @@ Scarb ensures a designated location for all project components, maintaining a st
 
 If you started a project that doesn’t use Scarb, as we did with the “Hello, world!” project, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate `Scarb.toml` file.
 
-### Building and Running a Scarb Project
+### Building Scarb Project
 
 From your hello_scarb directory, build your project by entering the following command:
 
@@ -126,33 +126,34 @@ $ cairo-run -- src/lib.cairo
 Run completed successfully, returning []
 ```
 
-We just built a project using 'scarb build'; now, let's run it directly with 'cairo-run'. We can also use 'scarb run' to execute custom shell scripts.
+### Defining Custom Scripts
 
+We can define scarb scripts in `Scarb.toml` file, which can be used to execute custom shell scripts.
 Add the following line to your `Scarb.toml` file:
 
 ```toml
 [scripts]
-foo = "cairo-run --  src/lib.cairo"
+run-lib = "cairo-run src/lib.cairo"
 ```
 
 Now you can run the following command to run the project:
 
 ```bash
-$ scarb run foo
+$ scarb run run-lib
 [DEBUG] Hello, Scarb!                   (raw: 5735816763073854913753904210465)
 
 Run completed successfully, returning []
 ```
 
-Using `scarb run` is a convenient way to run your project without having to remember the exact command to run your project, and it also allows you to define multiple custom scripts in `Scarb.toml`.
+Using `scarb run` is a convenient way to run custom shell scripts that can be useful to run files and test your project.
 
 Let’s recap what we’ve learned so far about Scarb:
 
 - We can create a project using `scarb new`.
 - We can build a project using `scarb build`.
-- We can build and run a project in one step using scarb run with custom script defined in `Scarb.toml`.
+- We can define custom scripts in `Scarb.toml` and call them with the `scarb run` command.
 
-An additional advantage of using Cargo is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
+An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
 # Summary
 
