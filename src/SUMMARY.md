@@ -42,11 +42,10 @@
 
 ## Generic Data Types
 
-- [Generic Data Types](ch6-00-generic-data-types.md)
-  - [Generic Functions](ch6-01-generic-functions.md)
-  - [Generic Structs](ch6-02-generic-structs.md)
-  - [Generic Enums](ch6-03-generic-enums.md)
-  - [Generic Methods](ch6-04-generic-methods.md)
+- [Generic Data Types](ch06-00-generic-data-types.md)
+  - [Generic Functions](ch06-01-generic-functions.md)
+  - [Generic Structs](ch06-02-generic-structs-enums.md)
+  - [Generic Methods](ch06-03-generic-methods.md)
 
 ## Appendix
 
