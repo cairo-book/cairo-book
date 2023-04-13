@@ -105,7 +105,7 @@ Scarb ensures a designated location for all project components, maintaining a st
 
 If you started a project that doesn’t use Scarb, as we did with the “Hello, world!” project, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate `Scarb.toml` file.
 
-### Building Scarb Project
+### Building a Scarb Project
 
 From your hello_scarb directory, build your project by entering the following command:
 
