@@ -50,7 +50,10 @@ block with the signature of the method that we want to implement. Traits are not
 a specific type; only the `self` parameter of the method defines which type it can be used
 with. Then, we define an `impl` (implementation) block for `RectangleTrait`, that defines
 the behavior of the methods implemented. Everything within this `impl` block will be
-associated with the type of the `self` parameter of the method called.
+associated with the type of the `self` parameter of the method called. While it is technically
+possible to define methods for multiple types within the same `impl` block, it is not
+a recommended practice, as it can lead to confusion. We recommend that the type of the `self` parameter
+statys consistent within the same `impl` block.
 Then we move the `area` function within the `impl` curly brackets and change the first (and in this case, only)
 parameter to be `self` in the signature and everywhere within the body. In
 `main`, where we called the `area` function and passed `rect1` as an argument,
