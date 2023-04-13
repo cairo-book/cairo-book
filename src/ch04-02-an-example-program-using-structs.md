@@ -2,9 +2,9 @@
 
 To understand when we might want to use structs, let’s write a program that calculates the area of a rectangle. We’ll start by using single variables, and then refactor the program until we’re using structs instead.
 
-Let’s make a new project with Scarb called _rectangles_ that will take the width and height of a rectangle specified in pixels and calculate the area of the rectangle. Listing 4-6 shows a short program with one way of doing exactly that in our project’s _src/structs.cairo_.
+Let’s make a new project with Scarb called _rectangles_ that will take the width and height of a rectangle specified in pixels and calculate the area of the rectangle. Listing 4-6 shows a short program with one way of doing exactly that in our project’s _src/lib.cairo_.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 use debug::PrintTrait;
@@ -22,10 +22,10 @@ fn area(width: u64, height: u64) -> u64 {
 
 <span class="caption">Listing 4-6: Calculating the area of a rectangle specified by separate width and height variables</span>
 
-Now run the program with `scarb run foo`:
+Now run the program with `cairo-run src/lib.cairo`:
 
 ```bash
-$ scarb run foo
+$ cairo-run src/lib.cairo
 [DEBUG] ,                               (raw: 300)
 
 Run completed successfully, returning []
@@ -39,12 +39,13 @@ The issue with this code is evident in the signature of `area`:
 fn area(width: u64, height: u64) -> u64 {
 ```
 
-The `area` function is supposed to calculate the area of one rectangle, but the function we wrote has two parameters, and it’s not clear anywhere in our program that the parameters are related. It would be more readable and more manageable to group width and height together. We’ve already discussed one way we might do that in chapter 3: using tuples.
+The `area` function is supposed to calculate the area of one rectangle, but the function we wrote has two parameters, and it’s not clear anywhere in our program that the parameters are related. It would be more readable and more manageable to group width and height together. We’ve already discussed one way we might do that in [Chapter 3](ch02-02-data-types.html#the-tuple-type): using tuples.
 
 ## Refactoring with Tuples
 
 Listing 4-7 shows another version of our program that uses tuples.
-<span class="filename">Filename: structs.cairo</span>
+
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 use debug::PrintTrait;
@@ -70,7 +71,7 @@ Mixing up the width and height wouldn’t matter for the area calculation, but i
 
 We use structs to add meaning by labeling the data. We can transform the tuple we’re using into a struct with a name for the whole as well as names for the parts.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 use debug::PrintTrait;
@@ -98,11 +99,11 @@ fn area(rectangle: Rectangle) -> u64 {
 
 Here we’ve defined a struct and named it `Rectangle`. Inside the curly brackets, we defined the fields as `width` and `height`, both of which have type `u64`. Then, in `main`, we created a particular instance of `Rectangle` that has a width of `30` and a height of `10`. Our `area` function is now defined with one parameter, which we’ve named `rectangle` which is of type `Rectangle` struct. We can then access the fields of the instance with dot notation, and it gives descriptive names to the values rather than using the tuple index values of `0` and `1`.
 
-## Adding Useful Functionality with Traits
+## Adding Useful Functionality with Trait
 
 It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 4-9 tries using the `print` as we have used in previous chapters. This won’t work.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 use debug::PrintTrait;
@@ -126,17 +127,18 @@ fn main() {
 When we compile this code, we get an error with this message:
 
 ```bash
-error: Method `print` not found on type "structs2::structs2::Rectangle". Did you import the correct trait and impl?
- --> structs2.cairo:16:15
+$ cairo-compile src/lib.cairo
+error: Method `print` not found on type "../src::Rectangle". Did you import the correct trait and impl?
+ --> lib.cairo:16:15
     rectangle.print();
               ^***^
 
 Error: Compilation failed.
 ```
 
-The `print` traits is implemented for may data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing 4-10.
+The `print` trait is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing 4-10.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 use debug::PrintTrait;
