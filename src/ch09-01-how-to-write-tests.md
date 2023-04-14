@@ -1,4 +1,4 @@
-# Testing Cairo programs
+# How To Write Tests
 
 ## The Anatomy of a Test Function
 

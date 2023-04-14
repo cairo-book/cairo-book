@@ -53,11 +53,11 @@
   - [Generic Functions](ch07-01-generic-data-types.md)
 
 
-## Writing tests
+## Testing Cairo Programs
 
-- [Writing tests](ch09-00-writing-tests.md)
+- [Testing Cairo Programs](ch09-00-testing-cairo-programs.md)
 
-  - [Testing Cairo programs](ch09-01-testing-cairo-programs.md)
+  - [How To Write Tests](ch09-01-how-to-write-tests.md)
   - [Testing Organization](ch09-02-test-organization.md)
 
 - [Appendix](appendix-00.md)
