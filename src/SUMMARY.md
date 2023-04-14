@@ -6,39 +6,40 @@
 
 ## Getting Started
 
-- [Getting Started](ch01-00-getting-started.md)
+-   [Getting Started](ch01-00-getting-started.md)
 
-  - [Installation](ch01-01-installation.md)
-  - [Hello, World!](ch01-02-hello-world.md)
-  - [Hello, Scarb!](ch01-03-hello-scarb.md)
+    -   [Installation](ch01-01-installation.md)
+    -   [Hello, World!](ch01-02-hello-world.md)
+    -   [Hello, Scarb!](ch01-03-hello-scarb.md)
 
 ## Common Programming Concepts
 
-- [Common Programming Concepts](ch02-00-common-programming-concepts.md)
-  - [Variables and Mutability](ch02-01-variables-and-mutability.md)
-  - [Data Types](ch02-02-data-types.md)
-  - [Functions](ch02-03-functions.md)
-  - [Comments](ch02-04-comments.md)
-  - [Control Flow](ch02-05-control-flow.md)
+-   [Common Programming Concepts](ch02-00-common-programming-concepts.md)
+    -   [Variables and Mutability](ch02-01-variables-and-mutability.md)
+    -   [Data Types](ch02-02-data-types.md)
+    -   [Functions](ch02-03-functions.md)
+    -   [Comments](ch02-04-comments.md)
+    -   [Control Flow](ch02-05-control-flow.md)
 
 ## Understanding Ownership
 
-- [Understanding Ownership](ch03-00-understanding-ownership.md)
-  - [What is Ownership?](ch03-01-what-is-ownership.md)
-  - [References and Snapshots](ch03-02-references-and-snapshots.md)
+-   [Understanding Ownership](ch03-00-understanding-ownership.md)
+    -   [What is Ownership?](ch03-01-what-is-ownership.md)
+    -   [References and Snapshots](ch03-02-references-and-snapshots.md)
 
 ## Using Structs to Structure Related Data
 
-- [Using Structs to Structure Related Data](ch04-00-using-structs-to-structure-related-data.md)
-  - [Defining and Instantiating Structs](ch04-01-defining-and-instantiating-structs.md)
-  - [An Example Program Using Structs](ch04-02-an-example-program-using-structs.md)
-  - [Method Syntax](ch04-03-method-syntax.md)
+-   [Using Structs to Structure Related Data](ch04-00-using-structs-to-structure-related-data.md)
+    -   [Defining and Instantiating Structs](ch04-01-defining-and-instantiating-structs.md)
+    -   [An Example Program Using Structs](ch04-02-an-example-program-using-structs.md)
+    -   [Method Syntax](ch04-03-method-syntax.md)
+    -   [Traits in Cairo](ch04-04-traits-in-cairo.md)
 
 ## Enums and Pattern Matching
 
-- [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md)
-  - [Enums](ch05-01-enums.md)
-  - [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
-- [Appendix](appendix-00.md)
+-   [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md)
+    -   [Enums](ch05-01-enums.md)
+    -   [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
+-   [Appendix](appendix-00.md)
 
-  - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
+    -   [D - Useful Development Tools](appendix-04-useful-development-tools.md)
