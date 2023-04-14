@@ -100,7 +100,7 @@ fn calculate_area(rec: @Rectangle) -> u64 {
 ```
 
 But, what happens if we try to modify something we’re passing as snapshot? Try the code in
-Listing 4-6. Spoiler alert: it doesn’t work!
+Listing 3-6. Spoiler alert: it doesn’t work!
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -123,7 +123,7 @@ fn flip(rec: @Rectangle) {
 }
 ```
 
-<span class="caption">Listing 4-6: Attempting to modify a snapshot value</span>
+<span class="caption">Listing 3-6: Attempting to modify a snapshot value</span>
 
 Here’s the error:
 
@@ -138,12 +138,12 @@ The compiler prevents us from modifying values associated to snapshots.
 
 ### Mutable References
 
-We can achieve the behavior we want in Listing 4-6 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by returning it automatically at the end of the execution.
+We can achieve the behavior we want in Listing 3-6 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by returning it automatically at the end of the execution.
 In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modifier.
 
 > **Note**: In Cairo, a parameter can only be passed as _mutable reference_ using the `ref` modifier if the variable is declared as mutable with `mut`.
 
-In Listing 4-7, we use a mutable reference to modify the value of the `height` field of the `Rectangle` instance in the `flip` function.
+In Listing 3-7, we use a mutable reference to modify the value of the `height` field of the `Rectangle` instance in the `flip` function.
 
 ```rust
 use debug::PrintTrait;
