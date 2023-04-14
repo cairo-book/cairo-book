@@ -116,8 +116,6 @@ Listing 9-4: Test results when one test passes and one test fails
 
 Instead of `ok`, the line `adder::main::tests::another` shows `fail`. A new section appear between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `[593979512822486838786147395675889716 ('Make this test fail'), ]` in the _src/main.cairo_ file.
 
-<!-- We can use the name of a failing test to run just that test to more easily debug it; we’ll talk more about ways to run tests in the “Controlling How Tests Are Run” section. -->
-
 The summary line displays at the end: overall, our test result is `FAILED`. We had one test pass and one test fail.
 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
