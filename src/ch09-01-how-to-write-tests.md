@@ -60,7 +60,7 @@ Listing 9-2: The output from running a test
 
 `cairo-test` compiled and ran the test. We see the line `running 1 tests`. The next line shows the name of the generated test function, called `it_works`, and that the result of running that test is `ok`. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
 
-It’s possible to mark a test as ignored so it doesn’t run in a particular instance; we’ll cover that in the [Ignoring Some Tests Unless Specifically Requested](#ignoring-some-tests-unless-specifically-requested) section later in this chapter. Because we haven’t done that here, the summary shows `0 ignored`.
+It’s possible to mark a test as ignored so it doesn’t run in a particular instance; we’ll cover that in the [Ignoring Some Tests Unless Specifically Requested](#ignoring-some-tests-unless-specifically-requested) section later in this chapter. Because we haven’t done that here, the summary shows `0 ignored`. We can also pass an argument to the `cairo-test` command to run only a test whose name matches a string; this is called filtering and we’ll cover that in the [Running Single Tests](#running-single-tests) section. We also haven’t filtered the tests being run, so the end of the summary shows `0 filtered out`.
 
 Let’s start to customize the test to our own needs. First change the name of the `it_works` function to a different name, such as `exploration`, like so:
 
@@ -422,6 +422,46 @@ Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 ```
 
 The failure message indicates that this test did indeed panic as we expected, but the panic message did not include the expected string. The panic message that we did get in this case was `Guess must be greater than 1`. Now we can start figuring out where our bug is!
+
+## Running Single Tests
+
+Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can choose which tests to run by passing `cairo-test` the name of the test you want to run as an argument.
+
+To demonstrate how to run a single test, we’ll first create two tests functions, as shown in Listing 9-10, and choose which ones to run.
+
+<span class="filename">Filename: src/main.cairo</span>
+
+```rust
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn add_two_and_two() {
+        let result = 2 + 2;
+        assert(result == 4, 'result is not 4');
+    }
+
+    #[test]
+    fn add_three_and_two() {
+        let result = 3 + 2;
+        assert(result == 5, 'result is not 5');
+    }
+}
+```
+
+Listing 9-10: Two tests with two different names
+
+We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
+
+```shell
+$ cairo-test -- --path src -f add_two_and_two
+    Finished dev [unoptimized + debuginfo] target(s) in 0.46s
+     Running `target/debug/cairo-test --path src -f add_two_and_two`
+running 1 tests
+test adder::main::tests::add_two_and_two ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 1 filtered out;
+```
+
+Only the test with the name `add_two_and_two` ran; the other test didn’t match that name. The test output lets us know we had one more test that didn’t run by displaying 1 filtered out at the end.
 
 ## Ignoring Some Tests Unless Specifically Requested
 
