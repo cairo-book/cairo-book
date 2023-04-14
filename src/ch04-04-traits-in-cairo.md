@@ -58,6 +58,8 @@ You would want to write a trait when you want multiple types to implement some f
 In the example below, we use generic type `T` and our method signatures can use this alias which can be provided during implementation.
 
 ```rust
+use debug::PrintTrait;
+
 // Here T is an alias type which will be provided buring implementation
 trait ShapeGeometry<T> {
 	fn boundary( self: T ) -> u64;
@@ -75,7 +77,7 @@ impl RectangleGeometry of ShapeGeometry::<Rectangle> {
 	}
 }
 
-// We might have another struct Triangle
+// We might have another struct Circle
 // which can use the same trait spec
 impl CircleGeometry of ShapeGeometry::<Circle> {
 	fn boundary( self: Circle ) -> u64 {
@@ -95,4 +97,60 @@ fn main() {
     circ.area().print(); // 78
     circ.boundary().print(); // 31
 }
+```
+
+## Managing and using external trait implementations
+
+To use traits methods, you need to make sure the correct implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use debug::PrintTrait;` to use `print()` methods.
+
+In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
+If `CircleGeometry` was in a separate module/file `circle` then to use `boundary` on `circ: Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`.
+
+If the code was organised into modules like this,
+
+```rust
+use debug::PrintTrait;
+
+// struct Circle { ... } and struct Rectangle { ... }
+
+mod geometry {
+    use super::Rectangle;
+    trait ShapeGeometry<T> {
+        // ...
+    }
+
+    impl RectangleGeometry of ShapeGeometry::<Rectangle> {
+        // ...
+    }
+}
+
+// Could be in a different file
+mod circle {
+    use super::geometry::ShapeGeometry;
+    use super::Circle;
+    impl CircleGeometry of ShapeGeometry::<Circle> {
+        // ...
+    }
+}
+
+fn main() {
+    let rect = Rectangle { height: 5_u64, width: 7_u64 };
+    let circ = Circle { radius: 5_u64 };
+	// Fails with this error
+	// Method `area` not found on... Did you import the correct trait and impl?
+    rect.area().print();
+    circ.area().print();
+}
+```
+
+To make it work, in addition to,
+
+```rust
+use geometry::ShapeGeometry;
+```
+
+you might also need to use `CircleGeometry`,
+
+```rust
+use circle::CircleGeometry
 ```
