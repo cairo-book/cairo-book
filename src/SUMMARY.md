@@ -39,6 +39,12 @@
 - [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md)
   - [Enums](ch05-01-enums.md)
   - [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
-- [Appendix](appendix-00.md)
 
+## Managing Cairo Projects with Packages, Crates and Modules
+
+- [Managing Cairo Projects with Packages, Crates and Modules](ch06-00-managing-cairo-projects-with-packages-crates-and-modules.md)
+
+  - [Defining Modules to Control Scope](ch06-02-defining-modules-to-control-scope.md)
+
+- [Appendix](appendix-00.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
