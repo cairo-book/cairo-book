@@ -21,16 +21,34 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
 - **Declaring modules**: In the crate root file, you can declare new modules;
   say, you declare a “garden” module with `mod garden;`. The compiler will look
   for the module’s code in these places:
-  - Inline, within curly brackets that replace the semicolon following `mod
-garden`
-  - In the file _src/garden.cairo_
+
+  - Inline, within curly brackets that replace the semicolon following `mod garden;`.
+
+    ```rust
+    // crate root file (lib.cairo)
+        mod garden {
+        // code defining the garden module goes here
+        }
+    ```
+
+- In the file _src/garden.cairo_
 - **Declaring submodules**: In any file other than the crate root, you can
   declare submodules. For example, you might declare `mod vegetables;` in
   _src/garden.cairo_. The compiler will look for the submodule’s code within the
   directory named for the parent module in these places:
+
   - Inline, directly following `mod vegetables`, within curly brackets instead
-    of the semicolon
+    of the semicolon.
+
+    ```rust
+    // src/garden.cairo file
+    mod vegetables {
+        // code defining the vegetables submodule goes here
+    }
+    ```
+
   - In the file _src/garden/vegetables.cairo_
+
 - **Paths to code in modules**: Once a module is part of your crate, you can
   refer to code in that module from anywhere else in that same crate, using the path
   to the code. For example, an `Asparagus` type in the garden vegetables module would be found at
@@ -71,7 +89,7 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```
+```rust
 use garden::vegetables::Aspergus;
 
 mod garden;
@@ -98,6 +116,9 @@ included too. That code is:
 #[derive(Copy,Drop)]
 struct Aspergus{}
 ```
+
+The line `use garden::vegetables::Aspergus;` lets us use bring the `Aspergus` type into scope,
+so we can use it in the `main` function.
 
 Now let’s get into the details of these rules and demonstrate them in action!
 
