@@ -6,4 +6,4 @@ Functions, structs, enums and traits can incorporate generic types as part of th
 
 Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication.
 
-For each concrete type that replaces a generic type the compiler creates a new definition, saving time to the programmer, but code duplication at low level still exists. Note that if you are writing Starknet contracts and using a generic for multiple types, size will increase somehow, somewhat.
+For each concrete type that replaces a generic type the compiler creates a new definition, reducing development time for the programmer, but code duplication at compile level still exists. This may be of importance if you are writing Starknet contracts and using a generic for multiple types which will cause contract size to increment.

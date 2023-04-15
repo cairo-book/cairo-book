@@ -34,9 +34,9 @@ fn main() {
 }
 ```
 
-This time instead of using a macro to define the `WalletDrop` we did it ourselves. Notice that we must define inside the angle brackets definitoin of `WalletDrop` that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is droppable as well.
+We avoid using the `derive` macro for `Drop` implementation of `Walet` and instead define our own `WalletDrop` implementation. Notice that we must define, just like functions, as an extra generic type for `WalletDrop` saying that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is droppable as well.
 
-Finally, if we want to add a field to `Wallet` representing it's Cairo address and we want that field to be different than `T` but generic as well can define another:
+Finally, if we want to add a field to `Wallet` representing it's Cairo address and we want that field to be different than `T` but generic as well can simply add another generic type between the `<>`:
 
 ```rust
 struct Wallet<T, U> {
