@@ -8,25 +8,39 @@ Tests are Cairo functions that verify that the non-test code is functioning in t
 - Run the code you want to test.
 - Assert the results are what you expect.
 
-Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the test attribute, the assert function, and and the should_panic attribute.
+Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the `test` attribute, the `assert` function, and and the `should_panic` attribute.
 
 ### The Anatomy of a Test Function
 
 At its simplest, a test in Cairo is a function that’s annotated with the `test` attribute. Attributes are metadata about pieces of Cairo code; one example is the derive attribute we used with structs in Chapter 4. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `cairo-test` command, Cairo builds a test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
 
-Let's create a new project called `adder` that will add two numbers:
+Let's create a new project called `adder` that will add two numbers using Scarb with the command `scarb new adder`:
 
 ```shell
 adder
 ├── cairo_project.toml
+├── Scarb.toml
 └── src
-    ├── cairo_project.toml
-    └── main.cairo
+    └── lib.cairo
 ```
 
-In `main.cairo`, let's add a firt test, as showned in Listing 9-1.
+<!-- TODO: remove when Scarb test work -->
 
-<span class="filename">Filename: main.cairo</span>
+> Note: You will notice here a `cairo_project.toml` file.
+> This is the configuration file for "vanilla" Cairo projects (i.e. not managed by Scarb),
+> which is required to run the `cairo-test .` command to run the code of the crate.
+> It is required until Scarb implements this feature. The content of the file is:
+>
+> ```toml
+> [crate_roots]
+> adder = "src"
+> ```
+>
+> and indicates that the crate named "adder" is located in the `src` directory.
+
+In _lib.cairo_, let's add a firt test, as shown in Listing 9-1.
+
+<span class="filename">Filename: lib.cairo</span>
 
 ```rust
 #[cfg(test)]
@@ -45,14 +59,12 @@ For now, let’s ignore the top two lines and focus on the function. Note the `#
 
 The example function body uses the `assert` function, which contains the result of adding 2 and 2, equals 4. This assertion serves as an example of the format for a typical test. Let’s run it to see that this test passes.
 
-The `cairo-test  -- --path src` command runs all tests in our project, as shown in Listing 9-2.
+The `cairo-test .` command runs all tests in our project, as shown in Listing 9-2.
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.47s
-    Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 1 tests
-test adder::main::tests::it_works ... ok
+test adder::lib::tests::it_works ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
@@ -64,7 +76,7 @@ It’s possible to mark a test as ignored so it doesn’t run in a particular in
 
 Let’s start to customize the test to our own needs. First change the name of the `it_works` function to a different name, such as `exploration`, like so:
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: lib.cairo</span>
 
 ```rust
 #[cfg(test)]
@@ -80,15 +92,13 @@ mod tests {
 Then run `cairo-test  -- --path src` again. The output now shows `exploration` instead of `it_works`:
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.47s
-    Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 1 tests
-test adder::main::tests::exploration ... ok
+test adder::lib::tests::exploration ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/main.cairo_ file looks like Listing 9-3.
+Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing 9-3.
 
 ```rust
 #[test]
@@ -101,20 +111,18 @@ fn another() {
 Listing 9-3: Adding a second test that will fail
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.47s
-    Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 2 tests
-test adder::main::tests::exploration ... ok
-test adder::main::tests::another ... fail
+test adder::lib::tests::exploration ... ok
+test adder::lib::tests::another ... fail
 failures:
-    adder::main::tests::another - panicked with [593979512822486838786147395675889716 ('Make this test fail'), ].
+    adder::lib::tests::another - panicked with [593979512822486838786147395675889716 ('Make this test fail'), ].
 Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
 Listing 9-4: Test results when one test passes and one test fails
 
-Instead of `ok`, the line `adder::main::tests::another` shows `fail`. A new section appear between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `[593979512822486838786147395675889716 ('Make this test fail'), ]` in the _src/main.cairo_ file.
+Instead of `ok`, the line `adder::lib::tests::another` shows `fail`. A new section appear between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `[593979512822486838786147395675889716 ('Make this test fail'), ]` in the _src/lib.cairo_ file.
 
 The summary line displays at the end: overall, our test result is `FAILED`. We had one test pass and one test fail.
 
@@ -124,9 +132,9 @@ Now that you’ve seen what the test results look like in different scenarios, l
 
 The `assert` function, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert` function a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the assert function calls `panic()` to cause the test to fail with a message we defined as the second argument of the `assert` function. Using the `assert` function helps us check that our code is functioning in the way we intend.
 
-In Chapter 4, Listing 5-15, we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/main.cairo_ file, then write some tests for it using the `assert` function.
+In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function.
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: lib.cairo</span>
 
 ```rust
 trait RectangleTrait {
@@ -148,7 +156,7 @@ Listing 9-5: Using the `Rectangle` struct and its `can_hold` method from Chapter
 
 The `can_hold` method returns a `Boolean`, which means it’s a perfect use case for the assert function. In Listing 9-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8_u64` and a height of `7_u64` and asserting that it can hold another `Rectangle` instance that has a width of `5_u64` and a height of `1_u64`.
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: lib.cairo</span>
 
 ```rust
 #[cfg(test)]
@@ -179,17 +187,15 @@ Note that we’ve added two new lines inside the tests module: `use super::Recta
 We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `Rectangle` instances that we need. Then we called the assert function and passed it the result of calling `larger.can_hold(@smaller)`. This expression is supposed to return `true`, so our test should pass. Let’s find out!
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.46s
-    Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 1 tests
-test adder::main::tests::larger_can_hold_smaller ... ok
+test adder::lib::tests::larger_can_hold_smaller ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
 It does pass! Let’s add another test, this time asserting that a smaller rectangle cannot hold a larger rectangle:
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: lib.cairo</span>
 
 ```rust
 #[cfg(test)]
@@ -221,12 +227,10 @@ mod tests {
 Because the correct result of the `can_hold` function in this case is `false`, we need to negate that result before we pass it to the assert function. As a result, our test will pass if `can_hold` returns false:
 
 ```shell
-$ cairo-test -- --path src
-        Finished dev [unoptimized + debuginfo] target(s) in 0.50s
-        Running `target/debug/cairo-test --path src`
+$ cairo-test .
     running 2 tests
-    test adder::main::tests::smaller_cannot_hold_larger ... ok
-    test adder::main::tests::larger_can_hold_smaller ... ok
+    test adder::lib::tests::smaller_cannot_hold_larger ... ok
+    test adder::lib::tests::larger_can_hold_smaller ... ok
     test result: ok. 2 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
@@ -244,14 +248,12 @@ impl RectangleImpl of RectangleTrait {
 Running the tests now produces the following:
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.51s
-    Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 2 tests
-test adder::main::tests::smaller_cannot_hold_larger ... ok
-test adder::main::tests::larger_can_hold_smaller ... fail
+test adder::lib::tests::smaller_cannot_hold_larger ... ok
+test adder::lib::tests::larger_can_hold_smaller ... fail
 failures:
-   adder::main::tests::larger_can_hold_smaller - panicked with [167190012635530104759003347567405866263038433127524 ('rectangle cannot hold'), ].
+   adder::lib::tests::larger_can_hold_smaller - panicked with [167190012635530104759003347567405866263038433127524 ('rectangle cannot hold'), ].
 
 Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
@@ -266,7 +268,7 @@ We do this by adding the attribute `should_panic` to our test function. The test
 
 Listing 9-8 shows a test that checks that the error conditions of `GuessTrait::new` happen when we expect them to.
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: lib.cairo</span>
 
 ```rust
 use array::ArrayTrait;
@@ -314,11 +316,9 @@ Listing 9-8: Testing that a condition will cause a panic
 We place the `#[should_panic]` attribute after the `#[test]` attribute and before the test function it applies to. Let’s look at the result when this test passes:
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.26s
-    Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 1 tests
-test adder::main::tests::greater_than_100 ... ok
+test adder::lib::tests::greater_than_100 ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
@@ -342,13 +342,11 @@ impl GuessImpl of GuessTrait {
 When we run the test in Listing 9-8, it will fail:
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.52s
-    Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 1 tests
-test adder::main::tests::greater_than_100 ... fail
+test adder::lib::tests::greater_than_100 ... fail
 failures:
-   adder::main::tests::greater_than_100 - expected panic but finished successfully.
+   adder::lib::tests::greater_than_100 - expected panic but finished successfully.
 Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 ```
 
@@ -356,7 +354,7 @@ We don’t get a very helpful message in this case, but when we look at the test
 
 Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `Guess` in Listing 9-9 where the new function panics with different messages depending on whether the value is too small or too large.
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: lib.cairo</span>
 
 ```rust
 // --snip--
@@ -382,7 +380,7 @@ mod tests {
     use super::GuessTrait;
 
     #[test]
-    #[should_panic(expected = ('Guess must be lower than 100', ))]
+    #[should_panic(expected: ('Guess must be lower than 100', ))]
     fn greater_than_100() {
         GuessTrait::new(200_u64);
     }
@@ -410,13 +408,11 @@ if value < 1_u64 {
 This time when we run the `should_panic` test, it will fail:
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.50s
-     Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 1 tests
-test adder::main::tests::greater_than_100 ... fail
+test adder::lib::tests::greater_than_100 ... fail
 failures:
-   adder::main::tests::greater_than_100 - panicked with [7525466742201272999442800965907272684056773373474020086884212809777 ('Guess must be greater than 1'), ].
+   adder::lib::tests::greater_than_100 - panicked with [7525466742201272999442800965907272684056773373474020086884212809777 ('Guess must be greater than 1'), ].
 
 Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 ```
@@ -429,7 +425,7 @@ Sometimes, running a full test suite can take a long time. If you’re working o
 
 To demonstrate how to run a single test, we’ll first create two tests functions, as shown in Listing 9-10, and choose which ones to run.
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 #[cfg(test)]
@@ -453,21 +449,21 @@ Listing 9-10: Two tests with two different names
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 
 ```shell
-$ cairo-test -- --path src -f add_two_and_two
-    Finished dev [unoptimized + debuginfo] target(s) in 0.46s
-     Running `target/debug/cairo-test --path src -f add_two_and_two`
+$ cairo-test . -f add_two_and_two
 running 1 tests
-test adder::main::tests::add_two_and_two ... ok
+test adder::lib::tests::add_two_and_two ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 1 filtered out;
 ```
 
 Only the test with the name `add_two_and_two` ran; the other test didn’t match that name. The test output lets us know we had one more test that didn’t run by displaying 1 filtered out at the end.
 
+We can also specify part of a test name, and any test whose name contains that value will be run.
+
 ## Ignoring Some Tests Unless Specifically Requested
 
 Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `cairo-test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `ignore` attribute to exclude them, as shown here:
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 #[cfg(test)]
@@ -489,12 +485,10 @@ mod tests {
 After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now when we run our tests, it_works runs, but expensive_test doesn’t:
 
 ```shell
-$ cairo-test -- --path src
-    Finished dev [unoptimized + debuginfo] target(s) in 0.59s
-     Running `target/debug/cairo-test --path src`
+$ cairo-test .
 running 2 tests
-test adder::main::tests::expensive_test ... ignored
-test adder::main::tests::it_works ... ok
+test adder::lib::tests::expensive_test ... ignored
+test adder::lib::tests::it_works ... ok
 test result: ok. 1 passed; 0 failed; 1 ignored; 0 filtered out;
 ```
 

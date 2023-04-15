@@ -1,6 +1,6 @@
 # Testing Organization
 
-We'll think about tests in terms of two main categories: unit tests and integration tests. Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions. Integration tests are entirely external to your library and use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test.
+We'll think about tests in terms of two main categories: unit tests and integration tests. Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions. Integration tests use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test.
 
 Writing both kinds of tests is important to ensure that the pieces of your library are doing what you expect them to, separately and together.
 
@@ -33,7 +33,7 @@ The attribute `cfg` stands for configuration and tells Cairo that the following 
 
 ## Integration Tests
 
-In Cairo, integration tests are entirely external to your library. They use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a `tests` directory.
+Integration tests use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a `tests` directory.
 
 ### The `tests` Directory
 
@@ -41,26 +41,31 @@ In Cairo, integration tests are entirely external to your library. They use your
 adder
 ├── cairo_project.toml
 ├── src
-    ├── cairo_project.toml
     ├── lib.cairo
 │   └── main.cairo
 └── tests
-    ├── cairo_project.toml
     ├── lib.cairo
     └── integration_test.cairo
 ```
 
-In your `tests` directory, create a `cairo_project.toml` file. This file will tell Cairo where our `adder` module is located and that this directory is the `tests` module:
+<!-- TODO: remove when Scarb test work -->
 
-```rust
-[crate_roots]
-adder = "../src"
-tests = "."
-```
-
-To successfully run your tests with `cairo-test` you will need to add a `lib.cairo` file in your `src` directory. `lib.cairo` will contain only one line `mod main;`. Same goes for your `tests` directory, add a `lib.cairo` file with `mod integration_test.cairo;`.
+> To successfully run your tests with `cairo-test` you will need to update your `cairo_project.toml` file to add the declaration of your `tests` crate.
+>
+> ```rust
+> [crate_roots]
+> adder = "src"
+> tests = "tests"
+> ```
 
 Each test file is compiled as its own separate crate, that's why whenever you add a new test file you must add it to your _tests/lib.cairo_.
+
+<span class="filename">Filename: tests/lib.cairo</span>
+
+```rust
+#[cfg(tests)]
+mod integration_tests
+```
 
 Enter the code in Listing 11-13 into the _tests/integration_test.cairo_ file:
 
@@ -77,12 +82,8 @@ fn internal() {
 
 Each file in the tests directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add `use adder::main` at the top of the code, which we didn’t need in the unit tests.
 
-We don’t need to annotate any code in _tests/integration_test.cairo_ with `#[cfg(test)]`. Cairo treats the tests directory specially and compiles files in this directory only when we run `cairo-test`. Run `cairo-test` now:
-
 ```shell
 $ cairo-test -- --path tests/
-    Finished dev [unoptimized + debuginfo] target(s) in 0.45s
-     Running `target/debug/cairo-test --path tests/`
 running 1 tests
 test tests::tests_integration::it_adds_two ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
