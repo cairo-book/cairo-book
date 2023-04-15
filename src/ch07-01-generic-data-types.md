@@ -1,10 +1,10 @@
 # Generic Data Types
 
-We use generics to create definitions for items like function signatures or structs, which we can then use with many different concerte data types. Let's first look at how to define functions, structs, enums and methods using generics.
+We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. Let's take a look at how to define functions, structs, enums and methods using generics.
 
 ## Generic Functions
 
-When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two `Array` of items, it will return the largest one. If we need to perform this operations for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.
+When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two `Array` of items, will return the largest one. If we need to perform this operations for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.
 
 ```rust
 // This code does not compile!
@@ -69,11 +69,76 @@ fn main() {
 }
 ```
 
-The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. Note that the `main` function remained unchanged, the compiler is smart enough to deduct which concrete type is being used.
+The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. Note that the `main` function remained unchanged, the compiler is smart enough to deduct which concrete type is being used and if it implements the `Drop` trait.
+
+### Constraints for Generic Types
+
+It is useful when defining generic types to have information about them. Knowing which traits they implement allow us to give them greater use in a functions logic at the cost of constraining the generic types that can be used for this function. We saw example an example of this previously by adding the `TDrop` implementation as part of the generic arguments of `largest_list`. This was forced on us by the compiler, but we can add constraints as well that benefit our function logic.
+
+Imagine that we want, given a list of some generic type `T`, get the smallest of them. At a first glance we know that we need to define a function which compares elements of type `T`. We know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
+
+```rust
+// This code does not compile!
+use array:ArrayTrait;
+
+// Given a list of T get the smallest one.
+// The PartialOrd trait implements comparison operations for T
+fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
+    // This represents the smallest element through the iteration
+    // Notice that we use the desnap (*) operator
+    let mut smallest = *list[0_usize];
+
+    // The index we will use to move through the list
+    let mut index = 1_usize;
+
+    // Iterate through the whole list storing the smallest
+    loop {
+        if index >= list.len(){
+            break smallest;
+        }
+        if *list[index] < smallest {
+            smallest = *list[index];
+        }
+        index = index + 1;
+    }
+}
+
+fn main()  {
+    let mut list = ArrayTrait::new();
+    list.append(5_u8);
+    list.append(3_u8);
+    list.append(10_u8);
+
+    // We need to specify that we are passing a snapshot of `list` as an argument
+    let s = smallest_element(@list);
+    assert(s == 3_u8, 0);
+
+}
+```
+
+The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes an snapshot of an `Array<T>` as a parameter and returns a copy of the smallest element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we don't require to implement the `Drop` trait for `T` as well. Why it does not compile then?
+
+When indexing on `list`, the value results in a snap of the indexed element, unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy operation for `T`, which means that `T` needs to implement the `Copy` trait. By copying a `@T` to a `T` there is now variables with type `T` that need to be dropped, requiring for `T` to implement the `Drop` trait as well. We must add both the `Drop` and `Copy` traits for the function to be correct. The function definition of `smallest_element` would then be:
+
+```rs
+fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>>(list: @Array<T>) -> T {
+    let mut smallest = *list[0_usize];
+    let mut index = 1_usize;
+    loop {
+        if index >= list.len(){
+            break smallest;
+        }
+        if *list[index] < smallest {
+            smallest = *list[index];
+        }
+        index = index + 1;
+    }
+}
+```
 
 ## Structs
 
-We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next listing shows the definition `Wallet<T>` which has a `balance` field of type `T`.
+We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition `Wallet<T>` which has a `balance` field of type `T`.
 
 ```rust
 // This code does not compile!
@@ -177,7 +242,7 @@ fn main() {
 
 We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns a snapshot of the field `address` from `Wallet`. Then we give an implementation for the trait in `WalletImpl<T>`. Note that you need to include a generic type in both definitions of the trait and the implementation.
 
-We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the next listing we define an implementation for wallets which have concrete type of `u128` for the `balance` field.
+We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
 
 ```rust
 trait WalletRecieveTrait {
