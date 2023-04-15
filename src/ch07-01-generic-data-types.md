@@ -1,6 +1,6 @@
 # Generic Data Types
 
-We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In cairo we can use generics when defining functions, structs, enums, traits, implementations and methods. Next we are going to take a look on how to effectively use generics over them.
+We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo we can use generics when defining functions, structs, enums, traits, implementations and methods! In this chapter we are going to take a look on how to effectively use generic types with all of them.
 
 ## Generic Functions
 
