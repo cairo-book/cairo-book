@@ -48,11 +48,9 @@
 
 ## Generic Data Types
 
-- [Generic Data Types](ch07-00-generic-data-types.md)
+- [Generic Types](ch07-00-generic-types.md)
 
-  - [Generic Functions](ch07-01-generic-functions.md)
-  - [Generic Structs](ch07-02-generic-structs-enums.md)
-  - [Generic Methods](ch07-03-generic-methods.md)
+  - [Generic Functions](ch07-01-generic-data-types.md)
 
 - [Appendix](appendix-00.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
