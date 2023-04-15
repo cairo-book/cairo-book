@@ -1,6 +1,6 @@
 # Generic Data Types
 
-We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. Let's take a look at how to define functions, structs, enums and methods using generics.
+We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In cairo we can use generics when defining functions, structs, enums, traits, implementations and methods. Next we are going to take a look on how to effectively use generics over them.
 
 ## Generic Functions
 
@@ -168,7 +168,7 @@ fn main() {
 }
 ```
 
-We avoid using the `derive` macro for `Drop` implementation of `Walet` and instead define our own `WalletDrop` implementation. Notice that we must define, just like functions, an aditional generic type for `WalletDrop` saying that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is also droppable.
+We avoid using the `derive` macro for `Drop` implementation of `Wallet` and instead define our own `WalletDrop` implementation. Notice that we must define, just like functions, an aditional generic type for `WalletDrop` saying that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is also droppable.
 
 Finally, if we want to add a field to `Wallet` representing its Cairo address and we want that field to be different than `T` but generic as well can simply add another generic type between the `<>`:
 
@@ -290,7 +290,7 @@ impl WalletMixImpl<T1,  U1> of WalletMixTrait<T1, U1> {
 }
 ```
 
-We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` methods which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As `mixup` signature specify, both `self` and `other` are getting dropped at the end of the function, which is the reason for this code not to compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifiying that they will implement the `Drop` trait in order for the compiler to know how to drop instances of `Wallet<T, U>`. The code fix is as follow:
+We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` methods which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As `mixup` signature specify, both `self` and `other` are getting dropped at the end of the function, which is the reason for this code not to compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifiying that they will implement the `Drop` trait in order for the compiler to know how to drop instances of `Wallet<T, U>`. The updated implementation is as follow:
 
 ```rust
 trait WalletMixTrait<T1, U1> {
@@ -318,4 +318,4 @@ fn main() {
 }
 ```
 
-We first create two instances: one of `Wallet<bool, u128>` and the other of `Wallet<felt252, u8>`. Then, we call `mixup` we create a new `Wallet<bool, u8>` instance.
+We first create two instances: one of `Wallet<bool, u128>` and the other of `Wallet<felt252, u8>`. Then, we call `mixup` and create a new `Wallet<bool, u8>` instance.
