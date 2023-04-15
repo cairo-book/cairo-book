@@ -73,9 +73,9 @@ The new `largest_list` function includes in its definition the requirement that 
 
 ### Constraints for Generic Types
 
-It is useful when defining generic types to have information about them. Knowing which traits they implement allow us to give them greater use in a functions logic at the cost of constraining the generic types that can be used for this function. We saw example an example of this previously by adding the `TDrop` implementation as part of the generic arguments of `largest_list`. This was forced on us by the compiler, but we can add constraints as well that benefit our function logic.
+When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allow us to utilize them more effectively in a functions logic at the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the `TDrop` implementation as part of the generic arguments of `largest_list`. While `TDrop` was added to satisfy the compilers requirements, we can also add constraints to benefit our function logic.
 
-Imagine that we want, given a list of some generic type `T`, get the smallest of them. At a first glance we know that we need to define a function which compares elements of type `T`. We know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
+Imagine that we want, given a list of elements of some generic type `T`, find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
 
 ```rust
 // This code does not compile!
