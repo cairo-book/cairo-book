@@ -131,7 +131,6 @@ mod dining {
 
         // Relative path Methods
         front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile
-        super::lib::front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile
         super::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
     }
 }
