@@ -40,15 +40,19 @@
   - [Enums](ch05-01-enums.md)
   - [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
 
+## Managing Cairo Projects with Packages, Crates and Modules
+
+- [Managing Cairo Projects with Packages, Crates and Modules](ch06-00-managing-cairo-projects-with-packages-crates-and-modules.md)
+
+  - [Defining Modules to Control Scope](ch06-02-defining-modules-to-control-scope.md)
+
 ## Generic Data Types
 
-- [Generic Data Types](ch06-00-generic-data-types.md)
-  - [Generic Functions](ch06-01-generic-functions.md)
-  - [Generic Structs](ch06-02-generic-structs-enums.md)
-  - [Generic Methods](ch06-03-generic-methods.md)
+- [Generic Data Types](ch07-00-generic-data-types.md)
 
-## Appendix
+  - [Generic Functions](ch07-01-generic-functions.md)
+  - [Generic Structs](ch07-02-generic-structs-enums.md)
+  - [Generic Methods](ch07-03-generic-methods.md)
 
 - [Appendix](appendix-00.md)
-
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
