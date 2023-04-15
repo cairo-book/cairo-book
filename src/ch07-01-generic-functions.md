@@ -1,9 +1,13 @@
-# Generic Functions
+# Generic Data Types
+
+We use generics to create definitions for items like function signatures or structs, whcih we can then use with many different concerte data types. Let's first look at how to define functions, structs, enums and methods using generics.
+
+## Generic Functions
 
 When defining a function that uses generics, we place the generics in the signature of the function where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two `Array` of items, it will return the largest one. If we need to perform this operations for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function just one time using generics and be on with it.
 
 ```rust
-// this code does not compile
+// This code does not compile!
 
 use array::ArrayTrait;
 
@@ -66,3 +70,187 @@ fn main() {
 ```
 
 The new `largest_list` function includes in it's definition the requirement that whatever generic type is placed there, it must be droppable. Note that the `main` function remained unchanged, the compiler is smart enough to deduct which concrete type it's being used: `T` is `felt252` and `TDrop` is the `impl` that drops a felt.
+
+## Structs
+
+We can also define structs to use a generic type parameter in or more fields using the `<>` syntax in a similar way to function defintions. First we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct defintion where we would otherwise specify concrete data types. The next listing shows the defintion `Wallet<T>` which has a `balance` field of type `T`.
+
+```rust
+// This code does not compile!
+
+#[derive(Drop)]
+struct Wallet<T> {
+    balance: T,
+}
+
+
+fn main() {
+   let w = Wallet{ balance: 3_u128};
+}
+```
+
+Compiling the above code would error due to the `derive` macro not working well with generics. When using generic types is best to directly write the traits you want to use:
+
+```rust
+struct Wallet<T> {
+    balance: T,
+}
+
+impl WalletDrop<T, impl TDrop : Drop<T>> of Drop<Wallet<t>>;
+
+fn main() {
+   let w = Wallet{ balance: 3_u128};
+}
+```
+
+We avoid using the `derive` macro for `Drop` implementation of `Walet` and instead define our own `WalletDrop` implementation. Notice that we must define, just like functions, as an extra generic type for `WalletDrop` saying that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is droppable as well.
+
+Finally, if we want to add a field to `Wallet` representing it's Cairo address and we want that field to be different than `T` but generic as well can simply add another generic type between the `<>`:
+
+```rust
+struct Wallet<T, U> {
+    balance: T,
+    address: U,
+}
+
+impl WalletDrop<T, impl TDrop: Drop<T>, U, impl UDrop: Drop<U>> of Drop<Wallet<T, U>>;
+
+
+fn main() {
+   let w = Wallet{ balance: 3_u128, address: 14};
+}
+```
+
+We add to `Wallet` struct definiton a new generic type `U` and then assign this type to the new field member `address`.
+Then we adapt the `WalletDrop` trait to work with the new generic type `U`. Notice that when initializing the struct inside `main` it automatically infers that `T` is a `u128` and `U` is a `felt252` and since they are both droppable, `Wallet` is droppable as well!
+
+## Enums
+
+As we did with structs, we can define enums to hold generic data types in their variants. For example the `Option<T>` enum provided by the Cairo's core library:
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+
+The `Option<T>` enum is generic over a type `T` and has two variants: `Some`, which holds one value of type `T` and `None` that doesn't hold any value. By using the `Option<T>` enum, it is possible for us to express the abstract concept of an optional value, and because this value has a generic type `T` we can use this abstraction with any type.
+
+Enums can use multiple generic types as well, like definition of the `Result<T, E>` enum that the standard library provides:
+
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+
+The `Result<T, E>` enum is generic over two types, `T` and `E`, and has two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition makes it convenient to use the `Result` enum anywhere we have an operation that might succed (by returning a value of type `T`) or fail (by returning a value of type `E`).
+
+## Generic Methods
+
+We can implement methods on structs and enums, and use the generic types in their definition, too. Using our previous definition of `Wallet<T>` struct we define a method `balance` for it:
+
+```rust
+struct Wallet<T> {
+    balance: T,
+}
+
+impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T, U>>;
+
+trait WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> @T;
+}
+
+impl WalletImpl<T> of WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> @T{
+        return self.balance;
+    }
+}
+
+fn main() {
+    let w = Wallet {balance: 50};
+    assert(w.balance() == 50, 0);
+}
+```
+
+We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns a snapshot of the field `address` from `Wallet`. Then we give an implementation for the trait in `WalletImpl<T>`. Notice that you need to include a generic type in both defintions for `trait` and `impl`.
+
+We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the next listing we define an implementation for wallets which have concrete type of `u128` for the `balance` field.
+
+```rust
+trait WalletRecieveTrait {
+    fn recieve(ref self: Wallet<u128>, value: u128);
+}
+
+impl WalletRecieveImpl of WalletRecieveTrait {
+    fn recieve(ref self: Wallet<u128>, value: u128) {
+        self.balance += value;
+    }
+}
+
+fn main() {
+    let mut w = Wallet {balance: 50_u128};
+    assert(w.balance() == 50_u128, 0);
+
+    w.recieve(100_u128)
+    assert(w.balance() == 150_u128, 0);
+}
+```
+
+The new method `recieve` increments the size of the balance of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update it's balance. If we were to change the intialization of `w` by changing the type of `balance` the previous code wouldn't compile.
+
+Cairo allow us to define generic types inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and create a new one with a generic type of each. First, lets rewrite the struct definiton:
+
+```rust
+struct Wallet<T, U> {
+    balance: T,
+    address: U,
+}
+```
+
+Next we are going to naively define the mixup trait and implementation:
+
+```rust
+// This does not compile!
+trait WalletMixTrait<T1, U1> {
+    fn mixup<T2, U2>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2>;
+}
+
+impl WalletMixImpl<T1,  U1> of WalletMixTrait<T1, U1> {
+    fn mixup<T2, U2>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2> {
+        Wallet {balance: self.balance, address: other.address}
+    }
+}
+```
+
+We are defining a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` methods which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` it creates a new `Wallet<T1, U2>`. As `mixup` signature signals, both `self` and `other` are getting dropped at the end of the function, which is the main reason for this code for not to compile. If you have been following this chapter from the start you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait. The code fix is as follow:
+
+```rust
+trait WalletMixTrait<T1, U1> {
+    fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2>;
+}
+
+impl WalletMixImpl<T1, impl T1Drop: Drop<T1>,  U1, impl U1Drop: Drop<U1>> of WalletMixTrait<T1, U1> {
+    fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2> {
+        Wallet {balance: self.balance, address: other.address}
+    }
+}
+```
+
+We add the requirements for `T1` adn `U1` to be droppable on `WalletMixImpl` declaration. Then we do the same for `T2` and `U2`, this time as part of `mixup` signature. We can now try the `mixup` function:
+
+```rs
+fn main() {
+   let w1 = Wallet{ balance: true, address: 10_u128};
+   let w2 = Wallet{ balance: 32, address: 100_u8};
+
+   let w3 = w1.mixup(w2);
+
+   assert(w3.balance == true, 0);
+   assert(w3.address == 100_u8, 0);
+}
+```
+
+We first create two instances, one of `Wallet<bool, u128>` and the other of `Wallet<felt252, u8>`. Then we call `mixup` finally getting a new instance of `Wallet<bool, u8>`.

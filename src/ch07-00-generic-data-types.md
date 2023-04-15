@@ -1,4 +1,4 @@
-# Generic Data Types
+# Generic Types
 
 Every programming language has tools for effectively handling the duplication of concepts. In Cairo, one such tool is generics: abstract stand-ins for concrete types or other properties. We can express the behaviour of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
 
