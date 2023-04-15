@@ -45,6 +45,7 @@
 - [Managing Cairo Projects with Packages, Crates and Modules](ch06-00-managing-cairo-projects-with-packages-crates-and-modules.md)
 
   - [Defining Modules to Control Scope](ch06-02-defining-modules-to-control-scope.md)
+  - [Paths for Referring to an Item in the Module Tree](ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md)
 
 - [Appendix](appendix-00.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
