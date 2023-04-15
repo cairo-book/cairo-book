@@ -4,7 +4,7 @@ To show Cairo where to find an item in a module tree, we use a path in the same 
 
 A path can take two forms:
 
-- An _absolute path_ is a full path starting from a crate root, in Rust you use the `crate` keyword to start an absolute path, in Cairo absolute paths are not implemented yet.
+- An _absolute path_ is a full path starting from the crate module, in Cairo, absolute paths starts by the identifier of the crate module.
 - A _relative path_ starts depends on the current module and uses `super`, or an identifier in the current module.
 
 Both absolute and relative paths are followed by one or more identifiers
@@ -31,30 +31,25 @@ mod front_of_house {
     }
 }
 
-use front_of_house::hosting::add_to_waitlist; // used for Relative Method 2
 
 pub fn eat_at_restaurant() {
     // Absolute path
-    crate::front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile in Cairo
+    restaurant::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
 
     // Relative path Method 1
     front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
 
     // Relative path Method 2
-    add_to_waitlist(); // ✅ Compiles
-
-    // Relative path Method 3
     super::lib::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
-
 }
 ```
 
 The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
-crate as `eat_at_restaurant`. In rust you can use the `crate` keyword to
-start an absolute path, in Cairo it's not possible that's the reason why this code won't compile.
+crate as `eat_at_restaurant`. In Cairo it's not possible you need to specify the crate module identifier,
+in our example it's `restaurant`.
 
-We then include three methods to import with a relative path.
+We then included two methods to import `add_to_waitlist` with a relative path.
 
 For the first method, the path starts with `front_of_house`, the name of the module
 defined at the same level of the module tree as `eat_at_restaurant`. Here the
@@ -62,9 +57,7 @@ filesystem equivalent would be using the path
 `./front_of_house/hosting/add_to_waitlist`. Starting with a module name means
 that the path is relative to the current module.
 
-The second method is similar to the first one but we use the `use` keyword to import the function. This is the recommended way to import functions as it permits to use the function without having to specify the path.
-
-The third method is similar to the first one but we use the `super` keyword to start the path from the parent module. Here the filesystem equivalent would be using the path `../front_of_house/hosting/add_to_waitlist`.
+The second method is similar to the first one but we use the `super` keyword to start the path from the parent module. Here the filesystem equivalent would be using the path `../front_of_house/hosting/add_to_waitlist`.
 
 ### Starting Relative Paths with `super`
 
@@ -95,23 +88,19 @@ mod customer_experience {
     }
 
     fn eat_at_restaurant() {
+        // Absolute path
+        restaurant::customer_experience::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
+
+        // Relative path Method 1
         front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
-        super::lib::front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile
+
+        // Relative path Method 2
         super::customer_experience::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
     }
 }
 ```
 
-We need to update the path that uses `super` because it won't compile as we added the `customer_experience` module. Now super is relative to the `customer_experience` module and not the `lib` file.
-
-Here is the error message:
-
-```bash
-error: Invalid path.
- --> lib.cairo:20:22
-        super::lib::front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile
-                     ^************^
-```
+We need to update the path that uses `super` because it won't compile as we added the `customer_experience` module. Now super is relative to the `customer_experience` module and not the `lib` file. Moreover we also need to update the absolute path because we moved the `front_of_house` module into the `customer_experience` module.
 
 However, if we moved the `eat_at_restaurant` function separately into a module
 named `dining` like so:
@@ -137,6 +126,10 @@ mod front_of_house {
 
 mod dining {
     fn eat_at_restaurant() {
+        // Absolute path
+        restaurant::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
+
+        // Relative path Methods
         front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile
         super::lib::front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile
         super::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
@@ -154,8 +147,6 @@ mod dining {
 
     fn eat_at_restaurant() {
         front_of_house::hosting::add_to_waitlist(); // ✅ Compile
-        super::lib::front_of_house::hosting::add_to_waitlist(); // ❌ Doesn't compile
-        super::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
     }
 }
 ```
