@@ -1,12 +1,12 @@
 # Traits in Cairo
 
-Traits specify functionality blueprints that can be implemented. The specification includes a set of function signatures containing type annotations for parameters and return value.
+Traits specify functionality blueprints that can be implemented. The blueprint specification includes a set of function signatures containing type annotations for the parameters and return value. This sets a standard to implement the specific functionality.
 
 ## Defining a Trait
 
 To define a trait, you use the keyword `trait` followed by the name of the trait in `PascalCase` then the function signatures in a pair of curly braces.
 
-Here's what a simple trait declaration looks like.
+For example, let's say that we have multiple structs representing shapes. We want our application to be able to perform geometry operations on these shapes, So we define a trait `ShapeGeometry` that contains a blueprint to implement geometry operations on a shape like this,
 
 ```rust
 trait ShapeGeometry {
@@ -15,9 +15,11 @@ trait ShapeGeometry {
 }
 ```
 
+Here our trait `ShapeGeometry` declares signatures for two methods `boundary` and `area`. When implemented, both these functions should return a `u64` and accept parameters as specified by the trait.
+
 ## Implementing a Trait
 
-The trait can then be implemented with `impl` keyword with the name of the implementation (to refer to when using methods/functions) like this,
+A trait can be implemented using `impl` keyword with the name of your implementation followed by `of` then the name of trait being implemented. Here's an example implementing `ShapeGeometry` trait.
 
 ```rust
 impl RectangleGeometry of ShapeGeometry {
@@ -30,9 +32,11 @@ impl RectangleGeometry of ShapeGeometry {
 }
 ```
 
+In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note the the function parameters and return value types are identical to the trait specification.
+
 ## Parameter `self`
 
-In the example above, `self` is a special keyword. When parameter with name `self` is used, the implemented functions are also attached to the instances of the type as methods. Here's an illustration,
+In the example above, `self` is a special parameter. When a parameter with name `self` is used, the implemented functions are also [attached to the instances of the type as methods](ch04-03-method-syntax.md#defining-methods). Here's an illustration,
 
 When `ShapeGeometry` trait is implemented,
 Function `area` from `ShapeGeometry` trait can be called in two ways,
@@ -53,7 +57,7 @@ And the implementation of `area` method will be able to access the instance via 
 
 ## Traits with generic types
 
-You would want to write a trait when you want multiple types to implement some functionality in a standard way. To do this, we use generic types.
+Usually we want to write a trait when we want multiple types to implement a functionality in a standard way. However, in the example above the signatures are static and cannot be used for multiple types. To do this, we use generic types when defining traits.
 
 In the example below, we use generic type `T` and our method signatures can use this alias which can be provided during implementation.
 
@@ -101,7 +105,7 @@ fn main() {
 
 ## Managing and using external trait implementations
 
-To use traits methods, you need to make sure the correct implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use debug::PrintTrait;` to use `print()` methods.
+To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use debug::PrintTrait;` to use `print()` methods.
 
 In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
 If `CircleGeometry` was in a separate module/file `circle` then to use `boundary` on `circ: Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`.
