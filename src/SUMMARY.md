@@ -46,5 +46,11 @@
 
   - [Defining Modules to Control Scope](ch06-02-defining-modules-to-control-scope.md)
 
+## Generic Data Types
+
+- [Generic Types](ch07-00-generic-types.md)
+
+  - [Generic Functions](ch07-01-generic-data-types.md)
+
 - [Appendix](appendix-00.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
