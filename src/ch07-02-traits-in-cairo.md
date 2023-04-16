@@ -10,8 +10,8 @@ For example, let's say that we have multiple structs representing shapes. We wan
 
 ```rust
 trait ShapeGeometry {
-	fn boundary( self: Rectangle ) -> u64;
-	fn area( self: Rectangle ) -> u64;
+    fn boundary( self: Rectangle ) -> u64;
+    fn area( self: Rectangle ) -> u64;
 }
 ```
 
@@ -65,38 +65,38 @@ use debug::PrintTrait;
 
 // Here T is an alias type which will be provided buring implementation
 trait ShapeGeometry<T> {
-	fn boundary( self: T ) -> u64;
-	fn area( self: T ) -> u64;
+    fn boundary( self: T ) -> u64;
+    fn area( self: T ) -> u64;
 }
 
 // Implementation RectangleGeometry passes in <Rectangle>
 // to implement the trait for that type
 impl RectangleGeometry of ShapeGeometry::<Rectangle> {
-	fn boundary( self: Rectangle ) -> u64 {
+    fn boundary( self: Rectangle ) -> u64 {
         2_u64 * (self.height + self.width)
     }
-	fn area( self: Rectangle ) -> u64 {
-		self.height * self.width
-	}
+    fn area( self: Rectangle ) -> u64 {
+        self.height * self.width
+    }
 }
 
 // We might have another struct Circle
 // which can use the same trait spec
 impl CircleGeometry of ShapeGeometry::<Circle> {
-	fn boundary( self: Circle ) -> u64 {
+    fn boundary( self: Circle ) -> u64 {
         (2_u64 * 314_u64 * self.radius) / 100_u64
     }
-	fn area( self: Circle ) -> u64 {
-		(314_u64 * self.radius * self.radius) / 100_u64
-	}
+    fn area( self: Circle ) -> u64 {
+       (314_u64 * self.radius * self.radius) / 100_u64
+    }
 }
 
 fn main() {
-	let rect = Rectangle { height: 5_u128, width: 7_u128 };
+    let rect = Rectangle { height: 5_u128, width: 7_u128 };
     rect.area().print(); // 35
     rect.boundary().print(); // 24
 
-	let circ = Circle { radius: 5_u128 };
+    let circ = Circle { radius: 5_u128 };
     circ.area().print(); // 78
     circ.boundary().print(); // 31
 }
@@ -139,8 +139,8 @@ mod circle {
 fn main() {
     let rect = Rectangle { height: 5_u64, width: 7_u64 };
     let circ = Circle { radius: 5_u64 };
-	// Fails with this error
-	// Method `area` not found on... Did you import the correct trait and impl?
+    // Fails with this error
+    // Method `area` not found on... Did you import the correct trait and impl?
     rect.area().print();
     circ.area().print();
 }

@@ -10,4 +10,4 @@ However, Cairo is not only for blockchain developers. As a general purpose progr
 
 This book is designed for developers with a basic understanding of programming concepts. It is a friendly and approachable text intended to help you level up your knowledge of Cairo, but also help you develop your programming skills in general. So, dive in and get ready to learn all there is to know about Cairo!
 
--- The Cairo community
+— The Cairo community
