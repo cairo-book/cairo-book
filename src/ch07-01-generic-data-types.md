@@ -37,13 +37,9 @@ fn main() {
 }
 ```
 
-The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for droping an array of a generic type. This happens because the compiler has now way to guarantee that an `Array<T>` is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifiying in the function signature that `T` implements the drop trait.
+The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for droping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifiying in the function signature of `largest_list` that `T` must implement the drop trait. The correct function definition of `largest_list` is as follows:
 
 ```rust
-use array::ArrayTrait;
-
-// Specify generic type T between the angulars
-// Also specify that the T implements the Drop trait
 fn largest_list<T, impl TDrop: Drop<T>>(l1: Array<T>, l2: Array<T>) -> Array<T> {
     if l1.len() > l2.len() {
         l1
@@ -51,29 +47,13 @@ fn largest_list<T, impl TDrop: Drop<T>>(l1: Array<T>, l2: Array<T>) -> Array<T> 
         l2
     }
 }
-
-fn main() {
-    let mut l1 = ArrayTrait::new();
-    let mut l2 = ArrayTrait::new();
-
-    l1.append(1);
-    l1.append(2);
-
-    l2.append(3);
-    l2.append(4);
-    l2.append(5);
-
-    // There is no need to specify the concrete type of T, nor of
-    // TDrop because they are infered by the compiler
-    let l3 = largest_list(l1, l2);
-}
 ```
 
-The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. Note that the `main` function remained unchanged, the compiler is smart enough to deduct which concrete type is being used and if it implements the `Drop` trait.
+The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. The `main` function remains unchanged, the compiler is smart enough to deduct which concrete type is being used and if it implements the `Drop` trait.
 
 ### Constraints for Generic Types
 
-When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allow us to utilize them more effectively in a functions logic at the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the `TDrop` implementation as part of the generic arguments of `largest_list`. While `TDrop` was added to satisfy the compilers requirements, we can also add constraints to benefit our function logic.
+When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allow us to use them more effectively in a functions logic at the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the `TDrop` implementation as part of the generic arguments of `largest_list`. While `TDrop` was added to satisfy the compilers requirements, we can also add constraints to benefit our function logic.
 
 Imagine that we want, given a list of elements of some generic type `T`, find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
 
@@ -168,9 +148,9 @@ fn main() {
 }
 ```
 
-We avoid using the `derive` macro for `Drop` implementation of `Wallet` and instead define our own `WalletDrop` implementation. Notice that we must define, just like functions, an aditional generic type for `WalletDrop` saying that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is also droppable.
+We avoid using the `derive` macro for `Drop` implementation of `Wallet` and instead define our own `WalletDrop` implementation. Notice that we must define, just like functions, an additional generic type for `WalletDrop` saying that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is also droppable.
 
-Finally, if we want to add a field to `Wallet` representing its Cairo address and we want that field to be different than `T` but generic as well can simply add another generic type between the `<>`:
+Finally, if we want to add a field to `Wallet` representing its Cairo address and we want that field to be different than `T` but generic as well, we can simply add another generic type between the `<>`:
 
 ```rust
 struct Wallet<T, U> {
@@ -245,12 +225,12 @@ We first define `WalletTrait<T>` trait using a generic type `T` which defines a 
 We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
 
 ```rust
-trait WalletRecieveTrait {
-    fn recieve(ref self: Wallet<u128>, value: u128);
+trait WalletReceiveTrait {
+    fn receive(ref self: Wallet<u128>, value: u128);
 }
 
-impl WalletRecieveImpl of WalletRecieveTrait {
-    fn recieve(ref self: Wallet<u128>, value: u128) {
+impl WalletReceiveImpl of WalletReceiveTrait {
+    fn receive(ref self: Wallet<u128>, value: u128) {
         self.balance += value;
     }
 }
@@ -259,12 +239,12 @@ fn main() {
     let mut w = Wallet {balance: 50_u128};
     assert(w.balance() == 50_u128, 0);
 
-    w.recieve(100_u128)
+    w.receive(100_u128)
     assert(w.balance() == 150_u128, 0);
 }
 ```
 
-The new method `recieve` increments the size of the balance of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
+The new method `receive` increments the size of the balance of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
 
 Cairo allow us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and create a new one with a generic type of each. First, lets rewrite the struct definiton:
 
