@@ -52,5 +52,13 @@
 
   - [Generic Functions](ch07-01-generic-data-types.md)
 
+
+## Testing Cairo Programs
+
+- [Testing Cairo Programs](ch09-00-testing-cairo-programs.md)
+
+  - [How To Write Tests](ch09-01-how-to-write-tests.md)
+  - [Testing Organization](ch09-02-test-organization.md)
+
 - [Appendix](appendix-00.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
