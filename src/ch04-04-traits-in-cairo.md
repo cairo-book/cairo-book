@@ -38,8 +38,7 @@ In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defi
 
 In the example above, `self` is a special parameter. When a parameter with name `self` is used, the implemented functions are also [attached to the instances of the type as methods](ch04-03-method-syntax.md#defining-methods). Here's an illustration,
 
-When `ShapeGeometry` trait is implemented,
-Function `area` from `ShapeGeometry` trait can be called in two ways,
+When the `ShapeGeometry` trait is implemented, the function `area` from the `ShapeGeometry` trait can be called in two ways:
 
 ```rust
 let rect = Rectangle { ... }; // Rectangle instantiation
@@ -53,7 +52,7 @@ area1.print();
 area2.print();
 ```
 
-And the implementation of `area` method will be able to access the instance via `self` parameter.
+And the implementation of the `area` method will be accessed via the `self` parameter.
 
 ## Traits with generic types
 
