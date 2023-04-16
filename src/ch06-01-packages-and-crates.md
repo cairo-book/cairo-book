@@ -29,3 +29,5 @@ version = "0.1.0"
 [dependencies]
 # foo = { path = "vendor/foo" }
 ```
+
+As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional `.cairo` files within the `src` directory or its subdirectories. It will be time to read [Defining Modules to Control Scope](./ch06-02-defining-modules-to-control-scope.md).
