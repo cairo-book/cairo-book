@@ -25,7 +25,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
   - Inline, within curly brackets that replace the semicolon following `mod garden;`.
 
     ```rust
-    // crate root file (lib.cairo)
+      // crate root file (lib.cairo)
         mod garden {
         // code defining the garden module goes here
         }
@@ -90,12 +90,12 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-use garden::vegetables::Aspergus;
+use garden::vegetables::Asparagus;
 
 mod garden;
 
 fn main(){
-    let aspergus = Aspergus{};
+    let Asparagus = Asparagus{};
 }
 
 
@@ -114,10 +114,10 @@ included too. That code is:
 
 ```rust
 #[derive(Copy,Drop)]
-struct Aspergus{}
+struct Asparagus{}
 ```
 
-The line `use garden::vegetables::Aspergus;` lets us use bring the `Aspergus` type into scope,
+The line `use garden::vegetables::Asparagus;` lets us use bring the `Asparagus` type into scope,
 so we can use it in the `main` function.
 
 Now let’s get into the details of these rules and demonstrate them in action!
@@ -177,9 +177,8 @@ groups rather than having to read through all the definitions, making it easier
 to find the definitions relevant to them. Programmers adding new functionality
 to this code would know where to place the code to keep the program organized.
 
-Earlier, we mentioned that _src/lib.cairo_ is called crate
-roots. The reason for their name is that the contents of either of these two
-files form a module named `crate` at the root of the crate’s module structure,
+Earlier, we mentioned that _src/lib.cairo_ is called the crate
+root. The reason for this name is that the content of this file form a module named after the crate name at the root of the crate’s module structure,
 known as the _module tree_.
 
 Listing 6-2 shows the module tree for the structure in Listing 6-1.
