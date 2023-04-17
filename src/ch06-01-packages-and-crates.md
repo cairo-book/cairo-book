@@ -1,7 +1,13 @@
 # Packages and Crates
 
 ## What is a crate?
-Cairo packages can be organized into crates to modularize and group related code together. A crate is a compilation unit that contains Cairo code, functions, and data structures. This allows you to split your code into smaller, reusable parts, and to manage dependencies in a more structured way.
+A crate is the smallest amount of code that the Cairo compiler considers at a time. Even if you run `cairo-compile` rather than `scarb build` and pass a single source code file, the compiler considers that file to be a crate. Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.
+
+## What is the crate root?
+The crate root is the `lib.cairo` source file that the Cairo compiler starts from and makes up the root module of your crate (we’ll explain modules in depth in the [“Defining Modules to Control Scope”](./ch06-02-defining-modules-to-control-scope.md) section).
+
+## What is a package?
+A cairo package is a bundle of one or more crates with a Scarb.toml file that describes how to build those crates. This enables the splitting of code into smaller, reusable parts and facilitates more structured dependency management.
 
 ## Creating a Package with Scarb
 You can create a new Cairo package using the scarb command-line tool. To create a new package, run the following command:
@@ -30,4 +36,4 @@ version = "0.1.0"
 # foo = { path = "vendor/foo" }
 ```
 
-As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional `.cairo` files within the `src` directory or its subdirectories. It will be time to read [Defining Modules to Control Scope](./ch06-02-defining-modules-to-control-scope.md).
+As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional `.cairo` files within the `src` directory or its subdirectories.
