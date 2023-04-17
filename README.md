@@ -6,7 +6,7 @@
 
 ## Description
 
-The Cairo Programming Language Book is a comprehensive documentation of the Cairo 1 programming language. This documentation is your go-to resource for mastering the first provable programming language, created and maintained by the Starknet community what you'll find here has been developed in close collaboration with the StarkWare team ensuring that the information is accurate, up-to-date, and consistent with the vision of Cairo's creators.
+This repository contains the source of "The Cairo Programming Language" book, a comprehensive documentation of the Cairo 1 programming language. This documentation is your go-to resource for mastering Cairo, created and maintained by the Starknet community. You can read the book [online](https://cairo-book.github.io/).
 
 <div align="center">
   <h3> Created by builders, for builders 📜</h3>
