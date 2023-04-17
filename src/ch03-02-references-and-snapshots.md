@@ -95,7 +95,8 @@ fn calculate_area(rec: @Rectangle) -> u64 {
     // As rec is a snapshot to a Rectangle, its fields are also snapshots of the fields types.
     // We need to transform the snapshots back into values using the desnap operator `*`.
     // This is only possible if the type is copyable, which is the case for u64.
-    rec.height * rec.width
+    // Here, `*` is used for both multiplying the height and width and for desnapping the snapshots.
+    *rec.height * *rec.width
 }
 ```
 

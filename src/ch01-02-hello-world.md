@@ -9,7 +9,7 @@ prints the text `Hello, world!` to the screen, so we’ll do the same here!
 > if you prefer to use an integrated development environment (IDE) instead of
 > the command line, feel free to use your favorite IDE. The Cairo team has developed
 > a VSCode extension for the Cairo language that you can use to get the features from
-> the language server and code highlighting. See[Appendix D][devtools]<!-- ignore -->
+> the language server and code highlighting. See [Appendix A][devtools]<!-- ignore -->
 > for more details.
 
 ### Creating a Project Directory
@@ -98,7 +98,7 @@ line as the function declaration, adding one space in between.
 > Note: If you want to stick to a standard style across Cairo projects, you can
 > use the automatic formatter tool called `cairo-format` to format your code in a
 > particular style (more on `cairo-format` in
-> [Appendix D][devtools]<!-- ignore -->). The Cairo team has included this tool
+> [Appendix A][devtools]<!-- ignore -->). The Cairo team has included this tool
 > with the standard Cairo distribution, as `cairo-run` is, so it should already be
 > installed on your computer!
 

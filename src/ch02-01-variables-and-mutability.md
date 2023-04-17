@@ -47,7 +47,7 @@ You received the error message `Cannot assign to an immutable variable.`
 because you tried to assign a second value to the immutable `x` variable.
 
 It’s important that we get compile-time errors when we attempt to change a
-value that’s designated as immutable because this very situation can lead to
+value that’s designated as immutable because this specific situation can lead to
 bugs. If one part of our code operates on the assumption that a value will
 never change and another part of our code changes that value, it’s possible
 that the first part of the code won’t do what it was designed to do. The cause

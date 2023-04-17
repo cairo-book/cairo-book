@@ -25,6 +25,7 @@ let direction = Direction::North(());
 It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a Direction. You can learn more about it on the [The Match Control Flow Construct page](ch05-02-the-match-control-flow-construct.md).
 
 ## Enums Combined with Custom Types
+
 Enums can also be used to store more interesting data associated with each variant. For example:
 
 ```rs
@@ -45,6 +46,7 @@ In this example, the `Message` enum has three variants: `Quit`, `Echo` and `Move
 You could even use a Struct or another Enum you defined inside one of your Enum variants.
 
 ## Trait Implementations for Enums
+
 In Cairo, you can define traits and implement them for your custom enums. This allows you to define methods and behaviors associated with the enum. Here's an example of defining a trait and implementing it for the previous `Message` enum:
 
 ```rs
@@ -71,15 +73,15 @@ impl ProcessingImpl of Processing {
 
 In this example, we implemented the `Processing` trait for `Message`. Here is how it could be used to process a Quit message:
 
-```rs
+```rust
 let msg: Message = Message::Quit(());
 msg.process();
 ```
 
-When ran on my machine, the output was: ``quitting``
-
+Running this code would print `quitting`.
 
 ## The Option Enum and Its Advantages
+
 The Option enum is a standard Cairo enum that represents the concept of an optional value. It has two variants: `Some: T` and `None: ()`. `Some: T ` indicates that there's a value of type `T`, while `None` represents the absence of a value.
 
 ```rs
@@ -93,12 +95,14 @@ The `Option` enum is helpful because it allows you to explicitly represent the p
 
 To give you an example, here is a function which returns the index of the first element of an array with a given value, or None if the element is not present.
 
-> Note: in the future it would be nice to replace this example by something simpler using a loop and without gas related code. 
+> Note: in the future it would be nice to replace this example by something simpler using a loop and without gas related code.
 
-```rs
+```rust
+use array::ArrayTrait;
+use debug::PrintTrait;
 fn find_value_recursive(
     arr: @Array<felt252>, value: felt252, index: usize
-) -> Option<usize> implicits(RangeCheck, GasBuiltin) {
+) -> Option<usize> {
 
     match gas::withdraw_gas() {
         Option::Some(_) => {},
@@ -145,4 +149,4 @@ fn test_increase_amount() {
 }
 ```
 
-When ran on my machine, the output was: 'it worked'
+Running this code would print `it worked`.

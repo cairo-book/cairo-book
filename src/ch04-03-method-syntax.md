@@ -53,7 +53,7 @@ the behavior of the methods implemented. Everything within this `impl` block wil
 associated with the type of the `self` parameter of the method called. While it is technically
 possible to define methods for multiple types within the same `impl` block, it is not
 a recommended practice, as it can lead to confusion. We recommend that the type of the `self` parameter
-statys consistent within the same `impl` block.
+stays consistent within the same `impl` block.
 Then we move the `area` function within the `impl` curly brackets and change the first (and in this case, only)
 parameter to be `self` in the signature and everywhere within the body. In
 `main`, where we called the `area` function and passed `rect1` as an argument,
@@ -66,7 +66,7 @@ Note that we used the `@` snapshot operator in front of the `Rectangle` type in 
 By doing so, we indicate that this method takes an immutable snapshot of the `Rectangle` instance, which is
 automatically created by the compiler when passing the instance to the method.
 Methods can take ownership of `self`, use `self` with snapshots as we’ve done here, or use a mutable reference to `self`
-using the `ref self: T` syntax, just as they can any other parameter.
+using the `ref self: T` syntax.
 
 We chose `self: @Rectangle` here for the same reason we used `@Rectangle` in the function
 version: we don’t want to take ownership, and we just want to read the data in
@@ -83,7 +83,7 @@ requiring them to be desnapped in order to manipulate them.
 
 The main reason for using methods instead of functions is for organization and code clarity. We’ve put all the things we can do with an instance of a type in one combination of `trait` & `impl` blocks, rather than making future users
 of our code search for capabilities of `Rectangle` in various places in the
-library we provide. However, we can define multiple combinations of `trait` & `impl` blocks for the same type at different places, which can be useful for more a more granular code organization. For example, you could implement
+library we provide. However, we can define multiple combinations of `trait` & `impl` blocks for the same type at different places, which can be useful for a more granular code organization. For example, you could implement
 the `Add` trait for your type in one `impl` block, and the `Sub` trait in another block.
 
 Note that we can choose to give a method the same name as one of the struct’s
@@ -228,7 +228,7 @@ parameters in functions.
 
 ### Accessing implementation functions
 
-All functions defined within a `trait` and `impl` block are can be directly addressed
+All functions defined within a `trait` and `impl` block can be directly addressed
 using the `::` operator on the implementation name.
 Functions in traits that aren’t methods are often used for constructors that
 will return a new instance of the struct. These are often called `new`, but
@@ -291,20 +291,15 @@ blocks</span>
 
 There’s no reason to separate these methods into multiple `trait` and `impl` blocks here,
 but this is valid syntax. We’ll see a case in which multiple blocks are
-useful in Chapter 10, where we discuss generic types and traits.
+useful in [Chapter 7](ch07-00-generic-types-and-traits.md), where we discuss generic types and traits.
 
 ## Summary
 
 Structs let you create custom types that are meaningful for your domain. By
 using structs, you can keep associated pieces of data connected to each other
 and name each piece to make your code clear. In `trait` and `impl` blocks, you can define
-metohds that are functions that are associated with your type that let you specify the behavior that instances of your
-structs have.
+methods, which are functions associated to a type and let you specify the behavior that instances of your
+type have.
 
 But structs aren’t the only way you can create custom types: let’s turn to
 Cairo’s enum feature to add another tool to your toolbox.
-
-[enums]: ch06-00-enums.html
-[trait-objects]: ch17-02-trait-objects.md
-[public]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#exposing-paths-with-the-pub-keyword
-[modules]: ch07-02-defining-modules-to-control-scope-and-privacy.html
