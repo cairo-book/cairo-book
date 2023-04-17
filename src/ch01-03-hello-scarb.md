@@ -120,11 +120,15 @@ This command creates a `sierra` file in `target/release`, let's ignore the `sier
 If you have installed Cairo correctly, you should be able to run and see the following output:
 
 ```bash
-$ cairo-run -- src/lib.cairo
+$ cairo-run src/lib.cairo
 [DEBUG] Hello, Scarb!                   (raw: 5735816763073854913753904210465)
 
 Run completed successfully, returning []
 ```
+
+> Note: You will notice here a that we didn't use a Scarb command, but rather a command from the Cairo binaries directly.
+> As Scarb doesn't have a command to execute Cairo code, yet we have to use the `cairo-run` command directly.
+> We will use this command in the rest of the tutorial, but we will also use Scarb commands to initialize projects.
 
 ### Defining Custom Scripts
 
@@ -150,7 +154,7 @@ Using `scarb run` is a convenient way to run custom shell scripts that can be us
 Let’s recap what we’ve learned so far about Scarb:
 
 - We can create a project using `scarb new`.
-- We can build a project using `scarb build`.
+- We can build a project using `scarb build` to generate the compiled Sierra code.
 - We can define custom scripts in `Scarb.toml` and call them with the `scarb run` command.
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
