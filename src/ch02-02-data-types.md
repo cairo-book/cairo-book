@@ -279,13 +279,13 @@ The above code will print `10` as we remove the first element that was added.
 
 You can pass the expected type of items inside the array when instantiating the array like this
 
-```rust
+```rust,
 let mut arr = ArrayTrait::<u128>::new();
 ```
 
 ##### Accessing Array Elements
 
-To access array elements, you can use `get()` or `at()` (which is equivalent to the subscripting operator `[]`) Array methods that return different types.
+To access array elements, you can use `get()` or `at()` array methods that return different types. Using `arr.at(index)` is equivalent to using the subscripting operator `arr[index]`.
 
 The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the [References and Snapshots](ch03-02-references-and-snapshots.md) chapter.
 
