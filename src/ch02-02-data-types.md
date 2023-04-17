@@ -239,8 +239,7 @@ Another way to have a collection of multiple values is with an _array_. Unlike
 a tuple, every element of an array must have the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
 
 An important thing to note is that arrays are append-only. This means that you can only add elements to the end of an array.
-Arrays are, in fact, queues.
-You cannot modify an elements in an array.
+Arrays are, in fact, queues whose values can't be popped nor modified.
 This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it.
 
 Here is an example of creation of an array with 3 elements:
@@ -256,7 +255,7 @@ fn main() {
 }
 ```
 
-It is possible to remove an element of an array by doing:
+It is possible to remove an element from the front of an array by calling the `pop_front()` method:
 
 ```rust
 
