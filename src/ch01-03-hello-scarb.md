@@ -126,7 +126,7 @@ $ cairo-run src/lib.cairo
 Run completed successfully, returning []
 ```
 
-> Note: You will notice here a that we didn't use a Scarb command, but rather a command from the Cairo binaries directly.
+> Note: You will notice here that we didn't use a Scarb command, but rather a command from the Cairo binaries directly.
 > As Scarb doesn't have a command to execute Cairo code, yet we have to use the `cairo-run` command directly.
 > We will use this command in the rest of the tutorial, but we will also use Scarb commands to initialize projects.
 
