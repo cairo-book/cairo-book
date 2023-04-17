@@ -137,6 +137,7 @@ Error: Compilation failed.
 ```
 
 The `print` trait is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing 4-10.
+To learn more about traits, see [Traits in Cairo](ch07-02-traits-in-cairo.md).
 
 <span class="filename">Filename: src/lib.cairo</span>
 

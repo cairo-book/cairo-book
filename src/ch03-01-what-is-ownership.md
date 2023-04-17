@@ -96,7 +96,6 @@ fn foo(arr: Array<u128>) {
 }
 
 fn bar(arr:Array<u128>){
-
 }
 
 fn main() {
@@ -106,11 +105,13 @@ fn main() {
 }
 ```
 
-In this case, we pass the same array instance `arr` by value to the functions `foo` and `bar`, which means that the parameter used in both function calls is the same instance of the array. If you append a value to the array `foo`, and
-then try to append another value to the same array in `bar`, what would happen is that
+In this case, we pass try to pass the same array instance `arr` by value to the functions `foo` and `bar`, which means
+that the parameter used in both function calls is the same instance of the array. If you append a value to the array
+in `foo`, and then try to append another value to the same array in `bar`, what would happen is that
 you would attempt to try to write to the same memory cell twice, which is not allowed in Cairo.
-To prevent this, the ownership of the `arr` variable moves from the `main` function to the `foo` function. When trying to call `bar` with `arr` as a parameter, the ownership of `arr` was already moved to the first call. The ownership system thus prevents us from
-using the same instance of `arr` in `foo`.
+To prevent this, the ownership of the `arr` variable moves from the `main` function to the `foo` function. When trying
+to call `bar` with `arr` as a parameter, the ownership of `arr` was already moved to the first call. The ownership
+system thus prevents us from using the same instance of `arr` in `foo`.
 
 Running the code above will result in a compile-time error:
 
