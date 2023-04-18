@@ -141,7 +141,7 @@ struct Wallet<T> {
     balance: T,
 }
 
-impl WalletDrop<T, impl TDrop : Drop<T>> of Drop<Wallet<t>>;
+impl WalletDrop<T, impl TDrop : Drop<T>> of Drop<Wallet<T>>;
 
 fn main() {
    let w = Wallet{ balance: 3_u128};
@@ -191,7 +191,7 @@ enum Result<T, E> {
 }
 ```
 
-The `Result<T, E>` enum is has two generic types, `T` and `E`, and two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition makes it convenient to use the `Result` enum anywhere we have an operation that might succeed (by returning a value of type `T`) or fail (by returning a value of type `E`).
+The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition makes it convenient to use the `Result` enum anywhere we have an operation that might succeed (by returning a value of type `T`) or fail (by returning a value of type `E`).
 
 ## Generic Methods
 
@@ -202,7 +202,7 @@ struct Wallet<T> {
     balance: T,
 }
 
-impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T, U>>;
+impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
 
 trait WalletTrait<T> {
     fn balance(self: @Wallet<T>) -> @T;
@@ -246,7 +246,7 @@ fn main() {
 
 The new method `receive` increments the size of the balance of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
 
-Cairo allow us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and create a new one with a generic type of each. First, lets rewrite the struct definiton:
+Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and create a new one with a generic type of each. First, lets rewrite the struct definiton:
 
 ```rust
 struct Wallet<T, U> {
@@ -263,7 +263,7 @@ trait WalletMixTrait<T1, U1> {
     fn mixup<T2, U2>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2>;
 }
 
-impl WalletMixImpl<T1,  U1> of WalletMixTrait<T1, U1> {
+impl WalletMixImpl<T1, U1> of WalletMixTrait<T1, U1> {
     fn mixup<T2, U2>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2> {
         Wallet {balance: self.balance, address: other.address}
     }
@@ -277,7 +277,7 @@ trait WalletMixTrait<T1, U1> {
     fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2>;
 }
 
-impl WalletMixImpl<T1, impl T1Drop: Drop<T1>,  U1, impl U1Drop: Drop<U1>> of WalletMixTrait<T1, U1> {
+impl WalletMixImpl<T1, impl T1Drop: Drop<T1>, U1, impl U1Drop: Drop<U1>> of WalletMixTrait<T1, U1> {
     fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2> {
         Wallet {balance: self.balance, address: other.address}
     }

@@ -64,7 +64,7 @@ Each test file is compiled as its own separate crate, that's why whenever you ad
 
 ```rust
 #[cfg(tests)]
-mod integration_tests
+mod integration_tests;
 ```
 
 Enter the code in Listing 11-13 into the _tests/integration_test.cairo_ file:
@@ -83,7 +83,7 @@ fn internal() {
 Each file in the tests directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add `use adder::main` at the top of the code, which we didn’t need in the unit tests.
 
 ```shell
-$ cairo-test -- --path tests/
+$ cairo-test tests/
 running 1 tests
 test tests::tests_integration::it_adds_two ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
