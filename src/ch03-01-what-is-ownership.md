@@ -105,7 +105,7 @@ fn main() {
 }
 ```
 
-In this case, we pass try to pass the same array instance `arr` by value to the functions `foo` and `bar`, which means
+In this case, we try to pass the same array instance `arr` by value to the functions `foo` and `bar`, which means
 that the parameter used in both function calls is the same instance of the array. If you append a value to the array
 in `foo`, and then try to append another value to the same array in `bar`, what would happen is that
 you would attempt to try to write to the same memory cell twice, which is not allowed in Cairo.
@@ -247,7 +247,7 @@ use array::ArrayTrait;
 use clone::Clone;
 use array::ArrayTCloneImpl;
 ...
-let arr1 = ArrayTrait::new::<u128>();
+let arr1 = ArrayTrait::<u128>::new();
 let arr2 = arr1.clone();
 
 ```
