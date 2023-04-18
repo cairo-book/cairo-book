@@ -143,7 +143,7 @@ Flow”][control-flow]<!-- ignore --> section.
 #### The Short String Type
 
 Cairo doesn't have a native type for strings, but you can store characters forming what we call a "short string" inside `felt252`s. Here are
-some examples of declaring values by puting them beteen single quotes:
+some examples of declaring values by putting them between single quotes:
 
 ```rust
 let my_first_char = 'C';
