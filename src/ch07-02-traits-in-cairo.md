@@ -6,12 +6,12 @@ Traits specify functionality blueprints that can be implemented. The blueprint s
 
 To define a trait, you use the keyword `trait` followed by the name of the trait in `PascalCase` then the function signatures in a pair of curly braces.
 
-For example, let's say that we have multiple structs representing shapes. We want our application to be able to perform geometry operations on these shapes, So we define a trait `ShapeGeometry` that contains a blueprint to implement geometry operations on a shape like this,
+For example, let's say that we have multiple structs representing shapes. We want our application to be able to perform geometry operations on these shapes, So we define a trait `ShapeGeometry` that contains a blueprint to implement geometry operations on a shape like this:
 
 ```rust
 trait ShapeGeometry {
-    fn boundary( self: Rectangle ) -> u64;
-    fn area( self: Rectangle ) -> u64;
+    fn boundary(self: Rectangle) -> u64;
+    fn area(self: Rectangle) -> u64;
 }
 ```
 
@@ -23,16 +23,16 @@ A trait can be implemented using `impl` keyword with the name of your implementa
 
 ```rust
 impl RectangleGeometry of ShapeGeometry {
-	fn boundary( self: Rectangle ) -> u64 {
+	fn boundary(self: Rectangle) -> u64 {
         2_u64 * (self.height + self.width)
     }
-	fn area( self: Rectangle ) -> u64 {
+	fn area(self: Rectangle) -> u64 {
 		self.height * self.width
 	}
 }
 ```
 
-In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note the the function parameters and return value types are identical to the trait specification.
+In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note that the function parameters and return value types are identical to the trait specification.
 
 ## Parameter `self`
 
@@ -54,7 +54,7 @@ area2.print();
 
 And the implementation of the `area` method will be accessed via the `self` parameter.
 
-## Traits with generic types
+## Generic Traits
 
 Usually we want to write a trait when we want multiple types to implement a functionality in a standard way. However, in the example above the signatures are static and cannot be used for multiple types. To do this, we use generic types when defining traits.
 
@@ -65,29 +65,29 @@ use debug::PrintTrait;
 
 // Here T is an alias type which will be provided buring implementation
 trait ShapeGeometry<T> {
-    fn boundary( self: T ) -> u64;
-    fn area( self: T ) -> u64;
+    fn boundary(self: T) -> u64;
+    fn area(self: T) -> u64;
 }
 
 // Implementation RectangleGeometry passes in <Rectangle>
 // to implement the trait for that type
-impl RectangleGeometry of ShapeGeometry::<Rectangle> {
-    fn boundary( self: Rectangle ) -> u64 {
+impl RectangleGeometry of ShapeGeometry<Rectangle> {
+    fn boundary(self: Rectangle) -> u64 {
         2_u64 * (self.height + self.width)
     }
-    fn area( self: Rectangle ) -> u64 {
+    fn area(self: Rectangle) -> u64 {
         self.height * self.width
     }
 }
 
 // We might have another struct Circle
 // which can use the same trait spec
-impl CircleGeometry of ShapeGeometry::<Circle> {
-    fn boundary( self: Circle ) -> u64 {
+impl CircleGeometry of ShapeGeometry<Circle> {
+    fn boundary(self: Circle) -> u64 {
         (2_u64 * 314_u64 * self.radius) / 100_u64
     }
-    fn area( self: Circle ) -> u64 {
-       (314_u64 * self.radius * self.radius) / 100_u64
+    fn area(self: Circle) -> u64 {
+        (314_u64 * self.radius * self.radius) / 100_u64
     }
 }
 

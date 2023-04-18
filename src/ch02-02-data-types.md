@@ -123,7 +123,7 @@ to a single value, which is then bound to a variable.
 #### The Boolean Type
 
 As in most other programming languages, a Boolean type in Cairo has two possible
-values: `true` and `false`. Booleans are one byte in size. The Boolean type in
+values: `true` and `false`. Booleans are one felt252 in size. The Boolean type in
 Cairo is specified using `bool`. For example:
 
 ```rust

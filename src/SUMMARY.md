@@ -58,10 +58,10 @@
 
 ## Testing Cairo Programs
 
-- [Testing Cairo Programs](ch09-00-testing-cairo-programs.md)
+- [Testing Cairo Programs](ch08-00-testing-cairo-programs.md)
 
-  - [How To Write Tests](ch09-01-how-to-write-tests.md)
-  - [Testing Organization](ch09-02-test-organization.md)
+  - [How To Write Tests](ch08-01-how-to-write-tests.md)
+  - [Testing Organization](ch08-02-test-organization.md)
 
 - [Appendix](appendix-00.md)
   - [A - Useful Development Tools](appendix-04-useful-development-tools.md)
