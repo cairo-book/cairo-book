@@ -248,14 +248,14 @@ Here is an example of creation of an array with 3 elements:
 use array::ArrayTrait;
 
 fn main() {
-    let mut a = ArrayTrait::new();
+    let a = ArrayTrait::new();
     a.append(0);
     a.append(1);
     a.append(2);
 }
 ```
 
-It is possible to remove an element from the front of an array by calling the `pop_front()` method:
+Arrays can be made mutable by adding `mut` keyword. It is possible to remove an element from the front of an mutable array by calling the `pop_front()` method:
 
 ```rust
 
