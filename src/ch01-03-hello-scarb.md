@@ -127,12 +127,12 @@ Run completed successfully, returning []
 ```
 
 > Note: You will notice here that we didn't use a Scarb command, but rather a command from the Cairo binaries directly.
-> As Scarb doesn't have a command to execute Cairo code, yet we have to use the `cairo-run` command directly.
+> As Scarb doesn't have a command to execute Cairo code yet, we have to use the `cairo-run` command directly.
 > We will use this command in the rest of the tutorial, but we will also use Scarb commands to initialize projects.
 
 ### Defining Custom Scripts
 
-We can define scarb scripts in `Scarb.toml` file, which can be used to execute custom shell scripts.
+We can define Scarb scripts in `Scarb.toml` file, which can be used to execute custom shell scripts.
 Add the following line to your `Scarb.toml` file:
 
 ```toml
