@@ -196,11 +196,10 @@ fn main() {
     let mut counter = 0;
 
     let result = loop {
-        counter += 1;
-
         if counter == 10 {
             break counter * 2;
         }
+        counter += 1;
     };
 
     'The result is '.print();
@@ -215,23 +214,6 @@ When the condition is met, we use the `break` keyword with the value `counter * 
 semicolon to end the statement that assigns the value to `result`. Finally, we
 print the value in `result`, which in this case is `20`.
 
-```rust
-use debug::PrintTrait;
-
-fn main() {
-    let mut counter = 0;
-
-    let result = loop {
-        if counter == 10 {
-            break counter * 2;
-        }
-        counter += 1;
-    };
-
-    'The result is '.print();
-    result.print();
-}
-```
 
 ## Summary
 
@@ -239,7 +221,7 @@ You made it! This was a sizable chapter: you learned about variables, data types
 `if` expressions, and loops! To practice with the concepts discussed in this chapter,
 try building programs to do the following:
 
-- Generate the *n*th Fibonacci number.
+- Generate the *n*-th Fibonacci number.
 - Compute the factorial of a number _n_.
 
 When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_
