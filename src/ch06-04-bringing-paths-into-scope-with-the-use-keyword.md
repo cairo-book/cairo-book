@@ -1,6 +1,7 @@
 # Bringing Paths into Scope with the `use` Keyword
 
-Writing out paths to call functions can be repetitive and inconvenient. To create a shortcut to a path, we can use the `use` keyword, which allows us to use the shorter name within the scope.
+Writing out paths to call functions can be repetitive and inconvenient. We can create a shortcut to a path with the `use` keyword.
+
 
 ## Full Paths and Shortcuts to Paths
 Using the `use` keyword, we can create shortcuts for paths, which can be used throughout the scope. To illustrate this, let's continue with the restaurant example:
@@ -8,19 +9,19 @@ Using the `use` keyword, we can create shortcuts for paths, which can be used th
 <span class="filename">Filename: src/lib.cairo</span>
 ```rs
 mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
+    mod hosting {
+        fn add_to_waitlist() {}
     }
 }
 
-use crate::front_of_house::hosting;
+use front_of_house::hosting;
 
-pub fn eat_at_restaurant() {
+fn eat_at_restaurant() {
     hosting::add_to_waitlist(); // ✅ Shorter path
 }
 ```
 
-By adding `use crate::front_of_house::hosting` in the crate root, `hosting` is now a valid name in that scope, as if the `hosting` module had been defined in the crate root. The paths brought into scope with `use` also check privacy, like any other paths.
+By adding `use front_of_house::hosting` in the crate root, `hosting` is now a valid name in that scope, as if the `hosting` module had been defined in the crate root.
 
 ## Idiomatic Paths
 While it's possible to bring a function directly into scope with `use`, it is considered more idiomatic to bring the function's parent module into scope instead. This makes it clear that the function is not locally defined while still minimizing the repetition of the full path.
