@@ -143,9 +143,11 @@ fn main() {
 #### Span
 `Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))
 
+All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method.
+
+##### Turning an Array into span
+
 To create a `Span` of an `Array`, call the `span()` method:
 ```rust
 let span = array.span();
 ```
-
-All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method.
