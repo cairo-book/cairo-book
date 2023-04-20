@@ -11,6 +11,7 @@ Arrays are, in fact, queues whose values can't be popped nor modified.
 This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it.
 
 #### Creating an Array
+
 Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of creation of an array with 3 elements:
 
 ```rust
@@ -33,7 +34,9 @@ let mut arr = ArrayTrait::<u128>::new();
 #### Updating an Array
 
 ##### Adding Elements
+
 To add an element to the end of an array, you can use the `append()` method:
+
 ```rust
     let mut a = ArrayTrait::new();
     a.append(10);
@@ -43,7 +46,8 @@ To add an element to the end of an array, you can use the `append()` method:
 ```
 
 ##### Removing Elements
-To remove an element from the front of an array, you can use the `pop_front()` method. 
+
+To remove an element from the front of an array, you can use the `pop_front()` method.
 This method returns an `Option` containing the removed element, or `Option::None` if the array is empty.
 
 ```rust
@@ -63,6 +67,8 @@ fn main() {
 ```
 
 The above code will print `10` as we remove the first element that was added.
+
+In Cairo, memory is immutable, which means that it is not possible to modify the elements of an array once they've been added. You can only add elements to the end of an array and remove elements from the front of an array. These operations do not require memory mutation, as they involve updating pointers rather than directly modifying the memory cells.
 
 #### Reading Elements from an Array
 
@@ -113,7 +119,7 @@ fn main() -> u128 {
 
 #### Size related methods
 
-To determine the number of elements in an array, use the `len()` method. The return is of type `usize`. 
+To determine the number of elements in an array, use the `len()` method. The return is of type `usize`.
 
 If you want to check if an array is empty or not, you can use the `is_empty()` method, which returns `true` if the array is empty and `false` otherwise.
 
@@ -127,20 +133,21 @@ use traits::Into;
 
 #[derive(Copy, Drop)]
 enum Data {
-    Integer: (u128),
-    Felt: (felt252),
-    Tuple: ((u32, u32)),
+    Integer: u128,
+    Felt: felt252,
+    Tuple: (u32, u32),
 }
 
 fn main() {
     let mut messages: Array<Data> = ArrayTrait::new();
-    messages.append(Data::Integer((100_u128)));
+    messages.append(Data::Integer(100_u128));
     messages.append(Data::Felt('hello world'));
     messages.append(Data::Tuple((10_u32, 30_u32)));
 }
 ```
 
 #### Span
+
 `Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))
 
 All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method.
@@ -148,6 +155,7 @@ All methods provided by `Array` can also be used with `Span`, with the exception
 ##### Turning an Array into span
 
 To create a `Span` of an `Array`, call the `span()` method:
+
 ```rust
 let span = array.span();
 ```
