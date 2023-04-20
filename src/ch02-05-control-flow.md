@@ -139,7 +139,7 @@ fn main() {
 ```
 
 When we run this program, we’ll see `again!` printed over and over continuously
-until we stop the program manually, because the stop condition is never reached..
+until we stop the program manually, because the stop condition is never reached.
 While the compiler prevents us from writing programs without a stop condition (`break()` statement),
 the stop condition might never be reached, resulting in an infinite loop.
 Most terminals support the keyboard shortcut <span class="keystroke">ctrl-c</span> to interrupt a program that is
@@ -214,14 +214,13 @@ When the condition is met, we use the `break` keyword with the value `counter * 
 semicolon to end the statement that assigns the value to `result`. Finally, we
 print the value in `result`, which in this case is `20`.
 
-
 ## Summary
 
 You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
 `if` expressions, and loops! To practice with the concepts discussed in this chapter,
 try building programs to do the following:
 
-- Generate the *n*-th Fibonacci number.
+- Generate the _n_-th Fibonacci number.
 - Compute the factorial of a number _n_.
 
 When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_
