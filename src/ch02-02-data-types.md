@@ -224,6 +224,6 @@ For example:
 
 ```rust
 fn main() {
-    let tup: (x: felt, y: felt) = (2,3);
+    let tup: (x: felt252, y: felt252) = (2,3);
 }
 ```
