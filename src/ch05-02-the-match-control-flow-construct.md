@@ -156,7 +156,7 @@ Let’s examine the first execution of `plus_one` in more detail. When we call `
     Option::Some(val) => Option::Some(val + 1_u8),
 ```
 
-The `Option::Some(5_u8)` value match the pattern `Option::Some(val)`? It does! We have the same variant. The `val` binds to the value contained in `Option::Some`, so `val` takes the value `5_u8`. The code in the match arm is then executed, so we add `1_u8` to the value of `val` and create a new `Option::Some` value with our total `6_u8` inside. Because the first arm matched, no other arms are compared.
+Does `Option::Some(5_u8)` value match the pattern `Option::Some(val)`? It does! We have the same variant. The `val` binds to the value contained in `Option::Some`, so `val` takes the value `5_u8`. The code in the match arm is then executed, so we add `1_u8` to the value of `val` and create a new `Option::Some` value with our total `6_u8` inside. Because the first arm matched, no other arms are compared.
 
 Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None(())`. We enter the match and compare to the first arm:
 
@@ -164,7 +164,7 @@ Now let’s consider the second call of `plus_one` in our main function, where `
     Option::Some(val) => Option::Some(val + 1_u8),
 ```
 
-The `Option::Some(5_u8)` value doesn’t match the pattern `Option::None`, so we continue to the next arm:
+The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we continue to the next arm:
 
 ```rust
     Option::None(_) => Option::None(()),

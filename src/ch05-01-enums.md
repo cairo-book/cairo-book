@@ -16,7 +16,7 @@ enum Direction {
 }
 ```
 
-Unlike other languages like Rust, every variant has a type. In this example, we've defined an enum called `Direction` with four variants: `North`, `East`, `South`, and `West`. The naming convention is to use PascalCase for enum variants. Each variant represents a distinct value of the Direction type and is associated with a unit type `()`. One variant can be instanciated using this syntax:
+Unlike other languages like Rust, every variant has a type. In this example, we've defined an enum called `Direction` with four variants: `North`, `East`, `South`, and `West`. The naming convention is to use PascalCase for enum variants. Each variant represents a distinct value of the Direction type and is associated with a unit type `()`. One variant can be instantiated using this syntax:
 
 ```rs
 let direction = Direction::North(());
