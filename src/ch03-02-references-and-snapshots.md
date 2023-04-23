@@ -81,6 +81,8 @@ Snapshots can be converted back into regular values using the `desnap` operator 
 The snapshot type is always copyable and droppable, so that you can use it multiple times without worrying about ownership transfers.
 
 ```rust
+use debug::PrintTrait;
+
 #[derive(Copy,Drop)]
 struct Rectangle {
     height: u64,
@@ -89,6 +91,9 @@ struct Rectangle {
 
 fn main(){
     let rec = Rectangle{height:3_u64, width:10_u64};
+    let area = calculate_area(@rec);
+    area.print();
+
 }
 
 fn calculate_area(rec: @Rectangle) -> u64 {
