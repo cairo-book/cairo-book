@@ -68,3 +68,10 @@
 
 - [Appendix](appendix-00.md)
   - [A - Useful Development Tools](appendix-04-useful-development-tools.md)
+
+## ABIs and Cross-contract Interactions
+
+- [ABIs and Cross-contract Interactions](./ch09-00-abis-and-cross-contract-interactions.md)
+  - [ABIs and Interfaces](./ch09-01-abis-and-interfaces.md)
+  - [Contract Dispatchers](./ch09-02-contract-dispatcher.md)
+  - [Library Dispachers and system calls](./ch09-03-library-dispatcher-and-system-calls.md)
