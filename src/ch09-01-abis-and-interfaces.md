@@ -48,3 +48,12 @@ trait IERC20 {
     fn approve(spender: ContractAddress, amount: u256);
 }
 ```
+
+## ABIs
+ABI stands for Application Binary Interface. ABIs gives a smart contract the ability to communicate and interact with external applications or other smart contracts. ABIs can be likened to APIs in traditional web development, which helps data flow between applications and servers.
+
+While we write our smart contract logics in high-level Cairo, they are stored on the VM as executable bytecodes which are in binary formats. Since this bytecode is not human readable, it requires interpretation to be understood. This is where ABIs come into play, defining specific methods which can be called to a smart contract for execution.
+
+Every contract on Starknet, has an Application Binary Interface (ABI), that specifies the methods contained in the contract, which can be called or interacted with.
+
+In the next chapter, we are going to be looking into how we can call other smart contracts using a `Contract Dispatcher`.
