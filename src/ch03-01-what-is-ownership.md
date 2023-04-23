@@ -274,7 +274,7 @@ struct MyStruct{}
 fn main() {
     let my_struct = MyStruct{};  // my_struct comes into scope
 
-    takes_ownership(my_struct);             // my_struct's value moves into the function...
+    takes_ownership(my_struct);     // my_struct's value moves into the function...
                                     // ... and so is no longer valid here
 
     let x = 5_u128;                 // x comes into scope
@@ -326,19 +326,19 @@ fn main() {
   // happens. a1 goes out of scope and is dropped.
 
 fn gives_ownership() -> A {             // gives_ownership will move its
-                                             // return value into the function
-                                             // that calls it
+                                        // return value into the function
+                                        // that calls it
 
     let some_a = A{}; // some_a comes into scope
 
     some_a                              // some_a is returned and
-                                             // moves out to the calling
-                                             // function
+                                        // moves out to the calling
+                                        // function
 }
 
 // This function takes an instance of A and returns one
 fn takes_and_gives_back(some_a: A) -> A { // some_a comes into
-                                                      // scope
+                                          // scope
 
     some_a  // some_a is returned and moves out to the calling function
 }
