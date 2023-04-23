@@ -286,7 +286,7 @@ fn main() {
 } // Here, x goes out of scope and is dropped. But because my_struct's value was moved, nothing
 // special happens.
 
-fn takes_ownership(some_struct: A) { // some_struct comes into scope
+fn takes_ownership(some_struct: MyStruct) { // some_struct comes into scope
 } // Here, some_struct goes out of scope and `drop` is called.
 
 fn makes_copy(some_uinteger: u128) { // some_uinteger comes into scope
