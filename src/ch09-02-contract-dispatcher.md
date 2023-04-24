@@ -3,6 +3,7 @@
 Each time a contract interface is created on Starknet, two dispatchers are automatically created and exported:
 1. The Contract Dispatcher
 2. The Library Dispatcher
+
 In this chapter, we are going to extensively discuss how the Contract dispatcher works and it's usage.
 
 To effectively break down the concepts in this chapter, we are going to be using the IERC20 interface from the previous chapter:
@@ -63,7 +64,7 @@ impl IERC20DispatcherImpl of IERC20DispatcherTrait::<IERC20Dispatcher> {
 
 **NB:** The expanded code for our IERC20 interface is a lot more robust, but to keep this chapter concise and straight to the point, we focused on one view function `get_name`, and one external function `transfer`.
 
-Its also worthy of note that, all these is abstracted behind the scenes, thanks to the power of Cairo plugins.
+It's also worthy of note that, all these is abstracted behind the scenes, thanks to the power of Cairo plugins.
 
 ## Calling Contracts using the Contract Dispatcher
 Calling another contract using the Contract interface dispatcher, calls the contract's logic in it's context, and in most cases may alter the contract's state. Here's an example:
