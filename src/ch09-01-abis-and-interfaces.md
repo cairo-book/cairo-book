@@ -18,7 +18,7 @@ For your Cairo code to qualify as an interface, it must meet the following requi
 
 Here's a sample interface for an ERC20 token contract:
 
-```cairo
+```rust
 use starknet::ContractAddress;
 
 #[abi]
