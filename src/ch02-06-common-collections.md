@@ -42,7 +42,6 @@ To add an element to the end of an array, you can use the `append()` method:
     a.append(10);
     a.append(1);
     a.append(2);
-}
 ```
 
 ##### Removing Elements
