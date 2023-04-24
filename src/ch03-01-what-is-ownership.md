@@ -327,8 +327,8 @@ fn main() {
   // happens. a1 goes out of scope and is dropped.
 
 fn gives_ownership() -> A {               // gives_ownership will move its
-                                          // return values ownership to the 
-                                          // calling function                                        
+                                          // return value into the function 
+                                          // that calls it                                        
 
     let some_a = A{};                     // some_a comes into scope
 
