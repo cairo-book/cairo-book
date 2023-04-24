@@ -10,7 +10,7 @@ A path can take two forms:
   Both absolute and relative paths are followed by one or more identifiers
   separated by double colons (`::`).
 
-To illustrate this notion let's take back our example for the restaurant we used in the last chapter. We have a crate named `restaurant` in which we have a module named `front_of_house` that contains a module named `hosting`. The `hosting` module contains a function named `add_to_waitlist`. We want to call the `add_to_waitlist` function from the `eat_at_restaurant` function. We need to tell Cairo the path to the `add_to_waitlist` function so it can find it.
+To illustrate this notion let's take back our example Listing 6-1 for the restaurant we used in the last chapter. We have a crate named `restaurant` in which we have a module named `front_of_house` that contains a module named `hosting`. The `hosting` module contains a function named `add_to_waitlist`. We want to call the `add_to_waitlist` function from the `eat_at_restaurant` function. We need to tell Cairo the path to the `add_to_waitlist` function so it can find it.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -40,6 +40,8 @@ pub fn eat_at_restaurant() {
     front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
 }
 ```
+
+<span class="caption">Listing 6-3: Calling the `add_to_waitlist` function using absolute and relative paths</span>
 
 The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
@@ -71,5 +73,7 @@ mod back_of_house {
     fn cook_order() {}
 }
 ```
+
+<span class="caption">Listing 6-4: Calling a function using a relative path starting with super</span>
 
 Here you can see directly that you access a parent's module easily using `super`, which wasn't the case previously.
