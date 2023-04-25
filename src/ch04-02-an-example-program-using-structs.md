@@ -78,20 +78,20 @@ use debug::PrintTrait;
 
 struct Rectangle {
     width: u64,
-    heigh: u64,
+    height: u64,
 }
 
 fn main() {
     let rectangle = Rectangle {
         width: 30_u64,
-        heigh: 10_u64,
+        height: 10_u64,
     };
     let area = area(rectangle);
     area.print(); // print out the area
 }
 
 fn area(rectangle: Rectangle) -> u64 {
-    rectangle.width * rectangle.heigh
+    rectangle.width * rectangle.height
 }
 ```
 
@@ -110,13 +110,13 @@ use debug::PrintTrait;
 
 struct Rectangle {
     width: u64,
-    heigh: u64,
+    height: u64,
 }
 
 fn main() {
     let rectangle = Rectangle {
         width: 30_u64,
-        heigh: 10_u64,
+        height: 10_u64,
     };
     rectangle.print();
 }
@@ -146,13 +146,13 @@ use debug::PrintTrait;
 
 struct Rectangle {
     width: u64,
-    heigh: u64,
+    height: u64,
 }
 
 fn main() {
     let rectangle = Rectangle {
         width: 30_u64,
-        heigh: 10_u64,
+        height: 10_u64,
     };
     rectangle.print();
 }
@@ -160,7 +160,7 @@ fn main() {
 impl RectanglePrintImpl of PrintTrait<Rectangle> {
     fn print(self: Rectangle) {
         self.width.print();
-        self.heigh.print();
+        self.height.print();
     }
 }
 ```

@@ -274,7 +274,7 @@ struct MyStruct{}
 fn main() {
     let my_struct = MyStruct{};  // my_struct comes into scope
 
-    takes_ownership(my_struct);             // my_struct's value moves into the function...
+    takes_ownership(my_struct);     // my_struct's value moves into the function...
                                     // ... and so is no longer valid here
 
     let x = 5_u128;                 // x comes into scope
@@ -286,7 +286,7 @@ fn main() {
 } // Here, x goes out of scope and is dropped. But because my_struct's value was moved, nothing
 // special happens.
 
-fn takes_ownership(some_struct: A) { // some_struct comes into scope
+fn takes_ownership(some_struct: MyStruct) { // some_struct comes into scope
 } // Here, some_struct goes out of scope and `drop` is called.
 
 fn makes_copy(some_uinteger: u128) { // some_uinteger comes into scope
@@ -314,33 +314,36 @@ function that returns some value, with similar annotations as those in Listing
 struct A{}
 
 fn main() {
-    let a1 = gives_ownership();         // gives_ownership moves its return
-                                        // value into a1
+    let a1 = gives_ownership();           // gives_ownership moves its return
+                                          // value into a1
 
-    let a2 = A{};     // a2 comes into scope
+    let a2 = A{};                         // a2 comes into scope
 
-    let a3 = takes_and_gives_back(a2);  // a2 is moved into
-                                        // takes_and_gives_back, which also
-                                        // moves its return value into a3
+    let a3 = takes_and_gives_back(a2);    // a2 is moved into
+                                          // takes_and_gives_back, which also
+                                          // moves its return value into a3
+                                        
 } // Here, a3 goes out of scope and is dropped. a2 was moved, so nothing
   // happens. a1 goes out of scope and is dropped.
 
-fn gives_ownership() -> A {             // gives_ownership will move its
-                                             // return value into the function
-                                             // that calls it
+fn gives_ownership() -> A {               // gives_ownership will move its
+                                          // return value into the function 
+                                          // that calls it                                        
 
-    let some_a = A{}; // some_a comes into scope
+    let some_a = A{};                     // some_a comes into scope
 
-    some_a                              // some_a is returned and
-                                             // moves out to the calling
-                                             // function
+    some_a                                // some_a is returned and
+                                          // moves ownership to the calling
+                                          // function
 }
 
 // This function takes an instance of A and returns one
 fn takes_and_gives_back(some_a: A) -> A { // some_a comes into
-                                                      // scope
+                                          // scope
 
-    some_a  // some_a is returned and moves out to the calling function
+    some_a                               // some_a is returned and moves 
+                                         // ownership to the calling 
+                                         // function
 }
 ```
 

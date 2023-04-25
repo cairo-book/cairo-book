@@ -160,7 +160,7 @@ fn main() {
     'Can rect1 hold rect2?'.print();
     rect1.can_hold(@rect2).print();
 
-    'Can rect1 hold rect?'.print();
+    'Can rect1 hold rect3?'.print();
     rect1.can_hold(@rect3).print();
 }
 ```
@@ -178,7 +178,7 @@ The expected output would look like the following because both dimensions of
 
 [DEBUG]	true                           	(raw: 1953658213)
 
-[DEBUG]	Can rect1 hold rect?           	(raw: 384675147322001384331925548502381811111693612095)
+[DEBUG]	Can rect1 hold rect3?          	(raw: 384675147322001384331925548502381811111693612095)
 
 [DEBUG]	false                          	(raw: 439721161573)
 
@@ -254,7 +254,7 @@ impl RectangleImpl of RectangleTrait {
 
 To call this function, we use the `::` syntax with the implementation name;
 `let square = RectangleImpl::square(10_u64);` is an example. This function is namespaced by
-the implementation: the `::` syntax is used for both trait functions and
+the implementation; the `::` syntax is used for both trait functions and
 namespaces created by modules. We’ll discuss modules in [Chapter 7][modules]<!-- ignore -->.
 
 > Note: It is also possible to call this function using the trait name, with `RectangleTrait::square(10_u64)`.
