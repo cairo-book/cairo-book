@@ -66,5 +66,12 @@
   - [How To Write Tests](ch08-01-how-to-write-tests.md)
   - [Testing Organization](ch08-02-test-organization.md)
 
+## ABIs and Cross-contract Interactions
+
+- [Starknet Smart Contracts](./ch09-starknet-smart-contracts.md)
+  - [ABIs and Cross-contract Interactions](./ch09-00-00-abis-and-cross-contract-interactions.md)
+    - [ABIs and Interfaces](./ch09-00-01-abis-and-interfaces.md)
+    - [Contract Dispatchers, Library Dispachers and system calls](./ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+
 - [Appendix](appendix-00.md)
   - [A - Useful Development Tools](appendix-04-useful-development-tools.md)
