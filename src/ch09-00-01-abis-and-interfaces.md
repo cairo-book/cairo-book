@@ -19,8 +19,6 @@ For your Cairo code to qualify as an interface, it must meet the following requi
 
 Here's a sample interface for an ERC20 token contract:
 
-<span class="caption">Listing 9-1: A simple ERC20 Interface</span>
-
 ```rust
 use starknet::ContractAddress;
 
@@ -54,6 +52,8 @@ trait IERC20 {
     fn approve(spender: ContractAddress, amount: u256) -> bool;
 }
 ```
+
+<span class="caption">Listing 9-1: A simple ERC20 Interface</span>
 
 ## ABIs
 ABI stands for Application Binary Interface. ABIs gives a smart contract the ability to communicate and interact with external applications or other smart contracts. ABIs can be likened to APIs in traditional web development, which helps data flow between applications and servers.
