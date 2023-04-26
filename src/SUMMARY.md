@@ -51,13 +51,18 @@
   - [Paths for Referring to an Item in the Module Tree](ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md)
   - [Bringing Paths into Scope with the `use` Keyword](ch06-04-bringing-paths-into-scope-with-the-use-keyword.md)
   - [Separating Modules into Different Files](ch06-05-separating-modules-into-different-files.md)
-
 ## Generic Data Types
 
 - [Generic Types](ch07-00-generic-types-and-traits.md)
 
   - [Generic Functions](ch07-01-generic-data-types.md)
   - [Traits in Cairo](ch07-02-traits-in-cairo.md)
+
+## Error Handling
+
+- [Error Handling](ch09-00-error-handling.md)
+
+  - [Error Handling](ch09-01-error-handling.md)
 
 ## Testing Cairo Programs
 
