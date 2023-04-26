@@ -54,7 +54,7 @@
 
 ## Generic Data Types
 
-- [Generic Types](ch07-00-generic-types.md)
+- [Generic Types](ch07-00-generic-types-and-traits.md)
 
   - [Generic Functions](ch07-01-generic-data-types.md)
   - [Traits in Cairo](ch07-02-traits-in-cairo.md)

@@ -90,7 +90,7 @@ The primary situation in which you’d use `usize` is when indexing some sort of
 #### Numeric Operations
 
 Cairo supports the basic mathematical operations you’d expect for all the integer
-types: addition, subtraction, multiplication, division, and remainder (u256 doesn't support division and remainder yet). Integer
+types: addition, subtraction, multiplication, division, and remainder. Integer
 division truncates toward zero to the nearest integer. The following code shows
 how you’d use each numeric operation in a `let` statement:
 
@@ -138,7 +138,7 @@ fn main() {
 
 The main way to use Boolean values is through conditionals, such as an `if`
 expression. We’ll cover how `if` expressions work in Cairo in the [“Control
-Flow”][control-flow]<!-- ignore --> section.
+Flow”][control-flow] section.
 
 #### The Short String Type
 
@@ -227,3 +227,5 @@ fn main() {
     let tup: (x: felt252, y: felt252) = (2,3);
 }
 ```
+
+[control-flow]: ch02-05-control-flow.md

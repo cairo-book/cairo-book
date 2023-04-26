@@ -110,7 +110,7 @@ First, you aren’t allowed to use `mut` with constants. Constants aren’t just
 immutable by default—they’re always immutable. You declare constants using the
 `const` keyword instead of the `let` keyword, and the type of the value _must_
 be annotated. We’ll cover types and type annotations in the next section,
-[“Data Types”][data-types]<!-- ignore -->, so don’t worry about the details
+[“Data Types”][data-types], so don’t worry about the details
 right now. Just know that you must always annotate the type.
 
 Constants can only be declared in the global scope, which makes
@@ -246,4 +246,4 @@ Error: failed to compile: src/lib.cairo
 Now that we’ve explored how variables work, let’s look at more data types they
 can have.
 
-[data-types]: ch03-02-data-types.html#data-types
+[data-types]: ch02-02-data-types.md
