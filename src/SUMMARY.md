@@ -62,7 +62,7 @@
 
 - [Error Handling](ch09-00-error-handling.md)
 
-  - [Error Handling](ch09-01-error-handling.md)
+  - [Recoverable Errors with Result](ch09-01-error-handling.md)
 
 ## Testing Cairo Programs
 
