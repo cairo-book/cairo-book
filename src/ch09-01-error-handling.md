@@ -4,11 +4,11 @@
 
 <br />
 
-Most errors aren’t serious enough to require the program to stop entirely. Sometimes, when a function fails, it’s for a reason that you can easily interpret and respond to. For example, if you try to open a file and that operation fails because the file doesn’t exist, you might want to create the file instead of terminating the process.
+Most errors aren’t serious enough to require the program to stop entirely. Sometimes, when a function fails, it’s for a reason that you can easily interpret and respond to. For example, if you try to add two large integers and the operation overflows because the sum exceeds the maximum representable value, you might want to return an error or a wrapped result instead of causing undefined behavior or terminating the process.
 
 ## The `Result` enum
 
-Recall from [“Generic data types”](/src/ch07-01-generic-data-types.md#enums) in Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
+Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
 ```rust
 enum Result<T, E> {
@@ -41,9 +41,9 @@ trait ResultTrait<T, E> {
 
 The `expect` and `unwrap` methods are similar in that they both attempt to extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` variant. If the `Result` is `Ok(x)`, both methods return the value `x`. However, the key difference between the two methods lies in their behavior when the `Result` is in the `Err` variant. The `expect` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap` method panics with a default error message, providing less information about the cause of the panic.
 
-The `expect_err` and `unwrap_err` have to exact opposite behavior. If the `Result` is `Err(x)`, both methods return the value `x`. However, the key difference between the two methods is in case of `Result::Ok()`. The `expect_err` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap_err` method panics with a default error message, providing less information about the cause of the panic.
+The `expect_err` and `unwrap_err` have the exact opposite behavior. If the `Result` is `Err(x)`, both methods return the value `x`. However, the key difference between the two methods is in case of `Result::Ok()`. The `expect_err` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap_err` method panics with a default error message, providing less information about the cause of the panic.
 
-A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl EDrop: Drop<E>>` in the first four methods signatures. This syntax represents generic type constraints in the Cairo language. These constraints indicate that the associated functions require an implementation of the `Drop` trait for the generic types `T` and `E`, respectively. The `Drop` trait is used to define custom clean-up logic for values when they go out of scope, ensuring proper resource management. By specifying these constraints, the functions using them guarantee that the values of types `T` and `E` will be cleaned up correctly, whether they are part of the `Ok` or `Err` variant of the `Result` enum.
+A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl EDrop: Drop<E>>` in the first four methods signatures. This syntax represents generic type constraints in the Cairo language. These constraints indicate that the associated functions require an implementation of the `Drop` trait for the generic types `T` and `E`, respectively.
 
 Finally, the `is_ok` and `is_err` methods are utility functions provided by the `ResultTrait` trait to check the variant of a `Result` enum value.
 
@@ -163,6 +163,6 @@ The console will print the error "Invalid Integer".
 
 ### Summary
 
-That is it for the error handling system in Cairo. We saw that recoverable errors can be handled in Cairo using the Result enum, which has two variants: `Ok` and `Err`. The `Result<T, E>` enum is generic, with types `T` and `E` representing the successful and error values, respectively. The `ResultTrait` provides methods for working with `Result<T, E>`, such as unwrapping values, checking if the result is `Ok` or `Err`, and panicking with custom messages.
+We saw that recoverable errors can be handled in Cairo using the Result enum, which has two variants: `Ok` and `Err`. The `Result<T, E>` enum is generic, with types `T` and `E` representing the successful and error values, respectively. The `ResultTrait` provides methods for working with `Result<T, E>`, such as unwrapping values, checking if the result is `Ok` or `Err`, and panicking with custom messages.
 
-To handle recoverable errors, a function can return a `Result` type and use pattern matching to handle the success or failure of an operation. The `?` operator can be used to implicitly handle errors by propagating the error or unwrapping the successful value. This allows for more concise and idiomatic error handling, where calling functions deal with errors.
+To handle recoverable errors, a function can return a `Result` type and use pattern matching to handle the success or failure of an operation. The `?` operator can be used to implicitly handle errors by propagating the error or unwrapping the successful value. This allows for more concise and clear error handling, where the caller is responsible for managing errors raised by the called function.
