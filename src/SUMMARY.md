@@ -73,9 +73,10 @@
 ## ABIs and Cross-contract Interactions
 
 - [Starknet Smart Contracts](./ch99-starknet-smart-contracts.md)
+  - [Contract Syntaxes](./ch99-01-contract-syntaxes.md)
   - [ABIs and Cross-contract Interactions](./ch99-00-00-abis-and-cross-contract-interactions.md)
-    - [ABIs and Interfaces](./ch99-00-01-abis-and-interfaces.md)
-    - [Contract Dispatchers, Library Dispachers and system calls](./ch99-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+      - [ABIs and Interfaces](./ch99-00-01-abis-and-interfaces.md)
+      - [Contract Dispatchers, Library Dispachers and system calls](./ch99-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
 
 - [Appendix](appendix-00.md)
   - [A - Useful Development Tools](appendix-04-useful-development-tools.md)
