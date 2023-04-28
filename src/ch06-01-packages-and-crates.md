@@ -10,14 +10,17 @@ The crate root is the `lib.cairo` source file that the Cairo compiler starts fro
 A cairo package is a bundle of one or more crates with a Scarb.toml file that describes how to build those crates. This enables the splitting of code into smaller, reusable parts and facilitates more structured dependency management.
 
 ## Creating a Package with Scarb
+
 You can create a new Cairo package using the scarb command-line tool. To create a new package, run the following command:
+
 ```bash
-scarb new my_crate
+scarb new my_package
 ```
 
-This command will generate a new package directory named my_crate with the following structure:
+This command will generate a new package directory named `my_package` with the following structure:
+
 ```
-my_crate/
+my_package/
 ├── Scarb.toml
 └── src
     └── lib.cairo
@@ -29,7 +32,7 @@ my_crate/
 
 ```toml
 [package]
-name = "my_crate"
+name = "my_package"
 version = "0.1.0"
 
 [dependencies]
