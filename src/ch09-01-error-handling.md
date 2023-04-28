@@ -1,7 +1,5 @@
 # Recoverable Errors with `Result`
 
----
-
 <br />
 
 Most errors aren’t serious enough to require the program to stop entirely. Sometimes, when a function fails, it’s for a reason that you can easily interpret and respond to. For example, if you try to add two large integers and the operation overflows because the sum exceeds the maximum representable value, you might want to return an error or a wrapped result instead of causing undefined behavior or terminating the process.
@@ -122,7 +120,7 @@ fn test_felt252_to_u8_panic() {
 
 The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'.
 
-> We could have also used the macro #[should_panic] here.
+> We could have also used the #[should_panic] attribute here.
 
 The last operator we will talk about is the `?` operator. The `?` operator is used for more idiomatic and concise error handling. When you use the `?` operator on a `Result` or `Option` type, it will do the following:
 
