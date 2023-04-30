@@ -32,7 +32,7 @@ Enums can also be used to store more interesting data associated with each varia
 #[derive(Drop)]
 enum Message {
     Quit : (),
-    Echo : (felt252),
+    Echo : (felt252, ),
     Move : (u128, u128),
 }
 ```
