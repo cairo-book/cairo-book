@@ -156,7 +156,7 @@ In Cairo, you can convert values between common scalar types and `felt252` using
 
 The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value.
 
-On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the destination type is smaller than the source type.
+On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the source type is smaller than the destination type.
 
 To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
 
