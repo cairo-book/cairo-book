@@ -218,14 +218,3 @@ When the condition is met, we use the `break` keyword with the value `counter * 
 semicolon to end the statement that assigns the value to `result`. Finally, we
 print the value in `result`, which in this case is `20`.
 
-## Summary
-
-You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
-`if` expressions, and loops! To practice with the concepts discussed in this chapter,
-try building programs to do the following:
-
-- Generate the _n_-th Fibonacci number.
-- Compute the factorial of a number _n_.
-
-When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_
-commonly exist in other programming languages: ownership.
