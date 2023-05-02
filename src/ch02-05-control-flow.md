@@ -81,7 +81,7 @@ This program has four possible paths it can take. After running it, you should s
 [DEBUG]	number is 3
 ```
 
-When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1'.print()`, nor do we see the `number is not divisible by 4, 3, or 2` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. Chapter 5 describes a powerful Cairo branching construct called `match` for these cases.
+When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1'.print()`, nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. Chapter 5 describes a powerful Cairo branching construct called `match` for these cases.
 
 ### Using `if` in a `let` statement
 
@@ -94,7 +94,11 @@ use debug::PrintTrait;
 
 fn main() {
     let condition = true;
-    let number = if condition { 5 } else { 6 };
+    let number = if condition {
+        5
+    } else {
+        6
+    };
 
     if number == 5 {
         'condition was true'.print();
