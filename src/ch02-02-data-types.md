@@ -224,7 +224,7 @@ For example:
 
 ```rust
 fn main() {
-    let tup: (x: felt252, y: felt252) = (2,3);
+    let (x, y): (felt252, felt252) = (2, 3);
 }
 ```
 
