@@ -137,6 +137,8 @@ fn foo(p: Point) {
 In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, and the ownership of `p1` remains with the main function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
+_Don't worry about the `Struct` keyword. We will introduce this in Chapter 4._
+
 ### The `Drop` Trait
 
 You may have noticed that the `Point` type in the previous example also implements the `Drop` trait. In Cairo, a value cannot go out of scope unless it has been previously moved.
