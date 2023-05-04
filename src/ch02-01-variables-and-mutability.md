@@ -210,7 +210,7 @@ use traits::Into;
 fn main() {
     let x = 2_u64;
     x.print();
-    let x = x.into(); // converts x to a felt.
+    let x: felt252 = x.into(); // converts x to a felt, type annotation is required.
     x.print()
 }
 ```
