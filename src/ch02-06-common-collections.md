@@ -79,6 +79,7 @@ The `at` function, on the other hand, directly returns a snapshot to the element
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
 ```rust
+use array::ArrayTrait;
 fn main() {
     let mut a = ArrayTrait::new();
     a.append(0);
@@ -101,11 +102,12 @@ use box::BoxTrait;
 fn main() -> u128 {
     let mut arr = ArrayTrait::<u128>::new();
     arr.append(100_u128);
-    let index_to_access = 1_usize; // Change this value to see different results, what would happen if the index doesn't exist ?
+    let index_to_access =
+        1_usize;        // Change this value to see different results, what would happen if the index doesn't exist ?
     match arr.get(index_to_access) {
         Option::Some(x) => {
-            *x.unbox()             // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator
-                                   // It basically means "transform what get(idx) returned into a real value"
+            *x.unbox()  // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator
+                        // It basically means "transform what get(idx) returned into a real value"
         },
         Option::None(_) => {
             let mut data = ArrayTrait::new();

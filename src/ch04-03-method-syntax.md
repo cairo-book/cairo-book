@@ -134,7 +134,7 @@ the program shown in Listing 5-14.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```swift
+```rust
 use debug::PrintTrait;
 #[derive(Copy, Drop)]
 struct Rectangle {
@@ -142,20 +142,10 @@ struct Rectangle {
     height: u64,
 }
 
-
 fn main() {
-    let rect1 = Rectangle {
-        width: 30_u64,
-        height: 50_u64,
-    };
-    let rect2 = Rectangle {
-        width: 10_u64,
-        height: 40_u64,
-    };
-    let rect3 = Rectangle {
-        width: 60_u64,
-        height: 45_u64,
-    };
+    let rect1 = Rectangle { width: 30_u64, height: 50_u64,  };
+    let rect2 = Rectangle { width: 10_u64, height: 40_u64,  };
+    let rect3 = Rectangle { width: 60_u64, height: 45_u64,  };
 
     'Can rect1 hold rect2?'.print();
     rect1.can_hold(@rect2).print();
@@ -242,7 +232,7 @@ value twice:
 
 ```rust
 trait RectangleTrait {
-    fn square(size:u64) -> Rectangle;
+    fn square(size: u64) -> Rectangle;
 }
 
 impl RectangleImpl of RectangleTrait {

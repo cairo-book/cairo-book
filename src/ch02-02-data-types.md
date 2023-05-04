@@ -67,7 +67,7 @@ fn sub_u8s(x: u8, y: u8) -> u8 {
 }
 
 fn main() {
-    sub_u8s(1,3);
+    sub_u8s(1, 3);
 }
 ```
 

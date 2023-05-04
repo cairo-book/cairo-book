@@ -173,13 +173,13 @@ executing the loop. Let's fix the infinite loop by adding a making the stop cond
 ```rust
 use debug::PrintTrait;
 fn main() {
-    let mut i:usize = 0;
+    let mut i: usize = 0;
     loop {
-        if i > 10{
-            break();
+        if i > 10 {
+            break ();
         }
         'again'.print();
-        i+=1;
+        i += 1;
     }
 }
 ```
@@ -195,7 +195,6 @@ use it, as shown here:
 
 ```rust
 use debug::PrintTrait;
-
 fn main() {
     let mut counter = 0;
 

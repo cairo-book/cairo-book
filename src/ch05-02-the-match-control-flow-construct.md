@@ -21,7 +21,7 @@ fn value_in_cents(coin: Coin) -> felt252 {
         Coin::Penny(_) => 1,
         Coin::Nickel(_) => 5,
         Coin::Dime(_) => 10,
-        Coin::Quarter(_)=> 25,
+        Coin::Quarter(_) => 25,
     }
 }
 ```
@@ -131,8 +131,8 @@ fn plus_one(x: Option<u8>) -> Option<u8> {
 }
 
 fn main() {
-    let five : Option<u8> = Option::Some(5_u8);
-    let six : Option<u8> = plus_one(five);
+    let five: Option<u8> = Option::Some(5_u8);
+    let six: Option<u8> = plus_one(five);
     six.unwrap().print();
     let none = plus_one(Option::None(()));
     none.unwrap().print();

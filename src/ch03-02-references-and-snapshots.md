@@ -153,14 +153,14 @@ In Listing 3-7, we use a mutable reference to modify the value of the `height` a
 
 ```rust
 use debug::PrintTrait;
-#[derive(Copy,Drop)]
+#[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,
     width: u64,
 }
 
-fn main(){
-    let mut rec = Rectangle{height:3_u64, width:10_u64};
+fn main() {
+    let mut rec = Rectangle { height: 3_u64, width: 10_u64 };
     flip(ref rec);
     rec.height.print();
     rec.width.print();
