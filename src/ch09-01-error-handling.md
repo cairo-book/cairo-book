@@ -122,12 +122,14 @@ The first one tests a valid conversion from `felt252` to `u8`, expecting the `un
 
 > We could have also used the #[should_panic] attribute here.
 
+### The `?` operator ?
+
 The last operator we will talk about is the `?` operator. The `?` operator is used for more idiomatic and concise error handling. When you use the `?` operator on a `Result` or `Option` type, it will do the following:
 
 - If the value is `Result::Ok(x)` or `Option::Some(x)`, it will return the inner value `x` directly.
 - If the value is `Result::Err(e)` or `Option::None`, it will propagate the error or `None` by immediately returning from the function.
 
-The ? operator is useful when you want to handle errors implicitly and let the calling function deal with them.
+The `?` operator is useful when you want to handle errors implicitly and let the calling function deal with them.
 
 Here is an example.
 
