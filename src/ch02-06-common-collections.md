@@ -101,8 +101,8 @@ use box::BoxTrait;
 fn main() -> u128 {
     let mut arr = ArrayTrait::<u128>::new();
     arr.append(100_u128);
-    let length = arr.len();
-    match arr.get(length - 1_usize) {
+    let index_to_access = 1_usize; // Change this value to see different results, what would happen if the index doesn't exist ?
+    match arr.get(index_to_access) {
         Option::Some(x) => {
             *x.unbox()
         },
@@ -111,7 +111,7 @@ fn main() -> u128 {
             data.append('out of bounds');
             panic(data)
         }
-    } // returns 100
+    }
 }
 ```
 
