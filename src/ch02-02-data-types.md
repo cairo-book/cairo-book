@@ -228,4 +228,10 @@ fn main() {
 }
 ```
 
+### The unit type ()
+
+A _unit type_ is a type which has only one value `()`.
+It is represented by a tuple with no elements.
+Its size is always zero, and it is guaranteed to not exist in the compiled code.
+
 [control-flow]: ch02-05-control-flow.md
