@@ -54,31 +54,19 @@ In other words, there are two important points in time here:
 
 At this point, the relationship between scopes and when variables are valid is
 similar to that in other programming languages. Now we’ll build on top of this
-understanding by introducing the `Array` type.
+understanding by using the `Array` type we introduced in the [previous chapter](ch02-06-common-collections.md).
 
-### The `Array` Type
+### Ownership with the `Array` Type
 
-To illustrate the rules of ownership, we need a data type that is more complex
-than those we covered in the [“Data Types”][data-types]<!-- ignore --> section
-of Chapter 3. The types covered previously are of a known size, can be
+To illustrate the rules of ownership, we need a data type that is more complex.
+The types covered in the [“Data Types”][data-types]<!-- ignore --> section
+of Chapter 2 are of a known size, can be
 quickly and trivially copied to make a new, independent instance if another
 part of code needs to use the same value in a different scope, and can easily
-be dropped when they're no longer used. But we want to look at data whose size
-is unknown at compile time and can't be trivially copied: the `Array` type.
+be dropped when they're no longer used. But what is the behavior with the `Array` type whose size
+is unknown at compile time and which can't be trivially copied ?
 
-In Cairo, each memory cell can only be written to once. Arrays are represented in memory by
-a segment of contiguous memory cells, and Cairo's linear type system is used to ensure that each cell is
-never written to more than once.
-Consider the following code, in which we define a variable `arr` of `Array` type that holds `u128` values:
-
-```rust
-use array::ArrayTrait;
-...
-
-let arr = ArrayTrait::<u128>::new();
-```
-
-You can append values to an `Array` using the `append` method:
+Here is a short reminder of what an array looks like:
 
 ```rust
 let mut arr = ArrayTrait::<u128>::new();
@@ -322,13 +310,13 @@ fn main() {
     let a3 = takes_and_gives_back(a2);    // a2 is moved into
                                           // takes_and_gives_back, which also
                                           // moves its return value into a3
-                                        
+
 } // Here, a3 goes out of scope and is dropped. a2 was moved, so nothing
   // happens. a1 goes out of scope and is dropped.
 
 fn gives_ownership() -> A {               // gives_ownership will move its
-                                          // return value into the function 
-                                          // that calls it                                        
+                                          // return value into the function
+                                          // that calls it
 
     let some_a = A{};                     // some_a comes into scope
 
@@ -341,8 +329,8 @@ fn gives_ownership() -> A {               // gives_ownership will move its
 fn takes_and_gives_back(some_a: A) -> A { // some_a comes into
                                           // scope
 
-    some_a                               // some_a is returned and moves 
-                                         // ownership to the calling 
+    some_a                               // some_a is returned and moves
+                                         // ownership to the calling
                                          // function
 }
 ```
