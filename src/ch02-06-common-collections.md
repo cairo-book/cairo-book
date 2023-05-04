@@ -6,9 +6,8 @@ Cairo1 provides a set of common collection types that can be used to store and m
 
 An array is a collection of elements of the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
 
-An important thing to note is that arrays are append-only. This means that you can only add elements to the end of an array.
-Arrays are, in fact, queues whose values can't be popped nor modified.
-This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it.
+An important thing to note is that arrays have limited modifications options. Arrays are, in fact, queues whose values can't be modified.
+This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can also append items to the end of an array and remove items from the front using `pop_front`.
 
 #### Creating an Array
 
@@ -158,6 +157,7 @@ To create a `Span` of an `Array`, call the `span()` method:
 ```rust
 let span = array.span();
 ```
+
 ## Summary
 
 You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
