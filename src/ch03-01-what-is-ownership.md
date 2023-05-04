@@ -268,11 +268,11 @@ fn main() {
     let x = 5_u128;                 // x comes into scope
 
     makes_copy(x);                  // x would move into the function,
-                                    // but u128 implements Copy, so it's okay to still
+                                    // but u128 implements Copy, so it is okay to still
                                     // use x afterward
 
-} // Here, x goes out of scope and is dropped. But because my_struct's value was moved, nothing
-// special happens.
+}                                   // Here, x goes out of scope and is dropped.
+
 
 fn takes_ownership(some_struct: MyStruct) { // some_struct comes into scope
 } // Here, some_struct goes out of scope and `drop` is called.
@@ -325,7 +325,7 @@ fn gives_ownership() -> A {               // gives_ownership will move its
                                           // function
 }
 
-// This function takes an instance of A and returns one
+// This function takes an instance some_a of A and returns it
 fn takes_and_gives_back(some_a: A) -> A { // some_a comes into
                                           // scope
 
