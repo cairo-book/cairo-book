@@ -95,6 +95,10 @@ The `Option` enum is helpful because it allows you to explicitly represent the p
 
 To give you an example, here is a function which returns the index of the first element of an array with a given value, or None if the element is not present.
 
+We are demonstrating two approaches for above function:
+- Recursive Approach `find_value_recursive` 
+- Iterative Approach `find_value_iterative`
+
 > Note: in the future it would be nice to replace this example by something simpler using a loop and without gas related code.
 
 ```rust
