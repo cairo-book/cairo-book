@@ -72,7 +72,7 @@ Listing 4-4 shows a `build_user` function that returns a `User` instance with th
 <span class="filename">Filename: structs.cairo</span>
 
 ```rust
-fn build_user(email: felt, username: String) -> User {
+fn build_user(email: felt252, username: felt252) -> User {
     User {
         active: true,
         username: username,

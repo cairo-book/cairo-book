@@ -149,18 +149,18 @@ In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modif
 
 > **Note**: In Cairo, a parameter can only be passed as _mutable reference_ using the `ref` modifier if the variable is declared as mutable with `mut`.
 
-In Listing 3-7, we use a mutable reference to modify the value of the `height` field of the `Rectangle` instance in the `flip` function.
+In Listing 3-7, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function.
 
 ```rust
 use debug::PrintTrait;
-#[derive(Copy,Drop)]
+#[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,
     width: u64,
 }
 
-fn main(){
-    let mut rec = Rectangle{height:3_u64, width:10_u64};
+fn main() {
+    let mut rec = Rectangle { height: 3_u64, width: 10_u64 };
     flip(ref rec);
     rec.height.print();
     rec.width.print();
@@ -172,6 +172,8 @@ fn flip(ref rec: Rectangle) {
     rec.width = temp;
 }
 ```
+
+<span class="caption">Listing 3-7: Use of a mutable reference to modify a value</span>
 
 First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` into `flip` with `ref rec`, and update the function signature to accept a mutable reference with `ref rec: Rectangle`. This makes it very clear that the `flip` function will mutate the value of the `Rectangle` instance passed as parameter.
 

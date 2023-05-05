@@ -141,10 +141,10 @@ struct Wallet<T> {
     balance: T,
 }
 
-impl WalletDrop<T, impl TDrop : Drop<T>> of Drop<Wallet<T>>;
+impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
 
 fn main() {
-   let w = Wallet{ balance: 3_u128};
+    let w = Wallet { balance: 3_u128 };
 }
 ```
 
@@ -160,9 +160,8 @@ struct Wallet<T, U> {
 
 impl WalletDrop<T, impl TDrop: Drop<T>, U, impl UDrop: Drop<U>> of Drop<Wallet<T, U>>;
 
-
 fn main() {
-   let w = Wallet{ balance: 3_u128, address: 14};
+    let w = Wallet { balance: 3_u128, address: 14 };
 }
 ```
 
@@ -209,13 +208,13 @@ trait WalletTrait<T> {
 }
 
 impl WalletImpl<T> of WalletTrait<T> {
-    fn balance(self: @Wallet<T>) -> @T{
+    fn balance(self: @Wallet<T>) -> @T {
         return self.balance;
     }
 }
 
 fn main() {
-    let w = Wallet {balance: 50};
+    let w = Wallet { balance: 50 };
     assert(w.balance() == 50, 0);
 }
 ```
@@ -236,7 +235,7 @@ impl WalletReceiveImpl of WalletReceiveTrait {
 }
 
 fn main() {
-    let mut w = Wallet {balance: 50_u128};
+    let mut w = Wallet { balance: 50_u128 };
     assert(w.balance() == 50_u128, 0);
 
     w.receive(100_u128)
@@ -265,7 +264,7 @@ trait WalletMixTrait<T1, U1> {
 
 impl WalletMixImpl<T1, U1> of WalletMixTrait<T1, U1> {
     fn mixup<T2, U2>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2> {
-        Wallet {balance: self.balance, address: other.address}
+        Wallet { balance: self.balance, address: other.address }
     }
 }
 ```
@@ -274,12 +273,16 @@ We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` method
 
 ```rust
 trait WalletMixTrait<T1, U1> {
-    fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2>;
+    fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(
+        self: Wallet<T1, U1>, other: Wallet<T2, U2>
+    ) -> Wallet<T1, U2>;
 }
 
 impl WalletMixImpl<T1, impl T1Drop: Drop<T1>, U1, impl U1Drop: Drop<U1>> of WalletMixTrait<T1, U1> {
-    fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> Wallet<T1, U2> {
-        Wallet {balance: self.balance, address: other.address}
+    fn mixup<T2, impl T2Drop: Drop<T2>, U2, impl U2Drop: Drop<U2>>(
+        self: Wallet<T1, U1>, other: Wallet<T2, U2>
+    ) -> Wallet<T1, U2> {
+        Wallet { balance: self.balance, address: other.address }
     }
 }
 ```
@@ -288,13 +291,13 @@ We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` dec
 
 ```rs
 fn main() {
-   let w1 = Wallet{ balance: true, address: 10_u128};
-   let w2 = Wallet{ balance: 32, address: 100_u8};
+    let w1 = Wallet { balance: true, address: 10_u128 };
+    let w2 = Wallet { balance: 32, address: 100_u8 };
 
-   let w3 = w1.mixup(w2);
+    let w3 = w1.mixup(w2);
 
-   assert(w3.balance == true, 0);
-   assert(w3.address == 100_u8, 0);
+    assert(w3.balance == true, 0);
+    assert(w3.address == 100_u8, 0);
 }
 ```
 

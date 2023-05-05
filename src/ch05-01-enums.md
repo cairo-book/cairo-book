@@ -9,11 +9,12 @@ Here's a simple example of an enum:
 ```rs
 #[derive(Drop)]
 enum Direction {
-    North : (),
-    East : (),
-    South : (),
-    West : (),
+    North: (),
+    East: (),
+    South: (),
+    West: (),
 }
+
 ```
 
 Unlike other languages like Rust, every variant has a type. In this example, we've defined an enum called `Direction` with four variants: `North`, `East`, `South`, and `West`. The naming convention is to use PascalCase for enum variants. Each variant represents a distinct value of the Direction type and is associated with a unit type `()`. One variant can be instantiated using this syntax:
@@ -100,10 +101,7 @@ To give you an example, here is a function which returns the index of the first 
 ```rust
 use array::ArrayTrait;
 use debug::PrintTrait;
-fn find_value_recursive(
-    arr: @Array<felt252>, value: felt252, index: usize
-) -> Option<usize> {
-
+fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> Option<usize> {
     match gas::withdraw_gas() {
         Option::Some(_) => {},
         Option::None(_) => {
@@ -147,6 +145,7 @@ fn test_increase_amount() {
         },
     }
 }
+
 ```
 
 Running this code would print `it worked`.

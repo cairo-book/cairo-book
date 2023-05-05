@@ -67,7 +67,7 @@ fn sub_u8s(x: u8, y: u8) -> u8 {
 }
 
 fn main() {
-    sub_u8s(1,3);
+    sub_u8s(1, 3);
 }
 ```
 
@@ -142,8 +142,8 @@ Flow”][control-flow] section.
 
 #### The Short String Type
 
-Cairo doesn't have a native type for strings, but you can store characters forming what we call a "short string" inside `felt252`s. Here are
-some examples of declaring values by putting them between single quotes:
+Cairo doesn't have a native type for strings, but you can store characters forming what we call a "short string" inside `felt252`s. A short string has a max length of 31 chars. This is to ensure that it can fit in a single felt (a felt is 252 bits, one ASCII char is 8 bits).
+Here are some examples of declaring values by putting them between single quotes:
 
 ```rust
 let my_first_char = 'C';
@@ -227,5 +227,11 @@ fn main() {
     let (x, y): (felt252, felt252) = (2, 3);
 }
 ```
+
+### The unit type ()
+
+A _unit type_ is a type which has only one value `()`.
+It is represented by a tuple with no elements.
+Its size is always zero, and it is guaranteed to not exist in the compiled code.
 
 [control-flow]: ch02-05-control-flow.md

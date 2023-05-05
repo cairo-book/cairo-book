@@ -163,7 +163,7 @@ Run panicked with err values: [375233589013918064796019]
 Remaining gas: 1050
 ```
 
-> Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurementsthat expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In this case, the program panicked because it ran out of gas, as the stop condition was never reached.
+> Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurements that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In this case, the program panicked because it ran out of gas, as the stop condition was never reached.
 > It is particularly important in the context of smart contracts deployed on Starknet, as it prevents from running infinite loops on the network.
 > If you're writing a program that needs to run a loop, you will need to execute it with the `--available-gas` flag set to a value that is large enough to run the program.
 
@@ -173,13 +173,13 @@ executing the loop. Let's fix the infinite loop by adding a making the stop cond
 ```rust
 use debug::PrintTrait;
 fn main() {
-    let mut i:usize = 0;
+    let mut i: usize = 0;
     loop {
-        if i > 10{
-            break();
+        if i > 10 {
+            break ();
         }
         'again'.print();
-        i+=1;
+        i += 1;
     }
 }
 ```
@@ -195,7 +195,6 @@ use it, as shown here:
 
 ```rust
 use debug::PrintTrait;
-
 fn main() {
     let mut counter = 0;
 
@@ -217,4 +216,3 @@ the loop. On every iteration of the loop, we check whether the `counter` is equa
 When the condition is met, we use the `break` keyword with the value `counter * 2`. After the loop, we use a
 semicolon to end the statement that assigns the value to `result`. Finally, we
 print the value in `result`, which in this case is `20`.
-

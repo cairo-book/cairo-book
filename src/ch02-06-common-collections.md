@@ -6,9 +6,8 @@ Cairo1 provides a set of common collection types that can be used to store and m
 
 An array is a collection of elements of the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
 
-An important thing to note is that arrays are append-only. This means that you can only add elements to the end of an array.
-Arrays are, in fact, queues whose values can't be popped nor modified.
-This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it.
+An important thing to note is that arrays have limited modifications options. Arrays are, in fact, queues whose values can't be modified.
+This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can only append items to the end of an array and remove items from the front using `pop_front`.
 
 #### Creating an Array
 
@@ -80,6 +79,7 @@ The `at` function, on the other hand, directly returns a snapshot to the element
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
 ```rust
+use array::ArrayTrait;
 fn main() {
     let mut a = ArrayTrait::new();
     a.append(0);
@@ -102,17 +102,19 @@ use box::BoxTrait;
 fn main() -> u128 {
     let mut arr = ArrayTrait::<u128>::new();
     arr.append(100_u128);
-    let length = arr.len();
-    match arr.get(length - 1_usize) {
+    let index_to_access =
+        1_usize;        // Change this value to see different results, what would happen if the index doesn't exist ?
+    match arr.get(index_to_access) {
         Option::Some(x) => {
-            *x.unbox()
+            *x.unbox()  // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator
+                        // It basically means "transform what get(idx) returned into a real value"
         },
         Option::None(_) => {
             let mut data = ArrayTrait::new();
             data.append('out of bounds');
             panic(data)
         }
-    } // returns 100
+    }
 }
 ```
 
@@ -158,6 +160,7 @@ To create a `Span` of an `Array`, call the `span()` method:
 ```rust
 let span = array.span();
 ```
+
 ## Summary
 
 You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
