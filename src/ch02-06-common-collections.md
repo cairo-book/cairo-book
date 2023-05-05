@@ -7,7 +7,7 @@ Cairo1 provides a set of common collection types that can be used to store and m
 An array is a collection of elements of the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
 
 An important thing to note is that arrays have limited modifications options. Arrays are, in fact, queues whose values can't be modified.
-This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can also append items to the end of an array and remove items from the front using `pop_front`.
+This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can only append items to the end of an array and remove items from the front using `pop_front`.
 
 #### Creating an Array
 
