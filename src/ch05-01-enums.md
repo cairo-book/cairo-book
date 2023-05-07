@@ -33,16 +33,16 @@ Enums can also be used to store more interesting data associated with each varia
 #[derive(Drop)]
 enum Message {
     Quit : (),
-    Echo : (felt252),
+    Echo : felt252,
     Move : (u128, u128),
 }
 ```
 
 In this example, the `Message` enum has three variants: `Quit`, `Echo` and `Move`, all with different types:
 
-- `Quit` has no data associated with it at all.
-- `Echo` includes a single felt.
-- `Move` includes two u128 values.
+- `Quit` is the unit type - it has no data associated with it at all.
+- `Echo` is a single felt.
+- `Move` is a tuple of two u128 values.
 
 You could even use a Struct or another Enum you defined inside one of your Enum variants.
 
@@ -97,7 +97,8 @@ The `Option` enum is helpful because it allows you to explicitly represent the p
 To give you an example, here is a function which returns the index of the first element of an array with a given value, or None if the element is not present.
 
 We are demonstrating two approaches for the above function:
-- Recursive Approach `find_value_recursive` 
+
+- Recursive Approach `find_value_recursive`
 - Iterative Approach `find_value_iterative`
 
 > Note: in the future it would be nice to replace this example by something simpler using a loop and without gas related code.
