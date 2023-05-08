@@ -1,4 +1,4 @@
-# Starknet contracts: Contract Syntaxes
+# Starknet contracts: Contract Syntax
 
 In this chapter, you are going to get acquainted with basic contract syntaxes available in Cairo, but before we go forward, it's important to create a clear distinction between programs and contracts on Starknet!
 
@@ -11,11 +11,7 @@ Cairo programs as we've previously defined, are a sequence of instructions that 
 fn main() {}
 ```
 
-Starknet contracts are basically programs that can run on the Starknet Virtual Machine, and thus have access to Starknet's state. For a program to be recognized as a contract by the compiler, it must possess the `#[contract]` attribute.
-
-A TLDR, would be:
-1. Contracts have access to Starknet's VM and thus have states, programs do not, and are as such stateless.
-2. Programs must always have a `main` entrypoint, Contracts must always have the `#[contract]` attribute.
+Starknet contracts are essentially programs that can run on the Starknet Virtual Machine, and as such, have access to Starknet's state. For a program to be recognized as a contract by the compiler, it must be annotated with the `#[contract]` attribute:
 
 ```rust
 #[contract]
@@ -28,7 +24,7 @@ mod Example{
     }
 
     #[event]
-    fn stored_name(caller: ContractAddress, name:felt252){}
+    fn StoredName(caller: ContractAddress, name:felt252){}
 
     #[constructor]
     fn constructor(_name: felt252, _address: ContractAddress){
@@ -39,7 +35,7 @@ mod Example{
     fn store_name(_name: felt252){
         let caller = get_caller_address();
         names::write(caller, _name);
-        stored_name(caller,_name);
+        StoredName(caller,_name);
     }
 
     #[view]
@@ -52,16 +48,7 @@ mod Example{
 
 <span class="caption">Listing 9-1: A simple ENS contract</span>
 
-## Modules
-Modules are named containers used to organize codes into namespaces, allowing for easier management of codes.
-
-Starknet contracts must be contained within modules. To define a module, you use the `mod` keyword:
-
-```rust
-mod Example {
-
-}
-```
+NB: Starknet contracts must be contained within [modules](./ch06-02-defining-modules-to-control-scope.md).
 
 ## Starknet Contract Attributes
 Attributes are special annotations that modify the behavior of certain functions or methods. They are placed before a function and begin with the `#[]` symbol.
@@ -154,19 +141,19 @@ Some important rules to note:
 4. Finally it should be annotated with the `#[constructor]` decorator.
 
 ### 2. External functions
-External functions are functions which modifies the state of the blockchain. They are specified using the `#[external]` attribute:
+External functions are functions which modifies the state of the blockchain. They are specified using the `#[external]` attribute, and are public by default:
 
 ```rust
 #[external]
 fn store_name(_name: felt252){
     let caller = get_caller_address();
     names::write(caller, _name);
-    stored_name(caller,_name);
+    StoredName(caller,_name);
 }
 ```
 
 ### 3. View functions
-View functions are read-only functions, they do not modify the state of the blockchain. They are specified using the `#[view]` attribute:
+View functions are read-only functions, they do not modify the state of the blockchain. They are specified using the `#[view]` attribute, and are public by default:
 
 ```rust
 #[view]
@@ -179,16 +166,16 @@ fn get_name(_address:ContractAddress) -> felt252{
 **NB:** It's important to note that, both external and view functions are public by default on Starknet. To create an internal function, you simply need to avoid specifying any attribute for that function.
 
 ## Events
-Events provides a means for Starknet contracts to emit information about specific occurences within the contract, that can in turn be used by external applications outside of Starknet.
+Events are custom data structures that are emitted by smart contracts during execution. They provide a way for smart contracts to communicate with the external world by logging information about specific events.
 
 ### Defining events
 An event is an empty function annotated with the `#[event]` attribute. 
 
-Making reference to the `stored_name` event from Listing 9-1:
+In Listing 9-1, `StoredName` is an event that emits information about names stored in the contract:
 
 ```rust
 #[event]
-fn stored_name(caller: ContractAddress, name:felt252){}
+fn StoredName(caller: ContractAddress, name:felt252){}
 ```
 
 we pass in the values to be emitted and their corresponding data types as argument within the parentheses.
@@ -197,5 +184,5 @@ we pass in the values to be emitted and their corresponding data types as argume
 After defining events, we can emit them by simply calling the event name like we'll call functions:
 
 ```rust
-stored_name(caller,_name);
+StoredName(caller,_name);
 ```

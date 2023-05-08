@@ -9,7 +9,7 @@ In this chapter, we are going to extensively discuss how these dispatchers work 
 To effectively break down the concepts in this chapter, we are going to be using the IERC20 interface from the previous chapter (refer to Listing 9-1):
 
 ## Contract Dispatcher
-Contracts annotated with the `#[abi]` attribute are programmed to automatically generate and export the relevant dispatcher logic on compilation. The compiler also generates a new trait, two new structs (one for contract calls, and the other for library calls) and their implementation of this trait. Our interface is expanded into something like this:
+Traits annotated with the `#[abi]` attribute are programmed to automatically generate and export the relevant dispatcher logic on compilation. The compiler also generates a new trait, two new structs (one for contract calls, and the other for library calls) and their implementation of this trait. Our interface is expanded into something like this:
 
 ```rust
 trait IERC20DispatcherTrait<T> {
