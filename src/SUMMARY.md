@@ -49,7 +49,7 @@
 
   - [Defining Modules to Control Scope](ch06-02-defining-modules-to-control-scope.md)
   - [Paths for Referring to an Item in the Module Tree](ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md)
-  - [Bringing Paths into Scope with the `use` Keyword](ch06-04-bringing-paths-into-scope-with-the-use-keyword.md)
+  - [Bringing Paths into Scope with the 'use' Keyword](ch06-04-bringing-paths-into-scope-with-the-use-keyword.md)
   - [Separating Modules into Different Files](ch06-05-separating-modules-into-different-files.md)
 ## Generic Data Types
 

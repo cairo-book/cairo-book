@@ -5,5 +5,11 @@ multilingual = false
 src = "src"
 title = "The Cairo Programming Language"
 
+[build]
+extra-watch-dirs = ["po"]
+
+[preprocessor.gettext]
+after = ["links"]
+
 [output.html.playground]
 runnable = false

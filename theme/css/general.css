@@ -248,3 +248,12 @@ span.caption code {
   font-size: 0.875em;
   font-weight: 400;
 }
+
+#language-list {
+  left: auto;
+  right: 10px;
+}
+
+#language-list a {
+  color: inherit;
+}
