@@ -1,17 +1,17 @@
 # Starknet contracts: Contract Syntax
 
-In this chapter, you are going to get acquainted with basic contract syntaxes available in Cairo, but before we go forward, it's important to create a clear distinction between programs and contracts on Starknet!
+In this chapter, you are going to learn how to create smart contracts in Cairo, but before we go forward, it's important to clarify the difference between Cairo programs and Starknet contracts.
 
 ## Cairo programs vs Starknet contracts
-Before we proceed, I'd like to point out that Starknet contracts are a special type of Cairo programs, so we are definitely not exploring an entirely different thing from all we've learnt thus far.
+Starknet contracts are a special type of Cairo programs, so we are definitely not exploring an entirely different thing from all we've learnt thus far.
 
-Cairo programs as we've previously defined, are a sequence of instructions that specifies a set of computations to be executed. As you must have already noticed, a Cairo program must always have a `main` entrypoint:
+Cairo programs consist of a sequence of instructions that specify a set of computations to execute. As you may have already noticed, a Cairo program must always have a `main` entry point:
 
 ```rust
 fn main() {}
 ```
 
-Starknet contracts are essentially programs that can run on the Starknet Virtual Machine, and as such, have access to Starknet's state. For a program to be recognized as a contract by the compiler, it must be annotated with the `#[contract]` attribute:
+Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a program to be recognized as a contract by the compiler, it must be annotated with the `#[contract]` attribute:
 
 ```rust
 #[contract]
@@ -46,7 +46,7 @@ mod Example{
 }
 ```
 
-<span class="caption">Listing 9-1: A simple ENS contract</span>
+<span class="caption">Listing 9-1: A simple ENS naming service contract</span>
 
 NB: Starknet contracts must be contained within [modules](./ch06-02-defining-modules-to-control-scope.md).
 
@@ -54,22 +54,22 @@ NB: Starknet contracts must be contained within [modules](./ch06-02-defining-mod
 Attributes are special annotations that modify the behavior of certain functions or methods. They are placed before a function and begin with the `#[]` symbol.
 
 Here are a list of common attributes used in Starknet contracts:
-1. `#[contract]`: This attribute like we explained earlier, instructs the compiler to handle our codes as contracts.
+1. `#[contract]`: As explained earlier, this attribute indicates to the compiler that the following code represents a contract. The compiler will automatically expand the code with elements related to contracts.
 
-2. `#[constructor]`:  This attribute marks a function as a constructor, allowing the function to be called with any necessary arguments to be initialized on deployment.
+2. `#[constructor]`:  This attribute marks a function as a constructor. Deploying a contract will run the constructor function with the parameter specified when deploying the contract.
 
-3. `#[external]`: This attribute marks a function as an external function.
+3. `#[external]`: This attribute marks a function as an external function (functions which modifies the state of the blockchain).
 
-4. `#[view]`: This attribute marks a function as a view function.
+4. `#[view]`: This attribute marks a function as a view function (read-only functions that do not modify the state of the blockchain).
 
 5. `#[event]`: This is used to define contract events.
 
 6. `#[l1_handler]`: This attribute is used to mark functions which can receive messages from L1s.
 
-## State Variables
-State variables store data in a contract storage, that can be accessed and modified throughout the lifetime of the contract. 
+## Storage Variables
+Storage variables store data in a contract storage, that can be accessed and modified throughout the lifetime of the contract. 
 
-State variables in Starknet contracts are stored in a special struct called `Storage`:
+Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
 ```rust
 struct Storage{
@@ -80,14 +80,14 @@ struct Storage{
 
 <span class="caption">Listing 9-2: A Storage Struct</span>
 
-The `Storage` struct takes in the name of the state variable, and it's data type. You can also create complex mappings using the `LegacyMap` keyword.
+The storage struct is just a [struct](./ch04-00-using-structs-to-structure-related-data.md) like any other, except that you can defined mappings with the `LegacyMap` type.
 
 ### Storage Mappings
-Mappings acts as mini hash tables, consisting of key -> value type pairs.
+Mappings are a key-value data structure that you can use to store data within a smart contract. They are essentially hash tables that allow you to associate a unique key with a corresponding value. Mappings are particularly useful for managing large sets of data, as it's impossible to store arrays in storage.
 
-They are created using the `LegacyMap` keyword, passing in the data types of the mapped variables within angular brackets `<>` as can be seen in Listing 9-2. 
+A mapping is a variable of type LegacyMap, inside which the key and value type are specified within angular brackets <>. The syntax for declaring a mapping is as follows in Listing 9-2. 
 
-You can also create more complex mappings like the popular `allowances` state variable in the ERC20 Standard using tuples:
+You can also create more complex mappings than that found in Listing 9-2 like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
 
 ```rust
 struct Storage{
@@ -95,37 +95,48 @@ struct Storage{
 }
 ```
 
-### Reading from Storage
-State variables can be read from, and written to. This can be done by calling the `read` and `write` StorageAccess methods on the state variable.
+In mappings, the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ
+ is the Pedersen hash and the final value is taken `mod2251−256`.
 
-To read from the state variable `names` in our Example contract in Listing 9-1:
+### Reading from Storage
+The values of storage variables can be read and modified using the `read` and `write` methods respectively.
+
+To read the value of the storage variable `names`, we call the `read` method on the `names` storage variable, passing in the key `_address` as a parameter.
 
 ```rust
 let name = names::read(_address);
 ```
 
-We call the `read` method on the `names` state variable, passing in the key `_address` into parentheses. 
+We call the `read` method on the `names` storage variable, passing in the key `_address` into parentheses.
 
-*NB: In a case where the state variable does not store a mapping, you can access it without needing to pass a key into the parentheses.*
+```rust
+fn read(key: felt252) -> felt252;
+```
+
+<span class="caption">Listing 9-3: The `read` method function signature</span>
+
+*NB: When the storage variable does not store a mapping, it's value is accessed without passing any parameters to the `read` method*
 
 ### Writing to Storage
-Writing to state variables can be done using the `write` StorageAccess method:
+Writing to storage variables can be done using the `write` StorageAccess method:
 
 ```rust
 names::write(_address, _name);
 ```
 
-We call the `write` method on the `names` state variable, passing in the key and values into the parentheses.
+We call the `write` method on the `names` storage variable, passing in the key and values into the parentheses.
+
+```rust
+fn write(value: felt252);
+```
+
+<span class="caption">Listing 9-3: The `write` method function signature</span>
 
 ## Functions
-Functions in Starknet contracts do not hold a special meaning from what we discussed in [Chapter 02](./ch02-03-functions.md), but can be annotated with attributes for specific functionalities.
-
-In this section, we are going to be looking at three popular function types you'd encounter with most contracts:
+In this section, we are going to be looking at some popular function types you'd encounter with most contracts:
 
 ### 1. Constructors
-Constructors are a special type of function used to initialize certain state variables on deployment.
-
-A constructor must be named `constructor` and annotated with the `#[constructor]` attribute:
+Constructors are a special type of function that runs when deploying a contract, and can be used to initialize certain storage variables on deployment:
 
 ```rust
 #[constructor]
@@ -135,13 +146,13 @@ fn constructor(_name: felt252, _address: ContractAddress){
 ```
 
 Some important rules to note:
-1. Your contract shouldn't have more than one constructor.
-2. Variables to be intialized should be passed in as arguments to the constructor.
+1. Your contract can't have more than one constructor.
 3. Your constructor function must be named `constructor`.
 4. Finally it should be annotated with the `#[constructor]` decorator.
 
 ### 2. External functions
-External functions are functions which modifies the state of the blockchain. They are specified using the `#[external]` attribute, and are public by default:
+External functions are functions which modifies the state of the blockchain. They are public by default, and can be interacted with by anyone. 
+You can create external functions by annotating functions with the `#[external]` attribute:
 
 ```rust
 #[external]
