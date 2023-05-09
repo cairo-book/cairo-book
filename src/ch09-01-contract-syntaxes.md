@@ -2,7 +2,7 @@
 
 In this chapter, you are going to learn how to create smart contracts in Cairo, but before we go forward, it's important to clarify the difference between Cairo programs and Starknet contracts.
 
-## Cairo programs vs Starknet contracts
+## Cairo programs and Starknet contracts
 Starknet contracts are a special type of Cairo programs, so we are definitely not exploring an entirely different thing from all we've learnt thus far.
 
 Cairo programs consist of a sequence of instructions that specify a set of computations to execute. As you may have already noticed, a Cairo program must always have a `main` entry point:
