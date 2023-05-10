@@ -39,3 +39,21 @@ fn main() {
 }
 ```
 Executing this program will yield the same error message as before. However, if there is no need for an array and multiple values must be returned within the error, panic_with_felt252 offers a more succinct option. In cases where an array is necessary, such as when dealing with a collection of related values or when the number of values is dynamic, using an array would be the appropriate choice. Otherwise, panic_with_felt252 provides a cleaner alternative for handling single value in error situations.
+
+## Using assert
+
+An even more meaningful way to panic is by using assert function from the Cairo core library. It asserts that a boolean expression is true at runtime, and if it is not, it calls the panic function with an error value. The assert function takes two arguments: a boolean expression, an error value. Error value can be expressed as a string directly as it is handled as a felt.
+
+Here is an example of its usage:
+
+```rust
+fn main() {
+    let my_number: u8 = 0;
+    
+    assert(my_number != 0, 'number is zero');
+
+    100 / my_number;
+}
+```
+
+We are asserting in main that `my_number` is not zero so we don't make a division by 0. Here `my_number` is zero so the assert will call panic function with the string value (as a felt) and the division will not be reached.
