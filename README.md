@@ -32,7 +32,7 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 All the Markdown files **MUST** be edited in english. To work locally in english:
 
-   - Start a local server with `mdbook server` and visit [localhost:3000](http://localhost:3000) to view the book.
+   - Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
    You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
 
    - Make changes to the book and refresh the browser to see the changes.
