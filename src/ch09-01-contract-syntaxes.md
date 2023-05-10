@@ -1,17 +1,17 @@
 # Starknet contracts: Contract Syntax
 
-In this chapter, you are going to learn how to create smart contracts in Cairo, but before we go forward, it's important to clarify the difference between Cairo programs and Starknet contracts.
+This chapter will guide you on how to create smart contracts in Cairo, and will clarify the distinction between Cairo programs and Starknet contracts.
 
 ## Cairo programs and Starknet contracts
-Starknet contracts are a special type of Cairo programs, so we are definitely not exploring an entirely different thing from all we've learnt thus far.
 
-Cairo programs consist of a sequence of instructions that specify a set of computations to execute. As you may have already noticed, a Cairo program must always have a `main` entry point:
+Starknet contracts are a special subset of Cairo programs, so the concepts previously learned in this book are still applicable to write Starknet contracts.
+As you may have already noticed, a Cairo program must always have a function `main` that serves as the entry point for this program:
 
 ```rust
 fn main() {}
 ```
 
-Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a program to be recognized as a contract by the compiler, it must be annotated with the `#[contract]` attribute:
+Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a module to be handled as a contract by the compiler, it must be annotated with the `#[contract]` attribute:
 
 ```rust
 #[contract]
@@ -46,28 +46,35 @@ mod Example{
 }
 ```
 
-<span class="caption">Listing 9-1: A simple ENS naming service contract</span>
+<span class="caption">Listing 9-1: A simple naming service contract</span>
 
-NB: Starknet contracts must be contained within [modules](./ch06-02-defining-modules-to-control-scope.md).
+> NB: Starknet contracts are defined within [modules](./ch06-02-defining-modules-to-control-scope.md).
 
 ## Starknet Contract Attributes
-Attributes are special annotations that modify the behavior of certain functions or methods. They are placed before a function and begin with the `#[]` symbol.
+
+Attributes are special annotations that modify the behavior of certain functions or methods. They are placed preceding a function and are denoted by the `#[]` symbol.
+
+<!-- TODO: Appendix on attributes -->
 
 Here are a list of common attributes used in Starknet contracts:
-1. `#[contract]`: As explained earlier, this attribute indicates to the compiler that the following code represents a contract. The compiler will automatically expand the code with elements related to contracts.
 
-2. `#[constructor]`:  This attribute marks a function as a constructor. Deploying a contract will run the constructor function with the parameter specified when deploying the contract.
+1. `#[contract]`: This attribute is used to annotate a module to be compiled as a Starknet contract.
+   The compiler recognizes this attribute and prepares the module with necessary contract elements,
+   such as the logic to handle external contract calls or how to access storage variables.
 
-3. `#[external]`: This attribute marks a function as an external function (functions which modifies the state of the blockchain).
+2. `#[constructor]`: This attribute marks a function as a constructor. The constructor function is called only once upon deploying a contract, setting the initial state of the contract.
 
-4. `#[view]`: This attribute marks a function as a view function (read-only functions that do not modify the state of the blockchain).
+3. `#[external]`: This attribute marks a function as an external function. External functions can be called by other contracts or externally and can modify the contract's state.
 
-5. `#[event]`: This is used to define contract events.
+4. `#[view]`: This attribute marks a function as a view function. View functions are read-only functions that allow you to access data from the contract, but prevent you from modifying the state of the blockchain.
+
+5. `#[event]`: This is used to define events that can be emitted by the contract.
 
 6. `#[l1_handler]`: This attribute is used to mark functions which can receive messages from L1s.
 
 ## Storage Variables
-Storage variables store data in a contract storage, that can be accessed and modified throughout the lifetime of the contract. 
+
+Storage variables allow you to store data that will be stored on the blockchain in the contract's storage. These data are persistent and can be accessed and modified anytime once the contract is deployed.
 
 Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
@@ -80,12 +87,16 @@ struct Storage{
 
 <span class="caption">Listing 9-2: A Storage Struct</span>
 
-The storage struct is just a [struct](./ch04-00-using-structs-to-structure-related-data.md) like any other, except that you can defined mappings with the `LegacyMap` type.
+The storage struct is a [struct](./ch04-00-using-structs-to-structure-related-data.md) like any other,
+except that it allows you to define mappings using the `LegacyMap` type.
 
 ### Storage Mappings
-Mappings are a key-value data structure that you can use to store data within a smart contract. They are essentially hash tables that allow you to associate a unique key with a corresponding value. Mappings are particularly useful for managing large sets of data, as it's impossible to store arrays in storage.
 
-A mapping is a variable of type LegacyMap, inside which the key and value type are specified within angular brackets <>. The syntax for declaring a mapping is as follows in Listing 9-2. 
+Mappings are a key-value data structure that you can use to store data within a smart contract. They are essentially hash tables that allow you to associate a unique key with a corresponding value. Mappings are also useful to store sets of data, as it's impossible to store arrays in storage.
+
+A mapping is a variable of type LegacyMap, in which the key and value types are specified within angular brackets <>.
+It is important to note that the `LegacyMap` type can only be used inside the `Storage` struct, and can't be used to define mappings in user-defined structs.
+The syntax for declaring a mapping is as follows in Listing 9-2.
 
 You can also create more complex mappings than that found in Listing 9-2 like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
 
@@ -96,47 +107,45 @@ struct Storage{
 ```
 
 In mappings, the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ
- is the Pedersen hash and the final value is taken `mod2251−256`.
+is the Pedersen hash and the final value is taken `mod2251−256`. You can learn more about the contract storage layout in the [Starknet Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)
 
 ### Reading from Storage
-The values of storage variables can be read and modified using the `read` and `write` methods respectively.
 
-To read the value of the storage variable `names`, we call the `read` method on the `names` storage variable, passing in the key `_address` as a parameter.
+To read the value of the storage variable `names`, we call the `read` function on the `names` storage variable, passing in the key `_address` as a parameter.
+
+```rust
+fn read(key: ContractAddress) -> felt252 {
+```
 
 ```rust
 let name = names::read(_address);
 ```
 
-We call the `read` method on the `names` storage variable, passing in the key `_address` into parentheses.
+<span class="caption">Listing 9-3: The `read` function signature for our Example contract and how to use it</span>
 
-```rust
-fn read(key: felt252) -> felt252;
-```
-
-<span class="caption">Listing 9-3: The `read` method function signature</span>
-
-*NB: When the storage variable does not store a mapping, it's value is accessed without passing any parameters to the `read` method*
+> Note: When the storage variable does not store a mapping, its value is accessed without passing any parameters to the read method
 
 ### Writing to Storage
-Writing to storage variables can be done using the `write` StorageAccess method:
+
+To write a value to the storage variable `names`, we call the `write` function on the `names` storage variable, passing in the key and values as arguments.
+
+```rust
+fn write(key: ContractAddress, value: felt252);
+```
 
 ```rust
 names::write(_address, _name);
 ```
 
-We call the `write` method on the `names` storage variable, passing in the key and values into the parentheses.
-
-```rust
-fn write(value: felt252);
-```
-
-<span class="caption">Listing 9-3: The `write` method function signature</span>
+<span class="caption">Listing 9-4: The `write` method function signature for our Example contract and how to use it</span>
 
 ## Functions
+
 In this section, we are going to be looking at some popular function types you'd encounter with most contracts:
 
 ### 1. Constructors
-Constructors are a special type of function that runs when deploying a contract, and can be used to initialize certain storage variables on deployment:
+
+Constructors are a special type of function that runs only once when deploying a contract, and can be used to initialize the state of the contract.
 
 ```rust
 #[constructor]
@@ -146,13 +155,15 @@ fn constructor(_name: felt252, _address: ContractAddress){
 ```
 
 Some important rules to note:
+
 1. Your contract can't have more than one constructor.
-3. Your constructor function must be named `constructor`.
-4. Finally it should be annotated with the `#[constructor]` decorator.
+2. Your constructor function must be named `constructor`.
+3. Lastly, it must be annotated with the `#[constructor]` attribute.
 
 ### 2. External functions
-External functions are functions which modifies the state of the blockchain. They are public by default, and can be interacted with by anyone. 
-You can create external functions by annotating functions with the `#[external]` attribute:
+
+External functions are functions that can modify the state of a contract. They are public and can be called by any other contract or externally.
+You can define external functions by annotating them with the `#[external]` attribute:
 
 ```rust
 #[external]
@@ -164,7 +175,9 @@ fn store_name(_name: felt252){
 ```
 
 ### 3. View functions
-View functions are read-only functions, they do not modify the state of the blockchain. They are specified using the `#[view]` attribute, and are public by default:
+
+View functions are read-only functions allowing you to access data from the contract while ensuring that the state of the contract is not modified. They can be called by other contracts or externally.
+You can define view functions by annotating them with the `#[view]` attribute:
 
 ```rust
 #[view]
@@ -174,25 +187,32 @@ fn get_name(_address:ContractAddress) -> felt252{
 }
 ```
 
-**NB:** It's important to note that, both external and view functions are public by default on Starknet. To create an internal function, you simply need to avoid specifying any attribute for that function.
+> **NB:** It's important to note that, both external and view functions are public. To create an internal function in a contract, you simply don't annotate it with any attribute.
 
 ## Events
-Events are custom data structures that are emitted by smart contracts during execution. They provide a way for smart contracts to communicate with the external world by logging information about specific events.
+
+Events are custom data structures that are emitted by smart contracts during execution.
+They provide a way for smart contracts to communicate with the external world by logging information
+about specific occurences in a contract.
 
 ### Defining events
-An event is an empty function annotated with the `#[event]` attribute. 
 
-In Listing 9-1, `StoredName` is an event that emits information about names stored in the contract:
+An event is defined as an empty function annotated with the `#[event]` attribute. The parameters of this function
+are the data that will be emitted by the event.
+
+In Listing 9-1, `StoredName` is an event that emits information when names are stored in the contract:
 
 ```rust
 #[event]
 fn StoredName(caller: ContractAddress, name:felt252){}
 ```
 
-we pass in the values to be emitted and their corresponding data types as argument within the parentheses.
+we pass in the emitted data types as parameters within the parentheses. In this example, our event will emit the contract address of the caller and the name stored within the contract.
 
 ### Emitting events
-After defining events, we can emit them by simply calling the event name like we'll call functions:
+
+After defining events, we can emit them by simply calling the event name like we'll call functions,
+passing in the values to be emitted as parameters:
 
 ```rust
 StoredName(caller,_name);
