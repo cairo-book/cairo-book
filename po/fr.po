@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2023-05-08 15:35-0300\n"
-"Last-Translator: dami <pinonesdamian@gmail.com>\n"
+"Last-Translator: glihm <dev@glihm.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/SUMMARY.md:1
 msgid "The Cairo Programming Language"
-msgstr "Le langage de programmation Cairo AHAHAH"
+msgstr "Le langage de programmation Cairo"
 
 #: src/SUMMARY.md:4
 msgid "Foreword"
@@ -189,7 +189,7 @@ msgstr ""
 
 #: src/title-page.md:1
 msgid "# The Cairo Programming Language"
-msgstr ""
+msgstr "# Le langage de programmation Cairo"
 
 #: src/title-page.md:3
 msgid ""
@@ -197,14 +197,18 @@ msgid ""
 "cairo-book.github.io). Special thanks to [Starkware](https://starkware.co/) "
 "through [OnlyDust](https://www.onlydust.xyz/), and [Voyager](https://voyager."
 "online/) for supporting the creation of this book."
-msgstr ""
+msgstr "par la communauté de Cairo et ses [contributeurs](https://github.com/cairo-book/"
+"cairo-book.github.io). Remerciements tout particuliers à [Starkware](https://starkware.co/) "
+"via [OnlyDust](https://www.onlydust.xyz/), et [Voyager](https://voyager."
+"online/) pour soutenir la rédaction de ce livre."
 
 #: src/title-page.md:5
 msgid ""
 "This version of the text assumes you’re using Cairo v1.0.0-alpha.7 (released "
 "2023-04-13). See the “Installation” section of Chapter 1 to install or "
 "update Cairo."
-msgstr ""
+msgstr "La version actuelle considère que vous utilisez Cairo v1.0.0-alpha.7 (version 2023-04-13). "
+"Se référer à la section “Installation” du chapitre 1 pour installer ou actualiser Cairo."
 
 #: src/ch00-01-foreword.md:1
 msgid "# Foreword"
@@ -218,7 +222,11 @@ msgid ""
 "Cairo 0.x was a low-level language that did not entirely abstract the "
 "underlying cryptographic primitives required to build a proof for the "
 "execution of a program."
-msgstr ""
+msgstr "En 2020, StarkWare publiait Cairo 0, un langage de programmation Turing-complet "
+"supportant la computation vérifiable (verifiable computation). Cairo a démarré comme langage assembleur "
+"et a progressivement évolué pour devenir plus expressif. La courbe d'apprentissage était initialement forte, "
+"car Cairo 0.x était un langage bas niveau qui n'apportait qu'une faible abstraction des primitives cryptographiques "
+"requises pour calculer une preuve de l'exécution d'un programme."
 
 #: src/ch00-01-foreword.md:5
 msgid ""
@@ -230,7 +238,13 @@ msgid ""
 "increasing the overall security of Cairo programs. Powered by a Rust VM, the "
 "execution of Cairo programs is now _blazingly_ fast, allowing you to build "
 "an extensive test suite without compromising on performance."
-msgstr ""
+msgstr "Avec la sortie de Cairo 1, l'expérience proposée aux développeur est désormais améliorée, "
+"avec une abstraction du modèle de mémoire immuable de l'architecture Cairo dès que possible. "
+"Fortement inspiré de Rust, Cairo 1 a été construit pour vous aider à créer des programmes prouvables "
+"sans connaissance particulière de l'architecture sous-jacente pour ainsi vous focaliser sur le programme en lui même, "
+"ce qui permet de renforcer la sécurité des programmes écrits en Cairo. "
+"Basée sur une VM en Rust, l'exécution des programmes Cairo est maintenant _incroyablement_ rapide, vous permettant "
+"d'ajouter des jeux de tests étendus sans compromettre les performances."
 
 #: src/ch00-01-foreword.md:7
 msgid ""
@@ -239,7 +253,10 @@ msgid ""
 "Starknet OS to generate execution traces for transactions to be proved by a "
 "prover, which is then verified on Ethereum L1 prior to updating the state "
 "root of Starknet."
-msgstr ""
+msgstr "Les développeurs blockchain qui souhaitent déployer des contrats sur Starknet "
+"utiliseront le langage de programmation Cairo pour écrire leurs contrats intelligents. "
+"Ceci permet au Starknet OS de générer des traces d'exécution pour les transactions afin "
+"d'être prouvées par un prouveur, pour ensuite être vérifiées sur Ethereum L1 avant d'actualiser l'état de Starknet."
 
 #: src/ch00-01-foreword.md:9
 msgid ""
@@ -247,7 +264,10 @@ msgid ""
 "programming language, it can be used for any computation that would benefit "
 "from being proved on one computer and verified on other machines with lower "
 "hardware requirements."
-msgstr ""
+msgstr "Cependant, Cairo n'est pas seulement dédié aux développeurs blockchain. "
+"En tant que langage de programmation généraliste, Cairo peut être utilisé pour tout type"
+" de calculs au bénéfice d'être prouvé par un ordinateur et vérifé par un autre ordinateur avec"
+" des prérequis matériels beaucoup moins importants."
 
 #: src/ch00-01-foreword.md:11
 msgid ""
@@ -256,11 +276,13 @@ msgid ""
 "help you level up your knowledge of Cairo, but also help you develop your "
 "programming skills in general. So, dive in and get ready to learn all there "
 "is to know about Cairo!"
-msgstr ""
+msgstr "Ce livre a pour cible des développeurs avec une connaissance basique de programmation. "
+"La rédaction accessible et compréhensive du contenu vous aidera à augmenter vos connaissances de Cairo, "
+"mais aussi vos compétences de programmation en général. Lancez vous pour tout savoir sur Cairo !"
 
 #: src/ch00-01-foreword.md:13
 msgid "— The Cairo community"
-msgstr ""
+msgstr "— La communauté Cairo"
 
 #: src/ch00-00-introduction.md:1
 msgid "# Introduction"
