@@ -58,12 +58,6 @@
   - [Generic Functions](ch07-01-generic-data-types.md)
   - [Traits in Cairo](ch07-02-traits-in-cairo.md)
 
-## Error Handling
-
-- [Error Handling](ch09-00-error-handling.md)
-
-  - [Recoverable Errors with Result](ch09-01-error-handling.md)
-
 ## Testing Cairo Programs
 
 - [Testing Cairo Programs](ch08-00-testing-cairo-programs.md)
@@ -71,12 +65,17 @@
   - [How To Write Tests](ch08-01-how-to-write-tests.md)
   - [Testing Organization](ch08-02-test-organization.md)
 
+## Error Handling
+- [Error Handling](ch09-00-error-handling.md)
+  - [Unrecoverable Errors with panic](ch09-01-unrecoverable-errors-with-panic.md)
+  - [Recoverable Errors with Result](ch09-02-error-handling.md)
+
 ## ABIs and Cross-contract Interactions
 
-- [Starknet Smart Contracts](./ch09-starknet-smart-contracts.md)
-  - [ABIs and Cross-contract Interactions](./ch09-00-00-abis-and-cross-contract-interactions.md)
-    - [ABIs and Interfaces](./ch09-00-01-abis-and-interfaces.md)
-    - [Contract Dispatchers, Library Dispachers and system calls](./ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+- [Starknet Smart Contracts](./ch99-starknet-smart-contracts.md)
+  - [ABIs and Cross-contract Interactions](./ch99-00-00-abis-and-cross-contract-interactions.md)
+    - [ABIs and Interfaces](./ch99-00-01-abis-and-interfaces.md)
+    - [Contract Dispatchers, Library Dispachers and system calls](./ch99-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
 
 - [Appendix](appendix-00.md)
   - [A - Useful Development Tools](appendix-04-useful-development-tools.md)
