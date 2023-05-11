@@ -51,6 +51,7 @@
   - [Paths for Referring to an Item in the Module Tree](ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md)
   - [Bringing Paths into Scope with the 'use' Keyword](ch06-04-bringing-paths-into-scope-with-the-use-keyword.md)
   - [Separating Modules into Different Files](ch06-05-separating-modules-into-different-files.md)
+
 ## Generic Data Types
 
 - [Generic Types](ch07-00-generic-types-and-traits.md)
@@ -66,16 +67,19 @@
   - [Testing Organization](ch08-02-test-organization.md)
 
 ## Error Handling
+
 - [Error Handling](ch09-00-error-handling.md)
   - [Unrecoverable Errors with panic](ch09-01-unrecoverable-errors-with-panic.md)
   - [Recoverable Errors with Result](ch09-02-error-handling.md)
 
-## ABIs and Cross-contract Interactions
+## Starknet smart contracts
 
-- [Starknet Smart Contracts](./ch99-starknet-smart-contracts.md)
-  - [ABIs and Cross-contract Interactions](./ch99-00-00-abis-and-cross-contract-interactions.md)
-    - [ABIs and Interfaces](./ch99-00-01-abis-and-interfaces.md)
-    - [Contract Dispatchers, Library Dispachers and system calls](./ch99-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+- [Starknet Smart Contracts](./ch99-00-starknet-smart-contracts.md)
+
+  - [Writing Starknet Contracts](./ch99-01-writing-starknet-contracts.md)
+  - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
+    - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
+    - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
 
 - [Appendix](appendix-00.md)
   - [A - Useful Development Tools](appendix-04-useful-development-tools.md)

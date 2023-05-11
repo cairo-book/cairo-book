@@ -5,6 +5,7 @@ Cross-contract interactions between smart contracts on a blockchain is a common 
 Achieving this on Starknet requires something we call an interface.
 
 ## Interface
+
 An interface is a list of a contract's function definitions without implementations. In other words, an interface specifies the function declarations (name, parameters, visibility and return value) contained in a smart contract without including the function body.
 
 Interfaces in Cairo are traits with the `#[abi]` attribute. If you are new to traits, check out the dedicated chapter on [traits](./ch07-02-traits-in-cairo.md).
@@ -56,6 +57,7 @@ trait IERC20 {
 <span class="caption">Listing 9-1: A simple ERC20 Interface</span>
 
 ## ABIs
+
 ABI stands for Application Binary Interface. ABIs gives a smart contract the ability to communicate and interact with external applications or other smart contracts. ABIs can be likened to APIs in traditional web development, which helps data flow between applications and servers.
 
 While we write our smart contract logics in high-level Cairo, they are stored on the VM as executable bytecodes which are in binary formats. Since this bytecode is not human readable, it requires interpretation to be understood. This is where ABIs come into play, defining specific methods which can be called to a smart contract for execution.
