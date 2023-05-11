@@ -114,14 +114,10 @@ is the Pedersen hash and the final value is taken `mod2251−256`. You can learn
 To read the value of the storage variable `names`, we call the `read` function on the `names` storage variable, passing in the key `_address` as a parameter.
 
 ```rust
-fn read(key: ContractAddress) -> felt252 {
-```
-
-```rust
 let name = names::read(_address);
 ```
 
-<span class="caption">Listing 9-3: The `read` function signature for our Example contract and how to use it</span>
+<span class="caption">Listing 9-3: Calling the `read` function on the `names` variable</span>
 
 > Note: When the storage variable does not store a mapping, its value is accessed without passing any parameters to the read method
 
@@ -130,14 +126,10 @@ let name = names::read(_address);
 To write a value to the storage variable `names`, we call the `write` function on the `names` storage variable, passing in the key and values as arguments.
 
 ```rust
-fn write(key: ContractAddress, value: felt252);
-```
-
-```rust
 names::write(_address, _name);
 ```
 
-<span class="caption">Listing 9-4: The `write` method function signature for our Example contract and how to use it</span>
+<span class="caption">Listing 9-4: Writing to the `names` variable</span>
 
 ## Functions
 
@@ -195,6 +187,8 @@ Events are custom data structures that are emitted by smart contracts during exe
 They provide a way for smart contracts to communicate with the external world by logging information
 about specific occurences in a contract.
 
+Events play a crucial role in the creation of smart contracts. Take, for instance, the Non-Fungible Tokens (NFTs) minted on Starknet. All of these are indexed and stored in a database, then displayed to users through the use of these events. Neglecting to include an event within your NFT contract could lead to a bad user experience. This is because users may not see their NFTs appear in their wallets (wallets use these indexers to display a user's NFTs).
+
 ### Defining events
 
 An event is defined as an empty function annotated with the `#[event]` attribute. The parameters of this function
@@ -207,7 +201,7 @@ In Listing 9-1, `StoredName` is an event that emits information when names are s
 fn StoredName(caller: ContractAddress, name:felt252){}
 ```
 
-we pass in the emitted data types as parameters within the parentheses. In this example, our event will emit the contract address of the caller and the name stored within the contract.
+We pass in the emitted data types as parameters within the parentheses. In this example, our event will emit the contract address of the caller and the name stored within the contract.
 
 ### Emitting events
 
