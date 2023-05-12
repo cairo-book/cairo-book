@@ -53,7 +53,6 @@ They have the same restrictions as strict keywords.
 The reasoning behind this is to make current programs forward compatible with future versions of
 Cairo by forbidding them to use these keywords.
 
-- `as`
 - `assert`
 - `do`
 - `dyn`
