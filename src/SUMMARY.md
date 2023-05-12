@@ -76,7 +76,8 @@
 
 - [Starknet Smart Contracts](./ch99-00-starknet-smart-contracts.md)
 
-  - [Writing Starknet Contracts](./ch99-01-writing-starknet-contracts.md)
+  - [Introduction to smart-contracts](./ch99-01-01-introduction-to-smart-contracts.md)
+  - [Writing Starknet Contracts](./ch99-01-02-writing-starknet-contracts.md)
   - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
     - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
