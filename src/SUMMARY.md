@@ -83,3 +83,4 @@
 
 - [Appendix](appendix-00.md)
   - [A - Useful Development Tools](appendix-04-useful-development-tools.md)
+  - [B - Cairo Most Common Types and Traits](appendix-05-most-common-types-and-traits)
