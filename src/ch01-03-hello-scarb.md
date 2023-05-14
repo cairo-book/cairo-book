@@ -81,7 +81,7 @@ The last line, `[dependencies]`, is the start of a section for you to list any o
 
 The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
-```rust
+```rust,file=hello_scarb.cairo
 mod hello_scarb;
 ```
 

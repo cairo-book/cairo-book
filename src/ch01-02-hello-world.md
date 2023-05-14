@@ -51,7 +51,7 @@ Now open the _main.cairo_ file you just created and enter the code in Listing 1-
 
 <span class="filename">Filename: main.cairo</span>
 
-```rust
+```rust,file=hello_world.cairo
 use debug::PrintTrait;
 fn main() {
     'Hello, world!'.print();
