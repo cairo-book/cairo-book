@@ -81,7 +81,7 @@ The last line, `[dependencies]`, is the start of a section for you to list any o
 
 The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
-```rust,file=hello_scarb.cairo
+```rust
 mod hello_scarb;
 ```
 
@@ -89,7 +89,7 @@ Then create a new file called `src/hello_scarb.cairo` and put the following code
 
 <span class="filename">Filename: src/hello_scarb.cairo</span>
 
-```rust
+```rust,file=hello_scarb.cairo
 use debug::PrintTrait;
 fn main() {
     'Hello, Scarb!'.print();
