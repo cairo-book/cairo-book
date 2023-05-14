@@ -49,9 +49,16 @@ jobs:
               echo "::group::Building $po_lang translation"
               MDBOOK_BOOK__LANGUAGE=$po_lang \
               mdbook build -d book/$po_lang
-              ls book/$po_lang
+              mv book/$po_lang/html book/html/$po_lang
               echo "::endgroup::"
           done
+
+      - name: Verify Cairo programs
+        uses: ./.github/workflows/verify-cairo-programs
+
+      - name: Generate job summary
+        shell: bash
+        run: cat book/cairo/cairo-programs/summary.md >> $GITHUB_STEP_SUMMARY
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -59,7 +66,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./book
+          path: ./book/html
 
       - name: Deploy to GitHub Pages
         id: deployment
