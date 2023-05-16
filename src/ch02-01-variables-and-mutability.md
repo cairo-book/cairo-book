@@ -16,7 +16,7 @@ code with the following code, which won’t compile just yet:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,does_not_compile
 use debug::PrintTrait;
 fn main() {
     let x = 5;
