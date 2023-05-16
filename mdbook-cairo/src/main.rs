@@ -3,17 +3,32 @@ use std::fs::{create_dir_all, remove_dir_all, File};
 use std::io::{self, Write};
 use std::path::Path;
 use mdbook::renderer::RenderContext;
-use mdbook::book::{Book, BookItem};
+use mdbook::book::{Book, BookItem, Chapter};
 use pulldown_cmark::{Event, Parser, Tag, CodeBlockKind};
+use regex::Regex;
+use lazy_static::lazy_static;
 
 /// The table header expected in book.toml.
 const CAIRO_CONFIG_TABLE_HEADER: &str = "output.cairo";
+
+/// An attribute added to a code block tag to ignore
+/// the code extraction.
+const CODE_BLOCK_DOES_NOT_COMPILE: &str = "does_not_compile";
+
+/// Main function expected in a code block to be a candidate
+/// for the code extraction.
+const CODE_BLOCK_MAIN_FUNCTION: &str = "fn main()";
 
 /// Struct mapping fields expected in [output.cairo] from book.toml.
 #[derive(Debug, Default, Serialize, Deserialize)]
 #[serde(default, rename_all = "kebab-case")]
 pub struct CairoConfig {
   pub output_dir: String,
+}
+
+// Statically initialize the regex to avoid rebuiling at each loop iteration.
+lazy_static! {
+    static ref REGEX: Regex = Regex::new(r"^ch(\d{2})-(\d{2})-(.*)$").expect("Failed to create regex");
 }
 
 /// Backend entry point, which received the mdbook content directly from stdin.
@@ -50,52 +65,64 @@ fn main() {
 fn process_chapters(book: &Book, output_dir: &Path) {
     for item in book.iter() {
         if let BookItem::Chapter(chapter) = item {
-            process_content(output_dir, &chapter.content);
+            if let Some(chapter_prefix) = chapter_prefix_from_name(chapter) {                
+                process_chapter(output_dir, &chapter_prefix, &chapter.content);
+            }
         }
     }
 }
 
+/// Extract the prefix of the chapter from filename string.
+fn chapter_prefix_from_name(chapter: &Chapter) -> Option<String> {
+    if let Some(p) = &chapter.path {
+        let file_name = p.to_string_lossy().to_string();
+
+        if let Some(groups) = REGEX.captures(&file_name) {
+            if let (Some(c), Some(s)) = (groups.get(1), groups.get(2)) {
+                let c = c.as_str();
+                let s = s.as_str();
+                return Some(format!("ch{}-{}", c, s));
+            }
+        }
+    }
+
+    None
+}
+
 /// Processes the content of a chapter to parse code blocks and write them to a file.
-fn process_content(output_dir: &Path, content: &str) {
+fn process_chapter(output_dir: &Path, prefix: &str, content: &str) {
     let parser = Parser::new(content);
 
-    let mut current_file: Option<File> = None;
+    let mut program_counter = 1;
+    let mut in_code_block = false;
+    let mut is_compilable = false;
 
     for event in parser {
         match event {
             Event::Start(Tag::CodeBlock(x)) => {
-                if let CodeBlockKind::Fenced(v) = x {
-                    if let Some(file_name) = filename_from_tag_value(v.to_string()) {
-                        current_file = Some(
-                            File::create(&output_dir.join(file_name))
-                                .expect("Failed to create file.")
-                        );
-                    }
+                in_code_block = true;
+
+                if let CodeBlockKind::Fenced(tag_value) = x {
+                    is_compilable = !tag_value.to_string().contains(CODE_BLOCK_DOES_NOT_COMPILE);
                 }
             }
             Event::Text(text) => {
-                if let Some(output_file) = &mut current_file {
-                    output_file.write(text.as_bytes())
-                        .expect("Can't write to file.");
+
+                if in_code_block && text.contains(CODE_BLOCK_MAIN_FUNCTION) && is_compilable {
+                    let file_name = format!("{}-{}.cairo", prefix, program_counter);
+                    let file_dir = &output_dir.join(file_name);
+                    let mut file = File::create(file_dir).expect("Failed to create file.");
+
+                    file.write(text.as_bytes()).expect("Can't write to file.");
+
+                    program_counter += 1;
                 }
             }
             Event::End(Tag::CodeBlock(_)) => {
-                current_file = None;
+                in_code_block = false;
             }
             _ => {}
         }
     }
 }
 
-/// Extracts the `file=` attribute from fenced code block tag value.
-/// The `file=` attribute MUST be the last one of the list, withtout
-/// trailing comma.
-fn filename_from_tag_value(tag_value: String) -> Option<String> {
-    // split_once is used as file= is supposed to be the last attribute
-    // with at least the language (rust usually) in the attribute list.
-    // TODO: rework for something more robust with regexp or similar.
-    match tag_value.split_once("file=") {
-        None => None,
-        Some(t) => Some(String::from(t.1))
-    }
-}
