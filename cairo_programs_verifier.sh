@@ -24,11 +24,12 @@ for prog in *.cairo; do
   o="$(echo $e | sed 's/  \+/ /g')"
 
   err="$(cat output/$prog.err)"
+  err2="$(printf '%s' "$err" | sed 's/\\n/<br>/g')"
 
   if [ $compile_code -eq 0 ]; then
       echo "| $prog | :heavy_check_mark: |  |"
   else
-      echo "| $prog | :x: | <pre>$err</pre> |"
+      echo "| $prog | :x: | <pre>$err2</pre> |"
   fi
 
 done
