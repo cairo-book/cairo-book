@@ -14,19 +14,21 @@ echo "| Cairo program | Result | Logs |"
 echo "| :-----------: | :----: | :--- |"
 
 for prog in *.cairo; do
-  cairo-run "$prog" > output/"$prog".out 2>&1
+  cairo-run "$prog" > output/"$prog".out 2> output/"$prog".err
 
   compile_code="$?"
 
   o="$(cat output/$prog.out)"
   # remove new lines and extra spaces.
-  e="${o//$'\n'/' '}"
-  e="$(echo $e | sed 's/  \+/ /g')"
+  o="${o//$'\n'/' '}"
+  o="$(echo $e | sed 's/  \+/ /g')"
+
+  err="$(cat output/$prog.err)"
 
   if [ $compile_code -eq 0 ]; then
       echo "| $prog | :heavy_check_mark: |  |"
   else
-      echo "| $prog | :x: | <pre>$e</pre> |"
+      echo "| $prog | :x: | <pre>$err</pre> |"
   fi
 
 done
