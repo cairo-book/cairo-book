@@ -24,7 +24,7 @@ for prog in *.cairo; do
   e="$(echo $e | sed 's/  \+/ /g')"
 
   if [ $compile_code -eq 0 ]; then
-      echo "| $prog | :heavy_check_mark: | <pre>$e</pre> |"
+      echo "| $prog | :heavy_check_mark: |  |"
   else
       echo "| $prog | :x: | <pre>$e</pre> |"
   fi
