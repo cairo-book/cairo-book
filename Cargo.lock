@@ -877,8 +877,10 @@ dependencies = [
 name = "mdbook-cairo"
 version = "0.1.0"
 dependencies = [
+ "lazy_static",
  "mdbook",
  "pulldown-cmark",
+ "regex",
  "serde",
  "serde_derive",
 ]
