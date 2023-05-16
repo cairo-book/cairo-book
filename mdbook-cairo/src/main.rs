@@ -81,7 +81,7 @@ fn chapter_prefix_from_name(chapter: &Chapter) -> Option<String> {
             if let (Some(c), Some(s)) = (groups.get(1), groups.get(2)) {
                 let c = c.as_str();
                 let s = s.as_str();
-                return Some(format!("ch{}-{}", c, s));
+                return Some(format!("ch{}_{}", c, s));
             }
         }
     }
@@ -109,7 +109,7 @@ fn process_chapter(output_dir: &Path, prefix: &str, content: &str) {
             Event::Text(text) => {
 
                 if in_code_block && text.contains(CODE_BLOCK_MAIN_FUNCTION) && is_compilable {
-                    let file_name = format!("{}-{}.cairo", prefix, program_counter);
+                    let file_name = format!("{}_{}.cairo", prefix, program_counter);
                     let file_dir = &output_dir.join(file_name);
                     let mut file = File::create(file_dir).expect("Failed to create file.");
 
