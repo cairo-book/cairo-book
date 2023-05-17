@@ -34,11 +34,11 @@ for prog in *.cairo; do
 
       if [ "$IS_RUN_LOCALLY" = true ]; then
           echo -e "\n---- ${RED}${prog}${NC} ----\n"
+          echo "$err"
       else
           echo ":x: **$prog**"
+          echo "<pre>$err</pre>"
       fi
-
-      echo "<pre>$err</pre>"
 
       echo ""
       echo "---  "
