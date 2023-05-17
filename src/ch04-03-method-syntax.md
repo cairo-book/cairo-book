@@ -134,7 +134,7 @@ the program shown in Listing 5-14.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,does_not_compile
 use debug::PrintTrait;
 #[derive(Copy, Drop)]
 struct Rectangle {

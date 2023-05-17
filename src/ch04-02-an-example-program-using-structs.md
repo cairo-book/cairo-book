@@ -105,7 +105,7 @@ It’d be useful to be able to print an instance of `Rectangle` while we’re de
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,does_not_compile
 use debug::PrintTrait;
 
 struct Rectangle {

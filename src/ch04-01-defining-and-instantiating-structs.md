@@ -49,7 +49,7 @@ To get a specific value from a struct, we use dot notation. For example, to acce
 
 <span class="filename">Filename: structs.cairo</span>
 
-```rust
+```rust,does_not_compile
 fn main() {
     let mut user1 = User {
         active: true,
