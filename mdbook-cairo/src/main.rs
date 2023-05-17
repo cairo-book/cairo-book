@@ -108,13 +108,19 @@ fn process_chapter(output_dir: &Path, prefix: &str, content: &str) {
             }
             Event::Text(text) => {
 
-                if in_code_block && text.contains(CODE_BLOCK_MAIN_FUNCTION) && is_compilable {
-                    let file_name = format!("{}_{}.cairo", prefix, program_counter);
-                    let file_dir = &output_dir.join(file_name);
-                    let mut file = File::create(file_dir).expect("Failed to create file.");
+                if in_code_block && text.contains(CODE_BLOCK_MAIN_FUNCTION) {
 
-                    file.write(text.as_bytes()).expect("Can't write to file.");
+                    if is_compilable {
+                        let file_name = format!("{}_{}.cairo", prefix, program_counter);
+                        let file_dir = &output_dir.join(file_name);
+                        let mut file = File::create(file_dir).expect("Failed to create file.");
+                        
+                        file.write(text.as_bytes()).expect("Can't write to file.");
+                    }
 
+                    // To facilitate the debugging, we always increment the counter when a
+                    // main function is found in a code block. This helps contributors to
+                    // easily locate the code, without having to skip the `does_not_compile` blocks.
                     program_counter += 1;
                 }
             }
