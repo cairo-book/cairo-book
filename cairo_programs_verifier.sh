@@ -7,7 +7,7 @@ rm -rf output/*
 echo "# Cairo program verifier"
 echo ""
 echo "The list of cairo programs below is auto-generated from the markdown sources.  "
-echo "Any code block with a main function will be compiled (except if the attribute `does_not_compile` is manually added)."
+echo "Any code block with a main function will be compiled (except if the attribute does_not_compile is manually added)."
 echo ""
 
 has_error=false
