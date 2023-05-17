@@ -56,10 +56,6 @@ jobs:
       - name: Verify Cairo programs
         uses: ./.github/workflows/verify-cairo-programs
 
-      - name: Generate job summary
-        shell: bash
-        run: cat book/cairo/cairo-programs/summary.md >> $GITHUB_STEP_SUMMARY
-
       - name: Setup Pages
         uses: actions/configure-pages@v3
 

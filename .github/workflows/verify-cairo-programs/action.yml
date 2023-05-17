@@ -17,3 +17,8 @@ runs:
         options: -v ${{ github.workspace }}/book/cairo/cairo-programs:/cairo
         run: |
           sh /cairo/cairo_programs_verifier.sh > /cairo/summary.md
+
+    - name: Generate job summary
+      shell: bash
+      run: cat book/cairo/cairo-programs/summary.md >> $GITHUB_STEP_SUMMARY
+      if: always()
