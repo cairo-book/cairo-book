@@ -83,5 +83,6 @@
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
 
 - [Appendix](appendix-00.md)
+  - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
   - [C - Derivable Traits](appendix-03-derivable-traits.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
