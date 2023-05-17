@@ -40,8 +40,10 @@ done
 
 if [ "$has_error" = false ] ; then
     echo ":heavy_check_mark: All Cairo programs were compiled successfully."
+    echo ""
+    exit 0
 else
     echo ":x: Some Cairo programs have errors, please check the list above."    
+    echo ""
+    exit 1
 fi
-
-echo ""
