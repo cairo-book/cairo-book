@@ -13,3 +13,6 @@ after = ["links"]
 
 [output.html.playground]
 runnable = false
+
+[output.cairo]
+output-dir = "cairo-programs"

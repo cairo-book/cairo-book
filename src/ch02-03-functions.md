@@ -153,7 +153,7 @@ statement in itself.
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
-```rust
+```rust,does_not_compile
 fn main() {
     let x = (let y = 6);
 }
@@ -281,7 +281,7 @@ Running this code will print `[DEBUG]                    (raw: 6)`. But if we pl
 semicolon at the end of the line containing `x + 1`, changing it from an
 expression to a statement, we’ll get an error:
 
-```rust
+```rust,does_not_compile
 use debug::PrintTrait;
 
 fn main() {

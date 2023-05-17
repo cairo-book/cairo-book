@@ -16,7 +16,7 @@ code with the following code, which won’t compile just yet:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,does_not_compile
 use debug::PrintTrait;
 fn main() {
     let x = 5;
@@ -220,7 +220,7 @@ Shadowing thus spares us from having to come up with different names, such as `x
 and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try to use
 `mut` for this, as shown here, we’ll get a compile-time error:
 
-```rust
+```rust,does_not_compile
 use debug::PrintTrait;
 use traits::Into;
 fn main() {

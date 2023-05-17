@@ -110,7 +110,7 @@ Listing 3-6. Spoiler alert: it doesn’t work!
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,does_not_compile
 #[derive(Copy,Drop)]
 struct Rectangle {
     height: u64,

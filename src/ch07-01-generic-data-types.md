@@ -6,7 +6,7 @@ We use generics to create definitions for item declarations, such as structs and
 
 When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two `Array` of items, will return the largest one. If we need to perform this operations for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.
 
-```rust
+```rust,does_not_compile
 // This code does not compile!
 
 use array::ArrayTrait;
@@ -57,7 +57,7 @@ When defining generic types, it is useful to have information about them. Knowin
 
 Imagine that we want, given a list of elements of some generic type `T`, find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
 
-```rust
+```rust,does_not_compile
 // This code does not compile!
 use array:ArrayTrait;
 
@@ -120,7 +120,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, imp
 
 We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition `Wallet<T>` which has a `balance` field of type `T`.
 
-```rust
+```rust,does_not_compile
 // This code does not compile!
 
 #[derive(Drop)]

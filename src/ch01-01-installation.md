@@ -17,7 +17,7 @@ Install [Git](https://git-scm.com/).
 
 ### Install
 
-If you wish to install a specific release of Cairo rather than the latest head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export CAIRO_GIT_TAG=v1.0.0-alpha.6`).
+If you wish to install a specific release of Cairo rather than the latest head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export CAIRO_GIT_TAG=v1.0.0`).
 
 ```bash 
 curl -L https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | bash
@@ -154,7 +154,7 @@ git fetch --all --tags
 # View tags (you can also do this in the cairo compiler repository)
 git describe --tags `git rev-list --tags`
 # Checkout the version you want
-git checkout tags/v1.0.0-alpha.6
+git checkout tags/v1.0.0
 
 # Generate release binaries
 cargo build --all --release

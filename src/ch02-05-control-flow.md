@@ -129,7 +129,7 @@ like this:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,ignore
+```rust,ignore,does_not_compile
 use debug::PrintTrait;
 fn main() {
     let mut i:usize = 0;
