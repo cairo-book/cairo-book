@@ -8,7 +8,7 @@ Here is how we can `panic` from inside a program and return the error code `2`:
 
 <span class="filename">Filename: lib.cairo</span>
 
-```rust
+```rust,does_not_compile
 use array::ArrayTrait;
 use debug::PrintTrait;
 
