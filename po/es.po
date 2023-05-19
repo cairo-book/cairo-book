@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-05-11 10:43+0100\n"
+"PO-Revision-Date: 2023-05-19 09:54+0100\n"
 "Last-Translator: dami <pinonesdamian@gmail.com>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
 "Language: es\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: src/SUMMARY.md:1
 msgid "The Cairo Programming Language"
@@ -161,9 +161,8 @@ msgid "Error Handling"
 msgstr "Gestión de Errores"
 
 #: src/SUMMARY.md:72
-#, fuzzy
 msgid "Unrecoverable Errors with panic"
-msgstr "Errores Recuperables con Resultados"
+msgstr "Errores Irrecuperables con pánico"
 
 #: src/SUMMARY.md:73
 msgid "Recoverable Errors with Result"
@@ -174,9 +173,8 @@ msgid "Starknet Smart Contracts"
 msgstr "Starknet Smart Contracts"
 
 #: src/SUMMARY.md:79
-#, fuzzy
 msgid "Writing Starknet Contracts"
-msgstr "# Contratos Inteligentes en Starknet"
+msgstr "Escribiendo Contratos en Starknet"
 
 #: src/SUMMARY.md:80
 msgid "ABIs and Cross-contract Interactions"
@@ -729,8 +727,8 @@ msgstr ""
 "target/release:$PATH\"' >> ~/.bashrc\n"
 "  ~~~\n"
 "\n"
-"Entonces, si tiene `~/.profile`, `~/.bash_profile` o `~/.bash_login`, "
-"añada también allí los comandos.\n"
+"Entonces, si tiene `~/.profile`, `~/.bash_profile` o `~/.bash_login`, añada "
+"también allí los comandos.\n"
 "Si no tienes ninguno de estos, añádelos a `~/.profile`.\n"
 "\n"
 "  * Para añadir a `~/.profile`:\n"
@@ -1713,9 +1711,9 @@ msgid ""
 "\"hello_scarb\" module."
 msgstr ""
 "Acabamos de crear un archivo llamado `lib.cairo`, que contiene una "
-"declaración de módulo que hace referencia a otro módulo llamado "
-"\"hello_scarb\", así como el archivo `hello_scarb.cairo`, que contiene los "
-"detalles de implementación del módulo \"hello_scarb\"."
+"declaración de módulo que hace referencia a otro módulo llamado \"hello_scarb"
+"\", así como el archivo `hello_scarb.cairo`, que contiene los detalles de "
+"implementación del módulo \"hello_scarb\"."
 
 #: src/ch01-03-hello-scarb.md:101
 msgid ""
@@ -2556,7 +2554,6 @@ msgstr ""
 "esas transformaciones."
 
 #: src/ch02-01-variables-and-mutability.md:199
-#, fuzzy
 msgid ""
 "Another distinction between `mut` and shadowing is that when we use the "
 "`let` keyword again,\n"
@@ -2571,17 +2568,18 @@ msgid ""
 "conversion between the\n"
 "`u64` and `felt252` types."
 msgstr ""
-"Otra diferencia entre `mut` y el sombreado es que al usar la palabra clave "
-"`let` nuevamente, \n"
-"estamos creando efectivamente una nueva variable, lo que nos permite cambiar "
-"el tipo del valor \n"
-"mientras reutilizamos el mismo nombre. Como se mencionó antes, el sombreado "
-"de variables y las \n"
-"variables mutables son equivalentes a un nivel más bajo. \n"
-"La única diferencia es que al sombrear una \n"
-"variable, el compilador no se quejará si cambia su tipo. Por ejemplo, "
-"digamos que nuestro programa \n"
-"realiza una conversión de tipo entre los tipos `u64` y `felt252`."
+"Otra distinción entre `mut` y shadowing es que cuando usamos de nuevo la "
+"palabra clave `let\n"
+"estamos creando una nueva variable, lo que nos permite cambiar el tipo del "
+"valor\n"
+"reutilizando el mismo nombre. Como se mencionó antes, la sombra de variables "
+"y las variables mutables\n"
+"son equivalentes en el nivel inferior.\n"
+"La única diferencia es que al sombrear una variable, el compilador no se "
+"quejará\n"
+"si cambias su tipo. Por ejemplo, digamos que nuestro programa realiza una "
+"conversión de tipo entre\n"
+"`u64` y `felt252`."
 
 #: src/ch02-01-variables-and-mutability.md:207
 msgid ""
@@ -2727,7 +2725,6 @@ msgstr ""
 "conversión donde especificamos el tipo de salida deseado."
 
 #: src/ch02-02-data-types.md:10
-#, fuzzy
 msgid ""
 "```Rust\n"
 "use traits::TryInto;\n"
@@ -2742,7 +2739,7 @@ msgstr ""
 "use traits::TryInto;\n"
 "use option::OptionTrait;\n"
 "fn main(){\n"
-"    let x = 3;\n"
+"    let x: felt252 = 3;\n"
 "    let y:u32 = x.try_into().unwrap();\n"
 "}\n"
 "```"
@@ -2819,8 +2816,8 @@ msgid ""
 "result in Cairo (for example `6 / 2`\n"
 "will indeed result in `3`).\n"
 "But when y does not divide x, you may get a surprising result: For example, "
-"since `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`, the value of `1 / 2` in Cairo is "
-"`(P+1)/2` (and not 0 or 0.5), as it satisfies the above equation."
+"since `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`, the value of `1 / 2` in Cairo is `(P"
+"+1)/2` (and not 0 or 0.5), as it satisfies the above equation."
 msgstr ""
 "En Cairo, el resultado de `x/y` está definido para satisfacer siempre la "
 "ecuación `(x / y) * y == x`. Si `y` divide a `x` entre enteros, obtendrás el "
@@ -4676,8 +4673,8 @@ msgstr ""
 "parada (sentencia `break()`),\n"
 "la condición de parada podría no alcanzarse nunca, dando lugar a un bucle "
 "infinito.\n"
-"La mayoría de los terminales soportan el atajo de teclado <span "
-"class=\"keystroke\">ctrl-c</span> para interrumpir un programa que está\n"
+"La mayoría de los terminales soportan el atajo de teclado <span class="
+"\"keystroke\">ctrl-c</span> para interrumpir un programa que está\n"
 "en un bucle continuo. Pruébalo:"
 
 #: src/ch02-05-control-flow.md:152
@@ -14881,9 +14878,8 @@ msgstr ""
 "asegurando que su código esté listo para producción."
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:1
-#, fuzzy
 msgid "# Unrecoverable Errors with panic"
-msgstr "# Errores Recuperables con `Result`"
+msgstr "# Errores Irrecuperables con pánico"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:3
 msgid ""
@@ -14895,6 +14891,14 @@ msgid ""
 "(e.g., accessing an array beyond its bounds), or deliberately, by invoking "
 "the panic function."
 msgstr ""
+"En Cairo, pueden surgir problemas inesperados durante la ejecución del "
+"programa, dando lugar a errores en tiempo de ejecución. Mientras que la "
+"función de pánico de la librería principal no proporciona una resolución "
+"para estos errores, sí reconoce su ocurrencia y termina el programa. Hay dos "
+"formas principales en las que se puede desencadenar un pánico en Cairo: "
+"inadvertidamente, a través de acciones que causan que el código entre en "
+"pánico (por ejemplo, acceder a un array más allá de sus límites), o "
+"deliberadamente, invocando la función de pánico."
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:5
 msgid ""
@@ -14904,15 +14908,22 @@ msgid ""
 "and dictionaries squashed to ensure the soundness of the program to safely "
 "terminate the execution."
 msgstr ""
+"Cuando se produce un pánico, se produce una terminación abrupta del "
+"programa. La función `panic` toma un array como argumento, que puede "
+"utilizarse para proporcionar un mensaje de error y realiza un proceso de "
+"desenrollado en el que todas las variables se eliminan y los diccionarios se "
+"aplastan para garantizar la solidez del programa y terminar la ejecución de "
+"forma segura."
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:7
 msgid ""
 "Here is how we can `panic` from inside a program and return the error code "
 "`2`:"
 msgstr ""
+"Así es como podemos `panic` desde dentro de un programa y devolver el código "
+"de error `2`:"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:11
-#, fuzzy
 msgid ""
 "```rust\n"
 "use array::ArrayTrait;\n"
@@ -14928,22 +14939,21 @@ msgid ""
 msgstr ""
 "```rust\n"
 "use array::ArrayTrait;\n"
+"use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
-"    let mut a = ArrayTrait::new();\n"
-"    a.append(0);\n"
-"    a.append(1);\n"
-"    a.append(2);\n"
+"    let mut data = ArrayTrait::new();\n"
+"    data.append(2);\n"
+"    panic(data);\n"
+"    'This line isn't reached'.print();\n"
 "}\n"
 "```"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:23
-#, fuzzy
 msgid "Running the program will produce the following output:"
-msgstr "Intente ejecutar este programa; debería obtener la siguiente salida:"
+msgstr "La ejecución del programa producirá el siguiente resultado:"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:25
-#, fuzzy
 msgid ""
 "```console\n"
 "$ cairo-run test.cairo\n"
@@ -14951,8 +14961,8 @@ msgid ""
 "```"
 msgstr ""
 "```console\n"
-"$ cairo-run main.cairo\n"
-"condition was true\n"
+"$ cairo-run test.cairo\n"
+"Run panicked with err values: [2]\n"
 "```"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:30
@@ -14960,6 +14970,8 @@ msgid ""
 "As you can notice in the output, the print statement is never reached, as "
 "the program terminates after encountering the `panic` statement."
 msgstr ""
+"Como se puede observar en la salida, la sentencia print nunca se alcanza, ya "
+"que el programa termina después de encontrar la sentencia `panic`."
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:32
 msgid ""
@@ -14970,14 +14982,19 @@ msgid ""
 "can panic in a one-liner by providing a felt252 error message as argument, "
 "making the code more readable and maintainable."
 msgstr ""
+"Una aproximación alternativa y más idiomática al pánico en Cairo sería usar "
+"la función `panic_with_felt252`. Esta función sirve como una abstracción del "
+"proceso de definición de arrays y a menudo se prefiere debido a su expresión "
+"más clara y concisa de la intención. Usando `panic_with_felt252`, los "
+"desarrolladores pueden entrar en pánico en una sola línea proporcionando un "
+"mensaje de error felt252 como argumento, haciendo el código más legible y "
+"mantenible."
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:34
-#, fuzzy
 msgid "Let's consider an example:"
-msgstr "Aquí un ejemplo."
+msgstr "Veamos un ejemplo:"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:36
-#, fuzzy
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -14987,7 +15004,7 @@ msgid ""
 msgstr ""
 "```rust\n"
 "fn main() {\n"
-"    let y = 6;\n"
+"    panic_with_felt252(2);\n"
 "}\n"
 "```"
 
@@ -14997,10 +15014,14 @@ msgid ""
 "case, if there is no need for an array and multiple values to be returned "
 "within the error, so `panic_with_felt252` is a more succinct alternative."
 msgstr ""
+"Ejecutando este programa se obtendrá el mismo mensaje de error que antes. En "
+"ese caso, si no hay necesidad de una matriz y múltiples valores a devolver "
+"dentro del error, por lo que `panic_with_felt252` es una alternativa más "
+"sucinta."
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:44
 msgid "## Using assert"
-msgstr ""
+msgstr "## Usando assert"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:46
 msgid ""
@@ -15011,11 +15032,17 @@ msgid ""
 "and the error value. The error value is specified as a felt252, so any "
 "string passed must be able to fit inside a felt252."
 msgstr ""
+"La función assert de la librería del núcleo de Cairo es en realidad una "
+"función de utilidad basada en panics. Afirma que una expresión booleana es "
+"verdadera en tiempo de ejecución, y si no lo es, llama a la función panic "
+"con un valor de error. La función assert toma dos argumentos: la expresión "
+"booleana a verificar y el valor de error. El valor de error se especifica "
+"como un felt252, por lo que cualquier cadena que se pase debe caber dentro "
+"de un felt252."
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:48
-#, fuzzy
 msgid "Here is an example of its usage:"
-msgstr "Aquí un ejemplo."
+msgstr "He aquí un ejemplo de su uso:"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:50
 msgid ""
@@ -15029,6 +15056,15 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```rust\n"
+"fn main() {\n"
+"    let my_number: u8 = 0;\n"
+"\n"
+"    assert(my_number != 0, 'number is zero');\n"
+"\n"
+"    100 / my_number;\n"
+"}\n"
+"```"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:60
 msgid ""
@@ -15039,6 +15075,11 @@ msgid ""
 "with the string 'number is zero' (as a felt252) and the division will not be "
 "reached."
 msgstr ""
+"Estamos afirmando en main que `mi_número` no es cero para asegurarnos de que "
+"no estamos realizando una división por 0.\n"
+"En este ejemplo, `my_number` es cero por lo que la afirmación fallará, y el "
+"programa entrará en pánico\n"
+"con la cadena 'number is zero' (como felt252) y no se realizará la división."
 
 #: src/ch09-02-error-handling.md:1
 msgid "# Recoverable Errors with `Result`"
@@ -15599,19 +15640,21 @@ msgstr ""
 "`#[contract]`. Profundizaremos más en esto en las próximas secciones."
 
 #: src/ch99-01-writing-starknet-contracts.md:1
-#, fuzzy
 msgid "# Writing Starknet Contracts"
-msgstr "# Contratos Inteligentes en Starknet"
+msgstr "# Escribiendo Contratos en Starknet"
 
 #: src/ch99-01-writing-starknet-contracts.md:3
 msgid ""
 "This chapter will guide you on how to create smart contracts in Cairo, and "
 "will clarify the distinction between Cairo programs and Starknet contracts."
 msgstr ""
+"Este capítulo te guiará sobre cómo crear contratos inteligentes en Cairo, y "
+"aclarará la distinción entre los programas de Cairo y los contratos de "
+"Starknet."
 
 #: src/ch99-01-writing-starknet-contracts.md:5
 msgid "## Cairo programs and Starknet contracts"
-msgstr ""
+msgstr "## Programas de Cairo y contratos Starknet"
 
 #: src/ch99-01-writing-starknet-contracts.md:7
 msgid ""
@@ -15621,18 +15664,20 @@ msgid ""
 "As you may have already noticed, a Cairo program must always have a function "
 "`main` that serves as the entry point for this program:"
 msgstr ""
+"Los contratos Starknet son un subconjunto especial de los programas Cairo, "
+"por lo que los conceptos aprendidos previamente en este libro siguen siendo "
+"aplicables para escribir contratos Starknet.\n"
+"Como ya habrás notado, un programa Cairo siempre debe tener una función "
+"`main` que sirve como punto de entrada para este programa:"
 
 #: src/ch99-01-writing-starknet-contracts.md:10
-#, fuzzy
 msgid ""
 "```rust\n"
 "fn main() {}\n"
 "```"
 msgstr ""
 "```rust\n"
-"fn main() {\n"
-"\n"
-"}\n"
+"fn main() {}\n"
 "```"
 
 #: src/ch99-01-writing-starknet-contracts.md:14
@@ -15642,6 +15687,10 @@ msgid ""
 "a contract by the compiler, it must be annotated with the `#[contract]` "
 "attribute:"
 msgstr ""
+"Los contratos de Starknet son esencialmente programas que pueden ejecutarse "
+"en el SO de Starknet, y como tales, tienen acceso al estado de Starknet. "
+"Para que un módulo sea tratado como un contrato por el compilador, debe ser "
+"anotado con el atributo `#[contract]`:"
 
 #: src/ch99-01-writing-starknet-contracts.md:16
 msgid ""
@@ -15678,24 +15727,57 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```rust\n"
+"#[contract]\n"
+"mod Example{\n"
+"    use starknet::get_caller_address;\n"
+"    use starknet::ContractAddress;\n"
+"\n"
+"    struct Storage{\n"
+"        names: LegacyMap::<ContractAddress, felt252>,\n"
+"    }\n"
+"\n"
+"    #[event]\n"
+"    fn StoredName(caller: ContractAddress, name:felt252){}\n"
+"\n"
+"    #[constructor]\n"
+"    fn constructor(_name: felt252, _address: ContractAddress){\n"
+"        names::write(_address, _name);\n"
+"    }\n"
+"\n"
+"    #[external]\n"
+"    fn store_name(_name: felt252){\n"
+"        let caller = get_caller_address();\n"
+"        names::write(caller, _name);\n"
+"        StoredName(caller,_name);\n"
+"    }\n"
+"\n"
+"    #[view]\n"
+"    fn get_name(_address:ContractAddress) -> felt252{\n"
+"        let name = names::read(_address);\n"
+"        return name;\n"
+"    }\n"
+"}\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:49
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 9-1: A simple naming service contract</span>"
 msgstr ""
-"<span class=\"caption\">Listado 9-1: Una interfaz simple de ERC20</span>"
+"<span class=\"caption\">Listado 9-1: Un contrato simple de servicio de "
+"nombres</span>"
 
 #: src/ch99-01-writing-starknet-contracts.md:51
 msgid ""
 "> NB: Starknet contracts are defined within [modules](./ch06-02-defining-"
 "modules-to-control-scope.md)."
 msgstr ""
+"> NB: Los contratos Starknet se definen dentro de [modules](./ch06-02-"
+"defining-modules-to-control-scope.md)."
 
 #: src/ch99-01-writing-starknet-contracts.md:53
-#, fuzzy
 msgid "## Starknet Contract Attributes"
-msgstr "# Contratos Inteligentes en Starknet"
+msgstr "## Atributos del Contrato Starknet"
 
 #: src/ch99-01-writing-starknet-contracts.md:55
 msgid ""
@@ -15703,15 +15785,18 @@ msgid ""
 "functions or methods. They are placed preceding a function and are denoted "
 "by the `#[]` symbol."
 msgstr ""
+"Los atributos son anotaciones especiales que modifican el comportamiento de "
+"determinadas funciones o métodos. Se colocan antes de una función y se "
+"indican con el símbolo `#[]`."
 
 #: src/ch99-01-writing-starknet-contracts.md:57
-#, fuzzy
 msgid "<!-- TODO: Appendix on attributes -->"
-msgstr "<!-- TODO: remove when Scarb test work -->"
+msgstr "<!-- TODO: Appendix on attributes -->"
 
 #: src/ch99-01-writing-starknet-contracts.md:59
 msgid "Here are a list of common attributes used in Starknet contracts:"
 msgstr ""
+"He aquí una lista de atributos comunes utilizados en los contratos Starknet:"
 
 #: src/ch99-01-writing-starknet-contracts.md:61
 msgid ""
@@ -15740,10 +15825,34 @@ msgid ""
 "6. `#[l1_handler]`: This attribute is used to mark functions which can "
 "receive messages from L1s."
 msgstr ""
+"1. `#[contract]`: Este atributo se utiliza para anotar un módulo para ser "
+"compilado como un contrato Starknet.\n"
+"   El compilador reconoce este atributo y prepara el módulo con los "
+"elementos de contrato necesarios,\n"
+"   como la lógica para manejar las llamadas externas del contrato o cómo "
+"acceder a las variables de almacenamiento.\n"
+"\n"
+"2. `#[constructor]`: Este atributo marca una función como constructor. La "
+"función constructora es llamada sólo una vez al desplegar un contrato, "
+"estableciendo el estado inicial del contrato.\n"
+"\n"
+"3. `#[external]`: Este atributo marca una función como función externa. Las "
+"funciones externas pueden ser llamadas por otros contratos o externamente y "
+"pueden modificar el estado del contrato.\n"
+"\n"
+"4. `#[view]`: Este atributo marca una función como función de vista. Las "
+"funciones de vista son funciones de sólo lectura que permiten acceder a los "
+"datos del contrato, pero impiden modificar el estado de la blockchain.\n"
+"\n"
+"5. `#[event]`: Se utiliza para definir eventos que pueden ser emitidos por "
+"el contrato.\n"
+"\n"
+"6. `#[l1_handler]`: Este atributo se utiliza para marcar funciones que "
+"pueden recibir mensajes de los L1."
 
 #: src/ch99-01-writing-starknet-contracts.md:75
 msgid "## Storage Variables"
-msgstr ""
+msgstr "##  Storage VariablesVariables de Almacenamiento"
 
 #: src/ch99-01-writing-starknet-contracts.md:77
 msgid ""
@@ -15751,12 +15860,18 @@ msgid ""
 "blockchain in the contract's storage. These data are persistent and can be "
 "accessed and modified anytime once the contract is deployed."
 msgstr ""
+"Las Storage variables o variables de Almacenamiento permiten guardar datos "
+"que se almacenarán en la blockchain en el almacenamiento del contrato. Estos "
+"datos son persistentes y se puede acceder a ellos y modificarlos en "
+"cualquier momento una vez desplegado el contrato."
 
 #: src/ch99-01-writing-starknet-contracts.md:79
 msgid ""
 "Storage variables in Starknet contracts are stored in a special struct "
 "called `Storage`:"
 msgstr ""
+"Las variables de almacenamiento en los contratos Starknet se almacenan en "
+"una estructura especial llamada `Storage`:"
 
 #: src/ch99-01-writing-starknet-contracts.md:81
 msgid ""
@@ -15767,13 +15882,17 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```rust\n"
+"struct Storage{\n"
+"    id: u8,\n"
+"    names: LegacyMap::<ContractAddress, felt252>,\n"
+"}\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:88
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-2: A Storage Struct</span>"
 msgstr ""
-"<span class=\"caption\">Listado 4-8: Definición de una estructura llamada "
-"`Rectangle`</span>"
+"<span class=\"caption\">Listado 9-2: Una Estructura de Almacenamiento</span>"
 
 #: src/ch99-01-writing-starknet-contracts.md:90
 msgid ""
@@ -15781,10 +15900,13 @@ msgid ""
 "related-data.md) like any other,\n"
 "except that it allows you to define mappings using the `LegacyMap` type."
 msgstr ""
+"La estructura de almacenamiento es una [struct](./ch04-00-using-structs-to-"
+"structure-related-data.md) como cualquier otra,\n"
+"excepto que permite definir mapeos utilizando el tipo `LegacyMap`."
 
 #: src/ch99-01-writing-starknet-contracts.md:93
 msgid "### Storage Mappings"
-msgstr ""
+msgstr "### Storage Mappings"
 
 #: src/ch99-01-writing-starknet-contracts.md:95
 msgid ""
@@ -15793,6 +15915,11 @@ msgid ""
 "associate a unique key with a corresponding value. Mappings are also useful "
 "to store sets of data, as it's impossible to store arrays in storage."
 msgstr ""
+"Los mapeos son una estructura de datos clave-valor que puedes utilizar para "
+"almacenar datos dentro de un contrato inteligente. Son esencialmente tablas "
+"hash que te permiten asociar una clave única con un valor correspondiente. "
+"Los mapeos también son útiles para almacenar conjuntos de datos, ya que es "
+"imposible almacenar matrices en el almacenamiento."
 
 #: src/ch99-01-writing-starknet-contracts.md:97
 msgid ""
@@ -15803,6 +15930,12 @@ msgid ""
 "structs.\n"
 "The syntax for declaring a mapping is as follows in Listing 9-2."
 msgstr ""
+"Un mapeo es una variable de tipo LegacyMap, en la que los tipos de clave y "
+"valor se especifican entre corchetes angulares <>.\n"
+"Es importante tener en cuenta que el tipo `LegacyMap` sólo se puede utilizar "
+"dentro de la estructura `Storage`, y no se puede utilizar para definir "
+"mapeos en estructuras definidas por el usuario.\n"
+"La sintaxis para declarar un mapeo es la siguiente en el Listado 9-2."
 
 #: src/ch99-01-writing-starknet-contracts.md:101
 msgid ""
@@ -15810,6 +15943,10 @@ msgid ""
 "like the popular `allowances` storage variable in the ERC20 Standard which "
 "maps the `owner` and `spender` to the `allowance` using tuples:"
 msgstr ""
+"También se pueden crear asignaciones más complejas que la del Listado 9-2, "
+"como la popular variable de almacenamiento `allowances` de la Norma ERC20, "
+"que asigna el `propietario` y el `gastador` a la `asignación` utilizando "
+"tuplas:"
 
 #: src/ch99-01-writing-starknet-contracts.md:103
 msgid ""
@@ -15819,6 +15956,11 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```rust\n"
+"struct Storage{\n"
+"    allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>\n"
+"}\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:109
 msgid ""
@@ -15829,11 +15971,16 @@ msgid ""
 "(https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/"
 "contract-storage/#storage_variables)"
 msgstr ""
+"En los mapeos, la dirección del valor en la clave `k_1,...,k_n` es `h(..."
+"h(h(sn_keccak(nombre_variable),k_1),k_2),...,k_n)` donde ℎ\n"
+"es el hash de Pedersen y el valor final se toma `mod2251-256`. Puedes "
+"obtener más información sobre el esquema de almacenamiento de contratos en "
+"la [Documentación de Starknet](https://docs.starknet.io/documentation/"
+"architecture_and_concepts/Contracts/contract-storage/#storage_variables)"
 
 #: src/ch99-01-writing-starknet-contracts.md:112
-#, fuzzy
 msgid "### Reading from Storage"
-msgstr "#### Lectura de Elementos de un Array"
+msgstr "### Lectura desde Storage"
 
 #: src/ch99-01-writing-starknet-contracts.md:114
 msgid ""
@@ -15841,36 +15988,39 @@ msgid ""
 "function on the `names` storage variable, passing in the key `_address` as a "
 "parameter."
 msgstr ""
+"Para leer el valor de la variable de almacenamiento `names`, llamamos a la "
+"función `read` sobre la variable de almacenamiento `names`, pasando la clave "
+"`_address` como parámetro."
 
 #: src/ch99-01-writing-starknet-contracts.md:116
-#, fuzzy
 msgid ""
 "```rust\n"
 "let name = names::read(_address);\n"
 "```"
 msgstr ""
 "```rust\n"
-"let span = array.span();\n"
+"let name = names::read(_address);\n"
 "```"
 
 #: src/ch99-01-writing-starknet-contracts.md:120
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 9-3: Calling the `read` function on the "
 "`names` variable</span>"
 msgstr ""
-"<span class=\"caption\">Lista 6-3: Llamada a la función `add_to_waitlist` "
-"utilizando rutas absolutas y relativas</span>"
+"<span class=\"caption\">Listado 9-3: Llamada a la función `read` sobre la "
+"variable `names`</span>"
 
 #: src/ch99-01-writing-starknet-contracts.md:122
 msgid ""
 "> Note: When the storage variable does not store a mapping, its value is "
 "accessed without passing any parameters to the read method"
 msgstr ""
+"> Nota: Cuando la variable de almacenamiento no almacena una asignación, se "
+"accede a su valor sin pasar ningún parámetro al método de lectura."
 
 #: src/ch99-01-writing-starknet-contracts.md:124
 msgid "### Writing to Storage"
-msgstr ""
+msgstr "### Escritura en Storage"
 
 #: src/ch99-01-writing-starknet-contracts.md:126
 msgid ""
@@ -15878,6 +16028,9 @@ msgid ""
 "function on the `names` storage variable, passing in the key and values as "
 "arguments."
 msgstr ""
+"Para escribir un valor en la variable de almacenamiento `names`, llamamos a "
+"la función `write` en la variable de almacenamiento `names`, pasando la "
+"clave y los valores como argumentos."
 
 #: src/ch99-01-writing-starknet-contracts.md:128
 msgid ""
@@ -15885,25 +16038,27 @@ msgid ""
 "names::write(_address, _name);\n"
 "```"
 msgstr ""
+"```rust\n"
+"names::write(_address, _name);\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:132
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 9-4: Writing to the `names` variable</span>"
 msgstr ""
-"<span class=\"caption\">Listado 3-6: Intentando modificar un valor de "
-"snapshot</span>"
+"<span class=\"caption\">Listado 9-4: Escribir en la variable `names`</span>"
 
 #: src/ch99-01-writing-starknet-contracts.md:136
 msgid ""
 "In this section, we are going to be looking at some popular function types "
 "you'd encounter with most contracts:"
 msgstr ""
+"En esta sección, vamos a ver algunos tipos de funciones populares que se "
+"encuentran en la mayoría de los contratos:"
 
 #: src/ch99-01-writing-starknet-contracts.md:138
-#, fuzzy
 msgid "### 1. Constructors"
-msgstr "##### Constantes"
+msgstr "### 1. Constructores"
 
 #: src/ch99-01-writing-starknet-contracts.md:140
 msgid ""
@@ -15911,6 +16066,9 @@ msgid ""
 "deploying a contract, and can be used to initialize the state of the "
 "contract."
 msgstr ""
+"Los constructores son un tipo especial de función que sólo se ejecuta una "
+"vez al desplegar un contrato, y pueden utilizarse para inicializar el estado "
+"del contrato."
 
 #: src/ch99-01-writing-starknet-contracts.md:142
 msgid ""
@@ -15921,10 +16079,16 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```rust\n"
+"#[constructor]\n"
+"fn constructor(_name: felt252, _address: ContractAddress){\n"
+"    names::write(_address, _name);\n"
+"}\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:149
 msgid "Some important rules to note:"
-msgstr ""
+msgstr "Algunas reglas importantes a tener en cuenta:"
 
 #: src/ch99-01-writing-starknet-contracts.md:151
 msgid ""
@@ -15932,11 +16096,13 @@ msgid ""
 "2. Your constructor function must be named `constructor`.\n"
 "3. Lastly, it must be annotated with the `#[constructor]` attribute."
 msgstr ""
+"1. Tu contrato no puede tener más de un constructor.\n"
+"2. Tu función constructora debe llamarse `constructor`.\n"
+"3. Por último, debe estar anotada con el atributo `#[constructor]`."
 
 #: src/ch99-01-writing-starknet-contracts.md:155
-#, fuzzy
 msgid "### 2. External functions"
-msgstr "## Funciones Genéricas"
+msgstr "### 2. Funciones Externas"
 
 #: src/ch99-01-writing-starknet-contracts.md:157
 msgid ""
@@ -15945,6 +16111,10 @@ msgid ""
 "You can define external functions by annotating them with the `#[external]` "
 "attribute:"
 msgstr ""
+"Las funciones externas son funciones que pueden modificar el estado de un "
+"contrato. Son públicas y pueden ser llamadas por cualquier otro contrato o "
+"externamente.\n"
+"Puedes definir funciones externas anotándolas con el atributo `#[external]`:"
 
 #: src/ch99-01-writing-starknet-contracts.md:160
 msgid ""
@@ -15957,11 +16127,18 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```rust\n"
+"#[external]\n"
+"fn store_name(_name: felt252){\n"
+"    let caller = get_caller_address();\n"
+"    names::write(caller, _name);\n"
+"    StoredName(caller,_name);\n"
+"}\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:169
-#, fuzzy
 msgid "### 3. View functions"
-msgstr "## Funciones"
+msgstr "### 3. Ver funciones"
 
 #: src/ch99-01-writing-starknet-contracts.md:171
 msgid ""
@@ -15971,6 +16148,11 @@ msgid ""
 "You can define view functions by annotating them with the `#[view]` "
 "attribute:"
 msgstr ""
+"Las funciones de vista son funciones de sólo lectura que permiten acceder a "
+"los datos del contrato garantizando al mismo tiempo que no se modifica el "
+"estado del contrato. Pueden ser llamadas por otros contratos o "
+"externamente.\n"
+"Puedes definir funciones de vista anotándolas con el atributo `#[view]`:"
 
 #: src/ch99-01-writing-starknet-contracts.md:174
 msgid ""
@@ -15982,6 +16164,13 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```rust\n"
+"#[view]\n"
+"fn get_name(_address:ContractAddress) -> felt252{\n"
+"    let name = names::read(_address);\n"
+"    return name;\n"
+"}\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:182
 msgid ""
@@ -15989,11 +16178,13 @@ msgid ""
 "public. To create an internal function in a contract, you simply don't "
 "annotate it with any attribute."
 msgstr ""
+"> **NB:** Es importante tener en cuenta que, tanto las funciones externas "
+"como las de vista son públicas. Para crear una función interna en un "
+"contrato, simplemente no la anotes con ningún atributo."
 
 #: src/ch99-01-writing-starknet-contracts.md:184
-#, fuzzy
 msgid "## Events"
-msgstr "## Enums (Enumeraciones)"
+msgstr "## Eventos"
 
 #: src/ch99-01-writing-starknet-contracts.md:186
 msgid ""
@@ -16003,6 +16194,11 @@ msgid ""
 "world by logging information\n"
 "about specific occurences in a contract."
 msgstr ""
+"Los eventos son estructuras de datos personalizadas que emiten los contratos "
+"inteligentes durante su ejecución.\n"
+"Proporcionan una manera para que los contratos inteligentes se comuniquen "
+"con el mundo externo mediante el registro de información\n"
+"sobre sucesos específicos en un contrato."
 
 #: src/ch99-01-writing-starknet-contracts.md:190
 msgid ""
@@ -16014,11 +16210,18 @@ msgid ""
 "NFTs appear in their wallets (wallets use these indexers to display a user's "
 "NFTs)."
 msgstr ""
+"Los acontecimientos desempeñan un papel crucial en la creación de contratos "
+"inteligentes. Tomemos, por ejemplo, las fichas no fungibles (NFT) acuñadas "
+"en Starknet. Todos ellos se indexan y almacenan en una base de datos, y "
+"luego se muestran a los usuarios mediante el uso de estos eventos. Descuidar "
+"la inclusión de un evento dentro de su contrato NFT podría conducir a una "
+"mala experiencia de usuario. Esto se debe a que los usuarios pueden no ver "
+"sus NFTs aparecer en sus carteras (las carteras utilizan estos indexadores "
+"para mostrar los NFTs de un usuario)."
 
 #: src/ch99-01-writing-starknet-contracts.md:192
-#, fuzzy
 msgid "### Defining events"
-msgstr "### Definición de Détodos"
+msgstr "### Definición de eventos"
 
 #: src/ch99-01-writing-starknet-contracts.md:194
 msgid ""
@@ -16026,12 +16229,17 @@ msgid ""
 "attribute. The parameters of this function\n"
 "are the data that will be emitted by the event."
 msgstr ""
+"Un evento se define como una función vacía anotada con el atributo "
+"`#[evento]`. Los parámetros de esta función\n"
+"son los datos que serán emitidos por el evento."
 
 #: src/ch99-01-writing-starknet-contracts.md:197
 msgid ""
 "In Listing 9-1, `StoredName` is an event that emits information when names "
 "are stored in the contract:"
 msgstr ""
+"En el Listado 9-1, `StoredName` es un evento que emite información cuando se "
+"almacenan nombres en el contrato:"
 
 #: src/ch99-01-writing-starknet-contracts.md:199
 msgid ""
@@ -16040,6 +16248,10 @@ msgid ""
 "fn StoredName(caller: ContractAddress, name:felt252){}\n"
 "```"
 msgstr ""
+"```rust\n"
+"#[event]\n"
+"fn StoredName(caller: ContractAddress, name:felt252){}\n"
+"```"
 
 #: src/ch99-01-writing-starknet-contracts.md:204
 msgid ""
@@ -16047,11 +16259,13 @@ msgid ""
 "this example, our event will emit the contract address of the caller and the "
 "name stored within the contract."
 msgstr ""
+"Pasamos los tipos de datos emitidos como parámetros dentro de los "
+"paréntesis. En este ejemplo, nuestro evento emitirá la dirección del "
+"contrato de la persona que llama y el nombre almacenado en el contrato."
 
 #: src/ch99-01-writing-starknet-contracts.md:206
-#, fuzzy
 msgid "### Emitting events"
-msgstr "##### Eliminar Elementos"
+msgstr "### Emisión de eventos"
 
 #: src/ch99-01-writing-starknet-contracts.md:208
 msgid ""
@@ -16059,16 +16273,18 @@ msgid ""
 "like we'll call functions,\n"
 "passing in the values to be emitted as parameters:"
 msgstr ""
+"Después de definir los eventos, podemos emitirlos simplemente llamando al "
+"nombre del evento como llamaremos a las funciones,\n"
+"pasando los valores a emitir como parámetros:"
 
 #: src/ch99-01-writing-starknet-contracts.md:211
-#, fuzzy
 msgid ""
 "```rust\n"
 "StoredName(caller,_name);\n"
 "```"
 msgstr ""
 "```rust\n"
-"mod hello_scarb;\n"
+"StoredName(caller,_name);\n"
 "```"
 
 #: src/ch99-02-00-abis-and-cross-contract-interactions.md:1
@@ -16338,7 +16554,6 @@ msgid "## Contract Dispatcher"
 msgstr "## Despachador de Contratos"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:14
-#, fuzzy
 msgid ""
 "Traits annotated with the `#[abi]` attribute are programmed to automatically "
 "generate and export the relevant dispatcher logic on compilation. The "
@@ -16346,12 +16561,11 @@ msgid ""
 "calls, and the other for library calls) and their implementation of this "
 "trait. Our interface is expanded into something like this:"
 msgstr ""
-"Los contratos anotados con el atributo `abi` están programados para generar "
-"automáticamente y exportar la lógica de despachador relevante durante la "
-"compilación. El compilador también genera un nuevo trait, dos nuevas "
-"estructuras (una para llamadas de contrato y otra para llamadas de "
-"biblioteca) y su implementación de este trait. Nuestra interfaz se expande "
-"en algo como esto:"
+"Los traits anotados con el atributo `#[abi]` están programados para generar "
+"y exportar automáticamente la lógica del dispatcher relevante en la "
+"compilación. El compilador también genera un nuevo trait, dos nuevos structs "
+"(uno para llamadas a contratos y otro para llamadas a librerías) y su "
+"implementación de este trait. Nuestra interfaz se expande en algo como esto:"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:16
 msgid ""
@@ -16442,7 +16656,6 @@ msgstr ""
 "contrato ERC-20:"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:47
-#, fuzzy
 msgid ""
 "```rust\n"
 "//**** Specify interface here ****//\n"
@@ -16485,7 +16698,7 @@ msgstr ""
 "        _contract_address: ContractAddress\n"
 "    ) -> felt252 {\n"
 "        IERC20Dispatcher {contract_address: _contract_address }.name()\n"
-"    } \n"
+"    }\n"
 "\n"
 "    #[external]\n"
 "    fn transfer_token(\n"
@@ -16494,7 +16707,7 @@ msgstr ""
 "    ) -> bool {\n"
 "        IERC20Dispatcher {contract_address: _contract_address }."
 "transfer(recipient, amount)\n"
-"    } \n"
+"    }\n"
 "}\n"
 "```"
 
@@ -16527,7 +16740,6 @@ msgid "## Library Dispatcher"
 msgstr "## Dispatcher de Biblioteca"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:78
-#, fuzzy
 msgid ""
 "The key difference between the contract dispatcher and the library "
 "dispatcher is that while the contract dispatcher calls an external "
@@ -16537,14 +16749,14 @@ msgid ""
 "So unlike the contract dispatcher, calls made using the library dispatcher "
 "have no possibility of tampering with the target contract's state."
 msgstr ""
-"La principal diferencia entre el Dispatcher de Contratos y el Dispatcher de "
-"Biblioteca es que, mientras que el Dispatcher de Contratos llama a la lógica "
-"de un contrato externo en el contexto del contrato externo, el Dispatcher de "
-"Biblioteca llama al hash de clase del contrato objetivo mientras ejecuta la "
-"llamada en el contexto del contrato que llama. \n"
-"Por lo tanto, a diferencia del Dispatcher de Contratos, las llamadas "
-"realizadas utilizando el Dispatcher de Biblioteca no tienen la posibilidad "
-"de manipular el estado del contrato objetivo."
+"La diferencia clave entre el despachador de contratos y el despachador de "
+"librerías es que mientras el despachador de contratos llama a la lógica de "
+"un contrato externo en el contexto del contrato externo, el despachador de "
+"librerías llama al classhash del contrato destino, mientras ejecuta la "
+"llamada en el contexto del contrato que llama.\n"
+"Por lo tanto, a diferencia del despachador de contratos, las llamadas "
+"realizadas mediante el despachador de bibliotecas no tienen la posibilidad "
+"de alterar el estado del contrato de destino."
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:81
 msgid ""
@@ -16627,7 +16839,6 @@ msgstr ""
 "utilizando el Dispatcher de Biblioteca:"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:110
-#, fuzzy
 msgid ""
 "```rust\n"
 "//**** Specify interface here ****//\n"
@@ -16662,7 +16873,7 @@ msgstr ""
 "fn token_name() -> felt252 {\n"
 "    IERC20LibraryDispatcher { class_hash: starknet::class_hash_const::"
 "<0x1234>() }.name()\n"
-"} \n"
+"}\n"
 "\n"
 "#[external]\n"
 "fn transfer_token(\n"
@@ -16670,7 +16881,7 @@ msgstr ""
 ") -> bool {\n"
 "    IERC20LibraryDispatcher { class_hash: starknet::class_hash_const::"
 "<0x1234>() }.transfer(recipient, amount)\n"
-"} \n"
+"}\n"
 "```"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:130
@@ -16726,7 +16937,6 @@ msgstr ""
 "bajo nivel:"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:140
-#, fuzzy
 msgid ""
 "```rust\n"
 "#[external]\n"
@@ -16747,7 +16957,7 @@ msgstr ""
 ") -> Span::<felt252> {\n"
 "    starknet::call_contract_syscall(address, selector, calldata.span())."
 "unwrap_syscall()\n"
-"} \n"
+"}\n"
 "```"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:149
