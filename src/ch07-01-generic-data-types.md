@@ -136,6 +136,8 @@ fn main() {
 
 Compiling the above code would error due to the `derive` macro not working well with generics. When using generic types is best to directly write the traits you want to use:
 
+<!-- TODO This is no longer true after in version 1.1.x and should be removed in the next versions -->
+
 ```rust
 struct Wallet<T> {
     balance: T,
@@ -202,14 +204,15 @@ struct Wallet<T> {
 }
 
 impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
+impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;
 
 trait WalletTrait<T> {
-    fn balance(self: @Wallet<T>) -> @T;
+    fn balance(self: @Wallet<T>) -> T;
 }
 
-impl WalletImpl<T> of WalletTrait<T> {
-    fn balance(self: @Wallet<T>) -> @T {
-        return self.balance;
+impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> T {
+        return *self.balance;
     }
 }
 
@@ -224,6 +227,23 @@ We first define `WalletTrait<T>` trait using a generic type `T` which defines a 
 We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
 
 ```rust
+struct Wallet<T> {
+    balance: T,
+}
+impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
+impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;
+/// Generic trait for wallets
+trait WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> T;
+}
+
+impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> T {
+        return *self.balance;
+    }
+}
+
+/// Trait for wallets of type u128
 trait WalletReceiveTrait {
     fn receive(ref self: Wallet<u128>, value: u128);
 }
@@ -238,7 +258,7 @@ fn main() {
     let mut w = Wallet { balance: 50_u128 };
     assert(w.balance() == 50_u128, 0);
 
-    w.receive(100_u128)
+    w.receive(100_u128);
     assert(w.balance() == 150_u128, 0);
 }
 ```
@@ -289,7 +309,7 @@ impl WalletMixImpl<T1, impl T1Drop: Drop<T1>, U1, impl U1Drop: Drop<U1>> of Wall
 
 We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` declaration. Then we do the same for `T2` and `U2`, this time as part of `mixup` signature. We can now try the `mixup` function:
 
-```rs
+```rs, does_not_compile
 fn main() {
     let w1 = Wallet { balance: true, address: 10_u128 };
     let w2 = Wallet { balance: 32, address: 100_u8 };
