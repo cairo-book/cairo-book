@@ -7,7 +7,6 @@ There are three keyword categories:
 
 - strict
 - reserved
-- contextual
 
 ---
 
@@ -16,33 +15,32 @@ There are three keyword categories:
 These keywords can only be used in their correct contexts.
 They cannot be used as names of any items.
 
-- `as` - perform primitive casting, disambiguate the specific trait containing
-- `const` - define constant items or constant raw pointers
+- `as` - Rename import
+- `break` - Exit a loop immediately
+- `const` - Define constant items
+- `continue` - Continue to the next loop iteration
+- `else` - Fallback for `if` and `if let` control flow constructs
+- `enum` - Define an enumeration
+- `extern` - Function defined at the compiler level using hint available at cairo1 level with this declaration
 - `false` - Boolean false literal
+- `fn` - Define a function
+- `if` - Branch based on the result of a conditional expression
+- `impl` - Implement inherent or trait functionality
+- `implicits` - Special kind of function parameters that are required to perform certain actions
+- `let` - Bind a variable
+- `loop` - Loop unconditionally
+- `match` - Match a value to patterns
+- `mod` - Define a module
+- `mut` - Denote variable mutability
+- `nopanic` - Functions marked with this notation mean that the function will never panic.
+- `of` - Implement a trait
+- `ref` - Bind by reference
+- `return` - Return from function
+- `struct` - Define a structure
+- `trait` - Define a trait
 - `true` - Boolean true literal
-- `extern` - link an external function or variable
-- `type` - define a type alias or associated type
-- `fn` - define a function or the function pointer type
-- `trait` - define a trait
-- `impl` - implement inherent or trait functionality
-- `of` - implement a trait
-- `mod` - define a module
-- `struct` - define a structure
-- `enum` - define an enumeration
-- `let` - bind a variable
-- `return` - return from function
-- `match` - match a value to patterns
-- `if` - branch based on the result of a conditional expression
-- `loop` - loop unconditionally
-- `continue` - continue to the next loop iteration
-- `break` - exit a loop immediately
-- `else` - fallback for `if` and `if let` control flow constructs
-- `use` - bring symbols into scope
-- `ref` - bind by reference
-- `mut` - denote mutability in references, raw pointers, or pattern bindings
-- `nopanic` - Functions marked with this notation, means that the function will never panic.
-<!-- need help for impliccit -->
-- `implicits`
+- `type` - Define a type alias
+- `use` - Bring symbols into scope
 
 ---
 
@@ -70,13 +68,3 @@ Cairo by forbidding them to use these keywords.
 - `while`
 - `with`
 - `yield`
-
----
-
-### Contextual keywords
-
-Some grammar productions may make use of new keywords not listed here. Such keywords have special meaning only in these certain contexts. Outside these places, these character sequences are treated as regular identifiers, thus it is possible to declare a function or variable with such names.
-
-### [NOTE]
-
-### No contextual keywords are in use as for now.
