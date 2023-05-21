@@ -1,4 +1,4 @@
-## Appendix A - Useful Development Tools
+## Appendix B - Useful Development Tools
 
 In this appendix, we talk about some useful development tools that the Cairo
 project provides. We’ll look at automatic formatting, quick ways to apply

@@ -82,4 +82,5 @@
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
 
 - [Appendix](appendix-00.md)
-  - [A - Useful Development Tools](appendix-04-useful-development-tools.md)
+  - [A - Keywords](appendix-01-keywords.md)
+  - [B - Useful Development Tools](appendix-04-useful-development-tools.md)
