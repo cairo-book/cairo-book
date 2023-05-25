@@ -72,6 +72,11 @@
   - [Unrecoverable Errors with panic](ch09-01-unrecoverable-errors-with-panic.md)
   - [Recoverable Errors with Result](ch09-02-error-handling.md)
 
+## Advanced Features
+
+- [Advanced Features](ch10-00-advanced-features.md)
+  - [Operator Overloading](ch10-01-operator-overloading.md)
+
 ## Starknet smart contracts
 
 - [Starknet Smart Contracts](./ch99-00-starknet-smart-contracts.md)
