@@ -60,16 +60,15 @@ The translation work is inspired from [Comprehensive Rust repository](https://gi
 
 ### Work locally (Cairo programs verification)
 
-The current book has a mdbook backend to extract Cairo programs from the markdown sources.
-To run this locally, and test if a Cairo program you have written in the book actually compiled.
+The current book has a mdbook backend to extract Cairo programs from the markdown sources. Currently, for each program it test two things: if it compiles and if it adheres to the `cairo-format` coding style. You can run this locally and test if a Cairo program you have written in the book passes these tests.
 
 The mdbook-cairo backend is working as following:
 1. It takes every code blocks in the markdown source and parse all of them.
 2. Code blocks with a main function `fn main()` are extracted into Cairo programs.
-3. The extracted programs are nammed based on the chapter they belong to, and a consecutive
+3. The extracted programs are named based on the chapter they belong to, and a consecutive
    number of the `fn main()` found in the chapter.
-4. If you have a code block with a `fn main()` function, but you know that is does not compile,
-   you can add an attribute to the code block tag value as following:
+4. If you have a code block with a `fn main()` function that you know does not compile,
+   you can indicate it by adding the `does_not_compile` attribute to the code block, like this:
    
    ````
    ```rust,does_not_compile
@@ -81,8 +80,17 @@ The mdbook-cairo backend is working as following:
    This main function will still count in the consecutive number of `fn main()` in the chapter file,
    but will not be extracted into a Cairo program.
 
-To run the CI locally, ensure that you are at the root of the repository (same directoy of this `README.md` file),
-and run:
+5. Alternatively, if you want to disable the format check using `cairo-format`,
+   you can add the `ignore_format` attribute to the code block, like this:   
+
+   ````
+   ```rust,ignore_format
+   fn main() {
+   }
+   ```
+   ````
+
+To run the CI locally, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
 
 `bash mdbook-cairo/scripts/cairo_local_verify.sh`
 
