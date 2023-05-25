@@ -63,15 +63,15 @@ In the example below, we use generic type `T` and our method signatures can use 
 ```rust
 use debug::PrintTrait;
 
-#[derive(Copy,Drop)]
-struct Rectangle{
+#[derive(Copy, Drop)]
+struct Rectangle {
     height: u64,
     width: u64,
 }
 
-#[derive(Copy,Drop)]
-struct Circle{
-    radius: u64,
+#[derive(Copy, Drop)]
+struct Circle {
+    radius: u64
 }
 
 // Here T is an alias type which will be provided buring implementation
@@ -122,7 +122,7 @@ If `CircleGeometry` was in a separate module/file `circle` then to use `boundary
 
 If the code was organised into modules like this,
 
-```rust, does_not_compile
+```rust,does_not_compile,ignore_format
 use debug::PrintTrait;
 
 // struct Circle { ... } and struct Rectangle { ... }
@@ -142,7 +142,7 @@ mod geometry {
 mod circle {
     use super::geometry::ShapeGeometry;
     use super::Circle;
-    impl CircleGeometry of ShapeGeometry::<Circle> {
+    impl CircleGeometry of ShapeGeometry<Circle> {
         // ...
     }
 }

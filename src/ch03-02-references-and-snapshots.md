@@ -22,7 +22,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,ignore_format
 use array::ArrayTrait;
 use debug::PrintTrait;
 
@@ -83,17 +83,16 @@ The snapshot type is always copyable and droppable, so that you can use it multi
 ```rust
 use debug::PrintTrait;
 
-#[derive(Copy,Drop)]
+#[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,
     width: u64,
 }
 
-fn main(){
-    let rec = Rectangle{height:3_u64, width:10_u64};
+fn main() {
+    let rec = Rectangle { height: 3_u64, width: 10_u64 };
     let area = calculate_area(@rec);
     area.print();
-
 }
 
 fn calculate_area(rec: @Rectangle) -> u64 {
@@ -111,14 +110,14 @@ Listing 3-6. Spoiler alert: it doesn’t work!
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-#[derive(Copy,Drop)]
+#[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,
     width: u64,
 }
 
-fn main(){
-    let rec = Rectangle{height:3_u64, width:10_u64};
+fn main() {
+    let rec = Rectangle { height: 3_u64, width: 10_u64 };
     flip(@rec);
 }
 

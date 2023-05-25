@@ -59,7 +59,7 @@ Imagine that we want, given a list of elements of some generic type `T`, find th
 
 ```rust,does_not_compile
 // This code does not compile!
-use array:ArrayTrait;
+use array::ArrayTrait;
 
 // Given a list of T get the smallest one.
 // The PartialOrd trait implements comparison operations for T
@@ -73,7 +73,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
 
     // Iterate through the whole list storing the smallest
     loop {
-        if index >= list.len(){
+        if index >= list.len() {
             break smallest;
         }
         if *list[index] < smallest {
@@ -83,7 +83,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
     }
 }
 
-fn main()  {
+fn main() {
     let mut list = ArrayTrait::new();
     list.append(5_u8);
     list.append(3_u8);
@@ -92,7 +92,6 @@ fn main()  {
     // We need to specify that we are passing a snapshot of `list` as an argument
     let s = smallest_element(@list);
     assert(s == 3_u8, 0);
-
 }
 ```
 
@@ -105,7 +104,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, imp
     let mut smallest = *list[0_usize];
     let mut index = 1_usize;
     loop {
-        if index >= list.len(){
+        if index >= list.len() {
             break smallest;
         }
         if *list[index] < smallest {
@@ -125,12 +124,12 @@ We can also define structs to use a generic type parameter for one or more field
 
 #[derive(Drop)]
 struct Wallet<T> {
-    balance: T,
+    balance: T
 }
 
 
 fn main() {
-   let w = Wallet{ balance: 3_u128};
+    let w = Wallet { balance: 3_u128 };
 }
 ```
 
@@ -140,7 +139,7 @@ Compiling the above code would error due to the `derive` macro not working well 
 
 ```rust
 struct Wallet<T> {
-    balance: T,
+    balance: T
 }
 
 impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
@@ -200,7 +199,7 @@ We can implement methods on structs and enums, and use the generic types in thei
 
 ```rust
 struct Wallet<T> {
-    balance: T,
+    balance: T
 }
 
 impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
@@ -228,8 +227,9 @@ We can also specify constraints on generic types when defining methods on the ty
 
 ```rust
 struct Wallet<T> {
-    balance: T,
+    balance: T
 }
+
 impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
 impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;
 /// Generic trait for wallets

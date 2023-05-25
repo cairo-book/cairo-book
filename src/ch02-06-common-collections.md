@@ -103,11 +103,12 @@ fn main() -> u128 {
     let mut arr = ArrayTrait::<u128>::new();
     arr.append(100_u128);
     let index_to_access =
-        1_usize;        // Change this value to see different results, what would happen if the index doesn't exist ?
+        1_usize; // Change this value to see different results, what would happen if the index doesn't exist ?
     match arr.get(index_to_access) {
         Option::Some(x) => {
-            *x.unbox()  // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator
-                        // It basically means "transform what get(idx) returned into a real value"
+            *x.unbox()
+        // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator
+        // It basically means "transform what get(idx) returned into a real value"
         },
         Option::None(_) => {
             let mut data = ArrayTrait::new();

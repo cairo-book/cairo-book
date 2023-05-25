@@ -133,7 +133,7 @@ local name, or _alias_, for the type. Listing 6-9 shows how you can rename an im
 ```rust
 use array::ArrayTrait as Arr;
 
-fn main(){
+fn main() {
     let mut arr = Arr::new(); // ArrayTrait was renamed to Arr
     arr.append(1);
 }

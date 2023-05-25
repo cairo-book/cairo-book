@@ -35,7 +35,7 @@ for prog in *.cairo; do
   # Check format if needed
   format_code=0
   if [[ $prog =~ "_checkfmt" ]]; then
-    cairo-format --check "$prog" > output/"$prog".err
+    cairo-format --check --print-parsing-errors "$prog" > output/"$prog".err
     format_code="$?"
   fi
 

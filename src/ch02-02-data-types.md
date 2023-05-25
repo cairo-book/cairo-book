@@ -10,9 +10,9 @@ when many types are possible, we can use a cast method where we specify the desi
 ```Rust
 use traits::TryInto;
 use option::OptionTrait;
-fn main(){
+fn main() {
     let x: felt252 = 3;
-    let y:u32 = x.try_into().unwrap();
+    let y: u32 = x.try_into().unwrap();
 }
 ```
 
@@ -96,7 +96,7 @@ how you’d use each numeric operation in a `let` statement:
 
 ```rust
 fn main() {
-     // addition
+    // addition
     let sum = 5_u128 + 10_u128;
 
     // subtraction
@@ -165,14 +165,16 @@ use traits::TryInto;
 use traits::Into;
 use option::OptionTrait;
 
-fn main(){
+fn main() {
     let my_felt = 10;
-    let my_u8: u8 = my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
+    let my_u8: u8 =
+        my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
     let my_u16: u16 = my_felt.try_into().unwrap();
     let my_u32: u32 = my_felt.try_into().unwrap();
     let my_u64: u64 = my_felt.try_into().unwrap();
     let my_u128: u128 = my_felt.try_into().unwrap();
-    let my_u256: u256 = my_felt.into(); // As a felt252 is smaller than a u256, we can use the into() method
+    let my_u256: u256 =
+        my_felt.into(); // As a felt252 is smaller than a u256, we can use the into() method
     let my_usize: usize = my_felt.try_into().unwrap();
     let my_felt2: felt252 = my_u8.into();
     let my_felt3: felt252 = my_u16.into();
@@ -192,7 +194,7 @@ type annotations in this example:
 
 ```rust
 fn main() {
-    let tup: (u32,u64,bool) = (10,20,true);
+    let tup: (u32, u64, bool) = (10, 20, true);
 }
 ```
 
