@@ -27,6 +27,10 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    `sudo apt install gettext`.
 
 3. Clone this repository.
+4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
+   ```
+   cargo install --path mdbook-cairo
+   ```
 
 ### Work locally (english, main language)
 
