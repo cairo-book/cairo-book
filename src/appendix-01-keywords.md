@@ -8,6 +8,10 @@ There are three keyword categories:
 - strict
 - reserved
 
+Also there are special purpose functions:
+
+- built-in functions
+
 ---
 
 ### Strict keywords
@@ -51,7 +55,6 @@ They have the same restrictions as strict keywords.
 The reasoning behind this is to make current programs forward compatible with future versions of
 Cairo by forbidding them to use these keywords.
 
-- `assert`
 - `do`
 - `dyn`
 - `macro`
@@ -68,3 +71,11 @@ Cairo by forbidding them to use these keywords.
 - `while`
 - `with`
 - `yield`
+
+---
+
+### Built-in functions
+
+The Cairo programming language provides several specific functions that serve a special purpose.
+
+-`assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function. -`panic` - This function terminates the program.
