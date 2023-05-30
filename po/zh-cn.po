@@ -14548,12 +14548,13 @@ msgid "# Introduction to smart-contracts"
 msgstr "# 智能合约简介"
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:3
+#, fuzzy
 msgid ""
 "This chapter will give you a high level introduction to what smart-contracts "
 "are, what are they used for and why would blockchain developers use Cairo "
 "and Starknet.\n"
 "If you are already familiar with blockchain programming, feel free to skip "
-"this chapter. The last part might still be intersting though."
+"this chapter. The last part might still be interesting though."
 msgstr ""
 "本章是一个关于什么是智能合约，它们有什么用途，以及为什么区块链开发者会使用"
 "Cairo和Starknet的高度简介。\n"
