@@ -6,7 +6,7 @@ We use generics to create definitions for item declarations, such as structs and
 
 When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two `Array` of items, will return the largest one. If we need to perform this operations for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.
 
-```rust
+```rust,does_not_compile
 // This code does not compile!
 
 use array::ArrayTrait;
@@ -57,7 +57,7 @@ When defining generic types, it is useful to have information about them. Knowin
 
 Imagine that we want, given a list of elements of some generic type `T`, find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
 
-```rust
+```rust,does_not_compile
 // This code does not compile!
 use array:ArrayTrait;
 
@@ -120,7 +120,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, imp
 
 We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition `Wallet<T>` which has a `balance` field of type `T`.
 
-```rust
+```rust,does_not_compile
 // This code does not compile!
 
 #[derive(Drop)]
@@ -135,6 +135,8 @@ fn main() {
 ```
 
 Compiling the above code would error due to the `derive` macro not working well with generics. When using generic types is best to directly write the traits you want to use:
+
+<!-- TODO This is no longer true after in version 1.1.x and should be removed in the next versions -->
 
 ```rust
 struct Wallet<T> {
@@ -202,14 +204,15 @@ struct Wallet<T> {
 }
 
 impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
+impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;
 
 trait WalletTrait<T> {
-    fn balance(self: @Wallet<T>) -> @T;
+    fn balance(self: @Wallet<T>) -> T;
 }
 
-impl WalletImpl<T> of WalletTrait<T> {
-    fn balance(self: @Wallet<T>) -> @T {
-        return self.balance;
+impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> T {
+        return *self.balance;
     }
 }
 
@@ -224,6 +227,23 @@ We first define `WalletTrait<T>` trait using a generic type `T` which defines a 
 We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
 
 ```rust
+struct Wallet<T> {
+    balance: T,
+}
+impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
+impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;
+/// Generic trait for wallets
+trait WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> T;
+}
+
+impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {
+    fn balance(self: @Wallet<T>) -> T {
+        return *self.balance;
+    }
+}
+
+/// Trait for wallets of type u128
 trait WalletReceiveTrait {
     fn receive(ref self: Wallet<u128>, value: u128);
 }
@@ -238,7 +258,7 @@ fn main() {
     let mut w = Wallet { balance: 50_u128 };
     assert(w.balance() == 50_u128, 0);
 
-    w.receive(100_u128)
+    w.receive(100_u128);
     assert(w.balance() == 150_u128, 0);
 }
 ```
@@ -289,7 +309,7 @@ impl WalletMixImpl<T1, impl T1Drop: Drop<T1>, U1, impl U1Drop: Drop<U1>> of Wall
 
 We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` declaration. Then we do the same for `T2` and `U2`, this time as part of `mixup` signature. We can now try the `mixup` function:
 
-```rs
+```rs, does_not_compile
 fn main() {
     let w1 = Wallet { balance: true, address: 10_u128 };
     let w2 = Wallet { balance: 32, address: 100_u8 };

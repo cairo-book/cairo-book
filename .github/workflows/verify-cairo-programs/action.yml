@@ -1,0 +1,24 @@
+name: Verify Cairo programs compilation
+
+description: Verify if all Cairo programs extracted from markdown can be compiled.
+
+runs:
+  using: composite
+  steps:
+    - name: Copy Cairo program verifier script
+      shell: bash
+      run: |
+        cp mdbook-cairo/scripts/cairo_programs_verifier.sh book/cairo/cairo-programs/
+
+    - name: Verify Cairo programs
+      uses: addnab/docker-run-action@v3
+      with:
+        image: starknet/cairo:1.0.0
+        options: -v ${{ github.workspace }}/book/cairo/cairo-programs:/cairo
+        run: |
+          sh /cairo/cairo_programs_verifier.sh false > /cairo/summary.md
+
+    - name: Generate job summary
+      shell: bash
+      run: cat book/cairo/cairo-programs/summary.md >> $GITHUB_STEP_SUMMARY
+      if: always()

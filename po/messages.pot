@@ -132,59 +132,67 @@ msgstr ""
 msgid "Separating Modules into Different Files"
 msgstr ""
 
-#: src/SUMMARY.md:56
+#: src/SUMMARY.md:57
 msgid "Generic Types"
 msgstr ""
 
-#: src/SUMMARY.md:58
+#: src/SUMMARY.md:59
 msgid "Generic Functions"
 msgstr ""
 
-#: src/SUMMARY.md:59
+#: src/SUMMARY.md:60
 msgid "Traits in Cairo"
 msgstr ""
 
-#: src/SUMMARY.md:61
-msgid "Error Handling"
-msgstr ""
-
-#: src/SUMMARY.md:65
-msgid "Recoverable Errors with Result"
-msgstr ""
-
-#: src/SUMMARY.md:67
+#: src/SUMMARY.md:62
 msgid "Testing Cairo Programs"
 msgstr ""
 
-#: src/SUMMARY.md:71
+#: src/SUMMARY.md:66
 msgid "How To Write Tests"
 msgstr ""
 
-#: src/SUMMARY.md:72
+#: src/SUMMARY.md:67
 msgid "Testing Organization"
 msgstr ""
 
-#: src/SUMMARY.md:76
-msgid "Starknet Smart Contracts"
+#: src/SUMMARY.md:69
+msgid "Error Handling"
+msgstr ""
+
+#: src/SUMMARY.md:72
+msgid "Unrecoverable Errors with panic"
+msgstr ""
+
+#: src/SUMMARY.md:73
+msgid "Recoverable Errors with Result"
 msgstr ""
 
 #: src/SUMMARY.md:77
-msgid "ABIs and Cross-contract Interactions"
-msgstr ""
-
-#: src/SUMMARY.md:78
-msgid "ABIs and Interfaces"
+msgid "Starknet Smart Contracts"
 msgstr ""
 
 #: src/SUMMARY.md:79
-msgid "Contract Dispatchers, Library Dispachers and system calls"
+msgid "Writing Starknet Contracts"
+msgstr ""
+
+#: src/SUMMARY.md:80
+msgid "ABIs and Cross-contract Interactions"
 msgstr ""
 
 #: src/SUMMARY.md:81
-msgid "Appendix"
+msgid "ABIs and Interfaces"
 msgstr ""
 
 #: src/SUMMARY.md:82
+msgid "Contract Dispatchers, Library Dispachers and system calls"
+msgstr ""
+
+#: src/SUMMARY.md:84
+msgid "Appendix"
+msgstr ""
+
+#: src/SUMMARY.md:85
 msgid "A - Useful Development Tools"
 msgstr ""
 
@@ -203,7 +211,7 @@ msgstr ""
 
 #: src/title-page.md:5
 msgid ""
-"This version of the text assumes you’re using Cairo v1.0.0-alpha.7 (released "
+"This version of the text assumes you’re using Cairo v1.0.0 (released "
 "2023-04-13). See the “Installation” section of Chapter 1 to install or "
 "update Cairo."
 msgstr ""
@@ -408,7 +416,7 @@ msgstr ""
 msgid ""
 "If you wish to install a specific release of Cairo rather than the latest "
 "head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export "
-"CAIRO_GIT_TAG=v1.0.0-alpha.6`)."
+"CAIRO_GIT_TAG=v1.0.0`)."
 msgstr ""
 
 #: src/ch01-01-installation.md:22
@@ -630,7 +638,7 @@ msgid ""
 "# View tags (you can also do this in the cairo compiler repository)\n"
 "git describe --tags `git rev-list --tags`\n"
 "# Checkout the version you want\n"
-"git checkout tags/v1.0.0-alpha.6\n"
+"git checkout tags/v1.0.0\n"
 "\n"
 "# Generate release binaries\n"
 "cargo build --all --release\n"
@@ -1766,7 +1774,7 @@ msgid ""
 "and mutable variables\n"
 "are equivalent at the lower level.\n"
 "The only difference is that by shadowing a variable, the compiler will not "
-"complaing\n"
+"complain \n"
 "if you change its type. For example, say our program performs a type "
 "conversion between the\n"
 "`u64` and `felt252` types."
@@ -1867,7 +1875,7 @@ msgid ""
 "use traits::TryInto;\n"
 "use option::OptionTrait;\n"
 "fn main(){\n"
-"    let x = 3;\n"
+"    let x: felt252 = 3;\n"
 "    let y:u32 = x.try_into().unwrap();\n"
 "}\n"
 "```"
@@ -2276,6 +2284,7 @@ msgid ""
 msgstr ""
 
 #: src/ch02-03-functions.md:1
+#: src/ch99-01-writing-starknet-contracts.md:134
 msgid "## Functions"
 msgstr ""
 
@@ -7913,7 +7922,7 @@ msgid ""
 msgstr ""
 
 #: src/ch07-01-generic-data-types.md:186
-#: src/ch09-01-error-handling.md:11
+#: src/ch09-02-error-handling.md:11
 msgid ""
 "```rust\n"
 "enum Result<T, E> {\n"
@@ -7924,7 +7933,7 @@ msgid ""
 msgstr ""
 
 #: src/ch07-01-generic-data-types.md:193
-#: src/ch09-01-error-handling.md:18
+#: src/ch09-02-error-handling.md:18
 msgid ""
 "The `Result<T, E>` enum has two generic types, `T` and `E`, and two "
 "variants: `Ok` which holds the value of type `T` and `Err` which holds the "
@@ -8390,373 +8399,6 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-00-error-handling.md:1
-msgid "# Error handling"
-msgstr ""
-
-#: src/ch09-00-error-handling.md:3
-msgid ""
-"In this chapter, we will explore various error handling techniques provided "
-"by Cairo, which not only allow you to address potential issues in your code, "
-"but also make it easier to create programs that are adaptable and "
-"maintainable. By examining different approaches to managing errors, such as "
-"pattern matching with the Result enum, using the ? operator for more "
-"ergonomic error propagation, and employing the unwrap or expect methods for "
-"handling recoverable errors, you'll gain a deeper understanding of Cairo's "
-"error handling features. These concepts are crucial for building robust "
-"applications that can effectively handle unexpected situations, ensuring "
-"your code is ready for production."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:1
-msgid "# Recoverable Errors with `Result`"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:3
-#: src/ch09-01-error-handling.md:56
-msgid "<br />"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:5
-msgid ""
-"Most errors aren’t serious enough to require the program to stop entirely. "
-"Sometimes, when a function fails, it’s for a reason that you can easily "
-"interpret and respond to. For example, if you try to add two large integers "
-"and the operation overflows because the sum exceeds the maximum "
-"representable value, you might want to return an error or a wrapped result "
-"instead of causing undefined behavior or terminating the process."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:7
-msgid "## The `Result` enum"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:9
-msgid ""
-"Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in "
-"Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and "
-"`Err`, as follows:"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:20
-msgid "## The `ResultTrait`"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:22
-msgid ""
-"The `ResultTrait` trait provides methods for working with the `Result<T, E>` "
-"enum, such as unwrapping values, checking whether the `Result` is `Ok` or "
-"`Err`, and panicking with a custom message. The `ResultTraitImpl` "
-"implementation defines the logic of these methods."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:24
-msgid ""
-"```rust\n"
-"trait ResultTrait<T, E> {\n"
-"    fn expect<impl EDrop: Drop<E>>(self: Result<T, E>, err: felt252) -> T;\n"
-"\n"
-"    fn unwrap<impl EDrop: Drop<E>>(self: Result<T, E>) -> T;\n"
-"\n"
-"    fn expect_err<impl TDrop: Drop<T>>(self: Result<T, E>, err: felt252) -> "
-"E;\n"
-"\n"
-"    fn unwrap_err<impl TDrop: Drop<T>>(self: Result<T, E>) -> E;\n"
-"\n"
-"    fn is_ok(self: @Result<T, E>) -> bool;\n"
-"\n"
-"    fn is_err(self: @Result<T, E>) -> bool;\n"
-"}\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:40
-msgid ""
-"The `expect` and `unwrap` methods are similar in that they both attempt to "
-"extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` "
-"variant. If the `Result` is `Ok(x)`, both methods return the value `x`. "
-"However, the key difference between the two methods lies in their behavior "
-"when the `Result` is in the `Err` variant. The `expect` method allows you to "
-"provide a custom error message (as a `felt252` value) that will be used when "
-"panicking, giving you more control and context over the panic. On the other "
-"hand, the `unwrap` method panics with a default error message, providing "
-"less information about the cause of the panic."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:42
-msgid ""
-"The `expect_err` and `unwrap_err` have the exact opposite behavior. If the "
-"`Result` is `Err(x)`, both methods return the value `x`. However, the key "
-"difference between the two methods is in case of `Result::Ok()`. The "
-"`expect_err` method allows you to provide a custom error message (as a "
-"`felt252` value) that will be used when panicking, giving you more control "
-"and context over the panic. On the other hand, the `unwrap_err` method "
-"panics with a default error message, providing less information about the "
-"cause of the panic."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:44
-msgid ""
-"A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl "
-"EDrop: Drop<E>>` in the first four methods signatures. This syntax "
-"represents generic type constraints in the Cairo language. These constraints "
-"indicate that the associated functions require an implementation of the "
-"`Drop` trait for the generic types `T` and `E`, respectively."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:46
-msgid ""
-"Finally, the `is_ok` and `is_err` methods are utility functions provided by "
-"the `ResultTrait` trait to check the variant of a `Result` enum value."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:48
-msgid ""
-"`is_ok` takes a snapshot of a `Result<T, E>` value and returns `true` if the "
-"`Result` is the `Ok` variant, meaning the operation was successful. If the "
-"`Result` is the `Err` variant, it returns `false`."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:50
-msgid ""
-"`is_err` takes a reference to a `Result<T, E>` value and returns `true` if "
-"the `Result` is the `Err` variant, meaning the operation encountered an "
-"error. If the `Result` is the `Ok` variant, it returns `false`."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:52
-msgid ""
-"These methods are helpful when you want to check the success or failure of "
-"an operation without consuming the Result value, allowing you to perform "
-"additional operations or make decisions based on the variant without "
-"unwrapping it."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:54
-msgid ""
-"You can find the implementation ot the `ResultTrait` "
-"[here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:58
-msgid "It is always easier to understand with examples."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:60
-msgid "Have a look at this function signature:"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:62
-msgid ""
-"```rust\n"
-"fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:66
-msgid ""
-"It takes two u128 integers, a and b, and returns a `Result<u128, u128>` "
-"where the `Ok` variant holds the sum if the addition does not overflow, and "
-"the `Err` variant holds the overflowed value if the addition does overflow."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:68
-msgid "Now, we can use this function elsewhere. For instance:"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:70
-msgid ""
-"```rust\n"
-"fn u128_checked_add(a: u128, b: u128) -> Option<u128> {\n"
-"    match u128_overflowing_add(a, b) {\n"
-"        Result::Ok(r) => Option::Some(r),\n"
-"        Result::Err(r) => Option::None(()),\n"
-"    }\n"
-"}\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:79
-msgid ""
-"Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. "
-"It uses the `Result` returned by `u128_overflowing_add` to determine the "
-"success or failure of the addition operation. The match expression checks "
-"the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it "
-"returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it "
-"returns `Option::None(())` to indicate that the operation has failed due to "
-"overflow. The function does not panic in case of an overflow."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:81
-msgid ""
-"Let's take another example demonstrating the use of `unwrap`.\n"
-"First we import the necessary modules:"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:84
-msgid ""
-"```rust\n"
-"use core::traits::Into;\n"
-"use traits::TryInto;\n"
-"use option::OptionTrait;\n"
-"use result::ResultTrait;\n"
-"use result::ResultTraitImpl;\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:92
-msgid ""
-"In this example, the `parse_u8` function takes a `felt252` integer and tries "
-"to convert it into a `u8` integer using the `try_into` method. If "
-"successful, it returns `Result::Ok(value)`, otherwise it returns "
-"`Result::Err('Invalid integer')`."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:94
-msgid ""
-"```rust\n"
-"fn parse_u8(s: felt252) -> Result<u8, felt252> {\n"
-"    match s.try_into() {\n"
-"        Option::Some(value) => Result::Ok(value),\n"
-"        Option::None(_) => Result::Err('Invalid integer'),\n"
-"    }\n"
-"}\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:103
-msgid "Our two test cases are:"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:105
-msgid ""
-"```rust\n"
-"#[test]\n"
-"fn test_felt252_to_u8() {\n"
-"    let number: felt252 = 5_felt252;\n"
-"    // should not panic\n"
-"    let res = parse_u8(number).unwrap();\n"
-"}\n"
-"\n"
-"#[test]\n"
-"fn test_felt252_to_u8_panic() {\n"
-"    let number: felt252 = 256_felt252;\n"
-"    // should panic\n"
-"    let res = parse_u8(number).unwrap();\n"
-"}\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:121
-msgid ""
-"The first one tests a valid conversion from `felt252` to `u8`, expecting the "
-"`unwrap` method not to panic. The second test function attempts to convert a "
-"value that is out of the `u8` range, expecting the `unwrap` method to panic "
-"with the error message 'Invalid integer'."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:123
-msgid "> We could have also used the #[should_panic] attribute here."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:125
-msgid "### The `?` operator ?"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:127
-msgid ""
-"The last operator we will talk about is the `?` operator. The `?` operator "
-"is used for more idiomatic and concise error handling. When you use the `?` "
-"operator on a `Result` or `Option` type, it will do the following:"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:129
-msgid ""
-"- If the value is `Result::Ok(x)` or `Option::Some(x)`, it will return the "
-"inner value `x` directly.\n"
-"- If the value is `Result::Err(e)` or `Option::None`, it will propagate the "
-"error or `None` by immediately returning from the function."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:132
-msgid ""
-"The `?` operator is useful when you want to handle errors implicitly and let "
-"the calling function deal with them."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:134
-msgid "Here is an example."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:136
-msgid ""
-"```rust\n"
-"fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {\n"
-"    let input_to_u8: u8 = parse_u8(input)?;\n"
-"    // DO SOMETHING\n"
-"    let res = input_to_u8 - 1;\n"
-"    Result::Ok(res)\n"
-"}\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:145
-msgid ""
-"`do_something_with_parse_u8` function takes a `felt252` value as input and "
-"calls `parse_u8`. The `?` operator is used to propagate the error, if any, "
-"or unwrap the successful value."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:147
-msgid "And with a little test case:"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:149
-msgid ""
-"```rust\n"
-"#[test]\n"
-"fn test_function_2() {\n"
-"    let number: felt252 = 258_felt252;\n"
-"    match do_something_with_parse_u8(number) {\n"
-"        Result::Ok(value) => value.print(),\n"
-"        Result::Err(e) => e.print()\n"
-"    }\n"
-"}\n"
-"```"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:160
-msgid "The console will print the error \"Invalid Integer\"."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:162
-msgid "<br/>"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:164
-msgid "### Summary"
-msgstr ""
-
-#: src/ch09-01-error-handling.md:166
-msgid ""
-"We saw that recoverable errors can be handled in Cairo using the Result "
-"enum, which has two variants: `Ok` and `Err`. The `Result<T, E>` enum is "
-"generic, with types `T` and `E` representing the successful and error "
-"values, respectively. The `ResultTrait` provides methods for working with "
-"`Result<T, E>`, such as unwrapping values, checking if the result is `Ok` or "
-"`Err`, and panicking with custom messages."
-msgstr ""
-
-#: src/ch09-01-error-handling.md:168
-msgid ""
-"To handle recoverable errors, a function can return a `Result` type and use "
-"pattern matching to handle the success or failure of an operation. The `?` "
-"operator can be used to implicitly handle errors by propagating the error or "
-"unwrapping the successful value. This allows for more concise and clear "
-"error handling, where the caller is responsible for managing errors raised "
-"by the called function."
-msgstr ""
-
 #: src/ch08-00-testing-cairo-programs.md:1
 msgid "# Testing Cairo Programs"
 msgstr ""
@@ -8858,6 +8500,7 @@ msgstr ""
 #: src/ch08-01-how-to-write-tests.md:274
 #: src/ch08-01-how-to-write-tests.md:355
 #: src/ch08-02-test-organization.md:19
+#: src/ch09-01-unrecoverable-errors-with-panic.md:9
 msgid "<span class=\"filename\">Filename: lib.cairo</span>"
 msgstr ""
 
@@ -9814,18 +9457,519 @@ msgid ""
 "each test."
 msgstr ""
 
-#: src/ch09-starknet-smart-contracts.md:1
+#: src/ch09-00-error-handling.md:1
+msgid "# Error handling"
+msgstr ""
+
+#: src/ch09-00-error-handling.md:3
+msgid ""
+"In this chapter, we will explore various error handling techniques provided "
+"by Cairo, which not only allow you to address potential issues in your code, "
+"but also make it easier to create programs that are adaptable and "
+"maintainable. By examining different approaches to managing errors, such as "
+"pattern matching with the Result enum, using the ? operator for more "
+"ergonomic error propagation, and employing the unwrap or expect methods for "
+"handling recoverable errors, you'll gain a deeper understanding of Cairo's "
+"error handling features. These concepts are crucial for building robust "
+"applications that can effectively handle unexpected situations, ensuring "
+"your code is ready for production."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:1
+msgid "# Unrecoverable Errors with panic"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:3
+msgid ""
+"In Cairo, unexpected issues may arise during program execution, resulting in "
+"runtime errors. While the panic function from the core library doesn't "
+"provide a resolution for these errors, it does acknowledge their occurrence "
+"and terminates the program. There are two primary ways that a panic can be "
+"triggered in Cairo: inadvertently, through actions causing the code to panic "
+"(e.g., accessing an array beyond its bounds), or deliberately, by invoking "
+"the panic function."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:5
+msgid ""
+"When a panic occurs, it leads to an abrupt termination of the program. The "
+"`panic` function take an array as argument, which can be used to provide an "
+"error message and performs an unwind process where all variables are dropped "
+"and dictionaries squashed to ensure the soundness of the program to safely "
+"terminate the execution."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:7
+msgid ""
+"Here is how we can `panic` from inside a program and return the error code "
+"`2`:"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:11
+msgid ""
+"```rust\n"
+"use array::ArrayTrait;\n"
+"use debug::PrintTrait;\n"
+"\n"
+"fn main() {\n"
+"    let mut data = ArrayTrait::new();\n"
+"    data.append(2);\n"
+"    panic(data);\n"
+"    'This line isn't reached'.print();\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:23
+msgid "Running the program will produce the following output:"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:25
+msgid ""
+"```console\n"
+"$ cairo-run test.cairo\n"
+"Run panicked with err values: [2]\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:30
+msgid ""
+"As you can notice in the output, the print statement is never reached, as "
+"the program terminates after encountering the `panic` statement."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:32
+msgid ""
+"An alternative and more idiomatic approach to panic in Cairo would be to use "
+"the `panic_with_felt252` function. This function serves as an abstraction of "
+"the array-defining process and is often preferred due to its clearer and "
+"more concise expression of intent. By using `panic_with_felt252`, developers "
+"can panic in a one-liner by providing a felt252 error message as argument, "
+"making the code more readable and maintainable."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:34
+msgid "Let's consider an example:"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:36
+msgid ""
+"```rust\n"
+"fn main() {\n"
+"    panic_with_felt252(2);\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:42
+msgid ""
+"Executing this program will yield the same error message as before. In that "
+"case, if there is no need for an array and multiple values to be returned "
+"within the error, so `panic_with_felt252` is a more succinct alternative."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:44
+msgid "## Using assert"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:46
+msgid ""
+"The assert function from the Cairo core library is actually a utility "
+"function based on panics. It asserts that a boolean expression is true at "
+"runtime, and if it is not, it calls the panic function with an error value. "
+"The assert function takes two arguments: the boolean expression to verify, "
+"and the error value. The error value is specified as a felt252, so any "
+"string passed must be able to fit inside a felt252."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:48
+msgid "Here is an example of its usage:"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:50
+msgid ""
+"```rust\n"
+"fn main() {\n"
+"    let my_number: u8 = 0;\n"
+"\n"
+"    assert(my_number != 0, 'number is zero');\n"
+"\n"
+"    100 / my_number;\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:60
+msgid ""
+"We are asserting in main that `my_number` is not zero to ensure that we're "
+"not performing a division by 0.\n"
+"In this example, `my_number` is zero so the assertion will fail, and the "
+"program will panic\n"
+"with the string 'number is zero' (as a felt252) and the division will not be "
+"reached."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:1
+msgid "# Recoverable Errors with `Result`"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:3
+#: src/ch09-02-error-handling.md:56
+msgid "<br />"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:5
+msgid ""
+"Most errors aren’t serious enough to require the program to stop entirely. "
+"Sometimes, when a function fails, it’s for a reason that you can easily "
+"interpret and respond to. For example, if you try to add two large integers "
+"and the operation overflows because the sum exceeds the maximum "
+"representable value, you might want to return an error or a wrapped result "
+"instead of causing undefined behavior or terminating the process."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:7
+msgid "## The `Result` enum"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:9
+msgid ""
+"Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in "
+"Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and "
+"`Err`, as follows:"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:20
+msgid "## The `ResultTrait`"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:22
+msgid ""
+"The `ResultTrait` trait provides methods for working with the `Result<T, E>` "
+"enum, such as unwrapping values, checking whether the `Result` is `Ok` or "
+"`Err`, and panicking with a custom message. The `ResultTraitImpl` "
+"implementation defines the logic of these methods."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:24
+msgid ""
+"```rust\n"
+"trait ResultTrait<T, E> {\n"
+"    fn expect<impl EDrop: Drop<E>>(self: Result<T, E>, err: felt252) -> T;\n"
+"\n"
+"    fn unwrap<impl EDrop: Drop<E>>(self: Result<T, E>) -> T;\n"
+"\n"
+"    fn expect_err<impl TDrop: Drop<T>>(self: Result<T, E>, err: felt252) -> "
+"E;\n"
+"\n"
+"    fn unwrap_err<impl TDrop: Drop<T>>(self: Result<T, E>) -> E;\n"
+"\n"
+"    fn is_ok(self: @Result<T, E>) -> bool;\n"
+"\n"
+"    fn is_err(self: @Result<T, E>) -> bool;\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:40
+msgid ""
+"The `expect` and `unwrap` methods are similar in that they both attempt to "
+"extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` "
+"variant. If the `Result` is `Ok(x)`, both methods return the value `x`. "
+"However, the key difference between the two methods lies in their behavior "
+"when the `Result` is in the `Err` variant. The `expect` method allows you to "
+"provide a custom error message (as a `felt252` value) that will be used when "
+"panicking, giving you more control and context over the panic. On the other "
+"hand, the `unwrap` method panics with a default error message, providing "
+"less information about the cause of the panic."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:42
+msgid ""
+"The `expect_err` and `unwrap_err` have the exact opposite behavior. If the "
+"`Result` is `Err(x)`, both methods return the value `x`. However, the key "
+"difference between the two methods is in case of `Result::Ok()`. The "
+"`expect_err` method allows you to provide a custom error message (as a "
+"`felt252` value) that will be used when panicking, giving you more control "
+"and context over the panic. On the other hand, the `unwrap_err` method "
+"panics with a default error message, providing less information about the "
+"cause of the panic."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:44
+msgid ""
+"A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl "
+"EDrop: Drop<E>>` in the first four methods signatures. This syntax "
+"represents generic type constraints in the Cairo language. These constraints "
+"indicate that the associated functions require an implementation of the "
+"`Drop` trait for the generic types `T` and `E`, respectively."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:46
+msgid ""
+"Finally, the `is_ok` and `is_err` methods are utility functions provided by "
+"the `ResultTrait` trait to check the variant of a `Result` enum value."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:48
+msgid ""
+"`is_ok` takes a snapshot of a `Result<T, E>` value and returns `true` if the "
+"`Result` is the `Ok` variant, meaning the operation was successful. If the "
+"`Result` is the `Err` variant, it returns `false`."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:50
+msgid ""
+"`is_err` takes a reference to a `Result<T, E>` value and returns `true` if "
+"the `Result` is the `Err` variant, meaning the operation encountered an "
+"error. If the `Result` is the `Ok` variant, it returns `false`."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:52
+msgid ""
+"These methods are helpful when you want to check the success or failure of "
+"an operation without consuming the Result value, allowing you to perform "
+"additional operations or make decisions based on the variant without "
+"unwrapping it."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:54
+msgid ""
+"You can find the implementation ot the `ResultTrait` "
+"[here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:58
+msgid "It is always easier to understand with examples."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:60
+msgid "Have a look at this function signature:"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:62
+msgid ""
+"```rust\n"
+"fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:66
+msgid ""
+"It takes two u128 integers, a and b, and returns a `Result<u128, u128>` "
+"where the `Ok` variant holds the sum if the addition does not overflow, and "
+"the `Err` variant holds the overflowed value if the addition does overflow."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:68
+msgid "Now, we can use this function elsewhere. For instance:"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:70
+msgid ""
+"```rust\n"
+"fn u128_checked_add(a: u128, b: u128) -> Option<u128> {\n"
+"    match u128_overflowing_add(a, b) {\n"
+"        Result::Ok(r) => Option::Some(r),\n"
+"        Result::Err(r) => Option::None(()),\n"
+"    }\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:79
+msgid ""
+"Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. "
+"It uses the `Result` returned by `u128_overflowing_add` to determine the "
+"success or failure of the addition operation. The match expression checks "
+"the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it "
+"returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it "
+"returns `Option::None(())` to indicate that the operation has failed due to "
+"overflow. The function does not panic in case of an overflow."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:81
+msgid ""
+"Let's take another example demonstrating the use of `unwrap`.\n"
+"First we import the necessary modules:"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:84
+msgid ""
+"```rust\n"
+"use core::traits::Into;\n"
+"use traits::TryInto;\n"
+"use option::OptionTrait;\n"
+"use result::ResultTrait;\n"
+"use result::ResultTraitImpl;\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:92
+msgid ""
+"In this example, the `parse_u8` function takes a `felt252` integer and tries "
+"to convert it into a `u8` integer using the `try_into` method. If "
+"successful, it returns `Result::Ok(value)`, otherwise it returns "
+"`Result::Err('Invalid integer')`."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:94
+msgid ""
+"```rust\n"
+"fn parse_u8(s: felt252) -> Result<u8, felt252> {\n"
+"    match s.try_into() {\n"
+"        Option::Some(value) => Result::Ok(value),\n"
+"        Option::None(_) => Result::Err('Invalid integer'),\n"
+"    }\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:103
+msgid "Our two test cases are:"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:105
+msgid ""
+"```rust\n"
+"#[test]\n"
+"fn test_felt252_to_u8() {\n"
+"    let number: felt252 = 5_felt252;\n"
+"    // should not panic\n"
+"    let res = parse_u8(number).unwrap();\n"
+"}\n"
+"\n"
+"#[test]\n"
+"fn test_felt252_to_u8_panic() {\n"
+"    let number: felt252 = 256_felt252;\n"
+"    // should panic\n"
+"    let res = parse_u8(number).unwrap();\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:121
+msgid ""
+"The first one tests a valid conversion from `felt252` to `u8`, expecting the "
+"`unwrap` method not to panic. The second test function attempts to convert a "
+"value that is out of the `u8` range, expecting the `unwrap` method to panic "
+"with the error message 'Invalid integer'."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:123
+msgid "> We could have also used the #[should_panic] attribute here."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:125
+msgid "### The `?` operator ?"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:127
+msgid ""
+"The last operator we will talk about is the `?` operator. The `?` operator "
+"is used for more idiomatic and concise error handling. When you use the `?` "
+"operator on a `Result` or `Option` type, it will do the following:"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:129
+msgid ""
+"- If the value is `Result::Ok(x)` or `Option::Some(x)`, it will return the "
+"inner value `x` directly.\n"
+"- If the value is `Result::Err(e)` or `Option::None`, it will propagate the "
+"error or `None` by immediately returning from the function."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:132
+msgid ""
+"The `?` operator is useful when you want to handle errors implicitly and let "
+"the calling function deal with them."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:134
+msgid "Here is an example."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:136
+msgid ""
+"```rust\n"
+"fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {\n"
+"    let input_to_u8: u8 = parse_u8(input)?;\n"
+"    // DO SOMETHING\n"
+"    let res = input_to_u8 - 1;\n"
+"    Result::Ok(res)\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:145
+msgid ""
+"`do_something_with_parse_u8` function takes a `felt252` value as input and "
+"calls `parse_u8`. The `?` operator is used to propagate the error, if any, "
+"or unwrap the successful value."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:147
+msgid "And with a little test case:"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:149
+msgid ""
+"```rust\n"
+"#[test]\n"
+"fn test_function_2() {\n"
+"    let number: felt252 = 258_felt252;\n"
+"    match do_something_with_parse_u8(number) {\n"
+"        Result::Ok(value) => value.print(),\n"
+"        Result::Err(e) => e.print()\n"
+"    }\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:160
+msgid "The console will print the error \"Invalid Integer\"."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:162
+msgid "<br/>"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:164
+msgid "### Summary"
+msgstr ""
+
+#: src/ch09-02-error-handling.md:166
+msgid ""
+"We saw that recoverable errors can be handled in Cairo using the Result "
+"enum, which has two variants: `Ok` and `Err`. The `Result<T, E>` enum is "
+"generic, with types `T` and `E` representing the successful and error "
+"values, respectively. The `ResultTrait` provides methods for working with "
+"`Result<T, E>`, such as unwrapping values, checking if the result is `Ok` or "
+"`Err`, and panicking with custom messages."
+msgstr ""
+
+#: src/ch09-02-error-handling.md:168
+msgid ""
+"To handle recoverable errors, a function can return a `Result` type and use "
+"pattern matching to handle the success or failure of an operation. The `?` "
+"operator can be used to implicitly handle errors by propagating the error or "
+"unwrapping the successful value. This allows for more concise and clear "
+"error handling, where the caller is responsible for managing errors raised "
+"by the called function."
+msgstr ""
+
+#: src/ch99-00-starknet-smart-contracts.md:1
 msgid "# Starknet Smart Contracts"
 msgstr ""
 
-#: src/ch09-starknet-smart-contracts.md:3
+#: src/ch99-00-starknet-smart-contracts.md:3
 msgid ""
 "All through the previous sections, you've mostly written programs with a "
 "`main` entrypoint. In the coming sections, you will learn to write and "
 "deploy Starknet contracts."
 msgstr ""
 
-#: src/ch09-starknet-smart-contracts.md:5
+#: src/ch99-00-starknet-smart-contracts.md:5
 msgid ""
 "Starknet contracts, in simple words, are programs that can run on the "
 "Starknet VM. Since they run on the VM, they have access to Starknet’s "
@@ -9834,23 +9978,461 @@ msgid ""
 "underlying L1."
 msgstr ""
 
-#: src/ch09-starknet-smart-contracts.md:7
+#: src/ch99-00-starknet-smart-contracts.md:7
 msgid ""
 "Starknet contracts are denoted by the `#[contract]` attribute. We'll dive "
 "deeper into this in the next sections."
 msgstr ""
 
-#: src/ch09-00-00-abis-and-cross-contract-interactions.md:1
+#: src/ch99-01-writing-starknet-contracts.md:1
+msgid "# Writing Starknet Contracts"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:3
+msgid ""
+"This chapter will guide you on how to create smart contracts in Cairo, and "
+"will clarify the distinction between Cairo programs and Starknet contracts."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:5
+msgid "## Cairo programs and Starknet contracts"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:7
+msgid ""
+"Starknet contracts are a special subset of Cairo programs, so the concepts "
+"previously learned in this book are still applicable to write Starknet "
+"contracts.\n"
+"As you may have already noticed, a Cairo program must always have a function "
+"`main` that serves as the entry point for this program:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:10
+msgid ""
+"```rust\n"
+"fn main() {}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:14
+msgid ""
+"Starknet contracts are essentially programs that can run on the Starknet OS, "
+"and as such, have access to Starknet's state. For a module to be handled as "
+"a contract by the compiler, it must be annotated with the `#[contract]` "
+"attribute:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:16
+msgid ""
+"```rust\n"
+"#[contract]\n"
+"mod Example{\n"
+"    use starknet::get_caller_address;\n"
+"    use starknet::ContractAddress;\n"
+"\n"
+"    struct Storage{\n"
+"        names: LegacyMap::<ContractAddress, felt252>,\n"
+"    }\n"
+"\n"
+"    #[event]\n"
+"    fn StoredName(caller: ContractAddress, name:felt252){}\n"
+"\n"
+"    #[constructor]\n"
+"    fn constructor(_name: felt252, _address: ContractAddress){\n"
+"        names::write(_address, _name);\n"
+"    }\n"
+"\n"
+"    #[external]\n"
+"    fn store_name(_name: felt252){\n"
+"        let caller = get_caller_address();\n"
+"        names::write(caller, _name);\n"
+"        StoredName(caller,_name);\n"
+"    }\n"
+"\n"
+"    #[view]\n"
+"    fn get_name(_address:ContractAddress) -> felt252{\n"
+"        let name = names::read(_address);\n"
+"        return name;\n"
+"    }\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:49
+msgid ""
+"<span class=\"caption\">Listing 9-1: A simple naming service contract</span>"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:51
+msgid ""
+"> NB: Starknet contracts are defined within "
+"[modules](./ch06-02-defining-modules-to-control-scope.md)."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:53
+msgid "## Starknet Contract Attributes"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:55
+msgid ""
+"Attributes are special annotations that modify the behavior of certain "
+"functions or methods. They are placed preceding a function and are denoted "
+"by the `#[]` symbol."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:57
+msgid "<!-- TODO: Appendix on attributes -->"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:59
+msgid "Here are a list of common attributes used in Starknet contracts:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:61
+msgid ""
+"1. `#[contract]`: This attribute is used to annotate a module to be compiled "
+"as a Starknet contract.\n"
+"   The compiler recognizes this attribute and prepares the module with "
+"necessary contract elements,\n"
+"   such as the logic to handle external contract calls or how to access "
+"storage variables.\n"
+"\n"
+"2. `#[constructor]`: This attribute marks a function as a constructor. The "
+"constructor function is called only once upon deploying a contract, setting "
+"the initial state of the contract.\n"
+"\n"
+"3. `#[external]`: This attribute marks a function as an external function. "
+"External functions can be called by other contracts or externally and can "
+"modify the contract's state.\n"
+"\n"
+"4. `#[view]`: This attribute marks a function as a view function. View "
+"functions are read-only functions that allow you to access data from the "
+"contract, but prevent you from modifying the state of the blockchain.\n"
+"\n"
+"5. `#[event]`: This is used to define events that can be emitted by the "
+"contract.\n"
+"\n"
+"6. `#[l1_handler]`: This attribute is used to mark functions which can "
+"receive messages from L1s."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:75
+msgid "## Storage Variables"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:77
+msgid ""
+"Storage variables allow you to store data that will be stored on the "
+"blockchain in the contract's storage. These data are persistent and can be "
+"accessed and modified anytime once the contract is deployed."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:79
+msgid ""
+"Storage variables in Starknet contracts are stored in a special struct "
+"called `Storage`:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:81
+msgid ""
+"```rust\n"
+"struct Storage{\n"
+"    id: u8,\n"
+"    names: LegacyMap::<ContractAddress, felt252>,\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:88
+msgid "<span class=\"caption\">Listing 9-2: A Storage Struct</span>"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:90
+msgid ""
+"The storage struct is a "
+"[struct](./ch04-00-using-structs-to-structure-related-data.md) like any "
+"other,\n"
+"except that it allows you to define mappings using the `LegacyMap` type."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:93
+msgid "### Storage Mappings"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:95
+msgid ""
+"Mappings are a key-value data structure that you can use to store data "
+"within a smart contract. They are essentially hash tables that allow you to "
+"associate a unique key with a corresponding value. Mappings are also useful "
+"to store sets of data, as it's impossible to store arrays in storage."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:97
+msgid ""
+"A mapping is a variable of type LegacyMap, in which the key and value types "
+"are specified within angular brackets <>.\n"
+"It is important to note that the `LegacyMap` type can only be used inside "
+"the `Storage` struct, and can't be used to define mappings in user-defined "
+"structs.\n"
+"The syntax for declaring a mapping is as follows in Listing 9-2."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:101
+msgid ""
+"You can also create more complex mappings than that found in Listing 9-2 "
+"like the popular `allowances` storage variable in the ERC20 Standard which "
+"maps the `owner` and `spender` to the `allowance` using tuples:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:103
+msgid ""
+"```rust\n"
+"struct Storage{\n"
+"    allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:109
+msgid ""
+"In mappings, the address of the value at key `k_1,...,k_n` is "
+"`h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ\n"
+"is the Pedersen hash and the final value is taken `mod2251−256`. You can "
+"learn more about the contract storage layout in the [Starknet "
+"Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:112
+msgid "### Reading from Storage"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:114
+msgid ""
+"To read the value of the storage variable `names`, we call the `read` "
+"function on the `names` storage variable, passing in the key `_address` as a "
+"parameter."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:116
+msgid ""
+"```rust\n"
+"let name = names::read(_address);\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:120
+msgid ""
+"<span class=\"caption\">Listing 9-3: Calling the `read` function on the "
+"`names` variable</span>"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:122
+msgid ""
+"> Note: When the storage variable does not store a mapping, its value is "
+"accessed without passing any parameters to the read method"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:124
+msgid "### Writing to Storage"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:126
+msgid ""
+"To write a value to the storage variable `names`, we call the `write` "
+"function on the `names` storage variable, passing in the key and values as "
+"arguments."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:128
+msgid ""
+"```rust\n"
+"names::write(_address, _name);\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:132
+msgid ""
+"<span class=\"caption\">Listing 9-4: Writing to the `names` variable</span>"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:136
+msgid ""
+"In this section, we are going to be looking at some popular function types "
+"you'd encounter with most contracts:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:138
+msgid "### 1. Constructors"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:140
+msgid ""
+"Constructors are a special type of function that runs only once when "
+"deploying a contract, and can be used to initialize the state of the "
+"contract."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:142
+msgid ""
+"```rust\n"
+"#[constructor]\n"
+"fn constructor(_name: felt252, _address: ContractAddress){\n"
+"    names::write(_address, _name);\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:149
+msgid "Some important rules to note:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:151
+msgid ""
+"1. Your contract can't have more than one constructor.\n"
+"2. Your constructor function must be named `constructor`.\n"
+"3. Lastly, it must be annotated with the `#[constructor]` attribute."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:155
+msgid "### 2. External functions"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:157
+msgid ""
+"External functions are functions that can modify the state of a contract. "
+"They are public and can be called by any other contract or externally.\n"
+"You can define external functions by annotating them with the `#[external]` "
+"attribute:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:160
+msgid ""
+"```rust\n"
+"#[external]\n"
+"fn store_name(_name: felt252){\n"
+"    let caller = get_caller_address();\n"
+"    names::write(caller, _name);\n"
+"    StoredName(caller,_name);\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:169
+msgid "### 3. View functions"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:171
+msgid ""
+"View functions are read-only functions allowing you to access data from the "
+"contract while ensuring that the state of the contract is not modified. They "
+"can be called by other contracts or externally.\n"
+"You can define view functions by annotating them with the `#[view]` "
+"attribute:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:174
+msgid ""
+"```rust\n"
+"#[view]\n"
+"fn get_name(_address:ContractAddress) -> felt252{\n"
+"    let name = names::read(_address);\n"
+"    return name;\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:182
+msgid ""
+"> **NB:** It's important to note that, both external and view functions are "
+"public. To create an internal function in a contract, you simply don't "
+"annotate it with any attribute."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:184
+msgid "## Events"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:186
+msgid ""
+"Events are custom data structures that are emitted by smart contracts during "
+"execution.\n"
+"They provide a way for smart contracts to communicate with the external "
+"world by logging information\n"
+"about specific occurences in a contract."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:190
+msgid ""
+"Events play a crucial role in the creation of smart contracts. Take, for "
+"instance, the Non-Fungible Tokens (NFTs) minted on Starknet. All of these "
+"are indexed and stored in a database, then displayed to users through the "
+"use of these events. Neglecting to include an event within your NFT contract "
+"could lead to a bad user experience. This is because users may not see their "
+"NFTs appear in their wallets (wallets use these indexers to display a user's "
+"NFTs)."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:192
+msgid "### Defining events"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:194
+msgid ""
+"An event is defined as an empty function annotated with the `#[event]` "
+"attribute. The parameters of this function\n"
+"are the data that will be emitted by the event."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:197
+msgid ""
+"In Listing 9-1, `StoredName` is an event that emits information when names "
+"are stored in the contract:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:199
+msgid ""
+"```rust\n"
+"#[event]\n"
+"fn StoredName(caller: ContractAddress, name:felt252){}\n"
+"```"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:204
+msgid ""
+"We pass in the emitted data types as parameters within the parentheses. In "
+"this example, our event will emit the contract address of the caller and the "
+"name stored within the contract."
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:206
+msgid "### Emitting events"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:208
+msgid ""
+"After defining events, we can emit them by simply calling the event name "
+"like we'll call functions,\n"
+"passing in the values to be emitted as parameters:"
+msgstr ""
+
+#: src/ch99-01-writing-starknet-contracts.md:211
+msgid ""
+"```rust\n"
+"StoredName(caller,_name);\n"
+"```"
+msgstr ""
+
+#: src/ch99-02-00-abis-and-cross-contract-interactions.md:1
 msgid "# Starknet contracts: ABIs and cross-contract interactions"
 msgstr ""
 
-#: src/ch09-00-00-abis-and-cross-contract-interactions.md:3
+#: src/ch99-02-00-abis-and-cross-contract-interactions.md:3
 msgid ""
 "The ability of contracts to interact with other smart contracts on the "
 "blockchain is a common pattern found in smart contract development."
 msgstr ""
 
-#: src/ch09-00-00-abis-and-cross-contract-interactions.md:5
+#: src/ch99-02-00-abis-and-cross-contract-interactions.md:5
 msgid ""
 "This chapter covers how cross-contract interactions between Starknet "
 "contracts can be achieved. Specifically, you'll learn about ABIs, contract "
@@ -9858,26 +10440,26 @@ msgid ""
 "call equivalents!"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:1
+#: src/ch99-02-01-abis-and-interfaces.md:1
 msgid "# ABIs and Contract Interfaces"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:3
+#: src/ch99-02-01-abis-and-interfaces.md:3
 msgid ""
 "Cross-contract interactions between smart contracts on a blockchain is a "
 "common practice which enables us to build flexible contracts that can speak "
 "with each other."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:5
+#: src/ch99-02-01-abis-and-interfaces.md:5
 msgid "Achieving this on Starknet requires something we call an interface."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:7
+#: src/ch99-02-01-abis-and-interfaces.md:7
 msgid "## Interface"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:8
+#: src/ch99-02-01-abis-and-interfaces.md:9
 msgid ""
 "An interface is a list of a contract's function definitions without "
 "implementations. In other words, an interface specifies the function "
@@ -9885,20 +10467,20 @@ msgid ""
 "smart contract without including the function body."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:10
+#: src/ch99-02-01-abis-and-interfaces.md:11
 msgid ""
 "Interfaces in Cairo are traits with the `#[abi]` attribute. If you are new "
 "to traits, check out the dedicated chapter on "
 "[traits](./ch07-02-traits-in-cairo.md)."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:12
+#: src/ch99-02-01-abis-and-interfaces.md:13
 msgid ""
 "For your Cairo code to qualify as an interface, it must meet the following "
 "requirements:"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:14
+#: src/ch99-02-01-abis-and-interfaces.md:15
 msgid ""
 "1. Must be appended with the `#[abi]` attribute.\n"
 "2. Your interface functions should have no implementations.\n"
@@ -9907,11 +10489,11 @@ msgid ""
 "5. Your interface should not declare state variables."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:20
+#: src/ch99-02-01-abis-and-interfaces.md:21
 msgid "Here's a sample interface for an ERC20 token contract:"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:22
+#: src/ch99-02-01-abis-and-interfaces.md:23
 msgid ""
 "```rust\n"
 "use starknet::ContractAddress;\n"
@@ -9949,15 +10531,15 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:56
+#: src/ch99-02-01-abis-and-interfaces.md:57
 msgid "<span class=\"caption\">Listing 9-1: A simple ERC20 Interface</span>"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:58
+#: src/ch99-02-01-abis-and-interfaces.md:59
 msgid "## ABIs"
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:59
+#: src/ch99-02-01-abis-and-interfaces.md:61
 msgid ""
 "ABI stands for Application Binary Interface. ABIs gives a smart contract the "
 "ability to communicate and interact with external applications or other "
@@ -9965,7 +10547,7 @@ msgid ""
 "which helps data flow between applications and servers."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:61
+#: src/ch99-02-01-abis-and-interfaces.md:63
 msgid ""
 "While we write our smart contract logics in high-level Cairo, they are "
 "stored on the VM as executable bytecodes which are in binary formats. Since "
@@ -9974,60 +10556,59 @@ msgid ""
 "which can be called to a smart contract for execution."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:63
+#: src/ch99-02-01-abis-and-interfaces.md:65
 msgid ""
 "Every contract on Starknet has an Application Binary Interface (ABI) that "
 "defines how to encode and decode data when calling its methods."
 msgstr ""
 
-#: src/ch09-00-01-abis-and-interfaces.md:65
+#: src/ch99-02-01-abis-and-interfaces.md:67
 msgid ""
 "In the next chapter, we are going to be looking into how we can call other "
 "smart contracts using a `Contract Dispatcher`, `Library Dispatcher`, and "
 "`System calls`."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:1
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:1
 msgid "# Contract Dispatcher, Library Dispatcher and System calls"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:3
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:3
 msgid ""
 "Each time a contract interface is created on Starknet, two dispatchers are "
 "automatically created and exported:"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:4
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:5
 msgid "1. The Contract Dispatcher\n2. The Library Dispatcher"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:7
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:8
 msgid ""
 "In this chapter, we are going to extensively discuss how these dispatchers "
 "work and their usage."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:9
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:10
 msgid ""
 "To effectively break down the concepts in this chapter, we are going to be "
 "using the IERC20 interface from the previous chapter (refer to Listing 9-1):"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:11
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:12
 msgid "## Contract Dispatcher"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:12
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:14
 msgid ""
-"Contracts annotated with the `#[abi]` attribute are programmed to "
-"automatically generate and export the relevant dispatcher logic on "
-"compilation. The compiler also generates a new trait, two new structs (one "
-"for contract calls, and the other for library calls) and their "
-"implementation of this trait. Our interface is expanded into something like "
-"this:"
+"Traits annotated with the `#[abi]` attribute are programmed to automatically "
+"generate and export the relevant dispatcher logic on compilation. The "
+"compiler also generates a new trait, two new structs (one for contract "
+"calls, and the other for library calls) and their implementation of this "
+"trait. Our interface is expanded into something like this:"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:14
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:16
 msgid ""
 "```rust\n"
 "trait IERC20DispatcherTrait<T> {\n"
@@ -10052,30 +10633,30 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:34
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:37
 msgid ""
 "<span class=\"caption\">Listing 9-2: An expanded form of the IERC20 "
 "trait</span>"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:36
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:39
 msgid ""
 "**NB:** The expanded code for our IERC20 interface is a lot more robust, but "
 "to keep this chapter concise and straight to the point, we focused on one "
 "view function `get_name`, and one external function `transfer`."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:38
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:41
 msgid ""
 "It's also worthy of note that all these is abstracted behind the scenes "
 "thanks to the power of Cairo plugins."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:40
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:43
 msgid "### Calling Contracts using the Contract Dispatcher"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:41
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:45
 msgid ""
 "This is an example of a contract named `Dispatcher` using the Contract "
 "interface dispatcher to call an ERC-20 contract in the ERC-20 contract's "
@@ -10083,7 +10664,7 @@ msgid ""
 "ERC-20 contract:"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:43
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:47
 msgid ""
 "```rust\n"
 "//**** Specify interface here ****//\n"
@@ -10099,7 +10680,7 @@ msgid ""
 "        _contract_address: ContractAddress\n"
 "    ) -> felt252 {\n"
 "        IERC20Dispatcher {contract_address: _contract_address }.name()\n"
-"    } \n"
+"    }\n"
 "\n"
 "    #[external]\n"
 "    fn transfer_token(\n"
@@ -10108,18 +10689,18 @@ msgid ""
 "    ) -> bool {\n"
 "        IERC20Dispatcher {contract_address: _contract_address "
 "}.transfer(recipient, amount)\n"
-"    } \n"
+"    }\n"
 "}\n"
 "```"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:67
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:72
 msgid ""
 "<span class=\"caption\">Listing 9-3: A sample contract which uses the "
 "Contract Dispatcher</span>"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:69
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:74
 msgid ""
 "As you can see, we had to first import the `IERC20DispatcherTrait` and "
 "`IERC20Dispatcher` which was generated and exported on compiling our "
@@ -10129,22 +10710,22 @@ msgid ""
 "want to call."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:71
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:76
 msgid "## Library Dispatcher"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:72
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:78
 msgid ""
 "The key difference between the contract dispatcher and the library "
 "dispatcher is that while the contract dispatcher calls an external "
 "contract's logic in the external contract's context, the library dispatcher "
 "calls the target contract's classhash, whilst executing the call in the "
-"calling contract's context. \n"
+"calling contract's context.\n"
 "So unlike the contract dispatcher, calls made using the library dispatcher "
 "have no possibility of tampering with the target contract's state."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:75
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:81
 msgid ""
 "As stated in the previous chapter, contracts annotated with the `#[abi]` "
 "macro on compilation generates a new trait, two new structs (one for "
@@ -10152,7 +10733,7 @@ msgid ""
 "this trait. The expanded form of the library traits looks like:"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:77
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:83
 msgid ""
 "```rust\n"
 "trait IERC20DispatcherTrait<T> {\n"
@@ -10178,21 +10759,21 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:97
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:104
 msgid ""
 "<span class=\"caption\">Listing 9-4: An expanded form of the IERC20 "
 "trait</span>"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:99
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:106
 msgid "### Calling Contracts using the Library Dispatcher"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:100
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:108
 msgid "Below's a sample code on calling contracts using the Library Dispatcher:"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:102
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:110
 msgid ""
 "```rust\n"
 "//**** Specify interface here ****//\n"
@@ -10205,7 +10786,7 @@ msgid ""
 "fn token_name() -> felt252 {\n"
 "    IERC20LibraryDispatcher { class_hash: "
 "starknet::class_hash_const::<0x1234>() }.name()\n"
-"} \n"
+"}\n"
 "\n"
 "#[external]\n"
 "fn transfer_token(\n"
@@ -10213,17 +10794,17 @@ msgid ""
 ") -> bool {\n"
 "    IERC20LibraryDispatcher { class_hash: "
 "starknet::class_hash_const::<0x1234>() }.transfer(recipient, amount)\n"
-"} \n"
+"}\n"
 "```"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:121
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:130
 msgid ""
 "<span class=\"caption\">Listing 9-4: A sample contract using the Library "
 "Dispatcher</span>"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:123
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:132
 msgid ""
 "As you can see, we had to first import the `IERC20DispatcherTrait` and "
 "`IERC20LibraryDispatcher` which was generated and exported on compiling our "
@@ -10233,11 +10814,11 @@ msgid ""
 "call."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:125
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:134
 msgid "## Calling Contracts using low-level System calls"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:126
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:136
 msgid ""
 "Another way to call other contracts is to use the "
 "`starknet::call_contract_syscall` system call. The Dispatchers we described "
@@ -10245,7 +10826,7 @@ msgid ""
 "call."
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:128
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:138
 msgid ""
 "Using the system call `starknet::call_contract_syscall` can be handy for "
 "customized error handling or possessing more control over the "
@@ -10253,7 +10834,7 @@ msgid ""
 "an example demonstrating a low-level `transfer` call:"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:130
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:140
 msgid ""
 "```rust\n"
 "#[external]\n"
@@ -10263,17 +10844,17 @@ msgid ""
 ") -> Span::<felt252> {\n"
 "    starknet::call_contract_syscall(address, selector, "
 "calldata.span()).unwrap_syscall()\n"
-"} \n"
+"}\n"
 "```"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:139
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:149
 msgid ""
 "<span class=\"caption\">Listing 9-5: A sample contract implementing system "
 "calls</span>"
 msgstr ""
 
-#: src/ch09-00-02-contract-dispatcher-library-dispatcher-and-system-calls.md:141
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:151
 msgid ""
 "As you can see, rather than pass our function arguments directly, we passed "
 "in the contract address, function selector (which is a keccak hash of the "

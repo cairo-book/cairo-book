@@ -89,7 +89,7 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,does_not_compile
 use garden::vegetables::Asparagus;
 
 mod garden;
