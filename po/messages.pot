@@ -750,7 +750,7 @@ msgid ""
 "developed\n"
 "> a VSCode extension for the Cairo language that you can use to get the "
 "features from\n"
-"> the language server and code highlighting. See [Appendix A][devtools]\n"
+"> the language server and code highlighting. See [Appendix B][devtools]\n"
 "> for more details."
 msgstr ""
 
@@ -924,7 +924,7 @@ msgid ""
 "> use the automatic formatter tool called `cairo-format` to format your code "
 "in a\n"
 "> particular style (more on `cairo-format` in\n"
-"> [Appendix A][devtools]). The Cairo team has included this tool\n"
+"> [Appendix B][devtools]). The Cairo team has included this tool\n"
 "> with the standard Cairo distribution, as `cairo-run` is, so it should "
 "already be\n"
 "> installed on your computer!"
@@ -10874,7 +10874,7 @@ msgid ""
 msgstr ""
 
 #: src/appendix-04-useful-development-tools.md:1
-msgid "## Appendix A - Useful Development Tools"
+msgid "## Appendix B - Useful Development Tools"
 msgstr ""
 
 #: src/appendix-04-useful-development-tools.md:3
