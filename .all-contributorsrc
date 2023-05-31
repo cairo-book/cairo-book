@@ -1,0 +1,69 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "fricoben",
+      "name": "Fricoben",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78437165?v=4",
+      "profile": "https://www.starknet.id/",
+      "contributions": [
+        "ideas",
+        "fundingFinding",
+        "projectManagement"
+      ]
+    },
+    {
+      "login": "enitrat",
+      "name": "Mathieu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60658558?v=4",
+      "profile": "https://github.com/enitrat",
+      "contributions": [
+        "ideas",
+        "code",
+        "mentoring",
+        "review",
+        "projectManagement"
+      ]
+    },
+    {
+      "login": "Nadai2010",
+      "name": "Nadai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112663528?v=4",
+      "profile": "https://github.com/Nadai2010",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "glihm",
+      "name": "glihm",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7962849?v=4",
+      "profile": "https://github.com/glihm",
+      "contributions": [
+        "code",
+        "tool"
+      ]
+    },
+    {
+      "login": "ClementWalter",
+      "name": "Clément Walter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18620296?v=4",
+      "profile": "https://www.linkedin.com/in/clementwalter/",
+      "contributions": [
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "cairo-book.github.io",
+  "projectOwner": "cairo-book"
+}

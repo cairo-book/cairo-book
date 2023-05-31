@@ -1,4 +1,7 @@
 <div align="center">
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
   <h1>The Cairo Programming Language Book</h1>
   <h3> Alexandria </h3>
   <img src="assets/alexandria.jpg" height="400" width="400">
@@ -23,8 +26,9 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    cargo install mdbook mdbook-i18n-helpers
    ```
 2. Host machine packages:
+
    - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager:
-   `sudo apt install gettext`.
+     `sudo apt install gettext`.
 
 3. Clone this repository.
 4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
@@ -36,12 +40,12 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 All the Markdown files **MUST** be edited in english. To work locally in english:
 
-   - Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
-   You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
+- Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
+  You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
 
-   - Make changes to the book and refresh the browser to see the changes.
+- Make changes to the book and refresh the browser to see the changes.
 
-   - Open a PR with your changes.
+- Open a PR with your changes.
 
 ### Work locally (translations)
 
@@ -52,15 +56,14 @@ auto-generated and updated by translators.
 
 To work with translations, those are the steps to update the translated content:
 
-   - Run a local server for the language you want to edit: `./translations.sh es` for instance. If no language is provided, the script will only extract translations from english.
+- Run a local server for the language you want to edit: `./translations.sh es` for instance. If no language is provided, the script will only extract translations from english.
 
-   - Open the translation file you are interested in `po/es.po` for instance. You can also use editors like [poedit](https://poedit.net/) to help you on this task.
+- Open the translation file you are interested in `po/es.po` for instance. You can also use editors like [poedit](https://poedit.net/) to help you on this task.
 
-   - When you are done, you should only have changes into the `po/xx.po` file. Commit them and open a PR.
-   The PR must stars with `i18n` to let the maintainers know that the PR is only changing translation.
+- When you are done, you should only have changes into the `po/xx.po` file. Commit them and open a PR.
+  The PR must stars with `i18n` to let the maintainers know that the PR is only changing translation.
 
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
-
 
 ### Work locally (Cairo programs verification)
 
@@ -68,20 +71,21 @@ The current book has a mdbook backend to extract Cairo programs from the markdow
 To run this locally, and test if a Cairo program you have written in the book actually compiled.
 
 The mdbook-cairo backend is working as following:
+
 1. It takes every code blocks in the markdown source and parse all of them.
 2. Code blocks with a main function `fn main()` are extracted into Cairo programs.
 3. The extracted programs are nammed based on the chapter they belong to, and a consecutive
    number of the `fn main()` found in the chapter.
 4. If you have a code block with a `fn main()` function, but you know that is does not compile,
    you can add an attribute to the code block tag value as following:
-   
+
    ````
    ```rust,does_not_compile
    fn main() {
    }
    ```
    ````
-   
+
    This main function will still count in the consecutive number of `fn main()` in the chapter file,
    but will not be extracted into a Cairo program.
 
@@ -90,3 +94,31 @@ and run:
 
 `bash mdbook-cairo/scripts/cairo_local_verify.sh`
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.starknet.id/"><img src="https://avatars.githubusercontent.com/u/78437165?v=4?s=100" width="100px;" alt="Fricoben"/><br /><sub><b>Fricoben</b></sub></a><br /><a href="#ideas-fricoben" title="Ideas, Planning, & Feedback">🤔</a> <a href="#fundingFinding-fricoben" title="Funding Finding">🔍</a> <a href="#projectManagement-fricoben" title="Project Management">📆</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/enitrat"><img src="https://avatars.githubusercontent.com/u/60658558?v=4?s=100" width="100px;" alt="Mathieu"/><br /><sub><b>Mathieu</b></sub></a><br /><a href="#ideas-enitrat" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/cairo-book/cairo-book.github.io/commits?author=enitrat" title="Code">💻</a> <a href="#mentoring-enitrat" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/cairo-book/cairo-book.github.io/pulls?q=is%3Apr+reviewed-by%3Aenitrat" title="Reviewed Pull Requests">👀</a> <a href="#projectManagement-enitrat" title="Project Management">📆</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Nadai2010"><img src="https://avatars.githubusercontent.com/u/112663528?v=4?s=100" width="100px;" alt="Nadai"/><br /><sub><b>Nadai</b></sub></a><br /><a href="#translation-Nadai2010" title="Translation">🌍</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/glihm"><img src="https://avatars.githubusercontent.com/u/7962849?v=4?s=100" width="100px;" alt="glihm"/><br /><sub><b>glihm</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/commits?author=glihm" title="Code">💻</a> <a href="#tool-glihm" title="Tools">🔧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/clementwalter/"><img src="https://avatars.githubusercontent.com/u/18620296?v=4?s=100" width="100px;" alt="Clément Walter"/><br /><sub><b>Clément Walter</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/pulls?q=is%3Apr+reviewed-by%3AClementWalter" title="Reviewed Pull Requests">👀</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
