@@ -89,7 +89,7 @@ Then create a new file called `src/hello_scarb.cairo` and put the following code
 
 <span class="filename">Filename: src/hello_scarb.cairo</span>
 
-```rust
+```rust,file=hello_scarb.cairo
 use debug::PrintTrait;
 fn main() {
     'Hello, Scarb!'.print();

@@ -204,10 +204,10 @@ msgstr "par la communauté de Cairo et ses [contributeurs](https://github.com/ca
 
 #: src/title-page.md:5
 msgid ""
-"This version of the text assumes you’re using Cairo v1.0.0-alpha.7 (released "
+"This version of the text assumes you’re using Cairo v1.0.0 (released "
 "2023-04-13). See the “Installation” section of Chapter 1 to install or "
 "update Cairo."
-msgstr "La version actuelle considère que vous utilisez Cairo v1.0.0-alpha.7 (version 2023-04-13). "
+msgstr "La version actuelle considère que vous utilisez Cairo v1.0.0 (version 2023-04-13). "
 "Se référer à la section “Installation” du chapitre 1 pour installer ou actualiser Cairo."
 
 #: src/ch00-01-foreword.md:1
@@ -427,7 +427,7 @@ msgstr ""
 msgid ""
 "If you wish to install a specific release of Cairo rather than the latest "
 "head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export "
-"CAIRO_GIT_TAG=v1.0.0-alpha.6`)."
+"CAIRO_GIT_TAG=v1.0.0`)."
 msgstr ""
 
 #: src/ch01-01-installation.md:22
@@ -645,7 +645,7 @@ msgid ""
 "# View tags (you can also do this in the cairo compiler repository)\n"
 "git describe --tags `git rev-list --tags`\n"
 "# Checkout the version you want\n"
-"git checkout tags/v1.0.0-alpha.6\n"
+"git checkout tags/v1.0.0\n"
 "\n"
 "# Generate release binaries\n"
 "cargo build --all --release\n"
@@ -757,7 +757,7 @@ msgid ""
 "developed\n"
 "> a VSCode extension for the Cairo language that you can use to get the "
 "features from\n"
-"> the language server and code highlighting. See [Appendix A][devtools]\n"
+"> the language server and code highlighting. See [Appendix B][devtools]\n"
 "> for more details."
 msgstr ""
 
@@ -929,7 +929,7 @@ msgid ""
 "> use the automatic formatter tool called `cairo-format` to format your code "
 "in a\n"
 "> particular style (more on `cairo-format` in\n"
-"> [Appendix A][devtools]). The Cairo team has included this tool\n"
+"> [Appendix B][devtools]). The Cairo team has included this tool\n"
 "> with the standard Cairo distribution, as `cairo-run` is, so it should "
 "already be\n"
 "> installed on your computer!"
@@ -10290,7 +10290,7 @@ msgid ""
 msgstr ""
 
 #: src/appendix-04-useful-development-tools.md:1
-msgid "## Appendix A - Useful Development Tools"
+msgid "## Appendix B - Useful Development Tools"
 msgstr ""
 
 #: src/appendix-04-useful-development-tools.md:3

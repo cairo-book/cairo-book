@@ -27,6 +27,10 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    `sudo apt install gettext`.
 
 3. Clone this repository.
+4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
+   ```
+   cargo install --path mdbook-cairo
+   ```
 
 ### Work locally (english, main language)
 
@@ -56,3 +60,33 @@ To work with translations, those are the steps to update the translated content:
    The PR must stars with `i18n` to let the maintainers know that the PR is only changing translation.
 
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
+
+
+### Work locally (Cairo programs verification)
+
+The current book has a mdbook backend to extract Cairo programs from the markdown sources.
+To run this locally, and test if a Cairo program you have written in the book actually compiled.
+
+The mdbook-cairo backend is working as following:
+1. It takes every code blocks in the markdown source and parse all of them.
+2. Code blocks with a main function `fn main()` are extracted into Cairo programs.
+3. The extracted programs are nammed based on the chapter they belong to, and a consecutive
+   number of the `fn main()` found in the chapter.
+4. If you have a code block with a `fn main()` function, but you know that is does not compile,
+   you can add an attribute to the code block tag value as following:
+   
+   ````
+   ```rust,does_not_compile
+   fn main() {
+   }
+   ```
+   ````
+   
+   This main function will still count in the consecutive number of `fn main()` in the chapter file,
+   but will not be extracted into a Cairo program.
+
+To run the CI locally, ensure that you are at the root of the repository (same directoy of this `README.md` file),
+and run:
+
+`bash mdbook-cairo/scripts/cairo_local_verify.sh`
+

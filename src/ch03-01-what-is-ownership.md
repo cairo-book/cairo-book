@@ -78,7 +78,7 @@ So, how does the ownership system ensure that each cell is never written to more
 Consider the following code, where we try to pass the same instance of an array in two consecutive
 function calls:
 
-```rust
+```rust,does_not_compile
 use array::ArrayTrait;
 fn foo(arr: Array<u128>) {
 }
@@ -144,7 +144,7 @@ _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 4](c
 You may have noticed that the `Point` type in the previous example also implements the `Drop` trait. In Cairo, a value cannot go out of scope unless it has been previously moved.
 For example, the following code will not compile, because the struct `A` is not moved before it goes out of scope:
 
-```rust
+```rust,does_not_compile
 struct A {}
 
 fn main() {
@@ -181,7 +181,7 @@ Manually calling the `squash` method on a dictionary is not very convenient, and
 
 Consider the following example, in which we define a custom type that contains a dictionary:
 
-```rust
+```rust,does_not_compile
 use dict::Felt252DictTrait;
 
 struct A {

@@ -63,6 +63,17 @@ In the example below, we use generic type `T` and our method signatures can use 
 ```rust
 use debug::PrintTrait;
 
+#[derive(Copy,Drop)]
+struct Rectangle{
+    height: u64,
+    width: u64,
+}
+
+#[derive(Copy,Drop)]
+struct Circle{
+    radius: u64,
+}
+
 // Here T is an alias type which will be provided buring implementation
 trait ShapeGeometry<T> {
     fn boundary(self: T) -> u64;
@@ -92,11 +103,11 @@ impl CircleGeometry of ShapeGeometry<Circle> {
 }
 
 fn main() {
-    let rect = Rectangle { height: 5_u128, width: 7_u128 };
+    let rect = Rectangle { height: 5_u64, width: 7_u64 };
     rect.area().print(); // 35
     rect.boundary().print(); // 24
 
-    let circ = Circle { radius: 5_u128 };
+    let circ = Circle { radius: 5_u64 };
     circ.area().print(); // 78
     circ.boundary().print(); // 31
 }
@@ -104,14 +115,14 @@ fn main() {
 
 ## Managing and using external trait implementations
 
-To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use debug::PrintTrait;` to use `print()` methods.
+To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use debug::PrintTrait;` to use the `print()` methods on supported types.
 
 In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
 If `CircleGeometry` was in a separate module/file `circle` then to use `boundary` on `circ: Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`.
 
 If the code was organised into modules like this,
 
-```rust
+```rust, does_not_compile
 use debug::PrintTrait;
 
 // struct Circle { ... } and struct Rectangle { ... }
