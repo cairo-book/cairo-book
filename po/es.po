@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-05-22 08:53+0100\n"
+"PO-Revision-Date: 2023-05-31 11:19+0100\n"
 "Last-Translator: dami <pinonesdamian@gmail.com>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
 "Language: es\n"
@@ -198,14 +198,18 @@ msgid "Appendix"
 msgstr "Apéndice"
 
 #: src/SUMMARY.md:86
+msgid "A - Keywords"
+msgstr "A - Palabras clave"
+
+#: src/SUMMARY.md:87
 msgid "B - Operators and Symbols"
 msgstr "B - Operadores y Símbolos"
 
-#: src/SUMMARY.md:87
+#: src/SUMMARY.md:88
 msgid "C - Derivable Traits"
 msgstr "C - Traits Derivables"
 
-#: src/SUMMARY.md:88
+#: src/SUMMARY.md:89
 msgid "D - Useful Development Tools"
 msgstr "D - Herramientas de Desarrollo Útiles"
 
@@ -15709,7 +15713,7 @@ msgstr "> También podríamos haber utilizado aquí el atributo #[should_panic].
 
 #: src/ch09-02-error-handling.md:125
 msgid "### The `?` operator ?"
-msgstr "### El operador `?`"
+msgstr "### ¿El operador `?`?"
 
 #: src/ch09-02-error-handling.md:127
 msgid ""
@@ -15894,13 +15898,14 @@ msgid ""
 "are, what are they used for and why would blockchain developers use Cairo "
 "and Starknet.\n"
 "If you are already familiar with blockchain programming, feel free to skip "
-"this chapter. The last part might still be intersting though."
+"this chapter. The last part might still be interesting though."
 msgstr ""
 "Este capítulo te dará una introducción de alto nivel a lo que son los "
 "contratos inteligentes, para qué se usan y por qué los desarrolladores de "
 "blockchain usan Cairo y Starknet.\n"
 "Si ya estás familiarizado con la programación de cadenas de bloques, puedes "
-"saltarte este capítulo. Sin embargo, la última parte puede ser interesante."
+"saltarte este capítulo. Sin embargo, la última parte puede seguir siendo "
+"interesante."
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:6
 msgid "## Smart-contracts"
@@ -17574,13 +17579,186 @@ msgstr ""
 "resultarle útil en su \n"
 "viaje a Cairo."
 
-#: src/appendix-04-useful-development-tools.md:1
-msgid "## Appendix A - Useful Development Tools"
+#: src/appendix-01-keywords.md:1
+msgid "## Appendix A: Keywords"
+msgstr "## Apéndice A: Palabras Clave"
+
+#: src/appendix-01-keywords.md:3
+msgid ""
+"The following list contains keywords that are reserved for current or "
+"future\n"
+"use by the Cairo language."
+msgstr ""
+"La siguiente lista contiene palabras clave que están reservadas para uso "
+"actual o futuro por el lenguaje Cairo\n"
+"por el lenguaje Cairo."
+
+#: src/appendix-01-keywords.md:6
+msgid "There are three keyword categories:"
+msgstr "Hay tres categorías de (Keyword) palabras clave:"
+
+#: src/appendix-01-keywords.md:8
+msgid ""
+"- strict\n"
+"- reserved"
+msgstr ""
+"- strict\n"
+"- reserved"
+
+#: src/appendix-01-keywords.md:13
+msgid "### Strict keywords"
+msgstr "### Palabras Clave Estrictas"
+
+#: src/appendix-01-keywords.md:15
+msgid ""
+"These keywords can only be used in their correct contexts.\n"
+"They cannot be used as names of any items."
+msgstr ""
+"Estas palabras clave sólo pueden utilizarse en sus contextos correctos.\n"
+"No pueden utilizarse como nombres de ningún elemento."
+
+#: src/appendix-01-keywords.md:18
+msgid ""
+"- `as` - Rename import\n"
+"- `break` - Exit a loop immediately\n"
+"- `const` - Define constant items\n"
+"- `continue` - Continue to the next loop iteration\n"
+"- `else` - Fallback for `if` and `if let` control flow constructs\n"
+"- `enum` - Define an enumeration\n"
+"- `extern` - Function defined at the compiler level using hint available at "
+"cairo1 level with this declaration\n"
+"- `false` - Boolean false literal\n"
+"- `fn` - Define a function\n"
+"- `if` - Branch based on the result of a conditional expression\n"
+"- `impl` - Implement inherent or trait functionality\n"
+"- `implicits` - Special kind of function parameters that are required to "
+"perform certain actions\n"
+"- `let` - Bind a variable\n"
+"- `loop` - Loop unconditionally\n"
+"- `match` - Match a value to patterns\n"
+"- `mod` - Define a module\n"
+"- `mut` - Denote variable mutability\n"
+"- `nopanic` - Functions marked with this notation mean that the function "
+"will never panic.\n"
+"- `of` - Implement a trait\n"
+"- `ref` - Bind by reference\n"
+"- `return` - Return from function\n"
+"- `struct` - Define a structure\n"
+"- `trait` - Define a trait\n"
+"- `true` - Boolean true literal\n"
+"- `type` - Define a type alias\n"
+"- `use` - Bring symbols into scope"
+msgstr ""
+"- `as` - Renombrar importación\n"
+"- `break` - Salir inmediatamente de un bucle\n"
+"- `const` - Definir elementos constantes\n"
+"- `continue` - Continúa con la siguiente iteración del bucle\n"
+"- `else` - Fallback para construcciones de flujo de control `if` y `if let`\n"
+"- `enum` - Define una enumeración\n"
+"- `extern` - Función definida a nivel de compilador utilizando una "
+"sugerencia disponible a nivel de cairo1 con esta declaración\n"
+"- `false` - Literal booleano falso\n"
+"- `fn` - Define una función\n"
+"- `if` - Rama basada en el resultado de una expresión condicional\n"
+"- `impl` - Implementa funcionalidad inherente o trait\n"
+"- `implicits` - Parámetros de función de tipo especial necesarios para "
+"realizar ciertas acciones\n"
+"- `let` - Vincular una variable\n"
+"- `loop` - Hacer un bucle incondicional\n"
+"- `match` - Comparar un valor con patrones\n"
+"- `mod` - Definir un módulo\n"
+"- `mut` - Denota mutabilidad de variables\n"
+"- `nopanic` - Las funciones marcadas con esta notación significan que la "
+"función nunca entrará en pánico.\n"
+"- `of` - Implementar un trait\n"
+"- `ref` - Vincular por referencia\n"
+"- `return` - Retorno de una función\n"
+"- `struct` - Define una estructura\n"
+"- `trait` - Define un trait\n"
+"- `true` - Literal booleano verdadero\n"
+"- `type` - Definir un alias de tipo\n"
+"- `use` - Introducir símbolos"
+
+#: src/appendix-01-keywords.md:47
+msgid "### Reserved keywords"
+msgstr "### Palabras Clave Reservadas"
+
+#: src/appendix-01-keywords.md:49
+msgid ""
+"These keywords aren't used yet, but they are reserved for future use.\n"
+"They have the same restrictions as strict keywords.\n"
+"The reasoning behind this is to make current programs forward compatible "
+"with future versions of\n"
+"Cairo by forbidding them to use these keywords."
+msgstr ""
+"Estas palabras clave aún no se utilizan, pero están reservadas para un uso "
+"futuro.\n"
+"Tienen las mismas restricciones que las palabras clave estrictas.\n"
+"El razonamiento detrás de esto es hacer que los programas actuales sean "
+"compatibles con futuras versiones de\n"
+"Cairo prohibiéndoles usar estas palabras clave."
+
+#: src/appendix-01-keywords.md:54
+msgid ""
+"- `assert`\n"
+"- `do`\n"
+"- `dyn`\n"
+"- `macro`\n"
+"- `move`\n"
+"- `Self`\n"
+"- `self`\n"
+"- `static_assert`\n"
+"- `static`\n"
+"- `super`\n"
+"- `try`\n"
+"- `typeof`\n"
+"- `unsafe`\n"
+"- `where`\n"
+"- `while`\n"
+"- `with`\n"
+"- `yield`"
+msgstr ""
+"- `assert`\n"
+"- `do`\n"
+"- `dyn`\n"
+"- `macro`\n"
+"- `move`\n"
+"- `Self`\n"
+"- `self`\n"
+"- `static_assert`\n"
+"- `static`\n"
+"- `super`\n"
+"- `try`\n"
+"- `typeof`\n"
+"- `unsafe`\n"
+"- `where`\n"
+"- `while`\n"
+"- `with`\n"
+"- `yield`"
+
+#: src/appendix-02-operators-and-symbols.md:1
+msgid "# Appendix B: Operators and Symbols"
+msgstr "# Apéndice B: Operadores y Símbolos"
+
+#: src/appendix-02-operators-and-symbols.md:3
+msgid "This appendix includes a glossary of Cairo's syntax."
+msgstr "Este apéndice incluye un glosario de la sintaxis de Cairo."
+
+#: src/appendix-02-operators-and-symbols.md:5
+msgid "## Operators"
+msgstr "## Operadores"
+
+#: src/appendix-02-operators-and-symbols.md:7
+msgid ""
+"Table B-1 contains the operators in Cairo, an example of how the operator "
+"would appear in context, a short explanation, and whether that operator is "
+"overloadable. If an operator is overloadable, the relevant trait to use to "
+"overload that operator is listed."
 msgstr ""
 "La Tabla B-1 contiene los operadores en Cairo, un ejemplo de cómo aparecería "
 "el operador en contexto, una breve explicación y si el operador es "
-"sobrecargable. Si un operador es sobrecargable, se enumera el rasgo "
-"relevante a usar para sobrecargar ese operador."
+"sobrecargable. Si un operador es sobrecargable, se lista el trait relevante "
+"a usar para sobrecargar ese operador."
 
 #: src/appendix-02-operators-and-symbols.md:9
 msgid "<span class=\"caption\">Table B-1: Operators</span>"
@@ -18357,3 +18535,6 @@ msgstr ""
 "para obtener instrucciones de instalación, Usted ganará habilidades tales "
 "como autocompletado, saltar a\n"
 "y errores en línea."
+
+#~ msgid "## Appendix A - Useful Development Tools"
+#~ msgstr "## Apéndice A - Herramientas de Desarrollo Útiles"
