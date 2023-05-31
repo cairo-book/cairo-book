@@ -23,8 +23,9 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    cargo install mdbook mdbook-i18n-helpers
    ```
 2. Host machine packages:
+
    - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager:
-   `sudo apt install gettext`.
+     `sudo apt install gettext`.
 
 3. Clone this repository.
 4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
@@ -36,12 +37,12 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 All the Markdown files **MUST** be edited in english. To work locally in english:
 
-   - Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
-   You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
+- Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
+  You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
 
-   - Make changes to the book and refresh the browser to see the changes.
+- Make changes to the book and refresh the browser to see the changes.
 
-   - Open a PR with your changes.
+- Open a PR with your changes.
 
 ### Work locally (translations)
 
@@ -52,15 +53,14 @@ auto-generated and updated by translators.
 
 To work with translations, those are the steps to update the translated content:
 
-   - Run a local server for the language you want to edit: `./translations.sh es` for instance. If no language is provided, the script will only extract translations from english.
+- Run a local server for the language you want to edit: `./translations.sh es` for instance. If no language is provided, the script will only extract translations from english.
 
-   - Open the translation file you are interested in `po/es.po` for instance. You can also use editors like [poedit](https://poedit.net/) to help you on this task.
+- Open the translation file you are interested in `po/es.po` for instance. You can also use editors like [poedit](https://poedit.net/) to help you on this task.
 
-   - When you are done, you should only have changes into the `po/xx.po` file. Commit them and open a PR.
-   The PR must stars with `i18n` to let the maintainers know that the PR is only changing translation.
+- When you are done, you should only have changes into the `po/xx.po` file. Commit them and open a PR.
+  The PR must stars with `i18n` to let the maintainers know that the PR is only changing translation.
 
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
-
 
 ### Work locally (Cairo programs verification)
 
@@ -68,20 +68,21 @@ The current book has a mdbook backend to extract Cairo programs from the markdow
 To run this locally, and test if a Cairo program you have written in the book actually compiled.
 
 The mdbook-cairo backend is working as following:
+
 1. It takes every code blocks in the markdown source and parse all of them.
 2. Code blocks with a main function `fn main()` are extracted into Cairo programs.
 3. The extracted programs are nammed based on the chapter they belong to, and a consecutive
    number of the `fn main()` found in the chapter.
 4. If you have a code block with a `fn main()` function, but you know that is does not compile,
    you can add an attribute to the code block tag value as following:
-   
+
    ````
    ```rust,does_not_compile
    fn main() {
    }
    ```
    ````
-   
+
    This main function will still count in the consecutive number of `fn main()` in the chapter file,
    but will not be extracted into a Cairo program.
 
@@ -90,3 +91,13 @@ and run:
 
 `bash mdbook-cairo/scripts/cairo_local_verify.sh`
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
