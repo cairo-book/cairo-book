@@ -87,4 +87,4 @@
   - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
   - [C - Derivable Traits](appendix-03-derivable-traits.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
-  - [B - Cairo Most Common Types and Traits](appendix-05-most-common-types-and-traits.md)
+  - [E - Cairo Most Common Types and Traits](appendix-05-most-common-types-and-traits.md)
