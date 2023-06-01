@@ -3,7 +3,7 @@
 The following list contains keywords that are reserved for current or future
 use by the Cairo language.
 
-There are three keyword categories:
+There are two keyword categories:
 
 - strict
 - reserved
