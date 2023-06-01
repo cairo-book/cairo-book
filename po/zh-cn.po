@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-06-02 03:38+0900\n"
+"PO-Revision-Date: 2023-06-02 04:13+0900\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -251,8 +251,8 @@ msgid ""
 "expressive. The learning curve was initially steep, as Cairo 0.x was a low-level language that did not entirely abstract the underlying cryptographic primitives required to build a "
 "proof for the execution of a program."
 msgstr ""
-"2020年，StarkWare发布了Cairo 0，这是一种支持可验证计算的图灵完全编程语言。Cairo最初是一种汇编语言，后来逐渐变得更具表现力。最初的学习曲线很陡峭，因为Cairo 0.x是一种低级语言，没有完全"
-"抽象出为程序的执行建立证明所需的底层加密原语。"
+"2020年，StarkWare发布了Cairo 0，这是一种支持可验证计算的图灵完备编程语言。Cairo最初是一种汇编语言，后来逐渐变得更具表现力。因为Cairo 0.x是一种低级语言，没有完全抽象出为程序的执行建立"
+"证明所需的底层加密原语，所以最初的学习曲线很陡峭。"
 
 #: src/ch00-01-foreword.md:5
 msgid ""
@@ -261,8 +261,8 @@ msgid ""
 "itself, increasing the overall security of Cairo programs. Powered by a Rust VM, the execution of Cairo programs is now _blazingly_ fast, allowing you to build an extensive test "
 "suite without compromising on performance."
 msgstr ""
-"随着Cairo 1的发布，开发者的体验有了很大的改善，尽可能地抽象出Cairo架构的底层不可变的内存模型。受到Rust的强烈启发，Cairo 1的建立是为了帮助你创建可证明的程序，而不需要具体了解其底层架"
-"构，这样你就可以专注于程序本身，提高Cairo程序的整体安全性。在Rust虚拟机的支持下，Cairo程序的执行速度现在快得惊人，允许你在不影响性能的情况下建立一个广泛的测试套件。"
+"随着Cairo 1的发布，由于尽可能地对Cairo架构底层的不可变内存模型进行了抽象，开发者的体验有了很大的改善。受到Rust的强烈启发，Cairo 1是为了帮助你无需具体了解其底层架构就创建可证明的程序而"
+"生，这样你就可以专注于程序本身，这提高Cairo程序的整体安全性。在Rust虚拟机的支持下，Cairo程序的执行速度现在快得惊人，允许你在不影响性能的情况下建立一个广泛的测试套件。"
 
 #: src/ch00-01-foreword.md:7
 msgid ""
@@ -276,14 +276,14 @@ msgstr ""
 msgid ""
 "However, Cairo is not only for blockchain developers. As a general purpose programming language, it can be used for any computation that would benefit from being proved on one "
 "computer and verified on other machines with lower hardware requirements."
-msgstr "然而，Cairo不仅适用于区块链开发者。作为一种通用的编程语言，它可以用于任何需要在一台计算机上生成证明并在其他硬件要求较低的机器上验证的计算场景。"
+msgstr "然而，Cairo不仅仅适用于区块链开发者。作为一种通用的编程语言，它可以用于任何需要在一台计算机上生成证明并在其他硬件要求较低的机器上验证的计算场景。"
 
 #: src/ch00-01-foreword.md:11
 msgid ""
 "This book is designed for developers with a basic understanding of programming concepts. It is a friendly and approachable text intended to help you level up your knowledge of Cairo, "
 "but also help you develop your programming skills in general. So, dive in and get ready to learn all there is to know about Cairo!"
 msgstr ""
-"本书是为对编程概念有基本了解的开发人员设计的。它是一本友好而平易近人的文本，旨在帮助你提高你的Cairo知识水平，同时也帮助你发展你的一般编程技能。因此，请潜心学习，并准备好学习所有关于"
+"本书是为对编程概念有基本了解的开发人员设计的。它是一本友好而平易近人的书本，旨在帮助你提高你的Cairo知识水平，同时也帮助你提高你的通用编程技能。因此，请潜下心来，并准备好学习所有关于"
 "Cairo的知识!"
 
 #: src/ch00-01-foreword.md:13
@@ -14132,7 +14132,7 @@ msgstr ""
 
 #: src/appendix-04-useful-development-tools.md:7
 msgid "### Automatic Formatting with `cairo-format`"
-msgstr "### 用`cairo-format’自动格式化"
+msgstr "### 用`cairo-format`自动格式化"
 
 #: src/appendix-04-useful-development-tools.md:9
 msgid ""
@@ -14140,8 +14140,8 @@ msgid ""
 "Many collaborative projects use `cairo-format` to prevent arguments about which\n"
 "style to use when writing Cairo: everyone formats their code using the tool."
 msgstr ""
-"`cairo-format`工具根据社区的代码风格重新格式化你的代码。\n"
-"在很多合作项目里，每个成员都会使用`cairo-format`以防止在编写Cairo时争论使用哪种风格。"
+"`cairo-format`工具根据Cairo社区的代码风格重新格式化你的代码。\n"
+"在大多多人合作项目里，每个成员都会使用`cairo-format`以防止在编写Cairo时争论使用哪种代码风格。"
 
 #: src/appendix-04-useful-development-tools.md:13
 msgid "To format any Cairo project, enter the following:"
@@ -14179,10 +14179,9 @@ msgid ""
 "[the Cairo extension for Visual Studio Code][vscode-cairo]."
 msgstr ""
 "为了帮助IDE整合，Cairo社区建议使用\n"
-"[`cairo-language-server`][cairo-language-server]<!-- ignore -->。这个工具是一套\n"
+"[`cairo-language-server`][cairo-language-server]<!-- ignore -->。这是\n"
 "[Language Server Protocol][lsp]<!-- ignore -->的一套以编译器为中心的实用工具。\n"
-"它是IDE和编程语言的规范，用于\n"
-"互相通信的规范。不同的客户端都可以使用`cairo-language-server`，例如\n"
+"它是用于IDE和编程语言互相通信的规范。不同的客户端都可以使用`cairo-language-server`，例如\n"
 "[Visual Studio Code的Cairo扩展][vscode-cairo]。"
 
 #: src/appendix-04-useful-development-tools.md:34
