@@ -8,6 +8,9 @@ There are two keyword categories:
 - strict
 - reserved
 
+There is a third category, which are functions from the core library. While their names are not reserved,
+they are not recommended to be used as names of any items to follow good practices.
+
 ---
 
 ### Strict keywords
@@ -51,7 +54,6 @@ They have the same restrictions as strict keywords.
 The reasoning behind this is to make current programs forward compatible with future versions of
 Cairo by forbidding them to use these keywords.
 
-- `assert`
 - `do`
 - `dyn`
 - `macro`
@@ -68,3 +70,11 @@ Cairo by forbidding them to use these keywords.
 - `while`
 - `with`
 - `yield`
+
+---
+
+### Built-in functions
+
+The Cairo programming language provides several specific functions that serve a special purpose. We will not cover all of them in this book, but using the names of these functions as names of other items is not recommended.
+
+-`assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function. -`panic` - This function terminates the program.
