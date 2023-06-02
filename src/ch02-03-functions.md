@@ -96,10 +96,10 @@ commas, like this:
 use debug::PrintTrait;
 
 fn main() {
-    another_function(5,6);
+    another_function(5, 6);
 }
 
-fn another_function(x: felt252, y:felt252) {
+fn another_function(x: felt252, y: felt252) {
     x.print();
     y.print();
 }
@@ -153,7 +153,7 @@ statement in itself.
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
-```rust,does_not_compile
+```rust,does_not_compile,ignore_format
 fn main() {
     let x = (let y = 6);
 }

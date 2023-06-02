@@ -16,7 +16,7 @@ fn main() {
     let mut data = ArrayTrait::new();
     data.append(2);
     panic(data);
-    'This line isn't reached'.print();
+    'This line isn\'t reached'.print();
 }
 ```
 

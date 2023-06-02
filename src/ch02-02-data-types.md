@@ -10,9 +10,9 @@ when many types are possible, we can use a cast method where we specify the desi
 ```Rust
 use traits::TryInto;
 use option::OptionTrait;
-fn main(){
+fn main() {
     let x: felt252 = 3;
-    let y:u32 = x.try_into().unwrap();
+    let y: u32 = x.try_into().unwrap();
 }
 ```
 
@@ -96,7 +96,7 @@ how you’d use each numeric operation in a `let` statement:
 
 ```rust
 fn main() {
-     // addition
+    // addition
     let sum = 5_u128 + 10_u128;
 
     // subtraction
@@ -157,12 +157,12 @@ On the other hand, the `into` method can be used for type casting when success i
 
 To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
 
-```rust
+```rust,ignore_format
 use traits::TryInto;
 use traits::Into;
 use option::OptionTrait;
 
-fn main(){
+fn main() {
     let my_felt = 10;
     let my_u8: u8 = my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
     let my_u16: u16 = my_felt.try_into().unwrap();
@@ -189,7 +189,7 @@ type annotations in this example:
 
 ```rust
 fn main() {
-    let tup: (u32,u64,bool) = (10,20,true);
+    let tup: (u32, u64, bool) = (10, 20, true);
 }
 ```
 

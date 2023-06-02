@@ -56,7 +56,7 @@ fn main() {
 }
 
 fn area(dimension: (u64, u64)) -> u64 {
-    let (x,y) = dimension;
+    let (x, y) = dimension;
     x * y
 }
 ```
@@ -73,7 +73,7 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,ignore_format
 use debug::PrintTrait;
 
 struct Rectangle {
@@ -105,7 +105,7 @@ It’d be useful to be able to print an instance of `Rectangle` while we’re de
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,does_not_compile
+```rust,does_not_compile,ignore_format
 use debug::PrintTrait;
 
 struct Rectangle {
@@ -141,7 +141,7 @@ To learn more about traits, see [Traits in Cairo](ch07-02-traits-in-cairo.md).
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,ignore_format
 use debug::PrintTrait;
 
 struct Rectangle {

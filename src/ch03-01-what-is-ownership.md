@@ -80,11 +80,9 @@ function calls:
 
 ```rust,does_not_compile
 use array::ArrayTrait;
-fn foo(arr: Array<u128>) {
-}
+fn foo(arr: Array<u128>) {}
 
-fn bar(arr:Array<u128>){
-}
+fn bar(arr: Array<u128>) {}
 
 fn main() {
     let mut arr = ArrayTrait::<u128>::new();
@@ -116,7 +114,7 @@ If a type implements the `Copy` trait, passing it to a function will not move th
 You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components don't implement the Copy trait.
 While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
 
-```rust
+```rust,ignore_format
 #[derive(Copy, Drop)]
 struct Point {
     x: u128,
@@ -189,9 +187,7 @@ struct A {
 }
 
 fn main() {
-    A {
-        dict: Felt252DictTrait::new()
-    };
+    A { dict: Felt252DictTrait::new() };
 }
 ```
 
@@ -215,9 +211,7 @@ struct A {
 }
 
 fn main() {
-    A {
-        dict: Felt252DictTrait::new()
-    }; // No error here
+    A { dict: Felt252DictTrait::new() }; // No error here
 }
 ```
 
@@ -257,7 +251,7 @@ showing where variables go into and out of scope.
 
 <span class="filename">Filename: src/main.cairo</span>
 
-```rust
+```rust,ignore_format
 #[derive(Drop)]
 struct MyStruct{}
 
@@ -299,15 +293,15 @@ function that returns some value, with similar annotations as those in Listing
 
 <span class="filename">Filename: src/main.cairo</span>
 
-```rust
+```rust,ignore_format
 #[derive(Drop)]
-struct A{}
+struct A {}
 
 fn main() {
     let a1 = gives_ownership();           // gives_ownership moves its return
                                           // value into a1
 
-    let a2 = A{};                         // a2 comes into scope
+    let a2 = A {};                        // a2 comes into scope
 
     let a3 = takes_and_gives_back(a2);    // a2 is moved into
                                           // takes_and_gives_back, which also
@@ -320,7 +314,7 @@ fn gives_ownership() -> A {               // gives_ownership will move its
                                           // return value into the function
                                           // that calls it
 
-    let some_a = A{};                     // some_a comes into scope
+    let some_a = A {};                    // some_a comes into scope
 
     some_a                                // some_a is returned and
                                           // moves ownership to the calling

@@ -57,7 +57,7 @@ You can use multiple conditions by combining if and else in an else if expressio
 
 <span class="filename">Filename: main.cairo</span>
 
-```rust
+```rust,ignore_format
 use debug::PrintTrait;
 
 fn main() {
@@ -132,10 +132,10 @@ like this:
 ```rust,ignore,does_not_compile
 use debug::PrintTrait;
 fn main() {
-    let mut i:usize = 0;
+    let mut i: usize = 0;
     loop {
-        if i > 10{
-            break();
+        if i > 10 {
+            break ();
         }
         'again!'.print();
     }

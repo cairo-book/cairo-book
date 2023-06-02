@@ -80,7 +80,7 @@ program. That makes you a Cairo programmer—welcome!
 Let’s review this “Hello, world!” program in detail. Here’s the first piece of
 the puzzle:
 
-```rust
+```rust,ignore_format
 fn main() {
 
 }
