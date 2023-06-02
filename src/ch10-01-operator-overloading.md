@@ -20,9 +20,9 @@ impl PotionAdd of Add<Potion> {
 }
 
 fn main() {
-    let health_potion: Potion = Potion { health: 100, mana: 0};
     let health_potion: Potion = Potion { health: 100, mana: 0 };
     let mana_potion: Potion = Potion { health: 0, mana: 100 };
+    let super_potion: Potion = health_potion + mana_potion;
     // Both potions were combined with the `+` operator.
     assert(super_potion.health == 100, '');
     assert(super_potion.mana == 100, '');
