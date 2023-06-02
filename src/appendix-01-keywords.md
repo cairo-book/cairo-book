@@ -3,14 +3,13 @@
 The following list contains keywords that are reserved for current or future
 use by the Cairo language.
 
-There are three keyword categories:
+There are two keyword categories:
 
 - strict
 - reserved
 
-Also there are special purpose functions:
-
-- built-in functions
+There is a third category, which are functions from the core library. While their names are not reserved,
+they are not recommended to be used as names of any items to follow good practices.
 
 ---
 
@@ -76,6 +75,6 @@ Cairo by forbidding them to use these keywords.
 
 ### Built-in functions
 
-The Cairo programming language provides several specific functions that serve a special purpose.
+The Cairo programming language provides several specific functions that serve a special purpose. We will not cover all of them in this book, but using the names of these functions as names of other items is not recommended.
 
 -`assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function. -`panic` - This function terminates the program.
