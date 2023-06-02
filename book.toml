@@ -11,8 +11,10 @@ extra-watch-dirs = ["po"]
 [preprocessor.gettext]
 after = ["links"]
 
-[output.html.playground]
-runnable = false
+[output.html]
+git-repository-url = "https://github.com/cairo-book/cairo-book.github.io/"
+edit-url-template = "https://github.com/cairo-book/cairo-book.github.io/edit/main/{path}"
+playground.runnable = false
 
 [output.cairo]
 output-dir = "cairo-programs"

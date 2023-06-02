@@ -117,8 +117,7 @@ fn main() {
 Each expression in these statements uses a mathematical operator and evaluates
 to a single value, which is then bound to a variable.
 
-<!-- TODO: Appendix operator -->
-<!-- [Appendix B][appendix_b] ignore contains a list of all operators that Cairo provides. -->
+[Appendix B][appendix_b] contains a list of all operators that Cairo provides.
 
 #### The Boolean Type
 
@@ -133,8 +132,6 @@ fn main() {
     let f: bool = false; // with explicit type annotation
 }
 ```
-
-[//]: # "TODO: control flow section"
 
 The main way to use Boolean values is through conditionals, such as an `if`
 expression. We’ll cover how `if` expressions work in Cairo in the [“Control
@@ -235,3 +232,4 @@ It is represented by a tuple with no elements.
 Its size is always zero, and it is guaranteed to not exist in the compiled code.
 
 [control-flow]: ch02-05-control-flow.md
+[appendix_b]: appendix-02-operators-and-symbols.md#operators

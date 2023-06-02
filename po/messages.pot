@@ -173,27 +173,43 @@ msgid "Starknet Smart Contracts"
 msgstr ""
 
 #: src/SUMMARY.md:79
-msgid "Writing Starknet Contracts"
+msgid "Introduction to smart-contracts"
 msgstr ""
 
 #: src/SUMMARY.md:80
-msgid "ABIs and Cross-contract Interactions"
+msgid "Writing Starknet Contracts"
 msgstr ""
 
 #: src/SUMMARY.md:81
-msgid "ABIs and Interfaces"
+msgid "ABIs and Cross-contract Interactions"
 msgstr ""
 
 #: src/SUMMARY.md:82
+msgid "ABIs and Interfaces"
+msgstr ""
+
+#: src/SUMMARY.md:83
 msgid "Contract Dispatchers, Library Dispachers and system calls"
 msgstr ""
 
-#: src/SUMMARY.md:84
+#: src/SUMMARY.md:85
 msgid "Appendix"
 msgstr ""
 
-#: src/SUMMARY.md:85
-msgid "A - Useful Development Tools"
+#: src/SUMMARY.md:86
+msgid "A - Keywords"
+msgstr ""
+
+#: src/SUMMARY.md:87
+msgid "B - Operators and Symbols"
+msgstr ""
+
+#: src/SUMMARY.md:88
+msgid "C - Derivable Traits"
+msgstr ""
+
+#: src/SUMMARY.md:89
+msgid "D - Useful Development Tools"
 msgstr ""
 
 #: src/title-page.md:1
@@ -212,7 +228,7 @@ msgstr ""
 #: src/title-page.md:5
 msgid ""
 "This version of the text assumes you’re using Cairo v1.0.0 (released "
-"2023-04-13). See the “Installation” section of Chapter 1 to install or "
+"2023-05-15). See the “Installation” section of Chapter 1 to install or "
 "update Cairo."
 msgstr ""
 
@@ -421,7 +437,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:22
 msgid ""
-"```bash \n"
+"```bash\n"
 "curl -L "
 "https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | "
 "bash\n"
@@ -494,11 +510,11 @@ msgstr ""
 
 #: src/ch01-01-installation.md:57
 msgid ""
-"* Define environment variable `CAIRO_ROOT` to point to the path where\n"
+"- Define environment variable `CAIRO_ROOT` to point to the path where\n"
 "  Cairo will store its data. `$HOME/.cairo` is the default.\n"
 "  If you installed Cairo via Git checkout, we recommend\n"
 "  to set it to the same location as where you cloned it.\n"
-"* Add the `cairo-*` executables to your `PATH` if it's not already there"
+"- Add the `cairo-*` executables to your `PATH` if it's not already there"
 msgstr ""
 
 #: src/ch01-01-installation.md:63
@@ -509,72 +525,74 @@ msgstr ""
 
 #: src/ch01-01-installation.md:65
 msgid ""
-"  - For **bash**:\n"
+"- For **bash**:\n"
 "\n"
-"    Stock Bash startup files vary widely between distributions in which of "
+"  Stock Bash startup files vary widely between distributions in which of "
 "them source\n"
-"    which, under what circumstances, in what order and what additional "
+"  which, under what circumstances, in what order and what additional "
 "configuration they perform.\n"
-"    As such, the most reliable way to get Cairo in all environments is to "
+"  As such, the most reliable way to get Cairo in all environments is to "
 "append Cairo\n"
-"    configuration commands to both `.bashrc` (for interactive shells)\n"
-"    and the profile file that Bash would use (for login shells).\n"
+"  configuration commands to both `.bashrc` (for interactive shells)\n"
+"  and the profile file that Bash would use (for login shells).\n"
 "\n"
-"    First, add the commands to `~/.bashrc` by running the following in your "
+"  First, add the commands to `~/.bashrc` by running the following in your "
 "terminal:\n"
 "\n"
-"    ~~~ bash\n"
-"    echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.bashrc\n"
-"    echo 'command -v cairo-compile >/dev/null || export "
+"  ```bash\n"
+"  echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.bashrc\n"
+"  echo 'command -v cairo-compile >/dev/null || export "
 "PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.bashrc\n"
-"    ~~~\n"
+"  ```\n"
 "\n"
-"    Then, if you have `~/.profile`, `~/.bash_profile` or `~/.bash_login`, "
-"add the commands there as well.\n"
-"    If you have none of these, add them to `~/.profile`.\n"
+"  Then, if you have `~/.profile`, `~/.bash_profile` or `~/.bash_login`, add "
+"the commands there as well.\n"
+"  If you have none of these, add them to `~/.profile`.\n"
 "\n"
-"    * to add to `~/.profile`:\n"
-"      ~~~ bash\n"
-"      echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.profile\n"
-"      echo 'command -v cairo-compile >/dev/null || export "
-"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.profile\n"
-"      ~~~\n"
+"  - to add to `~/.profile`:\n"
 "\n"
-"    * to add to `~/.bash_profile`:\n"
-"      ~~~ bash\n"
-"      echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.bash_profile\n"
-"      echo 'command -v cairo-compile >/dev/null || export "
-"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.bash_profile\n"
-"      ~~~\n"
-"\n"
-"  - For **Zsh**:\n"
-"    ~~~ zsh\n"
-"    echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.zshrc\n"
+"    ```bash\n"
+"    echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.profile\n"
 "    echo 'command -v cairo-compile >/dev/null || export "
+"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.profile\n"
+"    ```\n"
+"\n"
+"  - to add to `~/.bash_profile`:\n"
+"    ```bash\n"
+"    echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.bash_profile\n"
+"    echo 'command -v cairo-compile >/dev/null || export "
+"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.bash_profile\n"
+"    ```\n"
+"\n"
+"- For **Zsh**:\n"
+"\n"
+"  ```zsh\n"
+"  echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.zshrc\n"
+"  echo 'command -v cairo-compile >/dev/null || export "
 "PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.zshrc\n"
-"    ~~~\n"
+"  ```\n"
 "\n"
-"    If you wish to get Cairo in non-interactive login shells as well, also "
-"add the commands to `~/.zprofile` or `~/.zlogin`.\n"
+"  If you wish to get Cairo in non-interactive login shells as well, also add "
+"the commands to `~/.zprofile` or `~/.zlogin`.\n"
 "\n"
-"  - For **Fish shell**:\n"
+"- For **Fish shell**:\n"
 "\n"
-"    If you have Fish 3.2.0 or newer, execute this interactively:\n"
+"  If you have Fish 3.2.0 or newer, execute this interactively:\n"
 "\n"
-"    ~~~ fish\n"
-"    set -Ux CAIRO_ROOT $HOME/.cairo\n"
-"    fish_add_path $CAIRO_ROOT/target/release\n"
-"    ~~~\n"
+"  ```fish\n"
+"  set -Ux CAIRO_ROOT $HOME/.cairo\n"
+"  fish_add_path $CAIRO_ROOT/target/release\n"
+"  ```\n"
 "\n"
-"    Otherwise, execute the snippet below:\n"
+"  Otherwise, execute the snippet below:\n"
 "\n"
-"    ~~~ fish\n"
-"    set -Ux CAIRO_ROOT $HOME/.cairo\n"
-"    set -U fish_user_paths $CAIRO_ROOT/target/release $fish_user_paths\n"
-"    ~~~"
+"  ```fish\n"
+"  set -Ux CAIRO_ROOT $HOME/.cairo\n"
+"  set -U fish_user_paths $CAIRO_ROOT/target/release $fish_user_paths\n"
+"  ```"
 msgstr ""
 
-#: src/ch01-01-installation.md:119
+#: src/ch01-01-installation.md:121
 msgid ""
 "In MacOS, you might also want to install [Fig](https://fig.io/) which\n"
 "provides alternative shell completions for many command line tools with an\n"
@@ -583,43 +601,43 @@ msgid ""
 "so they might be slightly out of sync for bleeding-edge interface changes.)"
 msgstr ""
 
-#: src/ch01-01-installation.md:125
+#: src/ch01-01-installation.md:127
 msgid "### Restart your shell"
 msgstr ""
 
-#: src/ch01-01-installation.md:127
+#: src/ch01-01-installation.md:129
 msgid "for the `PATH` changes to take effect."
 msgstr ""
 
-#: src/ch01-01-installation.md:129
+#: src/ch01-01-installation.md:131
 msgid ""
 "```sh\n"
-"  exec \"$SHELL\"\n"
-"  ```"
+"exec \"$SHELL\"\n"
+"```"
 msgstr ""
 
-#: src/ch01-01-installation.md:133
+#: src/ch01-01-installation.md:135
 msgid ""
 "## Installing Cairo Manually "
 "([Guide](https://github.com/auditless/cairo-template) by "
 "[Abdel](https://github.com/abdelhamidbakhta))"
 msgstr ""
 
-#: src/ch01-01-installation.md:135
+#: src/ch01-01-installation.md:137
 msgid "### Step 1: Install Cairo 1.0"
 msgstr ""
 
-#: src/ch01-01-installation.md:137
+#: src/ch01-01-installation.md:139
 msgid ""
 "If you are using an x86 Linux system and can use the release binary, "
 "download Cairo here: <https://github.com/starkware-libs/cairo/releases>."
 msgstr ""
 
-#: src/ch01-01-installation.md:139
+#: src/ch01-01-installation.md:141
 msgid "For everyone else, we recommend compiling Cairo from source as follows:"
 msgstr ""
 
-#: src/ch01-01-installation.md:141
+#: src/ch01-01-installation.md:143
 msgid ""
 "```bash\n"
 "# Start by defining environment variable CAIRO_ROOT\n"
@@ -645,81 +663,81 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch01-01-installation.md:163
-msgid ". "
-msgstr ""
-
 #: src/ch01-01-installation.md:165
-msgid "**NOTE: Keeping Cairo up to date**"
+msgid "."
 msgstr ""
 
 #: src/ch01-01-installation.md:167
+msgid "**NOTE: Keeping Cairo up to date**"
+msgstr ""
+
+#: src/ch01-01-installation.md:169
 msgid ""
 "Now that your Cairo compiler is in a cloned repository, all you will need to "
 "do\n"
 "is pull the latest changes and rebuild as follows:"
 msgstr ""
 
-#: src/ch01-01-installation.md:170
+#: src/ch01-01-installation.md:172
 msgid ""
 "```bash\n"
 "cd $CAIRO_ROOT && git fetch && git pull && cargo build --all --release\n"
 "```"
 msgstr ""
 
-#: src/ch01-01-installation.md:174
+#: src/ch01-01-installation.md:176
 msgid "### Step 2: Add Cairo 1.0 executables to your path"
 msgstr ""
 
-#: src/ch01-01-installation.md:176
+#: src/ch01-01-installation.md:178
 msgid ""
 "```bash\n"
 "export PATH=\"$CAIRO_ROOT/target/release:$PATH\"\n"
 "```"
 msgstr ""
 
-#: src/ch01-01-installation.md:180
+#: src/ch01-01-installation.md:182
 msgid ""
 "**NOTE: If installing from a Linux binary, adapt the destination path "
 "accordingly.**"
 msgstr ""
 
-#: src/ch01-01-installation.md:182
+#: src/ch01-01-installation.md:184
 msgid "### Step 3: Setup Language Server"
 msgstr ""
 
-#: src/ch01-01-installation.md:184
+#: src/ch01-01-installation.md:186
 msgid "#### VS Code Extension"
 msgstr ""
 
-#: src/ch01-01-installation.md:186
+#: src/ch01-01-installation.md:188
 msgid ""
 "- Disable previous Cairo 0.x extension\n"
 "- Install the Cairo 1 extension for proper syntax highlighting and code "
 "navigation.\n"
-"Just follow the steps indicated "
+"  Just follow the steps indicated "
 "[here](https://github.com/starkware-libs/cairo/blob/main/vscode-cairo/README.md)."
 msgstr ""
 
-#: src/ch01-01-installation.md:190
+#: src/ch01-01-installation.md:192
 msgid "#### Cairo Language Server"
 msgstr ""
 
-#: src/ch01-01-installation.md:192
+#: src/ch01-01-installation.md:194
 msgid ""
 "From [Step 1](#step-1-install-cairo-10-guide-by-abdel), the "
 "`cairo-language-server` binary should be built and executing this command "
 "will copy its path into your clipboard."
 msgstr ""
 
-#: src/ch01-01-installation.md:194
+#: src/ch01-01-installation.md:196
 msgid ""
 "```bash\n"
 "which cairo-language-server | pbcopy\n"
 "```"
 msgstr ""
 
-#: src/ch01-01-installation.md:198
+#: src/ch01-01-installation.md:200
 msgid ""
 "Update the `languageServerPath` of the Cairo 1.0 extension by pasting the "
 "path."
@@ -750,7 +768,7 @@ msgid ""
 "developed\n"
 "> a VSCode extension for the Cairo language that you can use to get the "
 "features from\n"
-"> the language server and code highlighting. See [Appendix A][devtools]\n"
+"> the language server and code highlighting. See [Appendix B][devtools]\n"
 "> for more details."
 msgstr ""
 
@@ -834,7 +852,7 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:54
 msgid ""
-"```rust\n"
+"```rust,file=hello_world.cairo\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    'Hello, world!'.print();\n"
@@ -924,7 +942,7 @@ msgid ""
 "> use the automatic formatter tool called `cairo-format` to format your code "
 "in a\n"
 "> particular style (more on `cairo-format` in\n"
-"> [Appendix A][devtools]). The Cairo team has included this tool\n"
+"> [Appendix B][devtools]). The Cairo team has included this tool\n"
 "> with the standard Cairo distribution, as `cairo-run` is, so it should "
 "already be\n"
 "> installed on your computer!"
@@ -1207,7 +1225,7 @@ msgstr ""
 
 #: src/ch01-03-hello-scarb.md:92
 msgid ""
-"```rust\n"
+"```rust,file=hello_scarb.cairo\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    'Hello, Scarb!'.print();\n"
@@ -1465,7 +1483,7 @@ msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:19
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    let x = 5;\n"
@@ -1808,7 +1826,7 @@ msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:223
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "use traits::Into;\n"
 "fn main() {\n"
@@ -2284,7 +2302,7 @@ msgid ""
 msgstr ""
 
 #: src/ch02-03-functions.md:1
-#: src/ch99-01-writing-starknet-contracts.md:134
+#: src/ch99-01-02-writing-starknet-contracts.md:134
 msgid "## Functions"
 msgstr ""
 
@@ -2563,7 +2581,7 @@ msgstr ""
 
 #: src/ch02-03-functions.md:156
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "fn main() {\n"
 "    let x = (let y = 6);\n"
 "}\n"
@@ -2767,7 +2785,7 @@ msgstr ""
 
 #: src/ch02-03-functions.md:284
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
@@ -3072,7 +3090,7 @@ msgstr ""
 
 #: src/ch02-05-control-flow.md:132
 msgid ""
-"```rust,ignore\n"
+"```rust,ignore,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    let mut i:usize = 0;\n"
@@ -3729,7 +3747,7 @@ msgstr ""
 
 #: src/ch03-01-what-is-ownership.md:81
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use array::ArrayTrait;\n"
 "fn foo(arr: Array<u128>) {\n"
 "}\n"
@@ -3846,7 +3864,7 @@ msgstr ""
 
 #: src/ch03-01-what-is-ownership.md:147
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "struct A {}\n"
 "\n"
 "fn main() {\n"
@@ -3929,7 +3947,7 @@ msgstr ""
 
 #: src/ch03-01-what-is-ownership.md:184
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use dict::Felt252DictTrait;\n"
 "\n"
 "struct A {\n"
@@ -4443,7 +4461,7 @@ msgstr ""
 
 #: src/ch03-02-references-and-snapshots.md:113
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "#[derive(Copy,Drop)]\n"
 "struct Rectangle {\n"
 "    height: u64,\n"
@@ -4726,7 +4744,7 @@ msgstr ""
 
 #: src/ch04-01-defining-and-instantiating-structs.md:52
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "fn main() {\n"
 "    let mut user1 = User {\n"
 "        active: true,\n"
@@ -5034,7 +5052,7 @@ msgstr ""
 
 #: src/ch04-02-an-example-program-using-structs.md:108
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -5351,7 +5369,7 @@ msgstr ""
 
 #: src/ch04-03-method-syntax.md:137
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "#[derive(Copy, Drop)]\n"
 "struct Rectangle {\n"
@@ -6668,7 +6686,7 @@ msgstr ""
 
 #: src/ch06-02-defining-modules-to-control-scope.md:92
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use garden::vegetables::Asparagus;\n"
 "\n"
 "mod garden;\n"
@@ -7610,7 +7628,7 @@ msgstr ""
 
 #: src/ch07-01-generic-data-types.md:9
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "// This code does not compile!\n"
 "\n"
 "use array::ArrayTrait;\n"
@@ -7703,7 +7721,7 @@ msgstr ""
 
 #: src/ch07-01-generic-data-types.md:60
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "// This code does not compile!\n"
 "use array:ArrayTrait;\n"
 "\n"
@@ -7805,7 +7823,7 @@ msgstr ""
 
 #: src/ch07-01-generic-data-types.md:123
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "// This code does not compile!\n"
 "\n"
 "#[derive(Drop)]\n"
@@ -7829,6 +7847,12 @@ msgstr ""
 
 #: src/ch07-01-generic-data-types.md:139
 msgid ""
+"<!-- TODO This is no longer true after in version 1.1.x and should be "
+"removed in the next versions -->"
+msgstr ""
+
+#: src/ch07-01-generic-data-types.md:141
+msgid ""
 "```rust\n"
 "struct Wallet<T> {\n"
 "    balance: T,\n"
@@ -7842,7 +7866,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:151
+#: src/ch07-01-generic-data-types.md:153
 msgid ""
 "We avoid using the `derive` macro for `Drop` implementation of `Wallet` and "
 "instead define our own `WalletDrop` implementation. Notice that we must "
@@ -7851,14 +7875,14 @@ msgid ""
 "that the struct `Wallet<T>` is droppable as long as `T` is also droppable."
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:153
+#: src/ch07-01-generic-data-types.md:155
 msgid ""
 "Finally, if we want to add a field to `Wallet` representing its Cairo "
 "address and we want that field to be different than `T` but generic as well, "
 "we can simply add another generic type between the `<>`:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:155
+#: src/ch07-01-generic-data-types.md:157
 msgid ""
 "```rust\n"
 "struct Wallet<T, U> {\n"
@@ -7875,7 +7899,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:168
+#: src/ch07-01-generic-data-types.md:170
 msgid ""
 "We add to `Wallet` struct definiton a new generic type `U` and then assign "
 "this type to the new field member `address`.\n"
@@ -7885,18 +7909,18 @@ msgid ""
 "droppable, `Wallet` is droppable as well!"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:171
+#: src/ch07-01-generic-data-types.md:173
 msgid "## Enums"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:173
+#: src/ch07-01-generic-data-types.md:175
 msgid ""
 "As we did with structs, we can define enums to hold generic data types in "
 "their variants. For example the `Option<T>` enum provided by the Cairo core "
 "library:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:175
+#: src/ch07-01-generic-data-types.md:177
 msgid ""
 "```rust\n"
 "enum Option<T> {\n"
@@ -7906,7 +7930,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:182
+#: src/ch07-01-generic-data-types.md:184
 msgid ""
 "The `Option<T>` enum is generic over a type `T` and has two variants: "
 "`Some`, which holds one value of type `T` and `None` that doesn't hold any "
@@ -7915,13 +7939,13 @@ msgid ""
 "type `T` we can use this abstraction with any type."
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:184
+#: src/ch07-01-generic-data-types.md:186
 msgid ""
 "Enums can use multiple generic types as well, like definition of the "
 "`Result<T, E>` enum that the core library provides:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:186
+#: src/ch07-01-generic-data-types.md:188
 #: src/ch09-02-error-handling.md:11
 msgid ""
 "```rust\n"
@@ -7932,7 +7956,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:193
+#: src/ch07-01-generic-data-types.md:195
 #: src/ch09-02-error-handling.md:18
 msgid ""
 "The `Result<T, E>` enum has two generic types, `T` and `E`, and two "
@@ -7942,18 +7966,18 @@ msgid ""
 "of type `T`) or fail (by returning a value of type `E`)."
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:195
+#: src/ch07-01-generic-data-types.md:197
 msgid "## Generic Methods"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:197
+#: src/ch07-01-generic-data-types.md:199
 msgid ""
 "We can implement methods on structs and enums, and use the generic types in "
 "their definition, too. Using our previous definition of `Wallet<T>` struct, "
 "we define a `balance` method for it:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:199
+#: src/ch07-01-generic-data-types.md:201
 msgid ""
 "```rust\n"
 "struct Wallet<T> {\n"
@@ -7961,14 +7985,15 @@ msgid ""
 "}\n"
 "\n"
 "impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
+"impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;\n"
 "\n"
 "trait WalletTrait<T> {\n"
-"    fn balance(self: @Wallet<T>) -> @T;\n"
+"    fn balance(self: @Wallet<T>) -> T;\n"
 "}\n"
 "\n"
-"impl WalletImpl<T> of WalletTrait<T> {\n"
-"    fn balance(self: @Wallet<T>) -> @T {\n"
-"        return self.balance;\n"
+"impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {\n"
+"    fn balance(self: @Wallet<T>) -> T {\n"
+"        return *self.balance;\n"
 "    }\n"
 "}\n"
 "\n"
@@ -7979,7 +8004,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:222
+#: src/ch07-01-generic-data-types.md:225
 msgid ""
 "We first define `WalletTrait<T>` trait using a generic type `T` which "
 "defines a method that returns a snapshot of the field `address` from "
@@ -7988,7 +8013,7 @@ msgid ""
 "trait and the implementation."
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:224
+#: src/ch07-01-generic-data-types.md:227
 msgid ""
 "We can also specify constraints on generic types when defining methods on "
 "the type. We could, for example, implement methods only for `Wallet<u128>` "
@@ -7997,9 +8022,26 @@ msgid ""
 "`balance` field."
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:226
+#: src/ch07-01-generic-data-types.md:229
 msgid ""
 "```rust\n"
+"struct Wallet<T> {\n"
+"    balance: T,\n"
+"}\n"
+"impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
+"impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;\n"
+"/// Generic trait for wallets\n"
+"trait WalletTrait<T> {\n"
+"    fn balance(self: @Wallet<T>) -> T;\n"
+"}\n"
+"\n"
+"impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {\n"
+"    fn balance(self: @Wallet<T>) -> T {\n"
+"        return *self.balance;\n"
+"    }\n"
+"}\n"
+"\n"
+"/// Trait for wallets of type u128\n"
 "trait WalletReceiveTrait {\n"
 "    fn receive(ref self: Wallet<u128>, value: u128);\n"
 "}\n"
@@ -8014,13 +8056,13 @@ msgid ""
 "    let mut w = Wallet { balance: 50_u128 };\n"
 "    assert(w.balance() == 50_u128, 0);\n"
 "\n"
-"    w.receive(100_u128)\n"
+"    w.receive(100_u128);\n"
 "    assert(w.balance() == 150_u128, 0);\n"
 "}\n"
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:246
+#: src/ch07-01-generic-data-types.md:266
 msgid ""
 "The new method `receive` increments the size of the balance of any instance "
 "of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a "
@@ -8029,7 +8071,7 @@ msgid ""
 "the previous code wouldn't compile."
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:248
+#: src/ch07-01-generic-data-types.md:268
 msgid ""
 "Cairo allows us to define generic methods inside generic traits as well. "
 "Using the past implementation from `Wallet<U, V>` we are going to define a "
@@ -8037,7 +8079,7 @@ msgid ""
 "with a generic type of each. First, lets rewrite the struct definiton:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:250
+#: src/ch07-01-generic-data-types.md:270
 msgid ""
 "```rust\n"
 "struct Wallet<T, U> {\n"
@@ -8047,11 +8089,11 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:257
+#: src/ch07-01-generic-data-types.md:277
 msgid "Next we are going to naively define the mixup trait and implementation:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:259
+#: src/ch07-01-generic-data-types.md:279
 msgid ""
 "```rust\n"
 "// This does not compile!\n"
@@ -8069,7 +8111,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:272
+#: src/ch07-01-generic-data-types.md:292
 msgid ""
 "We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` "
 "methods which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` "
@@ -8082,7 +8124,7 @@ msgid ""
 "updated implementation is as follow:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:274
+#: src/ch07-01-generic-data-types.md:294
 msgid ""
 "```rust\n"
 "trait WalletMixTrait<T1, U1> {\n"
@@ -8102,16 +8144,16 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:290
+#: src/ch07-01-generic-data-types.md:310
 msgid ""
 "We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` "
 "declaration. Then we do the same for `T2` and `U2`, this time as part of "
 "`mixup` signature. We can now try the `mixup` function:"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:292
+#: src/ch07-01-generic-data-types.md:312
 msgid ""
-"```rs\n"
+"```rs, does_not_compile\n"
 "fn main() {\n"
 "    let w1 = Wallet { balance: true, address: 10_u128 };\n"
 "    let w2 = Wallet { balance: 32, address: 100_u8 };\n"
@@ -8124,7 +8166,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-01-generic-data-types.md:304
+#: src/ch07-01-generic-data-types.md:324
 msgid ""
 "We first create two instances: one of `Wallet<bool, u128>` and the other of "
 "`Wallet<felt252, u8>`. Then, we call `mixup` and create a new `Wallet<bool, "
@@ -8273,6 +8315,17 @@ msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
+"#[derive(Copy,Drop)]\n"
+"struct Rectangle{\n"
+"    height: u64,\n"
+"    width: u64,\n"
+"}\n"
+"\n"
+"#[derive(Copy,Drop)]\n"
+"struct Circle{\n"
+"    radius: u64,\n"
+"}\n"
+"\n"
 "// Here T is an alias type which will be provided buring implementation\n"
 "trait ShapeGeometry<T> {\n"
 "    fn boundary(self: T) -> u64;\n"
@@ -8302,30 +8355,30 @@ msgid ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    let rect = Rectangle { height: 5_u128, width: 7_u128 };\n"
+"    let rect = Rectangle { height: 5_u64, width: 7_u64 };\n"
 "    rect.area().print(); // 35\n"
 "    rect.boundary().print(); // 24\n"
 "\n"
-"    let circ = Circle { radius: 5_u128 };\n"
+"    let circ = Circle { radius: 5_u64 };\n"
 "    circ.area().print(); // 78\n"
 "    circ.boundary().print(); // 31\n"
 "}\n"
 "```"
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:105
+#: src/ch07-02-traits-in-cairo.md:116
 msgid "## Managing and using external trait implementations"
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:107
+#: src/ch07-02-traits-in-cairo.md:118
 msgid ""
 "To use traits methods, you need to make sure the correct "
 "traits/implementation(s) are imported. In the code above we imported "
-"`PrintTrait` from `debug` with `use debug::PrintTrait;` to use `print()` "
-"methods."
+"`PrintTrait` from `debug` with `use debug::PrintTrait;` to use the `print()` "
+"methods on supported types."
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:109
+#: src/ch07-02-traits-in-cairo.md:120
 msgid ""
 "In some cases you might need to import not only the trait but also the "
 "implementation if they are declared in separate modules.\n"
@@ -8334,13 +8387,13 @@ msgid ""
 "addition to `ShapeGeometry`."
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:112
+#: src/ch07-02-traits-in-cairo.md:123
 msgid "If the code was organised into modules like this,"
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:114
+#: src/ch07-02-traits-in-cairo.md:125
 msgid ""
-"```rust\n"
+"```rust, does_not_compile\n"
 "use debug::PrintTrait;\n"
 "\n"
 "// struct Circle { ... } and struct Rectangle { ... }\n"
@@ -8377,22 +8430,22 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:149
+#: src/ch07-02-traits-in-cairo.md:160
 msgid "To make it work, in addition to,"
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:151
+#: src/ch07-02-traits-in-cairo.md:162
 msgid ""
 "```rust\n"
 "use geometry::ShapeGeometry;\n"
 "```"
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:155
+#: src/ch07-02-traits-in-cairo.md:166
 msgid "you might also need to use `CircleGeometry`,"
 msgstr ""
 
-#: src/ch07-02-traits-in-cairo.md:157
+#: src/ch07-02-traits-in-cairo.md:168
 msgid ""
 "```rust\n"
 "use circle::CircleGeometry\n"
@@ -9507,7 +9560,7 @@ msgstr ""
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:11
 msgid ""
-"```rust\n"
+"```rust,does_not_compile\n"
 "use array::ArrayTrait;\n"
 "use debug::PrintTrait;\n"
 "\n"
@@ -9569,10 +9622,113 @@ msgid ""
 msgstr ""
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:44
-msgid "## Using assert"
+msgid "## nopanic notation"
 msgstr ""
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:46
+msgid ""
+"You can use the `nopanic` notation to indicate that a function will never "
+"panic. Only `nopanic` functions can be called in a function annotated as "
+"`nopanic`."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:48
+#: src/ch09-01-unrecoverable-errors-with-panic.md:83
+#: src/appendix-03-derivable-traits.md:17
+#: src/appendix-03-derivable-traits.md:42
+#: src/appendix-03-derivable-traits.md:63
+#: src/appendix-03-derivable-traits.md:85
+#: src/appendix-03-derivable-traits.md:118
+msgid "Example:"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:50
+msgid ""
+"```rust\n"
+"fn function_never_panic() -> felt252 nopanic {\n"
+"    42\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:56
+msgid "Wrong example:"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:58
+msgid ""
+"```rust\n"
+"fn function_never_panic() nopanic {\n"
+"    assert(1 == 1, 'what');\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:64
+msgid ""
+"If you write the following function that includes a function that may panic "
+"you will get the following error:"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:66
+msgid ""
+"```bash\n"
+"error: Function is declared as nopanic but calls a function that may panic.\n"
+" --> test.cairo:2:12\n"
+"    assert(1 == 1, 'what');\n"
+"           ^****^\n"
+"Function is declared as nopanic but calls a function that may panic.\n"
+" --> test.cairo:2:5\n"
+"    assert(1 == 1, 'what');\n"
+"    ^********************^\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:77
+msgid ""
+"Note that there are two functions that may panic here, assert and equality."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:79
+msgid "## panic_with macro"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:81
+msgid ""
+"You can use the `panic_with` macro to mark a function that returns an "
+"`Option` or `Result`. This macro takes two arguments, which are the data "
+"that is passed as the panic reason as well as the name for a wrapping "
+"function. It will create a wrapper for your annotated function which will "
+"panic if the function returns `None` or `Err`, the panic function will be "
+"called with the given data."
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:85
+msgid ""
+"```rust\n"
+"use option::OptionTrait;\n"
+"\n"
+"#[panic_with('value is 0', wrap_not_zero)]\n"
+"fn wrap_if_not_zero(value: u128) -> Option<u128> {\n"
+"    if value == 0 {\n"
+"        Option::None(())\n"
+"    } else {\n"
+"        Option::Some(value)\n"
+"    }\n"
+"}\n"
+"\n"
+"fn main() {\n"
+"    wrap_if_not_zero(0); // this returns None\n"
+"    wrap_not_zero(0); // this panic with 'value is 0'\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:103
+msgid "## Using assert"
+msgstr ""
+
+#: src/ch09-01-unrecoverable-errors-with-panic.md:105
 msgid ""
 "The assert function from the Cairo core library is actually a utility "
 "function based on panics. It asserts that a boolean expression is true at "
@@ -9582,11 +9738,11 @@ msgid ""
 "string passed must be able to fit inside a felt252."
 msgstr ""
 
-#: src/ch09-01-unrecoverable-errors-with-panic.md:48
+#: src/ch09-01-unrecoverable-errors-with-panic.md:107
 msgid "Here is an example of its usage:"
 msgstr ""
 
-#: src/ch09-01-unrecoverable-errors-with-panic.md:50
+#: src/ch09-01-unrecoverable-errors-with-panic.md:109
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -9599,7 +9755,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-01-unrecoverable-errors-with-panic.md:60
+#: src/ch09-01-unrecoverable-errors-with-panic.md:119
 msgid ""
 "We are asserting in main that `my_number` is not zero to ensure that we're "
 "not performing a division by 0.\n"
@@ -9984,21 +10140,225 @@ msgid ""
 "deeper into this in the next sections."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:1
+#: src/ch99-01-01-introduction-to-smart-contracts.md:1
+msgid "# Introduction to smart-contracts"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:3
+msgid ""
+"This chapter will give you a high level introduction to what smart-contracts "
+"are, what are they used for and why would blockchain developers use Cairo "
+"and Starknet.\n"
+"If you are already familiar with blockchain programming, feel free to skip "
+"this chapter. The last part might still be interesting though."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:6
+msgid "## Smart-contracts"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:8
+msgid ""
+"Smart contracts gained popularity and became more widespread with the birth "
+"of Ethereum. Smart contracts are essentially programs deployed on a "
+"blockchain. The term \"smart contract\" is somewhat misleading, as they are "
+"neither \"smart\" nor \"contracts\" but rather code and instructions that "
+"are executed based on specific inputs. They primarily consist of two "
+"components: storage and functions. Once deployed, users can interact with "
+"smart contracts by initiating blockchain transactions containing execution "
+"data (which function to call and with what input). Smart contracts can "
+"modify and read the storage of the underlying blockchain. A smart contract "
+"has its own address and is considered a blockchain account, meaning it can "
+"hold tokens."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:10
+msgid ""
+"The programming language used to write smart contracts varies depending on "
+"the blockchain. For example, on Ethereum and the [EVM-compatible "
+"ecosystem](https://ethereum.org/en/developers/docs/evm/) ecosystem, the most "
+"commonly used language is Solidity, while on Starknet, it is Cairo. The way "
+"the code is compiled also differs based on the blockchain. On Ethereum, "
+"Solidity is compiled into bytecode. On Starknet, Cairo is compiled into "
+"Sierra and then into Cairo Assembly (casm)."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:12
+msgid ""
+"Smart contracts possess several unique characteristics. They are "
+"**permissionless**, meaning anyone can deploy a smart contract on the "
+"network (within the context of a decentralized blockchain, of course). Smart "
+"contracts are also **transparent**; the data stored by the smart contract is "
+"accessible to anyone. The code that composes the contract can also be "
+"transparent, enabling **composability**. This allows developers to write "
+"smart contracts that use other smart contracts. Smart contracts can only "
+"access and interact with data from the blockchain they are deployed on. They "
+"require third-party softwares (called `oracles`) to access external data "
+"(the price of a token for instance)."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:14
+msgid ""
+"For developers to build smart contracts that can interact with each others, "
+"it is required to know what the other contracts look like. Hence, Ethereum "
+"developers started to build standards for smart contract developement, the "
+"`ERCxx`. The two most used and famous standards are the `ERC20`, used to "
+"build tokens like `USDC`, `DAI` or `STARK`, and the `ERC721`, for NFTs "
+"(Non-fungible tokens) like `CryptoPunks` or `Everai`."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:16
+msgid "## Use cases"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:18
+msgid ""
+"There are many possible use cases for smart-contracts. The only limits are "
+"the technical constraints of the blockchain and the creativity of developers."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:20
+msgid "#### DeFi"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:22
+msgid ""
+"Right now, the principal use case for smart contracts is similar to that of "
+"Ethereum or Bitcoin, which is essentially handling money. In the context of "
+"the alternative payment system promised by Bitcoin, smart contracts on "
+"Ethereum enable the creation of decentralized financial applications that no "
+"longer rely on traditional financial intermediaries. This is what we call "
+"DeFi (decentralized finance). DeFi consists of various projects such as "
+"lending/borrowing apps, decentralized exchanges (DEX), on-chain derivatives, "
+"stablecoins, decentralized hedge funds, insurance, and many more."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:24
+msgid "#### Tokenization"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:26
+msgid ""
+"Smart contracts can facilitate the tokenization of real-world assets, such "
+"as real estate, art, or precious metals. Tokenization divides an asset into "
+"digital tokens, which can be easily traded and managed on blockchain "
+"platforms. This can increase liquidity, enable fractional ownership, and "
+"simplify the buying and selling process."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:28
+msgid "#### Voting"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:30
+msgid ""
+"Smart contracts can be used to create secure and transparent voting systems. "
+"Votes can be recorded on the blockchain, ensuring immutability and "
+"transparency. The smart contract can then automatically tally the votes and "
+"declare the results, minimizing the potential for fraud or manipulation."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:32
+msgid "#### Royalties"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:34
+msgid ""
+"Smart contracts can automate royalty payments for artists, musicians, and "
+"other content creators. When a piece of content is consumed or sold, the "
+"smart contract can automatically calculate and distribute the royalties to "
+"the rightful owners, ensuring fair compensation and reducing the need for "
+"intermediaries."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:36
+msgid "#### Decentralized identities DIDs"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:38
+msgid ""
+"Smart contracts can be used to create and manage digital identities, "
+"allowing individuals to control their personal information and share it with "
+"third parties securely. The smart contract could verify the authenticity of "
+"a user's identity and automatically grant or revoke access to specific "
+"services based on the user's credentials."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:40
+msgid ""
+"<br/>\n"
+"<br/>\n"
+"As Ethereum continues to mature, we can expect the use cases and "
+"applications of smart contracts to expand further, bringing about exciting "
+"new opportunities and reshaping traditional systems for the better."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:44
+msgid "## The rise of Starknet and Cairo"
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:46
+msgid ""
+"Ethereum, being the most widely used and resilient smart-contract platform, "
+"became a victim of its own success. With the rapid adoption of some "
+"previously mentioned use cases, mainly DeFi, the cost of performing "
+"transactions became extremely high, rendering the network almost unusable. "
+"Engineers and researchers in the ecosystem began working on solutions to "
+"address this scalability issue. A famous theorem in the blockchain space "
+"states that it is impossible to achieve a high level of scalability, "
+"decentralization, and security simultaneously; trade-offs must be made. "
+"Ethereum is at the intersection of decentralization and security. "
+"Eventually, it was decided that Ethereum's purpose would be to serve as a "
+"secure settlement layer, while complex computations would be offloaded to "
+"other networks built on top of Ethereum. These are called Layer 2s (L2s). "
+"The two primary types of L2s are optimistic rollups and validity rollups. "
+"Both approaches involve compressing and batching numerous transactions "
+"together, computing the new state, and settling the result on Ethereum (L1). "
+"The difference lies in the way the result is settled on L1. For optimistic "
+"rollups, the new state is considered valid by default, but there is a 7-day "
+"window for nodes to identify malicious transactions. In contrast, validity "
+"rollups, such as Starknet, use cryptography to prove that the new state has "
+"been correctly computed. This is the purpose of STARKs, this cryptographic "
+"technology could permit validity rollups to scale significantly more than "
+"optimistic rollups. You can learn more about STARKs from Starkware's Medium "
+"[article](https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a), "
+"which serves as a good primer."
+msgstr ""
+
+#: src/ch99-01-01-introduction-to-smart-contracts.md:48
+msgid ""
+"Remember Cairo? It is, in fact, a language developed specifically to work "
+"with STARKs and make them general-purpose. With Cairo, we can write "
+"**provable code**. In the context of Starknet, this allows proving the "
+"correctness of computations from one state to another. Unlike most (if not "
+"all) of Starknet's competitors that chose to use the EVM (either as-is or "
+"adapted) as a base layer, Starknet employs its own VM. This frees developers "
+"from the constraints of the EVM, opening up a broader range of "
+"possibilities. Coupled with decreased transaction costs, the combination of "
+"Starknet and Cairo creates an exiting playground for developers. Native "
+"account abstraction enables more complex logic for accounts and transaction "
+"flows. Emerging use cases include **transparent AI** and artificial "
+"intelligence and machine learning applications. Finally, **blockchain "
+"games** can be developed entirely **on-chain**. Starknet has been "
+"specifically designed to maximize the capabilities of STARK proofs for "
+"optimal scalability."
+msgstr ""
+
+#: src/ch99-01-02-writing-starknet-contracts.md:1
 msgid "# Writing Starknet Contracts"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:3
+#: src/ch99-01-02-writing-starknet-contracts.md:3
 msgid ""
 "This chapter will guide you on how to create smart contracts in Cairo, and "
 "will clarify the distinction between Cairo programs and Starknet contracts."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:5
+#: src/ch99-01-02-writing-starknet-contracts.md:5
 msgid "## Cairo programs and Starknet contracts"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:7
+#: src/ch99-01-02-writing-starknet-contracts.md:7
 msgid ""
 "Starknet contracts are a special subset of Cairo programs, so the concepts "
 "previously learned in this book are still applicable to write Starknet "
@@ -10007,14 +10367,14 @@ msgid ""
 "`main` that serves as the entry point for this program:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:10
+#: src/ch99-01-02-writing-starknet-contracts.md:10
 msgid ""
 "```rust\n"
 "fn main() {}\n"
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:14
+#: src/ch99-01-02-writing-starknet-contracts.md:14
 msgid ""
 "Starknet contracts are essentially programs that can run on the Starknet OS, "
 "and as such, have access to Starknet's state. For a module to be handled as "
@@ -10022,7 +10382,7 @@ msgid ""
 "attribute:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:16
+#: src/ch99-01-02-writing-starknet-contracts.md:16
 msgid ""
 "```rust\n"
 "#[contract]\n"
@@ -10058,37 +10418,37 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:49
+#: src/ch99-01-02-writing-starknet-contracts.md:49
 msgid ""
 "<span class=\"caption\">Listing 9-1: A simple naming service contract</span>"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:51
+#: src/ch99-01-02-writing-starknet-contracts.md:51
 msgid ""
 "> NB: Starknet contracts are defined within "
 "[modules](./ch06-02-defining-modules-to-control-scope.md)."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:53
+#: src/ch99-01-02-writing-starknet-contracts.md:53
 msgid "## Starknet Contract Attributes"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:55
+#: src/ch99-01-02-writing-starknet-contracts.md:55
 msgid ""
 "Attributes are special annotations that modify the behavior of certain "
 "functions or methods. They are placed preceding a function and are denoted "
 "by the `#[]` symbol."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:57
+#: src/ch99-01-02-writing-starknet-contracts.md:57
 msgid "<!-- TODO: Appendix on attributes -->"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:59
+#: src/ch99-01-02-writing-starknet-contracts.md:59
 msgid "Here are a list of common attributes used in Starknet contracts:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:61
+#: src/ch99-01-02-writing-starknet-contracts.md:61
 msgid ""
 "1. `#[contract]`: This attribute is used to annotate a module to be compiled "
 "as a Starknet contract.\n"
@@ -10116,24 +10476,24 @@ msgid ""
 "receive messages from L1s."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:75
+#: src/ch99-01-02-writing-starknet-contracts.md:75
 msgid "## Storage Variables"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:77
+#: src/ch99-01-02-writing-starknet-contracts.md:77
 msgid ""
 "Storage variables allow you to store data that will be stored on the "
 "blockchain in the contract's storage. These data are persistent and can be "
 "accessed and modified anytime once the contract is deployed."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:79
+#: src/ch99-01-02-writing-starknet-contracts.md:79
 msgid ""
 "Storage variables in Starknet contracts are stored in a special struct "
 "called `Storage`:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:81
+#: src/ch99-01-02-writing-starknet-contracts.md:81
 msgid ""
 "```rust\n"
 "struct Storage{\n"
@@ -10143,11 +10503,11 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:88
+#: src/ch99-01-02-writing-starknet-contracts.md:88
 msgid "<span class=\"caption\">Listing 9-2: A Storage Struct</span>"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:90
+#: src/ch99-01-02-writing-starknet-contracts.md:90
 msgid ""
 "The storage struct is a "
 "[struct](./ch04-00-using-structs-to-structure-related-data.md) like any "
@@ -10155,11 +10515,11 @@ msgid ""
 "except that it allows you to define mappings using the `LegacyMap` type."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:93
+#: src/ch99-01-02-writing-starknet-contracts.md:93
 msgid "### Storage Mappings"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:95
+#: src/ch99-01-02-writing-starknet-contracts.md:95
 msgid ""
 "Mappings are a key-value data structure that you can use to store data "
 "within a smart contract. They are essentially hash tables that allow you to "
@@ -10167,7 +10527,7 @@ msgid ""
 "to store sets of data, as it's impossible to store arrays in storage."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:97
+#: src/ch99-01-02-writing-starknet-contracts.md:97
 msgid ""
 "A mapping is a variable of type LegacyMap, in which the key and value types "
 "are specified within angular brackets <>.\n"
@@ -10177,14 +10537,14 @@ msgid ""
 "The syntax for declaring a mapping is as follows in Listing 9-2."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:101
+#: src/ch99-01-02-writing-starknet-contracts.md:101
 msgid ""
 "You can also create more complex mappings than that found in Listing 9-2 "
 "like the popular `allowances` storage variable in the ERC20 Standard which "
 "maps the `owner` and `spender` to the `allowance` using tuples:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:103
+#: src/ch99-01-02-writing-starknet-contracts.md:103
 msgid ""
 "```rust\n"
 "struct Storage{\n"
@@ -10193,7 +10553,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:109
+#: src/ch99-01-02-writing-starknet-contracts.md:109
 msgid ""
 "In mappings, the address of the value at key `k_1,...,k_n` is "
 "`h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ\n"
@@ -10202,77 +10562,77 @@ msgid ""
 "Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:112
+#: src/ch99-01-02-writing-starknet-contracts.md:112
 msgid "### Reading from Storage"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:114
+#: src/ch99-01-02-writing-starknet-contracts.md:114
 msgid ""
 "To read the value of the storage variable `names`, we call the `read` "
 "function on the `names` storage variable, passing in the key `_address` as a "
 "parameter."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:116
+#: src/ch99-01-02-writing-starknet-contracts.md:116
 msgid ""
 "```rust\n"
 "let name = names::read(_address);\n"
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:120
+#: src/ch99-01-02-writing-starknet-contracts.md:120
 msgid ""
 "<span class=\"caption\">Listing 9-3: Calling the `read` function on the "
 "`names` variable</span>"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:122
+#: src/ch99-01-02-writing-starknet-contracts.md:122
 msgid ""
 "> Note: When the storage variable does not store a mapping, its value is "
 "accessed without passing any parameters to the read method"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:124
+#: src/ch99-01-02-writing-starknet-contracts.md:124
 msgid "### Writing to Storage"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:126
+#: src/ch99-01-02-writing-starknet-contracts.md:126
 msgid ""
 "To write a value to the storage variable `names`, we call the `write` "
 "function on the `names` storage variable, passing in the key and values as "
 "arguments."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:128
+#: src/ch99-01-02-writing-starknet-contracts.md:128
 msgid ""
 "```rust\n"
 "names::write(_address, _name);\n"
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:132
+#: src/ch99-01-02-writing-starknet-contracts.md:132
 msgid ""
 "<span class=\"caption\">Listing 9-4: Writing to the `names` variable</span>"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:136
+#: src/ch99-01-02-writing-starknet-contracts.md:136
 msgid ""
 "In this section, we are going to be looking at some popular function types "
 "you'd encounter with most contracts:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:138
+#: src/ch99-01-02-writing-starknet-contracts.md:138
 msgid "### 1. Constructors"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:140
+#: src/ch99-01-02-writing-starknet-contracts.md:140
 msgid ""
 "Constructors are a special type of function that runs only once when "
 "deploying a contract, and can be used to initialize the state of the "
 "contract."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:142
+#: src/ch99-01-02-writing-starknet-contracts.md:142
 msgid ""
 "```rust\n"
 "#[constructor]\n"
@@ -10282,22 +10642,22 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:149
+#: src/ch99-01-02-writing-starknet-contracts.md:149
 msgid "Some important rules to note:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:151
+#: src/ch99-01-02-writing-starknet-contracts.md:151
 msgid ""
 "1. Your contract can't have more than one constructor.\n"
 "2. Your constructor function must be named `constructor`.\n"
 "3. Lastly, it must be annotated with the `#[constructor]` attribute."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:155
+#: src/ch99-01-02-writing-starknet-contracts.md:155
 msgid "### 2. External functions"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:157
+#: src/ch99-01-02-writing-starknet-contracts.md:157
 msgid ""
 "External functions are functions that can modify the state of a contract. "
 "They are public and can be called by any other contract or externally.\n"
@@ -10305,7 +10665,7 @@ msgid ""
 "attribute:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:160
+#: src/ch99-01-02-writing-starknet-contracts.md:160
 msgid ""
 "```rust\n"
 "#[external]\n"
@@ -10317,11 +10677,11 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:169
+#: src/ch99-01-02-writing-starknet-contracts.md:169
 msgid "### 3. View functions"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:171
+#: src/ch99-01-02-writing-starknet-contracts.md:171
 msgid ""
 "View functions are read-only functions allowing you to access data from the "
 "contract while ensuring that the state of the contract is not modified. They "
@@ -10330,7 +10690,7 @@ msgid ""
 "attribute:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:174
+#: src/ch99-01-02-writing-starknet-contracts.md:174
 msgid ""
 "```rust\n"
 "#[view]\n"
@@ -10341,18 +10701,18 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:182
+#: src/ch99-01-02-writing-starknet-contracts.md:182
 msgid ""
 "> **NB:** It's important to note that, both external and view functions are "
 "public. To create an internal function in a contract, you simply don't "
 "annotate it with any attribute."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:184
+#: src/ch99-01-02-writing-starknet-contracts.md:184
 msgid "## Events"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:186
+#: src/ch99-01-02-writing-starknet-contracts.md:186
 msgid ""
 "Events are custom data structures that are emitted by smart contracts during "
 "execution.\n"
@@ -10361,7 +10721,7 @@ msgid ""
 "about specific occurences in a contract."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:190
+#: src/ch99-01-02-writing-starknet-contracts.md:190
 msgid ""
 "Events play a crucial role in the creation of smart contracts. Take, for "
 "instance, the Non-Fungible Tokens (NFTs) minted on Starknet. All of these "
@@ -10372,24 +10732,24 @@ msgid ""
 "NFTs)."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:192
+#: src/ch99-01-02-writing-starknet-contracts.md:192
 msgid "### Defining events"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:194
+#: src/ch99-01-02-writing-starknet-contracts.md:194
 msgid ""
 "An event is defined as an empty function annotated with the `#[event]` "
 "attribute. The parameters of this function\n"
 "are the data that will be emitted by the event."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:197
+#: src/ch99-01-02-writing-starknet-contracts.md:197
 msgid ""
 "In Listing 9-1, `StoredName` is an event that emits information when names "
 "are stored in the contract:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:199
+#: src/ch99-01-02-writing-starknet-contracts.md:199
 msgid ""
 "```rust\n"
 "#[event]\n"
@@ -10397,25 +10757,25 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:204
+#: src/ch99-01-02-writing-starknet-contracts.md:204
 msgid ""
 "We pass in the emitted data types as parameters within the parentheses. In "
 "this example, our event will emit the contract address of the caller and the "
 "name stored within the contract."
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:206
+#: src/ch99-01-02-writing-starknet-contracts.md:206
 msgid "### Emitting events"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:208
+#: src/ch99-01-02-writing-starknet-contracts.md:208
 msgid ""
 "After defining events, we can emit them by simply calling the event name "
 "like we'll call functions,\n"
 "passing in the values to be emitted as parameters:"
 msgstr ""
 
-#: src/ch99-01-writing-starknet-contracts.md:211
+#: src/ch99-01-02-writing-starknet-contracts.md:211
 msgid ""
 "```rust\n"
 "StoredName(caller,_name);\n"
@@ -10873,8 +11233,567 @@ msgid ""
 "Cairo journey."
 msgstr ""
 
+#: src/appendix-01-keywords.md:1
+msgid "## Appendix A: Keywords"
+msgstr ""
+
+#: src/appendix-01-keywords.md:3
+msgid ""
+"The following list contains keywords that are reserved for current or "
+"future\n"
+"use by the Cairo language."
+msgstr ""
+
+#: src/appendix-01-keywords.md:6
+msgid "There are three keyword categories:"
+msgstr ""
+
+#: src/appendix-01-keywords.md:8
+msgid "- strict\n- reserved"
+msgstr ""
+
+#: src/appendix-01-keywords.md:13
+msgid "### Strict keywords"
+msgstr ""
+
+#: src/appendix-01-keywords.md:15
+msgid ""
+"These keywords can only be used in their correct contexts.\n"
+"They cannot be used as names of any items."
+msgstr ""
+
+#: src/appendix-01-keywords.md:18
+msgid ""
+"- `as` - Rename import\n"
+"- `break` - Exit a loop immediately\n"
+"- `const` - Define constant items\n"
+"- `continue` - Continue to the next loop iteration\n"
+"- `else` - Fallback for `if` and `if let` control flow constructs\n"
+"- `enum` - Define an enumeration\n"
+"- `extern` - Function defined at the compiler level using hint available at "
+"cairo1 level with this declaration\n"
+"- `false` - Boolean false literal\n"
+"- `fn` - Define a function\n"
+"- `if` - Branch based on the result of a conditional expression\n"
+"- `impl` - Implement inherent or trait functionality\n"
+"- `implicits` - Special kind of function parameters that are required to "
+"perform certain actions\n"
+"- `let` - Bind a variable\n"
+"- `loop` - Loop unconditionally\n"
+"- `match` - Match a value to patterns\n"
+"- `mod` - Define a module\n"
+"- `mut` - Denote variable mutability\n"
+"- `nopanic` - Functions marked with this notation mean that the function "
+"will never panic.\n"
+"- `of` - Implement a trait\n"
+"- `ref` - Bind by reference\n"
+"- `return` - Return from function\n"
+"- `struct` - Define a structure\n"
+"- `trait` - Define a trait\n"
+"- `true` - Boolean true literal\n"
+"- `type` - Define a type alias\n"
+"- `use` - Bring symbols into scope"
+msgstr ""
+
+#: src/appendix-01-keywords.md:47
+msgid "### Reserved keywords"
+msgstr ""
+
+#: src/appendix-01-keywords.md:49
+msgid ""
+"These keywords aren't used yet, but they are reserved for future use.\n"
+"They have the same restrictions as strict keywords.\n"
+"The reasoning behind this is to make current programs forward compatible "
+"with future versions of\n"
+"Cairo by forbidding them to use these keywords."
+msgstr ""
+
+#: src/appendix-01-keywords.md:54
+msgid ""
+"- `assert`\n"
+"- `do`\n"
+"- `dyn`\n"
+"- `macro`\n"
+"- `move`\n"
+"- `Self`\n"
+"- `self`\n"
+"- `static_assert`\n"
+"- `static`\n"
+"- `super`\n"
+"- `try`\n"
+"- `typeof`\n"
+"- `unsafe`\n"
+"- `where`\n"
+"- `while`\n"
+"- `with`\n"
+"- `yield`"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:1
+msgid "# Appendix B: Operators and Symbols"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:3
+msgid "This appendix includes a glossary of Cairo's syntax."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:5
+msgid "## Operators"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:7
+msgid ""
+"Table B-1 contains the operators in Cairo, an example of how the operator "
+"would appear in context, a short explanation, and whether that operator is "
+"overloadable. If an operator is overloadable, the relevant trait to use to "
+"overload that operator is listed."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:9
+msgid "<span class=\"caption\">Table B-1: Operators</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:11
+msgid ""
+"| Operator | Example | Explanation | Overloadable? |\n"
+"|----------|---------|-------------|---------------|\n"
+"| `!` | `!expr` | Bitwise or logical complement | `Not` |\n"
+"| `!=` | `expr != expr` | Non-equality comparison | `PartialEq` |\n"
+"| `%` | `expr % expr` | Arithmetic remainder | `Rem` |\n"
+"| `%=` | `var %= expr` | Arithmetic remainder and assignment | `RemEq` |\n"
+"| `&` | `expr & expr` | Bitwise AND | `BitAnd` |\n"
+"| `*` | `expr * expr` | Arithmetic multiplication | `Mul` |\n"
+"| `*=` | `var *= expr` | Arithmetic multiplication and assignment | `MulEq` "
+"|\n"
+"| `@` | `@var` | Snapshot | |\n"
+"| `*` | `*var` | Desnap | |\n"
+"| `+` | `expr + expr` | Arithmetic addition | `Add` |\n"
+"| `+=` | `var += expr` | Arithmetic addition and assignment | `AddEq` |\n"
+"| `,` | `expr, expr` | Argument and element separator | |\n"
+"| `-` | `-expr` | Arithmetic negation | `Neg` |\n"
+"| `-` | `expr - expr` | Arithmetic subtraction | `Sub` |\n"
+"| `-=` | `var -= expr` | Arithmetic subtraction and assignment | `SubEq` |\n"
+"| `->` | `fn(...) -> type`, <code>&vert;...&vert; -> type</code> | Function "
+"and closure return type | |\n"
+"| `.` | `expr.ident` | Member access | |\n"
+"| `/` | `expr / expr` | Arithmetic division | `Div` |\n"
+"| `/=` | `var /= expr` | Arithmetic division and assignment | `DivEq` |\n"
+"| `:` | `pat: type`, `ident: type` | Constraints | |\n"
+"| `:` | `ident: expr` | Struct field initializer | |\n"
+"| `;` | `expr;` | Statement and item terminator | |\n"
+"| `<` | `expr < expr` | Less than comparison | `PartialOrd` |\n"
+"| `<=` | `expr <= expr` | Less than or equal to comparison | `PartialOrd` |\n"
+"| `=` | `var = expr` | Assignment | |\n"
+"| `==` | `expr == expr` | Equality comparison | `PartialEq` |\n"
+"| `=>` | `pat => expr` | Part of match arm syntax | |\n"
+"| `>` | `expr > expr` | Greater than comparison | `PartialOrd` |\n"
+"| `>=` | `expr >= expr` | Greater than or equal to comparison | `PartialOrd` "
+"|\n"
+"| `^` | `expr ^ expr` | Bitwise exclusive OR | `BitXor` |\n"
+"| <code>&vert;</code> | <code>expr &vert; expr</code> | Bitwise OR | `BitOr` "
+"|"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:45
+msgid "## Non Operator Symbols"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:47
+msgid ""
+"The following list contains all symbols that are not used as operators; that "
+"is, they do not have the same behavior as a function or method call."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:49
+msgid ""
+"Table B-2 shows symbols that appear on their own and are valid in a variety "
+"of locations."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:51
+msgid "<span class=\"caption\">Table B-2: Stand-Alone Syntax</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:53
+msgid ""
+"| Symbol | Explanation |\n"
+"|--------|-------------|\n"
+"| `..._u8`, `..._usize`, etc. | Numeric literal of specific type |\n"
+"| `'...'` | Short string |\n"
+"| `_` | “Ignored” pattern binding; also used to make integer literals "
+"readable |"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:59
+msgid ""
+"Table B-3 shows symbols that are used within the context of a module "
+"hierarchy path to access an item."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:61
+msgid "<span class=\"caption\">Table B-3: Path-Related Syntax</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:63
+msgid ""
+"| Symbol | Explanation |\n"
+"|--------|-------------|\n"
+"| `ident::ident` | Namespace path |\n"
+"| `super::path` | Path relative to the parent of the current module |\n"
+"| `trait::method(...)` | Disambiguating a method call by naming the trait "
+"that defines it |"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:69
+msgid ""
+"Table B-4 shows symbols that appear in the context of using generic type "
+"parameters."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:71
+msgid "<span class=\"caption\">Table B-4: Generics</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:73
+msgid ""
+"| Symbol | Explanation |\n"
+"|--------|-------------|\n"
+"| `path<...>` | Specifies parameters to generic type in a type (e.g., "
+"`Vec<u8>`) |\n"
+"| `path::<...>`, `method::<...>` | Specifies parameters to generic type, "
+"function, or method in an expression; often referred to as turbofish |\n"
+"| `fn ident<...> ...` | Define generic function |\n"
+"| `struct ident<...> ...` | Define generic structure |\n"
+"| `enum ident<...> ...` | Define generic enumeration |\n"
+"| `impl<...> ...` | Define generic implementation |"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:82
+msgid ""
+"Table B-5 shows symbols that appear in the context of calling or defining "
+"macros and specifying attributes on an item."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:84
+msgid "<span class=\"caption\">Table B-5: Macros and Attributes</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:86
+msgid ""
+"| Symbol | Explanation |\n"
+"|--------|-------------|\n"
+"| `#[meta]` | Outer attribute |"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:90
+msgid "Table B-6 shows symbols that create comments."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:92
+msgid "<span class=\"caption\">Table B-6: Comments</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:94
+msgid ""
+"| Symbol | Explanation |\n"
+"|--------|-------------|\n"
+"| `//` | Line comment |"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:98
+msgid "Table B-7 shows symbols that appear in the context of using tuples."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:100
+msgid "<span class=\"caption\">Table B-7: Tuples</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:103
+msgid ""
+"| Symbol | Explanation |\n"
+"|--------|-------------|\n"
+"| `()` | Empty tuple (aka unit), both literal and type |\n"
+"| `(expr)` | Parenthesized expression |\n"
+"| `(expr,)` | Single-element tuple expression |\n"
+"| `(type,)` | Single-element tuple type |\n"
+"| `(expr, ...)` | Tuple expression |\n"
+"| `(type, ...)` | Tuple type |\n"
+"| `expr(expr, ...)` | Function call expression; also used to initialize "
+"tuple `struct`s and tuple `enum` variants |"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:113
+msgid "Table B-8 shows the contexts in which curly braces are used."
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:115
+msgid "<span class=\"caption\">Table B-8: Curly Brackets</span>"
+msgstr ""
+
+#: src/appendix-02-operators-and-symbols.md:117
+msgid ""
+"| Context | Explanation |\n"
+"|---------|-------------|\n"
+"| `{...}` | Block expression |\n"
+"| `Type {...}` | `struct` literal |"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:1
+msgid "# Appendix C: Derivable Traits"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:3
+msgid ""
+"In various places in the book, we’ve discussed the `derive` attribute, which "
+"you can apply to a struct or enum definition. The `derive` attribute "
+"generates code to implement a default trait on the type you’ve annotated "
+"with the `derive` syntax."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:5
+msgid ""
+"In this appendix, we provide a comprehensive reference detailing all the "
+"traits in the standard library compatible with the `derive` attribute."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:7
+msgid ""
+"These traits listed here are the only ones defined by the core library that "
+"can be implemented on your types using `derive`. Other traits defined in the "
+"standard library don’t have sensible default behavior, so it’s up to you to "
+"implement them in the way that makes sense for what you’re trying to "
+"accomplish."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:9
+msgid ""
+"The list of derivable traits provided in this appendix does not encompass "
+"all possibilities: external libraries can implement `derive` for their own "
+"traits, expanding the list of traits compatible with `derive`."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:11
+msgid "## PartialEq for equality comparison"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:13
+msgid ""
+"The `PartialEq` trait allows for comparison between instances of a type for "
+"equality, thereby enabling the == and != operators."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:15
+msgid ""
+"When `PartialEq` is derived on structs, two instances are equal only if all "
+"fields are equal, and the instances are not equal if any fields are not "
+"equal. When derived on enums, each variant is equal to itself and not equal "
+"to the other variants."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:19
+msgid ""
+"```Rust\n"
+"#[derive(PartialEq, Drop)]\n"
+"struct A {\n"
+"    item: felt252\n"
+"}\n"
+"\n"
+"fn main() {\n"
+"    let first_struct = A {\n"
+"        item: 2\n"
+"    };\n"
+"    let second_struct = A {\n"
+"        item: 2\n"
+"    };\n"
+"    assert(first_struct == second_struct, 'Structs are different');\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:36
+msgid "## Clone and Copy for Duplicating Values"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:38
+msgid ""
+"The `Clone` trait provides the functionality to explicitly create a deep "
+"copy of a value."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:40
+msgid ""
+"Deriving `Clone` implements the `clone` method, which, in turn, calls clone "
+"on each of the type's components. This means all the fields or values in the "
+"type must also implement `Clone` to derive `Clone`."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:44
+msgid ""
+"```Rust\n"
+"use clone::Clone;\n"
+"\n"
+"#[derive(Clone, Drop)]\n"
+"struct A {\n"
+"    item: felt252\n"
+"}\n"
+"\n"
+"fn main() {\n"
+"    let first_struct = A {\n"
+"        item: 2\n"
+"    };\n"
+"    let second_struct = first_struct.clone();\n"
+"    assert(second_struct.item == 2, 'Not equal');\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:61
+msgid ""
+"The `Copy` trait allows for the duplication of values. You can derive `Copy` "
+"on any type whose parts all implement `Copy`."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:65
+msgid ""
+"```Rust\n"
+"#[derive(Copy, Drop)]\n"
+"struct A {\n"
+"    item: felt252\n"
+"}\n"
+"\n"
+"fn main() {\n"
+"    let first_struct = A {\n"
+"        item: 2\n"
+"    };\n"
+"    let second_struct = first_struct;\n"
+"    assert(second_struct.item == 2, 'Not equal');\n"
+"    assert(first_struct.item == 2, 'Not Equal'); // Copy Trait prevents "
+"firs_struct from moving into second_struct\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:81
+msgid "## Serializing with Serde"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:83
+msgid ""
+"`Serde` provides trait implementations for `serialize` and `deserialize` "
+"functions for data structures defined in your crate. It allows you to "
+"transform your structure into an array (or the opposite)."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:87
+msgid ""
+"```Rust\n"
+"use serde::Serde;\n"
+"use array::ArrayTrait;\n"
+"\n"
+"#[derive(Serde, Drop)]\n"
+"struct A {\n"
+"    item_one: felt252,\n"
+"    item_two: felt252,\n"
+"}\n"
+"\n"
+"fn main() {\n"
+"    let first_struct = A {\n"
+"        item_one: 2,\n"
+"        item_two: 99,\n"
+"    };\n"
+"    let mut output_array = ArrayTrait::new();\n"
+"    let serialized = first_struct.serialize(ref output_array);\n"
+"    panic(output_array);\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:108
+msgid "Output:"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:110
+msgid ""
+"```Bash\n"
+"Run panicked with [2 (''), 99 ('c'), ].\n"
+"```"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:114
+msgid ""
+"We can see here that our struct A has been serialized into the output array."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:116
+msgid ""
+"Also, we can use `deserialize` function to convert the serialized array back "
+"into our A struct."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:120
+msgid ""
+"```Rust\n"
+"use serde::Serde;\n"
+"use array::ArrayTrait;\n"
+"use option::OptionTrait;\n"
+"\n"
+"#[derive(Serde, Drop)]\n"
+"struct A {\n"
+"    item_one: felt252,\n"
+"    item_two: felt252,\n"
+"}\n"
+"\n"
+"fn main() {\n"
+"    let first_struct = A {\n"
+"        item_one: 2,\n"
+"        item_two: 99,\n"
+"    };\n"
+"    let mut output_array = ArrayTrait::new();\n"
+"    let mut serialized = first_struct.serialize(ref output_array);\n"
+"    let mut span_array = output_array.span();\n"
+"    let deserialized_struct: A = Serde::<A>::deserialize(ref "
+"span_array).unwrap();\n"
+"}\n"
+"```"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:143
+msgid ""
+"Here we are converting a serialized array span back to the struct A. "
+"`deserialize` returns an `Option` so we need to unwrap it. When using "
+"deserialize we also need to specify the type we want to deserialize into."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:145
+msgid "## Drop and Destruct"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:147
+msgid ""
+"When moving out of scope, variables need to be moved first. This is where "
+"the `Drop` trait intervenes. You can find more details about its usage "
+"[here](ch03-01-what-is-ownership.md#the-drop-trait)."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:149
+msgid ""
+"Moreover Dictionary need to be squashed before going out of scope. Calling "
+"manually the `squash` method on each of them can be quickly redundant. "
+"`Destruct` trait allows Dictionaries to be automatically squashed when they "
+"get out of scope. You can also find more information about `Destruct` "
+"[here](ch03-01-what-is-ownership.md#the-destruct-trait)."
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:151
+msgid "## PartialOrd and Ord for Ordering Comparisons"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:153
+msgid "TODO (Not derivable yet ?)"
+msgstr ""
+
 #: src/appendix-04-useful-development-tools.md:1
-msgid "## Appendix A - Useful Development Tools"
+msgid "## Appendix D - Useful Development Tools"
 msgstr ""
 
 #: src/appendix-04-useful-development-tools.md:3
