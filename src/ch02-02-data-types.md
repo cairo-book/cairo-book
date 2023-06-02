@@ -160,21 +160,19 @@ On the other hand, the `into` method can be used for type casting when success i
 
 To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
 
-```rust
+```rust,ignore_format
 use traits::TryInto;
 use traits::Into;
 use option::OptionTrait;
 
 fn main() {
     let my_felt = 10;
-    let my_u8: u8 =
-        my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
+    let my_u8: u8 = my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
     let my_u16: u16 = my_felt.try_into().unwrap();
     let my_u32: u32 = my_felt.try_into().unwrap();
     let my_u64: u64 = my_felt.try_into().unwrap();
     let my_u128: u128 = my_felt.try_into().unwrap();
-    let my_u256: u256 =
-        my_felt.into(); // As a felt252 is smaller than a u256, we can use the into() method
+    let my_u256: u256 = my_felt.into(); // As a felt252 is smaller than a u256, we can use the into() method
     let my_usize: usize = my_felt.try_into().unwrap();
     let my_felt2: felt252 = my_u8.into();
     let my_felt3: felt252 = my_u16.into();
