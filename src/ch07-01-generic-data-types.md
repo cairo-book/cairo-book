@@ -217,7 +217,7 @@ impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {
 
 fn main() {
     let w = Wallet { balance: 50 };
-    assert(w.balance() == 50, 0);
+    assert(*w.balance() == 50, 0);
 }
 ```
 

@@ -48,7 +48,7 @@ mod Example{
 
 <span class="caption">Listing 9-1: A simple naming service contract</span>
 
-> NB: Starknet contracts are defined within [modules](./ch06-02-defining-modules-to-control-scope.md).
+> Note: Starknet contracts are defined within [modules](./ch06-02-defining-modules-to-control-scope.md).
 
 ## Starknet Contract Attributes
 
@@ -179,7 +179,7 @@ fn get_name(_address:ContractAddress) -> felt252{
 }
 ```
 
-> **NB:** It's important to note that, both external and view functions are public. To create an internal function in a contract, you simply don't annotate it with any attribute.
+> **Note:** It's important to note that, both external and view functions are public. To create an internal function in a contract, you simply don't annotate it with any attribute.
 
 ## Events
 

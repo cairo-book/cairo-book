@@ -54,7 +54,7 @@ trait IERC20 {
 }
 ```
 
-<span class="caption">Listing 9-1: A simple ERC20 Interface</span>
+<span class="caption">Listing 99-1: A simple ERC20 Interface</span>
 
 ## ABIs
 
