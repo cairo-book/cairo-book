@@ -1,0 +1,42 @@
+name: Verify Cairo programs compilation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compile_and_verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Rust cache
+        uses: ./.github/workflows/setup-rust-cache
+
+      - name: Install mdbook
+        uses: ./.github/workflows/install-mdbook
+
+      - name: Build in English
+        run: |
+          mdbook build -d book
+
+      - name: Copy Cairo program verifier script
+        run: |
+          cp mdbook-cairo/scripts/cairo_programs_verifier.sh book/cairo/cairo-programs/
+        shell: bash
+
+      - name: Verify Cairo programs
+        uses: addnab/docker-run-action@v3
+        with:
+          image: starknet/cairo:1.0.0
+          options: -v ${{ github.workspace }}/book/cairo/cairo-programs:/cairo
+          run: |
+            sh /cairo/cairo_programs_verifier.sh false > /cairo/summary.md
+
+      - name: Generate job summary
+        run: cat book/cairo/cairo-programs/summary.md >> $GITHUB_STEP_SUMMARY
+        shell: bash
+        if: always()
