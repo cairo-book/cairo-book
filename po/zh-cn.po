@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-06-02 04:13+0900\n"
+"PO-Revision-Date: 2023-06-03 04:33+0900\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -790,7 +790,7 @@ msgstr "#### Cairo语言服务器"
 
 #: src/ch01-01-installation.md:194
 msgid "From [Step 1](#step-1-install-cairo-10-guide-by-abdel), the `cairo-language-server` binary should be built and executing this command will copy its path into your clipboard."
-msgstr "在[Step 1](#step-1-install-cairo-10-guide-by-abdel) 中，`cairo-language-server'二进制文件应该已经编译完成，执行这个命令将复制其路径到你的剪贴板。"
+msgstr "在[Step 1](#step-1-install-cairo-10-guide-by-abdel) 中，`cairo-language-server`二进制文件应该已经编译完成，执行这个命令将复制其路径到你的剪贴板。"
 
 #: src/ch01-01-installation.md:196
 msgid ""
@@ -990,13 +990,13 @@ msgstr "让我们详细回顾一下这个 \"Hello，world！\"程序。这里有
 
 #: src/ch01-02-hello-world.md:83
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "fn main() {\n"
 "\n"
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "fn main() {\n"
 "\n"
 "}\n"
@@ -1009,8 +1009,8 @@ msgid ""
 "first line declares a function named `main` that has no parameters and returns\n"
 "nothing. If there were parameters, they would go inside the parentheses `()`."
 msgstr ""
-"这些代码定义了一个名为 \"main \"的函数。`main'函数很特别：它总是每个可执行的Cairo程序中运行的第一个代码。\n"
-"这里，第一行声明了一个名为 \"main \"的函数，没有参数，也不返回。如果有参数，它们会被放在括号`()`里。"
+"这些代码定义了一个名为 `main`的函数。`main`函数很特别：它总是每个可执行的Cairo程序中运行的第一个代码。\n"
+"这里，第一行声明了一个名为 `main`的函数，没有参数，也不返回。如果有参数，它们会被放在括号`()`里。"
 
 #: src/ch01-02-hello-world.md:94
 msgid ""
@@ -1033,7 +1033,7 @@ msgid ""
 msgstr ""
 "> 注意：如果你想在Cairo项目中使用一个统一代码风格标准，你可以\n"
 "> 使用自动格式化工具`cairo-format`来将你的代码格式化为\n"
-"> 特定的代码风格（更多关于`cairo-format'的信息见\n"
+"> 特定的代码风格（更多关于`cairo-format`的信息见\n"
 "> [附录D][devtools]）。Cairo团队已经将这个工具\n"
 "> 包含在标准的Cairo发行版中，就像`cairo-run`一样，所以它应该已经被\n"
 "> 已经安装在你的计算机上了!"
@@ -1077,13 +1077,13 @@ msgid ""
 "calling `Hello, world!'.print()`, we're calling the `print()` method of the `felt252` implementation of the `PrintTrait` trait."
 msgstr ""
 "第二，调用的`print()`函数是来自trait`PrintTrait`的一个方法。这个trait是从Cairo核心库中导入的，它定义了如何将不同数据类型的值打印到屏幕上。在我们的例子中，我们的文本被定义为 \"short "
-"string\"，这是一个ASCII字符串，可以适合Cairo的基本数据类型，即`felt252`类型。通过调用`Hello, world!'.print()`，我们正在调用`PrintTrait`trait的`felt252`实现的`print()`方法。"
+"string\"，这是一个ASCII字符串，可以适合Cairo的基本数据类型，即`felt252`类型。通过调用`'Hello, world!'.print()`，我们正在调用`PrintTrait`trait的`felt252`实现的`print()`方法。"
 
 #: src/ch01-02-hello-world.md:120
 msgid ""
 "Third, you see the `'Hello, world!'` short string. We pass this short string as an argument\n"
 "to `print()`, and the short string is printed to the screen."
-msgstr "第三，看见了\"'Hello, world!'\"短字符串么。我们把这个短字符串作为一个参数传递给`print()`，因此短字符串被打印到屏幕上。"
+msgstr "第三，看见了`'Hello, world!'`短字符串么。我们把这个短字符串作为一个参数传递给`print()`，因此短字符串被打印到屏幕上。"
 
 #: src/ch01-02-hello-world.md:123
 msgid ""
@@ -1547,10 +1547,10 @@ msgid ""
 msgstr "然后，在你新的 _variables_ 目录下，打开 _src/lib.cairo_ 并将其替换为下面的代码，这段代码还不会被编译："
 
 #: src/ch02-01-variables-and-mutability.md:17 src/ch02-01-variables-and-mutability.md:76 src/ch02-01-variables-and-mutability.md:154 src/ch02-05-control-flow.md:130
-#: src/ch03-02-references-and-snapshots.md:23 src/ch03-02-references-and-snapshots.md:111 src/ch04-02-an-example-program-using-structs.md:7
+#: src/ch03-02-references-and-snapshots.md:23 src/ch03-02-references-and-snapshots.md:110 src/ch04-02-an-example-program-using-structs.md:7
 #: src/ch04-02-an-example-program-using-structs.md:48 src/ch04-02-an-example-program-using-structs.md:74 src/ch04-02-an-example-program-using-structs.md:106
 #: src/ch04-02-an-example-program-using-structs.md:142 src/ch04-03-method-syntax.md:18 src/ch04-03-method-syntax.md:93 src/ch04-03-method-syntax.md:135 src/ch04-03-method-syntax.md:192
-#: src/ch04-03-method-syntax.md:231 src/ch06-02-defining-modules-to-control-scope.md:90 src/ch06-02-defining-modules-to-control-scope.md:144
+#: src/ch04-03-method-syntax.md:231 src/ch06-02-defining-modules-to-control-scope.md:90 src/ch06-02-defining-modules-to-control-scope.md:143
 #: src/ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md:15 src/ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md:62
 #: src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:10 src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:35
 #: src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:74 src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:131
@@ -2049,18 +2049,18 @@ msgid ""
 "```Rust\n"
 "use traits::TryInto;\n"
 "use option::OptionTrait;\n"
-"fn main(){\n"
+"fn main() {\n"
 "    let x: felt252 = 3;\n"
-"    let y:u32 = x.try_into().unwrap();\n"
+"    let y: u32 = x.try_into().unwrap();\n"
 "}\n"
 "```"
 msgstr ""
 "```Rust\n"
 "use traits::TryInto;\n"
 "use option::OptionTrait;\n"
-"fn main(){\n"
+"fn main() {\n"
 "    let x: felt252 = 3;\n"
-"    let y:u32 = x.try_into().unwrap();\n"
+"    let y: u32 = x.try_into().unwrap();\n"
 "}\n"
 "```"
 
@@ -2135,7 +2135,7 @@ msgid ""
 "the built-in integer types in Cairo. We can use any of these variants to declare\n"
 "the type of an integer value."
 msgstr ""
-"felt252 类型是一个基本类型，是创建核心库中所有类型的基础。\n"
+"所谓的felt252 类型是一个基本类型，是创建核心库中所有类型的基础。\n"
 "然而，我们强烈建议程序员尽可能使用整数类型而不是 `felt252` 类型，因为 `integer` 类型带有额外的安全功能，\n"
 "对代码中的潜在漏洞提供额外保护，如溢出检查。通过使用这些整数类型，程序员可以确保他们的程序更加安全，不容易受到攻击或其他安全威胁。\n"
 "一个 _integer_ 是一个没有小数部分的数字。这个类型声明指出了该类型可以用来存储整数的比特位。\n"
@@ -2254,7 +2254,7 @@ msgstr ""
 msgid ""
 "```rust\n"
 "fn main() {\n"
-"     // addition\n"
+"    // addition\n"
 "    let sum = 5_u128 + 10_u128;\n"
 "\n"
 "    // subtraction\n"
@@ -2274,7 +2274,7 @@ msgid ""
 msgstr ""
 "```rust\n"
 "fn main() {\n"
-"     // addition\n"
+"    // addition\n"
 "    let sum = 5_u128 + 10_u128;\n"
 "\n"
 "    // subtraction\n"
@@ -2299,18 +2299,14 @@ msgid ""
 msgstr "这些语句中的每个表达式使用了一个数学运算符并计算出了一个值，然后绑定给一个变量。"
 
 #: src/ch02-02-data-types.md:120
-msgid ""
-"<!-- TODO: Appendix operator -->\n"
-"<!-- [Appendix B][appendix_b] ignore contains a list of all operators that Cairo provides. -->"
-msgstr ""
-"<!— TODO: Appendix operator —>\n"
-"<!— [Appendix B][appendix_b] ignore contains a list of all operators that Cairo provides. —>"
+msgid "[Appendix B][appendix_b] contains a list of all operators that Cairo provides."
+msgstr "[附录 B][appendix_b] 包含了一个Cairo中所有操作符的列表。"
 
-#: src/ch02-02-data-types.md:123
+#: src/ch02-02-data-types.md:122
 msgid "#### The Boolean Type"
 msgstr "#### 布尔类型"
 
-#: src/ch02-02-data-types.md:125
+#: src/ch02-02-data-types.md:124
 msgid ""
 "As in most other programming languages, a Boolean type in Cairo has two possible\n"
 "values: `true` and `false`. Booleans are one felt252 in size. The Boolean type in\n"
@@ -2319,7 +2315,7 @@ msgstr ""
 "正如其他大部分编程语言一样，Cairo 中的布尔类型有两个可能的值：`true` 和  `false`。布尔型的大小为一个 felt252。\n"
 "布尔类型在 Cairo 中是用 `bool` 来指定的。例如："
 
-#: src/ch02-02-data-types.md:129
+#: src/ch02-02-data-types.md:128
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -2337,7 +2333,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:139
+#: src/ch02-02-data-types.md:136
 msgid ""
 "The main way to use Boolean values is through conditionals, such as an `if`\n"
 "expression. We’ll cover how `if` expressions work in Cairo in the [“Control\n"
@@ -2346,21 +2342,21 @@ msgstr ""
 "使用布尔值的主要方式是通过条件语句，如 `if` 表达式。\n"
 "我们将在[\"控制流”][control-flow]部分介绍 `if` 表达式在 Cairo 中的工作原理。"
 
-#: src/ch02-02-data-types.md:143
+#: src/ch02-02-data-types.md:140
 msgid "#### The Short String Type"
 msgstr "#### 短字符串类型"
 
-#: src/ch02-02-data-types.md:145
+#: src/ch02-02-data-types.md:142
 msgid ""
 "Cairo doesn't have a native type for strings, but you can store characters forming what we call a \"short string\" inside `felt252`s. A short string has a max length of 31 chars. "
 "This is to ensure that it can fit in a single felt (a felt is 252 bits, one ASCII char is 8 bits).\n"
 "Here are some examples of declaring values by putting them between single quotes:"
 msgstr ""
-"Cairo 没有字符串（String）的原生类型，但你可以在 `felt252' 中存储短字符，形成我们所说的 \"短字符串\"。一个短字符串的最大长度为 31 个字符。这是为了确保它能装入一个 felt （一个 felt 是"
+"Cairo 没有字符串（String）的原生类型，但你可以在 `felt252` 中存储短字符，形成我们所说的 \"短字符串\"。一个短字符串的最大长度为 31 个字符。这是为了确保它能装入一个 felt （一个 felt 是"
 "252位，一个 ASCII 字符是 8 位）。\n"
 "可以通过把值放在单引号之间来声明短字符串，下面是一些例子："
 
-#: src/ch02-02-data-types.md:148
+#: src/ch02-02-data-types.md:145
 msgid ""
 "```rust\n"
 "let my_first_char = 'C';\n"
@@ -2372,38 +2368,38 @@ msgstr ""
 "let my_first_string = 'Hello world';\n"
 "```"
 
-#: src/ch02-02-data-types.md:153
+#: src/ch02-02-data-types.md:150
 msgid "### Type casting"
 msgstr "### 类型转换"
 
-#: src/ch02-02-data-types.md:155
+#: src/ch02-02-data-types.md:152
 msgid "In Cairo, you can convert values between common scalar types and `felt252` using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits, respectively."
-msgstr "在 Cairo 中，你可以使用 `TryInto' 和 `Into' 特性提供的 `try_into` 和 `into` 方法在普通标量类型和 `felt252` 之间进行类型转换。"
+msgstr "在 Cairo 中，你可以使用 `TryInto` 和 `Into` 特性提供的 `try_into` 和 `into` 方法在普通标量类型和 `felt252` 之间进行类型转换。"
 
-#: src/ch02-02-data-types.md:157
+#: src/ch02-02-data-types.md:154
 msgid ""
 "The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to "
 "unwrap to access the new value."
 msgstr "`try_into` 方法允许在目标类型可能不适合源值时进行安全的类型转换。请记住，`try_into` 会返回一个 `Option<T>` 类型，你需要解开（unwrap）这个类型来访问新的值。"
 
-#: src/ch02-02-data-types.md:159
+#: src/ch02-02-data-types.md:156
 msgid "On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the source type is smaller than the destination type."
 msgstr "另一方面，当转换必然成功时，如源类型小于目标类型时，`into` 方法可用于类型转换。"
 
-#: src/ch02-02-data-types.md:161
+#: src/ch02-02-data-types.md:158
 msgid ""
 "To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated "
 "in the example below."
 msgstr "为了进行转换，在源值上调用 `var.into()` 或 `var.try_into()` 来将其转换为另一种类型。新变量的类型必须被明确定义，如下面的例子所示。"
 
-#: src/ch02-02-data-types.md:163
+#: src/ch02-02-data-types.md:160
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use traits::TryInto;\n"
 "use traits::Into;\n"
 "use option::OptionTrait;\n"
 "\n"
-"fn main(){\n"
+"fn main() {\n"
 "    let my_felt = 10;\n"
 "    let my_u8: u8 = my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type\n"
 "    let my_u16: u16 = my_felt.try_into().unwrap();\n"
@@ -2417,12 +2413,12 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use traits::TryInto;\n"
 "use traits::Into;\n"
 "use option::OptionTrait;\n"
 "\n"
-"fn main(){\n"
+"fn main() {\n"
 "    let my_felt = 10;\n"
 "    let my_u8: u8 = my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type\n"
 "    let my_u16: u16 = my_felt.try_into().unwrap();\n"
@@ -2436,11 +2432,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:182
+#: src/ch02-02-data-types.md:179
 msgid "### The Tuple Type"
 msgstr "### 元组类型"
 
-#: src/ch02-02-data-types.md:184
+#: src/ch02-02-data-types.md:181
 msgid ""
 "A _tuple_ is a general way of grouping together a number of values with a\n"
 "variety of types into one compound type. Tuples have a fixed length: once\n"
@@ -2449,7 +2445,7 @@ msgstr ""
 "_元组_ 是一个将多个其他类型的值组合进一个复合类型的主要方式。\n"
 "元组长度固定：一旦声明，其长度不会增大或缩小。"
 
-#: src/ch02-02-data-types.md:188
+#: src/ch02-02-data-types.md:185
 msgid ""
 "We create a tuple by writing a comma-separated list of values inside\n"
 "parentheses. Each position in the tuple has a type, and the types of the\n"
@@ -2460,21 +2456,21 @@ msgstr ""
 "元组中的每一个位置都有一个类型，而且这些不同值的类型也不必是相同的。\n"
 "这个例子中使用了可选的类型注解："
 
-#: src/ch02-02-data-types.md:193
+#: src/ch02-02-data-types.md:190
 msgid ""
 "```rust\n"
 "fn main() {\n"
-"    let tup: (u32,u64,bool) = (10,20,true);\n"
+"    let tup: (u32, u64, bool) = (10, 20, true);\n"
 "}\n"
 "```"
 msgstr ""
 "```rust\n"
 "fn main() {\n"
-"    let tup: (u32,u64,bool) = (10,20,true);\n"
+"    let tup: (u32, u64, bool) = (10, 20, true);\n"
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:199
+#: src/ch02-02-data-types.md:196
 msgid ""
 "The variable `tup` binds to the entire tuple because a tuple is considered a\n"
 "single compound element. To get the individual values out of a tuple, we can\n"
@@ -2484,7 +2480,7 @@ msgstr ""
 "为了从元组中获取单个值，可以使用模式匹配（pattern matching）\n"
 "来解构（destructure）元组值，像这样："
 
-#: src/ch02-02-data-types.md:203
+#: src/ch02-02-data-types.md:200
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -2512,7 +2508,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:216
+#: src/ch02-02-data-types.md:213
 msgid ""
 "This program first creates a tuple and binds it to the variable `tup`. It then\n"
 "uses a pattern with `let` to take `tup` and turn it into three separate\n"
@@ -2526,7 +2522,7 @@ msgstr ""
 "因为它将一个元组拆成了三个部分。最后，程序打印出了 `y` 的值，\n"
 "也就是 `6`。"
 
-#: src/ch02-02-data-types.md:222
+#: src/ch02-02-data-types.md:219
 msgid ""
 "We can also declare the tuple with value and name at the same time.\n"
 "For example:"
@@ -2534,7 +2530,7 @@ msgstr ""
 "我们也可以同时用 value 和 name 来声明元组。\n"
 "比如说："
 
-#: src/ch02-02-data-types.md:225
+#: src/ch02-02-data-types.md:222
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -2548,11 +2544,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:231
+#: src/ch02-02-data-types.md:228
 msgid "### The unit type ()"
 msgstr "### unit类型 ()"
 
-#: src/ch02-02-data-types.md:233
+#: src/ch02-02-data-types.md:230
 msgid ""
 "A _unit type_ is a type which has only one value `()`.\n"
 "It is represented by a tuple with no elements.\n"
@@ -2768,10 +2764,10 @@ msgid ""
 "use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
-"    another_function(5,6);\n"
+"    another_function(5, 6);\n"
 "}\n"
 "\n"
-"fn another_function(x: felt252, y:felt252) {\n"
+"fn another_function(x: felt252, y: felt252) {\n"
 "    x.print();\n"
 "    y.print();\n"
 "}\n"
@@ -2781,10 +2777,10 @@ msgstr ""
 "use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
-"    another_function(5,6);\n"
+"    another_function(5, 6);\n"
 "}\n"
 "\n"
-"fn another_function(x: felt252, y:felt252) {\n"
+"fn another_function(x: felt252, y: felt252) {\n"
 "    x.print();\n"
 "    y.print();\n"
 "}\n"
@@ -2901,13 +2897,13 @@ msgstr ""
 
 #: src/ch02-03-functions.md:156
 msgid ""
-"```rust,does_not_compile\n"
+"```rust,does_not_compile,ignore_format\n"
 "fn main() {\n"
 "    let x = (let y = 6);\n"
 "}\n"
 "```"
 msgstr ""
-"```rust,does_not_compile\n"
+"```rust,does_not_compile,ignore_format\n"
 "fn main() {\n"
 "    let x = (let y = 6);\n"
 "}\n"
@@ -3407,7 +3403,7 @@ msgstr "你可以通过在一个 else if 表达式中结合 if 和 else 来使�
 
 #: src/ch02-05-control-flow.md:60
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
@@ -3425,7 +3421,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
@@ -3464,7 +3460,7 @@ msgid ""
 "first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want "
 "to refactor your code. Chapter 5 describes a powerful Cairo branching construct called `match` for these cases."
 msgstr ""
-"当执行这个程序时，它按顺序检查每个 `if` 表达式并执行第一个条件为 `true` 的代码块。注意即使 6 可以被 2 整除，也不会输出 `number minus 2 is 1'.print()`，更不会输出 `else` 块中的 "
+"当执行这个程序时，它按顺序检查每个 `if` 表达式并执行第一个条件为 `true` 的代码块。注意即使 6 可以被 2 整除，也不会输出 `'number minus 2 is 1'.print()`，更不会输出 `else` 块中的 "
 "`number not found`。原因是 Cairo 只会执行第一个条件为 `true` 的代码块，并且一旦它找到一个以后，甚至都不会检查剩下的条件了。\n"
 "\n"
 "使用过多的 `else if` 表达式会使代码显得杂乱无章，所以如果有多于一个 `else if` 表达式，最好重构代码。为此，第五章会介绍一个强大的 Cairo 分支结构（branching construct），叫做 `match`。"
@@ -3565,10 +3561,10 @@ msgid ""
 "```rust,ignore,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
-"    let mut i:usize = 0;\n"
+"    let mut i: usize = 0;\n"
 "    loop {\n"
-"        if i > 10{\n"
-"            break();\n"
+"        if i > 10 {\n"
+"            break ();\n"
 "        }\n"
 "        'again!'.print();\n"
 "    }\n"
@@ -3578,10 +3574,10 @@ msgstr ""
 "```rust,ignore,does_not_compile\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
-"    let mut i:usize = 0;\n"
+"    let mut i: usize = 0;\n"
 "    loop {\n"
-"        if i > 10{\n"
-"            break();\n"
+"        if i > 10 {\n"
+"            break ();\n"
 "        }\n"
 "        'again!'.print();\n"
 "    }\n"
@@ -3926,7 +3922,7 @@ msgid ""
 "array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the [References and Snapshots](ch03-02-references-and-snapshots."
 "md) chapter."
 msgstr ""
-"`get'函数返回一个`Option<Box<@T>>，这意味着它返回一个Box类型（Cairo的智能指针类型）的选项，包含一个指向指定索引的元素的快照，如果该元素在数组中存在。如果该元素不存在，`get`返回"
+"`get`函数返回一个`Option<Box<@T>>，这意味着它返回一个Box类型（Cairo的智能指针类型）的选项，包含一个指向指定索引的元素的快照，如果该元素在数组中存在。如果该元素不存在，`get`返回"
 "`None'。当你期望访问可能不在数组范围内的索引，并且希望优雅地处理这种情况而不发生恐慌时，这个方法很有用。快照将在[引用和快照](ch03-02-references-and-snapshots.md)章节中详细解释。"
 
 #: src/ch02-06-common-collections.md:77
@@ -3984,18 +3980,18 @@ msgstr "下面是一个使用`get()`方法的例子："
 
 #: src/ch02-06-common-collections.md:99
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use array::ArrayTrait;\n"
 "use box::BoxTrait;\n"
 "fn main() -> u128 {\n"
 "    let mut arr = ArrayTrait::<u128>::new();\n"
 "    arr.append(100_u128);\n"
-"    let index_to_access =\n"
-"        1_usize;        // Change this value to see different results, what would happen if the index doesn't exist ?\n"
+"    let index_to_access = 1_usize; // Change this value to see different results, what would happen if the index doesn't exist ?\n"
 "    match arr.get(index_to_access) {\n"
 "        Option::Some(x) => {\n"
-"            *x.unbox()  // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator\n"
-"                        // It basically means \"transform what get(idx) returned into a real value\"\n"
+"            *x.unbox()\n"
+"        // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator\n"
+"        // It basically means \"transform what get(idx) returned into a real value\"\n"
 "        },\n"
 "        Option::None(_) => {\n"
 "            let mut data = ArrayTrait::new();\n"
@@ -4006,18 +4002,18 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use array::ArrayTrait;\n"
 "use box::BoxTrait;\n"
 "fn main() -> u128 {\n"
 "    let mut arr = ArrayTrait::<u128>::new();\n"
 "    arr.append(100_u128);\n"
-"    let index_to_access =\n"
-"        1_usize;        // Change this value to see different results, what would happen if the index doesn't exist ?\n"
+"    let index_to_access = 1_usize; // Change this value to see different results, what would happen if the index doesn't exist ?\n"
 "    match arr.get(index_to_access) {\n"
 "        Option::Some(x) => {\n"
-"            *x.unbox()  // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator\n"
-"                        // It basically means \"transform what get(idx) returned into a real value\"\n"
+"            *x.unbox()\n"
+"        // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator\n"
+"        // It basically means \"transform what get(idx) returned into a real value\"\n"
 "        },\n"
 "        Option::None(_) => {\n"
 "            let mut data = ArrayTrait::new();\n"
@@ -4347,11 +4343,9 @@ msgstr ""
 msgid ""
 "```rust,does_not_compile\n"
 "use array::ArrayTrait;\n"
-"fn foo(arr: Array<u128>) {\n"
-"}\n"
+"fn foo(arr: Array<u128>) {}\n"
 "\n"
-"fn bar(arr:Array<u128>){\n"
-"}\n"
+"fn bar(arr: Array<u128>) {}\n"
 "\n"
 "fn main() {\n"
 "    let mut arr = ArrayTrait::<u128>::new();\n"
@@ -4362,11 +4356,9 @@ msgid ""
 msgstr ""
 "```rust,does_not_compile\n"
 "use array::ArrayTrait;\n"
-"fn foo(arr: Array<u128>) {\n"
-"}\n"
+"fn foo(arr: Array<u128>) {}\n"
 "\n"
-"fn bar(arr:Array<u128>){\n"
-"}\n"
+"fn bar(arr: Array<u128>) {}\n"
 "\n"
 "fn main() {\n"
 "    let mut arr = ArrayTrait::<u128>::new();\n"
@@ -4375,7 +4367,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:96
+#: src/ch03-01-what-is-ownership.md:94
 msgid ""
 "In this case, we try to pass the same array instance `arr` by value to the functions `foo` and `bar`, which means\n"
 "that the parameter used in both function calls is the same instance of the array. If you append a value to the array\n"
@@ -4391,11 +4383,11 @@ msgstr ""
 "为了防止这种情况，`arr`变量的所有权从`main`函数转移到`foo`函数。当试图以`arr`为参数调用`bar`时，`arr`的所有权早已再第一次调用时被转移。\n"
 "所有权系统阻止了我们在`foo`中使用相同的`arr`实例。"
 
-#: src/ch03-01-what-is-ownership.md:104
+#: src/ch03-01-what-is-ownership.md:102
 msgid "Running the code above will result in a compile-time error:"
 msgstr "运行上面的代码将导致一个编译时错误："
 
-#: src/ch03-01-what-is-ownership.md:106
+#: src/ch03-01-what-is-ownership.md:104
 msgid ""
 "```console\n"
 "error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>\n"
@@ -4411,11 +4403,11 @@ msgstr ""
 "        ^*****^\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:113
+#: src/ch03-01-what-is-ownership.md:111
 msgid "### The `Copy` Trait"
 msgstr "### `Copy` Trait"
 
-#: src/ch03-01-what-is-ownership.md:115
+#: src/ch03-01-what-is-ownership.md:113
 msgid ""
 "If a type implements the `Copy` trait, passing it to a function will not move the ownership of the value to the function called, but will instead pass a copy of the value.\n"
 "You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the "
@@ -4426,9 +4418,9 @@ msgstr ""
 "你可以通过在你的类型定义中添加`#[derive(Copy)]`标注来实现`Copy` Trait。然而，如果一个类型本身或其任何组件没有实现Copy Trait，Cairo将不允许该类型被标注为Copy。\n"
 "虽然数组和字典不能被复制，但不包含它们的自定义类型可以被复制。"
 
-#: src/ch03-01-what-is-ownership.md:119
+#: src/ch03-01-what-is-ownership.md:117
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "#[derive(Copy, Drop)]\n"
 "struct Point {\n"
 "    x: u128,\n"
@@ -4446,7 +4438,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "#[derive(Copy, Drop)]\n"
 "struct Point {\n"
 "    x: u128,\n"
@@ -4464,7 +4456,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:137
+#: src/ch03-01-what-is-ownership.md:135
 msgid ""
 "In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing "
 "a copy of `p1`, and the ownership of `p1` remains with the main function.\n"
@@ -4473,15 +4465,15 @@ msgstr ""
 "在这个例子中，我们可以向foo函数传递两次`p1`，因为`Point`类型实现了`Copy`trait。这意味着当我们把`p1`传递给`foo`时，我们实际上是在传递`p1`的副本，而`p1`的所有权仍然属于主函数。\n"
 "如果你从`Point`类型中删除`Copy`trait的派生，当你试图编译代码时，你会得到一个编译时错误。"
 
-#: src/ch03-01-what-is-ownership.md:140
+#: src/ch03-01-what-is-ownership.md:138
 msgid "_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 4](ch04-00-using-structs-to-structure-related-data.md)._"
 msgstr "_不要担心`Struct`关键字。我们将在[第四章](ch04-00-using-structs-to-structure-related-data.md)中介绍_"
 
-#: src/ch03-01-what-is-ownership.md:142
+#: src/ch03-01-what-is-ownership.md:140
 msgid "### The `Drop` Trait"
 msgstr "### `Drop` Trait"
 
-#: src/ch03-01-what-is-ownership.md:144
+#: src/ch03-01-what-is-ownership.md:142
 msgid ""
 "You may have noticed that the `Point` type in the previous example also implements the `Drop` trait. In Cairo, a value cannot go out of scope unless it has been previously moved.\n"
 "For example, the following code will not compile, because the struct `A` is not moved before it goes out of scope:"
@@ -4489,7 +4481,7 @@ msgstr ""
 "你可能已经注意到，前面例子中的`Point`类型也实现了`Drop` trait。在Cairo中，一个值不能超出其作用域，除非它之前被移动过。\n"
 "例如，下面的代码将无法编译，因为结构体`A`在超出作用域之前没有被移动："
 
-#: src/ch03-01-what-is-ownership.md:147
+#: src/ch03-01-what-is-ownership.md:145
 msgid ""
 "```rust,does_not_compile\n"
 "struct A {}\n"
@@ -4507,7 +4499,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:155
+#: src/ch03-01-what-is-ownership.md:153
 msgid ""
 "This is to ensure the soundness of Cairo programs. Soundness refers to the fact that if a\n"
 "statement during the execution of the program is false, no cheating prover can convince an\n"
@@ -4521,7 +4513,7 @@ msgstr ""
 "在我们的案例中，我们要确保程序执行过程中连续的字典key更新的一致性。\n"
 "这只有在字典被压缩（`squashed`）时才会进行检查--它将字典的所有权转移到了`squash`方法，从而允许字典超出范围。未被压缩的字典是危险的，因为恶意的证明者可以证明不一致更新的正确性。"
 
-#: src/ch03-01-what-is-ownership.md:163
+#: src/ch03-01-what-is-ownership.md:161
 msgid ""
 "However, types that implement the `Drop` trait are allowed to go out of scope without being explicitly moved. When a value of a type that implements the `Drop` trait goes out of "
 "scope, the `Drop` implementation is called on the type, which moves the value to the `drop` function, allowing it to go out of scope - This is what we call \"dropping\" a value.\n"
@@ -4531,7 +4523,7 @@ msgstr ""
 "我们所说的 \"丢弃 \"一个值。\n"
 "值得注意的是，drop的实现是一个 \"no-op\"，也就是说，除了允许值离开作用域之外，它不执行任何其他操作。"
 
-#: src/ch03-01-what-is-ownership.md:166
+#: src/ch03-01-what-is-ownership.md:164
 msgid ""
 "The `Drop` implementation can be derived for all types, allowing them to be dropped when goint out of scope, except for dictionaries (`Felt252Dict`) and types containing "
 "dictionaries.\n"
@@ -4540,7 +4532,7 @@ msgstr ""
 "除了字典（`Felt252Dict`）和包含字典的类型外，`Drop`的实现可以成为所有类型派生，允许它们在超出作用域时被丢弃。\n"
 "例如，下面的代码可以编译："
 
-#: src/ch03-01-what-is-ownership.md:169
+#: src/ch03-01-what-is-ownership.md:167
 msgid ""
 "```rust\n"
 "#[derive(Drop)]\n"
@@ -4560,11 +4552,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:178
+#: src/ch03-01-what-is-ownership.md:176
 msgid "### The `Destruct` Trait"
 msgstr "### `Destruct` Trait"
 
-#: src/ch03-01-what-is-ownership.md:180
+#: src/ch03-01-what-is-ownership.md:178
 msgid ""
 "Manually calling the `squash` method on a dictionary is not very convenient, and it is easy to forget to do so. To make it easier to use dictionaries, Cairo provides the `Destruct` "
 "trait, which allows you to specify the behavior of a type when it goes out of scope. While Dictionaries don't implement the `Drop` trait, they do implement the `Destruct` trait, "
@@ -4573,11 +4565,11 @@ msgstr ""
 "手动调用字典上的 `squash` 方法不是很方便，而且很容易忘记这样做。为了方便使用字典，Cairo 提供了 `Destruct` trait，它允许你指定一个类型超出作用域时的行为。虽然字典没有实现`Drop` trait，"
 "但它们实现了`Destruct`trait，这允许它们在超出作用域时自动被`squashed`，因此你可以不需要手动调用`squash`方法。"
 
-#: src/ch03-01-what-is-ownership.md:182
+#: src/ch03-01-what-is-ownership.md:180
 msgid "Consider the following example, in which we define a custom type that contains a dictionary:"
 msgstr "下面的这个例子中，我们定义了一个包含字典的自定义类型："
 
-#: src/ch03-01-what-is-ownership.md:184
+#: src/ch03-01-what-is-ownership.md:182
 msgid ""
 "```rust,does_not_compile\n"
 "use dict::Felt252DictTrait;\n"
@@ -4587,9 +4579,7 @@ msgid ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    A {\n"
-"        dict: Felt252DictTrait::new()\n"
-"    };\n"
+"    A { dict: Felt252DictTrait::new() };\n"
 "}\n"
 "```"
 msgstr ""
@@ -4601,17 +4591,15 @@ msgstr ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    A {\n"
-"        dict: Felt252DictTrait::new()\n"
-"    };\n"
+"    A { dict: Felt252DictTrait::new() };\n"
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:198
+#: src/ch03-01-what-is-ownership.md:194
 msgid "If you try to run this code, you will get a compile-time error:"
 msgstr "如果你试图运行这段代码，你会得到一个编译时错误："
 
-#: src/ch03-01-what-is-ownership.md:200
+#: src/ch03-01-what-is-ownership.md:196
 msgid ""
 "```console\n"
 "error: Variable not dropped. Trait has no implementation in context: core::traits::Drop::<temp7::temp7::A>. Trait has no implementation in context: core::traits::Destruct::<temp7::"
@@ -4629,7 +4617,7 @@ msgstr ""
 "    ^*^\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:207
+#: src/ch03-01-what-is-ownership.md:203
 msgid ""
 "When A goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can "
 "derive the `Destruct` trait implementation for the `A` type:"
@@ -4637,7 +4625,7 @@ msgstr ""
 "当A超出作用域时，它不能被丢弃，因为它既没有实现`Drop`（因为它包含一个字典，不能派生`derive(Drop)`）也没有实现`Destruct` trait。为了解决这个问题，我们可以为`A`类型派生出`Destruct` "
 "trait的实现："
 
-#: src/ch03-01-what-is-ownership.md:209
+#: src/ch03-01-what-is-ownership.md:205
 msgid ""
 "```rust\n"
 "use dict::Felt252DictTrait;\n"
@@ -4648,9 +4636,7 @@ msgid ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    A {\n"
-"        dict: Felt252DictTrait::new()\n"
-"    }; // No error here\n"
+"    A { dict: Felt252DictTrait::new() }; // No error here\n"
 "}\n"
 "```"
 msgstr ""
@@ -4663,21 +4649,19 @@ msgstr ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    A {\n"
-"        dict: Felt252DictTrait::new()\n"
-"    }; // No error here\n"
+"    A { dict: Felt252DictTrait::new() }; // No error here\n"
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:224
+#: src/ch03-01-what-is-ownership.md:218
 msgid "Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile."
 msgstr "现在，当`A`超出作用域时，它的字典将被自动`squashed`，并且程序将被编译。"
 
-#: src/ch03-01-what-is-ownership.md:226
+#: src/ch03-01-what-is-ownership.md:220
 msgid "### Copy Array data with Clone"
 msgstr "### 用Clone复制数组数据"
 
-#: src/ch03-01-what-is-ownership.md:228
+#: src/ch03-01-what-is-ownership.md:222
 msgid ""
 "If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 5, but because methods are a common feature "
 "in many\n"
@@ -4686,15 +4670,15 @@ msgstr ""
 "如果我们确实想深入复制一个 \"数组 \"的数据，我们可以使用一个叫做 `clone`的通用方法。\n"
 "我们将在第5章中讨论方法的语法，但由于方法是许多编程语言的共同特征，你可能已经见过它们了。"
 
-#: src/ch03-01-what-is-ownership.md:231
+#: src/ch03-01-what-is-ownership.md:225
 msgid "Here’s an example of the `clone` method in action."
 msgstr "下面是一个 `clone` 方法的实例。"
 
-#: src/ch03-01-what-is-ownership.md:233
+#: src/ch03-01-what-is-ownership.md:227
 msgid "> Note: in the following example, we need to import the `Clone` trait from the corelib `clone` module, and its implementation for the array type from the `array` module."
 msgstr "> 注意：在下面的例子中，我们需要从corelib的`clone`模块中导入`clone`trait，并从`array`模块中导入其对数组类型的实现。"
 
-#: src/ch03-01-what-is-ownership.md:235
+#: src/ch03-01-what-is-ownership.md:229
 msgid ""
 "```rust\n"
 "use array::ArrayTrait;\n"
@@ -4716,11 +4700,11 @@ msgstr ""
 "\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:245
+#: src/ch03-01-what-is-ownership.md:239
 msgid "> Note: you will need to run `cairo-run` with the `--available-gas=2000000` option to run this example, because it uses a loop and must be ran with a gas limit."
 msgstr "> 注意：你需要用`--available-gas=2000000`选项运行`cairo-run`来运行这个例子，因为它使用了一个循环，运行时必须有gas限制。"
 
-#: src/ch03-01-what-is-ownership.md:247
+#: src/ch03-01-what-is-ownership.md:241
 msgid ""
 "When you see a call to `clone`, you know that some arbitrary code is being\n"
 "executed and that code may be expensive. It’s a visual indicator that something\n"
@@ -4729,29 +4713,29 @@ msgstr ""
 "当你看到对`clone`的调用时，你知道一些特定的代码被执行而且这些代码可能相当消耗资源。\n"
 "你很容易察觉到一些不寻常的事情正在发生。"
 
-#: src/ch03-01-what-is-ownership.md:251
+#: src/ch03-01-what-is-ownership.md:245
 msgid "### Ownership and Functions"
 msgstr "### 所有权与函数"
 
-#: src/ch03-01-what-is-ownership.md:253
+#: src/ch03-01-what-is-ownership.md:247
 msgid ""
 "Passing a variable to a function will either move it or copy it. As seen in the Array section, passing an `Array` as a function parameter transfers its ownership; let's see what "
 "happens with other types."
 msgstr "将一个变量传递给一个函数，要么移动它，要么复制它。正如在数组部分所看到的，将 `Array` 作为一个函数参数传递同时会传递它的所有权；让我们看看其他类型会发生什么。"
 
-#: src/ch03-01-what-is-ownership.md:255
+#: src/ch03-01-what-is-ownership.md:249
 msgid ""
 "Listing 3-3 has an example with some annotations\n"
 "showing where variables go into and out of scope."
 msgstr "清单3-3使用注释展示变量何时进入和离开作用域。"
 
-#: src/ch03-01-what-is-ownership.md:258 src/ch03-01-what-is-ownership.md:300 src/ch03-01-what-is-ownership.md:353
+#: src/ch03-01-what-is-ownership.md:252 src/ch03-01-what-is-ownership.md:294 src/ch03-01-what-is-ownership.md:347
 msgid "<span class=\"filename\">Filename: src/main.cairo</span>"
 msgstr "<span class=\"filename\">文件名： src/main.cairo</span>"
 
-#: src/ch03-01-what-is-ownership.md:260
+#: src/ch03-01-what-is-ownership.md:254
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "#[derive(Drop)]\n"
 "struct MyStruct{}\n"
 "\n"
@@ -4777,7 +4761,7 @@ msgid ""
 "} // Here, some_integer goes out of scope and is dropped.\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "#[derive(Drop)]\n"
 "struct MyStruct{}\n"
 "\n"
@@ -4803,13 +4787,13 @@ msgstr ""
 "} // Here, some_integer goes out of scope and is dropped.\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:286
+#: src/ch03-01-what-is-ownership.md:280
 msgid ""
 "<span class=\"caption\">Listing 3-3: Functions with ownership and scope\n"
 "annotated</span>"
 msgstr "<span class=\"caption\">清单3-3：带有所有权和作用域注释的函数</span>"
 
-#: src/ch03-01-what-is-ownership.md:289
+#: src/ch03-01-what-is-ownership.md:283
 msgid ""
 "If we tried to use `my_struct` after the call to `takes_ownership`, Cairo would throw a\n"
 "compile-time error. These static checks protect us from mistakes. Try adding\n"
@@ -4820,11 +4804,11 @@ msgstr ""
 "这些静态检查可以保护我们不犯错误。试着在`main`中添加使用`my_struct`和`x`的代码，看看哪里可以使用它们，\n"
 "哪里所有权规则将会阻止你这样做。"
 
-#: src/ch03-01-what-is-ownership.md:294
+#: src/ch03-01-what-is-ownership.md:288
 msgid "### Return Values and Scope"
 msgstr "### 返回值与作用域"
 
-#: src/ch03-01-what-is-ownership.md:296
+#: src/ch03-01-what-is-ownership.md:290
 msgid ""
 "Returning values can also transfer ownership. Listing 3-4 shows an example of a\n"
 "function that returns some value, with similar annotations as those in Listing\n"
@@ -4833,17 +4817,17 @@ msgstr ""
 "返回值也可以转移所有权。示例3-4显示了一个例子\n"
 "该函数返回一些值，其注释与示例4-3中的相似。"
 
-#: src/ch03-01-what-is-ownership.md:302
+#: src/ch03-01-what-is-ownership.md:296
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "#[derive(Drop)]\n"
-"struct A{}\n"
+"struct A {}\n"
 "\n"
 "fn main() {\n"
 "    let a1 = gives_ownership();           // gives_ownership moves its return\n"
 "                                          // value into a1\n"
 "\n"
-"    let a2 = A{};                         // a2 comes into scope\n"
+"    let a2 = A {};                        // a2 comes into scope\n"
 "\n"
 "    let a3 = takes_and_gives_back(a2);    // a2 is moved into\n"
 "                                          // takes_and_gives_back, which also\n"
@@ -4856,7 +4840,7 @@ msgid ""
 "                                          // return value into the function\n"
 "                                          // that calls it\n"
 "\n"
-"    let some_a = A{};                     // some_a comes into scope\n"
+"    let some_a = A {};                    // some_a comes into scope\n"
 "\n"
 "    some_a                                // some_a is returned and\n"
 "                                          // moves ownership to the calling\n"
@@ -4873,15 +4857,15 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "#[derive(Drop)]\n"
-"struct A{}\n"
+"struct A {}\n"
 "\n"
 "fn main() {\n"
 "    let a1 = gives_ownership();           // gives_ownership moves its return\n"
 "                                          // value into a1\n"
 "\n"
-"    let a2 = A{};                         // a2 comes into scope\n"
+"    let a2 = A {};                        // a2 comes into scope\n"
 "\n"
 "    let a3 = takes_and_gives_back(a2);    // a2 is moved into\n"
 "                                          // takes_and_gives_back, which also\n"
@@ -4894,7 +4878,7 @@ msgstr ""
 "                                          // return value into the function\n"
 "                                          // that calls it\n"
 "\n"
-"    let some_a = A{};                     // some_a comes into scope\n"
+"    let some_a = A {};                    // some_a comes into scope\n"
 "\n"
 "    some_a                                // some_a is returned and\n"
 "                                          // moves ownership to the calling\n"
@@ -4911,7 +4895,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:340
+#: src/ch03-01-what-is-ownership.md:334
 msgid ""
 "<span class=\"caption\">Listing 3-4: Transferring ownership of return\n"
 "values</span>"
@@ -4919,11 +4903,11 @@ msgstr ""
 "<span class=\"caption\">清单3-4：转移返回值的所有权\n"
 "</span>"
 
-#: src/ch03-01-what-is-ownership.md:343
+#: src/ch03-01-what-is-ownership.md:337
 msgid "When a variable goes out of scope, its value is dropped, unless ownership of the value has been moved to another variable."
 msgstr "当一个变量超出作用域时，它的值会被丢弃，除非值的所有权被转移到另一个变量上。"
 
-#: src/ch03-01-what-is-ownership.md:345
+#: src/ch03-01-what-is-ownership.md:339
 msgid ""
 "While this works, taking ownership and then returning ownership with every\n"
 "function is a bit tedious. What if we want to let a function use a value but\n"
@@ -4935,11 +4919,11 @@ msgstr ""
 "如果我们想要函数使用一个值但不获取所有权该怎么办呢？\n"
 "除此之外，我们也可能想返回函数体中产生的一些数据。"
 
-#: src/ch03-01-what-is-ownership.md:351
+#: src/ch03-01-what-is-ownership.md:345
 msgid "Cairo does let us return multiple values using a tuple, as shown in Listing 3-5."
 msgstr "Cairo的确让我们可以使用一个元组返回多个值，如示例3-5所示。"
 
-#: src/ch03-01-what-is-ownership.md:355
+#: src/ch03-01-what-is-ownership.md:349
 msgid ""
 "```rust\n"
 "use array::ArrayTrait;\n"
@@ -4971,11 +4955,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:370
+#: src/ch03-01-what-is-ownership.md:364
 msgid "<span class=\"caption\">Listing 3-5: Returning ownership of parameters</span>"
 msgstr "<span class=\"caption\">清单3-5：返回参数的所有权</span>"
 
-#: src/ch03-01-what-is-ownership.md:372
+#: src/ch03-01-what-is-ownership.md:366
 msgid ""
 "But this is too much ceremony and a lot of work for a concept that should be\n"
 "common. Luckily for us, Cairo has two features for using a value without\n"
@@ -5031,7 +5015,7 @@ msgstr ""
 
 #: src/ch03-02-references-and-snapshots.md:25
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use array::ArrayTrait;\n"
 "use debug::PrintTrait;\n"
 "\n"
@@ -5050,7 +5034,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use array::ArrayTrait;\n"
 "use debug::PrintTrait;\n"
 "\n"
@@ -5177,17 +5161,16 @@ msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
-"#[derive(Copy,Drop)]\n"
+"#[derive(Copy, Drop)]\n"
 "struct Rectangle {\n"
 "    height: u64,\n"
 "    width: u64,\n"
 "}\n"
 "\n"
-"fn main(){\n"
-"    let rec = Rectangle{height:3_u64, width:10_u64};\n"
+"fn main() {\n"
+"    let rec = Rectangle { height: 3_u64, width: 10_u64 };\n"
 "    let area = calculate_area(@rec);\n"
 "    area.print();\n"
-"\n"
 "}\n"
 "\n"
 "fn calculate_area(rec: @Rectangle) -> u64 {\n"
@@ -5202,17 +5185,16 @@ msgstr ""
 "```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
-"#[derive(Copy,Drop)]\n"
+"#[derive(Copy, Drop)]\n"
 "struct Rectangle {\n"
 "    height: u64,\n"
 "    width: u64,\n"
 "}\n"
 "\n"
-"fn main(){\n"
-"    let rec = Rectangle{height:3_u64, width:10_u64};\n"
+"fn main() {\n"
+"    let rec = Rectangle { height: 3_u64, width: 10_u64 };\n"
 "    let area = calculate_area(@rec);\n"
 "    area.print();\n"
-"\n"
 "}\n"
 "\n"
 "fn calculate_area(rec: @Rectangle) -> u64 {\n"
@@ -5224,7 +5206,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:108
+#: src/ch03-02-references-and-snapshots.md:107
 msgid ""
 "But, what happens if we try to modify something we’re passing as snapshot? Try the code in\n"
 "Listing 3-6. Spoiler alert: it doesn’t work!"
@@ -5232,17 +5214,17 @@ msgstr ""
 "但是，如果我们试图修改我们作为快照传递的东西会发生什么？试试下面的代码\n"
 "示例3-6。剧透一下：它不起作用!"
 
-#: src/ch03-02-references-and-snapshots.md:113
+#: src/ch03-02-references-and-snapshots.md:112
 msgid ""
 "```rust,does_not_compile\n"
-"#[derive(Copy,Drop)]\n"
+"#[derive(Copy, Drop)]\n"
 "struct Rectangle {\n"
 "    height: u64,\n"
 "    width: u64,\n"
 "}\n"
 "\n"
-"fn main(){\n"
-"    let rec = Rectangle{height:3_u64, width:10_u64};\n"
+"fn main() {\n"
+"    let rec = Rectangle { height: 3_u64, width: 10_u64 };\n"
 "    flip(@rec);\n"
 "}\n"
 "\n"
@@ -5254,14 +5236,14 @@ msgid ""
 "```"
 msgstr ""
 "```rust,does_not_compile\n"
-"#[derive(Copy,Drop)]\n"
+"#[derive(Copy, Drop)]\n"
 "struct Rectangle {\n"
 "    height: u64,\n"
 "    width: u64,\n"
 "}\n"
 "\n"
-"fn main(){\n"
-"    let rec = Rectangle{height:3_u64, width:10_u64};\n"
+"fn main() {\n"
+"    let rec = Rectangle { height: 3_u64, width: 10_u64 };\n"
 "    flip(@rec);\n"
 "}\n"
 "\n"
@@ -5272,15 +5254,15 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:132
+#: src/ch03-02-references-and-snapshots.md:131
 msgid "<span class=\"caption\">Listing 3-6: Attempting to modify a snapshot value</span>"
 msgstr "<span class=\"caption\">示例3-6：试图修改一个快照值</span>"
 
-#: src/ch03-02-references-and-snapshots.md:134
+#: src/ch03-02-references-and-snapshots.md:133
 msgid "Here’s the error:"
 msgstr "这里有一个错误："
 
-#: src/ch03-02-references-and-snapshots.md:136
+#: src/ch03-02-references-and-snapshots.md:135
 msgid ""
 "```console\n"
 "error: Invalid left-hand side of assignment.\n"
@@ -5296,15 +5278,15 @@ msgstr ""
 "    ^********^\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:143
+#: src/ch03-02-references-and-snapshots.md:142
 msgid "The compiler prevents us from modifying values associated to snapshots."
 msgstr "编译器阻止我们修改与快照相关的值。"
 
-#: src/ch03-02-references-and-snapshots.md:145
+#: src/ch03-02-references-and-snapshots.md:144
 msgid "### Mutable References"
 msgstr "### 可变引用"
 
-#: src/ch03-02-references-and-snapshots.md:147
+#: src/ch03-02-references-and-snapshots.md:146
 msgid ""
 "We can achieve the behavior we want in Listing 3-6 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are "
 "implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by "
@@ -5315,15 +5297,15 @@ msgstr ""
 "做，它们允许你对传递的值进行改变，同时通过在执行结束时自动返回来保持对它的所有权。\n"
 "在Cairo中，一个参数可以使用`ref`修饰符作为 _mutable reference_ 传递。"
 
-#: src/ch03-02-references-and-snapshots.md:150
+#: src/ch03-02-references-and-snapshots.md:149
 msgid "> **Note**: In Cairo, a parameter can only be passed as _mutable reference_ using the `ref` modifier if the variable is declared as mutable with `mut`."
 msgstr "> **注意**：在Cairo中，只有在变量用`mut`声明为可变的情况下，才能使用`ref`修饰符将参数作为可变的引用传递。"
 
-#: src/ch03-02-references-and-snapshots.md:152
+#: src/ch03-02-references-and-snapshots.md:151
 msgid "In Listing 3-7, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function."
 msgstr "在示例3-7中，我们使用一个可变的引用来修改`Rectangle`实例在`flip`函数中的`height`和`width`字段的值。"
 
-#: src/ch03-02-references-and-snapshots.md:154
+#: src/ch03-02-references-and-snapshots.md:153
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -5369,11 +5351,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:176
+#: src/ch03-02-references-and-snapshots.md:175
 msgid "<span class=\"caption\">Listing 3-7: Use of a mutable reference to modify a value</span>"
 msgstr "<span class=\"caption\">清单 3-7：使用一个可变的引用来修改一个值</span>"
 
-#: src/ch03-02-references-and-snapshots.md:178
+#: src/ch03-02-references-and-snapshots.md:177
 msgid ""
 "First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` into `flip` with `ref rec`, and update the function signature to accept a mutable reference with `ref "
 "rec: Rectangle`. This makes it very clear that the `flip` function will mutate the value of the `Rectangle` instance passed as parameter."
@@ -5381,11 +5363,11 @@ msgstr ""
 "首先，我们把`rec`改成`mut`。然后我们用 `ref rec` 将 `rec` 的可变引用传入 `flip` ，并更新函数签名，用 `ref rec: Rectangle`接受可变引用。这很清楚地表明，`flip`函数将改变作为参数传递的"
 "`Rectangle`实例的值。"
 
-#: src/ch03-02-references-and-snapshots.md:180
+#: src/ch03-02-references-and-snapshots.md:179
 msgid "The output of the program is:"
 msgstr "程序的输出是："
 
-#: src/ch03-02-references-and-snapshots.md:182
+#: src/ch03-02-references-and-snapshots.md:181
 msgid ""
 "```console\n"
 "[DEBUG]\n"
@@ -5401,19 +5383,19 @@ msgstr ""
 "[DEBUG]\t                        (raw: 3)\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:189
+#: src/ch03-02-references-and-snapshots.md:188
 msgid "As expected, the `height` and `width` fields of the `rec` variable have been swapped."
 msgstr "正如预期的那样， `rec` 变量的 `height` 和 `width` 字段被调换了。"
 
-#: src/ch03-02-references-and-snapshots.md:191
+#: src/ch03-02-references-and-snapshots.md:190
 msgid "### Small recap"
 msgstr "### 小结"
 
-#: src/ch03-02-references-and-snapshots.md:193
+#: src/ch03-02-references-and-snapshots.md:192
 msgid "Let’s recap what we’ve discussed about ownership, snapshots, and references:"
 msgstr "让我们回顾一下我们已经讨论过的关于所有权、快照和引用的内容："
 
-#: src/ch03-02-references-and-snapshots.md:195
+#: src/ch03-02-references-and-snapshots.md:194
 msgid ""
 "- At any given time, a variable can only have one owner.\n"
 "- You can pass a variable by-value, by-snapshot, or by-reference to a function.\n"
@@ -5812,7 +5794,7 @@ msgid ""
 "}\n"
 "\n"
 "fn area(dimension: (u64, u64)) -> u64 {\n"
-"    let (x,y) = dimension;\n"
+"    let (x, y) = dimension;\n"
 "    x * y\n"
 "}\n"
 "```"
@@ -5826,7 +5808,7 @@ msgstr ""
 "}\n"
 "\n"
 "fn area(dimension: (u64, u64)) -> u64 {\n"
-"    let (x,y) = dimension;\n"
+"    let (x, y) = dimension;\n"
 "    x * y\n"
 "}\n"
 "```"
@@ -5862,7 +5844,7 @@ msgstr "我们使用结构体为数据命名来为其赋予意义。我们可以
 
 #: src/ch04-02-an-example-program-using-structs.md:76
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -5884,7 +5866,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -5933,7 +5915,7 @@ msgstr "在调试程序时打印出 `Rectangle` 实例来查看其所有字段�
 
 #: src/ch04-02-an-example-program-using-structs.md:108
 msgid ""
-"```rust,does_not_compile\n"
+"```rust,does_not_compile,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -5950,7 +5932,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust,does_not_compile\n"
+"```rust,does_not_compile,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -6008,7 +5990,7 @@ msgstr ""
 
 #: src/ch04-02-an-example-program-using-structs.md:144
 msgid ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -6032,7 +6014,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -6374,9 +6356,8 @@ msgid ""
 "`rect2` are smaller than the dimensions of `rect1`, but `rect3` is wider than\n"
 "`rect1`:"
 msgstr ""
-"预期的输出结果如下，因为`rect2'的两个尺寸都小于`rect1'的尺寸。\n"
-"`rect2`的尺寸都小于`rect1`的尺寸，但`rect3`的宽度大于\n"
-"`rect1'："
+"预期的输出结果如下，因为`rect2`的两个尺寸都小于`rect1`的尺寸。\n"
+"但`rect3`的宽度大于`rect1`："
 
 #: src/ch04-03-method-syntax.md:165
 msgid ""
@@ -6738,7 +6719,7 @@ msgstr ""
 
 #: src/ch05-01-enums.md:41
 msgid "In this example, the `Message` enum has three variants: `Quit`, `Echo` and `Move`, all with different types:"
-msgstr "在这个例子中，`Message'枚举有三个成员：`Quit'、`Echo'和`Move'，都有不同的类型："
+msgstr "在这个例子中，`Message`枚举有三个成员：`Quit`、`Echo`和`Move`，都有不同的类型："
 
 #: src/ch05-01-enums.md:43
 msgid ""
@@ -6746,7 +6727,7 @@ msgid ""
 "- `Echo` is a single felt.\n"
 "- `Move` is a tuple of two u128 values."
 msgstr ""
-"- `Quit'是unit类型 - 它完全没有与之相关的数据。\n"
+"- `Quit`是unit类型 - 它完全没有与之相关的数据。\n"
 "- `Echo'是一个单一的felt。\n"
 "- `Move'是一个由两个u128值组成的tuple。"
 
@@ -7938,10 +7919,9 @@ msgid ""
 "\n"
 "mod garden;\n"
 "\n"
-"fn main(){\n"
-"    let Asparagus = Asparagus{};\n"
+"fn main() {\n"
+"    let Asparagus = Asparagus {};\n"
 "}\n"
-"\n"
 "\n"
 "```"
 msgstr ""
@@ -7950,22 +7930,21 @@ msgstr ""
 "\n"
 "mod garden;\n"
 "\n"
-"fn main(){\n"
-"    let Asparagus = Asparagus{};\n"
+"fn main() {\n"
+"    let Asparagus = Asparagus {};\n"
 "}\n"
-"\n"
 "\n"
 "```"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:104
+#: src/ch06-02-defining-modules-to-control-scope.md:103
 msgid "The `mod garden;` line tells the compiler to include the code it finds in _src/garden.cairo_, which is:"
 msgstr "`mod garden;`行告诉编译器包括它在 _src/garden.cairo_ 中发现的代码是："
 
-#: src/ch06-02-defining-modules-to-control-scope.md:106
+#: src/ch06-02-defining-modules-to-control-scope.md:105
 msgid "<span class=\"filename\">Filename: src/garden.cairo</span>"
 msgstr "<span class=\"filename\">文件名： src/garden.cairo</span>"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:108
+#: src/ch06-02-defining-modules-to-control-scope.md:107
 msgid ""
 "```rust\n"
 "mod vegetables;\n"
@@ -7975,13 +7954,13 @@ msgstr ""
 "mod vegetables;\n"
 "```"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:112
+#: src/ch06-02-defining-modules-to-control-scope.md:111
 msgid ""
 "Here, `mod vegetables;` means the code in _src/garden/vegetables.cairo_ is\n"
 "included too. That code is:"
 msgstr "这里，`mod vegetables;`意味着 _src/garden/vegetables.cairo_ 中的代码也被包括在内。这段代码是："
 
-#: src/ch06-02-defining-modules-to-control-scope.md:115
+#: src/ch06-02-defining-modules-to-control-scope.md:114
 msgid ""
 "```rust\n"
 "#[derive(Copy,Drop)]\n"
@@ -7993,21 +7972,21 @@ msgstr ""
 "struct Asparagus{}\n"
 "```"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:120
+#: src/ch06-02-defining-modules-to-control-scope.md:119
 msgid ""
 "The line `use garden::vegetables::Asparagus;` lets us use bring the `Asparagus` type into scope,\n"
 "so we can use it in the `main` function."
 msgstr "这行`use garden::vecants::Asparagus;`让我们把`Asparagus`类型带入作用域、所以我们可以在`main`函数中使用它。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:123
+#: src/ch06-02-defining-modules-to-control-scope.md:122
 msgid "Now let’s get into the details of these rules and demonstrate them in action!"
 msgstr "现在让我们深入了解这些规则的细节并在实际中演示它们！"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:125
+#: src/ch06-02-defining-modules-to-control-scope.md:124
 msgid "### Grouping Related Code in Modules"
 msgstr "### 在模块中对相关代码进行分组"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:127
+#: src/ch06-02-defining-modules-to-control-scope.md:126
 msgid ""
 "_Modules_ let us organize code within a crate for readability and easy reuse.\n"
 "As an example, let’s write a library crate that provides the functionality of a\n"
@@ -8018,7 +7997,7 @@ msgstr ""
 "_模块_ 让我们可以将一个 crate 中的代码进行分组，以提高可读性与重用性。\n"
 "作为一个例子，让我们写一个crate，提供一个餐馆的机能。我们将定义函数的签名，但将其主体留空，以专注于代码的组织，而不是餐馆的实现。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:133
+#: src/ch06-02-defining-modules-to-control-scope.md:132
 msgid ""
 "In the restaurant industry, some parts of a restaurant are referred to as\n"
 "_front of house_ and others as _back of house_. Front of house is where\n"
@@ -8031,7 +8010,7 @@ msgstr ""
 "前台是招待顾客的地方，在这里，店主可以为顾客安排座位，服务员接受顾客下单和付款，调酒师会制作饮品。\n"
 "后台则是由厨师工作的厨房，洗碗工的工作地点，以及经理做行政工作的地方组成。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:140
+#: src/ch06-02-defining-modules-to-control-scope.md:139
 msgid ""
 "To structure our crate in this way, we can organize its functions into nested\n"
 "modules. Create a new package named `restaurant` by running `scarb new restaurant`; then enter the code in Listing 6-1 into _src/lib.cairo_ to\n"
@@ -8040,7 +8019,7 @@ msgstr ""
 "我们可以将函数放置到嵌套的模块中，来使我们的 crate 结构与实际的餐厅结构相同。\n"
 "通过运行 `scarb new restaurant`创建一个名为 `restaurant`的新包；然后将清单6-1中的代码输入 _src/lib.cairo_ ，以定义一些模块和函数签名。这里是前台的部分："
 
-#: src/ch06-02-defining-modules-to-control-scope.md:146
+#: src/ch06-02-defining-modules-to-control-scope.md:145
 msgid ""
 "```rust\n"
 "mod front_of_house {\n"
@@ -8078,13 +8057,13 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:164
+#: src/ch06-02-defining-modules-to-control-scope.md:163
 msgid ""
 "<span class=\"caption\">Listing 6-1: A `front_of_house` module containing other\n"
 "modules that then contain functions</span>"
 msgstr "<span class=\"caption\">清单6-1：一个 `front_of_house`模块包含其他的模块，而这些模块又包含了函数</span>"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:167
+#: src/ch06-02-defining-modules-to-control-scope.md:166
 msgid ""
 "We define a module with the `mod` keyword followed by the name of the module\n"
 "(in this case, `front_of_house`). The body of the module then goes inside curly\n"
@@ -8096,7 +8075,7 @@ msgstr ""
 "我们定义一个模块，是以 `mod`关键字为起始，然后指定模块的名字（本例中叫做 `front_of_house`），并且用花括号包围模块的主体。在模块内，我们还可以定义其他的模块，就像本例中的 `hosting` 和 "
 "`serving` 模块。模块还可以保存一些定义的其他项，比如结构体、枚举、常量、特性、以及列表中6-1中展示的函数。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:174
+#: src/ch06-02-defining-modules-to-control-scope.md:173
 msgid ""
 "By using modules, we can group related definitions together and name why\n"
 "they’re related. Programmers using this code can navigate the code based on the\n"
@@ -8108,18 +8087,18 @@ msgstr ""
 "定义。\n"
 "程序员向这段代码中添加一个新的功能时，他们也会知道代码应该放置在何处，可以保持程序的组织性。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:180
+#: src/ch06-02-defining-modules-to-control-scope.md:179
 msgid ""
 "Earlier, we mentioned that _src/lib.cairo_ is called the crate\n"
 "root. The reason for this name is that the content of this file form a module named after the crate name at the root of the crate’s module structure,\n"
 "known as the _module tree_."
 msgstr "在前面我们提到了，_src/lib.cairo_  叫做 crate 根。之所以这样叫它是因为这个文件的内容在 crate 模块结构的根组成了一个名为 crate 的模块，该结构被称为 模块树（ _module tree_ ）。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:184
+#: src/ch06-02-defining-modules-to-control-scope.md:183
 msgid "Listing 6-2 shows the module tree for the structure in Listing 6-1."
 msgstr "清单6-2显示了清单6-1中结构的模块树。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:186
+#: src/ch06-02-defining-modules-to-control-scope.md:185
 msgid ""
 "```text\n"
 "restaurant\n"
@@ -8145,13 +8124,13 @@ msgstr ""
 "         └── take_payment\n"
 "```"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:198
+#: src/ch06-02-defining-modules-to-control-scope.md:197
 msgid ""
 "<span class=\"caption\">Listing 6-2: The module tree for the code in Listing\n"
 "6-1</span>"
 msgstr "<span class=\"caption\">清单6-2：清单6-1中代码的模块树</span>"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:201
+#: src/ch06-02-defining-modules-to-control-scope.md:200
 msgid ""
 "This tree shows how some of the modules nest inside one another; for example,\n"
 "`hosting` nests inside `front_of_house`. The tree also shows that some modules\n"
@@ -8165,7 +8144,7 @@ msgstr ""
 "（ `hosting` 和 `serving` 被一起定义在 _front_of_house_ 中）。继续沿用家庭关系的比喻，如果一个模块 A 被包含在模块 B 中，我们将模块 A 称为模块 B 的 子（ _child_ ），模块 B 则是模块 A "
 "的 父（ _parent_ ）。注意，整个模块树都植根于名为 `restaurant` crate的隐式模块下。"
 
-#: src/ch06-02-defining-modules-to-control-scope.md:209
+#: src/ch06-02-defining-modules-to-control-scope.md:208
 msgid ""
 "The module tree might remind you of the filesystem’s directory tree on your\n"
 "computer; this is a very apt comparison! Just like directories in a filesystem,\n"
@@ -8602,7 +8581,7 @@ msgid ""
 "```rust\n"
 "use array::ArrayTrait as Arr;\n"
 "\n"
-"fn main(){\n"
+"fn main() {\n"
 "    let mut arr = Arr::new(); // ArrayTrait was renamed to Arr\n"
 "    arr.append(1);\n"
 "}\n"
@@ -8611,7 +8590,7 @@ msgstr ""
 "```rust\n"
 "use array::ArrayTrait as Arr;\n"
 "\n"
-"fn main(){\n"
+"fn main() {\n"
 "    let mut arr = Arr::new(); // ArrayTrait was renamed to Arr\n"
 "    arr.append(1);\n"
 "}\n"
@@ -9110,7 +9089,7 @@ msgstr "想象一下，我们想，给定一个通用类型`T`的元素列表，
 msgid ""
 "```rust,does_not_compile\n"
 "// This code does not compile!\n"
-"use array:ArrayTrait;\n"
+"use array::ArrayTrait;\n"
 "\n"
 "// Given a list of T get the smallest one.\n"
 "// The PartialOrd trait implements comparison operations for T\n"
@@ -9124,7 +9103,7 @@ msgid ""
 "\n"
 "    // Iterate through the whole list storing the smallest\n"
 "    loop {\n"
-"        if index >= list.len(){\n"
+"        if index >= list.len() {\n"
 "            break smallest;\n"
 "        }\n"
 "        if *list[index] < smallest {\n"
@@ -9134,7 +9113,7 @@ msgid ""
 "    }\n"
 "}\n"
 "\n"
-"fn main()  {\n"
+"fn main() {\n"
 "    let mut list = ArrayTrait::new();\n"
 "    list.append(5_u8);\n"
 "    list.append(3_u8);\n"
@@ -9143,13 +9122,12 @@ msgid ""
 "    // We need to specify that we are passing a snapshot of `list` as an argument\n"
 "    let s = smallest_element(@list);\n"
 "    assert(s == 3_u8, 0);\n"
-"\n"
 "}\n"
 "```"
 msgstr ""
 "```rust,does_not_compile\n"
 "// This code does not compile!\n"
-"use array:ArrayTrait;\n"
+"use array::ArrayTrait;\n"
 "\n"
 "// Given a list of T get the smallest one.\n"
 "// The PartialOrd trait implements comparison operations for T\n"
@@ -9163,7 +9141,7 @@ msgstr ""
 "\n"
 "    // Iterate through the whole list storing the smallest\n"
 "    loop {\n"
-"        if index >= list.len(){\n"
+"        if index >= list.len() {\n"
 "            break smallest;\n"
 "        }\n"
 "        if *list[index] < smallest {\n"
@@ -9173,7 +9151,7 @@ msgstr ""
 "    }\n"
 "}\n"
 "\n"
-"fn main()  {\n"
+"fn main() {\n"
 "    let mut list = ArrayTrait::new();\n"
 "    list.append(5_u8);\n"
 "    list.append(3_u8);\n"
@@ -9182,11 +9160,10 @@ msgstr ""
 "    // We need to specify that we are passing a snapshot of `list` as an argument\n"
 "    let s = smallest_element(@list);\n"
 "    assert(s == 3_u8, 0);\n"
-"\n"
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:99
+#: src/ch07-01-generic-data-types.md:98
 msgid ""
 "The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes an snapshot of an `Array<T>` as a parameter and returns a copy of the smallest "
 "element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we don't require to implement the `Drop` trait for `T` as well. "
@@ -9195,7 +9172,7 @@ msgstr ""
 "`smallest_element`函数使用一个实现了`PartialOrd`的trait的通用类型`T`，接收一个`Array<T>`的快照作为参数并返回最小元素的副本。因为参数是`@Array<T>`的类型，我们不再需要在执行结束时丢弃"
 "它，所以我们不需要为`T`实现`Drop`特性。那为什么它不能编译呢？"
 
-#: src/ch07-01-generic-data-types.md:101
+#: src/ch07-01-generic-data-types.md:100
 msgid ""
 "When indexing on `list`, the value results in a snap of the indexed element, unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation "
 "requires a copy from `@T` to`T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that "
@@ -9203,17 +9180,17 @@ msgid ""
 "updating the`smallest_element` function the resulting code would be:"
 msgstr ""
 "当对`list`进行索引时，其结果是对被索引的元素进行快照，除非`@T`实现了`PartialOrd`，否则我们需要使用 `*` 对元素进行解快照。`*` 操作需要从`@T`复制到`T`，这意味着`T`需要实现`Copy`特性。在"
-"复制了一个`@T`类型的元素到`T`之后，现在有`T`类型的变量需要被删除，这就要求`T`也要实现`Drop`特性。然后我们必须同时添加`Drop'和`Copy'特性的实现，以使该函数正确。在更新`smallest_element`"
+"复制了一个`@T`类型的元素到`T`之后，现在有`T`类型的变量需要被删除，这就要求`T`也要实现`Drop`特性。然后我们必须同时添加`Drop`和`Copy`特性的实现，以使该函数正确。在更新`smallest_element`"
 "函数后，产生的代码将是："
 
-#: src/ch07-01-generic-data-types.md:103
+#: src/ch07-01-generic-data-types.md:102
 msgid ""
 "```rs\n"
 "fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>>(list: @Array<T>) -> T {\n"
 "    let mut smallest = *list[0_usize];\n"
 "    let mut index = 1_usize;\n"
 "    loop {\n"
-"        if index >= list.len(){\n"
+"        if index >= list.len() {\n"
 "            break smallest;\n"
 "        }\n"
 "        if *list[index] < smallest {\n"
@@ -9229,7 +9206,7 @@ msgstr ""
 "    let mut smallest = *list[0_usize];\n"
 "    let mut index = 1_usize;\n"
 "    loop {\n"
-"        if index >= list.len(){\n"
+"        if index >= list.len() {\n"
 "            break smallest;\n"
 "        }\n"
 "        if *list[index] < smallest {\n"
@@ -9240,11 +9217,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:119
+#: src/ch07-01-generic-data-types.md:118
 msgid "## Structs"
 msgstr "## 结构体定义中的泛型"
 
-#: src/ch07-01-generic-data-types.md:121
+#: src/ch07-01-generic-data-types.md:120
 msgid ""
 "We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First we declare the name of the type "
 "parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The "
@@ -9253,19 +9230,19 @@ msgstr ""
 "我们也可以使用类似于函数定义的`<>` 语法来定义结构，它包含一个或多个泛型参数类型字段。首先，必须在结构体名称后面的尖括号中声明泛型参数的名称，接着在结构体定义中可以指定具体数据类型的位"
 "置使用泛型类型。下一个代码示例显示了 `Wallet<T>` 的定义，它有一个 `balance`字段，类型为 `T`。"
 
-#: src/ch07-01-generic-data-types.md:123
+#: src/ch07-01-generic-data-types.md:122
 msgid ""
 "```rust,does_not_compile\n"
 "// This code does not compile!\n"
 "\n"
 "#[derive(Drop)]\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
 "\n"
 "\n"
 "fn main() {\n"
-"   let w = Wallet{ balance: 3_u128};\n"
+"    let w = Wallet { balance: 3_u128 };\n"
 "}\n"
 "```"
 msgstr ""
@@ -9274,28 +9251,28 @@ msgstr ""
 "\n"
 "#[derive(Drop)]\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
 "\n"
 "\n"
 "fn main() {\n"
-"   let w = Wallet{ balance: 3_u128};\n"
+"    let w = Wallet { balance: 3_u128 };\n"
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:137
+#: src/ch07-01-generic-data-types.md:136
 msgid "Compiling the above code would error due to the `derive` macro not working well with generics. When using generic types is best to directly write the traits you want to use:"
 msgstr "由于`derive`宏在泛型中不能正常工作，编译上述代码会出错。当使用泛型时，最好直接编写你想使用的特性："
 
-#: src/ch07-01-generic-data-types.md:139
+#: src/ch07-01-generic-data-types.md:138
 msgid "<!-- TODO This is no longer true after in version 1.1.x and should be removed in the next versions -->"
 msgstr "<!-- TODO This is no longer true after in version 1.1.x and should be removed in the next versions -->"
 
-#: src/ch07-01-generic-data-types.md:141
+#: src/ch07-01-generic-data-types.md:140
 msgid ""
 "```rust\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
 "\n"
 "impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
@@ -9307,7 +9284,7 @@ msgid ""
 msgstr ""
 "```rust\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
 "\n"
 "impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
@@ -9317,7 +9294,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:153
+#: src/ch07-01-generic-data-types.md:152
 msgid ""
 "We avoid using the `derive` macro for `Drop` implementation of `Wallet` and instead define our own `WalletDrop` implementation. Notice that we must define, just like functions, an "
 "additional generic type for `WalletDrop` saying that `T` implements the `Drop` trait as well. We are basically saying that the struct `Wallet<T>` is droppable as long as `T` is also "
@@ -9326,13 +9303,13 @@ msgstr ""
 "应该避免使用`derive`宏来实现`Wallet`的`Drop`，而是定义我们自己的`WalletDrop`实现。注意，我们必须像定义函数一样，为`WalletDrop`定义一个额外的泛型`T`并且也实现了`Drop`特性。这基本上是在"
 "说，只要`T`也是可丢弃的，那么`钱包<T>`这个结构就是可丢弃的。"
 
-#: src/ch07-01-generic-data-types.md:155
+#: src/ch07-01-generic-data-types.md:154
 msgid ""
 "Finally, if we want to add a field to `Wallet` representing its Cairo address and we want that field to be different than `T` but generic as well, we can simply add another generic "
 "type between the `<>`:"
 msgstr "最后，如果我们想给`Wallet`添加一个代表其Cairo地址的字段，并且我们希望这个字段是与`T`不同的另一个泛型，我们可以简单地在`<>`之间添加另一个泛型："
 
-#: src/ch07-01-generic-data-types.md:157
+#: src/ch07-01-generic-data-types.md:156
 msgid ""
 "```rust\n"
 "struct Wallet<T, U> {\n"
@@ -9360,25 +9337,25 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:170
+#: src/ch07-01-generic-data-types.md:169
 msgid ""
 "We add to `Wallet` struct definiton a new generic type `U` and then assign this type to the new field member `address`.\n"
 "Then we adapt the `WalletDrop` trait to work with the new generic type `U`. Notice that when initializing the struct inside `main` it automatically infers that `T` is a `u128` and "
 "`U` is a `felt252` and since they are both droppable, `Wallet` is droppable as well!"
 msgstr ""
 "我们在`Wallet`结构定义中添加一个新的泛型`U`，然后将这个类型分配给新的字段成员`address`。\n"
-"然后我们调整 `WalletDrop`的trait，使其与新的泛型 \"U \"一起工作。注意，在初始化`main'中的结构时，它会自动推断出`T`是`u128`，`U`是`felt252`，由于它们都是可丢弃的，所以`Wallet`也是可丢"
+"然后我们调整 `WalletDrop`的trait，使其与新的泛型 \"U \"一起工作。注意，在初始化`main`中的结构时，它会自动推断出`T`是`u128`，`U`是`felt252`，由于它们都是可丢弃的，所以`Wallet`也是可丢"
 "弃的！"
 
-#: src/ch07-01-generic-data-types.md:173
+#: src/ch07-01-generic-data-types.md:172
 msgid "## Enums"
 msgstr "## 枚举定义中的泛型"
 
-#: src/ch07-01-generic-data-types.md:175
+#: src/ch07-01-generic-data-types.md:174
 msgid "As we did with structs, we can define enums to hold generic data types in their variants. For example the `Option<T>` enum provided by the Cairo core library:"
 msgstr "和结构体类似，枚举也可以在成员中存放泛型数据类型。例如，Cairo核心库提供的`Option<T>`枚举："
 
-#: src/ch07-01-generic-data-types.md:177
+#: src/ch07-01-generic-data-types.md:176
 msgid ""
 "```rust\n"
 "enum Option<T> {\n"
@@ -9394,7 +9371,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:184
+#: src/ch07-01-generic-data-types.md:183
 msgid ""
 "The `Option<T>` enum is generic over a type `T` and has two variants: `Some`, which holds one value of type `T` and `None` that doesn't hold any value. By using the `Option<T>` enum, "
 "it is possible for us to express the abstract concept of an optional value and because the value has a generic type `T` we can use this abstraction with any type."
@@ -9402,11 +9379,11 @@ msgstr ""
 "如你所见 `Option<T>` 是一个拥有泛型 `T` 的枚举，它有两个成员：`Some`，它存放了一个类型 `T` 的值，和不存在任何值的`None`。通过 `Option<T>` 枚举可以表达有一个可能的值的抽象概念，同时因"
 "为 `Option<T>` 是泛型的，无论这个可能的值是什么类型都可以使用这个抽象。"
 
-#: src/ch07-01-generic-data-types.md:186
+#: src/ch07-01-generic-data-types.md:185
 msgid "Enums can use multiple generic types as well, like definition of the `Result<T, E>` enum that the core library provides:"
 msgstr "枚举也可以拥有多个泛型类型，比如核心库提供的`Result<T, E>`枚举的定义："
 
-#: src/ch07-01-generic-data-types.md:188 src/ch09-02-error-handling.md:11
+#: src/ch07-01-generic-data-types.md:187 src/ch09-02-error-handling.md:11
 msgid ""
 "```rust\n"
 "enum Result<T, E> {\n"
@@ -9422,7 +9399,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:195 src/ch09-02-error-handling.md:18
+#: src/ch07-01-generic-data-types.md:194 src/ch09-02-error-handling.md:18
 msgid ""
 "The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition "
 "makes it convenient to use the `Result` enum anywhere we have an operation that might succeed (by returning a value of type `T`) or fail (by returning a value of type `E`)."
@@ -9430,21 +9407,21 @@ msgstr ""
 "`Result<T, E>`枚举有两个泛型类型，`T`和`E`，以及两个成员：`Ok`，存放`T`类型的值，`Err`，存放`E`类型的值。这个定义使得我们可以在任何地方使用`Result`枚举，该操作可能成功（返回`T`类型的"
 "值）或失败（返回`E`类型的值）。"
 
-#: src/ch07-01-generic-data-types.md:197
+#: src/ch07-01-generic-data-types.md:196
 msgid "## Generic Methods"
 msgstr "## 方法定义中的泛型"
 
-#: src/ch07-01-generic-data-types.md:199
+#: src/ch07-01-generic-data-types.md:198
 msgid ""
 "We can implement methods on structs and enums, and use the generic types in their definition, too. Using our previous definition of `Wallet<T>` struct, we define a `balance` method "
 "for it:"
 msgstr "我们可以在结构和枚举上实现方法，也可以在其定义中使用泛型。在之前定义的`Wallet<T>`结构体上为其定义一个`balance` 方法："
 
-#: src/ch07-01-generic-data-types.md:201
+#: src/ch07-01-generic-data-types.md:200
 msgid ""
 "```rust\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
 "\n"
 "impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
@@ -9468,7 +9445,7 @@ msgid ""
 msgstr ""
 "```rust\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
 "\n"
 "impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
@@ -9490,7 +9467,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:225
+#: src/ch07-01-generic-data-types.md:224
 msgid ""
 "We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns a snapshot of the field `address` from `Wallet`. Then we give an implementation "
 "for the trait in `WalletImpl<T>`. Note that you need to include a generic type in both definitions of the trait and the implementation."
@@ -9498,7 +9475,7 @@ msgstr ""
 "我们首先定义了`WalletTrait<T>`trait，使用一个泛型`T`，它定义了一个方法，从`Wallet`中返回字段`address`的快照。然后我们在`WalletImpl<T>`中给出该trait的实现。请注意，你需要在trait的定义"
 "和实现中都包含一个泛型。"
 
-#: src/ch07-01-generic-data-types.md:227
+#: src/ch07-01-generic-data-types.md:226
 msgid ""
 "We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than "
 "`Wallet<T>`. In the code example we define an implementation for wallets which have a concrete type of `u128` for the `balance` field."
@@ -9506,12 +9483,13 @@ msgstr ""
 "在定义类型上的方法时，我们也可以指定对泛型的约束。例如，我们可以只为`Wallet<u128>`实例而不是`Wallet<T>`实现方法。在代码示例中，我们为钱包定义了一个实现，这些钱包的`balance`字段的具体"
 "类型为`u128`。"
 
-#: src/ch07-01-generic-data-types.md:229
+#: src/ch07-01-generic-data-types.md:228
 msgid ""
 "```rust\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
+"\n"
 "impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
 "impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;\n"
 "/// Generic trait for wallets\n"
@@ -9547,8 +9525,9 @@ msgid ""
 msgstr ""
 "```rust\n"
 "struct Wallet<T> {\n"
-"    balance: T,\n"
+"    balance: T\n"
 "}\n"
+"\n"
 "impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;\n"
 "impl WalletCopy<T, impl TCopy: Copy<T>> of Copy<Wallet<T>>;\n"
 "/// Generic trait for wallets\n"
@@ -9772,7 +9751,7 @@ msgstr ""
 msgid ""
 "Here our trait `ShapeGeometry` declares signatures for two methods `boundary` and `area`. When implemented, both these functions should return a `u64` and accept parameters as "
 "specified by the trait."
-msgstr "这里我们的trait `ShapeGeometry`声明了两个方法的签名`boundary`和`area`。当编写实现时，这两个函数都应该返回一个`u64'，并接受trait所规定的参数。"
+msgstr "这里我们的trait `ShapeGeometry`声明了两个方法的签名`boundary`和`area`。当编写实现时，这两个函数都应该返回一个`u64`，并接受trait所规定的参数。"
 
 #: src/ch07-02-traits-in-cairo.md:20
 msgid "## Implementing a Trait"
@@ -9812,7 +9791,7 @@ msgstr ""
 msgid ""
 "In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note that the function parameters and return "
 "value types are identical to the trait specification."
-msgstr "在上面的代码中，`RectangleGeometry'实现了`ShapeGeometry'的trait，定义了`boundary'和`area'方法应该做什么。请注意，函数参数和返回值的类型与trait所定义的规范是相同的。"
+msgstr "在上面的代码中，`RectangleGeometry`实现了`ShapeGeometry`的trait，定义了`boundary`和`area`方法应该做什么。请注意，函数参数和返回值的类型与trait所定义的规范是相同的。"
 
 #: src/ch07-02-traits-in-cairo.md:37
 msgid "## Parameter `self`"
@@ -9877,18 +9856,18 @@ msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
-"#[derive(Copy,Drop)]\n"
-"struct Rectangle{\n"
+"#[derive(Copy, Drop)]\n"
+"struct Rectangle {\n"
 "    height: u64,\n"
 "    width: u64,\n"
 "}\n"
 "\n"
-"#[derive(Copy,Drop)]\n"
-"struct Circle{\n"
-"    radius: u64,\n"
+"#[derive(Copy, Drop)]\n"
+"struct Circle {\n"
+"    radius: u64\n"
 "}\n"
 "\n"
-"// Here T is an alias type which will be provided buring implementation\n"
+"// Here T is an alias type which will be provided during implementation\n"
 "trait ShapeGeometry<T> {\n"
 "    fn boundary(self: T) -> u64;\n"
 "    fn area(self: T) -> u64;\n"
@@ -9930,18 +9909,18 @@ msgstr ""
 "```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
-"#[derive(Copy,Drop)]\n"
-"struct Rectangle{\n"
+"#[derive(Copy, Drop)]\n"
+"struct Rectangle {\n"
 "    height: u64,\n"
 "    width: u64,\n"
 "}\n"
 "\n"
-"#[derive(Copy,Drop)]\n"
-"struct Circle{\n"
-"    radius: u64,\n"
+"#[derive(Copy, Drop)]\n"
+"struct Circle {\n"
+"    radius: u64\n"
 "}\n"
 "\n"
-"// Here T is an alias type which will be provided buring implementation\n"
+"// Here T is an alias type which will be provided during implementation\n"
 "trait ShapeGeometry<T> {\n"
 "    fn boundary(self: T) -> u64;\n"
 "    fn area(self: T) -> u64;\n"
@@ -10001,11 +9980,11 @@ msgstr ""
 
 #: src/ch07-02-traits-in-cairo.md:123
 msgid "If the code was organised into modules like this,"
-msgstr "如果代码被如下般组织成模块："
+msgstr "如果代码被如下般组织成模块,"
 
 #: src/ch07-02-traits-in-cairo.md:125
 msgid ""
-"```rust, does_not_compile\n"
+"```rust,does_not_compile,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "// struct Circle { ... } and struct Rectangle { ... }\n"
@@ -10025,7 +10004,7 @@ msgid ""
 "mod circle {\n"
 "    use super::geometry::ShapeGeometry;\n"
 "    use super::Circle;\n"
-"    impl CircleGeometry of ShapeGeometry::<Circle> {\n"
+"    impl CircleGeometry of ShapeGeometry<Circle> {\n"
 "        // ...\n"
 "    }\n"
 "}\n"
@@ -10040,7 +10019,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust, does_not_compile\n"
+"```rust,does_not_compile,ignore_format\n"
 "use debug::PrintTrait;\n"
 "\n"
 "// struct Circle { ... } and struct Rectangle { ... }\n"
@@ -10060,7 +10039,7 @@ msgstr ""
 "mod circle {\n"
 "    use super::geometry::ShapeGeometry;\n"
 "    use super::Circle;\n"
-"    impl CircleGeometry of ShapeGeometry::<Circle> {\n"
+"    impl CircleGeometry of ShapeGeometry<Circle> {\n"
 "        // ...\n"
 "    }\n"
 "}\n"
@@ -10418,7 +10397,7 @@ msgstr ""
 
 #: src/ch08-01-how-to-write-tests.md:130
 msgid "The summary line displays at the end: overall, our test result is `FAILED`. We had one test pass and one test fail."
-msgstr "摘要行显示在最后：总的来说，我们的测试结果是`FAILED'。我们有一个测试通过，一个测试失败。"
+msgstr "摘要行显示在最后：总的来说，我们的测试结果是`FAILED`。我们有一个测试通过，一个测试失败。"
 
 #: src/ch08-01-how-to-write-tests.md:132
 msgid "Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests."
@@ -10912,7 +10891,7 @@ msgid ""
 "For example, consider the modified code for `Guess` in Listing 8-9 where the new function panics with different messages depending on whether the value is too small or too large."
 msgstr ""
 "使用`should_panic`的测试可能是不精确的。即使测试的panic原因与我们所期望的不同, 但只要发生了panic，一个`should_panic`测试就一定会通过。为了使`should_panic`测试更加精确，我们可以在"
-"`should_panic`属性中添加一个可选的预期参数。该测试限制将确保故障信息包含所提供的文本。例如，考虑清单8-9中`Guess'的修改后的代码，新函数根据数值过小或过大的情况，以不同的消息进行恐慌。"
+"`should_panic`属性中添加一个可选的预期参数。该测试限制将确保故障信息包含所提供的文本。例如，考虑清单8-9中`Guess`的修改后的代码，新函数根据数值过小或过大的情况，以不同的消息进行恐慌。"
 
 #: src/ch08-01-how-to-write-tests.md:357
 msgid ""
@@ -11268,7 +11247,7 @@ msgstr ""
 
 #: src/ch08-02-test-organization.md:17
 msgid "Recall that when we created the new `adder` project in the first section of this chapter, we wrote this first test:"
-msgstr "回顾一下，当我们在本章第一节创建新的`adder'项目时，我们写了这个测试："
+msgstr "回顾一下，当我们在本章第一节创建新的`adder`项目时，我们写了这个测试："
 
 #: src/ch08-02-test-organization.md:32
 msgid ""
@@ -11462,7 +11441,7 @@ msgid ""
 "    let mut data = ArrayTrait::new();\n"
 "    data.append(2);\n"
 "    panic(data);\n"
-"    'This line isn't reached'.print();\n"
+"    'This line isn\\'t reached'.print();\n"
 "}\n"
 "```"
 msgstr ""
@@ -11474,7 +11453,7 @@ msgstr ""
 "    let mut data = ArrayTrait::new();\n"
 "    data.append(2);\n"
 "    panic(data);\n"
-"    'This line isn't reached'.print();\n"
+"    'This line isn\\'t reached'.print();\n"
 "}\n"
 "```"
 
@@ -11496,7 +11475,7 @@ msgstr ""
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:30
 msgid "As you can notice in the output, the print statement is never reached, as the program terminates after encountering the `panic` statement."
-msgstr "正如你在输出中所注意到的，打印语句没有被执行，因为程序在遇到`panic'语句后就终止了。"
+msgstr "正如你在输出中所注意到的，打印语句没有被执行，因为程序在遇到`panic`语句后就终止了。"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:32
 msgid ""
@@ -11919,7 +11898,7 @@ msgid ""
 "In this example, the `parse_u8` function takes a `felt252` integer and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::"
 "Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`."
 msgstr ""
-"在这个例子中，`parse_u8'函数接收一个`felt252`的整数，并尝试用`try_into`方法将其转换为`u8'的整数。如果成功，它返回`Result::Ok(value)`，否则它返回`Result::Err('Invalid integer')`。"
+"在这个例子中，`parse_u8`函数接收一个`felt252`的整数，并尝试用`try_into`方法将其转换为`u8`的整数。如果成功，它返回`Result::Ok(value)`，否则它返回`Result::Err('Invalid integer')`。"
 
 #: src/ch09-02-error-handling.md:94
 msgid ""
@@ -11983,7 +11962,7 @@ msgstr ""
 msgid ""
 "The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the "
 "`u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'."
-msgstr "第一个测试函数是测试从`felt252`到`u8`的有效转换，期望`unwrap`方法不要panic。第二个测试函数试图转换一个超出`u8'范围的值，期望`unwrap'方法panic，错误信息是 ‘Invalid integer’。"
+msgstr "第一个测试函数是测试从`felt252`到`u8`的有效转换，期望`unwrap`方法不要panic。第二个测试函数试图转换一个超出`u8`范围的值，期望`unwrap`方法panic，错误信息是 ‘Invalid integer’。"
 
 #: src/ch09-02-error-handling.md:123
 msgid "> We could have also used the #[should_panic] attribute here."
@@ -12087,7 +12066,7 @@ msgid ""
 "`Ok` or `Err`, and panicking with custom messages."
 msgstr ""
 "我们看到，可恢复的错误可以在Cairo中使用结果枚举来处理，它有两个变体：`Ok`和`Err`。`Result<T, E>`枚举是通用的，其类型`T`和`E`分别代表成功和错误值。`ResultTrait`提供了处理`Result<T, E>`"
-"的方法，例如解包值，检查结果是`Ok'还是`Err`，以及用自定义消息进行panic。"
+"的方法，例如解包值，检查结果是`Ok`还是`Err`，以及用自定义消息进行panic。"
 
 #: src/ch09-02-error-handling.md:168
 msgid ""
@@ -12127,7 +12106,7 @@ msgstr ""
 
 #: src/ch10-01-operator-overloading.md:8
 msgid "Consider an example where two `Potions` need to be combined. `Potions` have two data fields, mana and health. Combining two `Potions` should add their respective fields."
-msgstr "让我看一个例子，两个 `Potions` 需要合并。`Potions` 有两个数据字段，法力(mana)和健康(health)。合并两个`Potions` '应该是让它们各自的两个字段相加。"
+msgstr "让我看一个例子，两个 `Potions` 需要合并。`Potions` 有两个数据字段，法力(mana)和健康(health)。合并两个`Potions` 应该是让它们各自的两个字段相加。"
 
 #: src/ch10-01-operator-overloading.md:10
 msgid ""
@@ -12661,7 +12640,7 @@ msgstr "<span class=\"caption\">清单9-3：在`names`变量上调用`read`函�
 
 #: src/ch99-01-02-writing-starknet-contracts.md:122
 msgid "> Note: When the storage variable does not store a mapping, its value is accessed without passing any parameters to the read method"
-msgstr "> 注意：当存储变量不存储映射时，使用读取方法访问其值不需要传递任何参数。"
+msgstr "> 注意：当存储变量不存储映射时，使用读取方法访问其值不需要传递任何参数"
 
 #: src/ch99-01-02-writing-starknet-contracts.md:124
 msgid "### Writing to Storage"
@@ -12723,11 +12702,11 @@ msgid ""
 "2. Your constructor function must be named `constructor`.\n"
 "3. Lastly, it must be annotated with the `#[constructor]` attribute."
 msgstr ""
-"1.你的合同不能有一个以上的构造函数。\n"
+"1.你的合约只能有一个构造函数。\n"
 "\n"
 "2.你的构造函数必须被命名为`constructor`。\n"
 "\n"
-"3.最后，它必须用 `#[constructor]`属性来标注"
+"3.最后，它必须被标注为 `#[constructor]`属性。"
 
 #: src/ch99-01-02-writing-starknet-contracts.md:155
 msgid "### 2. External functions"
@@ -13350,7 +13329,7 @@ msgstr "另一种调用其他合约的方法是使用`starknet::call_contract_sy
 msgid ""
 "Using the system call `starknet::call_contract_syscall` can be handy for customized error handling or possessing more control over the serialization/deserialization of the call data "
 "and the returned data. Here's an example demonstrating a low-level `transfer` call:"
-msgstr "使用系统调用`starknet::call_contract_syscall`可以方便地进行自定义错误处理，或者对调用数据和返回数据的序列化/反序列化进行更多的控制。下面是一个演示底层的`transfer'调用的例子："
+msgstr "使用系统调用`starknet::call_contract_syscall`可以方便地进行自定义错误处理，或者对调用数据和返回数据的序列化/反序列化进行更多的控制。下面是一个演示底层的`transfer`调用的例子："
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:140
 msgid ""
@@ -13405,7 +13384,7 @@ msgid ""
 msgstr "下面的列表包含了为当前或未来保留的Cairo 语言的关键字。"
 
 #: src/appendix-01-keywords.md:6
-msgid "There are three keyword categories:"
+msgid "There are two keyword categories:"
 msgstr "有两个关键字类别："
 
 #: src/appendix-01-keywords.md:8
@@ -13416,11 +13395,17 @@ msgstr ""
 "- 严格（strict）关键字\n"
 "- 保留（reserved）关键字"
 
-#: src/appendix-01-keywords.md:13
+#: src/appendix-01-keywords.md:11
+msgid ""
+"There is a third category, which are functions from the core library. While their names are not reserved,\n"
+"they are not recommended to be used as names of any items to follow good practices."
+msgstr "还有第三类，是来自核心库的函数。虽然它们并不是保留关键字，但以遵循惯例不建议将其用作任何项的标识符。"
+
+#: src/appendix-01-keywords.md:16
 msgid "### Strict keywords"
 msgstr "### 严格关键字"
 
-#: src/appendix-01-keywords.md:15
+#: src/appendix-01-keywords.md:18
 msgid ""
 "These keywords can only be used in their correct contexts.\n"
 "They cannot be used as names of any items."
@@ -13428,7 +13413,7 @@ msgstr ""
 "这些关键词只能在其应该被使用的上下文中使用。\n"
 "因此，这些关键字不能被用作标识符。"
 
-#: src/appendix-01-keywords.md:18
+#: src/appendix-01-keywords.md:21
 msgid ""
 "- `as` - Rename import\n"
 "- `break` - Exit a loop immediately\n"
@@ -13484,24 +13469,23 @@ msgstr ""
 "- `type` - 定义一个类型的别名\n"
 "- `use` - 引入外部空间的符号"
 
-#: src/appendix-01-keywords.md:47
+#: src/appendix-01-keywords.md:50
 msgid "### Reserved keywords"
 msgstr "### 保留关键字"
 
-#: src/appendix-01-keywords.md:49
+#: src/appendix-01-keywords.md:52
 msgid ""
 "These keywords aren't used yet, but they are reserved for future use.\n"
 "They have the same restrictions as strict keywords.\n"
 "The reasoning behind this is to make current programs forward compatible with future versions of\n"
 "Cairo by forbidding them to use these keywords."
 msgstr ""
-"这些关键词还没有被使用，但它们被保留下来供将来使用。\n"
+"这些关键字还没有被使用，但它们被保留下来供将来使用。\n"
 "它们与严格关键字有同样的限制。\n"
 "禁止使用这些关键字的原因是为了可以使现在的程序向前兼容新版本的Cairo语言。"
 
-#: src/appendix-01-keywords.md:54
+#: src/appendix-01-keywords.md:57
 msgid ""
-"- `assert`\n"
 "- `do`\n"
 "- `dyn`\n"
 "- `macro`\n"
@@ -13519,7 +13503,6 @@ msgid ""
 "- `with`\n"
 "- `yield`"
 msgstr ""
-"- `assert`\n"
 "- `do`\n"
 "- `dyn`\n"
 "- `macro`\n"
@@ -13536,6 +13519,20 @@ msgstr ""
 "- `while`\n"
 "- `with`\n"
 "- `yield`"
+
+#: src/appendix-01-keywords.md:76
+msgid "### Built-in functions"
+msgstr "### 内置函数"
+
+#: src/appendix-01-keywords.md:78
+msgid ""
+"The Cairo programming language provides several specific functions that serve a special purpose. We will not cover all of them in this book, but using the names of these functions as "
+"names of other items is not recommended."
+msgstr "Cairo编程语言提供了几个具有特殊用途的函数。我们不会在本书中介绍所有这些函数，但不建议使用这些函数的名称作为任何项的标识符。"
+
+#: src/appendix-01-keywords.md:80
+msgid "-`assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function. -`panic` - This function terminates the program."
+msgstr "-`assert` - 这个函数检查一个布尔表达式，如果它的值是假的，就会触发panic函数。 -`panic` - 这个函数终止程序。"
 
 #: src/appendix-02-operators-and-symbols.md:1
 msgid "# Appendix B: Operators and Symbols"
@@ -13679,7 +13676,7 @@ msgstr ""
 "|--------|-------------|\n"
 "| `ident::ident` | 命名空间路径 |\n"
 "| `super::path` | 相对于当前模块的父级路径。\n"
-"| `trait::method(...)` | 通过命名定义该方法的trait来消除方法调用的二义性。"
+"| `trait::method(...)` | 通过命名定义该方法的trait来消除方法调用的二义性 |"
 
 #: src/appendix-02-operators-and-symbols.md:69
 msgid "Table B-4 shows symbols that appear in the context of using generic type parameters."
@@ -13925,7 +13922,7 @@ msgstr ""
 
 #: src/appendix-03-derivable-traits.md:61
 msgid "The `Copy` trait allows for the duplication of values. You can derive `Copy` on any type whose parts all implement `Copy`."
-msgstr "`Copy` trait 允许你复制值而不需要额外的代码。你可以在任何部分都实现了`Copy'的类型上派生`Copy'。"
+msgstr "`Copy` trait 允许你复制值而不需要额外的代码。你可以在任何部分都实现了`Copy`的类型上派生`Copy`。"
 
 #: src/appendix-03-derivable-traits.md:65
 msgid ""
@@ -14197,15 +14194,11 @@ msgstr ""
 msgid "## Appendix E - Most Common Types and Traits Required To Write Contracts"
 msgstr "## 附录 E - 编写合约所需最常见的类型 和Trait"
 
-#: src/appendix-05-most-common-types-and-traits.md:3 src/appendix-05-most-common-types-and-traits.md:7
+#: src/appendix-05-most-common-types-and-traits.md:3
 msgid "This appendix provides a reference for common types and traits used in contract development, along with their corresponding imports, paths, and usage examples."
 msgstr "本附录提供了合约开发中使用的常见类型和trait的参考，以及相应的导入方法、路径和使用方法的范例。"
 
 #: src/appendix-05-most-common-types-and-traits.md:5
-msgid "# Contract Development Appendix"
-msgstr "# 合约开发附录"
-
-#: src/appendix-05-most-common-types-and-traits.md:9
 msgid ""
 "| Import                    | Path                                                  | "
 "Usage                                                                                                                                                                                  "
@@ -14257,8 +14250,11 @@ msgstr ""
 "| `get_contract_address`    | `starknet::info::get_contract_address`                | `get_contract_address()` is a function that returns the address of the current contract. It can "
 "be used to obtain the address of the contract being executed.                          |"
 
-#: src/appendix-05-most-common-types-and-traits.md:21
+#: src/appendix-05-most-common-types-and-traits.md:17
 msgid ""
 "This is not an exhaustive list, but it covers some of the commonly used types and traits in contract development. For more details, refer to the official documentation and explore "
 "the available libraries and frameworks."
 msgstr "这并不是一个详尽的列表，但它涵盖了合约开发中一些常用的类型和trait。关于更多的细节，请参考官方文档并参考可用的库以及框架。"
+
+#~ msgid "# Contract Development Appendix"
+#~ msgstr "# 合约开发附录"
