@@ -10,8 +10,8 @@ Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in C
 
 ```rust
 enum Result<T, E> {
-    Ok(T),
-    Err(E),
+    Ok: T,
+    Err: E,
 }
 ```
 
