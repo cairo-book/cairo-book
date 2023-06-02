@@ -103,7 +103,4 @@ this by specifying absolute or relative paths. These paths can be brought into
 scope with a `use` statement so you can use a shorter path for multiple uses of
 the item in that scope. Module code is public by default.
 
-In the next chapter, we’ll look at some collection data structures in the
-standard library that you can use in your neatly organized code.
-
 [paths]: ch06-03-paths-for-referring-to-an-item-in-the-module-tree.html
