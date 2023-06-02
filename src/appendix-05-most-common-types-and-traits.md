@@ -2,10 +2,6 @@
 
 This appendix provides a reference for common types and traits used in contract development, along with their corresponding imports, paths, and usage examples.
 
-# Contract Development Appendix
-
-This appendix provides a reference for common types and traits used in contract development, along with their corresponding imports, paths, and usage examples.
-
 | Import                    | Path                                                  | Usage                                                                                                                                                                                  |
 | ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `OptionTrait`             | `std::option::OptionTrait`                            | `OptionTrait<T>` defines a set of methods required to manipulate optional value.                                                                                                       |
