@@ -5,6 +5,9 @@
 name: Deploy mdBook site to Pages
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main

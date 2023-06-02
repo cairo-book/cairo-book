@@ -124,7 +124,7 @@ Cairo only has one kind of loop for now: `loop`.
 The `loop` keyword tells Cairo to execute a block of code over and over again
 forever or until you explicitly tell it to stop.
 
-As an example, change the _src/lib.rs_ file in your _loops_ directory to look
+As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
 like this:
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -135,7 +135,7 @@ fn main() {
     let mut i: usize = 0;
     loop {
         if i > 10 {
-            break ();
+            break;
         }
         'again!'.print();
     }
@@ -144,7 +144,7 @@ fn main() {
 
 When we run this program, we’ll see `again!` printed over and over continuously
 until we stop the program manually, because the stop condition is never reached.
-While the compiler prevents us from writing programs without a stop condition (`break()` statement),
+While the compiler prevents us from writing programs without a stop condition (`break` statement),
 the stop condition might never be reached, resulting in an infinite loop.
 Most terminals support the keyboard shortcut <span class="keystroke">ctrl-c</span> to interrupt a program that is
 stuck in a continual loop. Give it a try:
@@ -167,7 +167,7 @@ Remaining gas: 1050
 > It is particularly important in the context of smart contracts deployed on Starknet, as it prevents from running infinite loops on the network.
 > If you're writing a program that needs to run a loop, you will need to execute it with the `--available-gas` flag set to a value that is large enough to run the program.
 
-To break out of a loop, you can place the `break()` statement within the loop to tell the program when to stop
+To break out of a loop, you can place the `break` statement within the loop to tell the program when to stop
 executing the loop. Let's fix the infinite loop by adding a making the stop condition `i > 10` reachable.
 
 ```rust
@@ -183,6 +183,28 @@ fn main() {
     }
 }
 ```
+
+The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
+
+```rust
+use debug::PrintTrait;
+fn main() {
+    let mut i: usize = 0;
+    loop {
+        if i > 10 {
+            break ();
+        }
+        if i == 5 {
+            i += 1;
+            continue;
+        }
+        i.print();
+        i += 1;
+    }
+}
+```
+
+Executing this program will not print the value of `i` when it is equal to `5`.
 
 #### Returning Values from Loops
 

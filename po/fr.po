@@ -3064,7 +3064,7 @@ msgstr ""
 
 #: src/ch02-05-control-flow.md:127
 msgid ""
-"As an example, change the _src/lib.rs_ file in your _loops_ directory to "
+"As an example, change the _src/lib.cairo_ file in your _loops_ directory to "
 "look\n"
 "like this:"
 msgstr ""
