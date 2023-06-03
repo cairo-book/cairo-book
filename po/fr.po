@@ -77,19 +77,19 @@ msgstr "Qu'est-ce que la possession ?"
 
 #: src/SUMMARY.md:29
 msgid "References and Snapshots"
-msgstr ""
+msgstr "Références et snapshots"
 
 #: src/SUMMARY.md:31
 msgid "Using Structs to Structure Related Data"
-msgstr ""
+msgstr "Utiliser des structures pour structurer des données liées"
 
 #: src/SUMMARY.md:34
 msgid "Defining and Instantiating Structs"
-msgstr ""
+msgstr "Définition et instanciation des structures"
 
 #: src/SUMMARY.md:35
 msgid "An Example Program Using Structs"
-msgstr ""
+msgstr "Un exemple de programme utilisant des structures"
 
 #: src/SUMMARY.md:36
 msgid "Method Syntax"
@@ -109,11 +109,11 @@ msgstr ""
 
 #: src/SUMMARY.md:44
 msgid "Managing Cairo Projects with Packages, Crates and Modules"
-msgstr ""
+msgstr "Gérer des projets Cairo avec des packages, des crates et des modules"
 
 #: src/SUMMARY.md:48
 msgid "Packages and Crates"
-msgstr ""
+msgstr "Packages et crates"
 
 #: src/SUMMARY.md:50
 msgid "Defining Modules to Control Scope"
@@ -185,7 +185,7 @@ msgstr ""
 
 #: src/SUMMARY.md:82
 msgid "A - Useful Development Tools"
-msgstr ""
+msgstr "A - Outils de développement utiles"
 
 #: src/title-page.md:1
 msgid "# The Cairo Programming Language"
@@ -212,7 +212,7 @@ msgstr "La version actuelle considère que vous utilisez Cairo v1.0.0 (version 2
 
 #: src/ch00-01-foreword.md:1
 msgid "# Foreword"
-msgstr ""
+msgstr "# Avant-propos"
 
 #: src/ch00-01-foreword.md:3
 msgid ""
@@ -286,11 +286,11 @@ msgstr "— La communauté Cairo"
 
 #: src/ch00-00-introduction.md:1
 msgid "# Introduction"
-msgstr ""
+msgstr "# Introduction"
 
 #: src/ch00-00-introduction.md:3
 msgid "## What is Cairo?"
-msgstr ""
+msgstr "## Qu'est-ce que Cairo ?"
 
 #: src/ch00-00-introduction.md:5
 msgid ""
@@ -306,10 +306,19 @@ msgid ""
 "subset of CASM. The point of Sierra is to ensure your CASM will always be "
 "provable, even when the computation fails."
 msgstr ""
+"Cairo est un langage de programmation conçu pour un processeur virtuel du même nom. "
+"L'aspect unique de ce processeur est qu'il n'a pas été créé pour les contraintes physiques de notre monde, " 
+"mais pour des contraintes cryptographiques, ce qui lui permet de prouver efficacement l'exécution de n'importe quel programme s'exécutant sur celui-ci. "
+"Cela signifie que vous pouvez effectuer des opérations longues sur une machine "
+"en laquelle vous n'avez pas confiance, et vérifier le résultat très rapidement sur une machine moins coûteuse. "
+"Alors que Cairo 0 était directement compilé en CASM, l'assembleur du processeur Cairo, "
+"Cairo 1 est un langage plus élevé. Il se compile d'abord en Sierra, "
+"une représentation intermédiaire de Cairo qui se compile ensuite en une sous-ensemble sûr de CASM. "
+"L'objectif de Sierra est de garantir que votre CASM sera toujours vérifiable, même en cas d'échec de calcul."
 
 #: src/ch00-00-introduction.md:8
 msgid "## What can you do with it?"
-msgstr ""
+msgstr "## Que pouvez-vous faire avec ?"
 
 #: src/ch00-00-introduction.md:10
 msgid ""
@@ -326,10 +335,20 @@ msgid ""
 "interactions themselves. This approach allows for increased throughput and "
 "reduced transaction costs but preserving Ethereum security."
 msgstr ""
+"Cairo permet de calculer des valeurs fiables sur des machines non fiables. "
+"Un cas d'utilisation majeur est Starknet, une solution de scalabilité pour Ethereum. "
+"Ethereum est une plateforme de blockchain décentralisée qui permet la création d'applications décentralisées "
+"où chaque interaction entre un utilisateur et une application décentralisée est vérifiée par tous les participants. "
+"Starknet est une seconde couche construite au-dessus d'Ethereum. "
+"Au lieu de demander à tous les participants du réseau de vérifier toutes les interactions des utilisateurs, "
+"seul un nœud, appelé le "prover", exécute les programmes et génère des preuves que les calculs ont été effectués correctement. "
+"Ces preuves sont ensuite vérifiées par un contrat intelligent Ethereum, "
+"ce qui nécessite une puissance de calcul considérablement inférieure par rapport à l'exécution des interactions elles-mêmes. "
+"Cette approche permet d'augmenter le débit et de réduire les coûts des transactions tout en préservant la sécurité d'Ethereum."
 
 #: src/ch00-00-introduction.md:12
 msgid "## What are the differences with other programming languages?"
-msgstr ""
+msgstr "## Quelles sont les différences avec d'autres langages de programmation ?"
 
 #: src/ch00-00-introduction.md:14
 msgid ""
@@ -337,6 +356,9 @@ msgid ""
 "when it comes to overhead costs and its primary advantages. Your program can "
 "be executed in two different ways:"
 msgstr ""
+"Cairo est assez différent des langages de programmation traditionnels, notamment "
+"en ce qui concerne les coûts supplémentaires et ses avantages principaux. Votre programme peut "
+"être exécuté de deux manières différentes :"
 
 #: src/ch00-00-introduction.md:16
 msgid ""
@@ -358,6 +380,23 @@ msgid ""
 "verifier doesn't sort the array, it just checks that it is sorted, which is "
 "cheaper."
 msgstr ""
+"- Lorsqu'il est exécuté par le "prover", le langage Cairo est similaire à n'importe quel autre langage. En raison "
+"de sa virtualisation et du fait que les opérations n'ont pas été spécifiquement "
+"conçues pour une efficacité maximale, cela peut entraîner une surcharge de performance, "
+"mais ce n'est pas la partie la plus pertinente à optimiser.\n"
+"\n"
+"- Lorsque la preuve générée est vérifiée par un vérificateur, le processus est un peu différent. "
+"Cette vérification doit être aussi peu coûteuse que possible, car elle peut éventuellement être effectuée "
+"sur de nombreuses machines très petites. Heureusement, la vérification est plus rapide que le calcul, "
+"et Cairo présente quelques avantages uniques pour l'améliorer encore davantage. L'un de ces avantages notables "
+"est le non-déterminisme. Ce sujet sera abordé en détail ultérieurement "
+"dans ce livre, mais l'idée est que vous pouvez théoriquement utiliser un algorithme différent "
+"pour la vérification que pour le calcul. Actuellement, l'écriture de code non "
+"déterministe personnalisé n'est pas prise en charge pour les développeurs, mais la bibliothèque standard "
+"tire parti du non-déterminisme pour améliorer les performances. Par exemple, "
+"trier un tableau dans Cairo coûte le même prix que le copier. En effet, "
+"le vérificateur ne trie pas le tableau, il vérifie simplement s'il est trié, ce qui est "
+"moins coûteux en termes de calcul."
 
 #: src/ch00-00-introduction.md:20
 msgid ""
@@ -368,10 +407,16 @@ msgid ""
 "Therefore, developers must think carefully about how they manage memory and "
 "data structures in their programs to optimize performance."
 msgstr ""
+"Un autre aspect qui distingue le langage est son modèle de mémoire. Dans Cairo, "
+"l'accès à la mémoire est immuable, ce qui signifie qu'une fois qu'une valeur est écrite en mémoire, "
+"elle ne peut pas être modifiée. Cairo 1 propose des abstractions qui aident les développeurs "
+"à travailler avec ces contraintes, mais il ne simule pas entièrement la mutabilité. "
+"Par conséquent, les développeurs doivent réfléchir attentivement à la gestion de la mémoire et "
+"des structures de données dans leurs programmes pour optimiser les performances."
 
 #: src/ch00-00-introduction.md:22
 msgid "## References"
-msgstr ""
+msgstr "## Références"
 
 #: src/ch00-00-introduction.md:24
 msgid ""
@@ -381,25 +426,33 @@ msgid ""
 "- State of non determinism: <https://twitter.com/PapiniShahar/"
 "status/1638203716535713798>"
 msgstr ""
+"- Architecture du processeur Cairo : <https://eprint.iacr.org/2021/1063>"
+"- Cairo, Sierra et Casm: <https://medium.com/nethermind-eth/under-the-hood-"
+"of-cairo-1-0-exploring-sierra-7f32808421f5>\n"
+"- État de non-déterminisme : <https://twitter.com/PapiniShahar/"
+"status/1638203716535713798>"
+
 
 #: src/ch01-01-installation.md:1
 msgid "# Installation"
-msgstr ""
+msgstr "# Installation"
 
 #: src/ch01-01-installation.md:3
 msgid ""
 "The first step is to install Cairo. We will download Cairo manually, using "
 "cairo repository or with an installation script. You’ll need an internet "
 "connection for the download."
-msgstr ""
+msgstr "La première étape consiste à installer Cairo. Nous allons télécharger Cairo manuellement, en utilisant "
+"le dépôt cairo ou avec un script d'installation. Vous aurez besoin d'une connexion Internet "
+"pour le téléchargement."
 
 #: src/ch01-01-installation.md:5
 msgid "### Prerequisites"
-msgstr ""
+msgstr "### Prérequis"
 
 #: src/ch01-01-installation.md:7
 msgid "First you will need to have Rust and Git installed."
-msgstr ""
+msgstr "Tout d'abord, vous devrez avoir Rust et Git installés."
 
 #: src/ch01-01-installation.md:9
 msgid ""
@@ -411,17 +464,19 @@ msgstr ""
 
 #: src/ch01-01-installation.md:14
 msgid "Install [Git](https://git-scm.com/)."
-msgstr ""
+msgstr "Installer [Git](https://git-scm.com/)."
 
 #: src/ch01-01-installation.md:16
 msgid ""
 "## Installing Cairo with a Script ([Installer](https://github.com/franalgaba/"
 "cairo-installer) by [Fran](https://github.com/franalgaba))"
 msgstr ""
+"## Installer Cairo avec un script ([Installer](https://github.com/franalgaba/"
+"cairo-installer) par [Fran](https://github.com/franalgaba))"
 
 #: src/ch01-01-installation.md:18
 msgid "### Install"
-msgstr ""
+msgstr "### Installer"
 
 #: src/ch01-01-installation.md:20
 msgid ""
@@ -429,6 +484,9 @@ msgid ""
 "head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export "
 "CAIRO_GIT_TAG=v1.0.0`)."
 msgstr ""
+"Si vous souhaitez installer une version spécifique de Cairo plutôt que la dernière "
+"version disponible, définissez la variable d'environnement `CAIRO_GIT_TAG` (par exemple, `export "
+"CAIRO_GIT_TAG=v1.0.0`)."
 
 #: src/ch01-01-installation.md:22
 msgid ""
@@ -443,10 +501,12 @@ msgid ""
 "After installing, follow [these instructions](#set-up-your-shell-environment-"
 "for-cairo) to set up your shell environment."
 msgstr ""
+"Après l'installation, suivez [ces instructions](#set-up-your-shell-environment-"
+"for-cairo) pour configurer votre interface utilisateur."
 
 #: src/ch01-01-installation.md:28
 msgid "### Update"
-msgstr ""
+msgstr "### Mise à jour"
 
 #: src/ch01-01-installation.md:30
 msgid ""
@@ -459,13 +519,15 @@ msgstr ""
 
 #: src/ch01-01-installation.md:35
 msgid "### Uninstall"
-msgstr ""
+msgstr "### Désinstaller"
 
 #: src/ch01-01-installation.md:37
 msgid ""
 "Cairo is installed within `$CAIRO_ROOT` (default: ~/.cairo). To uninstall, "
 "just remove it:"
 msgstr ""
+"Cairo est installé dans `$CAIRO_ROOT` (par défaut : ~/.cairo). Pour le désinstaller, "
+"il suffit de le supprimer :"
 
 #: src/ch01-01-installation.md:39
 msgid ""
@@ -476,7 +538,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:43
 msgid "then remove these three lines from .bashrc:"
-msgstr ""
+msgstr "puis retirez ces trois lignes de .bashrc :"
 
 #: src/ch01-01-installation.md:45
 msgid ""
@@ -487,7 +549,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:49
 msgid "and finally, restart your shell:"
-msgstr ""
+msgstr "et finalement relancez votre interface :"
 
 #: src/ch01-01-installation.md:51
 msgid ""
@@ -498,7 +560,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:55
 msgid "### Set up your shell environment for Cairo"
-msgstr ""
+msgstr "### Configurer votre interface utilisateur pour Cairo"
 
 #: src/ch01-01-installation.md:57
 msgid ""
@@ -514,6 +576,8 @@ msgid ""
 "The below setup should work for the vast majority of users for common use "
 "cases."
 msgstr ""
+"La configuration ci-dessous devrait fonctionner pour la grande majorité des utilisateurs dans des cas d'utilisation "
+"courants."
 
 #: src/ch01-01-installation.md:65
 msgid ""
@@ -593,7 +657,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:125
 msgid "### Restart your shell"
-msgstr ""
+msgstr "### Relancez votre interface"
 
 #: src/ch01-01-installation.md:127
 msgid "for the `PATH` changes to take effect."
@@ -611,20 +675,24 @@ msgid ""
 "## Installing Cairo Manually ([Guide](https://github.com/auditless/cairo-"
 "template) by [Abdel](https://github.com/abdelhamidbakhta))"
 msgstr ""
+""## Installer Cairo manuellement ([Guide](https://github.com/auditless/cairo-"
+"template) par [Abdel](https://github.com/abdelhamidbakhta))"
 
 #: src/ch01-01-installation.md:135
 msgid "### Step 1: Install Cairo 1.0"
-msgstr ""
+msgstr "### Étape 1: Installer Cairo 1.0"
 
 #: src/ch01-01-installation.md:137
 msgid ""
 "If you are using an x86 Linux system and can use the release binary, "
 "download Cairo here: <https://github.com/starkware-libs/cairo/releases>."
 msgstr ""
+""Si vous utilisez un système Linux x86 et pouvez utiliser la version binaire de sortie, "
+"téléchargez Cairo ici : <https://github.com/starkware-libs/cairo/releases>."
 
 #: src/ch01-01-installation.md:139
 msgid "For everyone else, we recommend compiling Cairo from source as follows:"
-msgstr ""
+msgstr "Pour tous les autres, nous recommandons de compiler Cairo à partir des sources comme suit :"
 
 #: src/ch01-01-installation.md:141
 msgid ""
