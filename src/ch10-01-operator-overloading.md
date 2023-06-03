@@ -7,7 +7,7 @@ However, it's essential to use operator overloading judiciously. Misuse can lead
 
 Consider an example where two `Potions` need to be combined. `Potions` have two data fields, mana and health. Combining two `Potions` should add their respective fields.
 
-```rust
+```rust,ignore_format
 struct Potion {
     health: felt252,
     mana: felt252
