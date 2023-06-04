@@ -144,10 +144,10 @@ Listing 5-5: A function that uses a match expression on an `Option<u8>`
 Note that your arms must respect the same order as the enum defined in the `OptionTrait` of the core Cairo lib.
 
 ```rust
-    enum Option<T> {
-        Some: T,
-        None: (),
-    }
+enum Option<T> {
+    Some: T,
+    None: (),
+}
 ```
 
 Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5_u8)`. We then compare that against each match arm:

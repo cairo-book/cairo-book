@@ -7,11 +7,13 @@ Each time a contract interface is created on Starknet, two dispatchers are autom
 
 In this chapter, we are going to extensively discuss how these dispatchers work and their usage.
 
-To effectively break down the concepts in this chapter, we are going to be using the IERC20 interface from the previous chapter (refer to Listing 9-1):
+To effectively break down the concepts in this chapter, we are going to be using the IERC20 interface from the previous chapter (refer to Listing 99-1):
 
 ## Contract Dispatcher
 
 Traits annotated with the `#[abi]` attribute are programmed to automatically generate and export the relevant dispatcher logic on compilation. The compiler also generates a new trait, two new structs (one for contract calls, and the other for library calls) and their implementation of this trait. Our interface is expanded into something like this:
+
+**Note:** The expanded code for our IERC20 interface is a lot longer, but to keep this chapter concise and straight to the point, we focused on one view function `get_name`, and one external function `transfer`.
 
 ```rust
 trait IERC20DispatcherTrait<T> {
@@ -34,11 +36,9 @@ impl IERC20DispatcherImpl of IERC20DispatcherTrait::<IERC20Dispatcher> {
 }
 ```
 
-<span class="caption">Listing 9-2: An expanded form of the IERC20 trait</span>
+<span class="caption">Listing 99-2: An expanded form of the IERC20 trait</span>
 
-**NB:** The expanded code for our IERC20 interface is a lot more robust, but to keep this chapter concise and straight to the point, we focused on one view function `get_name`, and one external function `transfer`.
-
-It's also worthy of note that all these is abstracted behind the scenes thanks to the power of Cairo plugins.
+It's also worthy of note that all these are abstracted behind the scenes thanks to the power of Cairo plugins.
 
 ### Calling Contracts using the Contract Dispatcher
 
@@ -69,7 +69,7 @@ mod Dispatcher {
 }
 ```
 
-<span class="caption">Listing 9-3: A sample contract which uses the Contract Dispatcher</span>
+<span class="caption">Listing 99-3: A sample contract which uses the Contract Dispatcher</span>
 
 As you can see, we had to first import the `IERC20DispatcherTrait` and `IERC20Dispatcher` which was generated and exported on compiling our interface, then we make calls to the methods implemented for the `IERC20Dispatcher` struct (`name`, `transfer`, etc), passing in the `contract_address` parameter which represents the address of the contract we want to call.
 
@@ -101,7 +101,7 @@ impl IERC20LibraryDispatcherImpl of IERC20DispatcherTrait::<IERC20LibraryDispatc
 }
 ```
 
-<span class="caption">Listing 9-4: An expanded form of the IERC20 trait</span>
+<span class="caption">Listing 99-4: An expanded form of the IERC20 trait</span>
 
 ### Calling Contracts using the Library Dispatcher
 
@@ -127,7 +127,7 @@ fn transfer_token(
 }
 ```
 
-<span class="caption">Listing 9-4: A sample contract using the Library Dispatcher</span>
+<span class="caption">Listing 99-4: A sample contract using the Library Dispatcher</span>
 
 As you can see, we had to first import the `IERC20DispatcherTrait` and `IERC20LibraryDispatcher` which was generated and exported on compiling our interface, then we make calls to the methods implemented for the `IERC20LibraryDispatcher` struct (`name`, `transfer`, etc), passing in the `class_hash` parameter which represents the class of the contract we want to call.
 
@@ -146,6 +146,6 @@ fn transfer_token(
 }
 ```
 
-<span class="caption">Listing 9-5: A sample contract implementing system calls</span>
+<span class="caption">Listing 99-5: A sample contract implementing system calls</span>
 
 As you can see, rather than pass our function arguments directly, we passed in the contract address, function selector (which is a keccak hash of the function name), and the calldata (function arguments). At the end, we get returned a serialized value which we'll need to deserialize ourselves!

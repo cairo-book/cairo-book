@@ -3721,10 +3721,10 @@ msgstr ""
 
 #: src/ch02-05-control-flow.md:127
 msgid ""
-"As an example, change the _src/lib.rs_ file in your _loops_ directory to look\n"
+"As an example, change the _src/lib.cairo_ file in your _loops_ directory to look\n"
 "like this:"
 msgstr ""
-"Por ejemplo, cambie el archivo _src/lib.rs_ de su directorio _loops_ para que tenga el siguiente aspecto\n"
+"Por ejemplo, cambie el archivo _src/lib.cairo_ de su directorio _loops_ para que tenga el siguiente aspecto\n"
 "así:"
 
 #: src/ch02-05-control-flow.md:132

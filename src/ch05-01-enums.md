@@ -107,15 +107,6 @@ We are demonstrating two approaches for the above function:
 use array::ArrayTrait;
 use debug::PrintTrait;
 fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> Option<usize> {
-    match gas::withdraw_gas() {
-        Option::Some(_) => {},
-        Option::None(_) => {
-            let mut data = ArrayTrait::new();
-            data.append('OOG');
-            panic(data);
-        },
-    }
-
     if index >= arr.len() {
         return Option::None(());
     }
@@ -155,13 +146,12 @@ fn test_increase_amount() {
     my_array.append(5);
 
     let value_to_find = 7;
-    let result = find_value_recursive(@my_array, value_to_find, 0_usize);
+    let result = find_value_recursive(@my_array, value_to_find, 0);
     let result_i = find_value_iterative(@my_array, value_to_find);
-
 
     match result {
         Option::Some(index) => {
-            if index == 1_usize {
+            if index == 1{
                 'it worked'.print();
             }
         },
@@ -171,7 +161,7 @@ fn test_increase_amount() {
     }
     match result_i {
         Option::Some(index) => {
-            if index == 1_usize {
+            if index == 1{
                 'it worked'.print();
             }
         },

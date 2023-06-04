@@ -3552,9 +3552,9 @@ msgstr "`loop` 关键字告诉 Rust 一遍又一遍地执行一段代码直到�
 
 #: src/ch02-05-control-flow.md:127
 msgid ""
-"As an example, change the _src/lib.rs_ file in your _loops_ directory to look\n"
+"As an example, change the _src/lib.cairo_ file in your _loops_ directory to look\n"
 "like this:"
-msgstr "作为一个例子，将你的_loops_目录下的_src/lib.rs_文件修改如下："
+msgstr "作为一个例子，将你的_loops_目录下的_src/lib.cairo_文件修改如下："
 
 #: src/ch02-05-control-flow.md:132
 msgid ""

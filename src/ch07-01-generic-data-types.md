@@ -175,8 +175,8 @@ As we did with structs, we can define enums to hold generic data types in their 
 
 ```rust
 enum Option<T> {
-    Some(T),
-    None,
+    Some: T,
+    None: (),
 }
 ```
 
@@ -186,8 +186,8 @@ Enums can use multiple generic types as well, like definition of the `Result<T, 
 
 ```rust
 enum Result<T, E> {
-    Ok(T),
-    Err(E),
+    Ok: T,
+    Err: E,
 }
 ```
 
