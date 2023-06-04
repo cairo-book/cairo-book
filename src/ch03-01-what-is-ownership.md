@@ -161,7 +161,7 @@ are dangerous, as a malicious prover could prove the correctness of inconsistent
 However, types that implement the `Drop` trait are allowed to go out of scope without being explicitly moved. When a value of a type that implements the `Drop` trait goes out of scope, the `Drop` implementation is called on the type, which moves the value to the `drop` function, allowing it to go out of scope - This is what we call "dropping" a value.
 It is important to note that the implementation of drop is a "no-op", meaning that it doesn't perform any actions other than allowing the value to go out of scope.
 
-The `Drop` implementation can be derived for all types, allowing them to be dropped when goint out of scope, except for dictionaries (`Felt252Dict`) and types containing dictionaries.
+The `Drop` implementation can be derived for all types, allowing them to be dropped when going out of scope, except for dictionaries (`Felt252Dict`) and types containing dictionaries.
 For example, the following code compiles:
 
 ```rust
