@@ -81,15 +81,15 @@ msgstr "Références et snapshots"
 
 #: src/SUMMARY.md:31
 msgid "Using Structs to Structure Related Data"
-msgstr "Utiliser des structures pour structurer des données liées"
+msgstr "Utiliser des structs pour structurer des données liées"
 
 #: src/SUMMARY.md:34
 msgid "Defining and Instantiating Structs"
-msgstr "Définition et instanciation des structures"
+msgstr "Définition et instanciation des structs"
 
 #: src/SUMMARY.md:35
 msgid "An Example Program Using Structs"
-msgstr "Un exemple de programme utilisant des structures"
+msgstr "Un exemple de programme utilisant des structs"
 
 #: src/SUMMARY.md:36
 msgid "Method Syntax"
@@ -309,7 +309,7 @@ msgstr ""
 "Cairo est un langage de programmation conçu pour un processeur virtuel du même nom. "
 "L'aspect unique de ce processeur est qu'il n'a pas été créé pour les contraintes physiques de notre monde, " 
 "mais pour des contraintes cryptographiques, ce qui lui permet de prouver efficacement l'exécution de n'importe quel programme s'exécutant sur celui-ci. "
-"Cela signifie que vous pouvez effectuer des opérations longues sur une machine "
+"Cela signifie que vous pouvez effectuer des opérations complexes sur une machine "
 "en laquelle vous n'avez pas confiance, et vérifier le résultat très rapidement sur une machine moins coûteuse. "
 "Alors que Cairo 0 était directement compilé en CASM, l'assembleur du processeur Cairo, "
 "Cairo 1 est un langage plus élevé. Il se compile d'abord en Sierra, "
@@ -342,8 +342,8 @@ msgstr ""
 "Starknet est une seconde couche construite au-dessus d'Ethereum. "
 "Au lieu de demander à tous les participants du réseau de vérifier toutes les interactions des utilisateurs, "
 "seul un nœud, appelé le "prover", exécute les programmes et génère des preuves que les calculs ont été effectués correctement. "
-"Ces preuves sont ensuite vérifiées par un contrat intelligent Ethereum, "
-"ce qui nécessite une puissance de calcul considérablement inférieure par rapport à l'exécution des interactions elles-mêmes. "
+"Ces preuves sont ensuite vérifiées par un smart contract déployé sur Ethereum, "
+"ce qui nécessite une puissance de calcul considérablement inférieure par rapport à l'exécution des transactions elles-mêmes. "
 "Cette approche permet d'augmenter le débit et de réduire les coûts des transactions tout en préservant la sécurité d'Ethereum."
 
 #: src/ch00-00-introduction.md:12
