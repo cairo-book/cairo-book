@@ -1,10 +1,9 @@
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[logo]: https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
 <div align="center">
+<!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
-  [![All Contributors][logo]](#contributors)
+  <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+  [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
+  <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
   <h3> Alexandria </h3>
