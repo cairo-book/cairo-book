@@ -1,7 +1,10 @@
 <div align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[logo]: https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+[![All Contributors][logo]](#contributors-)
+
   <h1>The Cairo Programming Language Book</h1>
   <h3> Alexandria </h3>
   <img src="assets/alexandria.jpg" height="400" width="400">
@@ -77,7 +80,7 @@ The mdbook-cairo backend is working as following:
    number of the `fn main()` found in the chapter.
 4. If you have a code block with a `fn main()` function that you know does not compile,
    you can indicate it by adding the `does_not_compile` attribute to the code block, like this:
-   
+
    ````
    ```rust,does_not_compile
    fn main() {
@@ -89,7 +92,7 @@ The mdbook-cairo backend is working as following:
    but will not be extracted into a Cairo program.
 
 5. Alternatively, if you want to disable the format check using `cairo-format`,
-   you can add the `ignore_format` attribute to the code block, like this:   
+   you can add the `ignore_format` attribute to the code block, like this:
 
    ````
    ```rust,ignore_format
