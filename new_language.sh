@@ -13,8 +13,15 @@ fi
 #Linux
 if [ "$OS" == "Linux" ]; then
     ARCH=$(uname -m)
-    # Install gettext
-    sudo apt install gettext
+    if which gettext > /dev/null; then
+        echo "gettext exists"
+    else
+        # Install gettext
+        echo ""
+        echo "Warning: gettext not exists. Will run `sudo apt install gettext` install gettext."
+        sudo apt install gettext
+    fi
+
     # Download mdBook and extract it out
     if [ "$ARCH" == "aarch64" ]; then
         curl -L https://github.com/rust-lang/mdBook/releases/download/v0.4.30/mdbook-v0.4.30-aarch64-unknown-linux-musl.tar.gz | tar -xz
@@ -23,8 +30,14 @@ if [ "$OS" == "Linux" ]; then
     fi
 # MACOS
 elif [ "$OS" == "Darwin" ]; then
-    # Install gettext
-    brew install gettext
+    if which gettext > /dev/null; then
+        echo "gettext exists"
+    else
+        # Install gettext
+        echo ""
+        echo "Warning: gettext not exists. Will run `brew install gettext` install gettext."
+        brew install gettext
+    fi
     # Download mdBook and extract it out
     curl -L https://github.com/rust-lang/mdBook/releases/download/v0.4.30/mdbook-v0.4.30-x86_64-apple-darwin.tar.gz | tar -xz
 else
