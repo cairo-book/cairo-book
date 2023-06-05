@@ -1,9 +1,10 @@
-<div align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [logo]: https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![All Contributors][logo]](#contributors-)
+<div align="center">
+
+  [![All Contributors][logo]](#contributors)
 
   <h1>The Cairo Programming Language Book</h1>
   <h3> Alexandria </h3>
