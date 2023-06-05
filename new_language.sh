@@ -35,7 +35,7 @@ fi
 # Build a new LANGUAGES. po file if not exist .
 if test -f "$FILE"; then
     echo ""
-    echo "File $FILE already exists. Ensure you're building a new book. Alternatively, use 'translations.sh' to serve an existing one."
+    echo "File $FILE already exists. Ensure you're initiating a new translation. Alternatively, use 'translations.sh' to serve an existing one."
 else
     msginit -i po/messages.pot -l $LANG -o po/$LANG.po
 fi
