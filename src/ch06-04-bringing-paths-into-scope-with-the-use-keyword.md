@@ -139,6 +139,9 @@ fn main() {
 }
 ```
 
+<span class="caption">Listing 6-9: Renaming a trait when it’s brought into
+scope with the `as` keyword</span>
+
 Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier.
 
 ### Importing multiple items from the same module
