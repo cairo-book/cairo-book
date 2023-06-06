@@ -36,7 +36,7 @@ impl RectangleImpl of RectangleTrait {
 }
 
 fn main() {
-    let rect1 = Rectangle { width: 30_u64, height: 50_u64,  };
+    let rect1 = Rectangle { width: 30, height: 50,  };
 
     rect1.area().print();
 }
@@ -106,12 +106,12 @@ trait RectangleTrait {
 
 impl RectangleImpl of RectangleTrait {
     fn width(self: @Rectangle) -> bool {
-        (*self.width) > 0_u64
+        (*self.width) > 0
     }
 }
 
 fn main() {
-    let rect1 = Rectangle { width: 30_u64, height: 50_u64,  };
+    let rect1 = Rectangle { width: 30, height: 50,  };
     rect1.width().print();
 }
 ```
@@ -143,9 +143,9 @@ struct Rectangle {
 }
 
 fn main() {
-    let rect1 = Rectangle { width: 30_u64, height: 50_u64,  };
-    let rect2 = Rectangle { width: 10_u64, height: 40_u64,  };
-    let rect3 = Rectangle { width: 60_u64, height: 45_u64,  };
+    let rect1 = Rectangle { width: 30, height: 50,  };
+    let rect2 = Rectangle { width: 10, height: 40,  };
+    let rect3 = Rectangle { width: 60, height: 45,  };
 
     'Can rect1 hold rect2?'.print();
     rect1.can_hold(@rect2).print();
@@ -243,11 +243,11 @@ impl RectangleImpl of RectangleTrait {
 ```
 
 To call this function, we use the `::` syntax with the implementation name;
-`let square = RectangleImpl::square(10_u64);` is an example. This function is namespaced by
+`let square = RectangleImpl::square(10);` is an example. This function is namespaced by
 the implementation; the `::` syntax is used for both trait functions and
 namespaces created by modules. We’ll discuss modules in [Chapter 7][modules]<!-- ignore -->.
 
-> Note: It is also possible to call this function using the trait name, with `RectangleTrait::square(10_u64)`.
+> Note: It is also possible to call this function using the trait name, with `RectangleTrait::square(10)`.
 
 ### Multiple `impl` Blocks
 

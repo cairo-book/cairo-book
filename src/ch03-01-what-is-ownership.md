@@ -261,7 +261,7 @@ fn main() {
     takes_ownership(my_struct);     // my_struct's value moves into the function...
                                     // ... and so is no longer valid here
 
-    let x = 5_u128;                 // x comes into scope
+    let x = 5;                 // x comes into scope
 
     makes_copy(x);                  // x would move into the function,
                                     // but u128 implements Copy, so it is okay to still

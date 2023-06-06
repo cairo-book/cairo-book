@@ -157,7 +157,7 @@ impl RectangleImpl of RectangleTrait {
 
 Listing 8-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5
 
-The `can_hold` method returns a `Boolean`, which means it’s a perfect use case for the assert function. In Listing 8-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8_u64` and a height of `7_u64` and asserting that it can hold another `Rectangle` instance that has a width of `5_u64` and a height of `1_u64`.
+The `can_hold` method returns a `Boolean`, which means it’s a perfect use case for the assert function. In Listing 8-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
 <span class="filename">Filename: lib.cairo</span>
 
@@ -170,12 +170,12 @@ mod tests {
     #[test]
     fn larger_can_hold_smaller() {
         let larger = Rectangle {
-            height: 7_u64,
-            width: 8_u64,
+            height: 7,
+            width: 8,
         };
         let smaller = Rectangle {
-            height: 1_u64,
-            width: 5_u64,
+            height: 1,
+            width: 5,
         };
 
         assert(larger.can_hold(@smaller), 'rectangle cannot hold');
@@ -214,12 +214,12 @@ mod tests {
     #[test]
     fn smaller_cannot_hold_larger() {
         let larger = Rectangle {
-            height: 7_u64,
-            width: 8_u64,
+            height: 7,
+            width: 8,
         };
         let smaller = Rectangle {
-            height: 1_u64,
-            width: 5_u64,
+            height: 1,
+            width: 5,
         };
 
         assert(!smaller.can_hold(@larger), 'rectangle cannot hold');
@@ -261,11 +261,11 @@ failures:
 Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
-Our tests caught the bug! Because `larger.width` is `8_u64` and `smaller.width` is `5_u64`, the comparison of the widths in `can_hold` now returns `false`: `8_u64` is not less than `5_u64`.
+Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false`: `8` is not less than `5`.
 
 ## Checking for Panics with `should_panic`
 
-In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 8-8. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1_u64` and `100_u64`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
+In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 8-8. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
 
 We do this by adding the attribute `should_panic` to our test function. The test passes if the code inside the function panics; the test fails if the code inside the function doesn’t panic.
 
@@ -287,7 +287,7 @@ trait GuessTrait {
 
 impl GuessImpl of GuessTrait {
     fn new(value: u64) -> Guess {
-        if value < 1_u64 | value > 100 {
+        if value < 1 | value > 100 {
             let mut data = ArrayTrait::new();
             data.append('Guess must be >= 1 and <= 100');
             panic(data);
@@ -304,7 +304,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn greater_than_100() {
-        GuessTrait::new(200_u64);
+        GuessTrait::new(200);
     }
 }
 ```
@@ -320,13 +320,13 @@ test adder::lib::tests::greater_than_100 ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-Looks good! Now let’s introduce a bug in our code by removing the condition that the new function will panic if the value is greater than `100_u64`:
+Looks good! Now let’s introduce a bug in our code by removing the condition that the new function will panic if the value is greater than `100`:
 
 ```rust
 // --snip--
 impl GuessImpl of GuessTrait {
     fn new(value: u64) -> Guess {
-        if value < 1_u64 {
+        if value < 1{
             let mut data = ArrayTrait::new();
             data.append('Guess must be >= 1 and <= 100');
             panic(data);
@@ -358,11 +358,11 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 // --snip--
 impl GuessImpl of GuessTrait {
     fn new(value: u64) -> Guess {
-        if value < 1_u64 {
+        if value < 1{
             let mut data = ArrayTrait::new();
             data.append('Guess must be >= 1');
             panic(data);
-        } else if value > 100_u64 {
+        } else if value > 100{
             let mut data = ArrayTrait::new();
             data.append('Guess must be <= 100');
             panic(data);
@@ -380,7 +380,7 @@ mod tests {
     #[test]
     #[should_panic(expected: ('Guess must be <= 100', ))]
     fn greater_than_100() {
-        GuessTrait::new(200_u64);
+        GuessTrait::new(200);
     }
 }
 ```
@@ -389,14 +389,14 @@ Listing 8-9: Testing for a panic with a panic message containing the error messa
 
 This test will pass because the value we put in the `should_panic` attribute’s expected parameter is the array of string of the message that the `Guess::new` function panics with. We need to specify the entire panic message that we expect.
 
-To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the if `value < 1_u64` and the else if `value > 100_u64` blocks:
+To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the if `value < 1` and the else if `value > 100` blocks:
 
 ```rust
-if value < 1_u64 {
+if value < 1{
     let mut data = ArrayTrait::new();
     data.append('Guess must be <= 100');
     panic(data);
-} else if value > 100_u64 {
+} else if value > 100{
     let mut data = ArrayTrait::new();
     data.append('Guess must be >= 1');
     panic(data);

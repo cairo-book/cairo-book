@@ -24,7 +24,7 @@ A trait can be implemented using `impl` keyword with the name of your implementa
 ```rust
 impl RectangleGeometry of ShapeGeometry {
 	fn boundary(self: Rectangle) -> u64 {
-        2_u64 * (self.height + self.width)
+        2 * (self.height + self.width)
     }
 	fn area(self: Rectangle) -> u64 {
 		self.height * self.width
@@ -84,7 +84,7 @@ trait ShapeGeometry<T> {
 // to implement the trait for that type
 impl RectangleGeometry of ShapeGeometry<Rectangle> {
     fn boundary(self: Rectangle) -> u64 {
-        2_u64 * (self.height + self.width)
+        2 * (self.height + self.width)
     }
     fn area(self: Rectangle) -> u64 {
         self.height * self.width
@@ -95,19 +95,19 @@ impl RectangleGeometry of ShapeGeometry<Rectangle> {
 // which can use the same trait spec
 impl CircleGeometry of ShapeGeometry<Circle> {
     fn boundary(self: Circle) -> u64 {
-        (2_u64 * 314_u64 * self.radius) / 100_u64
+        (2 * 314 * self.radius) / 100
     }
     fn area(self: Circle) -> u64 {
-        (314_u64 * self.radius * self.radius) / 100_u64
+        (314 * self.radius * self.radius) / 100
     }
 }
 
 fn main() {
-    let rect = Rectangle { height: 5_u64, width: 7_u64 };
+    let rect = Rectangle { height: 5, width: 7 };
     rect.area().print(); // 35
     rect.boundary().print(); // 24
 
-    let circ = Circle { radius: 5_u64 };
+    let circ = Circle { radius: 5 };
     circ.area().print(); // 78
     circ.boundary().print(); // 31
 }
@@ -148,8 +148,8 @@ mod circle {
 }
 
 fn main() {
-    let rect = Rectangle { height: 5_u64, width: 7_u64 };
-    let circ = Circle { radius: 5_u64 };
+    let rect = Rectangle { height: 5, width: 7 };
+    let circ = Circle { radius: 5 };
     // Fails with this error
     // Method `area` not found on... Did you import the correct trait and impl?
     rect.area().print();
