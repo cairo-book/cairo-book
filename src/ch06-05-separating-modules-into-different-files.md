@@ -4,7 +4,7 @@ So far, all the examples in this chapter defined multiple modules in one file.
 When modules get large, you might want to move their definitions to a separate
 file to make the code easier to navigate.
 
-For example, let’s start from the code in Listing 6-10 that had multiple
+For example, let’s start from the code in Listing 6-11 that had multiple
 restaurant modules. We’ll extract modules into files instead of having all the
 modules defined in the crate root file. In this case, the crate root file is
 _src/lib.cairo_.
@@ -12,8 +12,8 @@ _src/lib.cairo_.
 First, we’ll extract the `front_of_house` module to its own file. Remove the
 code inside the curly brackets for the `front_of_house` module, leaving only
 the `mod front_of_house;` declaration, so that _src/lib.cairo_ contains the code
-shown in Listing 6-11. Note that this won’t compile until we create the
-_src/front_of_house.cairo_ file in Listing 6-12.
+shown in Listing 6-12. Note that this won’t compile until we create the
+_src/front_of_house.cairo_ file in Listing 6-13.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -27,11 +27,11 @@ pub fn eat_at_restaurant() {
 }
 ```
 
-<span class="caption">Listing 6-11: Declaring the `front_of_house` module whose
+<span class="caption">Listing 6-12: Declaring the `front_of_house` module whose
 body will be in _src/front_of_house.cairo_</span>
 
 Next, place the code that was in the curly brackets into a new file named
-_src/front_of_house.cairo_, as shown in Listing 6-12. The compiler knows to look
+_src/front_of_house.cairo_, as shown in Listing 6-13. The compiler knows to look
 in this file because it came across the module declaration in the crate root
 with the name `front_of_house`.
 
@@ -43,7 +43,7 @@ mod hosting {
 }
 ```
 
-<span class="caption">Listing 6-12: Definitions inside the `front_of_house`
+<span class="caption">Listing 6-13: Definitions inside the `front_of_house`
 module in _src/front_of_house.cairo_</span>
 
 Note that you only need to load a file using a `mod` declaration _once_ in your
