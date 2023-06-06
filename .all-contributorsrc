@@ -95,6 +95,16 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "julio4",
+      "name": "julio4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30329843?v=4",
+      "profile": "http://julio4.com",
+      "contributions": [
+        "code",
+        "tool"
+      ]
     }
   ],
   "contributorsPerLine": 7,
