@@ -144,6 +144,55 @@ scope with the `as` keyword</span>
 
 Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier.
 
+### Importing multiple items from the same module
+
+When you want to import multiple items (like functions, structs or enums)
+from the same module in Cairo, you can use curly braces `{}` to list all of
+the items that you want to import. This helps to keep your code clean and easy
+to read by avoiding a long list of individual use statements.
+
+The general syntax for importing multiple items from the same module is:
+
+```rust
+use module::{item1, item2, item3};
+```
+
+Here is an example where we import three structures from the same module:
+
+```rust
+// Assuming we have a module called `shapes` with the structures `Square`, `Circle`, and `Triangle`.
+mod shapes {
+    #[derive(Drop)]
+    struct Square {
+        side: u32
+    }
+
+    #[derive(Drop)]
+    struct Circle {
+        radius: u32
+    }
+
+    #[derive(Drop)]
+    struct Triangle {
+        base: u32,
+        height: u32,
+    }
+}
+
+// We can import the structures `Square`, `Circle`, and `Triangle` from the `shapes` module like this:
+use shapes::{Square, Circle, Triangle};
+
+// Now we can directly use `Square`, `Circle`, and `Triangle` in our code.
+fn main() {
+    let sq = Square { side: 5 };
+    let cr = Circle { radius: 3 };
+    let tr = Triangle { base: 5, height: 2 };
+// ...
+}
+```
+
+<span class="caption">Listing 6-10: Importing multiple items from the same module</span>
+
 ## Re-exporting Names in Module Files
 
 When we bring a name into scope with the `use` keyword, the name available in
@@ -169,7 +218,7 @@ fn eat_at_restaurant() {
 }
 ```
 
-<span class="caption">Listing 6-10: Making a name available for any code to use
+<span class="caption">Listing 6-11: Making a name available for any code to use
 from a new scope with `pub use`</span>
 
 Before this change, external code would have to call the `add_to_waitlist`

@@ -66,10 +66,10 @@ use array::ArrayTrait;
 fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
     // This represents the smallest element through the iteration
     // Notice that we use the desnap (*) operator
-    let mut smallest = *list[0_usize];
+    let mut smallest = *list[0];
 
     // The index we will use to move through the list
-    let mut index = 1_usize;
+    let mut index = 1;
 
     // Iterate through the whole list storing the smallest
     loop {
@@ -101,8 +101,8 @@ When indexing on `list`, the value results in a snap of the indexed element, unl
 
 ```rs
 fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>>(list: @Array<T>) -> T {
-    let mut smallest = *list[0_usize];
-    let mut index = 1_usize;
+    let mut smallest = *list[0];
+    let mut index = 1;
     loop {
         if index >= list.len() {
             break smallest;

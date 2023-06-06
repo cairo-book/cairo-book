@@ -31,8 +31,8 @@ As for now, Scarb needs manual installation with the following steps:
 
   ```bash
   $ scarb --version
-  scarb 0.1.0 (289137c24 2023-03-28)
-  cairo: 1.0.0-alpha.6
+  scarb 0.3.0 (182a9019d 2023-05-29)
+  cairo: 1.1.0 (https://crates.io/crates/cairo-lang-compiler/1.1.0)
   ```
 
 ### Creating a Project with Scarb

@@ -11,7 +11,7 @@
 
 
 # https://hub.docker.com/r/starknet/cairo
-STARKNET_CAIRO_IMAGE=starknet/cairo:1.0.0
+STARKNET_CAIRO_IMAGE=starknet/cairo:1.1.0
 
 # 1. Install mdbook-cairo locally.
 cargo install --path mdbook-cairo --locked --force
