@@ -149,7 +149,7 @@ let my_first_string = 'Hello world';
 
 ### Type casting
 
-In Cairo, you can convert values between common scalar types and `felt252` using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits, respectively.
+In Cairo, you can convert types scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits, respectively.
 
 The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value.
 
@@ -163,16 +163,16 @@ use traits::Into;
 use option::OptionTrait;
 
 fn main() {
-    let my_felt = 10;
-    let my_u8: u8 = my_felt.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
-    let my_u16: u16 = my_felt.try_into().unwrap();
-    let my_u32: u32 = my_felt.try_into().unwrap();
-    let my_u64: u64 = my_felt.try_into().unwrap();
-    let my_u128: u128 = my_felt.try_into().unwrap();
-    let my_u256: u256 = my_felt.into(); // As a felt252 is smaller than a u256, we can use the into() method
-    let my_usize: usize = my_felt.try_into().unwrap();
-    let my_felt2: felt252 = my_u8.into();
-    let my_felt3: felt252 = my_u16.into();
+    let my_felt252 = 10;
+    let my_u8: u8 = my_felt252.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
+    let my_u16: u16 = my_u8.into();
+    let my_u32: u32 = my_u16.into();
+    let my_u64: u64 = my_u32.into();
+    let my_u128: u128 = my_u64.into();
+    let my_u256: u256 = my_felt252.into(); // As a felt252 is smaller than a u256, we can use the into() method
+    let my_usize: usize = my_felt252.try_into().unwrap();
+    let my_other_felt252: felt252 = my_u8.into();
+    let my_third_felt252: felt252 = my_u16.into();
 }
 ```
 
