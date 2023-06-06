@@ -9,8 +9,8 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 ```rust
 use debug::PrintTrait;
 fn main() {
-    let width1 = 30_u64;
-    let height1 = 10_u64;
+    let width1 = 30;
+    let height1 = 10;
     let area = area(width1, height1);
     area.print();
 }
@@ -50,7 +50,7 @@ Listing 4-7 shows another version of our program that uses tuples.
 ```rust
 use debug::PrintTrait;
 fn main() {
-    let rectangle = (30_u64, 10_u64);
+    let rectangle = (30, 10);
     let area = area(rectangle);
     area.print(); // print out the area
 }
@@ -83,8 +83,8 @@ struct Rectangle {
 
 fn main() {
     let rectangle = Rectangle {
-        width: 30_u64,
-        height: 10_u64,
+        width: 30,
+        height: 10,
     };
     let area = area(rectangle);
     area.print(); // print out the area
@@ -115,8 +115,8 @@ struct Rectangle {
 
 fn main() {
     let rectangle = Rectangle {
-        width: 30_u64,
-        height: 10_u64,
+        width: 30,
+        height: 10,
     };
     rectangle.print();
 }
@@ -151,8 +151,8 @@ struct Rectangle {
 
 fn main() {
     let rectangle = Rectangle {
-        width: 30_u64,
-        height: 10_u64,
+        width: 30,
+        height: 10,
     };
     rectangle.print();
 }

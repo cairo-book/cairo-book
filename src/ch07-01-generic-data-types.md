@@ -84,14 +84,14 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
 }
 
 fn main() {
-    let mut list = ArrayTrait::new();
-    list.append(5_u8);
-    list.append(3_u8);
-    list.append(10_u8);
+    let mut list: Array<u8> = ArrayTrait::new();
+    list.append(5);
+    list.append(3);
+    list.append(10);
 
     // We need to specify that we are passing a snapshot of `list` as an argument
     let s = smallest_element(@list);
-    assert(s == 3_u8, 0);
+    assert(s == 3, 0);
 }
 ```
 
@@ -129,7 +129,7 @@ struct Wallet<T> {
 
 
 fn main() {
-    let w = Wallet { balance: 3_u128 };
+    let w = Wallet { balance: 3 };
 }
 ```
 
@@ -145,7 +145,7 @@ struct Wallet<T> {
 impl WalletDrop<T, impl TDrop: Drop<T>> of Drop<Wallet<T>>;
 
 fn main() {
-    let w = Wallet { balance: 3_u128 };
+    let w = Wallet { balance: 3 };
 }
 ```
 
@@ -162,7 +162,7 @@ struct Wallet<T, U> {
 impl WalletDrop<T, impl TDrop: Drop<T>, U, impl UDrop: Drop<U>> of Drop<Wallet<T, U>>;
 
 fn main() {
-    let w = Wallet { balance: 3_u128, address: 14 };
+    let w = Wallet { balance: 3, address: 14 };
 }
 ```
 
@@ -255,11 +255,11 @@ impl WalletReceiveImpl of WalletReceiveTrait {
 }
 
 fn main() {
-    let mut w = Wallet { balance: 50_u128 };
-    assert(w.balance() == 50_u128, 0);
+    let mut w = Wallet { balance: 50 };
+    assert(w.balance() == 50, 0);
 
-    w.receive(100_u128);
-    assert(w.balance() == 150_u128, 0);
+    w.receive(100);
+    assert(w.balance() == 150, 0);
 }
 ```
 
@@ -311,13 +311,13 @@ We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` dec
 
 ```rs, does_not_compile
 fn main() {
-    let w1 = Wallet { balance: true, address: 10_u128 };
-    let w2 = Wallet { balance: 32, address: 100_u8 };
+    let w1 = Wallet { balance: true, address: 10 };
+    let w2 = Wallet { balance: 32, address: 100 };
 
     let w3 = w1.mixup(w2);
 
     assert(w3.balance == true, 0);
-    assert(w3.address == 100_u8, 0);
+    assert(w3.address == 100, 0);
 }
 ```
 

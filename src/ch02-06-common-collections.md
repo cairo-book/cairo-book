@@ -101,7 +101,7 @@ use array::ArrayTrait;
 use box::BoxTrait;
 fn main() -> u128 {
     let mut arr = ArrayTrait::<u128>::new();
-    arr.append(100_u128);
+    arr.append(100);
     let index_to_access = 1; // Change this value to see different results, what would happen if the index doesn't exist ?
     match arr.get(index_to_access) {
         Option::Some(x) => {
@@ -141,9 +141,9 @@ enum Data {
 
 fn main() {
     let mut messages: Array<Data> = ArrayTrait::new();
-    messages.append(Data::Integer(100_u128));
+    messages.append(Data::Integer(100));
     messages.append(Data::Felt('hello world'));
-    messages.append(Data::Tuple((10_u32, 30_u32)));
+    messages.append(Data::Tuple((10, 30)));
 }
 ```
 

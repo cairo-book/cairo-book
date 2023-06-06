@@ -35,10 +35,7 @@ struct User {
 }
 fn main() {
     let user1 = User {
-        active: true,
-        username: 'someusername123',
-        email: 'someone@example.com',
-        sign_in_count: 1_u64,
+        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1
     };
 }
 ```
@@ -52,10 +49,7 @@ To get a specific value from a struct, we use dot notation. For example, to acce
 ```rust,does_not_compile
 fn main() {
     let mut user1 = User {
-        active: true,
-        username: 'someusername123',
-        email: 'someone@example.com',
-        sign_in_count: 1_u64,
+        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1
     };
     user1.email = 'anotheremail@example.com';
 }
@@ -98,7 +92,7 @@ fn build_user(email: felt252, username: felt252) -> User {
         active: true,
         username,
         email,
-        sign_in_count: 1_u64,
+        sign_in_count: 1,
     }
 }
 ```

@@ -123,7 +123,7 @@ are currently supported.
 Here’s an example of a constant declaration:
 
 ```rust
-const ONE_HOUR_IN_SECONDS: u32 = 3600_u32;
+const ONE_HOUR_IN_SECONDS: u32 = 3600;
 ```
 
 Cairo's naming convention for constants is to use all uppercase with
@@ -208,7 +208,7 @@ if you change its type. For example, say our program performs a type conversion 
 use debug::PrintTrait;
 use traits::Into;
 fn main() {
-    let x = 2_u64;
+    let x = 2;
     x.print();
     let x: felt252 = x.into(); // converts x to a felt, type annotation is required.
     x.print()
@@ -224,7 +224,7 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 use debug::PrintTrait;
 use traits::Into;
 fn main() {
-    let mut x = 2_u64;
+    let mut x = 2;
     x.print();
     x = x.into();
     x.print()

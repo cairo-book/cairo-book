@@ -76,7 +76,7 @@ use adder::main;
 
 #[test]
 fn internal() {
-    assert(main::internal_adder(2_u32, 2_u32) == 4_u32, 'internal_adder failed');
+    assert(main::internal_adder(2, 2) == 4, 'internal_adder failed');
 }
 ```
 

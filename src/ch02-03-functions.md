@@ -235,7 +235,7 @@ function that returns a value:
 use debug::PrintTrait;
 
 fn five() -> u32 {
-    5_u32
+    5
 }
 
 fn main() {
@@ -268,13 +268,13 @@ Let’s look at another example:
 use debug::PrintTrait;
 
 fn main() {
-    let x = plus_one(5_u32);
+    let x = plus_one(5);
 
     x.print();
 }
 
 fn plus_one(x: u32) -> u32 {
-    x + 1_u32
+    x + 1
 }
 ```
 Running this code will print `[DEBUG]                    (raw: 6)`. But if we place a
@@ -285,13 +285,13 @@ expression to a statement, we’ll get an error:
 use debug::PrintTrait;
 
 fn main() {
-    let x = plus_one(5_u32);
+    let x = plus_one(5);
 
     x.print();
 }
 
 fn plus_one(x: u32) -> u32 {
-    x + 1_u32;
+    x + 1;
 }
 ```
 

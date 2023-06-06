@@ -115,7 +115,7 @@ If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska(())))`, `coin` 
 
 In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same. You can use Options by importing the `option::OptionTrait` trait.
 
-Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1_u8` to that value. If there isn’t a value inside, the function should return the `None` value and not attempt to perform any operations.
+Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there isn’t a value inside, the function should return the `None` value and not attempt to perform any operations.
 
 This function is very easy to write, thanks to match, and will look like Listing 5-5.
 
@@ -125,13 +125,13 @@ use debug::PrintTrait;
 
 fn plus_one(x: Option<u8>) -> Option<u8> {
     match x {
-        Option::Some(val) => Option::Some(val + 1_u8),
+        Option::Some(val) => Option::Some(val + 1),
         Option::None(_) => Option::None(()),
     }
 }
 
 fn main() {
-    let five: Option<u8> = Option::Some(5_u8);
+    let five: Option<u8> = Option::Some(5);
     let six: Option<u8> = plus_one(five);
     six.unwrap().print();
     let none = plus_one(Option::None(()));
@@ -150,18 +150,18 @@ enum Option<T> {
 }
 ```
 
-Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5_u8)`. We then compare that against each match arm:
+Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5)`. We then compare that against each match arm:
 
 ```rust
-    Option::Some(val) => Option::Some(val + 1_u8),
+    Option::Some(val) => Option::Some(val + 1),
 ```
 
-Does `Option::Some(5_u8)` value match the pattern `Option::Some(val)`? It does! We have the same variant. The `val` binds to the value contained in `Option::Some`, so `val` takes the value `5_u8`. The code in the match arm is then executed, so we add `1_u8` to the value of `val` and create a new `Option::Some` value with our total `6_u8` inside. Because the first arm matched, no other arms are compared.
+Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We have the same variant. The `val` binds to the value contained in `Option::Some`, so `val` takes the value `5`. The code in the match arm is then executed, so we add `1` to the value of `val` and create a new `Option::Some` value with our total `6` inside. Because the first arm matched, no other arms are compared.
 
 Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None(())`. We enter the match and compare to the first arm:
 
 ```rust
-    Option::Some(val) => Option::Some(val + 1_u8),
+    Option::Some(val) => Option::Some(val + 1),
 ```
 
 The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we continue to the next arm:
