@@ -13,7 +13,7 @@ runs:
     - name: Verify Cairo programs
       uses: addnab/docker-run-action@v3
       with:
-        image: starknet/cairo:1.0.0
+        image: starknet/cairo:1.1.0
         options: -v ${{ github.workspace }}/book/cairo/cairo-programs:/cairo
         run: |
           sh /cairo/cairo_programs_verifier.sh false > /cairo/summary.md

@@ -115,12 +115,12 @@ fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> O
         return Option::Some(index);
     }
 
-    find_value_recursive(arr, value, index + 1_usize)
+    find_value_recursive(arr, value, index + 1)
 }
 
 fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
     let length = arr.len();
-    let mut index = 0_usize;
+    let mut index = 0;
     let mut found: Option<usize> = Option::None(());
     loop {
         if index < length {
@@ -131,7 +131,7 @@ fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
         } else {
             break ();
         }
-        index += 1_usize;
+        index += 1;
     };
     return found;
 }

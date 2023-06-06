@@ -164,12 +164,12 @@ Here is an example where we import three structures from the same module:
 mod shapes {
     #[derive(Drop)]
     struct Square {
-        side: u32,
+        side: u32
     }
 
     #[derive(Drop)]
     struct Circle {
-        radius: u32,
+        radius: u32
     }
 
     #[derive(Drop)]
