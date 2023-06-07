@@ -194,7 +194,7 @@ Cairo knows that we didn’t cover every possible case, and even knows which pat
 
 Using enums, we can also take special actions for a few particular values, but for all other values take one default action. Currently only `0` and the `_`operator are supported.
 
-Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you loose. Here's a match that implements that logic, with the number hardcoded rather than a random value.
+Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you lose. Here's a match that implements that logic, with the number hardcoded rather than a random value.
 
 ```rust
 fn did_i_win(nb: felt252) {
