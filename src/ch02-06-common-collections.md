@@ -102,7 +102,7 @@ use box::BoxTrait;
 fn main() -> u128 {
     let mut arr = ArrayTrait::<u128>::new();
     arr.append(100);
-    let index_to_access = 1; // Change this value to see different results, what would happen if the index doesn't exist ?
+    let index_to_access = 1; // Change this value to see different results, what would happen if the index doesn't exist?
     match arr.get(index_to_access) {
         Option::Some(x) => {
             *x.unbox()

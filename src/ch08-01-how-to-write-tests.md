@@ -8,7 +8,7 @@ Tests are Cairo functions that verify that the non-test code is functioning in t
 - Run the code you want to test.
 - Assert the results are what you expect.
 
-Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the `test` attribute, the `assert` function, and and the `should_panic` attribute.
+Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the `test` attribute, the `assert` function, and the `should_panic` attribute.
 
 ### The Anatomy of a Test Function
 

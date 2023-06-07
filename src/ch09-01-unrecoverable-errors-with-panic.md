@@ -2,7 +2,7 @@
 
 In Cairo, unexpected issues may arise during program execution, resulting in runtime errors. While the panic function from the core library doesn't provide a resolution for these errors, it does acknowledge their occurrence and terminates the program. There are two primary ways that a panic can be triggered in Cairo: inadvertently, through actions causing the code to panic (e.g., accessing an array beyond its bounds), or deliberately, by invoking the panic function.
 
-When a panic occurs, it leads to an abrupt termination of the program. The `panic` function take an array as argument, which can be used to provide an error message and performs an unwind process where all variables are dropped and dictionaries squashed to ensure the soundness of the program to safely terminate the execution.
+When a panic occurs, it leads to an abrupt termination of the program. The `panic` function takes an array as argument, which can be used to provide an error message and performs an unwind process where all variables are dropped and dictionaries squashed to ensure the soundness of the program to safely terminate the execution.
 
 Here is how we can `panic` from inside a program and return the error code `2`:
 
