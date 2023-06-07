@@ -86,6 +86,9 @@
   - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
     - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+  - [Security Considerations](./ch99-03-00-security-considerations.md)
+    - [Recommendations](./ch99-03-01-recommendations.md)
+    - [Pitfalls](./ch99-03-02-pitfalls.md)
 
 - [Appendix](appendix-00.md)
   - [A - Keywords](appendix-01-keywords.md)
