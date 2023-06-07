@@ -33,4 +33,3 @@ sudo docker run --rm \
      --entrypoint sh \
      "$STARKNET_CAIRO_IMAGE" \
      /cairo/cairo_programs_verifier.sh true
-

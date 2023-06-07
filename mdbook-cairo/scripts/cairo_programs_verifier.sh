@@ -37,11 +37,13 @@ function run_cairo_checks() {
 
         if [ $exit_code -ne 0 ]; then
             err="$(cat output/$prog.err)"
+            out="$(cat output/$prog.out)"
             error_count=$((error_count+1))
 
             if [ "$IS_RUN_LOCALLY" = true ]; then
                 echo -ne "---- ${RED}./book/cairo/cairo-programs/$path/${prog}${NC} ----\r\n"
-                echo "$err"
+                echo -ne "${RED}Error: $err${NC}\n"
+                echo "Output: $out"
             else
                 echo ":x: **$prog**"
                 echo "<pre>$err</pre>"
@@ -50,35 +52,41 @@ function run_cairo_checks() {
         fi
     done
 
+    if [ "$IS_RUN_LOCALLY" = true ]; then # remove last line
+        echo -ne "                  \r\n"
+    fi
     cd ..
     return $error_count
 }
 
-# compilable_error=$(run_cairo_checks "compilable" "cairo-compile" "compilation")
-# runnable_error=$(run_cairo_checks "runnable" "cairo-run --available-gas=20000000" "run")
-# testable_error=$(run_cairo_checks "testable" "cairo-test" "test")
-run_cairo_checks "contracts" "starknet-compile" "contract"
+run_cairo_checks "compilable" "cairo-compile" "(1/5) compilation"
+compilable_error=$?
+run_cairo_checks "runnable" "cairo-run --available-gas=20000000" "(2/5) execution"
+runnable_error=$?
+run_cairo_checks "testable" "cairo-test" "(3/5) tests"
+testable_error=$?
+run_cairo_checks "contracts" "starknet-compile" "(4/5) Starknet contracts"
 contract_error=$?
-# format_error=$(run_cairo_checks "format" "cairo-format --check --print-parsing-errors" "format")
+run_cairo_checks "formats" "cairo-format --check --print-parsing-errors" "(5/5) Format"
+format_error=$?
 
-#has_error=$((has_compilable_error + has_runnable_error + has_testable_error + has_contract_error + has_format_error))
-has_error=$((contract_error))
+has_error=$((compilable_error + runnable_error + testable_error + contract_error + format_error))
 
 function print_total() {
     local section="$1"
     local error_count="$2"
-    echo -e "$([ $contract_error -eq 0 ] && echo $GREEN || echo $RED)$section: $error_count${NC}"
+    printf "$([ $error_count -eq 0 ] && echo $GREEN || echo $RED)%-25s %s\n${NC}" "$section:" "$error_count"
 }
 
 echo "---"
 echo ""
-echo "Summary:"
+echo "Summary"
 echo ""
-# echo "Compilable: $compilable_error"
-# echo "Runnable: $runnable_error"
-# echo "Test: $testable_error"
-print_total "Contract" $contract_error
-# echo "Format: $format_error"
+print_total "Compilation" $compilable_error
+print_total "Execution" $runnable_error
+print_total "Tests" $testable_error
+print_total "Starknet contracts" $contract_error
+print_total "Format" $format_error
 echo ""
 print_total "Total" $has_error
 echo ""

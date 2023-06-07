@@ -150,8 +150,10 @@ fn process_chapter(output_dir: &Path, prefix: &str, content: &str) {
                     let is_contract = text.contains(CODE_BLOCK_IS_CONTRACT);
 
                     if is_contract {
-                        // output to contracts directory
-                        write_to_file(&output_dir.join(CONTRACTS_DIR), prefix, &text, program_counter)
+                        if !tag_does_not_compile {
+                            // output to contracts directory
+                            write_to_file(&output_dir.join(CONTRACTS_DIR), prefix, &text, program_counter)
+                        }
                     } else {
                         let should_be_runnable = text.contains(CODE_BLOCK_IS_RUNNABLE);
                         if !tag_does_not_run && should_be_runnable {
