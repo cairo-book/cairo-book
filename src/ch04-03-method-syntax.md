@@ -45,7 +45,7 @@ fn main() {
 <span class="caption">Listing 4-13: Defining an `area` method to use on the
 `Rectangle` </span>
 
-To define the function within the context of `Rectangle`, we start by definining a `trait`
+To define the function within the context of `Rectangle`, we start by defining a `trait`
 block with the signature of the method that we want to implement. Traits are not linked to
 a specific type; only the `self` parameter of the method defines which type it can be used
 with. Then, we define an `impl` (implementation) block for `RectangleTrait`, that defines
