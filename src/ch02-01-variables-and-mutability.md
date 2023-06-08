@@ -17,13 +17,8 @@ code with the following code, which won’t compile just yet:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-use debug::PrintTrait;
-fn main() {
-    let x = 5;
-    x.print();
-    x = 6;
-    x.print();
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-01-variables-are-immutable.cairo}}
+
 ```
 
 Save and run the program using `cairo-run src/lib.cairo`. You should receive an error message
@@ -76,13 +71,7 @@ For example, let’s change _src/lib.cairo_ to the following:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-use debug::PrintTrait;
-fn main() {
-    let mut x = 5;
-    x.print();
-    x = 6;
-    x.print();
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-02-adding-mut.cairo}}
 ```
 
 When we run the program now, we get this:
@@ -153,19 +142,8 @@ use of the `let` keyword as follows:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```swift
-use debug::PrintTrait;
-fn main() {
-    let x = 5;
-    let x = x + 1;
-    {
-        let x = x * 2;
-        'Inner scope x value is:'.print();
-        x.print()
-    }
-    'Outer scope x value is:'.print();
-    x.print();
-}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no-listing-03-shadowing.cairo}}
 ```
 
 This program first binds `x` to a value of `5`. Then it creates a new variable
@@ -200,19 +178,12 @@ Another distinction between `mut` and shadowing is that when we use the `let` ke
 we are effectively creating a new variable, which allows us to change the type of the
 value while reusing the same name. As mentioned before, variable shadowing and mutable variables
 are equivalent at the lower level.
-The only difference is that by shadowing a variable, the compiler will not complain 
+The only difference is that by shadowing a variable, the compiler will not complain
 if you change its type. For example, say our program performs a type conversion between the
 `u64` and `felt252` types.
 
 ```rust
-use debug::PrintTrait;
-use traits::Into;
-fn main() {
-    let x = 2;
-    x.print();
-    let x: felt252 = x.into(); // converts x to a felt, type annotation is required.
-    x.print()
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-04-shadowing-different-type.cairo}}
 ```
 
 The first `x` variable has a `u64` type while the second `x` variable has a `felt252` type.
@@ -221,14 +192,7 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 `mut` for this, as shown here, we’ll get a compile-time error:
 
 ```rust,does_not_compile
-use debug::PrintTrait;
-use traits::Into;
-fn main() {
-    let mut x = 2;
-    x.print();
-    x = x.into();
-    x.print()
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-05-mut-different-type.cairo}}
 ```
 
 The error says we were expecting a `u64` (the original type) but we got a different type:
