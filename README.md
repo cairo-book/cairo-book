@@ -65,10 +65,11 @@ To work with translations, those are the steps to update the translated content:
 
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
 
-#### For non-developer translator
-If you can't set up the environment independently (or don't want to do it), and wish to initiate a new translation for your language, consider the following options:
-- Just ask your progammer friend generate a `.po` file of your language for you.
-- Otherwise, execute the command `./new_language.sh xx` (replace `xx` with your language code). This method can generate a `.po` file and almost doesn't need you install anything by yourself. Only for Linux and MacOS right now.
+#### Initiate a new translation for your language
+If you wish to initiate a new translation for your language without run a local server, consider the following tips:
+- Execute the command `./translations.sh new xx` (replace `xx` with your language code). This method can generate the `xx.po` file of your language for you.
+- For update your `xx.po` file, executing the command `./translations.sh xx` (replace `xx` with your language code), as mentioned in the previous chapter.
+- If the `xx.po` file already exist(which means you are not initiate a new translation), you should not run this command.
 
 ### Work locally (Cairo programs verification)
 
@@ -82,7 +83,7 @@ The mdbook-cairo backend is working as following:
    number of the `fn main()` found in the chapter.
 4. If you have a code block with a `fn main()` function that you know does not compile,
    you can indicate it by adding the `does_not_compile` attribute to the code block, like this:
-   
+
    ````
    ```rust,does_not_compile
    fn main() {
@@ -94,7 +95,7 @@ The mdbook-cairo backend is working as following:
    but will not be extracted into a Cairo program.
 
 5. Alternatively, if you want to disable the format check using `cairo-format`,
-   you can add the `ignore_format` attribute to the code block, like this:   
+   you can add the `ignore_format` attribute to the code block, like this:
 
    ````
    ```rust,ignore_format
