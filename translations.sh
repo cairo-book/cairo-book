@@ -21,7 +21,7 @@ function serve_book() {
     done
 
     # Serving the language, if any.
-    if [ $# -eq 0 ]
+    if [ -z "$LANG" ]
     then
         echo ""
         echo "No input language, stop after build."
@@ -33,6 +33,17 @@ function serve_book() {
 }
 
 function build_new_language() {
+    LANG=$1
+    FILE=po/$LANG.po
+
+    # Serving the language, if any.
+    if [ -z "$LANG" ]
+    then
+        echo ""
+        echo "No input language, stop after build."
+        exit 0
+    fi
+
     # Build a new LANGUAGE .po file if not exist .
     if test -f "$FILE"; then
         echo ""
@@ -46,8 +57,7 @@ function build_new_language() {
 if [ "$PARAM1" == "new" ]; then
     # The first parameter is 'new', PARAM2 is set to $LANG.
     LANG=$PARAM2
-    FILE=po/$LANG.po
-    build_new_language "$FILE"
+    build_new_language "$LANG"
 
 else
     # The first parameter is not 'new', PARAM1 is set to $LANG.
