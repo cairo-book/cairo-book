@@ -111,10 +111,8 @@ Flow”][control-flow] section.
 Cairo doesn't have a native type for strings, but you can store characters forming what we call a "short string" inside `felt252`s. A short string has a max length of 31 chars. This is to ensure that it can fit in a single felt (a felt is 252 bits, one ASCII char is 8 bits).
 Here are some examples of declaring values by putting them between single quotes:
 
-<!-- TODO make code snippets expandable -->
-
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-10-short-string-type.cairo:2:3}}
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no-listing-10-short-string-type.cairo:2:3}}
 ```
 
 ### Type casting
