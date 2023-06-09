@@ -7,13 +7,8 @@ Keep in mind that Cairo is a _statically typed_ language, which means that it
 must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases
 when many types are possible, we can use a cast method where we specify the desired output type.
 
-```Rust
-use traits::TryInto;
-use option::OptionTrait;
-fn main() {
-    let x: felt252 = 3;
-    let y: u32 = x.try_into().unwrap();
-}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no-listing-06-data-types.cairo}}
 ```
 
 You’ll see different type annotations for other data types.
@@ -62,13 +57,7 @@ Each variant has an explicit size. Note that for now, the `usize` type is just a
 As variables are unsigned, they can't contain a negative number. This code will cause the program to panic:
 
 ```rust
-fn sub_u8s(x: u8, y: u8) -> u8 {
-    x - y
-}
-
-fn main() {
-    sub_u8s(1, 3);
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-07-integer-types.cairo}}
 ```
 
 You can write integer literals in any of the forms shown in Table 3-2. Note
@@ -95,23 +84,7 @@ division truncates toward zero to the nearest integer. The following code shows
 how you’d use each numeric operation in a `let` statement:
 
 ```rust
-fn main() {
-    // addition
-    let sum = 5_u128 + 10_u128;
-
-    // subtraction
-    let difference = 95_u128 - 4_u128;
-
-    // multiplication
-    let product = 4_u128 * 30_u128;
-
-    // division
-    let quotient = 56_u128 / 32_u128; //result is 1
-    let quotient = 64_u128 / 32_u128; //result is 2
-
-    // remainder
-    let remainder = 43_u128 % 5_u128; // result is 3
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-08-numeric-operations.cairo}}
 ```
 
 Each expression in these statements uses a mathematical operator and evaluates
@@ -126,11 +99,7 @@ values: `true` and `false`. Booleans are one felt252 in size. The Boolean type i
 Cairo is specified using `bool`. For example:
 
 ```rust
-fn main() {
-    let t = true;
-
-    let f: bool = false; // with explicit type annotation
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-09-boolean-type.cairo}}
 ```
 
 The main way to use Boolean values is through conditionals, such as an `if`
@@ -143,8 +112,7 @@ Cairo doesn't have a native type for strings, but you can store characters formi
 Here are some examples of declaring values by putting them between single quotes:
 
 ```rust
-let my_first_char = 'C';
-let my_first_string = 'Hello world';
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no-listing-10-short-string-type.cairo:2:3}}
 ```
 
 ### Type casting
@@ -157,23 +125,8 @@ On the other hand, the `into` method can be used for type casting when success i
 
 To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
 
-```rust,ignore_format
-use traits::TryInto;
-use traits::Into;
-use option::OptionTrait;
-
-fn main() {
-    let my_felt252 = 10;
-    let my_u8: u8 = my_felt252.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type
-    let my_u16: u16 = my_u8.into();
-    let my_u32: u32 = my_u16.into();
-    let my_u64: u64 = my_u32.into();
-    let my_u128: u128 = my_u64.into();
-    let my_u256: u256 = my_felt252.into(); // As a felt252 is smaller than a u256, we can use the into() method
-    let my_usize: usize = my_felt252.try_into().unwrap();
-    let my_other_felt252: felt252 = my_u8.into();
-    let my_third_felt252: felt252 = my_u16.into();
-}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no-listing-11-type-casting.cairo}}
 ```
 
 ### The Tuple Type
@@ -188,9 +141,7 @@ different values in the tuple don’t have to be the same. We’ve added optiona
 type annotations in this example:
 
 ```rust
-fn main() {
-    let tup: (u32, u64, bool) = (10, 20, true);
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-12-tuple-type.cairo}}
 ```
 
 The variable `tup` binds to the entire tuple because a tuple is considered a
@@ -198,16 +149,7 @@ single compound element. To get the individual values out of a tuple, we can
 use pattern matching to destructure a tuple value, like this:
 
 ```rust
-use debug::PrintTrait;
-fn main() {
-    let tup = (500, 6, true);
-
-    let (x, y, z) = tup;
-
-    if y == 6 {
-        'y is six!'.print();
-    }
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-13-tuple-destructuration.cairo}}
 ```
 
 This program first creates a tuple and binds it to the variable `tup`. It then
@@ -216,13 +158,11 @@ variables, `x`, `y`, and `z`. This is called _destructuring_ because it breaks
 the single tuple into three parts. Finally, the program prints `y is six` as the value of
 `y` is `6`.
 
-We can also declare the tuple with value and name at the same time.
+We can also declare the tuple with value and types at the same time.
 For example:
 
 ```rust
-fn main() {
-    let (x, y): (felt252, felt252) = (2, 3);
-}
+{{#include ../listings/ch02-common-programming-concepts/no-listing-14-tuple-types.cairo}}
 ```
 
 ### The unit type ()
