@@ -91,7 +91,7 @@ To learn more about traits, see [Traits in Cairo](ch07-02-traits-in-cairo.md).
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,ignore_format
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_10_print_rectangle.cairo}}
+{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_10_print_rectangle.cairo}}
 ```
 
 <span class="caption">Listing 4-10: Implementing the `PrintTrait` trait on `Rectangle`</span>

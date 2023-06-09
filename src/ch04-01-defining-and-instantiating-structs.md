@@ -7,7 +7,7 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 <span class="filename">Filename: structs.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct.cairo:1:7}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct.cairo:user}}
 ```
 
 <span class="caption">Listing 4-1: A `User` struct definition</span>
@@ -20,7 +20,7 @@ For example, we can declare a particular user as shown in Listing 4-2.
 <span class="filename">Filename: structs.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct.cairo:all}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct.cairo:all}}
 ```
 
 <span class="caption">Listing 4-2: Creating an instance of the `User` struct</span>
