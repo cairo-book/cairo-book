@@ -8,7 +8,7 @@ must know the types of all variables at compile time. The compiler can usually i
 when many types are possible, we can use a cast method where we specify the desired output type.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-06-data-types.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_06_data_types.cairo}}
 ```
 
 You’ll see different type annotations for other data types.
@@ -57,7 +57,7 @@ Each variant has an explicit size. Note that for now, the `usize` type is just a
 As variables are unsigned, they can't contain a negative number. This code will cause the program to panic:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-07-integer-types.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_07_integer_types.cairo}}
 ```
 
 You can write integer literals in any of the forms shown in Table 3-2. Note
@@ -84,7 +84,7 @@ division truncates toward zero to the nearest integer. The following code shows
 how you’d use each numeric operation in a `let` statement:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-08-numeric-operations.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_08_numeric_operations.cairo}}
 ```
 
 Each expression in these statements uses a mathematical operator and evaluates
@@ -99,7 +99,7 @@ values: `true` and `false`. Booleans are one felt252 in size. The Boolean type i
 Cairo is specified using `bool`. For example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-09-boolean-type.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_09_boolean_type.cairo}}
 ```
 
 The main way to use Boolean values is through conditionals, such as an `if`
@@ -112,7 +112,7 @@ Cairo doesn't have a native type for strings, but you can store characters formi
 Here are some examples of declaring values by putting them between single quotes:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no-listing-10-short-string-type.cairo:2:3}}
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type.cairo:2:3}}
 ```
 
 ### Type casting
@@ -126,7 +126,7 @@ On the other hand, the `into` method can be used for type casting when success i
 To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-11-type-casting.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_casting.cairo}}
 ```
 
 ### The Tuple Type
@@ -141,7 +141,7 @@ different values in the tuple don’t have to be the same. We’ve added optiona
 type annotations in this example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-12-tuple-type.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_12_tuple_type.cairo}}
 ```
 
 The variable `tup` binds to the entire tuple because a tuple is considered a
@@ -149,7 +149,7 @@ single compound element. To get the individual values out of a tuple, we can
 use pattern matching to destructure a tuple value, like this:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-13-tuple-destructuration.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_13_tuple_destructuration.cairo}}
 ```
 
 This program first creates a tuple and binds it to the variable `tup`. It then
@@ -162,7 +162,7 @@ We can also declare the tuple with value and types at the same time.
 For example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-14-tuple-types.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types.cairo}}
 ```
 
 ### The unit type ()

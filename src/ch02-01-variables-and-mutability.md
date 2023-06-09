@@ -17,7 +17,7 @@ code with the following code, which won’t compile just yet:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no-listing-01-variables-are-immutable.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable.cairo}}
 
 ```
 
@@ -71,7 +71,7 @@ For example, let’s change _src/lib.cairo_ to the following:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-02-adding-mut.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_02_adding_mut.cairo}}
 ```
 
 When we run the program now, we get this:
@@ -143,7 +143,7 @@ use of the `let` keyword as follows:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-03-shadowing.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_03_shadowing.cairo}}
 ```
 
 This program first binds `x` to a value of `5`. Then it creates a new variable
@@ -183,7 +183,7 @@ if you change its type. For example, say our program performs a type conversion 
 `u64` and `felt252` types.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no-listing-04-shadowing-different-type.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_04_shadowing_different_type.cairo}}
 ```
 
 The first `x` variable has a `u64` type while the second `x` variable has a `felt252` type.
@@ -192,7 +192,7 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 `mut` for this, as shown here, we’ll get a compile-time error:
 
 ```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no-listing-05-mut-different-type.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type.cairo}}
 ```
 
 The error says we were expecting a `u64` (the original type) but we got a different type:
