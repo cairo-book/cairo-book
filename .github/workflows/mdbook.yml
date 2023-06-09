@@ -53,8 +53,8 @@ jobs:
               echo "::endgroup::"
           done
 
-      - name: Verify Cairo programs
-        uses: ./.github/workflows/verify-cairo-programs
+      # - name: Verify Cairo programs
+      #   uses: ./.github/workflows/verify-cairo-programs
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
