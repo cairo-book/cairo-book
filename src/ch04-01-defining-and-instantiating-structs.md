@@ -7,13 +7,7 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 <span class="filename">Filename: structs.cairo</span>
 
 ```rust
-#[derive(Copy, Drop)]
-struct User {
-    active: bool,
-    username: felt252,
-    email: felt252,
-    sign_in_count: u64,
-}
+{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct.cairo:1:7}}
 ```
 
 <span class="caption">Listing 4-1: A `User` struct definition</span>
@@ -26,18 +20,7 @@ For example, we can declare a particular user as shown in Listing 4-2.
 <span class="filename">Filename: structs.cairo</span>
 
 ```rust
-#[derive(Copy, Drop)]
-struct User {
-    active: bool,
-    username: felt252,
-    email: felt252,
-    sign_in_count: u64,
-}
-fn main() {
-    let user1 = User {
-        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1
-    };
-}
+{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct.cairo:all}}
 ```
 
 <span class="caption">Listing 4-2: Creating an instance of the `User` struct</span>
@@ -46,13 +29,8 @@ To get a specific value from a struct, we use dot notation. For example, to acce
 
 <span class="filename">Filename: structs.cairo</span>
 
-```rust,does_not_compile
-fn main() {
-    let mut user1 = User {
-        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1
-    };
-    user1.email = 'anotheremail@example.com';
-}
+```rust
+{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct.cairo:main}}
 ```
 
 <span class="caption">Listing 4-3: Changing the value in the email field of a `User` instance</span>
@@ -66,14 +44,7 @@ Listing 4-4 shows a `build_user` function that returns a `User` instance with th
 <span class="filename">Filename: structs.cairo</span>
 
 ```rust
-fn build_user(email: felt252, username: felt252) -> User {
-    User {
-        active: true,
-        username: username,
-        email: email,
-        sign_in_count: 1,
-    }
-}
+{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct.cairo:build_user}}
 ```
 
 <span class="caption">Listing 4-4: A `build_user` function that takes an email and username and returns a `User` instance</span>
@@ -87,14 +58,7 @@ Because the parameter names and the struct field names are exactly the same in L
 <span class="filename">Filename: structs.cairo</span>
 
 ```rust
-fn build_user(email: felt252, username: felt252) -> User {
-    User {
-        active: true,
-        username,
-        email,
-        sign_in_count: 1,
-    }
-}
+{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct.cairo:build_user2}}
 ```
 
 <span class="caption">Listing 4-5: A `build_user` function that uses field init shorthand because the `username` and `email` parameters have the same name as struct fields</span>
