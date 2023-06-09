@@ -68,6 +68,12 @@ To work with translations, those are the steps to update the translated content:
 
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
 
+#### Initiate a new translation for your language
+If you wish to initiate a new translation for your language without running a local server, consider the following tips:
+- Execute the command `./translations.sh new xx` (replace `xx` with your language code). This method can generate the `xx.po` file of your language for you.
+- To update your `xx.po` file, execute the command `./translations.sh xx` (replace `xx` with your language code), as mentioned in the previous chapter.
+- If the `xx.po` file already exists (which means you are not initiating a new translation), you should not run this command.
+
 ### Work locally (Cairo programs verification)
 
 The current book has a mdbook backend to extract Cairo programs from the markdown sources. Currently, for each program it test two things: if it compiles and if it adheres to the `cairo-format` coding style. You can run this locally and test if a Cairo program you have written in the book passes these tests.
