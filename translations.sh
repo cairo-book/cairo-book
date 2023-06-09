@@ -34,7 +34,7 @@ function serve_book() {
 
 function build_new_language() {
     LANG=$1
-    FILE=po/$LANG.po
+    FILE=po/"$LANG".po
 
     # Serving the language, if any.
     if [ -z "$LANG" ]
@@ -47,9 +47,9 @@ function build_new_language() {
     # Build a new LANGUAGE .po file if not exist .
     if test -f "$FILE"; then
         echo ""
-        echo "File $FILE already exists. Ensure you're initiating a new translation. Alternatively, use 'translations.sh' to serve an existing one."
+        echo "File $FILE already exists. Ensure you're initiating a new translation. Alternatively, use './transaction.sh $LANG' to serve an existing one."
     else
-        msginit -i po/messages.pot -l $LANG -o po/$LANG.po
+        msginit -i po/messages.pot -l "$LANG" -o po/"$LANG".po
     fi
 }
 
