@@ -23,22 +23,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,ignore_format
-use array::ArrayTrait;
-use debug::PrintTrait;
-
-fn main() {
-    let mut arr1 = ArrayTrait::<u128>::new();
-    let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time
-    arr1.append(1); // Mutate `arr1` by appending a value
-    let first_length = calculate_length(first_snapshot); // Calculate the length of the array when the snapshot was taken
-    let second_length = calculate_length(@arr1); // Calculate the current length of the array
-    first_length.print();
-    second_length.print();
-}
-
-fn calculate_length(arr: @Array<u128>) -> usize {
-    arr.len()
-}
+{{#include ../listings/ch03-understanding-ownership/no_listing_09_snapshots.cairo}}
 ```
 
 > Note: It is only possible to call the `len()` method on an array snapshot because it is defined as such in the `ArrayTrait` trait. If you try to call a method that is not defined for snapshots on a snapshot, you will get a compilation error. However, you can call methods expecting a snapshot on non-snapshot types.
@@ -59,8 +44,7 @@ that we pass `@arr1` into `calculate_length` and, in its definition, we take `@A
 Let’s take a closer look at the function call here:
 
 ```rust
-let mut arr1 = ArrayTrait::<u128>::new();
-let second_length = calculate_length(@arr1); // Calculate the current length of the array
+{{#rustdoc_include ../listings/ch03-understanding-ownership/no_listing_09_snapshots.cairo:11}}
 ```
 
 The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value, the value it points to cannot be modified through the snapshot, and the value it refers to will not be dropped once the snapshot stops being used.
@@ -68,7 +52,9 @@ The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a s
 Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:
 
 ```rust
-fn calculate_length(array_snapshot: @Array<u128>) -> usize { // array_snapshot is a snapshot of an Array
+fn calculate_length(
+    array_snapshot: @Array<u128>
+) -> usize { // array_snapshot is a snapshot of an Array
     array_snapshot.len()
 } // Here, array_snapshot goes out of scope and is dropped.
 // However, because it is only a view of what the original array `arr` contains, the original `arr` can still be used.
@@ -81,27 +67,7 @@ Snapshots can be converted back into regular values using the `desnap` operator 
 The snapshot type is always copyable and droppable, so that you can use it multiple times without worrying about ownership transfers.
 
 ```rust
-use debug::PrintTrait;
-
-#[derive(Copy, Drop)]
-struct Rectangle {
-    height: u64,
-    width: u64,
-}
-
-fn main() {
-    let rec = Rectangle { height: 3, width: 10 };
-    let area = calculate_area(@rec);
-    area.print();
-}
-
-fn calculate_area(rec: @Rectangle) -> u64 {
-    // As rec is a snapshot to a Rectangle, its fields are also snapshots of the fields types.
-    // We need to transform the snapshots back into values using the desnap operator `*`.
-    // This is only possible if the type is copyable, which is the case for u64.
-    // Here, `*` is used for both multiplying the height and width and for desnapping the snapshots.
-    *rec.height * *rec.width
-}
+{{#include ../listings/ch03-understanding-ownership/no_listing_10_desnap.cairo}}
 ```
 
 But, what happens if we try to modify something we’re passing as snapshot? Try the code in
@@ -110,22 +76,7 @@ Listing 3-6. Spoiler alert: it doesn’t work!
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-#[derive(Copy, Drop)]
-struct Rectangle {
-    height: u64,
-    width: u64,
-}
-
-fn main() {
-    let rec = Rectangle { height: 3, width: 10 };
-    flip(@rec);
-}
-
-fn flip(rec: @Rectangle) {
-    let temp = rec.height;
-    rec.height = rec.width;
-    rec.width = temp;
-}
+{{#include ../listings/ch03-understanding-ownership/listing_03_06.cairo}}
 ```
 
 <span class="caption">Listing 3-6: Attempting to modify a snapshot value</span>
@@ -151,25 +102,7 @@ In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modif
 In Listing 3-7, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function.
 
 ```rust
-use debug::PrintTrait;
-#[derive(Copy, Drop)]
-struct Rectangle {
-    height: u64,
-    width: u64,
-}
-
-fn main() {
-    let mut rec = Rectangle { height: 3, width: 10 };
-    flip(ref rec);
-    rec.height.print();
-    rec.width.print();
-}
-
-fn flip(ref rec: Rectangle) {
-    let temp = rec.height;
-    rec.height = rec.width;
-    rec.width = temp;
-}
+{{#include ../listings/ch03-understanding-ownership/listing_03_07.cairo}}
 ```
 
 <span class="caption">Listing 3-7: Use of a mutable reference to modify a value</span>
