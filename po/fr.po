@@ -719,6 +719,27 @@ msgid ""
 "cargo build --all --release\n"
 "```"
 msgstr ""
+"```bash\n"
+"# Commencez par définir la variable d'environnement CAIRO_ROOT\n"
+"export CAIRO_ROOT=\"${HOME}/.cairo\"\n"
+"\n"
+"# Créez le dossier .cairo s'il n'existe pas encore\n"
+"mkdir $CAIRO_ROOT\n"
+"\n"
+"# Clonez le compilateur Cairo dans $CAIRO_ROOT (répertoire par défaut)\n"
+"cd $CAIRO_ROOT && git clone git@github.com:starkware-libs/cairo.git .\n"
+"\n"
+"# OPTIONNEL/RECOMMANDÉ: Si vous souhaitez installer une version spécifique du compilateur\n"
+"# Récupérez tous les tags (versions)\n"
+"git fetch --all --tags\n"
+"# Affichez les tags (vous pouvez également le faire dans le dépôt du compilateur Cairo)\n"
+"git describe --tags `git rev-list --tags`\n"
+"# Sélectionnez la version que vous souhaitez\n"
+"git checkout tags/v1.0.0\n"
+"\n"
+"# Générez les binaires de la version finale\n"
+"cargo build --all --release\n"
+"```"
 
 #: src/ch01-01-installation.md:163
 msgid ". "
@@ -726,7 +747,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:165
 msgid "**NOTE: Keeping Cairo up to date**"
-msgstr ""
+msgstr "**NOTE : Garder Cairo à jour"
 
 #: src/ch01-01-installation.md:167
 msgid ""
@@ -734,6 +755,9 @@ msgid ""
 "do\n"
 "is pull the latest changes and rebuild as follows:"
 msgstr ""
+"Maintenant que votre compilateur Cairo se trouve dans un dépôt cloné, il vous suffit"
+" de\n"
+"pull les dernières modifications et reconstruire comme suit :"
 
 #: src/ch01-01-installation.md:170
 msgid ""
@@ -831,7 +855,7 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:15
 msgid "### Creating a Project Directory"
-msgstr ""
+msgstr "### Créer un répertoire de projet"
 
 #: src/ch01-02-hello-world.md:17
 msgid ""
@@ -843,6 +867,13 @@ msgid ""
 "keeping all\n"
 "your projects there."
 msgstr ""
+"Vous commencerez par créer un répertoire pour stocker votre code Cairo. Peu "
+"importe\n"
+"où se trouve votre code pour Cairo, mais pour les exercices et projets de ce "
+"livre,\n"
+"nous vous suggérons de créer un répertoire nommé _cairo_projects_ dans votre "
+"répertoire personnel\n"
+"et d'y conserver tous vos projets."
 
 #: src/ch01-02-hello-world.md:22
 msgid ""
@@ -851,10 +882,14 @@ msgid ""
 "and a directory for the “Hello, world!” project within the _cairo_projects_ "
 "directory."
 msgstr ""
+"Ouvrez un terminal et saisissez les commandes suivantes pour créer un "
+"répertoire _cairo_projects_\n"
+"et un répertoire pour le projet "Hello, world!" dans le répertoire "
+"_cairo_projects_.\n"
 
 #: src/ch01-02-hello-world.md:25
 msgid "For Linux, macOS, and PowerShell on Windows, enter this:"
-msgstr ""
+msgstr "Pour Linux, macOS, et PowerShell sur Windows, entrez ceci :"
 
 #: src/ch01-02-hello-world.md:27
 msgid ""
@@ -868,7 +903,7 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:34
 msgid "For Windows CMD, enter this:"
-msgstr ""
+msgstr "Pour l'invite de commande Windows, entrez ceci :"
 
 #: src/ch01-02-hello-world.md:36
 msgid ""
@@ -882,7 +917,7 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:43
 msgid "### Writing and Running a Cairo Program"
-msgstr ""
+msgstr "### Écrire et exécuter un programme Cairo"
 
 #: src/ch01-02-hello-world.md:45
 msgid ""
@@ -893,12 +928,22 @@ msgid ""
 "convention is to use an underscore to separate them. For example, use\n"
 "_hello_world.cairo_ rather than _helloworld.cairo_."
 msgstr ""
+"Ensuite, créez un nouveau fichier source et appelez-le _main.cairo_. Les "
+"fichiers Cairo se terminent toujours\n"
+"par l'extension _.cairo_. Si vous utilisez plus d'un mot dans votre nom de "
+"fichier, la\n"
+"convention est d'utiliser un tiret bas (_underscore_) pour les séparer. Par "
+"exemple, utilisez\n"
+"_hello_world.cairo_ plutôt que _helloworld.cairo_."
+
 
 #: src/ch01-02-hello-world.md:50
 msgid ""
 "Now open the _main.cairo_ file you just created and enter the code in "
 "Listing 1-1."
 msgstr ""
+"Maintenant, ouvrez le fichier _main.cairo_ que vous venez de créer et saisissez le code "
+"figurant dans la liste 1-1."
 
 #: src/ch01-02-hello-world.md:52 src/ch02-05-control-flow.md:9
 #: src/ch02-05-control-flow.md:58 src/ch02-05-control-flow.md:90
@@ -927,6 +972,9 @@ msgid ""
 "_~/cairo_projects/hello_world_ directory. Enter the following\n"
 "commands to compile and run the file:"
 msgstr ""
+"Sauvegardez le fichier et retournez à la fenêtre de terminal dans le répertoire\n"
+"_~/cairo_projects/hello_world_. Saisissez les commandes suivantes\n"
+"pour compiler et exécuter le fichier :"
 
 #: src/ch01-02-hello-world.md:67
 msgid ""
@@ -942,6 +990,9 @@ msgid ""
 "to\n"
 "the terminal."
 msgstr ""
+"Indépendamment de votre système d'exploitation, la chaîne `Hello, world!` "
+"devrait s'afficher\n"
+"dans le terminal."
 
 #: src/ch01-02-hello-world.md:75
 msgid ""
@@ -949,10 +1000,13 @@ msgid ""
 "Cairo\n"
 "program. That makes you a Cairo programmer—welcome!"
 msgstr ""
+"Si `Hello, world!` s'est affiché, félicitations ! Vous avez officiellement écrit un"
+"programme Cairo.\n"
+"Cela fait de vous un programmeur Cairo - bienvenue !"
 
 #: src/ch01-02-hello-world.md:78
 msgid "### Anatomy of a Cairo Program"
-msgstr ""
+msgstr "### Anatomie d'un programme Cairo"
 
 #: src/ch01-02-hello-world.md:80
 msgid ""
@@ -960,6 +1014,9 @@ msgid ""
 "of\n"
 "the puzzle:"
 msgstr ""
+"Étudions ce programme « Hello, world! » en détail. Voici la première partie "
+"du\n"
+"puzzle :"
 
 #: src/ch01-02-hello-world.md:83
 msgid ""
@@ -980,6 +1037,13 @@ msgid ""
 "returns\n"
 "nothing. If there were parameters, they would go inside the parentheses `()`."
 msgstr ""
+"Ces lignes définissent une fonction appelée `main`. La fonction `main` est spéciale : "
+"elle\n"
+"est toujours le premier code exécuté dans chaque programme Cairo exécutable. Ici, "
+"la\n"
+"première ligne déclare une fonction appelée `main` sans paramètres et qui ne "
+"retourne\n"
+"rien. Si des paramètres existaient, ils seraient placés à l'intérieur des parenthèses `()`."
 
 #: src/ch01-02-hello-world.md:94
 msgid ""
@@ -989,6 +1053,11 @@ msgid ""
 "same\n"
 "line as the function declaration, adding one space in between."
 msgstr ""
+"Le corps de la fonction est enveloppé dans `{}`. Cairo nécessite des accolades autour "
+"de tous\n"
+"les corps de fonction. Il est de bon ton de placer l'accolade ouvrante sur "
+"la même\n"
+"ligne que la déclaration de fonction, en ajoutant un espace entre les deux."
 
 #: src/ch01-02-hello-world.md:98
 msgid ""
@@ -1002,6 +1071,13 @@ msgid ""
 "already be\n"
 "> installed on your computer!"
 msgstr ""
+"> Remarque : Si vous souhaitez respecter un style standard pour l'ensemble des projets Cairo, "
+"vous pouvez\n"
+"> utiliser l'outil de formatage automatique appelé `cairo-format` pour formater votre code dans un\n"
+"> style particulier (plus d'informations sur `cairo-format` dans\n"
+"> [Appendix B][devtools]). L'équipe Cairo a inclus cet outil\n"
+"> avec la distribution standard de Cairo, tout comme `cairo-run`, il devrait donc déjà être\n"
+"> installé sur votre ordinateur !"
 
 #: src/ch01-02-hello-world.md:105
 msgid ""
@@ -1011,10 +1087,15 @@ msgid ""
 "so, we gain the ability to use the `print()` method on data types that are "
 "compatible with printing."
 msgstr ""
+"Avant la déclaration de la fonction principale, la ligne `use debug::PrintTrait;` est "
+"responsable de l'importation d'un élément défini dans un autre module. Dans ce cas, "
+"nous importons l'élément `PrintTrait` de la bibliothèque principale de Cairo. En faisant "
+"cela, nous obtenons la possibilité d'utiliser la méthode `print()` sur les types de données "
+"compatibles avec l'impression."
 
 #: src/ch01-02-hello-world.md:107
 msgid "The body of the `main` function holds the following code:"
-msgstr ""
+msgstr "Le corps de la fonction `main` contient le code suivant :"
 
 #: src/ch01-02-hello-world.md:109
 msgid ""
@@ -1028,10 +1109,12 @@ msgid ""
 "This line does all the work in this little program: it prints text to the\n"
 "screen. There are four important details to notice here."
 msgstr ""
+"Cette ligne fait tout le travail dans ce petit programme : elle affiche du texte à l'\n"
+"écran. Il y a quatre détails importants à remarquer ici."
 
 #: src/ch01-02-hello-world.md:116
 msgid "First, Cairo style is to indent with four spaces, not a tab."
-msgstr ""
+msgstr "Premièrement, le style Cairo consiste à indenter avec quatre espaces, pas avec une tabulation."
 
 #: src/ch01-02-hello-world.md:118
 msgid ""
@@ -1043,6 +1126,13 @@ msgid ""
 "calling `Hello, world!'.print()`, we're calling the `print()` method of the "
 "`felt252` implementation of the `PrintTrait` trait."
 msgstr ""
+"Deuxièmement, la fonction `print()` appelée est une méthode du trait "
+"`PrintTrait`. Ce trait est importé de la bibliothèque de base de Cairo et il "
+"définit comment afficher les valeurs à l'écran pour différents types de données. Dans notre "
+"cas, notre texte est défini comme une \"short string\", qui est une chaîne ASCII "
+"pouvant s'adapter au type de données de base de Cairo, qui est le type `felt252`. En "
+"appelant `Hello, world!'.print()`, nous appelons la méthode `print()` "
+"de l'implémentation `felt252` du trait `PrintTrait`."
 
 #: src/ch01-02-hello-world.md:120
 msgid ""
@@ -1050,6 +1140,9 @@ msgid ""
 "as an argument\n"
 "to `print()`, and the short string is printed to the screen."
 msgstr ""
+"Troisièmement, vous voyez la chaîne courte `'Hello, world!'`. Nous passons cette chaîne courte "
+"comme argument\n"
+"à `print()`, et la chaîne courte est affichée à l'écran."
 
 #: src/ch01-02-hello-world.md:123
 msgid ""
@@ -1058,6 +1151,9 @@ msgid ""
 "code\n"
 "end with a semicolon."
 msgstr ""
+"Quatrièmement, nous terminons la ligne par un point-virgule (`;`), ce qui indique que cette\n"
+"expression est terminée et que la suivante est prête à commencer. La plupart des lignes de code Cairo\n"
+"se terminent par un point-virgule."
 
 #: src/ch01-02-hello-world.md:127
 msgid ""
@@ -1068,6 +1164,12 @@ msgid ""
 "write\n"
 "real-world Cairo programs."
 msgstr ""
+"Exécuter simplement avec `cairo-run` est utile pour les programmes simples, mais lorsque votre "
+"projet\n"
+"se développe, vous voudrez gérer toutes les options et faciliter le partage de votre\n"
+"code. Ensuite, nous vous présenterons l'outil Scarb, qui vous aidera à "
+"écrire\n"
+"des programmes Cairo réels."
 
 #: src/ch01-03-hello-scarb.md:1
 msgid "# Hello, Scarb"
@@ -1078,6 +1180,8 @@ msgid ""
 "Scarb is the Cairo package manager and heavily inspired by [Cargo](https://"
 "doc.rust-lang.org/cargo/), Rust’s build system and package manager."
 msgstr ""
+"Scarb est le gestionnaire de paquets Cairo et s'inspire largement de [Cargo](https://"
+"doc.rust-lang.org/cargo/), le système de construction et le gestionnaire de paquets de Rust."
 
 #: src/ch01-03-hello-scarb.md:5
 msgid ""
@@ -1085,6 +1189,9 @@ msgid ""
 "pure Cairo or Starknet contracts), downloading the libraries your code "
 "depends on, and building those libraries."
 msgstr ""
+"Scarb effectue de nombreuses tâches pour vous, telles que la construction de votre code (qu'il s'agisse "
+"de Cairo pur ou de contrats Starknet), le téléchargement des bibliothèques dont dépend votre code, "
+"et la construction de ces bibliothèques."
 
 #: src/ch01-03-hello-scarb.md:7
 msgid ""
@@ -1094,32 +1201,39 @@ msgid ""
 "programs, you’ll add dependencies, and if you start a project using Scarb, "
 "adding dependencies will be much easier to do."
 msgstr ""
+"Si nous devions construire le projet 'Hello, world!' en utilisant Scarb, seule la partie "
+"de Scarb qui gère la construction du code serait utilisée, car le programme "
+"n'a besoin d'aucune dépendance externe. À mesure que vous écrivez des programmes Cairo plus complexes, "
+"vous ajouterez des dépendances, et si vous démarrez un projet en utilisant Scarb, "
+"l'ajout de dépendances sera beaucoup plus facile à faire."
 
 #: src/ch01-03-hello-scarb.md:9
 msgid "Let's start by installing Scarb."
-msgstr ""
+msgstr "Commencons par installer Scarb"
 
 #: src/ch01-03-hello-scarb.md:11
 msgid "## Installing Scarb"
-msgstr ""
+msgstr "## Installer Scarb"
 
 #: src/ch01-03-hello-scarb.md:13
 msgid "### Requirements"
-msgstr ""
+msgstr "### Prérequis"
 
 #: src/ch01-03-hello-scarb.md:15
 msgid ""
 "Scarb requires a Git executable to be available in the `PATH` environment "
 "variable."
 msgstr ""
+"Scarb nécessite qu'un exécutable Git soit disponible dans la variable "
+"d'environnement `PATH`."
 
 #: src/ch01-03-hello-scarb.md:17
 msgid "### Installation"
-msgstr ""
+msgstr "### Installation"
 
 #: src/ch01-03-hello-scarb.md:19
 msgid "As for now, Scarb needs manual installation with the following steps:"
-msgstr ""
+msgstr "Pour le moment, Scarb nécessite une installation manuelle avec les étapes suivantes :"
 
 #: src/ch01-03-hello-scarb.md:21
 msgid ""
@@ -1147,22 +1261,46 @@ msgid ""
 "  cairo: 1.0.0-alpha.6\n"
 "  ```"
 msgstr ""
+"- Téléchargez l'archive de la version correspondant à votre système "
+"d'exploitation et à votre architecture de processeur depuis [les versions de Scarb sur GitHub](https://github.com/software-"
+"mansion/scarb/releases)\n"
+"- Extrayez-la dans l'emplacement où vous souhaitez installer Scarb, par exemple `~/scarb`\n"
+"- Ajoutez le chemin du répertoire `scarb/bin` à votre variable d'environnement `PATH`.\n"
+"\n"
+"  Cela dépend du shell que vous utilisez. Prenons l'exemple de [zsh]"
+"(https://ohmyz.sh/) et supposez que vous avez extrait Scarb dans `~/scarb` :\n"
+"\n"
+"  - Ouvrez le fichier `~/.zshrc` dans votre éditeur préféré\n"
+"  - Ajoutez la ligne suivante à la fin du fichier : `export PATH=\"$PATH:~/"
+"scarb/bin\"`\n"
+"\n"
+"- Vérifiez l'installation en exécutant la commande suivante dans une nouvelle session de terminal, cela devrait afficher les versions de Scarb et du langage Cairo, par exemple :\n"
+"\n"
+"  ```bash\n"
+"  $ scarb --version\n"
+"  scarb 0.1.0 (289137c24 2023-03-28)\n"
+"  cairo: 1.0.0-alpha.6\n"
+"  ```"
 
 #: src/ch01-03-hello-scarb.md:38
 msgid "### Creating a Project with Scarb"
-msgstr ""
+msgstr "### Créer un projet avec Scarb"
 
 #: src/ch01-03-hello-scarb.md:40
 msgid ""
 "Let’s create a new project using Scarb and look at how it differs from our "
 "original “Hello, world!” project."
 msgstr ""
+"Créons un nouveau projet en utilisant Scarb et voyons en quoi il diffère de notre "
+"projet « Hello, world! » original."
 
 #: src/ch01-03-hello-scarb.md:42
 msgid ""
 "Navigate back to your projects directory (or wherever you decided to store "
 "your code). Then run the following:"
 msgstr ""
+"Revenez au répertoire de vos projets (ou à l'endroit où vous avez décidé de "
+"stocker votre code). Ensuite, exécutez la commande suivante :"
 
 #: src/ch01-03-hello-scarb.md:44
 msgid ""
@@ -1177,6 +1315,9 @@ msgid ""
 "project hello_scarb, and Scarb creates its files in a directory of the same "
 "name."
 msgstr ""
+"Cela crée un nouveau répertoire et un projet appelé hello_scarb. Nous avons "
+"nommé notre projet hello_scarb, et Scarb crée ses fichiers dans un répertoire "
+"portant le même nom."
 
 #: src/ch01-03-hello-scarb.md:50
 msgid ""
@@ -1184,11 +1325,15 @@ msgid ""
 "see that Scarb has generated two files and one directory for us: a `Scarb."
 "toml` file and a src directory with a `lib.cairo` file inside."
 msgstr ""
+"Accédez au répertoire hello_scarb avec la commande `cd hello_scarb`. Vous "
+"verrez que Scarb a généré deux fichiers et un répertoire pour nous : un "
+"fichier `Scarb.toml` et un répertoire src contenant un fichier `lib.cairo`."
 
 #: src/ch01-03-hello-scarb.md:52
 msgid ""
 "It has also initialized a new Git repository along with a `.gitignore` file"
 msgstr ""
+"Il a également initialisé un nouveau dépôt Git avec un fichier `.gitignore`."
 
 #: src/ch01-03-hello-scarb.md:54
 msgid ""
@@ -1196,12 +1341,18 @@ msgid ""
 "control system by using the `--vcs` flag.\n"
 "> Run `scarb new -help` to see the available options."
 msgstr ""
+"> Remarque : Git est un système de contrôle de version courant. Vous pouvez "
+"arrêter d'utiliser le système de contrôle de version en utilisant le drapeau "
+"`--vcs`.\n"
+"> Exécutez `scarb new -help` pour voir les options disponibles."
 
 #: src/ch01-03-hello-scarb.md:57
 msgid ""
 "Open _Scarb.toml_ in your text editor of choice. It should look similar to "
 "the code in Listing 1-2."
 msgstr ""
+"Ouvrez _Scarb.toml_ dans votre éditeur de texte préféré. Il devrait ressembler "
+"au code de l'exemple 1-2."
 
 #: src/ch01-03-hello-scarb.md:59
 msgid "<span class=\"filename\">Filename: Scarb.toml</span>"
@@ -1233,6 +1384,8 @@ msgid ""
 "This file is in the [TOML](https://toml.io/) (Tom’s Obvious, Minimal "
 "Language) format, which is Scarb’s configuration format."
 msgstr ""
+"Ce fichier est au format [TOML](https://toml.io/) (Tom’s Obvious, Minimal "
+"Language), qui est le format de configuration de Scarb."
 
 #: src/ch01-03-hello-scarb.md:76
 msgid ""
@@ -1240,12 +1393,19 @@ msgid ""
 "following statements are configuring a package. As we add more information "
 "to this file, we’ll add other sections."
 msgstr ""
+"La première ligne, `[package]`, est une rubrique de section qui indique que "
+"les déclarations suivantes configurent un package. Au fur et à mesure que "
+"nous ajouterons davantage d'informations à ce fichier, nous ajouterons "
+"d'autres sections."
 
 #: src/ch01-03-hello-scarb.md:78
 msgid ""
 "The next two lines set the configuration information Scarb needs to compile "
 "your program: the name and the version of Scarb to use."
 msgstr ""
+"Les deux lignes suivantes définissent les informations de configuration dont "
+"Scarb a besoin pour compiler votre programme : le nom et la version de Scarb "
+"à utiliser."
 
 #: src/ch01-03-hello-scarb.md:80
 msgid ""
@@ -1253,12 +1413,19 @@ msgid ""
 "any of your project’s dependencies. In Cairo, packages of code are referred "
 "to as crates. We won’t need any other crates for this project."
 msgstr ""
+"La dernière ligne, `[dependencies]`, marque le début d'une section où vous "
+"pouvez répertorier toutes les dépendances de votre projet. En Cairo, les "
+"packages de code sont appelés des crates. Nous n'aurons pas besoin d'autres "
+"crates pour ce projet."
 
 #: src/ch01-03-hello-scarb.md:82
 msgid ""
 "The other file created by Scarb is `src/lib.cairo`, let's delete all the "
 "content and put in the following content, we will explain the reason later."
 msgstr ""
+"L'autre fichier créé par Scarb est `src/lib.cairo`, supprimons tout son "
+"contenu et insérons le contenu suivant, nous expliquerons la raison plus "
+"tard."
 
 #: src/ch01-03-hello-scarb.md:84
 msgid ""
@@ -1272,6 +1439,8 @@ msgid ""
 "Then create a new file called `src/hello_scarb.cairo` and put the following "
 "code in it:"
 msgstr ""
+"Ensuite, créez un nouveau fichier appelé `src/hello_scarb.cairo` et ajoutez "
+"le code suivant :"
 
 #: src/ch01-03-hello-scarb.md:90
 msgid "<span class=\"filename\">Filename: src/hello_scarb.cairo</span>"
@@ -1294,11 +1463,16 @@ msgid ""
 "file `hello_scarb.cairo`,containing the implementation details of the "
 "\"hello_scarb\" module."
 msgstr ""
+"Nous venons de créer un fichier appelé `lib.cairo`, qui contient une déclaration "
+"de module faisant référence à un autre module nommé \"hello_scarb\", ainsi que le "
+"fichier `hello_scarb.cairo`, contenant les détails de mise en œuvre du module "
+"\"hello_scarb\"."
 
 #: src/ch01-03-hello-scarb.md:101
 msgid ""
 "Scarb requires your source files to be located within the src directory."
 msgstr ""
+"Scarb exige que vos fichiers sources soient situés dans le répertoire src."
 
 #: src/ch01-03-hello-scarb.md:103
 msgid ""
@@ -1307,6 +1481,11 @@ msgid ""
 "Scarb ensures a designated location for all project components, maintaining "
 "a structured organization."
 msgstr ""
+"Le répertoire principal du projet est réservé aux fichiers README, aux "
+"informations de licence, aux fichiers de configuration et à tout autre "
+"contenu non lié au code.\n"
+"Scarb garantit un emplacement désigné pour tous les composants du projet, "
+"maintenant ainsi une organisation structurée."
 
 #: src/ch01-03-hello-scarb.md:106
 msgid ""
@@ -1315,16 +1494,22 @@ msgid ""
 "the project code into the src directory and create an appropriate `Scarb."
 "toml` file."
 msgstr ""
+"Si vous avez démarré un projet qui n'utilise pas Scarb, comme nous l'avons "
+"fait avec le projet \"Hello, world!\", vous pouvez le convertir en un projet "
+"qui utilise Scarb. Déplacez le code du projet dans le répertoire src et "
+"créez un fichier `Scarb.toml` approprié."
 
 #: src/ch01-03-hello-scarb.md:108
 msgid "### Building a Scarb Project"
-msgstr ""
+msgstr "### Construire un projet Scarb"
 
 #: src/ch01-03-hello-scarb.md:110
 msgid ""
 "From your hello_scarb directory, build your project by entering the "
 "following command:"
 msgstr ""
+"Depuis votre répertoire hello_scarb, compilez votre projet en entrant la "
+"commande suivante :"
 
 #: src/ch01-03-hello-scarb.md:112
 msgid ""
@@ -1346,6 +1531,8 @@ msgid ""
 "If you have installed Cairo correctly, you should be able to run and see the "
 "following output:"
 msgstr ""
+"Si vous avez installé Cairo correctement, vous devriez pouvoir l'exécuter et "
+"voir la sortie suivante :"
 
 #: src/ch01-03-hello-scarb.md:122
 msgid ""
@@ -1367,10 +1554,16 @@ msgid ""
 "> We will use this command in the rest of the tutorial, but we will also use "
 "Scarb commands to initialize projects."
 msgstr ""
+"> Remarque : Vous remarquerez ici que nous n'avons pas utilisé une commande "
+"Scarb, mais plutôt une commande directement à partir des binaires Cairo.\n"
+"> Comme Scarb n'a pas encore de commande pour exécuter du code Cairo, nous "
+"devons utiliser directement la commande `cairo-run`.\n"
+"> Nous utiliserons cette commande dans la suite du tutoriel, mais nous "
+"utiliserons également des commandes Scarb pour initialiser les projets."
 
 #: src/ch01-03-hello-scarb.md:133
 msgid "### Defining Custom Scripts"
-msgstr ""
+msgstr "### Définition de scripts personnalisés"
 
 #: src/ch01-03-hello-scarb.md:135
 msgid ""
@@ -1378,6 +1571,9 @@ msgid ""
 "execute custom shell scripts.\n"
 "Add the following line to your `Scarb.toml` file:"
 msgstr ""
+"Nous pouvons définir des scripts Scarb dans le fichier `Scarb.toml`, qui peuvent être utilisés pour "
+"exécuter des scripts shell personnalisés.\n"
+"Ajoutez la ligne suivante à votre fichier `Scarb.toml` :"
 
 #: src/ch01-03-hello-scarb.md:138
 msgid ""
@@ -1390,6 +1586,7 @@ msgstr ""
 #: src/ch01-03-hello-scarb.md:143
 msgid "Now you can run the following command to run the project:"
 msgstr ""
+"Vous pouvez maintenant exécuter la commande suivante pour exécuter le projet :"
 
 #: src/ch01-03-hello-scarb.md:145
 msgid ""
@@ -1407,10 +1604,12 @@ msgid ""
 "Using `scarb run` is a convenient way to run custom shell scripts that can "
 "be useful to run files and test your project."
 msgstr ""
+"Utiliser `scarb run` est un moyen pratique d'exécuter des scripts shell personnalisés qui peuvent "
+"être utiles pour exécuter des fichiers et tester votre projet."
 
 #: src/ch01-03-hello-scarb.md:154
 msgid "Let’s recap what we’ve learned so far about Scarb:"
-msgstr ""
+msgstr "Récapitulons ce que nous avons appris jusqu'ici à propos de Scarb :"
 
 #: src/ch01-03-hello-scarb.md:156
 msgid ""
@@ -1420,6 +1619,11 @@ msgid ""
 "- We can define custom scripts in `Scarb.toml` and call them with the `scarb "
 "run` command."
 msgstr ""
+"- Nous pouvons créer un projet en utilisant `scarb new`.\n"
+"- Nous pouvons construire un projet en utilisant `scarb build` pour générer le code Sierra "
+"compilé.\n"
+"- Nous pouvons définir des scripts personnalisés dans `Scarb.toml` et les appeler avec "
+"la commande `scarb run`."
 
 #: src/ch01-03-hello-scarb.md:160
 msgid ""
@@ -1427,16 +1631,21 @@ msgid ""
 "matter which operating system you’re working on. So, at this point, we’ll no "
 "longer provide specific instructions for Linux and macOS versus Windows."
 msgstr ""
+"Un avantage supplémentaire de l'utilisation de Scarb est que les commandes sont les mêmes, peu "
+"importe le système d'exploitation sur lequel vous travaillez. À partir de maintenant, nous ne fournirons plus "
+"d'instructions spécifiques pour Linux et macOS par rapport à Windows."
 
 #: src/ch01-03-hello-scarb.md:162
 msgid "# Summary"
-msgstr ""
+msgstr "# Résumé"
 
 #: src/ch01-03-hello-scarb.md:164
 msgid ""
 "You’re already off to a great start on your Cairo journey! In this chapter, "
 "you’ve learned how to:"
 msgstr ""
+"Vous avez déjà fait un excellent début dans votre parcours avec Cairo ! Dans ce chapitre, "
+"vous avez appris comment :"
 
 #: src/ch01-03-hello-scarb.md:166
 msgid ""
@@ -1444,16 +1653,21 @@ msgid ""
 "- Write and run a “Hello, world!” program using `cairo-run` directly\n"
 "- Create and run a new project using the conventions of Scarb"
 msgstr ""
+"- Installer la dernière version stable de Cairo\n"
+"- Écrire et exécuter un programme « Hello, world! » en utilisant `cairo-run` directement\n"
+"- Créer et exécuter un nouveau projet en utilisant les conventions de Scarb"
 
 #: src/ch01-03-hello-scarb.md:170
 msgid ""
 "This is a great time to build a more substantial program to get used to "
 "reading and writing Cairo code."
 msgstr ""
+"C'est un bon moment pour créer un programme plus substantiel afin de vous habituer à "
+"lire et à écrire du code Cairo."
 
 #: src/ch02-00-common-programming-concepts.md:1
 msgid "# Common Programming Concepts"
-msgstr ""
+msgstr "# Concepts de programmation communs"
 
 #: src/ch02-00-common-programming-concepts.md:3
 msgid ""
@@ -1463,6 +1677,12 @@ msgid ""
 "unique to Cairo, but we’ll discuss them in the context of Cairo and explain "
 "the conventions around using these concepts."
 msgstr ""
+"Ce chapitre aborde les concepts présents dans presque tous les langages de "
+"programmation et leur fonctionnement appliqué à Cairo. De nombreux langages de "
+"programmation ont beaucoup de choses en commun au fondement. Aucun des concepts "
+"présentés dans ce chapitre n'est spécifique à Cairo, mais nous les aborderons dans "
+"le contexte de Cairo et expliquerons les conventions liées à l'utilisation de "
+"ces concepts."
 
 #: src/ch02-00-common-programming-concepts.md:5
 msgid ""
@@ -1470,10 +1690,14 @@ msgid ""
 "comments, and control flow. These foundations will be in every Cairo "
 "program, and learning them early will give you a strong core to start from."
 msgstr ""
+"Plus précisément, vous apprendrez les variables, les types de base, les "
+"fonctions, les commentaires et les structures de contrôle. Ces fondements "
+"sont présents dans chaque programme Cairo, et les apprendre dès le début vous "
+"donnera une base solide pour commencer."
 
 #: src/ch02-01-variables-and-mutability.md:1
 msgid "## Variables and Mutability"
-msgstr ""
+msgstr "## Variables et mutabilité"
 
 #: src/ch02-01-variables-and-mutability.md:3
 msgid ""
@@ -1488,6 +1712,16 @@ msgid ""
 "and how\n"
 "you can make your variables mutable."
 msgstr ""
+"Cairo utilise un modèle de mémoire immuable, ce qui signifie qu'une fois "
+"qu'une cellule mémoire a été écrite,\n"
+"elle ne peut pas être réécrite mais seulement lue. Pour refléter ce modèle "
+"de mémoire immuable,\n"
+"les variables dans Cairo sont immuables par défaut.\n"
+"Cependant, le langage abstrait ce modèle et vous donne la possibilité de "
+"rendre vos\n"
+"variables mutables. Explorons comment et pourquoi Cairo impose l'immuabilité, "
+"et comment\n"
+"vous pouvez rendre vos variables mutables."
 
 #: src/ch02-01-variables-and-mutability.md:10
 msgid ""
@@ -1497,6 +1731,11 @@ msgid ""
 "in\n"
 "your _cairo_projects_ directory by using `scarb new variables`."
 msgstr ""
+"Lorsqu'une variable est immuable, une fois qu'une valeur est liée à un nom, "
+"vous ne pouvez pas\n"
+"changer cette valeur. Pour illustrer cela, générez un nouveau projet appelé "
+"_variables_\n"
+"dans votre répertoire _cairo_projects_ en utilisant `scarb new variables`."
 
 #: src/ch02-01-variables-and-mutability.md:14
 msgid ""
@@ -1504,6 +1743,9 @@ msgid ""
 "its\n"
 "code with the following code, which won’t compile just yet:"
 msgstr ""
+"Ensuite, dans votre nouveau répertoire _variables_, ouvrez _src/lib.cairo_ "
+"et remplacez\n"
+"son code par le code suivant, qui ne compilera pas pour le moment :"
 
 #: src/ch02-01-variables-and-mutability.md:17
 #: src/ch02-01-variables-and-mutability.md:76
@@ -1551,6 +1793,10 @@ msgid ""
 "an error message\n"
 "regarding an immutability error, as shown in this output:"
 msgstr ""
+"Sauvegardez et exécutez le programme en utilisant `cairo-run src/lib.cairo`. "
+"Vous devriez recevoir\n"
+"un message d'erreur concernant une erreur d'immutabilité, comme indiqué dans "
+"cet exemple de sortie :"
 
 #: src/ch02-01-variables-and-mutability.md:32
 msgid ""
@@ -1572,12 +1818,22 @@ msgid ""
 "you’re\n"
 "not a good programmer! Experienced Caironautes still get compiler errors."
 msgstr ""
+"Cet exemple montre comment le compilateur vous aide à trouver des erreurs "
+"dans vos programmes.\n"
+"Les erreurs de compilation peuvent être frustrantes, mais elles signifient "
+"simplement que votre programme ne fait pas encore ce que vous souhaitez de "
+"manière sûre ; elles ne signifient _pas_ que vous n'êtes pas un bon "
+"programmeur ! Les Caironautes expérimentés rencontrent toujours des erreurs "
+"de compilation."
 
 #: src/ch02-01-variables-and-mutability.md:46
 msgid ""
 "You received the error message `Cannot assign to an immutable variable.`\n"
 "because you tried to assign a second value to the immutable `x` variable."
 msgstr ""
+"Vous avez reçu le message d'erreur `Cannot assign to an immutable variable.`\n"
+"(Impossible d'assigner une valeur à une variable non mutable) car vous avez "
+"essayé d'assigner une deuxième valeur à la variable non mutable `x`."
 
 #: src/ch02-01-variables-and-mutability.md:49
 msgid ""
@@ -1597,6 +1853,17 @@ msgid ""
 "thus\n"
 "easier to reason through."
 msgstr ""
+"Il est important que nous obtenions des erreurs de compilation lorsque nous\n"
+"tentons de modifier une valeur désignée comme immuable, car cette situation "
+"spécifique peut entraîner des bugs. Si une partie de notre code fonctionne "
+"en supposant qu'une valeur ne changera jamais et qu'une autre partie de notre "
+"code modifie cette valeur, il est possible que la première partie du code ne "
+"fonctionne pas comme prévu. La cause de ce type de bogue peut être difficile "
+"à identifier après coup, surtout lorsque la deuxième partie du code modifie "
+"la valeur uniquement _parfois_. Le compilateur Cairo garantit que lorsque "
+"vous déclarez qu'une valeur ne changera pas, elle ne changera vraiment pas, "
+"vous n'avez donc pas besoin de la suivre vous-même. Votre code est donc plus "
+"facile à comprendre."
 
 #: src/ch02-01-variables-and-mutability.md:60
 msgid ""
@@ -1608,6 +1875,12 @@ msgid ""
 "code\n"
 "will be changing this variable’s value."
 msgstr ""
+"Mais la mutabilité peut être très utile et rendre le code plus pratique à "
+"écrire.\n"
+"Bien que les variables soient immuables par défaut, vous pouvez les "
+"rendre mutables en ajoutant `mut` devant le nom de la variable. L'ajout de "
+"`mut` indique également aux futurs lecteurs du code que d'autres parties du "
+"code modifieront la valeur de cette variable."
 
 #: src/ch02-01-variables-and-mutability.md:66
 msgid ""
@@ -1625,10 +1898,20 @@ msgid ""
 "is that at the Cairo\n"
 "level, the variable is not redeclared so its type cannot change."
 msgstr ""
+"Cependant, vous vous demandez peut-être à ce stade ce qui se passe "
+"exactement lorsqu'une variable est déclarée comme `mut`, car nous avons "
+"mentionné précédemment que la mémoire de Cairo est immuable. La réponse est "
+"que la mémoire de Cairo est immuable, mais l'adresse mémoire à laquelle la "
+"variable pointe peut être modifiée. En examinant le code bas niveau de Cairo "
+"Assembly, il devient clair que la mutation des variables est implémentée "
+"sous forme de sucre syntaxique, ce qui traduit les opérations de mutation en "
+"une série d'étapes équivalentes à l'occultation de variables. La seule "
+"différence est qu'au niveau de Cairo, la variable n'est pas redéclarée, donc "
+"son type ne peut pas changer."
 
 #: src/ch02-01-variables-and-mutability.md:74
 msgid "For example, let’s change _src/lib.cairo_ to the following:"
-msgstr ""
+msgstr "Par exemple, remplaçons _src/lib.cairo_ par ce qui suit :"
 
 #: src/ch02-01-variables-and-mutability.md:78
 msgid ""
@@ -1645,7 +1928,7 @@ msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:88
 msgid "When we run the program now, we get this:"
-msgstr ""
+msgstr "Quand nous exécutons le programme maintenant, nous obtenons cela"
 
 #: src/ch02-01-variables-and-mutability.md:90
 msgid ""
