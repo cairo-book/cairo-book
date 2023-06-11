@@ -18,13 +18,7 @@ _src/front_of_house.cairo_ file in Listing 6-13.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-mod front_of_house;
-
-use restaurant::front_of_house::hosting;
-
-pub fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
-}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_12.cairo}}
 ```
 
 <span class="caption">Listing 6-12: Declaring the `front_of_house` module whose
@@ -38,9 +32,7 @@ with the name `front_of_house`.
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
 ```rust,
-mod hosting {
-    fn add_to_waitlist() {}
-}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_13.cairo}}
 ```
 
 <span class="caption">Listing 6-13: Definitions inside the `front_of_house`
@@ -75,7 +67,7 @@ contain the definitions made in the `hosting` module:
 <span class="filename">Filename: src/front_of_house/hosting.cairo</span>
 
 ```rust
-pub fn add_to_waitlist() {}
+fn add_to_waitlist() {}
 ```
 
 If we instead put _hosting.cairo_ in the _src_ directory, the compiler would
