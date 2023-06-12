@@ -43,14 +43,7 @@ In _lib.cairo_, let's add a first test, as shown in Listing 8-1.
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert(result == 4, 'result is not 4');
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_03.cairo:it_works}}
 ```
 
 Listing 8-1: A test module and function
@@ -79,14 +72,7 @@ Let’s start to customize the test to our own needs. First change the name of t
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn exploration() {
-        let result = 2 + 2;
-        assert(result == 4, 'result is not 4');
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_03.cairo:exploration}}
 ```
 
 Then run `cairo-test  -- --path src` again. The output now shows `exploration` instead of `it_works`:
@@ -101,14 +87,8 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing 8-3.
 
 ```rust
-#[cfg(test)]
-mod tests{
-    #[test]
-    fn another() {
-        let result = 2 + 2;
-        assert(result == 6, 'Make this test fail');
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_03.cairo:another}}
+
 ```
 
 Listing 8-3: Adding a second test that will fail
@@ -140,47 +120,17 @@ In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we 
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-trait RectangleTrait {
-    fn area(self: @Rectangle) -> u64;
-    fn can_hold(self: @Rectangle, other: @Rectangle) -> bool;
-}
-
-impl RectangleImpl of RectangleTrait {
-    fn area(self: @Rectangle) -> u64 {
-        *self.width * *self.height
-    }
-    fn can_hold(self: @Rectangle, other: @Rectangle) -> bool {
-        *self.width > *other.width & *self.height > *other.height
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_06.cairo:trait_impl}}
 ```
 
 Listing 8-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5
 
-The `can_hold` method returns a `Boolean`, which means it’s a perfect use case for the assert function. In Listing 8-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
+The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 8-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-#[cfg(test)]
-mod tests {
-    use super::Rectangle;
-    use super::RectangleTrait;
-
-    #[test]
-    fn larger_can_hold_smaller() {
-        let larger = Rectangle {
-            height: 7,
-            width: 8,
-        };
-        let smaller = Rectangle {
-            height: 1,
-            width: 5,
-        };
-
-        assert(larger.can_hold(@smaller), 'rectangle cannot hold');
-    }
-}
+{{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_06.cairo:test1}}
 ```
 
 Listing 8-6: A test for `can_hold` that checks whether a larger rectangle can indeed hold a smaller rectangle
@@ -201,30 +151,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-#[cfg(test)]
-mod tests {
-    use super::Rectangle;
-    use super::RectangleTrait;
-
-    #[test]
-    fn larger_can_hold_smaller() {
-        // --snip--
-    }
-
-    #[test]
-    fn smaller_cannot_hold_larger() {
-        let larger = Rectangle {
-            height: 7,
-            width: 8,
-        };
-        let smaller = Rectangle {
-            height: 1,
-            width: 5,
-        };
-
-        assert(!smaller.can_hold(@larger), 'rectangle cannot hold');
-    }
-}
+{{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_06.cairo:test2}}
 ```
 
 Because the correct result of the `can_hold` function in this case is `false`, we need to negate that result before we pass it to the assert function. As a result, our test will pass if `can_hold` returns false:
@@ -240,12 +167,7 @@ $ cairo-test .
 Two tests that pass! Now let’s see what happens to our test results when we introduce a bug in our code. We’ll change the implementation of the `can_hold` method by replacing the greater-than sign with a less-than sign when it compares the widths:
 
 ```rust
-// --snip--
-impl RectangleImpl of RectangleTrait {
-    fn can_hold(self: @Rectangle, other: @Rectangle) -> bool {
-        *self.width < *other.width & *self.height > *other.height
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/no_listing_02_wrong_can_hold_impl.cairo:wrong_impl}}
 ```
 
 Running the tests now produces the following:
@@ -274,39 +196,7 @@ Listing 8-8 shows a test that checks that the error conditions of `GuessTrait::n
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-use array::ArrayTrait;
-
-#[derive(Copy, Drop)]
-struct Guess {
-    value: u64,
-}
-
-trait GuessTrait {
-    fn new(value: u64) -> Guess;
-}
-
-impl GuessImpl of GuessTrait {
-    fn new(value: u64) -> Guess {
-        if value < 1 | value > 100 {
-            let mut data = ArrayTrait::new();
-            data.append('Guess must be >= 1 and <= 100');
-            panic(data);
-        }
-        Guess { value }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::Guess;
-    use super::GuessTrait;
-
-    #[test]
-    #[should_panic]
-    fn greater_than_100() {
-        GuessTrait::new(200);
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_08.cairo}}
 ```
 
 Listing 8-8: Testing that a condition will cause a panic
@@ -323,18 +213,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 Looks good! Now let’s introduce a bug in our code by removing the condition that the new function will panic if the value is greater than `100`:
 
 ```rust
-// --snip--
-impl GuessImpl of GuessTrait {
-    fn new(value: u64) -> Guess {
-        if value < 1{
-            let mut data = ArrayTrait::new();
-            data.append('Guess must be >= 1 and <= 100');
-            panic(data);
-        }
-
-        Guess { value, }
-    }
-}
+{{#rustdoc_include ../listings/ch08-testing-cairo-programs/no_listing_03_wrong_new_impl.cairo:here}}
 ```
 
 When we run the test in Listing 8-8, it will fail:
@@ -355,34 +234,7 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-// --snip--
-impl GuessImpl of GuessTrait {
-    fn new(value: u64) -> Guess {
-        if value < 1{
-            let mut data = ArrayTrait::new();
-            data.append('Guess must be >= 1');
-            panic(data);
-        } else if value > 100{
-            let mut data = ArrayTrait::new();
-            data.append('Guess must be <= 100');
-            panic(data);
-        }
-
-        Guess { value, }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::Guess;
-    use super::GuessTrait;
-
-    #[test]
-    #[should_panic(expected: ('Guess must be <= 100', ))]
-    fn greater_than_100() {
-        GuessTrait::new(200);
-    }
-}
+{{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_09.cairo:test_panic}}
 ```
 
 Listing 8-9: Testing for a panic with a panic message containing the error message string
@@ -392,15 +244,7 @@ This test will pass because the value we put in the `should_panic` attribute’s
 To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the if `value < 1` and the else if `value > 100` blocks:
 
 ```rust
-if value < 1{
-    let mut data = ArrayTrait::new();
-    data.append('Guess must be <= 100');
-    panic(data);
-} else if value > 100{
-    let mut data = ArrayTrait::new();
-    data.append('Guess must be >= 1');
-    panic(data);
-}
+{{#include ../listings/ch08-testing-cairo-programs/no_listing_04_new_bug.cairo:here}}
 ```
 
 This time when we run the `should_panic` test, it will fail:
@@ -426,20 +270,7 @@ To demonstrate how to run a single test, we’ll first create two tests function
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn add_two_and_two() {
-        let result = 2 + 2;
-        assert(result == 4, 'result is not 4');
-    }
-
-    #[test]
-    fn add_three_and_two() {
-        let result = 3 + 2;
-        assert(result == 5, 'result is not 5');
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_10.cairo}}
 ```
 
 Listing 8-10: Two tests with two different names
@@ -464,20 +295,7 @@ Sometimes a few specific tests can be very time-consuming to execute, so you mig
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert(result == 4, 'result is not 4');
-    }
-
-    #[test]
-    #[ignore]
-    fn expensive_test() {
-        // code that takes an hour to run
-    }
-}
+{{#include ../listings/ch08-testing-cairo-programs/no_listing_05_ignore_tests.cairo}}
 ```
 
 After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now when we run our tests, `it_works` runs, but `expensive_test` doesn’t:
