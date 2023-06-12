@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-06-07 03:53+0900\n"
+"PO-Revision-Date: 2023-06-11 23:48+0900\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -319,13 +319,13 @@ msgstr "## 你能用它做什么？"
 msgid ""
 "Cairo allows you to compute trustworthy values on untrusted machines. One major usecase is Starknet, a solution to Ethereum scaling. Ethereum is a decentralized blockchain platform "
 "that enables the creation of decentralized applications where every single interaction between a user and a d-app is verified by all the participants. Starknet is a Layer 2 built on "
-"top of Ethereum. Instead of having all the participants of the network to verify all user interactions, only one node, called the prover, execute the programs and generate proofs "
-"that the computations were done correctly.These proofs are then verified by an Ethereum smart contract, requiring significantly less computational power compared to executing the "
-"interactions themselves. This approach allows for increased throughput and reduced transaction costs but preserving Ethereum security."
+"top of Ethereum. Instead of having all the participants of the network to verify all user interactions, only one node, called the prover, executes the programs and generates proofs "
+"that the computations were done correctly. These proofs are then verified by an Ethereum smart contract, requiring significantly less computational power compared to executing the "
+"interactions themselves. This approach allows for increased throughput and reduced transaction costs while preserving Ethereum security."
 msgstr ""
 "Cairo允许你在不被信任的机器上计算值得信任的值。一个主要的用例是Starknet，这是一个针对Ethereum扩展的解决方案。以太坊是一个去中心化的区块链平台，它可以创建去中心化的应用程序，用户和d-"
-"app之间的每一次互动都会被所有参与者验证。Starknet是一个建立在以太坊之上的第二层。与其让网络的所有参与者来验证所有的用户互动，不如只让一个被称为验证者的节点来执行程序，并生成计算正确的"
-"证明。这些证明再由以太坊智能合约来验证，与执行互动本身相比，需要的计算能力要少得多。这种方法允许增加吞吐量和降低交易成本，但保留了Ethereum的安全性。"
+"app之间的每一次交互都会被所有参与者验证。Starknet是一个建立在以太坊之上的Layer 2。不同于以太坊让网络的所有参与者来验证所有的用户的交互，Starknet只让一个被称为验证者(prover)的节点来执"
+"行程序，并生成计算正确的证明。这些证明再由以太坊智能合约来验证，与执行交互本身相比，需要的计算能力要少得多。这种方法增加了吞吐量和降低交易成本，但保留了以太坊的安全性。"
 
 #: src/ch00-00-introduction.md:12
 msgid "## What are the differences with other programming languages?"
@@ -345,15 +345,15 @@ msgid ""
 "- When the generated proof is verified by a verifier, it is a bit different. This has to be as cheap as possible since it could potentially be verified on many very small machines. "
 "Fortunately verifying is faster than computing and Cairo has some unique advantages to improve it even more. A notable one is non-determinism. This is a topic you will cover in more "
 "detail later in this book, but the idea is that you can theoretically use a different algorithm for verifying than for computing. Currently, writing custom non-deterministic code is "
-"not supported for the developers, but the standard library leverages non-determinism for improved performance. For example sorting an array in Cairo costs the same price than copying "
+"not supported for the developers, but the standard library leverages non-determinism for improved performance. For example sorting an array in Cairo costs the same price as copying "
 "it. Because the verifier doesn't sort the array, it just checks that it is sorted, which is cheaper."
 msgstr ""
-"- 当被证明器（prover）执行时，它与任何其他语言相似。因为Cairo是虚拟化的，而且其操作并未设计为效率最大化，因此可能会导致一些额外性能开销，但这并不是最需要优化的相关部分。\n"
+"- 当被证明器（prover）执行时，它与其他的编程语言类似。因为Cairo是虚拟化的，而且其操作并未设计为效率最大化，因此可能会导致一些额外性能开销，但这并不是最需要优化的部分。\n"
 "\n"
-"- 当生成的证明被验证器验证时，情况就有点不同了。这必须是尽可能少消耗计算资源的的，因为它有可能需要在许多非常慢的机器上进行验证。幸运的是，验证比计算更快，而且Cairo有一些独特的优势，可"
-"以进一步提高验证速度。一个值得注意的是非确定性，这是一个将在本书后面详细介绍的话题。其设计理念是，理论上你无需在计算时和验证时使用同一种算法（译注：即在验证时你可以使用比生成证明时更"
-"快的算法来减少时间消耗）。目前开发者还不能编写自定义的非确定性代码，但标准库利用非确定性来提高性能。例如，在Cairo中对一个数组进行排序的成本与复制它的成本相同，这是因为验证器只是检查它"
-"是否被排序而不是真的对数组进行排序，所以可以减少计算资源消耗。"
+"- 当生成的证明被验证器验证时，情况就有点不同了。这一步必须是尽可能的少消耗计算资源，因为它有可能需要在许多非常慢的机器上进行验证。幸运的是，验证比计算更快，而且Cairo有一些独特的优势，"
+"可以进一步提高验证速度。一个值得注意的是非确定性，这是一个将在本书后面详细介绍的话题。其设计理念是，理论上你无需在计算时和验证时使用同一种算法（译注：即在验证时你可以使用比生成证明时"
+"更快的算法来减少时间消耗）。目前开发者还不能编写自定义的非确定性代码，但标准库利用非确定性来提高性能。例如，在Cairo中对一个数组进行排序的成本与复制它的成本相同，这是因为验证器只是检查"
+"它是否被排序而不是真的对数组进行排序，所以可以减少计算资源消耗。"
 
 #: src/ch00-00-introduction.md:20
 msgid ""
@@ -1326,9 +1326,9 @@ msgstr ""
 
 #: src/ch01-03-hello-scarb.md:99
 msgid ""
-"We have just created a file called `lib.cairo`, which contains a module declaration referencing another module named \"hello_scarb\", as well as the file `hello_scarb.cairo`,"
+"We have just created a file called `lib.cairo`, which contains a module declaration referencing another module named \"hello_scarb\", as well as the file `hello_scarb.cairo`, "
 "containing the implementation details of the \"hello_scarb\" module."
-msgstr "我们刚刚创建了一个名为`lib.cairo`的文件，其中包含一个模块声明，引用了另一个名为 \"hello_scarb \"的模块，以及文件`hello_scarb.cairo`，包含 \"hello_scarb \"模块的实现细节。"
+msgstr "我们刚刚创建了一个名为`lib.cairo`的文件，其中包含一个模块声明，引用了另一个名为 \"hello_scarb\"的模块，以及包含 “hello_scarb”模块的实现细节的文件`hello_scarb.cairo`。"
 
 #: src/ch01-03-hello-scarb.md:101
 msgid "Scarb requires your source files to be located within the src directory."
@@ -1546,10 +1546,10 @@ msgid ""
 "code with the following code, which won’t compile just yet:"
 msgstr "然后，在你新的 _variables_ 目录下，打开 _src/lib.cairo_ 并将其替换为下面的代码，这段代码还不会被编译："
 
-#: src/ch02-01-variables-and-mutability.md:17 src/ch02-01-variables-and-mutability.md:76 src/ch02-01-variables-and-mutability.md:154 src/ch02-05-control-flow.md:130
-#: src/ch03-02-references-and-snapshots.md:23 src/ch03-02-references-and-snapshots.md:110 src/ch04-02-an-example-program-using-structs.md:7
-#: src/ch04-02-an-example-program-using-structs.md:48 src/ch04-02-an-example-program-using-structs.md:74 src/ch04-02-an-example-program-using-structs.md:106
-#: src/ch04-02-an-example-program-using-structs.md:142 src/ch04-03-method-syntax.md:18 src/ch04-03-method-syntax.md:93 src/ch04-03-method-syntax.md:135 src/ch04-03-method-syntax.md:192
+#: src/ch02-01-variables-and-mutability.md:17 src/ch02-01-variables-and-mutability.md:77 src/ch02-01-variables-and-mutability.md:155 src/ch02-05-control-flow.md:130
+#: src/ch03-02-references-and-snapshots.md:23 src/ch03-02-references-and-snapshots.md:130 src/ch04-02-an-example-program-using-structs.md:7
+#: src/ch04-02-an-example-program-using-structs.md:48 src/ch04-02-an-example-program-using-structs.md:74 src/ch04-02-an-example-program-using-structs.md:103
+#: src/ch04-02-an-example-program-using-structs.md:136 src/ch04-03-method-syntax.md:18 src/ch04-03-method-syntax.md:93 src/ch04-03-method-syntax.md:135 src/ch04-03-method-syntax.md:192
 #: src/ch04-03-method-syntax.md:231 src/ch06-02-defining-modules-to-control-scope.md:90 src/ch06-02-defining-modules-to-control-scope.md:143
 #: src/ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md:15 src/ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md:62
 #: src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:10 src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:35
@@ -1569,6 +1569,7 @@ msgid ""
 "    x = 6;\n"
 "    x.print();\n"
 "}\n"
+"\n"
 "```"
 msgstr ""
 "```rust,does_not_compile\n"
@@ -1579,9 +1580,10 @@ msgstr ""
 "    x = 6;\n"
 "    x.print();\n"
 "}\n"
+"\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:29
+#: src/ch02-01-variables-and-mutability.md:30
 msgid ""
 "Save and run the program using `cairo-run src/lib.cairo`. You should receive an error message\n"
 "regarding an immutability error, as shown in this output:"
@@ -1589,7 +1591,7 @@ msgstr ""
 "保存并使用`cairo-run src/lib.cairo`运行该程序。你应该收到一条错误信息\n"
 "关于不可变性的错误，如图所示："
 
-#: src/ch02-01-variables-and-mutability.md:32
+#: src/ch02-01-variables-and-mutability.md:33
 msgid ""
 "```console\n"
 "error: Cannot assign to an immutable variable.\n"
@@ -1609,7 +1611,7 @@ msgstr ""
 "Error: failed to compile: src/lib.cairo\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:41
+#: src/ch02-01-variables-and-mutability.md:42
 msgid ""
 "This example shows how the compiler helps you find errors in your programs.\n"
 "Compiler errors can be frustrating, but really they only mean your program\n"
@@ -1621,7 +1623,7 @@ msgstr ""
 "还没有安全地完成你想做的事情；它们并不意味着你不是一个好的程序员。\n"
 "即使有经验的Caironautes仍然会遇到编译错误。"
 
-#: src/ch02-01-variables-and-mutability.md:46
+#: src/ch02-01-variables-and-mutability.md:47
 msgid ""
 "You received the error message `Cannot assign to an immutable variable.`\n"
 "because you tried to assign a second value to the immutable `x` variable."
@@ -1629,7 +1631,7 @@ msgstr ""
 "你收到的错误信息是 `Cannot assign to an immutable variable.`。\n"
 "因为你试图给不可变的`x`变量分配第二个值。"
 
-#: src/ch02-01-variables-and-mutability.md:49
+#: src/ch02-01-variables-and-mutability.md:50
 msgid ""
 "It’s important that we get compile-time errors when we attempt to change a\n"
 "value that’s designated as immutable because this specific situation can lead to\n"
@@ -1647,7 +1649,7 @@ msgstr ""
 "第一部分代码就有可能以不可预料的方式运行。不得不承认这种 bug 的起因难以跟踪，尤其是第二部分代码只是 _有时_ 会改变值。\n"
 "Cairo 编译器保证，如果声明一个值不会变，它就真的不会变，所以你不必自己跟踪它。这意味着你的代码更易于推导。"
 
-#: src/ch02-01-variables-and-mutability.md:60
+#: src/ch02-01-variables-and-mutability.md:61
 msgid ""
 "But mutability can be very useful, and can make code more convenient to write.\n"
 "Although variables are immutable by default, you can make them mutable by\n"
@@ -1657,7 +1659,7 @@ msgid ""
 msgstr ""
 "不过可变性也是非常有用的，可以用来更方便地编写代码。尽管变量默认是不可变的，你仍然可以在变量名前添加 `mut` 来使其可变。`mut` 也向阅读代码的人表明了其他代码将会改变这个变量值的意图。"
 
-#: src/ch02-01-variables-and-mutability.md:66
+#: src/ch02-01-variables-and-mutability.md:67
 msgid ""
 "However, you might be wondering at this point what exactly happens when a variable\n"
 "is declared as `mut`, as we previously mentioned that Cairo's memory is immutable.\n"
@@ -1672,11 +1674,11 @@ msgstr ""
 "我们可以清楚地发现变量可变性是以语法糖的形式实现的，它将变量可变性操作转化为一系列的步骤，等同于变量的隐藏（variable shadowing）。\n"
 "唯一的区别是，在Cairo，变量没有被重新声明，所以它的类型不能改变。"
 
-#: src/ch02-01-variables-and-mutability.md:74
+#: src/ch02-01-variables-and-mutability.md:75
 msgid "For example, let’s change _src/lib.cairo_ to the following:"
 msgstr "例如，让我们把 _src/lib.cairo_ 改为以下内容："
 
-#: src/ch02-01-variables-and-mutability.md:78
+#: src/ch02-01-variables-and-mutability.md:79
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -1698,11 +1700,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:88
+#: src/ch02-01-variables-and-mutability.md:89
 msgid "When we run the program now, we get this:"
 msgstr "当我们现在运行该程序时，我们得到了这个结果："
 
-#: src/ch02-01-variables-and-mutability.md:90
+#: src/ch02-01-variables-and-mutability.md:91
 msgid ""
 "```console\n"
 "❯ cairo-run src/lib.cairo\n"
@@ -1722,7 +1724,7 @@ msgstr ""
 "Run completed successfully, returning []\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:99
+#: src/ch02-01-variables-and-mutability.md:100
 msgid ""
 "We’re allowed to change the value bound to `x` from `5` to `6` when `mut` is\n"
 "used. Ultimately, deciding whether to use mutability or not is up to you and\n"
@@ -1731,18 +1733,18 @@ msgstr ""
 "当使用 `mut` 时，我们将在`x`绑定的值从`5`改为 `6` 。\n"
 "最终，决定是否使用可变性取决于你自己以及你认为在特定情况下什么是最清楚的。"
 
-#: src/ch02-01-variables-and-mutability.md:103
+#: src/ch02-01-variables-and-mutability.md:104
 msgid "### Constants"
 msgstr "### 常量"
 
-#: src/ch02-01-variables-and-mutability.md:105
+#: src/ch02-01-variables-and-mutability.md:106
 msgid ""
 "Like immutable variables, _constants_ are values that are bound to a name and\n"
 "are not allowed to change, but there are a few differences between constants\n"
 "and variables."
 msgstr "类似于不可变变量，常量 (constants) 是绑定到一个名称的不允许改变的值，不过常量与变量还是有一些区别。"
 
-#: src/ch02-01-variables-and-mutability.md:109
+#: src/ch02-01-variables-and-mutability.md:110
 msgid ""
 "First, you aren’t allowed to use `mut` with constants. Constants aren’t just\n"
 "immutable by default—they’re always immutable. You declare constants using the\n"
@@ -1754,24 +1756,24 @@ msgstr ""
 "首先，不允许对常量使用 `mut`。常量不仅仅是默认不可变—它总是不可变。声明常量使用 `const` 关键字而不是 `let`，并且 _必须_ 注明值的类型。在下一部分，[“数据类型”][data-types]中会介绍类型"
 "和类型注解，现在无需关心这些细节，记住总是标注类型即可。"
 
-#: src/ch02-01-variables-and-mutability.md:116
+#: src/ch02-01-variables-and-mutability.md:117
 msgid ""
 "Constants can only be declared in the global scope, which makes\n"
 "them useful for values that many parts of code need to know about."
 msgstr "常量可以在任何作用域中声明，包括全局作用域，这在一个值需要被很多部分的代码用到时很有用。"
 
-#: src/ch02-01-variables-and-mutability.md:119
+#: src/ch02-01-variables-and-mutability.md:120
 msgid ""
 "The last difference is that constants may be set only to a constant expression,\n"
 "not the result of a value that could only be computed at runtime. Only literal constants\n"
 "are currently supported."
 msgstr "最后一个区别是，常量只能被设置为常量表达式，而不可以是其他任何只能在运行时计算出的值。目前只支持字面常量。"
 
-#: src/ch02-01-variables-and-mutability.md:123
+#: src/ch02-01-variables-and-mutability.md:124
 msgid "Here’s an example of a constant declaration:"
 msgstr "下面是一个声明常量的例子："
 
-#: src/ch02-01-variables-and-mutability.md:125
+#: src/ch02-01-variables-and-mutability.md:126
 msgid ""
 "```rust\n"
 "const ONE_HOUR_IN_SECONDS: u32 = 3600;\n"
@@ -1781,13 +1783,13 @@ msgstr ""
 "const ONE_HOUR_IN_SECONDS: u32 = 3600;\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:129
+#: src/ch02-01-variables-and-mutability.md:130
 msgid ""
 "Cairo's naming convention for constants is to use all uppercase with\n"
 "underscores between words."
 msgstr "Cairo的常量命名规则是使用所有大写字母，单词之间使用下划线。"
 
-#: src/ch02-01-variables-and-mutability.md:132
+#: src/ch02-01-variables-and-mutability.md:133
 msgid ""
 "Constants are valid for the entire time a program runs, within the scope in\n"
 "which they were declared. This property makes constants useful for values in\n"
@@ -1798,7 +1800,7 @@ msgstr ""
 "在声明它的作用域之中，常量在整个程序生命周期中都有效，\n"
 "此属性使得常量可以作为多处代码使用的全局范围的固定数值，例如一个游戏中玩家可以获取的最高分，或者光速。"
 
-#: src/ch02-01-variables-and-mutability.md:138
+#: src/ch02-01-variables-and-mutability.md:139
 msgid ""
 "Naming hardcoded values used throughout your program as constants is useful in\n"
 "conveying the meaning of that value to future maintainers of the code. It also\n"
@@ -1808,11 +1810,11 @@ msgstr ""
 "将遍布于应用程序中的硬编码值声明为常量，能帮助后来的代码维护人员了解值的意图。\n"
 "如果将来需要修改硬编码值，也只需修改汇此处的硬编码值。"
 
-#: src/ch02-01-variables-and-mutability.md:143
+#: src/ch02-01-variables-and-mutability.md:144
 msgid "### Shadowing"
 msgstr "### 隐藏"
 
-#: src/ch02-01-variables-and-mutability.md:145
+#: src/ch02-01-variables-and-mutability.md:146
 msgid ""
 "Variable shadowing refers to the declaration of a\n"
 "new variable with the same name as a previous variable. Caironautes say that the\n"
@@ -1829,9 +1831,9 @@ msgstr ""
 "直到第二个变量自己也被隐藏或第二个变量的作用域结束。\n"
 "可以用相同变量名称来隐藏一个变量，以及重复使用 `let` 关键字来多次隐藏，如下所示："
 
-#: src/ch02-01-variables-and-mutability.md:156
+#: src/ch02-01-variables-and-mutability.md:157
 msgid ""
-"```swift\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    let x = 5;\n"
@@ -1846,22 +1848,22 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```swift\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    let x = 5;\n"
 "    let x = x + 1;\n"
 "    {\n"
 "        let x = x * 2;\n"
-"        ‘Inner scope x value is:’.print();\n"
+"        'Inner scope x value is:'.print();\n"
 "        x.print()\n"
 "    }\n"
-"    ‘Outer scope x value is:’.print();\n"
+"    'Outer scope x value is:'.print();\n"
 "    x.print();\n"
 "}\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:171
+#: src/ch02-01-variables-and-mutability.md:172
 msgid ""
 "This program first binds `x` to a value of `5`. Then it creates a new variable\n"
 "`x` by repeating `let x =`, taking the original value and adding `1` so the\n"
@@ -1874,7 +1876,7 @@ msgstr ""
 "这个程序首先将 `x` 绑定到值 `5` 上。接着通过 `let x =` 创建了一个新变量 `x` ，获取初始值并加 `1` ，这样 `x` 的值就变成 `6` 了。然后，在使用花括号创建的内部作用域内，第三个 `let` 语句"
 "也隐藏了 `x` 并创建了一个新的变量，将之前的值乘以 `2` ， `x` 得到的值是 `12`。当该作用域结束时，内部 shadowing 的作用域也结束了， `x` 又返回到 `6`。运行这个程序，它会有如下输出："
 
-#: src/ch02-01-variables-and-mutability.md:179
+#: src/ch02-01-variables-and-mutability.md:180
 msgid ""
 "```console\n"
 "cairo-run src/lib.cairo\n"
@@ -1904,7 +1906,7 @@ msgstr ""
 "Run completed successfully, returning []\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:193
+#: src/ch02-01-variables-and-mutability.md:194
 msgid ""
 "Shadowing is different from marking a variable as `mut` because we’ll get a\n"
 "compile-time error if we accidentally try to reassign to this variable without\n"
@@ -1916,13 +1918,13 @@ msgstr ""
 "当不小心尝试对变量重新赋值时，如果没有使用 `let` 关键字，就会导致编译时错误。\n"
 "通过使用 `let`，我们可以用这个新值进行一些计算，不过计算完之后变量仍然是不可变的。"
 
-#: src/ch02-01-variables-and-mutability.md:199
+#: src/ch02-01-variables-and-mutability.md:200
 msgid ""
 "Another distinction between `mut` and shadowing is that when we use the `let` keyword again,\n"
 "we are effectively creating a new variable, which allows us to change the type of the\n"
 "value while reusing the same name. As mentioned before, variable shadowing and mutable variables\n"
 "are equivalent at the lower level.\n"
-"The only difference is that by shadowing a variable, the compiler will not complain \n"
+"The only difference is that by shadowing a variable, the compiler will not complain\n"
 "if you change its type. For example, say our program performs a type conversion between the\n"
 "`u64` and `felt252` types."
 msgstr ""
@@ -1931,7 +1933,7 @@ msgstr ""
 "唯一的区别是，通过隐藏变量，即使你改变它的类型。编译器也不会检测到错误\n"
 "例如，假设我们的程序在`u64` 和 `felt252` 类型之间进行转换。"
 
-#: src/ch02-01-variables-and-mutability.md:207
+#: src/ch02-01-variables-and-mutability.md:208
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -1955,7 +1957,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:218
+#: src/ch02-01-variables-and-mutability.md:219
 msgid ""
 "The first `x` variable has a `u64` type while the second `x` variable has a `felt252` type.\n"
 "Shadowing thus spares us from having to come up with different names, such as `x_u64`\n"
@@ -1967,7 +1969,7 @@ msgstr ""
 "相反，我们可以重新使用更简单的 `x` 名称。然而，如果我们试图使用\n"
 "`mut` 来实现，我们会得到一个编译时错误，如下所示："
 
-#: src/ch02-01-variables-and-mutability.md:223
+#: src/ch02-01-variables-and-mutability.md:224
 msgid ""
 "```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
@@ -1991,11 +1993,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:234
-msgid "The error says we’re were expecting a `u64` (the original type) but we got a different type:"
+#: src/ch02-01-variables-and-mutability.md:235
+msgid "The error says we were expecting a `u64` (the original type) but we got a different type:"
 msgstr "这个错误表示我们预期得到一个 `u64` 类型（原始类型），但实际得到了不同的类型："
 
-#: src/ch02-01-variables-and-mutability.md:236
+#: src/ch02-01-variables-and-mutability.md:237
 msgid ""
 "```console\n"
 "❯ cairo-run src/lib.cairo\n"
@@ -2017,7 +2019,7 @@ msgstr ""
 "Error: failed to compile: src/lib.cairo\n"
 "```"
 
-#: src/ch02-01-variables-and-mutability.md:246
+#: src/ch02-01-variables-and-mutability.md:247
 msgid ""
 "Now that we’ve explored how variables work, let’s look at more data types they\n"
 "can have."
@@ -2046,7 +2048,7 @@ msgstr ""
 
 #: src/ch02-02-data-types.md:10
 msgid ""
-"```Rust\n"
+"```rust\n"
 "use traits::TryInto;\n"
 "use option::OptionTrait;\n"
 "fn main() {\n"
@@ -2055,7 +2057,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```Rust\n"
+"```rust\n"
 "use traits::TryInto;\n"
 "use option::OptionTrait;\n"
 "fn main() {\n"
@@ -2359,84 +2361,92 @@ msgstr ""
 #: src/ch02-02-data-types.md:145
 msgid ""
 "```rust\n"
-"let my_first_char = 'C';\n"
-"let my_first_string = 'Hello world';\n"
+"# fn main() {\n"
+"    let my_first_char = 'C';\n"
+"    let my_first_string = 'Hello world';\n"
+"# }\n"
 "```"
 msgstr ""
 "```rust\n"
-"let my_first_char = 'C';\n"
-"let my_first_string = 'Hello world';\n"
+"# fn main() {\n"
+"    let my_first_char = 'C';\n"
+"    let my_first_string = 'Hello world';\n"
+"# }\n"
 "```"
 
-#: src/ch02-02-data-types.md:150
+#: src/ch02-02-data-types.md:152
 msgid "### Type casting"
 msgstr "### 类型转换"
 
-#: src/ch02-02-data-types.md:152
+#: src/ch02-02-data-types.md:154
 msgid "In Cairo, you can convert types scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits, respectively."
 msgstr "在 Cairo 中，你可以使用 `TryInto` 和 `Into` 特性提供的 `try_into` 和 `into` 方法在标量类型之间进行显式类型转换。"
 
-#: src/ch02-02-data-types.md:154
+#: src/ch02-02-data-types.md:156
 msgid ""
 "The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to "
 "unwrap to access the new value."
 msgstr "`try_into` 方法允许在目标类型可能不适合源值时进行安全的类型转换。请记住，`try_into` 会返回一个 `Option<T>` 类型，你需要解开（unwrap）这个类型来访问新的值。"
 
-#: src/ch02-02-data-types.md:156
+#: src/ch02-02-data-types.md:158
 msgid "On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the source type is smaller than the destination type."
 msgstr "另一方面，当转换必然成功时，如源类型小于目标类型时，`into` 方法可用于类型转换。"
 
-#: src/ch02-02-data-types.md:158
+#: src/ch02-02-data-types.md:160
 msgid ""
 "To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated "
 "in the example below."
 msgstr "为了进行转换，在源值上调用 `var.into()` 或 `var.try_into()` 来将其转换为另一种类型。新变量的类型必须被明确定义，如下面的例子所示。"
 
-#: src/ch02-02-data-types.md:160
+#: src/ch02-02-data-types.md:162
 msgid ""
-"```rust,ignore_format\n"
+"```rust\n"
 "use traits::TryInto;\n"
 "use traits::Into;\n"
 "use option::OptionTrait;\n"
 "\n"
 "fn main() {\n"
 "    let my_felt252 = 10;\n"
-"    let my_u8: u8 = my_felt252.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type\n"
+"    // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type\n"
+"    let my_u8: u8 = my_felt252.try_into().unwrap();\n"
 "    let my_u16: u16 = my_u8.into();\n"
 "    let my_u32: u32 = my_u16.into();\n"
 "    let my_u64: u64 = my_u32.into();\n"
 "    let my_u128: u128 = my_u64.into();\n"
-"    let my_u256: u256 = my_felt252.into(); // As a felt252 is smaller than a u256, we can use the into() method\n"
+"    // As a felt252 is smaller than a u256, we can use the into() method\n"
+"    let my_u256: u256 = my_felt252.into();\n"
 "    let my_usize: usize = my_felt252.try_into().unwrap();\n"
 "    let my_other_felt252: felt252 = my_u8.into();\n"
 "    let my_third_felt252: felt252 = my_u16.into();\n"
 "}\n"
 "```"
 msgstr ""
-"```rust,ignore_format\n"
+"```rust\n"
 "use traits::TryInto;\n"
 "use traits::Into;\n"
 "use option::OptionTrait;\n"
 "\n"
 "fn main() {\n"
 "    let my_felt252 = 10;\n"
-"    let my_u8: u8 = my_felt252.try_into().unwrap(); // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type\n"
+"    // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type\n"
+"    let my_u8: u8 = my_felt252.try_into().unwrap();\n"
 "    let my_u16: u16 = my_u8.into();\n"
 "    let my_u32: u32 = my_u16.into();\n"
 "    let my_u64: u64 = my_u32.into();\n"
 "    let my_u128: u128 = my_u64.into();\n"
-"    let my_u256: u256 = my_felt252.into(); // As a felt252 is smaller than a u256, we can use the into() method\n"
+"    // As a felt252 is smaller than a u256, we can use the into() method\n"
+"    let my_u256: u256 = my_felt252.into();\n"
 "    let my_usize: usize = my_felt252.try_into().unwrap();\n"
 "    let my_other_felt252: felt252 = my_u8.into();\n"
 "    let my_third_felt252: felt252 = my_u16.into();\n"
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:179
+#: src/ch02-02-data-types.md:183
 msgid "### The Tuple Type"
 msgstr "### 元组类型"
 
-#: src/ch02-02-data-types.md:181
+#: src/ch02-02-data-types.md:185
 msgid ""
 "A _tuple_ is a general way of grouping together a number of values with a\n"
 "variety of types into one compound type. Tuples have a fixed length: once\n"
@@ -2445,7 +2455,7 @@ msgstr ""
 "_元组_ 是一个将多个其他类型的值组合进一个复合类型的主要方式。\n"
 "元组长度固定：一旦声明，其长度不会增大或缩小。"
 
-#: src/ch02-02-data-types.md:185
+#: src/ch02-02-data-types.md:189
 msgid ""
 "We create a tuple by writing a comma-separated list of values inside\n"
 "parentheses. Each position in the tuple has a type, and the types of the\n"
@@ -2456,7 +2466,7 @@ msgstr ""
 "元组中的每一个位置都有一个类型，而且这些不同值的类型也不必是相同的。\n"
 "这个例子中使用了可选的类型注解："
 
-#: src/ch02-02-data-types.md:190
+#: src/ch02-02-data-types.md:194
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -2470,7 +2480,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:196
+#: src/ch02-02-data-types.md:200
 msgid ""
 "The variable `tup` binds to the entire tuple because a tuple is considered a\n"
 "single compound element. To get the individual values out of a tuple, we can\n"
@@ -2480,7 +2490,7 @@ msgstr ""
 "为了从元组中获取单个值，可以使用模式匹配（pattern matching）\n"
 "来解构（destructure）元组值，像这样："
 
-#: src/ch02-02-data-types.md:200
+#: src/ch02-02-data-types.md:204
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -2508,7 +2518,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:213
+#: src/ch02-02-data-types.md:217
 msgid ""
 "This program first creates a tuple and binds it to the variable `tup`. It then\n"
 "uses a pattern with `let` to take `tup` and turn it into three separate\n"
@@ -2522,15 +2532,15 @@ msgstr ""
 "因为它将一个元组拆成了三个部分。最后，程序打印出了 `y` 的值，\n"
 "也就是 `6`。"
 
-#: src/ch02-02-data-types.md:219
+#: src/ch02-02-data-types.md:223
 msgid ""
-"We can also declare the tuple with value and name at the same time.\n"
+"We can also declare the tuple with value and types at the same time.\n"
 "For example:"
 msgstr ""
 "我们也可以同时用 value 和 name 来声明元组。\n"
 "比如说："
 
-#: src/ch02-02-data-types.md:222
+#: src/ch02-02-data-types.md:226
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -2544,11 +2554,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-02-data-types.md:228
+#: src/ch02-02-data-types.md:232
 msgid "### The unit type ()"
 msgstr "### unit类型 ()"
 
-#: src/ch02-02-data-types.md:230
+#: src/ch02-02-data-types.md:234
 msgid ""
 "A _unit type_ is a type which has only one value `()`.\n"
 "It is represented by a tuple with no elements.\n"
@@ -2575,15 +2585,15 @@ msgstr ""
 
 #: src/ch02-03-functions.md:8
 msgid ""
-"Cairo code uses *snake case* as the conventional style for function and variable\n"
+"Cairo code uses _snake case_ as the conventional style for function and variable\n"
 "names, in which all letters are lowercase and underscores separate words.\n"
 "Here’s a program that contains an example function definition:"
 msgstr ""
-"Cairo代码使用 *蛇形命名法（snake case）* 作为函数和变量名称的常规样式。\n"
+"Cairo代码使用 *蛇形命名法（ _snake case_  ）* 作为函数和变量名称的常规样式。\n"
 "所有的字母都是小写的，并以下划线分隔单词。\n"
 "这里有一个程序，包含一个函数定义的例子："
 
-#: src/ch02-03-functions.md:13
+#: src/ch02-03-functions.md:12
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -2611,37 +2621,37 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:26
+#: src/ch02-03-functions.md:25
 msgid ""
 "We define a function in Cairo by entering `fn` followed by a function name and a\n"
 "set of parentheses. The curly brackets tell the compiler where the function\n"
 "body begins and ends."
 msgstr "在 Cairo 中，我们通过输入 `fn` 和函数名称以及一组括号来定义一个函数。大括号告诉编译器函数体的开始和结束位置。"
 
-#: src/ch02-03-functions.md:30
+#: src/ch02-03-functions.md:29
 msgid ""
 "We can call any function we’ve defined by entering its name followed by a set\n"
 "of parentheses. Because `another_function` is defined in the program, it can be\n"
 "called from inside the `main` function. Note that we defined `another_function`\n"
-"*before* the `main` function in the source code; we could have defined it after\n"
+"_before_ the `main` function in the source code; we could have defined it after\n"
 "as well. Cairo doesn’t care where you define your functions, only that they’re\n"
 "defined somewhere in a scope that can be seen by the caller."
 msgstr ""
 "可以使用函数名后跟圆括号来调用我们定义过的任意函数。\n"
 "因为程序中已定义 `another_function` 函数，所以可以在 `main` 函数中调用它。\n"
-"注意，源码中 `another_function` 定义在 `main` 函数 *之前* ；当然我们也可以定义在之后。\n"
+"注意，源码中 `another_function` 定义在 `main` 函数 *之前* ；当然我们也可以定义在其之后。\n"
 "Cairo 不关心函数定义所在的位置，只要函数被调用时出现在调用之处可见的作用域内就行。"
 
-#: src/ch02-03-functions.md:37
+#: src/ch02-03-functions.md:36
 msgid ""
-"Let’s start a new project with Scarb named *functions* to explore functions\n"
-"further. Place the `another_function` example in *src/lib.cairo* and run it. You\n"
+"Let’s start a new project with Scarb named _functions_ to explore functions\n"
+"further. Place the `another_function` example in _src/lib.cairo_ and run it. You\n"
 "should see the following output:"
 msgstr ""
-"让我们用 Scarb 启动一个名为 *functions* 的新项目来进一步探索函数。\n"
-"更进一步。把 `another_function` 的例子写入 *src/lib.cairo* 中并运行它。你应该看到以下输出："
+"让我们用 Scarb 启动一个名为 _functions_ 的新项目来进一步探索函数。\n"
+"更进一步。把 `another_function` 的例子写入 _src/lib.cairo_ 中并运行它。你应该看到以下输出："
 
-#: src/ch02-03-functions.md:41
+#: src/ch02-03-functions.md:40
 msgid ""
 "```console\n"
 "$ cairo-run src/lib.cairo\n"
@@ -2655,7 +2665,7 @@ msgstr ""
 "[DEBUG] Another function.            (raw: 22265147635379277118623944509513687592494)\n"
 "```"
 
-#: src/ch02-03-functions.md:47
+#: src/ch02-03-functions.md:46
 msgid ""
 "The lines execute in the order in which they appear in the `main` function.\n"
 "First the “Hello, world!” message prints, and then `another_function` is called\n"
@@ -2664,28 +2674,28 @@ msgstr ""
 "这几行是按照它们在 `main` 函数中出现的顺序执行的。\n"
 "首先打印 \"Hello, world!\" 信息，然后调用 `another_function`，并打印其信息。"
 
-#: src/ch02-03-functions.md:51
+#: src/ch02-03-functions.md:50
 msgid "### Parameters"
 msgstr "### 参数"
 
-#: src/ch02-03-functions.md:53
+#: src/ch02-03-functions.md:52
 msgid ""
-"We can define functions to have *parameters*, which are special variables that\n"
+"We can define functions to have _parameters_, which are special variables that\n"
 "are part of a function’s signature. When a function has parameters, you can\n"
 "provide it with concrete values for those parameters. Technically, the concrete\n"
-"values are called *arguments*, but in casual conversation, people tend to use\n"
-"the words *parameter* and *argument* interchangeably for either the variables\n"
+"values are called _arguments_, but in casual conversation, people tend to use\n"
+"the words _parameter_ and _argument_ interchangeably for either the variables\n"
 "in a function’s definition or the concrete values passed in when you call a\n"
 "function."
 msgstr ""
-"我们可以定义为拥有 *参数（parameters）* 的函数，参数是特殊变量，是函数签名的一部分。当函数拥有参数（形参）时，可以为这些参数提供具体的值（实参）。\n"
-"技术上讲，这些具体值被称为 *参数*（arguments），但是在日常交流中，人们倾向于不区分使用 *parameter* 和 *argument* 来表示函数定义中的变量或调用函数时传入的具体值。"
+"我们可以定义为拥有 *参数（ _parameters_ ）* 的函数，参数是特殊变量，是函数签名的一部分。当函数拥有参数（形参）时，可以为这些参数提供具体的值（实参）。\n"
+"技术上讲，这些具体值被称为 *参数*（ _arguments_ ），但是在日常交流中，人们倾向于不区分使用 _parameters_ 和 _arguments_ 来表示函数定义中的变量或调用函数时传入的具体值。"
 
-#: src/ch02-03-functions.md:61
+#: src/ch02-03-functions.md:60
 msgid "In this version of `another_function` we add a parameter:"
 msgstr "在这个版本的 `another_function` 中，我们添加了一个参数："
 
-#: src/ch02-03-functions.md:63
+#: src/ch02-03-functions.md:62
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -2711,11 +2721,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:75
+#: src/ch02-03-functions.md:74
 msgid "Try running this program; you should get the following output:"
 msgstr "尝试运行这个程序；你应该得到以下输出："
 
-#: src/ch02-03-functions.md:77 src/ch02-03-functions.md:250
+#: src/ch02-03-functions.md:76 src/ch02-03-functions.md:256
 msgid ""
 "```console\n"
 "$ cairo-run src/lib.cairo\n"
@@ -2727,7 +2737,7 @@ msgstr ""
 "[DEBUG]                                 (raw: 5)\n"
 "```"
 
-#: src/ch02-03-functions.md:82
+#: src/ch02-03-functions.md:81
 msgid ""
 "The declaration of `another_function` has one parameter named `x`. The type of\n"
 "`x` is specified as `felt252`. When we pass `5` in to `another_function`, the\n"
@@ -2736,21 +2746,21 @@ msgstr ""
 "`another_function` 的声明有一个名为 `x` 的参数。\n"
 "`x` 的类型被指定为 `felt252`。当我们把 `5` 传给 `another_function` 时，`.print()`函数在控制台中会输出 `5`。"
 
-#: src/ch02-03-functions.md:86
+#: src/ch02-03-functions.md:85
 msgid ""
-"In function signatures, you *must* declare the type of each parameter. This is\n"
+"In function signatures, you _must_ declare the type of each parameter. This is\n"
 "a deliberate decision in Cairo’s design: requiring type annotations in function\n"
 "definitions means the compiler almost never needs you to use them elsewhere in\n"
 "the code to figure out what type you mean. The compiler is also able to give\n"
 "more helpful error messages if it knows what types the function expects."
 msgstr ""
-"在函数签名中，必须 声明每个参数的类型。\n"
+"在函数签名中，你 _必须_ 声明每个参数的类型。\n"
 "这是 Cairo 设计中一个经过慎重考虑的决定：\n"
 "要求在函数定义中提供类型注解，意味着编译器再也不需要你在代码的\n"
 "其他地方注明类型来指出你的意图。而且，在知道函数需要什么类型后，\n"
 "编译器就能够给出更有用的错误消息。"
 
-#: src/ch02-03-functions.md:92
+#: src/ch02-03-functions.md:91
 msgid ""
 "When defining multiple parameters, separate the parameter declarations with\n"
 "commas, like this:"
@@ -2758,7 +2768,7 @@ msgstr ""
 "当定义多个参数时，用逗号分隔。\n"
 "像这样："
 
-#: src/ch02-03-functions.md:95
+#: src/ch02-03-functions.md:94
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -2786,7 +2796,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:108
+#: src/ch02-03-functions.md:107
 msgid ""
 "This example creates a function named `another_function` with two\n"
 "parameters. The first parameter is named `x` and is an `felt252`. The second is\n"
@@ -2795,15 +2805,15 @@ msgstr ""
 "这个例子创建了一个名为 `another_function` 的函数，它有两个\n"
 "参数。第一个参数被命名为 `x`，类型是 `felt252`。第二个参数被命名为 `y`，也是 `felt252` 类型。然后，该函数打印了 `x` 的内容，然后打印 `y` 的内容。"
 
-#: src/ch02-03-functions.md:112
+#: src/ch02-03-functions.md:111
 msgid ""
-"Let’s try running this code. Replace the program currently in your *functions*\n"
-"project’s *src/lib.cairo* file with the preceding example and run it using `cairo-run src/lib.cairo`:"
+"Let’s try running this code. Replace the program currently in your _functions_\n"
+"project’s _src/lib.cairo_ file with the preceding example and run it using `cairo-run src/lib.cairo`:"
 msgstr ""
-"让我们试着运行这段代码。将目前在你的*functions*\n"
-"项目的 *src/lib.cairo* 文件中的程序，并使用 `cairo-run src/lib.cairo` 来运行它："
+"让我们试着运行这段代码。将目前在你的 _functions_ \n"
+"项目的 _src/lib.cairo_ 文件中的程序，并使用 `cairo-run src/lib.cairo` 来运行它："
 
-#: src/ch02-03-functions.md:115
+#: src/ch02-03-functions.md:114
 msgid ""
 "```console\n"
 "$ cairo-run src/lib.cairo\n"
@@ -2817,7 +2827,7 @@ msgstr ""
 "[DEBUG]                                 (raw: 6)\n"
 "```"
 
-#: src/ch02-03-functions.md:121
+#: src/ch02-03-functions.md:120
 msgid ""
 "Because we called the function with `5` as the value for `x` and `6` as\n"
 "the value for `y`, the program output contains those values."
@@ -2825,11 +2835,11 @@ msgstr ""
 "因为我们在调用函数时，将 `5` 作为 `x` 的值，将 `6` 作为 `y` 的值。\n"
 "程序输出包含这些值。"
 
-#: src/ch02-03-functions.md:124
+#: src/ch02-03-functions.md:123
 msgid "### Statements and Expressions"
 msgstr "### 语句和表达式"
 
-#: src/ch02-03-functions.md:126
+#: src/ch02-03-functions.md:125
 msgid ""
 "Function bodies are made up of a series of statements optionally ending in an\n"
 "expression. So far, the functions we’ve covered haven’t included an ending\n"
@@ -2845,25 +2855,25 @@ msgstr ""
 "（expression-based）的语言，这是一个需要理解的（不同于其他语言）\n"
 "重要区别。其他语言并没有这样的区别，所以让我们看看语句与表达式有什么区别以及这些区别是如何影响函数体的。"
 
-#: src/ch02-03-functions.md:134
+#: src/ch02-03-functions.md:133
 msgid ""
-"* **Statements** are instructions that perform some action and do not return\n"
+"- **Statements** are instructions that perform some action and do not return\n"
 "  a value.\n"
-"* **Expressions** evaluate to a resultant value. Let’s look at some examples."
+"- **Expressions** evaluate to a resultant value. Let’s look at some examples."
 msgstr ""
-"* **语句**（Statements）是执行一些操作但不返回值的指令。\n"
-"* **表达式**（Expressions）计算并产生一个值。让我们看一些例子。"
+"- **语句**（Statements）是执行一些操作但不返回值的指令。\n"
+"- **表达式**（Expressions）计算并产生一个值。让我们看一些例子。"
 
-#: src/ch02-03-functions.md:138
+#: src/ch02-03-functions.md:137
 msgid ""
 "We’ve actually already used statements and expressions. Creating a variable and\n"
-"assigning a value to it with the `let` keyword is a statement. In Listing 3-1,\n"
+"assigning a value to it with the `let` keyword is a statement. In Listing 2-1,\n"
 "`let y = 6;` is a statement."
 msgstr ""
 "实际上，我们已经使用过语句和表达式。\n"
-"使用 `let` 关键字创建变量并绑定一个值是一个语句。在列表 3-1 中，`let y = 6;`; 是一个语句。"
+"使用 `let` 关键字创建变量并绑定一个值是一个语句。在示例 2-1 中，`let y = 6;`; 是一个语句。"
 
-#: src/ch02-03-functions.md:142
+#: src/ch02-03-functions.md:141
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -2877,17 +2887,17 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:148
-msgid "<span class=\"caption\">Listing 3-1: A `main` function declaration containing one statement</span>"
-msgstr "<span class=\"caption\">列表3-1：一个包含一条语句的 `main` 函数声明</span>"
+#: src/ch02-03-functions.md:147
+msgid "<span class=\"caption\">Listing 2-1: A `main` function declaration containing one statement</span>"
+msgstr "<span class=\"caption\">示例2-1：一个包含一条语句的 `main` 函数声明</span>"
 
-#: src/ch02-03-functions.md:150
+#: src/ch02-03-functions.md:149
 msgid ""
 "Function definitions are also statements; the entire preceding example is a\n"
 "statement in itself."
 msgstr "函数定义也是语句，上面整个例子本身就是一个语句。"
 
-#: src/ch02-03-functions.md:153
+#: src/ch02-03-functions.md:152
 msgid ""
 "Statements do not return values. Therefore, you can’t assign a `let` statement\n"
 "to another variable, as the following code tries to do; you’ll get an error:"
@@ -2895,7 +2905,7 @@ msgstr ""
 "语句不返回值。因此，不能把 `let` 语句赋值给另一个变量，比如下面的例子尝试做\n"
 "的，会产生一个错误："
 
-#: src/ch02-03-functions.md:156
+#: src/ch02-03-functions.md:155
 msgid ""
 "```rust,does_not_compile,ignore_format\n"
 "fn main() {\n"
@@ -2913,7 +2923,7 @@ msgstr ""
 msgid "When you run this program, the error you’ll get looks like this:"
 msgstr "当你运行这个程序时，你将得到的错误看起来是这样："
 
-#: src/ch02-03-functions.md:162
+#: src/ch02-03-functions.md:163
 msgid ""
 "```console\n"
 "$ cairo-run src/lib.cairo\n"
@@ -2959,7 +2969,7 @@ msgstr ""
 "    let x = (let y = 6);\n"
 "```"
 
-#: src/ch02-03-functions.md:184
+#: src/ch02-03-functions.md:185
 msgid ""
 "The `let y = 6` statement does not return a value, so there isn’t anything for\n"
 "`x` to bind to. This is different from what happens in other languages, such as\n"
@@ -2971,19 +2981,19 @@ msgstr ""
 "中的情况不同，比如说 C 和 Ruby，其中赋值会返回赋值的值。\n"
 "在这些语言中，你可以写 `x = y = 6`，让 `x`和 `y` 都有值 `6`；但在 Cairo 中不是这样的。"
 
-#: src/ch02-03-functions.md:190
+#: src/ch02-03-functions.md:191
 msgid ""
 "Expressions evaluate to a value and make up most of the rest of the code that\n"
 "you’ll write in Cairo. Consider a math operation, such as `5 + 6`, which is an\n"
 "expression that evaluates to the value `11`. Expressions can be part of\n"
-"statements: in Listing 3-1, the `6` in the statement `let y = 6;` is an\n"
+"statements: in Listing 2-1, the `6` in the statement `let y = 6;` is an\n"
 "expression that evaluates to the value `6`. Calling a function is an\n"
 "expression. A new scope block created with\n"
 "curly brackets is an expression, for example:"
 msgstr ""
 "表达式会计算出一个值，并且你编写的大部分 Cairo 代码将是由表达式组成的。\n"
 "考虑一个数学运算，比如 `5 + 6` ，这是一个表达式并计算出值 `11`。\n"
-"表达式可以是语句的一部分：在示例 3-1 中，语句 `let y = 6;` 中的 `6` 是一个表达式，它计算出的值是 `6` 。\n"
+"表达式可以是语句的一部分：在示例 2-1 中，语句 `let y = 6;` 中的 `6` 是一个表达式，它计算出的值是 `6` 。\n"
 "函数调用是一个表达式。宏调用也是一个表达式。用大括号创建的一个新的块作用域同样也是一个表达式，例如："
 
 #: src/ch02-03-functions.md:199
@@ -3016,23 +3026,23 @@ msgstr ""
 msgid "This expression:"
 msgstr "这个表达式："
 
-#: src/ch02-03-functions.md:212
+#: src/ch02-03-functions.md:213
 msgid ""
-"```rust\n"
+"```rust, does_not_compile, ignore_format\n"
 "{\n"
-"    let x = 3;\n"
-"    x + 1\n"
+"        let x = 3;\n"
+"        x + 1\n"
 "}\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust, does_not_compile, ignore_format\n"
 "{\n"
-"    let x = 3;\n"
-"    x + 1\n"
+"        let x = 3;\n"
+"        x + 1\n"
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:218
+#: src/ch02-03-functions.md:220
 msgid ""
 "is a block that, in this case, evaluates to `4`. That value gets bound to `y`\n"
 "as part of the `let` statement. Note that the `x + 1` line doesn’t have a\n"
@@ -3047,11 +3057,11 @@ msgstr ""
 "分号。如果在表达式的结尾加上分号，它就变成了语句，而语句不会返回值。\n"
 "在接下来学习具有返回值的函数和表达式时要谨记这一点。"
 
-#: src/ch02-03-functions.md:225
+#: src/ch02-03-functions.md:228
 msgid "### Functions with Return Values"
 msgstr "### 具有返回值的函数"
 
-#: src/ch02-03-functions.md:226
+#: src/ch02-03-functions.md:230
 msgid ""
 "Functions can return values to the code that calls them. We don’t name return\n"
 "values, but we must declare their type after an arrow (`->`). In Cairo, the\n"
@@ -3066,7 +3076,7 @@ msgstr ""
 "`return` 关键字和指定值，可从函数中提前返回；但大部分函数隐式的返回最后的表达式。\n"
 "这是一个有返回值的函数的例子："
 
-#: src/ch02-03-functions.md:234
+#: src/ch02-03-functions.md:238
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -3094,7 +3104,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:246
+#: src/ch02-03-functions.md:251
 msgid ""
 "There are no function calls, or even `let` statements in the `five`\n"
 "function—just the number `5` by itself. That’s a perfectly valid function in\n"
@@ -3105,7 +3115,7 @@ msgstr ""
 " Cairo 中是一个完全有效的函数。注意，也指定了函数返回值的类型，就是\n"
 " `-> u32`。尝试运行代码；输出应该看起来像这样："
 
-#: src/ch02-03-functions.md:254
+#: src/ch02-03-functions.md:261
 msgid ""
 "The `5` in `five` is the function’s return value, which is why the return type\n"
 "is `u32`. Let’s examine this in more detail. There are two important bits:\n"
@@ -3117,17 +3127,17 @@ msgstr ""
 "码。有两个重要的部分：首先，`let x = five();` 这一行表明我们使用函数的返回值初\n"
 "始化一个变量。因为 `five` 函数返回 `5`，这一行与如下代码相同："
 
-#: src/ch02-03-functions.md:259
+#: src/ch02-03-functions.md:267
 msgid ""
-"```rust\n"
+"```rust, does_not_compile\n"
 "let x = 5;\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust, does_not_compile\n"
 "let x = 5;\n"
 "```"
 
-#: src/ch02-03-functions.md:262
+#: src/ch02-03-functions.md:271
 msgid ""
 "Second, the `five` function has no parameters and defines the type of the\n"
 "return value, but the body of the function is a lonely `5` with no semicolon\n"
@@ -3138,7 +3148,7 @@ msgstr ""
 "有分号，因为这是一个表达式，我们想要返回它的值。\n"
 "让我们看看另一个例子："
 
-#: src/ch02-03-functions.md:267
+#: src/ch02-03-functions.md:276
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -3168,7 +3178,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:280
+#: src/ch02-03-functions.md:290
 msgid ""
 "Running this code will print `[DEBUG]                    (raw: 6)`. But if we place a\n"
 "semicolon at the end of the line containing `x + 1`, changing it from an\n"
@@ -3177,7 +3187,7 @@ msgstr ""
 "运行这段代码将打印 `[DEBUG] (raw: 6)`。但是如果在包含 `x + 1` 的行尾放置一个\n"
 "分号，把它从一个表达式变成一个语句，我们会看到一个错误："
 
-#: src/ch02-03-functions.md:284
+#: src/ch02-03-functions.md:294
 msgid ""
 "```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
@@ -3207,11 +3217,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:298
+#: src/ch02-03-functions.md:308
 msgid "Compiling this code produces an error, as follows:"
 msgstr "编译这段代码会产生一个错误，如下所示："
 
-#: src/ch02-03-functions.md:299
+#: src/ch02-03-functions.md:310
 msgid ""
 "```console\n"
 "error: Unexpected return type. Expected: \"core::integer::u32\", found: \"()\".\n"
@@ -3221,7 +3231,7 @@ msgstr ""
 "error: Unexpected return type. Expected: \"core::integer::u32\", found: \"()\".\n"
 "```"
 
-#: src/ch02-03-functions.md:302
+#: src/ch02-03-functions.md:314
 msgid ""
 "The main error message, `Unexpected return type`, reveals the core issue with this\n"
 "code. The definition of the function `plus_one` says that it will return an\n"
@@ -3355,11 +3365,11 @@ msgstr "让我们试着改变 `number` 的值使条件为 `true` 时看看会发
 
 #: src/ch02-05-control-flow.md:38
 msgid ""
-"```rust\n"
+"```rust, does_not_compile\n"
 "    let number = 5;\n"
 "```"
 msgstr ""
-"```rust\n"
+"```rust, does_not_compile\n"
 "    let number = 5;\n"
 "```"
 
@@ -3403,7 +3413,7 @@ msgstr "你可以通过在一个 else if 表达式中结合 if 和 else 来使�
 
 #: src/ch02-05-control-flow.md:60
 msgid ""
-"```rust,ignore_format\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
@@ -3421,7 +3431,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust,ignore_format\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
 "fn main() {\n"
@@ -3558,7 +3568,7 @@ msgstr "作为一个例子，将你的_loops_目录下的_src/lib.cairo_文件�
 
 #: src/ch02-05-control-flow.md:132
 msgid ""
-"```rust,ignore,does_not_compile\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    let mut i: usize = 0;\n"
@@ -3571,7 +3581,7 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
-"```rust,ignore,does_not_compile\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "fn main() {\n"
 "    let mut i: usize = 0;\n"
@@ -3824,8 +3834,8 @@ msgid "#### Creating an Array"
 msgstr "#### 创建一个数组"
 
 #: src/ch02-06-common-collections.md:14
-msgid "Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of creation of an array with 3 elements:"
-msgstr "创建一个数组是通过`ArrayTrait::new()`调用完成的。下面是一个创建3个元素的数组的例子："
+msgid "Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of the creation of an array to which we append 3 elements:"
+msgstr "创建一个数组是通过调用`ArrayTrait::new()`完成的。下面是一个创建3个元素的数组的例子："
 
 #: src/ch02-06-common-collections.md:16
 msgid ""
@@ -3857,11 +3867,11 @@ msgstr "你可以在实例化数组时传递数组内项目的预期类型，像
 
 #: src/ch02-06-common-collections.md:29
 msgid ""
-"```rust,\n"
+"```rust, does_not_compile\n"
 "let mut arr = ArrayTrait::<u128>::new();\n"
 "```"
 msgstr ""
-"```rust,\n"
+"```rust, does_not_compile\n"
 "let mut arr = ArrayTrait::<u128>::new();\n"
 "```"
 
@@ -3880,32 +3890,40 @@ msgstr "要在一个数组的末尾添加一个元素，可以使用`append()`�
 #: src/ch02-06-common-collections.md:39
 msgid ""
 "```rust\n"
-"    let mut a = ArrayTrait::new();\n"
-"    a.append(10);\n"
-"    a.append(1);\n"
-"    a.append(2);\n"
+"# use array::ArrayTrait;\n"
+"# \n"
+"# fn main() {\n"
+"#     let mut a = ArrayTrait::new();\n"
+"    a.append(0);\n"
+"#     a.append(1);\n"
+"#     a.append(2);\n"
+"# }\n"
 "```"
 msgstr ""
 "```rust\n"
-"    let mut a = ArrayTrait::new();\n"
-"    a.append(10);\n"
-"    a.append(1);\n"
-"    a.append(2);\n"
+"# use array::ArrayTrait;\n"
+"# \n"
+"# fn main() {\n"
+"#     let mut a = ArrayTrait::new();\n"
+"    a.append(0);\n"
+"#     a.append(1);\n"
+"#     a.append(2);\n"
+"# }\n"
 "```"
 
-#: src/ch02-06-common-collections.md:46
+#: src/ch02-06-common-collections.md:50
 msgid "##### Removing Elements"
 msgstr "##### 移除元素"
 
-#: src/ch02-06-common-collections.md:48
+#: src/ch02-06-common-collections.md:52
 msgid ""
-"To remove an element from the front of an array, you can use the `pop_front()` method.\n"
+"You can only remove elements from the front of an array by using the `pop_front()` method.\n"
 "This method returns an `Option` containing the removed element, or `Option::None` if the array is empty."
 msgstr ""
 "要从一个数组的前面移除一个元素，你可以使用`pop_front()`方法。\n"
-"该方法返回一个包含被移除元素的`Option`，如果数组为空，则返回`Option::None`。"
+"该方法返回一个包含被移除元素的`Option`。如果数组为空，则返回`Option::None`。"
 
-#: src/ch02-06-common-collections.md:51
+#: src/ch02-06-common-collections.md:55
 msgid ""
 "```rust\n"
 "use option::OptionTrait;\n"
@@ -3939,11 +3957,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-06-common-collections.md:67
+#: src/ch02-06-common-collections.md:71
 msgid "The above code will print `10` as we remove the first element that was added."
 msgstr "上面的代码将打印`10`，因为我们删除了第一个被添加的元素。"
 
-#: src/ch02-06-common-collections.md:69
+#: src/ch02-06-common-collections.md:73
 msgid ""
 "In Cairo, memory is immutable, which means that it is not possible to modify the elements of an array once they've been added. You can only add elements to the end of an array and "
 "remove elements from the front of an array. These operations do not require memory mutation, as they involve updating pointers rather than directly modifying the memory cells."
@@ -3951,16 +3969,16 @@ msgstr ""
 "在Cairo中，内存是不可改变的，这意味着一旦数组中的元素被添加，就不可能修改它们。你只能将元素添加到数组的末端，并从数组的前端移除元素。这些操作不需要内存突变，因为它们涉及到更新指针而不"
 "是直接修改内存单元。"
 
-#: src/ch02-06-common-collections.md:71
+#: src/ch02-06-common-collections.md:75
 msgid "#### Reading Elements from an Array"
 msgstr "#### 从一个数组中读取元素"
 
-#: src/ch02-06-common-collections.md:73
+#: src/ch02-06-common-collections.md:77
 msgid ""
 "To access array elements, you can use `get()` or `at()` array methods that return different types. Using `arr.at(index)` is equivalent to using the subscripting operator `arr[index]`."
 msgstr "为了访问数组元素，你可以使用`get()`或`at()`数组方法，它们返回不同的类型。使用`arr.at(index)`等同于使用下标操作符`arr[index]`。"
 
-#: src/ch02-06-common-collections.md:75
+#: src/ch02-06-common-collections.md:79
 msgid ""
 "The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified "
 "index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the "
@@ -3970,7 +3988,7 @@ msgstr ""
 "`get`函数返回一个`Option<Box<@T>>，这意味着它返回一个Box类型（Cairo的智能指针类型）的选项，包含一个指向指定索引的元素的快照，如果该元素在数组中存在。如果该元素不存在，`get`返回"
 "`None'。当你期望访问可能不在数组范围内的索引，并且希望优雅地处理这种情况而不发生恐慌时，这个方法很有用。快照将在[引用和快照](ch03-02-references-and-snapshots.md)章节中详细解释。"
 
-#: src/ch02-06-common-collections.md:77
+#: src/ch02-06-common-collections.md:81
 msgid ""
 "The `at` function, on the other hand, directly returns a snapshot to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the "
 "index is out of bounds, a panic error occurs. You should only use at when you want the program to panic if the provided index is out of the array's bounds, which can prevent "
@@ -3979,11 +3997,11 @@ msgstr ""
 "另一方面，`at`函数直接返回一个快照到指定索引的元素，使用`unbox()`操作符来提取存储在一个盒子里的值。如果索引超出了范围，就会发生一个恐慌性错误。你应该只在希望程序在提供的索引超出数组的"
 "边界时发生恐慌时使用at，这样可以防止意外的行为。"
 
-#: src/ch02-06-common-collections.md:79
+#: src/ch02-06-common-collections.md:83
 msgid "In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking."
 msgstr "总之，当你想对越界访问尝试进行恐慌时，请使用`at`，而当你想优雅地处理这种情况而不恐慌时，请使用`get`。"
 
-#: src/ch02-06-common-collections.md:81
+#: src/ch02-06-common-collections.md:85
 msgid ""
 "```rust\n"
 "use array::ArrayTrait;\n"
@@ -4009,7 +4027,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-06-common-collections.md:93
+#: src/ch02-06-common-collections.md:97
 msgid ""
 "In this example, the variable named `first` will get the value `0` because that\n"
 "is the value at index `0` in the array. The variable named `second` will get\n"
@@ -4019,11 +4037,11 @@ msgstr ""
 "是数组中索引为`0'的值。名为`second'的变量将得到\n"
 "从数组中的索引`1`处获得数值`1'。"
 
-#: src/ch02-06-common-collections.md:97
+#: src/ch02-06-common-collections.md:101
 msgid "Here is an example with the `get()` method:"
 msgstr "下面是一个使用`get()`方法的例子："
 
-#: src/ch02-06-common-collections.md:99
+#: src/ch02-06-common-collections.md:103
 msgid ""
 "```rust,ignore_format\n"
 "use array::ArrayTrait;\n"
@@ -4031,7 +4049,8 @@ msgid ""
 "fn main() -> u128 {\n"
 "    let mut arr = ArrayTrait::<u128>::new();\n"
 "    arr.append(100);\n"
-"    let index_to_access = 1; // Change this value to see different results, what would happen if the index doesn't exist ?\n"
+"    let index_to_access =\n"
+"        1; // Change this value to see different results, what would happen if the index doesn't exist?\n"
 "    match arr.get(index_to_access) {\n"
 "        Option::Some(x) => {\n"
 "            *x.unbox()\n"
@@ -4053,7 +4072,8 @@ msgstr ""
 "fn main() -> u128 {\n"
 "    let mut arr = ArrayTrait::<u128>::new();\n"
 "    arr.append(100);\n"
-"    let index_to_access = 1; // Change this value to see different results, what would happen if the index doesn't exist ?\n"
+"    let index_to_access =\n"
+"        1; // Change this value to see different results, what would happen if the index doesn't exist?\n"
 "    match arr.get(index_to_access) {\n"
 "        Option::Some(x) => {\n"
 "            *x.unbox()\n"
@@ -4069,27 +4089,27 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-06-common-collections.md:121
+#: src/ch02-06-common-collections.md:126
 msgid "#### Size related methods"
 msgstr "#### 数组体积相关的方法"
 
-#: src/ch02-06-common-collections.md:123
+#: src/ch02-06-common-collections.md:128
 msgid "To determine the number of elements in an array, use the `len()` method. The return is of type `usize`."
 msgstr "要确定一个数组中的元素数量，请使用`len()`方法。其返回值为`usize`类型。"
 
-#: src/ch02-06-common-collections.md:125
+#: src/ch02-06-common-collections.md:130
 msgid "If you want to check if an array is empty or not, you can use the `is_empty()` method, which returns `true` if the array is empty and `false` otherwise."
 msgstr "如果你想检查一个数组是否为空，你可以使用`is_empty()`方法，如果数组为空，返回`true`，否则返回`false`。"
 
-#: src/ch02-06-common-collections.md:127
+#: src/ch02-06-common-collections.md:132
 msgid "#### Storing multiple types with Enums"
 msgstr "#### 用Enums存储多种类型"
 
-#: src/ch02-06-common-collections.md:129
+#: src/ch02-06-common-collections.md:134
 msgid "If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types."
 msgstr "如果你想在一个数组中存储不同类型的元素，你可以使用`Enum`来定义一个可以容纳多种类型的自定义数据类型。"
 
-#: src/ch02-06-common-collections.md:131
+#: src/ch02-06-common-collections.md:136
 msgid ""
 "```rust\n"
 "use array::ArrayTrait;\n"
@@ -4129,11 +4149,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-06-common-collections.md:150
+#: src/ch02-06-common-collections.md:155
 msgid "#### Span"
 msgstr "#### Span"
 
-#: src/ch02-06-common-collections.md:152
+#: src/ch02-06-common-collections.md:157
 msgid ""
 "`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. "
 "Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References "
@@ -4142,33 +4162,43 @@ msgstr ""
 "`Span`是一个结构，代表一个 \"数组 \"的快照（snapshot）。它被设计用来提供对数组元素的安全和控制的访问，而不需要修改原始数组。Span对于确保数据的完整性和避免在函数间传递数组或执行只读操"
 "作时的借用问题特别有用（参见[引用和快照](ch03-02-references-and-snapshots.md))"
 
-#: src/ch02-06-common-collections.md:154
+#: src/ch02-06-common-collections.md:159
 msgid "All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method."
 msgstr "除了 `append()`方法外，`Array`提供的其他所有方法都可以用于 `Span`。"
 
-#: src/ch02-06-common-collections.md:156
+#: src/ch02-06-common-collections.md:161
 msgid "##### Turning an Array into span"
 msgstr "##### 将一个数组变成span"
 
-#: src/ch02-06-common-collections.md:158
+#: src/ch02-06-common-collections.md:163
 msgid "To create a `Span` of an `Array`, call the `span()` method:"
 msgstr "要创建一个 `Array`的 `Span` ，请调用`span()`方法："
 
-#: src/ch02-06-common-collections.md:160
+#: src/ch02-06-common-collections.md:165
 msgid ""
 "```rust\n"
-"let span = array.span();\n"
+"# use array::ArrayTrait;\n"
+"# \n"
+"# fn main() {\n"
+"#     let mut array = ArrayTrait::new();\n"
+"    array.span()\n"
+"# }\n"
 "```"
 msgstr ""
 "```rust\n"
-"let span = array.span();\n"
+"# use array::ArrayTrait;\n"
+"# \n"
+"# fn main() {\n"
+"#     let mut array = ArrayTrait::new();\n"
+"    array.span()\n"
+"# }\n"
 "```"
 
-#: src/ch02-06-common-collections.md:164 src/ch04-03-method-syntax.md:286 src/ch06-05-separating-modules-into-different-files.md:98
+#: src/ch02-06-common-collections.md:174 src/ch04-03-method-syntax.md:286 src/ch06-05-separating-modules-into-different-files.md:98
 msgid "## Summary"
 msgstr "## 总结"
 
-#: src/ch02-06-common-collections.md:166
+#: src/ch02-06-common-collections.md:176
 msgid ""
 "You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,\n"
 "`if` expressions, loops, and common collections! To practice with the concepts discussed in this chapter,\n"
@@ -4178,7 +4208,7 @@ msgstr ""
 "`if`表达式、循环和常见的集合!为了练习本章所讨论的概念、\n"
 "试着建立程序来做以下事情："
 
-#: src/ch02-06-common-collections.md:170
+#: src/ch02-06-common-collections.md:180
 msgid ""
 "- Generate the _n_-th Fibonacci number.\n"
 "- Compute the factorial of a number _n_."
@@ -4186,7 +4216,7 @@ msgstr ""
 "- 产生第 _n_ 个斐波那契数。\n"
 "- 计算一个数字的阶乘 _n_ 。"
 
-#: src/ch02-06-common-collections.md:173
+#: src/ch02-06-common-collections.md:183
 msgid ""
 "When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_\n"
 "commonly exist in other programming languages: ownership."
@@ -4297,32 +4327,36 @@ msgstr ""
 #: src/ch03-01-what-is-ownership.md:39
 msgid ""
 "```rust\n"
+"# fn main() {\n"
 "    {                      // s is not valid here, it’s not yet declared\n"
 "        let s = 'hello';   // s is valid from this point forward\n"
 "\n"
 "        // do stuff with s\n"
 "    }                      // this scope is now over, and s is no longer valid\n"
+"# }\n"
 "```"
 msgstr ""
 "```rust\n"
+"# fn main() {\n"
 "    {                      // s is not valid here, it’s not yet declared\n"
-"        let s = ‘hello’;   // s is valid from this point forward\n"
+"        let s = 'hello';   // s is valid from this point forward\n"
 "\n"
 "        // do stuff with s\n"
 "    }                      // this scope is now over, and s is no longer valid\n"
+"# }\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:47
+#: src/ch03-01-what-is-ownership.md:49
 msgid ""
 "<span class=\"caption\">Listing 3-1: A variable and the scope in which it is\n"
 "valid</span>"
 msgstr "<span class=\"caption\">示例3-1：一个变量和其有效的作用域</span>"
 
-#: src/ch03-01-what-is-ownership.md:50
+#: src/ch03-01-what-is-ownership.md:52
 msgid "In other words, there are two important points in time here:"
 msgstr "换句话说，这里有两个重要的时间点："
 
-#: src/ch03-01-what-is-ownership.md:52
+#: src/ch03-01-what-is-ownership.md:54
 msgid ""
 "- When `s` comes _into_ scope, it is valid.\n"
 "- It remains valid until it goes _out of_ scope."
@@ -4330,7 +4364,7 @@ msgstr ""
 "- 当`s`进入 _进入作用域_ 时，它就是有效的。\n"
 "- 这一直持续到它 _离开_ 作用域 为止。"
 
-#: src/ch03-01-what-is-ownership.md:55
+#: src/ch03-01-what-is-ownership.md:57
 msgid ""
 "At this point, the relationship between scopes and when variables are valid is\n"
 "similar to that in other programming languages. Now we’ll build on top of this\n"
@@ -4339,11 +4373,11 @@ msgstr ""
 "目前为止，变量是否有效与作用域的关系跟其他编程语言是类似的。\n"
 "现在我们在此基础上通过在[前一章](ch02-06-common-collections.md)中介绍的`Array`类型进一步理解。"
 
-#: src/ch03-01-what-is-ownership.md:59
+#: src/ch03-01-what-is-ownership.md:61
 msgid "### Ownership with the `Array` Type"
 msgstr "###  `Array` 类型的所有权"
 
-#: src/ch03-01-what-is-ownership.md:61
+#: src/ch03-01-what-is-ownership.md:63
 msgid ""
 "To illustrate the rules of ownership, we need a data type that is more complex.\n"
 "The types covered in the [“Data Types”][data-types]<!-- ignore --> section\n"
@@ -4351,31 +4385,37 @@ msgid ""
 "quickly and trivially copied to make a new, independent instance if another\n"
 "part of code needs to use the same value in a different scope, and can easily\n"
 "be dropped when they're no longer used. But what is the behavior with the `Array` type whose size\n"
-"is unknown at compile time and which can't be trivially copied ?"
+"is unknown at compile time and which can't be trivially copied?"
 msgstr ""
-"为了演示所有权的规则，我们需要一个比第二章 [“Data Types”][data-types]<!-- ignore --> 中讲到的都要复杂的数据类型。\n"
+"为了演示所有权的规则，我们需要一个比第二章 [“Data Types”][data-types]<!-- ignore --> 中讲到的类型都要复杂的数据类型。\n"
 "前面介绍的类型都是已知大小的，如果代码的另一部分需要在不同的作用域中使用相同的值，可以快速简单地复制它们来创建一个新的独立实例，并且当离开作用域时被丢弃。\n"
 "但当编译时大小未知且无法被简单复制的`Array`会怎么样？"
 
-#: src/ch03-01-what-is-ownership.md:69
+#: src/ch03-01-what-is-ownership.md:71
 msgid "Here is a short reminder of what an array looks like:"
 msgstr "这里简单回忆一下数组的样子："
 
-#: src/ch03-01-what-is-ownership.md:71
+#: src/ch03-01-what-is-ownership.md:73
 msgid ""
 "```rust\n"
-"let mut arr = ArrayTrait::<u128>::new();\n"
-"arr.append(1);\n"
-"arr.append(2);\n"
+"# use array::ArrayTrait;\n"
+"# fn main() {\n"
+"    let mut arr = ArrayTrait::<u128>::new();\n"
+"    arr.append(1);\n"
+"    arr.append(2);\n"
+"# }\n"
 "```"
 msgstr ""
 "```rust\n"
-"let mut arr = ArrayTrait::<u128>::new();\n"
-"arr.append(1);\n"
-"arr.append(2);\n"
+"# use array::ArrayTrait;\n"
+"# fn main() {\n"
+"    let mut arr = ArrayTrait::<u128>::new();\n"
+"    arr.append(1);\n"
+"    arr.append(2);\n"
+"# }\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:77
+#: src/ch03-01-what-is-ownership.md:82
 msgid ""
 "So, how does the ownership system ensure that each cell is never written to more than once?\n"
 "Consider the following code, where we try to pass the same instance of an array in two consecutive\n"
@@ -4384,7 +4424,7 @@ msgstr ""
 "那么，所有权系统如何确保每个内存单元不会被写入超过一次？\n"
 "考虑一下下面的代码，我们试图在两个连续的函数调用中传递同一个数组实例："
 
-#: src/ch03-01-what-is-ownership.md:81
+#: src/ch03-01-what-is-ownership.md:86
 msgid ""
 "```rust,does_not_compile\n"
 "use array::ArrayTrait;\n"
@@ -4412,7 +4452,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:94
+#: src/ch03-01-what-is-ownership.md:99
 msgid ""
 "In this case, we try to pass the same array instance `arr` by value to the functions `foo` and `bar`, which means\n"
 "that the parameter used in both function calls is the same instance of the array. If you append a value to the array\n"
@@ -4428,11 +4468,11 @@ msgstr ""
 "为了防止这种情况，`arr`变量的所有权从`main`函数转移到`foo`函数。当试图以`arr`为参数调用`bar`时，`arr`的所有权早已再第一次调用时被转移。\n"
 "所有权系统阻止了我们在`foo`中使用相同的`arr`实例。"
 
-#: src/ch03-01-what-is-ownership.md:102
+#: src/ch03-01-what-is-ownership.md:107
 msgid "Running the code above will result in a compile-time error:"
 msgstr "运行上面的代码将导致一个编译时错误："
 
-#: src/ch03-01-what-is-ownership.md:104
+#: src/ch03-01-what-is-ownership.md:109
 msgid ""
 "```console\n"
 "error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>\n"
@@ -4448,11 +4488,11 @@ msgstr ""
 "        ^*****^\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:111
+#: src/ch03-01-what-is-ownership.md:116
 msgid "### The `Copy` Trait"
 msgstr "### `Copy` Trait"
 
-#: src/ch03-01-what-is-ownership.md:113
+#: src/ch03-01-what-is-ownership.md:118
 msgid ""
 "If a type implements the `Copy` trait, passing it to a function will not move the ownership of the value to the function called, but will instead pass a copy of the value.\n"
 "You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the "
@@ -4463,7 +4503,7 @@ msgstr ""
 "你可以通过在你的类型定义中添加`#[derive(Copy)]`标注来实现`Copy` Trait。然而，如果一个类型本身或其任何组件没有实现Copy Trait，Cairo将不允许该类型被标注为Copy。\n"
 "虽然数组和字典不能被复制，但不包含它们的自定义类型可以被复制。"
 
-#: src/ch03-01-what-is-ownership.md:117
+#: src/ch03-01-what-is-ownership.md:122
 msgid ""
 "```rust,ignore_format\n"
 "#[derive(Copy, Drop)]\n"
@@ -4501,7 +4541,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:135
+#: src/ch03-01-what-is-ownership.md:140
 msgid ""
 "In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing "
 "a copy of `p1`, and the ownership of `p1` remains with the main function.\n"
@@ -4510,15 +4550,15 @@ msgstr ""
 "在这个例子中，我们可以向foo函数传递两次`p1`，因为`Point`类型实现了`Copy`trait。这意味着当我们把`p1`传递给`foo`时，我们实际上是在传递`p1`的副本，而`p1`的所有权仍然属于主函数。\n"
 "如果你从`Point`类型中删除`Copy`trait的派生，当你试图编译代码时，你会得到一个编译时错误。"
 
-#: src/ch03-01-what-is-ownership.md:138
+#: src/ch03-01-what-is-ownership.md:143
 msgid "_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 4](ch04-00-using-structs-to-structure-related-data.md)._"
 msgstr "_不要担心`Struct`关键字。我们将在[第四章](ch04-00-using-structs-to-structure-related-data.md)中介绍_"
 
-#: src/ch03-01-what-is-ownership.md:140
+#: src/ch03-01-what-is-ownership.md:145
 msgid "### The `Drop` Trait"
 msgstr "### `Drop` Trait"
 
-#: src/ch03-01-what-is-ownership.md:142
+#: src/ch03-01-what-is-ownership.md:147
 msgid ""
 "You may have noticed that the `Point` type in the previous example also implements the `Drop` trait. In Cairo, a value cannot go out of scope unless it has been previously moved.\n"
 "For example, the following code will not compile, because the struct `A` is not moved before it goes out of scope:"
@@ -4526,7 +4566,7 @@ msgstr ""
 "你可能已经注意到，前面例子中的`Point`类型也实现了`Drop` trait。在Cairo中，一个值不能超出其作用域，除非它之前被移动过。\n"
 "例如，下面的代码将无法编译，因为结构体`A`在超出作用域之前没有被移动："
 
-#: src/ch03-01-what-is-ownership.md:145
+#: src/ch03-01-what-is-ownership.md:150
 msgid ""
 "```rust,does_not_compile\n"
 "struct A {}\n"
@@ -4544,21 +4584,21 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:153
+#: src/ch03-01-what-is-ownership.md:158
 msgid ""
 "This is to ensure the soundness of Cairo programs. Soundness refers to the fact that if a\n"
 "statement during the execution of the program is false, no cheating prover can convince an\n"
 "honest verifier that it is true. In our case, we want to ensure the consistency of\n"
 "consecutive dictionary key updates during program execution, which is only checked when\n"
-"the dictionaries are`squashed` - which moves the ownership of the dictionary to the\n"
+"the dictionaries are `squashed` - which moves the ownership of the dictionary to the\n"
 "`squash` method, thus allowing the dictionary to go out of scope. Unsquashed dictionaries\n"
 "are dangerous, as a malicious prover could prove the correctness of inconsistent updates."
 msgstr ""
 "这是为了确保Cairo程序的健全性。健全性指的是，如果在程序执行过程中的一个语句是假的，任何作弊的验证者都不可能说服一个诚实的验证者相信它是真的。\n"
-"在我们的案例中，我们要确保程序执行过程中连续的字典key更新的一致性。\n"
-"这只有在字典被压缩（`squashed`）时才会进行检查--它将字典的所有权转移到了`squash`方法，从而允许字典超出范围。未被压缩的字典是危险的，因为恶意的证明者可以证明不一致更新的正确性。"
+"在我们的案例中，我们要确保程序执行过程中连续的字典键的更新的一致性。\n"
+"这只有在字典被压缩（`squashed`）时才会进行检查--它将字典的所有权转移到了`squash`方法，从而允许字典超出作用域。未被压缩的字典是危险的，因为恶意的证明者可以证明不一致更新的正确性。"
 
-#: src/ch03-01-what-is-ownership.md:161
+#: src/ch03-01-what-is-ownership.md:166
 msgid ""
 "However, types that implement the `Drop` trait are allowed to go out of scope without being explicitly moved. When a value of a type that implements the `Drop` trait goes out of "
 "scope, the `Drop` implementation is called on the type, which moves the value to the `drop` function, allowing it to go out of scope - This is what we call \"dropping\" a value.\n"
@@ -4568,7 +4608,7 @@ msgstr ""
 "我们所说的 \"丢弃 \"一个值。\n"
 "值得注意的是，drop的实现是一个 \"no-op\"，也就是说，除了允许值离开作用域之外，它不执行任何其他操作。"
 
-#: src/ch03-01-what-is-ownership.md:164
+#: src/ch03-01-what-is-ownership.md:169
 msgid ""
 "The `Drop` implementation can be derived for all types, allowing them to be dropped when going out of scope, except for dictionaries (`Felt252Dict`) and types containing "
 "dictionaries.\n"
@@ -4577,7 +4617,7 @@ msgstr ""
 "除了字典（`Felt252Dict`）和包含字典的类型外，所有类型都可以派生`Drop`的实现，使得它们可以在超出作用域时被丢弃。\n"
 "例如，下面的代码可以正常编译："
 
-#: src/ch03-01-what-is-ownership.md:167
+#: src/ch03-01-what-is-ownership.md:172
 msgid ""
 "```rust\n"
 "#[derive(Drop)]\n"
@@ -4597,11 +4637,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:176
+#: src/ch03-01-what-is-ownership.md:181
 msgid "### The `Destruct` Trait"
 msgstr "### `Destruct` Trait"
 
-#: src/ch03-01-what-is-ownership.md:178
+#: src/ch03-01-what-is-ownership.md:183
 msgid ""
 "Manually calling the `squash` method on a dictionary is not very convenient, and it is easy to forget to do so. To make it easier to use dictionaries, Cairo provides the `Destruct` "
 "trait, which allows you to specify the behavior of a type when it goes out of scope. While Dictionaries don't implement the `Drop` trait, they do implement the `Destruct` trait, "
@@ -4610,11 +4650,11 @@ msgstr ""
 "手动调用字典上的 `squash` 方法不是很方便，而且很容易忘记这样做。为了方便使用字典，Cairo 提供了 `Destruct` trait，它允许你指定一个类型超出作用域时的行为。虽然字典没有实现`Drop` trait，"
 "但它们实现了`Destruct`trait，这允许它们在超出作用域时自动被`squashed`，因此你可以不需要手动调用`squash`方法。"
 
-#: src/ch03-01-what-is-ownership.md:180
+#: src/ch03-01-what-is-ownership.md:185
 msgid "Consider the following example, in which we define a custom type that contains a dictionary:"
 msgstr "下面的这个例子中，我们定义了一个包含字典的自定义类型："
 
-#: src/ch03-01-what-is-ownership.md:182
+#: src/ch03-01-what-is-ownership.md:187
 msgid ""
 "```rust,does_not_compile\n"
 "use dict::Felt252DictTrait;\n"
@@ -4640,11 +4680,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:194
+#: src/ch03-01-what-is-ownership.md:199
 msgid "If you try to run this code, you will get a compile-time error:"
 msgstr "如果你试图运行这段代码，你会得到一个编译时错误："
 
-#: src/ch03-01-what-is-ownership.md:196
+#: src/ch03-01-what-is-ownership.md:201
 msgid ""
 "```console\n"
 "error: Variable not dropped. Trait has no implementation in context: core::traits::Drop::<temp7::temp7::A>. Trait has no implementation in context: core::traits::Destruct::<temp7::"
@@ -4662,7 +4702,7 @@ msgstr ""
 "    ^*^\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:203
+#: src/ch03-01-what-is-ownership.md:208
 msgid ""
 "When A goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can "
 "derive the `Destruct` trait implementation for the `A` type:"
@@ -4670,7 +4710,7 @@ msgstr ""
 "当A超出作用域时，它不能被丢弃，因为它既没有实现`Drop`（因为它包含一个字典，不能派生`derive(Drop)`）也没有实现`Destruct` trait。为了解决这个问题，我们可以为`A`类型派生出`Destruct` "
 "trait的实现："
 
-#: src/ch03-01-what-is-ownership.md:205
+#: src/ch03-01-what-is-ownership.md:210
 msgid ""
 "```rust\n"
 "use dict::Felt252DictTrait;\n"
@@ -4698,15 +4738,15 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:218
+#: src/ch03-01-what-is-ownership.md:223
 msgid "Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile."
 msgstr "现在，当`A`超出作用域时，它的字典将被自动`squashed`，并且程序将被编译。"
 
-#: src/ch03-01-what-is-ownership.md:220
+#: src/ch03-01-what-is-ownership.md:225
 msgid "### Copy Array data with Clone"
 msgstr "### 用Clone复制数组数据"
 
-#: src/ch03-01-what-is-ownership.md:222
+#: src/ch03-01-what-is-ownership.md:227
 msgid ""
 "If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 5, but because methods are a common feature "
 "in many\n"
@@ -4715,41 +4755,41 @@ msgstr ""
 "如果我们确实想深入复制一个 \"数组 \"的数据，我们可以使用一个叫做 `clone`的通用方法。\n"
 "我们将在第5章中讨论方法的语法，但由于方法是许多编程语言的共同特征，你可能已经见过它们了。"
 
-#: src/ch03-01-what-is-ownership.md:225
+#: src/ch03-01-what-is-ownership.md:230
 msgid "Here’s an example of the `clone` method in action."
 msgstr "下面是一个 `clone` 方法的实例。"
 
-#: src/ch03-01-what-is-ownership.md:227
+#: src/ch03-01-what-is-ownership.md:232
 msgid "> Note: in the following example, we need to import the `Clone` trait from the corelib `clone` module, and its implementation for the array type from the `array` module."
 msgstr "> 注意：在下面的例子中，我们需要从corelib的`clone`模块中导入`clone`trait，并从`array`模块中导入其对数组类型的实现。"
 
-#: src/ch03-01-what-is-ownership.md:229
+#: src/ch03-01-what-is-ownership.md:234
 msgid ""
 "```rust\n"
 "use array::ArrayTrait;\n"
 "use clone::Clone;\n"
 "use array::ArrayTCloneImpl;\n"
-"...\n"
-"let arr1 = ArrayTrait::<u128>::new();\n"
-"let arr2 = arr1.clone();\n"
-"\n"
+"fn main() {\n"
+"    let arr1 = ArrayTrait::<u128>::new();\n"
+"    let arr2 = arr1.clone();\n"
+"}\n"
 "```"
 msgstr ""
 "```rust\n"
 "use array::ArrayTrait;\n"
 "use clone::Clone;\n"
 "use array::ArrayTCloneImpl;\n"
-"...\n"
-"let arr1 = ArrayTrait::<u128>::new();\n"
-"let arr2 = arr1.clone();\n"
-"\n"
+"fn main() {\n"
+"    let arr1 = ArrayTrait::<u128>::new();\n"
+"    let arr2 = arr1.clone();\n"
+"}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:239
+#: src/ch03-01-what-is-ownership.md:244
 msgid "> Note: you will need to run `cairo-run` with the `--available-gas=2000000` option to run this example, because it uses a loop and must be ran with a gas limit."
 msgstr "> 注意：你需要用`--available-gas=2000000`选项运行`cairo-run`来运行这个例子，因为它使用了一个循环，运行时必须有gas限制。"
 
-#: src/ch03-01-what-is-ownership.md:241
+#: src/ch03-01-what-is-ownership.md:246
 msgid ""
 "When you see a call to `clone`, you know that some arbitrary code is being\n"
 "executed and that code may be expensive. It’s a visual indicator that something\n"
@@ -4758,27 +4798,27 @@ msgstr ""
 "当你看到对`clone`的调用时，你知道一些特定的代码被执行而且这些代码可能相当消耗资源。\n"
 "你很容易察觉到一些不寻常的事情正在发生。"
 
-#: src/ch03-01-what-is-ownership.md:245
+#: src/ch03-01-what-is-ownership.md:250
 msgid "### Ownership and Functions"
 msgstr "### 所有权与函数"
 
-#: src/ch03-01-what-is-ownership.md:247
+#: src/ch03-01-what-is-ownership.md:252
 msgid ""
 "Passing a variable to a function will either move it or copy it. As seen in the Array section, passing an `Array` as a function parameter transfers its ownership; let's see what "
 "happens with other types."
 msgstr "将一个变量传递给一个函数，要么移动它，要么复制它。正如在数组部分所看到的，将 `Array` 作为一个函数参数传递同时会传递它的所有权；让我们看看其他类型会发生什么。"
 
-#: src/ch03-01-what-is-ownership.md:249
+#: src/ch03-01-what-is-ownership.md:254
 msgid ""
 "Listing 3-3 has an example with some annotations\n"
 "showing where variables go into and out of scope."
 msgstr "示例3-3使用注释展示变量何时进入和离开作用域。"
 
-#: src/ch03-01-what-is-ownership.md:252 src/ch03-01-what-is-ownership.md:294 src/ch03-01-what-is-ownership.md:347
+#: src/ch03-01-what-is-ownership.md:257 src/ch03-01-what-is-ownership.md:299 src/ch03-01-what-is-ownership.md:352
 msgid "<span class=\"filename\">Filename: src/main.cairo</span>"
 msgstr "<span class=\"filename\">文件名： src/main.cairo</span>"
 
-#: src/ch03-01-what-is-ownership.md:254
+#: src/ch03-01-what-is-ownership.md:259
 msgid ""
 "```rust,ignore_format\n"
 "#[derive(Drop)]\n"
@@ -4832,13 +4872,13 @@ msgstr ""
 "} // Here, some_integer goes out of scope and is dropped.\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:280
+#: src/ch03-01-what-is-ownership.md:285
 msgid ""
 "<span class=\"caption\">Listing 3-3: Functions with ownership and scope\n"
 "annotated</span>"
 msgstr "<span class=\"caption\">示例3-3：带有所有权和作用域注释的函数</span>"
 
-#: src/ch03-01-what-is-ownership.md:283
+#: src/ch03-01-what-is-ownership.md:288
 msgid ""
 "If we tried to use `my_struct` after the call to `takes_ownership`, Cairo would throw a\n"
 "compile-time error. These static checks protect us from mistakes. Try adding\n"
@@ -4849,11 +4889,11 @@ msgstr ""
 "这些静态检查可以保护我们不犯错误。试着在`main`中添加使用`my_struct`和`x`的代码，看看哪里可以使用它们，\n"
 "哪里所有权规则将会阻止你这样做。"
 
-#: src/ch03-01-what-is-ownership.md:288
+#: src/ch03-01-what-is-ownership.md:293
 msgid "### Return Values and Scope"
 msgstr "### 返回值与作用域"
 
-#: src/ch03-01-what-is-ownership.md:290
+#: src/ch03-01-what-is-ownership.md:295
 msgid ""
 "Returning values can also transfer ownership. Listing 3-4 shows an example of a\n"
 "function that returns some value, with similar annotations as those in Listing\n"
@@ -4862,7 +4902,7 @@ msgstr ""
 "返回值也可以转移所有权。示例3-4显示了一个例子\n"
 "该函数返回一些值，其注释与示例4-3中的相似。"
 
-#: src/ch03-01-what-is-ownership.md:296
+#: src/ch03-01-what-is-ownership.md:301
 msgid ""
 "```rust,ignore_format\n"
 "#[derive(Drop)]\n"
@@ -4940,7 +4980,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:334
+#: src/ch03-01-what-is-ownership.md:339
 msgid ""
 "<span class=\"caption\">Listing 3-4: Transferring ownership of return\n"
 "values</span>"
@@ -4948,11 +4988,11 @@ msgstr ""
 "<span class=\"caption\">示例3-4：转移返回值的所有权\n"
 "</span>"
 
-#: src/ch03-01-what-is-ownership.md:337
+#: src/ch03-01-what-is-ownership.md:342
 msgid "When a variable goes out of scope, its value is dropped, unless ownership of the value has been moved to another variable."
 msgstr "当一个变量超出作用域时，它的值会被丢弃，除非值的所有权被转移到另一个变量上。"
 
-#: src/ch03-01-what-is-ownership.md:339
+#: src/ch03-01-what-is-ownership.md:344
 msgid ""
 "While this works, taking ownership and then returning ownership with every\n"
 "function is a bit tedious. What if we want to let a function use a value but\n"
@@ -4964,11 +5004,11 @@ msgstr ""
 "如果我们想要函数使用一个值但不获取所有权该怎么办呢？\n"
 "除此之外，我们也可能想返回函数体中产生的一些数据。"
 
-#: src/ch03-01-what-is-ownership.md:345
+#: src/ch03-01-what-is-ownership.md:350
 msgid "Cairo does let us return multiple values using a tuple, as shown in Listing 3-5."
 msgstr "Cairo的确让我们可以使用一个元组返回多个值，如示例3-5所示。"
 
-#: src/ch03-01-what-is-ownership.md:349
+#: src/ch03-01-what-is-ownership.md:354
 msgid ""
 "```rust\n"
 "use array::ArrayTrait;\n"
@@ -5000,11 +5040,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-01-what-is-ownership.md:364
+#: src/ch03-01-what-is-ownership.md:369
 msgid "<span class=\"caption\">Listing 3-5: Returning ownership of parameters</span>"
 msgstr "<span class=\"caption\">示例3-5：返回参数的所有权</span>"
 
-#: src/ch03-01-what-is-ownership.md:366
+#: src/ch03-01-what-is-ownership.md:371
 msgid ""
 "But this is too much ceremony and a lot of work for a concept that should be\n"
 "common. Luckily for us, Cairo has two features for using a value without\n"
@@ -5068,7 +5108,9 @@ msgid ""
 "    let mut arr1 = ArrayTrait::<u128>::new();\n"
 "    let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time\n"
 "    arr1.append(1); // Mutate `arr1` by appending a value\n"
-"    let first_length = calculate_length(first_snapshot); // Calculate the length of the array when the snapshot was taken\n"
+"    let first_length = calculate_length(\n"
+"        first_snapshot\n"
+"    ); // Calculate the length of the array when the snapshot was taken\n"
 "    let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
 "    first_length.print();\n"
 "    second_length.print();\n"
@@ -5087,7 +5129,9 @@ msgstr ""
 "    let mut arr1 = ArrayTrait::<u128>::new();\n"
 "    let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time\n"
 "    arr1.append(1); // Mutate `arr1` by appending a value\n"
-"    let first_length = calculate_length(first_snapshot); // Calculate the length of the array when the snapshot was taken\n"
+"    let first_length = calculate_length(\n"
+"        first_snapshot\n"
+"    ); // Calculate the length of the array when the snapshot was taken\n"
 "    let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
 "    first_length.print();\n"
 "    second_length.print();\n"
@@ -5098,7 +5142,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:44
+#: src/ch03-02-references-and-snapshots.md:46
 msgid ""
 "> Note: It is only possible to call the `len()` method on an array snapshot because it is defined as such in the `ArrayTrait` trait. If you try to call a method that is not defined "
 "for snapshots on a snapshot, you will get a compilation error. However, you can call methods expecting a snapshot on non-snapshot types."
@@ -5106,11 +5150,11 @@ msgstr ""
 "> 注意：只有在数组快照上才能调用 `len()` 方法，因为它在 `ArrayTrait` trait中被定义成这样。如果你试图在一个快照上调用一个没有为快照定义的方法，你会得到一个编译错误。然而，你可以在非快"
 "照类型上调用快照的方法。"
 
-#: src/ch03-02-references-and-snapshots.md:46
+#: src/ch03-02-references-and-snapshots.md:48
 msgid "The output of this program is:"
 msgstr "这个程序的输出是："
 
-#: src/ch03-02-references-and-snapshots.md:48
+#: src/ch03-02-references-and-snapshots.md:50
 msgid ""
 "```console\n"
 "[DEBUG]\t                               \t(raw: 0)\n"
@@ -5128,7 +5172,7 @@ msgstr ""
 "Run completed successfully, returning []\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:56
+#: src/ch03-02-references-and-snapshots.md:58
 msgid ""
 "First, notice that all the tuple code in the variable declaration and the function return value is gone. Second, note\n"
 "that we pass `@arr1` into `calculate_length` and, in its definition, we take `@Array<u128>` rather than `Array<u128>`."
@@ -5136,49 +5180,85 @@ msgstr ""
 "首先，注意到变量声明和函数返回值中的所有元组代码都消失了。\n"
 "第二，注意看我们把`@arr1`传入`calculate_length`，因此在它的定义中，我们采用`@Array<u128>`，而不是`Array<u128>`。"
 
-#: src/ch03-02-references-and-snapshots.md:59
+#: src/ch03-02-references-and-snapshots.md:61
 msgid "Let’s take a closer look at the function call here:"
 msgstr "让我们仔细看一下这里的函数调用："
 
-#: src/ch03-02-references-and-snapshots.md:61
+#: src/ch03-02-references-and-snapshots.md:63
 msgid ""
 "```rust\n"
-"let mut arr1 = ArrayTrait::<u128>::new();\n"
-"let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
+"# use array::ArrayTrait;\n"
+"# use debug::PrintTrait;\n"
+"# \n"
+"# fn main() {\n"
+"#     let mut arr1 = ArrayTrait::<u128>::new();\n"
+"#     let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time\n"
+"#     arr1.append(1); // Mutate `arr1` by appending a value\n"
+"#     let first_length = calculate_length(\n"
+"#         first_snapshot\n"
+"#     ); // Calculate the length of the array when the snapshot was taken\n"
+"    let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
+"#     first_length.print();\n"
+"#     second_length.print();\n"
+"# }\n"
+"# \n"
+"# fn calculate_length(arr: @Array<u128>) -> usize {\n"
+"#     arr.len()\n"
+"# }\n"
 "```"
 msgstr ""
 "```rust\n"
-"let mut arr1 = ArrayTrait::<u128>::new();\n"
-"let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
+"# use array::ArrayTrait;\n"
+"# use debug::PrintTrait;\n"
+"# \n"
+"# fn main() {\n"
+"#     let mut arr1 = ArrayTrait::<u128>::new();\n"
+"#     let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time\n"
+"#     arr1.append(1); // Mutate `arr1` by appending a value\n"
+"#     let first_length = calculate_length(\n"
+"#         first_snapshot\n"
+"#     ); // Calculate the length of the array when the snapshot was taken\n"
+"    let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
+"#     first_length.print();\n"
+"#     second_length.print();\n"
+"# }\n"
+"# \n"
+"# fn calculate_length(arr: @Array<u128>) -> usize {\n"
+"#     arr.len()\n"
+"# }\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:66
+#: src/ch03-02-references-and-snapshots.md:84
 msgid ""
 "The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value, the value it points to cannot be modified through the "
 "snapshot, and the value it refers to will not be dropped once the snapshot stops being used."
 msgstr "`@arr1`语法让我们为`arr1`中的值创建了一个快照。因为快照是一个值的不可改变的视图，它所指向的值不能通过快照被修改，因此即使快照停止被使用，它所指向的值也不会被丢弃。"
 
-#: src/ch03-02-references-and-snapshots.md:68
+#: src/ch03-02-references-and-snapshots.md:86
 msgid "Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:"
 msgstr "同样，函数的签名使用`@`来表示参数`arr`的类型是一个快照。让我们添加一些解释性的注解："
 
-#: src/ch03-02-references-and-snapshots.md:70
+#: src/ch03-02-references-and-snapshots.md:88
 msgid ""
 "```rust\n"
-"fn calculate_length(array_snapshot: @Array<u128>) -> usize { // array_snapshot is a snapshot of an Array\n"
+"fn calculate_length(\n"
+"    array_snapshot: @Array<u128>\n"
+") -> usize { // array_snapshot is a snapshot of an Array\n"
 "    array_snapshot.len()\n"
 "} // Here, array_snapshot goes out of scope and is dropped.\n"
 "// However, because it is only a view of what the original array `arr` contains, the original `arr` can still be used.\n"
 "```"
 msgstr ""
 "```rust\n"
-"fn calculate_length(array_snapshot: @Array<u128>) -&gt; usize { // array_snapshot是一个数组的快照。\n"
+"fn calculate_length(\n"
+"    array_snapshot: @Array<u128>\n"
+") -> usize { // array_snapshot is a snapshot of an Array\n"
 "    array_snapshot.len()\n"
-"}// 这里，array_snapshot超出了范围被丢弃。\n"
-"// 但是，因为它只是原始数组`arr`所包含的视图，原始`arr`仍然可以被使用。\n"
+"} // Here, array_snapshot goes out of scope and is dropped.\n"
+"// However, because it is only a view of what the original array `arr` contains, the original `arr` can still be used.\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:77
+#: src/ch03-02-references-and-snapshots.md:97
 msgid ""
 "The scope in which the variable `array_snapshot` is valid is the same as any function parameter’s scope, but the underlying value of the snapshot is not dropped when `array_snapshot` "
 "stops being used. When functions have snapshots as parameters instead of the actual values, we won’t need to return the values in order to give back ownership of the original value, "
@@ -5187,7 +5267,7 @@ msgstr ""
 "变量`array_snapshot`的有效范围与任何函数参数的范围相同，但当`array_snapshot`停止使用时，快照的底层值不会被丢弃。当函数有快照作为参数而不是实际的值时，我们将不需要返回值以归还原始值的"
 "所有权，因为我们从未拥有过它。"
 
-#: src/ch03-02-references-and-snapshots.md:79
+#: src/ch03-02-references-and-snapshots.md:99
 msgid ""
 "Snapshots can be converted back into regular values using the `desnap` operator `*`, as long as the value type is copyable (which is not the case for Arrays, as they don't implement "
 "`Copy`). In the following example, we want to calculate the area of a rectangle, but we don't want to take ownership of the rectangle in the `calculate_area` function, because we "
@@ -5197,11 +5277,11 @@ msgstr ""
 "快照可以通过`desnap`操作符`*`转换回常规值，只要值的类型是可复制的（数组不是这样，因为它们没有实现`Copy`）。在下面的例子中，我们想计算一个矩形的面积，但我们不想在`calculate_area`函数中"
 "占有这个矩形的所有权，因为我们可能想在函数调用后再次使用这个矩形。由于我们的函数不会改变矩形实例，我们可以将矩形的快照传递给函数，然后用`desnap`操作符`*`将快照转化回数值。"
 
-#: src/ch03-02-references-and-snapshots.md:81
+#: src/ch03-02-references-and-snapshots.md:101
 msgid "The snapshot type is always copyable and droppable, so that you can use it multiple times without worrying about ownership transfers."
 msgstr "快照类型始终是可复制和可删除的，因此你可以多次使用它而不必担心所有权的转移。"
 
-#: src/ch03-02-references-and-snapshots.md:83
+#: src/ch03-02-references-and-snapshots.md:103
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -5251,7 +5331,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:107
+#: src/ch03-02-references-and-snapshots.md:127
 msgid ""
 "But, what happens if we try to modify something we’re passing as snapshot? Try the code in\n"
 "Listing 3-6. Spoiler alert: it doesn’t work!"
@@ -5259,9 +5339,10 @@ msgstr ""
 "但是，如果我们试图修改我们作为快照传递的东西会发生什么？试试下面的代码\n"
 "示例3-6。剧透一下：它不起作用!"
 
-#: src/ch03-02-references-and-snapshots.md:112
+#: src/ch03-02-references-and-snapshots.md:132
 msgid ""
 "```rust,does_not_compile\n"
+"// does_not_compile\n"
 "#[derive(Copy, Drop)]\n"
 "struct Rectangle {\n"
 "    height: u64,\n"
@@ -5281,6 +5362,7 @@ msgid ""
 "```"
 msgstr ""
 "```rust,does_not_compile\n"
+"// does_not_compile\n"
 "#[derive(Copy, Drop)]\n"
 "struct Rectangle {\n"
 "    height: u64,\n"
@@ -5299,15 +5381,15 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:131
+#: src/ch03-02-references-and-snapshots.md:152
 msgid "<span class=\"caption\">Listing 3-6: Attempting to modify a snapshot value</span>"
 msgstr "<span class=\"caption\">示例3-6：试图修改一个快照值</span>"
 
-#: src/ch03-02-references-and-snapshots.md:133
+#: src/ch03-02-references-and-snapshots.md:154
 msgid "Here’s the error:"
 msgstr "这里有一个错误："
 
-#: src/ch03-02-references-and-snapshots.md:135
+#: src/ch03-02-references-and-snapshots.md:156
 msgid ""
 "```console\n"
 "error: Invalid left-hand side of assignment.\n"
@@ -5323,15 +5405,15 @@ msgstr ""
 "    ^********^\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:142
+#: src/ch03-02-references-and-snapshots.md:163
 msgid "The compiler prevents us from modifying values associated to snapshots."
 msgstr "编译器阻止我们修改与快照相关的值。"
 
-#: src/ch03-02-references-and-snapshots.md:144
+#: src/ch03-02-references-and-snapshots.md:165
 msgid "### Mutable References"
 msgstr "### 可变引用"
 
-#: src/ch03-02-references-and-snapshots.md:146
+#: src/ch03-02-references-and-snapshots.md:167
 msgid ""
 "We can achieve the behavior we want in Listing 3-6 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are "
 "implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by "
@@ -5342,15 +5424,15 @@ msgstr ""
 "做，它们允许你对传递的值进行改变，同时通过在执行结束时自动返回来保持对它的所有权。\n"
 "在Cairo中，一个参数可以使用`ref`修饰符作为 _mutable reference_ 传递。"
 
-#: src/ch03-02-references-and-snapshots.md:149
+#: src/ch03-02-references-and-snapshots.md:170
 msgid "> **Note**: In Cairo, a parameter can only be passed as _mutable reference_ using the `ref` modifier if the variable is declared as mutable with `mut`."
 msgstr "> **注意**：在Cairo中，只有在变量用`mut`声明为可变的情况下，才能使用`ref`修饰符将参数作为可变的引用传递。"
 
-#: src/ch03-02-references-and-snapshots.md:151
+#: src/ch03-02-references-and-snapshots.md:172
 msgid "In Listing 3-7, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function."
 msgstr "在示例3-7中，我们使用一个可变的引用来修改`Rectangle`实例在`flip`函数中的`height`和`width`字段的值。"
 
-#: src/ch03-02-references-and-snapshots.md:153
+#: src/ch03-02-references-and-snapshots.md:174
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -5396,11 +5478,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:175
+#: src/ch03-02-references-and-snapshots.md:196
 msgid "<span class=\"caption\">Listing 3-7: Use of a mutable reference to modify a value</span>"
 msgstr "<span class=\"caption\">示例 3-7：使用一个可变的引用来修改一个值</span>"
 
-#: src/ch03-02-references-and-snapshots.md:177
+#: src/ch03-02-references-and-snapshots.md:198
 msgid ""
 "First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` into `flip` with `ref rec`, and update the function signature to accept a mutable reference with `ref "
 "rec: Rectangle`. This makes it very clear that the `flip` function will mutate the value of the `Rectangle` instance passed as parameter."
@@ -5408,11 +5490,11 @@ msgstr ""
 "首先，我们把`rec`改成`mut`。然后我们用 `ref rec` 将 `rec` 的可变引用传入 `flip` ，并更新函数签名，用 `ref rec: Rectangle`接受可变引用。这很清楚地表明，`flip`函数将改变作为参数传递的"
 "`Rectangle`实例的值。"
 
-#: src/ch03-02-references-and-snapshots.md:179
+#: src/ch03-02-references-and-snapshots.md:200
 msgid "The output of the program is:"
 msgstr "程序的输出是："
 
-#: src/ch03-02-references-and-snapshots.md:181
+#: src/ch03-02-references-and-snapshots.md:202
 msgid ""
 "```console\n"
 "[DEBUG]\n"
@@ -5428,19 +5510,19 @@ msgstr ""
 "[DEBUG]\t                        (raw: 3)\n"
 "```"
 
-#: src/ch03-02-references-and-snapshots.md:188
+#: src/ch03-02-references-and-snapshots.md:209
 msgid "As expected, the `height` and `width` fields of the `rec` variable have been swapped."
 msgstr "正如预期的那样， `rec` 变量的 `height` 和 `width` 字段被调换了。"
 
-#: src/ch03-02-references-and-snapshots.md:190
+#: src/ch03-02-references-and-snapshots.md:211
 msgid "### Small recap"
 msgstr "### 小结"
 
-#: src/ch03-02-references-and-snapshots.md:192
+#: src/ch03-02-references-and-snapshots.md:213
 msgid "Let’s recap what we’ve discussed about ownership, snapshots, and references:"
 msgstr "让我们回顾一下我们已经讨论过的关于所有权、快照和引用的内容："
 
-#: src/ch03-02-references-and-snapshots.md:194
+#: src/ch03-02-references-and-snapshots.md:215
 msgid ""
 "- At any given time, a variable can only have one owner.\n"
 "- You can pass a variable by-value, by-snapshot, or by-reference to a function.\n"
@@ -5497,8 +5579,8 @@ msgstr ""
 "定义结构体，需要使用 `struct` 关键字并为整个结构体提供一个名字。结构体的名字需要描述它所组合的数据的意义。接着，在大括号中，定义每一部分数据的名字和类型，我们称为 字段（field）。例"
 "如，示例 4-1 展示了一个存储用户账号信息的结构体。"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:7 src/ch04-01-defining-and-instantiating-structs.md:26 src/ch04-01-defining-and-instantiating-structs.md:47
-#: src/ch04-01-defining-and-instantiating-structs.md:66 src/ch04-01-defining-and-instantiating-structs.md:87
+#: src/ch04-01-defining-and-instantiating-structs.md:7 src/ch04-01-defining-and-instantiating-structs.md:26 src/ch04-01-defining-and-instantiating-structs.md:48
+#: src/ch04-01-defining-and-instantiating-structs.md:83 src/ch04-01-defining-and-instantiating-structs.md:118
 msgid "<span class=\"filename\">Filename: structs.cairo</span>"
 msgstr "<span class=\"filename\">文件名：structs.cairo</span>"
 
@@ -5558,6 +5640,7 @@ msgid ""
 "        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
 "    };\n"
 "}\n"
+"\n"
 "```"
 msgstr ""
 "```rust\n"
@@ -5573,13 +5656,14 @@ msgstr ""
 "        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
 "    };\n"
 "}\n"
+"\n"
 "```"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:43
+#: src/ch04-01-defining-and-instantiating-structs.md:44
 msgid "<span class=\"caption\">Listing 4-2: Creating an instance of the `User` struct</span>"
 msgstr "<span class=\"caption\">示例4-2：创建一个`User`结构的实例</span>"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:45
+#: src/ch04-01-defining-and-instantiating-structs.md:46
 msgid ""
 "To get a specific value from a struct, we use dot notation. For example, to access this user’s email address, we use `user1.email`. If the instance is mutable, we can change a value "
 "by using the dot notation and assigning into a particular field. Listing 4-3 shows how to change the value in the `email` field of a mutable `User` instance."
@@ -5587,73 +5671,133 @@ msgstr ""
 "为了从结构体中获取某个特定的值，可以使用点号。举个例子，想要用户的邮箱地址，可以用 `user1.email`。如果结构体的实例是可变的，我们可以使用点号并为对应的字段赋值。示例 4-3 展示了如何改变"
 "一个可变的 `User` 实例中 `email` 字段的值。"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:49
+#: src/ch04-01-defining-and-instantiating-structs.md:50
 msgid ""
-"```rust,does_not_compile\n"
+"```rust\n"
+"# #[derive(Copy, Drop)]\n"
+"# struct User {\n"
+"#     active: bool,\n"
+"#     username: felt252,\n"
+"#     email: felt252,\n"
+"#     sign_in_count: u64,\n"
+"# }\n"
 "fn main() {\n"
 "    let mut user1 = User {\n"
 "        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
 "    };\n"
 "    user1.email = 'anotheremail@example.com';\n"
 "}\n"
+"# \n"
+"# fn build_user(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
+"# fn build_user_short(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
 "```"
 msgstr ""
-"```rust,does_not_compile\n"
+"```rust\n"
+"# #[derive(Copy, Drop)]\n"
+"# struct User {\n"
+"#     active: bool,\n"
+"#     username: felt252,\n"
+"#     email: felt252,\n"
+"#     sign_in_count: u64,\n"
+"# }\n"
 "fn main() {\n"
 "    let mut user1 = User {\n"
 "        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
 "    };\n"
 "    user1.email = 'anotheremail@example.com';\n"
 "}\n"
+"# \n"
+"# fn build_user(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
+"# fn build_user_short(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
 "```"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:58
+#: src/ch04-01-defining-and-instantiating-structs.md:75
 msgid "<span class=\"caption\">Listing 4-3: Changing the value in the email field of a `User` instance</span>"
 msgstr "<span class=\"caption\">示例4-3：改变`User`实例的电子邮件字段中的值</span>"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:60
+#: src/ch04-01-defining-and-instantiating-structs.md:77
 msgid "Note that the entire instance must be mutable; Cairo doesn’t allow us to mark only certain fields as mutable."
 msgstr "注意，整个实例必须是可变的；Cairo不允许我们只把某些字段标记为可变的。"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:62
+#: src/ch04-01-defining-and-instantiating-structs.md:79
 msgid "As with any expression, we can construct a new instance of the struct as the last expression in the function body to implicitly return that new instance."
 msgstr "与任何表达式一样，我们可以在函数主体的最后一个表达式中构造一个新的结构体实例，以隐式返回该新实例。"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:64
+#: src/ch04-01-defining-and-instantiating-structs.md:81
 msgid ""
 "Listing 4-4 shows a `build_user` function that returns a `User` instance with the given email and username. The `active` field gets the value of `true`, and the `sign_in_count` gets "
 "a value of `1`."
 msgstr "示例4-4显示了一个`build_user`函数，该函数返回一个`User`实例，并给出了电子邮件和用户名。`active`字段的值为`true`，`sign_in_count`的值为`1`。"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:68
+#: src/ch04-01-defining-and-instantiating-structs.md:85
 msgid ""
 "```rust\n"
+"# #[derive(Copy, Drop)]\n"
+"# struct User {\n"
+"#     active: bool,\n"
+"#     username: felt252,\n"
+"#     email: felt252,\n"
+"#     sign_in_count: u64,\n"
+"# }\n"
+"# fn main() {\n"
+"#     let mut user1 = User {\n"
+"#         active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
+"#     };\n"
+"#     user1.email = 'anotheremail@example.com';\n"
+"# }\n"
+"# \n"
 "fn build_user(email: felt252, username: felt252) -> User {\n"
-"    User {\n"
-"        active: true,\n"
-"        username: username,\n"
-"        email: email,\n"
-"        sign_in_count: 1,\n"
-"    }\n"
+"    User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
 "}\n"
+"# \n"
+"# fn build_user_short(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
 "```"
 msgstr ""
 "```rust\n"
+"# #[derive(Copy, Drop)]\n"
+"# struct User {\n"
+"#     active: bool,\n"
+"#     username: felt252,\n"
+"#     email: felt252,\n"
+"#     sign_in_count: u64,\n"
+"# }\n"
+"# fn main() {\n"
+"#     let mut user1 = User {\n"
+"#         active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
+"#     };\n"
+"#     user1.email = 'anotheremail@example.com';\n"
+"# }\n"
+"# \n"
 "fn build_user(email: felt252, username: felt252) -> User {\n"
-"    User {\n"
-"        active: true,\n"
-"        username: username,\n"
-"        email: email,\n"
-"        sign_in_count: 1,\n"
-"    }\n"
+"    User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
 "}\n"
+"# \n"
+"# fn build_user_short(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
 "```"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:79
+#: src/ch04-01-defining-and-instantiating-structs.md:110
 msgid "<span class=\"caption\">Listing 4-4: A `build_user` function that takes an email and username and returns a `User` instance</span>"
 msgstr "<span class=\"caption\">示例4-4：一个`build_user`函数，接收电子邮件和用户名，并返回一个`User`实例</span>"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:81
+#: src/ch04-01-defining-and-instantiating-structs.md:112
 msgid ""
 "It makes sense to name the function parameters with the same name as the struct fields, but having to repeat the `email` and `username` field names and variables is a bit tedious. If "
 "the struct had more fields, repeating each name would get even more annoying. Luckily, there’s a convenient shorthand!"
@@ -5661,11 +5805,11 @@ msgstr ""
 "为函数参数起与结构体字段相同的名字是可以理解的，但必须重复`email`和`username`字段的名称和变量就有点乏味了。如果结构体有更多字段，重复每个名称就更加烦人了。幸运的是，有一个方便的简写语"
 "法！"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:83
+#: src/ch04-01-defining-and-instantiating-structs.md:114
 msgid "## Using the Field Init Shorthand"
 msgstr "## 使用字段初始化简写语法"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:85
+#: src/ch04-01-defining-and-instantiating-structs.md:116
 msgid ""
 "Because the parameter names and the struct field names are exactly the same in Listing 4-4, we can use the field init shorthand syntax to rewrite `build_user` so it behaves exactly "
 "the same but doesn’t have the repetition of `username` and `email`, as shown in Listing 4-5."
@@ -5673,36 +5817,64 @@ msgstr ""
 "因为示例 5-4 中的参数名与字段名都完全相同，我们可以使用字段初始化简写语法（field init shorthand）来重写 `build_user`，这样其行为与之前完全相同，不过无需重复 `username` 和 `email` 了，"
 "如示例 5-5 所示。"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:89
+#: src/ch04-01-defining-and-instantiating-structs.md:120
 msgid ""
 "```rust\n"
-"fn build_user(email: felt252, username: felt252) -> User {\n"
-"    User {\n"
-"        active: true,\n"
-"        username,\n"
-"        email,\n"
-"        sign_in_count: 1,\n"
-"    }\n"
+"# #[derive(Copy, Drop)]\n"
+"# struct User {\n"
+"#     active: bool,\n"
+"#     username: felt252,\n"
+"#     email: felt252,\n"
+"#     sign_in_count: u64,\n"
+"# }\n"
+"# fn main() {\n"
+"#     let mut user1 = User {\n"
+"#         active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
+"#     };\n"
+"#     user1.email = 'anotheremail@example.com';\n"
+"# }\n"
+"# \n"
+"# fn build_user(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
+"fn build_user_short(email: felt252, username: felt252) -> User {\n"
+"    User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
 "}\n"
+"# \n"
 "```"
 msgstr ""
 "```rust\n"
-"fn build_user(email: felt252, username: felt252) -> User {\n"
-"    User {\n"
-"        active: true,\n"
-"        username,\n"
-"        email,\n"
-"        sign_in_count: 1,\n"
-"    }\n"
+"# #[derive(Copy, Drop)]\n"
+"# struct User {\n"
+"#     active: bool,\n"
+"#     username: felt252,\n"
+"#     email: felt252,\n"
+"#     sign_in_count: u64,\n"
+"# }\n"
+"# fn main() {\n"
+"#     let mut user1 = User {\n"
+"#         active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
+"#     };\n"
+"#     user1.email = 'anotheremail@example.com';\n"
+"# }\n"
+"# \n"
+"# fn build_user(email: felt252, username: felt252) -> User {\n"
+"#     User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
+"# }\n"
+"# \n"
+"fn build_user_short(email: felt252, username: felt252) -> User {\n"
+"    User { active: true, username: username, email: email, sign_in_count: 1,  }\n"
 "}\n"
+"# \n"
 "```"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:100
+#: src/ch04-01-defining-and-instantiating-structs.md:145
 msgid ""
 "<span class=\"caption\">Listing 4-5: A `build_user` function that uses field init shorthand because the `username` and `email` parameters have the same name as struct fields</span>"
 msgstr "<span class=\"caption\">示例4-5: `build_user`函数使用了字段初始化简写语法，因为`username`和`email`参数与结构体字段同名，</span>"
 
-#: src/ch04-01-defining-and-instantiating-structs.md:102
+#: src/ch04-01-defining-and-instantiating-structs.md:147
 msgid ""
 "Here, we’re creating a new instance of the `User` struct, which has a field named `email`. We want to set the `email` field’s value to the value in the `email` parameter of the "
 "`build_user` function. Because the `email` field and the `email` parameter have the same name, we only need to write `email` rather than `email: email`."
@@ -5886,10 +6058,7 @@ msgid ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    let rectangle = Rectangle {\n"
-"        width: 30,\n"
-"        height: 10,\n"
-"    };\n"
+"    let rectangle = Rectangle { width: 30, height: 10,  };\n"
 "    let area = area(rectangle);\n"
 "    area.print(); // print out the area\n"
 "}\n"
@@ -5908,10 +6077,7 @@ msgstr ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    let rectangle = Rectangle {\n"
-"        width: 30,\n"
-"        height: 10,\n"
-"    };\n"
+"    let rectangle = Rectangle { width: 30, height: 10,  };\n"
 "    let area = area(rectangle);\n"
 "    area.print(); // print out the area\n"
 "}\n"
@@ -5921,11 +6087,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch04-02-an-example-program-using-structs.md:98
+#: src/ch04-02-an-example-program-using-structs.md:95
 msgid "<span class=\"caption\">Listing 4-8: Defining a `Rectangle` struct</span>"
 msgstr "<span class=\"caption\">示例 4-8：定义一个`Rectangle`结构</span>"
 
-#: src/ch04-02-an-example-program-using-structs.md:100
+#: src/ch04-02-an-example-program-using-structs.md:97
 msgid ""
 "Here we’ve defined a struct and named it `Rectangle`. Inside the curly brackets, we defined the fields as `width` and `height`, both of which have type `u64`. Then, in `main`, we "
 "created a particular instance of `Rectangle` that has a width of `30` and a height of `10`. Our `area` function is now defined with one parameter, which we’ve named `rectangle` which "
@@ -5936,19 +6102,19 @@ msgstr ""
 "度是`30`，高度是`10`。我们的 `area`函数现在定义了一个名为 `rectangle`参数，它是`Rectangle`结构类型。然后我们可以用点符号来访问实例的字段，它给这些值起了描述性的名字，而不是使用`0`和"
 "`1`的元组索引值。结构体胜在更清晰明了。"
 
-#: src/ch04-02-an-example-program-using-structs.md:102
+#: src/ch04-02-an-example-program-using-structs.md:99
 msgid "## Adding Useful Functionality with Trait"
 msgstr "## 用Trait增加实用功能"
 
-#: src/ch04-02-an-example-program-using-structs.md:104
+#: src/ch04-02-an-example-program-using-structs.md:101
 msgid ""
 "It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 4-9 tries using the `print` as we have "
 "used in previous chapters. This won’t work."
 msgstr "在调试程序时打印出 `Rectangle` 实例来查看其所有字段的值非常有用。示例 4-9 像前面章节那样尝试使用 `print`。但这并不管用。"
 
-#: src/ch04-02-an-example-program-using-structs.md:108
+#: src/ch04-02-an-example-program-using-structs.md:105
 msgid ""
-"```rust,does_not_compile,ignore_format\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -5957,15 +6123,12 @@ msgid ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    let rectangle = Rectangle {\n"
-"        width: 30,\n"
-"        height: 10,\n"
-"    };\n"
+"    let rectangle = Rectangle { width: 30, height: 10,  };\n"
 "    rectangle.print();\n"
 "}\n"
 "```"
 msgstr ""
-"```rust,does_not_compile,ignore_format\n"
+"```rust\n"
 "use debug::PrintTrait;\n"
 "\n"
 "struct Rectangle {\n"
@@ -5974,23 +6137,20 @@ msgstr ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    let rectangle = Rectangle {\n"
-"        width: 30,\n"
-"        height: 10,\n"
-"    };\n"
+"    let rectangle = Rectangle { width: 30, height: 10,  };\n"
 "    rectangle.print();\n"
 "}\n"
 "```"
 
-#: src/ch04-02-an-example-program-using-structs.md:125
+#: src/ch04-02-an-example-program-using-structs.md:119
 msgid "<span class=\"caption\">Listing 4-9: Attempting to print a `Rectangle` instance</span>"
 msgstr "<span class=\"caption\">示例 4-9：试图打印一个 `Rectangle`实例</span>"
 
-#: src/ch04-02-an-example-program-using-structs.md:127
+#: src/ch04-02-an-example-program-using-structs.md:121
 msgid "When we compile this code, we get an error with this message:"
 msgstr "当我们编译这段代码时，我们得到了一个错误，有这样的信息："
 
-#: src/ch04-02-an-example-program-using-structs.md:129
+#: src/ch04-02-an-example-program-using-structs.md:123
 msgid ""
 "```bash\n"
 "$ cairo-compile src/lib.cairo\n"
@@ -6012,7 +6172,7 @@ msgstr ""
 "Error: Compilation failed.\n"
 "```"
 
-#: src/ch04-02-an-example-program-using-structs.md:139
+#: src/ch04-02-an-example-program-using-structs.md:133
 msgid ""
 "The `print` trait is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing "
 "4-10.\n"
@@ -6021,7 +6181,7 @@ msgstr ""
 "许多数据类型都实现了 `print` trait，但 `Rectangle` 结构没有。我们可以通过在`Rectangle`上实现`PrintTrait` trait来解决这个问题，如示例4-10所示。\n"
 "要了解更多关于traits的信息，请参阅[Traits in Cairo](ch07-02-traits-in-cairo.md)。"
 
-#: src/ch04-02-an-example-program-using-structs.md:144
+#: src/ch04-02-an-example-program-using-structs.md:138
 msgid ""
 "```rust,ignore_format\n"
 "use debug::PrintTrait;\n"
@@ -6032,10 +6192,7 @@ msgid ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    let rectangle = Rectangle {\n"
-"        width: 30,\n"
-"        height: 10,\n"
-"    };\n"
+"    let rectangle = Rectangle { width: 30, height: 10,  };\n"
 "    rectangle.print();\n"
 "}\n"
 "\n"
@@ -6056,10 +6213,7 @@ msgstr ""
 "}\n"
 "\n"
 "fn main() {\n"
-"    let rectangle = Rectangle {\n"
-"        width: 30,\n"
-"        height: 10,\n"
-"    };\n"
+"    let rectangle = Rectangle { width: 30, height: 10,  };\n"
 "    rectangle.print();\n"
 "}\n"
 "\n"
@@ -6071,11 +6225,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch04-02-an-example-program-using-structs.md:168
+#: src/ch04-02-an-example-program-using-structs.md:159
 msgid "<span class=\"caption\">Listing 4-10: Implementing the `PrintTrait` trait on `Rectangle`</span>"
 msgstr "<span class=\"caption\">示例4-10：在`Rectangle`上实现`PrintTrait` trait</span>"
 
-#: src/ch04-02-an-example-program-using-structs.md:170
+#: src/ch04-02-an-example-program-using-structs.md:161
 msgid "Nice! It’s not the prettiest output, but it shows the values of all the fields for this instance, which would definitely help during debugging."
 msgstr "很好!这不是最漂亮的输出，但它显示了这个实例的所有字段的值，这在调试时肯定会有帮助。"
 
@@ -6107,10 +6261,10 @@ msgstr "### 定义方法"
 msgid ""
 "Let’s change the `area` function that has a `Rectangle` instance as a parameter\n"
 "and instead make an `area` method defined on the `RectangleTrait` trait, as shown\n"
-"in Listing 5-13."
+"in Listing 4-13."
 msgstr ""
 "让我们把前面实现的获取一个 `Rectangle` 实例作为参数的 `area` 函数，\n"
-"改写成一个定义于 `RectangleTrait` trait 上的 `area` 方法，如示例5-13所示。"
+"改写成一个定义于 `RectangleTrait` trait 上的 `area` 方法，如示例4-13所示。"
 
 #: src/ch04-03-method-syntax.md:20
 msgid ""
@@ -6172,7 +6326,7 @@ msgstr "<span class=\"caption\">示例4-13：定义一个用在`Rectangle` 上�
 
 #: src/ch04-03-method-syntax.md:48
 msgid ""
-"To define the function within the context of `Rectangle`, we start by definining a `trait`\n"
+"To define the function within the context of `Rectangle`, we start by defining a `trait`\n"
 "block with the signature of the method that we want to implement. Traits are not linked to\n"
 "a specific type; only the `self` parameter of the method defines which type it can be used\n"
 "with. Then, we define an `impl` (implementation) block for `RectangleTrait`, that defines\n"
@@ -6195,7 +6349,7 @@ msgstr ""
 "然后我们将`area`函数移到`impl`大括号内，并在签名和正文的所有地方将第一个（在本例中是唯一的）参数改为`self`。在`main`中，我们调用`area`函数并传递`rect1`作为参数、\n"
 "\n"
 "我们可以使用 _method syntax_ 在我们的`Rectangle`实例上调用`area`方法。\n"
-"方法语法获取一个实例并加上一个点号，后跟方法名、圆括号以及任何参数。"
+"方法语法是：在一个实例的后面，加上一个点号，后跟方法名、圆括号以及任何参数。"
 
 #: src/ch04-03-method-syntax.md:64
 msgid ""
@@ -6328,10 +6482,10 @@ msgid ""
 "of `Rectangle` and return `true` if the second `Rectangle` can fit completely\n"
 "within `self` (the first `Rectangle`); otherwise, it should return `false`.\n"
 "That is, once we’ve defined the `can_hold` method, we want to be able to write\n"
-"the program shown in Listing 5-14."
+"the program shown in Listing 4-14."
 msgstr ""
 "让我们通过在`Rectangle`结构体上实现第二个方法来练习使用方法。这次，我们希望让`Rectangle`的实例接收另一个`Rectangle`的实例。如果第二个`Rectangle`可以完全适应`self` （第一个"
-"`Rectangle`）就返回 `true` ; 否则，它应该返回`false`。也就是说，一旦我们定义了`can_hold`方法，我们希望能够编写列表5-14中显示的程序。"
+"`Rectangle`）就返回 `true` ; 否则，它应该返回`false`。也就是说，一旦我们定义了`can_hold`方法，我们希望能够编写列表4-14中显示的程序。"
 
 #: src/ch04-03-method-syntax.md:137
 msgid ""
@@ -6379,9 +6533,9 @@ msgstr ""
 
 #: src/ch04-03-method-syntax.md:158
 msgid ""
-"<span class=\"caption\">Listing 5-14: Using the as-yet-unwritten `can_hold`\n"
+"<span class=\"caption\">Listing 4-14: Using the as-yet-unwritten `can_hold`\n"
 "method</span>"
-msgstr "<span class=\"caption\">列表5-14：使用尚未编写的`can_hold`方法</span>"
+msgstr "<span class=\"caption\">示例4-14：使用尚未编写的`can_hold`方法</span>"
 
 #: src/ch04-03-method-syntax.md:161
 msgid ""
@@ -6433,12 +6587,12 @@ msgid ""
 "Boolean, and the implementation will check whether the width and height of\n"
 "`self` are greater than the width and height of the other `Rectangle`,\n"
 "respectively. Let’s add the new `can_hold` method to the `trait` and `impl` blocks from\n"
-"Listing 5-13, shown in Listing 5-15."
+"Listing 4-13, shown in Listing 4-15."
 msgstr ""
-"我们知道我们需要定义一个方法，所以它将在`trait RectangleTrait`和`impl RectangleImpl of RectangleTrait` 块中。该方法名为 `can_hold`，它将接收另一个`Rectangle`的快照作为参数。我们可以通"
-"过查看调用该方法的代码来确定参数的类型：`rect1.can_hold(@rect2)`将`@rect2`作为快照传递给`rect2`，它是`Rectangle`的一个实例。这是有意义的，因为我们只需要读取`rect2`（而不是写入，这意味"
-"着我们需要一个可变借用），我们希望`main`保留对`rect2`的所有权，以便在调用`can_hold` 方法后再次使用它。`can_hold` 的返回值将是一个布尔值，实现将检查`self`的宽度和高度是否分别大于另一"
-"`Rectangle`的宽度和高度。让我们将新的`can_hold`方法添加到示例5-13中的`trait`和`impl` 块中，如示例5-15所示。"
+"我们需要定义一个方法，将它放置在在`trait RectangleTrait`和`impl RectangleImpl of RectangleTrait` 块中。该方法名为 `can_hold`，它将接收另一个`Rectangle`的快照作为参数。我们可以通过查看"
+"调用该方法的代码来确定参数的类型：`rect1.can_hold(@rect2)`将`@rect2`作为快照传递给`rect2`，它是`Rectangle`的一个实例。这是有意义的，因为我们只需要读取`rect2`（而不是写入，这意味着我们"
+"需要一个可变借用），我们希望`main`保留对`rect2`的所有权，以便在调用`can_hold` 方法后再次使用它。`can_hold` 的返回值将是一个布尔值，实现将检查`self`的宽度和高度是否分别大于另一"
+"`Rectangle`的宽度和高度。让我们将新的`can_hold`方法添加到示例4-13中的`trait`和`impl` 块中，如示例4-15所示。"
 
 #: src/ch04-03-method-syntax.md:194
 msgid ""
@@ -6478,19 +6632,19 @@ msgstr ""
 
 #: src/ch04-03-method-syntax.md:211
 msgid ""
-"<span class=\"caption\">Listing 5-15: Implementing the `can_hold` method on\n"
+"<span class=\"caption\">Listing 4-15: Implementing the `can_hold` method on\n"
 "`Rectangle` that takes another `Rectangle` instance as a parameter</span>"
-msgstr "<span class=\"caption\">示例5-15: 在`Rectangle`上实现`can_hold`方法，该方法接收另一个`Rectangle`实例作为参数</span>"
+msgstr "<span class=\"caption\">示例4-15: 在`Rectangle`上实现`can_hold`方法，该方法接收另一个`Rectangle`实例作为参数</span>"
 
 #: src/ch04-03-method-syntax.md:214
 msgid ""
-"When we run this code with the `main` function in Listing 5-14, we’ll get our\n"
+"When we run this code with the `main` function in Listing 4-14, we’ll get our\n"
 "desired output. Methods can take multiple parameters that we add to the\n"
 "signature after the `self` parameter, and those parameters work just like\n"
 "parameters in functions."
 msgstr ""
-"当我们在Listing 5-14中的`main`函数中运行这段代码时，我们将得到我们想要的输出。\n"
-"方法可以使用多个参数，我们可以在`self`参数之后在函数签名中添加这些参数，\n"
+"当我们在示例 4-14中的`main`函数中运行这段代码时，我们将得到我们想要的输出。\n"
+"方法可以接收多个参数，我们可以在`self`参数之后在函数签名中添加这些参数，\n"
 "这些参数与函数中的参数工作原理相同。"
 
 #: src/ch04-03-method-syntax.md:219
@@ -6563,9 +6717,9 @@ msgstr "### 多个`impl`块"
 #: src/ch04-03-method-syntax.md:254
 msgid ""
 "Each struct is allowed to have multiple `trait` and `impl` blocks. For example, Listing\n"
-"5-15 is equivalent to the code shown in Listing 5-16, which has each method in\n"
+"5-15 is equivalent to the code shown in Listing 4-16, which has each method in\n"
 "its own `trait` and `impl` blocks."
-msgstr "每个结构体都可以有多个`trait` 和`impl`块。例如，示例5-15等价于示例5-16中展示的代码，其中每个方法都有自己的`trait` 和`impl`块。"
+msgstr "每个结构体都可以有多个`trait` 和`impl`块。例如，示例4-15等价于示例4-16中展示的代码，其中每个方法都有自己的`trait` 和`impl`块。"
 
 #: src/ch04-03-method-syntax.md:258
 msgid ""
@@ -6613,10 +6767,10 @@ msgstr ""
 
 #: src/ch04-03-method-syntax.md:279
 msgid ""
-"<span class=\"caption\">Listing 5-16: Rewriting Listing 5-15 using multiple `impl`\n"
+"<span class=\"caption\">Listing 4-16: Rewriting Listing 4-15 using multiple `impl`\n"
 "blocks</span>"
 msgstr ""
-"<span class=\"caption\">示例5-16：使用多个`impl`重写示例5-15\n"
+"<span class=\"caption\">示例4-16：使用多个`impl`重写示例4-15\n"
 "块</span>"
 
 #: src/ch04-03-method-syntax.md:282
@@ -6717,10 +6871,10 @@ msgstr ""
 #: src/ch05-01-enums.md:26
 msgid ""
 "It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a Direction. You can learn more about it "
-"on the [The Match Control Flow Construct page](ch05-02-the-match-control-flow-construct.md)."
+"on [The Match Control Flow Construct page](ch05-02-the-match-control-flow-construct.md)."
 msgstr ""
-"我们可以很轻易的写出根据枚举的成员运行不同的代码，在上面这个例子中，是根据方向来运行特定的代码。你可以在 [match 控制流结构](ch05-02-the-match-control-flow-construct.md)页面上了解更多"
-"信息。"
+"我们可以很轻易的写出根据枚举的成员运行不同的流程的代码，在上面这个例子中，是根据方向来运行特定的代码。你可以在 [Match 控制流结构](ch05-02-the-match-control-flow-construct.md)页面上了"
+"解更多信息。"
 
 #: src/ch05-01-enums.md:28
 msgid "## Enums Combined with Custom Types"
@@ -7525,9 +7679,10 @@ msgstr "使用枚举，我们也可以对一些特定的值采取特殊的操作
 
 #: src/ch05-02-the-match-control-flow-construct.md:197
 msgid ""
-"Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you loose. Here's a match that implements that logic, "
+"Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you lose. Here's a match that implements that logic, "
 "with the number hardcoded rather than a random value."
-msgstr "想象一下，我们正在实现一个游戏，你得到一个 0 到 7 之间的随机数字。如果你有 0，你就赢了。若是所有其他的值，你就输了。这里有一个实现该逻辑的 match，数字是硬编码的，而不是随机值。"
+msgstr ""
+"想象一下，我们正在实现一个游戏，你会获得一个 0 到 7 之间的随机数字。如果你有 0，你就赢了。若是任何其他的值，你就输了。这里有一个实现该逻辑的 match，数字是硬编码的，而不是随机值。"
 
 #: src/ch05-02-the-match-control-flow-construct.md:199
 msgid ""
@@ -9052,11 +9207,11 @@ msgstr "# 泛型数据类型"
 #: src/ch07-01-generic-data-types.md:3
 msgid ""
 "We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo we can use "
-"generics when defining functions, structs, enums, traits, implementations and methods! In this chapter we are going to take a look on how to effectively use generic types with all of "
+"generics when defining functions, structs, enums, traits, implementations and methods! In this chapter we are going to take a look at how to effectively use generic types with all of "
 "them."
 msgstr ""
 "我们可以使用泛型为像函数签名或结构体这样的项创建定义，这样它们就可以用于多种不同的具体数据类型。在Cairo中，我们可以在定义函数、结构、枚举、特征、实现和方法时使用泛型！在本章中，我们将"
-"看看如何有效地使用所有的泛型。"
+"看看在这些被提到的领域中如何有效地使用泛型。"
 
 #: src/ch07-01-generic-data-types.md:5
 msgid "## Generic Functions"
@@ -9065,11 +9220,11 @@ msgstr "## 在函数定义中使用泛型"
 #: src/ch07-01-generic-data-types.md:7
 msgid ""
 "When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For "
-"example, imagine we want to create a function which given two `Array` of items, will return the largest one. If we need to perform this operations for lists of different types, then "
+"example, imagine we want to create a function which given two `Array` of items, will return the largest one. If we need to perform this operation for lists of different types, then "
 "we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks."
 msgstr ""
-"当定义一个使用泛型的函数时，本来在函数签名中指定参数和返回值的类型的地方，会改用泛型来表示。例如，假设我们想创建一个函数，给定两个 \"Array \"项，将返回最大的一个。如果我们需要对不同类"
-"型的列表进行这种操作，那么我们就必须每次都重新定义这个函数。幸运的是，我们可以使用泛型来实现这个函数，然后继续完成其他任务。"
+"当定义一个使用泛型的函数时，本来在函数签名中指定参数和返回值的类型的地方，会改用泛型来表示。例如，假设我们想创建一个函数，给定两个 `Array` 项，函数将返回最大的一个。如果我们需要对不同"
+"类型的列表进行这种操作，那么我们就必须每次都重新定义这个函数。幸运的是，我们可以使用泛型来实现这个函数，然后继续完成其他任务。"
 
 #: src/ch07-01-generic-data-types.md:9
 msgid ""
@@ -9138,13 +9293,13 @@ msgstr ""
 #: src/ch07-01-generic-data-types.md:40
 msgid ""
 "The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it "
-"will fail with an error saying that there are no traits defined for droping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` "
-"is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifiying in the function "
+"will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` "
+"is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifying in the function "
 "signature of `largest_list` that `T` must implement the drop trait. The correct function definition of `largest_list` is as follows:"
 msgstr ""
-"`largest_list`函数比较了两个相同类型的列表，并返回具有更多元素的那一个，并丢弃另一个。如果你编译前面的代码，你会注意到它会出错，说没有为丢弃一个通用类型的数组定义特征。这是因为编译器"
-"没有办法保证在执行`main`函数时，`Array<T>`是可以丢弃的。为了丢弃一个`T`的数组，编译器必须首先知道如何丢弃`T`。这可以通过在`largest_list`的函数签名中规定`T`必须实现drop trait来解决。"
-"`largest_list`的正确函数定义如下："
+"名为`largest_list`函数比较了两个相同类型的列表，返回具有更多元素的那一个，并丢弃另一个。如果你编译前面的代码，你会注意到它会出错，说没有为丢弃一个泛型的数组定义trait。这是因为编译器没"
+"有办法保证在执行`main`函数时，`Array<T>`是可以丢弃的。为了丢弃一个`T`的数组，编译器必须首先知道如何丢弃`T`。可以通过在`largest_list`的函数签名中规定`T`必须实现drop trait来解决这个问"
+"题。`largest_list`的正确函数定义如下："
 
 #: src/ch07-01-generic-data-types.md:42
 msgid ""
@@ -9275,12 +9430,12 @@ msgstr ""
 
 #: src/ch07-01-generic-data-types.md:98
 msgid ""
-"The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes an snapshot of an `Array<T>` as a parameter and returns a copy of the smallest "
+"The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes a snapshot of an `Array<T>` as a parameter and returns a copy of the smallest "
 "element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we don't require to implement the `Drop` trait for `T` as well. "
 "Why it does not compile then?"
 msgstr ""
-"`smallest_element`函数使用一个实现了`PartialOrd`的trait的通用类型`T`，接收一个`Array<T>`的快照作为参数并返回最小元素的副本。因为参数是`@Array<T>`的类型，我们不再需要在执行结束时丢弃"
-"它，所以我们不需要为`T`实现`Drop`特性。那为什么它不能编译呢？"
+"名为`smallest_element`函数使用一个实现了`PartialOrd`的trait的通用类型`T`，接收一个`Array<T>`的快照作为参数并返回其中最小元素的拷贝。因为参数是`@Array<T>`的类型，我们不再需要在执行结束"
+"时丢弃它，所以我们不需要为`T`实现`Drop`特性。那为什么它不能编译呢？"
 
 #: src/ch07-01-generic-data-types.md:100
 msgid ""
@@ -9449,7 +9604,7 @@ msgstr ""
 
 #: src/ch07-01-generic-data-types.md:169
 msgid ""
-"We add to `Wallet` struct definiton a new generic type `U` and then assign this type to the new field member `address`.\n"
+"We add to `Wallet` struct definition a new generic type `U` and then assign this type to the new field member `address`.\n"
 "Then we adapt the `WalletDrop` trait to work with the new generic type `U`. Notice that when initializing the struct inside `main` it automatically infers that `T` is a `u128` and "
 "`U` is a `felt252` and since they are both droppable, `Wallet` is droppable as well!"
 msgstr ""
@@ -9666,9 +9821,8 @@ msgstr ""
 #: src/ch07-01-generic-data-types.md:268
 msgid ""
 "Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of "
-"different generic types and create a new one with a generic type of each. First, lets rewrite the struct definiton:"
-msgstr ""
-"Cairo也允许我们在泛型trait中定义泛型方法。在之前的 \"Wallet<U, V>\"的实现上定义一个trait，用来选取两个不同泛型的钱包，并创建一个拥有两者泛型新的钱包。首先，让我们重写结构体定义："
+"different generic types and create a new one with a generic type of each. First, let's rewrite the struct definition:"
+msgstr "Cairo也允许我们在泛型trait中定义泛型方法。在之前的 `Wallet<U, V>`的实现上定义一个trait，用来选取两个不同泛型的钱包，并创建一个拥有两者泛型新的钱包。首先，让我们重写结构体定义："
 
 #: src/ch07-01-generic-data-types.md:270
 msgid ""
@@ -9722,11 +9876,11 @@ msgstr ""
 msgid ""
 "We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` methods which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As "
 "`mixup` signature specify, both `self` and `other` are getting dropped at the end of the function, which is the reason for this code not to compile. If you have been following from "
-"the start until now you would know that we must add a requirement for all the generic types specifiying that they will implement the `Drop` trait in order for the compiler to know "
-"how to drop instances of `Wallet<T, U>`. The updated implementation is as follow:"
+"the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait in order for the compiler to know how "
+"to drop instances of `Wallet<T, U>`. The updated implementation is as follow:"
 msgstr ""
 "我们正在创建一个trait`WalletMixTrait<T1, U1>`，其中有`mixup<T2, U2>`方法，给定一个`Wallet<T1, U1>`和`Wallet<T2, U2>`的实例，创建一个新的`Wallet<T1, U2>。正如`mixup`签名所指定的，"
-"`self`和`other`都在函数的结尾处被丢弃，这就是这段代码不能编译的原因。如果你从开始到现在一直没掉队，你会知道我们必须为所有的泛型添加一个`Drop`trait的实现，以便编译器知道如何丢弃"
+"`self`和`other`都在函数的结尾处被丢弃，这就是这段代码不能编译的原因。如果你从开始到现在都跟上了课程，你会知道我们必须为所有的泛型添加一个`Drop` trait的实现，以便编译器知道如何丢弃"
 "`Wallet<T, U>`的实例。更新后的实现如下："
 
 #: src/ch07-01-generic-data-types.md:294
@@ -10204,9 +10358,9 @@ msgstr ""
 
 #: src/ch08-01-how-to-write-tests.md:11
 msgid ""
-"Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the `test` attribute, the `assert` function, and and the "
-"`should_panic` attribute."
-msgstr "让我们看看Cairo专门为编写执行这些测试提供的功能，其中包括`test`属性、`assert`函数和`should_panic`属性。"
+"Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the `test` attribute, the `assert` function, and the `should_panic` "
+"attribute."
+msgstr "让我们看看Cairo专门为编写执行这些动作的测试所提供的功能，其中包括`test`属性、`assert`函数和`should_panic`属性。"
 
 #: src/ch08-01-how-to-write-tests.md:13
 msgid "### The Anatomy of a Test Function"
@@ -11512,11 +11666,11 @@ msgstr ""
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:5
 msgid ""
-"When a panic occurs, it leads to an abrupt termination of the program. The `panic` function take an array as argument, which can be used to provide an error message and performs an "
+"When a panic occurs, it leads to an abrupt termination of the program. The `panic` function takes an array as argument, which can be used to provide an error message and performs an "
 "unwind process where all variables are dropped and dictionaries squashed to ensure the soundness of the program to safely terminate the execution."
 msgstr ""
-"当panic发生时，它会导致程序的突然终止。`panic` 函数接受一个数组作为参数，可以用来提供一个错误信息，并执行一个展开（unwind）过程--所有的变量被丢弃，字典被squash，以确保程序的合理地，安"
-"全地终止执行。"
+"当panic发生时，它会导致程序的突然终止。`panic` 函数接受一个数组作为参数，可以用来提供一个错误信息，并执行一个展开（unwind）过程--所有的变量被丢弃，字典被压缩(squash)，以确保程序的合理"
+"地，安全地终止执行。"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:7
 msgid "Here is how we can `panic` from inside a program and return the error code `2`:"
@@ -12310,8 +12464,8 @@ msgstr ""
 #: src/ch99-01-01-introduction-to-smart-contracts.md:10
 msgid ""
 "The programming language used to write smart contracts varies depending on the blockchain. For example, on Ethereum and the [EVM-compatible ecosystem](https://ethereum.org/en/"
-"developers/docs/evm/) ecosystem, the most commonly used language is Solidity, while on Starknet, it is Cairo. The way the code is compiled also differs based on the blockchain. On "
-"Ethereum, Solidity is compiled into bytecode. On Starknet, Cairo is compiled into Sierra and then into Cairo Assembly (casm)."
+"developers/docs/evm/), the most commonly used language is Solidity, while on Starknet, it is Cairo. The way the code is compiled also differs based on the blockchain. On Ethereum, "
+"Solidity is compiled into bytecode. On Starknet, Cairo is compiled into Sierra and then into Cairo Assembly (casm)."
 msgstr ""
 "用于编写智能合约的编程语言因区块链的不同而不同。例如，在以太坊和[EVM兼容的生态系统](https://ethereum.org/en/developers/docs/evm/)生态系统上，最常用的语言是Solidity，而在Starknet上，是"
 "Cairo。代码的编译方式也根据区块链的不同而不同。在Ethereum上，Solidity被编译成字节码。在Starknet上，Cairo被编译成Sierra，然后再编译成Cairo Assembly（casm）。"
@@ -12329,12 +12483,12 @@ msgstr ""
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:14
 msgid ""
-"For developers to build smart contracts that can interact with each others, it is required to know what the other contracts look like. Hence, Ethereum developers started to build "
-"standards for smart contract developement, the `ERCxx`. The two most used and famous standards are the `ERC20`, used to build tokens like `USDC`, `DAI` or `STARK`, and the `ERC721`, "
+"For developers to build smart contracts that can interact with each other, it is required to know what the other contracts look like. Hence, Ethereum developers started to build "
+"standards for smart contract development, the `ERCxx`. The two most used and famous standards are the `ERC20`, used to build tokens like `USDC`, `DAI` or `STARK`, and the `ERC721`, "
 "for NFTs (Non-fungible tokens) like `CryptoPunks` or `Everai`."
 msgstr ""
-"对于开发者来说，要想建立能够相互互动的智能合约，就必须知道其他合约的是什么样。因此，以太坊开发者建立了一些智能合约开发的标准，即 \"ERCxx\"。两个最常用和最著名的标准是 \"ERC20\"，用于"
-"建立 \"USDC\"、\"DAI \"或 \"STARK \"等代币，以及 \"ERC721\"，用于 \"CryptoPunks \"或 \"Everai \"等NFTs（Non-fungible tokens）。"
+"对于开发者来说，要想建立能够相互互动的智能合约，就必须知道其他合约的是什么样。因此，以太坊开发者建立了一些智能合约开发的标准，即 `ERCxx`。两个最常用和最著名的标准是 `ERC20`，用于建立 "
+"`USDC`、`DAI`或 `STARK`等代币，以及 `ERC721`，用于 `CryptoPunks`或 `Everai`等NFT（Non-fungible token）。"
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:16
 msgid "## Use cases"
@@ -12439,14 +12593,14 @@ msgid ""
 "Remember Cairo? It is, in fact, a language developed specifically to work with STARKs and make them general-purpose. With Cairo, we can write **provable code**. In the context of "
 "Starknet, this allows proving the correctness of computations from one state to another. Unlike most (if not all) of Starknet's competitors that chose to use the EVM (either as-is or "
 "adapted) as a base layer, Starknet employs its own VM. This frees developers from the constraints of the EVM, opening up a broader range of possibilities. Coupled with decreased "
-"transaction costs, the combination of Starknet and Cairo creates an exiting playground for developers. Native account abstraction enables more complex logic for accounts and "
+"transaction costs, the combination of Starknet and Cairo creates an exciting playground for developers. Native account abstraction enables more complex logic for accounts and "
 "transaction flows. Emerging use cases include **transparent AI** and artificial intelligence and machine learning applications. Finally, **blockchain games** can be developed "
 "entirely **on-chain**. Starknet has been specifically designed to maximize the capabilities of STARK proofs for optimal scalability."
 msgstr ""
 "还记得Cairo吗？事实上，它是一种专门开发的语言，用于和STARKs一起工作并使其通用化。通过Cairo，我们可以编写**可证明的代码**。在Starknet中，这允许证明从一个状态到另一个状态的计算的正确"
-"性。与大多数（如果不是全部）Starknet的竞争对手不同，他们选择使用EVM（无论是原样还是改编）作为基础层，Starknet采用了自己的VM。这使开发者摆脱了EVM的限制，开辟了更广泛的可能性。再加上交"
-"易成本的降低，Starknet和Cairo的结合为开发者创造了一个令人兴奋的游乐场。原生的账户抽象使账户和交易流的逻辑更加复杂。新兴的用例包括**透明的AI**和人工智能及机器学习应用。最后，**区块链游"
-"戏**可以完全**在链上开发**。总之，Starknet是被专门来设计最大化STARK证明能力，以实现最佳的可扩展性。"
+"性。与大多数（如果不是全部）Starknet的竞争对手不同，他们选择使用EVM（无论是原版还是适配兼容）作为基础层，Starknet采用了自己的VM。这使开发者摆脱了EVM的限制，开辟了更广泛的可能性。再加"
+"上交易成本的降低，Starknet和Cairo的结合为开发者创造了一个令人兴奋的游乐场。原生的账户抽象使账户和交易流的逻辑更加复杂。新兴的用例包括**透明的AI**和人工智能及机器学习应用。最后，**区块"
+"链游戏**可以完全**在链上开发**。总之，Starknet是被专门来设计最大化发挥STARK证明能力，以实现最佳的可扩展性。"
 
 #: src/ch99-01-02-writing-starknet-contracts.md:1
 msgid "# Writing Starknet Contracts"
@@ -12573,7 +12727,7 @@ msgid "<!-- TODO: Appendix on attributes -->"
 msgstr "<!-- TODO: Appendix on attributes -->"
 
 #: src/ch99-01-02-writing-starknet-contracts.md:59
-msgid "Here are a list of common attributes used in Starknet contracts:"
+msgid "Here is a list of common attributes used in Starknet contracts:"
 msgstr "以下是Starknet合约中使用的常见属性列表："
 
 #: src/ch99-01-02-writing-starknet-contracts.md:61
@@ -12869,10 +13023,10 @@ msgstr "## 事件"
 msgid ""
 "Events are custom data structures that are emitted by smart contracts during execution.\n"
 "They provide a way for smart contracts to communicate with the external world by logging information\n"
-"about specific occurences in a contract."
+"about specific occurrences in a contract."
 msgstr ""
 "事件是定制的数据结构，由智能合约在执行期间发出。\n"
-"它们为智能合约提供了一种与外部世界沟通的方式，即记录合约中特定事件的信息。"
+"它们为智能合约提供了一种与外部世界沟通的方式，即记录合约中所发生的特定事情的信息。"
 
 #: src/ch99-01-02-writing-starknet-contracts.md:190
 msgid ""
@@ -14340,6 +14494,161 @@ msgid ""
 "This is not an exhaustive list, but it covers some of the commonly used types and traits in contract development. For more details, refer to the official documentation and explore "
 "the available libraries and frameworks."
 msgstr "这并不是一个详尽的列表，但它涵盖了合约开发中一些常用的类型和trait。关于更多的细节，请参考官方文档并参考可用的库以及框架。"
+
+#~ msgid ""
+#~ "```rust\n"
+#~ "{\n"
+#~ "    let x = 3;\n"
+#~ "    x + 1\n"
+#~ "}\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust\n"
+#~ "{\n"
+#~ "    let x = 3;\n"
+#~ "    x + 1\n"
+#~ "}\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust,ignore,does_not_compile\n"
+#~ "use debug::PrintTrait;\n"
+#~ "fn main() {\n"
+#~ "    let mut i: usize = 0;\n"
+#~ "    loop {\n"
+#~ "        if i > 10 {\n"
+#~ "            break ();\n"
+#~ "        }\n"
+#~ "        'again!'.print();\n"
+#~ "    }\n"
+#~ "}\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust,ignore,does_not_compile\n"
+#~ "use debug::PrintTrait;\n"
+#~ "fn main() {\n"
+#~ "    let mut i: usize = 0;\n"
+#~ "    loop {\n"
+#~ "        if i > 10 {\n"
+#~ "            break ();\n"
+#~ "        }\n"
+#~ "        'again!'.print();\n"
+#~ "    }\n"
+#~ "}\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust\n"
+#~ "    let mut a = ArrayTrait::new();\n"
+#~ "    a.append(10);\n"
+#~ "    a.append(1);\n"
+#~ "    a.append(2);\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust\n"
+#~ "    let mut a = ArrayTrait::new();\n"
+#~ "    a.append(10);\n"
+#~ "    a.append(1);\n"
+#~ "    a.append(2);\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust\n"
+#~ "let span = array.span();\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust\n"
+#~ "let span = array.span();\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust\n"
+#~ "let mut arr = ArrayTrait::<u128>::new();\n"
+#~ "arr.append(1);\n"
+#~ "arr.append(2);\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust\n"
+#~ "let mut arr = ArrayTrait::<u128>::new();\n"
+#~ "arr.append(1);\n"
+#~ "arr.append(2);\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust\n"
+#~ "let mut arr1 = ArrayTrait::<u128>::new();\n"
+#~ "let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust\n"
+#~ "let mut arr1 = ArrayTrait::<u128>::new();\n"
+#~ "let second_length = calculate_length(@arr1); // Calculate the current length of the array\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust,does_not_compile\n"
+#~ "fn main() {\n"
+#~ "    let mut user1 = User {\n"
+#~ "        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
+#~ "    };\n"
+#~ "    user1.email = 'anotheremail@example.com';\n"
+#~ "}\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust,does_not_compile\n"
+#~ "fn main() {\n"
+#~ "    let mut user1 = User {\n"
+#~ "        active: true, username: 'someusername123', email: 'someone@example.com', sign_in_count: 1\n"
+#~ "    };\n"
+#~ "    user1.email = 'anotheremail@example.com';\n"
+#~ "}\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust\n"
+#~ "fn build_user(email: felt252, username: felt252) -> User {\n"
+#~ "    User {\n"
+#~ "        active: true,\n"
+#~ "        username: username,\n"
+#~ "        email: email,\n"
+#~ "        sign_in_count: 1,\n"
+#~ "    }\n"
+#~ "}\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust\n"
+#~ "fn build_user(email: felt252, username: felt252) -> User {\n"
+#~ "    User {\n"
+#~ "        active: true,\n"
+#~ "        username: username,\n"
+#~ "        email: email,\n"
+#~ "        sign_in_count: 1,\n"
+#~ "    }\n"
+#~ "}\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```rust\n"
+#~ "fn build_user(email: felt252, username: felt252) -> User {\n"
+#~ "    User {\n"
+#~ "        active: true,\n"
+#~ "        username,\n"
+#~ "        email,\n"
+#~ "        sign_in_count: 1,\n"
+#~ "    }\n"
+#~ "}\n"
+#~ "```"
+#~ msgstr ""
+#~ "```rust\n"
+#~ "fn build_user(email: felt252, username: felt252) -> User {\n"
+#~ "    User {\n"
+#~ "        active: true,\n"
+#~ "        username,\n"
+#~ "        email,\n"
+#~ "        sign_in_count: 1,\n"
+#~ "    }\n"
+#~ "}\n"
+#~ "```"
 
 #~ msgid ""
 #~ "```rust\n"
