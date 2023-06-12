@@ -8,25 +8,7 @@ However, it's essential to use operator overloading judiciously. Misuse can lead
 Consider an example where two `Potions` need to be combined. `Potions` have two data fields, mana and health. Combining two `Potions` should add their respective fields.
 
 ```rust
-struct Potion {
-    health: felt252,
-    mana: felt252
-}
-
-impl PotionAdd of Add<Potion> {
-    fn add(lhs: Potion, rhs: Potion) -> Potion {
-        Potion { health: lhs.health + rhs.health, mana: lhs.mana + rhs.mana,  }
-    }
-}
-
-fn main() {
-    let health_potion: Potion = Potion { health: 100, mana: 0 };
-    let mana_potion: Potion = Potion { health: 0, mana: 100 };
-    let super_potion: Potion = health_potion + mana_potion;
-    // Both potions were combined with the `+` operator.
-    assert(super_potion.health == 100, '');
-    assert(super_potion.mana == 100, '');
-}
+{{#include ../listings/ch10-advanced-features/no_listing_01_potions.cairo}}
 ```
 
 In the code above, we're implementing the `Add` trait for the `Potion` type. The add function takes two arguments: `lhs` and `rhs` (left and right-hand side). The function body returns a new `Potion` instance, its field values being a combination of `lhs` and `rhs`.
