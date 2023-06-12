@@ -61,7 +61,7 @@ test adder::lib::tests::it_works ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-Listing 8-2: The output from running a test
+<span class="caption">Listing 8-2: The output from running a test</span>
 
 `cairo-test` compiled and ran the test. We see the line `running 1 tests`. The next line shows the name of the generated test function, called `it_works`, and that the result of running that test is `ok`. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
 
@@ -91,7 +91,7 @@ Now we’ll add another test, but this time we’ll make a test that fails! Test
 
 ```
 
-Listing 8-3: Adding a second test that will fail
+<span class="caption">Listing 8-3: Adding a second test that will fail</span>
 
 ```shell
 $ cairo-test .
@@ -103,7 +103,7 @@ failures:
 Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
-Listing 8-4: Test results when one test passes and one test fails
+<span class="caption">Listing 8-4: Test results when one test passes and one test fails</span>
 
 Instead of `ok`, the line `adder::lib::tests::another` shows `fail`. A new section appears between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `[1725643816656041371866211894343434536761780588 ('Make this test fail'), ]` in the _src/lib.cairo_ file.
 
@@ -123,7 +123,7 @@ In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we 
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_06.cairo:trait_impl}}
 ```
 
-Listing 8-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5
+<span class="caption">Listing 8-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 8-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
@@ -133,7 +133,7 @@ The `can_hold` method returns a `bool`, which means it’s a perfect use case fo
 {{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_06.cairo:test1}}
 ```
 
-Listing 8-6: A test for `can_hold` that checks whether a larger rectangle can indeed hold a smaller rectangle
+<span class="caption">Listing 8-6: A test for `can_hold` that checks whether a larger rectangle can indeed hold a smaller rectangle</span>
 
 Note that we’ve added two new lines inside the tests module: `use super::Rectangle;` and `use super::RectangleTrait;`. The tests module is a regular module that follows the usual visibility rules. Because the tests module is an inner module, we need to bring the code under test in the outer module into the scope of the inner module.
 
@@ -199,7 +199,7 @@ Listing 8-8 shows a test that checks that the error conditions of `GuessTrait::n
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_08.cairo}}
 ```
 
-Listing 8-8: Testing that a condition will cause a panic
+<span class="caption">Listing 8-8: Testing that a condition will cause a panic</span>
 
 We place the `#[should_panic]` attribute after the `#[test]` attribute and before the test function it applies to. Let’s look at the result when this test passes:
 
@@ -237,7 +237,7 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 {{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_09.cairo:test_panic}}
 ```
 
-Listing 8-9: Testing for a panic with a panic message containing the error message string
+<span class="caption">Listing 8-9: Testing for a panic with a panic message containing the error message string</span>
 
 This test will pass because the value we put in the `should_panic` attribute’s expected parameter is the array of string of the message that the `Guess::new` function panics with. We need to specify the entire panic message that we expect.
 
@@ -273,7 +273,7 @@ To demonstrate how to run a single test, we’ll first create two tests function
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_10.cairo}}
 ```
 
-Listing 8-10: Two tests with two different names
+<span class="caption">Listing 8-10: Two tests with two different names</span>
 
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 
