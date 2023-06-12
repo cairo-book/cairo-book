@@ -53,7 +53,7 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 {{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_02.cairo:here}}
 ```
 
-<span class="caption">Listing 9-2: A Storage Struct</span>
+<span class="caption">Listing 99-2: A Storage Struct</span>
 
 The storage struct is a [struct](./ch04-00-using-structs-to-structure-related-data.md) like any other,
 except that it allows you to define mappings using the `LegacyMap` type.
@@ -64,9 +64,9 @@ Mappings are a key-value data structure that you can use to store data within a 
 
 A mapping is a variable of type LegacyMap, in which the key and value types are specified within angular brackets <>.
 It is important to note that the `LegacyMap` type can only be used inside the `Storage` struct, and can't be used to define mappings in user-defined structs.
-The syntax for declaring a mapping is as follows in Listing 9-2.
+The syntax for declaring a mapping is as follows in Listing 99-2.
 
-You can also create more complex mappings than that found in Listing 9-2 like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
+You can also create more complex mappings than that found in Listing 99-2 like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/no_listing_01_storage_mapping.cairo:here}}
@@ -83,7 +83,7 @@ To read the value of the storage variable `names`, we call the `read` function o
 {{#include ../listings/ch99-starknet-smart-contracts/listing_example_contract.cairo:read}}
 ```
 
-<span class="caption">Listing 9-3: Calling the `read` function on the `names` variable</span>
+<span class="caption">Listing 99-3: Calling the `read` function on the `names` variable</span>
 
 > Note: When the storage variable does not store a mapping, its value is accessed without passing any parameters to the read method
 
@@ -148,7 +148,7 @@ Events play a crucial role in the creation of smart contracts. Take, for instanc
 An event is defined as an empty function annotated with the `#[event]` attribute. The parameters of this function
 are the data that will be emitted by the event.
 
-In Listing 9-1, `StoredName` is an event that emits information when names are stored in the contract:
+In Listing 99-1, `StoredName` is an event that emits information when names are stored in the contract:
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/listing_example_contract.cairo:event}}
