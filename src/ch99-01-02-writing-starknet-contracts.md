@@ -14,36 +14,7 @@ fn main() {}
 Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a module to be handled as a contract by the compiler, it must be annotated with the `#[contract]` attribute:
 
 ```rust
-#[contract]
-mod Example{
-    use starknet::get_caller_address;
-    use starknet::ContractAddress;
-
-    struct Storage{
-        names: LegacyMap::<ContractAddress, felt252>,
-    }
-
-    #[event]
-    fn StoredName(caller: ContractAddress, name:felt252){}
-
-    #[constructor]
-    fn constructor(_name: felt252, _address: ContractAddress){
-        names::write(_address, _name);
-    }
-
-    #[external]
-    fn store_name(_name: felt252){
-        let caller = get_caller_address();
-        names::write(caller, _name);
-        StoredName(caller,_name);
-    }
-
-    #[view]
-    fn get_name(_address:ContractAddress) -> felt252{
-        let name = names::read(_address);
-        return name;
-    }
-}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:all}}
 ```
 
 <span class="caption">Listing 99-1: A simple naming service contract</span>
@@ -79,10 +50,7 @@ Storage variables allow you to store data that will be stored on the blockchain 
 Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
 ```rust
-struct Storage{
-    id: u8,
-    names: LegacyMap::<ContractAddress, felt252>,
-}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_02.cairo:here}}
 ```
 
 <span class="caption">Listing 99-2: A Storage Struct</span>
@@ -101,9 +69,7 @@ The syntax for declaring a mapping is as follows in Listing 99-2.
 You can also create more complex mappings than that found in Listing 99-2 like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
 
 ```rust
-struct Storage{
-    allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>
-}
+{{#include ../listings/ch99-starknet-smart-contracts/no_listing_01_storage_mapping.cairo:here}}
 ```
 
 In mappings, the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ
@@ -114,7 +80,7 @@ is the Pedersen hash and the final value is taken `mod2251−256`. You can learn
 To read the value of the storage variable `names`, we call the `read` function on the `names` storage variable, passing in the key `_address` as a parameter.
 
 ```rust
-let name = names::read(_address);
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:read}}
 ```
 
 <span class="caption">Listing 99-3: Calling the `read` function on the `names` variable</span>
@@ -126,7 +92,7 @@ let name = names::read(_address);
 To write a value to the storage variable `names`, we call the `write` function on the `names` storage variable, passing in the key and values as arguments.
 
 ```rust
-names::write(_address, _name);
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:write}}
 ```
 
 <span class="caption">Listing 99-4: Writing to the `names` variable</span>
@@ -140,10 +106,7 @@ In this section, we are going to be looking at some popular function types you'd
 Constructors are a special type of function that runs only once when deploying a contract, and can be used to initialize the state of the contract.
 
 ```rust
-#[constructor]
-fn constructor(_name: felt252, _address: ContractAddress){
-    names::write(_address, _name);
-}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:constructor}}
 ```
 
 Some important rules to note:
@@ -158,12 +121,7 @@ External functions are functions that can modify the state of a contract. They a
 You can define external functions by annotating them with the `#[external]` attribute:
 
 ```rust
-#[external]
-fn store_name(_name: felt252){
-    let caller = get_caller_address();
-    names::write(caller, _name);
-    StoredName(caller,_name);
-}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:external}}
 ```
 
 ### 3. View functions
@@ -172,11 +130,7 @@ View functions are read-only functions allowing you to access data from the cont
 You can define view functions by annotating them with the `#[view]` attribute:
 
 ```rust
-#[view]
-fn get_name(_address:ContractAddress) -> felt252{
-    let name = names::read(_address);
-    return name;
-}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:view}}
 ```
 
 > **Note:** It's important to note that, both external and view functions are public. To create an internal function in a contract, you simply don't annotate it with any attribute.
@@ -197,8 +151,7 @@ are the data that will be emitted by the event.
 In Listing 99-1, `StoredName` is an event that emits information when names are stored in the contract:
 
 ```rust
-#[event]
-fn StoredName(caller: ContractAddress, name:felt252){}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:event}}
 ```
 
 We pass in the emitted data types as parameters within the parentheses. In this example, our event will emit the contract address of the caller and the name stored within the contract.
@@ -209,5 +162,5 @@ After defining events, we can emit them by simply calling the event name like we
 passing in the values to be emitted as parameters:
 
 ```rust
-StoredName(caller,_name);
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:emit_event}}
 ```
