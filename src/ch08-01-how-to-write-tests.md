@@ -46,7 +46,7 @@ In _lib.cairo_, let's add a first test, as shown in Listing 8-1.
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_01_03.cairo:it_works}}
 ```
 
-Listing 8-1: A test module and function
+<span class="caption">Listing 8-1: A test module and function</span>
 
 For now, let’s ignore the top two lines and focus on the function. Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions in the tests module to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
