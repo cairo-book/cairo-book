@@ -9,10 +9,7 @@ Most errors aren’t serious enough to require the program to stop entirely. Som
 Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
 ```rust
-enum Result<T, E> {
-    Ok: T,
-    Err: E,
-}
+{{#include ../listings/ch09-error-handling/no_listing_07_result_enum.cairo}}
 ```
 
 The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition makes it convenient to use the `Result` enum anywhere we have an operation that might succeed (by returning a value of type `T`) or fail (by returning a value of type `E`).
@@ -22,19 +19,7 @@ The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `O
 The `ResultTrait` trait provides methods for working with the `Result<T, E>` enum, such as unwrapping values, checking whether the `Result` is `Ok` or `Err`, and panicking with a custom message. The `ResultTraitImpl` implementation defines the logic of these methods.
 
 ```rust
-trait ResultTrait<T, E> {
-    fn expect<impl EDrop: Drop<E>>(self: Result<T, E>, err: felt252) -> T;
-
-    fn unwrap<impl EDrop: Drop<E>>(self: Result<T, E>) -> T;
-
-    fn expect_err<impl TDrop: Drop<T>>(self: Result<T, E>, err: felt252) -> E;
-
-    fn unwrap_err<impl TDrop: Drop<T>>(self: Result<T, E>) -> E;
-
-    fn is_ok(self: @Result<T, E>) -> bool;
-
-    fn is_err(self: @Result<T, E>) -> bool;
-}
+{{#include ../listings/ch09-error-handling/no_listing_08_result_trait.cairo}}
 ```
 
 The `expect` and `unwrap` methods are similar in that they both attempt to extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` variant. If the `Result` is `Ok(x)`, both methods return the value `x`. However, the key difference between the two methods lies in their behavior when the `Result` is in the `Err` variant. The `expect` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap` method panics with a default error message, providing less information about the cause of the panic.
@@ -92,30 +77,15 @@ use result::ResultTraitImpl;
 In this example, the `parse_u8` function takes a `felt252` integer and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`.
 
 ```rust
-fn parse_u8(s: felt252) -> Result<u8, felt252> {
-    match s.try_into() {
-        Option::Some(value) => Result::Ok(value),
-        Option::None(_) => Result::Err('Invalid integer'),
-    }
-}
+{{#include ../listings/ch09-error-handling/listing_01.cairo:function}}
 ```
+
+<span class="caption">Listing 9-1: Using the Result type</span>
 
 Our two test cases are:
 
 ```rust
-#[test]
-fn test_felt252_to_u8() {
-    let number: felt252 = 5_felt252;
-    // should not panic
-    let res = parse_u8(number).unwrap();
-}
-
-#[test]
-fn test_felt252_to_u8_panic() {
-    let number: felt252 = 256_felt252;
-    // should panic
-    let res = parse_u8(number).unwrap();
-}
+{{#rustdoc_include ../listings/ch09-error-handling/listing_01.cairo:tests}}
 ```
 
 The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'.
@@ -134,27 +104,17 @@ The `?` operator is useful when you want to handle errors implicitly and let the
 Here is an example.
 
 ```rust
-fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {
-    let input_to_u8: u8 = parse_u8(input)?;
-    // DO SOMETHING
-    let res = input_to_u8 - 1;
-    Result::Ok(res)
-}
+{{#include ../listings/ch09-error-handling/listing_02.cairo:function}}
 ```
+
+<span class="caption">Listing 9-1: Using the `?` operator</span>
 
 `do_something_with_parse_u8` function takes a `felt252` value as input and calls `parse_u8`. The `?` operator is used to propagate the error, if any, or unwrap the successful value.
 
 And with a little test case:
 
 ```rust
-#[test]
-fn test_function_2() {
-    let number: felt252 = 258_felt252;
-    match do_something_with_parse_u8(number) {
-        Result::Ok(value) => value.print(),
-        Result::Err(e) => e.print()
-    }
-}
+{{#rustdoc_include ../listings/ch09-error-handling/listing_02.cairo:tests}}
 ```
 
 The console will print the error "Invalid Integer".
