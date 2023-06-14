@@ -111,9 +111,9 @@ Let's assume that we write a code which constructs the following list of `Elemen
 
 |   Key   | Prev | New |
 | :-----: | ---- | --- |
-|  Alex   | 0    | 100 |
-|  Maria  | 0    | 150 |
-| Charles | 0    | 70  |
+|  Alex   | 100  | 100 |
+|  Maria  | 150  | 150 |
+| Charles | 70   | 70  |
 |  Maria  | 100  | 250 |
 |  Alex   | 150  | 40  |
 |  Alex   | 40   | 300 |
@@ -124,9 +124,9 @@ After squashing
 
 |   Key   | Prev | New |
 | :-----: | ---- | --- |
-|  Alex   | 0    | 90  |
-| Charles | 0    | 70  |
-|  Maria  | 0    | 190 |
+|  Alex   | 100  | 90  |
+| Charles | 70   | 70  |
+|  Maria  | 150  | 190 |
 
 Squashing is essential to verify the correct output of Cairo files. A program that uses `Felt252Dict<T>` operation without squashing can run succesfully even if it contains inconsistent dictionary operations.
 
@@ -134,13 +134,25 @@ Squashing is essential to verify the correct output of Cairo files. A program th
 
 Contray to normal types, `Felt252Dict<T>` are not dropped but destructed. They do not implement the `Drop<T>` trait but the `Destruct<T>`. The `Drop<T>` is only used to take sure elements can be taken out of scope. `Destruct<T>` instead has some implementatnion. It executes the call to sqush dictionary. Once the dictionary is squashed and we know it is a valid during runtime.
 
-## Dictionaries inside of a struct
+When an element in Cairo is dropped, it means it is taken out of scope, but it is a no-op operation, meaning it does not generate new CASM, meanwhile Destruct does. Dictionaries need to implement the Destruct trait instead of the Drop trait, because the need to be squashed at the end of each execution.
+
+## Advanced Dictionaries
+
+### The `entry` method
+
+by using the entry function you can update the dictionary in a new way
+
+It returns a dict entry according to a key
+
+which is a whole new type. Once you ask for an entry the original dict cannot be modified in any way until you finalize working with this entry
+
+Once you do such_entry.finalize you are given back access to the normal dictionary
+
+There is no performance gain, but it represents another idiomatic way of modifying a dictionary.
+
+### Dictionaries as struct members
 
 Dictionaries can be stored inside structs, the important thing to notice here is that if you use them naively, then you'll get an error about no implementing the drop trait. Dictionaries cannot implement the drop trait as easy because, the need to be squash.
-
-What is the difference between drop and destruct?.
-
-They need to be squash because if an unsquashed dictionary is returned then the prover can be cheated (how and why).
 
 ```rust
 struct S {
@@ -158,7 +170,7 @@ fn using_s() {
 }
 ```
 
-## Dictionaries whose values are complex types
+## User defined types as a Dictionary value types
 
 Imagine you want a dictionary of dictionaries, how do you guarantee that all dictionaries are squashed, you need to create an implementation to dropping a dictionary of dictionaries.
 
