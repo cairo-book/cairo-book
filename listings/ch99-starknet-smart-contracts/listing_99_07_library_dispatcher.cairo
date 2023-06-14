@@ -6,7 +6,7 @@ trait IERC20DispatcherTrait<T> {
     fn transfer(self: T, recipient: ContractAddress, amount: u256);
 }
 
-#[derive(Copy, Drop)]
+#[derive(Copy, Drop, storage_access::StorageAccess, Serde)]
 struct IERC20LibraryDispatcher {
     class_hash: starknet::ClassHash, 
 }
