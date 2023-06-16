@@ -109,6 +109,10 @@ Combining `match` and enums is useful in many situations. You’ll see this patt
 
 There’s one other aspect of match we need to discuss: the arms’ patterns must cover all possibilities. Consider this version of our `plus_one` function, which has a bug and won’t compile:
 
+```rust
+{{#include ../listings/ch05-enums-and-pattern-matching/no_listing_07_missing_match_arm.cairo:here}}
+```
+
 ```bash
 $ cairo-run src/test.cairo
     error: Unsupported match. Currently, matches require one arm per variant,
