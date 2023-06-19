@@ -1,8 +1,18 @@
-#[external]
-fn withdraw(amount: u256) {
-    let current_balance = balance::read();
+#[contract]
+mod Contract {
+    #[storage]
+    struct Storage {
+        balance: u256
+    }
 
-    assert(balance >= amount, "Insufficient funds");
+    //ANCHOR: here
+    #[external]
+    fn withdraw(amount: u256) {
+        let current_balance = balance::read();
 
-    balance::write(current_balance - amount);
+        assert(balance >= amount, 'Insufficient funds');
+
+        balance::write(current_balance - amount);
+    }
+//ANCHOR_END: here
 }

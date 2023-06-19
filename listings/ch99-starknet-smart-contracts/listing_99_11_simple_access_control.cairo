@@ -40,7 +40,7 @@ mod AccessControlContract {
 
     // You can easily combine modifiers to perfom complex checks
     fn only_allowed() {
-        assert(is_owner() | is_role_a(), 'Not allowed');
+        assert(is_owner() || is_role_a(), 'Not allowed');
     }
 
     // Functions to manage roles
