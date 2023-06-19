@@ -38,14 +38,7 @@ These validations can include:
 For example, you could use the `assert` function to validate that a user has enough funds to perform a withdraw transaction. If the condition is not met, the transaction will fail and the state of the contract will not change.
 
 ```rust
-#[external]
-fn withdraw(amount: u256) {
-    let current_balance = balance::read();
-
-    assert(balance >= amount, "Insufficient funds");
-
-    balance::write(current_balance - amount);
-}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_10_assert_balance.cairo}}
 ```
 
 Using theses functions to check conditions adds constraints that helps clearly define the boundaries of possible state transitions for each function in your smart contract. These checks ensure that the behavior of the contract stays within the expected limits.
@@ -64,11 +57,22 @@ The pattern consists of following a specific order of operations in your functio
 2. **Effects**: Perform all state changes.
 3. **Interactions**: All external calls to other contracts should be made at the end of the function.
 
+### Access control
+
+Access control is the process of restricting access to certain features or resources. It is a common security mechanism used to prevent unauthorized access to sensitive information or actions. In smart contracts, some functions may often be restricted to specific users or roles.
+
+You can implement the access control pattern to easily manage permissions. This pattern consists of defining a set of roles and assigning them to specific users. Each function can then be restricted to specific roles.
+
+```rust
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_11_simple_access_control.cairo}}
+```
+
 ### Static analysis tool
 
 Static analysis refers to the process of examining code without its execution, focusing on its structure, syntax, and properties. It involves analyzing the source code to identify potential issues, vulnerabilities, or violations of specified rules.
 
-By defining formal rules, such as coding conventions or security guidelines, developers can utilize static analysis tools to automatically check the code against these standards.
+By defining rules, such as coding conventions or security guidelines, developers can utilize static analysis tools to automatically check the code against these standards.
 
-References:
+Reference:
+
 - [Semgrep Cairo 1.0 support](https://semgrep.dev/blog/2023/semgrep-now-supports-cairo-1-0)
