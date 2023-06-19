@@ -23,7 +23,7 @@ Unlike other languages like Rust, every variant has a type. In this example, we'
 let direction = Direction::North(());
 ```
 
-It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a Direction. You can learn more about it on the [The Match Control Flow Construct page](ch05-02-the-match-control-flow-construct.md).
+It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a Direction. You can learn more about it on [The Match Control Flow Construct page](ch05-02-the-match-control-flow-construct.md).
 
 ## Enums Combined with Custom Types
 

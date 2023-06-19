@@ -56,7 +56,7 @@ Attributes are special annotations that modify the behavior of certain functions
 
 <!-- TODO: Appendix on attributes -->
 
-Here are a list of common attributes used in Starknet contracts:
+Here is a list of common attributes used in Starknet contracts:
 
 1. `#[contract]`: This attribute is used to annotate a module to be compiled as a Starknet contract.
    The compiler recognizes this attribute and prepares the module with necessary contract elements,
@@ -185,7 +185,7 @@ fn get_name(_address:ContractAddress) -> felt252{
 
 Events are custom data structures that are emitted by smart contracts during execution.
 They provide a way for smart contracts to communicate with the external world by logging information
-about specific occurences in a contract.
+about specific occurrences in a contract.
 
 Events play a crucial role in the creation of smart contracts. Take, for instance, the Non-Fungible Tokens (NFTs) minted on Starknet. All of these are indexed and stored in a database, then displayed to users through the use of these events. Neglecting to include an event within your NFT contract could lead to a bad user experience. This is because users may not see their NFTs appear in their wallets (wallets use these indexers to display a user's NFTs).
 

@@ -231,7 +231,7 @@ fn main() {
 }
 ```
 
-The error says we’re were expecting a `u64` (the original type) but we got a different type:
+The error says we were expecting a `u64` (the original type) but we got a different type:
 
 ```console
 ❯ cairo-run src/lib.cairo

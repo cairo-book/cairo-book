@@ -64,7 +64,7 @@ of Chapter 2 are of a known size, can be
 quickly and trivially copied to make a new, independent instance if another
 part of code needs to use the same value in a different scope, and can easily
 be dropped when they're no longer used. But what is the behavior with the `Array` type whose size
-is unknown at compile time and which can't be trivially copied ?
+is unknown at compile time and which can't be trivially copied?
 
 Here is a short reminder of what an array looks like:
 
@@ -154,7 +154,7 @@ This is to ensure the soundness of Cairo programs. Soundness refers to the fact 
 statement during the execution of the program is false, no cheating prover can convince an
 honest verifier that it is true. In our case, we want to ensure the consistency of
 consecutive dictionary key updates during program execution, which is only checked when
-the dictionaries are`squashed` - which moves the ownership of the dictionary to the
+the dictionaries are `squashed` - which moves the ownership of the dictionary to the
 `squash` method, thus allowing the dictionary to go out of scope. Unsquashed dictionaries
 are dangerous, as a malicious prover could prove the correctness of inconsistent updates.
 
