@@ -10,17 +10,7 @@ scope of the `eat_at_restaurant` function so we only have to specify
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
-    }
-}
-
-use restaurant::front_of_house::hosting;
-
-fn eat_at_restaurant() {
-    hosting::add_to_waitlist(); // ✅ Shorter path
-}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_05.cairo}}
 ```
 
 <span class="caption">Listing 6-5: Bringing a module into scope with
@@ -35,19 +25,7 @@ statement, so the function body won’t compile:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
-    }
-}
-
-use restaurant::front_of_house::hosting;
-
-mod customer {
-    fn eat_at_restaurant() {
-        hosting::add_to_waitlist();
-    }
-}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_06.cairo}}
 ```
 
 <span class="caption">Listing 6-6: A `use` statement only applies in the scope
@@ -74,18 +52,7 @@ the `add_to_waitlist` function to achieve the same result, as in Listing 6-7.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-    }
-}
-
-use restaurant::front_of_house::hosting::add_to_waitlist;
-
-pub fn eat_at_restaurant() {
-    add_to_waitlist();
-}
-
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_07.cairo}}
 ```
 
 <span class="caption">Listing 6-7: Bringing the `add_to_waitlist` function
@@ -104,12 +71,7 @@ it’s idiomatic to specify the full path. Listing 6-8 shows the idiomatic way
 to bring the core library’s `ArrayTrait` trait into the scope.
 
 ```rust
-use array::ArrayTrait;
-
-fn main() {
-    let mut arr = ArrayTrait::new();
-    arr.append(1);
-}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_08.cairo}}
 ```
 
 <span class="caption">Listing 6-8: Bringing `ArrayTrait` into scope in an
@@ -131,12 +93,7 @@ local name, or _alias_, for the type. Listing 6-9 shows how you can rename an im
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-use array::ArrayTrait as Arr;
-
-fn main() {
-    let mut arr = Arr::new(); // ArrayTrait was renamed to Arr
-    arr.append(1);
-}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_09.cairo}}
 ```
 
 <span class="caption">Listing 6-9: Renaming a trait when it’s brought into
@@ -160,35 +117,7 @@ use module::{item1, item2, item3};
 Here is an example where we import three structures from the same module:
 
 ```rust
-// Assuming we have a module called `shapes` with the structures `Square`, `Circle`, and `Triangle`.
-mod shapes {
-    #[derive(Drop)]
-    struct Square {
-        side: u32
-    }
-
-    #[derive(Drop)]
-    struct Circle {
-        radius: u32
-    }
-
-    #[derive(Drop)]
-    struct Triangle {
-        base: u32,
-        height: u32,
-    }
-}
-
-// We can import the structures `Square`, `Circle`, and `Triangle` from the `shapes` module like this:
-use shapes::{Square, Circle, Triangle};
-
-// Now we can directly use `Square`, `Circle`, and `Triangle` in our code.
-fn main() {
-    let sq = Square { side: 5 };
-    let cr = Circle { radius: 3 };
-    let tr = Triangle { base: 5, height: 2 };
-// ...
-}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_10.cairo}}
 ```
 
 <span class="caption">Listing 6-10: Importing multiple items from the same module</span>
@@ -204,18 +133,8 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rs
-mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
-    }
-}
-
-use restaurant::front_of_house::hosting;
-
-fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
-}
+```rust
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_11.cairo}}
 ```
 
 <span class="caption">Listing 6-11: Making a name available for any code to use

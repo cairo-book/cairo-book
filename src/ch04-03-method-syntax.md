@@ -13,33 +13,12 @@ and an implementation associated with the type for which the method is intended.
 
 Let’s change the `area` function that has a `Rectangle` instance as a parameter
 and instead make an `area` method defined on the `RectangleTrait` trait, as shown
-in Listing 5-13.
+in Listing 4-13.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-use debug::PrintTrait;
-#[derive(Copy, Drop)]
-struct Rectangle {
-    width: u64,
-    height: u64,
-}
-
-trait RectangleTrait {
-    fn area(self: @Rectangle) -> u64;
-}
-
-impl RectangleImpl of RectangleTrait {
-    fn area(self: @Rectangle) -> u64 {
-        (*self.width) * (*self.height)
-    }
-}
-
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50,  };
-
-    rect1.area().print();
-}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_13_area_method.cairo}}
 ```
 
 <span class="caption">Listing 4-13: Defining an `area` method to use on the
@@ -93,27 +72,7 @@ fields. For example, we can define a method on `Rectangle` that is also named
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-use debug::PrintTrait;
-#[derive(Copy, Drop)]
-struct Rectangle {
-    width: u64,
-    height: u64,
-}
-
-trait RectangleTrait {
-    fn width(self: @Rectangle) -> bool;
-}
-
-impl RectangleImpl of RectangleTrait {
-    fn width(self: @Rectangle) -> bool {
-        (*self.width) > 0
-    }
-}
-
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50,  };
-    rect1.width().print();
-}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_14_width_method.cairo}}
 ```
 
 Here, we’re choosing to make the `width` method return `true` if the value in
@@ -130,32 +89,15 @@ struct. This time we want an instance of `Rectangle` to take another instance
 of `Rectangle` and return `true` if the second `Rectangle` can fit completely
 within `self` (the first `Rectangle`); otherwise, it should return `false`.
 That is, once we’ve defined the `can_hold` method, we want to be able to write
-the program shown in Listing 5-14.
+the program shown in Listing 4-14.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-use debug::PrintTrait;
-#[derive(Copy, Drop)]
-struct Rectangle {
-    width: u64,
-    height: u64,
-}
-
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50,  };
-    let rect2 = Rectangle { width: 10, height: 40,  };
-    let rect3 = Rectangle { width: 60, height: 45,  };
-
-    'Can rect1 hold rect2?'.print();
-    rect1.can_hold(@rect2).print();
-
-    'Can rect1 hold rect3?'.print();
-    rect1.can_hold(@rect3).print();
-}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold.cairo:no_method}}
 ```
 
-<span class="caption">Listing 5-14: Using the as-yet-unwritten `can_hold`
+<span class="caption">Listing 4-14: Using the as-yet-unwritten `can_hold`
 method</span>
 
 The expected output would look like the following because both dimensions of
@@ -187,31 +129,18 @@ calling the `can_hold` method. The return value of `can_hold` will be a
 Boolean, and the implementation will check whether the width and height of
 `self` are greater than the width and height of the other `Rectangle`,
 respectively. Let’s add the new `can_hold` method to the `trait` and `impl` blocks from
-Listing 5-13, shown in Listing 5-15.
+Listing 4-13, shown in Listing 4-15.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-trait RectangleTrait {
-    fn area(self: @Rectangle) -> u64;
-    fn can_hold(self: @Rectangle, other: @Rectangle) -> bool;
-}
-
-impl RectangleImpl of RectangleTrait {
-    fn area(self: @Rectangle) -> u64 {
-        *self.width * *self.height
-    }
-
-    fn can_hold(self: @Rectangle, other: @Rectangle) -> bool {
-        *self.width > *other.width & *self.height > *other.height
-    }
-}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold.cairo:trait_impl}}
 ```
 
-<span class="caption">Listing 5-15: Implementing the `can_hold` method on
+<span class="caption">Listing 4-15: Implementing the `can_hold` method on
 `Rectangle` that takes another `Rectangle` instance as a parameter</span>
 
-When we run this code with the `main` function in Listing 5-14, we’ll get our
+When we run this code with the `main` function in Listing 4-14, we’ll get our
 desired output. Methods can take multiple parameters that we add to the
 signature after the `self` parameter, and those parameters work just like
 parameters in functions.
@@ -231,15 +160,7 @@ value twice:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-trait RectangleTrait {
-    fn square(size: u64) -> Rectangle;
-}
-
-impl RectangleImpl of RectangleTrait {
-    fn square(size: u64) -> Rectangle {
-        Rectangle { width: size, height: size }
-    }
-}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_01_implementation_functions.cairo:here}}
 ```
 
 To call this function, we use the `::` syntax with the implementation name;
@@ -252,31 +173,14 @@ namespaces created by modules. We’ll discuss modules in [Chapter 7][modules]<!
 ### Multiple `impl` Blocks
 
 Each struct is allowed to have multiple `trait` and `impl` blocks. For example, Listing
-5-15 is equivalent to the code shown in Listing 5-16, which has each method in
+5-15 is equivalent to the code shown in Listing 4-16, which has each method in
 its own `trait` and `impl` blocks.
 
 ```rust
-trait RectangleCalc {
-    fn area(self: @Rectangle) -> u64;
-}
-impl RectangleCalcImpl of RectangleCalc {
-    fn area(self: @Rectangle) -> u64 {
-        (*self.width) * (*self.height)
-    }
-}
-
-trait RectangleCmp {
-    fn can_hold(self: @Rectangle, other: @Rectangle) -> bool;
-}
-
-impl RectangleCmpImpl of RectangleCmp {
-    fn can_hold(self: @Rectangle, other: @Rectangle) -> bool {
-        *self.width > *other.width & *self.height > *other.height
-    }
-}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_02_multiple_impls.cairo:here}}
 ```
 
-<span class="caption">Listing 5-16: Rewriting Listing 5-15 using multiple `impl`
+<span class="caption">Listing 4-16: Rewriting Listing 4-15 using multiple `impl`
 blocks</span>
 
 There’s no reason to separate these methods into multiple `trait` and `impl` blocks here,

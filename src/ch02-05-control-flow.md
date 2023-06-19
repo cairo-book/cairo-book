@@ -9,17 +9,7 @@ An if expression allows you to branch your code depending on conditions. You pro
 <span class="filename">Filename: main.cairo</span>
 
 ```rust
-use debug::PrintTrait;
-
-fn main() {
-    let number = 3;
-
-    if number == 5 {
-        'condition was true'.print();
-    } else {
-        'condition was false'.print();
-    }
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_if.cairo}}
 ```
 
 All `if` expressions start with the keyword `if`, followed by a condition. In this case, the condition checks whether or not the variable `number` has a value equal to 5. We place the block of code to execute if the condition is `true` immediately after the condition inside curly brackets.
@@ -35,7 +25,7 @@ $ cairo-run main.cairo
 
 Let’s try changing the value of `number` to a value that makes the condition `true` to see what happens:
 
-```rust
+```rust, does_not_compile
     let number = 5;
 ```
 
@@ -57,22 +47,8 @@ You can use multiple conditions by combining if and else in an else if expressio
 
 <span class="filename">Filename: main.cairo</span>
 
-```rust,ignore_format
-use debug::PrintTrait;
-
-fn main() {
-    let number = 3;
-
-    if number == 12 {
-        'number is 12'.print();
-    } else if number == 3 {
-        'number is 3'.print();
-    } else if number - 2 == 1 {
-        'number minus 2 is 1'.print();
-    } else {
-        'number not found'.print();
-    }
-}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_25_else_if.cairo}}
 ```
 
 This program has four possible paths it can take. After running it, you should see the following output:
@@ -90,20 +66,7 @@ Because if is an expression, we can use it on the right side of a let statement 
 <span class="filename">Filename: main.cairo</span>
 
 ```rust
-use debug::PrintTrait;
-
-fn main() {
-    let condition = true;
-    let number = if condition {
-        5
-    } else {
-        6
-    };
-
-    if number == 5 {
-        'condition was true'.print();
-    }
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_26_if_let.cairo}}
 ```
 
 ```console
@@ -129,17 +92,8 @@ like this:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,ignore,does_not_compile
-use debug::PrintTrait;
-fn main() {
-    let mut i: usize = 0;
-    loop {
-        if i > 10 {
-            break ();
-        }
-        'again!'.print();
-    }
-}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_27_loop.cairo}}
 ```
 
 When we run this program, we’ll see `again!` printed over and over continuously
@@ -171,17 +125,7 @@ To break out of a loop, you can place the `break` statement within the loop to t
 executing the loop. Let's fix the infinite loop by adding a making the stop condition `i > 10` reachable.
 
 ```rust
-use debug::PrintTrait;
-fn main() {
-    let mut i: usize = 0;
-    loop {
-        if i > 10 {
-            break ();
-        }
-        'again'.print();
-        i += 1;
-    }
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break.cairo}}
 ```
 
 The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
@@ -216,20 +160,7 @@ use to stop the loop; that value will be returned out of the loop so you can
 use it, as shown here:
 
 ```rust
-use debug::PrintTrait;
-fn main() {
-    let mut counter = 0;
-
-    let result = loop {
-        if counter == 10 {
-            break counter * 2;
-        }
-        counter += 1;
-    };
-
-    'The result is '.print();
-    result.print();
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_29_loop_return_values.cairo}}
 ```
 
 Before the loop, we declare a variable named `counter` and initialize it to

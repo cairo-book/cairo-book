@@ -9,21 +9,7 @@ Think of a match expression as being like a coin-sorting machine: coins slide do
 Speaking of coins, let’s use them as an example using match! We can write a function that takes an unknown US coin and, in a similar way as the counting machine, determines which coin it is and returns its value in cents, as shown in Listing 5-3.
 
 ```rust
-enum Coin {
-    Penny: (),
-    Nickel: (),
-    Dime: (),
-    Quarter: (),
-}
-
-fn value_in_cents(coin: Coin) -> felt252 {
-    match coin {
-        Coin::Penny(_) => 1,
-        Coin::Nickel(_) => 5,
-        Coin::Dime(_) => 10,
-        Coin::Quarter(_) => 25,
-    }
-}
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_03.cairo:all}}
 ```
 
 Listing 5-3: An enum and a match expression that has the variants of the enum as its patterns
@@ -41,17 +27,7 @@ The code associated with each arm is an expression, and the resultant value of t
 We don’t typically use curly brackets if the match arm code is short, as it is in our example where each arm just returns a value. If you want to run multiple lines of code in a match arm, you must use curly brackets, with a comma following the arm. For example, the following code prints “Lucky penny!” every time the method is called with a `Coin::Penny(())`, but still returns the last value of the block, `1`:
 
 ```rust
-fn value_in_cents(coin: Coin) -> felt252 {
-    match coin {
-        Coin::Penny(_) => {
-            ('Lucky penny!').print();
-            1
-        },
-        Coin::Nickel(_) => 5,
-        Coin::Dime(_) => 10,
-        Coin::Quarter(_)=> 25,
-    }
-}
+{{#include ../listings/ch05-enums-and-pattern-matching/no_listing_04_match_arms.cairo:here}}
 ```
 
 ## Patterns That Bind to Values
@@ -61,19 +37,7 @@ Another useful feature of match arms is that they can bind to the parts of the v
 As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our `enum` by changing the `Quarter` variant to include a `UsState` value stored inside it, which we’ve done in Listing 5-4.
 
 ```rust
-#[derive(Drop)]
-enum UsState {
-    Alabama: (),
-    Alaska: (),
-}
-
-#[derive(Drop)]
-enum Coin {
-    Penny: (),
-    Nickel: (),
-    Dime: (),
-    Quarter: (UsState),
-}
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_04.cairo}}
 ```
 
 Listing 5-4: A `Coin` enum in which the `Quarter` variant also holds a `UsState` value
@@ -83,30 +47,13 @@ Let’s imagine that a friend is trying to collect all 50 state quarters. While 
 In the match expression for this code, we add a variable called `state` to the pattern that matches values of the variant `Coin::Quarter`. When a `Coin::Quarter` matches, the `state` variable will bind to the value of that quarter’s state. Then we can use `state` in the code for that arm, like so:
 
 ```rust
-fn value_in_cents(coin: Coin) -> felt252 {
-    match coin {
-        Coin::Penny(_) => 1,
-        Coin::Nickel(_) => 5,
-        Coin::Dime(_) => 10,
-        Coin::Quarter(state)=> {
-            state.print();
-            25
-        },
-    }
-}
+{{#include ../listings/ch05-enums-and-pattern-matching/no_listing_05_print_enum.cairo:function}}
 ```
 
 To print the value of a variant of an enum in Cairo, we need to add an implementation for the `print` function for the `debug::PrintTrait`:
 
 ```rust
-impl UsStatePrintImpl of PrintTrait::<UsState> {
-    fn print(self: UsState) {
-        match self {
-            UsState::Alabama(_) => ('Alabama').print(),
-            UsState::Alaska(_) => ('Alaska').print(),
-        }
-    }
-}
+{{#include ../listings/ch05-enums-and-pattern-matching/no_listing_05_print_enum.cairo:print_impl}}
 ```
 
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska(())))`, `coin` would be `Coin::Quarter(UsState::Alaska())`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for state will be the value `UsState::Alaska()`. We can then use that binding in the `PrintTrait`, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
@@ -120,23 +67,7 @@ Let’s say we want to write a function that takes an `Option<u8>` and, if there
 This function is very easy to write, thanks to match, and will look like Listing 5-5.
 
 ```rust
-use option::OptionTrait;
-use debug::PrintTrait;
-
-fn plus_one(x: Option<u8>) -> Option<u8> {
-    match x {
-        Option::Some(val) => Option::Some(val + 1),
-        Option::None(_) => Option::None(()),
-    }
-}
-
-fn main() {
-    let five: Option<u8> = Option::Some(5);
-    let six: Option<u8> = plus_one(five);
-    six.unwrap().print();
-    let none = plus_one(Option::None(()));
-    none.unwrap().print();
-}
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05.cairo}}
 ```
 
 Listing 5-5: A function that uses a match expression on an `Option<u8>`
@@ -153,7 +84,7 @@ enum Option<T> {
 Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5)`. We then compare that against each match arm:
 
 ```rust
-    Option::Some(val) => Option::Some(val + 1),
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05.cairo:6}}
 ```
 
 Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We have the same variant. The `val` binds to the value contained in `Option::Some`, so `val` takes the value `5`. The code in the match arm is then executed, so we add `1` to the value of `val` and create a new `Option::Some` value with our total `6` inside. Because the first arm matched, no other arms are compared.
@@ -161,13 +92,13 @@ Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We 
 Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None(())`. We enter the match and compare to the first arm:
 
 ```rust
-    Option::Some(val) => Option::Some(val + 1),
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05.cairo:6}}
 ```
 
 The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we continue to the next arm:
 
 ```rust
-    Option::None(_) => Option::None(()),
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05.cairo:7}}
 ```
 
 It matches! There’s no value to add to, so the program stops and returns the `Option::None(())` value on the right side of `=>`.
@@ -177,6 +108,10 @@ Combining `match` and enums is useful in many situations. You’ll see this patt
 ## Matches Are Exhaustive
 
 There’s one other aspect of match we need to discuss: the arms’ patterns must cover all possibilities. Consider this version of our `plus_one` function, which has a bug and won’t compile:
+
+```rust
+{{#include ../listings/ch05-enums-and-pattern-matching/no_listing_07_missing_match_arm.cairo:here}}
+```
 
 ```bash
 $ cairo-run src/test.cairo
@@ -197,12 +132,7 @@ Using enums, we can also take special actions for a few particular values, but f
 Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you lose. Here's a match that implements that logic, with the number hardcoded rather than a random value.
 
 ```rust
-fn did_i_win(nb: felt252) {
-    match nb {
-        0 => ('You won!').print(),
-        _ => ('You lost...').print(),
-    }
-}
+{{#include ../listings/ch05-enums-and-pattern-matching/no_listing_06_match_zero.cairo:here}}
 ```
 
 The first arm, the pattern is the literal values 0. For the last arm that covers every other possible value, the pattern is the character `_`. This code compiles, even though we haven’t listed all the possible values a `felt252` can have, because the last pattern will match all values not specifically listed. This catch-all pattern meets the requirement that `match` must be exhaustive. Note that we have to put the catch-all arm last because the patterns are evaluated in order. If we put the catch-all arm earlier, the other arms would never run, so Cairo will warn us if we add arms after a catch-all!

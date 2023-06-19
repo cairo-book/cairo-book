@@ -11,22 +11,15 @@ This has to do with the fact that once a memory slot is written to, it cannot be
 
 #### Creating an Array
 
-Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of creation of an array with 3 elements:
+Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of the creation of an array to which we append 3 elements:
 
 ```rust
-use array::ArrayTrait;
-
-fn main() {
-    let mut a = ArrayTrait::new();
-    a.append(0);
-    a.append(1);
-    a.append(2);
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo}}
 ```
 
 You can pass the expected type of items inside the array when instantiating the array like this
 
-```rust,
+```rust, does_not_compile
 let mut arr = ArrayTrait::<u128>::new();
 ```
 
@@ -37,31 +30,16 @@ let mut arr = ArrayTrait::<u128>::new();
 To add an element to the end of an array, you can use the `append()` method:
 
 ```rust
-    let mut a = ArrayTrait::new();
-    a.append(10);
-    a.append(1);
-    a.append(2);
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo:5}}
 ```
 
 ##### Removing Elements
 
-To remove an element from the front of an array, you can use the `pop_front()` method.
+You can only remove elements from the front of an array by using the `pop_front()` method.
 This method returns an `Option` containing the removed element, or `Option::None` if the array is empty.
 
 ```rust
-use option::OptionTrait;
-use array::ArrayTrait;
-use debug::PrintTrait;
-
-fn main() {
-    let mut a = ArrayTrait::new();
-    a.append(10);
-    a.append(1);
-    a.append(2);
-
-    let first_value = a.pop_front().unwrap();
-    first_value.print(); // print '10'
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_31_array_pop_front.cairo}}
 ```
 
 The above code will print `10` as we remove the first element that was added.
@@ -79,15 +57,7 @@ The `at` function, on the other hand, directly returns a snapshot to the element
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
 ```rust
-use array::ArrayTrait;
-fn main() {
-    let mut a = ArrayTrait::new();
-    a.append(0);
-    a.append(1);
-
-    let first = *a.at(0);
-    let second = *a.at(1);
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_32_array_at.cairo}}
 ```
 
 In this example, the variable named `first` will get the value `0` because that
@@ -97,25 +67,7 @@ the value `1` from index `1` in the array.
 Here is an example with the `get()` method:
 
 ```rust,ignore_format
-use array::ArrayTrait;
-use box::BoxTrait;
-fn main() -> u128 {
-    let mut arr = ArrayTrait::<u128>::new();
-    arr.append(100);
-    let index_to_access = 1; // Change this value to see different results, what would happen if the index doesn't exist?
-    match arr.get(index_to_access) {
-        Option::Some(x) => {
-            *x.unbox()
-        // Don't worry about * for now, if you are curious see Chapter 3.2 #desnap operator
-        // It basically means "transform what get(idx) returned into a real value"
-        },
-        Option::None(_) => {
-            let mut data = ArrayTrait::new();
-            data.append('out of bounds');
-            panic(data)
-        }
-    }
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_33_array_get.cairo}}
 ```
 
 #### Size related methods
@@ -129,22 +81,7 @@ If you want to check if an array is empty or not, you can use the `is_empty()` m
 If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types.
 
 ```rust
-use array::ArrayTrait;
-use traits::Into;
-
-#[derive(Copy, Drop)]
-enum Data {
-    Integer: u128,
-    Felt: felt252,
-    Tuple: (u32, u32),
-}
-
-fn main() {
-    let mut messages: Array<Data> = ArrayTrait::new();
-    messages.append(Data::Integer(100));
-    messages.append(Data::Felt('hello world'));
-    messages.append(Data::Tuple((10, 30)));
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_34_array_with_enums.cairo}}
 ```
 
 #### Span
@@ -158,7 +95,7 @@ All methods provided by `Array` can also be used with `Span`, with the exception
 To create a `Span` of an `Array`, call the `span()` method:
 
 ```rust
-let span = array.span();
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_35_array_span.cairo:5}}
 ```
 
 ## Summary
