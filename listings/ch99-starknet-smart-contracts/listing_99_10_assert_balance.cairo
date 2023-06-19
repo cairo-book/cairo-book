@@ -5,7 +5,7 @@ mod Contract {
         balance: u256
     }
 
-    //ANCHOR: here
+    //ANCHOR: withdraw
     #[external]
     fn withdraw(amount: u256) {
         let current_balance = balance::read();
@@ -14,5 +14,5 @@ mod Contract {
 
         balance::write(current_balance - amount);
     }
-//ANCHOR_END: here
+//ANCHOR_END: withdraw
 }

@@ -16,7 +16,7 @@ mod AccessControlContract {
         owner::write(get_caller_address());
     }
 
-    // Modifiers functions to check roles
+    // Guard functions to check roles
 
     #[inline(always)]
     fn is_owner() -> bool {
@@ -38,7 +38,7 @@ mod AccessControlContract {
         assert(is_role_a(), 'Not role A');
     }
 
-    // You can easily combine modifiers to perfom complex checks
+    // You can easily combine guards to perfom complex checks
     fn only_allowed() {
         assert(is_owner() || is_role_a(), 'Not allowed');
     }
@@ -52,7 +52,7 @@ mod AccessControlContract {
     }
 
     // You can now focus on the business logic of your contract
-    // and reduce the complexity of your code by using modifiers
+    // and reduce the complexity of your code by using guard functions
 
     #[external]
     fn role_a_action() {
