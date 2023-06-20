@@ -36,23 +36,37 @@ jobs:
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
-      - name: Cairo Verify
-        uses: ./.github/workflows/cairo-verify
-
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
 
       - name: Build in English
         run: |
           mdbook build -d book
-
+      
+      - name: Copy WASM-Cairo pkg
+        run: |
+          cp -r theme/pkg book/html
+          cp -r theme/js book/html
+      
       - name: Build all translations
         run: |
           for po_lang in $(cat ./LANGUAGES); do
               echo "::group::Building $po_lang translation"
               MDBOOK_BOOK__LANGUAGE=$po_lang \
               mdbook build -d book/$po_lang
+              mv book/$po_lang/html book/html/$po_lang
               echo "::endgroup::"
+          done
+
+      # - name: Verify Cairo programs
+      #   uses: ./.github/workflows/verify-cairo-programs
+      - name: Copy WASM-Cairo pkg
+        run: |
+          for po_lang in $(cat ./LANGUAGES); do
+            echo "::group::Copy WASM-Cairo pkg to $po_lang/html"
+            cp -r theme/pkg book/html/$po_lang
+            cp -r theme/js book/html/$po_lang
+            echo "::endgroup::"
           done
 
       - name: Setup Pages
@@ -61,7 +75,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./book
+          path: ./book/html
 
       - name: Deploy to GitHub Pages
         id: deployment
