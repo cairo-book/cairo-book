@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-06-15 08:16+0900\n"
+"PO-Revision-Date: 2023-06-20 21:24+0900\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -200,27 +200,31 @@ msgstr "ABI和接口"
 msgid "Contract Dispatchers, Library Dispachers and system calls"
 msgstr "合约调度器、库调度器和系统调用"
 
-#: src/SUMMARY.md:90
+#: src/SUMMARY.md:89
+msgid "Security Considerations"
+msgstr "安全考量"
+
+#: src/SUMMARY.md:91
 msgid "Appendix"
 msgstr "附录"
 
-#: src/SUMMARY.md:91
+#: src/SUMMARY.md:92
 msgid "A - Keywords"
 msgstr "A - 关键字"
 
-#: src/SUMMARY.md:92
+#: src/SUMMARY.md:93
 msgid "B - Operators and Symbols"
 msgstr "B - 运算符和符号"
 
-#: src/SUMMARY.md:93
+#: src/SUMMARY.md:94
 msgid "C - Derivable Traits"
 msgstr "C - 可派生的 Trait"
 
-#: src/SUMMARY.md:94
+#: src/SUMMARY.md:95
 msgid "D - Useful Development Tools"
 msgstr "D - 实用开发工具"
 
-#: src/SUMMARY.md:95
+#: src/SUMMARY.md:96
 msgid "E - Cairo Most Common Types and Traits"
 msgstr "E - Cairo中最常见的类型和Trait"
 
@@ -2725,7 +2729,7 @@ msgstr ""
 msgid "Try running this program; you should get the following output:"
 msgstr "尝试运行这个程序；你应该得到以下输出："
 
-#: src/ch02-03-functions.md:76 src/ch02-03-functions.md:256
+#: src/ch02-03-functions.md:76 src/ch02-03-functions.md:276
 msgid ""
 "```console\n"
 "$ cairo-run src/lib.cairo\n"
@@ -2836,10 +2840,56 @@ msgstr ""
 "程序输出包含这些值。"
 
 #: src/ch02-03-functions.md:123
+msgid "#### Named parameters"
+msgstr "### 命名参数"
+
+#: src/ch02-03-functions.md:125
+msgid ""
+"In Cairo, named parameters allow you to specify the names of arguments when you call a function. This makes the function calls more readable and self-descriptive.\n"
+"If you want to use named parameters, you need to specify the name of the parameter and the value you want to pass to it. The syntax is `parameter_name: value`. If you pass a variable "
+"that has the same name as the parameter, you can simply write `:parameter_name` instead of `parameter_name: variable_name`."
+msgstr ""
+"在 Cairo 中，命名参数允许您在调用函数时指定参数的名称。这使得函数调用更具可读性和自描述性。\n"
+"如果你想使用命名参数，你需要指定参数的名称和你想传递给它的值。语法是 `parameter_name: value`。如果你传递的变量与参数名称相同，你可以简写为 `:parameter_name`，而不是 `parameter_name: "
+"variable_name`。"
+
+#: src/ch02-03-functions.md:128
+msgid "Here is an example:"
+msgstr "下面是一个例子："
+
+#: src/ch02-03-functions.md:130
+msgid ""
+"```rust\n"
+"fn foo(x: u8, y: u8) {}\n"
+"\n"
+"fn main() {\n"
+"    let first_arg = 3;\n"
+"    let second_arg = 4;\n"
+"    foo(x: first_arg, y: second_arg);\n"
+"    let x = 1;\n"
+"    let y = 2;\n"
+"    foo(:x, :y)\n"
+"}\n"
+"```"
+msgstr ""
+"```rust\n"
+"fn foo(x: u8, y: u8) {}\n"
+"\n"
+"fn main() {\n"
+"    let first_arg = 3;\n"
+"    let second_arg = 4;\n"
+"    foo(x: first_arg, y: second_arg);\n"
+"    let x = 1;\n"
+"    let y = 2;\n"
+"    foo(:x, :y)\n"
+"}\n"
+"```"
+
+#: src/ch02-03-functions.md:143
 msgid "### Statements and Expressions"
 msgstr "### 语句和表达式"
 
-#: src/ch02-03-functions.md:125
+#: src/ch02-03-functions.md:145
 msgid ""
 "Function bodies are made up of a series of statements optionally ending in an\n"
 "expression. So far, the functions we’ve covered haven’t included an ending\n"
@@ -2855,7 +2905,7 @@ msgstr ""
 "（expression-based）的语言，这是一个需要理解的（不同于其他语言）\n"
 "重要区别。其他语言并没有这样的区别，所以让我们看看语句与表达式有什么区别以及这些区别是如何影响函数体的。"
 
-#: src/ch02-03-functions.md:133
+#: src/ch02-03-functions.md:153
 msgid ""
 "- **Statements** are instructions that perform some action and do not return\n"
 "  a value.\n"
@@ -2864,7 +2914,7 @@ msgstr ""
 "- **语句**（Statements）是执行一些操作但不返回值的指令。\n"
 "- **表达式**（Expressions）计算并产生一个值。让我们看一些例子。"
 
-#: src/ch02-03-functions.md:137
+#: src/ch02-03-functions.md:157
 msgid ""
 "We’ve actually already used statements and expressions. Creating a variable and\n"
 "assigning a value to it with the `let` keyword is a statement. In Listing 2-1,\n"
@@ -2873,7 +2923,7 @@ msgstr ""
 "实际上，我们已经使用过语句和表达式。\n"
 "使用 `let` 关键字创建变量并绑定一个值是一个语句。在示例 2-1 中，`let y = 6;`; 是一个语句。"
 
-#: src/ch02-03-functions.md:141
+#: src/ch02-03-functions.md:161
 msgid ""
 "```rust\n"
 "fn main() {\n"
@@ -2887,17 +2937,17 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:147
+#: src/ch02-03-functions.md:167
 msgid "<span class=\"caption\">Listing 2-1: A `main` function declaration containing one statement</span>"
 msgstr "<span class=\"caption\">示例2-1：一个包含一条语句的 `main` 函数声明</span>"
 
-#: src/ch02-03-functions.md:149
+#: src/ch02-03-functions.md:169
 msgid ""
 "Function definitions are also statements; the entire preceding example is a\n"
 "statement in itself."
 msgstr "函数定义也是语句，上面整个例子本身就是一个语句。"
 
-#: src/ch02-03-functions.md:152
+#: src/ch02-03-functions.md:172
 msgid ""
 "Statements do not return values. Therefore, you can’t assign a `let` statement\n"
 "to another variable, as the following code tries to do; you’ll get an error:"
@@ -2905,7 +2955,7 @@ msgstr ""
 "语句不返回值。因此，不能把 `let` 语句赋值给另一个变量，比如下面的例子尝试做\n"
 "的，会产生一个错误："
 
-#: src/ch02-03-functions.md:155
+#: src/ch02-03-functions.md:175
 msgid ""
 "```rust,does_not_compile,ignore_format\n"
 "fn main() {\n"
@@ -2919,11 +2969,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:161
+#: src/ch02-03-functions.md:181
 msgid "When you run this program, the error you’ll get looks like this:"
 msgstr "当你运行这个程序时，你将得到的错误看起来是这样："
 
-#: src/ch02-03-functions.md:163
+#: src/ch02-03-functions.md:183
 msgid ""
 "```console\n"
 "$ cairo-run src/lib.cairo\n"
@@ -2969,7 +3019,7 @@ msgstr ""
 "    let x = (let y = 6);\n"
 "```"
 
-#: src/ch02-03-functions.md:185
+#: src/ch02-03-functions.md:205
 msgid ""
 "The `let y = 6` statement does not return a value, so there isn’t anything for\n"
 "`x` to bind to. This is different from what happens in other languages, such as\n"
@@ -2981,7 +3031,7 @@ msgstr ""
 "中的情况不同，比如说 C 和 Ruby，其中赋值会返回赋值的值。\n"
 "在这些语言中，你可以写 `x = y = 6`，让 `x`和 `y` 都有值 `6`；但在 Cairo 中不是这样的。"
 
-#: src/ch02-03-functions.md:191
+#: src/ch02-03-functions.md:211
 msgid ""
 "Expressions evaluate to a value and make up most of the rest of the code that\n"
 "you’ll write in Cairo. Consider a math operation, such as `5 + 6`, which is an\n"
@@ -2996,7 +3046,7 @@ msgstr ""
 "表达式可以是语句的一部分：在示例 2-1 中，语句 `let y = 6;` 中的 `6` 是一个表达式，它计算出的值是 `6` 。\n"
 "函数调用是一个表达式。宏调用也是一个表达式。用大括号创建的一个新的块作用域同样也是一个表达式，例如："
 
-#: src/ch02-03-functions.md:199
+#: src/ch02-03-functions.md:219
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -3022,11 +3072,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:211
+#: src/ch02-03-functions.md:231
 msgid "This expression:"
 msgstr "这个表达式："
 
-#: src/ch02-03-functions.md:213
+#: src/ch02-03-functions.md:233
 msgid ""
 "```rust, does_not_compile, ignore_format\n"
 "{\n"
@@ -3042,7 +3092,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:220
+#: src/ch02-03-functions.md:240
 msgid ""
 "is a block that, in this case, evaluates to `4`. That value gets bound to `y`\n"
 "as part of the `let` statement. Note that the `x + 1` line doesn’t have a\n"
@@ -3057,11 +3107,11 @@ msgstr ""
 "分号。如果在表达式的结尾加上分号，它就变成了语句，而语句不会返回值。\n"
 "在接下来学习具有返回值的函数和表达式时要谨记这一点。"
 
-#: src/ch02-03-functions.md:228
+#: src/ch02-03-functions.md:248
 msgid "### Functions with Return Values"
 msgstr "### 具有返回值的函数"
 
-#: src/ch02-03-functions.md:230
+#: src/ch02-03-functions.md:250
 msgid ""
 "Functions can return values to the code that calls them. We don’t name return\n"
 "values, but we must declare their type after an arrow (`->`). In Cairo, the\n"
@@ -3076,7 +3126,7 @@ msgstr ""
 "`return` 关键字和指定值，可从函数中提前返回；但大部分函数隐式的返回最后的表达式。\n"
 "这是一个有返回值的函数的例子："
 
-#: src/ch02-03-functions.md:238
+#: src/ch02-03-functions.md:258
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -3104,7 +3154,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:251
+#: src/ch02-03-functions.md:271
 msgid ""
 "There are no function calls, or even `let` statements in the `five`\n"
 "function—just the number `5` by itself. That’s a perfectly valid function in\n"
@@ -3115,7 +3165,7 @@ msgstr ""
 " Cairo 中是一个完全有效的函数。注意，也指定了函数返回值的类型，就是\n"
 " `-> u32`。尝试运行代码；输出应该看起来像这样："
 
-#: src/ch02-03-functions.md:261
+#: src/ch02-03-functions.md:281
 msgid ""
 "The `5` in `five` is the function’s return value, which is why the return type\n"
 "is `u32`. Let’s examine this in more detail. There are two important bits:\n"
@@ -3127,7 +3177,7 @@ msgstr ""
 "码。有两个重要的部分：首先，`let x = five();` 这一行表明我们使用函数的返回值初\n"
 "始化一个变量。因为 `five` 函数返回 `5`，这一行与如下代码相同："
 
-#: src/ch02-03-functions.md:267
+#: src/ch02-03-functions.md:287
 msgid ""
 "```rust, does_not_compile\n"
 "let x = 5;\n"
@@ -3137,7 +3187,7 @@ msgstr ""
 "let x = 5;\n"
 "```"
 
-#: src/ch02-03-functions.md:271
+#: src/ch02-03-functions.md:291
 msgid ""
 "Second, the `five` function has no parameters and defines the type of the\n"
 "return value, but the body of the function is a lonely `5` with no semicolon\n"
@@ -3148,7 +3198,7 @@ msgstr ""
 "有分号，因为这是一个表达式，我们想要返回它的值。\n"
 "让我们看看另一个例子："
 
-#: src/ch02-03-functions.md:276
+#: src/ch02-03-functions.md:296
 msgid ""
 "```rust\n"
 "use debug::PrintTrait;\n"
@@ -3178,7 +3228,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:290
+#: src/ch02-03-functions.md:310
 msgid ""
 "Running this code will print `[DEBUG]                    (raw: 6)`. But if we place a\n"
 "semicolon at the end of the line containing `x + 1`, changing it from an\n"
@@ -3187,7 +3237,7 @@ msgstr ""
 "运行这段代码将打印 `[DEBUG] (raw: 6)`。但是如果在包含 `x + 1` 的行尾放置一个\n"
 "分号，把它从一个表达式变成一个语句，我们会看到一个错误："
 
-#: src/ch02-03-functions.md:294
+#: src/ch02-03-functions.md:314
 msgid ""
 "```rust,does_not_compile\n"
 "use debug::PrintTrait;\n"
@@ -3217,11 +3267,11 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch02-03-functions.md:308
+#: src/ch02-03-functions.md:328
 msgid "Compiling this code produces an error, as follows:"
 msgstr "编译这段代码会产生一个错误，如下所示："
 
-#: src/ch02-03-functions.md:310
+#: src/ch02-03-functions.md:330
 msgid ""
 "```console\n"
 "error: Unexpected return type. Expected: \"core::integer::u32\", found: \"()\".\n"
@@ -3231,7 +3281,7 @@ msgstr ""
 "error: Unexpected return type. Expected: \"core::integer::u32\", found: \"()\".\n"
 "```"
 
-#: src/ch02-03-functions.md:314
+#: src/ch02-03-functions.md:334
 msgid ""
 "The main error message, `Unexpected return type`, reveals the core issue with this\n"
 "code. The definition of the function `plus_one` says that it will return an\n"
@@ -7689,6 +7739,24 @@ msgstr "还有另一方面需要讨论：这些分支必须覆盖了所有的可
 
 #: src/ch05-02-the-match-control-flow-construct.md:171
 msgid ""
+"```rust\n"
+"fn plus_one(x: Option<u8>) -> Option<u8> {\n"
+"    match x {\n"
+"        Option::Some(val) => Option::Some(val + 1), \n"
+"    }\n"
+"}\n"
+"```"
+msgstr ""
+"```rust\n"
+"fn plus_one(x: Option<u8>) -> Option<u8> {\n"
+"    match x {\n"
+"        Option::Some(val) => Option::Some(val + 1), \n"
+"    }\n"
+"}\n"
+"```"
+
+#: src/ch05-02-the-match-control-flow-construct.md:179
+msgid ""
 "```bash\n"
 "$ cairo-run src/test.cairo\n"
 "    error: Unsupported match. Currently, matches require one arm per variant,\n"
@@ -7709,7 +7777,7 @@ msgstr ""
 "    Error: failed to compile: ./src/test.cairo\n"
 "```"
 
-#: src/ch05-02-the-match-control-flow-construct.md:181
+#: src/ch05-02-the-match-control-flow-construct.md:189
 msgid ""
 "Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the "
 "code to be valid. Especially in the case of `Option<T>`, when Cairo prevents us from forgetting to explicitly handle the `None` case, it protects us from assuming that we have a "
@@ -7718,23 +7786,23 @@ msgstr ""
 "Rust 知道我们没有覆盖所有可能的情况甚至知道哪些模式被忘记了！Cairo 中的匹配是 穷尽的（exhaustive）：必须穷举到最后的可能性来使代码有效。特别的在这个 `Option<T>` 的例子中，Cairo 防止我"
 "们忘记明确的处理 None 的情况，这让我们免于假设拥有一个实际上为空的值，从而使之前提到的价值亿万的错误不可能发生。"
 
-#: src/ch05-02-the-match-control-flow-construct.md:183
+#: src/ch05-02-the-match-control-flow-construct.md:191
 msgid "## Match 0 and the \\_ Placeholder"
 msgstr "## Match 0 与 \\_ 占位符"
 
-#: src/ch05-02-the-match-control-flow-construct.md:185
+#: src/ch05-02-the-match-control-flow-construct.md:193
 msgid ""
 "Using enums, we can also take special actions for a few particular values, but for all other values take one default action. Currently only `0` and the `_`operator are supported."
 msgstr "使用枚举，我们也可以对一些特定的值采取特殊的操作，但对所有其他的值采取一个默认的操作。目前只支持 `0` 和 `_` 操作符。"
 
-#: src/ch05-02-the-match-control-flow-construct.md:187
+#: src/ch05-02-the-match-control-flow-construct.md:195
 msgid ""
 "Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you lose. Here's a match that implements that logic, "
 "with the number hardcoded rather than a random value."
 msgstr ""
 "想象一下，我们正在实现一个游戏，你会获得一个 0 到 7 之间的随机数字。如果你有 0，你就赢了。若是任何其他的值，你就输了。这里有一个实现该逻辑的 match，数字是硬编码的，而不是随机值。"
 
-#: src/ch05-02-the-match-control-flow-construct.md:189
+#: src/ch05-02-the-match-control-flow-construct.md:197
 msgid ""
 "```rust\n"
 "fn did_i_win(nb: felt252) {\n"
@@ -7754,7 +7822,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch05-02-the-match-control-flow-construct.md:198
+#: src/ch05-02-the-match-control-flow-construct.md:206
 msgid ""
 "The first arm, the pattern is the literal values 0. For the last arm that covers every other possible value, the pattern is the character `_`. This code compiles, even though we "
 "haven’t listed all the possible values a `felt252` can have, because the last pattern will match all values not specifically listed. This catch-all pattern meets the requirement that "
@@ -7765,7 +7833,7 @@ msgstr ""
 "没有特别列出的值。这个通配模式满足了 `match` 必须被穷尽的要求。请注意，我们必须把通配分支放在最后，因为模式是按顺序评估的。如果我们把通配分支放在前面，其他的分支就不会运行，所以如果我"
 "们在通配分支之后添加分支，Cairo 会警告我们!"
 
-#: src/ch05-02-the-match-control-flow-construct.md:200
+#: src/ch05-02-the-match-control-flow-construct.md:208
 msgid "<!-- TODO : might need to link the end of this chapter to patterns and matching chapter -->"
 msgstr "<!-- TODO : might need to link the end of this chapter to patterns and matching chapter -->"
 
@@ -14000,6 +14068,344 @@ msgid ""
 msgstr ""
 "正如你所看到的，我们没有直接传递我们的函数参数，而是传递了合约地址、函数选择器（这是一个函数名称的keccak哈希值）和calldata（函数参数）。最后，我们得到了一个序列化的值，我们需要自己反"
 "序列化它！"
+
+#: src/ch99-03-security-considerations.md:1
+msgid "# Security Considerations"
+msgstr "# 安全考量"
+
+#: src/ch99-03-security-considerations.md:3
+msgid "When developing software, ensuring it functions as intended is usually straightforward. However, preventing unintended usage and vulnerabilities can be more challenging."
+msgstr "在开发软件时，确保其按预期运行通常比较简单而直接。然而，防止非预期的使用和漏洞可能更具挑战性。"
+
+#: src/ch99-03-security-considerations.md:5
+msgid "In smart contract development, security is very important. A single error can result in the loss of valuable assets or the improper functioning of certain features."
+msgstr "在智能合约的开发中，安全性非常重要。仅仅一个简单的错误就可能导致宝贵资产的损失或某些功能的错误运行。"
+
+#: src/ch99-03-security-considerations.md:7
+msgid ""
+"Smart contracts are executed in a public environment where anyone can examine the code and interact with it. Any errors or vulnerabilities in the code can be exploited by malicious "
+"actors."
+msgstr "智能合约在一个公开的环境中执行，任何人都可以检查代码并与之交互。代码中的任何错误或漏洞都可能被恶意行为者利用。"
+
+#: src/ch99-03-security-considerations.md:9
+msgid ""
+"This chapter presents general recommendations for writing secure smart contracts. By incorporating these concepts during development, you can create robust and reliable smart "
+"contracts. This reduces the chances of unexpected behavior or vulnerabilities."
+msgstr "本章介绍了编写安全智能合约的一般建议。在开发过程中，通过融入这些概念，你可以创建健壮可靠的智能合约。这将减少出现意外行为或漏洞的机会。"
+
+#: src/ch99-03-security-considerations.md:11
+msgid "## Disclaimer"
+msgstr "## 免责声明"
+
+#: src/ch99-03-security-considerations.md:13
+msgid "This chapter does not provide an exhaustive list of all possible security issues, and it does not guarantee that your contracts will be completely secure."
+msgstr "本章并未提供所有可能的安全问题的详尽列表，也不能保证您的合约完全安全。"
+
+#: src/ch99-03-security-considerations.md:15
+msgid "If you are developing smart contracts for production use, it is highly recommended to conduct external audits performed by security experts."
+msgstr "如果您正在开发用于实际生产环境中的智能合约，强烈建议由安全专家对其进行第三方审计。"
+
+#: src/ch99-03-security-considerations.md:17
+msgid "## Mindset"
+msgstr "## 安全思维"
+
+#: src/ch99-03-security-considerations.md:19
+msgid ""
+"Cairo is a highly safe language inspired by rust. It is designed in a way that force you to cover all possible cases. Security issues on Starknet mostly arise from the way smart "
+"contracts flows are designed, not much from the language itself."
+msgstr "Cairo 是一种受到 Rust 启发的高度安全的语言。它的设计方式强制你覆盖所有可能的情况。在 Starknet 上的安全问题主要源于智能合约流程的设计，而非语言本身。"
+
+#: src/ch99-03-security-considerations.md:21
+msgid "Adopting a security mindset is the initial step in writing secure smart contracts. Try to always consider all possible scenarios when writing code."
+msgstr "采用安全思维是编写安全智能合约的第一步。在编写代码时，尽量始终考虑所有可能的场景。"
+
+#: src/ch99-03-security-considerations.md:23
+msgid "### Viewing smart contract as Finite State Machines"
+msgstr "### 将智能合约视为有限状态机"
+
+#: src/ch99-03-security-considerations.md:25
+msgid "Transactions in smart contracts are atomic, meaning they either succeed or fail without making any changes."
+msgstr "智能合约中的交易是原子性的，这意味着它们要么成功，要么失败且不发生任何变化。"
+
+#: src/ch99-03-security-considerations.md:27
+msgid ""
+"Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external function represents a set of possible state "
+"transitions. A transaction is nothing more than a state transition."
+msgstr "将智能合约视为状态机：它们有一组由构造函数约束定义的初始状态，而外部函数表示一组可能的状态转换。所谓交易也不过是一个状态转换。"
+
+#: src/ch99-03-security-considerations.md:29
+msgid ""
+"The `assert` or `panic` functions can be used to validate conditions before performing specific actions. You can learn more about these on the [Unrecoverable Errors with panic](./"
+"ch09-01-unrecoverable-errors-with-panic.md) page."
+msgstr "`assert` 或 `panic` 函数可以用于在执行特定操作之前验证条件。您可以在[无法恢复的错误与panic](./ch09-01-unrecoverable-errors-with-panic.md)页面上了解更多信息。"
+
+#: src/ch99-03-security-considerations.md:31
+msgid "These validations can include:"
+msgstr "这些验证会包括："
+
+#: src/ch99-03-security-considerations.md:33
+msgid ""
+"- Inputs provided by the caller\n"
+"- Execution requirements\n"
+"- Invariants (conditions that must always be true)\n"
+"- Return values from other function calls"
+msgstr ""
+"- 调用者提供的输入参数\n"
+"- 执行要求\n"
+"- 不变量（必须始终为真的条件）\n"
+"- 其他函数调用的返回值"
+
+#: src/ch99-03-security-considerations.md:38
+msgid ""
+"For example, you could use the `assert` function to validate that a user has enough funds to perform a withdraw transaction. If the condition is not met, the transaction will fail "
+"and the state of the contract will not change."
+msgstr "例如，您可以使用 `assert` 函数来验证用户是否具有足够的资金执行提款交易。如果条件不满足，交易将失败，并且合约的状态不会发生变化。"
+
+#: src/ch99-03-security-considerations.md:40
+msgid ""
+"```rust\n"
+"    #[external]\n"
+"    fn withdraw(amount: u256) {\n"
+"        let current_balance = balance::read();\n"
+"\n"
+"        assert(balance >= amount, 'Insufficient funds');\n"
+"\n"
+"        balance::write(current_balance - amount);\n"
+"    }\n"
+"```"
+msgstr ""
+"```rust\n"
+"    #[external]\n"
+"    fn withdraw(amount: u256) {\n"
+"        let current_balance = balance::read();\n"
+"\n"
+"        assert(balance >= amount, 'Insufficient funds');\n"
+"\n"
+"        balance::write(current_balance - amount);\n"
+"    }\n"
+"```"
+
+#: src/ch99-03-security-considerations.md:51
+msgid ""
+"Using theses functions to check conditions adds constraints that helps clearly define the boundaries of possible state transitions for each function in your smart contract. These "
+"checks ensure that the behavior of the contract stays within the expected limits."
+msgstr "使用这些函数来检查条件会添加约束，有助于清晰地定义智能合约中每个函数可能的状态转换的边界。这些检查确保合约的行为保持在预期范围内。"
+
+#: src/ch99-03-security-considerations.md:53
+msgid "## Recommendations"
+msgstr "## 建议"
+
+#: src/ch99-03-security-considerations.md:55
+msgid "### Checks Effects Interactions Pattern"
+msgstr "### 检查-效果-交互 模式"
+
+#: src/ch99-03-security-considerations.md:57
+msgid ""
+"The Checks Effects Interactions pattern is a common design pattern used to prevent reentrancy attacks on Ethereum. While reentrancy is harder to achieve in Starknet, it is still "
+"recommended to use this pattern in your smart contracts."
+msgstr "检查-效果-交互模式是一种常见的设计模式，用于防止以太坊上的重入攻击。尽管在 Starknet 上更难实现重入攻击，但仍建议在智能合约中使用这种模式。"
+
+#: src/ch99-03-security-considerations.md:59
+msgid "<!-- TODO add reference to the reentrancy CairoByExample page -->"
+msgstr "<!-- TODO add reference to the reentrancy CairoByExample page -->"
+
+#: src/ch99-03-security-considerations.md:61
+msgid "The pattern consists of following a specific order of operations in your functions:"
+msgstr "该模式由在函数中按照特定的操作顺序进行操作来实现："
+
+#: src/ch99-03-security-considerations.md:63
+msgid ""
+"1. **Checks**: Validate all conditions and inputs before performing any state changes.\n"
+"2. **Effects**: Perform all state changes.\n"
+"3. **Interactions**: All external calls to other contracts should be made at the end of the function."
+msgstr ""
+"1. **Checks(检查)**: 在执行任何状态更改之前，验证所有条件和输入。\n"
+"2. **Effects(效果)**: 执行所有状态更改。\n"
+"3. **Interactions(交互)**: 所有对其他合约的外部调用应在函数的最后进行。"
+
+#: src/ch99-03-security-considerations.md:67
+msgid "### Access control"
+msgstr "### 访问控制"
+
+#: src/ch99-03-security-considerations.md:69
+msgid ""
+"Access control is the process of restricting access to certain features or resources. It is a common security mechanism used to prevent unauthorized access to sensitive information "
+"or actions. In smart contracts, some functions may often be restricted to specific users or roles."
+msgstr "访问控制是限制对特定功能或资源的访问的过程。它是一种常见的安全机制，用于防止未经授权的敏感信息访问或操作。在智能合约中，某些函数可能经常需要被限制为特定的用户或角色使用。"
+
+#: src/ch99-03-security-considerations.md:71
+msgid ""
+"You can implement the access control pattern to easily manage permissions. This pattern consists of defining a set of roles and assigning them to specific users. Each function can "
+"then be restricted to specific roles."
+msgstr "您可以使用访问控制模式来轻松管理权限。该模式包括定义一组不同权限角色，并给不同用户分配对应的角色。每个函数都可限制为特定的角色才可访问。"
+
+#: src/ch99-03-security-considerations.md:73
+msgid ""
+"```rust\n"
+"#[contract]\n"
+"mod AccessControlContract {\n"
+"    use starknet::ContractAddress;\n"
+"    use starknet::get_caller_address;\n"
+"\n"
+"    #[storage]\n"
+"    struct Storage {\n"
+"        // Role 'owner': only one address\n"
+"        owner: ContractAddress,\n"
+"        // Role 'role_a': a set of addresses\n"
+"        role_a: LegacyMap::<ContractAddress, bool>\n"
+"    }\n"
+"\n"
+"    #[constructor]\n"
+"    fn constructor() {\n"
+"        owner::write(get_caller_address());\n"
+"    }\n"
+"\n"
+"    // Guard functions to check roles\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn is_owner() -> bool {\n"
+"        owner::read() == get_caller_address()\n"
+"    }\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn is_role_a() -> bool {\n"
+"        role_a::read(get_caller_address())\n"
+"    }\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn only_owner() {\n"
+"        assert(is_owner(), 'Not owner');\n"
+"    }\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn only_role_a() {\n"
+"        assert(is_role_a(), 'Not role A');\n"
+"    }\n"
+"\n"
+"    // You can easily combine guards to perfom complex checks\n"
+"    fn only_allowed() {\n"
+"        assert(is_owner() || is_role_a(), 'Not allowed');\n"
+"    }\n"
+"\n"
+"    // Functions to manage roles\n"
+"\n"
+"    #[external]\n"
+"    fn set_role_a(_target: ContractAddress, _active: bool) {\n"
+"        only_owner();\n"
+"        role_a::write(_target, _active);\n"
+"    }\n"
+"\n"
+"    // You can now focus on the business logic of your contract\n"
+"    // and reduce the complexity of your code by using guard functions\n"
+"\n"
+"    #[external]\n"
+"    fn role_a_action() {\n"
+"        only_role_a();\n"
+"    // ...\n"
+"    }\n"
+"\n"
+"    #[external]\n"
+"    fn allowed_action() {\n"
+"        only_allowed();\n"
+"    // ...\n"
+"    }\n"
+"}\n"
+"\n"
+"```"
+msgstr ""
+"```rust\n"
+"#[contract]\n"
+"mod AccessControlContract {\n"
+"    use starknet::ContractAddress;\n"
+"    use starknet::get_caller_address;\n"
+"\n"
+"    #[storage]\n"
+"    struct Storage {\n"
+"        // Role 'owner': only one address\n"
+"        owner: ContractAddress,\n"
+"        // Role 'role_a': a set of addresses\n"
+"        role_a: LegacyMap::<ContractAddress, bool>\n"
+"    }\n"
+"\n"
+"    #[constructor]\n"
+"    fn constructor() {\n"
+"        owner::write(get_caller_address());\n"
+"    }\n"
+"\n"
+"    // Guard functions to check roles\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn is_owner() -> bool {\n"
+"        owner::read() == get_caller_address()\n"
+"    }\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn is_role_a() -> bool {\n"
+"        role_a::read(get_caller_address())\n"
+"    }\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn only_owner() {\n"
+"        assert(is_owner(), 'Not owner');\n"
+"    }\n"
+"\n"
+"    #[inline(always)]\n"
+"    fn only_role_a() {\n"
+"        assert(is_role_a(), 'Not role A');\n"
+"    }\n"
+"\n"
+"    // You can easily combine guards to perfom complex checks\n"
+"    fn only_allowed() {\n"
+"        assert(is_owner() || is_role_a(), 'Not allowed');\n"
+"    }\n"
+"\n"
+"    // Functions to manage roles\n"
+"\n"
+"    #[external]\n"
+"    fn set_role_a(_target: ContractAddress, _active: bool) {\n"
+"        only_owner();\n"
+"        role_a::write(_target, _active);\n"
+"    }\n"
+"\n"
+"    // You can now focus on the business logic of your contract\n"
+"    // and reduce the complexity of your code by using guard functions\n"
+"\n"
+"    #[external]\n"
+"    fn role_a_action() {\n"
+"        only_role_a();\n"
+"    // ...\n"
+"    }\n"
+"\n"
+"    #[external]\n"
+"    fn allowed_action() {\n"
+"        only_allowed();\n"
+"    // ...\n"
+"    }\n"
+"}\n"
+"\n"
+"```"
+
+#: src/ch99-03-security-considerations.md:145
+msgid "### Static analysis tool"
+msgstr "### 静态分析工具"
+
+#: src/ch99-03-security-considerations.md:147
+msgid ""
+"Static analysis refers to the process of examining code without its execution, focusing on its structure, syntax, and properties. It involves analyzing the source code to identify "
+"potential issues, vulnerabilities, or violations of specified rules."
+msgstr "静态分析指的是在不执行代码的情况下对其进行检查的过程，重点关注其结构、语法和属性。它涉及到分析源代码，以识别潜在的问题、漏洞或违反特定规则的行为。"
+
+#: src/ch99-03-security-considerations.md:149
+msgid "By defining rules, such as coding conventions or security guidelines, developers can utilize static analysis tools to automatically check the code against these standards."
+msgstr "通过定义规则，例如编码规范或安全指南，开发人员可以使用静态分析工具自动检查代码是否符合这些标准。"
+
+#: src/ch99-03-security-considerations.md:151
+msgid "Reference:"
+msgstr "参考文献："
+
+#: src/ch99-03-security-considerations.md:153
+msgid "- [Semgrep Cairo 1.0 support](https://semgrep.dev/blog/2023/semgrep-now-supports-cairo-1-0)"
+msgstr "- [Semgrep Cairo 1.0 support](https://semgrep.dev/blog/2023/semgrep-now-supports-cairo-1-0)"
 
 #: src/appendix-00.md:1
 msgid "# Appendix"

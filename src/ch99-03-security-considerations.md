@@ -41,7 +41,7 @@ For example, you could use the `assert` function to validate that a user has eno
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_10_assert_balance.cairo:withdraw}}
 ```
 
-Using theses functions to check conditions adds constraints that helps clearly define the boundaries of possible state transitions for each function in your smart contract. These checks ensure that the behavior of the contract stays within the expected limits.
+Using these functions to check conditions adds constraints that help clearly define the boundaries of possible state transitions for each function in your smart contract. These checks ensure that the behavior of the contract stays within the expected limits.
 
 ## Recommendations
 
