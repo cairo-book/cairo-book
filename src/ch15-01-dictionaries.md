@@ -1,6 +1,6 @@
 # Dictionaries
 
-Cairo provides along with its core library a dictionary-like type. The `Felt252Dict<T>` data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables or associative array, among many others.
+Cairo provides along with its core library a dictionary-like type. The `Felt252Dict<T>` data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables, associative array and many others.
 
 The `Felt252Dict<T>` type is useful when you want to organize your data in a certain way for which using an `Array<T>` and indexing doesn't suffice. Cairo dictionaries also allows the programmer to easily simulate the existence of mutable memory when there is actually none.
 
@@ -30,7 +30,7 @@ fn main() {
 }
 ```
 
-The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next we create a new instance by using the `new` method. Notice that we sepcify that our value data types will be `u64`.
+The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next we create a new instance of `Felt252Dict<u64>` by using the `new` method.
 To add two new individuals we used the `insert` methods twice, each with its name and its balance. Finally we checked the balance of a new user using the `get` method.
 
 Until this point in the book you should have heard a lot about how Cairo memory systems are inmutable, meaning you can only write a memory cell once, `Felt252Dict<T>` brings a way to overcome this obstacle. The details of how this is achieved are going to be explained later on this chapter.
@@ -58,17 +58,25 @@ fn main() {
 
 ```
 
-This example we did something similar to the previous one. We created a dictionary, but instead of adding two users, we added the same one twice. Notice how the user _Alex_ is added twice with different balance each time and each time we check its balance is the latest one that got updated, effectively "rewriting"
+This example we did something similar to the previous one. We created a dictionary, but instead of adding two users, we added the same one twice. Each time we added _Alex_ we used a different balance and each time we checked, its balance has the last value that got inserted, effectively "rewriting" the same memory cells asociated with the user.
 
-It is worth mentioning that once you instantiate a `Fetl252Dict<T>`, behind the scenes all keys are initialized with the default value of the Value type. That is, if you initialze a dictionary of `u64` like in the previous examples, if you tried to get the balance of an inexistent user you will get 0 instead of `panic` like in other languages. Also this means there is no way to actually delete data from a dictionary. Something to take into account when writing your code.
+It is worth mentioning that once you instantiate a `Fetl252Dict<T>`, behind the scenes all keys have their associated values initialized as zero. This means, for example, that if you tried to get the balance of an inexistent user you will get 0 instead of an error or an undefined value. This also means there is no way to actually delete data from a dictionary. Something to take into account when incorporating dictionaries in your code.
 
-Until this point we have talked about all the basic features of mapping. Next we are going to talk about their inner mechanisms, and the compromises that were taken to accomplish this. Later we will take a more advance look to dictionaries and how can they be used with other data structures as well as another way of updating it's keys.
+Until this point we have talked about all the basic features of `Felt252Dict<T>` and if you are familiar with other languages you'll notice how everything works pretty much the same, from an outside perspective at least. But if you have been reading this book from the bginning you know that Cairo is at its core a fundamentally different language than any other, which means the inner workings of Dicitionaries is very different as well!
+
+In the following section we are going to give some insights about a Dictionary inner mechanisms and the compromises that were taken to make them work. After that we are going to take a look at how to use dictionaries with other data structures as well as other ways of interacting with it.
 
 ## Dictionaries Underneath
 
-Until this point we have seen that `Felt252Dict<T>` behaves in a similar way to analogous collections in other languages, at least externally. If you have been reading this book from the beginning you would know that Cairo is at its core a fundamentally different language from any other. This means that that the inner working of the Dictionaries is quite different too!
+In this section we will describe at a high level how Dictionaries get implemented in Cairo Assembly. The following explanation targets giving an overview of how it is implemented, but not how it is actually implemented because for that we would require to explain CASM as well and that is beyond the scope of this book. In CASM there are no such things as high level data structures as `Array<T>` or structs.
 
-`Felt252Dict<T>` are implemented as a an `Array<Element<T>>`. Where each `Element<T>` has information about what key it represents and the previous and current value it represented. It is important to clarify that it is not actually implemented this way, but the idea it follows at a low level is. The defintion of `Element<T>` would be:
+As we have mentioned, Cairo posses an inmutbale memory system so in order to simulate mutabilty `Felt252Dict<T>` are implemented using a list of elements underneath. This list behaves the same as an array, were each element is a tuple containing three values:
+
+1. A `key` which identifies the key-value pair of the dictionary.
+2. The `previous_value` that that Dictionary at this key held (More on this later).
+3. The `current_value` that the Dictionary is holding with this Key.
+
+We can say then that `Felt252Dict<T>` would be implemented in high level way as an `Array<Element<T>>`. Where each `Element<T>` has information about what key it represents and the previous and current value it represented. The defintion of `Element<T>` would be:
 
 ```rust
 struct Element<T> {
@@ -78,7 +86,7 @@ struct Element<T> {
 }
 ```
 
-Each time we insert an element with data type `T` in a Dictionary, it creates a new `Element<T>` and appends it at the end. If it is the first entry of this key, then the previous value and current value are the same. Using `balances` dictionary from previous examples, when inserting 'Alex' and 'Maria':
+Each time we insert an element with data type `T` in a Dictionary, it will create a new `Element<T>` and appends it at the end. If it is the first entry of this key, then the previous value and current value are the same. So each time there is an insertion, there is nothing being rewritten, but a new cell is used to hold the new value. Let's show an example using the `balances` dictionary from the previous section and inserting users 'Alex' and 'Maria':
 
 ```rust
 balances.insert('Alex', 100_u64);
@@ -86,7 +94,7 @@ balances.insert('Maria', 50_u64)
 balances.insert('Alex', 200_u64);
 ```
 
-Would create the list of `Element<T>`.
+This instructions would create the list of `Element<T>`:
 
 |  Key  | Prev | New |
 | :---: | ---- | --- |
@@ -94,9 +102,11 @@ Would create the list of `Element<T>`.
 | Maria | 50   | 50  |
 | Alex  | 100  | 200 |
 
-Notice that since 'Alex' was inserted twice, it appears twice, the last time with the updated value. This applies to every instance of a dictionary, if `n` elements are inserted, then `n` elements exist, without mattering if they have the same key. This means that each time you do a get you have a worst time complexity of `O(n)` where `n` is the amounts of elements inserted.
+Notice that since 'Alex' was inserted twice, it appears twice, the last time with the updated value. This applies to every instance of a dictionary, if `n` elements are inserted, then `n` elements exist, it doesn't matter if they had the same key. This means that insertion have a time complexity of `O(1)` because you only need to add an element at the end of the list while getting an element requires exploring the whole list, have a worst time complexity of `O(n)` where `n` is the amounts of elements inserted.
 
-It is worth mentioning that this description of dictionry is about the idea behind the implementation of `Felt252Dict<T>` and not the actual implementation. The actual implementation is done in CASM and the generated code goes beyond the objective of this book.
+The `key` and `current_value` use for each element is pretty straightforward. The necesity for a `previosu_value` is not.
+You need to remember that all cairo restricitions lays on that it is a proven language, it is executed by sequencer and then generates a proof based on the program which is then sent.
+Every time the prover gets a transaction we need to check no invalid values were added and that is done through _squashing_.
 
 ### Squashing Dictionaries
 
