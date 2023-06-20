@@ -111,6 +111,18 @@ To run the CI locally, ensure that you are at the root of the repository (same d
 
 `bash mdbook-cairo/scripts/cairo_local_verify.sh`
 
+<!-- To run the `cairo-verify` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
+```
+cargo run --bin cairo-verify
+```
+
+In CI, it's preferable to reduce output, so run `cairo-verify` with the `--quiet` flag.
+```
+cargo run --bin cairo-verify -- --quiet
+```
+
+There's other flags available to disable specific tests, run `cargo run --bin cairo-verify -- --help` to see them. -->
+
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
