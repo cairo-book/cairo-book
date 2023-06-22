@@ -21,10 +21,10 @@ fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
         if index < length {
             if *arr.at(index) == value {
                 found = Option::Some(index);
-                break ();
+                break;
             }
         } else {
-            break ();
+            break;
         }
         index += 1;
     };
