@@ -39,7 +39,7 @@ mod Example {
         //ANCHOR: read
         let name = names::read(_address);
         //ANCHOR_END: read
-        return name;
+        name;
     }
 //ANCHOR_END: view
 }

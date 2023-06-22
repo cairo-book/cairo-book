@@ -3,11 +3,11 @@ use debug::PrintTrait;
 use option::OptionTrait;
 fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> Option<usize> {
     if index >= arr.len() {
-        return Option::None(());
+        Option::None(())
     }
 
     if *arr.at(index) == value {
-        return Option::Some(index);
+        Option::Some(index)
     }
 
     find_value_recursive(arr, value, index + 1)
@@ -28,7 +28,7 @@ fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
         }
         index += 1;
     };
-    return found;
+    found
 }
 
 #[test]

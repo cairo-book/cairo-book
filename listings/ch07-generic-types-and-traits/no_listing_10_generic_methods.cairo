@@ -9,7 +9,7 @@ trait WalletTrait<T> {
 
 impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {
     fn balance(self: @Wallet<T>) -> T {
-        return *self.balance;
+        *self.balance
     }
 }
 
