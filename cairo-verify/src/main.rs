@@ -33,7 +33,7 @@ lazy_static! {
 
 fn main() {
     let cfg = &*CFG;
-    let cairo_files = find_cairo_files(&cfg.path);
+    let cairo_files = find_cairo_files(&cfg);
 
     let pb = ProgressBar::new(cairo_files.len() as u64);
     logger::setup(&cfg, pb.clone());
@@ -96,9 +96,9 @@ fn process_file(file_path: &str) {
     reader.lines().for_each(|line| {
         if let Ok(line_contents) = line {
             // Parse tags
-            if in_tag_block && line_contents.starts_with(config::TAG_PREFIX) {
-                let tags_line = line_contents.trim_start_matches(config::TAG_PREFIX).trim();
-                let tags_in_line: Vec<&str> = tags_line.split(',').map(|tag| tag.trim()).collect();
+            if in_tag_block && config::TAG_REGEX.is_match(&line_contents) {
+                let line_contents = config::TAG_REGEX.replace(&line_contents, "");
+                let tags_in_line: Vec<&str> = line_contents.trim().split(',').map(|tag| tag.trim()).collect();
 
                 tags_in_line.iter().for_each(|tag| {
                     if let Some(tag_enum) = tags::Tags::from_str(tag) {
@@ -147,7 +147,8 @@ fn process_file(file_path: &str) {
     // TEST CHECKS
     if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        match Cmd::CairoTest.test(file_path) {
+        let test_cmd: Cmd = if is_contract { Cmd::StarknetTest } else { Cmd::CairoTest };
+        match test_cmd.test(file_path) {
             Ok(_) => {}
             Err(e) => handle_error(e, file_path, Cmd::CairoTest),
         }
@@ -166,7 +167,7 @@ fn process_file(file_path: &str) {
 fn handle_error(e: String, file_path: &str, cmd: Cmd) {
     let clickable_file = clickable(file_path);
     let msg = match cmd {
-        Cmd::CairoTest | Cmd::StarknetCompile | Cmd::CairoRun => format!(
+        Cmd::CairoTest | Cmd::StarknetTest | Cmd::StarknetCompile | Cmd::CairoRun => format!(
             "{} -> {}: {}",
             clickable_file,
             cmd.as_str(),

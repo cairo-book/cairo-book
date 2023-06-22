@@ -5,6 +5,7 @@ pub enum Cmd {
     CairoCompile,
     CairoRun,
     CairoTest,
+    StarknetTest,
     StarknetCompile,
 }
 
@@ -15,6 +16,7 @@ impl Cmd {
             Cmd::CairoCompile => "cairo-compile",
             Cmd::CairoRun => "cairo-run",
             Cmd::CairoTest => "cairo-test",
+            Cmd::StarknetTest => "cairo-test",
             Cmd::StarknetCompile => "starknet-compile",
         }
     }
@@ -25,6 +27,7 @@ impl Cmd {
             Cmd::CairoCompile => vec![],
             Cmd::CairoRun => vec!["--program"],
             Cmd::CairoTest => vec![],
+            Cmd::StarknetTest => vec!["--starknet"],
             Cmd::StarknetCompile => vec![],
         }
     }

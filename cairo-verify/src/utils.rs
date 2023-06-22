@@ -3,12 +3,20 @@ use regex::Regex;
 use std::collections::HashSet;
 use walkdir::WalkDir;
 
-pub fn find_cairo_files(path: &str) -> Vec<String> {
+use crate::config::Config;
+
+pub fn find_cairo_files(cfg: &Config) -> Vec<String> {
+    let path = cfg.path.as_str();
+
     let mut cairo_files: Vec<String> = Vec::new();
 
     for entry in WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
         if let Some(file_name) = entry.file_name().to_str() {
             if file_name.ends_with(".cairo") {
+                if cfg.file.is_some() && !file_name.ends_with(cfg.file.as_ref().unwrap()) {
+                    continue;
+                }
+
                 cairo_files.push(entry.path().display().to_string());
             }
         }

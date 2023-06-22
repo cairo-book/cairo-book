@@ -1,4 +1,5 @@
 use clap::Parser;
+use regex::Regex;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -34,6 +35,10 @@ pub struct Config {
     /// Skip cairo-test checks
     #[arg(short, long)]
     pub test_skip: bool,
+
+    /// Specify file to check
+    #[arg(long)]
+    pub file: Option<String>,
 }
 
 /// Expected statement in a cairo program for it to be runnable.
@@ -42,5 +47,11 @@ pub const STATEMENT_IS_RUNNABLE: &str = "fn main()";
 pub const STATEMENT_IS_CONTRACT: &str = "#[contract]";
 /// Expected statement in a cairo program containing tests.
 pub const STATEMENT_IS_TESTABLE: &str = "#[test]";
-/// Expected prefix for tags
-pub const TAG_PREFIX: &str = "//";
+/// Expected regex for tags
+const TAG_REGEX_PATTERN: &str = r"^//\s*TAG";
+
+lazy_static! {
+    pub static ref TAG_REGEX: Regex =
+        Regex::new(TAG_REGEX_PATTERN).expect("Failed to create TAG_REGEX");
+}
+

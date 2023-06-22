@@ -27,6 +27,7 @@ impl ErrorSets {
             Cmd::CairoCompile => &mut self.compile_errors,
             Cmd::CairoRun => &mut self.run_errors,
             Cmd::CairoTest => &mut self.test_errors,
+            Cmd::StarknetTest => &mut self.test_errors,
             Cmd::StarknetCompile => &mut self.starknet_errors,
         }
     }

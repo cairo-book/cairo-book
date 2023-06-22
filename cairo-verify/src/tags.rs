@@ -12,8 +12,8 @@ impl Tags {
         match tag {
             "does_not_compile" => Some(Tags::DoesNotCompile),
             "does_not_run" => Some(Tags::DoesNotRun),
-            "ignore_format" => Some(Tags::IgnoreFormat),
-            "test_fails" => Some(Tags::FailingTests),
+            "ignore_fmt" => Some(Tags::IgnoreFormat),
+            "tests_fails" => Some(Tags::FailingTests),
             _ => None,
         }
     }
