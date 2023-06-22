@@ -2,15 +2,27 @@
 
 Traits specify functionality blueprints that can be implemented. The blueprint specification includes a set of function signatures containing type annotations for the parameters and return value. This sets a standard to implement the specific functionality.
 
-## Defining and implementing a Trait
+## Defining a Trait
 
-To define a trait, it is necessary to append the `#[generate_trait]` attribute to your trait declaration. The name of this trait must end with the suffix Trait for proper identification.
+To define a trait, you use the keyword `trait` followed by the name of the trait in `PascalCase` then the function signatures in a pair of curly braces.
 
-Implementing a trait is done using the impl keyword, followed by the name of your specific implementation. This is then followed by the keyword of and the name of the trait you're implementing. Let's consider an example where we're implementing the ShapeGeometryTrait:
+For example, let's say that we have multiple structs representing shapes. We want our application to be able to perform geometry operations on these shapes, So we define a trait `ShapeGeometry` that contains a blueprint to implement geometry operations on a shape like this:
 
 ```rust
-#[generate_trait]
-impl RectangleGeometry of ShapeGeometryTrait {
+trait ShapeGeometry {
+    fn boundary(self: Rectangle) -> u64;
+    fn area(self: Rectangle) -> u64;
+}
+```
+
+Here our trait `ShapeGeometry` declares signatures for two methods `boundary` and `area`. When implemented, both these functions should return a `u64` and accept parameters as specified by the trait.
+
+## Implementing a Trait
+
+A trait can be implemented using `impl` keyword with the name of your implementation followed by `of` then the name of trait being implemented. Here's an example implementing `ShapeGeometry` trait.
+
+```rust
+impl RectangleGeometry of ShapeGeometry {
 	fn boundary(self: Rectangle) -> u64 {
         2 * (self.height + self.width)
     }
@@ -20,7 +32,7 @@ impl RectangleGeometry of ShapeGeometryTrait {
 }
 ```
 
-In the previous code, we see RectangleGeometry being implemented without explicitly defining a corresponding trait. By incorporating the `#[generate_trait]` attribute, we delegate to the compiler the task of generating the matching trait.
+In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note that the function parameters and return value types are identical to the trait specification.
 
 ## Parameter `self`
 
@@ -62,10 +74,15 @@ struct Circle {
     radius: u64
 }
 
+// Here T is an alias type which will be provided during implementation
+trait ShapeGeometry<T> {
+    fn boundary(self: T) -> u64;
+    fn area(self: T) -> u64;
+}
+
 // Implementation RectangleGeometry passes in <Rectangle>
 // to implement the trait for that type
-#[generate_trait]
-impl RectangleGeometry of ShapeGeometryTrait<Rectangle> {
+impl RectangleGeometry of ShapeGeometry<Rectangle> {
     fn boundary(self: Rectangle) -> u64 {
         2 * (self.height + self.width)
     }
@@ -76,7 +93,7 @@ impl RectangleGeometry of ShapeGeometryTrait<Rectangle> {
 
 // We might have another struct Circle
 // which can use the same trait spec
-impl CircleGeometry of ShapeGeometryTrait<Circle> {
+impl CircleGeometry of ShapeGeometry<Circle> {
     fn boundary(self: Circle) -> u64 {
         (2 * 314 * self.radius) / 100
     }
