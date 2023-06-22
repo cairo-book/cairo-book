@@ -48,7 +48,7 @@ pub const STATEMENT_IS_CONTRACT: &str = "#[contract]";
 /// Expected statement in a cairo program containing tests.
 pub const STATEMENT_IS_TESTABLE: &str = "#[test]";
 /// Expected regex for tags
-const TAG_REGEX_PATTERN: &str = r"^//\s*TAG";
+const TAG_REGEX_PATTERN: &str = r"^//\s*TAG(S)?\s*(:)?\s*";
 
 lazy_static! {
     pub static ref TAG_REGEX: Regex =
