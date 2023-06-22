@@ -1,4 +1,4 @@
-#[contract]
+#[starknet::contract]
 mod Contract {
     #[storage]
     struct Storage {
@@ -6,13 +6,15 @@ mod Contract {
     }
 
     //ANCHOR: withdraw
-    #[external]
-    fn withdraw(amount: u256) {
-        let current_balance = balance::read();
+    impl Contract of IContract<ContractState> {
+        fn withdraw(ref self: ContractState, amount: u256) {
+            let current_balance = balance::read();
 
-        assert(balance >= amount, 'Insufficient funds');
+            assert(balance >= amount, 'Insufficient funds');
 
-        balance::write(current_balance - amount);
+            balance.write(current_balance - amount);
+        }
+    //ANCHOR_END: withdraw
+
     }
-//ANCHOR_END: withdraw
 }

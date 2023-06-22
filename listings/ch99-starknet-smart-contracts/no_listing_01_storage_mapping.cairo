@@ -1,4 +1,4 @@
-#[contract]
+#[starknet::contract]
 mod Contract {
     //ANCHOR: here
     struct Storage {
