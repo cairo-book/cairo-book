@@ -34,6 +34,21 @@ impl RectangleGeometry of ShapeGeometry {
 
 In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note that the function parameters and return value types are identical to the trait specification.
 
+## Generating a trait without explicit declaration.
+
+Alternatively, we can assign the responsibility of trait generation to the compiler. This can be achieved by applying the #[generate_trait] attribute to the trait implementation. In such scenarios, we must append the postfix 'Trait' to the name of the trait.
+
+```rust
+impl RectangleGeometry of ShapeGeometryTrait {
+	fn boundary(self: Rectangle) -> u64 {
+        2 * (self.height + self.width)
+    }
+	fn area(self: Rectangle) -> u64 {
+		self.height * self.width
+	}
+}
+```
+
 ## Parameter `self`
 
 In the example above, `self` is a special parameter. When a parameter with name `self` is used, the implemented functions are also [attached to the instances of the type as methods](ch04-03-method-syntax.md#defining-methods). Here's an illustration,
