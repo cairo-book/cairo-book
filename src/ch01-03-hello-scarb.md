@@ -166,9 +166,9 @@ mod a_test;
 mod b_test;
 ```
 
-While `scarb test` is not inherently a test runner, its core function lies in delegating the execution task to a designated test runner. The system defaults to `cairo-test` as the primary test runner. However, the flexibility of scarb test allows it to assign execution tasks to third-party runners as well. This can be achieved through the modification of the `[scripts]` section within the Scarb.toml configuration file.
+While `scarb test` is not inherently a test runner, its core function lies in delegating the execution task to a designated test runner. The system defaults to `cairo-test` as the primary test runner. However, the flexibility of `scarb test` allows it to assign execution tasks to third-party runners as well. This can be achieved through the modification of the `[scripts]` section within the `Scarb.toml` configuration file.
 
-For instance, in scenarios where we desire to utilize `protostar test` in conjunction with scarb test, the necessary addition can be made in the Scarb.toml file as per the given requirement.
+For instance, in scenarios where we desire to utilize `protostar test` in conjunction with `scarb test`, the necessary addition can be made in the `Scarb.toml` file as per the given requirement.
 
 ```toml
 "Scarb.toml"
@@ -178,7 +178,7 @@ test = "protostar test"
 ```
 
 
-In order to execute tests for Starknet contracts, it is necessary to append a specific flag to the scarb command, which is --starknet. The command would thus appear as scarb test --starknet. This action activates the Starknet plugin for the duration of our tests within the software environment.
+In order to execute tests for Starknet contracts, it is necessary to append a specific flag to the scarb command, which is `--starknet`. The command would thus appear as `scarb test --starknet.` This action activates the Starknet plugin for the duration of our tests within the software environment.
 
 Let’s recap what we’ve learned so far about Scarb:
 
