@@ -34,9 +34,9 @@ impl RectangleGeometry of ShapeGeometry {
 
 In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note that the function parameters and return value types are identical to the trait specification.
 
-## Creating a trait implicitly, without a direct declaration.
+## Implementing a trait, without writing its declaration.
 
-In another approach, the task of generating traits can be handled by the compiler itself. This is made possible by using the `#[generate_trait]` attribute with the trait implementation. When this approach is taken, remember to add `Trait` as a suffix to your trait name.
+You can write implementations directly without definining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute with on the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
 
 ```rust
 #[generate_trait]
