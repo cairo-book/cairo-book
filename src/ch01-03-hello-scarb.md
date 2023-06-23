@@ -151,7 +151,7 @@ Using `scarb run` is a convenient way to run custom shell scripts that can be us
 
 ### Running tests
 
-To execute all the unit and integration tests for a given package, use the `scarb test` command. This command requires a specific directory structure, which includes creating a tests directory. Within this directory, a corresponding lib.cairo file must be present that lists each test file.
+To execute all the unit and integration tests for a given package, use the `scarb test` command. This command requires a specific directory structure, which includes creating a tests directory. Within this directory, a corresponding `lib.cairo` file must be present that lists each test file.
 
 ```rust
 tests/
