@@ -196,5 +196,6 @@ You’re already off to a great start on your Cairo journey! In this chapter, yo
 - Install the latest stable version of Cairo
 - Write and run a “Hello, world!” program using `cairo-run` directly
 - Create and run a new project using the conventions of Scarb
+- Perform test executions using the command `scarb test`
 
 This is a great time to build a more substantial program to get used to reading and writing Cairo code.
