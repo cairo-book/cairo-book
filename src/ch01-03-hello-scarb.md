@@ -2,7 +2,7 @@
 
 Scarb is the Cairo package manager and heavily inspired by [Cargo](https://doc.rust-lang.org/cargo/), Rust’s build system and package manager.
 
-Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, and building those libraries.
+Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, building those libraries, and provides LSP support for the VSCode Cairo 1 extension.
 
 If we were to build the 'Hello, world!' project using Scarb, only the part of Scarb that handles building the code would be utilized, since the program doesn't require any external dependencies. As you write more complex Cairo programs, you’ll add dependencies, and if you start a project using Scarb, adding dependencies will be much easier to do.
 
@@ -16,23 +16,19 @@ Scarb requires a Git executable to be available in the `PATH` environment variab
 
 ### Installation
 
-As for now, Scarb needs manual installation with the following steps:
+To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/docs/install).
+You can simply run the following command in your terminal, then follow the onscreen instructions. This will install the latest stable release.
 
-- Download the release archive matching your operating system and CPU architecture, from [Scarb releases on GitHub](https://github.com/software-mansion/scarb/releases)
-- Extract it to a location where you would like to have Scarb installed, e.g. `~/scarb`
-- Add path to the `scarb/bin` directory to your `PATH` environment variable.
-
-  This depend on what shell you are using. Let’s take the example of [zsh](https://ohmyz.sh/) and you have extracted Scarb to `~/scarb`:
-
-  - Open `~/.zshrc` file in your favorite editor
-  - Add the following line to the end of the file: `export PATH="$PATH:~/scarb/bin"`
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+```
 
 - Verify installation by running the following command in new terminal session, it should print both Scarb and Cairo language versions, e.g:
 
   ```bash
   $ scarb --version
-  scarb 0.3.0 (182a9019d 2023-05-29)
-  cairo: 1.1.0 (https://crates.io/crates/cairo-lang-compiler/1.1.0)
+  scarb 0.4.0 (f813517bf 2023-06-06)
+  cairo: 1.1.0 (43b83560d)
   ```
 
 ### Creating a Project with Scarb
@@ -78,6 +74,8 @@ The first line, `[package]`, is a section heading that indicates that the follow
 The next two lines set the configuration information Scarb needs to compile your program: the name and the version of Scarb to use.
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
+
+> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/starknet-package).
 
 The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
