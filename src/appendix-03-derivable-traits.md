@@ -152,6 +152,8 @@ Moreover Dictionary need to be squashed before going out of scope. Calling manua
 
 When incorporating a user-defined struct as a storage variable within a Starknet contract, it is essential to employ the `StorageAccess` trait.
 
+Example:
+
 ```rust
 #[derive(Drop, storage_access::StorageAccess)]
 struct A {
@@ -165,7 +167,7 @@ struct Storage {
 }
 ```
 
-we demonstrate the implementation of a `struct A` that implemnts the StorageAccess trait. This `struct A` is subsequently utilized as a data type for a storage variable within a contract.
+Here we demonstrate the implementation of a `struct A` that derives the StorageAccess trait. This `struct A` is subsequently utilized as a data type for a storage variable within a contract.
 
 ## PartialOrd and Ord for Ordering Comparisons
 
