@@ -34,11 +34,12 @@ impl RectangleGeometry of ShapeGeometry {
 
 In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note that the function parameters and return value types are identical to the trait specification.
 
-## Generating a trait without explicit declaration.
+## Creating a trait implicitly, without a direct declaration.
 
-Alternatively, we can assign the responsibility of trait generation to the compiler. This can be achieved by applying the #[generate_trait] attribute to the trait implementation. In such scenarios, we must append the postfix 'Trait' to the name of the trait.
+In another approach, the task of generating traits can be handled by the compiler itself. This is made possible by using the `#[generate_trait]` attribute with the trait implementation. When this approach is taken, remember to add `Trait` as a suffix to your trait name.
 
 ```rust
+#[generate_trait]
 impl RectangleGeometry of ShapeGeometryTrait {
 	fn boundary(self: Rectangle) -> u64 {
         2 * (self.height + self.width)
@@ -48,6 +49,8 @@ impl RectangleGeometry of ShapeGeometryTrait {
 	}
 }
 ```
+
+In the aforementioned code, there is no need to manually define the trait. The compiler will automatically handle its definition, dynamically generating and updating it as new functions are introduced.
 
 ## Parameter `self`
 
