@@ -149,11 +149,43 @@ Run completed successfully, returning []
 
 Using `scarb run` is a convenient way to run custom shell scripts that can be useful to run files and test your project.
 
+### Running tests
+
+To execute all the unit and integration tests for a given package, use the `scarb test` command. This command requires a specific directory structure, which includes creating a tests directory. Within this directory, a corresponding lib.cairo file must be present that lists each test file.
+
+```rust
+tests/
+├── a_test.cairo
+├── b_test.cairo
+└── lib.cairo
+```
+```rust
+"lib.cairo"
+
+mod a_test;
+mod b_test;
+```
+
+While `scarb test` is not inherently a test runner, its core function lies in delegating the execution task to a designated test runner. The system defaults to `cairo-test` as the primary test runner. However, the flexibility of scarb test allows it to assign execution tasks to third-party runners as well. This can be achieved through the modification of the `[scripts]` section within the Scarb.toml configuration file.
+
+For instance, in scenarios where we desire to utilize `protostar test` in conjunction with scarb test, the necessary addition can be made in the Scarb.toml file as per the given requirement.
+
+```toml
+"Scarb.toml"
+
+[scripts]
+test = "protostar test"
+```
+
+
+In order to execute tests for Starknet contracts, it is necessary to append a specific flag to the scarb command, which is --starknet. The command would thus appear as scarb test --starknet. This action activates the Starknet plugin for the duration of our tests within the software environment.
+
 Let’s recap what we’ve learned so far about Scarb:
 
 - We can create a project using `scarb new`.
 - We can build a project using `scarb build` to generate the compiled Sierra code.
 - We can define custom scripts in `Scarb.toml` and call them with the `scarb run` command.
+- We can run test utilizing either `scarb test` and `scarb test --starknet` commands.
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
