@@ -40,7 +40,7 @@ In another approach, the task of generating traits can be handled by the compile
 
 ```rust
 #[generate_trait]
-impl RectangleGeometry of ShapeGeometryTrait {
+impl RectangleGeometry of RectangleGeometryTrait {
 	fn boundary(self: Rectangle) -> u64 {
         2 * (self.height + self.width)
     }
