@@ -13,7 +13,8 @@ runs:
     - name: Install dependencies (cairo tools)
       run: |
         curl -L https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | bash
-        export PATH="$HOME/.cairo/target/release:$PATH"
+        echo "CAIRO_ROOT=$HOME/.cairo" >> $GITHUB_ENV
+        echo "$HOME/.cairo/target/release" >> $GITHUB_PATH
       shell: bash
       env:
         CAIRO_GIT_TAG: v1.1.0
