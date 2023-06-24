@@ -155,16 +155,20 @@ When incorporating a user-defined struct as a storage variable within a Starknet
 Example:
 
 ```rust
-#[derive(Drop, storage_access::StorageAccess)]
-struct A {
-    item_one: felt252,
-    item_two: felt252,
+#[starknet::contract]
+mod Contract {
+    #[derive(Drop, storage_access::StorageAccess)]
+    struct A {
+        item_one: felt252,
+        item_two: felt252,
+    }
+
+    #[storage]
+    struct Storage {
+        my_storage: A,
+    }
 }
 
-#[storage]
-struct Storage {
-    my_storage: A,
-}
 ```
 
 Here we demonstrate the implementation of a `struct A` that derives the StorageAccess trait. This `struct A` is subsequently utilized as a data type for a storage variable within a contract.
