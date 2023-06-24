@@ -36,6 +36,9 @@ jobs:
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
+      - name: Cairo Verify
+        uses: ./.github/workflows/cairo-verify
+
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
 
@@ -52,9 +55,6 @@ jobs:
               mv book/$po_lang/html book/html/$po_lang
               echo "::endgroup::"
           done
-
-      # - name: Verify Cairo programs
-      #   uses: ./.github/workflows/verify-cairo-programs
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
