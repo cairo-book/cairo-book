@@ -148,6 +148,32 @@ When moving out of scope, variables need to be moved first. This is where the `D
 
 Moreover Dictionary need to be squashed before going out of scope. Calling manually the `squash` method on each of them can be quickly redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch03-01-what-is-ownership.md#the-destruct-trait).
 
+## StorageAccess
+
+Storing a user-defined struct in a storage variable within a Starknet contract requires the `StorageAccess` trait to be implemented for this type. You can automatically derive the `StorageAccess` trait for all structs that do not contain complex types like Dictionaries or Arrays.
+
+Example:
+
+```rust
+#[starknet::contract]
+mod Contract {
+    #[derive(Drop, storage_access::StorageAccess)]
+    struct A {
+        item_one: felt252,
+        item_two: felt252,
+    }
+
+    #[storage]
+    struct Storage {
+        my_storage: A,
+    }
+}
+
+```
+
+Here we demonstrate the implementation of a `struct A` that derives the StorageAccess trait. This `struct A` is subsequently used
+as a storage variable in the contract.
+
 ## PartialOrd and Ord for Ordering Comparisons
 
 TODO (Not derivable yet ?)
