@@ -151,9 +151,17 @@ If you ran the examples from [Basic use of Dictionaries](##Basic use of Dictiona
 
 The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonims.
 
-## Advanced Dictionaries
+On the following section we will have a hands on example using the `Destruct<T>` trait.
+
+## More Dictionaries
+
+Up to this point we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in this way. If you haven't understood all of it, don't worry because in this section we will have some hands on examples using dictionaries in non-trivial ways.
+
+We will begin explaining the `entry` method which is part of a dictionary basic functionality included `Felt252DictTrait<T>` which we didn't mentioned at the beginning. After that we will see examples of how `Felt252Dict<T>` interacts with other types such as structs and enums.
 
 ### The `entry` method
+
+Remember when we mentioned
 
 by using the entry function you can update the dictionary in a new way
 
@@ -185,7 +193,9 @@ fn using_s() {
 }
 ```
 
-## User defined types as a Dictionary value types
+### Dictionaries of structs
+
+## Dictionaries of Dictionaries??
 
 Imagine you want a dictionary of dictionaries, how do you guarantee that all dictionaries are squashed, you need to create an implementation to dropping a dictionary of dictionaries.
 
