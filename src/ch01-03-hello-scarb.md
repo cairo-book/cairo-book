@@ -4,7 +4,7 @@ Scarb is the Cairo package manager and heavily inspired by [Cargo](https://doc.r
 
 Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, building those libraries, and provides LSP support for the VSCode Cairo 1 extension.
 
-If we were to build the 'Hello, world!' project using Scarb, only the part of Scarb that handles building the code would be utilized, since the program doesn't require any external dependencies. As you write more complex Cairo programs, you’ll add dependencies, and if you start a project using Scarb, adding dependencies will be much easier to do.
+If we were to build the 'Hello, world!' project using Scarb, only the part of Scarb that handles building the code would be used, since the program doesn't require any external dependencies. As you write more complex Cairo programs, you’ll add dependencies, and if you start a project using Scarb, adding dependencies will be much easier to do.
 
 Let's start by installing Scarb.
 
@@ -151,44 +151,33 @@ Using `scarb run` is a convenient way to run custom shell scripts that can be us
 
 ### Running tests
 
-To run all the unit and integration tests associated with a particular package, the `scarb test` command should be utilized. For this command to function properly, a certain directory structure needs to be followed. Specifically, a `tests` directory should be created within the `/src` directory.
-
-Subsequently, the tests module needs to be incorporated into `lib.cairo`. In addition, a `tests.cairo` file must be created inside the `/src` directory. Each test file should have its module declaration within this `tests.cairo` file.
-```rust
-  src
-  ├── tests
-  ├      ├── a_test.cairo
-  ├      └── b_test.cairo
-  ├── lib.cairo
-  └── tests.cairo
-```
-```rust
-"lib.cairo"
-...
-mod tests;
-```
-```rust
-"tests.cairo"
-mod a_test;
-mod b_test;
-```
-
-While `scarb test` is not inherently a test runner, its core function lies in delegating the execution task to a designated test runner. The system defaults to `cairo-test` as the primary test runner. However, the flexibility of `scarb test` allows it to assign execution tasks to third-party runners as well. This can be achieved through the modification of the `[scripts]` section within the `Scarb.toml` configuration file.
-
-For instance, in scenarios where we desire to utilize `protostar test` in conjunction with `scarb test`, the necessary addition can be made in the `Scarb.toml` file as per the given requirement.
+To run all the tests associated with a particular package, you can use the `scarb test` command.
+It is not a test runner by itself, but rather delegates work to a testing solution of choice. Scarb comes with preinstalled `scarb cairo-test` extension, which bundles Cairo's native test runner. It is the default test runner used by scarb test.
+To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/testing#using-third-party-test-runners). For instance, if you want to use [Protostar](https://docs.swmansion.com/protostar/) as your testing framework, you can modify the `Scarb.toml` file as follows:
 
 ```toml
-"Scarb.toml"
 
 [scripts]
 test = "protostar test"
 ```
+
+Test functions are marked with the `#[test]` attributes, and running `scarb test` will run all test functions in your codebase under the `src/` directory.
+
+```rust
+├── Scarb.toml
+├── src
+│   ├── lib.cairo
+│   └── file.cairo
+```
+
+<span class="caption"> A sample Scarb project structure</span>
+
 Let’s recap what we’ve learned so far about Scarb:
 
 - We can create a project using `scarb new`.
 - We can build a project using `scarb build` to generate the compiled Sierra code.
 - We can define custom scripts in `Scarb.toml` and call them with the `scarb run` command.
-- We can run test utilizing either `scarb test`  command.
+- We can run tests using the `scarb test` command.
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
@@ -199,6 +188,6 @@ You’re already off to a great start on your Cairo journey! In this chapter, yo
 - Install the latest stable version of Cairo
 - Write and run a “Hello, world!” program using `cairo-run` directly
 - Create and run a new project using the conventions of Scarb
-- Perform test executions using the command `scarb test`
+- Execute tests using the `scarb test` command
 
 This is a great time to build a more substantial program to get used to reading and writing Cairo code.
