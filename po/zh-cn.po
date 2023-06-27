@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-06-20 21:24+0900\n"
+"PO-Revision-Date: 2023-06-28 00:32+0800\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: src/SUMMARY.md:1
 msgid "The Cairo Programming Language"
@@ -780,23 +780,29 @@ msgstr "#### VS代码扩展"
 
 #: src/ch01-01-installation.md:188
 msgid ""
-"- Disable previous Cairo 0.x extension\n"
-"- Install the Cairo 1 extension for proper syntax highlighting and code navigation.\n"
-"  Just follow the steps indicated [here](https://github.com/starkware-libs/cairo/blob/main/vscode-cairo/README.md)."
+"- If you have the previous Cairo 0 extension installed, you can disable/uninstall it.\n"
+"- Install the Cairo 1 extension for proper syntax highlighting and code navigation. You can find the link to the extension [here](https://marketplace.visualstudio.com/items?"
+"itemName=starkware.cairo1&ssr=false), or just search for \"Cairo 1.0\" in the VS Code marketplace.\n"
+"- The extension will work out of the box once you will have [Scarb](./ch01-03-hello-scarb.md) installed."
 msgstr ""
-"- 禁用以前的 Cairo 0.x 扩展\n"
-"- 安装Cairo 1扩展以获得正确的语法高亮和代码导航。\n"
-"只要按照[这里](https://github.com/starkware-libs/cairo/blob/main/vscode-cairo/README.md)所示的步骤就可以了。"
+"- 如果你安装了以前的Cairo 0扩展，你可以禁用/卸载它。\n"
+"- 安装Cairo 1扩展以获得正确的语法高亮和代码导航。你可以通过这个链接下载扩展[here](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1&ssr=false)，或者直接在VS Code市"
+"场上搜索 \"Cairo 1.0\"。\n"
+"- 一旦你安装了[Scarb](./ch01-03-hello-scarb.md)，该扩展就可以立即工作了。"
 
 #: src/ch01-01-installation.md:192
-msgid "#### Cairo Language Server"
-msgstr "#### Cairo语言服务器"
+msgid "#### Cairo Language Server without Scarb"
+msgstr "#### Cairo语言服务器(不使用Scarb时)"
 
 #: src/ch01-01-installation.md:194
-msgid "From [Step 1](#step-1-install-cairo-10-guide-by-abdel), the `cairo-language-server` binary should be built and executing this command will copy its path into your clipboard."
-msgstr "在[Step 1](#step-1-install-cairo-10-guide-by-abdel) 中，`cairo-language-server`二进制文件应该已经编译完成，执行这个命令将复制其路径到你的剪贴板。"
+msgid ""
+"If you don't want to depend on Scarb, you can still use the Cairo Language Server with the compiler binary.\n"
+"From [Step 1](#installing-cairo-with-a-script-installer-by-fran), the `cairo-language-server` binary should be built and executing this command will copy its path into your clipboard."
+msgstr ""
+"如果你不想依赖Scarb，你仍然可以通过编译的二进制文件使用Cairo语言服务器。\n"
+"在[Step 1](#installing-cairo-with-a-script-installer-by-fran) 中，`cairo-language-server`二进制文件应该已经编译完成，执行这个命令将复制其路径到你的剪贴板。"
 
-#: src/ch01-01-installation.md:196
+#: src/ch01-01-installation.md:197
 msgid ""
 "```bash\n"
 "which cairo-language-server | pbcopy\n"
@@ -806,9 +812,9 @@ msgstr ""
 "which cairo-language-server | pbcopy\n"
 "```"
 
-#: src/ch01-01-installation.md:200
-msgid "Update the `languageServerPath` of the Cairo 1.0 extension by pasting the path."
-msgstr "将上面复制的路径更新到Cairo 1.0扩展的`languageServerPath`中。"
+#: src/ch01-01-installation.md:201
+msgid "Update the `cairo1.languageServerPath` of the Cairo 1.0 extension by pasting the path."
+msgstr "将上面复制的路径更新到Cairo 1.0扩展的`cairo1.languageServerPath`中。"
 
 #: src/ch01-02-hello-world.md:1
 msgid "## Hello, World"
@@ -831,7 +837,7 @@ msgid ""
 "> if you prefer to use an integrated development environment (IDE) instead of\n"
 "> the command line, feel free to use your favorite IDE. The Cairo team has developed\n"
 "> a VSCode extension for the Cairo language that you can use to get the features from\n"
-"> the language server and code highlighting. See [Appendix B][devtools]\n"
+"> the language server and code highlighting. See [Appendix D][devtools]\n"
 "> for more details."
 msgstr ""
 "> 注意：本书假定对你命令行有基本的了解。Cairo对\n"
@@ -839,7 +845,7 @@ msgstr ""
 "> 如果你喜欢使用集成开发环境（IDE）而不是\n"
 "> 命令行，你完全可以使用你喜欢的IDE。Cairo团队已经开发了\n"
 "> Cairo语言的VSCode扩展，你可以用它来获得来自\n"
-"> 语言服务器和代码高亮。参见[附录D][devtools]来了解更多细节。"
+"> 语言服务器和代码高亮。参见[附录D][devtools]来获取更多细节。"
 
 #: src/ch01-02-hello-world.md:15
 msgid "### Creating a Project Directory"
@@ -1031,7 +1037,7 @@ msgid ""
 "> Note: If you want to stick to a standard style across Cairo projects, you can\n"
 "> use the automatic formatter tool called `cairo-format` to format your code in a\n"
 "> particular style (more on `cairo-format` in\n"
-"> [Appendix B][devtools]). The Cairo team has included this tool\n"
+"> [Appendix D][devtools]). The Cairo team has included this tool\n"
 "> with the standard Cairo distribution, as `cairo-run` is, so it should already be\n"
 "> installed on your computer!"
 msgstr ""
@@ -1118,9 +1124,9 @@ msgstr "Scarb是Cairo的软件包管理器，在很大程度上受到[Cargo](htt
 
 #: src/ch01-03-hello-scarb.md:5
 msgid ""
-"Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, and building those "
-"libraries."
-msgstr "Scarb为你处理很多任务，比如构建你的代码（纯Cairo或Starknet合约），下载你的代码所依赖的库，并构建这些库。"
+"Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, building those libraries, "
+"and provides LSP support for the VSCode Cairo 1 extension."
+msgstr "Scarb会为你处理很多任务，比如构建你的代码（纯Cairo或Starknet合约），为你下载你的代码所依赖的库并构建他们，以及为VSCode Cairo 1扩展提供LSP支持。"
 
 #: src/ch01-03-hello-scarb.md:7
 msgid ""
@@ -1151,58 +1157,54 @@ msgid "### Installation"
 msgstr "### 安装"
 
 #: src/ch01-03-hello-scarb.md:19
-msgid "As for now, Scarb needs manual installation with the following steps:"
-msgstr "就目前而言，Scarb需要手动安装，步骤如下："
-
-#: src/ch01-03-hello-scarb.md:21
 msgid ""
-"- Download the release archive matching your operating system and CPU architecture, from [Scarb releases on GitHub](https://github.com/software-mansion/scarb/releases)\n"
-"- Extract it to a location where you would like to have Scarb installed, e.g. `~/scarb`\n"
-"- Add path to the `scarb/bin` directory to your `PATH` environment variable.\n"
-"\n"
-"  This depend on what shell you are using. Let’s take the example of [zsh](https://ohmyz.sh/) and you have extracted Scarb to `~/scarb`:\n"
-"\n"
-"  - Open `~/.zshrc` file in your favorite editor\n"
-"  - Add the following line to the end of the file: `export PATH=\"$PATH:~/scarb/bin\"`\n"
-"\n"
+"To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/docs/install).\n"
+"You can simply run the following command in your terminal, then follow the onscreen instructions. This will install the latest stable release."
+msgstr ""
+"要安装Scarb，请参考[安装说明]（https://docs.swmansion.com/scarb/docs/install）。\n"
+"你可以简单地在终端运行以下命令，然后按照屏幕上的指示操作。这将安装最新的稳定版本。"
+
+#: src/ch01-03-hello-scarb.md:22
+msgid ""
+"```bash\n"
+"curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh\n"
+"```"
+msgstr ""
+"```bash\n"
+"curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh\n"
+"```"
+
+#: src/ch01-03-hello-scarb.md:26
+msgid ""
 "- Verify installation by running the following command in new terminal session, it should print both Scarb and Cairo language versions, e.g:\n"
 "\n"
 "  ```bash\n"
 "  $ scarb --version\n"
-"  scarb 0.3.0 (182a9019d 2023-05-29)\n"
-"  cairo: 1.1.0 (https://crates.io/crates/cairo-lang-compiler/1.1.0)\n"
+"  scarb 0.4.0 (f813517bf 2023-06-06)\n"
+"  cairo: 1.1.0 (43b83560d)\n"
 "  ```"
 msgstr ""
-"- 从[GitHub上的Scarb发布页](https://github.com/software-mansion/scarb/releases)下载与你的操作系统和CPU架构相匹配的Release档案。\n"
-"- 将其解压到你想安装Scarb的位置，例如`~/scarb`。\n"
-"- 将`scarb/bin`目录的路径添加到你的`PATH`环境变量中。\n"
-"\n"
-"  这取决于你使用的是什么shell。让我们以[zsh](https://ohmyz.sh/)为例，将Scarb解压到`~/scarb`后：\n"
-"\n"
-"  - 用你爱用的编辑器打开`~/.zshrc`文件\n"
-"  - 在文件的末尾添加以下行：`export PATH=\"$PATH:~/scarb/bin\"`。\n"
-"\n"
-"- 在新的终端会话中运行以下命令来验证安装是否成功，它应该同时打印Scarb和Cairo语言的版本，例如：\n"
+"- 在新的终端Session里输入以下命令来验证是否安装成功, 终端应该同时打印出Scarb 和 Cairo 的版本号, 比如:\n"
 "\n"
 "  ```bash\n"
 "  $ scarb --version\n"
-"  scarb 0.3.0 (182a9019d 2023-05-29)\n"
-"  cairo: 1.1.0 (https://crates.io/crates/cairo-lang-compiler/1.1.0)\n"
+"  scarb 0.4.0 (f813517bf 2023-06-06)\n"
+"  cairo: 1.1.0 (43b83560d)\n"
 "  ```"
 
-#: src/ch01-03-hello-scarb.md:38
+#: src/ch01-03-hello-scarb.md:34
 msgid "### Creating a Project with Scarb"
 msgstr "### 用Scarb创建一个项目"
 
-#: src/ch01-03-hello-scarb.md:40
+#: src/ch01-03-hello-scarb.md:36
 msgid "Let’s create a new project using Scarb and look at how it differs from our original “Hello, world!” project."
 msgstr "让我们用Scarb创建一个新的项目，看看它与我们原来的 \"Hello, world!\"项目有什么不同。"
 
-#: src/ch01-03-hello-scarb.md:42
+#: src/ch01-03-hello-scarb.md:38
 msgid "Navigate back to your projects directory (or wherever you decided to store your code). Then run the following:"
 msgstr "导航到你的项目目录（或你决定放代码的地方）。然后运行以下命令："
 
-#: src/ch01-03-hello-scarb.md:44
+#: src/ch01-03-hello-scarb.md:40
 msgid ""
 "```bash\n"
 "$ scarb new hello_scarb\n"
@@ -1212,21 +1214,21 @@ msgstr ""
 "$ scarb new hello_scarb\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:48
+#: src/ch01-03-hello-scarb.md:44
 msgid "It creates a new directory and project called hello_scarb. We’ve named our project hello_scarb, and Scarb creates its files in a directory of the same name."
 msgstr "它创建了一个新的目录和项目，名为hello_scarb。我们把我们的项目命名为hello_scarb，因此Scarb会在同名的目录下创建它的文件。"
 
-#: src/ch01-03-hello-scarb.md:50
+#: src/ch01-03-hello-scarb.md:46
 msgid ""
 "Go into the hello_scarb directory with the command `cd hello_scarb`. You’ll see that Scarb has generated two files and one directory for us: a `Scarb.toml` file and a src directory "
 "with a `lib.cairo` file inside."
 msgstr "用`cd hello_scarb`命令进入hello_scarb目录。你会看到Scarb已经为我们生成了两个文件和一个目录：一个`Scarb.toml`文件和一个src目录，里面有一个`lib.cairo`文件。"
 
-#: src/ch01-03-hello-scarb.md:52
+#: src/ch01-03-hello-scarb.md:48
 msgid "It has also initialized a new Git repository along with a `.gitignore` file"
 msgstr "它还初始化了一个新的Git仓库和一个`.gitignore`文件"
 
-#: src/ch01-03-hello-scarb.md:54
+#: src/ch01-03-hello-scarb.md:50
 msgid ""
 "> Note: Git is a common version control system. You can stop using version control system by using the `--vcs` flag.\n"
 "> Run `scarb new -help` to see the available options."
@@ -1234,15 +1236,15 @@ msgstr ""
 "> 注意：Git是一个常见的版本控制系统。你可以通过使用`--vcs`标志停止使用版本控制系统。\n"
 "> 运行`scarb new -help`以查看可用选项。"
 
-#: src/ch01-03-hello-scarb.md:57
+#: src/ch01-03-hello-scarb.md:53
 msgid "Open _Scarb.toml_ in your text editor of choice. It should look similar to the code in Listing 1-2."
 msgstr "在你选择的文本编辑器中打开 _Scarb.toml_ 。它看起来应该与示例1-2中的代码相似。"
 
-#: src/ch01-03-hello-scarb.md:59
+#: src/ch01-03-hello-scarb.md:55
 msgid "<span class=\"filename\">Filename: Scarb.toml</span>"
 msgstr "<span class=\"filename\">文件名：Scarb.toml</span>"
 
-#: src/ch01-03-hello-scarb.md:61
+#: src/ch01-03-hello-scarb.md:57
 msgid ""
 "```toml\n"
 "[package]\n"
@@ -1266,35 +1268,41 @@ msgstr ""
 "# foo = { path = “vendor/foo” }\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:72
+#: src/ch01-03-hello-scarb.md:68
 msgid "<span class=\"caption\">Listing 1-2: Contents of Scarb.toml generated by `scarb new`</span>"
 msgstr "<span class=\"caption\">示例1-2：由`scarb new`生成的Scarb.toml的内容</span>"
 
-#: src/ch01-03-hello-scarb.md:74
+#: src/ch01-03-hello-scarb.md:70
 msgid "This file is in the [TOML](https://toml.io/) (Tom’s Obvious, Minimal Language) format, which is Scarb’s configuration format."
 msgstr "这个文件是[TOML](https://toml.io/)（Tom's Obvious, Minimal Language）的格式，是Scarb的配置文件格式。"
 
-#: src/ch01-03-hello-scarb.md:76
+#: src/ch01-03-hello-scarb.md:72
 msgid ""
 "The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other "
 "sections."
 msgstr "第一行，`[package]`，是一个章节标题，表示下面的语句是在配置一个包。随着我们向这个文件添加更多的信息，我们将添加其他章节。"
 
-#: src/ch01-03-hello-scarb.md:78
+#: src/ch01-03-hello-scarb.md:74
 msgid "The next two lines set the configuration information Scarb needs to compile your program: the name and the version of Scarb to use."
 msgstr "接下来的两行设置了Scarb在编译你的程序时需要的配置信息：名称和要使用的Scarb版本。"
 
-#: src/ch01-03-hello-scarb.md:80
+#: src/ch01-03-hello-scarb.md:76
 msgid ""
 "The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any "
 "other crates for this project."
 msgstr "最后一行，`[dependencies]`，是一个章节的开始，该章节供你列出你的项目的所有依赖。在Cairo中，代码包被称为crate。在这个项目中，我们不需要任何其他的crate。"
 
-#: src/ch01-03-hello-scarb.md:82
+#: src/ch01-03-hello-scarb.md:78
+msgid ""
+"> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/"
+"starknet/starknet-package)."
+msgstr "> 注意：如果你要为Starknet构建合约，你需要添加[Scarb文档](https://docs.swmansion.com/scarb/docs/starknet/starknet-package)中提到的`starknet`依赖关系。"
+
+#: src/ch01-03-hello-scarb.md:80
 msgid "The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later."
 msgstr "Scarb创建的另一个文件是`src/lib.cairo`，让我们删除其中所有的内容，放入以下内容，我们将在后面解释原因。"
 
-#: src/ch01-03-hello-scarb.md:84
+#: src/ch01-03-hello-scarb.md:82
 msgid ""
 "```rust\n"
 "mod hello_scarb;\n"
@@ -1304,15 +1312,15 @@ msgstr ""
 "mod hello_scarb;\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:88
+#: src/ch01-03-hello-scarb.md:86
 msgid "Then create a new file called `src/hello_scarb.cairo` and put the following code in it:"
 msgstr "然后创建一个名为`src/hello_scarb.cairo`的新文件，并将以下代码放入其中："
 
-#: src/ch01-03-hello-scarb.md:90
+#: src/ch01-03-hello-scarb.md:88
 msgid "<span class=\"filename\">Filename: src/hello_scarb.cairo</span>"
 msgstr "<span class=\"filename\">文件名： src/hello_scarb.cairo</span>"
 
-#: src/ch01-03-hello-scarb.md:92
+#: src/ch01-03-hello-scarb.md:90
 msgid ""
 "```rust,file=hello_scarb.cairo\n"
 "use debug::PrintTrait;\n"
@@ -1328,17 +1336,17 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:99
+#: src/ch01-03-hello-scarb.md:97
 msgid ""
 "We have just created a file called `lib.cairo`, which contains a module declaration referencing another module named \"hello_scarb\", as well as the file `hello_scarb.cairo`, "
 "containing the implementation details of the \"hello_scarb\" module."
 msgstr "我们刚刚创建了一个名为`lib.cairo`的文件，其中包含一个模块声明，引用了另一个名为 \"hello_scarb\"的模块，以及包含 “hello_scarb”模块的实现细节的文件`hello_scarb.cairo`。"
 
-#: src/ch01-03-hello-scarb.md:101
+#: src/ch01-03-hello-scarb.md:99
 msgid "Scarb requires your source files to be located within the src directory."
 msgstr "Scarb要求你的源文件位于src目录中。"
 
-#: src/ch01-03-hello-scarb.md:103
+#: src/ch01-03-hello-scarb.md:101
 msgid ""
 "The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.\n"
 "Scarb ensures a designated location for all project components, maintaining a structured organization."
@@ -1346,22 +1354,22 @@ msgstr ""
 "顶层项目目录是为README文件、许可证信息、配置文件和任何其他与代码无关的内容保留的。\n"
 "Scarb确保所有项目组件都有一个指定的位置，维持一个结构化的组织架构。"
 
-#: src/ch01-03-hello-scarb.md:106
+#: src/ch01-03-hello-scarb.md:104
 msgid ""
 "If you started a project that doesn’t use Scarb, as we did with the “Hello, world!” project, you can convert it to a project that does use Scarb. Move the project code into the src "
 "directory and create an appropriate `Scarb.toml` file."
 msgstr ""
 "如果你启动了一个不使用Scarb的项目，就像我们在 \"Hello, world!\"项目中所做的那样，你可以把它转换成一个使用Scarb的项目。将项目代码移到src目录下，并创建一个适当的`Scarb.toml`文件。"
 
-#: src/ch01-03-hello-scarb.md:108
+#: src/ch01-03-hello-scarb.md:106
 msgid "### Building a Scarb Project"
 msgstr "### 编译Scarb项目"
 
-#: src/ch01-03-hello-scarb.md:110
+#: src/ch01-03-hello-scarb.md:108
 msgid "From your hello_scarb directory, build your project by entering the following command:"
 msgstr "在你的hello_scarb目录中，通过输入以下命令来编译你的项目："
 
-#: src/ch01-03-hello-scarb.md:112
+#: src/ch01-03-hello-scarb.md:110
 msgid ""
 "```bash\n"
 "$ scarb build\n"
@@ -1375,15 +1383,15 @@ msgstr ""
 "    Finished release target(s) in 0 seconds\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:118
+#: src/ch01-03-hello-scarb.md:116
 msgid "This command creates a `sierra` file in `target/release`, let's ignore the `sierra` file for now."
 msgstr "这个命令在`target/release`中创建了一个`sierra`文件，现在我们先忽略`sierra`文件。"
 
-#: src/ch01-03-hello-scarb.md:120
+#: src/ch01-03-hello-scarb.md:118
 msgid "If you have installed Cairo correctly, you should be able to run and see the following output:"
 msgstr "如果你正确安装了Cairo，你应该能够运行并看到以下输出："
 
-#: src/ch01-03-hello-scarb.md:122
+#: src/ch01-03-hello-scarb.md:120
 msgid ""
 "```bash\n"
 "$ cairo-run src/lib.cairo\n"
@@ -1399,7 +1407,7 @@ msgstr ""
 "Run completed successfully, returning []\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:129
+#: src/ch01-03-hello-scarb.md:127
 msgid ""
 "> Note: You will notice here that we didn't use a Scarb command, but rather a command from the Cairo binaries directly.\n"
 "> As Scarb doesn't have a command to execute Cairo code yet, we have to use the `cairo-run` command directly.\n"
@@ -1409,11 +1417,11 @@ msgstr ""
 "> 由于Scarb还没有执行Cairo代码的命令，我们必须直接使用`cairo-run`命令来执行代码。\n"
 "> 在接下来的教程中我们将使用这个命令，但我们也将使用Scarb命令来初始化项目。"
 
-#: src/ch01-03-hello-scarb.md:133
+#: src/ch01-03-hello-scarb.md:131
 msgid "### Defining Custom Scripts"
 msgstr "### 定义自定义脚本"
 
-#: src/ch01-03-hello-scarb.md:135
+#: src/ch01-03-hello-scarb.md:133
 msgid ""
 "We can define Scarb scripts in `Scarb.toml` file, which can be used to execute custom shell scripts.\n"
 "Add the following line to your `Scarb.toml` file:"
@@ -1421,7 +1429,7 @@ msgstr ""
 "我们可以在`Scarb.toml`文件中定义Scarb脚本，它可以用来执行自定义的shell脚本。\n"
 "在你的`Scarb.toml`文件中添加以下一行："
 
-#: src/ch01-03-hello-scarb.md:138
+#: src/ch01-03-hello-scarb.md:136
 msgid ""
 "```toml\n"
 "[scripts]\n"
@@ -1433,11 +1441,11 @@ msgstr ""
 "run-lib = \"cairo-run src/lib.cairo\"\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:143
+#: src/ch01-03-hello-scarb.md:141
 msgid "Now you can run the following command to run the project:"
 msgstr "现在你可以运行以下命令来运行该项目："
 
-#: src/ch01-03-hello-scarb.md:145
+#: src/ch01-03-hello-scarb.md:143
 msgid ""
 "```bash\n"
 "$ scarb run run-lib\n"
@@ -1453,15 +1461,15 @@ msgstr ""
 "Run completed successfully, returning []\n"
 "```"
 
-#: src/ch01-03-hello-scarb.md:152
+#: src/ch01-03-hello-scarb.md:150
 msgid "Using `scarb run` is a convenient way to run custom shell scripts that can be useful to run files and test your project."
 msgstr "使用 \"scarb run \"是运行自定义shell脚本的一种方便的方法，可以用来运行文件和测试你的项目。"
 
-#: src/ch01-03-hello-scarb.md:154
+#: src/ch01-03-hello-scarb.md:152
 msgid "Let’s recap what we’ve learned so far about Scarb:"
 msgstr "让我们回顾一下到目前为止我们所了解到的关于Scarb的情况："
 
-#: src/ch01-03-hello-scarb.md:156
+#: src/ch01-03-hello-scarb.md:154
 msgid ""
 "- We can create a project using `scarb new`.\n"
 "- We can build a project using `scarb build` to generate the compiled Sierra code.\n"
@@ -1471,21 +1479,21 @@ msgstr ""
 "- 我们可以使用`scarb build`建立一个项目，以生成编译后的Sierra代码。\n"
 "- 我们可以在`Scarb.toml`中定义自定义脚本，并使用`scarb run`命令调用它们。"
 
-#: src/ch01-03-hello-scarb.md:160
+#: src/ch01-03-hello-scarb.md:158
 msgid ""
 "An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific "
 "instructions for Linux and macOS versus Windows."
 msgstr "使用Scarb的另一个好处是，无论你在哪个操作系统上工作，命令都是一样的。所以我们将不再提供Linux和macOS与Windows的具体说明。"
 
-#: src/ch01-03-hello-scarb.md:162
+#: src/ch01-03-hello-scarb.md:160
 msgid "# Summary"
 msgstr "# 总结"
 
-#: src/ch01-03-hello-scarb.md:164
+#: src/ch01-03-hello-scarb.md:162
 msgid "You’re already off to a great start on your Cairo journey! In this chapter, you’ve learned how to:"
 msgstr "你的Cairo之旅已经有了一个很好的开始！在本章中，你已经学会了如何："
 
-#: src/ch01-03-hello-scarb.md:166
+#: src/ch01-03-hello-scarb.md:164
 msgid ""
 "- Install the latest stable version of Cairo\n"
 "- Write and run a “Hello, world!” program using `cairo-run` directly\n"
@@ -1495,7 +1503,7 @@ msgstr ""
 "- 直接使用`cairo-run`编写并运行一个 \"Hello, world!\"程序\n"
 "- 使用Scarb创建并运行一个新项目"
 
-#: src/ch01-03-hello-scarb.md:170
+#: src/ch01-03-hello-scarb.md:168
 msgid "This is a great time to build a more substantial program to get used to reading and writing Cairo code."
 msgstr "是时候通过建立更多实用程序来熟悉阅读和编写Cairo代码了。"
 
@@ -14187,9 +14195,9 @@ msgstr ""
 
 #: src/ch99-03-security-considerations.md:51
 msgid ""
-"Using theses functions to check conditions adds constraints that helps clearly define the boundaries of possible state transitions for each function in your smart contract. These "
+"Using these functions to check conditions adds constraints that help clearly define the boundaries of possible state transitions for each function in your smart contract. These "
 "checks ensure that the behavior of the contract stays within the expected limits."
-msgstr "使用这些函数来检查条件会添加约束，有助于清晰地定义智能合约中每个函数可能的状态转换的边界。这些检查确保合约的行为保持在预期范围内。"
+msgstr "使用这些函数来进行条件检查，添加一些有助于清晰地定义智能合约中每个函数可能的状态转换的边界的约束。这些检查确保合约的行为保持在预期范围内。"
 
 #: src/ch99-03-security-considerations.md:53
 msgid "## Recommendations"
@@ -15299,6 +15307,53 @@ msgid ""
 "This is not an exhaustive list, but it covers some of the commonly used types and traits in contract development. For more details, refer to the official documentation and explore "
 "the available libraries and frameworks."
 msgstr "这并不是一个详尽的列表，但它涵盖了合约开发中一些常用的类型和trait。关于更多的细节，请参考官方文档并参考可用的库以及框架。"
+
+#~ msgid ""
+#~ "- Disable previous Cairo 0.x extension\n"
+#~ "- Install the Cairo 1 extension for proper syntax highlighting and code navigation.\n"
+#~ "  Just follow the steps indicated [here](https://github.com/starkware-libs/cairo/blob/main/vscode-cairo/README.md)."
+#~ msgstr ""
+#~ "- 禁用以前的 Cairo 0.x 扩展\n"
+#~ "- 安装Cairo 1扩展以获得正确的语法高亮和代码导航。\n"
+#~ "只要按照[这里](https://github.com/starkware-libs/cairo/blob/main/vscode-cairo/README.md)所示的步骤就可以了。"
+
+#~ msgid "As for now, Scarb needs manual installation with the following steps:"
+#~ msgstr "就目前而言，Scarb需要手动安装，步骤如下："
+
+#~ msgid ""
+#~ "- Download the release archive matching your operating system and CPU architecture, from [Scarb releases on GitHub](https://github.com/software-mansion/scarb/releases)\n"
+#~ "- Extract it to a location where you would like to have Scarb installed, e.g. `~/scarb`\n"
+#~ "- Add path to the `scarb/bin` directory to your `PATH` environment variable.\n"
+#~ "\n"
+#~ "  This depend on what shell you are using. Let’s take the example of [zsh](https://ohmyz.sh/) and you have extracted Scarb to `~/scarb`:\n"
+#~ "\n"
+#~ "  - Open `~/.zshrc` file in your favorite editor\n"
+#~ "  - Add the following line to the end of the file: `export PATH=\"$PATH:~/scarb/bin\"`\n"
+#~ "\n"
+#~ "- Verify installation by running the following command in new terminal session, it should print both Scarb and Cairo language versions, e.g:\n"
+#~ "\n"
+#~ "  ```bash\n"
+#~ "  $ scarb --version\n"
+#~ "  scarb 0.3.0 (182a9019d 2023-05-29)\n"
+#~ "  cairo: 1.1.0 (https://crates.io/crates/cairo-lang-compiler/1.1.0)\n"
+#~ "  ```"
+#~ msgstr ""
+#~ "- 从[GitHub上的Scarb发布页](https://github.com/software-mansion/scarb/releases)下载与你的操作系统和CPU架构相匹配的Release档案。\n"
+#~ "- 将其解压到你想安装Scarb的位置，例如`~/scarb`。\n"
+#~ "- 将`scarb/bin`目录的路径添加到你的`PATH`环境变量中。\n"
+#~ "\n"
+#~ "  这取决于你使用的是什么shell。让我们以[zsh](https://ohmyz.sh/)为例，将Scarb解压到`~/scarb`后：\n"
+#~ "\n"
+#~ "  - 用你爱用的编辑器打开`~/.zshrc`文件\n"
+#~ "  - 在文件的末尾添加以下行：`export PATH=\"$PATH:~/scarb/bin\"`。\n"
+#~ "\n"
+#~ "- 在新的终端会话中运行以下命令来验证安装是否成功，它应该同时打印Scarb和Cairo语言的版本，例如：\n"
+#~ "\n"
+#~ "  ```bash\n"
+#~ "  $ scarb --version\n"
+#~ "  scarb 0.3.0 (182a9019d 2023-05-29)\n"
+#~ "  cairo: 1.1.0 (https://crates.io/crates/cairo-lang-compiler/1.1.0)\n"
+#~ "  ```"
 
 #~ msgid ""
 #~ "```rs\n"
