@@ -151,17 +151,24 @@ Using `scarb run` is a convenient way to run custom shell scripts that can be us
 
 ### Running tests
 
-To execute all the unit and integration tests for a given package, use the `scarb test` command. This command requires a specific directory structure, which includes creating a tests directory. Within this directory, a corresponding `lib.cairo` file must be present that lists each test file.
+To run all the unit and integration tests associated with a particular package, the `scarb test` command should be utilized. For this command to function properly, a certain directory structure needs to be followed. Specifically, a `tests` directory should be created within the `/src` directory.
 
+Subsequently, the tests module needs to be incorporated into `lib.cairo`. In addition, a `tests.cairo` file must be created inside the `/src` directory. Each test file should have its module declaration within this `tests.cairo` file.
 ```rust
-tests/
-├── a_test.cairo
-├── b_test.cairo
-└── lib.cairo
+  src
+  ├── tests
+  ├      ├── a_test.cairo
+  ├      └── b_test.cairo
+  ├── lib.cairo
+  └── tests.cairo
 ```
 ```rust
 "lib.cairo"
-
+...
+mod tests;
+```
+```rust
+"tests.cairo"
 mod a_test;
 mod b_test;
 ```
@@ -176,16 +183,12 @@ For instance, in scenarios where we desire to utilize `protostar test` in conjun
 [scripts]
 test = "protostar test"
 ```
-
-
-In order to execute tests for Starknet contracts, it is necessary to append a specific flag to the scarb command, which is `--starknet`. The command would thus appear as `scarb test --starknet.` This action activates the Starknet plugin for the duration of our tests within the software environment.
-
 Let’s recap what we’ve learned so far about Scarb:
 
 - We can create a project using `scarb new`.
 - We can build a project using `scarb build` to generate the compiled Sierra code.
 - We can define custom scripts in `Scarb.toml` and call them with the `scarb run` command.
-- We can run test utilizing either `scarb test` and `scarb test --starknet` commands.
+- We can run test utilizing either `scarb test`  command.
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
