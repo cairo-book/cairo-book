@@ -123,6 +123,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tiagofneto",
+      "name": "Tiago Neto",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46165861?v=4",
+      "profile": "https://github.com/tiagofneto",
+      "contributions": [
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
