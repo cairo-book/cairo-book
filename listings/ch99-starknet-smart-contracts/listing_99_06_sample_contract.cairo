@@ -33,7 +33,7 @@ trait IERC20 {
 //ANCHOR: here
 //**** Specify interface here ****//
 #[contract]
-mod Dispatcher {
+mod TokenWrapper {
     use super::IERC20DispatcherTrait;
     use super::IERC20Dispatcher;
     use starknet::ContractAddress;
@@ -51,4 +51,5 @@ mod Dispatcher {
     }
 }
 // ANCHOR_END: here
+
 
