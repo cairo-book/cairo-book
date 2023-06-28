@@ -1,4 +1,3 @@
-
 #[derive(Debug, PartialEq, Eq, Hash)]
 pub enum Tags {
     DoesNotCompile,

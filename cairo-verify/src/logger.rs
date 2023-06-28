@@ -1,6 +1,6 @@
-use log::{Log, Metadata, Record};
 use env_logger::Env;
 use indicatif::ProgressBar;
+use log::{Log, Metadata, Record};
 
 use crate::Config;
 
@@ -15,9 +15,7 @@ impl Log for ProgressBarLogger {
 
     fn log(&self, record: &Record) {
         if self.enabled(record.metadata()) {
-            self.pb.suspend(
-                || println!("{}", record.args())
-            )
+            self.pb.suspend(|| println!("{}", record.args()))
         }
     }
 

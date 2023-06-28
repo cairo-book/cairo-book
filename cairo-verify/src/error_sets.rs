@@ -1,6 +1,5 @@
-
-use std::collections::HashSet;
 use crate::cmd::Cmd;
+use std::collections::HashSet;
 
 pub struct ErrorSets {
     pub compile_errors: HashSet<String>,

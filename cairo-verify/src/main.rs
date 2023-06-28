@@ -33,10 +33,10 @@ lazy_static! {
 
 fn main() {
     let cfg = &*CFG;
-    let cairo_files = find_cairo_files(&cfg);
+    let cairo_files = find_cairo_files(cfg);
 
     let pb = ProgressBar::new(cairo_files.len() as u64);
-    logger::setup(&cfg, pb.clone());
+    logger::setup(cfg, pb.clone());
 
     for file in cairo_files {
         process_file(&file);
@@ -65,22 +65,19 @@ fn main() {
 
         println!(
             "{}",
-            format!(
-                "Total errors: {}",
-                total_errors.to_string().red()
-            )
-            .bold()
+            format!("Total errors: {}", total_errors.to_string().red()).bold()
         );
 
         println!("\n{}", "Please review the errors above. Do not hesitate to ask for help by commenting on the issue on Github.".red().italic());
     } else {
-        println!("\n{}\n", "ALL TESTS PASSING!".green().bold());
+        println!("\n{}\n", "ALL TESTS PASSED!".green().bold());
     }
 }
 
 fn process_file(file_path: &str) {
     let cfg = &*CFG;
-    let file = File::open(file_path).expect("Failed to open file");
+    let file =
+        File::open(file_path).unwrap_or_else(|_| panic!("Failed to open file {}", file_path));
     let reader = BufReader::new(file);
 
     // Parsed tags (if any)
@@ -92,13 +89,16 @@ fn process_file(file_path: &str) {
     let mut should_be_testable = false;
     let mut is_contract = false;
 
-    // for line in reader.lines() {
     reader.lines().for_each(|line| {
         if let Ok(line_contents) = line {
             // Parse tags
             if in_tag_block && config::TAG_REGEX.is_match(&line_contents) {
                 let line_contents = config::TAG_REGEX.replace(&line_contents, "");
-                let tags_in_line: Vec<&str> = line_contents.trim().split(',').map(|tag| tag.trim()).collect();
+                let tags_in_line: Vec<&str> = line_contents
+                    .trim()
+                    .split(',')
+                    .map(|tag| tag.trim())
+                    .collect();
 
                 tags_in_line.iter().for_each(|tag| {
                     if let Some(tag_enum) = tags::Tags::from_str(tag) {
@@ -128,7 +128,7 @@ fn process_file(file_path: &str) {
         }
     } else if should_be_runnable {
         // This is a cairo program, it must pass cairo-run
-        if !tags.contains(&Tags::DoesNotRun) && !cfg.run_skip {
+        if !tags.contains(&Tags::DoesNotRun) && !tags.contains(&Tags::DoesNotCompile) && !cfg.run_skip {
             match Cmd::CairoRun.test(file_path) {
                 Ok(_) => {}
                 Err(e) => handle_error(e, file_path, Cmd::CairoRun),
@@ -147,7 +147,11 @@ fn process_file(file_path: &str) {
     // TEST CHECKS
     if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        let test_cmd: Cmd = if is_contract { Cmd::StarknetTest } else { Cmd::CairoTest };
+        let test_cmd: Cmd = if is_contract {
+            Cmd::StarknetTest
+        } else {
+            Cmd::CairoTest
+        };
         match test_cmd.test(file_path) {
             Ok(_) => {}
             Err(e) => handle_error(e, file_path, Cmd::CairoTest),
@@ -167,12 +171,9 @@ fn process_file(file_path: &str) {
 fn handle_error(e: String, file_path: &str, cmd: Cmd) {
     let clickable_file = clickable(file_path);
     let msg = match cmd {
-        Cmd::CairoTest | Cmd::StarknetTest | Cmd::StarknetCompile | Cmd::CairoRun => format!(
-            "{} -> {}: {}",
-            clickable_file,
-            cmd.as_str(),
-            e.as_str()
-        ),
+        Cmd::CairoTest | Cmd::StarknetTest | Cmd::StarknetCompile | Cmd::CairoRun => {
+            format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
+        }
         _ => format!("{} -> {}", cmd.as_str(), clickable(e.as_str())),
     };
 

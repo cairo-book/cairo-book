@@ -54,4 +54,3 @@ lazy_static! {
     pub static ref TAG_REGEX: Regex =
         Regex::new(TAG_REGEX_PATTERN).expect("Failed to create TAG_REGEX");
 }
-

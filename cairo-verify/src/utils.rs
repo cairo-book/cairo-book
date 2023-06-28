@@ -35,7 +35,9 @@ pub fn clickable(input: &str) -> String {
         filename = captures.get(1).map_or("", |m| m.as_str()).to_string();
     }
 
-    path_parts.last_mut().map(|s| *s = &filename);
+    if let Some(parts) = path_parts.last_mut() {
+        *parts = &filename;
+    }
     let full_path = path_parts.join("/");
 
     let clickable_format = format!(
@@ -54,11 +56,14 @@ pub fn print_error_table(errors: &HashSet<String>, section_name: &str) {
         return;
     }
 
-    println!("{}", format!("{}: {}", section_name, errors.len()).bold().on_red());
+    println!(
+        "{}",
+        format!("{}: {}", section_name, errors.len())
+            .bold()
+            .on_red()
+    );
 
     for error in errors {
         println!(" - {}", error);
     }
-
-    println!("");
 }

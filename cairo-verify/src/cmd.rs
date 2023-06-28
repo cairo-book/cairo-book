@@ -1,4 +1,4 @@
-use std::process::{Command};
+use std::process::Command;
 
 pub enum Cmd {
     CairoFormat,
@@ -37,7 +37,7 @@ impl Cmd {
             .args(self.args())
             .arg(file_path)
             .output()
-            .expect(&format!("Failed to run {}", self.as_str()));
+            .unwrap_or_else(|_| panic!("Failed to run {}", self.as_str()));
 
         if !output.status.success() {
             return Err(String::from_utf8_lossy(&output.stderr).to_string());
@@ -46,5 +46,3 @@ impl Cmd {
         Ok(())
     }
 }
-
-

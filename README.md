@@ -81,6 +81,15 @@ The `cairo-verify` tool is designed to wrap all cairo and starknet plugins for q
 
 #### Setup
 
+Firstly, you need to have the following binaries in your path:
+- `cairo-compile`
+- `cairo-run`
+- `cairo-test`
+- `cairo-format`
+- `starknet-compile`
+
+They should be available after installing cairo, see [here](https://cairo-book.github.io/ch01-01-installation.html) for more details.
+
 To run the `cairo-verify` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
 
 ```sh
