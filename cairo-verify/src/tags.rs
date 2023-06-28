@@ -12,7 +12,7 @@ impl Tags {
             "does_not_compile" => Some(Tags::DoesNotCompile),
             "does_not_run" => Some(Tags::DoesNotRun),
             "ignore_fmt" => Some(Tags::IgnoreFormat),
-            "tests_fails" => Some(Tags::FailingTests),
+            "tests_fail" => Some(Tags::FailingTests),
             _ => None,
         }
     }

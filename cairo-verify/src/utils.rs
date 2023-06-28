@@ -26,8 +26,13 @@ pub fn find_cairo_files(cfg: &Config) -> Vec<String> {
 }
 
 /// Will replace the file path contained in the input string with a clickable format for better output
-pub fn clickable(input: &str) -> String {
-    let mut path_parts: Vec<&str> = input.split(|c: char| c == '\\' || c == '/').collect();
+pub fn clickable(relative_path: &str) -> String {
+    let full_path = std::env::current_dir()
+        .unwrap()
+        .join(relative_path)
+        .display()
+        .to_string();
+    let mut path_parts: Vec<&str> = full_path.split(|c: char| c == '\\' || c == '/').collect();
 
     let mut filename: String = path_parts.last().unwrap_or(&"").to_string();
     let re = Regex::new(r"([^:]+(:\d+:\d+)?)(:\s|$)").unwrap();
@@ -41,14 +46,14 @@ pub fn clickable(input: &str) -> String {
     let full_path = path_parts.join("/");
 
     let clickable_format = format!(
-        "\u{1b}]8;;{}\u{1b}\\{}\u{1b}]8;;\u{1b}\\",
+        "\u{1b}]8;;file://{}\u{1b}\\{}\u{1b}]8;;\u{1b}\\",
         full_path, filename
     )
     .bold()
     .red()
     .to_string();
 
-    input.replacen(&full_path, &clickable_format, 1)
+    full_path.replacen(&full_path, &clickable_format, 1)
 }
 
 pub fn print_error_table(errors: &HashSet<String>, section_name: &str) {
