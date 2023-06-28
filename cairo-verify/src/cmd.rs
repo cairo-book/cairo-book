@@ -25,7 +25,7 @@ impl Cmd {
         match self {
             Cmd::CairoFormat => vec!["-c"],
             Cmd::CairoCompile => vec![],
-            Cmd::CairoRun => vec!["--program"],
+            Cmd::CairoRun => vec![],
             Cmd::CairoTest => vec![],
             Cmd::StarknetTest => vec!["--starknet"],
             Cmd::StarknetCompile => vec![],
