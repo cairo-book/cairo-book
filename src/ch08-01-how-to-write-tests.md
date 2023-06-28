@@ -43,7 +43,7 @@ In _lib.cairo_, let's add a first test, as shown in Listing 8-1.
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_03.cairo:it_works}}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_02.cairo:it_works}}
 ```
 
 <span class="caption">Listing 8-1: A test module and function</span>
@@ -72,7 +72,7 @@ Let’s start to customize the test to our own needs. First change the name of t
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_03.cairo:exploration}}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_02.cairo:exploration}}
 ```
 
 Then run `cairo-test  -- --path src` again. The output now shows `exploration` instead of `it_works`:
@@ -87,7 +87,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing 8-3.
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_03.cairo:another}}
+{{#include ../listings/ch08-testing-cairo-programs/listing_08_03.cairo:another}}
 
 ```
 

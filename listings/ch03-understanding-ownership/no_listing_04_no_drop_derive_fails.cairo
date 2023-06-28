@@ -1,3 +1,4 @@
+//TAG: does_not_compile
 struct A {}
 
 fn main() {

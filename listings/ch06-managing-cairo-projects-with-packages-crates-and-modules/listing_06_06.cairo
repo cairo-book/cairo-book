@@ -1,4 +1,4 @@
-// does_not_compile
+//TAG: does_not_compile
 mod front_of_house {
     mod hosting {
         fn add_to_waitlist() {}

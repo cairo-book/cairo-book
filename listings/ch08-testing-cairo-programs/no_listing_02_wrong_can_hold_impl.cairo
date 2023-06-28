@@ -1,3 +1,4 @@
+//TAG: tests_fail
 use debug::PrintTrait;
 #[derive(Copy, Drop)]
 struct Rectangle {

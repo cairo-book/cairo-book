@@ -12,7 +12,7 @@ enum Coin {
     Penny: (),
     Nickel: (),
     Dime: (),
-    Quarter: (UsState, ),
+    Quarter: UsState,
 }
 // ANCHOR_END: enum_def
 
@@ -40,4 +40,5 @@ impl UsStatePrintImpl of PrintTrait<UsState> {
     }
 }
 // ANCHOR_END: print_impl
+
 

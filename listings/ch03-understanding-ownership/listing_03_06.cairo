@@ -1,4 +1,4 @@
-// does_not_compile
+//TAG: does_not_compile
 #[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,

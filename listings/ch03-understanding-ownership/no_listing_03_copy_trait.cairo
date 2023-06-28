@@ -10,6 +10,5 @@ fn main() {
     foo(p1);
 }
 
-fn foo(p: Point) {
-    // do something with p
+fn foo(p: Point) { // do something with p
 }

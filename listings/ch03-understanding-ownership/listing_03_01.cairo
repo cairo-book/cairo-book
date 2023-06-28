@@ -1,3 +1,4 @@
+//TAG: ignore_fmt
 fn main() {
 // ANCHOR: here
     {                      // s is not valid here, it’s not yet declared

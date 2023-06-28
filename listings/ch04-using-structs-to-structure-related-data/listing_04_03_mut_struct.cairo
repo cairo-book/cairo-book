@@ -28,3 +28,4 @@ fn build_user_short(email: felt252, username: felt252) -> User {
 // ANCHOR_END: build_user2
 // ANCHOR_END: all
 
+

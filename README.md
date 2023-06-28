@@ -70,7 +70,9 @@ To work with translations, those are the steps to update the translated content:
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
 
 #### Initiate a new translation for your language
+
 If you wish to initiate a new translation for your language without running a local server, consider the following tips:
+
 - Execute the command `./translations.sh new xx` (replace `xx` with your language code). This method can generate the `xx.po` file of your language for you.
 - To update your `xx.po` file, execute the command `./translations.sh xx` (replace `xx` with your language code), as mentioned in the previous chapter.
 - If the `xx.po` file already exists (which means you are not initiating a new translation), you should not run this command.
@@ -82,6 +84,7 @@ The `cairo-verify` tool is designed to wrap all cairo and starknet plugins for q
 #### Setup
 
 Firstly, you need to have the following binaries in your path:
+
 - `cairo-compile`
 - `cairo-run`
 - `cairo-test`
@@ -107,10 +110,12 @@ cargo install --path cairo-verify
 The tool scans for all `*.cairo` files in the specified directory and performs the following actions:
 
 For a Starknet contract:
+
 - `starknet-compile`
 - If it has tests: `cairo-test --starknet`
 
 Cairo program:
+
 - If it has a `main` function: `cairo-run`
 - Else, `cairo-compile`
 - If it has tests: `cairo-test`
@@ -124,10 +129,11 @@ To specify which tests to run, you can add a comment at the top of your file wit
 ```
 
 Here is a list of available tags:
+
 - `does_not_compile`: don't run `cairo-compile`/`starknet-compile`
 - `does_not_run`: don't run `cairo-run`
 - `ignore_fmt`: don't run `cairo-fmt`
-- `tests_fails`: don't run `cairo-test`/`cairo-test --starknet`
+- `tests_fail`: don't run `cairo-test`/`cairo-test --starknet`
 
 You can skip and ignore a specific test by adding the corresponding flag:
 

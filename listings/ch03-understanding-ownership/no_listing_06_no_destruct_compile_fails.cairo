@@ -1,3 +1,4 @@
+//TAG: does_not_compile
 use dict::Felt252DictTrait;
 
 struct A {
