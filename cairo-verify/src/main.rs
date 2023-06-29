@@ -152,12 +152,7 @@ fn process_file(file_path: &str) {
     // TEST CHECKS
     if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        let test_cmd: Cmd = if is_contract {
-            Cmd::StarknetTest(cairo_root.clone())
-        } else {
-            Cmd::CairoTest(cairo_root.clone())
-        };
-        match test_cmd.test(file_path) {
+        match Cmd::CairoTest(cairo_root.clone()).test(file_path) {
             Ok(_) => {}
             Err(e) => handle_error(e, file_path, Cmd::CairoTest(None)),
         }
@@ -176,7 +171,7 @@ fn process_file(file_path: &str) {
 fn handle_error(e: String, file_path: &str, cmd: Cmd) {
     let clickable_file = clickable(file_path);
     let msg = match cmd {
-        Cmd::CairoTest(_) | Cmd::StarknetTest(_) | Cmd::StarknetCompile(_) | Cmd::CairoRun(_) => {
+        Cmd::CairoTest(_) | Cmd::StarknetCompile(_) | Cmd::CairoRun(_) => {
             format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
         }
         _ => format!("{} -> {}", cmd.as_str(), clickable(e.as_str())),

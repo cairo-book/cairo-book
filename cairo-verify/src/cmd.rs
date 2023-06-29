@@ -6,7 +6,6 @@ pub enum Cmd {
     CairoCompile(Option<PathBuf>),
     CairoRun(Option<PathBuf>),
     CairoTest(Option<PathBuf>),
-    StarknetTest(Option<PathBuf>),
     StarknetCompile(Option<PathBuf>),
 }
 
@@ -17,7 +16,6 @@ impl Cmd {
             Cmd::CairoCompile(path) => ("cairo-compile", path),
             Cmd::CairoRun(path) => ("cairo-run", path),
             Cmd::CairoTest(path) => ("cairo-test", path),
-            Cmd::StarknetTest(path) => ("cairo-test", path),
             Cmd::StarknetCompile(path) => ("starknet-compile", path),
         };
 
@@ -35,7 +33,6 @@ impl Cmd {
             Cmd::CairoCompile(_) => vec![],
             Cmd::CairoRun(_) => vec!["--available-gas=20000000"],
             Cmd::CairoTest(_) => vec!["--starknet"],
-            Cmd::StarknetTest(_) => vec!["--starknet"],
             Cmd::StarknetCompile(_) => vec![],
         }
     }
