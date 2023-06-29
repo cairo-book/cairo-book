@@ -22,12 +22,12 @@ impl ErrorSets {
 
     pub fn get_mut_error_set(&mut self, cmd: &Cmd) -> &mut HashSet<String> {
         match cmd {
-            Cmd::CairoFormat => &mut self.format_errors,
-            Cmd::CairoCompile => &mut self.compile_errors,
-            Cmd::CairoRun => &mut self.run_errors,
-            Cmd::CairoTest => &mut self.test_errors,
-            Cmd::StarknetTest => &mut self.test_errors,
-            Cmd::StarknetCompile => &mut self.starknet_errors,
+            Cmd::CairoFormat(_) => &mut self.format_errors,
+            Cmd::CairoCompile(_) => &mut self.compile_errors,
+            Cmd::CairoRun(_) => &mut self.run_errors,
+            Cmd::CairoTest(_) => &mut self.test_errors,
+            Cmd::StarknetTest(_) => &mut self.test_errors,
+            Cmd::StarknetCompile(_) => &mut self.starknet_errors,
         }
     }
 }

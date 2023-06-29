@@ -76,6 +76,8 @@ fn main() {
 
 fn process_file(file_path: &str) {
     let cfg = &*CFG;
+    let cairo_root = cfg.cairo_root.clone();
+
     let file =
         File::open(file_path).unwrap_or_else(|_| panic!("Failed to open file {}", file_path));
     let reader = BufReader::new(file);
@@ -121,25 +123,28 @@ fn process_file(file_path: &str) {
     if is_contract {
         // This is a contract, it must pass starknet-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.starknet_skip {
-            match Cmd::StarknetCompile.test(file_path) {
+            match Cmd::StarknetCompile(cairo_root.clone()).test(file_path) {
                 Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::StarknetCompile),
+                Err(e) => handle_error(e, file_path, Cmd::StarknetCompile(None)),
             }
         }
     } else if should_be_runnable {
         // This is a cairo program, it must pass cairo-run
-        if !tags.contains(&Tags::DoesNotRun) && !tags.contains(&Tags::DoesNotCompile) && !cfg.run_skip {
-            match Cmd::CairoRun.test(file_path) {
+        if !tags.contains(&Tags::DoesNotRun)
+            && !tags.contains(&Tags::DoesNotCompile)
+            && !cfg.run_skip
+        {
+            match Cmd::CairoRun(cairo_root.clone()).test(file_path) {
                 Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::CairoRun),
+                Err(e) => handle_error(e, file_path, Cmd::CairoRun(None)),
             }
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.compile_skip {
-            match Cmd::CairoCompile.test(file_path) {
+            match Cmd::CairoCompile(cairo_root.clone()).test(file_path) {
                 Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::CairoCompile),
+                Err(e) => handle_error(e, file_path, Cmd::CairoCompile(None)),
             }
         }
     }
@@ -148,22 +153,22 @@ fn process_file(file_path: &str) {
     if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
         let test_cmd: Cmd = if is_contract {
-            Cmd::StarknetTest
+            Cmd::StarknetTest(cairo_root.clone())
         } else {
-            Cmd::CairoTest
+            Cmd::CairoTest(cairo_root.clone())
         };
         match test_cmd.test(file_path) {
             Ok(_) => {}
-            Err(e) => handle_error(e, file_path, Cmd::CairoTest),
+            Err(e) => handle_error(e, file_path, Cmd::CairoTest(None)),
         }
     }
 
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !cfg.formats_skip {
         // This program must pass cairo-format
-        match Cmd::CairoFormat.test(file_path) {
+        match Cmd::CairoFormat(cairo_root).test(file_path) {
             Ok(_) => {}
-            Err(e) => handle_error(e, file_path, Cmd::CairoFormat),
+            Err(e) => handle_error(e, file_path, Cmd::CairoFormat(None)),
         }
     }
 }
@@ -171,7 +176,7 @@ fn process_file(file_path: &str) {
 fn handle_error(e: String, file_path: &str, cmd: Cmd) {
     let clickable_file = clickable(file_path);
     let msg = match cmd {
-        Cmd::CairoTest | Cmd::StarknetTest | Cmd::StarknetCompile | Cmd::CairoRun => {
+        Cmd::CairoTest(_) | Cmd::StarknetTest(_) | Cmd::StarknetCompile(_) | Cmd::CairoRun(_) => {
             format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
         }
         _ => format!("{} -> {}", cmd.as_str(), clickable(e.as_str())),

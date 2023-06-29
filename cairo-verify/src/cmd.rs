@@ -1,34 +1,42 @@
+use std::path::PathBuf;
 use std::process::Command;
 
 pub enum Cmd {
-    CairoFormat,
-    CairoCompile,
-    CairoRun,
-    CairoTest,
-    StarknetTest,
-    StarknetCompile,
+    CairoFormat(Option<PathBuf>),
+    CairoCompile(Option<PathBuf>),
+    CairoRun(Option<PathBuf>),
+    CairoTest(Option<PathBuf>),
+    StarknetTest(Option<PathBuf>),
+    StarknetCompile(Option<PathBuf>),
 }
 
 impl Cmd {
-    pub fn as_str(&self) -> &str {
-        match self {
-            Cmd::CairoFormat => "cairo-format",
-            Cmd::CairoCompile => "cairo-compile",
-            Cmd::CairoRun => "cairo-run",
-            Cmd::CairoTest => "cairo-test",
-            Cmd::StarknetTest => "cairo-test",
-            Cmd::StarknetCompile => "starknet-compile",
+    pub fn as_str(&self) -> String {
+        let (binary, cairo_root) = match self {
+            Cmd::CairoFormat(path) => ("cairo-format", path),
+            Cmd::CairoCompile(path) => ("cairo-compile", path),
+            Cmd::CairoRun(path) => ("cairo-run", path),
+            Cmd::CairoTest(path) => ("cairo-test", path),
+            Cmd::StarknetTest(path) => ("cairo-test", path),
+            Cmd::StarknetCompile(path) => ("starknet-compile", path),
+        };
+
+        if let Some(r) = cairo_root {
+            let full_path = r.join(PathBuf::from("target/release")).join(binary);
+            return full_path.to_string_lossy().to_string();
         }
+
+        binary.into()
     }
 
     fn args(&self) -> Vec<&str> {
         match self {
-            Cmd::CairoFormat => vec!["-c"],
-            Cmd::CairoCompile => vec![],
-            Cmd::CairoRun => vec!["--available-gas=20000000"],
-            Cmd::CairoTest => vec![],
-            Cmd::StarknetTest => vec!["--starknet"],
-            Cmd::StarknetCompile => vec![],
+            Cmd::CairoFormat(_) => vec!["-c"],
+            Cmd::CairoCompile(_) => vec![],
+            Cmd::CairoRun(_) => vec!["--available-gas=20000000"],
+            Cmd::CairoTest(_) => vec!["--starknet"],
+            Cmd::StarknetTest(_) => vec!["--starknet"],
+            Cmd::StarknetCompile(_) => vec![],
         }
     }
 
