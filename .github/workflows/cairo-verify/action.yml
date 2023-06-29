@@ -19,6 +19,6 @@ runs:
       env:
         CAIRO_GIT_TAG: v1.1.0
 
-    - name: Run cairo-verify and generate summary
-      run: cairo-verify -q >> $GITHUB_STEP_SUMMARY
+      - name: Run cairo-verify and generate summary
+      run: cairo-verify -q --cairo-root $HOME/.cairo/target/release >> $GITHUB_STEP_SUMMARY
       shell: bash

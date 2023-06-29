@@ -20,7 +20,7 @@ impl Cmd {
         };
 
         if let Some(r) = cairo_root {
-            let full_path = r.join(PathBuf::from("target/release")).join(binary);
+            let full_path = r.join(binary);
             return full_path.to_string_lossy().to_string();
         }
 
