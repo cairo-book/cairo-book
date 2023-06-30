@@ -1,4 +1,5 @@
 use dict::Felt252DictTrait;
+use traits::Default;
 
 #[derive(Destruct)]
 struct A {
@@ -6,5 +7,5 @@ struct A {
 }
 
 fn main() {
-    A { dict: Felt252DictTrait::new() }; // No error here
+    A { dict: Default::default() }; // No error here
 }
