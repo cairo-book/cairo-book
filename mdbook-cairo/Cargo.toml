@@ -1,16 +1,16 @@
 [package]
 name = "mdbook-cairo"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 authors = ["Cairo-book community"]
-description = "A tool for extracting cairo code from Markdown files as compilable cairo programs."
+description = "A mdbook preprocessor to be used with cairo-verify"
 repository = "https://github.com/cairo-book/cairo-book.github.io"
 
 [dependencies]
+clap = "4.3.5"
+lazy_static = "1.4.0"
 mdbook = "0.4.28"
-pulldown-cmark = { version = "0.9.2", default-features = false }
-serde = "1.0.163"
-serde_derive = "1.0.163"
-lazy_static = "1.4"
-regex = "1.8.1"
+regex = "1.8.4"
+semver = "1.0.17"
+serde_json = "1.0.97"

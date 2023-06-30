@@ -1,3 +1,4 @@
+//TAG: does_not_compile
 use debug::PrintTrait;
 fn main() {
     let x = 5;

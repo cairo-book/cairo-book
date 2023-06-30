@@ -1,4 +1,4 @@
-// does_not_compile
+//TAG: does_not_compile
 use garden::vegetables::Asparagus;
 
 mod garden;

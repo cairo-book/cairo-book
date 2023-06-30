@@ -1,3 +1,4 @@
+//TAG: does_not_compile
 use option::OptionTrait;
 use debug::PrintTrait;
 

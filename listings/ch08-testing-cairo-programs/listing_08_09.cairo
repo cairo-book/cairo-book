@@ -13,13 +13,9 @@ trait GuessTrait {
 impl GuessImpl of GuessTrait {
     fn new(value: u64) -> Guess {
         if value < 1 {
-            let mut data = ArrayTrait::new();
-            data.append('Guess must be <= 100');
-            panic(data);
+            panic_with_felt252('Guess must be >= 1');
         } else if value > 100 {
-            let mut data = ArrayTrait::new();
-            data.append('Guess must be >= 1');
-            panic(data);
+            panic_with_felt252('Guess must be <= 100');
         }
 
         Guess { value,  }
@@ -37,7 +33,7 @@ mod tests {
     fn greater_than_100() {
         GuessTrait::new(200);
     }
-    //ANCHOR_END: test_panic
+//ANCHOR_END: test_panic
 }
 // ANCHOR_END:here
 

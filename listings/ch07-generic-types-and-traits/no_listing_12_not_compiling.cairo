@@ -1,4 +1,4 @@
-// does_not_compile
+//TAG: does_not_compile
 struct Wallet<T, U> {
     balance: T,
     address: U,

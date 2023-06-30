@@ -1,4 +1,4 @@
-// does_not_compile
+//TAG: does_not_compile
 use array::ArrayTrait;
 
 // Given a list of T get the smallest one.

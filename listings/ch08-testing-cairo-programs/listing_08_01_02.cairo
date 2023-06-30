@@ -14,13 +14,5 @@ mod tests {
         let result = 2 + 2;
         assert(result == 4, 'result is not 4');
     }
-    // ANCHOR_END: exploration
-
-    // ANCHOR: another
-    #[test]
-    fn another() {
-        let result = 2 + 2;
-        assert(result == 6, 'Make this test fail');
-    }
-// ANCHOR_END: another
+// ANCHOR_END: exploration
 }
