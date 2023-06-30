@@ -20,7 +20,7 @@ trait RectangleCmp {
 
 impl RectangleCmpImpl of RectangleCmp {
     fn can_hold(self: @Rectangle, other: @Rectangle) -> bool {
-        *self.width > *other.width & *self.height > *other.height
+        *self.width > *other.width && *self.height > *other.height
     }
 }
 // ANCHOR_END: here
