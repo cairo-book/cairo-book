@@ -1,18 +1,26 @@
-#[contract]
+#[starknet::interface]
+trait IContract<TContractState> {
+    fn withdraw(ref self: TContractState, amount: u256);
+}
+
+#[starknet::contract]
 mod Contract {
+    use super::IContract;
     #[storage]
     struct Storage {
         balance: u256
     }
 
     //ANCHOR: withdraw
-    #[external]
-    fn withdraw(amount: u256) {
-        let current_balance = balance::read();
+    impl Contract of IContract<ContractState> {
+        fn withdraw(ref self: ContractState, amount: u256) {
+            let current_balance = self.balance.read();
 
-        assert(balance::read() >= amount, 'Insufficient funds');
+            assert(self.balance.read() >= amount, 'Insufficient funds');
 
-        balance::write(current_balance - amount);
+            self.balance.write(current_balance - amount);
+        }
+    //ANCHOR_END: withdraw
+
     }
-//ANCHOR_END: withdraw
 }
