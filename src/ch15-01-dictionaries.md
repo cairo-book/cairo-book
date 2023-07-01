@@ -1,20 +1,20 @@
 # Dictionaries
 
-Cairo provides along with its core library a dictionary-like type. The `Felt252Dict<T>` data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables, associative array and many others.
+Cairo provides along with its core library a dictionary-like type. The `Felt252Dict<T>` data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables, associative arrays and many others.
 
-The `Felt252Dict<T>` type is useful when you want to organize your data in a certain way for which using an `Array<T>` and indexing doesn't suffice. Cairo dictionaries also allows the programmer to easily simulate the existence of mutable memory when there is actually none.
+The `Felt252Dict<T>` type is useful when you want to organize your data in a certain way for which using an `Array<T>` and indexing doesn't suffice. Cairo dictionaries also allow the programmer to easily simulate the existence of mutable memory when there is none.
 
-## Basic use of Dictionaries
+## Basic Use of Dictionaries
 
-It is normal in other language when creating a new dictionary to define the data types of both key and value. In Cairo the key type is restricted to `felt252` leaving only the possibility to specify the value data type, represented by `T` in `Felt252Dict<T>`.
+It is normal in other languages when creating a new dictionary to define the data types of both key and value. In Cairo, the key type is restricted to `felt252` leaving only the possibility to specify the value data type, represented by `T` in `Felt252Dict<T>`.
 
 The core functionality of a `Felt252Dict<T>` is implemented in the trait `Felt252DictTrait` which includes all basic operations. Among them we can find:
 
-1. `new() -> Felt252Dict<T>`, that creates a new instance of a dictionary,
+1. `new() -> Felt252Dict<T>`, which creates a new instance of a dictionary,
 2. `insert(felt252, T) -> ()` to write values to a dictionary instance and
 3. `get(felt252) -> T` to read values from it.
 
-These functions allow us to manipulate dictionaries like in any other language. In the following example we create a dictionary with the purpose of having a mapping between individuals and their balance:
+These functions allow us to manipulate dictionaries like in any other language. In the following example, we create a dictionary to represent a mapping between individuals and their balance:
 
 ```rust
 use dict::Felt252DictTrait;
@@ -33,11 +33,11 @@ fn main() {
 }
 ```
 
-The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next we create a new instance of `Felt252Dict<u64>` by using the `new` method and added two individuals, each one with their own balance, using the`insert` method. Finally, we checked the balance of our users with the `get` method.
+The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `new` method and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
 
-Until this point in the book we have talked about how Cairo memory systems are inmutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explained how this is actually implemented later on [Dictionaries Underneath](##Dictionaries Underneath).
+Until this point in the book we have talked about how Cairo memory systems are immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
 
-With the same tone of our previous example, lets show a code example where the balance of the same user changes:
+With the same tone as our previous example, let us show a code example where the balance of the same user changes:
 
 ```rust
 use dict::Felt252DictTrait;
@@ -59,23 +59,23 @@ fn main() {
 }
 ```
 
-Notice how in this example we added the _Alex_ user twice, each time using a different balance and each time we checked for its balance it had the last value inserted! `Felt252Dict<T>` effectively allow us to "rewrite" the memory value for any given key.
+Notice how in this example we added the _Alex_ user twice, each time using a different balance and each time that we checked for its balance it had the last value inserted! `Felt252Dict<T>` effectively allows us to "rewrite" the stored value for any given key.
 
-Before heading on and explaining how dictionaries are implemented it is worth mentioning that once you instantiate a `Fetl252Dict<T>`, behind the scenes all keys have their associated values initialized as zero. This means that if for example you tried to get the balance of an inexistent user you will get 0 instead of an error or an undefined value. This also means there is no way to actually delete data from a dictionary. Something to take into account when incorporating this structure into your code.
+Before heading on and explaining how dictionaries are implemented it is worth mentioning that once you instantiate a `Fetl252Dict<T>`, behind the scenes all keys have their associated values initialized as zero. This means that if for example, you tried to get the balance of an inexistent user you will get 0 instead of an error or an undefined value. This also means there is no way to delete data from a dictionary. Something to take into account when incorporating this structure into your code.
 
-Until this point we have seen all the basic features of `Felt252Dict<T>` and how its behaviour mimics the same behaviour as the corresponding data structures in any other language, that is, externally of course. Cairo is at its core a non-deterministic Turing-complete programming language, very different from any other popular language in existence, which as a consequence means that dictionaries are implemented very different as well!
+Until this point, we have seen all the basic features of `Felt252Dict<T>` and how it mimics the same behavior as the corresponding data structures in any other language, that is, externally of course. Cairo is at its core a non-deterministic Turing-complete programming language, very different from any other popular language in existence, which as a consequence means that dictionaries are implemented very differently as well!
 
-In the following sections we are going to give some insights about a Dictionary inner mechanisms and the compromises that were taken to make them work. After that we are going to take a look at how to use dictionaries with other data structures as well as other ways of interacting with it.
+In the following sections, we are going to give some insights about `Felt252Dict<T>` inner mechanisms and the compromises that were taken to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as using the `entry` method to interact with it.
 
 ## Dictionaries Underneath
 
-One of the constraints of being a non-deterministic language is that the memory system is inmutable, so in order to simulate mutability, the team decided to implement `Felt252Dict<T>` as list of entries. Each of the entries represent a time where a dictionary was accessed for reading/updating/writing purposes. An entry have three fields:
+One of the constraints of being a non-deterministic language is that the memory system is immutable, so in order to simulate mutability, the language implemented `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
 
 1. A `key` field which identifies the value for this key-value pair of the dictionary.
-2. A `previous_value` field which indicates which was previous value was hold at `key`.
-3. A `new_value` field which indicates the new value that is hold at `key`.
+2. A `previous_value` field which indicates which previous value was held at `key`.
+3. A `new_value` field which indicates the new value that is held at `key`.
 
-If we'd implemented `Felt252Dict<T>` using high level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The defintion of `Entry<T>` would be:
+If we'd implemented `Felt252Dict<T>` using high-level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The definition of `Entry<T>` would be:
 
 ```rust
 struct Entry<T> {
@@ -88,7 +88,7 @@ struct Entry<T> {
 For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be registered:
 
 - A `get` would register an entry where there is no change in state, and previous and new values are stored with the same value.
-- An `insert` would register new `Entry<T>` where the `new_value` would be the element being inserted, and the `previous_value` the last element inserted before this. In case it is the first entry for certain key, then the previous and current value will be the same.
+- An `insert` would register a new `Entry<T>` where the `new_value` would be the element being inserted, and the `previous_value` the last element inserted before this. In case it is the first entry for a certain key, then the previous and current values will be the same.
 
 The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per `Felt252Dict<T>` interaction. Let's show an example of this using the `balances` dictionary from the previous section and inserting the users 'Alex' and 'Maria':
 
@@ -99,7 +99,7 @@ balances.insert('Alex', 200_u64);
 balances.get('Maria')
 ```
 
-This instructions would then produce the following list of entries:
+These instructions would then produce the following list of entries:
 
 |  key  | previous | current |
 | :---: | -------- | ------- |
@@ -110,21 +110,20 @@ This instructions would then produce the following list of entries:
 
 Notice that since 'Alex' was inserted twice, it appears twice and the `previous` and `current` values are set properly. Also reading from 'Maria' registered an entry with no change from previous to current values.
 
-This approach to implement `Felt252Dict<T>` means that for each reading/writing operations there is a scan for the whole entry list in search the last entry with the same `key`. Once the entry have been found, its `new_value` is extacted and used on the new entry to be added as the `previous_value`. This means that interacting with `Felt252Dict<T>` has a worst time complexity of `O(n)` where `n` is the amount of entries in the list.
+This approach to implementing `Felt252Dict<T>` means that for each reading/writing operation, there is a scan for the whole entry list in search of the last entry with the same `key`. Once the entry has been found, its `new_value` is extracted and used on the new entry to be added as the `previous_value`. This means that interacting with `Felt252Dict<T>` has a worst-case time complexity of `O(n)` where `n` is the number of entries in the list.
 
-If you pour some thought on alternate ways of implementing `Felt252Dict<T>` you'd probably find them, probably even ditching completely the need for a `previous_value` field, nonetheless since Cairo is not your normal language this won't work.
-
-One of the purposes of Cairo is, with the STARK proof system, to generate proofs of computational integrity. This means that you need to verify that program execution is correct and inside the boundries of Cairo restrictions. One of those boundries checks consist on dictionary "squashing" and that requires information of both previous and new values for every entry.
+If you pour some thought into alternate ways of implementing `Felt252Dict<T>` you'd surely find them, probably even ditching completely the need for a `previous_value` field, nonetheless, since Cairo is not your normal language this won't work.
+One of the purposes of Cairo is, with the STARK proof system, to generate proofs of computational integrity. This means that you need to verify that program execution is correct and inside the boundaries of Cairo restrictions. One of those boundaries checks consists of "dictionary squashing" and that requires information on both previous and new values for every entry.
 
 ### Squashing Dictionaries
 
-In order to verify that the proof generated by a Cairo program execution which used a `Felt252Dict<T>` is correct we need to check that there wasn't any illegal tampering with the dictionary. This done through a method called `squash_dict` that reviews each entry of the entry list and checks that access to the dictionary remains coherent throughout the execution.
+To verify that the proof generated by a Cairo program execution that used a `Felt252Dict<T>` is correct we need to check that there wasn't any illegal tampering with the dictionary. This is done through a method called `squash_dict` that reviews each entry of the entry list and checks that access to the dictionary remains coherent throughout the execution.
 
-Given all entries with key `k`, you'll take them in the same order that they were found originally and for all of them, you'll take the `i` with the `i + 1` and compare that `new_i == previous_i+1`.
+The process of squashing is as follows: given all entries with certain key `k`, taken in the same order as they were inserted, verify that the ith entry `new_value` is equal to the ith + 1 entry `previous_value`. 
 
-For example, given an entry list like this one:
+For example, given the following entry list:
 
-|   key   | previous | current |
+|   key   | previous | new |
 | :-----: | -------- | ------- |
 |  Alex   | 100      | 100     |
 |  Maria  | 150      | 150     |
@@ -137,31 +136,31 @@ For example, given an entry list like this one:
 
 After squashing the entry list would be reduced to:
 
-|   key   | previous | current |
+|   key   | previous | new |
 | :-----: | -------- | ------- |
 |  Alex   | 100      | 90      |
 |  Maria  | 150      | 190     |
-| Charles | 70       | 70      |
+| Charles | 70     j
 
 In case of a change on any of the values of the first table, squashing would have failed during runtime.
 
 ### Dictionary Destruction
 
-If you ran the examples from [Basic use of Dictionaries](##Basic use of Dictionaries) you'd probably notice that you never did a call to squash dictionary, but program compiled succesfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call ocurred just before `balance` went out of scope.
+If you run the examples from [Basic Use of Dictionaries](#basic-use-of-dictionaries) you'd notice that you never did a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
 
-The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonims.
+The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms.
 
-On the following section we will have a hands on example using the `Destruct<T>` trait.
+In the following section, we will have a hands-on example using the `Destruct<T>` trait.
 
 ## More Dictionaries
 
-Up to this point we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in this way. If you haven't understood all of it, don't worry because in this section we will have some hands on examples using dictionaries in non-trivial ways.
+Up to this point we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in this way. If you haven't understood all of it, don't worry because in this section we will have some examples using dictionaries in non-trivial ways.
 
-We will begin explaining the `entry` method which is part of a dictionary basic functionality included `Felt252DictTrait<T>` which we didn't mentioned at the beginning. After that we will see examples of how `Felt252Dict<T>` interacts with other types such as structs and enums.
+We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` interacts with other types such as structs and enums.
 
-### The `entry` method
+### The `entry` Method
 
-Remember when we mentioned
+In the [Dictionaries Underneath](#Dictionaries Underneath) section we explained how `Felt252Dict<T>` internally worked. It was basically on a list of entries for each time the dictionary was accessed in any manner. This method used by the 
 
 by using the entry function you can update the dictionary in a new way
 
