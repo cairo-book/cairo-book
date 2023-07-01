@@ -48,8 +48,8 @@ pub struct Config {
 
 /// Expected statement in a cairo program for it to be runnable.
 pub const STATEMENT_IS_RUNNABLE: &str = "fn main()";
-/// Expected statement in a cairo program for it to be runnable.
-pub const STATEMENT_IS_CONTRACT: &str = "#[contract]";
+/// Expected statement in a starknet contract for it to compile.
+pub const STATEMENT_IS_CONTRACT: &str = "#[starknet::contract]";
 /// Expected statement in a cairo program containing tests.
 pub const STATEMENT_IS_TESTABLE: &str = "#[test]";
 /// Expected regex for tags
