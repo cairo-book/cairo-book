@@ -146,7 +146,7 @@ In case of a change on any of the values of the first table, squashing would hav
 
 ### Dictionary Destruction
 
-If you run the examples from [Basic Use of Dictionaries](#basic-use-of-dictionaries) you'd notice that you never did a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
+If you run the examples from [Basic Use of Dictionaries](#basic-use-of-dictionaries) you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
 
 The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms.
 
@@ -158,9 +158,61 @@ Up to this point we have given a comprehensive overview of the functionality of 
 
 We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` interacts with other types such as structs and enums.
 
-### The `entry` Method
+### Entry and Finalize 
 
-In the [Dictionaries Underneath](#Dictionaries Underneath) section we explained how `Felt252Dict<T>` internally worked. It was basically on a list of entries for each time the dictionary was accessed in any manner. This method used by the 
+In the [Dictionaries Underneath](#dictionaries-underneath) section we explained how `Felt252Dict<T>` internally worked. It was basically a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given certain `key` and then updating it according to whatever operation it was executing. The Cairo language give us the tools to replicate this ourselves through the `entry` and `finalize` methods.
+
+
+The `entry` method comes as part of `Felt252DictTrait<T>` and it takes as `key` as an argument and returns the last entry associated to that `key` represented by a `Felt252DictEntry<T>` as well as value that was being held at that `key`. The method signature is as follows:
+```rust
+fn entry(self: Felt252Dict<T>, key: felt252) -> (Felt252DictEntry<T>, T) nopanic
+```
+First, let's analize the parameters. Notice that this methods takes ownership of the Dictionary who called it, so the dictionary is no longer available. `Felt252DictEntry<T>` is a builtin method which represents that a Dictionary is in like a stand by mode were it is going to get written at certain `key`.  Also since the method "consumed" the dictionary who called it, you can no longer write to it.
+
+This opeartion in itself is meaningfull, and it only has some meaning by using the `finalize` method. `finalize` is defineed by `Felt252DictEntryTrait<T>` and is aplied over the `Felt252DictEntry<T>`. 
+```rust
+fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T> {
+```
+`finalize` consumes the entry we want to update and adds a new entry with the new value. As a final step it retunrs ownership of the dictionary back to us. We know have the same dictionary with an extra entry. 
+
+For example if we wanted to implement the insert method for a dictionary, using `entry` and `finalize` would follow this workflow:
+
+1. Find the last entry associated with certain `key` and give me its new value
+
+2. Build a new entry with the new value using the last entry's value as previous value
+
+The implementation would look like this:
+```rust
+fn insert<impl TDestruct: Destruct<T>>(ref self: Felt252Dict<T>, key: felt252, value: T) {
+    // We first get the last entry associated with `key`
+    let (entry, _prev_value) = felt252_dict_entry_get(self, key);
+
+    // We insert `entry` back in the dictionary with the new value
+    self = felt252_dict_entry_finalize(entry, value);
+}
+```
+
+For implementing the `get` the worklow  would be as following:
+
+1. Find the last entry associated with certain `key` and get the last value associated with it
+
+2. Insert a new entry where the new value match the previous value
+
+3. Return this previous value
+
+```rust
+fn get<impl TCopy: Copy<T>>(ref self: Felt252Dict<T>, key: felt252) -> T {
+    let (entry, prev_value) = felt252_dict_entry_get(self, key);
+    let return_value = prev_value;
+    self = felt252_dict_entry_finalize(entry, prev_value);
+    return_value
+}
+
+```
+
+This both examples show how we should implement both `get` and `insert` methods, and fun fact they are actually implemented this way! Check them out at (link).
+
+--- 
 
 by using the entry function you can update the dictionary in a new way
 
