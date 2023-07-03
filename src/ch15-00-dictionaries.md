@@ -40,13 +40,13 @@ In the following sections, we are going to give some insights about `Felt252Dict
 
 ## Dictionaries Underneath
 
-One of the constraints of being a non-deterministic language is that the memory system is immutable, so in order to simulate mutability, the language implements `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
+One of the constraints of Cairo's non-deterministic design is that its memory system is immutable, so in order to simulate mutability, the language implements `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
 
 1. A `key` field that identifies the value for this key-value pair of the dictionary.
 2. A `previous_value` field that indicates which previous value was held at `key`.
 3. A `new_value` field that indicates the new value that is held at `key`.
 
-If we'd implemented `Felt252Dict<T>` using high-level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The definition of `Entry<T>` would be:
+If we try implementing `Felt252Dict<T>` using high-level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The definition of `Entry<T>` would be:
 
 ```rust
 {{#include ../listings/ch15-dictionaries/listing_15_02_entries.cairo:struct}}
@@ -112,7 +112,7 @@ In case of a change on any of the values of the first table, squashing would hav
 
 If you run the examples from [Basic Use of Dictionaries](#basic-use-of-dictionaries) you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
 
-The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms.
+The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct](/src/appendix-03-derivable-traits.md#drop-and-destruct).
 
 In the following section, we will have a hands-on example using the `Destruct<T>` trait.
 
@@ -248,7 +248,7 @@ Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't wor
 {{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:destruct}}
 ```
 
-After adding the implementation we have now a fully functional `UserDatabase`. A use example:
+After adding the implementation we have now a fully functional `UserDatabase`:
 ```rust
 {{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:main}}
 ```
