@@ -1,6 +1,6 @@
 # Dictionaries
 
-Cairo provides along with its core library a dictionary-like type. The `Felt252Dict<T>` data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables, associative arrays and many others.
+Cairo provides in its core library a dictionary-like type. The `Felt252Dict<T>` data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables, associative arrays and many others.
 
 The `Felt252Dict<T>` type is useful when you want to organize your data in a certain way for which using an `Array<T>` and indexing doesn't suffice. Cairo dictionaries also allow the programmer to easily simulate the existence of mutable memory when there is none.
 
@@ -22,8 +22,8 @@ use dict::Felt252DictTrait;
 fn main() {
     let mut balances: Felt252Dict<u64> = Felt252DictTrait::new();
 
-    balances.insert('Alex', 100_u64);
-    balances.insert('Maria', 200_u64);
+    balances.insert('Alex', 100);
+    balances.insert('Maria', 200);
 
     let alex_balance = balances.get('Alex');
     assert(alex_balance == 100);
@@ -35,9 +35,9 @@ fn main() {
 
 The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `new` method and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
 
-Until this point in the book we have talked about how Cairo memory systems are immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
+Until this point in the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
 
-With the same tone as our previous example, let us show a code example where the balance of the same user changes:
+Building upon our previous example, let us show a code example where the balance of the same user changes:
 
 ```rust
 use dict::Felt252DictTrait;
@@ -46,13 +46,13 @@ fn main() {
     let mut balances: Felt252Dict<u64> = Felt252DictTrait::new();
 
     // Insert Alex with 100 balance
-    balances.insert('Alex', 100_u64);
+    balances.insert('Alex', 100);
     // Check that Alex has indeed 100 asociated with him
     let alex_balance_2 = balance.get('Alex');
     assert(alex_balance == 100);
 
     // Insert Alex again, this time with 200 balance
-    balances.insert('Alex', 200_u64);
+    balances.insert('Alex', 200);
     // Check the new balance is correct
     let alex_balance_2 = balance.get('Alex');
     assert(alex_balance_2 == 200);
@@ -69,7 +69,7 @@ In the following sections, we are going to give some insights about `Felt252Dict
 
 ## Dictionaries Underneath
 
-One of the constraints of being a non-deterministic language is that the memory system is immutable, so in order to simulate mutability, the language implemented `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
+One of the constraints of being a non-deterministic language is that the memory system is immutable, so in order to simulate mutability, the language implements `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
 
 1. A `key` field which identifies the value for this key-value pair of the dictionary.
 2. A `previous_value` field which indicates which previous value was held at `key`.
@@ -211,18 +211,6 @@ fn get<impl TCopy: Copy<T>>(ref self: Felt252Dict<T>, key: felt252) -> T {
 ```
 
 This both examples show how we should implement both `get` and `insert` methods, and fun fact they are actually implemented this way! Check them out at (link).
-
---- 
-
-by using the entry function you can update the dictionary in a new way
-
-It returns a dict entry according to a key
-
-which is a whole new type. Once you ask for an entry the original dict cannot be modified in any way until you finalize working with this entry
-
-Once you do such entry.finalize you are given back access to the normal dictionary
-
-There is no performance gain, but it represents another idiomatic way of modifying a dictionary.
 
 ### Dictionaries of Complex Types
 

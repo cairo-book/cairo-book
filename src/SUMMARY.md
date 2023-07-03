@@ -79,7 +79,7 @@
 
 ## Collections
 
-- [Collctions](ch15-00-collections.md)
+- [Collections](ch15-00-collections.md)
   - [Dictionaries](ch15-01-dictionaries.md)
 
 ## Starknet smart contracts
