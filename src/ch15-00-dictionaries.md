@@ -17,20 +17,7 @@ The core functionality of a `Felt252Dict<T>` is implemented in the trait `Felt25
 These functions allow us to manipulate dictionaries like in any other language. In the following example, we create a dictionary to represent a mapping between individuals and their balance:
 
 ```rust
-use dict::Felt252DictTrait;
-
-fn main() {
-    let mut balances: Felt252Dict<u64> = Felt252DictTrait::new();
-
-    balances.insert('Alex', 100);
-    balances.insert('Maria', 200);
-
-    let alex_balance = balances.get('Alex');
-    assert(alex_balance == 100);
-
-    let maria_balance = balances.get('Maria');
-    assert(maria_balance == 200);
-}
+{{#include ../listings/ch15-dictionaries/listing_15_00_intro.cairo}}
 ```
 
 The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `new` method and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
@@ -40,23 +27,7 @@ Until this point in the book we have talked about how Cairo's memory is immutabl
 Building upon our previous example, let us show a code example where the balance of the same user changes:
 
 ```rust
-use dict::Felt252DictTrait;
-
-fn main() {
-    let mut balances: Felt252Dict<u64> = Felt252DictTrait::new();
-
-    // Insert Alex with 100 balance
-    balances.insert('Alex', 100);
-    // Check that Alex has indeed 100 asociated with him
-    let alex_balance_2 = balance.get('Alex');
-    assert(alex_balance == 100);
-
-    // Insert Alex again, this time with 200 balance
-    balances.insert('Alex', 200);
-    // Check the new balance is correct
-    let alex_balance_2 = balance.get('Alex');
-    assert(alex_balance_2 == 200);
-}
+{{#include ../listings/ch15-dictionaries/listing_15_01_intro_rewrite.cairo}}
 ```
 
 Notice how in this example we added the _Alex_ user twice, each time using a different balance and each time that we checked for its balance it had the last value inserted! `Felt252Dict<T>` effectively allows us to "rewrite" the stored value for any given key.
@@ -78,11 +49,7 @@ One of the constraints of being a non-deterministic language is that the memory 
 If we'd implemented `Felt252Dict<T>` using high-level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The definition of `Entry<T>` would be:
 
 ```rust
-struct Entry<T> {
-   key: felt252,
-   previous_value: T,
-   new_value: T,
-}
+{{#include ../listings/ch15-dictionaries/listing_15_02_entries.cairo:struct}}
 ```
 
 For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be registered:
@@ -93,10 +60,7 @@ For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be regis
 The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per `Felt252Dict<T>` interaction. Let's show an example of this using the `balances` dictionary from the previous section and inserting the users 'Alex' and 'Maria':
 
 ```rust
-balances.insert('Alex', 100_u64);
-balances.insert('Maria', 50_u64)
-balances.insert('Alex', 200_u64);
-balances.get('Maria')
+{{#include ../listings/ch15-dictionaries/listing_15_02_entries.cairo:inserts}}
 ```
 
 These instructions would then produce the following list of entries:
@@ -187,106 +151,77 @@ Let us see an example using `entry` and `finalize`. Imagine we would like to imp
 
 Implementing our custom get would look like:
 ```rust
-fn custom_get<T, impl TCopy: Copy<T>>(ref self: Felt252Dict<T>, key: felt252) -> T {
-    // Get the new entry and the previous value held at `key`
-    let (entry, prev_value) = felt252_dict_entry_get(self, key);
+{{#include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:imports}}
 
-    // Store the value to return
-    let return_value = prev_value;
-    
-    // Store back the entry in the dictionary, getting ownership back of the dictionary
-    self = felt252_dict_entry_finalize(entry, prev_value);
-
-    // Return the read value
-    return_value
-}
+{{#include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:custom_get}}
 ```
 
 Implementing the `insert` method would follow a similar workflow, except for the part that we insert a new value when finalizing. If were to implement it, it would look like:
 
 ```rust
-fn custom_insert<T, impl TDestruct: Destruct<T>>(ref self: Felt252Dict<T>, key: felt252, value: T) {
-    // We first get the last entry associated with `key`
-    let (entry, _prev_value) = felt252_dict_entry_get(self, key);
+{{#include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:imports}}
 
-    // We insert `entry` back in the dictionary with the new value
-    self = felt252_dict_entry_finalize(entry, value);
-}
+{{#include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:custom_insert}}
 ```
 
-As a finalizing note, this two methods are implemented in similar way to how it is implemented for `Felt252Dict<T>`.
+As a finalizing note, this two methods are implemented in similar way to how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows some example usage:
+
+```rust
+{{#include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:main}}
+```
 
 ### Dictionaries of Complex Types
 
-One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`. This trait implement the `zero_default` method which is the one that gets called when a value does not exist on the dictionary. This is implemented by all except for complex types such as arrays and structs. This means that making a dictionary of those type can become a complex thing, you would need to implement a series of trait in order to use the dictionary. To compensante for this, the language introduces the `Nullable<T>` type.
+One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`. 
+This trait defines the `zero_default` method which is the one that gets called when a value does not exist on the dictionary. 
+This is implemented by all data types except for complex ones such as arrays and structs. 
+This means that making a dictionary of complex types is not a straightforward task because you would need to write a couple of traits in order to make the data type a valid dictionary value type.
+. To compensante for this the language introduces the `Nullable<T>` type.
 
 `Nullable<T>` represents the absence of value, and it is usually used in Object Oriented Programming Languages when a reference doesn't point at anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type inspired by Rust and allows us to store recursive data types. 
 
-Let's see a simple example where we insert a a `Span<T>` inside a `Felt252Dict<T>`.
+Let's show with an example. We will try to store a `Span<fetl252>` inside a dictionary. For that we will use `Nullable<T>` and `Box<T>`. Also, we are storing a `Span<T>` and not an `Array<T>` because the later does not implement the `Copy<T>` trait which required for reading from a dictionary.
 
 ```rust
-use array::{ArrayTrait, SpanTrait};
-use nullable::{NullableTrait, nullable_from_box, match_nullable, FromNullableResult};
-use box::BoxTrait;
-use dict::Felt252DictTrait;
+{{#include ../listings/ch15-dictionaries/listing_15_04_dict_of_complex.cairo:imports}}
 
-fn main() {
-    // Create the dictionary
-    let mut d = Felt252DictTrait::<Nullable<Span<felt252>>>::new();
+{{#include ../listings/ch15-dictionaries/listing_15_04_dict_of_complex.cairo:header}}
 
-    // Crate the array to insert
-    let mut a = ArrayTrait::new();
-    a.append(8);
-    a.append(9);
-    a.append(10);
-
-    // Insert it as a `Span`
-    d.insert(0, nullable_from_box(BoxTrait::new(a.span())));
-
-    // Get value back
-    let val = d.get(0);
-
-    // Search the value and assert it is not null
-    let span = match match_nullable(val) {
-        FromNullableResult::Null(()) => panic_with_felt252('No value found'),
-        FromNullableResult::NotNull(val) => val.unbox(),
-    };
-
-    // Verify we are having the right values
-    assert(*span.at(0) == 8, 'Expecting 8');
-    assert(*span.at(1) == 9, 'Expecting 9');
-    assert(*span.at(2) == 10, 'Expecting 10');
-}
+...
 ```
 
-In this example the first thing we did is creating the dictionary. We want it to hold a `Nullabel<Span>`. 
-Then we creaed an array which will use to store inside the dictionary. We won't actually insert the array, but a span of it.
+In this code snippet the first thin we did was to create a new dictionary 'd'. We want it to hold a `Nullabel<Span>`. After that, we created an array and filled it with values.
 
-To insert a span of `a` in the dictionary we first do a couple of things: 
+The last step is inserting the array as a span inside the dictionary. Notice that we don't directly do that, but instead we make some steps in between:
 1. We wrapped the array inside a `Box` using the `new` method from `BoxTrait`.
-2. We made the box nullable using `nullable_from_box`.
-3. We insert the final result
+2. We wrapped the `Box` inside a nullable using the `nullable_from_box` function.
+3. Finally, we inserted the result.
 
-With this workflow we can insert any complex type inside a dictionary. To read complex type from a dictionary we do the same thing but in the opposite order:
-1. We read the value and
-2. Verify it is non-null to unwrap it
-3. Extract the value inside the box
+Once the element is inside the dictionary, and we want to get it, we follow the same steps but in a reverse order. An example code to achieve that:
+```rust
+...
+
+{{#include ../listings/ch15-dictionaries/listing_15_04_dict_of_complex.cairo:footer}}
+```
+Here we:
+1. Read the value using `get`.
+2. Verified it is non-null using the `match_nullable` function.
+3. Unwrapped the value inside the box and asserted it was correct.
+
+The complete scirpt would look like this:
+
+```rust
+{{#include ../listings/ch15-dictionaries/listing_15_04_dict_of_complex.cairo:all}}
+```
 
 ### Dictionaries as Struct Members
 Defining dictionaries as  struct members is possible in Cairo but to correctly interact with them may not be entireley seamless. Let us show with an example where we implement a `UserDatabase` where we can add and read from it.
 
 
 ```rust
-struct UserDatabase<T> {
-    users_amount: u64,
-    balances: Felt252Dict<T>,
-}
+{{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:struct}}
 
-trait UserDatabaseTrait<T> {
-    fn new() -> UserDatabase<T>;
-    fn add_user(ref self: UserDatabase<T>, name: felt252, balance: T);
-    fn get_user(ref self: UserDatabase<T>, name: felt252) -> T;
-}
+{{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:trait}}
 ```
 
 First we define `UserDatabase`, a new type which will represent a database of users. It will have two members: the amount of users currently inserted, and a mapping of each user to its balance.
@@ -300,39 +235,20 @@ The only remaining thing is to actually implement the methods in `UserDatabaseTr
 
 The implemenation, with all restriction in place, would be as follow:
 ```rust
-impl UserDatabaseImpl<
-    T, impl TCopy: Copy<T>, impl TDefault: Felt252DictValue<T>, impl TDestruct: Destruct<T>
-> of UserDatabaseTrait<T> {
-    // Creates a database
-    fn new() -> UserDatabase<T> {
-        UserDatabase { users_amount: 0, balances: Felt252DictTrait::<T>::new() }
-    }
+{{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:imports}}
 
-    // Add a user
-    fn add_user(ref self: UserDatabase<T>, name: felt252, balance: T) {
-        self.balances.insert(name, balance);
-        self.users_amount += 1;
-    }
-
-    // Get the user
-    fn get_user(ref self: UserDatabase<T>, name: felt252) -> T {
-        self.balances.get(name)
-    }
-}
+{{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:impl}}
 ```
 
-Our database implementation almost complete, except for one thing: the compiler doesn't know how drop `UserDatabase<T>` out of scope.
+Our database implementation is almost complete, except for one thing: the compiler doesn't know how drop `UserDatabase<T>` out of scope.
 Since it has a `Felt252Dict<T>` as a member cannot be dropped,  we are forced to implement `Destruct<T>` trait. 
 Using `#[derive(Destruct)]` on top `UserDatabase<T>` definition won't work because the use of [generecity](/src/ch07-00-generic-types-and-traits.md). We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust
-impl UserDatabaseDestruct<
-    T, impl TDrop: Drop<T>, impl TDefault: Felt252DictValue<T>
-> of Destruct<UserDatabase<T>> {
-    fn destruct(self: UserDatabase<T>) nopanic {
-        self.balances.squash();
-    }
-}
+{{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:destruct}}
 ```
 
-After adding the implementation we have now a fully functional `UserDatabase`.
+After adding the implementation we have now a fully functional `UserDatabase`. A use example:
+```rust
+{{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:main}}
+```
