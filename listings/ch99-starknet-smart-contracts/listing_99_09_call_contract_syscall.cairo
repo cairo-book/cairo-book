@@ -17,7 +17,7 @@ mod TokenWrapper {
     #[storage]
     struct Storage {}
 
-    impl token_wrapper of ITokenWrapper<ContractState> {
+    impl TokenWrapper of ITokenWrapper<ContractState> {
         fn transfer_token(
             ref self: ContractState,
             address: starknet::ContractAddress,
