@@ -101,7 +101,7 @@ balances.get('Maria')
 
 These instructions would then produce the following list of entries:
 
-|  key  | previous | current |
+|  key  | previous |   new   |
 | :---: | -------- | ------- |
 | Alex  | 100      | 100     |
 | Maria | 50       | 50      |
@@ -110,7 +110,7 @@ These instructions would then produce the following list of entries:
 
 Notice that since 'Alex' was inserted twice, it appears twice and the `previous` and `current` values are set properly. Also reading from 'Maria' registered an entry with no change from previous to current values.
 
-This approach to implementing `Felt252Dict<T>` means that for each reading/writing operation, there is a scan for the whole entry list in search of the last entry with the same `key`. Once the entry has been found, its `new_value` is extracted and used on the new entry to be added as the `previous_value`. This means that interacting with `Felt252Dict<T>` has a worst-case time complexity of `O(n)` where `n` is the number of entries in the list.
+This approach to implementing `Felt252Dict<T>` means that for each read/write operation, there is a scan for the whole entry list in search of the last entry with the same `key`. Once the entry has been found, its `new_value` is extracted and used on the new entry to be added as the `previous_value`. This means that interacting with `Felt252Dict<T>` has a worst-case time complexity of `O(n)` where `n` is the number of entries in the list.
 
 If you pour some thought into alternate ways of implementing `Felt252Dict<T>` you'd surely find them, probably even ditching completely the need for a `previous_value` field, nonetheless, since Cairo is not your normal language this won't work.
 One of the purposes of Cairo is, with the STARK proof system, to generate proofs of computational integrity. This means that you need to verify that program execution is correct and inside the boundaries of Cairo restrictions. One of those boundaries checks consists of "dictionary squashing" and that requires information on both previous and new values for every entry.
@@ -123,7 +123,7 @@ The process of squashing is as follows: given all entries with certain key `k`, 
 
 For example, given the following entry list:
 
-|   key   | previous | new |
+|   key   | previous |   new   |
 | :-----: | -------- | ------- |
 |  Alex   | 100      | 100     |
 |  Maria  | 150      | 150     |
@@ -134,9 +134,9 @@ For example, given the following entry list:
 |  Maria  | 250      | 190     |
 |  Alex   | 300      | 90      |
 
-After squashing the entry list would be reduced to:
+After squashing, the entry list would be reduced to:
 
-|   key   | previous | new |
+|   key   | previous |   new   |
 | :-----: | -------- | ------- |
 |  Alex   | 100      | 90      |
 |  Maria  | 150      | 190     |
@@ -154,7 +154,7 @@ In the following section, we will have a hands-on example using the `Destruct<T>
 
 ## More Dictionaries
 
-Up to this point we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in this way. If you haven't understood all of it, don't worry because in this section we will have some examples using dictionaries in non-trivial ways.
+Up to this point we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in a certain way. If you haven't understood all of it, don't worry because in this section we will have some more examples using dictionaries.
 
 We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` interacts with other types such as structs and enums.
 
@@ -163,27 +163,49 @@ We will start by explaining the `entry` method which is part of a dictionary bas
 In the [Dictionaries Underneath](#dictionaries-underneath) section we explained how `Felt252Dict<T>` internally worked. It was basically a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given certain `key` and then updating it according to whatever operation it was executing. The Cairo language give us the tools to replicate this ourselves through the `entry` and `finalize` methods.
 
 
-The `entry` method comes as part of `Felt252DictTrait<T>` and it takes as `key` as an argument and returns the last entry associated to that `key` represented by a `Felt252DictEntry<T>` as well as value that was being held at that `key`. The method signature is as follows:
+The `entry` method comes as part of `Felt252DictTrait<T>` with the purpose of a creating a new entrygiven certain key. Once called, this method takes ownership of the dictionary and returns the entry to update.  The method signature is as follows: 
+
 ```rust
 fn entry(self: Felt252Dict<T>, key: felt252) -> (Felt252DictEntry<T>, T) nopanic
 ```
-First, let's analize the parameters. Notice that this methods takes ownership of the Dictionary who called it, so the dictionary is no longer available. `Felt252DictEntry<T>` is a builtin method which represents that a Dictionary is in like a stand by mode were it is going to get written at certain `key`.  Also since the method "consumed" the dictionary who called it, you can no longer write to it.
 
-This opeartion in itself is meaningfull, and it only has some meaning by using the `finalize` method. `finalize` is defineed by `Felt252DictEntryTrait<T>` and is aplied over the `Felt252DictEntry<T>`. 
+The first input parameter takes ownership of the dictionary while the second one is used to create the aprropiate entry. It returns a tuple containing a `Felt252DictEntr<T>`, which is the type used by Cairo to represent dictionary entries, and a `T` representing the value hold previously.
+
+The next thing to do is to update the entry with the new value. For this we use the `finalize` method which inserts the entry and returns ownership of the dictionary:
+
 ```rust
 fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T> {
 ```
-`finalize` consumes the entry we want to update and adds a new entry with the new value. As a final step it retunrs ownership of the dictionary back to us. We know have the same dictionary with an extra entry. 
 
-For example if we wanted to implement the insert method for a dictionary, using `entry` and `finalize` would follow this workflow:
+The method recieves the entry and the new value as a parameter and returns the updated dictionary.
 
-1. Find the last entry associated with certain `key` and give me its new value
+Let us see an example using `entry` and `finalize`. Imagine we would like to implement ourselves the `get` method from a dictionary. We then should do the following:
 
-2. Build a new entry with the new value using the last entry's value as previous value
+1. Create the new entry to add using the `entry` method
+2. Insert back the entry where the `new_value` eauals the `previous_value`.
+3. Return the value.
 
-The implementation would look like this:
+Implementing our custom get would look like:
 ```rust
-fn insert<impl TDestruct: Destruct<T>>(ref self: Felt252Dict<T>, key: felt252, value: T) {
+fn custom_get<T, impl TCopy: Copy<T>>(ref self: Felt252Dict<T>, key: felt252) -> T {
+    // Get the new entry and the previous value held at `key`
+    let (entry, prev_value) = felt252_dict_entry_get(self, key);
+
+    // Store the value to return
+    let return_value = prev_value;
+    
+    // Store back the entry in the dictionary, getting ownership back of the dictionary
+    self = felt252_dict_entry_finalize(entry, prev_value);
+
+    // Return the read value
+    return_value
+}
+```
+
+Implementing the `insert` method would follow a similar workflow, except for the part that we insert a new value when finalizing. If were to implement it, it would look like:
+
+```rust
+fn custom_insert<T, impl TDestruct: Destruct<T>>(ref self: Felt252Dict<T>, key: felt252, value: T) {
     // We first get the last entry associated with `key`
     let (entry, _prev_value) = felt252_dict_entry_get(self, key);
 
@@ -192,35 +214,66 @@ fn insert<impl TDestruct: Destruct<T>>(ref self: Felt252Dict<T>, key: felt252, v
 }
 ```
 
-For implementing the `get` the worklow  would be as following:
-
-1. Find the last entry associated with certain `key` and get the last value associated with it
-
-2. Insert a new entry where the new value match the previous value
-
-3. Return this previous value
-
-```rust
-fn get<impl TCopy: Copy<T>>(ref self: Felt252Dict<T>, key: felt252) -> T {
-    let (entry, prev_value) = felt252_dict_entry_get(self, key);
-    let return_value = prev_value;
-    self = felt252_dict_entry_finalize(entry, prev_value);
-    return_value
-}
-
-```
-
-This both examples show how we should implement both `get` and `insert` methods, and fun fact they are actually implemented this way! Check them out at (link).
+As a finalizing note, this two methods are implemented in similar way to how it is implemented for `Felt252Dict<T>`.
 
 ### Dictionaries of Complex Types
 
-One restriction `Felt252Dict<T>` has that we haven't taked about is the trait `Felt252DictValue<T>`. This trait implement the `zero_default` method which is the one that gets called when a value does not exist on the dictionary. This is implemented by all except for complex types such as arrays and structs. This means that making a dictionary of those type can become a complex thing, you would need to implement a series of trait in order to use the dictionary. To compensante for this, the language introduces the `Nullable<T>` type.
+One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`. This trait implement the `zero_default` method which is the one that gets called when a value does not exist on the dictionary. This is implemented by all except for complex types such as arrays and structs. This means that making a dictionary of those type can become a complex thing, you would need to implement a series of trait in order to use the dictionary. To compensante for this, the language introduces the `Nullable<T>` type.
 
-`Nullable<T>` represents the absence of value, and it is usually used in Object Oriented Programming Languages when a reference doesn't point at anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The use `Box<T>` is type inspired in Rust's that allows to store recursive data types. An example of 
+`Nullable<T>` represents the absence of value, and it is usually used in Object Oriented Programming Languages when a reference doesn't point at anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type inspired by Rust and allows us to store recursive data types. 
+
+Let's see a simple example where we insert a a `Span<T>` inside a `Felt252Dict<T>`.
+
+```rust
+use array::{ArrayTrait, SpanTrait};
+use nullable::{NullableTrait, nullable_from_box, match_nullable, FromNullableResult};
+use box::BoxTrait;
+use dict::Felt252DictTrait;
+
+fn main() {
+    // Create the dictionary
+    let mut d = Felt252DictTrait::<Nullable<Span<felt252>>>::new();
+
+    // Crate the array to insert
+    let mut a = ArrayTrait::new();
+    a.append(8);
+    a.append(9);
+    a.append(10);
+
+    // Insert it as a `Span`
+    d.insert(0, nullable_from_box(BoxTrait::new(a.span())));
+
+    // Get value back
+    let val = d.get(0);
+
+    // Search the value and assert it is not null
+    let span = match match_nullable(val) {
+        FromNullableResult::Null(()) => panic_with_felt252('No value found'),
+        FromNullableResult::NotNull(val) => val.unbox(),
+    };
+
+    // Verify we are having the right values
+    assert(*span.at(0) == 8, 'Expecting 8');
+    assert(*span.at(1) == 9, 'Expecting 9');
+    assert(*span.at(2) == 10, 'Expecting 10');
+}
+```
+
+In this example the first thing we did is creating the dictionary. We want it to hold a `Nullabel<Span>`. 
+Then we creaed an array which will use to store inside the dictionary. We won't actually insert the array, but a span of it.
+
+To insert a span of `a` in the dictionary we first do a couple of things: 
+1. We wrapped the array inside a `Box` using the `new` method from `BoxTrait`.
+2. We made the box nullable using `nullable_from_box`.
+3. We insert the final result
+
+With this workflow we can insert any complex type inside a dictionary. To read complex type from a dictionary we do the same thing but in the opposite order:
+1. We read the value and
+2. Verify it is non-null to unwrap it
+3. Extract the value inside the box
 
 ### Dictionaries as Struct Members
-
-Defining dictionaries as  struct members is possible in Cairo but to correctly interact with them some work is required. Let us show with an example.
+Defining dictionaries as  struct members is possible in Cairo but to correctly interact with them may not be entireley seamless. Let us show with an example where we implement a `UserDatabase` where we can add and read from it.
 
 
 ```rust
@@ -239,34 +292,38 @@ trait UserDatabaseTrait<T> {
 First we define `UserDatabase`, a new type which will represent a database of users. It will have two members: the amount of users currently inserted, and a mapping of each user to its balance.
 Next, we defined `UserDatabaseTrait`, the trait which will represent all the core functionality of our defined type.
 
-The only remaining thing is to actually implement our core functionality, but since we are working with [generic types](/src/ch07-00-generic-types-and-traits.md) we need to correctly stablish the requirements of `T` so it can be a valid `Felt252Dict<T>` value:
+The only remaining thing is to actually implement the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch07-00-generic-types-and-traits.md) we need to correctly stablish the requirements of `T` so it can be a valid `Felt252Dict<T>` value:
 
-1. `T` should implement the `Copy<T>` trait because reading a value from a `Felt252Dict<T>` doesn't return the item in itself, but a copy of it.
-2. `Felt252DictValue<T>` is an internal trait which all valid values data types must implement, we need to add this as a restriction as well.,
-3. Finally `Felt252DictTrait<T>` require all value types to be destructable as well. We need to add this restriction as well.
+1. `T` should implement the `Copy<T>`, since it required for getting values from a `Felt252Dict<T>` .
+2. All value types of a dictionary implements the `Felt252DictValue<T>`, our generic type should do as well.
+3. In order to insert values, `Felt252DictTrait<T>` require all value types to be destructable 
 
 The implemenation, with all restriction in place, would be as follow:
 ```rust
 impl UserDatabaseImpl<
     T, impl TCopy: Copy<T>, impl TDefault: Felt252DictValue<T>, impl TDestruct: Destruct<T>
 > of UserDatabaseTrait<T> {
+    // Creates a database
     fn new() -> UserDatabase<T> {
         UserDatabase { users_amount: 0, balances: Felt252DictTrait::<T>::new() }
     }
 
+    // Add a user
     fn add_user(ref self: UserDatabase<T>, name: felt252, balance: T) {
         self.balances.insert(name, balance);
         self.users_amount += 1;
     }
+
+    // Get the user
     fn get_user(ref self: UserDatabase<T>, name: felt252) -> T {
         self.balances.get(name)
     }
 }
 ```
 
-We have now our database fully functional, except for one thing: the compiler doesn't know how drop `UserDatabase<T>` out of scope. It cannot simply drop it beacuse there is a `Felt252Dict<T>` so implementing the `Drop<T>` for `UserDatabase<T>` won't work, we must implement `Destruct<T>`. Finally  using `#[derive(Destruct)]` on top `UserDatabase<T>` definition won't work either because the use of generecity, you can read more about that in [generic types](/src/ch07-00-generic-types-and-traits.md).
-
-In order to have our struct fully function we then should add:
+Our database implementation almost complete, except for one thing: the compiler doesn't know how drop `UserDatabase<T>` out of scope.
+Since it has a `Felt252Dict<T>` as a member cannot be dropped,  we are forced to implement `Destruct<T>` trait. 
+Using `#[derive(Destruct)]` on top `UserDatabase<T>` definition won't work because the use of [generecity](/src/ch07-00-generic-types-and-traits.md). We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust
 impl UserDatabaseDestruct<
@@ -278,3 +335,4 @@ impl UserDatabaseDestruct<
 }
 ```
 
+After adding the implementation we have now a fully functional `UserDatabase`.
