@@ -224,6 +224,12 @@ Once you do such entry.finalize you are given back access to the normal dictiona
 
 There is no performance gain, but it represents another idiomatic way of modifying a dictionary.
 
+### Dictionaries of Complex Types
+
+One restriction `Felt252Dict<T>` has that we haven't taked about is the trait `Felt252DictValue<T>`. This trait implement the `zero_default` method which is the one that gets called when a value does not exist on the dictionary. This is implemented by all except for complex types such as arrays and structs. This means that making a dictionary of those type can become a complex thing, you would need to implement a series of trait in order to use the dictionary. To compensante for this, the language introduces the `Nullable<T>` type.
+
+`Nullable<T>` represents the absence of value, and it is usually used in Object Oriented Programming Languages when a reference doesn't point at anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The use `Box<T>` is type inspired in Rust's that allows to store recursive data types. An example of 
+
 ### Dictionaries as Struct Members
 
 Defining dictionaries as  struct members is possible in Cairo but to correctly interact with them some work is required. Let us show with an example.
@@ -284,8 +290,3 @@ impl UserDatabaseDestruct<
 }
 ```
 
-### Dictionaries of Complex Types
-
-The Cairo language has a restriction over value types, they must implement the `Felt252DictValue<T>` trait. This trait has a method which is default which will be the value of en entry when it does not exist on the dictionary
-
-When trying to use dictionaries of complex types such as structs or `Array<T>` 
