@@ -77,10 +77,9 @@
 - [Advanced Features](ch10-00-advanced-features.md)
   - [Operator Overloading](ch10-01-operator-overloading.md)
 
-## Collections
+## Dictionaries
 
-- [Collections](ch15-00-collections.md)
-  - [Dictionaries](ch15-01-dictionaries.md)
+- [Dictionaries](ch15-00-dictionaries.md)
 
 ## Starknet smart contracts
 
