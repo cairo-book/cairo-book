@@ -1,5 +1,5 @@
 #[contract]
-mod Contract {
+mod contract {
     use array::ArrayTrait;
     #[external]
     fn transfer_token(

@@ -1,5 +1,5 @@
 #[contract]
-mod Contract {
+mod contract {
     #[storage]
     struct Storage {
         balance: u256

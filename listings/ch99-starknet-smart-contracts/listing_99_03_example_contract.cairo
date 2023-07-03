@@ -1,6 +1,6 @@
 //ANCHOR: all
 #[contract]
-mod Example {
+mod example {
     use starknet::get_caller_address;
     use starknet::ContractAddress;
 
