@@ -140,7 +140,7 @@ After squashing the entry list would be reduced to:
 | :-----: | -------- | ------- |
 |  Alex   | 100      | 90      |
 |  Maria  | 150      | 190     |
-| Charles | 70     j
+| Charles | 70       | 70      |
 
 In case of a change on any of the values of the first table, squashing would have failed during runtime.
 
@@ -224,32 +224,68 @@ Once you do such entry.finalize you are given back access to the normal dictiona
 
 There is no performance gain, but it represents another idiomatic way of modifying a dictionary.
 
-### Dictionaries as struct members
+### Dictionaries as Struct Members
 
-Dictionaries can be stored inside structs, the important thing to notice here is that if you use them naively, then you'll get an error about no implementing the drop trait. Dictionaries cannot implement the drop trait as easy because, the need to be squash.
+Defining dictionaries as  struct members is possible in Cairo but to correctly interact with them some work is required. Let us show with an example.
+
 
 ```rust
-struct S {
-    dict: Felt252Dict<u8>,
+struct UserDatabase<T> {
+    users_amount: u64,
+    balances: Felt252Dict<T>,
 }
 
-impl DestructS of Destruct::<S> {
-    fn destruct(self: S) nopanic {
-        self.dict.squash();
-    }
-}
-
-fn using_s() {
-    let s = S{dict: Felt252DictTrait::new()};
+trait UserDatabaseTrait<T> {
+    fn new() -> UserDatabase<T>;
+    fn add_user(ref self: UserDatabase<T>, name: felt252, balance: T);
+    fn get_user(ref self: UserDatabase<T>, name: felt252) -> T;
 }
 ```
 
-### Dictionaries of structs
+First we define `UserDatabase`, a new type which will represent a database of users. It will have two members: the amount of users currently inserted, and a mapping of each user to its balance.
+Next, we defined `UserDatabaseTrait`, the trait which will represent all the core functionality of our defined type.
 
-## Dictionaries of Dictionaries??
+The only remaining thing is to actually implement our core functionality, but since we are working with [generic types](/src/ch07-00-generic-types-and-traits.md) we need to correctly stablish the requirements of `T` so it can be a valid `Felt252Dict<T>` value:
 
-Imagine you want a dictionary of dictionaries, how do you guarantee that all dictionaries are squashed, you need to create an implementation to dropping a dictionary of dictionaries.
+1. `T` should implement the `Copy<T>` trait because reading a value from a `Felt252Dict<T>` doesn't return the item in itself, but a copy of it.
+2. `Felt252DictValue<T>` is an internal trait which all valid values data types must implement, we need to add this as a restriction as well.,
+3. Finally `Felt252DictTrait<T>` require all value types to be destructable as well. We need to add this restriction as well.
 
-You need to implement a trait Destruct for a type of dictionaries. It would go for all the keys of the dictionary on a squashing rampage. Returning a squashed dict of squashed dicts.
+The implemenation, with all restriction in place, would be as follow:
+```rust
+impl UserDatabaseImpl<
+    T, impl TCopy: Copy<T>, impl TDefault: Felt252DictValue<T>, impl TDestruct: Destruct<T>
+> of UserDatabaseTrait<T> {
+    fn new() -> UserDatabase<T> {
+        UserDatabase { users_amount: 0, balances: Felt252DictTrait::<T>::new() }
+    }
 
-If you see the implementation of Dictionary they have a generic type `T` and only requires for it to be droppable. We need to do a new implementation which requires there elements to be destructible. But right now there is no way to access the list of elements and squash them all?
+    fn add_user(ref self: UserDatabase<T>, name: felt252, balance: T) {
+        self.balances.insert(name, balance);
+        self.users_amount += 1;
+    }
+    fn get_user(ref self: UserDatabase<T>, name: felt252) -> T {
+        self.balances.get(name)
+    }
+}
+```
+
+We have now our database fully functional, except for one thing: the compiler doesn't know how drop `UserDatabase<T>` out of scope. It cannot simply drop it beacuse there is a `Felt252Dict<T>` so implementing the `Drop<T>` for `UserDatabase<T>` won't work, we must implement `Destruct<T>`. Finally  using `#[derive(Destruct)]` on top `UserDatabase<T>` definition won't work either because the use of generecity, you can read more about that in [generic types](/src/ch07-00-generic-types-and-traits.md).
+
+In order to have our struct fully function we then should add:
+
+```rust
+impl UserDatabaseDestruct<
+    T, impl TDrop: Drop<T>, impl TDefault: Felt252DictValue<T>
+> of Destruct<UserDatabase<T>> {
+    fn destruct(self: UserDatabase<T>) nopanic {
+        self.balances.squash();
+    }
+}
+```
+
+### Dictionaries of Complex Types
+
+The Cairo language has a restriction over value types, they must implement the `Felt252DictValue<T>` trait. This trait has a method which is default which will be the value of en entry when it does not exist on the dictionary
+
+When trying to use dictionaries of complex types such as structs or `Array<T>` 
