@@ -1,3 +1,4 @@
+//TAG: ignore_fmt
 #[derive(Drop)]
 struct MyStruct{}
 

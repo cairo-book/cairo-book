@@ -1,4 +1,4 @@
-//does_not_compile
+//TAG: does_not_compile
 use starknet::ContractAddress;
 
 trait IERC20DispatcherTrait<T> {

@@ -16,3 +16,4 @@ impl RectangleImpl of RectangleTrait {
 }
 // ANCHOR_END: here
 
+

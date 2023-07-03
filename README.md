@@ -2,7 +2,7 @@
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -34,6 +34,7 @@ This repository contains the source of "The Cairo Programming Language" book, a 
      `sudo apt install gettext`.
 
 3. Clone this repository.
+
 4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
    ```
    cargo install --path mdbook-cairo
@@ -69,47 +70,95 @@ To work with translations, those are the steps to update the translated content:
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
 
 #### Initiate a new translation for your language
+
 If you wish to initiate a new translation for your language without running a local server, consider the following tips:
+
 - Execute the command `./translations.sh new xx` (replace `xx` with your language code). This method can generate the `xx.po` file of your language for you.
 - To update your `xx.po` file, execute the command `./translations.sh xx` (replace `xx` with your language code), as mentioned in the previous chapter.
 - If the `xx.po` file already exists (which means you are not initiating a new translation), you should not run this command.
 
 ### Work locally (Cairo programs verification)
 
-The current book has a mdbook backend to extract Cairo programs from the markdown sources. Currently, for each program it test two things: if it compiles and if it adheres to the `cairo-format` coding style. You can run this locally and test if a Cairo program you have written in the book passes these tests.
+The `cairo-verify` tool is designed to wrap all cairo and starknet plugins for quickly verifying cairo programs.
 
-The mdbook-cairo backend is working as following:
+#### Setup
 
-1. It takes every code blocks in the markdown source and parse all of them.
-2. Code blocks with a main function `fn main()` are extracted into Cairo programs.
-3. The extracted programs are named based on the chapter they belong to, and a consecutive
-   number of the `fn main()` found in the chapter.
-4. If you have a code block with a `fn main()` function that you know does not compile,
-   you can indicate it by adding the `does_not_compile` attribute to the code block, like this:
+Firstly, you need to have the following binaries in your path:
 
-   ````
-   ```rust,does_not_compile
-   fn main() {
-   }
-   ```
-   ````
+- `cairo-compile`
+- `cairo-run`
+- `cairo-test`
+- `cairo-format`
+- `starknet-compile`
 
-   This main function will still count in the consecutive number of `fn main()` in the chapter file,
-   but will not be extracted into a Cairo program.
+They should be available after installing cairo, see [here](https://cairo-book.github.io/ch01-01-installation.html) for more details.
 
-5. Alternatively, if you want to disable the format check using `cairo-format`,
-   you can add the `ignore_format` attribute to the code block, like this:
+To run the `cairo-verify` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
 
-   ````
-   ```rust,ignore_format
-   fn main() {
-   }
-   ```
-   ````
+```sh
+cargo run --bin cairo-verify
+```
 
-To run the CI locally, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
+Alternatively, you can also install the tool with:
 
-`bash mdbook-cairo/scripts/cairo_local_verify.sh`
+```sh
+cargo install --path cairo-verify
+```
+
+#### Usage
+
+The tool scans for all `*.cairo` files in the specified directory and performs the following actions:
+
+For a Starknet contract:
+
+- `starknet-compile`
+- If it has tests: `cairo-test --starknet`
+
+Cairo program:
+
+- If it has a `main` function: `cairo-run`
+- Else, `cairo-compile`
+- If it has tests: `cairo-test`
+- `cairo-fmt`
+
+To specify which tests to run, you can add a comment at the top of your file with the following format:
+
+```rust
+// TAG: <tag1>
+// TAGS: <tag1>, <tag2>
+```
+
+Here is a list of available tags:
+
+- `does_not_compile`: don't run `cairo-compile`/`starknet-compile`
+- `does_not_run`: don't run `cairo-run`
+- `ignore_fmt`: don't run `cairo-fmt`
+- `tests_fail`: don't run `cairo-test`/`cairo-test --starknet`
+
+You can skip and ignore a specific test by adding the corresponding flag:
+
+```sh
+$ cairo-verify --help
+
+Usage: cairo-verify [OPTIONS]
+
+Options:
+  -p, --path <PATH>    The path to explore for *.cairo files [default: ./listings]
+  -v, --verbose        Print more information
+  -q, --quiet          Only print final results
+  -f, --formats-skip   Skip cairo-format checks
+  -s, --starknet-skip  Skip starknet-compile checks
+  -c, --compile-skip   Skip cairo-compile checks
+  -r, --run-skip       Skip cairo-run checks
+  -t, --test-skip      Skip cairo-test checks
+      --file <FILE>    Specify file to check
+  -h, --help           Print help
+  -V, --version        Print version
+```
+
+In CI, it's preferable to reduce output, so run `cairo-verify` with the `--quiet` flag.
+
+The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines in code blocks.
 
 ## Contributors
 
@@ -133,6 +182,11 @@ To run the CI locally, ensure that you are at the root of the repository (same d
       <td align="center" valign="top" width="14.28%"><a href="http://julio4.com"><img src="https://avatars.githubusercontent.com/u/30329843?v=4?s=100" width="100px;" alt="julio4"/><br /><sub><b>julio4</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/commits?author=julio4" title="Code">💻</a> <a href="#tool-julio4" title="Tools">🔧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/hgedia"><img src="https://avatars.githubusercontent.com/u/32969555?v=4?s=100" width="100px;" alt="Haresh Gedia"/><br /><sub><b>Haresh Gedia</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/commits?author=hgedia" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://0xdarlington.disha.page"><img src="https://avatars.githubusercontent.com/u/75126961?v=4?s=100" width="100px;" alt="Darlington Nnam"/><br /><sub><b>Darlington Nnam</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/commits?author=Darlington02" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tiagofneto"><img src="https://avatars.githubusercontent.com/u/46165861?v=4?s=100" width="100px;" alt="Tiago Neto"/><br /><sub><b>Tiago Neto</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/pulls?q=is%3Apr+reviewed-by%3Atiagofneto" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/omahs"><img src="https://avatars.githubusercontent.com/u/73983677?v=4?s=100" width="100px;" alt="omahs"/><br /><sub><b>omahs</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/commits?author=omahs" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://shramee.me"><img src="https://avatars.githubusercontent.com/u/11048263?v=4?s=100" width="100px;" alt="Shramee Srivastav"/><br /><sub><b>Shramee Srivastav</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book.github.io/commits?author=shramee" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

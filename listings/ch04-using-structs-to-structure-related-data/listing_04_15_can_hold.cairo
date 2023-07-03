@@ -1,4 +1,4 @@
-// does_not_compile
+//TAG: does_not_compile
 // ANCHOR: all
 // ANCHOR: no_method
 use debug::PrintTrait;

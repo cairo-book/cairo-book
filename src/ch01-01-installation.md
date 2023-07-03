@@ -185,16 +185,17 @@ export PATH="$CAIRO_ROOT/target/release:$PATH"
 
 #### VS Code Extension
 
-- Disable previous Cairo 0.x extension
-- Install the Cairo 1 extension for proper syntax highlighting and code navigation.
-  Just follow the steps indicated [here](https://github.com/starkware-libs/cairo/blob/main/vscode-cairo/README.md).
+- If you have the previous Cairo 0 extension installed, you can disable/uninstall it.
+- Install the Cairo 1 extension for proper syntax highlighting and code navigation. You can find the link to the extension [here](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1&ssr=false), or just search for "Cairo 1.0" in the VS Code marketplace.
+- The extension will work out of the box once you will have [Scarb](./ch01-03-hello-scarb.md) installed.
 
-#### Cairo Language Server
+#### Cairo Language Server without Scarb
 
-From [Step 1](#step-1-install-cairo-10-guide-by-abdel), the `cairo-language-server` binary should be built and executing this command will copy its path into your clipboard.
+If you don't want to depend on Scarb, you can still use the Cairo Language Server with the compiler binary.
+From [Step 1](#installing-cairo-with-a-script-installer-by-fran), the `cairo-language-server` binary should be built and executing this command will copy its path into your clipboard.
 
 ```bash
 which cairo-language-server | pbcopy
 ```
 
-Update the `languageServerPath` of the Cairo 1.0 extension by pasting the path.
+Update the `cairo1.languageServerPath` of the Cairo 1.0 extension by pasting the path.

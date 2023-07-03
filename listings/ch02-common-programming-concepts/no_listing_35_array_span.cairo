@@ -1,6 +1,6 @@
 use array::ArrayTrait;
 
 fn main() {
-    let mut array = ArrayTrait::new();
-    array.span()
+    let mut array: Array<u8> = ArrayTrait::new();
+    array.span();
 }

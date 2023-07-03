@@ -4,3 +4,4 @@ output
 
 # Editors tmp files.
 *~
+.idea/
