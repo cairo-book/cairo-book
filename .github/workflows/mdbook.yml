@@ -52,7 +52,6 @@ jobs:
               echo "::group::Building $po_lang translation"
               MDBOOK_BOOK__LANGUAGE=$po_lang \
               mdbook build -d book/$po_lang
-              mv book/$po_lang/html book/html/$po_lang
               echo "::endgroup::"
           done
 
@@ -62,7 +61,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./book/html
+          path: ./book
 
       - name: Deploy to GitHub Pages
         id: deployment

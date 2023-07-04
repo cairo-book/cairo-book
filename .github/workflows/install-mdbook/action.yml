@@ -7,7 +7,7 @@ runs:
   steps:
     # The --locked flag is important for reproducible builds.
     - name: Install mdbook
-      run: cargo install mdbook --locked --version 0.4.28
+      run: cargo install mdbook --locked --version 0.4.31
       shell: bash
 
     - name: Install mdbook-i18n-helpers
