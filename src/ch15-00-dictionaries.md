@@ -10,9 +10,8 @@ It is normal in other languages when creating a new dictionary to define the dat
 
 The core functionality of a `Felt252Dict<T>` is implemented in the trait `Felt252DictTrait` which includes all basic operations. Among them we can find:
 
-1. `new() -> Felt252Dict<T>`, which creates a new instance of a dictionary,
-2. `insert(felt252, T) -> ()` to write values to a dictionary instance and
-3. `get(felt252) -> T` to read values from it.
+1. `insert(felt252, T) -> ()` to write values to a dictionary instance and
+2. `get(felt252) -> T` to read values from it.
 
 These functions allow us to manipulate dictionaries like in any other language. In the following example, we create a dictionary to represent a mapping between individuals and their balance:
 
@@ -20,7 +19,7 @@ These functions allow us to manipulate dictionaries like in any other language. 
 {{#include ../listings/ch15-dictionaries/listing_15_00_intro.cairo}}
 ```
 
-The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `new` method and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
+The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
 
 Until this point in the book, we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
 

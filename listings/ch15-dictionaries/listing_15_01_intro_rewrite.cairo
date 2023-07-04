@@ -1,7 +1,7 @@
 use dict::Felt252DictTrait;
 
 fn main() {
-    let mut balances: Felt252Dict<u64> = Felt252DictTrait::new();
+    let mut balances: Felt252Dict<u64> = Default::default();
 
     // Insert Alex with 100 balance
     balances.insert('Alex', 100);

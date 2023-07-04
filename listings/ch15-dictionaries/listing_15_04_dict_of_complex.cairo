@@ -10,7 +10,7 @@ use nullable::{NullableTrait, nullable_from_box, match_nullable, FromNullableRes
 // ANCHOR: header
 fn main() {
     // Create the dictionary
-    let mut d = Felt252DictTrait::<Nullable<Span<felt252>>>::new();
+    let mut d: Felt252Dict<Nullable<Span<felt252>>> = Default::default();
 
     // Crate the array to insert
     let mut a = ArrayTrait::new();
@@ -20,9 +20,9 @@ fn main() {
 
     // Insert it as a `Span`
     d.insert(0, nullable_from_box(BoxTrait::new(a.span())));
-// ANCHOR_END: header
+    // ANCHOR_END: header
 
-// ANCHOR: footer
+    // ANCHOR: footer
     // Get value back
     let val = d.get(0);
 
@@ -40,3 +40,5 @@ fn main() {
 // ANCHOR_END: footer
 
 // ANCHOR_END: all 
+
+
