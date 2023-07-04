@@ -43,7 +43,7 @@ fn custom_insert<
 
 // ANCHOR: main
 fn main() {
-    let mut dict: Felt252Dict<u64> = Felt252DictTrait::new();
+    let mut dict: Felt252Dict<u64> = Default::default();
 
     custom_insert(ref dict, '0', 100);
 
@@ -52,3 +52,5 @@ fn main() {
     assert(val == 100, 'Expecting 100');
 }
 // ANCHOR_END: main
+
+

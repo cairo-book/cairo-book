@@ -27,8 +27,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 
   ```bash
   $ scarb --version
-  scarb 0.5.0-alpha.2 (7529c2ae0 2023-06-22)
-  cairo: 2.0.0-rc4 (https://crates.io/crates/cairo-lang-compiler/2.0.0-rc4)
+    scarb 0.5.0 (1b109f1f6 2023-07-03)
+    cairo: 2.0.0 (https://crates.io/crates/cairo-lang-compiler/2.0.0)
   ```
 
 ### Creating a Project with Scarb

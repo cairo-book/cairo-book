@@ -27,7 +27,7 @@ jobs:
           echo "$HOME/.cairo/target/release" >> $GITHUB_PATH
         shell: bash
         env:
-          CAIRO_GIT_TAG: v1.1.0
+          CAIRO_GIT_TAG: v2.0.0
 
       - name: Run cairo-verify and generate summary
         run: cairo-verify -q --cairo-root $HOME/.cairo/target/release >> $GITHUB_STEP_SUMMARY

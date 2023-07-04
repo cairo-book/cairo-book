@@ -21,7 +21,7 @@ use dict::Felt252DictTrait;
 impl UserDatabaseImpl<T, impl TDefault: Felt252DictValue<T>> of UserDatabaseTrait<T> {
     // Creates a database
     fn new() -> UserDatabase<T> {
-        UserDatabase { users_amount: 0, balances: Felt252DictTrait::<T>::new() }
+        UserDatabase { users_amount: 0, balances: Default::default() }
     }
 
     // Get the user
@@ -64,3 +64,5 @@ fn main() {
     assert(maria_latest_balance == 0, 'Expected 0');
 }
 // ANCHOR_END: main
+
+

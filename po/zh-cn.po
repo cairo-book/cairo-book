@@ -242,8 +242,8 @@ msgstr ""
 "中文版由[StarknetAstro](https://starknet-astro.super.site/)翻译。"
 
 #: src/title-page.md:5
-msgid "This version of the text assumes you’re using Cairo v1.1.0. See the “Installation” section of Chapter 1 to install or update Cairo."
-msgstr "这个版本的教程假设你使用的是Cairo v1.1.0。请参阅第1章的 \"安装 \"部分来安装或更新Cairo。"
+msgid "This version of the text assumes you’re using Cairo v2.0.0. See the “Installation” section of Chapter 1 to install or update Cairo."
+msgstr "这个版本的教程假设你使用的是Cairo v2.0.0。请参阅第1章的 \"安装 \"部分来安装或更新Cairo。"
 
 #: src/ch00-01-foreword.md:1
 msgid "# Foreword"
@@ -425,8 +425,8 @@ msgid "### Install"
 msgstr "### 安装"
 
 #: src/ch01-01-installation.md:20
-msgid "If you wish to install a specific release of Cairo rather than the latest head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export CAIRO_GIT_TAG=v1.1.0`)."
-msgstr "如果你想安装一个特定的Cairo版本，而不是最新版本，可以设置`CAIRO_GIT_TAG`环境变量（比如执行 `export CAIRO_GIT_TAG=v1.1.0` 来设置）。"
+msgid "If you wish to install a specific release of Cairo rather than the latest head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export CAIRO_GIT_TAG=v2.0.0`)."
+msgstr "如果你想安装一个特定的Cairo版本，而不是最新版本，可以设置`CAIRO_GIT_TAG`环境变量（比如执行 `export CAIRO_GIT_TAG=v2.0.0` 来设置）。"
 
 #: src/ch01-01-installation.md:22
 msgid ""
@@ -698,7 +698,7 @@ msgid ""
 "# View tags (you can also do this in the cairo compiler repository)\n"
 "git describe --tags `git rev-list --tags`\n"
 "# Checkout the version you want\n"
-"git checkout tags/v1.1.0\n"
+"git checkout tags/v2.0.0\n"
 "\n"
 "# Generate release binaries\n"
 "cargo build --all --release\n"
@@ -720,7 +720,7 @@ msgstr ""
 "# View tags (you can also do this in the cairo compiler repository)\n"
 "git describe --tags `git rev-list --tags`\n"
 "# Checkout the version you want\n"
-"git checkout tags/v1.1.0\n"
+"git checkout tags/v2.0.0\n"
 "\n"
 "# Generate release binaries\n"
 "cargo build --all --release\n"
