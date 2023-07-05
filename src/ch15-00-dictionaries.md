@@ -66,8 +66,8 @@ These instructions would then produce the following list of entries:
 
 |  key  | previous | new |
 | :---: | -------- | --- |
-| Alex  | 100      | 100 |
-| Maria | 50       | 50  |
+| Alex  | 0        | 100 |
+| Maria | 0        | 50  |
 | Alex  | 100      | 200 |
 | Maria | 50       | 50  |
 
@@ -88,9 +88,9 @@ For example, given the following entry list:
 
 |   key   | previous | new |
 | :-----: | -------- | --- |
-|  Alex   | 100      | 100 |
-|  Maria  | 150      | 150 |
-| Charles | 70       | 70  |
+|  Alex   | 0        | 100 |
+|  Maria  | 0        | 150 |
+| Charles | 0        | 70  |
 |  Maria  | 100      | 250 |
 |  Alex   | 150      | 40  |
 |  Alex   | 40       | 300 |
@@ -101,9 +101,9 @@ After squashing, the entry list would be reduced to:
 
 |   key   | previous | new |
 | :-----: | -------- | --- |
-|  Alex   | 100      | 90  |
-|  Maria  | 150      | 190 |
-| Charles | 70       | 70  |
+|  Alex   | 0        | 90  |
+|  Maria  | 0        | 190 |
+| Charles | 0        | 70  |
 
 In case of a change on any of the values of the first table, squashing would have failed during runtime.
 
