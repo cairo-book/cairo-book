@@ -21,7 +21,7 @@ These functions allow us to manipulate dictionaries like in any other language. 
 
 The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
 
-Until this point in the book, we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
+Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
 
 Building upon our previous example, let us show a code example where the balance of the same user changes:
 
@@ -29,13 +29,13 @@ Building upon our previous example, let us show a code example where the balance
 {{#include ../listings/ch15-dictionaries/listing_15_01_intro_rewrite.cairo}}
 ```
 
-Notice how in this example we added the _Alex_ user twice, each time using a different balance and each time that we checked for its balance it had the last value inserted! `Felt252Dict<T>` effectively allows us to "rewrite" the stored value for any given key.
+Notice how in this example we added the _Alex_ individual twice, each time using a different balance and each time that we checked for its balance it had the last value inserted! `Felt252Dict<T>` effectively allows us to "rewrite" the stored value for any given key.
 
-Before heading on and explaining how dictionaries are implemented it is worth mentioning that once you instantiate a `Fetl252Dict<T>`, behind the scenes all keys have their associated values initialized as zero. This means that if for example, you tried to get the balance of an inexistent user you will get 0 instead of an error or an undefined value. This also means there is no way to delete data from a dictionary. Something to take into account when incorporating this structure into your code.
+Before heading on and explaining how dictionaries are implemented it is worth mentioning that once you instantiate a `Felt252Dict<T>`, behind the scenes all keys have their associated values initialized as zero. This means that if for example, you tried to get the balance of an inexistent user you will get 0 instead of an error or an undefined value. This also means there is no way to delete data from a dictionary. Something to take into account when incorporating this structure into your code.
 
 Until this point, we have seen all the basic features of `Felt252Dict<T>` and how it mimics the same behavior as the corresponding data structures in any other language, that is, externally of course. Cairo is at its core a non-deterministic Turing-complete programming language, very different from any other popular language in existence, which as a consequence means that dictionaries are implemented very differently as well!
 
-In the following sections, we are going to give some insights about `Felt252Dict<T>` inner mechanisms and the compromises that were taken to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as using the `entry` method to interact with it.
+In the following sections, we are going to give some insights about `Felt252Dict<T>` inner mechanisms and the compromises that were taken to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as use the `entry` method as another way to interact with them.
 
 ## Dictionaries Underneath
 
@@ -54,7 +54,7 @@ If we try implementing `Felt252Dict<T>` using high-level structures we would int
 For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be registered:
 
 - A `get` would register an entry where there is no change in state, and previous and new values are stored with the same value.
-- An `insert` would register a new `Entry<T>` where the `new_value` would be the element being inserted, and the `previous_value` the last element inserted before this. In case it is the first entry for a certain key, then the previous and current values will be the same.
+- An `insert` would register a new `Entry<T>` where the `new_value` would be the element being inserted, and the `previous_value` the last element inserted before this. In case it is the first entry for a certain key, then the previous value will be zero.
 
 The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per `Felt252Dict<T>` interaction. Let's show an example of this using the `balances` dictionary from the previous section and inserting the users 'Alex' and 'Maria':
 
@@ -113,13 +113,13 @@ If you run the examples from [Basic Use of Dictionaries](#basic-use-of-dictionar
 
 The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct](/appendix-03-derivable-traits.md#drop-and-destruct).
 
-In the following section, we will have a hands-on example using the `Destruct<T>` trait.
+Later in [Dictionaries as Struct Members](#dictionaries-as-struct-members), we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
 
 ## More Dictionaries
 
 Up to this point, we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in a certain way. If you haven't understood all of it, don't worry because in this section we will have some more examples using dictionaries.
 
-We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` interacts with other types such as structs and enums.
+We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` [interacts](#dictionaries-of-complex-types) with other complex types such as `Array<T>` and how to [implement](#dictionaries-as-struct-members) a struct with a dictionary as a member.
 
 ### Entry and Finalize
 
@@ -131,7 +131,7 @@ The `entry` method comes as part of `Felt252DictTrait<T>` with the purpose of cr
 fn entry(self: Felt252Dict<T>, key: felt252) -> (Felt252DictEntry<T>, T) nopanic
 ```
 
-The first input parameter takes ownership of the dictionary while the second one is used to create the appropriate entry. It returns a tuple containing a `Felt252DictEntr<T>`, which is the type used by Cairo to represent dictionary entries, and a `T` representing the value held previously.
+The first input parameter takes ownership of the dictionary while the second one is used to create the appropriate entry. It returns a tuple containing a `Felt252DictEntry<T>`, which is the type used by Cairo to represent dictionary entries, and a `T` representing the value held previously.
 
 The next thing to do is to update the entry with the new value. For this, we use the `finalize` method which inserts the entry and returns ownership of the dictionary:
 
@@ -139,9 +139,9 @@ The next thing to do is to update the entry with the new value. For this, we use
 fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T> {
 ```
 
-The method receives the entry and the new value as a parameter and returns the updated dictionary.
+This method receives the entry and the new value as a parameter and returns the updated dictionary.
 
-Let us see an example using `entry` and `finalize`. Imagine we would like to implement the `get` method from a dictionary. We then should do the following:
+Let us see an example using `entry` and `finalize`. Imagine we would like to implement our own version of the `get` method from a dictionary. We should then do the following:
 
 1. Create the new entry to add using the `entry` method
 2. Insert back the entry where the `new_value` equals the `previous_value`.
@@ -155,7 +155,7 @@ Implementing our custom get would look like this:
 {{#include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:custom_get}}
 ```
 
-Implementing the `insert` method would follow a similar workflow, except for the part where we insert a new value when finalizing. If were to implement it, it would look like the following:
+Implementing the `insert` method would follow a similar workflow, except for inserting a new value when finalizing. If we were to implement it, it would look like the following:
 
 ```rust
 {{#include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:imports}}
@@ -191,7 +191,7 @@ Let's show using an example. We will try to store a `Span<felt252>` inside a dic
 
 In this code snippet, the first thing we did was to create a new dictionary `d`. We want it to hold a `Nullable<Span>`. After that, we created an array and filled it with values.
 
-The last step is inserting the array as a span inside the dictionary. Notice that we don't directly do that, but instead, we make some steps in between:
+The last step is inserting the array as a span inside the dictionary. Notice that we didn't do that directly, but instead, we took some steps in between:
 
 1. We wrapped the array inside a `Box` using the `new` method from `BoxTrait`.
 2. We wrapped the `Box` inside a nullable using the `nullable_from_box` function.
@@ -219,7 +219,7 @@ The complete script would look like this:
 
 ### Dictionaries as Struct Members
 
-Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let us show an example where we implement a `UserDatabase` that allows us to add users and query them.
+Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom _user database_ that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:
 
 ```rust
 {{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:struct}}
@@ -227,10 +227,16 @@ Defining dictionaries as struct members is possible in Cairo but correctly inter
 {{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:trait}}
 ```
 
-First, we define `UserDatabase`, our defined type which will represent a database of users. It will have two members: the amount of users currently inserted, and a mapping of each user to its balance.
-Next, we defined `UserDatabaseTrait`, the trait which will represent all the core functionality of `UserDatabase`.
+Our new type `UserDatabase<T>` represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are: 
+* `users_amount`, the number of users currently inserted and
+* `balances`, a mapping of each user to its balance.
 
-We now have to implement each of the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch07-00-generic-types-and-traits.md) we need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:
+The database core functionality is defined by `UserDatabaseTrait`. The following methods are defined:
+* `new` for easily creating new `UserDatabase` types.
+* `add_user` to insert users in the database.
+* `get_user` to find users in the database.
+
+The only remaining step is to implement each of the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch07-00-generic-types-and-traits.md) we also need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:
 
 1. `T` should implement the `Copy<T>` since it's required for getting values from a `Felt252Dict<T>`.
 2. All value types of a dictionary implement the `Felt252DictValue<T>`, our generic type should do as well.
@@ -252,7 +258,7 @@ Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't wor
 {{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:destruct}}
 ```
 
-After adding the implementation we have now a fully functional `UserDatabase`:
+Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully functional database. We can now try it out:
 
 ```rust
 {{#include ../listings/ch15-dictionaries/listing_15_05_dict_struct_member.cairo:main}}

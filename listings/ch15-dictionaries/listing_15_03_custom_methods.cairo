@@ -15,7 +15,7 @@ fn custom_get<T, impl TDefault: Felt252DictValue<T>, impl TDrop: Drop<T>, impl T
     // Store the value to return
     let return_value = prev_value;
 
-    // Store back the entry in the dictionary, getting ownership back of the dictionary
+    // Update the entry with `prev_value` and get back ownership of the dictionary
     dict = entry.finalize(prev_value);
 
     // Return the read value
@@ -33,10 +33,13 @@ fn custom_insert<
 >(
     ref dict: Felt252Dict<T>, key: felt252, value: T
 ) {
-    // We first get the last entry associated with `key`
+    // Get the last entry associated with `key`
+    // Notice that if `key` does not exists, _prev_value will
+    // be the default value of T.
     let (entry, _prev_value) = dict.entry(key);
 
-    // We insert `entry` back in the dictionary with the new value
+    // Insert `entry` back in the dictionary with the updated value,
+    // and recieve ownership of the dictionary
     dict = entry.finalize(value);
 }
 // ANCHOR_END: custom_insert
