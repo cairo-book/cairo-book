@@ -1205,7 +1205,7 @@ msgstr "### Instalación"
 
 #: src/ch01-03-hello-scarb.md:19
 msgid ""
-"To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/docs/install).\n"
+"To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download).\n"
 "You can simply run the following command in your terminal, then follow the onscreen instructions. This will install the latest stable release."
 msgstr ""
 "Para instalar Scarb, por favor consulta las [instrucciones de instalación](https://docs.swmansion.com/scarb/docs/install).\n"
