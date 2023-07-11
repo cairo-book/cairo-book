@@ -1,6 +1,6 @@
 ## Storage Variables
 
-As stated previously, storage variables allow you to store data that will be stored on the blockchain in the contract's storage. These data are persistent and can be accessed and modified anytime once the contract is deployed.
+As stated previously, storage variables allow you to store data that will be stored in the contract's storage that is itself stored on the blockchain. These data are persistent and can be accessed and modified anytime once the contract is deployed.
 
 Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
@@ -17,10 +17,10 @@ except that it **must** be annotated with `#[storage]` allowing you to store map
 
 Mappings are a key-value data structure that you can use to store data within a smart contract. They are essentially hash tables that allow you to associate a unique key with a corresponding value. Mappings are also useful to store sets of data, as it's impossible to store arrays in storage.
 
-A mapping is a variable of type `LegacyMap`, in which the key and value types are specified within angular brackets <>.
+A mapping is a variable of type `LegacyMap`, in which the key and value types are specified within angular brackets `<>`.
 It is important to note that the `LegacyMap` type can only be used inside the `Storage` struct, and can't be used to define mappings in user-defined structs.
 
-You can also create more complex mappings than that found in Listing 99-2 like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
+You can also create more complex mappings than that; you can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/no_listing_01_storage_mapping.cairo:here}}
