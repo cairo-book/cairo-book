@@ -86,7 +86,12 @@
 - [Starknet Smart Contracts](./ch99-00-starknet-smart-contracts.md)
 
   - [Introduction to smart-contracts](./ch99-01-01-introduction-to-smart-contracts.md)
-  - [Writing Starknet Contracts](./ch99-01-02-writing-starknet-contracts.md)
+  - [A simple contract](./ch99-01-02-a-simple-contract.md)
+  - [A deeper dive into contracts](./ch99-01-03-00-a-deeper-dive-into-contracts.md)
+    - [Storage Variables](./ch99-01-03-01-storage-variables.md)
+    - [Contract Functions](./ch99-01-03-02-contract-functions.md)
+    - [Contract Events](./ch99-01-03-03-contract-events.md)
+    - [Reducing boilerplate](./ch99-01-03-04-reducing-boilerplate.md)
   - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
     - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
