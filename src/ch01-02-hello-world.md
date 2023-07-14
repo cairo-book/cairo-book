@@ -65,7 +65,7 @@ _~/cairo_projects/hello_world_ directory. Enter the following
 commands to compile and run the file:
 
 ```console
-$ cairo-run main.cairo
+$ cairo-run --single-file main.cairo
 Hello, world!
 ```
 
