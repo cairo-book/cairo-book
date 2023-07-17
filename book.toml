@@ -8,13 +8,13 @@ title = "The Cairo Programming Language"
 [build]
 extra-watch-dirs = ["po"]
 
-[preprocessor.gettext]
+[preprocessor.cairo]
 after = ["links"]
+
+[preprocessor.gettext]
+after = ["cairo"]
 
 [output.html]
 git-repository-url = "https://github.com/cairo-book/cairo-book.github.io/"
 edit-url-template = "https://github.com/cairo-book/cairo-book.github.io/edit/main/{path}"
 playground.runnable = true
-
-[output.cairo]
-output-dir = "cairo-programs"

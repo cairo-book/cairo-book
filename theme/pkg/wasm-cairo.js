@@ -199,6 +199,38 @@ __exports.runCairoProgram = function(cairo_program, available_gas, print_full_me
     }
 };
 
+/**
+* @param {string} starknet_contract
+* @param {boolean} replace_ids
+* @returns {string}
+*/
+__exports.compileStarknetContract = function(starknet_contract, replace_ids) {
+    let deferred3_0;
+    let deferred3_1;
+    try {
+        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+        const ptr0 = passStringToWasm0(starknet_contract, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        wasm.compileStarknetContract(retptr, ptr0, len0, replace_ids);
+        var r0 = getInt32Memory0()[retptr / 4 + 0];
+        var r1 = getInt32Memory0()[retptr / 4 + 1];
+        var r2 = getInt32Memory0()[retptr / 4 + 2];
+        var r3 = getInt32Memory0()[retptr / 4 + 3];
+        var ptr2 = r0;
+        var len2 = r1;
+        if (r3) {
+            ptr2 = 0; len2 = 0;
+            throw takeObject(r2);
+        }
+        deferred3_0 = ptr2;
+        deferred3_1 = len2;
+        return getStringFromWasm0(ptr2, len2);
+    } finally {
+        wasm.__wbindgen_add_to_stack_pointer(16);
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+    }
+};
+
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
         if (typeof WebAssembly.instantiateStreaming === 'function') {
@@ -233,7 +265,7 @@ async function __wbg_load(module, imports) {
 function __wbg_get_imports() {
     const imports = {};
     imports.wbg = {};
-    imports.wbg.__wbg_log_5e41872ca2982e37 = function(arg0, arg1) {
+    imports.wbg.__wbg_log_65d0b624a75fcb22 = function(arg0, arg1) {
         console.log(getStringFromWasm0(arg0, arg1));
     };
 

@@ -20,6 +20,12 @@ declare namespace wasm_bindgen {
 	* @returns {string}
 	*/
 	export function runCairoProgram(cairo_program: string, available_gas: number | undefined, print_full_memory: boolean, use_dbg_print_hint: boolean): string;
+	/**
+	* @param {string} starknet_contract
+	* @param {boolean} replace_ids
+	* @returns {string}
+	*/
+	export function compileStarknetContract(starknet_contract: string, replace_ids: boolean): string;
 	
 }
 
@@ -30,6 +36,7 @@ declare interface InitOutput {
   readonly greet: (a: number, b: number, c: number) => void;
   readonly compileCairoProgram: (a: number, b: number, c: number, d: number) => void;
   readonly runCairoProgram: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => void;
+  readonly compileStarknetContract: (a: number, b: number, c: number, d: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
