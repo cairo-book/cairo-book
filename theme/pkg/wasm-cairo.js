@@ -97,7 +97,7 @@ let wasm_bindgen;
         let deferred2_1;
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            const ptr0 = passStringToWasm0(s, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const ptr0 = passStringToWasm0(s, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
             const len0 = WASM_VECTOR_LEN;
             wasm.greet(retptr, ptr0, len0);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -107,7 +107,7 @@ let wasm_bindgen;
             return getStringFromWasm0(r0, r1);
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
-            wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
+            wasm.__wbindgen_export_2(deferred2_0, deferred2_1, 1);
         }
     };
 
@@ -140,7 +140,7 @@ __exports.compileCairoProgram = function(cairo_program, replace_ids) {
     let deferred3_1;
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(cairo_program, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const ptr0 = passStringToWasm0(cairo_program, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
         const len0 = WASM_VECTOR_LEN;
         wasm.compileCairoProgram(retptr, ptr0, len0, replace_ids);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -158,7 +158,7 @@ __exports.compileCairoProgram = function(cairo_program, replace_ids) {
         return getStringFromWasm0(ptr2, len2);
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+        wasm.__wbindgen_export_2(deferred3_0, deferred3_1, 1);
     }
 };
 
@@ -177,7 +177,7 @@ __exports.runCairoProgram = function(cairo_program, available_gas, print_full_me
     let deferred3_1;
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(cairo_program, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const ptr0 = passStringToWasm0(cairo_program, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
         const len0 = WASM_VECTOR_LEN;
         wasm.runCairoProgram(retptr, ptr0, len0, !isLikeNone(available_gas), isLikeNone(available_gas) ? 0 : available_gas, print_full_memory, use_dbg_print_hint);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -195,7 +195,7 @@ __exports.runCairoProgram = function(cairo_program, available_gas, print_full_me
         return getStringFromWasm0(ptr2, len2);
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+        wasm.__wbindgen_export_2(deferred3_0, deferred3_1, 1);
     }
 };
 
@@ -209,7 +209,7 @@ __exports.compileStarknetContract = function(starknet_contract, replace_ids) {
     let deferred3_1;
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(starknet_contract, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const ptr0 = passStringToWasm0(starknet_contract, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
         const len0 = WASM_VECTOR_LEN;
         wasm.compileStarknetContract(retptr, ptr0, len0, replace_ids);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -227,7 +227,7 @@ __exports.compileStarknetContract = function(starknet_contract, replace_ids) {
         return getStringFromWasm0(ptr2, len2);
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+        wasm.__wbindgen_export_2(deferred3_0, deferred3_1, 1);
     }
 };
 

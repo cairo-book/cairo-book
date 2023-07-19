@@ -12,7 +12,7 @@ window.runFunc = async (cairo_program) => {
         });
 
         worker.onmessage = function(e) {
-            resolve(e.data);
+            resolve(e.data.substring(e.data.indexOf('\n') + 1));
         };
 
         worker.onerror = function(error) {

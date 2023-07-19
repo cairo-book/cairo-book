@@ -2,7 +2,9 @@
 
   <h1><code>WASM-Cairo</code></h1>
 
-  <strong>A suite of development tools and an environment for Cairo 1.10, all based on WebAssembly.</strong>
+  <strong>A suite of development tools and an environment for Cairo, all based on WebAssembly.</strong>
+  
+  [Github](https://github.com/cryptonerdcn/wasm-cairo)
 
   <sub>Built with 🦀🕸 by <a href="https://twitter.com/cryptonerdcn">cryptonerdcn from Starknet Astro</a></sub>
 </div>
@@ -15,13 +17,13 @@
 With Modules
 
 ```
-wasm-pack build --release --target --out-dir ./pkg
+wasm-pack build --release --target web --out-dir ./pkg/module --out-name wasm-cairo
 ```
 
 No Modules
 
 ```
-wasm-pack build --release --target no-modules --out-dir ./pkg
+wasm-pack build --release --target no-modules --out-dir ./pkg/no_module --out-name wasm-cairo
 ```
 
 You will find `wasm-cairo_bg.wasm` and `wasm-cairo.js` in `pkg` folder.
