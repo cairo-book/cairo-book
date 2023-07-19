@@ -46,6 +46,11 @@ jobs:
         run: |
           mdbook build -d book
 
+      - name: Copy WASM-Cairo pkg
+        run: |
+          cp -r theme/pkg book
+          cp -r theme/js book
+
       - name: Build all translations
         run: |
           for po_lang in $(cat ./LANGUAGES); do
