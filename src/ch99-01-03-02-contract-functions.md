@@ -6,7 +6,7 @@ In this section, we are going to be looking at the different types of functions 
 
 Constructors are a special type of function that only runs once when deploying a contract, and can be used to initialize the state of a contract.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:constructor}}
 ```
 
@@ -20,7 +20,7 @@ Some important rules to note:
 
 As stated previously, public functions are accessible from outside of the contract. They must be defined inside an implementation block annotated with the `#[external(v0)]` attribute. This attribute only affects the visibility (public vs private/internal), but it doesn't inform us on the ability of these functions to modify the state of the contract.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:impl_public}}
 ```
 
@@ -29,7 +29,7 @@ As stated previously, public functions are accessible from outside of the contra
 External functions are functions that can modify the state of a contract. They are public and can be called by any other contract or externally.
 External functions are _public_ functions where the `self: ContractState` is passed as reference with the `ref` keyword, allowing you to modify the state of the contract.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:external}}
 ```
 
@@ -38,7 +38,7 @@ External functions are _public_ functions where the `self: ContractState` is pas
 View functions are read-only functions allowing you to access data from the contract while ensuring that the state of the contract is not modified. They can be called by other contracts or externally.
 View functions are _public_ functions where the `self: ContractState` is passed as snapshot, preventing you from modifying the state of the contract.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:view}}
 ```
 
@@ -48,7 +48,7 @@ View functions are _public_ functions where the `self: ContractState` is passed 
 
 Functions that are not defined in a block annotated with the `#[external(v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:state_internal}}
 ```
 
@@ -56,6 +56,6 @@ Functions that are not defined in a block annotated with the `#[external(v0)]` a
 
 At this point, you might still be wondering if all of this is really necessary if you don't need to access the contract's state in your function (for example, a helper/library function). As a matter of fact, you can also define internal functions outside of implementation blocks. The only reason why we _need_ to define functions inside impl blocks is if we want to access the contract's state.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:stateless_internal}}
 ```

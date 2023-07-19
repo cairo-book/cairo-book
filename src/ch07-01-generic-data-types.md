@@ -13,7 +13,7 @@ When defining a function that uses generics, we place the generics in the functi
 The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifying in the function signature of `largest_list` that `T` must implement the drop trait. The correct function definition of `largest_list` is as follows:
 
 ```rust
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_02_with_tdrop.cairo}}
+{{#rustdoc_include ../listings/ch07-generic-types-and-traits/no_listing_02_with_tdrop.cairo}}
 ```
 
 The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. The `main` function remains unchanged, the compiler is smart enough to deduct which concrete type is being used and if it implements the `Drop` trait.
@@ -32,8 +32,8 @@ The `smallest_element` function uses a generic type `T` that implements the `Par
 
 When indexing on `list`, the value results in a snap of the indexed element, unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy from `@T` to`T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that need to be dropped, requiring for `T` to implement the `Drop` trait as well. We must then add both `Drop` and `Copy` traits implementation for the function to be correct. After updating the`smallest_element` function the resulting code would be:
 
-```rs
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_04_with_tcopy.cairo}}
+```rust
+{{#rustdoc_include ../listings/ch07-generic-types-and-traits/no_listing_04_with_tcopy.cairo}}
 ```
 
 ## Structs
@@ -64,7 +64,7 @@ We add to `Wallet` struct definition a new generic type `U` and then assign this
 
 As we did with structs, we can define enums to hold generic data types in their variants. For example the `Option<T>` enum provided by the Cairo core library:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_08_option.cairo}}
 ```
 
@@ -72,7 +72,7 @@ The `Option<T>` enum is generic over a type `T` and has two variants: `Some`, wh
 
 Enums can use multiple generic types as well, like definition of the `Result<T, E>` enum that the core library provides:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_09_result.cairo}}
 ```
 
@@ -98,13 +98,13 @@ The new method `receive` increments the size of the balance of any instance of a
 
 Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and create a new one with a generic type of each. First, let's rewrite the struct definition:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_12_not_compiling.cairo:1:4}}
 ```
 
 Next we are going to naively define the mixup trait and implementation:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_12_not_compiling.cairo:6:15}}
 
 ```
@@ -117,7 +117,7 @@ We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` method
 
 We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` declaration. Then we do the same for `T2` and `U2`, this time as part of `mixup` signature. We can now try the `mixup` function:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_13_compiling.cairo:main}}
 ```
 

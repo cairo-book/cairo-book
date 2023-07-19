@@ -24,7 +24,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
 
   - Inline, within curly brackets that replace the semicolon following `mod garden;`.
 
-    ```rust
+    ```rust,noplayground
       // crate root file (lib.cairo)
         mod garden {
         // code defining the garden module goes here
@@ -40,7 +40,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
   - Inline, directly following `mod vegetables`, within curly brackets instead
     of the semicolon.
 
-    ```rust
+    ```rust,noplayground
     // src/garden.cairo file
     mod vegetables {
         // code defining the vegetables submodule goes here
@@ -97,14 +97,14 @@ The `mod garden;` line tells the compiler to include the code it finds in _src/g
 
 <span class="filename">Filename: src/garden.cairo</span>
 
-```rust
+```rust,noplayground
 mod vegetables;
 ```
 
 Here, `mod vegetables;` means the code in _src/garden/vegetables.cairo_ is
 included too. That code is:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden.cairo}}
 ```
 
@@ -134,7 +134,7 @@ define some modules and function signatures. Here’s the front of house section
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_01.cairo}}
 ```
 

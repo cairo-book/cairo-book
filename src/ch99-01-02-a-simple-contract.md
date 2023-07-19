@@ -22,13 +22,13 @@ The contract defines and exposes publically the functions `set` and `get` that c
 
 ### The Interface: the contract's blueprint
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01.cairo:interface}}
 ```
 
 The interface of a contract represents the functions this contract exposes to the outside world. Here, the interface exposes two functions: `set` and `get`. By leveraging the [traits & impls](./ch07-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01_bis_wrong_impl.cairo:impl}}
 ```
 
@@ -48,7 +48,7 @@ Before we explore things further down, let's define some terminology.
 
 - A _view_ function is a public function that can be called from outside the contract, but that cannot mutate the state of the contract. `get` is a view function.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01.cairo:impl}}
 ```
 
@@ -66,7 +66,7 @@ As you can notice, all functions that need to access the state of the contract a
 This allows us to explicitly pass the `self: ContractState` parameter to the function, allowing access the storage variables of the contract.
 To access a storage variable of the current contract, you add the `self` prefix to the storage variable name, which allows you to use the `read` and `write` methods to either read or write the value of the storage variable.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01.cairo:write_state}}
 ```
 

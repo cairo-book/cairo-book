@@ -8,7 +8,7 @@ Think of a match expression as being like a coin-sorting machine: coins slide do
 
 Speaking of coins, let’s use them as an example using match! We can write a function that takes an unknown US coin and, in a similar way as the counting machine, determines which coin it is and returns its value in cents, as shown in Listing 5-3.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/listing_05_03.cairo:all}}
 ```
 
@@ -26,7 +26,7 @@ The code associated with each arm is an expression, and the resultant value of t
 
 We don’t typically use curly brackets if the match arm code is short, as it is in our example where each arm just returns a value. If you want to run multiple lines of code in a match arm, you must use curly brackets, with a comma following the arm. For example, the following code prints “Lucky penny!” every time the method is called with a `Coin::Penny(())`, but still returns the last value of the block, `1`:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_04_match_arms.cairo:here}}
 ```
 
@@ -36,7 +36,7 @@ Another useful feature of match arms is that they can bind to the parts of the v
 
 As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our `enum` by changing the `Quarter` variant to include a `UsState` value stored inside it, which we’ve done in Listing 5-4.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/listing_05_04.cairo}}
 ```
 
@@ -46,13 +46,13 @@ Let’s imagine that a friend is trying to collect all 50 state quarters. While 
 
 In the match expression for this code, we add a variable called `state` to the pattern that matches values of the variant `Coin::Quarter`. When a `Coin::Quarter` matches, the `state` variable will bind to the value of that quarter’s state. Then we can use `state` in the code for that arm, like so:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_05_print_enum.cairo:function}}
 ```
 
 To print the value of a variant of an enum in Cairo, we need to add an implementation for the `print` function for the `debug::PrintTrait`:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_05_print_enum.cairo:print_impl}}
 ```
 
@@ -70,11 +70,12 @@ This function is very easy to write, thanks to match, and will look like Listing
 {{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05.cairo}}
 ```
 
-Listing 5-5: A function that uses a match expression on an `Option<u8>`
+<span class="caption">Listing 5-5: A function that uses a match
+expression on an `Option<u8>`</span>
 
 Note that your arms must respect the same order as the enum defined in the `OptionTrait` of the core Cairo lib.
 
-```rust
+```rust,noplayground
 enum Option<T> {
     Some: T,
     None: (),
@@ -83,7 +84,7 @@ enum Option<T> {
 
 Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5)`. We then compare that against each match arm:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05.cairo:6}}
 ```
 
@@ -91,7 +92,7 @@ Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We 
 
 Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None(())`. We enter the match and compare to the first arm:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05.cairo:6}}
 ```
 
@@ -109,7 +110,7 @@ Combining `match` and enums is useful in many situations. You’ll see this patt
 
 There’s one other aspect of match we need to discuss: the arms’ patterns must cover all possibilities. Consider this version of our `plus_one` function, which has a bug and won’t compile:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_07_missing_match_arm.cairo:here}}
 ```
 
@@ -131,7 +132,7 @@ Using enums, we can also take special actions for a few particular values, but f
 
 Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you lose. Here's a match that implements that logic, with the number hardcoded rather than a random value.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_06_match_zero.cairo:here}}
 ```
 

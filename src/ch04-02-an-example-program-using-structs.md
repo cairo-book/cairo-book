@@ -25,7 +25,7 @@ This code succeeds in figuring out the area of the rectangle by calling the `are
 
 The issue with this code is evident in the signature of `area`:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_06_no_struct.cairo:9}}
 ```
 
@@ -53,7 +53,7 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,ignore_format
+```rust
 {{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_08_w_structs.cairo}}
 ```
 
@@ -75,7 +75,7 @@ It’d be useful to be able to print an instance of `Rectangle` while we’re de
 
 When we compile this code, we get an error with this message:
 
-```bash
+```text
 $ cairo-compile src/lib.cairo
 error: Method `print` not found on type "../src::Rectangle". Did you import the correct trait and impl?
  --> lib.cairo:16:15
@@ -90,7 +90,7 @@ To learn more about traits, see [Traits in Cairo](ch07-02-traits-in-cairo.md).
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,ignore_format
+```rust
 {{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_10_print_rectangle.cairo}}
 ```
 

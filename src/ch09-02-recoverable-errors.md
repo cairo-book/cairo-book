@@ -8,7 +8,7 @@ Most errors aren’t serious enough to require the program to stop entirely. Som
 
 Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_07_result_enum.cairo}}
 ```
 
@@ -18,7 +18,7 @@ The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `O
 
 The `ResultTrait` trait provides methods for working with the `Result<T, E>` enum, such as unwrapping values, checking whether the `Result` is `Ok` or `Err`, and panicking with a custom message. The `ResultTraitImpl` implementation defines the logic of these methods.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_08_result_trait.cairo}}
 ```
 
@@ -44,7 +44,7 @@ It is always easier to understand with examples.
 
 Have a look at this function signature:
 
-```rust
+```rust,noplayground
 fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;
 ```
 
@@ -52,7 +52,7 @@ It takes two u128 integers, a and b, and returns a `Result<u128, u128>` where th
 
 Now, we can use this function elsewhere. For instance:
 
-```rust
+```rust,noplayground
 fn u128_checked_add(a: u128, b: u128) -> Option<u128> {
     match u128_overflowing_add(a, b) {
         Result::Ok(r) => Option::Some(r),
@@ -66,7 +66,7 @@ Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. It u
 Let's take another example demonstrating the use of `unwrap`.
 First we import the necessary modules:
 
-```rust
+```rust,noplayground
 use core::traits::Into;
 use traits::TryInto;
 use option::OptionTrait;
@@ -76,7 +76,7 @@ use result::ResultTraitImpl;
 
 In this example, the `parse_u8` function takes a `felt252` integer and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch09-error-handling/listing_01.cairo:function}}
 ```
 
@@ -84,7 +84,7 @@ In this example, the `parse_u8` function takes a `felt252` integer and tries to 
 
 Our two test cases are:
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch09-error-handling/listing_01.cairo:tests}}
 ```
 
@@ -103,7 +103,7 @@ The `?` operator is useful when you want to handle errors implicitly and let the
 
 Here is an example.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch09-error-handling/listing_02.cairo:function}}
 ```
 
@@ -113,7 +113,7 @@ Here is an example.
 
 And with a little test case:
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch09-error-handling/listing_02.cairo:tests}}
 ```
 

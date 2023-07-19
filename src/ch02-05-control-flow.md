@@ -25,7 +25,7 @@ $ cairo-run main.cairo
 
 Let’s try changing the value of `number` to a value that makes the condition `true` to see what happens:
 
-```rust, does_not_compile
+```rust, noplayground
     let number = 5;
 ```
 

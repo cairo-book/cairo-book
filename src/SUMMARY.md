@@ -70,7 +70,7 @@
 
 - [Error Handling](ch09-00-error-handling.md)
   - [Unrecoverable Errors with panic](ch09-01-unrecoverable-errors-with-panic.md)
-  - [Recoverable Errors with Result](ch09-02-error-handling.md)
+  - [Recoverable Errors with Result](ch09-02-recoverable-errors.md)
 
 ## Advanced Features
 

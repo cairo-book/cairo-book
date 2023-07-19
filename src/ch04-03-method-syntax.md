@@ -159,7 +159,7 @@ value twice:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_01_implementation_functions.cairo:here}}
 ```
 
@@ -176,7 +176,7 @@ Each struct is allowed to have multiple `trait` and `impl` blocks. For example, 
 5-15 is equivalent to the code shown in Listing 4-16, which has each method in
 its own `trait` and `impl` blocks.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_02_multiple_impls.cairo:here}}
 ```
 

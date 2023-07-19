@@ -8,7 +8,7 @@ To define a trait, you use the keyword `trait` followed by the name of the trait
 
 For example, let's say that we have multiple structs representing shapes. We want our application to be able to perform geometry operations on these shapes, So we define a trait `ShapeGeometry` that contains a blueprint to implement geometry operations on a shape like this:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_14_traits.cairo:trait}}
 ```
 
@@ -18,7 +18,7 @@ Here our trait `ShapeGeometry` declares signatures for two methods `boundary` an
 
 A trait can be implemented using `impl` keyword with the name of your implementation followed by `of` then the name of trait being implemented. Here's an example implementing `ShapeGeometry` trait.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_14_traits.cairo:impl}}
 ```
 
@@ -28,7 +28,7 @@ In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defi
 
 You can write implementations directly without definining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute with on the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch07-generic-types-and-traits/no_listing_15_generate_trait.cairo}}
 ```
 
@@ -65,7 +65,7 @@ If `CircleGeometry` was in a separate module/file `circle` then to use `boundary
 
 If the code was organised into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant implementation is required.
 
-```rust,does_not_compile,ignore_format
+```rust,noplayground
 use debug::PrintTrait;
 
 // struct Circle { ... } and struct Rectangle { ... }

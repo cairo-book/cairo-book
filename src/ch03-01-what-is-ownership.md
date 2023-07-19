@@ -27,7 +27,7 @@ As a first example of ownership, we’ll look at the _scope_ of some variables. 
 scope is the range within a program for which an item is valid. Take the
 following variable:
 
-```rust
+```rust,noplayground
 let s = 'hello';
 ```
 
@@ -190,7 +190,7 @@ showing where variables go into and out of scope.
 
 <span class="filename">Filename: src/main.cairo</span>
 
-```rust,ignore_format
+```rust
 {{#include ../listings/ch03-understanding-ownership/listing_03_03.cairo}}
 ```
 
@@ -210,7 +210,7 @@ function that returns some value, with similar annotations as those in Listing
 
 <span class="filename">Filename: src/main.cairo</span>
 
-```rust,ignore_format
+```rust
 {{#include ../listings/ch03-understanding-ownership/listing_03_04.cairo}}
 ```
 

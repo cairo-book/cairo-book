@@ -6,7 +6,7 @@ Enums, short for "enumerations," are a way to define a custom data type that con
 
 Here's a simple example of an enum:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_01_enum_example.cairo:enum_example}}
 ```
 
@@ -22,7 +22,7 @@ It's easy to write code that acts differently depending on the variant of an enu
 
 Enums can also be used to store more interesting data associated with each variant. For example:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_02_enum_message.cairo:message}}
 ```
 
@@ -38,7 +38,7 @@ You could even use a Struct or another Enum you defined inside one of your Enum 
 
 In Cairo, you can define traits and implement them for your custom enums. This allows you to define methods and behaviors associated with the enum. Here's an example of defining a trait and implementing it for the previous `Message` enum:
 
-```rs
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_02_enum_message.cairo:trait_impl}}
 ```
 
@@ -54,7 +54,7 @@ Running this code would print `quitting`.
 
 The Option enum is a standard Cairo enum that represents the concept of an optional value. It has two variants: `Some: T` and `None: ()`. `Some: T ` indicates that there's a value of type `T`, while `None` represents the absence of a value.
 
-```rust
+```rust,noplayground
 enum Option<T> {
     Some: T,
     None: (),
@@ -72,7 +72,7 @@ We are demonstrating two approaches for the above function:
 
 > Note: in the future it would be nice to replace this example by something simpler using a loop and without gas related code.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_03_enum_option.cairo}}
 
 ```

@@ -17,10 +17,14 @@ Creating an Array is done with the `ArrayTrait::new()` call. Here is an example 
 {{#include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo}}
 ```
 
-You can pass the expected type of items inside the array when instantiating the array like this
+When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
 
-```rust, does_not_compile
+```rust, noplayground
 let mut arr = ArrayTrait::<u128>::new();
+```
+
+```rust, noplayground
+let mut arr:Array<u128> = ArrayTrait::new();
 ```
 
 #### Updating an Array
@@ -66,7 +70,7 @@ the value `1` from index `1` in the array.
 
 Here is an example with the `get()` method:
 
-```rust,ignore_format
+```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_33_array_get.cairo}}
 ```
 
