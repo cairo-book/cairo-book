@@ -22,7 +22,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,ignore_format
+```rust
 {{#include ../listings/ch03-understanding-ownership/no_listing_09_snapshots.cairo}}
 ```
 
@@ -51,7 +51,7 @@ The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a s
 
 Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:
 
-```rust
+```rust, noplayground
 fn calculate_length(
     array_snapshot: @Array<u128>
 ) -> usize { // array_snapshot is a snapshot of an Array

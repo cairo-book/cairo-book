@@ -111,7 +111,7 @@ are currently supported.
 
 Here’s an example of a constant declaration:
 
-```rust
+```rust, noplayground
 const ONE_HOUR_IN_SECONDS: u32 = 3600;
 ```
 

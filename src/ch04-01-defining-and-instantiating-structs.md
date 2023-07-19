@@ -6,7 +6,7 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 
 <span class="filename">Filename: structs.cairo</span>
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct.cairo:user}}
 ```
 

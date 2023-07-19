@@ -135,7 +135,7 @@ statement in itself.
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
-```rust,does_not_compile,ignore_format
+```rust, noplayground
 {{#include ../listings/ch02-common-programming-concepts/no_listing_18_statements_dont_return_values.cairo}}
 ```
 
@@ -183,7 +183,7 @@ curly brackets is an expression, for example:
 
 This expression:
 
-```rust, does_not_compile, ignore_format
+```rust, noplayground
 {
 {{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions.cairo:4:5}}
 }
@@ -227,7 +227,7 @@ first, the line `let x = five();` shows that we’re using the return value of a
 function to initialize a variable. Because the function `five` returns a `5`,
 that line is the same as the following:
 
-```rust, does_not_compile
+```rust, noplayground
 let x = 5;
 ```
 

@@ -9895,7 +9895,7 @@ msgstr ""
 msgid "Enums can use multiple generic types as well, like definition of the `Result<T, E>` enum that the core library provides:"
 msgstr "枚举也可以拥有多个泛型类型，比如核心库提供的`Result<T, E>`枚举的定义："
 
-#: src/ch07-01-generic-data-types.md:185 src/ch09-02-error-handling.md:11
+#: src/ch07-01-generic-data-types.md:185 src/ch09-02-recoverable-errors.md:11
 msgid ""
 "```rust\n"
 "enum Result<T, E> {\n"
@@ -9911,7 +9911,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch07-01-generic-data-types.md:192 src/ch09-02-error-handling.md:18
+#: src/ch07-01-generic-data-types.md:192 src/ch09-02-recoverable-errors.md:18
 msgid ""
 "The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition "
 "makes it convenient to use the `Result` enum anywhere we have an operation that might succeed (by returning a value of type `T`) or fail (by returning a value of type `E`)."
@@ -12494,15 +12494,15 @@ msgstr ""
 "在这个例子中，`my_number`是零，所以断言会失败，程序会panic，\n"
 "并给出 'number is zero'的字符串（保存在felt252中），除法将不会被执行。"
 
-#: src/ch09-02-error-handling.md:1
+#: src/ch09-02-recoverable-errors.md:1
 msgid "# Recoverable Errors with `Result`"
 msgstr "# 可恢复的错误与 `Result`"
 
-#: src/ch09-02-error-handling.md:3 src/ch09-02-error-handling.md:56
+#: src/ch09-02-recoverable-errors.md:3 src/ch09-02-recoverable-errors.md:56
 msgid "<br />"
 msgstr "<br />"
 
-#: src/ch09-02-error-handling.md:5
+#: src/ch09-02-recoverable-errors.md:5
 msgid ""
 "Most errors aren’t serious enough to require the program to stop entirely. Sometimes, when a function fails, it’s for a reason that you can easily interpret and respond to. For "
 "example, if you try to add two large integers and the operation overflows because the sum exceeds the maximum representable value, you might want to return an error or a wrapped "
@@ -12511,25 +12511,25 @@ msgstr ""
 "大多数错误并没有严重到需要程序完全停止的程度。有时，当一个函数失败时，它的原因是你可以很容易地解释和应对的。例如，如果你试图将两个大的整数相加，而操作溢出，因为总和超过了最大的可表示"
 "值，你可能想返回一个错误或一个包装好的结果，而不是引起未定义行为或终止程序。"
 
-#: src/ch09-02-error-handling.md:7
+#: src/ch09-02-recoverable-errors.md:7
 msgid "## The `Result` enum"
 msgstr "## `Result`枚举"
 
-#: src/ch09-02-error-handling.md:9
+#: src/ch09-02-recoverable-errors.md:9
 msgid "Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:"
 msgstr "回顾第七章中的[\"通用数据类型\"](ch07-01-generic-data-types.md#enums)，`Result`枚举被定义为有两个变体，`Ok`和`Err`，如下所示："
 
-#: src/ch09-02-error-handling.md:20
+#: src/ch09-02-recoverable-errors.md:20
 msgid "## The `ResultTrait`"
 msgstr "## `ResultTrait`"
 
-#: src/ch09-02-error-handling.md:22
+#: src/ch09-02-recoverable-errors.md:22
 msgid ""
 "The `ResultTrait` trait provides methods for working with the `Result<T, E>` enum, such as unwrapping values, checking whether the `Result` is `Ok` or `Err`, and panicking with a "
 "custom message. The `ResultTraitImpl` implementation defines the logic of these methods."
 msgstr "`ResultTrait`特征提供了处理`Result<T, E>`枚举的方法，例如解包值，检查`Result`是`Ok`还是`Err`，以及用自定义的消息进行panic。`ResultTraitImpl`实现定义了这些方法的逻辑。"
 
-#: src/ch09-02-error-handling.md:24
+#: src/ch09-02-recoverable-errors.md:24
 msgid ""
 "```rust\n"
 "trait ResultTrait<T, E> {\n"
@@ -12563,7 +12563,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch09-02-error-handling.md:40
+#: src/ch09-02-recoverable-errors.md:40
 msgid ""
 "The `expect` and `unwrap` methods are similar in that they both attempt to extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` variant. If the `Result` is "
 "`Ok(x)`, both methods return the value `x`. However, the key difference between the two methods lies in their behavior when the `Result` is in the `Err` variant. The `expect` method "
@@ -12574,7 +12574,7 @@ msgstr ""
 "`Err`变量时的行为。`expect`方法允许你提供一个自定义的错误信息（作为`felt252`值）在panic时使用，从而让你获取更多对panic相关的控制和上下文。另一方面，`unwrap`方法用一个默认的错误信息进"
 "行panic，提供的关于panic原因的信息较少。"
 
-#: src/ch09-02-error-handling.md:42
+#: src/ch09-02-recoverable-errors.md:42
 msgid ""
 "The `expect_err` and `unwrap_err` have the exact opposite behavior. If the `Result` is `Err(x)`, both methods return the value `x`. However, the key difference between the two "
 "methods is in case of `Result::Ok()`. The `expect_err` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more "
@@ -12583,7 +12583,7 @@ msgstr ""
 "`expect_err`和`unwrap_err`的行为完全相反。如果`Result`是`Err(x)`，两个方法都返回值`x`。然而，这两个方法的关键区别是在`Result::Ok()`的情况下。`expect_err`方法允许你提供一个自定义的错误"
 "信息（作为`felt252`值），在panic时使用，从而让你获取更多对panic相关的控制和上下文。另一方面，`unwrap_err`方法用一个默认的错误信息进行panic，提供的关于panic原因的信息较少。"
 
-#: src/ch09-02-error-handling.md:44
+#: src/ch09-02-recoverable-errors.md:44
 msgid ""
 "A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl EDrop: Drop<E>>` in the first four methods signatures. This syntax represents generic type constraints in the "
 "Cairo language. These constraints indicate that the associated functions require an implementation of the `Drop` trait for the generic types `T` and `E`, respectively."
@@ -12591,41 +12591,41 @@ msgstr ""
 "细心的读者可能已经注意到前四个方法签名中的`<impl TDrop: Drop<T>>` and `<impl EDrop: Drop<E>>`。这种语法代表了Cairo语言中的通用类型约束。这些约束表示相关的函数需要分别对通用类型`T`和"
 "`E`的`Drop`特性进行实现。"
 
-#: src/ch09-02-error-handling.md:46
+#: src/ch09-02-recoverable-errors.md:46
 msgid "Finally, the `is_ok` and `is_err` methods are utility functions provided by the `ResultTrait` trait to check the variant of a `Result` enum value."
 msgstr "最后，`is_ok`和`is_err`方法是`ResultTrait`特征提供的实用函数，用于检查`Result`枚举值的成员。"
 
-#: src/ch09-02-error-handling.md:48
+#: src/ch09-02-recoverable-errors.md:48
 msgid ""
 "`is_ok` takes a snapshot of a `Result<T, E>` value and returns `true` if the `Result` is the `Ok` variant, meaning the operation was successful. If the `Result` is the `Err` variant, "
 "it returns `false`."
 msgstr "`is_ok`获取一个`Result<T, E>`值的快照，如果`Result`是`Ok`成员，则返回`true`，意味着操作成功。如果`Result`是`Err`成员，则返回`false`。"
 
-#: src/ch09-02-error-handling.md:50
+#: src/ch09-02-recoverable-errors.md:50
 msgid ""
 "`is_err` takes a reference to a `Result<T, E>` value and returns `true` if the `Result` is the `Err` variant, meaning the operation encountered an error. If the `Result` is the `Ok` "
 "variant, it returns `false`."
 msgstr "`is_err`接收一个对`Result<T, E>`值的引用，如果`Result`是`Err`成员，意味着操作遇到了错误，则返回`true`。如果 `Result`是 `Ok`成员，则返回 `false`。"
 
-#: src/ch09-02-error-handling.md:52
+#: src/ch09-02-recoverable-errors.md:52
 msgid ""
 "These methods are helpful when you want to check the success or failure of an operation without consuming the Result value, allowing you to perform additional operations or make "
 "decisions based on the variant without unwrapping it."
 msgstr "当你想在不消耗结果值的情况下检查一个操作的成功或失败时，这些方法很有帮助，允许你执行额外的操作或根据枚举成员做出决定，而不用解开（unwrap）它。"
 
-#: src/ch09-02-error-handling.md:54
+#: src/ch09-02-recoverable-errors.md:54
 msgid "You can find the implementation ot the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
 msgstr "你可以在[这里](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)找到`ResultTrait`的实现。"
 
-#: src/ch09-02-error-handling.md:58
+#: src/ch09-02-recoverable-errors.md:58
 msgid "It is always easier to understand with examples."
 msgstr "有例子总是更容易理解。"
 
-#: src/ch09-02-error-handling.md:60
+#: src/ch09-02-recoverable-errors.md:60
 msgid "Have a look at this function signature:"
 msgstr "请看一下这个函数签名："
 
-#: src/ch09-02-error-handling.md:62
+#: src/ch09-02-recoverable-errors.md:62
 msgid ""
 "```rust\n"
 "fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;\n"
@@ -12635,17 +12635,17 @@ msgstr ""
 "fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;\n"
 "```"
 
-#: src/ch09-02-error-handling.md:66
+#: src/ch09-02-recoverable-errors.md:66
 msgid ""
 "It takes two u128 integers, a and b, and returns a `Result<u128, u128>` where the `Ok` variant holds the sum if the addition does not overflow, and the `Err` variant holds the "
 "overflowed value if the addition does overflow."
 msgstr "它接收两个u128整数，a和b，并返回一个`Result<u128, u128>`，如果加法没有溢出，`Ok`成员存储加法的和，如果加法溢出，`Err’成员存储溢出的值。"
 
-#: src/ch09-02-error-handling.md:68
+#: src/ch09-02-recoverable-errors.md:68
 msgid "Now, we can use this function elsewhere. For instance:"
 msgstr "现在，我们可以在其他地方使用这个函数。比如说："
 
-#: src/ch09-02-error-handling.md:70
+#: src/ch09-02-recoverable-errors.md:70
 msgid ""
 "```rust\n"
 "fn u128_checked_add(a: u128, b: u128) -> Option<u128> {\n"
@@ -12665,7 +12665,7 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch09-02-error-handling.md:79
+#: src/ch09-02-recoverable-errors.md:79
 msgid ""
 "Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. It uses the `Result` returned by `u128_overflowing_add` to determine the success or failure of the "
 "addition operation. The match expression checks the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it returns `Option::Some(r)` containing the sum. If the result is "
@@ -12674,7 +12674,7 @@ msgstr ""
 "这里，它接受两个u128整数，a和b，并返回一个`Option<u128>`。它使用`u128_overflowing_add`返回的`Result`来确定加法操作的成功或失败。匹配表达式检查来自`u128_overflowing_add`的`Result` 。如"
 "果结果是`Ok(r)`，则返回`Option::Some(r)`，其中包含和。如果结果是`Err(r)`，则返回`Option::None(())`，表示由于溢出导致操作失败。在溢出的情况下，该函数不会panic。"
 
-#: src/ch09-02-error-handling.md:81
+#: src/ch09-02-recoverable-errors.md:81
 msgid ""
 "Let's take another example demonstrating the use of `unwrap`.\n"
 "First we import the necessary modules:"
@@ -12682,7 +12682,7 @@ msgstr ""
 "让我们再举一个例子，演示一下`unwrap`的使用。\n"
 "首先我们导入必要的模块："
 
-#: src/ch09-02-error-handling.md:84
+#: src/ch09-02-recoverable-errors.md:84
 msgid ""
 "```rust\n"
 "use core::traits::Into;\n"
@@ -12700,14 +12700,14 @@ msgstr ""
 "use result::ResultTraitImpl;\n"
 "```"
 
-#: src/ch09-02-error-handling.md:92
+#: src/ch09-02-recoverable-errors.md:92
 msgid ""
 "In this example, the `parse_u8` function takes a `felt252` integer and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::"
 "Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`."
 msgstr ""
 "在这个例子中，`parse_u8`函数接收一个`felt252`的整数，并尝试用`try_into`方法将其转换为`u8`的整数。如果成功，它返回`Result::Ok(value)`，否则它返回`Result::Err('Invalid integer')`。"
 
-#: src/ch09-02-error-handling.md:94
+#: src/ch09-02-recoverable-errors.md:94
 msgid ""
 "```rust\n"
 "fn parse_u8(s: felt252) -> Result<u8, felt252> {\n"
@@ -12727,15 +12727,15 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch09-02-error-handling.md:103
+#: src/ch09-02-recoverable-errors.md:103
 msgid "<span class=\"caption\">Listing 9-1: Using the Result type</span>"
 msgstr "<span class=\"caption\">示例9-1：向 \"names \"变量写入内容</span>"
 
-#: src/ch09-02-error-handling.md:105
+#: src/ch09-02-recoverable-errors.md:105
 msgid "Our two test cases are:"
 msgstr "我们的两个测试案例是："
 
-#: src/ch09-02-error-handling.md:107
+#: src/ch09-02-recoverable-errors.md:107
 msgid ""
 "```rust\n"
 "# use traits::TryInto;\n"
@@ -12803,27 +12803,27 @@ msgstr ""
 "# \n"
 "```"
 
-#: src/ch09-02-error-handling.md:140
+#: src/ch09-02-recoverable-errors.md:140
 msgid ""
 "The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the "
 "`u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'."
 msgstr "第一个测试函数是测试从`felt252`到`u8`的有效转换，期望`unwrap`方法不要panic。第二个测试函数试图转换一个超出`u8`范围的值，期望`unwrap`方法panic，错误信息是 ‘Invalid integer’。"
 
-#: src/ch09-02-error-handling.md:142
+#: src/ch09-02-recoverable-errors.md:142
 msgid "> We could have also used the #[should_panic] attribute here."
 msgstr "> 我们也可以在这里使用#[should_panic]属性。"
 
-#: src/ch09-02-error-handling.md:144
+#: src/ch09-02-recoverable-errors.md:144
 msgid "### The `?` operator ?"
 msgstr "### `?`运算符?"
 
-#: src/ch09-02-error-handling.md:146
+#: src/ch09-02-recoverable-errors.md:146
 msgid ""
 "The last operator we will talk about is the `?` operator. The `?` operator is used for more idiomatic and concise error handling. When you use the `?` operator on a `Result` or "
 "`Option` type, it will do the following:"
 msgstr "我们要谈的最后一个操作符是`?`操作符。`?`运算符用于更成文和简明的错误处理。当你在 `Result`或 `Option`类型上使用`?`运算符时，它将做以下事情："
 
-#: src/ch09-02-error-handling.md:148
+#: src/ch09-02-recoverable-errors.md:148
 msgid ""
 "- If the value is `Result::Ok(x)` or `Option::Some(x)`, it will return the inner value `x` directly.\n"
 "- If the value is `Result::Err(e)` or `Option::None`, it will propagate the error or `None` by immediately returning from the function."
@@ -12831,15 +12831,15 @@ msgstr ""
 "- 如果值是`Result::Ok(x)`或`Option::Some(x)`，它将直接返回内部值`x`。\n"
 "- 如果值是`Result::Err(e)`或`Option::None`，它将通过立即从函数返回来传播错误或`None`。"
 
-#: src/ch09-02-error-handling.md:151
+#: src/ch09-02-recoverable-errors.md:151
 msgid "The `?` operator is useful when you want to handle errors implicitly and let the calling function deal with them."
 msgstr "当你想隐式处理错误并让调用函数处理它们时，`?`操作符很有用。"
 
-#: src/ch09-02-error-handling.md:153
+#: src/ch09-02-recoverable-errors.md:153
 msgid "Here is an example."
 msgstr "下面是一个例子。"
 
-#: src/ch09-02-error-handling.md:155
+#: src/ch09-02-recoverable-errors.md:155
 msgid ""
 "```rust\n"
 "fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {\n"
@@ -12859,20 +12859,20 @@ msgstr ""
 "}\n"
 "```"
 
-#: src/ch09-02-error-handling.md:164
+#: src/ch09-02-recoverable-errors.md:164
 msgid "<span class=\"caption\">Listing 9-1: Using the `?` operator</span>"
 msgstr "<span class=\"caption\">示例9-1：向 \"names \"变量写入内容</span>"
 
-#: src/ch09-02-error-handling.md:166
+#: src/ch09-02-recoverable-errors.md:166
 msgid ""
 "`do_something_with_parse_u8` function takes a `felt252` value as input and calls `parse_u8`. The `?` operator is used to propagate the error, if any, or unwrap the successful value."
 msgstr "`do_something_with_parse_u8`函数接收一个`felt252`值作为输入并调用`parse_u8`。`?`操作符用来传播错误，如果有的话，或者unwrap成功的值。"
 
-#: src/ch09-02-error-handling.md:168
+#: src/ch09-02-recoverable-errors.md:168
 msgid "And with a little test case:"
 msgstr "这里还有一个小的测试案例："
 
-#: src/ch09-02-error-handling.md:170
+#: src/ch09-02-recoverable-errors.md:170
 msgid ""
 "```rust\n"
 "# use traits::TryInto;\n"
@@ -12940,19 +12940,19 @@ msgstr ""
 "# \n"
 "```"
 
-#: src/ch09-02-error-handling.md:203
+#: src/ch09-02-recoverable-errors.md:203
 msgid "The console will print the error \"Invalid Integer\"."
 msgstr "控制台将打印错误  “Invalid Integer”。"
 
-#: src/ch09-02-error-handling.md:205
+#: src/ch09-02-recoverable-errors.md:205
 msgid "<br/>"
 msgstr "<br/>"
 
-#: src/ch09-02-error-handling.md:207
+#: src/ch09-02-recoverable-errors.md:207
 msgid "### Summary"
 msgstr "### 总结"
 
-#: src/ch09-02-error-handling.md:209
+#: src/ch09-02-recoverable-errors.md:209
 msgid ""
 "We saw that recoverable errors can be handled in Cairo using the Result enum, which has two variants: `Ok` and `Err`. The `Result<T, E>` enum is generic, with types `T` and `E` "
 "representing the successful and error values, respectively. The `ResultTrait` provides methods for working with `Result<T, E>`, such as unwrapping values, checking if the result is "
@@ -12961,7 +12961,7 @@ msgstr ""
 "我们看到，可恢复的错误可以在Cairo中使用结果枚举来处理，它有两个变体：`Ok`和`Err`。`Result<T, E>`枚举是通用的，其类型`T`和`E`分别代表成功和错误值。`ResultTrait`提供了处理`Result<T, E>`"
 "的方法，例如解包值，检查结果是`Ok`还是`Err`，以及用自定义消息进行panic。"
 
-#: src/ch09-02-error-handling.md:211
+#: src/ch09-02-recoverable-errors.md:211
 msgid ""
 "To handle recoverable errors, a function can return a `Result` type and use pattern matching to handle the success or failure of an operation. The `?` operator can be used to "
 "implicitly handle errors by propagating the error or unwrapping the successful value. This allows for more concise and clear error handling, where the caller is responsible for "

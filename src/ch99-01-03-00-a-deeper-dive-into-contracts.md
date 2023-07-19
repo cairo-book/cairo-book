@@ -14,7 +14,7 @@ At this point, you should have multiple questions that come to mind:
 
 Luckily, we'll be answering all these questions in this chapter. Let's consider the following example contract that we'll be using throughout this chapter:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:all}}
 ```
 

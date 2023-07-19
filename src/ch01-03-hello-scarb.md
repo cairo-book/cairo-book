@@ -79,7 +79,7 @@ The last line, `[dependencies]`, is the start of a section for you to list any o
 
 The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
-```rust
+```rust,noplayground
 mod hello_scarb;
 ```
 
@@ -163,7 +163,7 @@ test = "protostar test"
 
 Test functions are marked with the `#[test]` attributes, and running `scarb test` will run all test functions in your codebase under the `src/` directory.
 
-```rust
+```txt
 ├── Scarb.toml
 ├── src
 │   ├── lib.cairo

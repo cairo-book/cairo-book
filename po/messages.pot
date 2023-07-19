@@ -8183,7 +8183,7 @@ msgid ""
 msgstr ""
 
 #: src/ch07-01-generic-data-types.md:185
-#: src/ch09-02-error-handling.md:11
+#: src/ch09-02-recoverable-errors.md:11
 msgid ""
 "```rust\n"
 "enum Result<T, E> {\n"
@@ -8194,7 +8194,7 @@ msgid ""
 msgstr ""
 
 #: src/ch07-01-generic-data-types.md:192
-#: src/ch09-02-error-handling.md:18
+#: src/ch09-02-recoverable-errors.md:18
 msgid ""
 "The `Result<T, E>` enum has two generic types, `T` and `E`, and two "
 "variants: `Ok` which holds the value of type `T` and `Err` which holds the "
@@ -10094,16 +10094,16 @@ msgid ""
 "reached."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:1
+#: src/ch09-02-recoverable-errors.md:1
 msgid "# Recoverable Errors with `Result`"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:3
-#: src/ch09-02-error-handling.md:56
+#: src/ch09-02-recoverable-errors.md:3
+#: src/ch09-02-recoverable-errors.md:56
 msgid "<br />"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:5
+#: src/ch09-02-recoverable-errors.md:5
 msgid ""
 "Most errors aren’t serious enough to require the program to stop entirely. "
 "Sometimes, when a function fails, it’s for a reason that you can easily "
@@ -10113,22 +10113,22 @@ msgid ""
 "instead of causing undefined behavior or terminating the process."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:7
+#: src/ch09-02-recoverable-errors.md:7
 msgid "## The `Result` enum"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:9
+#: src/ch09-02-recoverable-errors.md:9
 msgid ""
 "Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in "
 "Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and "
 "`Err`, as follows:"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:20
+#: src/ch09-02-recoverable-errors.md:20
 msgid "## The `ResultTrait`"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:22
+#: src/ch09-02-recoverable-errors.md:22
 msgid ""
 "The `ResultTrait` trait provides methods for working with the `Result<T, E>` "
 "enum, such as unwrapping values, checking whether the `Result` is `Ok` or "
@@ -10136,7 +10136,7 @@ msgid ""
 "implementation defines the logic of these methods."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:24
+#: src/ch09-02-recoverable-errors.md:24
 msgid ""
 "```rust\n"
 "trait ResultTrait<T, E> {\n"
@@ -10156,7 +10156,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:40
+#: src/ch09-02-recoverable-errors.md:40
 msgid ""
 "The `expect` and `unwrap` methods are similar in that they both attempt to "
 "extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` "
@@ -10169,7 +10169,7 @@ msgid ""
 "less information about the cause of the panic."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:42
+#: src/ch09-02-recoverable-errors.md:42
 msgid ""
 "The `expect_err` and `unwrap_err` have the exact opposite behavior. If the "
 "`Result` is `Err(x)`, both methods return the value `x`. However, the key "
@@ -10181,7 +10181,7 @@ msgid ""
 "cause of the panic."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:44
+#: src/ch09-02-recoverable-errors.md:44
 msgid ""
 "A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl "
 "EDrop: Drop<E>>` in the first four methods signatures. This syntax "
@@ -10190,27 +10190,27 @@ msgid ""
 "`Drop` trait for the generic types `T` and `E`, respectively."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:46
+#: src/ch09-02-recoverable-errors.md:46
 msgid ""
 "Finally, the `is_ok` and `is_err` methods are utility functions provided by "
 "the `ResultTrait` trait to check the variant of a `Result` enum value."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:48
+#: src/ch09-02-recoverable-errors.md:48
 msgid ""
 "`is_ok` takes a snapshot of a `Result<T, E>` value and returns `true` if the "
 "`Result` is the `Ok` variant, meaning the operation was successful. If the "
 "`Result` is the `Err` variant, it returns `false`."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:50
+#: src/ch09-02-recoverable-errors.md:50
 msgid ""
 "`is_err` takes a reference to a `Result<T, E>` value and returns `true` if "
 "the `Result` is the `Err` variant, meaning the operation encountered an "
 "error. If the `Result` is the `Ok` variant, it returns `false`."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:52
+#: src/ch09-02-recoverable-errors.md:52
 msgid ""
 "These methods are helpful when you want to check the success or failure of "
 "an operation without consuming the Result value, allowing you to perform "
@@ -10218,39 +10218,39 @@ msgid ""
 "unwrapping it."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:54
+#: src/ch09-02-recoverable-errors.md:54
 msgid ""
 "You can find the implementation ot the `ResultTrait` "
 "[here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:58
+#: src/ch09-02-recoverable-errors.md:58
 msgid "It is always easier to understand with examples."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:60
+#: src/ch09-02-recoverable-errors.md:60
 msgid "Have a look at this function signature:"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:62
+#: src/ch09-02-recoverable-errors.md:62
 msgid ""
 "```rust\n"
 "fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;\n"
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:66
+#: src/ch09-02-recoverable-errors.md:66
 msgid ""
 "It takes two u128 integers, a and b, and returns a `Result<u128, u128>` "
 "where the `Ok` variant holds the sum if the addition does not overflow, and "
 "the `Err` variant holds the overflowed value if the addition does overflow."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:68
+#: src/ch09-02-recoverable-errors.md:68
 msgid "Now, we can use this function elsewhere. For instance:"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:70
+#: src/ch09-02-recoverable-errors.md:70
 msgid ""
 "```rust\n"
 "fn u128_checked_add(a: u128, b: u128) -> Option<u128> {\n"
@@ -10262,7 +10262,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:79
+#: src/ch09-02-recoverable-errors.md:79
 msgid ""
 "Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. "
 "It uses the `Result` returned by `u128_overflowing_add` to determine the "
@@ -10273,13 +10273,13 @@ msgid ""
 "overflow. The function does not panic in case of an overflow."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:81
+#: src/ch09-02-recoverable-errors.md:81
 msgid ""
 "Let's take another example demonstrating the use of `unwrap`.\n"
 "First we import the necessary modules:"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:84
+#: src/ch09-02-recoverable-errors.md:84
 msgid ""
 "```rust\n"
 "use core::traits::Into;\n"
@@ -10290,7 +10290,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:92
+#: src/ch09-02-recoverable-errors.md:92
 msgid ""
 "In this example, the `parse_u8` function takes a `felt252` integer and tries "
 "to convert it into a `u8` integer using the `try_into` method. If "
@@ -10298,7 +10298,7 @@ msgid ""
 "`Result::Err('Invalid integer')`."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:94
+#: src/ch09-02-recoverable-errors.md:94
 msgid ""
 "```rust\n"
 "fn parse_u8(s: felt252) -> Result<u8, felt252> {\n"
@@ -10310,15 +10310,15 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:103
+#: src/ch09-02-recoverable-errors.md:103
 msgid "<span class=\"caption\">Listing 9-1: Using the Result type</span>"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:105
+#: src/ch09-02-recoverable-errors.md:105
 msgid "Our two test cases are:"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:107
+#: src/ch09-02-recoverable-errors.md:107
 msgid ""
 "```rust\n"
 "# use traits::TryInto;\n"
@@ -10354,7 +10354,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:140
+#: src/ch09-02-recoverable-errors.md:140
 msgid ""
 "The first one tests a valid conversion from `felt252` to `u8`, expecting the "
 "`unwrap` method not to panic. The second test function attempts to convert a "
@@ -10362,22 +10362,22 @@ msgid ""
 "with the error message 'Invalid integer'."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:142
+#: src/ch09-02-recoverable-errors.md:142
 msgid "> We could have also used the #[should_panic] attribute here."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:144
+#: src/ch09-02-recoverable-errors.md:144
 msgid "### The `?` operator ?"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:146
+#: src/ch09-02-recoverable-errors.md:146
 msgid ""
 "The last operator we will talk about is the `?` operator. The `?` operator "
 "is used for more idiomatic and concise error handling. When you use the `?` "
 "operator on a `Result` or `Option` type, it will do the following:"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:148
+#: src/ch09-02-recoverable-errors.md:148
 msgid ""
 "- If the value is `Result::Ok(x)` or `Option::Some(x)`, it will return the "
 "inner value `x` directly.\n"
@@ -10385,17 +10385,17 @@ msgid ""
 "error or `None` by immediately returning from the function."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:151
+#: src/ch09-02-recoverable-errors.md:151
 msgid ""
 "The `?` operator is useful when you want to handle errors implicitly and let "
 "the calling function deal with them."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:153
+#: src/ch09-02-recoverable-errors.md:153
 msgid "Here is an example."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:155
+#: src/ch09-02-recoverable-errors.md:155
 msgid ""
 "```rust\n"
 "fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {\n"
@@ -10407,22 +10407,22 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:164
+#: src/ch09-02-recoverable-errors.md:164
 msgid "<span class=\"caption\">Listing 9-1: Using the `?` operator</span>"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:166
+#: src/ch09-02-recoverable-errors.md:166
 msgid ""
 "`do_something_with_parse_u8` function takes a `felt252` value as input and "
 "calls `parse_u8`. The `?` operator is used to propagate the error, if any, "
 "or unwrap the successful value."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:168
+#: src/ch09-02-recoverable-errors.md:168
 msgid "And with a little test case:"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:170
+#: src/ch09-02-recoverable-errors.md:170
 msgid ""
 "```rust\n"
 "# use traits::TryInto;\n"
@@ -10458,19 +10458,19 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:203
+#: src/ch09-02-recoverable-errors.md:203
 msgid "The console will print the error \"Invalid Integer\"."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:205
+#: src/ch09-02-recoverable-errors.md:205
 msgid "<br/>"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:207
+#: src/ch09-02-recoverable-errors.md:207
 msgid "### Summary"
 msgstr ""
 
-#: src/ch09-02-error-handling.md:209
+#: src/ch09-02-recoverable-errors.md:209
 msgid ""
 "We saw that recoverable errors can be handled in Cairo using the Result "
 "enum, which has two variants: `Ok` and `Err`. The `Result<T, E>` enum is "
@@ -10480,7 +10480,7 @@ msgid ""
 "`Err`, and panicking with custom messages."
 msgstr ""
 
-#: src/ch09-02-error-handling.md:211
+#: src/ch09-02-recoverable-errors.md:211
 msgid ""
 "To handle recoverable errors, a function can return a `Result` type and use "
 "pattern matching to handle the success or failure of an operation. The `?` "

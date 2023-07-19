@@ -4,7 +4,7 @@ As stated previously, storage variables allow you to store data that will be sto
 
 Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
-```rust
+```rust, noplayground
 {{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_02.cairo:here}}
 ```
 
@@ -22,7 +22,7 @@ It is important to note that the `LegacyMap` type can only be used inside the `S
 
 You can also create more complex mappings than that; you can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/no_listing_01_storage_mapping.cairo:here}}
 ```
 
@@ -36,7 +36,7 @@ is the Pedersen hash and the final value is taken `mod2251−256`. You can learn
 The compiler knows how to store basic data types, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `ContractAddress`, etc. But what if you want to store a custom struct in storage? In that case, you have to explicitly tell the compiler how to store your struct in storage.
 In our example, we want to store a `Person` struct in storage, so we have to tell the compiler how to store it in storage by adding a derive attribute of the `storage_access::StorageAccess` trait to our struct definition.
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:person}}
 ```
 
@@ -44,7 +44,7 @@ In our example, we want to store a `Person` struct in storage, so we have to tel
 
 To read the value of the storage variable `names`, we call the `read` function on the `names` storage variable, passing in the key `address` as a parameter.
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:read}}
 ```
 
@@ -56,7 +56,7 @@ To read the value of the storage variable `names`, we call the `read` function o
 
 To write a value to the storage variable `names`, we call the `write` function on the `names` storage variable, passing in the key and values as arguments.
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:write}}
 ```
 

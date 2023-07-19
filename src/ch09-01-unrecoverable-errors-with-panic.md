@@ -37,13 +37,13 @@ You can use the `nopanic` notation to indicate that a function will never panic.
 
 Example:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_03_nopanic.cairo}}
 ```
 
 Wrong example:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_04_nopanic_wrong.cairo}}
 ```
 
@@ -62,9 +62,9 @@ Function is declared as nopanic but calls a function that may panic.
 
 Note that there are two functions that may panic here, assert and equality.
 
-## panic_with macro
+## panic_with attribute
 
-You can use the `panic_with` macro to mark a function that returns an `Option` or `Result`. This macro takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function. It will create a wrapper for your annotated function which will panic if the function returns `None` or `Err`, the panic function will be called with the given data.
+You can use the `panic_with` attribute to mark a function that returns an `Option` or `Result`. This attribute takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function. It will create a wrapper for your annotated function which will panic if the function returns `None` or `Err`, the panic function will be called with the given data.
 
 Example:
 

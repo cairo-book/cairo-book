@@ -20,7 +20,7 @@ For your Cairo code to qualify as an interface, it must meet the following requi
 
 Here's a sample interface for an ERC20 token contract:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_interface.cairo}}
 ```
 

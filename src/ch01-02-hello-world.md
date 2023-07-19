@@ -80,7 +80,7 @@ program. That makes you a Cairo programmer—welcome!
 Let’s review this “Hello, world!” program in detail. Here’s the first piece of
 the puzzle:
 
-```rust,ignore_format
+```rust,noplayground
 fn main() {
 
 }
@@ -106,7 +106,7 @@ Prior to the main function declaration, The line `use debug::PrintTrait;` is res
 
 The body of the `main` function holds the following code:
 
-```rust
+```rust,noplayground
     'Hello, world!'.print();
 ```
 

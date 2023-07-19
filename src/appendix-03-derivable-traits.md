@@ -16,7 +16,7 @@ When `PartialEq` is derived on structs, two instances are equal only if all fiel
 
 Example:
 
-```Rust
+```rust
 #[derive(PartialEq, Drop)]
 struct A {
     item: felt252
@@ -41,7 +41,7 @@ Deriving `Clone` implements the `clone` method, which, in turn, calls clone on e
 
 Example:
 
-```Rust
+```rust
 use clone::Clone;
 
 #[derive(Clone, Drop)]
@@ -62,7 +62,7 @@ The `Copy` trait allows for the duplication of values. You can derive `Copy` on 
 
 Example:
 
-```Rust
+```rust
 #[derive(Copy, Drop)]
 struct A {
     item: felt252
@@ -84,7 +84,7 @@ fn main() {
 
 Example:
 
-```Rust
+```rust
 use serde::Serde;
 use array::ArrayTrait;
 
@@ -117,7 +117,7 @@ Also, we can use `deserialize` function to convert the serialized array back int
 
 Example:
 
-```Rust
+```rust
 use serde::Serde;
 use array::ArrayTrait;
 use option::OptionTrait;
@@ -154,7 +154,7 @@ Storing a user-defined struct in a storage variable within a Starknet contract r
 
 Example:
 
-```rust
+```rust, noplayground
 #[starknet::contract]
 mod contract {
     #[derive(Drop, storage_access::StorageAccess)]

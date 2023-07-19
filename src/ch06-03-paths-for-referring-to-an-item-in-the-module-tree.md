@@ -14,7 +14,7 @@ To illustrate this notion let's take back our example Listing 6-1 for the restau
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_03.cairo}}
 ```
 
@@ -38,7 +38,7 @@ definition code separately from or together with the code that uses the item.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_04.cairo}}
 ```
 
