@@ -15,6 +15,7 @@ Table B-1 contains the operators in Cairo, an example of how the operator would 
 | `%` | `expr % expr` | Arithmetic remainder | `Rem` |
 | `%=` | `var %= expr` | Arithmetic remainder and assignment | `RemEq` |
 | `&` | `expr & expr` | Bitwise AND | `BitAnd` |
+| `&&` | `expr && expr` | Short-circuiting logical AND | |
 | `*` | `expr * expr` | Arithmetic multiplication | `Mul` |
 | `*=` | `var *= expr` | Arithmetic multiplication and assignment | `MulEq` |
 | `@` | `@var` | Snapshot | |
@@ -41,6 +42,7 @@ Table B-1 contains the operators in Cairo, an example of how the operator would 
 | `>=` | `expr >= expr` | Greater than or equal to comparison | `PartialOrd` |
 | `^` | `expr ^ expr` | Bitwise exclusive OR | `BitXor` |
 | <code>&vert;</code> | <code>expr &vert; expr</code> | Bitwise OR | `BitOr` |
+| <code>&vert;&vert;</code> | <code>expr &vert;&vert; expr</code> | Short-circuiting logical OR | |
 
 ## Non Operator Symbols
 
