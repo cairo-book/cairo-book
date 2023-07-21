@@ -8,7 +8,7 @@ At this point, you should have multiple questions that come to mind:
 
 - How do I define internal/private functions?
 - How can I emit events? How can I index them?
-- Where should I defined functions that do not need to access the contract's state?
+- Where should I define functions that do not need to access the contract's state?
 - Is there a way to reduce the boilerplate?
 - How can I store more complex data types?
 
