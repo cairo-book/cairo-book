@@ -1,58 +1,33 @@
-//**** Specify interface here ****//
-use starknet::ContractAddress;
-
-#[starknet::interface]
-trait IERC20<TContractState> {
-    fn name(self: @TContractState) -> felt252;
-
-    fn symbol(self: @TContractState) -> felt252;
-
-    fn decimals(self: @TContractState) -> u8;
-
-    fn total_supply(self: @TContractState) -> u256;
-
-    fn balance_of(self: @TContractState, account: ContractAddress) -> u256;
-
-    fn allowance(self: @TContractState, owner: ContractAddress, spender: ContractAddress) -> u256;
-
-    fn transfer(ref self: TContractState, recipient: ContractAddress, amount: u256) -> bool;
-
-    fn transfer_from(
-        ref self: TContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256
-    ) -> bool;
-
-    fn approve(ref self: TContractState, spender: ContractAddress, amount: u256) -> bool;
-}
-
-#[starknet::interface]
-trait ITokenWrapper<TContractState> {
-    fn token_name(self: @TContractState) -> felt252;
-
-    fn transfer_token(ref self: TContractState, recipient: ContractAddress, amount: u256) -> bool;
-}
-
 //ANCHOR: here
+use starknet::ContractAddress;
+#[starknet::interface]
+trait IContractB<TContractState> {
+    fn set_value(ref self: TContractState, value: u128);
+
+    fn get_value(self: @TContractState) -> u128;
+}
+
 #[starknet::contract]
-mod TokenWrapper {
-    use super::IERC20DispatcherTrait;
-    use super::IERC20LibraryDispatcher;
+mod ContractA {
+    use super::{IContractBDispatcherTrait, IContractBLibraryDispatcher};
     use starknet::ContractAddress;
-    use super::ITokenWrapper;
 
     #[storage]
-    struct Storage {}
+    struct Storage {
+        value: u128
+    }
 
-    impl TokenWrapper of ITokenWrapper<ContractState> {
-        fn token_name(self: @ContractState) -> felt252 {
-            IERC20LibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }.name()
+    #[generate_trait]
+    #[external(v0)]
+    impl ContractA of IContractA {
+        fn set_value(ref self: ContractState, value: u128) {
+            IContractBLibraryDispatcher {
+                class_hash: starknet::class_hash_const::<0x1234>()
+            }.set_value(value)
         }
 
-        fn transfer_token(
-            ref self: ContractState, recipient: ContractAddress, amount: u256
-        ) -> bool {
-            IERC20LibraryDispatcher {
-                class_hash: starknet::class_hash_const::<0x1234>()
-            }.transfer(recipient, amount)
+        fn get_value(self: @ContractState) -> u128 {
+            self.value.read()
         }
     }
 }
