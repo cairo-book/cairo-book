@@ -6,7 +6,7 @@ Starknet is no exception to this rule and has its own L1 <> L2 Messaging system.
 
 Let's dive into the details.
 
-The crucial component of the L1 <> L1 Messaging system is `StarknetCore`. It is a set of contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of `StarknetCore` is called `StarknetMessaging` and it plays the role of a third party between your contracts on L1 and those on L2. `StarknetMessaging` follows an [interface](https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6) with function allowing to send message to L2, receiving messages on L1 from L2 and canceling messages. Starknet' Sequencer is able to see and receive these messages and to trigger the appropriate functions on L2 or sending messages to `StarknetCore` on L1. So on Ethereum, your contracts have to do a call to the `StarknetMessaging` contract and either call `sendMessageToL2` or `consumeMessageFromL2`. On Starknet, you must use the attribute `#[l1_handler]` on the functions that can receive messages from L1 and use the syscall `send_message_to_l1` for those sending messages to L1.
+The crucial component of the L1 <> L1 Messaging system is [`StarknetCore`](https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4). It is a set of contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of `StarknetCore` is called `StarknetMessaging` and it plays the role of a third party between your contracts on L1 and those on L2. `StarknetMessaging` follows an [interface](https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6) with functions allowing to send message to L2, receiving messages on L1 from L2 and canceling messages. Starknet's Sequencer is able to see and receive these messages and to trigger the appropriate functions on L2 or sending messages to `StarknetCore` on L1. So on Ethereum, your contracts have to do a call to the `StarknetMessaging` contract and either call `sendMessageToL2` or `consumeMessageFromL2`. On Starknet, you must use the attribute `#[l1_handler]` on the functions that can receive messages from L1 and use the syscall `send_message_to_l1` for those sending messages to L1.
 
 Let's take an example. It comes from the starknet-edu [repo](https://github.com/starknet-edu/starknet-messaging-bridge/tree/main).
 
@@ -44,7 +44,7 @@ function sendMessageToL2(
     ) external override returns (bytes32);
 ```
 
-In `ex01SendMessageToL2`, we first construct the message (the payload). It is an array of `uint256`. Then we call `StarknetCore.sendMessageToL2`. The first parameter is the L2 contract. The second is the selector (or the hash of the signature of the function we cant to call on L2) and then the paylod. We had a fee to it as a `msg.value` because we need to pay the transaction on L2.
+In `ex01SendMessageToL2`, we first construct the message (the payload). It is an array of `uint256`. Then we call `StarknetCore.sendMessageToL2`. The first parameter is the L2 contract. The second is the selector (or the `sn_keccak` hash of the signature of the function we cant to call on L2) and then the paylod. We add a fee to it as a `msg.value` because we need to pay the transaction on L2.
 
 On Starknet side we have:
 
@@ -52,7 +52,11 @@ On Starknet side we have:
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging.cairo:here}}
 ```
 
-We need to add the `#[l1_handler]` attribute to our contract. This means that this function can only be used in L1 handler transactions which are special functions triggered by the sequencer according to the messages sent on L1. There is nothing particular to do to receive transactions from L1 beside that. It is important to verify the origin of the transaction so that we ensure that our contract can only receive messages from a trusted L1 contract.
+We need to add the `#[l1_handler]` attribute to our function. This means that this function can only be used in L1 handler transactions which are special functions that can only be triggered by the sequencer following a message sent from L1. There is nothing particular to do to receive transactions from L1 beside that. It is important to verify the origin of the transaction so that we ensure that our contract can only receive messages from a trusted L1 contract.
+
+On L1, the important part is to build the exact same payload as on L2. Then you call `starknetCore.consumeMessageFromL2` by passing the L2 contract address and the payload.
+
+It is important to notice that when we send a message from L1 to L2, you have nothing to do on L2. The message is automatically consumed on L2 and the associated transaction triggered. But if we do the opposite, we have to manually consume the message on L1.
 
 To send a message in the opposite direction, what we would do on Starknet is:
 
@@ -87,10 +91,6 @@ function ex02ReceiveMessageFromL2(uint256 player_l2_address, uint256 message) ex
         emit MessageReceived(message);
     }
 ```
-
-On L1, the important part is to build the exact same payload as on L2. Then you call `starknetCore.consumeMessageFromL2` by passing the L2 contract address and the payload.
-
-It is important to notice that when we send a message from L1 to L2, you have nothing to do on L2. The message is automatically consumed on L2 and the associated transaction triggered. But if we do the opposite, we have to manually consume the message on L1.
 
 Another important issue to remember is that on L1 we use `uint256` and on L2 we are dealing with `felt252`. `felt252` are smaller than `uint256`. So we have to pay attention to the size of the messages we are sending. If, on L1, we build a message which size is above the maximum felt value, the message will never be consumed on L2.
 
