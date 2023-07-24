@@ -44,7 +44,7 @@ Before we explore things further down, let's define some terminology.
 
 - In the context of Starknet, a _public function_ is a function that is exposed to the outside world. In the example above, `set` and `get` are public functions. A public function can be called by anyone, and can be called from outside the contract, or from within the contract. In the example above, `set` and `get` are public functions.
 
-- What we call an _external_ function is a public function that is invoked through a transaction and that can mutate the state of the contract. `set` is an external functions.
+- What we call an _external_ function is a public function that is invoked through a transaction and that can mutate the state of the contract. `set` is an external function.
 
 - A _view_ function is a public function that can be called from outside the contract, but that cannot mutate the state of the contract. `get` is a view function.
 
