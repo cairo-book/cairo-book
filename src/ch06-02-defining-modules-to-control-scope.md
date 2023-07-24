@@ -31,7 +31,8 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
         }
     ```
 
-- In the file _src/garden.cairo_
+  - In the file _src/garden.cairo_
+
 - **Declaring submodules**: In any file other than the crate root, you can
   declare submodules. For example, you might declare `mod vegetables;` in
   _src/garden.cairo_. The compiler will look for the submodule’s code within the
