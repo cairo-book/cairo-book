@@ -16,7 +16,7 @@ To effectively break down the concepts in this chapter, we are going to be using
 As mentioned previously, traits annotated with the `#[starknet::interface]` attribute automatically generate a dispatcher and a trait on compilation.
 Our `IERC20` interface is expanded into something like this:
 
-**Note:** The expanded code for our IERC20 interface is a lot longer, but to keep this chapter concise and straight to the point, we focused on one view function `get_name`, and one external function `transfer`.
+**Note:** The expanded code for our IERC20 interface is a lot longer, but to keep this chapter concise and straight to the point, we focused on one view function `name`, and one external function `transfer`.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_05_dispatcher_trait.cairo}}
@@ -62,7 +62,7 @@ Notice that the main difference between the regular contract dispatcher and the 
 
 ### Calling Contracts using the Library Dispatcher
 
-Below's a sample code on calling contracts using the Library Dispatcher.
+Below's a sample code for calling contracts using the Library Dispatcher.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_08_using_library_dispatcher.cairo:here}}
