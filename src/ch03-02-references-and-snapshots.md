@@ -64,9 +64,9 @@ The scope in which the variable `array_snapshot` is valid is the same as any fun
 
 #### Desnap Operator
 
-To converts a snapshot back into a regular value, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator: it takes a snapshot as input and returns the value it points to.
+To convert a snapshot back into a regular value, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator: the snapshot value is copied to a new memory cell.
 
-It's important to note that during this conversion process, the value it points to is copied into a new variable. This enables multiple uses of the snapshot without concerns about ownership transfers. This also means that the value pointed to by the snapshot must be copyable and droppable (which is not the case for Arrays, as they don't implement `Copy`).
+It's important to note that during this conversion process, the value it points to is copied into a new variable. This enables multiple uses of the underlying value without concerns about ownership transfers. This also means that the value pointed to by the snapshot must be copyable (which is not the case for Arrays, as they don't implement `Copy`).
 
 In the following example, we want to calculate the area of a rectangle, but we don't want to take ownership of the rectangle in the `calculate_area` function, because we might want to use the rectangle again after the function call. Since our function doesn't mutate the rectangle instance, we can pass the snapshot of the rectangle to the function, and then transform the snapshots back into values using the `desnap` operator `*`.
 
