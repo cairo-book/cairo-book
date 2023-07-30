@@ -1,18 +1,59 @@
 # L1-L2 Messaging
 
-A crucial feature for a layer is its ability to interact with the layer 1.
+A crucial feature of a Layer 2 is its ability to interact with Layer 1.
 
-Starknet is no exception to this rule and has its own L1 <> L2 Messaging system. Here we are not talking about the consensus and the post of state updates on L1 but a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way round). Hence we can do "cross-chain" transactions. We can do things on a chain and see the result on the other. For instance, think about bridges. Bridges on Staknet all use L1-L2 messaging. Let's say you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 smart-contracts an it will automatically trigger the mint of the same token on L2. Another good usecase for this would be [DeFi pooling](https://starkware.co/resource/defi-pooling/).
+Starknet has its own L1 <> L2 Messaging system, which is different from its consensus mechanism and the submission of state updates on L1. L1-L2 Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on a chain and use the result of this computation on the other chain.
+
+Bridges on Staknet all use L1-L2 messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for L1-L2 messaging would be [DeFi pooling](https://starkware.co/resource/defi-pooling/).
 
 Let's dive into the details.
 
-The crucial component of the L1 <> L2 Messaging system is [`StarknetCore`](https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4). It is a set of contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of `StarknetCore` is called `StarknetMessaging` and it plays the role of a third party between your contracts on L1 and those on L2. `StarknetMessaging` follows an [interface](https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6) with functions allowing to send message to L2, receiving messages on L1 from L2 and canceling messages. Starknet's Sequencer is able to see and receive these messages and to trigger the appropriate functions on L2 or sending messages to `StarknetCore` on L1. So on Ethereum, your contracts have to do a call to the `StarknetMessaging` contract and either call `sendMessageToL2` or `consumeMessageFromL2`. On Starknet, you must use the attribute `#[l1_handler]` on the functions that can receive messages from L1 and use the syscall `send_message_to_l1` for those sending messages to L1.
+## The StarknetMessaging Contract
 
-Let's take an example. It comes from the starknet-edu [repo](https://github.com/starknet-edu/starknet-messaging-bridge/tree/main).
+The crucial component of the L1 <> L2 Messaging system is the [`StarknetCore`](https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4) contract. It is a set of Solidity contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of `StarknetCore` is called `StarknetMessaging` and it is the contract responsible for passing messages between Starknet and Ethereum. `StarknetMessaging` follows an [interface](https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6) with functions allowing to send message to L2, receiving messages on L1 from L2 and canceling messages.
 
-To give a bit of context, here we have two contracts, one on L1 and the other on L2. Both interact with each other. The goal of the workshop is to find a way to earn the points.
+```js
+interface IStarknetMessaging is IStarknetMessagingEvents {
 
-Here is a snippet of the solidity code:
+    function sendMessageToL2(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload
+    ) external returns (bytes32);
+
+    function consumeMessageFromL2(uint256 fromAddress, uint256[] calldata payload)
+        external
+        returns (bytes32);
+
+    function startL1ToL2MessageCancellation(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload,
+        uint256 nonce
+    ) external;
+
+    function cancelL1ToL2Message(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload,
+        uint256 nonce
+    ) external;
+}
+```
+
+<span class="caption"> Starknet messaging contract interface</span>
+
+The Starknet sequencer can receive the messages sent from Ethereum to the `StarknetMessaging` contract and trigger the appropriate functions on L2, or send messages to `StarknetCore` on L1.
+
+## Sending messages from Ethereum to Starknet
+
+If you want to send messages from Ethereum to Starknet, your Solidity contracts must call the `sendMessageToL2` function of the `StarknetMessaging` contract. To receive these messages on Starknet, you will need to annotate functions that can be called from L1 with the `#[l1_handler]` attribute.
+
+Let's take an example. It comes from the starknet-edu [repository](https://github.com/starknet-edu/starknet-messaging-bridge/tree/main).
+
+To give a bit of context, here we have two contracts, one on Ethereum and the other on Starknet. Both interact with each other. The goal of the workshop is to find a way to earn points by sending messages from one chain to the other.
+
+Here is a snippet of the solidity code to send a message from Ethereum to Starknet:
 
 ```rust
 function ex01SendMessageToL2(uint256 player_l2_address, uint256 message) external payable{
@@ -44,29 +85,31 @@ function sendMessageToL2(
     ) external override returns (bytes32);
 ```
 
-In `ex01SendMessageToL2`, we first construct the message (the payload). It is an array of `uint256`. Then we call `StarknetCore.sendMessageToL2`. The first parameter is the L2 contract. The second is the selector (or the `sn_keccak` hash of the signature of the function we cant to call on L2) and then the payload. We add a fee to it as a `msg.value` because we need to pay the transaction on L2.
+In `ex01SendMessageToL2`, we first construct the message (the payload). It is an array of `uint256`. Then we call `StarknetCore.sendMessageToL2`. The first parameter is the L2 contract address. The second is the selector (or the `sn_keccak` hash of the name of the function we want to call on L2), followed by the payload. We add a fee to it as a `msg.value` because we need to pay the transaction on L2.
 
-On Starknet side we have:
+On the Starknet side, to receive this message, we have:
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging.cairo:here}}
 ```
 
-We need to add the `#[l1_handler]` attribute to our function. This means that this function can only be used in L1 handler transactions which are special functions that can only be triggered by the sequencer following a message sent from L1. There is nothing particular to do to receive transactions from L1 beside that. It is important to verify the origin of the transaction so that we ensure that our contract can only receive messages from a trusted L1 contract.
+We need to add the `#[l1_handler]` attribute to our function. This means that this function can only be used to process messages from L1. L1 handlers are special functions that can only be triggered by the sequencer following a message sent from L1. There is nothing particular to do to receive transactions from L1 besides that. It is important to verify the origin of the transaction so that we ensure that our contract can only receive messages from a trusted L1 contract.
 
-On L1, the important part is to build the exact same payload as on L2. Then you call `starknetCore.consumeMessageFromL2` by passing the L2 contract address and the payload.
+It is important to notice that when we send a message from L1 to L2, you have nothing to do on L2. The message is automatically consumed on L2 and the associated transaction is triggered. But if we do the opposite, we have to manually consume the message on L1.
 
-It is important to notice that when we send a message from L1 to L2, you have nothing to do on L2. The message is automatically consumed on L2 and the associated transaction triggered. But if we do the opposite, we have to manually consume the message on L1.
+## Sending messages from Starknet to Ethereum
 
-To send a message in the opposite direction, what we would do on Starknet is:
+When sending messages from Starknet to Ethereum, you will have to use the `send_message_to_l1` syscall in your Cairo contracts. This syscall allows you to send messages to the `StarknetMessaging` contract on L1. Unlike L1-to-L2 messages, L2-to-L1 messages are not automatically consumed, which means that you will need your Solidity contract to call the `consumeMessageFromL2` function explicitly in order to consume the message.
+
+To send a message from L2 to L1, what we would do on Starknet is:
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging.cairo:l2l1}}
 ```
 
-We simply build the payload and pass it, along with the L1 contract address, to the syscall.
+We simply build the payload and pass it, along with the L1 contract address, to the syscall function.
 
-and on L1:
+On L1, the important part is to build the same payload as on L2. Then you call `starknetCore.consumeMessageFromL2` by passing the L2 contract address and the payload.
 
 ```js
 function ex02ReceiveMessageFromL2(uint256 player_l2_address, uint256 message) external payable{
@@ -92,6 +135,6 @@ function ex02ReceiveMessageFromL2(uint256 player_l2_address, uint256 message) ex
     }
 ```
 
-Another important issue to remember is that on L1 we use `uint256` and on L2 we are dealing with `felt252`. `felt252` are smaller than `uint256`. So we have to pay attention to the size of the messages we are sending. If, on L1, we build a message which size is above the maximum felt value, the message will never be consumed on L2.
+It is important to remember that on L1 we are sending a payload of `uint256`, but the basic data type on Starknet is `felt252`; however, `felt252` are approximatively 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
 
-If you want to learn more you can visit the [Starknet doc](https://docs.starknet.io/documentation/architecture_and_concepts/L1-L2_Communication/messaging-mechanism/).
+If you want to learn more about the messaging mechanism, you can visit the [Starknet documentation](https://docs.starknet.io/documentation/architecture_and_concepts/L1-L2_Communication/messaging-mechanism/).
