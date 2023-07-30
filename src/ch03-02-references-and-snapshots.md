@@ -62,9 +62,13 @@ fn calculate_length(
 
 The scope in which the variable `array_snapshot` is valid is the same as any function parameter’s scope, but the underlying value of the snapshot is not dropped when `array_snapshot` stops being used. When functions have snapshots as parameters instead of the actual values, we won’t need to return the values in order to give back ownership of the original value, because we never had it.
 
-Snapshots can be converted back into regular values using the `desnap` operator `*`, as long as the value type is copyable (which is not the case for Arrays, as they don't implement `Copy`). In the following example, we want to calculate the area of a rectangle, but we don't want to take ownership of the rectangle in the `calculate_area` function, because we might want to use the rectangle again after the function call. Since our function doesn't mutate the rectangle instance, we can pass the snapshot of the rectangle to the function, and then transform the snapshots back into values using the `desnap` operator `*`.
+#### Desnap Operator
 
-The snapshot type is always copyable and droppable, so that you can use it multiple times without worrying about ownership transfers.
+To convert a snapshot back into a regular value, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator: the snapshot value is copied to a new variable.
+
+It's important to note that during this conversion process, the value it points to is copied into a new variable. This enables multiple uses of the underlying value without concerns about ownership transfers. This also means that the value pointed to by the snapshot must be copyable (which is not the case for Arrays, as they don't implement `Copy`).
+
+In the following example, we want to calculate the area of a rectangle, but we don't want to take ownership of the rectangle in the `calculate_area` function, because we might want to use the rectangle again after the function call. Since our function doesn't mutate the rectangle instance, we can pass the snapshot of the rectangle to the function, and then transform the snapshots back into values using the `desnap` operator `*`.
 
 ```rust
 {{#include ../listings/ch03-understanding-ownership/no_listing_10_desnap.cairo}}
