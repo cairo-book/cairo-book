@@ -64,7 +64,7 @@ The scope in which the variable `array_snapshot` is valid is the same as any fun
 
 #### Desnap Operator
 
-To convert a snapshot back into a regular value, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator: the snapshot value is copied to a new memory cell.
+To convert a snapshot back into a regular value, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator: the snapshot value is copied to a new variable.
 
 It's important to note that during this conversion process, the value it points to is copied into a new variable. This enables multiple uses of the underlying value without concerns about ownership transfers. This also means that the value pointed to by the snapshot must be copyable (which is not the case for Arrays, as they don't implement `Copy`).
 
