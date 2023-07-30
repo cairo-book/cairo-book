@@ -1,20 +1,16 @@
-## Common Collections
-
-Cairo1 provides a set of common collection types that can be used to store and manipulate data. These collections are designed to be efficient, flexible, and easy to use. This section introduces the primary collection types available in Cairo1: `Array` and `Felt252Dict` (coming soon).
-
-### Array
+## Arrays
 
 An array is a collection of elements of the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
 
 An important thing to note is that arrays have limited modifications options. Arrays are, in fact, queues whose values can't be modified.
 This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can only append items to the end of an array and remove items from the front using `pop_front`.
 
-#### Creating an Array
+### Creating an Array
 
 Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of the creation of an array to which we append 3 elements:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_00_array_new_append.cairo}}
 ```
 
 When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
@@ -27,30 +23,30 @@ let mut arr = ArrayTrait::<u128>::new();
 let mut arr:Array<u128> = ArrayTrait::new();
 ```
 
-#### Updating an Array
+### Updating an Array
 
-##### Adding Elements
+#### Adding Elements
 
 To add an element to the end of an array, you can use the `append()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo:5}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_00_array_new_append.cairo:5}}
 ```
 
-##### Removing Elements
+#### Removing Elements
 
 You can only remove elements from the front of an array by using the `pop_front()` method.
 This method returns an `Option` containing the removed element, or `Option::None` if the array is empty.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_31_array_pop_front.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_01_array_pop_front.cairo}}
 ```
 
 The above code will print `10` as we remove the first element that was added.
 
 In Cairo, memory is immutable, which means that it is not possible to modify the elements of an array once they've been added. You can only add elements to the end of an array and remove elements from the front of an array. These operations do not require memory mutation, as they involve updating pointers rather than directly modifying the memory cells.
 
-#### Reading Elements from an Array
+### Reading Elements from an Array
 
 To access array elements, you can use `get()` or `at()` array methods that return different types. Using `arr.at(index)` is equivalent to using the subscripting operator `arr[index]`.
 
@@ -61,7 +57,7 @@ The `at` function, on the other hand, directly returns a snapshot to the element
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_32_array_at.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_02_array_at.cairo}}
 ```
 
 In this example, the variable named `first` will get the value `0` because that
@@ -71,45 +67,33 @@ the value `1` from index `1` in the array.
 Here is an example with the `get()` method:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_33_array_get.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_03_array_get.cairo}}
 ```
 
-#### Size related methods
+### Size related methods
 
 To determine the number of elements in an array, use the `len()` method. The return is of type `usize`.
 
 If you want to check if an array is empty or not, you can use the `is_empty()` method, which returns `true` if the array is empty and `false` otherwise.
 
-#### Storing multiple types with Enums
+### Storing multiple types with Enums
 
 If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_34_array_with_enums.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_04_array_with_enums.cairo}}
 ```
 
-#### Span
+### Span
 
 `Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))
 
 All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method.
 
-##### Turning an Array into span
+#### Turning an Array into span
 
 To create a `Span` of an `Array`, call the `span()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_35_array_span.cairo:5}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_05_array_span.cairo:5}}
 ```
-
-## Summary
-
-You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
-`if` expressions, loops, and common collections! To practice with the concepts discussed in this chapter,
-try building programs to do the following:
-
-- Generate the _n_-th Fibonacci number.
-- Compute the factorial of a number _n_.
-
-When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_
-commonly exist in other programming languages: ownership.

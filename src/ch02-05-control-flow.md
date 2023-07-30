@@ -169,3 +169,14 @@ the loop. On every iteration of the loop, we check whether the `counter` is equa
 When the condition is met, we use the `break` keyword with the value `counter * 2`. After the loop, we use a
 semicolon to end the statement that assigns the value to `result`. Finally, we
 print the value in `result`, which in this case is `20`.
+
+## Summary
+
+You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
+`if` expressions and loops! To practice with the concepts discussed in this chapter,
+try building programs to do the following:
+
+- Generate the _n_-th Fibonacci number.
+- Compute the factorial of a number _n_.
+
+Now, we’ll review the common collection types in Cairo in the next chapter.
