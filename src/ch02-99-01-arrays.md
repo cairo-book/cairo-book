@@ -10,7 +10,7 @@ This has to do with the fact that once a memory slot is written to, it cannot be
 Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of the creation of an array to which we append 3 elements:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_00_array_new_append.cairo}}
 ```
 
 When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
@@ -30,7 +30,7 @@ let mut arr:Array<u128> = ArrayTrait::new();
 To add an element to the end of an array, you can use the `append()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo:5}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_00_array_new_append.cairo:5}}
 ```
 
 #### Removing Elements
@@ -39,7 +39,7 @@ You can only remove elements from the front of an array by using the `pop_front(
 This method returns an `Option` containing the removed element, or `Option::None` if the array is empty.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_31_array_pop_front.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_01_array_pop_front.cairo}}
 ```
 
 The above code will print `10` as we remove the first element that was added.
@@ -57,7 +57,7 @@ The `at` function, on the other hand, directly returns a snapshot to the element
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_32_array_at.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_02_array_at.cairo}}
 ```
 
 In this example, the variable named `first` will get the value `0` because that
@@ -67,7 +67,7 @@ the value `1` from index `1` in the array.
 Here is an example with the `get()` method:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_33_array_get.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_03_array_get.cairo}}
 ```
 
 ### Size related methods
@@ -81,7 +81,7 @@ If you want to check if an array is empty or not, you can use the `is_empty()` m
 If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_34_array_with_enums.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_04_array_with_enums.cairo}}
 ```
 
 ### Span
@@ -95,5 +95,5 @@ All methods provided by `Array` can also be used with `Span`, with the exception
 To create a `Span` of an `Array`, call the `span()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_35_array_span.cairo:5}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_05_array_span.cairo:5}}
 ```
