@@ -1,114 +1,10 @@
-## Common Collections
-
-Cairo1 provides a set of common collection types that can be used to store and manipulate data. These collections are designed to be efficient, flexible, and easy to use. This section introduces the primary collection types available in Cairo1: Arrays and Dictionaries.
-
-### Array
-
-An array is a collection of elements of the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
-
-An important thing to note is that arrays have limited modifications options. Arrays are, in fact, queues whose values can't be modified.
-This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can only append items to the end of an array and remove items from the front using `pop_front`.
-
-#### Creating an Array
-
-Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of the creation of an array to which we append 3 elements:
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo}}
-```
-
-When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
-
-```rust, noplayground
-let mut arr = ArrayTrait::<u128>::new();
-```
-
-```rust, noplayground
-let mut arr:Array<u128> = ArrayTrait::new();
-```
-
-#### Updating an Array
-
-##### Adding Elements
-
-To add an element to the end of an array, you can use the `append()` method:
-
-```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_30_array_new_append.cairo:5}}
-```
-
-##### Removing Elements
-
-You can only remove elements from the front of an array by using the `pop_front()` method.
-This method returns an `Option` containing the removed element, or `Option::None` if the array is empty.
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_31_array_pop_front.cairo}}
-```
-
-The above code will print `10` as we remove the first element that was added.
-
-In Cairo, memory is immutable, which means that it is not possible to modify the elements of an array once they've been added. You can only add elements to the end of an array and remove elements from the front of an array. These operations do not require memory mutation, as they involve updating pointers rather than directly modifying the memory cells.
-
-#### Reading Elements from an Array
-
-To access array elements, you can use `get()` or `at()` array methods that return different types. Using `arr.at(index)` is equivalent to using the subscripting operator `arr[index]`.
-
-The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the [References and Snapshots](ch03-02-references-and-snapshots.md) chapter.
-
-The `at` function, on the other hand, directly returns a snapshot to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. You should only use at when you want the program to panic if the provided index is out of the array's bounds, which can prevent unexpected behavior.
-
-In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_32_array_at.cairo}}
-```
-
-In this example, the variable named `first` will get the value `0` because that
-is the value at index `0` in the array. The variable named `second` will get
-the value `1` from index `1` in the array.
-
-Here is an example with the `get()` method:
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_33_array_get.cairo}}
-```
-
-#### Size related methods
-
-To determine the number of elements in an array, use the `len()` method. The return is of type `usize`.
-
-If you want to check if an array is empty or not, you can use the `is_empty()` method, which returns `true` if the array is empty and `false` otherwise.
-
-#### Storing multiple types with Enums
-
-If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types.
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_34_array_with_enums.cairo}}
-```
-
-#### Span
-
-`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))
-
-All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method.
-
-##### Turning an Array into span
-
-To create a `Span` of an `Array`, call the `span()` method:
-
-```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_35_array_span.cairo:5}}
-```
-
-### Dictionaries
+## Dictionaries
 
 Cairo provides in its core library a dictionary-like type. The `Felt252Dict<T>` data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables, associative arrays and many others.
 
 The `Felt252Dict<T>` type is useful when you want to organize your data in a certain way for which using an `Array<T>` and indexing doesn't suffice. Cairo dictionaries also allow the programmer to easily simulate the existence of mutable memory when there is none.
 
-#### Basic Use of Dictionaries
+### Basic Use of Dictionaries
 
 It is normal in other languages when creating a new dictionary to define the data types of both key and value. In Cairo, the key type is restricted to `felt252` leaving only the possibility to specify the value data type, represented by `T` in `Felt252Dict<T>`.
 
@@ -141,7 +37,7 @@ Until this point, we have seen all the basic features of `Felt252Dict<T>` and ho
 
 In the following sections, we are going to give some insights about `Felt252Dict<T>` inner mechanisms and the compromises that were taken to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as use the `entry` method as another way to interact with them.
 
-#### Dictionaries Underneath
+### Dictionaries Underneath
 
 One of the constraints of Cairo's non-deterministic design is that its memory system is immutable, so in order to simulate mutability, the language implements `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
 
@@ -182,7 +78,7 @@ This approach to implementing `Felt252Dict<T>` means that for each read/write op
 If you pour some thought into alternate ways of implementing `Felt252Dict<T>` you'd surely find them, probably even ditching completely the need for a `previous_value` field, nonetheless, since Cairo is not your normal language this won't work.
 One of the purposes of Cairo is, with the STARK proof system, to generate proofs of computational integrity. This means that you need to verify that program execution is correct and inside the boundaries of Cairo restrictions. One of those boundary checks consists of "dictionary squashing" and that requires information on both previous and new values for every entry.
 
-#### Squashing Dictionaries
+### Squashing Dictionaries
 
 To verify that the proof generated by a Cairo program execution that used a `Felt252Dict<T>` is correct we need to check that there wasn't any illegal tampering with the dictionary. This is done through a method called `squash_dict` that reviews each entry of the entry list and checks that access to the dictionary remains coherent throughout the execution.
 
@@ -211,7 +107,7 @@ After squashing, the entry list would be reduced to:
 
 In case of a change on any of the values of the first table, squashing would have failed during runtime.
 
-#### Dictionary Destruction
+### Dictionary Destruction
 
 If you run the examples from [Basic Use of Dictionaries](#basic-use-of-dictionaries) you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
 
@@ -219,13 +115,13 @@ The `Destruct<T>` trait represents another way of removing instances out of scop
 
 Later in [Dictionaries as Struct Members](#dictionaries-as-struct-members), we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
 
-#### More Dictionaries
+### More Dictionaries
 
 Up to this point, we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in a certain way. If you haven't understood all of it, don't worry because in this section we will have some more examples using dictionaries.
 
 We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` [interacts](#dictionaries-of-complex-types) with other complex types such as `Array<T>` and how to [implement](#dictionaries-as-struct-members) a struct with a dictionary as a member.
 
-#### Entry and Finalize
+### Entry and Finalize
 
 In the [Dictionaries Underneath](#dictionaries-underneath) section, we explained how `Felt252Dict<T>` internally worked. It was a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given a certain `key` and then update it accordingly to whatever operation it was executing. The Cairo language gives us the tools to replicate this ourselves through the `entry` and `finalize` methods.
 
@@ -273,7 +169,7 @@ As a finalizing note, these two methods are implemented in a similar way to how 
 {{#rustdoc_include ../listings/ch15-dictionaries/listing_15_03_custom_methods.cairo:main}}
 ```
 
-#### Dictionaries of Complex Types
+### Dictionaries of Complex Types
 
 One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`.
 This trait defines the `zero_default` method which is the one that gets called when a value does not exist in the dictionary.
@@ -321,7 +217,7 @@ The complete script would look like this:
 {{#include ../listings/ch15-dictionaries/listing_15_04_dict_of_complex.cairo:all}}
 ```
 
-#### Dictionaries as Struct Members
+### Dictionaries as Struct Members
 
 Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom _user database_ that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:
 
@@ -372,12 +268,6 @@ Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully f
 
 ## Summary
 
-You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
-`if` expressions, loops, and common collections! To practice with the concepts discussed in this chapter,
-try building programs to do the following:
+Well done! You finished this chapter on arrays and dictionaries in Cairo. These data structures may be a bit challenging to grasp, but they are really useful.
 
-- Generate the _n_-th Fibonacci number.
-- Compute the factorial of a number _n_.
-
-When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_
-commonly exist in other programming languages: ownership.
+When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_ commonly exist in other programming languages: ownership.

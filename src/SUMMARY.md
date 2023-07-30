@@ -20,7 +20,11 @@
   - [Functions](ch02-03-functions.md)
   - [Comments](ch02-04-comments.md)
   - [Control Flow](ch02-05-control-flow.md)
-  - [Common Collections](ch02-06-common-collections.md)
+
+## Common Collections
+- [Common Collections](ch02-99-00-common-collections.md)
+  - [Arrays](ch02-99-01-arrays.md)
+  - [Dictionaries](ch02-99-02-dictionaries.md)
 
 ## Understanding Ownership
 
