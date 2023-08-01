@@ -2,7 +2,7 @@
 
 A crucial feature of a Layer 2 is its ability to interact with Layer 1.
 
-Starknet has its own L1 <> L2 Messaging system, which is different from its consensus mechanism and the submission of state updates on L1. L1-L2 Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on a chain and use the result of this computation on the other chain.
+Starknet has its own L1 <> L2 Messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on a chain and use the result of this computation on the other chain.
 
 Bridges on Staknet all use L1-L2 messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for L1-L2 messaging would be [DeFi pooling](https://starkware.co/resource/defi-pooling/).
 
@@ -93,9 +93,7 @@ On the Starknet side, to receive this message, we have:
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging.cairo:here}}
 ```
 
-We need to add the `#[l1_handler]` attribute to our function. This means that this function can only be used to process messages from L1. L1 handlers are special functions that can only be triggered by the sequencer following a message sent from L1. There is nothing particular to do to receive transactions from L1 besides that. It is important to verify the origin of the transaction so that we ensure that our contract can only receive messages from a trusted L1 contract.
-
-It is important to notice that when we send a message from L1 to L2, you have nothing to do on L2. The message is automatically consumed on L2 and the associated transaction is triggered. But if we do the opposite, we have to manually consume the message on L1.
+We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be triggered by the sequencer following a message sent from L1. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.
 
 ## Sending messages from Starknet to Ethereum
 
