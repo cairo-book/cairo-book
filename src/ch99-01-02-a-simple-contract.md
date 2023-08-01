@@ -7,7 +7,7 @@ This chapter will introduce you to the basics of Starknet contracts with an exam
 Let's consider the following contract to present the basics of a Starknet contract. It might not be easy to understand it all at once, but we will go through it step by step:
 
 ```rust
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01.cairo:all}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:all}}
 ```
 
 <span class="caption">Listing 99-1: A simple storage contract</span>
@@ -23,13 +23,13 @@ The contract defines and exposes publically the functions `set` and `get` that c
 ### The Interface: the contract's blueprint
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01.cairo:interface}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:interface}}
 ```
 
 The interface of a contract represents the functions this contract exposes to the outside world. Here, the interface exposes two functions: `set` and `get`. By leveraging the [traits & impls](./ch07-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01_bis_wrong_impl.cairo:impl}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01_bis_wrong_impl/src/lib.cairo:impl}}
 ```
 
 <span class="caption">Listing 99-1-bis: A wrong implementation of the interface of the contract. This does not compile.</span>
@@ -49,7 +49,7 @@ Before we explore things further down, let's define some terminology.
 - A _view_ function is a public function that can be called from outside the contract, but that cannot mutate the state of the contract. `get` is a view function.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01.cairo:impl}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:impl}}
 ```
 
 Since the contract interface is defined as the `ISimpleStorage` trait, in order to match the interface, the external functions of the contract
@@ -67,7 +67,7 @@ This allows us to explicitly pass the `self: ContractState` parameter to the fun
 To access a storage variable of the current contract, you add the `self` prefix to the storage variable name, which allows you to use the `read` and `write` methods to either read or write the value of the storage variable.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01.cairo:write_state}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:write_state}}
 ```
 
 <span class="caption">Using `self` and the `write` method to modify the value of a storage variable</span>

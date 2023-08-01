@@ -91,7 +91,7 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib.cairo}}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo}}
 ```
 
 The `mod garden;` line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
@@ -106,7 +106,7 @@ Here, `mod vegetables;` means the code in _src/garden/vegetables.cairo_ is
 included too. That code is:
 
 ```rust,noplayground
-{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden.cairo}}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
 ```
 
 The line `use garden::vegetables::Asparagus;` lets us use bring the `Asparagus` type into scope,
@@ -136,7 +136,7 @@ define some modules and function signatures. Here’s the front of house section
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_01.cairo}}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_01/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 6-1: A `front_of_house` module containing other

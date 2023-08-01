@@ -11,14 +11,14 @@ Events play a crucial role in the creation of smart contracts. Take, for instanc
 All the different events in the contract are defined under the `Event` enum, which implements the `starknet::Event` trait, as enum variants. This trait is defined in the core library as follows:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/no_listing_event_trait.cairo}}
+{{#include ../listings/ch99-starknet-smart-contracts/no_listing_event_trait/src/lib.cairo}}
 ```
 
 The `#[derive(starknet::Event)]` attribute causes the compiler to generate an implementation for the above trait,
 instantiated with the Event type, which in our example is the following enum:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:event}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:event}}
 ```
 
 Each event variant has to be a struct of the same name as the variant, and each variant needs to implement the `starknet::Event` trait itself.
@@ -36,5 +36,5 @@ When emitting the event with `self.emit(Event::StoredName(StoredName { user: use
 After defining events, we can emit them using `self.emit`, with the following syntax:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:emit_event}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:emit_event}}
 ```

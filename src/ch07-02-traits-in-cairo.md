@@ -9,7 +9,7 @@ To define a trait, you use the keyword `trait` followed by the name of the trait
 For example, let's say that we have multiple structs representing shapes. We want our application to be able to perform geometry operations on these shapes, So we define a trait `ShapeGeometry` that contains a blueprint to implement geometry operations on a shape like this:
 
 ```rust,noplayground
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_14_traits.cairo:trait}}
+{{#include ../listings/ch07-generic-types-and-traits/no_listing_14_traits/src/lib.cairo:trait}}
 ```
 
 Here our trait `ShapeGeometry` declares signatures for two methods `boundary` and `area`. When implemented, both these functions should return a `u64` and accept parameters as specified by the trait.
@@ -19,7 +19,7 @@ Here our trait `ShapeGeometry` declares signatures for two methods `boundary` an
 A trait can be implemented using `impl` keyword with the name of your implementation followed by `of` then the name of trait being implemented. Here's an example implementing `ShapeGeometry` trait.
 
 ```rust,noplayground
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_14_traits.cairo:impl}}
+{{#include ../listings/ch07-generic-types-and-traits/no_listing_14_traits/src/lib.cairo:impl}}
 ```
 
 In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defining what the methods `boundary` and `area` should do. Note that the function parameters and return value types are identical to the trait specification.
@@ -29,7 +29,7 @@ In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defi
 You can write implementations directly without definining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute with on the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
 
 ```rust,noplayground
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_15_generate_trait.cairo}}
+{{#include ../listings/ch07-generic-types-and-traits/no_listing_15_generate_trait/src/lib.cairo}}
 ```
 
 In the aforementioned code, there is no need to manually define the trait. The compiler will automatically handle its definition, dynamically generating and updating it as new functions are introduced.
@@ -41,7 +41,7 @@ In the example above, `self` is a special parameter. When a parameter with name 
 When the `ShapeGeometry` trait is implemented, the function `area` from the `ShapeGeometry` trait can be called in two ways:
 
 ```rust
-{{#rustdoc_include ../listings/ch07-generic-types-and-traits/no_listing_14_traits.cairo:main}}
+{{#rustdoc_include ../listings/ch07-generic-types-and-traits/no_listing_14_traits/src/lib.cairo:main}}
 ```
 
 And the implementation of the `area` method will be accessed via the `self` parameter.
@@ -53,7 +53,7 @@ Usually we want to write a trait when we want multiple types to implement a func
 In the example below, we use generic type `T` and our method signatures can use this alias which can be provided during implementation.
 
 ```rust
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_16_generic_traits.cairo}}
+{{#include ../listings/ch07-generic-types-and-traits/no_listing_16_generic_traits/src/lib.cairo}}
 ```
 
 ## Managing and using external trait implementations

@@ -9,7 +9,7 @@ An if expression allows you to branch your code depending on conditions. You pro
 <span class="filename">Filename: main.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_24_if.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_if/src/lib.cairo}}
 ```
 
 All `if` expressions start with the keyword `if`, followed by a condition. In this case, the condition checks whether or not the variable `number` has a value equal to 5. We place the block of code to execute if the condition is `true` immediately after the condition inside curly brackets.
@@ -48,7 +48,7 @@ You can use multiple conditions by combining if and else in an else if expressio
 <span class="filename">Filename: main.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_25_else_if.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_25_else_if/src/lib.cairo}}
 ```
 
 This program has four possible paths it can take. After running it, you should see the following output:
@@ -66,7 +66,7 @@ Because if is an expression, we can use it on the right side of a let statement 
 <span class="filename">Filename: main.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_26_if_let.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_26_if_let/src/lib.cairo}}
 ```
 
 ```console
@@ -93,7 +93,7 @@ like this:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_27_loop.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_27_loop/src/lib.cairo}}
 ```
 
 When we run this program, we’ll see `again!` printed over and over continuously
@@ -125,7 +125,7 @@ To break out of a loop, you can place the `break` statement within the loop to t
 executing the loop. Let's fix the infinite loop by adding a making the stop condition `i > 10` reachable.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break/src/lib.cairo}}
 ```
 
 The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
@@ -160,7 +160,7 @@ use to stop the loop; that value will be returned out of the loop so you can
 use it, as shown here:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_29_loop_return_values.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_29_loop_return_values/src/lib.cairo}}
 ```
 
 Before the loop, we declare a variable named `counter` and initialize it to

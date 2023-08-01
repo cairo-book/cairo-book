@@ -7,7 +7,7 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_06_no_struct.cairo}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_06_no_struct/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 4-6: Calculating the area of a rectangle specified by separate width and height variables</span>
@@ -26,7 +26,7 @@ This code succeeds in figuring out the area of the rectangle by calling the `are
 The issue with this code is evident in the signature of `area`:
 
 ```rust,noplayground
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_06_no_struct.cairo:9}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_06_no_struct/src/lib.cairo:9}}
 ```
 
 The `area` function is supposed to calculate the area of one rectangle, but the function we wrote has two parameters, and it’s not clear anywhere in our program that the parameters are related. It would be more readable and more manageable to group width and height together. We’ve already discussed one way we might do that in [Chapter 3](ch02-02-data-types.html#the-tuple-type): using tuples.
@@ -38,7 +38,7 @@ Listing 4-7 shows another version of our program that uses tuples.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_07_w_tuples.cairo}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_07_w_tuples/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 4-7: Specifying the width and height of the rectangle with a tuple</span>
@@ -54,7 +54,7 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_08_w_structs.cairo}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_08_w_structs/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 4-8: Defining a `Rectangle` struct</span>
@@ -68,7 +68,7 @@ It’d be useful to be able to print an instance of `Rectangle` while we’re de
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_10_print_rectangle.cairo:0:11}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_10_print_rectangle/src/lib.cairo:0:11}}
 ```
 
 <span class="caption">Listing 4-9: Attempting to print a `Rectangle` instance</span>
@@ -91,7 +91,7 @@ To learn more about traits, see [Traits in Cairo](ch07-02-traits-in-cairo.md).
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_10_print_rectangle.cairo}}
+{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_10_print_rectangle/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 4-10: Implementing the `PrintTrait` trait on `Rectangle`</span>

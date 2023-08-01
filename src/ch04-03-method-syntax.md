@@ -18,7 +18,7 @@ in Listing 4-13.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_13_area_method.cairo}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_13_area_method/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 4-13: Defining an `area` method to use on the
@@ -72,7 +72,7 @@ fields. For example, we can define a method on `Rectangle` that is also named
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_14_width_method.cairo}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_14_width_method/src/lib.cairo}}
 ```
 
 Here, we’re choosing to make the `width` method return `true` if the value in
@@ -94,7 +94,7 @@ the program shown in Listing 4-14.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold.cairo:no_method}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:no_method}}
 ```
 
 <span class="caption">Listing 4-14: Using the as-yet-unwritten `can_hold`
@@ -134,7 +134,7 @@ Listing 4-13, shown in Listing 4-15.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold.cairo:trait_impl}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:trait_impl}}
 ```
 
 <span class="caption">Listing 4-15: Implementing the `can_hold` method on
@@ -160,7 +160,7 @@ value twice:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_01_implementation_functions.cairo:here}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_01_implementation_functions/src/lib.cairo:here}}
 ```
 
 To call this function, we use the `::` syntax with the implementation name;
@@ -177,7 +177,7 @@ Each struct is allowed to have multiple `trait` and `impl` blocks. For example, 
 its own `trait` and `impl` blocks.
 
 ```rust,noplayground
-{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_02_multiple_impls.cairo:here}}
+{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_02_multiple_impls/src/lib.cairo:here}}
 ```
 
 <span class="caption">Listing 4-16: Rewriting Listing 4-15 using multiple `impl`

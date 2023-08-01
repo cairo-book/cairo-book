@@ -8,7 +8,7 @@ However, it's essential to use operator overloading judiciously. Misuse can lead
 Consider an example where two `Potions` need to be combined. `Potions` have two data fields, mana and health. Combining two `Potions` should add their respective fields.
 
 ```rust
-{{#include ../listings/ch10-advanced-features/no_listing_01_potions.cairo}}
+{{#include ../listings/ch10-advanced-features/no_listing_01_potions/src/lib.cairo}}
 ```
 
 In the code above, we're implementing the `Add` trait for the `Potion` type. The add function takes two arguments: `lhs` and `rhs` (left and right-hand side). The function body returns a new `Potion` instance, its field values being a combination of `lhs` and `rhs`.

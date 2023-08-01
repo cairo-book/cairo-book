@@ -19,7 +19,7 @@ Recall that when we created the new `adder` project in the first section of this
 <span class="filename">Filename: lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/no_listing_06_cfg_attr.cairo}}
+{{#include ../listings/ch08-testing-cairo-programs/no_listing_06_cfg_attr/src/lib.cairo}}
 ```
 
 The attribute `cfg` stands for configuration and tells Cairo that the following item should only be included given a certain configuration option. In this case, the configuration option is `test`, which is provided by Cairo for compiling and running tests. By using the `cfg` attribute, Cairo compiles our test code only if we actively run the tests with `cairo-test`. This includes any helper functions that might be within this module, in addition to the functions annotated with `#[test]`.
@@ -65,7 +65,7 @@ Enter the code in Listing 8-11 into the _tests/integration_test.cairo_ file:
 <span class="filename">Filename: tests/integration_test.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/no_listing_07_integration_test.cairo:here}}
+{{#include ../listings/ch08-testing-cairo-programs/no_listing_07_integration_test/src/lib.cairo:here}}
 ```
 
 <span class="caption">Listing 8-11: Testing functions from other modules</span>

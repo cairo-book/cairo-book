@@ -90,7 +90,7 @@ In `ex01SendMessageToL2`, we first construct the message (the payload). It is an
 On the Starknet side, to receive this message, we have:
 
 ```rust
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging.cairo:here}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging/src/lib.cairo:here}}
 ```
 
 We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be triggered by the sequencer following a message sent from L1. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.
@@ -102,7 +102,7 @@ When sending messages from Starknet to Ethereum, you will have to use the `send_
 To send a message from L2 to L1, what we would do on Starknet is:
 
 ```rust
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging.cairo:l2l1}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging/src/lib.cairo:l2l1}}
 ```
 
 We simply build the payload and pass it, along with the L1 contract address, to the syscall function.

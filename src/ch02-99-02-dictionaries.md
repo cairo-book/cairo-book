@@ -16,7 +16,7 @@ The core functionality of a `Felt252Dict<T>` is implemented in the trait `Felt25
 These functions allow us to manipulate dictionaries like in any other language. In the following example, we create a dictionary to represent a mapping between individuals and their balance:
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_07_intro.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_07_intro/src/lib.cairo}}
 ```
 
 The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
@@ -26,7 +26,7 @@ Throughout the book we have talked about how Cairo's memory is immutable, meanin
 Building upon our previous example, let us show a code example where the balance of the same user changes:
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_08_intro_rewrite.cairo}}
+{{#include ../listings/ch02-99-common-collections/no_listing_08_intro_rewrite/src/lib.cairo}}
 ```
 
 Notice how in this example we added the _Alex_ individual twice, each time using a different balance and each time that we checked for its balance it had the last value inserted! `Felt252Dict<T>` effectively allows us to "rewrite" the stored value for any given key.
@@ -48,7 +48,7 @@ One of the constraints of Cairo's non-deterministic design is that its memory sy
 If we try implementing `Felt252Dict<T>` using high-level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The definition of `Entry<T>` would be:
 
 ```rust,noplayground
-{{#include ../listings/ch02-99-common-collections/no_listing_09_entries.cairo:struct}}
+{{#include ../listings/ch02-99-common-collections/no_listing_09_entries/src/lib.cairo:struct}}
 ```
 
 For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be registered:
@@ -59,7 +59,7 @@ For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be regis
 The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per `Felt252Dict<T>` interaction. Let's show an example of this using the `balances` dictionary from the previous section and inserting the users 'Alex' and 'Maria':
 
 ```rust
-{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_09_entries.cairo:inserts}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_09_entries/src/lib.cairo:inserts}}
 ```
 
 These instructions would then produce the following list of entries:
@@ -150,23 +150,23 @@ Let us see an example using `entry` and `finalize`. Imagine we would like to imp
 Implementing our custom get would look like this:
 
 ```rust,noplayground
-{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods.cairo:imports}}
+{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods/src/lib.cairo:imports}}
 
-{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods.cairo:custom_get}}
+{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods/src/lib.cairo:custom_get}}
 ```
 
 Implementing the `insert` method would follow a similar workflow, except for inserting a new value when finalizing. If we were to implement it, it would look like the following:
 
 ```rust,noplayground
-{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods.cairo:imports}}
+{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods/src/lib.cairo:imports}}
 
-{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods.cairo:custom_insert}}
+{{#include ../listings/ch02-99-common-collections/no_listing_10_custom_methods/src/lib.cairo:custom_insert}}
 ```
 
 As a finalizing note, these two methods are implemented in a similar way to how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows some example usage:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_10_custom_methods.cairo:main}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_10_custom_methods/src/lib.cairo:main}}
 ```
 
 ### Dictionaries of Complex Types
@@ -182,9 +182,9 @@ To compensate for this the language introduces the `Nullable<T>` type.
 Let's show using an example. We will try to store a `Span<felt252>` inside a dictionary. For that, we will use `Nullable<T>` and `Box<T>`. Also, we are storing a `Span<T>` and not an `Array<T>` because the latter does not implement the `Copy<T>` trait which is required for reading from a dictionary.
 
 ```rust,noplayground
-{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex.cairo:imports}}
+{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:imports}}
 
-{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex.cairo:header}}
+{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:header}}
 
 //...
 ```
@@ -202,7 +202,7 @@ Once the element is inside the dictionary, and we want to get it, we follow the 
 ```rust,noplayground
 //...
 
-{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex.cairo:footer}}
+{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:footer}}
 ```
 
 Here we:
@@ -214,7 +214,7 @@ Here we:
 The complete script would look like this:
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex.cairo:all}}
+{{#include ../listings/ch02-99-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:all}}
 ```
 
 ### Dictionaries as Struct Members
@@ -222,9 +222,9 @@ The complete script would look like this:
 Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom _user database_ that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:
 
 ```rust,noplayground
-{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member.cairo:struct}}
+{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:struct}}
 
-{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member.cairo:trait}}
+{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:trait}}
 ```
 
 Our new type `UserDatabase<T>` represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are:
@@ -247,9 +247,9 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 The implementation, with all restriction in place, would be as follow:
 
 ```rust,noplayground
-{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member.cairo:imports}}
+{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:imports}}
 
-{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member.cairo:impl}}
+{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
 ```
 
 Our database implementation is almost complete, except for one thing: the compiler doesn't know how to drop a `UserDatabase<T>` out of scope.
@@ -257,13 +257,13 @@ Since it has a `Felt252Dict<T>` as a member it cannot be dropped, so we are forc
 Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [genericity](/src/ch07-00-generic-types-and-traits.md). We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust,noplayground
-{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member.cairo:destruct}}
+{{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}
 ```
 
 Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully functional database. We can now try it out:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member.cairo:main}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:main}}
 ```
 
 ## Summary
