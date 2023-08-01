@@ -102,7 +102,7 @@ If you want to use named parameters, you need to specify the name of the paramet
 Here is an example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_36_named_parameters.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_30_named_parameters.cairo}}
 ```
 
 ### Statements and Expressions
