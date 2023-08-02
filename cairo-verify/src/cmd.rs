@@ -1,4 +1,3 @@
-use std::path::PathBuf;
 use std::process::Command;
 
 pub enum Cmd {
@@ -7,54 +6,6 @@ pub enum Cmd {
     ScarbCairoRun(),
     ScarbTest(),
 }
-
-// let (binary, cairo_root) = match self {
-//     Cmd::CairoFormat(path) => {
-//         if let Some(p) = path {
-//             return format!(
-//                 "scarb --manifest-path {}/Scarb.toml fmt",
-//                 p.to_string_lossy()
-//             );
-//         }
-//         return String::from("scarb fmt");
-//     }
-//     Cmd::CairoCompile(path) => {
-//         if let Some(p) = path {
-//             return format!(
-//                 "scarb --manifest-path {}/Scarb.toml build",
-//                 p.to_string_lossy()
-//             );
-//         }
-//         return String::from("scarb build");
-//     }
-//     Cmd::CairoRun(path) => {
-//         if let Some(p) = path {
-//             return format!(
-//                 "scarb --manifest-path {}/Scarb.toml run",
-//                 p.to_string_lossy()
-//             );
-//         }
-//         return String::from("scarb run");
-//     }
-//     Cmd::CairoTest(path) => {
-//         if let Some(p) = path {
-//             return format!(
-//                 "scarb --manifest-path {}/Scarb.toml test",
-//                 p.to_string_lossy()
-//             );
-//         }
-//         return String::from("scarb test");
-//     }
-//     Cmd::StarknetCompile(path) => {
-//         if let Some(p) = path {
-//             return format!(
-//                 "scarb --manifest-path {}/Scarb.toml build",
-//                 p.to_string_lossy()
-//             );
-//         }
-//         return String::from("scarb build");
-//     }
-// };
 
 impl Cmd {
     pub fn as_str(&self) -> String {
@@ -88,7 +39,7 @@ impl Cmd {
             command.args(self.manifest_option(manifest_path));
             command.arg("build");
 
-            let output = command.output().expect("Failed to execute scarb");
+            let _output = command.output().expect("Failed to execute scarb");
         }
         let mut command = Command::new("scarb");
         command.args(self.manifest_option(manifest_path));

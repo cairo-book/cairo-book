@@ -1,6 +1,5 @@
 use clap::Parser;
 use regex::Regex;
-use std::path::PathBuf;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
