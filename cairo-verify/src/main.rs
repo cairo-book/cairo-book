@@ -67,6 +67,7 @@ fn main() {
         );
 
         println!("\n{}", "Please review the errors above. Do not hesitate to ask for help by commenting on the issue on Github.".red().italic());
+        std::process::exit(1);
     } else {
         println!("\n{}\n", "ALL TESTS PASSED!".green().bold());
     }
