@@ -49,27 +49,23 @@ The Starknet sequencer can receive the messages sent from Ethereum to the `Stark
 
 If you want to send messages from Ethereum to Starknet, your Solidity contracts must call the `sendMessageToL2` function of the `StarknetMessaging` contract. To receive these messages on Starknet, you will need to annotate functions that can be called from L1 with the `#[l1_handler]` attribute.
 
-Let's take an example. It comes from the starknet-edu [repository](https://github.com/starknet-edu/starknet-messaging-bridge/tree/main).
+Let's take an example. It is adapted from the [starknet-edu L1-L2 exercises](https://github.com/starknet-edu/starknet-messaging-bridge/tree/main). It's a contract that can receive a message sent from L1 and store it, and also send a message to L1.
 
 To give a bit of context, here we have two contracts, one on Ethereum and the other on Starknet. Both interact with each other. The goal of the workshop is to find a way to earn points by sending messages from one chain to the other.
 
-Here is a snippet of the solidity code to send a message from Ethereum to Starknet:
+Here is a snippet of the solidity code to send a simple message from Ethereum to Starknet:
 
 ```rust
-function ex01SendMessageToL2(uint256 player_l2_address, uint256 message) external payable{
+function ex01SendMessageToL2(uint256 value) external payable{
 
     // This function call requires money to send L2 messages, we check there is enough
     require(msg.value>=10000000000, "Message fee missing");
 
-    // Sending the message to the evaluator
+    // Sending the message to the l2 contract
     // Creating the payload
-    uint256[] memory payload = new uint256[](3);
-    // Adding player address on L2
-    payload[0] = player_l2_address;
-    // Adding player address on L1
-    payload[1] = uint256(uint160(msg.sender));
-    // Adding player message
-    payload[2] = message;
+    uint256[] memory payload = new uint256[](1);
+    // Adding the value to the payload
+    payload[0] = value;
     // Sending the message
     starknetCore.sendMessageToL2{value: 10000000000}(l2Evaluator, ex01_selector, payload);
 }
@@ -90,7 +86,7 @@ In `ex01SendMessageToL2`, we first construct the message (the payload). It is an
 On the Starknet side, to receive this message, we have:
 
 ```rust
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging/src/lib.cairo:here}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1_L2_messaging/src/lib.cairo:here}}
 ```
 
 We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be triggered by the sequencer following a message sent from L1. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.
@@ -102,7 +98,7 @@ When sending messages from Starknet to Ethereum, you will have to use the `send_
 To send a message from L2 to L1, what we would do on Starknet is:
 
 ```rust
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1-L2-messaging/src/lib.cairo:l2l1}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1_L2_messaging/src/lib.cairo:l2l1}}
 ```
 
 We simply build the payload and pass it, along with the L1 contract address, to the syscall function.
@@ -117,7 +113,7 @@ function ex02ReceiveMessageFromL2(uint256 player_l2_address, uint256 message) ex
         // Reconstructing the payload of the message we want to consume
         uint256[] memory payload = new uint256[](2);
         // Adding the address of the player on L2
-        payload[0] = player_l2_address;
+        payload[0] = caller_l2_address;
         // Adding the message
         payload[1] = message;
         // Adding a constraint on the message, to make sure players read BOTH contracts ;-)
