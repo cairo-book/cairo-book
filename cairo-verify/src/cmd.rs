@@ -2,47 +2,100 @@ use std::path::PathBuf;
 use std::process::Command;
 
 pub enum Cmd {
-    CairoFormat(Option<PathBuf>),
-    CairoCompile(Option<PathBuf>),
-    CairoRun(Option<PathBuf>),
-    CairoTest(Option<PathBuf>),
-    StarknetCompile(Option<PathBuf>),
+    ScarbFormat(),
+    ScarbBuild(),
+    ScarbCairoRun(),
+    ScarbTest(),
 }
+
+// let (binary, cairo_root) = match self {
+//     Cmd::CairoFormat(path) => {
+//         if let Some(p) = path {
+//             return format!(
+//                 "scarb --manifest-path {}/Scarb.toml fmt",
+//                 p.to_string_lossy()
+//             );
+//         }
+//         return String::from("scarb fmt");
+//     }
+//     Cmd::CairoCompile(path) => {
+//         if let Some(p) = path {
+//             return format!(
+//                 "scarb --manifest-path {}/Scarb.toml build",
+//                 p.to_string_lossy()
+//             );
+//         }
+//         return String::from("scarb build");
+//     }
+//     Cmd::CairoRun(path) => {
+//         if let Some(p) = path {
+//             return format!(
+//                 "scarb --manifest-path {}/Scarb.toml run",
+//                 p.to_string_lossy()
+//             );
+//         }
+//         return String::from("scarb run");
+//     }
+//     Cmd::CairoTest(path) => {
+//         if let Some(p) = path {
+//             return format!(
+//                 "scarb --manifest-path {}/Scarb.toml test",
+//                 p.to_string_lossy()
+//             );
+//         }
+//         return String::from("scarb test");
+//     }
+//     Cmd::StarknetCompile(path) => {
+//         if let Some(p) = path {
+//             return format!(
+//                 "scarb --manifest-path {}/Scarb.toml build",
+//                 p.to_string_lossy()
+//             );
+//         }
+//         return String::from("scarb build");
+//     }
+// };
 
 impl Cmd {
     pub fn as_str(&self) -> String {
-        let (binary, cairo_root) = match self {
-            Cmd::CairoFormat(path) => ("cairo-format", path),
-            Cmd::CairoCompile(path) => ("cairo-compile", path),
-            Cmd::CairoRun(path) => ("cairo-run", path),
-            Cmd::CairoTest(path) => ("cairo-test", path),
-            Cmd::StarknetCompile(path) => ("starknet-compile", path),
+        let command = match self {
+            Cmd::ScarbFormat() => "fmt",
+            Cmd::ScarbBuild() => "build",
+            Cmd::ScarbCairoRun() => "cairo-run",
+            Cmd::ScarbTest() => "test",
         };
+        command.into()
+    }
 
-        if let Some(r) = cairo_root {
-            let full_path = r.join(binary);
-            return full_path.to_string_lossy().to_string();
-        }
-
-        binary.into()
+    fn manifest_option(&self, manifest_path: &str) -> Vec<String> {
+        vec!["--manifest-path".to_string(), manifest_path.to_string()]
     }
 
     fn args(&self) -> Vec<&str> {
         match self {
-            Cmd::CairoFormat(_) => vec!["-c"],
-            Cmd::CairoCompile(_) => vec![],
-            Cmd::CairoRun(_) => vec!["--available-gas=20000000"],
-            Cmd::CairoTest(_) => vec!["--starknet"],
-            Cmd::StarknetCompile(_) => vec![],
+            Cmd::ScarbFormat() => vec!["-c"],
+            Cmd::ScarbBuild() => vec![],
+            Cmd::ScarbCairoRun() => vec!["--available-gas=20000000"],
+            Cmd::ScarbTest() => vec![],
         }
     }
 
-    pub fn test(&self, file_path: &str) -> Result<(), String> {
-        let output = Command::new(self.as_str())
-            .args(self.args())
-            .arg(file_path)
-            .output()
-            .unwrap_or_else(|_| panic!("Failed to run {}", self.as_str()));
+    pub fn test(&self, manifest_path: &str) -> Result<(), String> {
+        // Temporary workaround that compiles before trying to run
+        // Until Scarb does it by default.
+        if let Cmd::ScarbCairoRun() = self {
+            let mut command = Command::new("scarb");
+            command.args(self.manifest_option(manifest_path));
+            command.arg("build");
+
+            let output = command.output().expect("Failed to execute scarb");
+        }
+        let mut command = Command::new("scarb");
+        command.args(self.manifest_option(manifest_path));
+        command.arg(self.as_str());
+        command.args(self.args());
+
+        let output = command.output().expect("Failed to execute scarb");
 
         if !output.status.success() {
             return Err(String::from_utf8_lossy(&output.stderr).to_string());

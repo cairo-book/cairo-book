@@ -9,10 +9,6 @@ pub struct Config {
     #[arg(short, long, default_value = "./listings")]
     pub path: String,
 
-    /// The path to the cairo root directory
-    #[arg(long)]
-    pub cairo_root: Option<PathBuf>,
-
     /// Print more information.
     #[arg(short, long)]
     pub verbose: bool,
