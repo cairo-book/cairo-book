@@ -1,4 +1,4 @@
-# Voting contract
+# Deploying and Interacting with a Voting contract
 
 The **`Vote`** contract in Starknet begins by registering voters through the contract's constructor. Three voters are initialized at this stage, and their addresses are passed to an internal function **`_register_voters`**. This function adds the voters to the contract's state, marking them as registered and eligible to vote.
 
