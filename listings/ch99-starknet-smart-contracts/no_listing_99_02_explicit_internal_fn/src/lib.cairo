@@ -14,7 +14,7 @@ mod NameRegistry {
     }
 
     //ANCHOR: person
-    #[derive(Copy, Drop, Serde, storage_access::StorageAccess)]
+    #[derive(Copy, Drop, Serde, starknet::Store)]
     struct Person {
         name: felt252,
         address: ContractAddress

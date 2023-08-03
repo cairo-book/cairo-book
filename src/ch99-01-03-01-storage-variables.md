@@ -34,7 +34,7 @@ is the Pedersen hash and the final value is taken `mod2251−256`. You can learn
 ### Storing custom structs
 
 The compiler knows how to store basic data types, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `ContractAddress`, etc. But what if you want to store a custom struct in storage? In that case, you have to explicitly tell the compiler how to store your struct in storage.
-In our example, we want to store a `Person` struct in storage, so we have to tell the compiler how to store it in storage by adding a derive attribute of the `storage_access::StorageAccess` trait to our struct definition.
+In our example, we want to store a `Person` struct in storage, so we have to tell the compiler how to store it in storage by adding a derive attribute of the `starknet::Store` trait to our struct definition.
 
 ```rust, noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
