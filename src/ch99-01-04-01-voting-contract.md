@@ -170,7 +170,7 @@ With an unregistered account address, the terminal output is 0 (i.e., false), co
 
 Now that we have established how to verify voter eligibility, we can vote! To vote, we interact with the `vote` function, which is flagged as external, necessitating the use of the `starknet invoke` command.
 
-The `invoke` command syntax resembles the `call` command, but for voting, we submit either 1 (for Yes) or 0 (for No) as our input. When we invoke the `vote` function, we are charged a fee, and the transaction must be signed by the voter; we are writing to the contract's storage.
+The `invoke` command syntax resembles the `call` command, but for voting, we submit either `1` (for Yes) or `0` (for No) as our input. When we invoke the `vote` function, we are charged a fee, and the transaction must be signed by the voter; we are writing to the contract's storage.
 
 ```bash
 //Voting Yes
