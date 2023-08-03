@@ -16,7 +16,7 @@ jobs:
       - name: Setup Scarb
         uses: software-mansion/setup-scarb@v1
         with:
-          scarb-version: "0.5.2"
+          scarb-version: "0.6.0-alpha.2"
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache

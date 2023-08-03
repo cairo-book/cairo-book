@@ -178,7 +178,7 @@ fn handle_error(e: String, file_path: &str, cmd: Cmd) {
         Cmd::ScarbTest() | Cmd::ScarbCairoRun() => {
             format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
         }
-        _ => format!("{} -> {}", cmd.as_str(), clickable(e.as_str())),
+        _ => format!("{} -> {}", cmd.as_str(), clickable_file),
     };
 
     error!("{}", msg);
