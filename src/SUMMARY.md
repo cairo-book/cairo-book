@@ -95,6 +95,8 @@
   - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
     - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+  - [Other examples](./ch99-01-04-00-other-examples.md)
+    - [Deploying and Interacting with a Voting contract](./ch99-01-04-01-voting-contract.md)
   - [L1 <> L2 Messaging](./ch99-04-00-L1-L2-messaging.md)
   - [Security Considerations](./ch99-03-security-considerations.md)
 
