@@ -115,7 +115,7 @@ There’s one other aspect of match we need to discuss: the arms’ patterns mus
 ```
 
 ```bash
-$ cairo-run src/test.cairo
+$ scarb cairo-run
     error: Unsupported match. Currently, matches require one arm per variant,
     in the order of variant definition.
     --> test.cairo:34:5

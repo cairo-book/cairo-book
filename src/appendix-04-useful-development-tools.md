@@ -4,20 +4,14 @@ In this appendix, we talk about some useful development tools that the Cairo
 project provides. We’ll look at automatic formatting, quick ways to apply
 warning fixes, a linter, and integrating with IDEs.
 
-### Automatic Formatting with `cairo-format`
+### Automatic Formatting with `scarb fmt`
 
-The `cairo-format` tool reformats your code according to the community code style.
-Many collaborative projects use `cairo-format` to prevent arguments about which
+Scarb projects can be formatted using the `scarb fmt` command.
+If you're using the cairo binaries directly, you can run `cairo-format` instead.
+Many collaborative projects use `scarb fmt` to prevent arguments about which
 style to use when writing Cairo: everyone formats their code using the tool.
 
 To format any Cairo project, enter the following:
-
-```console
-cairo-format -r
-```
-
-Running this command reformats all the Cairo code in the current directory, recursively. This
-should only change the code style, not the code semantics.
 
 ### IDE Integration Using `cairo-language-server`
 
@@ -36,3 +30,5 @@ for installation instructions, You will gain abilities such as autocompletion, j
 definition, and inline errors.
 
 [cairo-language-server]: https://github.com/starkware-libs/cairo/tree/main/crates/cairo-lang-language-server
+
+> Note: If you have Scarb installed, it should work out of the box with the Cairo VSCode extension.

@@ -1,6 +1,6 @@
 ## Hello, World
 
-Now that you’ve installed Cairo, it’s time to write your first Cairo program.
+Now that you’ve installed Cairo through Scarb, it’s time to write your first Cairo program.
 It’s traditional when learning a new language to write a little program that
 prints the text `Hello, world!` to the screen, so we’ll do the same here!
 
@@ -22,32 +22,35 @@ your projects there.
 Open a terminal and enter the following commands to make a _cairo_projects_ directory
 and a directory for the “Hello, world!” project within the _cairo_projects_ directory.
 
+> Note: From now on, for each example shown in the book, we assume that
+> you will be working from a Scarb project directory. If you are not using Scarb, and try to run the examples from a different directory, you might need to adjust the commands accordingly or create a Scarb project.
+
 For Linux, macOS, and PowerShell on Windows, enter this:
 
 ```console
 mkdir ~/cairo_projects
 cd ~/cairo_projects
-mkdir hello_world
+scarb new hello_world
 cd hello_world
 ```
 
 For Windows CMD, enter this:
 
 ```cmd
-> mkdir "%USERPROFILE%\projects"
-> cd /d "%USERPROFILE%\projects"
-> mkdir hello_world
+> mkdir "%USERPROFILE%\cairo_projects"
+> cd /d "%USERPROFILE%\cairo_projects"
+> scarb new hello_world
 > cd hello_world
 ```
 
 ### Writing and Running a Cairo Program
 
-Next, make a new source file and call it _main.cairo_. Cairo files always end with
+Next, we will edit the source file `src/lib.cairo`. Cairo files always end with
 the _.cairo_ extension. If you’re using more than one word in your filename, the
 convention is to use an underscore to separate them. For example, use
 _hello_world.cairo_ rather than _helloworld.cairo_.
 
-Now open the _main.cairo_ file you just created and enter the code in Listing 1-1.
+Now open the _lib.cairo_ file created by Scarb, delete the existing content and enter the code in Listing 1-1.
 
 <span class="filename">Filename: main.cairo</span>
 
@@ -64,9 +67,16 @@ Save the file and go back to your terminal window in the
 _~/cairo_projects/hello_world_ directory. Enter the following
 commands to compile and run the file:
 
-```console
-$ cairo-run main.cairo
-Hello, world!
+> Note: before running the program, you have to build the project with `scarb build`
+
+<!--TODO REMOVE ONCE SCARB INTEGRATES THIS -->
+
+```shell
+$ scarb build && scarb cairo-run
+running hello_world ...
+[DEBUG]	Hello, world!                  	(raw: 0x48656c6c6f2c20776f726c6421
+
+Run completed successfully, returning []
 ```
 
 Regardless of your operating system, the string `Hello, world!` should print to
@@ -96,8 +106,8 @@ function bodies. It’s good style to place the opening curly bracket on the sam
 line as the function declaration, adding one space in between.
 
 > Note: If you want to stick to a standard style across Cairo projects, you can
-> use the automatic formatter tool called `cairo-format` to format your code in a
-> particular style (more on `cairo-format` in
+> use the automatic formatter tool available with `scarb fmt` to format your code in a
+> particular style (more on `scarb fmt` in
 > [Appendix D][devtools]). The Cairo team has included this tool
 > with the standard Cairo distribution, as `cairo-run` is, so it should already be
 > installed on your computer!
@@ -123,10 +133,5 @@ to `print()`, and the short string is printed to the screen.
 Fourth, we end the line with a semicolon (`;`), which indicates that this
 expression is over and the next one is ready to begin. Most lines of Cairo code
 end with a semicolon.
-
-Just running with `cairo-run` is fine for simple programs, but as your project
-grows, you’ll want to manage all the options and make it easy to share your
-code. Next, we’ll introduce you to the Scarb tool, which will help you write
-real-world Cairo programs.
 
 [devtools]: appendix-04-useful-development-tools.md

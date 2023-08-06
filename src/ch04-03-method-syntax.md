@@ -105,7 +105,7 @@ The expected output would look like the following because both dimensions of
 `rect1`:
 
 ```text
-❯ cairo-run src/lib.cairo
+$ scarb cairo-run
 [DEBUG]	Can rec1 hold rect2?           	(raw: 384675147322001379018464490539350216396261044799)
 
 [DEBUG]	true                           	(raw: 1953658213)

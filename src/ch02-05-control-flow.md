@@ -104,7 +104,7 @@ Most terminals support the keyboard shortcut <span class="keystroke">ctrl-c</spa
 stuck in a continual loop. Give it a try:
 
 ```console
-❯ cairo-run src/lib.cairo --available-gas=20000000
+$ scarb cairo-run --available-gas=20000000
 [DEBUG]	again                          	(raw: 418346264942)
 
 [DEBUG]	again                          	(raw: 418346264942)

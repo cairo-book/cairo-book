@@ -25,7 +25,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
   - Inline, within curly brackets that replace the semicolon following `mod garden;`.
 
     ```rust,noplayground
-      // crate root file (lib.cairo)
+      // crate root file (src/lib.cairo)
         mod garden {
         // code defining the garden module goes here
         }
@@ -66,25 +66,12 @@ crate’s directory, also named `backyard`, contains these files and directories
 ```text
 backyard/
 ├── Scarb.toml
-├── cairo_project.toml
 └── src
     ├── garden
     │   └── vegetables.cairo
     ├── garden.cairo
     └── lib.cairo
 ```
-
-> Note: You will notice here a `cairo_project.toml` file.
-> This is the configuration file for "vanilla" Cairo projects (i.e. not managed by Scarb),
-> which is required to run the `cairo-run .` command to run the code of the crate.
-> It is required until Scarb implements this feature. The content of the file is:
->
-> ```toml
-> [crate_roots]
-> backyard = "src"
-> ```
->
-> and indicates that the crate named "backyard" is located in the `src` directory.
 
 The crate root file in this case is _src/lib.cairo_, and it contains:
 

@@ -175,7 +175,7 @@ Here’s an example of the `clone` method in action.
 {{#include ../listings/ch03-understanding-ownership/no_listing_08_array_clone/src/lib.cairo}}
 ```
 
-> Note: you will need to run `cairo-run` with the `--available-gas=2000000` option to run this example, because it uses a loop and must be ran with a gas limit.
+> Note: you will need to run `scarb cairo-run` with the `--available-gas=2000000` option to run this example, because it uses a loop and must be ran with a gas limit.
 
 When you see a call to `clone`, you know that some arbitrary code is being
 executed and that code may be expensive. It’s a visual indicator that something

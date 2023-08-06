@@ -1,201 +1,188 @@
 # Installation
 
-The first step is to install Cairo. We will download Cairo manually, using cairo repository or with an installation script. You’ll need an internet connection for the download.
+Cairo can be installed by simply downloading [Scarb](https://docs.swmansion.com/scarb/docs). Scarb bundles the Cairo compiler and the Cairo language server together in an easy-to-install package so that you can start writing Cairo code right away.
 
-### Prerequisites
+Scarb is also Cairo's package manager and is heavily inspired by [Cargo](https://doc.rust-lang.org/cargo/), Rust’s build system and package manager.
 
-First you will need to have Rust and Git installed.
+Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, building those libraries, and provides LSP support for the VSCode Cairo 1 extension.
 
-```bash
-# Install stable Rust
-rustup override set stable && rustup update
-```
+As you write more complex Cairo programs, you might add dependencies, and if you start a project using Scarb, managing external code and dependencies will be a lot easier to do.
 
-Install [Git](https://git-scm.com/).
+Let's start by installing Scarb.
 
-## Installing Cairo with a Script ([Installer](https://github.com/franalgaba/cairo-installer) by [Fran](https://github.com/franalgaba))
+## Installing Scarb
 
-### Install
+### Requirements
 
-If you wish to install a specific release of Cairo rather than the latest head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export CAIRO_GIT_TAG=v2.0.0`).
+Scarb requires a Git executable to be available in the `PATH` environment variable.
 
-```bash
-curl -L https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | bash
-```
+### Installation
 
-After installing, follow [these instructions](#set-up-your-shell-environment-for-cairo) to set up your shell environment.
-
-### Update
-
-```
-rm -fr ~/.cairo
-curl -L https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | bash
-```
-
-### Uninstall
-
-Cairo is installed within `$CAIRO_ROOT` (default: ~/.cairo). To uninstall, just remove it:
+To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download).
+You can simply run the following command in your terminal, then follow the onscreen instructions. This will install the latest stable release.
 
 ```bash
-rm -fr ~/.cairo
+curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
 ```
 
-then remove these three lines from .bashrc:
-
-```bash
-export PATH="$HOME/.cairo/target/release:$PATH"
-```
-
-and finally, restart your shell:
-
-```bash
-exec $SHELL
-```
-
-### Set up your shell environment for Cairo
-
-- Define environment variable `CAIRO_ROOT` to point to the path where
-  Cairo will store its data. `$HOME/.cairo` is the default.
-  If you installed Cairo via Git checkout, we recommend
-  to set it to the same location as where you cloned it.
-- Add the `cairo-*` executables to your `PATH` if it's not already there
-
-The below setup should work for the vast majority of users for common use cases.
-
-- For **bash**:
-
-  Stock Bash startup files vary widely between distributions in which of them source
-  which, under what circumstances, in what order and what additional configuration they perform.
-  As such, the most reliable way to get Cairo in all environments is to append Cairo
-  configuration commands to both `.bashrc` (for interactive shells)
-  and the profile file that Bash would use (for login shells).
-
-  First, add the commands to `~/.bashrc` by running the following in your terminal:
+- Verify installation by running the following command in new terminal session, it should print both Scarb and Cairo language versions, e.g:
 
   ```bash
-  echo 'export CAIRO_ROOT="$HOME/.cairo"' >> ~/.bashrc
-  echo 'command -v cairo-compile >/dev/null || export PATH="$CAIRO_ROOT/target/release:$PATH"' >> ~/.bashrc
+  $ scarb --version
+    scarb 0.5.0 (1b109f1f6 2023-07-03)
+    cairo: 2.0.0 (https://crates.io/crates/cairo-lang-compiler/2.0.0)
   ```
 
-  Then, if you have `~/.profile`, `~/.bash_profile` or `~/.bash_login`, add the commands there as well.
-  If you have none of these, add them to `~/.profile`.
+### Creating a Project with Scarb
 
-  - to add to `~/.profile`:
+Let’s create a new project using Scarb and look at how it differs from our original “Hello, world!” project.
 
-    ```bash
-    echo 'export CAIRO_ROOT="$HOME/.cairo"' >> ~/.profile
-    echo 'command -v cairo-compile >/dev/null || export PATH="$CAIRO_ROOT/target/release:$PATH"' >> ~/.profile
-    ```
-
-  - to add to `~/.bash_profile`:
-    ```bash
-    echo 'export CAIRO_ROOT="$HOME/.cairo"' >> ~/.bash_profile
-    echo 'command -v cairo-compile >/dev/null || export PATH="$CAIRO_ROOT/target/release:$PATH"' >> ~/.bash_profile
-    ```
-
-- For **Zsh**:
-
-  ```zsh
-  echo 'export CAIRO_ROOT="$HOME/.cairo"' >> ~/.zshrc
-  echo 'command -v cairo-compile >/dev/null || export PATH="$CAIRO_ROOT/target/release:$PATH"' >> ~/.zshrc
-  ```
-
-  If you wish to get Cairo in non-interactive login shells as well, also add the commands to `~/.zprofile` or `~/.zlogin`.
-
-- For **Fish shell**:
-
-  If you have Fish 3.2.0 or newer, execute this interactively:
-
-  ```fish
-  set -Ux CAIRO_ROOT $HOME/.cairo
-  fish_add_path $CAIRO_ROOT/target/release
-  ```
-
-  Otherwise, execute the snippet below:
-
-  ```fish
-  set -Ux CAIRO_ROOT $HOME/.cairo
-  set -U fish_user_paths $CAIRO_ROOT/target/release $fish_user_paths
-  ```
-
-In MacOS, you might also want to install [Fig](https://fig.io/) which
-provides alternative shell completions for many command line tools with an
-IDE-like popup interface in the terminal window.
-(Note that their completions are independent from Cairo's codebase
-so they might be slightly out of sync for bleeding-edge interface changes.)
-
-### Restart your shell
-
-for the `PATH` changes to take effect.
-
-```sh
-exec "$SHELL"
-```
-
-## Installing Cairo Manually ([Guide](https://github.com/auditless/cairo-template) by [Abdel](https://github.com/abdelhamidbakhta))
-
-### Step 1: Install Cairo 1.0
-
-If you are using an x86 Linux system and can use the release binary, download Cairo here: <https://github.com/starkware-libs/cairo/releases>.
-
-For everyone else, we recommend compiling Cairo from source as follows:
+Navigate back to your projects directory (or wherever you decided to store your code). Then run the following:
 
 ```bash
-# Start by defining environment variable CAIRO_ROOT
-export CAIRO_ROOT="${HOME}/.cairo"
-
-# Create .cairo folder if it doesn't exist yet
-mkdir $CAIRO_ROOT
-
-# Clone the Cairo compiler in $CAIRO_ROOT (default root)
-cd $CAIRO_ROOT && git clone git@github.com:starkware-libs/cairo.git .
-
-# OPTIONAL/RECOMMENDED: If you want to install a specific version of the compiler
-# Fetch all tags (versions)
-git fetch --all --tags
-# View tags (you can also do this in the cairo compiler repository)
-git describe --tags `git rev-list --tags`
-# Checkout the version you want
-git checkout tags/v2.0.0
-
-# Generate release binaries
-cargo build --all --release
+$ scarb new hello_scarb
 ```
 
-.
+It creates a new directory and project called hello_scarb. We’ve named our project hello_scarb, and Scarb creates its files in a directory of the same name.
 
-**NOTE: Keeping Cairo up to date**
+Go into the hello_scarb directory with the command `cd hello_scarb`. You’ll see that Scarb has generated two files and one directory for us: a `Scarb.toml` file and a src directory with a `lib.cairo` file inside.
 
-Now that your Cairo compiler is in a cloned repository, all you will need to do
-is pull the latest changes and rebuild as follows:
+It has also initialized a new Git repository along with a `.gitignore` file
+
+> Note: Git is a common version control system. You can stop using version control system by using the `--vcs` flag.
+> Run `scarb new -help` to see the available options.
+
+Open _Scarb.toml_ in your text editor of choice. It should look similar to the code in Listing 1-2.
+
+<span class="filename">Filename: Scarb.toml</span>
+
+```toml
+[package]
+name = "hello_scarb"
+version = "0.1.0"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+
+[dependencies]
+# foo = { path = "vendor/foo" }
+```
+
+<span class="caption">Listing 1-2: Contents of Scarb.toml generated by `scarb new`</span>
+
+This file is in the [TOML](https://toml.io/) (Tom’s Obvious, Minimal Language) format, which is Scarb’s configuration format.
+
+The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other sections.
+
+The next two lines set the configuration information Scarb needs to compile your program: the name and the version of Scarb to use.
+
+The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
+
+> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/starknet-package).
+
+The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
+
+```rust,noplayground
+mod hello_scarb;
+```
+
+Then create a new file called `src/hello_scarb.cairo` and put the following code in it:
+
+<span class="filename">Filename: src/hello_scarb.cairo</span>
+
+```rust,file=hello_scarb.cairo
+use debug::PrintTrait;
+fn main() {
+    'Hello, Scarb!'.print();
+}
+```
+
+We have just created a file called `lib.cairo`, which contains a module declaration referencing another module named "hello_scarb", as well as the file `hello_scarb.cairo`, containing the implementation details of the "hello_scarb" module.
+
+Scarb requires your source files to be located within the src directory.
+
+The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
+Scarb ensures a designated location for all project components, maintaining a structured organization.
+
+If you started a project that doesn’t use Scarb, as we did with the “Hello, world!” project, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate `Scarb.toml` file.
+
+### Building a Scarb Project
+
+From your hello_scarb directory, build your project by entering the following command:
 
 ```bash
-cd $CAIRO_ROOT && git fetch && git pull && cargo build --all --release
+$ scarb build
+   Compiling hello_scarb v0.1.0 (file:///projects/Scarb.toml)
+    Finished release target(s) in 0 seconds
 ```
 
-### Step 2: Add Cairo 1.0 executables to your path
+This command creates a `sierra` file in `target/release`, let's ignore the `sierra` file for now.
+
+If you have installed Cairo correctly, you should be able to run and see the following output:
 
 ```bash
-export PATH="$CAIRO_ROOT/target/release:$PATH"
+$ scarb run src/lib.cairo
+[DEBUG] Hello, Scarb!                   (raw: 5735816763073854913753904210465)
+
+Run completed successfully, returning []
 ```
 
-**NOTE: If installing from a Linux binary, adapt the destination path accordingly.**
+> Note: You will notice here that we didn't use a Scarb command, but rather a command from the Cairo binaries directly.
+> As Scarb doesn't have a command to execute Cairo code yet, we have to use the `cairo-run` command directly.
+> We will use this command in the rest of the tutorial, but we will also use Scarb commands to initialize projects.
 
-### Step 3: Setup Language Server
+### Running tests
 
-#### VS Code Extension
+To run all the tests associated with a particular package, you can use the `scarb test` command.
+It is not a test runner by itself, but rather delegates work to a testing solution of choice. Scarb comes with preinstalled `scarb cairo-test` extension, which bundles Cairo's native test runner. It is the default test runner used by scarb test.
+To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/testing#using-third-party-test-runners).
 
-- If you have the previous Cairo 0 extension installed, you can disable/uninstall it.
-- Install the Cairo 1 extension for proper syntax highlighting and code navigation. You can find the link to the extension [here](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1&ssr=false), or just search for "Cairo 1.0" in the VS Code marketplace.
-- The extension will work out of the box once you will have [Scarb](./ch01-03-hello-scarb.md) installed.
+Test functions are marked with the `#[test]` attributes, and running `scarb test` will run all test functions in your codebase under the `src/` directory.
 
-#### Cairo Language Server without Scarb
-
-If you don't want to depend on Scarb, you can still use the Cairo Language Server with the compiler binary.
-From [Step 1](#installing-cairo-with-a-script-installer-by-fran), the `cairo-language-server` binary should be built and executing this command will copy its path into your clipboard.
-
-```bash
-which cairo-language-server | pbcopy
+```txt
+├── Scarb.toml
+├── src
+│   ├── lib.cairo
+│   └── file.cairo
 ```
 
-Update the `cairo1.languageServerPath` of the Cairo 1.0 extension by pasting the path.
+<span class="caption"> A sample Scarb project structure</span>
+
+Let’s recap what we’ve learned so far about Scarb:
+
+- We can create a project using `scarb new`.
+- We can build a project using `scarb build` to generate the compiled Sierra code.
+- We can define custom scripts in `Scarb.toml` and call them with the `scarb run` command.
+- We can run tests using the `scarb test` command.
+
+An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
+
+### Starknet support
+
+Scarb supports smart contract development for Starknet. To enable this functionality, you'll need to make some configurations in your `Scarb.toml` file.
+You have to add the `starknet` dependency and add a `[[target.starknet-contract]]` section to enable contract compilation.
+
+Below is the minimal Scarb.toml file required for a Starknet contract:
+
+```toml
+[package]
+name = "hello_starknet"
+version = "0.1.0"
+
+[dependencies]
+starknet = ">=2.1.0"
+
+[[target.starknet-contract]]
+```
+
+For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/contract-target).
+
+# Summary
+
+You’re already off to a great start on your Cairo journey! In this chapter, you’ve learned how to:
+
+- Install the latest stable version of Cairo
+- Write and run a “Hello, Scarb!” program using `scarb` directly
+- Create and run a new project using the conventions of Scarb
+- Execute tests using the `scarb test` command
+
+This is a great time to build a more substantial program to get used to reading and writing Cairo code.

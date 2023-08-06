@@ -12,10 +12,10 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 
 <span class="caption">Listing 4-6: Calculating the area of a rectangle specified by separate width and height variables</span>
 
-Now run the program with `cairo-run src/lib.cairo`:
+Now run the program with `scarb cairo-run`:
 
 ```bash
-$ cairo-run src/lib.cairo
+$ scarb cairo-run
 [DEBUG] ,                               (raw: 300)
 
 Run completed successfully, returning []
