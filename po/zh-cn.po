@@ -1186,10 +1186,10 @@ msgstr "### 安装"
 
 #: src/ch01-03-hello-scarb.md:19
 msgid ""
-"To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download).\n"
+"To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download.html).\n"
 "You can simply run the following command in your terminal, then follow the onscreen instructions. This will install the latest stable release."
 msgstr ""
-"要安装Scarb，请参考[安装说明]（https://docs.swmansion.com/scarb/docs/install）。\n"
+"要安装Scarb，请参考[安装说明]（https://docs.swmansion.com/scarb/docs/install.html）。\n"
 "你可以简单地在终端运行以下命令，然后按照屏幕上的指示操作。这将安装最新的稳定版本。"
 
 #: src/ch01-03-hello-scarb.md:22
@@ -1279,7 +1279,7 @@ msgid ""
 "name = \"hello_scarb\"\n"
 "version = \"0.1.0\"\n"
 "\n"
-"# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest\n"
+"# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html\n"
 "\n"
 "[dependencies]\n"
 "# foo = { path = \"vendor/foo\" }\n"
@@ -1290,7 +1290,7 @@ msgstr ""
 "name = “hello_scarb”\n"
 "version = “0.1.0”\n"
 "\n"
-"# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest\n"
+"# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html\n"
 "\n"
 "[dependencies]\n"
 "# foo = { path = “vendor/foo” }\n"
@@ -1323,8 +1323,8 @@ msgstr "最后一行，`[dependencies]`，是一个章节的开始，该章节�
 #: src/ch01-03-hello-scarb.md:78
 msgid ""
 "> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/"
-"starknet/starknet-package)."
-msgstr "> 注意：如果你要为Starknet构建合约，你需要添加[Scarb文档](https://docs.swmansion.com/scarb/docs/starknet/starknet-package)中提到的`starknet`依赖关系。"
+"starknet/starknet-package.html)."
+msgstr "> 注意：如果你要为Starknet构建合约，你需要添加[Scarb文档](https://docs.swmansion.com/scarb/docs/starknet/starknet-package.html)中提到的`starknet`依赖关系。"
 
 #: src/ch01-03-hello-scarb.md:80
 msgid "The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later."
@@ -1502,12 +1502,12 @@ msgid ""
 "To run all the tests associated with a particular package, you can use the `scarb test` command.\n"
 "It is not a test runner by itself, but rather delegates work to a testing solution of choice. Scarb comes with preinstalled `scarb cairo-test` extension, which bundles Cairo's native "
 "test runner. It is the default test runner used by scarb test.\n"
-"To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/testing#using-third-party-test-runners). For instance, if you want to "
+"To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/testing.html#using-third-party-test-runners). For instance, if you want to "
 "use [Protostar](https://docs.swmansion.com/protostar/) as your testing framework, you can modify the `Scarb.toml` file as follows:"
 msgstr ""
 "要运行与特定软件包相关的所有测试，可以使用`scarb test`命令。\n"
 "它本身并不是一个测试运行工具，而是将测试工作委托给所选的测试工具。Scarb预装了`scarb cairo-test`扩展，它捆绑了Cairo的本地测试运行器。它也是scarb test默认使用的测试运行器。\n"
-"要使用第三方测试运行器，请参考[Scarb的文档](https://docs.swmansion.com/scarb/docs/testing#using-third-party-test-runners)。例如，如果你想使用[Protostar](https://docs.swmansion.com/"
+"要使用第三方测试运行器，请参考[Scarb的文档](https://docs.swmansion.com/scarb/docs/testing.html#using-third-party-test-runners)。例如，如果你想使用[Protostar](https://docs.swmansion.com/"
 "protostar/)作为你的测试框架，你可以修改`Scarb.toml`文件如下："
 
 #: src/ch01-03-hello-scarb.md:158
@@ -8133,11 +8133,11 @@ msgid ""
 "- `src/` is the main directory where all the Cairo source files for the package will be stored.\n"
 "- `lib.cairo` is the default root module of the crate, which is also the main entry point of the package. By default, it is empty.\n"
 "- `Scarb.toml` is the package manifest file, which contains metadata and configuration options for the package, such as dependencies, package name, version, and authors. You can find "
-"documentation about it on the [scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest)."
+"documentation about it on the [scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest.html)."
 msgstr ""
 "- `src/`是主目录，包的所有Cairo源文件将存放在这里。\n"
 "- `lib.cairo`是crate的默认根模块，也是包的主要入口点。默认情况下，它是空的。\n"
-"- `Scarb.toml`是包示例文件，它包含包的元数据和配置选项，如依赖关系、包名称、版本和作者。你可以在[scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest)上找到关于它"
+"- `Scarb.toml`是包示例文件，它包含包的元数据和配置选项，如依赖关系、包名称、版本和作者。你可以在[scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest.html)上找到关于它"
 "的文档。"
 
 #: src/ch06-01-packages-and-crates.md:33
@@ -9231,8 +9231,8 @@ msgid "You might need to use external packages to leverage the functionality pro
 msgstr "你可能需要使用外部包来利用社区提供的功能。要在你的项目中使用Scarb的外部包，请遵循以下步骤："
 
 #: src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:246
-msgid "> The dependencies system is still a work in progress. You can check the official [documentation](https://docs.swmansion.com/scarb/docs/guides/dependencies)."
-msgstr "> 依赖关系系统仍然是一项正在进行的工作。你可以查看官方的[文档](https://docs.swmansion.com/scarb/docs/guides/dependencies)。"
+msgid "> The dependencies system is still a work in progress. You can check the official [documentation](https://docs.swmansion.com/scarb/docs/guides/dependencies.html)."
+msgstr "> 依赖关系系统仍然是一项正在进行的工作。你可以查看官方的[文档](https://docs.swmansion.com/scarb/docs/guides/dependencies.html)。"
 
 #: src/ch06-05-separating-modules-into-different-files.md:1
 msgid "## Separating Modules into Different Files"

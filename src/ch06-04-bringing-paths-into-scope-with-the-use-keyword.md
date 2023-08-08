@@ -159,4 +159,4 @@ the library and programmers calling the library.
 
 You might need to use external packages to leverage the functionality provided by the community. To use an external package in your project with Scarb, follow these steps:
 
-> The dependencies system is still a work in progress. You can check the official [documentation](https://docs.swmansion.com/scarb/docs/guides/dependencies).
+> The dependencies system is still a work in progress. You can check the official [documentation](https://docs.swmansion.com/scarb/docs/guides/dependencies.html).
