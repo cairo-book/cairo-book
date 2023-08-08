@@ -28,7 +28,7 @@ my_package/
 
 - `src/` is the main directory where all the Cairo source files for the package will be stored.
 - `lib.cairo` is the default root module of the crate, which is also the main entry point of the package. By default, it is empty.
-- `Scarb.toml` is the package manifest file, which contains metadata and configuration options for the package, such as dependencies, package name, version, and authors. You can find documentation about it on the [scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest).
+- `Scarb.toml` is the package manifest file, which contains metadata and configuration options for the package, such as dependencies, package name, version, and authors. You can find documentation about it on the [scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest.html).
 
 ```toml
 [package]

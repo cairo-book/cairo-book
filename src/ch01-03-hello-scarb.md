@@ -16,7 +16,7 @@ Scarb requires a Git executable to be available in the `PATH` environment variab
 
 ### Installation
 
-To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download).
+To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download.html).
 You can simply run the following command in your terminal, then follow the onscreen instructions. This will install the latest stable release.
 
 ```bash
@@ -59,7 +59,7 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 name = "hello_scarb"
 version = "0.1.0"
 
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
 # foo = { path = "vendor/foo" }
@@ -75,7 +75,7 @@ The next two lines set the configuration information Scarb needs to compile your
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
-> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/starknet-package).
+> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/starknet-package.html).
 
 The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
@@ -153,7 +153,7 @@ Using `scarb run` is a convenient way to run custom shell scripts that can be us
 
 To run all the tests associated with a particular package, you can use the `scarb test` command.
 It is not a test runner by itself, but rather delegates work to a testing solution of choice. Scarb comes with preinstalled `scarb cairo-test` extension, which bundles Cairo's native test runner. It is the default test runner used by scarb test.
-To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/testing#using-third-party-test-runners). For instance, if you want to use [Protostar](https://docs.swmansion.com/protostar/) as your testing framework, you can modify the `Scarb.toml` file as follows:
+To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/testing.html#using-third-party-test-runners). For instance, if you want to use [Protostar](https://docs.swmansion.com/protostar/) as your testing framework, you can modify the `Scarb.toml` file as follows:
 
 ```toml
 
@@ -199,7 +199,7 @@ starknet = ">=2.0.1"
 [[target.starknet-contract]]
 ```
 
-For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/contract-target).
+For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/contract-target.html).
 
 # Summary
 
