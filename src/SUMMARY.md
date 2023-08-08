@@ -10,7 +10,6 @@
 
   - [Installation](ch01-01-installation.md)
   - [Hello, World!](ch01-02-hello-world.md)
-  - [Hello, Scarb!](ch01-03-hello-scarb.md)
 
 ## Common Programming Concepts
 

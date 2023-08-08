@@ -50,7 +50,7 @@ Let’s create a new project using Scarb.
 Navigate to your projects directory (or wherever you decided to store your code). Then run the following:
 
 ```bash
-$ scarb new hello_world
+scarb new hello_world
 ```
 
 It creates a new directory and project called `hello_world`. We’ve named our project `hello_world`, and Scarb creates its files in a directory of the same name.
@@ -132,7 +132,7 @@ If you have installed Cairo correctly, you should be able to run and see the fol
 ```shell
 $ scarb build && scarb cairo-run
 running hello_world ...
-[DEBUG]	Hello, world!                  	(raw: 0x48656c6c6f2c20776f726c6421
+[DEBUG] Hello, world!                   (raw: 0x48656c6c6f2c20776f726c6421
 
 Run completed successfully, returning []
 ```

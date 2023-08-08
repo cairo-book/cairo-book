@@ -78,9 +78,9 @@ When we run the program now, we get this:
 
 ```shell
 $ scarb cairo-run
-[DEBUG]	                              	(raw: 5)
+[DEBUG]                                (raw: 5)
 
-[DEBUG]	                              	(raw: 6)
+[DEBUG]                                (raw: 6)
 
 Run completed successfully, returning []
 ```
@@ -156,14 +156,14 @@ When we run this program, it will output the following:
 
 ```shell
 scarb cairo-run
-[DEBUG]	Inner scope x value is:        	(raw: 7033328135641142205392067879065573688897582790068499258)
+[DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
 
 [DEBUG]
-                                      	(raw: 12)
+                                       (raw: 12)
 
-[DEBUG]	Outer scope x value is:        	(raw: 7610641743409771490723378239576163509623951327599620922)
+[DEBUG] Outer scope x value is:         (raw: 7610641743409771490723378239576163509623951327599620922)
 
-[DEBUG]	                              	(raw: 6)
+[DEBUG]                                (raw: 6)
 
 Run completed successfully, returning []
 ```
