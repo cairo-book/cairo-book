@@ -23,12 +23,12 @@ communicate with each other. Different clients can use `cairo-language-server`, 
 [the Cairo extension for Visual Studio Code][vscode-cairo].
 
 [lsp]: http://langserver.org/
-[vscode-cairo]: https://github.com/starkware-libs/cairo/tree/main/vscode-cairo
+[vscode-cairo]: https://marketplace.visualstudio.com/items?itemName=starkware.cairo1
 
 Visit the `vscode-cairo` [page][vscode-cairo]<!-- ignore -->
-for installation instructions, You will gain abilities such as autocompletion, jump to
+to install it on VSCode. You will get abilities such as autocompletion, jump to
 definition, and inline errors.
 
 [cairo-language-server]: https://github.com/starkware-libs/cairo/tree/main/crates/cairo-lang-language-server
 
-> Note: If you have Scarb installed, it should work out of the box with the Cairo VSCode extension.
+> Note: If you have Scarb installed, it should work out of the box with the Cairo VSCode extension, without a manual installation of the language server.
