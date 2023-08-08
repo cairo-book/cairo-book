@@ -40,7 +40,7 @@ adder
 
 In _lib.cairo_, let's add a first test, as shown in Listing 8-1.
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_01_02/src/lib.cairo:it_works}}
@@ -69,7 +69,7 @@ It’s possible to mark a test as ignored so it doesn’t run in a particular in
 
 Let’s start to customize the test to our own needs. First change the name of the `it_works` function to a different name, such as `exploration`, like so:
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_01_02/src/lib.cairo:exploration}}
@@ -117,7 +117,7 @@ The `assert` function, provided by Cairo, is useful when you want to ensure that
 
 In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 8-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function.
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_06/src/lib.cairo:trait_impl}}
@@ -127,7 +127,7 @@ In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we 
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 8-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_06/src/lib.cairo:test1}}
@@ -148,7 +148,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 
 It does pass! Let’s add another test, this time asserting that a smaller rectangle cannot hold a larger rectangle:
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_06/src/lib.cairo:test2}}
@@ -193,7 +193,7 @@ We do this by adding the attribute `should_panic` to our test function. The test
 
 Listing 8-8 shows a test that checks that the error conditions of `GuessTrait::new` happen when we expect them to.
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch08-testing-cairo-programs/listing_08_08/src/lib.cairo}}
@@ -231,7 +231,7 @@ We don’t get a very helpful message in this case, but when we look at the test
 
 Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `Guess` in Listing 8-9 where the new function panics with different messages depending on whether the value is too small or too large.
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_09/src/lib.cairo:test_panic}}

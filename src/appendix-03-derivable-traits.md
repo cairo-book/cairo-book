@@ -176,4 +176,8 @@ as a storage variable in the contract.
 
 ## PartialOrd and Ord for Ordering Comparisons
 
-TODO (Not derivable yet ?)
+In addition to the `PartialEq` trait, the standard library also provides the `PartialOrd` and `Ord` traits to compare values for ordering.
+
+The `PartialOrd` trait allows for comparison between instances of a type for ordering, thereby enabling the <, <=, >, and >= operators.
+
+When `PartialOrd` is derived on structs, two instances are ordered by comparing each field in turn.

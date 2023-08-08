@@ -86,7 +86,7 @@ system thus prevents us from using the same instance of `arr` in `foo`.
 
 Running the code above will result in a compile-time error:
 
-```console
+```shell
 error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
  --> array.cairo:6:9
     let mut arr = ArrayTrait::<u128>::new();
@@ -147,7 +147,7 @@ Consider the following example, in which we define a custom type that contains a
 
 If you try to run this code, you will get a compile-time error:
 
-```console
+```shell
 error: Variable not dropped. Trait has no implementation in context: core::traits::Drop::<temp7::temp7::A>. Trait has no implementation in context: core::traits::Destruct::<temp7::temp7::A>.
  --> temp7.cairo:7:5
     A {
@@ -188,7 +188,7 @@ Passing a variable to a function will either move it or copy it. As seen in the 
 Listing 3-3 has an example with some annotations
 showing where variables go into and out of scope.
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch03-understanding-ownership/listing_03_03/src/lib.cairo}}
@@ -208,7 +208,7 @@ Returning values can also transfer ownership. Listing 3-4 shows an example of a
 function that returns some value, with similar annotations as those in Listing
 4-3.
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch03-understanding-ownership/listing_03_04/src/lib.cairo}}
@@ -227,7 +227,7 @@ from the body of the function that we might want to return as well.
 
 Cairo does let us return multiple values using a tuple, as shown in Listing 3-5.
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch03-understanding-ownership/listing_03_05/src/lib.cairo}}

@@ -28,7 +28,7 @@ Let’s start a new project with Scarb named _functions_ to explore functions
 further. Place the `another_function` example in _src/lib.cairo_ and run it. You
 should see the following output:
 
-```console
+```shell
 $ scarb cairo-run
 [DEBUG] Hello, world!                (raw: 5735816763073854953388147237921)
 [DEBUG] Another function.            (raw: 22265147635379277118623944509513687592494)
@@ -56,7 +56,7 @@ In this version of `another_function` we add a parameter:
 
 Try running this program; you should get the following output:
 
-```console
+```shell
 $ scarb cairo-run
 [DEBUG]                                 (raw: 5)
 ```
@@ -85,7 +85,7 @@ named `y` and is type `felt252` too. The function then prints the content of the
 Let’s try running this code. Replace the program currently in your _functions_
 project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run`:
 
-```console
+```shell
 $ scarb cairo-run
 [DEBUG]                                 (raw: 5)
 [DEBUG]                                 (raw: 6)
@@ -141,7 +141,7 @@ to another variable, as the following code tries to do; you’ll get an error:
 
 When you run this program, the error you’ll get looks like this:
 
-```console
+```shell
 $ scarb cairo-run
 error: Missing token TerminalRParen.
  --> src/lib.cairo:2:14
@@ -216,7 +216,7 @@ function—just the number `5` by itself. That’s a perfectly valid function in
 Cairo. Note that the function’s return type is specified too, as `-> u32`. Try
 running this code; the output should look like this:
 
-```console
+```shell
 $ scarb cairo-run
 [DEBUG]                                 (raw: 5)
 ```
@@ -250,7 +250,7 @@ expression to a statement, we’ll get an error:
 
 Compiling this code produces an error, as follows:
 
-```console
+```shell
 error: Unexpected return type. Expected: "core::integer::u32", found: "()".
 ```
 

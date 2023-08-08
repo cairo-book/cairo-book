@@ -76,7 +76,7 @@ For example, let’s change _src/lib.cairo_ to the following:
 
 When we run the program now, we get this:
 
-```console
+```shell
 $ scarb cairo-run
 [DEBUG]	                              	(raw: 5)
 
@@ -154,7 +154,7 @@ variable, multiplying the previous value by `2` to give `x` a value of `12`.
 When that scope is over, the inner shadowing ends and `x` returns to being `6`.
 When we run this program, it will output the following:
 
-```console
+```shell
 scarb cairo-run
 [DEBUG]	Inner scope x value is:        	(raw: 7033328135641142205392067879065573688897582790068499258)
 
@@ -197,7 +197,7 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 
 The error says we were expecting a `u64` (the original type) but we got a different type:
 
-```console
+```shell
 $ scarb cairo-run
 error: Unexpected argument type. Expected: "core::integer::u64", found: "core::felt252".
  --> lib.cairo:6:9

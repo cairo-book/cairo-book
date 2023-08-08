@@ -4,7 +4,7 @@ Structs are similar to tuples, discussed in [The Data Types](ch02-02-data-types.
 
 To define a struct, we enter the keyword `struct` and name the entire struct. A struct’s name should describe the significance of the pieces of data being grouped together. Then, inside curly brackets, we define the names and types of the pieces of data, which we call fields. For example, Listing 4-1 shows a struct that stores information about a user account.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct/src/lib.cairo:user}}
@@ -17,7 +17,7 @@ We create an instance by stating the name of the struct and then add curly brack
 
 For example, we can declare a particular user as shown in Listing 4-2.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct/src/lib.cairo:all}}
@@ -27,7 +27,7 @@ For example, we can declare a particular user as shown in Listing 4-2.
 
 To get a specific value from a struct, we use dot notation. For example, to access this user’s email address, we use `user1.email`. If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field. Listing 4-3 shows how to change the value in the `email` field of a mutable `User` instance.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:main}}
@@ -41,7 +41,7 @@ As with any expression, we can construct a new instance of the struct as the las
 
 Listing 4-4 shows a `build_user` function that returns a `User` instance with the given email and username. The `active` field gets the value of `true`, and the `sign_in_count` gets a value of `1`.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:build_user}}
@@ -55,7 +55,7 @@ It makes sense to name the function parameters with the same name as the struct 
 
 Because the parameter names and the struct field names are exactly the same in Listing 4-4, we can use the field init shorthand syntax to rewrite `build_user` so it behaves exactly the same but doesn’t have the repetition of `username` and `email`, as shown in Listing 4-5.
 
-<span class="filename">Filename: structs.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:build_user2}}

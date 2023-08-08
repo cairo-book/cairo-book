@@ -6,7 +6,7 @@ When a panic occurs, it leads to an abrupt termination of the program. The `pani
 
 Here is how we can `panic` from inside a program and return the error code `2`:
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch09-error-handling/no_listing_01_panic/src/lib.cairo}}
@@ -14,7 +14,7 @@ Here is how we can `panic` from inside a program and return the error code `2`:
 
 Running the program will produce the following output:
 
-```console
+```shell
 $ scarb cairo-run
 Run panicked with [2 (''), ].
 ```
@@ -49,7 +49,7 @@ Wrong example:
 
 If you write the following function that includes a function that may panic you will get the following error:
 
-```console
+```shell
 error: Function is declared as nopanic but calls a function that may panic.
  --> test.cairo:2:12
     assert(1 == 1, 'what');

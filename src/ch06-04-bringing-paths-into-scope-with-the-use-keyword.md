@@ -34,7 +34,7 @@ it’s in</span>
 The compiler error shows that the shortcut no longer applies within the
 `customer` module:
 
-```console
+```shell
 ❯ scarb build
 error: Identifier not found.
  --> lib.cairo:11:9

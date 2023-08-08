@@ -16,7 +16,7 @@ The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run
 
 Recall that when we created the new `adder` project in the first section of this chapter, we wrote this first test:
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch08-testing-cairo-programs/no_listing_06_cfg_attr/src/lib.cairo}}

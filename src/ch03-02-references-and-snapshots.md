@@ -30,7 +30,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 
 The output of this program is:
 
-```console
+```shell
 [DEBUG]	                               	(raw: 0)
 
 [DEBUG]	                              	(raw: 1)
@@ -87,7 +87,7 @@ Listing 3-6. Spoiler alert: it doesn’t work!
 
 Here’s the error:
 
-```console
+```shell
 error: Invalid left-hand side of assignment.
  --> ownership.cairo:15:5
     rec.height = rec.width;
@@ -115,7 +115,7 @@ First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` in
 
 The output of the program is:
 
-```console
+```shell
 [DEBUG]
                                 (raw: 10)
 

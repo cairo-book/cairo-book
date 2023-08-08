@@ -6,7 +6,7 @@ The ability to run some code depending on whether a condition is true and to run
 
 An if expression allows you to branch your code depending on conditions. You provide a condition and then state, “If this condition is met, run this block of code. If the condition is not met, do not run this block of code.”
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_24_if/src/lib.cairo}}
@@ -18,7 +18,7 @@ Optionally, we can also include an `else` expression, which we chose to do here,
 
 Try running this code; you should see the following output:
 
-```console
+```shell
 $ cairo-run main.cairo
 [DEBUG]	condition was false
 ```
@@ -29,14 +29,14 @@ Let’s try changing the value of `number` to a value that makes the condition `
     let number = 5;
 ```
 
-```console
+```shell
 $ cairo-run main.cairo
 condition was true
 ```
 
 It’s also worth noting that the condition in this code must be a bool. If the condition isn’t a bool, we’ll get an error.
 
-```console
+```shell
 $ cairo-run main.cairo
 thread 'main' panicked at 'Failed to specialize: `enum_match<felt252>`. Error: Could not specialize libfunc `enum_match` with generic_args: [Type(ConcreteTypeId { id: 1, debug_name: None })]. Error: Provided generic argument is unsupported.', crates/cairo-lang-sierra-generator/src/utils.rs:256:9
 ```
@@ -45,7 +45,7 @@ thread 'main' panicked at 'Failed to specialize: `enum_match<felt252>`. Error: C
 
 You can use multiple conditions by combining if and else in an else if expression. For example:
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_25_else_if/src/lib.cairo}}
@@ -53,7 +53,7 @@ You can use multiple conditions by combining if and else in an else if expressio
 
 This program has four possible paths it can take. After running it, you should see the following output:
 
-```console
+```shell
 [DEBUG]	number is 3
 ```
 
@@ -63,13 +63,13 @@ When this program executes, it checks each `if` expression in turn and executes 
 
 Because if is an expression, we can use it on the right side of a let statement to assign the outcome to a variable.
 
-<span class="filename">Filename: main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_26_if_let/src/lib.cairo}}
 ```
 
-```console
+```shell
 $ cairo-run main.cairo
 [DEBUG]	condition was true
 ```
@@ -103,7 +103,7 @@ the stop condition might never be reached, resulting in an infinite loop.
 Most terminals support the keyboard shortcut <span class="keystroke">ctrl-c</span> to interrupt a program that is
 stuck in a continual loop. Give it a try:
 
-```console
+```shell
 $ scarb cairo-run --available-gas=20000000
 [DEBUG]	again                          	(raw: 418346264942)
 
