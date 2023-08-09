@@ -64,7 +64,7 @@ Before we can interact with the voting contract, we need to prepare the voter an
 
 ### Smart wallets for voting
 
-Aside from Scarb you will no have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the [Chapter 1](https://book.starknet.io/chapter_1/environment_setup.html) of the Starknet Book.
+Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the [Chapter 1](https://book.starknet.io/chapter_1/environment_setup.html) of the Starknet Book.
 
 For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is detailed in the [first chapter of the Starknet Book](https://book.starknet.io/chapter_1/first_contract.html).
 
