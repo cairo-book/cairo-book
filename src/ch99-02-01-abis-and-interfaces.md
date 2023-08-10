@@ -26,7 +26,7 @@ One important specification is that this trait must be generic over the `TContra
 Here's a sample interface for an ERC20 token contract. As you can see, it's a generic trait over the `TContractState` type. `view` functions have a self parameter of type `@TContractState`, while `external` functions have a self parameter of type passed by reference `ref self: TContractState`.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_interface.cairo}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_interface/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 99-4: A simple ERC20 Interface</span>

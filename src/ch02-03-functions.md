@@ -10,7 +10,7 @@ names, in which all letters are lowercase and underscores separate words.
 Here’s a program that contains an example function definition:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_15_functions.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_15_functions/src/lib.cairo}}
 ```
 
 We define a function in Cairo by entering `fn` followed by a function name and a
@@ -28,8 +28,8 @@ Let’s start a new project with Scarb named _functions_ to explore functions
 further. Place the `another_function` example in _src/lib.cairo_ and run it. You
 should see the following output:
 
-```console
-$ cairo-run src/lib.cairo
+```shell
+$ scarb cairo-run
 [DEBUG] Hello, world!                (raw: 5735816763073854953388147237921)
 [DEBUG] Another function.            (raw: 22265147635379277118623944509513687592494)
 ```
@@ -51,13 +51,13 @@ function.
 In this version of `another_function` we add a parameter:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_16_single_param.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_16_single_param/src/lib.cairo}}
 ```
 
 Try running this program; you should get the following output:
 
-```console
-$ cairo-run src/lib.cairo
+```shell
+$ scarb cairo-run
 [DEBUG]                                 (raw: 5)
 ```
 
@@ -75,7 +75,7 @@ When defining multiple parameters, separate the parameter declarations with
 commas, like this:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_17_multiple_params.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_17_multiple_params/src/lib.cairo}}
 ```
 
 This example creates a function named `another_function` with two
@@ -83,10 +83,10 @@ parameters. The first parameter is named `x` and is an `felt252`. The second is
 named `y` and is type `felt252` too. The function then prints the content of the felt `x` and then the content of the felt `y`.
 
 Let’s try running this code. Replace the program currently in your _functions_
-project’s _src/lib.cairo_ file with the preceding example and run it using `cairo-run src/lib.cairo`:
+project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run`:
 
-```console
-$ cairo-run src/lib.cairo
+```shell
+$ scarb cairo-run
 [DEBUG]                                 (raw: 5)
 [DEBUG]                                 (raw: 6)
 ```
@@ -102,7 +102,7 @@ If you want to use named parameters, you need to specify the name of the paramet
 Here is an example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_36_named_parameters.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_30_named_parameters/src/lib.cairo}}
 ```
 
 ### Statements and Expressions
@@ -124,7 +124,7 @@ assigning a value to it with the `let` keyword is a statement. In Listing 2-1,
 `let y = 6;` is a statement.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/listing_01_statement.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/listing_01_statement/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 2-1: A `main` function declaration containing one statement</span>
@@ -136,13 +136,13 @@ Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
 ```rust, noplayground
-{{#include ../listings/ch02-common-programming-concepts/no_listing_18_statements_dont_return_values.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_18_statements_dont_return_values/src/lib.cairo}}
 ```
 
 When you run this program, the error you’ll get looks like this:
 
-```console
-$ cairo-run src/lib.cairo
+```shell
+$ scarb cairo-run
 error: Missing token TerminalRParen.
  --> src/lib.cairo:2:14
     let x = (let y = 6);
@@ -178,14 +178,14 @@ expression. A new scope block created with
 curly brackets is an expression, for example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo}}
 ```
 
 This expression:
 
 ```rust, noplayground
 {
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions.cairo:4:5}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:4:5}}
 }
 ```
 
@@ -208,7 +208,7 @@ functions return the last expression implicitly. Here’s an example of a
 function that returns a value:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_20_function_return_values.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_20_function_return_values/src/lib.cairo}}
 ```
 
 There are no function calls, or even `let` statements in the `five`
@@ -216,8 +216,8 @@ function—just the number `5` by itself. That’s a perfectly valid function in
 Cairo. Note that the function’s return type is specified too, as `-> u32`. Try
 running this code; the output should look like this:
 
-```console
-$ cairo-run src/lib.cairo
+```shell
+$ scarb cairo-run
 [DEBUG]                                 (raw: 5)
 ```
 
@@ -237,7 +237,7 @@ because it’s an expression whose value we want to return.
 Let’s look at another example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_21_function_return_values_2.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_21_function_return_values_2/src/lib.cairo}}
 ```
 
 Running this code will print `[DEBUG]                    (raw: 6)`. But if we place a
@@ -245,12 +245,12 @@ semicolon at the end of the line containing `x + 1`, changing it from an
 expression to a statement, we’ll get an error:
 
 ```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_invalid.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_invalid/src/lib.cairo}}
 ```
 
 Compiling this code produces an error, as follows:
 
-```console
+```shell
 error: Unexpected return type. Expected: "core::integer::u32", found: "()".
 ```
 

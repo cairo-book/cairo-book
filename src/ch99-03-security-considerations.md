@@ -38,7 +38,7 @@ These validations can include:
 For example, you could use the `assert` function to validate that a user has enough funds to perform a withdraw transaction. If the condition is not met, the transaction will fail and the state of the contract will not change.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_10_assert_balance.cairo:withdraw}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_10_assert_balance/src/lib.cairo:withdraw}}
 ```
 
 Using these functions to check conditions adds constraints that help clearly define the boundaries of possible state transitions for each function in your smart contract. These checks ensure that the behavior of the contract stays within the expected limits.
@@ -64,7 +64,7 @@ Access control is the process of restricting access to certain features or resou
 You can implement the access control pattern to easily manage permissions. This pattern consists of defining a set of roles and assigning them to specific users. Each function can then be restricted to specific roles.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_11_simple_access_control.cairo}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_11_simple_access_control/src/lib.cairo}}
 ```
 
 ### Static analysis tool

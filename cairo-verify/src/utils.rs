@@ -5,24 +5,24 @@ use walkdir::WalkDir;
 
 use crate::config::Config;
 
-pub fn find_cairo_files(cfg: &Config) -> Vec<String> {
+pub fn find_scarb_manifests(cfg: &Config) -> Vec<String> {
     let path = cfg.path.as_str();
 
-    let mut cairo_files: Vec<String> = Vec::new();
+    let mut scarb_manifests: Vec<String> = Vec::new();
 
     for entry in WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
         if let Some(file_name) = entry.file_name().to_str() {
-            if file_name.ends_with(".cairo") {
+            if file_name.eq("Scarb.toml") {
                 if cfg.file.is_some() && !file_name.ends_with(cfg.file.as_ref().unwrap()) {
                     continue;
                 }
 
-                cairo_files.push(entry.path().display().to_string());
+                scarb_manifests.push(entry.path().display().to_string());
             }
         }
     }
 
-    cairo_files
+    scarb_manifests
 }
 
 /// Will replace the file path contained in the input string with a clickable format for better output
@@ -34,7 +34,8 @@ pub fn clickable(relative_path: &str) -> String {
         .to_string();
     let mut path_parts: Vec<&str> = full_path.split(|c: char| c == '\\' || c == '/').collect();
 
-    let mut filename: String = path_parts.last().unwrap_or(&"").to_string();
+    let file_listing_path: Vec<&str> = full_path.split("listings").collect();
+    let mut filename: String = file_listing_path.last().unwrap_or(&"")[1..].to_string();
     let re = Regex::new(r"([^:]+(:\d+:\d+)?)(:\s|$)").unwrap();
     if let Some(captures) = re.captures(filename.as_str()) {
         filename = captures.get(1).map_or("", |m| m.as_str()).to_string();
@@ -43,7 +44,6 @@ pub fn clickable(relative_path: &str) -> String {
     if let Some(parts) = path_parts.last_mut() {
         *parts = &filename;
     }
-    let full_path = path_parts.join("/");
 
     let clickable_format = format!(
         "\u{1b}]8;;file://{}\u{1b}\\{}\u{1b}]8;;\u{1b}\\",

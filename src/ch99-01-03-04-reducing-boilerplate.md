@@ -3,7 +3,7 @@
 In a previous section, we saw this example of an implementation block in a contract that didn't have any corresponding trait.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract.cairo:state_internal}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:state_internal}}
 ```
 
 It's not the first time that we encounter this attribute, we already talked about in it [Traits in Cairo](./ch07-02-traits-in-cairo.md). In this section, we'll be taking a deeper look at it and see how it can be used in contracts.
@@ -14,5 +14,5 @@ But by using the `#[generate_trait]` attribute, this whole process can be skippe
 If we had to manually define the trait for the `InternalFunctions` implementation, it would look something like this:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/no_listing_99_02_explicit_internal_fn.cairo:state_internal}}
+{{#include ../listings/ch99-starknet-smart-contracts/no_listing_99_02_explicit_internal_fn/src/lib.cairo:state_internal}}
 ```

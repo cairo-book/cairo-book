@@ -37,7 +37,7 @@ which it’s declared until the end of the current _scope_. Listing 3-1 shows a
 program with comments annotating where the variable `s` would be valid.
 
 ```rust
-{{#rustdoc_include ../listings/ch03-understanding-ownership/listing_03_01.cairo:here}}
+{{#rustdoc_include ../listings/ch03-understanding-ownership/listing_03_01/src/lib.cairo:here}}
 ```
 
 <span class="caption">Listing 3-1: A variable and the scope in which it is
@@ -65,7 +65,7 @@ is unknown at compile time and which can't be trivially copied?
 Here is a short reminder of what an array looks like:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-understanding-ownership/no_listing_01_array.cairo:3:5}}
+{{#rustdoc_include ../listings/ch03-understanding-ownership/no_listing_01_array/src/lib.cairo:3:5}}
 ```
 
 So, how does the ownership system ensure that each cell is never written to more than once?
@@ -73,7 +73,7 @@ Consider the following code, where we try to pass the same instance of an array 
 function calls:
 
 ```rust,does_not_compile
-{{#include ../listings/ch03-understanding-ownership/no_listing_02_pass_array_by_value.cairo}}
+{{#include ../listings/ch03-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo}}
 ```
 
 In this case, we try to pass the same array instance `arr` by value to the functions `foo` and `bar`, which means
@@ -86,7 +86,7 @@ system thus prevents us from using the same instance of `arr` in `foo`.
 
 Running the code above will result in a compile-time error:
 
-```console
+```shell
 error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
  --> array.cairo:6:9
     let mut arr = ArrayTrait::<u128>::new();
@@ -100,7 +100,7 @@ You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` 
 While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
 
 ```rust,ignore_format
-{{#include ../listings/ch03-understanding-ownership/no_listing_03_copy_trait.cairo}}
+{{#include ../listings/ch03-understanding-ownership/no_listing_03_copy_trait/src/lib.cairo}}
 ```
 
 In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, and the ownership of `p1` remains with the main function.
@@ -114,7 +114,7 @@ You may have noticed that the `Point` type in the previous example also implemen
 For example, the following code will not compile, because the struct `A` is not moved before it goes out of scope:
 
 ```rust,does_not_compile
-{{#include ../listings/ch03-understanding-ownership/no_listing_04_no_drop_derive_fails.cairo}}
+{{#include ../listings/ch03-understanding-ownership/no_listing_04_no_drop_derive_fails/src/lib.cairo}}
 ```
 
 This is to ensure the soundness of Cairo programs. Soundness refers to the fact that if a
@@ -132,7 +132,7 @@ The `Drop` implementation can be derived for all types, allowing them to be drop
 For example, the following code compiles:
 
 ```rust
-{{#include ../listings/ch03-understanding-ownership/no_listing_05_drop_derive_compiles.cairo}}
+{{#include ../listings/ch03-understanding-ownership/no_listing_05_drop_derive_compiles/src/lib.cairo}}
 ```
 
 ### The `Destruct` Trait
@@ -142,12 +142,12 @@ Manually calling the `squash` method on a dictionary is not very convenient, and
 Consider the following example, in which we define a custom type that contains a dictionary:
 
 ```rust,does_not_compile
-{{#include ../listings/ch03-understanding-ownership/no_listing_06_no_destruct_compile_fails.cairo}}
+{{#include ../listings/ch03-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo}}
 ```
 
 If you try to run this code, you will get a compile-time error:
 
-```console
+```shell
 error: Variable not dropped. Trait has no implementation in context: core::traits::Drop::<temp7::temp7::A>. Trait has no implementation in context: core::traits::Destruct::<temp7::temp7::A>.
  --> temp7.cairo:7:5
     A {
@@ -157,7 +157,7 @@ error: Variable not dropped. Trait has no implementation in context: core::trait
 When A goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
 
 ```rust
-{{#include ../listings/ch03-understanding-ownership/no_listing_07_destruct_compiles.cairo}}
+{{#include ../listings/ch03-understanding-ownership/no_listing_07_destruct_compiles/src/lib.cairo}}
 ```
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
@@ -172,10 +172,10 @@ Here’s an example of the `clone` method in action.
 > Note: in the following example, we need to import the `Clone` trait from the corelib `clone` module, and its implementation for the array type from the `array` module.
 
 ```rust
-{{#include ../listings/ch03-understanding-ownership/no_listing_08_array_clone.cairo}}
+{{#include ../listings/ch03-understanding-ownership/no_listing_08_array_clone/src/lib.cairo}}
 ```
 
-> Note: you will need to run `cairo-run` with the `--available-gas=2000000` option to run this example, because it uses a loop and must be ran with a gas limit.
+> Note: you will need to run `scarb cairo-run` with the `--available-gas=2000000` option to run this example, because it uses a loop and must be ran with a gas limit.
 
 When you see a call to `clone`, you know that some arbitrary code is being
 executed and that code may be expensive. It’s a visual indicator that something
@@ -188,10 +188,10 @@ Passing a variable to a function will either move it or copy it. As seen in the 
 Listing 3-3 has an example with some annotations
 showing where variables go into and out of scope.
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch03-understanding-ownership/listing_03_03.cairo}}
+{{#include ../listings/ch03-understanding-ownership/listing_03_03/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 3-3: Functions with ownership and scope
@@ -208,10 +208,10 @@ Returning values can also transfer ownership. Listing 3-4 shows an example of a
 function that returns some value, with similar annotations as those in Listing
 4-3.
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch03-understanding-ownership/listing_03_04.cairo}}
+{{#include ../listings/ch03-understanding-ownership/listing_03_04/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 3-4: Transferring ownership of return
@@ -227,10 +227,10 @@ from the body of the function that we might want to return as well.
 
 Cairo does let us return multiple values using a tuple, as shown in Listing 3-5.
 
-<span class="filename">Filename: src/main.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch03-understanding-ownership/listing_03_05.cairo}}
+{{#include ../listings/ch03-understanding-ownership/listing_03_05/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 3-5: Returning ownership of parameters</span>

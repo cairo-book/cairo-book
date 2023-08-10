@@ -1,5 +1,5 @@
 [package]
-name = "cairo-book"
+name = "cairo_book"
 version = "0.1.0"
 
 # Only required to have LS enabled in this directory.

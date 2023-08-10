@@ -1,6 +1,5 @@
 use clap::Parser;
 use regex::Regex;
-use std::path::PathBuf;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -8,10 +7,6 @@ pub struct Config {
     /// The path to explore for *.cairo files.
     #[arg(short, long, default_value = "./listings")]
     pub path: String,
-
-    /// The path to the cairo root directory
-    #[arg(long)]
-    pub cairo_root: Option<PathBuf>,
 
     /// Print more information.
     #[arg(short, long)]

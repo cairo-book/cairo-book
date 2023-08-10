@@ -2,7 +2,9 @@
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -83,13 +85,7 @@ The `cairo-verify` tool is designed to wrap all cairo and starknet plugins for q
 
 #### Setup
 
-Firstly, you need to have the following binaries in your path:
-
-- `cairo-compile`
-- `cairo-run`
-- `cairo-test`
-- `cairo-format`
-- `starknet-compile`
+Firstly, you need to have `scarb` resolved in your path:
 
 They should be available after installing cairo, see [here](https://cairo-book.github.io/ch01-01-installation.html) for more details.
 
@@ -111,15 +107,15 @@ The tool scans for all `*.cairo` files in the specified directory and performs t
 
 For a Starknet contract:
 
-- `starknet-compile`
-- If it has tests: `cairo-test --starknet`
+- `scarb build`
+- If it has tests: `scarb test`
 
 Cairo program:
 
-- If it has a `main` function: `cairo-run`
-- Else, `cairo-compile`
-- If it has tests: `cairo-test`
-- `cairo-fmt`
+- If it has a `main` function: `scarb cairo-run`
+- Else, `scarb build`
+- If it has tests: `scarb test`
+- `scarb fmt -c`
 
 To specify which tests to run, you can add a comment at the top of your file with the following format:
 
@@ -130,10 +126,10 @@ To specify which tests to run, you can add a comment at the top of your file wit
 
 Here is a list of available tags:
 
-- `does_not_compile`: don't run `cairo-compile`/`starknet-compile`
-- `does_not_run`: don't run `cairo-run`
-- `ignore_fmt`: don't run `cairo-fmt`
-- `tests_fail`: don't run `cairo-test`/`cairo-test --starknet`
+- `does_not_compile`: don't run `scarb build`
+- `does_not_run`: don't run `scarb cairo-run`
+- `ignore_fmt`: don't run `scarb fmt`
+- `tests_fail`: don't run `scarb test`
 
 You can skip and ignore a specific test by adding the corresponding flag:
 

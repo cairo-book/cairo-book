@@ -21,7 +21,7 @@ use crate::cmd::Cmd;
 use crate::config::Config;
 use crate::error_sets::ErrorSets;
 use crate::tags::Tags;
-use crate::utils::{clickable, find_cairo_files, print_error_table};
+use crate::utils::{clickable, find_scarb_manifests, print_error_table};
 
 lazy_static! {
     static ref CFG: Config = Config::parse();
@@ -33,12 +33,12 @@ lazy_static! {
 
 fn main() {
     let cfg = &*CFG;
-    let cairo_files = find_cairo_files(cfg);
+    let scarb_packages = find_scarb_manifests(cfg);
 
-    let pb = ProgressBar::new(cairo_files.len() as u64);
+    let pb = ProgressBar::new(scarb_packages.len() as u64);
     logger::setup(cfg, pb.clone());
 
-    for file in cairo_files {
+    for file in scarb_packages {
         process_file(&file);
         if !cfg.quiet {
             pb.inc(1);
@@ -50,7 +50,6 @@ fn main() {
     let errors = ERRORS.lock().unwrap();
     let total_errors = errors.compile_errors.len()
         + errors.run_errors.len()
-        + errors.starknet_errors.len()
         + errors.test_errors.len()
         + errors.format_errors.len();
 
@@ -59,7 +58,6 @@ fn main() {
 
         print_error_table(&errors.compile_errors, "Compile Errors");
         print_error_table(&errors.run_errors, "Run Errors");
-        print_error_table(&errors.starknet_errors, "Starknet Errors");
         print_error_table(&errors.test_errors, "Test Errors");
         print_error_table(&errors.format_errors, "Format Errors");
 
@@ -69,14 +67,20 @@ fn main() {
         );
 
         println!("\n{}", "Please review the errors above. Do not hesitate to ask for help by commenting on the issue on Github.".red().italic());
+        std::process::exit(1);
     } else {
         println!("\n{}\n", "ALL TESTS PASSED!".green().bold());
     }
 }
 
-fn process_file(file_path: &str) {
+fn process_file(manifest_path: &str) {
     let cfg = &*CFG;
-    let cairo_root = cfg.cairo_root.clone();
+    let manifest_path_as_path = std::path::Path::new(manifest_path);
+    let file_path = manifest_path_as_path
+        .parent()
+        .unwrap()
+        .join("src/lib.cairo");
+    let file_path = file_path.to_str().unwrap();
 
     let file =
         File::open(file_path).unwrap_or_else(|_| panic!("Failed to open file {}", file_path));
@@ -123,9 +127,9 @@ fn process_file(file_path: &str) {
     if is_contract {
         // This is a contract, it must pass starknet-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.starknet_skip {
-            match Cmd::StarknetCompile(cairo_root.clone()).test(file_path) {
+            match Cmd::ScarbBuild().test(manifest_path) {
                 Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::StarknetCompile(None)),
+                Err(e) => handle_error(e, file_path, Cmd::ScarbBuild()),
             }
         }
     } else if should_be_runnable {
@@ -134,17 +138,17 @@ fn process_file(file_path: &str) {
             && !tags.contains(&Tags::DoesNotCompile)
             && !cfg.run_skip
         {
-            match Cmd::CairoRun(cairo_root.clone()).test(file_path) {
+            match Cmd::ScarbCairoRun().test(manifest_path) {
                 Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::CairoRun(None)),
+                Err(e) => handle_error(e, file_path, Cmd::ScarbCairoRun()),
             }
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.compile_skip {
-            match Cmd::CairoCompile(cairo_root.clone()).test(file_path) {
+            match Cmd::ScarbBuild().test(manifest_path) {
                 Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::CairoCompile(None)),
+                Err(e) => handle_error(e, file_path, Cmd::ScarbBuild()),
             }
         }
     }
@@ -152,18 +156,18 @@ fn process_file(file_path: &str) {
     // TEST CHECKS
     if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        match Cmd::CairoTest(cairo_root.clone()).test(file_path) {
+        match Cmd::ScarbTest().test(manifest_path) {
             Ok(_) => {}
-            Err(e) => handle_error(e, file_path, Cmd::CairoTest(None)),
+            Err(e) => handle_error(e, file_path, Cmd::ScarbTest()),
         }
     }
 
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !cfg.formats_skip {
         // This program must pass cairo-format
-        match Cmd::CairoFormat(cairo_root).test(file_path) {
+        match Cmd::ScarbFormat().test(manifest_path) {
             Ok(_) => {}
-            Err(e) => handle_error(e, file_path, Cmd::CairoFormat(None)),
+            Err(e) => handle_error(e, file_path, Cmd::ScarbFormat()),
         }
     }
 }
@@ -171,10 +175,10 @@ fn process_file(file_path: &str) {
 fn handle_error(e: String, file_path: &str, cmd: Cmd) {
     let clickable_file = clickable(file_path);
     let msg = match cmd {
-        Cmd::CairoTest(_) | Cmd::StarknetCompile(_) | Cmd::CairoRun(_) => {
+        Cmd::ScarbTest() | Cmd::ScarbCairoRun() => {
             format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
         }
-        _ => format!("{} -> {}", cmd.as_str(), clickable(e.as_str())),
+        _ => format!("{} -> {}", cmd.as_str(), clickable_file),
     };
 
     error!("{}", msg);

@@ -148,16 +148,16 @@ When moving out of scope, variables need to be moved first. This is where the `D
 
 Moreover Dictionary need to be squashed before going out of scope. Calling manually the `squash` method on each of them can be quickly redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch03-01-what-is-ownership.md#the-destruct-trait).
 
-## StorageAccess
+## Store
 
-Storing a user-defined struct in a storage variable within a Starknet contract requires the `StorageAccess` trait to be implemented for this type. You can automatically derive the `StorageAccess` trait for all structs that do not contain complex types like Dictionaries or Arrays.
+Storing a user-defined struct in a storage variable within a Starknet contract requires the `Store` trait to be implemented for this type. You can automatically derive the `store` trait for all structs that do not contain complex types like Dictionaries or Arrays.
 
 Example:
 
 ```rust, noplayground
 #[starknet::contract]
 mod contract {
-    #[derive(Drop, storage_access::StorageAccess)]
+    #[derive(Drop, starknet::Store)]
     struct A {
         item_one: felt252,
         item_two: felt252,
@@ -171,9 +171,13 @@ mod contract {
 
 ```
 
-Here we demonstrate the implementation of a `struct A` that derives the StorageAccess trait. This `struct A` is subsequently used
+Here we demonstrate the implementation of a `struct A` that derives the Store trait. This `struct A` is subsequently used
 as a storage variable in the contract.
 
 ## PartialOrd and Ord for Ordering Comparisons
 
-TODO (Not derivable yet ?)
+In addition to the `PartialEq` trait, the standard library also provides the `PartialOrd` and `Ord` traits to compare values for ordering.
+
+The `PartialOrd` trait allows for comparison between instances of a type for ordering, thereby enabling the <, <=, >, and >= operators.
+
+When `PartialOrd` is derived on structs, two instances are ordered by comparing each field in turn.

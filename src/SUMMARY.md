@@ -10,7 +10,6 @@
 
   - [Installation](ch01-01-installation.md)
   - [Hello, World!](ch01-02-hello-world.md)
-  - [Hello, Scarb!](ch01-03-hello-scarb.md)
 
 ## Common Programming Concepts
 
@@ -22,6 +21,7 @@
   - [Control Flow](ch02-05-control-flow.md)
 
 ## Common Collections
+
 - [Common Collections](ch02-99-00-common-collections.md)
   - [Arrays](ch02-99-01-arrays.md)
   - [Dictionaries](ch02-99-02-dictionaries.md)
@@ -106,3 +106,4 @@
   - [C - Derivable Traits](appendix-03-derivable-traits.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
   - [E - Cairo Most Common Types and Traits](appendix-05-most-common-types-and-traits.md)
+  - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
