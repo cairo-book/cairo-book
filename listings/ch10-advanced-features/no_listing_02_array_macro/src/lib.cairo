@@ -7,6 +7,6 @@ fn main() {
     arr.append(3);
     arr.append(4);
     arr.append(5);
-    
+
     let mut arr_macro = array![1, 2, 3, 4, 5];
 }
