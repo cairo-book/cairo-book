@@ -30,8 +30,6 @@ For Linux, macOS, and PowerShell on Windows, enter this:
 ```shell
 mkdir ~/cairo_projects
 cd ~/cairo_projects
-scarb new hello_world
-cd hello_world
 ```
 
 For Windows CMD, enter this:
@@ -39,8 +37,6 @@ For Windows CMD, enter this:
 ```cmd
 > mkdir "%USERPROFILE%\cairo_projects"
 > cd /d "%USERPROFILE%\cairo_projects"
-> scarb new hello_world
-> cd hello_world
 ```
 
 ### Creating a Project with Scarb
