@@ -6,4 +6,4 @@ version = "0.1.0"
 
 [dependencies]
 # foo = { path = "vendor/foo" }
-starknet = ">=2.1.0-rc2"
+starknet = ">=2.1.0"
