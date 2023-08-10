@@ -121,7 +121,7 @@ $ scarb build
     Finished release target(s) in 0 seconds
 ```
 
-This command creates a `sierra` file in `target/release`, let's ignore the `sierra` file for now.
+This command creates a `sierra` file in `target/dev`, let's ignore the `sierra` file for now.
 
 If you have installed Cairo correctly, you should be able to run and see the following output:
 
