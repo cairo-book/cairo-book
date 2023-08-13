@@ -1,8 +1,8 @@
 use debug::PrintTrait;
 use traits::Into;
 fn main() {
-    let mut x = 2;
+    let mut x: u32 = 2;
     x.print();
-    x = x.into();
+    x = 100_felt252;
     x.print()
 }
