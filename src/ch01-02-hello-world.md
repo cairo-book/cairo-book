@@ -128,7 +128,7 @@ If you have installed Cairo correctly, you should be able to run and see the fol
 ```shell
 $ scarb cairo-run
 running hello_world ...
-[DEBUG] Hello, Scarb!                   (raw: 0x48656c6c6f2c20776f726c6421
+[DEBUG] Hello, World!                   (raw: 0x48656c6c6f2c20776f726c6421
 
 Run completed successfully, returning []
 ```
