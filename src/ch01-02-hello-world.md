@@ -98,7 +98,7 @@ Then create a new file called `src/hello_world.cairo` and put the following code
 ```rust,file=hello_world.cairo
 use debug::PrintTrait;
 fn main() {
-    'Hello, Scarb!'.print();
+    'Hello, World!'.print();
 }
 ```
 
@@ -128,7 +128,7 @@ If you have installed Cairo correctly, you should be able to run and see the fol
 ```shell
 $ scarb build && scarb cairo-run
 running hello_world ...
-[DEBUG] Hello, Scarb!                   (raw: 0x48656c6c6f2c20776f726c6421
+[DEBUG] Hello, World!                   (raw: 0x48656c6c6f2c20776f726c6421
 
 Run completed successfully, returning []
 ```
@@ -171,7 +171,7 @@ Prior to the main function declaration, The line `use debug::PrintTrait;` is res
 The body of the `main` function holds the following code:
 
 ```rust,noplayground
-    'Hello, world!'.print();
+    'Hello, World!'.print();
 ```
 
 This line does all the work in this little program: it prints text to the
@@ -181,7 +181,7 @@ First, Cairo style is to indent with four spaces, not a tab.
 
 Second, the `print()` function called is a method from the trait `PrintTrait`. This trait is imported from the Cairo core library, and it defines how to print values to the screen for different data types. In our case, our text is defined as a "short string", which is an ASCII string that can fit in Cairo's basic data type, which is the `felt252` type. By calling `Hello, world!'.print()`, we're calling the `print()` method of the `felt252` implementation of the `PrintTrait` trait.
 
-Third, you see the `'Hello, world!'` short string. We pass this short string as an argument
+Third, you see the `'Hello, World!'` short string. We pass this short string as an argument
 to `print()`, and the short string is printed to the screen.
 
 Fourth, we end the line with a semicolon (`;`), which indicates that this
