@@ -106,7 +106,7 @@ You can retrieve the smart wallet class hash (it will be the same for all you sm
 starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
 ```
 
-For the pubic key, you can use the `starkli signer keystore inspect` command directored to the keystore json file:
+For the public key, you can use the `starkli signer keystore inspect` command directored to the keystore json file:
 
 ```bash
 starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.json
