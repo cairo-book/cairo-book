@@ -6,16 +6,16 @@ When a panic occurs, it leads to an abrupt termination of the program. The `pani
 
 Here is how we can `panic` from inside a program and return the error code `2`:
 
-<span class="filename">Filename: lib.cairo</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch09-error-handling/no_listing_01_panic.cairo}}
+{{#include ../listings/ch09-error-handling/no_listing_01_panic/src/lib.cairo}}
 ```
 
 Running the program will produce the following output:
 
-```console
-$ cairo-run test.cairo
+```shell
+$ scarb cairo-run
 Run panicked with [2 (''), ].
 ```
 
@@ -26,7 +26,7 @@ An alternative and more idiomatic approach to panic in Cairo would be to use the
 Let's consider an example:
 
 ```rust
-{{#include ../listings/ch09-error-handling/no_listing_02_with_felt252.cairo}}
+{{#include ../listings/ch09-error-handling/no_listing_02_with_felt252/src/lib.cairo}}
 ```
 
 Executing this program will yield the same error message as before. In that case, if there is no need for an array and multiple values to be returned within the error, so `panic_with_felt252` is a more succinct alternative.
@@ -38,18 +38,18 @@ You can use the `nopanic` notation to indicate that a function will never panic.
 Example:
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/no_listing_03_nopanic.cairo}}
+{{#include ../listings/ch09-error-handling/no_listing_03_nopanic/src/lib.cairo}}
 ```
 
 Wrong example:
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/no_listing_04_nopanic_wrong.cairo}}
+{{#include ../listings/ch09-error-handling/no_listing_04_nopanic_wrong/src/lib.cairo}}
 ```
 
 If you write the following function that includes a function that may panic you will get the following error:
 
-```console
+```shell
 error: Function is declared as nopanic but calls a function that may panic.
  --> test.cairo:2:12
     assert(1 == 1, 'what');
@@ -69,7 +69,7 @@ You can use the `panic_with` attribute to mark a function that returns an `Optio
 Example:
 
 ```rust
-{{#include ../listings/ch09-error-handling/no_listing_05_panic_with.cairo}}
+{{#include ../listings/ch09-error-handling/no_listing_05_panic_with/src/lib.cairo}}
 ```
 
 ## Using assert
@@ -79,7 +79,7 @@ The assert function from the Cairo core library is actually a utility function b
 Here is an example of its usage:
 
 ```rust
-{{#include ../listings/ch09-error-handling/no_listing_06_assert.cairo}}
+{{#include ../listings/ch09-error-handling/no_listing_06_assert/src/lib.cairo}}
 ```
 
 We are asserting in main that `my_number` is not zero to ensure that we're not performing a division by 0.

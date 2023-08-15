@@ -15,7 +15,7 @@ To illustrate this notion let's take back our example Listing 6-1 for the restau
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_03.cairo}}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_03/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 6-3: Calling the `add_to_waitlist` function using absolute and relative paths</span>
@@ -39,7 +39,7 @@ definition code separately from or together with the code that uses the item.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_04.cairo}}
+{{#include ../listings/ch06-managing-cairo-projects-with-packages-crates-and-modules/listing_06_04/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 6-4: Calling a function using a relative path starting with super</span>

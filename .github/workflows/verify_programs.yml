@@ -13,6 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup Scarb
+        uses: software-mansion/setup-scarb@v1
+        with:
+          scarb-version: "0.6.0"
+
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
@@ -20,15 +25,6 @@ jobs:
         run: cargo install --path cairo-verify --locked
         shell: bash
 
-      - name: Install dependencies (cairo tools)
-        run: |
-          curl -L https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | bash
-          echo "CAIRO_ROOT=$HOME/.cairo" >> $GITHUB_ENV
-          echo "$HOME/.cairo/target/release" >> $GITHUB_PATH
-        shell: bash
-        env:
-          CAIRO_GIT_TAG: v1.1.0
-
       - name: Run cairo-verify and generate summary
-        run: cairo-verify -q --cairo-root $HOME/.cairo/target/release >> $GITHUB_STEP_SUMMARY
+        run: cairo-verify >> $GITHUB_STEP_SUMMARY
         shell: bash

@@ -11,7 +11,7 @@ The contract also monitors unauthorized voting attempts. If an unauthorized acti
 Together, these functions, states, constants, and events create a structured voting system, managing the lifecycle of a vote from registration to casting, event logging, and result retrieval within the Starknet environment. Constants like **`YES`** and **`NO`** help streamline the voting process, while events play a vital role in ensuring transparency and traceability.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_12_vote_contract.cairo}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_12_vote_contract/src/lib.cairo}}
 ```
 
 <span class="caption">Voting smart contract</span>
@@ -22,8 +22,8 @@ Part of the Starknet experience is deploying and interacting with smart contract
 
 Once the contract is deployed, we can interact with it by calling and invoking its functions:
 
-* Calling contracts: Interacting with external functions that only read from the state. These functions do not alter the state of the network, so they don't require fees or signing.
-* Invoking contracts: Interacting with external functions that can write to the state. These functions do alter the state of the network and require fees and signing.
+- Calling contracts: Interacting with external functions that only read from the state. These functions do not alter the state of the network, so they don't require fees or signing.
+- Invoking contracts: Interacting with external functions that can write to the state. These functions do alter the state of the network and require fees and signing.
 
 We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` on the https://book.starknet.io/chapter_3/katana.html[Chapter 3] of the Starknet Book.
 
@@ -46,15 +46,15 @@ This command will start a local Starknet node with 3 deployed accounts. We will 
 PREFUNDED ACCOUNTS
 ==================
 
-| Account address |  0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 
+| Account address |  0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0
 | Private key     |  0x0300001800000000300000180000000000030000000000003006001800006600
 | Public key      |  0x01b7b37a580d91bc3ad4f9933ed61f3a395e0e51c9dd5553323b8ca3942bb44e
 
-| Account address |  0x033c627a3e5213790e246a917770ce23d7e562baa5b4d2917c23b1be6d91961c 
+| Account address |  0x033c627a3e5213790e246a917770ce23d7e562baa5b4d2917c23b1be6d91961c
 | Private key     |  0x0333803103001800039980190300d206608b0070db0012135bd1fb5f6282170b
 | Public key      |  0x04486e2308ef3513531042acb8ead377b887af16bd4cdd8149812dfef1ba924d
 
-| Account address |  0x01d98d835e43b032254ffbef0f150c5606fa9c5c9310b1fae370ab956a7919f5 
+| Account address |  0x01d98d835e43b032254ffbef0f150c5606fa9c5c9310b1fae370ab956a7919f5
 | Private key     |  0x07ca856005bee0329def368d34a6711b2d95b09ef9740ebf2c7c7e3b16c1ca9c
 | Public key      |  0x07006c42b1cfc8bd45710646a0bb3534b182e83c313c7bc88ecf33b53ba4bcbc
 ...
@@ -74,7 +74,7 @@ Firstly, we create a signer from a private key:
 
 ```bash
 starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json
-``` 
+```
 
 Then, we create the Account Descriptor:
 

@@ -17,14 +17,14 @@ code with the following code, which won’t compile just yet:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/src/lib.cairo}}
 
 ```
 
-Save and run the program using `cairo-run src/lib.cairo`. You should receive an error message
+Save and run the program using `scarb cairo-run`. You should receive an error message
 regarding an immutability error, as shown in this output:
 
-```console
+```shell
 error: Cannot assign to an immutable variable.
  --> lib.cairo:5:5
     x = 6;
@@ -71,16 +71,16 @@ For example, let’s change _src/lib.cairo_ to the following:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_02_adding_mut.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_02_adding_mut/src/lib.cairo}}
 ```
 
 When we run the program now, we get this:
 
-```console
-❯ cairo-run src/lib.cairo
-[DEBUG]	                              	(raw: 5)
+```shell
+$ scarb cairo-run
+[DEBUG]                                (raw: 5)
 
-[DEBUG]	                              	(raw: 6)
+[DEBUG]                                (raw: 6)
 
 Run completed successfully, returning []
 ```
@@ -143,7 +143,7 @@ use of the `let` keyword as follows:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_03_shadowing.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_03_shadowing/src/lib.cairo}}
 ```
 
 This program first binds `x` to a value of `5`. Then it creates a new variable
@@ -154,16 +154,16 @@ variable, multiplying the previous value by `2` to give `x` a value of `12`.
 When that scope is over, the inner shadowing ends and `x` returns to being `6`.
 When we run this program, it will output the following:
 
-```console
-cairo-run src/lib.cairo
-[DEBUG]	Inner scope x value is:        	(raw: 7033328135641142205392067879065573688897582790068499258)
+```shell
+scarb cairo-run
+[DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
 
 [DEBUG]
-                                      	(raw: 12)
+                                       (raw: 12)
 
-[DEBUG]	Outer scope x value is:        	(raw: 7610641743409771490723378239576163509623951327599620922)
+[DEBUG] Outer scope x value is:         (raw: 7610641743409771490723378239576163509623951327599620922)
 
-[DEBUG]	                              	(raw: 6)
+[DEBUG]                                (raw: 6)
 
 Run completed successfully, returning []
 ```
@@ -183,7 +183,7 @@ if you change its type. For example, say our program performs a type conversion 
 `u64` and `felt252` types.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_04_shadowing_different_type.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_04_shadowing_different_type/src/lib.cairo}}
 ```
 
 The first `x` variable has a `u64` type while the second `x` variable has a `felt252` type.
@@ -192,17 +192,17 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 `mut` for this, as shown here, we’ll get a compile-time error:
 
 ```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo}}
 ```
 
 The error says we were expecting a `u64` (the original type) but we got a different type:
 
-```console
-❯ cairo-run src/lib.cairo
-error: Unexpected argument type. Expected: "core::integer::u64", found: "core::felt252".
- --> lib.cairo:6:9
-    x = x.into();
-        ^******^
+```shell
+$ scarb cairo-run
+error: Unexpected argument type. Expected: "core::integer::u32", found: "core::felt252".
+ --> lib.cairo:9:9
+    x = 100_felt252;
+        ^*********^
 
 Error: failed to compile: src/lib.cairo
 ```
