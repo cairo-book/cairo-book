@@ -244,7 +244,7 @@ starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f3334
 
 ### Visualizing Vote Outcomes
 
-To examine the voting results, we invoke the `get_vote_results` function, another view function, through the `starknet call` command.
+To examine the voting results, we invoke the `get_vote_status` function, another view function, through the `starknet call` command.
 
 ```bash
 starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 get_vote_status --rpc http://0.0.0.0:5050
