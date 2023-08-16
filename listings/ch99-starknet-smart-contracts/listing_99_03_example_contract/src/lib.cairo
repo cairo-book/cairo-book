@@ -59,7 +59,7 @@ mod NameRegistry {
         fn store_name(ref self: ContractState, name: felt252) {
             let caller = get_caller_address();
             //ANCHOR: write
-            self.names.write(caller, name);
+            self._store_name(caller, name);
         //ANCHOR_END: write
 
         }
