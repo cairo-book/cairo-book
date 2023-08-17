@@ -234,7 +234,7 @@ starknet = ">=2.1.0"
 [[target.starknet-contract]]
 ```
 
-For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/contract-target).
+For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
 
 # Summary
 
