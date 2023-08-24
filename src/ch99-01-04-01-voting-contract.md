@@ -25,11 +25,11 @@ Once the contract is deployed, we can interact with it by calling and invoking i
 - Calling contracts: Interacting with external functions that only read from the state. These functions do not alter the state of the network, so they don't require fees or signing.
 - Invoking contracts: Interacting with external functions that can write to the state. These functions do alter the state of the network and require fees and signing.
 
-We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` on the https://book.starknet.io/chapter_3/katana.html[Chapter 3] of the Starknet Book.
+We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` on [Chapter 3](https://book.starknet.io/chapter_3/katana.html) of the Starknet Book.
 
 ### The `katana` local Starknet node
 
-`katana` is designed to support local development by the [Dojo team](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md). It will allow do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
+`katana` is designed to support local development by the [Dojo team](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md). It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
 
 To install `katana` from the source code, please refer to the [katana subchapter in Chapter 3](https://book.starknet.io/chapter_3/katana.html) of the Starknet Book.
 
@@ -100,13 +100,13 @@ The Account Descriptor will look like this. You can get the public key and the s
 }
 ```
 
-You can retrieve the smart wallet class hash (it will be the same for all you smart wallets) with the following command. Notice the use of the `--rpc` flagand the RPC endpoint provided by `katana`:
+You can retrieve the smart wallet class hash (it will be the same for all your smart wallets) with the following command. Notice the use of the `--rpc` flag and the RPC endpoint provided by `katana`:
 
 ```
 starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
 ```
 
-For the public key, you can use the `starkli signer keystore inspect` command directored to the keystore json file:
+For the public key, you can use the `starkli signer keystore inspect` command with the directory of the keystore json file:
 
 ```bash
 starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.json
@@ -131,7 +131,7 @@ Since we are using a local node, the transaction will achieve finality immediate
 The following command deploys the voting contract and registers voter_0, voter_1, and voter_2 as eligible voters. These are the constructor arguments, so add a voter account that you can later vote with.
 
 ```bash
-starknet deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
 ```
 
 An example command:
@@ -144,7 +144,7 @@ In this case, the contract has been deployed at an specific address: `0x05ea3a69
 
 ### Voter Eligibility Verification
 
-In our voting contract, we have two functions to validate voter eligibility, `voter_can_vote` and `is_voter_registered`. These are read external functions, which mean they don't alter the state of the contract but only read the current state.
+In our voting contract, we have two functions to validate voter eligibility, `voter_can_vote` and `is_voter_registered`. These are external read functions, which mean they don't alter the state of the contract but only read the current state.
 
 The `is_voter_registered` function checks whether a particular address is registered as an eligible voter in the contract. The `voter_can_vote` function, on the other hand, checks whether the voter at a specific address is currently eligible to vote, i.e., they are registered and haven't voted already.
 
