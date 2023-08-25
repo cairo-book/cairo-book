@@ -4,8 +4,8 @@ The Cairo language has some plugins that allows developers to simplify their cod
 
 ### Let's start by `array!`
 
-Sometimes, we need to create arrays with values that are already known at compile time. The basic way of doing that is redundant. You would first declare the array and then append one by one every values. `array!` creates a simpler way of doing this task by combining the two steps.
-At compile-time, the compiler will create an array and append sequencially every values passed to the `array!` macro.
+Sometimes, we need to create arrays with values that are already known at compile time. The basic way of doing that is redundant. You would first declare the array and then append each value one by one. `array!` is a simpler way of doing this task by combining the two steps.
+At compile-time, the compiler will create an array and append all values passed to the `array!` macro sequentially.
 
 Without `array!`:
 
