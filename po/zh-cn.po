@@ -202,7 +202,7 @@ msgstr "深入了解合约"
 
 #: src/SUMMARY.md:92
 msgid "Storage Variables"
-msgstr "## 存储变量"
+msgstr "存储变量"
 
 #: src/SUMMARY.md:93
 msgid "Contract Functions"
@@ -10884,7 +10884,7 @@ msgid ""
 "the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait in order for the compiler to know how "
 "to drop instances of `Wallet<T, U>`. The updated implementation is as follow:"
 msgstr ""
-"我们正在创建一个trait`WalletMixTrait<T1, U1>`，其中有`mixup<T2, U2>`方法，给定一个`Wallet<T1, U1>`和`Wallet<T2, U2>`的实例，创建一个新的`Wallet<T1, U2>。正如`mixup`签名所指定的，"
+"我们正在创建一个trait`WalletMixTrait<T1, U1>`，其中有`mixup<T2, U2>`方法，给定一个`Wallet<T1, U1>`和`Wallet<T2, U2>`的实例，创建一个新的`Wallet<T1, U2>`。正如`mixup`签名所指定的，"
 "`self`和`other`都在函数的结尾处被丢弃，这就是这段代码不能编译的原因。如果你从开始到现在都跟上了课程，你会知道我们必须为所有的泛型添加一个`Drop` trait的实现，以便编译器知道如何丢弃"
 "`Wallet<T, U>`的实例。更新后的实现如下："
 
@@ -14677,7 +14677,7 @@ msgstr "<span class=\"caption\">示例  99-1bis：本章的参考合约</span>"
 
 #: src/ch99-01-03-01-storage-variables.md:1
 msgid "## Storage Variables"
-msgstr "## 存储用变量"
+msgstr "## 存储变量"
 
 #: src/ch99-01-03-01-storage-variables.md:3
 msgid ""
@@ -14687,7 +14687,7 @@ msgstr "如前所述，存储变量允许您存储数据，这些数据将存储
 
 #: src/ch99-01-03-01-storage-variables.md:5
 msgid "Storage variables in Starknet contracts are stored in a special struct called `Storage`:"
-msgstr "Starknet合同中的存储用变量被存储在一个特殊的结构中，称为`Storage`："
+msgstr "Starknet合同中的存储变量被存储在一个特殊的结构中，称为`Storage`："
 
 #: src/ch99-01-03-01-storage-variables.md:7
 msgid ""
@@ -14724,7 +14724,7 @@ msgid ""
 "The storage struct is a [struct](./ch04-00-using-structs-to-structure-related-data.md) like any other,\n"
 "except that it **must** be annotated with `#[storage]` allowing you to store mappings using the `LegacyMap` type."
 msgstr ""
-"存储结构是一个[结构体]（./ch04-00-using-structs-to-structure-related-data.md），与其他结构体基本一样、\n"
+"存储结构是一个[结构体](./ch04-00-using-structs-to-structure-related-data.md)，与其他结构体基本一样、\n"
 "除了它 **必须** 被标注为`#[storage]`，以允许你使用`LegacyMap`类型来存储映射。"
 
 #: src/ch99-01-03-01-storage-variables.md:24
@@ -16044,7 +16044,7 @@ msgid ""
 "The **`Vote`** contract in Starknet begins by registering voters through the contract's constructor. Three voters are initialized at this stage, and their addresses are passed to an "
 "internal function **`_register_voters`**. This function adds the voters to the contract's state, marking them as registered and eligible to vote."
 msgstr ""
-"Starknet的**`Vote`**合约首先要通过合约的构造函数注册投票人。在此阶段，三个投票人被初始化，他们的地址被传递给内部函数 **`_register_voters`**。该函数将选民添加到合约的状态中，标记为已注"
+"Starknet的 **`Vote`** 合约首先要通过合约的构造函数注册投票人。在此阶段，三个投票人被初始化，他们的地址被传递给内部函数 **`_register_voters`**。该函数将选民添加到合约的状态中，标记为已注"
 "册并有资格投票。"
 
 #: src/ch99-01-04-01-voting-contract.md:5
@@ -16059,14 +16059,14 @@ msgid ""
 "updated, recording the vote and marking the voter as having voted. This ensures that the voter is not able to cast a vote again within the same proposal. The casting of a vote "
 "triggers the **`VoteCast`** event, logging the action."
 msgstr ""
-"注册完成后，投票者可使用**`vote`**函数进行投票，选择 1（YES）或 0（NO）作为其投票。投票时，合约状态会被更新，记录投票情况并标记投票人已投票。这样可以确保投票者无法在同一提案中再次投"
-"票。投票会触发**`VoteCast`**事件，记录投票行为。"
+"注册完成后，投票者可使用 **`vote`** 函数进行投票，选择 1（YES）或 0（NO）作为其投票。投票时，合约状态会被更新，记录投票情况并标记投票人已投票。这样可以确保投票者无法在同一提案中再次投"
+"票。投票会触发 **`VoteCast`** 事件，记录投票行为。"
 
 #: src/ch99-01-04-01-voting-contract.md:9
 msgid ""
 "The contract also monitors unauthorized voting attempts. If an unauthorized action is detected, such as a non-registered user attempting to vote or a user trying to vote again, the "
 "**`UnauthorizedAttempt`** event is emitted."
-msgstr "该合约还会监控未经授权的投票尝试。如果检测到未经授权的行为，如非注册用户试图投票或用户试图再次投票，就会发出**`UnauthorizedAttempt`**事件。"
+msgstr "该合约还会监控未经授权的投票尝试。如果检测到未经授权的行为，如非注册用户试图投票或用户试图再次投票，就会发出 **`UnauthorizedAttempt`** 事件。"
 
 #: src/ch99-01-04-01-voting-contract.md:11
 msgid ""
@@ -16074,7 +16074,7 @@ msgid ""
 "retrieval within the Starknet environment. Constants like **`YES`** and **`NO`** help streamline the voting process, while events play a vital role in ensuring transparency and "
 "traceability."
 msgstr ""
-"这些功能、状态、常量和事件共同创建了一个结构化投票系统，在Starknet环境中管理着从注册到投票、事件记录、以及结果检索的投票生命周期。常量（如**`YES`**和**`NO`**）有助于简化投票流程，而事"
+"这些功能、状态、常量和事件共同创建了一个结构化投票系统，在Starknet环境中管理着从注册到投票、事件记录、以及结果检索的投票生命周期。常量（如 **`YES`** 和 **`NO`** ）有助于简化投票流程，而事"
 "件则在确保透明度和可追溯性方面发挥着重要作用。"
 
 #: src/ch99-01-04-01-voting-contract.md:13
@@ -16464,7 +16464,7 @@ msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:201
 msgid "### The `katana` local Starknet node"
-msgstr "###`katana` 本地Starknet节点"
+msgstr "### `katana` 本地Starknet节点"
 
 #: src/ch99-01-04-01-voting-contract.md:203
 msgid ""
