@@ -199,7 +199,7 @@ The error says we were expecting a `u64` (the original type) but we got a differ
 
 ```shell
 $ scarb cairo-run
-error: Unexpected argument type. Expected: "core::integer::u32", found: "core::felt252".
+error: Unexpected argument type. Expected: "core::integer::u64", found: "core::felt252".
  --> lib.cairo:9:9
     x = 100_felt252;
         ^*********^
