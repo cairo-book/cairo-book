@@ -4206,7 +4206,7 @@ msgstr ""
 
 #: src/ch02-99-02-dictionaries.md:128
 msgid "### Squashing Dictionaries"
-msgstr "### 压缩字典"
+msgstr "### 字典压缩"
 
 #: src/ch02-99-02-dictionaries.md:130
 msgid ""
@@ -9785,7 +9785,7 @@ msgstr "在这里，我们用别名`Arr`将`ArrayTrait`带入作用域。现在�
 
 #: src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:149
 msgid "### Importing multiple items from the same module"
-msgstr "###从同一模块中导入多个项"
+msgstr "### 从同一模块中导入多个项"
 
 #: src/ch06-04-bringing-paths-into-scope-with-the-use-keyword.md:151
 msgid ""
