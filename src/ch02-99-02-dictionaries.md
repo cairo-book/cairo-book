@@ -88,8 +88,8 @@ For example, given the following entry list:
 
 |   key   | previous | new |
 | :-----: | -------- | --- |
-|  Alex   | 0        | 100 |
-|  Maria  | 0        | 150 |
+|  Alex   | 0        | 150 |
+|  Maria  | 0        | 100 |
 | Charles | 0        | 70  |
 |  Maria  | 100      | 250 |
 |  Alex   | 150      | 40  |
