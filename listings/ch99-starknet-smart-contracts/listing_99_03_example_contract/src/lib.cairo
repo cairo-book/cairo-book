@@ -83,7 +83,7 @@ mod NameRegistry {
             //ANCHOR_END: write
             self.total_names.write(total_names + 1);
             //ANCHOR: emit_event
-            self.emit(Event::StoredName(StoredName { user: user, name: name }));
+            self.emit(StoredName { user: user, name: name });
         //ANCHOR_END: emit_event
 
         }
