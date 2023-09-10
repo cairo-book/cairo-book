@@ -1,4 +1,3 @@
-use array::ArrayTrait;
 use clone::Clone;
 use array::ArrayTCloneImpl;
 fn main() {

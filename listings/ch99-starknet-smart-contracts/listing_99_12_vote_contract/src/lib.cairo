@@ -40,7 +40,7 @@ mod Vote {
         voter_2: ContractAddress,
         voter_3: ContractAddress
     ) {
-        // Register all voters by calling the _register_voters function 
+        // Register all voters by calling the _register_voters function
         self._register_voters(voter_1, voter_2, voter_3);
 
         // Initialize the vote count to 0
@@ -66,7 +66,7 @@ mod Vote {
     /// @dev Represents an unauthorized attempt to vote
     #[derive(Drop, starknet::Event)]
     struct UnauthorizedAttempt {
-        unauthorized_address: ContractAddress, 
+        unauthorized_address: ContractAddress,
     }
 
     /// @dev Implementation of VoteTrait for ContractState
@@ -103,7 +103,7 @@ mod Vote {
                 self.yes_votes.write(self.yes_votes.read() + 1_u8);
             }
 
-            self.emit(VoteCast { voter: caller, vote: vote,  });
+            self.emit(VoteCast { voter: caller, vote: vote, });
         }
     }
 
@@ -137,7 +137,7 @@ mod Vote {
             let can_vote: bool = self.can_vote.read((address));
 
             if (can_vote == false) {
-                self.emit(UnauthorizedAttempt { unauthorized_address: address,  });
+                self.emit(UnauthorizedAttempt { unauthorized_address: address, });
             }
 
             assert(is_voter == true, 'USER_NOT_REGISTERED');

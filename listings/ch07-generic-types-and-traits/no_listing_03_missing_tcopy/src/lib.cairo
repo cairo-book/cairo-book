@@ -1,5 +1,4 @@
 //TAG: does_not_compile
-use array::ArrayTrait;
 
 // Given a list of T get the smallest one.
 // The PartialOrd trait implements comparison operations for T

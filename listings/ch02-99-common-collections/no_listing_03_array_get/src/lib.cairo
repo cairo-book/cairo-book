@@ -1,4 +1,3 @@
-use array::ArrayTrait;
 use box::BoxTrait;
 fn main() -> u128 {
     let mut arr = ArrayTrait::<u128>::new();

@@ -1,4 +1,3 @@
-use array::ArrayTrait;
 use debug::PrintTrait;
 
 fn main() {

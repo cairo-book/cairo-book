@@ -21,9 +21,8 @@ mod ContractA {
     #[external(v0)]
     impl ContractA of IContractA {
         fn set_value(ref self: ContractState, value: u128) {
-            IContractBLibraryDispatcher {
-                class_hash: starknet::class_hash_const::<0x1234>()
-            }.set_value(value)
+            IContractBLibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }
+                .set_value(value)
         }
 
         fn get_value(self: @ContractState) -> u128 {

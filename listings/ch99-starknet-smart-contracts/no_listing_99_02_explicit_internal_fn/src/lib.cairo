@@ -25,7 +25,7 @@ mod NameRegistry {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        StoredName: StoredName, 
+        StoredName: StoredName,
     }
 
     #[derive(Drop, starknet::Event)]
