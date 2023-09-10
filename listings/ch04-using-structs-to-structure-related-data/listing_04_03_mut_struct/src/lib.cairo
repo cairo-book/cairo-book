@@ -17,13 +17,13 @@ fn main() {
 
 // ANCHOR: build_user
 fn build_user(email: felt252, username: felt252) -> User {
-    User { active: true, username: username, email: email, sign_in_count: 1,  }
+    User { active: true, username: username, email: email, sign_in_count: 1, }
 }
 // ANCHOR_END: build_user
 
 // ANCHOR: build_user2
 fn build_user_short(email: felt252, username: felt252) -> User {
-    User { active: true, username, email, sign_in_count: 1,  }
+    User { active: true, username, email, sign_in_count: 1, }
 }
 // ANCHOR_END: build_user2
 // ANCHOR_END: all

@@ -1,4 +1,3 @@
-use array::ArrayTrait;
 fn main() {
     let arr1 = ArrayTrait::<u128>::new();
 

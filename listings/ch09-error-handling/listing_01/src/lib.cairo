@@ -1,5 +1,3 @@
-use traits::TryInto;
-
 //ANCHOR: function
 fn parse_u8(s: felt252) -> Result<u8, felt252> {
     match s.try_into() {

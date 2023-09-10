@@ -1,4 +1,3 @@
-use option::OptionTrait;
 use debug::PrintTrait;
 
 fn plus_one(x: Option<u8>) -> Option<u8> {
