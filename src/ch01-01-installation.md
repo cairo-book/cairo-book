@@ -29,6 +29,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 
   ```bash
   $ scarb --version
-    scarb 0.6.0 (532d8e349 2023-08-07)
+    scarb 0.7.0 (532d8e349 2023-08-07)
     cairo: 2.1.0 (https://crates.io/crates/cairo-lang-compiler/2.1.0)
   ```
