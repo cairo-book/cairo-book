@@ -4,7 +4,7 @@ use integer::{u128_safe_divmod, u128_as_non_zero};
 use traits::{Into, TryInto};
 use option::OptionTrait;
 
-#[derive(Drop)]
+#[derive(Drop, Serde)]
 struct Sizes {
     tiny: u8,
     small: u32,
@@ -18,7 +18,7 @@ const MASK_8: u128 = 0xff;
 const MASK_32: u128 = 0xffffffff;
 
 
-impl ComplexFieldsStorePacking of StorePacking<Sizes, u128> {
+impl SizesStorePacking of StorePacking<Sizes, u128> {
     fn pack(value: Sizes) -> u128 {
         value.tiny.into() + (value.small.into() * TWO_POW_8) + (value.medium.into() * TWO_POW_40)
     }
@@ -39,7 +39,7 @@ impl ComplexFieldsStorePacking of StorePacking<Sizes, u128> {
 #[starknet::contract]
 mod SizeFactory {
     use super::Sizes;
-    use super::ComplexFieldsStorePacking; //don't forget to import it!
+    use super::SizesStorePacking; //don't forget to import it!
 
     #[storage]
     struct Storage {
@@ -67,17 +67,17 @@ mod SizeFactory {
 
 #[cfg(test)]
 mod tests {
-    use super::{ComplexFieldsStorePacking, Sizes};
+    use super::{SizesStorePacking, Sizes};
     use starknet::StorePacking;
     #[test]
     #[available_gas(200000)]
     fn test_pack_unpack() {
         let value = Sizes { tiny: 0x12, small: 0x12345678, medium: 0x1234567890, };
 
-        let packed = ComplexFieldsStorePacking::pack(value);
+        let packed = SizesStorePacking::pack(value);
         assert(packed == 0x12345678901234567812, 'wrong packed value');
 
-        let unpacked = ComplexFieldsStorePacking::unpack(packed);
+        let unpacked = SizesStorePacking::unpack(packed);
         assert(unpacked.tiny == 0x12, 'wrong unpacked tiny');
         assert(unpacked.small == 0x12345678, 'wrong unpacked small');
         assert(unpacked.medium == 0x1234567890, 'wrong unpacked medium');
