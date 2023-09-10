@@ -20,14 +20,14 @@ The goal is to pack the `tiny`, `small`, and `medium` fields into a single `u128
 First, when packing:
 
 - `tiny` is a `u8` so we just convert it directly to a `u128` with `.into()`. This creates a `u128` value with the low 8 bits set to `tiny`'s value.
-- `small` is a `u32` so we first shift it left by 8 bits (add 8 bits with the value 0 to the left) to make space for `tiny`. The value of `tiny` now takes bits 0-8 and the value of small takes bits 8-39. Then we add tiny to small to combine them into a single `u128` value. This takes bits 8-39.
-- Similarly `medium` is a `u64` so we shift it left by 32 bits (TWO_POW_32) to make space for the previous fields. This takes bits 40-103.
+- `small` is a `u32` so we first shift it left by 8 bits (add 8 bits with the value 0 to the left) to make space for `tiny`. The value of `tiny` now takes bits 0-7 and the value of small takes bits 8-39. Then we add tiny to small to combine them into a single `u128` value. This takes bits 8-39.
+- Similarly `medium` is a `u64` so we shift it left by 32 bits (`TWO_POW_32`) to make space for the previous fields. This takes bits 40-103.
 
 When unpacking:
 
-- First we extract tiny by bitwise ANDing (&) with a bitmask of 8 ones (` MASK_8``). This isolates the lowest 8 bits of the packed value, which is  `tiny`'s value.
-- For small, we right shift by 8 bits (`/ TWO_POW_8`) to align it with the bitmask, then use bitwise AND with the 32 ones bitmask.
-- For medium we right shift by 40 bits. Since it is the last value packed, we don't need to apply a bitmask as the higher bits are already 0.
+- First we extract `tiny` by bitwise ANDing (&) with a bitmask of 8 ones (`& MASK_8`). This isolates the lowest 8 bits of the packed value, which is `tiny`'s value.
+- For `small`, we right shift by 8 bits (`/ TWO_POW_8`) to align it with the bitmask, then use bitwise AND with the 32 ones bitmask.
+- For `medium` we right shift by 40 bits. Since it is the last value packed, we don't need to apply a bitmask as the higher bits are already 0.
 
 This technique can be used for any group of fields that fit within the bit size of the packed storage type. For example, if you have a struct with multiple fields whose bit sizes add up to 256 bits, you can pack them into a single `u256` variable. If the bit sizes add up to 512 bits, you can pack them into a single `u512` variable, and so on. You can define your own structs and logic to pack and unpack them.
 
