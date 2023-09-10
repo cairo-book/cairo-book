@@ -1,5 +1,5 @@
 use debug::PrintTrait;
-use traits::Into;
+
 fn main() {
     let x: u64 = 2;
     x.print();

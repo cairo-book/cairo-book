@@ -1,7 +1,5 @@
 //TAG: does_not_compile
 
-use array::ArrayTrait;
-
 // Specify generic type T between the angulars
 fn largest_list<T>(l1: Array<T>, l2: Array<T>) -> Array<T> {
     if l1.len() > l2.len() {

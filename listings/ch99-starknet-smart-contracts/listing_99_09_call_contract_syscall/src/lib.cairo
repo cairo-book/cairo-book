@@ -10,9 +10,8 @@ trait ITokenWrapper<TContractState> {
 
 #[starknet::contract]
 mod TokenWrapper {
-    use array::ArrayTrait;
-    use option::OptionTrait;
     use super::ITokenWrapper;
+    use starknet::SyscallResultTrait;
 
     #[storage]
     struct Storage {}

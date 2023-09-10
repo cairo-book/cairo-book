@@ -1,7 +1,3 @@
-use traits::TryInto;
-use traits::Into;
-use option::OptionTrait;
-
 fn main() {
     let my_felt252 = 10;
     // Since a felt252 might not fit in a u8, we need to unwrap the Option<T> type

@@ -1,5 +1,5 @@
 //TAG: does_not_run
-use array::ArrayTrait;
+
 fn foo(arr: Array<u128>) {}
 
 fn bar(arr: Array<u128>) {}

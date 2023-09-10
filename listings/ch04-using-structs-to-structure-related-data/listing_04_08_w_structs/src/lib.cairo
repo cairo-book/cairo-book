@@ -6,7 +6,7 @@ struct Rectangle {
 }
 
 fn main() {
-    let rectangle = Rectangle { width: 30, height: 10,  };
+    let rectangle = Rectangle { width: 30, height: 10, };
     let area = area(rectangle);
     area.print(); // print out the area
 }

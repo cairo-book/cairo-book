@@ -1,11 +1,11 @@
 //TAG: does_not_compile
-use option::OptionTrait;
+
 use debug::PrintTrait;
 
 //ANCHOR: here
 fn plus_one(x: Option<u8>) -> Option<u8> {
     match x {
-        Option::Some(val) => Option::Some(val + 1), 
+        Option::Some(val) => Option::Some(val + 1),
     }
 }
 //ANCHOR_END: here
