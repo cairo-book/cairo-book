@@ -20,7 +20,7 @@ The goal is to pack the `tiny`, `small`, and `medium` fields into a single `u128
 First, when packing:
 
 - `tiny` is a `u8` so we just convert it directly to a `u128` with `.into()`. This creates a `u128` value with the low 8 bits set to `tiny`'s value.
-- `small` is a `u32` so we first shift it left by 8 bits (add 8 bits with the value 0 to the left) to create room for the 8 bites taken by `tiny`. Then we add tiny to small to combine them into a single `u128` value. The value of `tiny` now takes bits 0-7 and the value of small takes bits 8-39.
+- `small` is a `u32` so we first shift it left by 8 bits (add 8 bits with the value 0 to the left) to create room for the 8 bites taken by `tiny`. Then we add `tiny` to `small` to combine them into a single `u128` value. The value of `tiny` now takes bits 0-7 and the value of small takes bits 8-39.
 - Similarly `medium` is a `u64` so we shift it left by 40 (8 + 32) bits (`TWO_POW_40`) to make space for the previous fields. This takes bits 40-103.
 
 When unpacking:
@@ -32,4 +32,4 @@ When unpacking:
 This technique can be used for any group of fields that fit within the bit size of the packed storage type. For example, if you have a struct with multiple fields whose bit sizes add up to 256 bits, you can pack them into a single `u256` variable. If the bit sizes add up to 512 bits, you can pack them into a single `u512` variable, and so on. You can define your own structs and logic to pack and unpack them.
 
 The rest of the work is done magically by the compiler - if a type implements the `StorePacking` trait, then the compiler will know it can use the `StoreUsingPacking` implementation of the `Store` trait in order to pack before writing and unpack after reading from storage.
-One important details, however, is that the type that `StorePacking::pack` spits out also has to implement `Store` for StoreUsingPacking to work. Most of the time, we will want to pack into a felt252 or u256 - but if you want to pack into a type of your own, make sure that this one implements the `Store` trait.
+One important details, however, is that the type that `StorePacking::pack` spits out also has to implement `Store` for `StoreUsingPacking` to work. Most of the time, we will want to pack into a felt252 or u256 - but if you want to pack into a type of your own, make sure that this one implements the `Store` trait.
