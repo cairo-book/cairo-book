@@ -1711,8 +1711,8 @@ msgid ""
 "But when y does not divide x, you may get a surprising result: For example, since `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`, the value of `1 / 2` in Cairo is `(P+1)/2` (and not 0 or 0.5), as "
 "it satisfies the above equation."
 msgstr ""
-"在 Cairo，`x/y` 的结果被定义为总是满足方程式 `(x / y) * y == x`。如果y除以x为整数，你将得到 Cairo 的预期结果（例如，`6 / 2` 确实会得到`3`）。\n"
-"但是当 y 不除以 x 时，你可能会得到一个令人惊讶的结果：\n"
+"在 Cairo，`x/y` 的结果被定义为总是满足方程式 `(x / y) * y == x`。如果 y 作为整数可以整除 x ，你将得到 Cairo 的预期结果（例如，`6 / 2` 确实会得到`3`）。\n"
+"但是当 y 不能整除 x 时，你可能会得到一个令人惊讶的结果：\n"
 "例如，由于 `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`，在 Cairo 中 `1 / 2` 的值是 `(P+1)/2`（而不是0或0.5），因为它满足上述公式。"
 
 #: src/ch02-02-data-types.md:40
