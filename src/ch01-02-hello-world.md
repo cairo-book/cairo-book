@@ -83,7 +83,7 @@ The next two lines set the configuration information Scarb needs to compile your
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
-> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/starknet/starknet-package).
+> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/starknet-package.html).
 
 The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
@@ -194,7 +194,7 @@ end with a semicolon.
 
 To run all the tests associated with a particular package, you can use the `scarb test` command.
 It is not a test runner by itself, but rather delegates work to a testing solution of choice. Scarb comes with preinstalled `scarb cairo-test` extension, which bundles Cairo's native test runner. It is the default test runner used by scarb test.
-To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/testing#using-third-party-test-runners).
+To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/extensions/testing.html#using-third-party-test-runners).
 
 Test functions are marked with the `#[test]` attributes, and running `scarb test` will run all test functions in your codebase under the `src/` directory.
 
