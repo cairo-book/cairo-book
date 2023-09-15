@@ -1,4 +1,5 @@
 use debug::PrintTrait;
+use array::ArrayTrait;
 
 fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> Option<usize> {
     if index >= arr.len() {
