@@ -13,10 +13,6 @@ trait UserDatabaseTrait<T> {
 }
 // ANCHOR_END: trait
 
-// ANCHOR: imports
-use dict::Felt252DictTrait;
-// ANCHOR_END: imports
-
 // ANCHOR: impl
 impl UserDatabaseImpl<T, impl TDefault: Felt252DictValue<T>> of UserDatabaseTrait<T> {
     // Creates a database

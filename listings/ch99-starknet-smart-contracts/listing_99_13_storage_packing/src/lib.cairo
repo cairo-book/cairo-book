@@ -1,8 +1,6 @@
 //ANCHOR:here
 use starknet::{StorePacking};
 use integer::{u128_safe_divmod, u128_as_non_zero};
-use traits::{Into, TryInto};
-use option::OptionTrait;
 
 #[derive(Drop, Serde)]
 struct Sizes {
