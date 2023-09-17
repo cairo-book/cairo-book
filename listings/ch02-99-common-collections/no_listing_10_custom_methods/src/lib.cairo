@@ -1,5 +1,4 @@
 // ANCHOR: imports
-use dict::Felt252DictTrait;
 use dict::Felt252DictEntryTrait;
 // ANCHOR_END: imports
 
