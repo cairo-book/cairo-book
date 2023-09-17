@@ -126,7 +126,7 @@ This command creates a `sierra` file in `target/dev`, let's ignore the `sierra` 
 If you have installed Cairo correctly, you should be able to run and see the following output:
 
 ```shell
-$ scarb build && scarb cairo-run
+$ scarb cairo-run
 running hello_world ...
 [DEBUG] Hello, World!                   (raw: 0x48656c6c6f2c20776f726c6421
 
