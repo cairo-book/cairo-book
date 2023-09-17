@@ -10,7 +10,7 @@ Here's a simple example of an enum:
 {{#include ../listings/ch05-enums-and-pattern-matching/no_listing_01_enum_example/src/lib.cairo:enum_example}}
 ```
 
-Unlike other languages like Rust, every variant has a type. In this example, we've defined an enum called `Direction` with four variants: `North`, `East`, `South`, and `West`. The naming convention is to use PascalCase for enum variants. Each variant represents a distinct value of the Direction type and is associated with a unit type `()`. One variant can be instantiated using this syntax:
+In this example, we've defined an enum called `Direction` with four variants: `North`, `East`, `South`, and `West`. The naming convention is to use PascalCase for enum variants. Each variant represents a distinct value of the Direction type. In this particular example, variants don't have any associated value. One variant can be instantiated using this syntax:
 
 ```rust
 {{#rustdoc_include ../listings/ch05-enums-and-pattern-matching/no_listing_01_enum_example/src/lib.cairo:here}}
@@ -28,7 +28,7 @@ Enums can also be used to store more interesting data associated with each varia
 
 In this example, the `Message` enum has three variants: `Quit`, `Echo` and `Move`, all with different types:
 
-- `Quit` is the unit type - it has no data associated with it at all.
+- `Quit` doesn't have any associated value.
 - `Echo` is a single felt.
 - `Move` is a tuple of two u128 values.
 
