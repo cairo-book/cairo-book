@@ -36,8 +36,8 @@ They cannot be used as names of any items.
 - `mod` - Define a module
 - `mut` - Denote variable mutability
 - `nopanic` - Functions marked with this notation mean that the function will never panic.
-- `of` - Implement a trait
-- `ref` - Bind by reference
+- `of` - Implementation a trait
+- `ref` - Parameter passed implicitly returned at the end of a function
 - `return` - Return from function
 - `struct` - Define a structure
 - `trait` - Define a trait
@@ -54,13 +54,18 @@ They have the same restrictions as strict keywords.
 The reasoning behind this is to make current programs forward compatible with future versions of
 Cairo by forbidding them to use these keywords.
 
+- `Self`
+- `assert`
 - `do`
 - `dyn`
+- `for`
+- `hint`
+- `in`
 - `macro`
 - `move`
-- `Self`
-- `self`
+- `pub`
 - `static_assert`
+- `self`
 - `static`
 - `super`
 - `try`
