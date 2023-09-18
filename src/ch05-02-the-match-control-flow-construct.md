@@ -67,7 +67,7 @@ Let’s say we want to write a function that takes an `Option<u8>` and, if there
 This function is very easy to write, thanks to match, and will look like Listing 5-5.
 
 ```rust
-{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo}}
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo:all}}
 ```
 
 <span class="caption">Listing 5-5: A function that uses a match
@@ -85,7 +85,7 @@ enum Option<T> {
 Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5)`. We then compare that against each match arm:
 
 ```rust,noplayground
-{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo:6}}
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo:option_some}}
 ```
 
 Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We have the same variant. The `val` binds to the value contained in `Option::Some`, so `val` takes the value `5`. The code in the match arm is then executed, so we add `1` to the value of `val` and create a new `Option::Some` value with our total `6` inside. Because the first arm matched, no other arms are compared.
@@ -93,13 +93,13 @@ Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We 
 Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None(())`. We enter the match and compare to the first arm:
 
 ```rust,noplayground
-{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo:6}}
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo:option_some}}
 ```
 
 The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we continue to the next arm:
 
 ```rust
-{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo:7}}
+{{#include ../listings/ch05-enums-and-pattern-matching/listing_05_05/src/lib.cairo:option_none}}
 ```
 
 It matches! There’s no value to add to, so the program stops and returns the `Option::None(())` value on the right side of `=>`.

@@ -1,3 +1,4 @@
+//ANCHOR:all
 use debug::PrintTrait;
 fn main() {
     let width1 = 30;
@@ -6,6 +7,9 @@ fn main() {
     area.print();
 }
 
+//ANCHOR: here
 fn area(width: u64, height: u64) -> u64 {
+//ANCHOR_END: here
     width * height
 }
+//ANCHOR_END:all

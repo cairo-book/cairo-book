@@ -95,5 +95,5 @@ All methods provided by `Array` can also be used with `Span`, with the exception
 To create a `Span` of an `Array`, call the `span()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_05_array_span/src/lib.cairo:5}}
+{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_05_array_spano_listing_05_array_spann/src/lib.cairo:3}}
 ```
