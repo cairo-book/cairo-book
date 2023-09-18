@@ -10,13 +10,13 @@ At compile-time, the compiler will create an array and append all values passed 
 Without `array!`:
 
 ```rust
-{{#include ../listings/ch10-advanced-features/no_listing_02_array_macro/src/lib.cairo:2:7}}
+{{#include ../listings/ch10-advanced-features/no_listing_02_array_macro/src/lib.cairo:no_macro}}
 ```
 
 With `array!`:
 
 ```rust
-{{#include ../listings/ch10-advanced-features/no_listing_02_array_macro/src/lib.cairo:9:9}}
+{{#include ../listings/ch10-advanced-features/no_listing_02_array_macro/src/lib.cairo:array_macro}}
 ```
 
 ### `consteval_int!`

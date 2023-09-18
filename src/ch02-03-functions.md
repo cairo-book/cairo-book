@@ -178,15 +178,13 @@ expression. A new scope block created with
 curly brackets is an expression, for example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:all}}
 ```
 
 This expression:
 
 ```rust, noplayground
-{
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:4:5}}
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:block_expr}}
 ```
 
 is a block that, in this case, evaluates to `4`. That value gets bound to `y`

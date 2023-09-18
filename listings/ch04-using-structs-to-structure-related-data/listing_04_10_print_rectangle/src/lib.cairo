@@ -1,3 +1,5 @@
+//ANCHOR:all
+//ANCHOR: here
 use debug::PrintTrait;
 
 struct Rectangle {
@@ -9,6 +11,7 @@ fn main() {
     let rectangle = Rectangle { width: 30, height: 10, };
     rectangle.print();
 }
+//ANCHOR_END: here
 
 impl RectanglePrintImpl of PrintTrait<Rectangle> {
     fn print(self: Rectangle) {
@@ -16,3 +19,4 @@ impl RectanglePrintImpl of PrintTrait<Rectangle> {
         self.height.print();
     }
 }
+//ANCHOR_END:all
