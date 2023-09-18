@@ -9,7 +9,7 @@ struct UserDatabase<T> {
 trait UserDatabaseTrait<T> {
     fn new() -> UserDatabase<T>;
     fn add_user<impl TDrop: Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T);
-    fn get_user<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T;
+    fn get_balance<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T;
 }
 // ANCHOR_END: trait
 
@@ -24,8 +24,8 @@ impl UserDatabaseImpl<T, impl TDefault: Felt252DictValue<T>> of UserDatabaseTrai
         UserDatabase { users_amount: 0, balances: Default::default() }
     }
 
-    // Get the user
-    fn get_user<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T {
+    // Get the user's balance
+    fn get_balance<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T {
         self.balances.get(name)
     }
 
@@ -57,8 +57,8 @@ fn main() {
     db.add_user('Alex', 40);
     db.add_user('Maria', 0);
 
-    let alex_latest_balance = db.get_user('Alex');
-    let maria_latest_balance = db.get_user('Maria');
+    let alex_latest_balance = db.get_balance('Alex');
+    let maria_latest_balance = db.get_balance('Maria');
 
     assert(alex_latest_balance == 40, 'Expected 40');
     assert(maria_latest_balance == 0, 'Expected 0');
