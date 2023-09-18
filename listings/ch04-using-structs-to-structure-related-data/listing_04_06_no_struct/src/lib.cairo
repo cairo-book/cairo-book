@@ -9,7 +9,9 @@ fn main() {
 
 //ANCHOR: here
 fn area(width: u64, height: u64) -> u64 {
-//ANCHOR_END: here
+    //ANCHOR_END: here
     width * height
 }
 //ANCHOR_END:all
+
+
