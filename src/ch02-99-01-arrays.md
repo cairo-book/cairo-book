@@ -78,7 +78,7 @@ If you want to check if an array is empty or not, you can use the `is_empty()` m
 
 ### Storing multiple types with Enums
 
-If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types.
+If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md) chapter.
 
 ```rust
 {{#include ../listings/ch02-99-common-collections/no_listing_04_array_with_enums/src/lib.cairo}}
