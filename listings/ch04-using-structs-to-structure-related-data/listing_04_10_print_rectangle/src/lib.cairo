@@ -20,3 +20,5 @@ impl RectanglePrintImpl of PrintTrait<Rectangle> {
     }
 }
 //ANCHOR_END:all
+
+

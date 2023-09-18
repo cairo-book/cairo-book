@@ -19,3 +19,4 @@ impl WalletMixImpl<T1, U1> of WalletMixTrait<T1, U1> {
 }
 //ANCHOR_END: trait_impl
 
+
