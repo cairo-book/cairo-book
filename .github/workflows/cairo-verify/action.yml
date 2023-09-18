@@ -8,7 +8,7 @@ runs:
     - uses: actions/checkout@v3
     - uses: software-mansion/setup-scarb@v1
       with:
-        scarb-version: "0.6.0"
+        scarb-version: "0.7.0"
 
     - name: Install cairo-verify
       run: cargo install --path cairo-verify --locked

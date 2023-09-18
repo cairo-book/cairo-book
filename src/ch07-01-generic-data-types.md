@@ -99,13 +99,13 @@ The new method `receive` increments the size of the balance of any instance of a
 Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and create a new one with a generic type of each. First, let's rewrite the struct definition:
 
 ```rust,noplayground
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_12_not_compiling/src/lib.cairo:1:4}}
+{{#include ../listings/ch07-generic-types-and-traits/no_listing_12_not_compiling/src/lib.cairo:struct}}
 ```
 
 Next we are going to naively define the mixup trait and implementation:
 
 ```rust,noplayground
-{{#include ../listings/ch07-generic-types-and-traits/no_listing_12_not_compiling/src/lib.cairo:6:15}}
+{{#include ../listings/ch07-generic-types-and-traits/no_listing_12_not_compiling/src/lib.cairo:trait_impl}}
 
 ```
 

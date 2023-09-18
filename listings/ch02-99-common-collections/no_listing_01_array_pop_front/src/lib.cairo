@@ -1,5 +1,3 @@
-use option::OptionTrait;
-use array::ArrayTrait;
 use debug::PrintTrait;
 
 fn main() {

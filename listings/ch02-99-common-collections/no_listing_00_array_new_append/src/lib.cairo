@@ -1,5 +1,3 @@
-use array::ArrayTrait;
-
 fn main() {
     let mut a = ArrayTrait::new();
     a.append(0);

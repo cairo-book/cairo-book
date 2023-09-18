@@ -44,7 +44,7 @@ that we pass `@arr1` into `calculate_length` and, in its definition, we take `@A
 Let’s take a closer look at the function call here:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-understanding-ownership/no_listing_09_snapshots/src/lib.cairo:11}}
+{{#rustdoc_include ../listings/ch03-understanding-ownership/no_listing_09_snapshots/src/lib.cairo:function_call}}
 ```
 
 The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value, the value it points to cannot be modified through the snapshot, and the value it refers to will not be dropped once the snapshot stops being used.

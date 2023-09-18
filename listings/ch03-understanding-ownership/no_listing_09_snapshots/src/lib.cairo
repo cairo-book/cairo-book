@@ -1,4 +1,3 @@
-use array::ArrayTrait;
 use debug::PrintTrait;
 
 fn main() {
@@ -8,7 +7,9 @@ fn main() {
     let first_length = calculate_length(
         first_snapshot
     ); // Calculate the length of the array when the snapshot was taken
+    //ANCHOR: function_call
     let second_length = calculate_length(@arr1); // Calculate the current length of the array
+    //ANCHOR_END: function_call
     first_length.print();
     second_length.print();
 }

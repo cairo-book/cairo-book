@@ -3,7 +3,7 @@ use debug::PrintTrait;
 // ANCHOR: message
 #[derive(Drop)]
 enum Message {
-    Quit: (),
+    Quit,
     Echo: felt252,
     Move: (u128, u128),
 }
@@ -17,7 +17,7 @@ trait Processing {
 impl ProcessingImpl of Processing {
     fn process(self: Message) {
         match self {
-            Message::Quit(()) => {
+            Message::Quit => {
                 'quitting'.print();
             },
             Message::Echo(value) => {
@@ -32,7 +32,7 @@ impl ProcessingImpl of Processing {
 // ANCHOR_END: trait_impl
 fn main() {
     // ANCHOR: main
-    let msg: Message = Message::Quit(());
+    let msg: Message = Message::Quit;
     msg.process();
 // ANCHOR_END: main
 }

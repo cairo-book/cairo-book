@@ -24,7 +24,7 @@ mod NameRegistry {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        StoredName: StoredName, 
+        StoredName: StoredName,
     }
 
     #[derive(Drop, starknet::Event)]
@@ -58,10 +58,7 @@ mod NameRegistry {
         //ANCHOR: external
         fn store_name(ref self: ContractState, name: felt252) {
             let caller = get_caller_address();
-            //ANCHOR: write
             self._store_name(caller, name);
-        //ANCHOR_END: write
-
         }
         //ANCHOR_END: external
 
@@ -81,10 +78,12 @@ mod NameRegistry {
     impl InternalFunctions of InternalFunctionsTrait {
         fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252) {
             let mut total_names = self.total_names.read();
+            //ANCHOR: write
             self.names.write(user, name);
+            //ANCHOR_END: write
             self.total_names.write(total_names + 1);
             //ANCHOR: emit_event
-            self.emit(Event::StoredName(StoredName { user: user, name: name }));
+            self.emit(StoredName { user: user, name: name });
         //ANCHOR_END: emit_event
 
         }

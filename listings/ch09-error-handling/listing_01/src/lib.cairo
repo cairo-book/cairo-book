@@ -1,5 +1,3 @@
-use traits::TryInto;
-
 //ANCHOR: function
 fn parse_u8(s: felt252) -> Result<u8, felt252> {
     match s.try_into() {
@@ -13,7 +11,6 @@ fn parse_u8(s: felt252) -> Result<u8, felt252> {
 #[cfg(test)]
 mod tests {
     use super::parse_u8;
-    use result::ResultTrait;
     #[test]
     fn test_felt252_to_u8() {
         let number: felt252 = 5_felt252;

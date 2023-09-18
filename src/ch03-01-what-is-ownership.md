@@ -65,7 +65,7 @@ is unknown at compile time and which can't be trivially copied?
 Here is a short reminder of what an array looks like:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-understanding-ownership/no_listing_01_array/src/lib.cairo:3:5}}
+{{#rustdoc_include ../listings/ch03-understanding-ownership/no_listing_01_array/src/lib.cairo:2:4}}
 ```
 
 So, how does the ownership system ensure that each cell is never written to more than once?

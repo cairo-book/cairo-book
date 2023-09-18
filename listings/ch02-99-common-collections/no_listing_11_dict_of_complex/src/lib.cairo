@@ -1,10 +1,8 @@
-// ANCHOR: all 
+// ANCHOR: all
 
 // ANCHOR: imports
-use array::{ArrayTrait, SpanTrait};
-use box::BoxTrait;
 use dict::Felt252DictTrait;
-use nullable::{NullableTrait, nullable_from_box, match_nullable, FromNullableResult};
+use nullable::{nullable_from_box, match_nullable, FromNullableResult};
 // ANCHOR_END: imports
 
 // ANCHOR: header
@@ -39,6 +37,6 @@ fn main() {
 }
 // ANCHOR_END: footer
 
-// ANCHOR_END: all 
+// ANCHOR_END: all
 
 

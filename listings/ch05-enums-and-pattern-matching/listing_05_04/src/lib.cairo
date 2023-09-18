@@ -9,5 +9,5 @@ enum Coin {
     Penny: (),
     Nickel: (),
     Dime: (),
-    Quarter: (UsState, ),
+    Quarter: (UsState,),
 }

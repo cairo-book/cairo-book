@@ -1,8 +1,6 @@
-use array::ArrayTrait;
-
 #[derive(Copy, Drop)]
 struct Guess {
-    value: u64, 
+    value: u64,
 }
 
 trait GuessTrait {

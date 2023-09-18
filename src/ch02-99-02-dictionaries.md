@@ -88,8 +88,8 @@ For example, given the following entry list:
 
 |   key   | previous | new |
 | :-----: | -------- | --- |
-|  Alex   | 0        | 100 |
-|  Maria  | 0        | 150 |
+|  Alex   | 0        | 150 |
+|  Maria  | 0        | 100 |
 | Charles | 0        | 70  |
 |  Maria  | 100      | 250 |
 |  Alex   | 150      | 40  |
@@ -169,15 +169,15 @@ As a finalizing note, these two methods are implemented in a similar way to how 
 {{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_10_custom_methods/src/lib.cairo:main}}
 ```
 
-### Dictionaries of Complex Types
+### Dictionaries of types not supported natively
 
 One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`.
 This trait defines the `zero_default` method which is the one that gets called when a value does not exist in the dictionary.
-This is implemented by all data types except for complex ones such as arrays and structs.
-This means that making a dictionary of complex types is not a straightforward task because you would need to write a couple of traits in order to make the data type a valid dictionary value type.
-To compensate for this the language introduces the `Nullable<T>` type.
+This is implemented by some common data types, such as most unsigned integers, `bool` and `felt252` - but it is not implemented for more complex ones types such as arrays, structs (including `u256`), and other types from the core library.
+This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations in order to make the data type a valid dictionary value type.
+To compensate this, you can wrap your type inside a `Nullable<T>`.
 
-`Nullable<T>` represents the absence of value, and it is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type, inspired by Rust, allows us to store recursive data types.
+`Nullable<T>` is a smart pointer type that can either point to a value or be `null` in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type, inspired by Rust, allows us to allocate a new memory segment for our type, and access this segment using a pointer that can only be manipulated in one place at a time.
 
 Let's show using an example. We will try to store a `Span<felt252>` inside a dictionary. For that, we will use `Nullable<T>` and `Box<T>`. Also, we are storing a `Span<T>` and not an `Array<T>` because the latter does not implement the `Copy<T>` trait which is required for reading from a dictionary.
 
@@ -252,9 +252,9 @@ The implementation, with all restriction in place, would be as follow:
 {{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
 ```
 
-Our database implementation is almost complete, except for one thing: the compiler doesn't know how to drop a `UserDatabase<T>` out of scope.
-Since it has a `Felt252Dict<T>` as a member it cannot be dropped, so we are forced to implement the `Destruct<T>` trait.
-Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [genericity](/src/ch07-00-generic-types-and-traits.md). We need to code the `Destruct<T>` trait implementation by ourselves:
+Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it doesn't implement the `Drop<T>` trait, nor the `Destruct<T>` trait.
+Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to implement the `Destruct<T>` trait manually (refer to the [Ownership](ch03-01-what-is-ownership.md#the-drop-trait) chapter for more information).
+Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [genericity](/src/ch07-00-generic-types-and-traits.md) in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust,noplayground
 {{#include ../listings/ch02-99-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}

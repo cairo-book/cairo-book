@@ -1,9 +1,8 @@
-use array::ArrayTrait;
 use debug::PrintTrait;
-use option::OptionTrait;
+
 fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> Option<usize> {
     if index >= arr.len() {
-        return Option::None(());
+        return Option::None;
     }
 
     if *arr.at(index) == value {
@@ -16,7 +15,7 @@ fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> O
 fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
     let length = arr.len();
     let mut index = 0;
-    let mut found: Option<usize> = Option::None(());
+    let mut found: Option<usize> = Option::None;
     loop {
         if index < length {
             if *arr.at(index) == value {
@@ -50,7 +49,7 @@ fn test_increase_amount() {
                 'it worked'.print();
             }
         },
-        Option::None(()) => {
+        Option::None => {
             'not found'.print();
         },
     }
@@ -60,7 +59,7 @@ fn test_increase_amount() {
                 'it worked'.print();
             }
         },
-        Option::None(()) => {
+        Option::None => {
             'not found'.print();
         },
     }

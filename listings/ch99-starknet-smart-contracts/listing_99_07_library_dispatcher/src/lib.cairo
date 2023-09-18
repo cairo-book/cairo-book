@@ -8,7 +8,7 @@ trait IERC20DispatcherTrait<T> {
 
 #[derive(Copy, Drop, starknet::Store, Serde)]
 struct IERC20LibraryDispatcher {
-    class_hash: starknet::ClassHash, 
+    class_hash: starknet::ClassHash,
 }
 
 impl IERC20LibraryDispatcherImpl of IERC20DispatcherTrait<IERC20LibraryDispatcher> {

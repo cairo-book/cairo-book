@@ -8,7 +8,7 @@ trait IERC20DispatcherTrait<T> {
 
 #[derive(Copy, Drop, starknet::Store, Serde)]
 struct IERC20Dispatcher {
-    contract_address: starknet::ContractAddress, 
+    contract_address: starknet::ContractAddress,
 }
 
 impl IERC20DispatcherImpl of IERC20DispatcherTrait<IERC20Dispatcher> {

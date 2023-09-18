@@ -1,8 +1,6 @@
-use array::ArrayTrait;
-
 #[derive(Copy, Drop)]
 struct Guess {
-    value: u64, 
+    value: u64,
 }
 
 trait GuessTrait {
@@ -22,7 +20,7 @@ impl GuessImpl of GuessTrait {
             panic(data);
         }
 
-        Guess { value,  }
+        Guess { value, }
     }
 }
 
@@ -32,7 +30,7 @@ mod tests {
     use super::GuessTrait;
 
     #[test]
-    #[should_panic(expected: ('Guess must be <= 100', ))]
+    #[should_panic(expected: ('Guess must be <= 100',))]
     fn greater_than_100() {
         GuessTrait::new(200);
     }

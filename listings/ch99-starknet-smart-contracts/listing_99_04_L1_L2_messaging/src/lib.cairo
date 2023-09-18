@@ -4,11 +4,11 @@ mod Evaluator {
     use starknet::get_contract_address;
     use starknet::ContractAddress;
     use starknet::syscalls::send_message_to_l1_syscall;
-    use array::ArrayTrait;
-    use option::OptionTrait;
+
+
     use zeroable::Zeroable;
-    use traits::TryInto;
-    use traits::Into;
+
+
     use integer::u256;
     use integer::u256_from_felt252;
 
@@ -25,7 +25,7 @@ mod Evaluator {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        ReceivedSomething: ReceivedSomething, 
+        ReceivedSomething: ReceivedSomething,
     }
 
     #[derive(Drop, starknet::Event)]

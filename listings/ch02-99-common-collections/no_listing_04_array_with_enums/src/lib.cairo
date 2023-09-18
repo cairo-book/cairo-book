@@ -1,6 +1,3 @@
-use array::ArrayTrait;
-use traits::Into;
-
 #[derive(Copy, Drop)]
 enum Data {
     Integer: u128,

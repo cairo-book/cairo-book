@@ -1,5 +1,3 @@
-use traits::TryInto;
-
 fn parse_u8(s: felt252) -> Result<u8, felt252> {
     match s.try_into() {
         Option::Some(value) => Result::Ok(value),
