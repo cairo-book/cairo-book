@@ -22,15 +22,15 @@
 
 ## Common Collections
 
-- [Common Collections](ch02-99-00-common-collections.md)
+- [Common Collections](ch03-00-common-collections.md)
   - [Arrays](ch03-01-arrays.md)
   - [Dictionaries](ch03-02-dictionaries.md)
 
 ## Understanding Ownership
 
-- [Understanding Ownership](ch03-00-understanding-ownership.md)
-  - [What is Ownership?](ch03-01-what-is-ownership.md)
-  - [References and Snapshots](ch03-02-references-and-snapshots.md)
+- [Understanding Ownership](ch04-00-understanding-ownership.md)
+  - [What is Ownership?](ch04-01-what-is-ownership.md)
+  - [References and Snapshots](ch04-02-references-and-snapshots.md)
 
 ## Using Structs to Structure Related Data
 

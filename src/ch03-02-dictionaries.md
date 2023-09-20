@@ -253,7 +253,7 @@ The implementation, with all restriction in place, would be as follow:
 ```
 
 Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it doesn't implement the `Drop<T>` trait, nor the `Destruct<T>` trait.
-Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to implement the `Destruct<T>` trait manually (refer to the [Ownership](ch03-01-what-is-ownership.md#the-drop-trait) chapter for more information).
+Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to implement the `Destruct<T>` trait manually (refer to the [Ownership](ch04-01-what-is-ownership.md#the-drop-trait) chapter for more information).
 Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [genericity](/src/ch08-00-generic-types-and-traits.md) in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust,noplayground
