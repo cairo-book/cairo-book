@@ -43,7 +43,7 @@ In _lib.cairo_, let's add a first test, as shown in Listing 8-1.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_02/src/lib.cairo:it_works}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_08_01_02/src/lib.cairo:it_works}}
 ```
 
 <span class="caption">Listing 8-1: A test module and function</span>
@@ -72,7 +72,7 @@ Let’s start to customize the test to our own needs. First change the name of t
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_01_02/src/lib.cairo:exploration}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_08_01_02/src/lib.cairo:exploration}}
 ```
 
 Then run `cairo-test  -- --path src` again. The output now shows `exploration` instead of `it_works`:
@@ -87,7 +87,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing 8-3.
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_03/src/lib.cairo:another}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_08_03/src/lib.cairo:another}}
 
 ```
 
@@ -120,7 +120,7 @@ In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_06/src/lib.cairo:trait_impl}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_08_06/src/lib.cairo:trait_impl}}
 ```
 
 <span class="caption">Listing 8-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
@@ -130,7 +130,7 @@ The `can_hold` method returns a `bool`, which means it’s a perfect use case fo
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_06/src/lib.cairo:test1}}
+{{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_08_06/src/lib.cairo:test1}}
 ```
 
 <span class="caption">Listing 8-6: A test for `can_hold` that checks whether a larger rectangle can indeed hold a smaller rectangle</span>
@@ -151,7 +151,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_06/src/lib.cairo:test2}}
+{{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_08_06/src/lib.cairo:test2}}
 ```
 
 Because the correct result of the `can_hold` function in this case is `false`, we need to negate that result before we pass it to the assert function. As a result, our test will pass if `can_hold` returns false:
@@ -167,7 +167,7 @@ $ cairo-test .
 Two tests that pass! Now let’s see what happens to our test results when we introduce a bug in our code. We’ll change the implementation of the `can_hold` method by replacing the greater-than sign with a less-than sign when it compares the widths:
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/no_listing_02_wrong_can_hold_impl/src/lib.cairo:wrong_impl}}
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_02_wrong_can_hold_impl/src/lib.cairo:wrong_impl}}
 ```
 
 Running the tests now produces the following:
@@ -196,7 +196,7 @@ Listing 8-8 shows a test that checks that the error conditions of `GuessTrait::n
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_08/src/lib.cairo}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_08_08/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 8-8: Testing that a condition will cause a panic</span>
@@ -213,7 +213,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 Looks good! Now let’s introduce a bug in our code by removing the condition that the new function will panic if the value is greater than `100`:
 
 ```rust
-{{#rustdoc_include ../listings/ch08-testing-cairo-programs/no_listing_03_wrong_new_impl/src/lib.cairo:here}}
+{{#rustdoc_include ../listings/ch09-testing-cairo-programs/no_listing_03_wrong_new_impl/src/lib.cairo:here}}
 ```
 
 When we run the test in Listing 8-8, it will fail:
@@ -234,7 +234,7 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch08-testing-cairo-programs/listing_08_09/src/lib.cairo:test_panic}}
+{{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_08_09/src/lib.cairo:test_panic}}
 ```
 
 <span class="caption">Listing 8-9: Testing for a panic with a panic message containing the error message string</span>
@@ -244,7 +244,7 @@ This test will pass because the value we put in the `should_panic` attribute’s
 To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the if `value < 1` and the else if `value > 100` blocks:
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:here}}
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:here}}
 ```
 
 This time when we run the `should_panic` test, it will fail:
@@ -270,7 +270,7 @@ To demonstrate how to run a single test, we’ll first create two tests function
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/listing_08_10/src/lib.cairo}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_08_10/src/lib.cairo}}
 ```
 
 <span class="caption">Listing 8-10: Two tests with two different names</span>
@@ -295,7 +295,7 @@ Sometimes a few specific tests can be very time-consuming to execute, so you mig
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch08-testing-cairo-programs/no_listing_05_ignore_tests/src/lib.cairo}}
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_05_ignore_tests/src/lib.cairo}}
 ```
 
 After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now when we run our tests, `it_works` runs, but `expensive_test` doesn’t:

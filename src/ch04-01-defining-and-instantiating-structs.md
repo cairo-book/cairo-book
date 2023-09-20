@@ -7,7 +7,7 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct/src/lib.cairo:user}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_01_user_struct/src/lib.cairo:user}}
 ```
 
 <span class="caption">Listing 4-1: A `User` struct definition</span>
@@ -20,7 +20,7 @@ For example, we can declare a particular user as shown in Listing 4-2.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_01_user_struct/src/lib.cairo:all}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_01_user_struct/src/lib.cairo:all}}
 ```
 
 <span class="caption">Listing 4-2: Creating an instance of the `User` struct</span>
@@ -30,7 +30,7 @@ To get a specific value from a struct, we use dot notation. For example, to acce
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:main}}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:main}}
 ```
 
 <span class="caption">Listing 4-3: Changing the value in the email field of a `User` instance</span>
@@ -44,7 +44,7 @@ Listing 4-4 shows a `build_user` function that returns a `User` instance with th
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:build_user}}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:build_user}}
 ```
 
 <span class="caption">Listing 4-4: A `build_user` function that takes an email and username and returns a `User` instance</span>
@@ -58,7 +58,7 @@ Because the parameter names and the struct field names are exactly the same in L
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch04-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:build_user2}}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_04_03_mut_struct/src/lib.cairo:build_user2}}
 ```
 
 <span class="caption">Listing 4-5: A `build_user` function that uses field init shorthand because the `username` and `email` parameters have the same name as struct fields</span>

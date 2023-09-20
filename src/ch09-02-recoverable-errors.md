@@ -9,7 +9,7 @@ Most errors aren’t serious enough to require the program to stop entirely. Som
 Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/no_listing_07_result_enum/src/lib.cairo}}
+{{#include ../listings/ch10-error-handling/no_listing_07_result_enum/src/lib.cairo}}
 ```
 
 The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition makes it convenient to use the `Result` enum anywhere we have an operation that might succeed (by returning a value of type `T`) or fail (by returning a value of type `E`).
@@ -19,7 +19,7 @@ The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `O
 The `ResultTrait` trait provides methods for working with the `Result<T, E>` enum, such as unwrapping values, checking whether the `Result` is `Ok` or `Err`, and panicking with a custom message. The `ResultTraitImpl` implementation defines the logic of these methods.
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/no_listing_08_result_trait/src/lib.cairo}}
+{{#include ../listings/ch10-error-handling/no_listing_08_result_trait/src/lib.cairo}}
 ```
 
 The `expect` and `unwrap` methods are similar in that they both attempt to extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` variant. If the `Result` is `Ok(x)`, both methods return the value `x`. However, the key difference between the two methods lies in their behavior when the `Result` is in the `Err` variant. The `expect` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap` method panics with a default error message, providing less information about the cause of the panic.
@@ -77,7 +77,7 @@ use result::ResultTraitImpl;
 In this example, the `parse_u8` function takes a `felt252` integer and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`.
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/listing_01/src/lib.cairo:function}}
+{{#include ../listings/ch10-error-handling/listing_01/src/lib.cairo:function}}
 ```
 
 <span class="caption">Listing 9-1: Using the Result type</span>
@@ -85,7 +85,7 @@ In this example, the `parse_u8` function takes a `felt252` integer and tries to 
 Our two test cases are:
 
 ```rust,noplayground
-{{#rustdoc_include ../listings/ch09-error-handling/listing_01/src/lib.cairo:tests}}
+{{#rustdoc_include ../listings/ch10-error-handling/listing_01/src/lib.cairo:tests}}
 ```
 
 The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'.
@@ -104,7 +104,7 @@ The `?` operator is useful when you want to handle errors implicitly and let the
 Here is an example.
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/listing_02/src/lib.cairo:function}}
+{{#include ../listings/ch10-error-handling/listing_02/src/lib.cairo:function}}
 ```
 
 <span class="caption">Listing 9-1: Using the `?` operator</span>
@@ -114,7 +114,7 @@ Here is an example.
 And with a little test case:
 
 ```rust,noplayground
-{{#rustdoc_include ../listings/ch09-error-handling/listing_02/src/lib.cairo:tests}}
+{{#rustdoc_include ../listings/ch10-error-handling/listing_02/src/lib.cairo:tests}}
 ```
 
 The console will print the error "Invalid Integer".
