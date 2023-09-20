@@ -60,7 +60,7 @@ PREFUNDED ACCOUNTS
 ...
 ```
 
-Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the [Account Abstraction](https://book.starknet.io/chapter_5/index.html) chapter of the Starknet Book.
+Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the [Account Abstraction](https://book.starknet.io/chapter_4/index.html) chapter of the Starknet Book.
 
 ### Smart wallets for voting
 
