@@ -236,7 +236,7 @@ The database core functionality is defined by `UserDatabaseTrait`. The following
 
 - `new` for easily creating new `UserDatabase` types.
 - `add_user` to insert users in the database.
-- `get_user` to find users in the database.
+- `get_balance` to find user's balance in the database.
 
 The only remaining step is to implement each of the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch07-00-generic-types-and-traits.md) we also need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:
 
