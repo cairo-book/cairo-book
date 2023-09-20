@@ -36,7 +36,7 @@ In the aforementioned code, there is no need to manually define the trait. The c
 
 ## Parameter `self`
 
-In the example above, `self` is a special parameter. When a parameter with name `self` is used, the implemented functions are also [attached to the instances of the type as methods](ch04-03-method-syntax.md#defining-methods). Here's an illustration,
+In the example above, `self` is a special parameter. When a parameter with name `self` is used, the implemented functions are also [attached to the instances of the type as methods](ch05-03-method-syntax.md#defining-methods). Here's an illustration,
 
 When the `ShapeGeometry` trait is implemented, the function `area` from the `ShapeGeometry` trait can be called in two ways:
 

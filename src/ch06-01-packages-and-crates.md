@@ -6,7 +6,7 @@ A crate is the smallest amount of code that the Cairo compiler considers at a ti
 
 ## What is the crate root?
 
-The crate root is the `lib.cairo` source file that the Cairo compiler starts from and makes up the root module of your crate (we’ll explain modules in depth in the [“Defining Modules to Control Scope”](./ch06-02-defining-modules-to-control-scope.md) section).
+The crate root is the `lib.cairo` source file that the Cairo compiler starts from and makes up the root module of your crate (we’ll explain modules in depth in the [“Defining Modules to Control Scope”](./ch07-02-defining-modules-to-control-scope.md) section).
 
 ## What is a package?
 

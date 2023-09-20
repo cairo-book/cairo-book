@@ -117,7 +117,7 @@ chefs and cooks work in the kitchen, dishwashers clean up, and managers do
 administrative work.
 
 To structure our crate in this way, we can organize its functions into nested
-modules. Create a new package named `restaurant` by running `scarb new restaurant`; then enter the code in Listing 6-1 into _src/lib.cairo_ to
+modules. Create a new package named `restaurant` by running `scarb new restaurant`; then enter the code in Listing 7-1 into _src/lib.cairo_ to
 define some modules and function signatures. Here’s the front of house section:
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -126,7 +126,7 @@ define some modules and function signatures. Here’s the front of house section
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_06_01/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 6-1: A `front_of_house` module containing other
+<span class="caption">Listing 7-1: A `front_of_house` module containing other
 modules that then contain functions</span>
 
 We define a module with the `mod` keyword followed by the name of the module
@@ -146,7 +146,7 @@ Earlier, we mentioned that _src/lib.cairo_ is called the crate
 root. The reason for this name is that the content of this file form a module named after the crate name at the root of the crate’s module structure,
 known as the _module tree_.
 
-Listing 6-2 shows the module tree for the structure in Listing 6-1.
+Listing 7-2 shows the module tree for the structure in Listing 7-1.
 
 ```text
 restaurant
@@ -160,7 +160,7 @@ restaurant
          └── take_payment
 ```
 
-<span class="caption">Listing 6-2: The module tree for the code in Listing
+<span class="caption">Listing 7-2: The module tree for the code in Listing
 6-1</span>
 
 This tree shows how some of the modules nest inside one another; for example,

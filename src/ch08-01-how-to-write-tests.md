@@ -12,7 +12,7 @@ Let’s look at the features Cairo provides specifically for writing tests that 
 
 ### The Anatomy of a Test Function
 
-At its simplest, a test in Cairo is a function that’s annotated with the `test` attribute. Attributes are metadata about pieces of Cairo code; one example is the derive attribute we used with structs in Chapter 4. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `cairo-test` command, Cairo builds a test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
+At its simplest, a test in Cairo is a function that’s annotated with the `test` attribute. Attributes are metadata about pieces of Cairo code; one example is the derive attribute we used with structs in Chapter 5. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `cairo-test` command, Cairo builds a test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
 
 Let's create a new project called `adder` that will add two numbers using Scarb with the command `scarb new adder`:
 
@@ -38,7 +38,7 @@ adder
 >
 > and indicates that the crate named "adder" is located in the `src` directory.
 
-In _lib.cairo_, let's add a first test, as shown in Listing 8-1.
+In _lib.cairo_, let's add a first test, as shown in Listing 9-1.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -46,13 +46,13 @@ In _lib.cairo_, let's add a first test, as shown in Listing 8-1.
 {{#include ../listings/ch09-testing-cairo-programs/listing_08_01_02/src/lib.cairo:it_works}}
 ```
 
-<span class="caption">Listing 8-1: A test module and function</span>
+<span class="caption">Listing 9-1: A test module and function</span>
 
 For now, let’s ignore the top two lines and focus on the function. Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions in the tests module to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
 The example function body uses the `assert` function, which contains the result of adding 2 and 2, equals 4. This assertion serves as an example of the format for a typical test. Let’s run it to see that this test passes.
 
-The `cairo-test .` command runs all tests in our project, as shown in Listing 8-2.
+The `cairo-test .` command runs all tests in our project, as shown in Listing 9-2.
 
 ```shell
 $ cairo-test .
@@ -61,7 +61,7 @@ test adder::lib::tests::it_works ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-<span class="caption">Listing 8-2: The output from running a test</span>
+<span class="caption">Listing 9-2: The output from running a test</span>
 
 `cairo-test` compiled and ran the test. We see the line `running 1 tests`. The next line shows the name of the generated test function, called `it_works`, and that the result of running that test is `ok`. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
 
@@ -84,14 +84,14 @@ test adder::lib::tests::exploration ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing 8-3.
+Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing 9-3.
 
 ```rust
 {{#include ../listings/ch09-testing-cairo-programs/listing_08_03/src/lib.cairo:another}}
 
 ```
 
-<span class="caption">Listing 8-3: Adding a second test that will fail</span>
+<span class="caption">Listing 9-3: Adding a second test that will fail</span>
 
 ```shell
 $ cairo-test .
@@ -103,7 +103,7 @@ failures:
 Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
-<span class="caption">Listing 8-4: Test results when one test passes and one test fails</span>
+<span class="caption">Listing 9-4: Test results when one test passes and one test fails</span>
 
 Instead of `ok`, the line `adder::lib::tests::another` shows `fail`. A new section appears between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `[1725643816656041371866211894343434536761780588 ('Make this test fail'), ]` in the _src/lib.cairo_ file.
 
@@ -115,7 +115,7 @@ Now that you’ve seen what the test results look like in different scenarios, l
 
 The `assert` function, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert` function a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the assert function calls `panic()` to cause the test to fail with a message we defined as the second argument of the `assert` function. Using the `assert` function helps us check that our code is functioning in the way we intend.
 
-In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 8-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function.
+In [Chapter 5, Listing 6-15](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -123,9 +123,9 @@ In [Chapter 4, Listing 5-15](ch04-03-method-syntax.md#multiple-impl-blocks), we 
 {{#include ../listings/ch09-testing-cairo-programs/listing_08_06/src/lib.cairo:trait_impl}}
 ```
 
-<span class="caption">Listing 8-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
+<span class="caption">Listing 9-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 6</span>
 
-The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 8-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
+The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 9-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -133,7 +133,7 @@ The `can_hold` method returns a `bool`, which means it’s a perfect use case fo
 {{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_08_06/src/lib.cairo:test1}}
 ```
 
-<span class="caption">Listing 8-6: A test for `can_hold` that checks whether a larger rectangle can indeed hold a smaller rectangle</span>
+<span class="caption">Listing 9-6: A test for `can_hold` that checks whether a larger rectangle can indeed hold a smaller rectangle</span>
 
 Note that we’ve added two new lines inside the tests module: `use super::Rectangle;` and `use super::RectangleTrait;`. The tests module is a regular module that follows the usual visibility rules. Because the tests module is an inner module, we need to bring the code under test in the outer module into the scope of the inner module.
 
@@ -187,11 +187,11 @@ Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `
 
 ## Checking for Panics with `should_panic`
 
-In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 8-8. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
+In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 9-8. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
 
 We do this by adding the attribute `should_panic` to our test function. The test passes if the code inside the function panics; the test fails if the code inside the function doesn’t panic.
 
-Listing 8-8 shows a test that checks that the error conditions of `GuessTrait::new` happen when we expect them to.
+Listing 9-8 shows a test that checks that the error conditions of `GuessTrait::new` happen when we expect them to.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -199,7 +199,7 @@ Listing 8-8 shows a test that checks that the error conditions of `GuessTrait::n
 {{#include ../listings/ch09-testing-cairo-programs/listing_08_08/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 8-8: Testing that a condition will cause a panic</span>
+<span class="caption">Listing 9-8: Testing that a condition will cause a panic</span>
 
 We place the `#[should_panic]` attribute after the `#[test]` attribute and before the test function it applies to. Let’s look at the result when this test passes:
 
@@ -216,7 +216,7 @@ Looks good! Now let’s introduce a bug in our code by removing the condition th
 {{#rustdoc_include ../listings/ch09-testing-cairo-programs/no_listing_03_wrong_new_impl/src/lib.cairo:here}}
 ```
 
-When we run the test in Listing 8-8, it will fail:
+When we run the test in Listing 9-8, it will fail:
 
 ```shell
 $ cairo-test .
@@ -229,7 +229,7 @@ Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 
 We don’t get a very helpful message in this case, but when we look at the test function, we see that it’s annotated with `#[should_panic]`. The failure we got means that the code in the test function did not cause a panic.
 
-Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `Guess` in Listing 8-9 where the new function panics with different messages depending on whether the value is too small or too large.
+Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `Guess` in Listing 9-9 where the new function panics with different messages depending on whether the value is too small or too large.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -237,7 +237,7 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 {{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_08_09/src/lib.cairo:test_panic}}
 ```
 
-<span class="caption">Listing 8-9: Testing for a panic with a panic message containing the error message string</span>
+<span class="caption">Listing 9-9: Testing for a panic with a panic message containing the error message string</span>
 
 This test will pass because the value we put in the `should_panic` attribute’s expected parameter is the array of string of the message that the `Guess::new` function panics with. We need to specify the entire panic message that we expect.
 
@@ -265,7 +265,7 @@ The failure message indicates that this test did indeed panic as we expected, bu
 
 Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can choose which tests to run by passing `cairo-test` the name of the test you want to run as an argument.
 
-To demonstrate how to run a single test, we’ll first create two tests functions, as shown in Listing 8-10, and choose which ones to run.
+To demonstrate how to run a single test, we’ll first create two tests functions, as shown in Listing 9-10, and choose which ones to run.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -273,7 +273,7 @@ To demonstrate how to run a single test, we’ll first create two tests function
 {{#include ../listings/ch09-testing-cairo-programs/listing_08_10/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 8-10: Two tests with two different names</span>
+<span class="caption">Listing 9-10: Two tests with two different names</span>
 
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 

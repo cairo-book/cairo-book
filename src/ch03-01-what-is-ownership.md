@@ -33,14 +33,14 @@ let s = 'hello';
 
 The variable `s` refers to a short string, where the value of the string is
 hardcoded into the text of our program. The variable is valid from the point at
-which it’s declared until the end of the current _scope_. Listing 3-1 shows a
+which it’s declared until the end of the current _scope_. Listing 4-1 shows a
 program with comments annotating where the variable `s` would be valid.
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing_03_01/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 3-1: A variable and the scope in which it is
+<span class="caption">Listing 4-1: A variable and the scope in which it is
 valid</span>
 
 In other words, there are two important points in time here:
@@ -106,7 +106,7 @@ While Arrays and Dictionaries can't be copied, custom types that don't contain e
 In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, and the ownership of `p1` remains with the main function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
-_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 4](ch04-00-using-structs-to-structure-related-data.md)._
+_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._
 
 ### The `Drop` Trait
 
@@ -164,7 +164,7 @@ Now, when `A` goes out of scope, its dictionary will be automatically `squashed`
 
 ### Copy Array data with Clone
 
-If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 5, but because methods are a common feature in many
+If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 6, but because methods are a common feature in many
 programming languages, you’ve probably seen them before.
 
 Here’s an example of the `clone` method in action.
@@ -185,7 +185,7 @@ different is going on.
 
 Passing a variable to a function will either move it or copy it. As seen in the Array section, passing an `Array` as a function parameter transfers its ownership; let's see what happens with other types.
 
-Listing 3-3 has an example with some annotations
+Listing 4-3 has an example with some annotations
 showing where variables go into and out of scope.
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -194,7 +194,7 @@ showing where variables go into and out of scope.
 {{#include ../listings/ch04-understanding-ownership/listing_03_03/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 3-3: Functions with ownership and scope
+<span class="caption">Listing 4-3: Functions with ownership and scope
 annotated</span>
 
 If we tried to use `my_struct` after the call to `takes_ownership`, Cairo would throw a
@@ -204,7 +204,7 @@ the ownership rules prevent you from doing so.
 
 ### Return Values and Scope
 
-Returning values can also transfer ownership. Listing 3-4 shows an example of a
+Returning values can also transfer ownership. Listing 4-4 shows an example of a
 function that returns some value, with similar annotations as those in Listing
 4-3.
 
@@ -214,7 +214,7 @@ function that returns some value, with similar annotations as those in Listing
 {{#include ../listings/ch04-understanding-ownership/listing_03_04/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 3-4: Transferring ownership of return
+<span class="caption">Listing 4-4: Transferring ownership of return
 values</span>
 
 When a variable goes out of scope, its value is dropped, unless ownership of the value has been moved to another variable.
@@ -225,7 +225,7 @@ not take ownership? It’s quite annoying that anything we pass in also needs to
 be passed back if we want to use it again, in addition to any data resulting
 from the body of the function that we might want to return as well.
 
-Cairo does let us return multiple values using a tuple, as shown in Listing 3-5.
+Cairo does let us return multiple values using a tuple, as shown in Listing 4-5.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -233,7 +233,7 @@ Cairo does let us return multiple values using a tuple, as shown in Listing 3-5.
 {{#include ../listings/ch04-understanding-ownership/listing_03_05/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 3-5: Returning ownership of parameters</span>
+<span class="caption">Listing 4-5: Returning ownership of parameters</span>
 
 But this is too much ceremony and a lot of work for a concept that should be
 common. Luckily for us, Cairo has two features for using a value without

@@ -23,8 +23,8 @@
 ## Common Collections
 
 - [Common Collections](ch02-99-00-common-collections.md)
-  - [Arrays](ch02-99-01-arrays.md)
-  - [Dictionaries](ch02-99-02-dictionaries.md)
+  - [Arrays](ch03-01-arrays.md)
+  - [Dictionaries](ch03-02-dictionaries.md)
 
 ## Understanding Ownership
 
@@ -34,53 +34,53 @@
 
 ## Using Structs to Structure Related Data
 
-- [Using Structs to Structure Related Data](ch04-00-using-structs-to-structure-related-data.md)
-  - [Defining and Instantiating Structs](ch04-01-defining-and-instantiating-structs.md)
-  - [An Example Program Using Structs](ch04-02-an-example-program-using-structs.md)
-  - [Method Syntax](ch04-03-method-syntax.md)
+- [Using Structs to Structure Related Data](ch05-00-using-structs-to-structure-related-data.md)
+  - [Defining and Instantiating Structs](ch05-01-defining-and-instantiating-structs.md)
+  - [An Example Program Using Structs](ch05-02-an-example-program-using-structs.md)
+  - [Method Syntax](ch05-03-method-syntax.md)
 
 ## Enums and Pattern Matching
 
-- [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md)
-  - [Enums](ch05-01-enums.md)
-  - [The Match Control Flow Construct](ch05-02-the-match-control-flow-construct.md)
+- [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md)
+  - [Enums](ch06-01-enums.md)
+  - [The Match Control Flow Construct](ch06-02-the-match-control-flow-construct.md)
 
 ## Managing Cairo Projects with Packages, Crates and Modules
 
-- [Managing Cairo Projects with Packages, Crates and Modules](ch06-00-managing-cairo-projects-with-packages-crates-and-modules.md)
+- [Managing Cairo Projects with Packages, Crates and Modules](ch07-00-managing-cairo-projects-with-packages-crates-and-modules.md)
 
-  - [Packages and Crates](ch06-01-packages-and-crates.md)
+  - [Packages and Crates](ch07-01-packages-and-crates.md)
 
-  - [Defining Modules to Control Scope](ch06-02-defining-modules-to-control-scope.md)
-  - [Paths for Referring to an Item in the Module Tree](ch06-03-paths-for-referring-to-an-item-in-the-module-tree.md)
-  - [Bringing Paths into Scope with the 'use' Keyword](ch06-04-bringing-paths-into-scope-with-the-use-keyword.md)
-  - [Separating Modules into Different Files](ch06-05-separating-modules-into-different-files.md)
+  - [Defining Modules to Control Scope](ch07-02-defining-modules-to-control-scope.md)
+  - [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
+  - [Bringing Paths into Scope with the 'use' Keyword](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
+  - [Separating Modules into Different Files](ch07-05-separating-modules-into-different-files.md)
 
 ## Generic Data Types
 
-- [Generic Types](ch07-00-generic-types-and-traits.md)
+- [Generic Types](ch08-00-generic-types-and-traits.md)
 
-  - [Generic Functions](ch07-01-generic-data-types.md)
-  - [Traits in Cairo](ch07-02-traits-in-cairo.md)
+  - [Generic Functions](ch08-01-generic-data-types.md)
+  - [Traits in Cairo](ch08-02-traits-in-cairo.md)
 
 ## Testing Cairo Programs
 
-- [Testing Cairo Programs](ch08-00-testing-cairo-programs.md)
+- [Testing Cairo Programs](ch09-00-testing-cairo-programs.md)
 
-  - [How To Write Tests](ch08-01-how-to-write-tests.md)
-  - [Testing Organization](ch08-02-test-organization.md)
+  - [How To Write Tests](ch09-01-how-to-write-tests.md)
+  - [Testing Organization](ch09-02-test-organization.md)
 
 ## Error Handling
 
-- [Error Handling](ch09-00-error-handling.md)
-  - [Unrecoverable Errors with panic](ch09-01-unrecoverable-errors-with-panic.md)
-  - [Recoverable Errors with Result](ch09-02-recoverable-errors.md)
+- [Error Handling](ch10-00-error-handling.md)
+  - [Unrecoverable Errors with panic](ch10-01-unrecoverable-errors-with-panic.md)
+  - [Recoverable Errors with Result](ch10-02-recoverable-errors.md)
 
 ## Advanced Features
 
-- [Advanced Features](ch10-00-advanced-features.md)
-  - [Operator Overloading](ch10-01-operator-overloading.md)
-  - [Macros](ch10-02-macros.md)
+- [Advanced Features](ch11-00-advanced-features.md)
+  - [Operator Overloading](ch11-01-operator-overloading.md)
+  - [Macros](ch11-02-macros.md)
 
 ## Starknet smart contracts
 

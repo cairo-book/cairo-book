@@ -16,7 +16,7 @@ In this example, we've defined an enum called `Direction` with four variants: `N
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_01_enum_example/src/lib.cairo:here}}
 ```
 
-It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a Direction. You can learn more about it on [The Match Control Flow Construct page](ch05-02-the-match-control-flow-construct.md).
+It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a Direction. You can learn more about it on [The Match Control Flow Construct page](ch06-02-the-match-control-flow-construct.md).
 
 ## Enums Combined with Custom Types
 

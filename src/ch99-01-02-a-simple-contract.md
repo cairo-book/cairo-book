@@ -12,7 +12,7 @@ Let's consider the following contract to present the basics of a Starknet contra
 
 <span class="caption">Listing 99-1: A simple storage contract</span>
 
-> Note: Starknet contracts are defined within [modules](./ch06-02-defining-modules-to-control-scope.md).
+> Note: Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md).
 
 ### What is this contract?
 
@@ -26,7 +26,7 @@ The contract defines and exposes publically the functions `set` and `get` that c
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:interface}}
 ```
 
-The interface of a contract represents the functions this contract exposes to the outside world. Here, the interface exposes two functions: `set` and `get`. By leveraging the [traits & impls](./ch07-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface.
+The interface of a contract represents the functions this contract exposes to the outside world. Here, the interface exposes two functions: `set` and `get`. By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01_bis_wrong_impl/src/lib.cairo:impl}}

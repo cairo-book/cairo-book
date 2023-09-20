@@ -6,7 +6,7 @@ Most errors aren’t serious enough to require the program to stop entirely. Som
 
 ## The `Result` enum
 
-Recall from [“Generic data types”](ch07-01-generic-data-types.md#enums) in Chapter 7 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
+Recall from [“Generic data types”](ch08-01-generic-data-types.md#enums) in Chapter 8 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
 ```rust,noplayground
 {{#include ../listings/ch10-error-handling/no_listing_07_result_enum/src/lib.cairo}}
@@ -80,7 +80,7 @@ In this example, the `parse_u8` function takes a `felt252` integer and tries to 
 {{#include ../listings/ch10-error-handling/listing_01/src/lib.cairo:function}}
 ```
 
-<span class="caption">Listing 9-1: Using the Result type</span>
+<span class="caption">Listing 10-1: Using the Result type</span>
 
 Our two test cases are:
 
@@ -107,7 +107,7 @@ Here is an example.
 {{#include ../listings/ch10-error-handling/listing_02/src/lib.cairo:function}}
 ```
 
-<span class="caption">Listing 9-1: Using the `?` operator</span>
+<span class="caption">Listing 10-1: Using the `?` operator</span>
 
 `do_something_with_parse_u8` function takes a `felt252` value as input and calls `parse_u8`. The `?` operator is used to propagate the error, if any, or unwrap the successful value.
 

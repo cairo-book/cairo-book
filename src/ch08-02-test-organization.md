@@ -60,7 +60,7 @@ Each test file is compiled as its own separate crate, that's why whenever you ad
 mod integration_tests;
 ```
 
-Enter the code in Listing 8-11 into the _tests/integration_test.cairo_ file:
+Enter the code in Listing 9-11 into the _tests/integration_test.cairo_ file:
 
 <span class="filename">Filename: tests/integration_test.cairo</span>
 
@@ -68,7 +68,7 @@ Enter the code in Listing 8-11 into the _tests/integration_test.cairo_ file:
 {{#include ../listings/ch09-testing-cairo-programs/no_listing_07_integration_test/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 8-11: Testing functions from other modules</span>
+<span class="caption">Listing 9-11: Testing functions from other modules</span>
 
 Each file in the tests directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add `use adder::main` at the top of the code, which we didn’t need in the unit tests.
 
