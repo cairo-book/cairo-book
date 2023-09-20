@@ -50,12 +50,12 @@ In other words, there are two important points in time here:
 
 At this point, the relationship between scopes and when variables are valid is
 similar to that in other programming languages. Now we’ll build on top of this
-understanding by using the `Array` type we introduced in the [previous chapter](ch02-06-common-collections.md).
+understanding by using the `Array` type we introduced in the [previous chapter](./ch03-01-arrays.md).
 
 ### Ownership with the `Array` Type
 
 To illustrate the rules of ownership, we need a data type that is more complex.
-The types covered in the [“Data Types”][data-types]<!-- ignore --> section
+The types covered in the [Data Types][data-types]<!-- ignore --> section
 of Chapter 2 are of a known size, can be
 quickly and trivially copied to make a new, independent instance if another
 part of code needs to use the same value in a different scope, and can easily
