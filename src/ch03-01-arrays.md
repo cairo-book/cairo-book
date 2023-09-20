@@ -10,7 +10,7 @@ This has to do with the fact that once a memory slot is written to, it cannot be
 Creating an Array is done with the `ArrayTrait::new()` call. Here is an example of the creation of an array to which we append 3 elements:
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_00_array_new_append/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo}}
 ```
 
 When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
@@ -30,7 +30,7 @@ let mut arr:Array<u128> = ArrayTrait::new();
 To add an element to the end of an array, you can use the `append()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_00_array_new_append/src/lib.cairo:5}}
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo:5}}
 ```
 
 #### Removing Elements
@@ -39,7 +39,7 @@ You can only remove elements from the front of an array by using the `pop_front(
 This method returns an `Option` containing the removed element, or `Option::None` if the array is empty.
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_01_array_pop_front/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_01_array_pop_front/src/lib.cairo}}
 ```
 
 The above code will print `10` as we remove the first element that was added.
@@ -50,14 +50,14 @@ In Cairo, memory is immutable, which means that it is not possible to modify the
 
 To access array elements, you can use `get()` or `at()` array methods that return different types. Using `arr.at(index)` is equivalent to using the subscripting operator `arr[index]`.
 
-The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the [References and Snapshots](ch03-02-references-and-snapshots.md) chapter.
+The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the [References and Snapshots](ch04-02-references-and-snapshots.md) chapter.
 
 The `at` function, on the other hand, directly returns a snapshot to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. You should only use at when you want the program to panic if the provided index is out of the array's bounds, which can prevent unexpected behavior.
 
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_02_array_at/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_02_array_at/src/lib.cairo}}
 ```
 
 In this example, the variable named `first` will get the value `0` because that
@@ -67,7 +67,7 @@ the value `1` from index `1` in the array.
 Here is an example with the `get()` method:
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_03_array_get/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_03_array_get/src/lib.cairo}}
 ```
 
 ### Size related methods
@@ -78,15 +78,15 @@ If you want to check if an array is empty or not, you can use the `is_empty()` m
 
 ### Storing multiple types with Enums
 
-If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the [Enums and Pattern Matching](ch05-00-enums-and-pattern-matching.md) chapter.
+If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md) chapter.
 
 ```rust
-{{#include ../listings/ch02-99-common-collections/no_listing_04_array_with_enums/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_04_array_with_enums/src/lib.cairo}}
 ```
 
 ### Span
 
-`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))
+`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch04-02-references-and-snapshots.md))
 
 All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method.
 
@@ -95,5 +95,5 @@ All methods provided by `Array` can also be used with `Span`, with the exception
 To create a `Span` of an `Array`, call the `span()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-99-common-collections/no_listing_05_array_spano_listing_05_array_spann/src/lib.cairo:3}}
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_05_array_span/src/lib.cairo:3}}
 ```

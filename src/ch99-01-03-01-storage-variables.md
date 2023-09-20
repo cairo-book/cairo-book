@@ -10,7 +10,7 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 
 <span class="caption">Listing 99-2: A Storage Struct</span>
 
-The storage struct is a [struct](./ch04-00-using-structs-to-structure-related-data.md) like any other,
+The storage struct is a [struct](./ch05-00-using-structs-to-structure-related-data.md) like any other,
 except that it **must** be annotated with `#[storage]` allowing you to store mappings using the `LegacyMap` type.
 
 ### Storing Mappings

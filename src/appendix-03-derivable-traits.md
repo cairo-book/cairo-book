@@ -144,9 +144,9 @@ Here we are converting a serialized array span back to the struct A. `deserializ
 
 ## Drop and Destruct
 
-When moving out of scope, variables need to be moved first. This is where the `Drop` trait intervenes. You can find more details about its usage [here](ch03-01-what-is-ownership.md#the-drop-trait).
+When moving out of scope, variables need to be moved first. This is where the `Drop` trait intervenes. You can find more details about its usage [here](ch04-01-what-is-ownership.md#the-drop-trait).
 
-Moreover Dictionary need to be squashed before going out of scope. Calling manually the `squash` method on each of them can be quickly redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch03-01-what-is-ownership.md#the-destruct-trait).
+Moreover Dictionary need to be squashed before going out of scope. Calling manually the `squash` method on each of them can be quickly redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch04-01-what-is-ownership.md#the-destruct-trait).
 
 ## Store
 

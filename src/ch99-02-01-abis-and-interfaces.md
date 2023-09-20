@@ -17,7 +17,7 @@ ABIs are typically used in dApps frontends, allowing it to format data correctly
 The interface of a contract is a list of the functions it exposes publically.
 It specifies the function signatures (name, parameters, visibility and return value) contained in a smart contract without including the function body.
 
-Contract interfaces in Cairo are traits annotated with the `#[starknet::interface]` attribute. If you are new to traits, check out the dedicated chapter on [traits](./ch07-02-traits-in-cairo.md).
+Contract interfaces in Cairo are traits annotated with the `#[starknet::interface]` attribute. If you are new to traits, check out the dedicated chapter on [traits](./ch08-02-traits-in-cairo.md).
 
 One important specification is that this trait must be generic over the `TContractState` type. This is required for functions to access the contract's storage, so that they can read and write to it.
 
