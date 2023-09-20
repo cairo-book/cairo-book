@@ -13,15 +13,15 @@ and an implementation associated with the type for which the method is intended.
 
 Let’s change the `area` function that has a `Rectangle` instance as a parameter
 and instead make an `area` method defined on the `RectangleTrait` trait, as shown
-in Listing 4-13.
+in Listing 5-13.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_13_area_method/src/lib.cairo}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_13_area_method/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-13: Defining an `area` method to use on the
+<span class="caption">Listing 5-13: Defining an `area` method to use on the
 `Rectangle` </span>
 
 To define the function within the context of `Rectangle`, we start by defining a `trait`
@@ -72,7 +72,7 @@ fields. For example, we can define a method on `Rectangle` that is also named
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_14_width_method/src/lib.cairo}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_14_width_method/src/lib.cairo}}
 ```
 
 Here, we’re choosing to make the `width` method return `true` if the value in
@@ -89,15 +89,15 @@ struct. This time we want an instance of `Rectangle` to take another instance
 of `Rectangle` and return `true` if the second `Rectangle` can fit completely
 within `self` (the first `Rectangle`); otherwise, it should return `false`.
 That is, once we’ve defined the `can_hold` method, we want to be able to write
-the program shown in Listing 4-14.
+the program shown in Listing 5-14.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:no_method}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:no_method}}
 ```
 
-<span class="caption">Listing 4-14: Using the as-yet-unwritten `can_hold`
+<span class="caption">Listing 5-14: Using the as-yet-unwritten `can_hold`
 method</span>
 
 The expected output would look like the following because both dimensions of
@@ -129,18 +129,18 @@ calling the `can_hold` method. The return value of `can_hold` will be a
 Boolean, and the implementation will check whether the width and height of
 `self` are greater than the width and height of the other `Rectangle`,
 respectively. Let’s add the new `can_hold` method to the `trait` and `impl` blocks from
-Listing 4-13, shown in Listing 4-15.
+Listing 5-13, shown in Listing 5-15.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:trait_impl}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:trait_impl}}
 ```
 
-<span class="caption">Listing 4-15: Implementing the `can_hold` method on
+<span class="caption">Listing 5-15: Implementing the `can_hold` method on
 `Rectangle` that takes another `Rectangle` instance as a parameter</span>
 
-When we run this code with the `main` function in Listing 4-14, we’ll get our
+When we run this code with the `main` function in Listing 5-14, we’ll get our
 desired output. Methods can take multiple parameters that we add to the
 signature after the `self` parameter, and those parameters work just like
 parameters in functions.
@@ -160,32 +160,32 @@ value twice:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_01_implementation_functions/src/lib.cairo:here}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_implementation_functions/src/lib.cairo:here}}
 ```
 
 To call this function, we use the `::` syntax with the implementation name;
 `let square = RectangleImpl::square(10);` is an example. This function is namespaced by
 the implementation; the `::` syntax is used for both trait functions and
-namespaces created by modules. We’ll discuss modules in [Chapter 7][modules]<!-- ignore -->.
+namespaces created by modules. We’ll discuss modules in [Chapter 8][modules]<!-- ignore -->.
 
 > Note: It is also possible to call this function using the trait name, with `RectangleTrait::square(10)`.
 
 ### Multiple `impl` Blocks
 
 Each struct is allowed to have multiple `trait` and `impl` blocks. For example, Listing
-5-15 is equivalent to the code shown in Listing 4-16, which has each method in
+5-15 is equivalent to the code shown in Listing 5-16, which has each method in
 its own `trait` and `impl` blocks.
 
 ```rust,noplayground
-{{#include ../listings/ch04-using-structs-to-structure-related-data/no_listing_02_multiple_impls/src/lib.cairo:here}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_02_multiple_impls/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 4-16: Rewriting Listing 4-15 using multiple `impl`
+<span class="caption">Listing 5-16: Rewriting Listing 5-15 using multiple `impl`
 blocks</span>
 
 There’s no reason to separate these methods into multiple `trait` and `impl` blocks here,
 but this is valid syntax. We’ll see a case in which multiple blocks are
-useful in [Chapter 7](ch07-00-generic-types-and-traits.md), where we discuss generic types and traits.
+useful in [Chapter 8](ch08-00-generic-types-and-traits.md), where we discuss generic types and traits.
 
 ## Summary
 
