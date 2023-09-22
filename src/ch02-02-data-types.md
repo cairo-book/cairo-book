@@ -60,6 +60,8 @@ As variables are unsigned, they can't contain a negative number. This code will 
 {{#include ../listings/ch02-common-programming-concepts/no_listing_07_integer_types/src/lib.cairo}}
 ```
 
+All integer types previously mentioned fit into a `felt252`, except for `u256` which needs 4 more bits to be stored. Under the hood, `u256` is basically a struct containing 2 variables `(low : felt252, high : felt252)`, which actually only use 128 bits each.
+
 You can write integer literals in any of the forms shown in Table 3-2. Note
 that number literals that can be multiple numeric types allow a type suffix,
 such as `57_u8`, to designate the type.
