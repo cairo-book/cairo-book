@@ -307,3 +307,35 @@ When testing recursive functions or loops, you must provide the test with a maxi
 ```rust
 {{#include ../listings/ch09-testing-cairo-programs/no_listing_08_test_gas/src/lib.cairo}}
 ```
+
+## Benchmarking the gas usage of a specific operation
+
+When you want to benchmark the gas usage of a specific operation, you can use the following pattern in your test function.
+
+```rust
+let initial = testing::get_available_gas();
+gas::withdraw_gas().unwrap();
+    /// code we want to bench.
+(testing::get_available_gas() - x).print();
+```
+
+The following example shows how to use it to test the gas function of the `sum_n` function above.
+
+```rust
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_09_benchmark_gas/src/lib.cairo}}
+```
+
+The value printed when running `scarb cairo-test` is the amount of gas that was consumed by the operation benchmarked.
+
+```shell
+$ scarb cairo-test
+testing no_listing_09_benchmark_gas ...
+running 1 tests
+[DEBUG]	                               	(raw: 0x179f8
+
+test no_listing_09_benchmark_gas::benchmark_sum_n_gas ... ok (gas usage est.: 98030)
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
+
+```
+
+Here, the gas usage of the `sum_n` function is 96760 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 98030, due to some extra steps required to run the entire test function.
