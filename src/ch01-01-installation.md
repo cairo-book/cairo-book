@@ -33,3 +33,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
   cairo: 2.2.0 (https://crates.io/crates/cairo-lang-compiler/2.2.0)
   sierra: 1.3.0
   ```
+
+## Installing the VSCode extension
+
+Cairo has a VSCode extension that provides syntax highlighting, code completion, and other useful features. You can install it from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1).
+Once installed, go into the extension settings, and make sure to tick the `Enable Language Server` and `Enable Scarb` options.
