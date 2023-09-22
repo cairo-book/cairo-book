@@ -29,7 +29,9 @@ In our example, we want to store a `Person` struct in storage, which is possible
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
 ```
 
-The address of structs is `sn_keccak(variable_name)`, pointing to the first element of the struct. All other elements contained in the struct are stored contiguously.
+The base storage address for structs remains `sn_keccak(variable_name)`, and the value contained at this address is the first primitive type contained by the struct.
+
+Subsequent fields are stored in addresses contiguous to the first elements at addresses `base_address + i`.
 
 ### Storing mappings
 
