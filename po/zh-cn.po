@@ -3201,7 +3201,7 @@ msgstr "#### 使用 `loop` 重复执行代码"
 msgid ""
 "The `loop` keyword tells Cairo to execute a block of code over and over again\n"
 "forever or until you explicitly tell it to stop."
-msgstr "`loop` 关键字告诉 Rust 一遍又一遍地执行一段代码直到你明确要求停止。"
+msgstr "`loop` 关键字告诉 Cairo 一遍又一遍地执行一段代码直到你明确要求停止。"
 
 #: src/ch02-05-control-flow.md:127
 msgid ""
