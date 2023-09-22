@@ -23,7 +23,7 @@ In the case of `u256`, the address will be a pointer to `low : felt252`, with `h
 ### Storing structs
 
 The compiler knows how to store basic data types, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ContractAddress`, etc. But what if you want to store a custom struct in storage? In that case, you have to explicitly tell the compiler how to store your struct in storage.
-In our example, we want to store a `Person` struct in storage, so we have to tell the compiler how to store it in storage by adding a derive attribute of the `starknet::Store` trait to our struct definition.
+In our example, we want to store a `Person` struct in storage, which is possible by implementing the `Store` trait for the `Person` type. This can be achieved by simply adding a `#[derive(starknet::Store)]` attribute on top of our struct definition.
 
 ```rust, noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
