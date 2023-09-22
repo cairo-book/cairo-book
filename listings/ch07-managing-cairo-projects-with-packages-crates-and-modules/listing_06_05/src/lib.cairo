@@ -1,6 +1,4 @@
 //TAG: does_not_compile
-// Assuming "front_of_house" module is contained in a crate called "restaurant", as mentionned in 7.2. section
-// If the path is created in the same crate, "restaurant" is optional in the use statement
 
 mod front_of_house {
     mod hosting {
