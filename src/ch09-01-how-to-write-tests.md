@@ -12,33 +12,18 @@ Let’s look at the features Cairo provides specifically for writing tests that 
 
 ### The Anatomy of a Test Function
 
-At its simplest, a test in Cairo is a function that’s annotated with the `test` attribute. Attributes are metadata about pieces of Cairo code; one example is the derive attribute we used with structs in Chapter 5. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `cairo-test` command, Cairo builds a test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
+At its simplest, a test in Cairo is a function that’s annotated with the `test` attribute. Attributes are metadata about pieces of Cairo code; one example is the derive attribute we used with structs in Chapter 5. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb cairo-test` command, Scarb runs Cairo's test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
 
 Let's create a new project called `adder` that will add two numbers using Scarb with the command `scarb new adder`:
 
 ```shell
 adder
-├── cairo_project.toml
 ├── Scarb.toml
 └── src
     └── lib.cairo
 ```
 
-<!-- TODO: remove when Scarb test work -->
-
-> Note: You will notice here a `cairo_project.toml` file.
-> This is the configuration file for "vanilla" Cairo projects (i.e. not managed by Scarb),
-> which is required to run the `cairo-test .` command to run the code of the crate.
-> It is required until Scarb implements this feature. The content of the file is:
->
-> ```toml
-> [crate_roots]
-> adder = "src"
-> ```
->
-> and indicates that the crate named "adder" is located in the `src` directory.
-
-In _lib.cairo_, let's add a first test, as shown in Listing 9-1.
+In _lib.cairo_, let's remove the existing content and add a first test, as shown in Listing 9-1.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -52,10 +37,11 @@ For now, let’s ignore the top two lines and focus on the function. Note the `#
 
 The example function body uses the `assert` function, which contains the result of adding 2 and 2, equals 4. This assertion serves as an example of the format for a typical test. Let’s run it to see that this test passes.
 
-The `cairo-test .` command runs all tests in our project, as shown in Listing 9-2.
+The `scarb cairo-test` command runs all tests founds in our project, as shown in Listing 9-2.
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
+testing adder...
 running 1 tests
 test adder::lib::tests::it_works ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
@@ -63,9 +49,9 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 
 <span class="caption">Listing 9-2: The output from running a test</span>
 
-`cairo-test` compiled and ran the test. We see the line `running 1 tests`. The next line shows the name of the generated test function, called `it_works`, and that the result of running that test is `ok`. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
+`scarb cairo-test` compiled and ran the test. We see the line `running 1 tests`. The next line shows the name of the test function, called `it_works`, and that the result of running that test is `ok`. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
 
-It’s possible to mark a test as ignored so it doesn’t run in a particular instance; we’ll cover that in the [Ignoring Some Tests Unless Specifically Requested](#ignoring-some-tests-unless-specifically-requested) section later in this chapter. Because we haven’t done that here, the summary shows `0 ignored`. We can also pass an argument to the `cairo-test` command to run only a test whose name matches a string; this is called filtering and we’ll cover that in the [Running Single Tests](#running-single-tests) section. We also haven’t filtered the tests being run, so the end of the summary shows `0 filtered out`.
+It’s possible to mark a test as ignored so it doesn’t run in a particular instance; we’ll cover that in the [Ignoring Some Tests Unless Specifically Requested](#ignoring-some-tests-unless-specifically-requested) section later in this chapter. Because we haven’t done that here, the summary shows `0 ignored`. We can also pass an argument to the `scarb cairo-test` command to run only a test whose name matches a string; this is called filtering and we’ll cover that in the [Running Single Tests](#running-single-tests) section. We also haven’t filtered the tests being run, so the end of the summary shows `0 filtered out`.
 
 Let’s start to customize the test to our own needs. First change the name of the `it_works` function to a different name, such as `exploration`, like so:
 
@@ -75,10 +61,10 @@ Let’s start to customize the test to our own needs. First change the name of t
 {{#include ../listings/ch09-testing-cairo-programs/listing_08_01_02/src/lib.cairo:exploration}}
 ```
 
-Then run `cairo-test  -- --path src` again. The output now shows `exploration` instead of `it_works`:
+Then run `scarb cairo-test` again. The output now shows `exploration` instead of `it_works`:
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 1 tests
 test adder::lib::tests::exploration ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
@@ -94,7 +80,7 @@ Now we’ll add another test, but this time we’ll make a test that fails! Test
 <span class="caption">Listing 9-3: Adding a second test that will fail</span>
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 2 tests
 test adder::lib::tests::exploration ... ok
 test adder::lib::tests::another ... fail
@@ -115,7 +101,7 @@ Now that you’ve seen what the test results look like in different scenarios, l
 
 The `assert` function, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert` function a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the assert function calls `panic()` to cause the test to fail with a message we defined as the second argument of the `assert` function. Using the `assert` function helps us check that our code is functioning in the way we intend.
 
-In [Chapter 5, Listing 6-15](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function.
+In [Chapter 5, Listing 5-15](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -123,7 +109,7 @@ In [Chapter 5, Listing 6-15](ch05-03-method-syntax.md#multiple-impl-blocks), we 
 {{#include ../listings/ch09-testing-cairo-programs/listing_08_06/src/lib.cairo:trait_impl}}
 ```
 
-<span class="caption">Listing 9-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 6</span>
+<span class="caption">Listing 9-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 9-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
@@ -140,7 +126,7 @@ Note that we’ve added two new lines inside the tests module: `use super::Recta
 We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `Rectangle` instances that we need. Then we called the assert function and passed it the result of calling `larger.can_hold(@smaller)`. This expression is supposed to return `true`, so our test should pass. Let’s find out!
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 1 tests
 test adder::lib::tests::larger_can_hold_smaller ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
@@ -157,7 +143,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 Because the correct result of the `can_hold` function in this case is `false`, we need to negate that result before we pass it to the assert function. As a result, our test will pass if `can_hold` returns false:
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
     running 2 tests
     test adder::lib::tests::smaller_cannot_hold_larger ... ok
     test adder::lib::tests::larger_can_hold_smaller ... ok
@@ -173,7 +159,7 @@ Two tests that pass! Now let’s see what happens to our test results when we in
 Running the tests now produces the following:
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 2 tests
 test adder::lib::tests::smaller_cannot_hold_larger ... ok
 test adder::lib::tests::larger_can_hold_smaller ... fail
@@ -185,7 +171,7 @@ Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false`: `8` is not less than `5`.
 
-## Checking for Panics with `should_panic`
+## Checking for panics with `should_panic`
 
 In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 9-8. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
 
@@ -204,7 +190,7 @@ Listing 9-8 shows a test that checks that the error conditions of `GuessTrait::n
 We place the `#[should_panic]` attribute after the `#[test]` attribute and before the test function it applies to. Let’s look at the result when this test passes:
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 1 tests
 test adder::lib::tests::greater_than_100 ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
@@ -219,7 +205,7 @@ Looks good! Now let’s introduce a bug in our code by removing the condition th
 When we run the test in Listing 9-8, it will fail:
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 1 tests
 test adder::lib::tests::greater_than_100 ... fail
 failures:
@@ -250,7 +236,7 @@ To see what happens when a `should_panic` test with an expected message fails, l
 This time when we run the `should_panic` test, it will fail:
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 1 tests
 test adder::lib::tests::greater_than_100 ... fail
 failures:
@@ -263,7 +249,7 @@ The failure message indicates that this test did indeed panic as we expected, bu
 
 ## Running Single Tests
 
-Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can choose which tests to run by passing `cairo-test` the name of the test you want to run as an argument.
+Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can choose which tests to run by passing `scarb cairo-test` an option `-f` (for "filter"), followed by the name of the test you want to run as an argument.
 
 To demonstrate how to run a single test, we’ll first create two tests functions, as shown in Listing 9-10, and choose which ones to run.
 
@@ -278,7 +264,7 @@ To demonstrate how to run a single test, we’ll first create two tests function
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 
 ```shell
-$ cairo-test . -f add_two_and_two
+$ scarb cairo-test -f add_two_and_two
 running 1 tests
 test adder::lib::tests::add_two_and_two ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 1 filtered out;
@@ -290,7 +276,7 @@ We can also specify part of a test name, and any test whose name contains that v
 
 ## Ignoring Some Tests Unless Specifically Requested
 
-Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `cairo-test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `ignore` attribute to exclude them, as shown here:
+Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `scarb cairo-test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `ignore` attribute to exclude them, as shown here:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -301,7 +287,7 @@ Sometimes a few specific tests can be very time-consuming to execute, so you mig
 After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now when we run our tests, `it_works` runs, but `expensive_test` doesn’t:
 
 ```shell
-$ cairo-test .
+$ scarb cairo-test
 running 2 tests
 test adder::lib::tests::expensive_test ... ignored
 test adder::lib::tests::it_works ... ok
@@ -310,4 +296,46 @@ test result: ok. 1 passed; 0 failed; 1 ignored; 0 filtered out;
 
 The `expensive_test` function is listed as ignored.
 
-When you’re at a point where it makes sense to check the results of the ignored tests and you have time to wait for the results, you can run `cairo-test --include-ignored` to run all tests whether they’re ignored or not.
+When you’re at a point where it makes sense to check the results of the ignored tests and you have time to wait for the results, you can run `scarb cairo-test --include-ignored` to run all tests whether they’re ignored or not.
+
+## Testing recursive functions or loops
+
+When testing recursive functions or loops, you must provide the test with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. To do so, you must add the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
+
+<span class="filename">Filename: src/lib.cairo</span>
+
+```rust
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_08_test_gas/src/lib.cairo}}
+```
+
+## Benchmarking the gas usage of a specific operation
+
+When you want to benchmark the gas usage of a specific operation, you can use the following pattern in your test function.
+
+```rust
+let initial = testing::get_available_gas();
+gas::withdraw_gas().unwrap();
+    /// code we want to bench.
+(testing::get_available_gas() - x).print();
+```
+
+The following example shows how to use it to test the gas function of the `sum_n` function above.
+
+```rust
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_09_benchmark_gas/src/lib.cairo}}
+```
+
+The value printed when running `scarb cairo-test` is the amount of gas that was consumed by the operation benchmarked.
+
+```shell
+$ scarb cairo-test
+testing no_listing_09_benchmark_gas ...
+running 1 tests
+[DEBUG]	                               	(raw: 0x179f8
+
+test no_listing_09_benchmark_gas::benchmark_sum_n_gas ... ok (gas usage est.: 98030)
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
+
+```
+
+Here, the gas usage of the `sum_n` function is 96760 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 98030, due to some extra steps required to run the entire test function.
