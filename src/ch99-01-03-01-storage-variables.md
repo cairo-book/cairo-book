@@ -13,9 +13,7 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 The storage struct is a [struct](./ch05-00-using-structs-to-structure-related-data.md) like any other,
 except that it **must** be annotated with `#[storage]` allowing you to store mappings using the `LegacyMap` type.
 
-### Storing basic data types
-
-Basic data types are single values contained in a `felt252`, except for `u256` which is a struct of 2 `felt252`.
+### Storing data types
 
 The base address of a value in storage is `sn_keccak(variable_name)`, with `variable_name` as the ASCII encoding of the variable's name. As the keccak256 hash function produces an output of 256 bits that doesn't fit in a `felt252`, we use `sn_keccak` which is defined as the first 250 bits of the Keccak256 hash.
 In the case of `u256`, the address will be a pointer to `low : felt252`, with `high : felt252` stored contiguously.
