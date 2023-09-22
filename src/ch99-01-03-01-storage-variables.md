@@ -50,7 +50,7 @@ In mappings, the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_kecca
 
 If the key of the mapping is a struct, each element of the struct constitutes a key. For example, if you have struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` - where `k_1` and `k_2` are the values of the two fields of the struct.
 
-Additionnaly, in the case of a nested mapping such as `LegacyMap((ContractAddress, ContractAddress), u8)`, the address will be computed in the same way : `h(h(sn_keccak(variable_name),k_1),k_2)`.
+Similarly, in the case of a nested mapping such as `LegacyMap((ContractAddress, ContractAddress), u8)`, the address will be computed in the same way: `h(h(sn_keccak(variable_name),k_1),k_2)`.
 
 You can learn more about the contract storage layout in the [Starknet Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)
 
