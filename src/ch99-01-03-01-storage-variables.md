@@ -47,7 +47,7 @@ You can also create more complex mappings than that; you can find one in Listing
 
 In mappings, the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ is the Pedersen hash and the final value is taken `mod (2^251) − 256`.
 
-If the key of the mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the Hash trait, which can be derived with the #[derive(Hash)] attribute. For example, if you have struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` - where `k_1` and `k_2` are the values of the two fields of the struct.
+If the key of the mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the Hash trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` - where `k_1` and `k_2` are the values of the two fields of the struct.
 
 Similarly, in the case of a nested mapping such as `LegacyMap((ContractAddress, ContractAddress), u8)`, the address will be computed in the same way: `h(h(sn_keccak(variable_name),k_1),k_2)`.
 
