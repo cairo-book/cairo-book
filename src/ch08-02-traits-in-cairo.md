@@ -76,7 +76,7 @@ mod geometry {
         // ...
     }
 
-    impl RectangleGeometry of ShapeGeometry::<Rectangle> {
+    impl RectangleGeometry of ShapeGeometry<Rectangle> {
         // ...
     }
 }

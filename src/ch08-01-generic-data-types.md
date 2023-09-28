@@ -16,7 +16,7 @@ The `largest_list` function compares two lists of the same type and returns the 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_02_with_tdrop/src/lib.cairo}}
 ```
 
-The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. The `main` function remains unchanged, the compiler is smart enough to deduct which concrete type is being used and if it implements the `Drop` trait.
+The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. The `main` function remains unchanged, the compiler is smart enough to deduce which concrete type is being used and if it implements the `Drop` trait.
 
 ### Constraints for Generic Types
 
