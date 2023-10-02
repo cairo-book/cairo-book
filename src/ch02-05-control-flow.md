@@ -122,7 +122,7 @@ Remaining gas: 1050
 > If you're writing a program that needs to run a loop, you will need to execute it with the `--available-gas` flag set to a value that is large enough to run the program.
 
 To break out of a loop, you can place the `break` statement within the loop to tell the program when to stop
-executing the loop. Let's fix the infinite loop by adding a making the stop condition `i > 10` reachable.
+executing the loop. Let's fix the infinite loop by making the stop condition `i > 10` reachable.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break/src/lib.cairo}}
