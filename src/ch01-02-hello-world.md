@@ -216,25 +216,6 @@ Let’s recap what we’ve learned so far about Scarb:
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
-### Starknet support
-
-Scarb supports smart contract development for Starknet. To enable this functionality, you'll need to make some configurations in your `Scarb.toml` file.
-You have to add the `starknet` dependency and add a `[[target.starknet-contract]]` section to enable contract compilation.
-
-Below is the minimal Scarb.toml file required for a Starknet contract:
-
-```toml
-[package]
-name = "hello_starknet"
-version = "0.1.0"
-
-[dependencies]
-starknet = ">=2.2.0"
-
-[[target.starknet-contract]]
-```
-
-For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
 
 # Summary
 
