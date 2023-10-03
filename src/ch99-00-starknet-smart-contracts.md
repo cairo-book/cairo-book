@@ -11,4 +11,22 @@ If you want to learn more about the Starknet network itself, its architecture an
 
 #### Scarb
 
-You can set up a Starknet development environment using Scarb as stated in the [Installation](./ch01-01-installation.md) section. Each example in this chapter can be used with Scarb. Note that you will need to modify the `Scarb.toml` file from your Scarb packages to use the `starknet` dependency, as mentioned in the [Hello, World](./ch01-02-hello-world.md#starknet-support) Starknet section.
+Scarb supports smart contract development for Starknet. To enable this functionality, you'll need to make some configurations in your `Scarb.toml` file (see [Installation](./ch01-01-installation.md) for how to install Scarb).
+You have to add the `starknet` dependency and add a `[[target.starknet-contract]]` section to enable contract compilation.
+
+Below is the minimal Scarb.toml file required to compile a crate containing Starknet contracts:
+
+```toml
+[package]
+name = "package_name"
+version = "0.1.0"
+
+[dependencies]
+starknet = ">=2.2.0"
+
+[[target.starknet-contract]]
+```
+
+For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
+
+Each example in this chapter can be used with Scarb.
