@@ -108,7 +108,7 @@ function sendMessageToL2(
 The parameters are as follow:
 * `toAddress`: The contract address on L2 that will be called.
 * `selector`: The selector of the function of this contract at `toAddress`. This selector (function) must have the `#[l1_handler]` attribute to be callable.
-* `payload`: The payload is always an array or `felt252` (which are represented by `uint256` in solidity). For this reason we've inserted the input `myFelt` into the array.
+* `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in solidity). For this reason we've inserted the input `myFelt` into the array.
 This is why we need to insert the input data into an array.
 
 On the Starknet side, to receive this message, we have:
