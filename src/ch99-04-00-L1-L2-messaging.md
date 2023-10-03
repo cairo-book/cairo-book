@@ -4,7 +4,7 @@ A crucial feature of a Layer 2 is its ability to interact with Layer 1.
 
 Starknet has its own L1 <> L2 Messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on a chain and use the result of this computation on the other chain.
 
-Bridges on Staknet all use L1-L2 messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for L1-L2 messaging would be [DeFi pooling](https://starkware.co/resource/defi-pooling/).
+Bridges on Starknet all use L1-L2 messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for L1-L2 messaging would be [DeFi pooling](https://starkware.co/resource/defi-pooling/).
 
 Let's dive into the details.
 
