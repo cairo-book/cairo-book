@@ -113,14 +113,8 @@ This is why we need to insert the input data into an array.
 
 On the Starknet side, to receive this message, we have:
 
-```rust,does_not_compile
-#[l1_handler]
-fn msg_handler_felt(ref self: ContractState, from_address: felt252, my_felt: felt252) {
-    assert(from_address == self.allowed_message_sender.read(), 'Invalid message sender');
-
-    // You can now use the data, automatically deserialized from the message payload.
-    assert(my_felt == 123, 'Invalid value');
-}
+```rust
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1_L2_messaging/src/lib.cairo:felt_msg_handler}}
 ```
 
 We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be executed by a `L1HandlerTransaction`. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.
@@ -131,13 +125,8 @@ When sending messages from Starknet to Ethereum, you will have to use the `send_
 
 To send a message from L2 to L1, what we would do on Starknet is:
 
-```rust,does_not_compile
-fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {
-    // Note here, we "serialize" my_felt, as the payload must be
-    // a `Span<felt252>`.
-    starknet::send_message_to_l1_syscall(to_address.into(), array![my_felt].span())
-        .unwrap_syscall();
-}
+```rust
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04_L1_L2_messaging/src/lib.cairo:felt_msg_send}}
 ```
 
 We simply build the payload and pass it, along with the L1 contract address, to the syscall function.
