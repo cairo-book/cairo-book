@@ -99,6 +99,7 @@ The Account Descriptor will look like this. You can get the public key and the s
   }
 }
 ```
+Copy the Account Descriptor above and paste in the newly created `account0_account.json file`, then replace "<SMART_WALLET_PUBLIC_KEY>", "<SMART_WALLET_CLASS_HASH>" and "<SMART_WALLET_ADDRESS>" with values from the `katana` account used.
 
 You can retrieve the smart wallet class hash (it will be the same for all your smart wallets) with the following command. Notice the use of the `--rpc` flag and the RPC endpoint provided by `katana`:
 
@@ -121,6 +122,8 @@ Before deploying, we need to declare the contract. We can do this with the `star
 ```bash
 starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --compiler-version 2.0.1 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
 ```
+
+If you encounter error while running the command with `--compiler-version 2.0.1`, you can skip the compiler version entirely and run the command without `--compiler-version 2.0.1`.
 
 The class hash of the contract is: `0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`. You can find it [on any block explorer](https://goerli.voyager.online/class/0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52).
 
