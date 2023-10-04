@@ -28,19 +28,6 @@ wasm-pack build --release --target no-modules --out-dir ./pkg/no_module --out-na
 
 You will find `wasm-cairo_bg.wasm` and `wasm-cairo.js` in `pkg` folder.
 
-
-### 🛠️ Build Astro Editor
-
-```
-wasm-pack build --release --target no-modules --out-dir ./dist/pkg --out-name wasm-cairo
-```
-
-Then run 
-```
-node app.js
-```
-For local web instance.
-
 ### 🛠️ Build WASMTIME's WASM-Cairo Toolkit
 
 ```
