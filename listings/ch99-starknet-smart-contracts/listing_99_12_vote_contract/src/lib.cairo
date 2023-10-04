@@ -76,7 +76,7 @@ mod Vote {
         fn get_vote_status(self: @ContractState) -> (u8, u8, u8, u8) {
             let (n_yes, n_no) = self._get_voting_result();
             let (yes_percentage, no_percentage) = self._get_voting_result_in_percentage();
-            return (n_yes, n_no, yes_percentage, no_percentage);
+            (n_yes, n_no, yes_percentage, no_percentage)
         }
 
         /// @dev Check whether a voter is allowed to vote
@@ -153,7 +153,7 @@ mod Vote {
             let n_yes: u8 = self.yes_votes.read();
             let n_no: u8 = self.no_votes.read();
 
-            return (n_yes, n_no);
+            (n_yes, n_no)
         }
 
         // @dev Internal function to calculate the voting results in percentage
@@ -163,10 +163,13 @@ mod Vote {
 
             let total_votes: u8 = n_yes + n_no;
 
+            if (total_votes == 0_u8) {
+                return (0, 0);
+            }
             let yes_percentage: u8 = (n_yes * 100_u8) / (total_votes);
             let no_percentage: u8 = (n_no * 100_u8) / (total_votes);
 
-            return (yes_percentage, no_percentage);
+            (yes_percentage, no_percentage)
         }
     }
 }
