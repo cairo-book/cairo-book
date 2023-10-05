@@ -1,81 +1,83 @@
+//! A simple contract that sends and receives messages from/to
+//! the L1 (Ethereum).
+//!
+//! The reception of the messages is done using the `l1_handler` functions.
+//! The messages are sent by using the `send_message_to_l1_syscall` syscall.
+
+/// A custom struct, which is already
+/// serializable as `felt252` is serializable.
+#[derive(Drop, Serde)]
+struct MyData {
+    a: felt252,
+    b: felt252,
+}
+
+#[starknet::interface]
+trait IContractL1<T> {
+    /// Sends a message to L1 contract with a single felt252 value.
+    ///
+    /// # Arguments
+    ///
+    /// * `to_address` - Contract address on L1.
+    /// * `my_felt` - Felt value to be sent in the payload.
+    fn send_message_felt(ref self: T, to_address: starknet::EthAddress, my_felt: felt252);
+
+    /// Sends a message to L1 contract with a serialized struct.
+    /// To send a struct in a payload of a message, you only have to ensure that
+    /// your structure is serializable implementing the `Serde` trait. Which
+    /// can be derived automatically if your struct only contains serializable members.
+    ///
+    /// # Arguments
+    ///
+    /// * `to_address` - Contract address on L1.
+    /// * `data` - Data to be sent in the payload.
+    fn send_message_struct(ref self: T, to_address: starknet::EthAddress, data: MyData);
+}
+
 #[starknet::contract]
-mod Evaluator {
-    use starknet::get_caller_address;
-    use starknet::get_contract_address;
-    use starknet::ContractAddress;
-    use starknet::syscalls::send_message_to_l1_syscall;
-
-
-    use zeroable::Zeroable;
-
-
-    use integer::u256;
-    use integer::u256_from_felt252;
+mod contract_msg {
+    use super::{IContractL1, MyData};
+    use starknet::{EthAddress, SyscallResultTrait};
 
     #[storage]
     struct Storage {
-        l1_evaluator_address: felt252,
-        messages: LegacyMap<usize, usize>,
-        messages_count: usize
+        allowed_message_sender: felt252,
     }
 
-    #[constructor]
-    fn constructor(ref self: ContractState) {}
-
-    #[event]
-    #[derive(Drop, starknet::Event)]
-    enum Event {
-        ReceivedSomething: ReceivedSomething,
-    }
-
-    #[derive(Drop, starknet::Event)]
-    struct ReceivedSomething {
-        #[key]
-        from: usize,
-        name: usize
-    }
-
-
-    //ANCHOR:here
+    //ANCHOR: felt_msg_handler
     #[l1_handler]
-    fn ex_01_receive_message_from_l1(
-        ref self: ContractState, from_address: felt252, message: usize
-    ) {
-        // Selector: 0x274ab8abc4e270a94c36e1a54c794cd4dd537eeee371e7188c56ee768c4c0c4
-        // Check that the sender is the correct L1 evaluator
-        assert(from_address == self.l1_evaluator_address.read(), 'WRONG L1 EVALUATOR');
-        // Adding a check on the message, because why not?
-        assert(message > 168111, 'MESSAGE TOO SMALL');
-        assert(message < 5627895, 'MESSAGE TOO BIG');
+    fn msg_handler_felt(ref self: ContractState, from_address: felt252, my_felt: felt252) {
+        assert(from_address == self.allowed_message_sender.read(), 'Invalid message sender');
 
-        // Store the message received from L1
-        let mut message_count = self.messages_count.read();
-        self.messages.write(message_count, message);
-        message_count += 1;
-        self.messages_count.write(message_count);
+        // You can now use the data, automatically deserialized from the message payload.
+        assert(my_felt == 123, 'Invalid value');
     }
-    //ANCHOR_END: here
-    //ANCHOR: l2l1
+    //ANCHOR_END: felt_msg_handler
+
+    #[l1_handler]
+    fn msg_handler_struct(ref self: ContractState, from_address: felt252, data: MyData) {
+        // assert(from_address == ...);
+
+        assert(!data.a.is_zero(), 'data.a is invalid');
+        assert(!data.b.is_zero(), 'data.b is invalid');
+    }
 
     #[external(v0)]
-    #[generate_trait]
-    impl Evaluator of IEvaluator {
-        fn ex_02_send_message_to_l1(ref self: ContractState, value: usize) {
-            // Create the message payload
-            // By default it's an array of felt252
-            let mut message_payload = ArrayTrait::new();
-            // Adding the address of the caller on L2
-            message_payload.append(get_caller_address().into());
-            // Adding the value
-            message_payload.append(value.into());
-            // Sending the message
-            send_message_to_l1_syscall(self.l1_evaluator_address.read(), message_payload.span());
+    impl ContractL1Impl of IContractL1<ContractState> {
+        //ANCHOR: felt_msg_send
+        fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {
+            // Note here, we "serialize" my_felt, as the payload must be
+            // a `Span<felt252>`.
+            starknet::send_message_to_l1_syscall(to_address.into(), array![my_felt].span())
+                .unwrap();
         }
+        //ANCHOR_END: felt_msg_send
 
-        fn get_l1_evaluator_address(self: @ContractState) -> felt252 {
-            self.l1_evaluator_address.read()
+        fn send_message_struct(ref self: ContractState, to_address: EthAddress, data: MyData) {
+            // Explicit serialization of our structure `MyData`.
+            let mut buf: Array<felt252> = array![];
+            data.serialize(ref buf);
+            starknet::send_message_to_l1_syscall(to_address.into(), buf.span()).unwrap();
         }
     }
-//ANCHOR_END: l2l1
-
 }
