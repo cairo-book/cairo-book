@@ -25,7 +25,7 @@ trait IContractL1<T> {
     /// Sends a message to L1 contract with a serialized struct.
     /// To send a struct in a payload of a message, you only have to ensure that
     /// your structure is serializable implementing the `Serde` trait. Which
-    /// is automatically done if your structure only contains already serializable members.
+    /// can be derived automatically if your struct only contains serializable members.
     ///
     /// # Arguments
     ///
