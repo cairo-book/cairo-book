@@ -1,0 +1,10 @@
+[package]
+name = "no_listing_01_embeddable"
+version = "0.1.0"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+
+[dependencies]
+starknet = ">=2.3.0-rc0"
+
+[[target.starknet-contract]]

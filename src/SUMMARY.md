@@ -94,6 +94,7 @@
     - [Contract Events](./ch99-01-03-03-contract-events.md)
     - [Reducing boilerplate](./ch99-01-03-04-reducing-boilerplate.md)
     - [Optimizing storage costs](./ch99-01-03-05-optimizing-storage.md)
+  - [Components](./ch99-01-05-components.md)
   - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
     - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
