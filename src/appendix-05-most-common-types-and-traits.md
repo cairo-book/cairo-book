@@ -1,11 +1,19 @@
-## Appendix E - Most Common Types and Traits Required To Write Contracts
+## Appendix E - The cairo Prelude and Common Types & Traits
 
-This appendix provides a reference for common types and traits used in contract development, along with their corresponding imports, paths, and usage examples.
+This appendix provides a prelude and a reference for common types and traits used in contract development, along with their corresponding imports, paths, and usage examples.
+
+### Prelude
+
+The following two codes bring the fundamentals for Cairo. They facilitate system interaction and smart contract management. Additionally, they establish the essential foundations for arithmetic, logical operations, and data management within smart contracts.
+
+[Starknet.cairo](https://github.com/starkware-libs/cairo/blob/v2.2.0/corelib/src/starknet.cairo) is a module layout, incorporating various traits, data types, and syscall declarations necessary for smart contract in Cairo and system-level operations within a Starknet environment. It includes modules for storage access, syscalls, cryptographic primitives (like secp256), contract and Ethereum addresses handling, event and account management, along with some helper functions and types for system interactions and error handling.
+
+[Lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.2.0/corelib/src/lib.cairo) demonstrates extensive trait implementations, type definitions, and external function declarations, providing foundational operations for arithmetic, logical operations, and data type conversions within a StarkNet ecosystem. It structures fundamental data types like booleans, and user-defined types (e.g., felt252), and their associated operations while also defining external functions and methods for basic arithmetic and logical operations. This block also includes module declarations for various utility and core functionalities like box, array, dictionary handling, serialization, deserialization, and error handling which are crucial for smart contract development in Cairo.
 
 | Import                    | Path                                                  | Usage                                                                                                                                                                                  |
 | ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OptionTrait`             | `std::option::OptionTrait`                            | `OptionTrait<T>` defines a set of methods required to manipulate optional value.                                                                                                       |
-| `ResultTrait`             | `std::result::ResultTrait`                            | `ResultTrait<T, E>` Type for Starknet contract address, a value in the range [0, 2 \*\* 251).                                                                                          |
+| `OptionTrait`             | `core::option::OptionTrait`                            | `OptionTrait<T>` defines a set of methods required to manipulate optional value.                                                                                                       |
+| `ResultTrait`             | `core::result::ResultTrait`                            | `ResultTrait<T, E>` Type for Starknet contract address, a value in the range [0, 2 \*\* 251).                                                                                          |
 | `ContractAddress`         | `starknet::ContractAddress`                           | `ContractAddress` is a type to represent the smart contract address                                                                                                                    |
 | `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` is the implementation of the trait `Zeroable` for the `ContractAddress` type. It is required to check whether a value of `t:ContractAddress` is zero or not. |
 | `contract_address_const`  | `starknet::contract_address_const`                    | The `contract_address_const!` it's a function that allows instantiating constant contract address values.                                                                              |
