@@ -4,11 +4,14 @@ This appendix provides a prelude and a reference for common types and traits use
 
 ### Prelude
 
-The following two codes bring the fundamentals for Cairo. They facilitate system interaction and smart contract management. Additionally, they establish the essential foundations for arithmetic, logical operations, and data management within smart contracts.
+The Cairo prelude is a collection of commonly used modules, functions, data types, and traits that are automatically brought into scope of every module in a Cairo crate without needing explicit import statements. Cairo's prelude provides the basic building blocks developers need to start Cairo programs and writing smart contracts.
 
-[Starknet.cairo](https://github.com/starkware-libs/cairo/blob/v2.2.0/corelib/src/starknet.cairo) is a module layout, incorporating various traits, data types, and syscall declarations necessary for smart contract in Cairo and system-level operations within a Starknet environment. It includes modules for storage access, syscalls, cryptographic primitives (like secp256), contract and Ethereum addresses handling, event and account management, along with some helper functions and types for system interactions and error handling.
-
-[Lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.2.0/corelib/src/lib.cairo) demonstrates extensive trait implementations, type definitions, and external function declarations, providing foundational operations for arithmetic, logical operations, and data type conversions within a StarkNet ecosystem. It structures fundamental data types like booleans, and user-defined types (e.g., felt252), and their associated operations while also defining external functions and methods for basic arithmetic and logical operations. This block also includes module declarations for various utility and core functionalities like box, array, dictionary handling, serialization, deserialization, and error handling which are crucial for smart contract development in Cairo.
+The core library prelude is defined in [lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.2.0/corelib/src/lib.cairo) file of the corelib crate and contains Cairo's primitive data types, traits, operators, and utility functions. This includes:
+Data types - felts, bools, arrays, dicts, etc.
+Traits - behaviors for arithmetic, comparison, serialization
+Operators - arithmetic, logical, bitwise
+Utility functions - helpers for arrays, maps, boxing, etc.
+The core library prelude delivers the fundamental programming constructs and operations needed for basic Cairo programs, without requiring the explicit import of elements. Since the core library prelude is automatically imported, its contents are available for use in any Cairo crate without explicit imports. This prevents repetition and provides a better devX. This is what allows you to use `ArrayTrait::append()` or the `Default` trait without bringing them explicitly into scope.
 
 ### List of common types and traits
 
