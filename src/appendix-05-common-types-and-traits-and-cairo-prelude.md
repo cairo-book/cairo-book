@@ -1,6 +1,4 @@
-## Appendix E - The cairo Prelude and Common Types & Traits
-
-This appendix provides a prelude and a reference for common types and traits used in contract development, along with their corresponding imports, paths, and usage examples.
+## Appendix E - Common Types & Traits and the Cairo Prelude
 
 ### Prelude
 
@@ -15,10 +13,12 @@ The core library prelude delivers the fundamental programming constructs and ope
 
 ### List of common types and traits
 
+The following section provides a brief overview of commonly used types and traits when developping Cairo programs. Most of these are included in the prelude and not required to be imported explicitly - but not all of them.
+
 | Import                    | Path                                                  | Usage                                                                                                                                                                                  |
 | ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OptionTrait`             | `core::option::OptionTrait`                            | `OptionTrait<T>` defines a set of methods required to manipulate optional value.                                                                                                       |
-| `ResultTrait`             | `core::result::ResultTrait`                            | `ResultTrait<T, E>` Type for Starknet contract address, a value in the range [0, 2 \*\* 251).                                                                                          |
+| `OptionTrait`             | `core::option::OptionTrait`                           | `OptionTrait<T>` defines a set of methods required to manipulate optional value.                                                                                                       |
+| `ResultTrait`             | `core::result::ResultTrait`                           | `ResultTrait<T, E>` Type for Starknet contract address, a value in the range [0, 2 \*\* 251).                                                                                          |
 | `ContractAddress`         | `starknet::ContractAddress`                           | `ContractAddress` is a type to represent the smart contract address                                                                                                                    |
 | `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` is the implementation of the trait `Zeroable` for the `ContractAddress` type. It is required to check whether a value of `t:ContractAddress` is zero or not. |
 | `contract_address_const`  | `starknet::contract_address_const`                    | The `contract_address_const!` it's a function that allows instantiating constant contract address values.                                                                              |

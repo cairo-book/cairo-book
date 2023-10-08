@@ -107,5 +107,5 @@
   - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
   - [C - Derivable Traits](appendix-03-derivable-traits.md)
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
-  - [E - The cairo Prelude and Common Types & Traits](appendix-05-the-cairo-prelude-and-common-types-&-traits.md)
+  - [E - The cairo Prelude and Common Types & Traits](appendix-05-common-types-and-traits-and-cairo-prelude.md)
   - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
