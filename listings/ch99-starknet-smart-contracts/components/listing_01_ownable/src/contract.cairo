@@ -1,5 +1,5 @@
 #[starknet::contract]
-mod OwnableContract {
+mod OwnableCounter {
     use listing_01_ownable::component::ownable_component;
 
     component!(path: ownable_component, storage: ownable, event: OwnableEvent);
@@ -11,6 +11,7 @@ mod OwnableContract {
 
     #[storage]
     struct Storage {
+        counter: u128,
         #[substorage(v0)]
         ownable: ownable_component::Storage
     }
@@ -20,5 +21,12 @@ mod OwnableContract {
     #[derive(Drop, starknet::Event)]
     enum Event {
         OwnableEvent: ownable_component::Event
+    }
+
+
+    #[abi(embed_v0)]
+    fn foo(ref self: ContractState) {
+        self.ownable.assert_only_owner();
+        self.counter.write(self.counter.read() + 1);
     }
 }
