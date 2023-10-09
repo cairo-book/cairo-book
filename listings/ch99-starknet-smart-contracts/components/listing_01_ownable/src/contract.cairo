@@ -4,10 +4,12 @@ mod OwnableCounter {
 
     component!(path: ownable_component, storage: ownable, event: OwnableEvent);
 
+    //ANCHOR:  embedded_impl
     #[abi(embed_v0)]
     impl OwnableImpl = ownable_component::Ownable<ContractState>;
 
     impl OwnableInternalImpl = ownable_component::InternalImpl<ContractState>;
+    //ANCHOR_END: embedded_impl
 
     #[storage]
     struct Storage {

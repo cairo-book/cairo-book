@@ -21,7 +21,7 @@ functions. Unlike a contract, a component cannot be declared or deployed. Its
 logic will eventually be part of the contract’s bytecode it has been embedded
 in.
 
-# What's in a Component?
+## What's in a Component?
 
 A component is like a mini contract. It can contain:
 
@@ -32,7 +32,7 @@ A component is like a mini contract. It can contain:
 Unlike a contract, a component cannot be deployed on its own. The component's
 code becomes part of the contract it's embedded to.
 
-# Creating Components
+## Creating Components
 
 To create a component, first define it in its own module decorated with a
 `#[starknet::component]` attribute. Within this module, you can declare a `
@@ -62,7 +62,7 @@ ComponentState<TContractState>` (for external functions) or `self:
 generic over `TContractState`, allowing us to use this component in any
 contract.
 
-## Example: an Ownable compnent
+### Example: an Ownable compnent
 
 > ⚠️ The example shown below has not been audited and is not intended for
 > production use. The authors are not responsible for any damages caused by the
@@ -143,7 +143,7 @@ For traits that do not have an explicit definition and are generated using
 `TContractState` instead of `ComponentState<TContractState>`, as demonstrated in
 the example with the `InternalTrait`.
 
-# Using components inside a contract
+## Using components inside a contract
 
 The major strength of components is how it allows reusing already built
 primitives inside your contracts with a restricted amount of boilerplate. To
@@ -170,7 +170,9 @@ ownable_component::Event`).
    alias. This alias must be annotated with `#[abi(embed_v0)]` to externally
    expose the component's functions.
 
-   As you can see, the InternalImpl is not marked with `#[abi(embed_v0)]`. Indeed, we don't want to expose externally the functions defined in this impl. However, we might still want to access them internally.
+   As you can see, the InternalImpl is not marked with `#[abi(embed_v0)]`.
+   Indeed, we don't want to expose externally the functions defined in this
+   impl. However, we might still want to access them internally.
 
 <!-- TODO: Add content on impl aliases -->
 
@@ -182,13 +184,14 @@ following:
 ```
 
 The component's logic is now seamlessly part of the contract! We can interact
-with the components functions externally by calling them using the `IOwnableDispatcher` instantiated with the contract's address.
+with the components functions externally by calling them using the
+`IOwnableDispatcher` instantiated with the contract's address.
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_ownable/src/component.cairo:interface}}
 ```
 
-# Stacking Components for Maximum Composability
+## Stacking Components for Maximum Composability
 
 The composability of components really shines when combining multiple of them
 together. Each adds its features onto the contract. You will be able to rely on
@@ -203,3 +206,47 @@ Components can even depend on other components by restricting the
 `TContractstate` they're generic on to implement the trait of another component.
 Before we dive into this mechanism, let's first look at how components work
 under the hood.
+
+## Troubleshooting
+
+You might encounter some errors when trying to implement components.
+Unfortunately, some of them lack meaningful error messages to help debug. This
+section aims to provide you with some pointers to help you debug your code.
+
+- `Trait not found. Not a trait.`
+
+  This error can occur when you're not importing the component's impl block
+  correctly in your contract. Make sure to respect the following syntax:
+
+  ```rust
+  #[abi(embed_v0)]
+  impl IMPL_NAME = upgradeable::EMBEDDED_NAME<ContractState>
+  ```
+
+  Referring to our previous example, this would be:
+
+  ```rust
+  #[abi(embed_v0)]
+  impl OwnableImpl = upgradeable::Ownable<ContractState>
+  ```
+
+- `Plugin diagnostic: name is not a substorage member in the contract's Storage.
+Consider adding to Storage: (...)`
+
+  The compiler helps you a lot debugging this by giving you recommendation on
+  the action to take. Basically, you forgot to add the component's storage to
+  your contract's storage. Make sure to add the path to the component's storage
+  annotated with the `#[substorage(v0)]` attribute to your contract's storage.
+
+- `Plugin diagnostic: name is not a nested event in the contract's Event enum.
+Consider adding to the Event enum:`
+
+  Similar to the previous error, the compiler, you forgot to add the component's
+  events to your contract's events. Make sure to add the path to the component's
+  events to your contract's events.
+
+- Components functions are not accessible externally
+
+  This can happen if you forgot to annotate the component's impl block with
+  `#[abi(embed_v0)]`. Make sure to add this annotation when embedding the
+  component's impl in your contract.
