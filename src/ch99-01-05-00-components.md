@@ -112,7 +112,7 @@ trait. This allows us to use the component in any contract, as long as the
 contract implements the `HasComponent` trait. Understanding this mechanism in
 details is not required to use components, but if you're curious about the inner
 workings, you can read more in the [Components under the
-hood](./ch99-01-05-00-components.md#components-under-the-hood) section.
+hood](./ch99-01-05-01-components-under-the-hood.md) section.
 
 One of the major differences from a regular smart contract is that access to
 storage and events is done via the generic `ComponentState<TContractState>` type
