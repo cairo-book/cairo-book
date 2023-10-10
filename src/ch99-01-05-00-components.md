@@ -23,11 +23,11 @@ in.
 
 ## What's in a Component?
 
-A component is like a mini contract. It can contain:
+A component is very similar to a contract. It can contain:
 
 - Storage variables
 - Events
-- Functions
+- External and internal functions
 
 Unlike a contract, a component cannot be deployed on its own. The component's
 code becomes part of the contract it's embedded to.
@@ -62,7 +62,7 @@ ComponentState<TContractState>` (for external functions) or `self:
 generic over `TContractState`, allowing us to use this component in any
 contract.
 
-### Example: an Ownable compnent
+### Example: an Ownable component
 
 > ⚠️ The example shown below has not been audited and is not intended for
 > production use. The authors are not responsible for any damages caused by the
@@ -132,7 +132,7 @@ are:
 - Adding the `#[starknet::component]` attribute to the module.
 - Adding the `#[embeddable_as(name)]` attribute to the `impl` block that will be
   embedded in another contract.
-- Adding generic paramters to the `impl` block:
+- Adding generic parameters to the `impl` block:
   - Adding `TContractState` as a generic parameter.
   - Adding `+HasComponent<TContractState>` as an impl restriction.
 - Changing the type of the `self` argument in the functions inside the `impl`

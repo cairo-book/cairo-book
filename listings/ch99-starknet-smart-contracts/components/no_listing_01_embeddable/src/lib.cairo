@@ -18,5 +18,3 @@ mod simple_contract {
     #[abi(embed_v0)]
     impl MySimpleImpl = super::SimpleImpl<ContractState>;
 }
-
-use nullable::NullableTrait;
