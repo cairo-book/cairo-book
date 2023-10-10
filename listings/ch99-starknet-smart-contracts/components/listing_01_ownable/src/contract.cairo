@@ -1,3 +1,4 @@
+//ANCHOR: all
 #[starknet::contract]
 mod OwnableCounter {
     use listing_01_ownable::component::ownable_component;
@@ -32,3 +33,6 @@ mod OwnableCounter {
         self.counter.write(self.counter.read() + 1);
     }
 }
+//ANCHOR_END: all
+
+

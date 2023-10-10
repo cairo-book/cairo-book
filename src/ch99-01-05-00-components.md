@@ -8,8 +8,8 @@ contract from the rest?
 
 Components provide exactly that. They are modular add-ons encapsulating reusable
 logic, storage, and events that can be incorporated into multiple contracts.
-Components can be incorporated into multiple contracts to extend a contract's
-functionality, without having to reimplement the same logic over and over again.
+They can be used to extend a contract's functionality, without having to
+reimplement the same logic over and over again.
 
 Think of components as Lego blocks. They allow you to enrich your contracts by
 plugging in a module that you or someone else wrote. This module can be a simple
@@ -43,9 +43,8 @@ The next step is to define the component interface, containing the signatures of
 the functions that will allow external access to the component's logic. You can
 define the interface of the component by declaring a trait with the
 `#[starknet::interface]` attribute, just as you would with contracts. This
-interface will be used to allow external access to the component's functions
-from inside a contract by interacting with the embedded `impl` of the component,
-or externally using the
+interface will be used to enable external access to the component's functions
+using the
 [Dispatcher](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
 pattern.
 
@@ -56,8 +55,14 @@ implementation of the trait defining the interface of the component.
 > Note: `name` is the name that we’ll be using in the contract to refer to the
 > component. It is different than the name of your impl.
 
-Functions within this `impl` block expect arguments like `ref self:
-ComponentState<TContractState>` (for external functions) or `self:
+You can also define internal functions that will not be accessible externally,
+by simply omitting the `#[embeddable_as(name)]` attribute above the internal
+`impl` block. You will be able to use these internal functions inside the
+contract you embed the component in, but not interact with it from outside, as
+they're not a part of the abi of the contract.
+
+Functions within these `impl` block expect arguments like `ref self:
+ComponentState<TContractState>` (for state-modifying functions) or `self:
 @ComponentState<TContractState>` (for view functions). This makes the impl
 generic over `TContractState`, allowing us to use this component in any
 contract.
@@ -180,7 +185,7 @@ For example, to embed the `Ownable` component defined above, we would do the
 following:
 
 ```rust
-{{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_ownable/src/contract.cairo}}
+{{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_ownable/src/contract.cairo:all}}
 ```
 
 The component's logic is now seamlessly part of the contract! We can interact
@@ -204,8 +209,8 @@ and audited components for everything else.
 
 Components can even depend on other components by restricting the
 `TContractstate` they're generic on to implement the trait of another component.
-Before we dive into this mechanism, let's first look at how components work
-under the hood.
+Before we dive into this mechanism, let's first look at [how components work
+under the hood](./ch99-01-05-01-components-under-the-hood).
 
 ## Troubleshooting
 
