@@ -85,3 +85,8 @@ The code uses the methods insert and get to access the values in the `Felt252Dic
 
 
 ```
+
+
+### Credits
+
+The full implementation of the Stack and Vect structure was found on alexandria : https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
