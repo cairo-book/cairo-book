@@ -17,15 +17,9 @@ trait Processing {
 impl ProcessingImpl of Processing {
     fn process(self: Message) {
         match self {
-            Message::Quit => {
-                'quitting'.print();
-            },
-            Message::Echo(value) => {
-                value.print();
-            },
-            Message::Move((x, y)) => {
-                'moving'.print();
-            },
+            Message::Quit => { 'quitting'.print(); },
+            Message::Echo(value) => { value.print(); },
+            Message::Move((x, y)) => { 'moving'.print(); },
         }
     }
 }
