@@ -17,29 +17,7 @@ new entry points and modifying the ABI of the contract.
 Let's look at an example to see this in action:
 
 ```rust
-#[starknet::interface]
-trait SimpleTrait<TContractState> {
-    fn ret_4(self: @TContractState) -> u8;
-}
-
-#[starknet::embeddable]
-impl SimpleImpl<TContractState> of SimpleTrait<TContractState> {
-    fn ret_4(self: @TContractState) -> u8 {
-        4
-    }
-}
-
-#[starknet::contract]
-mod simple_contract {
-    #[storage]
-    struct Storage {}
-
-    #[abi(embed_v0)]
-    impl MySimpleImpl = super::SimpleImpl<ContractState>;
-
-    // ret_4 added to the contract's ABI
-}
-
+{{#include ../listings/ch99-starknet-smart-contracts/components/no_listing_01_embeddable/src/lib.cairo}}
 ```
 
 By embedding `SimpleImpl`, we externally expose `ret4` in the contract's ABI.
