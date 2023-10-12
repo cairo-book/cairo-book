@@ -1,8 +1,8 @@
-## Custom Data Structures
+# Custom Data Structures
 
-When you first start programming in Cairo, you'll likely use arrays (`Array<T>`) to store collections of data. However, you quickly realize arrays have one big limitation - the data stored in them is immutable. Once you insert a value into an array, you can't modify it.
+When you first start programming in Cairo, you'll likely want to use arrays (`Array<T>`) to store collections of data. However, you will quickly realize that arrays have one big limitation - the data stored in them is immutable. Once you append a value to an array, you can't modify it.
 
-This can be frustrating when you want to treat a data structure like a mutable vector. For example, say you're making a game where the players have a level, but they can also level up. You might try to store the level of the players in an array:
+This can be frustrating when you want to use a mutable data structure. For example, say you're making a game where the players have a level, and they can level up. You might try to store the level of the players in an array:
 
 ```rust,noplayground
 let mut level_players = Array::new();
@@ -11,18 +11,18 @@ level_players.append(1);
 level_players.append(10); 
 ```
 
-But then you realize you can't increase the level once it's set. You cannot remove a player if the player dies unless he happens to be the first in the array.
+But then you realize you can't increase the level at a specific index once it's set. If a player dies, you cannot remove it from the array unless he happens to be the in the first position.
 
-Fortunately, Cairo provides a handy built-in dictionary type called `Felt252Dict<T>` that allows us to build flexible data structures that can be modified. Let's explore how to use it to create a dynamic array implementation.
+Fortunately, Cairo provides a handy built-in dictionary type called `Felt252Dict<T>` that allows us to simulate the behavior of mutable data structures. Let's first explore how to use it to create a dynamic array implementation.
 
-### Defining Our Ideal Interface 
+## Simulating a dynamic array with dicts
 
 First, let's think about how we want our mutable dynamic array to behave. What operations should it support?
 
 It should:
-- Allow us to add items to the end
+- Allow us to append items at the end
 - Let us access any item by index 
-- Allow setting an item's value by index
+- Allow setting the value of an item at a specific index
 - Return the current length
 
 
@@ -33,49 +33,49 @@ We can define this interface in Cairo like:
 {{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:trait}}
 ```
 
-This provides a blueprint for our dynamic array implementation. We named it Vec as it is similar to `Vec<T>` data structure in Rust. 
+This provides a blueprint for the implementation of our dynamic array. We named it Vec as it is similar to the `Vec<T>` data structure in Rust. 
 
-### Implementing a Mutable Vector in Cairo 
+### Implementing a dynamic array in Cairo 
 
 
 
-To store our data, we'll use a `Felt252Dict<T>` which maps index numbers (felts) to values. We'll also store a separate len field to track the length.
+To store our data, we'll use a `Felt252Dict<T>` which maps index numbers (felts) to values. We'll also store a separate `len` field to track the length.
 
-Here is what our structure looks like:
+Here is what our struct looks like:
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
-The key thing that makes this vector mutable is that we can insert into the dictionary to update values. For example, to set a new value at an index, we do:
+The key thing that makes this vector mutable is that we can insert into the dictionary to set or update values. For example, to update a value at a specific index, we do:
 
 ```rust,noplayground
 fn set(ref self: NullableVector<T>, index: usize, value: T) {
   self.data.insert(index.into(), nullable_from_box(BoxTrait::new(value)));
 }
 ```
-This overwrites any existing value at that index.
+This overwrites the previously existing value at that index.
 
-While arrays are immutable, dictionaries provide the flexibility we need for modifiable data structures like vectors. This is a handy technique to be aware of.
+While arrays are immutable, dictionaries provide the flexibility we need for modifiable data structures like vectors.
 
-The implementation of the rest of the interface is more straitforward. The implementation of all the methods defined in our interface can be done as follow :
+The implementation of the rest of the interface is straightforward. The implementation of all the methods defined in our interface can be done as follow :
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
 ```
-The full implementation of the Vec structure was found on alexandria : https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
+The full implementation of the Vec structure can be found on Alexandria : https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
 
 
-## Another example of structure
+## Simulating a Stack with dicts
 
 
 
-We will now look at another example and implement it, the Stack. 
+We will now look at a second example and its implementation details: a Stack. 
 
-A Stack is a collection that is based on the last-in-first-out (LIFO) policy. The data is added at the top of the stack and removed from the top as well such that the last element added will be the first out of the stack.
+A Stack is a LIFO (Last-In, First-Out) collection. The insertion of a new element and removal of an existing element takes place at the same end, represented as the top of the stack.
 
 Let us define what operations we need to create a stack :
 
-- Add an item to the top
-- Remove an item from the top
+- Push an item to the top of the stack
+- Pop an item from the top of the stack
 - Check whether there are still any elements in the stack.
 
 From these specifications we can define the following interface :
@@ -91,14 +91,14 @@ From these specifications we can define the following interface :
 
 Now we will discuss about the structure of the stack, to support a stack data structure in Cairo, we can again use a `Felt252Dict<T>` to store the values of the stack and a `usize` to keep track of the length of the stack to iterate over it.
 
-The definition of the structure is :
+The Stack struct is defined as:
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:struct}}
 
 ```
 
-Our stack is almost done, let us implement the functions we declared :
+Next, let's see how our main functions `push` and `pop` are implemented.
 
 
 ```rust
@@ -108,7 +108,7 @@ Our stack is almost done, let us implement the functions we declared :
 
 ```
 
-The code uses the methods insert and get to access the values in the `Felt252Dict<T>`. To push an element at the end of the stack the function inserts the element at `len` and increases the size of the stack to keep track of the position of the last element. To pop a value the code retreives the last value using `len` and then decreases its value to keep track of the position of the last element.
+The code uses the `insert` and `get` methods to access the values in the `Felt252Dict<T>`. To push an element at the top of the stack, the `push` function inserts the element in the dict at index `len` - and increases the `len` field of the stack to keep track of the position of the stack top. To remove a value, the `pop` function retreives the last value at position `len-1` and then decreases the value of `len` to update the position of the stack top accordingly.
 
-The full implementation of the Stack structure was found on alexandria : https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
+The full implementation of the Stack, along with more data structures that you can use in your code, can be found in the community-maintained [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures) library, in the "data_structures" crate.
 
