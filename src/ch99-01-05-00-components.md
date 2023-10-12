@@ -207,7 +207,7 @@ you need a contract to have.
 Developers can focus on their core contract logic while relying on battle-tested
 and audited components for everything else.
 
-Components can even depend on other components by restricting the
+Components can even [depend](./ch99-01-05-02-component-dependencies.md) on other components by restricting the
 `TContractstate` they're generic on to implement the trait of another component.
 Before we dive into this mechanism, let's first look at [how components work
 under the hood](./ch99-01-05-01-components-under-the-hood).
