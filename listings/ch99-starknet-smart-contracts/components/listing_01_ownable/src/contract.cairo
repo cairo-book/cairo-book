@@ -27,7 +27,7 @@ mod OwnableCounter {
     }
 
 
-    #[abi(embed_v0)]
+    #[external(v0)]
     fn foo(ref self: ContractState) {
         self.ownable.assert_only_owner();
         self.counter.write(self.counter.read() + 1);
