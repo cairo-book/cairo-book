@@ -13,11 +13,11 @@ level_players.append(10);
 
 But then you realize you can't increase the level once it's set. You cannot remove a player if the player dies unless he happens to be the first in the array.
 
-Fortunately, Cairo provides a handy built-in dictionary type called `Felt252Dict<T>` that allows us to build flexible data structures that can be modified. Let's explore how to use it to create a mutable vector implementation.
+Fortunately, Cairo provides a handy built-in dictionary type called `Felt252Dict<T>` that allows us to build flexible data structures that can be modified. Let's explore how to use it to create a dynamic array implementation.
 
 ### Defining Our Ideal Interface 
 
-First, let's think about how we want our vector to behave. What operations should it support?
+First, let's think about how we want our mutable dynamic array to behave. What operations should it support?
 
 It should:
 - Allow us to add items to the end
@@ -33,11 +33,11 @@ We can define this interface in Cairo like:
 {{#include ../listings/ch03-common-collections/no_listing_13_own_struct_vect/src/lib.cairo:trait}}
 ```
 
-This provides a blueprint for our vector implementation. Let's build it out.
+This provides a blueprint for our dynamic array implementation. We named it Vec as it is similar to `Vec<T>` data structure in Rust. 
 
 ### Implementing a Mutable Vector in Cairo 
 
-To define our vectors we used the definition of Vec in Rust. They can also be defined as dynamic arrays, their size can change and their data can be accessed and modified. 
+
 
 To store our data, we'll use a `Felt252Dict<T>` which maps index numbers (felts) to values. We'll also store a separate len field to track the length.
 
@@ -45,7 +45,7 @@ Here is what our structure looks like:
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_13_own_struct_vect/src/lib.cairo:struct}}
 ```
-The key thing that makes this vector "mutable" is that we can insert into the dictionary to update values. For example, to set a new value at an index, we do:
+The key thing that makes this vector mutable is that we can insert into the dictionary to update values. For example, to set a new value at an index, we do:
 
 ```rust,noplayground
 fn set(ref self: NullableVector<T>, index: usize, value: T) {
