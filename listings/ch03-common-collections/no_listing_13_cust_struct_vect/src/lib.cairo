@@ -52,12 +52,12 @@ impl NullableVecImpl<T, impl TDrop: Drop<T>, impl TCopy: Copy<T>> of VecTrait<Nu
         self.data.insert(self.len.into(), nullable_from_box(BoxTrait::new(value)));
         self.len = integer::u32_wrapping_add(self.len, 1_usize);
     }
-
+    // ANCHOR: set	
     fn set(ref self: NullableVec<T>, index: usize, value: T) {
         assert(index < self.len(), 'Index out of bounds');
         self.data.insert(index.into(), nullable_from_box(BoxTrait::new(value)));
     }
-
+    // ANCHOR_END: set
     fn len(self: @NullableVec<T>) -> usize {
         *self.len
     }
