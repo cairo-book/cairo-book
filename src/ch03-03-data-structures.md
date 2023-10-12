@@ -15,7 +15,7 @@ But then you realize you can't increase the level once it's set. You cannot remo
 
 Fortunately, Cairo provides a handy built-in dictionary type called `Felt252Dict<T>` that allows us to build flexible data structures that can be modified. Let's explore how to use it to create a mutable vector implementation.
 
-### Defining Our Ideal Interface
+### Defining Our Ideal Interface 
 
 First, let's think about how we want our vector to behave. What operations should it support?
 
@@ -36,6 +36,8 @@ We can define this interface in Cairo like:
 This provides a blueprint for our vector implementation. Let's build it out.
 
 ### Implementing a Mutable Vector in Cairo 
+
+To define our vectors we used the definition of Vec in Rust. They can also be defined as dynamic arrays, their size can change and their data can be accessed and modified. 
 
 To store our data, we'll use a `Felt252Dict<T>` which maps index numbers (felts) to values. We'll also store a separate len field to track the length.
 
@@ -62,7 +64,11 @@ The implementation of the rest of the interface is more straitforward. The imple
 The full implementation of the Vec structure was found on alexandria : https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
 
 
-#### Implementing a Mutable Stack in Cairo 
+## Another example of structure
+
+
+
+We will now look at another example and implement it, the Stack. 
 
 A Stack is a collection that is based on the last-in-first-out (LIFO) policy. The data is added at the top of the stack and removed from the top as well such that the last element added will be the first out of the stack.
 
@@ -80,6 +86,8 @@ From these specifications we can define the following interface :
 
 
 ```
+
+### Implementing a Mutable Stack in Cairo 
 
 Now we will discuss about the structure of the stack, to support a stack data structure in Cairo, we can again use a `Felt252Dict<T>` to store the values of the stack and a `usize` to keep track of the length of the stack to iterate over it.
 
