@@ -1,4 +1,4 @@
-## Flexible Data Structures with Dictionaries
+## Custom Data Structures
 
 When you first start programming in Cairo, you'll likely use arrays (`Array<T>`) to store collections of data. However, you quickly realize arrays have one big limitation - the data stored in them is immutable. Once you insert a value into an array, you can't modify it.
 
@@ -30,7 +30,7 @@ We can define this interface in Cairo like:
 
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_13_own_struct_vect/src/lib.cairo:trait}}
+{{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:trait}}
 ```
 
 This provides a blueprint for our dynamic array implementation. We named it Vec as it is similar to `Vec<T>` data structure in Rust. 
@@ -43,7 +43,7 @@ To store our data, we'll use a `Felt252Dict<T>` which maps index numbers (felts)
 
 Here is what our structure looks like:
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_13_own_struct_vect/src/lib.cairo:struct}}
+{{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 The key thing that makes this vector mutable is that we can insert into the dictionary to update values. For example, to set a new value at an index, we do:
 
@@ -59,7 +59,7 @@ While arrays are immutable, dictionaries provide the flexibility we need for mod
 The implementation of the rest of the interface is more straitforward. The implementation of all the methods defined in our interface can be done as follow :
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_13_own_struct_vect/src/lib.cairo:implem}}
+{{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
 ```
 The full implementation of the Vec structure was found on alexandria : https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
 
@@ -81,7 +81,7 @@ Let us define what operations we need to create a stack :
 From these specifications we can define the following interface :
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_14_own_struct_stack/src/lib.cairo:trait}}
+{{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:trait}}
 
 
 
@@ -94,7 +94,7 @@ Now we will discuss about the structure of the stack, to support a stack data st
 The definition of the structure is :
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_14_own_struct_stack/src/lib.cairo:struct}}
+{{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:struct}}
 
 ```
 
@@ -103,7 +103,7 @@ Our stack is almost done, let us implement the functions we declared :
 
 ```rust
 
-{{#include ../listings/ch03-common-collections/no_listing_14_own_struct_stack/src/lib.cairo:implem}}
+{{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
 
 
 ```
