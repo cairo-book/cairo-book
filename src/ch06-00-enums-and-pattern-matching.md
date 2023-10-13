@@ -1,4 +1,5 @@
 # Enums and Pattern Matching
+
 In this chapter, we’ll look at *enumerations*, also referred to as *enums*.
 Enums allow you to define a type by enumerating its possible *variants*. First,
 we’ll define and use an enum to show how an enum can encode meaning along with
