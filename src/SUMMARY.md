@@ -25,6 +25,7 @@
 - [Common Collections](ch03-00-common-collections.md)
   - [Arrays](ch03-01-arrays.md)
   - [Dictionaries](ch03-02-dictionaries.md)
+  - [Custom Data Structures](ch03-03-custom-data-structures.md)
 
 ## Understanding Ownership
 
@@ -50,7 +51,6 @@
 - [Managing Cairo Projects with Packages, Crates and Modules](ch07-00-managing-cairo-projects-with-packages-crates-and-modules.md)
 
   - [Packages and Crates](ch07-01-packages-and-crates.md)
-
   - [Defining Modules to Control Scope](ch07-02-defining-modules-to-control-scope.md)
   - [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
   - [Bringing Paths into Scope with the 'use' Keyword](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
@@ -73,12 +73,14 @@
 ## Error Handling
 
 - [Error Handling](ch10-00-error-handling.md)
+
   - [Unrecoverable Errors with panic](ch10-01-unrecoverable-errors-with-panic.md)
   - [Recoverable Errors with Result](ch10-02-recoverable-errors.md)
 
 ## Advanced Features
 
 - [Advanced Features](ch11-00-advanced-features.md)
+
   - [Operator Overloading](ch11-01-operator-overloading.md)
   - [Macros](ch11-02-macros.md)
 
@@ -89,24 +91,33 @@
   - [Introduction to smart-contracts](./ch99-01-01-introduction-to-smart-contracts.md)
   - [A simple contract](./ch99-01-02-a-simple-contract.md)
   - [A deeper dive into contracts](./ch99-01-03-00-a-deeper-dive-into-contracts.md)
+
     - [Storage Variables](./ch99-01-03-01-storage-variables.md)
     - [Contract Functions](./ch99-01-03-02-contract-functions.md)
     - [Contract Events](./ch99-01-03-03-contract-events.md)
     - [Reducing boilerplate](./ch99-01-03-04-reducing-boilerplate.md)
     - [Optimizing storage costs](./ch99-01-03-05-optimizing-storage.md)
+
   - [Components](./ch99-01-05-00-components.md)
+
     - [Under the hood](./ch99-01-05-01-components-under-the-hood.md)
     - [Component dependencies](./ch99-01-05-02-component-dependencies.md)
     - [Testing components](./ch99-01-05-03-testing-components.md)
+
   - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
+
     - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
     - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+
   - [Other examples](./ch99-01-04-00-other-examples.md)
+
     - [Deploying and Interacting with a Voting contract](./ch99-01-04-01-voting-contract.md)
+
   - [L1 <> L2 Messaging](./ch99-04-00-L1-L2-messaging.md)
   - [Security Considerations](./ch99-03-security-considerations.md)
 
 - [Appendix](appendix-00.md)
+
   - [A - Keywords](appendix-01-keywords.md)
   - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
   - [C - Derivable Traits](appendix-03-derivable-traits.md)
