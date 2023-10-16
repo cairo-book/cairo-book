@@ -13,7 +13,6 @@ trait StackTrait<S, T> {
 }
 // ANCHOR_END: trait
 
-
 // ANCHOR: struct
 struct NullableStack<T> {
     data: Felt252Dict<Nullable<T>>,
@@ -29,7 +28,9 @@ impl DestructNullableStack<T, impl TDrop: Drop<T>> of Destruct<NullableStack<T>>
 
 
 // ANCHOR: implem
-impl NullableStackImpl<T, impl TDrop: Drop<T>, impl TCopy: Copy<T>> of StackTrait<NullableStack<T>, T> {
+impl NullableStackImpl<
+    T, impl TDrop: Drop<T>, impl TCopy: Copy<T>
+> of StackTrait<NullableStack<T>, T> {
     fn push(ref self: NullableStack<T>, value: T) {
         self.data.insert(self.len.into(), nullable_from_box(BoxTrait::new(value)));
         self.len += 1;
@@ -45,6 +46,8 @@ impl NullableStackImpl<T, impl TDrop: Drop<T>, impl TCopy: Copy<T>> of StackTrai
 
     fn is_empty(self: @NullableStack<T>) -> bool {
         *self.len == 0
-    }    
+    }
 }
 // ANCHOR_END: implem
+
+
