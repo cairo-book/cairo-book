@@ -15,7 +15,7 @@ But then you realize you can't increase the level at a specific index once it's 
 
 Fortunately, Cairo provides a handy built-in [dictionary type](./ch03-02-dictionaries.md) called `Felt252Dict<T>` that allows us to simulate the behavior of mutable data structures. Let's first explore how to use it to create a dynamic array implementation.
 
-Note: Several concepts used in this chapter are presented in later parts of the book. We recommend you to check out the following chapter first: Structs(ch05-00-using-structs-to-structure-related-data), [Methods](./ch05-03-method-syntax.md), [Generic types](./ch08-00-generic-types-and-traits.md), [Traits](./ch08-02-traits-in-cairo.md)
+Note: Several concepts used in this chapter are presented in later parts of the book. We recommend you to check out the following chapter first: [Structs](ch05-00-using-structs-to-structure-related-data), [Methods](./ch05-03-method-syntax.md), [Generic types](./ch08-00-generic-types-and-traits.md), [Traits](./ch08-02-traits-in-cairo.md)
 
 ## Simulating a dynamic array with dicts
 
