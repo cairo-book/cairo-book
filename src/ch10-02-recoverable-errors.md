@@ -56,12 +56,12 @@ Now, we can use this function elsewhere. For instance:
 fn u128_checked_add(a: u128, b: u128) -> Option<u128> {
     match u128_overflowing_add(a, b) {
         Result::Ok(r) => Option::Some(r),
-        Result::Err(r) => Option::None(()),
+        Result::Err(r) => Option::None,
     }
 }
 ```
 
-Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. It uses the `Result` returned by `u128_overflowing_add` to determine the success or failure of the addition operation. The match expression checks the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it returns `Option::None(())` to indicate that the operation has failed due to overflow. The function does not panic in case of an overflow.
+Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. It uses the `Result` returned by `u128_overflowing_add` to determine the success or failure of the addition operation. The match expression checks the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it returns `Option::None` to indicate that the operation has failed due to overflow. The function does not panic in case of an overflow.
 
 Let's take another example demonstrating the use of `unwrap`.
 First we import the necessary modules:
