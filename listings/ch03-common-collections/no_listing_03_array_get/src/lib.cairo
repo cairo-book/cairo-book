@@ -9,7 +9,7 @@ fn main() -> u128 {
         // Don't worry about * for now, if you are curious see Chapter 4.2 #desnap operator
         // It basically means "transform what get(idx) returned into a real value"
         },
-        Option::None(_) => {
+        Option::None => {
             let mut data = ArrayTrait::new();
             data.append('out of bounds');
             panic(data)

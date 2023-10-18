@@ -24,7 +24,7 @@ In Cairo, the order of the arms must follow the same order as the enum.
 
 The code associated with each arm is an expression, and the resultant value of the expression in the matching arm is the value that gets returned for the entire match expression.
 
-We don’t typically use curly brackets if the match arm code is short, as it is in our example where each arm just returns a value. If you want to run multiple lines of code in a match arm, you must use curly brackets, with a comma following the arm. For example, the following code prints “Lucky penny!” every time the method is called with a `Coin::Penny(())`, but still returns the last value of the block, `1`:
+We don’t typically use curly brackets if the match arm code is short, as it is in our example where each arm just returns a value. If you want to run multiple lines of code in a match arm, you must use curly brackets, with a comma following the arm. For example, the following code prints “Lucky penny!” every time the method is called with a `Coin::Penny`, but still returns the last value of the block, `1`:
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_04_match_arms/src/lib.cairo:here}}
@@ -37,7 +37,7 @@ Another useful feature of match arms is that they can bind to the parts of the v
 As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our `enum` by changing the `Quarter` variant to include a `UsState` value stored inside it, which we’ve done in Listing 6-4.
 
 ```rust,noplayground
-{{#include ../listings/ch06-enums-and-pattern-matching/listing_05_04/src/lib.cairo}}
+{{#include ../listings/ch06-enums-and-pattern-matching/listing_05_04/src/lib.cairo:enum_def}}
 ```
 
 Listing 6-4: A `Coin` enum in which the `Quarter` variant also holds a `UsState` value
@@ -47,16 +47,16 @@ Let’s imagine that a friend is trying to collect all 50 state quarters. While 
 In the match expression for this code, we add a variable called `state` to the pattern that matches values of the variant `Coin::Quarter`. When a `Coin::Quarter` matches, the `state` variable will bind to the value of that quarter’s state. Then we can use `state` in the code for that arm, like so:
 
 ```rust,noplayground
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_05_print_enum/src/lib.cairo:function}}
+{{#include ../listings/ch06-enums-and-pattern-matching/listing_05_04/src/lib.cairo:function}}
 ```
 
 To print the value of a variant of an enum in Cairo, we need to add an implementation for the `print` function for the `debug::PrintTrait`:
 
 ```rust,noplayground
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_05_print_enum/src/lib.cairo:print_impl}}
+{{#include ../listings/ch06-enums-and-pattern-matching/listing_05_04/src/lib.cairo:print_impl}}
 ```
 
-If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska(())))`, `coin` would be `Coin::Quarter(UsState::Alaska())`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for state will be the value `UsState::Alaska()`. We can then use that binding in the `PrintTrait`, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
+If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for state will be the value `UsState::Alaska`. We can then use that binding in the `PrintTrait`, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
 
 ## Matching with Options
 
@@ -78,7 +78,7 @@ Note that your arms must respect the same order as the enum defined in the `Opti
 ```rust,noplayground
 enum Option<T> {
     Some: T,
-    None: (),
+    None,
 }
 ```
 
@@ -90,7 +90,7 @@ Let’s examine the first execution of `plus_one` in more detail. When we call `
 
 Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We have the same variant. The `val` binds to the value contained in `Option::Some`, so `val` takes the value `5`. The code in the match arm is then executed, so we add `1` to the value of `val` and create a new `Option::Some` value with our total `6` inside. Because the first arm matched, no other arms are compared.
 
-Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None(())`. We enter the match and compare to the first arm:
+Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None`. We enter the match and compare to the first arm:
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/listing_05_05/src/lib.cairo:option_some}}
@@ -102,7 +102,7 @@ The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we 
 {{#include ../listings/ch06-enums-and-pattern-matching/listing_05_05/src/lib.cairo:option_none}}
 ```
 
-It matches! There’s no value to add to, so the program stops and returns the `Option::None(())` value on the right side of `=>`.
+It matches! There’s no value to add to, so the program stops and returns the `Option::None` value on the right side of `=>`.
 
 Combining `match` and enums is useful in many situations. You’ll see this pattern a lot in Cairo code: `match` against an enum, bind a variable to the data inside, and then execute code based on it. It’s a bit tricky at first, but once you get used to it, you’ll wish you had it in all languages. It’s consistently a user favorite.
 
