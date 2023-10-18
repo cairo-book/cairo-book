@@ -7,7 +7,7 @@ fn plus_one(x: Option<u8>) -> Option<u8> {
         Option::Some(val) => Option::Some(val + 1),
         //ANCHOR_END: option_some
         // ANCHOR: option_none
-        Option::None(_) => Option::None,
+        Option::None => Option::None,
     //ANCHOR_END: option_none
     }
 }
