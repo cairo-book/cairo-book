@@ -22,7 +22,7 @@ fn value_in_cents(coin: Coin) -> felt252 {
         Coin::Penny(_) => 1,
         Coin::Nickel(_) => 5,
         Coin::Dime(_) => 10,
-        Coin::Quarter(state) => {
+        Coin::Quarter((state)) => {
             state.print();
             25
         },
