@@ -1,7 +1,7 @@
 fn parse_u8(s: felt252) -> Result<u8, felt252> {
     match s.try_into() {
         Option::Some(value) => Result::Ok(value),
-        Option::None(_) => Result::Err('Invalid integer'),
+        Option::None => Result::Err('Invalid integer'),
     }
 }
 
