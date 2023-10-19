@@ -1,11 +1,11 @@
 ## Storage Optimization with `StorePacking`
 
-Bit-packing is a simple concept: Use as few bit as possible to store a piece of data. When done well, it can significantly reduce the size of the data you need to store. This is especially important in smart contracts, where storage is expensive.
+Bit-packing is a simple concept: Use as few bits as possible to store a piece of data. When done well, it can significantly reduce the size of the data you need to store. This is especially important in smart contracts, where storage is expensive.
 
-When writing Cairo smart contracts, it is important to optimize storage usage to reduce gas costs. Indeed, most of the cost associated to a transaction is related to storage updates; and each storage slot costs gas to write to.
-This means that by packing multiple values into fewer slots, you can decrease the gas cost incurred to the users of your smart contract.
+When writing Cairo smart contracts, it is important to optimize storage usage to reduce gas costs. Indeed, most of the cost associated with a transaction is related to storage updates; and each storage slot costs gas to write to.
+This means that by packing multiple values into fewer slots, you can decrease the gas cost incurred by the users of your smart contract.
 
-Cairo provides the `StorePacking` trait to enable packing struct fields into a fewer number of storage slots. For example, consider a `Sizes` struct with 3 fields of different types. The total size is 8 + 32 + 64 = 104 bits. This is less than the 128 bits of a single `u128`. This means we can pack all 3 fields into a single `u128` variable. Since a storage slot can hold up to 251 bits, our packed value will take only one storage slot instead of 3.
+Cairo provides the `StorePacking` trait to enable packing struct fields into fewer storage slots. For example, consider a `Sizes` struct with 3 fields of different types. The total size is 8 + 32 + 64 = 104 bits. This is less than the 128 bits of a single `u128`. This means we can pack all 3 fields into a single `u128` variable. Since a storage slot can hold up to 251 bits, our packed value will take only one storage slot instead of 3.
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_13_storage_packing/src/lib.cairo:here}}
@@ -32,4 +32,4 @@ When unpacking:
 This technique can be used for any group of fields that fit within the bit size of the packed storage type. For example, if you have a struct with multiple fields whose bit sizes add up to 256 bits, you can pack them into a single `u256` variable. If the bit sizes add up to 512 bits, you can pack them into a single `u512` variable, and so on. You can define your own structs and logic to pack and unpack them.
 
 The rest of the work is done magically by the compiler - if a type implements the `StorePacking` trait, then the compiler will know it can use the `StoreUsingPacking` implementation of the `Store` trait in order to pack before writing and unpack after reading from storage.
-One important details, however, is that the type that `StorePacking::pack` spits out also has to implement `Store` for `StoreUsingPacking` to work. Most of the time, we will want to pack into a felt252 or u256 - but if you want to pack into a type of your own, make sure that this one implements the `Store` trait.
+One important detail, however, is that the type that `StorePacking::pack` spits out also has to implement `Store` for `StoreUsingPacking` to work. Most of the time, we will want to pack into a felt252 or u256 - but if you want to pack into a type of your own, make sure that this one implements the `Store` trait.
