@@ -5,7 +5,7 @@ Bit-packing is a simple concept: Use as few bits as possible to store a piece of
 When writing Cairo smart contracts, it is important to optimize storage usage to reduce gas costs. Indeed, most of the cost associated with a transaction is related to storage updates; and each storage slot costs gas to write to.
 This means that by packing multiple values into fewer slots, you can decrease the gas cost incurred by the users of your smart contract.
 
-Cairo provides the `StorePacking` trait to enable packing struct fields into  fewer storage slots. For example, consider a `Sizes` struct with 3 fields of different types. The total size is 8 + 32 + 64 = 104 bits. This is less than the 128 bits of a single `u128`. This means we can pack all 3 fields into a single `u128` variable. Since a storage slot can hold up to 251 bits, our packed value will take only one storage slot instead of 3.
+Cairo provides the `StorePacking` trait to enable packing struct fields into fewer storage slots. For example, consider a `Sizes` struct with 3 fields of different types. The total size is 8 + 32 + 64 = 104 bits. This is less than the 128 bits of a single `u128`. This means we can pack all 3 fields into a single `u128` variable. Since a storage slot can hold up to 251 bits, our packed value will take only one storage slot instead of 3.
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_13_storage_packing/src/lib.cairo:here}}
