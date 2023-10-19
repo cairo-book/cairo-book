@@ -47,16 +47,24 @@ mod tests {
         let result_i = find_value_iterative(@my_array, value_to_find);
 
         match result {
-            Option::Some(index) => { if index == 1 {
-                'it worked'.print();
-            } },
-            Option::None => { 'not found'.print(); },
+            enums::Option::Some(index) => {
+                if index == 1 {
+                    'it worked'.print();
+                }
+            },
+            enums::Option::None => {
+                'not found'.print();
+            },
         }
         match result_i {
-            Option::Some(index) => { if index == 1 {
-                'it worked'.print();
-            } },
-            Option::None => { 'not found'.print(); },
+            enums::Option::Some(index) => {
+                if index == 1 {
+                    'it worked'.print();
+                }
+            },
+            enums::Option::None => {
+                'not found'.print();
+            },
         }
     }
 }
