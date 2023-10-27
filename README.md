@@ -53,7 +53,7 @@ All the Markdown files **MUST** be edited in english. To work locally in english
 
 ### Work locally (translations)
 
-This book is targetting international audience, and aims at being gradually translated in several languages.
+This book is targeting international audience, and aims at being gradually translated in several languages.
 
 **All files in the `src` directory MUST be written in english**. This ensures that all the translation files can be
 auto-generated and updated by translators.
