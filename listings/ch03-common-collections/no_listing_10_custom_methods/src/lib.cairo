@@ -38,7 +38,7 @@ fn custom_insert<
     let (entry, _prev_value) = dict.entry(key);
 
     // Insert `entry` back in the dictionary with the updated value,
-    // and recieve ownership of the dictionary
+    // and receive ownership of the dictionary
     dict = entry.finalize(value);
 }
 // ANCHOR_END: custom_insert

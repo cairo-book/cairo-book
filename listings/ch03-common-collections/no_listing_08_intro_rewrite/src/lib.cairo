@@ -3,7 +3,7 @@ fn main() {
 
     // Insert Alex with 100 balance
     balances.insert('Alex', 100);
-    // Check that Alex has indeed 100 asociated with him
+    // Check that Alex has indeed 100 associated with him
     let alex_balance = balances.get('Alex');
     assert(alex_balance == 100, 'Alex balance is not 100');
 
