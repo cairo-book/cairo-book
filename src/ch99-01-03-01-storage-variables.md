@@ -30,10 +30,29 @@ The base storage address for structs remains `sn_keccak(variable_name)`, and the
 
 Subsequent fields are stored in addresses contiguous to the first elements at addresses `base_address + i`.
 
-## Writing to stored structs
+## Writing custom storage structs to storage
 
 To write custom storage structs to storage you have to first create the struct variant as a member of the default storage struct. The type of the variant is
 the custom storage struct.
+
+```rust, noplayground
+    #[storage]
+    struct Storage {
+        id: u8,
+        names: LegacyMap::<ContractAddress, felt252>,
+        name: Person,
+        address: Person,
+    }
+
+```
+
+The value to be written to storage is passed into the function as an argument. The type of the argument is the custom storage struct.
+
+```rust, noplayground
+    fn add_person(ref self: ContractState, name: Person) {
+        self.name.write(name);
+    }
+```
 
 ### Storing mappings
 
