@@ -30,6 +30,11 @@ The base storage address for structs remains `sn_keccak(variable_name)`, and the
 
 Subsequent fields are stored in addresses contiguous to the first elements at addresses `base_address + i`.
 
+## Writing to stored structs
+
+To write custom storage structs to storage you have to first create the struct variant as a member of the default storage struct. The type of the variant is
+the custom storage struct.
+
 ### Storing mappings
 
 Mappings are a key-value data structure that you can use to store data within a smart contract. They are essentially hash tables that allow you to associate a unique key with a corresponding value. Mappings are also useful to store sets of data, as it's impossible to store arrays in storage.
