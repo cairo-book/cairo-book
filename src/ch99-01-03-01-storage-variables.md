@@ -31,10 +31,9 @@ The base storage address for structs remains `sn_keccak(variable_name)`, and the
 Subsequent fields are stored in addresses contiguous to the first elements at addresses `base_address + i`.
 
 
-## Writing custom structs to storage
+## Writing user defined structs to storage
 
-To write custom struct to storage you have to first add the struct variant as a member of the default storage struct. The type of the variant is
-the custom struct.
+To write user defined struct to storage you have to first add the struct variables to the default storage struct. The variable type is the struct identifier.
 
 ```rust, noplayground
     #[storage]
@@ -47,7 +46,7 @@ the custom struct.
 
 ```
 
-The value to be written to storage is passed into the function as an argument. The type of the argument is the custom struct.
+The value to be written to storage is passed into the function as argument. The argument type is also the struct identifier.
 
 ```rust, noplayground
     fn add_person(ref self: ContractState, name: Person) {
@@ -87,6 +86,17 @@ To read the value of the storage variable `names`, we call the `read` function o
 ```
 
 <span class="caption">Listing 99-3: Calling the `read` function on the `names` variable</span>
+
+
+This is the same for reading user defined structs. You only need to read the struct variable added to the default storage struct.
+
+```rust, noplayground
+    fn get_person(self: @ContractState) -> Person {
+        self.name.read()
+    }
+```
+
+<span class="caption">Listing 99-3b: Calling the `read` function on the `name` variable for user defined struct</span>
 
 > Note: When the storage variable does not store a mapping, its value is accessed without passing any parameters to the read method
 
