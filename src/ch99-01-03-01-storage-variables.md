@@ -87,17 +87,6 @@ To read the value of the storage variable `names`, we call the `read` function o
 
 <span class="caption">Listing 99-3: Calling the `read` function on the `names` variable</span>
 
-
-This is the same for reading user defined structs. You only need to read the struct variable added to the default storage struct.
-
-```rust, noplayground
-    fn get_person(self: @ContractState) -> Person {
-        self.name.read()
-    }
-```
-
-<span class="caption">Listing 99-3b: Calling the `read` function on the `name` variable for user defined struct</span>
-
 > Note: When the storage variable does not store a mapping, its value is accessed without passing any parameters to the read method
 
 ### Writing to Storage
