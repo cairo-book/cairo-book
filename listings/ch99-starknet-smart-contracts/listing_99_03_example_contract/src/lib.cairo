@@ -8,7 +8,7 @@ trait INameRegistry<TContractState> {
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
 }
 
-
+//ANCHOR: storage
 #[starknet::contract]
 mod NameRegistry {
     use starknet::{ContractAddress, get_caller_address};
@@ -19,6 +19,7 @@ mod NameRegistry {
         total_names: u128,
         owner: Person
     }
+    //ANCHOR_END: storage
 
     //ANCHOR: event
     #[event]

@@ -33,25 +33,16 @@ Subsequent fields are stored in addresses contiguous to the first elements at ad
 
 ## Writing user defined structs to storage
 
-To write user defined struct to storage you have to first add the struct variables to the default storage struct. The variable type is the struct identifier.
+To write user defined struct to storage you have to first add the struct variables to the default Storage struct. The variable type is the user defined struct identifier.
 
 ```rust, noplayground
-    #[storage]
-    struct Storage {
-        id: u8,
-        names: LegacyMap::<ContractAddress, felt252>,
-        name: Person,
-        address: Person,
-    }
-
+    {{#include ../listings/ch99-01-03-00-a-deeper-dive-into-contracts/listing_99_03_example_contract/src/lib.cairo:storage}}
 ```
 
-The value to be written to storage is passed into the function as argument. The argument type is also the struct identifier.
+The value to be written to storage is passed into the function as argument. The argument type is also the user defined struct identifier.
 
 ```rust, noplayground
-    fn add_person(ref self: ContractState, name: Person) {
-        self.name.write(name);
-    }
+    {{#include ../listings/ch99-01-03-00-a-deeper-dive-into-contracts/listing_99_03_example_contract/src/lib.cairo:constructor}}
 ```
 
 ### Storing mappings
