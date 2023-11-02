@@ -8,11 +8,11 @@ trait INameRegistry<TContractState> {
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
 }
 
-//ANCHOR: storage
 #[starknet::contract]
 mod NameRegistry {
     use starknet::{ContractAddress, get_caller_address};
 
+    //ANCHOR: storage
     #[storage]
     struct Storage {
         names: LegacyMap::<ContractAddress, felt252>,
