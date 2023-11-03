@@ -1,6 +1,6 @@
 # Macros
 
-The Cairo language has some plugins that allows developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code. In Cairo, there are only two `macros`: `array![]` and `consteval_int!()`.
+The Cairo language has some plugins that allows developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code. In Cairo, are few `macros` which are : `array![]`, `consteval_int!()` and `selector!()`.
 
 ### Let's start by `array!`
 
@@ -30,3 +30,19 @@ const a: felt252 = consteval_int!(2 * 2 * 2);
 ```
 
 This will be interprated as `const a: felt252 = 8;` by the compiler.
+
+### `selector!`
+
+This `selector!` is used for computing the starknet keccak for a given value, and can be widely used for computing the function selector of the given function name.
+
+Here is an example of `selector!` :
+
+```rust
+const fn_selector : felt252 = selector!("transfer_from");
+```
+
+This will give the value of the transfer_from's starknet keccak value (function selector) which is
+
+```rust
+fn_selector = 0x03704ffe8fba161be0e994951751a5033b1462b918ff785c0a636be718dfdb68
+```
