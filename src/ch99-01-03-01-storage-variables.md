@@ -31,17 +31,16 @@ The base storage address for structs remains `sn_keccak(variable_name)`, and the
 Subsequent fields are stored in addresses contiguous to the first elements at addresses `base_address + i`.
 
 
-To write user defined structs to storage you have to first add the struct variables to the default Storage struct. The variable type is the user defined struct identifier. 
-**This also applies to other data types.**
+To store values annotated with the `#[derive(starknet::Store)]` attribute, the variants must be added to the `Storage` struct. For instance, `owner` is added to `Storage` so we can write the `Person` struct to storage.
 
 ```rust, noplayground
     {{#include ../listings/ch99-01-03-00-a-deeper-dive-into-contracts/listing_99_03_example_contract/src/lib.cairo:storage}}
 ```
 
-The value to be written to storage is passed into the function as argument. The argument type is also the user defined identifier.
+The value to be stored is passed into a function as argument:
 
 ```rust, noplayground
-    {{#include ../listings/ch99-01-03-00-a-deeper-dive-into-contracts/listing_99_03_example_contract/src/lib.cairo:constructor}}
+    {{#include ../listings/ch99-01-03-00-a-deeper-dive-into-contracts/listing_99_03_example_contract/src/lib.cairo:arg}}
 ```
 
 ### Storing mappings

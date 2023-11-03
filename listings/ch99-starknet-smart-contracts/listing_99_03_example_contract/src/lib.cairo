@@ -46,7 +46,9 @@ mod NameRegistry {
 
     //ANCHOR: constructor
     #[constructor]
+    //ANCHOR: arg
     fn constructor(ref self: ContractState, owner: Person) {
+        //ANCHOR_END: arg
         self.names.write(owner.address, owner.name);
         self.total_names.write(1);
         self.owner.write(owner);
