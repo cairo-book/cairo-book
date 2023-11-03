@@ -4,7 +4,6 @@ trait ITokenWrapper<TContractState> {
     fn transfer_token(
         ref self: TContractState,
         address: starknet::ContractAddress,
-        selector: felt252,
         sender: ContractAddress,
         recipient: ContractAddress,
         amount: u256
@@ -25,7 +24,6 @@ mod TokenWrapper {
         fn transfer_token(
             ref self: ContractState,
             address: ContractAddress,
-            selector: felt252,
             sender: ContractAddress,
             recipient: ContractAddress,
             amount: u256
@@ -35,7 +33,7 @@ mod TokenWrapper {
             Serde::serialize(@recipient, ref Calldata);
             Serde::serialize(@amount, ref Calldata);
             let mut res = starknet::call_contract_syscall(
-                address, selector!("selector"), Calldata.span()
+                address, selector!("transferFrom"), Calldata.span()
             )
                 .unwrap_syscall();
             Serde::<bool>::deserialize(ref res).unwrap()

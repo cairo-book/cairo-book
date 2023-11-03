@@ -84,4 +84,4 @@ Using these syscalls can be handy for customized error handling or to get more c
 
 <span class="caption">Listing 99-9: A sample contract using syscalls</span>
 
-To use this syscall, we passed in the contract address, the function name that we will be calling, and the calldata (function arguments), which then inside the function gets serialized and is passed on to the array which is spanned and passed as the calldata. At the end, we are returned a serialized value which we'll need to deserialize ourselves!
+To use this syscall, we passed in the contract address, the calldata (function arguments), which then inside the function gets serialized and is passed on to the array which is spanned and passed as the calldata. The function name is already passed in which is transferFrom which we will be calling, At the end, we are returned a serialized value which we'll need to deserialize ourselves!
