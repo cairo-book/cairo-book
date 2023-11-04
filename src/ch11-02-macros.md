@@ -1,6 +1,6 @@
 # Macros
 
-The Cairo language has some plugins that allows developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code. In Cairo, are few `macros` which are : `array![]`, `consteval_int!()` and `selector!()`.
+The Cairo language has some plugins that allows developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code. In Cairo, there are a few `macros` which are : `array![]`, `consteval_int!()` and `selector!()`.
 
 ### Let's start by `array!`
 
