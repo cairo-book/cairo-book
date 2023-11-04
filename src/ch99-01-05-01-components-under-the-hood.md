@@ -1,6 +1,6 @@
 # Components under the hood
 
-Components provide powerful modularity to StarkNet contracts. But how does this
+Components provide powerful modularity to Starknet contracts. But how does this
 magic actually happen behind the scenes?
 
 This chapter will dive deep into the compiler internals to explain the

@@ -6,6 +6,7 @@ use starknet::ContractAddress;
 trait INameRegistry<TContractState> {
     fn store_name(ref self: TContractState, name: felt252);
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
+    fn get_owner(self: @TContractState) -> NameRegistry::Person;
 }
 
 
@@ -13,12 +14,14 @@ trait INameRegistry<TContractState> {
 mod NameRegistry {
     use starknet::{ContractAddress, get_caller_address};
 
+    //ANCHOR: storage
     #[storage]
     struct Storage {
         names: LegacyMap::<ContractAddress, felt252>,
         total_names: u128,
         owner: Person
     }
+    //ANCHOR_END: storage
 
     //ANCHOR: event
     #[event]
@@ -48,7 +51,9 @@ mod NameRegistry {
     fn constructor(ref self: ContractState, owner: Person) {
         self.names.write(owner.address, owner.name);
         self.total_names.write(1);
+        //ANCHOR: write_owner
         self.owner.write(owner);
+    //ANCHOR_END: write_owner
     }
     //ANCHOR_END: constructor
 
@@ -69,7 +74,13 @@ mod NameRegistry {
             //ANCHOR_END: read
             name
         }
-    //ANCHOR_END: view
+        //ANCHOR_END: view
+        fn get_owner(self: @ContractState) -> Person {
+            //ANCHOR: read_owner
+            let owner = self.owner.read();
+            //ANCHOR_END: read_owner
+            owner
+        }
     }
     //ANCHOR_END: impl_public
 
@@ -91,8 +102,14 @@ mod NameRegistry {
     // ANCHOR_END: state_internal
 
     // ANCHOR: stateless_internal
-    fn _get_contract_name() -> felt252 {
+    fn get_contract_name() -> felt252 {
         'Name Registry'
+    }
+
+    fn get_owner_storage_address(self: @ContractState) -> starknet::StorageBaseAddress {
+        //ANCHOR: owner_address
+        self.owner.address()
+    //ANCHOR_END: owner_address
     }
 // ANCHOR_END: stateless_internal
 }

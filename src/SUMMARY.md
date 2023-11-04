@@ -92,7 +92,7 @@
   - [A simple contract](./ch99-01-02-a-simple-contract.md)
   - [A deeper dive into contracts](./ch99-01-03-00-a-deeper-dive-into-contracts.md)
 
-    - [Storage Variables](./ch99-01-03-01-storage-variables.md)
+    - [Contract Storage](./ch99-01-03-01-contract-storage.md)
     - [Contract Functions](./ch99-01-03-02-contract-functions.md)
     - [Contract Events](./ch99-01-03-03-contract-events.md)
     - [Reducing boilerplate](./ch99-01-03-04-reducing-boilerplate.md)
