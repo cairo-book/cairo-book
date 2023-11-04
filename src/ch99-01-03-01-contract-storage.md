@@ -86,14 +86,27 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 | name    | owner.address()    |
 | address | owner.address() +1 |
 
-## Storing mappings
+## Storage mappings
 
-Mappings are a key-value data structure that you can use to store data within a smart contract. They are essentially hash tables that allow you to associate a unique key with a corresponding value. Mappings are also useful to store sets of data, as it's impossible to store arrays in storage.
+Storage mappings are similar to hash tables in that they allow mapping keys to values. However, unlike a typical hash table, the key data itself is not stored - only its hash is used to look up the associated value value in the contract's storage.
+Mappings do not have a concept of length or whether a key/value pair is set. The only way to remove a mapping is to set its value to the default zero value.
 
-A mapping is a variable of type `LegacyMap`, in which the key and value types are specified within angular brackets `<>`.
-It is important to note that the `LegacyMap` type can **only** be used inside the `Storage` struct, and cannot be used as a local variable.
+Mappings are only used to compute the location of data in the storage of a
+contract given certain keys. They are thus **only allowed as storage variables**.
+They cannot be used as parameters or return parameters of contract functions,
+and cannot be used as types inside structs.
 
-You can also create more complex mappings than that; you can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` and `spender` to the `allowance` using tuples:
+<div align="center">
+    <img src="mappings.png" alt="mappings" width="500px"/>
+<div align="center">
+    </div>
+    <span class="caption">Mapping keys to storage values</span>
+</div>
+
+To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
+specifying the key and value types.
+
+You can also create more complex mappings with multiple keys. You can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps an `owner` and an allowed `spender` to its `allowance` amound using multiple keys passed inside a tuple:
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/no_listing_01_storage_mapping/src/lib.cairo:here}}
@@ -106,4 +119,4 @@ If the key of a mapping is a struct, each element of the struct constitutes a ke
 
 Similarly, in the case of a nested mapping such as `LegacyMap((ContractAddress, ContractAddress), u8)`, the address will be computed in the same way: `h(h(sn_keccak(variable_name),k_1),k_2)`.
 
-You can learn more about the contract storage layout in the [Starknet Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)
+For more details about the contract storage layout in the [Starknet Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)
