@@ -3,7 +3,7 @@ use starknet::ContractAddress;
 trait ITokenWrapper<TContractState> {
     fn transfer_token(
         ref self: TContractState,
-        address: starknet::ContractAddress,
+        address: ContractAddress,
         sender: ContractAddress,
         recipient: ContractAddress,
         amount: u256
@@ -28,12 +28,12 @@ mod TokenWrapper {
             recipient: ContractAddress,
             amount: u256
         ) -> bool {
-            let mut Calldata: Array<felt252> = ArrayTrait::new();
-            Serde::serialize(@sender, ref Calldata);
-            Serde::serialize(@recipient, ref Calldata);
-            Serde::serialize(@amount, ref Calldata);
+            let mut call_data: Array<felt252> = ArrayTrait::new();
+            Serde::serialize(@sender, ref call_data);
+            Serde::serialize(@recipient, ref call_data);
+            Serde::serialize(@amount, ref call_data);
             let mut res = starknet::call_contract_syscall(
-                address, selector!("transferFrom"), Calldata.span()
+                address, selector!("transferFrom"), call_data.span()
             )
                 .unwrap_syscall();
             Serde::<bool>::deserialize(ref res).unwrap()
