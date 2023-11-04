@@ -2,7 +2,7 @@
 
 All through the previous sections, you've mostly written programs with a `main` entrypoint. In the coming sections, you will learn to write and deploy Starknet contracts.
 
-One of the applications of the Cairo language is to write smart contracts for the Starknet network. Starknet is a permissionless network that leverages zk-STARKs technology for scalability. As a Layer-2 scalability solution for Ethereum, Starknet's goal is to offer fast, secure, and low-cost transactions. It functions as a Validity Rollup (commonly known as a zero-knowledge Rollup) and is built on top of the Cairo language and the StarkNet VM.
+One of the applications of the Cairo language is to write smart contracts for the Starknet network. Starknet is a permissionless network that leverages zk-STARKs technology for scalability. As a Layer-2 scalability solution for Ethereum, Starknet's goal is to offer fast, secure, and low-cost transactions. It functions as a Validity Rollup (commonly known as a zero-knowledge Rollup) and is built on top of the Cairo language and the Starknet VM.
 
 Starknet contracts, in simple words, are programs that can run on the Starknet VM. Since they run on the VM, they have access to Starknet’s persistent state, can alter or modify variables in Starknet’s states, communicate with other contracts, and interact seamlessly with the underlying L1.
 

@@ -13851,8 +13851,8 @@ msgstr ""
 "6. `#[l1_handler]`: Este atributo se utiliza para marcar funciones que pueden recibir mensajes de los L1."
 
 #: src/ch99-01-02-writing-starknet-contracts.md:75
-msgid "## Storage Variables"
-msgstr "##  Storage VariablesVariables de Almacenamiento"
+msgid "## Contract Storage"
+msgstr "##  Contract StorageVariables de Almacenamiento"
 
 #: src/ch99-01-02-writing-starknet-contracts.md:77
 msgid ""
