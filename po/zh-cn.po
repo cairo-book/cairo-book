@@ -201,7 +201,7 @@ msgid "A deeper dive into contracts"
 msgstr "深入了解合约"
 
 #: src/SUMMARY.md:92
-msgid "Storage Variables"
+msgid "Contract Storage"
 msgstr "存储变量"
 
 #: src/SUMMARY.md:93
@@ -14479,7 +14479,7 @@ msgid ""
 "        }\n"
 "    }\n"
 "\n"
-"    fn _get_contract_name() -> felt252 {\n"
+"    fn get_contract_name() -> felt252 {\n"
 "        'Name Registry'\n"
 "    }\n"
 "}\n"
@@ -14557,7 +14557,7 @@ msgstr ""
 "        }\n"
 "    }\n"
 "\n"
-"    fn _get_contract_name() -> felt252 {\n"
+"    fn get_contract_name() -> felt252 {\n"
 "        'Name Registry'\n"
 "    }\n"
 "}\n"
@@ -14567,21 +14567,21 @@ msgstr ""
 msgid "<span class=\"caption\">Listing 99-1bis: Our reference contract for this chapter</span>"
 msgstr "<span class=\"caption\">示例  99-1bis：本章的参考合约</span>"
 
-#: src/ch99-01-03-01-storage-variables.md:1
-msgid "## Storage Variables"
+#: src/ch99-01-03-01-contract-storage.md:1
+msgid "## Contract Storage"
 msgstr "## 存储变量"
 
-#: src/ch99-01-03-01-storage-variables.md:3
+#: src/ch99-01-03-01-contract-storage.md:3
 msgid ""
 "As stated previously, storage variables allow you to store data that will be stored in the contract's storage that is itself stored on the blockchain. These data are persistent and "
 "can be accessed and modified anytime once the contract is deployed."
 msgstr "如前所述，存储变量允许您存储数据，这些数据将存储在合约的存储空间中，而合约本身存储在区块链上。这些数据是持久的，一旦合约部署完成，就可以随时访问和修改。"
 
-#: src/ch99-01-03-01-storage-variables.md:5
+#: src/ch99-01-03-01-contract-storage.md:5
 msgid "Storage variables in Starknet contracts are stored in a special struct called `Storage`:"
 msgstr "Starknet合同中的存储变量被存储在一个特殊的结构中，称为`Storage`："
 
-#: src/ch99-01-03-01-storage-variables.md:7
+#: src/ch99-01-03-01-contract-storage.md:7
 msgid ""
 "```rust, noplayground\n"
 "# #[starknet::contract]\n"
@@ -14607,11 +14607,11 @@ msgstr ""
 "# }\n"
 "```"
 
-#: src/ch99-01-03-01-storage-variables.md:19
+#: src/ch99-01-03-01-contract-storage.md:19
 msgid "<span class=\"caption\">Listing 99-2: A Storage Struct</span>"
 msgstr "<span class=\"caption\">示例99-2：存储用结构体</span>"
 
-#: src/ch99-01-03-01-storage-variables.md:21
+#: src/ch99-01-03-01-contract-storage.md:21
 msgid ""
 "The storage struct is a [struct](./ch04-00-using-structs-to-structure-related-data.md) like any other,\n"
 "except that it **must** be annotated with `#[storage]` allowing you to store mappings using the `LegacyMap` type."
@@ -14619,18 +14619,18 @@ msgstr ""
 "存储结构是一个[结构体](./ch04-00-using-structs-to-structure-related-data.md)，与其他结构体基本一样、\n"
 "除了它 **必须** 被标注为`#[storage]`，以允许你使用`LegacyMap`类型来存储映射。"
 
-#: src/ch99-01-03-01-storage-variables.md:24
+#: src/ch99-01-03-01-contract-storage.md:24
 msgid "### Storing Mappings"
 msgstr "### 存储映射"
 
-#: src/ch99-01-03-01-storage-variables.md:26
+#: src/ch99-01-03-01-contract-storage.md:26
 msgid ""
 "Mappings are a key-value data structure that you can use to store data within a smart contract. They are essentially hash tables that allow you to associate a unique key with a "
 "corresponding value. Mappings are also useful to store sets of data, as it's impossible to store arrays in storage."
 msgstr ""
 "映射是一种键值数据结构，你可以用它来存储智能合约中的数据。它们本质上是哈希表，允许你将一个唯一的键与一个相应的值联系起来。映射对于存储数据集也很有用，因为在存储中不可能存储数组。"
 
-#: src/ch99-01-03-01-storage-variables.md:28
+#: src/ch99-01-03-01-contract-storage.md:28
 msgid ""
 "A mapping is a variable of type `LegacyMap`, in which the key and value types are specified within angular brackets `<>`.\n"
 "It is important to note that the `LegacyMap` type can only be used inside the `Storage` struct, and can't be used to define mappings in user-defined structs."
@@ -14638,13 +14638,13 @@ msgstr ""
 "映射是一个类型为 `LegacyMap` 的变量，其中键和值的类型在角括号 `<>` 中指定。\n"
 "需要注意的是，`LegacyMap`类型只能在 `LegacyMap`结构内部使用，不能用于在用户定义的结构中定义映射。"
 
-#: src/ch99-01-03-01-storage-variables.md:31
+#: src/ch99-01-03-01-contract-storage.md:31
 msgid ""
 "You can also create more complex mappings than that; you can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps the `owner` "
 "and `spender` to the `allowance` using tuples:"
 msgstr "您还可以创建比这更复杂的映射；您可以在示例 99-2bis中找到一个类似于 ERC20 标准中常见的 `allowances` 存储变量，它使用元组将 `owner` 和 `spender` 映射到 `allowance` 中："
 
-#: src/ch99-01-03-01-storage-variables.md:33
+#: src/ch99-01-03-01-contract-storage.md:33
 msgid ""
 "```rust,noplayground\n"
 "    #[storage]\n"
@@ -14660,11 +14660,11 @@ msgstr ""
 "    }\n"
 "```"
 
-#: src/ch99-01-03-01-storage-variables.md:40
+#: src/ch99-01-03-01-contract-storage.md:40
 msgid "<span class=\"caption\">Listing 99-2bis: Storing mappings</span>"
 msgstr "<span class=\"caption\">示例99-2bis：存储映射</span>"
 
-#: src/ch99-01-03-01-storage-variables.md:42
+#: src/ch99-01-03-01-contract-storage.md:42
 msgid ""
 "In mappings, the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ\n"
 "is the Pedersen hash and the final value is taken `mod2251−256`. You can learn more about the contract storage layout in the [Starknet Documentation](https://docs.starknet.io/"
@@ -14674,11 +14674,11 @@ msgstr ""
 "是Pedersen哈希值，最终值取为 \"mod2251-256\"。你可以在[Starknet文档](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)中"
 "了解更多关于合约存储布局的信息。"
 
-#: src/ch99-01-03-01-storage-variables.md:45
+#: src/ch99-01-03-01-contract-storage.md:45
 msgid "### Storing custom structs"
 msgstr "### 存储自定义结构体"
 
-#: src/ch99-01-03-01-storage-variables.md:47
+#: src/ch99-01-03-01-contract-storage.md:47
 msgid ""
 "The compiler knows how to store basic data types, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `ContractAddress`, etc. But what if you want to store a custom "
 "struct in storage? In that case, you have to explicitly tell the compiler how to store your struct in storage.\n"
@@ -14689,7 +14689,7 @@ msgstr ""
 "器如何在存储空间中存储您的结构。\n"
 "在我们的示例中，我们希望将`Person`结构体存储在存储空间中，因此我们必须在结构体定义中添加`starknet::Store`trait的派生属性，告诉编译器如何将其存储在存储空间中。"
 
-#: src/ch99-01-03-01-storage-variables.md:50
+#: src/ch99-01-03-01-contract-storage.md:50
 msgid ""
 "```rust, noplayground\n"
 "    #[derive(Copy, Drop, Serde, starknet::Store)]\n"
@@ -14707,15 +14707,15 @@ msgstr ""
 "    }\n"
 "```"
 
-#: src/ch99-01-03-01-storage-variables.md:58
+#: src/ch99-01-03-01-contract-storage.md:58
 msgid "### Reading from Storage"
 msgstr "### 从存储中读取"
 
-#: src/ch99-01-03-01-storage-variables.md:60
+#: src/ch99-01-03-01-contract-storage.md:60
 msgid "To read the value of the storage variable `names`, we call the `read` function on the `names` storage variable, passing in the key `address` as a parameter."
 msgstr "要读取存储变量 `names` 的值，我们需要调用存储变量 `names` 的 `read` 函数，并将键值 `address` 作为参数传入。"
 
-#: src/ch99-01-03-01-storage-variables.md:62
+#: src/ch99-01-03-01-contract-storage.md:62
 msgid ""
 "```rust, noplayground\n"
 "            let name = self.names.read(address);\n"
@@ -14725,23 +14725,23 @@ msgstr ""
 "            let name = self.names.read(address);\n"
 "```"
 
-#: src/ch99-01-03-01-storage-variables.md:66
+#: src/ch99-01-03-01-contract-storage.md:66
 msgid "<span class=\"caption\">Listing 99-3: Calling the `read` function on the `names` variable</span>"
 msgstr "<span class=\"caption\">示例99-3：在`names`变量上调用`read`函数</span>"
 
-#: src/ch99-01-03-01-storage-variables.md:68
+#: src/ch99-01-03-01-contract-storage.md:68
 msgid "> Note: When the storage variable does not store a mapping, its value is accessed without passing any parameters to the read method"
 msgstr "> 注意：当存储变量不存储映射时，使用读取方法访问其值不需要传递任何参数"
 
-#: src/ch99-01-03-01-storage-variables.md:70
+#: src/ch99-01-03-01-contract-storage.md:70
 msgid "### Writing to Storage"
 msgstr "### 写入存储"
 
-#: src/ch99-01-03-01-storage-variables.md:72
+#: src/ch99-01-03-01-contract-storage.md:72
 msgid "To write a value to the storage variable `names`, we call the `write` function on the `names` storage variable, passing in the key and values as arguments."
 msgstr "为了给存储变量`names`写一个值，我们在`names`存储变量上调用`write`函数，将键和值作为参数传入。"
 
-#: src/ch99-01-03-01-storage-variables.md:74
+#: src/ch99-01-03-01-contract-storage.md:74
 msgid ""
 "```rust, noplayground\n"
 "            self.names.write(user, name);\n"
@@ -14751,7 +14751,7 @@ msgstr ""
 "            self.names.write(user, name);\n"
 "```"
 
-#: src/ch99-01-03-01-storage-variables.md:78
+#: src/ch99-01-03-01-contract-storage.md:78
 msgid "<span class=\"caption\">Listing 99-4: Writing to the `names` variable</span>"
 msgstr "<span class=\"caption\">示例99-4：向 \"names \"变量写入内容</span>"
 
@@ -14970,13 +14970,13 @@ msgstr ""
 #: src/ch99-01-03-02-contract-functions.md:90
 msgid ""
 "```rust,noplayground\n"
-"    fn _get_contract_name() -> felt252 {\n"
+"    fn get_contract_name() -> felt252 {\n"
 "        'Name Registry'\n"
 "    }\n"
 "```"
 msgstr ""
 "```rust,noplayground\n"
-"    fn _get_contract_name() -> felt252 {\n"
+"    fn get_contract_name() -> felt252 {\n"
 "        'Name Registry'\n"
 "    }\n"
 "```"
