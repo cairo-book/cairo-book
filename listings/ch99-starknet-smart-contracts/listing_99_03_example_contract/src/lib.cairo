@@ -78,7 +78,8 @@ mod NameRegistry {
         fn get_owner(self: @ContractState) -> Person {
             //ANCHOR: read_owner
             let owner = self.owner.read();
-        //ANCHOR_END: read_owner
+            //ANCHOR_END: read_owner
+            owner
         }
     }
     //ANCHOR_END: impl_public
@@ -101,8 +102,14 @@ mod NameRegistry {
     // ANCHOR_END: state_internal
 
     // ANCHOR: stateless_internal
-    fn _get_contract_name() -> felt252 {
+    fn get_contract_name() -> felt252 {
         'Name Registry'
+    }
+
+    fn get_owner_storage_address(self: @ContractState) -> starknet::StorageBaseAddress {
+        //ANCHOR: owner_address
+        self.owner.address()
+    //ANCHOR_END: owner_address
     }
 // ANCHOR_END: stateless_internal
 }
