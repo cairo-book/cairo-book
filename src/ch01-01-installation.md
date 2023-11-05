@@ -18,8 +18,10 @@ Scarb requires a Git executable to be available in the `PATH` environment variab
 
 ### Installation
 
-To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download).
-You can simply run the following command in your terminal, then follow the onscreen instructions. This will install the latest stable release.
+To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download). We strongly recommend that you install
+Scarb [via asdf](https://docs.swmansion.com/scarb/download.html#install-via-asdf), a CLI tool that can manage multiple language runtime versions on a per-project basis.
+This will ensure that the version of Scarb you use to work on a project always matches the one defined in the project settings, avoiding problems lead to version mismatch.
+Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This will install the latest stable release of Scarb.
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
