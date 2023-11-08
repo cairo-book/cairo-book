@@ -76,3 +76,4 @@ By defining rules, such as coding conventions or security guidelines, developers
 Reference:
 
 - [Semgrep Cairo 1.0 support](https://semgrep.dev/blog/2023/semgrep-now-supports-cairo-1-0)
+- [Caracal, a Starknet static analyzer](https://github.com/crytic/caracal)
