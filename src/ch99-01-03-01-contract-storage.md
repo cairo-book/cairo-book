@@ -88,7 +88,7 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 
 ## Storage mappings
 
-Storage mappings are similar to hash tables in that they allow mapping keys to values. However, unlike a typical hash table, the key data itself is not stored - only its hash is used to look up the associated value value in the contract's storage.
+Storage mappings are similar to hash tables in that they allow mapping keys to values. However, unlike a typical hash table, the key data itself is not stored - only its hash is used to look up the associated value in the contract's storage.
 Mappings do not have a concept of length or whether a key/value pair is set. The only way to remove a mapping is to set its value to the default zero value.
 
 Mappings are only used to compute the location of data in the storage of a
