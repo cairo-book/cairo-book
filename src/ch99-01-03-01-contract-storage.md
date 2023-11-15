@@ -89,7 +89,7 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 
 ## Storing Enums
 
-Enums can be written to storage similarly to struct, by implementing the `store` trait for the enum.
+Enums can be written to storage similarly to struct, by implementing the `store` trait for that enum.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_08_enum_storage/src/lib.cairo:enum_store}}
@@ -98,7 +98,7 @@ Enums can be written to storage similarly to struct, by implementing the `store`
 ### Enums storage layout
 
 Enums are stored as serialized felt252 values on Starknet. The serialized felt252 values indicate the index of each variant in the enum definition, and if a variant has a defined type, that type will be serialized too. 
-In our example, `North` being the first variant in the enum will be serialized to `0x00...0`, `East` will be serialized to `0x00...1`, and this continues till the last variant.
+In our example, `North` being the first variant in the enum will be serialized to `0x01`, `East` will be serialized to `0x02`, and this continues till the last variant.
 
 
 To read enum variants stored to `Storage` we call `read` function on the variant:
