@@ -86,6 +86,33 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 | name    | owner.address()    |
 | address | owner.address() +1 |
 
+
+## Storing Enums
+
+Enums can be written to storage similarly to struct, by implementing the `store` trait for the enum.
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_08_enum_storage/src/lib.cairo:enum_store}}
+```
+
+### Enums storage layout
+
+Enums are stored as serialized felt252 values on Starknet. The serialized felt252 values indicate the index of each variant in the enum definition, and if a variant has a defined type, that type will be serialized too. 
+In our example, `North` being the first variant in the enum will be serialized to `0x00...0`, `East` will be serialized to `0x00...1`, and this continues till the last variant.
+
+
+To read enum variants stored to `Storage` we call `read` function on the variant:
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_08_enum_storage/src/lib.cairo:read}}
+```
+
+To modify or write to a stored enum, we call `write` function on the variant:
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_08_enum_storage/src/lib.cairo:write}}
+```
+
 ## Storage mappings
 
 Storage mappings are similar to hash tables in that they allow mapping keys to values. However, unlike a typical hash table, the key data itself is not stored - only its hash is used to look up the associated value value in the contract's storage.
