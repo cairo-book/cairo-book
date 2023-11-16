@@ -2,7 +2,7 @@
 
 In Cairo, unexpected issues may arise during program execution, resulting in runtime errors. While the panic function from the core library doesn't provide a resolution for these errors, it does acknowledge their occurrence and terminates the program. There are two primary ways that a panic can be triggered in Cairo: inadvertently, through actions causing the code to panic (e.g., accessing an array beyond its bounds), or deliberately, by invoking the panic function.
 
-When a panic occurs, it leads to an abrupt termination of the program. The `panic` function takes an array as argument, which can be used to provide an error message and performs an unwind process where all variables are dropped and dictionaries squashed to ensure the soundness of the program to safely terminate the execution.
+When a panic occurs, it leads to an abrupt termination of the program. The `panic` function takes an array as an argument, which can be used to provide an error message and performs an unwind process where all variables are dropped and dictionaries squashed to ensure the soundness of the program to safely terminate the execution.
 
 Here is how we can `panic` from inside a program and return the error code `2`:
 
@@ -21,7 +21,7 @@ Run panicked with [2 (''), ].
 
 As you can notice in the output, the print statement is never reached, as the program terminates after encountering the `panic` statement.
 
-An alternative and more idiomatic approach to panic in Cairo would be to use the `panic_with_felt252` function. This function serves as an abstraction of the array-defining process and is often preferred due to its clearer and more concise expression of intent. By using `panic_with_felt252`, developers can panic in a one-liner by providing a felt252 error message as argument, making the code more readable and maintainable.
+An alternative and more idiomatic approach to panic in Cairo would be to use the `panic_with_felt252` function. This function serves as an abstraction of the array-defining process and is often preferred due to its clearer and more concise expression of intent. By using `panic_with_felt252`, developers can panic in a one-liner by providing a felt252 error message as an argument, making the code more readable and maintainable.
 
 Let's consider an example:
 
