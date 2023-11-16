@@ -21,7 +21,7 @@ With `array!`:
 
 ### `consteval_int!`
 
-In some situtations, a developer might need to declare a constant that is the result of a computation of integers. To compute a constant expression and use its result at compile time, it is required to use the `consteval_int!` macro.
+In some situations, a developer might need to declare a constant that is the result of a computation of integers. To compute a constant expression and use its result at compile time, it is required to use the `consteval_int!` macro.
 
 Here is an example of `consteval_int!`:
 
@@ -29,4 +29,4 @@ Here is an example of `consteval_int!`:
 const a: felt252 = consteval_int!(2 * 2 * 2);
 ```
 
-This will be interprated as `const a: felt252 = 8;` by the compiler.
+This will be interpreted as `const a: felt252 = 8;` by the compiler.
