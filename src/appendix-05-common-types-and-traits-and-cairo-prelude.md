@@ -25,7 +25,7 @@ them explicitly into scope.
 ### List of common types and traits
 
 The following section provides a brief overview of commonly used types and
-traits when developping Cairo programs. Most of these are included in the
+traits when developing Cairo programs. Most of these are included in the
 prelude and not required to be imported explicitly - but not all of them.
 
 | Import                    | Path                                                  | Usage                                                                                                                                                                                  |
