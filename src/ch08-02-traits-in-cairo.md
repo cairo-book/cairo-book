@@ -26,7 +26,7 @@ In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` defi
 
 ## Implementing a trait, without writing its declaration.
 
-You can write implementations directly without definining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute with on the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
+You can write implementations directly without defining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute within the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
 
 ```rust,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_15_generate_trait/src/lib.cairo}}
@@ -63,7 +63,7 @@ To use traits methods, you need to make sure the correct traits/implementation(s
 In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
 If `CircleGeometry` was in a separate module/file `circle` then to use `boundary` on `circ: Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`.
 
-If the code was organised into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant implementation is required.
+If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant implementation is required.
 
 ```rust,noplayground
 use debug::PrintTrait;
