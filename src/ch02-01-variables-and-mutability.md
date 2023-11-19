@@ -34,14 +34,14 @@ Error: failed to compile: src/lib.cairo
 ```
 
 This example shows how the compiler helps you find errors in your programs.
-Compiler errors can be frustrating, but really they only mean your program
+Compiler errors can be frustrating, but they only mean your program
 isn’t safely doing what you want it to do yet; they do _not_ mean that you’re
 not a good programmer! Experienced Caironautes still get compiler errors.
 
 You received the error message `Cannot assign to an immutable variable.`
 because you tried to assign a second value to the immutable `x` variable.
 
-It’s important that we get compile-time errors when we attempt to change a
+We must get compile-time errors when we attempt to change a
 value that’s designated as immutable because this specific situation can lead to
 bugs. If one part of our code operates on the assumption that a value will
 never change and another part of our code changes that value, it’s possible
@@ -142,7 +142,7 @@ new variable with the same name as a previous variable. Caironautes say that the
 first variable is _shadowed_ by the second, which means that the second
 variable is what the compiler will see when you use the name of the variable.
 In effect, the second variable overshadows the first, taking any uses of the
-variable name to itself until either it itself is shadowed or the scope ends.
+variable name to itself until either it is shadowed or the scope ends.
 We can shadow a variable by using the same variable’s name and repeating the
 use of the `let` keyword as follows:
 
