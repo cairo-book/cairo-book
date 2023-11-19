@@ -36,7 +36,7 @@ They cannot be used as names of any items.
 - `mod` - Define a module
 - `mut` - Denote variable mutability
 - `nopanic` - Functions marked with this notation mean that the function will never panic.
-- `of` - Implementation a trait
+- `of` - Implementation of a trait
 - `ref` - Parameter passed implicitly returned at the end of a function
 - `return` - Return from function
 - `struct` - Define a structure
