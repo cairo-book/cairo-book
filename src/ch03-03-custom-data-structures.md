@@ -18,7 +18,7 @@ level_players.append(10);
 
 But then you realize you can't increase the level at a specific index once it's
 set. If a player dies, you cannot remove it from the array unless he happens to
-be the in the first position.
+be in the first position.
 
 Fortunately, Cairo provides a handy built-in [dictionary
 type](./ch03-02-dictionaries.md) called `Felt252Dict<T>` that allows us to

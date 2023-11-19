@@ -1,8 +1,8 @@
 # Generic Types and Traits
 
-Every programming language has tools for effectively handling the duplication of concepts. In Cairo, one such tool is generics: abstract stand-ins for concrete types or other properties. We can express the behaviour of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
+Every programming language has tools for effectively handling the duplication of concepts. In Cairo, one such tool is generics: abstract stand-ins for concrete types or other properties. We can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
 
-Functions, structs, enums and traits can incorporate generic types as part of their definition instead of a concrete types like `u32` or `ContractAddress`.
+Functions, structs, enums and traits can incorporate generic types as part of their definition instead of a concrete type like `u32` or `ContractAddress`.
 
 Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication.
 

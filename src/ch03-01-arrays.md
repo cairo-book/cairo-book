@@ -2,7 +2,7 @@
 
 An array is a collection of elements of the same type. You can create and use array methods by importing the `array::ArrayTrait` trait.
 
-An important thing to note is that arrays have limited modifications options. Arrays are, in fact, queues whose values can't be modified.
+An important thing to note is that arrays have limited modification options. Arrays are, in fact, queues whose values can't be modified.
 This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can only append items to the end of an array and remove items from the front using `pop_front`.
 
 ### Creating an Array
@@ -13,7 +13,7 @@ Creating an Array is done with the `ArrayTrait::new()` call. Here is an example 
 {{#include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo}}
 ```
 
-When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type the variable.
+When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type of the variable.
 
 ```rust, noplayground
 let mut arr = ArrayTrait::<u128>::new();
