@@ -19,7 +19,7 @@ These functions allow us to manipulate dictionaries like in any other language. 
 {{#include ../listings/ch03-common-collections/no_listing_07_intro/src/lib.cairo}}
 ```
 
-The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
+The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and added two individuals, each one with their balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
 
 Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
 
@@ -33,13 +33,13 @@ Notice how in this example we added the _Alex_ individual twice, each time using
 
 Before heading on and explaining how dictionaries are implemented it is worth mentioning that once you instantiate a `Felt252Dict<T>`, behind the scenes all keys have their associated values initialized as zero. This means that if for example, you tried to get the balance of an inexistent user you will get 0 instead of an error or an undefined value. This also means there is no way to delete data from a dictionary. Something to take into account when incorporating this structure into your code.
 
-Until this point, we have seen all the basic features of `Felt252Dict<T>` and how it mimics the same behavior as the corresponding data structures in any other language, that is, externally of course. Cairo is at its core a non-deterministic Turing-complete programming language, very different from any other popular language in existence, which as a consequence means that dictionaries are implemented very differently as well!
+Until this point, we have seen all the basic features of `Felt252Dict<T>` and how it mimics the same behaviour as the corresponding data structures in any other language, that is, externally of course. Cairo is at its core a non-deterministic Turing-complete programming language, very different from any other popular language in existence, which as a consequence means that dictionaries are implemented very differently as well!
 
-In the following sections, we are going to give some insights about `Felt252Dict<T>` inner mechanisms and the compromises that were taken to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as use the `entry` method as another way to interact with them.
+In the following sections, we are going to give some insights about `Felt252Dict<T>` inner mechanisms and the compromises that were made to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as use the `entry` method as another way to interact with them.
 
 ### Dictionaries Underneath
 
-One of the constraints of Cairo's non-deterministic design is that its memory system is immutable, so in order to simulate mutability, the language implements `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
+One of the constraints of Cairo's non-deterministic design is that its memory system is immutable, so to simulate mutability, the language implements `Felt252Dict<T>` as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:
 
 1. A `key` field that identifies the value for this key-value pair of the dictionary.
 2. A `previous_value` field that indicates which previous value was held at `key`.
@@ -125,7 +125,7 @@ We will start by explaining the `entry` method which is part of a dictionary bas
 
 In the [Dictionaries Underneath](#dictionaries-underneath) section, we explained how `Felt252Dict<T>` internally worked. It was a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given a certain `key` and then update it accordingly to whatever operation it was executing. The Cairo language gives us the tools to replicate this ourselves through the `entry` and `finalize` methods.
 
-The `entry` method comes as part of `Felt252DictTrait<T>` with the purpose of creating a new entry given a certain key. Once called, this method takes ownership of the dictionary and returns the entry to update. The method signature is as follows:
+The `entry` method comes as part of `Felt252DictTrait<T>` to create a new entry given a certain key. Once called, this method takes ownership of the dictionary and returns the entry to update. The method signature is as follows:
 
 ```rust,noplayground
 fn entry(self: Felt252Dict<T>, key: felt252) -> (Felt252DictEntry<T>, T) nopanic
@@ -141,7 +141,7 @@ fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T> {
 
 This method receives the entry and the new value as a parameter and returns the updated dictionary.
 
-Let us see an example using `entry` and `finalize`. Imagine we would like to implement our own version of the `get` method from a dictionary. We should then do the following:
+Let us see an example using `entry` and `finalize`. Imagine we would like to implement our version of the `get` method from a dictionary. We should then do the following:
 
 1. Create the new entry to add using the `entry` method
 2. Insert back the entry where the `new_value` equals the `previous_value`.
@@ -174,7 +174,7 @@ As a finalizing note, these two methods are implemented in a similar way to how 
 One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`.
 This trait defines the `zero_default` method which is the one that gets called when a value does not exist in the dictionary.
 This is implemented by some common data types, such as most unsigned integers, `bool` and `felt252` - but it is not implemented for more complex ones types such as arrays, structs (including `u256`), and other types from the core library.
-This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations in order to make the data type a valid dictionary value type.
+This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations to make the data type a valid dictionary value type.
 To compensate this, you can wrap your type inside a `Nullable<T>`.
 
 `Nullable<T>` is a smart pointer type that can either point to a value or be `null` in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type, inspired by Rust, allows us to allocate a new memory segment for our type, and access this segment using a pointer that can only be manipulated in one place at a time.
