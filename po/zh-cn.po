@@ -13266,7 +13266,7 @@ msgid ""
 msgstr "当你想在不消耗结果值的情况下检查一个操作的成功或失败时，这些方法很有帮助，允许你执行额外的操作或根据枚举成员做出决定，而不用解开（unwrap）它。"
 
 #: src/ch09-02-recoverable-errors.md:54
-msgid "You can find the implementation ot the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
+msgid "You can find the implementation of the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
 msgstr "你可以在[这里](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)找到`ResultTrait`的实现。"
 
 #: src/ch09-02-recoverable-errors.md:58

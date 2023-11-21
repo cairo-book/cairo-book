@@ -12993,7 +12993,7 @@ msgstr ""
 "decisiones basadas en la variante sin desenvolverla."
 
 #: src/ch09-02-recoverable-errors.md:54
-msgid "You can find the implementation ot the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
+msgid "You can find the implementation of the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
 msgstr "Puede encontrar la implementación del `ResultTrait` [aquí](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
 
 #: src/ch09-02-recoverable-errors.md:58

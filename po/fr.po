@@ -7642,7 +7642,7 @@ msgid ""
 msgstr ""
 
 #: src/ch09-01-error-handling.md:54
-msgid "You can find the implementation ot the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
+msgid "You can find the implementation of the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
 msgstr ""
 
 #: src/ch09-01-error-handling.md:58

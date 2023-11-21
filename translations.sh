@@ -36,7 +36,7 @@ function build_new_language() {
     LANG=$1
     FILE=po/"$LANG".po
 
-    # Stop if no language paramter.
+    # Stop if no language parameter.
     if [ -z "$LANG" ]
     then
         echo ""

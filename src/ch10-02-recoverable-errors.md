@@ -36,7 +36,7 @@ Finally, the `is_ok` and `is_err` methods are utility functions provided by the 
 
 These methods are helpful when you want to check the success or failure of an operation without consuming the Result value, allowing you to perform additional operations or make decisions based on the variant without unwrapping it.
 
-You can find the implementation ot the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20).
+You can find the implementation of the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20).
 
 <br />
 
