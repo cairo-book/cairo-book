@@ -1,7 +1,8 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
-"POT-Creation-Date: 2023-10-13T15:22:19+02:00\n"
+"POT-Creation-Date: 2023-11-21T20:02:02+01:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,28 +12,19 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/SUMMARY.md:1
-#: src/title-page.md:1
+#: src/SUMMARY.md:1 src/title-page.md:1
 msgid "The Cairo Programming Language"
 msgstr ""
 
-#: src/SUMMARY.md:4
-#: src/ch00-01-foreword.md:1
-msgid "Foreword"
+#: src/SUMMARY.md:3
+msgid "The Cairo Programming Language Foreword Introduction"
 msgstr ""
 
-#: src/SUMMARY.md:5
-#: src/ch00-00-introduction.md:1
-msgid "Introduction"
-msgstr ""
-
-#: src/SUMMARY.md:7
-#: src/ch01-00-getting-started.md:1
+#: src/SUMMARY.md:7 src/SUMMARY.md:9 src/ch01-00-getting-started.md:1
 msgid "Getting Started"
 msgstr ""
 
-#: src/SUMMARY.md:11
-#: src/ch01-01-installation.md:1
+#: src/SUMMARY.md:11 src/ch01-01-installation.md:1
 #: src/ch01-01-installation.md:19
 msgid "Installation"
 msgstr ""
@@ -41,112 +33,100 @@ msgstr ""
 msgid "Hello, World!"
 msgstr ""
 
-#: src/SUMMARY.md:14
+#: src/SUMMARY.md:14 src/SUMMARY.md:16
 #: src/ch02-00-common-programming-concepts.md:1
 msgid "Common Programming Concepts"
 msgstr ""
 
-#: src/SUMMARY.md:17
-#: src/ch02-01-variables-and-mutability.md:1
+#: src/SUMMARY.md:17 src/ch02-01-variables-and-mutability.md:1
 msgid "Variables and Mutability"
 msgstr ""
 
-#: src/SUMMARY.md:18
-#: src/ch02-02-data-types.md:1
+#: src/SUMMARY.md:18 src/ch02-02-data-types.md:1
 msgid "Data Types"
 msgstr ""
 
-#: src/SUMMARY.md:19
-#: src/ch02-03-functions.md:1
+#: src/SUMMARY.md:19 src/ch02-03-functions.md:1
 msgid "Functions"
 msgstr ""
 
-#: src/SUMMARY.md:20
-#: src/ch02-04-comments.md:1
+#: src/SUMMARY.md:20 src/ch02-04-comments.md:1
 msgid "Comments"
 msgstr ""
 
-#: src/SUMMARY.md:21
-#: src/ch02-05-control-flow.md:1
+#: src/SUMMARY.md:21 src/ch02-05-control-flow.md:1
 msgid "Control Flow"
 msgstr ""
 
-#: src/SUMMARY.md:23
-#: src/ch03-00-common-collections.md:1
+#: src/SUMMARY.md:23 src/SUMMARY.md:25 src/ch03-00-common-collections.md:1
 msgid "Common Collections"
 msgstr ""
 
-#: src/SUMMARY.md:26
-#: src/ch03-01-arrays.md:1
+#: src/SUMMARY.md:26 src/ch03-01-arrays.md:1
 msgid "Arrays"
 msgstr ""
 
-#: src/SUMMARY.md:27
-#: src/ch03-02-dictionaries.md:1
+#: src/SUMMARY.md:27 src/ch03-02-dictionaries.md:1
 msgid "Dictionaries"
 msgstr ""
 
-#: src/SUMMARY.md:29
+#: src/SUMMARY.md:28 src/ch03-03-custom-data-structures.md:1
+msgid "Custom Data Structures"
+msgstr ""
+
+#: src/SUMMARY.md:30 src/SUMMARY.md:32
 msgid "Understanding Ownership"
 msgstr ""
 
-#: src/SUMMARY.md:32
+#: src/SUMMARY.md:33
 msgid "What is Ownership?"
 msgstr ""
 
-#: src/SUMMARY.md:33
-#: src/ch04-02-references-and-snapshots.md:1
+#: src/SUMMARY.md:34 src/ch04-02-references-and-snapshots.md:1
 msgid "References and Snapshots"
 msgstr ""
 
-#: src/SUMMARY.md:35
+#: src/SUMMARY.md:36 src/SUMMARY.md:38
 #: src/ch05-00-using-structs-to-structure-related-data.md:1
 msgid "Using Structs to Structure Related Data"
 msgstr ""
 
-#: src/SUMMARY.md:38
-#: src/ch05-01-defining-and-instantiating-structs.md:1
+#: src/SUMMARY.md:39 src/ch05-01-defining-and-instantiating-structs.md:1
 msgid "Defining and Instantiating Structs"
 msgstr ""
 
-#: src/SUMMARY.md:39
-#: src/ch05-02-an-example-program-using-structs.md:1
+#: src/SUMMARY.md:40 src/ch05-02-an-example-program-using-structs.md:1
 msgid "An Example Program Using Structs"
 msgstr ""
 
-#: src/SUMMARY.md:40
-#: src/ch05-03-method-syntax.md:1
+#: src/SUMMARY.md:41 src/ch05-03-method-syntax.md:1
 msgid "Method Syntax"
 msgstr ""
 
-#: src/SUMMARY.md:42
+#: src/SUMMARY.md:43 src/SUMMARY.md:45
 #: src/ch06-00-enums-and-pattern-matching.md:1
 msgid "Enums and Pattern Matching"
 msgstr ""
 
-#: src/SUMMARY.md:42
-#: src/ch06-01-enums.md:1
+#: src/SUMMARY.md:46 src/ch06-01-enums.md:1
 #: src/ch08-01-generic-data-types.md:163
 msgid "Enums"
 msgstr ""
 
-#: src/SUMMARY.md:46
-#: src/ch06-02-the-match-control-flow-construct.md:1
+#: src/SUMMARY.md:47 src/ch06-02-the-match-control-flow-construct.md:1
 msgid "The Match Control Flow Construct"
 msgstr ""
 
-#: src/SUMMARY.md:48
+#: src/SUMMARY.md:49 src/SUMMARY.md:51
 #: src/ch07-00-managing-cairo-projects-with-packages-crates-and-modules.md:1
 msgid "Managing Cairo Projects with Packages, Crates and Modules"
 msgstr ""
 
-#: src/SUMMARY.md:52
-#: src/ch07-01-packages-and-crates.md:1
+#: src/SUMMARY.md:53 src/ch07-01-packages-and-crates.md:1
 msgid "Packages and Crates"
 msgstr ""
 
-#: src/SUMMARY.md:54
-#: src/ch07-02-defining-modules-to-control-scope.md:1
+#: src/SUMMARY.md:54 src/ch07-02-defining-modules-to-control-scope.md:1
 msgid "Defining Modules to Control Scope"
 msgstr ""
 
@@ -159,186 +139,171 @@ msgstr ""
 msgid "Bringing Paths into Scope with the 'use' Keyword"
 msgstr ""
 
-#: src/SUMMARY.md:57
-#: src/ch07-05-separating-modules-into-different-files.md:1
+#: src/SUMMARY.md:57 src/ch07-05-separating-modules-into-different-files.md:1
 msgid "Separating Modules into Different Files"
+msgstr ""
+
+#: src/SUMMARY.md:59 src/ch08-01-generic-data-types.md:1
+msgid "Generic Data Types"
 msgstr ""
 
 #: src/SUMMARY.md:61
 msgid "Generic Types"
 msgstr ""
 
-#: src/SUMMARY.md:63
-#: src/ch08-01-generic-data-types.md:5
+#: src/SUMMARY.md:63 src/ch08-01-generic-data-types.md:5
 msgid "Generic Functions"
 msgstr ""
 
-#: src/SUMMARY.md:64
-#: src/ch08-02-traits-in-cairo.md:1
+#: src/SUMMARY.md:64 src/ch08-02-traits-in-cairo.md:1
 msgid "Traits in Cairo"
 msgstr ""
 
-#: src/SUMMARY.md:66
-#: src/ch09-00-testing-cairo-programs.md:1
+#: src/SUMMARY.md:66 src/SUMMARY.md:68 src/ch09-00-testing-cairo-programs.md:1
 msgid "Testing Cairo Programs"
 msgstr ""
 
-#: src/SUMMARY.md:70
-#: src/ch09-01-how-to-write-tests.md:1
+#: src/SUMMARY.md:70 src/ch09-01-how-to-write-tests.md:1
 msgid "How To Write Tests"
 msgstr ""
 
-#: src/SUMMARY.md:71
-#: src/ch09-02-test-organization.md:1
+#: src/SUMMARY.md:71 src/ch09-02-test-organization.md:1
 msgid "Testing Organization"
 msgstr ""
 
-#: src/SUMMARY.md:73
+#: src/SUMMARY.md:73 src/SUMMARY.md:75
 msgid "Error Handling"
 msgstr ""
 
-#: src/SUMMARY.md:76
-#: src/ch10-01-unrecoverable-errors-with-panic.md:1
+#: src/SUMMARY.md:77 src/ch10-01-unrecoverable-errors-with-panic.md:1
 msgid "Unrecoverable Errors with panic"
 msgstr ""
 
-#: src/SUMMARY.md:77
+#: src/SUMMARY.md:78
 msgid "Recoverable Errors with Result"
 msgstr ""
 
-#: src/SUMMARY.md:79
-#: src/ch11-00-advanced-features.md:1
+#: src/SUMMARY.md:80 src/SUMMARY.md:82 src/ch11-00-advanced-features.md:1
 msgid "Advanced Features"
 msgstr ""
 
-#: src/SUMMARY.md:82
-#: src/ch11-01-operator-overloading.md:1
+#: src/SUMMARY.md:84 src/ch11-01-operator-overloading.md:1
 msgid "Operator Overloading"
 msgstr ""
 
-#: src/SUMMARY.md:83
-#: src/ch11-02-macros.md:1
+#: src/SUMMARY.md:85 src/ch11-02-macros.md:1
 msgid "Macros"
 msgstr ""
 
 #: src/SUMMARY.md:87
-#: src/ch99-00-starknet-smart-contracts.md:1
+msgid "Starknet smart contracts"
+msgstr ""
+
+#: src/SUMMARY.md:89 src/ch99-00-starknet-smart-contracts.md:1
 msgid "Starknet Smart Contracts"
 msgstr ""
 
-#: src/SUMMARY.md:89
-#: src/ch99-01-01-introduction-to-smart-contracts.md:1
+#: src/SUMMARY.md:91 src/ch99-01-01-introduction-to-smart-contracts.md:1
 msgid "Introduction to smart-contracts"
 msgstr ""
 
-#: src/SUMMARY.md:90
-#: src/ch99-01-02-a-simple-contract.md:1
+#: src/SUMMARY.md:92 src/ch99-01-02-a-simple-contract.md:1
 msgid "A simple contract"
 msgstr ""
 
-#: src/SUMMARY.md:91
-#: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:1
+#: src/SUMMARY.md:93 src/ch99-01-03-00-a-deeper-dive-into-contracts.md:1
 msgid "A deeper dive into contracts"
 msgstr ""
 
-#: src/SUMMARY.md:92
-#: src/ch99-01-03-01-contract-storage.md:1
+#: src/SUMMARY.md:95 src/ch99-01-03-01-contract-storage.md:1
 msgid "Contract Storage"
 msgstr ""
 
-#: src/SUMMARY.md:93
-#: src/ch99-01-03-02-contract-functions.md:1
+#: src/SUMMARY.md:96 src/ch99-01-03-02-contract-functions.md:1
 msgid "Contract Functions"
 msgstr ""
 
-#: src/SUMMARY.md:94
+#: src/SUMMARY.md:97
 msgid "Contract Events"
 msgstr ""
 
-#: src/SUMMARY.md:95
-#: src/ch99-01-03-04-reducing-boilerplate.md:1
+#: src/SUMMARY.md:98 src/ch99-01-03-04-reducing-boilerplate.md:1
 msgid "Reducing boilerplate"
 msgstr ""
 
-#: src/SUMMARY.md:96
+#: src/SUMMARY.md:99
 msgid "Optimizing storage costs"
 msgstr ""
 
-#: src/SUMMARY.md:97
+#: src/SUMMARY.md:101
 msgid "Components"
 msgstr ""
 
-#: src/SUMMARY.md:98
+#: src/SUMMARY.md:103
 msgid "Under the hood"
 msgstr ""
 
-#: src/SUMMARY.md:99
-#: src/ch99-01-05-02-component-dependencies.md:1
+#: src/SUMMARY.md:104 src/ch99-01-05-02-component-dependencies.md:1
 msgid "Component dependencies"
 msgstr ""
 
-#: src/SUMMARY.md:100
-#: src/ch99-01-05-03-testing-components.md:1
+#: src/SUMMARY.md:105 src/ch99-01-05-03-testing-components.md:1
 msgid "Testing components"
 msgstr ""
 
-#: src/SUMMARY.md:101
+#: src/SUMMARY.md:107
 msgid "ABIs and Cross-contract Interactions"
 msgstr ""
 
-#: src/SUMMARY.md:102
+#: src/SUMMARY.md:109
 msgid "ABIs and Interfaces"
 msgstr ""
 
-#: src/SUMMARY.md:103
+#: src/SUMMARY.md:110
 msgid "Contract Dispatchers, Library Dispachers and system calls"
 msgstr ""
 
-#: src/SUMMARY.md:104
-#: src/ch99-01-04-00-other-examples.md:1
+#: src/SUMMARY.md:112 src/ch99-01-04-00-other-examples.md:1
 msgid "Other examples"
 msgstr ""
 
-#: src/SUMMARY.md:105
-#: src/ch99-01-04-01-voting-contract.md:1
+#: src/SUMMARY.md:114 src/ch99-01-04-01-voting-contract.md:1
 msgid "Deploying and Interacting with a Voting contract"
 msgstr ""
 
-#: src/SUMMARY.md:106
-msgid "L1 <> L2 Messaging"
+#: src/SUMMARY.md:116
+msgid "L1 \\<\\> L2 Messaging"
 msgstr ""
 
-#: src/SUMMARY.md:107
-#: src/ch99-03-security-considerations.md:1
+#: src/SUMMARY.md:117 src/ch99-03-security-considerations.md:1
 msgid "Security Considerations"
 msgstr ""
 
-#: src/SUMMARY.md:109
-#: src/appendix-00.md:1
+#: src/SUMMARY.md:119 src/appendix-00.md:1
 msgid "Appendix"
 msgstr ""
 
-#: src/SUMMARY.md:110
+#: src/SUMMARY.md:121
 msgid "A - Keywords"
 msgstr ""
 
-#: src/SUMMARY.md:111
+#: src/SUMMARY.md:122
 msgid "B - Operators and Symbols"
 msgstr ""
 
-#: src/SUMMARY.md:112
+#: src/SUMMARY.md:123
 msgid "C - Derivable Traits"
 msgstr ""
 
-#: src/SUMMARY.md:113
+#: src/SUMMARY.md:124
 msgid "D - Useful Development Tools"
 msgstr ""
 
-#: src/SUMMARY.md:114
+#: src/SUMMARY.md:125
 msgid "E - Common Types & Traits and the Cairo Prelude"
 msgstr ""
 
-#: src/SUMMARY.md:115
+#: src/SUMMARY.md:126
 msgid "F - Installing Cairo binaries"
 msgstr ""
 
@@ -357,6 +322,10 @@ msgid ""
 "Compiler](https://github.com/starkware-libs/cairo) [version "
 "2.2.0](https://github.com/starkware-libs/cairo/releases). See the "
 "“Installation” section of Chapter 1 to install or update Cairo."
+msgstr ""
+
+#: src/ch00-01-foreword.md:1
+msgid "Foreword"
 msgstr ""
 
 #: src/ch00-01-foreword.md:3
@@ -409,6 +378,10 @@ msgstr ""
 
 #: src/ch00-01-foreword.md:13
 msgid "— The Cairo community"
+msgstr ""
+
+#: src/ch00-00-introduction.md:1
+msgid "Introduction"
 msgstr ""
 
 #: src/ch00-00-introduction.md:3
@@ -566,40 +539,32 @@ msgstr ""
 #: src/ch01-01-installation.md:21
 msgid ""
 "To install Scarb, please refer to the [installation "
-"instructions](https://docs.swmansion.com/scarb/download). You can simply run "
-"the following command in your terminal, then follow the onscreen "
-"instructions. This will install the latest stable release."
+"instructions](https://docs.swmansion.com/scarb/download). We strongly "
+"recommend that you install Scarb [via "
+"asdf](https://docs.swmansion.com/scarb/download.html#install-via-asdf), a "
+"CLI tool that can manage multiple language runtime versions on a per-project "
+"basis. This will ensure that the version of Scarb you use to work on a "
+"project always matches the one defined in the project settings, avoiding "
+"problems lead to version mismatch. Otherwise, you can simply run the "
+"following command in your terminal, and follow the onscreen instructions. "
+"This will install the latest stable release of Scarb."
 msgstr ""
 
-#: src/ch01-01-installation.md:24
-msgid ""
-"```bash\n"
-"curl --proto '=https' --tlsv1.2 -sSf "
-"https://docs.swmansion.com/scarb/install.sh | sh\n"
-"```"
+#: src/ch01-01-installation.md:27
+msgid "'=https'"
 msgstr ""
 
-#: src/ch01-01-installation.md:28
+#: src/ch01-01-installation.md:30
 msgid ""
 "Verify installation by running the following command in new terminal "
 "session, it should print both Scarb and Cairo language versions, e.g:"
 msgstr ""
 
-#: src/ch01-01-installation.md:30
-msgid ""
-"```bash\n"
-"$ scarb --version\n"
-"scarb 2.3.0-rc1 (58cc88efb 2023-08-23)\n"
-"cairo: 2.2.0 (https://crates.io/crates/cairo-lang-compiler/2.2.0)\n"
-"sierra: 1.3.0\n"
-"```"
-msgstr ""
-
-#: src/ch01-01-installation.md:37
+#: src/ch01-01-installation.md:39
 msgid "Installing the VSCode extension"
 msgstr ""
 
-#: src/ch01-01-installation.md:39
+#: src/ch01-01-installation.md:41
 msgid ""
 "Cairo has a VSCode extension that provides syntax highlighting, code "
 "completion, and other useful features. You can install it from the [VSCode "
@@ -666,12 +631,8 @@ msgstr ""
 msgid "For Windows CMD, enter this:"
 msgstr ""
 
-#: src/ch01-02-hello-world.md:37
-msgid ""
-"```cmd\n"
-"> mkdir \"%USERPROFILE%\\cairo_projects\"\n"
-"> cd /d \"%USERPROFILE%\\cairo_projects\"\n"
-"```"
+#: src/ch01-02-hello-world.md:38 src/ch01-02-hello-world.md:39
+msgid "\"%USERPROFILE%\\cairo_projects\""
 msgstr ""
 
 #: src/ch01-02-hello-world.md:42
@@ -718,142 +679,6 @@ msgstr ""
 msgid ""
 "Open _Scarb.toml_ in your text editor of choice. It should look similar to "
 "the code in Listing 1-2."
-msgstr ""
-
-#: src/ch01-02-hello-world.md:63
-#: src/ch01-02-hello-world.md:76
-#: src/ch01-02-hello-world.md:96
-#: src/ch01-02-hello-world.md:208
-#: src/ch02-01-variables-and-mutability.md:17
-#: src/ch02-01-variables-and-mutability.md:77
-#: src/ch02-01-variables-and-mutability.md:155
-#: src/ch02-02-data-types.md:47
-#: src/ch02-02-data-types.md:78
-#: src/ch02-03-functions.md:167
-#: src/ch02-05-control-flow.md:9
-#: src/ch02-05-control-flow.md:58
-#: src/ch02-05-control-flow.md:90
-#: src/ch02-05-control-flow.md:130
-#: src/ch04-01-what-is-ownership.md:50
-#: src/ch04-01-what-is-ownership.md:252
-#: src/ch04-01-what-is-ownership.md:280
-#: src/ch04-01-what-is-ownership.md:294
-#: src/ch04-01-what-is-ownership.md:334
-#: src/ch04-01-what-is-ownership.md:347
-#: src/ch04-01-what-is-ownership.md:363
-#: src/ch04-02-references-and-snapshots.md:23
-#: src/ch04-02-references-and-snapshots.md:134
-#: src/ch04-02-references-and-snapshots.md:155
-#: src/ch04-02-references-and-snapshots.md:199
-#: src/ch05-01-defining-and-instantiating-structs.md:7
-#: src/ch05-01-defining-and-instantiating-structs.md:19
-#: src/ch05-01-defining-and-instantiating-structs.md:26
-#: src/ch05-01-defining-and-instantiating-structs.md:44
-#: src/ch05-01-defining-and-instantiating-structs.md:48
-#: src/ch05-01-defining-and-instantiating-structs.md:76
-#: src/ch05-01-defining-and-instantiating-structs.md:84
-#: src/ch05-01-defining-and-instantiating-structs.md:112
-#: src/ch05-01-defining-and-instantiating-structs.md:120
-#: src/ch05-01-defining-and-instantiating-structs.md:148
-#: src/ch05-02-an-example-program-using-structs.md:7
-#: src/ch05-02-an-example-program-using-structs.md:23
-#: src/ch05-02-an-example-program-using-structs.md:48
-#: src/ch05-02-an-example-program-using-structs.md:64
-#: src/ch05-02-an-example-program-using-structs.md:74
-#: src/ch05-02-an-example-program-using-structs.md:95
-#: src/ch05-02-an-example-program-using-structs.md:103
-#: src/ch05-02-an-example-program-using-structs.md:119
-#: src/ch05-02-an-example-program-using-structs.md:136
-#: src/ch05-02-an-example-program-using-structs.md:161
-#: src/ch05-03-method-syntax.md:18
-#: src/ch05-03-method-syntax.md:45
-#: src/ch05-03-method-syntax.md:93
-#: src/ch05-03-method-syntax.md:135
-#: src/ch05-03-method-syntax.md:158
-#: src/ch05-03-method-syntax.md:192
-#: src/ch05-03-method-syntax.md:211
-#: src/ch05-03-method-syntax.md:231
-#: src/ch05-03-method-syntax.md:279
-#: src/ch06-02-the-match-control-flow-construct.md:141
-#: src/ch07-02-defining-modules-to-control-scope.md:78
-#: src/ch07-02-defining-modules-to-control-scope.md:92
-#: src/ch07-02-defining-modules-to-control-scope.md:130
-#: src/ch07-02-defining-modules-to-control-scope.md:150
-#: src/ch07-02-defining-modules-to-control-scope.md:184
-#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:15
-#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:44
-#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:62
-#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:77
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:10
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:29
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:38
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:56
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:77
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:93
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:115
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:131
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:142
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:194
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:205
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:221
-#: src/ch07-05-separating-modules-into-different-files.md:18
-#: src/ch07-05-separating-modules-into-different-files.md:30
-#: src/ch07-05-separating-modules-into-different-files.md:38
-#: src/ch07-05-separating-modules-into-different-files.md:46
-#: src/ch07-05-separating-modules-into-different-files.md:66
-#: src/ch07-05-separating-modules-into-different-files.md:75
-#: src/ch09-01-how-to-write-tests.md:28
-#: src/ch09-01-how-to-write-tests.md:38
-#: src/ch09-01-how-to-write-tests.md:54
-#: src/ch09-01-how-to-write-tests.md:62
-#: src/ch09-01-how-to-write-tests.md:92
-#: src/ch09-01-how-to-write-tests.md:104
-#: src/ch09-01-how-to-write-tests.md:118
-#: src/ch09-01-how-to-write-tests.md:137
-#: src/ch09-01-how-to-write-tests.md:141
-#: src/ch09-01-how-to-write-tests.md:192
-#: src/ch09-01-how-to-write-tests.md:207
-#: src/ch09-01-how-to-write-tests.md:305
-#: src/ch09-01-how-to-write-tests.md:341
-#: src/ch09-01-how-to-write-tests.md:394
-#: src/ch09-01-how-to-write-tests.md:433
-#: src/ch09-01-how-to-write-tests.md:489
-#: src/ch09-01-how-to-write-tests.md:508
-#: src/ch09-01-how-to-write-tests.md:527
-#: src/ch09-01-how-to-write-tests.md:563
-#: src/ch09-02-test-organization.md:30
-#: src/ch09-02-test-organization.md:59
-#: src/ch09-02-test-organization.md:66
-#: src/ch09-02-test-organization.md:80
-#: src/ch10-01-unrecoverable-errors-with-panic.md:9
-#: src/ch10-02-recoverable-errors.md:103
-#: src/ch10-02-recoverable-errors.md:161
-#: src/ch99-01-02-a-simple-contract.md:38
-#: src/ch99-01-02-a-simple-contract.md:70
-#: src/ch99-01-02-a-simple-contract.md:118
-#: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:95
-#: src/ch99-01-03-01-contract-storage.md:19
-#: src/ch99-01-03-01-contract-storage.md:61
-#: src/ch99-01-03-01-contract-storage.md:79
-#: src/ch99-01-03-01-contract-storage.md:91
-#: src/ch99-01-03-05-optimizing-storage.md:75
-#: src/ch99-02-01-abis-and-interfaces.md:55
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:46
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:125
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:168
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:208
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:252
-#: src/ch99-01-04-01-voting-contract.md:191
-#: src/ch99-04-00-L1-L2-messaging.md:49
-#: src/appendix-02-operators-and-symbols.md:9
-#: src/appendix-02-operators-and-symbols.md:53
-#: src/appendix-02-operators-and-symbols.md:63
-#: src/appendix-02-operators-and-symbols.md:73
-#: src/appendix-02-operators-and-symbols.md:86
-#: src/appendix-02-operators-and-symbols.md:94
-#: src/appendix-02-operators-and-symbols.md:102
-#: src/appendix-02-operators-and-symbols.md:117
-msgid ""
 msgstr ""
 
 #: src/ch01-02-hello-world.md:63
@@ -964,15 +789,6 @@ msgstr ""
 msgid ""
 "From your `hello_world` directory, build your project by entering the "
 "following command:"
-msgstr ""
-
-#: src/ch01-02-hello-world.md:118
-msgid ""
-"```bash\n"
-"$ scarb build\n"
-"   Compiling hello_world v0.1.0 (file:///projects/Scarb.toml)\n"
-"    Finished release target(s) in 0 seconds\n"
-"```"
 msgstr ""
 
 #: src/ch01-02-hello-world.md:124
@@ -1139,9 +955,8 @@ msgid ""
 "longer provide specific instructions for Linux and macOS versus Windows."
 msgstr ""
 
-#: src/ch01-02-hello-world.md:220
-#: src/ch02-05-control-flow.md:242
-#: src/ch03-02-dictionaries.md:528
+#: src/ch01-02-hello-world.md:220 src/ch02-05-control-flow.md:242
+#: src/ch03-02-dictionaries.md:528 src/ch03-03-custom-data-structures.md:214
 #: src/ch05-03-method-syntax.md:286
 #: src/ch07-05-separating-modules-into-different-files.md:98
 #: src/ch10-02-recoverable-errors.md:202
@@ -1218,14 +1033,10 @@ msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:17
 #: src/ch02-01-variables-and-mutability.md:77
-#: src/ch02-01-variables-and-mutability.md:155
-#: src/ch02-05-control-flow.md:9
-#: src/ch02-05-control-flow.md:58
-#: src/ch02-05-control-flow.md:90
-#: src/ch02-05-control-flow.md:130
-#: src/ch04-01-what-is-ownership.md:252
-#: src/ch04-01-what-is-ownership.md:294
-#: src/ch04-01-what-is-ownership.md:347
+#: src/ch02-01-variables-and-mutability.md:155 src/ch02-05-control-flow.md:9
+#: src/ch02-05-control-flow.md:58 src/ch02-05-control-flow.md:90
+#: src/ch02-05-control-flow.md:130 src/ch04-01-what-is-ownership.md:252
+#: src/ch04-01-what-is-ownership.md:294 src/ch04-01-what-is-ownership.md:347
 #: src/ch04-02-references-and-snapshots.md:23
 #: src/ch04-02-references-and-snapshots.md:134
 #: src/ch05-01-defining-and-instantiating-structs.md:7
@@ -1238,10 +1049,8 @@ msgstr ""
 #: src/ch05-02-an-example-program-using-structs.md:74
 #: src/ch05-02-an-example-program-using-structs.md:103
 #: src/ch05-02-an-example-program-using-structs.md:136
-#: src/ch05-03-method-syntax.md:18
-#: src/ch05-03-method-syntax.md:93
-#: src/ch05-03-method-syntax.md:135
-#: src/ch05-03-method-syntax.md:192
+#: src/ch05-03-method-syntax.md:18 src/ch05-03-method-syntax.md:93
+#: src/ch05-03-method-syntax.md:135 src/ch05-03-method-syntax.md:192
 #: src/ch05-03-method-syntax.md:231
 #: src/ch07-02-defining-modules-to-control-scope.md:78
 #: src/ch07-02-defining-modules-to-control-scope.md:130
@@ -1253,18 +1062,12 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:131
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:205
 #: src/ch07-05-separating-modules-into-different-files.md:18
-#: src/ch09-01-how-to-write-tests.md:28
-#: src/ch09-01-how-to-write-tests.md:62
-#: src/ch09-01-how-to-write-tests.md:118
-#: src/ch09-01-how-to-write-tests.md:141
-#: src/ch09-01-how-to-write-tests.md:207
-#: src/ch09-01-how-to-write-tests.md:305
-#: src/ch09-01-how-to-write-tests.md:394
-#: src/ch09-01-how-to-write-tests.md:489
-#: src/ch09-01-how-to-write-tests.md:527
-#: src/ch09-01-how-to-write-tests.md:563
-#: src/ch09-02-test-organization.md:30
-#: src/ch09-02-test-organization.md:59
+#: src/ch09-01-how-to-write-tests.md:28 src/ch09-01-how-to-write-tests.md:62
+#: src/ch09-01-how-to-write-tests.md:118 src/ch09-01-how-to-write-tests.md:141
+#: src/ch09-01-how-to-write-tests.md:207 src/ch09-01-how-to-write-tests.md:305
+#: src/ch09-01-how-to-write-tests.md:394 src/ch09-01-how-to-write-tests.md:489
+#: src/ch09-01-how-to-write-tests.md:527 src/ch09-01-how-to-write-tests.md:563
+#: src/ch09-02-test-organization.md:30 src/ch09-02-test-organization.md:59
 #: src/ch10-01-unrecoverable-errors-with-panic.md:9
 msgid "Filename: src/lib.cairo"
 msgstr ""
@@ -1449,19 +1252,8 @@ msgid ""
 "program performs a type conversion between the `u64` and `felt252` types."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:208
-msgid ""
-"```rust\n"
-"use debug::PrintTrait;\n"
-"\n"
-"fn main() {\n"
-"    let x: u64 = 2;\n"
-"    x.print();\n"
-"    let x: felt252 = x.into(); // converts x to a felt, type annotation is "
-"required.\n"
-"    x.print()\n"
-"}\n"
-"```"
+#: src/ch02-01-variables-and-mutability.md:214
+msgid "// converts x to a felt, type annotation is required.\n"
 msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:219
@@ -1614,8 +1406,7 @@ msgstr ""
 msgid "`u16`"
 msgstr ""
 
-#: src/ch02-02-data-types.md:53
-#: src/ch02-02-data-types.md:57
+#: src/ch02-02-data-types.md:53 src/ch02-02-data-types.md:57
 msgid "32-bit"
 msgstr ""
 
@@ -1681,8 +1472,7 @@ msgstr ""
 msgid "Numeric literals"
 msgstr ""
 
-#: src/ch02-02-data-types.md:80
-#: src/appendix-02-operators-and-symbols.md:11
+#: src/ch02-02-data-types.md:80 src/appendix-02-operators-and-symbols.md:11
 msgid "Example"
 msgstr ""
 
@@ -1738,27 +1528,36 @@ msgid ""
 "statement:"
 msgstr ""
 
-#: src/ch02-02-data-types.md:97
-msgid ""
-"```rust\n"
-"fn main() {\n"
-"    // addition\n"
-"    let sum = 5_u128 + 10_u128;\n"
-"\n"
-"    // subtraction\n"
-"    let difference = 95_u128 - 4_u128;\n"
-"\n"
-"    // multiplication\n"
-"    let product = 4_u128 * 30_u128;\n"
-"\n"
-"    // division\n"
-"    let quotient = 56_u128 / 32_u128; //result is 1\n"
-"    let quotient = 64_u128 / 32_u128; //result is 2\n"
-"\n"
-"    // remainder\n"
-"    let remainder = 43_u128 % 5_u128; // result is 3\n"
-"}\n"
-"```"
+#: src/ch02-02-data-types.md:99
+msgid "// addition\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:102
+msgid "// subtraction\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:105
+msgid "// multiplication\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:108
+msgid "// division\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:109
+msgid "//result is 1\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:110
+msgid "//result is 2\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:112
+msgid "// remainder\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:113
+msgid "// result is 3\n"
 msgstr ""
 
 #: src/ch02-02-data-types.md:117
@@ -1784,15 +1583,8 @@ msgid ""
 "Boolean type in Cairo is specified using `bool`. For example:"
 msgstr ""
 
-#: src/ch02-02-data-types.md:128
-msgid ""
-"```rust\n"
-"fn main() {\n"
-"    let t = true;\n"
-"\n"
-"    let f: bool = false; // with explicit type annotation\n"
-"}\n"
-"```"
+#: src/ch02-02-data-types.md:132
+msgid "// with explicit type annotation\n"
 msgstr ""
 
 #: src/ch02-02-data-types.md:136
@@ -1813,6 +1605,10 @@ msgid ""
 "has a max length of 31 chars. This is to ensure that it can fit in a single "
 "felt (a felt is 252 bits, one ASCII char is 8 bits). Here are some examples "
 "of declaring values by putting them between single quotes:"
+msgstr ""
+
+#: src/ch02-02-data-types.md:147
+msgid "'C'"
 msgstr ""
 
 #: src/ch02-02-data-types.md:152
@@ -1847,25 +1643,14 @@ msgid ""
 "explicitly defined, as demonstrated in the example below."
 msgstr ""
 
-#: src/ch02-02-data-types.md:162
+#: src/ch02-02-data-types.md:165
 msgid ""
-"```rust\n"
-"fn main() {\n"
-"    let my_felt252 = 10;\n"
-"    // Since a felt252 might not fit in a u8, we need to unwrap the "
-"Option<T> type\n"
-"    let my_u8: u8 = my_felt252.try_into().unwrap();\n"
-"    let my_u16: u16 = my_u8.into();\n"
-"    let my_u32: u32 = my_u16.into();\n"
-"    let my_u64: u64 = my_u32.into();\n"
-"    let my_u128: u128 = my_u64.into();\n"
-"    // As a felt252 is smaller than a u256, we can use the into() method\n"
-"    let my_u256: u256 = my_felt252.into();\n"
-"    let my_usize: usize = my_felt252.try_into().unwrap();\n"
-"    let my_other_felt252: felt252 = my_u8.into();\n"
-"    let my_third_felt252: felt252 = my_u16.into();\n"
-"}\n"
-"```"
+"// Since a felt252 might not fit in a u8, we need to unwrap the Option<T> "
+"type\n"
+msgstr ""
+
+#: src/ch02-02-data-types.md:171
+msgid "// As a felt252 is smaller than a u256, we can use the into() method\n"
 msgstr ""
 
 #: src/ch02-02-data-types.md:179
@@ -2217,14 +2002,12 @@ msgid ""
 "the same line will be ignored by the compiler."
 msgstr ""
 
-#: src/ch02-04-comments.md:5
-msgid ""
-"```rust\n"
-"fn main() -> felt252 {\n"
-"    // start of the function\n"
-"    1 + 4 // return the sum of 1 and 4\n"
-"}\n"
-"```"
+#: src/ch02-04-comments.md:7
+msgid "// start of the function\n"
+msgstr ""
+
+#: src/ch02-04-comments.md:8
+msgid "// return the sum of 1 and 4\n"
 msgstr ""
 
 #: src/ch02-05-control-flow.md:3
@@ -2381,7 +2164,7 @@ msgid ""
 "including a gas meter. The gas meter is a mechanism that limits the amount "
 "of computation that can be done in a program. By setting a value to the "
 "`--available-gas` flag, we can set the maximum amount of gas available to "
-"the program. Gas is a unit of measurements that expresses the computation "
+"the program. Gas is a unit of measurement that expresses the computation "
 "cost of an instruction. When the gas meter runs out, the program will stop. "
 "In this case, the program panicked because it ran out of gas, as the stop "
 "condition was never reached. It is particularly important in the context of "
@@ -2475,9 +2258,9 @@ msgstr ""
 
 #: src/ch03-01-arrays.md:5
 msgid ""
-"An important thing to note is that arrays have limited modifications "
-"options. Arrays are, in fact, queues whose values can't be modified. This "
-"has to do with the fact that once a memory slot is written to, it cannot be "
+"An important thing to note is that arrays have limited modification options. "
+"Arrays are, in fact, queues whose values can't be modified. This has to do "
+"with the fact that once a memory slot is written to, it cannot be "
 "overwritten, but only read from it. You can only append items to the end of "
 "an array and remove items from the front using `pop_front`."
 msgstr ""
@@ -2495,7 +2278,7 @@ msgstr ""
 #: src/ch03-01-arrays.md:21
 msgid ""
 "When required, you can pass the expected type of items inside the array when "
-"instantiating the array like this, or explicitly define the type the "
+"instantiating the array like this, or explicitly define the type of the "
 "variable."
 msgstr ""
 
@@ -2523,21 +2306,8 @@ msgid ""
 "element, or `Option::None` if the array is empty."
 msgstr ""
 
-#: src/ch03-01-arrays.md:51
-msgid ""
-"```rust\n"
-"use debug::PrintTrait;\n"
-"\n"
-"fn main() {\n"
-"    let mut a = ArrayTrait::new();\n"
-"    a.append(10);\n"
-"    a.append(1);\n"
-"    a.append(2);\n"
-"\n"
-"    let first_value = a.pop_front().unwrap();\n"
-"    first_value.print(); // print '10'\n"
-"}\n"
-"```"
+#: src/ch03-01-arrays.md:61
+msgid "// print '10'\n"
 msgstr ""
 
 #: src/ch03-01-arrays.md:65
@@ -2604,31 +2374,18 @@ msgstr ""
 msgid "Here is an example with the `get()` method:"
 msgstr ""
 
-#: src/ch03-01-arrays.md:96
+#: src/ch03-01-arrays.md:101
 msgid ""
-"```rust\n"
-"fn main() -> u128 {\n"
-"    let mut arr = ArrayTrait::<u128>::new();\n"
-"    arr.append(100);\n"
-"    let index_to_access =\n"
-"        1; // Change this value to see different results, what would happen "
-"if the index doesn't exist?\n"
-"    match arr.get(index_to_access) {\n"
-"        Option::Some(x) => {\n"
-"            *x\n"
-"                .unbox() // Don't worry about * for now, if you are curious "
-"see Chapter 4.2 #desnap operator\n"
+"// Change this value to see different results, what would happen if the "
+"index doesn't exist?\n"
+msgstr ""
+
+#: src/ch03-01-arrays.md:105
+msgid ""
+"// Don't worry about * for now, if you are curious see Chapter 4.2 #desnap "
+"operator\n"
 "        // It basically means \"transform what get(idx) returned into a real "
 "value\"\n"
-"        },\n"
-"        Option::None(_) => {\n"
-"            let mut data = ArrayTrait::new();\n"
-"            data.append('out of bounds');\n"
-"            panic(data)\n"
-"        }\n"
-"    }\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch03-01-arrays.md:117
@@ -2763,25 +2520,20 @@ msgid ""
 "balance of the same user changes:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:39
-msgid ""
-"```rust\n"
-"fn main() {\n"
-"    let mut balances: Felt252Dict<u64> = Default::default();\n"
-"\n"
-"    // Insert Alex with 100 balance\n"
-"    balances.insert('Alex', 100);\n"
-"    // Check that Alex has indeed 100 associated with him\n"
-"    let alex_balance = balances.get('Alex');\n"
-"    assert(alex_balance == 100, 'Alex balance is not 100');\n"
-"\n"
-"    // Insert Alex again, this time with 200 balance\n"
-"    balances.insert('Alex', 200);\n"
-"    // Check the new balance is correct\n"
-"    let alex_balance_2 = balances.get('Alex');\n"
-"    assert(alex_balance_2 == 200, 'Alex balance is not 200');\n"
-"}\n"
-"```"
+#: src/ch03-02-dictionaries.md:43
+msgid "// Insert Alex with 100 balance\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:45
+msgid "// Check that Alex has indeed 100 associated with him\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:49
+msgid "// Insert Alex again, this time with 200 balance\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:51
+msgid "// Check the new balance is correct\n"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:57
@@ -2891,63 +2643,47 @@ msgstr ""
 msgid "These instructions would then produce the following list of entries:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:108
-#: src/ch03-02-dictionaries.md:130
+#: src/ch03-02-dictionaries.md:108 src/ch03-02-dictionaries.md:130
 #: src/ch03-02-dictionaries.md:143
 msgid "key"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:108
-#: src/ch03-02-dictionaries.md:130
+#: src/ch03-02-dictionaries.md:108 src/ch03-02-dictionaries.md:130
 #: src/ch03-02-dictionaries.md:143
 msgid "previous"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:108
-#: src/ch03-02-dictionaries.md:130
+#: src/ch03-02-dictionaries.md:108 src/ch03-02-dictionaries.md:130
 #: src/ch03-02-dictionaries.md:143
 msgid "new"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:110
-#: src/ch03-02-dictionaries.md:112
-#: src/ch03-02-dictionaries.md:132
-#: src/ch03-02-dictionaries.md:136
-#: src/ch03-02-dictionaries.md:137
-#: src/ch03-02-dictionaries.md:139
+#: src/ch03-02-dictionaries.md:110 src/ch03-02-dictionaries.md:112
+#: src/ch03-02-dictionaries.md:132 src/ch03-02-dictionaries.md:136
+#: src/ch03-02-dictionaries.md:137 src/ch03-02-dictionaries.md:139
 #: src/ch03-02-dictionaries.md:145
 msgid "Alex"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:110
-#: src/ch03-02-dictionaries.md:111
-#: src/ch03-02-dictionaries.md:132
-#: src/ch03-02-dictionaries.md:133
-#: src/ch03-02-dictionaries.md:134
-#: src/ch03-02-dictionaries.md:145
-#: src/ch03-02-dictionaries.md:146
-#: src/ch03-02-dictionaries.md:147
+#: src/ch03-02-dictionaries.md:110 src/ch03-02-dictionaries.md:111
+#: src/ch03-02-dictionaries.md:132 src/ch03-02-dictionaries.md:133
+#: src/ch03-02-dictionaries.md:134 src/ch03-02-dictionaries.md:145
+#: src/ch03-02-dictionaries.md:146 src/ch03-02-dictionaries.md:147
 msgid "0"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:110
-#: src/ch03-02-dictionaries.md:112
-#: src/ch03-02-dictionaries.md:133
-#: src/ch03-02-dictionaries.md:135
+#: src/ch03-02-dictionaries.md:110 src/ch03-02-dictionaries.md:112
+#: src/ch03-02-dictionaries.md:133 src/ch03-02-dictionaries.md:135
 msgid "100"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:111
-#: src/ch03-02-dictionaries.md:113
-#: src/ch03-02-dictionaries.md:133
-#: src/ch03-02-dictionaries.md:135
-#: src/ch03-02-dictionaries.md:138
-#: src/ch03-02-dictionaries.md:146
+#: src/ch03-02-dictionaries.md:111 src/ch03-02-dictionaries.md:113
+#: src/ch03-02-dictionaries.md:133 src/ch03-02-dictionaries.md:135
+#: src/ch03-02-dictionaries.md:138 src/ch03-02-dictionaries.md:146
 msgid "Maria"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:111
-#: src/ch03-02-dictionaries.md:113
+#: src/ch03-02-dictionaries.md:111 src/ch03-02-dictionaries.md:113
 #: src/ch03-02-dictionaries.md:113
 msgid "50"
 msgstr ""
@@ -3011,43 +2747,35 @@ msgstr ""
 msgid "For example, given the following entry list:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:132
-#: src/ch03-02-dictionaries.md:136
+#: src/ch03-02-dictionaries.md:132 src/ch03-02-dictionaries.md:136
 msgid "150"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:134
-#: src/ch03-02-dictionaries.md:147
+#: src/ch03-02-dictionaries.md:134 src/ch03-02-dictionaries.md:147
 msgid "Charles"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:134
-#: src/ch03-02-dictionaries.md:147
+#: src/ch03-02-dictionaries.md:134 src/ch03-02-dictionaries.md:147
 msgid "70"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:135
-#: src/ch03-02-dictionaries.md:138
+#: src/ch03-02-dictionaries.md:135 src/ch03-02-dictionaries.md:138
 msgid "250"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:136
-#: src/ch03-02-dictionaries.md:137
+#: src/ch03-02-dictionaries.md:136 src/ch03-02-dictionaries.md:137
 msgid "40"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:137
-#: src/ch03-02-dictionaries.md:139
+#: src/ch03-02-dictionaries.md:137 src/ch03-02-dictionaries.md:139
 msgid "300"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:138
-#: src/ch03-02-dictionaries.md:146
+#: src/ch03-02-dictionaries.md:138 src/ch03-02-dictionaries.md:146
 msgid "190"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:139
-#: src/ch03-02-dictionaries.md:145
+#: src/ch03-02-dictionaries.md:139 src/ch03-02-dictionaries.md:145
 msgid "90"
 msgstr ""
 
@@ -3184,29 +2912,22 @@ msgstr ""
 msgid "Implementing our custom get would look like this:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:193
+#: src/ch03-02-dictionaries.md:199 src/ch03-02-dictionaries.md:248
+msgid "// Get the new entry and the previous value held at `key`\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:202 src/ch03-02-dictionaries.md:251
+msgid "// Store the value to return\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:205 src/ch03-02-dictionaries.md:254
 msgid ""
-"```rust,noplayground\n"
-"use dict::Felt252DictEntryTrait;\n"
-"\n"
-"fn custom_get<T, impl TDefault: Felt252DictValue<T>, impl TDrop: Drop<T>, "
-"impl TCopy: Copy<T>>(\n"
-"    ref dict: Felt252Dict<T>, key: felt252\n"
-") -> T {\n"
-"    // Get the new entry and the previous value held at `key`\n"
-"    let (entry, prev_value) = dict.entry(key);\n"
-"\n"
-"    // Store the value to return\n"
-"    let return_value = prev_value;\n"
-"\n"
-"    // Update the entry with `prev_value` and get back ownership of the "
+"// Update the entry with `prev_value` and get back ownership of the "
 "dictionary\n"
-"    dict = entry.finalize(prev_value);\n"
-"\n"
-"    // Return the read value\n"
-"    return_value\n"
-"}\n"
-"```"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:208 src/ch03-02-dictionaries.md:257
+msgid "// Return the read value\n"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:213
@@ -3216,30 +2937,17 @@ msgid ""
 "look like the following:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:215
+#: src/ch03-02-dictionaries.md:227
 msgid ""
-"```rust,noplayground\n"
-"use dict::Felt252DictEntryTrait;\n"
-"\n"
-"fn custom_insert<\n"
-"    T,\n"
-"    impl TDefault: Felt252DictValue<T>,\n"
-"    impl TDestruct: Destruct<T>,\n"
-"    impl TPrint: PrintTrait<T>,\n"
-"    impl TDrop: Drop<T>\n"
-">(\n"
-"    ref dict: Felt252Dict<T>, key: felt252, value: T\n"
-") {\n"
-"    // Get the last entry associated with `key`\n"
+"// Get the last entry associated with `key`\n"
 "    // Notice that if `key` does not exists, _prev_value will\n"
 "    // be the default value of T.\n"
-"    let (entry, _prev_value) = dict.entry(key);\n"
-"\n"
-"    // Insert `entry` back in the dictionary with the updated value,\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:232
+msgid ""
+"// Insert `entry` back in the dictionary with the updated value,\n"
 "    // and receive ownership of the dictionary\n"
-"    dict = entry.finalize(value);\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:238
@@ -3249,62 +2957,28 @@ msgid ""
 "some example usage:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:240
-msgid ""
-"```rust\n"
-"# use dict::Felt252DictEntryTrait;\n"
-"# \n"
-"# use debug::PrintTrait;\n"
-"# \n"
-"# fn custom_get<T, impl TDefault: Felt252DictValue<T>, impl TDrop: Drop<T>, "
-"impl TCopy: Copy<T>>(\n"
-"#     ref dict: Felt252Dict<T>, key: felt252\n"
-"# ) -> T {\n"
-"#     // Get the new entry and the previous value held at `key`\n"
-"#     let (entry, prev_value) = dict.entry(key);\n"
-"# \n"
-"#     // Store the value to return\n"
-"#     let return_value = prev_value;\n"
-"# \n"
-"#     // Update the entry with `prev_value` and get back ownership of the "
-"dictionary\n"
-"#     dict = entry.finalize(prev_value);\n"
-"# \n"
-"#     // Return the read value\n"
-"#     return_value\n"
-"# }\n"
-"# \n"
-"# fn custom_insert<\n"
-"#     T,\n"
-"#     impl TDefault: Felt252DictValue<T>,\n"
-"#     impl TDestruct: Destruct<T>,\n"
-"#     impl TPrint: PrintTrait<T>,\n"
-"#     impl TDrop: Drop<T>\n"
-"# >(\n"
-"#     ref dict: Felt252Dict<T>, key: felt252, value: T\n"
-"# ) {\n"
-"#     // Get the last entry associated with `key`\n"
-"#     // Notice that if `key` does not exists, _prev_value will\n"
-"#     // be the default value of T.\n"
-"#     let (entry, _prev_value) = dict.entry(key);\n"
-"# \n"
-"#     // Insert `entry` back in the dictionary with the updated value,\n"
-"#     // and receive ownership of the dictionary\n"
-"#     dict = entry.finalize(value);\n"
-"# }\n"
-"# \n"
-"fn main() {\n"
-"    let mut dict: Felt252Dict<u64> = Default::default();\n"
-"\n"
-"    custom_insert(ref dict, '0', 100);\n"
-"\n"
-"    let val = custom_get(ref dict, '0');\n"
-"\n"
-"    assert(val == 100, 'Expecting 100');\n"
-"}\n"
-"# \n"
-"# \n"
-"```"
+#: src/ch03-02-dictionaries.md:270
+msgid "// Get the last entry associated with `key`\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:271
+msgid "// Notice that if `key` does not exists, _prev_value will\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:272
+msgid "// be the default value of T.\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:275
+msgid "// Insert `entry` back in the dictionary with the updated value,\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:276
+msgid "// and receive ownership of the dictionary\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:283 src/ch03-02-dictionaries.md:285
+msgid "'0'"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:293
@@ -3346,27 +3020,20 @@ msgid ""
 "dictionary."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:305
-msgid ""
-"```rust,noplayground\n"
-"use dict::Felt252DictTrait;\n"
-"use nullable::{nullable_from_box, match_nullable, FromNullableResult};\n"
-"\n"
-"fn main() {\n"
-"    // Create the dictionary\n"
-"    let mut d: Felt252Dict<Nullable<Span<felt252>>> = Default::default();\n"
-"\n"
-"    // Crate the array to insert\n"
-"    let mut a = ArrayTrait::new();\n"
-"    a.append(8);\n"
-"    a.append(9);\n"
-"    a.append(10);\n"
-"\n"
-"    // Insert it as a `Span`\n"
-"    d.insert(0, nullable_from_box(BoxTrait::new(a.span())));\n"
-"\n"
-"//...\n"
-"```"
+#: src/ch03-02-dictionaries.md:310 src/ch03-02-dictionaries.md:368
+msgid "// Create the dictionary\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:313 src/ch03-02-dictionaries.md:371
+msgid "// Crate the array to insert\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:319 src/ch03-02-dictionaries.md:377
+msgid "// Insert it as a `Span`\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:321 src/ch03-02-dictionaries.md:336
+msgid "//...\n"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:325
@@ -3404,27 +3071,16 @@ msgid ""
 "that:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:335
-msgid ""
-"```rust,noplayground\n"
-"//...\n"
-"\n"
-"    // Get value back\n"
-"    let val = d.get(0);\n"
-"\n"
-"    // Search the value and assert it is not null\n"
-"    let span = match match_nullable(val) {\n"
-"        FromNullableResult::Null(()) => panic_with_felt252('No value "
-"found'),\n"
-"        FromNullableResult::NotNull(val) => val.unbox(),\n"
-"    };\n"
-"\n"
-"    // Verify we are having the right values\n"
-"    assert(*span.at(0) == 8, 'Expecting 8');\n"
-"    assert(*span.at(1) == 9, 'Expecting 9');\n"
-"    assert(*span.at(2) == 10, 'Expecting 10');\n"
-"}\n"
-"```"
+#: src/ch03-02-dictionaries.md:338 src/ch03-02-dictionaries.md:380
+msgid "// Get value back\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:341 src/ch03-02-dictionaries.md:383
+msgid "// Search the value and assert it is not null\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:347 src/ch03-02-dictionaries.md:389
+msgid "// Verify we are having the right values\n"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:354
@@ -3445,45 +3101,6 @@ msgstr ""
 
 #: src/ch03-02-dictionaries.md:360
 msgid "The complete script would look like this:"
-msgstr ""
-
-#: src/ch03-02-dictionaries.md:362
-msgid ""
-"```rust\n"
-"\n"
-"use dict::Felt252DictTrait;\n"
-"use nullable::{nullable_from_box, match_nullable, FromNullableResult};\n"
-"\n"
-"fn main() {\n"
-"    // Create the dictionary\n"
-"    let mut d: Felt252Dict<Nullable<Span<felt252>>> = Default::default();\n"
-"\n"
-"    // Crate the array to insert\n"
-"    let mut a = ArrayTrait::new();\n"
-"    a.append(8);\n"
-"    a.append(9);\n"
-"    a.append(10);\n"
-"\n"
-"    // Insert it as a `Span`\n"
-"    d.insert(0, nullable_from_box(BoxTrait::new(a.span())));\n"
-"\n"
-"    // Get value back\n"
-"    let val = d.get(0);\n"
-"\n"
-"    // Search the value and assert it is not null\n"
-"    let span = match match_nullable(val) {\n"
-"        FromNullableResult::Null(()) => panic_with_felt252('No value "
-"found'),\n"
-"        FromNullableResult::NotNull(val) => val.unbox(),\n"
-"    };\n"
-"\n"
-"    // Verify we are having the right values\n"
-"    assert(*span.at(0) == 8, 'Expecting 8');\n"
-"    assert(*span.at(1) == 9, 'Expecting 9');\n"
-"    assert(*span.at(2) == 10, 'Expecting 10');\n"
-"}\n"
-"\n"
-"```"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:397
@@ -3563,32 +3180,16 @@ msgstr ""
 msgid "The implementation, with all restriction in place, would be as follow:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:433
-msgid ""
-"```rust,noplayground\n"
-"\n"
-"\n"
-"impl UserDatabaseImpl<T, impl TDefault: Felt252DictValue<T>> of "
-"UserDatabaseTrait<T> {\n"
-"    // Creates a database\n"
-"    fn new() -> UserDatabase<T> {\n"
-"        UserDatabase { users_amount: 0, balances: Default::default() }\n"
-"    }\n"
-"\n"
-"    // Get the user's balance\n"
-"    fn get_balance<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: "
-"felt252) -> T {\n"
-"        self.balances.get(name)\n"
-"    }\n"
-"\n"
-"    // Add a user\n"
-"    fn add_user<impl TDrop: Drop<T>>(ref self: UserDatabase<T>, name: "
-"felt252, balance: T) {\n"
-"        self.balances.insert(name, balance);\n"
-"        self.users_amount += 1;\n"
-"    }\n"
-"}\n"
-"```"
+#: src/ch03-02-dictionaries.md:437 src/ch03-02-dictionaries.md:484
+msgid "// Creates a database\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:442 src/ch03-02-dictionaries.md:489
+msgid "// Get the user's balance\n"
+msgstr ""
+
+#: src/ch03-02-dictionaries.md:447 src/ch03-02-dictionaries.md:494
+msgid "// Add a user\n"
 msgstr ""
 
 #: src/ch03-02-dictionaries.md:455
@@ -3612,71 +3213,6 @@ msgid ""
 "fully functional database. We can now try it out:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:471
-msgid ""
-"```rust\n"
-"# struct UserDatabase<T> {\n"
-"#     users_amount: u64,\n"
-"#     balances: Felt252Dict<T>,\n"
-"# }\n"
-"# \n"
-"# trait UserDatabaseTrait<T> {\n"
-"#     fn new() -> UserDatabase<T>;\n"
-"#     fn add_user<impl TDrop: Drop<T>>(ref self: UserDatabase<T>, name: "
-"felt252, balance: T);\n"
-"#     fn get_balance<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: "
-"felt252) -> T;\n"
-"# }\n"
-"# \n"
-"# impl UserDatabaseImpl<T, impl TDefault: Felt252DictValue<T>> of "
-"UserDatabaseTrait<T> {\n"
-"#     // Creates a database\n"
-"#     fn new() -> UserDatabase<T> {\n"
-"#         UserDatabase { users_amount: 0, balances: Default::default() }\n"
-"#     }\n"
-"# \n"
-"#     // Get the user's balance\n"
-"#     fn get_balance<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: "
-"felt252) -> T {\n"
-"#         self.balances.get(name)\n"
-"#     }\n"
-"# \n"
-"#     // Add a user\n"
-"#     fn add_user<impl TDrop: Drop<T>>(ref self: UserDatabase<T>, name: "
-"felt252, balance: T) {\n"
-"#         self.balances.insert(name, balance);\n"
-"#         self.users_amount += 1;\n"
-"#     }\n"
-"# }\n"
-"# \n"
-"# impl UserDatabaseDestruct<\n"
-"#     T, impl TDrop: Drop<T>, impl TDefault: Felt252DictValue<T>\n"
-"# > of Destruct<UserDatabase<T>> {\n"
-"#     fn destruct(self: UserDatabase<T>) nopanic {\n"
-"#         self.balances.squash();\n"
-"#     }\n"
-"# }\n"
-"# \n"
-"fn main() {\n"
-"    let mut db = UserDatabaseTrait::new();\n"
-"\n"
-"    db.add_user('Alex', 100);\n"
-"    db.add_user('Maria', 80);\n"
-"\n"
-"    db.add_user('Alex', 40);\n"
-"    db.add_user('Maria', 0);\n"
-"\n"
-"    let alex_latest_balance = db.get_balance('Alex');\n"
-"    let maria_latest_balance = db.get_balance('Maria');\n"
-"\n"
-"    assert(alex_latest_balance == 40, 'Expected 40');\n"
-"    assert(maria_latest_balance == 0, 'Expected 0');\n"
-"}\n"
-"# \n"
-"# \n"
-"```"
-msgstr ""
-
 #: src/ch03-02-dictionaries.md:530
 msgid ""
 "Well done! You finished this chapter on arrays and dictionaries in Cairo. "
@@ -3689,6 +3225,223 @@ msgid ""
 "When you’re ready to move on, we’ll talk about a concept that Cairo shares "
 "with Rust and that _doesn’t_ commonly exist in other programming languages: "
 "ownership."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:3
+msgid ""
+"When you first start programming in Cairo, you'll likely want to use arrays "
+"(`Array<T>`) to store collections of data. However, you will quickly realize "
+"that arrays have one big limitation - the data stored in them is immutable. "
+"Once you append a value to an array, you can't modify it."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:8
+msgid ""
+"This can be frustrating when you want to use a mutable data structure. For "
+"example, say you're making a game where the players have a level, and they "
+"can level up. You might try to store the level of the players in an array:"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:19
+msgid ""
+"But then you realize you can't increase the level at a specific index once "
+"it's set. If a player dies, you cannot remove it from the array unless he "
+"happens to be in the first position."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:23
+msgid ""
+"Fortunately, Cairo provides a handy built-in [dictionary "
+"type](./ch03-02-dictionaries.md) called `Felt252Dict<T>` that allows us to "
+"simulate the behavior of mutable data structures. Let's first explore how to "
+"use it to create a dynamic array implementation."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:28
+msgid ""
+"Note: Several concepts used in this chapter are presented in later parts of "
+"the book. We recommend you to check out the following chapter first: "
+"[Structs](ch05-00-using-structs-to-structure-related-data), "
+"[Methods](./ch05-03-method-syntax.md), [Generic "
+"types](./ch08-00-generic-types-and-traits.md), "
+"[Traits](./ch08-02-traits-in-cairo.md)"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:35
+msgid "Simulating a dynamic array with dicts"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:37
+msgid ""
+"First, let's think about how we want our mutable dynamic array to behave. "
+"What operations should it support?"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:40
+msgid "It should:"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:42
+msgid "Allow us to append items at the end"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:43
+msgid "Let us access any item by index"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:44
+msgid "Allow setting the value of an item at a specific index"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:45
+msgid "Return the current length"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:47
+msgid "We can define this interface in Cairo like:"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:60
+msgid ""
+"This provides a blueprint for the implementation of our dynamic array. We "
+"named it Vec as it is similar to the `Vec<T>` data structure in Rust."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:63
+msgid "Implementing a dynamic array in Cairo"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:65
+msgid ""
+"To store our data, we'll use a `Felt252Dict<T>` which maps index numbers "
+"(felts) to values. We'll also store a separate `len` field to track the "
+"length."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:68
+msgid ""
+"Here is what our struct looks like. We wrap the type `T` inside `Nullable` "
+"pointer to allow using any type `T` in our data structure, as explained in "
+"the "
+"[Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively) "
+"section:"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:80
+msgid ""
+"The key thing that makes this vector mutable is that we can insert values "
+"into the dictionary to set or update values in our data structure. For "
+"example, to update a value at a specific index, we do:"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:91
+msgid ""
+"This overwrites the previously existing value at that index in the "
+"dictionary."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:93
+msgid ""
+"While arrays are immutable, dictionaries provide the flexibility we need for "
+"modifiable data structures like vectors."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:96
+msgid ""
+"The implementation of the rest of the interface is straightforward. The "
+"implementation of all the methods defined in our interface can be done as "
+"follow :"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:133
+msgid ""
+"The full implementation of the `Vec` structure can be found in the "
+"community-maintained library "
+"[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures)."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:137
+msgid "Simulating a Stack with dicts"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:139
+msgid ""
+"We will now look at a second example and its implementation details: a Stack."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:141
+msgid ""
+"A Stack is a LIFO (Last-In, First-Out) collection. The insertion of a new "
+"element and removal of an existing element takes place at the same end, "
+"represented as the top of the stack."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:145
+msgid "Let us define what operations we need to create a stack :"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:147
+msgid "Push an item to the top of the stack"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:148
+msgid "Pop an item from the top of the stack"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:149
+msgid "Check whether there are still any elements in the stack."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:151
+msgid "From these specifications we can define the following interface :"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:161
+msgid "Implementing a Mutable Stack in Cairo"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:163
+msgid ""
+"To create a stack data structure in Cairo, we can again use a "
+"`Felt252Dict<T>` to store the values of the stack along with a `usize` field "
+"to keep track of the length of the stack to iterate over it."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:167
+msgid "The Stack struct is defined as:"
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:176
+msgid "Next, let's see how our main functions `push` and `pop` are implemented."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:201
+msgid ""
+"The code uses the `insert` and `get` methods to access the values in the "
+"`Felt252Dict<T>`. To push an element at the top of the stack, the `push` "
+"function inserts the element in the dict at index `len` - and increases the "
+"`len` field of the stack to keep track of the position of the stack top. To "
+"remove a value, the `pop` function retrieves the last value at position "
+"`len-1` and then decreases the value of `len` to update the position of the "
+"stack top accordingly."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:209
+msgid ""
+"The full implementation of the Stack, along with more data structures that "
+"you can use in your code, can be found in the community-maintained "
+"[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures) "
+"library, in the \"data_structures\" crate."
+msgstr ""
+
+#: src/ch03-03-custom-data-structures.md:216
+msgid ""
+"While Cairo's memory model is immutable and can make it difficult to "
+"implement mutable data structures, we can fortunately use the "
+"`Felt252Dict<T>` type to simulate mutable data structures. This allows us to "
+"implement a wide range of data structures that are useful for many "
+"applications, effectively hiding the complexity of the underlying memory "
+"model."
 msgstr ""
 
 #: src/ch04-00-understanding-ownership.md:1
@@ -3773,19 +3526,24 @@ msgid ""
 "valid."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:39
-msgid ""
-"```rust\n"
-"# //TAG: ignore_fmt\n"
-"# fn main() {\n"
-"    {                      // s is not valid here, it’s not yet declared\n"
-"        let s = 'hello';   // s is valid from this point forward\n"
-"\n"
-"        // do stuff with s\n"
-"    }                      // this scope is now over, and s is no longer "
-"valid\n"
-"# }\n"
-"```"
+#: src/ch04-01-what-is-ownership.md:40
+msgid "//TAG: ignore_fmt\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:42
+msgid "// s is not valid here, it’s not yet declared\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:43
+msgid "// s is valid from this point forward\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:45
+msgid "// do stuff with s\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:46
+msgid "// this scope is now over, and s is no longer valid\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:50
@@ -3877,24 +3635,8 @@ msgid ""
 "can be."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:122
-msgid ""
-"```rust,ignore_format\n"
-"#[derive(Copy, Drop)]\n"
-"struct Point {\n"
-"    x: u128,\n"
-"    y: u128,\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let p1 = Point { x: 5, y: 10 };\n"
-"    foo(p1);\n"
-"    foo(p1);\n"
-"}\n"
-"\n"
-"fn foo(p: Point) { // do something with p\n"
-"}\n"
-"```"
+#: src/ch04-01-what-is-ownership.md:135
+msgid "// do something with p\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:139
@@ -3925,15 +3667,8 @@ msgid ""
 "compile, because the struct `A` is not moved before it goes out of scope:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:149
-msgid ""
-"```rust,does_not_compile\n"
-"struct A {}\n"
-"\n"
-"fn main() {\n"
-"    A {}; // error: Value not dropped.\n"
-"}\n"
-"```"
+#: src/ch04-01-what-is-ownership.md:153
+msgid "// error: Value not dropped.\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:157
@@ -3967,16 +3702,8 @@ msgid ""
 "types containing dictionaries. For example, the following code compiles:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:171
-msgid ""
-"```rust\n"
-"#[derive(Drop)]\n"
-"struct A {}\n"
-"\n"
-"fn main() {\n"
-"    A {}; // Now there is no error.\n"
-"}\n"
-"```"
+#: src/ch04-01-what-is-ownership.md:176
+msgid "// Now there is no error.\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:180
@@ -4013,18 +3740,8 @@ msgid ""
 "implementation for the `A` type:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:208
-msgid ""
-"```rust\n"
-"#[derive(Destruct)]\n"
-"struct A {\n"
-"    dict: Felt252Dict<u128>\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    A { dict: Default::default() }; // No error here\n"
-"}\n"
-"```"
+#: src/ch04-01-what-is-ownership.md:215
+msgid "// No error here\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:219
@@ -4087,36 +3804,46 @@ msgid ""
 "into and out of scope."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:254
+#: src/ch04-01-what-is-ownership.md:259
+msgid "// my_struct comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:261
 msgid ""
-"```rust\n"
-"#[derive(Drop)]\n"
-"struct MyStruct{}\n"
-"\n"
-"fn main() {\n"
-"    let my_struct = MyStruct{};  // my_struct comes into scope\n"
-"\n"
-"    takes_ownership(my_struct);     // my_struct's value moves into the "
-"function...\n"
+"// my_struct's value moves into the function...\n"
 "                                    // ... and so is no longer valid here\n"
-"\n"
-"    let x = 5;                 // x comes into scope\n"
-"\n"
-"    makes_copy(x);                  // x would move into the function,\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:264
+msgid "// x comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:266
+msgid ""
+"// x would move into the function,\n"
 "                                    // but u128 implements Copy, so it is "
 "okay to still\n"
 "                                    // use x afterward\n"
-"\n"
-"}                                   // Here, x goes out of scope and is "
-"dropped.\n"
-"\n"
-"\n"
-"fn takes_ownership(some_struct: MyStruct) { // some_struct comes into scope\n"
-"} // Here, some_struct goes out of scope and `drop` is called.\n"
-"\n"
-"fn makes_copy(some_uinteger: u128) { // some_uinteger comes into scope\n"
-"} // Here, some_integer goes out of scope and is dropped.\n"
-"```"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:270
+msgid "// Here, x goes out of scope and is dropped.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:273
+msgid "// some_struct comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:274
+msgid "// Here, some_struct goes out of scope and `drop` is called.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:276
+msgid "// some_uinteger comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:277
+msgid "// Here, some_integer goes out of scope and is dropped.\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:280
@@ -4143,47 +3870,63 @@ msgid ""
 "Listing 4-3."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:296
+#: src/ch04-01-what-is-ownership.md:301
 msgid ""
-"```rust\n"
-"#[derive(Drop)]\n"
-"struct A {}\n"
-"\n"
-"fn main() {\n"
-"    let a1 = gives_ownership();           // gives_ownership moves its "
-"return\n"
+"// gives_ownership moves its return\n"
 "                                          // value into a1\n"
-"\n"
-"    let a2 = A {};                        // a2 comes into scope\n"
-"\n"
-"    let a3 = takes_and_gives_back(a2);    // a2 is moved into\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:304
+msgid "// a2 comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:306
+msgid ""
+"// a2 is moved into\n"
 "                                          // takes_and_gives_back, which "
 "also\n"
 "                                          // moves its return value into a3\n"
-"\n"
-"} // Here, a3 goes out of scope and is dropped. a2 was moved, so nothing\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:310
+msgid ""
+"// Here, a3 goes out of scope and is dropped. a2 was moved, so nothing\n"
 "  // happens. a1 goes out of scope and is dropped.\n"
-"\n"
-"fn gives_ownership() -> A {               // gives_ownership will move its\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:313
+msgid ""
+"// gives_ownership will move its\n"
 "                                          // return value into the function\n"
 "                                          // that calls it\n"
-"\n"
-"    let some_a = A {};                    // some_a comes into scope\n"
-"\n"
-"    some_a                                // some_a is returned and\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:317
+msgid "// some_a comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:319
+msgid ""
+"// some_a is returned and\n"
 "                                          // moves ownership to the calling\n"
 "                                          // function\n"
-"}\n"
-"\n"
-"// This function takes an instance some_a of A and returns it\n"
-"fn takes_and_gives_back(some_a: A) -> A { // some_a comes into\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:323
+msgid "// This function takes an instance some_a of A and returns it\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:325
+msgid ""
+"// some_a comes into\n"
 "                                          // scope\n"
-"\n"
-"    some_a                               // some_a is returned and moves\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:328
+msgid ""
+"// some_a is returned and moves\n"
 "                                         // ownership to the calling\n"
 "                                         // function\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:334
@@ -4211,21 +3954,8 @@ msgid ""
 "4-5."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:349
-msgid ""
-"```rust\n"
-"fn main() {\n"
-"    let arr1 = ArrayTrait::<u128>::new();\n"
-"\n"
-"    let (arr2, len) = calculate_length(arr1);\n"
-"}\n"
-"\n"
-"fn calculate_length(arr: Array<u128>) -> (Array<u128>, usize) {\n"
-"    let length = arr.len(); // len() returns the length of an array\n"
-"\n"
-"    (arr, length)\n"
-"}\n"
-"```"
+#: src/ch04-01-what-is-ownership.md:357
+msgid "// len() returns the length of an array\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:363
@@ -4273,31 +4003,26 @@ msgid ""
 "array is kept in the main function."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:25
+#: src/ch04-02-references-and-snapshots.md:30
+#: src/ch04-02-references-and-snapshots.md:69
+msgid "// Take a snapshot of `arr1` at this point in time\n"
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:31
+#: src/ch04-02-references-and-snapshots.md:70
+msgid "// Mutate `arr1` by appending a value\n"
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:34
 msgid ""
-"```rust\n"
-"use debug::PrintTrait;\n"
-"\n"
-"fn main() {\n"
-"    let mut arr1 = ArrayTrait::<u128>::new();\n"
-"    let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point "
-"in time\n"
-"    arr1.append(1); // Mutate `arr1` by appending a value\n"
-"    let first_length = calculate_length(\n"
-"        first_snapshot\n"
-"    ); // Calculate the length of the array when the snapshot was taken\n"
+"// Calculate the length of the array when the snapshot was taken\n"
 "    //ANCHOR: function_call\n"
-"    let second_length = calculate_length(@arr1); // Calculate the current "
-"length of the array\n"
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:36
+msgid ""
+"// Calculate the current length of the array\n"
 "    //ANCHOR_END: function_call\n"
-"    first_length.print();\n"
-"    second_length.print();\n"
-"}\n"
-"\n"
-"fn calculate_length(arr: @Array<u128>) -> usize {\n"
-"    arr.len()\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch04-02-references-and-snapshots.md:47
@@ -4325,29 +4050,12 @@ msgstr ""
 msgid "Let’s take a closer look at the function call here:"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:64
-msgid ""
-"```rust\n"
-"# use debug::PrintTrait;\n"
-"# \n"
-"# fn main() {\n"
-"#     let mut arr1 = ArrayTrait::<u128>::new();\n"
-"#     let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point "
-"in time\n"
-"#     arr1.append(1); // Mutate `arr1` by appending a value\n"
-"#     let first_length = calculate_length(\n"
-"#         first_snapshot\n"
-"#     ); // Calculate the length of the array when the snapshot was taken\n"
-"    let second_length = calculate_length(@arr1); // Calculate the current "
-"length of the array\n"
-"#     first_length.print();\n"
-"#     second_length.print();\n"
-"# }\n"
-"# \n"
-"# fn calculate_length(arr: @Array<u128>) -> usize {\n"
-"#     arr.len()\n"
-"# }\n"
-"```"
+#: src/ch04-02-references-and-snapshots.md:73
+msgid "// Calculate the length of the array when the snapshot was taken\n"
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:74
+msgid "// Calculate the current length of the array\n"
 msgstr ""
 
 #: src/ch04-02-references-and-snapshots.md:84
@@ -4364,17 +4072,15 @@ msgid ""
 "of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:88
+#: src/ch04-02-references-and-snapshots.md:91
+msgid "// array_snapshot is a snapshot of an Array\n"
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:93
 msgid ""
-"```rust, noplayground\n"
-"fn calculate_length(\n"
-"    array_snapshot: @Array<u128>\n"
-") -> usize { // array_snapshot is a snapshot of an Array\n"
-"    array_snapshot.len()\n"
-"} // Here, array_snapshot goes out of scope and is dropped.\n"
+"// Here, array_snapshot goes out of scope and is dropped.\n"
 "// However, because it is only a view of what the original array `arr` "
 "contains, the original `arr` can still be used.\n"
-"```"
 msgstr ""
 
 #: src/ch04-02-references-and-snapshots.md:97
@@ -4417,35 +4123,16 @@ msgid ""
 "the snapshots back into values using the `desnap` operator `*`."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:107
+#: src/ch04-02-references-and-snapshots.md:123
 msgid ""
-"```rust\n"
-"use debug::PrintTrait;\n"
-"\n"
-"#[derive(Copy, Drop)]\n"
-"struct Rectangle {\n"
-"    height: u64,\n"
-"    width: u64,\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let rec = Rectangle { height: 3, width: 10 };\n"
-"    let area = calculate_area(@rec);\n"
-"    area.print();\n"
-"}\n"
-"\n"
-"fn calculate_area(rec: @Rectangle) -> u64 {\n"
-"    // As rec is a snapshot to a Rectangle, its fields are also snapshots of "
-"the fields types.\n"
+"// As rec is a snapshot to a Rectangle, its fields are also snapshots of the "
+"fields types.\n"
 "    // We need to transform the snapshots back into values using the desnap "
 "operator `*`.\n"
 "    // This is only possible if the type is copyable, which is the case for "
 "u64.\n"
 "    // Here, `*` is used for both multiplying the height and width and for "
 "desnapping the snapshots.\n"
-"    *rec.height * *rec.width\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch04-02-references-and-snapshots.md:131
@@ -4746,21 +4433,9 @@ msgstr ""
 msgid "Listing 5-7 shows another version of our program that uses tuples."
 msgstr ""
 
-#: src/ch05-02-an-example-program-using-structs.md:50
-msgid ""
-"```rust\n"
-"use debug::PrintTrait;\n"
-"fn main() {\n"
-"    let rectangle = (30, 10);\n"
-"    let area = area(rectangle);\n"
-"    area.print(); // print out the area\n"
-"}\n"
-"\n"
-"fn area(dimension: (u64, u64)) -> u64 {\n"
-"    let (x, y) = dimension;\n"
-"    x * y\n"
-"}\n"
-"```"
+#: src/ch05-02-an-example-program-using-structs.md:55
+#: src/ch05-02-an-example-program-using-structs.md:87
+msgid "// print out the area\n"
 msgstr ""
 
 #: src/ch05-02-an-example-program-using-structs.md:64
@@ -4795,28 +4470,6 @@ msgid ""
 "We use structs to add meaning by labeling the data. We can transform the "
 "tuple we’re using into a struct with a name for the whole as well as names "
 "for the parts."
-msgstr ""
-
-#: src/ch05-02-an-example-program-using-structs.md:76
-msgid ""
-"```rust\n"
-"use debug::PrintTrait;\n"
-"\n"
-"struct Rectangle {\n"
-"    width: u64,\n"
-"    height: u64,\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let rectangle = Rectangle { width: 30, height: 10, };\n"
-"    let area = area(rectangle);\n"
-"    area.print(); // print out the area\n"
-"}\n"
-"\n"
-"fn area(rectangle: Rectangle) -> u64 {\n"
-"    rectangle.width * rectangle.height\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch05-02-an-example-program-using-structs.md:95
@@ -5083,8 +4736,7 @@ msgid ""
 "\\[Chapter 8\\]\\[modules\\]"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:248
-#: src/appendix-06-cairo-binaries.md:167
+#: src/ch05-03-method-syntax.md:248 src/appendix-06-cairo-binaries.md:167
 msgid "."
 msgstr ""
 
@@ -5361,7 +5013,7 @@ msgid ""
 "is in our example where each arm just returns a value. If you want to run "
 "multiple lines of code in a match arm, you must use curly brackets, with a "
 "comma following the arm. For example, the following code prints “Lucky "
-"penny!” every time the method is called with a `Coin::Penny(())`, but still "
+"penny!” every time the method is called with a `Coin::Penny`, but still "
 "returns the last value of the block, `1`:"
 msgstr ""
 
@@ -5416,11 +5068,11 @@ msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:112
 msgid ""
-"If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska(())))`, "
-"`coin` would be `Coin::Quarter(UsState::Alaska())`. When we compare that "
-"value with each of the match arms, none of them match until we reach "
+"If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` "
+"would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with "
+"each of the match arms, none of them match until we reach "
 "`Coin::Quarter(state)`. At that point, the binding for state will be the "
-"value `UsState::Alaska()`. We can then use that binding in the `PrintTrait`, "
+"value `UsState::Alaska`. We can then use that binding in the `PrintTrait`, "
 "thus getting the inner state value out of the `Coin` enum variant for "
 "`Quarter`."
 msgstr ""
@@ -5483,7 +5135,7 @@ msgstr ""
 #: src/ch06-02-the-match-control-flow-construct.md:161
 msgid ""
 "Now let’s consider the second call of `plus_one` in our main function, where "
-"`x` is `Option::None(())`. We enter the match and compare to the first arm:"
+"`x` is `Option::None`. We enter the match and compare to the first arm:"
 msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:167
@@ -5495,7 +5147,7 @@ msgstr ""
 #: src/ch06-02-the-match-control-flow-construct.md:173
 msgid ""
 "It matches! There’s no value to add to, so the program stops and returns the "
-"`Option::None(())` value on the right side of `=>`."
+"`Option::None` value on the right side of `=>`."
 msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:175
@@ -5771,14 +5423,12 @@ msgid ""
 "garden;`."
 msgstr ""
 
-#: src/ch07-02-defining-modules-to-control-scope.md:27
-msgid ""
-"```rust,noplayground\n"
-"  // crate root file (src/lib.cairo)\n"
-"    mod garden {\n"
-"    // code defining the garden module goes here\n"
-"    }\n"
-"```"
+#: src/ch07-02-defining-modules-to-control-scope.md:28
+msgid "// crate root file (src/lib.cairo)\n"
+msgstr ""
+
+#: src/ch07-02-defining-modules-to-control-scope.md:30
+msgid "// code defining the garden module goes here\n"
 msgstr ""
 
 #: src/ch07-02-defining-modules-to-control-scope.md:34
@@ -5799,14 +5449,12 @@ msgid ""
 "of the semicolon."
 msgstr ""
 
-#: src/ch07-02-defining-modules-to-control-scope.md:44
-msgid ""
-"```rust,noplayground\n"
-"// src/garden.cairo file\n"
-"mod vegetables {\n"
-"    // code defining the vegetables submodule goes here\n"
-"}\n"
-"```"
+#: src/ch07-02-defining-modules-to-control-scope.md:45
+msgid "// src/garden.cairo file\n"
+msgstr ""
+
+#: src/ch07-02-defining-modules-to-control-scope.md:47
+msgid "// code defining the vegetables submodule goes here\n"
 msgstr ""
 
 #: src/ch07-02-defining-modules-to-control-scope.md:51
@@ -6001,34 +5649,17 @@ msgid ""
 "`add_to_waitlist` function so it can find it."
 msgstr ""
 
-#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:17
-msgid ""
-"```rust,noplayground\n"
-"mod front_of_house {\n"
-"    mod hosting {\n"
-"        fn add_to_waitlist() {}\n"
-"\n"
-"        fn seat_at_table() {}\n"
-"    }\n"
-"\n"
-"    mod serving {\n"
-"        fn take_order() {}\n"
-"\n"
-"        fn serve_order() {}\n"
-"\n"
-"        fn take_payment() {}\n"
-"    }\n"
-"}\n"
-"\n"
-"\n"
-"fn eat_at_restaurant() {\n"
-"    // Absolute path\n"
-"    restaurant::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles\n"
-"\n"
-"    // Relative path\n"
-"    front_of_house::hosting::add_to_waitlist(); // ✅ Compiles\n"
-"}\n"
-"```"
+#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:36
+msgid "// Absolute path\n"
+msgstr ""
+
+#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:37
+#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:40
+msgid "// ✅ Compiles\n"
+msgstr ""
+
+#: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:39
+msgid "// Relative path\n"
 msgstr ""
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:44
@@ -6097,27 +5728,17 @@ msgid ""
 "`eat_at_restaurant`."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:12
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:13
 msgid ""
-"```rust\n"
 "// Assuming \"front_of_house\" module is contained in a crate called "
 "\"restaurant\", as mentioned in the section \"Defining Modules to Control "
 "Scope\"\n"
 "// If the path is created in the same crate, \"restaurant\" is optional in "
 "the use statement\n"
-"\n"
-"mod front_of_house {\n"
-"    mod hosting {\n"
-"        fn add_to_waitlist() {}\n"
-"    }\n"
-"}\n"
-"\n"
-"use restaurant::front_of_house::hosting;\n"
-"\n"
-"fn eat_at_restaurant() {\n"
-"    hosting::add_to_waitlist(); // ✅ Shorter path\n"
-"}\n"
-"```"
+msgstr ""
+
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:25
+msgid "// ✅ Shorter path\n"
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:29
@@ -6217,16 +5838,8 @@ msgid ""
 "rename an import with `as`:"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:133
-msgid ""
-"```rust\n"
-"use array::ArrayTrait as Arr;\n"
-"\n"
-"fn main() {\n"
-"    let mut arr = Arr::new(); // ArrayTrait was renamed to Arr\n"
-"    arr.append(1);\n"
-"}\n"
-"```"
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:137
+msgid "// ArrayTrait was renamed to Arr\n"
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:142
@@ -6261,41 +5874,29 @@ msgstr ""
 msgid "Here is an example where we import three structures from the same module:"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:162
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:163
 msgid ""
-"```rust\n"
 "// Assuming we have a module called `shapes` with the structures `Square`, "
 "`Circle`, and `Triangle`.\n"
-"mod shapes {\n"
-"    #[derive(Drop)]\n"
-"    struct Square {\n"
-"        side: u32\n"
-"    }\n"
-"\n"
-"    #[derive(Drop)]\n"
-"    struct Circle {\n"
-"        radius: u32\n"
-"    }\n"
-"\n"
-"    #[derive(Drop)]\n"
-"    struct Triangle {\n"
-"        base: u32,\n"
-"        height: u32,\n"
-"    }\n"
-"}\n"
-"\n"
+msgstr ""
+
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:181
+msgid ""
 "// We can import the structures `Square`, `Circle`, and `Triangle` from the "
 "`shapes` module like this:\n"
-"use shapes::{Square, Circle, Triangle};\n"
-"\n"
+msgstr ""
+
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:184
+msgid ""
 "// Now we can directly use `Square`, `Circle`, and `Triangle` in our code.\n"
-"fn main() {\n"
-"    let sq = Square { side: 5 };\n"
-"    let cr = Circle { radius: 3 };\n"
-"    let tr = Triangle { base: 5, height: 2 };\n"
-"// ...\n"
-"}\n"
-"```"
+msgstr ""
+
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:189
+#: src/ch08-02-traits-in-cairo.md:186 src/ch08-02-traits-in-cairo.md:190
+#: src/ch08-02-traits-in-cairo.md:199
+#: src/ch99-03-security-considerations.md:143
+#: src/ch99-03-security-considerations.md:148
+msgid "// ...\n"
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:194
@@ -6502,14 +6103,14 @@ msgid ""
 "Every programming language has tools for effectively handling the "
 "duplication of concepts. In Cairo, one such tool is generics: abstract "
 "stand-ins for concrete types or other properties. We can express the "
-"behaviour of generics or how they relate to other generics without knowing "
+"behavior of generics or how they relate to other generics without knowing "
 "what will be in their place when compiling and running the code."
 msgstr ""
 
 #: src/ch08-00-generic-types-and-traits.md:5
 msgid ""
 "Functions, structs, enums and traits can incorporate generic types as part "
-"of their definition instead of a concrete types like `u32` or "
+"of their definition instead of a concrete type like `u32` or "
 "`ContractAddress`."
 msgstr ""
 
@@ -6536,10 +6137,6 @@ msgid ""
 "type."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:1
-msgid "Generic Data Types"
-msgstr ""
-
 #: src/ch08-01-generic-data-types.md:3
 msgid ""
 "We use generics to create definitions for item declarations, such as structs "
@@ -6560,35 +6157,14 @@ msgid ""
 "function once using generics and move on to other tasks."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:9
+#: src/ch08-01-generic-data-types.md:10
+msgid "// Specify generic type T between the angulars\n"
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:31
 msgid ""
-"```rust\n"
-"\n"
-"// Specify generic type T between the angulars\n"
-"fn largest_list<T>(l1: Array<T>, l2: Array<T>) -> Array<T> {\n"
-"    if l1.len() > l2.len() {\n"
-"        l1\n"
-"    } else {\n"
-"        l2\n"
-"    }\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let mut l1 = ArrayTrait::new();\n"
-"    let mut l2 = ArrayTrait::new();\n"
-"\n"
-"    l1.append(1);\n"
-"    l1.append(2);\n"
-"\n"
-"    l2.append(3);\n"
-"    l2.append(4);\n"
-"    l2.append(5);\n"
-"\n"
-"    // There is no need to specify the concrete type of T because\n"
+"// There is no need to specify the concrete type of T because\n"
 "    // it is inferred by the compiler\n"
-"    let l3 = largest_list(l1, l2);\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch08-01-generic-data-types.md:37
@@ -6624,57 +6200,42 @@ msgid ""
 "types that can be used with the function. We saw an example of this "
 "previously by adding the `TDrop` implementation as part of the generic "
 "arguments of `largest_list`. While `TDrop` was added to satisfy the "
-"compilers requirements, we can also add constraints to benefit our function "
+"compiler's requirements, we can also add constraints to benefit our function "
 "logic."
 msgstr ""
 
 #: src/ch08-01-generic-data-types.md:55
 msgid ""
-"Imagine that we want, given a list of elements of some generic type `T`, "
+"Imagine that we want, given a list of elements of some generic type `T`, to "
 "find the smallest element among them. Initially, we know that for an element "
 "of type `T` to be comparable, it must implement the `PartialOrd` trait. The "
 "resulting function would be:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:57
+#: src/ch08-01-generic-data-types.md:58
 msgid ""
-"```rust\n"
-"\n"
 "// Given a list of T get the smallest one.\n"
 "// The PartialOrd trait implements comparison operations for T\n"
-"fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> "
-"T {\n"
-"    // This represents the smallest element through the iteration\n"
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:62
+msgid ""
+"// This represents the smallest element through the iteration\n"
 "    // Notice that we use the desnap (*) operator\n"
-"    let mut smallest = *list[0];\n"
-"\n"
-"    // The index we will use to move through the list\n"
-"    let mut index = 1;\n"
-"\n"
-"    // Iterate through the whole list storing the smallest\n"
-"    loop {\n"
-"        if index >= list.len() {\n"
-"            break smallest;\n"
-"        }\n"
-"        if *list[index] < smallest {\n"
-"            smallest = *list[index];\n"
-"        }\n"
-"        index = index + 1;\n"
-"    }\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let mut list: Array<u8> = ArrayTrait::new();\n"
-"    list.append(5);\n"
-"    list.append(3);\n"
-"    list.append(10);\n"
-"\n"
-"    // We need to specify that we are passing a snapshot of `list` as an "
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:66
+msgid "// The index we will use to move through the list\n"
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:69
+msgid "// Iterate through the whole list storing the smallest\n"
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:87
+msgid ""
+"// We need to specify that we are passing a snapshot of `list` as an "
 "argument\n"
-"    let s = smallest_element(@list);\n"
-"    assert(s == 3, 0);\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch08-01-generic-data-types.md:93
@@ -6766,8 +6327,7 @@ msgid ""
 "`Result<T, E>` enum that the core library provides:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:185
-#: src/ch10-02-recoverable-errors.md:18
+#: src/ch08-01-generic-data-types.md:185 src/ch10-02-recoverable-errors.md:18
 msgid ""
 "The `Result<T, E>` enum has two generic types, `T` and `E`, and two "
 "variants: `Ok` which holds the value of type `T` and `Err` which holds the "
@@ -6805,44 +6365,12 @@ msgid ""
 "`balance` field."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:217
-msgid ""
-"```rust\n"
-"#[derive(Copy, Drop)]\n"
-"struct Wallet<T> {\n"
-"    balance: T\n"
-"}\n"
-"\n"
-"/// Generic trait for wallets\n"
-"trait WalletTrait<T> {\n"
-"    fn balance(self: @Wallet<T>) -> T;\n"
-"}\n"
-"\n"
-"impl WalletImpl<T, impl TCopy: Copy<T>> of WalletTrait<T> {\n"
-"    fn balance(self: @Wallet<T>) -> T {\n"
-"        return *self.balance;\n"
-"    }\n"
-"}\n"
-"\n"
-"/// Trait for wallets of type u128\n"
-"trait WalletReceiveTrait {\n"
-"    fn receive(ref self: Wallet<u128>, value: u128);\n"
-"}\n"
-"\n"
-"impl WalletReceiveImpl of WalletReceiveTrait {\n"
-"    fn receive(ref self: Wallet<u128>, value: u128) {\n"
-"        self.balance += value;\n"
-"    }\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let mut w = Wallet { balance: 50 };\n"
-"    assert(w.balance() == 50, 0);\n"
-"\n"
-"    w.receive(100);\n"
-"    assert(w.balance() == 150, 0);\n"
-"}\n"
-"```"
+#: src/ch08-01-generic-data-types.md:222
+msgid "/// Generic trait for wallets\n"
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:233
+msgid "/// Trait for wallets of type u128\n"
 msgstr ""
 
 #: src/ch08-01-generic-data-types.md:254
@@ -6866,23 +6394,8 @@ msgstr ""
 msgid "Next we are going to naively define the mixup trait and implementation:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:267
-msgid ""
-"```rust,noplayground\n"
-"// This does not compile!\n"
-"trait WalletMixTrait<T1, U1> {\n"
-"    fn mixup<T2, U2>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> "
-"Wallet<T1, U2>;\n"
-"}\n"
-"\n"
-"impl WalletMixImpl<T1, U1> of WalletMixTrait<T1, U1> {\n"
-"    fn mixup<T2, U2>(self: Wallet<T1, U1>, other: Wallet<T2, U2>) -> "
-"Wallet<T1, U2> {\n"
-"        Wallet { balance: self.balance, address: other.address }\n"
-"    }\n"
-"}\n"
-"\n"
-"```"
+#: src/ch08-01-generic-data-types.md:268
+msgid "// This does not compile!\n"
 msgstr ""
 
 #: src/ch08-01-generic-data-types.md:281
@@ -6971,8 +6484,8 @@ msgstr ""
 #: src/ch08-02-traits-in-cairo.md:39
 msgid ""
 "You can write implementations directly without defining the corresponding "
-"trait. This is made possible by using the `#[generate_trait]` attribute with "
-"on the implementation, which will make the compiler generate the trait "
+"trait. This is made possible by using the `#[generate_trait]` attribute "
+"within the implementation, which will make the compiler generate the trait "
 "corresponding to the implementation automatically. Remember to add `Trait` "
 "as a suffix to your trait name, as the compiler will create the trait by "
 "adding a `Trait` suffix to the implementation name."
@@ -7003,50 +6516,24 @@ msgid ""
 "`ShapeGeometry` trait can be called in two ways:"
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:66
-msgid ""
-"```rust\n"
-"# use debug::PrintTrait;\n"
-"# \n"
-"# #[derive(Drop, Copy)]\n"
-"# struct Rectangle {\n"
-"#     height: u64,\n"
-"#     width: u64,\n"
-"# }\n"
-"# \n"
-"# trait ShapeGeometry {\n"
-"#     fn boundary(self: Rectangle) -> u64;\n"
-"#     fn area(self: Rectangle) -> u64;\n"
-"# }\n"
-"# \n"
-"# impl RectangleGeometry of ShapeGeometry {\n"
-"#     fn boundary(self: Rectangle) -> u64 {\n"
-"#         2 * (self.height + self.width)\n"
-"#     }\n"
-"#     fn area(self: Rectangle) -> u64 {\n"
-"#         self.height * self.width\n"
-"#     }\n"
-"# }\n"
-"# \n"
-"fn main() {\n"
-"    let rect = Rectangle { height: 5, width: 10 }; // Rectangle "
-"instantiation\n"
-"\n"
-"    // First way, as a method on the struct instance\n"
-"    let area1 = rect.area();\n"
-"    // Second way, from the implementation\n"
-"    let area2 = RectangleGeometry::area(rect);\n"
-"    // Third way, from the trait\n"
-"    let area3 = ShapeGeometry::area(rect);\n"
-"\n"
-"    // `area1` has same value as `area2` and `area3`\n"
-"    area1.print();\n"
-"    area2.print();\n"
-"    area3.print();\n"
-"}\n"
-"# \n"
-"# \n"
-"```"
+#: src/ch08-02-traits-in-cairo.md:90
+msgid "// Rectangle instantiation\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:92
+msgid "// First way, as a method on the struct instance\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:94
+msgid "// Second way, from the implementation\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:96
+msgid "// Third way, from the trait\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:99
+msgid "// `area1` has same value as `area2` and `area3`\n"
 msgstr ""
 
 #: src/ch08-02-traits-in-cairo.md:108
@@ -7073,60 +6560,36 @@ msgid ""
 "use this alias which can be provided during implementation."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:116
+#: src/ch08-02-traits-in-cairo.md:129
+msgid "// Here T is an alias type which will be provided during implementation\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:135
 msgid ""
-"```rust\n"
-"use debug::PrintTrait;\n"
-"\n"
-"#[derive(Copy, Drop)]\n"
-"struct Rectangle {\n"
-"    height: u64,\n"
-"    width: u64,\n"
-"}\n"
-"\n"
-"#[derive(Copy, Drop)]\n"
-"struct Circle {\n"
-"    radius: u64\n"
-"}\n"
-"\n"
-"// Here T is an alias type which will be provided during implementation\n"
-"trait ShapeGeometry<T> {\n"
-"    fn boundary(self: T) -> u64;\n"
-"    fn area(self: T) -> u64;\n"
-"}\n"
-"\n"
 "// Implementation RectangleGeometry passes in <Rectangle>\n"
 "// to implement the trait for that type\n"
-"impl RectangleGeometry of ShapeGeometry<Rectangle> {\n"
-"    fn boundary(self: Rectangle) -> u64 {\n"
-"        2 * (self.height + self.width)\n"
-"    }\n"
-"    fn area(self: Rectangle) -> u64 {\n"
-"        self.height * self.width\n"
-"    }\n"
-"}\n"
-"\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:146
+msgid ""
 "// We might have another struct Circle\n"
 "// which can use the same trait spec\n"
-"impl CircleGeometry of ShapeGeometry<Circle> {\n"
-"    fn boundary(self: Circle) -> u64 {\n"
-"        (2 * 314 * self.radius) / 100\n"
-"    }\n"
-"    fn area(self: Circle) -> u64 {\n"
-"        (314 * self.radius * self.radius) / 100\n"
-"    }\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let rect = Rectangle { height: 5, width: 7 };\n"
-"    rect.area().print(); // 35\n"
-"    rect.boundary().print(); // 24\n"
-"\n"
-"    let circ = Circle { radius: 5 };\n"
-"    circ.area().print(); // 78\n"
-"    circ.boundary().print(); // 31\n"
-"}\n"
-"```"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:160
+msgid "// 35\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:161
+msgid "// 24\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:164
+msgid "// 78\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:165
+msgid "// 31\n"
 msgstr ""
 
 #: src/ch08-02-traits-in-cairo.md:169
@@ -7151,48 +6614,24 @@ msgstr ""
 
 #: src/ch08-02-traits-in-cairo.md:176
 msgid ""
-"If the code was organised into modules like this, where the implementation "
+"If the code was organized into modules like this, where the implementation "
 "of a trait was defined in a different module than the trait itself, "
 "explicitly importing the relevant implementation is required."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:178
+#: src/ch08-02-traits-in-cairo.md:180
+msgid "// struct Circle { ... } and struct Rectangle { ... }\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:193
+msgid "// Could be in a different file\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:206
 msgid ""
-"```rust,noplayground\n"
-"use debug::PrintTrait;\n"
-"\n"
-"// struct Circle { ... } and struct Rectangle { ... }\n"
-"\n"
-"mod geometry {\n"
-"    use super::Rectangle;\n"
-"    trait ShapeGeometry<T> {\n"
-"        // ...\n"
-"    }\n"
-"\n"
-"    impl RectangleGeometry of ShapeGeometry<Rectangle> {\n"
-"        // ...\n"
-"    }\n"
-"}\n"
-"\n"
-"// Could be in a different file\n"
-"mod circle {\n"
-"    use super::geometry::ShapeGeometry;\n"
-"    use super::Circle;\n"
-"    impl CircleGeometry of ShapeGeometry<Circle> {\n"
-"        // ...\n"
-"    }\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let rect = Rectangle { height: 5, width: 7 };\n"
-"    let circ = Circle { radius: 5 };\n"
-"    // Fails with this error\n"
+"// Fails with this error\n"
 "    // Method `area` not found on... Did you import the correct trait and "
 "impl?\n"
-"    rect.area().print();\n"
-"    circ.area().print();\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch08-02-traits-in-cairo.md:213
@@ -7206,8 +6645,7 @@ msgid ""
 "the imported trait, and thus is automatically resolved."
 msgstr ""
 
-#: src/ch09-01-how-to-write-tests.md:3
-#: src/ch09-01-how-to-write-tests.md:13
+#: src/ch09-01-how-to-write-tests.md:3 src/ch09-01-how-to-write-tests.md:13
 msgid "The Anatomy of a Test Function"
 msgstr ""
 
@@ -7614,23 +7052,8 @@ msgid ""
 "them, as shown here:"
 msgstr ""
 
-#: src/ch09-01-how-to-write-tests.md:529
-msgid ""
-"```rust\n"
-"#[cfg(test)]\n"
-"mod tests {\n"
-"    #[test]\n"
-"    fn it_works() {\n"
-"        let result = 2 + 2;\n"
-"        assert(result == 4, 'result is not 4');\n"
-"    }\n"
-"\n"
-"    #[test]\n"
-"    #[ignore]\n"
-"    fn expensive_test() { // code that takes an hour to run\n"
-"    }\n"
-"}\n"
-"```"
+#: src/ch09-01-how-to-write-tests.md:540
+msgid "// code that takes an hour to run\n"
 msgstr ""
 
 #: src/ch09-01-how-to-write-tests.md:545
@@ -7675,54 +7098,14 @@ msgid ""
 "use the following pattern in your test function."
 msgstr ""
 
-#: src/ch09-01-how-to-write-tests.md:596
-msgid ""
-"```rust\n"
-"let initial = testing::get_available_gas();\n"
-"gas::withdraw_gas().unwrap();\n"
-"    /// code we want to bench.\n"
-"(testing::get_available_gas() - x).print();\n"
-"```"
+#: src/ch09-01-how-to-write-tests.md:599 src/ch09-01-how-to-write-tests.md:629
+msgid "/// code we want to bench.\n"
 msgstr ""
 
 #: src/ch09-01-how-to-write-tests.md:603
 msgid ""
 "The following example shows how to use it to test the gas function of the "
 "`sum_n` function above."
-msgstr ""
-
-#: src/ch09-01-how-to-write-tests.md:605
-msgid ""
-"```rust\n"
-"fn sum_n(n: usize) -> usize {\n"
-"    let mut i = 0;\n"
-"    let mut sum = 0;\n"
-"    loop {\n"
-"        if i == n {\n"
-"            sum += i;\n"
-"            break;\n"
-"        };\n"
-"        sum += i;\n"
-"        i += 1;\n"
-"    };\n"
-"    sum\n"
-"}\n"
-"\n"
-"#[cfg(test)]\n"
-"mod test {\n"
-"    use super::sum_n;\n"
-"    use debug::PrintTrait;\n"
-"    #[test]\n"
-"    #[available_gas(2000000)]\n"
-"    fn benchmark_sum_n_gas() {\n"
-"        let initial = testing::get_available_gas();\n"
-"        gas::withdraw_gas().unwrap();\n"
-"        /// code we want to bench.\n"
-"        let result = sum_n(10);\n"
-"        (initial - testing::get_available_gas()).print();\n"
-"    }\n"
-"}\n"
-"```"
 msgstr ""
 
 #: src/ch09-01-how-to-write-tests.md:636
@@ -7889,10 +7272,10 @@ msgstr ""
 #: src/ch10-01-unrecoverable-errors-with-panic.md:5
 msgid ""
 "When a panic occurs, it leads to an abrupt termination of the program. The "
-"`panic` function takes an array as argument, which can be used to provide an "
-"error message and performs an unwind process where all variables are dropped "
-"and dictionaries squashed to ensure the soundness of the program to safely "
-"terminate the execution."
+"`panic` function takes an array as an argument, which can be used to provide "
+"an error message and performs an unwind process where all variables are "
+"dropped and dictionaries squashed to ensure the soundness of the program to "
+"safely terminate the execution."
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:7
@@ -7917,8 +7300,8 @@ msgid ""
 "the `panic_with_felt252` function. This function serves as an abstraction of "
 "the array-defining process and is often preferred due to its clearer and "
 "more concise expression of intent. By using `panic_with_felt252`, developers "
-"can panic in a one-liner by providing a felt252 error message as argument, "
-"making the code more readable and maintainable."
+"can panic in a one-liner by providing a felt252 error message as an "
+"argument, making the code more readable and maintainable."
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:35
@@ -7983,23 +7366,12 @@ msgid ""
 "called with the given data."
 msgstr ""
 
-#: src/ch10-01-unrecoverable-errors-with-panic.md:86
-msgid ""
-"```rust\n"
-"#[panic_with('value is 0', wrap_not_zero)]\n"
-"fn wrap_if_not_zero(value: u128) -> Option<u128> {\n"
-"    if value == 0 {\n"
-"        Option::None\n"
-"    } else {\n"
-"        Option::Some(value)\n"
-"    }\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    wrap_if_not_zero(0); // this returns None\n"
-"    wrap_not_zero(0); // this panic with 'value is 0'\n"
-"}\n"
-"```"
+#: src/ch10-01-unrecoverable-errors-with-panic.md:97
+msgid "// this returns None\n"
+msgstr ""
+
+#: src/ch10-01-unrecoverable-errors-with-panic.md:98
+msgid "// this panic with 'value is 0'\n"
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:102
@@ -8159,7 +7531,7 @@ msgid ""
 "success or failure of the addition operation. The match expression checks "
 "the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it "
 "returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it "
-"returns `Option::None(())` to indicate that the operation has failed due to "
+"returns `Option::None` to indicate that the operation has failed due to "
 "overflow. The function does not panic in case of an overflow."
 msgstr ""
 
@@ -8185,37 +7557,12 @@ msgstr ""
 msgid "Our two test cases are:"
 msgstr ""
 
-#: src/ch10-02-recoverable-errors.md:107
-msgid ""
-"```rust,noplayground\n"
-"# fn parse_u8(s: felt252) -> Result<u8, felt252> {\n"
-"#     match s.try_into() {\n"
-"#         Option::Some(value) => Result::Ok(value),\n"
-"#         Option::None(_) => Result::Err('Invalid integer'),\n"
-"#     }\n"
-"# }\n"
-"# \n"
-"#[cfg(test)]\n"
-"mod tests {\n"
-"    use super::parse_u8;\n"
-"    #[test]\n"
-"    fn test_felt252_to_u8() {\n"
-"        let number: felt252 = 5_felt252;\n"
-"        // should not panic\n"
-"        let res = parse_u8(number).unwrap();\n"
-"    }\n"
-"\n"
-"    #[test]\n"
-"    #[should_panic]\n"
-"    fn test_felt252_to_u8_panic() {\n"
-"        let number: felt252 = 256_felt252;\n"
-"        // should panic\n"
-"        let res = parse_u8(number).unwrap();\n"
-"    }\n"
-"}\n"
-"# \n"
-"# \n"
-"```"
+#: src/ch10-02-recoverable-errors.md:121
+msgid "// should not panic\n"
+msgstr ""
+
+#: src/ch10-02-recoverable-errors.md:129
+msgid "// should panic\n"
 msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:137
@@ -8263,16 +7610,8 @@ msgstr ""
 msgid "Here is an example."
 msgstr ""
 
-#: src/ch10-02-recoverable-errors.md:152
-msgid ""
-"```rust,noplayground\n"
-"fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {\n"
-"    let input_to_u8: u8 = parse_u8(input)?;\n"
-"    // DO SOMETHING\n"
-"    let res = input_to_u8 - 1;\n"
-"    Result::Ok(res)\n"
-"}\n"
-"```"
+#: src/ch10-02-recoverable-errors.md:155 src/ch10-02-recoverable-errors.md:177
+msgid "// DO SOMETHING\n"
 msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:161
@@ -8288,40 +7627,6 @@ msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:165
 msgid "And with a little test case:"
-msgstr ""
-
-#: src/ch10-02-recoverable-errors.md:167
-msgid ""
-"```rust,noplayground\n"
-"# fn parse_u8(s: felt252) -> Result<u8, felt252> {\n"
-"#     match s.try_into() {\n"
-"#         Option::Some(value) => Result::Ok(value),\n"
-"#         Option::None(_) => Result::Err('Invalid integer'),\n"
-"#     }\n"
-"# }\n"
-"# \n"
-"# fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {\n"
-"#     let input_to_u8: u8 = parse_u8(input)?;\n"
-"#     // DO SOMETHING\n"
-"#     let res = input_to_u8 - 1;\n"
-"#     Result::Ok(res)\n"
-"# }\n"
-"# \n"
-"# #[cfg(test)]\n"
-"# mod tests {\n"
-"#     use super::do_something_with_parse_u8;\n"
-"#     use debug::PrintTrait;\n"
-"    #[test]\n"
-"    fn test_function_2() {\n"
-"        let number: felt252 = 258_felt252;\n"
-"        match do_something_with_parse_u8(number) {\n"
-"            Result::Ok(value) => value.print(),\n"
-"            Result::Err(e) => e.print()\n"
-"        }\n"
-"    }\n"
-"# }\n"
-"# \n"
-"```"
 msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:198
@@ -8380,30 +7685,8 @@ msgid ""
 "respective fields."
 msgstr ""
 
-#: src/ch11-01-operator-overloading.md:10
-msgid ""
-"```rust\n"
-"struct Potion {\n"
-"    health: felt252,\n"
-"    mana: felt252\n"
-"}\n"
-"\n"
-"impl PotionAdd of Add<Potion> {\n"
-"    fn add(lhs: Potion, rhs: Potion) -> Potion {\n"
-"        Potion { health: lhs.health + rhs.health, mana: lhs.mana + rhs.mana, "
-"}\n"
-"    }\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let health_potion: Potion = Potion { health: 100, mana: 0 };\n"
-"    let mana_potion: Potion = Potion { health: 0, mana: 100 };\n"
-"    let super_potion: Potion = health_potion + mana_potion;\n"
-"    // Both potions were combined with the `+` operator.\n"
-"    assert(super_potion.health == 100, '');\n"
-"    assert(super_potion.mana == 100, '');\n"
-"}\n"
-"```"
+#: src/ch11-01-operator-overloading.md:26
+msgid "// Both potions were combined with the `+` operator.\n"
 msgstr ""
 
 #: src/ch11-01-operator-overloading.md:32
@@ -8458,10 +7741,10 @@ msgstr ""
 
 #: src/ch11-02-macros.md:29
 msgid ""
-"In some situations, a developer might need to declare a constant that is "
-"the result of a computation of integers. To compute a constant expression "
-"and use its result at compile time, it is required to use the "
-"`consteval_int!` macro."
+"In some situations, a developer might need to declare a constant that is the "
+"result of a computation of integers. To compute a constant expression and "
+"use its result at compile time, it is required to use the `consteval_int!` "
+"macro."
 msgstr ""
 
 #: src/ch11-02-macros.md:31
@@ -8487,7 +7770,7 @@ msgid ""
 "solution for Ethereum, Starknet's goal is to offer fast, secure, and "
 "low-cost transactions. It functions as a Validity Rollup (commonly known as "
 "a zero-knowledge Rollup) and is built on top of the Cairo language and the "
-"StarkNet VM."
+"Starknet VM."
 msgstr ""
 
 #: src/ch99-00-starknet-smart-contracts.md:7
@@ -8600,8 +7883,8 @@ msgid ""
 "transparent, enabling **composability**. This allows developers to write "
 "smart contracts that use other smart contracts. Smart contracts can only "
 "access and interact with data from the blockchain they are deployed on. They "
-"require third-party software (called `oracles`) to access external data "
-"(the price of a token for instance)."
+"require third-party software (called `oracles`) to access external data (the "
+"price of a token for instance)."
 msgstr ""
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:14
@@ -8833,8 +8116,8 @@ msgid ""
 "`stored_data` of type `u128` (unsigned integer of 128 bits). You can think "
 "of it as a single slot in a database that you can query and alter by calling "
 "functions of the code that manages the database. The contract defines and "
-"exposes publicly the functions `set` and `get` that can be used to modify "
-"or retrieve the value of that variable."
+"exposes publicly the functions `set` and `get` that can be used to modify or "
+"retrieve the value of that variable."
 msgstr ""
 
 #: src/ch99-01-02-a-simple-contract.md:48
@@ -9021,16 +8304,17 @@ msgid ""
 "chapter:"
 msgstr ""
 
-#: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:95
+#: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:104
 msgid "Listing 99-1bis: Our reference contract for this chapter"
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:3
 msgid ""
-"As stated previously, storage variables allow you to store data that will be "
-"stored in the contract's storage that is itself stored on the blockchain. "
-"These data are persistent and can be accessed and modified anytime once the "
-"contract is deployed."
+"The most common way for interacting with a contract’s storage is through "
+"storage variables. As stated previously, storage variables allow you to "
+"store data that will be stored in the contract's storage that is itself "
+"stored on the blockchain. These data are persistent and can be accessed and "
+"modified anytime once the contract is deployed."
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:5
@@ -9039,157 +8323,250 @@ msgid ""
 "called `Storage`:"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:19
-msgid "Listing 99-2: A Storage Struct"
+#: src/ch99-01-03-01-contract-storage.md:96
+msgid "A Storage Struct"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:21
+#: src/ch99-01-03-01-contract-storage.md:98
 msgid ""
 "The storage struct is a "
 "[struct](./ch05-00-using-structs-to-structure-related-data.md) like any "
-"other, except that it **must** be annotated with `#[storage]` allowing you "
-"to store mappings using the `LegacyMap` type."
+"other, except that it **must** be annotated with `#[storage]`. This "
+"annotation tells the compiler to generate the required code to interact with "
+"the blockchain state, and allows you to read and write data from and to "
+"storage. Moreover, this allows you to define storage mappings using the "
+"`LegacyMap` type."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:24
-msgid "Storing data types"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:26
+#: src/ch99-01-03-01-contract-storage.md:101
 msgid ""
-"The base address `StorageBaseAddress` of a value in storage is "
-"`sn_keccak(variable_name)`, with `variable_name` as the ASCII encoding of "
-"the variable's name. As the keccak256 hash function produces an output of "
-"256 bits that doesn't fit in a `felt252`, we use `sn_keccak` which is "
-"defined as the first 250 bits of the Keccak256 hash."
+"Each variable stored in the storage struct is stored in a different location "
+"in the contract's storage. The storage address of a variable is determined "
+"by the variable's name, and the eventual keys of the variable if it is a "
+"[mapping](#storing-mappings)."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:28
-msgid "Storing structs"
+#: src/ch99-01-03-01-contract-storage.md:103
+msgid "Storage Addresses"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:30
+#: src/ch99-01-03-01-contract-storage.md:105
+msgid "The address of a storage variable is computed as follows:"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:107
 msgid ""
-"Most types from the core library, such as unsigned integers (`u8`, `u128`, "
-"`u256`...), `felt252`, `bool`, `ContractAddress`, etc. implement the `Store` "
-"trait and can thus be stored without further action. But what if you wanted "
-"to store a struct that you defined yourself? In that case, you have to "
-"explicitly tell the compiler how to store your struct. In our example, we "
-"want to store a `Person` struct in storage, which is possible by "
-"implementing the `Store` trait for the `Person` type. This can be achieved "
-"by simply adding a `#[derive(starknet::Store)]` attribute on top of our "
-"struct definition."
+"If the variable is a single value (not a mapping), the address is the "
+"`sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` "
+"is Starknet's version of the Keccak256 hash function, whose output is "
+"truncated to 250 bits."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:41
+#: src/ch99-01-03-01-contract-storage.md:108
 msgid ""
-"The base storage address for structs remains `sn_keccak(variable_name)`, and "
-"the value contained at this address is the first primitive type contained by "
-"the struct."
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:43
-msgid ""
-"Subsequent fields are stored in addresses contiguous to the first elements "
-"at addresses `base_address + i`."
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:45
-msgid "Storing mappings"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:47
-msgid ""
-"Mappings are a key-value data structure that you can use to store data "
-"within a smart contract. They are essentially hash tables that allow you to "
-"associate a unique key with a corresponding value. Mappings are also useful "
-"to store sets of data, as it's impossible to store arrays in storage."
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:49
-msgid ""
-"A mapping is a variable of type `LegacyMap`, in which the key and value "
-"types are specified within angular brackets `<>`. It is important to note "
-"that the `LegacyMap` type can only be used inside the `Storage` struct, and "
-"can't be used to define mappings in user-defined structs."
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:52
-msgid ""
-"You can also create more complex mappings than that; you can find one in "
-"Listing 99-2bis like the popular `allowances` storage variable in the ERC20 "
-"Standard which maps the `owner` and `spender` to the `allowance` using "
-"tuples:"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:61
-msgid "Listing 99-2bis: Storing mappings"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:63
-msgid ""
-"In mappings, the address of the value at key `k_1,...,k_n` is "
+"If the variable is a [mapping](#storing-mappings), the address of the value "
+"at key `k_1,...,k_n` is "
 "`h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ is the "
 "Pedersen hash and the final value is taken `mod (2^251) − 256`."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:65
+#: src/ch99-01-03-01-contract-storage.md:109
 msgid ""
-"If the key of the mapping is a struct, each element of the struct "
-"constitutes a key. Moreover, the struct should implement the Hash trait, "
+"If it is a mapping to complex values (e.g., tuples or structs), then this "
+"complex value lies in a continuous segment starting from the address "
+"calculated in the previous point. Note that 256 field elements is the "
+"current limitation on the maximal size of a complex storage value."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:111
+msgid ""
+"You can access the address of a storage variable by calling the `address` "
+"function on the variable, which returns a `StorageBaseAddress` value."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:202
+msgid "Interacting with Storage Variables"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:204
+msgid ""
+"Variables stored in the storage struct can be accessed and modified using "
+"the `read` and `write` functions, and you can get their address in storage "
+"using the `addr` function. These functions are automatically generated by "
+"the compiler for each storage variable."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:206
+msgid ""
+"To read the value of the `owner` storage variable, which is a single value, "
+"we call the `read` function on the `owner` variable, passing in no "
+"parameters."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:297
+msgid "Calling the `read` function on the `owner` variable"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:299
+msgid ""
+"To read the value of the storage variable `names`, which is a mapping from "
+"`ContractAddress` to `felt252`, we call the `read` function on the `names` "
+"variable, passing in the key `address` as a parameter. If the mapping had "
+"more than one key, we would pass in the other keys as parameters as well."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:390
+msgid "Calling the `read` function on the `names` variable"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:392
+msgid ""
+"To write a value to a storage variable, we call the `write` function passing "
+"in the eventual keys the value as arguments. As with the `read` function, "
+"the number of arguments depends on the number of keys - here, we only pass "
+"in the value to write to the `owner` variable as it is a simple variable."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:483
+msgid "Calling the `write` function on the `owner` variable"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:574
+msgid "Calling the `write` function on the `names` variable"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:576
+msgid "Storing custom types"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:578
+msgid ""
+"The `Store` trait, defined in the `starknet::storage_access` module, is used "
+"to specify how a type should be stored in storage. In order for a type to be "
+"stored in storage, it must implement the `Store` trait. Most types from the "
+"core library, such as unsigned integers (`u8`, `u128`, `u256`...), "
+"`felt252`, `bool`, `ContractAddress`, etc. implement the `Store` trait and "
+"can thus be stored without further action."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:580
+msgid ""
+"But what if you wanted to store a type that you defined yourself, such as an "
+"enum or a struct? In that case, you have to explicitly tell the compiler how "
+"to store this type."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:582
+msgid ""
+"In our example, we want to store a `Person` struct in storage, which is "
+"possible by implementing the `Store` trait for the `Person` type. This can "
+"be achieved by simply adding a `#[derive(starknet::Store)]` attribute on top "
+"of our struct definition."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:673
+msgid "Structs storage layout"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:675
+msgid ""
+"On Starknet, structs are stored in storage as a sequence of primitive types. "
+"The elements of the struct are stored in the same order as they are defined "
+"in the struct definition. The first element of the struct is stored at the "
+"base address of the struct, which is computed as specified in [Storage "
+"Addresses](#storage-addresses) and can be obtained by calling "
+"`var.address()`, and subsequent elements are stored at addresses contiguous "
+"to the first element. For example, the storage layout for the `owner` "
+"variable of type `Person` will result in the following layout:"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:679
+msgid "Fields"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:679
+msgid "Address"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:681
+msgid "name"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:681
+msgid "owner.address()"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:682
+msgid "address"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:682
+msgid "owner.address() +1"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:684
+msgid "Storage mappings"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:686
+msgid ""
+"Storage mappings are similar to hash tables in that they allow mapping keys "
+"to values. However, unlike a typical hash table, the key data itself is not "
+"stored - only its hash is used to look up the associated value in the "
+"contract's storage. Mappings do not have a concept of length or whether a "
+"key/value pair is set. The only way to remove a mapping is to set its value "
+"to the default zero value."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:689
+msgid ""
+"Mappings are only used to compute the location of data in the storage of a "
+"contract given certain keys. They are thus **only allowed as storage "
+"variables**. They cannot be used as parameters or return parameters of "
+"contract functions, and cannot be used as types inside structs."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:701
+msgid ""
+"To declare a mapping, use the `LegacyMap` type enclosed in angle brackets "
+"`<>`, specifying the key and value types."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:704
+msgid ""
+"You can also create more complex mappings with multiple keys. You can find "
+"one in Listing 99-2bis like the popular `allowances` storage variable in the "
+"ERC20 Standard which maps an `owner` and an allowed `spender` to its "
+"`allowance` amount using multiple keys passed inside a tuple:"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:713
+msgid "Listing 99-2bis: Storing mappings"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:715
+msgid ""
+"The address in storage of a variable stored in a mapping is computed "
+"according to the description in the [Storage Addresses](#storage-addresses) "
+"section. If the key of a mapping is a struct, each element of the struct "
+"constitutes a key. Moreover, the struct should implement the `Hash` trait, "
 "which can be derived with the `#[derive(Hash)]` attribute. For example, if "
 "you have struct with two fields, the address will be "
 "`h(h(sn_keccak(variable_name),k_1),k_2)` - where `k_1` and `k_2` are the "
 "values of the two fields of the struct."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:67
+#: src/ch99-01-03-01-contract-storage.md:718
 msgid ""
 "Similarly, in the case of a nested mapping such as "
 "`LegacyMap((ContractAddress, ContractAddress), u8)`, the address will be "
 "computed in the same way: `h(h(sn_keccak(variable_name),k_1),k_2)`."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:69
+#: src/ch99-01-03-01-contract-storage.md:720
 msgid ""
-"You can learn more about the contract storage layout in the [Starknet "
+"For more details about the contract storage layout in the [Starknet "
 "Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:71
-msgid "Reading from Storage"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:73
-msgid ""
-"To read the value of the storage variable `names`, we call the `read` "
-"function on the `names` storage variable, passing in the key `address` as a "
-"parameter."
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:79
-msgid "Listing 99-3: Calling the `read` function on the `names` variable"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:81
-msgid ""
-"Note: When the storage variable does not store a mapping, its value is "
-"accessed without passing any parameters to the read method"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:83
-msgid "Writing to Storage"
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:85
-msgid ""
-"To write a value to the storage variable `names`, we call the `write` "
-"function on the `names` storage variable, passing in the key and values as "
-"arguments."
-msgstr ""
-
-#: src/ch99-01-03-01-contract-storage.md:91
-msgid "Listing 99-4: Writing to the `names` variable"
 msgstr ""
 
 #: src/ch99-01-03-02-contract-functions.md:3
@@ -9237,11 +8614,11 @@ msgid ""
 "these functions to modify the state of the contract."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:43
+#: src/ch99-01-03-02-contract-functions.md:47
 msgid "External functions"
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:45
+#: src/ch99-01-03-02-contract-functions.md:49
 msgid ""
 "External functions are functions that can modify the state of a contract. "
 "They are public and can be called by any other contract or externally. "
@@ -9250,11 +8627,11 @@ msgid ""
 "of the contract."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:55
+#: src/ch99-01-03-02-contract-functions.md:59
 msgid "View functions"
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:57
+#: src/ch99-01-03-02-contract-functions.md:61
 msgid ""
 "View functions are read-only functions allowing you to access data from the "
 "contract while ensuring that the state of the contract is not modified. They "
@@ -9263,7 +8640,7 @@ msgid ""
 "you from modifying the state of the contract."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:67
+#: src/ch99-01-03-02-contract-functions.md:71
 msgid ""
 "**Note:** It's important to note that both external and view functions are "
 "public. To create an internal function in a contract, you will need to "
@@ -9271,18 +8648,18 @@ msgid ""
 "`#[external(v0)]` attribute."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:69
+#: src/ch99-01-03-02-contract-functions.md:73
 msgid "3. Private functions"
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:71
+#: src/ch99-01-03-02-contract-functions.md:75
 msgid ""
 "Functions that are not defined in a block annotated with the "
 "`#[external(v0)]` attribute are private functions (also called internal "
 "functions). They can only be called from within the contract."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:86
+#: src/ch99-01-03-02-contract-functions.md:90
 msgid ""
 "Wait, what is this `#[generate_trait]` attribute? Where is the trait "
 "definition for this implementation? Well, the `#[generate_trait]` attribute "
@@ -9293,7 +8670,7 @@ msgid ""
 "section](./ch99-01-03-04-reducing-boilerplate.md)."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:88
+#: src/ch99-01-03-02-contract-functions.md:92
 msgid ""
 "At this point, you might still be wondering if all of this is really "
 "necessary if you don't need to access the contract's state in your function "
@@ -9303,8 +8680,7 @@ msgid ""
 "the contract's state."
 msgstr ""
 
-#: src/ch99-01-03-03-contract-events.md:1
-#: src/ch99-01-05-00-components.md:29
+#: src/ch99-01-03-03-contract-events.md:1 src/ch99-01-05-00-components.md:29
 msgid "Events"
 msgstr ""
 
@@ -9431,98 +8807,45 @@ msgstr ""
 
 #: src/ch99-01-03-05-optimizing-storage.md:3
 msgid ""
-"Bit-packing is a simple concept: Use as few bit as possible to store a piece "
-"of data. When done well, it can significantly reduce the size of the data "
-"you need to store. This is especially important in smart contracts, where "
-"storage is expensive."
+"Bit-packing is a simple concept: Use as few bits as possible to store a "
+"piece of data. When done well, it can significantly reduce the size of the "
+"data you need to store. This is especially important in smart contracts, "
+"where storage is expensive."
 msgstr ""
 
 #: src/ch99-01-03-05-optimizing-storage.md:5
 msgid ""
 "When writing Cairo smart contracts, it is important to optimize storage "
-"usage to reduce gas costs. Indeed, most of the cost associated to a "
+"usage to reduce gas costs. Indeed, most of the cost associated with a "
 "transaction is related to storage updates; and each storage slot costs gas "
 "to write to. This means that by packing multiple values into fewer slots, "
-"you can decrease the gas cost incurred to the users of your smart contract."
+"you can decrease the gas cost incurred by the users of your smart contract."
 msgstr ""
 
 #: src/ch99-01-03-05-optimizing-storage.md:8
 msgid ""
 "Cairo provides the `StorePacking` trait to enable packing struct fields into "
-"a fewer number of storage slots. For example, consider a `Sizes` struct with "
-"3 fields of different types. The total size is 8 + 32 + 64 = 104 bits. This "
-"is less than the 128 bits of a single `u128`. This means we can pack all 3 "
-"fields into a single `u128` variable. Since a storage slot can hold up to "
-"251 bits, our packed value will take only one storage slot instead of 3."
+"fewer storage slots. For example, consider a `Sizes` struct with 3 fields of "
+"different types. The total size is 8 + 32 + 64 = 104 bits. This is less than "
+"the 128 bits of a single `u128`. This means we can pack all 3 fields into a "
+"single `u128` variable. Since a storage slot can hold up to 251 bits, our "
+"packed value will take only one storage slot instead of 3."
 msgstr ""
 
-#: src/ch99-01-03-05-optimizing-storage.md:10
+#: src/ch99-01-03-05-optimizing-storage.md:49
+msgid "//don't forget to import it!\n"
+msgstr ""
+
+#: src/ch99-01-03-05-optimizing-storage.md:58
 msgid ""
-"```rust\n"
-"use starknet::{StorePacking};\n"
-"use integer::{u128_safe_divmod, u128_as_non_zero};\n"
-"\n"
-"#[derive(Drop, Serde)]\n"
-"struct Sizes {\n"
-"    tiny: u8,\n"
-"    small: u32,\n"
-"    medium: u64,\n"
-"}\n"
-"\n"
-"const TWO_POW_8: u128 = 0x100;\n"
-"const TWO_POW_40: u128 = 0x10000000000;\n"
-"\n"
-"const MASK_8: u128 = 0xff;\n"
-"const MASK_32: u128 = 0xffffffff;\n"
-"\n"
-"\n"
-"impl SizesStorePacking of StorePacking<Sizes, u128> {\n"
-"    fn pack(value: Sizes) -> u128 {\n"
-"        value.tiny.into() + (value.small.into() * TWO_POW_8) + "
-"(value.medium.into() * TWO_POW_40)\n"
-"    }\n"
-"\n"
-"    fn unpack(value: u128) -> Sizes {\n"
-"        let tiny = value & MASK_8;\n"
-"        let small = (value / TWO_POW_8) & MASK_32;\n"
-"        let medium = (value / TWO_POW_40);\n"
-"\n"
-"        Sizes {\n"
-"            tiny: tiny.try_into().unwrap(),\n"
-"            small: small.try_into().unwrap(),\n"
-"            medium: medium.try_into().unwrap(),\n"
-"        }\n"
-"    }\n"
-"}\n"
-"\n"
-"#[starknet::contract]\n"
-"mod SizeFactory {\n"
-"    use super::Sizes;\n"
-"    use super::SizesStorePacking; //don't forget to import it!\n"
-"\n"
-"    #[storage]\n"
-"    struct Storage {\n"
-"        remaining_sizes: Sizes\n"
-"    }\n"
-"\n"
-"    #[external(v0)]\n"
-"    fn update_sizes(ref self: ContractState, sizes: Sizes) {\n"
-"        // This will automatically pack the\n"
+"// This will automatically pack the\n"
 "        // struct into a single u128\n"
-"        self.remaining_sizes.write(sizes);\n"
-"    }\n"
-"\n"
-"\n"
-"    #[external(v0)]\n"
-"    fn get_sizes(ref self: ContractState) -> Sizes {\n"
-"        // this will automatically unpack the\n"
+msgstr ""
+
+#: src/ch99-01-03-05-optimizing-storage.md:66
+msgid ""
+"// this will automatically unpack the\n"
 "        // packed-representation into the Sizes struct\n"
-"        self.remaining_sizes.read()\n"
-"    }\n"
-"}\n"
-"\n"
-"\n"
-"```"
 msgstr ""
 
 #: src/ch99-01-03-05-optimizing-storage.md:75
@@ -9601,7 +8924,7 @@ msgid ""
 "The rest of the work is done magically by the compiler - if a type "
 "implements the `StorePacking` trait, then the compiler will know it can use "
 "the `StoreUsingPacking` implementation of the `Store` trait in order to pack "
-"before writing and unpack after reading from storage. One important details, "
+"before writing and unpack after reading from storage. One important detail, "
 "however, is that the type that `StorePacking::pack` spits out also has to "
 "implement `Store` for `StoreUsingPacking` to work. Most of the time, we will "
 "want to pack into a felt252 or u256 - but if you want to pack into a type of "
@@ -10019,7 +9342,7 @@ msgstr ""
 
 #: src/ch99-01-05-01-components-under-the-hood.md:3
 msgid ""
-"Components provide powerful modularity to StarkNet contracts. But how does "
+"Components provide powerful modularity to Starknet contracts. But how does "
 "this magic actually happen behind the scenes?"
 msgstr ""
 
@@ -10094,23 +9417,8 @@ msgid ""
 "a generic contract, and `ComponentState<TContractState>`."
 msgstr ""
 
-#: src/ch99-01-05-01-components-under-the-hood.md:74
-msgid ""
-"```rust\n"
-"// generated per component\n"
-"trait HasComponent<TContractState> {\n"
-"    fn get_component(self: @TContractState) -> "
-"@ComponentState<TContractState>;\n"
-"    fn get_component_mut(ref self: TContractState) -> "
-"ComponentState<TContractState>;\n"
-"    fn get_contract(self: @ComponentState<TContractState>) -> "
-"@TContractState;\n"
-"    fn get_contract_mut(ref self: ComponentState<TContractState>) -> "
-"TContractState;\n"
-"    fn emit<S, impl IntoImp: traits::Into<S, Event>>(ref self: "
-"ComponentState<TContractState>, event: S);\n"
-"}\n"
-"```"
+#: src/ch99-01-05-01-components-under-the-hood.md:75
+msgid "// generated per component\n"
 msgstr ""
 
 #: src/ch99-01-05-01-components-under-the-hood.md:85
@@ -10308,10 +9616,10 @@ msgstr ""
 
 #: src/ch99-02-01-abis-and-interfaces.md:17
 msgid ""
-"The interface of a contract is a list of the functions it exposes "
-"publicly. It specifies the function signatures (name, parameters, "
-"visibility and return value) contained in a smart contract without including "
-"the function body."
+"The interface of a contract is a list of the functions it exposes publicly. "
+"It specifies the function signatures (name, parameters, visibility and "
+"return value) contained in a smart contract without including the function "
+"body."
 msgstr ""
 
 #: src/ch99-02-01-abis-and-interfaces.md:20
@@ -10408,32 +9716,9 @@ msgid ""
 "function `name`, and one external function `transfer`."
 msgstr ""
 
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:21
-msgid ""
-"```rust,noplayground\n"
-"use starknet::{ContractAddress};\n"
-"\n"
-"trait IERC20DispatcherTrait<T> {\n"
-"    fn name(self: T) -> felt252;\n"
-"    fn transfer(self: T, recipient: ContractAddress, amount: u256);\n"
-"}\n"
-"\n"
-"#[derive(Copy, Drop, starknet::Store, Serde)]\n"
-"struct IERC20Dispatcher {\n"
-"    contract_address: ContractAddress,\n"
-"}\n"
-"\n"
-"impl IERC20DispatcherImpl of IERC20DispatcherTrait<IERC20Dispatcher> {\n"
-"    fn name(\n"
-"        self: IERC20Dispatcher\n"
-"    ) -> felt252 { // starknet::call_contract_syscall is called in here\n"
-"    }\n"
-"    fn transfer(\n"
-"        self: IERC20Dispatcher, recipient: ContractAddress, amount: u256\n"
-"    ) { // starknet::call_contract_syscall is called in here\n"
-"    }\n"
-"}\n"
-"```"
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:37
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:41
+msgid "// starknet::call_contract_syscall is called in here\n"
 msgstr ""
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:46
@@ -10467,84 +9752,8 @@ msgid ""
 "modify the state of the contract deployed at `contract_address`."
 msgstr ""
 
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:56
-msgid ""
-"```rust,noplayground\n"
-"# use starknet::ContractAddress;\n"
-"# \n"
-"# #[starknet::interface]\n"
-"# trait IERC20<TContractState> {\n"
-"#     fn name(self: @TContractState) -> felt252;\n"
-"# \n"
-"#     fn symbol(self: @TContractState) -> felt252;\n"
-"# \n"
-"#     fn decimals(self: @TContractState) -> u8;\n"
-"# \n"
-"#     fn total_supply(self: @TContractState) -> u256;\n"
-"# \n"
-"#     fn balance_of(self: @TContractState, account: ContractAddress) -> "
-"u256;\n"
-"# \n"
-"#     fn allowance(self: @TContractState, owner: ContractAddress, spender: "
-"ContractAddress) -> u256;\n"
-"# \n"
-"#     fn transfer(ref self: TContractState, recipient: ContractAddress, "
-"amount: u256) -> bool;\n"
-"# \n"
-"#     fn transfer_from(\n"
-"#         ref self: TContractState, sender: ContractAddress, recipient: "
-"ContractAddress, amount: u256\n"
-"#     ) -> bool;\n"
-"# \n"
-"#     fn approve(ref self: TContractState, spender: ContractAddress, amount: "
-"u256) -> bool;\n"
-"# }\n"
-"# \n"
-"# #[starknet::interface]\n"
-"# trait ITokenWrapper<TContractState> {\n"
-"#     fn token_name(self: @TContractState, contract_address: "
-"ContractAddress) -> felt252;\n"
-"# \n"
-"#     fn transfer_token(\n"
-"#         ref self: TContractState,\n"
-"#         contract_address: ContractAddress,\n"
-"#         recipient: ContractAddress,\n"
-"#         amount: u256\n"
-"#     ) -> bool;\n"
-"# }\n"
-"# \n"
-"# \n"
-"//**** Specify interface here ****//\n"
-"#[starknet::contract]\n"
-"mod TokenWrapper {\n"
-"    use super::IERC20DispatcherTrait;\n"
-"    use super::IERC20Dispatcher;\n"
-"    use super::ITokenWrapper;\n"
-"    use starknet::ContractAddress;\n"
-"\n"
-"    #[storage]\n"
-"    struct Storage {}\n"
-"\n"
-"    impl TokenWrapper of ITokenWrapper<ContractState> {\n"
-"        fn token_name(self: @ContractState, contract_address: "
-"ContractAddress) -> felt252 {\n"
-"            IERC20Dispatcher { contract_address }.name()\n"
-"        }\n"
-"\n"
-"        fn transfer_token(\n"
-"            ref self: ContractState,\n"
-"            contract_address: ContractAddress,\n"
-"            recipient: ContractAddress,\n"
-"            amount: u256\n"
-"        ) -> bool {\n"
-"            IERC20Dispatcher { contract_address }.transfer(recipient, "
-"amount)\n"
-"        }\n"
-"    }\n"
-"}\n"
-"# \n"
-"# \n"
-"```"
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:94
+msgid "//**** Specify interface here ****//\n"
 msgstr ""
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:125
@@ -10601,35 +9810,9 @@ msgid ""
 "like:"
 msgstr ""
 
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:141
-msgid ""
-"```rust,noplayground\n"
-"use starknet::ContractAddress;\n"
-"\n"
-"trait IERC20DispatcherTrait<T> {\n"
-"    fn name(self: T) -> felt252;\n"
-"    fn transfer(self: T, recipient: ContractAddress, amount: u256);\n"
-"}\n"
-"\n"
-"#[derive(Copy, Drop, starknet::Store, Serde)]\n"
-"struct IERC20LibraryDispatcher {\n"
-"    class_hash: starknet::ClassHash,\n"
-"}\n"
-"\n"
-"impl IERC20LibraryDispatcherImpl of "
-"IERC20DispatcherTrait<IERC20LibraryDispatcher> {\n"
-"    fn name(\n"
-"        self: IERC20LibraryDispatcher\n"
-"    ) -> felt252 { // starknet::syscalls::library_call_syscall  is called in "
-"here\n"
-"    }\n"
-"    fn transfer(\n"
-"        self: IERC20LibraryDispatcher, recipient: ContractAddress, amount: "
-"u256\n"
-"    ) { // starknet::syscalls::library_call_syscall  is called in here\n"
-"    }\n"
-"}\n"
-"```"
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:157
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:161
+msgid "// starknet::syscalls::library_call_syscall  is called in here\n"
 msgstr ""
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:166
@@ -10688,16 +9871,27 @@ msgid ""
 "`call_contract_sycall` to call the `transfer` function of an ERC20 contract:"
 msgstr ""
 
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:252
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:254
+msgid "\"transferFrom\""
+msgstr ""
+
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:264
 msgid "Listing 99-9: A sample contract using syscalls"
 msgstr ""
 
-#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:254
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:266
 msgid ""
-"To use this syscall, we passed in the contract address, the function "
-"selector (which is the `starknet_keccak` hash of the function name), and the "
-"calldata (function arguments). At the end, we get returned a serialized "
-"value which we'll need to deserialize ourselves!"
+"To use this syscall, we passed in the contract address, the selector of the "
+"function we want to call, and the call arguments."
+msgstr ""
+
+#: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:268
+msgid ""
+"The call arguments must be provided as an array of `felt252`. To build this "
+"array, we serialize the expected function parameters into an "
+"`Array<felt252>` using the `Serde` trait, and then pass this array as "
+"calldata. At the end, we are returned a serialized value which we'll need to "
+"deserialize ourselves!"
 msgstr ""
 
 #: src/ch99-01-04-00-other-examples.md:3
@@ -10751,200 +9945,123 @@ msgid ""
 "traceability."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:13
+#: src/ch99-01-04-01-voting-contract.md:14
 msgid ""
-"```rust,noplayground\n"
 "/// @dev Core Library Imports for the Traits outside the Starknet Contract\n"
-"use starknet::ContractAddress;\n"
-"\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:16
+msgid ""
 "/// @dev Trait defining the functions that can be implemented or called by "
 "the Starknet Contract\n"
-"#[starknet::interface]\n"
-"trait VoteTrait<T> {\n"
-"    /// @dev Function that returns the current vote status\n"
-"    fn get_vote_status(self: @T) -> (u8, u8, u8, u8);\n"
-"    /// @dev Function that checks if the user at the specified address is "
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:20
+msgid "/// @dev Function that returns the current vote status\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:22
+msgid ""
+"/// @dev Function that checks if the user at the specified address is "
 "allowed to vote\n"
-"    fn voter_can_vote(self: @T, user_address: ContractAddress) -> bool;\n"
-"    /// @dev Function that checks if the specified address is registered as "
-"a voter\n"
-"    fn is_voter_registered(self: @T, address: ContractAddress) -> bool;\n"
-"    /// @dev Function that allows a user to vote\n"
-"    fn vote(ref self: T, vote: u8);\n"
-"}\n"
-"\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:24
+msgid ""
+"/// @dev Function that checks if the specified address is registered as a "
+"voter\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:26
+msgid "/// @dev Function that allows a user to vote\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:29
+msgid ""
 "/// @dev Starknet Contract allowing three registered voters to vote on a "
 "proposal\n"
-"#[starknet::contract]\n"
-"mod Vote {\n"
-"    use starknet::ContractAddress;\n"
-"    use starknet::get_caller_address;\n"
-"\n"
-"    const YES: u8 = 1_u8;\n"
-"    const NO: u8 = 0_u8;\n"
-"\n"
-"    /// @dev Structure that stores vote counts and voter states\n"
-"    #[storage]\n"
-"    struct Storage {\n"
-"        yes_votes: u8,\n"
-"        no_votes: u8,\n"
-"        can_vote: LegacyMap::<ContractAddress, bool>,\n"
-"        registered_voter: LegacyMap::<ContractAddress, bool>,\n"
-"    }\n"
-"\n"
-"    /// @dev Contract constructor initializing the contract with a list of "
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:39
+msgid "/// @dev Structure that stores vote counts and voter states\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:48
+msgid ""
+"/// @dev Contract constructor initializing the contract with a list of "
 "registered voters and 0 vote count\n"
-"    #[constructor]\n"
-"    fn constructor(\n"
-"        ref self: ContractState,\n"
-"        voter_1: ContractAddress,\n"
-"        voter_2: ContractAddress,\n"
-"        voter_3: ContractAddress\n"
-"    ) {\n"
-"        // Register all voters by calling the _register_voters function\n"
-"        self._register_voters(voter_1, voter_2, voter_3);\n"
-"\n"
-"        // Initialize the vote count to 0\n"
-"        self.yes_votes.write(0_u8);\n"
-"        self.no_votes.write(0_u8);\n"
-"    }\n"
-"\n"
-"    /// @dev Event that gets emitted when a vote is cast\n"
-"    #[event]\n"
-"    #[derive(Drop, starknet::Event)]\n"
-"    enum Event {\n"
-"        VoteCast: VoteCast,\n"
-"        UnauthorizedAttempt: UnauthorizedAttempt,\n"
-"    }\n"
-"\n"
-"    /// @dev Represents a vote that was cast\n"
-"    #[derive(Drop, starknet::Event)]\n"
-"    struct VoteCast {\n"
-"        voter: ContractAddress,\n"
-"        vote: u8,\n"
-"    }\n"
-"\n"
-"    /// @dev Represents an unauthorized attempt to vote\n"
-"    #[derive(Drop, starknet::Event)]\n"
-"    struct UnauthorizedAttempt {\n"
-"        unauthorized_address: ContractAddress,\n"
-"    }\n"
-"\n"
-"    /// @dev Implementation of VoteTrait for ContractState\n"
-"    #[external(v0)]\n"
-"    impl VoteImpl of super::VoteTrait<ContractState> {\n"
-"        /// @dev Returns the voting results\n"
-"        fn get_vote_status(self: @ContractState) -> (u8, u8, u8, u8) {\n"
-"            let (n_yes, n_no) = self._get_voting_result();\n"
-"            let (yes_percentage, no_percentage) = "
-"self._get_voting_result_in_percentage();\n"
-"            (n_yes, n_no, yes_percentage, no_percentage)\n"
-"        }\n"
-"\n"
-"        /// @dev Check whether a voter is allowed to vote\n"
-"        fn voter_can_vote(self: @ContractState, user_address: "
-"ContractAddress) -> bool {\n"
-"            self.can_vote.read(user_address)\n"
-"        }\n"
-"\n"
-"        /// @dev Check whether an address is registered as a voter\n"
-"        fn is_voter_registered(self: @ContractState, address: "
-"ContractAddress) -> bool {\n"
-"            self.registered_voter.read(address)\n"
-"        }\n"
-"\n"
-"        /// @dev Submit a vote\n"
-"        fn vote(ref self: ContractState, vote: u8) {\n"
-"            assert(vote == NO || vote == YES, 'VOTE_0_OR_1');\n"
-"            let caller: ContractAddress = get_caller_address();\n"
-"            self._assert_allowed(caller);\n"
-"            self.can_vote.write(caller, false);\n"
-"\n"
-"            if (vote == NO) {\n"
-"                self.no_votes.write(self.no_votes.read() + 1_u8);\n"
-"            }\n"
-"            if (vote == YES) {\n"
-"                self.yes_votes.write(self.yes_votes.read() + 1_u8);\n"
-"            }\n"
-"\n"
-"            self.emit(VoteCast { voter: caller, vote: vote, });\n"
-"        }\n"
-"    }\n"
-"\n"
-"    /// @dev Internal Functions implementation for the Vote contract\n"
-"    #[generate_trait]\n"
-"    impl InternalFunctions of InternalFunctionsTrait {\n"
-"        /// @dev Registers the voters and initializes their voting status to "
-"true (can vote)\n"
-"        fn _register_voters(\n"
-"            ref self: ContractState,\n"
-"            voter_1: ContractAddress,\n"
-"            voter_2: ContractAddress,\n"
-"            voter_3: ContractAddress\n"
-"        ) {\n"
-"            self.registered_voter.write(voter_1, true);\n"
-"            self.can_vote.write(voter_1, true);\n"
-"\n"
-"            self.registered_voter.write(voter_2, true);\n"
-"            self.can_vote.write(voter_2, true);\n"
-"\n"
-"            self.registered_voter.write(voter_3, true);\n"
-"            self.can_vote.write(voter_3, true);\n"
-"        }\n"
-"    }\n"
-"\n"
-"    /// @dev Asserts implementation for the Vote contract\n"
-"    #[generate_trait]\n"
-"    impl AssertsImpl of AssertsTrait {\n"
-"        // @dev Internal function that checks if an address is allowed to "
-"vote\n"
-"        fn _assert_allowed(ref self: ContractState, address: "
-"ContractAddress) {\n"
-"            let is_voter: bool = self.registered_voter.read((address));\n"
-"            let can_vote: bool = self.can_vote.read((address));\n"
-"\n"
-"            if (can_vote == false) {\n"
-"                self.emit(UnauthorizedAttempt { unauthorized_address: "
-"address, });\n"
-"            }\n"
-"\n"
-"            assert(is_voter == true, 'USER_NOT_REGISTERED');\n"
-"            assert(can_vote == true, 'USER_ALREADY_VOTED');\n"
-"        }\n"
-"    }\n"
-"\n"
-"    /// @dev Implement the VotingResultTrait for the Vote contract\n"
-"    #[generate_trait]\n"
-"    impl VoteResultFunctionsImpl of VoteResultFunctionsTrait {\n"
-"        // @dev Internal function to get the voting results (yes and no vote "
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:56
+msgid "// Register all voters by calling the _register_voters function\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:59
+msgid "// Initialize the vote count to 0\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:64
+msgid "/// @dev Event that gets emitted when a vote is cast\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:72
+msgid "/// @dev Represents a vote that was cast\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:79
+msgid "/// @dev Represents an unauthorized attempt to vote\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:85
+msgid "/// @dev Implementation of VoteTrait for ContractState\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:88
+msgid "/// @dev Returns the voting results\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:95
+msgid "/// @dev Check whether a voter is allowed to vote\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:100
+msgid "/// @dev Check whether an address is registered as a voter\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:105
+msgid "/// @dev Submit a vote\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:123
+msgid "/// @dev Internal Functions implementation for the Vote contract\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:126
+msgid ""
+"/// @dev Registers the voters and initializes their voting status to true "
+"(can vote)\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:144
+msgid "/// @dev Asserts implementation for the Vote contract\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:147
+msgid "// @dev Internal function that checks if an address is allowed to vote\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:161
+msgid "/// @dev Implement the VotingResultTrait for the Vote contract\n"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:164
+msgid ""
+"// @dev Internal function to get the voting results (yes and no vote "
 "counts)\n"
-"        fn _get_voting_result(self: @ContractState) -> (u8, u8) {\n"
-"            let n_yes: u8 = self.yes_votes.read();\n"
-"            let n_no: u8 = self.no_votes.read();\n"
-"\n"
-"            (n_yes, n_no)\n"
-"        }\n"
-"\n"
-"        // @dev Internal function to calculate the voting results in "
-"percentage\n"
-"        fn _get_voting_result_in_percentage(self: @ContractState) -> (u8, "
-"u8) {\n"
-"            let n_yes: u8 = self.yes_votes.read();\n"
-"            let n_no: u8 = self.no_votes.read();\n"
-"\n"
-"            let total_votes: u8 = n_yes + n_no;\n"
-"\n"
-"            if (total_votes == 0_u8) {\n"
-"                return (0, 0);\n"
-"            }\n"
-"            let yes_percentage: u8 = (n_yes * 100_u8) / (total_votes);\n"
-"            let no_percentage: u8 = (n_no * 100_u8) / (total_votes);\n"
-"\n"
-"            (yes_percentage, no_percentage)\n"
-"        }\n"
-"    }\n"
-"}\n"
-"```"
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:172
+msgid "// @dev Internal function to calculate the voting results in percentage\n"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:191
@@ -11022,6 +10139,10 @@ msgid ""
 "will use these accounts to deploy and interact with the voting contract:"
 msgstr ""
 
+#: src/ch99-01-04-01-voting-contract.md:221
+msgid "================="
+msgstr ""
+
 #: src/ch99-01-04-01-voting-contract.md:237
 msgid ""
 "Before we can interact with the voting contract, we need to prepare the "
@@ -11074,23 +10195,59 @@ msgid ""
 "the smart wallet address from the output of the initial `katana` command:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:261
-msgid ""
-"```bash\n"
-"{\n"
-"  \"version\": 1,\n"
-"  \"variant\": {\n"
-"        \"type\": \"open_zeppelin\",\n"
-"        \"version\": 1,\n"
-"        \"public_key\": \"<SMART_WALLET_PUBLIC_KEY>\"\n"
-"  },\n"
-"    \"deployment\": {\n"
-"        \"status\": \"deployed\",\n"
-"        \"class_hash\": \"<SMART_WALLET_CLASS_HASH>\",\n"
-"        \"address\": \"<SMART_WALLET_ADDRESS>\"\n"
-"  }\n"
-"}\n"
-"```"
+#: src/ch99-01-04-01-voting-contract.md:263
+#: src/ch99-01-04-01-voting-contract.md:266
+#: src/ch99-01-04-01-voting-contract.md:375
+msgid "\"version\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:264
+msgid "\"variant\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:265
+#: src/ch99-01-04-01-voting-contract.md:381
+msgid "\"type\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:265
+msgid "\"open_zeppelin\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:267
+msgid "\"public_key\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:267
+msgid "\"<SMART_WALLET_PUBLIC_KEY>\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:269
+msgid "\"deployment\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:270
+msgid "\"status\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:270
+msgid "\"deployed\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:271
+msgid "\"class_hash\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:271
+msgid "\"<SMART_WALLET_CLASS_HASH>\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:272
+msgid "\"address\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:272
+msgid "\"<SMART_WALLET_ADDRESS>\""
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:277
@@ -11135,16 +10292,6 @@ msgstr ""
 msgid ""
 "Before deploying, we need to declare the contract. We can do this with the "
 "`starkli declare` command:"
-msgstr ""
-
-#: src/ch99-01-04-01-voting-contract.md:297
-msgid ""
-"```bash\n"
-"starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc "
-"http://0.0.0.0:5050 --account "
-"~/.starkli-wallets/deployer/account0_account.json --keystore "
-"~/.starkli-wallets/deployer/account0_keystore.json\n"
-"```"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:301
@@ -11193,32 +10340,8 @@ msgid ""
 "arguments, so add a voter account that you can later vote with."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:313
-msgid ""
-"```bash\n"
-"starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> "
-"<voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account "
-"~/.starkli-wallets/deployer/account0_account.json --keystore "
-"~/.starkli-wallets/deployer/account0_keystore.json\n"
-"```"
-msgstr ""
-
 #: src/ch99-01-04-01-voting-contract.md:317
 msgid "An example command:"
-msgstr ""
-
-#: src/ch99-01-04-01-voting-contract.md:319
-msgid ""
-"```bash\n"
-"starkli deploy "
-"0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52 "
-"0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 "
-"0x033c627a3e5213790e246a917770ce23d7e562baa5b4d2917c23b1be6d91961c "
-"0x01d98d835e43b032254ffbef0f150c5606fa9c5c9310b1fae370ab956a7919f5 --rpc "
-"http://0.0.0.0:5050 --account "
-"~/.starkli-wallets/deployer/account0_account.json --keystore "
-"~/.starkli-wallets/deployer/account0_keystore.json\n"
-"```"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:323
@@ -11290,15 +10413,6 @@ msgid ""
 "account address to observe the output:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:343
-msgid ""
-"```bash\n"
-"starkli call "
-"0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 "
-"is_voter_registered 0x44444444444444444 --rpc http://0.0.0.0:5050\n"
-"```"
-msgstr ""
-
 #: src/ch99-01-04-01-voting-contract.md:347
 msgid ""
 "With an unregistered account address, the terminal output is 0 (i.e., "
@@ -11324,25 +10438,6 @@ msgid ""
 "the voter; we are writing to the contract's storage."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:355
-msgid ""
-"```bash\n"
-"//Voting Yes\n"
-"starkli invoke "
-"0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 "
-"--rpc http://0.0.0.0:5050 --account "
-"~/.starkli-wallets/deployer/account0_account.json --keystore "
-"~/.starkli-wallets/deployer/account0_keystore.json\n"
-"\n"
-"//Voting No\n"
-"starkli invoke "
-"0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 "
-"--rpc http://0.0.0.0:5050 --account "
-"~/.starkli-wallets/deployer/account0_account.json --keystore "
-"~/.starkli-wallets/deployer/account0_keystore.json\n"
-"```"
-msgstr ""
-
 #: src/ch99-01-04-01-voting-contract.md:363
 msgid ""
 "You will be prompted to enter the password for the signer. Once you enter "
@@ -11351,55 +10446,88 @@ msgid ""
 "transaction command, you can get more details about the transaction:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:365
-msgid ""
-"```bash\n"
-"starkli transaction <TRANSACTION_HASH> --rpc http://0.0.0.0:5050\n"
-"```"
-msgstr ""
-
 #: src/ch99-01-04-01-voting-contract.md:369
 msgid "This returns:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:371
-msgid ""
-"```bash\n"
-"{\n"
-"  \"transaction_hash\": "
-"\"0x5604a97922b6811060e70ed0b40959ea9e20c726220b526ec690de8923907fd\",\n"
-"  \"max_fee\": \"0x430e81\",\n"
-"  \"version\": \"0x1\",\n"
-"  \"signature\": [\n"
-"    \"0x75e5e4880d7a8301b35ff4a1ed1e3d72fffefa64bb6c306c314496e6e402d57\",\n"
-"    \"0xbb6c459b395a535dcd00d8ab13d7ed71273da4a8e9c1f4afe9b9f4254a6f51\"\n"
-"  ],\n"
-"  \"nonce\": \"0x3\",\n"
-"  \"type\": \"INVOKE\",\n"
-"  \"sender_address\": "
-"\"0x3ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0\",\n"
-"  \"calldata\": [\n"
-"    \"0x1\",\n"
-"    \"0x5ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349\",\n"
-"    \"0x132bdf85fc8aa10ac3c22f02317f8f53d4b4f52235ed1eabb3a4cbbe08b5c41\",\n"
-"    \"0x0\",\n"
-"    \"0x1\",\n"
-"    \"0x1\",\n"
-"    \"0x1\"\n"
-"  ]\n"
-"}\n"
-"```"
+#: src/ch99-01-04-01-voting-contract.md:373
+msgid "\"transaction_hash\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:373
+msgid "\"0x5604a97922b6811060e70ed0b40959ea9e20c726220b526ec690de8923907fd\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:374
+msgid "\"max_fee\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:374
+msgid "\"0x430e81\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:375
+#: src/ch99-01-04-01-voting-contract.md:384
+#: src/ch99-01-04-01-voting-contract.md:388
+#: src/ch99-01-04-01-voting-contract.md:389
+#: src/ch99-01-04-01-voting-contract.md:390
+msgid "\"0x1\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:376
+msgid "\"signature\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:377
+msgid "\"0x75e5e4880d7a8301b35ff4a1ed1e3d72fffefa64bb6c306c314496e6e402d57\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:378
+msgid "\"0xbb6c459b395a535dcd00d8ab13d7ed71273da4a8e9c1f4afe9b9f4254a6f51\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:380
+msgid "\"nonce\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:380
+msgid "\"0x3\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:381
+msgid "\"INVOKE\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:382
+msgid "\"sender_address\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:382
+msgid "\"0x3ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:383
+msgid "\"calldata\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:385
+msgid "\"0x5ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:386
+msgid "\"0x132bdf85fc8aa10ac3c22f02317f8f53d4b4f52235ed1eabb3a4cbbe08b5c41\""
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:387
+msgid "\"0x0\""
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:395
 msgid "If you try to vote twice with the same signer you will get an error:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:397
-msgid ""
-"```bash\n"
-"Error: code=ContractError, message=\"Contract error\"\n"
-"```"
+#: src/ch99-01-04-01-voting-contract.md:398
+msgid "\"Contract error\""
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:401
@@ -11409,21 +10537,22 @@ msgid ""
 "node):"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:403
+#: src/ch99-01-04-01-voting-contract.md:405
 msgid ""
-"```bash\n"
-"...\n"
-"Transaction execution error: \"Error in the called contract "
+"\"Error in the called contract "
 "(0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0):\n"
 "    Error at pc=0:81:\n"
 "    Got an exception while executing a hint: Custom Hint Error: Execution "
 "failed. Failure reason: \\\"USER_ALREADY_VOTED\\\".\n"
 "    ...\n"
-"```"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:411
 msgid "The key for the error is `USER_ALREADY_VOTED`."
+msgstr ""
+
+#: src/ch99-01-04-01-voting-contract.md:414
+msgid "'USER_ALREADY_VOTED'"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:417
@@ -11435,23 +10564,6 @@ msgid ""
 "is the same for each voter)."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:419
-msgid ""
-"```bash\n"
-"starkli invoke "
-"0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 "
-"--rpc http://0.0.0.0:5050 --account "
-"~/.starkli-wallets/deployer/account1_account.json --keystore "
-"~/.starkli-wallets/deployer/account1_keystore.json\n"
-"\n"
-"starkli invoke "
-"0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 "
-"--rpc http://0.0.0.0:5050 --account "
-"~/.starkli-wallets/deployer/account2_account.json --keystore "
-"~/.starkli-wallets/deployer/account2_keystore.json\n"
-"```"
-msgstr ""
-
 #: src/ch99-01-04-01-voting-contract.md:425
 msgid "Visualizing Vote Outcomes"
 msgstr ""
@@ -11460,15 +10572,6 @@ msgstr ""
 msgid ""
 "To examine the voting results, we invoke the `get_vote_status` function, "
 "another view function, through the `starknet call` command."
-msgstr ""
-
-#: src/ch99-01-04-01-voting-contract.md:429
-msgid ""
-"```bash\n"
-"starkli call "
-"0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 "
-"get_vote_status --rpc http://0.0.0.0:5050\n"
-"```"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:433
@@ -11595,31 +10698,18 @@ msgid ""
 "[here](https://docs.starknet.io/documentation/tools/important_addresses/)."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:64
+#: src/ch99-04-00-L1-L2-messaging.md:65
+msgid "// Sends a message on Starknet with a single felt.\n"
+msgstr ""
+
+#: src/ch99-04-00-L1-L2-messaging.md:74
 msgid ""
-"```js\n"
-"// Sends a message on Starknet with a single felt.\n"
-"function sendMessageFelt(\n"
-"    uint256 contractAddress,\n"
-"    uint256 selector,\n"
-"    uint256 myFelt\n"
-")\n"
-"    external\n"
-"    payable\n"
-"{\n"
-"    // We \"serialize\" here the felt into a payload, which is an array of "
+"// We \"serialize\" here the felt into a payload, which is an array of "
 "uint256.\n"
-"    uint256[] memory payload = new uint256[](1);\n"
-"    payload[0] = myFelt;\n"
-"\n"
-"    // msg.value must always be >= 20_000 wei.\n"
-"    _snMessaging.sendMessageToL2{value: msg.value}(\n"
-"        contractAddress,\n"
-"        selector,\n"
-"        payload\n"
-"    );\n"
-"}\n"
-"```"
+msgstr ""
+
+#: src/ch99-04-00-L1-L2-messaging.md:78
+msgid "// msg.value must always be >= 20_000 wei.\n"
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:87
@@ -11659,22 +10749,22 @@ msgstr ""
 msgid "The signature of the `sendMessageToL2` is:"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:108
+#: src/ch99-04-00-L1-L2-messaging.md:109
 msgid "The parameters are as follow:"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:109
+#: src/ch99-04-00-L1-L2-messaging.md:111
 msgid "`toAddress`: The contract address on L2 that will be called."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:110
+#: src/ch99-04-00-L1-L2-messaging.md:112
 msgid ""
 "`selector`: The selector of the function of this contract at `toAddress`. "
 "This selector (function) must have the `#[l1_handler]` attribute to be "
 "callable."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:111
+#: src/ch99-04-00-L1-L2-messaging.md:113
 msgid ""
 "`payload`: The payload is always an array of `felt252` (which are "
 "represented by `uint256` in solidity). For this reason we've inserted the "
@@ -11682,27 +10772,17 @@ msgid ""
 "into an array."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:114
+#: src/ch99-04-00-L1-L2-messaging.md:116
 msgid "On the Starknet side, to receive this message, we have:"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:116
+#: src/ch99-04-00-L1-L2-messaging.md:123
 msgid ""
-"```rust\n"
-"    #[l1_handler]\n"
-"    fn msg_handler_felt(ref self: ContractState, from_address: felt252, "
-"my_felt: felt252) {\n"
-"        assert(from_address == self.allowed_message_sender.read(), 'Invalid "
-"message sender');\n"
-"\n"
-"        // You can now use the data, automatically deserialized from the "
-"message payload.\n"
-"        assert(my_felt == 123, 'Invalid value');\n"
-"    }\n"
-"```"
+"// You can now use the data, automatically deserialized from the message "
+"payload.\n"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:126
+#: src/ch99-04-00-L1-L2-messaging.md:128
 msgid ""
 "We need to add the `#[l1_handler]` attribute to our function. L1 handlers "
 "are special functions that can only be executed by a `L1HandlerTransaction`. "
@@ -11712,11 +10792,11 @@ msgid ""
 "that our contract can only receive messages from a trusted L1 contract."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:128
+#: src/ch99-04-00-L1-L2-messaging.md:130
 msgid "Sending messages from Starknet to Ethereum"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:130
+#: src/ch99-04-00-L1-L2-messaging.md:132
 msgid ""
 "When sending messages from Starknet to Ethereum, you will have to use the "
 "`send_message_to_l1` syscall in your Cairo contracts. This syscall allows "
@@ -11727,31 +10807,23 @@ msgid ""
 "the message."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:132
+#: src/ch99-04-00-L1-L2-messaging.md:134
 msgid "To send a message from L2 to L1, what we would do on Starknet is:"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:134
+#: src/ch99-04-00-L1-L2-messaging.md:138
 msgid ""
-"```rust\n"
-"        fn send_message_felt(ref self: ContractState, to_address: "
-"EthAddress, my_felt: felt252) {\n"
-"            // Note here, we \"serialize\" my_felt, as the payload must be\n"
+"// Note here, we \"serialize\" my_felt, as the payload must be\n"
 "            // a `Span<felt252>`.\n"
-"            starknet::send_message_to_l1_syscall(to_address.into(), "
-"array![my_felt].span())\n"
-"                .unwrap();\n"
-"        }\n"
-"```"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:143
+#: src/ch99-04-00-L1-L2-messaging.md:145
 msgid ""
 "We simply build the payload and pass it, along with the L1 contract address, "
 "to the syscall function."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:145
+#: src/ch99-04-00-L1-L2-messaging.md:147
 msgid ""
 "On L1, the important part is to build the same payload as on L2. Then you "
 "call `consumeMessageFromL2` by passing the L2 contract address and the "
@@ -11761,34 +10833,31 @@ msgid ""
 "`send_message_to_l1_syscall`."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:149
-msgid ""
-"```js\n"
-"function consumeMessageFelt(\n"
-"    uint256 fromAddress,\n"
-"    uint256[] calldata payload\n"
-")\n"
-"    external\n"
-"{\n"
-"    let messageHash = _snMessaging.consumeMessageFromL2(fromAddress, "
-"payload);\n"
-"    \n"
-"    // You can use the message hash if you want here.\n"
-"\n"
-"    // We expect the payload to contain only a felt252 value (which is a "
-"uint256 in solidity).\n"
-"    require(payload.length == 1, \"Invalid payload\");\n"
-"\n"
-"    uint256 my_felt = payload[0];\n"
-"    \n"
-"    // From here, you can safely use `my_felt` as the message has been "
-"verified by StarknetMessaging.\n"
-"    require(my_felt > 0, \"Invalid value\");\n"
-"}\n"
-"```"
+#: src/ch99-04-00-L1-L2-messaging.md:160
+msgid "// You can use the message hash if you want here.\n"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:170
+#: src/ch99-04-00-L1-L2-messaging.md:162
+msgid ""
+"// We expect the payload to contain only a felt252 value (which is a uint256 "
+"in solidity).\n"
+msgstr ""
+
+#: src/ch99-04-00-L1-L2-messaging.md:163
+msgid "\"Invalid payload\""
+msgstr ""
+
+#: src/ch99-04-00-L1-L2-messaging.md:167
+msgid ""
+"// From here, you can safely use `my_felt` as the message has been verified "
+"by StarknetMessaging.\n"
+msgstr ""
+
+#: src/ch99-04-00-L1-L2-messaging.md:168
+msgid "\"Invalid value\""
+msgstr ""
+
+#: src/ch99-04-00-L1-L2-messaging.md:172
 msgid ""
 "As you can see, in this context we don't have to verify which contract from "
 "L2 is sending the message. But we are actually using the "
@@ -11796,21 +10865,21 @@ msgid ""
 "the payload) to ensure we are only consuming valid messages."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:172
+#: src/ch99-04-00-L1-L2-messaging.md:174
 msgid ""
 "It is important to remember that on L1 we are sending a payload of "
 "`uint256`, but the basic data type on Starknet is `felt252`; however, "
-"`felt252` are approximately 4 bits smaller than `uint256`. So we have to "
-"pay attention to the values contained in the payload of the messages we are "
+"`felt252` are approximately 4 bits smaller than `uint256`. So we have to pay "
+"attention to the values contained in the payload of the messages we are "
 "sending. If, on L1, we build a message with values above the maximum "
 "`felt252`, the message will be stuck and never consumed on L2."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:174
+#: src/ch99-04-00-L1-L2-messaging.md:176
 msgid "Cairo Serde"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:175
+#: src/ch99-04-00-L1-L2-messaging.md:178
 msgid ""
 "Before sending messages between L1 and L2, you must remember that Starknet "
 "contracts, written in Cairo, can only understand serialized data. And "
@@ -11822,37 +10891,31 @@ msgid ""
 "consumed on L2."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:179
+#: src/ch99-04-00-L1-L2-messaging.md:182
 msgid ""
 "So for instance, an actual `uint256` value in Cairo is represented by a "
 "struct like:"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:188
+#: src/ch99-04-00-L1-L2-messaging.md:191
 msgid ""
 "which will be serialized as **TWO** felts, one for the `low`, and one for "
 "the `high`. This means that to send only one `u256` to Cairo, you'll need to "
 "send a paylaod from L1 with **TWO** values."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:190
-msgid ""
-"```js\n"
-"uint256[] memory payload = new uint256[](2);\n"
-"// Let's send the value 1 as a u256 in cairo: low = 1, high = 0.\n"
-"payload[0] = 1;\n"
-"payload[1] = 0;\n"
-"```"
+#: src/ch99-04-00-L1-L2-messaging.md:194
+msgid "// Let's send the value 1 as a u256 in cairo: low = 1, high = 0.\n"
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:197
+#: src/ch99-04-00-L1-L2-messaging.md:200
 msgid ""
 "If you want to learn more about the messaging mechanism, you can visit the "
 "[Starknet "
 "documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/)."
 msgstr ""
 
-#: src/ch99-04-00-L1-L2-messaging.md:199
+#: src/ch99-04-00-L1-L2-messaging.md:202
 msgid ""
 "You can also find a [detailed guide "
 "here](https://github.com/glihm/starknet-messaging-dev) to test the messaging "
@@ -12041,92 +11104,30 @@ msgid ""
 "specific users. Each function can then be restricted to specific roles."
 msgstr ""
 
-#: src/ch99-03-security-considerations.md:73
+#: src/ch99-03-security-considerations.md:92
+msgid "// Role 'owner': only one address\n"
+msgstr ""
+
+#: src/ch99-03-security-considerations.md:94
+msgid "// Role 'role_a': a set of addresses\n"
+msgstr ""
+
+#: src/ch99-03-security-considerations.md:103
+msgid "// Guard functions to check roles\n"
+msgstr ""
+
+#: src/ch99-03-security-considerations.md:126
+msgid "// You can easily combine guards to perform complex checks\n"
+msgstr ""
+
+#: src/ch99-03-security-considerations.md:131
+msgid "// Functions to manage roles\n"
+msgstr ""
+
+#: src/ch99-03-security-considerations.md:138
 msgid ""
-"```rust,noplayground\n"
-"#[starknet::contract]\n"
-"mod access_control_contract {\n"
-"    use starknet::ContractAddress;\n"
-"    use starknet::get_caller_address;\n"
-"\n"
-"    trait IContract<TContractState> {\n"
-"        fn is_owner(self: @TContractState) -> bool;\n"
-"        fn is_role_a(self: @TContractState) -> bool;\n"
-"        fn only_owner(self: @TContractState);\n"
-"        fn only_role_a(self: @TContractState);\n"
-"        fn only_allowed(self: @TContractState);\n"
-"        fn set_role_a(ref self: TContractState, _target: ContractAddress, "
-"_active: bool);\n"
-"        fn role_a_action(ref self: ContractState);\n"
-"        fn allowed_action(ref self: ContractState);\n"
-"    }\n"
-"\n"
-"    #[storage]\n"
-"    struct Storage {\n"
-"        // Role 'owner': only one address\n"
-"        owner: ContractAddress,\n"
-"        // Role 'role_a': a set of addresses\n"
-"        role_a: LegacyMap::<ContractAddress, bool>\n"
-"    }\n"
-"\n"
-"    #[constructor]\n"
-"    fn constructor(ref self: ContractState) {\n"
-"        self.owner.write(get_caller_address());\n"
-"    }\n"
-"\n"
-"    // Guard functions to check roles\n"
-"\n"
-"    impl Contract of IContract<ContractState> {\n"
-"        #[inline(always)]\n"
-"        fn is_owner(self: @ContractState) -> bool {\n"
-"            self.owner.read() == get_caller_address()\n"
-"        }\n"
-"\n"
-"        #[inline(always)]\n"
-"        fn is_role_a(self: @ContractState) -> bool {\n"
-"            self.role_a.read(get_caller_address())\n"
-"        }\n"
-"\n"
-"        #[inline(always)]\n"
-"        fn only_owner(self: @ContractState) {\n"
-"            assert(Contract::is_owner(self), 'Not owner');\n"
-"        }\n"
-"\n"
-"        #[inline(always)]\n"
-"        fn only_role_a(self: @ContractState) {\n"
-"            assert(Contract::is_role_a(self), 'Not role A');\n"
-"        }\n"
-"\n"
-"        // You can easily combine guards to perform complex checks\n"
-"        fn only_allowed(self: @ContractState) {\n"
-"            assert(Contract::is_owner(self) || Contract::is_role_a(self), "
-"'Not allowed');\n"
-"        }\n"
-"\n"
-"        // Functions to manage roles\n"
-"\n"
-"        fn set_role_a(ref self: ContractState, _target: ContractAddress, "
-"_active: bool) {\n"
-"            Contract::only_owner(@self);\n"
-"            self.role_a.write(_target, _active);\n"
-"        }\n"
-"\n"
-"        // You can now focus on the business logic of your contract\n"
+"// You can now focus on the business logic of your contract\n"
 "        // and reduce the complexity of your code by using guard functions\n"
-"\n"
-"        fn role_a_action(ref self: ContractState) {\n"
-"            Contract::only_role_a(@self);\n"
-"        // ...\n"
-"        }\n"
-"\n"
-"        fn allowed_action(ref self: ContractState) {\n"
-"            Contract::only_allowed(@self);\n"
-"        // ...\n"
-"        }\n"
-"    }\n"
-"}\n"
-"\n"
-"```"
 msgstr ""
 
 #: src/ch99-03-security-considerations.md:155
@@ -12156,6 +11157,10 @@ msgstr ""
 msgid ""
 "[Semgrep Cairo 1.0 "
 "support](https://semgrep.dev/blog/2023/semgrep-now-supports-cairo-1-0)"
+msgstr ""
+
+#: src/ch99-03-security-considerations.md:164
+msgid "[Caracal, a Starknet static analyzer](https://github.com/crytic/caracal)"
 msgstr ""
 
 #: src/appendix-00.md:3
@@ -13284,24 +12289,8 @@ msgid ""
 "on any type whose parts all implement `Copy`."
 msgstr ""
 
-#: src/appendix-03-derivable-traits.md:65
-msgid ""
-"```rust\n"
-"#[derive(Copy, Drop)]\n"
-"struct A {\n"
-"    item: felt252\n"
-"}\n"
-"\n"
-"fn main() {\n"
-"    let first_struct = A {\n"
-"        item: 2\n"
-"    };\n"
-"    let second_struct = first_struct;\n"
-"    assert(second_struct.item == 2, 'Not equal');\n"
-"    assert(first_struct.item == 2, 'Not Equal'); // Copy Trait prevents "
-"firs_struct from moving into second_struct\n"
-"}\n"
-"```"
+#: src/appendix-03-derivable-traits.md:77
+msgid "// Copy Trait prevents firs_struct from moving into second_struct\n"
 msgstr ""
 
 #: src/appendix-03-derivable-traits.md:81
@@ -13317,6 +12306,14 @@ msgstr ""
 
 #: src/appendix-03-derivable-traits.md:108
 msgid "Output:"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:111
+msgid "''"
+msgstr ""
+
+#: src/appendix-03-derivable-traits.md:111
+msgid "'c'"
 msgstr ""
 
 #: src/appendix-03-derivable-traits.md:114
@@ -13687,6 +12684,10 @@ msgstr ""
 msgid "First you will need to have Rust and Git installed."
 msgstr ""
 
+#: src/appendix-06-cairo-binaries.md:12
+msgid "# Install stable Rust\n"
+msgstr ""
+
 #: src/appendix-06-cairo-binaries.md:16
 msgid "Install [Git](https://git-scm.com/)."
 msgstr ""
@@ -13707,15 +12708,6 @@ msgid ""
 "If you wish to install a specific release of Cairo rather than the latest "
 "head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export "
 "CAIRO_GIT_TAG=v2.2.0`)."
-msgstr ""
-
-#: src/appendix-06-cairo-binaries.md:24
-msgid ""
-"```bash\n"
-"curl -L "
-"https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | "
-"bash\n"
-"```"
 msgstr ""
 
 #: src/appendix-06-cairo-binaries.md:28
@@ -13753,11 +12745,8 @@ msgstr ""
 msgid "then remove these three lines from .bashrc:"
 msgstr ""
 
-#: src/appendix-06-cairo-binaries.md:47
-msgid ""
-"```bash\n"
-"export PATH=\"$HOME/.cairo/target/release:$PATH\"\n"
-"```"
+#: src/appendix-06-cairo-binaries.md:48
+msgid "\"$HOME/.cairo/target/release:$PATH\""
 msgstr ""
 
 #: src/appendix-06-cairo-binaries.md:51
@@ -13806,13 +12795,16 @@ msgid ""
 "terminal:"
 msgstr ""
 
-#: src/appendix-06-cairo-binaries.md:77
+#: src/appendix-06-cairo-binaries.md:78 src/appendix-06-cairo-binaries.md:88
+#: src/appendix-06-cairo-binaries.md:94 src/appendix-06-cairo-binaries.md:101
+msgid "'export CAIRO_ROOT=\"$HOME/.cairo\"'"
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:79 src/appendix-06-cairo-binaries.md:89
+#: src/appendix-06-cairo-binaries.md:95 src/appendix-06-cairo-binaries.md:102
 msgid ""
-"```bash\n"
-"echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.bashrc\n"
-"echo 'command -v cairo-compile >/dev/null || export "
-"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.bashrc\n"
-"```"
+"'command -v cairo-compile >/dev/null || export "
+"PATH=\"$CAIRO_ROOT/target/release:$PATH\"'"
 msgstr ""
 
 #: src/appendix-06-cairo-binaries.md:82
@@ -13826,39 +12818,12 @@ msgstr ""
 msgid "to add to `~/.profile`:"
 msgstr ""
 
-#: src/appendix-06-cairo-binaries.md:87
-msgid ""
-"```bash\n"
-"echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.profile\n"
-"echo 'command -v cairo-compile >/dev/null || export "
-"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.profile\n"
-"```"
-msgstr ""
-
 #: src/appendix-06-cairo-binaries.md:92
 msgid "to add to `~/.bash_profile`:"
 msgstr ""
 
-#: src/appendix-06-cairo-binaries.md:93
-msgid ""
-"```bash\n"
-"echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.bash_profile\n"
-"echo 'command -v cairo-compile >/dev/null || export "
-"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.bash_profile\n"
-"```"
-msgstr ""
-
 #: src/appendix-06-cairo-binaries.md:98
 msgid "For **Zsh**:"
-msgstr ""
-
-#: src/appendix-06-cairo-binaries.md:100
-msgid ""
-"```zsh\n"
-"echo 'export CAIRO_ROOT=\"$HOME/.cairo\"' >> ~/.zshrc\n"
-"echo 'command -v cairo-compile >/dev/null || export "
-"PATH=\"$CAIRO_ROOT/target/release:$PATH\"' >> ~/.zshrc\n"
-"```"
 msgstr ""
 
 #: src/appendix-06-cairo-binaries.md:105
@@ -13896,11 +12861,8 @@ msgstr ""
 msgid "for the `PATH` changes to take effect."
 msgstr ""
 
-#: src/appendix-06-cairo-binaries.md:133
-msgid ""
-"```sh\n"
-"exec \"$SHELL\"\n"
-"```"
+#: src/appendix-06-cairo-binaries.md:134
+msgid "\"$SHELL\""
 msgstr ""
 
 #: src/appendix-06-cairo-binaries.md:137
@@ -13924,30 +12886,39 @@ msgstr ""
 msgid "For everyone else, we recommend compiling Cairo from source as follows:"
 msgstr ""
 
-#: src/appendix-06-cairo-binaries.md:145
+#: src/appendix-06-cairo-binaries.md:146
+msgid "# Start by defining environment variable CAIRO_ROOT\n"
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:147
+msgid "\"${HOME}/.cairo\""
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:148
+msgid "# Create .cairo folder if it doesn't exist yet\n"
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:151
+msgid "# Clone the Cairo compiler in $CAIRO_ROOT (default root)\n"
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:154
 msgid ""
-"```bash\n"
-"# Start by defining environment variable CAIRO_ROOT\n"
-"export CAIRO_ROOT=\"${HOME}/.cairo\"\n"
-"\n"
-"# Create .cairo folder if it doesn't exist yet\n"
-"mkdir $CAIRO_ROOT\n"
-"\n"
-"# Clone the Cairo compiler in $CAIRO_ROOT (default root)\n"
-"cd $CAIRO_ROOT && git clone git@github.com:starkware-libs/cairo.git .\n"
-"\n"
 "# OPTIONAL/RECOMMENDED: If you want to install a specific version of the "
 "compiler\n"
 "# Fetch all tags (versions)\n"
-"git fetch --all --tags\n"
-"# View tags (you can also do this in the cairo compiler repository)\n"
-"git describe --tags `git rev-list --tags`\n"
-"# Checkout the version you want\n"
-"git checkout tags/v2.2.0\n"
-"\n"
-"# Generate release binaries\n"
-"cargo build --all --release\n"
-"```"
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:157
+msgid "# View tags (you can also do this in the cairo compiler repository)\n"
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:159
+msgid "# Checkout the version you want\n"
+msgstr ""
+
+#: src/appendix-06-cairo-binaries.md:162
+msgid "# Generate release binaries\n"
 msgstr ""
 
 #: src/appendix-06-cairo-binaries.md:169
@@ -13964,11 +12935,8 @@ msgstr ""
 msgid "Step 2: Add Cairo 1.0 executables to your path"
 msgstr ""
 
-#: src/appendix-06-cairo-binaries.md:180
-msgid ""
-"```bash\n"
-"export PATH=\"$CAIRO_ROOT/target/release:$PATH\"\n"
-"```"
+#: src/appendix-06-cairo-binaries.md:181
+msgid "\"$CAIRO_ROOT/target/release:$PATH\""
 msgstr ""
 
 #: src/appendix-06-cairo-binaries.md:184
@@ -14023,3 +12991,4 @@ msgid ""
 "Update the `cairo1.languageServerPath` of the Cairo 1.0 extension by pasting "
 "the path."
 msgstr ""
+
