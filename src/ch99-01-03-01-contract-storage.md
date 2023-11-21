@@ -106,7 +106,7 @@ and cannot be used as types inside structs.
 To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
-You can also create more complex mappings with multiple keys. You can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps an `owner` and an allowed `spender` to its `allowance` amound using multiple keys passed inside a tuple:
+You can also create more complex mappings with multiple keys. You can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps an `owner` and an allowed `spender` to its `allowance` amount using multiple keys passed inside a tuple:
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/no_listing_01_storage_mapping/src/lib.cairo:here}}

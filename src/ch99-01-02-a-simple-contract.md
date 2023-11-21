@@ -18,7 +18,7 @@ Let's consider the following contract to present the basics of a Starknet contra
 
 In this example, the `Storage` struct declares a storage variable called `stored_data` of type `u128` (unsigned integer of 128 bits).
 You can think of it as a single slot in a database that you can query and alter by calling functions of the code that manages the database.
-The contract defines and exposes publically the functions `set` and `get` that can be used to modify or retrieve the value of that variable.
+The contract defines and exposes publicly the functions `set` and `get` that can be used to modify or retrieve the value of that variable.
 
 ### The Interface: the contract's blueprint
 

@@ -8,8 +8,8 @@ Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge
 
 On Starknet, it's important to note that the messaging system is **asynchronous** and **asymmetric**.
 
-* **Asynchronous**: this means that in your contract code (being solidity or cairo), you can't wait the result of the message being sent on the other chain within your contract code execution.
-* **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automatized by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.
+- **Asynchronous**: this means that in your contract code (being solidity or cairo), you can't wait the result of the message being sent on the other chain within your contract code execution.
+- **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automatized by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.
 
 Let's dive into the details.
 
@@ -97,6 +97,7 @@ The fees of the `L1HandlerTransaction` are computed in a regular manner as it wo
 the gas consumption using `starkli` or `snforge` to estimate the cost of your message execution.
 
 The signature of the `sendMessageToL2` is:
+
 ```js
 function sendMessageToL2(
         uint256 toAddress,
@@ -106,10 +107,11 @@ function sendMessageToL2(
 ```
 
 The parameters are as follow:
-* `toAddress`: The contract address on L2 that will be called.
-* `selector`: The selector of the function of this contract at `toAddress`. This selector (function) must have the `#[l1_handler]` attribute to be callable.
-* `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in solidity). For this reason we've inserted the input `myFelt` into the array.
-This is why we need to insert the input data into an array.
+
+- `toAddress`: The contract address on L2 that will be called.
+- `selector`: The selector of the function of this contract at `toAddress`. This selector (function) must have the `#[l1_handler]` attribute to be callable.
+- `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in solidity). For this reason we've inserted the input `myFelt` into the array.
+  This is why we need to insert the input data into an array.
 
 On the Starknet side, to receive this message, we have:
 
@@ -143,26 +145,27 @@ function consumeMessageFelt(
     external
 {
     let messageHash = _snMessaging.consumeMessageFromL2(fromAddress, payload);
-    
+
     // You can use the message hash if you want here.
 
     // We expect the payload to contain only a felt252 value (which is a uint256 in solidity).
     require(payload.length == 1, "Invalid payload");
 
     uint256 my_felt = payload[0];
-    
-    // From here, you can safely use `my_felt` as the message has beed verified by StarknetMessaging.
+
+    // From here, you can safely use `my_felt` as the message has been verified by StarknetMessaging.
     require(my_felt > 0, "Invalid value");
 }
 ```
 
 As you can see, in this context we don't have to verify which contract from L2 is sending the message. But we are actually using the `consumeMessageFromL2` to validate the inputs (the sender address on L2 and the payload) to ensure we are only consuming valid messages.
 
-It is important to remember that on L1 we are sending a payload of `uint256`, but the basic data type on Starknet is `felt252`; however, `felt252` are approximatively 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
+It is important to remember that on L1 we are sending a payload of `uint256`, but the basic data type on Starknet is `felt252`; however, `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
 
 ## Cairo Serde
+
 Before sending messages between L1 and L2, you must remember that Starknet contracts, written in Cairo, can only understand serialized data. And serialized data is always an array of `felt252`.
-On solidity, we have `uint256` type, and `felt252` are approximatively 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending.
+On solidity, we have `uint256` type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending.
 If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
 
 So for instance, an actual `uint256` value in Cairo is represented by a struct like:
