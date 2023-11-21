@@ -1,4 +1,4 @@
-name: Verify Cairo programs compilation
+name: CI
 
 on:
   pull_request:
@@ -16,7 +16,7 @@ jobs:
       - name: Setup Scarb
         uses: software-mansion/setup-scarb@v1
         with:
-          scarb-version: "2.3.0-rc1"
+          scarb-version: 2.3.0-rc1
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
@@ -28,3 +28,9 @@ jobs:
       - name: Run cairo-verify and generate summary
         run: cairo-verify >> $GITHUB_STEP_SUMMARY
         shell: bash
+
+  typos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: crate-ci/typos@master
