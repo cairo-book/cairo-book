@@ -177,7 +177,7 @@ struct u256 {
 }
 ```
 
-which will be serialized as **TWO** felts, one for the `low`, and one for the `high`. This means that to send only one `u256` to Cairo, you'll need to send a paylaod from L1 with **TWO** values.
+which will be serialized as **TWO** felts, one for the `low`, and one for the `high`. This means that to send only one `u256` to Cairo, you'll need to send a payload from L1 with **TWO** values.
 
 ```js
 uint256[] memory payload = new uint256[](2);
