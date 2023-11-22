@@ -24,9 +24,9 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 1. Rust related packages:
    - Install toolchain providing `cargo` using [rustup](https://rustup.rs/).
-   - Install [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html) and the translation extension:
+   - Install [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html) and the required extensions:
    ```
-   cargo install mdbook mdbook-i18n-helpers
+   cargo install mdbook mdbook-i18n-helpers mdbook-last-changed
    ```
 2. Host machine packages:
 
