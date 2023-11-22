@@ -14,6 +14,10 @@ runs:
       run: cargo install mdbook-i18n-helpers --locked --version 0.1.0
       shell: bash
 
+    - name: Install mdbook-last-changed
+      run: cargo install mdbook-last-changed --locked --version 0.1.4
+      shell: bash
+
     - name: Install mdbook-cairo preprocessor
       run: cargo install --path mdbook-cairo --locked
       shell: bash
