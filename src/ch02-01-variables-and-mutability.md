@@ -7,8 +7,8 @@ However, the language abstracts this model and gives you the option to make your
 variables mutable. Let’s explore how and why Cairo enforces immutability, and how
 you can make your variables mutable.
 
-When a variable is immutable, once a value is bound to a name, you can’t change
-that value. To illustrate this, generate a new project called _variables_ in
+When a variable is immutable, once a variable is bound to a value, you can’t change
+that variable. To illustrate this, generate a new project called _variables_ in
 your _cairo_projects_ directory by using `scarb new variables`.
 
 Then, in your new _variables_ directory, open _src/lib.cairo_ and replace its
@@ -41,27 +41,23 @@ not a good programmer! Experienced Caironautes still get compiler errors.
 You received the error message `Cannot assign to an immutable variable.`
 because you tried to assign a second value to the immutable `x` variable.
 
-It’s important that we get compile-time errors when we attempt to change a
-value that’s designated as immutable because this specific situation can lead to
-bugs. If one part of our code operates on the assumption that a value will
-never change and another part of our code changes that value, it’s possible
-that the first part of the code won’t do what it was designed to do. The cause
-of this kind of bug can be difficult to track down after the fact, especially
-when the second piece of code changes the value only _sometimes_. The Cairo
-compiler guarantees that when you state that a value won’t change, it really
-won’t change, so you don’t have to keep track of it yourself. Your code is thus
-easier to reason through.
+Cairo, unlike most other languages, has immutable memory. This makes a
+whole class of bugs impossible, because values will never change unexpectedly.
+This makes code easier to reason about.
 
 But mutability can be very useful, and can make code more convenient to write.
 Although variables are immutable by default, you can make them mutable by
 adding `mut` in front of the variable name. Adding `mut` also conveys
 intent to future readers of the code by indicating that other parts of the code
-will be changing this variable’s value.
+will be changing this variable.
 
 However, you might be wondering at this point what exactly happens when a variable
 is declared as `mut`, as we previously mentioned that Cairo's memory is immutable.
-The answer is that Cairo's memory is immutable, but the memory address the variable points
-to can be changed. Upon examining the low-level Cairo Assembly code, it becomes clear that
+The answer is that the _value_ is immutable, but the _variable_ isn't. What value
+the variable points to can be changed. Assigning to a mutable variable in Cairo
+is essentially equivalent to redeclaring it to point to another value in another memory cell,
+but the compiler handles that for you, and the keyword `mut` makes it explicit.
+Upon examining the low-level Cairo Assembly code, it becomes clear that
 variable mutation is implemented as syntactic sugar, which translates mutation operations
 into a series of steps equivalent to variable shadowing. The only difference is that at the Cairo
 level, the variable is not redeclared so its type cannot change.

@@ -7,12 +7,15 @@ call to `calculate_length`, because the `Array` was moved into
 
 ### Snapshots
 
-Instead, we can provide a _snapshot_ of the `Array` value. In Cairo, a snapshot
-is an immutable view of a value at a certain point in time. In the previous chapter,
-we talked about how Cairo's ownership system prevents us from using a value after
-we've moved it, protecting us from potentially writing twice to the same memory cell when
-appending values to arrays. However, it's not very convenient. Let's see how we can retain ownership
-of the value in the calling function using snapshots.
+In the previous chapter, we talked about how Cairo's ownership system prevents
+us from using a variable after we've moved it, protecting us from potentially
+writing twice to the same memory cell. However, it's not very convenient.
+Let's see how we can retain ownership of the variable in the calling function using snapshots.
+
+In Cairo, a snapshot is an immutable view of a value at a certain point in time.
+Recall that memory is immutable, so modifying a value actually creates a new memory cell.
+The old memory cell still exists, and snapshots are variables that point to that "old" value.
+In this sense, snapshots are a view "into the past".
 
 Here is how you would define and use a `calculate_length` function that takes a
 snapshot to an array as a parameter instead of taking ownership of the underlying value. In this example,
@@ -47,7 +50,7 @@ Let’s take a closer look at the function call here:
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no_listing_09_snapshots/src/lib.cairo:function_call}}
 ```
 
-The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value, the value it points to cannot be modified through the snapshot, and the value it refers to will not be dropped once the snapshot stops being used.
+The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value at a specific point in time, the usual rules of the linear type system are not enforced. In particular, snapshot variables are always `Drop`, never `Destruct`, even dictionary snapshots.
 
 Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:
 
@@ -64,9 +67,9 @@ The scope in which the variable `array_snapshot` is valid is the same as any fun
 
 #### Desnap Operator
 
-To convert a snapshot back into a regular value, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator: the snapshot value is copied to a new variable.
+To convert a snapshot back into a regular variable, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator.
 
-It's important to note that during this conversion process, the value it points to is copied into a new variable. This enables multiple uses of the underlying value without concerns about ownership transfers. This also means that the value pointed to by the snapshot must be copyable (which is not the case for Arrays, as they don't implement `Copy`).
+Only `Copy` types can be desnapped. However, in the general case, because the value is not modified, the new variable created by the `desnap` operator reuses the old value, and so desnapping is a completely free operation, just like `Copy`.
 
 In the following example, we want to calculate the area of a rectangle, but we don't want to take ownership of the rectangle in the `calculate_area` function, because we might want to use the rectangle again after the function call. Since our function doesn't mutate the rectangle instance, we can pass the snapshot of the rectangle to the function, and then transform the snapshots back into values using the `desnap` operator `*`.
 
@@ -126,7 +129,7 @@ As expected, the `height` and `width` fields of the `rec` variable have been swa
 
 ### Small recap
 
-Let’s recap what we’ve discussed about ownership, snapshots, and references:
+Let’s recap what we’ve discussed about the linear type system, ownership, snapshots, and references:
 
 - At any given time, a variable can only have one owner.
 - You can pass a variable by-value, by-snapshot, or by-reference to a function.
