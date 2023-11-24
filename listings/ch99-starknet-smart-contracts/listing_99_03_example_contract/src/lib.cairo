@@ -4,7 +4,7 @@ use starknet::ContractAddress;
 
 #[starknet::interface]
 trait INameRegistry<TContractState> {
-    fn store_name(ref self: TContractState, name: felt252);
+    fn store_name(ref self: TContractState, name: felt252, registration_type: NameRegistry::RegistrationType);
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
     fn get_owner(self: @TContractState) -> NameRegistry::Person;
 }
@@ -18,6 +18,7 @@ mod NameRegistry {
     #[storage]
     struct Storage {
         names: LegacyMap::<ContractAddress, felt252>,
+        registration_type: LegacyMap::<ContractAddress, RegistrationType>,
         total_names: u128,
         owner: Person
     }
@@ -46,6 +47,14 @@ mod NameRegistry {
     }
     //ANCHOR_END: person
 
+    //ANCHOR: enum_store
+    #[derive( Drop, Serde, starknet::Store)]
+    enum RegistrationType {
+        finite: u64,
+        infinite
+    }
+    //ANCHOR_END: enum_store
+
     //ANCHOR: constructor
     #[constructor]
     fn constructor(ref self: ContractState, owner: Person) {
@@ -61,9 +70,9 @@ mod NameRegistry {
     #[external(v0)]
     impl NameRegistry of super::INameRegistry<ContractState> {
         //ANCHOR: external
-        fn store_name(ref self: ContractState, name: felt252) {
+        fn store_name(ref self: ContractState, name: felt252, registration_type: RegistrationType) {
             let caller = get_caller_address();
-            self._store_name(caller, name);
+            self._store_name(caller, name, registration_type);
         }
         //ANCHOR_END: external
 
@@ -87,11 +96,14 @@ mod NameRegistry {
     // ANCHOR: state_internal
     #[generate_trait]
     impl InternalFunctions of InternalFunctionsTrait {
-        fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252) {
+        fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252, registration_type: RegistrationType) {
             let mut total_names = self.total_names.read();
             //ANCHOR: write
             self.names.write(user, name);
             //ANCHOR_END: write
+            //ANCHOR: enum_write
+            self.registration_type.write(user, registration_type);
+            //ANCHOR_END: enum_write
             self.total_names.write(total_names + 1);
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });

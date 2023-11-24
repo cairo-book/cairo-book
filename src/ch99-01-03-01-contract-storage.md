@@ -71,8 +71,12 @@ But what if you wanted to store a type that you defined yourself, such as an enu
 
 In our example, we want to store a `Person` struct in storage, which is possible by implementing the `Store` trait for the `Person` type. This can be achieved by simply adding a `#[derive(starknet::Store)]` attribute on top of our struct definition.
 
+## Storing Enums
+
+Enums can be written to storage similarly to struct, by implementing the `store` trait for that enum.
+
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:enum_store}}
 ```
 
 ### Structs storage layout
@@ -87,30 +91,25 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 | address | owner.address() +1 |
 
 
-## Storing Enums
-
-Enums can be written to storage similarly to struct, by implementing the `store` trait for that enum.
-
-```rust, noplayground
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_08_enum_storage/src/lib.cairo:enum_store}}
-```
-
 ### Enums storage layout
 
-Enums are stored as serialized felt252 values on Starknet. The serialized felt252 values indicate the index of each variant in the enum definition, and if a variant has a defined type, that type will be serialized too. 
-In our example, `North` being the first variant in the enum will be serialized to `0x01`, `East` will be serialized to `0x02`, and this continues till the last variant.
+Enums are stored as serialized felt252 type on Starknet. The enum variants are assigned an index according to the order in which they are defined.
+The first variant of the enum is assigned an index of 0 and stored at the base address of the enum, which is computed and can be located in a similar way as in structs. 
+After the first variant, the index is incremented by 1 for every other variant stored. 
+If a variant contains an associated type, an offset is assigned to such type as storage location. The offset is incremented by 1 for each associated type stored.
+For example, below is an illustration of the storage layout for the `registration_type` variable of type `RegistrationType`:
 
 
-To read enum variants stored to `Storage` we call `read` function on the variant:
+| Fields        | Address                                      |
+| ------------- | -------------------------------------------- |
+| finite: u64   | registration_type.address().index.offset + 1 |
+| infinite      | registration_type.address().index            |
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_08_enum_storage/src/lib.cairo:read}}
-```
 
 To modify or write to a stored enum, we call `write` function on the variant:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_08_enum_storage/src/lib.cairo:write}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:enum_write}}
 ```
 
 ## Storage mappings
