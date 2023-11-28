@@ -19,9 +19,9 @@ Pedersen was introduced first, and is still used to compute the addresses of var
 
 ### Working with Hashes
 
-The core library makes it easy to work with hashes. The `Hash` trait is implemented for all types that can be converted to `felt252`, including `felt252` itself. For more complex types like structs, deriving `Hash` allows them to be hashed easily using the hash function of your choice - given that all of the struct's fields are themselves hashable. You cannot derive the `Hash` trait on a struct that contains un-hashable values, such as `Array<T>` or a `Felt252Dict<T>`.
+The core library makes it easy to work with hashes. The `Hash` trait is implemented for all types that can be converted to `felt252`, including `felt252` itself. For more complex types like structs, deriving `Hash` allows them to be hashed easily using the hash function of your choice - given that all of the struct's fields are themselves hashable. You cannot derive the `Hash` trait on a struct that contains un-hashable values, such as `Array<T>` or a `Felt252Dict<T>`, even if `T`is hashable.
 
-The `Hash` trait is accompanied by the `HashStateTrait`, defined as follows:
+The `Hash` trait is accompanied by the `HashStateTrait` that defines the basic methods to work with hashes. They allow you to initialize a hash state, that contains the temporary values of the varibles involved in the computation of the hash. `HashStateTrait` also defines the methods to update the hash state and finalized it when the computation is completed. `HashStateTrait` is defined as follows:
 
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_03_hash_trait/src/lib.cairo:hashtrait}}
