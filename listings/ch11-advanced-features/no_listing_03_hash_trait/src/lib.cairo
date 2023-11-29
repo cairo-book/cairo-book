@@ -11,7 +11,6 @@ trait Hash<T, S, +HashStateTrait<S>> {
     /// Updates the hash state with the given value.
     fn update_state(state: S, value: T) -> S;
 }
-
 //ANCHOR_END: hashtrait
 
 
