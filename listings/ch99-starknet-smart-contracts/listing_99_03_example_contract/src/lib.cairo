@@ -4,7 +4,9 @@ use starknet::ContractAddress;
 
 #[starknet::interface]
 trait INameRegistry<TContractState> {
-    fn store_name(ref self: TContractState, name: felt252, registration_type: NameRegistry::RegistrationType);
+    fn store_name(
+        ref self: TContractState, name: felt252, registration_type: NameRegistry::RegistrationType
+    );
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
     fn get_owner(self: @TContractState) -> NameRegistry::Person;
 }
@@ -48,7 +50,7 @@ mod NameRegistry {
     //ANCHOR_END: person
 
     //ANCHOR: enum_store
-    #[derive( Drop, Serde, starknet::Store)]
+    #[derive(Drop, Serde, starknet::Store)]
     enum RegistrationType {
         finite: u64,
         infinite
@@ -96,14 +98,17 @@ mod NameRegistry {
     // ANCHOR: state_internal
     #[generate_trait]
     impl InternalFunctions of InternalFunctionsTrait {
-        fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252, registration_type: RegistrationType) {
+        fn _store_name(
+            ref self: ContractState,
+            user: ContractAddress,
+            name: felt252,
+            registration_type: RegistrationType
+        ) {
             let mut total_names = self.total_names.read();
             //ANCHOR: write
             self.names.write(user, name);
             //ANCHOR_END: write
-            //ANCHOR: enum_write
             self.registration_type.write(user, registration_type);
-            //ANCHOR_END: enum_write
             self.total_names.write(total_names + 1);
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
