@@ -76,13 +76,13 @@ Firstly, we create a signer from a private key:
 starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json
 ```
 
-Then, we create the Account Descriptor:
+Then, we create the Account Descriptor by fetching the katana account we want to use:
 
 ```bash
-touch ~/.starkli-wallets/deployer/account0_account.json
+starkli account fetch <KATANA ACCOUNT ADDRESS> --rpc http://0.0.0.0:5050 --output account0_account.json
 ```
 
-The Account Descriptor will look like this. You can get the public key and the smart wallet address from the output of the initial `katana` command:
+This command will create a new `account0_account.json` file containing the following details:
 
 ```bash
 {
@@ -99,8 +99,6 @@ The Account Descriptor will look like this. You can get the public key and the s
   }
 }
 ```
-
-Copy the Account Descriptor above and paste in the newly created `account0_account.json file`, then replace "<SMART_WALLET_PUBLIC_KEY>", "<SMART_WALLET_CLASS_HASH>" and "<SMART_WALLET_ADDRESS>" with values from the `katana` account used.
 
 You can retrieve the smart wallet class hash (it will be the same for all your smart wallets) with the following command. Notice the use of the `--rpc` flag and the RPC endpoint provided by `katana`:
 
