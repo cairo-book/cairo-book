@@ -79,7 +79,7 @@ starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.j
 Then, we create the Account Descriptor by fetching the katana account we want to use:
 
 ```bash
-starkli account fetch <KATANA ACCOUNT ADDRESS> --rpc http://0.0.0.0:5050 --output account0_account.json
+starkli account fetch <KATANA ACCOUNT ADDRESS> --rpc http://0.0.0.0:5050 --output ~/.starkli-wallets/deployer/account0_account.json
 ```
 
 This command will create a new `account0_account.json` file containing the following details:
