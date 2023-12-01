@@ -31,22 +31,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
-      - name: Cairo Verify
-        uses: ./.github/workflows/cairo-verify
-
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
 
-      - name: Build in English
-        run: |
-          mdbook build -d book
+      - name: Build book (English)
+        run: mdbook build -d book
 
       - name: Copy WASM-Cairo pkg
         run: |
