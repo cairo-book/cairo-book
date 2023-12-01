@@ -71,6 +71,7 @@ But what if you wanted to store a type that you defined yourself, such as an enu
 
 In our example, we want to store a `Person` struct in storage, which is possible by implementing the `Store` trait for the `Person` type. This can be achieved by simply adding a `#[derive(starknet::Store)]` attribute on top of our struct definition.
 
+```rust, noplayground
 {{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
 ```
 
