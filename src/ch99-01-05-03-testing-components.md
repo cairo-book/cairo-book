@@ -1,8 +1,9 @@
 # Testing components
 
-Components are not very straightforward to test. They are not like pure functions, which are easy to test. They are not like contracts, that need to be tested against a specific state, which can be achieved by either deploying the contract in a test, or by simply getting the `ContractState` object and modifying it in the context of your tests.
+Testing components is a bit different than testing contracts.
+Contracts need to be tested against a specific state, which can be achieved by either deploying the contract in a test, or by simply getting the `ContractState` object and modifying it in the context of your tests.
 
-Components are meant to be integrated in contracts, can't be deployed on their own, and don't have a `ContractState` object that we could use. So how do we test them?
+Components are a generic construct, meant to be integrated in contracts, that can't be deployed on their own and don't have a `ContractState` object that we could use. So how do we test them?
 
 Let's consider that we want to test a very simple component called "Counter", that will allow each contract to have a counter that can be incremented. The component is defined as follows:
 
@@ -36,21 +37,23 @@ We can now write tests for the component by deploying this mock contract and cal
 
 ## Testing components without deploying a contract
 
-In [Components under the hood](./ch99-01-05-01-components-under-the-hood.md), we saw that components were implemented generically over `ComponentState<TContractState>` - provided that `HasComponent` is implemented for `TContractState`.
+In [Components under the hood](./ch99-01-05-01-components-under-the-hood.md), we saw that components leveraged genericity to define storage and logic that could be embedded in multiple contracts. If a contract embeds a component, a `HasComponent` trait is created in this contract, and the component methods are made available.
 
-This informs us that if we can provide a concrete `TContractState` that implements the `HasComponent` trait to the `ComponentState` type, we should be able to directly invoke the methods of the component against this concrete `ComponentState` object, without having to deploy a mock.
+This informs us that if we can provide a concrete `TContractState` that implements the `HasComponent` trait to the `ComponentState` struct, should be able to directly invoke the methods of the component using this concrete `ComponentState` object, without having to deploy a mock.
 
 Let's see how we can do that by using type aliases. We still need to define a mock contract - let's use the same as above - but this time, we won't need to deploy it.
 
-First, we need to define a concrete implementation of `ComponentState` using a type alias. We will use the `ContractState` type of `MockContract` to do so:
+First, we need to define a concrete implementation of the generic `ComponentState` type using a type alias. We will use the `MockContract::ContractState` type to do so.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch99-starknet-smart-contracts/components/listing_03_test_component/src/tests_direct.cairo:type_alias}}
 ```
 
-We defined the `TestingState` type as an alias of the `CounterComponent::ComponentState<MockContract::ContractState>` type. By passing the `MockContract::ContractState` type as a concrete type of `ComponentState`, we aliased a concrete implementation of the `ComponentState` trait to `TestingState`. Because `MockContract` embeds `CounterComponent`, the methods of `CounterComponent` are now available on `TestingState`.
+We defined the `TestingState` type as an alias of the `CounterComponent::ComponentState<MockContract::ContractState>` type. By passing the `MockContract::ContractState` type as a concrete type for `ComponentState`, we aliased a concrete implementation of the `ComponentState` struct to `TestingState`.
 
-Secondly, we need to retrieve an object of type `TestingState`, that we will use to test the component. We can do so by calling the `component_state_for_testing` function, which automatically infers that it should return an object of type `TestingState`.
+Because `MockContract` embeds `CounterComponent`, the methods of `CounterComponent` defined in the `CounterImpl` block can now be used on a `TestingState` object.
+
+Now that we have made these methods available, we need to instantiate an object of type `TestingState`, that we will use to test the component. We can do so by calling the `component_state_for_testing` function, which automatically infers that it should return an object of type `TestingState`.
 
 We can even implement this as part of the `Default` trait, which allows us to return an empty `TestingState` with the `Default::default()` syntax.
 
