@@ -75,8 +75,11 @@ In our example, we want to store a `Person` struct in storage, which is possible
 {{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
 ```
 
-Enums can be written to storage similarly to struct, by implementing the `store` trait for that enum.
+Similarly, Enums can be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait.
 
+```rust, noplayground
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:enum_store}}
+```
 
 ### Structs storage layout
 
@@ -89,24 +92,16 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 | name    | owner.address()    |
 | address | owner.address() +1 |
 
-
 ### Enums storage layout
 
-Enums are stored as serialized felt252 type on Starknet. Serialization is a standard format for organizing data for easy storage and access.
-The enum variants are assigned an index according to the order in which they are defined.
-The first variant of the enum is assigned an index and stored at the base address of the storage variable. After the first variant, the index is incremented by 1 for every other variant stored. 
-If an enum variant contains an associated type, it is stored starting from the base address of the storage variable + 1.
-For example, below is an illustration of the storage layout for the `registration_type` variable of type `RegistrationType`:
+When you store an enum variant, what you're essentially storing is the variant's index and an eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
+If your variant has an associated value, it's stored starting from the address immediately following the base address.
+For example, suppose we have the `RegistrationType` enum with the `finite` variant, which carries an associated limit date. The storage layout would look like this:
 
-
-| element               | Address                                |
-| --------------------- | -------------------------------------- |
-| variant index         | registration_type.address()            |
-| variant value(if any) | registration_type.address() + 1        |
-
-
-To modify or write to a stored enum, we call `write` function on that variant.
-
+| Element                           | Address                         |
+| --------------------------------- | ------------------------------- |
+| Variant index (e.g. 1 for finite) | registration_type.address()     |
+| Associated limit date             | registration_type.address() + 1 |
 
 ## Storage mappings
 
