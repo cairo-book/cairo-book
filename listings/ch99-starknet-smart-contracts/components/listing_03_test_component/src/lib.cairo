@@ -22,3 +22,5 @@ mod MockContract {
     impl CounterImpl = CounterComponent::CounterImpl<ContractState>;
 }
 //ANCHOR_END: mock_contract
+
+
