@@ -75,6 +75,12 @@ In our example, we want to store a `Person` struct in storage, which is possible
 {{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
 ```
 
+Similarly, Enums can be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait.
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:enum_store}}
+```
+
 ### Structs storage layout
 
 On Starknet, structs are stored in storage as a sequence of primitive types.
@@ -85,6 +91,17 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 | ------- | ------------------ |
 | name    | owner.address()    |
 | address | owner.address() +1 |
+
+### Enums storage layout
+
+When you store an enum variant, what you're essentially storing is the variant's index and an eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
+If your variant has an associated value, it's stored starting from the address immediately following the base address.
+For example, suppose we have the `RegistrationType` enum with the `finite` variant, which carries an associated limit date. The storage layout would look like this:
+
+| Element                           | Address                         |
+| --------------------------------- | ------------------------------- |
+| Variant index (e.g. 1 for finite) | registration_type.address()     |
+| Associated limit date             | registration_type.address() + 1 |
 
 ## Storage mappings
 
