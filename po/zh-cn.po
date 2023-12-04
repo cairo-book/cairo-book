@@ -11121,6 +11121,10 @@ msgid ""
 "key/value pair is set. The only way to remove a mapping is to set its value "
 "to the default zero value."
 msgstr ""
+"存储映射（Storage mappings）类似于哈希表，它们允许将键映射到值。"
+"与传统的哈希表不同，存储映射中并不存储键的实际数据 - 只使用键的哈希值来查找合约存储中关联的值。"
+"存储映射不具有长度的概念，也无法判断某个键/值对是否已设置。"
+"唯一删除存储映射的方法是将其值设置为默认的零值。"
 
 #: src/ch99-01-03-01-contract-storage.md:689
 msgid ""
@@ -11129,12 +11133,16 @@ msgid ""
 "variables**. They cannot be used as parameters or return parameters of "
 "contract functions, and cannot be used as types inside structs."
 msgstr ""
+"映射仅用于根据特定键计算合约存储中数据的位置。**只允许作为存储变量使用**。"
+"不能用作合约函数的参数或返回参数，并且不能在结构体内部使用作为类型。"
 
 #: src/ch99-01-03-01-contract-storage.md:701
 msgid ""
 "To declare a mapping, use the `LegacyMap` type enclosed in angle brackets "
 "`<>`, specifying the key and value types."
 msgstr ""
+"要声明一个映射，使用尖括号 `<>` 将 `LegacyMap` 类型括起来，"
+"指定键和值的类型。"
 
 #: src/ch99-01-03-01-contract-storage.md:704
 #, fuzzy
