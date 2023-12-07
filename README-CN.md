@@ -1,4 +1,4 @@
-English | [简体中文](README-CN.md)
+[English](README.md) | 简体中文
 
 <div align="center">
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
@@ -7,131 +7,128 @@ English | [简体中文](README-CN.md)
 [![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-  <h1>The Cairo Programming Language Book</h1>
+  <h1>Cairo编程语言教程</h1>
   <h3> Alexandria </h3>
   <img src="assets/alexandria.jpg" height="400" width="400">
 </div>
 
-## Description
+## 描述
 
-This repository contains the source of "The Cairo Programming Language" book, a comprehensive documentation of the Cairo 1 programming language. This documentation is your go-to resource for mastering Cairo, created and maintained by the Starknet community. You can read the book [online](https://book.cairo-lang.org/).
-
+该存储库包含了《Cairo编程语言》书籍的源代码，这是对Cairo 1编程语言的全面文档。这份文档是您掌握Cairo的首选资源，由Starknet社区创建和维护。您可以在线阅读这本书，[链接在这里](https://book.cairo-lang.org/)。
 <div align="center">
-  <h3> Created by builders, for builders 📜</h3>
+  <h3> 来源于社区，贡献于社区 📜</h3>
 </div>
 
-## Contribute
+## 贡献方法
 
-### Setup
+### 设置
 
-1. Rust related packages:
-   - Install toolchain providing `cargo` using [rustup](https://rustup.rs/).
-   - Install [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html) and the required extensions:
+1. 安装 Rust 相关包:
+   - 使用 [rustup](https://rustup.rs/) 安装`cargo`工具链
+   - 安装 [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html) and the required extensions:
    ```
    cargo install mdbook mdbook-i18n-helpers mdbook-last-changed
    ```
-2. Host machine packages:
+2. 安装系统相关依赖包:
 
    - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager:
      `sudo apt install gettext`.
 
-3. Clone this repository.
+3. Clone 仓库.
 
-4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
+4. 安装 mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
    ```
    cargo install --path mdbook-cairo
    ```
 
-### Work locally (english, main language)
+### 在本地运行（主要语言, 英语）
 
-All the Markdown files **MUST** be edited in english. To work locally in english:
+所有的 Markdown 文件**必须**以英文进行编辑。要在本地以英文工作：
 
-- Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
-  You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
+- 使用命令 `mdbook serve` 开启本地服务，然后访问[localhost:3000](http://localhost:3000) to view the book.
+  您可以使用 `--open` 标志来自动打开浏览器: `mdbook serve --open`.
 
-- Make changes to the book and refresh the browser to see the changes.
+- 对书籍进行修改，并刷新浏览器以查看更改。
 
-- Open a PR with your changes.
+- 为你的改变提交PR。
 
-### Work locally (translations)
+### 本地工作（翻译）
 
-This book is targeting international audience, and aims at being gradually translated in several languages.
+本书面向国际读者群体，旨在逐步翻译成多种语言。
 
-**All files in the `src` directory MUST be written in english**. This ensures that all the translation files can be
-auto-generated and updated by translators.
+**`src` 目录下的所有文件必须使用英文编写。**。 这样可以确保所有翻译文件可以被翻译人员自动生成和更新。
 
-To work with translations, those are the steps to update the translated content:
+如果要进行翻译，以下是进行翻译的步骤：
 
-- Run a local server for the language you want to edit: `./translations.sh es` for instance. If no language is provided, the script will only extract translations from english.
+- 启动要编辑的语言的本地服务器: 执行 `./translations.sh es` 。如果没有提供语言参数，脚本将仅从英语中提取翻译内容。
 
-- Open the translation file you are interested in `po/es.po` for instance. You can also use editors like [poedit](https://poedit.net/) to help you on this task.
+- 打开您感兴趣的翻译文件，例如 `po/es.po`。您也可以使用类似 [poedit](https://poedit.net/) 的编辑器来帮助您完成这个任务。
 
-- When you are done, you should only have changes into the `po/xx.po` file. Commit them and open a PR.
-  The PR must stars with `i18n` to let the maintainers know that the PR is only changing translation.
+- 完成后，您应该只对 `po/xx.po` 文件进行更改。提交更改并提交一个 PR。
+  PR 标题必须以 `i18n` 开头，以便让维护者知道该 PR 仅涉及翻译的更改。
 
-The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
+翻译工作的灵感来自于 [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
 
-#### Initiate a new translation for your language
+#### 开始一个新的语言翻译
 
-If you wish to initiate a new translation for your language without running a local server, consider the following tips:
+如果您希望在不运行本地服务器的情况下为您的语言启动一个新的翻译，请考虑以下步骤：
 
-- Execute the command `./translations.sh new xx` (replace `xx` with your language code). This method can generate the `xx.po` file of your language for you.
-- To update your `xx.po` file, execute the command `./translations.sh xx` (replace `xx` with your language code), as mentioned in the previous chapter.
-- If the `xx.po` file already exists (which means you are not initiating a new translation), you should not run this command.
+- 执行命令 `./translations.sh new xx` (替换 `xx` 为你的语言代码)。 该命令可以生成对应语言的po文件 `xx.po`。
+- 更新你的 `xx.po` 文件, 执行命令 `./translations.sh xx` (替换 `xx` 为你的语言代码), 如前一章节所述。
+- 如果 `xx.po` 已经存在, 则不需要执行该命令。
 
-### Work locally (Cairo programs verification)
+### 本地工作（验证Cairo程序）
 
-The `cairo-verify` tool is designed to wrap all cairo and starknet plugins for quickly verifying cairo programs.
+`cairo-verify` 工具旨在封装所有 cairo and starknet 插件以便快速验证 Cairo 程序。
 
-#### Setup
+#### 设置
 
-Firstly, you need to have `scarb` resolved in your path:
+首先，您需要将 `scarb` 添加到您的环境变量中，确保它可以在命令行中被调用：
 
-They should be available after installing cairo, see [here](https://cairo-book.github.io/ch01-01-installation.html) for more details.
+详细的安装说明请参阅[这里](https://cairo-book.github.io/ch01-01-installation.html) for more details.
 
-To run the `cairo-verify` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
+要运行 `cairo-verify` 辅助工具, 请确保您位于存储库的根目录 (与 `README.md` 同级), 然后运行以下命令：
 
 ```sh
 cargo run --bin cairo-verify
 ```
 
-Alternatively, you can also install the tool with:
+或者，您也可以使用以下命令安装该工具：
 
 ```sh
 cargo install --path cairo-verify
 ```
 
-#### Usage
+#### 使用
 
-The tool scans for all `*.cairo` files in the specified directory and performs the following actions:
+该工具会在指定目录中扫描所有的 `*.cairo`  文件，并执行以下操作：
 
-For a Starknet contract:
+对于一个 Starknet 合约:
 
 - `scarb build`
-- If it has tests: `scarb test`
+- 如果文件包含测试: `scarb test`
 
-Cairo program:
+Cairo 程序:
 
-- If it has a `main` function: `scarb cairo-run`
-- Else, `scarb build`
-- If it has tests: `scarb test`
+- 如果包含 `main` 方法: `scarb cairo-run`
+- 否则执行, `scarb build`
+- 如果文件包含测试: `scarb test`
 - `scarb fmt -c`
 
-To specify which tests to run, you can add a comment at the top of your file with the following format:
+要指定要运行的测试，您可以在文件顶部添加以下格式的注释：
 
 ```rust
 // TAG: <tag1>
 // TAGS: <tag1>, <tag2>
 ```
 
-Here is a list of available tags:
+以下是可用tags的列表：
+- `does_not_compile`: 不运行 `scarb build`
+- `does_not_run`: 不运行 `scarb cairo-run`
+- `ignore_fmt`: 不运行 `scarb fmt`
+- `tests_fail`: 不运行 `scarb test`
 
-- `does_not_compile`: don't run `scarb build`
-- `does_not_run`: don't run `scarb cairo-run`
-- `ignore_fmt`: don't run `scarb fmt`
-- `tests_fail`: don't run `scarb test`
-
-You can skip and ignore a specific test by adding the corresponding flag:
+您可以通过添加相应的tags来跳过和忽略特定的测试：
 
 ```sh
 $ cairo-verify --help
@@ -152,11 +149,11 @@ Options:
   -V, --version        Print version
 ```
 
-In CI, it's preferable to reduce output, so run `cairo-verify` with the `--quiet` flag.
+在 CI 环境中，为了减少输出信息，建议在运行 `cairo-verify` 时使用 `--quiet` 标志。
 
-The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines in code blocks.
+mdbook-cairo 是一个 mdbook 预处理器，仅会移除代码块中的 `// TAG` 行。
 
-## Contributors
+## 贡献者
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
