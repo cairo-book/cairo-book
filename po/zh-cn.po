@@ -1736,7 +1736,7 @@ msgid ""
 "But when y does not divide x, you may get a surprising result: For example, since `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`, the value of `1 / 2` in Cairo is `(P+1)/2` (and not 0 or 0.5), as "
 "it satisfies the above equation."
 msgstr ""
-"在 Cairo，`x/y` 的结果被定义为总是满足方程式 `(x / y) * y == x`。如果 y 作为整数可以整除 x ，你将得到 Cairo 的预期结果（例如，`6 / 2` 确实会得到`3`）。\n"
+"在 Cairo，`x/y` 的结果被定义为总是满足方程式 `(x / y) * y == x`。如果 y 作为整数可以整除 x ，你将得到 Cairo 的预期结果（例如���`6 / 2` 确实会得到`3`）。\n"
 "但是当 y 不能整除 x 时，你可能会得到一个令人惊讶的结果：\n"
 "例如，由于 `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`，在 Cairo 中 `1 / 2` 的值是 `(P+1)/2`（而不是0或0.5），因为它满足上述公式。"
 
@@ -3311,7 +3311,6 @@ msgstr ""
 "```"
 
 #: src/ch02-05-control-flow.md:166
-#, fuzzy
 msgid ""
 "> Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a "
 "program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurement that expresses the computation "
@@ -3319,8 +3318,8 @@ msgid ""
 "> It is particularly important in the context of smart contracts deployed on Starknet, as it prevents from running infinite loops on the network.\n"
 "> If you're writing a program that needs to run a loop, you will need to execute it with the `--available-gas` flag set to a value that is large enough to run the program."
 msgstr ""
-"> 注意：Cairo通过包含一个 gas 表来防止我们运行无限循环的程序。 gas 表是一种限制程序中可进行的计算量的机制。通过给 `--available-gas` 标志设置一个值，我们可以设置程序的最大可用 gas 量。"
-"gas 是一个计量单位，表示一条指令的计算成本。当煤气表耗尽时，程序将停止。在这种情况下，程序因为 gas 耗尽而报错，尽管从未达到停止条件。\n"
+"> 注意：Cairo通过包含一个 gas 计量器来防止我们运行无限循环的程序。 gas 计量器是一种限制程序中可进行的计算量的机制。通过给 `--available-gas` 标志设置一个值，我们可以设置程序的最大可用 "
+"gas 量。gas 是一个计量单位，表示一条指令的计算成本。当设置的最大gas值耗尽时，程序将停止。在这种情况下，程序会抛出 gas 耗尽的错误(panic)，尽管从未达到停止条件。\n"
 "> 对于部署在 Starknet 上的智能合约，它特别重要，因为它可以防止在网络上运行无限循环。\n"
 "> 如果你正在编写一个需要运行循环的程序，你需要在执行时将 `--available-gas` 标志设置为一个足够大的值来运行该程序。"
 
@@ -3537,13 +3536,12 @@ msgid "An array is a collection of elements of the same type. You can create and
 msgstr "一个数组是相同类型元素的集合。你可以通过导入`array::ArrayTrait`特质来创建和使用数组方法。"
 
 #: src/ch03-01-arrays.md:5
-#, fuzzy
 msgid ""
 "An important thing to note is that arrays have limited modification options. Arrays are, in fact, queues whose values can't be modified.\n"
 "This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can only append items to the end of an array and remove items "
 "from the front using `pop_front`."
 msgstr ""
-"需要注意的一个重要问题是，数组的修改选项有限。事实上，数组是队列，其值不能被修改。\n"
+"需要注意的一个重要问题是，数组的修改选项有限。这里的数组实际上是以队列的形式存储的，其值不能被直接修改。\n"
 "这与这样一个事实有关：一旦一个内存槽被写入，它就不能被覆盖，而只能从其中读出。你只能用`pop_front`将项目追加到数组的末端，并从前面删除项目。"
 
 #: src/ch03-01-arrays.md:8
@@ -3575,9 +3573,8 @@ msgstr ""
 "```"
 
 #: src/ch03-01-arrays.md:21
-#, fuzzy
 msgid "When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type of the variable."
-msgstr "需要时，你可以在实例化数组时像下面这样传递数组内部项的预期类型，或者明确定义变量的类型。"
+msgstr "需要时，你可以在实例化数组时像下面这样传递数组内部元素的预期类型，或者明确定义变量的类型。"
 
 #: src/ch03-01-arrays.md:23
 msgid ""
@@ -3705,14 +3702,13 @@ msgstr ""
 "`None`。当你希望访问的索引可能不在数组的边界内，并希望优雅地处理这种情况而不引起panic时，该方法就非常有用。快照将在[引用和快照](ch04-02-references-and-snapshots.md)一章中详细解释。"
 
 #: src/ch03-01-arrays.md:75
-#, fuzzy
 msgid ""
 "The `at` function, on the other hand, directly returns a snapshot to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the "
 "index is out of bounds, a panic error occurs. You should only use `at` when you want the program to panic if the provided index is out of the array's bounds, which can prevent "
 "unexpected behavior."
 msgstr ""
-"另一方面，`at`函数直接返回一个快照到指定索引的元素，使用`unbox()`操作符来提取存储在一个盒子里的值。如果索引超出了范围，就会发生一个恐慌性错误。你应该只在希望程序在提供的索引超出数组的"
-"边界时发生恐慌时使用at，这样可以防止意外的行为。"
+"另一方面，`at`函数直接返回一个快照到指定索引的元素，使用`unbox()`操作符来提取存储在一个盒子里的值。如果索引超出了范围，就会抛出错误(panic)。你应该只在希望索引超出数组的边界时抛出"
+"`panic`时，使用 `at`，这样可以防止意外的行为。"
 
 #: src/ch03-01-arrays.md:77
 msgid "In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking."
@@ -3817,11 +3813,12 @@ msgid "### Storing multiple types with Enums"
 msgstr "### 用Enums存储多种类型"
 
 #: src/ch03-01-arrays.md:125
-#, fuzzy
 msgid ""
 "If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail "
 "in the [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md) chapter."
-msgstr "如果你想在一个数组中存储不同类型的元素，你可以使用`Enum`来定义一个可以容纳多种类型的自定义数据类型。"
+msgstr ""
+"如果你想在一个数组中存储不同类型的元素，你可以使用`Enum`来定义一个可以容纳多种类型的自定义数据类型。更多关于Enum的细节见 [Enums and Pattern Matching](ch06-00-enums-and-pattern-"
+"matching.md) 这一章节。"
 
 #: src/ch03-01-arrays.md:127
 msgid ""
@@ -3862,14 +3859,13 @@ msgid "### Span"
 msgstr "### Span"
 
 #: src/ch03-01-arrays.md:145
-#, fuzzy
 msgid ""
 "`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. "
 "Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References "
 "and Snapshots](ch04-02-references-and-snapshots.md))"
 msgstr ""
-"`Span`是一个结构，代表一个 \"数组 \"的快照（snapshot）。它被设计用来提供对数组元素的安全和控制的访问，而不需要修改原始数组。Span对于确保数据的完整性和避免在函数间传递数组或执行只读操"
-"作时的借用问题特别有用（参见[引用和快照](ch03-02-references-and-snapshots.md))"
+"`Span`是一个结构，代表一个 \"数组 \"的快照（snapshot）。它被设计用来提供对数组元素的安全可控的访问，而不需要修改原始数组。Span对于确保数据的完整性和避免在函数间传递数组或执行只读操作"
+"时的借用问题特别有用（参见[引用和快照](ch04-02-references-and-snapshots.md))"
 
 #: src/ch03-01-arrays.md:147
 msgid "All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method."
@@ -4900,7 +4896,6 @@ msgid "The database core functionality is defined by `UserDatabaseTrait`. The fo
 msgstr "数据库核心功能由`UserDatabaseTrait`定义。定义了以下方法："
 
 #: src/ch03-02-dictionaries.md:421
-#, fuzzy
 msgid ""
 "- `new` for easily creating new `UserDatabase` types.\n"
 "- `add_user` to insert users in the database.\n"
@@ -4908,15 +4903,14 @@ msgid ""
 msgstr ""
 "- `new`用于方便创建新的`UserDatabase`类型。\n"
 "- `add_user`用于在数据库中插入用户。\n"
-"- `get_user`用于在数据库中查找用户。"
+"- `get_balance`用于在数据库中查找用户的余额。"
 
 #: src/ch03-02-dictionaries.md:425
-#, fuzzy
 msgid ""
 "The only remaining step is to implement each of the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch08-00-generic-types-and-traits.md) we also "
 "need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:"
 msgstr ""
-"剩下的步骤就是实现`UserDatabaseTrait`中的每一个方法，但是由于我们使用的是[泛型](/src/ch07-00-generic-types-and-traits.md)，我们还需要正确地建立`T`的要求，这样它才能成为一个有效的"
+"剩下的步骤就是实现`UserDatabaseTrait`中的每一个方法，但是由于我们使用的是[泛型](/src/ch08-00-generic-types-and-traits.md)，我们还需要正确地建立`T`的要求，这样它才能成为一个有效的"
 "`Felt252Dict<T>`值类型："
 
 #: src/ch03-02-dictionaries.md:427
@@ -4980,7 +4974,6 @@ msgstr ""
 "```"
 
 #: src/ch03-02-dictionaries.md:455
-#, fuzzy
 msgid ""
 "Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it doesn't implement the "
 "`Drop<T>` trait, nor the `Destruct<T>` trait.\n"
@@ -4990,8 +4983,8 @@ msgid ""
 "definition. We need to code the `Destruct<T>` trait implementation by ourselves:"
 msgstr ""
 "我们的数据库实现几乎已经完成，除了一点：编译器不知道如何让 `UserDatabase<T>` 脱离作用域，因为它没有实现 `Drop<T>` 特性，也没有实现 `Destruct<T>` 特性。\n"
-"由于它有一个 `Felt252Dict<T>` 作为成员，它不能被丢弃，所以我们不得不手动实现 `Destruct<T>` 特性（更多信息请参阅 [所有权](ch03-01-what-is-ownership.md#the-drop-trait) 章节）。\n"
-"在 `UserDatabase<T>` 定义之上使用 `#[derive(Destruct)]`是行不通的，因为在 struct 定义中使用了 [泛型](/src/ch07-00-generic-types-and-traits.md) 。我们需要自己编写实现 `Destruct<T>` "
+"由于它有一个 `Felt252Dict<T>` 作为成员，它不能被丢弃，所以我们不得不手动实现 `Destruct<T>` 特性（更多信息请参阅 [所有权](ch04-01-what-is-ownership.md#the-drop-trait) 章节）。\n"
+"在 `UserDatabase<T>` 定义之上使用 `#[derive(Destruct)]`是行不通的，因为在 struct 定义中使用了 [泛型](/src/ch08-00-generic-types-and-traits.md) 。我们需要自己编写实现 `Destruct<T>` "
 "trait的代码："
 
 #: src/ch03-02-dictionaries.md:459
@@ -5185,7 +5178,6 @@ msgstr ""
 "```"
 
 #: src/ch03-03-custom-data-structures.md:19
-#, fuzzy
 msgid ""
 "But then you realize you can't increase the level at a specific index once it's\n"
 "set. If a player dies, you cannot remove it from the array unless he happens to\n"
@@ -5283,9 +5275,8 @@ msgstr ""
 "我们命名它为Vec，因为它类似于 Rust 中的`Vec<T>` 数据结构。"
 
 #: src/ch03-03-custom-data-structures.md:63
-#, fuzzy
 msgid "### Implementing a dynamic array in Cairo"
-msgstr "## 实现一个trait"
+msgstr "## 在Cairo中实现动态数组"
 
 #: src/ch03-03-custom-data-structures.md:65
 msgid ""
@@ -5443,9 +5434,8 @@ msgstr ""
 "[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures)里找到。"
 
 #: src/ch03-03-custom-data-structures.md:137
-#, fuzzy
 msgid "## Simulating a Stack with dicts"
-msgstr "## 用Scarb创建一个包"
+msgstr "## 使用字典模拟堆栈"
 
 #: src/ch03-03-custom-data-structures.md:139
 msgid "We will now look at a second example and its implementation details: a Stack."
@@ -5475,9 +5465,8 @@ msgstr ""
 "- 检查堆栈中是否还有元素。"
 
 #: src/ch03-03-custom-data-structures.md:151
-#, fuzzy
 msgid "From these specifications we can define the following interface :"
-msgstr "这些指令将产生以下条目列表："
+msgstr "根据这些规则我们可以定义以下接口："
 
 #: src/ch03-03-custom-data-structures.md:153
 msgid ""
@@ -5498,9 +5487,8 @@ msgstr ""
 "```"
 
 #: src/ch03-03-custom-data-structures.md:161
-#, fuzzy
 msgid "### Implementing a Mutable Stack in Cairo"
-msgstr "## 实现一个trait"
+msgstr "### 在Cairo实现可变堆栈"
 
 #: src/ch03-03-custom-data-structures.md:163
 msgid ""
@@ -5715,7 +5703,6 @@ msgstr ""
 "```"
 
 #: src/ch04-01-what-is-ownership.md:34
-#, fuzzy
 msgid ""
 "The variable `s` refers to a short string, where the value of the string is\n"
 "hardcoded into the text of our program. The variable is valid from the point at\n"
@@ -5724,7 +5711,7 @@ msgid ""
 msgstr ""
 "变量`s`指的是一个短字符串，字符串的值被硬编码到我们的程序文本中。\n"
 "这个变量从它被声明的那一刻起，一直到当前 _scope_ 的结束，都是有效的。\n"
-"示例3-1的程序中的注释标明了变量 `s` 在何处是有效的。"
+"示例4-1的程序中的注释标明了变量 `s` 在何处是有效的。"
 
 #: src/ch04-01-what-is-ownership.md:39
 msgid ""
@@ -5751,11 +5738,10 @@ msgstr ""
 "```"
 
 #: src/ch04-01-what-is-ownership.md:50
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 4-1: A variable and the scope in which it is\n"
 "valid</span>"
-msgstr "<span class=\"caption\">示例3-1：一个变量和其有效的作用域</span>"
+msgstr "<span class=\"caption\">示例4-1：一个变量和其有效的作用域</span>"
 
 #: src/ch04-01-what-is-ownership.md:53
 msgid "In other words, there are two important points in time here:"
@@ -5770,21 +5756,19 @@ msgstr ""
 "- 这一直持续到它 _离开_ 作用域 为止。"
 
 #: src/ch04-01-what-is-ownership.md:58
-#, fuzzy
 msgid ""
 "At this point, the relationship between scopes and when variables are valid is\n"
 "similar to that in other programming languages. Now we’ll build on top of this\n"
 "understanding by using the `Array` type we introduced in the [previous chapter](./ch03-01-arrays.md)."
 msgstr ""
 "目前为止，变量是否有效与作用域的关系跟其他编程语言是类似的。\n"
-"现在我们在此基础上通过在[前一章](ch02-06-common-collections.md)中介绍的`Array`类型进一步理解。"
+"现在我们在此基础上通过在[前一章](./ch03-01-arrays.md)中介绍的`Array`类型进一步理解。"
 
 #: src/ch04-01-what-is-ownership.md:62
 msgid "### Ownership with the `Array` Type"
 msgstr "###  `Array` 类型的所有权"
 
 #: src/ch04-01-what-is-ownership.md:64
-#, fuzzy
 msgid ""
 "To illustrate the rules of ownership, we need a data type that is more complex.\n"
 "The types covered in the [Data Types][data-types]<!-- ignore --> section\n"
@@ -5794,9 +5778,9 @@ msgid ""
 "be dropped when they're no longer used. But what is the behavior with the `Array` type whose size\n"
 "is unknown at compile time and which can't be trivially copied?"
 msgstr ""
-"为了演示所有权的规则，我们需要一个比第二章 [“Data Types”][data-types]<!-- ignore --> 中讲到的类型都要复杂的数据类型。\n"
+"为了演示所有权的规则，我们需要一个比第二章 [数据类型][data-types]<!-- ignore --> 中讲到的类型都要复杂的数据类型。\n"
 "前面介绍的类型都是已知大小的，如果代码的另一部分需要在不同的作用域中使用相同的值，可以快速简单地复制它们来创建一个新的独立实例，并且当离开作用域时被丢弃。\n"
-"但当编译时大小未知且无法被简单复制的`Array`会怎么样？"
+"那么那些在编译时大小未知，且无法被简单复制的`Array`会怎么样呢？"
 
 #: src/ch04-01-what-is-ownership.md:72
 msgid "Here is a short reminder of what an array looks like:"
@@ -5954,9 +5938,8 @@ msgstr ""
 "如果你从`Point`类型中删除`Copy`trait的派生，当你试图编译代码时，你会得到一个编译时错误。"
 
 #: src/ch04-01-what-is-ownership.md:142
-#, fuzzy
 msgid "_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._"
-msgstr "_不要担心`Struct`关键字。我们将在[第四章](ch04-00-using-structs-to-structure-related-data.md)中介绍_"
+msgstr "_不要担心`Struct`关键字。我们将在[第五章](ch05-00-using-structs-to-structure-related-data.md)中介绍_"
 
 #: src/ch04-01-what-is-ownership.md:144
 msgid "### The `Drop` Trait"
@@ -6145,14 +6128,13 @@ msgid "### Copy Array data with Clone"
 msgstr "### 用Clone复制数组数据"
 
 #: src/ch04-01-what-is-ownership.md:223
-#, fuzzy
 msgid ""
 "If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 6, but because methods are a common feature "
 "in many\n"
 "programming languages, you’ve probably seen them before."
 msgstr ""
-"如果我们确实想深入复制一个 \"数组 \"的数据，我们可以使用一个叫做 `clone`的通用方法。\n"
-"我们将在第5章中讨论方法的语法，但由于方法是许多编程语言的共同特征，你可能已经见过它们了。"
+"如果我们确实想深拷贝一个 \"数组 \"的数据，我们可以使用一个叫做 `clone`的通用方法。\n"
+"我们将在第6章中讨论方法的语法，但由于方法是许多编程语言的共同特征，你可能已经见过它们了。"
 
 #: src/ch04-01-what-is-ownership.md:226
 msgid "Here’s an example of the `clone` method in action."
@@ -6206,11 +6188,10 @@ msgid ""
 msgstr "将一个变量传递给一个函数，要么移动它，要么复制它。正如在数组部分所看到的，将 `Array` 作为一个函数参数传递同时会传递它的所有权；让我们看看其他类型会发生什么。"
 
 #: src/ch04-01-what-is-ownership.md:249
-#, fuzzy
 msgid ""
 "Listing 4-3 has an example with some annotations\n"
 "showing where variables go into and out of scope."
-msgstr "示例3-3使用注释展示变量何时进入和离开作用域。"
+msgstr "示例4-3使用注释展示变量何时进入和离开作用域。"
 
 #: src/ch04-01-what-is-ownership.md:254
 msgid ""
@@ -6267,11 +6248,10 @@ msgstr ""
 "```"
 
 #: src/ch04-01-what-is-ownership.md:280
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 4-3: Functions with ownership and scope\n"
 "annotated</span>"
-msgstr "<span class=\"caption\">示例3-3：带有所有权和作用域注释的函数</span>"
+msgstr "<span class=\"caption\">示例4-3：带有所有权和作用域注释的函数</span>"
 
 #: src/ch04-01-what-is-ownership.md:283
 msgid ""
@@ -6289,13 +6269,12 @@ msgid "### Return Values and Scope"
 msgstr "### 返回值与作用域"
 
 #: src/ch04-01-what-is-ownership.md:290
-#, fuzzy
 msgid ""
 "Returning values can also transfer ownership. Listing 4-4 shows an example of a\n"
 "function that returns some value, with similar annotations as those in Listing\n"
 "4-3."
 msgstr ""
-"返回值也可以转移所有权。示例3-4显示了一个例子\n"
+"返回值也可以转移所有权。示例4-4显示了一个例子\n"
 "该函数返回一些值，其注释与示例4-3中的相似。"
 
 #: src/ch04-01-what-is-ownership.md:296
@@ -6377,12 +6356,11 @@ msgstr ""
 "```"
 
 #: src/ch04-01-what-is-ownership.md:334
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 4-4: Transferring ownership of return\n"
 "values</span>"
 msgstr ""
-"<span class=\"caption\">示例3-4：转移返回值的所有权\n"
+"<span class=\"caption\">示例4-4：转移返回值的所有权\n"
 "</span>"
 
 #: src/ch04-01-what-is-ownership.md:337
@@ -6402,9 +6380,8 @@ msgstr ""
 "除此之外，我们也可能想返回函数体中产生的一些数据。"
 
 #: src/ch04-01-what-is-ownership.md:345
-#, fuzzy
 msgid "Cairo does let us return multiple values using a tuple, as shown in Listing 4-5."
-msgstr "Cairo的确让我们可以使用一个元组返回多个值，如示例3-5所示。"
+msgstr "Cairo的确让我们可以使用一个元组返回多个值，如示例4-5所示。"
 
 #: src/ch04-01-what-is-ownership.md:349
 msgid ""
@@ -6437,9 +6414,8 @@ msgstr ""
 "```"
 
 #: src/ch04-01-what-is-ownership.md:363
-#, fuzzy
 msgid "<span class=\"caption\">Listing 4-5: Returning ownership of parameters</span>"
-msgstr "<span class=\"caption\">示例3-5：返回参数的所有权</span>"
+msgstr "<span class=\"caption\">示例4-5：返回参数的所有权</span>"
 
 #: src/ch04-01-what-is-ownership.md:365
 msgid ""
@@ -6456,14 +6432,13 @@ msgid "## References and Snapshots"
 msgstr "## 引用和快照"
 
 #: src/ch04-02-references-and-snapshots.md:3
-#, fuzzy
 msgid ""
 "The issue with the tuple code in Listing 4-5 is that we have to return the\n"
 "`Array` to the calling function so we can still use the `Array` after the\n"
 "call to `calculate_length`, because the `Array` was moved into\n"
 "`calculate_length`."
 msgstr ""
-"示例3-5中元组代码的问题是，因为 `Array`的所有权被移到了`calculate_length`中。\n"
+"示例4-5中元组代码的问题是，因为 `Array`的所有权被移到了`calculate_length`中。\n"
 "我们必须返回`Array`给调用的函数，这样我们在调用`calculate_length`后才仍然可以使用`Array`。"
 
 #: src/ch04-02-references-and-snapshots.md:8
@@ -6743,13 +6718,12 @@ msgstr ""
 "```"
 
 #: src/ch04-02-references-and-snapshots.md:131
-#, fuzzy
 msgid ""
 "But, what happens if we try to modify something we’re passing as snapshot? Try the code in\n"
 "Listing 4-6. Spoiler alert: it doesn’t work!"
 msgstr ""
 "但是，如果我们试图修改我们作为快照传递的东西会发生什么？试试下面的代码\n"
-"示例3-6。剧透一下：它不起作用!"
+"示例4-6。剧透一下：它不起作用!"
 
 #: src/ch04-02-references-and-snapshots.md:136
 msgid ""
@@ -6792,9 +6766,8 @@ msgstr ""
 "```"
 
 #: src/ch04-02-references-and-snapshots.md:155
-#, fuzzy
 msgid "<span class=\"caption\">Listing 4-6: Attempting to modify a snapshot value</span>"
-msgstr "<span class=\"caption\">示例3-6：试图修改一个快照值</span>"
+msgstr "<span class=\"caption\">示例4-6：试图修改一个快照值</span>"
 
 #: src/ch04-02-references-and-snapshots.md:157
 msgid "Here’s the error:"
@@ -6825,14 +6798,13 @@ msgid "### Mutable References"
 msgstr "### 可变引用"
 
 #: src/ch04-02-references-and-snapshots.md:170
-#, fuzzy
 msgid ""
 "We can achieve the behavior we want in Listing 4-6 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are "
 "implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by "
 "returning it automatically at the end of the execution.\n"
 "In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modifier."
 msgstr ""
-"在示例3-6中，我们也可以通过使用 _mutable reference_ 而不是快照来实现我们想要的行为。可变引用实际上是传递给函数的可变值，在函数结束时被隐式返回，将所有权返回给调用的上下文。通过这样"
+"在示例4-6中，我们也可以通过使用 _mutable reference_ 而不是快照来实现我们想要的行为。可变引用实际上是传递给函数的可变值，在函数结束时被隐式返回，将所有权返回给调用的上下文。通过这样"
 "做，它们允许你对传递的值进行改变，同时通过在执行结束时自动返回来保持对它的所有权。\n"
 "在Cairo中，一个参数可以使用`ref`修饰符作为 _mutable reference_ 传递。"
 
@@ -6841,9 +6813,8 @@ msgid "> **Note**: In Cairo, a parameter can only be passed as _mutable referenc
 msgstr "> **注意**：在Cairo中，只有在变量用`mut`声明为可变的情况下，才能使用`ref`修饰符将参数作为可变的引用传递。"
 
 #: src/ch04-02-references-and-snapshots.md:175
-#, fuzzy
 msgid "In Listing 4-7, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function."
-msgstr "在示例3-7中，我们使用一个可变的引用来修改`Rectangle`实例在`flip`函数中的`height`和`width`字段的值。"
+msgstr "在示例4-7中，我们使用一个可变的引用来修改`Rectangle`实例在`flip`函数中的`height`和`width`字段的值。"
 
 #: src/ch04-02-references-and-snapshots.md:177
 msgid ""
@@ -6892,9 +6863,8 @@ msgstr ""
 "```"
 
 #: src/ch04-02-references-and-snapshots.md:199
-#, fuzzy
 msgid "<span class=\"caption\">Listing 4-7: Use of a mutable reference to modify a value</span>"
-msgstr "<span class=\"caption\">示例 3-7：使用一个可变的引用来修改一个值</span>"
+msgstr "<span class=\"caption\">示例 4-7：使用一个可变的引用来修改一个值</span>"
 
 #: src/ch04-02-references-and-snapshots.md:201
 msgid ""
@@ -6987,13 +6957,12 @@ msgstr ""
 "明其值的意义。由于有了这些名字，结构体比元组更灵活：不需要依赖顺序来指定或访问实例中的值。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:5
-#, fuzzy
 msgid ""
 "To define a struct, we enter the keyword `struct` and name the entire struct. A struct’s name should describe the significance of the pieces of data being grouped together. Then, "
 "inside curly brackets, we define the names and types of the pieces of data, which we call fields. For example, Listing 5-1 shows a struct that stores information about a user account."
 msgstr ""
 "定义结构体，需要使用 `struct` 关键字并为整个结构体提供一个名字。结构体的名字需要描述它所组合的数据的意义。接着，在大括号中，定义每一部分数据的名字和类型，我们称为 字段（field）。例"
-"如，示例 4-1 展示了一个存储用户账号信息的结构体。"
+"如，示例 5-1 展示了一个存储用户账号信息的结构体。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:9
 msgid ""
@@ -7018,9 +6987,8 @@ msgstr ""
 "```"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:19
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-1: A `User` struct definition</span>"
-msgstr "<span class=\"caption\">示例4-1：一个 `User` 结构定义</span>"
+msgstr "<span class=\"caption\">示例5-1：一个 `User` 结构定义</span>"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:21
 msgid ""
@@ -7034,9 +7002,8 @@ msgstr ""
 "在结构体中声明的顺序一致。换句话说，结构体的定义就像一个类型的通用模板，而实例则会在这个模板中放入特定数据来创建这个类型的值。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:24
-#, fuzzy
 msgid "For example, we can declare a particular user as shown in Listing 5-2."
-msgstr "例如，我们可以如示例4-2所示声明一个特定的用户。"
+msgstr "例如，我们可以如示例5-2所示声明一个特定的用户。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:28
 msgid ""
@@ -7073,17 +7040,15 @@ msgstr ""
 "```"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:44
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-2: Creating an instance of the `User` struct</span>"
-msgstr "<span class=\"caption\">示例4-2：创建一个`User`结构的实例</span>"
+msgstr "<span class=\"caption\">示例5-2：创建一个`User`结构的实例</span>"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:46
-#, fuzzy
 msgid ""
 "To get a specific value from a struct, we use dot notation. For example, to access this user’s email address, we use `user1.email`. If the instance is mutable, we can change a value "
 "by using the dot notation and assigning into a particular field. Listing 5-3 shows how to change the value in the `email` field of a mutable `User` instance."
 msgstr ""
-"为了从结构体中获取某个特定的值，可以使用点号。举个例子，想要用户的邮箱地址，可以用 `user1.email`。如果结构体的实例是可变的，我们可以使用点号并为对应的字段赋值。示例 4-3 展示了如何改变"
+"为了从结构体中获取某个特定的值，可以使用点号。举个例子，想要用户的邮箱地址，可以用 `user1.email`。如果结构体的实例是可变的，我们可以使用点号并为对应的字段赋值。示例 5-3 展示了如何改变"
 "一个可变的 `User` 实例中 `email` 字段的值。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:50
@@ -7141,9 +7106,8 @@ msgstr ""
 "```"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:76
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-3: Changing the value in the email field of a `User` instance</span>"
-msgstr "<span class=\"caption\">示例4-3：改变`User`实例的电子邮件字段中的值</span>"
+msgstr "<span class=\"caption\">示例5-3：改变`User`实例的电子邮件字段中的值</span>"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:78
 msgid "Note that the entire instance must be mutable; Cairo doesn’t allow us to mark only certain fields as mutable."
@@ -7154,11 +7118,10 @@ msgid "As with any expression, we can construct a new instance of the struct as 
 msgstr "与任何表达式一样，我们可以在函数主体的最后一个表达式中构造一个新的结构体实例，以隐式返回该新实例。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:82
-#, fuzzy
 msgid ""
 "Listing 5-4 shows a `build_user` function that returns a `User` instance with the given email and username. The `active` field gets the value of `true`, and the `sign_in_count` gets "
 "a value of `1`."
-msgstr "示例4-4显示了一个`build_user`函数，该函数返回一个`User`实例，并给出了电子邮件和用户名。`active`字段的值为`true`，`sign_in_count`的值为`1`。"
+msgstr "示例5-4显示了一个`build_user`函数，该函数返回一个`User`实例，并给出了电子邮件和用户名。`active`字段的值为`true`，`sign_in_count`的值为`1`。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:86
 msgid ""
@@ -7215,9 +7178,8 @@ msgstr ""
 "```"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:112
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-4: A `build_user` function that takes an email and username and returns a `User` instance</span>"
-msgstr "<span class=\"caption\">示例4-4：一个`build_user`函数，接收电子邮件和用户名，并返回一个`User`实例</span>"
+msgstr "<span class=\"caption\">示例5-4：一个`build_user`函数，接收电子邮件和用户名，并返回一个`User`实例</span>"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:114
 msgid ""
@@ -7295,10 +7257,9 @@ msgstr ""
 "```"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:148
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 5-5: A `build_user` function that uses field init shorthand because the `username` and `email` parameters have the same name as struct fields</span>"
-msgstr "<span class=\"caption\">示例4-5: `build_user`函数使用了字段初始化简写语法，因为`username`和`email`参数与结构体字段同名，</span>"
+msgstr "<span class=\"caption\">示例5-5: `build_user`函数使用了字段初始化简写语法，因为`username`和`email`参数与结构体字段同名，</span>"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:150
 msgid ""
@@ -7319,12 +7280,11 @@ msgid ""
 msgstr "为了理解何时会需要使用结构体，让我们编写一个计算长方形面积的程序。我们会从单独的变量开始，接着重构程序直到使用结构体替代他们为止。"
 
 #: src/ch05-02-an-example-program-using-structs.md:5
-#, fuzzy
 msgid ""
 "Let’s make a new project with Scarb called _rectangles_ that will take the width and height of a rectangle specified in pixels and calculate the area of the rectangle. Listing 5-6 "
 "shows a short program with one way of doing exactly that in our project’s _src/lib.cairo_."
 msgstr ""
-"让我们用Scarb做一个名为 _rectangles_ 的新项目，它获取以像素为单位的长方形的宽度和高度，并计算出长方形的面积。示例4-6显示了位于项目中的 _src/lib.cairo_ 中的小程序，它刚刚好实现此功能。"
+"让我们用Scarb创建一个名为 _rectangles_ 的新项目，它获取以像素为单位的长方形的宽度和高度，并计算出长方形的面积。示例5-6显示了位于项目中的 _src/lib.cairo_ 中的小程序，它刚好实现此功能。"
 
 #: src/ch05-02-an-example-program-using-structs.md:9
 msgid ""
@@ -7357,9 +7317,8 @@ msgstr ""
 "```"
 
 #: src/ch05-02-an-example-program-using-structs.md:23
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-6: Calculating the area of a rectangle specified by separate width and height variables</span>"
-msgstr "<span class=\"caption\">示例4-6：通过分别指定长方形的宽和高的变量来计算长方形面积</span>"
+msgstr "<span class=\"caption\">示例5-6：通过分别指定长方形的宽和高的变量来计算长方形面积</span>"
 
 #: src/ch05-02-an-example-program-using-structs.md:25
 msgid "Now run the program with `scarb cairo-run`:"
@@ -7400,23 +7359,21 @@ msgstr ""
 "```"
 
 #: src/ch05-02-an-example-program-using-structs.md:42
-#, fuzzy
 msgid ""
 "The `area` function is supposed to calculate the area of one rectangle, but the function we wrote has two parameters, and it’s not clear anywhere in our program that the parameters "
 "are related. It would be more readable and more manageable to group width and height together. We’ve already discussed one way we might do that in [Chapter 2](ch02-02-data-types."
 "html#the-tuple-type): using tuples."
 msgstr ""
 "`area`函数应该是计算一个矩形的面积，但是我们写的函数有两个参数，而且在我们的程序中没有任何地方明确说明这些参数的关系。如果把宽度和高度放在一起，会更有可读性，也更容易管理。我们已经在"
-"[第三章](ch02-02-data-types.html#the-tuple-type)中讨论了一种我们可以做到的方法：使用元组。"
+"[第二章](ch02-02-data-types.html#the-tuple-type)中讨论了一种我们可以做到的方法：使用元组。"
 
 #: src/ch05-02-an-example-program-using-structs.md:44
 msgid "## Refactoring with Tuples"
 msgstr "## 使用元组重构"
 
 #: src/ch05-02-an-example-program-using-structs.md:46
-#, fuzzy
 msgid "Listing 5-7 shows another version of our program that uses tuples."
-msgstr "示例4-7显示了我们使用元组的另一个程序版本。"
+msgstr "示例5-7显示了我们使用元组的另一个程序版本。"
 
 #: src/ch05-02-an-example-program-using-structs.md:50
 msgid ""
@@ -7449,9 +7406,8 @@ msgstr ""
 "```"
 
 #: src/ch05-02-an-example-program-using-structs.md:64
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-7: Specifying the width and height of the rectangle with a tuple</span>"
-msgstr "<span class=\"caption\">示例4-7：用一个元组指定矩形的宽度和高度</span>"
+msgstr "<span class=\"caption\">示例5-7：用一个元组指定矩形的宽度和高度</span>"
 
 #: src/ch05-02-an-example-program-using-structs.md:66
 msgid ""
@@ -7519,9 +7475,8 @@ msgstr ""
 "```"
 
 #: src/ch05-02-an-example-program-using-structs.md:95
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-8: Defining a `Rectangle` struct</span>"
-msgstr "<span class=\"caption\">示例 4-8：定义一个`Rectangle`结构</span>"
+msgstr "<span class=\"caption\">示例 5-8：定义一个`Rectangle`结构</span>"
 
 #: src/ch05-02-an-example-program-using-structs.md:97
 msgid ""
@@ -7539,11 +7494,10 @@ msgid "## Adding Useful Functionality with Trait"
 msgstr "## 用Trait增加实用功能"
 
 #: src/ch05-02-an-example-program-using-structs.md:101
-#, fuzzy
 msgid ""
 "It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 5-9 tries using the `print` as we have "
 "used in previous chapters. This won’t work."
-msgstr "在调试程序时打印出 `Rectangle` 实例来查看其所有字段的值非常有用。示例 4-9 像前面章节那样尝试使用 `print`。但这并不管用。"
+msgstr "在调试程序时打印出 `Rectangle` 实例来查看其所有字段的值非常有用。示例 5-9 像前面章节那样尝试使用 `print`。但这并不管用。"
 
 #: src/ch05-02-an-example-program-using-structs.md:105
 msgid ""
@@ -7576,9 +7530,8 @@ msgstr ""
 "```"
 
 #: src/ch05-02-an-example-program-using-structs.md:119
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-9: Attempting to print a `Rectangle` instance</span>"
-msgstr "<span class=\"caption\">示例 4-9：试图打印一个 `Rectangle`实例</span>"
+msgstr "<span class=\"caption\">示例 5-9：试图打印一个 `Rectangle`实例</span>"
 
 #: src/ch05-02-an-example-program-using-structs.md:121
 msgid "When we compile this code, we get an error with this message:"
@@ -7607,14 +7560,13 @@ msgstr ""
 "```"
 
 #: src/ch05-02-an-example-program-using-structs.md:133
-#, fuzzy
 msgid ""
 "The `print` trait is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing "
 "5-10.\n"
 "To learn more about traits, see [Traits in Cairo](ch08-02-traits-in-cairo.md)."
 msgstr ""
-"许多数据类型都实现了 `print` trait，但 `Rectangle` 结构没有。我们可以通过在`Rectangle`上实现`PrintTrait` trait来解决这个问题，如示例4-10所示。\n"
-"要了解更多关于traits的信息，请参阅[Traits in Cairo](ch07-02-traits-in-cairo.md)。"
+"许多数据类型都实现了 `print` trait，但 `Rectangle` 结构没有。我们可以通过在`Rectangle`上实现`PrintTrait` trait来解决这个问题，如示例5-10所示。\n"
+"要了解更多关于traits的信息，请参阅[Traits in Cairo](ch08-02-traits-in-cairo.md)。"
 
 #: src/ch05-02-an-example-program-using-structs.md:138
 msgid ""
@@ -7665,9 +7617,8 @@ msgstr ""
 "```"
 
 #: src/ch05-02-an-example-program-using-structs.md:161
-#, fuzzy
 msgid "<span class=\"caption\">Listing 5-10: Implementing the `PrintTrait` trait on `Rectangle`</span>"
-msgstr "<span class=\"caption\">示例4-10：在`Rectangle`上实现`PrintTrait` trait</span>"
+msgstr "<span class=\"caption\">示例5-10：在`Rectangle`上实现`PrintTrait` trait</span>"
 
 #: src/ch05-02-an-example-program-using-structs.md:163
 msgid "Nice! It’s not the prettiest output, but it shows the values of all the fields for this instance, which would definitely help during debugging."
@@ -7698,14 +7649,13 @@ msgid "### Defining Methods"
 msgstr "### 定义方法"
 
 #: src/ch05-03-method-syntax.md:14
-#, fuzzy
 msgid ""
 "Let’s change the `area` function that has a `Rectangle` instance as a parameter\n"
 "and instead make an `area` method defined on the `RectangleTrait` trait, as shown\n"
 "in Listing 5-13."
 msgstr ""
 "让我们把前面实现的获取一个 `Rectangle` 实例作为参数的 `area` 函数，\n"
-"改写成一个定义于 `RectangleTrait` trait 上的 `area` 方法，如示例4-13所示。"
+"改写成一个定义于 `RectangleTrait` trait 上的 `area` 方法，如示例5-13所示。"
 
 #: src/ch05-03-method-syntax.md:20
 msgid ""
@@ -7760,11 +7710,10 @@ msgstr ""
 "```"
 
 #: src/ch05-03-method-syntax.md:45
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 5-13: Defining an `area` method to use on the\n"
 "`Rectangle` </span>"
-msgstr "<span class=\"caption\">示例4-13：定义一个用在`Rectangle` 上的 `area` 方法 </span>"
+msgstr "<span class=\"caption\">示例5-13：定义一个用在`Rectangle` 上的 `area` 方法 </span>"
 
 #: src/ch05-03-method-syntax.md:48
 msgid ""
@@ -7918,7 +7867,6 @@ msgid "### Methods with More Parameters"
 msgstr "### 带有更多参数的方法"
 
 #: src/ch05-03-method-syntax.md:128
-#, fuzzy
 msgid ""
 "Let’s practice using methods by implementing a second method on the `Rectangle`\n"
 "struct. This time we want an instance of `Rectangle` to take another instance\n"
@@ -7928,7 +7876,7 @@ msgid ""
 "the program shown in Listing 5-14."
 msgstr ""
 "让我们通过在`Rectangle`结构体上实现第二个方法来练习使用方法。这次，我们希望让`Rectangle`的实例接收另一个`Rectangle`的实例。如果第二个`Rectangle`可以完全适应`self` （第一个"
-"`Rectangle`）就返回 `true` ; 否则，它应该返回`false`。也就是说，一旦我们定义了`can_hold`方法，我们希望能够编写列表4-14中显示的程序。"
+"`Rectangle`）就返回 `true` ; 否则，它应该返回`false`。也就是说，一旦我们定义了`can_hold`方法，我们希望能够编写示例5-14中显示的程序。"
 
 #: src/ch05-03-method-syntax.md:137
 msgid ""
@@ -7975,11 +7923,10 @@ msgstr ""
 "```"
 
 #: src/ch05-03-method-syntax.md:158
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 5-14: Using the as-yet-unwritten `can_hold`\n"
 "method</span>"
-msgstr "<span class=\"caption\">示例4-14：使用尚未编写的`can_hold`方法</span>"
+msgstr "<span class=\"caption\">示例5-14：使用尚未编写的`can_hold`方法</span>"
 
 #: src/ch05-03-method-syntax.md:161
 msgid ""
@@ -8017,7 +7964,6 @@ msgstr ""
 "```"
 
 #: src/ch05-03-method-syntax.md:177
-#, fuzzy
 msgid ""
 "We know we want to define a method, so it will be within the `trait RectangleTrait`\n"
 "and `impl RectangleImpl of RectangleTrait` blocks.\n"
@@ -8037,7 +7983,7 @@ msgstr ""
 "我们需要定义一个方法，将它放置在在`trait RectangleTrait`和`impl RectangleImpl of RectangleTrait` 块中。该方法名为 `can_hold`，它将接收另一个`Rectangle`的快照作为参数。我们可以通过查看"
 "调用该方法的代码来确定参数的类型：`rect1.can_hold(@rect2)`将`@rect2`作为快照传递给`rect2`，它是`Rectangle`的一个实例。这是有意义的，因为我们只需要读取`rect2`（而不是写入，这意味着我们"
 "需要一个可变借用），我们希望`main`保留对`rect2`的所有权，以便在调用`can_hold` 方法后再次使用它。`can_hold` 的返回值将是一个布尔值，实现将检查`self`的宽度和高度是否分别大于另一"
-"`Rectangle`的宽度和高度。让我们将新的`can_hold`方法添加到示例4-13中的`trait`和`impl` 块中，如示例4-15所示。"
+"`Rectangle`的宽度和高度。让我们将新的`can_hold`方法添加到示例5-13中的`trait`和`impl` 块中，如示例5-15所示。"
 
 #: src/ch05-03-method-syntax.md:194 src/ch09-01-how-to-write-tests.md:120
 msgid ""
@@ -8076,23 +8022,20 @@ msgstr ""
 "```"
 
 #: src/ch05-03-method-syntax.md:211
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 5-15: Implementing the `can_hold` method on\n"
 "`Rectangle` that takes another `Rectangle` instance as a parameter</span>"
-msgstr "<span class=\"caption\">示例4-15: 在`Rectangle`上实现`can_hold`方法，该方法接收另一个`Rectangle`实例作为参数</span>"
+msgstr "<span class=\"caption\">示例5-15: 在`Rectangle`上实现`can_hold`方法，该方法接收另一个`Rectangle`实例作为参数</span>"
 
 #: src/ch05-03-method-syntax.md:214
-#, fuzzy
 msgid ""
 "When we run this code with the `main` function in Listing 5-14, we’ll get our\n"
 "desired output. Methods can take multiple parameters that we add to the\n"
 "signature after the `self` parameter, and those parameters work just like\n"
 "parameters in functions."
 msgstr ""
-"当我们在示例 4-14中的`main`函数中运行这段代码时，我们将得到我们想要的输出。\n"
-"方法可以接收多个参数，我们可以在`self`参数之后在函数签名中添加这些参数，\n"
-"这些参数与函数中的参数工作原理相同。"
+"当我们在示例 5-14中的`main`函数中运行这段代码时，我们将得到我们想要的输出。\n"
+"方法可以接收多个参数，我们可以在`self`参数之后在函数签名中添加这些参数，这些参数与函数中的参数工作原理相同。"
 
 #: src/ch05-03-method-syntax.md:219
 msgid "### Accessing implementation functions"
@@ -8143,7 +8086,6 @@ msgstr ""
 "```"
 
 #: src/ch05-03-method-syntax.md:245
-#, fuzzy
 msgid ""
 "To call this function, we use the `::` syntax with the implementation name;\n"
 "`let square = RectangleImpl::square(10);` is an example. This function is namespaced by\n"
@@ -8152,7 +8094,7 @@ msgid ""
 msgstr ""
 "为了调用这个函数，我们在实现的名称后面使用`::`语法；\n"
 "比如`let square = RectangleImpl::square(10);` 这个例子。这个函数的位于其实现的命名空间中；`::`语法用于关联trait的函数和模块创建的命名空间。\n"
-"我们将在 [Chapter 7][modules]<！--ignore-->中讲到模块。"
+"我们将在 [Chapter 8][modules]<！--ignore-->中讲到模块。"
 
 #: src/ch05-03-method-syntax.md:250
 msgid "> Note: It is also possible to call this function using the trait name, with `RectangleTrait::square(10)`."
@@ -8163,12 +8105,11 @@ msgid "### Multiple `impl` Blocks"
 msgstr "### 多个`impl`块"
 
 #: src/ch05-03-method-syntax.md:254
-#, fuzzy
 msgid ""
 "Each struct is allowed to have multiple `trait` and `impl` blocks. For example, Listing\n"
 "5-15 is equivalent to the code shown in Listing 5-16, which has each method in\n"
 "its own `trait` and `impl` blocks."
-msgstr "每个结构体都可以有多个`trait` 和`impl`块。例如，示例4-15等价于示例4-16中展示的代码，其中每个方法都有自己的`trait` 和`impl`块。"
+msgstr "每个结构体都可以有多个`trait` 和`impl`块。例如，示例5-15等价于示例5-16中展示的代码，其中每个方法都有自己的`trait` 和`impl`块。"
 
 #: src/ch05-03-method-syntax.md:258
 msgid ""
@@ -8215,24 +8156,21 @@ msgstr ""
 "```"
 
 #: src/ch05-03-method-syntax.md:279
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 5-16: Rewriting Listing 5-15 using multiple `impl`\n"
 "blocks</span>"
 msgstr ""
-"<span class=\"caption\">示例4-16：使用多个`impl`重写示例4-15\n"
+"<span class=\"caption\">示例5-16：使用多个`impl`重写示例5-15\n"
 "块</span>"
 
 #: src/ch05-03-method-syntax.md:282
-#, fuzzy
 msgid ""
 "There’s no reason to separate these methods into multiple `trait` and `impl` blocks here,\n"
 "but this is valid syntax. We’ll see a case in which multiple blocks are\n"
 "useful in [Chapter 8](ch08-00-generic-types-and-traits.md), where we discuss generic types and traits."
 msgstr ""
 "这里没有理由把这些方法分成多个`trait`和`impl`块，\n"
-"但这是有效的语法。我们将在[第7章](ch07-00-generic-types-and-traits.md)中看\n"
-"到一个多块的情况，在那里我们讨论泛型和trait。"
+"但这是有效的语法。我们将在[第7章](ch08-00-generic-types-and-traits.md)中看到一个多块的情况，在那里我们讨论泛型和trait。"
 
 #: src/ch05-03-method-syntax.md:288
 msgid ""
@@ -8363,12 +8301,11 @@ msgstr ""
 "```"
 
 #: src/ch06-01-enums.md:37
-#, fuzzy
 msgid ""
 "It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a Direction. You can learn more about it "
 "on [The Match Control Flow Construct page](ch06-02-the-match-control-flow-construct.md)."
 msgstr ""
-"我们可以很轻易的写出根据枚举的成员运行不同的流程的代码，在上面这个例子中，是根据方向来运行特定的代码。你可以在 [Match 控制流结构](ch05-02-the-match-control-flow-construct.md)页面上了"
+"我们可以很轻易的写出根据枚举的成员运行不同的流程的代码，在上面这个例子中，是根据方向来运行特定的代码。你可以在 [Match 控制流结构](ch06-02-the-match-control-flow-construct.md)页面上了"
 "解更多信息。"
 
 #: src/ch06-01-enums.md:39
@@ -10550,7 +10487,7 @@ msgid ""
 "_src/front_of_house.cairo_ file in Listing 7-13."
 msgstr ""
 "首先将 `front_of_house` 模块提取到其自己的文件中。删除 `front_of_house`  模块的大括号中的代码，只留下 `mod front_of_house;` 声明，这样 _src/lib.cairo_ 就包含了代码\n"
-"如示例6-12所示。注意直到创建示例 6-13 中的 _src/front_of_house.cairo_ 文件之前代码都不能编译。"
+"如示例6-12所示。注意直到���建示例 6-13 中的 _src/front_of_house.cairo_ 文件之前代码都不能编译。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:20
 msgid ""
@@ -11645,7 +11582,7 @@ msgstr "## 参数  `self`"
 msgid ""
 "In the example above, `self` is a special parameter. When a parameter with name `self` is used, the implemented functions are also [attached to the instances of the type as methods]"
 "(ch05-03-method-syntax.md#defining-methods). Here's an illustration,"
-msgstr "在上面的例子中，`self`是一个特殊参数。当使用名称为`self`的参数时，实现的函数也会[作为方法附加到类型的实例上](ch04-03-method-syntax.md#defining-methods)。下面是一个演示、"
+msgstr "在上面的例子中，`self`是一个特殊参数。当使用名称为`self`的���数时，实现的函数也会[作为方法附加到类型的实例上](ch04-03-method-syntax.md#defining-methods)。下面是一个演示、"
 
 #: src/ch08-02-traits-in-cairo.md:64
 msgid "When the `ShapeGeometry` trait is implemented, the function `area` from the `ShapeGeometry` trait can be called in two ways:"
@@ -12446,7 +12383,7 @@ msgstr ""
 
 #: src/ch09-01-how-to-write-tests.md:205
 msgid "It does pass! Let’s add another test, this time asserting that a smaller rectangle cannot hold a larger rectangle:"
-msgstr "它确实通过了!让我们再增加一个测试，这次是断言一个较小的矩形不能容纳一个较大的矩形："
+msgstr "它确实通过了!让我们再增加���个测试，这次是断言一个较小的矩形不能容纳一个较大的矩形："
 
 #: src/ch09-01-how-to-write-tests.md:209
 msgid ""
@@ -15083,11 +15020,11 @@ msgstr "## 智能合约"
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:8
 msgid ""
-"Smart contracts gained popularity and became more widespread with the birth of Ethereum. Smart contracts are essentially programs deployed on a blockchain. The term \"smart "
-"contract\" is somewhat misleading, as they are neither \"smart\" nor \"contracts\" but rather code and instructions that are executed based on specific inputs. They primarily consist "
-"of two components: storage and functions. Once deployed, users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to "
-"call and with what input). Smart contracts can modify and read the storage of the underlying blockchain. A smart contract has its own address and is considered a blockchain account, "
-"meaning it can hold tokens."
+"Smart contracts gained popularity and became more widespread with the birth of Ethereum. Smart contracts are essentially programs deployed on a blockchain. The term \"smart contract"
+"\" is somewhat misleading, as they are neither \"smart\" nor \"contracts\" but rather code and instructions that are executed based on specific inputs. They primarily consist of two "
+"components: storage and functions. Once deployed, users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to call and "
+"with what input). Smart contracts can modify and read the storage of the underlying blockchain. A smart contract has its own address and is considered a blockchain account, meaning "
+"it can hold tokens."
 msgstr ""
 "随着以太坊的诞生，智能合约得到了普及并变得更加广泛。智能合约本质上是部署在区块链上的程序。术语 \"智能合约 \"有些误导，因为它们既不 \"智能 \"也不是 \"合约\"，而只是根据特定输入执行的代"
 "码和指令。它们主要由两部分组成：存储和函数。部署后，用户可以通过启动包含执行数据的区块链交易（调用哪个函数，输入什么参数）与智能合约互动。智能合约可以修改和读取底层区块链的存储。智能"
@@ -21972,7 +21909,7 @@ msgstr ""
 msgid ""
 "Using these functions to check conditions adds constraints that help clearly define the boundaries of possible state transitions for each function in your smart contract. These "
 "checks ensure that the behavior of the contract stays within the expected limits."
-msgstr "使用这些函数来进行条件检查，添加一些有助于清晰地定义智能合约中每个函数可能的状态转换的边界的约束。这些检查确保合约的行为保持在预期范围内。"
+msgstr "使用这些函数来进行条件检查，添加一���有助于清晰地定义智能合约中每个函数可能的状态转换的边界的约束。这些检查确保合约的行为保持在预期范围内。"
 
 #: src/ch99-03-security-considerations.md:53
 msgid "## Recommendations"
@@ -22397,7 +22334,7 @@ msgstr "### 内置函数"
 msgid ""
 "The Cairo programming language provides several specific functions that serve a special purpose. We will not cover all of them in this book, but using the names of these functions as "
 "names of other items is not recommended."
-msgstr "Cairo编程语言提供了几个具有特殊用途的函数。我们不会在本书中介绍所有这些函数，但不建议使用这些函数的名称作为任何项的标识符。"
+msgstr "Cairo编程语言提供了���个具有特殊用途的函数。我们不会在本书中介绍所有这些函数，但不建议使用这些函数的名称作为任何项的标识符。"
 
 #: src/appendix-01-keywords.md:85
 msgid "-`assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function. -`panic` - This function terminates the program."
