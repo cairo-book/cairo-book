@@ -9,7 +9,7 @@
 
   <h1>Cairo编程语言教程</h1>
   <h3> Alexandria </h3>
-  <img src="assets/alexandria.jpg" height="400" width="400">
+  <img src="../assets/alexandria.jpg" height="400" width="400">
 </div>
 
 ## 描述
