@@ -41,6 +41,14 @@ not a good programmer! Experienced Caironautes still get compiler errors.
 You received the error message `Cannot assign to an immutable variable.`
 because you tried to assign a second value to the immutable `x` variable.
 
+It’s important that we get compile-time errors when we attempt to change a
+value that’s designated as immutable because this specific situation can lead to
+bugs. If one part of our code operates on the assumption that a value will
+never change and another part of our code changes that value, it’s possible
+that the first part of the code won’t do what it was designed to do. The cause
+of this kind of bug can be difficult to track down after the fact, especially
+when the second piece of code changes the value only _sometimes_.
+
 Cairo, unlike most other languages, has immutable memory. This makes a
 whole class of bugs impossible, because values will never change unexpectedly.
 This makes code easier to reason about.
@@ -49,13 +57,15 @@ But mutability can be very useful, and can make code more convenient to write.
 Although variables are immutable by default, you can make them mutable by
 adding `mut` in front of the variable name. Adding `mut` also conveys
 intent to future readers of the code by indicating that other parts of the code
-will be changing this variable.
+will be changing the value associated to this variable.
+
+<!-- TODO: add an illustration of this -->
 
 However, you might be wondering at this point what exactly happens when a variable
 is declared as `mut`, as we previously mentioned that Cairo's memory is immutable.
 The answer is that the _value_ is immutable, but the _variable_ isn't. What value
 the variable points to can be changed. Assigning to a mutable variable in Cairo
-is essentially equivalent to redeclaring it to point to another value in another memory cell,
+is essentially equivalent to redeclaring it to refer to another value in another memory cell,
 but the compiler handles that for you, and the keyword `mut` makes it explicit.
 Upon examining the low-level Cairo Assembly code, it becomes clear that
 variable mutation is implemented as syntactic sugar, which translates mutation operations

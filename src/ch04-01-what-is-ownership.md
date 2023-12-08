@@ -1,10 +1,6 @@
 ## Ownership Using a Linear Type System
 
-Cairo uses a linear type system for two main reasons:
- - Ensuring that all code is provable and thus verifiable.
- - Abstracting away the immutable memory of the Cairo VM.
-
-In a linear type system, any value (a basic type, a struct, an enum) must be used and must only be used once. 'Used' here means that the value is either _destroyed_ or _moved_.
+Cairo uses a linear type system. In such a type system, any value (a basic type, a struct, an enum) must be used and must only be used once. 'Used' here means that the value is either _destroyed_ or _moved_.
 
 _Destruction_ can happen in several ways:
  - a variable goes out of scope
@@ -15,10 +11,13 @@ _Moving_ a value simply means passing that value to another function.
 
 This results in somewhat similar constraints to the Rust ownership model, but there are some differences.
 In particular, the rust ownership model exists (in part) to avoid data races and concurrent mutable access to a memory value. This is obviously impossible in Cairo since the memory is immutable.
+Instead, Cairo leverages its linear type system for two main purposes:
+ - Ensuring that all code is provable and thus verifiable.
+ - Abstracting away the immutable memory of the Cairo VM.
 
 #### Ownership
 
-In Cairo, ownership applies to _variables_ and not to _values_. A value can safely be pointed to by many different variables (even if they are mutable variables), as the value itself is always immutable.
+In Cairo, ownership applies to _variables_ and not to _values_. A value can safely be referred to by many different variables (even if they are mutable variables), as the value itself is always immutable.
 Variables however can be mutable, so the compiler must ensure that constant variables aren't accidentally modified by the programmer.
 This makes it possible to talk about ownership of a variable: the owner is the code that can read (and write if mutable) the variable.
 
@@ -74,13 +73,12 @@ Here is a short reminder of what an array looks like:
 How does the type system ensure that the Cairo program never tries to write to the same memory cell twice?
 Consider the following code, where we try to remove the front of the array twice:
 
-//// CHANGEME
 ```rust,does_not_compile
 {{#include ../listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo}}
 ```
 
-In this case, we try to pass the same value (the array in `arr`) to both function calls. This means our code tries to remove the first element twice, which would try to write to the same memory cell twice - which is forbidden by the Cairo VM, leading to a runtime error.
-Thankfully, this code does not actually compile. Once we have passed the array, the variable is no longer usable. We get this compile-time error, telling us that we would need Array to implement the Copy Trait:
+In this case, we try to pass the same value (the array in the `arr` variable) to both function calls. This means our code tries to remove the first element twice, which would try to write to the same memory cell twice - which is forbidden by the Cairo VM, leading to a runtime error.
+Thankfully, this code does not actually compile. Once we have passed the array to the `foo` function, the variable `arr` is no longer usable. We get this compile-time error, telling us that we would need Array to implement the Copy Trait:
 
 ```shell
 error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
@@ -101,7 +99,7 @@ While Arrays and Dictionaries can't be copied, custom types that don't contain e
 {{#include ../listings/ch04-understanding-ownership/no_listing_03_copy_trait/src/lib.cairo}}
 ```
 
-In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid.
+In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid. In ownership terms, this means that the ownership of `p1` remains with the main function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
 _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._
@@ -109,7 +107,7 @@ _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](c
 ### Destroying values - example with FeltDict
 
 The other way linear types can be _used_ is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In rust for example, this could be closing the access to a file, or locking a mutex.
-In Cairo, one type that has such behaviour is felt252Dict. For provability, dicts must be 'squashed' when they are destructed.
+In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
 This would be very easy to forget, so it is enforced by the type system and the compiler.
 
 #### No-op destruction: the Drop Trait
@@ -130,9 +128,9 @@ For example, the following code compiles:
 ```
 
 #### Destruction with a side-effect: the Destruct trait
-When a value is destroyed, the compiler calls the `destruct` method on that type. This method is provided by the `Destruct` trait. This is actually how `Drop` is implemented at the moment, by providing a `Destruct` impl that does nothing.
+When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
-As said earlier, dictionaries in Cairo are types that must be "squashed" when destructed, so that the sequence of access can be proven. This is easy for developers to forget, so instead dictionaries implement the Destruct Trait.
+As said earlier, dictionaries in Cairo are types that must be "squashed" when destructed, so that the sequence of access can be proven. This is easy for developers to forget, so instead dictionaries implement the `Destruct` trait to ensure that all dictionaries are _squashed_ when going out of scope.
 As such, the following example will not compile:
 
 ```rust,does_not_compile
@@ -155,11 +153,6 @@ When A goes out of scope, it can't be dropped as it implements neither the `Drop
 ```
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
-
-#### Copy vs Destruct
-
-You may notice that these two traits are somewhat incompatible. With a `Copy` type, we could have two variables pointing to the same value, which would lead to a double-destruction when both variables go out of scope. This is obviously quite broken for any type with a non-trivial `Destruct` implementation.
-For this reason, most types are either `Copy` and `Drop`, just `Drop`, or none. A `Copy` and `Destruct` type is possible, but be aware that this is rather odd, and possibly an indicator of a 'gotcha'.
 
 ### Copy Array data with Clone
 
