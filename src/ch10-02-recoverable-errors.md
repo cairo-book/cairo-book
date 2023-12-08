@@ -26,7 +26,7 @@ The `expect` and `unwrap` methods are similar in that they both attempt to extra
 
 The `expect_err` and `unwrap_err` have the exact opposite behavior. If the `Result` is `Err(x)`, both methods return the value `x`. However, the key difference between the two methods is in case of `Result::Ok()`. The `expect_err` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap_err` method panics with a default error message, providing less information about the cause of the panic.
 
-A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl EDrop: Drop<E>>` in the first four methods signatures. This syntax represents generic type constraints in the Cairo language. These constraints indicate that the associated functions require an implementation of the `Drop` trait for the generic types `T` and `E`, respectively.
+A careful reader may have noticed the `<+Drop<T>>` and `<+Drop<E>>` in the first four methods signatures. This syntax represents generic type constraints in the Cairo language. These constraints indicate that the associated functions require an implementation of the `Drop` trait for the generic types `T` and `E`, respectively.
 
 Finally, the `is_ok` and `is_err` methods are utility functions provided by the `ResultTrait` trait to check the variant of a `Result` enum value.
 

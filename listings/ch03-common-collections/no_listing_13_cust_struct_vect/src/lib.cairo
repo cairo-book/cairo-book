@@ -23,14 +23,14 @@ struct NullableVec<T> {
 }
 // ANCHOR_END: struct
 
-impl DestructNullableVec<T, impl TDrop: Drop<T>> of Destruct<NullableVec<T>> {
+impl DestructNullableVec<T, +Drop<T>> of Destruct<NullableVec<T>> {
     fn destruct(self: NullableVec<T>) nopanic {
         self.data.squash();
     }
 }
 
 // ANCHOR: implem
-impl NullableVecImpl<T, impl TDrop: Drop<T>, impl TCopy: Copy<T>> of VecTrait<NullableVec<T>, T> {
+impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
     fn new() -> NullableVec<T> {
         NullableVec { data: Default::default(), len: 0 }
     }

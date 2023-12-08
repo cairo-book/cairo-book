@@ -20,7 +20,7 @@ struct NullableStack<T> {
 }
 // ANCHOR_END: struct
 
-impl DestructNullableStack<T, impl TDrop: Drop<T>> of Destruct<NullableStack<T>> {
+impl DestructNullableStack<T, +Drop<T>> of Destruct<NullableStack<T>> {
     fn destruct(self: NullableStack<T>) nopanic {
         self.data.squash();
     }
@@ -28,9 +28,7 @@ impl DestructNullableStack<T, impl TDrop: Drop<T>> of Destruct<NullableStack<T>>
 
 
 // ANCHOR: implem
-impl NullableStackImpl<
-    T, impl TDrop: Drop<T>, impl TCopy: Copy<T>
-> of StackTrait<NullableStack<T>, T> {
+impl NullableStackImpl<T, +Drop<T>, +Copy<T>> of StackTrait<NullableStack<T>, T> {
     fn push(ref self: NullableStack<T>, value: T) {
         self.data.insert(self.len.into(), nullable_from_box(BoxTrait::new(value)));
         self.len += 1;

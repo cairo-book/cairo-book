@@ -2,7 +2,7 @@
 
 // Given a list of T get the smallest one.
 // The PartialOrd trait implements comparison operations for T
-fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
+fn smallest_element<T, +PartialOrd<T>>(list: @Array<T>) -> T {
     // This represents the smallest element through the iteration
     // Notice that we use the desnap (*) operator
     let mut smallest = *list[0];

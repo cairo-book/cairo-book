@@ -5,7 +5,7 @@ use dict::Felt252DictEntryTrait;
 use debug::PrintTrait;
 
 // ANCHOR: custom_get
-fn custom_get<T, impl TDefault: Felt252DictValue<T>, impl TDrop: Drop<T>, impl TCopy: Copy<T>>(
+fn custom_get<T, +Felt252DictValue<T>, +Drop<T>, +Copy<T>>(
     ref dict: Felt252Dict<T>, key: felt252
 ) -> T {
     // Get the new entry and the previous value held at `key`
@@ -23,13 +23,7 @@ fn custom_get<T, impl TDefault: Felt252DictValue<T>, impl TDrop: Drop<T>, impl T
 // ANCHOR_END: custom_get
 
 // ANCHOR: custom_insert
-fn custom_insert<
-    T,
-    impl TDefault: Felt252DictValue<T>,
-    impl TDestruct: Destruct<T>,
-    impl TPrint: PrintTrait<T>,
-    impl TDrop: Drop<T>
->(
+fn custom_insert<T, +Felt252DictValue<T>, +Destruct<T>, +PrintTrait<T>, +Drop<T>>(
     ref dict: Felt252Dict<T>, key: felt252, value: T
 ) {
     // Get the last entry associated with `key`
