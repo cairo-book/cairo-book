@@ -1,6 +1,6 @@
 //TAG: does_not_compile
 
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 //ANCHOR: here
 fn plus_one(x: Option<u8>) -> Option<u8> {

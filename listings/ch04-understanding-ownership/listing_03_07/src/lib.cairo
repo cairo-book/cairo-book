@@ -1,4 +1,5 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
+
 #[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,

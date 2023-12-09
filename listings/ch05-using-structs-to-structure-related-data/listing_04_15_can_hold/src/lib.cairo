@@ -1,7 +1,7 @@
 //TAG: does_not_compile
 // ANCHOR: all
 // ANCHOR: no_method
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,

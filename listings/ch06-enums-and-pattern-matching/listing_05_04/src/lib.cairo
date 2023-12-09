@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 // ANCHOR: enum_def
 #[derive(Drop)]

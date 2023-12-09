@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 fn main() {
     let mut a = ArrayTrait::new();

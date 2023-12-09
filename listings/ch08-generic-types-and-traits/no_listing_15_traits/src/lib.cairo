@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 #[derive(Drop, Copy)]
 struct Rectangle {

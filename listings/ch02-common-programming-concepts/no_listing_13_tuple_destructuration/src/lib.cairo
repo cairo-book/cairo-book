@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 fn main() {
     let tup = (500, 6, true);
 

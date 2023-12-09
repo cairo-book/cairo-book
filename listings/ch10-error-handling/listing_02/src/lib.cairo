@@ -17,7 +17,7 @@ fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {
 #[cfg(test)]
 mod tests {
     use super::do_something_with_parse_u8;
-    use debug::PrintTrait;
+    use core::debug::PrintTrait;
     //ANCHOR: tests
     #[test]
     fn test_function_2() {

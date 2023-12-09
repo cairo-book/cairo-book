@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 // ANCHOR: here
 fn did_i_win(nb: felt252) {

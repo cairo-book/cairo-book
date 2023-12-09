@@ -38,6 +38,7 @@ trait IContractL1<T> {
 mod contract_msg {
     use super::{IContractL1, MyData};
     use starknet::{EthAddress, SyscallResultTrait};
+    use core::zeroable::Zeroable;
 
     #[storage]
     struct Storage {

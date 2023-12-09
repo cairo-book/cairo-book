@@ -1,7 +1,7 @@
 //ANCHOR: import
-use poseidon::PoseidonTrait;
-use poseidon::poseidon_hash_span;
-use hash::{HashStateTrait, HashStateExTrait};
+use core::poseidon::PoseidonTrait;
+use core::poseidon::poseidon_hash_span;
+use core::hash::{HashStateTrait, HashStateExTrait};
 //ANCHOR_END: import
 
 //ANCHOR: structure
