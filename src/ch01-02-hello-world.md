@@ -66,6 +66,7 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 [package]
 name = "hello_world"
 version = "0.1.0"
+edition = "2023_10"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
@@ -79,7 +80,7 @@ This file is in the [TOML](https://toml.io/) (Tom’s Obvious, Minimal Language)
 
 The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other sections.
 
-The next two lines set the configuration information Scarb needs to compile your program: the name and the version of Scarb to use.
+The next three lines set the configuration information Scarb needs to compile your program: the name and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix E](./appendix-05-common-types-and-traits-and-cairo-prelude.md)
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
@@ -96,9 +97,8 @@ Then create a new file called `src/hello_world.cairo` and put the following code
 <span class="filename">Filename: src/hello_world.cairo</span>
 
 ```rust,file=hello_world.cairo
-use core::debug::PrintTrait;
 fn main() {
-    'Hello, World!'.print();
+    println!("Hello, World!");
 }
 ```
 
@@ -166,12 +166,10 @@ line as the function declaration, adding one space in between.
 > with the standard Cairo distribution, as `cairo-run` is, so it should already be
 > installed on your computer!
 
-Prior to the main function declaration, The line `use debug::PrintTrait;` is responsible for importing an item defined in another module. In this case, we are importing the `PrintTrait` item from the Cairo core library. This trait is not included in the prelude. Hence, importing it is mandatory. By doing so, we gain the ability to use the `print()` method on data types that are compatible with printing.
-
 The body of the `main` function holds the following code:
 
 ```rust,noplayground
-    'Hello, World!'.print();
+    println!("Hello, World!");
 ```
 
 This line does all the work in this little program: it prints text to the
@@ -179,10 +177,9 @@ screen. There are four important details to notice here.
 
 First, Cairo style is to indent with four spaces, not a tab.
 
-Second, the `print()` function called is a method from the trait `PrintTrait`. This trait is imported from the Cairo core library, and it defines how to print values to the screen for different data types. In our case, our text is defined as a "short string", which is an ASCII string that can fit in Cairo's basic data type, which is the `felt252` type. By calling `Hello, world!'.print()`, we're calling the `print()` method of the `felt252` implementation of the `PrintTrait` trait.
+Second, `println!` calls a Cairo macro. If it had called a function instead, it would be entered as `println` (without the `!`). We’ll discuss Cairo macros in more detail in [Chapter Macros](./ch11-02-macros.md). For now, you just need to know that using a `!` means that you’re calling a macro instead of a normal function and that macros don’t always follow the same rules as functions.
 
-Third, you see the `'Hello, World!'` short string. We pass this short string as an argument
-to `print()`, and the short string is printed to the screen.
+Third, you see the `"Hello, world!"` string. We pass this string as an argument to `println!`, and the string is printed to the screen.
 
 Fourth, we end the line with a semicolon (`;`), which indicates that this
 expression is over and the next one is ready to begin. Most lines of Cairo code

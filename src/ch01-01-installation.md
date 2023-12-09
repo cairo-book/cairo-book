@@ -33,9 +33,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 
 ```bash
 $ scarb --version
-scarb 2.4.0 (58cc88efb 2023-08-23)
-cairo: 2.2.0 (https://crates.io/crates/cairo-lang-compiler/2.2.0)
-sierra: 1.3.0
+scarb 2.4.0 (cba988e68 2023-12-06)
+cairo: 2.4.0 (https://crates.io/crates/cairo-lang-compiler/2.4.0)
+sierra: 1.4.0
 ```
 
 ## Installing the VSCode extension

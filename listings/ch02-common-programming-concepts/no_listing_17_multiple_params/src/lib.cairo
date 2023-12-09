@@ -1,8 +1,7 @@
 fn main() {
-    another_function(5, 6);
+    print_labeled_measurement(5, "h");
 }
 
-fn another_function(x: felt252, y: felt252) {
-    println!("x = {}", x);
-    println!("y = {}", y);
+fn print_labeled_measurement(value: u128, unit_label: ByteArray) {
+    println!("The measurement is: {value}{unit_label}");
 }
