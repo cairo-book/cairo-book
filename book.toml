@@ -6,7 +6,7 @@ src = "src"
 title = "The Cairo Programming Language"
 
 [build]
-extra-watch-dirs = ["po"]
+extra-watch-dirs = ["po", "listings"]
 
 [preprocessor.cairo]
 after = ["links"]

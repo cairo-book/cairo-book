@@ -8,25 +8,25 @@ struct UserDatabase<T> {
 // ANCHOR: trait
 trait UserDatabaseTrait<T> {
     fn new() -> UserDatabase<T>;
-    fn add_user<impl TDrop: Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T);
-    fn get_balance<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T;
+    fn add_user<+Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T);
+    fn get_balance<+Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T;
 }
 // ANCHOR_END: trait
 
 // ANCHOR: impl
-impl UserDatabaseImpl<T, impl TDefault: Felt252DictValue<T>> of UserDatabaseTrait<T> {
+impl UserDatabaseImpl<T, +Felt252DictValue<T>> of UserDatabaseTrait<T> {
     // Creates a database
     fn new() -> UserDatabase<T> {
         UserDatabase { users_amount: 0, balances: Default::default() }
     }
 
     // Get the user's balance
-    fn get_balance<impl TCopy: Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T {
+    fn get_balance<+Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T {
         self.balances.get(name)
     }
 
     // Add a user
-    fn add_user<impl TDrop: Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T) {
+    fn add_user<+Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T) {
         self.balances.insert(name, balance);
         self.users_amount += 1;
     }
@@ -34,9 +34,7 @@ impl UserDatabaseImpl<T, impl TDefault: Felt252DictValue<T>> of UserDatabaseTrai
 // ANCHOR_END: impl
 
 // ANCHOR: destruct
-impl UserDatabaseDestruct<
-    T, impl TDrop: Drop<T>, impl TDefault: Felt252DictValue<T>
-> of Destruct<UserDatabase<T>> {
+impl UserDatabaseDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<UserDatabase<T>> {
     fn destruct(self: UserDatabase<T>) nopanic {
         self.balances.squash();
     }
