@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-12-09 02:01+0900\n"
+"PO-Revision-Date: 2023-12-09 13:47+0800\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -13607,13 +13607,12 @@ msgstr ""
 "触发panic：无意地通过导致代码panic的行为（例如，访问一个超出其界限的数组），或故意地，通过调用panic函数。"
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:5
-#, fuzzy
 msgid ""
 "When a panic occurs, it leads to an abrupt termination of the program. The `panic` function takes an array as an argument, which can be used to provide an error message and performs "
 "an unwind process where all variables are dropped and dictionaries squashed to ensure the soundness of the program to safely terminate the execution."
 msgstr ""
-"当panic发生时，它会导致程序的突然终止。`panic` 函数接受一个数组作为参数，可以用来提供一个错误信息，并执行一个展开（unwind）过程--所有的变量被丢弃，字典被压缩(squash)，以确保程序的合理"
-"地，安全地终止执行。"
+"当发生恐慌时，它会导致程序突然终止。`panic` 函数接受一个数组作为参数，可以用来提供错误消息，并执行一个解除过程，在这个过程中所有变量都会被丢弃，字典被压缩，以确保程序的健全性，安全地"
+"终止执行。"
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:7
 msgid "Here is how we can `panic` from inside a program and return the error code `2`:"
@@ -13668,14 +13667,13 @@ msgid "As you can notice in the output, the print statement is never reached, as
 msgstr "正如你在输出中所注意到的，打印语句没有被执行，因为程序在遇到`panic`语句后就终止了。"
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:33
-#, fuzzy
 msgid ""
 "An alternative and more idiomatic approach to panic in Cairo would be to use the `panic_with_felt252` function. This function serves as an abstraction of the array-defining process "
 "and is often preferred due to its clearer and more concise expression of intent. By using `panic_with_felt252`, developers can panic in a one-liner by providing a felt252 error "
 "message as an argument, making the code more readable and maintainable."
 msgstr ""
-"在Cairo中，另一种更常见的方法是使用`panic_with_felt252`函数来处理恐慌。这个函数是对数组定义过程的抽象，由于它更清晰、更简洁地表达了意图，所以实际运用中经常使用该函数。通过使用"
-"`panic_with_felt252`，开发者可以通过提供felt252错误信息作为参数，在一个单行代码中进行panic，使代码更易读和可维护。"
+"Cairo 中处理恐慌的另一种更符合习惯的方法是使用 `panic_with_felt252` 函数。这个函数作为定义数组过程的抽象，通常更受欢迎，因为它表达意图更清晰、更简洁。通过使用 `panic_with_felt252`，开"
+"发者可以通过提供一个 felt252 类型的错误消息作为参数，在一行代码中实现恐慌，使代码更易读和可维护。"
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:35
 msgid "Let's consider an example:"
@@ -13896,9 +13894,8 @@ msgid "## The `Result` enum"
 msgstr "## `Result`枚举"
 
 #: src/ch10-02-recoverable-errors.md:9
-#, fuzzy
 msgid "Recall from [“Generic data types”](ch08-01-generic-data-types.md#enums) in Chapter 8 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:"
-msgstr "回顾第七章中的[\"通用数据类型\"](ch07-01-generic-data-types.md#enums)，`Result`枚举被定义为有两个变体，`Ok`和`Err`，如下所示："
+msgstr "回顾第8章中的[“通用数据类型”](ch08-01-generic-data-types.md#enums) 一节中，`Result` 枚举被定义为具有两个变体，即 `Ok` 和 `Err`，如下所示："
 
 #: src/ch10-02-recoverable-errors.md:20
 msgid "## The `ResultTrait`"
@@ -13995,9 +13992,8 @@ msgid ""
 msgstr "当你想在不消耗结果值的情况下检查一个操作的成功或失败时，这些方法很有帮助，允许你执行额外的操作或根据枚举成员做出决定，而不用解开（unwrap）它。"
 
 #: src/ch10-02-recoverable-errors.md:54
-#, fuzzy
 msgid "You can find the implementation of the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)."
-msgstr "你可以在[这里](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)找到`ResultTrait`的实现。"
+msgstr "你可以在[这里](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20)找到 `ResultTrait` 的实现。"
 
 #: src/ch10-02-recoverable-errors.md:58
 msgid "It is always easier to understand with examples."
@@ -14048,14 +14044,13 @@ msgstr ""
 "```"
 
 #: src/ch10-02-recoverable-errors.md:79
-#, fuzzy
 msgid ""
 "Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. It uses the `Result` returned by `u128_overflowing_add` to determine the success or failure of the "
 "addition operation. The match expression checks the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it returns `Option::Some(r)` containing the sum. If the result is "
 "`Err(r)`, it returns `Option::None` to indicate that the operation has failed due to overflow. The function does not panic in case of an overflow."
 msgstr ""
-"这里，它接受两个u128整数，a和b，并返回一个`Option<u128>`。它使用`u128_overflowing_add`返回的`Result`来确定加法操作的成功或失败。匹配表达式检查来自`u128_overflowing_add`的`Result` 。如"
-"果结果是`Ok(r)`，则返回`Option::Some(r)`，其中包含和。如果结果是`Err(r)`，则返回`Option::None(())`，表示由于溢出导致操作失败。在溢出的情况下，该函数不会panic。"
+"这里，它接受两个 u128 整数，a 和 b，返回一个 `Option<u128>`。它使用 `u128_overflowing_add` 返回的 `Result` 来确定加法操作的成功或失败。匹配表达式检查 `u128_overflowing_add` 的 "
+"`Result`。如果结果是 `Ok(r)`，它返回 `Option::Some(r)`，其中包含求和结果。如果结果是 `Err(r)`，它返回 `Option::None`，表示操作因为溢出而失败。如果发生溢出，该函数不会引发恐慌。"
 
 #: src/ch10-02-recoverable-errors.md:81
 msgid ""
@@ -14111,9 +14106,8 @@ msgstr ""
 "```"
 
 #: src/ch10-02-recoverable-errors.md:103
-#, fuzzy
 msgid "<span class=\"caption\">Listing 10-1: Using the Result type</span>"
-msgstr "<span class=\"caption\">示例9-1：向 \"names \"变量写入内容</span>"
+msgstr "<span class=“caption”>示例10-1：使用Result 类型</span>"
 
 #: src/ch10-02-recoverable-errors.md:105
 msgid "Our two test cases are:"
@@ -14238,9 +14232,8 @@ msgstr ""
 "```"
 
 #: src/ch10-02-recoverable-errors.md:161
-#, fuzzy
 msgid "<span class=\"caption\">Listing 10-1: Using the `?` operator</span>"
-msgstr "<span class=\"caption\">示例9-1：向 \"names \"变量写入内容</span>"
+msgstr "<span class=“caption”>示例 10-1: 使用 `?` 操作符</span>"
 
 #: src/ch10-02-recoverable-errors.md:163
 msgid ""
@@ -14513,11 +14506,10 @@ msgid "### `consteval_int!`"
 msgstr "### `consteval_int!`"
 
 #: src/ch11-02-macros.md:29
-#, fuzzy
 msgid ""
 "In some situations, a developer might need to declare a constant that is the result of a computation of integers. To compute a constant expression and use its result at compile time, "
 "it is required to use the `consteval_int!` macro."
-msgstr "在某些情况下，开发人员可能需要声明一个作为整数计算结果的常量。要计算常量表达式并在编译时使用其结果，需要使用 `consteval_int!` 宏。"
+msgstr "在某些情况下，开发人员可能需要声明一个常量，该常量是整数计算的结果。为了在编译时计算常量表达式并使用其结果，需要使用`consteval_int!` 宏。"
 
 #: src/ch11-02-macros.md:31
 msgid "Here is an example of `consteval_int!`:"
@@ -14534,9 +14526,8 @@ msgstr ""
 "```"
 
 #: src/ch11-02-macros.md:37
-#, fuzzy
 msgid "This will be interpreted as `const a: felt252 = 8;` by the compiler."
-msgstr "编译器会将其解释为 `const a: felt252 = 8;`。"
+msgstr "编译器将解释为 `const a: felt252 = 8`"
 
 #: src/ch11-03-hash.md:1
 msgid "# Hashes"
@@ -14556,9 +14547,8 @@ msgid ""
 msgstr ""
 
 #: src/ch11-03-hash.md:7
-#, fuzzy
 msgid "### Hash functions in Cairo"
-msgstr "# Cairo中的Trait"
+msgstr "### Cairo中的哈希函数"
 
 #: src/ch11-03-hash.md:9
 msgid "The Cairo core library provides two hash functions: Pedersen and Poseidon."
@@ -14591,9 +14581,8 @@ msgid ""
 msgstr ""
 
 #: src/ch11-03-hash.md:19
-#, fuzzy
 msgid "### Working with Hashes"
-msgstr "## 使用元组重构"
+msgstr "### 使用哈希函数"
 
 #: src/ch11-03-hash.md:21
 msgid ""
@@ -14919,14 +14908,13 @@ msgid "All through the previous sections, you've mostly written programs with a 
 msgstr "在前面的章节中，你主要是用`main`入口来编写程序。在接下来的章节中，你将学习如何编写和部署Starknet合约。"
 
 #: src/ch99-00-starknet-smart-contracts.md:5
-#, fuzzy
 msgid ""
 "One of the applications of the Cairo language is to write smart contracts for the Starknet network. Starknet is a permissionless network that leverages zk-STARKs technology for "
 "scalability. As a Layer-2 scalability solution for Ethereum, Starknet's goal is to offer fast, secure, and low-cost transactions. It functions as a Validity Rollup (commonly known as "
 "a zero-knowledge Rollup) and is built on top of the Cairo language and the Starknet VM."
 msgstr ""
-"Cairo语言的应用之一是为Starknet编写智能合约。Starknet 是一个无权限网络，利用 zk-STARKs 技术实现可扩展性。作为以太坊的第二层可扩展性解决方案，Starknet 的目标是提供快速、安全和低成本的"
-"交易。它起着有效性卷积（通常称为零知识卷积）的作用，建立在Cairo语言和 StarkNet 虚拟机之上。"
+"Cairo语言的一个应用是编写用于Starknet网络的智能合约。Starknet是一个无许可网络，利用zk-STARKs技术实现可扩展性。作为以太坊的二层可扩展性解决方案，Starknet的目标是提供快速、安全和低成本"
+"的交易。它作为一个有效性Rollup（通常称为零知识Rollup）运行，并构建在Cairo语言和Starknet虚拟机之上。"
 
 #: src/ch99-00-starknet-smart-contracts.md:7
 msgid ""
@@ -14950,19 +14938,17 @@ msgid "#### Scarb"
 msgstr "#### Scarb"
 
 #: src/ch99-00-starknet-smart-contracts.md:14
-#, fuzzy
 msgid ""
 "Scarb supports smart contract development for Starknet. To enable this functionality, you'll need to make some configurations in your `Scarb.toml` file (see [Installation](./ch01-01-"
 "installation.md) for how to install Scarb).\n"
 "You have to add the `starknet` dependency and add a `[[target.starknet-contract]]` section to enable contract compilation."
 msgstr ""
-"Scarb 支持Starknet的智能合约开发。要启用此功能，你需要在你的 `Scarb.toml` 文件中进行一些配置。\n"
-"你必须添加 `starknet`依赖关系，并添加 `[[target.starknet-contract]]` 部分以启用合约编译。"
+"Scarb支持Starknet的智能合约开发。要启用此功能，您需要在 `Scarb.toml` 文件中进行一些配置（有关如何安装Scarb，请参阅[安装](./ch01-01-installation.md)）。\n"
+"你需要添加 `starknet` 依赖项，并添加一个 `[[target.starknet-contract]]` 部分以启用合约编译。"
 
 #: src/ch99-00-starknet-smart-contracts.md:17
-#, fuzzy
 msgid "Below is the minimal Scarb.toml file required to compile a crate containing Starknet contracts:"
-msgstr "以下是 Starknet 合约最低所需的 Scarb.toml 配置文件："
+msgstr "下面是编译包含Starknet合约的crate所需的最小Scarb.toml文件示例："
 
 #: src/ch99-00-starknet-smart-contracts.md:19
 msgid ""
@@ -15020,11 +15006,11 @@ msgstr "## 智能合约"
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:8
 msgid ""
-"Smart contracts gained popularity and became more widespread with the birth of Ethereum. Smart contracts are essentially programs deployed on a blockchain. The term \"smart contract"
-"\" is somewhat misleading, as they are neither \"smart\" nor \"contracts\" but rather code and instructions that are executed based on specific inputs. They primarily consist of two "
-"components: storage and functions. Once deployed, users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to call and "
-"with what input). Smart contracts can modify and read the storage of the underlying blockchain. A smart contract has its own address and is considered a blockchain account, meaning "
-"it can hold tokens."
+"Smart contracts gained popularity and became more widespread with the birth of Ethereum. Smart contracts are essentially programs deployed on a blockchain. The term \"smart "
+"contract\" is somewhat misleading, as they are neither \"smart\" nor \"contracts\" but rather code and instructions that are executed based on specific inputs. They primarily consist "
+"of two components: storage and functions. Once deployed, users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to "
+"call and with what input). Smart contracts can modify and read the storage of the underlying blockchain. A smart contract has its own address and is considered a blockchain account, "
+"meaning it can hold tokens."
 msgstr ""
 "随着以太坊的诞生，智能合约得到了普及并变得更加广泛。智能合约本质上是部署在区块链上的程序。术语 \"智能合约 \"有些误导，因为它们既不 \"智能 \"也不是 \"合约\"，而只是根据特定输入执行的代"
 "码和指令。它们主要由两部分组成：存储和函数。部署后，用户可以通过启动包含执行数据的区块链交易（调用哪个函数，输入什么参数）与智能合约互动。智能合约可以修改和读取底层区块链的存储。智能"
@@ -15040,16 +15026,15 @@ msgstr ""
 "Cairo。代码的编译方式也根据区块链的不同而不同。在Ethereum上，Solidity被编译成字节码。在Starknet上，Cairo被编译成Sierra，然后再编译成Cairo Assembly（casm）。"
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:12
-#, fuzzy
 msgid ""
 "Smart contracts possess several unique characteristics. They are **permissionless**, meaning anyone can deploy a smart contract on the network (within the context of a decentralized "
 "blockchain, of course). Smart contracts are also **transparent**; the data stored by the smart contract is accessible to anyone. The code that composes the contract can also be "
 "transparent, enabling **composability**. This allows developers to write smart contracts that use other smart contracts. Smart contracts can only access and interact with data from "
 "the blockchain they are deployed on. They require third-party software (called `oracles`) to access external data (the price of a token for instance)."
 msgstr ""
-"智能合约拥有几个独特的特点。它们是**无权限的**，意味着任何人都可以在网络上部署智能合约（当然该网络必须是去中心化区块链）。智能合约也是**透明的**；任何人都可以访问智能合约所存储的数"
-"据。构成合约的代码也可以是透明的，实现了**可组合性**。这使得开发者可以编写使用其他智能合约的智能合约。智能合约只能访问它们所部署的区块链上的数据并与之互动。他们需要第三方工具或软件"
-"（称为 \"oracles\"）来访问外部数据（例如，代币的价格）。"
+"智能合约具有几个独特特征。它们是 **无需许可** 的，意味着任何人都可以在网络上部署智能合约（当然是在去中心化的区块链上）。智能合约也是 **透明** 的；由智能合约存储的数据对任何人都是可访"
+"问的。构成合约的代码也可以是透明的，从而实现 **可组合性**。这使得开发人员可以编写使用其他智能合约的智能合约。智能合约只能访问和与其部署所在的区块链上的数据进行交互。它们需要第三方软件"
+"（被称为 `oracle`）来访问外部数据（例如代币的价格）。"
 
 #: src/ch99-01-01-introduction-to-smart-contracts.md:14
 msgid ""
@@ -15316,24 +15301,22 @@ msgid "<span class=\"caption\">Listing 99-1: A simple storage contract</span>"
 msgstr "<span class=\"caption\">示例99-1：一个简单的存储合约</span>"
 
 #: src/ch99-01-02-a-simple-contract.md:40
-#, fuzzy
 msgid "> Note: Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md)."
-msgstr "> 注意：Starknet合约是在模块（[modules](./ch06-02-defining-modules-to-control-scope.md)）中被定义的。"
+msgstr "> 注意：Starknet合约是在模块（[modules](./ch07-02-defining-modules-to-control-scope.md)）中被定义的。"
 
 #: src/ch99-01-02-a-simple-contract.md:42
 msgid "### What is this contract?"
 msgstr "## 这是什么合约？"
 
 #: src/ch99-01-02-a-simple-contract.md:44
-#, fuzzy
 msgid ""
 "In this example, the `Storage` struct declares a storage variable called `stored_data` of type `u128` (unsigned integer of 128 bits).\n"
 "You can think of it as a single slot in a database that you can query and alter by calling functions of the code that manages the database.\n"
 "The contract defines and exposes publicly the functions `set` and `get` that can be used to modify or retrieve the value of that variable."
 msgstr ""
-"在这个示例中，`Storage`结构体声明了一个名为`stored_data`的存储变量，其类型为`u128`（128位无符号整数）。\n"
-"您可以将其视为数据库中的一个槽，您可以通过调用管理数据库的代码函数来查询和更改该槽。\n"
-"该合约定义并公开了函数`set`和`get`，可以用来修改或获取该变量的值。"
+"在这个例子中，`Storage` 结构声明了一个名为 `stored_data` 的存储变量，类型为`u128`（128位无符号整数）。\n"
+"你可以将它想象成数据库中的一个单独槽位，通过调用管理数据库的代码的函数来查询和修改它。\n"
+"该合约定义并公开了 `set` 和 `get` 函数，用于修改或检索该变量的值。"
 
 #: src/ch99-01-02-a-simple-contract.md:48
 msgid "### The Interface: the contract's blueprint"
@@ -15358,14 +15341,13 @@ msgstr ""
 "```"
 
 #: src/ch99-01-02-a-simple-contract.md:58
-#, fuzzy
 msgid ""
 "The interface of a contract represents the functions this contract exposes to the outside world. Here, the interface exposes two functions: `set` and `get`. By leveraging the [traits "
 "& impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a "
 "compilation error if your contract doesn’t conform with the declared interface."
 msgstr ""
-"合约的接口表示合同对外公开的功能。这里，接口公开了两个函数： `set` 和 `get`。通过利用Cairo中的[traits & impls](./ch07-02-traits-in-cairo.md)机制，我们可以确保合约的实际实现与其接口相"
-"匹配。事实上，如果你的合约不符合声明的接口，你会得到一个编译错误。"
+"合约的接口代表了该合约向外界公开的函数。在这里，接口公开了两个函数：`set` 和 `get` 。通过利用Cairo的[traits & impls](./ch08-02-traits-in-cairo.md) 机制，我们可以确保合约的实际实现与其"
+"接口匹配。事实上，如果你的合约与声明的接口不符合，将会得到编译错误。"
 
 #: src/ch99-01-02-a-simple-contract.md:60
 msgid ""
@@ -15779,16 +15761,16 @@ msgid "<span class=\"caption\">Listing 99-1bis: Our reference contract for this 
 msgstr "<span class=\"caption\">示例  99-1bis：本章的参考合约</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:1
-#, fuzzy
 msgid "# Contract Storage"
-msgstr "## 存储变量"
+msgstr "# 合约存储"
 
 #: src/ch99-01-03-01-contract-storage.md:3
-#, fuzzy
 msgid ""
 "The most common way for interacting with a contract’s storage is through storage variables. As stated previously, storage variables allow you to store data that will be stored in the "
 "contract's storage that is itself stored on the blockchain. These data are persistent and can be accessed and modified anytime once the contract is deployed."
-msgstr "如前所述，存储变量允许您存储数据，这些数据将存储在合约的存储空间中，而合约本身存储在区块链上。这些数据是持久的，一旦合约部署完成，就可以随时访问和修改。"
+msgstr ""
+"与合约存储进行交互的最常见方式是通过存储变量。正如前面所述，存储变量允许您存储将存储在合约的存储中的数据，而该存储本身存储在区块链上。这些数据是持久的，一旦合约部署后，可以随时访问和"
+"修改。"
 
 #: src/ch99-01-03-01-contract-storage.md:5
 msgid "Storage variables in Starknet contracts are stored in a special struct called `Storage`:"
@@ -16005,19 +15987,17 @@ msgstr ""
 "```"
 
 #: src/ch99-01-03-01-contract-storage.md:111
-#, fuzzy
 msgid "<span class=\"caption\">A Storage Struct</span>"
-msgstr "<span class=\"caption\">示例99-2：存储用结构体</span>"
+msgstr "<span class=“caption”>存储结构</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:113
-#, fuzzy
 msgid ""
 "The storage struct is a [struct](./ch05-00-using-structs-to-structure-related-data.md) like any other,\n"
 "except that it **must** be annotated with `#[storage]`. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read "
 "and write data from and to storage. Moreover, this allows you to define storage mappings using the `LegacyMap` type."
 msgstr ""
-"存储结构是一个[结构体](./ch04-00-using-structs-to-structure-related-data.md)，与其他结构体基本一样、\n"
-"除了它 **必须** 被标注为`#[storage]`，以允许你使用`LegacyMap`类型来存储映射。"
+"Storage[结构体](./ch05-00-using-structs-to-structure-related-data.md) 与其他结构体一样，\n"
+"只是它 **必须** 带有 `#[storage]` 注解。这个注解告诉编译器生成与区块链状态交互所需的代码，并允许您从存储中读取和写入数据。此外，这还允许您使用 `LegacyMap` 类型定义存储映射。"
 
 #: src/ch99-01-03-01-contract-storage.md:116
 msgid ""
@@ -16044,9 +16024,8 @@ msgid ""
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:126
-#, fuzzy
 msgid "You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value."
-msgstr "要读取存储变量 `names` 的值，我们需要调用存储变量 `names` 的 `read` 函数，并将键值 `address` 作为参数传入。"
+msgstr "通过在变量上调用 `address` 函数，你可以访问存储变量的地址，该函数返回一个 `StorageBaseAddress` 值。"
 
 #: src/ch99-01-03-01-contract-storage.md:128
 msgid ""
@@ -16259,9 +16238,8 @@ msgstr ""
 "```"
 
 #: src/ch99-01-03-01-contract-storage.md:232
-#, fuzzy
 msgid "## Interacting with Storage Variables"
-msgstr "### 具有返回值的函数"
+msgstr "## 与存储变量交互"
 
 #: src/ch99-01-03-01-contract-storage.md:234
 msgid ""
@@ -16270,9 +16248,8 @@ msgid ""
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:236
-#, fuzzy
 msgid "To read the value of the `owner` storage variable, which is a single value, we call the `read` function on the `owner` variable, passing in no parameters."
-msgstr "要读取存储变量 `names` 的值，我们需要调用存储变量 `names` 的 `read` 函数，并将键值 `address` 作为参数传入。"
+msgstr "要读取 `owner` 存储变量的值，该变量是一个单一值，我们调用 `owner` 变量上的 `read` 函数，不传入任何参数。"
 
 #: src/ch99-01-03-01-contract-storage.md:238
 msgid ""
@@ -16485,16 +16462,16 @@ msgstr ""
 "```"
 
 #: src/ch99-01-03-01-contract-storage.md:342
-#, fuzzy
 msgid "<span class=\"caption\">Calling the `read` function on the `owner` variable</span>"
-msgstr "<span class=\"caption\">示例99-3：在`names`变量上调用`read`函数</span>"
+msgstr "<span class=“caption”>调用`owner` 变量上的 `read` 函数</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:344
-#, fuzzy
 msgid ""
 "To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the `names` variable, passing in the key "
 "`address` as a parameter. If the mapping had more than one key, we would pass in the other keys as parameters as well."
-msgstr "要读取存储变量 `names` 的值，我们需要调用存储变量 `names` 的 `read` 函数，并将键值 `address` 作为参数传入。"
+msgstr ""
+"要读取存储变量 `names` 的值，这个变量是从 `ContractAddress` 映射到 `felt252` 的，我们在 `names` 变量上调用 `read` 函数，将键 `address` 作为参数传入。如果这个映射有多个键，我们也会将其"
+"他键作为参数传入。"
 
 #: src/ch99-01-03-01-contract-storage.md:346
 msgid ""
@@ -16707,9 +16684,8 @@ msgstr ""
 "```"
 
 #: src/ch99-01-03-01-contract-storage.md:450
-#, fuzzy
 msgid "<span class=\"caption\">Calling the `read` function on the `names` variable</span>"
-msgstr "<span class=\"caption\">示例99-3：在`names`变量上调用`read`函数</span>"
+msgstr "<span class=“caption”>调用`names` 变量上的`read` 函数</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:452
 msgid ""
@@ -16928,9 +16904,8 @@ msgstr ""
 "```"
 
 #: src/ch99-01-03-01-contract-storage.md:558
-#, fuzzy
 msgid "<span class=\"caption\">Calling the `write` function on the `owner` variable</span>"
-msgstr "<span class=\"caption\">示例99-3：在`names`变量上调用`read`函数</span>"
+msgstr "<span class=\"caption\">调用`owner` 变量上的`write` 函数</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:560
 msgid ""
@@ -17143,14 +17118,12 @@ msgstr ""
 "```"
 
 #: src/ch99-01-03-01-contract-storage.md:664
-#, fuzzy
 msgid "<span class=\"caption\">Calling the `write` function on the `names` variable</span>"
-msgstr "<span class=\"caption\">示例99-3：在`names`变量上调用`read`函数</span>"
+msgstr "<span class=\"caption\">调用 `names` 变量上的 `write`  函数</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:666
-#, fuzzy
 msgid "## Storing custom types"
-msgstr "### 存储自定义结构体"
+msgstr "## 存储自定义结构体"
 
 #: src/ch99-01-03-01-contract-storage.md:668
 msgid ""
@@ -17594,9 +17567,8 @@ msgstr ""
 "```"
 
 #: src/ch99-01-03-01-contract-storage.md:884
-#, fuzzy
 msgid "### Structs storage layout"
-msgstr "## 存储变量"
+msgstr "### 结构体的存储布局"
 
 #: src/ch99-01-03-01-contract-storage.md:886
 msgid ""
@@ -17616,9 +17588,8 @@ msgid ""
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:895
-#, fuzzy
 msgid "### Enums storage layout"
-msgstr "## 存储变量"
+msgstr "### 枚举的存储布局"
 
 #: src/ch99-01-03-01-contract-storage.md:897
 msgid ""
@@ -17637,9 +17608,8 @@ msgid ""
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:906
-#, fuzzy
 msgid "## Storage mappings"
-msgstr "### 存储映射"
+msgstr "## 存储映射"
 
 #: src/ch99-01-03-01-contract-storage.md:908
 msgid ""
@@ -17679,11 +17649,12 @@ msgid ""
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:926
-#, fuzzy
 msgid ""
 "You can also create more complex mappings with multiple keys. You can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps an "
 "`owner` and an allowed `spender` to its `allowance` amount using multiple keys passed inside a tuple:"
-msgstr "您还可以创建比这更复杂的映射；您可以在示例 99-2bis中找到一个类似于 ERC20 标准中常见的 `allowances` 存储变量，它使用元组将 `owner` 和 `spender` 映射到 `allowance` 中："
+msgstr ""
+"你还可以创建具有多个键的更复杂的映射。在示例 99-2bis 中可以找到一个示例，就像ERC20标准中的流行的 `allowances` 存储变量一样，它使用多个键将 `owner` 和允许的 `spender` 映射到其 "
+"`allowance` 金额，这些键被传递到一个元组中："
 
 #: src/ch99-01-03-01-contract-storage.md:928
 msgid ""
@@ -17720,11 +17691,11 @@ msgid ""
 msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:942
-#, fuzzy
 msgid ""
 "For more details about the contract storage layout in the [Starknet Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/"
 "#storage_variables)"
-msgstr "如果你想了解更多关于消息机制的信息，可以访问 [Starknet 文档](https://docs.starknet.io/documentation/architecture_and_concepts/L1-L2_Communication/messaging-mechanism/)。"
+msgstr ""
+"如果你想了解更多关于合约存储布局的细节，可以访问 [Starknet 文档](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables)"
 
 #: src/ch99-01-03-01-contract-storage.md:944 src/ch99-01-04-01-voting-contract.md:433
 msgid "<footer id=\"last-change\">Last change: 2023-12-03</footer>"
@@ -18138,11 +18109,10 @@ msgid "In a previous section, we saw this example of an implementation block in 
 msgstr "在上一节中，我们看到了这样一个示例：在一个没有任何相应trait的合约中，有一个实现块。"
 
 #: src/ch99-01-03-04-reducing-boilerplate.md:24
-#, fuzzy
 msgid ""
 "It's not the first time that we encounter this attribute, we already talked about in it [Traits in Cairo](./ch08-02-traits-in-cairo.md). In this section, we'll be taking a deeper "
 "look at it and see how it can be used in contracts."
-msgstr "这不是我们第一次遇到这个属性，我们已经在[Cairo中的Traits](./ch07-02-traits-in-cairo.md)中讨论过。在本节中，我们将对它进行更深入的了解，看看它在合约中是如何使用的。"
+msgstr "这并不是我们第一次遇到这个属性，我们已经在在Cairo中使用 `Traits`(./ch08-02-traits-in-cairo.md) 中讨论过它。在本节中，我们将更深入地研究它，并看看它在合约中的使用方式。"
 
 #: src/ch99-01-03-04-reducing-boilerplate.md:26
 msgid ""
@@ -18202,31 +18172,28 @@ msgid "## Storage Optimization with `StorePacking`"
 msgstr "## 使用`StorePacking`优化存储"
 
 #: src/ch99-01-03-05-optimizing-storage.md:3
-#, fuzzy
 msgid ""
 "Bit-packing is a simple concept: Use as few bits as possible to store a piece of data. When done well, it can significantly reduce the size of the data you need to store. This is "
 "especially important in smart contracts, where storage is expensive."
-msgstr "Bit-packing(位打包)是一个简单的概念：使用尽可能少的位来存储数据。如果做得好，它可以大大减少需要存储的数据大小。这在智能合约中尤为重要，因为智能合约的存储成本很高。"
+msgstr "位压缩是一个简单的概念：使用尽可能少的位数来存储数据。如果做得好，它可以显著减少需要存储的数据大小。这在智能合约中尤为重要，因为存储是昂贵的。"
 
 #: src/ch99-01-03-05-optimizing-storage.md:5
-#, fuzzy
 msgid ""
 "When writing Cairo smart contracts, it is important to optimize storage usage to reduce gas costs. Indeed, most of the cost associated with a transaction is related to storage "
 "updates; and each storage slot costs gas to write to.\n"
 "This means that by packing multiple values into fewer slots, you can decrease the gas cost incurred by the users of your smart contract."
 msgstr ""
-"在编写Cairo智能合约时，优化存储使用以降低gas成本非常重要。事实上，一笔交易的大部分成本都与存储更新有关；而每个存储槽的写入都会产生gas成本。\n"
-"这意味着，通过将多个值打包到更少的槽中，可以降低智能合约用户的gas成本。"
+"在编写Cairo智能合约时，优化存储使用以减少 gas 成本是非常重要的。事实上，与交易相关的大部分成本都与存储更新相关；而每个存储槽位写入都需要 gas 成本。\n"
+"这意味着通过将多个值打包到较少的槽位中，你可以减少智能合约的用户所需的 gas 成本。"
 
 #: src/ch99-01-03-05-optimizing-storage.md:8
-#, fuzzy
 msgid ""
 "Cairo provides the `StorePacking` trait to enable packing struct fields into fewer storage slots. For example, consider a `Sizes` struct with 3 fields of different types. The total "
 "size is 8 + 32 + 64 = 104 bits. This is less than the 128 bits of a single `u128`. This means we can pack all 3 fields into a single `u128` variable. Since a storage slot can hold up "
 "to 251 bits, our packed value will take only one storage slot instead of 3."
 msgstr ""
-"Cairo 提供了 `StorePacking` 特性，可以将结构体字段打包让其占用更少的存储槽。例如，考虑一个有 3 个不同类型字段的 `Sizes` 结构。总大小为 8 + 32 + 64 = 104 位。这小于单个 `u128` 的 128 "
-"位。这意味着我们可以将所有 3 个字段打包到一个 `u128` 变量中。由于一个存储槽最多可容纳 251 位，我们打包后的值将只占用一个存储槽，而不是三个。"
+"Cairo提供了 `StorePacking` trait，以便将结构体字段打包到较少的存储槽位中。例如，考虑一个具有3个不同类型字段的 `Sizes` 结构体。总大小为8 + 32 + 64 = 104位。这比单个 `u128` 的128位要"
+"小。这意味着我们可以将这3个字段都打包到一个单独的 `u128` 变量中。由于一个存储槽位最多可以容纳251位，我们打包后的值只需要一个存储槽位，而不是3个。"
 
 #: src/ch99-01-03-05-optimizing-storage.md:10
 msgid ""
@@ -18416,17 +18383,16 @@ msgstr ""
 "以将它们打包到一个 `u512` 变量中，依此类推。你可以定义自己的结构和逻辑来打包和解包它们。"
 
 #: src/ch99-01-03-05-optimizing-storage.md:95
-#, fuzzy
 msgid ""
 "The rest of the work is done magically by the compiler - if a type implements the `StorePacking` trait, then the compiler will know it can use the `StoreUsingPacking` implementation "
 "of the `Store` trait in order to pack before writing and unpack after reading from storage.\n"
 "One important detail, however, is that the type that `StorePacking::pack` spits out also has to implement `Store` for `StoreUsingPacking` to work. Most of the time, we will want to "
 "pack into a felt252 or u256 - but if you want to pack into a type of your own, make sure that this one implements the `Store` trait."
 msgstr ""
-"其余的工作则由编译器神奇地完成--如果一个类型实现了 `StorePacking` 特性，那么编译器就会知道它可以使用 `StoreUsingPacking` 特性的 `StoreUsingPacking` 实现，以便在写入之前打包，在从存储"
-"空间读取之后解包。\n"
-"然而，一个重要的细节是，`StorePacking::pack` 输出的类型也必须实现 `Store` 才能让 `StoreUsingPacking` 起作用。大多数情况下，我们希望将数据打包到 felt252 或 u256 中，但如果你想打包到自"
-"己的类型中，请确保该类型实现了 `Store` 特性。"
+"其余的工作由编译器自动完成 - 如果一个类型实现了 `StorePacking` trait，那么编译器将知道它可以使用 `Store` trait 的 `StoreUsingPacking` 实现，在写入之前进行打包，在从存储中读取后进行解"
+"包。\n"
+"然而，一个重要的细节是，`StorePacking::pack` 输出的类型也必须实现 `Store`，以使 `StoreUsingPacking` 正常工作。大多数情况下，我们希望打包到 felt252 或 u256 类型中 - 但是如果你想打包到"
+"自定义类型中，请确保该类型实现了 `Store` trait。"
 
 #: src/ch99-01-03-05-optimizing-storage.md:98
 msgid "<footer id=\"last-change\">Last change: 2023-10-19</footer>"
@@ -18482,9 +18448,8 @@ msgstr ""
 "其逻辑最终将成为它被嵌入的合约字节码的一部分。"
 
 #: src/ch99-01-05-00-components.md:24
-#, fuzzy
 msgid "## What's in a Component?"
-msgstr "## 什么是包？"
+msgstr "## 组件里面有什么？"
 
 #: src/ch99-01-05-00-components.md:26
 msgid "A component is very similar to a contract. It can contain:"
@@ -18507,9 +18472,8 @@ msgid ""
 msgstr "与合约不同，组件不能单独部署。组件的代码成为嵌入到的合约的一部分。"
 
 #: src/ch99-01-05-00-components.md:35
-#, fuzzy
 msgid "## Creating Components"
-msgstr "## 创建惯用的 `use` 路径"
+msgstr "## 创建组件"
 
 #: src/ch99-01-05-00-components.md:37
 msgid ""
@@ -19241,9 +19205,8 @@ msgstr ""
 "可嵌入的impl可以注入到任何合约中，这会添加新的入口点以及改变合约的 ABI。"
 
 #: src/ch99-01-05-01-components-under-the-hood.md:17
-#, fuzzy
 msgid "Let's look at an example to see this in action:"
-msgstr "下面是一个 `clone` 方法的实例。"
+msgstr "让我们看一个示例来看看这个实际运作的过程："
 
 #: src/ch99-01-05-01-components-under-the-hood.md:19
 msgid ""
@@ -19483,9 +19446,8 @@ msgstr ""
 "  在合约中写上`embeddable_as(Ownable)`时，就意味着`Ownable`将是被嵌入合约中来实现所有权功能的impl。"
 
 #: src/ch99-01-05-01-components-under-the-hood.md:149
-#, fuzzy
 msgid "## Contract Integration"
-msgstr "## 合约函数"
+msgstr "## 合约集成"
 
 #: src/ch99-01-05-01-components-under-the-hood.md:151
 msgid ""
@@ -19647,20 +19609,18 @@ msgid "## Interface"
 msgstr "## 接口"
 
 #: src/ch99-02-01-abis-and-interfaces.md:17
-#, fuzzy
 msgid ""
 "The interface of a contract is a list of the functions it exposes publicly.\n"
 "It specifies the function signatures (name, parameters, visibility and return value) contained in a smart contract without including the function body."
 msgstr ""
-"合约接口是合约公开的函数列表。\n"
+"合约的接口是它公开的函数列表。\n"
 "它指定了智能合约中包含的函数签名（名称、参数、可见性和返回值），但不包括函数体。"
 
 #: src/ch99-02-01-abis-and-interfaces.md:20
-#, fuzzy
 msgid ""
 "Contract interfaces in Cairo are traits annotated with the `#[starknet::interface]` attribute. If you are new to traits, check out the dedicated chapter on [traits](./ch08-02-traits-"
 "in-cairo.md)."
-msgstr "Cairo中的接口是带有`#[starknet::interface]`属性的trait。如果你不太了解trait，请查看关于[traits](./ch07-02-traits-in-cairo.md)的专门章节。"
+msgstr "在Cairo中，合约接口是用 `#[starknet::interface]` 属性注解的 traits。如果你对 traits 还不熟悉，请查看专门介绍 [traits](./ch08-02-traits-in-cairo.md) 的章节。"
 
 #: src/ch99-02-01-abis-and-interfaces.md:22
 msgid ""
@@ -20781,14 +20741,13 @@ msgstr ""
 "- 唤起合约：与可以写入状态的外部函数交互。这些函数会改变网络状态，因此需要付费或签署。"
 
 #: src/ch99-01-04-01-voting-contract.md:202
-#, fuzzy
 msgid ""
 "We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use "
 "the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` in the [Local "
 "Development with Katana](https://book.starknet.io/chapter_3/katana.html) chapter of the Starknet Book."
 msgstr ""
-"我们将使用 `katana` 设置一个本地开发节点，以部署投票合约。然后，我们将通过调用合约的函数与合约进行交互。你也可以使用 Goerli Testnet 来代替 `katana`。不过，我们建议在本地开发和测试中使"
-"用 `katana`。你可以在Starknet Book的[第3章](https://book.starknet.io/chapter_3/katana.html)中找到`katana`的完整教程。"
+"我们将使用 `katana` 设置一个本地开发节点来部署投票合约。然后，我们将通过调用和调用其函数与合约进行交互。你也可以使用Goerli测试网络而不是 `katana`。然而，我们建议在本地开发和测试中使"
+"用 `katana`。你可以在Starknet Book的 [Local Development with Katana](https://book.starknet.io/chapter_3/katana.html) 章节中找到有关 `katana` 的完整教程。"
 
 #: src/ch99-01-04-01-voting-contract.md:204
 msgid "### The `katana` local Starknet node"
@@ -20802,9 +20761,8 @@ msgstr ""
 "`katana`旨在支持[Dojo 团队](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md)的本地开发。通过它，您可以在本地完成星网所需的一切工作。它是开发和测试的绝佳工具。"
 
 #: src/ch99-01-04-01-voting-contract.md:208
-#, fuzzy
 msgid "To install `katana` from the source code, please refer to the [Local Development with Katana](https://book.starknet.io/chapter_3/katana.html) chapter of the Starknet Book."
-msgstr "要从源代码安装`katana`，请参阅Starknet Book的[第 3 章 katana 子章节](https://book.starknet.io/chapter_3/katana.html)。"
+msgstr "要从源代码安装 `katana`，请参考Starknet Book的 [Local Development with Katana](https://book.starknet.io/chapter_3/katana.html) 章节。"
 
 #: src/ch99-01-04-01-voting-contract.md:210
 msgid "Once you have `katana` installed, you can start the local Starknet node with:"
@@ -20865,36 +20823,33 @@ msgstr ""
 "```"
 
 #: src/ch99-01-04-01-voting-contract.md:237
-#, fuzzy
 msgid ""
 "Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for "
 "voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the [Account Abstraction](https://book.starknet.io/chapter_4/index.html) chapter "
 "of the Starknet Book."
 msgstr ""
-"在与投票合同互动之前，我们需要在Starknet中准备好投票人和管理员账户。每个投票人账户都必须注册并有足够的资金用于投票。如需更详细地了解账户抽象的操作方法，请参阅Starknet Book中的[账户抽"
-"象](https://book.starknet.io/chapter_5/index.html)章节。"
+"在我们与投票合约进行交互之前，我们需要在Starknet上准备选民和管理员账户。每个选民账户必须进行注册，并具备足够的资金进行投票。如果你想更详细地了解账户如何与账户抽象一起操作，请参考"
+"Starknet Book的 [账户抽象](https://book.starknet.io/chapter_4/index.html) 章节。"
 
 #: src/ch99-01-04-01-voting-contract.md:239
 msgid "### Smart wallets for voting"
 msgstr "### 用于投票的智能钱包"
 
 #: src/ch99-01-04-01-voting-contract.md:241
-#, fuzzy
 msgid ""
 "Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the "
 "[Environment setup](https://book.starknet.io/chapter_1/environment_setup.html) chapter of the Starknet Book."
 msgstr ""
-"除了 Scarb，您还需要安装 Starkli。Starkli 是一个命令行工具，可以让你与 Starknet 交互。你可以在Starknet Book的[第1章](https://book.starknet.io/chapter_1/environment_setup.html)中找到安"
-"装说明。"
+"除了Scarb之外，你还需要安装Starkli。Starkli是一个命令行工具，允许你与Starknet进行交互。你可以在Starknet Book的 [环境初始化](https://book.starknet.io/chapter_1/environment_setup.html) "
+"章节中找到安装说明。"
 
 #: src/ch99-01-04-01-voting-contract.md:243
-#, fuzzy
 msgid ""
 "For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the [Environment setup](https://"
 "book.starknet.io/chapter_1/environment_setup.html) chapter of the Starknet Book."
 msgstr ""
-"对于我们要使用的每一个智能钱包，我们都必须在加密密钥库中创建一个签名者（Signer）和一个账户描述符（Account Descriptor）。Starknet的[第一章](https://book.starknet.io/chapter_1/"
-"first_contract.html) 详细介绍了这一过程。"
+"对于我们将使用的每个智能钱包，我们必须在加密的密钥库中创建一个签名者和一个账户描述符。这个过程也在Starknet Book的[环境初始化](https://book.starknet.io/chapter_1/environment_setup."
+"html) 章节中详细介绍了。"
 
 #: src/ch99-01-04-01-voting-contract.md:245
 msgid "We can create Signers and Account Descriptors for the accounts we want to use for voting. Let's create a smart wallet for voting in our smart contract."
@@ -20915,9 +20870,8 @@ msgstr ""
 "```"
 
 #: src/ch99-01-04-01-voting-contract.md:253
-#, fuzzy
 msgid "Then, we create the Account Descriptor by fetching the katana account we want to use:"
-msgstr "然后，我们创建账户描述符："
+msgstr "然后，我们通过获取我们要使用的katana账户来创建账户描述符："
 
 #: src/ch99-01-04-01-voting-contract.md:255
 msgid ""
@@ -20930,9 +20884,8 @@ msgstr ""
 "```"
 
 #: src/ch99-01-04-01-voting-contract.md:259
-#, fuzzy
 msgid "This command will create a new `account0_account.json` file containing the following details:"
-msgstr "该命令将生成一个名为`my_package`的新软件包目录，其结构如下："
+msgstr "这个命令将创建一个新的 `account0_account.json` 文件，其中包含以下细节："
 
 #: src/ch99-01-04-01-voting-contract.md:261
 msgid ""
@@ -21375,24 +21328,22 @@ msgid "A crucial feature of a Layer 2 is its ability to interact with Layer 1."
 msgstr "Layer 2的一个重要特征是它能与Layer 1交互。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:5
-#, fuzzy
 msgid ""
 "Starknet has its own `L1-L2` Messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 "
 "to interact with smart-contracts on L2 (or the other way around), allowing us to do \"cross-chain\" transactions. For example, we can do some computations on a chain and use the "
 "result of this computation on the other chain."
 msgstr ""
-"Starknet拥有自己的 L1 <> L2 消息传递系统，它不同于共识机制和 L1 上的状态更新提交。消息传递是 L1 上的智能合约与 L2 上的智能合约进行交互（或反方向）的一种方式，允许我们进行 \"跨链 \"交"
-"易。例如，我们可以在一条链上进行一些计算，并在另一条链上使用计算结果。"
+"Starknet拥有自己的 `L1-L2` 消息传递系统，它与其共识机制和L1上状态更新的提交方式不同。消息传递是L1上的智能合约与L2上的智能合约（或反之亦然）进行交互的一种方式，允许我们进行”跨链”交易。"
+"例如，我们可以在一个链上进行一些计算，并在另一个链上使用这个计算的结果。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:7
-#, fuzzy
 msgid ""
 "Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge "
 "contract, which will automatically trigger the minting of the same token on L2. Another good use case for `L1-L2` messaging would be [DeFi pooling](https://starkware.co/resource/defi-"
 "pooling/)."
 msgstr ""
-"Staknet 上的桥都使用 L1-L2 消息传递。比方说，您想将代币从以太坊桥接到Staknet。您只需在 L1 桥接合约中存入您的代币，这将自动触发 L2 上相同代币的铸造。L1-L2 消息传递的另一个很好的例子是 "
-"[DeFi 资金池](https://starkware.co/resource/defi-pooling/)。"
+"在Starknet上，所有的桥接都使用 `L1-L2` 消息传递。假设你想要将以太坊上的代币桥接到Starknet上。你只需要将代币存入L1桥接合约，这将自动触发在L2上铸造相同代币。`L1-L2` 消息传递的另一个很好"
+"的用例是[DeFi池化](https://starkware.co/resource/defi-pooling/)。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:9
 msgid "On Starknet, it's important to note that the messaging system is **asynchronous** and **asymmetric**."
@@ -21416,7 +21367,6 @@ msgid "## The StarknetMessaging Contract"
 msgstr "## Starknet消息传递合约"
 
 #: src/ch99-04-00-L1-L2-messaging.md:18
-#, fuzzy
 msgid ""
 "The crucial component of the `L1-L2` Messaging system is the [`StarknetCore`](https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4) contract. It is a set of "
 "Solidity contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of `StarknetCore` is called `StarknetMessaging` and it is the contract "
@@ -21424,9 +21374,9 @@ msgid ""
 "blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6) with functions allowing to send message to L2, receiving messages on L1 from L2 "
 "and canceling messages."
 msgstr ""
-"L1 <> L2消息传递系统的关键组成部分是[`StarknetCore`](https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4)合约。它是一组部署在以太坊上的 Solidity 合约，可以让"
-"Starknet正常运行。`StarknetCore`的其中一个合约叫做 `StarknetMessaging`，它负责在Starknet和以太坊之间传递消息。`StarknetMessaging` 遵循一个[接口](https://github.com/starkware-libs/"
-"cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6)，其功能允许向 L2 发送消息、从 L2 接收 L1 上的消息以及取消消息。"
+"`L1-L2` 消息传递系统的关键组件是[StarknetCore合约](https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4)。它是部署在以太坊上的一组Solidity合约，用于使Starknet正常运"
+"行。`StarknetCore` 的合约之一被称为`StarknetMessaging`，它负责在Starknet和以太坊之间传递消息。StarknetMessaging遵循一个[接口](https://github.com/starkware-libs/cairo-lang/"
+"blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6)，其中包含了一些函数，允许向L2发送消息，在L1上从L2接收消息以及取消消息。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:20
 msgid ""
@@ -21580,9 +21530,8 @@ msgid ""
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:99
-#, fuzzy
 msgid "The signature of the `sendMessageToL2` is:"
-msgstr "`StarknetCore.sendMessageToL2`的签名是："
+msgstr "`sendMessageToL2`的签名是："
 
 #: src/ch99-04-00-L1-L2-messaging.md:101
 msgid ""
@@ -21632,28 +21581,26 @@ msgid ""
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:128
-#, fuzzy
 msgid ""
 "We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be executed by a `L1HandlerTransaction`. There is nothing particular to "
 "do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 "
 "message to ensure that our contract can only receive messages from a trusted L1 contract."
 msgstr ""
-"我们需要在函数中添加 `#[l1_handler]` 属性。L1 handler是一种特殊函数，只能由排序器在收到 L1 发送的信息后触发。接收来自 L1 的事务无需做任何特殊处理，因为排序器会自动转发消息。在您的 "
-"`#[l1_handler]` 函数中，必须验证 L1 消息的发送者，以确保我们的合约只能接收来自可信 L1 合约的消息。"
+"我们需要为我们的函数添加 `#[l1_handler]` 属性。L1处理器是一种特殊的函数，只能由`L1HandlerTransaction` 执行。接收来自L1的事务时不需要特别处理，因为消息会自动由顺序器中继。在你的 "
+"`#[l1_handler]` 函数中，重要的是要验证L1消息的发送者，以确保我们的合约只能接收来自受信任的L1合约的消息。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:130
 msgid "## Sending messages from Starknet to Ethereum"
 msgstr "## 从Starknet向以太坊发送信息"
 
 #: src/ch99-04-00-L1-L2-messaging.md:132
-#, fuzzy
 msgid ""
 "When sending messages from Starknet to Ethereum, you will have to use the `send_message_to_l1` syscall in your Cairo contracts. This syscall allows you to send messages to the "
 "`StarknetMessaging` contract on L1. Unlike `L1->L2` messages, `L2->L1` messages must be consumed manually, which means that you will need your Solidity contract to call the "
 "`consumeMessageFromL2` function of the `StarknetMessaging` contract explicitly in order to consume the message."
 msgstr ""
-"当从Starknet向以太坊发送消息时，你必须在Cairo合约中使用`send_message_to_l1`系统调用。该系统调用允许你向 L1 上的 `StarknetMessaging` 合约发送消息。与 L1 到 L2 的消息不同，L2 到 L1 的消"
-"息不会被自动消费，这意味着你需要在 Solidity 合约中明确调用 `consumeMessageFromL2` 函数才能消费消息。"
+"当从Starknet发送消息到以太坊时，你将需要在Cairo合约中使用 `send_message_to_l1` 系统调用。该系统调用允许您向L1上的 `StarknetMessaging` 合约发送消息。与 `L1->L2` 消息不同的是，`L2->L1` "
+"消息必须手动消耗，这意味着你的Solidity合约需要显式调用 `StarknetMessaging` 合约的 `consumeMessageFromL2` 函数来消耗消息。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:134
 msgid "To send a message from L2 to L1, what we would do on Starknet is:"
@@ -21713,21 +21660,19 @@ msgid ""
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:174
-#, fuzzy
 msgid ""
 "It is important to remember that on L1 we are sending a payload of `uint256`, but the basic data type on Starknet is `felt252`; however, `felt252` are approximately 4 bits smaller "
 "than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum "
 "`felt252`, the message will be stuck and never consumed on L2."
 msgstr ""
-"重要的是要记住，在 L1 上，我们发送的payload是 `uint256`，但Starknet的基本数据类型是 `felt252`；但是，`felt252`比 `uint256`大约小 4 位。因此，我们必须注意发送信息的payload中包含的值。"
-"如果我们在 L1 上构建的报文的值超过了 `felt252`的最大值，那么该报文就会被卡住，在 L2 上永远不会被消费。"
+"重要的是要记住，在L1上我们发送的有效载荷是 `uint256`，但是在Starknet上的基本数据类型是 `felt252`；然而，`felt252` 比 `uint256` 大约小4位。因此，我们必须注意我们发送的消息有效载荷中包"
+"含的值。如果在L1上构建的消息的值超过了最大的`felt252`，该消息将被卡住，无法在L2上被消耗。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:176
 msgid "## Cairo Serde"
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:178
-#, fuzzy
 msgid ""
 "Before sending messages between L1 and L2, you must remember that Starknet contracts, written in Cairo, can only understand serialized data. And serialized data is always an array of "
 "`felt252`.\n"
@@ -21735,8 +21680,9 @@ msgid ""
 "we are sending.\n"
 "If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2."
 msgstr ""
-"重要的是要记住，在 L1 上，我们发送的payload是 `uint256`，但Starknet的基本数据类型是 `felt252`；但是，`felt252`比 `uint256`大约小 4 位。因此，我们必须注意发送信息的payload中包含的值。"
-"如果我们在 L1 上构建的报文的值超过了 `felt252`的最大值，那么该报文就会被卡住，在 L2 上永远不会被消费。"
+"在L1和L2之间发送消息之前，你必须记住，用Cairo编写的Starknet合约只能理解序列化数据。而序列化数据始终是一个`felt252`数组。\n"
+"在Solidity中，我们有 `uint256` 类型，而 `felt252` 比 `uint256` 大约小4位。因此，我们必须注意我们发送的消息有效载荷中包含的值。\n"
+"如果在L1上构建的消息的值超过了最大的 `felt252`，该消息将被卡住，无法在L2上被消耗。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:182
 msgid "So for instance, an actual `uint256` value in Cairo is represented by a struct like:"
@@ -21775,11 +21721,10 @@ msgid ""
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:200
-#, fuzzy
 msgid ""
 "If you want to learn more about the messaging mechanism, you can visit the [Starknet documentation](https://docs.starknet.io/documentation/architecture_and_concepts/"
 "Network_Architecture/messaging-mechanism/)."
-msgstr "如果你想了解更多关于消息机制的信息，可以访问 [Starknet 文档](https://docs.starknet.io/documentation/architecture_and_concepts/L1-L2_Communication/messaging-mechanism/)。"
+msgstr "如果你想了解更多关于消息机制的信息，可以访问 [Starknet 文档](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/)."
 
 #: src/ch99-04-00-L1-L2-messaging.md:202
 msgid "You can also find a [detailed guide here](https://github.com/glihm/starknet-messaging-dev) to test the messaging in local."
@@ -23099,7 +23044,6 @@ msgid ""
 msgstr ""
 
 #: src/appendix-05-common-types-and-traits-and-cairo-prelude.md:31
-#, fuzzy
 msgid ""
 "| Import                    | Path                                                  | "
 "Usage                                                                                                                                                                                  "
@@ -23132,24 +23076,24 @@ msgstr ""
 "| ------------------------- | ----------------------------------------------------- | "
 "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- "
 "|\n"
-"| `OptionTrait`             | `std::option::OptionTrait`                            | `OptionTrait<T>` defines a set of methods required to manipulate optional "
-"value.                                                                                                       |\n"
-"| `ResultTrait`             | `std::result::ResultTrait`                            | `ResultTrait<T, E>` Type for Starknet contract address, a value in the range [0, 2 \\*\\* "
+"| `OptionTrait`             | `core::option::OptionTrait`                           | `OptionTrait<T>` 定义了一组操作可选值所需的方"
+"法.                                                                                                       |\n"
+"| `ResultTrait`             | `core::result::ResultTrait`                           | `ResultTrait<T, E>` 是用于表示Starknet合约地址的类型，其取值范围为[0, 2 \\*\\* "
 "251).                                                                                          |\n"
-"| `ContractAddress`         | `starknet::ContractAddress`                           | `ContractAddress` is a type to represent the smart contract "
-"address                                                                                                                    |\n"
-"| `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` is the implementation of the trait `Zeroable` for the "
-"`ContractAddress` type. It is required to check whether a value of `t:ContractAddress` is zero or not. |\n"
-"| `contract_address_const`  | `starknet::contract_address_const`                    | The `contract_address_const!` it's a function that allows instantiating constant contract "
-"address values.                                                                              |\n"
-"| `Into`                    | `traits::Into;`                                       | `Into<T>` is a trait used for conversion between types. If there is an implementation of Into<T,"
-"S> for the types T and S, you can convert T into S.                                    |\n"
-"| `TryInto`                 | `traits::TryInto;`                                    | `TryInto<T>` is a trait used for conversion between types.If there is an implementation of "
-"TryInto<T,S> for the types T and S, you can convert T into S.                               |\n"
-"| `get_caller_address`      | `starknet::get_caller_address`                        | `get_caller_address()` is a function that returns the address of the caller of the contract. It "
-"can be used to identify the caller of a contract function.                             |\n"
-"| `get_contract_address`    | `starknet::info::get_contract_address`                | `get_contract_address()` is a function that returns the address of the current contract. It can "
-"be used to obtain the address of the contract being executed.                          |"
+"| `ContractAddress`         | `starknet::ContractAddress`                           | `ContractAddress` 是一种用于表示智能合约地址的类"
+"型                                                                                                                    |\n"
+"| `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` 是对 `ContractAddress` 类型实现的`Zeroable` 特征。它用于检查`t:"
+"ContractAddress` 的值是否为零。|\n"
+"| `contract_address_const`  | `starknet::contract_address_const`                    | `contract_address_const!` 是一个函数，允许实例化常量合约地址"
+"值。                                                                              |\n"
+"| `Into`                    | `traits::Into;`                                       | `Into<T>` 是用于类型转换的 trait。如果对类型T和S存在Into<T,S>的实现，那么可以将T转换为"
+"S                                    |\n"
+"| `TryInto`                 | `traits::TryInto;`                                    | `TryInto<T>` 是用于类型转换的 trait。如果对类型T和S存在TryInto<T,S>的实现，那么可以将T转换为"
+"S.                               |\n"
+"| `get_caller_address`      | `starknet::get_caller_address`                        | `get_caller_address()` 是一个函数，用于返回调用合约的地址。它可以用于识别合约函数的调用"
+"者                             |\n"
+"| `get_contract_address`    | `starknet::info::get_contract_address`                | `get_contract_address()` 是一个函数，用于返回当前合约的地址。它可以用于获取正在执行的合约的地"
+"址.                          |"
 
 #: src/appendix-05-common-types-and-traits-and-cairo-prelude.md:43
 msgid ""
