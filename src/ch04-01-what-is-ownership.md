@@ -3,17 +3,19 @@
 Cairo uses a linear type system. In such a type system, any value (a basic type, a struct, an enum) must be used and must only be used once. 'Used' here means that the value is either _destroyed_ or _moved_.
 
 _Destruction_ can happen in several ways:
- - a variable goes out of scope
- - a struct is destructured
- - explicit destruction using destruct()
+
+- a variable goes out of scope
+- a struct is destructured
+- explicit destruction using destruct()
 
 _Moving_ a value simply means passing that value to another function.
 
 This results in somewhat similar constraints to the Rust ownership model, but there are some differences.
 In particular, the rust ownership model exists (in part) to avoid data races and concurrent mutable access to a memory value. This is obviously impossible in Cairo since the memory is immutable.
 Instead, Cairo leverages its linear type system for two main purposes:
- - Ensuring that all code is provable and thus verifiable.
- - Abstracting away the immutable memory of the Cairo VM.
+
+- Ensuring that all code is provable and thus verifiable.
+- Abstracting away the immutable memory of the Cairo VM.
 
 #### Ownership
 
@@ -22,9 +24,10 @@ Variables however can be mutable, so the compiler must ensure that constant vari
 This makes it possible to talk about ownership of a variable: the owner is the code that can read (and write if mutable) the variable.
 
 This means that variables (not values) follow similar rules to Rust values:
- - Each variable in Cairo has an owner.
- - There can only be one owner at a time.
- - When the owner goes out of scope, the variable is destroyed.
+
+- Each variable in Cairo has an owner.
+- There can only be one owner at a time.
+- When the owner goes out of scope, the variable is destroyed.
 
 Now that we’re past basic Cairo syntax, we won’t include all the `fn main() {`
 examples inside a `main` function manually. As a result, our examples will be a
@@ -118,6 +121,7 @@ For example, the following code will not compile, because the struct `A` is not 
 ```rust,does_not_compile
 {{#include ../listings/ch04-understanding-ownership/no_listing_04_no_drop_derive_fails/src/lib.cairo}}
 ```
+
 However, types that implement the `Drop` trait are automatically destroyed when going out of scope. This destruction does nothing, it is a no-op - simply a hint to the compiler that this type can safely be destroyed once it's no longer useful. We call this "dropping" a value.
 
 At the moment, the `Drop` implementation can be derived for all types, allowing them to be dropped when going out of scope, except for dictionaries (`Felt252Dict`) and types containing dictionaries.
@@ -128,6 +132,7 @@ For example, the following code compiles:
 ```
 
 #### Destruction with a side-effect: the Destruct trait
+
 When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
 As said earlier, dictionaries in Cairo are types that must be "squashed" when destructed, so that the sequence of access can be proven. This is easy for developers to forget, so instead dictionaries implement the `Destruct` trait to ensure that all dictionaries are _squashed_ when going out of scope.
@@ -163,9 +168,9 @@ Here’s an example of the `clone` method in action.
 ```rust
 {{#include ../listings/ch04-understanding-ownership/no_listing_08_array_clone/src/lib.cairo}}
 ```
-When you see a call to `clone`, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
-In this case, both the _variable_ and the _value_ are being copied, resulting in new memory cells being used.
 
+When you see a call to `clone`, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
+In this case, _value_ is being copied, resulting in new memory cells being used, and the a new _variable_ is created, referring to the new, copied value.
 
 ### Return Values and Scope
 
