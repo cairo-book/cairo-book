@@ -1,15 +1,13 @@
-use core::debug::PrintTrait;
-
 fn main() {
     let number = 3;
 
     if number == 12 {
-        'number is 12'.print();
+        println!("number is 12");
     } else if number == 3 {
-        'number is 3'.print();
+        println!("number is 3");
     } else if number - 2 == 1 {
-        'number minus 2 is 1'.print();
+        println!("number minus 2 is 1");
     } else {
-        'number not found'.print();
+        println!("number not found");
     }
 }

@@ -1,9 +1,7 @@
-use core::debug::PrintTrait;
-
 fn main() {
     let x = plus_one(5);
 
-    x.print();
+    println!("x = {}", x);
 }
 
 fn plus_one(x: u32) -> u32 {

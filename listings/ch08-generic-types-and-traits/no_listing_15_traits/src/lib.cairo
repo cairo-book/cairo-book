@@ -1,5 +1,3 @@
-use core::debug::PrintTrait;
-
 mod aggregator {
     //ANCHOR: trait
     trait Summary<T> {

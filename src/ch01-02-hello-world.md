@@ -126,7 +126,7 @@ This command creates a `sierra` file in `target/dev`, let's ignore the `sierra` 
 If you have installed Cairo correctly, you should be able to run and see the following output:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 running hello_world ...
 [DEBUG] Hello, World!                   (raw: 0x48656c6c6f2c20776f726c6421
 
@@ -215,7 +215,6 @@ Let’s recap what we’ve learned so far about Scarb:
 - We can run tests using the `scarb test` command.
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
-
 
 # Summary
 

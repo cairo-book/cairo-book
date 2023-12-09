@@ -1,7 +1,6 @@
-use core::debug::PrintTrait;
 fn main() {
     let mut x = 5;
-    x.print();
+    println!("x = {}", x);
     x = 6;
-    x.print();
+    println!("x = {}", x);
 }

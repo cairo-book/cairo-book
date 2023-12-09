@@ -4,7 +4,9 @@
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>Cairo编程语言教程</h1>
@@ -14,7 +16,8 @@
 
 ## 描述
 
-该存储库包含了《Cairo编程语言》书籍的源代码，这是对Cairo 1编程语言的全面文档。这份文档是您掌握Cairo的首选资源，由Starknet社区创建和维护。您可以在线阅读这本书，[链接在这里](https://book.cairo-lang.org/)。
+该存储库包含了《Cairo 编程语言》书籍的源代码，这是对 Cairo 1 编程语言的全面文档。这份文档是您掌握 Cairo 的首选资源，由 Starknet 社区创建和维护。您可以在线阅读这本书，[链接在这里](https://book.cairo-lang.org/)。
+
 <div align="center">
   <h3> 来源于社区，贡献于社区 📜</h3>
 </div>
@@ -50,7 +53,7 @@
 
 - 对书籍进行修改，并刷新浏览器以查看更改。
 
-- 为你的改变提交PR。
+- 为你的改变提交 PR。
 
 ### 本地工作（翻译）
 
@@ -73,11 +76,11 @@
 
 如果您希望在不运行本地服务器的情况下为您的语言启动一个新的翻译，请考虑以下步骤：
 
-- 执行命令 `./translations.sh new xx` (替换 `xx` 为你的语言代码)。 该命令可以生成对应语言的po文件 `xx.po`。
+- 执行命令 `./translations.sh new xx` (替换 `xx` 为你的语言代码)。 该命令可以生成对应语言的 po 文件 `xx.po`。
 - 更新你的 `xx.po` 文件, 执行命令 `./translations.sh xx` (替换 `xx` 为你的语言代码), 如前一章节所述。
 - 如果 `xx.po` 已经存在, 则不需要执行该命令。
 
-### 本地工作（验证Cairo程序）
+### 本地工作（验证 Cairo 程序）
 
 `cairo-verify` 工具旨在封装所有 cairo and starknet 插件以便快速验证 Cairo 程序。
 
@@ -101,7 +104,7 @@ cargo install --path cairo-verify
 
 #### 使用
 
-该工具会在指定目录中扫描所有的 `*.cairo`  文件，并执行以下操作：
+该工具会在指定目录中扫描所有的 `*.cairo` 文件，并执行以下操作：
 
 对于一个 Starknet 合约:
 
@@ -110,7 +113,7 @@ cargo install --path cairo-verify
 
 Cairo 程序:
 
-- 如果包含 `main` 方法: `scarb cairo-run`
+- 如果包含 `main` 方法: `scarb cairo-run --available-gas=200000000`
 - 否则执行, `scarb build`
 - 如果文件包含测试: `scarb test`
 - `scarb fmt -c`
@@ -122,13 +125,14 @@ Cairo 程序:
 // TAGS: <tag1>, <tag2>
 ```
 
-以下是可用tags的列表：
+以下是可用 tags 的列表：
+
 - `does_not_compile`: 不运行 `scarb build`
-- `does_not_run`: 不运行 `scarb cairo-run`
+- `does_not_run`: 不运行 `scarb cairo-run --available-gas=200000000`
 - `ignore_fmt`: 不运行 `scarb fmt`
 - `tests_fail`: 不运行 `scarb test`
 
-您可以通过添加相应的tags来跳过和忽略特定的测试：
+您可以通过添加相应的 tags 来跳过和忽略特定的测试：
 
 ```sh
 $ cairo-verify --help

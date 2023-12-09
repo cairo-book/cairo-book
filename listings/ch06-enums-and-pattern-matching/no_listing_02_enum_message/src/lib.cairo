@@ -1,5 +1,5 @@
 // ANCHOR: all
-use core::debug::PrintTrait;
+
 // ANCHOR: message
 #[derive(Drop)]
 enum Message {
@@ -17,9 +17,9 @@ trait Processing {
 impl ProcessingImpl of Processing {
     fn process(self: Message) {
         match self {
-            Message::Quit => { 'quitting'.print(); },
-            Message::Echo(value) => { value.print(); },
-            Message::Move((x, y)) => { 'moving'.print(); },
+            Message::Quit => { println!("quitting") },
+            Message::Echo(value) => { println!("echoing {}", value) },
+            Message::Move((x, y)) => { println!("moving") },
         }
     }
 }

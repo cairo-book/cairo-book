@@ -1,5 +1,3 @@
-use core::debug::PrintTrait;
-
 #[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,
@@ -9,7 +7,7 @@ struct Rectangle {
 fn main() {
     let rec = Rectangle { height: 3, width: 10 };
     let area = calculate_area(@rec);
-    area.print();
+    println!("Area: {}", area);
 }
 
 fn calculate_area(rec: @Rectangle) -> u64 {

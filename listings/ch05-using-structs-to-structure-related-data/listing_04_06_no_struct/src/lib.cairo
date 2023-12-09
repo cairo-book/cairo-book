@@ -1,10 +1,10 @@
 //ANCHOR:all
-use core::debug::PrintTrait;
+
 fn main() {
     let width1 = 30;
     let height1 = 10;
     let area = area(width1, height1);
-    area.print();
+    println!("Area is {}", area);
 }
 
 //ANCHOR: here

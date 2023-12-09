@@ -1,5 +1,5 @@
 //TAG: tests_fail
-use core::debug::PrintTrait;
+
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,

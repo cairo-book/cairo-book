@@ -1,4 +1,3 @@
-use core::debug::PrintTrait;
 fn main() {
     let mut counter = 0;
 
@@ -9,6 +8,5 @@ fn main() {
         counter += 1;
     };
 
-    'The result is '.print();
-    result.print();
+    println!("The result is {}", result);
 }

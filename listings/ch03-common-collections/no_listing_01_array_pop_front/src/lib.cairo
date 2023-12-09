@@ -1,5 +1,3 @@
-use core::debug::PrintTrait;
-
 fn main() {
     let mut a = ArrayTrait::new();
     a.append(10);
@@ -7,5 +5,5 @@ fn main() {
     a.append(2);
 
     let first_value = a.pop_front().unwrap();
-    first_value.print(); // print '10'
+    println!("first value: {}", first_value);
 }

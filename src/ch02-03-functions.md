@@ -29,7 +29,7 @@ further. Place the `another_function` example in _src/lib.cairo_ and run it. You
 should see the following output:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 [DEBUG] Hello, world!                (raw: 5735816763073854953388147237921)
 [DEBUG] Another function.            (raw: 22265147635379277118623944509513687592494)
 ```
@@ -57,7 +57,7 @@ In this version of `another_function` we add a parameter:
 Try running this program; you should get the following output:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 [DEBUG]                                 (raw: 5)
 ```
 
@@ -83,10 +83,10 @@ parameters. The first parameter is named `x` and is an `felt252`. The second is
 named `y` and is type `felt252` too. The function then prints the content of the felt `x` and then the content of the felt `y`.
 
 Let’s try running this code. Replace the program currently in your _functions_
-project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run`:
+project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run --available-gas=200000000`:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 [DEBUG]                                 (raw: 5)
 [DEBUG]                                 (raw: 6)
 ```
@@ -142,7 +142,7 @@ to another variable, as the following code tries to do; you’ll get an error:
 When you run this program, the error you’ll get looks like this:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 error: Missing token TerminalRParen.
  --> src/lib.cairo:2:14
     let x = (let y = 6);
@@ -215,7 +215,7 @@ Cairo. Note that the function’s return type is specified too, as `-> u32`. Try
 running this code; the output should look like this:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 [DEBUG]                                 (raw: 5)
 ```
 

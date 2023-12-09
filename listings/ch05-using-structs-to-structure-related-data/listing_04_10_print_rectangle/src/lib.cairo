@@ -1,7 +1,7 @@
 //ANCHOR:all
 //ANCHOR: here
-use core::debug::PrintTrait;
 
+use core::debug::PrintTrait;
 struct Rectangle {
     width: u64,
     height: u64,
@@ -12,6 +12,7 @@ fn main() {
     rectangle.print();
 }
 //ANCHOR_END: here
+
 
 impl RectanglePrintImpl of PrintTrait<Rectangle> {
     fn print(self: Rectangle) {

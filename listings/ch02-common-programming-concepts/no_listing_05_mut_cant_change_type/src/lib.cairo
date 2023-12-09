@@ -1,9 +1,8 @@
 //TAG: does_not_compile
-use core::debug::PrintTrait;
 
 fn main() {
     let mut x: u64 = 2;
-    x.print();
+    println!("x = {}", x);
     x = 100_felt252;
-    x.print()
+    println!("x = {}", x);
 }

@@ -29,12 +29,14 @@ curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh
 
 - Verify installation by running the following command in new terminal session, it should print both Scarb and Cairo language versions, e.g:
 
-  ```bash
-  $ scarb --version
-  scarb 2.3.0-rc1 (58cc88efb 2023-08-23)
-  cairo: 2.2.0 (https://crates.io/crates/cairo-lang-compiler/2.2.0)
-  sierra: 1.3.0
-  ```
+<!-- TODO UPDATE VERSION -->
+
+```bash
+$ scarb --version
+scarb 2.4.0 (58cc88efb 2023-08-23)
+cairo: 2.2.0 (https://crates.io/crates/cairo-lang-compiler/2.2.0)
+sierra: 1.3.0
+```
 
 ## Installing the VSCode extension
 

@@ -1,5 +1,3 @@
-use core::debug::PrintTrait;
-
 #[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,
@@ -9,8 +7,7 @@ struct Rectangle {
 fn main() {
     let mut rec = Rectangle { height: 3, width: 10 };
     flip(ref rec);
-    rec.height.print();
-    rec.width.print();
+    println!("height: {}, width: {}", rec.height, rec.width);
 }
 
 fn flip(ref rec: Rectangle) {

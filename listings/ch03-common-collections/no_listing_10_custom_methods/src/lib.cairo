@@ -2,8 +2,6 @@
 use core::dict::Felt252DictEntryTrait;
 // ANCHOR_END: imports
 
-use core::debug::PrintTrait;
-
 // ANCHOR: custom_get
 fn custom_get<T, +Felt252DictValue<T>, +Drop<T>, +Copy<T>>(
     ref dict: Felt252Dict<T>, key: felt252
@@ -23,7 +21,7 @@ fn custom_get<T, +Felt252DictValue<T>, +Drop<T>, +Copy<T>>(
 // ANCHOR_END: custom_get
 
 // ANCHOR: custom_insert
-fn custom_insert<T, +Felt252DictValue<T>, +Destruct<T>, +PrintTrait<T>, +Drop<T>>(
+fn custom_insert<T, +Felt252DictValue<T>, +Destruct<T>, +Drop<T>>(
     ref dict: Felt252Dict<T>, key: felt252, value: T
 ) {
     // Get the last entry associated with `key`
