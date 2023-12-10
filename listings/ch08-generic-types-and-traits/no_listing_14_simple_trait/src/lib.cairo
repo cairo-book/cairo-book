@@ -14,8 +14,10 @@ trait Summary {
 
 //ANCHOR: impl
 impl NewsArticleSummary of Summary {
-     fn summarize(self: @NewsArticle) -> ByteArray{
+    fn summarize(self: @NewsArticle) -> ByteArray {
         format!("{:?} by {:?} ({:?})", self.headline, self.author, self.location)
-     }
+    }
 }
 //ANCHOR_END: impl
+
+

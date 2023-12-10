@@ -113,7 +113,7 @@ because those types don’t implement `Summary`. -->
 
 <!-- TODO multiple trait bounds -->
 
-<!-- TODO: Using trait bounds to conditionnaly implement methods -->
+<!-- TODO: Using trait bounds to conditionally implement methods -->
 
 ## Implementing a trait, without writing its declaration.
 
