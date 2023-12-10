@@ -1,8 +1,13 @@
 # Traits in Cairo
 
-Traits specify functionality blueprints that can be implemented. The blueprint specification includes a set of function signatures containing type annotations for the parameters and return value. This sets a standard to implement the specific functionality.
+A trait defines functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way.
+We can use _trait bounds_ to specify that a generic type can be any type that has certain behavior.
+
+> Note: Note: Traits are similar to a feature often called interfaces in other languages, although with some differences.
 
 ## Defining a Trait
+
+A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.
 
 To define a trait, you use the keyword `trait` followed by the name of the trait in `PascalCase` then the function signatures in a pair of curly braces.
 
