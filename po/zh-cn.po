@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-12-10 22:37+0800\n"
+"PO-Revision-Date: 2023-12-11 00:45+0800\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -20953,10 +20953,11 @@ msgid ""
 "If the compiler version you're using is older than the one used by Starkli and you encounter a `compiler-version` error while using the command above, you can specify a compiler "
 "version to use in the command by adding the `--compiler-version x.y.z` flag."
 msgstr ""
+"如果你使用的编译器版本旧于Starkli使用的版本，并且在使用上述命令时遇到了 `compiler-version` 错误，你可以通过在命令中添加 `--compiler-version x.y.z` 标志来指定要使用的编译器版本。"
 
 #: src/ch99-01-04-01-voting-contract.md:301
 msgid "If you're still encountering issues with the compiler version, try upgrading Starkli using the command: `starkliup` to make sure you're using the latest version of starkli."
-msgstr ""
+msgstr "如果你仍然遇到编译器版本的问题，请尝试使用以下命令来升级 Starkli：`starkliup`，以确保你正在使用 starkli 的最新版本。"
 
 #: src/ch99-01-04-01-voting-contract.md:303
 msgid ""
@@ -21320,7 +21321,7 @@ msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:9
 msgid "On Starknet, it's important to note that the messaging system is **asynchronous** and **asymmetric**."
-msgstr ""
+msgstr "在Starknet上，重要的是要注意消息系统是**异步**和**非对称**。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:11
 msgid ""
@@ -21330,6 +21331,9 @@ msgid ""
 "to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must "
 "then consume the message manually via a transaction on L1."
 msgstr ""
+"- **异步性**：这意味着在你的合约代码（无论是Solidity还是Cairo）中，在合约代码执行期间，你不能等待另一个链上发送消息的结果。\n"
+"- **非对称性**：从以太坊发送消息到Starknet（`L1->L2`）是由Starknet序列器完全自动化的，这意味着消息会自动传递到L2上的目标合约。然而，当从Starknet发送消息到以太坊（`L2->L1`）时，"
+"Starknet序列器仅在L1上发送消息的哈希。然后，你必须通过L1上的交易来手动消耗该消息。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:14
 msgid "Let's dive into the details."
@@ -21421,6 +21425,8 @@ msgid ""
 "Once a message is detected in a log, the sequencer prepares and executes a `L1HandlerTransaction` to call the function on the target L2 contract. This takes up to 1-2 minutes to be "
 "done (few seconds for ethereum block to be mined, and then the sequencer must build and execute the transaction)."
 msgstr ""
+"对于 `L1->L2` 的消息，Starknet序列器不断监听以太坊上的 `StarknetMessaging` 合约发出的日志。\n"
+"一旦在日志中检测到消息，序列器会准备并执行 `L1HandlerTransaction`，以调用目标L2合约上的函数。这个过程可能需要1-2分钟（几秒钟用于挖掘以太坊区块，然后序列器必须构建并执行事务）。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:54
 msgid ""
@@ -21428,6 +21434,8 @@ msgid ""
 "contracts execution\n"
 "to the `StarknetCore` contract on L1, where they can then be consumed once the block they belong to is proven and verified on Ethereum (which for now is around 3-4 hours)."
 msgstr ""
+"`L2->L1` 的消息是由在L2上执行的合约准备的，并且是生成的区块的一部分。当序列器生成一个区块时，序列器将把合约执行准备的每个消息的哈希发送到L1上的 `StarknetCore` 合约，一旦它们所属的区块"
+"在以太坊上被证明和验证（目前大约需要3-4小时），这些消息就可以被消耗。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:57
 msgid "## Sending messages from Ethereum to Starknet"
@@ -21448,6 +21456,8 @@ msgid ""
 "The `_snMessaging` is a state variable already initialized with the address of the `StarknetMessaging` contract. You can check those addresses [here](https://docs.starknet.io/"
 "documentation/tools/important_addresses/)."
 msgstr ""
+"让我们看一个简单的合约，来自[这个教程](https://github.com/glihm/starknet-messaging-dev/blob/main/solidity/src/ContractMsg.sol) 我们希望向Starknet发送一条消息。\n"
+"`_snMessaging` 是一个已经初始化为 `StarknetMessaging` 合约地址的状态变量。你可以在[这里](https://docs.starknet.io/documentation/tools/important_addresses/)检查这些地址。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:64
 msgid ""
@@ -21474,6 +21484,28 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```js\n"
+"// Sends a message on Starknet with a single felt.\n"
+"function sendMessageFelt(\n"
+"    uint256 contractAddress,\n"
+"    uint256 selector,\n"
+"    uint256 myFelt\n"
+")\n"
+"    external\n"
+"    payable\n"
+"{\n"
+"    // We \"serialize\" here the felt into a payload, which is an array of uint256.\n"
+"    uint256[] memory payload = new uint256[](1);\n"
+"    payload[0] = myFelt;\n"
+"\n"
+"    // msg.value must always be >= 20_000 wei.\n"
+"    _snMessaging.sendMessageToL2{value: msg.value}(\n"
+"        contractAddress,\n"
+"        selector,\n"
+"        payload\n"
+"    );\n"
+"}\n"
+"```"
 
 #: src/ch99-04-00-L1-L2-messaging.md:87
 msgid ""
@@ -21481,26 +21513,29 @@ msgid ""
 "Please note that if you want to send more complex data you can. Just be aware that your cairo contract will only understand `felt252` data type. So you must ensure that the "
 "serialization of your data into the `uint256` array follow the cairo serialization scheme."
 msgstr ""
+"该函数向 `StarknetMessaging` 合约发送一个包含单个 felt 值的消息。\n"
+"请注意，如果你想发送更复杂的数据，可以这样做。只是要注意，你的 Cairo 合约只能理解 `felt252` 数据类型。因此，你必须确保将数据序列化为 `uint256` 数组时，要按照 Cairo 的序列化方案进行操"
+"作。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:90
 msgid ""
 "It's important to note that we have `{value: msg.value}`. In fact, the minimum value we've to send here is `20k wei`, due to the fact that the `StarknetMessaging` contract will "
 "register\n"
 "the hash of our message in the storage of Ethereum."
-msgstr ""
+msgstr "这里需要注意的是我们有 `{value: msg.value}`。实际上，我们在这里必须发送的最小值是 `20,000 wei` ，因为 `StarknetMessaging` 合约会在以太坊的存储中注册我们消息的哈希。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:93
 msgid ""
 "Additionally to those `20k wei`, as the `L1HandlerTransaction` that will be executed by the sequencer is not bound to any account (the message originates from L1), you must also "
 "ensure\n"
 "that you pay enough fees on L1 for your message to be deserialized and processed on L2."
-msgstr ""
+msgstr "除了这 `20,000 wei` 之外，由于由序列器执行的 `L1HandlerTransaction` 不绑定到任何账户（消息源自 L1），你还必须确保在 L1 上支付足够的费用，以便你的消息在 L2 上被反序列化和处理。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:96
 msgid ""
 "The fees of the `L1HandlerTransaction` are computed in a regular manner as it would be done for an `Invoke` transaction. For this, you can profile\n"
 "the gas consumption using `starkli` or `snforge` to estimate the cost of your message execution."
-msgstr ""
+msgstr "`L1HandlerTransaction` 的费用计算方式与 `Invoke` 交易的计算方式相同。为此，你可以使用 `starkly` 或 `snforge` 对gas消耗进行分析，估算你的消息执行成本。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:99
 msgid "The signature of the `sendMessageToL2` is:"
@@ -21526,7 +21561,7 @@ msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:109
 msgid "The parameters are as follow:"
-msgstr ""
+msgstr "参数如下："
 
 #: src/ch99-04-00-L1-L2-messaging.md:111
 msgid ""
@@ -21535,6 +21570,9 @@ msgid ""
 "- `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in solidity). For this reason we've inserted the input `myFelt` into the array.\n"
 "  This is why we need to insert the input data into an array."
 msgstr ""
+"- `toAddress` : 在 L2 上将被调用的合约地址。\n"
+"- `selector` : 位于 `toAddress` 上此合约函数的选择器。这个选择器（函数）必须具有 `#[l1_handler]` 属性以便被调用。\n"
+"- `payload` : payload 始终是一个 `felt252` 数组（在 Solidity 中由 `uint256` 表示）。因此，我们将输入 `myFelt` 插入到数组中。这就是为什么我们需要将输入数据插入到数组中的原因。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:116
 msgid "On the Starknet side, to receive this message, we have:"
@@ -21552,6 +21590,15 @@ msgid ""
 "    }\n"
 "```"
 msgstr ""
+"```rust\n"
+"    #[l1_handler]\n"
+"    fn msg_handler_felt(ref self: ContractState, from_address: felt252, my_felt: felt252) {\n"
+"        assert(from_address == self.allowed_message_sender.read(), 'Invalid message sender');\n"
+"\n"
+"        // You can now use the data, automatically deserialized from the message payload.\n"
+"        assert(my_felt == 123, 'Invalid value');\n"
+"    }\n"
+"```"
 
 #: src/ch99-04-00-L1-L2-messaging.md:128
 msgid ""
@@ -21590,6 +21637,14 @@ msgid ""
 "        }\n"
 "```"
 msgstr ""
+"```rust\n"
+"        fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {\n"
+"            // Note here, we \"serialize\" my_felt, as the payload must be\n"
+"            // a `Span<felt252>`.\n"
+"            starknet::send_message_to_l1_syscall(to_address.into(), array![my_felt].span())\n"
+"                .unwrap();\n"
+"        }\n"
+"```"
 
 #: src/ch99-04-00-L1-L2-messaging.md:145
 msgid "We simply build the payload and pass it, along with the L1 contract address, to the syscall function."
@@ -21601,6 +21656,8 @@ msgid ""
 "Please be aware that the L2 contract address expected by the `consumeMessageFromL2` is the contract address of the account that sends the transaction on L2,\n"
 "and not the address of the contract executing the `send_message_to_l1_syscall`."
 msgstr ""
+"在L1上，重要的部分是构建与L2上相同的payload。然后，通过传递L2合约地址和payload来调用 `consumeMessageFromL2`。\n"
+"请注意，`consumeMessageFromL2` 期望的L2合约地址是在L2上发送交易的账户的合约地址，而不是执行 `send_message_to_l1_syscall` 的合约的地址。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:151
 msgid ""
@@ -21625,12 +21682,34 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```js\n"
+"function consumeMessageFelt(\n"
+"    uint256 fromAddress,\n"
+"    uint256[] calldata payload\n"
+")\n"
+"    external\n"
+"{\n"
+"    let messageHash = _snMessaging.consumeMessageFromL2(fromAddress, payload);\n"
+"\n"
+"    // You can use the message hash if you want here.\n"
+"\n"
+"    // We expect the payload to contain only a felt252 value (which is a uint256 in solidity).\n"
+"    require(payload.length == 1, \"Invalid payload\");\n"
+"\n"
+"    uint256 my_felt = payload[0];\n"
+"\n"
+"    // From here, you can safely use `my_felt` as the message has been verified by StarknetMessaging.\n"
+"    require(my_felt > 0, \"Invalid value\");\n"
+"}\n"
+"```"
 
 #: src/ch99-04-00-L1-L2-messaging.md:172
 msgid ""
 "As you can see, in this context we don't have to verify which contract from L2 is sending the message. But we are actually using the `consumeMessageFromL2` to validate the inputs "
 "(the sender address on L2 and the payload) to ensure we are only consuming valid messages."
 msgstr ""
+"正如你所看到的，在这个上下文中，我们无需验证L2中的哪个合约正在发送消息。但实际上，我们使用 `consumeMessageFromL2` 来验证输入（在L2上的发送者地址和payload），以确保我们只处理有效的消"
+"息。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:174
 msgid ""
@@ -21643,7 +21722,7 @@ msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:176
 msgid "## Cairo Serde"
-msgstr ""
+msgstr "## Cairo Serde"
 
 #: src/ch99-04-00-L1-L2-messaging.md:178
 msgid ""
@@ -21659,7 +21738,7 @@ msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:182
 msgid "So for instance, an actual `uint256` value in Cairo is represented by a struct like:"
-msgstr ""
+msgstr "例如，在Cairo中，一个实际的 `uint256` 值表示为类似以下的结构："
 
 #: src/ch99-04-00-L1-L2-messaging.md:184
 msgid ""
@@ -21681,7 +21760,7 @@ msgstr ""
 msgid ""
 "which will be serialized as **TWO** felts, one for the `low`, and one for the `high`. This means that to send only one `u256` to Cairo, you'll need to send a payload from L1 with "
 "**TWO** values."
-msgstr ""
+msgstr "这将被序列化为**两个** felts ，一个用于 `low` ，另一个用于 `high` 。这意味着要向Cairo发送一个 `u256`，你需要从L1发送一个包含**两个**值的 payload。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:193
 msgid ""
@@ -21692,6 +21771,12 @@ msgid ""
 "payload[1] = 0;\n"
 "```"
 msgstr ""
+"```js\n"
+"uint256[] memory payload = new uint256[](2);\n"
+"// Let's send the value 1 as a u256 in cairo: low = 1, high = 0.\n"
+"payload[0] = 1;\n"
+"payload[1] = 0;\n"
+"```"
 
 #: src/ch99-04-00-L1-L2-messaging.md:200
 msgid ""
@@ -21701,7 +21786,7 @@ msgstr "如果你想了解更多关于消息机制的信息，可以访问 [Star
 
 #: src/ch99-04-00-L1-L2-messaging.md:202
 msgid "You can also find a [detailed guide here](https://github.com/glihm/starknet-messaging-dev) to test the messaging in local."
-msgstr ""
+msgstr "你也可以在这里找到[详细的教程](https://github.com/glihm/starknet-messaging-dev) 来在本地测试消息传递。"
 
 #: src/ch99-04-00-L1-L2-messaging.md:204
 msgid "<footer id=\"last-change\">Last change: 2023-11-22</footer>"
@@ -22987,6 +23072,8 @@ msgid ""
 "the basic building blocks developers need to start Cairo programs and writing\n"
 "smart contracts."
 msgstr ""
+"Cairo预设是一个常用模块、函数、数据类型和特性的集合，它们会自动引入到Cairo crate中每个模块的作用域中，无需显式的导入语句。Cairo的预设提供了开发者开始编写Cairo程序和智能合约所需的基本"
+"构建块。"
 
 #: src/appendix-05-common-types-and-traits-and-cairo-prelude.md:11
 msgid ""
@@ -23004,6 +23091,14 @@ msgid ""
 "allows you to use `ArrayTrait::append()` or the `Default` trait without bringing\n"
 "them explicitly into scope."
 msgstr ""
+"核心库预设定义在 corelib crate 的[lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.2.0/corelib/src/lib.cairo)文件中，包含了Cairo的基本数据类型、traits、操作符和实用函数。其"
+"中包括：\n"
+"- 数据类型：felts、bools、arrays、dicts等。\n"
+"- Traits：用于算术、比较、序列化的行为。\n"
+"- 操作符：算术、逻辑、位运算符。\n"
+"- 实用函数：用于数组、映射、包装等的辅助函数。\n"
+"核心库预设提供了基本的Cairo程序所需的基本编程构造和操作，无需显式导入元素。由于核心库预设被自动导入，其内容可在任何Cairo crate中使用，无需显式导入。这避免了重复工作，提供了更好的开发"
+"体验。这就是为什么你可以在不显式引入的情况下使用 `ArrayTrait::append()` 或 `Default` 特性的原因。"
 
 #: src/appendix-05-common-types-and-traits-and-cairo-prelude.md:25
 msgid "### List of common types and traits"
@@ -23014,7 +23109,7 @@ msgid ""
 "The following section provides a brief overview of commonly used types and\n"
 "traits when developing Cairo programs. Most of these are included in the\n"
 "prelude and not required to be imported explicitly - but not all of them."
-msgstr ""
+msgstr "以下部分简要概述了在开发Cairo程序时常用的类型和特性。大多数这些都包含在预设中，无需显式导入 - 但并非全部。"
 
 #: src/appendix-05-common-types-and-traits-and-cairo-prelude.md:31
 msgid ""
