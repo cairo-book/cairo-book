@@ -22,7 +22,8 @@ fn test_increment() {
     counter.increment();
     counter.increment();
 
-    assert(counter.get_counter() == 1, 'result should be 1');
+    assert_eq!(counter.get_counter(), 2);
 }
 //ANCHOR_END: test
+
 

@@ -32,3 +32,4 @@ mod CounterComponent {
 }
 //ANCHOR_END: component
 
+

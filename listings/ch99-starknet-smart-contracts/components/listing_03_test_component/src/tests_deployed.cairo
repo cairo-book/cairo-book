@@ -18,7 +18,7 @@ mod test_deployed {
     #[available_gas(20000000)]
     fn test_constructor() {
         let counter = setup_counter();
-        assert(counter.get_counter() == 0, 'counter should be 0');
+        assert_eq!(counter.get_counter(), 0);
     }
 
     #[test]
@@ -26,6 +26,6 @@ mod test_deployed {
     fn test_increment() {
         let counter = setup_counter();
         counter.increment();
-        assert(counter.get_counter() == 1, 'counter should be 1');
+        assert_eq!(counter.get_counter(), 1);
     }
 }
