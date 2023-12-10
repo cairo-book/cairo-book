@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-12-11 00:45+0800\n"
+"PO-Revision-Date: 2023-12-11 02:20+0900\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -3533,7 +3533,7 @@ msgstr "## 数组"
 
 #: src/ch03-01-arrays.md:3
 msgid "An array is a collection of elements of the same type. You can create and use array methods by importing the `array::ArrayTrait` trait."
-msgstr "一个数组是相同类型元素的集合。你可以通过导入`array::ArrayTrait`特质来创建和使用数组方法。"
+msgstr "一个数组是相同类型元素的集合。你可以通过导入`array::ArrayTrait`trait来创建和使用数组方法。"
 
 #: src/ch03-01-arrays.md:5
 msgid ""
@@ -4301,9 +4301,9 @@ msgid ""
 "operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, "
 "for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct](/appendix-03-derivable-traits.md#drop-and-destruct)."
 msgstr ""
-"除 `Drop<T>` 之外，`Destruct<T>` 特质代表了另一种将实例移出作用域的方法。这两者之间的主要区别在于 `Drop<T>` 被视为一个 no-op 操作，这意味着它不会产生新的 CASM，而 `Destruct<T>` 没有这"
-"个限制。唯一主动使用`Destruct<T>`特性的类型是`Felt252Dict<T>`，对于其他类型`Destruct<T>`和`Drop<T>`是同义词。你可以在[Drop and Destruct](/appendix-03-derivable-traits.md#drop and-"
-"destruct)中阅读更多关于这些特质的信息。"
+"除 `Drop<T>` 之外，`Destruct<T>` trait代表了另一种将实例移出作用域的方法。这两者之间的主要区别在于 `Drop<T>` 被视为一个 no-op 操作，这意味着它不会产生新的 CASM，而 `Destruct<T>` 没有"
+"这个限制。唯一主动使用`Destruct<T>`特性的类型是`Felt252Dict<T>`，对于其他类型`Destruct<T>`和`Drop<T>`是同义词。你可以在[Drop and Destruct](/appendix-03-derivable-traits.md#drop and-"
+"destruct)中阅读更多关于这些trait的信息。"
 
 #: src/ch03-02-dictionaries.md:157
 msgid "Later in [Dictionaries as Struct Members](#dictionaries-as-struct-members), we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type."
@@ -4620,7 +4620,7 @@ msgid ""
 "To compensate this, you can wrap your type inside a `Nullable<T>`."
 msgstr ""
 "`Felt252Dict<T>`的一个限制我们还没有讨论过，那就是 `Felt252DictValue<T>` trait。\n"
-"该特质定义了 `zero_default` 方法，当字典中不存在某个值时，就会调用该方法。\n"
+"该trait定义了 `zero_default` 方法，当字典中不存在某个值时，就会调用该方法。\n"
 "一些常见的数据类型（如大多数无符号整数、`bool` 和 `felt252`）实现了该方法，但更复杂的数据类型，如数组、结构体（包括 `u256`）和核心库中的其他类型，则没有实现该方法。\n"
 "这就意味着，将不受原生支持的类型封装成字典并不是一件简单的事情，因为您需要编写一些trait的实现，才能使这些数据类型成为有效的字典值类型。\n"
 "为了弥补这一不足，您可以将您的类型封装在 `Nullable<T>`中。"
@@ -6947,14 +6947,13 @@ msgid "# Defining and Instantiating Structs"
 msgstr "# 结构体的定义和实例化"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:3
-#, fuzzy
 msgid ""
 "Structs are similar to tuples, discussed in the [Data Types](ch02-02-data-types.md) section, in that both hold multiple related values. Like tuples, the pieces of a struct can be "
 "different types. Unlike with tuples, in a struct you’ll name each piece of data so it’s clear what the values mean. Adding these names means that structs are more flexible than "
 "tuples: you don’t have to rely on the order of the data to specify or access the values of an instance."
 msgstr ""
 "结构体与[数据类型](ch02-02-data-types.md)一节中讨论的元组类似，它们都包含多个相关的值。和元组一样，结构体的每一部分可以是不同类型。但不同于元组，结构体需要命名各部分数据以便能清楚的表"
-"明其值的意义。由于有了这些名字，结构体比元组更灵活：不需要依赖顺序来指定或访问实例中的值。"
+"明其值的意义。由于有了这些命名，结构体比元组更灵活：不需要依赖顺序来指定或访问实例中的值。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:5
 msgid ""
@@ -7194,13 +7193,12 @@ msgid "## Using the Field Init Shorthand"
 msgstr "## 使用字段初始化简写语法"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:118
-#, fuzzy
 msgid ""
 "Because the parameter names and the struct field names are exactly the same in Listing 5-4, we can use the field init shorthand syntax to rewrite `build_user` so it behaves exactly "
 "the same but doesn’t have the repetition of `username` and `email`, as shown in Listing 5-5."
 msgstr ""
-"因为示例 5-4 中的参数名与字段名都完全相同，我们可以使用字段初始化简写语法（field init shorthand）来重写 `build_user`，这样其行为与之前完全相同，不过无需重复 `username` 和 `email` 了，"
-"如示例 5-5 所示。"
+"因为示例 5-4 中的参数名与字段名都完全相同，我们可以使用字段初始化简写语法（field init shorthand）来重写 `build_user`。如示例 5-5 所示，重写后其行为与之前完全相同，不过无需重复 "
+"`username` 和 `email` 了。"
 
 #: src/ch05-01-defining-and-instantiating-structs.md:122
 msgid ""
@@ -10149,7 +10147,7 @@ msgid ""
 "On the other hand, when bringing in structs, enums, traits, and other items with `use`,\n"
 "it’s idiomatic to specify the full path. Listing 7-8 shows the idiomatic way\n"
 "to bring the core library’s `ArrayTrait` trait into the scope."
-msgstr "另一方面，使用 `use` 引入结构体、枚举和其他项时，习惯是指定它们的完整路径。示例 7-8 展示了将核心库的 `ArrayTrait` 特质带入作用域。"
+msgstr "另一方面，使用 `use` 引入结构体、枚举和其他项时，习惯是指定它们的完整路径。示例 7-8 展示了将核心库的 `ArrayTrait` trait带入作用域。"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:108
 msgid ""
@@ -10637,7 +10635,7 @@ msgstr ""
 
 #: src/ch08-00-generic-types-and-traits.md:5
 msgid "Functions, structs, enums and traits can incorporate generic types as part of their definition instead of a concrete type like `u32` or `ContractAddress`."
-msgstr "函数、结构体、枚举和特征可以将泛型作为其定义的一部分，而不是像`u32`或`ContractAddress`这样的具体类型。"
+msgstr "函数、结构体、枚举和trait可以将泛型作为其定义的一部分，而不是像`u32`或`ContractAddress`这样的具体类型。"
 
 #: src/ch08-00-generic-types-and-traits.md:7
 msgid "Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication."
@@ -10667,8 +10665,8 @@ msgid ""
 "generics when defining functions, structs, enums, traits, implementations and methods! In this chapter we are going to take a look at how to effectively use generic types with all of "
 "them."
 msgstr ""
-"我们可以使用泛型为像函数签名或结构体这样的项创建定义，这样它们就可以用于多种不同的具体数据类型。在Cairo中，我们可以在定义函数、结构、枚举、特征、实现和方法时使用泛型！在本章中，我们将"
-"看看在这些被提到的领域中如何有效地使用泛型。"
+"我们可以使用泛型为像函数签名或结构体这样的项创建定义，这样它们就可以用于多种不同的具体数据类型。在Cairo中，我们可以在定义函数、结构、枚举、trait、实现和方法时使用泛型！在本章中，我们"
+"将看看在这些被提到的领域中如何有效地使用泛型。"
 
 #: src/ch08-01-generic-data-types.md:5
 msgid "## Generic Functions"
@@ -11543,7 +11541,7 @@ msgstr "在上面的例子中，`self`是一个特殊参数。当使用名称为
 
 #: src/ch08-02-traits-in-cairo.md:64
 msgid "When the `ShapeGeometry` trait is implemented, the function `area` from the `ShapeGeometry` trait can be called in two ways:"
-msgstr "当 \"ShapeGeometry \"特质被实现时，\"ShapeGeometry \"特质中的函数 \"area \"可以通过两种方式被调用："
+msgstr "当 \"ShapeGeometry \"trait被实现时，\"ShapeGeometry \"trait中的函数 \"area \"可以通过两种方式被调用："
 
 #: src/ch08-02-traits-in-cairo.md:66
 msgid ""
@@ -11643,7 +11641,7 @@ msgstr "## 泛型Traits"
 msgid ""
 "Usually we want to write a trait when we want multiple types to implement a functionality in a standard way. However, in the example above the signatures are static and cannot be "
 "used for multiple types. To do this, we use generic types when defining traits."
-msgstr "通常情况下，当我们希望多个类型以标准的方式实现一个功能时，我们要写一个trait。然而，在上面的例子中，签名是静态的，不能用于多种类型。为了做到这一点，我们在定义特质时使用泛型。"
+msgstr "通常情况下，当我们希望多个类型以标准的方式实现一个功能时，我们要写一个trait。然而，在上面的例子中，签名是静态的，不能用于多种类型。为了做到这一点，我们在定义trait时使用泛型。"
 
 #: src/ch08-02-traits-in-cairo.md:114
 msgid "In the example below, we use generic type `T` and our method signatures can use this alias which can be provided during implementation."
@@ -13475,7 +13473,7 @@ msgstr "我们需要在每个测试文件的作用域中引入被测试的函数
 
 #: src/ch09-02-test-organization.md:84
 msgid "Then, to run all of our integration tests, we can just add a filter to only run tests whose path contains \"integration_tests\"."
-msgstr ""
+msgstr "然后，为了运行我们所有的集成测试，我们可以添加一个过滤器来仅运行路径包含“integration_tests”的测试。"
 
 #: src/ch09-02-test-organization.md:86
 msgid ""
@@ -13828,7 +13826,7 @@ msgstr "## `ResultTrait`"
 msgid ""
 "The `ResultTrait` trait provides methods for working with the `Result<T, E>` enum, such as unwrapping values, checking whether the `Result` is `Ok` or `Err`, and panicking with a "
 "custom message. The `ResultTraitImpl` implementation defines the logic of these methods."
-msgstr "`ResultTrait`特征提供了处理`Result<T, E>`枚举的方法，例如解包值，检查`Result`是`Ok`还是`Err`，以及用自定义的消息进行panic。`ResultTraitImpl`实现定义了这些方法的逻辑。"
+msgstr "`ResultTrait`trait提供了处理`Result<T, E>`枚举的方法，例如解包值，检查`Result`是`Ok`还是`Err`，以及用自定义的消息进行panic。`ResultTraitImpl`实现定义了这些方法的逻辑。"
 
 #: src/ch10-02-recoverable-errors.md:24
 msgid ""
@@ -13894,7 +13892,7 @@ msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:46
 msgid "Finally, the `is_ok` and `is_err` methods are utility functions provided by the `ResultTrait` trait to check the variant of a `Result` enum value."
-msgstr "最后，`is_ok`和`is_err`方法是`ResultTrait`特征提供的实用函数，用于检查`Result`枚举值的成员。"
+msgstr "最后，`is_ok`和`is_err`方法是`ResultTrait`trait提供的实用函数，用于检查`Result`枚举值的成员。"
 
 #: src/ch10-02-recoverable-errors.md:48
 msgid ""
@@ -14521,15 +14519,15 @@ msgid ""
 "types like structs, deriving `Hash` allows them to be hashed easily using the hash function of your choice - given that all of the struct's fields are themselves hashable. You cannot "
 "derive the `Hash` trait on a struct that contains un-hashable values, such as `Array<T>` or a `Felt252Dict<T>`, even if `T` itself is hashable."
 msgstr ""
-"核心库使哈希操作变得简单。`Hash` 特征适用于所有可以转换为 `felt252`的类型，包括 `felt252`本身。对于像结构体这样更复杂的类型，派生 `Hash`允许它们使用您选择的哈希函数进行哈希 - 只要结构"
-"体的所有字段本身都是可哈希的。即使 `T`1 本身可哈希，您也无法在包含不可哈希值的结构体上派生 `Hash`特征，例如 `Array<T>` 或 `Felt252Dict<T>`。"
+"核心库使哈希操作变得简单。`Hash` trait适用于所有可以转换为 `felt252`的类型，包括 `felt252`本身。对于像结构体这样更复杂的类型，派生 `Hash`允许它们使用您选择的哈希函数进行哈希 - 只要结"
+"构体的所有字段本身都是可哈希的。即使 `T`1 本身可哈希，您也无法在包含不可哈希值的结构体上派生 `Hash`trait，例如 `Array<T>` 或 `Felt252Dict<T>`。"
 
 #: src/ch11-03-hash.md:23
 msgid ""
 "The `Hash` trait is accompanied by the `HashStateTrait` that defines the basic methods to work with hashes. They allow you to initialize a hash state that will contain the temporary "
 "values of the hash after each application of the hash function; update the hash state, and finalize it when the computation is completed. `HashStateTrait` is defined as follows:"
 msgstr ""
-"`Hash`特征伴随着 `HashStateTrait`，它定义了用于处理哈希的基本方法。它们允许您初始化一个哈希状态，其中将包含哈希函数每次应用后哈希的临时值；更新哈希状态，并在计算完成后将其最终确定。"
+"`Hash`trait伴随着 `HashStateTrait`，它定义了用于处理哈希的基本方法。它们允许您初始化一个哈希状态，其中将包含哈希函数每次应用后哈希的临时值；更新哈希状态，并在计算完成后将其最终确定。"
 "`HashStateTrait`定义如下："
 
 #: src/ch11-03-hash.md:25
@@ -14568,7 +14566,7 @@ msgstr ""
 msgid ""
 "To use hashes in your code, you must first import the relevant traits and functions. In the following example, we will demonstrate how to hash a struct using both the Pedersen and "
 "Poseidon hash functions."
-msgstr "要在代码中使用哈希，您必须首先导入相关的特征和函数。在以下示例中，我们将演示如何使用 Pedersen 和 Poseidon 哈希函数对结构体进行哈希处理。"
+msgstr "要在代码中使用哈希，您必须首先导入相关的trait和函数。在以下示例中，我们将演示如何使用 Pedersen 和 Poseidon 哈希函数对结构体进行哈希处理。"
 
 #: src/ch11-03-hash.md:42
 msgid ""
@@ -14618,7 +14616,7 @@ msgstr ""
 
 #: src/ch11-03-hash.md:60
 msgid "As our struct derives the trait HashTrait, we can call the function as follow for Poseidon hashing :"
-msgstr "由于我们的结构体派生了 HashTrait 特征，我们可以使用以下方式调用 Poseidon 哈希函数："
+msgstr "由于我们的结构体派生了 HashTrait 这个trait，我们可以使用以下方式调用 Poseidon 哈希函数："
 
 #: src/ch11-03-hash.md:62
 msgid ""
@@ -14738,7 +14736,7 @@ msgstr ""
 
 #: src/ch11-03-hash.md:117
 msgid "First let us import the following trait and function :"
-msgstr "首先，让我们引入以下特征和函数："
+msgstr "首先，让我们引入以下trait和函数："
 
 #: src/ch11-03-hash.md:119
 msgid ""
@@ -14758,7 +14756,7 @@ msgstr ""
 msgid ""
 "Now we define the structure, as you might have notice we didn't derived the Hash trait. If you try to derive the\n"
 "Hash trait on this structure it will rise an error because the structure contains a field not hashable."
-msgstr "现在，我们来定义结构体。正如您可能注意到的，我们没有派生 Hash 特征。如果您尝试在这个结构体上派生 Hash 特征，它会引发错误，因为结构体包含一个不可哈希的字段。"
+msgstr "现在，我们来定义结构体。正如您可能注意到的，我们没有派生 Hash trait。如果您尝试在这个结构体上派生 Hash trait，它会引发错误，因为结构体包含一个不可哈希的字段。"
 
 #: src/ch11-03-hash.md:128
 msgid ""
@@ -15177,7 +15175,7 @@ msgstr "## 一个简单Starknet合约剖析"
 
 #: src/ch99-01-02-a-simple-contract.md:7
 msgid "Let's consider the following contract to present the basics of a Starknet contract. It might not be easy to understand it all at once, but we will go through it step by step:"
-msgstr "让我们通过下面的合同来了解Starknet合约的基本内容。可能一下子很难理解，但是我们将一步一步地进行讲解："
+msgstr "让我们通过下面的合约来了解Starknet合约的基本内容。可能一下子很难理解，但是我们将一步一步地进行讲解："
 
 #: src/ch99-01-02-a-simple-contract.md:9
 msgid ""
@@ -15491,7 +15489,7 @@ msgstr ""
 
 #: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:15
 msgid "Luckily, we'll be answering all these questions in this chapter. Let's consider the following example contract that we'll be using throughout this chapter:"
-msgstr "幸运的是，我们将在本章中回答所有这些问题。下面是我们在本章中将使用的合同示例："
+msgstr "幸运的是，我们将在本章中回答所有这些问题。下面是我们在本章中将使用的合约示例："
 
 #: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:17
 msgid ""
@@ -15717,7 +15715,7 @@ msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:5
 msgid "Storage variables in Starknet contracts are stored in a special struct called `Storage`:"
-msgstr "Starknet合同中的存储变量被存储在一个特殊的结构中，称为`Storage`："
+msgstr "Starknet合约中的存储变量被存储在一个特殊的结构中，称为`Storage`："
 
 #: src/ch99-01-03-01-contract-storage.md:7
 msgid ""
@@ -17080,8 +17078,8 @@ msgid ""
 "implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ContractAddress`, etc. implement the `Store` "
 "trait and can thus be stored without further action."
 msgstr ""
-"`Store` 特征，定义在 `starknet::storage_access`  模块中，用于指定类型如何在存储中存储。为了将类型存储在存储中，它必须实现 `Store` 特征。大多数来自核心库的类型，例如无符号整数 (`u8`, "
-"`u128`, `u256`...),、`felt252`、`bool`、`ContractAddress` 等都实现了 `Store` 特征，因此无需进一步操作即可存储。"
+"`Store` trait，定义在 `starknet::storage_access`  模块中，用于指定类型如何在存储中存储。为了将类型存储在存储中，它必须实现 `Store` trait。大多数来自核心库的类型，例如无符号整数 "
+"(`u8`, `u128`, `u256`...),、`felt252`、`bool`、`ContractAddress` 等都实现了 `Store` trait，因此无需进一步操作即可存储。"
 
 #: src/ch99-01-03-01-contract-storage.md:670
 msgid "But what if you wanted to store a type that you defined yourself, such as an enum or a struct? In that case, you have to explicitly tell the compiler how to store this type."
@@ -17306,7 +17304,7 @@ msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:778
 msgid "Similarly, Enums can be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait."
-msgstr "类似地，枚举也可以在实现 `Store` 特征的情况下写入存储，只要所有关联类型也实现 `Store` 特征，就可以简单地推导它。"
+msgstr "类似地，枚举也可以在实现 `Store` trait的情况下写入存储，只要所有关联类型也实现 `Store` trait，就可以简单地推导它。"
 
 #: src/ch99-01-03-01-contract-storage.md:780
 msgid ""
@@ -17654,7 +17652,7 @@ msgid ""
 msgstr ""
 "存储在映射中的变量的存储地址根据 [存储地址](#storage-addresses) 部分的描述进行计算。\n"
 "\n"
-"如果映射的键是一个结构体，则结构体的每个元素都构成一个键。此外，结构体应该实现 `Hash` 特征，可以使用 `#[derive(Hash)]`  属性派生。例如，如果您的结构体有两个字段，则地址将是 "
+"如果映射的键是一个结构体，则结构体的每个元素都构成一个键。此外，结构体应该实现 `Hash` trait，可以使用 `#[derive(Hash)]`  属性派生。例如，如果您的结构体有两个字段，则地址将是 "
 "`h(h(sn_keccak(variable_name),k_1),k_2)` - 其中 `k_1`  和 `k_2`  是结构体这两个字段的值。"
 
 #: src/ch99-01-03-01-contract-storage.md:940
@@ -17894,8 +17892,8 @@ msgid ""
 "the compiler to generate a trait definition for the implementation block. This allows you to get rid of the boilerplate code of defining a trait and implementing it for the "
 "implementation block. We will see more about this in the [next section](./ch99-01-03-04-reducing-boilerplate.md)."
 msgstr ""
-"> 等等，这个`#[generate_trait]`属性是什么？这个实现的特质定义在哪里？嗯，`#[generate_trait]`属性是一个特殊的属性，它告诉编译器为实现块生成一个特质定义。这允许你摆脱为实现块定义特质和"
-"实现特质的模板代码。我们将在[下一节](./ch99-01-03-04-reducing-boilerplate.md)中看到更多关于这方面的内容。"
+"> 等等，这个`#[generate_trait]`属性是什么？这个实现的trait定义在哪里？嗯，`#[generate_trait]`属性是一个特殊的属性，它告诉编译器为实现块生成一个trait定义。这允许你摆脱为实现块定义trait"
+"和实现trait的模板代码。我们将在[下一节](./ch99-01-03-04-reducing-boilerplate.md)中看到更多关于这方面的内容。"
 
 #: src/ch99-01-03-02-contract-functions.md:98
 msgid ""
@@ -18481,7 +18479,7 @@ msgid ""
 "implementation of the trait defining the interface of the component."
 msgstr ""
 "组件外部逻辑的实际实现是在标记为`#[embeddable_as(name)]`的`impl`代码块中完成的。\n"
-"通常，这个`impl`块将是一个定义组件接口的特征的实现。"
+"通常，这个`impl`块将是一个定义组件接口的trait的实现。"
 
 #: src/ch99-01-05-00-components.md:55
 msgid ""
@@ -18771,7 +18769,7 @@ msgid ""
 msgstr ""
 "`#[embeddable_as]`属性用于将 impl 标记为可嵌入到合约。\n"
 "它允许我们指定将在合约中引用此组件。\n"
-"在这种情况下，组件将在嵌入它的合同中被视为`Ownable` 。"
+"在这种情况下，组件将在嵌入它的合约中被视为`Ownable` 。"
 
 #: src/ch99-01-05-00-components.md:193
 msgid ""
@@ -19719,7 +19717,7 @@ msgid ""
 "As mentioned previously, traits annotated with the `#[starknet::interface]` attribute automatically generate a dispatcher and a trait on compilation.\n"
 "Our `IERC20` interface is expanded into something like this:"
 msgstr ""
-"如前所述，使用 `#[starknet::interface]` 属性注释的特质会在编译时自动生成一个调度器和一个trait。\n"
+"如前所述，使用 `#[starknet::interface]` 属性注释的trait会在编译时自动生成一个调度器和一个trait。\n"
 "我们的  `IERC20` 接口扩展至如下："
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:19
@@ -20291,7 +20289,7 @@ msgstr "<footer id=\"last-change\">Last change: 2023-08-04</footer>"
 
 #: src/ch99-01-04-01-voting-contract.md:1
 msgid "# Deploying and Interacting with a Voting contract"
-msgstr "# 部署表决合同并与之互动"
+msgstr "# 部署表决合约并与之互动"
 
 #: src/ch99-01-04-01-voting-contract.md:3
 msgid ""
@@ -20731,7 +20729,7 @@ msgid ""
 "`katana` is designed to support local development by the [Dojo team](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md). It will allow you to do everything you "
 "need to do with Starknet, but locally. It is a great tool for development and testing."
 msgstr ""
-"`katana`旨在支持[Dojo 团队](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md)的本地开发。通过它，您可以在本地完成星网所需的一切工作。它是开发和测试的绝佳工具。"
+"`katana`旨在支持[Dojo 团队](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md)的本地开发。通过它，您可以在本地完成Starknet所需的一切工作。它是开发和测试的绝佳工具。"
 
 #: src/ch99-01-04-01-voting-contract.md:208
 msgid "To install `katana` from the source code, please refer to the [Local Development with Katana](https://book.starknet.io/chapter_3/katana.html) chapter of the Starknet Book."
@@ -21019,7 +21017,7 @@ msgstr ""
 msgid ""
 "In this case, the contract has been deployed at an specific address: `0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349`. This address will be different for you. We "
 "will use this address to interact with the contract."
-msgstr "在本例中，合同已部署到特定地址：`0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349`。您应该会看到不同的地址。我们将使用此地址与合约进行交互。"
+msgstr "在本例中，合约已部署到特定地址：`0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349`。您应该会看到不同的地址。我们将使用此地址与合约进行交互。"
 
 #: src/ch99-01-04-01-voting-contract.md:323
 msgid "### Voter Eligibility Verification"
@@ -21035,7 +21033,7 @@ msgstr "在我们的投票合约中，我们有两个函数来验证投票人的
 msgid ""
 "The `is_voter_registered` function checks whether a particular address is registered as an eligible voter in the contract. The `voter_can_vote` function, on the other hand, checks "
 "whether the voter at a specific address is currently eligible to vote, i.e., they are registered and haven't voted already."
-msgstr "`is_voter_registered`函数检查特定地址是否在合同中登记为合格投票人。另一方面，`voter_can_vote`函数会检查特定地址的投票人当前是否有资格投票，即他们是否已登记且尚未投票。"
+msgstr "`is_voter_registered`函数检查特定地址是否在合约中登记为合格投票人。另一方面，`voter_can_vote`函数会检查特定地址的投票人当前是否有资格投票，即他们是否已登记且尚未投票。"
 
 #: src/ch99-01-04-01-voting-contract.md:329
 msgid ""
@@ -22985,7 +22983,7 @@ msgstr "除了 `PartialEq` trait，标准库还提供了 `PartialOrd` 和 `Ord` 
 
 #: src/appendix-03-derivable-traits.md:181
 msgid "The `PartialOrd` trait allows for comparison between instances of a type for ordering, thereby enabling the <, <=, >, and >= operators."
-msgstr "`PartialOrd`特质允许在一个类型的实例之间进行排序比较，从而使得我们可以使用 <、<=、> 和 >= 操作符。"
+msgstr "`PartialOrd`trait允许在一个类型的实例之间进行排序比较，从而使得我们可以使用 <、<=、> 和 >= 操作符。"
 
 #: src/appendix-03-derivable-traits.md:183
 msgid "When `PartialOrd` is derived on structs, two instances are ordered by comparing each field in turn."
@@ -23150,7 +23148,7 @@ msgstr ""
 "251).                                                                                          |\n"
 "| `ContractAddress`         | `starknet::ContractAddress`                           | `ContractAddress` 是一种用于表示智能合约地址的类"
 "型                                                                                                                    |\n"
-"| `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` 是对 `ContractAddress` 类型实现的`Zeroable` 特征。它用于检查`t:"
+"| `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` 是对 `ContractAddress` 类型实现的`Zeroable` trait。它用于检查`t:"
 "ContractAddress` 的值是否为零。|\n"
 "| `contract_address_const`  | `starknet::contract_address_const`                    | `contract_address_const!` 是一个函数，允许实例化常量合约地址"
 "值。                                                                              |\n"
