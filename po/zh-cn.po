@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-12-10 21:51+0800\n"
+"PO-Revision-Date: 2023-12-10 22:37+0800\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -1736,7 +1736,7 @@ msgid ""
 "But when y does not divide x, you may get a surprising result: For example, since `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`, the value of `1 / 2` in Cairo is `(P+1)/2` (and not 0 or 0.5), as "
 "it satisfies the above equation."
 msgstr ""
-"在 Cairo，`x/y` 的结果被定义为总是满足方程式 `(x / y) * y == x`。如果 y 作为整数可以整除 x ，你将得到 Cairo 的预期结果（例如���`6 / 2` 确实会得到`3`）。\n"
+"在 Cairo，`x/y` 的结果被定义为总是满足方程式 `(x / y) * y == x`。如果 y 作为整数可以整除 x ，你将得到 Cairo 的预期结果（例如�����`6 / 2` 确实会得到`3`）。\n"
 "但是当 y 不能整除 x 时，你可能会得到一个令人惊讶的结果：\n"
 "例如，由于 `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`，在 Cairo 中 `1 / 2` 的值是 `(P+1)/2`（而不是0或0.5），因为它满足上述公式。"
 
@@ -4881,7 +4881,7 @@ msgstr ""
 msgid ""
 "Our new type `UserDatabase<T>` represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members "
 "are:"
-msgstr "我们的新类型`UserDatabase<T>`表示用户数据库。它用泛型表示用户的余额，给使用我们的数据类型的人提供了很大的灵活性。它的两个成员是："
+msgstr "我们的新类型`UserDatabase<T>`表示用户数据库。它用泛型表示用户的余额，给使用我们的数据类型的人提���了很大的灵活性。它的两个成员是："
 
 #: src/ch03-02-dictionaries.md:416
 msgid ""
@@ -5276,7 +5276,7 @@ msgstr ""
 
 #: src/ch03-03-custom-data-structures.md:63
 msgid "### Implementing a dynamic array in Cairo"
-msgstr "## 在Cairo中实现动态数组"
+msgstr "## 在Cairo中实现���态数组"
 
 #: src/ch03-03-custom-data-structures.md:65
 msgid ""
@@ -13079,7 +13079,7 @@ msgstr "当你到了需要检查被忽略的测试结果的时候，而且你有
 
 #: src/ch09-01-how-to-write-tests.md:559
 msgid "## Testing recursive functions or loops"
-msgstr ""
+msgstr "## 测试递归函数或循环"
 
 #: src/ch09-01-how-to-write-tests.md:561
 msgid ""
@@ -13087,6 +13087,8 @@ msgid ""
 "and can help you benchmark the efficiency of your implementations. To do so, you must add the `#[available_gas(<Number>)]` attribute on the test function. The following example shows "
 "how to use it:"
 msgstr ""
+"在测试递归函数或循环时，必须为测试提供可消耗的最大gas。这样可以防止运行无限循环或消耗过多gas，还可以帮助对您的代码实现效率进行基准测试。为此，必须在测试函数中添加 "
+"`#[available_gas(<Number>)]` 属性。下面的示例展示了如何使用该属性："
 
 #: src/ch09-01-how-to-write-tests.md:565
 msgid ""
@@ -13146,11 +13148,11 @@ msgstr ""
 
 #: src/ch09-01-how-to-write-tests.md:592
 msgid "## Benchmarking the gas usage of a specific operation"
-msgstr ""
+msgstr "## 测定特定操作的gas使用量"
 
 #: src/ch09-01-how-to-write-tests.md:594
 msgid "When you want to benchmark the gas usage of a specific operation, you can use the following pattern in your test function."
-msgstr ""
+msgstr "如果要对特定操作的gas用量进行基准测试，可以在测试函数中使用以下模式。"
 
 #: src/ch09-01-how-to-write-tests.md:596
 msgid ""
@@ -13170,7 +13172,7 @@ msgstr ""
 
 #: src/ch09-01-how-to-write-tests.md:603
 msgid "The following example shows how to use it to test the gas function of the `sum_n` function above."
-msgstr ""
+msgstr "下面的示例展示了如何使用它来测试上述 `sum_n` 函数的gas用量。"
 
 #: src/ch09-01-how-to-write-tests.md:605
 msgid ""
@@ -13238,7 +13240,7 @@ msgstr ""
 
 #: src/ch09-01-how-to-write-tests.md:636
 msgid "The value printed when running `scarb cairo-test` is the amount of gas that was consumed by the operation benchmarked."
-msgstr ""
+msgstr "运行 \"scarb cairo-test \"时打印的值是基准运行所消耗的gas。"
 
 #: src/ch09-01-how-to-write-tests.md:638
 msgid ""
@@ -13268,7 +13270,7 @@ msgstr ""
 msgid ""
 "Here, the gas usage of the `sum_n` function is 96760 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 98030, due to some extra "
 "steps required to run the entire test function."
-msgstr ""
+msgstr "这里，\"sum_n \"函数的gas用量为 96760（十六进制数的十进制表示法）。由于运行整个测试功能需要一些额外步骤，因此测试消耗的gas总量略高，为 98030。"
 
 #: src/ch09-01-how-to-write-tests.md:651 src/ch09-02-test-organization.md:97
 msgid "<footer id=\"last-change\">Last change: 2023-09-22</footer>"
@@ -13284,8 +13286,8 @@ msgid ""
 "test private functions. Although Cairo doesn't implement the concept of public/private functions/fields yet, it's good practice to start organizing your code as if it were. "
 "Integration tests use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test."
 msgstr ""
-"我们可以将测试分为两个主要类别：单元测试和集成测试。单元测试是小型且更加专注的测试，一次只测试一个模块的功能，并且可以测试私有函数。尽管 Cairo 目前还没有实现公共/私有函数和字段的概"
-"念，但按照这样的方式组织代码是一个良好的实践。集成测试则使用代码的公共接口，像任何外部代码一样使用，可能会在一个测试中涉及多个模块。"
+"我们把测试主要分成两类：单元测试和集成测试。单元测试小而专注，每次测试一个模块，可以测试私有函数。虽然 Cairo 还没有实现公有/私有函数/字段的概念，但像这样组织代码是一个很好的习惯。集成"
+"测试像其他任何外部代码一样使用您的代码，只使用公共接口，并在每个测试中可能使用多个模块。"
 
 #: src/ch09-02-test-organization.md:5
 msgid "Writing both kinds of tests is important to ensure that the pieces of your library are doing what you expect them to, separately and together."
@@ -13344,14 +13346,14 @@ msgstr ""
 "    #[test]\n"
 "    fn it_works() {\n"
 "        let result = 2 + 2;\n"
-"        assert(result == 4, ‘result is not 4’);\n"
+"        assert(result == 4, 'result is not 4');\n"
 "    }\n"
 "}\n"
 "```"
 
 #: src/ch09-02-test-organization.md:30 src/ch09-02-test-organization.md:59
 msgid "<span class=\"caption\">Filename: src/lib.cairo</span>"
-msgstr "<span class=\"caption\">文件名： src/lib.cairo</span>"
+msgstr "<span class=\"caption\">文件名: src/lib.cairo</span>"
 
 #: src/ch09-02-test-organization.md:32
 msgid ""
@@ -13359,7 +13361,7 @@ msgid ""
 "option is `test`, which is provided by Cairo for compiling and running tests. By using the `cfg` attribute, Cairo compiles our test code only if we actively run the tests with `scarb "
 "cairo-test`. This includes any helper functions that might be within this module, in addition to the functions annotated with `#[test]`."
 msgstr ""
-"属性`cfg`代表配置，告诉Cairo只有在给定的配置选项的情况下才应该包含下面的项目。在本例中，配置选项是`test`，它由Cairo提供，用于编译和运行测试。通过使用`cfg`属性，Cairo只有在我们用"
+"`cfg`属性代表配置，告诉Cairo只有在给定的配置选项的情况下才应该包含下面的项目。在本例中，配置选项是`test`，它由Cairo提供，用于编译和运行测试。通过使用`cfg`属性，Cairo只有在我们用"
 "`scarb cairo-test`主动运行测试时才会编译我们的测试代码。这包括任何可能在这个模块中的辅助函数，以及用`#[test]`标注的函数。"
 
 #: src/ch09-02-test-organization.md:34
@@ -13435,11 +13437,11 @@ msgstr ""
 
 #: src/ch09-02-test-organization.md:66
 msgid "<span class=\"caption\">Filename: src/tests.cairo</span>"
-msgstr "<span class=\"caption\">文件名：structs.cairo</span>"
+msgstr "<span class=\"caption\">文件名：src/tests.cairo</span>"
 
 #: src/ch09-02-test-organization.md:68
 msgid "Enter the code in Listing 9-11 into the _src/tests/integration_test.cairo_ file:"
-msgstr "将示例9-11中的代码输入到 _tests/integration_test.cairo_ 文件："
+msgstr "将示例9-11中的代码输入到 _src/tests/integration_test.cairo_ 文件："
 
 #: src/ch09-02-test-organization.md:70
 msgid ""
@@ -13465,7 +13467,7 @@ msgstr ""
 
 #: src/ch09-02-test-organization.md:80
 msgid "<span class=\"caption\">Filename: src/tests/integration_test.cairo</span>"
-msgstr "<span class=\"caption\">文件名：test/integration_test.cairo</span>"
+msgstr "<span class=\"caption\">文件名：src/tests/integration_test.cairo</span>"
 
 #: src/ch09-02-test-organization.md:82
 msgid "We need to bring our tested functions into each test file scope. For that reason we add `use adder::it_adds_two` at the top of the code, which we didn’t need in the unit tests."
@@ -14452,7 +14454,7 @@ msgstr "编译器将解释为 `const a: felt252 = 8`"
 
 #: src/ch11-03-hash.md:1
 msgid "# Hashes"
-msgstr ""
+msgstr "# 哈希"
 
 #: src/ch11-03-hash.md:3
 msgid ""
@@ -14460,12 +14462,14 @@ msgid ""
 "is deterministic, meaning that the same input will always produce the same hash value. Hash functions are a fundamental component in various fields, including data storage, "
 "cryptography, and data integrity verification - and are very often when developing smart contracts, especially when working with Merkle trees."
 msgstr ""
+"哈希本质上是一个将任意长度的输入数据（通常称为消息）转换为固定大小值的过程，该值通常称为“哈希”。这种转换是确定性的，这意味着相同的输入将始终生成相同的哈希值。哈希函数是各种领域的基"
+"石，包括数据存储、密码学和数据完整性验证 - 并且在开发智能合约时经常使用，尤其是在使用 Merkle 树时。"
 
 #: src/ch11-03-hash.md:5
 msgid ""
 "In this chapter, we will present the two hash functions implemented in natively in the Cairo library : `Poseidon` and `Pedersen`. We will discuss about when and how to use them, and "
 "see examples with cairo programs."
-msgstr ""
+msgstr "本章，我们将介绍 Cairo 库中原生实现的两种哈希函数：Poseidon 和 Pedersen。我们将讨论何时以及如何使用它们，并通过 Cairo 程序展示示例。"
 
 #: src/ch11-03-hash.md:7
 msgid "### Hash functions in Cairo"
@@ -14473,7 +14477,7 @@ msgstr "### Cairo中的哈希函数"
 
 #: src/ch11-03-hash.md:9
 msgid "The Cairo core library provides two hash functions: Pedersen and Poseidon."
-msgstr ""
+msgstr "Cairo 核心库提供了两种哈希函数：Pedersen 和 Poseidon。"
 
 #: src/ch11-03-hash.md:11
 msgid ""
@@ -14482,6 +14486,8 @@ msgid ""
 "Problem (ECDLP), which is a problem so hard to solve that it ensures the security of the hash function. The difficulty of reversing these operations is what makes the Pedersen hash "
 "function secure and reliable for cryptographic purposes."
 msgstr ""
+"Pedersen 哈希函数是一种基于椭圆曲线密码学的加密算法。这些函数对椭圆曲线上的点进行操作——本质上是使用这些点的位置进行数学运算——这在一个方向上很容易做到，但却很难反过来操作。这种单向性是"
+"基于椭圆曲线离散对数问题 (ECDLP)，它是一个很难的问题，可以确保哈希函数的安全性。无法逆转这些操作的困难性使 Pedersen 哈希函数在加密用途上安全可靠。"
 
 #: src/ch11-03-hash.md:13
 msgid ""
@@ -14489,10 +14495,12 @@ msgid ""
 "STARKs (so, Cairo). Poseidon uses a method called a 'sponge construction,' which soaks up data and transforms it securely using a process known as the Hades permutation. Cairo's "
 "version of Poseidon is based on a three element state permutation with [specific parameters](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt)"
 msgstr ""
+"Poseidon 是一系列哈希函数，作为代数电路非常高效。它的设计特别适用于零知识证明系统，包括 STARKs (所以也适用于 Cairo)。Poseidon 使用一种称为“sponge construction”的方法，该方法吸收数据并"
+"使用称为 Hades 置换的过程安全地转换数据。Cairo 版本的 Poseidon 基于具有三元素状态置换和 [特定参数]: https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt 的设计。"
 
 #: src/ch11-03-hash.md:15
 msgid "#### When to use them ?"
-msgstr ""
+msgstr "#### 何时使用它们？"
 
 #: src/ch11-03-hash.md:17
 msgid ""
@@ -14500,6 +14508,8 @@ msgid ""
 "a storage mapping on Starknet). However, as Poseidon is cheaper and faster than Pedersen when working with STARK proofs system, it's now the recommended hash function to use in Cairo "
 "programs."
 msgstr ""
+"Pedersen 是 Starknet 上最初使用的哈希函数，现在仍用于计算存储中变量的地址（例如，LegacyMap 使用 Pedersen 对 Starknet 上存储映射的键进行哈希）。然而，由于 Poseidon 在处理 STARK 证明系"
+"统时比 Pedersen 更便宜、更快，因此现在它已成为 Cairo 程序中推荐使用的哈希函数。"
 
 #: src/ch11-03-hash.md:19
 msgid "### Working with Hashes"
@@ -14511,12 +14521,16 @@ msgid ""
 "types like structs, deriving `Hash` allows them to be hashed easily using the hash function of your choice - given that all of the struct's fields are themselves hashable. You cannot "
 "derive the `Hash` trait on a struct that contains un-hashable values, such as `Array<T>` or a `Felt252Dict<T>`, even if `T` itself is hashable."
 msgstr ""
+"核心库使哈希操作变得简单。`Hash` 特征适用于所有可以转换为 `felt252`的类型，包括 `felt252`本身。对于像结构体这样更复杂的类型，派生 `Hash`允许它们使用您选择的哈希函数进行哈希 - 只要结构"
+"体的所有字段本身都是可哈希的。即使 `T`1 本身可哈希，您也无法在包含不可哈希值的结构体上派生 `Hash`特征，例如 `Array<T>` 或 `Felt252Dict<T>`。"
 
 #: src/ch11-03-hash.md:23
 msgid ""
 "The `Hash` trait is accompanied by the `HashStateTrait` that defines the basic methods to work with hashes. They allow you to initialize a hash state that will contain the temporary "
 "values of the hash after each application of the hash function; update the hash state, and finalize it when the computation is completed. `HashStateTrait` is defined as follows:"
 msgstr ""
+"`Hash`特征伴随着 `HashStateTrait`，它定义了用于处理哈希的基本方法。它们允许您初始化一个哈希状态，其中将包含哈希函数每次应用后哈希的临时值；更新哈希状态，并在计算完成后将其最终确定。"
+"`HashStateTrait`定义如下："
 
 #: src/ch11-03-hash.md:25
 msgid ""
@@ -14554,7 +14568,7 @@ msgstr ""
 msgid ""
 "To use hashes in your code, you must first import the relevant traits and functions. In the following example, we will demonstrate how to hash a struct using both the Pedersen and "
 "Poseidon hash functions."
-msgstr ""
+msgstr "要在代码中使用哈希，您必须首先导入相关的特征和函数。在以下示例中，我们将演示如何使用 Pedersen 和 Poseidon 哈希函数对结构体进行哈希处理。"
 
 #: src/ch11-03-hash.md:42
 msgid ""
@@ -14562,6 +14576,9 @@ msgid ""
 "to work with. Then the hash state can be updated with the `update(self: HashState, value: felt252) -> HashState` or `update_with(self: S, value: T) -> S` functions as many times as "
 "required. Then the function `finalize(self: HashState) -> felt252` is called on the hash state and it returns the value of the hash as a `felt252`."
 msgstr ""
+"首先，需要根据我们想要使用的哈希函数，使用 `PoseidonTrait::new() -> HashState` 或 `PedersenTrait::new(base: felt252) -> HashState` 初始化哈希状态。然后，可以使用 `update(self: "
+"HashState, value: felt252) -> HashState` 或 `update_with(self: S, value: T) -> S` 函数多次更新哈希状态，具体更新次数取决于需要。最后，使用 `finalize(self: HashState) -> felt252` 函数"
+"完成哈希计算并返回哈希值。"
 
 #: src/ch11-03-hash.md:44
 msgid ""
@@ -14601,7 +14618,7 @@ msgstr ""
 
 #: src/ch11-03-hash.md:60
 msgid "As our struct derives the trait HashTrait, we can call the function as follow for Poseidon hashing :"
-msgstr ""
+msgstr "由于我们的结构体派生了 HashTrait 特征，我们可以使用以下方式调用 Poseidon 哈希函数："
 
 #: src/ch11-03-hash.md:62
 msgid ""
@@ -14653,7 +14670,7 @@ msgstr ""
 
 #: src/ch11-03-hash.md:85
 msgid "And as follow for Pedersen hashing :"
-msgstr ""
+msgstr "同样地，我们也可以使用以下方式调用 Pedersen 哈希函数："
 
 #: src/ch11-03-hash.md:87
 msgid ""
@@ -14707,7 +14724,7 @@ msgstr ""
 
 #: src/ch11-03-hash.md:111
 msgid "### Advanced Hashing: Hashing arrays with Poseidon"
-msgstr ""
+msgstr "### 高级哈希：使用 Poseidon 哈希数组"
 
 #: src/ch11-03-hash.md:113
 msgid ""
@@ -14715,10 +14732,13 @@ msgid ""
 "To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can use the build-in function in poseidon\n"
 "` poseidon_hash_span(mut span: Span<felt252>) -> felt252`. Similarly you can hash `Array<felt252>` by calling `poseidon_hash_span` on its span."
 msgstr ""
+"让我们来看一个哈希包含 `Span<felt252>`.的函数的例子。\n"
+"要哈希 `Span<felt252>` 或包含 `Span<felt252>` 的结构体，您可以使用 poseidon 中的内置函数 ` poseidon_hash_span(mut span: Span<felt252>) -> felt252`。同样，您可以通过对其 span 调用 "
+"`poseidon_hash_span` 来哈希 `Array<felt252>`。"
 
 #: src/ch11-03-hash.md:117
 msgid "First let us import the following trait and function :"
-msgstr ""
+msgstr "首先，让我们引入以下特征和函数："
 
 #: src/ch11-03-hash.md:119
 msgid ""
@@ -14738,7 +14758,7 @@ msgstr ""
 msgid ""
 "Now we define the structure, as you might have notice we didn't derived the Hash trait. If you try to derive the\n"
 "Hash trait on this structure it will rise an error because the structure contains a field not hashable."
-msgstr ""
+msgstr "现在，我们来定义结构体。正如您可能注意到的，我们没有派生 Hash 特征。如果您尝试在这个结构体上派生 Hash 特征，它会引发错误，因为结构体包含一个不可哈希的字段。"
 
 #: src/ch11-03-hash.md:128
 msgid ""
@@ -14767,6 +14787,8 @@ msgid ""
 "In this example, we initialized a HashState (`hash`) and updateted it and then called the function `finalize()` on the\n"
 "HashState to get the computed hash `hash_felt252`. We used the `poseidon_hash_span` on the `Span` of the `Array<felt252>` to compute its hash."
 msgstr ""
+"在这个例子中，我们初始化了一个 HashState (`hash`) 并更新了它，然后在 HashState 上调用了函数 `finalize()` 以获得计算出的哈希 `hash_felt252`。我们使用 `poseidon_hash_span` 对 "
+"`Array<felt252>` 的 `Span` 进行哈希计算，以计算其哈希值。"
 
 #: src/ch11-03-hash.md:141
 msgid ""
@@ -14903,7 +14925,7 @@ msgstr "有关外部合约依赖等更多配置相关的内容，请参阅 [Scar
 
 #: src/ch99-00-starknet-smart-contracts.md:32
 msgid "Each example in this chapter can be used with Scarb."
-msgstr ""
+msgstr "本章中的每个示例都可以与 Scarb 一起使用。"
 
 #: src/ch99-00-starknet-smart-contracts.md:34 src/ch99-01-05-01-components-under-the-hood.md:192 src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:270
 msgid "<footer id=\"last-change\">Last change: 2023-11-04</footer>"
@@ -15909,7 +15931,7 @@ msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:111
 msgid "<span class=\"caption\">A Storage Struct</span>"
-msgstr "<span class=“caption”>存储结构</span>"
+msgstr "<span class=\"caption\">存储用结构体</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:113
 msgid ""
@@ -15924,15 +15946,15 @@ msgstr ""
 msgid ""
 "Each variable stored in the storage struct is stored in a different location in the contract's storage. The storage address of a variable is determined by the variable's name, and "
 "the eventual keys of the variable if it is a [mapping](#storing-mappings)."
-msgstr ""
+msgstr "存储结构中存储的每个变量都存储在合约存储的不同位置。变量的存储地址由变量名决定，如果是映射，则还由变量的最终键决定。"
 
 #: src/ch99-01-03-01-contract-storage.md:118
 msgid "## Storage Addresses"
-msgstr ""
+msgstr "## 存储地址"
 
 #: src/ch99-01-03-01-contract-storage.md:120
 msgid "The address of a storage variable is computed as follows:"
-msgstr ""
+msgstr "存储变量的地址计算方式如下："
 
 #: src/ch99-01-03-01-contract-storage.md:122
 msgid ""
@@ -15943,6 +15965,10 @@ msgid ""
 "- If it is a mapping to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated in the previous point. "
 "Note that 256 field elements is the current limitation on the maximal size of a complex storage value."
 msgstr ""
+"- 如果变量是单个值（不是映射），则地址是变量名 ASCII 编码的 `sn_keccak`  哈希值。`sn_keccak`_是 Starknet 的 Keccak256 哈希函数版本，其输出被截断为 250 位。\n"
+"- 如果变量是[映射](#storing-mappings),，则键为 `k_1,...,k_n`  的值的地址是 `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`，其中 ℎ 是 Pedersen 哈希，最终值取 `mod (2^251) − "
+"256`。\n"
+"- 如果它是映射到复杂值（例如，元组或结构），则此复杂值位于从上一点计算的地址开始的连续段中。请注意，256 个域元素是当前复杂存储值最大大小的限制。"
 
 #: src/ch99-01-03-01-contract-storage.md:126
 msgid "You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value."
@@ -16166,7 +16192,7 @@ msgstr "## 与存储变量交互"
 msgid ""
 "Variables stored in the storage struct can be accessed and modified using the `read` and `write` functions, and you can get their address in storage using the `addr` function. These "
 "functions are automatically generated by the compiler for each storage variable."
-msgstr ""
+msgstr "存储在存储结构中的变量可以使用 `read` 和 `write` 函数进行访问和修改，还可以使用 `addr` 函数获取它们在存储中的地址。这些函数由编译器为每个存储变量自动生成。"
 
 #: src/ch99-01-03-01-contract-storage.md:236
 msgid "To read the value of the `owner` storage variable, which is a single value, we call the `read` function on the `owner` variable, passing in no parameters."
@@ -16384,7 +16410,7 @@ msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:342
 msgid "<span class=\"caption\">Calling the `read` function on the `owner` variable</span>"
-msgstr "<span class=“caption”>调用`owner` 变量上的 `read` 函数</span>"
+msgstr "<span class=\"caption\">调用 `owner` 变量上的 `read` 函数</span>"
 
 #: src/ch99-01-03-01-contract-storage.md:344
 msgid ""
@@ -16613,6 +16639,8 @@ msgid ""
 "To write a value to a storage variable, we call the `write` function passing in the eventual keys the value as arguments. As with the `read` function, the number of arguments depends "
 "on the number of keys - here, we only pass in the value to write to the `owner` variable as it is a simple variable."
 msgstr ""
+"要将值写入存储变量，我们需要调用 `write` 函数，并将其最终键和值作为参数传递。与 read 函数一样，参数的数量取决于键的数量——这里，我们只需要将要写入 `owner`变量的值作为参数，因为它是一个"
+"简单的变量。"
 
 #: src/ch99-01-03-01-contract-storage.md:454
 msgid ""
@@ -17052,16 +17080,19 @@ msgid ""
 "implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ContractAddress`, etc. implement the `Store` "
 "trait and can thus be stored without further action."
 msgstr ""
+"`Store` 特征，定义在 `starknet::storage_access`  模块中，用于指定类型如何在存储中存储。为了将类型存储在存储中，它必须实现 `Store` 特征。大多数来自核心库的类型，例如无符号整数 (`u8`, "
+"`u128`, `u256`...),、`felt252`、`bool`、`ContractAddress` 等都实现了 `Store` 特征，因此无需进一步操作即可存储。"
 
 #: src/ch99-01-03-01-contract-storage.md:670
 msgid "But what if you wanted to store a type that you defined yourself, such as an enum or a struct? In that case, you have to explicitly tell the compiler how to store this type."
-msgstr ""
+msgstr "但是，如果您想存储您自己定义的类型，例如枚举或结构，该怎么办？在这种情况下，您必须明确地告诉编译器如何存储这种类型。"
 
 #: src/ch99-01-03-01-contract-storage.md:672
 msgid ""
 "In our example, we want to store a `Person` struct in storage, which is possible by implementing the `Store` trait for the `Person` type. This can be achieved by simply adding a "
 "`#[derive(starknet::Store)]` attribute on top of our struct definition."
 msgstr ""
+"在我们的例子中，我们想将 `Person` 结构存储在存储中，这可以通过为 `Person` 类型实现 `Store` 特性来实现。这可以通过在结构体定义顶部简单添加 `#[derive(starknet::Store)]` 属性来实现。"
 
 #: src/ch99-01-03-01-contract-storage.md:674
 msgid ""
@@ -17275,7 +17306,7 @@ msgstr ""
 
 #: src/ch99-01-03-01-contract-storage.md:778
 msgid "Similarly, Enums can be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait."
-msgstr ""
+msgstr "类似地，枚举也可以在实现 `Store` 特征的情况下写入存储，只要所有关联类型也实现 `Store` 特征，就可以简单地推导它。"
 
 #: src/ch99-01-03-01-contract-storage.md:780
 msgid ""
@@ -17499,6 +17530,10 @@ msgid ""
 "to the first element.\n"
 "For example, the storage layout for the `owner` variable of type `Person` will result in the following layout:"
 msgstr ""
+"在 Starknet 上，结构会被存储为基本类型序列。结构的元素按照结构定义中的顺序进行存储。结构的第一个元素存储在结构的基地址，该地址根据 [存储地址](#storage-addresses) 中的说明计算，可以通"
+"过调用 `var.address()` 获取，后面的元素则存储在与第一个元素相邻的地址。\n"
+"\n"
+"例如，类型为 `Person` 的 `owner` 变量的存储布局将如下所示："
 
 #: src/ch99-01-03-01-contract-storage.md:890
 msgid ""
@@ -17507,6 +17542,10 @@ msgid ""
 "| name    | owner.address()    |\n"
 "| address | owner.address() +1 |"
 msgstr ""
+"| Fields  | Address            |\n"
+"| ------- | ------------------ |\n"
+"| name    | owner.address()    |\n"
+"| address | owner.address() +1 |"
 
 #: src/ch99-01-03-01-contract-storage.md:895
 msgid "### Enums storage layout"
@@ -17519,6 +17558,9 @@ msgid ""
 "If your variant has an associated value, it's stored starting from the address immediately following the base address.\n"
 "For example, suppose we have the `RegistrationType` enum with the `finite` variant, which carries an associated limit date. The storage layout would look like this:"
 msgstr ""
+"当您存储一个枚举变体时，您实际上存储的是变体的索引和最终的关联值。这个索引从您的枚举的第一个变体开始为 0，并为每个后续变体增加 1。\n"
+"如果您的变体具有关联值，它会从基地址之后的第一个地址开始存储。\n"
+"例如，假设我们有一个带有 `finite` 变体的 `RegistrationType` 枚举，该变体带有关联的截止日期。存储布局将如下所示："
 
 #: src/ch99-01-03-01-contract-storage.md:901
 msgid ""
@@ -17527,6 +17569,10 @@ msgid ""
 "| Variant index (e.g. 1 for finite) | registration_type.address()     |\n"
 "| Associated limit date             | registration_type.address() + 1 |"
 msgstr ""
+"| Element                           | Address                         |\n"
+"| --------------------------------- | ------------------------------- |\n"
+"| Variant index (e.g. 1 for finite) | registration_type.address()     |\n"
+"| Associated limit date             | registration_type.address() + 1 |"
 
 #: src/ch99-01-03-01-contract-storage.md:906
 msgid "## Storage mappings"
@@ -17538,6 +17584,8 @@ msgid ""
 "to look up the associated value in the contract's storage.\n"
 "Mappings do not have a concept of length or whether a key/value pair is set. The only way to remove a mapping is to set its value to the default zero value."
 msgstr ""
+"存储映射类似于哈希表，它们允许将键映射到值。但是，与典型的哈希表不同，不存储键数据本身 - 仅使用其哈希码在合约的存储中查找关联的值。\n"
+"映射没有长度概念，也没有键/值对是否设置的概念。删除映射的唯一方法是将其值设置为默认的零值。"
 
 #: src/ch99-01-03-01-contract-storage.md:911
 msgid ""
@@ -17545,7 +17593,7 @@ msgid ""
 "contract given certain keys. They are thus **only allowed as storage variables**.\n"
 "They cannot be used as parameters or return parameters of contract functions,\n"
 "and cannot be used as types inside structs."
-msgstr ""
+msgstr "映射只用于根据某些键计算合约存储中数据的位置。因此，它们只能作为存储变量使用。它们不能用作合约函数的参数或返回值参数，也不能用作结构体内的类型。"
 
 #: src/ch99-01-03-01-contract-storage.md:916
 msgid ""
@@ -17567,7 +17615,7 @@ msgstr ""
 msgid ""
 "To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,\n"
 "specifying the key and value types."
-msgstr ""
+msgstr "要声明一个映射，请使用尖括号 `<>` 包围的 `LegacyMap`类型，指定键和值类型。"
 
 #: src/ch99-01-03-01-contract-storage.md:926
 msgid ""
@@ -17604,12 +17652,16 @@ msgid ""
 "`#[derive(Hash)]` attribute. For example, if you have struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` - where `k_1` and `k_2` are the values of "
 "the two fields of the struct."
 msgstr ""
+"存储在映射中的变量的存储地址根据 [存储地址](#storage-addresses) 部分的描述进行计算。\n"
+"\n"
+"如果映射的键是一个结构体，则结构体的每个元素都构成一个键。此外，结构体应该实现 `Hash` 特征，可以使用 `#[derive(Hash)]`  属性派生。例如，如果您的结构体有两个字段，则地址将是 "
+"`h(h(sn_keccak(variable_name),k_1),k_2)` - 其中 `k_1`  和 `k_2`  是结构体这两个字段的值。"
 
 #: src/ch99-01-03-01-contract-storage.md:940
 msgid ""
 "Similarly, in the case of a nested mapping such as `LegacyMap((ContractAddress, ContractAddress), u8)`, the address will be computed in the same way: `h(h(sn_keccak(variable_name),"
 "k_1),k_2)`."
-msgstr ""
+msgstr "类似地，对于嵌套映射，例如 `LegacyMap((ContractAddress, ContractAddress), u8)`，地址将以相同的方式计算：`h(h(sn_keccak(variable_name),k_1),k_2)`。"
 
 #: src/ch99-01-03-01-contract-storage.md:942
 msgid ""
@@ -19905,7 +19957,7 @@ msgid ""
 "`IERC20Dispatcher` struct (`name`, `transfer`, etc), passing in the `contract_address` of the contract we want to call in the `IERC20Dispatcher` struct."
 msgstr ""
 "正如您所看到的，我们必须首先导入编译器生成的 `IERC20DispatcherTrait` 和 `IERC20Dispatcher`，这样我们就可以调用为 `IERC20Dispatcher` 结构实现的方法（`name`、`transfer` 等），并在 "
-"`IERC20Dispatcher` 结构中传入我们要调用的合约的 `contract_address` 。"
+"`IERC20Dispatcher` 结构中传���我们要调用的合约的 `contract_address` 。"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:129
 msgid "## Library Dispatcher"
@@ -23430,7 +23482,7 @@ msgid ""
 "itemName=starkware.cairo1&ssr=false), or just search for \"Cairo 1.0\" in the VS Code marketplace.\n"
 "- The extension will work out of the box once you will have [Scarb](./ch01-03-hello-scarb.md) installed."
 msgstr ""
-"- 如果你安装了以前的Cairo 0扩展，你可以禁用/卸载它。\n"
+"- 如果你安装了以前的Cairo 0扩展，你���以禁用/卸载它。\n"
 "- 安装Cairo 1扩展以获得正确的语法高亮和代码导航。你可以通过这个链接下载扩展[here](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1&ssr=false)，或者直接在VS Code市"
 "场上搜索 \"Cairo 1.0\"。\n"
 "- 一旦你安装了[Scarb](./ch01-03-hello-scarb.md)，该扩展就可以立即工作了。"
@@ -24168,7 +24220,7 @@ msgstr "将上面复制的路径更新到Cairo 1.0扩展的`cairo1.languageServe
 #~ msgstr ""
 #~ "> 注意：你会注意到这里有一个`cairo_project.toml`文件。\n"
 #~ "> 这是 通常的Cairo项目的配置文件（即不由Scarb管理）、\n"
-#~ "> 这是运行`cairo-run .`命令来运行crate的代码所需要的。\n"
+#~ "> 这是运行`cairo-run .`命令���运行crate的代码所需要的。\n"
 #~ "> 在Scarb实现这一功能之前，它是必需的。该文件的内容是：\n"
 #~ ">\n"
 #~ "> ```toml\n"
