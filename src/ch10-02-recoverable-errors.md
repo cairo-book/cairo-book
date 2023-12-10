@@ -64,23 +64,14 @@ fn u128_checked_add(a: u128, b: u128) -> Option<u128> {
 Here, it accepts two u128 integers, a and b, and returns an `Option<u128>`. It uses the `Result` returned by `u128_overflowing_add` to determine the success or failure of the addition operation. The match expression checks the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it returns `Option::None` to indicate that the operation has failed due to overflow. The function does not panic in case of an overflow.
 
 Let's take another example demonstrating the use of `unwrap`.
-First we import the necessary modules:
-
-```rust,noplayground
-use core::traits::Into;
-use traits::TryInto;
-use option::OptionTrait;
-use result::ResultTrait;
-use result::ResultTraitImpl;
-```
-
-In this example, the `parse_u8` function takes a `felt252` integer and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`.
 
 ```rust,noplayground
 {{#include ../listings/ch10-error-handling/listing_01/src/lib.cairo:function}}
 ```
 
 <span class="caption">Listing 10-1: Using the Result type</span>
+
+In this example, the `parse_u8` function takes a `felt252` integer and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`.
 
 Our two test cases are:
 

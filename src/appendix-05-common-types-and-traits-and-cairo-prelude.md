@@ -9,7 +9,7 @@ the basic building blocks developers need to start Cairo programs and writing
 smart contracts.
 
 The core library prelude is defined in the
-[lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.2.0/corelib/src/lib.cairo)
+[lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.4.0/corelib/src/lib.cairo)
 file of the corelib crate and contains Cairo's primitive data types, traits,
 operators, and utility functions. This includes: Data types - felts, bools,
 arrays, dicts, etc. Traits - behaviors for arithmetic, comparison, serialization
@@ -21,6 +21,11 @@ imported, its contents are available for use in any Cairo crate without explicit
 imports. This prevents repetition and provides a better devX. This is what
 allows you to use `ArrayTrait::append()` or the `Default` trait without bringing
 them explicitly into scope.
+
+You can choose which prelude to use. For example, adding `edition = "2023_10"` in `scarb.toml` configuration file will provide you november 2023 version of the prelude.
+The compiler currently exposes 2 different versions of the prelude:
+- A general version, with a lot of traits that are made available, corresponding to `edition = "2023_01"`.
+- A restricted version, including the most essential traits needed for general cairo programming, corresponding to `edition = 2023_10`.
 
 ### List of common types and traits
 

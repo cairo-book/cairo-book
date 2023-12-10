@@ -58,7 +58,7 @@ In the example below, we use generic type `T` and our method signatures can use 
 
 ## Managing and using external trait implementations
 
-To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use debug::PrintTrait;` to use the `print()` methods on supported types.
+To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use debug::PrintTrait;` to use the `print()` methods on supported types. All traits included in the prelude don't need to be explicitly imported and are freely accessible.
 
 In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
 If `CircleGeometry` was in a separate module/file `circle` then to use `boundary` on `circ: Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`.
@@ -66,7 +66,7 @@ If `CircleGeometry` was in a separate module/file `circle` then to use `boundary
 If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant implementation is required.
 
 ```rust,noplayground
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 // struct Circle { ... } and struct Rectangle { ... }
 

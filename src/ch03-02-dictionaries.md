@@ -19,7 +19,7 @@ These functions allow us to manipulate dictionaries like in any other language. 
 {{#include ../listings/ch03-common-collections/no_listing_07_intro/src/lib.cairo}}
 ```
 
-The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
+`Felt252DictTrait` trait doesn't need to be explicitly imported as it is included in the prelude. Therefore, all the methods we need to interact with the dictionary are by default in the scope. We can create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and add two individuals, each one with their own balance, using the `insert` method. Finally, we check the balance of our users with the `get` method.
 
 Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
 
@@ -172,7 +172,7 @@ As a finalizing note, these two methods are implemented in a similar way to how 
 ### Dictionaries of types not supported natively
 
 One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`.
-This trait defines the `zero_default` method which is the one that gets called when a value does not exist in the dictionary.
+This trait, included in the prelude, defines the `zero_default` method which is the one that gets called when a value does not exist in the dictionary.
 This is implemented by some common data types, such as most unsigned integers, `bool` and `felt252` - but it is not implemented for more complex ones types such as arrays, structs (including `u256`), and other types from the core library.
 This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations in order to make the data type a valid dictionary value type.
 To compensate this, you can wrap your type inside a `Nullable<T>`.

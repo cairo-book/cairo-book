@@ -119,7 +119,7 @@ Here are some examples of declaring values by putting them between single quotes
 
 ### Type casting
 
-In Cairo, you can convert types scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits, respectively.
+In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits, respectively. These traits are included in the prelude and don't need to be explicitly imported.
 
 The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value.
 

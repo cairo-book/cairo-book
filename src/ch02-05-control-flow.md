@@ -131,7 +131,7 @@ executing the loop. Let's fix the infinite loop by adding a making the stop cond
 The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
 
 ```rust
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 fn main() {
     let mut i: usize = 0;
     loop {
