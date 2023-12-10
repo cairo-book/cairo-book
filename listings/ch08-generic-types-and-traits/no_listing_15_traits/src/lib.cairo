@@ -1,44 +1,64 @@
 use debug::PrintTrait;
 
-#[derive(Drop, Copy)]
-struct Rectangle {
-    height: u64,
-    width: u64,
-}
-
-//ANCHOR: trait
-trait ShapeGeometry {
-    fn boundary(self: Rectangle) -> u64;
-    fn area(self: Rectangle) -> u64;
-}
-//ANCHOR_END: trait
-
-//ANCHOR: impl
-impl RectangleGeometry of ShapeGeometry {
-    fn boundary(self: Rectangle) -> u64 {
-        2 * (self.height + self.width)
+mod aggregator {
+    //ANCHOR: trait
+    trait Summary<T> {
+        fn summarize(self: @T) -> ByteArray;
     }
-    fn area(self: Rectangle) -> u64 {
-        self.height * self.width
+    //ANCHOR_END: trait
+
+    //ANCHOR: impl
+    #[derive(Drop, Clone)]
+    struct NewsArticle {
+        headline: ByteArray,
+        location: ByteArray,
+        author: ByteArray,
+        content: ByteArray,
     }
-}
+
+    impl NewsArticleSummary of Summary<NewsArticle> {
+        fn summarize(self: @NewsArticle) -> ByteArray {
+            format!(
+                "{} by {} ({})", self.headline.clone(), self.author.clone(), self.location.clone()
+            )
+        }
+    }
+
+    #[derive(Drop, Clone)]
+    struct Tweet {
+        username: ByteArray,
+        content: ByteArray,
+        reply: bool,
+        retweet: bool,
+    }
+
+    impl TweetSummary of Summary<Tweet> {
+        fn summarize(self: @Tweet) -> ByteArray {
+            format!("{}: {}", self.username.clone(), self.content.clone())
+        }
+    }
 //ANCHOR_END: impl
+}
 
 //ANCHOR: main
+use aggregator::{Summary, NewsArticle, Tweet};
 fn main() {
-    let rect = Rectangle { height: 5, width: 10 }; // Rectangle instantiation
+    let news = NewsArticle {
+        headline: "Cairo has become the most popular language for developers",
+        location: "Worldwide",
+        author: "Cairo Digger",
+        content: "Cairo is a new programming language for zero-knowledge proofs",
+    };
 
-    // First way, as a method on the struct instance
-    let area1 = rect.area();
-    // Second way, from the implementation
-    let area2 = RectangleGeometry::area(rect);
-    // Third way, from the trait
-    let area3 = ShapeGeometry::area(rect);
+    let tweet = Tweet {
+        username: "EliBenSasson",
+        content: "Crypto is full of short-term maximizing projects. \n @Starknet and @StarkWareLtd are about long-term vision maximization.",
+        reply: false,
+        retweet: false
+    }; // Tweet instantiation
 
-    // `area1` has same value as `area2` and `area3`
-    area1.print();
-    area2.print();
-    area3.print();
+    println!("New article available! {}", news.summarize());
+    println!("1 new tweet: {}", tweet.summarize());
 }
 //ANCHOR_END: main
 
