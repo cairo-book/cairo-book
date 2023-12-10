@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-12-09 13:47+0800\n"
+"PO-Revision-Date: 2023-12-10 21:51+0800\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -8685,12 +8685,11 @@ msgstr ""
 "时，值会进入相关联的代码块并在执行中被使用。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:9
-#, fuzzy
 msgid ""
 "Speaking of coins, let’s use them as an example using match! We can write a function that takes an unknown US coin and, in a similar way as the counting machine, determines which "
 "coin it is and returns its value in cents, as shown in Listing 6-3."
 msgstr ""
-"因为刚刚提到了硬币，让我们用它们来作为一个使用 `match` 的例子！我们可以编写一个函数来获取一个未知的硬币，并以一种类似验钞机的方式，确定它是何种硬币，并返回其价值（美分），如示例5-3所"
+"因为刚刚提到了硬币，让我们用它们来作为一个使用 `match` 的例子！我们可以编写一个函数来获取一个未知的硬币，并以一种类似验钞机的方式，确定它是何种硬币，并返回其价值（美分），如示例6-3所"
 "示。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:11
@@ -8732,9 +8731,8 @@ msgstr ""
 "```"
 
 #: src/ch06-02-the-match-control-flow-construct.md:29
-#, fuzzy
 msgid "Listing 6-3: An enum and a match expression that has the variants of the enum as its patterns"
-msgstr "示例5-3：一个枚举和一个将枚举成员作为其模式的 match 表达式"
+msgstr "示例6-3：一个枚举和一个将枚举成员作为其模式的 match 表达式"
 
 #: src/ch06-02-the-match-control-flow-construct.md:31
 msgid ""
@@ -8772,14 +8770,13 @@ msgid ""
 msgstr "与每个 match 相关的代码是一个表达式，而 match 分支中表达式的结果值是整个 match 表达式被返回的值。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:41
-#, fuzzy
 msgid ""
 "We don’t typically use curly brackets if the match arm code is short, as it is in our example where each arm just returns a value. If you want to run multiple lines of code in a "
 "match arm, you must use curly brackets, with a comma following the arm. For example, the following code prints “Lucky penny!” every time the method is called with a `Coin::Penny`, "
 "but still returns the last value of the block, `1`:"
 msgstr ""
 "如果 match 分支的代码很短，我们通常不使用大括号，就像在我们的示例中一样，每个分支只是返回一个值。如果你想在一个 match 分支中运行多行代码，你必须使用大括号，在 match 分支后面加一个逗"
-"号。例如，下面的代码在每次调用 `Coin::Penny(())` 方法时都会打印出 “Lucky penny!”，但仍然返回区块的最后一个值 `1`："
+"号。例如，下面的代码在每次调用 `Coin::Penny` 方法时都会打印出 “Lucky penny!”，但仍然返回区块的最后一个值 `1`："
 
 #: src/ch06-02-the-match-control-flow-construct.md:43
 msgid ""
@@ -8820,14 +8817,13 @@ msgid "Another useful feature of match arms is that they can bind to the parts o
 msgstr "另一个match分支的有用的特点是它们可以绑定到值中与模式相匹配的部分。这就是如何从枚举成员中提取数值的方法。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:61
-#, fuzzy
 msgid ""
 "As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 "
 "states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our `enum` by changing the `Quarter` variant to include a "
 "`UsState` value stored inside it, which we’ve done in Listing 6-4."
 msgstr ""
 "作为一个例子，让我们修改枚举的一个成员来存放数据。1999 年到 2008 年间，美国在 25 美分的硬币的一侧为 50 个州的每一个都印刷了不同的设计。其他的硬币都没有这种区分州的设计，所以只有这些 "
-"25 美分硬币有特殊的价值。我们可以通过改变 `Quarter` 变量，使其包含一个`UsState` 的值，从而将这个信息添加到我们的 `enum` 中，我们在示例5-4中已经这样做了。"
+"25 美分硬币有特殊的价值。我们可以通过改变 `Quarter` 变量，使其包含一个`UsState` 的值，从而将这个信息添加到我们的 `enum` 中，我们在示例6-4中已经这样做了。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:63
 msgid ""
@@ -8864,9 +8860,8 @@ msgstr ""
 "```"
 
 #: src/ch06-02-the-match-control-flow-construct.md:79
-#, fuzzy
 msgid "Listing 6-4: A `Coin` enum in which the `Quarter` variant also holds a `UsState` value"
-msgstr "列表5-4: 一个 `Coin` 枚举，其中 `Quarter` 变量也持有一个 `UsState` 值"
+msgstr "列表6-4: 一个 `Coin` 枚举，其中 `Quarter` 变量也持有一个 `UsState` 值"
 
 #: src/ch06-02-the-match-control-flow-construct.md:81
 msgid ""
@@ -8942,14 +8937,13 @@ msgstr ""
 "```"
 
 #: src/ch06-02-the-match-control-flow-construct.md:112
-#, fuzzy
 msgid ""
 "If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of "
 "them match until we reach `Coin::Quarter(state)`. At that point, the binding for state will be the value `UsState::Alaska`. We can then use that binding in the `PrintTrait`, thus "
 "getting the inner state value out of the `Coin` enum variant for `Quarter`."
 msgstr ""
-"如果我们调用 `value_in_cents(Coin::quarter(UsState::Alaska(())))`，`coin` 将是 `Coin::quarter(UsState::Alaska())`。当我们将该值与每个匹配臂进行比较时，没有一个匹配，直到我们到达 "
-"`Coin::Quarter(state)`。在这一点上，state 的绑定将是 `UsState::Alaska()` 的值。然后我们可以在 `PrintTrait` 中使用该绑定，从而从 `Coin` 枚举变量中获得 `Quarter` 的内部状态值。"
+"如果我们调用 `value_in_cents(Coin::quarter(UsState::Alaska))`，`coin` 将是 `Coin::quarter(UsState::Alaska)`。当我们将该值与每个匹配臂进行比较时，没有一个匹配，直到我们到达 `Coin::"
+"Quarter(state)`。在这一点上，state 的绑定将是 `UsState::Alaska` 的值。然后我们可以在 `PrintTrait` 中使用该绑定，从而从 `Coin` 枚举变量中获得 `Quarter` 的内部状态值。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:114
 msgid "## Matching with Options"
@@ -8971,9 +8965,8 @@ msgid ""
 msgstr "假设我们想写一个函数，接收一个 `Option<u8>`，如果里面有一个值，就把 `1` 加到这个值上。如果里面没有一个值，这个函数应该返回 `None` 值，并且不试图执行任何操作。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:120
-#, fuzzy
 msgid "This function is very easy to write, thanks to match, and will look like Listing 6-5."
-msgstr "这个函数非常容易编写，这要归功于 match，它看起来像示例5-5。"
+msgstr "这个函数非常容易编写，这要归功于 match，它看起来像示例6-5。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:122
 msgid ""
@@ -9016,11 +9009,10 @@ msgstr ""
 "```"
 
 #: src/ch06-02-the-match-control-flow-construct.md:141
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 6-5: A function that uses a match\n"
 "expression on an `Option<u8>`</span>"
-msgstr "示例5-5：一个在`Option<u8>`上使用匹配表达式的函数"
+msgstr "示例6-5：一个在`Option<u8>`上使用匹配表达式的函数"
 
 #: src/ch06-02-the-match-control-flow-construct.md:144
 msgid "Note that your arms must respect the same order as the enum defined in the `OptionTrait` of the core Cairo lib."
@@ -9068,9 +9060,8 @@ msgstr ""
 "的值上加上 `1`，并创建一个新的 `Option::Some` 值，里面有我们的和 `6` 。因为第一个分支就匹配到了，其他的分支将不再进行比较。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:161
-#, fuzzy
 msgid "Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None`. We enter the match and compare to the first arm:"
-msgstr "现在让我们考虑在我们的主函数中对 `plus_one` 的第二次调用，其中 `x` 是`Option::None(())`。我们进入匹配，并与第一个分支进行比较："
+msgstr "现在让我们考虑在我们的主函数中对 `plus_one` 的第二次调用，其中 `x` 是`Option::None`。我们进入匹配，并与第一个分支进行比较："
 
 #: src/ch06-02-the-match-control-flow-construct.md:167
 msgid "The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we continue to the next arm:"
@@ -9087,9 +9078,8 @@ msgstr ""
 "```"
 
 #: src/ch06-02-the-match-control-flow-construct.md:173
-#, fuzzy
 msgid "It matches! There’s no value to add to, so the program stops and returns the `Option::None` value on the right side of `=>`."
-msgstr "它是匹配的!没有值可以添加，所以程序停止，并返回 `=>` 右边的 `Option::None(())` 值。"
+msgstr "它是匹配的!没有值可以添加，所以程序停止，并返回 `=>` 右边的 `Option::None` 值。"
 
 #: src/ch06-02-the-match-control-flow-construct.md:175
 msgid ""
@@ -9313,12 +9303,11 @@ msgid "## What is the crate root?"
 msgstr "## 什么是crate root？"
 
 #: src/ch07-01-packages-and-crates.md:9
-#, fuzzy
 msgid ""
 "The crate root is the `lib.cairo` source file that the Cairo compiler starts from and makes up the root module of your crate (we’ll explain modules in depth in the [“Defining Modules "
 "to Control Scope”](./ch07-02-defining-modules-to-control-scope.md) section)."
 msgstr ""
-"Crate root根是`lib.cairo`源文件，Cairo编译器从该文件开始，并构成你的crate的根模块（我们将在[“定义模块来控制作用域”](./ch06-02-defining-modules-to-control-scope.md)部分深入解释模块）。"
+"Crate root根是`lib.cairo`源文件，Cairo编译器从该文件开始，并构成你的crate的根模块（我们将在[“定义模块来控制作用域”](./ch07-02-defining-modules-to-control-scope.md)部分深入解释模块）。"
 
 #: src/ch07-01-packages-and-crates.md:11
 msgid "## What is a package?"
@@ -9647,14 +9636,13 @@ msgstr ""
 "后台则是由厨师工作的厨房，洗碗工的工作地点，以及经理做行政工作的地方组成。"
 
 #: src/ch07-02-defining-modules-to-control-scope.md:126
-#, fuzzy
 msgid ""
 "To structure our crate in this way, we can organize its functions into nested\n"
 "modules. Create a new package named `restaurant` by running `scarb new restaurant`; then enter the code in Listing 7-1 into _src/lib.cairo_ to\n"
 "define some modules and function signatures. Here’s the front of house section:"
 msgstr ""
 "我们可以将函数放置到嵌套的模块中，来使我们的 crate 结构与实际的餐厅结构相同。\n"
-"通过运行 `scarb new restaurant`创建一个名为 `restaurant`的新包；然后将示例6-1中的代码输入 _src/lib.cairo_ ，以定义一些模块和函数签名。这里是前台的部分："
+"通过运行 `scarb new restaurant`创建一个名为 `restaurant`的新包；然后将示例7-1中的代码输入 _src/lib.cairo_ ，以定义一些模块和函数签名。这里是前台的部分："
 
 #: src/ch07-02-defining-modules-to-control-scope.md:132
 msgid ""
@@ -9695,11 +9683,10 @@ msgstr ""
 "```"
 
 #: src/ch07-02-defining-modules-to-control-scope.md:150
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-1: A `front_of_house` module containing other\n"
 "modules that then contain functions</span>"
-msgstr "<span class=\"caption\">示例6-1：一个 `front_of_house`模块包含其他的模块，而这些模块又包含了函数</span>"
+msgstr "<span class=\"caption\">示例7-1：一个 `front_of_house`模块包含其他的模块，而这些模块又包含了函数</span>"
 
 #: src/ch07-02-defining-modules-to-control-scope.md:153
 msgid ""
@@ -9733,9 +9720,8 @@ msgid ""
 msgstr "在前面我们提到了，_src/lib.cairo_  叫做 crate 根。之所以这样叫它是因为这个文件的内容在 crate 模块结构的根组成了一个名为 crate 的模块，该结构被称为 模块树（ _module tree_ ）。"
 
 #: src/ch07-02-defining-modules-to-control-scope.md:170
-#, fuzzy
 msgid "Listing 7-2 shows the module tree for the structure in Listing 7-1."
-msgstr "示例6-2显示了示例6-1中结构的模块树。"
+msgstr "示例7-2显示了示例7-1中结构的模块树。"
 
 #: src/ch07-02-defining-modules-to-control-scope.md:172
 msgid ""
@@ -9764,11 +9750,10 @@ msgstr ""
 "```"
 
 #: src/ch07-02-defining-modules-to-control-scope.md:184
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-2: The module tree for the code in Listing\n"
 "6-1</span>"
-msgstr "<span class=\"caption\">示例6-2：示例6-1中代码的模块树</span>"
+msgstr "<span class=\"caption\">示例7-2：示例6-1中代码的模块树</span>"
 
 #: src/ch07-02-defining-modules-to-control-scope.md:187
 msgid ""
@@ -9818,13 +9803,12 @@ msgstr ""
 "绝对路径和相对路径后面都有一个或多个标识符用双冒号（`::`）分开。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:13
-#, fuzzy
 msgid ""
 "To illustrate this notion let's take back our example Listing 7-1 for the restaurant we used in the last chapter. We have a crate named `restaurant` in which we have a module named "
 "`front_of_house` that contains a module named `hosting`. The `hosting` module contains a function named `add_to_waitlist`. We want to call the `add_to_waitlist` function from the "
 "`eat_at_restaurant` function. We need to tell Cairo the path to the `add_to_waitlist` function so it can find it."
 msgstr ""
-"为了说明这个概念，让我们回到我们在上一章使用的餐厅的例子示例6-1。我们有一个名为 `restaurant`的crate，其中有一个名为`front_of_house`的模块，包含一个名为 `hosting`的模块。`hosting`模块"
+"为了说明这个概念，让我们回到我们在上一章使用的餐厅的例子示例7-1。我们有一个名为 `restaurant`的crate，其中有一个名为`front_of_house`的模块，包含一个名为 `hosting`的模块。`hosting`模块"
 "包含一个名为 `add_to_waitlist`的函数。我们想从`eat_at_restaurant`函数中调用`add_to_waitlist`函数。我们需要告诉Cairo `add_to_waitlist`函数的路径，以便它能找到它。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:17
@@ -9884,9 +9868,8 @@ msgstr ""
 "```"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:44
-#, fuzzy
 msgid "<span class=\"caption\">Listing 7-3: Calling the `add_to_waitlist` function using absolute and relative paths</span>"
-msgstr "<span class=\"caption\">示例6-3：使用绝对和相对路径调用`add_to_waitlist`函数</span>"
+msgstr "<span class=\"caption\">示例7-3：使用绝对和相对路径调用`add_to_waitlist`函数</span>"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:46
 msgid ""
@@ -9950,9 +9933,8 @@ msgstr ""
 "```"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:77
-#, fuzzy
 msgid "<span class=\"caption\">Listing 7-4: Calling a function using a relative path starting with super</span>"
-msgstr "<span class=\"caption\">示例6-4：使用以super开头的相对路径调用一个函数</span>"
+msgstr "<span class=\"caption\">示例7-4：使用以super开头的相对路径调用一个函数</span>"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:79
 msgid "Here you can see directly that you access a parent's module easily using `super`, which wasn't the case previously."
@@ -9969,13 +9951,12 @@ msgid ""
 msgstr "不得不编写路径来调用函数显得不便且重复。幸运的是，有一种方法可以简化这个过程：我们可以用`use`关键字创建一个路径的快捷方式，然后在作用域内的其他地方使用这个较短的名字。"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:5
-#, fuzzy
 msgid ""
 "In Listing 7-5, we bring the `restaurant::front_of_house::hosting` module into the\n"
 "scope of the `eat_at_restaurant` function so we only have to specify\n"
 "`hosting::add_to_waitlist` to call the `add_to_waitlist` function in\n"
 "`eat_at_restaurant`."
-msgstr "在示例6-5中，我们把`restaurant::front_of_house::hosting`模块带入到作用域内，所以我们只需要指定 `hosting::add_to_waitlist` 来调用`eat_at_restaurant`中的`add_to_waitlist` 函数。"
+msgstr "在示例7-5中，我们把`restaurant::front_of_house::hosting`模块带入到作用域内，所以我们只需要指定 `hosting::add_to_waitlist` 来调用`eat_at_restaurant`中的`add_to_waitlist` 函数。"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:12
 msgid ""
@@ -10014,12 +9995,11 @@ msgstr ""
 "```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:29
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-5: Bringing a module into scope with\n"
 "`use`</span>"
 msgstr ""
-"<span class=\"caption\">示例 6-5: 用 \"使用 \"将一个模块带入范围。\n"
+"<span class=\"caption\">示例 7-5: 用 \"使用 \"将一个模块带入范围。\n"
 "使用</span>"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:32
@@ -10031,12 +10011,11 @@ msgstr ""
 "效名称，就像在 crate 根中定义了`hosting`模块一样。"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:34
-#, fuzzy
 msgid ""
 "Note that `use` only creates the shortcut for the particular scope in which the `use` occurs. Listing 7-6 moves the `eat_at_restaurant` function into a new\n"
 "child module named `customer`, which is then a different scope than the `use`\n"
 "statement, so the function body won’t compile:"
-msgstr "注意 `use`  只能创建 `use`  所在的特定作用域内的短路径。示例 6-6 将 `eat_at_restaurant` 函数移到一个新的子模块中，这又是一个不同于  `use`  语句的作用域，所以函数体不能编译："
+msgstr "注意 `use`  只能创建 `use`  所在的特定作用域内的短路径。示例 7-6 将 `eat_at_restaurant` 函数移到一个新的子模块中，这又是一个不同于  `use`  语句的作用域，所以函数体不能编译："
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:40
 msgid ""
@@ -10073,11 +10052,10 @@ msgstr ""
 "```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:56
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-6: A `use` statement only applies in the scope\n"
 "it’s in</span>"
-msgstr "<span class=\"caption\">示例6-6：一个 `use`语句只适用于它所在的作用域</span>"
+msgstr "<span class=\"caption\">示例7-6：一个 `use`语句只适用于它所在的作用域</span>"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:59
 msgid ""
@@ -10108,7 +10086,6 @@ msgid "## Creating Idiomatic `use` Paths"
 msgstr "## 创建惯用的 `use` 路径"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:72
-#, fuzzy
 msgid ""
 "In Listing 7-5, you might have wondered why we specified `use\n"
 "restaurant::front_of_house::hosting` and then called `hosting::add_to_waitlist` in\n"
@@ -10116,7 +10093,7 @@ msgid ""
 "the `add_to_waitlist` function to achieve the same result, as in Listing 7-7."
 msgstr ""
 "在示例6-5中，你可能想知道为什么我们指定`restaurant::front_of_house::hosting`，然后调用`eat_at_restaurant`中的`hosting::add_to_waitlist`，而不是通过指定一直到\n"
-"`add_to_waitlist`函数的 `use` 路径来得到相同的结果，如示例6-7。"
+"`add_to_waitlist`函数的 `use` 路径来得到相同的结果，如示例7-7。"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:79
 msgid ""
@@ -10149,14 +10126,12 @@ msgstr ""
 "```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:93
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-7: Bringing the `add_to_waitlist` function\n"
 "into scope with `use`, which is unidiomatic</span>"
-msgstr "<span class=\"caption\">示例6-7：使用 `use` 将 `add_to_waitlist` 函数引入作用域，这并不符合习惯</span>"
+msgstr "<span class=\"caption\">示例7-7：使用 `use` 将 `add_to_waitlist` 函数引入作用域，这并不符合习惯</span>"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:96
-#, fuzzy
 msgid ""
 "Although both Listing 7-5 and 6-7 accomplish the same task, Listing 7-5 is\n"
 "the idiomatic way to bring a function into scope with `use`. Bringing the\n"
@@ -10166,16 +10141,15 @@ msgid ""
 "while still minimizing repetition of the full path. The code in Listing 7-7 is\n"
 "unclear as to where `add_to_waitlist` is defined."
 msgstr ""
-"尽管示例6-5和6-7都完成了相同的任务，但示例 6-5 是使用 use 将函数引入作用域的习惯用法。要想使用 `use` 将函数的父模块引入作用域，我们必须在调用函数时指定父模块，这样可以清晰地表明函数不"
-"是在本地定义的，同时使完整路径的重复度最小化。示例 6-7 中的代码不清楚 `add_to_waitlist` 是在哪里被定义的。"
+"尽管示例7-5和7-7都完成了相同的任务，但示例 7-5 是使用 use 将函数引入作用域的习惯用法。要想使用 `use` 将函数的父模块引入作用域，我们必须在调用函数时指定父模块，这样可以清晰地表明函数不"
+"是在本地定义的，同时使完整路径的重复度最小化。示例 7-7 中的代码不清楚 `add_to_waitlist` 是在哪里被定义的。"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:104
-#, fuzzy
 msgid ""
 "On the other hand, when bringing in structs, enums, traits, and other items with `use`,\n"
 "it’s idiomatic to specify the full path. Listing 7-8 shows the idiomatic way\n"
 "to bring the core library’s `ArrayTrait` trait into the scope."
-msgstr "另一方面，使用 `use` 引入结构体、枚举和其他项时，习惯是指定它们的完整路径。示例 6-8 展示了将核心库的 `ArrayTrait` 特质带入作用域。"
+msgstr "另一方面，使用 `use` 引入结构体、枚举和其他项时，习惯是指定它们的完整路径。示例 7-8 展示了将核心库的 `ArrayTrait` 特质带入作用域。"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:108
 msgid ""
@@ -10194,11 +10168,10 @@ msgstr ""
 "```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:115
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-8: Bringing `ArrayTrait` into scope in an\n"
 "idiomatic way</span>"
-msgstr "<span class=\"caption\">示例6-8：将`ArrayTrait`引入作用域的习惯用法式</span>"
+msgstr "<span class=\"caption\">示例7-8：将`ArrayTrait`引入作用域的习惯用法式</span>"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:118
 msgid ""
@@ -10220,13 +10193,12 @@ msgid "### Providing New Names with the `as` Keyword"
 msgstr "### 使用 as 关键字提供新的名称"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:127
-#, fuzzy
 msgid ""
 "There’s another solution to the problem of bringing two types of the same name\n"
 "into the same scope with `use`: after the path, we can specify `as` and a new\n"
 "local name, or _alias_, for the type. Listing 7-9 shows how you can rename an import with `as`:"
 msgstr ""
-"使用 `use` 将两个同名类型引入同一作用域这个问题还有另一个解决办法：在这个类型的路径后面，我们使用 `as` 指定一个新的本地名称或者别名（ _alias_ ）。示例6-9显示了如何用`as`重命名一个导"
+"使用 `use` 将两个同名类型引入同一作用域这个问题还有另一个解决办法：在这个类型的路径后面，我们使用 `as` 指定一个新的本地名称或者别名（ _alias_ ）。示例7-9显示了如何用`as`重命名一个导"
 "入："
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:133
@@ -10250,11 +10222,10 @@ msgstr ""
 "```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:142
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-9: Renaming a trait when it’s brought into\n"
 "scope with the `as` keyword</span>"
-msgstr "<span class=\"caption\">示例 6-9：使用 `as` 关键字重命名引入作用域的类型</span>"
+msgstr "<span class=\"caption\">示例 7-9：使用 `as` 关键字重命名引入作用域的类型</span>"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:145
 msgid "Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier."
@@ -10360,9 +10331,8 @@ msgstr ""
 "```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:194
-#, fuzzy
 msgid "<span class=\"caption\">Listing 7-10: Importing multiple items from the same module</span>"
-msgstr "<span class=\"caption\">示例 6-10：从同一模块导入多个项</span>"
+msgstr "<span class=\"caption\">示例 7-10：从同一模块导入多个项</span>"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:196
 msgid "## Re-exporting Names in Module Files"
@@ -10413,11 +10383,10 @@ msgstr ""
 "```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:221
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-11: Making a name available for any code to use\n"
 "from a new scope with `pub use`</span>"
-msgstr "<span class=\"caption\">示例 6-11: 通过 `pub use` 使名称可在新作用域中被导入至任何代码</span>"
+msgstr "<span class=\"caption\">示例 7-11: 通过 `pub use` 使名称可在新作用域中被导入至任何代码</span>"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:224
 msgid ""
@@ -10469,16 +10438,14 @@ msgid ""
 msgstr "到目前为止，本章所有的例子都在一个文件中定义多个模块。当模块变得更大时，你可能想要将它们的定义移动到单独的文件中，从而使代码更容易阅读。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:7
-#, fuzzy
 msgid ""
 "For example, let’s start from the code in Listing 7-11 that had multiple\n"
 "restaurant modules. We’ll extract modules into files instead of having all the\n"
 "modules defined in the crate root file. In this case, the crate root file is\n"
 "_src/lib.cairo_."
-msgstr "例如，我们从示例6-11中的代码开始，我们会将模块的代码提取到各自的文件中，而不是将所有模块都定义到 crate 根文件中。在这里，crate 根文件是 _src/lib.cairo_ 。"
+msgstr "例如，我们从示例7-11中的代码开始，我们会将模块的代码提取到各自的文件中，而不是将所有模块都定义到 crate 根文件中。在这里，crate 根文件是 _src/lib.cairo_ 。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:12
-#, fuzzy
 msgid ""
 "First, we’ll extract the `front_of_house` module to its own file. Remove the\n"
 "code inside the curly brackets for the `front_of_house` module, leaving only\n"
@@ -10487,7 +10454,7 @@ msgid ""
 "_src/front_of_house.cairo_ file in Listing 7-13."
 msgstr ""
 "首先将 `front_of_house` 模块提取到其自己的文件中。删除 `front_of_house`  模块的大括号中的代码，只留下 `mod front_of_house;` 声明，这样 _src/lib.cairo_ 就包含了代码\n"
-"如示例6-12所示。注意直到���建示例 6-13 中的 _src/front_of_house.cairo_ 文件之前代码都不能编译。"
+"如示例7-12所示。注意直到创建示例 7-13 中的 _src/front_of_house.cairo_ 文件之前代码都不能编译。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:20
 msgid ""
@@ -10512,21 +10479,19 @@ msgstr ""
 "```"
 
 #: src/ch07-05-separating-modules-into-different-files.md:30
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-12: Declaring the `front_of_house` module whose\n"
 "body will be in _src/front_of_house.cairo_</span>"
-msgstr "<span class=\"caption\">示例6-12：声明`front_of_house` 模块，其主体代码将存放在 _src/front_of_house.cairo_ 中。</span>"
+msgstr "<span class=\"caption\">示例7-12：声明`front_of_house` 模块，其主体代码将存放在 _src/front_of_house.cairo_ 中。</span>"
 
 #: src/ch07-05-separating-modules-into-different-files.md:33
-#, fuzzy
 msgid ""
 "Next, place the code that was in the curly brackets into a new file named\n"
 "_src/front_of_house.cairo_, as shown in Listing 7-13. The compiler knows to look\n"
 "in this file because it came across the module declaration in the crate root\n"
 "with the name `front_of_house`."
 msgstr ""
-"接下来将之前大括号内的代码放入一个名叫 _src/front_of_house.cairo_ 的新文件中，如示例 6-13所示。因为编译器找到了 crate 根中名叫 `front_of_house` 的模块声明，它就知道去查看这个文件。"
+"接下来将之前大括号内的代码放入一个名叫 _src/front_of_house.cairo_ 的新文件中，如示例 7-13所示。因为编译器找到了 crate 根中名叫 `front_of_house` 的模块声明，它就知道去查看这个文件。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:38 src/ch07-05-separating-modules-into-different-files.md:66
 msgid "<span class=\"filename\">Filename: src/front_of_house.cairo</span>"
@@ -10547,11 +10512,10 @@ msgstr ""
 "```"
 
 #: src/ch07-05-separating-modules-into-different-files.md:46
-#, fuzzy
 msgid ""
 "<span class=\"caption\">Listing 7-13: Definitions inside the `front_of_house`\n"
 "module in _src/front_of_house.cairo_</span>"
-msgstr "<span class=\"caption\">示例 6-13：在 _src/front_of_house.cairo_ 中定义 `front_of_house` 模块。</span>"
+msgstr "<span class=\"caption\">示例 7-13：在 _src/front_of_house.cairo_ 中定义 `front_of_house` 模块。</span>"
 
 #: src/ch07-05-separating-modules-into-different-files.md:49
 msgid ""
@@ -10664,7 +10628,6 @@ msgid "# Generic Types and Traits"
 msgstr "# 泛型和Trait"
 
 #: src/ch08-00-generic-types-and-traits.md:3
-#, fuzzy
 msgid ""
 "Every programming language has tools for effectively handling the duplication of concepts. In Cairo, one such tool is generics: abstract stand-ins for concrete types or other "
 "properties. We can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code."
@@ -10673,7 +10636,6 @@ msgstr ""
 "联，而不需要在编写和编译代码时知道他们在这里实际上代表什么。"
 
 #: src/ch08-00-generic-types-and-traits.md:5
-#, fuzzy
 msgid "Functions, structs, enums and traits can incorporate generic types as part of their definition instead of a concrete type like `u32` or `ContractAddress`."
 msgstr "函数、结构体、枚举和特征可以将泛型作为其定义的一部分，而不是像`u32`或`ContractAddress`这样的具体类型。"
 
@@ -10813,7 +10775,6 @@ msgstr ""
 "```"
 
 #: src/ch08-01-generic-data-types.md:49
-#, fuzzy
 msgid ""
 "The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. The `main` function remains unchanged, "
 "the compiler is smart enough to deduce which concrete type is being used and if it implements the `Drop` trait."
@@ -10826,7 +10787,6 @@ msgid "### Constraints for Generic Types"
 msgstr "### 范型的约束"
 
 #: src/ch08-01-generic-data-types.md:53
-#, fuzzy
 msgid ""
 "When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allow us to use them more effectively in a functions logic at "
 "the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the `TDrop` implementation as part of the generic "
@@ -10836,7 +10796,6 @@ msgstr ""
 "将`TDrop`的实现作为`largest_list`的泛型参数的一部分。虽然 `TDrop`是为了满足编译器的要求而添加的，但我们也可以添加一些约束条件以有利于我们的函数逻辑。"
 
 #: src/ch08-01-generic-data-types.md:55
-#, fuzzy
 msgid ""
 "Imagine that we want, given a list of elements of some generic type `T`, to find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, "
 "it must implement the `PartialOrd` trait. The resulting function would be:"
@@ -11522,7 +11481,6 @@ msgid "## Implementing a trait, without writing its declaration."
 msgstr "## trait的无声明实现。"
 
 #: src/ch08-02-traits-in-cairo.md:39
-#, fuzzy
 msgid ""
 "You can write implementations directly without defining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute within the implementation, which "
 "will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the "
@@ -11578,11 +11536,10 @@ msgid "## Parameter `self`"
 msgstr "## 参数  `self`"
 
 #: src/ch08-02-traits-in-cairo.md:62
-#, fuzzy
 msgid ""
 "In the example above, `self` is a special parameter. When a parameter with name `self` is used, the implemented functions are also [attached to the instances of the type as methods]"
 "(ch05-03-method-syntax.md#defining-methods). Here's an illustration,"
-msgstr "在上面的例子中，`self`是一个特殊参数。当使用名称为`self`的���数时，实现的函数也会[作为方法附加到类型的实例上](ch04-03-method-syntax.md#defining-methods)。下面是一个演示、"
+msgstr "在上面的例子中，`self`是一个特殊参数。当使用名称为`self`的���数时，实现的函数也会[作为方法附加到类型的实例上](ch05-03-method-syntax.md#defining-methods)。下面是一个演示、"
 
 #: src/ch08-02-traits-in-cairo.md:64
 msgid "When the `ShapeGeometry` trait is implemented, the function `area` from the `ShapeGeometry` trait can be called in two ways:"
@@ -11820,7 +11777,6 @@ msgstr ""
 "如果`CircleGeometry`是在一个单独的模块/文件`circle`中，那么要在`circ: Circle`上使用`boundary`，我们就需要在 `ShapeGeometry`之外再导入 `CircleGeometry`。"
 
 #: src/ch08-02-traits-in-cairo.md:176
-#, fuzzy
 msgid ""
 "If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant "
 "implementation is required."
@@ -11965,13 +11921,12 @@ msgid "### The Anatomy of a Test Function"
 msgstr "### 一个测试函数的剖析"
 
 #: src/ch09-01-how-to-write-tests.md:15
-#, fuzzy
 msgid ""
 "At its simplest, a test in Cairo is a function that’s annotated with the `test` attribute. Attributes are metadata about pieces of Cairo code; one example is the derive attribute we "
 "used with structs in Chapter 5. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb cairo-test` command, Scarb "
 "runs Cairo's test runner binary that runs the annotated functions and reports on whether each test function passes or fails."
 msgstr ""
-"最简单的Cairo中的测试是一个带有`test`属性注释的函数。属性是关于Cairo代码片段的元数据；一个例子是我们在第4章中对结构体使用的derive属性。要把一个函数变成测试函数，在 `fn`前的一行加上 "
+"最简单的Cairo中的测试是一个带有`test`属性注释的函数。属性是关于Cairo代码片段的元数据；一个例子是我们在第5章中对结构体使用的derive属性。要把一个函数变成测试函数，在 `fn`前的一行加上 "
 "`#[test]`。当你用`cairo-test`命令运行你的测试时，Cairo会建立一个测试运行器的二进制文件，运行被标注了的函数，并报告每个测试函数的通过或失败。"
 
 #: src/ch09-01-how-to-write-tests.md:17
@@ -11995,9 +11950,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:26
-#, fuzzy
 msgid "In _lib.cairo_, let's remove the existing content and add a first test, as shown in Listing 9-1."
-msgstr "在 _lib.cairo_ 中，让我们添加第一个测试，如示例8-1所示。"
+msgstr "在 _lib.cairo_ 中，让我们添加第一个测试，如示例9-1所示。"
 
 #: src/ch09-01-how-to-write-tests.md:30
 msgid ""
@@ -12018,9 +11972,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:38
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-1: A test module and function</span>"
-msgstr "<span class=\"caption\">示例8-1：一个测试模块和其函数</span>"
+msgstr "<span class=\"caption\">示例9-1：一个测试模块和其函数</span>"
 
 #: src/ch09-01-how-to-write-tests.md:40
 msgid ""
@@ -12038,9 +11991,8 @@ msgid ""
 msgstr "这个例子的函数体使用了`assert`函数，它包含了2和2相加的结果，等于4。这个断言是一个典型测试格式范例。让我们运行它，看看这个测试是否通过。"
 
 #: src/ch09-01-how-to-write-tests.md:44
-#, fuzzy
 msgid "The `scarb cairo-test` command runs all tests founds in our project, as shown in Listing 9-2."
-msgstr "用`scarb cairo-test`命令运行我们项目中的所有测试，如示例8-2所示。"
+msgstr "用`scarb cairo-test`命令运行我们项目中的所有测试，如示例9-2所示。"
 
 #: src/ch09-01-how-to-write-tests.md:46
 msgid ""
@@ -12061,22 +12013,19 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:54
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-2: The output from running a test</span>"
-msgstr "<span class=\"caption\">示例8-2：运行测试后的输出</span>"
+msgstr "<span class=\"caption\">示例9-2：运行测试后的输出</span>"
 
 #: src/ch09-01-how-to-write-tests.md:56
-#, fuzzy
 msgid ""
 "`scarb cairo-test` compiled and ran the test. We see the line `running 1 tests`. The next line shows the name of the test function, called `it_works`, and that the result of running "
 "that test is `ok`. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or "
 "failed."
 msgstr ""
-"`cairo-test`编译并运行了测试。我们看到一行`running 1 tests`。下一行显示了生成的测试函数的名称，叫做`it_works`，运行该测试的结果是`ok`。总体摘要`test result: ok.`意味着所有的测试都通过"
-"了，`1 passed; 0 failed` 的部分展示了通过或失败的测试的总数。"
+"`scarb cairo-test`编译并运行了测试。我们看到一行`running 1 tests`。下一行显示了生成的测试函数的名称，叫做`it_works`，运行该测试的结果是`ok`。总体摘要`test result: ok.`意味着所有的测试"
+"都通过了，`1 passed; 0 failed` 的部分展示了通过或失败的测试的总数。"
 
 #: src/ch09-01-how-to-write-tests.md:58
-#, fuzzy
 msgid ""
 "It’s possible to mark a test as ignored so it doesn’t run in a particular instance; we’ll cover that in the [Ignoring Some Tests Unless Specifically Requested](#ignoring-some-tests-"
 "unless-specifically-requested) section later in this chapter. Because we haven’t done that here, the summary shows `0 ignored`. We can also pass an argument to the `scarb cairo-test` "
@@ -12110,9 +12059,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:72
-#, fuzzy
 msgid "Then run `scarb cairo-test` again. The output now shows `exploration` instead of `it_works`:"
-msgstr "然后再次运行`cairo-test -- --path src`。现在输出显示的是 `exploration`而不是`it_works`："
+msgstr "然后再次运行`scarb cairo-test`。现在输出显示的是 `exploration`而不是`it_works`："
 
 #: src/ch09-01-how-to-write-tests.md:74
 msgid ""
@@ -12131,13 +12079,12 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:81
-#, fuzzy
 msgid ""
 "Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main "
 "thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing 9-3."
 msgstr ""
 "现在我们将添加另一个测试，但这次我们要做一个失败的测试! 当测试函数中的某些东西发生panic时，测试就会失败。每个测试都在一个新的线程中运行，当主线程看到一个测试线程死亡时，该测试被标记为"
-"失败。将新的测试作为一个名为`another`的函数输入，因此你的 _src/lib.cairo_ 文件看起来像示例8-3里一样。"
+"失败。将新的测试作为一个名为`another`的函数输入，因此你的 _src/lib.cairo_ 文件看起来像示例9-3里一样。"
 
 #: src/ch09-01-how-to-write-tests.md:83
 msgid ""
@@ -12160,9 +12107,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:92
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-3: Adding a second test that will fail</span>"
-msgstr "<span class=“caption”>示例8-3：添加第二个测试（会失败的测试）</span>"
+msgstr "<span class=“caption”>示例9-3：添加第二个测试（会失败的测试）</span>"
 
 #: src/ch09-01-how-to-write-tests.md:94
 msgid ""
@@ -12187,9 +12133,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:104
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-4: Test results when one test passes and one test fails</span>"
-msgstr "<span class=“caption”>示例8-4：一个测试通过，一个测试失败时的测试结果</span>"
+msgstr "<span class=“caption”>示例9-4：一个测试通过，一个测试失败时的测试结果</span>"
 
 #: src/ch09-01-how-to-write-tests.md:106
 msgid ""
@@ -12222,26 +12167,23 @@ msgstr ""
 "`false`，assert函数调用 `panic()`，导致测试失败，我们定义的信息是 `assert`函数的第二个参数。使用`assert`函数可以帮助我们检查我们的代码是否按照我们的意图运行。"
 
 #: src/ch09-01-how-to-write-tests.md:116
-#, fuzzy
 msgid ""
 "In [Chapter 5, Listing 5-15](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put "
 "this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function."
 msgstr ""
-"在[第4章，示例5-15](ch04-03-method-syntax.md#multiple-impl-blocks)中，我们使用了一个`Rectangle`结构和一个`can_hold`方法，在示例8-5中重复了这些。让我们把这段代码放在_src/lib.cairo_文件"
+"在[第5章，示例5-15](ch05-03-method-syntax.md#multiple-impl-blocks)中，我们使用了一个`Rectangle`结构和一个`can_hold`方法，在示例9-5中重复了这些。让我们把这段代码放在_src/lib.cairo_文件"
 "中，然后用`assert`函数为它写一些测试。"
 
 #: src/ch09-01-how-to-write-tests.md:137
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>"
-msgstr "<span class=“caption”>示例8-5：使用第五章中的 `Rectangle`结构及其`can_hold`方法</span>"
+msgstr "<span class=“caption”>示例9-5：使用第五章中的 `Rectangle`结构及其`can_hold`方法</span>"
 
 #: src/ch09-01-how-to-write-tests.md:139
-#, fuzzy
 msgid ""
 "The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 9-6, we write a test that exercises the `can_hold` method by creating "
 "a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`."
 msgstr ""
-"返回值为`bool`的`can_hold`方法是assert函数的一个完美用例。在示例8-6中，我们写了一个测试，通过创建一个宽度为`8`、高度为`7`的`Rectangle`实例，并断言它可以容纳另一个宽度为`5`、高度为`1`"
+"返回值为`bool`的`can_hold`方法是assert函数的一个完美用例。在示例9-6中，我们写了一个测试，通过创建一个宽度为`8`、高度为`7`的`Rectangle`实例，并断言它可以容纳另一个宽度为`5`、高度为`1`"
 "的`Rectangle`实例，来测试`can_hold`方法。"
 
 #: src/ch09-01-how-to-write-tests.md:143
@@ -12345,9 +12287,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:192
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-6: A test for `can_hold` that checks whether a larger rectangle can indeed hold a smaller rectangle</span>"
-msgstr "<span class=“caption”>示例 8-6: `can_hold`的测试，检查一个较大的矩形是否真的可以容纳一个较小的矩形</span>"
+msgstr "<span class=“caption”>示例 9-6: `can_hold`的测试，检查一个较大的矩形是否真的可以容纳一个较小的矩形</span>"
 
 #: src/ch09-01-how-to-write-tests.md:194
 msgid ""
@@ -12574,18 +12515,16 @@ msgid "Our tests caught the bug! Because `larger.width` is `8` and `smaller.widt
 msgstr "我们的测试发现了这个错误! 因为`larger.width`是`8`，`smaller.width`是`5`，`can_hold`中的宽度比较现在返回`false`：因为`8`不比`5`小。"
 
 #: src/ch09-01-how-to-write-tests.md:297
-#, fuzzy
 msgid "## Checking for panics with `should_panic`"
 msgstr "## 用`should_panic`检查panic情况"
 
 #: src/ch09-01-how-to-write-tests.md:299
-#, fuzzy
 msgid ""
 "In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 9-8. Other code "
 "that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` "
 "instance with a value outside that range panics."
 msgstr ""
-"除了检查返回值之外，检查我们的代码是否按照我们所期望的那样处理错误条件也很重要。例如，考虑示例8-8中的Guess类型。其他使用`Guess`的代码依赖于保证`Guess`实例只包含`1`和`100`之间的值。我"
+"除了检查返回值之外，检查我们的代码是否按照我们所期望的那样处理错误条件也很重要。例如，考虑示例9-8中的Guess类型。其他使用`Guess`的代码依赖于保证`Guess`实例只包含`1`和`100`之间的值。我"
 "们可以写一个测试，以确保试图创建的`Guess`实例的值不在这个范围内时，会发生panic。"
 
 #: src/ch09-01-how-to-write-tests.md:301
@@ -12595,9 +12534,8 @@ msgid ""
 msgstr "我们通过在我们的测试函数中添加属性`should_panic`来做到这一点。如果函数中的代码出现panic，则测试通过；如果函数中的代码没有出现panic，则测试失败。"
 
 #: src/ch09-01-how-to-write-tests.md:303
-#, fuzzy
 msgid "Listing 9-8 shows a test that checks that the error conditions of `GuessTrait::new` happen when we expect them to."
-msgstr "示例8-8显示了一个测试，检查`GuessTrait::new`的错误条件是否在我们期望的时候发生。"
+msgstr "示例9-8显示了一个测试，检查`GuessTrait::new`的错误条件是否在我们期望的时候发生。"
 
 #: src/ch09-01-how-to-write-tests.md:307
 msgid ""
@@ -12670,9 +12608,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:341
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-8: Testing that a condition will cause a panic</span>"
-msgstr "<span class=“caption”>示例8-8：测试一个条件是否会导致panic</span>"
+msgstr "<span class=“caption”>示例9-8：测试一个条件是否会导致panic</span>"
 
 #: src/ch09-01-how-to-write-tests.md:343
 msgid "We place the `#[should_panic]` attribute after the `#[test]` attribute and before the test function it applies to. Let’s look at the result when this test passes:"
@@ -12751,9 +12688,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:379
-#, fuzzy
 msgid "When we run the test in Listing 9-8, it will fail:"
-msgstr "当我们运行示例8-8中的测试时，它将失败："
+msgstr "当我们运行示例9-8中的测试时，它将失败："
 
 #: src/ch09-01-how-to-write-tests.md:381
 msgid ""
@@ -12782,14 +12718,13 @@ msgid ""
 msgstr "在这种情况下，我们没有得到一个非常有用的消息，但是当我们看测试函数时，我们看到它被注解为`#[should_panic]`。我们得到的失败意味着测试函数中的代码并没有引起panic。"
 
 #: src/ch09-01-how-to-write-tests.md:392
-#, fuzzy
 msgid ""
 "Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` "
 "tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. "
 "For example, consider the modified code for `Guess` in Listing 9-9 where the new function panics with different messages depending on whether the value is too small or too large."
 msgstr ""
 "使用`should_panic`的测试可能是不精确的。即使测试的panic原因与我们所期望的不同, 但只要发生了panic，一个`should_panic`测试就一定会通过。为了使`should_panic`测试更加精确，我们可以在"
-"`should_panic`属性中添加一个可选的预期参数。该测试限制将确保故障信息包含所提供的文本。例如，考虑示例8-9中`Guess`的修改后的代码，新函数根据数值过小或过大的情况，以不同的消息进行恐慌。"
+"`should_panic`属性中添加一个可选的预期参数。该测试限制将确保故障信息包含所提供的文本。例如，考虑示例9-9中`Guess`的修改后的代码，新函数根据数值过小或过大的情况，以不同的消息进行恐慌。"
 
 #: src/ch09-01-how-to-write-tests.md:396
 msgid ""
@@ -12868,9 +12803,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:433
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-9: Testing for a panic with a panic message containing the error message string</span>"
-msgstr "<span class=“caption”>示例8-9：用包含错误信息字符串的恐慌信息来测试panic</span>"
+msgstr "<span class=“caption”>示例9-9：用包含错误信息字符串的恐慌信息来测试panic</span>"
 
 #: src/ch09-01-how-to-write-tests.md:435
 msgid ""
@@ -12984,18 +12918,16 @@ msgid "## Running Single Tests"
 msgstr "## 运行单一测试"
 
 #: src/ch09-01-how-to-write-tests.md:485
-#, fuzzy
 msgid ""
 "Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can "
 "choose which tests to run by passing `scarb cairo-test` an option `-f` (for \"filter\"), followed by the name of the test you want to run as an argument."
 msgstr ""
-"有时，运行一个完整的测试套件可能需要很长的时间。如果你正在处理某个特定领域的代码，你可能只想运行与该代码有关的测试。你可以通过传递`cairo-test`你想运行的测试名称作为参数来选择运行哪些"
-"测试。"
+"有时，运行一个完整的测试套件可能需要很长的时间。如果你正在处理某个特定领域的代码，你可能只想运行与该代码有关的测试。你可以通过传递`scarb cairo-test`以及`-f`(“filter”)你想运行的测试名"
+"称作为参数来选择运行哪些测试。"
 
 #: src/ch09-01-how-to-write-tests.md:487
-#, fuzzy
 msgid "To demonstrate how to run a single test, we’ll first create two tests functions, as shown in Listing 9-10, and choose which ones to run."
-msgstr "为了演示如何运行一个测试，我们将首先创建两个测试函数，如示例8-10所示，并选择运行哪一个。"
+msgstr "为了演示如何运行一个测试，我们将首先创建两个测试函数，如示例9-10所示，并选择运行哪一个。"
 
 #: src/ch09-01-how-to-write-tests.md:491
 msgid ""
@@ -13034,9 +12966,8 @@ msgstr ""
 "```"
 
 #: src/ch09-01-how-to-write-tests.md:508
-#, fuzzy
 msgid "<span class=\"caption\">Listing 9-10: Two tests with two different names</span>"
-msgstr "<span class=“caption”>示例8-10：两个不同名称的测试</span>"
+msgstr "<span class=“caption”>示例9-10：两个不同名称的测试</span>"
 
 #: src/ch09-01-how-to-write-tests.md:510
 msgid "We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:"
@@ -13073,13 +13004,12 @@ msgid "## Ignoring Some Tests Unless Specifically Requested"
 msgstr "## 在非特别指定时，忽略一些测试"
 
 #: src/ch09-01-how-to-write-tests.md:525
-#, fuzzy
 msgid ""
 "Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `scarb cairo-test`. Rather than listing as arguments all "
 "tests you do want to run, you can instead annotate the time-consuming tests using the `ignore` attribute to exclude them, as shown here:"
 msgstr ""
-"有时一些特定的测试执行起来非常耗时，所以你可能想在大多数`cairo-test`的运行中排除它们。与其将所有你想运行的测试列为参数，不如使用`ignore` 属性对耗时的测试进行注释，将其排除在外，如图所"
-"示："
+"有时一些特定的测试执行起来非常耗时，所以你可能想在大多数`scarb cairo-test`的运行中排除它们。与其将所有你想运行的测试列为参数，不如使用`ignore` 属性对耗时的测试进行注释，将其排除在外，"
+"如图所示："
 
 #: src/ch09-01-how-to-write-tests.md:529
 msgid ""
@@ -13142,11 +13072,10 @@ msgid "The `expensive_test` function is listed as ignored."
 msgstr "`expensive_test`函数被列为`ignored`。"
 
 #: src/ch09-01-how-to-write-tests.md:557
-#, fuzzy
 msgid ""
 "When you’re at a point where it makes sense to check the results of the ignored tests and you have time to wait for the results, you can run `scarb cairo-test --include-ignored` to "
 "run all tests whether they’re ignored or not."
-msgstr "当你到了需要检查被忽略的测试结果的时候，而且你有时间等待测试结果，你可以运行`cairo-test --include-ignored`来运行所有的测试，无论它们是否被标记忽略。"
+msgstr "当你到了需要检查被忽略的测试结果的时候，而且你有时间等待测试结果，你可以运行`scarb cairo-test --include-ignored`来运行所有的测试，无论它们是否被标记忽略。"
 
 #: src/ch09-01-how-to-write-tests.md:559
 msgid "## Testing recursive functions or loops"
@@ -13350,14 +13279,13 @@ msgid "# Testing Organization"
 msgstr "# 测试的组织结构"
 
 #: src/ch09-02-test-organization.md:3
-#, fuzzy
 msgid ""
 "We'll think about tests in terms of two main categories: unit tests and integration tests. Unit tests are small and more focused, testing one module in isolation at a time, and can "
 "test private functions. Although Cairo doesn't implement the concept of public/private functions/fields yet, it's good practice to start organizing your code as if it were. "
 "Integration tests use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test."
 msgstr ""
-"我们倾向于根据测试的两个主要分类来考虑问题：单元测试和集成测试。单元测试（unit tests）与 集成测试（integration tests）。单元测试倾向于更小而更集中，在隔离的环境中一次测试一个模块，或"
-"者是测试私有接口。而集成测试对于你的代码来说则完全是外部的。它们与其他外部代码一样，通过相同的方式使用你的代码，只测试公有接口而且每个测试都有可能会测试多个模块。"
+"我们可以将测试分为两个主要类别：单元测试和集成测试。单元测试是小型且更加专注的测试，一次只测试一个模块的功能，并且可以测试私有函数。尽管 Cairo 目前还没有实现公共/私有函数和字段的概"
+"念，但按照这样的方式组织代码是一个良好的实践。集成测试则使用代码的公共接口，像任何外部代码一样使用，可能会在一个测试中涉及多个模块。"
 
 #: src/ch09-02-test-organization.md:5
 msgid "Writing both kinds of tests is important to ensure that the pieces of your library are doing what you expect them to, separately and together."
@@ -13383,16 +13311,15 @@ msgid "### The Tests Module and `#[cfg(test)]`"
 msgstr "### 测试模块和`#[cfg(test)]`"
 
 #: src/ch09-02-test-organization.md:15
-#, fuzzy
 msgid ""
 "The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run the test code only when you run `scarb cairo-test`, not when you run `cairo-run`. This saves compile "
 "time when you only want to build the library and saves space in the resulting compiled artifact because the tests are not included. You’ll see that because integration tests go in a "
 "different directory, they don’t need the `#[cfg(test)]` annotation. However, because unit tests go in the same files as the code, you’ll use `#[cfg(test)]` to specify that they "
 "shouldn’t be included in the compiled result."
 msgstr ""
-"测试模块的 `#[cfg(test)]`注解告诉 Cairo 只在执行`cairo-test` 时才编译和运行测试代码，而在运行 `cairo-run` 时不这么做。这在只希望构建库的时候可以节省编译时间，并且因为它们并没有包含测"
-"试，所以能减少编译产生的文件的大小。与之对应的集成测试因为位于另一个文件夹，所以它们并不需要 `#[cfg(test)]`注解。然而单元测试位于与源码相同的文件中，所以你需要使用 `#[cfg(test)]` 来指"
-"定他们不应该被包含进编译结果中。"
+"测试模块的 `#[cfg(test)]`注解告诉 Cairo 只在执行`scarb cairo-test` 时才编译和运行测试代码，而在运行 `cairo-run` 时不这么做。这在只希望构建库的时候可以节省编译时间，并且因为它们并没有"
+"包含测试，所以能减少编译产生的文件的大小。与之对应的集成测试因为位于另一个文件夹，所以它们并不需要 `#[cfg(test)]`注解。然而单元测试位于与源码相同的文件中，所以你需要使用 "
+"`#[cfg(test)]` 来指定他们不应该被包含进编译结果中。"
 
 #: src/ch09-02-test-organization.md:17
 msgid "Recall that when we created the new `adder` project in the first section of this chapter, we wrote this first test:"
@@ -13423,19 +13350,17 @@ msgstr ""
 "```"
 
 #: src/ch09-02-test-organization.md:30 src/ch09-02-test-organization.md:59
-#, fuzzy
 msgid "<span class=\"caption\">Filename: src/lib.cairo</span>"
-msgstr "<span class=\"filename\">文件名： src/lib.cairo</span>"
+msgstr "<span class=\"caption\">文件名： src/lib.cairo</span>"
 
 #: src/ch09-02-test-organization.md:32
-#, fuzzy
 msgid ""
 "The attribute `cfg` stands for configuration and tells Cairo that the following item should only be included given a certain configuration option. In this case, the configuration "
 "option is `test`, which is provided by Cairo for compiling and running tests. By using the `cfg` attribute, Cairo compiles our test code only if we actively run the tests with `scarb "
 "cairo-test`. This includes any helper functions that might be within this module, in addition to the functions annotated with `#[test]`."
 msgstr ""
 "属性`cfg`代表配置，告诉Cairo只有在给定的配置选项的情况下才应该包含下面的项目。在本例中，配置选项是`test`，它由Cairo提供，用于编译和运行测试。通过使用`cfg`属性，Cairo只有在我们用"
-"`cairo-test`主动运行测试时才会编译我们的测试代码。这包括任何可能在这个模块中的辅助函数，以及用`#[test]`标注的函数。"
+"`scarb cairo-test`主动运行测试时才会编译我们的测试代码。这包括任何可能在这个模块中的辅助函数，以及用`#[test]`标注的函数。"
 
 #: src/ch09-02-test-organization.md:34
 msgid "## Integration Tests"
@@ -13509,14 +13434,12 @@ msgstr ""
 "```"
 
 #: src/ch09-02-test-organization.md:66
-#, fuzzy
 msgid "<span class=\"caption\">Filename: src/tests.cairo</span>"
-msgstr "<span class=\"filename\">文件名：structs.cairo</span>"
+msgstr "<span class=\"caption\">文件名：structs.cairo</span>"
 
 #: src/ch09-02-test-organization.md:68
-#, fuzzy
 msgid "Enter the code in Listing 9-11 into the _src/tests/integration_test.cairo_ file:"
-msgstr "将示例8-11中的代码输入到 _tests/integration_test.cairo_ 文件："
+msgstr "将示例9-11中的代码输入到 _tests/integration_test.cairo_ 文件："
 
 #: src/ch09-02-test-organization.md:70
 msgid ""
@@ -13541,14 +13464,12 @@ msgstr ""
 "```"
 
 #: src/ch09-02-test-organization.md:80
-#, fuzzy
 msgid "<span class=\"caption\">Filename: src/tests/integration_test.cairo</span>"
-msgstr "<span class=\"filename\">文件名：test/integration_test.cairo</span>"
+msgstr "<span class=\"caption\">文件名：test/integration_test.cairo</span>"
 
 #: src/ch09-02-test-organization.md:82
-#, fuzzy
 msgid "We need to bring our tested functions into each test file scope. For that reason we add `use adder::it_adds_two` at the top of the code, which we didn’t need in the unit tests."
-msgstr "测试目录中的每个文件都是一个独立的crate，所以我们需要将我们的库引入每个测试crate的范围。出于这个原因，我们在代码的顶部添加了`use adder::main`，在单元测试中我们不需要这个。"
+msgstr "我们需要在每个测试文件的作用域中引入被测试的函数。出于这个原因，我们在代码的顶部添加了`use adder::it_adds_two`，在单元测试中我们不需要这个。"
 
 #: src/ch09-02-test-organization.md:84
 msgid "Then, to run all of our integration tests, we can just add a filter to only run tests whose path contains \"integration_tests\"."
