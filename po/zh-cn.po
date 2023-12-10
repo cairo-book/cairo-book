@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-12-11 02:20+0900\n"
+"PO-Revision-Date: 2023-12-11 02:32+0900\n"
 "Last-Translator: cryptonerdcn <cryptonerdcn@gmail.com>\n"
 "Language-Team: Language zh-cn\n"
 "Language: zh_CN\n"
@@ -234,7 +234,7 @@ msgstr "组件"
 
 #: src/SUMMARY.md:104
 msgid "Under the hood"
-msgstr "引擎盖下"
+msgstr "深入了解组件"
 
 #: src/SUMMARY.md:105
 msgid "Component dependencies"
@@ -13789,9 +13789,9 @@ msgid ""
 "In this example, `my_number` is zero so the assertion will fail, and the program will panic\n"
 "with the string 'number is zero' (as a felt252) and the division will not be reached."
 msgstr ""
-"我们在main中断言`my_number`不是0，以确保我们没有进行除以0的操作。\n"
+"我们在`main`中断言`my_number`不是0，以确保我们没有进行除以0的操作。\n"
 "在这个例子中，`my_number`是零，所以断言会失败，程序会panic，\n"
-"并给出 'number is zero'的字符串（保存在felt252中），除法将不会被执行。"
+"并给出 'number is zero'的字符串结果（以felt252的形式），除法将不会被执行。"
 
 #: src/ch10-02-recoverable-errors.md:1
 msgid "# Recoverable Errors with `Result`"
@@ -14100,11 +14100,11 @@ msgstr ""
 msgid ""
 "The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the "
 "`u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'."
-msgstr "第一个测试函数是测试从`felt252`到`u8`的有效转换，期望`unwrap`方法不要panic。第二个测试函数试图转换一个超出`u8`范围的值，期望`unwrap`方法panic，错误信息是 ‘Invalid integer’。"
+msgstr "第一个测试函数是测试从`felt252`到`u8`的有效转换，期望`unwrap`方法不要panic。第二个测试函数试图转换一个超出`u8`范围的值，期望`unwrap`方法panic，错误信息是 'Invalid integer'。"
 
 #: src/ch10-02-recoverable-errors.md:139
 msgid "> We could have also used the #[should_panic] attribute here."
-msgstr "> 我们也可以在这里使用#[should_panic]属性。"
+msgstr "> 我们也可以在这里使用 #[should_panic] 属性。"
 
 #: src/ch10-02-recoverable-errors.md:141
 msgid "### The `?` operator ?"
@@ -14494,7 +14494,7 @@ msgid ""
 "version of Poseidon is based on a three element state permutation with [specific parameters](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt)"
 msgstr ""
 "Poseidon 是一系列哈希函数，作为代数电路非常高效。它的设计特别适用于零知识证明系统，包括 STARKs (所以也适用于 Cairo)。Poseidon 使用一种称为“sponge construction”的方法，该方法吸收数据并"
-"使用称为 Hades 置换的过程安全地转换数据。Cairo 版本的 Poseidon 基于具有三元素状态置换和 [特定参数]: https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt 的设计。"
+"使用称为 Hades 置换的过程安全地转换数据。Cairo 版本的 Poseidon 基于具有三元素状态置换和 [特定参数](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt)的设计。"
 
 #: src/ch11-03-hash.md:15
 msgid "#### When to use them ?"
@@ -14506,8 +14506,8 @@ msgid ""
 "a storage mapping on Starknet). However, as Poseidon is cheaper and faster than Pedersen when working with STARK proofs system, it's now the recommended hash function to use in Cairo "
 "programs."
 msgstr ""
-"Pedersen 是 Starknet 上最初使用的哈希函数，现在仍用于计算存储中变量的地址（例如，LegacyMap 使用 Pedersen 对 Starknet 上存储映射的键进行哈希）。然而，由于 Poseidon 在处理 STARK 证明系"
-"统时比 Pedersen 更便宜、更快，因此现在它已成为 Cairo 程序中推荐使用的哈希函数。"
+"Pedersen 是 Starknet 上最初使用的哈希函数，现在仍用于计算存储中变量的地址（例如，`LegacyMap` 使用 Pedersen 对 Starknet 上存储映射的键进行哈希）。然而，由于 Poseidon 在处理 STARK 证明"
+"系统时比 Pedersen 更便宜，更快，因此现在它已成为 Cairo 程序中推荐使用的哈希函数。"
 
 #: src/ch11-03-hash.md:19
 msgid "### Working with Hashes"
@@ -19955,7 +19955,7 @@ msgid ""
 "`IERC20Dispatcher` struct (`name`, `transfer`, etc), passing in the `contract_address` of the contract we want to call in the `IERC20Dispatcher` struct."
 msgstr ""
 "正如您所看到的，我们必须首先导入编译器生成的 `IERC20DispatcherTrait` 和 `IERC20Dispatcher`，这样我们就可以调用为 `IERC20Dispatcher` 结构实现的方法（`name`、`transfer` 等），并在 "
-"`IERC20Dispatcher` 结构中传���我们要调用的合约的 `contract_address` 。"
+"`IERC20Dispatcher` 结构中传入我们要调用的合约的 `contract_address` 。"
 
 #: src/ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md:129
 msgid "## Library Dispatcher"
