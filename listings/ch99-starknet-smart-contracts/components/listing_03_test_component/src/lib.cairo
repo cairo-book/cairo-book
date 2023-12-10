@@ -1,5 +1,7 @@
 mod counter;
+#[cfg(test)]
 mod tests_deployed;
+#[cfg(test)]
 mod tests_direct;
 
 // ANCHOR: mock_contract
