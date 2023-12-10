@@ -1,6 +1,6 @@
 ## Arrays
 
-An array is a collection of elements of the same type. You can create and use array methods without explicitly importing the `array::ArrayTrait` trait, as it is included in the prelude.
+An array is a collection of elements of the same type. You can create and use array methods by using the `ArrayTrait` trait from the core library.
 
 An important thing to note is that arrays have limited modification options. Arrays are, in fact, queues whose values can't be modified.
 This has to do with the fact that once a memory slot is written to, it cannot be overwritten, but only read from it. You can only append items to the end of an array and remove items from the front using `pop_front`.

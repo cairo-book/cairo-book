@@ -60,7 +60,7 @@ If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` woul
 
 ## Matching with Options
 
-In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same. You can use Options without explicitly importing the `option::OptionTrait` trait, as it is included in the prelude.
+In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same.
 
 Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there isn’t a value inside, the function should return the `None` value and not attempt to perform any operations.
 

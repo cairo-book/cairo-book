@@ -22,7 +22,7 @@ imports. This prevents repetition and provides a better devX. This is what
 allows you to use `ArrayTrait::append()` or the `Default` trait without bringing
 them explicitly into scope.
 
-You can choose which prelude to use. For example, adding `edition = "2023_10"` in `scarb.toml` configuration file will provide you november 2023 version of the prelude.
+You can choose which prelude to use. For example, adding `edition = "2023_10"` in `Scarb.toml` configuration file will load the prelude from October 2023, which is more restricted than the one from January 2023.
 The compiler currently exposes 2 different versions of the prelude:
 - A general version, with a lot of traits that are made available, corresponding to `edition = "2023_01"`.
 - A restricted version, including the most essential traits needed for general cairo programming, corresponding to `edition = 2023_10`.

@@ -1,5 +1,4 @@
 //ANCHOR: import
-use core::pedersen::PedersenTrait;
 use core::poseidon::PoseidonTrait;
 use core::hash::{HashStateTrait, HashStateExTrait};
 //ANCHOR_END: import
