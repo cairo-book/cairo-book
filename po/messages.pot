@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
-"POT-Creation-Date: 2023-11-21T20:02:02+01:00\n"
+"POT-Creation-Date: 2023-12-11T05:12:16Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -109,7 +109,7 @@ msgid "Enums and Pattern Matching"
 msgstr ""
 
 #: src/SUMMARY.md:46 src/ch06-01-enums.md:1
-#: src/ch08-01-generic-data-types.md:163
+#: src/ch08-01-generic-data-types.md:189
 msgid "Enums"
 msgstr ""
 
@@ -195,115 +195,119 @@ msgstr ""
 msgid "Macros"
 msgstr ""
 
-#: src/SUMMARY.md:87
+#: src/SUMMARY.md:86 src/ch11-03-hash.md:19
+msgid "Working with Hashes"
+msgstr ""
+
+#: src/SUMMARY.md:88
 msgid "Starknet smart contracts"
 msgstr ""
 
-#: src/SUMMARY.md:89 src/ch99-00-starknet-smart-contracts.md:1
+#: src/SUMMARY.md:90 src/ch99-00-starknet-smart-contracts.md:1
 msgid "Starknet Smart Contracts"
 msgstr ""
 
-#: src/SUMMARY.md:91 src/ch99-01-01-introduction-to-smart-contracts.md:1
+#: src/SUMMARY.md:92 src/ch99-01-01-introduction-to-smart-contracts.md:1
 msgid "Introduction to smart-contracts"
 msgstr ""
 
-#: src/SUMMARY.md:92 src/ch99-01-02-a-simple-contract.md:1
+#: src/SUMMARY.md:93 src/ch99-01-02-a-simple-contract.md:1
 msgid "A simple contract"
 msgstr ""
 
-#: src/SUMMARY.md:93 src/ch99-01-03-00-a-deeper-dive-into-contracts.md:1
+#: src/SUMMARY.md:94 src/ch99-01-03-00-a-deeper-dive-into-contracts.md:1
 msgid "A deeper dive into contracts"
 msgstr ""
 
-#: src/SUMMARY.md:95 src/ch99-01-03-01-contract-storage.md:1
+#: src/SUMMARY.md:96 src/ch99-01-03-01-contract-storage.md:1
 msgid "Contract Storage"
 msgstr ""
 
-#: src/SUMMARY.md:96 src/ch99-01-03-02-contract-functions.md:1
+#: src/SUMMARY.md:97 src/ch99-01-03-02-contract-functions.md:1
 msgid "Contract Functions"
 msgstr ""
 
-#: src/SUMMARY.md:97
+#: src/SUMMARY.md:98
 msgid "Contract Events"
 msgstr ""
 
-#: src/SUMMARY.md:98 src/ch99-01-03-04-reducing-boilerplate.md:1
+#: src/SUMMARY.md:99 src/ch99-01-03-04-reducing-boilerplate.md:1
 msgid "Reducing boilerplate"
 msgstr ""
 
-#: src/SUMMARY.md:99
+#: src/SUMMARY.md:100
 msgid "Optimizing storage costs"
 msgstr ""
 
-#: src/SUMMARY.md:101
+#: src/SUMMARY.md:102
 msgid "Components"
 msgstr ""
 
-#: src/SUMMARY.md:103
+#: src/SUMMARY.md:104
 msgid "Under the hood"
 msgstr ""
 
-#: src/SUMMARY.md:104 src/ch99-01-05-02-component-dependencies.md:1
+#: src/SUMMARY.md:105 src/ch99-01-05-02-component-dependencies.md:1
 msgid "Component dependencies"
 msgstr ""
 
-#: src/SUMMARY.md:105 src/ch99-01-05-03-testing-components.md:1
+#: src/SUMMARY.md:106 src/ch99-01-05-03-testing-components.md:1
 msgid "Testing components"
 msgstr ""
 
-#: src/SUMMARY.md:107
+#: src/SUMMARY.md:108
 msgid "ABIs and Cross-contract Interactions"
 msgstr ""
 
-#: src/SUMMARY.md:109
+#: src/SUMMARY.md:110
 msgid "ABIs and Interfaces"
 msgstr ""
 
-#: src/SUMMARY.md:110
+#: src/SUMMARY.md:111
 msgid "Contract Dispatchers, Library Dispachers and system calls"
 msgstr ""
 
-#: src/SUMMARY.md:112 src/ch99-01-04-00-other-examples.md:1
+#: src/SUMMARY.md:113 src/ch99-01-04-00-other-examples.md:1
 msgid "Other examples"
 msgstr ""
 
-#: src/SUMMARY.md:114 src/ch99-01-04-01-voting-contract.md:1
+#: src/SUMMARY.md:115 src/ch99-01-04-01-voting-contract.md:1
 msgid "Deploying and Interacting with a Voting contract"
 msgstr ""
 
-#: src/SUMMARY.md:116
+#: src/SUMMARY.md:117
 msgid "L1 \\<\\> L2 Messaging"
 msgstr ""
 
-#: src/SUMMARY.md:117 src/ch99-03-security-considerations.md:1
+#: src/SUMMARY.md:118 src/ch99-03-security-considerations.md:1
 msgid "Security Considerations"
 msgstr ""
 
-#: src/SUMMARY.md:119 src/appendix-00.md:1
+#: src/SUMMARY.md:120 src/appendix-00.md:1
 msgid "Appendix"
 msgstr ""
 
-#: src/SUMMARY.md:121
+#: src/SUMMARY.md:122
 msgid "A - Keywords"
 msgstr ""
 
-#: src/SUMMARY.md:122
+#: src/SUMMARY.md:123
 msgid "B - Operators and Symbols"
 msgstr ""
 
-#: src/SUMMARY.md:123
+#: src/SUMMARY.md:124
 msgid "C - Derivable Traits"
 msgstr ""
 
-#: src/SUMMARY.md:124
+#: src/SUMMARY.md:125
 msgid "D - Useful Development Tools"
 msgstr ""
 
-#: src/SUMMARY.md:125
+#: src/SUMMARY.md:126
 msgid "E - Common Types & Traits and the Cairo Prelude"
 msgstr ""
 
-#: src/SUMMARY.md:126
+#: src/SUMMARY.md:127
 msgid "F - Installing Cairo binaries"
 msgstr ""
 
@@ -956,8 +960,8 @@ msgid ""
 msgstr ""
 
 #: src/ch01-02-hello-world.md:220 src/ch02-05-control-flow.md:242
-#: src/ch03-02-dictionaries.md:528 src/ch03-03-custom-data-structures.md:214
-#: src/ch05-03-method-syntax.md:286
+#: src/ch03-02-dictionaries.md:512 src/ch03-03-custom-data-structures.md:212
+#: src/ch05-03-method-syntax.md:295
 #: src/ch07-05-separating-modules-into-different-files.md:98
 #: src/ch10-02-recoverable-errors.md:202
 msgid "Summary"
@@ -1019,8 +1023,8 @@ msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:10
 msgid ""
-"When a variable is immutable, once a value is bound to a name, you can’t "
-"change that value. To illustrate this, generate a new project called "
+"When a variable is immutable, once a variable is bound to a value, you can’t "
+"change that variable. To illustrate this, generate a new project called "
 "_variables_ in your _cairo_projects_ directory by using `scarb new "
 "variables`."
 msgstr ""
@@ -1032,13 +1036,13 @@ msgid ""
 msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:17
-#: src/ch02-01-variables-and-mutability.md:77
-#: src/ch02-01-variables-and-mutability.md:155 src/ch02-05-control-flow.md:9
+#: src/ch02-01-variables-and-mutability.md:83
+#: src/ch02-01-variables-and-mutability.md:161 src/ch02-05-control-flow.md:9
 #: src/ch02-05-control-flow.md:58 src/ch02-05-control-flow.md:90
-#: src/ch02-05-control-flow.md:130 src/ch04-01-what-is-ownership.md:252
-#: src/ch04-01-what-is-ownership.md:294 src/ch04-01-what-is-ownership.md:347
-#: src/ch04-02-references-and-snapshots.md:23
-#: src/ch04-02-references-and-snapshots.md:134
+#: src/ch02-05-control-flow.md:130 src/ch04-01-what-is-ownership.md:242
+#: src/ch04-01-what-is-ownership.md:288
+#: src/ch04-02-references-and-snapshots.md:26
+#: src/ch04-02-references-and-snapshots.md:137
 #: src/ch05-01-defining-and-instantiating-structs.md:7
 #: src/ch05-01-defining-and-instantiating-structs.md:26
 #: src/ch05-01-defining-and-instantiating-structs.md:48
@@ -1049,9 +1053,9 @@ msgstr ""
 #: src/ch05-02-an-example-program-using-structs.md:74
 #: src/ch05-02-an-example-program-using-structs.md:103
 #: src/ch05-02-an-example-program-using-structs.md:136
-#: src/ch05-03-method-syntax.md:18 src/ch05-03-method-syntax.md:93
-#: src/ch05-03-method-syntax.md:135 src/ch05-03-method-syntax.md:192
-#: src/ch05-03-method-syntax.md:231
+#: src/ch05-03-method-syntax.md:18 src/ch05-03-method-syntax.md:101
+#: src/ch05-03-method-syntax.md:143 src/ch05-03-method-syntax.md:199
+#: src/ch05-03-method-syntax.md:237
 #: src/ch07-02-defining-modules-to-control-scope.md:78
 #: src/ch07-02-defining-modules-to-control-scope.md:130
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:15
@@ -1102,60 +1106,68 @@ msgid ""
 "it’s possible that the first part of the code won’t do what it was designed "
 "to do. The cause of this kind of bug can be difficult to track down after "
 "the fact, especially when the second piece of code changes the value only "
-"_sometimes_. The Cairo compiler guarantees that when you state that a value "
-"won’t change, it really won’t change, so you don’t have to keep track of it "
-"yourself. Your code is thus easier to reason through."
+"_sometimes_."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:61
+#: src/ch02-01-variables-and-mutability.md:58
+msgid ""
+"Cairo, unlike most other languages, has immutable memory. This makes a whole "
+"class of bugs impossible, because values will never change unexpectedly. "
+"This makes code easier to reason about."
+msgstr ""
+
+#: src/ch02-01-variables-and-mutability.md:62
 msgid ""
 "But mutability can be very useful, and can make code more convenient to "
 "write. Although variables are immutable by default, you can make them "
 "mutable by adding `mut` in front of the variable name. Adding `mut` also "
 "conveys intent to future readers of the code by indicating that other parts "
-"of the code will be changing this variable’s value."
+"of the code will be changing the value associated to this variable."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:67
+#: src/ch02-01-variables-and-mutability.md:70
 msgid ""
 "However, you might be wondering at this point what exactly happens when a "
 "variable is declared as `mut`, as we previously mentioned that Cairo's "
-"memory is immutable. The answer is that Cairo's memory is immutable, but the "
-"memory address the variable points to can be changed. Upon examining the "
-"low-level Cairo Assembly code, it becomes clear that variable mutation is "
-"implemented as syntactic sugar, which translates mutation operations into a "
-"series of steps equivalent to variable shadowing. The only difference is "
-"that at the Cairo level, the variable is not redeclared so its type cannot "
-"change."
+"memory is immutable. The answer is that the _value_ is immutable, but the "
+"_variable_ isn't. What value the variable points to can be changed. "
+"Assigning to a mutable variable in Cairo is essentially equivalent to "
+"redeclaring it to refer to another value in another memory cell, but the "
+"compiler handles that for you, and the keyword `mut` makes it explicit. Upon "
+"examining the low-level Cairo Assembly code, it becomes clear that variable "
+"mutation is implemented as syntactic sugar, which translates mutation "
+"operations into a series of steps equivalent to variable shadowing. The only "
+"difference is that at the Cairo level, the variable is not redeclared so its "
+"type cannot change."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:75
+#: src/ch02-01-variables-and-mutability.md:81
 msgid "For example, let’s change _src/lib.cairo_ to the following:"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:89
+#: src/ch02-01-variables-and-mutability.md:95
 msgid "When we run the program now, we get this:"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:100
+#: src/ch02-01-variables-and-mutability.md:106
 msgid ""
 "We’re allowed to change the value bound to `x` from `5` to `6` when `mut` is "
 "used. Ultimately, deciding whether to use mutability or not is up to you and "
 "depends on what you think is clearest in that particular situation."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:104
+#: src/ch02-01-variables-and-mutability.md:110
 msgid "Constants"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:106
+#: src/ch02-01-variables-and-mutability.md:112
 msgid ""
 "Like immutable variables, _constants_ are values that are bound to a name "
 "and are not allowed to change, but there are a few differences between "
 "constants and variables."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:110
+#: src/ch02-01-variables-and-mutability.md:116
 msgid ""
 "First, you aren’t allowed to use `mut` with constants. Constants aren’t just "
 "immutable by default—they’re always immutable. You declare constants using "
@@ -1165,30 +1177,30 @@ msgid ""
 "details right now. Just know that you must always annotate the type."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:117
+#: src/ch02-01-variables-and-mutability.md:123
 msgid ""
 "Constants can only be declared in the global scope, which makes them useful "
 "for values that many parts of code need to know about."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:120
+#: src/ch02-01-variables-and-mutability.md:126
 msgid ""
 "The last difference is that constants may be set only to a constant "
 "expression, not the result of a value that could only be computed at "
 "runtime. Only literal constants are currently supported."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:124
+#: src/ch02-01-variables-and-mutability.md:130
 msgid "Here’s an example of a constant declaration:"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:130
+#: src/ch02-01-variables-and-mutability.md:136
 msgid ""
 "Cairo's naming convention for constants is to use all uppercase with "
 "underscores between words."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:133
+#: src/ch02-01-variables-and-mutability.md:139
 msgid ""
 "Constants are valid for the entire time a program runs, within the scope in "
 "which they were declared. This property makes constants useful for values in "
@@ -1197,7 +1209,7 @@ msgid ""
 "allowed to earn, or the speed of light."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:139
+#: src/ch02-01-variables-and-mutability.md:145
 msgid ""
 "Naming hardcoded values used throughout your program as constants is useful "
 "in conveying the meaning of that value to future maintainers of the code. It "
@@ -1205,11 +1217,11 @@ msgid ""
 "the hardcoded value needed to be updated in the future."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:144
+#: src/ch02-01-variables-and-mutability.md:150
 msgid "Shadowing"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:146
+#: src/ch02-01-variables-and-mutability.md:152
 msgid ""
 "Variable shadowing refers to the declaration of a new variable with the same "
 "name as a previous variable. Caironautes say that the first variable is "
@@ -1221,7 +1233,7 @@ msgid ""
 "the `let` keyword as follows:"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:172
+#: src/ch02-01-variables-and-mutability.md:178
 msgid ""
 "This program first binds `x` to a value of `5`. Then it creates a new "
 "variable `x` by repeating `let x =`, taking the original value and adding "
@@ -1232,7 +1244,7 @@ msgid ""
 "returns to being `6`. When we run this program, it will output the following:"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:194
+#: src/ch02-01-variables-and-mutability.md:200
 msgid ""
 "Shadowing is different from marking a variable as `mut` because we’ll get a "
 "compile-time error if we accidentally try to reassign to this variable "
@@ -1241,7 +1253,7 @@ msgid ""
 "transformations have been completed."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:200
+#: src/ch02-01-variables-and-mutability.md:206
 msgid ""
 "Another distinction between `mut` and shadowing is that when we use the "
 "`let` keyword again, we are effectively creating a new variable, which "
@@ -1252,11 +1264,11 @@ msgid ""
 "program performs a type conversion between the `u64` and `felt252` types."
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:214
+#: src/ch02-01-variables-and-mutability.md:220
 msgid "// converts x to a felt, type annotation is required.\n"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:219
+#: src/ch02-01-variables-and-mutability.md:225
 msgid ""
 "The first `x` variable has a `u64` type while the second `x` variable has a "
 "`felt252` type. Shadowing thus spares us from having to come up with "
@@ -1265,13 +1277,13 @@ msgid ""
 "we’ll get a compile-time error:"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:235
+#: src/ch02-01-variables-and-mutability.md:241
 msgid ""
 "The error says we were expecting a `u64` (the original type) but we got a "
 "different type:"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:237
+#: src/ch02-01-variables-and-mutability.md:243
 msgid ""
 "```shell\n"
 "$ scarb cairo-run\n"
@@ -1285,7 +1297,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch02-01-variables-and-mutability.md:247
+#: src/ch02-01-variables-and-mutability.md:253
 msgid ""
 "Now that we’ve explored how variables work, let’s look at more data types "
 "they can have."
@@ -2912,21 +2924,21 @@ msgstr ""
 msgid "Implementing our custom get would look like this:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:199 src/ch03-02-dictionaries.md:248
+#: src/ch03-02-dictionaries.md:199 src/ch03-02-dictionaries.md:242
 msgid "// Get the new entry and the previous value held at `key`\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:202 src/ch03-02-dictionaries.md:251
+#: src/ch03-02-dictionaries.md:202 src/ch03-02-dictionaries.md:245
 msgid "// Store the value to return\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:205 src/ch03-02-dictionaries.md:254
+#: src/ch03-02-dictionaries.md:205 src/ch03-02-dictionaries.md:248
 msgid ""
 "// Update the entry with `prev_value` and get back ownership of the "
 "dictionary\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:208 src/ch03-02-dictionaries.md:257
+#: src/ch03-02-dictionaries.md:208 src/ch03-02-dictionaries.md:251
 msgid "// Return the read value\n"
 msgstr ""
 
@@ -2937,55 +2949,55 @@ msgid ""
 "look like the following:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:227
+#: src/ch03-02-dictionaries.md:221
 msgid ""
 "// Get the last entry associated with `key`\n"
 "    // Notice that if `key` does not exists, _prev_value will\n"
 "    // be the default value of T.\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:232
+#: src/ch03-02-dictionaries.md:226
 msgid ""
 "// Insert `entry` back in the dictionary with the updated value,\n"
 "    // and receive ownership of the dictionary\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:238
+#: src/ch03-02-dictionaries.md:232
 msgid ""
 "As a finalizing note, these two methods are implemented in a similar way to "
 "how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows "
 "some example usage:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:270
+#: src/ch03-02-dictionaries.md:258
 msgid "// Get the last entry associated with `key`\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:271
+#: src/ch03-02-dictionaries.md:259
 msgid "// Notice that if `key` does not exists, _prev_value will\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:272
+#: src/ch03-02-dictionaries.md:260
 msgid "// be the default value of T.\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:275
+#: src/ch03-02-dictionaries.md:263
 msgid "// Insert `entry` back in the dictionary with the updated value,\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:276
+#: src/ch03-02-dictionaries.md:264
 msgid "// and receive ownership of the dictionary\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:283 src/ch03-02-dictionaries.md:285
+#: src/ch03-02-dictionaries.md:271 src/ch03-02-dictionaries.md:273
 msgid "'0'"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:293
+#: src/ch03-02-dictionaries.md:281
 msgid "Dictionaries of types not supported natively"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:295
+#: src/ch03-02-dictionaries.md:283
 msgid ""
 "One restriction of `Felt252Dict<T>` that we haven't talked about is the "
 "trait `Felt252DictValue<T>`. This trait defines the `zero_default` method "
@@ -3000,7 +3012,7 @@ msgid ""
 "inside a `Nullable<T>`."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:301
+#: src/ch03-02-dictionaries.md:289
 msgid ""
 "`Nullable<T>` is a smart pointer type that can either point to a value or be "
 "`null` in the absence of value. It is usually used in Object Oriented "
@@ -3011,7 +3023,7 @@ msgid ""
 "pointer that can only be manipulated in one place at a time."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:303
+#: src/ch03-02-dictionaries.md:291
 msgid ""
 "Let's show using an example. We will try to store a `Span<felt252>` inside a "
 "dictionary. For that, we will use `Nullable<T>` and `Box<T>`. Also, we are "
@@ -3020,94 +3032,94 @@ msgid ""
 "dictionary."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:310 src/ch03-02-dictionaries.md:368
+#: src/ch03-02-dictionaries.md:298 src/ch03-02-dictionaries.md:356
 msgid "// Create the dictionary\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:313 src/ch03-02-dictionaries.md:371
+#: src/ch03-02-dictionaries.md:301 src/ch03-02-dictionaries.md:359
 msgid "// Crate the array to insert\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:319 src/ch03-02-dictionaries.md:377
+#: src/ch03-02-dictionaries.md:307 src/ch03-02-dictionaries.md:365
 msgid "// Insert it as a `Span`\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:321 src/ch03-02-dictionaries.md:336
+#: src/ch03-02-dictionaries.md:309 src/ch03-02-dictionaries.md:324
 msgid "//...\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:325
+#: src/ch03-02-dictionaries.md:313
 msgid ""
 "In this code snippet, the first thing we did was to create a new dictionary "
 "`d`. We want it to hold a `Nullable<Span>`. After that, we created an array "
 "and filled it with values."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:327
+#: src/ch03-02-dictionaries.md:315
 msgid ""
 "The last step is inserting the array as a span inside the dictionary. Notice "
 "that we didn't do that directly, but instead, we took some steps in between:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:329
+#: src/ch03-02-dictionaries.md:317
 msgid ""
 "We wrapped the array inside a `Box` using the `new` method from `BoxTrait`."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:330
+#: src/ch03-02-dictionaries.md:318
 msgid ""
 "We wrapped the `Box` inside a nullable using the `nullable_from_box` "
 "function."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:331
+#: src/ch03-02-dictionaries.md:319
 msgid "Finally, we inserted the result."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:333
+#: src/ch03-02-dictionaries.md:321
 msgid ""
 "Once the element is inside the dictionary, and we want to get it, we follow "
 "the same steps but in reverse order. The following code shows how to achieve "
 "that:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:338 src/ch03-02-dictionaries.md:380
+#: src/ch03-02-dictionaries.md:326 src/ch03-02-dictionaries.md:368
 msgid "// Get value back\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:341 src/ch03-02-dictionaries.md:383
+#: src/ch03-02-dictionaries.md:329 src/ch03-02-dictionaries.md:371
 msgid "// Search the value and assert it is not null\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:347 src/ch03-02-dictionaries.md:389
+#: src/ch03-02-dictionaries.md:335 src/ch03-02-dictionaries.md:377
 msgid "// Verify we are having the right values\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:354
+#: src/ch03-02-dictionaries.md:342
 msgid "Here we:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:356
+#: src/ch03-02-dictionaries.md:344
 msgid "Read the value using `get`."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:357
+#: src/ch03-02-dictionaries.md:345
 msgid "Verified it is non-null using the `match_nullable` function."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:358
+#: src/ch03-02-dictionaries.md:346
 msgid "Unwrapped the value inside the box and asserted it was correct."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:360
+#: src/ch03-02-dictionaries.md:348
 msgid "The complete script would look like this:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:397
+#: src/ch03-02-dictionaries.md:385
 msgid "Dictionaries as Struct Members"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:399
+#: src/ch03-02-dictionaries.md:387
 msgid ""
 "Defining dictionaries as struct members is possible in Cairo but correctly "
 "interacting with them may not be entirely seamless. Let's try implementing a "
@@ -3116,40 +3128,40 @@ msgid ""
 "its functionality:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:414
+#: src/ch03-02-dictionaries.md:402
 msgid ""
 "Our new type `UserDatabase<T>` represents a database of users. It is generic "
 "over the balances of the users, giving major flexibility to whoever uses our "
 "data type. Its two members are:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:416
+#: src/ch03-02-dictionaries.md:404
 msgid "`users_amount`, the number of users currently inserted and"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:417
+#: src/ch03-02-dictionaries.md:405
 msgid "`balances`, a mapping of each user to its balance."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:419
+#: src/ch03-02-dictionaries.md:407
 msgid ""
 "The database core functionality is defined by `UserDatabaseTrait`. The "
 "following methods are defined:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:421
+#: src/ch03-02-dictionaries.md:409
 msgid "`new` for easily creating new `UserDatabase` types."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:422
+#: src/ch03-02-dictionaries.md:410
 msgid "`add_user` to insert users in the database."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:423
+#: src/ch03-02-dictionaries.md:411
 msgid "`get_balance` to find user's balance in the database."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:425
+#: src/ch03-02-dictionaries.md:413
 msgid ""
 "The only remaining step is to implement each of the methods in "
 "`UserDatabaseTrait`, but since we are working with [generic "
@@ -3158,41 +3170,41 @@ msgid ""
 "value type:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:427
+#: src/ch03-02-dictionaries.md:415
 msgid ""
 "`T` should implement the `Copy<T>` since it's required for getting values "
 "from a `Felt252Dict<T>`."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:428
+#: src/ch03-02-dictionaries.md:416
 msgid ""
 "All value types of a dictionary implement the `Felt252DictValue<T>`, our "
 "generic type should do as well."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:429
+#: src/ch03-02-dictionaries.md:417
 msgid ""
 "To insert values, `Felt252DictTrait<T>` requires all value types to be "
 "destructible."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:431
+#: src/ch03-02-dictionaries.md:419
 msgid "The implementation, with all restriction in place, would be as follow:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:437 src/ch03-02-dictionaries.md:484
+#: src/ch03-02-dictionaries.md:425 src/ch03-02-dictionaries.md:470
 msgid "// Creates a database\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:442 src/ch03-02-dictionaries.md:489
+#: src/ch03-02-dictionaries.md:430 src/ch03-02-dictionaries.md:475
 msgid "// Get the user's balance\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:447 src/ch03-02-dictionaries.md:494
+#: src/ch03-02-dictionaries.md:435 src/ch03-02-dictionaries.md:480
 msgid "// Add a user\n"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:455
+#: src/ch03-02-dictionaries.md:443
 msgid ""
 "Our database implementation is almost complete, except for one thing: the "
 "compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since "
@@ -3207,20 +3219,20 @@ msgid ""
 "ourselves:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:469
+#: src/ch03-02-dictionaries.md:455
 msgid ""
 "Implementing `Destruct<T>` for `UserDatabase` was our last step to get a "
 "fully functional database. We can now try it out:"
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:530
+#: src/ch03-02-dictionaries.md:514
 msgid ""
 "Well done! You finished this chapter on arrays and dictionaries in Cairo. "
 "These data structures may be a bit challenging to grasp, but they are really "
 "useful."
 msgstr ""
 
-#: src/ch03-02-dictionaries.md:532
+#: src/ch03-02-dictionaries.md:516
 msgid ""
 "When you’re ready to move on, we’ll talk about a concept that Cairo shares "
 "with Rust and that _doesn’t_ commonly exist in other programming languages: "
@@ -3415,7 +3427,7 @@ msgstr ""
 msgid "Next, let's see how our main functions `push` and `pop` are implemented."
 msgstr ""
 
-#: src/ch03-03-custom-data-structures.md:201
+#: src/ch03-03-custom-data-structures.md:199
 msgid ""
 "The code uses the `insert` and `get` methods to access the values in the "
 "`Felt252Dict<T>`. To push an element at the top of the stack, the `push` "
@@ -3426,7 +3438,7 @@ msgid ""
 "stack top accordingly."
 msgstr ""
 
-#: src/ch03-03-custom-data-structures.md:209
+#: src/ch03-03-custom-data-structures.md:207
 msgid ""
 "The full implementation of the Stack, along with more data structures that "
 "you can use in your code, can be found in the community-maintained "
@@ -3434,7 +3446,7 @@ msgid ""
 "library, in the \"data_structures\" crate."
 msgstr ""
 
-#: src/ch03-03-custom-data-structures.md:216
+#: src/ch03-03-custom-data-structures.md:214
 msgid ""
 "While Cairo's memory model is immutable and can make it difficult to "
 "implement mutable data structures, we can fortunately use the "
@@ -3461,108 +3473,151 @@ msgid ""
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:1
-msgid "What Is Ownership?"
+msgid "Ownership Using a Linear Type System"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:3
 msgid ""
-"Cairo implements an ownership system to ensure the safety and correctness of "
-"its compiled code. The ownership mechanism complements the linear type "
-"system, which enforces that objects are used exactly once. This helps "
-"prevent common operations that can produce runtime errors, such as illegal "
-"memory address references or multiple writes to the same memory address, and "
-"ensures the soundness of Cairo programs by checking at compile time that all "
-"the dictionaries are squashed."
+"Cairo uses a linear type system. In such a type system, any value (a basic "
+"type, a struct, an enum) must be used and must only be used once. 'Used' "
+"here means that the value is either _destroyed_ or _moved_."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:5
+msgid "_Destruction_ can happen in several ways:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:7
+msgid "a variable goes out of scope"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:8
+msgid "a struct is destructured"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:9
-msgid ""
-"Now that we’re past basic Cairo syntax, we won’t include all the `fn main() "
-"{` code in examples, so if you’re following along, make sure to put the "
-"following examples inside a `main` function manually. As a result, our "
-"examples will be a bit more concise, letting us focus on the actual details "
-"rather than boilerplate code."
+msgid "explicit destruction using destruct()"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:15
-msgid "Ownership Rules"
+#: src/ch04-01-what-is-ownership.md:11
+msgid "_Moving_ a value simply means passing that value to another function."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:13
+msgid ""
+"This results in somewhat similar constraints to the Rust ownership model, "
+"but there are some differences. In particular, the rust ownership model "
+"exists (in part) to avoid data races and concurrent mutable access to a "
+"memory value. This is obviously impossible in Cairo since the memory is "
+"immutable. Instead, Cairo leverages its linear type system for two main "
+"purposes:"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:17
-msgid ""
-"First, let’s take a look at the ownership rules. Keep these rules in mind as "
-"we work through the examples that illustrate them:"
+msgid "Ensuring that all code is provable and thus verifiable."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:18
+msgid "Abstracting away the immutable memory of the Cairo VM."
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:20
-msgid "Each value in Cairo has an _owner_."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:21
-msgid "There can only be one owner at a time."
+msgid "Ownership"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:22
-msgid "When the owner goes out of scope, the value will be _dropped_."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:24
-msgid "Variable Scope"
+msgid ""
+"In Cairo, ownership applies to _variables_ and not to _values_. A value can "
+"safely be referred to by many different variables (even if they are mutable "
+"variables), as the value itself is always immutable. Variables however can "
+"be mutable, so the compiler must ensure that constant variables aren't "
+"accidentally modified by the programmer. This makes it possible to talk "
+"about ownership of a variable: the owner is the code that can read (and "
+"write if mutable) the variable."
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:26
 msgid ""
-"As a first example of ownership, we’ll look at the _scope_ of some "
-"variables. A scope is the range within a program for which an item is valid. "
-"Take the following variable:"
+"This means that variables (not values) follow similar rules to Rust values:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:34
+#: src/ch04-01-what-is-ownership.md:28
+msgid "Each variable in Cairo has an owner."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:29
+msgid "There can only be one owner at a time."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:30
+msgid "When the owner goes out of scope, the variable is destroyed."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:32
 msgid ""
-"The variable `s` refers to a short string, where the value of the string is "
-"hardcoded into the text of our program. The variable is valid from the point "
-"at which it’s declared until the end of the current _scope_. Listing 4-1 "
-"shows a program with comments annotating where the variable `s` would be "
-"valid."
+"Now that we’re past basic Cairo syntax, we won’t include all the `fn main() "
+"{` examples inside a `main` function manually. As a result, our examples "
+"will be a code in examples, so if you’re following along, make sure to put "
+"the following bit more concise, letting us focus on the actual details "
+"rather than boilerplate code."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:38
+msgid "Variable Scope"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:40
-msgid "//TAG: ignore_fmt\n"
+msgid ""
+"As a first example of the linear type system, we’ll look at the _scope_ of "
+"some variables. A scope is the range within a program for which an item is "
+"valid. Take the following variable:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:42
-msgid "// s is not valid here, it’s not yet declared\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:43
-msgid "// s is valid from this point forward\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:45
-msgid "// do stuff with s\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:46
-msgid "// this scope is now over, and s is no longer valid\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:50
-msgid "Listing 4-1: A variable and the scope in which it is valid"
+#: src/ch04-01-what-is-ownership.md:48
+msgid ""
+"The variable `s` refers to a short string. The variable is valid from the "
+"point at which it’s declared until the end of the current _scope_. Listing "
+"4-1 shows a program with comments annotating where the variable `s` would be "
+"valid."
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:53
-msgid "In other words, there are two important points in time here:"
+msgid "//TAG: ignore_fmt\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:55
-msgid "When `s` comes _into_ scope, it is valid."
+msgid "// s is not valid here, it’s not yet declared\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:56
-msgid "It remains valid until it goes _out of_ scope."
+msgid "// s is valid from this point forward\n"
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:58
+msgid "// do stuff with s\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:59
+msgid "// this scope is now over, and s is no longer valid\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:63
+msgid "Listing 4-1: A variable and the scope in which it is valid"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:65
+msgid "In other words, there are two important points in time here:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:67
+msgid "When `s` comes _into_ scope, it is valid."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:68
+msgid "It remains valid until it goes _out of_ scope."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:70
 msgid ""
 "At this point, the relationship between scopes and when variables are valid "
 "is similar to that in other programming languages. Now we’ll build on top of "
@@ -3570,169 +3625,162 @@ msgid ""
 "chapter](./ch03-01-arrays.md)."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:62
-msgid "Ownership with the `Array` Type"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:64
-msgid ""
-"To illustrate the rules of ownership, we need a data type that is more "
-"complex. The types covered in the [Data "
-"Types](ch02-02-data-types.html#data-types)"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:65
-msgid ""
-" section of Chapter 2 are of a known size, can be quickly and trivially "
-"copied to make a new, independent instance if another part of code needs to "
-"use the same value in a different scope, and can easily be dropped when "
-"they're no longer used. But what is the behavior with the `Array` type whose "
-"size is unknown at compile time and which can't be trivially copied?"
-msgstr ""
-
 #: src/ch04-01-what-is-ownership.md:72
-msgid "Here is a short reminder of what an array looks like:"
+msgid "Moving values - example with Array"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:82
+#: src/ch04-01-what-is-ownership.md:74
 msgid ""
-"So, how does the ownership system ensure that each cell is never written to "
-"more than once? Consider the following code, where we try to pass the same "
-"instance of an array in two consecutive function calls:"
+"As said earlier, _moving_ a value simply means passing that value to another "
+"function. When that happens, the variable referring to that value in the "
+"original scope is destroyed and can no longer be used, and a new variable is "
+"created to hold the same value."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:99
+#: src/ch04-01-what-is-ownership.md:76
 msgid ""
-"In this case, we try to pass the same array instance `arr` by value to the "
-"functions `foo` and `bar`, which means that the parameter used in both "
-"function calls is the same instance of the array. If you append a value to "
-"the array in `foo`, and then try to append another value to the same array "
-"in `bar`, what would happen is that you would attempt to try to write to the "
-"same memory cell twice, which is not allowed in Cairo. To prevent this, the "
-"ownership of the `arr` variable moves from the `main` function to the `foo` "
-"function. When trying to call `bar` with `arr` as a parameter, the ownership "
-"of `arr` was already moved to the first call. The ownership system thus "
-"prevents us from using the same instance of `arr` in `foo`."
+"Arrays are an example of a complex type that is moved when passing it to "
+"another function. Here is a short reminder of what an array looks like:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:107
-msgid "Running the code above will result in a compile-time error:"
+#: src/ch04-01-what-is-ownership.md:87
+msgid ""
+"How does the type system ensure that the Cairo program never tries to write "
+"to the same memory cell twice? Consider the following code, where we try to "
+"remove the front of the array twice:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:116
-msgid "The `Copy` Trait"
+#: src/ch04-01-what-is-ownership.md:103
+msgid ""
+"In this case, we try to pass the same value (the array in the `arr` "
+"variable) to both function calls. This means our code tries to remove the "
+"first element twice, which would try to write to the same memory cell twice "
+"- which is forbidden by the Cairo VM, leading to a runtime error. "
+"Thankfully, this code does not actually compile. Once we have passed the "
+"array to the `foo` function, the variable `arr` is no longer usable. We get "
+"this compile-time error, telling us that we would need Array to implement "
+"the Copy Trait:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:113
+msgid "The Copy trait"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:115
+msgid ""
+"If a type implements the `Copy` trait, passing a value of that type to a "
+"function does not move the value. Instead, a new variable is created, "
+"referring to the same value. The important thing to note here is that this "
+"is a completely free operation, because variables are a cairo abstraction "
+"only and because _values_ in Cairo are always immutable. This, in "
+"particular, conceptually differs from the rust version of the `Copy` trait, "
+"where the value is potentially copied in memory."
 msgstr ""
 
 #: src/ch04-01-what-is-ownership.md:118
 msgid ""
-"If a type implements the `Copy` trait, passing it to a function will not "
-"move the ownership of the value to the function called, but will instead "
-"pass a copy of the value. You can implement the `Copy` trait on your type by "
-"adding the `#[derive(Copy)]` annotation to your type definition. However, "
-"Cairo won't allow a type to be annotated with Copy if the type itself or any "
-"of its components don't implement the Copy trait. While Arrays and "
-"Dictionaries can't be copied, custom types that don't contain either of them "
-"can be."
+"You can implement the `Copy` trait on your type by adding the "
+"`#[derive(Copy)]` annotation to your type definition. However, Cairo won't "
+"allow a type to be annotated with Copy if the type itself or any of its "
+"components don't implement the Copy trait. While Arrays and Dictionaries "
+"can't be copied, custom types that don't contain either of them can be."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:135
+#: src/ch04-01-what-is-ownership.md:134
 msgid "// do something with p\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:139
+#: src/ch04-01-what-is-ownership.md:138
 msgid ""
 "In this example, we can pass `p1` twice to the foo function because the "
 "`Point` type implements the `Copy` trait. This means that when we pass `p1` "
-"to `foo`, we are actually passing a copy of `p1`, and the ownership of `p1` "
-"remains with the main function. If you remove the `Copy` trait derivation "
-"from the `Point` type, you will get a compile-time error when trying to "
-"compile the code."
+"to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid. In "
+"ownership terms, this means that the ownership of `p1` remains with the main "
+"function. If you remove the `Copy` trait derivation from the `Point` type, "
+"you will get a compile-time error when trying to compile the code."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:142
+#: src/ch04-01-what-is-ownership.md:141
 msgid ""
 "_Don't worry about the `Struct` keyword. We will introduce this in [Chapter "
 "5](ch05-00-using-structs-to-structure-related-data.md)._"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:144
-msgid "The `Drop` Trait"
+#: src/ch04-01-what-is-ownership.md:143
+msgid "Destroying values - example with FeltDict"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:146
+#: src/ch04-01-what-is-ownership.md:145
+msgid ""
+"The other way linear types can be _used_ is by being destroyed. Destruction "
+"must ensure that the 'resource' is now correctly released. In rust for "
+"example, this could be closing the access to a file, or locking a mutex. In "
+"Cairo, one type that has such behaviour is `Felt252Dict`. For provability, "
+"dicts must be 'squashed' when they are destructed. This would be very easy "
+"to forget, so it is enforced by the type system and the compiler."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:149
+msgid "No-op destruction: the Drop Trait"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:151
 msgid ""
 "You may have noticed that the `Point` type in the previous example also "
-"implements the `Drop` trait. In Cairo, a value cannot go out of scope unless "
-"it has been previously moved. For example, the following code will not "
-"compile, because the struct `A` is not moved before it goes out of scope:"
+"implements the `Drop` trait. For example, the following code will not "
+"compile, because the struct `A` is not moved or destroyed before it goes out "
+"of scope:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:153
+#: src/ch04-01-what-is-ownership.md:158
 msgid "// error: Value not dropped.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:157
+#: src/ch04-01-what-is-ownership.md:162
 msgid ""
-"This is to ensure the soundness of Cairo programs. Soundness refers to the "
-"fact that if a statement during the execution of the program is false, no "
-"cheating prover can convince an honest verifier that it is true. In our "
-"case, we want to ensure the consistency of consecutive dictionary key "
-"updates during program execution, which is only checked when the "
-"dictionaries are `squashed` - which moves the ownership of the dictionary to "
-"the `squash` method, thus allowing the dictionary to go out of scope. "
-"Unsquashed dictionaries are dangerous, as a malicious prover could prove the "
-"correctness of inconsistent updates."
+"However, types that implement the `Drop` trait are automatically destroyed "
+"when going out of scope. This destruction does nothing, it is a no-op - "
+"simply a hint to the compiler that this type can safely be destroyed once "
+"it's no longer useful. We call this \"dropping\" a value."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:165
+#: src/ch04-01-what-is-ownership.md:164
 msgid ""
-"However, types that implement the `Drop` trait are allowed to go out of "
-"scope without being explicitly moved. When a value of a type that implements "
-"the `Drop` trait goes out of scope, the `Drop` implementation is called on "
-"the type, which moves the value to the `drop` function, allowing it to go "
-"out of scope - This is what we call \"dropping\" a value. It is important to "
-"note that the implementation of drop is a \"no-op\", meaning that it doesn't "
-"perform any actions other than allowing the value to go out of scope."
+"At the moment, the `Drop` implementation can be derived for all types, "
+"allowing them to be dropped when going out of scope, except for dictionaries "
+"(`Felt252Dict`) and types containing dictionaries. For example, the "
+"following code compiles:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:168
-msgid ""
-"The `Drop` implementation can be derived for all types, allowing them to be "
-"dropped when going out of scope, except for dictionaries (`Felt252Dict`) and "
-"types containing dictionaries. For example, the following code compiles:"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:176
+#: src/ch04-01-what-is-ownership.md:172
 msgid "// Now there is no error.\n"
 msgstr ""
 
+#: src/ch04-01-what-is-ownership.md:176
+msgid "Destruction with a side-effect: the Destruct trait"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:178
+msgid ""
+"When a value is destroyed, the compiler first tries to call the `drop` "
+"method on that type. If it doesn't exist, then the compiler tries to call "
+"`destruct` instead. This method is provided by the `Destruct` trait."
+msgstr ""
+
 #: src/ch04-01-what-is-ownership.md:180
-msgid "The `Destruct` Trait"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:182
 msgid ""
-"Manually calling the `squash` method on a dictionary is not very convenient, "
-"and it is easy to forget to do so. To make it easier to use dictionaries, "
-"Cairo provides the `Destruct` trait, which allows you to specify the "
-"behavior of a type when it goes out of scope. While Dictionaries don't "
-"implement the `Drop` trait, they do implement the `Destruct` trait, which "
-"allows them to automatically be `squashed` when they go out of scope. This "
-"means that you can use dictionaries without having to manually call the "
-"`squash` method."
+"As said earlier, dictionaries in Cairo are types that must be \"squashed\" "
+"when destructed, so that the sequence of access can be proven. This is easy "
+"for developers to forget, so instead dictionaries implement the `Destruct` "
+"trait to ensure that all dictionaries are _squashed_ when going out of "
+"scope. As such, the following example will not compile:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:184
-msgid ""
-"Consider the following example, in which we define a custom type that "
-"contains a dictionary:"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:197
+#: src/ch04-01-what-is-ownership.md:194
 msgid "If you try to run this code, you will get a compile-time error:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:206
+#: src/ch04-01-what-is-ownership.md:203
 msgid ""
 "When A goes out of scope, it can't be dropped as it implements neither the "
 "`Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the "
@@ -3740,21 +3788,21 @@ msgid ""
 "implementation for the `A` type:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:215
+#: src/ch04-01-what-is-ownership.md:212
 msgid "// No error here\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:219
+#: src/ch04-01-what-is-ownership.md:216
 msgid ""
 "Now, when `A` goes out of scope, its dictionary will be automatically "
 "`squashed`, and the program will compile."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:221
+#: src/ch04-01-what-is-ownership.md:218
 msgid "Copy Array data with Clone"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:223
+#: src/ch04-01-what-is-ownership.md:220
 msgid ""
 "If we _do_ want to deeply copy the data of an `Array`, we can use a common "
 "method called `clone`. We’ll discuss method syntax in Chapter 6, but because "
@@ -3762,125 +3810,41 @@ msgid ""
 "seen them before."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:226
+#: src/ch04-01-what-is-ownership.md:222
 msgid "Here’s an example of the `clone` method in action."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:228
-msgid ""
-"Note: in the following example, we need to import the `Clone` trait from the "
-"corelib `clone` module, and its implementation for the array type from the "
-"`array` module."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:239
-msgid ""
-"Note: you will need to run `scarb cairo-run` with the "
-"`--available-gas=2000000` option to run this example, because it uses a loop "
-"and must be ran with a gas limit."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:241
+#: src/ch04-01-what-is-ownership.md:233
 msgid ""
 "When you see a call to `clone`, you know that some arbitrary code is being "
 "executed and that code may be expensive. It’s a visual indicator that "
-"something different is going on."
+"something different is going on. In this case, _value_ is being copied, "
+"resulting in new memory cells being used, and the a new _variable_ is "
+"created, referring to the new, copied value."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:245
-msgid "Ownership and Functions"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:247
-msgid ""
-"Passing a variable to a function will either move it or copy it. As seen in "
-"the Array section, passing an `Array` as a function parameter transfers its "
-"ownership; let's see what happens with other types."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:249
-msgid ""
-"Listing 4-3 has an example with some annotations showing where variables go "
-"into and out of scope."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:259
-msgid "// my_struct comes into scope\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:261
-msgid ""
-"// my_struct's value moves into the function...\n"
-"                                    // ... and so is no longer valid here\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:264
-msgid "// x comes into scope\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:266
-msgid ""
-"// x would move into the function,\n"
-"                                    // but u128 implements Copy, so it is "
-"okay to still\n"
-"                                    // use x afterward\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:270
-msgid "// Here, x goes out of scope and is dropped.\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:273
-msgid "// some_struct comes into scope\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:274
-msgid "// Here, some_struct goes out of scope and `drop` is called.\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:276
-msgid "// some_uinteger comes into scope\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:277
-msgid "// Here, some_integer goes out of scope and is dropped.\n"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:280
-msgid "Listing 4-3: Functions with ownership and scope annotated"
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:283
-msgid ""
-"If we tried to use `my_struct` after the call to `takes_ownership`, Cairo "
-"would throw a compile-time error. These static checks protect us from "
-"mistakes. Try adding code to `main` that uses `my_struct` and `x` to see "
-"where you can use them and where the ownership rules prevent you from doing "
-"so."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:288
+#: src/ch04-01-what-is-ownership.md:236
 msgid "Return Values and Scope"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:290
+#: src/ch04-01-what-is-ownership.md:238
 msgid ""
-"Returning values can also transfer ownership. Listing 4-4 shows an example "
-"of a function that returns some value, with similar annotations as those in "
-"Listing 4-3."
+"Returning values is equivalent to _moving_ them. Listing 4-4 shows an "
+"example of a function that returns some value, with similar annotations as "
+"those in Listing 4-3."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:301
+#: src/ch04-01-what-is-ownership.md:249
 msgid ""
 "// gives_ownership moves its return\n"
 "                                          // value into a1\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:304
+#: src/ch04-01-what-is-ownership.md:252
 msgid "// a2 comes into scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:306
+#: src/ch04-01-what-is-ownership.md:254
 msgid ""
 "// a2 is moved into\n"
 "                                          // takes_and_gives_back, which "
@@ -3888,85 +3852,79 @@ msgid ""
 "                                          // moves its return value into a3\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:310
+#: src/ch04-01-what-is-ownership.md:258
 msgid ""
 "// Here, a3 goes out of scope and is dropped. a2 was moved, so nothing\n"
 "  // happens. a1 goes out of scope and is dropped.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:313
+#: src/ch04-01-what-is-ownership.md:261
 msgid ""
 "// gives_ownership will move its\n"
 "                                          // return value into the function\n"
 "                                          // that calls it\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:317
+#: src/ch04-01-what-is-ownership.md:265
 msgid "// some_a comes into scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:319
+#: src/ch04-01-what-is-ownership.md:267
 msgid ""
 "// some_a is returned and\n"
 "                                          // moves ownership to the calling\n"
 "                                          // function\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:323
+#: src/ch04-01-what-is-ownership.md:271
 msgid "// This function takes an instance some_a of A and returns it\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:325
+#: src/ch04-01-what-is-ownership.md:273
 msgid ""
 "// some_a comes into\n"
 "                                          // scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:328
+#: src/ch04-01-what-is-ownership.md:276
 msgid ""
 "// some_a is returned and moves\n"
 "                                         // ownership to the calling\n"
 "                                         // function\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:334
-msgid "Listing 4-4: Transferring ownership of return values"
+#: src/ch04-01-what-is-ownership.md:282
+msgid "Listing 4-4: Moving return values"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:337
+#: src/ch04-01-what-is-ownership.md:284
 msgid ""
-"When a variable goes out of scope, its value is dropped, unless ownership of "
-"the value has been moved to another variable."
+"While this works, moving into and out of every function is a bit tedious. "
+"What if we want to let a function use a value but not move the value? It’s "
+"quite annoying that anything we pass in also needs to be passed back if we "
+"want to use it again, in addition to any data resulting from the body of the "
+"function that we might want to return as well."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:339
-msgid ""
-"While this works, taking ownership and then returning ownership with every "
-"function is a bit tedious. What if we want to let a function use a value but "
-"not take ownership? It’s quite annoying that anything we pass in also needs "
-"to be passed back if we want to use it again, in addition to any data "
-"resulting from the body of the function that we might want to return as well."
-msgstr ""
-
-#: src/ch04-01-what-is-ownership.md:345
+#: src/ch04-01-what-is-ownership.md:286
 msgid ""
 "Cairo does let us return multiple values using a tuple, as shown in Listing "
 "4-5."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:357
+#: src/ch04-01-what-is-ownership.md:298
 msgid "// len() returns the length of an array\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:363
-msgid "Listing 4-5: Returning ownership of parameters"
+#: src/ch04-01-what-is-ownership.md:304
+msgid "Listing 4-5: Returning many values"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:365
+#: src/ch04-01-what-is-ownership.md:306
 msgid ""
 "But this is too much ceremony and a lot of work for a concept that should be "
-"common. Luckily for us, Cairo has two features for using a value without "
-"transferring ownership, called _references_ and _snapshots_."
+"common. Luckily for us, Cairo has two features for passing a value without "
+"destroying or moving it, called _references_ and _snapshots_."
 msgstr ""
 
 #: src/ch04-02-references-and-snapshots.md:3
@@ -3983,16 +3941,23 @@ msgstr ""
 
 #: src/ch04-02-references-and-snapshots.md:10
 msgid ""
-"Instead, we can provide a _snapshot_ of the `Array` value. In Cairo, a "
-"snapshot is an immutable view of a value at a certain point in time. In the "
-"previous chapter, we talked about how Cairo's ownership system prevents us "
-"from using a value after we've moved it, protecting us from potentially "
-"writing twice to the same memory cell when appending values to arrays. "
-"However, it's not very convenient. Let's see how we can retain ownership of "
-"the value in the calling function using snapshots."
+"In the previous chapter, we talked about how Cairo's ownership system "
+"prevents us from using a variable after we've moved it, protecting us from "
+"potentially writing twice to the same memory cell. However, it's not very "
+"convenient. Let's see how we can retain ownership of the variable in the "
+"calling function using snapshots."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:17
+#: src/ch04-02-references-and-snapshots.md:15
+msgid ""
+"In Cairo, a snapshot is an immutable view of a value at a certain point in "
+"time. Recall that memory is immutable, so modifying a value actually creates "
+"a new memory cell. The old memory cell still exists, and snapshots are "
+"variables that refer to that \"old\" value. In this sense, snapshots are a "
+"view \"into the past\"."
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:20
 msgid ""
 "Here is how you would define and use a `calculate_length` function that "
 "takes a snapshot to an array as a parameter instead of taking ownership of "
@@ -4003,29 +3968,29 @@ msgid ""
 "array is kept in the main function."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:30
-#: src/ch04-02-references-and-snapshots.md:69
+#: src/ch04-02-references-and-snapshots.md:33
+#: src/ch04-02-references-and-snapshots.md:72
 msgid "// Take a snapshot of `arr1` at this point in time\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:31
-#: src/ch04-02-references-and-snapshots.md:70
+#: src/ch04-02-references-and-snapshots.md:34
+#: src/ch04-02-references-and-snapshots.md:73
 msgid "// Mutate `arr1` by appending a value\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:34
+#: src/ch04-02-references-and-snapshots.md:37
 msgid ""
 "// Calculate the length of the array when the snapshot was taken\n"
 "    //ANCHOR: function_call\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:36
+#: src/ch04-02-references-and-snapshots.md:39
 msgid ""
 "// Calculate the current length of the array\n"
 "    //ANCHOR_END: function_call\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:47
+#: src/ch04-02-references-and-snapshots.md:50
 msgid ""
 "Note: It is only possible to call the `len()` method on an array snapshot "
 "because it is defined as such in the `ArrayTrait` trait. If you try to call "
@@ -4034,11 +3999,11 @@ msgid ""
 "non-snapshot types."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:49
+#: src/ch04-02-references-and-snapshots.md:52
 msgid "The output of this program is:"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:59
+#: src/ch04-02-references-and-snapshots.md:62
 msgid ""
 "First, notice that all the tuple code in the variable declaration and the "
 "function return value is gone. Second, note that we pass `@arr1` into "
@@ -4046,44 +4011,45 @@ msgid ""
 "than `Array<u128>`."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:62
+#: src/ch04-02-references-and-snapshots.md:65
 msgid "Let’s take a closer look at the function call here:"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:73
+#: src/ch04-02-references-and-snapshots.md:76
 msgid "// Calculate the length of the array when the snapshot was taken\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:74
+#: src/ch04-02-references-and-snapshots.md:77
 msgid "// Calculate the current length of the array\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:84
+#: src/ch04-02-references-and-snapshots.md:87
 msgid ""
 "The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because "
-"a snapshot is an immutable view of a value, the value it points to cannot be "
-"modified through the snapshot, and the value it refers to will not be "
-"dropped once the snapshot stops being used."
+"a snapshot is an immutable view of a value at a specific point in time, the "
+"usual rules of the linear type system are not enforced. In particular, "
+"snapshot variables are always `Drop`, never `Destruct`, even dictionary "
+"snapshots."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:86
+#: src/ch04-02-references-and-snapshots.md:89
 msgid ""
 "Similarly, the signature of the function uses `@` to indicate that the type "
 "of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:91
+#: src/ch04-02-references-and-snapshots.md:94
 msgid "// array_snapshot is a snapshot of an Array\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:93
+#: src/ch04-02-references-and-snapshots.md:96
 msgid ""
 "// Here, array_snapshot goes out of scope and is dropped.\n"
 "// However, because it is only a view of what the original array `arr` "
 "contains, the original `arr` can still be used.\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:97
+#: src/ch04-02-references-and-snapshots.md:100
 msgid ""
 "The scope in which the variable `array_snapshot` is valid is the same as any "
 "function parameter’s scope, but the underlying value of the snapshot is not "
@@ -4093,27 +4059,25 @@ msgid ""
 "because we never had it."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:99
+#: src/ch04-02-references-and-snapshots.md:102
 msgid "Desnap Operator"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:101
+#: src/ch04-02-references-and-snapshots.md:104
 msgid ""
-"To convert a snapshot back into a regular value, you can use the `desnap` "
-"operator `*`, which serves as the opposite of the `@` operator: the snapshot "
-"value is copied to a new variable."
+"To convert a snapshot back into a regular variable, you can use the `desnap` "
+"operator `*`, which serves as the opposite of the `@` operator."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:103
+#: src/ch04-02-references-and-snapshots.md:106
 msgid ""
-"It's important to note that during this conversion process, the value it "
-"points to is copied into a new variable. This enables multiple uses of the "
-"underlying value without concerns about ownership transfers. This also means "
-"that the value pointed to by the snapshot must be copyable (which is not the "
-"case for Arrays, as they don't implement `Copy`)."
+"Only `Copy` types can be desnapped. However, in the general case, because "
+"the value is not modified, the new variable created by the `desnap` operator "
+"reuses the old value, and so desnapping is a completely free operation, just "
+"like `Copy`."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:105
+#: src/ch04-02-references-and-snapshots.md:108
 msgid ""
 "In the following example, we want to calculate the area of a rectangle, but "
 "we don't want to take ownership of the rectangle in the `calculate_area` "
@@ -4123,7 +4087,7 @@ msgid ""
 "the snapshots back into values using the `desnap` operator `*`."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:123
+#: src/ch04-02-references-and-snapshots.md:126
 msgid ""
 "// As rec is a snapshot to a Rectangle, its fields are also snapshots of the "
 "fields types.\n"
@@ -4135,29 +4099,29 @@ msgid ""
 "desnapping the snapshots.\n"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:131
+#: src/ch04-02-references-and-snapshots.md:134
 msgid ""
 "But, what happens if we try to modify something we’re passing as snapshot? "
 "Try the code in Listing 4-6. Spoiler alert: it doesn’t work!"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:155
+#: src/ch04-02-references-and-snapshots.md:158
 msgid "Listing 4-6: Attempting to modify a snapshot value"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:157
+#: src/ch04-02-references-and-snapshots.md:160
 msgid "Here’s the error:"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:166
+#: src/ch04-02-references-and-snapshots.md:169
 msgid "The compiler prevents us from modifying values associated to snapshots."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:168
+#: src/ch04-02-references-and-snapshots.md:171
 msgid "Mutable References"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:170
+#: src/ch04-02-references-and-snapshots.md:173
 msgid ""
 "We can achieve the behavior we want in Listing 4-6 by using a _mutable "
 "reference_ instead of a snapshot. Mutable references are actually mutable "
@@ -4168,24 +4132,24 @@ msgid ""
 "parameter can be passed as _mutable reference_ using the `ref` modifier."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:173
+#: src/ch04-02-references-and-snapshots.md:176
 msgid ""
 "**Note**: In Cairo, a parameter can only be passed as _mutable reference_ "
 "using the `ref` modifier if the variable is declared as mutable with `mut`."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:175
+#: src/ch04-02-references-and-snapshots.md:178
 msgid ""
 "In Listing 4-7, we use a mutable reference to modify the value of the "
 "`height` and `width` fields of the `Rectangle` instance in the `flip` "
 "function."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:199
+#: src/ch04-02-references-and-snapshots.md:202
 msgid "Listing 4-7: Use of a mutable reference to modify a value"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:201
+#: src/ch04-02-references-and-snapshots.md:204
 msgid ""
 "First, we change `rec` to be `mut`. Then we pass a mutable reference of "
 "`rec` into `flip` with `ref rec`, and update the function signature to "
@@ -4194,47 +4158,48 @@ msgid ""
 "instance passed as parameter."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:203
+#: src/ch04-02-references-and-snapshots.md:206
 msgid "The output of the program is:"
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:212
+#: src/ch04-02-references-and-snapshots.md:215
 msgid ""
 "As expected, the `height` and `width` fields of the `rec` variable have been "
 "swapped."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:214
+#: src/ch04-02-references-and-snapshots.md:217
 msgid "Small recap"
-msgstr ""
-
-#: src/ch04-02-references-and-snapshots.md:216
-msgid ""
-"Let’s recap what we’ve discussed about ownership, snapshots, and references:"
-msgstr ""
-
-#: src/ch04-02-references-and-snapshots.md:218
-msgid "At any given time, a variable can only have one owner."
 msgstr ""
 
 #: src/ch04-02-references-and-snapshots.md:219
 msgid ""
+"Let’s recap what we’ve discussed about the linear type system, ownership, "
+"snapshots, and references:"
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:221
+msgid "At any given time, a variable can only have one owner."
+msgstr ""
+
+#: src/ch04-02-references-and-snapshots.md:222
+msgid ""
 "You can pass a variable by-value, by-snapshot, or by-reference to a function."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:220
+#: src/ch04-02-references-and-snapshots.md:223
 msgid ""
 "If you pass-by-value, ownership of the variable is transferred to the "
 "function."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:221
+#: src/ch04-02-references-and-snapshots.md:224
 msgid ""
 "If you want to keep ownership of the variable and know that your function "
 "won’t mutate it, you can pass it as a snapshot with `@`."
 msgstr ""
 
-#: src/ch04-02-references-and-snapshots.md:222
+#: src/ch04-02-references-and-snapshots.md:225
 msgid ""
 "If you want to keep ownership of the variable and know that your function "
 "will mutate it, you can pass it as a mutable reference with `ref`."
@@ -4549,8 +4514,8 @@ msgid ""
 "parameter is always `self`, which represents the instance of the type the "
 "method is being called on. For those familiar with Rust, Cairo's approach "
 "might be confusing, as methods cannot be defined directly on types. Instead, "
-"you must define a trait and an implementation associated with the type for "
-"which the method is intended."
+"you must define a [trait](./ch08-02-traits-in-cairo.md) and an "
+"implementation associated with the type for which the method is intended."
 msgstr ""
 
 #: src/ch05-03-method-syntax.md:12
@@ -4590,7 +4555,7 @@ msgid ""
 "arguments."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:64
+#: src/ch05-03-method-syntax.md:66
 msgid ""
 "Methods must have a parameter named `self` of the type they will be applied "
 "to for their first parameter. Note that we used the `@` snapshot operator in "
@@ -4602,7 +4567,7 @@ msgid ""
 "using the `ref self: T` syntax."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:71
+#: src/ch05-03-method-syntax.md:74
 msgid ""
 "We chose `self: @Rectangle` here for the same reason we used `@Rectangle` in "
 "the function version: we don’t want to take ownership, and we just want to "
@@ -4615,7 +4580,7 @@ msgid ""
 "original instance after the transformation."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:80
+#: src/ch05-03-method-syntax.md:83
 msgid ""
 "Observe the use of the desnap operator `*` within the area method when "
 "accessing the struct's members. This is necessary because the struct is "
@@ -4623,7 +4588,7 @@ msgid ""
 "requiring them to be desnapped in order to manipulate them."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:84
+#: src/ch05-03-method-syntax.md:88
 msgid ""
 "The main reason for using methods instead of functions is for organization "
 "and code clarity. We’ve put all the things we can do with an instance of a "
@@ -4636,14 +4601,14 @@ msgid ""
 "block, and the `Sub` trait in another block."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:89
+#: src/ch05-03-method-syntax.md:97
 msgid ""
 "Note that we can choose to give a method the same name as one of the "
 "struct’s fields. For example, we can define a method on `Rectangle` that is "
 "also named `width`:"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:119
+#: src/ch05-03-method-syntax.md:127
 msgid ""
 "Here, we’re choosing to make the `width` method return `true` if the value "
 "in the instance’s `width` field is greater than `0` and `false` if the value "
@@ -4653,11 +4618,11 @@ msgid ""
 "the field `width`."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:126
+#: src/ch05-03-method-syntax.md:134
 msgid "Methods with More Parameters"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:128
+#: src/ch05-03-method-syntax.md:136
 msgid ""
 "Let’s practice using methods by implementing a second method on the "
 "`Rectangle` struct. This time we want an instance of `Rectangle` to take "
@@ -4667,18 +4632,18 @@ msgid ""
 "want to be able to write the program shown in Listing 5-14."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:158
+#: src/ch05-03-method-syntax.md:166
 msgid "Listing 5-14: Using the as-yet-unwritten `can_hold` method"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:161
+#: src/ch05-03-method-syntax.md:169
 msgid ""
 "The expected output would look like the following because both dimensions of "
 "`rect2` are smaller than the dimensions of `rect1`, but `rect3` is wider "
 "than `rect1`:"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:177
+#: src/ch05-03-method-syntax.md:185
 msgid ""
 "We know we want to define a method, so it will be within the `trait "
 "RectangleTrait` and `impl RectangleImpl of RectangleTrait` blocks. The "
@@ -4696,13 +4661,13 @@ msgid ""
 "5-13, shown in Listing 5-15."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:211
+#: src/ch05-03-method-syntax.md:218
 msgid ""
 "Listing 5-15: Implementing the `can_hold` method on `Rectangle` that takes "
 "another `Rectangle` instance as a parameter"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:214
+#: src/ch05-03-method-syntax.md:221
 msgid ""
 "When we run this code with the `main` function in Listing 5-14, we’ll get "
 "our desired output. Methods can take multiple parameters that we add to the "
@@ -4710,11 +4675,11 @@ msgid ""
 "parameters in functions."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:219
+#: src/ch05-03-method-syntax.md:226
 msgid "Accessing implementation functions"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:221
+#: src/ch05-03-method-syntax.md:228
 msgid ""
 "All functions defined within a `trait` and `impl` block can be directly "
 "addressed using the `::` operator on the implementation name. Functions in "
@@ -4727,7 +4692,7 @@ msgid ""
 "value twice:"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:245
+#: src/ch05-03-method-syntax.md:251
 msgid ""
 "To call this function, we use the `::` syntax with the implementation name; "
 "`let square = RectangleImpl::square(10);` is an example. This function is "
@@ -4736,32 +4701,32 @@ msgid ""
 "\\[Chapter 8\\]\\[modules\\]"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:248 src/appendix-06-cairo-binaries.md:167
+#: src/ch05-03-method-syntax.md:255 src/appendix-06-cairo-binaries.md:167
 msgid "."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:250
+#: src/ch05-03-method-syntax.md:257
 msgid ""
 "Note: It is also possible to call this function using the trait name, with "
 "`RectangleTrait::square(10)`."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:252
+#: src/ch05-03-method-syntax.md:260
 msgid "Multiple `impl` Blocks"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:254
+#: src/ch05-03-method-syntax.md:262
 msgid ""
 "Each struct is allowed to have multiple `trait` and `impl` blocks. For "
 "example, Listing 5-15 is equivalent to the code shown in Listing 5-16, which "
 "has each method in its own `trait` and `impl` blocks."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:279
+#: src/ch05-03-method-syntax.md:287
 msgid "Listing 5-16: Rewriting Listing 5-15 using multiple `impl` blocks"
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:282
+#: src/ch05-03-method-syntax.md:290
 msgid ""
 "There’s no reason to separate these methods into multiple `trait` and `impl` "
 "blocks here, but this is valid syntax. We’ll see a case in which multiple "
@@ -4769,7 +4734,7 @@ msgid ""
 "we discuss generic types and traits."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:288
+#: src/ch05-03-method-syntax.md:297
 msgid ""
 "Structs let you create custom types that are meaningful for your domain. By "
 "using structs, you can keep associated pieces of data connected to each "
@@ -4778,7 +4743,7 @@ msgid ""
 "let you specify the behavior that instances of your type have."
 msgstr ""
 
-#: src/ch05-03-method-syntax.md:294
+#: src/ch05-03-method-syntax.md:303
 msgid ""
 "But structs aren’t the only way you can create custom types: let’s turn to "
 "Cairo’s enum feature to add another tool to your toolbox."
@@ -5892,8 +5857,8 @@ msgid ""
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:189
-#: src/ch08-02-traits-in-cairo.md:186 src/ch08-02-traits-in-cairo.md:190
-#: src/ch08-02-traits-in-cairo.md:199
+#: src/ch08-02-traits-in-cairo.md:352 src/ch08-02-traits-in-cairo.md:356
+#: src/ch08-02-traits-in-cairo.md:365
 #: src/ch99-03-security-considerations.md:143
 #: src/ch99-03-security-considerations.md:148
 msgid "// ...\n"
@@ -6262,10 +6227,40 @@ msgid ""
 msgstr ""
 
 #: src/ch08-01-generic-data-types.md:115
-msgid "Structs"
+msgid "Anonymous Generic Implementation Parameter (`+` operator)"
 msgstr ""
 
 #: src/ch08-01-generic-data-types.md:117
+msgid ""
+"Until now, we have always specified a name for each implementation of the "
+"required generic trait: `TPartialOrd` for `PartialOrd<T>`, `TDrop` for "
+"`Drop<T>`, and `TCopy` for `Copy<T>`."
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:119
+msgid ""
+"However, most of the time, we don't use the implementation in the function "
+"body; we only use it as a constraint. In these cases, we can use the `+` "
+"operator to specify that the generic type must implement a trait without "
+"naming the implementation. This is referred to as an _anonymous generic "
+"implementation parameter_."
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:121
+msgid ""
+"For example, `+PartialOrd<T>` is equivalent to `impl TPartialOrd: "
+"PartialOrd<T>`."
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:123
+msgid "We can rewrite the `smallest_element` function signature as follows:"
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:141
+msgid "Structs"
+msgstr ""
+
+#: src/ch08-01-generic-data-types.md:143
 msgid ""
 "We can also define structs to use a generic type parameter for one or more "
 "fields using the `<>` syntax, similar to function definitions. First we "
@@ -6276,13 +6271,13 @@ msgid ""
 "type `T`."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:131
+#: src/ch08-01-generic-data-types.md:157
 msgid ""
 "The above code derives the `Drop` trait for the `Wallet` type automatically. "
 "It is equivalent to writing the following code:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:145
+#: src/ch08-01-generic-data-types.md:171
 msgid ""
 "We avoid using the `derive` macro for `Drop` implementation of `Wallet` and "
 "instead define our own `WalletDrop` implementation. Notice that we must "
@@ -6291,28 +6286,28 @@ msgid ""
 "that the struct `Wallet<T>` is droppable as long as `T` is also droppable."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:147
+#: src/ch08-01-generic-data-types.md:173
 msgid ""
 "Finally, if we want to add a field to `Wallet` representing its address and "
 "we want that field to be different than `T` but generic as well, we can "
 "simply add another generic type between the `<>`:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:161
+#: src/ch08-01-generic-data-types.md:187
 msgid ""
 "We add to `Wallet` struct definition a new generic type `U` and then assign "
 "this type to the new field member `address`. Notice that the derive "
 "attribute for the `Drop` trait works for `U` as well."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:165
+#: src/ch08-01-generic-data-types.md:191
 msgid ""
 "As we did with structs, we can define enums to hold generic data types in "
 "their variants. For example the `Option<T>` enum provided by the Cairo core "
 "library:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:174
+#: src/ch08-01-generic-data-types.md:200
 msgid ""
 "The `Option<T>` enum is generic over a type `T` and has two variants: "
 "`Some`, which holds one value of type `T` and `None` that doesn't hold any "
@@ -6321,13 +6316,13 @@ msgid ""
 "type `T` we can use this abstraction with any type."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:176
+#: src/ch08-01-generic-data-types.md:202
 msgid ""
 "Enums can use multiple generic types as well, like definition of the "
 "`Result<T, E>` enum that the core library provides:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:185 src/ch10-02-recoverable-errors.md:18
+#: src/ch08-01-generic-data-types.md:211 src/ch10-02-recoverable-errors.md:18
 msgid ""
 "The `Result<T, E>` enum has two generic types, `T` and `E`, and two "
 "variants: `Ok` which holds the value of type `T` and `Err` which holds the "
@@ -6336,18 +6331,18 @@ msgid ""
 "of type `T`) or fail (by returning a value of type `E`)."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:187
+#: src/ch08-01-generic-data-types.md:213
 msgid "Generic Methods"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:189
+#: src/ch08-01-generic-data-types.md:215
 msgid ""
 "We can implement methods on structs and enums, and use the generic types in "
 "their definition, too. Using our previous definition of `Wallet<T>` struct, "
 "we define a `balance` method for it:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:213
+#: src/ch08-01-generic-data-types.md:239
 msgid ""
 "We first define `WalletTrait<T>` trait using a generic type `T` which "
 "defines a method that returns a snapshot of the field `address` from "
@@ -6356,7 +6351,7 @@ msgid ""
 "trait and the implementation."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:215
+#: src/ch08-01-generic-data-types.md:241
 msgid ""
 "We can also specify constraints on generic types when defining methods on "
 "the type. We could, for example, implement methods only for `Wallet<u128>` "
@@ -6365,15 +6360,15 @@ msgid ""
 "`balance` field."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:222
+#: src/ch08-01-generic-data-types.md:248
 msgid "/// Generic trait for wallets\n"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:233
+#: src/ch08-01-generic-data-types.md:259
 msgid "/// Trait for wallets of type u128\n"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:254
+#: src/ch08-01-generic-data-types.md:280
 msgid ""
 "The new method `receive` increments the size of the balance of any instance "
 "of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a "
@@ -6382,7 +6377,7 @@ msgid ""
 "the previous code wouldn't compile."
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:256
+#: src/ch08-01-generic-data-types.md:282
 msgid ""
 "Cairo allows us to define generic methods inside generic traits as well. "
 "Using the past implementation from `Wallet<U, V>` we are going to define a "
@@ -6390,15 +6385,15 @@ msgid ""
 "with a generic type of each. First, let's rewrite the struct definition:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:265
+#: src/ch08-01-generic-data-types.md:291
 msgid "Next we are going to naively define the mixup trait and implementation:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:268
+#: src/ch08-01-generic-data-types.md:294
 msgid "// This does not compile!\n"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:281
+#: src/ch08-01-generic-data-types.md:307
 msgid ""
 "We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` "
 "methods which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` "
@@ -6411,14 +6406,14 @@ msgid ""
 "updated implementation is as follow:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:299
+#: src/ch08-01-generic-data-types.md:325
 msgid ""
 "We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` "
 "declaration. Then we do the same for `T2` and `U2`, this time as part of "
 "`mixup` signature. We can now try the `mixup` function:"
 msgstr ""
 
-#: src/ch08-01-generic-data-types.md:313
+#: src/ch08-01-generic-data-types.md:339
 msgid ""
 "We first create two instances: one of `Wallet<bool, u128>` and the other of "
 "`Wallet<felt252, u8>`. Then, we call `mixup` and create a new `Wallet<bool, "
@@ -6427,61 +6422,223 @@ msgstr ""
 
 #: src/ch08-02-traits-in-cairo.md:3
 msgid ""
-"Traits specify functionality blueprints that can be implemented. The "
-"blueprint specification includes a set of function signatures containing "
-"type annotations for the parameters and return value. This sets a standard "
-"to implement the specific functionality."
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:5
-msgid "Defining a Trait"
+"A trait defines a set of methods that can be implemented by a type. These "
+"methods can be called on instances of the type when this trait is "
+"implemented. A trait combined with a generic type defines functionality a "
+"particular type has and can share with other types. We can use traits to "
+"define shared behavior in an abstract way. We can use _trait bounds_ to "
+"specify that a generic type can be any type that has certain behavior."
 msgstr ""
 
 #: src/ch08-02-traits-in-cairo.md:7
 msgid ""
-"To define a trait, you use the keyword `trait` followed by the name of the "
-"trait in `PascalCase` then the function signatures in a pair of curly braces."
+"Note: Note: Traits are similar to a feature often called interfaces in other "
+"languages, although with some differences."
 msgstr ""
 
 #: src/ch08-02-traits-in-cairo.md:9
 msgid ""
-"For example, let's say that we have multiple structs representing shapes. We "
-"want our application to be able to perform geometry operations on these "
-"shapes, So we define a trait `ShapeGeometry` that contains a blueprint to "
-"implement geometry operations on a shape like this:"
+"While traits can be written to not accept generic types, they are most "
+"useful when used with generic types. We already covered generics in the "
+"[previous chapter](./ch08-01-generic-data-types.md), and we will use them in "
+"this chapter to demonstrate how traits can be used to define shared behavior "
+"for generic types."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:18
+#: src/ch08-02-traits-in-cairo.md:11
+msgid "Defining a Trait"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:13
 msgid ""
-"Here our trait `ShapeGeometry` declares signatures for two methods "
-"`boundary` and `area`. When implemented, both these functions should return "
-"a `u64` and accept parameters as specified by the trait."
+"A type’s behavior consists of the methods we can call on that type. "
+"Different types share the same behavior if we can call the same methods on "
+"all of those types. Trait definitions are a way to group method signatures "
+"together to define a set of behaviors necessary to accomplish some purpose."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:20
-msgid "Implementing a Trait"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:22
+#: src/ch08-02-traits-in-cairo.md:15
 msgid ""
-"A trait can be implemented using `impl` keyword with the name of your "
-"implementation followed by `of` then the name of trait being implemented. "
-"Here's an example implementing `ShapeGeometry` trait."
+"For example, let’s say we have a struct `NewsArticle` that holds a news "
+"story in a particular location. We can define a trait `Summary` that "
+"describes the behavior of something that can summarize the `NewsArticle` "
+"type."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:35
+#: src/ch08-02-traits-in-cairo.md:32
+msgid "\"{:?} by {:?} ({:?})\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:41
 msgid ""
-"In the code above, `RectangleGeometry` implements the trait `ShapeGeometry` "
-"defining what the methods `boundary` and `area` should do. Note that the "
-"function parameters and return value types are identical to the trait "
-"specification."
+"Here, we declare a trait using the trait keyword and then the trait’s name, "
+"which is `Summary` in this case."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:37
+#: src/ch08-02-traits-in-cairo.md:45
+msgid ""
+"Inside the curly brackets, we declare the method signatures that describe "
+"the behaviors of the types that implement this trait, which in this case is "
+"`fn summarize(self: @NewsArticle) -> ByteArray`. After the method signature, "
+"instead of providing an implementation within curly brackets, we use a "
+"semicolon."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:47
+msgid ""
+"Note: the `ByteArray` type is the type used to represent Strings in Cairo."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:49
+msgid ""
+"As the trait is not generic, the `self` parameter is not generic either and "
+"is of type `@NewsArticle`. This means that the `summarize` method can only "
+"be called on instances of `NewsArticle`."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:51
+msgid ""
+"Now, consider that we want to make a media aggregator library crate named "
+"`aggregator` that can display summaries of data that might be stored in a "
+"`NewsArticle` or `Tweet` instance. To do this, we need a summary from each "
+"type, and we’ll request that summary by calling a summarize method on an "
+"instance. By defining the `Summary` trait on generic type `T`, we can "
+"implement the `summarize` method on any type we want to be able to summarize."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:72 src/ch08-02-traits-in-cairo.md:150
+#: src/ch08-02-traits-in-cairo.md:228
+msgid "\"{} by {} ({})\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:87 src/ch08-02-traits-in-cairo.md:165
+#: src/ch08-02-traits-in-cairo.md:243
+msgid "\"{}: {}\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:95 src/ch08-02-traits-in-cairo.md:173
+#: src/ch08-02-traits-in-cairo.md:251
+msgid "\"Cairo has become the most popular language for developers\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:96 src/ch08-02-traits-in-cairo.md:174
+#: src/ch08-02-traits-in-cairo.md:252
+msgid "\"Worldwide\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:97 src/ch08-02-traits-in-cairo.md:175
+#: src/ch08-02-traits-in-cairo.md:253
+msgid "\"Cairo Digger\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:98 src/ch08-02-traits-in-cairo.md:176
+#: src/ch08-02-traits-in-cairo.md:254
+msgid "\"Cairo is a new programming language for zero-knowledge proofs\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:102 src/ch08-02-traits-in-cairo.md:180
+#: src/ch08-02-traits-in-cairo.md:258
+msgid "\"EliBenSasson\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:103 src/ch08-02-traits-in-cairo.md:181
+#: src/ch08-02-traits-in-cairo.md:259
+msgid ""
+"\"Crypto is full of short-term maximizing projects. \\n"
+" @Starknet and @StarkWareLtd are about long-term vision maximization.\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:106 src/ch08-02-traits-in-cairo.md:184
+#: src/ch08-02-traits-in-cairo.md:262
+msgid "// Tweet instantiation\n"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:108 src/ch08-02-traits-in-cairo.md:186
+#: src/ch08-02-traits-in-cairo.md:264
+msgid "\"New article available! {}\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:109 src/ch08-02-traits-in-cairo.md:187
+#: src/ch08-02-traits-in-cairo.md:265
+msgid "\"1 new tweet: {}\""
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:115
+msgid ""
+"A `Summary` trait that consists of the behavior provided by a `summarize` "
+"method"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:117
+msgid ""
+"Each generic type implementing this trait must provide its own custom "
+"behavior for the body of the method. The compiler will enforce that any type "
+"that has the Summary trait will have the method summarize defined with this "
+"signature exactly."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:119
+msgid ""
+"A trait can have multiple methods in its body: the method signatures are "
+"listed one per line and each line ends in a semicolon."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:121
+msgid "Implementing a Trait on a type"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:123
+msgid ""
+"Now that we’ve defined the desired signatures of the `Summary` trait’s "
+"methods, we can implement it on the types in our media aggregator. The next "
+"code snippet shows an implementation of the `Summary` trait on the "
+"`NewsArticle` struct that uses the headline, the author, and the location to "
+"create the return value of `summarize`. For the `Tweet` struct, we define "
+"`summarize` as the username followed by the entire text of the tweet, "
+"assuming that tweet content is already limited to 280 characters."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:193
+msgid ""
+"Implementing a trait on a type is similar to implementing regular methods. "
+"The difference is that after `impl`, we put a name for the implementation, "
+"then use the `of` keyword, and then specify the name of the trait we are "
+"writing the implementation for. If the implementation is for a generic type, "
+"we place the generic type name in the angle brackets after the trait name."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:198
+msgid ""
+"Within the `impl` block, we put the method signatures that the trait "
+"definition has defined. Instead of adding a semicolon after each signature, "
+"we use curly brackets and fill in the method body with the specific behavior "
+"that we want the methods of the trait to have for the particular type."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:203
+msgid ""
+"Now that the library has implemented the `Summary` trait on `NewsArticle` "
+"and `Tweet`, users of the crate can call the trait methods on instances of "
+"`NewsArticle` and `Tweet` in the same way we call regular methods. The only "
+"difference is that the user must bring the trait into scope as well as the "
+"types. Here’s an example of how a crate could use our `aggregator` crate:"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:271
+msgid "This code prints the following:"
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:280
+msgid ""
+"Other crates that depend on the `aggregator` crate can also bring the "
+"`Summary` trait into scope to implement `Summary` on their own types."
+msgstr ""
+
+#: src/ch08-02-traits-in-cairo.md:310
 msgid "Implementing a trait, without writing its declaration."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:39
+#: src/ch08-02-traits-in-cairo.md:312
 msgid ""
 "You can write implementations directly without defining the corresponding "
 "trait. This is made possible by using the `#[generate_trait]` attribute "
@@ -6491,112 +6648,18 @@ msgid ""
 "adding a `Trait` suffix to the implementation name."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:58
+#: src/ch08-02-traits-in-cairo.md:331
 msgid ""
 "In the aforementioned code, there is no need to manually define the trait. "
 "The compiler will automatically handle its definition, dynamically "
 "generating and updating it as new functions are introduced."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:60
-msgid "Parameter `self`"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:62
-msgid ""
-"In the example above, `self` is a special parameter. When a parameter with "
-"name `self` is used, the implemented functions are also [attached to the "
-"instances of the type as "
-"methods](ch05-03-method-syntax.md#defining-methods). Here's an illustration,"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:64
-msgid ""
-"When the `ShapeGeometry` trait is implemented, the function `area` from the "
-"`ShapeGeometry` trait can be called in two ways:"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:90
-msgid "// Rectangle instantiation\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:92
-msgid "// First way, as a method on the struct instance\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:94
-msgid "// Second way, from the implementation\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:96
-msgid "// Third way, from the trait\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:99
-msgid "// `area1` has same value as `area2` and `area3`\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:108
-msgid ""
-"And the implementation of the `area` method will be accessed via the `self` "
-"parameter."
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:110
-msgid "Generic Traits"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:112
-msgid ""
-"Usually we want to write a trait when we want multiple types to implement a "
-"functionality in a standard way. However, in the example above the "
-"signatures are static and cannot be used for multiple types. To do this, we "
-"use generic types when defining traits."
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:114
-msgid ""
-"In the example below, we use generic type `T` and our method signatures can "
-"use this alias which can be provided during implementation."
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:129
-msgid "// Here T is an alias type which will be provided during implementation\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:135
-msgid ""
-"// Implementation RectangleGeometry passes in <Rectangle>\n"
-"// to implement the trait for that type\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:146
-msgid ""
-"// We might have another struct Circle\n"
-"// which can use the same trait spec\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:160
-msgid "// 35\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:161
-msgid "// 24\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:164
-msgid "// 78\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:165
-msgid "// 31\n"
-msgstr ""
-
-#: src/ch08-02-traits-in-cairo.md:169
+#: src/ch08-02-traits-in-cairo.md:335
 msgid "Managing and using external trait implementations"
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:171
+#: src/ch08-02-traits-in-cairo.md:337
 msgid ""
 "To use traits methods, you need to make sure the correct "
 "traits/implementation(s) are imported. In the code above we imported "
@@ -6604,7 +6667,7 @@ msgid ""
 "methods on supported types."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:173
+#: src/ch08-02-traits-in-cairo.md:339
 msgid ""
 "In some cases you might need to import not only the trait but also the "
 "implementation if they are declared in separate modules. If `CircleGeometry` "
@@ -6612,33 +6675,33 @@ msgid ""
 "Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:176
+#: src/ch08-02-traits-in-cairo.md:342
 msgid ""
 "If the code was organized into modules like this, where the implementation "
 "of a trait was defined in a different module than the trait itself, "
 "explicitly importing the relevant implementation is required."
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:180
+#: src/ch08-02-traits-in-cairo.md:346
 msgid "// struct Circle { ... } and struct Rectangle { ... }\n"
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:193
+#: src/ch08-02-traits-in-cairo.md:359
 msgid "// Could be in a different file\n"
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:206
+#: src/ch08-02-traits-in-cairo.md:372
 msgid ""
 "// Fails with this error\n"
 "    // Method `area` not found on... Did you import the correct trait and "
 "impl?\n"
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:213
+#: src/ch08-02-traits-in-cairo.md:379
 msgid "To make it work, in addition to,"
 msgstr ""
 
-#: src/ch08-02-traits-in-cairo.md:219
+#: src/ch08-02-traits-in-cairo.md:385
 msgid ""
 "you will need to import `CircleGeometry` explicitly. Note that you do not "
 "need to import `RectangleGeometry`, as it is defined in the same module as "
@@ -7464,11 +7527,11 @@ msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:44
 msgid ""
-"A careful reader may have noticed the `<impl TDrop: Drop<T>>` and `<impl "
-"EDrop: Drop<E>>` in the first four methods signatures. This syntax "
-"represents generic type constraints in the Cairo language. These constraints "
-"indicate that the associated functions require an implementation of the "
-"`Drop` trait for the generic types `T` and `E`, respectively."
+"A careful reader may have noticed the `<+Drop<T>>` and `<+Drop<E>>` in the "
+"first four methods signatures. This syntax represents generic type "
+"constraints in the Cairo language. These constraints indicate that the "
+"associated functions require an implementation of the `Drop` trait for the "
+"generic types `T` and `E`, respectively."
 msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:46
@@ -7753,6 +7816,166 @@ msgstr ""
 
 #: src/ch11-02-macros.md:37
 msgid "This will be interpreted as `const a: felt252 = 8;` by the compiler."
+msgstr ""
+
+#: src/ch11-03-hash.md:1
+msgid "Hashes"
+msgstr ""
+
+#: src/ch11-03-hash.md:3
+msgid ""
+"At its essence, hashing is a process of converting input data (often called "
+"a message) of any length into a fixed-size value, typically referred to as a "
+"\"hash.\" This transformation is deterministic, meaning that the same input "
+"will always produce the same hash value. Hash functions are a fundamental "
+"component in various fields, including data storage, cryptography, and data "
+"integrity verification - and are very often when developing smart contracts, "
+"especially when working with Merkle trees."
+msgstr ""
+
+#: src/ch11-03-hash.md:5
+msgid ""
+"In this chapter, we will present the two hash functions implemented in "
+"natively in the Cairo library : `Poseidon` and `Pedersen`. We will discuss "
+"about when and how to use them, and see examples with cairo programs."
+msgstr ""
+
+#: src/ch11-03-hash.md:7
+msgid "Hash functions in Cairo"
+msgstr ""
+
+#: src/ch11-03-hash.md:9
+msgid ""
+"The Cairo core library provides two hash functions: Pedersen and Poseidon."
+msgstr ""
+
+#: src/ch11-03-hash.md:11
+msgid ""
+"Pedersen hash functions are cryptographic algorithms that rely on elliptic "
+"curve cryptography. These functions perform operations on points along an "
+"elliptic curve — essentially, doing math with the locations of these points "
+"— which are easy to do in one direction and hard to undo. This one-way "
+"difficulty is based on the Elliptic Curve Discrete Logarithm Problem "
+"(ECDLP), which is a problem so hard to solve that it ensures the security of "
+"the hash function. The difficulty of reversing these operations is what "
+"makes the Pedersen hash function secure and reliable for cryptographic "
+"purposes."
+msgstr ""
+
+#: src/ch11-03-hash.md:13
+msgid ""
+"Poseidon is a family of hash functions designed for being very efficient as "
+"algebraic circuits. Its design is particularly efficient for Zero-Knowledge "
+"proof systems, including STARKs (so, Cairo). Poseidon uses a method called a "
+"'sponge construction,' which soaks up data and transforms it securely using "
+"a process known as the Hades permutation. Cairo's version of Poseidon is "
+"based on a three element state permutation with [specific "
+"parameters](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt)"
+msgstr ""
+
+#: src/ch11-03-hash.md:15
+msgid "When to use them ?"
+msgstr ""
+
+#: src/ch11-03-hash.md:17
+msgid ""
+"Pedersen was the first hash function used on Starknet, and is still used to "
+"compute the addresses of variables in storage (for example, `LegacyMap` uses "
+"Pedersen to hash the keys of a storage mapping on Starknet). However, as "
+"Poseidon is cheaper and faster than Pedersen when working with STARK proofs "
+"system, it's now the recommended hash function to use in Cairo programs."
+msgstr ""
+
+#: src/ch11-03-hash.md:21
+msgid ""
+"The core library makes it easy to work with hashes. The `Hash` trait is "
+"implemented for all types that can be converted to `felt252`, including "
+"`felt252` itself. For more complex types like structs, deriving `Hash` "
+"allows them to be hashed easily using the hash function of your choice - "
+"given that all of the struct's fields are themselves hashable. You cannot "
+"derive the `Hash` trait on a struct that contains un-hashable values, such "
+"as `Array<T>` or a `Felt252Dict<T>`, even if `T` itself is hashable."
+msgstr ""
+
+#: src/ch11-03-hash.md:23
+msgid ""
+"The `Hash` trait is accompanied by the `HashStateTrait` that defines the "
+"basic methods to work with hashes. They allow you to initialize a hash state "
+"that will contain the temporary values of the hash after each application of "
+"the hash function; update the hash state, and finalize it when the "
+"computation is completed. `HashStateTrait` is defined as follows:"
+msgstr ""
+
+#: src/ch11-03-hash.md:26
+msgid "/// A trait for hash state accumulators.\n"
+msgstr ""
+
+#: src/ch11-03-hash.md:32
+msgid "/// A trait for values that can be hashed.\n"
+msgstr ""
+
+#: src/ch11-03-hash.md:35
+msgid "/// Updates the hash state with the given value.\n"
+msgstr ""
+
+#: src/ch11-03-hash.md:40
+msgid ""
+"To use hashes in your code, you must first import the relevant traits and "
+"functions. In the following example, we will demonstrate how to hash a "
+"struct using both the Pedersen and Poseidon hash functions."
+msgstr ""
+
+#: src/ch11-03-hash.md:42
+msgid ""
+"The first step is to initialize the hash with either `PoseidonTrait::new() "
+"-> HashState` or `PedersenTrait::new(base: felt252) -> HashState` depending "
+"on which hash function we want to work with. Then the hash state can be "
+"updated with the `update(self: HashState, value: felt252) -> HashState` or "
+"`update_with(self: S, value: T) -> S` functions as many times as required. "
+"Then the function `finalize(self: HashState) -> felt252` is called on the "
+"hash state and it returns the value of the hash as a `felt252`."
+msgstr ""
+
+#: src/ch11-03-hash.md:60
+msgid ""
+"As our struct derives the trait HashTrait, we can call the function as "
+"follow for Poseidon hashing :"
+msgstr ""
+
+#: src/ch11-03-hash.md:85
+msgid "And as follow for Pedersen hashing :"
+msgstr ""
+
+#: src/ch11-03-hash.md:111
+msgid "Advanced Hashing: Hashing arrays with Poseidon"
+msgstr ""
+
+#: src/ch11-03-hash.md:113
+msgid ""
+"Let us look at an example of hashing a function that contains an "
+"`Span<felt252>`. To hash a `Span<felt252>` or a struct that contains a "
+"`Span<felt252>` you can use the build-in function in poseidon ` "
+"poseidon_hash_span(mut span: Span<felt252>) -> felt252`. Similarly you can "
+"hash `Array<felt252>` by calling `poseidon_hash_span` on its span."
+msgstr ""
+
+#: src/ch11-03-hash.md:117
+msgid "First let us import the following trait and function :"
+msgstr ""
+
+#: src/ch11-03-hash.md:125
+msgid ""
+"Now we define the structure, as you might have notice we didn't derived the "
+"Hash trait. If you try to derive the Hash trait on this structure it will "
+"rise an error because the structure contains a field not hashable."
+msgstr ""
+
+#: src/ch11-03-hash.md:138
+msgid ""
+"In this example, we initialized a HashState (`hash`) and updateted it and "
+"then called the function `finalize()` on the HashState to get the computed "
+"hash `hash_felt252`. We used the `poseidon_hash_span` on the `Span` of the "
+"`Array<felt252>` to compute its hash."
 msgstr ""
 
 #: src/ch99-00-starknet-smart-contracts.md:3
@@ -8304,7 +8527,7 @@ msgid ""
 "chapter:"
 msgstr ""
 
-#: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:104
+#: src/ch99-01-03-00-a-deeper-dive-into-contracts.md:119
 msgid "Listing 99-1bis: Our reference contract for this chapter"
 msgstr ""
 
@@ -8323,11 +8546,11 @@ msgid ""
 "called `Storage`:"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:96
+#: src/ch99-01-03-01-contract-storage.md:111
 msgid "A Storage Struct"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:98
+#: src/ch99-01-03-01-contract-storage.md:113
 msgid ""
 "The storage struct is a "
 "[struct](./ch05-00-using-structs-to-structure-related-data.md) like any "
@@ -8338,7 +8561,7 @@ msgid ""
 "`LegacyMap` type."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:101
+#: src/ch99-01-03-01-contract-storage.md:116
 msgid ""
 "Each variable stored in the storage struct is stored in a different location "
 "in the contract's storage. The storage address of a variable is determined "
@@ -8346,15 +8569,15 @@ msgid ""
 "[mapping](#storing-mappings)."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:103
+#: src/ch99-01-03-01-contract-storage.md:118
 msgid "Storage Addresses"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:105
+#: src/ch99-01-03-01-contract-storage.md:120
 msgid "The address of a storage variable is computed as follows:"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:107
+#: src/ch99-01-03-01-contract-storage.md:122
 msgid ""
 "If the variable is a single value (not a mapping), the address is the "
 "`sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` "
@@ -8362,7 +8585,7 @@ msgid ""
 "truncated to 250 bits."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:108
+#: src/ch99-01-03-01-contract-storage.md:123
 msgid ""
 "If the variable is a [mapping](#storing-mappings), the address of the value "
 "at key `k_1,...,k_n` is "
@@ -8370,7 +8593,7 @@ msgid ""
 "Pedersen hash and the final value is taken `mod (2^251) − 256`."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:109
+#: src/ch99-01-03-01-contract-storage.md:124
 msgid ""
 "If it is a mapping to complex values (e.g., tuples or structs), then this "
 "complex value lies in a continuous segment starting from the address "
@@ -8378,17 +8601,17 @@ msgid ""
 "current limitation on the maximal size of a complex storage value."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:111
+#: src/ch99-01-03-01-contract-storage.md:126
 msgid ""
 "You can access the address of a storage variable by calling the `address` "
 "function on the variable, which returns a `StorageBaseAddress` value."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:202
+#: src/ch99-01-03-01-contract-storage.md:232
 msgid "Interacting with Storage Variables"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:204
+#: src/ch99-01-03-01-contract-storage.md:234
 msgid ""
 "Variables stored in the storage struct can be accessed and modified using "
 "the `read` and `write` functions, and you can get their address in storage "
@@ -8396,18 +8619,18 @@ msgid ""
 "the compiler for each storage variable."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:206
+#: src/ch99-01-03-01-contract-storage.md:236
 msgid ""
 "To read the value of the `owner` storage variable, which is a single value, "
 "we call the `read` function on the `owner` variable, passing in no "
 "parameters."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:297
+#: src/ch99-01-03-01-contract-storage.md:342
 msgid "Calling the `read` function on the `owner` variable"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:299
+#: src/ch99-01-03-01-contract-storage.md:344
 msgid ""
 "To read the value of the storage variable `names`, which is a mapping from "
 "`ContractAddress` to `felt252`, we call the `read` function on the `names` "
@@ -8415,11 +8638,11 @@ msgid ""
 "more than one key, we would pass in the other keys as parameters as well."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:390
+#: src/ch99-01-03-01-contract-storage.md:450
 msgid "Calling the `read` function on the `names` variable"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:392
+#: src/ch99-01-03-01-contract-storage.md:452
 msgid ""
 "To write a value to a storage variable, we call the `write` function passing "
 "in the eventual keys the value as arguments. As with the `read` function, "
@@ -8427,19 +8650,19 @@ msgid ""
 "in the value to write to the `owner` variable as it is a simple variable."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:483
+#: src/ch99-01-03-01-contract-storage.md:558
 msgid "Calling the `write` function on the `owner` variable"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:574
+#: src/ch99-01-03-01-contract-storage.md:664
 msgid "Calling the `write` function on the `names` variable"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:576
+#: src/ch99-01-03-01-contract-storage.md:666
 msgid "Storing custom types"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:578
+#: src/ch99-01-03-01-contract-storage.md:668
 msgid ""
 "The `Store` trait, defined in the `starknet::storage_access` module, is used "
 "to specify how a type should be stored in storage. In order for a type to be "
@@ -8449,14 +8672,14 @@ msgid ""
 "can thus be stored without further action."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:580
+#: src/ch99-01-03-01-contract-storage.md:670
 msgid ""
 "But what if you wanted to store a type that you defined yourself, such as an "
 "enum or a struct? In that case, you have to explicitly tell the compiler how "
 "to store this type."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:582
+#: src/ch99-01-03-01-contract-storage.md:672
 msgid ""
 "In our example, we want to store a `Person` struct in storage, which is "
 "possible by implementing the `Store` trait for the `Person` type. This can "
@@ -8464,11 +8687,18 @@ msgid ""
 "of our struct definition."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:673
+#: src/ch99-01-03-01-contract-storage.md:778
+msgid ""
+"Similarly, Enums can be written to storage if they implement the `Store` "
+"trait, which can be trivially derived as long as all associated types "
+"implement the `Store` trait."
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:884
 msgid "Structs storage layout"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:675
+#: src/ch99-01-03-01-contract-storage.md:886
 msgid ""
 "On Starknet, structs are stored in storage as a sequence of primitive types. "
 "The elements of the struct are stored in the same order as they are defined "
@@ -8480,35 +8710,71 @@ msgid ""
 "variable of type `Person` will result in the following layout:"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:679
+#: src/ch99-01-03-01-contract-storage.md:890
 msgid "Fields"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:679
+#: src/ch99-01-03-01-contract-storage.md:890
+#: src/ch99-01-03-01-contract-storage.md:901
 msgid "Address"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:681
+#: src/ch99-01-03-01-contract-storage.md:892
 msgid "name"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:681
+#: src/ch99-01-03-01-contract-storage.md:892
 msgid "owner.address()"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:682
+#: src/ch99-01-03-01-contract-storage.md:893
 msgid "address"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:682
+#: src/ch99-01-03-01-contract-storage.md:893
 msgid "owner.address() +1"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:684
+#: src/ch99-01-03-01-contract-storage.md:895
+msgid "Enums storage layout"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:897
+msgid ""
+"When you store an enum variant, what you're essentially storing is the "
+"variant's index and an eventual associated values. This index starts at 0 "
+"for the first variant of your enum and increments by 1 for each subsequent "
+"variant. If your variant has an associated value, it's stored starting from "
+"the address immediately following the base address. For example, suppose we "
+"have the `RegistrationType` enum with the `finite` variant, which carries an "
+"associated limit date. The storage layout would look like this:"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:901
+msgid "Element"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:903
+msgid "Variant index (e.g. 1 for finite)"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:903
+msgid "registration_type.address()"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:904
+msgid "Associated limit date"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:904
+msgid "registration_type.address() + 1"
+msgstr ""
+
+#: src/ch99-01-03-01-contract-storage.md:906
 msgid "Storage mappings"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:686
+#: src/ch99-01-03-01-contract-storage.md:908
 msgid ""
 "Storage mappings are similar to hash tables in that they allow mapping keys "
 "to values. However, unlike a typical hash table, the key data itself is not "
@@ -8518,7 +8784,7 @@ msgid ""
 "to the default zero value."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:689
+#: src/ch99-01-03-01-contract-storage.md:911
 msgid ""
 "Mappings are only used to compute the location of data in the storage of a "
 "contract given certain keys. They are thus **only allowed as storage "
@@ -8526,13 +8792,13 @@ msgid ""
 "contract functions, and cannot be used as types inside structs."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:701
+#: src/ch99-01-03-01-contract-storage.md:923
 msgid ""
 "To declare a mapping, use the `LegacyMap` type enclosed in angle brackets "
 "`<>`, specifying the key and value types."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:704
+#: src/ch99-01-03-01-contract-storage.md:926
 msgid ""
 "You can also create more complex mappings with multiple keys. You can find "
 "one in Listing 99-2bis like the popular `allowances` storage variable in the "
@@ -8540,11 +8806,11 @@ msgid ""
 "`allowance` amount using multiple keys passed inside a tuple:"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:713
+#: src/ch99-01-03-01-contract-storage.md:935
 msgid "Listing 99-2bis: Storing mappings"
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:715
+#: src/ch99-01-03-01-contract-storage.md:937
 msgid ""
 "The address in storage of a variable stored in a mapping is computed "
 "according to the description in the [Storage Addresses](#storage-addresses) "
@@ -8556,17 +8822,17 @@ msgid ""
 "values of the two fields of the struct."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:718
+#: src/ch99-01-03-01-contract-storage.md:940
 msgid ""
 "Similarly, in the case of a nested mapping such as "
 "`LegacyMap((ContractAddress, ContractAddress), u8)`, the address will be "
 "computed in the same way: `h(h(sn_keccak(variable_name),k_1),k_2)`."
 msgstr ""
 
-#: src/ch99-01-03-01-contract-storage.md:720
+#: src/ch99-01-03-01-contract-storage.md:942
 msgid ""
 "For more details about the contract storage layout in the [Starknet "
-"Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Contracts/contract-storage/#storage_variables)"
+"Documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables)"
 msgstr ""
 
 #: src/ch99-01-03-02-contract-functions.md:3
@@ -8659,7 +8925,7 @@ msgid ""
 "functions). They can only be called from within the contract."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:90
+#: src/ch99-01-03-02-contract-functions.md:96
 msgid ""
 "Wait, what is this `#[generate_trait]` attribute? Where is the trait "
 "definition for this implementation? Well, the `#[generate_trait]` attribute "
@@ -8670,7 +8936,7 @@ msgid ""
 "section](./ch99-01-03-04-reducing-boilerplate.md)."
 msgstr ""
 
-#: src/ch99-01-03-02-contract-functions.md:92
+#: src/ch99-01-03-02-contract-functions.md:98
 msgid ""
 "At this point, you might still be wondering if all of this is really "
 "necessary if you don't need to access the contract's state in your function "
@@ -8775,7 +9041,7 @@ msgid ""
 "contract that didn't have any corresponding trait."
 msgstr ""
 
-#: src/ch99-01-03-04-reducing-boilerplate.md:18
+#: src/ch99-01-03-04-reducing-boilerplate.md:24
 msgid ""
 "It's not the first time that we encounter this attribute, we already talked "
 "about in it [Traits in Cairo](./ch08-02-traits-in-cairo.md). In this "
@@ -8783,7 +9049,7 @@ msgid ""
 "contracts."
 msgstr ""
 
-#: src/ch99-01-03-04-reducing-boilerplate.md:20
+#: src/ch99-01-03-04-reducing-boilerplate.md:26
 msgid ""
 "Recall that in order to access the ContractState in a function, this "
 "function must be defined in an implementation block whose generic parameter "
@@ -8795,7 +9061,7 @@ msgid ""
 "in our functions."
 msgstr ""
 
-#: src/ch99-01-03-04-reducing-boilerplate.md:23
+#: src/ch99-01-03-04-reducing-boilerplate.md:29
 msgid ""
 "If we had to manually define the trait for the `InternalFunctions` "
 "implementation, it would look something like this:"
@@ -10186,18 +10452,20 @@ msgid "Firstly, we create a signer from a private key:"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:253
-msgid "Then, we create the Account Descriptor:"
+msgid ""
+"Then, we create the Account Descriptor by fetching the katana account we "
+"want to use:"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:259
 msgid ""
-"The Account Descriptor will look like this. You can get the public key and "
-"the smart wallet address from the output of the initial `katana` command:"
+"This command will create a new `account0_account.json` file containing the "
+"following details:"
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:263
 #: src/ch99-01-04-01-voting-contract.md:266
-#: src/ch99-01-04-01-voting-contract.md:375
+#: src/ch99-01-04-01-voting-contract.md:373
 msgid "\"version\""
 msgstr ""
 
@@ -10206,7 +10474,7 @@ msgid "\"variant\""
 msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:265
-#: src/ch99-01-04-01-voting-contract.md:381
+#: src/ch99-01-04-01-voting-contract.md:379
 msgid "\"type\""
 msgstr ""
 
@@ -10252,49 +10520,41 @@ msgstr ""
 
 #: src/ch99-01-04-01-voting-contract.md:277
 msgid ""
-"Copy the Account Descriptor above and paste in the newly created "
-"`account0_account.json file`, then replace \"\\<SMART_WALLET_PUBLIC_KEY>\", "
-"\"\\<SMART_WALLET_CLASS_HASH>\" and \"\\<SMART_WALLET_ADDRESS>\" with values "
-"from the `katana` account used."
-msgstr ""
-
-#: src/ch99-01-04-01-voting-contract.md:279
-msgid ""
 "You can retrieve the smart wallet class hash (it will be the same for all "
 "your smart wallets) with the following command. Notice the use of the "
 "`--rpc` flag and the RPC endpoint provided by `katana`:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:281
+#: src/ch99-01-04-01-voting-contract.md:279
 msgid ""
 "```\n"
 "starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050\n"
 "```"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:285
+#: src/ch99-01-04-01-voting-contract.md:283
 msgid ""
 "For the public key, you can use the `starkli signer keystore inspect` "
 "command with the directory of the keystore json file:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:291
+#: src/ch99-01-04-01-voting-contract.md:289
 msgid ""
 "This process is identical for `account_1` and `account_2` in case you want "
 "to have a second and a third voter."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:293
+#: src/ch99-01-04-01-voting-contract.md:291
 msgid "Contract Deployment"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:295
+#: src/ch99-01-04-01-voting-contract.md:293
 msgid ""
 "Before deploying, we need to declare the contract. We can do this with the "
 "`starkli declare` command:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:301
+#: src/ch99-01-04-01-voting-contract.md:299
 msgid ""
 "If the compiler version you're using is older than the one used by Starkli "
 "and you encounter a `compiler-version` error while using the command above, "
@@ -10302,14 +10562,14 @@ msgid ""
 "`--compiler-version x.y.z` flag."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:303
+#: src/ch99-01-04-01-voting-contract.md:301
 msgid ""
 "If you're still encountering issues with the compiler version, try upgrading "
 "Starkli using the command: `starkliup` to make sure you're using the latest "
 "version of starkli."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:305
+#: src/ch99-01-04-01-voting-contract.md:303
 msgid ""
 "The class hash of the contract is: "
 "`0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`. You "
@@ -10317,7 +10577,7 @@ msgid ""
 "explorer](https://goerli.voyager.online/class/0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52)."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:307
+#: src/ch99-01-04-01-voting-contract.md:305
 msgid ""
 "The `--rpc` flag specifies the RPC endpoint to use (the one provided by "
 "`katana`). The `--account` flag specifies the account to use for signing the "
@@ -10326,25 +10586,25 @@ msgid ""
 "the transaction."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:309
+#: src/ch99-01-04-01-voting-contract.md:307
 msgid ""
 "Since we are using a local node, the transaction will achieve finality "
 "immediately. If you are using the Goerli Testnet, you will need to wait for "
 "the transaction to be final, which usually takes a few seconds."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:311
+#: src/ch99-01-04-01-voting-contract.md:309
 msgid ""
 "The following command deploys the voting contract and registers voter_0, "
 "voter_1, and voter_2 as eligible voters. These are the constructor "
 "arguments, so add a voter account that you can later vote with."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:317
+#: src/ch99-01-04-01-voting-contract.md:315
 msgid "An example command:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:323
+#: src/ch99-01-04-01-voting-contract.md:321
 msgid ""
 "In this case, the contract has been deployed at an specific address: "
 "`0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349`. This "
@@ -10352,11 +10612,11 @@ msgid ""
 "the contract."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:325
+#: src/ch99-01-04-01-voting-contract.md:323
 msgid "Voter Eligibility Verification"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:327
+#: src/ch99-01-04-01-voting-contract.md:325
 msgid ""
 "In our voting contract, we have two functions to validate voter eligibility, "
 "`voter_can_vote` and `is_voter_registered`. These are external read "
@@ -10364,7 +10624,7 @@ msgid ""
 "read the current state."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:329
+#: src/ch99-01-04-01-voting-contract.md:327
 msgid ""
 "The `is_voter_registered` function checks whether a particular address is "
 "registered as an eligible voter in the contract. The `voter_can_vote` "
@@ -10373,7 +10633,7 @@ msgid ""
 "already."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:331
+#: src/ch99-01-04-01-voting-contract.md:329
 msgid ""
 "You can call these functions using the `starkli call` command. Note that the "
 "`call` command is used for read functions, while the `invoke` command is "
@@ -10381,7 +10641,7 @@ msgid ""
 "not require signing, while the `invoke` command does."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:333
+#: src/ch99-01-04-01-voting-contract.md:331
 msgid ""
 "```bash+\n"
 "starkli call "
@@ -10392,7 +10652,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:337
+#: src/ch99-01-04-01-voting-contract.md:335
 msgid ""
 "First we added the address of the contract, then the function we want to "
 "call, and finally the input for the function. In this case, we are checking "
@@ -10401,36 +10661,36 @@ msgid ""
 "vote."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:339
+#: src/ch99-01-04-01-voting-contract.md:337
 msgid ""
 "Since we provided a registered voter address as an input, the result is 1 "
 "(boolean true), indicating the voter is eligible to vote."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:341
+#: src/ch99-01-04-01-voting-contract.md:339
 msgid ""
 "Next, let's call the `is_voter_registered` function using an unregistered "
 "account address to observe the output:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:347
+#: src/ch99-01-04-01-voting-contract.md:345
 msgid ""
 "With an unregistered account address, the terminal output is 0 (i.e., "
 "false), confirming that the account is not eligible to vote."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:349
+#: src/ch99-01-04-01-voting-contract.md:347
 msgid "Casting a Vote"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:351
+#: src/ch99-01-04-01-voting-contract.md:349
 msgid ""
 "Now that we have established how to verify voter eligibility, we can vote! "
 "To vote, we interact with the `vote` function, which is flagged as external, "
 "necessitating the use of the `starknet invoke` command."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:353
+#: src/ch99-01-04-01-voting-contract.md:351
 msgid ""
 "The `invoke` command syntax resembles the `call` command, but for voting, we "
 "submit either `1` (for Yes) or `0` (for No) as our input. When we invoke the "
@@ -10438,7 +10698,7 @@ msgid ""
 "the voter; we are writing to the contract's storage."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:363
+#: src/ch99-01-04-01-voting-contract.md:361
 msgid ""
 "You will be prompted to enter the password for the signer. Once you enter "
 "the password, the transaction will be signed and submitted to the Starknet "
@@ -10446,98 +10706,98 @@ msgid ""
 "transaction command, you can get more details about the transaction:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:369
+#: src/ch99-01-04-01-voting-contract.md:367
 msgid "This returns:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:373
+#: src/ch99-01-04-01-voting-contract.md:371
 msgid "\"transaction_hash\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:373
+#: src/ch99-01-04-01-voting-contract.md:371
 msgid "\"0x5604a97922b6811060e70ed0b40959ea9e20c726220b526ec690de8923907fd\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:374
+#: src/ch99-01-04-01-voting-contract.md:372
 msgid "\"max_fee\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:374
+#: src/ch99-01-04-01-voting-contract.md:372
 msgid "\"0x430e81\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:375
-#: src/ch99-01-04-01-voting-contract.md:384
+#: src/ch99-01-04-01-voting-contract.md:373
+#: src/ch99-01-04-01-voting-contract.md:382
+#: src/ch99-01-04-01-voting-contract.md:386
+#: src/ch99-01-04-01-voting-contract.md:387
 #: src/ch99-01-04-01-voting-contract.md:388
-#: src/ch99-01-04-01-voting-contract.md:389
-#: src/ch99-01-04-01-voting-contract.md:390
 msgid "\"0x1\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:376
+#: src/ch99-01-04-01-voting-contract.md:374
 msgid "\"signature\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:377
+#: src/ch99-01-04-01-voting-contract.md:375
 msgid "\"0x75e5e4880d7a8301b35ff4a1ed1e3d72fffefa64bb6c306c314496e6e402d57\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:378
+#: src/ch99-01-04-01-voting-contract.md:376
 msgid "\"0xbb6c459b395a535dcd00d8ab13d7ed71273da4a8e9c1f4afe9b9f4254a6f51\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:380
+#: src/ch99-01-04-01-voting-contract.md:378
 msgid "\"nonce\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:380
+#: src/ch99-01-04-01-voting-contract.md:378
 msgid "\"0x3\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:381
+#: src/ch99-01-04-01-voting-contract.md:379
 msgid "\"INVOKE\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:382
+#: src/ch99-01-04-01-voting-contract.md:380
 msgid "\"sender_address\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:382
+#: src/ch99-01-04-01-voting-contract.md:380
 msgid "\"0x3ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:383
+#: src/ch99-01-04-01-voting-contract.md:381
 msgid "\"calldata\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:385
+#: src/ch99-01-04-01-voting-contract.md:383
 msgid "\"0x5ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:386
+#: src/ch99-01-04-01-voting-contract.md:384
 msgid "\"0x132bdf85fc8aa10ac3c22f02317f8f53d4b4f52235ed1eabb3a4cbbe08b5c41\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:387
+#: src/ch99-01-04-01-voting-contract.md:385
 msgid "\"0x0\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:395
+#: src/ch99-01-04-01-voting-contract.md:393
 msgid "If you try to vote twice with the same signer you will get an error:"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:398
+#: src/ch99-01-04-01-voting-contract.md:396
 msgid "\"Contract error\""
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:401
+#: src/ch99-01-04-01-voting-contract.md:399
 msgid ""
 "The error is not very informative, but you can get more details when looking "
 "at the output in the terminal where you started `katana` (our local Starknet "
 "node):"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:405
+#: src/ch99-01-04-01-voting-contract.md:403
 msgid ""
 "\"Error in the called contract "
 "(0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0):\n"
@@ -10547,15 +10807,15 @@ msgid ""
 "    ...\n"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:411
+#: src/ch99-01-04-01-voting-contract.md:409
 msgid "The key for the error is `USER_ALREADY_VOTED`."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:414
+#: src/ch99-01-04-01-voting-contract.md:412
 msgid "'USER_ALREADY_VOTED'"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:417
+#: src/ch99-01-04-01-voting-contract.md:415
 msgid ""
 "We can repeat the process to create Signers and Account Descriptors for the "
 "accounts we want to use for voting. Remember that each Signer must be "
@@ -10564,17 +10824,17 @@ msgid ""
 "is the same for each voter)."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:425
+#: src/ch99-01-04-01-voting-contract.md:423
 msgid "Visualizing Vote Outcomes"
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:427
+#: src/ch99-01-04-01-voting-contract.md:425
 msgid ""
 "To examine the voting results, we invoke the `get_vote_status` function, "
 "another view function, through the `starknet call` command."
 msgstr ""
 
-#: src/ch99-01-04-01-voting-contract.md:433
+#: src/ch99-01-04-01-voting-contract.md:431
 msgid ""
 "The output reveals the tally of \"Yes\" and \"No\" votes along with their "
 "relative percentages."
@@ -10901,7 +11161,7 @@ msgstr ""
 msgid ""
 "which will be serialized as **TWO** felts, one for the `low`, and one for "
 "the `high`. This means that to send only one `u256` to Cairo, you'll need to "
-"send a paylaod from L1 with **TWO** values."
+"send a payload from L1 with **TWO** values."
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:194
