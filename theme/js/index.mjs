@@ -1,12 +1,15 @@
 const maxWorkers = 1;
 let workerPath = '';
 
+// supported languages
+const supportedLanguages = ['zh-cn', 'fr', 'es'];
+
 // path to mjs. This is the path to the current script, which is the last script in the document.
 const scripts = document.getElementsByTagName('script');
 const currentScript = scripts[scripts.length - 1];
 const scriptUrl = currentScript.src;
 
-if (window.location.pathname.startsWith('/zh-cn')) {
+if (supportedLanguages.some(lang => window.location.pathname.startsWith('/' + lang))) {
     workerPath = new URL('../js/worker.cjs', scriptUrl).toString();
 } else {
     workerPath = new URL('./worker.cjs', scriptUrl).toString();
