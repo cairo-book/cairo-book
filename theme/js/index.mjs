@@ -2,7 +2,7 @@ const maxWorkers = 1;
 let workerPath = '';
 
 // supported languages
-const supportedLanguages = ['zh-cn', 'fr', 'es'];
+const supportedLanguages = ['zh-cn', 'fr', 'es', 'id'];
 
 // path to mjs. This is the path to the current script, which is the last script in the document.
 const scripts = document.getElementsByTagName('script');
