@@ -335,6 +335,10 @@
         <script src="{{ path_to_root }}mode-rust.js"></script>
         <script src="{{ path_to_root }}theme-dawn.js"></script>
         <script src="{{ path_to_root }}theme-tomorrow_night.js"></script>
+        {{#if (eq language "en")}}
+        <script src="{{ path_to_root }}js/index.mjs"></script>
+        {{else}}
+        <script src="{{ path_to_root }}../js/index.mjs"></script>
         {{/if}}
 
         {{#if search_js}}
@@ -346,7 +350,6 @@
         <script src="{{ path_to_root }}clipboard.min.js"></script>
         <script src="{{ path_to_root }}highlight.js"></script>
         <script src="{{ path_to_root }}book.js"></script>
-        <script src="{{ path_to_root }}js/index.mjs"></script>
 
         <!-- Custom JS scripts -->
         {{#each additional_js}}
