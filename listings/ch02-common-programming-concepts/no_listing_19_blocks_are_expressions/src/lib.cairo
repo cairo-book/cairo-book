@@ -1,5 +1,5 @@
 //ANCHOR: all
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 fn main() {
     //ANCHOR: block_expr
     let y = {

@@ -30,7 +30,7 @@ fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
 
 #[cfg(test)]
 mod tests {
-    use debug::PrintTrait;
+    use core::debug::PrintTrait;
     use super::{find_value_recursive, find_value_iterative};
 
     #[test]

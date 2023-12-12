@@ -1,5 +1,5 @@
 //ANCHOR:all
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 fn main() {
     let width1 = 30;
     let height1 = 10;

@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 mod aggregator {
     //ANCHOR: trait

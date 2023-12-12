@@ -1,6 +1,6 @@
 //ANCHOR:here
 use starknet::{StorePacking};
-use integer::{u128_safe_divmod, u128_as_non_zero};
+use core::integer::{u128_safe_divmod, u128_as_non_zero};
 
 #[derive(Drop, Serde)]
 struct Sizes {

@@ -96,7 +96,7 @@ Then create a new file called `src/hello_world.cairo` and put the following code
 <span class="filename">Filename: src/hello_world.cairo</span>
 
 ```rust,file=hello_world.cairo
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 fn main() {
     'Hello, World!'.print();
 }
@@ -166,7 +166,7 @@ line as the function declaration, adding one space in between.
 > with the standard Cairo distribution, as `cairo-run` is, so it should already be
 > installed on your computer!
 
-Prior to the main function declaration, The line `use debug::PrintTrait;` is responsible for importing an item defined in another module. In this case, we are importing the `PrintTrait` item from the Cairo core library. By doing so, we gain the ability to use the `print()` method on data types that are compatible with printing.
+Prior to the main function declaration, The line `use debug::PrintTrait;` is responsible for importing an item defined in another module. In this case, we are importing the `PrintTrait` item from the Cairo core library. This trait is not included in the prelude. Hence, importing it is mandatory. By doing so, we gain the ability to use the `print()` method on data types that are compatible with printing.
 
 The body of the `main` function holds the following code:
 

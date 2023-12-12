@@ -25,6 +25,7 @@ mod ownable_component {
     use starknet::ContractAddress;
     use starknet::get_caller_address;
     use super::Errors;
+    use core::zeroable::Zeroable;
 
     #[storage]
     struct Storage {

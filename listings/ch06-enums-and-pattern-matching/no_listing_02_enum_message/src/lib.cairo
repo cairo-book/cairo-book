@@ -1,5 +1,5 @@
 // ANCHOR: all
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 // ANCHOR: message
 #[derive(Drop)]
 enum Message {

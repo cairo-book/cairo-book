@@ -13,7 +13,7 @@ trait ITokenWrapper<TContractState> {
 #[starknet::contract]
 mod TokenWrapper {
     use super::ITokenWrapper;
-    use serde::Serde;
+    use core::serde::Serde;
     use starknet::SyscallResultTrait;
     use starknet::ContractAddress;
 

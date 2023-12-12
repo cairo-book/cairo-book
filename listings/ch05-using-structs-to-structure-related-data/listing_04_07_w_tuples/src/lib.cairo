@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 fn main() {
     let rectangle = (30, 10);
     let area = area(rectangle);

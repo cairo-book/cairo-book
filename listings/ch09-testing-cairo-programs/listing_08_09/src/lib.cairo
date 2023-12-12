@@ -1,3 +1,5 @@
+use core::panic_with_felt252;
+
 #[derive(Copy, Drop)]
 struct Guess {
     value: u64,

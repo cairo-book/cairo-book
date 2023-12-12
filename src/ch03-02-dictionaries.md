@@ -19,7 +19,7 @@ These functions allow us to manipulate dictionaries like in any other language. 
 {{#include ../listings/ch03-common-collections/no_listing_07_intro/src/lib.cairo}}
 ```
 
-The first thing we do is import `Felt252DictTrait` which brings to scope all the methods we need to interact with the dictionary. Next, we create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and added two individuals, each one with their own balance, using the `insert` method. Finally, we checked the balance of our users with the `get` method.
+We can create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and add two individuals, each one with their own balance, using the `insert` method. Finally, we check the balance of our users with the `get` method. These methods are defined in the `Felt252DictTrait` trait in the core library.
 
 Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
 

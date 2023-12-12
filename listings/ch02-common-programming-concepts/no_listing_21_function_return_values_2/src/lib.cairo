@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 fn main() {
     let x = plus_one(5);

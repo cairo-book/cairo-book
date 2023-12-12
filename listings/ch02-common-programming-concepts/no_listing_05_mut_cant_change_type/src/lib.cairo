@@ -1,5 +1,5 @@
 //TAG: does_not_compile
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 fn main() {
     let mut x: u64 = 2;

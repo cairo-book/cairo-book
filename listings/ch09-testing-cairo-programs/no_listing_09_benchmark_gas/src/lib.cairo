@@ -15,7 +15,9 @@ fn sum_n(n: usize) -> usize {
 #[cfg(test)]
 mod test {
     use super::sum_n;
-    use debug::PrintTrait;
+    use core::debug::PrintTrait;
+    use core::testing;
+    use core::gas;
     #[test]
     #[available_gas(2000000)]
     fn benchmark_sum_n_gas() {

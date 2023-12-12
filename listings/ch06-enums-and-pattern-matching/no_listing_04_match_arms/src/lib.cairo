@@ -1,4 +1,4 @@
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 enum Coin {
     Penny,
     Nickel,

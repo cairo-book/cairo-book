@@ -1,5 +1,5 @@
 //ANCHOR:all
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 fn plus_one(x: Option<u8>) -> Option<u8> {
     match x {

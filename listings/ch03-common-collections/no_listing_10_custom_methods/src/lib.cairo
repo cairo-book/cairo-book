@@ -1,8 +1,8 @@
 // ANCHOR: imports
-use dict::Felt252DictEntryTrait;
+use core::dict::Felt252DictEntryTrait;
 // ANCHOR_END: imports
 
-use debug::PrintTrait;
+use core::debug::PrintTrait;
 
 // ANCHOR: custom_get
 fn custom_get<T, +Felt252DictValue<T>, +Drop<T>, +Copy<T>>(

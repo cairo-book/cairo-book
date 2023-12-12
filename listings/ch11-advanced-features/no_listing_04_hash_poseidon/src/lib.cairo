@@ -1,7 +1,6 @@
 //ANCHOR: import
-use pedersen::PedersenTrait;
-use poseidon::PoseidonTrait;
-use hash::{HashStateTrait, HashStateExTrait};
+use core::poseidon::PoseidonTrait;
+use core::hash::{HashStateTrait, HashStateExTrait};
 //ANCHOR_END: import
 
 //ANCHOR: structure
