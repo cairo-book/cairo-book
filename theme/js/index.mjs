@@ -1,5 +1,20 @@
-const maxWorkers = 1
-const worker = new Worker('js/worker.cjs')
+const maxWorkers = 1;
+let workerPath = '';
+
+// path to mjs. This is the path to the current script, which is the last script in the document.
+const scripts = document.getElementsByTagName('script');
+const currentScript = scripts[scripts.length - 1];
+const scriptUrl = currentScript.src;
+
+if (window.location.pathname.startsWith('/zh-cn')) {
+    workerPath = new URL('../js/worker.cjs', scriptUrl).toString();
+} else {
+    workerPath = new URL('./worker.cjs', scriptUrl).toString();
+}
+
+
+console.log(workerPath);
+const worker = new Worker(workerPath);
 
 window.runFunc = async (cairo_program) => {
     return new Promise((resolve, reject) => {
@@ -19,4 +34,4 @@ window.runFunc = async (cairo_program) => {
             reject(error);
         };
     });
-}
+};
