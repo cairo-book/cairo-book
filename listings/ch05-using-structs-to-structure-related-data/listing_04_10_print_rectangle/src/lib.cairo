@@ -13,7 +13,6 @@ fn main() {
 }
 //ANCHOR_END: here
 
-
 impl RectanglePrintImpl of PrintTrait<Rectangle> {
     fn print(self: Rectangle) {
         self.width.print();
