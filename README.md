@@ -4,7 +4,9 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -112,7 +114,7 @@ For a Starknet contract:
 
 Cairo program:
 
-- If it has a `main` function: `scarb cairo-run`
+- If it has a `main` function: `scarb cairo-run --available-gas=200000000`
 - Else, `scarb build`
 - If it has tests: `scarb test`
 - `scarb fmt -c`
@@ -127,7 +129,7 @@ To specify which tests to run, you can add a comment at the top of your file wit
 Here is a list of available tags:
 
 - `does_not_compile`: don't run `scarb build`
-- `does_not_run`: don't run `scarb cairo-run`
+- `does_not_run`: don't run `scarb cairo-run --available-gas=200000000`
 - `ignore_fmt`: don't run `scarb fmt`
 - `tests_fail`: don't run `scarb test`
 

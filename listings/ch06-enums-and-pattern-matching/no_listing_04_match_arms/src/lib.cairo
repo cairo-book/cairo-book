@@ -1,4 +1,3 @@
-use core::debug::PrintTrait;
 enum Coin {
     Penny,
     Nickel,
@@ -10,7 +9,7 @@ enum Coin {
 fn value_in_cents(coin: Coin) -> felt252 {
     match coin {
         Coin::Penny => {
-            ('Lucky penny!').print();
+            println!("Lucky penny!");
             1
         },
         Coin::Nickel => 5,

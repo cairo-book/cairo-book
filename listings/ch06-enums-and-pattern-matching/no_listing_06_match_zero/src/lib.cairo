@@ -1,10 +1,8 @@
-use core::debug::PrintTrait;
-
 // ANCHOR: here
 fn did_i_win(nb: felt252) {
     match nb {
-        0 => ('You won!').print(),
-        _ => ('You lost...').print(),
+        0 => println!("You won!"),
+        _ => println!("You lost..."),
     }
 }
 // ANCHOR_END: here

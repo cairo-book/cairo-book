@@ -15,7 +15,7 @@ Here is how we can `panic` from inside a program and return the error code `2`:
 Running the program will produce the following output:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 Run panicked with [2 (''), ].
 ```
 

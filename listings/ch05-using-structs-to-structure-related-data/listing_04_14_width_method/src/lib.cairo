@@ -1,4 +1,3 @@
-use core::debug::PrintTrait;
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,
@@ -17,5 +16,5 @@ impl RectangleImpl of RectangleTrait {
 
 fn main() {
     let rect1 = Rectangle { width: 30, height: 50, };
-    rect1.width().print();
+    println!("Width: {}", rect1.width);
 }

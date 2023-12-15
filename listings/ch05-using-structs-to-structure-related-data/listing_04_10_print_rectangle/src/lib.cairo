@@ -1,7 +1,7 @@
 //ANCHOR:all
 //ANCHOR: here
-use core::debug::PrintTrait;
 
+use core::debug::PrintTrait;
 struct Rectangle {
     width: u64,
     height: u64,

@@ -54,10 +54,12 @@ You can use multiple conditions by combining if and else in an else if expressio
 This program has four possible paths it can take. After running it, you should see the following output:
 
 ```shell
-[DEBUG]	number is 3
+number is 3
+Run completed successfully, returning []
+Remaining gas: 1999937120
 ```
 
-When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1'.print()`, nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. [Chapter 6](./ch06-02-the-match-control-flow-construct.md) describes a powerful Cairo branching construct called `match` for these cases.
+When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1'` nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. [Chapter 6](./ch06-02-the-match-control-flow-construct.md) describes a powerful Cairo branching construct called `match` for these cases.
 
 ### Using `if` in a `let` statement
 
@@ -71,7 +73,9 @@ Because if is an expression, we can use it on the right side of a let statement 
 
 ```shell
 $ cairo-run main.cairo
-[DEBUG]	condition was true
+condition was true and number is 5
+Run completed successfully, returning []
+Remaining gas: 1999780390
 ```
 
 The `number` variable will be bound to a value based on the outcome of the `if` expression. Which will be 5 here.

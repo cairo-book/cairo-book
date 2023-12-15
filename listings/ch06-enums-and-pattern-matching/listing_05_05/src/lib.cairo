@@ -1,5 +1,5 @@
 //ANCHOR:all
-use core::debug::PrintTrait;
+use core::fmt;
 
 fn plus_one(x: Option<u8>) -> Option<u8> {
     match x {
@@ -15,9 +15,9 @@ fn plus_one(x: Option<u8>) -> Option<u8> {
 fn main() {
     let five: Option<u8> = Option::Some(5);
     let six: Option<u8> = plus_one(five);
-    six.unwrap().print();
+    println!("six: {}", six.unwrap());
     let none = plus_one(Option::None);
-    none.unwrap().print();
+    println!("none: {}", none.unwrap());
 }
 //ANCHOR_END:all
 

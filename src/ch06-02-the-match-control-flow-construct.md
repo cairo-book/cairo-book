@@ -115,7 +115,7 @@ There’s one other aspect of match we need to discuss: the arms’ patterns mus
 ```
 
 ```bash
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
     error: Unsupported match. Currently, matches require one arm per variant,
     in the order of variant definition.
     --> test.cairo:34:5

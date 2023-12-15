@@ -1,5 +1,5 @@
 //ANCHOR: all
-use core::debug::PrintTrait;
+
 fn main() {
     //ANCHOR: block_expr
     let y = {
@@ -8,7 +8,7 @@ fn main() {
     };
     //ANCHOR_END: block_expr
 
-    y.print();
+    println!("y = {}", y);
 }
 //ANCHOR_END: all
 

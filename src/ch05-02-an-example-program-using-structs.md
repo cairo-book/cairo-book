@@ -12,10 +12,10 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 
 <span class="caption">Listing 5-6: Calculating the area of a rectangle specified by separate width and height variables</span>
 
-Now run the program with `scarb cairo-run`:
+Now run the program with `scarb cairo-run --available-gas=200000000`:
 
 ```bash
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 [DEBUG] ,                               (raw: 300)
 
 Run completed successfully, returning []
@@ -66,6 +66,8 @@ Here we’ve defined a struct and named it `Rectangle`. Inside the curly bracket
 It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 5-9 tries using the `print` as we have used in previous chapters. This won’t work.
 
 <span class="filename">Filename: src/lib.cairo</span>
+
+<!-- TODO implement debug instead -->
 
 ```rust
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_10_print_rectangle/src/lib.cairo:here}}

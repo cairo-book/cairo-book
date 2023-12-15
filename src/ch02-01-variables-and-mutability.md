@@ -21,7 +21,7 @@ code with the following code, which won’t compile just yet:
 
 ```
 
-Save and run the program using `scarb cairo-run`. You should receive an error message
+Save and run the program using `scarb cairo-run --available-gas=200000000`. You should receive an error message
 regarding an immutability error, as shown in this output:
 
 ```shell
@@ -83,7 +83,7 @@ For example, let’s change _src/lib.cairo_ to the following:
 When we run the program now, we get this:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 [DEBUG]                                (raw: 5)
 
 [DEBUG]                                (raw: 6)
@@ -161,7 +161,7 @@ When that scope is over, the inner shadowing ends and `x` returns to being `6`.
 When we run this program, it will output the following:
 
 ```shell
-scarb cairo-run
+scarb cairo-run --available-gas=200000000
 [DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
 
 [DEBUG]
@@ -204,7 +204,7 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 The error says we were expecting a `u64` (the original type) but we got a different type:
 
 ```shell
-$ scarb cairo-run
+$ scarb cairo-run --available-gas=200000000
 error: Unexpected argument type. Expected: "core::integer::u64", found: "core::felt252".
  --> lib.cairo:9:9
     x = 100_felt252;

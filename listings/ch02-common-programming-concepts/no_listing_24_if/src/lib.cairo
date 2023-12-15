@@ -1,11 +1,9 @@
-use core::debug::PrintTrait;
-
 fn main() {
     let number = 3;
 
     if number == 5 {
-        'condition was true'.print();
+        println!("condition was true and number = {}", number);
     } else {
-        'condition was false'.print();
+        println!("condition was false and number = {}", number);
     }
 }

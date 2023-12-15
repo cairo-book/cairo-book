@@ -1,5 +1,3 @@
-use core::debug::PrintTrait;
-
 struct Rectangle {
     width: u64,
     height: u64,
@@ -8,7 +6,7 @@ struct Rectangle {
 fn main() {
     let rectangle = Rectangle { width: 30, height: 10, };
     let area = area(rectangle);
-    area.print(); // print out the area
+    println!("Area: {}", area);
 }
 
 fn area(rectangle: Rectangle) -> u64 {

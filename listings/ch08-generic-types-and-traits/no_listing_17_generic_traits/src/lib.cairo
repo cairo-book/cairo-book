@@ -1,5 +1,3 @@
-use core::debug::PrintTrait;
-
 #[derive(Copy, Drop)]
 struct Rectangle {
     height: u64,
@@ -41,10 +39,10 @@ impl CircleGeometry of ShapeGeometry<Circle> {
 
 fn main() {
     let rect = Rectangle { height: 5, width: 7 };
-    rect.area().print(); // 35
-    rect.boundary().print(); // 24
+    println!("Rectangle area: {}", rect.area()); //35
+    println!("Rectangle boundary: {}", rect.boundary()); //24
 
     let circ = Circle { radius: 5 };
-    circ.area().print(); // 78
-    circ.boundary().print(); // 31
+    println!("Circle area: {}", circ.area()); //78
+    println!("Circle boundary: {}", circ.boundary()); //31
 }

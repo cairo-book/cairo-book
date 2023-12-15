@@ -30,7 +30,6 @@ fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
 
 #[cfg(test)]
 mod tests {
-    use core::debug::PrintTrait;
     use super::{find_value_recursive, find_value_iterative};
 
     #[test]
@@ -47,16 +46,20 @@ mod tests {
         let result_i = find_value_iterative(@my_array, value_to_find);
 
         match result {
-            Option::Some(index) => { if index == 1 {
-                'it worked'.print();
-            } },
-            Option::None => { 'not found'.print(); },
+            Option::Some(index) => {
+                if index == 1 {
+                    println!("found recursively at index {}", index);
+                }
+            },
+            Option::None => { println!("not found"); },
         }
         match result_i {
-            Option::Some(index) => { if index == 1 {
-                'it worked'.print();
-            } },
-            Option::None => { 'not found'.print(); },
+            Option::Some(index) => {
+                if index == 1 {
+                    println!("found iteratively at index {}", index);
+                }
+            },
+            Option::None => { println!("not found"); },
         }
     }
 }

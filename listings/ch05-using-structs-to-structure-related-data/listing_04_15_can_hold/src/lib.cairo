@@ -1,7 +1,7 @@
 //TAG: does_not_compile
 // ANCHOR: all
 // ANCHOR: no_method
-use core::debug::PrintTrait;
+
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,
@@ -13,11 +13,8 @@ fn main() {
     let rect2 = Rectangle { width: 10, height: 40, };
     let rect3 = Rectangle { width: 60, height: 45, };
 
-    'Can rect1 hold rect2?'.print();
-    rect1.can_hold(@rect2).print();
-
-    'Can rect1 hold rect3?'.print();
-    rect1.can_hold(@rect3).print();
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(@rect2));
+    println!("Can rect1 hold rect3? {}", rect1.can_hold(@rect3));
 }
 // ANCHOR_END: no_method
 
