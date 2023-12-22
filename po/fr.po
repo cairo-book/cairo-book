@@ -6788,7 +6788,7 @@ msgstr ""
 #: src/ch08-01-generic-data-types.md:213
 msgid ""
 "We first define `WalletTrait<T>` trait using a generic type `T` which "
-"defines a method that returns a snapshot of the field `address` from "
+"defines a method that returns a snapshot of the field `balance` from "
 "`Wallet`. Then we give an implementation for the trait in `WalletImpl<T>`. "
 "Note that you need to include a generic type in both definitions of the "
 "trait and the implementation."
