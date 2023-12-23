@@ -11151,10 +11151,10 @@ msgstr ""
 
 #: src/ch08-01-generic-data-types.md:213
 msgid ""
-"We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns a snapshot of the field `address` from `Wallet`. Then we give an implementation "
+"We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns a snapshot of the field `balance` from `Wallet`. Then we give an implementation "
 "for the trait in `WalletImpl<T>`. Note that you need to include a generic type in both definitions of the trait and the implementation."
 msgstr ""
-"我们首先定义了`WalletTrait<T>`trait，使用一个泛型`T`，它定义了一个方法，从`Wallet`中返回字段`address`的快照。然后我们在`WalletImpl<T>`中给出该trait的实现。请注意，你需要在trait的定义"
+"我们首先定义了`WalletTrait<T>`trait，使用一个泛型`T`，它定义了一个方法，从`Wallet`中返回字段`balance`的快照。然后我们在`WalletImpl<T>`中给出该trait的实现。请注意，你需要在trait的定义"
 "和实现中都包含一个泛型。"
 
 #: src/ch08-01-generic-data-types.md:215
