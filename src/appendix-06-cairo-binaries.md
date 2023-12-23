@@ -166,7 +166,7 @@ cargo build --all --release
 
 .
 
-**NOTE: Keeping Cairo up to date**
+> **NOTE: Keeping Cairo up to date**
 
 Now that your Cairo compiler is in a cloned repository, all you will need to do
 is pull the latest changes and rebuild as follows:
