@@ -21,7 +21,7 @@ Contract interfaces in Cairo are traits annotated with the `#[starknet::interfac
 
 One important specification is that this trait must be generic over the `TContractState` type. This is required for functions to access the contract's storage, so that they can read and write to it.
 
-> Note: The contract constructor is not part of the interface. Nor are internal functions part of the interface.
+> **Note:** The contract constructor is not part of the interface. Nor are internal functions part of the interface.
 
 Here's a sample interface for an ERC20 token contract. As you can see, it's a generic trait over the `TContractState` type. `view` functions have a self parameter of type `@TContractState`, while `external` functions have a self parameter of type passed by reference `ref self: TContractState`.
 

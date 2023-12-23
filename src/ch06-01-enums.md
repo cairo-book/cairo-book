@@ -70,7 +70,7 @@ We are demonstrating two approaches for the above function:
 - Recursive Approach `find_value_recursive`
 - Iterative Approach `find_value_iterative`
 
-> Note: in the future it would be nice to replace this example by something simpler using a loop and without gas related code.
+> **Note:** in the future it would be nice to replace this example by something simpler using a loop and without gas related code.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_option/src/lib.cairo}}

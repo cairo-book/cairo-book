@@ -175,7 +175,7 @@ by the implementation; the `::` syntax is used for both trait functions and
 namespaces created by modules. We’ll discuss modules in [Chapter 8][modules]<!--
 ignore -->.
 
-> Note: It is also possible to call this function using the trait name, with
+> **Note:** It is also possible to call this function using the trait name, with
 > `RectangleTrait::square(10)`.
 
 ### Multiple `impl` Blocks

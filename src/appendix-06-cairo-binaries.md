@@ -181,7 +181,7 @@ cd $CAIRO_ROOT && git fetch && git pull && cargo build --all --release
 export PATH="$CAIRO_ROOT/target/release:$PATH"
 ```
 
-**NOTE: If installing from a Linux binary, adapt the destination path accordingly.**
+> **NOTE: If installing from a Linux binary, adapt the destination path accordingly.**
 
 ### Step 3: Setup Language Server
 

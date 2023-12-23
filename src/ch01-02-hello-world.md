@@ -4,7 +4,7 @@ Now that you’ve installed Cairo through Scarb, it’s time to write your first
 It’s traditional when learning a new language to write a little program that
 prints the text `Hello, world!` to the screen, so we’ll do the same here!
 
-> Note: This book assumes basic familiarity with the command line. Cairo makes
+> **Note:** This book assumes basic familiarity with the command line. Cairo makes
 > no specific demands about your editing or tooling or where your code lives, so
 > if you prefer to use an integrated development environment (IDE) instead of
 > the command line, feel free to use your favorite IDE. The Cairo team has developed
@@ -22,7 +22,7 @@ your projects there.
 Open a terminal and enter the following commands to make a _cairo_projects_ directory
 and a directory for the “Hello, world!” project within the _cairo_projects_ directory.
 
-> Note: From now on, for each example shown in the book, we assume that
+> **Note:** From now on, for each example shown in the book, we assume that
 > you will be working from a Scarb project directory. If you are not using Scarb, and try to run the examples from a different directory, you might need to adjust the commands accordingly or create a Scarb project.
 
 For Linux, macOS, and PowerShell on Windows, enter this:
@@ -55,7 +55,7 @@ Go into the `hello_world` directory with the command `cd hello_world`. You’ll 
 
 It has also initialized a new Git repository along with a `.gitignore` file
 
-> Note: Git is a common version control system. You can stop using version control system by using the `--vcs` flag.
+> **Note:** Git is a common version control system. You can stop using version control system by using the `--vcs` flag.
 > Run `scarb new -help` to see the available options.
 
 Open _Scarb.toml_ in your text editor of choice. It should look similar to the code in Listing 1-2.
@@ -84,7 +84,7 @@ The next three lines set the configuration information Scarb needs to compile yo
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
-> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/starknet-package.html).
+> **Note:** If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/starknet-package.html).
 
 The other file created by Scarb is `src/lib.cairo`, let's delete all the content and put in the following content, we will explain the reason later.
 
@@ -159,7 +159,7 @@ The function body is wrapped in `{}`. Cairo requires curly brackets around all
 function bodies. It’s good style to place the opening curly bracket on the same
 line as the function declaration, adding one space in between.
 
-> Note: If you want to stick to a standard style across Cairo projects, you can
+> **Note:** If you want to stick to a standard style across Cairo projects, you can
 > use the automatic formatter tool available with `scarb fmt` to format your code in a
 > particular style (more on `scarb fmt` in
 > [Appendix D][devtools]). The Cairo team has included this tool

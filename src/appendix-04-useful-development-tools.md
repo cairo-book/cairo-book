@@ -31,4 +31,4 @@ definition, and inline errors.
 
 [cairo-language-server]: https://github.com/starkware-libs/cairo/tree/main/crates/cairo-lang-language-server
 
-> Note: If you have Scarb installed, it should work out of the box with the Cairo VSCode extension, without a manual installation of the language server.
+> **Note:**  If you have Scarb installed, it should work out of the box with the Cairo VSCode extension, without a manual installation of the language server.

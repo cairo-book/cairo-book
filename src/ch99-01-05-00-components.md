@@ -52,7 +52,7 @@ The actual implementation of the component's external logic is done in an `impl`
 block marked as `#[embeddable_as(name)]`. Usually, this `impl` block will be an
 implementation of the trait defining the interface of the component.
 
-> Note: `name` is the name that we’ll be using in the contract to refer to the
+> **Note:** `name` is the name that we’ll be using in the contract to refer to the
 > component. It is different than the name of your impl.
 
 You can also define internal functions that will not be accessible externally,
@@ -125,7 +125,7 @@ and not `ContractState`. Note that while the type is different, accessing
 storage or emitting events is done similarly via `self.storage_var_name.read()`
 or `self.emit(...).`
 
-> Note: To avoid the confusion between the embeddable name and the impl name, we
+> **Note:** To avoid the confusion between the embeddable name and the impl name, we
 > recommend keeping the suffix `Impl` in the impl name.
 
 ## Migrating a Contract to a Component

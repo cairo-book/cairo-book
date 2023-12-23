@@ -4,7 +4,7 @@ A trait defines a set of methods that can be implemented by a type. These method
 A trait combined with a generic type defines functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way.
 We can use _trait bounds_ to specify that a generic type can be any type that has certain behavior.
 
-> Note: Note: Traits are similar to a feature often called interfaces in other languages, although with some differences.
+> **Note:** Traits are similar to a feature often called interfaces in other languages, although with some differences.
 
 While traits can be written to not accept generic types, they are most useful when used with generic types. We already covered generics in the [previous chapter](./ch08-01-generic-data-types.md), and we will use them in this chapter to demonstrate how traits can be used to define shared behavior for generic types.
 
@@ -26,7 +26,7 @@ Here, we declare a trait using the trait keyword and then the trait’s name, wh
 
 Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
 
-> Note: the `ByteArray` type is the type used to represent Strings in Cairo.
+> **Note:** the `ByteArray` type is the type used to represent Strings in Cairo.
 
 As the trait is not generic, the `self` parameter is not generic either and is of type `@NewsArticle`. This means that the `summarize` method can only be called on instances of `NewsArticle`.
 

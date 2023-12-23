@@ -12,7 +12,7 @@ Let's consider the following contract to present the basics of a Starknet contra
 
 <span class="caption">Listing 99-1: A simple storage contract</span>
 
-> Note: Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md).
+> **Note:** Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md).
 
 ### What is this contract?
 
@@ -72,6 +72,6 @@ To access a storage variable of the current contract, you add the `self` prefix 
 
 <span class="caption">Using `self` and the `write` method to modify the value of a storage variable</span>
 
-> Note: if the contract state is passed as a snapshot instead of `ref`, attempting to modify will result in a compilation error.
+> **Note:** if the contract state is passed as a snapshot instead of `ref`, attempting to modify will result in a compilation error.
 
 This contract does not do much yet apart from allowing anyone to store a single number that is accessible by anyone in the world. Anyone could call `set` again with a different value and overwrite your number, but the number is still stored in the history of the blockchain. Later, you will see how you can impose access restrictions so that only you can alter the number.
