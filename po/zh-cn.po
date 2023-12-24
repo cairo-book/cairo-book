@@ -14782,7 +14782,7 @@ msgstr ""
 
 #: src/ch11-03-hash.md:138
 msgid ""
-"In this example, we initialized a HashState (`hash`) and updateted it and then called the function `finalize()` on the\n"
+"In this example, we initialized a HashState (`hash`) and updated it and then called the function `finalize()` on the\n"
 "HashState to get the computed hash `hash_felt252`. We used the `poseidon_hash_span` on the `Span` of the `Array<felt252>` to compute its hash."
 msgstr ""
 "在这个例子中，我们初始化了一个 HashState (`hash`) 并更新了它，然后在 HashState 上调用了函数 `finalize()` 以获得计算出的哈希 `hash_felt252`。我们使用 `poseidon_hash_span` 对 "
