@@ -107,9 +107,9 @@ with the string 'number is zero' (as a felt252) and the division will not be rea
 
 ## `assert!` and `assert_eq` macros
 
-Cairo version 2.4.0 introduced `assert!` and `assert_eq` macros. Similarly to `panic` macro, they both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
+Cairo version 2.4.0 introduced `assert!` and `assert_eq` macros. Similarly to `panic!` macro, they both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
 
-`assert!` macro checks whether a condition holds and panic otherwise: 
+`assert!` macro checks whether a condition holds and panics otherwise: 
 
 ```rust
 let var1 = 1;
@@ -119,7 +119,7 @@ assert!(var1 != var2, "values should not be equal");
 assert!(var1 != var2, "{},{} should not be equal", var1, var2);
 ```
 
-`assert_eq!` macro checks whether 2 values are equal and panic otherwise:
+`assert_eq!` macro checks whether 2 values are equal and panics otherwise:
 
 ```rust
 #[derive(Drop, Debug, PartialEq)]
