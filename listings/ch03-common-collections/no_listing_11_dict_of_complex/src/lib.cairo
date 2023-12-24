@@ -3,7 +3,6 @@
 // ANCHOR: imports
 use core::dict::Felt252DictTrait;
 use core::nullable::{nullable_from_box, match_nullable, FromNullableResult};
-use core::panic_with_felt252;
 // ANCHOR_END: imports
 
 // ANCHOR: header
@@ -27,14 +26,14 @@ fn main() {
 
     // Search the value and assert it is not null
     let span = match match_nullable(val) {
-        FromNullableResult::Null(()) => panic_with_felt252('No value found'),
+        FromNullableResult::Null(()) => panic!("No value found"),
         FromNullableResult::NotNull(val) => val.unbox(),
     };
 
     // Verify we are having the right values
-    assert(*span.at(0) == 8, 'Expecting 8');
-    assert(*span.at(1) == 9, 'Expecting 9');
-    assert(*span.at(2) == 10, 'Expecting 10');
+    assert!(*span.at(0) == 8, "Expecting 8");
+    assert!(*span.at(1) == 9, "Expecting 9");
+    assert!(*span.at(2) == 10, "Expecting 10");
 }
 // ANCHOR_END: footer
 

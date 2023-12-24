@@ -45,7 +45,7 @@ impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
     }
 
     fn at(ref self: NullableVec<T>, index: usize) -> T {
-        assert(index < self.len(), 'Index out of bounds');
+        assert!(index < self.len(), "Index out of bounds");
         self.data.get(index.into()).deref()
     }
 
@@ -55,7 +55,7 @@ impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
     }
     // ANCHOR: set
     fn set(ref self: NullableVec<T>, index: usize, value: T) {
-        assert(index < self.len(), 'Index out of bounds');
+        assert!(index < self.len(), "Index out of bounds");
         self.data.insert(index.into(), nullable_from_box(BoxTrait::new(value)));
     }
     // ANCHOR_END: set

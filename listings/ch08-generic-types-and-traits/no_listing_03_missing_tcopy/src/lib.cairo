@@ -30,5 +30,5 @@ fn main() {
 
     // We need to specify that we are passing a snapshot of `list` as an argument
     let s = smallest_element(@list);
-    assert(s == 3, 0);
+    assert!(s == 3);
 }

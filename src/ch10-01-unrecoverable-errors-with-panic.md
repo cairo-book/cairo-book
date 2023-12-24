@@ -31,6 +31,25 @@ Let's consider an example:
 
 Executing this program will yield the same error message as before. In that case, if there is no need for an array and multiple values to be returned within the error, so `panic_with_felt252` is a more succinct alternative.
 
+## `panic!` macro
+
+`panic!` macro has been introduced with cairo version 2.4.0. The previous example returning the error code 2 shows how convenient `panic!` macro is. There is no need to create an array and pass it as argument like `panic` function.
+
+```rust
+fn main() {
+    if true == true {
+        panic!("2");
+    }
+    println!("This line isn't reached");
+}
+```
+
+Unlike `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a litteral longer than 31 bytes. This is because `panic!` takes a formatted byte array as parameter. For example, the following line of code will successfully compile: 
+
+```rust
+panic!("the error for panic! macro is not limited to 31 characters anymore");
+```
+
 ## nopanic notation
 
 You can use the `nopanic` notation to indicate that a function will never panic. Only `nopanic` functions can be called in a function annotated as `nopanic`.
@@ -85,3 +104,32 @@ Here is an example of its usage:
 We are asserting in main that `my_number` is not zero to ensure that we're not performing a division by 0.
 In this example, `my_number` is zero so the assertion will fail, and the program will panic
 with the string 'number is zero' (as a felt252) and the division will not be reached.
+
+## `assert!` and `assert_eq` macros
+
+Cairo version 2.4.0 introduced `assert!` and `assert_eq` macros. Similarly to `panic` macro, they both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
+
+`assert!` macro checks whether a condition holds and panic otherwise: 
+
+```rust
+let var1 = 1;
+let var2 = 2;
+assert!(var1 != var2);
+assert!(var1 != var2, "values should not be equal");
+assert!(var1 != var2, "{},{} should not be equal", var1, var2);
+```
+
+`assert_eq!` macro checks whether 2 values are equal and panic otherwise:
+
+```rust
+#[derive(Drop, Debug, PartialEq)]
+struct MyStruct {
+    var1: u8,
+    var2: u8
+}
+...
+let first = MyStruct { var1: 1, var2: 2 };
+let second = MyStruct { var1: 1, var2: 2 };
+assert_eq!(first, second);
+assert_eq!(first, second, "{:?},{:?} should be equal", first, second);
+```

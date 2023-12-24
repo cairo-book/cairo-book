@@ -16,7 +16,7 @@ mod contract {
         fn withdraw(ref self: ContractState, amount: u256) {
             let current_balance = self.balance.read();
 
-            assert(self.balance.read() >= amount, 'Insufficient funds');
+            assert!(self.balance.read() >= amount, "Insufficient funds");
 
             self.balance.write(current_balance - amount);
         }
