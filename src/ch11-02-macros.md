@@ -34,8 +34,8 @@ Similarly to rust, `format!` macro is useful to format and concatenate multiple 
 let var1 = 5;
 let var2: ByteArray = "hello";
 let var3: u32 = 5;
-let ba = format!("{},{},{}", var1, var2, var3);
-let ba = format!("{var1}{var2}{var3}");
+let byte_array = format!("{},{},{}", var1, var2, var3);
+let byte_array = format!("{var1}{var2}{var3}");
 ```
 
 ### `write!` macro

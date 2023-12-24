@@ -44,7 +44,7 @@ fn main() {
 }
 ```
 
-Unlike `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a litteral longer than 31 bytes. This is because `panic!` takes a formatted byte array as parameter. For example, the following line of code will successfully compile: 
+Unlike `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a formatted byte array as parameter. For example, the following line of code will successfully compile: 
 
 ```rust
 panic!("the error for panic! macro is not limited to 31 characters anymore");
