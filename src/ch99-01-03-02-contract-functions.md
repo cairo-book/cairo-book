@@ -79,7 +79,6 @@ impl SomeImpl of SomeTrait {
 
     #[external(v0)]
     // this is a public function
-
     fn external_function(
         ref self: ContractState, arg1: felt252) -> felt252 {
 			...
