@@ -11,10 +11,7 @@ fn main() {
     let mut d: Felt252Dict<Nullable<Span<felt252>>> = Default::default();
 
     // Crate the array to insert
-    let mut a = ArrayTrait::new();
-    a.append(8);
-    a.append(9);
-    a.append(10);
+    let a = array![8, 9, 10];
 
     // Insert it as a `Span`
     d.insert(0, nullable_from_box(BoxTrait::new(a.span())));
