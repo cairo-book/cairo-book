@@ -62,38 +62,14 @@ At this point, you might still be wondering if all of this is really necessary i
 
 ### 4. [abi(per_item)] attribute
 
-Before cairo version 2.3.0, it was not possible to annotate specific functions inside an implementation block. This means that constructor or l1_handler functions could not be included inside a trait implementation, and needed to be annotated individually. Moreover, internal functions needed to be implemented in a different impl than public functions.
+Before cairo version 2.3.0, it was not possible to annotate specific functions inside an implementation block. This means that `constructor` or `l1_handler` functions could not be included inside a trait implementation, and needed to be annotated individually. Moreover, internal functions needed to be implemented in a different impl than public functions.
 
-It is now possible to annotate function individually inside an impl, hence allowing different types of entrypoints. `#[abi(per_item)]` attribute is always used with `#[generate_trait]` attribute. In this case, impl and trait name will not be part of the ABI. Note that when using `#[abi(per_item)]` attribute, public functions  need to be annotated with `#[external(v0)]` attribute.
+It is now possible to annotate function individually inside an impl, hence allowing different types of entrypoints. `#[abi(per_item)]` attribute is often used with `#[generate_trait]` attribute. In this case, impl and trait name will not be part of the ABI. Note that when using `#[abi(per_item)]` attribute, public functions need to be annotated with `#[external(v0)]` attribute.
+In the case of `#[abi(per_item)]` attribute usage without `#[generate_trait]`, it will only be possible to include `constructor`, `l1-handler` and `internal` functions in the trait implementation. Indeed, `#[abi(per_item)]` only works with a trait that is defined as a Starknet interface. Hence, it will be mandatory to create another trait defined as interface to implement public functions.
+
 Here is a short example:
 
-```rust
-#[abi(per_item)]
-#[generate_trait]
-impl SomeImpl of SomeTrait {
-    #[constructor]
-    // this is a constructor function
-    fn constructor(ref self: ContractState) {
-			...
-    }
-
-    #[external(v0)]
-    // this is a public function
-    fn external_function(
-        ref self: ContractState, arg1: felt252) -> felt252 {
-			...
-    }
-
-    #[l1_handler]
-    // this is a l1_handler function
-    fn handle_message(ref self: ContractState, from_address: felt252, arg: felt252) -> felt252 {
-        ...
-    }
-
-	// this is an internal function
-	fn internal_function(self: @ContractState) {
-			...
-	}
-}
+```rust,noplayground
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_14_abi_per_item_attribute/src/lib.cairo}}
 ```
 
