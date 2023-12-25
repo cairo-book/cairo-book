@@ -23,7 +23,7 @@ fn main() {
 
     // Search the value and assert it is not null
     let span = match match_nullable(val) {
-        FromNullableResult::Null(()) => panic!("No value found"),
+        FromNullableResult::Null => panic!("No value found"),
         FromNullableResult::NotNull(val) => val.unbox(),
     };
 

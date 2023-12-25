@@ -33,18 +33,13 @@ Executing this program will yield the same error message as before. In that case
 
 ## `panic!` macro
 
-`panic!` macro has been introduced with cairo version 2.4.0. The previous example returning the error code 2 shows how convenient `panic!` macro is. There is no need to create an array and pass it as argument like `panic` function.
+`panic!` macro can be really helpful. The previous example returning the error code 2 shows how convenient `panic!` macro is. There is no need to create an array and pass it as argument like `panic` function.
 
 ```rust
-fn main() {
-    if true == true {
-        panic!("2");
-    }
-    println!("This line isn't reached");
-}
+{{#include ../listings/ch10-error-handling/no_listing_09_panic_macro/src/lib.cairo}}
 ```
 
-Unlike `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a formatted byte array as parameter. For example, the following line of code will successfully compile: 
+Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as parameter. For example, the following line of code will successfully compile: 
 
 ```rust
 panic!("the error for panic! macro is not limited to 31 characters anymore");
@@ -107,29 +102,16 @@ with the string 'number is zero' (as a felt252) and the division will not be rea
 
 ## `assert!` and `assert_eq` macros
 
-Cairo version 2.4.0 introduced `assert!` and `assert_eq` macros. Similarly to `panic!` macro, they both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
+Similarly to `panic!` macro, `assert!` and `assert_eq` macros both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
 
 `assert!` macro checks whether a condition holds and panics otherwise: 
 
 ```rust
-let var1 = 1;
-let var2 = 2;
-assert!(var1 != var2);
-assert!(var1 != var2, "values should not be equal");
-assert!(var1 != var2, "{},{} should not be equal", var1, var2);
+{{#include ../listings/ch10-error-handling/no_listing_10_assert_macro/src/lib.cairo}}
 ```
 
-`assert_eq!` macro checks whether 2 values are equal and panics otherwise:
+`assert_eq!` macro can only be used in tests, and the types compared need to implement `Debug`. It checks whether 2 values are equal and panics otherwise:
 
 ```rust
-#[derive(Drop, Debug, PartialEq)]
-struct MyStruct {
-    var1: u8,
-    var2: u8
-}
-...
-let first = MyStruct { var1: 1, var2: 2 };
-let second = MyStruct { var1: 1, var2: 2 };
-assert_eq!(first, second);
-assert_eq!(first, second, "{:?},{:?} should be equal", first, second);
+{{#include ../listings/ch10-error-handling/no_listing_11_assert_eq_macro/src/lib.cairo}}
 ```
