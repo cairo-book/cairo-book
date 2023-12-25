@@ -44,7 +44,7 @@ mod SizeFactory {
         remaining_sizes: Sizes
     }
 
-    #[external(v0)]
+    #[abi(embed_v0)]
     fn update_sizes(ref self: ContractState, sizes: Sizes) {
         // This will automatically pack the
         // struct into a single u128
@@ -52,7 +52,7 @@ mod SizeFactory {
     }
 
 
-    #[external(v0)]
+    #[abi(embed_v0)]
     fn get_sizes(ref self: ContractState) -> Sizes {
         // this will automatically unpack the
         // packed-representation into the Sizes struct

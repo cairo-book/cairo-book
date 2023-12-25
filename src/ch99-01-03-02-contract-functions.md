@@ -18,7 +18,7 @@ Some important rules to note:
 
 ### 2. Public functions
 
-As stated previously, public functions are accessible from outside of the contract. They must be defined inside an implementation block annotated with the `#[external(v0)]` attribute. This attribute only affects the visibility (public vs private/internal), but it doesn't inform us on the ability of these functions to modify the state of the contract.
+As stated previously, public functions are accessible from outside of the contract. They must be defined inside an implementation block annotated with the `#[abi(embed_v0)]` attribute. This attribute means that all functions embedded inside it are implementations of the Starknet interface, and therefore entry points of the contract. It only affects the visibility (public vs private/internal), but it doesn't inform us on the ability of these functions to modify the state of the contract.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:impl_public}}
@@ -59,3 +59,42 @@ At this point, you might still be wondering if all of this is really necessary i
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:stateless_internal}}
 ```
+
+### 4. [abi(per_item)] attribute
+
+Before cairo version 2.3.0, it was not possible to annotate specific functions inside an implementation block. This means that constructor or l1_handler functions could not be included inside a trait implementation, and needed to be annotated individually. Moreover, internal functions needed to be implemented in a different impl than public functions.
+
+It is now possible to annotate function individually inside an impl, hence allowing different types of entrypoints. `#[abi(per_item)]` attribute is always used with `#[generate_trait]` attribute. In this case, impl and trait name will not be part of the ABI. Note that when using `#[abi(per_item)]` attribute, public functions  need to be annotated with `#[external(v0)]` attribute.
+Here is a short example:
+
+```rust
+#[abi(per_item)]
+#[generate_trait]
+impl SomeImpl of SomeTrait {
+    #[constructor]
+    // this is a constructor function
+    fn constructor(ref self: ContractState) {
+			...
+    }
+
+    #[external(v0)]
+    // this is a public function
+
+    fn external_function(
+        ref self: ContractState, arg1: felt252) -> felt252 {
+			...
+    }
+
+    #[l1_handler]
+    // this is a l1_handler function
+    fn handle_message(ref self: ContractState, from_address: felt252, arg: felt252) -> felt252 {
+        ...
+    }
+
+	// this is an internal function
+	fn internal_function(self: @ContractState) {
+			...
+	}
+}
+```
+

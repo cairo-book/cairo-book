@@ -18,7 +18,7 @@ mod SimpleStorage {
     }
 
     //ANCHOR: impl
-    #[external(v0)]
+    #[abi(embed_v0)]
     impl SimpleStorage of super::ISimpleStorage<ContractState> {
         //ANCHOR: write_state
         fn set(ref self: ContractState, x: u128) {
