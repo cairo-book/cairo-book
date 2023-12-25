@@ -58,7 +58,7 @@ the `add_to_waitlist` function to achieve the same result, as in Listing 7-7.
 <span class="caption">Listing 7-7: Bringing the `add_to_waitlist` function
 into scope with `use`, which is unidiomatic</span>
 
-Although both Listing 7-5 and 6-7 accomplish the same task, Listing 7-5 is
+Although both Listing 7-5 and 7-7 accomplish the same task, Listing 7-5 is
 the idiomatic way to bring a function into scope with `use`. Bringing the
 function’s parent module into scope with `use` means we have to specify the
 parent module when calling the function. Specifying the parent module when
