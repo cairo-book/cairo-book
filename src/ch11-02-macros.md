@@ -4,7 +4,7 @@ The Cairo language has some plugins that allows developers to simplify their cod
 
 ### `print!` and `println!` macros
 
-`println!` and `print!` both call a Cairo macro. If it had called a function instead, it would be entered as `println` or `print` (without the `!`). Two macros are available for printing values:
+Two macros are available for printing values:
 - `println!` which prints on a new line 
 - `print!` with inline printing
   
