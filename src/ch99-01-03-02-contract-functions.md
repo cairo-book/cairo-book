@@ -42,11 +42,11 @@ View functions are _public_ functions where the `self: ContractState` is passed 
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:view}}
 ```
 
-> **Note:** It's important to note that both external and view functions are public. To create an internal function in a contract, you will need to define it outside of the implementation block annotated with the `#[external(v0)]` attribute.
+> **Note:** It's important to note that both external and view functions are public. To create an internal function in a contract, you will need to define it outside of the implementation block annotated with the `#[abi(embed_v0)]` attribute.
 
 ### 3. Private functions
 
-Functions that are not defined in a block annotated with the `#[external(v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.
+Functions that are not defined in a block annotated with the `#[abi(embed_v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:state_internal}}
@@ -64,8 +64,8 @@ At this point, you might still be wondering if all of this is really necessary i
 
 Before cairo version 2.3.0, it was not possible to annotate specific functions inside an implementation block. This means that `constructor` or `l1_handler` functions could not be included inside a trait implementation, and needed to be annotated individually. Moreover, internal functions needed to be implemented in a different impl than public functions.
 
-It is now possible to annotate function individually inside an impl, hence allowing different types of entrypoints. `#[abi(per_item)]` attribute is often used with `#[generate_trait]` attribute. In this case, impl and trait name will not be part of the ABI. Note that when using `#[abi(per_item)]` attribute, public functions need to be annotated with `#[external(v0)]` attribute.
-In the case of `#[abi(per_item)]` attribute usage without `#[generate_trait]`, it will only be possible to include `constructor`, `l1-handler` and `internal` functions in the trait implementation. Indeed, `#[abi(per_item)]` only works with a trait that is defined as a Starknet interface. Hence, it will be mandatory to create another trait defined as interface to implement public functions.
+It is now possible to annotate function individually inside an impl, hence allowing different types of entrypoints. `#[abi(per_item)]` attribute is often used with `#[generate_trait]` attribute. In this case, impl and trait names will not be part of the ABI. Note that when using `#[abi(per_item)]` attribute, public functions need to be annotated with `#[external(v0)]` attribute.
+In the case of `#[abi(per_item)]` attribute usage without `#[generate_trait]`, it will only be possible to include `constructor`, `l1-handler` and `internal` functions in the trait implementation. Indeed, `#[abi(per_item)]` only works with a trait that is not defined as a Starknet interface. Hence, it will be mandatory to create another trait defined as interface to implement public functions.
 
 Here is a short example:
 
