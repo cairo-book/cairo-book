@@ -100,7 +100,7 @@ like this:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_27_loop/src/lib.cairo}}
 ```
 
-When we run this program, we’ll see `again!` printed over and over continuously
+When we run this program, we’ll see `i = 0` printed over and over continuously
 until we stop the program manually, because the stop condition is never reached.
 While the compiler prevents us from writing programs without a stop condition (`break` statement),
 the stop condition might never be reached, resulting in an infinite loop.
@@ -109,16 +109,13 @@ stuck in a continual loop. Give it a try:
 
 ```shell
 $ scarb cairo-run --available-gas=20000000
-[DEBUG]	again                          	(raw: 418346264942)
-
-[DEBUG]	again                          	(raw: 418346264942)
-
-[DEBUG]	again                          	(raw: 418346264942)
-
-[DEBUG]	again                          	(raw: 418346264942)
-
-Run panicked with err values: [375233589013918064796019]
-Remaining gas: 1050
+i = 0
+i = 0
+i = 0
+...
+i = 0
+Run panicked with [375233589013918064796019 ('Out of gas'), ].
+Remaining gas: 120810
 ```
 
 > Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurement that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In this case, the program panicked because it ran out of gas, as the stop condition was never reached.
