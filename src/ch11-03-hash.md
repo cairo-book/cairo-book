@@ -71,7 +71,7 @@ Hash trait on this structure it will rise an error because the structure contain
 
 ```
 
-In this example, we initialized a HashState (`hash`) and updateted it and then called the function `finalize()` on the
+In this example, we initialized a HashState (`hash`) and updated it and then called the function `finalize()` on the
 HashState to get the computed hash `hash_felt252`. We used the `poseidon_hash_span` on the `Span` of the `Array<felt252>` to compute its hash.
 
 ```rust
