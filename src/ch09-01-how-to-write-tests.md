@@ -8,7 +8,7 @@ Tests are Cairo functions that verify that the non-test code is functioning in t
 - Run the code you want to test.
 - Assert the results are what you expect.
 
-Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the `test` attribute, the `assert` function, and the `should_panic` attribute.
+Let’s look at the features Cairo provides specifically for writing tests that take these actions, which include the `test` attribute, the `assert!` macro, and the `should_panic` attribute.
 
 ### The Anatomy of a Test Function
 
@@ -97,13 +97,11 @@ The summary line displays at the end: overall, our test result is `FAILED`. We h
 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
-## Checking Results with the assert function
+## Checking Results with the `assert!` macro 
 
-The `assert` function, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert` function a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the assert function calls `panic()` to cause the test to fail with a message we defined as the second argument of the `assert` function. Using the `assert` function helps us check that our code is functioning in the way we intend.
+The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
 
-Since cairo version 2.4.0, `assert!` macro is available, allowing to return an error that doesn't fit into a `felt252`.
-
-In [Chapter 5, Listing 5-15](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert` function.
+In [Chapter 5, Listing 5-15](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -113,7 +111,7 @@ In [Chapter 5, Listing 5-15](ch05-03-method-syntax.md#multiple-impl-blocks), we 
 
 <span class="caption">Listing 9-5: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
 
-The `can_hold` method returns a `bool`, which means it’s a perfect use case for the assert function. In Listing 9-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
+The `can_hold` method returns a `bool`, which means it’s a perfect use case for the `assert!` macro. In Listing 9-6, we write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -125,7 +123,7 @@ The `can_hold` method returns a `bool`, which means it’s a perfect use case fo
 
 Note that we’ve added two new lines inside the tests module: `use super::Rectangle;` and `use super::RectangleTrait;`. The tests module is a regular module that follows the usual visibility rules. Because the tests module is an inner module, we need to bring the code under test in the outer module into the scope of the inner module.
 
-We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `Rectangle` instances that we need. Then we called the assert function and passed it the result of calling `larger.can_hold(@smaller)`. This expression is supposed to return `true`, so our test should pass. Let’s find out!
+We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `Rectangle` instances that we need. Then we called the `assert!` macro and passed it the result of calling `larger.can_hold(@smaller)`. This expression is supposed to return `true`, so our test should pass. Let’s find out!
 
 ```shell
 $ scarb cairo-test
@@ -142,7 +140,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 {{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_08_06/src/lib.cairo:test2}}
 ```
 
-Because the correct result of the `can_hold` function in this case is `false`, we need to negate that result before we pass it to the assert function. As a result, our test will pass if `can_hold` returns false:
+Because the correct result of the `can_hold` function in this case is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
 
 ```shell
 $ scarb cairo-test
