@@ -96,7 +96,7 @@ included too. That code is:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
 ```
 
-The line `use garden::vegetables::Asparagus;` lets us use bring the `Asparagus` type into scope,
+The line `use garden::vegetables::Asparagus;` lets us bring the `Asparagus` type into scope,
 so we can use it in the `main` function.
 
 Now let’s get into the details of these rules and demonstrate them in action!
