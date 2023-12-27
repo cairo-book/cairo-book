@@ -62,9 +62,8 @@ At this point, you might still be wondering if all of this is really necessary i
 
 ### 4. [abi(per_item)] attribute
 
-Before cairo version 2.3.0, it was not possible to annotate specific functions inside an implementation block. This means that `constructor` or `l1_handler` functions could not be included inside a trait implementation, and needed to be annotated individually. Moreover, internal functions needed to be implemented in a different impl than public functions.
+You can also define the entrypoint type of a function individually inside an impl using the`#[abi(per_item)]` attribute on top of your impl. It is often used with the `#[generate_trait]` attribute, as it allows you to define entrypoints without an explicit interface. In this case, the functions will not be grouped under an impl in the abi. Note that when using `#[abi(per_item)]` attribute, public functions need to be annotated with `#[external(v0)]` attribute - otherwise, they will not be exposed.
 
-It is now possible to annotate function individually inside an impl, hence allowing different types of entrypoints. `#[abi(per_item)]` attribute is often used with `#[generate_trait]` attribute. In this case, impl and trait names will not be part of the ABI. Note that when using `#[abi(per_item)]` attribute, public functions need to be annotated with `#[external(v0)]` attribute.
 In the case of `#[abi(per_item)]` attribute usage without `#[generate_trait]`, it will only be possible to include `constructor`, `l1-handler` and `internal` functions in the trait implementation. Indeed, `#[abi(per_item)]` only works with a trait that is not defined as a Starknet interface. Hence, it will be mandatory to create another trait defined as interface to implement public functions.
 
 Here is a short example:
