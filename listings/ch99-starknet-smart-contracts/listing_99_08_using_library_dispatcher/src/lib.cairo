@@ -18,13 +18,15 @@ mod ContractA {
     }
 
     #[generate_trait]
-    #[external(v0)]
+    #[abi(per_item)]
     impl ContractA of IContractA {
+        #[external(v0)]
         fn set_value(ref self: ContractState, value: u128) {
             IContractBLibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }
                 .set_value(value)
         }
 
+        #[external(v0)]
         fn get_value(self: @ContractState) -> u128 {
             self.value.read()
         }

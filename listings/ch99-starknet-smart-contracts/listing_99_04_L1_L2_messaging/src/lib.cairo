@@ -63,7 +63,7 @@ mod contract_msg {
         assert(!data.b.is_zero(), 'data.b is invalid');
     }
 
-    #[external(v0)]
+    #[abi(embed_v0)]
     impl ContractL1Impl of IContractL1<ContractState> {
         //ANCHOR: felt_msg_send
         fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {

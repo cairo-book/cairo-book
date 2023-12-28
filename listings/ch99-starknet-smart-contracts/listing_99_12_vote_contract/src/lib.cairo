@@ -70,7 +70,7 @@ mod Vote {
     }
 
     /// @dev Implementation of VoteTrait for ContractState
-    #[external(v0)]
+    #[abi(embed_v0)]
     impl VoteImpl of super::VoteTrait<ContractState> {
         /// @dev Returns the voting results
         fn get_vote_status(self: @ContractState) -> (u8, u8, u8, u8) {

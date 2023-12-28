@@ -69,7 +69,7 @@ mod NameRegistry {
     //ANCHOR_END: constructor
 
     //ANCHOR: impl_public
-    #[external(v0)]
+    #[abi(embed_v0)]
     impl NameRegistry of super::INameRegistry<ContractState> {
         //ANCHOR: external
         fn store_name(ref self: ContractState, name: felt252, registration_type: RegistrationType) {
