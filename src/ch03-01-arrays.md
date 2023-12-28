@@ -76,6 +76,23 @@ To determine the number of elements in an array, use the `len()` method. The ret
 
 If you want to check if an array is empty or not, you can use the `is_empty()` method, which returns `true` if the array is empty and `false` otherwise.
 
+### `array!` macro
+
+Sometimes, we need to create arrays with values that are already known at compile time. The basic way of doing that is redundant. You would first declare the array and then append each value one by one. `array!` is a simpler way of doing this task by combining the two steps.
+At compile-time, the compiler will expand the macro to generate the code that appends the items sequentially.
+
+Without `array!`:
+
+```rust
+{{#include ../listings/ch11-advanced-features/no_listing_02_array_macro/src/lib.cairo:no_macro}}
+```
+
+With `array!`:
+
+```rust
+{{#include ../listings/ch11-advanced-features/no_listing_02_array_macro/src/lib.cairo:array_macro}}
+```
+
 ### Storing multiple types with Enums
 
 If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md) chapter.

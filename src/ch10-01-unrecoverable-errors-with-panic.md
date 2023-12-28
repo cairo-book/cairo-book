@@ -31,6 +31,20 @@ Let's consider an example:
 
 Executing this program will yield the same error message as before. In that case, if there is no need for an array and multiple values to be returned within the error, so `panic_with_felt252` is a more succinct alternative.
 
+## `panic!` macro
+
+`panic!` macro can be really helpful. The previous example returning the error code 2 shows how convenient `panic!` macro is. There is no need to create an array and pass it as argument like `panic` function.
+
+```rust
+{{#include ../listings/ch10-error-handling/no_listing_09_panic_macro/src/lib.cairo}}
+```
+
+Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as parameter. For example, the following line of code will successfully compile: 
+
+```rust
+panic!("the error for panic! macro is not limited to 31 characters anymore");
+```
+
 ## nopanic notation
 
 You can use the `nopanic` notation to indicate that a function will never panic. Only `nopanic` functions can be called in a function annotated as `nopanic`.
@@ -85,3 +99,19 @@ Here is an example of its usage:
 We are asserting in main that `my_number` is not zero to ensure that we're not performing a division by 0.
 In this example, `my_number` is zero so the assertion will fail, and the program will panic
 with the string 'number is zero' (as a felt252) and the division will not be reached.
+
+## `assert!` and `assert_eq` macros
+
+Similarly to `panic!` macro, `assert!` and `assert_eq` macros both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
+
+`assert!` macro checks whether a condition holds and panics otherwise: 
+
+```rust
+{{#include ../listings/ch10-error-handling/no_listing_10_assert_macro/src/lib.cairo}}
+```
+
+`assert_eq!` macro can only be used in tests, and the types compared need to implement `Debug`. It checks whether 2 values are equal and panics otherwise:
+
+```rust
+{{#include ../listings/ch10-error-handling/no_listing_11_assert_eq_macro/src/lib.cairo}}
+```

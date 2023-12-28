@@ -26,7 +26,7 @@ Transactions in smart contracts are atomic, meaning they either succeed or fail 
 
 Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external function represents a set of possible state transitions. A transaction is nothing more than a state transition.
 
-The `assert` or `panic` functions can be used to validate conditions before performing specific actions. You can learn more about these on the [Unrecoverable Errors with panic](./ch10-01-unrecoverable-errors-with-panic.md) page.
+The `assert!` or `panic!` macros can be used to validate conditions before performing specific actions. You can learn more about these on the [Unrecoverable Errors with panic](./ch10-01-unrecoverable-errors-with-panic.md) page.
 
 These validations can include:
 
@@ -35,7 +35,7 @@ These validations can include:
 - Invariants (conditions that must always be true)
 - Return values from other function calls
 
-For example, you could use the `assert` function to validate that a user has enough funds to perform a withdraw transaction. If the condition is not met, the transaction will fail and the state of the contract will not change.
+For example, you could use the `assert!` macro to validate that a user has enough funds to perform a withdraw transaction. If the condition is not met, the transaction will fail and the state of the contract will not change.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_10_assert_balance/src/lib.cairo:withdraw}}

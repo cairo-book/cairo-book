@@ -19,6 +19,6 @@ mod test {
     #[available_gas(2000000)]
     fn test_sum_n() {
         let result = sum_n(10);
-        assert(result == 55, 'result is not 55');
+        assert!(result == 55, "result is not 55");
     }
 }

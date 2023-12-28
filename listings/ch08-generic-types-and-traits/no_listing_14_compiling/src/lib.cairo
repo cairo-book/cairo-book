@@ -27,8 +27,8 @@ fn main() {
 
     let w3 = w1.mixup(w2);
 
-    assert(w3.balance == true, 0);
-    assert(w3.address == 100, 0);
+    assert!(w3.balance == true);
+    assert!(w3.address == 100);
 }
 // ANCHOR_END: main
 

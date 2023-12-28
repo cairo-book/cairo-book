@@ -42,17 +42,17 @@ mod access_control_contract {
 
         #[inline(always)]
         fn only_owner(self: @ContractState) {
-            assert(Contract::is_owner(self), 'Not owner');
+            assert!(Contract::is_owner(self), "Not owner");
         }
 
         #[inline(always)]
         fn only_role_a(self: @ContractState) {
-            assert(Contract::is_role_a(self), 'Not role A');
+            assert!(Contract::is_role_a(self), "Not role A");
         }
 
         // You can easily combine guards to perform complex checks
         fn only_allowed(self: @ContractState) {
-            assert(Contract::is_owner(self) || Contract::is_role_a(self), 'Not allowed');
+            assert!(Contract::is_owner(self) || Contract::is_role_a(self), "Not allowed");
         }
 
         // Functions to manage roles

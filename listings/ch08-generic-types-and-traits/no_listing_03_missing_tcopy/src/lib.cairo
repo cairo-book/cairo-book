@@ -23,12 +23,9 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
 }
 
 fn main() {
-    let mut list: Array<u8> = ArrayTrait::new();
-    list.append(5);
-    list.append(3);
-    list.append(10);
+    let list: Array<u8> = array![5, 3, 10];
 
     // We need to specify that we are passing a snapshot of `list` as an argument
     let s = smallest_element(@list);
-    assert(s == 3, 0);
+    assert!(s == 3);
 }

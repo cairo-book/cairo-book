@@ -34,7 +34,7 @@ mod tests {
         let larger = Rectangle { height: 7, width: 8, };
         let smaller = Rectangle { height: 1, width: 5, };
 
-        assert(larger.can_hold(@smaller), 'rectangle cannot hold');
+        assert!(larger.can_hold(@smaller), "rectangle cannot hold");
     }
     //ANCHOR_END: test1
 
@@ -44,7 +44,7 @@ mod tests {
         let larger = Rectangle { height: 7, width: 8, };
         let smaller = Rectangle { height: 1, width: 5, };
 
-        assert(!smaller.can_hold(@larger), 'rectangle cannot hold');
+        assert!(!smaller.can_hold(@larger), "rectangle cannot hold");
     }
 // ANCHOR_END: test2
 }

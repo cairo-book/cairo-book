@@ -54,8 +54,8 @@ fn main() {
     let alex_latest_balance = db.get_balance('Alex');
     let maria_latest_balance = db.get_balance('Maria');
 
-    assert(alex_latest_balance == 40, 'Expected 40');
-    assert(maria_latest_balance == 0, 'Expected 0');
+    assert!(alex_latest_balance == 40, "Expected 40");
+    assert!(maria_latest_balance == 0, "Expected 0");
 }
 // ANCHOR_END: main
 

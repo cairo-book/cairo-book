@@ -143,7 +143,7 @@ fn main() {
             i += 1;
             continue;
         }
-        i.print();
+        println!("i = {}", i);
         i += 1;
     }
 }

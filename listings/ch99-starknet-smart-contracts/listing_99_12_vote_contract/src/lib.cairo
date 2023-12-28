@@ -91,7 +91,7 @@ mod Vote {
 
         /// @dev Submit a vote
         fn vote(ref self: ContractState, vote: u8) {
-            assert(vote == NO || vote == YES, 'VOTE_0_OR_1');
+            assert!(vote == NO || vote == YES, "VOTE_0_OR_1");
             let caller: ContractAddress = get_caller_address();
             self._assert_allowed(caller);
             self.can_vote.write(caller, false);
@@ -140,8 +140,8 @@ mod Vote {
                 self.emit(UnauthorizedAttempt { unauthorized_address: address, });
             }
 
-            assert(is_voter == true, 'USER_NOT_REGISTERED');
-            assert(can_vote == true, 'USER_ALREADY_VOTED');
+            assert!(is_voter == true, "USER_NOT_REGISTERED");
+            assert!(can_vote == true, "USER_ALREADY_VOTED");
         }
     }
 
