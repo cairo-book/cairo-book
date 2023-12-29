@@ -32,7 +32,7 @@ Finally, the `is_ok` and `is_err` methods are utility functions provided by the 
 
 `is_ok` takes a snapshot of a `Result<T, E>` value and returns `true` if the `Result` is the `Ok` variant, meaning the operation was successful. If the `Result` is the `Err` variant, it returns `false`.
 
-`is_err` takes a reference to a `Result<T, E>` value and returns `true` if the `Result` is the `Err` variant, meaning the operation encountered an error. If the `Result` is the `Ok` variant, it returns `false`.
+`is_err` takes a snapshot to a `Result<T, E>` value and returns `true` if the `Result` is the `Err` variant, meaning the operation encountered an error. If the `Result` is the `Ok` variant, it returns `false`.
 
 These methods are helpful when you want to check the success or failure of an operation without consuming the Result value, allowing you to perform additional operations or make decisions based on the variant without unwrapping it.
 
