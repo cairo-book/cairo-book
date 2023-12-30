@@ -38,17 +38,22 @@ The first step is to initialize the hash with either `PoseidonTrait::new() -> Ha
 {{#include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:structure}}
 ```
 
-As our struct derives the trait HashTrait, we can call the function as follow for Poseidon hashing :
+As our struct derives the trait HashTrait, we can call the function as follows for Poseidon hashing :
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:main}}
 ```
 
-And as follow for Pedersen hashing :
+And as follows for Pedersen hashing :
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:main}}
+```
 
+If we need to calculate Pedersen hash of two `felt252`, we can simply use the same pattern, with the first value being the default state of the hash, updated with the second value.
+
+```rust
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen_felts/src/lib.cairo}}
 ```
 
 ### Advanced Hashing: Hashing arrays with Poseidon
