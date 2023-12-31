@@ -50,11 +50,7 @@ And as follows for Pedersen hashing :
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:main}}
 ```
 
-If we need to calculate Pedersen hash of two `felt252`, we can simply use the same pattern, with the first value being the default state of the hash, updated with the second value.
-
-```rust
-{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen_felts/src/lib.cairo}}
-```
+Note that Pedersen is instantiated with a base state while Poseidon is not.
 
 ### Advanced Hashing: Hashing arrays with Poseidon
 
