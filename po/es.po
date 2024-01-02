@@ -66,15 +66,15 @@ msgstr "Colecciones Comunes"
 #: src/SUMMARY.md:26 src/ch03-01-arrays.md:1
 #, fuzzy
 msgid "Arrays"
-msgstr "### Array"
+msgstr "Arrays"
 
 #: src/SUMMARY.md:27 src/ch03-02-dictionaries.md:1
 msgid "Dictionaries"
-msgstr ""
+msgstr "Diccionarios"
 
 #: src/SUMMARY.md:28 src/ch03-03-custom-data-structures.md:1
 msgid "Custom Data Structures"
-msgstr ""
+msgstr "Estructura de Dato Personalizadas"
 
 #: src/SUMMARY.md:30 src/SUMMARY.md:32
 msgid "Understanding Ownership"
@@ -146,9 +146,8 @@ msgid "Separating Modules into Different Files"
 msgstr "Separación de Módulos en Distintos Ficheros"
 
 #: src/SUMMARY.md:59 src/ch08-01-generic-data-types.md:1
-#, fuzzy
 msgid "Generic Data Types"
-msgstr "# Tipos de Datos Genéricos"
+msgstr "Tipos de Datos Genéricos"
 
 #: src/SUMMARY.md:61
 msgid "Generic Types"
@@ -196,7 +195,7 @@ msgstr "Sobrecarga de Operadores"
 
 #: src/SUMMARY.md:85 src/ch11-02-macros.md:1
 msgid "Macros"
-msgstr ""
+msgstr "Macros"
 
 #: src/SUMMARY.md:87
 #, fuzzy
@@ -213,36 +212,33 @@ msgstr "Introducción a los smart-contracts"
 
 #: src/SUMMARY.md:92 src/ch99-01-02-a-simple-contract.md:1
 msgid "A simple contract"
-msgstr ""
+msgstr "Un simple contrato"
 
 #: src/SUMMARY.md:93 src/ch99-01-03-00-a-deeper-dive-into-contracts.md:1
 msgid "A deeper dive into contracts"
-msgstr ""
+msgstr "Una inmersión más profunda en contratos"
 
 #: src/SUMMARY.md:95 src/ch99-01-03-01-contract-storage.md:1
-#, fuzzy
 msgid "Contract Storage"
-msgstr "##  Contract StorageVariables de Almacenamiento"
+msgstr "Almacenamiento de Contrato"
 
 #: src/SUMMARY.md:96 src/ch99-01-03-02-contract-functions.md:1
-#, fuzzy
 msgid "Contract Functions"
-msgstr "Funciones Genéricas"
+msgstr "Funciones de Contrato"
 
 #: src/SUMMARY.md:97
 msgid "Contract Events"
-msgstr ""
+msgstr "Eventos de Contrato"
 
 #: src/SUMMARY.md:98 src/ch99-01-03-04-reducing-boilerplate.md:1
 msgid "Reducing boilerplate"
-msgstr ""
+msgstr "Reducion de codigo repetitivo"
 
 #: src/SUMMARY.md:99
 msgid "Optimizing storage costs"
-msgstr ""
+msgstr "Optimización de Costos de Almacenamiento"
 
 #: src/SUMMARY.md:101
-#, fuzzy
 msgid "Components"
 msgstr "Comentarios"
 
@@ -252,11 +248,11 @@ msgstr ""
 
 #: src/SUMMARY.md:104 src/ch99-01-05-02-component-dependencies.md:1
 msgid "Component dependencies"
-msgstr ""
+msgstr "Dependencias de Componentes"
 
 #: src/SUMMARY.md:105 src/ch99-01-05-03-testing-components.md:1
 msgid "Testing components"
-msgstr ""
+msgstr "Prueba de Componentes"
 
 #: src/SUMMARY.md:107
 msgid "ABIs and Cross-contract Interactions"
@@ -268,18 +264,15 @@ msgstr "ABIs e interfaces"
 
 #: src/SUMMARY.md:110
 msgid "Contract Dispatchers, Library Dispachers and system calls"
-msgstr ""
-"Despachadores de contratos, despachadores de librerías y llamadas del sistema"
+msgstr "Despachadores de contratos, despachadores de librerías y llamadas del sistema"
 
 #: src/SUMMARY.md:112 src/ch99-01-04-00-other-examples.md:1
-#, fuzzy
 msgid "Other examples"
-msgstr "Ejemplo incorrecto:"
+msgstr "Otros Ejemplos"
 
 #: src/SUMMARY.md:114 src/ch99-01-04-01-voting-contract.md:1
-#, fuzzy
 msgid "Deploying and Interacting with a Voting contract"
-msgstr "Definición e instanciación de estructuras"
+msgstr "Desplegando e Interactuando con un Contrato de Votación"
 
 #: src/SUMMARY.md:116
 msgid "L1 \\<\\> L2 Messaging"
@@ -311,12 +304,11 @@ msgstr "D - Herramientas de Desarrollo Útiles"
 
 #: src/SUMMARY.md:125
 msgid "E - Common Types & Traits and the Cairo Prelude"
-msgstr ""
+msgstr "E - "
 
 #: src/SUMMARY.md:126
-#, fuzzy
 msgid "F - Installing Cairo binaries"
-msgstr "## Instalando Scarb"
+msgstr "F - Instalación de los binarios Cairo"
 
 #: src/title-page.md:3
 msgid ""
@@ -331,15 +323,16 @@ msgstr ""
 "(https://voyager.online/) por apoyar la creación de este libro."
 
 #: src/title-page.md:5
-#, fuzzy
 msgid ""
 "This version of the text assumes you’re using the [Cairo Compiler](https://"
 "github.com/starkware-libs/cairo) [version 2.2.0](https://github.com/"
 "starkware-libs/cairo/releases). See the “Installation” section of Chapter 1 "
 "to install or update Cairo."
 msgstr ""
-"Esta versión del texto asume que estás usando Cairo v1.1.0. Consulte la "
-"sección \"Instalación\" del Capítulo 1 para instalar o actualizar Cairo."
+"Esta versión del libro asume que estás usando [Cairo Compiler](https://"
+"github.com/starkware-libs/cairo) [version 2.2.0](https://github.com/"
+"starkware-libs/cairo/releases). Consulte la sección "Instalación" del "
+"Capítulo 1 para instalar o actualizar Cairo."
 
 #: src/ch00-01-foreword.md:1
 msgid "Foreword"
@@ -425,19 +418,17 @@ msgstr ""
 
 #: src/ch00-01-foreword.md:13
 msgid "— The Cairo community"
-msgstr "—  La comunidad de Cairo"
+msgstr "— La comunidad de Cairo"
 
 #: src/ch00-00-introduction.md:1
 msgid "Introduction"
 msgstr "Introducción"
 
 #: src/ch00-00-introduction.md:3
-#, fuzzy
 msgid "What is Cairo?"
-msgstr "## ¿Qué es Cairo?"
+msgstr "¿Qué es Cairo?"
 
 #: src/ch00-00-introduction.md:5
-#, fuzzy
 msgid ""
 "Cairo is a programming language designed for a virtual CPU of the same name. "
 "The unique aspect of this processor is that it was not created for the "
@@ -457,7 +448,7 @@ msgstr ""
 "lo hace capaz de probar eficientemente la ejecución de cualquier programa "
 "que se ejecute en él. Esto significa que puedes realizar operaciones que "
 "consumen mucho tiempo en una máquina en la que no confías, y comprobar el "
-"resultado muy rápidamente en una máquina más barata.\n"
+"resultado muy rápidamente en una máquina más barata. "
 "Mientras que Cairo 0 solía compilarse directamente a CASM, el ensamblador de "
 "CPU de Cairo, Cairo 1 es un lenguaje de más alto nivel. Primero compila a "
 "Sierra, una representación intermedia de Cairo que compilará más tarde a un "
@@ -465,9 +456,8 @@ msgstr ""
 "sea siempre demostrable, incluso cuando falle el cálculo."
 
 #: src/ch00-00-introduction.md:8
-#, fuzzy
 msgid "What can you do with it?"
-msgstr "## ¿Qué puedes hacer con Cairo?"
+msgstr "¿Qué puedes hacer con Cairo?"
 
 #: src/ch00-00-introduction.md:10
 msgid ""
@@ -500,9 +490,8 @@ msgstr ""
 "Ethereum."
 
 #: src/ch00-00-introduction.md:12
-#, fuzzy
 msgid "What are the differences with other programming languages?"
-msgstr "## ¿Cuáles son las diferencias con otros lenguajes de programación?"
+msgstr "¿Cuáles son las diferencias con otros lenguajes de programación?"
 
 #: src/ch00-00-introduction.md:14
 msgid ""
@@ -521,9 +510,12 @@ msgid ""
 "designed for maximum efficiency, this can lead to some performance overhead "
 "but it is not the most relevant part to optimize."
 msgstr ""
+"Cuando es ejecutado por el prover(Probador), es similar a cualquier otro " 
+"lenguaje. Debido a que Cairo está virtualizado, y a que las operaciones no " 
+"fueron específicamente diseñadas para una máxima eficiencia, esto puede llevar "
+"a una cierta costos de rendimiento, pero no es la parte más relevante a optimizar."
 
 #: src/ch00-00-introduction.md:18
-#, fuzzy
 msgid ""
 "When the generated proof is verified by a verifier, it is a bit different. "
 "This has to be as cheap as possible since it could potentially be verified "
@@ -538,13 +530,7 @@ msgid ""
 "verifier doesn't sort the array, it just checks that it is sorted, which is "
 "cheaper."
 msgstr ""
-"- Cuando es ejecutado por el probador (prover), es similar a cualquier otro "
-"lenguaje. Debido a que Cairo es virtualizado y las operaciones no fueron "
-"diseñadas específicamente para obtener la máxima eficiencia, esto puede "
-"generar cierta sobrecarga de rendimiento, pero no es la parte más relevante "
-"para optimizar.\n"
-"\n"
-"- Sin embargo, cuando la prueba generada es verificada por un verificador, "
+"Sin embargo, cuando la prueba generada es verificada por un verificador, "
 "es un poco diferente. Esto debe ser lo más económico posible, ya que "
 "potencialmente podría ser verificado en muchas máquinas muy pequeñas. "
 "Afortunadamente, la verificación es más rápida que el cálculo y Cairo tiene "
@@ -556,7 +542,7 @@ msgstr ""
 "desarrolladores, pero la biblioteca estándar aprovecha la no determinación "
 "para mejorar el rendimiento. Por ejemplo, ordenar un arreglo en Cairo tiene "
 "el mismo costo que copiarlo. Debido a que el verificador no ordena el "
-"arreglo, solo verifica que esté ordenado, lo cual es más barato."
+"array, solo verifica que esté ordenado, lo cual es más barato."
 
 #: src/ch00-00-introduction.md:20
 msgid ""
@@ -576,31 +562,30 @@ msgstr ""
 "las estructuras de datos en sus programas para optimizar el rendimiento."
 
 #: src/ch00-00-introduction.md:22
-#, fuzzy
 msgid "References"
-msgstr "Referencias:"
+msgstr "Referencias"
 
 #: src/ch00-00-introduction.md:24
-msgid "Cairo CPU Architecture: <https://eprint.iacr.org/2021/1063>"
+msgid ""
+"Cairo CPU Architecture: <https://eprint.iacr.org/2021/1063>"
 msgstr ""
+"Arquitectura del CPU de Cairo: <https://eprint.iacr.org/2021/1063>"
 
 #: src/ch00-00-introduction.md:25
-#, fuzzy
 msgid ""
 "Cairo, Sierra and Casm: <https://medium.com/nethermind-eth/under-the-hood-of-"
 "cairo-1-0-exploring-sierra-7f32808421f5>"
 msgstr ""
-"- Arquitectura del CPU de Cairo: <https://eprint.iacr.org/2021/1063>\n"
-"- Cairo, Sierra y Casm: <https://medium.com/nethermind-eth/under-the-hood-of-"
-"cairo-1-0-exploring-sierra-7f32808421f5>\n"
-"- Estado no determinista: <https://twitter.com/PapiniShahar/"
-"status/1638203716535713798>"
+"Cairo, Sierra y Casm: <https://medium.com/nethermind-eth/under-the-hood-of-"
+"cairo-1-0-exploring-sierra-7f32808421f5>"
 
 #: src/ch00-00-introduction.md:26
 msgid ""
 "State of non determinism: <https://twitter.com/PapiniShahar/"
 "status/1638203716535713798>"
 msgstr ""
+"Estado no determinista: <https://twitter.com/PapiniShahar/"
+"status/1638203716535713798>"
 
 #: src/ch01-01-installation.md:3
 msgid ""
@@ -609,9 +594,12 @@ msgid ""
 "server together in an easy-to-install package so that you can start writing "
 "Cairo code right away."
 msgstr ""
+"Cairo puede instalarse simplemente descargando [Scarb](https://docs.swmansion."
+"com/scarb/docs). Scarb incluye el compilador Cairo y el servidor de lenguaje "
+"Cairo en un paquete fácil de instalar para que puedas empezar a escribir código "
+"Cairo inmediatamente."
 
 #: src/ch01-01-installation.md:5
-#, fuzzy
 msgid ""
 "Scarb is also Cairo's package manager and is heavily inspired by [Cargo]"
 "(https://doc.rust-lang.org/cargo/), Rust’s build system and package manager."
@@ -628,8 +616,8 @@ msgid ""
 "VSCode Cairo 1 extension."
 msgstr ""
 "Scarb se encarga de muchas tareas por ti, como construir tu código (ya sea "
-"en Cairo puro o contratos Starknet), descargar las bibliotecas en las que tu "
-"código depende, construir esas bibliotecas y proporcionar soporte LSP "
+"en Cairo puro o contratos Starknet), descargar las librerias necesarias "
+"para tu código, construir esas librerias y proporcionar soporte LSP "
 "(Language Server Protocol) para la extensión de Cairo 1 en VSCode."
 
 #: src/ch01-01-installation.md:9
@@ -638,20 +626,21 @@ msgid ""
 "you start a project using Scarb, managing external code and dependencies "
 "will be a lot easier to do."
 msgstr ""
+"A medida que escribas programas Cairo más complejos, es posible que añadas "
+"dependencias, y si comienzas un proyecto utilizando Scarb, gestionar el"
+"código externo y las dependencias será mucho más fácil de hacer. "
 
 #: src/ch01-01-installation.md:11
 msgid "Let's start by installing Scarb."
 msgstr "Empecemos instalando Scarb."
 
 #: src/ch01-01-installation.md:13
-#, fuzzy
 msgid "Installing Scarb"
-msgstr "## Instalando Scarb"
+msgstr "Instalando Scarb"
 
 #: src/ch01-01-installation.md:15
-#, fuzzy
 msgid "Requirements"
-msgstr "### Requisitos"
+msgstr "Requisitos"
 
 #: src/ch01-01-installation.md:17
 msgid ""
@@ -672,30 +661,32 @@ msgid ""
 "the following command in your terminal, and follow the onscreen "
 "instructions. This will install the latest stable release of Scarb."
 msgstr ""
+"Para instalar Scarb, por favor consulte las [installation instructions](https://"
+"docs.swmansion.com/scarb/download). Recomendamos que instale Scarb a través de "
+"[via asdf](https://docs.swmansion.com/scarb/download.html#install-via-asdf) una "
+"herramienta CLI que puede gestionar múltiples versiones de tiempo de ejecución "
+"del lenguaje en una base por proyecto. Esto asegurará que la versión de Scarb "
+"que utilices para trabajar en un proyecto siempre coincida con la definida en "
+"la configuración del proyecto, evitando problemas que conduzcan a que las "
+"versiones no coincidan. De lo contrario, puede simplemente ejecutar el siguiente "
+"comando en tu terminal, y seguir las instrucciones en pantalla. Esto instalará "
+"la última versión estable de Scarb."
 
 #: src/ch01-01-installation.md:27
 msgid "'=https'"
 msgstr ""
 
 #: src/ch01-01-installation.md:30
-#, fuzzy
 msgid ""
 "Verify installation by running the following command in new terminal "
 "session, it should print both Scarb and Cairo language versions, e.g:"
 msgstr ""
-"- Verify installation by running the following command in new terminal "
-"session, it should print both Scarb and Cairo language versions, e.g:\n"
-"\n"
-"  ```bash\n"
-"  $ scarb --version\n"
-"  scarb 0.4.0 (f813517bf 2023-06-06)\n"
-"  cairo: 1.1.0 (43b83560d)\n"
-"  ```"
+"Verifique la instalación ejecutando el siguiente comando en una nueva"
+"terminal, debería imprimir las versiones en Scarb y Cairo, p.ej: "
 
 #: src/ch01-01-installation.md:39
-#, fuzzy
 msgid "Installing the VSCode extension"
-msgstr "#### Extensión VS Code"
+msgstr "Instalación de la extensión VSCode"
 
 #: src/ch01-01-installation.md:41
 msgid ""
@@ -705,14 +696,17 @@ msgid ""
 "cairo1). Once installed, go into the extension settings, and make sure to "
 "tick the `Enable Language Server` and `Enable Scarb` options."
 msgstr ""
+"Cairo tiene una extensión VSCode que proporciona resaltado de sintaxis, "
+completado de código,y otras características útiles. Puedes instalarla desde "
+[VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=starkware."
+"cairo1). Una vez instalada, ve a la configuración de la extensión, y asegúrate "
+"de marcar las opciones `Enable Language Server` y `Enable Scarb` options.""
 
 #: src/ch01-02-hello-world.md:1
-#, fuzzy
 msgid "Hello, World"
 msgstr "¡Hola, mundo!"
 
 #: src/ch01-02-hello-world.md:3
-#, fuzzy
 msgid ""
 "Now that you’ve installed Cairo through Scarb, it’s time to write your first "
 "Cairo program. It’s traditional when learning a new language to write a "
@@ -720,14 +714,11 @@ msgid ""
 "do the same here!"
 msgstr ""
 "Ahora que has instalado Cairo, es hora de escribir tu primer programa "
-"Cairo.\n"
-"Es tradicional cuando se aprende un nuevo lenguaje escribir un pequeño "
-"programa que\n"
-"imprima el texto `¡Hola, mundo!` en la pantalla, ¡así que haremos lo mismo "
-"aquí!"
+"Cairo. Es tradicional cuando se aprende un nuevo lenguaje se escriba "
+"un pequeño programa que imprima el texto `Hello, world!` en la pantalla, "
+"¡así que haremos lo mismo aquí!"
 
 #: src/ch01-02-hello-world.md:7
-#, fuzzy
 msgid ""
 "Note: This book assumes basic familiarity with the command line. Cairo makes "
 "no specific demands about your editing or tooling or where your code lives, "
@@ -737,27 +728,20 @@ msgid ""
 "the features from the language server and code highlighting. See [Appendix D]"
 "(appendix-04-useful-development-tools.md) for more details."
 msgstr ""
-"> Nota: Este libro asume una familiaridad básica con la línea de comandos. "
-"Cairo no hace\n"
-"> ninguna demanda específica sobre su edición o herramientas o donde vive su "
-"código, así que\n"
-"si prefiere usar un entorno de desarrollo integrado (IDE) en lugar de la "
-"línea de comandos, > siéntase libre de usar su IDE favorito.\n"
-"> la línea de comandos, siéntase libre de usar su IDE favorito. El equipo de "
-"Cairo ha desarrollado\n"
-"> una extensión VSCode para el lenguaje Cairo que puedes usar para obtener "
-"las características de\n"
-"> el servidor de lenguajes y el resaltado de código. Ver [Apéndice D]"
-"[devtools]\n"
-"> para más detalles."
+"Nota: Este libro asume una familiaridad básica con la línea de comandos. "
+"Cairo no hace ninguna demanda específica sobre tu edición o herramientas "
+"o donde vive tu código, así que si prefiere usar un entorno de desarrollo "
+"integrado (IDE) en lugar de la línea de comandos, siéntase libre de usar "
+"tu IDE favorito. El equipo de Cairo ha desarrollado una extensión VSCode "
+"para el lenguaje Cairo que puedes usar para obtener las características de "
+"el servidor de lenguajes y el resaltado de código. Vea el [Appendix D]"
+"(appendix-04-useful-development-tools.md) para más detalles."
 
 #: src/ch01-02-hello-world.md:15
-#, fuzzy
 msgid "Creating a Project Directory"
-msgstr "### Creando un Directorio de Proyecto"
+msgstr "Creando un Directorio de Proyecto"
 
 #: src/ch01-02-hello-world.md:17
-#, fuzzy
 msgid ""
 "You’ll start by making a directory to store your Cairo code. It doesn’t "
 "matter to Cairo where your code lives, but for the exercises and projects in "
@@ -765,24 +749,19 @@ msgid ""
 "directory and keeping all your projects there."
 msgstr ""
 "Empezarás creando un directorio para almacenar tu código de Cairo. A Cairo "
-"no le importa\n"
-"a Cairo dónde vive tu código, pero para los ejercicios y proyectos de este "
-"libro,\n"
-"sugerimos hacer un directorio _cairo_projects_ en su directorio home y "
-"mantener todos\n"
-"tus proyectos allí."
+"no le importa a Cairo dónde vive tu código, pero para los ejercicios y "
+"proyectos de este libro, sugerimos hacer un directorio _cairo_projects_ "
+"en tu directorio home y mantener todos tus proyectos allí."
 
 #: src/ch01-02-hello-world.md:22
-#, fuzzy
 msgid ""
 "Open a terminal and enter the following commands to make a _cairo_projects_ "
 "directory and a directory for the “Hello, world!” project within the "
 "_cairo_projects_ directory."
 msgstr ""
-"Abre un terminal e introduce los siguientes comandos para crear un "
-"directorio _cairo_projects_.\n"
-"y un directorio para el proyecto \"¡Hola, mundo!\" dentro del directorio "
-"_cairo_projects_."
+"Abre una terminal e introduce los siguientes comandos para crear un "
+"directorio _cairo_projects_. y un directorio para el proyecto “¡Hola, mundo!” "
+"dentro del directorio _cairo_projects_."
 
 #: src/ch01-02-hello-world.md:25
 msgid ""
@@ -791,6 +770,11 @@ msgid ""
 "and try to run the examples from a different directory, you might need to "
 "adjust the commands accordingly or create a Scarb project."
 msgstr ""
+"Nota: De ahora en adelante, para cada ejemplo mostrado en el libro, asumimos "
+"que estarás trabajando desde un directorio de proyecto Scarb. Si no estás "
+"utilizando Scarb, e intentas ejecutar los ejemplos desde un directorio "
+"diferente, puede que tengas que ajustar los comandos en consecuencia o crear "
+"un proyecto Scarb."
 
 #: src/ch01-02-hello-world.md:28
 msgid "For Linux, macOS, and PowerShell on Windows, enter this:"
@@ -805,44 +789,40 @@ msgid "\"%USERPROFILE%\\cairo_projects\""
 msgstr ""
 
 #: src/ch01-02-hello-world.md:42
-#, fuzzy
 msgid "Creating a Project with Scarb"
-msgstr "### Creando un Proyecto con Scarb"
+msgstr "Crear un Proyecto con Scarb"
 
 #: src/ch01-02-hello-world.md:44
 msgid "Let’s create a new project using Scarb."
-msgstr ""
+msgstr "Vamos a crear un nuevo proyecto usando Scarb."
 
 #: src/ch01-02-hello-world.md:46
-#, fuzzy
 msgid ""
 "Navigate to your projects directory (or wherever you decided to store your "
 "code). Then run the following:"
 msgstr ""
-"Navegue de nuevo a su directorio de proyectos (o donde haya decidido "
-"almacenar su código). Luego ejecute lo siguiente:"
+"Navegue de nuevo a su directorio de proyectos (o donde hayas decidido "
+"almacenar tu código).Luego, ejecute lo siguiente:"
 
 #: src/ch01-02-hello-world.md:52
-#, fuzzy
 msgid ""
 "It creates a new directory and project called `hello_world`. We’ve named our "
 "project `hello_world`, and Scarb creates its files in a directory of the "
 "same name."
 msgstr ""
-"Crea un nuevo directorio y proyecto llamado hello_scarb. Hemos llamado a "
-"nuestro proyecto hello_scarb, y Scarb crea sus archivos en un directorio con "
-"el mismo nombre."
+"Esto crea un nuevo directorio y proyecto llamado `hello_world`. Hemos nombrado "
+"a nuestro proyecto `hello_world`, y Scarb crea sus archivos en un directorio "
+"con el mismo nombre."
 
 #: src/ch01-02-hello-world.md:54
-#, fuzzy
 msgid ""
 "Go into the `hello_world` directory with the command `cd hello_world`. "
 "You’ll see that Scarb has generated two files and one directory for us: a "
 "`Scarb.toml` file and a src directory with a `lib.cairo` file inside."
 msgstr ""
-"Entre en el directorio hello_scarb con el comando `cd hello_scarb`.Verás que "
-"Scarb ha generado dos archivos y un directorio para nosotros: un archivo "
-"`Scarb.toml` y un directorio src con un archivo `lib.cairo` dentro."
+"Entre en el directorio `hello_world` con el comando `cd hello_world`. "
+"Verás que Scarb ha generado dos archivos y un directorio para nosotros: un "
+"archivo `Scarb.toml` y un directorio src con un archivo `lib.cairo` dentro."
 
 #: src/ch01-02-hello-world.md:56
 msgid ""
@@ -852,16 +832,14 @@ msgstr ""
 "gitignore`"
 
 #: src/ch01-02-hello-world.md:58
-#, fuzzy
 msgid ""
 "Note: Git is a common version control system. You can stop using version "
 "control system by using the `--vcs` flag. Run `scarb new -help` to see the "
 "available options."
 msgstr ""
-"> Nota: Git es un sistema de control de versiones común. Puede dejar de usar "
-"el sistema de control de versiones \n"
-"> usando la bandera `--vcs`.\n"
-"> Ejecute `scarb new -help` para ver las opciones disponibles."
+"Nota: Git es un sistema de control de versiones común. Puede dejar de usar "
+"el sistema de control de versiones usando la bandera `--vcs`. Ejecute "
+"`scarb new -help` para ver las opciones disponibles."
 
 #: src/ch01-02-hello-world.md:61
 msgid ""
@@ -873,10 +851,9 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:63
 msgid "Filename: Scarb.toml"
-msgstr ""
+msgstr "Archivo: Scarb.toml"
 
 #: src/ch01-02-hello-world.md:65
-#, fuzzy
 msgid ""
 "```toml\n"
 "[package]\n"
@@ -892,7 +869,7 @@ msgid ""
 msgstr ""
 "```toml\n"
 "[package]\n"
-"name = \"hello_scarb\"\n"
+"name = \"hello_world\"\n"
 "version = \"0.1.0\"\n"
 "\n"
 "# Vea más claves y sus definiciones en https://docs.swmansion.com/scarb/docs/"
@@ -903,11 +880,8 @@ msgstr ""
 "```"
 
 #: src/ch01-02-hello-world.md:76
-#, fuzzy
 msgid "Listing 1-2: Contents of Scarb.toml generated by `scarb new`"
-msgstr ""
-"<span class=\"caption\">Listing 1-2: Contents of Scarb.toml generated by "
-"`scarb new`</span>"
+msgstr "Listado 1-2: Contenido de Scarb.toml generado por `scarb new`"
 
 #: src/ch01-02-hello-world.md:78
 msgid ""
@@ -929,12 +903,18 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:82
 msgid ""
-"The next two lines set the configuration information Scarb needs to compile "
-"your program: the name and the version of Scarb to use."
+"The next three lines set the configuration information Scarb needs to compile "
+"your program: the name and the version of Scarb to use, and the edition of the "
+"prelude to use. The prelude is the collection of the most commonly used items "
+"that are automatically imported into every Cairo program. You can learn more "
+"about the prelude in [Appendix E](./appendix-05-common-types-and-traits-and-cairo-prelude.md)"
 msgstr ""
-"Las siguientes dos líneas establecen la información de configuración que "
-"Scarb necesita para compilar su programa: el nombre y la versión de Scarb a "
-"utilizar."
+"Las siguientes tres líneas establecen la información de configuración que Scarb "
+"necesita para compilar tu programa: el nombre y la versión de Scarb a utilizar, "
+"y la edición del prelude a utilizar. El prelude es la colección de los elementos "
+"comúnmente utilizados que se importan automáticamente en cada programa de Cairo. "
+"Puedes obtener más información sobre el prelude en el [Appendix E]"
+"(./appendix-05-common-types-and-traits-and-cairo-prelude.md)"
 
 #: src/ch01-02-hello-world.md:84
 msgid ""
@@ -948,14 +928,13 @@ msgstr ""
 "crate para este proyecto."
 
 #: src/ch01-02-hello-world.md:86
-#, fuzzy
 msgid ""
 "Note: If you're building contracts for Starknet, you will need to add the "
 "`starknet` dependency as mentioned in the [Scarb documentation](https://docs."
 "swmansion.com/scarb/docs/extensions/starknet/starknet-package.html)."
 msgstr ""
-"> Nota: Si estás construyendo contratos para Starknet, deberás agregar la "
-"dependencia `starknet` como se menciona en la [documentación de Scarb]"
+"Nota: Si estás construyendo contratos para Starknet, deberás agregar la "
+"dependencia `starknet` como se menciona en la [Scarb documentation]"
 "(https://docs.swmansion.com/scarb/docs/starknet/starknet-package.html)."
 
 #: src/ch01-02-hello-world.md:88
@@ -968,7 +947,6 @@ msgstr ""
 "adelante."
 
 #: src/ch01-02-hello-world.md:94
-#, fuzzy
 msgid ""
 "Then create a new file called `src/hello_world.cairo` and put the following "
 "code in it:"
@@ -978,10 +956,9 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:96
 msgid "Filename: src/hello_world.cairo"
-msgstr ""
+msgstr "Archivo: src/hello_world.cairo"
 
 #: src/ch01-02-hello-world.md:105
-#, fuzzy
 msgid ""
 "We have just created a file called `lib.cairo`, which contains a module "
 "declaration referencing another module named `hello_world`, as well as the "
@@ -990,64 +967,56 @@ msgid ""
 msgstr ""
 "Acabamos de crear un archivo llamado `lib.cairo`, que contiene una "
 "declaración de módulo que hace referencia a otro módulo llamado "
-"\"hello_scarb\", así como el archivo `hello_scarb.cairo`, que contiene los "
-"detalles de implementación del módulo \"hello_scarb\"."
+"`hello_world` así como el archivo `hello_scarb.cairo`, que contiene los "
+"detalles de implementación del módulo `hello_world`."
 
 #: src/ch01-02-hello-world.md:107
-#, fuzzy
 msgid ""
 "Scarb requires your source files to be located within the `src` directory."
 msgstr ""
 "Scarb requiere que sus archivos fuente se encuentren dentro del directorio "
-"src."
+"`src`."
 
 #: src/ch01-02-hello-world.md:109
-#, fuzzy
 msgid ""
 "The top-level project directory is reserved for README files, license "
 "information, configuration files, and any other non-code-related content. "
 "Scarb ensures a designated location for all project components, maintaining "
 "a structured organization."
 msgstr ""
-"El directorio de proyecto de nivel superior está reservado para los archivos "
-"README, información de licencia, archivos de configuración, y cualquier\n"
-"otro contenido no relacionado con el código.\n"
-"Scarb asegura una ubicación designada para todos los componentes del "
-"proyecto, manteniendo una organización estructurada."
+"El directorio principal del proyecto está reservado para archivos README, "
+"información de licencia, archivos de configuración y cualquier otro contenido "
+"no relacionado con el código. Scarb asegura una ubicación designada para "
+"todos los componentes del proyecto, manteniendo una organización estructurada."
 
 #: src/ch01-02-hello-world.md:112
-#, fuzzy
 msgid ""
 "If you started a project that doesn’t use Scarb, you can convert it to a "
 "project that does use Scarb. Move the project code into the src directory "
 "and create an appropriate `Scarb.toml` file."
 msgstr ""
-"Si ha iniciado un proyecto que no utiliza Scarb, como hicimos con el "
-"proyecto “Hello, world!”, puede convertirlo en un proyecto que utilice "
-"Scarb. Mueva el código del proyecto al directorio src y cree un archivo "
-"`Scarb.toml` apropiado."
+"Si has iniciado un proyecto que no utiliza Scarb, puedes convertirlo en "
+"un proyecto que sí lo use, Scarb. Mueva el código del proyecto al directorio "
+"src y cree un archivo `Scarb.toml` apropiado."
 
 #: src/ch01-02-hello-world.md:114
-#, fuzzy
 msgid "Building a Scarb Project"
-msgstr "### Creación de un proyecto Scarb"
+msgstr "Crear un proyecto con Scarb"
 
 #: src/ch01-02-hello-world.md:116
-#, fuzzy
 msgid ""
 "From your `hello_world` directory, build your project by entering the "
 "following command:"
 msgstr ""
-"Desde su directorio hello_scarb, construya su proyecto introduciendo el "
+"Desde tu directorio `hello_world`, construya su proyecto introduciendo el "
 "siguiente comando:"
 
 #: src/ch01-02-hello-world.md:124
-#, fuzzy
 msgid ""
 "This command creates a `sierra` file in `target/dev`, let's ignore the "
 "`sierra` file for now."
 msgstr ""
-"Este comando crea un archivo `sierra` en `target/release`, ignoremos el "
+"Este comando crea un archivo `sierra` en `target/dev`, ignoremos el "
 "archivo `sierra` por ahora."
 
 #: src/ch01-02-hello-world.md:126
@@ -1059,41 +1028,34 @@ msgstr ""
 "la siguiente salida:"
 
 #: src/ch01-02-hello-world.md:136
-#, fuzzy
 msgid ""
 "Regardless of your operating system, the string `Hello, world!` should print "
 "to the terminal."
 msgstr ""
-"Independientemente de su sistema operativo, la cadena `Hello, world!` "
-"debería \n"
-"imprimirse en el terminal."
+"Independientemente de tu sistema operativo, el string `Hello, world!` "
+"debería imprimirse en la terminal."
 
 #: src/ch01-02-hello-world.md:139
-#, fuzzy
 msgid ""
 "If `Hello, world!` did print, congratulations! You’ve officially written a "
 "Cairo program. That makes you a Cairo programmer—welcome!"
 msgstr ""
-"Si `Hello, world!` se imprime, ¡enhorabuena! Has escrito oficialmente un "
-"programa\n"
-" en Cairo. Eso te convierte en un programador de Cairo ¡Bienvenido!"
+"Si `Hello, world!` se imprime, ¡felicidades! Has escrito oficialmente un "
+"programa en Cairo. Eso te convierte en un programador de Cairo ¡Bienvenido!"
 
 #: src/ch01-02-hello-world.md:142
-#, fuzzy
 msgid "Anatomy of a Cairo Program"
-msgstr "### Anatomía de un Programa Cairo"
+msgstr "Anatomía de un Programa Cairo"
 
 #: src/ch01-02-hello-world.md:144
-#, fuzzy
 msgid ""
 "Let’s review this “Hello, world!” program in detail. Here’s the first piece "
 "of the puzzle:"
 msgstr ""
-"Revisemos este programa \"¡Hola, mundo!\" en detalle. Aquí está la primera \n"
-"pieza del puzzle:"
+"Revisemos este programa “Hello, world!” en detalle. Aquí está la primera "
+"pieza del rompecabezas:"
 
 #: src/ch01-02-hello-world.md:153
-#, fuzzy
 msgid ""
 "These lines define a function named `main`. The `main` function is special: "
 "it is always the first code that runs in every executable Cairo program. "
@@ -1102,28 +1064,23 @@ msgid ""
 "parentheses `()`."
 msgstr ""
 "Estas líneas definen una función llamada `main`. La función `main` es "
-"especial: es\n"
-"es siempre el primer código que se ejecuta en cada programa ejecutable de El "
-"Cairo. Aquí, la\n"
-"primera línea declara una función llamada `main` que no tiene parámetros y "
-"devuelve\n"
-"nada. Si hubiera parámetros, irían dentro de los paréntesis `()`."
+"especial: siempre es el primer código que se ejecuta en cada programa "
+"ejecutable de Cairo. Aquí, la primera línea declara una función llamada "
+"`main` que no tiene parámetros y devuelve nada. Si hubiera parámetros, "
+"irían dentro de los paréntesis `()`."
 
 #: src/ch01-02-hello-world.md:158
-#, fuzzy
 msgid ""
 "The function body is wrapped in `{}`. Cairo requires curly brackets around "
 "all function bodies. It’s good style to place the opening curly bracket on "
 "the same line as the function declaration, adding one space in between."
 msgstr ""
 "El cuerpo de la función está envuelto en `{}`. Cairo requiere llaves "
-"alrededor de todos los\n"
-"cuerpos de función. Es de buen estilo colocar la llave de apertura en la "
-"misma línea que la\n"
-" declaración de la función, añadiendo un espacio en medio."
+"alrededor de todos los cuerpos de funciones. Es una buena práctica colocar "
+"la llave de apertura en la misma línea que la declaración de la función, "
+"añadiendo un espacio en medio."
 
 #: src/ch01-02-hello-world.md:162
-#, fuzzy
 msgid ""
 "Note: If you want to stick to a standard style across Cairo projects, you "
 "can use the automatic formatter tool available with `scarb fmt` to format "
@@ -1132,94 +1089,65 @@ msgid ""
 "tool with the standard Cairo distribution, as `cairo-run` is, so it should "
 "already be installed on your computer!"
 msgstr ""
-"> Nota: Si quieres mantener un estilo estándar en todos los proyectos de El "
-"Cairo, puedes\n"
-"> usar la herramienta de formateo automático llamada `cairo-format` para "
-"formatear tu código en un\n"
-"> estilo particular (más sobre `cairo-format` en\n"
-"> [Apéndice D][devtools]). El equipo de Cairo ha incluido esta herramienta\n"
-"> con la distribución estándar de Cairo, como lo es `cairo-run`, así que ya "
-"debería estar\n"
-"> ¡instalada en tu ordenador!"
+"Nota: Si quieres mantener un estilo estándar en todos los proyectos de Cairo, "
+"puedes usar la herramienta de formateo automático llamada `scarb fmt` para "
+"formatear tu código en un estilo específico (más sobre `scarb fmt` en "
+"[Apéndice D](appendix-04-useful-development-tools.md)). El equipo de Cairo ha "
+"incluido esta herramienta con la distribución estándar de Cairo, como `cairo-run`, "
+"¡así que ya debería estar instalada en tu ordenador!"
 
 #: src/ch01-02-hello-world.md:169
-msgid ""
-"Prior to the main function declaration, The line `use debug::PrintTrait;` is "
-"responsible for importing an item defined in another module. In this case, "
-"we are importing the `PrintTrait` item from the Cairo core library. By doing "
-"so, we gain the ability to use the `print()` method on data types that are "
-"compatible with printing."
-msgstr ""
-"Antes de la declaración de la función principal, la línea `use debug::"
-"PrintTrait;` es responsable de importar un elemento definido en otro módulo. "
-"En este caso, estamos importando el elemento `PrintTrait` de la biblioteca "
-"central de Cairo. Haciendo esto, ganamos la habilidad de usar el método "
-"`print()` en tipos de datos que son compatibles con la impresión."
-
-#: src/ch01-02-hello-world.md:171
 msgid "The body of the `main` function holds the following code:"
 msgstr "El cuerpo de la función `main` contiene el siguiente código:"
 
-#: src/ch01-02-hello-world.md:177
-#, fuzzy
+#: src/ch01-02-hello-world.md:175
 msgid ""
 "This line does all the work in this little program: it prints text to the "
 "screen. There are four important details to notice here."
 msgstr ""
 "Esta línea hace todo el trabajo en este pequeño programa: imprime texto en "
-"la pantalla.\n"
-"pantalla. Hay cuatro detalles importantes a tener en cuenta aquí."
+"la pantalla. Hay cuatro detalles importantes a tener en cuenta aquí."
+
+#: src/ch01-02-hello-world.md:178
+msgid "First, Cairo style is to indent with four spaces, not a tab."
+msgstr "Primero, el estilo de Cairo es identar con cuatro espacios, no con una tabulación."
 
 #: src/ch01-02-hello-world.md:180
-msgid "First, Cairo style is to indent with four spaces, not a tab."
-msgstr ""
-"En primer lugar, el estilo de Cairo es hacer sangrías con cuatro espacios, "
-"no con una tabulación."
-
-#: src/ch01-02-hello-world.md:182
 msgid ""
-"Second, the `print()` function called is a method from the trait "
-"`PrintTrait`. This trait is imported from the Cairo core library, and it "
-"defines how to print values to the screen for different data types. In our "
-"case, our text is defined as a \"short string\", which is an ASCII string "
-"that can fit in Cairo's basic data type, which is the `felt252` type. By "
-"calling `Hello, world!'.print()`, we're calling the `print()` method of the "
-"`felt252` implementation of the `PrintTrait` trait."
+"Second, `println!` calls a Cairo macro. If it had called a function instead, it "
+"would be entered as `println` (without the `!`). We’ll discuss Cairo macros in "
+"more detail in [Chapter Macros](./ch11-02-macros.md). For now, you just need to "
+"know that using a `!` means that you’re calling a macro instead of a normal "
+"function and that macros don’t always follow the same rules as functions."
 msgstr ""
-"Segundo, la función `print()` es un método del trait `PrintTrait`. Este "
-"trait se importa de la librería del núcleo de Cairo, y define cómo imprimir "
-"valores en la pantalla para diferentes tipos de datos. En nuestro caso, "
-"nuestro texto está definido como una \"cadena corta\", que es una cadena "
-"ASCII que puede caber en el tipo de datos básico de Cairo, que es el tipo "
-"`felt252`. Al llamar a `Hello, world!'.print()`, estamos llamando al método "
-"`print()` de la implementación `felt252` del trait `PrintTrait`."
+"En segundo lugar, las llamadas a `println` hacen uso de un macro de Cairo. Si en "
+"su lugar se hubiera llamado a una función, se escribiría como `println` (sin el `!`). "
+"Discutiremos los macros de Cairo con más detalle en [Chapter Macros]"
+"(./ch11-02-macros.md). Por ahora, solo necesitas saber que el uso del `!` indica "
+"que estás llamando a un macro en lugar de una función normal, y que los macros "
+"no siempre siguen las mismas reglas que las funciones."
 
-#: src/ch01-02-hello-world.md:184
-#, fuzzy
+#: src/ch01-02-hello-world.md:183
 msgid ""
-"Third, you see the `'Hello, World!'` short string. We pass this short string "
-"as an argument to `print()`, and the short string is printed to the screen."
+"Third, you see the `"Hello, world!"` string. We pass this string as an argument "
+"to `println!`, and the string is printed to the screen."
 msgstr ""
-"En tercer lugar, ves la cadena corta `'Hello, world!'` Pasamos esta cadena "
-"corta como argumento\n"
-"a `print()`, y la cadena corta se imprime en la pantalla."
+"En tercer lugar, ves la short string `'Hello, world!'`. Pasamos este short "
+"string como argumento a `print()`, y la cadena corta se imprime en la pantalla."
 
 #: src/ch01-02-hello-world.md:187
-#, fuzzy
 msgid ""
 "Fourth, we end the line with a semicolon (`;`), which indicates that this "
 "expression is over and the next one is ready to begin. Most lines of Cairo "
 "code end with a semicolon."
 msgstr ""
-"Cuarto, terminamos la línea con un punto y coma (`;`), que indica que esta\n"
+"Cuarto, terminamos la línea con un punto y coma (`;`), que indica que esta "
 "expresión ha terminado y la siguiente está lista para comenzar. La mayoría "
-"de las \n"
-"líneas de código de Cairo terminan con punto y coma."
+"de las líneas de código de Cairo terminan con punto y coma."
 
 #: src/ch01-02-hello-world.md:193
-#, fuzzy
 msgid "Running tests"
-msgstr "## Ejecución de Pruebas Individuales"
+msgstr "Ejecución de Test"
 
 #: src/ch01-02-hello-world.md:195
 msgid ""
@@ -1231,6 +1159,14 @@ msgid ""
 "test runners, please refer to [Scarb's documentation](https://docs.swmansion."
 "com/scarb/docs/extensions/testing.html#using-third-party-test-runners)."
 msgstr ""
+"Para ejecutar todos los test asociados con un paquete específico, puedes usar "
+"el comando `scarb test`. No es un ejecutor de test en sí mismo, sino que delega "
+"el trabajo a una solución de test a elección. Scarb viene con la extensión "
+"`scarb cairo-test` preinstalada, que incluye el ejecutor de test nativo de Cairo."
+"Es el ejecutor de test predeterminado utilizado por scarb test. Para utilizar "
+"ejecutores de test de terceros, por favor consulta la documentación [Scarb's "
+"documentation](https://docs.swmansion.com/scarb/docs/extensions/testing."
+"html#using-third-party-test-runners)."
 
 #: src/ch01-02-hello-world.md:199
 msgid ""
@@ -1238,10 +1174,13 @@ msgid ""
 "test` will run all test functions in your codebase under the `src/` "
 "directory."
 msgstr ""
+"Las funciones de test se marcan con el atributo `#[test]`, y al ejecutar "
+"`scarb test` se ejecutarán todas las funciones de test en tu código bajo el "
+"`src/` directory."
 
 #: src/ch01-02-hello-world.md:208
 msgid " A sample Scarb project structure"
-msgstr ""
+msgstr " Ejemplo de estructura de un proyecto Scarb"
 
 #: src/ch01-02-hello-world.md:210
 msgid "Let’s recap what we’ve learned so far about Scarb:"
@@ -1249,23 +1188,27 @@ msgstr "Recapitulemos lo que hemos aprendido hasta ahora sobre Scarb:"
 
 #: src/ch01-02-hello-world.md:212
 msgid "We can create a project using `scarb new`."
-msgstr ""
+msgstr "Podemos crear un proyecto utilizando `scarb new`."
 
 #: src/ch01-02-hello-world.md:213
 msgid ""
 "We can build a project using `scarb build` to generate the compiled Sierra "
 "code."
 msgstr ""
+"Podemos construir un proyecto usando `scarb build` para generar el código "
+"compilado de Sierra."
 
 #: src/ch01-02-hello-world.md:214
 msgid ""
 "We can define custom scripts in `Scarb.toml` and call them with the `scarb "
 "run` command."
 msgstr ""
+"Podemos definir scripts personalizados en `Scarb.toml` y llamarlos con el "
+"comando `Scarb.run`."
 
 #: src/ch01-02-hello-world.md:215
 msgid "We can run tests using the `scarb test` command."
-msgstr ""
+msgstr "Podemos ejecutar tests usando el comando `scarb test`."
 
 #: src/ch01-02-hello-world.md:217
 msgid ""
@@ -1283,33 +1226,32 @@ msgstr ""
 #: src/ch05-03-method-syntax.md:286
 #: src/ch07-05-separating-modules-into-different-files.md:98
 #: src/ch10-02-recoverable-errors.md:202
-#, fuzzy
 msgid "Summary"
-msgstr "# Resumen"
+msgstr "Resumen"
 
 #: src/ch01-02-hello-world.md:222
 msgid ""
 "You’re already off to a great start on your Cairo journey! In this chapter, "
 "you’ve learned how to:"
 msgstr ""
-"Ya has empezado con buen pie tu viaje en Cairo. En este capítulo, has "
+"¡Ya has tenido un gran comienzo en tu viaje con Cairo!. En este capítulo, has "
 "aprendido cómo:"
 
 #: src/ch01-02-hello-world.md:224
 msgid "Install the latest stable version of Cairo"
-msgstr ""
+msgstr "Instalar la última versión estable de Cairo"
 
 #: src/ch01-02-hello-world.md:225
 msgid "Write and run a “Hello, Scarb!” program using `scarb` directly"
-msgstr ""
+msgstr "Escribir y ejecutar un programa "¡Hola, Scarb!" usando `scarb` directamente"
 
 #: src/ch01-02-hello-world.md:226
 msgid "Create and run a new project using the conventions of Scarb"
-msgstr ""
+msgstr "Crear y ejecutar un nuevo proyecto siguiendo las convenciones de Scarb"
 
 #: src/ch01-02-hello-world.md:227
 msgid "Execute tests using the `scarb test` command"
-msgstr ""
+msgstr "Ejecutar pruebas usando el comando `scarb test`"
 
 #: src/ch01-02-hello-world.md:229
 msgid ""
