@@ -100,9 +100,9 @@ We are asserting in main that `my_number` is not zero to ensure that we're not p
 In this example, `my_number` is zero so the assertion will fail, and the program will panic
 with the string 'number is zero' (as a felt252) and the division will not be reached.
 
-## `assert!` and `assert_eq` macros
+## `assert!` and `assert_eq!` macros
 
-Similarly to `panic!` macro, `assert!` and `assert_eq` macros both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
+Similarly to `panic!` macro, `assert!` and `assert_eq!` macros both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
 
 `assert!` macro checks whether a condition holds and panics otherwise: 
 
