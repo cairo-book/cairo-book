@@ -44,13 +44,13 @@ As our struct derives the trait HashTrait, we can call the function as follows f
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:main}}
 ```
 
-And as follows for Pedersen hashing :
+Pedersen is different from Poseidon, as it starts with a base state. This base state must be of `felt252` type, which forces us to either hash the struct with an arbitrary base state using the `update_with` method, or serialize the struct into an array to loop through all of its fields and hash its elements together.
+
+Here is a short example for Pedersen hashing :
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:main}}
 ```
-
-Note that Pedersen is instantiated with a base state while Poseidon is not.
 
 ### Advanced Hashing: Hashing arrays with Poseidon
 
