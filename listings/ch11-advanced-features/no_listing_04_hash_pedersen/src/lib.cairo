@@ -1,8 +1,6 @@
-use core::array::ArrayTrait;
 //ANCHOR: import
 use core::pedersen::PedersenTrait;
 use core::hash::{HashStateTrait, HashStateExTrait};
-use core::Serde;
 //ANCHOR_END: import
 
 //ANCHOR: structure
