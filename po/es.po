@@ -3024,29 +3024,26 @@ msgstr ""
 "Ahora, revisaremos los tipos de colección comunes en Cairo en el próximo capítulo."
 
 #: src/ch03-00-common-collections.md:3
-#, fuzzy
 msgid ""
 "Cairo provides a set of common collection types that can be used to store "
 "and manipulate data. These collections are designed to be efficient, "
 "flexible, and easy to use. This section introduces the primary collection "
 "types available in Cairo: Arrays and Dictionaries."
 msgstr ""
-"Cairo1 proporciona un conjunto de tipos de colecciones comunes que pueden "
-"utilizarse para almacenar y manipular datos. Estas colecciones están "
-"diseñadas para ser eficientes, flexibles y fáciles de usar. Esta sección "
-"presenta los principales tipos de colecciones disponibles en Cairo1: `Array` "
-"y `Felt252Dict` (próximamente)."
+"Cairo ofrece un conjunto de tipos de colecciones comunes que pueden utilizarse "
+"para almacenar y manipular datos. Estas colecciones están diseñadas para ser "
+"eficientes, flexibles y fáciles de usar. Esta sección presenta los tipos principales "
+"de colecciones disponibles en Cairo: Arrays y Diccionarios."
 
 #: src/ch03-01-arrays.md:3
 msgid ""
 "An array is a collection of elements of the same type. You can create and "
-"use array methods by importing the `array::ArrayTrait` trait."
+"use array methods by using the `ArrayTrait` trait from the core library."
 msgstr ""
-"Un array es una colección de elementos del mismo tipo. Puedes crear y "
-"utilizar métodos de array importando el trait `array::ArrayTrait`."
+"Un array es una colección de elementos del mismo tipo. Puedes crear y utilizar "
+"métodos de array mediante el uso del rasgo `ArrayTrait` de la libreria principal."
 
 #: src/ch03-01-arrays.md:5
-#, fuzzy
 msgid ""
 "An important thing to note is that arrays have limited modification options. "
 "Arrays are, in fact, queues whose values can't be modified. This has to do "
@@ -3056,67 +3053,59 @@ msgid ""
 msgstr ""
 "Algo importante a tener en cuenta es que las arrays tienen opciones de "
 "modificación limitadas. Las arrays son, de hecho, colas cuyos valores no "
-"pueden modificarse.\n"
-"Esto tiene que ver con el hecho de que una vez que se escribe en un espacio "
-"de memoria, no se puede sobrescribir, sino sólo leer de él. Sólo se pueden "
-"añadir elementos al final de un array y eliminar elementos de la parte "
-"delantera utilizando `pop_front`."
+"pueden modificarse. Esto tiene que ver con el hecho de que una vez que se "
+"escribe en un espacio de memoria, no se puede sobrescribir, sino sólo leer "
+"de él. Sólo se pueden añadir elementos al final de un array y eliminar "
+"elementos de la parte delantera utilizando `pop_front`."
 
 #: src/ch03-01-arrays.md:8
-#, fuzzy
 msgid "Creating an Array"
-msgstr "#### Crear un Array"
+msgstr "Crear un Array"
 
 #: src/ch03-01-arrays.md:10
 msgid ""
 "Creating an Array is done with the `ArrayTrait::new()` call. Here is an "
 "example of the creation of an array to which we append 3 elements:"
 msgstr ""
-"Crear una matriz se realiza con la llamada ArrayTrait::new()`. Aquí tienes "
-"un ejemplo de la creación de una matriz a la que agregamos 3 elementos:"
+"Crear un Array se realiza con la llamada `ArrayTrait::new()`. Aquí tienes "
+"un ejemplo de la creación de una array a la que agregamos 3 elementos:"
 
 #: src/ch03-01-arrays.md:21
-#, fuzzy
 msgid ""
 "When required, you can pass the expected type of items inside the array when "
 "instantiating the array like this, or explicitly define the type of the "
 "variable."
 msgstr ""
-"Puede pasar el tipo esperado de elementos dentro de la array al instanciar "
-"la array de la siguiente manera"
+"Cuando sea necesario, puedes pasar el tipo esperado de elementos dentro del "
+"array al instanciarlo de esta manera, o definir explícitamente el tipo del mismo."
 
 #: src/ch03-01-arrays.md:31
-#, fuzzy
 msgid "Updating an Array"
-msgstr "#### Actualizar un Array"
+msgstr "Actualizar un Array"
 
 #: src/ch03-01-arrays.md:33
-#, fuzzy
 msgid "Adding Elements"
-msgstr "##### Añadir Elementos"
+msgstr "Añadir Elementos"
 
 #: src/ch03-01-arrays.md:35
 msgid ""
 "To add an element to the end of an array, you can use the `append()` method:"
 msgstr ""
-"To add an element to the end of an array, you can use the `append()` method:"
+"Para añadir un elemento al final de un array, puedes utilizar el método `append()`:"
 
 #: src/ch03-01-arrays.md:46
-#, fuzzy
 msgid "Removing Elements"
-msgstr "##### Eliminar Elementos"
+msgstr "Eliminar Elementos"
 
 #: src/ch03-01-arrays.md:48
-#, fuzzy
 msgid ""
 "You can only remove elements from the front of an array by using the "
 "`pop_front()` method. This method returns an `Option` containing the removed "
 "element, or `Option::None` if the array is empty."
 msgstr ""
 "Sólo se pueden eliminar elementos de la parte frontal de un array utilizando "
-"el método `pop_front()`.\n"
-"Este método devuelve un `Option` que contiene el elemento eliminado, o "
-"`Option::None` si el array está vacío."
+"el método `pop_front()`. Este método devuelve un `Option` que contiene el "
+"elemento eliminado, o `Option::None` si el array está vacío."
 
 #: src/ch03-01-arrays.md:61
 msgid "// print '10'\n"
@@ -3145,9 +3134,8 @@ msgstr ""
 "directamente las celdas de memoria."
 
 #: src/ch03-01-arrays.md:69
-#, fuzzy
 msgid "Reading Elements from an Array"
-msgstr "#### Lectura de Elementos de un Array"
+msgstr "Lectura de Elementos en un Array"
 
 #: src/ch03-01-arrays.md:71
 msgid ""
@@ -3160,7 +3148,6 @@ msgstr ""
 "equivalente a utilizar el operador de subíndice `arr[index]`."
 
 #: src/ch03-01-arrays.md:73
-#, fuzzy
 msgid ""
 "The `get` function returns an `Option<Box<@T>>`, which means it returns an "
 "option to a Box type (Cairo's smart-pointer type) containing a snapshot to "
@@ -3178,10 +3165,9 @@ msgstr ""
 "`None`. Este método es útil cuando esperas acceder a índices que pueden no "
 "estar dentro de los límites del array y quieres manejar tales casos con "
 "gracia sin pánicos. Las instantáneas se explicarán con más detalle en el "
-"capítulo [Referencias y Snapshots](ch03-02-references-and-snapshots.md)."
+"capítulo [References and Snapshots](ch03-02-references-and-snapshots.md)."
 
 #: src/ch03-01-arrays.md:75
-#, fuzzy
 msgid ""
 "The `at` function, on the other hand, directly returns a snapshot to the "
 "element at the specified index using the `unbox()` operator to extract the "
@@ -3207,17 +3193,14 @@ msgstr ""
 "manejar estos casos con gracia sin entrar en pánico."
 
 #: src/ch03-01-arrays.md:90
-#, fuzzy
 msgid ""
 "In this example, the variable named `first` will get the value `0` because "
 "that is the value at index `0` in the array. The variable named `second` "
 "will get the value `1` from index `1` in the array."
 msgstr ""
 "En este ejemplo, la variable llamada `first` obtendrá el valor `0` porque es "
-"el \n"
-"valor del índice `0` del array. La variable llamada `second` obtendrá el "
-"valor `1` \n"
-"del índice `1` del array."
+"el valor del índice `0` del array. La variable llamada `second` obtendrá el "
+"valor `1` del índice `1` del array."
 
 #: src/ch03-01-arrays.md:94
 msgid "Here is an example with the `get()` method:"
@@ -3238,11 +3221,10 @@ msgid ""
 msgstr ""
 
 #: src/ch03-01-arrays.md:117
-#, fuzzy
 msgid "Size related methods"
-msgstr "#### Métodos relacionados con el tamaño"
+msgstr "Métodos Relacionados con el Tamaño"
 
-#: src/ch03-01-arrays.md:119
+#: src/ch03-01-arrays.md:113
 msgid ""
 "To determine the number of elements in an array, use the `len()` method. The "
 "return is of type `usize`."
@@ -3250,7 +3232,7 @@ msgstr ""
 "Para determinar el número de elementos de un array, utilice el método "
 "`len()`. El valor devuelto es de tipo `usize`."
 
-#: src/ch03-01-arrays.md:121
+#: src/ch03-01-arrays.md:115
 msgid ""
 "If you want to check if an array is empty or not, you can use the "
 "`is_empty()` method, which returns `true` if the array is empty and `false` "
@@ -3260,30 +3242,56 @@ msgstr ""
 "`is_empty()`, que devuelve `true` si el array está vacío y `false` en caso "
 "contrario."
 
-#: src/ch03-01-arrays.md:123
-#, fuzzy
-msgid "Storing multiple types with Enums"
-msgstr "#### Almacenar multiples tipos con Enums"
+#: src/ch03-01-arrays.md:117 src/ch11-02-macros.md:27
+msgid "`array!` macro"
+msgstr "`Array!` Macro"
 
-#: src/ch03-01-arrays.md:125
-#, fuzzy
+#: src/ch03-01-arrays.md:119
+msgid ""
+"Sometimes, we need to create arrays with values that are already known at "
+"compile time. The basic way of doing that is redundant. You would first "
+"declare the array and then append each value one by one. `array!` is a "
+"simpler way of doing this task by combining the two steps. At compile-time, "
+"the compiler will expand the macro to generate the code that appends the "
+"items sequentially."
+msgstr ""
+"A veces, necesitamos crear arrays con valores que ya se conocen en tiempo "
+"de compilación. La forma básica de hacerlo es redundante. Primero declararías "
+"el array y luego añadirías cada valor uno por uno. `array!` es una forma más "
+"sencilla de realizar esta tarea al combinar los dos pasos. En tiempo de "
+"compilación, el compilador expandirá la macro para generar el código que añade "
+"los elementos de forma secuencial "
+
+#: src/ch03-01-arrays.md:122 src/ch11-02-macros.md:10
+msgid "Without `array!`:"
+msgstr "Sin `array!`:"
+
+#: src/ch03-01-arrays.md:133 src/ch11-02-macros.md:21
+msgid "With `array!`:"
+msgstr "Con `array!`:"
+
+#: src/ch03-01-arrays.md:139
+msgid "Storing multiple types with Enums"
+msgstr "Almacenar Multiples Tipos con Enums"
+
+#: src/ch03-01-arrays.md:141
 msgid ""
 "If you want to store elements of different types in an array, you can use an "
 "`Enum` to define a custom data type that can hold multiple types. Enums will "
 "be explained in more detail in the [Enums and Pattern Matching](ch06-00-"
 "enums-and-pattern-matching.md) chapter."
 msgstr ""
-"Si desea almacenar elementos de diferentes tipos en una array, puede "
-"utilizar un `Enum` para definir un tipo de datos personalizado que pueda "
-"contener múltiples tipos."
+"Si deseas almacenar elementos de diferentes tipos en un array, puedes utilizar "
+"un "Enum" para definir un tipo de datos personalizado que puede contener "
+"múltiples tipos. Los Enums se explicarán con más detalle en el capítulo [Enums "
+"and Pattern Matching](ch06-00-enums-and-pattern-matching.md)."
 
 #: src/ch03-01-arrays.md:143
 #, fuzzy
 msgid "Span"
-msgstr "#### Span"
+msgstr "Span"
 
 #: src/ch03-01-arrays.md:145
-#, fuzzy
 msgid ""
 "`Span` is a struct that represents a snapshot of an `Array`. It is designed "
 "to provide safe and controlled access to the elements of an array without "
@@ -3297,7 +3305,7 @@ msgstr ""
 "un array sin modificar el array original. Span es particularmente útil para "
 "asegurar la integridad de los datos y evitar problemas de préstamo cuando se "
 "pasan arrays entre funciones o cuando se realizan operaciones de sólo "
-"lectura (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))"
+"lectura (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))."
 
 #: src/ch03-01-arrays.md:147
 msgid ""
@@ -3308,13 +3316,12 @@ msgstr ""
 "`Span`, a excepción del método `append()`."
 
 #: src/ch03-01-arrays.md:149
-#, fuzzy
 msgid "Turning an Array into span"
-msgstr "##### Convertir un Array en span"
+msgstr "Convertir un Array en Span"
 
 #: src/ch03-01-arrays.md:151
 msgid "To create a `Span` of an `Array`, call the `span()` method:"
-msgstr "To create a `Span` of an `Array`, call the `span()` method:"
+msgstr "Para crear un `Span` de un `Array`, llama al método `span()`:"
 
 #: src/ch03-02-dictionaries.md:3
 msgid ""
@@ -3324,6 +3331,11 @@ msgid ""
 "data structure is known differently across different programming languages "
 "such as maps, hash tables, associative arrays and many others."
 msgstr ""
+"Cairo proporciona en su libreria principal un tipo de datos similar a un "
+"diccionario. El tipo de datos Felt252Dict<T> representa una colección de pares "
+"key-value donde cada key es única y está asociada con un value correspondiente. "
+"Este tipo de estructura de datos se conoce de manera diferente en varios lenguajes "
+"de programación, como mapas, tablas hash, arrays asociativos y muchos otros."
 
 #: src/ch03-02-dictionaries.md:5
 msgid ""
@@ -3332,10 +3344,14 @@ msgid ""
 "Cairo dictionaries also allow the programmer to easily simulate the "
 "existence of mutable memory when there is none."
 msgstr ""
+"El tipo Felt252Dict<T> es útil cuando deseas organizar tus datos de una manera "
+"específica para la cual el uso de un Array<T> e indexación no es suficiente. "
+"Los diccionarios en Cairo también permiten al programador simular fácilmente "
+"la existencia de memoria mutable cuando no la hay."
 
 #: src/ch03-02-dictionaries.md:7
 msgid "Basic Use of Dictionaries"
-msgstr ""
+msgstr "Uso Basico de Diccionarios"
 
 #: src/ch03-02-dictionaries.md:9
 msgid ""
@@ -3344,6 +3360,11 @@ msgid ""
 "`felt252` leaving only the possibility to specify the value data type, "
 "represented by `T` in `Felt252Dict<T>`."
 msgstr ""
+"Es común en otros lenguajes especificar los tipos de datos tanto para la key "
+"como para el value al crear un nuevo diccionario. En Cairo, el tipo de key está "
+"restringido a `felt252`, lo que deja solo la posibilidad de especificar el tipo "
+"de dato del value, representado por `T` en `Felt252Dict<T>`."
+
 
 #: src/ch03-02-dictionaries.md:11
 msgid ""
@@ -3351,14 +3372,17 @@ msgid ""
 "`Felt252DictTrait` which includes all basic operations. Among them we can "
 "find:"
 msgstr ""
+"La funcionalidad principal de un Felt252Dict<T> se implementa en el rasgo "
+"`Felt252DictTrait`, que incluye todas las operaciones básicas. Entre ellas "
+"podemos encontrar:"
 
 #: src/ch03-02-dictionaries.md:13
 msgid "`insert(felt252, T) -> ()` to write values to a dictionary instance and"
-msgstr ""
+msgstr "`insert(felt252, T) -> ()` para escribir valores en una instancia de diccionario."
 
 #: src/ch03-02-dictionaries.md:14
 msgid "`get(felt252) -> T` to read values from it."
-msgstr ""
+msgstr "`get(felt252) -> T` para leer sus valores."
 
 #: src/ch03-02-dictionaries.md:16
 msgid ""
@@ -3366,16 +3390,23 @@ msgid ""
 "language. In the following example, we create a dictionary to represent a "
 "mapping between individuals and their balance:"
 msgstr ""
+"Estas funciones nos permiten manipular diccionarios como en cualquier otro lenguaje. "
+"En el siguiente ejemplo, creamos un diccionario para representar una relación entre "
+"individuos y sus saldos:"
 
 #: src/ch03-02-dictionaries.md:33
 msgid ""
-"The first thing we do is import `Felt252DictTrait` which brings to scope all "
-"the methods we need to interact with the dictionary. Next, we create a new "
-"instance of `Felt252Dict<u64>` by using the `default` method of the "
-"`Default` trait and added two individuals, each one with their own balance, "
-"using the `insert` method. Finally, we checked the balance of our users with "
-"the `get` method."
+"We can create a new instance of `Felt252Dict<u64>` by using the `default` "
+"method of the `Default` trait and add two individuals, each one with their "
+"own balance, using the `insert` method. Finally, we check the balance of our "
+"users with the `get` method. These methods are defined in the "
+"`Felt252DictTrait` trait in the core library."
 msgstr ""
+"Podemos crear una nueva instancia de `Felt252Dict<u64>` utilizando el método "
+"`default` del rasgo `Default` y añadir dos individuos, cada uno con su propio "
+"saldo, utilizando el método `insert`. Por último, comprobamos el saldo de "
+"nuestros usuarios con el método `get`. Estos métodos están definidos en el trait "
+"`Felt252DictTrait` de la librería principal."
 
 #: src/ch03-02-dictionaries.md:35
 msgid ""
@@ -3384,12 +3415,19 @@ msgid ""
 "type represents a way to overcome this obstacle. We will explain how this is "
 "implemented later on in [Dictionaries Underneath](#dictionaries-underneath)."
 msgstr ""
+"A lo largo del libro, hemos hablado sobre cómo la memoria en Cairo es inmutable, "
+"lo que significa que solo puedes escribir en una celda de memoria una vez, pero "
+"el tipo Felt252Dict<T> representa una manera de superar este obstáculo. Explicaremos "
+"cómo se implementa esto más adelante en [Dictionaries Underneath]"
+"(#dictionaries-underneath)."
 
 #: src/ch03-02-dictionaries.md:37
 msgid ""
 "Building upon our previous example, let us show a code example where the "
 "balance of the same user changes:"
 msgstr ""
+"Basándonos en nuestro ejemplo anterior, vamos a mostrar un ejemplo de código "
+"en el que cambia el saldo del mismo usuario:"
 
 #: src/ch03-02-dictionaries.md:43
 msgid "// Insert Alex with 100 balance\n"
@@ -3414,6 +3452,10 @@ msgid ""
 "had the last value inserted! `Felt252Dict<T>` effectively allows us to "
 "\"rewrite\" the stored value for any given key."
 msgstr ""
+"¡Fíjate cómo en este ejemplo hemos añadido el individuo _Alex_ dos veces, "
+"cada vez usando un saldo diferente y cada vez que comprobamos su saldo tenía "
+"el último valor insertado! `Felt252Dict<T>` nos permite efectivamente \"reescribir\" "
+"el valor almacenado para cualquier key dada."
 
 #: src/ch03-02-dictionaries.md:59
 msgid ""
@@ -3425,6 +3467,13 @@ msgid ""
 "is no way to delete data from a dictionary. Something to take into account "
 "when incorporating this structure into your code."
 msgstr ""
+"Antes de seguir adelante y explicar cómo se implementan los diccionarios "
+"vale la pena mencionar que una vez que instanciar un `Felt252Dict<T>`, detrás "
+"de las escenas de todas las claves tienen sus valores asociados inicializado "
+"como cero. Esto significa que si, por ejemplo, intentas obtener el saldo de un "
+"usuario inexistente obtendrás 0 en lugar de un error o un valor indefinido. "
+"Esto también significa que no hay forma de borrar datos de un diccionario. "
+"Algo a tener en cuenta a la hora de incorporar esta estructura a tu código."
 
 #: src/ch03-02-dictionaries.md:61
 msgid ""
@@ -3435,6 +3484,13 @@ msgid ""
 "any other popular language in existence, which as a consequence means that "
 "dictionaries are implemented very differently as well!"
 msgstr ""
+" Hasta este punto, hemos visto todas las características básicas de "
+"`Felt252Dict<T>` y cómo imita el mismo comportamiento que las estructuras de "
+"datos correspondientes en cualquier otro lenguaje, es decir, externamente, "
+"por supuesto. Cairo es en su núcleo un lenguaje de programación Turing-completo "
+"no determinista, muy diferente de cualquier otro lenguaje popular existente, "
+"lo que como consecuencia significa que ¡los diccionarios se implementan también "
+"de forma muy diferente!"
 
 #: src/ch03-02-dictionaries.md:63
 msgid ""
@@ -3444,10 +3500,15 @@ msgid ""
 "dictionaries with other data structures as well as use the `entry` method as "
 "another way to interact with them."
 msgstr ""
+"En las siguientes secciones, vamos a dar algunas ideas sobre `Felt252Dict<T>` "
+"mecanismos internos y los compromisos que se tomaron para que funcionen. Después "
+"de eso, vamos a echar un vistazo a cómo utilizar los diccionarios con otras "
+"estructuras de datos, así como utilizar el método `entry` como otra forma de "
+"interactuar con ellos."
 
 #: src/ch03-02-dictionaries.md:65
 msgid "Dictionaries Underneath"
-msgstr ""
+msgstr "Diccionarios por Debajo"
 
 #: src/ch03-02-dictionaries.md:67
 msgid ""
@@ -3457,22 +3518,28 @@ msgid ""
 "represents a time when a dictionary was accessed for reading/updating/"
 "writing purposes. An entry has three fields:"
 msgstr ""
+"Una de las restricciones del diseño no determinista de Cairo es que su sistema "
+"de memoria es inmutable, así que para simular la mutabilidad, el lenguaje implementa "
+"`Felt252Dict<T>` como una lista de entradas. Cada una de las entradas representa un "
+"momento en el que se accedió al diccionario para leer/actualizar/escribir. Una entrada "
+"tiene tres campos:"
 
 #: src/ch03-02-dictionaries.md:69
 msgid ""
-"A `key` field that identifies the value for this key-value pair of the "
-"dictionary."
+"A `key` field that identifies the value for this key-value pair of the dictionary."
 msgstr ""
+"Un campo `key` que identifica el valor para este par key-value del diccionario."
 
 #: src/ch03-02-dictionaries.md:70
 msgid ""
 "A `previous_value` field that indicates which previous value was held at "
 "`key`."
 msgstr ""
+"Un campo `previous_value` que indica qué valor anterior tenía `key`."
 
 #: src/ch03-02-dictionaries.md:71
 msgid "A `new_value` field that indicates the new value that is held at `key`."
-msgstr ""
+msgstr "Un campo `new_value` que indica el nuevo valor que se tiene en `key`."
 
 #: src/ch03-02-dictionaries.md:73
 msgid ""
@@ -3481,18 +3548,26 @@ msgid ""
 "information about what key-value pair it represents and the previous and new "
 "values it holds. The definition of `Entry<T>` would be:"
 msgstr ""
+"Si intentamos implementar `Felt252Dict<T>` usando estructuras de alto nivel "
+"lo definiríamos internamente como `Array<Entry<T>>` donde cada `Entry<T>` tiene "
+"información sobre qué par key-value representa y los valores anteriores y "
+"nuevos que contiene. La definición de `Entry<T>` sería:"
 
 #: src/ch03-02-dictionaries.md:83
 msgid ""
 "For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be "
 "registered:"
 msgstr ""
+"Por cada vez que interactuemos con un `Felt252Dict<T>` se registrará una "
+"nueva `Entrada<T>`:"
 
 #: src/ch03-02-dictionaries.md:85
 msgid ""
 "A `get` would register an entry where there is no change in state, and "
 "previous and new values are stored with the same value."
 msgstr ""
+"Un `get` registraría una entrada en la que no hay cambio de estado, los "
+"valores anteriores y nuevos se almacenan con el mismo valor."
 
 #: src/ch03-02-dictionaries.md:86
 msgid ""
@@ -3501,6 +3576,10 @@ msgid ""
 "inserted before this. In case it is the first entry for a certain key, then "
 "the previous value will be zero."
 msgstr ""
+"Un `insert` registraría una nueva `Entry<T>` donde el `new_value` sería "
+"el elemento que se inserta, y el `previous_value` el último elemento insertado "
+"antes de este. En caso de que sea la primera entrada para una determinada clave, "
+"entonces el valor anterior será cero."
 
 #: src/ch03-02-dictionaries.md:88
 msgid ""
@@ -3509,10 +3588,14 @@ msgid ""
 "example of this using the `balances` dictionary from the previous section "
 "and inserting the users 'Alex' and 'Maria':"
 msgstr ""
+"El uso de esta lista de entradas muestra cómo no hay ninguna reescritura, "
+"sólo la creación de nuevas celdas de memoria por interacción `Felt252Dict<T>`. "
+"Vamos a mostrar un ejemplo de esto usando el diccionario `balances` de la sección "
+"anterior e insertando los usuarios `Alex` y `Maria`:"
 
 #: src/ch03-02-dictionaries.md:106
 msgid "These instructions would then produce the following list of entries:"
-msgstr ""
+msgstr "Estas instrucciones producirían la siguiente lista de entradas:"
 
 #: src/ch03-02-dictionaries.md:108 src/ch03-02-dictionaries.md:130
 #: src/ch03-02-dictionaries.md:143
@@ -3568,6 +3651,10 @@ msgid ""
 "`previous` and `current` values are set properly. Also reading from 'Maria' "
 "registered an entry with no change from previous to current values."
 msgstr ""
+"Observe que como 'Alex' se insertó dos veces, aparece dos veces y los "
+"valores `previous` y `current` se establecen correctamente. También la "
+"lectura de 'Maria' registró una entrada sin cambios de los valores "
+"anteriores a los actuales."
 
 #: src/ch03-02-dictionaries.md:117
 msgid ""
@@ -3579,6 +3666,12 @@ msgid ""
 "worst-case time complexity of `O(n)` where `n` is the number of entries in "
 "the list."
 msgstr ""
+"Este enfoque para implementar `Felt252Dict<T>` significa que para cada operación "
+"de lectura/escritura, hay un escaneo de toda la lista de entradas en busca de la "
+"última entrada con la misma `clave`. Una vez encontrada la entrada, se extrae su "
+"`nuevo_valor` y se utiliza en la nueva entrada que se añade como `valor_anterior`. "
+"Esto significa que interactuar con `Felt252Dict<T>` tiene una complejidad temporal "
+"en el peor de los casos de `O(n)` donde `n` es el número de entradas de la lista."
 
 #: src/ch03-02-dictionaries.md:119
 msgid ""
@@ -3592,10 +3685,18 @@ msgid ""
 "of \"dictionary squashing\" and that requires information on both previous "
 "and new values for every entry."
 msgstr ""
+"Si te pones a pensar en formas alternativas de implementar `Felt252Dict<T>` seguramente "
+"las encontrarás, probablemente incluso eliminando completamente la necesidad de un campo "
+"`previous_value`, sin embargo, como Cairo no es un lenguaje normal esto no funcionará. "
+"Uno de los propósitos de Cairo es, con el sistema de pruebas STARK, generar pruebas de "
+"integridad computacional. Esto significa que necesitas verificar que la ejecución del "
+"programa es correcta y dentro de los límites de las restricciones de Cairo. Una de esas "
+"comprobaciones de límites consiste en "comprimir diccionarios" y eso requiere información "
+"tanto de los valores anteriores como de los nuevos para cada entrada."
 
 #: src/ch03-02-dictionaries.md:122
 msgid "Squashing Dictionaries"
-msgstr ""
+msgstr "Comprimir Diccionarios"
 
 #: src/ch03-02-dictionaries.md:124
 msgid ""
@@ -3605,6 +3706,11 @@ msgid ""
 "`squash_dict` that reviews each entry of the entry list and checks that "
 "access to the dictionary remains coherent throughout the execution."
 msgstr ""
+"Para verificar que la prueba generada por la ejecución de un programa Cairo que "
+"utilizó un `Felt252Dict<T>` es correcta necesitamos comprobar que no hubo ninguna "
+"manipulación ilegal del diccionario. Esto se hace mediante un método llamado "
+"`squash_dict` que revisa cada entrada de la lista de entradas y comprueba que el "
+"acceso al diccionario sigue siendo coherente durante toda la ejecución."
 
 #: src/ch03-02-dictionaries.md:126
 msgid ""
@@ -3612,10 +3718,13 @@ msgid ""
 "`k`, taken in the same order as they were inserted, verify that the ith "
 "entry `new_value` is equal to the ith + 1 entry `previous_value`."
 msgstr ""
+"El proceso de comprimir es el siguiente: dadas todas las entradas con cierta clave `k`, "
+"tomadas en el mismo orden en que fueron insertadas, verificar que la i-ésima entrada "
+"`new_value` es igual a la i-th + 1 entrada `previous_value`."
 
 #: src/ch03-02-dictionaries.md:128
 msgid "For example, given the following entry list:"
-msgstr ""
+msgstr "Por ejemplo, dada la siguiente lista de entradas:"
 
 #: src/ch03-02-dictionaries.md:132 src/ch03-02-dictionaries.md:136
 msgid "150"
@@ -3651,17 +3760,19 @@ msgstr ""
 
 #: src/ch03-02-dictionaries.md:141
 msgid "After squashing, the entry list would be reduced to:"
-msgstr ""
+msgstr "Después de comprimir, la lista de entradas se reduciría a:"
 
 #: src/ch03-02-dictionaries.md:149
 msgid ""
 "In case of a change on any of the values of the first table, squashing would "
 "have failed during runtime."
 msgstr ""
+"En caso de un cambio en alguno de los valores de la primera tabla, la compresión "
+"habría fallado durante la ejecución."
 
 #: src/ch03-02-dictionaries.md:151
 msgid "Dictionary Destruction"
-msgstr ""
+msgstr "Destrucción de Diccionarios"
 
 #: src/ch03-02-dictionaries.md:153
 msgid ""
@@ -3672,6 +3783,12 @@ msgid ""
 "implementation of the `Destruct<T>` trait. This call occurred just before "
 "the `balance` dictionary went out of scope."
 msgstr ""
+"Pruebas los ejemplos de [Basic Use of Dictionaries](#basic-use-of-"
+"dictionaries), notarás que nunca se hizo una llamada a para comprimir el diccionario, "
+"pero el programa se compiló exitosamente de todos modos. Lo que ocurrió en segundo "
+"plano es que la operación de compresión se llamó automáticamente mediante la "
+"implementación de `Felt252Dict<T>` del rasgo `Destruct<T>`. Esta llamada ocurrió "
+"justo antes de que el diccionario `balance` saliera del scope."
 
 #: src/ch03-02-dictionaries.md:155
 msgid ""
@@ -3684,6 +3801,13 @@ msgid ""
 "traits in [Drop and Destruct](/appendix-03-derivable-traits.md#drop-and-"
 "destruct)."
 msgstr ""
+"El `Destruct<T>` representa otra forma de eliminar instancias fuera del scope "
+"aparte de `Drop<T>`. La principal diferencia entre estos dos es que `Drop<T>` se "
+"trata como una operación no-op, lo que significa que no genera nuevos CASM mientras "
+"que `Destruct<T>` no tiene esta restricción. El único tipo que utiliza activamente "
+"el rasgo `Destruct<T>` es `Felt252Dict<T>`, para cualquier otro tipo `Destruct<T>` "
+"y `Drop<T>` son sinónimos. Puedes leer más sobre estos rasgos en [Drop and Destruct]"
+"(/appendix-03-derivable-traits.md#drop-and-destruct)."
 
 #: src/ch03-02-dictionaries.md:157
 msgid ""
@@ -3691,10 +3815,13 @@ msgid ""
 "we will have a hands-on example where we implement the `Destruct<T>` trait "
 "for a custom type."
 msgstr ""
+"Más adelante en [Dictionaries as Struct Members](#dictionaries-as-struct-members), "
+"tendremos un ejemplo práctico donde implementaremos el rasgo `Destruct<T>` para un "
+"tipo personalizado."
 
 #: src/ch03-02-dictionaries.md:159
 msgid "More Dictionaries"
-msgstr ""
+msgstr "Más Diccionarios"
 
 #: src/ch03-02-dictionaries.md:161
 msgid ""
@@ -3703,6 +3830,10 @@ msgid ""
 "in a certain way. If you haven't understood all of it, don't worry because "
 "in this section we will have some more examples using dictionaries."
 msgstr ""
+"Hasta este punto, hemos dado una visión general de la funcionalidad de `Felt252Dict<T>` "
+"de cómo y por qué se implementa de una determinada manera. Si no lo has entendido todo, "
+"no te preocupes porque en esta sección tendremos algunos ejemplos más utilizando "
+"diccionarios."
 
 #: src/ch03-02-dictionaries.md:163
 msgid ""
@@ -3713,10 +3844,16 @@ msgid ""
 "complex types such as `Array<T>` and how to [implement](#dictionaries-as-"
 "struct-members) a struct with a dictionary as a member."
 msgstr ""
+"Empezaremos explicando el método `entry` que forma parte de una funcionalidad "
+"básica del diccionario incluida en `Felt252DictTrait<T>` que no mencionamos al "
+"principio. Poco después, veremos ejemplos de cómo `Felt252Dict<T>` [interacts]"
+"(#dictionaries-of-complex-types) con otros tipos complejos como `Array<T>` y cómo "
+"[implement](#dictionaries-as-struct-members) una struct con un diccionario "
+"como miembro."
 
 #: src/ch03-02-dictionaries.md:165
 msgid "Entry and Finalize"
-msgstr ""
+msgstr "Entrada y Finalización"
 
 #: src/ch03-02-dictionaries.md:167
 msgid ""
@@ -3727,6 +3864,12 @@ msgid ""
 "whatever operation it was executing. The Cairo language gives us the tools "
 "to replicate this ourselves through the `entry` and `finalize` methods."
 msgstr ""
+"En la sección [Dictionaries Underneath](#diccionarios-debajo), explicamos "
+"cómo funcionaba internamente `Felt252Dict<T>`. Era una lista de entradas cada "
+"vez que se accedía al diccionario de cualquier manera. Primero encontraba la "
+"última entrada dada una cierta `clave` y luego la actualizaba según la operación "
+"que estuviera ejecutando. El lenguaje Cairo nos da las herramientas para replicar "
+"esto nosotros mismos a través de los métodos `entry` y `finalize`."
 
 #: src/ch03-02-dictionaries.md:169
 msgid ""
@@ -3735,6 +3878,10 @@ msgid ""
 "ownership of the dictionary and returns the entry to update. The method "
 "signature is as follows:"
 msgstr ""
+"El método `entry` viene como parte de `Felt252DictTrait<T>` con el propósito de "
+"crear una nueva entrada dada una determinada clave. Una vez llamado, este método "
+"toma posesión del diccionario y devuelve la entrada a actualizar. La característica "
+"del método es la siguiente:"
 
 #: src/ch03-02-dictionaries.md:175
 msgid ""
@@ -3743,6 +3890,10 @@ msgid ""
 "`Felt252DictEntry<T>`, which is the type used by Cairo to represent "
 "dictionary entries, and a `T` representing the value held previously."
 msgstr ""
+"El primer parámetro de entrada toma posesión del diccionario mientras que el segundo "
+"se utiliza para crear la entrada apropiada. Devuelve una tupla que contiene una "
+"`Felt252DictEntry<T>`, que es el tipo utilizado por Cairo para representar entradas de "
+"diccionario, y una `T` que representa el valor mantenido anteriormente."
 
 #: src/ch03-02-dictionaries.md:177
 msgid ""
@@ -3750,12 +3901,16 @@ msgid ""
 "use the `finalize` method which inserts the entry and returns ownership of "
 "the dictionary:"
 msgstr ""
+"Lo siguiente que hay que hacer es actualizar la entrada con el nuevo valor. Para esto, "
+"utilizamos el método `finalize` que inserta la entrada y devuelve la propiedad del diccionario:"
 
 #: src/ch03-02-dictionaries.md:183
 msgid ""
 "This method receives the entry and the new value as a parameter and returns "
 "the updated dictionary."
 msgstr ""
+"Este método recibe la entrada y el nuevo valor como parámetro, devolviendo el "
+"diccionario actualizado."
 
 #: src/ch03-02-dictionaries.md:185
 msgid ""
@@ -3763,23 +3918,26 @@ msgid ""
 "implement our own version of the `get` method from a dictionary. We should "
 "then do the following:"
 msgstr ""
+"Veamos un ejemplo utilizando `entry` y `finalize`. Imaginemos que queremos implementar nuestra "
+"propia versión del método `get` de un diccionario. Deberíamos hacer lo siguiente:"
 
 #: src/ch03-02-dictionaries.md:187
 msgid "Create the new entry to add using the `entry` method"
-msgstr ""
+msgstr "Crear la nueva entrada que deseamos agregar utilizando el método `entry`."
 
 #: src/ch03-02-dictionaries.md:188
 msgid ""
 "Insert back the entry where the `new_value` equals the `previous_value`."
 msgstr ""
+"Insertar nuevamente la entrada donde el `new_value` sea igual al `previous_value`."
 
 #: src/ch03-02-dictionaries.md:189
 msgid "Return the value."
-msgstr ""
+msgstr "Devolver el valor."
 
 #: src/ch03-02-dictionaries.md:191
 msgid "Implementing our custom get would look like this:"
-msgstr ""
+msgstr "Implementar nuestra propia función get se vería así:"
 
 #: src/ch03-02-dictionaries.md:199 src/ch03-02-dictionaries.md:248
 msgid "// Get the new entry and the previous value held at `key`\n"
@@ -3805,6 +3963,9 @@ msgid ""
 "inserting a new value when finalizing. If we were to implement it, it would "
 "look like the following:"
 msgstr ""
+"Implementar el método `insert` seguiría un flujo de trabajo similar, excepto "
+"por la inserción de un nuevo valor al finalizar. Si lo implementáramos, tendría "
+"el siguiente aspecto:"
 
 #: src/ch03-02-dictionaries.md:227
 msgid ""
@@ -3825,6 +3986,9 @@ msgid ""
 "how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows "
 "some example usage:"
 msgstr ""
+"Como nota final, estos dos métodos se implementan de manera similar a cómo "
+"`insert` y `get` se implementan para `Felt252Dict<T>`. Este código muestra "
+"algunos ejemplos de uso:"
 
 #: src/ch03-02-dictionaries.md:270
 msgid "// Get the last entry associated with `key`\n"
@@ -3852,7 +4016,7 @@ msgstr ""
 
 #: src/ch03-02-dictionaries.md:293
 msgid "Dictionaries of types not supported natively"
-msgstr ""
+msgstr "Tipos de Diccionarios No Soportados Nativamente"
 
 #: src/ch03-02-dictionaries.md:295
 msgid ""
@@ -3868,6 +4032,16 @@ msgid ""
 "valid dictionary value type. To compensate this, you can wrap your type "
 "inside a `Nullable<T>`."
 msgstr ""
+"Una restricción de `Felt252Dict<T>` de la que no hemos hablado es el rasgo "
+"`Felt252DictValue<T>`. Este rasgo define el método `zero_default` que es el "
+"que se llama cuando un valor no existe en el diccionario. Esto está implementado "
+"para algunos tipos de datos comunes, como la mayoría de los enteros sin signo, "
+"`bool` y `felt252` - pero no está implementado para tipos más complejos como "
+"arrays, structs (incluyendo `u256`), y otros tipos de la librería principal. "
+"Esto significa que hacer un diccionario de tipos no soportados nativamente no "
+"es una tarea sencilla, porque necesitarías escribir un par de implementaciones "
+"de rasgos para hacer del tipo de datos un tipo de valor de diccionario válido. "
+"Para compensar esto, puedes envolver tu tipo dentro de un `Nullable<T>`."
 
 #: src/ch03-02-dictionaries.md:301
 msgid ""
@@ -3879,6 +4053,13 @@ msgid ""
 "allocate a new memory segment for our type, and access this segment using a "
 "pointer that can only be manipulated in one place at a time."
 msgstr ""
+"`Nullable<T>` es un tipo de puntero inteligente que puede apuntar a un valor o "
+"ser `null` en ausencia de valor. Suele utilizarse en Lenguajes de Programación "
+"Orientados a Objetos cuando una referencia no apunta a ningún sitio. La diferencia "
+"con `Option` es que el valor envuelto se almacena dentro de un tipo de datos "
+"`Box<T>`. El tipo `Box<T>`, inspirado en Rust, nos permite asignar un nuevo segmento "
+"de memoria para nuestro tipo, y acceder a este segmento utilizando un puntero que "
+"sólo puede ser manipulado en un lugar a la vez."
 
 #: src/ch03-02-dictionaries.md:303
 msgid ""
@@ -3888,6 +4069,10 @@ msgid ""
 "implement the `Copy<T>` trait which is required for reading from a "
 "dictionary."
 msgstr ""
+"Vamos a mostrarlo con un ejemplo. Intentaremos almacenar un `Span<felt252>` dentro "
+"de un diccionario. Para ello utilizaremos `Nullable<T>` y `Box<T>`. Además, estamos "
+"almacenando un `Span<T>` y no un `Array<T>` porque este último no implementa el rasgo "
+"`Copy<T>` que es necesario para leer de un diccionario."
 
 #: src/ch03-02-dictionaries.md:310 src/ch03-02-dictionaries.md:368
 msgid "// Create the dictionary\n"
@@ -3911,27 +4096,34 @@ msgid ""
 "`d`. We want it to hold a `Nullable<Span>`. After that, we created an array "
 "and filled it with values."
 msgstr ""
+"En este fragmento de código, lo primero que hicimos fue crear un nuevo "
+"diccionario `d`. Queremos que contenga un  `Nullable<Span>`. Después, "
+"creamos un array y lo llenamos de valores."
 
 #: src/ch03-02-dictionaries.md:327
 msgid ""
 "The last step is inserting the array as a span inside the dictionary. Notice "
 "that we didn't do that directly, but instead, we took some steps in between:"
 msgstr ""
+"El último paso es insertar el array como un span dentro del diccionario. Fíjate "
+"que no lo hemos hecho directamente, sino que hemos dado algunos pasos intermedios:"
 
 #: src/ch03-02-dictionaries.md:329
 msgid ""
 "We wrapped the array inside a `Box` using the `new` method from `BoxTrait`."
 msgstr ""
+"Envolvimos el array dentro de un `Box` usando el método `new` de `BoxTrait`."
 
 #: src/ch03-02-dictionaries.md:330
 msgid ""
 "We wrapped the `Box` inside a nullable using the `nullable_from_box` "
 "function."
 msgstr ""
+"Envolvemos el `Box` dentro de un tipo nullable usando la función `nullable_from_box`."
 
 #: src/ch03-02-dictionaries.md:331
 msgid "Finally, we inserted the result."
-msgstr ""
+msgstr "Por último, introducimos el resultado."
 
 #: src/ch03-02-dictionaries.md:333
 msgid ""
@@ -3939,6 +4131,8 @@ msgid ""
 "the same steps but in reverse order. The following code shows how to achieve "
 "that:"
 msgstr ""
+"Una vez que el elemento está dentro del diccionario, y queremos obtenerlo, seguimos "
+"los mismos pasos pero en orden inverso. El siguiente código muestra cómo conseguirlo:"
 
 #: src/ch03-02-dictionaries.md:338 src/ch03-02-dictionaries.md:380
 msgid "// Get value back\n"
@@ -3954,27 +4148,27 @@ msgstr ""
 
 #: src/ch03-02-dictionaries.md:354
 msgid "Here we:"
-msgstr ""
+msgstr "Aquí tenemos:"
 
 #: src/ch03-02-dictionaries.md:356
 msgid "Read the value using `get`."
-msgstr ""
+msgstr "Lee el valor utilizando `get`."
 
 #: src/ch03-02-dictionaries.md:357
 msgid "Verified it is non-null using the `match_nullable` function."
-msgstr ""
+msgstr "Verificado que no es nulo usando la función `match_nullable`."
 
 #: src/ch03-02-dictionaries.md:358
 msgid "Unwrapped the value inside the box and asserted it was correct."
-msgstr ""
+msgstr "Desenvolvió el valor dentro de la caja y afirmó que era correcto."
 
 #: src/ch03-02-dictionaries.md:360
 msgid "The complete script would look like this:"
-msgstr ""
+msgstr "El script completo tendría este aspecto:"
 
 #: src/ch03-02-dictionaries.md:397
 msgid "Dictionaries as Struct Members"
-msgstr ""
+msgstr "Diccionarios como miembros del Struct"
 
 #: src/ch03-02-dictionaries.md:399
 msgid ""
@@ -3984,6 +4178,11 @@ msgid ""
 "will need to define a struct to represent the new type and a trait to define "
 "its functionality:"
 msgstr ""
+"Definir diccionarios como miembros de struct es posible en Cairo, pero interactuar "
+"correctamente con ellos puede no ser del todo fluido. Intentemos implementar una "
+"_user database_ personalizada que nos permita añadir usuarios y consultarlos. "
+"Necesitaremos definir un struct para representar el nuevo tipo y un trait para "
+"definir su funcionalidad:"
 
 #: src/ch03-02-dictionaries.md:414
 msgid ""
@@ -3991,32 +4190,37 @@ msgid ""
 "over the balances of the users, giving major flexibility to whoever uses our "
 "data type. Its two members are:"
 msgstr ""
+"Nuestro nuevo tipo `UserDatabase<T>` representa una base de datos de usuarios. "
+"Es genérico sobre los saldos de los usuarios, dando mayor flexibilidad a quien "
+"utilice nuestro tipo de datos. Sus dos miembros son:"
 
 #: src/ch03-02-dictionaries.md:416
 msgid "`users_amount`, the number of users currently inserted and"
-msgstr ""
+msgstr "`users_amount`, el número de usuarios insertados actualmente."
 
 #: src/ch03-02-dictionaries.md:417
 msgid "`balances`, a mapping of each user to its balance."
-msgstr ""
+msgstr "`balances`, una asignación de cada usuario a su balance."
 
 #: src/ch03-02-dictionaries.md:419
 msgid ""
 "The database core functionality is defined by `UserDatabaseTrait`. The "
 "following methods are defined:"
 msgstr ""
+"La funcionalidad central de la base de datos está definida por `UserDatabaseTrait`. "
+"Donde se definen los siguientes métodos:"
 
 #: src/ch03-02-dictionaries.md:421
 msgid "`new` for easily creating new `UserDatabase` types."
-msgstr ""
+msgstr "`new` para crear fácilmente nuevos tipos de `UserDatabase`."
 
 #: src/ch03-02-dictionaries.md:422
 msgid "`add_user` to insert users in the database."
-msgstr ""
+msgstr "`add_user` para insertar usuarios en la base de datos."
 
 #: src/ch03-02-dictionaries.md:423
 msgid "`get_balance` to find user's balance in the database."
-msgstr ""
+msgstr "`get_balance` para encontrar el saldo del usuario en la base de datos."
 
 #: src/ch03-02-dictionaries.md:425
 msgid ""
@@ -4025,28 +4229,38 @@ msgid ""
 "ch08-00-generic-types-and-traits.md) we also need to correctly establish the "
 "requirements of `T` so it can be a valid `Felt252Dict<T>` value type:"
 msgstr ""
+"El único paso restante es implementar cada uno de los métodos en `UserDatabaseTrait`, "
+"pero como estamos trabajando con [generic types](/src/ch08-00-generic-types-and-traits.md) "
+"también necesitamos establecer correctamente los requisitos de `T` para que pueda ser un "
+"tipo de valor `Felt252Dict<T>` válido:"
 
 #: src/ch03-02-dictionaries.md:427
 msgid ""
 "`T` should implement the `Copy<T>` since it's required for getting values "
 "from a `Felt252Dict<T>`."
 msgstr ""
+"`T` debería implementar el `Copy<T>` ya que es necesario para obtener valores "
+"de un `Felt252Dict<T>`."
 
 #: src/ch03-02-dictionaries.md:428
 msgid ""
 "All value types of a dictionary implement the `Felt252DictValue<T>`, our "
 "generic type should do as well."
 msgstr ""
+"Todos los tipos de valor de un diccionario implementan el `Felt252DictValue<T>`, "
+"nuestro tipo genérico debería hacerlo también."
 
 #: src/ch03-02-dictionaries.md:429
 msgid ""
 "To insert values, `Felt252DictTrait<T>` requires all value types to be "
 "destructible."
 msgstr ""
+"Para insertar valores, `Felt252DictTrait<T>` requiere que todos los tipos "
+"de valores sean destructibles."
 
 #: src/ch03-02-dictionaries.md:431
 msgid "The implementation, with all restriction in place, would be as follow:"
-msgstr ""
+msgstr "La implementación, con todas las restricciones, sería la siguiente:"
 
 #: src/ch03-02-dictionaries.md:437 src/ch03-02-dictionaries.md:484
 msgid "// Creates a database\n"
@@ -4073,12 +4287,23 @@ msgid ""
 "generic-types-and-traits.md) in the struct definition. We need to code the "
 "`Destruct<T>` trait implementation by ourselves:"
 msgstr ""
+"Nuestra implementación de la base de datos está casi completa, excepto por una "
+"cosa: el compilador no sabe cómo hacer que una `UserDatabase<T>` salga de ámbito, "
+"ya que no implementa el rasgo `Drop<T>`, ni el rasgo `Destruct<T>`. Como tiene un "
+"`Felt252Dict<T>` como miembro, no se puede soltar, así que nos vemos obligados a "
+"implementar el rasgo `Destruct<T>` manualmente (consulta el capítulo [Ownership]"
+"(ch04-01-what-is-ownership.md#the-drop-trait) para más información). Utilizar "
+"`#[derive(Destruct)]` sobre la definición de `UserDatabase<T>` no funcionará debido "
+"al uso de [genericity](/src/ch08-00-generic-types-and-traits.md) en la definición de "
+"la estructura. Necesitamos implementar manualmente el rasgo `Destruct<T>`."
 
 #: src/ch03-02-dictionaries.md:469
 msgid ""
 "Implementing `Destruct<T>` for `UserDatabase` was our last step to get a "
 "fully functional database. We can now try it out:"
 msgstr ""
+"Implementar `Destruct<T>` para `UserDatabase` fue nuestro último paso para "
+"conseguir una base de datos completamente funcional. Ahora podemos probarla:"
 
 #: src/ch03-02-dictionaries.md:530
 msgid ""
@@ -4086,17 +4311,19 @@ msgid ""
 "These data structures may be a bit challenging to grasp, but they are really "
 "useful."
 msgstr ""
+"¡Bien hecho! Has terminado este capítulo sobre array y diccionarios en Cairo. "
+"Estas estructuras de datos pueden ser un poco difíciles de entender, pero son "
+"realmente útiles."
 
 #: src/ch03-02-dictionaries.md:532
-#, fuzzy
 msgid ""
 "When you’re ready to move on, we’ll talk about a concept that Cairo shares "
 "with Rust and that _doesn’t_ commonly exist in other programming languages: "
 "ownership."
 msgstr ""
 "Cuando estés listo para continuar, hablaremos de un concepto que Cairo "
-"comparte con Rust y que _no_\n"
-"existe comúnmente en otros lenguajes de programación: ownership."
+"comparte con Rust y que _no_ existe comúnmente en otros lenguajes de programación: "
+"Ownership."
 
 #: src/ch03-03-custom-data-structures.md:3
 msgid ""
@@ -4105,6 +4332,10 @@ msgid ""
 "that arrays have one big limitation - the data stored in them is immutable. "
 "Once you append a value to an array, you can't modify it."
 msgstr ""
+"Cuando empieces a programar en Cairo, probablemente querrás usar arrays (`Array<T>`) "
+"para almacenar colecciones de datos. Sin embargo, rápidamente te darás cuenta de que "
+"los arrays tienen una gran limitación - los datos almacenados en ellos son inmutables. "
+"Una vez que añades un valor a un array, no puedes modificarlo."
 
 #: src/ch03-03-custom-data-structures.md:8
 msgid ""
@@ -4112,6 +4343,9 @@ msgid ""
 "example, say you're making a game where the players have a level, and they "
 "can level up. You might try to store the level of the players in an array:"
 msgstr ""
+"Esto puede resultar frustrante cuando se desea utilizar una estructura de datos mutable. "
+"Por ejemplo, digamos que estás haciendo un juego donde los jugadores tienen un nivel, y "
+"pueden subir de nivel. Podrías intentar almacenar el nivel de los jugadores en un array:"
 
 #: src/ch03-03-custom-data-structures.md:19
 msgid ""
@@ -4119,6 +4353,9 @@ msgid ""
 "it's set. If a player dies, you cannot remove it from the array unless he "
 "happens to be in the first position."
 msgstr ""
+"Pero entonces te das cuenta de que no puedes aumentar el nivel en un índice específico "
+"una vez que está fijado. Si un jugador muere, no puedes eliminarlo de la matriz a menos "
+"que casualmente esté en la primera posición."
 
 #: src/ch03-03-custom-data-structures.md:23
 msgid ""
@@ -4127,6 +4364,10 @@ msgid ""
 "behavior of mutable data structures. Let's first explore how to use it to "
 "create a dynamic array implementation."
 msgstr ""
+"Afortunadamente, Cairo proporciona una útil funcionalidad integrada [dictionary type]"
+"(./ch03-02-dictionaries.md) llamado `Felt252Dict<T>` que nos permite simular el "
+"comportamiento de estructuras de datos mutables. Exploremos primero cómo usarlo "
+"para crear una implementación de array dinámico."
 
 #: src/ch03-03-custom-data-structures.md:28
 msgid ""
@@ -4136,51 +4377,58 @@ msgid ""
 "ch05-03-method-syntax.md), [Generic types](./ch08-00-generic-types-and-"
 "traits.md), [Traits](./ch08-02-traits-in-cairo.md)"
 msgstr ""
+"Nota: Varios conceptos utilizados en este capítulo se presentan en partes posteriores "
+"del libro. Le recomendamos que consulte primero el capítulo siguiente: [Structs]"
+"(ch05-00-using-structs-to-structure-related-data), [Methods](./ch05-03-method-syntax.md), "
+"[Generic types](./ch08-00-generic-types-and-traits.md), [Traits](./ch08-02-traits-in-cairo.md)."
 
 #: src/ch03-03-custom-data-structures.md:35
 msgid "Simulating a dynamic array with dicts"
-msgstr ""
+msgstr "Simular un Array Dinámico con Dicts"
 
 #: src/ch03-03-custom-data-structures.md:37
 msgid ""
 "First, let's think about how we want our mutable dynamic array to behave. "
 "What operations should it support?"
 msgstr ""
+"En primer lugar, pensemos en cómo queremos que se comporte nuestro array dinámico mutable. "
+"¿Qué operaciones debería soportar?"
 
 #: src/ch03-03-custom-data-structures.md:40
 msgid "It should:"
-msgstr ""
+msgstr "Deberia:"
 
 #: src/ch03-03-custom-data-structures.md:42
 msgid "Allow us to append items at the end"
-msgstr ""
+msgstr "Permitirnos añadir elementos al final."
 
 #: src/ch03-03-custom-data-structures.md:43
 msgid "Let us access any item by index"
-msgstr ""
+msgstr "Permitir el acceso a cualquier elemento por índice."
 
 #: src/ch03-03-custom-data-structures.md:44
 msgid "Allow setting the value of an item at a specific index"
-msgstr ""
+msgstr "Permitir establecer el valor de un elemento en un índice específico."
 
 #: src/ch03-03-custom-data-structures.md:45
 msgid "Return the current length"
-msgstr ""
+msgstr "Devolver la longitud actual."
 
 #: src/ch03-03-custom-data-structures.md:47
 msgid "We can define this interface in Cairo like:"
-msgstr ""
+msgstr "Podemos definir esta interfaz en Cairo como:"
 
 #: src/ch03-03-custom-data-structures.md:60
 msgid ""
 "This provides a blueprint for the implementation of our dynamic array. We "
 "named it Vec as it is similar to the `Vec<T>` data structure in Rust."
 msgstr ""
+"Esto proporciona un modelo para la implementación de nuestra array dinámica. "
+"Lo llamamos Vec porque es similar a la estructura de datos `Vec<T>` de Rust."
 
 #: src/ch03-03-custom-data-structures.md:63
-#, fuzzy
 msgid "Implementing a dynamic array in Cairo"
-msgstr "## Implementando un Trait"
+msgstr "Implementar un Array Dinámico en Cairo"
 
 #: src/ch03-03-custom-data-structures.md:65
 msgid ""
@@ -4188,6 +4436,8 @@ msgid ""
 "(felts) to values. We'll also store a separate `len` field to track the "
 "length."
 msgstr ""
+"Para almacenar nuestros datos, utilizaremos un `Felt252Dict<T>` que asigna números "
+"de índice (felts) a valores. También almacenaremos un campo `len` separado para rastrear la longitud."
 
 #: src/ch03-03-custom-data-structures.md:68
 msgid ""
@@ -4196,6 +4446,9 @@ msgid ""
 "the [Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-"
 "supported-natively) section:"
 msgstr ""
+"Este es el aspecto de nuestra estructura. Envolvemos el tipo `T` dentro del puntero `Nullable` "
+"para permitir el uso de cualquier tipo `T` en nuestra estructura de datos, como se explica en "
+"la sección [Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively):"
 
 #: src/ch03-03-custom-data-structures.md:80
 msgid ""
@@ -4203,18 +4456,25 @@ msgid ""
 "into the dictionary to set or update values in our data structure. For "
 "example, to update a value at a specific index, we do:"
 msgstr ""
+"La clave que hace que este vector sea mutable es que podemos insertar valores en el diccionario "
+"para establecer o actualizar valores en nuestra estructura de datos. Por ejemplo, para actualizar "
+"un valor en un índice específico, hacemos:"
 
 #: src/ch03-03-custom-data-structures.md:91
 msgid ""
 "This overwrites the previously existing value at that index in the "
 "dictionary."
 msgstr ""
+"Esto sobrescribe el valor existente anteriormente en ese índice del "
+"diccionario."
 
 #: src/ch03-03-custom-data-structures.md:93
 msgid ""
 "While arrays are immutable, dictionaries provide the flexibility we need for "
 "modifiable data structures like vectors."
 msgstr ""
+"Mientras que las arrays son inmutables, los diccionarios proporcionan la flexibilidad "
+"que necesitamos para las estructuras de datos modificables, como los vectores."
 
 #: src/ch03-03-custom-data-structures.md:96
 msgid ""
@@ -4222,6 +4482,8 @@ msgid ""
 "implementation of all the methods defined in our interface can be done as "
 "follow :"
 msgstr ""
+"La implementación del resto de la interfaz es sencilla. La implementación de "
+"todos los métodos definidos en nuestra interfaz se puede hacer de la siguiente manera:"
 
 #: src/ch03-03-custom-data-structures.md:133
 msgid ""
@@ -4229,15 +4491,18 @@ msgid ""
 "maintained library [Alexandria](https://github.com/keep-starknet-strange/"
 "alexandria/tree/main/src/data_structures)."
 msgstr ""
+"La implementación completa de la estructura `Vec` puede encontrarse en la libreria "
+"mantenida por la comunidad."
 
 #: src/ch03-03-custom-data-structures.md:137
 msgid "Simulating a Stack with dicts"
-msgstr ""
+msgstr "Simular un Stack con Dicts"
 
 #: src/ch03-03-custom-data-structures.md:139
 msgid ""
 "We will now look at a second example and its implementation details: a Stack."
 msgstr ""
+"A continuación veremos un segundo ejemplo y sus detalles de implementación: un Stack."
 
 #: src/ch03-03-custom-data-structures.md:141
 msgid ""
@@ -4245,30 +4510,33 @@ msgid ""
 "element and removal of an existing element takes place at the same end, "
 "represented as the top of the stack."
 msgstr ""
+"Un Stack es una colección LIFO (último en entrar, primero en salir). La inserción de un "
+"nuevo elemento y la eliminación de un elemento existente tiene lugar en el mismo extremo, "
+"representado como la parte superior de la pila."
 
 #: src/ch03-03-custom-data-structures.md:145
 msgid "Let us define what operations we need to create a stack :"
-msgstr ""
+msgstr "Definamos qué operaciones necesitamos para crear una stack:"
 
 #: src/ch03-03-custom-data-structures.md:147
 msgid "Push an item to the top of the stack"
-msgstr ""
+msgstr "Push un elemento a la parte superior de la stack."
 
 #: src/ch03-03-custom-data-structures.md:148
 msgid "Pop an item from the top of the stack"
-msgstr ""
+msgstr "Pop un elemento de la parte superior de la stack."
 
 #: src/ch03-03-custom-data-structures.md:149
 msgid "Check whether there are still any elements in the stack."
-msgstr ""
+msgstr "Check si todavía hay elementos en la stack."
 
 #: src/ch03-03-custom-data-structures.md:151
 msgid "From these specifications we can define the following interface :"
-msgstr ""
+msgstr "A partir de estas especificaciones podemos definir la siguiente interfaz:"
 
 #: src/ch03-03-custom-data-structures.md:161
 msgid "Implementing a Mutable Stack in Cairo"
-msgstr ""
+msgstr "Implementar un Stack Mutable en Cairo"
 
 #: src/ch03-03-custom-data-structures.md:163
 msgid ""
@@ -4276,15 +4544,18 @@ msgid ""
 "`Felt252Dict<T>` to store the values of the stack along with a `usize` field "
 "to keep track of the length of the stack to iterate over it."
 msgstr ""
+"Para crear una estructura de datos de stack en Cairo, podemos utilizar de nuevo un "
+"`Felt252Dict<T>` para almacenar los valores de la pila junto con un campo `usize` para "
+"llevar la cuenta de la longitud de la stack para iterar sobre ella."
 
 #: src/ch03-03-custom-data-structures.md:167
 msgid "The Stack struct is defined as:"
-msgstr ""
+msgstr "La estructura Stack se define como:"
 
 #: src/ch03-03-custom-data-structures.md:176
 msgid ""
 "Next, let's see how our main functions `push` and `pop` are implemented."
-msgstr ""
+msgstr "A continuación, veamos cómo se implementan nuestras funciones principales `push` y `pop`."
 
 #: src/ch03-03-custom-data-structures.md:201
 msgid ""
@@ -4296,6 +4567,12 @@ msgid ""
 "`len-1` and then decreases the value of `len` to update the position of the "
 "stack top accordingly."
 msgstr ""
+"El código utiliza los métodos `insert` y `get` para acceder a los valores del `Felt252Dict<T>`. "
+"Para empujar un elemento a la parte superior del stack, la función `push` inserta el elemento en "
+"el dict en el índice `len` - y aumenta el campo `len` del stack para mantener la pista de la posición "
+"de la parte superior del stack. Para eliminar un valor, la función `pop` recupera el último valor en "
+"la posición `len-1` y luego disminuye el valor de `len` para actualizar la posición de la parte superior "
+"del stack en consecuencia."
 
 #: src/ch03-03-custom-data-structures.md:209
 msgid ""
@@ -4304,6 +4581,9 @@ msgid ""
 "[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/"
 "src/data_structures) library, in the \"data_structures\" crate."
 msgstr ""
+"La implementación completa del stack, junto con otras estructuras de datos que puedes utilizar en tu código, "
+"se encuentra en la libreria mantenida por la comunidad [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/"
+"src/data_structures), en el paquete  \"data_structures\"."
 
 #: src/ch03-03-custom-data-structures.md:216
 msgid ""
@@ -4314,6 +4594,10 @@ msgid ""
 "applications, effectively hiding the complexity of the underlying memory "
 "model."
 msgstr ""
+"Aunque el modelo de memoria de Cairo es inmutable y puede dificultar la implementación de estructuras de datos "
+"mutables, afortunadamente podemos utilizar el tipo `Felt252Dict<T>` para simular estructuras de datos mutables. "
+"Esto nos permite implementar una amplia gama de estructuras de datos que son útiles para muchas aplicaciones, "
+"ocultando eficazmente la complejidad del modelo de memoria subyacente."
 
 #: src/ch04-00-understanding-ownership.md:1
 #, fuzzy
@@ -10859,14 +11143,6 @@ msgid ""
 "simpler way of doing this task by combining the two steps. At compile-time, "
 "the compiler will create an array and append all values passed to the `array!"
 "` macro sequentially."
-msgstr ""
-
-#: src/ch11-02-macros.md:10
-msgid "Without `array!`:"
-msgstr ""
-
-#: src/ch11-02-macros.md:21
-msgid "With `array!`:"
 msgstr ""
 
 #: src/ch11-02-macros.md:27
