@@ -15,8 +15,8 @@ appending values to arrays. However, it's not very convenient. Let's see how we 
 of the value in the calling function using snapshots.
 
 Here is how you would define and use a `calculate_length` function that takes a
-snapshot to an array as a parameter instead of taking ownership of the underlying value. In this example,
-the `calculate_length` function returns the length of the array passed as parameter.
+snapshot of an array as a parameter instead of taking ownership of the underlying value. In this example,
+the `calculate_length` function returns the length of the array passed as a parameter.
 As we're passing it as a snapshot, which is an immutable view of the array, we can be sure that
 the `calculate_length` function will not mutate the array, and ownership of the array is kept in the main function.
 

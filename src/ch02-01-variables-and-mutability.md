@@ -111,8 +111,21 @@ are currently supported.
 
 Here’s an example of a constant declaration:
 
-```rust, noplayground
+```rust
+// Define a constant representing one hour in seconds
 const ONE_HOUR_IN_SECONDS: u32 = 3600;
+
+fn main() {
+    // Print the value of the constant
+    println!("x = {}", ONE_HOUR_IN_SECONDS);
+}
+```
+When we run the program now, we get this:
+
+```shell
+$ scarb cairo-run
+x = 3600
+Run completed successfully, returning []
 ```
 
 Cairo's naming convention for constants is to use all uppercase with
