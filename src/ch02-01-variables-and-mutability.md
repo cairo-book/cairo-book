@@ -125,6 +125,7 @@ When we run the program now, we get this:
 ```shell
 $ scarb cairo-run
 x = 3600
+
 Run completed successfully, returning []
 ```
 
