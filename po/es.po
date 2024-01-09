@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: The Cairo Programming Language\n"
 "POT-Creation-Date: 2023-11-21T20:02:02+01:00\n"
 "PO-Revision-Date: 2023-06-26 00:08+0100\n"
-"Last-Translator: dami <pinonesdamian@gmail.com>\n"
+"Last-Translator: Leandro <carvajal.leandro.94@gmail.com>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,7 @@ msgstr ""
 
 #: src/SUMMARY.md:1 src/title-page.md:1
 msgid "The Cairo Programming Language"
-msgstr "El lenguaje de programación Cairo"
+msgstr "El Lenguaje de Programación Cairo"
 
 #: src/SUMMARY.md:3
 #, fuzzy
@@ -23,7 +23,7 @@ msgstr "El lenguaje de programación Cairo"
 
 #: src/SUMMARY.md:7 src/SUMMARY.md:9 src/ch01-00-getting-started.md:1
 msgid "Getting Started"
-msgstr "Primeros pasos"
+msgstr "Primeros Pasos"
 
 #: src/SUMMARY.md:11 src/ch01-01-installation.md:1
 #: src/ch01-01-installation.md:19
@@ -32,20 +32,20 @@ msgstr "Instalación"
 
 #: src/SUMMARY.md:12
 msgid "Hello, World!"
-msgstr "¡Hola, mundo!"
+msgstr "¡Hola, Mundo!"
 
 #: src/SUMMARY.md:14 src/SUMMARY.md:16
 #: src/ch02-00-common-programming-concepts.md:1
 msgid "Common Programming Concepts"
-msgstr "Conceptos comunes de programación"
+msgstr "Conceptos Comunes de Programación"
 
 #: src/SUMMARY.md:17 src/ch02-01-variables-and-mutability.md:1
 msgid "Variables and Mutability"
-msgstr "Variables y mutabilidad"
+msgstr "Variables y Mutabilidad"
 
 #: src/SUMMARY.md:18 src/ch02-02-data-types.md:1
 msgid "Data Types"
-msgstr "Tipos de datos"
+msgstr "Tipos de Datos"
 
 #: src/SUMMARY.md:19 src/ch02-03-functions.md:1
 msgid "Functions"
@@ -57,7 +57,7 @@ msgstr "Comentarios"
 
 #: src/SUMMARY.md:21 src/ch02-05-control-flow.md:1
 msgid "Control Flow"
-msgstr "Flujo de control"
+msgstr "Flujo de Control"
 
 #: src/SUMMARY.md:23 src/SUMMARY.md:25 src/ch03-00-common-collections.md:1
 msgid "Common Collections"
@@ -91,24 +91,24 @@ msgstr "Referencias y Snapshots"
 #: src/SUMMARY.md:36 src/SUMMARY.md:38
 #: src/ch05-00-using-structs-to-structure-related-data.md:1
 msgid "Using Structs to Structure Related Data"
-msgstr "Uso de estructuras para estructurar datos relacionados"
+msgstr "Uso de Structs para Estructurar Datos Relacionados"
 
 #: src/SUMMARY.md:39 src/ch05-01-defining-and-instantiating-structs.md:1
 msgid "Defining and Instantiating Structs"
-msgstr "Definición e instanciación de estructuras"
+msgstr "Definición e Instanciación de Structs"
 
 #: src/SUMMARY.md:40 src/ch05-02-an-example-program-using-structs.md:1
 msgid "An Example Program Using Structs"
-msgstr "Un programa de ejemplo usando estructuras"
+msgstr "Un Programa de Ejemplo Usando Structs"
 
 #: src/SUMMARY.md:41 src/ch05-03-method-syntax.md:1
 msgid "Method Syntax"
-msgstr "Sintaxis de métodos"
+msgstr "Sintaxis de Métodos"
 
 #: src/SUMMARY.md:43 src/SUMMARY.md:45
 #: src/ch06-00-enums-and-pattern-matching.md:1
 msgid "Enums and Pattern Matching"
-msgstr "Enums y Concordancia de Patrones"
+msgstr "Enums y Comparación de Pattern"
 
 #: src/SUMMARY.md:46 src/ch06-01-enums.md:1
 #: src/ch08-01-generic-data-types.md:163
@@ -130,12 +130,12 @@ msgstr "Paquetes y Crates"
 
 #: src/SUMMARY.md:54 src/ch07-02-defining-modules-to-control-scope.md:1
 msgid "Defining Modules to Control Scope"
-msgstr "Definición de módulos para controlar el alcance"
+msgstr "Definición de Módulos para Controlar el Alcance"
 
 #: src/SUMMARY.md:55
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:1
 msgid "Paths for Referring to an Item in the Module Tree"
-msgstr "Rutas para referirse a un elemento en el Arbol de Módulos"
+msgstr "Paths Para Referirse a Un Item en el Arbol de Módulos"
 
 #: src/SUMMARY.md:56
 msgid "Bringing Paths into Scope with the 'use' Keyword"
@@ -191,7 +191,7 @@ msgstr "Funciones Avanzadas"
 
 #: src/SUMMARY.md:84 src/ch11-01-operator-overloading.md:1
 msgid "Operator Overloading"
-msgstr "Sobrecarga de Operadores"
+msgstr "Sobrecarga del Operador"
 
 #: src/SUMMARY.md:85 src/ch11-02-macros.md:1
 msgid "Macros"
@@ -208,15 +208,15 @@ msgstr "Starknet Smart Contracts"
 
 #: src/SUMMARY.md:91 src/ch99-01-01-introduction-to-smart-contracts.md:1
 msgid "Introduction to smart-contracts"
-msgstr "Introducción a los smart-contracts"
+msgstr "Introducción a los Smart-Contracts"
 
 #: src/SUMMARY.md:92 src/ch99-01-02-a-simple-contract.md:1
 msgid "A simple contract"
-msgstr "Un simple contrato"
+msgstr "Un Contrato Simple"
 
 #: src/SUMMARY.md:93 src/ch99-01-03-00-a-deeper-dive-into-contracts.md:1
 msgid "A deeper dive into contracts"
-msgstr "Una inmersión más profunda en contratos"
+msgstr "Profundizar en los Contratos"
 
 #: src/SUMMARY.md:95 src/ch99-01-03-01-contract-storage.md:1
 msgid "Contract Storage"
@@ -232,7 +232,7 @@ msgstr "Eventos de Contrato"
 
 #: src/SUMMARY.md:98 src/ch99-01-03-04-reducing-boilerplate.md:1
 msgid "Reducing boilerplate"
-msgstr "Reducion de codigo repetitivo"
+msgstr "Reducion de Codigo Repetitivo"
 
 #: src/SUMMARY.md:99
 msgid "Optimizing storage costs"
@@ -256,15 +256,15 @@ msgstr "Prueba de Componentes"
 
 #: src/SUMMARY.md:107
 msgid "ABIs and Cross-contract Interactions"
-msgstr "ABIs e Interacciones entre Contratos Multicapa"
+msgstr "ABIs e Interacciones entre Cross-contract"
 
 #: src/SUMMARY.md:109
 msgid "ABIs and Interfaces"
-msgstr "ABIs e interfaces"
+msgstr "ABIs e Interfaces"
 
 #: src/SUMMARY.md:110
 msgid "Contract Dispatchers, Library Dispachers and system calls"
-msgstr "Despachadores de contratos, despachadores de librerías y llamadas del sistema"
+msgstr "Contract Dispatchers, Library Dispachers y system calls"
 
 #: src/SUMMARY.md:112 src/ch99-01-04-00-other-examples.md:1
 msgid "Other examples"
@@ -272,7 +272,7 @@ msgstr "Otros Ejemplos"
 
 #: src/SUMMARY.md:114 src/ch99-01-04-01-voting-contract.md:1
 msgid "Deploying and Interacting with a Voting contract"
-msgstr "Desplegando e Interactuando con un Contrato de Votación"
+msgstr "Desplegando e Interactuando con Un Contrato de Votación"
 
 #: src/SUMMARY.md:116
 msgid "L1 \\<\\> L2 Messaging"
@@ -288,7 +288,7 @@ msgstr "Apéndice"
 
 #: src/SUMMARY.md:121
 msgid "A - Keywords"
-msgstr "A - Palabras clave"
+msgstr "A - Palabras Clave"
 
 #: src/SUMMARY.md:122
 msgid "B - Operators and Symbols"
@@ -304,11 +304,11 @@ msgstr "D - Herramientas de Desarrollo Útiles"
 
 #: src/SUMMARY.md:125
 msgid "E - Common Types & Traits and the Cairo Prelude"
-msgstr "E - "
+msgstr "E - Tipos Comunes, Traits y Cairo Prelude"
 
 #: src/SUMMARY.md:126
 msgid "F - Installing Cairo binaries"
-msgstr "F - Instalación de los binarios Cairo"
+msgstr "F - Instalación de los binarios de Cairo"
 
 #: src/title-page.md:3
 msgid ""
@@ -426,7 +426,7 @@ msgstr "Introducción"
 
 #: src/ch00-00-introduction.md:3
 msgid "What is Cairo?"
-msgstr "¿Qué es Cairo?"
+msgstr "¿Qué Es Cairo?"
 
 #: src/ch00-00-introduction.md:5
 msgid ""
@@ -457,7 +457,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:8
 msgid "What can you do with it?"
-msgstr "¿Qué puedes hacer con Cairo?"
+msgstr "¿Qué Puedes Hacer con Cairo?"
 
 #: src/ch00-00-introduction.md:10
 msgid ""
@@ -491,7 +491,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:12
 msgid "What are the differences with other programming languages?"
-msgstr "¿Cuáles son las diferencias con otros lenguajes de programación?"
+msgstr "¿Cuáles Son las Diferencias con Otros Lenguajes de Programación?"
 
 #: src/ch00-00-introduction.md:14
 msgid ""
@@ -686,7 +686,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:39
 msgid "Installing the VSCode extension"
-msgstr "Instalación de la extensión VSCode"
+msgstr "Instalación de la Extensión VSCode"
 
 #: src/ch01-01-installation.md:41
 msgid ""
@@ -704,7 +704,7 @@ completado de código,y otras características útiles. Puedes instalarla desde 
 
 #: src/ch01-02-hello-world.md:1
 msgid "Hello, World"
-msgstr "¡Hola, mundo!"
+msgstr "¡Hola, Mundo!"
 
 #: src/ch01-02-hello-world.md:3
 msgid ""
@@ -1001,7 +1001,7 @@ msgstr ""
 
 #: src/ch01-02-hello-world.md:114
 msgid "Building a Scarb Project"
-msgstr "Crear un proyecto con Scarb"
+msgstr "Crear un Proyecto con Scarb"
 
 #: src/ch01-02-hello-world.md:116
 msgid ""
@@ -1287,7 +1287,6 @@ msgstr ""
 "que empezar."
 
 #: src/ch02-01-variables-and-mutability.md:3
-#, fuzzy
 msgid ""
 "Cairo uses an immutable memory model, meaning that once a memory cell is "
 "written to, it can't be overwritten but only read from. To reflect this "
@@ -1297,38 +1296,31 @@ msgid ""
 "immutability, and how you can make your variables mutable."
 msgstr ""
 "Cairo usa un modelo de memoria inmutable, lo que significa que una vez que "
-"se escribe en\n"
-" una celda de memoria, no puede ser sobrescrita sino sólo leída. Para "
-"reflejar este modelo \n"
-"de memoria inmutable, las variables en Cairo son inmutables por defecto.\n"
-"Sin embargo, el lenguaje abstrae este modelo y te da la opción de hacer tus\n"
-"variables mutables. Exploremos cómo y por qué Cairo impone la inmutabilidad, "
-"y cómo\n"
-"puedes hacer tus variables mutables."
+"se escribe en una celda de memoria, no se puede sobrescribir, sino solo leer. "
+"Para reflejar este modelo de memoria inmutable, las variables en Cairo son "
+"inmutables por defecto. Sin embargo, el lenguaje abstrae este modelo y te da "
+"la opción de hacer tus variables mutables. Exploremos cómo y por qué Cairo "
+"impone la inmutabilidad, y cómo puedes hacer tus variables mutables."
 
 #: src/ch02-01-variables-and-mutability.md:10
-#, fuzzy
 msgid ""
-"When a variable is immutable, once a value is bound to a name, you can’t "
-"change that value. To illustrate this, generate a new project called "
+"When a variable is immutable, once a variable is bound to a value, you can’t "
+"change that variable. To illustrate this, generate a new project called "
 "_variables_ in your _cairo_projects_ directory by using `scarb new "
 "variables`."
 msgstr ""
 "Cuando una variable es inmutable, una vez que un valor está ligado a un "
-"nombre, no\n"
-" puedes cambiar ese valor. Para ilustrar esto, genera un nuevo proyecto "
-"llamado _\n"
-"variables_ en tu directorio _cairo_projects_ usando `scarb new variables`."
+"nombre, no puedes cambiar ese valor. Para ilustrar esto, genera un nuevo "
+"proyecto llamado _variables_ en tu directorio _cairo_projects_ usando "
+"`scarb new variables`."
 
 #: src/ch02-01-variables-and-mutability.md:14
-#, fuzzy
 msgid ""
 "Then, in your new _variables_ directory, open _src/lib.cairo_ and replace "
 "its code with the following code, which won’t compile just yet:"
 msgstr ""
-"A continuación, en su nuevo directorio _variables_, abra _src/lib.cairo_ y "
-"sustituya \n"
-"su código por el siguiente, que todavía no compilará:"
+"A continuación, en tu nuevo directorio _variables_, abra _src/lib.cairo_ y "
+"sustituya su código por el siguiente, que todavía no compilará:"
 
 #: src/ch02-01-variables-and-mutability.md:17
 #: src/ch02-01-variables-and-mutability.md:77
@@ -1368,23 +1360,20 @@ msgstr ""
 #: src/ch09-01-how-to-write-tests.md:527 src/ch09-01-how-to-write-tests.md:563
 #: src/ch09-02-test-organization.md:30 src/ch09-02-test-organization.md:59
 #: src/ch10-01-unrecoverable-errors-with-panic.md:9
-#, fuzzy
 msgid "Filename: src/lib.cairo"
-msgstr "<span class=\"filename\">Filename: src/lib.cairo</span>"
+msgstr "Archivo: src/lib.cairo"
 
 #: src/ch02-01-variables-and-mutability.md:30
-#, fuzzy
 msgid ""
-"Save and run the program using `scarb cairo-run`. You should receive an "
-"error message regarding an immutability error, as shown in this output:"
+"Save and run the program using `scarb cairo-run --available-gas=200000000`. "
+"You should receive an error message regarding an immutability error, as "
+"shown in this output:"
 msgstr ""
-"Guarde y ejecute el programa utilizando `cairo-run src/lib.cairo`. Debería "
-"recibir un mensaje \n"
-"de error relativo a un error de inmutabilidad, como se muestra en esta "
-"salida:"
+"Guarda y ejecuta el programa usando scarb cairo-run --available-gas=200000000. "
+"Deberías recibir un mensaje de error relacionado con un error de inmutabilidad, "
+"como se muestra en esta salida:"
 
 #: src/ch02-01-variables-and-mutability.md:42
-#, fuzzy
 msgid ""
 "This example shows how the compiler helps you find errors in your programs. "
 "Compiler errors can be frustrating, but really they only mean your program "
@@ -1393,27 +1382,20 @@ msgid ""
 "errors."
 msgstr ""
 "Este ejemplo muestra cómo el compilador te ayuda a encontrar errores en "
-"tus \n"
-"programas. Los errores del compilador pueden ser frustrantes, pero en "
-"realidad \n"
-"sólo significan que su programa todavía no está haciendo con seguridad lo "
-"que usted \n"
-"quiere que haga; ¡no significan que usted no sea un buen programador! Los "
-"Caironautas \n"
-"experimentados siguen teniendo errores de compilador."
+"tus programas. Los errores del compilador pueden ser frustrantes, pero en "
+"realidad sólo significan que tu programa aún no está haciendo de manera "
+"segura lo que deseas; ¡no significan que seas un buen programador! Los "
+"Caironautas experimentados siguen teniendo errores de compilador."
 
 #: src/ch02-01-variables-and-mutability.md:47
-#, fuzzy
 msgid ""
 "You received the error message `Cannot assign to an immutable variable.` "
 "because you tried to assign a second value to the immutable `x` variable."
 msgstr ""
 "Recibiste el mensaje de error `Cannot assign to an immutable variable.` "
-"porque \n"
-"intentaste asignar un segundo valor a la variable inmutable `x`."
+"porque intentaste asignar un segundo valor a la variable inmutable `x`."
 
 #: src/ch02-01-variables-and-mutability.md:50
-#, fuzzy
 msgid ""
 "It’s important that we get compile-time errors when we attempt to change a "
 "value that’s designated as immutable because this specific situation can "
@@ -1422,49 +1404,42 @@ msgid ""
 "it’s possible that the first part of the code won’t do what it was designed "
 "to do. The cause of this kind of bug can be difficult to track down after "
 "the fact, especially when the second piece of code changes the value only "
-"_sometimes_. The Cairo compiler guarantees that when you state that a value "
-"won’t change, it really won’t change, so you don’t have to keep track of it "
-"yourself. Your code is thus easier to reason through."
+"_sometimes_."
 msgstr ""
 "Es importante que obtengamos errores en tiempo de compilación cuando "
-"intentamos \n"
-"cambiar un valor designado como inmutable porque esta situación específica "
-"puede\n"
-" conducir a errores. Si una parte de nuestro código opera bajo la suposición "
-"de que un\n"
-" valor nunca cambiará y otra parte de nuestro código cambia ese valor, es "
-"posible\n"
-"que la primera parte del código no haga lo que fue diseñada para hacer. La "
-"causa de este \n"
-"tipo de error puede ser difícil de rastrear después de los hechos, "
-"especialmente cuando la \n"
-"segunda parte del código cambia el valor sólo _a veces_. El compilador Cairo "
-"garantiza que \n"
-"cuando dices que un valor no cambiará, realmente no cambiará, por lo que no "
-"tiene que hacer \n"
-"un seguimiento. Su código es así más fácil de razonar."
+"intentamos cambiar un valor designado como inmutable porque esta situación "
+"específica puede conducir a errores. Si una parte de nuestro código opera "
+"bajo la suposición de que un valor nunca cambiará y otra parte de nuestro "
+"código cambia ese valor, es posible que la primera parte del código no haga "
+"lo que fue diseñada para hacer. La causa de este tipo de error puede ser "
+"difícil de rastrear después de los hechos, especialmente cuando la segunda "
+"parte del código cambia el valor sólo _a veces_."
 
-#: src/ch02-01-variables-and-mutability.md:61
-#, fuzzy
+#: src/ch02-01-variables-and-mutability.md:58
+msgid ""
+"Cairo, unlike most other languages, has immutable memory. This makes a whole "
+"class of bugs impossible, because values will never change unexpectedly. "
+"This makes code easier to reason about."
+msgstr ""
+"Cairo, a diferencia de la mayoría de los otros lenguajes, tiene memoria inmutable. "
+"Esto hace que una clase completa de errores sea imposible, porque los valores nunca "
+"cambiarán inesperadamente. Esto facilita el razonamiento sobre el código."
+
+#: src/ch02-01-variables-and-mutability.md:62
 msgid ""
 "But mutability can be very useful, and can make code more convenient to "
 "write. Although variables are immutable by default, you can make them "
 "mutable by adding `mut` in front of the variable name. Adding `mut` also "
 "conveys intent to future readers of the code by indicating that other parts "
-"of the code will be changing this variable’s value."
+"of the code will be changing the value associated to this variable."
 msgstr ""
 "Pero la mutabilidad puede ser muy útil, y puede hacer que el código sea más "
-"cómodo \n"
-"de escribir. Aunque las variables son inmutables por defecto, puedes "
-"hacerlas mutables \n"
-"añadiendo `mut` delante del nombre de la variable. Añadir `mut` también "
-"transmite \n"
-"intención a los futuros lectores del código indicando que otras partes del "
-"código \n"
-"cambiarán el valor de esta variable."
+"cómodo de escribir. Aunque las variables son inmutables por defecto, puedes "
+"hacerlas mutables añadiendo `mut` delante del nombre de la variable. Añadir "
+"`mut` también transmite intención a los futuros lectores del código indicando "
+"que otras partes del código cambiarán el valor de esta variable."
 
 #: src/ch02-01-variables-and-mutability.md:67
-#, fuzzy
 msgid ""
 "However, you might be wondering at this point what exactly happens when a "
 "variable is declared as `mut`, as we previously mentioned that Cairo's "
@@ -1477,21 +1452,14 @@ msgid ""
 "change."
 msgstr ""
 "Sin embargo, puede que en este punto te estés preguntando qué ocurre "
-"exactamente \n"
-"cuando una variable es declarada como `mut`, ya que previamente mencionamos "
-"que la \n"
-"memoria de Cairo es inmutable.\n"
-"La respuesta es que la memoria de Cairo es inmutable, pero la dirección de "
-"memoria a la \n"
+"exactamente cuando una variable es declarada como `mut`, ya que "
+"previamente mencionamos que la memoria de Cairo es inmutable. La respuesta "
+"es que la memoria de Cairo es inmutable, pero la dirección de memoria a la "
 "que apunta la variable puede ser cambiada. Al examinar el código ensamblador "
-"de bajo nivel \n"
-"de Cairo, queda claro que la mutación de variables se implementa como azúcar "
-"sintáctico, \n"
-"que traduce las operaciones de mutación en una serie de pasos equivalentes "
-"al shadowing \n"
-"de variables. La única diferencia es que en el nivel la variable no se "
-"vuelve a declarar, por lo \n"
-"que su tipo no puede cambiar."
+"de bajo nivel de Cairo, queda claro que la mutación de variables se implementa "
+"como azúcar sintáctico, que traduce las operaciones de mutación en una serie "
+"de pasos equivalentes al shadowing de variables. La única diferencia es que "
+"en el nivel la variable no se vuelve a declarar, por lo que su tipo no puede cambiar."
 
 #: src/ch02-01-variables-and-mutability.md:75
 msgid "For example, let’s change _src/lib.cairo_ to the following:"
@@ -1501,39 +1469,58 @@ msgstr "Por ejemplo, cambiemos _src/lib.cairo_ por lo siguiente:"
 msgid "When we run the program now, we get this:"
 msgstr "Cuando ejecutamos el programa ahora, obtenemos esto:"
 
+#: src/ch02-01-variables-and-mutability.md:70
+msgid ""
+"However, you might be wondering at this point what exactly happens when a "
+"variable is declared as `mut`, as we previously mentioned that Cairo's "
+"memory is immutable. The answer is that the _value_ is immutable, but the "
+"_variable_ isn't. What value the variable points to can be changed. "
+"Assigning to a mutable variable in Cairo is essentially equivalent to "
+"redeclaring it to refer to another value in another memory cell, but the "
+"compiler handles that for you, and the keyword `mut` makes it explicit. Upon "
+"examining the low-level Cairo Assembly code, it becomes clear that variable "
+"mutation is implemented as syntactic sugar, which translates mutation "
+"operations into a series of steps equivalent to variable shadowing. The only "
+"difference is that at the Cairo level, the variable is not redeclared so its "
+"type cannot change."
+msgstr ""
+"Sin embargo, puede que te estés preguntando en este punto qué ocurre exactamente "
+"cuando una variable se declara como `mut`, ya que anteriormente mencionamos que "
+"la memoria de Cairo es inmutable. La respuesta es que el _valor_ es inmutable, "
+"pero la _variable_ no lo es. El valor al que apunta la variable puede ser cambiado. "
+"Asignar a una variable mutable en Cairo es esencialmente equivalente a redeclararla "
+"para referirse a otro valor en otra celda de memoria, pero el compilador se encarga "
+"de ello, y la palabra clave `mut` lo hace explícito. Al examinar el código ensamblador "
+"de bajo nivel de Cairo, queda claro que la mutación se implementa como azúcar "
+"sintáctico, que traduce las operaciones de mutación las operaciones de mutación en una "
+"serie de pasos equivalentes al shadowing de variables. La única diferencia es que en "
+"el nivel Cairo, la variable no se vuelve a declarar, por lo que su tipo no puede cambiar."
+
 #: src/ch02-01-variables-and-mutability.md:100
-#, fuzzy
 msgid ""
 "We’re allowed to change the value bound to `x` from `5` to `6` when `mut` is "
 "used. Ultimately, deciding whether to use mutability or not is up to you and "
 "depends on what you think is clearest in that particular situation."
 msgstr ""
 "Se nos permite cambiar el valor ligado a `x` de `5` a `6` cuando se usa "
-"`mut`. \n"
-"En última instancia, la decisión de utilizar la mutabilidad o no es suya y "
-"depende \n"
-"de lo que usted piensa que es más claro en esa situación particular."
+"`mut`. En última instancia, la decisión de utilizar la mutabilidad o no "
+"es suya y depende de lo que usted piensa que es más claro en esa situación particular."
 
 #: src/ch02-01-variables-and-mutability.md:104
-#, fuzzy
 msgid "Constants"
-msgstr "##### Constantes"
+msgstr "Constantes"
 
 #: src/ch02-01-variables-and-mutability.md:106
-#, fuzzy
 msgid ""
 "Like immutable variables, _constants_ are values that are bound to a name "
 "and are not allowed to change, but there are a few differences between "
 "constants and variables."
 msgstr ""
-"Al igual que las variables inmutables, las _constantes_ son valores que "
-"están\n"
-" vinculados a un nombre y no se les permite cambiar, pero hay algunas "
-"diferencias \n"
-"entre las constantes y las variables."
+"Al igual que las variables inmutables, las _constants_ son valores que "
+"están vinculados a un nombre y no se les permite cambiar, pero hay algunas "
+"diferencias entre las constantes y las variables."
 
 #: src/ch02-01-variables-and-mutability.md:110
-#, fuzzy
 msgid ""
 "First, you aren’t allowed to use `mut` with constants. Constants aren’t just "
 "immutable by default—they’re always immutable. You declare constants using "
@@ -1543,55 +1530,44 @@ msgid ""
 "details right now. Just know that you must always annotate the type."
 msgstr ""
 "En primer lugar, no se permite el uso de `mut` con las constantes. Las "
-"constantes \n"
-"no son solo inmutables por defecto, sino que siempre son inmutables. Se "
-"declaran \n"
-"constantes usando la palabra clave `const` en lugar de la palabra clave "
-"`let`, y el tipo de\n"
-" valor _debe_ ser anotado. Cubriremos los tipos y las anotaciones de tipo en "
-"la próxima\n"
-" sección, [“Tipos de datos”][tipos-de-datos], así que no se preocupe por "
-"los \n"
-"detalles por ahora. Solo sepa que siempre debe anotar el tipo."
+"constantes no son solo inmutables por defecto, sino que siempre son inmutables. "
+"Se declaran constantes usando la palabra clave `const` en lugar de la palabra "
+"clave `let`, y el tipo de valor _must_ ser anotado. Cubriremos los tipos y las "
+"anotaciones de tipo en la próxima sección, [“Data Types”](ch02-02-data-types.md), "
+"así que no se preocupe por los detalles por ahora. Solo sepa que siempre debe "
+"anotar el tipo."
 
 #: src/ch02-01-variables-and-mutability.md:117
-#, fuzzy
 msgid ""
 "Constants can only be declared in the global scope, which makes them useful "
 "for values that many parts of code need to know about."
 msgstr ""
 "Las constantes solo se pueden declarar en el ámbito global, lo que las "
-"hace \n"
-"útiles para valores que muchas partes del código deben conocer."
+"hace útiles para valores que muchas partes del código necesitan conocer."
 
 #: src/ch02-01-variables-and-mutability.md:120
-#, fuzzy
 msgid ""
 "The last difference is that constants may be set only to a constant "
 "expression, not the result of a value that could only be computed at "
 "runtime. Only literal constants are currently supported."
 msgstr ""
 "La última diferencia es que las constantes solo pueden ser asignadas a una "
-"expresión \n"
-"constante, no al resultado de un valor que solo se podría calcular en tiempo "
-"de ejecución. \n"
-"Actualmente, solo se admiten constantes literales."
+"expresión constante, no al resultado de un valor que solo se podría calcular "
+"en tiempo de ejecución. Actualmente, solo se admiten constantes literales."
 
 #: src/ch02-01-variables-and-mutability.md:124
 msgid "Here’s an example of a constant declaration:"
 msgstr "Aquí hay un ejemplo de declaración de constante:"
 
 #: src/ch02-01-variables-and-mutability.md:130
-#, fuzzy
 msgid ""
 "Cairo's naming convention for constants is to use all uppercase with "
 "underscores between words."
 msgstr ""
-"La convención de nomenclatura de Cairo para las constantes es usar todas\n"
-" las mayúsculas con guiones bajos entre palabras."
+"La convención de nomenclatura de Cairo para las constantes es utilizar "
+"mayúsculas con guiones bajos entre palabras."
 
 #: src/ch02-01-variables-and-mutability.md:133
-#, fuzzy
 msgid ""
 "Constants are valid for the entire time a program runs, within the scope in "
 "which they were declared. This property makes constants useful for values in "
@@ -1600,38 +1576,30 @@ msgid ""
 "allowed to earn, or the speed of light."
 msgstr ""
 "Las constantes son válidas durante todo el tiempo que se ejecuta un "
-"programa, \n"
-"dentro del ámbito en el que fueron declaradas. Esta propiedad hace que las "
-"constantes \n"
-"sean útiles para los valores en el dominio de su aplicación que varias "
-"partes del programa \n"
-"podrían necesitar conocer, como el número máximo de puntos que cualquier "
-"jugador de \n"
-"un juego puede ganar o la velocidad de la luz."
+"programa, dentro del ámbito en el que fueron declaradas. Esta propiedad "
+"hace que las constantes sean útiles para los valores en el dominio de su "
+"aplicación que varias partes del programa podrían necesitar conocer, "
+"como el número máximo de puntos que cualquier jugador de un juego puede "
+"ganar o la velocidad de la luz."
 
-#: src/ch02-01-variables-and-mutability.md:139
-#, fuzzy
+#: src/ch02-01-variables-and-mutability.md:139  
 msgid ""
 "Naming hardcoded values used throughout your program as constants is useful "
 "in conveying the meaning of that value to future maintainers of the code. It "
 "also helps to have only one place in your code you would need to change if "
 "the hardcoded value needed to be updated in the future."
 msgstr ""
-"Nombrar los valores codificados en duro utilizados en todo el programa "
-"como \n"
-"constantes es útil para transmitir el significado de ese valor a los futuros "
-"mantenedores\n"
-" del código. También ayuda a tener solo un lugar en su código donde tendría "
-"que cambiar\n"
-" si el valor codificado en duro necesitara ser actualizado en el futuro."
+"Nombrar los valores codificados en el programa como constantes y usarlas en "
+"todo el código es útil para transmitir el significado de ese valor a los futuros "
+"mantenedores del código. También ayuda a tener solo un lugar en tu código que "
+"necesitarías cambiar si el valor codificado necesitara ser actualizado en el futuro."
 
 #: src/ch02-01-variables-and-mutability.md:144
 #, fuzzy
 msgid "Shadowing"
-msgstr "### Shadowing"
+msgstr "Shadowing"
 
 #: src/ch02-01-variables-and-mutability.md:146
-#, fuzzy
 msgid ""
 "Variable shadowing refers to the declaration of a new variable with the same "
 "name as a previous variable. Caironautes say that the first variable is "
@@ -1642,23 +1610,16 @@ msgid ""
 "shadow a variable by using the same variable’s name and repeating the use of "
 "the `let` keyword as follows:"
 msgstr ""
-"La sombra de una variable se refiere a la declaración de una nueva variable "
-"con \n"
-"el mismo nombre que una variable anterior. Los caironautas dicen que la "
-"primera \n"
-"variable está _sombreada_ por la segunda, lo que significa que el compilador "
-"verá \n"
-"la segunda variable cuando use el nombre de la variable. En efecto, la "
-"segunda \n"
-"variable oculta la primera, tomando cualquier uso del nombre de la variable "
-"para sí \n"
-"misma hasta que ella misma sea sombreada o que el ámbito termine. Podemos \n"
-"sombrear una variable usando el mismo nombre de la variable y repitiendo el "
-"uso de \n"
-"la palabra clave `let` de la siguiente manera:"
+"El shadowing (sombreado) de variables se refiere a la declaración de una nueva "
+"variable con el mismo nombre que una variable anterior. Los Caironautas dicen "
+"que la primera variable está sombreada por la segunda, lo que significa que la "
+"segunda variable es la que el compilador verá cuando uses el nombre de la "
+"variable. En efecto, la segunda variable eclipsa a la primera, tomando cualquier "
+"uso del nombre de la variable para sí misma hasta que ella misma sea sombreada o "
+"termine el ámbito. Podemos sombrear una variable usando el mismo nombre de la "
+"variable y repitiendo el uso de la palabra clave `let` de la siguiente manera:"
 
 #: src/ch02-01-variables-and-mutability.md:172
-#, fuzzy
 msgid ""
 "This program first binds `x` to a value of `5`. Then it creates a new "
 "variable `x` by repeating `let x =`, taking the original value and adding "
@@ -1668,20 +1629,16 @@ msgid ""
 "value of `12`. When that scope is over, the inner shadowing ends and `x` "
 "returns to being `6`. When we run this program, it will output the following:"
 msgstr ""
-"Este programa primero asigna un valor de `5` a `x`. Luego crea una nueva \n"
+"Este programa primero asigna un valor de `5` a `x`. Luego crea una nueva "
 "variable `x` repitiendo `let x =`, tomando el valor original y sumando "
-"`1`, \n"
-"por lo que el valor de `x` es ahora `6`. Luego, dentro de un ámbito "
-"interno \n"
-"creado con llaves, la tercera instrucción `let` también sombrea `x` y crea \n"
-"una nueva variable, multiplicando el valor anterior por `2` para darle a "
-"`x` \n"
-"un valor de `12`. Cuando ese ámbito termina, la sombra interna termina y "
-"`x`\n"
-" vuelve a ser `6`. Al ejecutar este programa, se mostrará lo siguiente:"
+"`1`, por lo que el valor de `x` es ahora `6`. Luego, dentro de un ámbito "
+"interno creado con llaves, la tercera instrucción `let` también sombrea "
+"`x` y crea una nueva variable, multiplicando el valor anterior por `2` "
+"para darle a `x` un valor de `12`. Cuando ese ámbito termina, la sombra "
+"interna termina y `x` vuelve a ser `6`. Al ejecutar este programa, se "
+"mostrará lo siguiente:"
 
 #: src/ch02-01-variables-and-mutability.md:194
-#, fuzzy
 msgid ""
 "Shadowing is different from marking a variable as `mut` because we’ll get a "
 "compile-time error if we accidentally try to reassign to this variable "
@@ -1689,18 +1646,13 @@ msgid ""
 "transformations on a value but have the variable be immutable after those "
 "transformations have been completed."
 msgstr ""
-"El sombreado es diferente de marcar una variable como `mut`, porque "
-"obtendremos \n"
-"un error en tiempo de compilación si intentamos reasignar a esta variable "
-"sin usar la \n"
-"palabra clave `let`. Al usar `let`, podemos realizar algunas "
-"transformaciones en un \n"
-"valor pero hacer que la variable sea inmutable después de que se hayan "
-"completado \n"
-"esas transformaciones."
+"El shadowing es diferente a marcar una variable como `mut`, porque obtendremos "
+"un error en tiempo de compilación si intentamos reasignar a esta variable sin "
+"usar la palabra clave `let`. Al usar `let`, podemos realizar algunas "
+"transformaciones en un valor pero hacer que la variable sea inmutable después "
+"de que se hayan completado esas transformaciones."
 
 #: src/ch02-01-variables-and-mutability.md:200
-#, fuzzy
 msgid ""
 "Another distinction between `mut` and shadowing is that when we use the "
 "`let` keyword again, we are effectively creating a new variable, which "
@@ -1724,7 +1676,6 @@ msgid "// converts x to a felt, type annotation is required.\n"
 msgstr ""
 
 #: src/ch02-01-variables-and-mutability.md:219
-#, fuzzy
 msgid ""
 "The first `x` variable has a `u64` type while the second `x` variable has a "
 "`felt252` type. Shadowing thus spares us from having to come up with "
@@ -1733,12 +1684,10 @@ msgid ""
 "we’ll get a compile-time error:"
 msgstr ""
 "El primer variable `x` tiene un tipo `u64`, mientras que la segunda variable "
-"`x` tiene un tipo `felt252`.\n"
-"Por lo tanto, el shadowing nos ahorra tener que inventar diferentes nombres, "
-"como `x_u64` y `x_felt252`; \n"
-"en su lugar, podemos reutilizar el nombre más simple `x`. Sin embargo, si "
-"intentamos usar `mut` para esto, \n"
-"como se muestra aquí, obtendremos un error en tiempo de compilación:"
+"`x` tiene un tipo `felt252`. Por lo tanto, el shadowing nos ahorra tener que "
+"inventar diferentes nombres, como `x_u64` y `x_felt252`; en su lugar, podemos "
+"reutilizar el nombre más simple `x`. Sin embargo, si intentamos usar `mut` "
+"para esto, como se muestra aquí, obtendremos un error en tiempo de compilación:"
 
 #: src/ch02-01-variables-and-mutability.md:235
 msgid ""
@@ -1762,19 +1711,9 @@ msgid ""
 "Error: failed to compile: src/lib.cairo\n"
 "```"
 msgstr ""
-"```console\n"
-"❯ cairo-run src/lib.cairo\n"
-"error: Unexpected argument type. Expected: \"core::integer::u64\", found: "
-"\"core::felt252\".\n"
-" --> lib.cairo:6:9\n"
-"    x = x.into();\n"
-"        ^******^\n"
-"\n"
-"Error: failed to compile: src/lib.cairo\n"
-"```"
+
 
 #: src/ch02-01-variables-and-mutability.md:247
-#, fuzzy
 msgid ""
 "Now that we’ve explored how variables work, let’s look at more data types "
 "they can have."
@@ -1783,20 +1722,16 @@ msgstr ""
 "de datos que pueden tener."
 
 #: src/ch02-02-data-types.md:3
-#, fuzzy
 msgid ""
 "Every value in Cairo is of a certain _data type_, which tells Cairo what "
 "kind of data is being specified so it knows how to work with that data. This "
 "section covers two subsets of data types: scalars and compounds."
 msgstr ""
 "Cada valor en Cairo tiene un cierto _tipo de dato_, lo que le dice a Cairo "
-"qué tipo de\n"
-" datos se están especificando para que sepa cómo trabajar con esos datos. "
-"Esta sección cubre dos subconjuntos de tipos de \n"
-"datos: escalares y compuestos."
+"qué tipo de datos se están especificando para que sepa cómo trabajar con esos "
+"datos. Esta sección cubre dos subconjuntos de tipos de datos: escalares y compuestos."
 
 #: src/ch02-02-data-types.md:6
-#, fuzzy
 msgid ""
 "Keep in mind that Cairo is a _statically typed_ language, which means that "
 "it must know the types of all variables at compile time. The compiler can "
@@ -1804,42 +1739,35 @@ msgid ""
 "when many types are possible, we can use a cast method where we specify the "
 "desired output type."
 msgstr ""
-"Tenga en cuenta que Cairo es un lenguaje _de tipado estático_, lo que "
-"significa que debe\n"
-" conocer los tipos de todas las variables en tiempo de compilación. El "
+"Ten en cuenta que Cairo es un lenguaje de _tipado estático_, lo que significa "
+"que debe conocer los tipos de todas las variables en tiempo de compilación. El "
 "compilador suele inferir el tipo deseado en función del valor y su uso. En "
-"casos \n"
-"en que pueden ser posibles varios tipos, podemos utilizar un método de "
+"casos en que pueden ser posibles varios tipos, podemos utilizar un método de "
 "conversión donde especificamos el tipo de salida deseado."
 
 #: src/ch02-02-data-types.md:17
 msgid "You’ll see different type annotations for other data types."
-msgstr "Verá diferentes anotaciones de tipo para otros tipos de datos."
+msgstr "Verás diferentes anotaciones de tipo para otros tipos de datos."
 
 #: src/ch02-02-data-types.md:19
-#, fuzzy
 msgid "Scalar Types"
-msgstr "### Tipos escalares"
+msgstr "Tipo Escalar"
 
 #: src/ch02-02-data-types.md:21
-#, fuzzy
 msgid ""
 "A _scalar_ type represents a single value. Cairo has three primary scalar "
 "types: felts, integers, and booleans. You may recognize these from other "
 "programming languages. Let’s jump into how they work in Cairo."
 msgstr ""
-"Un tipo _scalar_ representa un único valor. Cairo tiene tres tipos escalares "
-"primarios:\n"
-"fieltros, enteros y booleanos. Puede que reconozca de otros lenguajes de "
-"programación. Veamos cómo funcionan en Cairo."
+"Un tipo _escalar_ representa un único valor. Cairo tiene tres tipos escalares "
+"primarios:felts, integers(enteros) y booleans. Puede que reconozca de otros "
+"lenguajes de programación. Veamos cómo funcionan en Cairo."
 
 #: src/ch02-02-data-types.md:25
-#, fuzzy
 msgid "Felt Type"
-msgstr "#### Tipo Felt"
+msgstr "Tipo Felt"
 
 #: src/ch02-02-data-types.md:27
-#, fuzzy
 msgid ""
 "In Cairo, if you don't specify the type of a variable or argument, its type "
 "defaults to a field element, represented by the keyword `felt252`. In the "
@@ -1852,17 +1780,15 @@ msgid ""
 "P)."
 msgstr ""
 "En Cairo, si no especificas el tipo de una variable o argumento, su tipo por "
-"defecto es un elemento de campo, representado por la palabra clave "
-"`felt252`. En el contexto de Cairo, cuando decimos \"un elemento de campo\" "
-"nos referimos a un entero en el rango `0 <= x < P`,\n"
-" donde `P` es un número primo muy grande actualmente igual a `P = 2^{251} + "
-"17 * 2^{192}+1`. Al sumar, restar o multiplicar, si el resultado queda fuera "
-"del rango especificado del número primo, se produce un desbordamiento y se "
-"suma o resta un múltiplo apropiado de P para que el resultado vuelva a estar "
-"dentro del rango (es decir, el resultado se calcula módulo P)."
+"defecto es un elemento de campo, representado por la palabra clave `felt252`. "
+"En el contexto de Cairo, cuando decimos \"un elemento de campo\" nos referimos "
+"a un entero en el rango `0 <= x < P`, donde `P` es un número primo muy grande "
+"actualmente igual a `P = 2^{251} + 17 * 2^{192}+1`. Al sumar, restar o multiplicar, "
+"si el resultado queda fuera del rango especificado del número primo, se produce "
+"un desbordamiento y se suma o resta un múltiplo apropiado de P para que el resultado "
+"vuelva a estar dentro del rango (es decir, el resultado se calcula módulo P)."
 
 #: src/ch02-02-data-types.md:30
-#, fuzzy
 msgid ""
 "The most important difference between integers and field elements is "
 "division: Division of field elements (and therefore division in Cairo) is "
@@ -1880,7 +1806,6 @@ msgstr ""
 "de `x` por `y`."
 
 #: src/ch02-02-data-types.md:34
-#, fuzzy
 msgid ""
 "In Cairo, the result of `x/y` is defined to always satisfy the equation "
 "`(x / y) * y == x`. If y divides x as integers, you will get the expected "
@@ -1891,19 +1816,16 @@ msgid ""
 msgstr ""
 "En Cairo, el resultado de `x/y` está definido para satisfacer siempre la "
 "ecuación `(x / y) * y == x`. Si `y` divide a `x` entre enteros, obtendrás el "
-"resultado esperado en Cairo (por ejemplo `6 / 2`\n"
-" dará como resultado `3`).\n"
+"resultado esperado en Cairo (por ejemplo `6 / 2` dará como resultado `3`). "
 "Pero cuando `y` no divide a `x`, puedes obtener un resultado sorprendente: "
 "Por ejemplo, como `2 * ((P+1)/2) = P+1 ≡ 1 mod[P]`, el valor de `1 / 2` en "
 "Cairo es `(P+1)/2` (y no 0 ó 0,5), ya que satisface la ecuación anterior."
 
 #: src/ch02-02-data-types.md:38
-#, fuzzy
 msgid "Integer Types"
-msgstr "#### Tipos enteros"
+msgstr "Tipo Integer"
 
 #: src/ch02-02-data-types.md:40
-#, fuzzy
 msgid ""
 "The felt252 type is a fundamental type that serves as the basis for creating "
 "all types in the core library. However, it is highly recommended for "
@@ -1918,26 +1840,23 @@ msgid ""
 "can use any of these variants to declare the type of an integer value."
 msgstr ""
 "El tipo felt252 es un tipo fundamental que sirve como base para la creación "
-"de todos los tipos en la librería central.\n"
-"Sin embargo, se recomienda encarecidamente a los programadores que utilicen "
-"los tipos enteros en lugar del tipo `felt252` siempre que sea posible, ya "
-"que los tipos `integer` vienen con características de seguridad añadidas que "
-"proporcionan protección extra contra posibles vulnerabilidades en el código, "
-"como comprobaciones de desbordamiento. Utilizando estos tipos de enteros, "
-"los programadores pueden asegurarse de que sus programas son más seguros y "
-"menos susceptibles a ataques u otras amenazas de seguridad.\n"
-"Un _integer_ es un número sin componente fraccionario. Esta declaración de "
-"tipo indica el número de bits que el programador puede utilizar para "
-"almacenar el entero.\n"
-"La Tabla 3-1 muestra \n"
-"los tipos enteros incorporados en Cairo. Podemos usar cualquiera de estas "
-"variantes para declarar\n"
-"el tipo de un valor entero."
+"de todos los tipos en la librería central. Sin embargo, se recomienda "
+"encarecidamente a los programadores que utilicen los tipos integer en lugar "
+"del tipo `felt252` siempre que sea posible, ya que los tipos `integer` vienen "
+"con características de seguridad añadidas que proporcionan protección extra "
+"contra posibles vulnerabilidades en el código, como comprobaciones de "
+"desbordamiento. Utilizando estos tipos de integer, los programadores pueden "
+"asegurarse de que sus programas son más seguros y menos susceptibles a ataques "
+"u otras amenazas de seguridad. Un _integer_ es un número sin componente "
+"fraccionario. Esta declaración de tipo indica el número de bits que el "
+"programador puede utilizar para almacenar el entero. La Tabla 3-1 muestra "
+"los tipos de integer integrados en Cairo. Podemos usar cualquiera de estas "
+"variantes para declarar el tipo de un valor entero."
+
 
 #: src/ch02-02-data-types.md:47
-#, fuzzy
 msgid "Table 3-1: Integer Types in Cairo"
-msgstr "<span class=\"caption\">Table 3-1: Integer Types in Cairo</span>"
+msgstr "Tabla 3-1: Tipos de Integer en Cairo"
 
 #: src/ch02-02-data-types.md:49
 msgid "Length"
@@ -2000,7 +1919,6 @@ msgid "`usize`"
 msgstr ""
 
 #: src/ch02-02-data-types.md:59
-#, fuzzy
 msgid ""
 "Each variant has an explicit size. Note that for now, the `usize` type is "
 "just an alias for `u32`; however, it might be useful when in the future "
@@ -2009,9 +1927,9 @@ msgid ""
 msgstr ""
 "Cada variante tiene un tamaño explícito. Tenga en cuenta que por ahora, el "
 "tipo `usize` es sólo un alias para `u32`; sin embargo, podría ser útil "
-"cuando en el futuro Cairo pueda ser compilado a MLIR.\n"
-"Como las variables son sin signo, no pueden contener un número negativo. "
-"Este código hará que el programa entre en pánico:"
+"cuando en el futuro Cairo pueda ser compilado a MLIR.Como las variables son "
+"sin signo, no pueden contener un número negativo. Este código hará que el "
+"programa genere un error:"
 
 #: src/ch02-02-data-types.md:72
 msgid ""
@@ -2019,29 +1937,28 @@ msgid ""
 "`u256` which needs 4 more bits to be stored. Under the hood, `u256` is "
 "basically a struct with 2 fields: `u256 {low: u128, high: u128}`"
 msgstr ""
+"Todos los tipos de integer mencionados anteriormente encajan en un `felt252`, "
+"excepto `u256`, que necesita 4 bits adicionales para almacenarse. Por debajo, "
+"`u256` es básicamente una estructura con 2 campos: `u256 {low: u128, high: u128}`"
 
 #: src/ch02-02-data-types.md:74
-#, fuzzy
 msgid ""
 "You can write integer literals in any of the forms shown in Table 3-2. Note "
 "that number literals that can be multiple numeric types allow a type suffix, "
 "such as `57_u8`, to designate the type."
 msgstr ""
-"Puede escribir literales enteros en cualquiera de las formas mostradas en la "
-"Tabla 3-2. Observe\n"
-"que los literales numéricos que pueden ser múltiples tipos numéricos "
-"permiten un sufijo de tipo\n"
-"como `57_u8`, para designar el tipo."
+"Puede escribir literales integer en cualquiera de las formas mostradas en la "
+"Tabla 3-2. Observe que los literales numéricos que pueden ser múltiples tipos "
+"numéricos permiten un sufijo de tipo como `57_u8`, para designar el tipo."
 
 #: src/ch02-02-data-types.md:78
-#, fuzzy
 msgid "Table 3-2: Integer Literals in Cairo"
-msgstr "<span class=\"caption\">Table 3-2: Integer Literals in Cairo</span>"
+msgstr "Tabla 3-2: Literales de Integer en Cairo"
 
 #: src/ch02-02-data-types.md:80
 #, fuzzy
 msgid "Numeric literals"
-msgstr "#### Operaciones numéricas"
+msgstr "Literales Numericos"
 
 #: src/ch02-02-data-types.md:80 src/appendix-02-operators-and-symbols.md:11
 #, fuzzy
@@ -2081,24 +1998,20 @@ msgid "`0b01`"
 msgstr ""
 
 #: src/ch02-02-data-types.md:87
-#, fuzzy
 msgid ""
 "So how do you know which type of integer to use? Try to estimate the max "
 "value your int can have and choose the good size. The primary situation in "
 "which you’d use `usize` is when indexing some sort of collection."
 msgstr ""
 "Entonces, ¿cómo saber qué tipo de entero utilizar? Intenta estimar el valor "
-"máximo que puede tener tu int y elige un buen tamaño.\n"
-"La principal situación en la que usarías `usize` es al indexar algún tipo de "
-"colección."
+"máximo que puede tener tu int y elige el tamaño adecuado."La principal "
+"situación en la que usarías `usize` es al indexar algún tipo de colección."
 
 #: src/ch02-02-data-types.md:90
-#, fuzzy
 msgid "Numeric Operations"
-msgstr "#### Operaciones numéricas"
+msgstr "Operaciones Numéricas"
 
 #: src/ch02-02-data-types.md:92
-#, fuzzy
 msgid ""
 "Cairo supports the basic mathematical operations you’d expect for all the "
 "integer types: addition, subtraction, multiplication, division, and "
@@ -2107,12 +2020,10 @@ msgid ""
 "statement:"
 msgstr ""
 "Cairo soporta las operaciones matemáticas básicas que esperarías para todos "
-"los \n"
-"tipos de enteros: suma, resta, multiplicación y resto (u256 no soporta "
-"división y resto \n"
-"todavía). Entero trunca hacia cero al entero más cercano. El siguiente "
-"código muestra \n"
-"cómo utilizar cada operación numérica en una sentencia `let`:"
+"los tipos de integer: suma, resta, multiplicación y resto (u256 no soporta "
+"división y resto todavía). Entero trunca hacia cero al entero más cercano. "
+"El siguiente código muestra cómo utilizar cada operación numérica en una "
+"sentencia `let`:"
 
 #: src/ch02-02-data-types.md:99
 msgid "// addition\n"
@@ -2147,66 +2058,55 @@ msgid "// result is 3\n"
 msgstr ""
 
 #: src/ch02-02-data-types.md:117
-#, fuzzy
 msgid ""
 "Each expression in these statements uses a mathematical operator and "
 "evaluates to a single value, which is then bound to a variable."
 msgstr ""
 "Cada expresión de estas sentencias utiliza un operador matemático y se "
-"evalúa a \n"
-"un único valor, que se asigna a una variable."
+"evalúa a un único valor, que se asigna a una variable."
 
 #: src/ch02-02-data-types.md:120
-#, fuzzy
 msgid ""
 "[Appendix B](appendix-02-operators-and-symbols.md#operators) contains a list "
 "of all operators that Cairo provides."
 msgstr ""
-"[Apéndice B][appendix_b] contiene una lista de todos los operadores que "
-"Cairo proporciona."
+"[Appendix B](appendix-02-operators-and-symbols.md#operators) contiene una lista "
+"de todos los operadores que Cairo proporciona."
 
 #: src/ch02-02-data-types.md:122
-#, fuzzy
 msgid "The Boolean Type"
-msgstr "#### El tipo Booleano"
+msgstr "Tipo Boolean"
 
 #: src/ch02-02-data-types.md:124
-#, fuzzy
 msgid ""
 "As in most other programming languages, a Boolean type in Cairo has two "
 "possible values: `true` and `false`. Booleans are one felt252 in size. The "
 "Boolean type in Cairo is specified using `bool`. For example:"
 msgstr ""
 "Como en la mayoría de los lenguajes de programación, un tipo booleano en "
-"Cairo tiene \n"
-"dos posibles valores: `true` y `false`. Los booleanos tienen un byte de "
-"tamaño. El tipo booleano \n"
-"en Cairo se especifica usando `bool`. Por ejemplo:"
+"Cairo tiene dos posibles valores: `true` y `false`. Los booleanos tienen "
+"un byte de tamaño. El tipo booleano en Cairo se especifica usando `bool`. "
+"Por ejemplo:"
 
 #: src/ch02-02-data-types.md:132
-msgid "// with explicit type annotation\n"
+msgid "// with explicit type annotation\n"  
 msgstr ""
 
 #: src/ch02-02-data-types.md:136
-#, fuzzy
 msgid ""
 "The main way to use Boolean values is through conditionals, such as an `if` "
 "expression. We’ll cover how `if` expressions work in Cairo in the [“Control "
 "Flow”](ch02-05-control-flow.md) section."
 msgstr ""
-"La principal forma de utilizar valores booleanos es a través de "
-"condicionales, \n"
-"como una expresión `if` expresión. Cubriremos cómo funcionan las expresiones "
-"`if` \n"
-"en Cairo en la sección. [“Control de flujo”][control-de-flujo]"
+"La principal forma de utilizar valores booleanos es a través de condicionales, "
+"como una expresión `if`. Cubriremos cómo funcionan las expresiones "
+"`if` en Cairo en la sección [“Control "Flow”](ch02-05-control-flow.md)"
 
 #: src/ch02-02-data-types.md:140
-#, fuzzy
 msgid "The Short String Type"
-msgstr "#### El tipo de Short String"
+msgstr "Tipo Short String"
 
 #: src/ch02-02-data-types.md:142
-#, fuzzy
 msgid ""
 "Cairo doesn't have a native type for strings, but you can store characters "
 "forming what we call a \"short string\" inside `felt252`s. A short string "
@@ -2215,10 +2115,9 @@ msgid ""
 "of declaring values by putting them between single quotes:"
 msgstr ""
 "Cairo no tiene un tipo nativo para strings, pero puedes almacenar caracteres "
-"formando lo que llamamos un \"short string\" dentro de `felt252`. Una cadena "
-"corta tiene una longitud máxima de 31 caracteres. Esto es para asegurar que "
-"puede caber en un solo felt (un felt son 252 bits, un char ASCII son 8 "
-"bits).\n"
+"formando lo que llamamos un \"short string\" dentro de `felt252`. Un short "
+"string tiene una longitud máxima de 31 caracteres. Esto es para asegurar que "
+"puede caber en un solo felt (un felt son 252 bits, un char ASCII son 8 bits). "
 "He aquí algunos ejemplos de declaración de valores entre comillas simples:"
 
 #: src/ch02-02-data-types.md:147
@@ -2226,15 +2125,14 @@ msgid "'C'"
 msgstr ""
 
 #: src/ch02-02-data-types.md:152
-#, fuzzy
 msgid "Type casting"
-msgstr "### Conversión de Tipos"
+msgstr "Conversión de Tipos"
 
 #: src/ch02-02-data-types.md:154
 msgid ""
-"In Cairo, you can convert types scalar types from one type to another by "
-"using the `try_into` and `into` methods provided by the `TryInto` and `Into` "
-"traits, respectively."
+"In Cairo, you can convert scalar types from one type to another by using the "
+"`try_into` and `into` methods provided by the `TryInto` and `Into` traits "
+"from the core library."
 msgstr ""
 "En Cairo, puedes convertir tipos escalares de un tipo a otro utilizando los "
 "métodos `try_into` e `into` proporcionados por los traits `TryInto` e "
@@ -2282,25 +2180,20 @@ msgid "// As a felt252 is smaller than a u256, we can use the into() method\n"
 msgstr ""
 
 #: src/ch02-02-data-types.md:179
-#, fuzzy
 msgid "The Tuple Type"
-msgstr "### El Tipo Tupla"
+msgstr "Tipo Tupla"
 
 #: src/ch02-02-data-types.md:181
-#, fuzzy
 msgid ""
 "A _tuple_ is a general way of grouping together a number of values with a "
 "variety of types into one compound type. Tuples have a fixed length: once "
 "declared, they cannot grow or shrink in size."
 msgstr ""
-"Una _tupla_ es una forma general de agrupar un número de valores con una "
-"variedad \n"
-"de tipos en un tipo compuesto. Las tuplas tienen una longitud fija: una vez "
-"declaradas, \n"
-"no pueden aumentar ni disminuir de tamaño."
+"Una _tuple_ es una forma general de agrupar un número de valores con una "
+"variedad de tipos en un tipo compuesto. Las tuplas tienen una longitud "
+"fija: una vez declaradas, no pueden aumentar ni disminuir de tamaño."
 
 #: src/ch02-02-data-types.md:185
-#, fuzzy
 msgid ""
 "We create a tuple by writing a comma-separated list of values inside "
 "parentheses. Each position in the tuple has a type, and the types of the "
@@ -2308,29 +2201,22 @@ msgid ""
 "optional type annotations in this example:"
 msgstr ""
 "Se crea una tupla escribiendo una lista de valores separados por comas "
-"entre \n"
-"paréntesis. Cada posición de la tupla tiene un tipo, y los tipos de los "
-"distintos valores\n"
-" de la tupla no tienen por qué ser iguales. Hemos añadido anotaciones "
-"opcionales de \n"
-"tipo en este ejemplo:"
+"entre paréntesis. Cada posición de la tupla tiene un tipo, y los tipos de "
+"los distintos valores de la tupla no tienen por qué ser iguales. Hemos "
+"añadido anotaciones opcionales de tipo en este ejemplo:"
 
 #: src/ch02-02-data-types.md:196
-#, fuzzy
 msgid ""
 "The variable `tup` binds to the entire tuple because a tuple is considered a "
 "single compound element. To get the individual values out of a tuple, we can "
 "use pattern matching to destructure a tuple value, like this:"
 msgstr ""
 "La variable `tup` se vincula a toda la tupla porque una tupla se considera "
-"un único\n"
-" elemento compuesto. Para obtener los valores individuales de una tupla, "
-"podemos \n"
-"utilizar la concordancia de patrones para desestructurar un valor de tupla, "
-"así:"
+"un único elemento compuesto. Para obtener los valores individuales de una tupla, "
+"podemos utilizar la concordancia de patrones para desestructurar un valor de "
+"tupla, así:"
 
 #: src/ch02-02-data-types.md:213
-#, fuzzy
 msgid ""
 "This program first creates a tuple and binds it to the variable `tup`. It "
 "then uses a pattern with `let` to take `tup` and turn it into three separate "
@@ -2339,42 +2225,34 @@ msgid ""
 "six` as the value of `y` is `6`."
 msgstr ""
 "Este programa crea primero una tupla y la asocia a la variable `tup`. A "
-"continuación, \n"
-"utiliza un patrón con `let` para tomar `tup` y convertirla en tres variables "
-"separadas,\n"
-" `x`, `y`, y `z`. Esto se llama _desestructuración_ porque divide la tupla "
-"en tres partes. \n"
-"Finalmente, el programa imprime `y es seis` ya que el valor de `y` es `6`."
+"continuación, utiliza un patrón con `let` para tomar `tup` y convertirla "
+"en tres variables separadas, `x`, `y`, y `z`. Esto se llama "
+"_desestructuración_ porque divide la tupla en tres partes. Finalmente, "
+"el programa imprime `y es seis` ya que el valor de `y` es `6`."
 
 #: src/ch02-02-data-types.md:219
-#, fuzzy
 msgid ""
 "We can also declare the tuple with value and types at the same time. For "
 "example:"
 msgstr ""
 "También podemos declarar la tupla con los valores y los tipos al mismo "
-"tiempo. \n"
-"Por ejemplo:"
+"tiempo. Por ejemplo:"
 
 #: src/ch02-02-data-types.md:228
-#, fuzzy
 msgid "The unit type ()"
-msgstr "### The unit type ()"
+msgstr "Tipo Unidad ()"
 
 #: src/ch02-02-data-types.md:230
-#, fuzzy
 msgid ""
 "A _unit type_ is a type which has only one value `()`. It is represented by "
 "a tuple with no elements. Its size is always zero, and it is guaranteed to "
 "not exist in the compiled code."
 msgstr ""
-"Un _tipo unitario_ es un tipo que sólo tiene un valor `()`.\n"
-"Se representa mediante una tupla sin elementos.\n"
-"Su tamaño es siempre cero y se garantiza que no existe en el código "
-"compilado."
+"Un _tipo unidad_ es un tipo que sólo tiene un valor `()`.Se representa "
+"mediante una tupla sin elementos. Su tamaño es siempre cero y se garantiza "
+"que no existirá en el código compilado."
 
 #: src/ch02-03-functions.md:3
-#, fuzzy
 msgid ""
 "Functions are prevalent in Cairo code. You’ve already seen one of the most "
 "important functions in the language: the `main` function, which is the entry "
@@ -2382,15 +2260,11 @@ msgid ""
 "to declare new functions."
 msgstr ""
 "Las funciones son frecuentes en el código de Cairo. Ya has visto una de "
-"las \n"
-"funciones más importantes del lenguaje: la función `main`, que es el punto "
-"de \n"
-"entrada de muchos programas. También has visto la palabra clave `fn`, que "
-"te \n"
-"permite declarar nuevas funciones."
+"las funciones más importantes del lenguaje: la función `main`, que es el punto "
+"de entrada de muchos programas. También has visto la palabra clave `fn`, que "
+"te permite declarar nuevas funciones."
 
 #: src/ch02-03-functions.md:8
-#, fuzzy
 msgid ""
 "Cairo code uses _snake case_ as the conventional style for function and "
 "variable names, in which all letters are lowercase and underscores separate "
@@ -2402,20 +2276,16 @@ msgstr ""
 "contiene un ejemplo de definición de función:"
 
 #: src/ch02-03-functions.md:25
-#, fuzzy
 msgid ""
 "We define a function in Cairo by entering `fn` followed by a function name "
 "and a set of parentheses. The curly brackets tell the compiler where the "
 "function body begins and ends."
 msgstr ""
 "Definimos una función en Cairo introduciendo `fn` seguido de un nombre de "
-"función y un\n"
-"conjunto de paréntesis. Las llaves indican al compilador dónde empieza y "
-"termina el\n"
-" cuerpo de la función."
+"función y un conjunto de paréntesis. Las llaves indican al compilador dónde "
+"empieza y termina el cuerpo de la función."
 
 #: src/ch02-03-functions.md:29
-#, fuzzy
 msgid ""
 "We can call any function we’ve defined by entering its name followed by a "
 "set of parentheses. Because `another_function` is defined in the program, it "
@@ -2426,48 +2296,38 @@ msgid ""
 "by the caller."
 msgstr ""
 "Podemos llamar a cualquier función que hayamos definido introduciendo su "
-"nombre seguido de unos\n"
-"de paréntesis. Como `otra_funcion` está definida en el programa, puede ser\n"
-"llamada desde dentro de la función `main`. Tenga en cuenta que hemos "
-"definido \"otra_función\n"
-"_antes_ de la función `main` en el código fuente; también podríamos haberla "
-"definido después.\n"
-"también. A Cairo no le importa dónde definas tus funciones, sólo que estén\n"
-"definidas en algún lugar en un ámbito que pueda ser visto por quien las "
-"llame."
+"nombre seguido de paréntesis. Dado que `otra_funcion` está definida "
+"en el programa, puede ser llamada desde dentro de la función `main`. Tenga "
+"en cuenta que hemos definido `otra_funcion` _antes_ de la función `main` "
+"en el código fuente; también podríamos haberla definido después también. "
+"A Cairo no le importa dónde definas tus funciones, sólo que estén definidas "
+"en algún lugar en un ámbito que pueda ser visto por quien las llame."
 
 #: src/ch02-03-functions.md:36
-#, fuzzy
 msgid ""
 "Let’s start a new project with Scarb named _functions_ to explore functions "
 "further. Place the `another_function` example in _src/lib.cairo_ and run it. "
 "You should see the following output:"
 msgstr ""
 "Empecemos un nuevo proyecto con Scarb llamado _functions_ para explorar las "
-"funciones\n"
-"más a fondo. Coloque el ejemplo `another_function` en _src/lib.cairo_ y "
-"ejecútelo. Usted\n"
-"Debería ver la siguiente salida:"
+"funciones más a fondo. Coloque el ejemplo `another_function` en _src/lib.cairo_ "
+"y ejecútelo. Usted Debería ver la siguiente salida:"
 
 #: src/ch02-03-functions.md:46
-#, fuzzy
 msgid ""
 "The lines execute in the order in which they appear in the `main` function. "
 "First the “Hello, world!” message prints, and then `another_function` is "
 "called and its message is printed."
 msgstr ""
-"Las líneas se ejecutan en el orden en que aparecen en la función `main`.\n"
-"Primero se imprime el mensaje \" Hello, world!\", y luego se llama a "
-"`another_function`\n"
-" y se imprime su mensaje."
+"Las líneas se ejecutan en el orden en que aparecen en la función `main`. "
+"Primero se imprime el mensaje “Hello, world!”, luego se llama a "
+"`another_function` y se imprime su mensaje."
 
 #: src/ch02-03-functions.md:50
-#, fuzzy
 msgid "Parameters"
-msgstr "### Parámetros"
+msgstr "Parámetros"
 
 #: src/ch02-03-functions.md:52
-#, fuzzy
 msgid ""
 "We can define functions to have _parameters_, which are special variables "
 "that are part of a function’s signature. When a function has parameters, you "
@@ -2478,17 +2338,12 @@ msgid ""
 "when you call a function."
 msgstr ""
 "Podemos definir funciones para que tengan _parameters_, que son variables "
-"especiales que\n"
-"forman parte de la firma de una función. Cuando una función tiene "
-"parámetros, puede\n"
-"proporcionarle valores concretos para esos parámetros. Técnicamente, los "
-"valores\n"
-"valores concretos se llaman _arguments_, pero en la conversación informal, "
-"la gente tiende a usar\n"
-"las palabras _parameters_ y _arguments_ indistintamente para las variables\n"
-"en la definición de una función o los valores concretos que se pasan cuando "
-"se llama a una\n"
-"función."
+"especiales que forman parte de la firma de una función. Cuando una función tiene "
+"parámetros, puedes proporcionarle valores concretos para esos parámetros. "
+"Técnicamente, los valores valores concretos se llaman _arguments_, pero en la "
+"conversación informal, la gente tiende a usar las palabras _parameters_ y _arguments_ "
+"indistintamente para las variables en la definición de una función o los valores "
+"concretos que se pasan cuando se llama a una función."
 
 #: src/ch02-03-functions.md:60
 msgid "In this version of `another_function` we add a parameter:"
@@ -2498,21 +2353,19 @@ msgstr "En esta versión de `another_function` añadimos un parámetro:"
 msgid "Try running this program; you should get the following output:"
 msgstr "Intente ejecutar este programa; debería obtener la siguiente salida:"
 
-#: src/ch02-03-functions.md:81
-#, fuzzy
+#: src/ch02-03-functions.md:79
 msgid ""
 "The declaration of `another_function` has one parameter named `x`. The type "
 "of `x` is specified as `felt252`. When we pass `5` in to `another_function`, "
-"the `.print()` function outputs `5` in the console."
+"the `println!` macro puts `5` where the pair of curly brackets containing "
+"`x` was in the format string."
 msgstr ""
-"La declaración de `another_function` tiene un parámetro llamado `x`. El tipo "
-"de\n"
-"`x` se especifica como `felt252`. Cuando pasamos `5` a `another_function`, "
-"la función\n"
-"`print()` muestra `5` en la consola."
+"La declaración de `another_function` tiene un parámetro llamado x. El tipo de "
+"`x` se especifica cómo `felt252`. Cuando pasamos 5 a `another_function`, la "
+"macro `println!` coloca 5 donde estaba el par de llaves que contenían a `x` en "
+"el formato string."
 
-#: src/ch02-03-functions.md:85
-#, fuzzy
+#: src/ch02-03-functions.md:83
 msgid ""
 "In function signatures, you _must_ declare the type of each parameter. This "
 "is a deliberate decision in Cairo’s design: requiring type annotations in "
@@ -2522,68 +2375,57 @@ msgid ""
 "expects."
 msgstr ""
 "En las firmas de función, _must_ declarar el tipo de cada parámetro. Esta "
-"es\n"
-"una decisión deliberada en el diseño de Cairo: requerir anotaciones de tipo "
-"en las\n"
-"significa que el compilador casi nunca necesita usarlas en otra parte del "
-"código\n"
-"el código para averiguar a qué tipo se refiere. El compilador también es "
-"capaz de dar\n"
-"mensajes de error más útiles si sabe qué tipos espera la función."
+"es una decisión deliberada en el diseño de Cairo: requerir anotaciones de "
+"tipo en las significa que el compilador casi nunca necesita usarlas en otra "
+"parte del código el código para averiguar a qué tipo se refiere. El compilador "
+"también puede dar mensajes de error más útiles si sabe qué tipos espera la función."
 
-#: src/ch02-03-functions.md:91
-#, fuzzy
+#: src/ch02-03-functions.md:89
 msgid ""
 "When defining multiple parameters, separate the parameter declarations with "
 "commas, like this:"
 msgstr ""
 "Cuando defina múltiples parámetros, separe las declaraciones de parámetros "
-"con\n"
-"comas, así:"
+"con comas, así:"
 
-#: src/ch02-03-functions.md:107
-#, fuzzy
+#: src/ch02-03-functions.md:102
 msgid ""
-"This example creates a function named `another_function` with two "
-"parameters. The first parameter is named `x` and is an `felt252`. The second "
-"is named `y` and is type `felt252` too. The function then prints the content "
-"of the felt `x` and then the content of the felt `y`."
+"This example creates a function named `print_labeled_measurement` with two "
+"parameters. The first parameter is named `value` and is a `u128`. The second "
+"is named `unit_label` and is of type `ByteArray` - Cairo's internal type to "
+"represent string literals. The function then prints text containing both the "
+"`value` and the `unit_label`."
 msgstr ""
-"Este ejemplo crea una función llamada `another_function` con dos parámetros. "
-"El primer \n"
-"parámetro se llama `x` y es un `felt252`. El segundo se llama `y` y también "
-"es del tipo `felt252`. \n"
-"La función luego imprime el contenido del `x` y luego el contenido del `y`."
+"Este ejemplo crea una función llamada `print_labeled_measurement` con dos "
+"parámetros. El primer parámetro se llama `value` y es un `u128`. El segundo "
+"se llama `unit_label` y es de tipo `ByteArray`, el tipo interno de Cairo "
+"para representar literales de string. La función luego imprime texto que "
+"contiene tanto el valor como la etiqueta de unidad `unit_label`."
 
-#: src/ch02-03-functions.md:111
-#, fuzzy
+#: src/ch02-03-functions.md:106
 msgid ""
 "Let’s try running this code. Replace the program currently in your "
 "_functions_ project’s _src/lib.cairo_ file with the preceding example and "
-"run it using `scarb cairo-run`:"
+"run it using `scarb cairo-run --available-gas=200000000`:"
 msgstr ""
 "Intentemos ejecutar este código. Sustituye el programa que actualmente está "
-"en tu proyecto _functions_\n"
-"de tu proyecto _src/lib.cairo_ con el ejemplo anterior y ejecútalo usando "
-"`cairo-run src/lib.cairo`:"
+"en tu proyecto _functions_ de tu proyecto _src/lib.cairo_ con el ejemplo "
+"anterior y ejecútalo usando `scarb cairo-run --available-gas=200000000`:"
 
-#: src/ch02-03-functions.md:120
-#, fuzzy
+#: src/ch02-03-functions.md:116
 msgid ""
-"Because we called the function with `5` as the value for `x` and `6` as the "
-"value for `y`, the program output contains those values."
+"Because we called the function with `5` as the value for value and `\"h\"` "
+"as the value for `unit_label`, the program output contains those values."
 msgstr ""
-"Debido a que llamamos a la función con `5` como valor para `x` y `6` como "
-"valor\n"
-" para `y`, la salida del programa contiene esos valores."
+"Dado que llamamos a la función con `5` como el valor para valor y `\"h\"` como "
+"el valor para `unit_label`, la salida del programa contiene esos valores."
+
 
 #: src/ch02-03-functions.md:123
-#, fuzzy
 msgid "Named parameters"
-msgstr "#### Parámetros con nombre"
+msgstr "Parámetros con Nombre"
 
 #: src/ch02-03-functions.md:125
-#, fuzzy
 msgid ""
 "In Cairo, named parameters allow you to specify the names of arguments when "
 "you call a function. This makes the function calls more readable and self-"
@@ -2595,24 +2437,21 @@ msgid ""
 msgstr ""
 "En Cairo, los parámetros con nombre permiten especificar los nombres de los "
 "argumentos cuando se llama a una función. Esto hace que las llamadas a "
-"funciones sean más legibles y autodescriptivas.\n"
-"Si quieres usar parámetros con nombre, necesitas especificar el nombre del "
-"parámetro y el valor que quieres pasarle. La sintaxis es `parameter_name: "
-"value`. Si pasas una variable que tiene el mismo nombre que el parámetro, "
-"puedes escribir simplemente `:parameter_name` en lugar de `parameter_name: "
-"variable_name`."
+"funciones sean más legibles y autodescriptivas. Si quieres usar parámetros "
+"con nombre, necesitas especificar el nombre del parámetro y el valor que "
+"quieres pasarle. La sintaxis es `parameter_name: value`. Si pasas una "
+"variable que tiene el mismo nombre que el parámetro, puedes escribir "
+"simplemente `:parameter_name` en lugar de `parameter_name: variable_name`."
 
 #: src/ch02-03-functions.md:128
 msgid "Here is an example:"
 msgstr "Aquí un ejemplo:"
 
 #: src/ch02-03-functions.md:143
-#, fuzzy
 msgid "Statements and Expressions"
-msgstr "### Declaraciones y Expresiones"
+msgstr "Declaraciones y Expresiones"
 
 #: src/ch02-03-functions.md:145
-#, fuzzy
 msgid ""
 "Function bodies are made up of a series of statements optionally ending in "
 "an expression. So far, the functions we’ve covered haven’t included an "
@@ -2623,90 +2462,66 @@ msgid ""
 "differences affect the bodies of functions."
 msgstr ""
 "Los cuerpos de las funciones están compuestos por una serie de sentencias "
-"que \n"
-"terminan opcionalmente en una expresión. Hasta ahora, las funciones que "
-"hemos \n"
-"cubierto no han incluido una expresión final, pero ya has visto una "
-"expresión como parte \n"
-"de una sentencia. Como Cairo es un lenguaje basado en expresiones, esta es "
-"una \n"
-"distinción importante que debemos entender. Otros lenguajes no tienen las "
-"mismas \n"
-"distinciones, así que veamos qué son las sentencias y expresiones y cómo sus "
-"diferencias \n"
-"afectan los cuerpos de las funciones."
+"que terminan opcionalmente en una expresión. Hasta ahora, las funciones que "
+"hemos cubierto no han incluido una expresión final, pero ya has visto una "
+"expresión como parte de una sentencia. Como Cairo es un lenguaje basado en "
+"expresiones, esta es una distinción importante que debemos entender. Otros "
+"lenguajes no tienen las mismas distinciones, así que veamos qué son las "
+"sentencias y expresiones y cómo sus diferencias afectan los cuerpos de las "
+"funciones."
 
 #: src/ch02-03-functions.md:153
-#, fuzzy
 msgid ""
 "**Statements** are instructions that perform some action and do not return a "
 "value."
 msgstr ""
-"- Las **Declaraciones** son instrucciones que realizan alguna acción y no "
-"devuelven\n"
-"  un valor.\n"
-"- Las **Expresiones** se evalúan a un valor resultante. Veamos algunos "
-"ejemplos."
+"**Declaraciones** son instrucciones que realizan alguna acción y no "
+"devuelven un valor."
 
 #: src/ch02-03-functions.md:155
-#, fuzzy
 msgid ""
 "**Expressions** evaluate to a resultant value. Let’s look at some examples."
 msgstr ""
-"- Las **Declaraciones** son instrucciones que realizan alguna acción y no "
-"devuelven\n"
-"  un valor.\n"
-"- Las **Expresiones** se evalúan a un valor resultante. Veamos algunos "
-"ejemplos."
+"**Expresiones** se evalúan a un valor resultante. Veamos algunos ejemplos."
 
 #: src/ch02-03-functions.md:157
-#, fuzzy
 msgid ""
 "We’ve actually already used statements and expressions. Creating a variable "
 "and assigning a value to it with the `let` keyword is a statement. In "
 "Listing 2-1, `let y = 6;` is a statement."
 msgstr ""
 "De hecho, ya hemos utilizado declaraciones y expresiones. Crear una variable "
-"y \n"
-"asignarle un valor con la palabra clave `let` es una declaración. En el "
-"Listado 2-1,\n"
-" `let y = 6;` es una declaración."
+"y asignarle un valor con la palabra clave `let` es una declaración. En el "
+"Listado 2-1, `let y = 6;` es una declaración."
 
 #: src/ch02-03-functions.md:167
-#, fuzzy
 msgid "Listing 2-1: A `main` function declaration containing one statement"
-msgstr ""
-"<span class=\"caption\">Listing 2-1: A `main` declaración de función que "
-"contiene una declaración</span>"
+msgstr "Listado 2-1: Declaración de una función main que contiene una instrucción"
+
 
 #: src/ch02-03-functions.md:169
-#, fuzzy
 msgid ""
 "Function definitions are also statements; the entire preceding example is a "
 "statement in itself."
 msgstr ""
 "Las definiciones de funciones también son sentencias; todo el ejemplo "
-"anterior \n"
-"es una sentencia en sí misma."
+"anterior es una sentencia en sí misma."
 
 #: src/ch02-03-functions.md:172
-#, fuzzy
 msgid ""
 "Statements do not return values. Therefore, you can’t assign a `let` "
 "statement to another variable, as the following code tries to do; you’ll get "
 "an error:"
 msgstr ""
-"Las Declaraciones no devuelven valores. Por lo tanto, no se puede asignar "
-"una sentencia \n"
-"`let` a otra variable, como intenta hacer el siguiente código; se producirá "
-"un error:"
+"Las declaraciones no devuelven valores. Por lo tanto, no se puede asignar "
+"una sentencia `let` a otra variable, como intenta hacer el siguiente "
+"código; se producirá un error:"
 
 #: src/ch02-03-functions.md:181
 msgid "When you run this program, the error you’ll get looks like this:"
 msgstr "Cuando ejecutes este programa, el error que obtendrás se verá así:"
 
 #: src/ch02-03-functions.md:205
-#, fuzzy
 msgid ""
 "The `let y = 6` statement does not return a value, so there isn’t anything "
 "for `x` to bind to. This is different from what happens in other languages, "
@@ -2715,16 +2530,12 @@ msgid ""
 "and `y` have the value `6`; that is not the case in Cairo."
 msgstr ""
 "La declaración `let y = 6` no devuelve un valor, por lo que no hay nada a lo "
-"que `x`\n"
-" pueda enlazar. Esto es diferente de lo que sucede en otros lenguajes, como "
-"C y Ruby, \n"
-"donde la asignación devuelve el valor de la asignación. En esos lenguajes, "
-"puedes escribir\n"
-" `x = y = 6` y tanto `x` como `y` tendrán el valor `6`; esto no es así en "
-"Cairo."
+"que `x` pueda enlazar. Esto es diferente de lo que sucede en otros lenguajes, "
+"como C y Ruby, donde la asignación devuelve el valor de la asignación. En esos "
+"lenguajes, puedes escribir `x = y = 6` y tanto `x` como `y` tendrán el valor "
+"`6`; esto no es así en Cairo."
 
 #: src/ch02-03-functions.md:211
-#, fuzzy
 msgid ""
 "Expressions evaluate to a value and make up most of the rest of the code "
 "that you’ll write in Cairo. Consider a math operation, such as `5 + 6`, "
@@ -2735,21 +2546,17 @@ msgid ""
 "for example:"
 msgstr ""
 "Las expresiones se evalúan a un valor y forman la mayor parte del resto del "
-"código que escribirás en Cairo.\n"
-"escribirás en Cairo. Considera una operación matemática, como `5 + 6`, que "
-"es una\n"
-"expresión que se evalúa al valor `11`. Las expresiones pueden ser parte de\n"
-"sentencias: en el Listado 2-1, el `6` en la sentencia `let y = 6;` es una\n"
-"es una expresión que se evalúa al valor `6`. Llamar a una función es una\n"
-"expresión. Un nuevo bloque de ámbito creado con\n"
-"es una expresión, por ejemplo:"
+"código que escribirás en Cairo. Considera una operación matemática, como `5 + 6`"
+", que es una expresión que se evalúa al valor `11`. Las expresiones pueden ser "
+"parte de sentencias: en el Listado 2-1, el `6` en la sentencia `let y = 6;` es "
+"una es una expresión que se evalúa al valor `6`. Llamar a una función es una"
+"expresión. Un nuevo bloque de ámbito creado con es una expresión, por ejemplo:"
 
 #: src/ch02-03-functions.md:231
 msgid "This expression:"
 msgstr "Esta expresión:"
 
 #: src/ch02-03-functions.md:240
-#, fuzzy
 msgid ""
 "is a block that, in this case, evaluates to `4`. That value gets bound to "
 "`y` as part of the `let` statement. Note that the `x + 1` line doesn’t have "
@@ -2759,26 +2566,19 @@ msgid ""
 "return a value. Keep this in mind as you explore function return values and "
 "expressions next."
 msgstr ""
-"este bloque de código, en este caso, se evalúa como 4. Ese valor se asigna\n"
-" a y como parte de la declaración let. Ten en cuenta que la línea x + 1 no "
-"tiene\n"
-" un punto y coma al final, lo que es diferente a la mayoría de las líneas "
-"que has \n"
-"visto hasta ahora. Las expresiones no incluyen un punto y coma al final. Si "
-"agregas\n"
-" un punto y coma al final de una expresión, la conviertes en una "
-"declaración, y en \n"
-"ese caso no se devolverá ningún valor. Tenlo en cuenta mientras exploras "
-"los \n"
-"valores de retorno de las funciones y las expresiones a continuación."
+"Este bloque de código, en este caso, se evalúa como 4. Ese valor se asigna "
+"a y como parte de la declaración let. Ten en cuenta que la línea x + 1 no "
+"tiene un punto y coma al final, lo que es diferente a la mayoría de las líneas "
+"que has visto hasta ahora. Las expresiones no incluyen un punto y coma al final. "
+"Si agregas un punto y coma al final de una expresión, la conviertes en una "
+"declaración, y en ese caso no se devolverá ningún valor. Tenlo en cuenta mientras "
+"exploras los valores de retorno de las funciones y las expresiones a continuación."
 
 #: src/ch02-03-functions.md:248
-#, fuzzy
 msgid "Functions with Return Values"
-msgstr "### Funciones con Valores de Retorno"
+msgstr "Funciones con Valores de Retorno"
 
 #: src/ch02-03-functions.md:250
-#, fuzzy
 msgid ""
 "Functions can return values to the code that calls them. We don’t name "
 "return values, but we must declare their type after an arrow (`->`). In "
@@ -2788,21 +2588,15 @@ msgid ""
 "but most functions return the last expression implicitly. Here’s an example "
 "of a function that returns a value:"
 msgstr ""
-"Las funciones pueden devolver valores al código que las llama. No "
-"nombramos \n"
+"Las funciones pueden devolver valores al código que las llama. No nombramos "
 "los valores de retorno, pero debemos declarar su tipo después de una flecha "
-"(`->`).\n"
-" En Cairo, el valor de retorno de la función es sinónimo del valor de la "
-"última expresión \n"
-"en el bloque del cuerpo de una función. Puede salir temprano de una función "
-"usando la \n"
-"palabra clave `return` y especificando un valor, pero la mayoría de las "
-"funciones devuelven\n"
-" la última expresión implícitamente. Aquí hay un ejemplo de una función que "
-"devuelve un valor:"
+"(`->`). En Cairo, el valor de retorno de la función es sinónimo del valor "
+"de la última expresión en el bloque del cuerpo de una función. Puede salir "
+"temprano de una función usando la palabra clave `return` y especificando un "
+"valor, pero la mayoría de las funciones devuelven la última expresión "
+"implícitamente. Aquí hay un ejemplo de una función que devuelve un valor:"
 
 #: src/ch02-03-functions.md:271
-#, fuzzy
 msgid ""
 "There are no function calls, or even `let` statements in the `five` function—"
 "just the number `5` by itself. That’s a perfectly valid function in Cairo. "
@@ -2810,15 +2604,11 @@ msgid ""
 "running this code; the output should look like this:"
 msgstr ""
 "No hay llamadas a funciones ni declaraciones `let` en la función `five`, "
-"solo \n"
-"el número `5` por sí mismo. Esa es una función perfectamente válida en "
-"Cairo.\n"
-" Observa que se especifica el tipo de retorno de la función como `-> u32`. "
-"Intenta\n"
-" ejecutar este código; la salida debería verse así:"
+"solo el número `5` por sí mismo. Esa es una función perfectamente válida en "
+"Cairo. Observa que se especifica el tipo de retorno de la función como `-> u32`. "
+"Intenta ejecutar este código; la salida debería verse así:"
 
 #: src/ch02-03-functions.md:281
-#, fuzzy
 msgid ""
 "The `5` in `five` is the function’s return value, which is why the return "
 "type is `u32`. Let’s examine this in more detail. There are two important "
@@ -2827,47 +2617,35 @@ msgid ""
 "returns a `5`, that line is the same as the following:"
 msgstr ""
 "El `5` en `five` es el valor de retorno de la función, por eso el tipo de "
-"retorno\n"
-" es `u32`. Vamos a examinar esto con más detalle. Hay dos partes "
-"importantes: \n"
-"en primer lugar, la línea `let x = five();` muestra que estamos usando el "
-"valor de \n"
-"retorno de una función para inicializar una variable. Debido a que la "
-"función `five` \n"
-"devuelve un `5`, esa línea es lo mismo que:"
+"retorno es `u32`. Vamos a examinar esto con más detalle. Hay dos partes "
+"importantes: en primer lugar, la línea `let x = five();` muestra que estamos "
+"usando el valor de retorno de una función para inicializar una variable. "
+"Debido a que la función `five` devuelve un `5`, esa línea es lo mismo que:"
 
 #: src/ch02-03-functions.md:291
-#, fuzzy
 msgid ""
 "Second, the `five` function has no parameters and defines the type of the "
 "return value, but the body of the function is a lonely `5` with no semicolon "
 "because it’s an expression whose value we want to return. Let’s look at "
 "another example:"
 msgstr ""
-"Segundo, la función `five` no tiene parámetros y define el tipo del\n"
-"valor de retorno, pero el cuerpo de la función es un solitario `5` sin punto "
-"y coma\n"
-"porque es una expresión cuyo valor queremos devolver.\n"
-"Veamos otro ejemplo:"
+"Segundo, la función `five` no tiene parámetros y define el tipo del valor "
+"de retorno, pero el cuerpo de la función es un solitario `5` sin punto "
+"y coma porque es una expresión cuyo valor queremos devolver. Veamos otro ejemplo:"
 
 #: src/ch02-03-functions.md:310
-#, fuzzy
 msgid ""
-"Running this code will print `[DEBUG]                    (raw: 6)`. But if "
-"we place a semicolon at the end of the line containing `x + 1`, changing it "
-"from an expression to a statement, we’ll get an error:"
+"Running this code will print `x = 6`. But if we place a semicolon at the end "
+"of the line containing `x + 1`, changing it from an expression to a "
+"statement, we’ll get an error:"
 msgstr ""
-"Al ejecutar este código se imprimirá `[DEBUG]                    (raw: 6)`. "
-"Pero si \n"
-"agregamos un punto y coma al final de la línea que contiene `x + 1`, "
-"cambiándola \n"
-"de una expresión a una declaración, obtendremos un error:"
+"Al ejecutar este código se imprimirá `x = 6`. Pero si agregamos un punto y "
+"coma al final de la línea que contiene `x + 1`, cambiándola de una expresión "
+"a una declaración, obtendremos un error:"
 
 #: src/ch02-03-functions.md:328
 msgid "Compiling this code produces an error, as follows:"
-msgstr ""
-"La compilación de este código produce un error, como se muestra a "
-"continuación:"
+msgstr "La compilación de este código produce un error, como se muestra a continuación:"
 
 #: src/ch02-03-functions.md:330
 #, fuzzy
@@ -2883,7 +2661,6 @@ msgstr ""
 "```"
 
 #: src/ch02-03-functions.md:334
-#, fuzzy
 msgid ""
 "The main error message, `Unexpected return type`, reveals the core issue "
 "with this code. The definition of the function `plus_one` says that it will "
@@ -2891,15 +2668,11 @@ msgid ""
 "expressed by `()`, the unit type. Therefore, nothing is returned, which "
 "contradicts the function definition and results in an error."
 msgstr ""
-"El mensaje principal de error, `Unexpected return type`, revela el "
-"problema \n"
-"principal con este código. La definición de la función `plus_one` dice que "
-"devolverá \n"
-"un `u32`, pero las sentencias no se evalúan a un valor, lo cual se expresa "
-"por `()`, el tipo \n"
-"unit. Por lo tanto, no se devuelve nada, lo que contradice la definición de "
-"la función y \n"
-"resulta en un error."
+"El mensaje principal de error, `Unexpected return type`, revela el problema "
+"principal con este código. La definición de la función `plus_one` indica que "
+"devolverá un `u32`, pero las sentencias no se evalúan a un valor, lo cual "
+"se expresa por `()`, el tipo unit. Por lo tanto, no se devuelve nada, lo que "
+"contradice la definición de la función y resulta en un error."
 
 #: src/ch02-04-comments.md:3
 msgid ""
@@ -2933,9 +2706,8 @@ msgstr ""
 "flujo de ejecución del código en Cairo son las expresiones if y los bucles."
 
 #: src/ch02-05-control-flow.md:5
-#, fuzzy
 msgid "`if` Expressions"
-msgstr "### Expresiones `if`"
+msgstr "Expresiones `if`"
 
 #: src/ch02-05-control-flow.md:7
 msgid ""
@@ -2944,9 +2716,9 @@ msgid ""
 "block of code. If the condition is not met, do not run this block of code.”"
 msgstr ""
 "Una expresión if le permite ramificar su código según condiciones. "
-"Proporciona una condición y luego establece: \"Si se cumple esta condición, "
+"Proporciona una condición y luego establece: "Si se cumple esta condición, "
 "ejecute este bloque de código. Si no se cumple la condición, no ejecute este "
-"bloque de código\"."
+"bloque de código"."
 
 #: src/ch02-05-control-flow.md:25
 msgid ""
@@ -2983,8 +2755,8 @@ msgid ""
 "Let’s try changing the value of `number` to a value that makes the condition "
 "`true` to see what happens:"
 msgstr ""
-"Intentaré cambiar el valor de number por uno que haga que la condición sea "
-"verdadera para ver qué sucede:"
+"Intentaré cambiar el valor de `number` por uno que haga que la condición sea "
+"`true` para ver qué sucede:"
 
 #: src/ch02-05-control-flow.md:47
 msgid ""
@@ -2995,9 +2767,9 @@ msgstr ""
 "bool. Si la condición no es un bool, obtendremos un error."
 
 #: src/ch02-05-control-flow.md:54
-#, fuzzy
+
 msgid "Handling Multiple Conditions with `else if`"
-msgstr "### Manejando múltiples condiciones con `else if`"
+msgstr "Manejando de Múltiples Condiciones con `else if`"
 
 #: src/ch02-05-control-flow.md:56
 msgid ""
@@ -3016,35 +2788,32 @@ msgstr ""
 "ejecutarlo, debería ver la siguiente salida:"
 
 #: src/ch02-05-control-flow.md:84
-#, fuzzy
 msgid ""
 "When this program executes, it checks each `if` expression in turn and "
 "executes the first body for which the condition evaluates to `true`. Note "
 "that even though `number - 2 == 1` is `true`, we don’t see the output "
-"`number minus 2 is 1'.print()`, nor do we see the `number not found` text "
-"from the `else` block. That’s because Cairo only executes the block for the "
-"first true condition, and once it finds one, it doesn’t even check the rest. "
-"Using too many `else if` expressions can clutter your code, so if you have "
-"more than one, you might want to refactor your code. [Chapter 6](./ch06-02-"
-"the-match-control-flow-construct.md) describes a powerful Cairo branching "
-"construct called `match` for these cases."
+"`number minus 2 is 1'` nor do we see the `number not found` text from the "
+"`else` block. That’s because Cairo only executes the block for the first "
+"true condition, and once it finds one, it doesn’t even check the rest. Using "
+"too many `else if` expressions can clutter your code, so if you have more "
+"than one, you might want to refactor your code. [Chapter "
+"6](./ch06-02-the-match-control-flow-construct.md) describes a powerful Cairo "
+"branching construct called `match` for these cases."
 msgstr ""
-"Cuando este programa se ejecuta, verifica cada expresión `if` en orden y "
-"ejecuta el primer cuerpo para el cual la condición se evalúa como verdadera. "
-"Es importante destacar que aunque `number - 2 == 1` es verdadero, no vemos "
-"la salida `number minus 2 is 1'.print()`, ni tampoco vemos el texto `number "
-"is not divisible by 4, 3, or 2` del bloque `else`. Esto se debe a que Cairo "
-"solo ejecuta el bloque correspondiente a la primera condición verdadera que "
-"encuentra, y una vez que la encuentra, no verifica las demás. Usar "
-"demasiadas expresiones `else if` puede desordenar el código, por lo que si "
-"tienes más de una, es posible que desees refactorizar el código. El capítulo "
-"5 describe una poderosa estructura de control de flujo de Cairo llamada "
-"`match` para estos casos."
+"Cuando este programa se ejecuta, verifica cada expresión `if` sucesivamente y "
+"ejecuta el cuerpo correspondiente a la primera condición que se evalúa como "
+"`true`. Observa que, aunque `number - 2 == 1` es `true`, no vemos la "
+"salida `number minus 2 is 1'.print()`, ni el texto `number not found` del bloque "
+"`else`. Esto se debe a que Cairo solo ejecuta el bloque correspondiente a la "
+"primera condición verdadera y, una vez que encuentra una, ni siquiera verifica el "
+"resto. El uso excesivo de expresiones `else if` puede ensuciar tu código, así "
+"que si tienes más de una, podrías considerar refactorizar tu código. [Chapter 6]"
+"(./ch06-02-the-match-control-flow-construct.md) describe una poderosa "
+"construcción de ramificación en Cairo llamada match para estos casos."
 
 #: src/ch02-05-control-flow.md:86
-#, fuzzy
 msgid "Using `if` in a `let` statement"
-msgstr "### Usando `if` en una declaración `let`"
+msgstr "Usando `if` en una Declaración `let`"
 
 #: src/ch02-05-control-flow.md:88
 msgid ""
@@ -3063,9 +2832,8 @@ msgstr ""
 "expresión `if`. En este caso, será 5."
 
 #: src/ch02-05-control-flow.md:116
-#, fuzzy
 msgid "Repetition with Loops"
-msgstr "### Repetición con bucles"
+msgstr "Repetición con Loops"
 
 #: src/ch02-05-control-flow.md:118
 msgid ""
@@ -3085,63 +2853,50 @@ msgid "Cairo only has one kind of loop for now: `loop`."
 msgstr "Cairo sólo tiene un tipo de bucle por ahora: `loop`."
 
 #: src/ch02-05-control-flow.md:122
-#, fuzzy
 msgid "Repeating Code with `loop`"
-msgstr "#### Repetición de Código con `loop`"
+msgstr "Repetición de Código con `loop`"
 
 #: src/ch02-05-control-flow.md:124
-#, fuzzy
 msgid ""
 "The `loop` keyword tells Cairo to execute a block of code over and over "
 "again forever or until you explicitly tell it to stop."
 msgstr ""
 "La palabra clave `loop` le dice a Cairo que ejecute un bloque de código una "
-"y otra vez\n"
-"para siempre o hasta que le digas explícitamente que pare."
+"y otra vez para siempre o hasta que le digas explícitamente que pare."
 
 #: src/ch02-05-control-flow.md:127
-#, fuzzy
 msgid ""
 "As an example, change the _src/lib.cairo_ file in your _loops_ directory to "
 "look like this:"
 msgstr ""
-"Por ejemplo, cambie el archivo _src/lib.cairo_ de su directorio _loops_ para "
-"que tenga el siguiente aspecto\n"
-"así:"
+"Como ejemplo, cambie el archivo _src/lib.cairo_ en tu directorio _loops_ para "
+"quede de la siguiente manera:"
 
 #: src/ch02-05-control-flow.md:145
-#, fuzzy
 msgid ""
-"When we run this program, we’ll see `again!` printed over and over "
+"When we run this program, we’ll see `i = 0` printed over and over "
 "continuously until we stop the program manually, because the stop condition "
 "is never reached. While the compiler prevents us from writing programs "
 "without a stop condition (`break` statement), the stop condition might never "
 "be reached, resulting in an infinite loop. Most terminals support the "
 "keyboard shortcut "
 msgstr ""
-"Cuando ejecutamos este programa, veremos que se imprime `again!` una y otra "
-"vez continuamente\n"
-"hasta que detengamos el programa manualmente, porque la condición de parada "
-"nunca se cumple.\n"
-"Si bien el compilador nos impide escribir programas sin una condición de "
-"parada (`break`),\n"
-"es posible que la condición de parada nunca se cumpla, lo que resulta en un "
-"bucle infinito. \n"
-"La mayoría de las terminales admiten el atajo de teclado <span "
-"class=\"keystroke\">ctrl-c</span> para interrumpir un programa que está\n"
-"atrapado en un bucle continuo. Pruébalo:"
+"Cuando ejecutamos este programa, veremos que se imprime "i = 0" una y "
+"otra vez continuamente hasta que detengamos el programa manualmente, "
+"porque la condición de detención nunca se cumple. Si bien el compilador "
+"nos impide escribir programas sin una condición de detención (declaración `break`), "
+"la condición de detención puede no alcanzarse nunca, lo que resulta en un bucle "
+"infinito. La mayoría de las terminales admiten el atajo de teclado "
 
 #: src/ch02-05-control-flow.md:149
 msgid "ctrl-c"
-msgstr ""
+msgstr "ctrl-c "
 
 #: src/ch02-05-control-flow.md:149
-msgid ""
-" to interrupt a program that is stuck in a continual loop. Give it a try:"
-msgstr ""
+msgid " to interrupt a program that is stuck in a continual loop. Give it a try:"
+msgstr "para interrumpir un programa que está atrapado en un bucle continuo. Pruébalo:"
 
 #: src/ch02-05-control-flow.md:166
-#, fuzzy
 msgid ""
 "Note: Cairo prevents us from running program with infinite loops by "
 "including a gas meter. The gas meter is a mechanism that limits the amount "
@@ -3156,7 +2911,7 @@ msgid ""
 "will need to execute it with the `--available-gas` flag set to a value that "
 "is large enough to run the program."
 msgstr ""
-"> Nota: Cairo nos previene de ejecutar programas con bucles infinitos "
+"Nota: Cairo nos previene de ejecutar programas con bucles infinitos "
 "incluyendo un contador de gas. El contador de gas es un mecanismo que limita "
 "la cantidad de computación que se puede hacer en un programa. Estableciendo "
 "un valor a la bandera `--available-gas`, podemos establecer la cantidad "
@@ -3164,25 +2919,22 @@ msgstr ""
 "que expresa el coste de cálculo de una instrucción. Cuando el contador de "
 "gas se agote, el programa se detendrá. En este caso, el programa entró en "
 "pánico porque se quedó sin gas, ya que nunca se alcanzó la condición de "
-"parada.\n"
-"> Es particularmente importante en el contexto de los contratos inteligentes "
-"desplegados en Starknet, ya que evita que se ejecuten bucles infinitos en la "
-"red.\n"
-"> Si estás escribiendo un programa que necesita ejecutar un bucle, tendrás "
-"que ejecutarlo con la bandera `--available-gas` establecida en un valor que "
-"sea lo suficientemente grande como para ejecutar el programa."
+"parada. Es particularmente importante en el contexto de los contratos "
+"inteligentes desplegados en Starknet, ya que evita que se ejecuten bucles "
+"infinitos en la red. Si estás escribiendo un programa que necesita ejecutar "
+"un bucle, tendrás que ejecutarlo con la bandera `--available-gas` establecida "
+"en un valor que sea lo suficientemente grande como para ejecutar el programa."
 
 #: src/ch02-05-control-flow.md:170
-#, fuzzy
 msgid ""
 "To break out of a loop, you can place the `break` statement within the loop "
 "to tell the program when to stop executing the loop. Let's fix the infinite "
 "loop by adding a making the stop condition `i > 10` reachable."
 msgstr ""
 "Para salir de un bucle, puedes colocar la instrucción `break` dentro del "
-"bucle para indicarle al programa cuándo detener\n"
-"la ejecución del bucle. Vamos a solucionar el bucle infinito haciendo que la "
-"condición de parada `i > 10` sea alcanzable."
+"bucle para indicarle al programa cuándo detener la ejecución del bucle. "
+"Vamos a solucionar el bucle infinito haciendo que la condición de parada "
+"`i > 10` sea alcanzable."
 
 #: src/ch02-05-control-flow.md:187
 msgid ""
@@ -3205,12 +2957,10 @@ msgstr ""
 "a `5`."
 
 #: src/ch02-05-control-flow.md:209
-#, fuzzy
 msgid "Returning Values from Loops"
-msgstr "#### Devolución de Valores de Loops"
+msgstr "Retorno de Valores de Loops"
 
 #: src/ch02-05-control-flow.md:211
-#, fuzzy
 msgid ""
 "One of the uses of a `loop` is to retry an operation you know might fail, "
 "such as checking whether an operation has succeeded. You might also need to "
@@ -3219,20 +2969,15 @@ msgid ""
 "expression you use to stop the loop; that value will be returned out of the "
 "loop so you can use it, as shown here:"
 msgstr ""
-"Uno de los usos de un `loop` es reintentar una operación que sabes que puede "
-"fallar, como por ejemplo\n"
-"comprobar si una operación ha tenido éxito. También puede ser necesario "
-"pasar\n"
-"el resultado de esa operación fuera del bucle al resto del código. Para "
-"ello\n"
-"Para ello, puede añadir el valor que desea devolver después de la expresión "
-"`break`\n"
-"para detener el bucle; ese valor será devuelto fuera del bucle para que "
-"pueda utilizarlo, \n"
+"Uno de los usos de un `loop` es volver a intentar una operación que sabes que "
+"podría fallar, como verificar si una operación ha tenido éxito. También es "
+"posible que necesites pasar el resultado de esa operación fuera del bucle "
+"para el resto de tu código. Para hacer esto, puedes agregar el valor que "
+"deseas devolver después de la expresión `break` que utilizas para detener el "
+"bucle; ese valor se devolverá fuera del bucle para que puedas utilizarlo, "
 "como se muestra aquí:"
 
 #: src/ch02-05-control-flow.md:235
-#, fuzzy
 msgid ""
 "Before the loop, we declare a variable named `counter` and initialize it to "
 "`0`. Then we declare a variable named `result` to hold the value returned "
@@ -3243,75 +2988,62 @@ msgid ""
 "value to `result`. Finally, we print the value in `result`, which in this "
 "case is `20`."
 msgstr ""
-"Antes del bucle, declaramos una variable llamada `counter` y la "
-"inicializamos a\n"
-"`0`. Luego declaramos una variable llamada `resultado` para mantener el "
-"valor devuelto por el bucle.\n"
-"del bucle. En cada iteración del bucle, comprobamos si `counter` es igual a "
-"`10`, y añadimos `1` a la variable `counter`.\n"
-"Cuando se cumple la condición, utilizamos la palabra clave `break` con el "
-"valor `counter * 2`. Después del bucle, usamos un\n"
-"punto y coma para terminar la sentencia que asigna el valor a `resultado`. "
-"Finalmente\n"
-"el valor en `resultado`, que en este caso es `20`."
+"Antes del bucle, declaramos una variable llamada `counter` y la inicializamos "
+"en `0`. Luego declaramos una variable llamada `result` para mantener el "
+"valor devuelto por el bucle. En cada iteración del bucle, comprobamos si `counter` "
+"es igual a `10`, y añadimos `1` a la variable `counter`. Cuando se cumple la "
+"condición, utilizamos la palabra clave `break` con el valor `counter * 2`. Después "
+"del bucle, usamos un punto y coma para terminar la sentencia que asigna el valor a "
+"`result`. Finalmente el valor en `result`, que en este caso es `20`."
 
 #: src/ch02-05-control-flow.md:244
-#, fuzzy
 msgid ""
 "You made it! This was a sizable chapter: you learned about variables, data "
 "types, functions, comments, `if` expressions and loops! To practice with the "
 "concepts discussed in this chapter, try building programs to do the "
 "following:"
 msgstr ""
-"¡Lo has conseguido! Este ha sido un capítulo considerable: has aprendido "
-"sobre variables, tipos de datos, funciones, comentarios,\n"
-"expresiones `if`, bucles y colecciones comunes. Para practicar con los "
-"conceptos discutidos en este capítulo,\n"
-"intenta construir programas para hacer lo siguiente:"
+"¡Lo has conseguido! Este fue un capítulo considerable: aprendiste sobre variables, "
+"tipos de datos, funciones, comentarios, expresiones `if` y bucles. Para practicar "
+"con los conceptos discutidos en este capítulo, intenta construir programas para "
+"hacer lo siguiente:"
 
 #: src/ch02-05-control-flow.md:248
-#, fuzzy
 msgid "Generate the _n_\\-th Fibonacci number."
-msgstr ""
-"- Generar el _n_-th número de Fibonacci.\n"
-"- Calcular el factorial de un número _n_."
+msgstr "Generar el _n_\\-th número de Fibonacci.\n"
+
 
 #: src/ch02-05-control-flow.md:249
-#, fuzzy
 msgid "Compute the factorial of a number _n_."
-msgstr ""
-"- Generar el _n_-th número de Fibonacci.\n"
-"- Calcular el factorial de un número _n_."
+msgstr "Calcular el factorial de un número _n_."
 
 #: src/ch02-05-control-flow.md:251
 msgid ""
 "Now, we’ll review the common collection types in Cairo in the next chapter."
 msgstr ""
+"Ahora, revisaremos los tipos de colección comunes en Cairo en el próximo capítulo."
 
 #: src/ch03-00-common-collections.md:3
-#, fuzzy
 msgid ""
 "Cairo provides a set of common collection types that can be used to store "
 "and manipulate data. These collections are designed to be efficient, "
 "flexible, and easy to use. This section introduces the primary collection "
 "types available in Cairo: Arrays and Dictionaries."
 msgstr ""
-"Cairo1 proporciona un conjunto de tipos de colecciones comunes que pueden "
-"utilizarse para almacenar y manipular datos. Estas colecciones están "
-"diseñadas para ser eficientes, flexibles y fáciles de usar. Esta sección "
-"presenta los principales tipos de colecciones disponibles en Cairo1: `Array` "
-"y `Felt252Dict` (próximamente)."
+"Cairo ofrece un conjunto de tipos de colecciones comunes que pueden utilizarse "
+"para almacenar y manipular datos. Estas colecciones están diseñadas para ser "
+"eficientes, flexibles y fáciles de usar. Esta sección presenta los tipos principales "
+"de colecciones disponibles en Cairo: Arrays y Diccionarios."
 
 #: src/ch03-01-arrays.md:3
 msgid ""
 "An array is a collection of elements of the same type. You can create and "
-"use array methods by importing the `array::ArrayTrait` trait."
+"use array methods by using the `ArrayTrait` trait from the core library."
 msgstr ""
-"Un array es una colección de elementos del mismo tipo. Puedes crear y "
-"utilizar métodos de array importando el trait `array::ArrayTrait`."
+"Un array es una colección de elementos del mismo tipo. Puedes crear y utilizar "
+"métodos de array mediante el uso del rasgo `ArrayTrait` de la libreria principal."
 
 #: src/ch03-01-arrays.md:5
-#, fuzzy
 msgid ""
 "An important thing to note is that arrays have limited modification options. "
 "Arrays are, in fact, queues whose values can't be modified. This has to do "
@@ -3321,67 +3053,59 @@ msgid ""
 msgstr ""
 "Algo importante a tener en cuenta es que las arrays tienen opciones de "
 "modificación limitadas. Las arrays son, de hecho, colas cuyos valores no "
-"pueden modificarse.\n"
-"Esto tiene que ver con el hecho de que una vez que se escribe en un espacio "
-"de memoria, no se puede sobrescribir, sino sólo leer de él. Sólo se pueden "
-"añadir elementos al final de un array y eliminar elementos de la parte "
-"delantera utilizando `pop_front`."
+"pueden modificarse. Esto tiene que ver con el hecho de que una vez que se "
+"escribe en un espacio de memoria, no se puede sobrescribir, sino sólo leer "
+"de él. Sólo se pueden añadir elementos al final de un array y eliminar "
+"elementos de la parte delantera utilizando `pop_front`."
 
 #: src/ch03-01-arrays.md:8
-#, fuzzy
 msgid "Creating an Array"
-msgstr "#### Crear un Array"
+msgstr "Crear un Array"
 
 #: src/ch03-01-arrays.md:10
 msgid ""
 "Creating an Array is done with the `ArrayTrait::new()` call. Here is an "
 "example of the creation of an array to which we append 3 elements:"
 msgstr ""
-"Crear una matriz se realiza con la llamada ArrayTrait::new()`. Aquí tienes "
-"un ejemplo de la creación de una matriz a la que agregamos 3 elementos:"
+"Crear un Array se realiza con la llamada `ArrayTrait::new()`. Aquí tienes "
+"un ejemplo de la creación de una array a la que agregamos 3 elementos:"
 
 #: src/ch03-01-arrays.md:21
-#, fuzzy
 msgid ""
 "When required, you can pass the expected type of items inside the array when "
 "instantiating the array like this, or explicitly define the type of the "
 "variable."
 msgstr ""
-"Puede pasar el tipo esperado de elementos dentro de la array al instanciar "
-"la array de la siguiente manera"
+"Cuando sea necesario, puedes pasar el tipo esperado de elementos dentro del "
+"array al instanciarlo de esta manera, o definir explícitamente el tipo del mismo."
 
 #: src/ch03-01-arrays.md:31
-#, fuzzy
 msgid "Updating an Array"
-msgstr "#### Actualizar un Array"
+msgstr "Actualizar un Array"
 
 #: src/ch03-01-arrays.md:33
-#, fuzzy
 msgid "Adding Elements"
-msgstr "##### Añadir Elementos"
+msgstr "Añadir Elementos"
 
 #: src/ch03-01-arrays.md:35
 msgid ""
 "To add an element to the end of an array, you can use the `append()` method:"
 msgstr ""
-"To add an element to the end of an array, you can use the `append()` method:"
+"Para añadir un elemento al final de un array, puedes utilizar el método `append()`:"
 
 #: src/ch03-01-arrays.md:46
-#, fuzzy
 msgid "Removing Elements"
-msgstr "##### Eliminar Elementos"
+msgstr "Eliminar Elementos"
 
 #: src/ch03-01-arrays.md:48
-#, fuzzy
 msgid ""
 "You can only remove elements from the front of an array by using the "
 "`pop_front()` method. This method returns an `Option` containing the removed "
 "element, or `Option::None` if the array is empty."
 msgstr ""
 "Sólo se pueden eliminar elementos de la parte frontal de un array utilizando "
-"el método `pop_front()`.\n"
-"Este método devuelve un `Option` que contiene el elemento eliminado, o "
-"`Option::None` si el array está vacío."
+"el método `pop_front()`. Este método devuelve un `Option` que contiene el "
+"elemento eliminado, o `Option::None` si el array está vacío."
 
 #: src/ch03-01-arrays.md:61
 msgid "// print '10'\n"
@@ -3410,9 +3134,8 @@ msgstr ""
 "directamente las celdas de memoria."
 
 #: src/ch03-01-arrays.md:69
-#, fuzzy
 msgid "Reading Elements from an Array"
-msgstr "#### Lectura de Elementos de un Array"
+msgstr "Lectura de Elementos en un Array"
 
 #: src/ch03-01-arrays.md:71
 msgid ""
@@ -3425,7 +3148,6 @@ msgstr ""
 "equivalente a utilizar el operador de subíndice `arr[index]`."
 
 #: src/ch03-01-arrays.md:73
-#, fuzzy
 msgid ""
 "The `get` function returns an `Option<Box<@T>>`, which means it returns an "
 "option to a Box type (Cairo's smart-pointer type) containing a snapshot to "
@@ -3443,10 +3165,9 @@ msgstr ""
 "`None`. Este método es útil cuando esperas acceder a índices que pueden no "
 "estar dentro de los límites del array y quieres manejar tales casos con "
 "gracia sin pánicos. Las instantáneas se explicarán con más detalle en el "
-"capítulo [Referencias y Snapshots](ch03-02-references-and-snapshots.md)."
+"capítulo [References and Snapshots](ch03-02-references-and-snapshots.md)."
 
 #: src/ch03-01-arrays.md:75
-#, fuzzy
 msgid ""
 "The `at` function, on the other hand, directly returns a snapshot to the "
 "element at the specified index using the `unbox()` operator to extract the "
@@ -3472,17 +3193,14 @@ msgstr ""
 "manejar estos casos con gracia sin entrar en pánico."
 
 #: src/ch03-01-arrays.md:90
-#, fuzzy
 msgid ""
 "In this example, the variable named `first` will get the value `0` because "
 "that is the value at index `0` in the array. The variable named `second` "
 "will get the value `1` from index `1` in the array."
 msgstr ""
 "En este ejemplo, la variable llamada `first` obtendrá el valor `0` porque es "
-"el \n"
-"valor del índice `0` del array. La variable llamada `second` obtendrá el "
-"valor `1` \n"
-"del índice `1` del array."
+"el valor del índice `0` del array. La variable llamada `second` obtendrá el "
+"valor `1` del índice `1` del array."
 
 #: src/ch03-01-arrays.md:94
 msgid "Here is an example with the `get()` method:"
@@ -3503,11 +3221,10 @@ msgid ""
 msgstr ""
 
 #: src/ch03-01-arrays.md:117
-#, fuzzy
 msgid "Size related methods"
-msgstr "#### Métodos relacionados con el tamaño"
+msgstr "Métodos Relacionados con el Tamaño"
 
-#: src/ch03-01-arrays.md:119
+#: src/ch03-01-arrays.md:113
 msgid ""
 "To determine the number of elements in an array, use the `len()` method. The "
 "return is of type `usize`."
@@ -3515,7 +3232,7 @@ msgstr ""
 "Para determinar el número de elementos de un array, utilice el método "
 "`len()`. El valor devuelto es de tipo `usize`."
 
-#: src/ch03-01-arrays.md:121
+#: src/ch03-01-arrays.md:115
 msgid ""
 "If you want to check if an array is empty or not, you can use the "
 "`is_empty()` method, which returns `true` if the array is empty and `false` "
@@ -3525,30 +3242,56 @@ msgstr ""
 "`is_empty()`, que devuelve `true` si el array está vacío y `false` en caso "
 "contrario."
 
-#: src/ch03-01-arrays.md:123
-#, fuzzy
-msgid "Storing multiple types with Enums"
-msgstr "#### Almacenar multiples tipos con Enums"
+#: src/ch03-01-arrays.md:117 src/ch11-02-macros.md:27
+msgid "`array!` macro"
+msgstr "`Array!` Macro"
 
-#: src/ch03-01-arrays.md:125
-#, fuzzy
+#: src/ch03-01-arrays.md:119
+msgid ""
+"Sometimes, we need to create arrays with values that are already known at "
+"compile time. The basic way of doing that is redundant. You would first "
+"declare the array and then append each value one by one. `array!` is a "
+"simpler way of doing this task by combining the two steps. At compile-time, "
+"the compiler will expand the macro to generate the code that appends the "
+"items sequentially."
+msgstr ""
+"A veces, necesitamos crear arrays con valores que ya se conocen en tiempo "
+"de compilación. La forma básica de hacerlo es redundante. Primero declararías "
+"el array y luego añadirías cada valor uno por uno. `array!` es una forma más "
+"sencilla de realizar esta tarea al combinar los dos pasos. En tiempo de "
+"compilación, el compilador expandirá la macro para generar el código que añade "
+"los elementos de forma secuencial "
+
+#: src/ch03-01-arrays.md:122 src/ch11-02-macros.md:10
+msgid "Without `array!`:"
+msgstr "Sin `array!`:"
+
+#: src/ch03-01-arrays.md:133 src/ch11-02-macros.md:21
+msgid "With `array!`:"
+msgstr "Con `array!`:"
+
+#: src/ch03-01-arrays.md:139
+msgid "Storing multiple types with Enums"
+msgstr "Almacenar Multiples Tipos con Enums"
+
+#: src/ch03-01-arrays.md:141
 msgid ""
 "If you want to store elements of different types in an array, you can use an "
 "`Enum` to define a custom data type that can hold multiple types. Enums will "
 "be explained in more detail in the [Enums and Pattern Matching](ch06-00-"
 "enums-and-pattern-matching.md) chapter."
 msgstr ""
-"Si desea almacenar elementos de diferentes tipos en una array, puede "
-"utilizar un `Enum` para definir un tipo de datos personalizado que pueda "
-"contener múltiples tipos."
+"Si deseas almacenar elementos de diferentes tipos en un array, puedes utilizar "
+"un "Enum" para definir un tipo de datos personalizado que puede contener "
+"múltiples tipos. Los Enums se explicarán con más detalle en el capítulo [Enums "
+"and Pattern Matching](ch06-00-enums-and-pattern-matching.md)."
 
 #: src/ch03-01-arrays.md:143
 #, fuzzy
 msgid "Span"
-msgstr "#### Span"
+msgstr "Span"
 
 #: src/ch03-01-arrays.md:145
-#, fuzzy
 msgid ""
 "`Span` is a struct that represents a snapshot of an `Array`. It is designed "
 "to provide safe and controlled access to the elements of an array without "
@@ -3562,7 +3305,7 @@ msgstr ""
 "un array sin modificar el array original. Span es particularmente útil para "
 "asegurar la integridad de los datos y evitar problemas de préstamo cuando se "
 "pasan arrays entre funciones o cuando se realizan operaciones de sólo "
-"lectura (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))"
+"lectura (cf. [References and Snapshots](ch03-02-references-and-snapshots.md))."
 
 #: src/ch03-01-arrays.md:147
 msgid ""
@@ -3573,13 +3316,12 @@ msgstr ""
 "`Span`, a excepción del método `append()`."
 
 #: src/ch03-01-arrays.md:149
-#, fuzzy
 msgid "Turning an Array into span"
-msgstr "##### Convertir un Array en span"
+msgstr "Convertir un Array en Span"
 
 #: src/ch03-01-arrays.md:151
 msgid "To create a `Span` of an `Array`, call the `span()` method:"
-msgstr "To create a `Span` of an `Array`, call the `span()` method:"
+msgstr "Para crear un `Span` de un `Array`, llama al método `span()`:"
 
 #: src/ch03-02-dictionaries.md:3
 msgid ""
@@ -3589,6 +3331,11 @@ msgid ""
 "data structure is known differently across different programming languages "
 "such as maps, hash tables, associative arrays and many others."
 msgstr ""
+"Cairo proporciona en su libreria principal un tipo de datos similar a un "
+"diccionario. El tipo de datos Felt252Dict<T> representa una colección de pares "
+"key-value donde cada key es única y está asociada con un value correspondiente. "
+"Este tipo de estructura de datos se conoce de manera diferente en varios lenguajes "
+"de programación, como mapas, tablas hash, arrays asociativos y muchos otros."
 
 #: src/ch03-02-dictionaries.md:5
 msgid ""
@@ -3597,10 +3344,14 @@ msgid ""
 "Cairo dictionaries also allow the programmer to easily simulate the "
 "existence of mutable memory when there is none."
 msgstr ""
+"El tipo Felt252Dict<T> es útil cuando deseas organizar tus datos de una manera "
+"específica para la cual el uso de un Array<T> e indexación no es suficiente. "
+"Los diccionarios en Cairo también permiten al programador simular fácilmente "
+"la existencia de memoria mutable cuando no la hay."
 
 #: src/ch03-02-dictionaries.md:7
 msgid "Basic Use of Dictionaries"
-msgstr ""
+msgstr "Uso Basico de Diccionarios"
 
 #: src/ch03-02-dictionaries.md:9
 msgid ""
@@ -3609,6 +3360,11 @@ msgid ""
 "`felt252` leaving only the possibility to specify the value data type, "
 "represented by `T` in `Felt252Dict<T>`."
 msgstr ""
+"Es común en otros lenguajes especificar los tipos de datos tanto para la key "
+"como para el value al crear un nuevo diccionario. En Cairo, el tipo de key está "
+"restringido a `felt252`, lo que deja solo la posibilidad de especificar el tipo "
+"de dato del value, representado por `T` en `Felt252Dict<T>`."
+
 
 #: src/ch03-02-dictionaries.md:11
 msgid ""
@@ -3616,14 +3372,17 @@ msgid ""
 "`Felt252DictTrait` which includes all basic operations. Among them we can "
 "find:"
 msgstr ""
+"La funcionalidad principal de un Felt252Dict<T> se implementa en el rasgo "
+"`Felt252DictTrait`, que incluye todas las operaciones básicas. Entre ellas "
+"podemos encontrar:"
 
 #: src/ch03-02-dictionaries.md:13
 msgid "`insert(felt252, T) -> ()` to write values to a dictionary instance and"
-msgstr ""
+msgstr "`insert(felt252, T) -> ()` para escribir valores en una instancia de diccionario."
 
 #: src/ch03-02-dictionaries.md:14
 msgid "`get(felt252) -> T` to read values from it."
-msgstr ""
+msgstr "`get(felt252) -> T` para leer sus valores."
 
 #: src/ch03-02-dictionaries.md:16
 msgid ""
@@ -3631,16 +3390,23 @@ msgid ""
 "language. In the following example, we create a dictionary to represent a "
 "mapping between individuals and their balance:"
 msgstr ""
+"Estas funciones nos permiten manipular diccionarios como en cualquier otro lenguaje. "
+"En el siguiente ejemplo, creamos un diccionario para representar una relación entre "
+"individuos y sus saldos:"
 
 #: src/ch03-02-dictionaries.md:33
 msgid ""
-"The first thing we do is import `Felt252DictTrait` which brings to scope all "
-"the methods we need to interact with the dictionary. Next, we create a new "
-"instance of `Felt252Dict<u64>` by using the `default` method of the "
-"`Default` trait and added two individuals, each one with their own balance, "
-"using the `insert` method. Finally, we checked the balance of our users with "
-"the `get` method."
+"We can create a new instance of `Felt252Dict<u64>` by using the `default` "
+"method of the `Default` trait and add two individuals, each one with their "
+"own balance, using the `insert` method. Finally, we check the balance of our "
+"users with the `get` method. These methods are defined in the "
+"`Felt252DictTrait` trait in the core library."
 msgstr ""
+"Podemos crear una nueva instancia de `Felt252Dict<u64>` utilizando el método "
+"`default` del rasgo `Default` y añadir dos individuos, cada uno con su propio "
+"saldo, utilizando el método `insert`. Por último, comprobamos el saldo de "
+"nuestros usuarios con el método `get`. Estos métodos están definidos en el trait "
+"`Felt252DictTrait` de la librería principal."
 
 #: src/ch03-02-dictionaries.md:35
 msgid ""
@@ -3649,12 +3415,19 @@ msgid ""
 "type represents a way to overcome this obstacle. We will explain how this is "
 "implemented later on in [Dictionaries Underneath](#dictionaries-underneath)."
 msgstr ""
+"A lo largo del libro, hemos hablado sobre cómo la memoria en Cairo es inmutable, "
+"lo que significa que solo puedes escribir en una celda de memoria una vez, pero "
+"el tipo Felt252Dict<T> representa una manera de superar este obstáculo. Explicaremos "
+"cómo se implementa esto más adelante en [Dictionaries Underneath]"
+"(#dictionaries-underneath)."
 
 #: src/ch03-02-dictionaries.md:37
 msgid ""
 "Building upon our previous example, let us show a code example where the "
 "balance of the same user changes:"
 msgstr ""
+"Basándonos en nuestro ejemplo anterior, vamos a mostrar un ejemplo de código "
+"en el que cambia el saldo del mismo usuario:"
 
 #: src/ch03-02-dictionaries.md:43
 msgid "// Insert Alex with 100 balance\n"
@@ -3679,6 +3452,10 @@ msgid ""
 "had the last value inserted! `Felt252Dict<T>` effectively allows us to "
 "\"rewrite\" the stored value for any given key."
 msgstr ""
+"¡Fíjate cómo en este ejemplo hemos añadido el individuo _Alex_ dos veces, "
+"cada vez usando un saldo diferente y cada vez que comprobamos su saldo tenía "
+"el último valor insertado! `Felt252Dict<T>` nos permite efectivamente \"reescribir\" "
+"el valor almacenado para cualquier key dada."
 
 #: src/ch03-02-dictionaries.md:59
 msgid ""
@@ -3690,6 +3467,13 @@ msgid ""
 "is no way to delete data from a dictionary. Something to take into account "
 "when incorporating this structure into your code."
 msgstr ""
+"Antes de seguir adelante y explicar cómo se implementan los diccionarios "
+"vale la pena mencionar que una vez que instanciar un `Felt252Dict<T>`, detrás "
+"de las escenas de todas las claves tienen sus valores asociados inicializado "
+"como cero. Esto significa que si, por ejemplo, intentas obtener el saldo de un "
+"usuario inexistente obtendrás 0 en lugar de un error o un valor indefinido. "
+"Esto también significa que no hay forma de borrar datos de un diccionario. "
+"Algo a tener en cuenta a la hora de incorporar esta estructura a tu código."
 
 #: src/ch03-02-dictionaries.md:61
 msgid ""
@@ -3700,6 +3484,13 @@ msgid ""
 "any other popular language in existence, which as a consequence means that "
 "dictionaries are implemented very differently as well!"
 msgstr ""
+" Hasta este punto, hemos visto todas las características básicas de "
+"`Felt252Dict<T>` y cómo imita el mismo comportamiento que las estructuras de "
+"datos correspondientes en cualquier otro lenguaje, es decir, externamente, "
+"por supuesto. Cairo es en su núcleo un lenguaje de programación Turing-completo "
+"no determinista, muy diferente de cualquier otro lenguaje popular existente, "
+"lo que como consecuencia significa que ¡los diccionarios se implementan también "
+"de forma muy diferente!"
 
 #: src/ch03-02-dictionaries.md:63
 msgid ""
@@ -3709,10 +3500,15 @@ msgid ""
 "dictionaries with other data structures as well as use the `entry` method as "
 "another way to interact with them."
 msgstr ""
+"En las siguientes secciones, vamos a dar algunas ideas sobre `Felt252Dict<T>` "
+"mecanismos internos y los compromisos que se tomaron para que funcionen. Después "
+"de eso, vamos a echar un vistazo a cómo utilizar los diccionarios con otras "
+"estructuras de datos, así como utilizar el método `entry` como otra forma de "
+"interactuar con ellos."
 
 #: src/ch03-02-dictionaries.md:65
 msgid "Dictionaries Underneath"
-msgstr ""
+msgstr "Diccionarios por Debajo"
 
 #: src/ch03-02-dictionaries.md:67
 msgid ""
@@ -3722,22 +3518,28 @@ msgid ""
 "represents a time when a dictionary was accessed for reading/updating/"
 "writing purposes. An entry has three fields:"
 msgstr ""
+"Una de las restricciones del diseño no determinista de Cairo es que su sistema "
+"de memoria es inmutable, así que para simular la mutabilidad, el lenguaje implementa "
+"`Felt252Dict<T>` como una lista de entradas. Cada una de las entradas representa un "
+"momento en el que se accedió al diccionario para leer/actualizar/escribir. Una entrada "
+"tiene tres campos:"
 
 #: src/ch03-02-dictionaries.md:69
 msgid ""
-"A `key` field that identifies the value for this key-value pair of the "
-"dictionary."
+"A `key` field that identifies the value for this key-value pair of the dictionary."
 msgstr ""
+"Un campo `key` que identifica el valor para este par key-value del diccionario."
 
 #: src/ch03-02-dictionaries.md:70
 msgid ""
 "A `previous_value` field that indicates which previous value was held at "
 "`key`."
 msgstr ""
+"Un campo `previous_value` que indica qué valor anterior tenía `key`."
 
 #: src/ch03-02-dictionaries.md:71
 msgid "A `new_value` field that indicates the new value that is held at `key`."
-msgstr ""
+msgstr "Un campo `new_value` que indica el nuevo valor que se tiene en `key`."
 
 #: src/ch03-02-dictionaries.md:73
 msgid ""
@@ -3746,18 +3548,26 @@ msgid ""
 "information about what key-value pair it represents and the previous and new "
 "values it holds. The definition of `Entry<T>` would be:"
 msgstr ""
+"Si intentamos implementar `Felt252Dict<T>` usando estructuras de alto nivel "
+"lo definiríamos internamente como `Array<Entry<T>>` donde cada `Entry<T>` tiene "
+"información sobre qué par key-value representa y los valores anteriores y "
+"nuevos que contiene. La definición de `Entry<T>` sería:"
 
 #: src/ch03-02-dictionaries.md:83
 msgid ""
 "For each time we interact with a `Felt252Dict<T>` a new `Entry<T>` will be "
 "registered:"
 msgstr ""
+"Por cada vez que interactuemos con un `Felt252Dict<T>` se registrará una "
+"nueva `Entrada<T>`:"
 
 #: src/ch03-02-dictionaries.md:85
 msgid ""
 "A `get` would register an entry where there is no change in state, and "
 "previous and new values are stored with the same value."
 msgstr ""
+"Un `get` registraría una entrada en la que no hay cambio de estado, los "
+"valores anteriores y nuevos se almacenan con el mismo valor."
 
 #: src/ch03-02-dictionaries.md:86
 msgid ""
@@ -3766,6 +3576,10 @@ msgid ""
 "inserted before this. In case it is the first entry for a certain key, then "
 "the previous value will be zero."
 msgstr ""
+"Un `insert` registraría una nueva `Entry<T>` donde el `new_value` sería "
+"el elemento que se inserta, y el `previous_value` el último elemento insertado "
+"antes de este. En caso de que sea la primera entrada para una determinada clave, "
+"entonces el valor anterior será cero."
 
 #: src/ch03-02-dictionaries.md:88
 msgid ""
@@ -3774,10 +3588,14 @@ msgid ""
 "example of this using the `balances` dictionary from the previous section "
 "and inserting the users 'Alex' and 'Maria':"
 msgstr ""
+"El uso de esta lista de entradas muestra cómo no hay ninguna reescritura, "
+"sólo la creación de nuevas celdas de memoria por interacción `Felt252Dict<T>`. "
+"Vamos a mostrar un ejemplo de esto usando el diccionario `balances` de la sección "
+"anterior e insertando los usuarios `Alex` y `Maria`:"
 
 #: src/ch03-02-dictionaries.md:106
 msgid "These instructions would then produce the following list of entries:"
-msgstr ""
+msgstr "Estas instrucciones producirían la siguiente lista de entradas:"
 
 #: src/ch03-02-dictionaries.md:108 src/ch03-02-dictionaries.md:130
 #: src/ch03-02-dictionaries.md:143
@@ -3833,6 +3651,10 @@ msgid ""
 "`previous` and `current` values are set properly. Also reading from 'Maria' "
 "registered an entry with no change from previous to current values."
 msgstr ""
+"Observe que como 'Alex' se insertó dos veces, aparece dos veces y los "
+"valores `previous` y `current` se establecen correctamente. También la "
+"lectura de 'Maria' registró una entrada sin cambios de los valores "
+"anteriores a los actuales."
 
 #: src/ch03-02-dictionaries.md:117
 msgid ""
@@ -3844,6 +3666,12 @@ msgid ""
 "worst-case time complexity of `O(n)` where `n` is the number of entries in "
 "the list."
 msgstr ""
+"Este enfoque para implementar `Felt252Dict<T>` significa que para cada operación "
+"de lectura/escritura, hay un escaneo de toda la lista de entradas en busca de la "
+"última entrada con la misma `clave`. Una vez encontrada la entrada, se extrae su "
+"`nuevo_valor` y se utiliza en la nueva entrada que se añade como `valor_anterior`. "
+"Esto significa que interactuar con `Felt252Dict<T>` tiene una complejidad temporal "
+"en el peor de los casos de `O(n)` donde `n` es el número de entradas de la lista."
 
 #: src/ch03-02-dictionaries.md:119
 msgid ""
@@ -3857,10 +3685,18 @@ msgid ""
 "of \"dictionary squashing\" and that requires information on both previous "
 "and new values for every entry."
 msgstr ""
+"Si te pones a pensar en formas alternativas de implementar `Felt252Dict<T>` seguramente "
+"las encontrarás, probablemente incluso eliminando completamente la necesidad de un campo "
+"`previous_value`, sin embargo, como Cairo no es un lenguaje normal esto no funcionará. "
+"Uno de los propósitos de Cairo es, con el sistema de pruebas STARK, generar pruebas de "
+"integridad computacional. Esto significa que necesitas verificar que la ejecución del "
+"programa es correcta y dentro de los límites de las restricciones de Cairo. Una de esas "
+"comprobaciones de límites consiste en "comprimir diccionarios" y eso requiere información "
+"tanto de los valores anteriores como de los nuevos para cada entrada."
 
 #: src/ch03-02-dictionaries.md:122
 msgid "Squashing Dictionaries"
-msgstr ""
+msgstr "Comprimir Diccionarios"
 
 #: src/ch03-02-dictionaries.md:124
 msgid ""
@@ -3870,6 +3706,11 @@ msgid ""
 "`squash_dict` that reviews each entry of the entry list and checks that "
 "access to the dictionary remains coherent throughout the execution."
 msgstr ""
+"Para verificar que la prueba generada por la ejecución de un programa Cairo que "
+"utilizó un `Felt252Dict<T>` es correcta necesitamos comprobar que no hubo ninguna "
+"manipulación ilegal del diccionario. Esto se hace mediante un método llamado "
+"`squash_dict` que revisa cada entrada de la lista de entradas y comprueba que el "
+"acceso al diccionario sigue siendo coherente durante toda la ejecución."
 
 #: src/ch03-02-dictionaries.md:126
 msgid ""
@@ -3877,10 +3718,13 @@ msgid ""
 "`k`, taken in the same order as they were inserted, verify that the ith "
 "entry `new_value` is equal to the ith + 1 entry `previous_value`."
 msgstr ""
+"El proceso de comprimir es el siguiente: dadas todas las entradas con cierta clave `k`, "
+"tomadas en el mismo orden en que fueron insertadas, verificar que la i-ésima entrada "
+"`new_value` es igual a la i-th + 1 entrada `previous_value`."
 
 #: src/ch03-02-dictionaries.md:128
 msgid "For example, given the following entry list:"
-msgstr ""
+msgstr "Por ejemplo, dada la siguiente lista de entradas:"
 
 #: src/ch03-02-dictionaries.md:132 src/ch03-02-dictionaries.md:136
 msgid "150"
@@ -3916,17 +3760,19 @@ msgstr ""
 
 #: src/ch03-02-dictionaries.md:141
 msgid "After squashing, the entry list would be reduced to:"
-msgstr ""
+msgstr "Después de comprimir, la lista de entradas se reduciría a:"
 
 #: src/ch03-02-dictionaries.md:149
 msgid ""
 "In case of a change on any of the values of the first table, squashing would "
 "have failed during runtime."
 msgstr ""
+"En caso de un cambio en alguno de los valores de la primera tabla, la compresión "
+"habría fallado durante la ejecución."
 
 #: src/ch03-02-dictionaries.md:151
 msgid "Dictionary Destruction"
-msgstr ""
+msgstr "Destrucción de Diccionarios"
 
 #: src/ch03-02-dictionaries.md:153
 msgid ""
@@ -3937,6 +3783,12 @@ msgid ""
 "implementation of the `Destruct<T>` trait. This call occurred just before "
 "the `balance` dictionary went out of scope."
 msgstr ""
+"Pruebas los ejemplos de [Basic Use of Dictionaries](#basic-use-of-"
+"dictionaries), notarás que nunca se hizo una llamada a para comprimir el diccionario, "
+"pero el programa se compiló exitosamente de todos modos. Lo que ocurrió en segundo "
+"plano es que la operación de compresión se llamó automáticamente mediante la "
+"implementación de `Felt252Dict<T>` del rasgo `Destruct<T>`. Esta llamada ocurrió "
+"justo antes de que el diccionario `balance` saliera del scope."
 
 #: src/ch03-02-dictionaries.md:155
 msgid ""
@@ -3949,6 +3801,13 @@ msgid ""
 "traits in [Drop and Destruct](/appendix-03-derivable-traits.md#drop-and-"
 "destruct)."
 msgstr ""
+"El `Destruct<T>` representa otra forma de eliminar instancias fuera del scope "
+"aparte de `Drop<T>`. La principal diferencia entre estos dos es que `Drop<T>` se "
+"trata como una operación no-op, lo que significa que no genera nuevos CASM mientras "
+"que `Destruct<T>` no tiene esta restricción. El único tipo que utiliza activamente "
+"el rasgo `Destruct<T>` es `Felt252Dict<T>`, para cualquier otro tipo `Destruct<T>` "
+"y `Drop<T>` son sinónimos. Puedes leer más sobre estos rasgos en [Drop and Destruct]"
+"(/appendix-03-derivable-traits.md#drop-and-destruct)."
 
 #: src/ch03-02-dictionaries.md:157
 msgid ""
@@ -3956,10 +3815,13 @@ msgid ""
 "we will have a hands-on example where we implement the `Destruct<T>` trait "
 "for a custom type."
 msgstr ""
+"Más adelante en [Dictionaries as Struct Members](#dictionaries-as-struct-members), "
+"tendremos un ejemplo práctico donde implementaremos el rasgo `Destruct<T>` para un "
+"tipo personalizado."
 
 #: src/ch03-02-dictionaries.md:159
 msgid "More Dictionaries"
-msgstr ""
+msgstr "Más Diccionarios"
 
 #: src/ch03-02-dictionaries.md:161
 msgid ""
@@ -3968,6 +3830,10 @@ msgid ""
 "in a certain way. If you haven't understood all of it, don't worry because "
 "in this section we will have some more examples using dictionaries."
 msgstr ""
+"Hasta este punto, hemos dado una visión general de la funcionalidad de `Felt252Dict<T>` "
+"de cómo y por qué se implementa de una determinada manera. Si no lo has entendido todo, "
+"no te preocupes porque en esta sección tendremos algunos ejemplos más utilizando "
+"diccionarios."
 
 #: src/ch03-02-dictionaries.md:163
 msgid ""
@@ -3978,10 +3844,16 @@ msgid ""
 "complex types such as `Array<T>` and how to [implement](#dictionaries-as-"
 "struct-members) a struct with a dictionary as a member."
 msgstr ""
+"Empezaremos explicando el método `entry` que forma parte de una funcionalidad "
+"básica del diccionario incluida en `Felt252DictTrait<T>` que no mencionamos al "
+"principio. Poco después, veremos ejemplos de cómo `Felt252Dict<T>` [interacts]"
+"(#dictionaries-of-complex-types) con otros tipos complejos como `Array<T>` y cómo "
+"[implement](#dictionaries-as-struct-members) una struct con un diccionario "
+"como miembro."
 
 #: src/ch03-02-dictionaries.md:165
 msgid "Entry and Finalize"
-msgstr ""
+msgstr "Entrada y Finalización"
 
 #: src/ch03-02-dictionaries.md:167
 msgid ""
@@ -3992,6 +3864,12 @@ msgid ""
 "whatever operation it was executing. The Cairo language gives us the tools "
 "to replicate this ourselves through the `entry` and `finalize` methods."
 msgstr ""
+"En la sección [Dictionaries Underneath](#diccionarios-debajo), explicamos "
+"cómo funcionaba internamente `Felt252Dict<T>`. Era una lista de entradas cada "
+"vez que se accedía al diccionario de cualquier manera. Primero encontraba la "
+"última entrada dada una cierta `clave` y luego la actualizaba según la operación "
+"que estuviera ejecutando. El lenguaje Cairo nos da las herramientas para replicar "
+"esto nosotros mismos a través de los métodos `entry` y `finalize`."
 
 #: src/ch03-02-dictionaries.md:169
 msgid ""
@@ -4000,6 +3878,10 @@ msgid ""
 "ownership of the dictionary and returns the entry to update. The method "
 "signature is as follows:"
 msgstr ""
+"El método `entry` viene como parte de `Felt252DictTrait<T>` con el propósito de "
+"crear una nueva entrada dada una determinada clave. Una vez llamado, este método "
+"toma posesión del diccionario y devuelve la entrada a actualizar. La característica "
+"del método es la siguiente:"
 
 #: src/ch03-02-dictionaries.md:175
 msgid ""
@@ -4008,6 +3890,10 @@ msgid ""
 "`Felt252DictEntry<T>`, which is the type used by Cairo to represent "
 "dictionary entries, and a `T` representing the value held previously."
 msgstr ""
+"El primer parámetro de entrada toma posesión del diccionario mientras que el segundo "
+"se utiliza para crear la entrada apropiada. Devuelve una tupla que contiene una "
+"`Felt252DictEntry<T>`, que es el tipo utilizado por Cairo para representar entradas de "
+"diccionario, y una `T` que representa el valor mantenido anteriormente."
 
 #: src/ch03-02-dictionaries.md:177
 msgid ""
@@ -4015,12 +3901,16 @@ msgid ""
 "use the `finalize` method which inserts the entry and returns ownership of "
 "the dictionary:"
 msgstr ""
+"Lo siguiente que hay que hacer es actualizar la entrada con el nuevo valor. Para esto, "
+"utilizamos el método `finalize` que inserta la entrada y devuelve la propiedad del diccionario:"
 
 #: src/ch03-02-dictionaries.md:183
 msgid ""
 "This method receives the entry and the new value as a parameter and returns "
 "the updated dictionary."
 msgstr ""
+"Este método recibe la entrada y el nuevo valor como parámetro, devolviendo el "
+"diccionario actualizado."
 
 #: src/ch03-02-dictionaries.md:185
 msgid ""
@@ -4028,23 +3918,26 @@ msgid ""
 "implement our own version of the `get` method from a dictionary. We should "
 "then do the following:"
 msgstr ""
+"Veamos un ejemplo utilizando `entry` y `finalize`. Imaginemos que queremos implementar nuestra "
+"propia versión del método `get` de un diccionario. Deberíamos hacer lo siguiente:"
 
 #: src/ch03-02-dictionaries.md:187
 msgid "Create the new entry to add using the `entry` method"
-msgstr ""
+msgstr "Crear la nueva entrada que deseamos agregar utilizando el método `entry`."
 
 #: src/ch03-02-dictionaries.md:188
 msgid ""
 "Insert back the entry where the `new_value` equals the `previous_value`."
 msgstr ""
+"Insertar nuevamente la entrada donde el `new_value` sea igual al `previous_value`."
 
 #: src/ch03-02-dictionaries.md:189
 msgid "Return the value."
-msgstr ""
+msgstr "Devolver el valor."
 
 #: src/ch03-02-dictionaries.md:191
 msgid "Implementing our custom get would look like this:"
-msgstr ""
+msgstr "Implementar nuestra propia función get se vería así:"
 
 #: src/ch03-02-dictionaries.md:199 src/ch03-02-dictionaries.md:248
 msgid "// Get the new entry and the previous value held at `key`\n"
@@ -4070,6 +3963,9 @@ msgid ""
 "inserting a new value when finalizing. If we were to implement it, it would "
 "look like the following:"
 msgstr ""
+"Implementar el método `insert` seguiría un flujo de trabajo similar, excepto "
+"por la inserción de un nuevo valor al finalizar. Si lo implementáramos, tendría "
+"el siguiente aspecto:"
 
 #: src/ch03-02-dictionaries.md:227
 msgid ""
@@ -4090,6 +3986,9 @@ msgid ""
 "how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows "
 "some example usage:"
 msgstr ""
+"Como nota final, estos dos métodos se implementan de manera similar a cómo "
+"`insert` y `get` se implementan para `Felt252Dict<T>`. Este código muestra "
+"algunos ejemplos de uso:"
 
 #: src/ch03-02-dictionaries.md:270
 msgid "// Get the last entry associated with `key`\n"
@@ -4117,7 +4016,7 @@ msgstr ""
 
 #: src/ch03-02-dictionaries.md:293
 msgid "Dictionaries of types not supported natively"
-msgstr ""
+msgstr "Tipos de Diccionarios No Soportados Nativamente"
 
 #: src/ch03-02-dictionaries.md:295
 msgid ""
@@ -4133,6 +4032,16 @@ msgid ""
 "valid dictionary value type. To compensate this, you can wrap your type "
 "inside a `Nullable<T>`."
 msgstr ""
+"Una restricción de `Felt252Dict<T>` de la que no hemos hablado es el rasgo "
+"`Felt252DictValue<T>`. Este rasgo define el método `zero_default` que es el "
+"que se llama cuando un valor no existe en el diccionario. Esto está implementado "
+"para algunos tipos de datos comunes, como la mayoría de los enteros sin signo, "
+"`bool` y `felt252` - pero no está implementado para tipos más complejos como "
+"arrays, structs (incluyendo `u256`), y otros tipos de la librería principal. "
+"Esto significa que hacer un diccionario de tipos no soportados nativamente no "
+"es una tarea sencilla, porque necesitarías escribir un par de implementaciones "
+"de rasgos para hacer del tipo de datos un tipo de valor de diccionario válido. "
+"Para compensar esto, puedes envolver tu tipo dentro de un `Nullable<T>`."
 
 #: src/ch03-02-dictionaries.md:301
 msgid ""
@@ -4144,6 +4053,13 @@ msgid ""
 "allocate a new memory segment for our type, and access this segment using a "
 "pointer that can only be manipulated in one place at a time."
 msgstr ""
+"`Nullable<T>` es un tipo de puntero inteligente que puede apuntar a un valor o "
+"ser `null` en ausencia de valor. Suele utilizarse en Lenguajes de Programación "
+"Orientados a Objetos cuando una referencia no apunta a ningún sitio. La diferencia "
+"con `Option` es que el valor envuelto se almacena dentro de un tipo de datos "
+"`Box<T>`. El tipo `Box<T>`, inspirado en Rust, nos permite asignar un nuevo segmento "
+"de memoria para nuestro tipo, y acceder a este segmento utilizando un puntero que "
+"sólo puede ser manipulado en un lugar a la vez."
 
 #: src/ch03-02-dictionaries.md:303
 msgid ""
@@ -4153,6 +4069,10 @@ msgid ""
 "implement the `Copy<T>` trait which is required for reading from a "
 "dictionary."
 msgstr ""
+"Vamos a mostrarlo con un ejemplo. Intentaremos almacenar un `Span<felt252>` dentro "
+"de un diccionario. Para ello utilizaremos `Nullable<T>` y `Box<T>`. Además, estamos "
+"almacenando un `Span<T>` y no un `Array<T>` porque este último no implementa el rasgo "
+"`Copy<T>` que es necesario para leer de un diccionario."
 
 #: src/ch03-02-dictionaries.md:310 src/ch03-02-dictionaries.md:368
 msgid "// Create the dictionary\n"
@@ -4176,27 +4096,34 @@ msgid ""
 "`d`. We want it to hold a `Nullable<Span>`. After that, we created an array "
 "and filled it with values."
 msgstr ""
+"En este fragmento de código, lo primero que hicimos fue crear un nuevo "
+"diccionario `d`. Queremos que contenga un  `Nullable<Span>`. Después, "
+"creamos un array y lo llenamos de valores."
 
 #: src/ch03-02-dictionaries.md:327
 msgid ""
 "The last step is inserting the array as a span inside the dictionary. Notice "
 "that we didn't do that directly, but instead, we took some steps in between:"
 msgstr ""
+"El último paso es insertar el array como un span dentro del diccionario. Fíjate "
+"que no lo hemos hecho directamente, sino que hemos dado algunos pasos intermedios:"
 
 #: src/ch03-02-dictionaries.md:329
 msgid ""
 "We wrapped the array inside a `Box` using the `new` method from `BoxTrait`."
 msgstr ""
+"Envolvimos el array dentro de un `Box` usando el método `new` de `BoxTrait`."
 
 #: src/ch03-02-dictionaries.md:330
 msgid ""
 "We wrapped the `Box` inside a nullable using the `nullable_from_box` "
 "function."
 msgstr ""
+"Envolvemos el `Box` dentro de un tipo nullable usando la función `nullable_from_box`."
 
 #: src/ch03-02-dictionaries.md:331
 msgid "Finally, we inserted the result."
-msgstr ""
+msgstr "Por último, introducimos el resultado."
 
 #: src/ch03-02-dictionaries.md:333
 msgid ""
@@ -4204,6 +4131,8 @@ msgid ""
 "the same steps but in reverse order. The following code shows how to achieve "
 "that:"
 msgstr ""
+"Una vez que el elemento está dentro del diccionario, y queremos obtenerlo, seguimos "
+"los mismos pasos pero en orden inverso. El siguiente código muestra cómo conseguirlo:"
 
 #: src/ch03-02-dictionaries.md:338 src/ch03-02-dictionaries.md:380
 msgid "// Get value back\n"
@@ -4219,27 +4148,27 @@ msgstr ""
 
 #: src/ch03-02-dictionaries.md:354
 msgid "Here we:"
-msgstr ""
+msgstr "Aquí tenemos:"
 
 #: src/ch03-02-dictionaries.md:356
 msgid "Read the value using `get`."
-msgstr ""
+msgstr "Lee el valor utilizando `get`."
 
 #: src/ch03-02-dictionaries.md:357
 msgid "Verified it is non-null using the `match_nullable` function."
-msgstr ""
+msgstr "Verificado que no es nulo usando la función `match_nullable`."
 
 #: src/ch03-02-dictionaries.md:358
 msgid "Unwrapped the value inside the box and asserted it was correct."
-msgstr ""
+msgstr "Desenvolvió el valor dentro de la caja y afirmó que era correcto."
 
 #: src/ch03-02-dictionaries.md:360
 msgid "The complete script would look like this:"
-msgstr ""
+msgstr "El script completo tendría este aspecto:"
 
 #: src/ch03-02-dictionaries.md:397
 msgid "Dictionaries as Struct Members"
-msgstr ""
+msgstr "Diccionarios como Miembros del Struct"
 
 #: src/ch03-02-dictionaries.md:399
 msgid ""
@@ -4249,6 +4178,11 @@ msgid ""
 "will need to define a struct to represent the new type and a trait to define "
 "its functionality:"
 msgstr ""
+"Definir diccionarios como miembros de struct es posible en Cairo, pero interactuar "
+"correctamente con ellos puede no ser del todo fluido. Intentemos implementar una "
+"_user database_ personalizada que nos permita añadir usuarios y consultarlos. "
+"Necesitaremos definir un struct para representar el nuevo tipo y un trait para "
+"definir su funcionalidad:"
 
 #: src/ch03-02-dictionaries.md:414
 msgid ""
@@ -4256,32 +4190,37 @@ msgid ""
 "over the balances of the users, giving major flexibility to whoever uses our "
 "data type. Its two members are:"
 msgstr ""
+"Nuestro nuevo tipo `UserDatabase<T>` representa una base de datos de usuarios. "
+"Es genérico sobre los saldos de los usuarios, dando mayor flexibilidad a quien "
+"utilice nuestro tipo de datos. Sus dos miembros son:"
 
 #: src/ch03-02-dictionaries.md:416
 msgid "`users_amount`, the number of users currently inserted and"
-msgstr ""
+msgstr "`users_amount`, el número de usuarios insertados actualmente."
 
 #: src/ch03-02-dictionaries.md:417
 msgid "`balances`, a mapping of each user to its balance."
-msgstr ""
+msgstr "`balances`, una asignación de cada usuario a su balance."
 
 #: src/ch03-02-dictionaries.md:419
 msgid ""
 "The database core functionality is defined by `UserDatabaseTrait`. The "
 "following methods are defined:"
 msgstr ""
+"La funcionalidad central de la base de datos está definida por `UserDatabaseTrait`. "
+"Donde se definen los siguientes métodos:"
 
 #: src/ch03-02-dictionaries.md:421
 msgid "`new` for easily creating new `UserDatabase` types."
-msgstr ""
+msgstr "`new` para crear fácilmente nuevos tipos de `UserDatabase`."
 
 #: src/ch03-02-dictionaries.md:422
 msgid "`add_user` to insert users in the database."
-msgstr ""
+msgstr "`add_user` para insertar usuarios en la base de datos."
 
 #: src/ch03-02-dictionaries.md:423
 msgid "`get_balance` to find user's balance in the database."
-msgstr ""
+msgstr "`get_balance` para encontrar el saldo del usuario en la base de datos."
 
 #: src/ch03-02-dictionaries.md:425
 msgid ""
@@ -4290,28 +4229,38 @@ msgid ""
 "ch08-00-generic-types-and-traits.md) we also need to correctly establish the "
 "requirements of `T` so it can be a valid `Felt252Dict<T>` value type:"
 msgstr ""
+"El único paso restante es implementar cada uno de los métodos en `UserDatabaseTrait`, "
+"pero como estamos trabajando con [generic types](/src/ch08-00-generic-types-and-traits.md) "
+"también necesitamos establecer correctamente los requisitos de `T` para que pueda ser un "
+"tipo de valor `Felt252Dict<T>` válido:"
 
 #: src/ch03-02-dictionaries.md:427
 msgid ""
 "`T` should implement the `Copy<T>` since it's required for getting values "
 "from a `Felt252Dict<T>`."
 msgstr ""
+"`T` debería implementar el `Copy<T>` ya que es necesario para obtener valores "
+"de un `Felt252Dict<T>`."
 
 #: src/ch03-02-dictionaries.md:428
 msgid ""
 "All value types of a dictionary implement the `Felt252DictValue<T>`, our "
 "generic type should do as well."
 msgstr ""
+"Todos los tipos de valor de un diccionario implementan el `Felt252DictValue<T>`, "
+"nuestro tipo genérico debería hacerlo también."
 
 #: src/ch03-02-dictionaries.md:429
 msgid ""
 "To insert values, `Felt252DictTrait<T>` requires all value types to be "
 "destructible."
 msgstr ""
+"Para insertar valores, `Felt252DictTrait<T>` requiere que todos los tipos "
+"de valores sean destructibles."
 
 #: src/ch03-02-dictionaries.md:431
 msgid "The implementation, with all restriction in place, would be as follow:"
-msgstr ""
+msgstr "La implementación, con todas las restricciones, sería la siguiente:"
 
 #: src/ch03-02-dictionaries.md:437 src/ch03-02-dictionaries.md:484
 msgid "// Creates a database\n"
@@ -4338,12 +4287,23 @@ msgid ""
 "generic-types-and-traits.md) in the struct definition. We need to code the "
 "`Destruct<T>` trait implementation by ourselves:"
 msgstr ""
+"Nuestra implementación de la base de datos está casi completa, excepto por una "
+"cosa: el compilador no sabe cómo hacer que una `UserDatabase<T>` salga de ámbito, "
+"ya que no implementa el rasgo `Drop<T>`, ni el rasgo `Destruct<T>`. Como tiene un "
+"`Felt252Dict<T>` como miembro, no se puede soltar, así que nos vemos obligados a "
+"implementar el rasgo `Destruct<T>` manualmente (consulta el capítulo [Ownership]"
+"(ch04-01-what-is-ownership.md#the-drop-trait) para más información). Utilizar "
+"`#[derive(Destruct)]` sobre la definición de `UserDatabase<T>` no funcionará debido "
+"al uso de [genericity](/src/ch08-00-generic-types-and-traits.md) en la definición de "
+"la estructura. Necesitamos implementar manualmente el rasgo `Destruct<T>`."
 
 #: src/ch03-02-dictionaries.md:469
 msgid ""
 "Implementing `Destruct<T>` for `UserDatabase` was our last step to get a "
 "fully functional database. We can now try it out:"
 msgstr ""
+"Implementar `Destruct<T>` para `UserDatabase` fue nuestro último paso para "
+"conseguir una base de datos completamente funcional. Ahora podemos probarla:"
 
 #: src/ch03-02-dictionaries.md:530
 msgid ""
@@ -4351,17 +4311,19 @@ msgid ""
 "These data structures may be a bit challenging to grasp, but they are really "
 "useful."
 msgstr ""
+"¡Bien hecho! Has terminado este capítulo sobre array y diccionarios en Cairo. "
+"Estas estructuras de datos pueden ser un poco difíciles de entender, pero son "
+"realmente útiles."
 
 #: src/ch03-02-dictionaries.md:532
-#, fuzzy
 msgid ""
 "When you’re ready to move on, we’ll talk about a concept that Cairo shares "
 "with Rust and that _doesn’t_ commonly exist in other programming languages: "
 "ownership."
 msgstr ""
 "Cuando estés listo para continuar, hablaremos de un concepto que Cairo "
-"comparte con Rust y que _no_\n"
-"existe comúnmente en otros lenguajes de programación: ownership."
+"comparte con Rust y que _no_ existe comúnmente en otros lenguajes de programación: "
+"Ownership."
 
 #: src/ch03-03-custom-data-structures.md:3
 msgid ""
@@ -4370,6 +4332,10 @@ msgid ""
 "that arrays have one big limitation - the data stored in them is immutable. "
 "Once you append a value to an array, you can't modify it."
 msgstr ""
+"Cuando empieces a programar en Cairo, probablemente querrás usar arrays (`Array<T>`) "
+"para almacenar colecciones de datos. Sin embargo, rápidamente te darás cuenta de que "
+"los arrays tienen una gran limitación - los datos almacenados en ellos son inmutables. "
+"Una vez que añades un valor a un array, no puedes modificarlo."
 
 #: src/ch03-03-custom-data-structures.md:8
 msgid ""
@@ -4377,6 +4343,9 @@ msgid ""
 "example, say you're making a game where the players have a level, and they "
 "can level up. You might try to store the level of the players in an array:"
 msgstr ""
+"Esto puede resultar frustrante cuando se desea utilizar una estructura de datos mutable. "
+"Por ejemplo, digamos que estás haciendo un juego donde los jugadores tienen un nivel, y "
+"pueden subir de nivel. Podrías intentar almacenar el nivel de los jugadores en un array:"
 
 #: src/ch03-03-custom-data-structures.md:19
 msgid ""
@@ -4384,6 +4353,9 @@ msgid ""
 "it's set. If a player dies, you cannot remove it from the array unless he "
 "happens to be in the first position."
 msgstr ""
+"Pero entonces te das cuenta de que no puedes aumentar el nivel en un índice específico "
+"una vez que está fijado. Si un jugador muere, no puedes eliminarlo de la matriz a menos "
+"que casualmente esté en la primera posición."
 
 #: src/ch03-03-custom-data-structures.md:23
 msgid ""
@@ -4392,6 +4364,10 @@ msgid ""
 "behavior of mutable data structures. Let's first explore how to use it to "
 "create a dynamic array implementation."
 msgstr ""
+"Afortunadamente, Cairo proporciona una útil funcionalidad integrada [dictionary type]"
+"(./ch03-02-dictionaries.md) llamado `Felt252Dict<T>` que nos permite simular el "
+"comportamiento de estructuras de datos mutables. Exploremos primero cómo usarlo "
+"para crear una implementación de array dinámico."
 
 #: src/ch03-03-custom-data-structures.md:28
 msgid ""
@@ -4401,51 +4377,58 @@ msgid ""
 "ch05-03-method-syntax.md), [Generic types](./ch08-00-generic-types-and-"
 "traits.md), [Traits](./ch08-02-traits-in-cairo.md)"
 msgstr ""
+"Nota: Varios conceptos utilizados en este capítulo se presentan en partes posteriores "
+"del libro. Le recomendamos que consulte primero el capítulo siguiente: [Structs]"
+"(ch05-00-using-structs-to-structure-related-data), [Methods](./ch05-03-method-syntax.md), "
+"[Generic types](./ch08-00-generic-types-and-traits.md), [Traits](./ch08-02-traits-in-cairo.md)."
 
 #: src/ch03-03-custom-data-structures.md:35
 msgid "Simulating a dynamic array with dicts"
-msgstr ""
+msgstr "Simular un Array Dinámico con Dicts"
 
 #: src/ch03-03-custom-data-structures.md:37
 msgid ""
 "First, let's think about how we want our mutable dynamic array to behave. "
 "What operations should it support?"
 msgstr ""
+"En primer lugar, pensemos en cómo queremos que se comporte nuestro array dinámico mutable. "
+"¿Qué operaciones debería soportar?"
 
 #: src/ch03-03-custom-data-structures.md:40
 msgid "It should:"
-msgstr ""
+msgstr "Deberia:"
 
 #: src/ch03-03-custom-data-structures.md:42
 msgid "Allow us to append items at the end"
-msgstr ""
+msgstr "Permitirnos añadir elementos al final."
 
 #: src/ch03-03-custom-data-structures.md:43
 msgid "Let us access any item by index"
-msgstr ""
+msgstr "Permitir el acceso a cualquier elemento por índice."
 
 #: src/ch03-03-custom-data-structures.md:44
 msgid "Allow setting the value of an item at a specific index"
-msgstr ""
+msgstr "Permitir establecer el valor de un elemento en un índice específico."
 
 #: src/ch03-03-custom-data-structures.md:45
 msgid "Return the current length"
-msgstr ""
+msgstr "Devolver la longitud actual."
 
 #: src/ch03-03-custom-data-structures.md:47
 msgid "We can define this interface in Cairo like:"
-msgstr ""
+msgstr "Podemos definir esta interfaz en Cairo como:"
 
 #: src/ch03-03-custom-data-structures.md:60
 msgid ""
 "This provides a blueprint for the implementation of our dynamic array. We "
 "named it Vec as it is similar to the `Vec<T>` data structure in Rust."
 msgstr ""
+"Esto proporciona un modelo para la implementación de nuestra array dinámica. "
+"Lo llamamos Vec porque es similar a la estructura de datos `Vec<T>` de Rust."
 
 #: src/ch03-03-custom-data-structures.md:63
-#, fuzzy
 msgid "Implementing a dynamic array in Cairo"
-msgstr "## Implementando un Trait"
+msgstr "Implementar un Array Dinámico en Cairo"
 
 #: src/ch03-03-custom-data-structures.md:65
 msgid ""
@@ -4453,6 +4436,8 @@ msgid ""
 "(felts) to values. We'll also store a separate `len` field to track the "
 "length."
 msgstr ""
+"Para almacenar nuestros datos, utilizaremos un `Felt252Dict<T>` que asigna números "
+"de índice (felts) a valores. También almacenaremos un campo `len` separado para rastrear la longitud."
 
 #: src/ch03-03-custom-data-structures.md:68
 msgid ""
@@ -4461,6 +4446,9 @@ msgid ""
 "the [Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-"
 "supported-natively) section:"
 msgstr ""
+"Este es el aspecto de nuestra estructura. Envolvemos el tipo `T` dentro del puntero `Nullable` "
+"para permitir el uso de cualquier tipo `T` en nuestra estructura de datos, como se explica en "
+"la sección [Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively):"
 
 #: src/ch03-03-custom-data-structures.md:80
 msgid ""
@@ -4468,18 +4456,25 @@ msgid ""
 "into the dictionary to set or update values in our data structure. For "
 "example, to update a value at a specific index, we do:"
 msgstr ""
+"La clave que hace que este vector sea mutable es que podemos insertar valores en el diccionario "
+"para establecer o actualizar valores en nuestra estructura de datos. Por ejemplo, para actualizar "
+"un valor en un índice específico, hacemos:"
 
 #: src/ch03-03-custom-data-structures.md:91
 msgid ""
 "This overwrites the previously existing value at that index in the "
 "dictionary."
 msgstr ""
+"Esto sobrescribe el valor existente anteriormente en ese índice del "
+"diccionario."
 
 #: src/ch03-03-custom-data-structures.md:93
 msgid ""
 "While arrays are immutable, dictionaries provide the flexibility we need for "
 "modifiable data structures like vectors."
 msgstr ""
+"Mientras que las arrays son inmutables, los diccionarios proporcionan la flexibilidad "
+"que necesitamos para las estructuras de datos modificables, como los vectores."
 
 #: src/ch03-03-custom-data-structures.md:96
 msgid ""
@@ -4487,6 +4482,8 @@ msgid ""
 "implementation of all the methods defined in our interface can be done as "
 "follow :"
 msgstr ""
+"La implementación del resto de la interfaz es sencilla. La implementación de "
+"todos los métodos definidos en nuestra interfaz se puede hacer de la siguiente manera:"
 
 #: src/ch03-03-custom-data-structures.md:133
 msgid ""
@@ -4494,15 +4491,18 @@ msgid ""
 "maintained library [Alexandria](https://github.com/keep-starknet-strange/"
 "alexandria/tree/main/src/data_structures)."
 msgstr ""
+"La implementación completa de la estructura `Vec` puede encontrarse en la libreria "
+"mantenida por la comunidad."
 
 #: src/ch03-03-custom-data-structures.md:137
 msgid "Simulating a Stack with dicts"
-msgstr ""
+msgstr "Simular un Stack con Dicts"
 
 #: src/ch03-03-custom-data-structures.md:139
 msgid ""
 "We will now look at a second example and its implementation details: a Stack."
 msgstr ""
+"A continuación veremos un segundo ejemplo y sus detalles de implementación: un Stack."
 
 #: src/ch03-03-custom-data-structures.md:141
 msgid ""
@@ -4510,30 +4510,33 @@ msgid ""
 "element and removal of an existing element takes place at the same end, "
 "represented as the top of the stack."
 msgstr ""
+"Un Stack es una colección LIFO (último en entrar, primero en salir). La inserción de un "
+"nuevo elemento y la eliminación de un elemento existente tiene lugar en el mismo extremo, "
+"representado como la parte superior de la pila."
 
 #: src/ch03-03-custom-data-structures.md:145
 msgid "Let us define what operations we need to create a stack :"
-msgstr ""
+msgstr "Definamos qué operaciones necesitamos para crear una stack:"
 
 #: src/ch03-03-custom-data-structures.md:147
 msgid "Push an item to the top of the stack"
-msgstr ""
+msgstr "Push un elemento a la parte superior de la stack."
 
 #: src/ch03-03-custom-data-structures.md:148
 msgid "Pop an item from the top of the stack"
-msgstr ""
+msgstr "Pop un elemento de la parte superior de la stack."
 
 #: src/ch03-03-custom-data-structures.md:149
 msgid "Check whether there are still any elements in the stack."
-msgstr ""
+msgstr "Check si todavía hay elementos en la stack."
 
 #: src/ch03-03-custom-data-structures.md:151
 msgid "From these specifications we can define the following interface :"
-msgstr ""
+msgstr "A partir de estas especificaciones podemos definir la siguiente interfaz:"
 
 #: src/ch03-03-custom-data-structures.md:161
 msgid "Implementing a Mutable Stack in Cairo"
-msgstr ""
+msgstr "Implementar un Stack Mutable en Cairo"
 
 #: src/ch03-03-custom-data-structures.md:163
 msgid ""
@@ -4541,15 +4544,18 @@ msgid ""
 "`Felt252Dict<T>` to store the values of the stack along with a `usize` field "
 "to keep track of the length of the stack to iterate over it."
 msgstr ""
+"Para crear una estructura de datos de stack en Cairo, podemos utilizar de nuevo un "
+"`Felt252Dict<T>` para almacenar los valores de la pila junto con un campo `usize` para "
+"llevar la cuenta de la longitud de la stack para iterar sobre ella."
 
 #: src/ch03-03-custom-data-structures.md:167
 msgid "The Stack struct is defined as:"
-msgstr ""
+msgstr "La estructura Stack se define como:"
 
 #: src/ch03-03-custom-data-structures.md:176
 msgid ""
 "Next, let's see how our main functions `push` and `pop` are implemented."
-msgstr ""
+msgstr "A continuación, veamos cómo se implementan nuestras funciones principales `push` y `pop`."
 
 #: src/ch03-03-custom-data-structures.md:201
 msgid ""
@@ -4561,6 +4567,12 @@ msgid ""
 "`len-1` and then decreases the value of `len` to update the position of the "
 "stack top accordingly."
 msgstr ""
+"El código utiliza los métodos `insert` y `get` para acceder a los valores del `Felt252Dict<T>`. "
+"Para empujar un elemento a la parte superior del stack, la función `push` inserta el elemento en "
+"el dict en el índice `len` - y aumenta el campo `len` del stack para mantener la pista de la posición "
+"de la parte superior del stack. Para eliminar un valor, la función `pop` recupera el último valor en "
+"la posición `len-1` y luego disminuye el valor de `len` para actualizar la posición de la parte superior "
+"del stack en consecuencia."
 
 #: src/ch03-03-custom-data-structures.md:209
 msgid ""
@@ -4569,6 +4581,9 @@ msgid ""
 "[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/"
 "src/data_structures) library, in the \"data_structures\" crate."
 msgstr ""
+"La implementación completa del stack, junto con otras estructuras de datos que puedes utilizar en tu código, "
+"se encuentra en la libreria mantenida por la comunidad [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/"
+"src/data_structures), en el paquete  \"data_structures\"."
 
 #: src/ch03-03-custom-data-structures.md:216
 msgid ""
@@ -4579,6 +4594,10 @@ msgid ""
 "applications, effectively hiding the complexity of the underlying memory "
 "model."
 msgstr ""
+"Aunque el modelo de memoria de Cairo es inmutable y puede dificultar la implementación de estructuras de datos "
+"mutables, afortunadamente podemos utilizar el tipo `Felt252Dict<T>` para simular estructuras de datos mutables. "
+"Esto nos permite implementar una amplia gama de estructuras de datos que son útiles para muchas aplicaciones, "
+"ocultando eficazmente la complejidad del modelo de memoria subyacente."
 
 #: src/ch04-00-understanding-ownership.md:1
 #, fuzzy
@@ -11124,14 +11143,6 @@ msgid ""
 "simpler way of doing this task by combining the two steps. At compile-time, "
 "the compiler will create an array and append all values passed to the `array!"
 "` macro sequentially."
-msgstr ""
-
-#: src/ch11-02-macros.md:10
-msgid "Without `array!`:"
-msgstr ""
-
-#: src/ch11-02-macros.md:21
-msgid "With `array!`:"
 msgstr ""
 
 #: src/ch11-02-macros.md:27
