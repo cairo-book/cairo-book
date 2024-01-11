@@ -20,6 +20,7 @@ Try running this code; you should see the following output:
 
 ```shell
 $ scarb cairo-run --available-gas=20000000
+condition was false and number = 3
 Run completed successfully, returning []
 Remaining gas: 19780390
 ```
