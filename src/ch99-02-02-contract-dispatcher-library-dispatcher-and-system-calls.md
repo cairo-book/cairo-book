@@ -9,7 +9,7 @@ The compiler also generates a trait `IERC20DispatcherTrait`, allowing us to call
 
 In this chapter, we are going to discuss what these are, how they work and how to use them.
 
-To effectively break down the concepts in this chapter, we are going to be using the IERC20 interface from the previous chapter (refer to Listing 99-4):
+To effectively break down the concepts in this chapter, we are going to be using the IERC20 interface from the previous chapter (refer to Listing 99-4).
 
 ## Contract Dispatcher
 

@@ -316,7 +316,7 @@ When you want to benchmark the gas usage of a specific operation, you can use th
 let initial = testing::get_available_gas();
 gas::withdraw_gas().unwrap();
     /// code we want to bench.
-(initial - testing::get_available_gas()).print();
+println!("{}\n", initial - testing::get_available_gas());
 ```
 
 The following example shows how to use it to test the gas function of the `sum_n` function above.
