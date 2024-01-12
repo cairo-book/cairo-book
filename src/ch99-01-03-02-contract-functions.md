@@ -48,17 +48,14 @@ View functions are _public_ functions where the `self: ContractState` is passed 
 
 Functions that are not defined in a block annotated with the `#[abi(embed_v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.
 
+They can be grouped in a dedicated impl block (e.g in components, to easily import internal functions all at once in the embedding contracts) or just be added as free functions inside the contract module.
+Note that these 2 methods are equivalent. Just choose the one that makes your code more readable and easy to use.
+
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:state_internal}}
 ```
 
 > Wait, what is this `#[generate_trait]` attribute? Where is the trait definition for this implementation? Well, the `#[generate_trait]` attribute is a special attribute that tells the compiler to generate a trait definition for the implementation block. This allows you to get rid of the boilerplate code of defining a trait and implementing it for the implementation block. We will see more about this in the [next section](./ch99-01-03-04-reducing-boilerplate.md).
-
-At this point, you might still be wondering if all of this is really necessary if you don't need to access the contract's state in your function (for example, a helper/library function). As a matter of fact, you can also define internal functions outside of implementation blocks. The only reason why we _need_ to define functions inside impl blocks is if we want to access the contract's state.
-
-```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:stateless_internal}}
-```
 
 ### 4. [abi(per_item)] attribute
 
@@ -71,4 +68,3 @@ Here is a short example:
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_14_abi_per_item_attribute/src/lib.cairo}}
 ```
-
