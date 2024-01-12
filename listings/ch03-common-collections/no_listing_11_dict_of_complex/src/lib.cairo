@@ -10,7 +10,7 @@ fn main() {
     // Create the dictionary
     let mut d: Felt252Dict<Nullable<Span<felt252>>> = Default::default();
 
-    // Crate the array to insert
+    // Create the array to insert
     let a = array![8, 9, 10];
 
     // Insert it as a `Span`

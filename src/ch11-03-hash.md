@@ -2,7 +2,7 @@
 
 At its essence, hashing is a process of converting input data (often called a message) of any length into a fixed-size value, typically referred to as a "hash." This transformation is deterministic, meaning that the same input will always produce the same hash value. Hash functions are a fundamental component in various fields, including data storage, cryptography, and data integrity verification - and are very often when developing smart contracts, especially when working with Merkle trees.
 
-In this chapter, we will present the two hash functions implemented in natively in the Cairo library : `Poseidon` and `Pedersen`. We will discuss about when and how to use them, and see examples with cairo programs.
+In this chapter, we will present the two hash functions implemented natively in the Cairo library : `Poseidon` and `Pedersen`. We will discuss about when and how to use them, and see examples with cairo programs.
 
 ### Hash functions in Cairo
 
@@ -10,7 +10,7 @@ The Cairo core library provides two hash functions: Pedersen and Poseidon.
 
 Pedersen hash functions are cryptographic algorithms that rely on elliptic curve cryptography. These functions perform operations on points along an elliptic curve — essentially, doing math with the locations of these points — which are easy to do in one direction and hard to undo. This one-way difficulty is based on the Elliptic Curve Discrete Logarithm Problem (ECDLP), which is a problem so hard to solve that it ensures the security of the hash function. The difficulty of reversing these operations is what makes the Pedersen hash function secure and reliable for cryptographic purposes.
 
-Poseidon is a family of hash functions designed for being very efficient as algebraic circuits. Its design is particularly efficient for Zero-Knowledge proof systems, including STARKs (so, Cairo). Poseidon uses a method called a 'sponge construction,' which soaks up data and transforms it securely using a process known as the Hades permutation. Cairo's version of Poseidon is based on a three element state permutation with [specific parameters](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt)
+Poseidon is a family of hash functions designed for being very efficient as algebraic circuits. Its design is particularly efficient for Zero-Knowledge proof systems, including STARKs (so, Cairo). Poseidon uses a method called a 'sponge construction,' which soaks up data and transforms it securely using a process known as the Hades permutation. Cairo's version of Poseidon is based on a three element state permutation with [specific parameters](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt).
 
 #### When to use them ?
 
@@ -54,7 +54,7 @@ Here is a short example for Pedersen hashing :
 
 ### Advanced Hashing: Hashing arrays with Poseidon
 
-Let us look at an example of hashing a function that contains an `Span<felt252>`.
+Let us look at an example of hashing a function that contains a `Span<felt252>`.
 To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can use the build-in function in poseidon
 ` poseidon_hash_span(mut span: Span<felt252>) -> felt252`. Similarly you can hash `Array<felt252>` by calling `poseidon_hash_span` on its span.
 
