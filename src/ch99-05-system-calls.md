@@ -6,6 +6,19 @@ Writing smart contracts requires various associated operations, such as calling 
 
 The Starknet contract language supports these operations by using system calls. System calls enable a contract to require services from the Starknet OS. You can use system calls in a function to get information that depends on the broader state of Starknet, which would otherwise be inaccessible, rather than local variables that appear in the function’s scope.
 
+Here is a list of the system calls available in Cairo 1.0:
+
+- [get_block_hash](#get_block_hash)
+- [get_execution_info](#get_execution_info)
+- [call_contract](#call_contract)
+- [deploy](#deploy)
+- [emit_event](#emit_event)
+- [library_call](#library_call)
+- [send_message_to_L1](#send_message_to_l1)
+- [replace_class](#replace_class)
+- [storage_read](#storage_read)
+- [storage_write](#storage_write)
+
 ## `get_block_hash`
 
 #### Syntax
