@@ -117,14 +117,8 @@ are currently supported.
 
 Here’s an example of a constant declaration:
 
-```rust
-// Define a constant representing one hour in seconds
+```rust, noplayground
 const ONE_HOUR_IN_SECONDS: u32 = 3600;
-
-fn main() {
-    // Print the value of the constant
-    println!("x = {}", ONE_HOUR_IN_SECONDS);
-}
 ```
 When we run the program now, we get this:
 
