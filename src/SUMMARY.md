@@ -116,6 +116,7 @@
 
   - [L1 <> L2 Messaging](./ch99-04-00-L1-L2-messaging.md)
   - [Security Considerations](./ch99-03-security-considerations.md)
+  - [System Calls](./ch99-05-system-calls.md)
 
 - [Appendix](appendix-00.md)
 
