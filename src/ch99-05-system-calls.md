@@ -2,11 +2,9 @@
 
 This chapter is based on the StarkNet documentation available at [StarkNet Docs](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/).
 
-System calls are essential for interacting with the StarkNet operating system and perform various operations like accessing contract storage, calling other contracts, and interacting with the blockchain state. Each system call is explained with its syntax, description, return values, and common usage.
+Writing smart contracts requires various associated operations, such as calling another contract or accessing the contract’s storage, that standalone programs do not require.
 
-## System Calls Overview
-
-In StarkNet, system calls allow a contract to request services from the StarkNet OS. They are used to get information depending on the broader state of StarkNet, which would otherwise be inaccessible.
+The Starknet contract language supports these operations by using system calls. System calls enable a contract to require services from the Starknet OS. You can use system calls in a function to get information that depends on the broader state of Starknet, which would otherwise be inaccessible, rather than local variables that appear in the function’s scope.
 
 ## `get_block_hash`
 
@@ -135,7 +133,7 @@ A tuple wrapped with SyscallResult where:
 
 #### Common library
 
-- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/main/corelib/src/starknet/syscalls.cairo#L22)
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/4821865770ac9e57442aef6f0ce82edc7020a4d6/corelib/src/starknet/syscalls.cairo#L22)
 
 ## `emit_event`
 
