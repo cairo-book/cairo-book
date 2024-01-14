@@ -116,7 +116,6 @@
 
   - [L1 <> L2 Messaging](./ch99-04-00-L1-L2-messaging.md)
   - [Security Considerations](./ch99-03-security-considerations.md)
-  - [System Calls](./ch99-05-system-calls.md)
 
 - [Appendix](appendix-00.md)
 
@@ -126,3 +125,4 @@
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
   - [E - Common Types & Traits and the Cairo Prelude](appendix-05-common-types-and-traits-and-cairo-prelude.md)
   - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
+  - [G - System Calls](appendix-07-system-calls.md)
