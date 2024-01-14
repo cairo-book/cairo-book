@@ -68,7 +68,6 @@ mod tests {
     use super::{SizesStorePacking, Sizes};
     use starknet::StorePacking;
     #[test]
-    #[available_gas(200000)]
     fn test_pack_unpack() {
         let value = Sizes { tiny: 0x12, small: 0x12345678, medium: 0x1234567890, };
 

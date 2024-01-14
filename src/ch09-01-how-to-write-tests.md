@@ -300,7 +300,7 @@ When you’re at a point where it makes sense to check the results of the ignore
 
 ## Testing recursive functions or loops
 
-When testing recursive functions or loops, you must provide the test with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. To do so, you must add the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
+When testing recursive functions or loops, the test is instantiated by default with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. This value is assumed reasonably large enough, but you can override it by adding the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
 
 <span class="filename">Filename: src/lib.cairo</span>
 

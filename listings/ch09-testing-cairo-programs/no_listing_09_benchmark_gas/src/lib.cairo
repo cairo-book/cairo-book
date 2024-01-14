@@ -19,7 +19,6 @@ mod test {
     use core::testing;
     use core::gas;
     #[test]
-    #[available_gas(2000000)]
     fn benchmark_sum_n_gas() {
         let initial = testing::get_available_gas();
         gas::withdraw_gas().unwrap();

@@ -13,14 +13,12 @@ fn setup_counter() -> ICounterDispatcher {
 }
 
 #[test]
-#[available_gas(20000000)]
 fn test_constructor() {
     let counter = setup_counter();
     assert_eq!(counter.get_counter(), 0);
 }
 
 #[test]
-#[available_gas(20000000)]
 fn test_increment() {
     let counter = setup_counter();
     counter.increment();
