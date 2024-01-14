@@ -1,3 +1,5 @@
+//TAG: does_not_compile
+
 fn main() {
     let number = 3;
 
