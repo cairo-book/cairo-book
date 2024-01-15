@@ -46,7 +46,7 @@ Table B-1 contains the operators in Cairo, an example of how the operator would 
 
 ## Non Operator Symbols
 
-The following list contains all symbols that are not used as operators; that is, they do not have the same behaviour as a function or method call.
+The following list contains all symbols that are not used as operators; that is, they do not have the same behavior as a function or method call.
 
 Table B-2 shows symbols that appear on their own and are valid in a variety of locations.
 
