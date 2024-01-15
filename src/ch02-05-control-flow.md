@@ -41,9 +41,14 @@ Remaining gas: 19780390
 It’s also worth noting that the condition in this code must be a bool. If the condition isn’t a bool, we’ll get an error.
 
 ```shell
-$ scarb cairo-run --available-gas=20000000
-Run panicked with [2, ].
-Remaining gas: 19940790
+error: Mismatched types. The type core::bool cannot be created from a numeric literal.
+ --> /home/cairo/src/lib.cairo:2:18
+    let number = 3;
+                 ^
+
+
+error: could not compile `hello_world` due to previous error
+Error: `scarb metadata` exited with error
 ```
 
 ### Handling Multiple Conditions with `else if`
