@@ -41,7 +41,7 @@ not a good programmer! Experienced Caironautes still get compiler errors.
 You received the error message `Cannot assign to an immutable variable.`
 because you tried to assign a second value to the immutable `x` variable.
 
-We must get compile-time errors when we attempt to change a
+It’s important that we get compile-time errors when we attempt to change a
 value that’s designated as immutable because this specific situation can lead to
 bugs. If one part of our code operates on the assumption that a value will
 never change and another part of our code changes that value, it’s possible
@@ -120,14 +120,6 @@ Here’s an example of a constant declaration:
 ```rust, noplayground
 const ONE_HOUR_IN_SECONDS: u32 = 3600;
 ```
-When we run the program now, we get this:
-
-```shell
-$ scarb cairo-run
-x = 3600
-
-Run completed successfully, returning []
-```
 
 Cairo's naming convention for constants is to use all uppercase with
 underscores between words.
@@ -150,7 +142,7 @@ new variable with the same name as a previous variable. Caironautes say that the
 first variable is _shadowed_ by the second, which means that the second
 variable is what the compiler will see when you use the name of the variable.
 In effect, the second variable overshadows the first, taking any uses of the
-variable name to itself until either it is shadowed or the scope ends.
+variable name to itself until either it itself is shadowed or the scope ends.
 We can shadow a variable by using the same variable’s name and repeating the
 use of the `let` keyword as follows:
 
