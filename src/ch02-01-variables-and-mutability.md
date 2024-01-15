@@ -34,7 +34,7 @@ Error: failed to compile: src/lib.cairo
 ```
 
 This example shows how the compiler helps you find errors in your programs.
-Compiler errors can be frustrating, but really they only mean your program
+Compiler errors can be frustrating, but they only mean your program
 isn’t safely doing what you want it to do yet; they do _not_ mean that you’re
 not a good programmer! Experienced Caironautes still get compiler errors.
 
