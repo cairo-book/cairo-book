@@ -51,9 +51,9 @@ It’s also worth noting that the condition in this code must be a bool. If the 
 The `if` condition evaluates to a value of 3 this time, and Cairo throws an error:
 
 ```shell
-
+$ scarb build
 error: Mismatched types. The type core::bool cannot be created from a numeric literal.
- --> /home/cairo/src/lib.cairo:2:18
+ --> projects/branches/src/lib.cairo:2:18
     let number = 3;
                  ^
 
