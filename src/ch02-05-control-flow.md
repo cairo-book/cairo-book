@@ -21,8 +21,10 @@ Optionally, we can also include an `else` expression, which we chose to do here,
 Try running this code; you should see the following output:
 
 ```shell
-$ cairo-run main.cairo
-[DEBUG]	condition was false
+$ scarb cairo-run --available-gas=20000000
+condition was false and number = 3
+Run completed successfully, returning []
+Remaining gas: 19780390
 ```
 
 Let’s try changing the value of `number` to a value that makes the condition `true` to see what happens:
@@ -32,8 +34,10 @@ Let’s try changing the value of `number` to a value that makes the condition `
 ```
 
 ```shell
-$ cairo-run main.cairo
-condition was true
+$ scarb cairo-run --available-gas=20000000
+condition was true and number = 5
+Run completed successfully, returning []
+Remaining gas: 19780390
 ```
 
 It’s also worth noting that the condition in this code must be a bool. If the condition isn’t a bool, we’ll get an error. For example, try running the following code:
@@ -51,7 +55,11 @@ $ scarb build
 error: Mismatched types. The type core::bool cannot be created from a numeric literal.
  --> projects/branches/src/lib.cairo:2:18
     let number = 3;
-```
+                 ^
+
+
+error: could not compile `hello_world` due to previous error
+Error: `scarb metadata` exited with error
 
 The error indicates that Cairo inferred the type of `number` to be a `bool`
 based on its later use as a condition of the `if` statement. It tries to create
@@ -64,6 +72,7 @@ change the if expression to the following:
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_24_ter_if_not_equal_zero/src/lib.cairo}}
+
 ```
 
 Running this code will print `number was something other than zero`.
@@ -81,6 +90,7 @@ You can use multiple conditions by combining if and else in an else if expressio
 This program has four possible paths it can take. After running it, you should see the following output:
 
 ```shell
+$ scarb cairo-run --available-gas=20000000
 number is 3
 Run completed successfully, returning []
 Remaining gas: 1999937120
@@ -99,7 +109,7 @@ Because if is an expression, we can use it on the right side of a let statement 
 ```
 
 ```shell
-$ cairo-run main.cairo
+$ scarb cairo-run --available-gas=20000000
 condition was true and number is 5
 Run completed successfully, returning []
 Remaining gas: 1999780390
@@ -159,7 +169,6 @@ executing the loop. Let's fix the infinite loop by adding a making the stop cond
 The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
 
 ```rust
-use core::debug::PrintTrait;
 fn main() {
     let mut i: usize = 0;
     loop {
