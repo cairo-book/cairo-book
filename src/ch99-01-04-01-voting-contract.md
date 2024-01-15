@@ -25,13 +25,21 @@ Once the contract is deployed, we can interact with it by calling and invoking i
 - Calling contracts: Interacting with external functions that only read from the state. These functions do not alter the state of the network, so they don't require fees or signing.
 - Invoking contracts: Interacting with external functions that can write to the state. These functions do alter the state of the network and require fees and signing.
 
-We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` in the [Local Development with Katana](https://book.starknet.io/chapter_3/katana.html) chapter of the Starknet Book.
+We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` in the [Katana: A Local Node](https://book.starknet.io/ch02-04-katana.html) chapter of the Starknet Book.
 
 ### The `katana` local Starknet node
 
 `katana` is designed to support local development by the [Dojo team](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md). It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
 
-To install `katana` from the source code, please refer to the [Local Development with Katana](https://book.starknet.io/chapter_3/katana.html) chapter of the Starknet Book.
+To install `katana` from the source code, please refer to the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation) chapter of the Starknet Book.
+
+> Note: Please verify that the version of `katana` match the specified version provided below.
+> ```bash
+> $ katana --version
+> katana 0.4.4
+> ```
+> To upgrade `katana`, refer to the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation) chapter of the Starknet Book.
+
 
 Once you have `katana` installed, you can start the local Starknet node with:
 
@@ -60,13 +68,20 @@ PREFUNDED ACCOUNTS
 ...
 ```
 
-Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the [Account Abstraction](https://book.starknet.io/chapter_4/index.html) chapter of the Starknet Book.
+Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the [Account Abstraction](https://book.starknet.io/ch04-00-account-abstraction.html) chapter of the Starknet Book.
 
 ### Smart wallets for voting
 
-Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the [Environment setup](https://book.starknet.io/chapter_1/environment_setup.html) chapter of the Starknet Book.
+Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#starkli-installation) chapter of the Starknet Book.
 
-For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the [Environment setup](https://book.starknet.io/chapter_1/environment_setup.html) chapter of the Starknet Book.
+> Note: Please verify that the version of `starkli` match the specified version provided below.
+> ```bash
+> $ starkli --version
+> 0.1.20 (e4d2307)
+> ```
+> To upgrade `starkli` to `1.0.20`, use the `starkliup -v 0.1.20` command.
+
+For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the [Testnet Deployment](https://book.starknet.io/ch02-05-testnet-deployment.html?highlight=signer#creating-a-signer) chapter of the Starknet Book.
 
 We can create Signers and Account Descriptors for the accounts we want to use for voting. Let's create a smart wallet for voting in our smart contract.
 
