@@ -18,8 +18,8 @@ The old memory cell still exists, and snapshots are variables that refer to that
 In this sense, snapshots are a view "into the past".
 
 Here is how you would define and use a `calculate_length` function that takes a
-snapshot of an array as a parameter instead of taking ownership of the underlying value. In this example,
-the `calculate_length` function returns the length of the array passed as a parameter.
+snapshot to an array as a parameter instead of taking ownership of the underlying value. In this example,
+the `calculate_length` function returns the length of the array passed as parameter.
 As we're passing it as a snapshot, which is an immutable view of the array, we can be sure that
 the `calculate_length` function will not mutate the array, and ownership of the array is kept in the main function.
 

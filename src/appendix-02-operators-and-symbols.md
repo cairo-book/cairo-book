@@ -74,14 +74,14 @@ Table B-4 shows symbols that appear in the context of using generic type paramet
 
 <span class="caption">Table B-4: Generics</span>
 
-| Symbol                         | Explanation                                                                                                  |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `path<...>`                    | Specifies parameters to generic type in a type (e.g., `Vec<u8>`)                                             |
-| `path::<...>`, `method::<...>` | Specifies parameters to a generic type, function, or method in an expression; often referred to as turbofish |
-| `fn ident<...> ...`            | Define generic function                                                                                      |
-| `struct ident<...> ...`        | Define generic structure                                                                                     |
-| `enum ident<...> ...`          | Define generic enumeration                                                                                   |
-| `impl<...> ...`                | Define generic implementation                                                                                |
+| Symbol                         | Explanation                                                                                                |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `path<...>`                    | Specifies parameters to generic type in a type (e.g., `Vec<u8>`)                                           |
+| `path::<...>`, `method::<...>` | Specifies parameters to generic type, function, or method in an expression; often referred to as turbofish |
+| `fn ident<...> ...`            | Define generic function                                                                                    |
+| `struct ident<...> ...`        | Define generic structure                                                                                   |
+| `enum ident<...> ...`          | Define generic enumeration                                                                                 |
+| `impl<...> ...`                | Define generic implementation                                                                              |
 
 Table B-5 shows symbols that appear in the context of calling or defining macros and specifying attributes on an item.
 
