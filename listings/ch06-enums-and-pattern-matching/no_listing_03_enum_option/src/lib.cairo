@@ -33,7 +33,6 @@ mod tests {
     use super::{find_value_recursive, find_value_iterative};
 
     #[test]
-    #[available_gas(999999)]
     fn test_increase_amount() {
         let mut my_array = ArrayTrait::new();
         my_array.append(3);

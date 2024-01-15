@@ -6,6 +6,8 @@ The ability to run some code depending on whether a condition is true and to run
 
 An if expression allows you to branch your code depending on conditions. You provide a condition and then state, “If this condition is met, run this block of code. If the condition is not met, do not run this block of code.”
 
+Create a new project called _branches_ in your _projects_ directory to explore the `if` expression. In the src/lib.cairo file, input the following:
+
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
@@ -38,9 +40,18 @@ Run completed successfully, returning []
 Remaining gas: 19780390
 ```
 
-It’s also worth noting that the condition in this code must be a bool. If the condition isn’t a bool, we’ll get an error.
+It’s also worth noting that the condition in this code must be a bool. If the condition isn’t a bool, we’ll get an error. For example, try running the following code:
+
+<span class="filename">Filename: src/lib.cairo</span>
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_bis_if_not_bool/src/lib.cairo}}
+```
+
+The `if` condition evaluates to a value of 3 this time, and Cairo throws an error:
 
 ```shell
+
 error: Mismatched types. The type core::bool cannot be created from a numeric literal.
  --> /home/cairo/src/lib.cairo:2:18
     let number = 3;
@@ -49,7 +60,22 @@ error: Mismatched types. The type core::bool cannot be created from a numeric li
 
 error: could not compile `hello_world` due to previous error
 Error: `scarb metadata` exited with error
+
+The error indicates that Cairo inferred the type of `number` to be a `bool`
+based on its later use as a condition of the `if` statement. It tries to create
+a `bool` from the value `3`, but Cairo doesn't support instantiating a `bool`
+from a numeric literal anyway - you can only use `true` or `false` to create a
+`bool`. Unlike languages such as Ruby and JavaScript, Cairo will not
+automatically try to convert non-Boolean types to a Boolean. If we want the if
+code block to run only when a number is not equal to 0, for example, we can
+change the if expression to the following:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_ter_if_not_equal_zero/src/lib.cairo}}
+
 ```
+
+Running this code will print `number was something other than zero`.
 
 ### Handling Multiple Conditions with `else if`
 

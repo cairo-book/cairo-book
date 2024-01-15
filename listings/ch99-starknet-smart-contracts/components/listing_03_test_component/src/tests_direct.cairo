@@ -15,7 +15,6 @@ impl TestingStateDefault of Default<TestingState> {
 
 //ANCHOR: test
 #[test]
-#[available_gas(2000000)]
 fn test_increment() {
     let mut counter: TestingState = Default::default();
 

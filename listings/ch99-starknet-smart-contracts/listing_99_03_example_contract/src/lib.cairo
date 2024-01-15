@@ -96,6 +96,9 @@ mod NameRegistry {
     //ANCHOR_END: impl_public
 
     // ANCHOR: state_internal
+    // ANCHOR: generate_trait
+
+    // Could be a group of functions about a same topic
     #[generate_trait]
     impl InternalFunctions of InternalFunctionsTrait {
         fn _store_name(
@@ -116,9 +119,10 @@ mod NameRegistry {
 
         }
     }
-    // ANCHOR_END: state_internal
+    // ANCHOR_END: generate_trait
 
-    // ANCHOR: stateless_internal
+    // Free functions
+
     fn get_contract_name() -> felt252 {
         'Name Registry'
     }
@@ -128,7 +132,7 @@ mod NameRegistry {
         self.owner.address()
     //ANCHOR_END: owner_address
     }
-// ANCHOR_END: stateless_internal
+// ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
 

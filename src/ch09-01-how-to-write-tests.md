@@ -97,7 +97,7 @@ The summary line displays at the end: overall, our test result is `FAILED`. We h
 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
-## Checking Results with the `assert!` macro 
+## Checking Results with the `assert!` macro
 
 The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
 
@@ -300,7 +300,7 @@ When you’re at a point where it makes sense to check the results of the ignore
 
 ## Testing recursive functions or loops
 
-When testing recursive functions or loops, you must provide the test with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. To do so, you must add the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
+When testing recursive functions or loops, the test is instantiated by default with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. This value is assumed reasonably large enough, but you can override it by adding the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -316,7 +316,7 @@ When you want to benchmark the gas usage of a specific operation, you can use th
 let initial = testing::get_available_gas();
 gas::withdraw_gas().unwrap();
     /// code we want to bench.
-(testing::get_available_gas() - x).print();
+println!("{}\n", initial - testing::get_available_gas());
 ```
 
 The following example shows how to use it to test the gas function of the `sum_n` function above.

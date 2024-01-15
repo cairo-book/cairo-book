@@ -4,7 +4,7 @@ use core::hash::{HashStateTrait, HashStateExTrait};
 //ANCHOR_END: import
 
 //ANCHOR: structure
-#[derive(Drop, Hash)]
+#[derive(Drop, Hash, Serde, Copy)]
 struct StructForHash {
     first: felt252,
     second: felt252,
@@ -14,11 +14,26 @@ struct StructForHash {
 //ANCHOR_END: structure
 
 //ANCHOR: main
-fn main() -> felt252 {
+fn main() -> (felt252, felt252) {
     let struct_to_hash = StructForHash { first: 0, second: 1, third: (1, 2), last: false };
 
-    let hash = PedersenTrait::new(0).update_with(struct_to_hash).finalize();
-    hash
+    // hash1 is the result of hashing a struct with a base state of 0
+    let hash1 = PedersenTrait::new(0).update_with(struct_to_hash).finalize();
+
+    let mut serialized_struct: Array<felt252> = ArrayTrait::new();
+    Serde::serialize(@struct_to_hash, ref serialized_struct);
+    let first_element = serialized_struct.pop_front().unwrap();
+    let mut state = PedersenTrait::new(first_element);
+    loop {
+        match serialized_struct.pop_front() {
+            Option::Some(value) => state.update(value),
+            Option::None => { break; }
+        };
+    };
+    // hash2 is the result of hashing only the fields of the struct
+    let hash2 = state.finalize();
+
+    (hash1, hash2)
 }
 //ANCHOR_END: main
 

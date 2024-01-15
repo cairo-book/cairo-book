@@ -126,16 +126,31 @@ $ scarb cairo-run --available-gas=200000000
 
 Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of `Option<T>`, when Cairo prevents us from forgetting to explicitly handle the `None` case, it protects us from assuming that we have a value when we might have null, thus making the billion-dollar mistake discussed earlier impossible.
 
-## Match 0 and the \_ Placeholder
+## Match catch-all operator
 
-Using enums, we can also take special actions for a few particular values, but for all other values take one default action. Currently only `0` and the `_`operator are supported.
+The `_` operator allows you to specify a default behavior for all the values which are not already handled in the `match` expression.
 
-Imagine we’re implementing a game where, you get a random number between 0 and 7. If you have 0, you win. For all other values you lose. Here's a match that implements that logic, with the number hardcoded rather than a random value.
+Currently, only `felt252` variables are supported, with some limitations:
+
+- The first arm must be 0,
+- The catch-all arm must be at the end of the `match` expression,
+- If you want to handle any other value than 0, you must define a specific arm for all the values between 0 and this value (for example, if you want a specific arm for 3, you must define a specific arm for 1 and 2 aswell).
+
+Imagine we’re implementing a game where, you get a random number between 0 and 7.
+
+If you have 0, you win. If you have 1, nothing happens. For all other values you lose.
+
+Here's a match that implements that logic, with the number hardcoded rather than a random value.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_match_zero/src/lib.cairo:here}}
 ```
 
-The first arm, the pattern is the literal values 0. For the last arm that covers every other possible value, the pattern is the character `_`. This code compiles, even though we haven’t listed all the possible values a `felt252` can have, because the last pattern will match all values not specifically listed. This catch-all pattern meets the requirement that `match` must be exhaustive. Note that we have to put the catch-all arm last because the patterns are evaluated in order. If we put the catch-all arm earlier, the other arms would never run, so Cairo will warn us if we add arms after a catch-all!
+The first two arms are literal values 0 and 1. For the last arm that covers every other possible values, the pattern is the character `_`.
+
+This code compiles, even though we haven’t listed all the possible values a `felt252` can have, because the last pattern will match all values not specifically listed. This catch-all pattern meets the requirement that `match` must be exhaustive.
+Note that we have to put the catch-all arm last because the patterns are evaluated in order. If we put the catch-all arm earlier, the other arms would never run, so Cairo will warn us if we add arms after a catch-all!
+
+_`match` expressions will be strongly improved in future Cairo versions._
 
 <!-- TODO : might need to link the end of this chapter to patterns and matching chapter -->
