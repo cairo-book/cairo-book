@@ -125,3 +125,4 @@
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
   - [E - Common Types & Traits and the Cairo Prelude](appendix-05-common-types-and-traits-and-cairo-prelude.md)
   - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
+  - [G - System Calls](appendix-07-system-calls.md)
