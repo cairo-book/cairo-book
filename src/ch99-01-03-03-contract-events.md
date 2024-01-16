@@ -29,7 +29,7 @@ The auto implementation of the `starknet::Event` trait will implement the `appen
 In our contract, we define an event named `StoredName` that emits the contract address of the caller and the name stored within the contract, where the `user` field is serialized as a key and the `name` field is serialized as data.
 To index the key of an event, simply annotate it with the `#[key]` as demonstrated in the example for the `user` key.
 
-When emitting the event with `self.emit(StoredName { user: user, name: name })`, a key corresponding to the name ` StoredName`, specifically `sn_keccak(StoredName)`, is appended to the keys list. `user`is serialized as key, thanks to the `#[key]` attribute, while address is serialized as data. After everything is processed, we end up with the following keys and data: `keys = [sn_keccak("StoredName"),user]` and `data = [address]`.
+When emitting the event with `self.emit(StoredName { user: user, name: name })`, a key corresponding to the name ` StoredName`, specifically `sn_keccak(StoredName)`, is appended to the keys list. `user`is serialized as key, thanks to the `#[key]` attribute, while address is serialized as data. After everything is processed, we end up with the following keys and data: `keys = [sn_keccak("StoredName"),user]` and `data = [name]`.
 
 ### Emitting events
 
