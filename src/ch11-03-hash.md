@@ -55,7 +55,7 @@ Here is a short example for Pedersen hashing :
 ### Advanced Hashing: Hashing arrays with Poseidon
 
 Let us look at an example of hashing a function that contains a `Span<felt252>`.
-To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can use the build-in function in poseidon
+To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can use the built-in function in poseidon
 ` poseidon_hash_span(mut span: Span<felt252>) -> felt252`. Similarly you can hash `Array<felt252>` by calling `poseidon_hash_span` on its span.
 
 First let us import the following trait and function :
