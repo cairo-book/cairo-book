@@ -108,7 +108,7 @@
   - [ABIs and Cross-contract Interactions](./ch99-02-00-abis-and-cross-contract-interactions.md)
 
     - [ABIs and Interfaces](./ch99-02-01-abis-and-interfaces.md)
-    - [Contract Dispatchers, Library Dispachers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+    - [Contract Dispatchers, Library Dispatchers and system calls](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
 
   - [Other examples](./ch99-01-04-00-other-examples.md)
 
