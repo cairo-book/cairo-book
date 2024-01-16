@@ -9,7 +9,7 @@ Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge
 On Starknet, it's important to note that the messaging system is **asynchronous** and **asymmetric**.
 
 - **Asynchronous**: this means that in your contract code (being solidity or cairo), you can't wait the result of the message being sent on the other chain within your contract code execution.
-- **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automatized by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.
+- **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automated by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.
 
 Let's dive into the details.
 
