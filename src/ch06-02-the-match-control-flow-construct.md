@@ -134,7 +134,7 @@ Currently, only `felt252` variables are supported, with some limitations:
 
 - The first arm must be 0,
 - The catch-all arm must be at the end of the `match` expression,
-- If you want to handle any other value than 0, you must define a specific arm for all the values between 0 and this value (for example, if you want a specific arm for 3, you must define a specific arm for 1 and 2 aswell).
+- If you want to handle any other value than 0, you must define a specific arm for all the values between 0 and this value (for example, if you want a specific arm for 3, you must define a specific arm for 1 and 2 as well).
 
 Imagine we’re implementing a game where, you get a random number between 0 and 7.
 
