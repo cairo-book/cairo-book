@@ -251,7 +251,7 @@ The failure message indicates that this test did indeed panic as we expected, bu
 
 Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can choose which tests to run by passing `scarb cairo-test` an option `-f` (for "filter"), followed by the name of the test you want to run as an argument.
 
-To demonstrate how to run a single test, we’ll first create two tests functions, as shown in Listing 9-10, and choose which ones to run.
+To demonstrate how to run a single test, we’ll first create two test functions, as shown in Listing 9-10, and choose which ones to run.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
