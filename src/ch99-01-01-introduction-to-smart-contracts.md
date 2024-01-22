@@ -1,6 +1,6 @@
 # Introduction to smart-contracts
 
-This chapter will give you a high level introduction to what smart-contracts are, what are they used for and why would blockchain developers use Cairo and Starknet.
+This chapter will give you a high level introduction to what smart-contracts are, what are they used for, and why would blockchain developers use Cairo and Starknet.
 If you are already familiar with blockchain programming, feel free to skip this chapter. The last part might still be interesting though.
 
 ## Smart-contracts

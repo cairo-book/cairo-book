@@ -170,7 +170,7 @@ Here’s an example of the `clone` method in action.
 ```
 
 When you see a call to `clone`, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
-In this case, _value_ is being copied, resulting in new memory cells being used, and the a new _variable_ is created, referring to the new, copied value.
+In this case, _value_ is being copied, resulting in new memory cells being used, and a new _variable_ is created, referring to the new, copied value.
 
 ### Return Values and Scope
 

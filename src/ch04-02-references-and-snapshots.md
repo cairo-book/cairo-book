@@ -77,7 +77,7 @@ In the following example, we want to calculate the area of a rectangle, but we d
 {{#include ../listings/ch04-understanding-ownership/no_listing_10_desnap/src/lib.cairo}}
 ```
 
-But, what happens if we try to modify something we’re passing as snapshot? Try the code in
+But, what happens if we try to modify something we’re passing as a snapshot? Try the code in
 Listing 4-6. Spoiler alert: it doesn’t work!
 
 <span class="filename">Filename: src/lib.cairo</span>
