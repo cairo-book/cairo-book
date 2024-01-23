@@ -14,13 +14,10 @@ fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
     let length = arr.len();
     let mut index = 0;
     let mut found: Option<usize> = Option::None;
-    loop {
-        if index < length {
-            if *arr.at(index) == value {
-                found = Option::Some(index);
-                break;
-            }
-        } else {
+
+    while index < length {
+        if *arr.at(index) == value {
+            found = Option::Some(index);
             break;
         }
         index += 1;
