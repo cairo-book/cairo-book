@@ -4,6 +4,7 @@ fn main() {
         if i > 10 {
             break;
         }
-        println!("i = {}", i);
+        println!("i = {i}");
+        i += 1;
     }
 }
