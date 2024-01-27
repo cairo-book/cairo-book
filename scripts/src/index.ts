@@ -8,7 +8,7 @@ import {
   deletePreviousTmpFolders,
 } from "./reorder-listings";
 
-const ROOT_PATH = path.join(__dirname, "..");
+const ROOT_PATH = path.join(__dirname, "../..");
 
 const listingsPath = path.join(ROOT_PATH, "listings");
 const srcFolderPath = path.join(ROOT_PATH, "src");
