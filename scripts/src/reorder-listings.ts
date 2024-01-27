@@ -3,6 +3,7 @@ import * as path from "path";
 import {
   findFileIncludingString,
   getChapterNumber,
+  printDiff,
   renameListing,
 } from "./utils";
 import prompts from "prompts";
@@ -260,8 +261,17 @@ Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from $
       content = fs.readFileSync(path.join(srcFolderPath, file), "utf8");
     }
     // Update the caption in the current file's content
-    const newCaption = `<span class="caption">Listing ${currentChapter}-${expectedListingNumber}`;
+    const newListing = `Listing ${currentChapter}-${expectedListingNumber}`;
+    const newCaption = `<span class="caption">${newListing}`;
+    const oldContent = content;
     content = content.replace(match[0], newCaption);
+
+    //TODO: make global over all files
+    // Update all mentions to this listing in the current file's content
+    //Listing ${match[1]}-${match[2]}
+    const mentionsRegex = new RegExp(`Listing ${match[1]}-${match[2]}`, "g");
+    content = content.replace(mentionsRegex, newCaption);
+    printDiff(oldContent, content);
     updated = true;
   }
 

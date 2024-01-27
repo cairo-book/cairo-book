@@ -79,7 +79,7 @@ export function renameFolder(
   fs.renameSync(folderPath, newFolderPath);
 }
 
-function printDiff(oldStr: string, newStr: string) {
+export function printDiff(oldStr: string, newStr: string) {
   const oldLines = oldStr.split("\n");
   const newLines = newStr.split("\n");
 
