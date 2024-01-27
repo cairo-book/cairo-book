@@ -121,68 +121,52 @@ The `number` variable will be bound to a value based on the outcome of the `if` 
 
 It’s often useful to execute a block of code more than once. For this task, Cairo provides a simple loop syntax, which will run through the code inside the loop body to the end and then start immediately back at the beginning. To experiment with loops, let’s create a new project called loops.
 
-Cairo only has one kind of loop for now: `loop`.
+Cairo has two kinds of loops: `loop` and `while`.
 
 #### Repeating Code with `loop`
 
-The `loop` keyword tells Cairo to execute a block of code over and over again
-forever or until you explicitly tell it to stop.
+The `loop` keyword tells Cairo to execute a block of code over and over again forever or until you explicitly tell it to stop.
 
-As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
-like this:
+As an example, change the _src/lib.cairo_ file in your _loops_ directory to look like this:
 
 <span class="filename">Filename: src/lib.cairo</span>
-
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_27_loop/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_27_infinite_loop/src/lib.cairo}}
 ```
 
-When we run this program, we’ll see `i = 0` printed over and over continuously
-until we stop the program manually, because the stop condition is never reached.
-While the compiler prevents us from writing programs without a stop condition (`break` statement),
-the stop condition might never be reached, resulting in an infinite loop.
-Most terminals support the keyboard shortcut <span class="keystroke">ctrl-c</span> to interrupt a program that is
-stuck in a continual loop. Give it a try:
+> Note: This program would not compile without a break condition. For the purpose of the example, we added a `break` statement that will never be reached, but satisfies the compiler.
 
+When we run this program, we’ll see again! printed over and over continuously until either the program runs out of gas we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
 ```shell
-$ scarb cairo-run --available-gas=20000000
-i = 0
-i = 0
-i = 0
-...
-i = 0
-Run panicked with [375233589013918064796019 ('Out of gas'), ].
-Remaining gas: 120810
-```
+$ scarb cairo-run --available-gas=2000000000000
+   Compiling loops v0.1.0 (file:///projects/loops)
+    Finished release target(s) in 0 seconds
+     Running loops
+again!
+again!
+again!
+^Cagain!
+``` 
+The symbol `^C` represents where you pressed ctrl-c. You may or may not see the word `again!` printed after the ^C, depending on where the code was in the loop when it received the interrupt signal.
 
-> Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurement that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In this case, the program panicked because it ran out of gas, as the stop condition was never reached.
+> Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurement that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In this case, we set the gas limit high enough for the the program to run for quite some time.
+
 > It is particularly important in the context of smart contracts deployed on Starknet, as it prevents from running infinite loops on the network.
 > If you're writing a program that needs to run a loop, you will need to execute it with the `--available-gas` flag set to a value that is large enough to run the program.
 
-To break out of a loop, you can place the `break` statement within the loop to tell the program when to stop
-executing the loop. Let's fix the infinite loop by adding a making the stop condition `i > 10` reachable.
+Now, try running the same program again, but this time with the `--available-gas` flag set to `200000`. You will see the program only prints `again!` 3 times before it stops, as it ran out of gas to keep executing the loop.
+
+Fortunately, Cairo also provides a way to break out of a loop using code. You can place the `break` keyword within the loop to tell the program when to stop executing the loop.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break/src/lib.cairo}}
 ```
 
-The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
+The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. 
+Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
 
 ```rust
-fn main() {
-    let mut i: usize = 0;
-    loop {
-        if i > 10 {
-            break;
-        }
-        if i == 5 {
-            i += 1;
-            continue;
-        }
-        println!("i = {}", i);
-        i += 1;
-    }
-}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_29_loop_continue/src/lib.cairo}}
 ```
 
 Executing this program will not print the value of `i` when it is equal to `5`.
@@ -197,7 +181,7 @@ use to stop the loop; that value will be returned out of the loop so you can
 use it, as shown here:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_29_loop_return_values/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_30_loop_return_values/src/lib.cairo}}
 ```
 
 Before the loop, we declare a variable named `counter` and initialize it to
@@ -206,6 +190,24 @@ the loop. On every iteration of the loop, we check whether the `counter` is equa
 When the condition is met, we use the `break` keyword with the value `counter * 2`. After the loop, we use a
 semicolon to end the statement that assigns the value to `result`. Finally, we
 print the value in `result`, which in this case is `20`.
+
+#### Conditional Loops with while
+
+A program will often need to evaluate a condition within a loop.
+While the condition is `true`, the loop runs.
+When the condition ceases to be `true`, the program calls `break`, stopping the loop.
+It’s possible to implement behavior like this using a combination of `loop`, `if`, `else`, and `break`; you could try that now in a program, if you’d like.
+However, this pattern is so common that Cairo has a built-in language construct for it, called a `while` loop.
+
+In Listing 3-3, we use `while` to loop the program three times, counting down each time, and then, after the loop, print a message and exit.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_31_while_loop/src/lib.cairo}}
+```
+<span class="caption">Listing 3-3: Using a while loop to run code while a condition holds true</span>
+
+This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
+While a condition evaluates to `true`, the code runs; otherwise, it exits the loop.
 
 ## Summary
 

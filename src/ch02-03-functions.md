@@ -104,7 +104,7 @@ If you want to use named parameters, you need to specify the name of the paramet
 Here is an example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_30_named_parameters/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_32_named_parameters/src/lib.cairo}}
 ```
 
 ### Statements and Expressions

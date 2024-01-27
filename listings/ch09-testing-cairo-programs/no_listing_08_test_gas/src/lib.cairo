@@ -1,11 +1,7 @@
 fn sum_n(n: usize) -> usize {
     let mut i = 0;
     let mut sum = 0;
-    loop {
-        if i == n {
-            sum += i;
-            break;
-        };
+    while i <= n {
         sum += i;
         i += 1;
     };
