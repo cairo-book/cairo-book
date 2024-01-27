@@ -101,7 +101,7 @@ Now that you’ve seen what the test results look like in different scenarios, l
 
 The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
 
-In [Chapter 5, Listing 5-15](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
+In [Chapter 5, Listing 5-13](ch05-03-method-syntax.md#multiple-impl-blocks), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing 9-5. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -173,19 +173,19 @@ Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `
 
 ## Checking for panics with `should_panic`
 
-In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 9-8. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
+In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 9-7. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
 
 We do this by adding the attribute `should_panic` to our test function. The test passes if the code inside the function panics; the test fails if the code inside the function doesn’t panic.
 
-Listing 9-8 shows a test that checks that the error conditions of `GuessTrait::new` happen when we expect them to.
+Listing 9-7 shows a test that checks that the error conditions of `GuessTrait::new` happen when we expect them to.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch09-testing-cairo-programs/listing_08_08/src/lib.cairo}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_09_07/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 9-8: Testing that a condition will cause a panic</span>
+<span class="caption">Listing 9-7: Testing that a condition will cause a panic</span>
 
 We place the `#[should_panic]` attribute after the `#[test]` attribute and before the test function it applies to. Let’s look at the result when this test passes:
 
@@ -202,7 +202,7 @@ Looks good! Now let’s introduce a bug in our code by removing the condition th
 {{#rustdoc_include ../listings/ch09-testing-cairo-programs/no_listing_03_wrong_new_impl/src/lib.cairo:here}}
 ```
 
-When we run the test in Listing 9-8, it will fail:
+When we run the test in Listing 9-7, it will fail:
 
 ```shell
 $ scarb cairo-test
@@ -215,15 +215,15 @@ Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 
 We don’t get a very helpful message in this case, but when we look at the test function, we see that it’s annotated with `#[should_panic]`. The failure we got means that the code in the test function did not cause a panic.
 
-Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `Guess` in Listing 9-9 where the new function panics with different messages depending on whether the value is too small or too large.
+Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `Guess` in Listing 9-8 where the new function panics with different messages depending on whether the value is too small or too large.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_08_09/src/lib.cairo:test_panic}}
+{{#rustdoc_include ../listings/ch09-testing-cairo-programs/listing_09_08/src/lib.cairo:test_panic}}
 ```
 
-<span class="caption">Listing 9-9: Testing for a panic with a panic message containing the error message string</span>
+<span class="caption">Listing 9-8: Testing for a panic with a panic message containing the error message string</span>
 
 This test will pass because the value we put in the `should_panic` attribute’s expected parameter is the array of string of the message that the `Guess::new` function panics with. We need to specify the entire panic message that we expect.
 
@@ -251,15 +251,15 @@ The failure message indicates that this test did indeed panic as we expected, bu
 
 Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can choose which tests to run by passing `scarb cairo-test` an option `-f` (for "filter"), followed by the name of the test you want to run as an argument.
 
-To demonstrate how to run a single test, we’ll first create two test functions, as shown in Listing 9-10, and choose which ones to run.
+To demonstrate how to run a single test, we’ll first create two test functions, as shown in Listing 9-9, and choose which ones to run.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch09-testing-cairo-programs/listing_08_10/src/lib.cairo}}
+{{#include ../listings/ch09-testing-cairo-programs/listing_09_09/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 9-10: Two tests with two different names</span>
+<span class="caption">Listing 9-9: Two tests with two different names</span>
 
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 

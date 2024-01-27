@@ -136,7 +136,7 @@ it again after calling the `can_hold` method. The return value of `can_hold`
 will be a Boolean, and the implementation will check whether the width and
 height of `self` are greater than the width and height of the other `Rectangle`,
 respectively. Let’s add the new `can_hold` method to the `trait` and `impl`
-blocks from Listing 5-13, shown in Listing 5-15.
+blocks from Listing 5-11, shown in Listing 5-13.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -181,7 +181,7 @@ ignore -->.
 ### Multiple `impl` Blocks
 
 Each struct is allowed to have multiple `trait` and `impl` blocks. For example,
-Listing 5-15 is equivalent to the code shown in Listing 5-16, which has each
+Listing 5-13 is equivalent to the code shown in Listing 5-14, which has each
 method in its own `trait` and `impl` blocks.
 
 ```rust,noplayground
