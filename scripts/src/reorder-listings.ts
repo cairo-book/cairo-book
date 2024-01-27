@@ -249,17 +249,19 @@ async function processListingCaption(
 Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from ${oldFolderName} to ${newFolderName}?`,
       onState,
     });
-    if (response.rename) {
-      await renameListing(
-        srcFolderPath,
-        currentChapter,
-        selectedFolder,
-        oldFolderName,
-        newFolderName,
-        true
-      );
-      content = fs.readFileSync(path.join(srcFolderPath, file), "utf8");
+    if (!response.rename) {
+      return { updated, content };
     }
+    await renameListing(
+      srcFolderPath,
+      currentChapter,
+      selectedFolder,
+      oldFolderName,
+      newFolderName,
+      true
+    );
+    content = fs.readFileSync(path.join(srcFolderPath, file), "utf8");
+
     // Update the caption in the current file's content
     const newListing = `Listing ${currentChapter}-${expectedListingNumber}`;
     const newCaption = `<span class="caption">${newListing}`;
