@@ -133,9 +133,7 @@ To send a message from L2 to L1, what we would do on Starknet is:
 
 We simply build the payload and pass it, along with the L1 contract address, to the syscall function.
 
-On L1, the important part is to build the same payload as on L2. Then you call `consumeMessageFromL2` by passing the L2 contract address and the payload.
-Please be aware that the L2 contract address expected by the `consumeMessageFromL2` is the contract address of the account that sends the transaction on L2,
-and not the address of the contract executing the `send_message_to_l1_syscall`.
+On L1, the important part is to build the same payload sent by the L2. Then you call `consumeMessageFromL2` in you solidity contract by passing the L2 contract address and the payload. Please be aware that the L2 contract address expected by the `consumeMessageFromL2` is the address of the contract that sends the message on the L2 by calling `send_message_to_l1_syscall`.
 
 ```js
 function consumeMessageFelt(
@@ -158,7 +156,9 @@ function consumeMessageFelt(
 }
 ```
 
-As you can see, in this context we don't have to verify which contract from L2 is sending the message. But we are actually using the `consumeMessageFromL2` to validate the inputs (the sender address on L2 and the payload) to ensure we are only consuming valid messages.
+As you can see, in this context we don't have to verify which contract from L2 is sending the message (as we do on the L2 to verify which contract from L1 is sending the message). But we are actually using the `consumeMessageFromL2` of the starknet core contract to validate the inputs (the contract address on L2 and the payload) to ensure we are only consuming valid messages.
+
+> **Note:** The `consumeMessageFromL2` function of the starknet core contract is expected to be called from a solidity contract, and not directly on the starknet core contract. The reason of that is because the starknet core contract is using `msg.sender` to actually compute the hash of the message. And this `msg.sender` must correspond to the `to_address` field that is given to the function `send_message_to_l1_syscall` that is called on Starknet.
 
 It is important to remember that on L1 we are sending a payload of `uint256`, but the basic data type on Starknet is `felt252`; however, `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
 
