@@ -141,9 +141,9 @@ This example also meets the exhaustiveness requirement because we’re explicitl
 
 ## Multiple Patterns with the `|` operator
 
-In match expressions, you can match multiple patterns using the | syntax, which is the pattern or operator.
+ In `match` expressions, you can match multiple patterns using the `|` syntax, which is the pattern *or* operator.
 
-For example, in the following code we modified the `vending_machine_accept` function to accept both Dime and Quarter coins in a single arm:
+For example, in the following code we modified the `vending_machine_accept` function to accept both `Dime` and `Quarter` coins in a single arm:
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_10_match_or/src/lib.cairo:here}}
@@ -159,7 +159,7 @@ Let's introduce a new `DayType` enum:
 ```
 
 Now, let's suppose that our vending machine accepts any coin on weekdays, but only accepts quarters and dimes on weekends and holidays.
-We can modify the `vending_machine_accept` function to accept a tuple of a `Coin` and a `Weekday` and return true only if the coin is accepted and the day is a weekday:
+We can modify the `vending_machine_accept` function to accept a tuple of a `Coin` and a `Weekday` and return `true` only if the coin is accepted and the day is a weekday:
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_11_match_tuple/src/lib.cairo:here}}
