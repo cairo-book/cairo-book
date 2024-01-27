@@ -223,11 +223,15 @@ async function processListingCaption(
       .padStart(2, "0");
     const newFolderName = `listing_${paddedChapterNumber}_${paddedNewListingNumber}`;
 
-    const selectedFolder = path.join(
-      listingsFolderPath,
-      listingsFolder,
+    const chapterListingsFolder = path.join(listingsFolderPath, listingsFolder);
+
+    // Search inside the chapterListingsFolder for a file containing the oldFolderName
+    oldFolderName = findFileIncludingString(
+      chapterListingsFolder,
       oldFolderName
-    );
+    )!;
+
+    const selectedFolder = path.join(chapterListingsFolder, oldFolderName);
 
     // Ask validation before renaming
     // Skip 3 lines in console

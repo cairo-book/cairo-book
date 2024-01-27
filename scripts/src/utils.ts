@@ -194,6 +194,8 @@ export function findFileIncludingString(
 ): string | null {
   const listingsFolder = fs
     .readdirSync(path)
-    .find((folder) => folder.includes(searchString));
+    .find(
+      (folder) => folder.includes(searchString) && !folder.includes("_tmp")
+    );
   return listingsFolder || null;
 }
