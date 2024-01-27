@@ -87,6 +87,7 @@ export async function reorderListings(
       contentChanged = updated;
     } while (contentChanged);
   }
+  commitFolderRenames(listingsFolderPath); // final commit
 }
 
 /**
@@ -272,7 +273,7 @@ Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from $
     // Update all mentions to this listing in the current file's content
     //Listing ${match[1]}-${match[2]}
     const mentionsRegex = new RegExp(`Listing ${match[1]}-${match[2]}`, "g");
-    content = content.replace(mentionsRegex, newCaption);
+    content = content.replace(mentionsRegex, newListing);
     printDiff(oldContent, content);
     updated = true;
   }

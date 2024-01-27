@@ -5,7 +5,7 @@ The most common way for interacting with a contract’s storage is through stora
 Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:storage}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:storage}}
 ```
 
 <span class="caption">A Storage Struct</span>
@@ -26,7 +26,7 @@ The address of a storage variable is computed as follows:
 You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value.
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:owner_address}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:owner_address}}
 ```
 
 ## Interacting with Storage Variables
@@ -36,7 +36,7 @@ Variables stored in the storage struct can be accessed and modified using the `r
 To read the value of the `owner` storage variable, which is a single value, we call the `read` function on the `owner` variable, passing in no parameters.
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:read_owner}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:read_owner}}
 ```
 
 <span class="caption">Calling the `read` function on the `owner` variable</span>
@@ -44,7 +44,7 @@ To read the value of the `owner` storage variable, which is a single value, we c
 To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the `names` variable, passing in the key `address` as a parameter. If the mapping had more than one key, we would pass in the other keys as parameters as well.
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:read}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:read}}
 ```
 
 <span class="caption">Calling the `read` function on the `names` variable</span>
@@ -52,13 +52,13 @@ To read the value of the storage variable `names`, which is a mapping from `Cont
 To write a value to a storage variable, we call the `write` function passing in the eventual keys the value as arguments. As with the `read` function, the number of arguments depends on the number of keys - here, we only pass in the value to write to the `owner` variable as it is a simple variable.
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:write_owner}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:write_owner}}
 ```
 
 <span class="caption">Calling the `write` function on the `owner` variable</span>
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:write}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:write}}
 ```
 
 <span class="caption">Calling the `write` function on the `names` variable</span>
@@ -72,13 +72,13 @@ But what if you wanted to store a type that you defined yourself, such as an enu
 In our example, we want to store a `Person` struct in storage, which is possible by implementing the `Store` trait for the `Person` type. This can be achieved by simply adding a `#[derive(starknet::Store)]` attribute on top of our struct definition.
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:person}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:person}}
 ```
 
 Similarly, Enums can be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait.
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:enum_store}}
+{{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:enum_store}}
 ```
 
 ### Structs storage layout
@@ -123,13 +123,13 @@ and cannot be used as types inside structs.
 To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
-You can also create more complex mappings with multiple keys. You can find one in Listing 99-2bis like the popular `allowances` storage variable in the ERC20 Standard which maps an `owner` and an allowed `spender` to its `allowance` amount using multiple keys passed inside a tuple:
+You can also create more complex mappings with multiple keys. You can find one in Listing 99-4 like the popular `allowances` storage variable in the ERC20 Standard which maps an `owner` and an allowed `spender` to its `allowance` amount using multiple keys passed inside a tuple:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/no_listing_01_storage_mapping/src/lib.cairo:here}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_04/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 99-2bis: Storing mappings</span>
+<span class="caption">Listing 99-4: Storing mappings</span>
 
 The address in storage of a variable stored in a mapping is computed according to the description in the [Storage Addresses](#storage-addresses) section.
 If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` - where `k_1` and `k_2` are the values of the two fields of the struct.

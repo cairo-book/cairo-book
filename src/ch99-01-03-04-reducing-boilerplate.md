@@ -3,7 +3,7 @@
 In a previous section, we saw this example of an implementation block in a contract that didn't have any corresponding trait.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:generate_trait}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:generate_trait}}
 ```
 
 It's not the first time that we encounter this attribute, we already talked about in it [Traits in Cairo](./ch08-02-traits-in-cairo.md). In this section, we'll be taking a deeper look at it and see how it can be used in contracts.

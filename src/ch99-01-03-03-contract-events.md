@@ -18,7 +18,7 @@ The `#[derive(starknet::Event)]` attribute causes the compiler to generate an im
 instantiated with the Event type, which in our example is the following enum:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:event}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:event}}
 ```
 
 Each event variant has to be a struct of the same name as the variant, and each variant needs to implement the `starknet::Event` trait itself.
@@ -36,5 +36,5 @@ When emitting the event with `self.emit(StoredName { user: user, name: name })`,
 After defining events, we can emit them using `self.emit`, with the following syntax:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03_example_contract/src/lib.cairo:emit_event}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:emit_event}}
 ```
