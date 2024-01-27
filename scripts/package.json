@@ -1,0 +1,19 @@
+{
+  "name": "scripts",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/prompts": "^2.4.9"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "fuzzysort": "^2.0.4",
+    "prompts": "^2.4.2"
+  }
+}
