@@ -231,6 +231,11 @@ async function processListingCaption(
       oldFolderName
     )!;
 
+    if (!oldFolderName) {
+      console.log(`No file found including string: ${oldFolderName}`);
+      return { updated, content };
+    }
+
     const selectedFolder = path.join(chapterListingsFolder, oldFolderName);
 
     // Ask validation before renaming
