@@ -174,29 +174,29 @@ In this case, _value_ is being copied, resulting in new memory cells being used,
 
 ### Return Values and Scope
 
-Returning values is equivalent to _moving_ them. Listing 4-4 shows an example of a
+Returning values is equivalent to _moving_ them. Listing 4-2 shows an example of a
 function that returns some value, with similar annotations as those in Listing
-4-3.
+4-1.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_03_04/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_04_02/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-4: Moving return values</span>
+<span class="caption">Listing 4-2: Moving return values</span>
 
 While this works, moving into and out of every function is a bit tedious. What if we want to let a function use a value but not move the value? It’s quite annoying that anything we pass in also needs to be passed back if we want to use it again, in addition to any data resulting from the body of the function that we might want to return as well.
 
-Cairo does let us return multiple values using a tuple, as shown in Listing 4-5.
+Cairo does let us return multiple values using a tuple, as shown in Listing 4-3.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_03_05/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_04_03/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-5: Returning many values</span>
+<span class="caption">Listing 4-3: Returning many values</span>
 
 But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called _references_ and _snapshots_.
 
