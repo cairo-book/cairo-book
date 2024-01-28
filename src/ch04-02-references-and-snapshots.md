@@ -78,15 +78,15 @@ In the following example, we want to calculate the area of a rectangle, but we d
 ```
 
 But, what happens if we try to modify something we’re passing as a snapshot? Try the code in
-Listing 4-6. Spoiler alert: it doesn’t work!
+Listing 4-4. Spoiler alert: it doesn’t work!
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-{{#include ../listings/ch04-understanding-ownership/listing_03_06/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_04_04/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-6: Attempting to modify a snapshot value</span>
+<span class="caption">Listing 4-4: Attempting to modify a snapshot value</span>
 
 Here’s the error:
 
@@ -106,13 +106,13 @@ In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modif
 
 > **Note**: In Cairo, a parameter can only be passed as _mutable reference_ using the `ref` modifier if the variable is declared as mutable with `mut`.
 
-In Listing 4-7, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function.
+In Listing 4-5, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function.
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_03_07/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_04_05/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-7: Use of a mutable reference to modify a value</span>
+<span class="caption">Listing 4-5: Use of a mutable reference to modify a value</span>
 
 First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` into `flip` with `ref rec`, and update the function signature to accept a mutable reference with `ref rec: Rectangle`. This makes it very clear that the `flip` function will mutate the value of the `Rectangle` instance passed as parameter.
 

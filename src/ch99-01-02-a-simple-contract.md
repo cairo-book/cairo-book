@@ -29,10 +29,10 @@ The contract defines and exposes publicly the functions `set` and `get` that can
 The interface of a contract represents the functions this contract exposes to the outside world. Here, the interface exposes two functions: `set` and `get`. By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface.
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01_bis_wrong_impl/src/lib.cairo:impl}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_02/src/lib.cairo:impl}}
 ```
 
-<span class="caption">Listing 99-1-bis: A wrong implementation of the interface of the contract. This does not compile.</span>
+<span class="caption">Listing 99-2: A wrong implementation of the interface of the contract. This does not compile.</span>
 
 In the interface, note the generic type `TContractState` of the `self` argument which is passed by reference to the `set` function. The `self` parameter represents the contract state. Seeing the `self` argument passed to `set` tells us that this function might access the state of the contract, as it is what gives us access to the contract’s storage. The `ref` modifier implies that `self` may be modified, meaning that the storage variables of the contract may be modified inside the `set` function.
 

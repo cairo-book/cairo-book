@@ -3,6 +3,7 @@ import * as path from "path";
 import {
   findFileIncludingString,
   getChapterNumber,
+  printDiff,
   renameListing,
 } from "./utils";
 import prompts from "prompts";
@@ -86,6 +87,7 @@ export async function reorderListings(
       contentChanged = updated;
     } while (contentChanged);
   }
+  commitFolderRenames(listingsFolderPath); // final commit
 }
 
 /**
@@ -223,11 +225,20 @@ async function processListingCaption(
       .padStart(2, "0");
     const newFolderName = `listing_${paddedChapterNumber}_${paddedNewListingNumber}`;
 
-    const selectedFolder = path.join(
-      listingsFolderPath,
-      listingsFolder,
+    const chapterListingsFolder = path.join(listingsFolderPath, listingsFolder);
+
+    // Search inside the chapterListingsFolder for a file containing the oldFolderName
+    oldFolderName = findFileIncludingString(
+      chapterListingsFolder,
       oldFolderName
-    );
+    )!;
+
+    if (!oldFolderName) {
+      console.log(`No file found including string: ${oldFolderName}`);
+      return { updated, content };
+    }
+
+    const selectedFolder = path.join(chapterListingsFolder, oldFolderName);
 
     // Ask validation before renaming
     // Skip 3 lines in console
@@ -239,20 +250,31 @@ async function processListingCaption(
 Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from ${oldFolderName} to ${newFolderName}?`,
       onState,
     });
-    if (response.rename) {
-      await renameListing(
-        srcFolderPath,
-        currentChapter,
-        selectedFolder,
-        oldFolderName,
-        newFolderName,
-        true
-      );
-      content = fs.readFileSync(path.join(srcFolderPath, file), "utf8");
+    if (!response.rename) {
+      return { updated, content };
     }
+    await renameListing(
+      srcFolderPath,
+      currentChapter,
+      selectedFolder,
+      oldFolderName,
+      newFolderName,
+      true
+    );
+    content = fs.readFileSync(path.join(srcFolderPath, file), "utf8");
+
     // Update the caption in the current file's content
-    const newCaption = `<span class="caption">Listing ${currentChapter}-${expectedListingNumber}`;
+    const newListing = `Listing ${currentChapter}-${expectedListingNumber}`;
+    const newCaption = `<span class="caption">${newListing}`;
+    const oldContent = content;
     content = content.replace(match[0], newCaption);
+
+    //TODO: make global over all files
+    // Update all mentions to this listing in the current file's content
+    //Listing ${match[1]}-${match[2]}
+    const mentionsRegex = new RegExp(`Listing ${match[1]}-${match[2]}`, "g");
+    content = content.replace(mentionsRegex, newListing);
+    printDiff(oldContent, content);
     updated = true;
   }
 

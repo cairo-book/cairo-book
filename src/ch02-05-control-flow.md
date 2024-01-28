@@ -60,6 +60,7 @@ error: Mismatched types. The type core::bool cannot be created from a numeric li
 
 error: could not compile `hello_world` due to previous error
 Error: `scarb metadata` exited with error
+```
 
 The error indicates that Cairo inferred the type of `number` to be a `bool`
 based on its later use as a condition of the `if` statement. It tries to create
@@ -199,12 +200,12 @@ When the condition ceases to be `true`, the program calls `break`, stopping the 
 It’s possible to implement behavior like this using a combination of `loop`, `if`, `else`, and `break`; you could try that now in a program, if you’d like.
 However, this pattern is so common that Cairo has a built-in language construct for it, called a `while` loop.
 
-In Listing 3-3, we use `while` to loop the program three times, counting down each time, and then, after the loop, print a message and exit.
+In Listing 2-3, we use `while` to loop the program three times, counting down each time, and then, after the loop, print a message and exit.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_31_while_loop/src/lib.cairo}}
 ```
-<span class="caption">Listing 3-3: Using a while loop to run code while a condition holds true</span>
+<span class="caption">Listing 2-3: Using a while loop to run code while a condition holds true</span>
 
 This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
 While a condition evaluates to `true`, the code runs; otherwise, it exits the loop.

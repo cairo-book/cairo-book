@@ -79,7 +79,7 @@ export function renameFolder(
   fs.renameSync(folderPath, newFolderPath);
 }
 
-function printDiff(oldStr: string, newStr: string) {
+export function printDiff(oldStr: string, newStr: string) {
   const oldLines = oldStr.split("\n");
   const newLines = newStr.split("\n");
 
@@ -194,6 +194,8 @@ export function findFileIncludingString(
 ): string | null {
   const listingsFolder = fs
     .readdirSync(path)
-    .find((folder) => folder.includes(searchString));
+    .find(
+      (folder) => folder.includes(searchString) && !folder.includes("_tmp")
+    );
   return listingsFolder || null;
 }

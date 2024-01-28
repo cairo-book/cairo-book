@@ -18,10 +18,10 @@ shown in Listing 5-13.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_13_area_method/src/lib.cairo}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_11/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 5-13: Defining an `area` method to use on the
+<span class="caption">Listing 5-11: Defining an `area` method to use on the
 `Rectangle` </span>
 
 To define the function within the context of `Rectangle`, we start by defining a
@@ -102,10 +102,10 @@ program shown in Listing 5-14.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:no_method}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_12/src/lib.cairo:no_method}}
 ```
 
-<span class="caption">Listing 5-14: Using the as-yet-unwritten `can_hold`
+<span class="caption">Listing 5-12: Using the as-yet-unwritten `can_hold`
 method</span>
 
 The expected output would look like the following because both dimensions of
@@ -136,15 +136,15 @@ it again after calling the `can_hold` method. The return value of `can_hold`
 will be a Boolean, and the implementation will check whether the width and
 height of `self` are greater than the width and height of the other `Rectangle`,
 respectively. Let’s add the new `can_hold` method to the `trait` and `impl`
-blocks from Listing 5-13, shown in Listing 5-15.
+blocks from Listing 5-11, shown in Listing 5-13.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_15_can_hold/src/lib.cairo:trait_impl}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_12/src/lib.cairo:trait_impl}}
 ```
 
-<span class="caption">Listing 5-15: Implementing the `can_hold` method on
+<span class="caption">Listing 5-13: Implementing the `can_hold` method on
 `Rectangle` that takes another `Rectangle` instance as a parameter</span>
 
 When we run this code with the `main` function in Listing 5-14, we’ll get our
@@ -181,14 +181,14 @@ ignore -->.
 ### Multiple `impl` Blocks
 
 Each struct is allowed to have multiple `trait` and `impl` blocks. For example,
-Listing 5-15 is equivalent to the code shown in Listing 5-16, which has each
+Listing 5-13 is equivalent to the code shown in Listing 5-14, which has each
 method in its own `trait` and `impl` blocks.
 
 ```rust,noplayground
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_02_multiple_impls/src/lib.cairo:here}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_14/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 5-16: Rewriting Listing 5-15 using multiple `impl`
+<span class="caption">Listing 5-14: Rewriting Listing 5-13 using multiple `impl`
 blocks</span>
 
 There’s no reason to separate these methods into multiple `trait` and `impl`
