@@ -22,3 +22,7 @@ To run:
 ```bash
 bun start
 ```
+
+# Diff script
+
+Displays the diff between two builds of the book. Useful when moving snippet folders around but not modifying the content a lot. 
