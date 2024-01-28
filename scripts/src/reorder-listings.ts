@@ -292,7 +292,7 @@ Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from $
  *
  * @param srcFolderPath - The path to the source directory containing the chapter files.
  */
-export function fixListingsCHapterNumber(srcFolderPath: string) {
+export function fixListingsChapterNumber(srcFolderPath: string) {
   const files = fs.readdirSync(srcFolderPath);
 
   for (const file of files) {
