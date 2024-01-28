@@ -60,6 +60,7 @@ error: Mismatched types. The type core::bool cannot be created from a numeric li
 
 error: could not compile `hello_world` due to previous error
 Error: `scarb metadata` exited with error
+```
 
 The error indicates that Cairo inferred the type of `number` to be a `bool`
 based on its later use as a condition of the `if` statement. It tries to create
