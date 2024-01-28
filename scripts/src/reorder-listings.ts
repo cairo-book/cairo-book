@@ -315,6 +315,8 @@ export function fixListingsChapterNumber(srcFolderPath: string) {
       const updatedContent = content.replace(
         /<span class="caption">Listing (\d+)-(\d+)/g,
         (match, listingChapterNumber, listingNumber) => {
+          // Check if the listing chapter number matches the actual chapter number
+          // if not, update the caption with the correct chapter number.
           if (parseInt(listingChapterNumber, 10) !== chapterNumber) {
             updated = true; // Flag to indicate content was modified
             const newListing = `<span class="caption">Listing ${chapterNumber}-${listingNumber}`;
