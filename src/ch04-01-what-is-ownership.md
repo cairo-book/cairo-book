@@ -50,7 +50,7 @@ which it’s declared until the end of the current _scope_. Listing 4-1 shows a
 program with comments annotating where the variable `s` would be valid.
 
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing_03_01/src/lib.cairo:here}}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing_04_01/src/lib.cairo:here}}
 ```
 
 <span class="caption">Listing 4-1: A variable and the scope in which it is valid</span>

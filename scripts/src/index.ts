@@ -3,7 +3,7 @@ import prompts from "prompts";
 
 import { searchAndRenameListing } from "./search-rename-listing";
 import {
-  fixListingsCHapterNumber,
+  fixListingsChapterNumber,
   reorderListings,
   deletePreviousTmpFolders,
 } from "./reorder-listings";
@@ -14,7 +14,7 @@ const listingsPath = path.join(ROOT_PATH, "listings");
 const srcFolderPath = path.join(ROOT_PATH, "src");
 
 async function main() {
-  console.log("Welcome to the Maintenance Script for mdbook");
+  console.log("Welcome to the Maintenance Script for the Cairo Book");
 
   const actionResponse = await prompts({
     type: "select",
@@ -32,7 +32,7 @@ async function main() {
       break;
     case "reorder":
       deletePreviousTmpFolders(listingsPath);
-      fixListingsCHapterNumber(srcFolderPath);
+      fixListingsChapterNumber(srcFolderPath);
       reorderListings(srcFolderPath, listingsPath);
       break;
     default:

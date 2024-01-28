@@ -55,6 +55,7 @@ export async function reorderListings(
     .filter((file) => file.startsWith("ch") && file.endsWith(".md"))
     .sort();
 
+  // First listing is always 1
   let expectedListingNumber = 1;
   let currentChapter = 0;
 
@@ -70,7 +71,7 @@ export async function reorderListings(
       // Commit any pending folder renames before moving to the next chapter
       commitFolderRenames(listingsFolderPath);
       currentChapter = chapterNumber;
-      expectedListingNumber = 1; // Reset only when the chapter changes
+      expectedListingNumber = 1; // Reset to 1 when the chapter changes
     }
 
     let contentChanged;
@@ -82,8 +83,12 @@ export async function reorderListings(
         expectedListingNumber // Pass expectedListingNumber to processFile
       );
       if (!updated) {
+        // If the content didn't change, we can move to the next expected listing number
         expectedListingNumber = nextListingNumber;
       }
+
+      // If the content changed, we need to re-read the file content with the same
+      // expectedListingNumber to ensure that the rest of the listings are in order, post-modification.
       contentChanged = updated;
     } while (contentChanged);
   }
@@ -109,25 +114,23 @@ async function processFile(
   file: string,
   expectedListingNumber: number
 ): Promise<{ updated: boolean; nextListingNumber: number }> {
+  let updated = false;
   const chapterNumber = getChapterNumber(file);
   if (chapterNumber === null) {
     console.log(`Warning: File ${file} doesn't match expected format (chX.md)`);
-    return { updated: false, nextListingNumber: expectedListingNumber };
+    return { updated, nextListingNumber: expectedListingNumber };
   }
-
-  let currentChapter = chapterNumber;
-  let updated = false;
 
   const filePath = path.join(srcFolderPath, file);
   let content = fs.readFileSync(filePath, "utf8");
 
-  const paddedChapterNumber = currentChapter.toString().padStart(2, "0");
+  // Search the folder containing listings for this chapter.
+  const paddedChapterNumber = chapterNumber.toString().padStart(2, "0");
   const searchString = `ch${paddedChapterNumber}`;
   const chapterListingsFolder = findFileIncludingString(
     listingsFolderPath,
     searchString
   );
-
   if (!chapterListingsFolder) {
     console.log(
       `Warning: No listings folder found for chapter ${chapterNumber}`
@@ -138,17 +141,21 @@ async function processFile(
   const regex = /<span class="caption">Listing (\d+)-(\d+)/g;
   let match;
 
+  // For each listings caption in the file, process it
+  // which involves checking if the listing number matches the expected listing number
+  // and updates the content if not.
   while ((match = regex.exec(content)) !== null) {
     const result = await processListingCaption(
       match,
       content,
-      currentChapter,
+      chapterNumber,
       expectedListingNumber,
       srcFolderPath,
       listingsFolderPath,
       chapterListingsFolder,
       file
     );
+    // Content is updated with the eventual updated content from processListingCaption
     content = result.content;
     updated = result.updated || updated;
     expectedListingNumber++;
@@ -214,17 +221,19 @@ async function processListingCaption(
       return { updated, content };
     }
 
+    // Find the folder name used for this listing, in the snippet just above
+    // the current listing caption
     let oldFolderName = "";
     if (lastIncludeMatch && lastIncludeMatch[1]) {
       oldFolderName = lastIncludeMatch[1];
     }
 
+    // Prepare the new folder name to update
     const paddedChapterNumber = currentChapter.toString().padStart(2, "0");
     const paddedNewListingNumber = expectedListingNumber
       .toString()
       .padStart(2, "0");
     const newFolderName = `listing_${paddedChapterNumber}_${paddedNewListingNumber}`;
-
     const chapterListingsFolder = path.join(listingsFolderPath, listingsFolder);
 
     // Search inside the chapterListingsFolder for a file containing the oldFolderName
@@ -237,26 +246,25 @@ async function processListingCaption(
       console.log(`No file found including string: ${oldFolderName}`);
       return { updated, content };
     }
-
-    const selectedFolder = path.join(chapterListingsFolder, oldFolderName);
+    const oldFolderPath = path.join(chapterListingsFolder, oldFolderName);
 
     // Ask validation before renaming
     // Skip 3 lines in console
     process.stdout.write("\n\n\n");
-    const response = await prompts({
+    const renameResponse = await prompts({
       type: "confirm",
       name: "rename",
-      message: `Found oudated Listing ${match[1]}-${match[2]} in file ${file}.
-Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from ${oldFolderName} to ${newFolderName}?`,
+      message: `Listing ${match[1]}-${match[2]} in file ${file} should be Listing ${currentChapter}-${expectedListingNumber}.
+Rename and move source from ${oldFolderName} to ${newFolderName}?`,
       onState,
     });
-    if (!response.rename) {
+    if (!renameResponse.rename) {
       return { updated, content };
     }
     await renameListing(
       srcFolderPath,
       currentChapter,
-      selectedFolder,
+      oldFolderPath,
       oldFolderName,
       newFolderName,
       true
@@ -270,11 +278,29 @@ Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from $
     content = content.replace(match[0], newCaption);
 
     //TODO: make global over all files
-    // Update all mentions to this listing in the current file's content
-    //Listing ${match[1]}-${match[2]}
+    // Search for all mentions to this listing in the current file's content
+    // Listing ${match[1]}-${match[2]}
+    // and replace it with the new listing number
+    //TODO: add a prompt for each change
     const mentionsRegex = new RegExp(`Listing ${match[1]}-${match[2]}`, "g");
-    content = content.replace(mentionsRegex, newListing);
-    printDiff(oldContent, content);
+    const updatedContent = content.replace(mentionsRegex, newListing);
+
+    // Show the difference
+    printDiff(content, updatedContent);
+
+    // Ask for user confirmation
+    const renameReference = await prompts({
+      type: "confirm",
+      name: "rename",
+      message: "Found a reference. Do you want to rename it?",
+    });
+
+    if (renameReference.rename) {
+      content = updatedContent; // Apply the change
+    } else {
+      console.log("Change skipped.");
+    }
+
     updated = true;
   }
 
@@ -292,7 +318,7 @@ Rename to Listing ${currentChapter}-${expectedListingNumber} and move dir from $
  *
  * @param srcFolderPath - The path to the source directory containing the chapter files.
  */
-export function fixListingsCHapterNumber(srcFolderPath: string) {
+export function fixListingsChapterNumber(srcFolderPath: string) {
   const files = fs.readdirSync(srcFolderPath);
 
   for (const file of files) {
@@ -315,6 +341,8 @@ export function fixListingsCHapterNumber(srcFolderPath: string) {
       const updatedContent = content.replace(
         /<span class="caption">Listing (\d+)-(\d+)/g,
         (match, listingChapterNumber, listingNumber) => {
+          // Check if the listing chapter number matches the actual chapter number
+          // if not, update the caption with the correct chapter number.
           if (parseInt(listingChapterNumber, 10) !== chapterNumber) {
             updated = true; // Flag to indicate content was modified
             const newListing = `<span class="caption">Listing ${chapterNumber}-${listingNumber}`;
