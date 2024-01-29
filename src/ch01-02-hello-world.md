@@ -16,10 +16,10 @@ prints the text `Hello, world!` to the screen, so we’ll do the same here!
 
 You’ll start by making a directory to store your Cairo code. It doesn’t matter
 to Cairo where your code lives, but for the exercises and projects in this book,
-we suggest making a \_cairo_projects\_ directory in your home directory and keeping all
+we suggest making a _cairo_projects_ directory in your home directory and keeping all
 your projects there.
 
-Open a terminal and enter the following commands to make a \_cairo_projects\_ directory.
+Open a terminal and enter the following commands to make a _cairo_projects_ directory.
 
 For Linux, macOS, and PowerShell on Windows, enter this:
 
@@ -42,13 +42,13 @@ For Windows CMD, enter this:
 
 Let’s create a new project using Scarb.
 
-Navigate to your \_cairo_projects\_ directory (or wherever you decided to store your code). Then run the following:
+Navigate to your _cairo_projects_ directory (or wherever you decided to store your code). Then run the following:
 
 ```bash
 scarb new hello_world
 ```
 
-It creates a new directory and project called _hello_world_. We’ve named our project \_hello_world\_, and Scarb creates its files in a directory of the same name.
+It creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
 
 Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated two files and one directory for us: a _Scarb.toml_ file and a _src_ directory with a _lib.cairo_ file inside.
 
@@ -91,7 +91,7 @@ The other file created by Scarb is _src/lib.cairo_, let's delete all the content
 mod hello_world;
 ```
 
-Then create a new file called \_src/hello_world.cairo\_ and put the following code in it:
+Then create a new file called _src/hello_world.cairo_ and put the following code in it:
 
 <span class="filename">Filename: src/hello_world.cairo</span>
 
@@ -101,7 +101,7 @@ fn main() {
 }
 ```
 
-We have just created a file called _lib.cairo_, which contains a module declaration referencing another module named \_hello_world\_, as well as the file _hello_world.cairo_, containing the implementation details of the \_hello_world\_ module.
+We have just created a file called _lib.cairo_, which contains a module declaration referencing another module named _hello_world_, as well as the file _hello_world.cairo_, containing the implementation details of the _hello_world_ module.
 
 Scarb requires your source files to be located within the _src_ directory.
 
@@ -121,7 +121,7 @@ If you started a project that doesn’t use Scarb, you can convert it to a proje
 
 ### Building a Scarb Project
 
-From your \_hello_world\_ directory, build your project by entering the following command:
+From your _hello_world_ directory, build your project by entering the following command:
 
 ```bash
 $ scarb build
