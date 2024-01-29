@@ -2,7 +2,7 @@
 
 fn main() {
     let mut x: u64 = 2;
-    println!("x = {}", x);
-    x = 100_felt252;
-    println!("x = {}", x);
+    println!("The value of x is: {}", x);
+    x = 'a short string';
+    println!("The value of x is: {}", x);
 }

@@ -7,8 +7,8 @@ However, the language abstracts this model and gives you the option to make your
 variables mutable. Let’s explore how and why Cairo enforces immutability, and how
 you can make your variables mutable.
 
-When a variable is immutable, once a variable is bound to a value, you can’t change
-that variable. To illustrate this, generate a new project called _variables_ in
+When a variable is immutable, once a value is bound to a name, you can’t change
+that value. To illustrate this, generate a new project called _variables_ in
 your _cairo_projects_ directory by using `scarb new variables`.
 
 Then, in your new _variables_ directory, open _src/lib.cairo_ and replace its
@@ -21,7 +21,7 @@ code with the following code, which won’t compile just yet:
 
 ```
 
-Save and run the program using `scarb cairo-run --available-gas=200000000`. You should receive an error message
+Save and run the program using `scarb cairo-run`. You should receive an error message
 regarding an immutability error, as shown in this output:
 
 ```shell
@@ -63,8 +63,8 @@ will be changing the value associated to this variable.
 
 However, you might be wondering at this point what exactly happens when a variable
 is declared as `mut`, as we previously mentioned that Cairo's memory is immutable.
-The answer is that the _value_ is immutable, but the _variable_ isn't. What value
-the variable points to can be changed. Assigning to a mutable variable in Cairo
+The answer is that the _value_ is immutable, but the _variable_ isn't. The value
+associated to the variable can be changed. Assigning to a mutable variable in Cairo
 is essentially equivalent to redeclaring it to refer to another value in another memory cell,
 but the compiler handles that for you, and the keyword `mut` makes it explicit.
 Upon examining the low-level Cairo Assembly code, it becomes clear that
@@ -83,7 +83,7 @@ For example, let’s change _src/lib.cairo_ to the following:
 When we run the program now, we get this:
 
 ```shell
-$ scarb cairo-run --available-gas=200000000
+$ scarb cairo-run
 [DEBUG]                                (raw: 5)
 
 [DEBUG]                                (raw: 6)
@@ -120,6 +120,14 @@ Here’s an example of a constant declaration:
 ```rust, noplayground
 const ONE_HOUR_IN_SECONDS: u32 = 3600;
 ```
+
+Nonetheless, it is possible to use the `consteval_int!` macro to create a `const` variable that is the result of some computation:
+
+```rust, noplayground
+const ONE_HOUR_IN_SECONDS: u32 = consteval_int!(60 * 60);
+```
+
+We will dive into more detail about macros in the [dedicated section](./ch11-02-macros.md).
 
 Cairo's naming convention for constants is to use all uppercase with
 underscores between words.
@@ -161,7 +169,7 @@ When that scope is over, the inner shadowing ends and `x` returns to being `6`.
 When we run this program, it will output the following:
 
 ```shell
-scarb cairo-run --available-gas=200000000
+scarb cairo-run
 [DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
 
 [DEBUG]
@@ -204,7 +212,7 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 The error says we were expecting a `u64` (the original type) but we got a different type:
 
 ```shell
-$ scarb cairo-run --available-gas=200000000
+$ scarb cairo-run
 error: Unexpected argument type. Expected: "core::integer::u64", found: "core::felt252".
  --> lib.cairo:9:9
     x = 100_felt252;
