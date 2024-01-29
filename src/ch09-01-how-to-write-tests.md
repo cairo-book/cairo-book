@@ -267,7 +267,7 @@ details about these and other derivable traits.
 
 <!-- Both macros allow to use a panic error string as explained in [Chapter 10](./ch10-01-unrecoverable-errors-with-panic.md#assert-assert_eq-and-assert_ne-macros). -->
 
-### Adding Custom Failure Messages
+## Adding Custom Failure Messages
 
 You can also add a custom message to be printed with the failure message as
 optional arguments to the `assert!`, `assert_eq!`, and `assert_ne!` macros. Any
