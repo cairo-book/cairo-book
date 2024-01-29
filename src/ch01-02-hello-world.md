@@ -50,7 +50,7 @@ scarb new hello_world
 
 It creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
 
-Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated two files and one directory for us: a _Scarb.toml_ file and a src directory with a _lib.cairo_ file inside.
+Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated two files and one directory for us: a _Scarb.toml_ file and a _src_ directory with a _lib.cairo_ file inside.
 
 It has also initialized a new Git repository along with a `.gitignore` file
 
