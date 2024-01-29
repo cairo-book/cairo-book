@@ -19,11 +19,7 @@ to Cairo where your code lives, but for the exercises and projects in this book,
 we suggest making a _cairo_projects_ directory in your home directory and keeping all
 your projects there.
 
-Open a terminal and enter the following commands to make a _cairo_projects_ directory
-and a directory for the “Hello, world!” project within the _cairo_projects_ directory.
-
-> Note: From now on, for each example shown in the book, we assume that
-> you will be working from a Scarb project directory. If you are not using Scarb, and try to run the examples from a different directory, you might need to adjust the commands accordingly or create a Scarb project.
+Open a terminal and enter the following commands to make a _cairo_projects_ directory.
 
 For Linux, macOS, and PowerShell on Windows, enter this:
 
@@ -39,11 +35,14 @@ For Windows CMD, enter this:
 > cd /d "%USERPROFILE%\cairo_projects"
 ```
 
+> Note: From now on, for each example shown in the book, we assume that
+> you will be working from a Scarb project directory. If you are not using Scarb, and try to run the examples from a different directory, you might need to adjust the commands accordingly or create a Scarb project.
+
 ### Creating a Project with Scarb
 
 Let’s create a new project using Scarb.
 
-Navigate to your projects directory (or wherever you decided to store your code). Then run the following:
+Navigate to your _cairo_projects_ directory (or wherever you decided to store your code). Then run the following:
 
 ```bash
 scarb new hello_world
@@ -55,10 +54,10 @@ Go into the `hello_world` directory with the command `cd hello_world`. You’ll 
 
 It has also initialized a new Git repository along with a `.gitignore` file
 
-> Note: Git is a common version control system. You can stop using version control system by using the `--vcs` flag.
+> Note: Git is a common version control system. You can stop using version control system by using the `--no-vcs` flag.
 > Run `scarb new -help` to see the available options.
 
-Open _Scarb.toml_ in your text editor of choice. It should look similar to the code in Listing 1-2.
+Open `Scarb.toml` in your text editor of choice. It should look similar to the code in Listing 1-2.
 
 <span class="filename">Filename: Scarb.toml</span>
 
@@ -66,7 +65,7 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 [package]
 name = "hello_world"
 version = "0.1.0"
-edition = "2023_10"
+edition = "2023_11"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
@@ -80,7 +79,7 @@ This file is in the [TOML](https://toml.io/) (Tom’s Obvious, Minimal Language)
 
 The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other sections.
 
-The next three lines set the configuration information Scarb needs to compile your program: the name and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix E](./appendix-05-common-types-and-traits-and-cairo-prelude.md)
+The next three lines set the configuration information Scarb needs to compile your program: the name of the package and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix E](./appendix-05-common-types-and-traits-and-cairo-prelude.md)
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
@@ -104,12 +103,21 @@ fn main() {
 
 We have just created a file called `lib.cairo`, which contains a module declaration referencing another module named `hello_world`, as well as the file `hello_world.cairo`, containing the implementation details of the `hello_world` module.
 
-Scarb requires your source files to be located within the `src` directory.
+Scarb requires your source files to be located within the src directory.
 
 The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
 Scarb ensures a designated location for all project components, maintaining a structured organization.
 
-If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate `Scarb.toml` file.
+If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate _Scarb.toml_ file.
+
+```txt
+├── Scarb.toml
+├── src
+│   ├── lib.cairo
+│   └── hello_world.cairo
+```
+
+<span class="caption"> A sample Scarb project structure</span>
 
 ### Building a Scarb Project
 
@@ -123,7 +131,7 @@ $ scarb build
 
 This command creates a `sierra` file in `target/dev`, let's ignore the `sierra` file for now.
 
-If you have installed Cairo correctly, you should be able to run and see the following output:
+If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb cairo-run` command and see the following output:
 
 ```shell
 $ scarb cairo-run --available-gas=200000000
@@ -188,39 +196,15 @@ end with a semicolon.
 
 [devtools]: appendix-04-useful-development-tools.md
 
-### Running tests
-
-To run all the tests associated with a particular package, you can use the `scarb test` command.
-It is not a test runner by itself, but rather delegates work to a testing solution of choice. Scarb comes with preinstalled `scarb cairo-test` extension, which bundles Cairo's native test runner. It is the default test runner used by scarb test.
-To use third-party test runners, please refer to [Scarb's documentation](https://docs.swmansion.com/scarb/docs/extensions/testing.html#using-third-party-test-runners).
-
-Test functions are marked with the `#[test]` attributes, and running `scarb test` will run all test functions in your codebase under the `src/` directory.
-
-```txt
-├── Scarb.toml
-├── src
-│   ├── lib.cairo
-│   └── file.cairo
-```
-
-<span class="caption"> A sample Scarb project structure</span>
+# Summary
 
 Let’s recap what we’ve learned so far about Scarb:
 
+- We can install one or multiple Scarb verions, either the latest stable or a specific one, using asdf.
 - We can create a project using `scarb new`.
 - We can build a project using `scarb build` to generate the compiled Sierra code.
-- We can define custom scripts in `Scarb.toml` and call them with the `scarb run` command.
-- We can run tests using the `scarb test` command.
+- We can execute a Cairo program using the `scarb cairo-run` command.
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
-# Summary
-
-You’re already off to a great start on your Cairo journey! In this chapter, you’ve learned how to:
-
-- Install the latest stable version of Cairo
-- Write and run a “Hello, Scarb!” program using `scarb` directly
-- Create and run a new project using the conventions of Scarb
-- Execute tests using the `scarb test` command
-
-This is a great time to build a more substantial program to get used to reading and writing Cairo code.
+You’re already off to a great start on your Cairo journey! This is a great time to build a more substantial program to get used to reading and writing Cairo code.
