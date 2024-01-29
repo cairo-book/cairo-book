@@ -8,11 +8,21 @@ These traits listed here are the only ones defined by the core library that can 
 
 The list of derivable traits provided in this appendix does not encompass all possibilities: external libraries can implement `derive` for their own traits, expanding the list of traits compatible with `derive`.
 
+## Debug for Programmer Output
+
+The `Debug` trait enables debug formatting in format strings, which you indicate by adding `:?` within `{}` placeholders.
+
+The `Debug` trait allows you to print instances of a type for debugging purposes, so you and other programmers using your type can inspect an instance at a particular point in a program’s execution.
+
+The `Debug` trait is required, for example, in use of the `assert_eq!` macro. This macro prints the values of instances given as arguments if the equality assertion fails so programmers can see why the two instances weren’t equal.
+
 ## PartialEq for equality comparison
 
 The `PartialEq` trait allows for comparison between instances of a type for equality, thereby enabling the == and != operators.
 
 When `PartialEq` is derived on structs, two instances are equal only if all fields are equal, and the instances are not equal if any fields are not equal. When derived on enums, each variant is equal to itself and not equal to the other variants.
+
+The `PartialEq` trait is required, for example, with the use of the `assert_eq!` macro, which needs to be able to compare two instances of a type for equality.
 
 Example:
 
