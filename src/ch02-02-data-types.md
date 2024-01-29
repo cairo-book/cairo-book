@@ -22,7 +22,7 @@ these from other programming languages. Let’s jump into how they work in Cairo
 #### Felt Type
 
 In Cairo, if you don't specify the type of a variable or argument, its type defaults to a field element, represented by the keyword `felt252`. In the context of Cairo, when we say “a field element” we mean an integer in the range `0 <= x < P`,
-where `P` is a very large prime number currently equal to `P = 2^{251} + 17 * 2^{192}+1`. When adding, subtracting, or multiplying, if the result falls outside the specified range of the prime number, an overflow occurs, and an appropriate multiple of P is added or subtracted to bring the result back within the range (i.e., the result is computed modulo P).
+where `P` is a very large prime number currently equal to `P = 2^{251} + 17 * 2^{192}+1`. When adding, subtracting, or multiplying, if the result falls outside the specified range of the prime number, an overflow (or underflow) occurs, and an appropriate multiple of P is added or subtracted to bring the result back within the range (i.e., the result is computed modulo P).
 
 The most important difference between integers and field elements is division: Division of field elements (and therefore division in Cairo) is unlike regular CPUs division, where
 integer division `x / y` is defined as `[x/y]` where the integer part of the quotient is returned (so you get `7 / 3 = 2`) and it may or may not satisfy the equation `(x / y) * y == x`,
@@ -35,8 +35,8 @@ But when y does not divide x, you may get a surprising result: For example, sinc
 #### Integer Types
 
 The felt252 type is a fundamental type that serves as the basis for creating all types in the core library.
-However, it is highly recommended for programmers to use the integer types instead of the `felt252` type whenever possible, as the `integer` types come with added security features that provide extra protection against potential vulnerabilities in the code, such as overflow checks. By using these integer types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
-An _integer_ is a number without a fractional component. This type declaration indicates the number of bits the programmer can use to store the integer.
+However, it is highly recommended for programmers to use the integer types instead of the `felt252` type whenever possible, as the `integer` types come with added security features that provide extra protection against potential vulnerabilities in the code, such as overflow and underflow checks. By using these integer types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
+An `integer` is a number without a fractional component. This type declaration indicates the number of bits the programmer can use to store the integer.
 Table 3-1 shows
 the built-in integer types in Cairo. We can use any of these variants to declare
 the type of an integer value.
@@ -60,11 +60,15 @@ As variables are unsigned, they can't contain a negative number. This code will 
 {{#include ../listings/ch02-common-programming-concepts/no_listing_07_integer_types/src/lib.cairo}}
 ```
 
-All integer types previously mentioned fit into a `felt252`, except for `u256` which needs 4 more bits to be stored. Under the hood, `u256` is basically a struct with 2 fields: `u256 {low: u128, high: u128}`
+All integer types previously mentioned fit into a `felt252`, except for `u256` which needs 4 more bits to be stored. Under the hood, `u256` is basically a struct with 2 fields: `u256 {low: u128, high: u128}`.
+
+Cairo also provides support for signed integers, starting with the prefix `i`. These integers can represent both positive and negative values, with sizes ranging from `i8` to `i128`.
+Each signed variant can store numbers from `-(2^(n - 1))` to `2^(n - 1) - 1` inclusive, where `n` is the number of bits that variant uses. So an i8 can store numbers from `-(2^7)` to `2^7 - 1`, which equals `-128` to `127`.
 
 You can write integer literals in any of the forms shown in Table 3-2. Note
 that number literals that can be multiple numeric types allow a type suffix,
 such as `57_u8`, to designate the type.
+It is also possible to use a visual separator `_` for integer literals, in order to improve code readability.
 
 <span class="caption">Table 3-2: Integer Literals in Cairo</span>
 
@@ -97,12 +101,14 @@ to a single value, which is then bound to a variable.
 #### The Boolean Type
 
 As in most other programming languages, a Boolean type in Cairo has two possible
-values: `true` and `false`. Booleans are one felt252 in size. The Boolean type in
+values: `true` and `false`. Booleans are one `felt252` in size. The Boolean type in
 Cairo is specified using `bool`. For example:
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_09_boolean_type/src/lib.cairo}}
 ```
+
+When declaring a `bool` variable, it is mandatory to use either `true` or `false` literals as value. Hence, it is not allowed to use integer literals (i.e. `0` instead of false) for `bool` declarations. 
 
 The main way to use Boolean values is through conditionals, such as an `if`
 expression. We’ll cover how `if` expressions work in Cairo in the [“Control
@@ -131,7 +137,17 @@ To perform the conversion, call `var.into()` or `var.try_into()` on the source v
 {{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_casting/src/lib.cairo}}
 ```
 
-### The Tuple Type
+### Compound Types
+
+#### The Array Type
+
+An array is a collection of elements of the same type. We'll cover this type in more detail in the [Chapter Arrays](./ch03-01-arrays.md).
+
+#### The Dictionary Type
+
+A dictionary is a collection of key-value pairs. We'll delve deeper into this type in the [Chapter Dictionaries](./ch03-02-dictionaries.md).
+
+#### The Tuple Type
 
 A _tuple_ is a general way of grouping together a number of values with a
 variety of types into one compound type. Tuples have a fixed length: once
@@ -160,7 +176,7 @@ variables, `x`, `y`, and `z`. This is called _destructuring_ because it breaks
 the single tuple into three parts. Finally, the program prints `y is six` as the value of
 `y` is `6`.
 
-We can also declare the tuple with value and types at the same time.
+We can also declare the tuple with value and types, and destructure it at the same time.
 For example:
 
 ```rust
