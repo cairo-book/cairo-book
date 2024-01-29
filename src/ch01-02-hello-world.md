@@ -101,7 +101,7 @@ fn main() {
 }
 ```
 
-We have just created a file called _lib.cairo_, which contains a module declaration referencing another module named _hello_world_, as well as the file _hello_world.cairo_, containing the implementation details of the _hello_world_ module.
+We have just created a file called _lib.cairo_, which contains a module declaration referencing another module named `hello_world`, as well as the file _hello_world.cairo_, containing the implementation details of the `hello_world` module.
 
 Scarb requires your source files to be located within the _src_ directory.
 
