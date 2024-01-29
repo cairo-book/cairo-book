@@ -3,7 +3,7 @@
 ## What is Cairo?
 
 Cairo is a programming language designed for a virtual CPU of the same name. The unique aspect of this processor is that it was not created for the physical constraints of our world but for cryptographic ones, making it capable of efficiently proving the execution of any program running on it. This means that you can perform time consuming operations on a machine you don't trust, and check the result very quickly on a cheaper machine.
-While Cairo 0 used to be directly compiled to CASM, the Cairo CPU assembly, Cairo 1 is a higher-level language. It first compiles to Sierra, an intermediate representation of Cairo which will compile later down to a safe subset of CASM. The point of Sierra is to ensure your CASM will always be provable, even when the computation fails.
+While Cairo 0 used to be directly compiled to CASM, the Cairo CPU assembly, Cairo 1 is a higher level language. It first compiles to Sierra, an intermediate representation of Cairo which will compile later down to a safe subset of CASM. The point of Sierra is to ensure your CASM will always be provable, even when the computation fails.
 
 ## What can you do with it?
 
