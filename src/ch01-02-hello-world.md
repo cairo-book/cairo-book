@@ -16,10 +16,10 @@ prints the text `Hello, world!` to the screen, so we’ll do the same here!
 
 You’ll start by making a directory to store your Cairo code. It doesn’t matter
 to Cairo where your code lives, but for the exercises and projects in this book,
-we suggest making a _cairo_projects_ directory in your home directory and keeping all
+we suggest making a \_cairo_projects\_ directory in your home directory and keeping all
 your projects there.
 
-Open a terminal and enter the following commands to make a _cairo_projects_ directory.
+Open a terminal and enter the following commands to make a \_cairo_projects\_ directory.
 
 For Linux, macOS, and PowerShell on Windows, enter this:
 
@@ -42,13 +42,13 @@ For Windows CMD, enter this:
 
 Let’s create a new project using Scarb.
 
-Navigate to your _cairo_projects_ directory (or wherever you decided to store your code). Then run the following:
+Navigate to your \_cairo_projects\_ directory (or wherever you decided to store your code). Then run the following:
 
 ```bash
 scarb new hello_world
 ```
 
-It creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
+It creates a new directory and project called _hello_world_. We’ve named our project \_hellow_world\_, and Scarb creates its files in a directory of the same name.
 
 Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated two files and one directory for us: a _Scarb.toml_ file and a _src_ directory with a _lib.cairo_ file inside.
 
