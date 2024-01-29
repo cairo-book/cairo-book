@@ -9,7 +9,7 @@ you can make your variables mutable.
 
 When a variable is immutable, once a value is bound to a name, you can’t change
 that value. To illustrate this, generate a new project called _variables_ in
-your _cairo_projects_ directory by using `scarb new variables`.
+your \_cairo_projects_\ directory by using `scarb new variables`.
 
 Then, in your new _variables_ directory, open _src/lib.cairo_ and replace its
 code with the following code, which won’t compile just yet:
