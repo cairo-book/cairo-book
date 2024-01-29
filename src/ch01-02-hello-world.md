@@ -200,7 +200,7 @@ end with a semicolon.
 
 Let’s recap what we’ve learned so far about Scarb:
 
-- We can install one or multiple Scarb verions, either the latest stable or a specific one, using asdf.
+- We can install one or multiple Scarb versions, either the latest stable or a specific one, using asdf.
 - We can create a project using `scarb new`.
 - We can build a project using `scarb build` to generate the compiled Sierra code.
 - We can execute a Cairo program using the `scarb cairo-run` command.
