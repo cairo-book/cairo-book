@@ -48,7 +48,7 @@ Navigate to your \_cairo_projects\_ directory (or wherever you decided to store 
 scarb new hello_world
 ```
 
-It creates a new directory and project called _hello_world_. We’ve named our project \_hellow_world\_, and Scarb creates its files in a directory of the same name.
+It creates a new directory and project called _hello_world_. We’ve named our project \_hello_world\_, and Scarb creates its files in a directory of the same name.
 
 Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated two files and one directory for us: a _Scarb.toml_ file and a _src_ directory with a _lib.cairo_ file inside.
 
