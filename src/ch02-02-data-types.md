@@ -65,6 +65,7 @@ All integer types previously mentioned fit into a `felt252`, except for `u256` w
 You can write integer literals in any of the forms shown in Table 3-2. Note
 that number literals that can be multiple numeric types allow a type suffix,
 such as `57_u8`, to designate the type.
+It is also possible to use a visual separator `_` for number literals, in order to improve code readability.
 
 <span class="caption">Table 3-2: Integer Literals in Cairo</span>
 
