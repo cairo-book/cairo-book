@@ -103,7 +103,7 @@ fn main() {
 
 We have just created a file called `lib.cairo`, which contains a module declaration referencing another module named `hello_world`, as well as the file `hello_world.cairo`, containing the implementation details of the `hello_world` module.
 
-Scarb requires your source files to be located within the src directory.
+Scarb requires your source files to be located within the _src_ directory.
 
 The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
 Scarb ensures a designated location for all project components, maintaining a structured organization.
