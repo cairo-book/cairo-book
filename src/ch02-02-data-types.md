@@ -68,7 +68,7 @@ Each signed variant can store numbers from `-(2^(n - 1))` to `2^(n - 1) - 1` inc
 You can write integer literals in any of the forms shown in Table 3-2. Note
 that number literals that can be multiple numeric types allow a type suffix,
 such as `57_u8`, to designate the type.
-It is also possible to use a visual separator `_` for integer literals, in order to improve code readability.
+It is also possible to use a visual separator `_` for number literals, in order to improve code readability.
 
 <span class="caption">Table 3-2: Integer Literals in Cairo</span>
 

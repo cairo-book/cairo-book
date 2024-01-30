@@ -20,21 +20,35 @@ Scarb requires a Git executable to be available in the `PATH` environment variab
 
 To install Scarb, please refer to the [installation instructions](https://docs.swmansion.com/scarb/download). We strongly recommend that you install
 Scarb [via asdf](https://docs.swmansion.com/scarb/download.html#install-via-asdf), a CLI tool that can manage multiple language runtime versions on a per-project basis.
-This will ensure that the version of Scarb you use to work on a project always matches the one defined in the project settings, avoiding problems lead to version mismatch.
+This will ensure that the version of Scarb you use to work on a project always matches the one defined in the project settings, avoiding problems related to version mismatches.
+
+Please refer to the [asdf documentation](https://asdf-vm.com/guide/getting-started.html) to install all prerequisites.
+
+Once you have asdf installed locally, you can download Scarb plugin with the following command:
+```bash
+asdf plugin add scarb
+```
+This will allow you to download specific versions:
+```bash
+asdf install scarb 2.5.0
+```
+and set a global version: 
+```bash
+asdf global scarb 2.5.0
+```
+
 Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This will install the latest stable release of Scarb.
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
 ```
 
-- Verify installation by running the following command in new terminal session, it should print both Scarb and Cairo language versions, e.g:
-
-<!-- TODO UPDATE VERSION -->
+- In both cases, you can verify installation by running the following command in a new terminal session, it should print both Scarb and Cairo language versions, e.g:
 
 ```bash
 $ scarb --version
-scarb 2.4.0 (cba988e68 2023-12-06)
-cairo: 2.4.0 (https://crates.io/crates/cairo-lang-compiler/2.4.0)
+scarb 2.5.0 (c531a6e50 2024-01-22)
+cairo: 2.5.0 (https://crates.io/crates/cairo-lang-compiler/2.5.0)
 sierra: 1.4.0
 ```
 
