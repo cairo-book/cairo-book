@@ -11,14 +11,15 @@ trait GuessTrait {
 impl GuessImpl of GuessTrait {
     fn new(value: u64) -> Guess {
         if value < 1 {
-            panic!("Guess must be >= 1");
-        } else if value > 100 {
             panic!("Guess must be <= 100");
+        } else if value > 100 {
+            panic!("Guess must be >= 1");
         }
 
         Guess { value, }
     }
 }
+// ANCHOR_END:here
 
 #[cfg(test)]
 mod tests {
@@ -31,6 +32,5 @@ mod tests {
         GuessTrait::new(200);
     }
 }
-// ANCHOR_END:here
 
 
