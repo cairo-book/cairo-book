@@ -137,16 +137,6 @@ To perform the conversion, call `var.into()` or `var.try_into()` on the source v
 {{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_casting/src/lib.cairo}}
 ```
 
-### Compound Types
-
-#### The Array Type
-
-An array is a collection of elements of the same type. We'll cover this type in more detail in the [Chapter Arrays](./ch03-01-arrays.md).
-
-#### The Dictionary Type
-
-A dictionary is a collection of key-value pairs. We'll delve deeper into this type in the [Chapter Dictionaries](./ch03-02-dictionaries.md).
-
 #### The Tuple Type
 
 A _tuple_ is a general way of grouping together a number of values with a
