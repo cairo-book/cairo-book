@@ -21,15 +21,15 @@ these from other programming languages. Let’s jump into how they work in Cairo
 
 #### Felt Type
 
-In Cairo, if you don't specify the type of a variable or argument, its type defaults to a field element, represented by the keyword `felt252`. In the context of Cairo, when we say “a field element” we mean an integer in the range `0 <= x < P`,
-where `P` is a very large prime number currently equal to \\(P = {2^251} + 17 * {2^192}+1\\). When adding, subtracting, or multiplying, if the result falls outside the specified range of the prime number, an overflow (or underflow) occurs, and an appropriate multiple of P is added or subtracted to bring the result back within the range (i.e., the result is computed modulo P).
+In Cairo, if you don't specify the type of a variable or argument, its type defaults to a field element, represented by the keyword `felt252`. In the context of Cairo, when we say “a field element” we mean an integer in the range \\(0 \leq x < P\\),
+where `P` is a very large prime number currently equal to \\(P = {2^{251}} + 17 * {2^{192}}+1\\). When adding, subtracting, or multiplying, if the result falls outside the specified range of the prime number, an overflow (or underflow) occurs, and an appropriate multiple of P is added or subtracted to bring the result back within the range (i.e., the result is computed modulo P).
 
 The most important difference between integers and field elements is division: Division of field elements (and therefore division in Cairo) is unlike regular CPUs division, where
 integer division \\( \frac{x}{y} \\) is defined as `[x/y]` where the integer part of the quotient is returned (so you get \\( \frac{7}{3} = 2 \\)) and it may or may not satisfy the equation \\( \frac{x}{y} * y == x \\),
 depending on the divisibility of `x` by `y`.
 
 In Cairo, the result of \\( \frac{x}{y} \\) is defined to always satisfy the equation \\( \frac{x}{y} * y == x \\). If y divides x as integers, you will get the expected result in Cairo (for example \\( \frac{x}{y} \\) will indeed result in `3`).
-But when y does not divide x, you may get a surprising result: For example, since \\( 2 * \frac{P + 1}{2} = P+1 ≡ 1 mod[P] \\), the value of \\( \frac{1}{2} \\) in Cairo is \\( \frac{P + 1}{2} \\) (and not 0 or 0.5), as it satisfies the above equation.
+But when y does not divide x, you may get a surprising result: for example, since \\( 2 * \frac{P + 1}{2} = P+1 ≡ 1 mod[P] \\), the value of \\( \frac{1}{2} \\) in Cairo is \\( \frac{P + 1}{2} \\) (and not 0 or 0.5), as it satisfies the above equation.
 
 #### Integer Types
 
@@ -62,7 +62,7 @@ As variables are unsigned, they can't contain a negative number. This code will 
 All integer types previously mentioned fit into a `felt252`, except for `u256` which needs 4 more bits to be stored. Under the hood, `u256` is basically a struct with 2 fields: `u256 {low: u128, high: u128}`.
 
 Cairo also provides support for signed integers, starting with the prefix `i`. These integers can represent both positive and negative values, with sizes ranging from `i8` to `i128`.
-Each signed variant can store numbers from \\( -({2^(n - 1)}) \\) to \\( {2^(n - 1)} - 1 \\) inclusive, where `n` is the number of bits that variant uses. So an i8 can store numbers from \\( -({2^7}) \\) to \\( {2^7} - 1 \\), which equals `-128` to `127`.
+Each signed variant can store numbers from \\( -({2^{n - 1}}) \\) to \\( {2^{n - 1}} - 1 \\) inclusive, where `n` is the number of bits that variant uses. So an i8 can store numbers from \\( -({2^7}) \\) to \\( {2^7} - 1 \\), which equals `-128` to `127`.
 
 You can write integer literals in any of the forms shown in Table 3-2. Note
 that number literals that can be multiple numeric types allow a type suffix,
