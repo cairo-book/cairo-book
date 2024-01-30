@@ -176,9 +176,7 @@ expression that evaluates to the value `11`. Expressions can be part of
 statements: in Listing 2-1, the `6` in the statement `let y = 6;` is an
 expression that evaluates to the value `6`.
 
-Calling a function is an expression. Indeed, it can either return:
-- one or multiple values if the function does return values
-- a variable of unit type with `()` value if the function doesn't produce any output
+Calling a function is an expression since it always evaluates to a value: the function's explicit return value, if specified, or the 'unit' type `()` otherwise.
 
 A new scope block created with curly brackets is an expression, for example:
 
