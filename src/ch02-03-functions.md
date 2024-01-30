@@ -221,7 +221,7 @@ running this code; the output should look like this:
 
 ```shell
 $ scarb cairo-run
-The value of x is
+The value of x is: 5
 Run completed successfully, returning []
 ```
 
