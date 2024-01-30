@@ -137,7 +137,7 @@ To perform the conversion, call `var.into()` or `var.try_into()` on the source v
 {{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_casting/src/lib.cairo}}
 ```
 
-#### The Tuple Type
+### The Tuple Type
 
 A _tuple_ is a general way of grouping together a number of values with a
 variety of types into one compound type. Tuples have a fixed length: once
