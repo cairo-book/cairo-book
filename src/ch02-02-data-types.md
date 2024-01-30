@@ -28,7 +28,7 @@ The most important difference between integers and field elements is division: D
 integer division \\( \frac{x}{y} \\) is defined as `[x/y]` where the integer part of the quotient is returned (so you get \\( \frac{7}{3} = 2 \\)) and it may or may not satisfy the equation \\( \frac{x}{y} * y == x \\),
 depending on the divisibility of `x` by `y`.
 
-In Cairo, the result of \\( \frac{x}{y} \\) is defined to always satisfy the equation \\( \frac{x}{y} * y == x \\). If y divides x as integers, you will get the expected result in Cairo (for example \\( \frac{x}{y} \\) will indeed result in `3`).
+In Cairo, the result of \\( \frac{x}{y} \\) is defined to always satisfy the equation \\( \frac{x}{y} * y == x \\). If y divides x as integers, you will get the expected result in Cairo (for example \\( \frac{6}{2} \\) will indeed result in `3`).
 But when y does not divide x, you may get a surprising result: for example, since \\( 2 * \frac{P + 1}{2} = P+1 ≡ 1 mod[P] \\), the value of \\( \frac{1}{2} \\) in Cairo is \\( \frac{P + 1}{2} \\) (and not 0 or 0.5), as it satisfies the above equation.
 
 #### Integer Types
