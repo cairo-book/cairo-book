@@ -111,9 +111,8 @@ right now. Just know that you must always annotate the type.
 Constants can only be declared in the global scope, which makes
 them useful for values that many parts of code need to know about.
 
-The last difference is that constants may be set only to a constant expression,
-not the result of a value that could only be computed at runtime. Only literal constants
-are currently supported.
+The last difference is that constants may natively be set only to a constant expression,
+not the result of a value that could only be computed at runtime.
 
 Here’s an example of a constant declaration:
 

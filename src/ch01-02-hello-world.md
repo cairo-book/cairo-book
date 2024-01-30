@@ -108,7 +108,7 @@ Scarb requires your source files to be located within the _src_ directory.
 The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
 Scarb ensures a designated location for all project components, maintaining a structured organization.
 
-If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate _Scarb.toml_ file. You can also use `scarb init` command to generate the _src_ folder and the _Scarb.toml_ it contains.
+If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the _src_ directory and create an appropriate _Scarb.toml_ file. You can also use `scarb init` command to generate the _src_ folder and the _Scarb.toml_ it contains.
 
 ```txt
 ├── Scarb.toml
@@ -136,7 +136,7 @@ If you have installed Cairo correctly, you should be able to run the `main` func
 ```shell
 $ scarb cairo-run
 running hello_world ...
-[DEBUG] Hello, World!                   (raw: 0x48656c6c6f2c20776f726c6421
+[DEBUG] Hello, World!                   (raw: 0x48656c6c6f2c20776f726c6421)
 
 Run completed successfully, returning []
 ```
