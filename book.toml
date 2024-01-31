@@ -24,3 +24,4 @@ edit-url-template = "https://github.com/cairo-book/cairo-book.github.io/edit/mai
 playground.runnable = true
 google-analytics = "G-0ZJLBV4KE2"
 additional-css = ["theme/css/last-changed.css"]
+mathjax-support = true

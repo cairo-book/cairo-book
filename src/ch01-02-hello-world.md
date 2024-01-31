@@ -108,7 +108,7 @@ Scarb requires your source files to be located within the _src_ directory.
 The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
 Scarb ensures a designated location for all project components, maintaining a structured organization.
 
-If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the src directory and create an appropriate _Scarb.toml_ file. You can also use `scarb init` command to generate the _src_ folder and the _Scarb.toml_ it contains.
+If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the _src_ directory and create an appropriate _Scarb.toml_ file. You can also use `scarb init` command to generate the _src_ folder and the _Scarb.toml_ it contains.
 
 ```txt
 ├── Scarb.toml
