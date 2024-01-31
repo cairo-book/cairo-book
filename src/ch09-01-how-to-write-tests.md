@@ -171,6 +171,137 @@ Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false`: `8` is not less than `5`.
 
+## Testing Equality with the `assert_eq!` and `assert_ne!` Macros
+
+A common way to verify functionality is to test for equality between the result
+of the code under test and the value you expect the code to return. You could
+do this using the `assert!` macro and passing it an expression using the `==`
+operator. However, this is such a common test that the standard library
+provides a pair of macros—`assert_eq!` and `assert_ne!`—to perform this test
+more conveniently. These macros compare two arguments for equality or
+inequality, respectively. They’ll also print the two values if the assertion
+fails, which makes it easier to see _why_ the test failed; conversely, the
+`assert!` macro only indicates that it got a `false` value for the `==`
+expression, without printing the values that led to the `false` value.
+
+In Listing 9-7, we write a function named `add_two` that adds `2` to its
+parameter, then we test this function using the `assert_eq!` macro.
+
+<span class="filename">Filename: src/lib.cairo</span>
+
+```rust
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_10_assert_eq/src/add_two.cairo}}
+```
+
+<span class="caption">Listing 9-7: Testing the function `add_two` using the
+`assert_eq!` macro</span>
+
+Let’s check that it passes!
+
+```console
+$ scarb cairo-test
+running 1 tests
+test tests::it_adds_two ... ok (gas usage est.: 307660)
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
+```
+
+We pass `4` as the argument to `assert_eq!`, which is equal to the result of
+calling `add_two(2)`. The line for this test is `test tests::it_adds_two ...
+ok`, and the `ok` text indicates that our test passed!
+
+Let’s introduce a bug into our code to see what `assert_eq!` looks like when it
+fails. Change the implementation of the `add_two` function to instead add `3`:
+
+```rust
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_10_assert_eq/src/wrong_add_two.cairo}}
+```
+
+Run the tests again:
+
+```console
+$ scarb cairo-test
+running 1 tests
+test tests::it_adds_two ... fail (gas usage est.: 359600)
+failures:
+   tests::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed.
+4: 4
+add_two(2): 5".
+
+Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
+```
+
+Our test caught the bug! The `it_adds_two` test failed with the following message: `` Panicked with "assertion `4 == add_two(2)` failed ``.
+It tells use that the assertion that fails was `` "assertion `left == right` failed`` and the `left`
+and `right` value are printed on the next lines as `left: left_value` and `right: right_value`.
+This helps us start debugging: the `left` argument was `4` but the `right` argument, where we had
+`add_two(2)`, was `5`. You can imagine that this would be especially helpful
+when we have a lot of tests going on.
+
+Note that in some languages and test frameworks, the parameters to equality
+assertion functions are called `expected` and `actual`, and the order in which
+we specify the arguments matters. However, in Cairo, they’re called `left` and
+`right`, and the order in which we specify the value we expect and the value
+the code produces doesn’t matter. We could write the assertion in this test as
+`assert_eq!(add_two(2), 4)`, which would result in the same failure message
+that displays `` assertion failed: `(left == right)` ``.
+
+The `assert_ne!` macro will pass if the two values we give it are not equal and
+fail if they’re equal. This macro is most useful for cases when we’re not sure
+what a value _will_ be, but we know what the value definitely _shouldn’t_ be.
+For example, if we’re testing a function that is guaranteed to change its input
+in some way, but the way in which the input is changed depends on the day of
+the week that we run our tests, the best thing to assert might be that the
+output of the function is not equal to the input.
+
+Under the surface, the `assert_eq!` and `assert_ne!` macros use the operators
+`==` and `!=`, respectively. When the assertions fail, these macros print their
+arguments using debug formatting, which means the values being compared must
+implement the `PartialEq` and `Debug` traits. All primitive types and most of
+the core library types implement these traits. For structs and enums that
+you define yourself, you’ll need to implement `PartialEq` to assert equality of
+those types. You’ll also need to implement `Debug` to print the values when the
+assertion fails. Because both traits are derivable traits this is usually as straightforward as adding the
+`#[derive(Drop, Debug, PartialEq)]` annotation to your struct or enum definition. See
+Appendix C, [“Derivable Traits”](./appendix-03-derivable-traits.md), for more
+details about these and other derivable traits.
+
+<!-- Both macros allow to use a panic error string as explained in [Chapter 10](./ch10-01-unrecoverable-errors-with-panic.md#assert-assert_eq-and-assert_ne-macros). -->
+
+## Adding Custom Failure Messages
+
+You can also add a custom message to be printed with the failure message as
+optional arguments to the `assert!`, `assert_eq!`, and `assert_ne!` macros. Any
+arguments specified after the required arguments are passed along to the
+`format!` macro (discussed in [Chapter 11 - Macros](./ch11-02-macros.md#format-macro) in the `format!` section), so you can pass a format string that contains `{}` placeholders and
+values to go in those placeholders. Custom messages are useful for documenting
+what an assertion means; when a test fails, you’ll have a better idea of what
+the problem is with the code.
+
+Let’s add a custom failure message composed of a format
+string with a placeholder filled in with the actual value we got from the
+`add_two` function:
+
+```rust
+{{#include ../listings/ch09-testing-cairo-programs/no_listing_11_custom_messages/src/add_two.cairo:here}}
+```
+
+Now when we run the test, we’ll get a more informative error message:
+
+```console
+$ scarb cairo-test
+running 1 tests
+test tests::it_adds_two ... fail (gas usage est.: 590230)
+failures:
+   tests::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed: Expected 4, got add_two(2)=5
+4: 4
+add_two(2): 5".
+
+Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
+```
+
+We can see the value we actually got in the test output, which would help us
+debug what happened instead of what we were expecting to happen.
+
 ## Checking for panics with `should_panic`
 
 In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the Guess type in Listing 9-7. Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.

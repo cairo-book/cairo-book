@@ -2,5 +2,5 @@
 version = 1
 
 [[package]]
-name = "listing_99_03_example_contract"
+name = "listing_99_03"
 version = "0.1.0"
