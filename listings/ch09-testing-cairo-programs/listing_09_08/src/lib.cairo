@@ -1,5 +1,3 @@
-use core::panic_with_felt252;
-
 #[derive(Copy, Drop)]
 struct Guess {
     value: u64,
@@ -9,16 +7,12 @@ trait GuessTrait {
     fn new(value: u64) -> Guess;
 }
 
-// ANCHOR:here
 impl GuessImpl of GuessTrait {
     fn new(value: u64) -> Guess {
-        if value < 1 {
-            panic!("Guess must be >= 1");
-        } else if value > 100 {
-            panic!("Guess must be <= 100");
+        if value < 1 || value > 100 {
+            panic!("Guess must be >= 1 and <= 100");
         }
-
-        Guess { value, }
+        Guess { value }
     }
 }
 
@@ -27,14 +21,9 @@ mod tests {
     use super::Guess;
     use super::GuessTrait;
 
-    //ANCHOR: test_panic
     #[test]
-    #[should_panic(expected: ("Guess must be <= 100",))]
+    #[should_panic]
     fn greater_than_100() {
         GuessTrait::new(200);
     }
-//ANCHOR_END: test_panic
 }
-// ANCHOR_END:here
-
-
