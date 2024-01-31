@@ -145,8 +145,11 @@ library, in the "data_structures" crate.
 
 ## Summary
 
+Well done! Now you have knowledge of arrays, dictionaries and even custom data structures. 
 While Cairo's memory model is immutable and can make it difficult to implement
 mutable data structures, we can fortunately use the `Felt252Dict<T>` type to
 simulate mutable data structures. This allows us to implement a wide range of
 data structures that are useful for many applications, effectively hiding the
 complexity of the underlying memory model.
+
+When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that doesn’t commonly exist in other programming languages: ownership.

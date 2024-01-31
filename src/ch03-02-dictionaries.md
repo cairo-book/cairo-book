@@ -266,8 +266,3 @@ Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully f
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:main}}
 ```
 
-## Summary
-
-Well done! You finished this chapter on arrays and dictionaries in Cairo. These data structures may be a bit challenging to grasp, but they are really useful.
-
-When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that _doesn’t_ commonly exist in other programming languages: ownership.
