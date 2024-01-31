@@ -30,7 +30,7 @@ integer division \\( \frac{x}{y} \\) is defined as \\( \left\lfloor \frac{x}{y} 
 depending on the divisibility of `x` by `y`.
 
 In Cairo, the result of \\( \frac{x}{y} \\) is defined to always satisfy the equation \\( \frac{x}{y} \cdot y == x \\). If y divides x as integers, you will get the expected result in Cairo (for example \\( \frac{6}{2} \\) will indeed result in `3`).
-But when y does not divide x, you may get a surprising result: for example, since \\( 2 \cdot \frac{P + 1}{2} = P + 1 ≡ 1 mod[P] \\), the value of \\( \frac{1}{2} \\) in Cairo is \\( \frac{P + 1}{2} \\) (and not 0 or 0.5), as it satisfies the above equation.
+But when y does not divide x, you may get a surprising result: for example, since \\( 2 \cdot \frac{P + 1}{2} = P + 1 \equiv 1 \mod P \\), the value of \\( \frac{1}{2} \\) in Cairo is \\( \frac{P + 1}{2} \\) (and not 0 or 0.5), as it satisfies the above equation.
 
 #### Integer Types
 
