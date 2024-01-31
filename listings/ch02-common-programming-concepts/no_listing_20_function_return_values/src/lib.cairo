@@ -4,5 +4,5 @@ fn five() -> u32 {
 
 fn main() {
     let x = five();
-    println!("x = {}", x);
+    println!("The value of x is: {}", x);
 }

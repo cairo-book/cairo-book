@@ -135,9 +135,8 @@ If you have installed Cairo correctly, you should be able to run the `main` func
 
 ```shell
 $ scarb cairo-run
-running hello_world ...
-[DEBUG] Hello, World!                   (raw: 0x48656c6c6f2c20776f726c6421
-
+Running hello_world
+Hello, World!
 Run completed successfully, returning []
 ```
 

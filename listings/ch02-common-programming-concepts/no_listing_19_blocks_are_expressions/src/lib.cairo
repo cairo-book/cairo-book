@@ -8,7 +8,7 @@ fn main() {
     };
     //ANCHOR_END: block_expr
 
-    println!("y = {}", y);
+    println!("The value of y is: {}", y);
 }
 //ANCHOR_END: all
 
