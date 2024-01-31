@@ -187,7 +187,7 @@ expression, without printing the values that led to the `false` value.
 In Listing 9-7, we write a function named `add_two` that adds `2` to its
 parameter, then we test this function using the `assert_eq!` macro.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch09-testing-cairo-programs/no_listing_10_assert_eq/src/add_two.cairo}}
@@ -230,10 +230,10 @@ add_two(2): 5".
 Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 ```
 
-Our test caught the bug! The `it_adds_two` test failed, and the message tells
-us that the assertion that fails was `` assertion failed: `(left == right)` ``
-and what the `left` and `right` values are. This message helps us start
-debugging: the `left` argument was `4` but the `right` argument, where we had
+Our test caught the bug! The `it_adds_two` test failed with the following message: `` Panicked with "assertion `4 == add_two(2)` failed ``.
+It tells use that the assertion that fails was `` "assertion `left == right` failed`` and the `left`
+and `right` value are printed on the next lines as `left: left_value` and `right: right_value`.
+This helps us start debugging: the `left` argument was `4` but the `right` argument, where we had
 `add_two(2)`, was `5`. You can imagine that this would be especially helpful
 when we have a lot of tests going on.
 

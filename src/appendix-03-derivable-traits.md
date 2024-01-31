@@ -6,8 +6,6 @@ In this appendix, we provide a comprehensive reference detailing all the traits 
 
 These traits listed here are the only ones defined by the core library that can be implemented on your types using `derive`. Other traits defined in the standard library don’t have sensible default behavior, so it’s up to you to implement them in the way that makes sense for what you’re trying to accomplish.
 
-The list of derivable traits provided in this appendix does not encompass all possibilities: external libraries can implement `derive` for their own traits, expanding the list of traits compatible with `derive`.
-
 ## Debug for Programmer Output
 
 The `Debug` trait enables debug formatting in format strings, which you indicate by adding `:?` within `{}` placeholders.
