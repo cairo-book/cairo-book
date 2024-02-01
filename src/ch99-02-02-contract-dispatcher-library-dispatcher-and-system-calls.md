@@ -70,7 +70,7 @@ Below's a sample code for calling contracts using the Library Dispatcher.
 
 <span class="caption">Listing 99-9: A sample contract using the Library Dispatcher</span>
 
-As you can see, we had to first import in our contract the `IContractBDispatcherTrait` and `IContractBLibraryDispatcher` which were generated from our interface by the compiler. Then, we can create an instance of `IContractBLibraryDispatcher` passing in the `class_hash` of the class we want to make library calls to. From there, we can call the functions defined in that class, executing its logic in the context of our contract. When we call `set_value` on ContractA, it will make a library call to the `set_value` function in ContractB, updating the value of the storage variable `value` in ContractA.
+As you can see, we had to first import in our contract the `IContractADispatcherTrait` and `IContractALibraryDispatcher` which were generated from our interface by the compiler. Then, we can create an instance of `IContractALibraryDispatcher` passing in the `class_hash` of the class we want to make library calls to. From there, we can call the functions defined in that class, executing its logic in the context of our contract. When we call `set_value` on ContractA, it will make a library call to the `set_value` function in IContractA, updating the value of the storage variable `value` in ContractA.
 
 ## Using low-level syscalls
 
