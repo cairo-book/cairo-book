@@ -5,5 +5,5 @@ fn main() {
     a.append(2);
 
     let first_value = a.pop_front().unwrap();
-    println!("first value: {}", first_value);
+    println!("The first value is {}", first_value);
 }
