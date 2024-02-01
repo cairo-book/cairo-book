@@ -36,7 +36,7 @@ To add an element to the end of an array, you can use the `append()` method:
 #### Removing Elements
 
 You can only remove elements from the front of an array by using the `pop_front()` method.
-This method returns an `Option` that needs to be unwrapped, containing the removed element, or `Option::None` if the array is empty.
+This method returns an `Option` that can be unwrapped, containing the removed element, or `Option::None` if the array is empty.
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_01_array_pop_front/src/lib.cairo}}
