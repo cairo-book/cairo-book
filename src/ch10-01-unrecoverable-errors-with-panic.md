@@ -86,6 +86,7 @@ Example:
 {{#include ../listings/ch10-error-handling/no_listing_05_panic_with/src/lib.cairo}}
 ```
 
+<!-- Moved to Chapter 9 - Testing
 ## Using assert
 
 The assert function from the Cairo core library is actually a utility function based on panics. It asserts that a boolean expression is true at runtime, and if it is not, it calls the panic function with an error value. The assert function takes two arguments: the boolean expression to verify, and the error value. The error value is specified as a felt252, so any string passed must be able to fit inside a felt252.
@@ -100,9 +101,9 @@ We are asserting in main that `my_number` is not zero to ensure that we're not p
 In this example, `my_number` is zero so the assertion will fail, and the program will panic
 with the string 'number is zero' (as a felt252) and the division will not be reached.
 
-## `assert!` and `assert_eq!` macros
+## `assert!`, `assert_eq!` and `assert_ne!` macros
 
-Similarly to `panic!` macro, `assert!` and `assert_eq!` macros both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
+Similarly to `panic!` macro, `assert!`, `assert_eq!` and `assert_ne!` macros both allow to use a panic error string longer than 31 bytes which can be formatted. It is also possible to omit the panic error.
 
 `assert!` macro checks whether a condition holds and panics otherwise: 
 
@@ -113,5 +114,7 @@ Similarly to `panic!` macro, `assert!` and `assert_eq!` macros both allow to use
 `assert_eq!` macro can only be used in tests, and the types compared need to implement `Debug`. It checks whether 2 values are equal and panics otherwise:
 
 ```rust
-{{#include ../listings/ch10-error-handling/no_listing_11_assert_eq_macro/src/lib.cairo}}
+{{#include ../listings/ch10-error-handling/no_listing_11_assert_eq_ne_macro/src/lib.cairo}}
 ```
+
+`assert_eq!` and `assert_ne!` macros are covered in more details in the [Chapter 9](./ch09-01-how-to-write-tests.md#testing-equality-with-the-assert_eq-and-assert_ne-macros) -->

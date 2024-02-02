@@ -30,7 +30,7 @@ error: Cannot assign to an immutable variable.
     x = 6;
     ^***^
 
-Error: failed to compile: src/lib.cairo
+error: could not compile `variables` due to previous error
 ```
 
 This example shows how the compiler helps you find errors in your programs.
@@ -84,10 +84,8 @@ When we run the program now, we get this:
 
 ```shell
 $ scarb cairo-run
-[DEBUG]                                (raw: 5)
-
-[DEBUG]                                (raw: 6)
-
+The value of x is: 5
+The value of x is: 6
 Run completed successfully, returning []
 ```
 
@@ -111,7 +109,7 @@ right now. Just know that you must always annotate the type.
 Constants can only be declared in the global scope, which makes
 them useful for values that many parts of code need to know about.
 
-The last difference is that constants may be set only to a constant expression,
+The last difference is that constants may natively be set only to a constant expression,
 not the result of a value that could only be computed at runtime. Only literal constants
 are currently supported.
 
@@ -170,15 +168,8 @@ When we run this program, it will output the following:
 
 ```shell
 scarb cairo-run
-[DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
-
-[DEBUG]
-                                       (raw: 12)
-
-[DEBUG] Outer scope x value is:         (raw: 7610641743409771490723378239576163509623951327599620922)
-
-[DEBUG]                                (raw: 6)
-
+Inner scope x value is: 12
+Outer scope x value is: 6
 Run completed successfully, returning []
 ```
 
@@ -213,12 +204,13 @@ The error says we were expecting a `u64` (the original type) but we got a differ
 
 ```shell
 $ scarb cairo-run
-error: Unexpected argument type. Expected: "core::integer::u64", found: "core::felt252".
- --> lib.cairo:9:9
-    x = 100_felt252;
-        ^*********^
 
-Error: failed to compile: src/lib.cairo
+error: The value does not fit within the range of type core::integer::u64.
+ --> lib.cairo:9:9
+    x = 'a short string';
+        ^**************^
+
+error: could not compile `variables` due to previous error
 ```
 
 Now that we’ve explored how variables work, let’s look at more data types they

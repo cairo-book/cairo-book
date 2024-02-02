@@ -3,5 +3,5 @@ fn main() {
 }
 
 fn another_function(x: felt252) {
-    println!("x = {}", x);
+    println!("The value of x is: {}", x);
 }

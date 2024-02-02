@@ -29,9 +29,10 @@ further. Place the `another_function` example in _src/lib.cairo_ and run it. You
 should see the following output:
 
 ```shell
-$ scarb cairo-run --available-gas=200000000
-[DEBUG] Hello, world!                (raw: 5735816763073854953388147237921)
-[DEBUG] Another function.            (raw: 22265147635379277118623944509513687592494)
+$ scarb cairo-run
+Hello, world!
+Another function.
+Run completed successfully, returning []
 ```
 
 The lines execute in the order in which they appear in the `main` function.
@@ -57,10 +58,9 @@ In this version of `another_function` we add a parameter:
 Try running this program; you should get the following output:
 
 ```shell
-$ scarb cairo-run --available-gas=200000000
-x = 5
+$ scarb cairo-run
+The value of x is: 5
 Run completed successfully, returning []
-Remaining gas: 1999829300
 ```
 
 The declaration of `another_function` has one parameter named `x`. The type of
@@ -85,13 +85,12 @@ parameters. The first parameter is named `value` and is a `u128`. The second is
 named `unit_label` and is of type `ByteArray` - Cairo's internal type to represent string literals. The function then prints text containing both the `value` and the `unit_label`.
 
 Let’s try running this code. Replace the program currently in your _functions_
-project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run --available-gas=200000000`:
+project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run`:
 
 ```shell
-$ scarb cairo-run --available-gas=200000000
+$ scarb cairo-run
 The measurement is: 5h
 Run completed successfully, returning []
-Remaining gas: 1999755400
 ```
 
 Because we called the function with `5` as the value for value and `"h"` as the value for `unit_label`, the program output contains those values.
@@ -144,7 +143,7 @@ to another variable, as the following code tries to do; you’ll get an error:
 When you run this program, the error you’ll get looks like this:
 
 ```shell
-$ scarb cairo-run --available-gas=200000000
+$ scarb cairo-run
 error: Missing token TerminalRParen.
  --> src/lib.cairo:2:14
     let x = (let y = 6);
@@ -175,9 +174,11 @@ Expressions evaluate to a value and make up most of the rest of the code that
 you’ll write in Cairo. Consider a math operation, such as `5 + 6`, which is an
 expression that evaluates to the value `11`. Expressions can be part of
 statements: in Listing 2-1, the `6` in the statement `let y = 6;` is an
-expression that evaluates to the value `6`. Calling a function is an
-expression. A new scope block created with
-curly brackets is an expression, for example:
+expression that evaluates to the value `6`.
+
+Calling a function is an expression since it always evaluates to a value: the function's explicit return value, if specified, or the 'unit' type `()` otherwise.
+
+A new scope block created with curly brackets is an expression, for example:
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:all}}
@@ -217,10 +218,9 @@ Cairo. Note that the function’s return type is specified too, as `-> u32`. Try
 running this code; the output should look like this:
 
 ```shell
-$ scarb cairo-run --available-gas=200000000
-x = 5
+$ scarb cairo-run
+The value of x is: 5
 Run completed successfully, returning []
-Remaining gas: 1999847760
 ```
 
 The `5` in `five` is the function’s return value, which is why the return type
@@ -249,8 +249,6 @@ expression to a statement, we’ll get an error:
 ```rust,does_not_compile
 {{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_invalid/src/lib.cairo}}
 ```
-
-Compiling this code produces an error, as follows:
 
 ```shell
 error: Unexpected return type. Expected: "core::integer::u32", found: "()".

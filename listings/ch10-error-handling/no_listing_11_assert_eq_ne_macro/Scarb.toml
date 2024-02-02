@@ -1,7 +1,7 @@
 [package]
-name = "no_listing_11_assert_eq_macro"
+name = "no_listing_11_assert_eq_ne_macro"
 version = "0.1.0"
-edition = "2023_10"
+edition = "2023_11"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
