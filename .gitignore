@@ -5,3 +5,5 @@ output
 # Editors tmp files.
 *~
 .idea/
+
+*Scarb.lock
