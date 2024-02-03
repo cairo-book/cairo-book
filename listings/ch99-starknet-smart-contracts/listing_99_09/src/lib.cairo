@@ -18,9 +18,9 @@ mod ContractA {
     }
 
     #[abi(embed_v0)]
-    impl ContractA of super::IContractA {
+    impl ContractA of super::IContractA<ContractState> {
         fn set_value(ref self: ContractState, value: u128) {
-            IContractBLibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }
+            IContractALibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }
                 .set_value(value)
         }
 
