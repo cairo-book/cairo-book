@@ -22,8 +22,7 @@ be in the first position.
 
 Fortunately, Cairo provides a handy built-in [dictionary
 type](./ch03-02-dictionaries.md) called `Felt252Dict<T>` that allows us to
-simulate the behavior of mutable data structures. Let's first explore how to use
-it to create a dynamic array implementation.
+simulate the behavior of mutable data structures. Let's first explore how to create a struct that contains, among others, a `Felt252Dict<T>`.
 
 Note: Several concepts used in this chapter are presented in later parts of the
 book. We recommend you to check out the following chapter first:
@@ -31,6 +30,55 @@ book. We recommend you to check out the following chapter first:
 [Methods](./ch05-03-method-syntax.md), [Generic
 types](./ch08-00-generic-types-and-traits.md),
 [Traits](./ch08-02-traits-in-cairo.md)
+
+## Dictionaries as Struct Members
+
+Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom _user database_ that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:
+
+```rust,noplayground
+{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:struct}}
+
+{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:trait}}
+```
+
+Our new type `UserDatabase<T>` represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are:
+
+- `users_updates`, the number of users updates in the dictionary and
+- `balances`, a mapping of each user to its balance.
+
+The database core functionality is defined by `UserDatabaseTrait`. The following methods are defined:
+
+- `new` for easily creating new `UserDatabase` types.
+- `update_user` to update the balance of users in the database.
+- `get_balance` to find user's balance in the database.
+
+The only remaining step is to implement each of the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch08-00-generic-types-and-traits.md) we also need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:
+
+1. `T` should implement the `Copy<T>` since it's required for getting values from a `Felt252Dict<T>`.
+2. All value types of a dictionary implement the `Felt252DictValue<T>`, our generic type should do as well.
+3. To insert values, `Felt252DictTrait<T>` requires all value types to be destructible.
+
+The implementation, with all restrictions in place, would be as follow:
+
+```rust,noplayground
+{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:imports}}
+
+{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
+```
+
+Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it doesn't implement the `Drop<T>` trait, nor the `Destruct<T>` trait.
+Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to implement the `Destruct<T>` trait manually (refer to the [Ownership](ch04-01-what-is-ownership.md#the-drop-trait) chapter for more information).
+Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [genericity](/src/ch08-00-generic-types-and-traits.md) in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
+
+```rust,noplayground
+{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}
+```
+
+Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully functional database. We can now try it out:
+
+```rust
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:main}}
+```
 
 ## Simulating a dynamic array with dicts
 

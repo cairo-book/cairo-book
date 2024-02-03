@@ -25,7 +25,7 @@ fn custom_insert<T, +Felt252DictValue<T>, +Destruct<T>, +Drop<T>>(
     ref dict: Felt252Dict<T>, key: felt252, value: T
 ) {
     // Get the last entry associated with `key`
-    // Notice that if `key` does not exists, _prev_value will
+    // Notice that if `key` does not exist, `_prev_value` will
     // be the default value of T.
     let (entry, _prev_value) = dict.entry(key);
 
@@ -43,7 +43,7 @@ fn main() {
 
     let val = custom_get(ref dict, '0');
 
-    assert(val == 100, 'Expecting 100');
+    assert!(val == 100, "Expecting 100");
 }
 // ANCHOR_END: main
 

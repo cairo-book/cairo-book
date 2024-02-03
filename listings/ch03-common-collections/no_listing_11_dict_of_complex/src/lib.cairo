@@ -1,7 +1,6 @@
 // ANCHOR: all
 
 // ANCHOR: imports
-use core::dict::Felt252DictTrait;
 use core::nullable::{nullable_from_box, match_nullable, FromNullableResult};
 // ANCHOR_END: imports
 
