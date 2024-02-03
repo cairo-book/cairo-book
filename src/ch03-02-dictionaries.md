@@ -233,13 +233,13 @@ Defining dictionaries as struct members is possible in Cairo but correctly inter
 
 Our new type `UserDatabase<T>` represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are:
 
-- `users_amount`, the number of users currently inserted and
+- `users_updates`, the number of users updates in the dictionary and
 - `balances`, a mapping of each user to its balance.
 
 The database core functionality is defined by `UserDatabaseTrait`. The following methods are defined:
 
 - `new` for easily creating new `UserDatabase` types.
-- `add_user` to insert users in the database.
+- `update_user` to update the balance of users in the database.
 - `get_balance` to find user's balance in the database.
 
 The only remaining step is to implement each of the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch08-00-generic-types-and-traits.md) we also need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:

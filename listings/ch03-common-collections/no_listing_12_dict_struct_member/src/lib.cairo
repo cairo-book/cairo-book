@@ -1,6 +1,6 @@
 // ANCHOR: struct
 struct UserDatabase<T> {
-    users_amount: u64,
+    users_updates: u64,
     balances: Felt252Dict<T>,
 }
 // ANCHOR_END: struct
@@ -8,7 +8,7 @@ struct UserDatabase<T> {
 // ANCHOR: trait
 trait UserDatabaseTrait<T> {
     fn new() -> UserDatabase<T>;
-    fn add_user<+Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T);
+    fn update_user<+Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T);
     fn get_balance<+Copy<T>>(ref self: UserDatabase<T>, name: felt252) -> T;
 }
 // ANCHOR_END: trait
@@ -17,7 +17,7 @@ trait UserDatabaseTrait<T> {
 impl UserDatabaseImpl<T, +Felt252DictValue<T>> of UserDatabaseTrait<T> {
     // Creates a database
     fn new() -> UserDatabase<T> {
-        UserDatabase { users_amount: 0, balances: Default::default() }
+        UserDatabase { users_updates: 0, balances: Default::default() }
     }
 
     // Get the user's balance
@@ -26,9 +26,9 @@ impl UserDatabaseImpl<T, +Felt252DictValue<T>> of UserDatabaseTrait<T> {
     }
 
     // Add a user
-    fn add_user<+Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T) {
+    fn update_user<+Drop<T>>(ref self: UserDatabase<T>, name: felt252, balance: T) {
         self.balances.insert(name, balance);
-        self.users_amount += 1;
+        self.users_updates += 1;
     }
 }
 // ANCHOR_END: impl
@@ -45,11 +45,11 @@ impl UserDatabaseDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<UserDat
 fn main() {
     let mut db = UserDatabaseTrait::new();
 
-    db.add_user('Alex', 100);
-    db.add_user('Maria', 80);
+    db.update_user('Alex', 100);
+    db.update_user('Maria', 80);
 
-    db.add_user('Alex', 40);
-    db.add_user('Maria', 0);
+    db.update_user('Alex', 40);
+    db.update_user('Maria', 0);
 
     let alex_latest_balance = db.get_balance('Alex');
     let maria_latest_balance = db.get_balance('Maria');
