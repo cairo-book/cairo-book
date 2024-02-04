@@ -13,7 +13,7 @@ and an implementation associated with the type for which the method is intended.
 
 Let’s change the `area` function that has a `Rectangle` instance as a parameter
 and instead make an `area` method defined on the `RectangleTrait` trait, as
-shown in Listing 5-13.
+shown in Listing 5-11.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -80,11 +80,11 @@ fields. For example, we can define a method on `Rectangle` that is also named
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_14_width_method/src/lib.cairo}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_14_width_method/src/lib.cairo}}
 ```
 
 Here, we’re choosing to make the `width` method return `true` if the value in
-the instance’s `width` field is greater than `0` and `false` if the value is
+the instance’s `width` field is greater than `0`, and `false` if the value is
 `0`: we can use a field within a method of the same name for any purpose. In
 `main`, when we follow `rect1.width` with parentheses, Cairo knows we mean the
 method `width`. When we don’t use parentheses, Cairo knows we mean the field
@@ -97,7 +97,7 @@ struct. This time we want an instance of `Rectangle` to take another instance of
 `Rectangle` and return `true` if the second `Rectangle` can fit completely
 within `self` (the first `Rectangle`); otherwise, it should return `false`. That
 is, once we’ve defined the `can_hold` method, we want to be able to write the
-program shown in Listing 5-14.
+program shown in Listing 5-12.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -112,15 +112,11 @@ The expected output would look like the following because both dimensions of
 `rect2` are smaller than the dimensions of `rect1`, but `rect3` is wider than
 `rect1`:
 
-```text
-$ scarb cairo-run --available-gas=200000000
-[DEBUG]	Can rec1 hold rect2?           	(raw: 384675147322001379018464490539350216396261044799)
-
-[DEBUG]	true                           	(raw: 1953658213)
-
-[DEBUG]	Can rect1 hold rect3?          	(raw: 384675147322001384331925548502381811111693612095)
-
-[DEBUG]	false                          	(raw: 439721161573)
+```bash
+$ scarb cairo-run
+Can rect1 hold rect2? true
+Can rect1 hold rect3? false
+Run completed successfully, returning []
 
 ```
 
@@ -147,7 +143,7 @@ blocks from Listing 5-11, shown in Listing 5-13.
 <span class="caption">Listing 5-13: Implementing the `can_hold` method on
 `Rectangle` that takes another `Rectangle` instance as a parameter</span>
 
-When we run this code with the `main` function in Listing 5-14, we’ll get our
+When we run this code with the `main` function in Listing 5-12, we’ll get our
 desired output. Methods can take multiple parameters that we add to the
 signature after the `self` parameter, and those parameters work just like
 parameters in functions.
@@ -169,11 +165,10 @@ a square `Rectangle` rather than having to specify the same value twice:
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_implementation_functions/src/lib.cairo:here}}
 ```
 
-To call this function, we use the `::` syntax with the implementation name; `let
+To call this function, we use the `::` syntax with the implementation name: `let
 square = RectangleImpl::square(10);` is an example. This function is namespaced
 by the implementation; the `::` syntax is used for both trait functions and
-namespaces created by modules. We’ll discuss modules in [Chapter 8][modules]<!--
-ignore -->.
+namespaces created by modules. We’ll discuss modules in [Chapter 7](ch07-02-defining-modules-to-control-scope.md).
 
 > Note: It is also possible to call this function using the trait name, with
 > `RectangleTrait::square(10)`.

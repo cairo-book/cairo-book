@@ -6,7 +6,7 @@ struct Rectangle {
 fn main() {
     let rectangle = Rectangle { width: 30, height: 10, };
     let area = area(rectangle);
-    println!("Area: {}", area);
+    println!("Area is {}", area);
 }
 
 fn area(rectangle: Rectangle) -> u64 {
