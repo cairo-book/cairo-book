@@ -1,6 +1,6 @@
 ## References and Snapshots
 
-The issue with the tuple code in Listing 4-5 is that we have to return the
+The issue with the tuple code in previous Listing 4-3 is that we have to return the
 `Array` to the calling function so we can still use the `Array` after the
 call to `calculate_length`, because the `Array` was moved into
 `calculate_length`.
@@ -21,7 +21,7 @@ Here is how you would define and use a `calculate_length` function that takes a
 snapshot of an array as a parameter instead of taking ownership of the underlying value. In this example,
 the `calculate_length` function returns the length of the array passed as a parameter.
 As we're passing it as a snapshot, which is an immutable view of the array, we can be sure that
-the `calculate_length` function will not mutate the array, and ownership of the array is kept in the main function.
+the `calculate_length` function will not mutate the array, and ownership of the array is kept in the `main` function.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -34,10 +34,8 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 The output of this program is:
 
 ```shell
-[DEBUG]	                               	(raw: 0)
-
-[DEBUG]	                              	(raw: 1)
-
+The length of the array when the snapshot was taken is 0
+The current length of the array is 1
 Run completed successfully, returning []
 ```
 
@@ -47,17 +45,17 @@ that we pass `@arr1` into `calculate_length` and, in its definition, we take `@A
 Let’s take a closer look at the function call here:
 
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no_listing_09_snapshots/src/lib.cairo:function_call}}
+let second_length = calculate_length(@arr1); // Calculate the current length of the array
 ```
 
-The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value at a specific point in time, the usual rules of the linear type system are not enforced. In particular, snapshot variables are always `Drop`, never `Destruct`, even dictionary snapshots.
+The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value at a specific point in time, the usual rules of the linear type system are not enforced. In particular, snapshot variables always implement the `Drop` trait, never the `Destruct` trait, even dictionary snapshots.
 
 Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:
 
 ```rust, noplayground
 fn calculate_length(
-    array_snapshot: @Array<u128>
-) -> usize { // array_snapshot is a snapshot of an Array
+    array_snapshot: @Array<u128> // array_snapshot is a snapshot of an Array
+) -> usize {
     array_snapshot.len()
 } // Here, array_snapshot goes out of scope and is dropped.
 // However, because it is only a view of what the original array `arr` contains, the original `arr` can still be used.
@@ -101,7 +99,7 @@ The compiler prevents us from modifying values associated to snapshots.
 
 ### Mutable References
 
-We can achieve the behavior we want in Listing 4-6 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by returning it automatically at the end of the execution.
+We can achieve the behavior we want in Listing 4-4 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by returning it automatically at the end of the execution.
 In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modifier.
 
 > **Note**: In Cairo, a parameter can only be passed as _mutable reference_ using the `ref` modifier if the variable is declared as mutable with `mut`.
@@ -119,10 +117,8 @@ First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` in
 The output of the program is:
 
 ```shell
-[DEBUG]
-                                (raw: 10)
-
-[DEBUG]	                        (raw: 3)
+height: 10, width: 3
+Run completed successfully, returning []
 ```
 
 As expected, the `height` and `width` fields of the `rec` variable have been swapped.

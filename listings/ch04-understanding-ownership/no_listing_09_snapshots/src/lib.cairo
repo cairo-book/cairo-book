@@ -5,9 +5,7 @@ fn main() {
     let first_length = calculate_length(
         first_snapshot
     ); // Calculate the length of the array when the snapshot was taken
-    //ANCHOR: function_call
     let second_length = calculate_length(@arr1); // Calculate the current length of the array
-    //ANCHOR_END: function_call
     println!("The length of the array when the snapshot was taken is {}", first_length);
     println!("The current length of the array is {}", second_length);
 }
