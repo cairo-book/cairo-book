@@ -4,9 +4,9 @@ Cairo uses a linear type system. In such a type system, any value (a basic type,
 
 _Destruction_ can happen in several ways:
 
-- a variable goes out of scope
-- a struct is destructured
-- explicit destruction using destruct()
+- a variable goes out of scope.
+- a struct is destructured.
+- explicit destruction using `destruct()`.
 
 _Moving_ a value simply means passing that value to another function.
 
@@ -29,9 +29,9 @@ This means that variables (not values) follow similar rules to Rust values:
 - There can only be one owner at a time.
 - When the owner goes out of scope, the variable is destroyed.
 
-Now that we’re past basic Cairo syntax, we won’t include all the `fn main() {`
-examples inside a `main` function manually. As a result, our examples will be a
-code in examples, so if you’re following along, make sure to put the following
+Now that we’re past basic Cairo syntax, we won’t include all the 
+examples inside a `main` function manually. As a result, our examples will be made of
+code snippets, so if you’re following along, make sure to put the following
 bit more concise, letting us focus on the actual details rather than
 boilerplate code.
 
@@ -95,14 +95,16 @@ error: Variable was previously moved. Trait has no implementation in context: co
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
 The important thing to note here is that this is a completely free operation, because variables are a cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the rust version of the `Copy` trait, where the value is potentially copied in memory.
 
-You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components don't implement the Copy trait.
+All basic types previously described in [data types chapter](ch02-02-data-types.md) implement by default the `Copy` trait.
+
 While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
+You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components doesn't implement the Copy trait.
 
 ```rust,ignore_format
 {{#include ../listings/ch04-understanding-ownership/no_listing_03_copy_trait/src/lib.cairo}}
 ```
 
-In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid. In ownership terms, this means that the ownership of `p1` remains with the main function.
+In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid. In ownership terms, this means that the ownership of `p1` remains with the `main` function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
 _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._
@@ -113,7 +115,7 @@ The other way linear types can be _used_ is by being destroyed. Destruction must
 In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
 This would be very easy to forget, so it is enforced by the type system and the compiler.
 
-#### No-op destruction: the Drop Trait
+#### No-op destruction: the `Drop` Trait
 
 You may have noticed that the `Point` type in the previous example also implements the `Drop` trait.
 For example, the following code will not compile, because the struct `A` is not moved or destroyed before it goes out of scope:
@@ -131,7 +133,7 @@ For example, the following code compiles:
 {{#include ../listings/ch04-understanding-ownership/no_listing_05_drop_derive_compiles/src/lib.cairo}}
 ```
 
-#### Destruction with a side-effect: the Destruct trait
+#### Destruction with a side-effect: the `Destruct` trait
 
 When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
@@ -151,7 +153,7 @@ error: Variable not dropped. Trait has no implementation in context: core::trait
     ^*^
 ```
 
-When A goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
+When `A` goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
 
 ```rust
 {{#include ../listings/ch04-understanding-ownership/no_listing_07_destruct_compiles/src/lib.cairo}}
@@ -161,7 +163,7 @@ Now, when `A` goes out of scope, its dictionary will be automatically `squashed`
 
 ### Copy Array data with Clone
 
-If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 6, but because methods are a common feature in many programming languages, you’ve probably seen them before.
+If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in [Chapter 5-3](ch05-03-method-syntax.md), but because methods are a common feature in many programming languages, you’ve probably seen them before.
 
 Here’s an example of the `clone` method in action.
 
@@ -170,7 +172,7 @@ Here’s an example of the `clone` method in action.
 ```
 
 When you see a call to `clone`, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
-In this case, _value_ is being copied, resulting in new memory cells being used, and a new _variable_ is created, referring to the new, copied value.
+In this case, the _value_ `arr1` refers to is being copied, resulting in new memory cells being used, and a new _variable_ `arr2` is created, referring to the new copied value.
 
 ### Return Values and Scope
 
