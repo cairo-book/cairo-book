@@ -1,3 +1,4 @@
+//TAG: tests_fail
 #[derive(Copy, Drop)]
 struct Guess {
     value: u64,
