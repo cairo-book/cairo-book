@@ -21,15 +21,15 @@ fn gives_ownership() -> A {               // gives_ownership will move its
 
     let some_a = A {};                    // some_a comes into scope
 
-    some_a                                // some_a is returned and the
-                                          // calling function takes ownership
-                                          // of it 
+    some_a                                // some_a is returned and
+                                          // moves ownership to the calling
+                                          // function
 }
 
 // This function takes an instance some_a of A and returns it
 fn takes_and_gives_back(some_a: A) -> A { // some_a comes into scope
 
-    some_a                                // some_a is returned and the
-                                          // calling function takes ownership
-                                          // of it 
+    some_a                                // some_a is returned and
+                                          // moves ownership to the calling
+                                          // function
 }

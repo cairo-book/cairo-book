@@ -29,11 +29,7 @@ This means that variables (not values) follow similar rules to Rust values:
 - There can only be one owner at a time.
 - When the owner goes out of scope, the variable is destroyed.
 
-Now that we’re past basic Cairo syntax, we won’t include all the 
-examples inside a `main` function manually. As a result, our examples will be made of
-code snippets, so if you’re following along, make sure to put the following
-bit more concise, letting us focus on the actual details rather than
-boilerplate code.
+Now that we’re past basic Rust syntax, we won’t include all the `fn main() {` code in examples, so if you’re following along, make sure to put the following examples inside a main function manually. As a result, our examples will be a bit more concise, letting us focus on the actual details rather than boilerplate code.
 
 ### Variable Scope
 
