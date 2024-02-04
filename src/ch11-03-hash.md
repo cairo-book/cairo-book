@@ -31,11 +31,11 @@ To use hashes in your code, you must first import the relevant traits and functi
 The first step is to initialize the hash with either `PoseidonTrait::new() -> HashState` or `PedersenTrait::new(base: felt252) -> HashState` depending on which hash function we want to work with. Then the hash state can be updated with the `update(self: HashState, value: felt252) -> HashState` or `update_with(self: S, value: T) -> S` functions as many times as required. Then the function `finalize(self: HashState) -> felt252` is called on the hash state and it returns the value of the hash as a `felt252`.
 
 ```rust
-{{#include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:import}}
+{{#include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:import}}
 ```
 
 ```rust
-{{#include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:structure}}
+{{#include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:structure}}
 ```
 
 As our struct derives the trait HashTrait, we can call the function as follows for Poseidon hashing :
