@@ -30,7 +30,7 @@ fn gives_ownership() -> A {               // gives_ownership will move its
 fn takes_and_gives_back(some_a: A) -> A { // some_a comes into
                                           // scope
 
-    some_a                               // some_a is returned and moves
-                                         // ownership to the calling
-                                         // function
+    some_a                                // some_a is returned and 
+                                          // moves ownership to the calling
+                                          // function
 }
