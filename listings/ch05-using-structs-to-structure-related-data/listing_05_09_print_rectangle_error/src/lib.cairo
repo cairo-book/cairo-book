@@ -1,3 +1,4 @@
+//TAG: does_not_compile
 //ANCHOR:all
 //ANCHOR: here
 #[derive(Drop)]
