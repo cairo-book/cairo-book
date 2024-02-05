@@ -86,7 +86,7 @@ error: Trait has no implementation in context: core::fmt::Display::<rectangles::
 error: could not compile `rectangles` due to previous error
 ```
 
-`print!` and `println!` macros work for many data types, but not for the custom `Rectangle` struct. We can fix this by destructuring the fields of the `Rectangle` struct as shown in Listing 5-10.
+`print!` and `println!` macros work for many data types, but not for the custom `Rectangle` struct. We can fix this by accessing the fields of the `Rectangle` struct as shown in Listing 5-10.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
