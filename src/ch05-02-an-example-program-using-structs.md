@@ -69,7 +69,7 @@ It’d be useful to be able to print an instance of `Rectangle` while we’re de
 <!-- TODO implement debug instead -->
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_print_rectangle/src/lib.cairo:here}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_09_print_rectangle/src/lib.cairo:here}}
 ```
 
 <span class="caption">Listing 5-9: Attempting to print a `Rectangle` instance</span>
@@ -92,7 +92,7 @@ The `PrintTrait` trait is implemented for many data types, but not for the `Rect
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_print_rectangle/src/lib.cairo:all}}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_09_print_rectangle/src/lib.cairo:all}}
 ```
 
 <span class="caption">Listing 5-10: Implementing the `PrintTrait` trait on Rectangle</span>
