@@ -62,32 +62,31 @@ Here we’ve defined a struct and named it `Rectangle`. Inside the curly bracket
 
 ## Printing a struct
 
-It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 5-9 tries to print `rectangle` using the `print` function of the `PrintTrait`. This won’t work.
+It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 5-9 tries to print `rectangle` using the `println!` macro. This won’t work.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 <!-- TODO implement debug instead -->
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_print_rectangle/src/lib.cairo:here}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_09_print_rectangle_error/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 5-9: Attempting to print a `Rectangle` instance</span>
+<span class="caption">Listing 5-9: Attempting to print a `Rectangle` instance with `println!` macro</span>
 
 When we compile this code, we get an error with this message:
 
 ```bash
 $ cairo-compile src/lib.cairo
-error: Method `print` could not be called on type `rectangles::Rectangle`.
-Candidate `PrintTrait::print` inference failed with: Trait has no implementation in context: core::debug::PrintTrait::<rectangles::Rectangle>
+error: Trait has no implementation in context: core::fmt::Display::<rectangles::Rectangle>
  --> lib.cairo:16:15
-     rectangle.print();
-              ^***^
+    match core::fmt::Display::fmt(__write_macro_arg0__, ref __formatter_for_print_macros__) {
+                              ^*^
+
 error: could not compile `rectangles` due to previous error
 ```
 
-The `prinTrait` is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing 5-10.
-To learn more about traits, see [Traits in Cairo](ch08-02-traits-in-cairo.md).
+`print!` and `println!` macros work for many data types, but not for the custom `Rectangle` struct. We can fix this by destructuring the fields of the `Rectangle` struct as shown in Listing 5-10.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -95,16 +94,15 @@ To learn more about traits, see [Traits in Cairo](ch08-02-traits-in-cairo.md).
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_print_rectangle/src/lib.cairo:all}}
 ```
 
-<span class="caption">Listing 5-10: Implementing the `PrintTrait` trait on `Rectangle`</span>
+<span class="caption">Listing 5-10: Printing `Rectangle` struct's fields with `println!` macro</span>
 
 When we run the `main` function, we get the following output:
 
 ```bash
 $ scarb cairo-run
-[DEBUG] 0x1e
-[DEBUG] 0xa ('
-')
+Width is 30
+Height is 10
 Run completed successfully, returning []
 ```
 
-Nice! It’s not the prettiest output, but it shows the values of all the fields for this instance, which would definitely help during debugging.
+Nice! We can now print the values of all the fields for this instance, which would definitely help during debugging.
