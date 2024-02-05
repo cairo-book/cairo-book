@@ -60,7 +60,7 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 
 Here we’ve defined a struct and named it `Rectangle`. Inside the curly brackets, we defined the fields as `width` and `height`, both of which have type `u64`. Then, in `main`, we created a particular instance of `Rectangle` that has a width of `30` and a height of `10`. Our `area` function is now defined with one parameter, which we’ve named `rectangle` which is of type `Rectangle` struct. We can then access the fields of the instance with dot notation, and it gives descriptive names to the values rather than using the tuple index values of `0` and `1`.
 
-## Adding Uselful Functionnality with Trait
+## Adding Uselful Functionality with Trait
 
 It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 5-9 tries to print `rectangle` using the `print` function. This won’t work.
 
