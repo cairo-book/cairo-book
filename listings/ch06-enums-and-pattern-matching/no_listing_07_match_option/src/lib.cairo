@@ -1,6 +1,4 @@
 //ANCHOR:all
-use core::fmt;
-
 fn plus_one(x: Option<u8>) -> Option<u8> {
     match x {
         //ANCHOR: option_some

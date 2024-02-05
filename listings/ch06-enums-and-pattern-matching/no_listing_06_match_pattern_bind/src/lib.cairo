@@ -34,8 +34,8 @@ fn value_in_cents(coin: Coin) -> felt252 {
 impl UsStatePrintImpl of PrintTrait<UsState> {
     fn print(self: UsState) {
         match self {
-            UsState::Alabama => ('Alabama').print(),
-            UsState::Alaska => ('Alaska').print(),
+            UsState::Alabama => 'Alabama'.print(),
+            UsState::Alaska => 'Alaska'.print(),
         }
     }
 }
