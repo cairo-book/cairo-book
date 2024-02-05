@@ -180,6 +180,5 @@ Here's a match that implements that logic:
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_integers/src/lib.cairo:here}}
 ```
-If we decided to change the rules, 
 
 > These restrictions are planned to be relaxed in future versions of Cairo.
