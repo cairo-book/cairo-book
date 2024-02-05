@@ -1,5 +1,7 @@
 //ANCHOR:all
 //ANCHOR: here
+use core::debug::PrintTrait;
+
 #[derive(Drop)]
 struct Rectangle {
     width: u64,
@@ -8,11 +10,16 @@ struct Rectangle {
 
 fn main() {
     let rectangle = Rectangle { width: 30, height: 10, };
-    println!("Width is {}", rectangle.width);
-    println!("Height is {}", rectangle.height);
+    rectangle.print();
 }
 //ANCHOR_END: here
 
+impl RectanglePrintImpl of PrintTrait<Rectangle> {
+    fn print(self: Rectangle) {
+        self.width.print();
+        self.height.print();
+    }
+}
 //ANCHOR_END:all
 
 

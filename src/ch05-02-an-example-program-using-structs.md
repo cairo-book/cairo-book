@@ -60,33 +60,34 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 
 Here we’ve defined a struct and named it `Rectangle`. Inside the curly brackets, we defined the fields as `width` and `height`, both of which have type `u64`. Then, in `main`, we created a particular instance of `Rectangle` that has a width of `30` and a height of `10`. Our `area` function is now defined with one parameter, which we’ve named `rectangle` which is of type `Rectangle` struct. We can then access the fields of the instance with dot notation, and it gives descriptive names to the values rather than using the tuple index values of `0` and `1`.
 
-## Printing a struct
+## Adding Uselful Functionnality with Trait
 
-It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 5-9 tries to print `rectangle` using the `println!` macro. This won’t work.
+It’d be useful to be able to print an instance of `Rectangle` while we’re debugging our program and see the values for all its fields. Listing 5-9 tries to print `rectangle` using the `print` function. This won’t work.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 <!-- TODO implement debug instead -->
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_09_print_rectangle_error/src/lib.cairo:here}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_print_rectangle/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 5-9: Attempting to print a `Rectangle` instance with `println!` macro</span>
+<span class="caption">Listing 5-9: Attempting to print a `Rectangle` instance</span>
 
 When we compile this code, we get an error with this message:
 
 ```bash
-$ cairo-compile src/lib.cairo
-error: Trait has no implementation in context: core::fmt::Display::<rectangles::Rectangle>
+$ scarb build
+error: Method `print` could not be called on type `rectangles::Rectangle`.
+Candidate `PrintTrait::print` inference failed with: Trait has no implementation in context: core::debug::PrintTrait::<rectangles::Rectangle>
  --> lib.cairo:16:15
-    match core::fmt::Display::fmt(__write_macro_arg0__, ref __formatter_for_print_macros__) {
-                              ^*^
+    rectangle.print();
+              ^***^
 
 error: could not compile `rectangles` due to previous error
 ```
 
-`print!` and `println!` macros work for many data types, but not for the custom `Rectangle` struct. We can fix this by accessing the fields of the `Rectangle` struct as shown in Listing 5-10.
+The `PrintTrait` trait is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing 5-10. To learn more about traits, see [Traits in Cairo](ch02-02-traits-in-cairo.md).
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -94,15 +95,17 @@ error: could not compile `rectangles` due to previous error
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_print_rectangle/src/lib.cairo:all}}
 ```
 
-<span class="caption">Listing 5-10: Printing `Rectangle` struct's fields with `println!` macro</span>
+<span class="caption">Listing 5-10: Implementing the `PrintTrait` trait on Rectangle</span>
 
 When we run the `main` function, we get the following output:
 
 ```bash
 $ scarb cairo-run
-Width is 30
-Height is 10
+[DEBUG] 0x1e
+[DEBUG] 0xa ('
+')
 Run completed successfully, returning []
 ```
 
-Nice! We can now print the values of all the fields for this instance, which would definitely help during debugging.
+Nice! It’s not the prettiest output, but it shows the values of all the fields for this instance, which would definitely help during debugging.
+
