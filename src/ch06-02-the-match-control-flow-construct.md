@@ -14,7 +14,7 @@ Speaking of coins, let’s use them as an example using `match`! We can write a 
 
 Let’s break down the `match` expression in the `value_in_cents` function. First we list the `match` keyword followed by an expression, which in this case is the value `coin`. This seems very similar to a conditional expression used with if, but there’s a big difference: with if, the condition needs to evaluate to a Boolean value, but here it can be any type. The type of `coin` in this example is the `Coin` enum that we defined on the first line.
 
-Next are the `match` arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value `Coin::Penny` and then the `=>` operator that separates the pattern and the code to run. The code in this case is just the value `1`. Each arm is separated from the next with a comma. The order of arms and their patterns is not enforced to match the order in the enum definition.
+Next are the `match` arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value `Coin::Penny` and then the `=>` operator that separates the pattern and the code to run. The code in this case is just the value `1`. Each arm is separated from the next with a comma.
 
 When the `match` expression executes, it compares the resultant value against the pattern of each arm, in the order they are given. If a pattern matches the value, the code associated with that pattern is executed. If that pattern doesn’t match the value, execution continues to the next arm, much as in a coin-sorting machine. We can have as many arms as we need: in the above example, our `match` has four arms.
 
@@ -40,19 +40,13 @@ As an example, let’s change one of our enum variants to hold data inside it. F
 
 Let’s imagine that a friend is trying to collect all 50 state quarters. While we sort our loose change by coin type, we’ll also call out the name of the state associated with each quarter so that if it’s one our friend doesn’t have, they can add it to their collection.
 
-In the `match` expression for this code, we add a variable called `state` to the pattern that matches values of the variant `Coin::Quarter`. When a `Coin::Quarter` matches, the `state` variable will bind to the value of that quarter’s state. Then we can use `state` in the code for that arm, like so:
+In the `match` expression for this code, we add a variable called `state` to the pattern that matches values of the variant `Coin::Quarter`. When a `Coin::Quarter` matches, the `state` variable will bind to the value of that quarter’s state. Then we can create another `match` expression for `state`, in order to print the right value:
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_match_pattern_bind/src/lib.cairo:function}}
 ```
 
-To print the value of a variant of an enum in Cairo, we need to add an implementation for the `print` function of the `debug::PrintTrait`:
-
-```rust,noplayground
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_match_pattern_bind/src/lib.cairo:print_impl}}
-```
-
-If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in the `PrintTrait`, thus getting the inner `state` value out of the `Coin` enum variant for `Quarter`.
+If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use a matching construct again, and finally print the correct `state` in each arm. In this case, the printed value will be 'Alaska', because `state` is binded to `UsState::Alaska`.
 
 ## Matching with `Option<T>`
 

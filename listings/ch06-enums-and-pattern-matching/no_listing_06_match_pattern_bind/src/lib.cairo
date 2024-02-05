@@ -1,10 +1,7 @@
-use core::debug::PrintTrait;
-
-// ANCHOR: enum_def
 #[derive(Drop)]
 enum UsState {
-    Alabama,
-    Alaska,
+    Alabama: felt252,
+    Alaska: felt252,
 }
 
 #[derive(Drop)]
@@ -23,22 +20,13 @@ fn value_in_cents(coin: Coin) -> felt252 {
         Coin::Nickel => 5,
         Coin::Dime => 10,
         Coin::Quarter(state) => {
-            state.print();
+            match state {
+                UsState::Alabama => println!("Alabama"),
+                UsState::Alaska => println!("Alaska"),
+            }
             25
         },
     }
 }
 // ANCHOR_END: function
-
-// ANCHOR: print_impl
-impl UsStatePrintImpl of PrintTrait<UsState> {
-    fn print(self: UsState) {
-        match self {
-            UsState::Alabama => 'Alabama'.print(),
-            UsState::Alaska => 'Alaska'.print(),
-        }
-    }
-}
-// ANCHOR_END: print_impl
-
 
