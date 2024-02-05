@@ -87,7 +87,7 @@ Candidate `PrintTrait::print` inference failed with: Trait has no implementation
 error: could not compile `rectangles` due to previous error
 ```
 
-The `PrintTrait` trait is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing 5-10. To learn more about traits, see [Traits in Cairo](ch02-02-traits-in-cairo.md).
+The `PrintTrait` trait is implemented for many data types, but not for the `Rectangle` struct. We can fix this by implementing the `PrintTrait` trait on `Rectangle` as shown in Listing 5-10. To learn more about traits, see [Traits in Cairo](ch08-02-traits-in-cairo.md).
 
 <span class="filename">Filename: src/lib.cairo</span>
 
