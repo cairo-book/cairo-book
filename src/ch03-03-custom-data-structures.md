@@ -26,10 +26,10 @@ simulate the behavior of mutable data structures. Let's first explore how to cre
 
 Note: Several concepts used in this chapter are presented in later parts of the
 book. We recommend you to check out the following chapter first:
-[Structs](ch05-00-using-structs-to-structure-related-data),
-[Methods](./ch05-03-method-syntax.md), [Generic
-types](./ch08-00-generic-types-and-traits.md),
-[Traits](./ch08-02-traits-in-cairo.md)
+[Structs](ch05-00-using-structs-to-structure-related-data.md),
+[Methods](./ch05-03-method-syntax.md),
+[Generic types](./ch08-00-generic-types-and-traits.md),
+[Traits](./ch08-02-traits-in-cairo.md).
 
 ## Dictionaries as Struct Members
 
@@ -87,10 +87,10 @@ operations should it support?
 
 It should:
 
-- Allow us to append items at the end
-- Let us access any item by index
-- Allow setting the value of an item at a specific index
-- Return the current length
+- Allow us to append items at the end.
+- Let us access any item by index.
+- Allow setting the value of an item at a specific index.
+- Return the current length.
 
 We can define this interface in Cairo like:
 
@@ -99,7 +99,7 @@ We can define this interface in Cairo like:
 ```
 
 This provides a blueprint for the implementation of our dynamic array. We named
-it Vec as it is similar to the `Vec<T>` data structure in Rust.
+it _Vec_ as it is similar to the `Vec<T>` data structure in Rust.
 
 ### Implementing a dynamic array in Cairo
 
@@ -150,8 +150,8 @@ represented as the top of the stack.
 
 Let us define what operations we need to create a stack :
 
-- Push an item to the top of the stack
-- Pop an item from the top of the stack
+- Push an item to the top of the stack.
+- Pop an item from the top of the stack.
 - Check whether there are still any elements in the stack.
 
 From these specifications we can define the following interface :
@@ -179,8 +179,8 @@ Next, let's see how our main functions `push` and `pop` are implemented.
 ```
 
 The code uses the `insert` and `get` methods to access the values in the
-`Felt252Dict<T>`. To push an element at the top of the stack, the `push`
-function inserts the element in the dict at index `len` - and increases the
+`Felt252Dict<T>`. To push an element to the top of the stack, the `push`
+function inserts the element in the dict at index `len` and increases the
 `len` field of the stack to keep track of the position of the stack top. To
 remove a value, the `pop` function retrieves the last value at position `len-1`
 and then decreases the value of `len` to update the position of the stack top
