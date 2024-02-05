@@ -1,3 +1,5 @@
+// ANCHOR: enum_def
+
 #[derive(Drop)]
 enum UsState {
     Alabama: felt252,
@@ -29,4 +31,5 @@ fn value_in_cents(coin: Coin) -> felt252 {
     }
 }
 // ANCHOR_END: function
+
 
