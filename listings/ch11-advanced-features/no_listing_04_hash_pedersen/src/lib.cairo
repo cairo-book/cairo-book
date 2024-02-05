@@ -26,7 +26,7 @@ fn main() -> (felt252, felt252) {
     let mut state = PedersenTrait::new(first_element);
     loop {
         match serialized_struct.pop_front() {
-            Option::Some(value) => state.update(value),
+            Option::Some(value) => { state = state.update(value); },
             Option::None => { break; }
         };
     };

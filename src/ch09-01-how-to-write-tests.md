@@ -360,7 +360,7 @@ This test will pass because the value we put in the `should_panic` attribute’s
 
 To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the if `value < 1` and the else if `value > 100` blocks:
 
-```rust
+```rust, tests_fail
 {{#include ../listings/ch09-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:here}}
 ```
 
