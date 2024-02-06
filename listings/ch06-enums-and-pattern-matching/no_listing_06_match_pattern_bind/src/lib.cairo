@@ -2,8 +2,8 @@
 
 #[derive(Drop)]
 enum UsState {
-    Alabama: felt252,
-    Alaska: felt252,
+    Alabama,
+    Alaska,
 }
 
 #[derive(Drop)]
@@ -23,8 +23,8 @@ fn value_in_cents(coin: Coin) -> felt252 {
         Coin::Dime => 10,
         Coin::Quarter(state) => {
             match state {
-                UsState::Alabama => println!("Alabama"),
-                UsState::Alaska => println!("Alaska"),
+                UsState::Alabama => println!("State quarter from Alabama"),
+                UsState::Alaska => println!("State quarter from Alaska"),
             }
             25
         },

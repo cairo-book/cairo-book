@@ -50,7 +50,7 @@ If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` woul
 
 ## Matching with `Option<T>`
 
-In the previous Enums section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same.
+In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same.
 
 Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there isn’t a value inside, the function should return the `None` value and not attempt to perform any operations.
 
@@ -82,7 +82,7 @@ The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we 
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_07_match_option/src/lib.cairo:option_none}}
 ```
 
-It matches! There’s no value to add to, so the matching construct ends and returns the `Option::None` value on the right side of `=>`. The program will ultimately fail to compile because of `none.unwrap()` call, which tries to unwrap an `Option::None`.
+It matches! There’s no value to add to, so the matching construct ends and returns the `Option::None` value on the right side of `=>`.
 
 Combining `match` and enums is useful in many situations. You’ll see this pattern a lot in Cairo code: `match` against an enum, bind a variable to the data inside, and then execute code based on it. It’s a bit tricky at first, but once you get used to it, you’ll wish you had it in all languages. It’s consistently a user favorite.
 
@@ -141,9 +141,9 @@ For example, in the following code we modified the `vending_machine_accept` func
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_10_match_or/src/lib.cairo:here}}
 ```
 
-## Matching over Tuples
+## Matching Tuples
 
-It is possible to match over tuples.
+It is possible to match tuples.
 Let's introduce a new `DayType` enum:
 
 ```rust,noplayground
@@ -157,9 +157,9 @@ We can modify the `vending_machine_accept` function to accept a tuple of a `Coin
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_11_match_tuple/src/lib.cairo:here}}
 ```
 
-## Matching over felts and integers
+## Matching `felt252` and integer variables
 
-You can also match felts and integers. This is useful when you want to match against a range of values.
+You can also match `felt252` and integer variables. This is useful when you want to match against a range of values.
 However there are some restrictions:
 
 - Only integers that fit into a single `felt252` are supported (i.e. `u256` is not supported).
