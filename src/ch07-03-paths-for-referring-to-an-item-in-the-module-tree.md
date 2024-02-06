@@ -15,10 +15,10 @@ To illustrate this notion let's take back our example Listing 7-1 for the restau
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_06_03/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_02/src/lib.cairo:paths}}
 ```
 
-<span class="caption">Listing 7-3: Calling the `add_to_waitlist` function using absolute and relative paths</span>
+<span class="caption">Listing 7-2: Calling the `add_to_waitlist` function using absolute and relative paths</span>
 
 The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
@@ -39,9 +39,9 @@ definition code separately from or together with the code that uses the item.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_06_04/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_03/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-4: Calling a function using a relative path starting with super</span>
+<span class="caption">Listing 7-3: Calling a function using a relative path starting with super</span>
 
 Here you can see directly that you access a parent's module easily using `super`, which wasn't the case previously.

@@ -1,8 +1,12 @@
 //TAG: does_not_compile
-use garden::vegetables::Asparagus;
-
+// ANCHOR: crate
 mod garden;
+
+use garden::vegetables::Asparagus;
 
 fn main() {
     let Asparagus = Asparagus {};
 }
+// ANCHOR_END: crate
+
+

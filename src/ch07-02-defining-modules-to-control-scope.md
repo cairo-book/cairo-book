@@ -31,7 +31,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
         }
     ```
 
-  - In the file _src/garden.cairo_
+  - In the file _src/garden.cairo_.
 
 - **Declaring submodules**: In any file other than the crate root, you can
   declare submodules. For example, you might declare `mod vegetables;` in
@@ -48,7 +48,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
     }
     ```
 
-  - In the file _src/garden/vegetables.cairo_
+  - In the file _src/garden/vegetables.cairo_.
 
 - **Paths to code in modules**: Once a module is part of your crate, you can
   refer to code in that module from anywhere else in that same crate, using the path
@@ -78,7 +78,7 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo:crate}}
 ```
 
 The `mod garden;` line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
@@ -117,13 +117,13 @@ chefs and cooks work in the kitchen, dishwashers clean up, and managers do
 administrative work.
 
 To structure our crate in this way, we can organize its functions into nested
-modules. Create a new package named `restaurant` by running `scarb new restaurant`; then enter the code in Listing 7-1 into _src/lib.cairo_ to
+modules. Create a new package named _restaurant_ by running `scarb new restaurant`; then enter the code in Listing 7-1 into _src/lib.cairo_ to
 define some modules and function signatures. Here’s the front of house section:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_06_01/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_01/src/lib.cairo:front_of_house}}
 ```
 
 <span class="caption">Listing 7-1: A `front_of_house` module containing other
@@ -133,8 +133,7 @@ We define a module with the `mod` keyword followed by the name of the module
 (in this case, `front_of_house`). The body of the module then goes inside curly
 brackets. Inside modules, we can place other modules, as in this case with the
 modules `hosting` and `serving`. Modules can also hold definitions for other
-items, such as structs, enums, constants, traits, and—as in Listing
-6-1—functions.
+items, such as structs, enums, constants, traits, and functions.
 
 By using modules, we can group related definitions together and name why
 they’re related. Programmers using this code can navigate the code based on the
@@ -142,8 +141,14 @@ groups rather than having to read through all the definitions, making it easier
 to find the definitions relevant to them. Programmers adding new functionality
 to this code would know where to place the code to keep the program organized.
 
+We can now integrate the _back of house_ module in our _src/lib.cairo_ file:
+
+```rust,noplayground
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_01/src/lib.cairo:back_of_house}}
+```
+
 Earlier, we mentioned that _src/lib.cairo_ is called the crate
-root. The reason for this name is that the content of this file form a module named after the crate name at the root of the crate’s module structure,
+root. The reason for this name is that the content of this file forms a module named after the crate name at the root of the crate’s module structure,
 known as the _module tree_.
 
 Listing 7-2 shows the module tree for the structure in Listing 7-1.
@@ -151,17 +156,25 @@ Listing 7-2 shows the module tree for the structure in Listing 7-1.
 ```text
 restaurant
  └── front_of_house
-     ├── hosting
-     │   ├── add_to_waitlist
-     │   └── seat_at_table
-     └── serving
-         ├── take_order
-         ├── serve_order
-         └── take_payment
+  │  ├── hosting
+  │  │   ├── add_to_waitlist
+  │  │   └── seat_at_table
+  │  └── serving
+  │      ├── take_order
+  │      ├── serve_order
+  │      └── take_payment
+  └── back_of_house
+     ├── cooking
+     │   ├── cook_dish
+     │   └── arrange_on_plate
+     └── organizing
+         ├── pay_bill
+         ├── recruit
+         └── clean_up
 ```
 
 <span class="caption">Listing 7-2: The module tree for the code in Listing
-6-1</span>
+7-1</span>
 
 This tree shows how some of the modules nest inside one another; for example,
 `hosting` nests inside `front_of_house`. The tree also shows that some modules
