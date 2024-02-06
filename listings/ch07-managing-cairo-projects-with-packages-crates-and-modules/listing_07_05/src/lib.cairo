@@ -15,4 +15,3 @@ mod customer {
 }
 // ANCHOR_END: wrong-path
 
-
