@@ -75,7 +75,7 @@ to bring the core library’s `ArrayTrait` trait into the scope, allowing to cal
 
 <span class="caption">Listing 7-7: Bringing `ArrayTrait` into scope in an idiomatic way</span>
 
-Note that in this case, `use core::array::ArrayTrait;` is optinonal to bring `ArrayTrait` trait into scope, because `ArrayTrait` is included in the prelude and therefore automatically brought into scope.
+Note that in this case, `use core::array::ArrayTrait;` is not required to bring `ArrayTrait` trait into scope, because `ArrayTrait` is included in the prelude and therefore automatically brought into scope.
 
 There’s no strong reason behind this idiom: it’s just the convention that has
 emerged in the Rust community, and folks have gotten used to reading and writing Rust code this way.
