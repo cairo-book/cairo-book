@@ -16,5 +16,5 @@ impl RectangleImpl of RectangleTrait {
 
 fn main() {
     let rect1 = Rectangle { width: 30, height: 50, };
-    println!("Width: {}", rect1.width);
+    println!("Width is {}", rect1.width);
 }
