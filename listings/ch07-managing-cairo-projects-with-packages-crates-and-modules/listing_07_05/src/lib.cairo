@@ -1,4 +1,5 @@
 //TAG: does_not_compile
+
 // ANCHOR: wrong-path
 mod front_of_house {
     mod hosting {
@@ -14,4 +15,5 @@ mod customer {
     }
 }
 // ANCHOR_END: wrong-path
+
 

@@ -1,4 +1,5 @@
 //TAG: does_not_compile
+
 // ANCHOR: unidiomatic-path
 mod front_of_house {
     mod hosting {
@@ -12,4 +13,5 @@ fn eat_at_restaurant() {
     add_to_waitlist();
 }
 // ANCHOR_END: unidiomatic-path
+
 
