@@ -54,8 +54,7 @@ the `add_to_waitlist` function to achieve the same result, as in Listing 7-6.
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_06/src/lib.cairo:unidiomatic-path}}
 ```
 
-<span class="caption">Listing 7-6: Bringing the `add_to_waitlist` function
-into scope with `use`, which is unidiomatic</span>
+<span class="caption">Listing 7-6: Bringing the `add_to_waitlist` function into scope with `use`, which is unidiomatic</span>
 
 Although both Listing 7-4 and 7-6 accomplish the same task, Listing 7-4 is
 the idiomatic way to bring a function into scope with `use`. Bringing the
