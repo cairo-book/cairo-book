@@ -155,6 +155,25 @@ the library and programmers calling the library.
 
 ## Using External Packages in Cairo with Scarb
 
-You might need to use external packages to leverage the functionality provided by the community. To use an external package in your project with Scarb, follow these steps:
+You might need to use external packages to leverage the functionality provided by the community. Scarb allows you to use dependencies by cloning packages from their Git repositories. To use an external package in your project with Scarb, simply declare the Git repository URL of the dependency you want to add in a dedicated `[dependencies]` section in your _Scarb.toml_ configuration file. Note that the URL might correspond to the main branch, or any specific commit, branch or tag. For this, you will have to pass an extra `rev`, `branch`, or `tag` field. For example, the following code imports the main branch of _alexandria_math_ crate from _alexandria_ package:
 
-> The dependencies system is still a work in progress. You can check the official [documentation](https://docs.swmansion.com/scarb/docs/guides/dependencies.html).
+```rust
+[dependencies]
+alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
+```
+
+while the following code imports a specific branch (which is deprecated and should not be used):
+
+```rust
+[dependencies]
+alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git", branch = "cairo-v2.3.0-rc0" }
+```
+
+If you want to import multiple packages in your project, you need to create only one `[dependencies]` section and list all the desired packages beneath it. You can also specify develoment dependencies by declaring a `[dev-dependencies]` section.
+
+After that, simply run `scarb build` to fetch all external dependencies and compile your package with all the dependencies included.
+
+Note that it is also possible to add dependencies with the `scarb add` command, which will automatically edit the _Scarb.toml_ file for you. For development dependencies, just use the `scarb add --dev` command.
+
+To remove a dependency, simply remove the corresponding line from your _Scarb.toml_ file, or use the `scarb rm` command. 
+
