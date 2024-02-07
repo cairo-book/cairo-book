@@ -169,7 +169,7 @@ while the following code imports a specific branch (which is deprecated and shou
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git", branch = "cairo-v2.3.0-rc0" }
 ```
 
-If you want to import multiple packages in your project, you need to create only one `[dependencies]` section and list all the desired packages beneath it. You can also specify develoment dependencies by declaring a `[dev-dependencies]` section.
+If you want to import multiple packages in your project, you need to create only one `[dependencies]` section and list all the desired packages beneath it. You can also specify development dependencies by declaring a `[dev-dependencies]` section.
 
 After that, simply run `scarb build` to fetch all external dependencies and compile your package with all the dependencies included.
 
