@@ -2,15 +2,15 @@
 
 // ANCHOR: wrong-path
 mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
+    pub(crate) mod hosting {
+        pub(crate) fn add_to_waitlist() {}
     }
 }
 
 use restaurant::front_of_house::hosting;
 
 mod customer {
-    fn eat_at_restaurant() {
+    pub(crate) fn eat_at_restaurant() {
         hosting::add_to_waitlist();
     }
 }

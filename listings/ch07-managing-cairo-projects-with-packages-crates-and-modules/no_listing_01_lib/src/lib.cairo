@@ -1,6 +1,6 @@
 //TAG: does_not_compile
 // ANCHOR: crate
-mod garden;
+pub mod garden;
 
 use garden::vegetables::Asparagus;
 

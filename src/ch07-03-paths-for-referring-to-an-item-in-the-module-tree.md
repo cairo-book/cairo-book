@@ -10,7 +10,7 @@ A path can take two forms:
   Both absolute and relative paths are followed by one or more identifiers
   separated by double colons (`::`).
 
-To illustrate this notion let's take back our example Listing 7-1 for the restaurant we used in the last chapter. We have a crate named `restaurant` in which we have a module named `front_of_house` that contains a module named `hosting`. The `hosting` module contains a function named `add_to_waitlist`. We want to call the `add_to_waitlist` function from the `eat_at_restaurant` function. We need to tell Cairo the path to the `add_to_waitlist` function so it can find it.
+To illustrate this notion let's take back our example Listing 7-1 for the restaurant we used in the last chapter. We have a crate named _restaurant_ in which we have a module named _front_of_house_ that contains a module named _hosting_. The _hosting_ module contains a function named `add_to_waitlist`. We want to call the `add_to_waitlist` function from the `eat_at_restaurant` function. We need to tell Cairo the path to the `add_to_waitlist` function so it can find it.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -24,17 +24,14 @@ The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
 crate as `eat_at_restaurant`. In Cairo, absolute paths start from the crate root, which you need to refer to by using the crate name.
 
-The second time we call `add_to_waitlist`, we use a relative path. The path starts with `front_of_house`, the name of the module
-defined at the same level of the module tree as `eat_at_restaurant`. Here the
-filesystem equivalent would be using the path
-`./front_of_house/hosting/add_to_waitlist`. Starting with a module name means
-that the path is relative to the current module.
+The second time we call `add_to_waitlist`, we use a relative path. The path starts with _front_of_house_, the name of the module defined at the same level of the module tree as `eat_at_restaurant`. Here the filesystem equivalent would be using the path `./front_of_house/hosting/add_to_waitlist`. Starting with a module name means that the path is relative to the current module.
 
 ### Starting Relative Paths with `super`
 
 Choosing whether to use a `super` or not is a decision you’ll make
 based on your project, and depends on whether you’re more likely to move item
 definition code separately from or together with the code that uses the item.
+Let's introduce the back of house of our restaurant to highlight the use of `super`.
 
 <span class="filename">Filename: src/lib.cairo</span>
 

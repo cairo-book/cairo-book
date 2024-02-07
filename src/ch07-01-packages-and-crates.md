@@ -2,7 +2,7 @@
 
 ## What is a crate?
 
-A crate is the smallest amount of code that the Cairo compiler considers at a time. Even if you run `cairo-compile` (CLI tool to compile Cairo code, provided by Scarb) rather than `scarb build` and pass a single source code file, the compiler considers that file to be a crate. Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.
+A crate is the smallest amount of code that the Cairo compiler considers at a time. Even if you run `cairo-compile` (a compiler binary that can be used to compile Cairo files, that Scarb extends with additional functionalities) rather than `scarb build` and pass a single source code file, the compiler considers that file to be a crate. Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.
 
 ## What is the crate root?
 

@@ -54,6 +54,8 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
   refer to code in that module from anywhere else in that same crate, using the path
   to the code. For example, an `Asparagus` type in the garden vegetables module would be found at
   `backyard::garden::vegetables::Asparagus`.
+- **Private vs public**: Code within a module is private from its parent modules by default. This means that it may only be
+  accessed by the current module and its descendants. To make a module public, declare it with `pub mod` instead of `mod`. To make items within a public module public as well, use `pub` before their declarations. Cairo also provides the `pub(crate)` keyword, allowing an item or module to be only visible within the crate in which the definition is included.
 - **The `use` keyword**: Within a scope, the `use` keyword creates shortcuts to
   items to reduce repetition of long paths. In any scope that can refer to
   `backyard::garden::vegetables::Asparagus`, you can create a shortcut with
@@ -81,16 +83,15 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo:crate}}
 ```
 
-The `mod garden;` line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
+The `pub mod garden;` line imports the module named _garden_. Using `pub` (or `pub(crate)`) is optionnal here, as the `main` function resides in the same module as `pub mod garden;` declaration. This line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
 
 <span class="filename">Filename: src/garden.cairo</span>
 
 ```rust,noplayground
-mod vegetables;
+pub mod vegetables;
 ```
 
-Here, `mod vegetables;` means the code in _src/garden/vegetables.cairo_ is
-included too. That code is:
+Here, we use `pub mod vegetables;` but we could have used `pub(crate) mod vegetables;` as well. This line means the code in _src/garden/vegetables.cairo_ is included too. That code is:
 
 ```rust,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
@@ -126,26 +127,21 @@ define some modules and function signatures. Here’s the front of house section
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_01/src/lib.cairo:front_of_house}}
 ```
 
-<span class="caption">Listing 7-1: A `front_of_house` module containing other
-modules that then contain functions</span>
+<span class="caption">Listing 7-1: A _front_of_house_ module containing other public modules that then contain public functions</span>
 
 We define a module with the `mod` keyword followed by the name of the module
-(in this case, `front_of_house`). The body of the module then goes inside curly
+(in this case, _front_of_house_). The body of the module then goes inside curly
 brackets. Inside modules, we can place other modules, as in this case with the
-modules `hosting` and `serving`. Modules can also hold definitions for other
-items, such as structs, enums, constants, traits, and functions.
+modules _hosting_ and _serving_. These modules need to be public for the code they contain to be usable
+in _front_of_house_ module, and therefore in _src/lib.cairo_ file.
+The same applies for functions these modules contain. Modules can also hold definitions for other
+items, such as structs, enums, constants, traits, and functions. All of these need to be public with `pub` or `pub(crate)` to be accessible from any external module, or the crate in which they're defined, respectively.
 
 By using modules, we can group related definitions together and name why
 they’re related. Programmers using this code can navigate the code based on the
 groups rather than having to read through all the definitions, making it easier
 to find the definitions relevant to them. Programmers adding new functionality
 to this code would know where to place the code to keep the program organized.
-
-We can now integrate the _back of house_ module in our _src/lib.cairo_ file:
-
-```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_01/src/lib.cairo:back_of_house}}
-```
 
 Earlier, we mentioned that _src/lib.cairo_ is called the crate
 root. The reason for this name is that the content of this file forms a module named after the crate name at the root of the crate’s module structure,
@@ -156,33 +152,25 @@ Listing 7-2 shows the module tree for the structure in Listing 7-1.
 ```text
 restaurant
  └── front_of_house
-  │  ├── hosting
-  │  │   ├── add_to_waitlist
-  │  │   └── seat_at_table
-  │  └── serving
-  │      ├── take_order
-  │      ├── serve_order
-  │      └── take_payment
-  └── back_of_house
-     ├── cooking
-     │   ├── cook_dish
-     │   └── arrange_on_plate
-     └── organizing
-         ├── pay_bill
-         ├── recruit
-         └── clean_up
+     ├── hosting
+     │   ├── add_to_waitlist
+     │   └── seat_at_table
+     └── serving
+         ├── take_order
+         ├── serve_order
+         └── take_payment
 ```
 
 <span class="caption">Listing 7-2: The module tree for the code in Listing
 7-1</span>
 
 This tree shows how some of the modules nest inside one another; for example,
-`hosting` nests inside `front_of_house`. The tree also shows that some modules
+_hosting_ nests inside _front_of_house_. The tree also shows that some modules
 are _siblings_ to each other, meaning they’re defined in the same module;
-`hosting` and `serving` are siblings defined within `front_of_house`. If module
+_hosting_ and _serving_ are siblings defined within _front_of_house_. If module
 A is contained inside module B, we say that module A is the _child_ of module B
 and that module B is the _parent_ of module A. Notice that the entire module
-tree is rooted under the explicit name of the crate `restaurant`.
+tree is rooted under the explicit name of the crate _restaurant_.
 
 The module tree might remind you of the filesystem’s directory tree on your
 computer; this is a very apt comparison! Just like directories in a filesystem,

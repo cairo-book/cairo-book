@@ -4,8 +4,8 @@
 // If the path is created in the same crate, "restaurant" is optional in the use statement
 
 mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
+    pub(crate) mod hosting {
+        pub(crate) fn add_to_waitlist() {}
     }
 }
 

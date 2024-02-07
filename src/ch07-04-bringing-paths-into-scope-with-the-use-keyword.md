@@ -123,8 +123,8 @@ Here is an example where we import three structures from the same module:
 
 ## Re-exporting Names in Module Files
 
-When we bring a name into scope with the `use` keyword, the name available in
-the new scope can be exported as if it had been defined in that code’s scope.
+When we bring a name into scope with the `pub use` keyword, the name available in
+the new scope can be imported as if it had been defined in that code’s scope.
 This technique is called _re-exporting_ because we’re bringing an item into scope,
 but also making that item available for others to bring into their scope.
 

@@ -21,8 +21,7 @@ _src/front_of_house.cairo_ file.
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_11/src/lib.cairo:front-extraction}}
 ```
 
-<span class="caption">Listing 7-11: Declaring the `front_of_house` module whose
-body will be in _src/front_of_house.cairo_</span>
+<span class="caption">Listing 7-11: Declaring the `front_of_house` module whose body will be in _src/front_of_house.cairo_</span>
 
 Next, place the code that was in the curly brackets into a new file named
 _src/front_of_house.cairo_, as shown in Listing 7-12. The compiler knows to look
@@ -35,8 +34,7 @@ with the name `front_of_house`.
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_12/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-12: Definitions inside the `front_of_house`
-module in _src/front_of_house.cairo_</span>
+<span class="caption">Listing 7-12: Definitions inside the `front_of_house` module in _src/front_of_house.cairo_</span>
 
 Note that you only need to load a file using a `mod` declaration _once_ in your
 module tree. Once the compiler knows the file is part of the project (and knows
@@ -58,7 +56,7 @@ declaration of the `hosting` module:
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
 ```rust,noplayground
-mod hosting;
+pub(crate) mod hosting;
 ```
 
 Then we create a _src/front_of_house_ directory and a file _hosting.cairo_ to
@@ -67,7 +65,7 @@ contain the definitions made in the `hosting` module:
 <span class="filename">Filename: src/front_of_house/hosting.cairo</span>
 
 ```rust,noplayground
-fn add_to_waitlist() {}
+pub(crate) fn add_to_waitlist() {}
 ```
 
 If we instead put _hosting.cairo_ in the _src_ directory, the compiler would

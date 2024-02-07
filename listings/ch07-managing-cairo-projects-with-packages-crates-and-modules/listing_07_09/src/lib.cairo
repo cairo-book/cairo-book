@@ -1,19 +1,19 @@
 // Assuming we have a module called `shapes` with the structures `Square`, `Circle`, and `Triangle`.
 mod shapes {
     #[derive(Drop)]
-    struct Square {
-        side: u32
+    pub struct Square {
+        pub side: u32
     }
 
     #[derive(Drop)]
-    struct Circle {
-        radius: u32
+    pub struct Circle {
+        pub radius: u32
     }
 
     #[derive(Drop)]
-    struct Triangle {
-        base: u32,
-        height: u32,
+    pub struct Triangle {
+        pub base: u32,
+        pub height: u32,
     }
 }
 

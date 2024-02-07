@@ -1,8 +1,8 @@
 //TAG: does_not_compile
 // ANCHOR: reexporting
 mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
     }
 }
 
