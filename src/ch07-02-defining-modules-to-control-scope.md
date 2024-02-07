@@ -83,7 +83,7 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo:crate}}
 ```
 
-The `pub mod garden;` line imports the module named _garden_. Using `pub` (or `pub(crate)`) is optionnal here, as the `main` function resides in the same module as `pub mod garden;` declaration. This line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
+The `pub mod garden;` line imports the module named _garden_. Using `pub` (or `pub(crate)`) is optional here, as the `main` function resides in the same module as `pub mod garden;` declaration. This line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
 
 <span class="filename">Filename: src/garden.cairo</span>
 
