@@ -1,7 +1,6 @@
-use core::debug::PrintTrait;
-
 // ANCHOR: enum_def
-#[derive(Drop)]
+
+#[derive(Drop, Debug)] // Debug so we can inspect the state in a minute
 enum UsState {
     Alabama,
     Alaska,
@@ -23,22 +22,11 @@ fn value_in_cents(coin: Coin) -> felt252 {
         Coin::Nickel => 5,
         Coin::Dime => 10,
         Coin::Quarter(state) => {
-            state.print();
+            println!("State quarter from {:?}!", state);
             25
-        },
-    }
-}
-// ANCHOR_END: function
-
-// ANCHOR: print_impl
-impl UsStatePrintImpl of PrintTrait<UsState> {
-    fn print(self: UsState) {
-        match self {
-            UsState::Alabama => ('Alabama').print(),
-            UsState::Alaska => ('Alaska').print(),
         }
     }
 }
-// ANCHOR_END: print_impl
+// ANCHOR_END: function
 
 
