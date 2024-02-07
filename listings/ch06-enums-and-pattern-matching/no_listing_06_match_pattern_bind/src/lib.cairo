@@ -1,6 +1,6 @@
 // ANCHOR: enum_def
 
-#[derive(Drop)]
+#[derive(Drop, Debug)] // Debug so we can inspect the state in a minute
 enum UsState {
     Alabama,
     Alaska,
@@ -22,12 +22,9 @@ fn value_in_cents(coin: Coin) -> felt252 {
         Coin::Nickel => 5,
         Coin::Dime => 10,
         Coin::Quarter(state) => {
-            match state {
-                UsState::Alabama => println!("State quarter from Alabama"),
-                UsState::Alaska => println!("State quarter from Alaska"),
-            }
+            println!("State quarter from {:?}!", state);
             25
-        },
+        }
     }
 }
 // ANCHOR_END: function
