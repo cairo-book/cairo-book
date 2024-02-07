@@ -26,7 +26,7 @@ _src/front_of_house.cairo_ file.
 Next, place the code that was in the curly brackets into a new file named
 _src/front_of_house.cairo_, as shown in Listing 7-12. The compiler knows to look
 in this file because it came across the module declaration in the crate root
-with the name `front_of_house`.
+with the name `front_of_house`. Note that we chose here to use `pub(crate)` but we could also have used `pub`.
 
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
