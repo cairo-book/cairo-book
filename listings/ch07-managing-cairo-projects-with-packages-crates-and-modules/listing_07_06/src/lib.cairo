@@ -9,7 +9,7 @@ mod front_of_house {
 
 use restaurant::front_of_house::hosting::add_to_waitlist;
 
-fn eat_at_restaurant() {
+pub fn eat_at_restaurant() {
     add_to_waitlist();
 }
 // ANCHOR_END: unidiomatic-path

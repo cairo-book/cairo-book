@@ -4,14 +4,14 @@
 // If the path is created in the same crate, "restaurant" is optional in the use statement
 
 mod front_of_house {
-    pub(crate) mod hosting {
-        pub(crate) fn add_to_waitlist() {}
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
     }
 }
 
 use restaurant::front_of_house::hosting;
 
-fn eat_at_restaurant() {
+pub fn eat_at_restaurant() {
     hosting::add_to_waitlist(); // ✅ Shorter path
 }
 // ANCHOR_END: use

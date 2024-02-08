@@ -66,15 +66,13 @@ unclear as to where `add_to_waitlist` is defined.
 
 On the other hand, when bringing in structs, enums, traits, and other items with `use`,
 it’s idiomatic to specify the full path. Listing 7-7 shows the idiomatic way
-to bring the core library’s `ArrayTrait` trait into the scope, allowing to call `new` method to create an array, and `append` method to add the value 1 in the array.
+to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
 
 ```rust
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_07/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-7: Bringing `ArrayTrait` into scope in an idiomatic way</span>
-
-Note that in this case, `use core::array::ArrayTrait;` is not required to bring `ArrayTrait` trait into scope, because `ArrayTrait` is included in the prelude and therefore automatically brought into scope.
+<span class="caption">Listing 7-7: Bringing `BitSize` trait into scope in an idiomatic way</span>
 
 There’s no strong reason behind this idiom: it’s just the convention that has
 emerged in the Rust community, and folks have gotten used to reading and writing Rust code this way.
@@ -95,8 +93,7 @@ local name, or _alias_, for the type. Listing 7-8 shows how you can rename an im
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_08/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-8: Renaming a trait when it’s brought into
-scope with the `as` keyword</span>
+<span class="caption">Listing 7-8: Renaming a trait when it’s brought into scope with the `as` keyword</span>
 
 Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier.
 
@@ -123,10 +120,10 @@ Here is an example where we import three structures from the same module:
 
 ## Re-exporting Names in Module Files
 
-When we bring a name into scope with the `pub use` keyword, the name available in
+When we bring a name into scope with the `use` keyword, the name available in
 the new scope can be imported as if it had been defined in that code’s scope.
 This technique is called _re-exporting_ because we’re bringing an item into scope,
-but also making that item available for others to bring into their scope.
+but also making that item available for others to bring into their scope, with the `pub` keyword.
 
 For example, let's re-export the `add_to_waitlist` function in the restaurant example:
 

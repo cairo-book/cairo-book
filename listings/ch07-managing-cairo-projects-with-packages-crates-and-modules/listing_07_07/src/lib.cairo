@@ -1,6 +1,6 @@
-use core::array::ArrayTrait;
+use core::num::traits::BitSize;
 
 fn main() {
-    let mut arr = ArrayTrait::new();
-    arr.append(1);
+    let u8_size: usize = BitSize::<u8>::bits();
+    println!("A u8 variable has {} bits", u8_size)
 }

@@ -83,7 +83,8 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo:crate}}
 ```
 
-The `pub mod garden;` line imports the module named _garden_. Using `pub` (or `pub(crate)`) is optional here, as the `main` function resides in the same module as `pub mod garden;` declaration. This line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
+The `pub mod garden;` line imports the module named _garden_. Using `pub` (or `pub(crate)`) is optional to run our program, as the `main` function resides in the same module as `pub mod garden;` declaration. Nevertheless, not declaring _garden_ `pub` will make it not accessible from any other package.
+This line tells the compiler to include the code it finds in _src/garden.cairo_, which is:
 
 <span class="filename">Filename: src/garden.cairo</span>
 
@@ -91,7 +92,7 @@ The `pub mod garden;` line imports the module named _garden_. Using `pub` (or `p
 pub mod vegetables;
 ```
 
-Here, we use `pub mod vegetables;` but we could have used `pub(crate) mod vegetables;` as well. This line means the code in _src/garden/vegetables.cairo_ is included too. That code is:
+Here, `pub mod vegetables;` means the code in _src/garden/vegetables.cairo_ is included too. That code is:
 
 ```rust,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
@@ -104,7 +105,12 @@ Now let’s get into the details of these rules and demonstrate them in action!
 
 ### Grouping Related Code in Modules
 
-_Modules_ let us organize code within a crate for readability and easy reuse.
+_Modules_ let us organize code within a crate for readability and easy reuse. 
+Modules also allow us to control the privacy of items, because code within a module
+is private by default. Private items are internal implementation details not
+available for outside use. We can choose to make modules and the items within
+them public, which exposes them to allow external code to use and depend on them.
+
 As an example, let’s write a library crate that provides the functionality of a
 restaurant. We’ll define the signatures of functions but leave their bodies
 empty to concentrate on the organization of the code, rather than the
@@ -132,10 +138,8 @@ define some modules and function signatures. Here’s the front of house section
 We define a module with the `mod` keyword followed by the name of the module
 (in this case, _front_of_house_). The body of the module then goes inside curly
 brackets. Inside modules, we can place other modules, as in this case with the
-modules _hosting_ and _serving_. These modules need to be public for the code they contain to be usable
-in _front_of_house_ module, and therefore in _src/lib.cairo_ file.
-The same applies for functions these modules contain. Modules can also hold definitions for other
-items, such as structs, enums, constants, traits, and functions. All of these need to be public with `pub` or `pub(crate)` to be accessible from any external module, or the crate in which they're defined, respectively.
+modules _hosting_ and _serving_. Modules can also hold definitions for other
+items, such as structs, enums, constants, traits, and functions.
 
 By using modules, we can group related definitions together and name why
 they’re related. Programmers using this code can navigate the code based on the
