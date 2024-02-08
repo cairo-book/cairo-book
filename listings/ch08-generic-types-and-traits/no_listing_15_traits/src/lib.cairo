@@ -1,17 +1,17 @@
 mod aggregator {
     //ANCHOR: trait
-    trait Summary<T> {
+    pub trait Summary<T> {
         fn summarize(self: @T) -> ByteArray;
     }
     //ANCHOR_END: trait
 
     //ANCHOR: impl
     #[derive(Drop, Clone)]
-    struct NewsArticle {
-        headline: ByteArray,
-        location: ByteArray,
-        author: ByteArray,
-        content: ByteArray,
+    pub struct NewsArticle {
+        pub headline: ByteArray,
+        pub location: ByteArray,
+        pub author: ByteArray,
+        pub content: ByteArray,
     }
 
     impl NewsArticleSummary of Summary<NewsArticle> {
@@ -23,11 +23,11 @@ mod aggregator {
     }
 
     #[derive(Drop, Clone)]
-    struct Tweet {
-        username: ByteArray,
-        content: ByteArray,
-        reply: bool,
-        retweet: bool,
+    pub struct Tweet {
+        pub username: ByteArray,
+        pub content: ByteArray,
+        pub reply: bool,
+        pub retweet: bool,
     }
 
     impl TweetSummary of Summary<Tweet> {
