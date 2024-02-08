@@ -1,5 +1,5 @@
 //TAG: does_not_compile
-
+// ANCHOR: generic
 // Specify generic type T between the angulars
 fn largest_list<T>(l1: Array<T>, l2: Array<T>) -> Array<T> {
     if l1.len() > l2.len() {
@@ -24,3 +24,6 @@ fn main() {
     // it is inferred by the compiler
     let l3 = largest_list(l1, l2);
 }
+// ANCHOR_END: generic
+
+

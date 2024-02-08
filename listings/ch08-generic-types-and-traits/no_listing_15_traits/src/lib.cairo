@@ -56,7 +56,7 @@ fn main() {
     }; // Tweet instantiation
 
     println!("New article available! {}", news.summarize());
-    println!("1 new tweet: {}", tweet.summarize());
+    println!("New tweet! {}", tweet.summarize());
 }
 //ANCHOR_END: main
 
