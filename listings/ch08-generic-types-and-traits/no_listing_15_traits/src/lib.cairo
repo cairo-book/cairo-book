@@ -6,7 +6,7 @@ mod aggregator {
     //ANCHOR_END: trait
 
     //ANCHOR: impl
-    #[derive(Drop, Clone)]
+    #[derive(Drop)]
     pub struct NewsArticle {
         pub headline: ByteArray,
         pub location: ByteArray,
@@ -16,13 +16,11 @@ mod aggregator {
 
     impl NewsArticleSummary of Summary<NewsArticle> {
         fn summarize(self: @NewsArticle) -> ByteArray {
-            format!(
-                "{} by {} ({})", self.headline.clone(), self.author.clone(), self.location.clone()
-            )
+            format!("{} by {} ({})", self.headline, self.author, self.location)
         }
     }
 
-    #[derive(Drop, Clone)]
+    #[derive(Drop)]
     pub struct Tweet {
         pub username: ByteArray,
         pub content: ByteArray,
@@ -32,7 +30,7 @@ mod aggregator {
 
     impl TweetSummary of Summary<Tweet> {
         fn summarize(self: @Tweet) -> ByteArray {
-            format!("{}: {}", self.username.clone(), self.content.clone())
+            format!("{}: {}", self.username, self.content)
         }
     }
 //ANCHOR_END: impl
