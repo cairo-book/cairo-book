@@ -38,7 +38,7 @@ Now, consider that we want to make a media aggregator library crate named `aggre
 
 <span class="caption">A `Summary` trait that consists of the behavior provided by a `summarize` method</span>
 
-Each type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that implements the Summary trait will have the method `summarize` defined with this signature exactly.
+Each type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that implements the `Summary` trait will have the method `summarize` defined with this signature exactly.
 
 A trait can have multiple methods in its body: the method signatures are listed one per line and each line ends in a semicolon.
 
