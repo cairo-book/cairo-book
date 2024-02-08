@@ -58,9 +58,9 @@
 
 ## Generic Data Types
 
-- [Generic Types](ch08-00-generic-types-and-traits.md)
+- [Generic Types and Traits](ch08-00-generic-types-and-traits.md)
 
-  - [Generic Functions](ch08-01-generic-data-types.md)
+  - [Generic Data Types](ch08-01-generic-data-types.md)
   - [Traits in Cairo](ch08-02-traits-in-cairo.md)
 
 ## Testing Cairo Programs

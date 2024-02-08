@@ -38,7 +38,7 @@ Now, consider that we want to make a media aggregator library crate named `aggre
 
 <span class="caption">A `Summary` trait that consists of the behavior provided by a `summarize` method</span>
 
-Each generic type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that has the Summary trait will have the method summarize defined with this signature exactly.
+Each type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that implements the Summary trait will have the method `summarize` defined with this signature exactly.
 
 A trait can have multiple methods in its body: the method signatures are listed one per line and each line ends in a semicolon.
 
@@ -78,14 +78,14 @@ types. Here’s an example of how a crate could use our `aggregator` crate:
 
 This code prints the following:
 
-```text
+```shell
 New article available! Cairo has become the most popular language for developers by Cairo Digger (Worldwide)
-
-1 new tweet: EliBenSasson: Crypto is full of short-term maximizing projects.
+New tweet! EliBenSasson: Crypto is full of short-term maximizing projects. 
  @Starknet and @StarkWareLtd are about long-term vision maximization.
+Run completed successfully, returning []
 ```
 
-Other crates that depend on the `aggregator` crate can also bring the `Summary`
+Other crates that depend on the _aggregator_ crate can also bring the `Summary`
 trait into scope to implement `Summary` on their own types.
 
 <!-- TODO: move traits as parameters here -->
@@ -115,7 +115,7 @@ because those types don’t implement `Summary`. -->
 
 <!-- TODO: Using trait bounds to conditionally implement methods -->
 
-## Implementing a trait, without writing its declaration.
+## Implementing a trait, without writing its declaration
 
 You can write implementations directly without defining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute within the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
 
@@ -127,58 +127,13 @@ In the aforementioned code, there is no need to manually define the trait. The c
 
 <!-- TODO: rework this section -->
 
-## Managing and using external trait implementations
+## Managing and using external trait or implementation
 
-To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use core::debug::PrintTrait;` to use the `print()` methods on supported types. All traits included in the prelude don't need to be explicitly imported and are freely accessible.
+To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
+If `CircleGeometry` implementation was in a separate module/file named _circle_, then to define `boundary` method on `Circle` struct, we'd need to import `ShapeGeometry` trait in _circle_ module.
 
-In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
-If `CircleGeometry` was in a separate module/file `circle` then to use `boundary` on `circ: Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`.
-
-If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant implementation is required.
+If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant trait or implementation is required.
 
 ```rust,noplayground
-use core::debug::PrintTrait;
-
-// struct Circle { ... } and struct Rectangle { ... }
-
-mod geometry {
-    use super::Rectangle;
-    trait ShapeGeometry<T> {
-        // ...
-    }
-
-    impl RectangleGeometry of ShapeGeometry<Rectangle> {
-        // ...
-    }
-}
-
-// Could be in a different file
-mod circle {
-    use super::geometry::ShapeGeometry;
-    use super::Circle;
-    impl CircleGeometry of ShapeGeometry<Circle> {
-        // ...
-    }
-}
-
-fn main() {
-    let rect = Rectangle { height: 5, width: 7 };
-    let circ = Circle { radius: 5 };
-    // Fails with this error
-    // Method `area` not found on... Did you import the correct trait and impl?
-    rect.area().print();
-    circ.area().print();
-}
-```
-
-To make it work, in addition to,
-
-```rust
-use geometry::ShapeGeometry;
-```
-
-you will need to import `CircleGeometry` explicitly. Note that you do not need to import `RectangleGeometry`, as it is defined in the same module as the imported trait, and thus is automatically resolved.
-
-```rust
-use circle::CircleGeometry
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_17_generic_traits/src/lib.cairo}}
 ```
