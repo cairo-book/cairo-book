@@ -22,7 +22,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
   say, you declare a “garden” module with `mod garden;`. The compiler will look
   for the module’s code in these places:
 
-  - Inline, within curly brackets that replace the semicolon following `mod garden;`.
+  - Inline, within curly brackets that replace the semicolon following `mod garden`.
 
     ```rust,noplayground
       // crate root file (src/lib.cairo)

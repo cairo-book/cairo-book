@@ -32,7 +32,7 @@ collectively referred to as the _module system_, include:
 - **Crates:** A tree of modules that corresponds to a single compilation unit.
   It has a root directory, and a root module defined at the _lib.cairo_ file under this directory.
 - **Modules** and **use:** Let you control the organization and scope of items.
-- **Paths:** A way of naming an item, such as a struct, function, or module
+- **Paths:** A way of naming an item, such as a struct, function, or module.
 
 In this chapter, we’ll cover all these features, discuss how they interact, and
 explain how to use them to manage scope. By the end, you should have a solid

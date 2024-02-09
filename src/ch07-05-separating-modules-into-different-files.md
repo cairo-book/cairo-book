@@ -40,9 +40,9 @@ Note that you only need to load a file using a `mod` declaration _once_ in your
 module tree. Once the compiler knows the file is part of the project (and knows
 where in the module tree the code resides because of where you’ve put the `mod`
 statement), other files in your project should refer to the loaded file’s code
-using a path to where it was declared, as covered in the [“Paths for Referring
-to an Item in the Module Tree”][paths]<!-- ignore --> section. In other words,
-`mod` is _not_ an “include” operation that you may have seen in other
+using a path to where it was declared, as covered in the [Paths for Referring
+to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section.
+In other words, `mod` is _not_ an “include” operation that you may have seen in other
 programming languages.
 
 Next, we’ll extract the `hosting` module to its own file. The process is a bit
