@@ -19,7 +19,7 @@ To illustrate this notion let's take back our example Listing 7-1 for the restau
 
 <span class="caption">Listing 7-2: Calling the `add_to_waitlist` function using absolute and relative paths</span>
 
-The `eat_at_restaurant function` is part of our library's public API, so we mark it with the `pub` keyword. In the [“Exposing Paths with the pub Keyword”](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md#exposing-paths-with-the-pub-keyword) section, we’ll go into more detail about `pub`.
+The `eat_at_restaurant function` is part of our library's public API, so we mark it with the `pub` keyword. In the [Exposing Paths with the pub Keyword](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md#exposing-paths-with-the-pub-keyword) section, we’ll go into more detail about `pub`.
 
 The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
@@ -73,7 +73,7 @@ Adding the `pub` keyword in front of `mod hosting;` makes the module public. Wit
 
 This is why we also make the `add_to_waitlist` function public by adding the `pub` keyword before its definition.
 
-Now the code will compile! To see why adding the `pub` keyword lets us use these paths in `add_to_waitlis`t` with respect to the privacy rules, let’s look at the absolute and the relative paths.
+Now the code will compile! To see why adding the `pub` keyword lets us use these paths in `add_to_waitlist` with respect to the privacy rules, let’s look at the absolute and the relative paths.
 
 In the absolute path, we start with the crate root, the root of our crate’s module tree. The `front_of_house` module is defined in the crate root. While `front_of_house` isn’t public, because the `eat_at_restaurant` function is defined in the same module as `front_of_house` (that is, `front_of_house` and `eat_at_restaurant` are siblings), we can refer to `front_of_house` from `eat_at_restaurant`. Next is the `hosting` module marked with `pub`. We can access the parent module of `hosting`, so we can access `hosting` itself. Finally, the `add_to_waitlist` function is marked with `pub` and we can access its parent module, so this function call works!
 
