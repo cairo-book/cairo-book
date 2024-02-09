@@ -1,2 +1,2 @@
-#[derive(Copy, Drop)]
-struct Asparagus {}
+#[derive(Drop, Debug)]
+pub struct Asparagus {}

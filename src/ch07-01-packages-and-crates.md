@@ -2,25 +2,33 @@
 
 ## What is a crate?
 
-A crate is the smallest amount of code that the Cairo compiler considers at a time. Even if you run `cairo-compile` rather than `scarb build` and pass a single source code file, the compiler considers that file to be a crate. Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.
+A crate is a subset of a package that is used in the actual Cairo compilation. This includes:
+- The package source code, identified by the package name and the crate root, which is the main entry point of the package.
+- A subset of the package metadata that identifies crate-level settings of the Cairo compiler, for example the `edition` field in the _Scarb.toml_ file.
+
+Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.
 
 ## What is the crate root?
 
-The crate root is the `lib.cairo` source file that the Cairo compiler starts from and makes up the root module of your crate (we’ll explain modules in depth in the [“Defining Modules to Control Scope”](./ch07-02-defining-modules-to-control-scope.md) section).
+The crate root is the _lib.cairo_ source file that the Cairo compiler starts from and makes up the root module of your crate. We’ll explain modules in depth in the [“Defining Modules to Control Scope”](./ch07-02-defining-modules-to-control-scope.md) section.
 
 ## What is a package?
 
-A cairo package is a bundle of one or more crates with a Scarb.toml file that describes how to build those crates. This enables the splitting of code into smaller, reusable parts and facilitates more structured dependency management.
+A cairo package is a directory (or equivalent) containing: 
+- A _Scarb.toml_ manifest file with a `[package]` section.
+- Associated source code.
+
+This definition implies that a package might contain other packages, with a corresponding _Scarb.toml_ file for each package.
 
 ## Creating a Package with Scarb
 
-You can create a new Cairo package using the scarb command-line tool. To create a new package, run the following command:
+You can create a new Cairo package using the Scarb command-line tool. To create a new package, run the following command:
 
 ```bash
 scarb new my_package
 ```
 
-This command will generate a new package directory named `my_package` with the following structure:
+This command will generate a new package directory named _my_package_ with the following structure:
 
 ```
 my_package/
@@ -29,17 +37,18 @@ my_package/
     └── lib.cairo
 ```
 
-- `src/` is the main directory where all the Cairo source files for the package will be stored.
-- `lib.cairo` is the default root module of the crate, which is also the main entry point of the package.
-- `Scarb.toml` is the package manifest file, which contains metadata and configuration options for the package, such as dependencies, package name, version, and authors. You can find documentation about it on the [scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest.html).
+- _src/_ is the main directory where all the Cairo source files for the package will be stored.
+- _lib.cairo_ is the default root module of the crate, which is also the main entry point of the package.
+- _Scarb.toml_ is the package manifest file, which contains metadata and configuration options for the package, such as dependencies, package name, version, and authors. You can find documentation about it on the [scarb reference](https://docs.swmansion.com/scarb/docs/reference/manifest.html).
 
 ```toml
 [package]
 name = "my_package"
 version = "0.1.0"
+edition = "2023_11"
 
 [dependencies]
 # foo = { path = "vendor/foo" }
 ```
 
-As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional `.cairo` files within the `src` directory or its subdirectories.
+As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional _.cairo_ files within the _src_ directory or its subdirectories.

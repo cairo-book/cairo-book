@@ -30,7 +30,7 @@ collectively referred to as the _module system_, include:
 
 - **Packages:** A Scarb feature that lets you build, test, and share crates
 - **Crates:** A tree of modules that corresponds to a single compilation unit.
-  It has a root directory, and a root module defined at the file `lib.cairo` under this directory.
+  It has a root directory, and a root module defined at the _lib.cairo_ file under this directory.
 - **Modules** and **use:** Let you control the organization and scope of items.
 - **Paths:** A way of naming an item, such as a struct, function, or module
 
