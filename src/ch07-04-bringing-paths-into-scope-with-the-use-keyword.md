@@ -15,10 +15,9 @@ scope of the `eat_at_restaurant` function so we only have to specify
 
 <span class="caption">Listing 7-4: Bringing a module into scope with `use`</span>
 
-Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use restaurant::front_of_house::hosting;` in the crate root, _hosting_ is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
+Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use restaurant::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
 
-Note that `use` only creates the shortcut for the particular scope in which the `use` occurs. Listing 7-5 moves the `eat_at_restaurant` function into a new
-child module named `customer`, which is then a different scope than the `use`
+Note that `use` only creates the shortcut for the particular scope in which the `use` occurs. Listing 7-5 moves the `eat_at_restaurant` function into a new child module named `customer`, which is then a different scope than the `use`
 statement, so the function body won’t compile:
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -27,11 +26,9 @@ statement, so the function body won’t compile:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_05/src/lib.cairo:wrong-path}}
 ```
 
-<span class="caption">Listing 7-5: A `use` statement only applies in the scope
-it’s in</span>
+<span class="caption">Listing 7-5: A `use` statement only applies in the scope it’s in</span>
 
-The compiler error shows that the shortcut no longer applies within the
-`customer` module:
+The compiler error shows that the shortcut no longer applies within the `customer` module:
 
 ```shell
 $ scarb build
@@ -64,9 +61,7 @@ calling the function makes it clear that the function isn’t locally defined
 while still minimizing repetition of the full path. The code in Listing 7-6 is
 unclear as to where `add_to_waitlist` is defined.
 
-On the other hand, when bringing in structs, enums, traits, and other items with `use`,
-it’s idiomatic to specify the full path. Listing 7-7 shows the idiomatic way
-to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
+On the other hand, when bringing in structs, enums, traits, and other items with `use`, it’s idiomatic to specify the full path. Listing 7-7 shows the idiomatic way to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
 
 ```rust
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_07/src/lib.cairo}}
@@ -136,9 +131,8 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 <span class="caption">Listing 7-10: Making a name available for any code to use from a new scope with `pub use`</span>
 
 Before this change, external code would have to call the `add_to_waitlist`
-function by using the path
-`restaurant::front_of_house::hosting::add_to_waitlist()`. Now that this `pub use`
-has re-exported the `hosting` module from the root module, external code
+function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`. 
+Now that this `pub use` has re-exported the `hosting` module from the root module, external code
 can now use the path `restaurant::hosting::add_to_waitlist()` instead.
 
 Re-exporting is useful when the internal structure of your code is different

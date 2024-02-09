@@ -26,7 +26,7 @@ _src/front_of_house.cairo_ file.
 Next, place the code that was in the curly brackets into a new file named
 _src/front_of_house.cairo_, as shown in Listing 7-12. The compiler knows to look
 in this file because it came across the module declaration in the crate root
-with the name `front_of_house`. Note that we chose here to use `pub(crate)` but we could also have used `pub`.
+with the name `front_of_house`.
 
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
@@ -56,7 +56,7 @@ declaration of the `hosting` module:
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
 ```rust,noplayground
-pub(crate) mod hosting;
+pub mod hosting;
 ```
 
 Then we create a _src/front_of_house_ directory and a file _hosting.cairo_ to
@@ -65,7 +65,7 @@ contain the definitions made in the `hosting` module:
 <span class="filename">Filename: src/front_of_house/hosting.cairo</span>
 
 ```rust,noplayground
-pub(crate) fn add_to_waitlist() {}
+pub fn add_to_waitlist() {}
 ```
 
 If we instead put _hosting.cairo_ in the _src_ directory, the compiler would
