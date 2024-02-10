@@ -1,21 +1,17 @@
-#[derive(Copy, Drop)]
-struct Rectangle {
-    height: u64,
-    width: u64,
+// Here T is an alias type which will be provided during implementation
+pub trait ShapeGeometry<T> {
+    fn boundary(self: T) -> u64;
+    fn area(self: T) -> u64;
 }
 
-#[derive(Copy, Drop)]
-struct Circle {
-    radius: u64
-}
+mod rectangle {
+    // Importing ShapeGeometry is required to implement this trait for Rectangle
+    use super::ShapeGeometry;
 
-mod geometry {
-    use super::Rectangle;
-
-    // Here T is an alias type which will be provided during implementation
-    pub(crate) trait ShapeGeometry<T> {
-        fn boundary(self: T) -> u64;
-        fn area(self: T) -> u64;
+    #[derive(Copy, Drop)]
+    pub struct Rectangle {
+        pub height: u64,
+        pub width: u64,
     }
 
     // Implementation RectangleGeometry passes in <Rectangle>
@@ -31,10 +27,13 @@ mod geometry {
 }
 
 mod circle {
-    // We need to import ShapeGeometry trait to be able to to define
-    // boundary method for Circle
-    use super::geometry::ShapeGeometry;
-    use super::Circle;
+    // Importing ShapeGeometry is required to implement this trait for Circle
+    use super::ShapeGeometry;
+
+    #[derive(Copy, Drop)]
+    pub struct Circle {
+        pub radius: u64
+    }
 
     // Implementation CircleGeometry passes in <Circle>
     // to implement the imported trait for that type
@@ -48,8 +47,8 @@ mod circle {
     }
 }
 
-use geometry::ShapeGeometry;
-use circle::CircleGeometry;
+use rectangle::Rectangle;
+use circle::Circle;
 
 fn main() {
     let rect = Rectangle { height: 5, width: 7 };
@@ -57,6 +56,6 @@ fn main() {
     println!("Rectangle boundary: {}", ShapeGeometry::boundary(rect)); //24
 
     let circ = Circle { radius: 5 };
-    println!("Circle area: {}", CircleGeometry::area(circ)); //78
-    println!("Circle boundary: {}", CircleGeometry::boundary(circ)); //31
+    println!("Circle area: {}", ShapeGeometry::area(circ)); //78
+    println!("Circle boundary: {}", ShapeGeometry::boundary(circ)); //31
 }
