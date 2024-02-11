@@ -67,7 +67,7 @@ Our two test cases are:
 
 The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'.
 
-Don't worry about the `#[cfg(test)]`, `#[test]` and `#[should_panic]` attributes for now. We'll explain in more detail their meanings in the next [Testing Cairo Programs](ch10-01-how-to-write-tests.md) section.
+Don't worry about `#[test]` and `#[should_panic]` attributes for now. We'll explain in more detail their meanings in the next [Testing Cairo Programs](ch10-01-how-to-write-tests.md) chapter.
 
 ### The `?` operator
 

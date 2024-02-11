@@ -1,5 +1,4 @@
-//TAG: tests_fail
-#[derive(Copy, Drop)]
+#[derive(Drop)]
 struct Guess {
     value: u64,
 }
@@ -8,13 +7,13 @@ trait GuessTrait {
     fn new(value: u64) -> Guess;
 }
 
-// ANCHOR:here
+// ANCHOR: here
 impl GuessImpl of GuessTrait {
     fn new(value: u64) -> Guess {
         if value < 1 {
-            panic!("Guess must be <= 100");
-        } else if value > 100 {
             panic!("Guess must be >= 1");
+        } else if value > 100 {
+            panic!("Guess must be <= 100");
         }
 
         Guess { value, }
@@ -26,6 +25,6 @@ impl GuessImpl of GuessTrait {
 fn greater_than_100() {
     GuessTrait::new(200);
 }
-// ANCHOR_END:here
+// ANCHOR_END: here
 
 
