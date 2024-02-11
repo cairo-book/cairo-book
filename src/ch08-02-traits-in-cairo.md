@@ -60,7 +60,7 @@ difference is that after `impl`, we put a name for the implementation,
 then use the `of` keyword, and then specify the name of the trait we are writing the implementation for.
 If the implementation is for a generic type, we place the generic type name in the angle brackets after the trait name.
 
-Note that we don't need to define the implementation as `pub` if the trait it implements is `pub` itself. Defining an implementation as `pub` only allows to access its path externally.
+Note that for the trait method to be accessible, there must be an implementation of that trait visible from the scope where the method is called. If the trait is `pub` and the implementation is not, and the implementation is not visible in the scope where the trait method is called, this will cause a compilation error.
 
 Within the `impl` block, we put the method signatures
 that the trait definition has defined. Instead of adding a semicolon after each
