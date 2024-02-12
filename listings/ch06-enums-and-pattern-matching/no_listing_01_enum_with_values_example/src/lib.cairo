@@ -1,4 +1,3 @@
-// TAG: ignore_fmt
 // ANCHOR: all
 // ANCHOR: enum_example
 #[derive(Drop)]
@@ -11,8 +10,8 @@ enum Direction {
 // ANCHOR_END: enum_example
 
 fn main() {
-// ANCHOR: here
-let direction = Direction::North(10);
+    // ANCHOR: here
+    let direction = Direction::North(10);
 // ANCHOR_END: here
 }
 // ANCHOR_END: all
