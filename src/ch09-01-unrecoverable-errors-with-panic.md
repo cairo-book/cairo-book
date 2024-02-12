@@ -41,7 +41,7 @@ Executing this program will yield the same error message as before. In that case
 
 Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as parameter. For example, the following line of code will successfully compile: 
 
-```rust
+```rust, noplayground
 panic!("the error for panic! macro is not limited to 31 characters anymore");
 ```
 
@@ -49,19 +49,19 @@ panic!("the error for panic! macro is not limited to 31 characters anymore");
 
 You can use the `nopanic` notation to indicate that a function will never panic. Only `nopanic` functions can be called in a function annotated as `nopanic`.
 
-Example:
+Here is an example:
 
 ```rust,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_04_nopanic/src/lib.cairo}}
 ```
 
-Wrong example:
+This function will always return `42` and is guaranteed to never panic. Conversely, the following function is not guaranteed to never panic:
 
 ```rust,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:wrong-nopanic}}
 ```
 
-If you write the following function that includes a function that may panic you will get the following error:
+If you try to compile this function that includes code that may panic, you will get the following error:
 
 ```shell
 error: Function is declared as nopanic but calls a function that may panic.

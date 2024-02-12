@@ -1,4 +1,4 @@
-//TAG: does_not_compile
+// TAGS: does_not_compile, ignore_fmt
 // ANCHOR: overflow
 fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;
 // ANCHOR_END: overflow

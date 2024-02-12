@@ -1,7 +1,7 @@
-//TAG: tests_fail
+// TAG: tests_fail
+// ANCHOR: exploration-and-another
 #[cfg(test)]
 mod tests {
-    // ANCHOR: exploration-and-another
     #[test]
     fn exploration() {
         let result = 2 + 2;
@@ -13,5 +13,7 @@ mod tests {
         let result = 2 + 2;
         assert!(result == 6, "Make this test fail");
     }
-// ANCHOR_END: exploration-and-another
 }
+// ANCHOR_END: exploration-and-another
+
+
