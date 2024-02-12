@@ -1,26 +1,34 @@
-fn find_value_recursive(arr: @Array<felt252>, value: felt252, index: usize) -> Option<usize> {
-    if index >= arr.len() {
-        return Option::None;
-    }
+fn find_value_recursive(mut arr: Span<felt252>, value: felt252, index: usize) -> Option<usize> {
+    let mut found: Option<usize> = Option::None;
 
-    if *arr.at(index) == value {
-        return Option::Some(index);
-    }
+    match arr.pop_front() {
+        Option::Some(index_value) => {
+            if (*index_value == value) {
+                found = Option::Some(index)
+            } else {
+                find_value_recursive(arr, value, index + 1);
+            }
+        },
+        Option::None => {},
+    };
 
-    find_value_recursive(arr, value, index + 1)
+    found
 }
 
-fn find_value_iterative(arr: @Array<felt252>, value: felt252) -> Option<usize> {
+fn find_value_iterative(mut arr: Span<felt252>, value: felt252) -> Option<usize> {
     let length = arr.len();
     let mut index = 0;
     let mut found: Option<usize> = Option::None;
 
     while index < length {
-        if *arr.at(index) == value {
-            found = Option::Some(index);
-            break;
+        match arr.pop_front() {
+            Option::Some(index_value) => if (*index_value == value) {
+                found = Option::Some(index)
+            },
+            Option::None => {},
         }
         index += 1;
     };
-    return found;
+
+    found
 }
