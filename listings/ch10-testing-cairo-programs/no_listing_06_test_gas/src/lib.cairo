@@ -11,6 +11,7 @@ fn sum_n(n: usize) -> usize {
 #[cfg(test)]
 mod test {
     use super::sum_n;
+
     #[test]
     #[available_gas(2000000)]
     fn test_sum_n() {
