@@ -37,14 +37,14 @@ mod tests2 {
     use super::Rectangle;
     use super::RectangleTrait;
 
-// ANCHOR: test2
-#[test]
-fn smaller_cannot_hold_larger() {
-    let larger = Rectangle { height: 7, width: 8, };
-    let smaller = Rectangle { height: 1, width: 5, };
+    // ANCHOR: test2
+    #[test]
+    fn smaller_cannot_hold_larger() {
+        let larger = Rectangle { height: 7, width: 8, };
+        let smaller = Rectangle { height: 1, width: 5, };
 
-    assert!(!smaller.can_hold(@larger), "rectangle cannot hold");
-}
+        assert!(!smaller.can_hold(@larger), "rectangle cannot hold");
+    }
 // ANCHOR_END: test2
 }
 
