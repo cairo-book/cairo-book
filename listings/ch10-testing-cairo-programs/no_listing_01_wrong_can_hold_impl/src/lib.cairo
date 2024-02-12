@@ -15,3 +15,5 @@ impl RectangleImpl of RectangleTrait {
     }
 }
 // ANCHOR_END: wrong_impl
+
+
