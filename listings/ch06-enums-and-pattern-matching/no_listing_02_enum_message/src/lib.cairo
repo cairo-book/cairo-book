@@ -19,7 +19,7 @@ impl ProcessingImpl of Processing {
         match self {
             Message::Quit => { println!("quitting") },
             Message::Echo(value) => { println!("echoing {}", value) },
-            Message::Move((x, y)) => { println!("moving") },
+            Message::Move((x, y)) => { println!("moving from {} to {}", x, y) },
         }
     }
 }
