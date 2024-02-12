@@ -54,7 +54,7 @@ Here, it accepts two `u128` integers, `a` and `b`, and returns an `Option<u128>`
 Let's take another example:
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/listing_01/src/lib.cairo:function}}
+{{#include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:function}}
 ```
 
 In this example, the `parse_u8` function takes a `felt252` and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`.
@@ -62,7 +62,7 @@ In this example, the `parse_u8` function takes a `felt252` and tries to convert 
 Our two test cases are:
 
 ```rust,noplayground
-{{#rustdoc_include ../listings/ch09-error-handling/listing_01/src/lib.cairo:tests}}
+{{#rustdoc_include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:tests}}
 ```
 
 Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail its meaning in the next [Testing Cairo Programs](ch10-01-how-to-write-tests.md) chapter. 
@@ -83,7 +83,7 @@ The `?` operator is useful when you want to handle errors implicitly and let the
 Here is an example:
 
 ```rust,noplayground
-{{#include ../listings/ch09-error-handling/listing_02/src/lib.cairo:function}}
+{{#include ../listings/ch09-error-handling/listing_09_02/src/lib.cairo:function}}
 ```
 
 We can see that `do_something_with_parse_u8` function takes a `felt252` value as input and calls `parse_u8` function. The `?` operator is used to propagate the error, if any, or unwrap the successful value.
@@ -91,7 +91,7 @@ We can see that `do_something_with_parse_u8` function takes a `felt252` value as
 And with a little test case:
 
 ```rust,noplayground
-{{#rustdoc_include ../listings/ch09-error-handling/listing_02/src/lib.cairo:tests}}
+{{#rustdoc_include ../listings/ch09-error-handling/listing_09_02/src/lib.cairo:tests}}
 ```
 
 The console will print the error "Invalid Integer".

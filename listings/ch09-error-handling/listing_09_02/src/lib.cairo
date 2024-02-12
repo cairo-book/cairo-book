@@ -18,15 +18,15 @@ fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {
 #[cfg(test)]
 mod tests {
     use super::do_something_with_parse_u8;
-    //ANCHOR: tests
-    #[test]
-    fn test_function_2() {
-        let number: felt252 = 258;
-        match do_something_with_parse_u8(number) {
-            Result::Ok(value) => println!("Result: {}", value),
-            Result::Err(e) => println!("Error: {}", e),
-        }
+//ANCHOR: tests
+#[test]
+fn test_function_2() {
+    let number: felt252 = 258;
+    match do_something_with_parse_u8(number) {
+        Result::Ok(value) => println!("Result: {}", value),
+        Result::Err(e) => println!("Error: {}", e),
     }
+}
 //ANCHOR_END: tests
 }
 

@@ -60,7 +60,7 @@ Let’s start to customize the test to our own needs. First change the name of t
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_01/src/lib.cairo:exploration}}
 ```
 
@@ -261,6 +261,12 @@ For example, if we’re testing a function that is guaranteed to change its inpu
 in some way, but the way in which the input is changed depends on the day of
 the week that we run our tests, the best thing to assert might be that the
 output of the function is not equal to the input.
+
+Here is a simple example comparing two structs, showing how tu use `assert_eq!` and `assert_ne!` macros:
+
+```rust, noplayground
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_10_assert_eq_ne_macro/src/lib.cairo}}
+```
 
 Under the surface, `assert_eq!` and `assert_ne!` macros use the operators
 `==` and `!=`, respectively. When the assertions fail, these macros print their
