@@ -1,13 +1,17 @@
 # Generic Data Types
 
-We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo we can use generics when defining functions, structs, enums, traits, implementations and methods! In this chapter we are going to take a look at how to effectively use generic types with all of them.
+We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo, we can use generics when defining functions, structs, enums, traits, implementations and methods. In this chapter we are going to take a look at how to effectively use generic types with all of them.
+
+Generics allow us to write reusable code that works with many types, thus avoiding code duplication. while enhancing code maintainability.
 
 ## Generic Functions
+
+Making a function generic means it can operate on different types, avoiding the need for multiple, type-specific implementations. This leads to significant code reduction and increases the flexibility of the code.
 
 When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two `Array` of items, will return the largest one. If we need to perform this operation for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.
 
 ```rust
-{{#include ../listings/ch08-generic-types-and-traits/no_listing_01_missing_tdrop/src/lib.cairo}}
+{{#include ../listings/ch08-generic-types-and-traits/no_listing_01_missing_tdrop/src/lib.cairo:generic}}
 ```
 
 The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifying in the function signature of `largest_list` that `T` must implement the drop trait. The correct function definition of `largest_list` is as follows:
@@ -25,7 +29,7 @@ When defining generic types, it is useful to have information about them. Knowin
 Imagine that we want, given a list of elements of some generic type `T`, to find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
 
 ```rust
-{{#include ../listings/ch08-generic-types-and-traits/no_listing_03_missing_tcopy/src/lib.cairo}}
+{{#include ../listings/ch08-generic-types-and-traits/no_listing_03_missing_tcopy/src/lib.cairo:missing-tcopy}}
 ```
 
 The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes a snapshot of an `Array<T>` as a parameter and returns a copy of the smallest element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we don't require to implement the `Drop` trait for `T` as well. Why it does not compile then?
@@ -84,7 +88,7 @@ As we did with structs, we can define enums to hold generic data types in their 
 
 The `Option<T>` enum is generic over a type `T` and has two variants: `Some`, which holds one value of type `T` and `None` that doesn't hold any value. By using the `Option<T>` enum, it is possible for us to express the abstract concept of an optional value and because the value has a generic type `T` we can use this abstraction with any type.
 
-Enums can use multiple generic types as well, like definition of the `Result<T, E>` enum that the core library provides:
+Enums can use multiple generic types as well, like the definition of the `Result<T, E>` enum that the core library provides:
 
 ```rust,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_10_result/src/lib.cairo}}
@@ -100,7 +104,7 @@ We can implement methods on structs and enums, and use the generic types in thei
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_11_generic_methods/src/lib.cairo}}
 ```
 
-We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns a snapshot of the field `balance` from `Wallet`. Then we give an implementation for the trait in `WalletImpl<T>`. Note that you need to include a generic type in both definitions of the trait and the implementation.
+We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns the value of the field `balance` from `Wallet`. Then we give an implementation for the trait in `WalletImpl<T>`. Note that you need to include a generic type in both definitions of the trait and the implementation.
 
 We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
 
@@ -123,7 +127,7 @@ Next we are going to naively define the mixup trait and implementation:
 
 ```
 
-We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` methods which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As `mixup` signature specify, both `self` and `other` are getting dropped at the end of the function, which is the reason for this code not to compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait in order for the compiler to know how to drop instances of `Wallet<T, U>`. The updated implementation is as follow:
+We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` method which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As `mixup` signature specify, both `self` and `other` are getting dropped at the end of the function, which is the reason for this code not to compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait in order for the compiler to know how to drop instances of `Wallet<T, U>`. The updated implementation is as follow:
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_14_compiling/src/lib.cairo:trait_impl}}

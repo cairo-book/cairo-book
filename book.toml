@@ -14,10 +14,6 @@ after = ["links"]
 [preprocessor.gettext]
 after = ["cairo"]
 
-[preprocessor.last-changed]
-command = "mdbook-last-changed"
-renderer = ["html"]
-
 [output.html]
 git-repository-url = "https://github.com/cairo-book/cairo-book.github.io"
 edit-url-template = "https://github.com/cairo-book/cairo-book.github.io/edit/main/{path}"

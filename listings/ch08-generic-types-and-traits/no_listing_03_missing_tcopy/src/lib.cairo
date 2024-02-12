@@ -1,6 +1,6 @@
 //TAG: does_not_compile
-
-// Given a list of T get the smallest one.
+//ANCHOR: missing-tcopy
+// Given a list of T get the smallest one
 // The PartialOrd trait implements comparison operations for T
 fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
     // This represents the smallest element through the iteration
@@ -29,3 +29,6 @@ fn main() {
     let s = smallest_element(@list);
     assert!(s == 3);
 }
+//ANCHOR_END: missing-tcopy
+
+

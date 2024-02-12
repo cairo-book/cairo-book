@@ -1,38 +1,36 @@
 mod aggregator {
     //ANCHOR: trait
-    trait Summary<T> {
+    pub trait Summary<T> {
         fn summarize(self: @T) -> ByteArray;
     }
     //ANCHOR_END: trait
 
     //ANCHOR: impl
-    #[derive(Drop, Clone)]
-    struct NewsArticle {
-        headline: ByteArray,
-        location: ByteArray,
-        author: ByteArray,
-        content: ByteArray,
+    #[derive(Drop)]
+    pub struct NewsArticle {
+        pub headline: ByteArray,
+        pub location: ByteArray,
+        pub author: ByteArray,
+        pub content: ByteArray,
     }
 
     impl NewsArticleSummary of Summary<NewsArticle> {
         fn summarize(self: @NewsArticle) -> ByteArray {
-            format!(
-                "{} by {} ({})", self.headline.clone(), self.author.clone(), self.location.clone()
-            )
+            format!("{} by {} ({})", self.headline, self.author, self.location)
         }
     }
 
-    #[derive(Drop, Clone)]
-    struct Tweet {
-        username: ByteArray,
-        content: ByteArray,
-        reply: bool,
-        retweet: bool,
+    #[derive(Drop)]
+    pub struct Tweet {
+        pub username: ByteArray,
+        pub content: ByteArray,
+        pub reply: bool,
+        pub retweet: bool,
     }
 
     impl TweetSummary of Summary<Tweet> {
         fn summarize(self: @Tweet) -> ByteArray {
-            format!("{}: {}", self.username.clone(), self.content.clone())
+            format!("{}: {}", self.username, self.content)
         }
     }
 //ANCHOR_END: impl
@@ -56,7 +54,7 @@ fn main() {
     }; // Tweet instantiation
 
     println!("New article available! {}", news.summarize());
-    println!("1 new tweet: {}", tweet.summarize());
+    println!("New tweet! {}", tweet.summarize());
 }
 //ANCHOR_END: main
 

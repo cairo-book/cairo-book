@@ -7,7 +7,7 @@ struct NewsArticle {
 }
 
 //ANCHOR: trait
-trait Summary {
+pub trait Summary {
     fn summarize(self: @NewsArticle) -> ByteArray;
 }
 //ANCHOR_END: trait

@@ -18,11 +18,8 @@ For example, let’s say we have a struct `NewsArticle` that holds a news story 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_14_simple_trait/src/lib.cairo:trait}}
 ```
 
-<!-- TODO add `pub` visibility -->
-
 Here, we declare a trait using the trait keyword and then the trait’s name, which is `Summary` in this case.
-
-<!-- We’ve also declared the trait as pub so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.  -->
+We’ve also declared the trait as `pub` so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.
 
 Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
 
@@ -30,7 +27,7 @@ Inside the curly brackets, we declare the method signatures that describe the be
 
 As the trait is not generic, the `self` parameter is not generic either and is of type `@NewsArticle`. This means that the `summarize` method can only be called on instances of `NewsArticle`.
 
-Now, consider that we want to make a media aggregator library crate named `aggregator` that can display summaries of data that might be stored in a `NewsArticle` or `Tweet` instance. To do this, we need a summary from each type, and we’ll request that summary by calling a summarize method on an instance. By defining the `Summary` trait on generic type `T`, we can implement the `summarize` method on any type we want to be able to summarize.
+Now, consider that we want to make a media aggregator library crate named _aggregator_ that can display summaries of data that might be stored in a `NewsArticle` or `Tweet` instance. To do this, we need a summary from each type, and we’ll request that summary by calling a summarize method on an instance of that type. By defining the `Summary` trait on generic type `T`, we can implement the `summarize` method on any type we want to be able to summarize.
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:trait}}
@@ -38,19 +35,21 @@ Now, consider that we want to make a media aggregator library crate named `aggre
 
 <span class="caption">A `Summary` trait that consists of the behavior provided by a `summarize` method</span>
 
-Each generic type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that has the Summary trait will have the method summarize defined with this signature exactly.
+Each type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that implements the `Summary` trait will have the method `summarize` defined with this signature exactly.
 
 A trait can have multiple methods in its body: the method signatures are listed one per line and each line ends in a semicolon.
 
 ## Implementing a Trait on a type
 
 Now that we’ve defined the desired signatures of the `Summary` trait’s methods,
-we can implement it on the types in our media aggregator. The next code snippet shows
+we can implement it on the types in our media aggregator. The following code shows
 an implementation of the `Summary` trait on the `NewsArticle` struct that uses
 the headline, the author, and the location to create the return value of
 `summarize`. For the `Tweet` struct, we define `summarize` as the username
 followed by the entire text of the tweet, assuming that tweet content is
 already limited to 280 characters.
+
+<!-- TODO: standardize Listing quotations - none in this chapter, systematic in Modules chapter -->
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:impl}}
@@ -60,6 +59,8 @@ Implementing a trait on a type is similar to implementing regular methods. The
 difference is that after `impl`, we put a name for the implementation,
 then use the `of` keyword, and then specify the name of the trait we are writing the implementation for.
 If the implementation is for a generic type, we place the generic type name in the angle brackets after the trait name.
+
+Note that for the trait method to be accessible, there must be an implementation of that trait visible from the scope where the method is called. If the trait is `pub` and the implementation is not, and the implementation is not visible in the scope where the trait method is called, this will cause a compilation error.
 
 Within the `impl` block, we put the method signatures
 that the trait definition has defined. Instead of adding a semicolon after each
@@ -78,17 +79,16 @@ types. Here’s an example of how a crate could use our `aggregator` crate:
 
 This code prints the following:
 
-```text
+```shell
 New article available! Cairo has become the most popular language for developers by Cairo Digger (Worldwide)
-
-1 new tweet: EliBenSasson: Crypto is full of short-term maximizing projects.
+New tweet! EliBenSasson: Crypto is full of short-term maximizing projects. 
  @Starknet and @StarkWareLtd are about long-term vision maximization.
+Run completed successfully, returning []
 ```
 
-Other crates that depend on the `aggregator` crate can also bring the `Summary`
-trait into scope to implement `Summary` on their own types.
+Other crates that depend on the _aggregator_ crate can also bring the `Summary` trait into scope to implement `Summary` on their own types.
 
-<!-- TODO: move traits as parameters here -->
+<!-- TODO: NOT AVAILABLE IN CAIRO FOR NOW move traits as parameters here -->
 <!-- ## Traits as parameters
 
 Now that you know how to define and implement traits, we can explore how to use
@@ -109,13 +109,13 @@ and pass in any instance of `NewsArticle` or `Tweet`. Code that calls the
 function with any other type, such as a `String` or an `i32`, won’t compile
 because those types don’t implement `Summary`. -->
 
-<!-- TODO trait bound syntax -->
+<!-- TODO NOT AVAILABLE IN CAIRO FOR NOW trait bound syntax -->
 
-<!-- TODO multiple trait bounds -->
+<!-- TODO NOT AVAILABLE IN CAIRO FOR NOW multiple trait bounds -->
 
-<!-- TODO: Using trait bounds to conditionally implement methods -->
+<!-- TODO NOT AVAILABLE IN CAIRO FOR NOW Using trait bounds to conditionally implement methods -->
 
-## Implementing a trait, without writing its declaration.
+## Implementing a trait, without writing its declaration
 
 You can write implementations directly without defining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute within the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
 
@@ -125,60 +125,15 @@ You can write implementations directly without defining the corresponding trait.
 
 In the aforementioned code, there is no need to manually define the trait. The compiler will automatically handle its definition, dynamically generating and updating it as new functions are introduced.
 
-<!-- TODO: rework this section -->
+## Managing and using external trait
 
-## Managing and using external trait implementations
+To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
+If `CircleGeometry` implementation was in a separate module/file named _circle_, then to define `boundary` method on `Circle` struct, we'd need to import `ShapeGeometry` trait in _circle_ module.
 
-To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In the code above we imported `PrintTrait` from `debug` with `use core::debug::PrintTrait;` to use the `print()` methods on supported types. All traits included in the prelude don't need to be explicitly imported and are freely accessible.
-
-In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
-If `CircleGeometry` was in a separate module/file `circle` then to use `boundary` on `circ: Circle`, we'd need to import `CircleGeometry` in addition to `ShapeGeometry`.
-
-If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant implementation is required.
+If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant trait or implementation is required.
 
 ```rust,noplayground
-use core::debug::PrintTrait;
-
-// struct Circle { ... } and struct Rectangle { ... }
-
-mod geometry {
-    use super::Rectangle;
-    trait ShapeGeometry<T> {
-        // ...
-    }
-
-    impl RectangleGeometry of ShapeGeometry<Rectangle> {
-        // ...
-    }
-}
-
-// Could be in a different file
-mod circle {
-    use super::geometry::ShapeGeometry;
-    use super::Circle;
-    impl CircleGeometry of ShapeGeometry<Circle> {
-        // ...
-    }
-}
-
-fn main() {
-    let rect = Rectangle { height: 5, width: 7 };
-    let circ = Circle { radius: 5 };
-    // Fails with this error
-    // Method `area` not found on... Did you import the correct trait and impl?
-    rect.area().print();
-    circ.area().print();
-}
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_17_generic_traits/src/lib.cairo}}
 ```
 
-To make it work, in addition to,
-
-```rust
-use geometry::ShapeGeometry;
-```
-
-you will need to import `CircleGeometry` explicitly. Note that you do not need to import `RectangleGeometry`, as it is defined in the same module as the imported trait, and thus is automatically resolved.
-
-```rust
-use circle::CircleGeometry
-```
+Note that in this example, `CircleGeometry` and `RectangleGeometry` implementations don't need to be declared as `pub`. Indeed, `ShapeGeometry` trait, which is public, is used to print the result in the `main` function. The compiler will find the appropriate implementation for the `ShapeGeometry` public trait, regardless of the implementation visibility.
