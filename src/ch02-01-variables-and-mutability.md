@@ -16,8 +16,8 @@ code with the following code, which won’t compile just yet:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/src/lib.cairo}}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/src/lib.cairo:main}}
 
 ```
 
@@ -196,8 +196,8 @@ Shadowing thus spares us from having to come up with different names, such as `x
 and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try to use
 `mut` for this, as shown here, we’ll get a compile-time error:
 
-```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo}}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo:main}}
 ```
 
 The error says we were expecting a `u64` (the original type) but we got a different type:

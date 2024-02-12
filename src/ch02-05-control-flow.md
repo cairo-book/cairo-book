@@ -29,7 +29,7 @@ Run completed successfully, returning []
 Let’s try changing the value of `number` to a value that makes the condition `true` to see what happens:
 
 ```rust, noplayground
-    let number = 5;
+let number = 5;
 ```
 
 ```shell
@@ -43,7 +43,7 @@ It’s also worth noting that the condition in this code must be a `bool`. If th
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_24_bis_if_not_bool/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_bis_if_not_bool/src/lib.cairo:main}}
 ```
 
 The `if` condition evaluates to a value of 3 this time, and Cairo throws an error:

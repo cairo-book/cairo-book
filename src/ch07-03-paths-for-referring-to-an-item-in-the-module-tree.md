@@ -66,7 +66,7 @@ Let’s return to the previous error that told us the `hosting` module and the `
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_03_pub/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_03_pub/src/lib.cairo:all}}
 ```
 
 Adding the `pub` keyword in front of `mod hosting;` makes the module public. With this change, if we can access `front_of_house`, we can access `hosting`. But the contents of `hosting` are still private; making the module public doesn’t make its contents public. The `pub` keyword on a module only lets code in its ancestor modules refer to it, not access its inner code. Because modules are containers, there’s not much we can do by only making the module public; we need to go further and choose to make one or more of the items within the module public as well.

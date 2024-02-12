@@ -1,4 +1,5 @@
-//TAG: ignore_fmt
+// TAG: ignore_fmt
+// ANCHOR: all
 #[derive(Drop)]
 struct A {}
 
@@ -33,3 +34,4 @@ fn takes_and_gives_back(some_a: A) -> A { // some_a comes into scope
                                           // moves ownership to the calling
                                           // function
 }
+// ANCHOR_END: all

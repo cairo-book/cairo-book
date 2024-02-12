@@ -176,7 +176,7 @@ line as the function declaration, adding one space in between.
 The body of the `main` function holds the following code:
 
 ```rust,noplayground
-    println!("Hello, World!");
+println!("Hello, World!");
 ```
 
 This line does all the work in this little program: it prints text to the

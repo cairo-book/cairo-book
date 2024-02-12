@@ -1,7 +1,6 @@
 //TAG: does_not_compile
 // ANCHOR: all
 // ANCHOR: no_method
-
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,

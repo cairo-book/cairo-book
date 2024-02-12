@@ -9,7 +9,7 @@ scope of the `eat_at_restaurant` function so we only have to specify
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_04/src/lib.cairo:use}}
 ```
 
@@ -22,7 +22,7 @@ statement, so the function body won’t compile:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_05/src/lib.cairo:wrong-path}}
 ```
 
@@ -47,7 +47,7 @@ the `add_to_waitlist` function to achieve the same result, as in Listing 7-6.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_06/src/lib.cairo:unidiomatic-path}}
 ```
 
@@ -124,7 +124,7 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_10/src/lib.cairo:reexporting}}
 ```
 
@@ -148,14 +148,14 @@ the library and programmers calling the library.
 
 You might need to use external packages to leverage the functionality provided by the community. Scarb allows you to use dependencies by cloning packages from their Git repositories. To use an external package in your project with Scarb, simply declare the Git repository URL of the dependency you want to add in a dedicated `[dependencies]` section in your _Scarb.toml_ configuration file. Note that the URL might correspond to the main branch, or any specific commit, branch or tag. For this, you will have to pass an extra `rev`, `branch`, or `tag` field, respectively. For example, the following code imports the main branch of _alexandria_math_ crate from _alexandria_ package:
 
-```rust
+```rust, noplayground
 [dependencies]
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
 ```
 
 while the following code imports a specific branch (which is deprecated and should not be used):
 
-```rust
+```rust, noplayground
 [dependencies]
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git", branch = "cairo-v2.3.0-rc0" }
 ```

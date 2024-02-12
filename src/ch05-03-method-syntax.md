@@ -117,7 +117,6 @@ $ scarb cairo-run
 Can rect1 hold rect2? true
 Can rect1 hold rect3? false
 Run completed successfully, returning []
-
 ```
 
 We know we want to define a method, so it will be within the `trait
@@ -136,7 +135,7 @@ blocks from Listing 5-11, shown in Listing 5-13.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_12/src/lib.cairo:trait_impl}}
 ```
 

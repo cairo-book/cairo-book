@@ -44,7 +44,7 @@ that we pass `@arr1` into `calculate_length` and, in its definition, we take `@A
 
 Let’s take a closer look at the function call here:
 
-```rust
+```rust, noplayground
 let second_length = calculate_length(@arr1); // Calculate the current length of the array
 ```
 
@@ -81,7 +81,7 @@ Listing 4-4. Spoiler alert: it doesn’t work!
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,does_not_compile
-{{#include ../listings/ch04-understanding-ownership/listing_04_04/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_04_04/src/lib.cairo:all}}
 ```
 
 <span class="caption">Listing 4-4: Attempting to modify a snapshot value</span>

@@ -1,4 +1,5 @@
-//TAG: does_not_compile
+// TAGS: does_not_compile, ignore_fmt
+// ANCHOR: all
 struct A {
     dict: Felt252Dict<u128>
 }
@@ -6,3 +7,5 @@ struct A {
 fn main() {
     A { dict: Default::default() };
 }
+// ANCHOR_END: all
+

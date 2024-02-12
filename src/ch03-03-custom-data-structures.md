@@ -61,8 +61,6 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 The implementation, with all restrictions in place, would be as follow:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:imports}}
-
 {{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
 ```
 
@@ -94,7 +92,7 @@ It should:
 
 We can define this interface in Cairo like:
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:trait}}
 ```
 
@@ -111,7 +109,7 @@ pointer to allow using any type `T` in our data structure, as explained in the
 [Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively)
 section:
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 
@@ -132,7 +130,7 @@ The implementation of the rest of the interface is straightforward. The
 implementation of all the methods defined in our interface can be done as follow
 :
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
 ```
 
@@ -156,7 +154,7 @@ Let us define what operations we need to create a stack :
 
 From these specifications we can define the following interface :
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:trait}}
 ```
 
@@ -168,13 +166,13 @@ length of the stack to iterate over it.
 
 The Stack struct is defined as:
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:struct}}
 ```
 
 Next, let's see how our main functions `push` and `pop` are implemented.
 
-```rust
+```rust, noplayground
 {{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
 ```
 

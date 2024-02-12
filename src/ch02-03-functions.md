@@ -137,7 +137,7 @@ Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
 ```rust, noplayground
-{{#include ../listings/ch02-common-programming-concepts/no_listing_18_statements_dont_return_values/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_18_statements_dont_return_values/src/lib.cairo:main}}
 ```
 
 When you run this program, the error you’ll get looks like this:
@@ -246,8 +246,8 @@ Running this code will print `x = 6`. But if we place a
 semicolon at the end of the line containing `x + 1`, changing it from an
 expression to a statement, we’ll get an error:
 
-```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_invalid/src/lib.cairo}}
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_invalid/src/lib.cairo:main}}
 ```
 
 ```shell

@@ -37,7 +37,7 @@ As a first example of the linear type system, we’ll look at the _scope_ of som
 scope is the range within a program for which an item is valid. Take the
 following variable:
 
-```rust,noplayground
+```rust, noplayground
 let s = 'hello';
 ```
 
@@ -45,7 +45,7 @@ The variable `s` refers to a short string. The variable is valid from the point 
 which it’s declared until the end of the current _scope_. Listing 4-1 shows a
 program with comments annotating where the variable `s` would be valid.
 
-```rust
+```rust, noplayground
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing_04_01/src/lib.cairo:here}}
 ```
 
@@ -66,14 +66,14 @@ Arrays are an example of a complex type that is moved when passing it to another
 Here is a short reminder of what an array looks like:
 
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no_listing_01_array/src/lib.cairo:2:4}}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no_listing_01_array/src/lib.cairo:array}}
 ```
 
 How does the type system ensure that the Cairo program never tries to write to the same memory cell twice?
 Consider the following code, where we try to remove the front of the array twice:
 
 ```rust,does_not_compile
-{{#include ../listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:all}}
 ```
 
 In this case, we try to pass the same value (the array in the `arr` variable) to both function calls. This means our code tries to remove the first element twice, which would try to write to the same memory cell twice - which is forbidden by the Cairo VM, leading to a runtime error.
@@ -117,7 +117,7 @@ You may have noticed that the `Point` type in the previous example also implemen
 For example, the following code will not compile, because the struct `A` is not moved or destroyed before it goes out of scope:
 
 ```rust,does_not_compile
-{{#include ../listings/ch04-understanding-ownership/no_listing_04_no_drop_derive_fails/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/no_listing_04_no_drop_derive_fails/src/lib.cairo:all}}
 ```
 
 However, types that implement the `Drop` trait are automatically destroyed when going out of scope. This destruction does nothing, it is a no-op - simply a hint to the compiler that this type can safely be destroyed once it's no longer useful. We call this "dropping" a value.
@@ -137,7 +137,7 @@ As said earlier, dictionaries in Cairo are types that must be "squashed" when de
 As such, the following example will not compile:
 
 ```rust,does_not_compile
-{{#include ../listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo:all}}
 ```
 
 If you try to run this code, you will get a compile-time error:
@@ -179,7 +179,7 @@ function that returns some value, with similar annotations as those in Listing
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_04_02/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_04_02/src/lib.cairo:all}}
 ```
 
 <span class="caption">Listing 4-2: Moving return values</span>

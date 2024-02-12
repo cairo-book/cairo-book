@@ -58,7 +58,7 @@ For each time we interact with a `Felt252Dict<T>`, a new `Entry<T>` will be regi
 
 The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per `Felt252Dict<T>` interaction. Let's show an example of this using the `balances` dictionary from the previous section and inserting the users 'Alex' and 'Maria':
 
-```rust
+```rust, noplayground
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_09_entries/src/lib.cairo:inserts}}
 ```
 

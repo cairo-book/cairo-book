@@ -1,5 +1,4 @@
 // ANCHOR: enum_def
-
 #[derive(Drop, Debug)] // Debug so we can inspect the state in a minute
 enum UsState {
     Alabama,

@@ -29,8 +29,8 @@ let mut arr:Array<u128> = ArrayTrait::new();
 
 To add an element to the end of an array, you can use the `append()` method:
 
-```rust
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo:5}}
+```rust, noplayground
+a.append(2);
 ```
 
 #### Removing Elements
@@ -95,14 +95,14 @@ At compile-time, the compiler will expand the macro to generate the code that ap
 
 Without `array!`:
 
-```rust
-{{#include ../listings/ch11-advanced-features/no_listing_02_array_macro/src/lib.cairo:no_macro}}
+```rust, noplayground
+{{#include ../listings/ch03-common-collections/no_listing_02_array_macro/src/lib.cairo:no_macro}}
 ```
 
 With `array!`:
 
-```rust
-{{#include ../listings/ch11-advanced-features/no_listing_02_array_macro/src/lib.cairo:array_macro}}
+```rust, noplayground
+{{#include ../listings/ch03-common-collections/no_listing_02_array_macro/src/lib.cairo:array_macro}}
 ```
 
 ### Storing multiple types with Enums
@@ -123,6 +123,6 @@ All methods provided by `Array` can also be used with `Span`, with the exception
 
 To create a `Span` of an `Array`, call the `span()` method:
 
-```rust
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_05_array_span/src/lib.cairo:3}}
+```rust, noplayground
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_05_array_span/src/lib.cairo:4}}
 ```

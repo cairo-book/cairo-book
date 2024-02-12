@@ -1,5 +1,5 @@
-//TAG: does_not_compile
-
+// TAG: does_not_compile
+// ANCHOR: main
 fn main() {
     let x = plus_one(5);
 
@@ -9,3 +9,6 @@ fn main() {
 fn plus_one(x: u32) -> u32 {
     x + 1;
 }
+// ANCHOR_END: main
+
+

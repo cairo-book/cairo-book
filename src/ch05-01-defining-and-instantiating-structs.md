@@ -43,7 +43,7 @@ Listing 5-4 shows a `build_user` function that returns a `User` instance with th
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_02_mut_struct/src/lib.cairo:build_user}}
 ```
 
@@ -57,7 +57,7 @@ Because the parameter names and the struct field names are exactly the same in L
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```rust, noplayground
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_02_mut_struct/src/lib.cairo:build_user2}}
 ```
 

@@ -1,5 +1,5 @@
-//TAG: does_not_compile
-
+// TAG: does_not_compile
+// ANCHOR: main
 fn main() {
     let number = 3;
 
@@ -7,3 +7,6 @@ fn main() {
         println!("number was three");
     }
 }
+// ANCHOR_END: main
+
+
