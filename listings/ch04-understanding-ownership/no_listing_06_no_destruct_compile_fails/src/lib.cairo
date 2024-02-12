@@ -1,4 +1,4 @@
-// TAGS: does_not_compile, ignore_fmt
+// TAG: does_not_compile
 // ANCHOR: all
 struct A {
     dict: Felt252Dict<u128>

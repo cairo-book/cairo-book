@@ -1,4 +1,4 @@
-// TAGS: does_not_compile, ignore_fmt
+// TAG: does_not_compile
 // ANCHOR: main
 fn main() {
     let mut x: u64 = 2;

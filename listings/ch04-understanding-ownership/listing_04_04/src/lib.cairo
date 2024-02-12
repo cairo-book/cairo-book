@@ -1,4 +1,4 @@
-// TAGS: does_not_compile, ignore_fmt
+// TAG: does_not_compile
 // ANCHOR: all
 #[derive(Copy, Drop)]
 struct Rectangle {
@@ -17,3 +17,4 @@ fn flip(rec: @Rectangle) {
     rec.width = temp;
 }
 // ANCHOR_END: all
+

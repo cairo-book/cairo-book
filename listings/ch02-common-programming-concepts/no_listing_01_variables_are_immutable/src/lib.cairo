@@ -1,4 +1,4 @@
-//TAGS: does_not_compile, ignore_fmt
+//TAG: does_not_compile
 // ANCHOR: main
 fn main() {
     let x = 5;
@@ -7,5 +7,4 @@ fn main() {
     println!("The value of x is: {}", x);
 }
 // ANCHOR_END: main
-
 

@@ -30,7 +30,7 @@ let mut arr:Array<u128> = ArrayTrait::new();
 To add an element to the end of an array, you can use the `append()` method:
 
 ```rust, noplayground
-a.append(2);
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo:3}}
 ```
 
 #### Removing Elements
@@ -123,6 +123,6 @@ All methods provided by `Array` can also be used with `Span`, with the exception
 
 To create a `Span` of an `Array`, call the `span()` method:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_05_array_span/src/lib.cairo:4}}
+```rust
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_05_array_span/src/lib.cairo}}
 ```

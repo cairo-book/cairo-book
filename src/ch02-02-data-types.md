@@ -120,7 +120,7 @@ Cairo doesn't have a native type for strings, but you can store characters formi
 Here are some examples of declaring values by putting them between single quotes:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:3:4}}
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:3}}
 ```
 
 ### Type casting

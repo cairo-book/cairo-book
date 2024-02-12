@@ -1,4 +1,4 @@
-// TAG: does_not_compile, ignore_fmt
+// TAG: does_not_compile
 // ANCHOR: main
 fn main() {
     let x = (let y = 6);

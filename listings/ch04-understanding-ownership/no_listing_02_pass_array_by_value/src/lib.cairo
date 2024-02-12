@@ -1,4 +1,4 @@
-// TAGS: does_not_run, ignore_fmt
+// TAG: does_not_run
 // ANCHOR: all
 fn foo(mut arr: Array<u128>) {
     arr.pop_front();
@@ -10,4 +10,5 @@ fn main() {
     foo(arr);
 }
 // ANCHOR_END: all
+
 
