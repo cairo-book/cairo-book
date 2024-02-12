@@ -401,22 +401,23 @@ The failure message indicates that this test did indeed panic as we expected, bu
 
 Sometimes, running a full test suite can take a long time. If you’re working on code in a particular area, you might want to run only the tests pertaining to that code. You can choose which tests to run by passing `scarb cairo-test` an option `-f` (for "filter"), followed by the name of the test you want to run as an argument.
 
-To demonstrate how to run a single test, we’ll first create two test functions, as shown in Listing 9-10, and choose which ones to run.
+To demonstrate how to run a single test, we’ll first create two test functions, as shown in Listing 10-7, and choose which ones to run.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/listing_09_10/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_07/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 9-10: Two tests with two different names</span>
+<span class="caption">Listing 10-7: Two tests with two different names</span>
 
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 
 ```shell
 $ scarb cairo-test -f add_two_and_two
+testing adder ...
 running 1 tests
-test adder::lib::tests::add_two_and_two ... ok
+test adder::add_two_and_two ... ok (gas usage est.: 53200)
 test result: ok. 1 passed; 0 failed; 0 ignored; 1 filtered out;
 ```
 
@@ -426,7 +427,7 @@ We can also specify part of a test name, and any test whose name contains that v
 
 ## Ignoring Some Tests Unless Specifically Requested
 
-Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `scarb cairo-test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `ignore` attribute to exclude them, as shown here:
+Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `scarb cairo-test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `#[ignore]` attribute to exclude them, as shown here:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -438,9 +439,10 @@ After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now 
 
 ```shell
 $ scarb cairo-test
+testing adder ...
 running 2 tests
-test adder::lib::tests::expensive_test ... ignored
-test adder::lib::tests::it_works ... ok
+test adder::expensive_test ... ignored
+test adder:::it_works ... ok
 test result: ok. 1 passed; 0 failed; 1 ignored; 0 filtered out;
 ```
 
@@ -455,7 +457,7 @@ When testing recursive functions or loops, the test is instantiated by default w
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_08_test_gas/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
 ```
 
 ## Benchmarking the gas usage of a specific operation
@@ -472,20 +474,19 @@ println!("{}\n", initial - testing::get_available_gas());
 The following example shows how to use it to test the gas function of the `sum_n` function above.
 
 ```rust
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_benchmark_gas/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_07_benchmark_gas/src/lib.cairo}}
 ```
 
-The value printed when running `scarb cairo-test` is the amount of gas that was consumed by the operation benchmarked.
+The value printed when running `scarb cairo-test` is the amount of gas that was consumed by the benchmarked operation.
 
 ```shell
 $ scarb cairo-test
-testing no_listing_09_benchmark_gas ...
+testing adder ...
 running 1 tests
-[DEBUG]	                               	(raw: 0x179f8
+163430
 
-test no_listing_09_benchmark_gas::benchmark_sum_n_gas ... ok (gas usage est.: 98030)
+test adder::benchmark_sum_n_gas ... ok (gas usage est.: 271290)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
-
 ```
 
-Here, the gas usage of the `sum_n` function is 96760 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 98030, due to some extra steps required to run the entire test function.
+Here, the gas usage of the `sum_n` function is 163430 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 271290, due to some extra steps required to run the entire test function.
