@@ -136,12 +136,12 @@ mod Vote {
             let is_voter: bool = self.registered_voter.read((address));
             let can_vote: bool = self.can_vote.read((address));
 
-            if (can_vote == false) {
+            if (!can_vote) {
                 self.emit(UnauthorizedAttempt { unauthorized_address: address, });
             }
 
-            assert!(is_voter == true, "USER_NOT_REGISTERED");
-            assert!(can_vote == true, "USER_ALREADY_VOTED");
+            assert!(is_voter, "USER_NOT_REGISTERED");
+            assert!(can_vote, "USER_ALREADY_VOTED");
         }
     }
 

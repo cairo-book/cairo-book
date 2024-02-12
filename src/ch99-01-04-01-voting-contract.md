@@ -250,7 +250,7 @@ Transaction execution error: "Error in the called contract (0x03ee9e18edc71a6df3
 The key for the error is `USER_ALREADY_VOTED`.
 
 ```bash
-assert!(can_vote == true, "USER_ALREADY_VOTED");
+assert!(can_vote, "USER_ALREADY_VOTED");
 ```
 
 We can repeat the process to create Signers and Account Descriptors for the accounts we want to use for voting. Remember that each Signer must be created from a private key, and each Account Descriptor must be created from a public key, a smart wallet address, and the smart wallet class hash (which is the same for each voter).
