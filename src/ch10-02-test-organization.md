@@ -48,6 +48,7 @@ First of all, add the following code in your _lib.cairo_ file:
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/lib.cairo}}
 ```
 
+Note that we still need to use the `#[cfg(test)]` attribute here, because we are in the _lib.cairo_ file of the _src_ directory.
 Then, create a _tests.cairo_ file and fill it as follows:
 
 <span class="caption">Filename: src/tests.cairo</span>
