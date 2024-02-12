@@ -3,11 +3,13 @@ use starknet::{StorePacking};
 use core::integer::{u128_safe_divmod, u128_as_non_zero};
 
 #[derive(Drop, Serde)]
+//ANCHOR:struct
 struct Sizes {
     tiny: u8,
     small: u32,
     medium: u64,
 }
+//ANCHOR_END:struct
 
 const TWO_POW_8: u128 = 0x100;
 const TWO_POW_40: u128 = 0x10000000000;
