@@ -1,5 +1,5 @@
 // ANCHOR: guess
-#[derive(Copy, Drop)]
+#[derive(Drop)]
 struct Guess {
     value: u64,
 }
@@ -13,16 +13,22 @@ impl GuessImpl of GuessTrait {
         if value < 1 || value > 100 {
             panic!("Guess must be >= 1 and <= 100");
         }
+
         Guess { value, }
     }
 }
 // ANCHOR_END: guess
 
 // ANCHOR: test
-#[test]
-#[should_panic]
-fn greater_than_100() {
-    GuessTrait::new(200);
+#[cfg(test)]
+mod tests {
+    use super::GuessTrait;
+
+    #[test]
+    #[should_panic]
+    fn greater_than_100() {
+        GuessTrait::new(200);
+    }
 }
 // ANCHOR_END: test
 

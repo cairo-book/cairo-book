@@ -1,4 +1,4 @@
-#[derive(Copy, Drop)]
+#[derive(Drop)]
 struct Guess {
     value: u64,
 }

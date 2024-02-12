@@ -20,10 +20,15 @@ impl GuessImpl of GuessTrait {
     }
 }
 
-#[test]
-#[should_panic(expected: ("Guess must be <= 100",))]
-fn greater_than_100() {
-    GuessTrait::new(200);
+#[cfg(test)]
+mod tests {
+    use super::GuessTrait;
+
+    #[test]
+    #[should_panic(expected: ("Guess must be <= 100",))]
+    fn greater_than_100() {
+        GuessTrait::new(200);
+    }
 }
 // ANCHOR_END: here
 

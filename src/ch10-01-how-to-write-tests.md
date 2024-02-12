@@ -8,7 +8,10 @@ Tests are Cairo functions that verify that the non-test code is functioning in t
 - Run the code you want to test.
 - Assert the results are what you expect.
 
-Let’s look at the features Cairo provides for writing tests that take these actions, which include `#[test]` attribute, `assert!`, `assert_eq!`, `assert_ne!` macros, and `#[should_panic]` attribute.
+Let’s look at the features Cairo provides for writing tests that take these actions, which include:
+-  `#[test]` attribute.
+-  `assert!`, `assert_eq!`, `assert_ne!` macros.
+-  `#[should_panic]` attribute.
 
 ### The Anatomy of a Test Function
 
@@ -23,7 +26,7 @@ adder
     └── lib.cairo
 ```
 
-In _lib.cairo_, let's remove the existing content and add a first test, as shown in Listing 10-1.
+In _lib.cairo_, let's remove the existing content and add a `tests` module containing a first test, as shown in Listing 10-1.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -35,9 +38,11 @@ In _lib.cairo_, let's remove the existing content and add a first test, as shown
 
 Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
+We use the `#[cfg(test)]`attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]`attribute in the next [Testing Organization](ch10-02-test-organization.md) section. 
+
 The example function body uses the `assert!` macro, which contains the result of adding 2 and 2, equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how `assert!` works later in this chapter. Let’s run it to see that this test passes.
 
-The `scarb cairo-test` command runs all tests founds in our project, as shown in Listing 10-2.
+The `scarb cairo-test` command runs all tests founds in our project, and shows the following output:
 
 ```shell
 $ scarb cairo-test
@@ -46,8 +51,6 @@ running 1 tests
 test adder::it_works ... ok (gas usage est.: 53200)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
-
-<span class="caption">Listing 10-2: The output from running a test</span>
 
 `scarb cairo-test` compiled and ran the test. We see the line `running 1 tests`. The next line shows the name of the test function, called `it_works`, and that the result of running that test is `ok`. The test runner also provides an estimation of the gas consumption. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
 
@@ -142,7 +145,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:test2}}
 ```
 
-Because the correct result of the `can_hold` function in this case is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
+Because the correct result of the `can_hold` method in this case is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
 
 ```shell
 $ scarb cairo-test
@@ -171,7 +174,6 @@ failures:
    adder::larger_can_hold_smaller - Panicked with "rectangle cannot hold".
 
 Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
-
 ```
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in `larger_can_hold_smaller` test. Notice that `smaller_cannot_hold_larger` test still passes: to make the test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
@@ -210,7 +212,7 @@ test adder::it_adds_two ... ok (gas usage est.: 307660)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-We pass `4` as the argument to `assert_eq!`, which is equal to the result of
+We pass `4` as the argument to `assert_eq!` macro, which is equal to the result of
 calling `add_two(2)`. The line for this test is `test adder::it_adds_two ...
 ok`, and the `ok` text indicates that our test passed!
 
@@ -286,7 +288,7 @@ string with a placeholder filled in with the actual value we got from the
 `add_two` function:
 
 ```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/src/add_two.cairo:here}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/src/lib.cairo:here}}
 ```
 
 Now when we run the test, we’ll get a more informative error message:

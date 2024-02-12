@@ -17,7 +17,7 @@ The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run
 Recall that when we created the new `adder` project in the first section of this chapter, we wrote this first test:
 
 ```rust
-{{#include ../listings/ch09-testing-cairo-programs/no_listing_06_cfg_attr/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_06_cfg_attr/src/lib.cairo}}
 ```
 
 <span class="caption">Filename: src/lib.cairo</span>
@@ -41,7 +41,7 @@ adder
 ```
 
 ```rust
-{{#include ../listings/ch09-testing-cairo-programs/no_listing_07_integration_test/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_07_integration_test/src/lib.cairo}}
 ```
 
 <span class="caption">Filename: src/lib.cairo</span>
@@ -56,7 +56,7 @@ mod integration_tests;
 Enter the code in Listing 9-11 into the _src/tests/integration_test.cairo_ file:
 
 ```rust
-{{#include ../listings/ch09-testing-cairo-programs/no_listing_07_integration_test/src/tests/integration_tests.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_07_integration_test/src/tests/integration_tests.cairo}}
 ```
 
 <span class="caption">Filename: src/tests/integration_test.cairo</span>
