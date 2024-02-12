@@ -16,16 +16,15 @@ fn find_value_recursive(mut arr: Span<felt252>, value: felt252, index: usize) ->
 }
 
 fn find_value_iterative(mut arr: Span<felt252>, value: felt252) -> Option<usize> {
-    let length = arr.len();
     let mut index = 0;
     let mut found: Option<usize> = Option::None;
 
-    while index < length {
+    loop {
         match arr.pop_front() {
-            Option::Some(index_value) => if (*index_value == value) {
+            Option::Some(array_value) => if (*array_value == value) {
                 found = Option::Some(index)
             },
-            Option::None => {},
+            Option::None => {break;},
         }
         index += 1;
     };
