@@ -26,7 +26,7 @@ where `P` is a very large prime number currently equal to \\( {2^{251}} + 17 \cd
 
 The most important difference between integers and field elements is division: Division of field elements (and therefore division in Cairo) is unlike regular CPUs division, where
 integer division \\( \frac{x}{y} \\) is defined as \\( \left\lfloor \frac{x}{y} \right\rfloor \\)
- where the integer part of the quotient is returned (so you get \\( \frac{7}{3} = 2 \\)) and it may or may not satisfy the equation \\( \frac{x}{y} \cdot y == x \\),
+where the integer part of the quotient is returned (so you get \\( \frac{7}{3} = 2 \\)) and it may or may not satisfy the equation \\( \frac{x}{y} \cdot y == x \\),
 depending on the divisibility of `x` by `y`.
 
 In Cairo, the result of \\( \frac{x}{y} \\) is defined to always satisfy the equation \\( \frac{x}{y} \cdot y == x \\). If y divides x as integers, you will get the expected result in Cairo (for example \\( \frac{6}{2} \\) will indeed result in `3`).
@@ -108,20 +108,44 @@ Cairo is specified using `bool`. For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_09_boolean_type/src/lib.cairo}}
 ```
 
-When declaring a `bool` variable, it is mandatory to use either `true` or `false` literals as value. Hence, it is not allowed to use integer literals (i.e. `0` instead of false) for `bool` declarations. 
+When declaring a `bool` variable, it is mandatory to use either `true` or `false` literals as value. Hence, it is not allowed to use integer literals (i.e. `0` instead of false) for `bool` declarations.
 
 The main way to use Boolean values is through conditionals, such as an `if`
 expression. We’ll cover how `if` expressions work in Cairo in the [“Control
 Flow”][control-flow] section.
 
-#### The Short String Type
+#### String Types
 
-Cairo doesn't have a native type for strings, but you can store characters forming what we call a "short string" inside `felt252`s. A short string has a max length of 31 chars. This is to ensure that it can fit in a single felt (a felt is 252 bits, one ASCII char is 8 bits).
-Here are some examples of declaring values by putting them between single quotes:
+Cairo doesn't have a native type for strings but provides two ways to handle them: short strings using simple quotes and ByteArray using double quotes.
+
+##### Short strings
+
+A short string is a ASCII string where each character is encoded on one byte (see the [ASCII table](https://www.asciitable.com/)). For example:
+
+- `'a'` is equivalent to `0x61`
+- `'b'` is equivalent to `0x62`
+- `'c'` is equivalent to `0x63`
+- `0x616263` is equivalent to `'abc'`.
+
+Cairo uses the `felt252` for short strings. As the `felt252` is on 251 bits, a short string is limited to 31 characters (31 \* 8 = 248 bits, which is the maximum multiple of 8 that fits in 251 bits).
+
+You can choose to represent your short string with an hexadecimal value like `0x616263` or by directly writing the string using simple quotes like `'abc'`, which is more convenient.
+
+Here are some examples of declaring short strings in Cairo:
 
 ```rust
-{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:3}}
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:6}}
 ```
+
+##### Byte Array strings
+
+With the `ByteArray` struct added in Cairo 2.4.0 you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
+
+```rust
+{{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
+```
+
+<!-- TODO: add a link to the future 'ByteArray' chapter when available -->
 
 ### Type casting
 
