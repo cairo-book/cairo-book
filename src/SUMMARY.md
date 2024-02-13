@@ -63,19 +63,19 @@
   - [Generic Data Types](ch08-01-generic-data-types.md)
   - [Traits in Cairo](ch08-02-traits-in-cairo.md)
 
-## Testing Cairo Programs
-
-- [Testing Cairo Programs](ch09-00-testing-cairo-programs.md)
-
-  - [How To Write Tests](ch09-01-how-to-write-tests.md)
-  - [Testing Organization](ch09-02-test-organization.md)
-
 ## Error Handling
 
-- [Error Handling](ch10-00-error-handling.md)
+- [Error Handling](ch09-00-error-handling.md)
 
-  - [Unrecoverable Errors with panic](ch10-01-unrecoverable-errors-with-panic.md)
-  - [Recoverable Errors with Result](ch10-02-recoverable-errors.md)
+  - [Unrecoverable Errors with panic](ch09-01-unrecoverable-errors-with-panic.md)
+  - [Recoverable Errors with Result](ch09-02-recoverable-errors.md)
+
+## Testing Cairo Programs
+
+- [Testing Cairo Programs](ch10-00-testing-cairo-programs.md)
+
+  - [How To Write Tests](ch10-01-how-to-write-tests.md)
+  - [Testing Organization](ch10-02-test-organization.md)
 
 ## Advanced Features
 
