@@ -36,14 +36,23 @@ impl Preprocessor for Cairo {
                 let mut new_content = String::new();
                 let lines = chapter.content.split_terminator('\n').peekable();
                 let mut in_code_block = false;
+                let mut skip_empty_lines = false;
 
                 for line in lines {
                     in_code_block ^= line.starts_with("```");
 
                     if in_code_block && TAG_REGEX.is_match(line) {
+                        // skip following empty line
+                        skip_empty_lines = true;
                         // delete this line
                         continue;
                     }
+
+                    if skip_empty_lines && line.is_empty() {
+                        // skip empty lines after the tag
+                        continue;
+                    }
+                    skip_empty_lines = false;
 
                     new_content.push_str(line);
                     new_content.push('\n');
