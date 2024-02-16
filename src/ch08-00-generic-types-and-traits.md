@@ -20,7 +20,7 @@ We begin with a short program that finds the largest number in an array of `u8`:
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_01/src/lib.cairo}}
 ```
 
-We store an array of `u8` in the variable `number_list` and extract the first number in the array in a variable named `largest`. We then iterate through all the numbers in the array, and if the current number is greater than the number stored in `largest`, update the value of `largest`. However, if the current number is less than or equal to the largest number seen so far, the variable doesn’t change, and the code moves on to the next number in the list. After considering all the numbers in the array, `largest` should contain to the largest number, which in this case is 100.
+We store an array of `u8` in the variable `number_list` and extract the first number in the array in a variable named `largest`. We then iterate through all the numbers in the array, and if the current number is greater than the number stored in `largest`, update the value of `largest`. However, if the current number is less than or equal to the largest number seen so far, the variable doesn’t change, and the code moves on to the next number in the list. After considering all the numbers in the array, `largest` should contain the largest number, which in this case is 100.
 
 We've now been tasked with finding the largest number in two different arrays of numbers. To do so, we can choose to duplicate the previous code and use the same logic at two different places in the program, as follows: 
 
@@ -28,7 +28,7 @@ We've now been tasked with finding the largest number in two different arrays of
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_02/src/lib.cairo}}
 ```
 
-Although this code works, duplicating code is tedious and error prone. We also have to remember to update the code in multiple places when we want to change it.
+Although this code works, duplicating code is tedious and error-prone. We also have to remember to update the code in multiple places when we want to change it.
 
 To eliminate this duplication, we’ll create an abstraction by defining a function that operates on any array of `u8` passed in a parameter. This solution makes our code clearer and lets us express the concept of finding the largest number in an array abstractly.
 
