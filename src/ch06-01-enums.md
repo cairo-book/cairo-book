@@ -22,7 +22,7 @@ Now let's imagine that our variants have associated values, that store the exact
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_01_enum_with_values_example/src/lib.cairo:enum_example}}
 ```
 
-and instantiate a `direction` it as follows:
+and instantiate it as follows:
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_01_enum_with_values_example/src/lib.cairo:here}}
@@ -40,7 +40,7 @@ Enums can also be used to store more interesting custom data associated with eac
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_message/src/lib.cairo:message}}
 ```
 
-In this example, the `Message` enum has three variants: `Quit`, `Echo` and `Move`, all with different types:
+In this example, the `Message` enum has three variants: `Quit`, `Echo`, and `Move`, all with different types:
 
 - `Quit` doesn't have any associated value.
 - `Echo` is a single `felt252`.
