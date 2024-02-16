@@ -55,7 +55,7 @@ Go into the _hello_world_ directory with the command `cd hello_world`. You’ll 
 It has also initialized a new Git repository along with a `.gitignore` file
 
 > Note: Git is a common version control system. You can stop using version control system by using the `--no-vcs` flag.
-> Run `scarb new -help` to see the available options.
+> Run `scarb new --help` to see the available options.
 
 Open _Scarb.toml_ in your text editor of choice. It should look similar to the code in Listing 1-2.
 
