@@ -1,6 +1,6 @@
 # Macros
 
-The Cairo language has some plugins that allows developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code.
+The Cairo language has some plugins that allow developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code.
 
 ### `print!` and `println!` macros
 
