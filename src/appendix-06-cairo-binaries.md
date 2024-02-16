@@ -2,11 +2,11 @@
 
 If you want to have access to the Cairo binaries, for anything that you could not achieve by purely using Scarb you can install them by following the instructions below.
 
-The first step is to install Cairo. We will download Cairo manually, using cairo repository or with an installation script. You’ll need an internet connection for the download.
+The first step is to install Cairo. We will download Cairo manually, using Cairo repository or with an installation script. You’ll need an internet connection for the download.
 
 ### Prerequisites
 
-First you will need to have Rust and Git installed.
+First, you will need to have Rust and Git installed.
 
 ```bash
 # Install stable Rust
@@ -123,7 +123,7 @@ The below setup should work for the vast majority of users for common use cases.
 In MacOS, you might also want to install [Fig](https://fig.io/) which
 provides alternative shell completions for many command line tools with an
 IDE-like popup interface in the terminal window.
-(Note that their completions are independent from Cairo's codebase
+(Note that their completions are independent of Cairo's codebase
 so they might be slightly out of sync for bleeding-edge interface changes.)
 
 ### Restart your shell
@@ -155,7 +155,7 @@ cd $CAIRO_ROOT && git clone git@github.com:starkware-libs/cairo.git .
 # OPTIONAL/RECOMMENDED: If you want to install a specific version of the compiler
 # Fetch all tags (versions)
 git fetch --all --tags
-# View tags (you can also do this in the cairo compiler repository)
+# View tags (you can also do this in the Cairo compiler repository)
 git describe --tags `git rev-list --tags`
 # Checkout the version you want
 git checkout tags/v2.5.1
