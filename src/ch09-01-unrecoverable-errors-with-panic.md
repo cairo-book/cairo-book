@@ -33,13 +33,13 @@ Executing this program will yield the same error message as before. In that case
 
 ## `panic!` macro
 
-`panic!` macro can be really helpful. The previous example returning the error code `2` shows how convenient `panic!` macro is. There is no need to create an array and pass it as argument like `panic` function.
+`panic!` macro can be really helpful. The previous example returning the error code `2` shows how convenient `panic!` macro is. There is no need to create an array and pass it as an argument like `panic` function.
 
 ```rust
 {{#include ../listings/ch09-error-handling/no_listing_03_panic_macro/src/lib.cairo}}
 ```
 
-Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as parameter. For example, the following line of code will successfully compile: 
+Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as a parameter. For example, the following line of code will successfully compile: 
 
 ```rust, noplayground
 panic!("the error for panic! macro is not limited to 31 characters anymore");
@@ -74,7 +74,7 @@ Function is declared as nopanic but calls a function that may panic.
     ^********************^
 ```
 
-Note that there are two functions that may panic here, `assert` and equality with `==`. We usually don't use `assert` function in practice and use `assert!` macro instead. We will discusse `assert!` macro in more detail in [Testing Cairo Programs](ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro) chapter.
+Note that there are two functions that may panic here, `assert` and equality with `==`. We usually don't use `assert` function in practice and use `assert!` macro instead. We will discuss `assert!` macro in more detail in [Testing Cairo Programs](ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro) chapter.
 
 ## `panic_with` attribute
 
