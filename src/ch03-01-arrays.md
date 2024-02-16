@@ -7,7 +7,7 @@ This has to do with the fact that once a memory slot is written to, it cannot be
 
 ### Creating an Array
 
-Creating an array is done with the `ArrayTrait::new()` call. Here is an example of the creation of an array to which we append 3 elements:
+Creating an array is done with the `ArrayTrait::new()` call. Here's an example of creating an array and appending 3 elements to it::
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo}}
@@ -82,7 +82,7 @@ If you want to use the subscripting operator `arr[index]`, you will need to expl
 
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
-### Size related methods
+### Size-related methods
 
 To determine the number of elements in an array, use the `len()` method. The return value is of type `usize`.
 
@@ -117,7 +117,7 @@ If you want to store elements of different types in an array, you can use an `En
 
 `Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch04-02-references-and-snapshots.md))
 
-All methods provided by `Array` can also be used with `Span`, with the exception of the `append()` method.
+All methods provided by `Array` can also be used with `Span`, except for the `append()` method.
 
 #### Turning an Array into span
 
