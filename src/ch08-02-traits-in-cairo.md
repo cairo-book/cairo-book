@@ -81,7 +81,7 @@ This code prints the following:
 
 ```shell
 New article available! Cairo has become the most popular language for developers by Cairo Digger (Worldwide)
-New tweet! EliBenSasson: Crypto is full of short-term maximizing projects. 
+New tweet! EliBenSasson: Crypto is full of short-term maximizing projects.
  @Starknet and @StarkWareLtd are about long-term vision maximization.
 Run completed successfully, returning []
 ```
@@ -114,16 +114,6 @@ because those types don’t implement `Summary`. -->
 <!-- TODO NOT AVAILABLE IN CAIRO FOR NOW multiple trait bounds -->
 
 <!-- TODO NOT AVAILABLE IN CAIRO FOR NOW Using trait bounds to conditionally implement methods -->
-
-## Implementing a trait, without writing its declaration
-
-You can write implementations directly without defining the corresponding trait. This is made possible by using the `#[generate_trait]` attribute within the implementation, which will make the compiler generate the trait corresponding to the implementation automatically. Remember to add `Trait` as a suffix to your trait name, as the compiler will create the trait by adding a `Trait` suffix to the implementation name.
-
-```rust,noplayground
-{{#include ../listings/ch08-generic-types-and-traits/no_listing_16_generate_trait/src/lib.cairo}}
-```
-
-In the aforementioned code, there is no need to manually define the trait. The compiler will automatically handle its definition, dynamically generating and updating it as new functions are introduced.
 
 ## Managing and using external trait
 
