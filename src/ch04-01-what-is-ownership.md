@@ -89,7 +89,7 @@ error: Variable was previously moved. Trait has no implementation in context: co
 #### The Copy trait
 
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
-The important thing to note here is that this is a completely free operation, because variables are a cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the rust version of the `Copy` trait, where the value is potentially copied in memory.
+The important thing to note here is that this is a completely free operation, because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the rust version of the `Copy` trait, where the value is potentially copied in memory.
 
 All basic types previously described in [data types chapter](ch02-02-data-types.md) implement by default the `Copy` trait.
 
