@@ -4,7 +4,7 @@
 
 A crate is a subset of a package that is used in the actual Cairo compilation. This includes:
 - The package source code, identified by the package name and the crate root, which is the main entry point of the package.
-- A subset of the package metadata that identifies crate-level settings of the Cairo compiler, for example the `edition` field in the _Scarb.toml_ file.
+- A subset of the package metadata that identifies crate-level settings of the Cairo compiler, for example, the `edition` field in the _Scarb.toml_ file.
 
 Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.
 
@@ -14,7 +14,7 @@ The crate root is the _lib.cairo_ source file that the Cairo compiler starts fro
 
 ## What is a package?
 
-A cairo package is a directory (or equivalent) containing: 
+A Cairo package is a directory (or equivalent) containing: 
 - A _Scarb.toml_ manifest file with a `[package]` section.
 - Associated source code.
 
