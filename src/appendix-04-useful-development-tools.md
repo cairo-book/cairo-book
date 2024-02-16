@@ -7,7 +7,7 @@ warning fixes, a linter, and integrating with IDEs.
 ### Automatic Formatting with `scarb fmt`
 
 Scarb projects can be formatted using the `scarb fmt` command.
-If you're using the cairo binaries directly, you can run `cairo-format` instead.
+If you're using the Cairo binaries directly, you can run `cairo-format` instead.
 Many collaborative projects use `scarb fmt` to prevent arguments about which
 style to use when writing Cairo: everyone formats their code using the tool.
 
