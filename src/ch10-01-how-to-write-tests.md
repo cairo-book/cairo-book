@@ -38,11 +38,11 @@ In _lib.cairo_, let's remove the existing content and add a `tests` module conta
 
 Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
-We use the `#[cfg(test)]`attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]`attribute in the next [Testing Organization](ch10-02-test-organization.md) section. 
+We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the next [Testing Organization](ch10-02-test-organization.md) section. 
 
 The example function body uses the `assert!` macro, which contains the result of adding 2 and 2, equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how `assert!` works later in this chapter. Let’s run it to see that this test passes.
 
-The `scarb cairo-test` command runs all tests founds in our project, and shows the following output:
+The `scarb cairo-test` command runs all tests found in our project, and shows the following output:
 
 ```shell
 $ scarb cairo-test
@@ -145,7 +145,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:test2}}
 ```
 
-Because the correct result of the `can_hold` method in this case is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
+Because the correct result of the `can_hold` method, in this case, is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
 
 ```shell
 $ scarb cairo-test
@@ -241,7 +241,7 @@ Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 Our test caught the bug! The `it_adds_two` test failed with the following
 message: `` Panicked with "assertion `4 == add_two(2)` failed ``.
 It tells us that the assertion that failed was `` "assertion `left == right` failed`` and the `left`
-and `right` value are printed on the next lines as `left: left_value` and `right: right_value`.
+and `right` values are printed on the next lines as `left: left_value` and `right: right_value`.
 This helps us start debugging: the `left` argument was `4` but the `right` argument, where we had
 `add_two(2)`, was `5`. You can imagine that this would be especially helpful
 when we have a lot of tests going on.
@@ -258,11 +258,11 @@ The `assert_ne!` macro will pass if the two values we give it are not equal and
 fail if they’re equal. This macro is most useful for cases when we’re not sure
 what a value _will_ be, but we know what the value definitely _shouldn’t_ be.
 For example, if we’re testing a function that is guaranteed to change its input
-in some way, but the way in which the input is changed depends on the day of
+in some way, but how the input is changed depends on the day of
 the week that we run our tests, the best thing to assert might be that the
 output of the function is not equal to the input.
 
-Here is a simple example comparing two structs, showing how tu use `assert_eq!` and `assert_ne!` macros:
+Here is a simple example comparing two structs, showing how to use `assert_eq!` and `assert_ne!` macros:
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_10_assert_eq_ne_macro/src/lib.cairo}}
@@ -275,7 +275,7 @@ implement `PartialEq` and `Debug` traits. All primitive types and most of
 the core library types implement these traits. For structs and enums that
 you define yourself, you’ll need to implement `PartialEq` to assert equality of
 those types. You’ll also need to implement `Debug` to print the values when the
-assertion fails. Because both traits are derivable traits this is usually as straightforward as adding the
+assertion fails. Because both traits are derivable this is usually as straightforward as adding the
 `#[derive(Drop, Debug, PartialEq)]` annotation to your struct or enum definition. See
 [Appendix C](./appendix-03-derivable-traits.md) for more detail about these and other derivable traits.
 
