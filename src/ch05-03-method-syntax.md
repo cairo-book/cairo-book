@@ -51,7 +51,7 @@ Methods can take ownership of `self`, use `self` with snapshots as we’ve done
 here, or use a mutable reference to `self` using the `ref self: T` syntax.
 
 We chose `self: @Rectangle` here for the same reason we used `@Rectangle` in the
-function version: we don’t want to take ownership, and we just want to read the
+function version: we don’t want to take ownership, we just want to read the
 data in the struct, not write to it. If we wanted to change the instance that
 we’ve called the method on as part of what the method does, we’d use `ref self:
 Rectangle` as the first parameter. Having a method that takes ownership of the

@@ -12,7 +12,7 @@ Speaking of coins, let’s use them as an example using `match`! We can write a 
 
 <span class="caption">Listing 6-3: An enum and a `match` expression that has the variants of the enum as its patterns</span>
 
-Let’s break down the `match` expression in the `value_in_cents` function. First we list the `match` keyword followed by an expression, which in this case is the value `coin`. This seems very similar to a conditional expression used with if, but there’s a big difference: with if, the condition needs to evaluate to a Boolean value, but here it can be any type. The type of `coin` in this example is the `Coin` enum that we defined on the first line.
+Let’s break down the `match` expression in the `value_in_cents` function. First, we list the `match` keyword followed by an expression, which in this case is the value `coin`. This seems very similar to a conditional expression used with if, but there’s a big difference: with if, the condition needs to evaluate to a Boolean value, but here it can be any type. The type of `coin` in this example is the `Coin` enum that we defined on the first line.
 
 Next are the `match` arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value `Coin::Penny` and then the `=>` operator that separates the pattern and the code to run. The code in this case is just the value `1`. Each arm is separated from the next with a comma.
 
@@ -119,7 +119,7 @@ Using enums, we can also take special actions for a few particular values, but f
 You can use it by simply adding a new arm with `_` as the pattern for the last arm of the `match` expression.
 
 Imagine we have a vending machine that only accepts Dime coins.
-We want to have a function that process inserted coins and returns `true` only if the coin is accepted.
+We want to have a function that processes inserted coins and returns `true` only if the coin is accepted.
 
 Here's a `vending_machine_accept` function that implements this logic:
 
@@ -164,7 +164,7 @@ We can modify the `vending_machine_accept` function to accept a tuple of a `Coin
 ## Matching `felt252` and integer variables
 
 You can also match `felt252` and integer variables. This is useful when you want to match against a range of values.
-However there are some restrictions:
+However, there are some restrictions:
 
 - Only integers that fit into a single `felt252` are supported (i.e. `u256` is not supported).
 - The first arm must be 0.

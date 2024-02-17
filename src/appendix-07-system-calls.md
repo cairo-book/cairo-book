@@ -132,7 +132,7 @@ Deploys a new instance of a previously declared class.
 #### Arguments
 
 - _`class_hash`_: The class hash of the contract to be deployed.
-- _`contract_address_salt`_: The salt, an arbitrary value provided by the sender, used in the computation of the contract’s address.
+- _`contract_address_salt`_: The salt, an arbitrary value provided by the sender. It is used in the computation of the contract’s address.
 - _`calldata`_: The constructor’s calldata. An array of felts.
 - _`deploy_from_zero`_: A flag used for the contract address computation. If not set, the caller address will be used as the new contract’s deployer address, otherwise 0 is used.
 
@@ -162,7 +162,7 @@ extern fn emit_event_syscall(
 
 Emits an event with a given set of keys and data.
 
-For more information, and for a higher-level syntax for emitting events, see [Starknet events](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/starknet-events/).
+For more information and a higher-level syntax for emitting events, see [Starknet events](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/starknet-events/).
 
 #### Arguments
 

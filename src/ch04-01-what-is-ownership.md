@@ -11,7 +11,7 @@ _Destruction_ can happen in several ways:
 _Moving_ a value simply means passing that value to another function.
 
 This results in somewhat similar constraints to the Rust ownership model, but there are some differences.
-In particular, the rust ownership model exists (in part) to avoid data races and concurrent mutable access to a memory value. This is obviously impossible in Cairo since the memory is immutable.
+In particular, the Rust ownership model exists (in part) to avoid data races and concurrent mutable access to a memory value. This is obviously impossible in Cairo since the memory is immutable.
 Instead, Cairo leverages its linear type system for two main purposes:
 
 - Ensuring that all code is provable and thus verifiable.
@@ -89,7 +89,7 @@ error: Variable was previously moved. Trait has no implementation in context: co
 #### The Copy trait
 
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
-The important thing to note here is that this is a completely free operation, because variables are a cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the rust version of the `Copy` trait, where the value is potentially copied in memory.
+The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
 
 All basic types previously described in [data types chapter](ch02-02-data-types.md) implement by default the `Copy` trait.
 
@@ -107,7 +107,7 @@ _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](c
 
 ### Destroying values - example with FeltDict
 
-The other way linear types can be _used_ is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In rust for example, this could be closing the access to a file, or locking a mutex.
+The other way linear types can be _used_ is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In Rust, for example, this could be closing the access to a file, or locking a mutex.
 In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
 This would be very easy to forget, so it is enforced by the type system and the compiler.
 

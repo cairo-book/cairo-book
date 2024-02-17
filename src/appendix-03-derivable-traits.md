@@ -4,7 +4,7 @@ In various places in the book, we’ve discussed the `derive` attribute, which y
 
 In this appendix, we provide a comprehensive reference detailing all the traits in the standard library compatible with the `derive` attribute.
 
-These traits listed here are the only ones defined by the core library that can be implemented on your types using `derive`. Other traits defined in the standard library don’t have sensible default behavior, so it’s up to you to implement them in the way that makes sense for what you’re trying to accomplish.
+These traits listed here are the only ones defined by the core library that can be implemented on your types using `derive`. Other traits defined in the standard library don’t have sensible default behavior, so it’s up to you to implement them in a way that makes sense for what you’re trying to accomplish.
 
 ## Debug for Programmer Output
 
@@ -154,7 +154,7 @@ Here we are converting a serialized array span back to the struct A. `deserializ
 
 When moving out of scope, variables need to be moved first. This is where the `Drop` trait intervenes. You can find more details about its usage [here](ch04-01-what-is-ownership.md#the-drop-trait).
 
-Moreover Dictionary need to be squashed before going out of scope. Calling manually the `squash` method on each of them can be quickly redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch04-01-what-is-ownership.md#the-destruct-trait).
+Moreover, Dictionaries need to be squashed before going out of scope. Calling the `squash` method on each of them manually can quickly become redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch04-01-what-is-ownership.md#the-destruct-trait).
 
 ## Store
 

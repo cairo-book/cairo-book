@@ -1,6 +1,6 @@
 # Generic Data Types
 
-We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo, we can use generics when defining functions, structs, enums, traits, implementations and methods. In this chapter we are going to take a look at how to effectively use generic types with all of them.
+We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo, we can use generics when defining functions, structs, enums, traits, implementations and methods. In this chapter, we are going to take a look at how to effectively use generic types with all of them.
 
 Generics allow us to write reusable code that works with many types, thus avoiding code duplication. while enhancing code maintainability.
 
@@ -24,7 +24,7 @@ The new `largest_list` function includes in its definition the requirement that 
 
 ### Constraints for Generic Types
 
-When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allow us to use them more effectively in a functions logic at the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the `TDrop` implementation as part of the generic arguments of `largest_list`. While `TDrop` was added to satisfy the compiler's requirements, we can also add constraints to benefit our function logic.
+When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allows us to use it more effectively in a function's logic at the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the `TDrop` implementation as part of the generic arguments of `largest_list`. While `TDrop` was added to satisfy the compiler's requirements, we can also add constraints to benefit our function logic.
 
 Imagine that we want, given a list of elements of some generic type `T`, to find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
 
@@ -32,9 +32,9 @@ Imagine that we want, given a list of elements of some generic type `T`, to find
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_03_missing_tcopy/src/lib.cairo:missing-tcopy}}
 ```
 
-The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes a snapshot of an `Array<T>` as a parameter and returns a copy of the smallest element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we don't require to implement the `Drop` trait for `T` as well. Why it does not compile then?
+The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes a snapshot of an `Array<T>` as a parameter and returns a copy of the smallest element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we are not required to implement the `Drop` trait for `T` as well. Why it does not compile then?
 
-When indexing on `list`, the value results in a snap of the indexed element, unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy from `@T` to`T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that need to be dropped, requiring for `T` to implement the `Drop` trait as well. We must then add both `Drop` and `Copy` traits implementation for the function to be correct. After updating the`smallest_element` function the resulting code would be:
+When indexing on `list`, the value results in a snap of the indexed element, unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy from `@T` to `T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that need to be dropped, requiring `T` to implement the `Drop` trait as well. We must then add both `Drop` and `Copy` traits implementation for the function to be correct. After updating the `smallest_element` function the resulting code would be:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_04_with_tcopy/src/lib.cairo}}
@@ -56,7 +56,7 @@ We can rewrite the `smallest_element` function signature as follows:
 
 ## Structs
 
-We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition `Wallet<T>` which has a `balance` field of type `T`.
+We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First, we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition `Wallet<T>` which has a `balance` field of type `T`.
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_06_derive_generics/src/lib.cairo}}
@@ -106,7 +106,7 @@ We can implement methods on structs and enums, and use the generic types in thei
 
 We first define `WalletTrait<T>` trait using a generic type `T` which defines a method that returns the value of the field `balance` from `Wallet`. Then we give an implementation for the trait in `WalletImpl<T>`. Note that you need to include a generic type in both definitions of the trait and the implementation.
 
-We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
+We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example, we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_12_constrained_generics/src/lib.cairo}}
@@ -114,20 +114,20 @@ We can also specify constraints on generic types when defining methods on the ty
 
 The new method `receive` increments the size of the balance of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
 
-Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and create a new one with a generic type of each. First, let's rewrite the struct definition:
+Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and creates a new one with a generic type of each. First, let's rewrite the struct definition:
 
 ```rust,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_13_not_compiling/src/lib.cairo:struct}}
 ```
 
-Next we are going to naively define the mixup trait and implementation:
+Next, we are going to naively define the mixup trait and implementation:
 
 ```rust,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_13_not_compiling/src/lib.cairo:trait_impl}}
 
 ```
 
-We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` method which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As `mixup` signature specify, both `self` and `other` are getting dropped at the end of the function, which is the reason for this code not to compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait in order for the compiler to know how to drop instances of `Wallet<T, U>`. The updated implementation is as follow:
+We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` method which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As `mixup` signature specifies, both `self` and `other` are getting dropped at the end of the function, which is why this code does not compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait for the compiler to know how to drop instances of `Wallet<T, U>`. The updated implementation is as follows:
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_14_compiling/src/lib.cairo:trait_impl}}
