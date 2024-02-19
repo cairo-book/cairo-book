@@ -1,6 +1,6 @@
 # Hashes
 
-At its essence, hashing is a process of converting input data (often called a message) of any length into a fixed-size value, typically referred to as a "hash." This transformation is deterministic, meaning that the same input will always produce the same hash value. Hash functions are a fundamental component in various fields, including data storage, cryptography, and data integrity verification - and are very often when developing smart contracts, especially when working with Merkle trees.
+At its essence, hashing is a process of converting input data (often called a message) of any length into a fixed-size value, typically referred to as a "hash." This transformation is deterministic, meaning that the same input will always produce the same hash value. Hash functions are a fundamental component in various fields, including data storage, cryptography, and data integrity verification - and are very often used when developing smart contracts, especially when working with Merkle trees.
 
 In this chapter, we will present the two hash functions implemented natively in the Cairo library: `Poseidon` and `Pedersen`. We will discuss when and how to use them, and see examples with Cairo programs.
 
