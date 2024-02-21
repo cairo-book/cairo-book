@@ -199,10 +199,10 @@ with the components functions externally by calling them using the
 ## Stacking Components for Maximum Composability
 
 The composability of components really shines when combining multiple of them
-together. Each adds its features onto the contract. You will be able to rely on
-[Openzeppelin's](https://github.com/OpenZeppelin/cairo-contracts) future
-implementation of components to quickly plug-in all the common functionalities
-you need a contract to have.
+together. Each adds its features onto the contract. You can rely on
+[Openzeppelin's](https://github.com/OpenZeppelin/cairo-contracts) implementation
+of components to quickly plug-in all the common functionalities you need a contract
+to have.
 
 Developers can focus on their core contract logic while relying on battle-tested
 and audited components for everything else.
