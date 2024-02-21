@@ -22,9 +22,9 @@ This will be interpreted as `const a: felt252 = 8;` by the compiler.
 
 Please refer to the [Arrays](./ch03-01-arrays.md) page.
 
-### `panic!` macro
+## `panic!`, `assert!` and `assert_eq!` macros
 
-See [Unrecoverable Errors with panic](./ch10-01-unrecoverable-errors-with-panic.md) page.
+See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.md) page.
 
 ### `format!` macro
 
