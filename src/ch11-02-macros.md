@@ -2,17 +2,11 @@
 
 The Cairo language has some plugins that allow developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code.
 
-### `print!` and `println!` macros
+## `print!` and `println!` macros
 
-Two macros are available for printing values:
-- `println!` which prints on a new line 
-- `print!` with inline printing
-  
-Both can be used with curly brackets as placeholders that hold a value in place:
-- When printing the value of a variable, the variable name can go inside the curly brackets.
-- When printing the result of evaluating an expression, use empty curly brackets in the format string, then follow the format string with a comma-separated list of expressions to print in each empty curly bracket placeholder in the same order.
+Please refer to the [Printing](./ch11-04-printing.md) page.
 
-### `consteval_int!` macro
+## `consteval_int!` macro
 
 In some situations, a developer might need to declare a constant that is the result of a computation of integers. To compute a constant expression and use its result at compile time, it is required to use the `consteval_int!` macro.
 
@@ -24,17 +18,13 @@ const a: felt252 = consteval_int!(2 * 2 * 2);
 
 This will be interpreted as `const a: felt252 = 8;` by the compiler.
 
-### `array!` macro
+## `array!` macro
 
 Please refer to the [Arrays](./ch03-01-arrays.md) page.
 
 ### `panic!` macro
 
-See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.md) page.
-
-### `assert!`, `assert_eq!` and `assert_ne!` macros macro
-
-See [How to Write Tests](./ch10-01-how-to-write-tests.md) page.
+See [Unrecoverable Errors with panic](./ch10-01-unrecoverable-errors-with-panic.md) page.
 
 ### `format!` macro
 

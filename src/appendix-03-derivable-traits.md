@@ -12,6 +12,26 @@ The `Debug` trait enables debug formatting in format strings, which you indicate
 
 The `Debug` trait allows you to print instances of a type for debugging purposes, so you and other programmers using your type can inspect an instance at a particular point in a program’s execution.
 
+For example:
+
+```rust
+#[derive(Copy, Drop, Debug)]
+struct Point {
+    x: u8,
+    y: u8
+}
+
+fn main() {
+    let p = Point { x: 1, y: 3};
+    println!("{:?}", p);
+}
+```
+
+```bash
+scarb cairo-run
+Point { x: 1, y: 3 }
+```
+
 The `Debug` trait is required, for example, in use of the `assert_eq!` macro. This macro prints the values of instances given as arguments if the equality assertion fails so programmers can see why the two instances weren’t equal.
 
 ## PartialEq for equality comparison

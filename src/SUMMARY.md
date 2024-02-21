@@ -84,6 +84,7 @@
   - [Operator Overloading](ch11-01-operator-overloading.md)
   - [Macros](ch11-02-macros.md)
   - [Working with Hashes](ch11-03-hash.md)
+  - [Printing](ch11-04-printing.md)
 
 ## Starknet smart contracts
 
