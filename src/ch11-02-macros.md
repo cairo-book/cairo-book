@@ -58,8 +58,11 @@ This macro takes 2 arguments:
   
 Calling this macro will append the provided `ByteArray` string to the formatter.
 Example usage is:
+
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_07_write_macro/src/lib.cairo}}
 ```
 
+### `get_dep_component!` macro
 
+Please refer to the [Components dependencies](./ch99-01-05-02-component-dependencies.md)
