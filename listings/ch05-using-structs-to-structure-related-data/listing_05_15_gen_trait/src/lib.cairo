@@ -4,10 +4,7 @@ struct Rectangle {
     height: u64,
 }
 
-trait RectangleTrait {
-    fn area(self: @Rectangle) -> u64;
-}
-
+#[generate_trait]
 impl RectangleImpl of RectangleTrait {
     fn area(self: @Rectangle) -> u64 {
         (*self.width) * (*self.height)
@@ -16,6 +13,6 @@ impl RectangleImpl of RectangleTrait {
 
 fn main() {
     let rect1 = Rectangle { width: 30, height: 50, };
-
     println!("Area is {}", rect1.area());
 }
+
