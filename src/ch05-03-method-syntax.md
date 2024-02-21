@@ -39,15 +39,12 @@ Note that:
 
 ### The generate_trait attribute
 
-For those familiar with Rust, Cairo's approach might be confusing, as
-methods cannot be defined directly on types. Instead, you must define a [trait](./ch08-02-traits-in-cairo.md)
-and an implementation of this trait associated with the type for which the method is intended.
+If you are familiar with Rust, you may find Cairo's approach confusing because methods cannot be defined directly on types. Instead, you must define a [trait](./ch08-02-traits-in-cairo.md) and an implementation of this trait associated with the type for which the method is intended.
+However, defining a trait and then implementing it to define methods on a specific type is verbose, and unnecessary: the trait itself will not be reused.
 
-But, defining a trait and then implementing it, just to define methods on a type is a little bit too verbose and seems useless.
+So, to avoid defining useless traits, Cairo provides the `#[generate_trait]` attribute to add above a trait implementation, which tells to the compiler to generate the corresponding trait definition for you, and let's you focus on the implementation only. Both approaches are equivalent, but it's considered a best practice to not explicitly define traits in this case.
 
-So, to avoid defining useless traits, Cairo provides the `#[generate_trait]` attribute to add above a trait implementation and which tells to the compiler to generate the corresponding trait definition for you.
-
-So, the previous example can also be written as follow:
+The previous example can also be written as follows:
 
 ```rust
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_15_gen_trait/src/lib.cairo}}
