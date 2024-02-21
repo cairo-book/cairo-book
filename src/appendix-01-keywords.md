@@ -24,7 +24,7 @@ They cannot be used as names of any items.
 - `continue` - Continue to the next loop iteration
 - `else` - Fallback for `if` and `if let` control flow constructs
 - `enum` - Define an enumeration
-- `extern` - Function defined at the compiler level using hint available at Cairo 1 level with this declaration
+- `extern` - Function defined at the compiler level that can be compiled to CASM
 - `false` - Boolean false literal
 - `fn` - Define a function
 - `if` - Branch based on the result of a conditional expression
@@ -88,5 +88,5 @@ Cairo by forbidding them to use these keywords.
 
 The Cairo programming language provides several specific functions that serve a special purpose. We will not cover all of them in this book, but using the names of these functions as names of other items is not recommended.
 
-- `assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function. -`panic` - This function terminates the program.
+- `assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function.
 - `panic` - This function acknowledge the occurrence of an error and terminates the program.
