@@ -98,7 +98,7 @@ Table B-5 shows symbols that appear in the context of specifying attributes on a
 | `#[panic_with('...', wrapper_name)]` | Creates a wrapper for the annotated function which will panic if the function returns `None` or `Err`, with the given data as the panic error |
 | `#[test]`                            | Describe a function as a test function |
 | `#[cfg(...)]`                        | Configuration attribute, especially used to configure a `tests` module with `#[cfg(test)]`  |
-| `#[should_panic]`                    | Specifies that a function should necessarily panic |
+| `#[should_panic]`                    | Specifies that a test function should necessarily panic |
 | `#[starknet::contract]`              | Defines a Starknet smart contract |
 | `#[starknet::interface]`             | Defines a Starknet interface |
 | `#[starknet::component]`             | Defines a Starknet interface |
