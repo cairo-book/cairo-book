@@ -77,14 +77,18 @@
   - [How To Write Tests](ch10-01-how-to-write-tests.md)
   - [Testing Organization](ch10-02-test-organization.md)
 
-## Advanced Features
+## Advanced Cairo Features
 
-- [Advanced Features](ch11-00-advanced-features.md)
+- [Advanced Cairo Features](ch11-00-advanced-features.md)
 
-  - [Operator Overloading](ch11-01-operator-overloading.md)
-  - [Macros](ch11-02-macros.md)
-  - [Working with Hashes](ch11-03-hash.md)
-  - [Printing](ch11-04-printing.md)
+  - [Using Arrays inside Dictionaries](ch11-01-using-arrays-inside-dictionaries.md)
+  - [Smart Pointers](ch11-02-smart-pointers.md)
+  - [Operator Overloading](ch11-03-operator-overloading.md)
+  - [Working with Hashes](ch11-04-hash.md)
+  - [Macros](ch11-05-macros.md)
+  - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
+  - [Gas optimisation](ch11-07-gas-optimisation.md)
+  - [Printing](ch11-08-printing.md)
 
 ## Starknet smart contracts
 
