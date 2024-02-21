@@ -43,18 +43,9 @@ call doesn’t take ownership of any of its parameters.
 {{#include ../listings/ch11-advanced-features/no_listing_06_format_macro/src/lib.cairo}}
 ```
 
-### `write!` macro
+### `write!` and `writeln!` macros
 
-The `write!` and `writeln!` are two macros which are used to emit the format string to a specified stream.
-This macro takes 2 arguments:
-- a Formatter, which is a struct containing a `ByteArray`, representing the pending result of formatting (the _stream_)
-- the 'ByteArray' to append to the formatter
-  
-Calling this macro will append the provided `ByteArray` string to the formatter.
-Example usage is:
-
-```rust
-{{#include ../listings/ch11-advanced-features/no_listing_07_write_macro/src/lib.cairo}}
+Please refer to the [Printing](./ch11-04-printing.md) page.
 ```
 
 ### `get_dep_component!` macro
