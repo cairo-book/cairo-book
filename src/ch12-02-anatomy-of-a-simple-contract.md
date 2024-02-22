@@ -1,8 +1,6 @@
-# A simple contract
+# Anatomy of a Simple Contract
 
 This chapter will introduce you to the basics of Starknet contracts with an example of a basic contract. You will learn how to write a simple contract that stores a single number on the blockchain.
-
-## Anatomy of a simple Starknet Contract
 
 Let's consider the following contract to present the basics of a Starknet contract. It might not be easy to understand it all at once, but we will go through it step by step:
 

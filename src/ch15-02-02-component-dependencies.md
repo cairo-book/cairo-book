@@ -1,4 +1,4 @@
-# Component dependencies
+# Component Dependencies
 
 A component can use another component as a dependency. It's for example possible to create
 the `OwnableCounter` component that will use the `Ownable` component as a dependency.
