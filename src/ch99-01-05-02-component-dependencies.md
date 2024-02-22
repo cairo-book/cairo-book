@@ -1,11 +1,12 @@
 # Component dependencies
 
-A component can use another component as a dependency. It's for example possible to create
-the `OwnableCounter` component that will use the `Ownable` component as a dependency.
+Working with components becomes more complex when we try to use one component inside another. As mentioned earlier, a component can only be embedded within a contract, meaning that it's not possible to embed a component within another component. However, this doesn't mean that we can't use one component inside another. In this section, we will see how to use a component as a dependency of another component.
 
-The component structure is very similar to a regular component.
+Consider a component called `OwnableCounter` whose purpose is to create a counter that can only be incremented by its owner. This component can be embedded in any contract, so that any contract that uses it will have a counter that can only be incremented by its owner.
 
-Here is the full implementation that we'll break down right after
+The first way to implement this is to create a single component that contains both counter and ownership features from within a single component. However, this approach is not recommended: our goal is to minimize the amount of code duplication and take advantage of component reusability. Instead, we can create a new component that _depends_ on the `Ownable' component for the ownership features, and internally defines the logic for the counter.
+
+Here's the complete implementation, which we'll break down right after:
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_component_dep/src/counter.cairo:full}}
@@ -13,33 +14,34 @@ Here is the full implementation that we'll break down right after
 
 ## Specificities
 
-### Component signature
+### Specifying dependencies on another component
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_component_dep/src/counter.cairo:component_signature}}
 ```
 
-This is the first difference in our component implementation. In addition to the
-regular generics declared in a component we must declare another one that is our
-dependency. In our case it is `impl Owner: ownable_component::HasComponent<TContractState>`,
-we declare an `impl` called `Owner` which is an implementation of the trait `HasComponent`
-for the `ownable_component`. This essentially means that the type `TContractState` has access
-to the `ownable_component` ([See here for more information](./ch99-01-05-01-components-under-the-hood.md#a-primer-on-embeddable-impls)).
+In [Chapter 8](./ch08-02-traits-in-cairo.md), we introduced trait bounds, which are used to specify that a generic type must implement a certain trait. In the same way, we can specify that a component depends on another component by restricting the `impl` block to be available only for contracts that contain the required component. 
+In our case, this is done by adding a restriction `impl Owner: ownable_component::HasComponent<TContractState>`, which indicates that this `impl` block is only available for contracts that contain an implementation of the `ownable_component::HasComponent` trait. This essentially means that the `TContractState' type has access to the ownable component
+(See [Components under the hood](./ch99-01-05-01-components-under-the-hood.md#a-primer-on-embeddable-impls) for more information).
 
-### Implementation
+Although most of the trait bounds were defined using [anonymous parameters](./ch08-01-generic-data-types.md#anonymous-generic-implementation-parameter--operator), the dependency on the `Ownable' component is defined using a named parameter (here, `Owner`). We will need to use this explicit name when accessing the `Ownable` component within the `impl` block.
 
-Now that our component depends on the `Ownable` component we'll see how to call it from our `OwnableCounter` component.
+While this mechanism is verbose and may not be easy to approach at first, it is a powerful leverage of the trait system in Cairo. The inner workings of this mechanism are abstracted away from the user, and all you need to know is that when you embed a component in a contract, all other components in the same contract can access it.
+
+### Using the dependency
+
+Now that we have made our `impl` depend on the `Ownable` component, we can access its functions, storage, and events within the implementation block. To bring the `Ownable` component into scope, we have two choices, depending on whether we intend to mutate the state of the `Ownable` component or not.
+If we want to access the state of the `Ownable` component without mutating it, we use the `get_dep_component!` macro. If we want to mutate the state of the `Ownable` component (for example, change the current owner), we use the `get_dep_component_mut!` macro.
+Both macros take two arguments: the first is `self`, representing the state of the component using the dependency, and the second is the component to access.
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_component_dep/src/counter.cairo:increment}}
 ```
 
-In this function we want to make sure that only the owner can call the `increment` function so we need to call
-`assert_only_owner` from the `Ownable` component. We'll use the `get_dep_component!` macro which returns the
-requested component state from a snapshot of the state. Now that we have our component state we can call
-the function we like `assert_only_owner`.
+In this function, we want to make sure that only the owner can call the `increment` function. We need to use
+the `assert_only_owner` function from the `Ownable` component. We'll use the `get_dep_component!` macro which will return a snapshot of the requested component state, and call `assert_only_owner` on it, as a method of that component.
 
-In the case of `transfer_ownership` we want to mutate that state so we need to use `get_dep_component_mut!`
+For the `transfer_ownership` function, we want to mutate that state to change the current owner. We need to use the `get_dep_component_mut!` macro, which will return the requested component state as a mutable reference, and call `transfer_ownership` on it.
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_component_dep/src/counter.cairo:transfer_ownership}}
@@ -47,13 +49,3 @@ In the case of `transfer_ownership` we want to mutate that state so we need to u
 
 It works exactly the same as `get_dep_component!` except that we need to pass the state as a `ref` so we can
 mutate it to transfer the ownership.
-
-## `get_dep_component!` macro
-
-The `get_dep_component!` and `get_dep_component_mut!` are two macros which are
-used to get a component given a contract state that has it. It goes up to the
-contract state and down again to the requested component state
-This macro takes 2 arguments:
-
-- a component state (`@self` for `get_dep_component!` and `ref self` for `get_dep_component!`)
-- the target component embeddable name
