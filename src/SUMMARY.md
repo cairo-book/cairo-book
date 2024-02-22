@@ -1,8 +1,10 @@
-# The Cairo Programming Language
+# The Cairo Book
 
-[The Cairo Programming Language](title-page.md)
+[The Cairo Book](title-page.md)
 [Foreword](ch00-01-foreword.md)
 [Introduction](ch00-00-introduction.md)
+
+# The Cairo Programming Language  
 
 ## Getting Started
 
@@ -86,6 +88,18 @@
   - [Working with Hashes](ch11-03-hash.md)
   - [Printing](ch11-04-printing.md)
 
+
+- [Appendix](appendix-00.md)
+
+  - [A - Keywords](appendix-01-keywords.md)
+  - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
+  - [C - Derivable Traits](appendix-03-derivable-traits.md)
+  - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
+  - [E - Common Types & Traits and the Cairo Prelude](appendix-05-common-types-and-traits-and-cairo-prelude.md)
+  - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
+
+# Smart Contracts in Cairo
+
 ## Introduction to Starknet Smart Contracts
 
 - [Introduction to Starknet Smart Contracts](./ch12-00-introduction-to-starknet-smart-contracts.md)
@@ -133,12 +147,7 @@
     - [Static Analysis Tools](./ch16-03-static-analysis-tools.md)
     - [Formal Verification](./ch16-04-formal-verification.md)
 
-- [Appendix](appendix-00.md)
+## Appendix
 
-  - [A - Keywords](appendix-01-keywords.md)
-  - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
-  - [C - Derivable Traits](appendix-03-derivable-traits.md)
-  - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
-  - [E - Common Types & Traits and the Cairo Prelude](appendix-05-common-types-and-traits-and-cairo-prelude.md)
-  - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
-  - [G - System Calls](appendix-07-system-calls.md)
+- [Appendix](appendix-00.md)
+  - [A - System Calls](appendix-07-system-calls.md)
