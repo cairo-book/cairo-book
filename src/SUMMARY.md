@@ -100,7 +100,7 @@
     - [Contract Storage](./ch13-01-contract-storage.md)
     - [Contract Functions](./ch13-02-contract-functions.md)
     - [Contract Events](./ch13-03-contract-events.md)
-    - [Reducing boilerplate](./ch13-04-reducing-boilerplate.md)
+    - [Reducing Boilerplate](./ch13-04-reducing-boilerplate.md)
 
 ## Starknet Cross-Contract Interactions
 

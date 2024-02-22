@@ -1,4 +1,4 @@
-# Reducing boilerplate
+# Reducing Boilerplate
 
 In a previous section, we saw this example of an implementation block in a contract that didn't have any corresponding trait.
 
