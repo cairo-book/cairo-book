@@ -51,8 +51,9 @@ mutate it to transfer the ownership.
 ## `get_dep_component!` macro
 
 The `get_dep_component!` and `get_dep_component_mut!` are two macros which are
-used to get a component give a contract state that has it.
+used to get a component given a contract state that has it. It goes up to the
+contract state and down again to the requested component state
 This macro takes 2 arguments:
 
-- a contract state (`@self` for `get_dep_component!` and `ref self` for `get_dep_component!`)
+- a component state (`@self` for `get_dep_component!` and `ref self` for `get_dep_component!`)
 - the target component embeddable name
