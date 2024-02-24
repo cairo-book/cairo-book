@@ -4,7 +4,7 @@ Working with components becomes more complex when we try to use one component in
 
 Consider a component called `OwnableCounter` whose purpose is to create a counter that can only be incremented by its owner. This component can be embedded in any contract, so that any contract that uses it will have a counter that can only be incremented by its owner.
 
-The first way to implement this is to create a single component that contains both counter and ownership features from within a single component. However, this approach is not recommended: our goal is to minimize the amount of code duplication and take advantage of component reusability. Instead, we can create a new component that _depends_ on the `Ownable' component for the ownership features, and internally defines the logic for the counter.
+The first way to implement this is to create a single component that contains both counter and ownership features from within a single component. However, this approach is not recommended: our goal is to minimize the amount of code duplication and take advantage of component reusability. Instead, we can create a new component that _depends_ on the `Ownable` component for the ownership features, and internally defines the logic for the counter.
 
 Here's the complete implementation, which we'll break down right after:
 
@@ -32,7 +32,7 @@ While this mechanism is verbose and may not be easy to approach at first, it is 
 
 Now that we have made our `impl` depend on the `Ownable` component, we can access its functions, storage, and events within the implementation block. To bring the `Ownable` component into scope, we have two choices, depending on whether we intend to mutate the state of the `Ownable` component or not.
 If we want to access the state of the `Ownable` component without mutating it, we use the `get_dep_component!` macro. If we want to mutate the state of the `Ownable` component (for example, change the current owner), we use the `get_dep_component_mut!` macro.
-Both macros take two arguments: the first is `self`, representing the state of the component using the dependency, and the second is the component to access.
+Both macros take two arguments: the first is `self`, either as a snapshot or by reference depending on mutability, representing the state of the component using the dependency, and the second is the component to access.
 
 ```rust
 {{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_component_dep/src/counter.cairo:increment}}
