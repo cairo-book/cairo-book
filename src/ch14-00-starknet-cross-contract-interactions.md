@@ -1,4 +1,4 @@
-# Starknet contracts: ABIs and cross-contract interactions
+# Starknet Cross-Contract Interactions
 
 Interactions between smart contracts are an important feature when creating complex decentralized applications, as it allows for composability and separation of concerns. This chapter sheds light on how to make contracts interact with each other.
 

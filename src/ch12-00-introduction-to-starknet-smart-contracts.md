@@ -1,4 +1,4 @@
-# Starknet Smart Contracts
+# Introduction to Starknet Smart Contracts
 
 All through the previous sections, you've mostly written programs with a `main` entrypoint. In the coming sections, you will learn to write and deploy Starknet contracts.
 

@@ -1,4 +1,4 @@
-## Events
+## Contract Events
 
 Events are custom data structures that are emitted by smart contracts during execution.
 They provide a way for smart contracts to communicate with the external world by logging information
