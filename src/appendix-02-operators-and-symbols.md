@@ -101,13 +101,13 @@ Table B-5 shows symbols that appear in the context of specifying attributes on a
 | `#[should_panic]`                    | Specifies that a test function should necessarily panic |
 | `#[starknet::contract]`              | Defines a Starknet smart contract |
 | `#[starknet::interface]`             | Defines a Starknet interface |
-| `#[starknet::component]`             | Defines a Starknet interface |
+| `#[starknet::component]`             | Defines a Starknet component |
 | `#[starknet::embeddable]`            | Defines an isolated embeddable implementation that can be injected in any smart contract |
 | `#[embeddable_as(...)]`              | Defines an embeddable implementation inside a component |
 | `#[storage]`                         | Defines the storage of a smart contract |
 | `#[event]`                           | Defines an event in a smart contract |
 | `#[constructor]`                     | Defines the constructor in a smart contract |
-| `#[abi(embed_v0)]`                   | Defines an external function |
+| `#[abi(embed_v0)]`                   | Defines an implementation of a trait, exposing the functions of the impl as entrypoints of a contract |
 | `#[abi(per_item)]`                   | Allows individual definition of the entrypoint type of functions inside an impl |
 | `#[external(v0)]`                    | Defines an external function when `#[abi(per_item)]` is used |
 
@@ -162,4 +162,4 @@ Table B-9 shows the contexts in which curly braces are used.
 | `{...}`      | Block expression |
 | `Type {...}` | `struct` literal |
 
-<span class="caption">Table B-8: Curly Brackets</span>
+<span class="caption">Table B-8: Curly Braces</span>

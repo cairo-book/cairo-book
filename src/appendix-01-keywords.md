@@ -53,7 +53,7 @@ They cannot be used as names of any items.
 
 These keywords are associated with a specific behaviour, but can also be used to define items.
 
-- `self` - Type alias for the type we are defining or implementing
+- `self` - Method subject
 - `super` - Parent module of the current module
 
 ---
