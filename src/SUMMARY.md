@@ -137,20 +137,22 @@
     - [Under the hood](./ch15-02-01-under-the-hood.md)
     - [Component dependencies](./ch15-02-02-component-dependencies.md)
     - [Testing components](./ch15-02-03-testing-components.md)
-  - [Upgradability](./ch15-03-upgradability.md)
   - [L1 <> L2 Messaging](./ch15-04-L1-L2-messaging.md)
-  - [Oracle Interactions](./ch15-05-oracle-interactions.md)
-    - [Price Feeds](./ch15-05-01-price-feeds.md)
-    - [Randomness](./ch15-05-02-randomness.md)
   - [Other examples](./ch15-06-other-examples.md)
     - [Deploying and Interacting with a Voting contract](./ch15-06-01-deploying-and-interacting-with-a-voting-contract.md)
+  
+  <!-- - [Upgradability](./ch15-03-upgradability.md) -->
+  <!-- - [Oracle Interactions](./ch15-05-oracle-interactions.md) -->
+  <!-- - [Price Feeds](./ch15-05-01-price-feeds.md) -->
+  <!-- - [Randomness](./ch15-05-02-randomness.md) -->
 
 ## Starknet Smart Contracts Security
   - [Starknet Smart Contracts Security](./ch16-00-starknet-smart-contracts-security.md)
     - [General Recommendations](./ch16-01-general-recommendations.md)
-    - [Testing Smart Contracts with Starknet Foundry](./ch16-02-testing-smart-contracts-with-starknet-foundry.md)
     - [Static Analysis Tools](./ch16-03-static-analysis-tools.md)
-    - [Formal Verification](./ch16-04-formal-verification.md)
+  
+  <!-- - [Testing Smart Contracts with Starknet Foundry](./ch16-02-testing-smart-contracts-with-starknet-foundry.md) -->
+  <!-- - [Formal Verification](./ch16-04-formal-verification.md) -->
 
 ## Appendix
 
