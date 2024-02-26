@@ -103,6 +103,8 @@
   - [E - Common Types & Traits and the Cairo Prelude](appendix-05-common-types-and-traits-and-cairo-prelude.md)
   - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
 
+-----------
+
 # Smart Contracts in Cairo
 
 ## Introduction to Starknet Smart Contracts
