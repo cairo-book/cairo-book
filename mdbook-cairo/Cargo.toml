@@ -8,8 +8,10 @@ description = "A mdbook preprocessor to be used with cairo-verify"
 repository = "https://github.com/cairo-book/cairo-book.github.io"
 
 [dependencies]
+anyhow = "1.0.80"
 clap = "4.3.5"
 lazy_static = "1.4.0"
+log = "0.4.20"
 mdbook = "0.4.28"
 regex = "1.8.4"
 semver = "1.0.17"
