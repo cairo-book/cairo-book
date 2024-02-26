@@ -119,6 +119,7 @@
   - [Other examples](./ch99-01-04-00-other-examples.md)
 
     - [Deploying and Interacting with a Voting contract](./ch99-01-04-01-voting-contract.md)
+    - [Upgradeable contract](./ch99-01-04-01-upgradeable-contract.md)
 
   - [L1 <> L2 Messaging](./ch99-04-00-L1-L2-messaging.md)
   - [Security Considerations](./ch99-03-security-considerations.md)
