@@ -1,4 +1,4 @@
-# Interacting with other contracts and classes using Dispatchers and syscalls
+# Contract Dispatchers, Library Dispatchers and System Calls
 
 Each time a contract interface is defined, two dispatchers are automatically created and exported by the compiler. Let's consider an interface that we named IERC20, these would be:
 

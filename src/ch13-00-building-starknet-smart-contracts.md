@@ -1,4 +1,4 @@
-# A deeper dive into contracts
+# Building Starknet Smart Contracts
 
 In the previous section, we gave an introductory example of a smart contract written in Cairo. In this section, we'll be taking a deeper look at all the components of a smart contract, step by step.
 

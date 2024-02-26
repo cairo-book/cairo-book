@@ -1,4 +1,4 @@
-# The Cairo Programming Language
+# The Cairo Book 
 
 By the Cairo Community and its [contributors](https://github.com/cairo-book/cairo-book.github.io). Special thanks to [StarkWare](https://starkware.co/) through [OnlyDust](https://www.onlydust.xyz/), and [Voyager](https://voyager.online/) for supporting the creation of this book.
 

@@ -1,9 +1,9 @@
-# Introduction to smart-contracts
+# General Introduction to Smart Contracts
 
 This chapter will give you a high level introduction to what smart-contracts are, what are they used for, and why would blockchain developers use Cairo and Starknet.
 If you are already familiar with blockchain programming, feel free to skip this chapter. The last part might still be interesting though.
 
-## Smart-contracts
+## Smart Contracts
 
 Smart contracts gained popularity and became more widespread with the birth of Ethereum. Smart contracts are essentially programs deployed on a blockchain. The term "smart contract" is somewhat misleading, as they are neither "smart" nor "contracts" but rather code and instructions that are executed based on specific inputs. They primarily consist of two components: storage and functions. Once deployed, users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to call and with what input). Smart contracts can modify and read the storage of the underlying blockchain. A smart contract has its own address and is considered a blockchain account, meaning it can hold tokens.
 

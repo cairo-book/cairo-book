@@ -1,11 +1,11 @@
-## Storage Optimization with `StorePacking`
+# Optimizing Storage Costs
 
 Bit-packing is a simple concept: Use as few bits as possible to store a piece of data. When done well, it can significantly reduce the size of the data you need to store. This is especially important in smart contracts, where storage is expensive.
 
 When writing Cairo smart contracts, it is important to optimize storage usage to reduce gas costs. Indeed, most of the cost associated with a transaction is related to storage updates; and each storage slot costs gas to write to.
 This means that by packing multiple values into fewer slots, you can decrease the gas cost incurred by the users of your smart contract.
 
-### Integer structure and bitwise operators
+## Integer structure and bitwise operators
 
 An integer is coded on a certain number of bits, depending on its size (For example, a `u8` integer is coded on 8 bits).
 
@@ -56,7 +56,7 @@ With these bitwise operators, let's see how to combine two `u8` integers into a 
     <span class="caption">Packing and unpacking integer values</span>
 </div>
 
-### Bit-packing in Cairo
+## Bit-packing in Cairo
 
 The storage of a Starknet smart contract is a map with 2<sup>251</sup> slots, where each slot is a `felt252` which is initialized to 0.
 
@@ -88,7 +88,7 @@ To unpack these 3 variables from a `u128` we have to successively shift them to 
     <span class="caption">Sizes unpacking</span>
 </div>
 
-### The `StorePacking` trait
+## The `StorePacking` trait
 
 Cairo provides the `StorePacking` trait to enable packing struct fields into fewer storage slots. `StorePacking<T, PackedT>` is a generic trait taking the type you want to pack (`T`) and the destination type (`PackedT`) as parameters. It provides two functions to implement: `pack` and `unpack`.
 
