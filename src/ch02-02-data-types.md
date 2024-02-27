@@ -1,4 +1,4 @@
-## Data Types
+# Data Types
 
 Every value in Cairo is of a certain _data type_, which tells Cairo what kind of
 data is being specified so it knows how to work with that data. This section covers two subsets of data types: scalars and compounds.
@@ -13,13 +13,13 @@ when many types are possible, we can use a cast method where we specify the desi
 
 You’ll see different type annotations for other data types.
 
-### Scalar Types
+## Scalar Types
 
 A _scalar_ type represents a single value. Cairo has three primary scalar types:
 felts, integers, and booleans. You may recognize
 these from other programming languages. Let’s jump into how they work in Cairo.
 
-#### Felt Type
+### Felt Type
 
 In Cairo, if you don't specify the type of a variable or argument, its type defaults to a field element, represented by the keyword `felt252`. In the context of Cairo, when we say “a field element” we mean an integer in the range \\( 0 \leq x < P \\),
 where `P` is a very large prime number currently equal to \\( {2^{251}} + 17 \cdot {2^{192}} + 1 \\). When adding, subtracting, or multiplying, if the result falls outside the specified range of the prime number, an overflow (or underflow) occurs, and an appropriate multiple of P is added or subtracted to bring the result back within the range (i.e., the result is computed modulo P).
@@ -32,7 +32,7 @@ depending on the divisibility of `x` by `y`.
 In Cairo, the result of \\( \frac{x}{y} \\) is defined to always satisfy the equation \\( \frac{x}{y} \cdot y == x \\). If y divides x as integers, you will get the expected result in Cairo (for example \\( \frac{6}{2} \\) will indeed result in `3`).
 But when y does not divide x, you may get a surprising result: for example, since \\( 2 \cdot \frac{P + 1}{2} = P + 1 \equiv 1 \mod P \\), the value of \\( \frac{1}{2} \\) in Cairo is \\( \frac{P + 1}{2} \\) (and not 0 or 0.5), as it satisfies the above equation.
 
-#### Integer Types
+### Integer Types
 
 The felt252 type is a fundamental type that serves as the basis for creating all types in the core library.
 However, it is highly recommended for programmers to use the integer types instead of the `felt252` type whenever possible, as the `integer` types come with added security features that provide extra protection against potential vulnerabilities in the code, such as overflow and underflow checks. By using these integer types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
@@ -82,7 +82,7 @@ It is also possible to use a visual separator `_` for number literals, in order 
 So how do you know which type of integer to use? Try to estimate the max value your int can have and choose the good size.
 The primary situation in which you’d use `usize` is when indexing some sort of collection.
 
-#### Numeric Operations
+### Numeric Operations
 
 Cairo supports the basic mathematical operations you’d expect for all the integer
 types: addition, subtraction, multiplication, division, and remainder. Integer
@@ -98,7 +98,7 @@ to a single value, which is then bound to a variable.
 
 [Appendix B][appendix_b] contains a list of all operators that Cairo provides.
 
-#### The Boolean Type
+### The Boolean Type
 
 As in most other programming languages, a Boolean type in Cairo has two possible
 values: `true` and `false`. Booleans are one `felt252` in size. The Boolean type in
@@ -114,11 +114,11 @@ The main way to use Boolean values is through conditionals, such as an `if`
 expression. We’ll cover how `if` expressions work in Cairo in the [“Control
 Flow”][control-flow] section.
 
-#### String Types
+### String Types
 
 Cairo doesn't have a native type for strings but provides two ways to handle them: short strings using simple quotes and ByteArray using double quotes.
 
-##### Short strings
+#### Short strings
 
 A short string is a ASCII string where each character is encoded on one byte (see the [ASCII table](https://www.asciitable.com/)). For example:
 
@@ -137,7 +137,7 @@ Here are some examples of declaring short strings in Cairo:
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:6}}
 ```
 
-##### Byte Array strings
+#### Byte Array strings
 
 With the `ByteArray` struct added in Cairo 2.4.0 you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
 
@@ -147,7 +147,7 @@ With the `ByteArray` struct added in Cairo 2.4.0 you are not limited to 31 chara
 
 <!-- TODO: add a link to the future 'ByteArray' chapter when available -->
 
-### Type casting
+## Type casting
 
 In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library.
 
@@ -161,7 +161,7 @@ To perform the conversion, call `var.into()` or `var.try_into()` on the source v
 {{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_casting/src/lib.cairo}}
 ```
 
-### The Tuple Type
+## The Tuple Type
 
 A _tuple_ is a general way of grouping together a number of values with a
 variety of types into one compound type. Tuples have a fixed length: once
@@ -197,7 +197,7 @@ For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types/src/lib.cairo}}
 ```
 
-### The unit type ()
+## The unit type ()
 
 A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.

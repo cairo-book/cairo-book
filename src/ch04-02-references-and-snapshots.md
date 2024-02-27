@@ -1,11 +1,11 @@
-## References and Snapshots
+# References and Snapshots
 
 The issue with the tuple code in previous Listing {{#ref return-multiple-values}} is that we have to return the
 `Array` to the calling function so we can still use the `Array` after the
 call to `calculate_length`, because the `Array` was moved into
 `calculate_length`.
 
-### Snapshots
+## Snapshots
 
 In the previous chapter, we talked about how Cairo's ownership system prevents
 us from using a variable after we've moved it, protecting us from potentially
@@ -63,7 +63,7 @@ fn calculate_length(
 
 The scope in which the variable `array_snapshot` is valid is the same as any function parameter’s scope, but the underlying value of the snapshot is not dropped when `array_snapshot` stops being used. When functions have snapshots as parameters instead of the actual values, we won’t need to return the values in order to give back ownership of the original value, because we never had it.
 
-#### Desnap Operator
+### Desnap Operator
 
 To convert a snapshot back into a regular variable, you can use the `desnap` operator `*`, which serves as the opposite of the `@` operator.
 
@@ -99,7 +99,7 @@ error: Invalid left-hand side of assignment.
 
 The compiler prevents us from modifying values associated to snapshots.
 
-### Mutable References
+## Mutable References
 
 We can achieve the behavior we want in Listing {{#ref modify-snapshot}} by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by returning it automatically at the end of the execution.
 In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modifier.
@@ -125,7 +125,7 @@ Run completed successfully, returning []
 
 As expected, the `height` and `width` fields of the `rec` variable have been swapped.
 
-### Small recap
+## Small recap
 
 Let’s recap what we’ve discussed about the linear type system, ownership, snapshots, and references:
 

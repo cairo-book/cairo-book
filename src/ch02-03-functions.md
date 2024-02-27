@@ -1,4 +1,4 @@
-## Functions
+# Functions
 
 Functions are prevalent in Cairo code. You’ve already seen one of the most
 important functions in the language: the `main` function, which is the entry
@@ -39,7 +39,7 @@ The lines execute in the order in which they appear in the `main` function.
 First the “Hello, world!” message prints, and then `another_function` is called
 and its message is printed.
 
-### Parameters
+## Parameters
 
 We can define functions to have _parameters_, which are special variables that
 are part of a function’s signature. When a function has parameters, you can
@@ -95,7 +95,7 @@ Run completed successfully, returning []
 
 Because we called the function with `5` as the value for value and `"h"` as the value for `unit_label`, the program output contains those values.
 
-#### Named parameters
+### Named parameters
 
 In Cairo, named parameters allow you to specify the names of arguments when you call a function. This makes the function calls more readable and self-descriptive.
 If you want to use named parameters, you need to specify the name of the parameter and the value you want to pass to it. The syntax is `parameter_name: value`. If you pass a variable that has the same name as the parameter, you can simply write `:parameter_name` instead of `parameter_name: variable_name`.
@@ -106,7 +106,7 @@ Here is an example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_32_named_parameters/src/lib.cairo}}
 ```
 
-### Statements and Expressions
+## Statements and Expressions
 
 Function bodies are made up of a series of statements optionally ending in an
 expression. So far, the functions we’ve covered haven’t included an ending
@@ -199,7 +199,7 @@ of an expression, you turn it into a statement, and it will then not return a
 value. Keep this in mind as you explore function return values and expressions
 next.
 
-### Functions with Return Values
+## Functions with Return Values
 
 Functions can return values to the code that calls them. We don’t name return
 values, but we must declare their type after an arrow (`->`). In Cairo, the
