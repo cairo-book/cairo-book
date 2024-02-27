@@ -11,7 +11,7 @@ import { extractFolderName, getSubSubfolders } from "./utils";
  * @returns A promise that resolves to the selected folder name, or undefined if no matches are found.
  */
 export async function fuzzySearchFolders(
-  folders: string[]
+  folders: string[],
 ): Promise<string | undefined> {
   const response = await prompts({
     type: "text",
@@ -39,5 +39,3 @@ export async function fuzzySearchFolders(
 
   return selection.folder;
 }
-
-

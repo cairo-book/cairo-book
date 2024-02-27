@@ -2,7 +2,7 @@
 
 In the previous section, we gave an introductory example of a smart contract written in Cairo. In this section, we'll be taking a deeper look at all the components of a smart contract, step by step.
 
-When we discussed [_interfaces_](./ch99-01-02-a-simple-contract.md), we specified the difference between _public functions, external functions and view functions_, and we mentioned how to interact with _storage_.
+When we discussed [_interfaces_](./ch12-02-anatomy-of-a-simple-contract.md), we specified the difference between _public functions, external functions and view functions_, and we mentioned how to interact with _storage_.
 
 At this point, you should have multiple questions that come to mind:
 

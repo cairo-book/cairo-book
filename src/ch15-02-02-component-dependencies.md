@@ -20,11 +20,11 @@ Here's the complete implementation, which we'll break down right after:
 {{#include ../listings/ch99-starknet-smart-contracts/components/listing_01_component_dep/src/counter.cairo:component_signature}}
 ```
 
-In [Chapter 8](./ch08-02-traits-in-cairo.md), we introduced trait bounds, which are used to specify that a generic type must implement a certain trait. In the same way, we can specify that a component depends on another component by restricting the `impl` block to be available only for contracts that contain the required component. 
+In [Chapter 8](./ch08-02-traits-in-cairo.md), we introduced trait bounds, which are used to specify that a generic type must implement a certain trait. In the same way, we can specify that a component depends on another component by restricting the `impl` block to be available only for contracts that contain the required component.
 In our case, this is done by adding a restriction `impl Owner: ownable_component::HasComponent<TContractState>`, which indicates that this `impl` block is only available for contracts that contain an implementation of the `ownable_component::HasComponent` trait. This essentially means that the `TContractState' type has access to the ownable component
-(See [Components under the hood](./ch99-01-05-01-components-under-the-hood.md#a-primer-on-embeddable-impls) for more information).
+(See [Components under the hood](./ch15-02-01-under-the-hood.md#a-primer-on-embeddable-impls) for more information).
 
-Although most of the trait bounds were defined using [anonymous parameters](./ch08-01-generic-data-types.md#anonymous-generic-implementation-parameter--operator), the dependency on the `Ownable' component is defined using a named parameter (here, `Owner`). We will need to use this explicit name when accessing the `Ownable` component within the `impl` block.
+Although most of the trait bounds were defined using [anonymous parameters](./ch08-01-generic-data-types.md#anonymous-generic-implementation-parameter--operator), the dependency on the `Ownable' component is defined using a named parameter (here, `Owner`). We will need to use this explicit name when accessing the `Ownable`component within the`impl` block.
 
 While this mechanism is verbose and may not be easy to approach at first, it is a powerful leverage of the trait system in Cairo. The inner workings of this mechanism are abstracted away from the user, and all you need to know is that when you embed a component in a contract, all other components in the same contract can access it.
 

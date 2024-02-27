@@ -55,7 +55,7 @@ Note that these 2 methods are equivalent. Just choose the one that makes your co
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:state_internal}}
 ```
 
-> Wait, what is this `#[generate_trait]` attribute? Where is the trait definition for this implementation? Well, the `#[generate_trait]` attribute is a special attribute that tells the compiler to generate a trait definition for the implementation block. This allows you to get rid of the boilerplate code of defining a trait and implementing it for the implementation block. We will see more about this in the [next section](./ch99-01-03-04-reducing-boilerplate.md).
+> Wait, what is this `#[generate_trait]` attribute? Where is the trait definition for this implementation? Well, the `#[generate_trait]` attribute is a special attribute that tells the compiler to generate a trait definition for the implementation block. This allows you to get rid of the boilerplate code of defining a trait and implementing it for the implementation block. We will see more about this in the [next section](./ch13-04-reducing-boilerplate.md).
 
 ### 4. [abi(per_item)] attribute
 

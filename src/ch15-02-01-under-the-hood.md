@@ -67,7 +67,7 @@ TContractState`, where access to the component state is made via the
   contract that wants to use it. The opposite direction
   (`ComponentState<TContractState>` to `ContractState`) is useful for
   dependencies (see the `Upgradeable` component depending on an `IOwnable`
-  implementation example in the [Components dependencies ](./ch99-01-05-02-component-dependencies.md) section.
+  implementation example in the [Components dependencies ](./ch15-02-02-component-dependencies.md) section.
 
   To put it briefly, one should think of an implementation of the above
   `HasComponent<T>` as saying: **“Contract whose state T has the upgradeable

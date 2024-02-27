@@ -9,9 +9,10 @@ Tests are Cairo functions that verify that the non-test code is functioning in t
 - Assert the results are what you expect.
 
 Let’s look at the features Cairo provides for writing tests that take these actions, which include:
--  `#[test]` attribute.
--  `assert!`, `assert_eq!`, `assert_ne!` macros.
--  `#[should_panic]` attribute.
+
+- `#[test]` attribute.
+- `assert!`, `assert_eq!`, `assert_ne!` macros.
+- `#[should_panic]` attribute.
 
 ### The Anatomy of a Test Function
 
@@ -38,7 +39,7 @@ In _lib.cairo_, let's remove the existing content and add a `tests` module conta
 
 Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
-We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the next [Testing Organization](ch10-02-test-organization.md) section. 
+We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the next [Testing Organization](ch10-02-test-organization.md) section.
 
 The example function body uses the `assert!` macro, which contains the result of adding 2 and 2, equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how `assert!` works later in this chapter. Let’s run it to see that this test passes.
 
@@ -239,7 +240,7 @@ Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
-message: `` Panicked with "assertion `4 == add_two(2)` failed ``.
+message: ``Panicked with "assertion `4 == add_two(2)` failed``.
 It tells us that the assertion that failed was `` "assertion `left == right` failed`` and the `left`
 and `right` values are printed on the next lines as `left: left_value` and `right: right_value`.
 This helps us start debugging: the `left` argument was `4` but the `right` argument, where we had
@@ -284,7 +285,7 @@ assertion fails. Because both traits are derivable this is usually as straightfo
 You can also add a custom message to be printed with the failure message as
 optional arguments to `assert!`, `assert_eq!`, and `assert_ne!` macros. Any
 arguments specified after the required arguments are passed along to the
-`format!` macro (discussed in [Chapter 11 - Macros](./ch11-02-macros.md#format-macro)), so you can pass a format string that contains `{}` placeholders and
+`format!` macro (discussed in [Chapter 11 - Macros](./ch11-06-macros.md#format-macro)), so you can pass a format string that contains `{}` placeholders and
 values to go in those placeholders. Custom messages are useful for documenting
 what an assertion means; when a test fails, you’ll have a better idea of what
 the problem is with the code.
@@ -359,7 +360,7 @@ When we run the test, it will fail:
 
 ```shell
 $ scarb cairo-test
-testing guess ... 
+testing guess ...
 running 1 tests
 test guess::greater_than_100 ... fail (gas usage est.: 54570)
 failures:

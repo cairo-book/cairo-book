@@ -20,8 +20,7 @@ But then you realize you can't increase the level at a specific index once it's
 set. If a player dies, you cannot remove it from the array unless he happens to
 be in the first position.
 
-Fortunately, Cairo provides a handy built-in [dictionary
-type](./ch03-02-dictionaries.md) called `Felt252Dict<T>` that allows us to
+Fortunately, Cairo provides a handy built-in [dictionary type](./ch03-02-dictionaries.md) called `Felt252Dict<T>` that allows us to
 simulate the behavior of mutable data structures. Let's first explore how to create a struct that contains, among others, a `Felt252Dict<T>`.
 
 Note: Several concepts used in this chapter are presented in later parts of the
@@ -193,7 +192,7 @@ library, in the "data_structures" crate.
 
 ## Summary
 
-Well done! Now you have knowledge of arrays, dictionaries and even custom data structures. 
+Well done! Now you have knowledge of arrays, dictionaries and even custom data structures.
 While Cairo's memory model is immutable and can make it difficult to implement
 mutable data structures, we can fortunately use the `Felt252Dict<T>` type to
 simulate mutable data structures. This allows us to implement a wide range of
