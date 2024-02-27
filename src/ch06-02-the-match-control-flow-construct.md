@@ -50,8 +50,6 @@ Because `state` is an `UsState` enum which implements the `Debug` trait, we can 
 
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the Coin enum variant for Quarter.
 
-
-
 ## Matching with `Option<T>`
 
 In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same.
@@ -137,7 +135,7 @@ This example also meets the exhaustiveness requirement because we’re explicitl
 
 ## Multiple Patterns with the `|` operator
 
- In `match` expressions, you can match multiple patterns using the `|` syntax, which is the pattern *or* operator.
+In `match` expressions, you can match multiple patterns using the `|` syntax, which is the pattern _or_ operator.
 
 For example, in the following code we modified the `vending_machine_accept` function to accept both `Dime` and `Quarter` coins in a single arm:
 

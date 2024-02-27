@@ -14,7 +14,7 @@ Then you’ll learn how to use traits to define behavior in a generic way. You c
 
 Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication. Before diving into generics syntax, then, let’s first look at how to remove duplication in a way that doesn’t involve generic types by extracting a function that replaces specific values with a placeholder that represents multiple values. Then we’ll apply the same technique to extract a generic function! By looking at how to recognize duplicated code you can extract into a function, you’ll start to recognize duplicated code that can use generics.
 
-We begin with a short program that finds the largest number in an array of `u8`: 
+We begin with a short program that finds the largest number in an array of `u8`:
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_01/src/lib.cairo}}
@@ -22,7 +22,7 @@ We begin with a short program that finds the largest number in an array of `u8`:
 
 We store an array of `u8` in the variable `number_list` and extract the first number in the array in a variable named `largest`. We then iterate through all the numbers in the array, and if the current number is greater than the number stored in `largest`, update the value of `largest`. However, if the current number is less than or equal to the largest number seen so far, the variable doesn’t change, and the code moves on to the next number in the list. After considering all the numbers in the array, `largest` should contain the largest number, which in this case is 100.
 
-We've now been tasked with finding the largest number in two different arrays of numbers. To do so, we can choose to duplicate the previous code and use the same logic at two different places in the program, as follows: 
+We've now been tasked with finding the largest number in two different arrays of numbers. To do so, we can choose to duplicate the previous code and use the same logic at two different places in the program, as follows:
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_02/src/lib.cairo}}
@@ -41,8 +41,9 @@ To do that, we extract the code that finds the largest number into a function na
 The largest function has a parameter called `number_list`, passed by reference, which represents any concrete array of `u8` values we might pass into the function. As a result, when we call the function, the code runs on the specific values that we pass in.
 
 In summary, here are the steps we took to change the code:
+
 - Identify duplicate code.
 - Extract the duplicate code into the body of the function and specify the inputs and return values of that code in the function signature.
 - Update the two instances of duplicated code to call the function instead.
-  
+
 Next, we’ll use these same steps with generics to reduce code duplication. In the same way that the function body can operate on an abstract `Array<u8>` instead of specific `u8` values, generics allow code to operate on abstract types.

@@ -92,7 +92,7 @@ This line tells the compiler to include the code it finds in _src/garden.cairo_,
 pub mod vegetables;
 ```
 
-Here, `pub mod vegetables;` means the code in _src/garden/vegetables.cairo_ is included too. That code is:
+Here, `pub mod vegetables;` means the code in *src/garden/vegetables.cairo* is included too. That code is:
 
 ```rust,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
@@ -105,7 +105,7 @@ Now let’s get into the details of these rules and demonstrate them in action!
 
 ### Grouping Related Code in Modules
 
-_Modules_ let us organize code within a crate for readability and easy reuse. 
+_Modules_ let us organize code within a crate for readability and easy reuse.
 Modules also allow us to control the privacy of items, because code within a module
 is private by default. Private items are internal implementation details not
 available for outside use. We can choose to make modules and the items within

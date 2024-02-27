@@ -104,6 +104,3 @@ We can also use `pub` to designate structs and enums as public, but there are a 
 - In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the enum keyword.
 
 There’s one more situation involving `pub` that we haven’t covered, and that is our last module system feature: the `use` keyword. We’ll cover `use` by itself first, and then we’ll show how to combine `pub` and `use`.
-
-
-

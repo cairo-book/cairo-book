@@ -34,12 +34,13 @@ We will setup a local development node using `katana` to deploy the voting contr
 To install `katana` from the source code, please refer to the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation) chapter of the Starknet Book.
 
 > Note: Please verify that the version of `katana` match the specified version provided below.
+>
 > ```bash
 > $ katana --version
 > katana 0.4.4
 > ```
+>
 > To upgrade `katana`, refer to the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation) chapter of the Starknet Book.
-
 
 Once you have `katana` installed, you can start the local Starknet node with:
 
@@ -75,10 +76,12 @@ Before we can interact with the voting contract, we need to prepare the voter an
 Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#starkli-installation) chapter of the Starknet Book.
 
 > Note: Please verify that the version of `starkli` match the specified version provided below.
+>
 > ```bash
 > $ starkli --version
 > 0.1.20 (e4d2307)
 > ```
+>
 > To upgrade `starkli` to `1.0.20`, use the `starkliup -v 0.1.20` command.
 
 For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the [Testnet Deployment](https://book.starknet.io/ch02-05-testnet-deployment.html?highlight=signer#creating-a-signer) chapter of the Starknet Book.

@@ -127,6 +127,7 @@ The `loop` keyword tells Cairo to execute a block of code over and over again fo
 As an example, change the _src/lib.cairo_ file in your _loops_ directory to look like this:
 
 <span class="filename">Filename: src/lib.cairo</span>
+
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_27_infinite_loop/src/lib.cairo}}
 ```
@@ -134,6 +135,7 @@ As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
 > Note: This program would not compile without a break condition. For the purpose of the example, we added a `break` statement that will never be reached, but satisfies the compiler.
 
 When we run this program, we’ll see again! printed over and over continuously until either the program runs out of gas or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
+
 ```shell
 $ scarb cairo-run --available-gas=2000000000000
    Compiling loops v0.1.0 (file:///projects/loops)
@@ -143,7 +145,8 @@ again!
 again!
 again!
 ^Cagain!
-``` 
+```
+
 The symbol `^C` represents where you pressed ctrl-c. You may or may not see the word `again!` printed after the ^C, depending on where the code was in the loop when it received the interrupt signal.
 
 > Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurement that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In the previous case, we set the gas limit high enough for the the program to run for quite some time.
@@ -159,7 +162,7 @@ Fortunately, Cairo also provides a way to break out of a loop using code. You ca
 {{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break/src/lib.cairo}}
 ```
 
-The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. 
+The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration.
 Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
 
 ```rust
@@ -201,6 +204,7 @@ In Listing 2-3, we use `while` to loop the program three times, counting down ea
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_31_while_loop/src/lib.cairo}}
 ```
+
 <span class="caption">Listing 2-3: Using a `while` loop to run code while a condition holds `true`</span>
 
 This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
