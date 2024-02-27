@@ -1,4 +1,4 @@
-## Defining Modules to Control Scope
+# Defining Modules to Control Scope
 
 In this section, we’ll talk about modules and other parts of the module system,
 namely _paths_ that allow you to name items and the `use` keyword that brings a
@@ -8,7 +8,7 @@ First, we’re going to start with a list of rules for easy reference when you�
 organizing your code in the future. Then we’ll explain each of the rules in
 detail.
 
-### Modules Cheat Sheet
+## Modules Cheat Sheet
 
 Here we provide a quick reference on how modules, paths and the `use` keyword
 work in the compiler, and how most developers organize their
@@ -103,7 +103,7 @@ so we can use it in the `main` function.
 
 Now let’s get into the details of these rules and demonstrate them in action!
 
-### Grouping Related Code in Modules
+## Grouping Related Code in Modules
 
 _Modules_ let us organize code within a crate for readability and easy reuse.
 Modules also allow us to control the privacy of items, because code within a module

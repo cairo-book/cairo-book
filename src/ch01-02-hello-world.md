@@ -1,4 +1,4 @@
-## Hello, World
+# Hello, World
 
 Now that you’ve installed Cairo through Scarb, it’s time to write your first Cairo program.
 It’s traditional when learning a new language to write a little program that
@@ -12,7 +12,7 @@ prints the text `Hello, world!` to the screen, so we’ll do the same here!
 > the language server and code highlighting. See [Appendix D][devtools]
 > for more details.
 
-### Creating a Project Directory
+## Creating a Project Directory
 
 You’ll start by making a directory to store your Cairo code. It doesn’t matter
 to Cairo where your code lives, but for the exercises and projects in this book,
@@ -38,7 +38,7 @@ For Windows CMD, enter this:
 > Note: From now on, for each example shown in the book, we assume that
 > you will be working from a Scarb project directory. If you are not using Scarb, and try to run the examples from a different directory, you might need to adjust the commands accordingly or create a Scarb project.
 
-### Creating a Project with Scarb
+## Creating a Project with Scarb
 
 Let’s create a new project using Scarb.
 
@@ -120,7 +120,7 @@ If you started a project that doesn’t use Scarb, you can convert it to a proje
 
 <span class="caption"> A sample Scarb project structure</span>
 
-### Building a Scarb Project
+## Building a Scarb Project
 
 From your _hello_world_ directory, build your project by entering the following command:
 
@@ -147,7 +147,7 @@ the terminal.
 If `Hello, world!` did print, congratulations! You’ve officially written a Cairo
 program. That makes you a Cairo programmer—welcome!
 
-### Anatomy of a Cairo Program
+## Anatomy of a Cairo Program
 
 Let’s review this “Hello, world!” program in detail. Here’s the first piece of
 the puzzle:

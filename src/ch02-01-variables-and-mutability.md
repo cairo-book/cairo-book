@@ -1,4 +1,4 @@
-## Variables and Mutability
+# Variables and Mutability
 
 Cairo uses an immutable memory model, meaning that once a memory cell is written to,
 it can't be overwritten but only read from. To reflect this immutable memory model,
@@ -93,7 +93,7 @@ We’re allowed to change the value bound to `x` from `5` to `6` when `mut` is
 used. Ultimately, deciding whether to use mutability or not is up to you and
 depends on what you think is clearest in that particular situation.
 
-### Constants
+## Constants
 
 Like immutable variables, _constants_ are values that are bound to a name and
 are not allowed to change, but there are a few differences between constants
@@ -141,7 +141,7 @@ conveying the meaning of that value to future maintainers of the code. It also
 helps to have only one place in your code you would need to change if the
 hardcoded value needed to be updated in the future.
 
-### Shadowing
+## Shadowing
 
 Variable shadowing refers to the declaration of a
 new variable with the same name as a previous variable. Caironautes say that the
