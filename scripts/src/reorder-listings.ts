@@ -48,7 +48,7 @@ const onState = (state: any) => {
  */
 export async function reorderListings(
   srcFolderPath: string,
-  listingsFolderPath: string
+  listingsFolderPath: string,
 ) {
   const chapterFiles = fs
     .readdirSync(srcFolderPath)
@@ -63,7 +63,7 @@ export async function reorderListings(
     const chapterNumber = getChapterNumber(file);
     if (chapterNumber === null) {
       console.log(
-        `Warning: File ${file} doesn't match expected format (chX.md)`
+        `Warning: File ${file} doesn't match expected format (chX.md)`,
       );
       return false;
     }
@@ -80,7 +80,7 @@ export async function reorderListings(
         srcFolderPath,
         listingsFolderPath,
         file,
-        expectedListingNumber // Pass expectedListingNumber to processFile
+        expectedListingNumber, // Pass expectedListingNumber to processFile
       );
       if (!updated) {
         // If the content didn't change, we can move to the next expected listing number
@@ -112,7 +112,7 @@ async function processFile(
   srcFolderPath: string,
   listingsFolderPath: string,
   file: string,
-  expectedListingNumber: number
+  expectedListingNumber: number,
 ): Promise<{ updated: boolean; nextListingNumber: number }> {
   let updated = false;
   const chapterNumber = getChapterNumber(file);
@@ -129,11 +129,11 @@ async function processFile(
   const searchString = `ch${paddedChapterNumber}`;
   const chapterListingsFolder = findFileIncludingString(
     listingsFolderPath,
-    searchString
+    searchString,
   );
   if (!chapterListingsFolder) {
     console.log(
-      `Warning: No listings folder found for chapter ${chapterNumber}`
+      `Warning: No listings folder found for chapter ${chapterNumber}`,
     );
     return { updated: false, nextListingNumber: expectedListingNumber };
   }
@@ -153,7 +153,7 @@ async function processFile(
       srcFolderPath,
       listingsFolderPath,
       chapterListingsFolder,
-      file
+      file,
     );
     // Content is updated with the eventual updated content from processListingCaption
     content = result.content;
@@ -194,7 +194,7 @@ async function processListingCaption(
   srcFolderPath: string,
   listingsFolderPath: string,
   listingsFolder: string,
-  file: string
+  file: string,
 ): Promise<{ updated: boolean; content: string }> {
   const listingNumber = match[2];
   const listingNum = parseInt(listingNumber, 10);
@@ -205,7 +205,7 @@ async function processListingCaption(
     const contentBeforeCaption = content.substring(0, match.index);
     const folderNameRegex = new RegExp(
       `${listingsFolder}/(listing_\\d+_\\d+)`,
-      "g"
+      "g",
     );
     let lastIncludeMatch;
     let includeMatch;
@@ -216,7 +216,7 @@ async function processListingCaption(
     }
     if (!lastIncludeMatch) {
       console.log(
-        `Warning: No include found for listing ${listingNumber} in file ${file}`
+        `Warning: No include found for listing ${listingNumber} in file ${file}`,
       );
       return { updated, content };
     }
@@ -239,7 +239,7 @@ async function processListingCaption(
     // Search inside the chapterListingsFolder for a file containing the oldFolderName
     oldFolderName = findFileIncludingString(
       chapterListingsFolder,
-      oldFolderName
+      oldFolderName,
     )!;
 
     if (!oldFolderName) {
@@ -267,7 +267,7 @@ Rename and move source from ${oldFolderName} to ${newFolderName}?`,
       oldFolderPath,
       oldFolderName,
       newFolderName,
-      true
+      true,
     );
     content = fs.readFileSync(path.join(srcFolderPath, file), "utf8");
 
@@ -327,7 +327,7 @@ export function fixListingsChapterNumber(srcFolderPath: string) {
       const chapterMatch = file.match(/ch(\d+)/);
       if (!chapterMatch) {
         console.log(
-          `Warning: File ${file} doesn't match expected format (chX.md)`
+          `Warning: File ${file} doesn't match expected format (chX.md)`,
         );
         continue;
       }
@@ -350,7 +350,7 @@ export function fixListingsChapterNumber(srcFolderPath: string) {
             return newListing;
           }
           return match;
-        }
+        },
       );
 
       if (updated) {

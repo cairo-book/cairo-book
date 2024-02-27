@@ -9,7 +9,7 @@ Table B-1 contains the operators in Cairo, an example of how the operator would 
 | Operator                  | Example                                                 | Explanation                              | Overloadable? |
 | ------------------------- | ------------------------------------------------------- | ---------------------------------------- | ------------- |
 | `!`                       | `!expr`                                                 | Logical complement                       | `Not`         |
-| `~`                       | `~expr`                                                 | Bitwise NOT                              | `BitNot`         |
+| `~`                       | `~expr`                                                 | Bitwise NOT                              | `BitNot`      |
 | `!=`                      | `expr != expr`                                          | Non-equality comparison                  | `PartialEq`   |
 | `%`                       | `expr % expr`                                           | Arithmetic remainder                     | `Rem`         |
 | `%=`                      | `var %= expr`                                           | Arithmetic remainder and assignment      | `RemEq`       |
@@ -52,12 +52,12 @@ The following list contains all symbols that are not used as operators; that is,
 
 Table B-2 shows symbols that appear on their own and are valid in a variety of locations.
 
-| Symbol                                  | Explanation                                                            |
-| --------------------------------------- | ---------------------------------------------------------------------- |
-| `..._u8`, `..._usize`, `..._bool`, etc. | Numeric literal of specific type                                       |
-| `"..."`                                 | String literal                                                         |
-| `'...'`                                 | Short string, 31 ASCII characters maximum                              |
-| `_`                                     | “Ignored” pattern binding                                              |
+| Symbol                                  | Explanation                               |
+| --------------------------------------- | ----------------------------------------- |
+| `..._u8`, `..._usize`, `..._bool`, etc. | Numeric literal of specific type          |
+| `"..."`                                 | String literal                            |
+| `'...'`                                 | Short string, 31 ASCII characters maximum |
+| `_`                                     | “Ignored” pattern binding                 |
 
 <span class="caption">Table B-2: Stand-Alone Syntax</span>
 
@@ -75,7 +75,7 @@ Table B-4 shows symbols that appear in the context of using generic type paramet
 
 | Symbol                         | Explanation                                                                                                  |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `path<...>`                    | Specifies parameters to generic type in a type (e.g., `Array<u8>`)                                             |
+| `path<...>`                    | Specifies parameters to generic type in a type (e.g., `Array<u8>`)                                           |
 | `path::<...>`, `method::<...>` | Specifies parameters to a generic type, function, or method in an expression; often referred to as turbofish |
 | `fn ident<...> ...`            | Define generic function                                                                                      |
 | `struct ident<...> ...`        | Define generic structure                                                                                     |
@@ -86,50 +86,50 @@ Table B-4 shows symbols that appear in the context of using generic type paramet
 
 Table B-5 shows symbols that appear in the context of specifying attributes on an item.
 
-| Symbol                               | Explanation     |
-| ------------------------------------ | --------------- |
-| `#[derive(...)]`                     | Automatically implements a trait for a type |
-| `#[inline]`                          | Hint to the compiler to allow inlining of annotated function |
-| `#[inline(always)]`                  | Hint to the compiler to systematically inline annotated function |
-| `#[inline(never)]`                   | Hint to the compiler to never inline annotated function |
-| `#[must_use]`                        | Hint to the compiler that the return value of a function or a specific returned type must be used |
-| `#[generate_trait]`                  | Automatically generates a trait for an impl  |
-| `#[available_gas(...)]`              | Set the maximum amount of gas available to execute a function |
+| Symbol                               | Explanation                                                                                                                                   |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `#[derive(...)]`                     | Automatically implements a trait for a type                                                                                                   |
+| `#[inline]`                          | Hint to the compiler to allow inlining of annotated function                                                                                  |
+| `#[inline(always)]`                  | Hint to the compiler to systematically inline annotated function                                                                              |
+| `#[inline(never)]`                   | Hint to the compiler to never inline annotated function                                                                                       |
+| `#[must_use]`                        | Hint to the compiler that the return value of a function or a specific returned type must be used                                             |
+| `#[generate_trait]`                  | Automatically generates a trait for an impl                                                                                                   |
+| `#[available_gas(...)]`              | Set the maximum amount of gas available to execute a function                                                                                 |
 | `#[panic_with('...', wrapper_name)]` | Creates a wrapper for the annotated function which will panic if the function returns `None` or `Err`, with the given data as the panic error |
-| `#[test]`                            | Describe a function as a test function |
-| `#[cfg(...)]`                        | Configuration attribute, especially used to configure a `tests` module with `#[cfg(test)]`  |
-| `#[should_panic]`                    | Specifies that a test function should necessarily panic |
-| `#[starknet::contract]`              | Defines a Starknet smart contract |
-| `#[starknet::interface]`             | Defines a Starknet interface |
-| `#[starknet::component]`             | Defines a Starknet component |
-| `#[starknet::embeddable]`            | Defines an isolated embeddable implementation that can be injected in any smart contract |
-| `#[embeddable_as(...)]`              | Defines an embeddable implementation inside a component |
-| `#[storage]`                         | Defines the storage of a smart contract |
-| `#[event]`                           | Defines an event in a smart contract |
-| `#[constructor]`                     | Defines the constructor in a smart contract |
-| `#[abi(embed_v0)]`                   | Defines an implementation of a trait, exposing the functions of the impl as entrypoints of a contract |
-| `#[abi(per_item)]`                   | Allows individual definition of the entrypoint type of functions inside an impl |
-| `#[external(v0)]`                    | Defines an external function when `#[abi(per_item)]` is used |
+| `#[test]`                            | Describe a function as a test function                                                                                                        |
+| `#[cfg(...)]`                        | Configuration attribute, especially used to configure a `tests` module with `#[cfg(test)]`                                                    |
+| `#[should_panic]`                    | Specifies that a test function should necessarily panic                                                                                       |
+| `#[starknet::contract]`              | Defines a Starknet smart contract                                                                                                             |
+| `#[starknet::interface]`             | Defines a Starknet interface                                                                                                                  |
+| `#[starknet::component]`             | Defines a Starknet component                                                                                                                  |
+| `#[starknet::embeddable]`            | Defines an isolated embeddable implementation that can be injected in any smart contract                                                      |
+| `#[embeddable_as(...)]`              | Defines an embeddable implementation inside a component                                                                                       |
+| `#[storage]`                         | Defines the storage of a smart contract                                                                                                       |
+| `#[event]`                           | Defines an event in a smart contract                                                                                                          |
+| `#[constructor]`                     | Defines the constructor in a smart contract                                                                                                   |
+| `#[abi(embed_v0)]`                   | Defines an implementation of a trait, exposing the functions of the impl as entrypoints of a contract                                         |
+| `#[abi(per_item)]`                   | Allows individual definition of the entrypoint type of functions inside an impl                                                               |
+| `#[external(v0)]`                    | Defines an external function when `#[abi(per_item)]` is used                                                                                  |
 
 <span class="caption">Table B-5: Attributes</span>
 
 Table B-6 shows symbols that appear in the context of calling or defining macros.
 
-| Symbol                               | Explanation     |
-| ------------------------------------ | --------------- |
-| `print!`                             | Inline printing |
-| `println!`                           | Print on a new line |
-| `consteval_int!`                     | Declare a constant that is the result of a computation of integers |
-| `array!`                             | Instantiate and fill arrays  |
-| `panic!`                             | Calls `panic` function and allows to provide a message error longer than 31 characters |
-| `assert!`                            | Evaluates a Boolean and panics if `false`  |
-| `assert_eq!`                         | Evaluates an equality, and panics if not equal  |
-| `assert_ne!`                         | Evaluates an equality, and panics if equal  |
-| `format!`                            | Format a string and returns a `ByteArray` with the contents  |
-| `write!`                             | Write formatted strings in a formatter  |
-| `writeln!`                           | Write formatted strings in a formatter on a new line  |
-| `get_dep_component!`                 | Returns the requested component state from a snapshot of the state inside a component  |
-| `get_dep_component_mut!`             | Returns the requested component state from a reference of the state inside a component  |
+| Symbol                   | Explanation                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `print!`                 | Inline printing                                                                        |
+| `println!`               | Print on a new line                                                                    |
+| `consteval_int!`         | Declare a constant that is the result of a computation of integers                     |
+| `array!`                 | Instantiate and fill arrays                                                            |
+| `panic!`                 | Calls `panic` function and allows to provide a message error longer than 31 characters |
+| `assert!`                | Evaluates a Boolean and panics if `false`                                              |
+| `assert_eq!`             | Evaluates an equality, and panics if not equal                                         |
+| `assert_ne!`             | Evaluates an equality, and panics if equal                                             |
+| `format!`                | Format a string and returns a `ByteArray` with the contents                            |
+| `write!`                 | Write formatted strings in a formatter                                                 |
+| `writeln!`               | Write formatted strings in a formatter on a new line                                   |
+| `get_dep_component!`     | Returns the requested component state from a snapshot of the state inside a component  |
+| `get_dep_component_mut!` | Returns the requested component state from a reference of the state inside a component |
 
 <span class="caption">Table B-6: Macros</span>
 

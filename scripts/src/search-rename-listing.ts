@@ -1,6 +1,11 @@
 import prompts from "prompts";
 import { fuzzySearchFolders } from "./prompt";
-import { extractFolderName, getChapterNumber, getSubSubfolders, renameListing } from "./utils";
+import {
+  extractFolderName,
+  getChapterNumber,
+  getSubSubfolders,
+  renameListing,
+} from "./utils";
 
 /**
  * Allows the user to search for a listing folder and rename it.
@@ -13,7 +18,7 @@ import { extractFolderName, getChapterNumber, getSubSubfolders, renameListing } 
  */
 export async function searchAndRenameListing(
   srcFolderPath: string,
-  listingsPath: string
+  listingsPath: string,
 ) {
   const folders = getSubSubfolders(listingsPath);
   const selectedFolder = await fuzzySearchFolders(folders);
@@ -36,7 +41,7 @@ export async function searchAndRenameListing(
         chapterNumber,
         selectedFolder,
         oldFolderName,
-        response.newFolderName
+        response.newFolderName,
       );
     }
   }

@@ -131,7 +131,7 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 <span class="caption">Listing 7-10: Making a name available for any code to use from a new scope with `pub use`</span>
 
 Before this change, external code would have to call the `add_to_waitlist`
-function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`. 
+function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`.
 Now that this `pub use` has re-exported the `hosting` module from the root module, external code
 can now use the path `restaurant::hosting::add_to_waitlist()` instead.
 
@@ -166,5 +166,4 @@ After that, simply run `scarb build` to fetch all external dependencies and comp
 
 Note that it is also possible to add dependencies with the `scarb add` command, which will automatically edit the _Scarb.toml_ file for you. For development dependencies, just use the `scarb add --dev` command.
 
-To remove a dependency, simply remove the corresponding line from your _Scarb.toml_ file, or use the `scarb rm` command. 
-
+To remove a dependency, simply remove the corresponding line from your _Scarb.toml_ file, or use the `scarb rm` command.
