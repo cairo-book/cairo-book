@@ -51,13 +51,13 @@ The two primary types of L2s are optimistic rollups and validity rollups. Both a
 
 In contrast, validity rollups, such as Starknet, use cryptography to prove that the new state has been correctly computed. This is the purpose of STARKs, this cryptographic technology could permit validity rollups to scale significantly more than optimistic rollups. You can learn more about STARKs from Starkware's Medium [article](https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a), which serves as a good primer.
 
-> Starknet's architecture is thoroughly described in the [Starknet Book](https://book.starknet.io/chapter_4/index.html), which is a great resource to learn more about the Starknet network.
+> Starknet's architecture is thoroughly described in the [Starknet Book](https://book.starknet.io/ch03-00-architecture.html), which is a great resource to learn more about the Starknet network.
 
 Remember Cairo? It is, in fact, a language developed specifically to work with STARKs and make them general-purpose. With Cairo, we can write **provable code**. In the context of Starknet, this allows proving the correctness of computations from one state to another.
 
 Unlike most (if not all) of Starknet's competitors that chose to use the EVM (either as-is or adapted) as a base layer, Starknet employs its own VM. This frees developers from the constraints of the EVM, opening up a broader range of possibilities. Coupled with decreased transaction costs, the combination of Starknet and Cairo creates an exciting playground for developers. Native account abstraction enables more complex logic for accounts, that we call "Smart Accounts", and transaction flows. Emerging use cases include **transparent AI** and machine learning applications. Finally, **blockchain games** can be developed entirely **on-chain**. Starknet has been specifically designed to maximize the capabilities of STARK proofs for optimal scalability.
 
-> Learn more about Account Abstraction in the [Starknet Book](https://book.starknet.io/chapter_5/index.html).
+> Learn more about Account Abstraction in the [Starknet Book](https://book.starknet.io/ch04-00-account-abstraction.html).
 
 ## Cairo programs and Starknet contracts: what is the difference?
 

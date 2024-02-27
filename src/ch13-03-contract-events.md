@@ -22,7 +22,7 @@ instantiated with the Event type, which in our example is the following enum:
 ```
 
 Each event variant has to be a struct of the same name as the variant, and each variant needs to implement the `starknet::Event` trait itself.
-Moreover, the members of these variants must implement the `Serde` trait (_c.f._ [Appendix C: Serializing with Serde](./appendix-03-derivable-traits.md)), as keys/data are added to the event using a serialization process.
+Moreover, the members of these variants must implement the `Serde` trait (_c.f._ [Appendix C: Serializing with Serde](./appendix-03-derivable-traits.html#serializing-with-serde)), as keys/data are added to the event using a serialization process.
 
 The auto implementation of the `starknet::Event` trait will implement the `append_keys_and_data` function for each variant of our `Event` enum. The generated implementation will append a single key based on the variant name (`StoredName`), and then recursively call `append_keys_and_data` in the impl of the Event trait for the variant’s type .
 

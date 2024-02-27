@@ -32,11 +32,11 @@ See [How to Write Tests](./ch10-01-how-to-write-tests.md) page.
 
 ## `format!` macro
 
-See [Printing](./ch11-09-printing.md) page.
+See [Printing](./ch09-01-unrecoverable-errors-with-panic.html#panic-macro) page.
 
 ## `write!` and `writeln!` macros
 
-See [Printing](./ch11-09-printing.md) page.
+See [Printing](./ch11-09-printing.html#printing-custom-data-types) page.
 
 ## `get_dep_component!` macro
 

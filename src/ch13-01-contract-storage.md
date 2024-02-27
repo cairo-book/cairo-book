@@ -13,14 +13,14 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 The storage struct is a [struct](./ch05-00-using-structs-to-structure-related-data.md) like any other,
 except that it **must** be annotated with `#[storage]`. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. Moreover, this allows you to define storage mappings using the `LegacyMap` type.
 
-Each variable stored in the storage struct is stored in a different location in the contract's storage. The storage address of a variable is determined by the variable's name, and the eventual keys of the variable if it is a [mapping](#storing-mappings).
+Each variable stored in the storage struct is stored in a different location in the contract's storage. The storage address of a variable is determined by the variable's name, and the eventual keys of the variable if it is a [mapping](./ch13-01-contract-storage.html#storage-mappings).
 
 ## Storage Addresses
 
 The address of a storage variable is computed as follows:
 
 - If the variable is a single value (not a mapping), the address is the `sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.
-- If the variable is a [mapping](#storing-mappings), the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ is the Pedersen hash and the final value is taken `mod (2^251) − 256`.
+- If the variable is a [mapping](./ch13-01-contract-storage.html#storage-mappings), the address of the value at key `k_1,...,k_n` is `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)` where ℎ is the Pedersen hash and the final value is taken `mod (2^251) − 256`.
 - If it is a mapping to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated in the previous point. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
 You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value.

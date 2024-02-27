@@ -51,7 +51,7 @@ The database core functionality is defined by `UserDatabaseTrait`. The following
 - `update_user` to update the balance of users in the database.
 - `get_balance` to find user's balance in the database.
 
-The only remaining step is to implement each of the methods in `UserDatabaseTrait`, but since we are working with [generic types](/src/ch08-00-generic-types-and-traits.md) we also need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:
+The only remaining step is to implement each of the methods in `UserDatabaseTrait`, but since we are working with [Generic types](./ch08-00-generic-types-and-traits.md) we also need to correctly establish the requirements of `T` so it can be a valid `Felt252Dict<T>` value type:
 
 1. `T` should implement the `Copy<T>` since it's required for getting values from a `Felt252Dict<T>`.
 2. All value types of a dictionary implement the `Felt252DictValue<T>`, our generic type should do as well.
@@ -67,7 +67,7 @@ The implementation, with all restrictions in place, would be as follow:
 
 Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it doesn't implement the `Drop<T>` trait, nor the `Destruct<T>` trait.
 Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to implement the `Destruct<T>` trait manually (refer to the [Ownership](ch04-01-what-is-ownership.md#the-drop-trait) chapter for more information).
-Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [genericity](/src/ch08-00-generic-types-and-traits.md) in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
+Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [Generic types](./ch08-00-generic-types-and-traits.md) in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}

@@ -29,7 +29,7 @@ We will setup a local development node using `katana` to deploy the voting contr
 
 ### The `katana` local Starknet node
 
-`katana` is designed to support local development by the [Dojo team](https://github.com/dojoengine/dojo/blob/main/crates/katana/README.md). It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
+`katana` is designed to support local development by the [Dojo team](https://github.com/dojoengine/dojo/blob/main/crates/katana). It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
 
 To install `katana` from the source code, please refer to the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation) chapter of the Starknet Book.
 
