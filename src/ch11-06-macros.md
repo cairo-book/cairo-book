@@ -24,7 +24,7 @@ Please refer to the [Arrays](./ch03-01-arrays.md) page.
 
 ## `panic!` macro
 
-See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.md) page.
+See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.html#panic-macro) page.
 
 ## `assert!`, `assert_eq!`, and `assert_ne!` macros
 
@@ -32,11 +32,11 @@ See [How to Write Tests](./ch10-01-how-to-write-tests.md) page.
 
 ## `format!` macro
 
-See [Printing](./ch11-09-printing.md) page.
+See [Printing](./ch11-09-printing.html#formatting) page.
 
 ## `write!` and `writeln!` macros
 
-See [Printing](./ch11-09-printing.md) page.
+See [Printing](./ch11-09-printing.html#printing-custom-data-types) page.
 
 ## `get_dep_component!` macro
 
