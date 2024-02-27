@@ -1,6 +1,6 @@
-## Appendix D - Common Types & Traits and the Cairo Prelude
+# Appendix D - Common Types & Traits and the Cairo Prelude
 
-### Prelude
+## Prelude
 
 The Cairo prelude is a collection of commonly used modules, functions, data
 types, and traits that are automatically brought into scope of every module in a
@@ -34,7 +34,7 @@ The compiler currently exposes 2 different versions of the prelude:
 
 Note that there is a third edition, `2023_11` which includes recent update concerning items visibility. If you decide to use the `2023_11` edition, you will get the same imports as the `2023_10` edition, but you will need to define visibility for all items you are using
 
-### List of common types and traits
+## List of common types and traits
 
 The following section provides a brief overview of commonly used types and traits when developing Cairo programs. Most of these are included in the prelude and are therefore not required to be imported explicitly - but not all of them.
 
