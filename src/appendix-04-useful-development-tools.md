@@ -1,10 +1,10 @@
-## Appendix D - Useful Development Tools
+# Appendix D - Useful Development Tools
 
 In this appendix, we talk about some useful development tools that the Cairo
 project provides. We’ll look at automatic formatting, quick ways to apply
 warning fixes, a linter, and integrating with IDEs.
 
-### Automatic Formatting with `scarb fmt`
+## Automatic Formatting with `scarb fmt`
 
 Scarb projects can be formatted using the `scarb fmt` command.
 If you're using the Cairo binaries directly, you can run `cairo-format` instead.
@@ -13,7 +13,7 @@ style to use when writing Cairo: everyone formats their code using the tool.
 
 To format any Cairo project, enter the following:
 
-### IDE Integration Using `cairo-language-server`
+## IDE Integration Using `cairo-language-server`
 
 To help IDE integration, the Cairo community recommends using the
 [`cairo-language-server`][cairo-language-server]<!-- ignore -->. This tool is a set of
