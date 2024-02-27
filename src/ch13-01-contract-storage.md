@@ -123,13 +123,14 @@ and cannot be used as types inside structs.
 To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
-You can also create more complex mappings with multiple keys. You can find one in Listing 99-4 like the popular `allowances` storage variable in the ERC20 Standard which maps an `owner` and an allowed `spender` to its `allowance` amount using multiple keys passed inside a tuple:
+You can also create more complex mappings with multiple keys. You can find one in Listing {{#ref storage-mapping}} like the popular `allowances` storage variable in the ERC20 Standard which maps an `owner` and an allowed `spender` to its `allowance` amount using multiple keys passed inside a tuple:
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_04/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 99-4: Storing mappings</span>
+{{#label storage-mapping}}
+<span class="caption">Listing {{#ref storage-mapping}}: Storing mappings</span>
 
 The address in storage of a variable stored in a mapping is computed according to the description in the [Storage Addresses](#storage-addresses) section.
 If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` - where `k_1` and `k_2` are the values of the two fields of the struct.

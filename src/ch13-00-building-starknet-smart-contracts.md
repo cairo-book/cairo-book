@@ -18,4 +18,5 @@ Luckily, we'll be answering all these questions in this chapter. Let's consider 
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:all}}
 ```
 
-<span class="caption">Listing 99-3: Our reference contract for this chapter</span>
+{{#label reference-contract}}
+<span class="caption">Listing {{#ref reference-contract}}: Our reference contract for this chapter</span>

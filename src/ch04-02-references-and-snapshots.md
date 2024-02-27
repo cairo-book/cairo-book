@@ -1,6 +1,6 @@
 ## References and Snapshots
 
-The issue with the tuple code in previous Listing 4-3 is that we have to return the
+The issue with the tuple code in previous Listing {{#ref return-multiple-values}} is that we have to return the
 `Array` to the calling function so we can still use the `Array` after the
 call to `calculate_length`, because the `Array` was moved into
 `calculate_length`.
@@ -76,7 +76,7 @@ In the following example, we want to calculate the area of a rectangle, but we d
 ```
 
 But, what happens if we try to modify something we’re passing as a snapshot? Try the code in
-Listing 4-4. Spoiler alert: it doesn’t work!
+Listing {{#ref modify-snapshot}}. Spoiler alert: it doesn’t work!
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -84,7 +84,9 @@ Listing 4-4. Spoiler alert: it doesn’t work!
 {{#include ../listings/ch04-understanding-ownership/listing_04_04/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-4: Attempting to modify a snapshot value</span>
+{{#label modify-snapshot}}
+
+<span class="caption">Listing {{#ref modify-snapshot}}: Attempting to modify a snapshot value</span>
 
 Here’s the error:
 
@@ -99,7 +101,7 @@ The compiler prevents us from modifying values associated to snapshots.
 
 ### Mutable References
 
-We can achieve the behavior we want in Listing 4-4 by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by returning it automatically at the end of the execution.
+We can achieve the behavior we want in Listing {{#ref modify-snapshot}} by using a _mutable reference_ instead of a snapshot. Mutable references are actually mutable values passed to a function that are implicitly returned at the end of the function, returning ownership to the calling context. By doing so, they allow you to mutate the value passed while keeping ownership of it by returning it automatically at the end of the execution.
 In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modifier.
 
 > **Note**: In Cairo, a parameter can only be passed as _mutable reference_ using the `ref` modifier if the variable is declared as mutable with `mut`.

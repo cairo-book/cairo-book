@@ -2,7 +2,7 @@
 
 To understand when we might want to use structs, let’s write a program that calculates the area of a rectangle. We’ll start by using single variables, and then refactor the program until we’re using structs instead.
 
-Let’s make a new project with Scarb called _rectangles_ that will take the width and height of a rectangle specified in pixels and calculate the area of the rectangle. Listing 5-6 shows a short program with one way of doing exactly that in our project’s _src/lib.cairo_.
+Let’s make a new project with Scarb called _rectangles_ that will take the width and height of a rectangle specified in pixels and calculate the area of the rectangle. Listing {{#ref area-fn}} shows a short program with one way of doing exactly that in our project’s _src/lib.cairo_.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -10,7 +10,8 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_06_no_struct/src/lib.cairo:all}}
 ```
 
-<span class="caption">Listing 5-6: Calculating the area of a rectangle specified by separate width and height variables</span>
+{{#label area-fn}}
+<span class="caption">Listing {{#ref area-fn}}: Calculating the area of a rectangle specified by separate width and height variables</span>
 
 Now run the program with `scarb cairo-run`:
 
@@ -32,7 +33,7 @@ The `area` function is supposed to calculate the area of one rectangle, but the 
 
 ## Refactoring with Tuples
 
-Listing 5-7 shows another version of our program that uses tuples.
+Listing {{#ref rectangle-tuple}} shows another version of our program that uses tuples.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -40,7 +41,8 @@ Listing 5-7 shows another version of our program that uses tuples.
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_07_w_tuples/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 5-7: Specifying the width and height of the rectangle with a tuple</span>
+{{#label rectangle-tuple}}
+<span class="caption">Listing {{#ref rectangle-tuple}}: Specifying the width and height of the rectangle with a tuple</span>
 
 In one way, this program is better. Tuples let us add a bit of structure, and we’re now passing just one argument. But in another way, this version is less clear: tuples don’t name their elements, so we have to index into the parts of the tuple, making our calculation less obvious.
 
@@ -56,6 +58,7 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_08_w_structs/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 5-8: Defining a `Rectangle` struct</span>
+{{#label rectangle-struct}}
+<span class="caption">Listing {{#ref rectangle-struct}}: Defining a `Rectangle` struct</span>
 
 Here we’ve defined a struct and named it `Rectangle`. Inside the curly brackets, we defined the fields as `width` and `height`, both of which have type `u64`. Then, in `main`, we created a particular instance of `Rectangle` that has a width of `30` and a height of `10`. Our `area` function is now defined with one parameter, which we’ve named `rectangle` which is of type `Rectangle` struct. We can then access the fields of the instance with dot notation, and it gives descriptive names to the values rather than using the tuple index values of `0` and `1`.

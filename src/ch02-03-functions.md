@@ -121,14 +121,15 @@ of functions.
 - **Expressions** evaluate to a resultant value. Let’s look at some examples.
 
 We’ve actually already used statements and expressions. Creating a variable and
-assigning a value to it with the `let` keyword is a statement. In Listing 2-1,
+assigning a value to it with the `let` keyword is a statement. In Listing {{#ref fn-main}},
 `let y = 6;` is a statement.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/listing_01_statement/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 2-1: A `main` function declaration containing one statement</span>
+{{#label fn-main}}
+<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement</span>
 
 Function definitions are also statements; the entire preceding example is a
 statement in itself.
@@ -173,7 +174,7 @@ languages, you can write `x = y = 6` and have both `x` and `y` have the value
 Expressions evaluate to a value and make up most of the rest of the code that
 you’ll write in Cairo. Consider a math operation, such as `5 + 6`, which is an
 expression that evaluates to the value `11`. Expressions can be part of
-statements: in Listing 2-1, the `6` in the statement `let y = 6;` is an
+statements: in Listing {{#ref fn-main}}, the `6` in the statement `let y = 6;` is an
 expression that evaluates to the value `6`.
 
 Calling a function is an expression since it always evaluates to a value: the function's explicit return value, if specified, or the 'unit' type `()` otherwise.

@@ -42,14 +42,15 @@ let s = 'hello';
 ```
 
 The variable `s` refers to a short string. The variable is valid from the point at
-which it’s declared until the end of the current _scope_. Listing 4-1 shows a
+which it’s declared until the end of the current _scope_. Listing {{#ref variable-scope}} shows a
 program with comments annotating where the variable `s` would be valid.
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing_04_01/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 4-1: A variable and the scope in which it is valid</span>
+{{#label variable-scope}}
+<span class="caption">Listing {{#ref variable-scope}}: A variable and the scope in which it is valid</span>
 
 In other words, there are two important points in time here:
 
@@ -172,9 +173,9 @@ In this case, the _value_ `arr1` refers to is being copied, resulting in new mem
 
 ### Return Values and Scope
 
-Returning values is equivalent to _moving_ them. Listing 4-2 shows an example of a
+Returning values is equivalent to _moving_ them. Listing {{#ref move-return-values}} shows an example of a
 function that returns some value, with similar annotations as those in Listing
-4-1.
+{{#ref variable-scope}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -182,11 +183,12 @@ function that returns some value, with similar annotations as those in Listing
 {{#include ../listings/ch04-understanding-ownership/listing_04_02/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-2: Moving return values</span>
+{{#label move-return-values}}
+<span class="caption">Listing {{#ref move-return-values}}: Moving return values</span>
 
 While this works, moving into and out of every function is a bit tedious. What if we want to let a function use a value but not move the value? It’s quite annoying that anything we pass in also needs to be passed back if we want to use it again, in addition to any data resulting from the body of the function that we might want to return as well.
 
-Cairo does let us return multiple values using a tuple, as shown in Listing 4-3.
+Cairo does let us return multiple values using a tuple, as shown in Listing {{#ref return-multiple-values}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -194,7 +196,8 @@ Cairo does let us return multiple values using a tuple, as shown in Listing 4-3.
 {{#include ../listings/ch04-understanding-ownership/listing_04_03/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-3: Returning many values</span>
+{{#label return-multiple-values}}
+<span class="caption">Listing {{#ref return-multiple-values}}: Returning many values</span>
 
 But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called _references_ and _snapshots_.
 
