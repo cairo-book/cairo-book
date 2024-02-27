@@ -1,4 +1,4 @@
-# System Calls
+# Appendix A - System Calls
 
 This chapter is based on the StarkNet documentation available at [StarkNet Docs](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/).
 

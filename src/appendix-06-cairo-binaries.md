@@ -1,4 +1,4 @@
-# Appendix F: Installing the Cairo binaries
+# Appendix F - Installing the Cairo binaries
 
 If you want to have access to the Cairo binaries, for anything that you could not achieve by purely using Scarb you can install them by following the instructions below.
 
