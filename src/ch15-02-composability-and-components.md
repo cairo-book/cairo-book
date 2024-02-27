@@ -37,7 +37,7 @@ code becomes part of the contract it's embedded to.
 To create a component, first define it in its own module decorated with a
 `#[starknet::component]` attribute. Within this module, you can declare a `
 Storage` struct and `Event` enum, as usually done in
-[Contracts](./ch99-01-02-a-simple-contract.md).
+[Contracts](./ch12-02-anatomy-of-a-simple-contract.md).
 
 The next step is to define the component interface, containing the signatures of
 the functions that will allow external access to the component's logic. You can
@@ -45,7 +45,7 @@ define the interface of the component by declaring a trait with the
 `#[starknet::interface]` attribute, just as you would with contracts. This
 interface will be used to enable external access to the component's functions
 using the
-[Dispatcher](./ch99-02-02-contract-dispatcher-library-dispatcher-and-system-calls.md)
+[Dispatcher](./ch14-02-contract-dispatchers-library-dispatchers-and-system-calls.md)
 pattern.
 
 The actual implementation of the component's external logic is done in an `impl`
@@ -116,8 +116,7 @@ the added restriction that `TContractState` must implement the `HasComponent<T>`
 trait. This allows us to use the component in any contract, as long as the
 contract implements the `HasComponent` trait. Understanding this mechanism in
 details is not required to use components, but if you're curious about the inner
-workings, you can read more in the [Components under the
-hood](./ch99-01-05-01-components-under-the-hood.md) section.
+workings, you can read more in the [Components under the hood](./ch15-02-01-under-the-hood.md) section.
 
 One of the major differences from a regular smart contract is that access to
 storage and events is done via the generic `ComponentState<TContractState>` type
@@ -207,10 +206,9 @@ to have.
 Developers can focus on their core contract logic while relying on battle-tested
 and audited components for everything else.
 
-Components can even [depend](./ch99-01-05-02-component-dependencies.md) on other components by restricting the
+Components can even [depend](./ch15-02-02-component-dependencies.md) on other components by restricting the
 `TContractstate` they're generic on to implement the trait of another component.
-Before we dive into this mechanism, let's first look at [how components work
-under the hood](./ch99-01-05-01-components-under-the-hood).
+Before we dive into this mechanism, let's first look at [how components work under the hood](./ch15-02-01-under-the-hood.md).
 
 ## Troubleshooting
 

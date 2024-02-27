@@ -125,7 +125,7 @@ Nonetheless, it is possible to use the `consteval_int!` macro to create a `const
 const ONE_HOUR_IN_SECONDS: u32 = consteval_int!(60 * 60);
 ```
 
-We will dive into more detail about macros in the [dedicated section](./ch11-02-macros.md).
+We will dive into more detail about macros in the [dedicated section](./ch11-06-macros.md).
 
 Cairo's naming convention for constants is to use all uppercase with
 underscores between words.
