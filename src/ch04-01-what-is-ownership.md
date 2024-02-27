@@ -112,7 +112,7 @@ The other way linear types can be _used_ is by being destroyed. Destruction must
 In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
 This would be very easy to forget, so it is enforced by the type system and the compiler.
 
-## No-op destruction: the `Drop` Trait
+### No-op destruction: the `Drop` Trait
 
 You may have noticed that the `Point` type in the previous example also implements the `Drop` trait.
 For example, the following code will not compile, because the struct `A` is not moved or destroyed before it goes out of scope:
@@ -130,7 +130,7 @@ For example, the following code compiles:
 {{#include ../listings/ch04-understanding-ownership/no_listing_05_drop_derive_compiles/src/lib.cairo}}
 ```
 
-## Destruction with a side-effect: the `Destruct` trait
+### Destruction with a side-effect: the `Destruct` trait
 
 When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
