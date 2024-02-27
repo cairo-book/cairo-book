@@ -185,7 +185,7 @@ screen. There are four important details to notice here.
 First, Cairo style is to indent with four spaces, not a tab.
 
 Second, `println!` calls a Cairo macro. If it had called a function instead, it would be entered as `println` (without the `!`).
-We’ll discuss Cairo macros in more detail in [Chapter Macros](./ch11-02-macros.md). For now, you just need to know that using a `!` means that you’re calling a macro instead of a normal function and that macros don’t always follow the same rules as functions.
+We’ll discuss Cairo macros in more detail in [Chapter Macros](./ch11-06-macros.md). For now, you just need to know that using a `!` means that you’re calling a macro instead of a normal function and that macros don’t always follow the same rules as functions.
 
 Third, you see the `"Hello, world!"` string. We pass this string as an argument to `println!`, and the string is printed to the screen.
 
