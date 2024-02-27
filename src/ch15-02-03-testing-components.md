@@ -37,7 +37,7 @@ We can now write tests for the component by deploying this mock contract and cal
 
 ## Testing components without deploying a contract
 
-In [Components under the hood](./ch99-01-05-01-components-under-the-hood.md), we saw that components leveraged genericity to define storage and logic that could be embedded in multiple contracts. If a contract embeds a component, a `HasComponent` trait is created in this contract, and the component methods are made available.
+In [Components under the hood](./ch15-02-01-under-the-hood.md), we saw that components leveraged genericity to define storage and logic that could be embedded in multiple contracts. If a contract embeds a component, a `HasComponent` trait is created in this contract, and the component methods are made available.
 
 This informs us that if we can provide a concrete `TContractState` that implements the `HasComponent` trait to the `ComponentState` struct, should be able to directly invoke the methods of the component using this concrete `ComponentState` object, without having to deploy a mock.
 
