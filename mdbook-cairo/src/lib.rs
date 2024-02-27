@@ -2,7 +2,6 @@ use std::collections::HashMap;
 
 use anyhow::anyhow;
 use lazy_static::lazy_static;
-use log::warn;
 use mdbook::book::{Book, BookItem};
 use mdbook::errors::Error;
 use mdbook::preprocess::{Preprocessor, PreprocessorContext};
@@ -89,6 +88,35 @@ impl Default for Cairo {
     }
 }
 
+/// Trait to allow for iterating over the book processing parent items first
+trait BookExt {
+    fn for_each_mut_parent_first<F>(&mut self, func: F)
+    where
+        F: FnMut(&mut BookItem);
+}
+
+impl BookExt for Book {
+    fn for_each_mut_parent_first<F>(&mut self, mut func: F)
+    where
+        F: FnMut(&mut BookItem),
+    {
+        for_each_mut_parent_first(&mut func, &mut self.sections);
+    }
+}
+
+pub fn for_each_mut_parent_first<'a, F, I>(func: &mut F, items: I)
+where
+    F: FnMut(&mut BookItem),
+    I: IntoIterator<Item = &'a mut BookItem>,
+{
+    for item in items {
+        func(item);
+        if let BookItem::Chapter(ch) = item {
+            for_each_mut_parent_first(func, &mut ch.sub_items);
+        }
+    }
+}
+
 impl Preprocessor for Cairo {
     fn name(&self) -> &str {
         "cairo-preprocessor"
@@ -96,10 +124,18 @@ impl Preprocessor for Cairo {
 
     fn run(&self, _ctx: &PreprocessorContext, mut book: Book) -> Result<Book, Error> {
         let mut label_processor = LabelsProcessor::new();
-        // First pass: collect all labels
-        book.for_each_mut(|item| {
+        let mut prev_chapter_number = 0;
+        // First pass: collect all labels - process parents items first to have correct labels numerotation
+        book.for_each_mut_parent_first(|item| {
             if let BookItem::Chapter(ref mut chapter) = *item {
                 let chapter_number = chapter.number.as_ref().map_or(0, |s| s[0]);
+
+                // Reset label count after each chapter
+                if chapter_number != prev_chapter_number {
+                    prev_chapter_number = chapter_number;
+                    label_processor.current_label = 1;
+                }
+
                 let mut new_content = String::new();
                 let lines = chapter.content.split_terminator('\n').peekable();
 
@@ -111,7 +147,7 @@ impl Preprocessor for Cairo {
                             }
                         }
                         Err(e) => {
-                            warn!(
+                            eprintln!(
                                 "Error: {}. In chapter: {}. In line: {}",
                                 e, chapter.name, line
                             );
@@ -121,8 +157,6 @@ impl Preprocessor for Cairo {
                     new_content.push('\n');
                 }
 
-                // Reset label count after each chapter
-                label_processor.current_label = 1;
                 chapter.content = new_content;
             }
         });
@@ -157,7 +191,7 @@ impl Preprocessor for Cairo {
                             new_content.push('\n');
                         }
                         Err(e) => {
-                            warn!(
+                            eprintln!(
                                 "Error: {}. In chapter: {}. In line: {}",
                                 e, chapter.name, line
                             );

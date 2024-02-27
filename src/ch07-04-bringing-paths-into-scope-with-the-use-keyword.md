@@ -2,7 +2,7 @@
 
 Having to write out the paths to call functions can feel inconvenient and repetitive. Fortunately, there’s a way to simplify this process: we can create a shortcut to a path with the `use` keyword once, and then use the shorter name everywhere else in the scope.
 
-In Listing 7-4, we bring the `restaurant::front_of_house::hosting` module into the
+In Listing {{#ref use-keyword}}, we bring the `restaurant::front_of_house::hosting` module into the
 scope of the `eat_at_restaurant` function so we only have to specify
 `hosting::add_to_waitlist` to call the `add_to_waitlist` function in
 `eat_at_restaurant`.
@@ -13,11 +13,12 @@ scope of the `eat_at_restaurant` function so we only have to specify
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_04/src/lib.cairo:use}}
 ```
 
-<span class="caption">Listing 7-4: Bringing a module into scope with `use`</span>
+{{#label use-keyword}}
+<span class="caption">Listing {{#ref use-keyword}}: Bringing a module into scope with `use`</span>
 
 Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use restaurant::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
 
-Note that `use` only creates the shortcut for the particular scope in which the `use` occurs. Listing 7-5 moves the `eat_at_restaurant` function into a new child module named `customer`, which is then a different scope than the `use`
+Note that `use` only creates the shortcut for the particular scope in which the `use` occurs. Listing {{#ref  use-scope}} moves the `eat_at_restaurant` function into a new child module named `customer`, which is then a different scope than the `use`
 statement, so the function body won’t compile:
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -26,7 +27,8 @@ statement, so the function body won’t compile:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_05/src/lib.cairo:wrong-path}}
 ```
 
-<span class="caption">Listing 7-5: A `use` statement only applies in the scope it’s in</span>
+{{#label use-scope}}
+<span class="caption">Listing {{#ref  use-scope}}: A `use` statement only applies in the scope it’s in</span>
 
 The compiler error shows that the shortcut no longer applies within the `customer` module:
 
@@ -40,10 +42,10 @@ error: Identifier not found.
 
 ## Creating Idiomatic `use` Paths
 
-In Listing 7-4, you might have wondered why we specified `use
+In Listing {{#ref use-keyword}}, you might have wondered why we specified `use
 restaurant::front_of_house::hosting` and then called `hosting::add_to_waitlist` in
 `eat_at_restaurant` rather than specifying the `use` path all the way out to
-the `add_to_waitlist` function to achieve the same result, as in Listing 7-6.
+the `add_to_waitlist` function to achieve the same result, as in Listing {{#ref unidiomatic-use}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -51,23 +53,25 @@ the `add_to_waitlist` function to achieve the same result, as in Listing 7-6.
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_06/src/lib.cairo:unidiomatic-path}}
 ```
 
-<span class="caption">Listing 7-6: Bringing the `add_to_waitlist` function into scope with `use`, which is unidiomatic</span>
+{{#label unidiomatic-use}}
+<span class="caption">Listing {{#ref unidiomatic-use}}: Bringing the `add_to_waitlist` function into scope with `use`, which is unidiomatic</span>
 
-Although both Listing 7-4 and 7-6 accomplish the same task, Listing 7-4 is
+Although both Listing {{#ref use-keyword}} and {{#ref unidiomatic-use}} accomplish the same task, Listing {{#ref use-keyword}} is
 the idiomatic way to bring a function into scope with `use`. Bringing the
 function’s parent module into scope with `use` means we have to specify the
 parent module when calling the function. Specifying the parent module when
 calling the function makes it clear that the function isn’t locally defined
-while still minimizing repetition of the full path. The code in Listing 7-6 is
+while still minimizing repetition of the full path. The code in Listing{{#ref unidiomatic-use}} is
 unclear as to where `add_to_waitlist` is defined.
 
-On the other hand, when bringing in structs, enums, traits, and other items with `use`, it’s idiomatic to specify the full path. Listing 7-7 shows the idiomatic way to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
+On the other hand, when bringing in structs, enums, traits, and other items with `use`, it’s idiomatic to specify the full path. Listing {{#ref idiomatic-use}} shows the idiomatic way to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
 
 ```rust
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_07/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-7: Bringing `BitSize` trait into scope in an idiomatic way</span>
+{{#label idiomatic-use}}
+<span class="caption">Listing {{#ref idiomatic-use}}: Bringing `BitSize` trait into scope in an idiomatic way</span>
 
 There’s no strong reason behind this idiom: it’s just the convention that has
 emerged in the Rust community, and folks have gotten used to reading and writing Rust code this way.
@@ -80,7 +84,7 @@ into scope with `use` statements, because Cairo doesn’t allow that.
 
 There’s another solution to the problem of bringing two types of the same name
 into the same scope with `use`: after the path, we can specify `as` and a new
-local name, or _alias_, for the type. Listing 7-8 shows how you can rename an import with `as`:
+local name, or _alias_, for the type. Listing {{#ref as-keyword}} shows how you can rename an import with `as`:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -88,7 +92,8 @@ local name, or _alias_, for the type. Listing 7-8 shows how you can rename an im
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_08/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-8: Renaming a trait when it’s brought into scope with the `as` keyword</span>
+{{#label as-keyword}}
+<span class="caption">Listing {{#ref as-keyword}}: Renaming a trait when it’s brought into scope with the `as` keyword</span>
 
 Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier.
 
@@ -111,7 +116,8 @@ Here is an example where we import three structures from the same module:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_09/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-9: Importing multiple items from the same module</span>
+{{#label multiple-imports}}
+<span class="caption">Listing {{#ref multiple-imports}}: Importing multiple items from the same module</span>
 
 ## Re-exporting Names in Module Files
 
@@ -128,7 +134,8 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_10/src/lib.cairo:reexporting}}
 ```
 
-<span class="caption">Listing 7-10: Making a name available for any code to use from a new scope with `pub use`</span>
+{{#label reexporting}}
+<span class="caption">Listing {{#ref reexporting}}: Making a name available for any code to use from a new scope with `pub use`</span>
 
 Before this change, external code would have to call the `add_to_waitlist`
 function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`.
