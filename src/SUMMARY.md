@@ -117,6 +117,7 @@
 
 - [Building Starknet Smart Contracts](./ch13-00-building-starknet-smart-contracts.md)
 
+  - [Upgradeable contract](./ch99-01-04-01-upgradeable-contract.md)
   - [Contract Storage](./ch13-01-contract-storage.md)
   - [Contract Functions](./ch13-02-contract-functions.md)
   - [Contract Events](./ch13-03-contract-events.md)
