@@ -13,8 +13,8 @@ _[lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.4.0/corelib/src/lib
 file of the corelib crate and contains Cairo's primitive data types, traits,
 operators, and utility functions. This includes: 
 
-- Data types: felts, bools, arrays, dicts, etc.
-- Traits: behaviors for arithmetic, comparison, serialization
+- Data types: integers, bools, arrays, dicts, etc.
+- Traits: behaviors for arithmetic, comparison, and serialization operations
 - Operators: arithmetic, logical, bitwise
 - Utility functions - helpers for arrays, maps, boxing, etc.
 
@@ -26,13 +26,12 @@ imports. This prevents repetition and provides a better devX. This is what
 allows you to use `ArrayTrait::append()` or the `Default` trait without bringing
 them explicitly into scope.
 
-You can choose which prelude to use. For example, adding `edition = "2023_10"` in _Scarb.toml_ configuration file will load the prelude from October 2023, which is more restricted than the one from January 2023.
+You can choose which prelude to use. For example, adding `edition = "2023_11"` in the _Scarb.toml_ configuration file will load the prelude from November 2023. Note that when you create a new project using `scarb new` command, the _Scarb.toml_ file will automatically include `edition = "2023_11"`.
+
 The compiler currently exposes 2 different versions of the prelude:
 
 - A general version, with a lot of traits that are made available, corresponding to `edition = "2023_01"`.
 - A restricted version, including the most essential traits needed for general cairo programming, corresponding to `edition = 2023_10`.
-
-Note that there is a third edition, `2023_11` which includes recent update concerning items visibility. If you decide to use the `2023_11` edition, you will get the same imports as the `2023_10` edition, but you will need to define visibility for all items you are using
 
 ## List of common types and traits
 
