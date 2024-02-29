@@ -39,7 +39,7 @@ Executing this program will yield the same error message as before. In that case
 {{#include ../listings/ch09-error-handling/no_listing_03_panic_macro/src/lib.cairo}}
 ```
 
-Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as a parameter. For example, the following line of code will successfully compile: 
+Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as a parameter. For example, the following line of code will successfully compile:
 
 ```rust, noplayground
 panic!("the error for panic! macro is not limited to 31 characters anymore");

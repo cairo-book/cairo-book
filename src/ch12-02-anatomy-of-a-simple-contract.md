@@ -8,7 +8,8 @@ Let's consider the following contract to present the basics of a Starknet contra
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:all}}
 ```
 
-<span class="caption">Listing 99-1: A simple storage contract</span>
+{{#label simple-contract}}
+<span class="caption">Listing {{#ref simple-contract}}: A simple storage contract</span>
 
 > Note: Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md).
 
@@ -30,7 +31,8 @@ The interface of a contract represents the functions this contract exposes to th
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_02/src/lib.cairo:impl}}
 ```
 
-<span class="caption">Listing 99-2: A wrong implementation of the interface of the contract. This does not compile.</span>
+{{#label wrong-interface}}
+<span class="caption">Listing {{#ref wrong-interface}}: A wrong implementation of the interface of the contract. This does not compile.</span>
 
 In the interface, note the generic type `TContractState` of the `self` argument which is passed by reference to the `set` function. The `self` parameter represents the contract state. Seeing the `self` argument passed to `set` tells us that this function might access the state of the contract, as it is what gives us access to the contract’s storage. The `ref` modifier implies that `self` may be modified, meaning that the storage variables of the contract may be modified inside the `set` function.
 

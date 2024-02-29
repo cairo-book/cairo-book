@@ -1,4 +1,4 @@
-## Appendix A: Keywords
+# Appendix A: Keywords
 
 The following list contains keywords that are reserved for current or future use by the Cairo language.
 
@@ -13,7 +13,7 @@ they are not recommended to be used as names of any items to follow good practic
 
 ---
 
-### Strict keywords
+## Strict keywords
 
 These keywords can only be used in their correct contexts.
 They cannot be used as names of any items.
@@ -49,7 +49,7 @@ They cannot be used as names of any items.
 
 ---
 
-### Loose keywords
+## Loose keywords
 
 These keywords are associated with a specific behaviour, but can also be used to define items.
 
@@ -58,7 +58,7 @@ These keywords are associated with a specific behaviour, but can also be used to
 
 ---
 
-### Reserved keywords
+## Reserved keywords
 
 These keywords aren't used yet, but they are reserved for future use.
 For now, it is possible to use them to define items, although it is highly recommended not to do so.
@@ -84,7 +84,7 @@ Cairo by forbidding them to use these keywords.
 
 ---
 
-### Built-in functions
+## Built-in functions
 
 The Cairo programming language provides several specific functions that serve a special purpose. We will not cover all of them in this book, but using the names of these functions as names of other items is not recommended.
 

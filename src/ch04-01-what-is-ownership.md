@@ -1,4 +1,4 @@
-## Ownership Using a Linear Type System
+# Ownership Using a Linear Type System
 
 Cairo uses a linear type system. In such a type system, any value (a basic type, a struct, an enum) must be used and must only be used once. 'Used' here means that the value is either _destroyed_ or _moved_.
 
@@ -17,7 +17,7 @@ Instead, Cairo leverages its linear type system for two main purposes:
 - Ensuring that all code is provable and thus verifiable.
 - Abstracting away the immutable memory of the Cairo VM.
 
-#### Ownership
+### Ownership
 
 In Cairo, ownership applies to _variables_ and not to _values_. A value can safely be referred to by many different variables (even if they are mutable variables), as the value itself is always immutable.
 Variables however can be mutable, so the compiler must ensure that constant variables aren't accidentally modified by the programmer.
@@ -31,7 +31,7 @@ This means that variables (not values) follow similar rules to Rust values:
 
 Now that we’re past basic Cairo syntax, we won’t include all the `fn main() {` code in examples, so if you’re following along, make sure to put the following examples inside a main function manually. As a result, our examples will be a bit more concise, letting us focus on the actual details rather than boilerplate code.
 
-### Variable Scope
+## Variable Scope
 
 As a first example of the linear type system, we’ll look at the _scope_ of some variables. A
 scope is the range within a program for which an item is valid. Take the
@@ -42,14 +42,15 @@ let s = 'hello';
 ```
 
 The variable `s` refers to a short string. The variable is valid from the point at
-which it’s declared until the end of the current _scope_. Listing 4-1 shows a
+which it’s declared until the end of the current _scope_. Listing {{#ref variable-scope}} shows a
 program with comments annotating where the variable `s` would be valid.
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing_04_01/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 4-1: A variable and the scope in which it is valid</span>
+{{#label variable-scope}}
+<span class="caption">Listing {{#ref variable-scope}}: A variable and the scope in which it is valid</span>
 
 In other words, there are two important points in time here:
 
@@ -86,7 +87,7 @@ error: Variable was previously moved. Trait has no implementation in context: co
         ^*****^
 ```
 
-#### The Copy trait
+## The Copy trait
 
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
 The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
@@ -105,13 +106,13 @@ If you remove the `Copy` trait derivation from the `Point` type, you will get a 
 
 _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._
 
-### Destroying values - example with FeltDict
+## Destroying values - example with FeltDict
 
 The other way linear types can be _used_ is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In Rust, for example, this could be closing the access to a file, or locking a mutex.
 In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
 This would be very easy to forget, so it is enforced by the type system and the compiler.
 
-#### No-op destruction: the `Drop` Trait
+### No-op destruction: the `Drop` Trait
 
 You may have noticed that the `Point` type in the previous example also implements the `Drop` trait.
 For example, the following code will not compile, because the struct `A` is not moved or destroyed before it goes out of scope:
@@ -129,7 +130,7 @@ For example, the following code compiles:
 {{#include ../listings/ch04-understanding-ownership/no_listing_05_drop_derive_compiles/src/lib.cairo}}
 ```
 
-#### Destruction with a side-effect: the `Destruct` trait
+### Destruction with a side-effect: the `Destruct` trait
 
 When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
@@ -157,7 +158,7 @@ When `A` goes out of scope, it can't be dropped as it implements neither the `Dr
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
 
-### Copy Array data with Clone
+## Copy Array data with Clone
 
 If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in [Chapter 5-3](ch05-03-method-syntax.md), but because methods are a common feature in many programming languages, you’ve probably seen them before.
 
@@ -170,11 +171,11 @@ Here’s an example of the `clone` method in action.
 When you see a call to `clone`, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
 In this case, the _value_ `arr1` refers to is being copied, resulting in new memory cells being used, and a new _variable_ `arr2` is created, referring to the new copied value.
 
-### Return Values and Scope
+## Return Values and Scope
 
-Returning values is equivalent to _moving_ them. Listing 4-2 shows an example of a
+Returning values is equivalent to _moving_ them. Listing {{#ref move-return-values}} shows an example of a
 function that returns some value, with similar annotations as those in Listing
-4-1.
+{{#ref variable-scope}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -182,11 +183,12 @@ function that returns some value, with similar annotations as those in Listing
 {{#include ../listings/ch04-understanding-ownership/listing_04_02/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-2: Moving return values</span>
+{{#label move-return-values}}
+<span class="caption">Listing {{#ref move-return-values}}: Moving return values</span>
 
 While this works, moving into and out of every function is a bit tedious. What if we want to let a function use a value but not move the value? It’s quite annoying that anything we pass in also needs to be passed back if we want to use it again, in addition to any data resulting from the body of the function that we might want to return as well.
 
-Cairo does let us return multiple values using a tuple, as shown in Listing 4-3.
+Cairo does let us return multiple values using a tuple, as shown in Listing {{#ref return-multiple-values}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -194,7 +196,8 @@ Cairo does let us return multiple values using a tuple, as shown in Listing 4-3.
 {{#include ../listings/ch04-understanding-ownership/listing_04_03/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-3: Returning many values</span>
+{{#label return-multiple-values}}
+<span class="caption">Listing {{#ref return-multiple-values}}: Returning many values</span>
 
 But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called _references_ and _snapshots_.
 

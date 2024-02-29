@@ -26,7 +26,7 @@ Transactions in smart contracts are atomic, meaning they either succeed or fail 
 
 Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external function represents a set of possible state transitions. A transaction is nothing more than a state transition.
 
-The `assert!` or `panic!` macros can be used to validate conditions before performing specific actions. You can learn more about these on the [Unrecoverable Errors with panic](./ch10-01-unrecoverable-errors-with-panic.md) page.
+The `assert!` or `panic!` macros can be used to validate conditions before performing specific actions. You can learn more about these on the [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.md) page.
 
 These validations can include:
 

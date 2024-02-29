@@ -44,7 +44,7 @@ When indexing on `list`, the value results in a snap of the indexed element, unl
 
 Until now, we have always specified a name for each implementation of the required generic trait: `TPartialOrd` for `PartialOrd<T>`, `TDrop` for `Drop<T>`, and `TCopy` for `Copy<T>`.
 
-However, most of the time, we don't use the implementation in the function body; we only use it as a constraint. In these cases, we can use the `+` operator to specify that the generic type must implement a trait without naming the implementation. This is referred to as an *anonymous generic implementation parameter*.
+However, most of the time, we don't use the implementation in the function body; we only use it as a constraint. In these cases, we can use the `+` operator to specify that the generic type must implement a trait without naming the implementation. This is referred to as an _anonymous generic implementation parameter_.
 
 For example, `+PartialOrd<T>` is equivalent to `impl TPartialOrd: PartialOrd<T>`.
 

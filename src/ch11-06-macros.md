@@ -16,7 +16,7 @@ This will be interpreted as `const a: felt252 = 8;` by the compiler.
 
 ## `print!` and `println!` macros
 
-Please refer to the [Printing](./ch11-04-printing.md) page.
+Please refer to the [Printing](./ch11-09-printing.md) page.
 
 ## `array!` macro
 
@@ -24,7 +24,7 @@ Please refer to the [Arrays](./ch03-01-arrays.md) page.
 
 ## `panic!` macro
 
-See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.md) page.
+See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.html#panic-macro) page.
 
 ## `assert!`, `assert_eq!`, and `assert_ne!` macros
 
@@ -32,12 +32,12 @@ See [How to Write Tests](./ch10-01-how-to-write-tests.md) page.
 
 ## `format!` macro
 
-Please refer to the [Printing](./ch11-04-printing.md) page.
+See [Printing](./ch11-09-printing.html#formatting) page.
 
 ## `write!` and `writeln!` macros
 
-Please refer to the [Printing](./ch11-04-printing.md) page.
+See [Printing](./ch11-09-printing.html#printing-custom-data-types) page.
 
 ## `get_dep_component!` macro
 
-Please refer to the [Components Dependencies](./ch99-01-05-02-component-dependencies.md) page.
+Please refer to the [Components Dependencies](./ch15-02-02-component-dependencies.md) page.

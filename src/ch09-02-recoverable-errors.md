@@ -27,6 +27,7 @@ The `expect_err` and `unwrap_err` methods have the exact opposite behavior. If t
 A careful reader may have noticed the `<+Drop<T>>` and `<+Drop<E>>` in the first four methods signatures. This syntax represents generic type constraints in the Cairo language, as seen in the previous chapter. These constraints indicate that the associated functions require an implementation of the `Drop` trait for the generic types `T` and `E`, respectively.
 
 Finally, the `is_ok` and `is_err` methods are utility functions provided by the `ResultTrait` trait to check the variant of a `Result` enum value.
+
 - `is_ok` takes a snapshot of a `Result<T, E>` value and returns `true` if the `Result` is the `Ok` variant, meaning the operation was successful. If the `Result` is the `Err` variant, it returns `false`.
 - `is_err` takes a snapshot of a `Result<T, E>` value and returns `true` if the `Result` is the `Err` variant, meaning the operation encountered an error. If the `Result` is the `Ok` variant, it returns `false`.
 
@@ -65,8 +66,8 @@ Our two test cases are:
 {{#rustdoc_include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:tests}}
 ```
 
-Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail its meaning in the next [Testing Cairo Programs](ch10-01-how-to-write-tests.md) chapter. 
- 
+Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail its meaning in the next [Testing Cairo Programs](ch10-01-how-to-write-tests.md) chapter.
+
 `#[test]` attribute means the function is a test function, and `#[should_panic]` attribute means this test will pass if the test execution panics.
 
 The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'.

@@ -4,7 +4,7 @@
 [Foreword](ch00-01-foreword.md)
 [Introduction](ch00-00-introduction.md)
 
-# The Cairo Programming Language  
+# The Cairo Programming Language
 
 ## Getting Started
 
@@ -87,12 +87,11 @@
   - [Working with Hashes](ch11-05-hash.md)
   - [Macros](ch11-06-macros.md)
   - [Printing](ch11-09-printing.md)
-  
+
 <!--  - [Using Arrays inside Dictionaries](ch11-02-using-arrays-inside-dictionaries.md) -->
 <!--  - [Smart Pointers](ch11-03-smart-pointers.md) -->
 <!--  - [Inlining in Cairo](ch11-07-inlining-in-cairo.md) -->
 <!--  - [Gas optimisation](ch11-08-gas-optimisation.md) -->
-
 
 - [Appendix](appendix-00.md)
 
@@ -102,6 +101,8 @@
   - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
   - [E - Common Types & Traits and the Cairo Prelude](appendix-05-common-types-and-traits-and-cairo-prelude.md)
   - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
+
+---
 
 # Smart Contracts in Cairo
 
@@ -116,19 +117,18 @@
 
 - [Building Starknet Smart Contracts](./ch13-00-building-starknet-smart-contracts.md)
 
-    - [Deploying and Interacting with a Voting contract](./ch99-01-04-01-voting-contract.md)
-    - [Upgradeable contract](./ch99-01-04-01-upgradeable-contract.md)
-    - [Contract Storage](./ch13-01-contract-storage.md)
-    - [Contract Functions](./ch13-02-contract-functions.md)
-    - [Contract Events](./ch13-03-contract-events.md)
-    - [Reducing Boilerplate](./ch13-04-reducing-boilerplate.md)
+  - [Upgradeable contract](./ch99-01-04-01-upgradeable-contract.md)
+  - [Contract Storage](./ch13-01-contract-storage.md)
+  - [Contract Functions](./ch13-02-contract-functions.md)
+  - [Contract Events](./ch13-03-contract-events.md)
+  - [Reducing Boilerplate](./ch13-04-reducing-boilerplate.md)
 
 ## Starknet Cross-Contract Interactions
 
 - [Starknet Cross-Contract Interactions](./ch14-00-starknet-cross-contract-interactions.md)
 
-    - [ABIs and Contract Interfaces](./ch14-01-abis-and-contract-interfaces.md)
-    - [Contract Dispatchers, Library Dispatchers and System Calls](./ch14-02-contract-dispatchers-library-dispatchers-and-system-calls.md)
+  - [ABIs and Contract Interfaces](./ch14-01-abis-and-contract-interfaces.md)
+  - [Contract Dispatchers, Library Dispatchers and System Calls](./ch14-02-contract-dispatchers-library-dispatchers-and-system-calls.md)
 
 ## Building Advanced Starknet Smart Contracts
 
@@ -142,17 +142,19 @@
   - [L1 <> L2 Messaging](./ch15-04-L1-L2-messaging.md)
   - [Other examples](./ch15-06-other-examples.md)
     - [Deploying and Interacting with a Voting contract](./ch15-06-01-deploying-and-interacting-with-a-voting-contract.md)
-  
+
   <!-- - [Upgradability](./ch15-03-upgradability.md) -->
   <!-- - [Oracle Interactions](./ch15-05-oracle-interactions.md) -->
   <!-- - [Price Feeds](./ch15-05-01-price-feeds.md) -->
   <!-- - [Randomness](./ch15-05-02-randomness.md) -->
 
 ## Starknet Smart Contracts Security
-  - [Starknet Smart Contracts Security](./ch16-00-starknet-smart-contracts-security.md)
-    - [General Recommendations](./ch16-01-general-recommendations.md)
-    - [Static Analysis Tools](./ch16-03-static-analysis-tools.md)
-  
+
+- [Starknet Smart Contracts Security](./ch16-00-starknet-smart-contracts-security.md)
+
+  - [General Recommendations](./ch16-01-general-recommendations.md)
+  - [Static Analysis Tools](./ch16-03-static-analysis-tools.md)
+
   <!-- - [Testing Smart Contracts with Starknet Foundry](./ch16-02-testing-smart-contracts-with-starknet-foundry.md) -->
   <!-- - [Formal Verification](./ch16-04-formal-verification.md) -->
 

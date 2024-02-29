@@ -4,13 +4,14 @@ Cairo has an extremely powerful control flow construct called `match` that allow
 
 Think of a `match` expression as being like a coin-sorting machine: coins slide down a track with variously sized holes along it, and each coin falls through the first hole it encounters that it fits into. In the same way, values go through each pattern in a match, and at the first pattern the value “fits”, the value falls into the associated code block to be used during execution.
 
-Speaking of coins, let’s use them as an example using `match`! We can write a function that takes an unknown US coin and, in a similar way as the counting machine, determines which coin it is and returns its value in cents, as shown in Listing 6-3.
+Speaking of coins, let’s use them as an example using `match`! We can write a function that takes an unknown US coin and, in a similar way as the counting machine, determines which coin it is and returns its value in cents, as shown in Listing {{#ref match-enum}}.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_04_match_example/src/lib.cairo:all}}
 ```
 
-<span class="caption">Listing 6-3: An enum and a `match` expression that has the variants of the enum as its patterns</span>
+{{#label match-enum}}
+<span class="caption">Listing {{#ref match-enum}}: An enum and a `match` expression that has the variants of the enum as its patterns</span>
 
 Let’s break down the `match` expression in the `value_in_cents` function. First, we list the `match` keyword followed by an expression, which in this case is the value `coin`. This seems very similar to a conditional expression used with if, but there’s a big difference: with if, the condition needs to evaluate to a Boolean value, but here it can be any type. The type of `coin` in this example is the `Coin` enum that we defined on the first line.
 
@@ -30,13 +31,14 @@ We don’t typically use curly brackets if the `match` arm code is short, as it 
 
 Another useful feature of `match` arms is that they can bind to the parts of the values that match the pattern. This is how we can extract values out of enum variants.
 
-As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our `enum` by changing the `Quarter` variant to include a `UsState` value stored inside it, which we’ve done in Listing 6-4.
+As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our `enum` by changing the `Quarter` variant to include a `UsState` value stored inside it, which we’ve done in Listing {{#ref match-pattern-bind}}.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_match_pattern_bind/src/lib.cairo:enum_def}}
 ```
 
-<span class="caption">Listing 6-4: A `Coin` enum in which the `Quarter` variant also holds a `UsState` value</span>
+{{#label match-pattern-bind}}
+<span class="caption">Listing {{#ref match-pattern-bind}}: A `Coin` enum in which the `Quarter` variant also holds a `UsState` value</span>
 
 Let’s imagine that a friend is trying to collect all 50 state quarters. While we sort our loose change by coin type, we’ll also call out the name of the state associated with each quarter so that if it’s one our friend doesn’t have, they can add it to their collection.
 
@@ -50,21 +52,20 @@ Because `state` is an `UsState` enum which implements the `Debug` trait, we can 
 
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the Coin enum variant for Quarter.
 
-
-
 ## Matching with `Option<T>`
 
 In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same.
 
 Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there isn’t a value inside, the function should return the `None` value and not attempt to perform any operations.
 
-This function is very easy to write, thanks to `match`, and will look like Listing 6-5.
+This function is very easy to write, thanks to `match`, and will look like Listing {{#ref match-option}}.
 
 ```rust
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_07_match_option/src/lib.cairo:all}}
 ```
 
-<span class="caption">Listing 6-5: A function that uses a `match` expression on an `Option<u8>`</span>
+{{#label match-option}}
+<span class="caption">Listing {{#ref match-option}}: A function that uses a `match` expression on an `Option<u8>`</span>
 
 Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5)`. We then compare that against each `match` arm:
 
@@ -137,7 +138,7 @@ This example also meets the exhaustiveness requirement because we’re explicitl
 
 ## Multiple Patterns with the `|` operator
 
- In `match` expressions, you can match multiple patterns using the `|` syntax, which is the pattern *or* operator.
+In `match` expressions, you can match multiple patterns using the `|` syntax, which is the pattern _or_ operator.
 
 For example, in the following code we modified the `vending_machine_accept` function to accept both `Dime` and `Quarter` coins in a single arm:
 
