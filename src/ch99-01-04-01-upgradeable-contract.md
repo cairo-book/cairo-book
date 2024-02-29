@@ -31,9 +31,3 @@ Check [OpenZeppelin docs API reference](https://docs.openzeppelin.com/contracts-
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_12_upgradeable_contract_example/src/lib.cairo}}
 ```
 <span class="caption">Upgradeable OZ component usage </span>
-
-## Proxies in Starknet
-
-In the case of contract upgrades, it is achieved by simply changing the contract’s class hash. As of clones, contracts already are like clones of the class they implement.
-
-Implementing a proxy pattern in Starknet has an important limitation: there is no fallback mechanism to be used for redirecting every potential function call to the implementation. This means that a generic proxy contract can’t be implemented. Instead, a limited proxy contract can implement specific functions that forward their execution to another contract class. This can still be useful for example to upgrade the logic of some functions.
