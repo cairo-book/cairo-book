@@ -25,14 +25,19 @@ This will ensure that the version of Scarb you use to work on a project always m
 Please refer to the [asdf documentation](https://asdf-vm.com/guide/getting-started.html) to install all prerequisites.
 
 Once you have asdf installed locally, you can download Scarb plugin with the following command:
+
 ```bash
 asdf plugin add scarb
 ```
+
 This will allow you to download specific versions:
+
 ```bash
 asdf install scarb 2.5.3
 ```
-and set a global version: 
+
+and set a global version:
+
 ```bash
 asdf global scarb 2.5.3
 ```

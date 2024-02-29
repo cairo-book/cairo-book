@@ -1,10 +1,10 @@
-## Separating Modules into Different Files
+# Separating Modules into Different Files
 
 So far, all the examples in this chapter defined multiple modules in one file.
 When modules get large, you might want to move their definitions to a separate
 file to make the code easier to navigate.
 
-For example, let’s start from the code in Listing 7-4 that had multiple
+For example, let’s start from the code in Listing {{#ref use-keyword}} that had multiple
 restaurant modules. We’ll extract modules into files instead of having all the
 modules defined in the crate root file. In this case, the crate root file is
 _src/lib.cairo_.
@@ -12,7 +12,7 @@ _src/lib.cairo_.
 First, we’ll extract the `front_of_house` module to its own file. Remove the
 code inside the curly brackets for the `front_of_house` module, leaving only
 the `mod front_of_house;` declaration, so that _src/lib.cairo_ contains the code
-shown in Listing 7-11. Note that this won’t compile until we create the
+shown in Listing {{#ref front-extraction}}. Note that this won’t compile until we create the
 _src/front_of_house.cairo_ file.
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -21,10 +21,11 @@ _src/front_of_house.cairo_ file.
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_11/src/lib.cairo:front-extraction}}
 ```
 
-<span class="caption">Listing 7-11: Declaring the `front_of_house` module whose body will be in _src/front_of_house.cairo_</span>
+{{#label front-extraction}}
+<span class="caption">Listing {{#ref front-extraction}}: Declaring the `front_of_house` module whose body will be in _src/front_of_house.cairo_</span>
 
 Next, place the code that was in the curly brackets into a new file named
-_src/front_of_house.cairo_, as shown in Listing 7-12. The compiler knows to look
+_src/front_of_house.cairo_, as shown in Listing {{#ref module-foh}}. The compiler knows to look
 in this file because it came across the module declaration in the crate root
 with the name `front_of_house`.
 
@@ -34,14 +35,14 @@ with the name `front_of_house`.
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_12/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 7-12: Definitions inside the `front_of_house` module in _src/front_of_house.cairo_</span>
+{{#label module-foh}}
+<span class="caption">Listing {{#ref module-foh}}: Definitions inside the `front_of_house` module in _src/front_of_house.cairo_</span>
 
 Note that you only need to load a file using a `mod` declaration _once_ in your
 module tree. Once the compiler knows the file is part of the project (and knows
 where in the module tree the code resides because of where you’ve put the `mod`
 statement), other files in your project should refer to the loaded file’s code
-using a path to where it was declared, as covered in the [Paths for Referring
-to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section.
+using a path to where it was declared, as covered in the [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section.
 In other words, `mod` is _not_ an “include” operation that you may have seen in other
 programming languages.
 

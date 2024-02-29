@@ -1,8 +1,8 @@
-## Control Flow
+# Control Flow
 
 The ability to run some code depending on whether a condition is true and to run some code repeatedly while a condition is true are basic building blocks in most programming languages. The most common constructs that let you control the flow of execution of Cairo code are if expressions and loops.
 
-### `if` Expressions
+## `if` Expressions
 
 An if expression allows you to branch your code depending on conditions. You provide a condition and then state, “If this condition is met, run this block of code. If the condition is not met, do not run this block of code.”
 
@@ -76,7 +76,7 @@ change the if expression to the following:
 
 Running this code will print `number was something other than zero`.
 
-### Handling Multiple Conditions with `else if`
+## Handling Multiple Conditions with `else if`
 
 You can use multiple conditions by combining `if` and `else` in an `else if` expression. For example:
 
@@ -96,7 +96,7 @@ Run completed successfully, returning []
 
 When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1` nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. [Chapter 6](./ch06-02-the-match-control-flow-construct.md) describes a powerful Cairo branching construct called `match` for these cases.
 
-### Using `if` in a `let` statement
+## Using `if` in a `let` statement
 
 Because `if` is an expression, we can use it on the right side of a `let` statement to assign the outcome to a variable.
 
@@ -114,19 +114,20 @@ Run completed successfully, returning []
 
 The `number` variable will be bound to a value based on the outcome of the `if` expression, which will be 5 here.
 
-### Repetition with Loops
+## Repetition with Loops
 
 It’s often useful to execute a block of code more than once. For this task, Cairo provides a simple loop syntax, which will run through the code inside the loop body to the end and then start immediately back at the beginning. To experiment with loops, let’s create a new project called _loops_.
 
 Cairo has two kinds of loops: `loop` and `while`.
 
-#### Repeating Code with `loop`
+### Repeating Code with `loop`
 
 The `loop` keyword tells Cairo to execute a block of code over and over again forever or until you explicitly tell it to stop.
 
 As an example, change the _src/lib.cairo_ file in your _loops_ directory to look like this:
 
 <span class="filename">Filename: src/lib.cairo</span>
+
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_27_infinite_loop/src/lib.cairo}}
 ```
@@ -134,6 +135,7 @@ As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
 > Note: This program would not compile without a break condition. For the purpose of the example, we added a `break` statement that will never be reached, but satisfies the compiler.
 
 When we run this program, we’ll see again! printed over and over continuously until either the program runs out of gas or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
+
 ```shell
 $ scarb cairo-run --available-gas=2000000000000
    Compiling loops v0.1.0 (file:///projects/loops)
@@ -143,7 +145,8 @@ again!
 again!
 again!
 ^Cagain!
-``` 
+```
+
 The symbol `^C` represents where you pressed ctrl-c. You may or may not see the word `again!` printed after the ^C, depending on where the code was in the loop when it received the interrupt signal.
 
 > Note: Cairo prevents us from running program with infinite loops by including a gas meter. The gas meter is a mechanism that limits the amount of computation that can be done in a program. By setting a value to the `--available-gas` flag, we can set the maximum amount of gas available to the program. Gas is a unit of measurement that expresses the computation cost of an instruction. When the gas meter runs out, the program will stop. In the previous case, we set the gas limit high enough for the the program to run for quite some time.
@@ -159,7 +162,7 @@ Fortunately, Cairo also provides a way to break out of a loop using code. You ca
 {{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break/src/lib.cairo}}
 ```
 
-The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration. 
+The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration.
 Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
 
 ```rust
@@ -168,7 +171,7 @@ Let's add a `continue` statement to our loop to skip the `print` statement when 
 
 Executing this program will not print the value of `i` when it is equal to `5`.
 
-#### Returning Values from Loops
+### Returning Values from Loops
 
 One of the uses of a `loop` is to retry an operation you know might fail, such
 as checking whether an operation has succeeded. You might also need to pass
@@ -188,7 +191,7 @@ When the condition is met, we use the `break` keyword with the value `counter * 
 semicolon to end the statement that assigns the value to `result`. Finally, we
 print the value in `result`, which in this case is `20`.
 
-#### Conditional Loops with `while`
+### Conditional Loops with `while`
 
 A program will often need to evaluate a condition within a loop.
 While the condition is `true`, the loop runs.
@@ -196,12 +199,14 @@ When the condition ceases to be `true`, the program calls `break`, stopping the 
 It’s possible to implement behavior like this using a combination of `loop`, `if`, `else`, and `break`; you could try that now in a program, if you’d like.
 However, this pattern is so common that Cairo has a built-in language construct for it, called a `while` loop.
 
-In Listing 2-3, we use `while` to loop the program three times, counting down each time after printing the value of `number`, and then, after the loop, print a message and exit.
+In Listing {{#ref while-true}}, we use `while` to loop the program three times, counting down each time after printing the value of `number`, and then, after the loop, print a message and exit.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_31_while_loop/src/lib.cairo}}
 ```
-<span class="caption">Listing 2-3: Using a `while` loop to run code while a condition holds `true`</span>
+
+{{#label while-true}}
+<span class="caption">Listing {{#ref while-true}}: Using a `while` loop to run code while a condition holds `true`</span>
 
 This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
 While a condition evaluates to `true`, the code runs; otherwise, it exits the loop.

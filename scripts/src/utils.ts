@@ -50,13 +50,13 @@ export function extractFolderName(folderPath: string): string {
 export function updateScarbTomlFile(
   folderPath: string,
   oldName: string,
-  newName: string
+  newName: string,
 ) {
   const tomlFilePath = path.join(folderPath, "Scarb.toml");
   let tomlContent = fs.readFileSync(tomlFilePath, "utf8");
   tomlContent = tomlContent.replace(
     new RegExp(`name = "${oldName}"`, "g"),
-    `name = "${newName}"`
+    `name = "${newName}"`,
   );
   fs.writeFileSync(tomlFilePath, tomlContent, "utf8");
 }
@@ -72,7 +72,7 @@ export function updateScarbTomlFile(
 export function renameFolder(
   folderPath: string,
   newName: string,
-  temp: boolean
+  temp: boolean,
 ) {
   newName = temp ? newName + "_tmp" : newName;
   const newFolderPath = path.join(folderPath, "..", newName);
@@ -104,7 +104,7 @@ export function updateMarkdownFiles(
   srcFolderPath: string,
   chapterNumber: number,
   oldName: string,
-  newName: string
+  newName: string,
 ) {
   const paddedChapterNumber = chapterNumber.toString().padStart(2, "0");
   const files = fs.readdirSync(srcFolderPath);
@@ -151,7 +151,7 @@ export async function renameListing(
   selectedFolder: string,
   oldFolderName: string,
   newFolderName: string,
-  temp = false
+  temp = false,
 ) {
   try {
     updateScarbTomlFile(selectedFolder, oldFolderName, newFolderName);
@@ -160,7 +160,7 @@ export async function renameListing(
       srcFolderPath,
       chapterNumber,
       oldFolderName,
-      newFolderName
+      newFolderName,
     );
     // wait 50 ms for file system to update - bad but works
     await new Promise((resolve) => setTimeout(resolve, 50));
@@ -190,12 +190,12 @@ export function getChapterNumber(file: string): number | null {
  */
 export function findFileIncludingString(
   path: string,
-  searchString: string
+  searchString: string,
 ): string | null {
   const listingsFolder = fs
     .readdirSync(path)
     .find(
-      (folder) => folder.includes(searchString) && !folder.includes("_tmp")
+      (folder) => folder.includes(searchString) && !folder.includes("_tmp"),
     );
   return listingsFolder || null;
 }

@@ -1,4 +1,4 @@
-## Defining Modules to Control Scope
+# Defining Modules to Control Scope
 
 In this section, we’ll talk about modules and other parts of the module system,
 namely _paths_ that allow you to name items and the `use` keyword that brings a
@@ -8,7 +8,7 @@ First, we’re going to start with a list of rules for easy reference when you�
 organizing your code in the future. Then we’ll explain each of the rules in
 detail.
 
-### Modules Cheat Sheet
+## Modules Cheat Sheet
 
 Here we provide a quick reference on how modules, paths and the `use` keyword
 work in the compiler, and how most developers organize their
@@ -92,7 +92,7 @@ This line tells the compiler to include the code it finds in _src/garden.cairo_,
 pub mod vegetables;
 ```
 
-Here, `pub mod vegetables;` means the code in _src/garden/vegetables.cairo_ is included too. That code is:
+Here, `pub mod vegetables;` means the code in *src/garden/vegetables.cairo* is included too. That code is:
 
 ```rust,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
@@ -103,9 +103,9 @@ so we can use it in the `main` function.
 
 Now let’s get into the details of these rules and demonstrate them in action!
 
-### Grouping Related Code in Modules
+## Grouping Related Code in Modules
 
-_Modules_ let us organize code within a crate for readability and easy reuse. 
+_Modules_ let us organize code within a crate for readability and easy reuse.
 Modules also allow us to control the privacy of items, because code within a module
 is private by default. Private items are internal implementation details not
 available for outside use. We can choose to make modules and the items within
@@ -124,7 +124,7 @@ chefs and cooks work in the kitchen, dishwashers clean up, and managers do
 administrative work.
 
 To structure our crate in this way, we can organize its functions into nested
-modules. Create a new package named _restaurant_ by running `scarb new restaurant`; then enter the code in Listing 7-1 into _src/lib.cairo_ to
+modules. Create a new package named _restaurant_ by running `scarb new restaurant`; then enter the code in Listing {{#ref front_of_house}} into _src/lib.cairo_ to
 define some modules and function signatures. Here’s the front of house section:
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -133,7 +133,8 @@ define some modules and function signatures. Here’s the front of house section
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_01/src/lib.cairo:front_of_house}}
 ```
 
-<span class="caption">Listing 7-1: A `front_of_house` module containing other modules that then contain functions</span>
+{{#label front_of_house}}
+<span class="caption">Listing {{#ref front_of_house}}: A `front_of_house` module containing other modules that then contain functions</span>
 
 We define a module with the `mod` keyword followed by the name of the module
 (in this case, `front_of_house`). The body of the module then goes inside curly
@@ -150,7 +151,7 @@ to this code would know where to place the code to keep the program organized.
 Earlier, we mentioned that _src/lib.cairo_ is called the crate
 root. The reason for this name is that the content of this file forms a module named after the crate name at the root of the crate’s module structure, known as the _module tree_.
 
-Listing 7-2 shows the module tree for the structure in Listing 7-1.
+Listing {{#ref module-tree}} shows the module tree for the structure in Listing {{#ref front_of_house}}.
 
 ```text
 restaurant
@@ -164,7 +165,8 @@ restaurant
          └── take_payment
 ```
 
-<span class="caption">Listing 7-2: The module tree for the code in Listing 7-1</span>
+{{#label module-tree}}
+<span class="caption">Listing {{#ref module-tree}}: The module tree for the code in Listing {{#ref front_of_house}}</span>
 
 This tree shows how some of the modules nest inside one another; for example,
 `hosting` nests inside `front_of_house`. The tree also shows that some modules
