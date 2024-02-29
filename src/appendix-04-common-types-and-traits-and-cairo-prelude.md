@@ -31,7 +31,7 @@ You can choose which prelude to use. For example, adding `edition = "2023_11"` i
 The compiler currently exposes 2 different versions of the prelude:
 
 - A general version, with a lot of traits that are made available, corresponding to `edition = "2023_01"`.
-- A restricted version, including the most essential traits needed for general cairo programming, corresponding to `edition = 2023_10`.
+- A restricted version, including the most essential traits needed for general cairo programming, corresponding to `edition = 2023_11`.
 
 ## List of common types and traits
 
