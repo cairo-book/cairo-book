@@ -20,7 +20,7 @@ Pedersen was the first hash function used on Starknet, and is still used to comp
 
 The core library makes it easy to work with hashes. The `Hash` trait is implemented for all types that can be converted to `felt252`, including `felt252` itself. For more complex types like structs, deriving `Hash` allows them to be hashed easily using the hash function of your choice - given that all of the struct's fields are themselves hashable. You cannot derive the `Hash` trait on a struct that contains un-hashable values, such as `Array<T>` or a `Felt252Dict<T>`, even if `T` itself is hashable.
 
-The `Hash` trait is accompanied by the `HashStateTrait` that defines the basic methods to work with hashes. They allow you to initialize a hash state that will contain the temporary values of the hash after each application of the hash function; update the hash state, and finalize it when the computation is completed. `HashStateTrait` is defined as follows:
+The `Hash` trait is accompanied by the `HashStateTrait` and `HashStateExTrait` that define the basic methods to work with hashes. They allow you to initialize a hash state that will contain the temporary values of the hash after each application of the hash function; update the hash state, and finalize it when the computation is completed. `HashStateTrait` and `HashStateExTrait` are defined as follows:
 
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_03_hash_trait/src/lib.cairo:hashtrait}}
@@ -54,10 +54,10 @@ Here is a short example of Pedersen hashing :
 
 ### Advanced Hashing: Hashing arrays with Poseidon
 
-Let us look at an example of hashing a function that contains a `Span<felt252>`.
+Let us look at an example of hashing a struct that contains a `Span<felt252>`.
 To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can use the built-in function `poseidon_hash_span(mut span: Span<felt252>) -> felt252`. Similarly, you can hash `Array<felt252>` by calling `poseidon_hash_span` on its span.
 
-First, let us import the following trait and function :
+First, let us import the following traits and function :
 
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:import}}
