@@ -1,5 +1,4 @@
 //ANCHOR: all
-
 use starknet::ContractAddress;
 
 #[starknet::interface]
@@ -10,7 +9,6 @@ trait INameRegistry<TContractState> {
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
     fn get_owner(self: @TContractState) -> NameRegistry::Person;
 }
-
 
 #[starknet::contract]
 mod NameRegistry {
@@ -42,7 +40,7 @@ mod NameRegistry {
     //ANCHOR_END: event
 
     //ANCHOR: person
-    #[derive(Copy, Drop, Serde, starknet::Store)]
+    #[derive(Drop, Serde, starknet::Store)]
     struct Person {
         name: felt252,
         address: ContractAddress
@@ -69,6 +67,7 @@ mod NameRegistry {
     //ANCHOR_END: constructor
 
     //ANCHOR: impl_public
+    // Public functions
     #[abi(embed_v0)]
     impl NameRegistry of super::INameRegistry<ContractState> {
         //ANCHOR: external
@@ -85,6 +84,7 @@ mod NameRegistry {
             //ANCHOR_END: read
             name
         }
+
         //ANCHOR_END: view
         fn get_owner(self: @ContractState) -> Person {
             //ANCHOR: read_owner
@@ -97,7 +97,6 @@ mod NameRegistry {
 
     // ANCHOR: state_internal
     // ANCHOR: generate_trait
-
     // Could be a group of functions about a same topic
     #[generate_trait]
     impl InternalFunctions of InternalFunctionsTrait {
@@ -116,13 +115,11 @@ mod NameRegistry {
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
         //ANCHOR_END: emit_event
-
         }
     }
     // ANCHOR_END: generate_trait
 
     // Free functions
-
     fn get_contract_name() -> felt252 {
         'Name Registry'
     }

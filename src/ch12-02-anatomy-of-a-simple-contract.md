@@ -9,7 +9,7 @@ Let's consider the following contract to present the basics of a Starknet contra
 ```
 
 {{#label simple-contract}}
-<span class="caption">Listing {{#ref simple-contract}}: A simple storage contract</span>
+<span class="caption">Listing {{#ref simple-contract}}: A simple storage contract.</span>
 
 > Note: Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md).
 
