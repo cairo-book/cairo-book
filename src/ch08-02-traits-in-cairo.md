@@ -137,6 +137,6 @@ Implementations can be aliased when imported. This is most useful when you want 
 ```
 
 {{#label impl-aliases}}
-<span class="caption"> Listing {{#ref impl-aliases}}: Using impl aliases to instanciate generic impls with concrete types</span>
+<span class="caption"> Listing {{#ref impl-aliases}}: Using impl aliases to instantiate generic impls with concrete types</span>
 
 We can define the generic implementation in a private module, use an impl alias to instantiate the generic implementation for these two concrete types, and make these two implementations public, while keeping the generic implementation private and unexposed. This way, we can avoid code duplication using the generic implementation, while keeping the public API clean and simple.
