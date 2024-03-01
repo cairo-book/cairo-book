@@ -69,6 +69,8 @@ Here is an example:
 
 `Serde` provides trait implementations for `serialize` and `deserialize` functions for data structures defined in your crate. It allows you to transform your structure into an array (or the opposite).
 
+> **[Serialization](https://en.wikipedia.org/wiki/Serialization)** is a process of transforming data structures into a format that can be easily stored or transmitted. Let's say you are running a program and would like to persist its state to be able to resume it later. To do this, you could take each of the objects your program is using and save information about them, for example in a file. This exactly is a simplified version of serialization. Now if you want to resume your program with this saved state, you would perform **deserialization** which means you would load the state of the objects from some source.
+
 For example:
 
 ```rust

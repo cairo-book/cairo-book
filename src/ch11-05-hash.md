@@ -44,9 +44,7 @@ As our struct derives the trait HashTrait, we can call the function as follows f
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:main}}
 ```
 
-Pedersen is different from Poseidon, as it starts with a base state. This base state must be of `felt252` type, which forces us to either hash the struct with an arbitrary base state using the `update_with` method, or serialize the struct into an array to loop through all of its fields and hash its elements together. 
-
-> **[Serialization](https://en.wikipedia.org/wiki/Serialization)** is a process of transforming data structures into a format that can be easily stored or transmitted. Let's say you are running a program and would like to persist its state to be able to resume it later. To do this, you could take each of the objects your program is using and save information about them, for example in a file. This exactly is a simplified version of serialization. Now if you want to resume your program with this saved state, you would perform **deserialization** which means you would load the state of the objects from some source.
+Pedersen is different from Poseidon, as it starts with a base state. This base state must be of `felt252` type, which forces us to either hash the struct with an arbitrary base state using the `update_with` method, or serialize the struct into an array to loop through all of its fields and hash its elements together.
 
 Here is a short example of Pedersen hashing :
 
