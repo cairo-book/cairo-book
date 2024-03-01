@@ -1,4 +1,4 @@
-# Appendix A: Keywords
+# Appendix A - Keywords
 
 The following list contains keywords that are reserved for current or future use by the Cairo language.
 

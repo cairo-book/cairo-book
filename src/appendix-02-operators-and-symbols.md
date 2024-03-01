@@ -1,4 +1,4 @@
-# Appendix B: Operators and Symbols
+# Appendix B - Operators and Symbols
 
 This appendix contains a glossary of Cairo's syntax, including operators and other symbols that appear by themselves or in the context of paths, generics, macros, attributes, comments, tuples, and brackets.
 

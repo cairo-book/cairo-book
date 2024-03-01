@@ -58,7 +58,7 @@ Here are some examples:
 {{#include ../listings/ch11-advanced-features/no_listing_07_write_macro/src/lib.cairo}}
 ```
 
-So, you can also implement the `Display` trait for the `Point` struct as follow:
+So, you can also implement the `Display` trait for the `Point` struct as follows:
 
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_10_display_trait_with_write/src/lib.cairo}}

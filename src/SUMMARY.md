@@ -83,23 +83,22 @@
 - [Advanced Cairo Features](ch11-00-advanced-features.md)
 
   - [Custom Data Structures](ch11-01-custom-data-structures.md)
+  - [Using Arrays inside Dictionaries]()
+  - [Smart Pointers]()
   - [Operator Overloading](ch11-04-operator-overloading.md)
   - [Working with Hashes](ch11-05-hash.md)
   - [Macros](ch11-06-macros.md)
+  - [Inlining in Cairo]()
+  - [Gas optimisation]()
   - [Printing](ch11-09-printing.md)
-
-<!--  - [Using Arrays inside Dictionaries](ch11-02-using-arrays-inside-dictionaries.md) -->
-<!--  - [Smart Pointers](ch11-03-smart-pointers.md) -->
-<!--  - [Inlining in Cairo](ch11-07-inlining-in-cairo.md) -->
-<!--  - [Gas optimisation](ch11-08-gas-optimisation.md) -->
 
 - [Appendix](appendix-00.md)
 
   - [A - Keywords](appendix-01-keywords.md)
   - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
   - [C - Derivable Traits](appendix-03-derivable-traits.md)
-  - [D - Useful Development Tools](appendix-04-useful-development-tools.md)
-  - [E - Common Types & Traits and the Cairo Prelude](appendix-05-common-types-and-traits-and-cairo-prelude.md)
+  - [D - Common Types & Traits and the Cairo Prelude](appendix-04-common-types-and-traits-and-cairo-prelude.md)
+  - [E - Useful Development Tools](appendix-05-useful-development-tools.md)
   - [F - Installing Cairo binaries](appendix-06-cairo-binaries.md)
 
 ---
@@ -138,24 +137,22 @@
     - [Under the hood](./ch15-02-01-under-the-hood.md)
     - [Component dependencies](./ch15-02-02-component-dependencies.md)
     - [Testing components](./ch15-02-03-testing-components.md)
+  - [Upgradability]()
   - [L1 <> L2 Messaging](./ch15-04-L1-L2-messaging.md)
+  - [Oracle Interactions](./ch15-05-oracle-interactions.md)
+    - [Price Feeds]()
+    - [Randomness]()
   - [Other examples](./ch15-06-other-examples.md)
     - [Deploying and Interacting with a Voting contract](./ch15-06-01-deploying-and-interacting-with-a-voting-contract.md)
-
-  <!-- - [Upgradability](./ch15-03-upgradability.md) -->
-  <!-- - [Oracle Interactions](./ch15-05-oracle-interactions.md) -->
-  <!-- - [Price Feeds](./ch15-05-01-price-feeds.md) -->
-  <!-- - [Randomness](./ch15-05-02-randomness.md) -->
 
 ## Starknet Smart Contracts Security
 
 - [Starknet Smart Contracts Security](./ch16-00-starknet-smart-contracts-security.md)
 
   - [General Recommendations](./ch16-01-general-recommendations.md)
+  - [Testing Smart Contracts with Starknet Foundry]()
   - [Static Analysis Tools](./ch16-03-static-analysis-tools.md)
-
-  <!-- - [Testing Smart Contracts with Starknet Foundry](./ch16-02-testing-smart-contracts-with-starknet-foundry.md) -->
-  <!-- - [Formal Verification](./ch16-04-formal-verification.md) -->
+  - [Formal Verification]()
 
 ## Appendix
 
