@@ -18,7 +18,7 @@ Each variable stored in the storage struct is stored in a different location in 
 The address of a storage variable is computed as follows:
 
 - If the variable is a single value (not a mapping), the address is the `sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.
-- If the variable is a [mapping](./ch13-01-contract-storage.html#storage-mappings) with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} + 17 \cdot {2^{192}} + 1 \\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key.
+- If the variable is a [mapping](./ch13-01-contract-storage.html#storage-mappings) with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key.
 - If it is a mapping to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated in the previous points. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
 You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value.
@@ -73,8 +73,6 @@ Similarly, Enums can be written to storage if they implement the `Store` trait, 
 {{#rustdoc_include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:enum_store}}
 ```
 
-Note that we also need to derive `Drop` and `Serde` traits to properly use custom types in contracts storage.
-
 ### Structs storage layout
 
 On Starknet, structs are stored in storage as a sequence of primitive types.
@@ -127,6 +125,6 @@ You can also create more complex mappings with multiple keys. You can find in Li
 <span class="caption">Listing {{#ref storage-mapping}}: Storing a mapping with multiple keys inside a tuple.</span>
 
 The address in storage of a variable stored in a mapping is computed according to the description in the [Storage Addresses](#storage-addresses) section.
-If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have a struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` modulo \\( {2^{251}} + 17 \cdot {2^{192}} + 1 \\), where `k_1` and `k_2` are the values of the two fields of the struct.
+If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have a struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` modulo \\( {2^{251}} - 256\\), where `k_1` and `k_2` are the values of the two fields of the struct.
 
 Similarly, in the case of a nested mapping such as `LegacyMap::<(ContractAddress, ContractAddress), u8>`, the address will be computed in the same way: `h(h(sn_keccak(variable_name),k_1),k_2)`.
