@@ -127,3 +127,16 @@ If the code was organized into modules like this, where the implementation of a 
 ```
 
 Note that in this example, `CircleGeometry` and `RectangleGeometry` implementations don't need to be declared as `pub`. Indeed, `ShapeGeometry` trait, which is public, is used to print the result in the `main` function. The compiler will find the appropriate implementation for the `ShapeGeometry` public trait, regardless of the implementation visibility.
+
+## Impl aliases
+
+Implementations can be aliased when imported. This is most useful when you want to instantiate generic impls with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
+
+```rust,noplayground
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_impl_aliases/src/lib.cairo}}
+```
+
+{{#label impl-aliases}}
+<span class="caption"> Listing {{#ref impl-aliases}}: Using impl aliases to instanciate generic impls with concrete types</span>
+
+We can define the generic implementation in a private module, use an impl alias to instantiate the generic implementation for these two concrete types, and make these two implementations public, while keeping the generic implementation private and unexposed. This way, we can avoid code duplication using the generic implementation, while keeping the public API clean and simple.
