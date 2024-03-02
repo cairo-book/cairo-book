@@ -203,7 +203,7 @@ A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.
 Its size is always zero, and it is guaranteed to not exist in the compiled code.
 
-You might be wondering why you would even need a unit type? In Cairo, functions must always return some value. Even if your function is not meant to return anything, this will be its default return type. You don't have to explicitly specify it when declaring your functions, but it's good to be clear about why it is even there. You will learn more about functions later in the book.
+You might be wondering why you would even need a unit type? In Cairo, functions must always return some value. Even if your expression is not meant to return anything, this will be its default return type. You don't have to explicitly specify it when declaring your functions, but it's good to be clear about why it is even there. You will learn more about functions later in the book.
 
 [control-flow]: ch02-05-control-flow.md
 [appendix_b]: appendix-02-operators-and-symbols.md#operators
