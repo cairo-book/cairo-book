@@ -50,6 +50,8 @@ In the `match` expression for this code, we add a variable called `state` to the
 
 Because `state` is an `UsState` enum which implements the `Debug` trait, we can print `state` value with `println!` macro.
 
+> Note: `{:?}` is a special formatting syntax that allows you to print a debug form of the parameter passed to the `println!` macro. You can find more information about it [here](appendix-03-derivable-traits.html#debug-for-programmer-output).
+
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the Coin enum variant for Quarter.
 
 ## Matching with `Option<T>`
@@ -111,7 +113,7 @@ error: Missing match arm: `None` not covered.
 error: could not compile `match` due to previous error
 ```
 
-Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of `Option<T>`, when Cairo prevents us from forgetting to explicitly handle the `None` case, it protects us from assuming that we have a value when we might have null, thus making the billion-dollar mistake discussed earlier impossible.
+Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of `Option<T>`, when Cairo prevents us from forgetting to explicitly handle the `None` case, it protects us from assuming that we have a value when we might have null, thus making the [billion-dollar mistake](https://en.wikipedia.org/wiki/Null_pointer#History) discussed earlier impossible.
 
 ## Catch-all with the `_` Placeholder
 

@@ -20,11 +20,11 @@ To illustrate this notion let's take back our example Listing {{#ref front_of_ho
 {{#label path-types}}
 <span class="caption">Listing {{#ref path-types}}: Calling the `add_to_waitlist` function using absolute and relative paths</span>
 
-The `eat_at_restaurant function` is part of our library's public API, so we mark it with the `pub` keyword. In the [Exposing Paths with the pub Keyword](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md#exposing-paths-with-the-pub-keyword) section, we’ll go into more detail about `pub`.
+The `eat_at_restaurant` function is part of our library's public API, so we mark it with the `pub` keyword. In the [Exposing Paths with the pub Keyword](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md#exposing-paths-with-the-pub-keyword) section, we’ll go into more detail about `pub`.
 
 The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
-crate as `eat_at_restaurant`. In Cairo, absolute paths start from the crate root, which you need to refer to by using the crate name. You can imagine a filesystem with the same structure: we’d specify the path _/front_of_house/hosting/add_to_waitlist_ to run the _add_to_waitlist_ program; using the crate name to start from the crate root is like using _/_ to start from the filesystem root in your shell.
+crate as `eat_at_restaurant`. In Cairo, absolute paths start from the crate root, which you need to refer to by using the crate name. You can imagine a filesystem with the same structure: we’d specify the path _/front_of_house/hosting/add_to_waitlist_ to run the _add_to_waitlist_ program; using the crate name to start from the crate root is like using a slash (`/`) to start from the filesystem root in your shell.
 
 The second time we call `add_to_waitlist`, we use a relative path. The path starts with `front_of_house`, the name of the module defined at the same level of the module tree as `eat_at_restaurant`. Here the filesystem equivalent would be using the path _./front_of_house/hosting/add_to_waitlist_. Starting with a module name means that the path is relative to the current module.
 
