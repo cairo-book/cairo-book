@@ -89,6 +89,10 @@ Using these syscalls can be handy for customized error handling or to get more c
 {{#label syscalls}}
 <span class="caption">Listing {{#ref syscalls}}: A sample contract using syscalls</span>
 
-To use this syscall, we passed in the contract address, the selector of the function we want to call, and the call arguments.
+To use this syscall, we passed in the contract address, the function we want to call, and the call arguments.
 
 The call arguments must be provided as an array of `felt252`. To build this array, we serialize the expected function parameters into an `Array<felt252>` using the `Serde` trait, and then pass this array as calldata. At the end, we are returned a serialized value which we'll need to deserialize ourselves!
+
+In Starknet contract context, a **selector** is an identifier through which a function is callable in transactions or in other classes.
+
+Note that in `starknet::call_contract_syscall` we didn't specify the function name as a string (ByteArray), but rather used the `selector!` macro, which produces the selector by computing a `sn_keccak` hash on its input.
