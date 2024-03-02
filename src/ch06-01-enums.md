@@ -92,4 +92,4 @@ We are demonstrating two approaches for the above function:
 
 Enums can be useful in many situations, especially when using the `match` flow construct that we just used. We will describe it in the next section.
 
-Other enums are used very often, such as the `Result` enum, allowing to handle error gracefully. We will explain the `Result` enum in detail in the [Error Handling](ch09-02-recoverable-errors.md) chapter.
+Other enums are used very often, such as the `Result` enum, allowing to handle errors gracefully. We will explain the `Result` enum in detail in the [Error Handling](ch09-02-recoverable-errors.md) chapter.

@@ -12,7 +12,7 @@ Then you’ll learn how to use traits to define behavior in a generic way. You c
 
 ## Removing Duplication by Extracting a Function
 
-Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication. Before diving into generics syntax, then, let’s first look at how to remove duplication in a way that doesn’t involve generic types by extracting a function that replaces specific values with a placeholder that represents multiple values. Then we’ll apply the same technique to extract a generic function! By looking at how to recognize duplicated code you can extract into a function, you’ll start to recognize duplicated code that can use generics.
+Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication. Before diving into generics syntax, then, let’s first look at how to remove duplication in a way that doesn’t involve generic types by extracting a function that replaces specific values with a placeholder that represents multiple values. Then we’ll apply the same technique to extract a generic function! By learning how to identify duplicated code that can be extracted into a function, you'll start to recognize instances where generics can be used to reduce duplication.
 
 We begin with a short program that finds the largest number in an array of `u8`:
 
@@ -46,4 +46,4 @@ In summary, here are the steps we took to change the code:
 - Extract the duplicate code into the body of the function and specify the inputs and return values of that code in the function signature.
 - Update the two instances of duplicated code to call the function instead.
 
-Next, we’ll use these same steps with generics to reduce code duplication. In the same way that the function body can operate on an abstract `Array<u8>` instead of specific `u8` values, generics allow code to operate on abstract types.
+Next, we’ll use these same steps with generics to reduce code duplication. In the same way that the function body can operate on an abstract `Array<T>` instead of specific `u8` values, generics allow code to operate on abstract types.
