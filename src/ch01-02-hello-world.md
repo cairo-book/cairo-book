@@ -141,7 +141,7 @@ Hello, World!
 Run completed successfully, returning []
 ```
 
-Regardless of your operating system, the string `Hello, world!` should print to
+Regardless of your operating system, the string `Hello, world!` should be printed to
 the terminal.
 
 If `Hello, world!` did print, congratulations! You’ve officially written a Cairo
