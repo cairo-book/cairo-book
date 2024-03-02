@@ -134,7 +134,7 @@ As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
 
 > Note: This program would not compile without a break condition. For the purpose of the example, we added a `break` statement that will never be reached, but satisfies the compiler.
 
-When we run this program, we’ll see again! printed over and over continuously until either the program runs out of gas or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
+When we run this program, we’ll see `again!` printed over and over continuously until either the program runs out of gas or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
 
 ```shell
 $ scarb cairo-run --available-gas=2000000000000
@@ -163,7 +163,7 @@ Fortunately, Cairo also provides a way to break out of a loop using code. You ca
 ```
 
 The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration.
-Let's add a `continue` statement to our loop to skip the `print` statement when `i` is equal to `5`.
+Let's add a `continue` statement to our loop to skip the `println!` statement when `i` is equal to `5`.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_29_loop_continue/src/lib.cairo}}

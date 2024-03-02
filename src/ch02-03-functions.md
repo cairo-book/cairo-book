@@ -36,7 +36,7 @@ Run completed successfully, returning []
 ```
 
 The lines execute in the order in which they appear in the `main` function.
-First the “Hello, world!” message prints, and then `another_function` is called
+First the `Hello, world!` message prints, and then `another_function` is called
 and its message is printed.
 
 ## Parameters
