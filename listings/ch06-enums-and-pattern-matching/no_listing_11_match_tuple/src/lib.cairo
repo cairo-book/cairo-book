@@ -1,5 +1,3 @@
-use core::debug::PrintTrait;
-
 // ANCHOR: enum_def
 #[derive(Drop)]
 enum DayType {

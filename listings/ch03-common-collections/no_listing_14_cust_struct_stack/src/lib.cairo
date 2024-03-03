@@ -2,7 +2,7 @@
 
 // ANCHOR: imports
 use core::dict::Felt252DictTrait;
-use core::nullable::{nullable_from_box, match_nullable, FromNullableResult, NullableTrait};
+use core::nullable::{match_nullable, FromNullableResult, NullableTrait};
 // ANCHOR_END: imports
 
 // ANCHOR: trait
@@ -30,7 +30,7 @@ impl DestructNullableStack<T, +Drop<T>> of Destruct<NullableStack<T>> {
 // ANCHOR: implem
 impl NullableStackImpl<T, +Drop<T>, +Copy<T>> of StackTrait<NullableStack<T>, T> {
     fn push(ref self: NullableStack<T>, value: T) {
-        self.data.insert(self.len.into(), nullable_from_box(BoxTrait::new(value)));
+        self.data.insert(self.len.into(), NullableTrait::new(value));
         self.len += 1;
     }
 

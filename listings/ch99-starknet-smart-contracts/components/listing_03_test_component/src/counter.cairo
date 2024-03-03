@@ -1,6 +1,6 @@
 //ANCHOR: interface
 #[starknet::interface]
-trait ICounter<TContractState> {
+pub trait ICounter<TContractState> {
     fn get_counter(self: @TContractState) -> u32;
     fn increment(ref self: TContractState);
 }
@@ -8,7 +8,7 @@ trait ICounter<TContractState> {
 
 //ANCHOR: component
 #[starknet::component]
-mod CounterComponent {
+pub mod CounterComponent {
     #[storage]
     struct Storage {
         value: u32
