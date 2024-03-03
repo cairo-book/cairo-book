@@ -1,7 +1,7 @@
 // ANCHOR: all
 
 // ANCHOR: imports
-use core::nullable::{nullable_from_box, match_nullable, FromNullableResult};
+use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
 // ANCHOR_END: imports
 
 // ANCHOR: header
@@ -13,7 +13,7 @@ fn main() {
     let a = array![8, 9, 10];
 
     // Insert it as a `Span`
-    d.insert(0, nullable_from_box(BoxTrait::new(a.span())));
+    d.insert(0, NullableTrait::new(a.span()));
     // ANCHOR_END: header
 
     // ANCHOR: footer

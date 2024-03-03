@@ -2,7 +2,7 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait INameRegistry<TContractState> {
+pub trait INameRegistry<TContractState> {
     fn store_name(
         ref self: TContractState, name: felt252, registration_type: NameRegistry::RegistrationType
     );
@@ -12,7 +12,7 @@ trait INameRegistry<TContractState> {
 
 #[starknet::contract]
 mod NameRegistry {
-    use starknet::{ContractAddress, get_caller_address};
+    use starknet::{ContractAddress, get_caller_address, storage_access::StorageBaseAddress};
 
     //ANCHOR: storage
     #[storage]
@@ -41,7 +41,7 @@ mod NameRegistry {
 
     //ANCHOR: person
     #[derive(Drop, Serde, starknet::Store)]
-    struct Person {
+    pub struct Person {
         name: felt252,
         address: ContractAddress
     }
@@ -49,7 +49,7 @@ mod NameRegistry {
 
     //ANCHOR: enum_store
     #[derive(Drop, Serde, starknet::Store)]
-    enum RegistrationType {
+    pub enum RegistrationType {
         finite: u64,
         infinite
     }
@@ -124,7 +124,7 @@ mod NameRegistry {
         'Name Registry'
     }
 
-    fn get_owner_storage_address(self: @ContractState) -> starknet::StorageBaseAddress {
+    fn get_owner_storage_address(self: @ContractState) -> StorageBaseAddress {
         //ANCHOR: owner_address
         self.owner.address()
     //ANCHOR_END: owner_address

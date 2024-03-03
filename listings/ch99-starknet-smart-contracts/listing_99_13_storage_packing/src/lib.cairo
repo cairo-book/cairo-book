@@ -1,6 +1,6 @@
 //ANCHOR:here
-use starknet::{StorePacking};
-use core::integer::{u128_safe_divmod, u128_as_non_zero};
+use starknet::storage_access::StorePacking;
+use core::integer::{u128_safe_divmod};
 
 #[derive(Drop, Serde)]
 //ANCHOR:struct
@@ -68,7 +68,7 @@ mod SizeFactory {
 #[cfg(test)]
 mod tests {
     use super::{SizesStorePacking, Sizes};
-    use starknet::StorePacking;
+    use starknet::storage_access::StorePacking;
     #[test]
     fn test_pack_unpack() {
         let value = Sizes { tiny: 0x12, small: 0x12345678, medium: 0x1234567890, };

@@ -14,8 +14,7 @@ trait ITokenWrapper<TContractState> {
 mod TokenWrapper {
     use super::ITokenWrapper;
     use core::serde::Serde;
-    use starknet::SyscallResultTrait;
-    use starknet::ContractAddress;
+    use starknet::{SyscallResultTrait, ContractAddress, syscalls};
 
     #[storage]
     struct Storage {}
@@ -32,7 +31,7 @@ mod TokenWrapper {
             Serde::serialize(@sender, ref call_data);
             Serde::serialize(@recipient, ref call_data);
             Serde::serialize(@amount, ref call_data);
-            let mut res = starknet::call_contract_syscall(
+            let mut res = syscalls::call_contract_syscall(
                 address, selector!("transferFrom"), call_data.span()
             )
                 .unwrap_syscall();

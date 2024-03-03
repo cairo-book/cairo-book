@@ -2,10 +2,10 @@
 // OpenZeppelin Contracts for Cairo available here: https://github.com/OpenZeppelin/cairo-contracts
 
 use starknet::ContractAddress;
-mod Errors {
-    const NOT_OWNER: felt252 = 'Caller is not the owner';
-    const ZERO_ADDRESS_CALLER: felt252 = 'Caller is the zero address';
-    const ZERO_ADDRESS_OWNER: felt252 = 'New owner is the zero address';
+pub mod Errors {
+    pub const NOT_OWNER: felt252 = 'Caller is not the owner';
+    pub const ZERO_ADDRESS_CALLER: felt252 = 'Caller is the zero address';
+    pub const ZERO_ADDRESS_OWNER: felt252 = 'New owner is the zero address';
 }
 
 // ANCHOR: interface
@@ -21,11 +21,11 @@ trait IOwnable<TContractState> {
 
 //ANCHOR: component
 #[starknet::component]
-mod ownable_component {
+pub mod ownable_component {
     use starknet::ContractAddress;
     use starknet::get_caller_address;
     use super::Errors;
-    use core::zeroable::Zeroable;
+    use core::num::traits::Zero;
 
     #[storage]
     struct Storage {
@@ -34,7 +34,7 @@ mod ownable_component {
 
     #[event]
     #[derive(Drop, starknet::Event)]
-    enum Event {
+    pub enum Event {
         OwnershipTransferred: OwnershipTransferred
     }
 
@@ -46,7 +46,7 @@ mod ownable_component {
 
     //ANCHOR: impl_signature
     #[embeddable_as(Ownable)]
-    impl OwnableImpl<
+    pub impl OwnableImpl<
         TContractState, +HasComponent<TContractState>
     > of super::IOwnable<ComponentState<TContractState>> {
         //ANCHOR_END: impl_signature
@@ -64,12 +64,12 @@ mod ownable_component {
 
         fn renounce_ownership(ref self: ComponentState<TContractState>) {
             self.assert_only_owner();
-            self._transfer_ownership(Zeroable::zero());
+            self._transfer_ownership(Zero::zero());
         }
     }
 
     #[generate_trait]
-    impl InternalImpl<
+    pub impl InternalImpl<
         TContractState, +HasComponent<TContractState>
     > of InternalTrait<TContractState> {
         fn initializer(ref self: ComponentState<TContractState>, owner: ContractAddress) {

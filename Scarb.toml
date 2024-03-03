@@ -1,6 +1,7 @@
 [package]
 name = "cairo_book"
 version = "0.1.0"
+edition = "2023_11"
 
 # Only required to have LS enabled in this directory.
 
