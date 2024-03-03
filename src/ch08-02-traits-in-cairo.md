@@ -147,7 +147,7 @@ We can define the generic implementation in a private module, use an impl alias 
 
 Negative implementations, also known as negative traits or negative bounds, are a mechanism that allows you to express that a type does not implement a certain trait when defining the implementation of a trait over a generic type. Negative impls enable you to write implementations that are applicable only when another implementation does not exist in the current scope.
 
-For example, let's say we have a trait `Producer` and a trait `Consumer`, and we want to define a generic behavior where all types implement the `Consumer` by default. However, we want to ensure that no type can be both a `Consumer` and a `Producer`. We can use negative impls to express this restriction.
+For example, let's say we have a trait `Producer` and a trait `Consumer`, and we want to define a generic behavior where all types implement the `Consumer` trait by default. However, we want to ensure that no type can be both a `Consumer` and a `Producer`. We can use negative impls to express this restriction.
 
 In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements the `Producer` trait, and two other types, `AnotherType` and `AThirdType`, which do not implement the `Producer` trait. We then use negative impls to create a default implementation of the `Consumer` trait for all types that do not implement the `Producer` trait.
 

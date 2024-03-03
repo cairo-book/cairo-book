@@ -1,10 +1,10 @@
 #[derive(Drop)]
 struct ProducerType {}
 
-#[derive(Drop)]
+#[derive(Drop, Debug)]
 struct AnotherType {}
 
-#[derive(Drop)]
+#[derive(Drop, Debug)]
 struct AThirdType {}
 
 trait Producer<T> {
@@ -21,9 +21,9 @@ impl ProducerImpl of Producer<ProducerType> {
     }
 }
 
-impl TConsumerImpl<T, +Drop<T>, -Producer<T>> of Consumer<T> {
+impl TConsumerImpl<T, +core::fmt::Debug<T>, +Drop<T>, -Producer<T>> of Consumer<T> {
     fn consume(self: T, input: u32) {
-        println!("Consumed value: {}", input);
+        println!("{:?} consumed value: {}", self, input);
     }
 }
 
