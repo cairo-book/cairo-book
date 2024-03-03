@@ -15,9 +15,10 @@ Let's consider the following contract to present the basics of a Starknet contra
 
 ## What is this contract?
 
-In this example, the `Storage` struct declares a storage variable called `stored_data` of type `u128` (unsigned integer of 128 bits).
-You can think of it as a single slot in a database that you can query and alter by calling functions of the code that manages the database.
-The contract defines and exposes publicly the functions `set` and `get` that can be used to modify or retrieve the value of that variable.
+Contracts are a combintation of state and logic.
+The state is defined within the `Storage` struct, and is always initialized empty. Here, our struct contains a single a field called `stored_data` of type `u128` (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \\( {2^{128}} - 1 \\).
+The logic is defined by functions that interact with the state. Here, our contract defines and publicly exposes the functions `set` and `get` that can be used to modify or retrieve the value of the stored variable.
+You can think of it as a single slot in a database that you can query and modify by calling functions of the code that manages the database.
 
 ## The interface: the contract's blueprint
 
@@ -25,16 +26,18 @@ The contract defines and exposes publicly the functions `set` and `get` that can
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:interface}}
 ```
 
-Using the `#[starknet::interface]` attribute, you can define the contract interface representing the functions this contract exposes to the outside world. Here, the interface exposes two functions: `set` and `get`. By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface.
+Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world. In Cairo, they're defined by annotating a trait with the `#[starknet::interface]` attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.
+
+Here, the interface contains two functions: `set` and `get`. By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface, as shown in Listing {{#ref wrong-interface}}.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_02/src/lib.cairo:impl}}
 ```
 
 {{#label wrong-interface}}
-<span class="caption">Listing {{#ref wrong-interface}}: A wrong implementation of the interface of the contract. This does not compile.</span>
+<span class="caption">Listing {{#ref wrong-interface}}: A wrong implementation of the interface of the contract. This does not compile, as the return type of `set` does not match the trait's.</span>
 
-In the interface, note the generic type `TContractState` of the `self` argument which is passed by reference to the `set` function. The `self` parameter represents the contract state. Seeing the `self` argument passed to `set` tells us that this function might access the state of the contract, as it is what gives us access to the contract’s storage. The `ref` modifier implies that `self` may be modified, meaning that the storage variables of the contract may be modified inside the `set` function.
+In the interface, note the generic type `TContractState` of the `self` argument which is passed by reference to the `set` function. The `self` parameter represents the contract state. Seeing the `self` argument passed in a contract function tells us that this function can access the state of the contract. The `ref` modifier implies that `self` may be modified, meaning that the storage variables of the contract may be modified inside the `set` function.
 
 On the other hand, `get` takes a _snapshot_ of `TContractState`, which immediately tells us that it does not modify the state (and indeed, the compiler will complain if we try to modify storage inside the `get` function).
 
