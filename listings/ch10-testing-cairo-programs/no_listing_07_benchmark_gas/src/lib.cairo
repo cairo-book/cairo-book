@@ -20,6 +20,6 @@ mod test {
         gas::withdraw_gas().unwrap();
         /// code we want to bench.
         let _result = sum_n(10);
-        println!("{}\n", initial - testing::get_available_gas());
+        println!("consumed gas: {}\n", initial - testing::get_available_gas());
     }
 }

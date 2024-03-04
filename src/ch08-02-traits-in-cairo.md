@@ -21,7 +21,7 @@ For example, let’s say we have a struct `NewsArticle` that holds a news story 
 Here, we declare a trait using the trait keyword and then the trait’s name, which is `Summary` in this case.
 We’ve also declared the trait as `pub` so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.
 
-Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
+Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray;`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
 
 > Note: the `ByteArray` type is the type used to represent Strings in Cairo.
 

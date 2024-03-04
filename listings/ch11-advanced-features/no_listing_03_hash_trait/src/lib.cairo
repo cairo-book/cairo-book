@@ -1,5 +1,4 @@
 //ANCHOR: hashtrait
-
 /// A trait for hash state accumulators.
 trait HashStateTrait<S> {
     fn update(self: S, value: felt252) -> S;
