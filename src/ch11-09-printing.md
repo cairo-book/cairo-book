@@ -9,7 +9,7 @@ Cairo provides two macros to print standard data types:
 - `println!` which prints on a new line,
 - `print!` with inline printing.
 
-Both take a `ByteArray` string as first parameter (See [Data Types](ch02-02-data-types.html#byte-array-strings)) which can be a simple string to print a message or a string with placeholders to format the way values are printed.
+Both take a `ByteArray` string as first parameter (See [Data Types](ch02-02-data-types.md#byte-array-strings)) which can be a simple string to print a message or a string with placeholders to format the way values are printed.
 
 There are two ways to use these placeholders and both can be mixed:
 

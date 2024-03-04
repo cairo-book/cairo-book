@@ -28,8 +28,6 @@ The attribute `cfg` stands for configuration and tells Cairo that the following 
 
 Integration tests use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a `tests` directory.
 
-> Note: Integration tests provide greater confidence in the correctness of your code but often come with a cost: they take longer to run. Because of this, it's important to strike the right balance between the number of integration and unit tests to ensure that your test suite runs within a reasonable time frame.
-
 ### The _tests_ Directory
 
 ```shell

@@ -54,7 +54,7 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 
 1. `T` should implement the `Copy<T>` since it's required for getting values from a `Felt252Dict<T>`.
 2. All value types of a dictionary implement the `Felt252DictValue<T>`, our generic type should do as well.
-3. To insert values, `Felt252DictTrait<T>` requires all value types to be destructible (implement the `Drop<T>` trait).
+3. To insert values, `Felt252DictTrait<T>` requires all value types to be droppable (implement the `Drop<T>` trait).
 
 The implementation, with all restrictions in place, would be as follow:
 

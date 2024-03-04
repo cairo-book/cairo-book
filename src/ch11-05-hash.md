@@ -38,7 +38,7 @@ The first step is to initialize the hash with either `PoseidonTrait::new() -> Ha
 {{#include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:structure}}
 ```
 
-As our struct derives the trait `Hash` trait, we can call the function as follows for Poseidon hashing :
+As our struct derives the `Hash` trait, we can call the function as follows for Poseidon hashing :
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:main}}
