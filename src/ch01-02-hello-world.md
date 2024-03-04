@@ -208,3 +208,5 @@ Let’s recap what we’ve learned so far about Scarb:
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
 You’re already off to a great start on your Cairo journey! This is a great time to build a more substantial program to get used to reading and writing Cairo code.
+
+{{#quiz ../quizzes/ch01-02-hello-world.toml}}
