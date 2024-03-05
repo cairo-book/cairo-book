@@ -37,7 +37,7 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager:
      `sudo apt install gettext`.
 
-3. Clone this repository.
+3. Clone this repository and CD into the your new cloned repository.
 
 4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
    ```
