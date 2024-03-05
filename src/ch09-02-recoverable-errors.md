@@ -70,7 +70,7 @@ Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail
 
 `#[test]` attribute means the function is a test function, and `#[should_panic]` attribute means this test will pass if the test execution panics.
 
-The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message 'Invalid integer'.
+The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message `Invalid integer`.
 
 ### The `?` operator
 
@@ -95,7 +95,7 @@ And with a little test case:
 {{#rustdoc_include ../listings/ch09-error-handling/listing_09_02/src/lib.cairo:tests}}
 ```
 
-The console will print the error "Invalid Integer".
+The console will print the error `Invalid Integer`.
 
 ### Summary
 

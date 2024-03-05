@@ -89,4 +89,4 @@ Cairo by forbidding them to use these keywords.
 The Cairo programming language provides several specific functions that serve a special purpose. We will not cover all of them in this book, but using the names of these functions as names of other items is not recommended.
 
 - `assert` - This function checks a boolean expression, and if it evaluates to false, it triggers the panic function.
-- `panic` - This function acknowledge the occurrence of an error and terminates the program.
+- `panic` - This function acknowledges the occurrence of an error and terminates the program.

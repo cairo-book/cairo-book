@@ -9,11 +9,11 @@ Cairo provides two macros to print standard data types:
 - `println!` which prints on a new line,
 - `print!` with inline printing.
 
-Both take a `ByteArray` string as first parameter (See [Data Types](ch02-02-data-types.md)) which can be a simple string to print a message or a string with placeholders to format the way values are printed.
+Both take a `ByteArray` string as first parameter (See [Data Types](ch02-02-data-types.md#byte-array-strings)) which can be a simple string to print a message or a string with placeholders to format the way values are printed.
 
 There are two ways to use these placeholders and both can be mixed:
 
-- empty curly brackets `{}` are replaced by values given as parameters to the print macro, in the same order,
+- empty curly brackets `{}` are replaced by values given as parameters to the `print!` macro, in the same order.
 - curly brackets with variable names are directly replaced by the variable value.
 
 Here are some examples:
@@ -51,7 +51,7 @@ Knowing this, here is an example of how to implement the `Display` trait for a c
 {{#include ../listings/ch11-advanced-features/no_listing_09_display_trait_with_format/src/lib.cairo}}
 ```
 
-Cairo also provides the `write!` and `writeln!` macro to write formatted strings in a formatter.
+Cairo also provides the `write!` and `writeln!` macros to write formatted strings in a formatter.
 Here are some examples:
 
 ```rust

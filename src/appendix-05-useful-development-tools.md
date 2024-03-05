@@ -11,7 +11,11 @@ If you're using the Cairo binaries directly, you can run `cairo-format` instead.
 Many collaborative projects use `scarb fmt` to prevent arguments about which
 style to use when writing Cairo: everyone formats their code using the tool.
 
-To format any Cairo project, enter the following:
+To format any Cairo project, enter the following inside the project directory:
+
+```bash
+scarb fmt
+```
 
 ## IDE Integration Using `cairo-language-server`
 

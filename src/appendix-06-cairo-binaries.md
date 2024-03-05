@@ -2,18 +2,19 @@
 
 If you want to have access to the Cairo binaries, for anything that you could not achieve by purely using Scarb you can install them by following the instructions below.
 
-The first step is to install Cairo. We will download Cairo manually, using Cairo repository or with an installation script. You’ll need an internet connection for the download.
-
 ### Prerequisites
 
-First, you will need to have Rust and Git installed.
+You will need to have [Rust](https://www.rust-lang.org) and [Git](https://git-scm.com/) installed.
 
+To install Rust, you first need the [`rustup`](https://www.rust-lang.org/tools/install) tool. It allows you to install Rust using the following command:
 ```bash
 # Install stable Rust
 rustup override set stable && rustup update
 ```
 
-Install [Git](https://git-scm.com/).
+Follow the link for information on how to install [Git](https://git-scm.com/downloads).
+
+The next step is to install Cairo. We will download Cairo manually, using Cairo repository or with an installation script. You’ll need an internet connection for the download.
 
 ## Installing Cairo with a Script ([Installer](https://github.com/franalgaba/cairo-installer) by [Fran](https://github.com/franalgaba))
 

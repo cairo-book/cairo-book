@@ -23,8 +23,7 @@ be in the first position.
 Fortunately, Cairo provides a handy built-in [dictionary type](./ch03-02-dictionaries.md) called `Felt252Dict<T>` that allows us to
 simulate the behavior of mutable data structures. Let's first explore how to create a struct that contains, among others, a `Felt252Dict<T>`.
 
-Note: Several concepts used in this chapter are presented in later parts of the
-book. We recommend you to check out the following chapter first:
+> Note: Several concepts used in this chapter were already presented earlier in the book. We recommend checking out the following chapters if you need to revise them:
 [Structs](ch05-00-using-structs-to-structure-related-data.md),
 [Methods](./ch05-03-method-syntax.md),
 [Generic types](./ch08-00-generic-types-and-traits.md),
@@ -42,7 +41,7 @@ Defining dictionaries as struct members is possible in Cairo but correctly inter
 
 Our new type `UserDatabase<T>` represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are:
 
-- `users_updates`, the number of users updates in the dictionary and
+- `users_updates`, the number of users updates in the dictionary.
 - `balances`, a mapping of each user to its balance.
 
 The database core functionality is defined by `UserDatabaseTrait`. The following methods are defined:
@@ -55,7 +54,7 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 
 1. `T` should implement the `Copy<T>` since it's required for getting values from a `Felt252Dict<T>`.
 2. All value types of a dictionary implement the `Felt252DictValue<T>`, our generic type should do as well.
-3. To insert values, `Felt252DictTrait<T>` requires all value types to be destructible.
+3. To insert values, `Felt252DictTrait<T>` requires all value types to be droppable (implement the `Drop<T>` trait).
 
 The implementation, with all restrictions in place, would be as follow:
 
@@ -198,5 +197,3 @@ mutable data structures, we can fortunately use the `Felt252Dict<T>` type to
 simulate mutable data structures. This allows us to implement a wide range of
 data structures that are useful for many applications, effectively hiding the
 complexity of the underlying memory model.
-
-When you’re ready to move on, we’ll talk about a concept that Cairo shares with Rust and that doesn’t commonly exist in other programming languages: ownership.
