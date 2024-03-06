@@ -275,7 +275,7 @@ Here is a simple example comparing two structs, showing how to use `assert_eq!` 
 
 Under the surface, `assert_eq!` and `assert_ne!` macros use the operators
 `==` and `!=`, respectively. When the assertions fail, these macros print their
-arguments using debug formatting, which means the values being compared must
+arguments using debug formatting (`{:?}` syntax), which means the values being compared must
 implement `PartialEq` and `Debug` traits. All primitive types and most of
 the core library types implement these traits. For structs and enums that
 you define yourself, you’ll need to implement `PartialEq` to assert equality of
@@ -497,7 +497,7 @@ The value printed when running `scarb cairo-test` is the amount of gas that was 
 $ scarb cairo-test
 testing adder ...
 running 1 tests
-163430
+consumed gas: 163430
 
 test adder::benchmark_sum_n_gas ... ok (gas usage est.: 271290)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;

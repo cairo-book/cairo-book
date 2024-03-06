@@ -1,4 +1,4 @@
-# Appendix C: Derivable Traits
+# Appendix C - Derivable Traits
 
 In various places in the book, we’ve discussed the `derive` attribute, which you can apply to a struct or enum definition. The `derive` attribute generates code to implement a default trait on the type you’ve annotated with the `derive` syntax.
 
@@ -8,9 +8,9 @@ These traits listed here are the only ones defined by the core library that can 
 
 ## Drop and Destruct
 
-When moving out of scope, variables need to be moved first. This is where the `Drop` trait intervenes. You can find more details about its usage [here](ch04-01-what-is-ownership.md#the-drop-trait).
+When moving out of scope, variables need to be moved first. This is where the `Drop` trait intervenes. You can find more details about its usage [here](ch04-01-what-is-ownership.md#no-op-destruction-the-drop-trait).
 
-Moreover, Dictionaries need to be squashed before going out of scope. Calling the `squash` method on each of them manually can quickly become redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch04-01-what-is-ownership.md#the-destruct-trait).
+Moreover, Dictionaries need to be squashed before going out of scope. Calling the `squash` method on each of them manually can quickly become redundant. `Destruct` trait allows Dictionaries to be automatically squashed when they get out of scope. You can also find more information about `Destruct` [here](ch04-01-what-is-ownership.md#destruction-with-a-side-effect-the-destruct-trait).
 
 ## `Clone` and `Copy` for Duplicating Values
 
@@ -68,6 +68,8 @@ Here is an example:
 ## Serializing with `Serde`
 
 `Serde` provides trait implementations for `serialize` and `deserialize` functions for data structures defined in your crate. It allows you to transform your structure into an array (or the opposite).
+
+> **[Serialization](https://en.wikipedia.org/wiki/Serialization)** is a process of transforming data structures into a format that can be easily stored or transmitted. Let's say you are running a program and would like to persist its state to be able to resume it later. To do this, you could take each of the objects your program is using and save information about them, for example in a file. This exactly is a simplified version of serialization. Now if you want to resume your program with this saved state, you would perform **deserialization** which means you would load the state of the objects from some source.
 
 For example:
 

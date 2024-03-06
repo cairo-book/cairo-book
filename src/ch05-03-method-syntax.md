@@ -66,7 +66,7 @@ Let's write a new method `scale` which resizes a rectangle of a `factor` given a
 
 It is also possible to define a method which takes ownership of the instance by using just `self` as the first parameter but it is rare. This technique is usually used when the method transforms `self` into something else and you want to prevent the caller from using the original instance after the transformation.
 
-Look at the [Understand Ownership](ch04-00-understanding-ownership.md) chapter for more details about these important notions.
+Look at the [Understanding Ownership](ch04-00-understanding-ownership.md) chapter for more details about these important notions.
 
 ## Methods with several parameters
 

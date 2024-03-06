@@ -21,7 +21,7 @@ For example, let’s say we have a struct `NewsArticle` that holds a news story 
 Here, we declare a trait using the trait keyword and then the trait’s name, which is `Summary` in this case.
 We’ve also declared the trait as `pub` so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.
 
-Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
+Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray;`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
 
 > Note: the `ByteArray` type is the type used to represent Strings in Cairo.
 
@@ -127,3 +127,35 @@ If the code was organized into modules like this, where the implementation of a 
 ```
 
 Note that in this example, `CircleGeometry` and `RectangleGeometry` implementations don't need to be declared as `pub`. Indeed, `ShapeGeometry` trait, which is public, is used to print the result in the `main` function. The compiler will find the appropriate implementation for the `ShapeGeometry` public trait, regardless of the implementation visibility.
+
+## Impl aliases
+
+Implementations can be aliased when imported. This is most useful when you want to instantiate generic impls with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
+
+```rust,noplayground
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_impl_aliases/src/lib.cairo}}
+```
+
+{{#label impl-aliases}}
+<span class="caption"> Listing {{#ref impl-aliases}}: Using impl aliases to instantiate generic impls with concrete types</span>
+
+We can define the generic implementation in a private module, use an impl alias to instantiate the generic implementation for these two concrete types, and make these two implementations public, while keeping the generic implementation private and unexposed. This way, we can avoid code duplication using the generic implementation, while keeping the public API clean and simple.
+
+## Negative impls
+
+> Note: This is still an experimental feature and can only be used if `experimental-features = ["negative_impls"]` is enabled in your Scarb.toml file, under the `[package]` section.
+
+Negative implementations, also known as negative traits or negative bounds, are a mechanism that allows you to express that a type does not implement a certain trait when defining the implementation of a trait over a generic type. Negative impls enable you to write implementations that are applicable only when another implementation does not exist in the current scope.
+
+For example, let's say we have a trait `Producer` and a trait `Consumer`, and we want to define a generic behavior where all types implement the `Consumer` trait by default. However, we want to ensure that no type can be both a `Consumer` and a `Producer`. We can use negative impls to express this restriction.
+
+In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements the `Producer` trait, and two other types, `AnotherType` and `AThirdType`, which do not implement the `Producer` trait. We then use negative impls to create a default implementation of the `Consumer` trait for all types that do not implement the `Producer` trait.
+
+```rust
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_18_negative_impl/src/lib.cairo}}
+```
+
+{{#label negative-impls}}
+<span class="caption"> Listing {{#ref negative-impls}}: Using negative impls to enforce that a type cannot implement both Producer and Consumer traits simultaneously</span>
+
+In the `main` function, we create instances of `ProducerType`, `AnotherType`, and `AThirdType`. We then call the `produce` method on the `producer` instance and pass the result to the `consume` method on the `another_type` and `third_type` instances. Finally, we try to call the `consume` method on the `producer` instance, which results in a compile-time error because `ProducerType` does not implement the `Consumer` trait.

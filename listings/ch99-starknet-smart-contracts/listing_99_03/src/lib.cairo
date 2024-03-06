@@ -1,9 +1,8 @@
 //ANCHOR: all
-
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait INameRegistry<TContractState> {
+pub trait INameRegistry<TContractState> {
     fn store_name(
         ref self: TContractState, name: felt252, registration_type: NameRegistry::RegistrationType
     );
@@ -11,10 +10,9 @@ trait INameRegistry<TContractState> {
     fn get_owner(self: @TContractState) -> NameRegistry::Person;
 }
 
-
 #[starknet::contract]
 mod NameRegistry {
-    use starknet::{ContractAddress, get_caller_address};
+    use starknet::{ContractAddress, get_caller_address, storage_access::StorageBaseAddress};
 
     //ANCHOR: storage
     #[storage]
@@ -42,8 +40,8 @@ mod NameRegistry {
     //ANCHOR_END: event
 
     //ANCHOR: person
-    #[derive(Copy, Drop, Serde, starknet::Store)]
-    struct Person {
+    #[derive(Drop, Serde, starknet::Store)]
+    pub struct Person {
         name: felt252,
         address: ContractAddress
     }
@@ -51,7 +49,7 @@ mod NameRegistry {
 
     //ANCHOR: enum_store
     #[derive(Drop, Serde, starknet::Store)]
-    enum RegistrationType {
+    pub enum RegistrationType {
         finite: u64,
         infinite
     }
@@ -69,6 +67,7 @@ mod NameRegistry {
     //ANCHOR_END: constructor
 
     //ANCHOR: impl_public
+    // Public functions
     #[abi(embed_v0)]
     impl NameRegistry of super::INameRegistry<ContractState> {
         //ANCHOR: external
@@ -85,6 +84,7 @@ mod NameRegistry {
             //ANCHOR_END: read
             name
         }
+
         //ANCHOR_END: view
         fn get_owner(self: @ContractState) -> Person {
             //ANCHOR: read_owner
@@ -97,7 +97,6 @@ mod NameRegistry {
 
     // ANCHOR: state_internal
     // ANCHOR: generate_trait
-
     // Could be a group of functions about a same topic
     #[generate_trait]
     impl InternalFunctions of InternalFunctionsTrait {
@@ -116,18 +115,16 @@ mod NameRegistry {
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
         //ANCHOR_END: emit_event
-
         }
     }
     // ANCHOR_END: generate_trait
 
     // Free functions
-
     fn get_contract_name() -> felt252 {
         'Name Registry'
     }
 
-    fn get_owner_storage_address(self: @ContractState) -> starknet::StorageBaseAddress {
+    fn get_owner_storage_address(self: @ContractState) -> StorageBaseAddress {
         //ANCHOR: owner_address
         self.owner.address()
     //ANCHOR_END: owner_address

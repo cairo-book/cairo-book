@@ -120,7 +120,7 @@ Cairo doesn't have a native type for strings but provides two ways to handle the
 
 #### Short strings
 
-A short string is a ASCII string where each character is encoded on one byte (see the [ASCII table](https://www.asciitable.com/)). For example:
+A short string is an ASCII string where each character is encoded on one byte (see the [ASCII table](https://www.asciitable.com/)). For example:
 
 - `'a'` is equivalent to `0x61`
 - `'b'` is equivalent to `0x62`
@@ -187,7 +187,7 @@ use pattern matching to destructure a tuple value, like this:
 This program first creates a tuple and binds it to the variable `tup`. It then
 uses a pattern with `let` to take `tup` and turn it into three separate
 variables, `x`, `y`, and `z`. This is called _destructuring_ because it breaks
-the single tuple into three parts. Finally, the program prints `y is six` as the value of
+the single tuple into three parts. Finally, the program prints `y is 6!` as the value of
 `y` is `6`.
 
 We can also declare the tuple with value and types, and destructure it at the same time.
@@ -202,6 +202,8 @@ For example:
 A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.
 Its size is always zero, and it is guaranteed to not exist in the compiled code.
+
+You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns `()`  implicitly.
 
 [control-flow]: ch02-05-control-flow.md
 [appendix_b]: appendix-02-operators-and-symbols.md#operators

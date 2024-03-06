@@ -2,7 +2,7 @@
 
 // ANCHOR: imports
 use core::dict::Felt252DictTrait;
-use core::nullable::{nullable_from_box, match_nullable, FromNullableResult, NullableTrait};
+use core::nullable::{match_nullable, FromNullableResult, NullableTrait};
 use core::integer;
 // ANCHOR_END: imports
 
@@ -50,13 +50,13 @@ impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
     }
 
     fn push(ref self: NullableVec<T>, value: T) -> () {
-        self.data.insert(self.len.into(), nullable_from_box(BoxTrait::new(value)));
+        self.data.insert(self.len.into(), NullableTrait::new(value));
         self.len = core::integer::u32_wrapping_add(self.len, 1_usize);
     }
     // ANCHOR: set
     fn set(ref self: NullableVec<T>, index: usize, value: T) {
         assert!(index < self.len(), "Index out of bounds");
-        self.data.insert(index.into(), nullable_from_box(BoxTrait::new(value)));
+        self.data.insert(index.into(), NullableTrait::new(value));
     }
     // ANCHOR_END: set
     fn len(self: @NullableVec<T>) -> usize {

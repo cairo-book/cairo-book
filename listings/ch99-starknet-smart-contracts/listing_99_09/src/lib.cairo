@@ -10,7 +10,7 @@ trait IContractA<TContractState> {
 #[starknet::contract]
 mod ContractA {
     use super::{IContractADispatcherTrait, IContractALibraryDispatcher};
-    use starknet::ContractAddress;
+    use starknet::{ContractAddress, class_hash::class_hash_const};
 
     #[storage]
     struct Storage {
@@ -20,7 +20,7 @@ mod ContractA {
     #[abi(embed_v0)]
     impl ContractA of super::IContractA<ContractState> {
         fn set_value(ref self: ContractState, value: u128) {
-            IContractALibraryDispatcher { class_hash: starknet::class_hash_const::<0x1234>() }
+            IContractALibraryDispatcher { class_hash: class_hash_const::<0x1234>() }
                 .set_value(value)
         }
 
