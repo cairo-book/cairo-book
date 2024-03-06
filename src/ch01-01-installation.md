@@ -42,18 +42,25 @@ and set a global version:
 asdf global scarb 2.5.3
 ```
 
+- You can verify installation by running the following command in a new terminal session, it should print both Scarb, Cairo and Sierra language versions, e.g:
+
+```bash
+scarb 2.5.3 (46d5d5cea 2024-02-01)
+cairo: 2.5.3 (https://crates.io/crates/cairo-lang-compiler/2.5.3)
+sierra: 1.4.0
+```
+
 Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This will install the latest stable release of Scarb.
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
 ```
-
-- In both cases, you can verify installation by running the following command in a new terminal session, it should print both Scarb and Cairo language versions, e.g:
+- You can verify installation by running the following command in a new terminal session, it should print both Scarb, Cairo and Sierra language versions, e.g:
 
 ```bash
 $ scarb --version
-scarb 2.5.3 (46d5d5cea 2024-02-01)
-cairo: 2.5.3 (https://crates.io/crates/cairo-lang-compiler/2.5.3)
+scarb 2.5.4 (28dee92c8 2024-02-14)
+cairo: 2.5.4 (https://crates.io/crates/cairo-lang-compiler/2.5.4)
 sierra: 1.4.0
 ```
 
