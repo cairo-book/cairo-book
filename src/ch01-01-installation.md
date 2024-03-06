@@ -45,6 +45,7 @@ asdf global scarb 2.5.3
 - You can verify installation by running the following command in a new terminal session, it should print both Scarb, Cairo and Sierra language versions, e.g:
 
 ```bash
+$ scarb --version
 scarb 2.5.3 (46d5d5cea 2024-02-01)
 cairo: 2.5.3 (https://crates.io/crates/cairo-lang-compiler/2.5.3)
 sierra: 1.4.0
