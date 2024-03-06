@@ -26,12 +26,10 @@ starknet = ">=2.5.0"
 [[target.starknet-contract]]
 ```
 
-For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
-
-Each example in the following sections can be used with Scarb.
+If you need to import external dependencies in your project, you can consult the [dedicated section](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md#using-external-packages-in-cairo-with-scarb). For additional configuration, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
 
 ## Starknet Foundry
 
-Starknet Foundry is a tool chain for Starknet Smart Contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
+Starknet Foundry is a tool chain for Starknet smart contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
 
-We'll describe Starknet Foundry in more detail in the [Useful Development Tools](./appendix-05-useful-development-tools.md) appendix.
+We'll describe Starknet Foundry in more detail in [Chapter 17](./appendix-05-useful-development-tools.md) when discussing Starknet smart contract testing and security.
