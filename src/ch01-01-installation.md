@@ -48,7 +48,6 @@ Otherwise, you can simply run the following command in your terminal, and follow
 curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
 ```
 <br>
-
 In both cases, you can verify installation by running the following command in a new terminal session, it should print both Scarb and Cairo language versions, e.g:
 
 ```bash
