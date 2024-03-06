@@ -49,7 +49,8 @@ Table 3-1 shows the built-in integer types in Cairo. We can use any of these var
 | 256-bit | `u256`   |
 | 32-bit  | `usize`  |
 
-<br>
+
+
 <div align="center"><span class="caption">Table 3-1: Integer Types in Cairo</span></div>
 
 Each variant has an explicit size. Note that for now, the `usize` type is just an alias for `u32`; however, it might be useful when in the future Cairo can be compiled to MLIR.
