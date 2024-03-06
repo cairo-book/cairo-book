@@ -1,4 +1,4 @@
-#[derive(Copy, Drop)]
+#[derive(Drop)]
 struct Rectangle {
     height: u64,
     width: u64,
