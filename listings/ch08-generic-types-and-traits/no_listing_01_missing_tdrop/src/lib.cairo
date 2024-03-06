@@ -10,8 +10,8 @@ fn largest_list<T>(l1: Array<T>, l2: Array<T>) -> Array<T> {
 }
 
 fn main() {
-    let mut l1 = ArrayTrait::new();
-    let mut l2 = ArrayTrait::new();
+    let mut l1 = array![];
+    let mut l2 = array![];
 
     l1.append(1);
     l1.append(2);

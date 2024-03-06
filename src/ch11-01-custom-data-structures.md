@@ -10,10 +10,8 @@ example, say you're making a game where the players have a level, and they can
 level up. You might try to store the level of the players in an array:
 
 ```rust,noplayground
-let mut level_players = Array::new();
-level_players.append(5);
-level_players.append(1);
-level_players.append(10);
+{{#include ../listings/ch11-advanced-features/listing_01_array_collection/src/lib.cairo:array_append}}
+
 ```
 
 But then you realize you can't increase the level at a specific index once it's
@@ -34,9 +32,9 @@ simulate the behavior of mutable data structures. Let's first explore how to cre
 Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom _user database_ that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:struct}}
+{{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:struct}}
 
-{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:trait}}
+{{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:trait}}
 ```
 
 Our new type `UserDatabase<T>` represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are:
@@ -59,9 +57,7 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 The implementation, with all restrictions in place, would be as follow:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:imports}}
-
-{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
+{{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
 ```
 
 Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it doesn't implement the `Drop<T>` trait, nor the `Destruct<T>` trait.
@@ -69,13 +65,13 @@ Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are for
 Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [Generic types](./ch08-00-generic-types-and-traits.md) in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}
+{{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}
 ```
 
 Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully functional database. We can now try it out:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_12_dict_struct_member/src/lib.cairo:main}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:main}}
 ```
 
 ## Simulating a dynamic array with dicts
@@ -93,7 +89,7 @@ It should:
 We can define this interface in Cairo like:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:trait}}
+{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:trait}}
 ```
 
 This provides a blueprint for the implementation of our dynamic array. We named
@@ -110,7 +106,7 @@ pointer to allow using any type `T` in our data structure, as explained in the
 section:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
+{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 
 The key thing that makes this vector mutable is that we can insert values into
@@ -118,7 +114,7 @@ the dictionary to set or update values in our data structure. For example, to
 update a value at a specific index, we do:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:set}}
+{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:set}}
 ```
 
 This overwrites the previously existing value at that index in the dictionary.
@@ -131,7 +127,7 @@ implementation of all the methods defined in our interface can be done as follow
 :
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
+{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
 ```
 
 The full implementation of the `Vec` structure can be found in the
@@ -155,7 +151,7 @@ Let us define what operations we need to create a stack :
 From these specifications we can define the following interface :
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:trait}}
+{{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:trait}}
 ```
 
 ### Implementing a Mutable Stack in Cairo
@@ -167,13 +163,13 @@ length of the stack to iterate over it.
 The Stack struct is defined as:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:struct}}
+{{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:struct}}
 ```
 
 Next, let's see how our main functions `push` and `pop` are implemented.
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
+{{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
 ```
 
 The code uses the `insert` and `get` methods to access the values in the

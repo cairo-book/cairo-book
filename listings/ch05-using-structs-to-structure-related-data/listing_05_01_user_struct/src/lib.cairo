@@ -1,6 +1,6 @@
 // ANCHOR: all
 // ANCHOR: user
-#[derive(Copy, Drop)]
+#[derive(Drop)]
 struct User {
     active: bool,
     username: felt252,
@@ -8,6 +8,7 @@ struct User {
     sign_in_count: u64,
 }
 // ANCHOR_END: user
+
 // ANCHOR: main
 fn main() {
     let user1 = User {

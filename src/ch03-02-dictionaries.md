@@ -119,7 +119,7 @@ Later in [Dictionaries as Struct Members](ch11-01-custom-data-structures.html#di
 
 Up to this point, we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in a certain way. If you haven't understood all of it, don't worry because in this section we will have some more examples using dictionaries.
 
-We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` [interacts](#dictionaries-of-types-not-supported-natively) with other complex types such as `Array<T>` and how to [implement](#dictionaries-as-struct-members) a struct with a dictionary as a member.
+We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` [interacts](#dictionaries-of-types-not-supported-natively) with other complex types such as `Array<T>`.
 
 ## Entry and Finalize
 

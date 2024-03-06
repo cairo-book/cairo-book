@@ -11,7 +11,7 @@ Crates can contain modules, and the modules may be defined in other files that g
 
 ## What is the crate root?
 
-The crate root is the _lib.cairo_ source file that the Cairo compiler starts from and makes up the root module of your crate. We’ll explain modules in depth in the [“Defining Modules to Control Scope”](./ch07-02-defining-modules-to-control-scope.md) section.
+The crate root is the _lib.cairo_ source file that the Cairo compiler starts from and makes up the root module of your crate. We’ll explain modules in depth in the [Defining Modules to Control Scope](./ch07-02-defining-modules-to-control-scope.md) section.
 
 ## What is a package?
 

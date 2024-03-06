@@ -37,11 +37,7 @@ But when y does not divide x, you may get a surprising result: for example, sinc
 The felt252 type is a fundamental type that serves as the basis for creating all types in the core library.
 However, it is highly recommended for programmers to use the integer types instead of the `felt252` type whenever possible, as the `integer` types come with added security features that provide extra protection against potential vulnerabilities in the code, such as overflow and underflow checks. By using these integer types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
 An `integer` is a number without a fractional component. This type declaration indicates the number of bits the programmer can use to store the integer.
-Table 3-1 shows
-the built-in integer types in Cairo. We can use any of these variants to declare
-the type of an integer value.
-
-<span class="caption">Table 3-1: Integer Types in Cairo</span>
+Table 3-1 shows the built-in integer types in Cairo. We can use any of these variants to declare the type of an integer value.
 
 | Length  | Unsigned |
 | ------- | -------- |
@@ -52,6 +48,9 @@ the type of an integer value.
 | 128-bit | `u128`   |
 | 256-bit | `u256`   |
 | 32-bit  | `usize`  |
+
+<br>
+<div align="center"><span class="caption">Table 3-1: Integer Types in Cairo</span></div>
 
 Each variant has an explicit size. Note that for now, the `usize` type is just an alias for `u32`; however, it might be useful when in the future Cairo can be compiled to MLIR.
 As variables are unsigned, they can't contain a negative number. This code will cause the program to panic:
@@ -70,14 +69,16 @@ that number literals that can be multiple numeric types allow a type suffix,
 such as `57_u8`, to designate the type.
 It is also possible to use a visual separator `_` for number literals, in order to improve code readability.
 
-<span class="caption">Table 3-2: Integer Literals in Cairo</span>
-
 | Numeric literals | Example   |
 | ---------------- | --------- |
 | Decimal          | `98222`   |
 | Hex              | `0xff`    |
 | Octal            | `0o04321` |
 | Binary           | `0b01`    |
+
+<br>
+<div align="center"><span class="caption">Table 3-2: Integer Literals in Cairo</span></div>
+
 
 So how do you know which type of integer to use? Try to estimate the max value your int can have and choose the good size.
 The primary situation in which you’d use `usize` is when indexing some sort of collection.
@@ -111,8 +112,8 @@ Cairo is specified using `bool`. For example:
 When declaring a `bool` variable, it is mandatory to use either `true` or `false` literals as value. Hence, it is not allowed to use integer literals (i.e. `0` instead of false) for `bool` declarations.
 
 The main way to use Boolean values is through conditionals, such as an `if`
-expression. We’ll cover how `if` expressions work in Cairo in the [“Control
-Flow”][control-flow] section.
+expression. We’ll cover how `if` expressions work in Cairo in the [Control
+Flow][control-flow] section.
 
 ### String Types
 

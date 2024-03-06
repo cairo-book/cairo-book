@@ -1,5 +1,5 @@
 fn main() {
-    let mut data = ArrayTrait::new();
+    let mut data = array![];
     data.append(2);
     if true {
         panic(data);
