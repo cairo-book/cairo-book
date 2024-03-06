@@ -3,7 +3,7 @@ use core::poseidon::PoseidonTrait;
 use core::hash::{HashStateTrait, HashStateExTrait};
 //ANCHOR_END: import
 
-//ANCHOR: structure
+//ANCHOR: all
 #[derive(Drop, Hash)]
 struct StructForHash {
     first: felt252,
@@ -20,5 +20,6 @@ fn main() -> felt252 {
     hash
 }
 //ANCHOR_END: main
+//ANCHOR_END: all
 
 
