@@ -11,9 +11,10 @@ If you want to learn more about the Starknet network itself, its architecture an
 ## Scarb
 
 Scarb facilitates smart contract development for Starknet. To enable this feature, you'll need to make some configurations in your _Scarb.toml_ file (see [Installation](./ch01-01-installation.md) for how to install Scarb).
-First, add the `starknet` dependency to your _Scarb.toml_ file. Next, specify the compiler output by adding a `[[target.starknet-contract]]` section to enable contract compilation.
 
-Below is the minimal Scarb.toml file required to compile a crate containing Starknet contracts:
+First, add the `starknet` dependency to your _Scarb.toml_ file. Next, specify the compiler output by adding a `[[target.starknet-contract]]` section to enable the creation of the SIERRA contract class. If you omit to specify the target, compilation will work but Scarb will generate a SIERRA file that is not deployable on the Starknet network.
+
+Below is the minimal _Scarb.toml_ file required to compile a crate containing Starknet contracts:
 
 ```toml
 [package]
