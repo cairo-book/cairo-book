@@ -97,4 +97,4 @@ The call arguments must be provided as an array of `felt252`. To build this arra
 
 In Starknet contract context, a **selector** is an identifier through which a function is callable in transactions or in other classes.
 
-Note that in `starknet::call_contract_syscall` we didn't specify the function name as a string (ByteArray), but rather used the `selector!` macro, which produces the selector by computing a `sn_keccak` hash on its input.
+Note that in `starknet::call_contract_syscall`, we didn't specify the function name as a string, but rather used the `selector!` macro, which computes the `sn_keccak` hash of the provided function signature.
