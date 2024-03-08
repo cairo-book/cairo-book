@@ -16,40 +16,7 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 ### Sample Cairo Contract for Randomness: Raffle Game
 
 ```rust
-{{#include ../listings/ch99-starknet-smart-contracts/listing_99_15_randomness/src/lib.cairo:struct}}
-```
-
-```rs
-use starknet::ContractAddress;
-
-#[starknet::interface]
-trait IRaffle<TContractState> {
-	fn enter_raffle(ref self: TContractState, amount: u128);
-	fn pick_winner(self: @TContractState) -> ContractAddress;
-}
-
-#[starknet::contract]
-mod Raffle {
-	use super::{ContractAddress, IRaffle};
-	use starknet::info::{get_caller_address};
-	use pragma_lib::abi::{IRandomnessDispatcher, IRandomnessDispatcherTrait};
-
-	#[storage]
-	struct Storage {
-		winner: ContractAddress;
-	}
-
-	#[constructor]
-    fn constructor(ref self: ContractState, randomness_contract_address: ContractAddress) {
-        self.randomness_contract_address.write(randomness_contract_address);
-    }
-
-	#[abi(embed_v0)]
-	impl Raffle of IRaffle<ContractState> {
-		fn enter_raffle(ref self: ContractState, amount:u128){}
-		fn pick_winner(self: @ContractState) -> ContractAddress {}
-	}
-}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_15_randomness/src/lib.cairo:here}}
 ```
 
 ### Explanation for Example Functions that uses Pragma VRF
