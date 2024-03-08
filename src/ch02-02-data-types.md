@@ -51,7 +51,6 @@ the type of an integer value.
 | 64-bit  | `u64`    |
 | 128-bit | `u128`   |
 | 256-bit | `u256`   |
-| 32-bit  | `usize`  |
 
 Each variant has an explicit size. Note that for now, the `usize` type is just an alias for `u32`; however, it might be useful when in the future Cairo can be compiled to MLIR.
 As variables are unsigned, they can't contain a negative number. This code will cause the program to panic:
