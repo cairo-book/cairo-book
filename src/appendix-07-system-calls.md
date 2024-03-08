@@ -97,7 +97,7 @@ Calls a given contract. This system call expects the address of the called contr
 #### Arguments
 
 - _`address`_: The address of the contract you want to call.
-- _`entry_point_selector`_: A selector for a function within that contract.
+- _`entry_point_selector`_: A selector for a function within that contract, can be computed with the `selector!` macro.
 - _`calldata`_: The calldata array.
 
 #### Return values
@@ -213,7 +213,7 @@ This system call replaces the known delegate call functionality from Ethereum, w
 
 - _`class_hash`_: The hash of the class you want to use.
 
-- _`function_selector`_: A selector for a function within that class.
+- _`function_selector`_: A selector for a function within that class, can be computed with the `selector!` macro.
 
 - _`calldata`_: The calldata.
 
