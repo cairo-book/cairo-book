@@ -12,7 +12,7 @@ If you want to learn more about the Starknet network itself, its architecture an
 
 Scarb facilitates smart contract development for Starknet. To enable this feature, you'll need to make some configurations in your _Scarb.toml_ file (see [Installation](./ch01-01-installation.md) for how to install Scarb).
 
-First, add the `starknet` dependency to your _Scarb.toml_ file. Next, specify the compiler output by adding a `[[target.starknet-contract]]` section to enable the creation of the SIERRA contract class. If you omit to specify the target, compilation will work but Scarb will generate a SIERRA file that is not deployable on the Starknet network.
+First, add the `starknet` dependency to your _Scarb.toml_ file. Next, enable the Starknet contract compilation of the package by adding a `[[target.starknet-contract]]` section. By default, specifying this target will build a Sierra Contract Class file, which can be deployed on Starknet. If you omit to specify the target, your package will compile but will not produce an output that you can use with Starknet.
 
 Below is the minimal _Scarb.toml_ file required to compile a crate containing Starknet contracts:
 
@@ -27,7 +27,7 @@ starknet = ">=2.5.0"
 [[target.starknet-contract]]
 ```
 
-If you need to import external dependencies in your project, you can consult the [dedicated section](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md#using-external-packages-in-cairo-with-scarb). For additional configuration, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
+To compile contracts defined in your package's dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
 
 ## Starknet Foundry
 

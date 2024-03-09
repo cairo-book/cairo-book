@@ -44,6 +44,26 @@ View functions are _public_ functions where the `self: ContractState` is passed 
 
 > **Note:** It's important to note that both external and view functions are public. To create an internal function in a contract, you will need to define it outside of the implementation block annotated with the `#[abi(embed_v0)]` attribute.
 
+### Standalone public functions
+
+It is also possible to define public functions outside of an implementation of a trait, using the `#[external(v0)]` attribute. Doing this will automatically generate the corresponding ABI, allowing these standalone public functions to be callable by anyone from the outside. These functions can also be called from within the contract just like any function in Starknet contracts.
+
+Listing {{#ref standalone_interface}} and listing {{#ref standalone}} show a rewrite of the `INameRegistry` interface that doesn't contain the `store_name` function, which is implemented as a standalone public function:
+
+```rust,noplayground
+{{#include ../listings/ch99-starknet-smart-contracts/no_listing_standalone/src/lib.cairo:interface}}
+```
+
+{{#label standalone_interface}}
+<span class="caption">Listing {{#ref standalone_interface}}: `INameRegistry` interface that doesn't expose the `store_name` function.</span>
+
+```rust,noplayground
+{{#include ../listings/ch99-starknet-smart-contracts/no_listing_standalone/src/lib.cairo:standalone}}
+```
+
+{{#label standalone}}
+<span class="caption">Listing {{#ref standalone}}: Standalone `store_name` function.</span>
+
 ## 3. Private functions
 
 Functions that are not defined in a block annotated with the `#[abi(embed_v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.

@@ -68,6 +68,6 @@ As you may have already noticed, a Cairo program must always have a `main` funct
 fn main() {}
 ```
 
-Contracts deployed on the Starknet network are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. Contracts do not have a `main` function but one or multiple functions that can serve as entry points.
+Contracts deployed on the Starknet network are essentially programs that are run by the sequencer, and as such, have access to Starknet's state. Contracts do not have a `main` function but one or multiple functions that can serve as entry points.
 
 Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md). For a module to be handled as a contract by the compiler, it must be annotated with the `#[starknet::contract]` attribute.
