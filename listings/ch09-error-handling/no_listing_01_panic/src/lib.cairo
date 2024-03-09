@@ -1,6 +1,6 @@
 fn main() {
-    let mut data = array![];
-    data.append(2);
+    let mut data = array![2];
+
     if true {
         panic(data);
     }
