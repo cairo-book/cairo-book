@@ -66,12 +66,12 @@ Running this code would print `quitting`.
 
 ## The `Option` Enum and Its Advantages
 
-The Option enum is a standard Cairo enum that represents the concept of an optional value. It has two variants: `Some: T` and `None: ()`. `Some: T ` indicates that there's a value of type `T`, while `None` represents the absence of a value.
+The Option enum is a standard Cairo enum that represents the concept of an optional value. It has two variants: `Some: T` and `None`. `Some: T ` indicates that there's a value of type `T`, while `None` represents the absence of a value.
 
 ```rust,noplayground
 enum Option<T> {
     Some: T,
-    None: (),
+    None,
 }
 ```
 
