@@ -69,7 +69,7 @@ Before we explore things further down, let's define some terminology.
 
 - What we call an _external_ function is a public function that can be directly invoked through a Starknet transaction and that can mutate the state of the contract. `set` is an external function.
 
-- A _view_ function is a read-only function that cannot mutate the state of the contract. `get` is a view function.
+- A _view_ function is a public read-only function that cannot mutate the state of the contract. `get` is a view function.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:impl}}
