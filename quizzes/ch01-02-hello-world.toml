@@ -1,13 +1,8 @@
 [[questions]]
 id = "aac32d9f-b5a4-4946-81f2-eb6bcfc090ed"
-type = "MultipleChoice"
+type = "ShortAnswer"
 prompt.prompt = "What is the name of the initial function that a Cairo program runs?"
 answer.answer = "main"
-prompt.distractors = [
-  "run",
-  "entrypoint"
-]
-
 
 [[questions]]
 id = "a89b37cf-aa75-4fc7-b433-3b57d273ce1d"
@@ -15,19 +10,3 @@ type = "ShortAnswer"
 prompt.prompt = "Which command will run the code in your project?"
 answer.answer = "scarb cairo-run"
 context = "`scarb cairo-run` will first compile and then run your code."
-
-[[questions]]
-id = "44736aac-befe-40bd-8c67-5a29229af33f"
-type = "Tracing"
-prompt.program = """
-fn main() {
-  let x = 1;
-  println!("{x}")
-  let y = x + 3;
-  println!("Result: {y}");
-}
-"""
-answer.doesCompile = false
-context = """
-This program is missing a semicolon (`;`) after calling the first `println!` macro.
-"""

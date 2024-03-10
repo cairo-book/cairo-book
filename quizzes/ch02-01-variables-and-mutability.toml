@@ -15,7 +15,7 @@ const MINUTES_PER_HOUR = 60;
 """,
 """
 ```rust
-let y = "{}";
+let y = 10;
 ```
 """
 ]
