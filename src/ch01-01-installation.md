@@ -57,6 +57,8 @@ cairo: 2.5.3 (https://crates.io/crates/cairo-lang-compiler/2.5.3)
 sierra: 1.4.0
 ```
 
+{{#quiz ../quizzes/ch01-01-installation.toml}}
+
 ## Installing the VSCode extension
 
 Cairo has a VSCode extension that provides syntax highlighting, code completion, and other useful features. You can install it from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1).

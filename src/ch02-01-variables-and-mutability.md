@@ -216,4 +216,6 @@ error: could not compile `variables` due to previous error
 Now that we’ve explored how variables work, let’s look at more data types they
 can have.
 
+{{#quiz ../quizzes/ch02-01-variables-and-mutability.toml}}
+
 [data-types]: ch02-02-data-types.md
