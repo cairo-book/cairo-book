@@ -1,5 +1,5 @@
 fn main() {
-    let arr1 = ArrayTrait::<u128>::new();
+    let arr1: Array<u128> = array![];
 
     let (arr2, len) = calculate_length(arr1);
 }

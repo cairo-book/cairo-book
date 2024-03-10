@@ -3,8 +3,6 @@ trait Two<T> {
 }
 
 mod one_based {
-    use core::traits::{Into, TryInto};
-    use core::array::ArrayTrait;
     pub impl TwoImpl<
         T, +Copy<T>, +Drop<T>, +Add<T>, impl One: core::num::traits::One<T>
     > of super::Two<T> {

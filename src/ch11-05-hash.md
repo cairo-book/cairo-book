@@ -32,10 +32,8 @@ The first step is to initialize the hash with either `PoseidonTrait::new() -> Ha
 
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:import}}
-```
 
-```rust
-{{#include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:structure}}
+{{#include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo:all}}
 ```
 
 As our struct derives the `Hash` trait, we can call the function as follows for Poseidon hashing :

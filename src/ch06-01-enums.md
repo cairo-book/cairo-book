@@ -30,7 +30,7 @@ and instantiate it as follows:
 
 In this code, each variant is associated to a `u128` value, representing the direction in degrees. We will see in the next example that it is also possible to associate different data types to each variant.
 
-It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a direction. You can learn more about it in [The Match Control Flow Construct](ch06-02-the-match-control-flow-construct.md) section.
+It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a direction. You can learn more about it in the [Match Control Flow Construct](ch06-02-the-match-control-flow-construct.md) section.
 
 ## Enums Combined with Custom Types
 

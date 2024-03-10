@@ -1,5 +1,4 @@
 //ANCHOR: all
-
 fn main() {
     //ANCHOR: block_expr
     let y = {

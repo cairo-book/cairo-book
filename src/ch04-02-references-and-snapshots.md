@@ -29,7 +29,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 {{#include ../listings/ch04-understanding-ownership/no_listing_09_snapshots/src/lib.cairo}}
 ```
 
-> Note: It is only possible to call the `len()` method on an array snapshot because it is defined as such in the `ArrayTrait` trait. If you try to call a method that is not defined for snapshots on a snapshot, you will get a compilation error. However, you can call methods expecting a snapshot on non-snapshot types.
+> Note: it is only possible to call the `len()` method on an array snapshot because it is defined as such in the `ArrayTrait` trait. If you try to call a method that is not defined for snapshots on a snapshot, you will get a compilation error. However, you can call methods expecting a snapshot on non-snapshot types.
 
 The output of this program is:
 

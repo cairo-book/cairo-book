@@ -23,7 +23,7 @@ We’ve also declared the trait as `pub` so that crates depending on this crate 
 
 Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray;`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
 
-> Note: the `ByteArray` type is the type used to represent Strings in Cairo.
+> Note: the `ByteArray` type is the type used to represent strings in Cairo.
 
 As the trait is not generic, the `self` parameter is not generic either and is of type `@NewsArticle`. This means that the `summarize` method can only be called on instances of `NewsArticle`.
 

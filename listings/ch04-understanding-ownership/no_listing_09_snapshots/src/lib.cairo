@@ -1,5 +1,5 @@
 fn main() {
-    let mut arr1 = ArrayTrait::<u128>::new();
+    let mut arr1: Array<u128> = array![];
     let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time
     arr1.append(1); // Mutate `arr1` by appending a value
     let first_length = calculate_length(
