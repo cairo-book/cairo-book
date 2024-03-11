@@ -99,7 +99,7 @@ Two methods are commonly used to access or modify the state of a contract:
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:read_state}}
 ```
 
-- `write`, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that `write` may take more than one argument, depending on the type of the storage variable. For example, writting on a mapping requires 2 arguments: the key and the value to be written.
+- `write`, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that `write` may take more than one argument, depending on the type of the storage variable. For example, writing on a mapping requires 2 arguments: the key and the value to be written.
   
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:write_state}}
