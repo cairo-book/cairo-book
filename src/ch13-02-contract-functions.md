@@ -18,7 +18,7 @@ Some important rules to note:
 
 ## 2. Public functions
 
-As stated previously, public functions are accessible from outside of the contract. They must be defined inside an implementation block annotated with the `#[abi(embed_v0)]` attribute. This attribute means that all functions embedded inside it are implementations of the Starknet interface, and therefore entry points of the contract. It only affects the visibility (public vs private/internal), but it doesn't inform us on the ability of these functions to modify the state of the contract.
+As stated previously, public functions are accessible from outside of the contract. They are usually defined inside an implementation block annotated with the `#[abi(embed_v0)]` attribute. This attribute means that all functions embedded inside it are implementations of the Starknet interface, and therefore entry points of the contract. It only affects the visibility (public vs private/internal), but it doesn't inform us on the ability of these functions to modify the state of the contract.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:impl_public}}
@@ -51,22 +51,12 @@ It is also possible to define public functions outside of an implementation of a
 Listing {{#ref standalone_interface}} and listing {{#ref standalone}} show a rewrite of the `INameRegistry` interface that doesn't contain the `store_name` function, which is implemented as a standalone public function:
 
 ```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/no_listing_standalone/src/lib.cairo:interface}}
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:standalone}}
 ```
-
-{{#label standalone_interface}}
-<span class="caption">Listing {{#ref standalone_interface}}: `INameRegistry` interface that doesn't expose the `store_name` function.</span>
-
-```rust,noplayground
-{{#include ../listings/ch99-starknet-smart-contracts/no_listing_standalone/src/lib.cairo:standalone}}
-```
-
-{{#label standalone}}
-<span class="caption">Listing {{#ref standalone}}: Standalone `store_name` function.</span>
 
 ## 3. Private functions
 
-Functions that are not defined in a block annotated with the `#[abi(embed_v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.
+Functions that are not defined with the `#[external(v0)]` attribute or inside a block annotated with the `#[abi(embed_v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.
 
 They can be grouped in a dedicated impl block (e.g in components, to easily import internal functions all at once in the embedding contracts) or just be added as free functions inside the contract module.
 Note that these 2 methods are equivalent. Just choose the one that makes your code more readable and easy to use.
