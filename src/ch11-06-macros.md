@@ -14,6 +14,10 @@ const a: felt252 = consteval_int!(2 * 2 * 2);
 
 This will be interpreted as `const a: felt252 = 8;` by the compiler.
 
+## `selector!` macro
+
+See [Entry Point Selector](./ch14-02-contract-dispatchers-library-dispatchers-and-system-calls.md#entry-point-selector).
+
 ## `print!` and `println!` macros
 
 Please refer to the [Printing](./ch11-09-printing.md) page.

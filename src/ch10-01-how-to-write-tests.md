@@ -289,7 +289,7 @@ assertion fails. Because both traits are derivable this is usually as straightfo
 You can also add a custom message to be printed with the failure message as
 optional arguments to `assert!`, `assert_eq!`, and `assert_ne!` macros. Any
 arguments specified after the required arguments are passed along to the
-`format!` macro (discussed in [Chapter 11 - Macros](./ch11-06-macros.md#format-macro)), so you can pass a format string that contains `{}` placeholders and
+`format!` macro (discussed in [Printing Chapter](./ch11-09-printing.md#formatting)), so you can pass a format string that contains `{}` placeholders and
 values to go in those placeholders. Custom messages are useful for documenting
 what an assertion means; when a test fails, you’ll have a better idea of what
 the problem is with the code.

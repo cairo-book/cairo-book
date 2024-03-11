@@ -89,6 +89,14 @@ Using these syscalls can be handy for customized error handling or to get more c
 {{#label syscalls}}
 <span class="caption">Listing {{#ref syscalls}}: A sample contract using syscalls</span>
 
-To use this syscall, we passed in the contract address, the selector of the function we want to call, and the call arguments.
+To use this syscall, we passed in the contract address, the selector of the function we want to call (see next section), and the call arguments.
 
 The call arguments must be provided as an array of `felt252`. To build this array, we serialize the expected function parameters into an `Array<felt252>` using the `Serde` trait, and then pass this array as calldata. At the end, we are returned a serialized value which we'll need to deserialize ourselves!
+
+### Entry Point Selector
+
+In the context of a smart contract, a selector is a unique identifier for a specific entrypoint of a contract. When a transaction is sent to a contract, it includes the selector in the calldata to specify which function should be executed.
+
+On Starknet, the selector is computed by applying the `sn_keccak` hash function to the string representation of the function name. If the function name is `transfer`, the selector can be computed with `selector!("transfer")`
+
+Note that in `starknet::call_contract_syscall`, we didn't specify the function name as a string, but rather used the `selector!` macro, which computes the `sn_keccak` hash of the provided function signature.

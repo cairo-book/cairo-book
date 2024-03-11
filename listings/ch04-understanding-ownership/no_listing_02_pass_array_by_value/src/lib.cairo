@@ -4,7 +4,7 @@ fn foo(mut arr: Array<u128>) {
 }
 
 fn main() {
-    let mut arr = ArrayTrait::<u128>::new();
+    let mut arr: Array<u128> = array![];
     foo(arr);
     foo(arr);
 }

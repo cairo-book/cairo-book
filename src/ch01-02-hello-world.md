@@ -9,7 +9,7 @@ prints the text `Hello, world!` to the screen, so we’ll do the same here!
 > if you prefer to use an integrated development environment (IDE) instead of
 > the command line, feel free to use your favorite IDE. The Cairo team has developed
 > a VSCode extension for the Cairo language that you can use to get the features from
-> the language server and code highlighting. See [Appendix D][devtools]
+> the language server and code highlighting. See [Appendix E](./appendix-05-useful-development-tools.md)
 > for more details.
 
 ## Creating a Project Directory
@@ -80,7 +80,7 @@ This file is in the [TOML](https://toml.io/) (Tom’s Obvious, Minimal Language)
 
 The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other sections.
 
-The next three lines set the configuration information Scarb needs to compile your program: the name of the package and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix E](./appendix-05-common-types-and-traits-and-cairo-prelude.md)
+The next three lines set the configuration information Scarb needs to compile your program: the name of the package and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix D](./appendix-04-common-types-and-traits-and-cairo-prelude.md).
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
@@ -145,7 +145,7 @@ Regardless of your operating system, the string `Hello, world!` should be printe
 the terminal.
 
 If `Hello, world!` did print, congratulations! You’ve officially written a Cairo
-program. That makes you a Cairo programmer—welcome!
+program. That makes you a Cairo programmer — welcome!
 
 ## Anatomy of a Cairo Program
 
@@ -186,7 +186,7 @@ screen. There are four important details to notice here.
 First, Cairo style is to indent with four spaces, not a tab.
 
 Second, `println!` calls a Cairo macro. If it had called a function instead, it would be entered as `println` (without the `!`).
-We’ll discuss Cairo macros in more detail in [Chapter Macros](./ch11-06-macros.md). For now, you just need to know that using a `!` means that you’re calling a macro instead of a normal function and that macros don’t always follow the same rules as functions.
+We’ll discuss Cairo macros in more detail in [Macros Chapter](./ch11-06-macros.md). For now, you just need to know that using a `!` means that you’re calling a macro instead of a normal function and that macros don’t always follow the same rules as functions.
 
 Third, you see the `"Hello, world!"` string. We pass this string as an argument to `println!`, and the string is printed to the screen.
 
@@ -208,3 +208,5 @@ Let’s recap what we’ve learned so far about Scarb:
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 
 You’re already off to a great start on your Cairo journey! This is a great time to build a more substantial program to get used to reading and writing Cairo code.
+
+{{#quiz ../quizzes/ch01-02-hello-world.toml}}

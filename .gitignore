@@ -2,6 +2,9 @@ book
 target
 output
 
+# mdbook-quiz
+src/quiz
+
 # Editors tmp files.
 *~
 .idea/

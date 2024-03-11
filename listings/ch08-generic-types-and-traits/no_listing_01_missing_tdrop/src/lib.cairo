@@ -10,15 +10,8 @@ fn largest_list<T>(l1: Array<T>, l2: Array<T>) -> Array<T> {
 }
 
 fn main() {
-    let mut l1 = ArrayTrait::new();
-    let mut l2 = ArrayTrait::new();
-
-    l1.append(1);
-    l1.append(2);
-
-    l2.append(3);
-    l2.append(4);
-    l2.append(5);
+    let mut l1 = array![1, 2];
+    let mut l2 = array![3, 4, 5];
 
     // There is no need to specify the concrete type of T because
     // it is inferred by the compiler

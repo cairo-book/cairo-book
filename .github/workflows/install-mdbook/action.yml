@@ -21,3 +21,7 @@ runs:
     - name: Install mdbook-cairo preprocessor
       run: cargo install --path mdbook-cairo --locked
       shell: bash
+
+    - name: Install mdbook-quiz preprocessor
+      run: cargo install mdbook-quiz --locked --version 0.3.4
+      shell: bash

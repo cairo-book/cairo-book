@@ -1,0 +1,9 @@
+[[questions]]
+id = "1b7c7edd-8c2c-418b-ad80-c0b37b8ae215"
+type = "MultipleChoice"
+prompt.prompt = "What is Scarb?"
+answer.answer = "Cairo's package manager and build system"
+prompt.distractors = [
+  "a VS Code extension",
+  "the name of the VM that runs Cairo"
+]

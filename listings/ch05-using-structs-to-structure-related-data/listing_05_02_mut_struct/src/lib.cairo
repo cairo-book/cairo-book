@@ -1,5 +1,5 @@
 // ANCHOR: all
-#[derive(Copy, Drop)]
+#[derive(Drop)]
 struct User {
     active: bool,
     username: felt252,
