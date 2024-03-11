@@ -27,7 +27,7 @@ As stated previously, public functions are accessible from outside of the contra
 ### External functions
 
 External functions are functions that can modify the state of a contract. They are public and can be called by any other contract or externally.
-External functions are _public_ functions where the `self: ContractState` is passed as reference with the `ref` keyword, allowing you to modify the state of the contract.
+External functions are _public_ functions where the `ref self: ContractState` is passed as reference with the `ref` keyword, allowing you to modify the state of the contract.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:external}}
@@ -36,7 +36,7 @@ External functions are _public_ functions where the `self: ContractState` is pas
 ### View functions
 
 View functions are read-only functions allowing you to access data from the contract while ensuring that the state of the contract is not modified. They can be called by other contracts or externally.
-View functions are _public_ functions where the `self: ContractState` is passed as snapshot, preventing you from modifying the state of the contract.
+View functions are _public_ functions where the `self: @ContractState` is passed as snapshot, preventing you from modifying the state of the contract.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_03/src/lib.cairo:view}}
