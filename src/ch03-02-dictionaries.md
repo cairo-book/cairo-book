@@ -195,11 +195,7 @@ Let's show using an example. We will try to store a `Span<felt252>` inside a dic
 
 In this code snippet, the first thing we did was to create a new dictionary `d`. We want it to hold a `Nullable<Span>`. After that, we created an array and filled it with values.
 
-The last step is inserting the array as a span inside the dictionary. Notice that we didn't do that directly, but instead, we took some steps in between:
-
-1. We wrapped the array inside a `Box` using the `new` method from `BoxTrait`.
-2. We wrapped the `Box` inside a nullable using the `nullable_from_box` function.
-3. Finally, we inserted the result.
+The last step is inserting the array as a span inside the dictionary. Notice that we do this using the `new` function of the `NullableTrait`.
 
 Once the element is inside the dictionary, and we want to get it, we follow the same steps but in reverse order. The following code shows how to achieve that:
 
