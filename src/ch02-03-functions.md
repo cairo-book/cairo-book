@@ -260,3 +260,5 @@ code. The definition of the function `plus_one` says that it will return an
 `u32`, but statements don’t evaluate to a value, which is expressed by `()`,
 the unit type. Therefore, nothing is returned, which contradicts the function
 definition and results in an error.
+
+{{#quiz ../quizzes/ch02-03-functions.toml}}

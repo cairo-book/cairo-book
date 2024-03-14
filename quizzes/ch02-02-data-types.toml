@@ -1,0 +1,42 @@
+[[questions]]
+id = "4fd0bdba-6ef4-44ad-b552-953b09b814d7"
+type = "MultipleChoice"
+prompt.prompt = "The largest number representable by the type `felt252` is:"
+answer.answer = "2<sup>251</sup>+17⋅2<sup>192</sup>"
+prompt.distractors = [
+  "2<sup>251</sup>+2<sup>192</sup>+1",
+  "2<sup>256</sup>",
+  "2<sup>127</sup>",
+]
+prompt.answerIndex = 3
+context = """
+In general, a signed number with *n* bits can represent numbers between -(2<sup>n - 1</sup>) and 2<sup>n - 1</sup> - 1.
+"""
+
+[[questions]]
+id = "4d5cab51-6eca-4aa0-8666-993acdd85c8d"
+type = "MultipleChoice"
+prompt.prompt = "If `x : u8 = 0`, what will happen when computing `x - 1`?"
+answer.answer = "It will always panic." 
+prompt.distractors = [
+  "It will return `-1`.",
+  "Compiler will issue a warning about underflow.",
+]
+context = """
+`u8` is an unsigned integer type which cannot contain negative numbers.
+"""
+
+[[questions]]
+id = "dc1e6fa1-0d7b-479e-98ac-6a514d60eb1b"
+type = "Tracing"
+prompt.program = """
+fn main() {
+  let x: felt32 = 2.0;
+  println!("{x}");
+}
+"""
+answer.doesCompile = false
+answer.lineNumber = 2
+context = """
+The type `felt32` does not exist. Proper field type is `felt252`.
+"""

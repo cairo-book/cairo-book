@@ -211,6 +211,8 @@ In Listing {{#ref while-true}}, we use `while` to loop the program three times, 
 This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
 While a condition evaluates to `true`, the code runs; otherwise, it exits the loop.
 
+{{#quiz ../quizzes/ch02-05-control-flow.toml}}
+
 ## Summary
 
 You made it! This was a sizable chapter: you learned about variables, data types, functions, comments,
