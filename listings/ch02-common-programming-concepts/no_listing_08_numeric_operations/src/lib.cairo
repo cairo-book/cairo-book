@@ -14,4 +14,7 @@ fn main() {
 
     // remainder
     let remainder = 43_u128 % 5_u128; // result is 3
+    
+    // divmod
+    let (quotient, remainder) = DivRem::div_rem(42, 7);
 }
