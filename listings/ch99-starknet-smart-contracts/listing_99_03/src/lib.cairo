@@ -95,6 +95,14 @@ mod NameRegistry {
     }
     //ANCHOR_END: impl_public
 
+    //ANCHOR: standalone
+    // Standalone public function
+    #[external(v0)]
+    fn get_contract_name(self: @ContractState) -> felt252 {
+        'Name Registry'
+    }
+    //ANCHOR_END: standalone
+
     // ANCHOR: state_internal
     // ANCHOR: generate_trait
     // Could be a group of functions about a same topic
@@ -118,14 +126,6 @@ mod NameRegistry {
         }
     }
     // ANCHOR_END: generate_trait
-
-    //ANCHOR: standalone
-    // Standalone public function
-    #[external(v0)]
-    fn get_contract_name(self: @ContractState) -> felt252 {
-        'Name Registry'
-    }
-    //ANCHOR_END: standalone
 
     // Free function
     fn get_owner_storage_address(self: @ContractState) -> StorageBaseAddress {
