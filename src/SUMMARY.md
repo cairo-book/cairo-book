@@ -46,6 +46,7 @@
 - [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md)
   - [Enums](ch06-01-enums.md)
   - [The Match Control Flow Construct](ch06-02-the-match-control-flow-construct.md)
+  - [Concise Control Flow with if let & while let](ch06-03-consise-control-flow-with-if-let-and-while-let.md)
 
 ## Managing Cairo Projects with Packages, Crates and Modules
 
