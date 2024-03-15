@@ -11,9 +11,10 @@ If you want to learn more about the Starknet network itself, its architecture an
 ## Scarb
 
 Scarb facilitates smart contract development for Starknet. To enable this feature, you'll need to make some configurations in your _Scarb.toml_ file (see [Installation](./ch01-01-installation.md) for how to install Scarb).
-First, add the `starknet` dependency to your _Scarb.toml_ file. Next, specify the compiler output by adding a `[[target.starknet-contract]]` section to enable contract compilation.
 
-Below is the minimal Scarb.toml file required to compile a crate containing Starknet contracts:
+First, add the `starknet` dependency to your _Scarb.toml_ file. Next, enable the Starknet contract compilation of the package by adding a `[[target.starknet-contract]]` section. By default, specifying this target will build a Sierra Contract Class file, which can be deployed on Starknet. If you omit to specify the target, your package will compile but will not produce an output that you can use with Starknet.
+
+Below is the minimal _Scarb.toml_ file required to compile a crate containing Starknet contracts:
 
 ```toml
 [package]
@@ -26,12 +27,10 @@ starknet = ">=2.5.0"
 [[target.starknet-contract]]
 ```
 
-For additional configuration, such as external contract dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
-
-Each example in the following sections can be used with Scarb.
+To compile contracts defined in your package's dependencies, please refer to the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/starknet/contract-target.html#compiling-external-contracts).
 
 ## Starknet Foundry
 
-Starknet Foundry is a tool chain for Starknet Smart Contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
+Starknet Foundry is a tool chain for Starknet smart contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
 
-We'll describe Starknet Foundry in more detail in the [Useful Development Tools](./appendix-05-useful-development-tools.md) appendix.
+We'll describe Starknet Foundry in more detail in [Chapter 17](./appendix-05-useful-development-tools.md) when discussing Starknet smart contract testing and security.

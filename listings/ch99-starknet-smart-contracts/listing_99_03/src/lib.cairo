@@ -67,7 +67,7 @@ mod NameRegistry {
     //ANCHOR_END: constructor
 
     //ANCHOR: impl_public
-    // Public functions
+    // Public functions inside an impl block
     #[abi(embed_v0)]
     impl NameRegistry of super::INameRegistry<ContractState> {
         //ANCHOR: external
@@ -95,6 +95,14 @@ mod NameRegistry {
     }
     //ANCHOR_END: impl_public
 
+    //ANCHOR: standalone
+    // Standalone public function
+    #[external(v0)]
+    fn get_contract_name(self: @ContractState) -> felt252 {
+        'Name Registry'
+    }
+    //ANCHOR_END: standalone
+
     // ANCHOR: state_internal
     // ANCHOR: generate_trait
     // Could be a group of functions about a same topic
@@ -119,11 +127,7 @@ mod NameRegistry {
     }
     // ANCHOR_END: generate_trait
 
-    // Free functions
-    fn get_contract_name() -> felt252 {
-        'Name Registry'
-    }
-
+    // Free function
     fn get_owner_storage_address(self: @ContractState) -> StorageBaseAddress {
         //ANCHOR: owner_address
         self.owner.address()

@@ -62,10 +62,12 @@ Unlike most (if not all) of Starknet's competitors that chose to use the EVM (ei
 ## Cairo programs and Starknet contracts: what is the difference?
 
 Starknet contracts are a special superset of Cairo programs, so the concepts previously learned in this book are still applicable to write Starknet contracts.
-As you may have already noticed, a Cairo program must always have a function `main` that serves as the entry point for this program:
+As you may have already noticed, a Cairo program must always have a `main` function that serves as the entry point for this program:
 
 ```rust
 fn main() {}
 ```
 
-Starknet contracts are essentially programs that can run on the Starknet OS, and as such, have access to Starknet's state. For a module to be handled as a contract by the compiler, it must be annotated with the `#[starknet::contract]` attribute.
+Contracts deployed on the Starknet network are essentially programs that are run by the sequencer, and as such, have access to Starknet's state. Contracts do not have a `main` function but one or multiple functions that can serve as entry points.
+
+Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md). For a module to be handled as a contract by the compiler, it must be annotated with the `#[starknet::contract]` attribute.
