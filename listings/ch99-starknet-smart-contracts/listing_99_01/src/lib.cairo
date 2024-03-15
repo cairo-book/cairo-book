@@ -9,9 +9,6 @@ trait ISimpleStorage<TContractState> {
 
 #[starknet::contract]
 mod SimpleStorage {
-    use starknet::get_caller_address;
-    use starknet::ContractAddress;
-
     #[storage]
     struct Storage {
         stored_data: u128
@@ -20,13 +17,16 @@ mod SimpleStorage {
     //ANCHOR: impl
     #[abi(embed_v0)]
     impl SimpleStorage of super::ISimpleStorage<ContractState> {
-        //ANCHOR: write_state
         fn set(ref self: ContractState, x: u128) {
+            //ANCHOR: write_state
             self.stored_data.write(x);
-        }
         //ANCHOR_END: write_state
+        }
+
         fn get(self: @ContractState) -> u128 {
+            //ANCHOR: read_state
             self.stored_data.read()
+        //ANCHOR_END: read_state
         }
     }
 //ANCHOR_END: impl

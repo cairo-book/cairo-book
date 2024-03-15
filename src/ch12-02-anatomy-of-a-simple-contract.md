@@ -1,22 +1,22 @@
 # Anatomy of a Simple Contract
 
-This chapter will introduce you to the basics of Starknet contracts with an example of a basic contract. You will learn how to write a simple contract that stores a single number on the blockchain.
+This chapter will introduce you to the basics of Starknet contracts using a very simple smart contract as example. You will learn how to write a contract that allows anyone to store a single number on the Starknet blockchain.
 
-Let's consider the following contract to present the basics of a Starknet contract. It might not be easy to understand it all at once, but we will go through it step by step:
+Let's consider the following contract for the whole chapter. It might not be easy to understand it all at once, but we will go through it step by step:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:all}}
 ```
 
 {{#label simple-contract}}
 <span class="caption">Listing {{#ref simple-contract}}: A simple storage contract.</span>
 
-> Note: Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md).
-
 ## What is this contract?
 
-Contracts are a combination of state and logic.
-The state is defined within the `Storage` struct, and is always initialized empty. Here, our struct contains a single field called `stored_data` of type `u128` (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \\( {2^{128}} - 1 \\).
+Contracts are defined by encapsulating state and logic within a module annotated with the `#[starknet::contract]` attribute.
+
+The state is defined within the `Storage` struct, and is always initialized empty. Here, our struct contains a single a field called `stored_data` of type `u128` (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \\( {2^{128}} - 1 \\).
+
 The logic is defined by functions that interact with the state. Here, our contract defines and publicly exposes the functions `set` and `get` that can be used to modify or retrieve the value of the stored variable.
 You can think of it as a single slot in a database that you can query and modify by calling functions of the code that manages the database.
 
@@ -26,59 +26,85 @@ You can think of it as a single slot in a database that you can query and modify
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:interface}}
 ```
 
+{{#label interface}}
+<span class="caption">Listing {{#ref interface}}: A basic contract interface.</span>
+
+
 Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world. In Cairo, they're defined by annotating a trait with the `#[starknet::interface]` attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.
 
-Here, the interface contains two functions: `set` and `get`. By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface, as shown in Listing {{#ref wrong-interface}}.
+All contract interfaces use a generic type for the `self` parameter, representing the contract state. We chose to name this generic parameter `TContractState` in our interface, but this is not enforced and any name can be chosen.
+
+In our interface, note the generic type `TContractState` of the `self` argument which is passed by reference to the `set` function. Seeing the `self` argument passed in a contract function tells us that this function can access the state of the contract. The `ref` modifier implies that `self` may be modified, meaning that the storage variables of the contract may be modified inside the `set` function.
+
+On the other hand, the `get` function takes a snapshot of `TContractState`, which immediately tells us that it does not modify the state (and indeed, the compiler will complain if we try to modify storage inside the `get` function).
+
+By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface. For example, Listing {{#ref wrong-interface}} shows a wrong implementation of the `ISimpleStorage` interface, containing a slightly different `set` function that doesn't have the same signature.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_02/src/lib.cairo:impl}}
 ```
 
 {{#label wrong-interface}}
-<span class="caption">Listing {{#ref wrong-interface}}: A wrong implementation of the interface of the contract. This does not compile, as the return type of `set` does not match the trait's.</span>
+<span class="caption">Listing {{#ref wrong-interface}}: A wrong implementation of the interface of the contract. This does not compile, as the signature of `set` doesn't match the trait's.
 
-In the interface, note the generic type `TContractState` of the `self` argument which is passed by reference to the `set` function. The `self` parameter represents the contract state. Seeing the `self` argument passed in a contract function tells us that this function can access the state of the contract. The `ref` modifier implies that `self` may be modified, meaning that the storage variables of the contract may be modified inside the `set` function.
+Trying to compile a contract using this implementation will result in the following error:
 
-On the other hand, `get` takes a _snapshot_ of `TContractState`, which immediately tells us that it does not modify the state (and indeed, the compiler will complain if we try to modify storage inside the `get` function).
+```shell
+error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
+ --> /SimpleStorage/src/lib.cairo:20:16
+        fn set(ref self: ContractState) {}
+               ^*********************^
+
+error: Wrong number of arguments. Expected 2, found: 1
+ --> /SimpleStorage/src/lib.cairo[contract]:80:5
+    SimpleStorage::set(ref contract_state, );
+    ^**************************************^
+
+error: could not compile `SimpleStorage` due to previous error
+```
 
 ## Public functions defined in an implementation block
 
 Before we explore things further down, let's define some terminology.
 
-- In the context of Starknet, a _public function_ is a function that is exposed to the outside world. In the example above, `set` and `get` are public functions. A public function can be called by anyone, and can be called from outside the contract, or from within the contract. In the example above, `set` and `get` are public functions.
+- In the context of Starknet, a _public function_ is a function that is exposed to the outside world. A public function can be called by anyone, either from outside the contract or from within the contract itself. In the example above, `set` and `get` are public functions.
 
-- What we call an _external_ function is a public function that is invoked through a transaction and that can mutate the state of the contract. `set` is an external function.
+- What we call an _external_ function is a public function that can be directly invoked through a Starknet transaction and that can mutate the state of the contract. `set` is an external function.
 
-- A _view_ function is a public function that can be called from outside the contract, but that cannot mutate the state of the contract. `get` is a view function.
+- A _view_ function is a public function that is typically read-only and cannot mutate the state of the contract. However, this limitation is only enforced by the compiler, and not by Starknet itself. We will discuss the implications of this in a later section. `get` is a view function.
 
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:impl}}
 ```
 
+{{#label implementation}}
+<span class="caption">Listing {{#ref implementation}}: SimpleStorage implementation.</span>
+
 Since the contract interface is defined as the `ISimpleStorage` trait, in order to match the interface, the public functions of the contract must be defined in an implementation of this trait — which allows us to make sure that the implementation of the contract matches its interface.
 
 However, simply defining the functions in the implementation block is not enough. The implementation block must be annotated with the `#[abi(embed_v0)]` attribute. This attribute exposes the functions defined in this implementation to the outside world — forget to add it and your functions will not be callable from the outside. All functions defined in a block marked as `#[abi(embed_v0)]` are consequently _public functions_.
 
-When writing the implementation of the interface, the generic parameter corresponding to the `self` argument in the trait must be `ContractState`. The `ContractState` type is generated by the compiler, and gives access to the storage variables defined in the `Storage` struct.
+Because the `SimpleStorage` contract is defined as a module, we need to access the interface defined in the parent module. We can either bring it to the current scope with the `use` keyword, or refer to it directly using `super`.
+
+When writing the implementation of an interface, the `self` parameter in the trait methods **must** be of type `ContractState`. The `ContractState` type is generated by the compiler, and gives access to the storage variables defined in the `Storage` struct.
 Additionally, `ContractState` gives us the ability to emit events. The name `ContractState` is not surprising, as it’s a representation of the contract’s state, which is what we think of `self` in the contract interface trait.
+When `self` is a snapshot of `ContractState`, only read access is allowed, and emitting events is not possible.
 
-## Standalone public functions
+## Accessing and modifying the contract's state
 
-It is also possible to define public functions outside of an impl block, using the `#[external(v0)]` attribute. Doing this will automatically generate the corresponding ABI, allowing these standalone public functions to be callable by anyone from the outside.
+Two methods are commonly used to access or modify the state of a contract:
+- `read`, which returns the value of a storage variable. This method is called on the variable itself and does not take any argument.
+  
+```rust,noplayground
+{{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:read_state}}
+```
 
-## Modifying the contract's state
-
-As you can notice, all functions inside an impl block that need to access the state of the contract are defined under the implementation of a trait that has a `TContractState` generic parameter, and take a `self: ContractState` parameter.
-This allows us to explicitly pass the `self: ContractState` parameter to the function, allowing access the storage variables of the contract.
-To access a storage variable of the current contract, you add the `self` prefix to the storage variable name, which allows you to use the `read` and `write` methods to either read or write the value of the storage variable.
-
+- `write`, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that `write` may take more than one argument, depending on the type of the storage variable. For example, writing on a mapping requires 2 arguments: the key and the value to be written.
+  
 ```rust,noplayground
 {{#include ../listings/ch99-starknet-smart-contracts/listing_99_01/src/lib.cairo:write_state}}
 ```
 
-{{#label write-method}}
-<span class="caption">Listing {{#ref write-method}}: Using `self` and the `write` method to modify the value of a storage variable.</span>
+> Reminder: if the contract state is passed as a snapshot with `@` instead of passed by reference with `ref`, attempting to modify the contract state will result in a compilation error.
 
-> Note: if the contract state is passed as a snapshot with `@` instead of passed by reference with `ref`, attempting to modify the contract state will result in a compilation error.
-
-This contract does not do much yet apart from allowing anyone to store a single number that is accessible by anyone in the world. Anyone could call `set` again with a different value and overwrite the current number, but this number will still be stored in the history of the blockchain. Later, you will see how you can impose access restrictions so that only you can alter the number.
+This contract does not do much apart from allowing anyone to store a single number that is accessible by anyone in the world. Anyone could call `set` again with a different value and overwrite the current number. Nevertheless, each value stored in the storage of the contract will still be stored in the history of the blockchain. Later in this book, you will see how you can impose access restrictions so that only you can alter the number.
