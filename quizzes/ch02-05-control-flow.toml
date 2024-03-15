@@ -52,7 +52,7 @@ What feature does Cairo provide for repeating code execution until a specified c
 answer.answer = "`loop` or `while` with a break condition."
 prompt.distractors = [
 "Traditional `for` loops similar to those in imperative languages.",
-"Recursive function calls without any limits."
+"Automated mechanisms that handle execution retries for you."
 ]
 context = """
 Cairo supports `loop` and `while` loops that continue execution indefinitely until a break condition is explicitly met or the program runs out of gas.

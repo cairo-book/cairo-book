@@ -1,16 +1,16 @@
 [[questions]]
 id = "4fd0bdba-6ef4-44ad-b552-953b09b814d7"
 type = "MultipleChoice"
-prompt.prompt = "The largest number representable by the type `felt252` is:"
-answer.answer = "2<sup>251</sup>+17⋅2<sup>192</sup>"
+prompt.prompt = "The largest number representable by the type `i128` is:"
+answer.answer = "2<sup>127</sup> - 1"
 prompt.distractors = [
-  "2<sup>251</sup>+2<sup>192</sup>+1",
-  "2<sup>256</sup>",
   "2<sup>127</sup>",
+  "2<sup>128</sup>",
+  "This type can hold any number.",
 ]
 prompt.answerIndex = 3
 context = """
-In general, a signed number with *n* bits can represent numbers between -(2<sup>n - 1</sup>) and 2<sup>n - 1</sup> - 1.
+In general, a **signed** number with *n* bits can represent numbers between -(2<sup>n - 1</sup>) and 2<sup>n - 1</sup> - 1. For **unsigned** numbers the range is from 0 to 2<sup>n</sup> - 1.
 """
 
 [[questions]]
@@ -31,7 +31,7 @@ id = "dc1e6fa1-0d7b-479e-98ac-6a514d60eb1b"
 type = "Tracing"
 prompt.program = """
 fn main() {
-  let x: felt32 = 2.0;
+  let x: felt32 = 2;
   println!("{x}");
 }
 """
