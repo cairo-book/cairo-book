@@ -2,6 +2,8 @@
 
 Cairo can be installed by simply downloading [Scarb](https://docs.swmansion.com/scarb/docs). Scarb bundles the Cairo compiler and the Cairo language server together in an easy-to-install package so that you can start writing Cairo code right away.
 
+Scarb is the package manager and build toolchain for Starknet ecosystem. Those coming from Rust ecosystem will find Scarb very similar to Cargo.
+
 Scarb is also Cairo's package manager and is heavily inspired by [Cargo](https://doc.rust-lang.org/cargo/), Rust’s build system and package manager.
 
 Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, building those libraries, and provides LSP support for the VSCode Cairo 1 extension.
