@@ -1,5 +1,7 @@
 # Concise Control Flow with if let & while let
 
+## if let Expressions
+
 The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing 6-6 matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
 
 ```rust,noplayground
@@ -60,24 +62,14 @@ Or we could use an `if let` and `else` expression, like this:
 If you have a situation in which your program has logic that is too verbose to
 express using a `match`, remember that `if let` is in your Cairo toolbox as well.
 
-## while let
+## while let Expressions
+
+Similar to `if let`, `while let` can make awkward `match` sequences more tolorable.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_while_let/src/lib.cairo:here}}
 ```
 
-## Summary
+## See also
 
-We’ve now covered how to use enums to create custom types that can be one of a
-set of enumerated values. When enum values have
-data inside them, you can use `match` or `if let` to extract and use those
-values, depending on how many cases you need to handle.
-
-Your Cairo programs can now express concepts in your domain using structs and
-enums. Creating custom types to use in your API ensures type safety: the
-compiler will make certain your functions only get values of the type each
-function expects.
-
-In order to provide a well-organized API to your users that is straightforward
-to use and only exposes exactly what your users will need, let’s now turn to
-Cairo’s modules.
+[enum](/ch06-01-enums.html)
