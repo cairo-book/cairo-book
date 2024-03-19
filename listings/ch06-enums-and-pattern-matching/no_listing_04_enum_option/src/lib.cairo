@@ -17,7 +17,8 @@ fn find_value_iterative(mut arr: Span<felt252>, value: felt252) -> Option<usize>
         .pop_front() {
             if (*array_value == value) {
                 result = Option::Some(index);
-            }
+            };
+
             index += 1;
         };
 
