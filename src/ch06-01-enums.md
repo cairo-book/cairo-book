@@ -88,8 +88,6 @@ We are demonstrating two approaches for the above function:
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_04_enum_option/src/lib.cairo}}
 ```
 
-<!-- TODO: use `while let Some(a) = arr.pop_front() {` syntax when it is made available -->
-
 Enums can be useful in many situations, especially when using the `match` flow construct that we just used. We will describe it in the next section.
 
 Other enums are used very often, such as the `Result` enum, allowing to handle errors gracefully. We will explain the `Result` enum in detail in the [Error Handling](ch09-02-recoverable-errors.md) chapter.
