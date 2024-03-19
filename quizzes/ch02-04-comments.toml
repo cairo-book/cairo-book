@@ -1,0 +1,7 @@
+[[questions]]
+id = "ed752dc7-dffd-4ccb-9571-fd442aafe998"
+type = "ShortAnswer"
+prompt.prompt = "What is the syntax introducing a comment?"
+answer.answer = "//"
+
+

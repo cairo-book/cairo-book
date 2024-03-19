@@ -1,0 +1,59 @@
+[[questions]]
+id = "17a48401-18af-42d3-bc5a-c9fe9d87815e"
+type = "Tracing"
+prompt.program = """
+fn main() {
+  let x = 1;
+  let y = if x { 0 } else { 1 }; 
+  println!("{y}");
+}
+"""
+answer.doesCompile = false
+answer.lineNumber = 3
+context = """
+The condition to an if-expression must be a boolean. Cairo does not have a concept of "truthy" or "falsy" values.
+"""
+
+[[questions]]
+id = "2b4f0ad1-ccb2-4854-a8de-9b5067b8a3f1"
+type = "MultipleChoice"
+prompt.prompt = """
+What happens in Cairo if an if condition evaluates to true?
+
+1. The program skips the if block and executes the next block of code.
+2. The program executes the block of code associated with the if condition.
+3. The program terminates immediately.
+"""
+answer.answer = "2"
+prompt.distractors = [ "1", "3", "1 and 3" ]
+context = """
+When an if condition in Cairo evaluates to true, the program executes the block of code associated with that if condition.
+"""
+
+[[questions]]
+id = "1abbb637-f4cc-42d2-8a02-c85c1002096a"
+type = "MultipleChoice"
+prompt.prompt = """
+What is the result of running a Cairo program with an if statement where the condition evaluates to false and no else block is provided?
+"""
+answer.answer = "The program skips the if block and moves on to the next bit of code."
+prompt.distractors = [
+"The program panics.",
+"The program executes an implicit else block.",
+"The program stops execution."
+]
+
+[[questions]]
+id = "5b0baa2b-f5b3-4718-a4d7-9f28c0540e79"
+type = "MultipleChoice"
+prompt.prompt = """
+What feature does Cairo provide for repeating code execution until a specified condition is met or gas runs out?
+"""
+answer.answer = "`loop` or `while` with a break condition."
+prompt.distractors = [
+"Traditional `for` loops similar to those in imperative languages.",
+"Automated mechanisms that handle execution retries for you."
+]
+context = """
+Cairo supports `loop` and `while` loops that continue execution indefinitely until a break condition is explicitly met or the program runs out of gas.
+"""
