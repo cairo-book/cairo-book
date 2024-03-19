@@ -33,13 +33,13 @@ asdf plugin add scarb
 This will allow you to download specific versions:
 
 ```bash
-asdf install scarb 2.6.3
+asdf install scarb 2.5.3
 ```
 
 and set a global version:
 
 ```bash
-asdf global scarb 2.6.3
+asdf global scarb 2.5.3
 ```
 
 Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This will install the latest stable release of Scarb.
@@ -53,9 +53,9 @@ In both cases, you can verify installation by running the following command in a
 
 ```bash
 $ scarb --version
-scarb 2.6.3 (e6f921dfd 2024-03-13)
-cairo: 2.6.3 (https://crates.io/crates/cairo-lang-compiler/2.6.3)
-sierra: 1.5.0
+scarb 2.5.3 (46d5d5cea 2024-02-01)
+cairo: 2.5.3 (https://crates.io/crates/cairo-lang-compiler/2.5.3)
+sierra: 1.4.0
 ```
 
 {{#quiz ../quizzes/ch01-01-installation.toml}}
