@@ -6,8 +6,8 @@ mod front_of_house {
 
 pub fn eat_at_restaurant() {
     // Absolute path
-    restaurant::front_of_house::hosting::add_to_waitlist();
+    restaurant::front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
 
     // Relative path
-    front_of_house::hosting::add_to_waitlist();
+    front_of_house::hosting::add_to_waitlist(); // ✅ Compiles
 }
