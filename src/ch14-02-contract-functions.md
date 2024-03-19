@@ -18,31 +18,33 @@ Some important rules to note:
 
 ## 2. Public functions
 
-As stated previously, public functions are accessible from outside of the contract. They are usually defined inside an implementation block annotated with the `#[abi(embed_v0)]` attribute. This attribute means that all functions embedded inside it are implementations of the Starknet interface, and therefore entry points of the contract. It only affects the visibility (public vs private/internal), but it doesn't inform us on the ability of these functions to modify the state of the contract.
+As stated previously, public functions are accessible from outside of the contract. They are usually defined inside an implementation block annotated with the `#[abi(embed_v0)]` attribute. This attribute means that all functions embedded inside it are implementations of the Starknet interface, and therefore entry points of the contract. It only affects the visibility (public vs private/internal), but it doesn't inform us on the ability of these functions to modify the state of the contract. 
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:impl_public}}
 ```
 
-### External functions
+### State mutability of public functions
 
-External functions are functions that can modify the state of a contract. They are public and can be called by any other contract or externally.
-External functions are _public_ functions where the `self: ContractState` is passed as reference with the `ref` keyword, allowing you to modify the state of the contract.
+Functions can access storage easily via `self: ContractState`, which abstracts away the complexity of underlying system calls (`storage_read_syscall` and `storage_write_syscall`). Two keywords are provided to decorate `self`, which intends to help developers to isolate view functions and external functions.
+
+In case `self: ContractState` is passed as reference with the `ref` keyword, it exposes the both the `read` and `write` access. This allows modifying the state of the contract via `self` directly. 
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:external}}
 ```
 
-### View functions
-
-View functions are read-only functions allowing you to access data from the contract while ensuring that the state of the contract is not modified. They can be called by other contracts or externally.
-View functions are _public_ functions where the `self: ContractState` is passed as snapshot, preventing you from modifying the state of the contract.
+In case `self: ContractState` is passed as snapshot, it exposes only the `read` access and no storage write can be made via `self`.
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:view}}
 ```
 
-> **Note:** It's important to note that both external and view functions are public. To create an internal function in a contract, you will need to define it outside of the implementation block annotated with the `#[abi(embed_v0)]` attribute.
+However, passing `self` as a snapshot only restricts the storage write access via `self`. It does not prevent state modification via direct system calls. Hence there is no view function in Starknet and **all the public functions** have the potentiality to modify states. This is different from EVM where a staticcall opcode is provided which restricts storage modifications in the current context and subcontexts. 
+
+> **Warning:** Developers **should not** have the assumption that calling a function where self is passed as snapshot can not modify states and reenter.
+
+> **Note:** To create an internal function in a contract, you will need to define it outside of the implementation block annotated with the `#[abi(embed_v0)]` attribute.
 
 ### Standalone public functions
 
