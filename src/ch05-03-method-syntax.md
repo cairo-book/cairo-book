@@ -16,19 +16,19 @@ to an `area` method for the `Rectangle` type.
 To do that, we first define the `RectangleTrait` trait with an `area` method taking a `Rectangle` as `self` parameter.
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_define_methods/src/lib.cairo:trait_definition}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_define_methods/src/lib.cairo:trait_definition}}
 ```
 
 Then, we implement this trait in `RectangleImpl` with the `impl` keyword. In the body of the `area` method, we can access to the calling instance with the `self` parameter.
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_define_methods/src/lib.cairo:trait_implementation}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_define_methods/src/lib.cairo:trait_implementation}}
 ```
 
 Finally, we call this `area` method on the `Rectangle` instance `rect1` using the `<instance_name>.<method_name>` syntax. The instance `rect1` will be passed to the `area` method as the `self` parameter.
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_10_define_methods/src/lib.cairo:main}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_define_methods/src/lib.cairo:main}}
 ```
 
 Note that:
@@ -47,7 +47,7 @@ So, to avoid defining useless traits, Cairo provides the `#[generate_trait]` att
 The previous example can also be written as follows:
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_15_gen_trait/src/lib.cairo}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_02_gen_trait/src/lib.cairo}}
 ```
 
 Let's use this `#[generate_trait]` in the following chapters to make our code cleaner.
@@ -59,9 +59,9 @@ As the `area` method does not modify the calling instance, `self` is declared as
 Let's write a new method `scale` which resizes a rectangle of a `factor` given as parameter:
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_11_references/src/lib.cairo:trait_impl}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_03_references/src/lib.cairo:trait_impl}}
 
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_11_references/src/lib.cairo:main}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_03_references/src/lib.cairo:main}}
 ```
 
 It is also possible to define a method which takes ownership of the instance by using just `self` as the first parameter but it is rare. This technique is usually used when the method transforms `self` into something else and you want to prevent the caller from using the original instance after the transformation.
@@ -73,9 +73,9 @@ Look at the [Understanding Ownership](ch04-00-understanding-ownership.md) chapte
 Let’s practice using methods by implementing another method on the `Rectangle` struct. This time we want to write the method `can_hold` which accepts another instance of `Rectangle` and returns `true` if this rectangle can fit completely within self; otherwise, it should return false.
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_12_some_params/src/lib.cairo:trait_impl}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_04_some_params/src/lib.cairo:trait_impl}}
 
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_12_some_params/src/lib.cairo:main}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_04_some_params/src/lib.cairo:main}}
 ```
 
 Here, we expect that `rect1` can hold `rect2` but not `rect3`.
@@ -89,9 +89,9 @@ These methods are often use to build new instances but they may have a lot of di
 Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `compare` which compares two `Rectangle` instances, and returns `true` if both rectangle have the same area and `false` otherwise.
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_13_class_methods/src/lib.cairo:trait_impl}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:trait_impl}}
 
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_13_class_methods/src/lib.cairo:main}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:main}}
 ```
 
 Note that the `compare` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `Rectangle::compare(rect1, rect2)`, it is called with `rect1.compare(rect2)`.
@@ -102,7 +102,7 @@ Each struct is allowed to have multiple `trait` and `impl` blocks. For example,
 the following code is equivalent to the code shown in the _Methods with several parameters_ section, which has each method in its own `trait` and `impl` blocks.
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_14_multiple_traits/src/lib.cairo:here}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_06_multiple_traits/src/lib.cairo:here}}
 ```
 
 There’s no strong reason to separate these methods into multiple `trait` and `impl`
