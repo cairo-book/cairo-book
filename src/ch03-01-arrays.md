@@ -10,7 +10,7 @@ This has to do with the fact that once a memory slot is written to, it cannot be
 Creating an array is done with the `ArrayTrait::new()` call. Here's an example of creating an array and appending 3 elements to it::
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_01_array_new_append/src/lib.cairo}}
 ```
 
 When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type of the variable.
@@ -30,7 +30,7 @@ let mut arr:Array<u128> = ArrayTrait::new();
 To add an element to the end of an array, you can use the `append()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_00_array_new_append/src/lib.cairo:5}}
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_01_array_new_append/src/lib.cairo:5}}
 ```
 
 ### Removing Elements
@@ -39,7 +39,7 @@ You can only remove elements from the front of an array by using the `pop_front(
 This method returns an `Option` that can be unwrapped, containing the removed element, or `Option::None` if the array is empty.
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_01_array_pop_front/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_02_array_pop_front/src/lib.cairo}}
 ```
 
 The above code will print `The first value is 10` as we remove the first element that was added.
@@ -67,7 +67,7 @@ The `at` function, on the other hand, directly returns a snapshot to the element
 Here is an example with the `at()` method:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_02_array_at/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_04_array_at/src/lib.cairo}}
 ```
 
 In this example, the variable named `first` will get the value `0` because that
@@ -77,7 +77,7 @@ the value `1` from index `1` in the array.
 If you want to use the subscripting operator `arr[index]`, you will need to explicitly define the type of the elements of the array, otherwise it will not compile. For example:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_02_array_at_2/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_05_array_at_2/src/lib.cairo}}
 ```
 
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
@@ -96,13 +96,13 @@ At compile-time, the compiler will expand the macro to generate the code that ap
 Without `array!`:
 
 ```rust
-{{#include ../listings/ch11-advanced-features/no_listing_02_array_macro/src/lib.cairo:no_macro}}
+{{#include ../listings/ch03-common-collections/no_listing_06_array_macro/src/lib.cairo:no_macro}}
 ```
 
 With `array!`:
 
 ```rust
-{{#include ../listings/ch11-advanced-features/no_listing_02_array_macro/src/lib.cairo:array_macro}}
+{{#include ../listings/ch03-common-collections/no_listing_06_array_macro/src/lib.cairo:array_macro}}
 ```
 
 ## Storing multiple types with Enums
@@ -110,7 +110,7 @@ With `array!`:
 If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md) chapter.
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_04_array_with_enums/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_07_array_with_enums/src/lib.cairo}}
 ```
 
 ## Span
@@ -124,5 +124,5 @@ All methods provided by `Array` can also be used with `Span`, except for the `ap
 To create a `Span` of an `Array`, call the `span()` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_05_array_span/src/lib.cairo:3}}
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_array_span/src/lib.cairo:3}}
 ```

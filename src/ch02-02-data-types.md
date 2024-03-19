@@ -4,8 +4,7 @@ Every value in Cairo is of a certain _data type_, which tells Cairo what kind of
 data is being specified so it knows how to work with that data. This section covers two subsets of data types: scalars and compounds.
 
 Keep in mind that Cairo is a _statically typed_ language, which means that it
-must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases
-when many types are possible, we can use a cast method where we specify the desired output type.
+must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases when many types are possible, we can use a cast method where we specify the desired output type.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_06_data_types/src/lib.cairo}}
@@ -138,13 +137,11 @@ Here are some examples of declaring short strings in Cairo:
 
 #### Byte Array strings
 
-With the `ByteArray` struct added in Cairo 2.4.0 you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
+With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
 
 ```rust
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
-
-<!-- TODO: add a link to the future 'ByteArray' chapter when available -->
 
 ## Type casting
 
