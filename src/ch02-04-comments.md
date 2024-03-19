@@ -31,3 +31,5 @@ But you’ll more often see them used in this format, with the comment on a sepa
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_23_comments_2/src/lib.cairo}}
 ```
+
+{{#quiz ../quizzes/ch02-04-comments.toml}}
