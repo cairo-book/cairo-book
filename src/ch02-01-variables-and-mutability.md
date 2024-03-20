@@ -108,22 +108,33 @@ Constants can only be declared in the global scope, which makes
 them useful for values that many parts of code need to know about.
 
 The last difference is that constants may natively be set only to a constant expression,
-not the result of a value that could only be computed at runtime. Only literal constants
-are currently supported.
+not the result of a value that could only be computed at runtime.
 
 Here’s an example of a constant declaration:
 
-```rust, noplayground
-const ONE_HOUR_IN_SECONDS: u32 = 3600;
+```rust,noplayground
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:integer_const}}
 ```
 
 Nonetheless, it is possible to use the `consteval_int!` macro to create a `const` variable that is the result of some computation:
 
 ```rust, noplayground
-const ONE_HOUR_IN_SECONDS: u32 = consteval_int!(60 * 60);
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:consteval_const}}
 ```
 
 We will dive into more detail about macros in the [dedicated section](./ch11-06-macros.md).
+
+We can also declare more complexe `const` variables, including structs and enums that we will discuss in later chapters:
+
+```rust, noplayground
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:complex_const}}
+```
+
+Lastly, it is also possible to declare constant fixed-size arrays for any basic data types, as follows:
+
+```rust, noplayground
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:fixed_size_array_const}}
+```
 
 Cairo's naming convention for constants is to use all uppercase with underscores between words.
 
