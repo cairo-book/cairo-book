@@ -59,7 +59,7 @@ In this second example, we need to pass `user` and `name` as arguments, because 
 
 The `Store` trait, defined in the `starknet::storage_access` module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it must implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ContractAddress`, etc. implement the `Store` trait and can thus be stored without further action.
 
-Note that it is possible to store strings in contracts storage by using the `ByteArray` type, which also implements the `Store`trait.
+Note that the `ByteArray` type also implements the `Store` trait, allowing to store strings in contracts storage.
 
 But what if you wanted to store a type that you defined yourself, such as an enum or a struct? In that case, you have to explicitly tell the compiler how to store this type.
 
