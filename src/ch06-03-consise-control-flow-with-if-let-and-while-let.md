@@ -4,8 +4,8 @@
 
 The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing {{#ref config_max}} matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
 
-```rust
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_if_let/src/lib.cairo:match}}
+```rust,noplayground
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_14_if_let_match_one/src/lib.cairo:match}}
 ```
 
 {{#label config_max}}
@@ -21,8 +21,8 @@ add.
 Instead, we could write this in a shorter way using `if let`. The following
 code behaves the same as the `match` in Listing {{#ref config_max}}:
 
-```rust
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_if_let/src/lib.cairo:if_let_example}}
+```rust,noplayground
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_15_if_let/src/lib.cairo:if_let_example}}
 ```
 
 The syntax `if let` takes a pattern and an expression separated by an equal
@@ -50,14 +50,14 @@ We can include an `else` with an `if let`. The block of code that goes with the
 announcing the state of the quarters, we could do that with a `match`
 expression, like this:
 
-```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_06_if_let/src/lib.cairo:coiner_match}}
+```rust,noplayground
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_16_if_let_coiner_match/src/lib.cairo:here}}
 ```
 
 Or we could use an `if let` and `else` expression, like this:
 
-```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_06_if_let/src/lib.cairo:coiner}}
+```rust,noplayground
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_17_if_let_coiner/src/lib.cairo:here}}
 ```
 
 If you have a situation in which your program has logic that is too verbose to
@@ -67,8 +67,8 @@ express using a `match`, remember that `if let` is in your Cairo toolbox as well
 
 The `while let` syntax is similar to the `if let` syntax, but it allows you to loop over a collection of values and execute a block of code for each value that matches a specified pattern. In the case below, the pattern is `Option::Some(x)`, which matches any `Some` variant of the `Option` enum.
 
-```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_06_while_let/src/lib.cairo:here}}
+```rust,noplayground
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_18_while_let/src/lib.cairo:here}}
 ```
 
 Using `while let` provides a more concise and idiomatic way of writing this loop compared to a traditional `while` loop with explicit pattern matching or handling of the `Option` type. However, as with `if let`, you lose the exhaustive checking that a `match` expression provides, so you need to be careful to handle any remaining cases outside the while let loop if necessary.
