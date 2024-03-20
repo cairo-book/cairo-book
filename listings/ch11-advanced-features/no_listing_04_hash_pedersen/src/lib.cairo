@@ -24,12 +24,11 @@ fn main() -> (felt252, felt252) {
     Serde::serialize(@struct_to_hash, ref serialized_struct);
     let first_element = serialized_struct.pop_front().unwrap();
     let mut state = PedersenTrait::new(first_element);
-    loop {
-        match serialized_struct.pop_front() {
-            Option::Some(value) => { state = state.update(value); },
-            Option::None => { break; }
-        };
+
+    while let Option::Some(value) = serialized_struct.pop_front() {
+        state = state.update(value);
     };
+
     // hash2 is the result of hashing only the fields of the struct
     let hash2 = state.finalize();
 
