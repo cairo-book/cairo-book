@@ -24,10 +24,11 @@ As stated previously, public functions are accessible from outside of the contra
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:impl_public}}
 ```
 
+Functions can access storage easily via `self: ContractState`, which abstracts away the complexity of underlying system calls (`storage_read_syscall` and `storage_write_syscall`). The compiler provides two modifiers: `ref` and `@` to decorate `self`, which intends to distinguish view and external functions.
+
 ### External functions
 
-External functions are functions that can modify the state of a contract. They are public and can be called by any other contract or externally.
-External functions are _public_ functions where the `self: ContractState` is passed as reference with the `ref` keyword, allowing you to modify the state of the contract.
+External functions are _public_ functions where the `self: ContractState` is passed as reference with the `ref` keyword, which exposes both the `read` and `write` access. This allows modifying the state of the contract via `self` directly.
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:external}}
@@ -35,14 +36,19 @@ External functions are _public_ functions where the `self: ContractState` is pas
 
 ### View functions
 
-View functions are read-only functions allowing you to access data from the contract while ensuring that the state of the contract is not modified. They can be called by other contracts or externally.
-View functions are _public_ functions where the `self: ContractState` is passed as snapshot, preventing you from modifying the state of the contract.
+View functions are _public_ functions where the `self: ContractState` is passed as snapshot, it exposes only the `read` access, and no storage write can be made via `self`. The compiler will mark their `state_mutability` to `view`, and view functions can be queried via `starknet_call` on Starknet, which will not create a transaction and hence will not change the state.
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:view}}
 ```
 
-> **Note:** It's important to note that both external and view functions are public. To create an internal function in a contract, you will need to define it outside of the implementation block annotated with the `#[abi(embed_v0)]` attribute.
+### State mutability of public functions
+
+However, as you may have noticed, passing `self` as a snapshot only restricts the storage write access via `self`. It does not prevent state modification via direct system calls or calling another contract. Hence the read only property of view functions is not enforced on Starknet and a view function can be defined and invoked to change states. In conclusion, even though external and view functions are distinguished by the Cairo compiler, **all the public functions** have the potential to modify states on Starknet.
+
+> **Warning:** This is different from EVM where a staticcall opcode is provided which restricts storage modifications in the current context and subcontexts. Hence developers **should not** have the assumption that calling a view function on another contract can not reenter and modify states.
+
+> **Note:** To create an internal function in a contract, you will need to define it outside of the implementation block annotated with the `#[abi(embed_v0)]` attribute.
 
 ### Standalone public functions
 
