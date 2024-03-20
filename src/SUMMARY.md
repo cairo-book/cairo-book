@@ -108,51 +108,51 @@
 
 ## Introduction to Starknet Smart Contracts
 
-- [Introduction to Starknet Smart Contracts](./ch12-00-introduction-to-starknet-smart-contracts.md)
+- [Introduction to Starknet Smart Contracts](./ch13-00-introduction-to-starknet-smart-contracts.md)
 
-  - [General Introduction to Smart Contracts](./ch12-01-general-introduction-to-smart-contracts.md)
-  - [Anatomy of a Simple Contract](./ch12-02-anatomy-of-a-simple-contract.md)
+  - [General Introduction to Smart Contracts](./ch13-01-general-introduction-to-smart-contracts.md)
+  - [Anatomy of a Simple Contract](./ch13-02-anatomy-of-a-simple-contract.md)
 
 ## Building Starknet Smart Contracts
 
-- [Building Starknet Smart Contracts](./ch13-00-building-starknet-smart-contracts.md)
+- [Building Starknet Smart Contracts](./ch14-00-building-starknet-smart-contracts.md)
 
-  - [Contract Storage](./ch13-01-contract-storage.md)
-  - [Contract Functions](./ch13-02-contract-functions.md)
-  - [Contract Events](./ch13-03-contract-events.md)
-  - [Reducing Boilerplate](./ch13-04-reducing-boilerplate.md)
+  - [Contract Storage](./ch14-01-contract-storage.md)
+  - [Contract Functions](./ch14-02-contract-functions.md)
+  - [Contract Events](./ch14-03-contract-events.md)
+  - [Reducing Boilerplate](./ch14-04-reducing-boilerplate.md)
 
 ## Starknet Cross-Contract Interactions
 
-- [Starknet Cross-Contract Interactions](./ch14-00-starknet-cross-contract-interactions.md)
+- [Starknet Cross-Contract Interactions](./ch15-00-starknet-cross-contract-interactions.md)
 
-  - [ABIs and Contract Interfaces](./ch14-01-abis-and-contract-interfaces.md)
-  - [Contract Dispatchers, Library Dispatchers and System Calls](./ch14-02-contract-dispatchers-library-dispatchers-and-system-calls.md)
+  - [ABIs and Contract Interfaces](./ch15-01-abis-and-contract-interfaces.md)
+  - [Contract Dispatchers, Library Dispatchers and System Calls](./ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.md)
 
 ## Building Advanced Starknet Smart Contracts
 
-- [Building Advanced Starknet Smart Contracts](./ch15-00-building-advanced-starknet-smart-contracts.md)
+- [Building Advanced Starknet Smart Contracts](./ch16-00-building-advanced-starknet-smart-contracts.md)
 
-  - [Optimizing Storage Costs](./ch15-01-optimizing-storage-costs.md)
-  - [Composability and Components](./ch15-02-composability-and-components.md)
-    - [Under the hood](./ch15-02-01-under-the-hood.md)
-    - [Component dependencies](./ch15-02-02-component-dependencies.md)
-    - [Testing components](./ch15-02-03-testing-components.md)
+  - [Optimizing Storage Costs](./ch16-01-optimizing-storage-costs.md)
+  - [Composability and Components](./ch16-02-00-composability-and-components.md)
+    - [Under the hood](./ch16-02-01-under-the-hood.md)
+    - [Component dependencies](./ch16-02-02-component-dependencies.md)
+    - [Testing components](./ch16-02-03-testing-components.md)
   - [Upgradability]()
-  - [L1 <> L2 Messaging](./ch15-04-L1-L2-messaging.md)
-  - [Oracle Interactions](./ch15-05-oracle-interactions.md)
+  - [L1 <> L2 Messaging](./ch16-04-L1-L2-messaging.md)
+  - [Oracle Interactions](./ch16-05-oracle-interactions.md)
     - [Price Feeds]()
     - [Randomness]()
-  - [Other examples](./ch15-06-other-examples.md)
-    - [Deploying and Interacting with a Voting contract](./ch15-06-01-deploying-and-interacting-with-a-voting-contract.md)
+  - [Other examples](./ch16-06-00-other-examples.md)
+    - [Deploying and Interacting with a Voting contract](./ch16-06-01-deploying-and-interacting-with-a-voting-contract.md)
 
 ## Starknet Smart Contracts Security
 
-- [Starknet Smart Contracts Security](./ch16-00-starknet-smart-contracts-security.md)
+- [Starknet Smart Contracts Security](./ch17-00-starknet-smart-contracts-security.md)
 
-  - [General Recommendations](./ch16-01-general-recommendations.md)
+  - [General Recommendations](./ch17-01-general-recommendations.md)
   - [Testing Smart Contracts with Starknet Foundry]()
-  - [Static Analysis Tools](./ch16-03-static-analysis-tools.md)
+  - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
   - [Formal Verification]()
 
 ## Appendix
