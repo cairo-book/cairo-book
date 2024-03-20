@@ -6,7 +6,7 @@ enum Coin {
     Quarter,
 }
 
-fn coiner_match() {
+fn main() {
     // ANCHOR: here
     let coin = Coin::Quarter;
     let mut count = 0;
