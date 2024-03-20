@@ -5,7 +5,7 @@
 The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing {{#ref config_max}} matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
 
 ```rust
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_14_if_let_match/src/lib.cairo:match}}
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_14_if_let_match_one/src/lib.cairo:match}}
 ```
 
 {{#label config_max}}
