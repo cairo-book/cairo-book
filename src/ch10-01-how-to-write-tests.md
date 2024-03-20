@@ -278,7 +278,7 @@ Here is a simple example comparing two structs, showing how to use `assert_eq!` 
 ```
 
 Under the surface, `assert_eq!` and `assert_ne!` macros use the operators
-`==` and `!=`, respectively. When the assertions fail, these macros print their
+`==` and `!=`, respectively. They both take snapshots of values as arguments. When the assertions fail, these macros print their
 arguments using debug formatting (`{:?}` syntax), which means the values being compared must
 implement `PartialEq` and `Debug` traits. All primitive types and most of
 the core library types implement these traits. For structs and enums that
@@ -305,7 +305,7 @@ Comparisons in tests can be done using the `assert_xx!` macros:
 {{#label assert_macros}}
 <span class="caption">Listing {{#ref assert_macros}}: Example of tests that use the `assert_xx!` macros for comparisons.</span>
 
-In this example, we throw multiple times a `Dice` struct and compare the result. We need to manually implement the `PartialOrd` trait for our struct so that we can compare `Dices` with `lt`, `le`, `gt` and,`ge` functions, which are used by `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros respectively.
+In this example, we throw multiple times a `Dice` struct and compare the result. We need to manually implement the `PartialOrd` trait for our struct so that we can compare `Dices` with `lt`, `le`, `gt` and,`ge` functions, which are used by `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros respectively. We also need to derive the `Copy` trait on our `Dice` struct in order to use multiple times the instantiated structs, as comparison functions take ownership of variables.
 
 ## Adding Custom Failure Messages
 
