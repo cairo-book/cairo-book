@@ -168,6 +168,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "okhaimie-dev",
+      "name": "okhai.stark ( Tony Stark )",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57156589?v=4",
+      "profile": "https://okhaimie.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -175,6 +184,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
-  "projectName": "cairo-book.github.io",
+  "projectName": "cairo-book",
   "projectOwner": "cairo-book"
 }
