@@ -13,12 +13,12 @@ mod consteval {
 // ANCHOR: complex_const
 struct AnyStruct {
     a: u256,
-    b: u256
+    b: u32
 }
 
 enum AnyEnum {
     A: felt252,
-    B: (u256, u256)
+    B: (usize, u256)
 }
 
 const STRUCT_INSTANCE: AnyStruct = AnyStruct { a: 0, b: 1 };
