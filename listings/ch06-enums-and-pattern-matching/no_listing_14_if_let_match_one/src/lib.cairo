@@ -1,4 +1,4 @@
-fn main() {
+fn match_one() {
     // ANCHOR: match
     let config_max = Option::Some(5);
     match config_max {
