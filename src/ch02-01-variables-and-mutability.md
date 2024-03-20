@@ -104,23 +104,24 @@ be annotated. We’ll cover types and type annotations in the next section,
 [“Data Types”][data-types], so don’t worry about the details
 right now. Just know that you must always annotate the type.
 
+Constant variables can be declared with any usual data type, including structs, enums and fixed-size arrays.
+
 Constants can only be declared in the global scope, which makes
 them useful for values that many parts of code need to know about.
 
 The last difference is that constants may natively be set only to a constant expression,
-not the result of a value that could only be computed at runtime. Only literal constants
-are currently supported.
+not the result of a value that could only be computed at runtime.
 
-Here’s an example of a constant declaration:
+Here’s an example of constants declaration:
 
-```rust, noplayground
-const ONE_HOUR_IN_SECONDS: u32 = 3600;
+```rust,noplayground
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:const_expressions}}
 ```
 
 Nonetheless, it is possible to use the `consteval_int!` macro to create a `const` variable that is the result of some computation:
 
 ```rust, noplayground
-const ONE_HOUR_IN_SECONDS: u32 = consteval_int!(60 * 60);
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:consteval_const}}
 ```
 
 We will dive into more detail about macros in the [dedicated section](./ch11-06-macros.md).
