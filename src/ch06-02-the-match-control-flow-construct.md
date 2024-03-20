@@ -164,6 +164,12 @@ We can modify the `vending_machine_accept` function to accept a tuple of a `Coin
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:here}}
 ```
 
+Writing `(_, _)` for the last arm of a tuple matching pattern might feel superfluous. Hence, we can use the `_ =>` syntax if we want, for example, that our vending machine only accepts quarters on weekdays:
+
+```rust,noplayground
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:week}}
+```
+
 ## Matching `felt252` and integer variables
 
 You can also match `felt252` and integer variables. This is useful when you want to match against a range of values.
