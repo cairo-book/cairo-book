@@ -166,7 +166,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/122918260?v=4",
       "profile": "https://github.com/TAdev0",
       "contributions": [
-        "code"
+        "code",
+        "maintenance",
+        "review"
       ]
     }
   ],
@@ -175,6 +177,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
-  "projectName": "cairo-book.github.io",
+  "projectName": "cairo-book",
   "projectOwner": "cairo-book"
 }
