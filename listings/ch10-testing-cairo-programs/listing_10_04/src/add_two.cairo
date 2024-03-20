@@ -10,4 +10,9 @@ mod tests {
     fn it_adds_two() {
         assert_eq!(4, add_two(2));
     }
+
+    #[test]
+    fn wrong_check() {
+        assert_ne!(0, add_two(2));
+    }
 }
