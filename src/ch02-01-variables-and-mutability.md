@@ -104,7 +104,7 @@ be annotated. We’ll cover types and type annotations in the next section,
 [“Data Types”][data-types], so don’t worry about the details
 right now. Just know that you must always annotate the type.
 
-Constant variables can be declared with any usual data type, including struct, enum and fixed-size arrays.
+Constant variables can be declared with any usual data type, including structs, enums and fixed-size arrays.
 
 Constants can only be declared in the global scope, which makes
 them useful for values that many parts of code need to know about.
