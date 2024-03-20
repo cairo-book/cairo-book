@@ -121,12 +121,15 @@ of functions.
 - **Expressions** evaluate to a resultant value. Let’s look at some examples.
 
 We’ve actually already used statements and expressions. Creating a variable and
-assigning a value to it with the `let` keyword is a statement. In the following `main` function,
+assigning a value to it with the `let` keyword is a statement. In Listing {{#ref fn-main}},
 `let y = 6;` is a statement.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_19_statement/src/lib.cairo}}
 ```
+
+{{#label fn-main}}
+<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement.</span>
 
 Function definitions are also statements; the entire preceding example is a statement in itself.
 

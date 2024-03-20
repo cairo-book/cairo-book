@@ -196,7 +196,7 @@ In Listing {{#ref while-true}}, we use `while` to loop the program three times, 
 ```
 
 {{#label while-true}}
-<span class="caption">Listing {{#ref while-true}}: Using a `while` loop to run code while a condition holds `true`</span>
+<span class="caption">Listing {{#ref while-true}}: Using a `while` loop to run code while a condition holds `true`.</span>
 
 This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
 While a condition evaluates to `true`, the code runs; otherwise, it exits the loop.
