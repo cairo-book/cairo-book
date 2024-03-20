@@ -28,7 +28,9 @@
         "code",
         "mentoring",
         "review",
-        "projectManagement"
+        "projectManagement",
+        "maintenance",
+        "tool"
       ]
     },
     {
@@ -192,6 +194,51 @@
       "name": "kwkr",
       "avatar_url": "https://avatars.githubusercontent.com/u/20127759?v=4",
       "profile": "https://github.com/kwkr",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ArnaudBD",
+      "name": "ArnaudBD",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20355199?v=4",
+      "profile": "https://github.com/ArnaudBD",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "JimmyFate",
+      "name": "Jimmy Fate",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158521482?v=4",
+      "profile": "https://github.com/JimmyFate",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "LeandroCarvajal",
+      "name": "SimplementeCao",
+      "avatar_url": "https://avatars.githubusercontent.com/u/99574021?v=4",
+      "profile": "https://github.com/LeandroCarvajal",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "LucasLvy",
+      "name": "Lucas @ StarkWare",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70894690?v=4",
+      "profile": "https://github.com/LucasLvy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "remybar",
+      "name": "Rémy Baranx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57539816?v=4",
+      "profile": "https://github.com/remybar",
       "contributions": [
         "code"
       ]
