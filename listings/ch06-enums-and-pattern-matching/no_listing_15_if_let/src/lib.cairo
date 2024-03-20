@@ -4,6 +4,6 @@ fn if_let_example() {
     if let Option::Some(max) = number {
         println!("The maximum is configured to be {}", max);
     }
-    // ANCHOR_END: if_let_example
+// ANCHOR_END: if_let_example
 }
 

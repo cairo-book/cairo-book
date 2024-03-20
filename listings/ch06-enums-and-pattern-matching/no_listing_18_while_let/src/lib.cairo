@@ -5,7 +5,7 @@ fn array_sum(mut arr: Array<felt252>) -> felt252 {
         sum += value;
     };
     sum
-    // ANCHOR_END: here
+// ANCHOR_END: here
 }
 
 fn main() {
