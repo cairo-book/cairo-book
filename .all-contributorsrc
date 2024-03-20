@@ -28,7 +28,9 @@
         "code",
         "mentoring",
         "review",
-        "projectManagement"
+        "projectManagement",
+        "maintenance",
+        "tool"
       ]
     },
     {
@@ -192,6 +194,15 @@
       "name": "Lucas @ StarkWare",
       "avatar_url": "https://avatars.githubusercontent.com/u/70894690?v=4",
       "profile": "https://github.com/LucasLvy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "remybar",
+      "name": "Rémy Baranx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57539816?v=4",
+      "profile": "https://github.com/remybar",
       "contributions": [
         "code"
       ]
