@@ -11,7 +11,7 @@ Tests are Cairo functions that verify that the non-test code is functioning in t
 Let’s look at the features Cairo provides for writing tests that take these actions, which include:
 
 - `#[test]` attribute.
-- `assert!`, `assert_eq!`, `assert_ne!` macros.
+- `assert!`, `assert_eq!`, `assert_ne!`, `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros.
 - `#[should_panic]` attribute.
 
 ### The Anatomy of a Test Function
@@ -36,7 +36,7 @@ In _lib.cairo_, let's remove the existing content and add a `tests` module conta
 ```
 
 {{#label first-test}}
-<span class="caption">Listing {{#ref first-test}}: A simple test function</span>
+<span class="caption">Listing {{#ref first-test}}: A simple test function.</span>
 
 Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
@@ -86,7 +86,7 @@ Now we’ll add another test, but this time we’ll make a test that fails! Test
 ```
 
 {{#label second-test}}
-<span class="caption">Listing {{#ref second-test}}: Adding a second test in _lib.cairo_ that will fail</span>
+<span class="caption">Listing {{#ref second-test}}: Adding a second test in _lib.cairo_ that will fail.</span>
 
 Run `scarb cairo-test` and you will see the following output:
 
@@ -121,7 +121,7 @@ Remember in [Chapter 5](ch05-03-method-syntax.md), we used a `Rectangle` struct 
 ```
 
 {{#label rectangle}}
-<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
+<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from Chapter 5.</span>
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the `assert!` macro. We can write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
@@ -182,7 +182,9 @@ Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in `larger_can_hold_smaller` test. Notice that `smaller_cannot_hold_larger` test still passes: to make the test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
 
-## Testing Equality with the `assert_eq!` and `assert_ne!` Macros
+## Testing Equality and Comparisons with the `assert_xx!` macros
+
+### `assert_eq!` and `assert_ne!` macros
 
 A common way to verify functionality is to test for equality between the result
 of the code under test and the value you expect the code to return. You could
@@ -196,7 +198,7 @@ fails, which makes it easier to see _why_ the test failed; conversely, the
 expression, without printing the values that led to the `false` value.
 
 In Listing {{#ref add_two}}, we write a function named `add_two` that adds `2` to its
-parameter, then we test this function using the `assert_eq!` macro.
+parameter, then we test this function using `assert_eq!` and `assert_ne!` macros.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -205,21 +207,30 @@ parameter, then we test this function using the `assert_eq!` macro.
 ```
 
 {{#label add_two}}
-<span class="caption">Listing {{#ref add_two}}: Testing the function `add_two` using the `assert_eq!` macro</span>
+<span class="caption">Listing {{#ref add_two}}: Testing the function `add_two` using `assert_eq!` and `assert_ne!` macros.</span>
 
 Let’s check that it passes!
 
 ```shell
 $ scarb cairo-test
 testing adder ...
-running 1 tests
-test adder::it_adds_two ... ok (gas usage est.: 307660)
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
+running 2 tests
+test adder::wrong_check ... ok (gas usage est.: 132000)
+test adder::it_adds_two ... ok (gas usage est.: 131500)
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-We pass `4` as the argument to `assert_eq!` macro, which is equal to the result of
-calling `add_two(2)`. The line for this test is `test adder::it_adds_two ...
-ok`, and the `ok` text indicates that our test passed!
+In the `it_adds_two` test, we pass `4` as argument to `assert_eq!` macro, which is equal to the result of
+calling `add_two(2)`. The line for this test is `test adder::it_adds_two ...ok`, and the `ok` text indicates that our test passed.
+
+In the `wrong_check` test, we pass `0` as argument to `assert_ne!` macro, which is not equal to the result of
+calling `add_two(2)`. Tests that use the `assert_ne!` macro will pass if the two values we give it are not equal and
+fail if they’re equal. This macro is most useful for cases when we’re not sure
+what a value _will_ be, but we know what the value definitely _shouldn’t_ be.
+For example, if we’re testing a function that is guaranteed to change its input
+in some way, but how the input is changed depends on the day of
+the week that we run our tests, the best thing to assert might be that the
+output of the function is not equal to the input.
 
 Let’s introduce a bug into our code to see what `assert_eq!` looks like when it
 fails. Change the implementation of the `add_two` function to instead add `3`:
@@ -233,14 +244,15 @@ Run the tests again:
 ```shell
 $ scarb cairo-test
 testing adder ...
-running 1 tests
-test adder::it_adds_two ... fail (gas usage est.: 359600)
+running 2 tests
+test adder::wrong_check ... ok (gas usage est.: 132000)
+test adder::it_adds_two ... fail (gas usage est.: 166800)
 failures:
-   adder::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed.
+   adder::tests::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed.
 4: 4
 add_two(2): 5".
 
-Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
+Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
@@ -259,14 +271,6 @@ the code produces doesn’t matter. We could write the assertion in this test as
 `assert_eq!(add_two(2), 4)`, which would result in the same failure message
 that displays `` assertion failed: `(left == right)` ``.
 
-The `assert_ne!` macro will pass if the two values we give it are not equal and
-fail if they’re equal. This macro is most useful for cases when we’re not sure
-what a value _will_ be, but we know what the value definitely _shouldn’t_ be.
-For example, if we’re testing a function that is guaranteed to change its input
-in some way, but how the input is changed depends on the day of
-the week that we run our tests, the best thing to assert might be that the
-output of the function is not equal to the input.
-
 Here is a simple example comparing two structs, showing how to use `assert_eq!` and `assert_ne!` macros:
 
 ```rust, noplayground
@@ -283,6 +287,25 @@ those types. You’ll also need to implement `Debug` to print the values when th
 assertion fails. Because both traits are derivable this is usually as straightforward as adding the
 `#[derive(Drop, Debug, PartialEq)]` annotation to your struct or enum definition. See
 [Appendix C](./appendix-03-derivable-traits.md) for more detail about these and other derivable traits.
+
+### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros
+
+Comparisons in tests can be done using the `assert_xx!` macros:
+- `assert_lt!` checks if a given value is lower than another value, and reverts otherwise.
+- `assert_le!` checks if a given value is lower or equal than another value, and reverts otherwise.
+- `assert_gt!` checks if a given value is greater than another value, and reverts otherwise.
+- `assert_ge!` checks if a given value is greater or equal than another value, and reverts otherwise.
+
+ Listing {{#ref assert_macros}} demonstrates how to use these macros: 
+
+```rust, noplayground
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_08/src/lib.cairo}}
+```
+
+{{#label assert_macros}}
+<span class="caption">Listing {{#ref assert_macros}}: Example of tests that use the `assert_xx!` macros for comparisons.</span>
+
+In this example, we throw multiple times a `Dice` struct and compare the result. We need to manually implement the `PartialOrd` trait for our struct so that we can compare `Dices` with `lt`, `le`, `gt` and,`ge` functions, which are used by `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros respectively.
 
 ## Adding Custom Failure Messages
 
@@ -331,7 +354,7 @@ In addition to checking return values, it’s important to check that our code h
 ```
 
 {{#label guess}}
-<span class="caption">Listing {{#ref guess}}: Guess struct and its `new` method</span>
+<span class="caption">Listing {{#ref guess}}: Guess struct and its `new` method.</span>
 
 Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
 
@@ -384,7 +407,7 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 ```
 
 {{#label guess-2}}
-<span class="caption">Listing {{#ref guess-2}}: `new` implementation that panics with different error messages</span>
+<span class="caption">Listing {{#ref guess-2}}: `new` implementation that panics with different error messages.</span>
 
 The test will pass because the value we put in the `should_panic` attribute’s expected parameter is the string that the `Guess::new` method panics with. We need to specify the entire panic message that we expect.
 
@@ -423,7 +446,7 @@ To demonstrate how to run a single test, we’ll first create two test functions
 ```
 
 {{#label two-tests}}
-<span class="caption">Listing {{#ref two-tests}}: Two tests with two different names</span>
+<span class="caption">Listing {{#ref two-tests}}: Two tests with two different names.</span>
 
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 
