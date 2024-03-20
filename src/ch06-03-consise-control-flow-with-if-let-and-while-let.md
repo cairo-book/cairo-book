@@ -2,13 +2,14 @@
 
 ## if let
 
-The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing 6-6 matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
+The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing {{#ref config_max}} matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_if_let/src/lib.cairo:match}}
 ```
 
-<span class="caption">Listing 6-6: A `match` that only cares about executing
+{{#label config_max}}
+<span class="caption">Listing {{#ref config_max}}: A `match` that only cares about executing
 code when the value is `Option::Some`</span>
 
 If the value is `Option::Some`, we print out the value in the `Option::Some` variant by binding
@@ -18,7 +19,7 @@ with the `None` value. To satisfy the `match` expression, we have to add `_ =>
 add.
 
 Instead, we could write this in a shorter way using `if let`. The following
-code behaves the same as the `match` in Listing 6-6:
+code behaves the same as the `match` in Listing {{#ref config_max}}:
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_if_let/src/lib.cairo:if_let_example}}
@@ -44,7 +45,7 @@ runs code when the value matches one pattern and then ignores all other values.
 We can include an `else` with an `if let`. The block of code that goes with the
 `else` is the same as the block of code that would go with the `_` case in the
 `match` expression that is equivalent to the `if let` and `else`. Recall the
-`Coin` enum definition in Listing 6-4, where the `Quarter` variant also held a
+`Coin` enum definition in Listing {{#ref match-pattern-bind}}, where the `Quarter` variant also held a
 `UsState` value. If we wanted to count all non-quarter coins we see while also
 announcing the state of the quarters, we could do that with a `match`
 expression, like this:
@@ -64,14 +65,10 @@ express using a `match`, remember that `if let` is in your Cairo toolbox as well
 
 ## while let
 
-Similar to `if let`, `while let` can make awkward `match` sequences more tolorable.
+The `while let` syntax is similar to the `if let` syntax, but it allows you to loop over a collection of values and execute a block of code for each value that matches a specified pattern. In the case below, the pattern is `Option::Some(x)`, which matches any `Some` variant of the `Option` enum.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_while_let/src/lib.cairo:here}}
 ```
 
-Using the `while let` make this sequence much nicer.
-
-## See also
-
-[enum](/ch06-01-enums.html)
+Using `while let` provides a more concise and idiomatic way of writing this loop compared to a traditional `while` loop with explicit pattern matching or handling of the `Option` type. However, as with `if let`, you lose the exhaustive checking that a `match` expression provides, so you need to be careful to handle any remaining cases outside the while let loop if necessary.
