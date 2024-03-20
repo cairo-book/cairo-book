@@ -8,10 +8,8 @@ An if expression allows you to branch your code depending on conditions. You pro
 
 Create a new project called _branches_ in your _cairo_projects_ directory to explore the `if` expression. In the _src/lib.cairo_ file, input the following:
 
-<span class="filename">Filename: src/lib.cairo</span>
-
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_24_if/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_27_if/src/lib.cairo}}
 ```
 
 All `if` expressions start with the keyword `if`, followed by a condition. In this case, the condition checks whether or not the variable `number` has a value equal to 5. We place the block of code to execute if the condition is `true` immediately after the condition inside curly brackets.
@@ -40,10 +38,8 @@ Run completed successfully, returning []
 
 It’s also worth noting that the condition in this code must be a `bool`. If the condition isn’t a `bool`, we’ll get an error. For example, try running the following code:
 
-<span class="filename">Filename: src/lib.cairo</span>
-
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_24_bis_if_not_bool/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo}}
 ```
 
 The `if` condition evaluates to a value of 3 this time, and Cairo throws an error:
@@ -70,7 +66,7 @@ code block to run only when a number is not equal to 0, for example, we can
 change the if expression to the following:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_24_ter_if_not_equal_zero/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_29_ter_if_not_equal_zero/src/lib.cairo}}
 
 ```
 
@@ -80,10 +76,8 @@ Running this code will print `number was something other than zero`.
 
 You can use multiple conditions by combining `if` and `else` in an `else if` expression. For example:
 
-<span class="filename">Filename: src/lib.cairo</span>
-
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_25_else_if/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_30_else_if/src/lib.cairo}}
 ```
 
 This program has four possible paths it can take. After running it, you should see the following output:
@@ -100,10 +94,8 @@ When this program executes, it checks each `if` expression in turn and executes 
 
 Because `if` is an expression, we can use it on the right side of a `let` statement to assign the outcome to a variable.
 
-<span class="filename">Filename: src/lib.cairo</span>
-
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_26_if_let/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_31_if_let/src/lib.cairo}}
 ```
 
 ```shell
@@ -126,10 +118,8 @@ The `loop` keyword tells Cairo to execute a block of code over and over again fo
 
 As an example, change the _src/lib.cairo_ file in your _loops_ directory to look like this:
 
-<span class="filename">Filename: src/lib.cairo</span>
-
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_27_infinite_loop/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_32_infinite_loop/src/lib.cairo}}
 ```
 
 > Note: This program would not compile without a break condition. For the purpose of the example, we added a `break` statement that will never be reached, but satisfies the compiler.
@@ -159,14 +149,14 @@ Now, try running the same program again, but this time with the `--available-gas
 Fortunately, Cairo also provides a way to break out of a loop using code. You can place the `break` keyword within the loop to tell the program when to stop executing the loop.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_28_loop_break/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_33_loop_break/src/lib.cairo}}
 ```
 
 The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration.
 Let's add a `continue` statement to our loop to skip the `println!` statement when `i` is equal to `5`.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_29_loop_continue/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_34_loop_continue/src/lib.cairo}}
 ```
 
 Executing this program will not print the value of `i` when it is equal to `5`.
@@ -181,7 +171,7 @@ use to stop the loop; that value will be returned out of the loop so you can
 use it, as shown here:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_30_loop_return_values/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_35_loop_return_values/src/lib.cairo}}
 ```
 
 Before the loop, we declare a variable named `counter` and initialize it to
@@ -202,11 +192,11 @@ However, this pattern is so common that Cairo has a built-in language construct 
 In Listing {{#ref while-true}}, we use `while` to loop the program three times, counting down each time after printing the value of `number`, and then, after the loop, print a message and exit.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_31_while_loop/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_36_while_loop/src/lib.cairo}}
 ```
 
 {{#label while-true}}
-<span class="caption">Listing {{#ref while-true}}: Using a `while` loop to run code while a condition holds `true`</span>
+<span class="caption">Listing {{#ref while-true}}: Using a `while` loop to run code while a condition holds `true`.</span>
 
 This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
 While a condition evaluates to `true`, the code runs; otherwise, it exits the loop.

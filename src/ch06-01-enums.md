@@ -19,13 +19,13 @@ In this example, we've defined an enum called `Direction` with four variants: `N
 Now let's imagine that our variants have associated values, that store the exact degree of the direction. We can define a new `Direction` enum:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_01_enum_with_values_example/src/lib.cairo:enum_example}}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_with_values_example/src/lib.cairo:enum_example}}
 ```
 
 and instantiate it as follows:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_01_enum_with_values_example/src/lib.cairo:here}}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_with_values_example/src/lib.cairo:here}}
 ```
 
 In this code, each variant is associated to a `u128` value, representing the direction in degrees. We will see in the next example that it is also possible to associate different data types to each variant.
@@ -37,7 +37,7 @@ It's easy to write code that acts differently depending on the variant of an enu
 Enums can also be used to store more interesting custom data associated with each variant. For example:
 
 ```rust, noplayground
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_message/src/lib.cairo:message}}
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:message}}
 ```
 
 In this example, the `Message` enum has three variants: `Quit`, `Echo`, and `Move`, all with different types:
@@ -53,13 +53,13 @@ You could even use a Struct or another enum you defined inside one of your enum 
 In Cairo, you can define traits and implement them for your custom enums. This allows you to define methods and behaviors associated with the enum. Here's an example of defining a trait and implementing it for the previous `Message` enum:
 
 ```rust, noplayground
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_message/src/lib.cairo:trait_impl}}
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:trait_impl}}
 ```
 
 In this example, we implemented the `Processing` trait for `Message`. Here is how it could be used to process a Quit message:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_message/src/lib.cairo:main}}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:main}}
 ```
 
 Running this code would print `quitting`.
@@ -85,10 +85,8 @@ We are demonstrating two approaches for the above function:
 - Iterative approach with `find_value_iterative`.
 
 ```rust,noplayground
-{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_option/src/lib.cairo}}
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_04_enum_option/src/lib.cairo}}
 ```
-
-<!-- TODO: use `while let Some(a) = arr.pop_front() {` syntax when it is made available -->
 
 Enums can be useful in many situations, especially when using the `match` flow construct that we just used. We will describe it in the next section.
 

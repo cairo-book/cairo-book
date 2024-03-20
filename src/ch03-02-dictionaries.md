@@ -16,7 +16,7 @@ The core functionality of a `Felt252Dict<T>` is implemented in the trait `Felt25
 These functions allow us to manipulate dictionaries like in any other language. In the following example, we create a dictionary to represent a mapping between individuals and their balance:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_07_intro/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_09_intro/src/lib.cairo}}
 ```
 
 We can create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and add two individuals, each one with their own balance, using the `insert` method. Finally, we check the balance of our users with the `get` method. These methods are defined in the `Felt252DictTrait` trait in the core library.
@@ -26,7 +26,7 @@ Throughout the book we have talked about how Cairo's memory is immutable, meanin
 Building upon our previous example, let us show a code example where the balance of the same user changes:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_08_intro_rewrite/src/lib.cairo}}
+{{#include ../listings/ch03-common-collections/no_listing_10_intro_rewrite/src/lib.cairo}}
 ```
 
 Notice how in this example we added the 'Alex' individual twice, each time using a different balance and each time that we checked for its balance it had the last value inserted! `Felt252Dict<T>` effectively allows us to "rewrite" the stored value for any given key.
@@ -48,7 +48,7 @@ One of the constraints of Cairo's non-deterministic design is that its memory sy
 If we try implementing `Felt252Dict<T>` using high-level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The definition of `Entry<T>` would be:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_09_entries/src/lib.cairo:struct}}
+{{#include ../listings/ch03-common-collections/no_listing_11_entries/src/lib.cairo:struct}}
 ```
 
 For each time we interact with a `Felt252Dict<T>`, a new `Entry<T>` will be registered:
@@ -59,7 +59,7 @@ For each time we interact with a `Felt252Dict<T>`, a new `Entry<T>` will be regi
 The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per `Felt252Dict<T>` interaction. Let's show an example of this using the `balances` dictionary from the previous section and inserting the users 'Alex' and 'Maria':
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_09_entries/src/lib.cairo:inserts}}
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_11_entries/src/lib.cairo:inserts}}
 ```
 
 These instructions would then produce the following list of entries:
@@ -151,9 +151,9 @@ Let us see an example using `entry` and `finalize`. Imagine we would like to imp
 Implementing our custom get would look like this:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_10_custom_methods/src/lib.cairo:imports}}
+{{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:imports}}
 
-{{#include ../listings/ch03-common-collections/no_listing_10_custom_methods/src/lib.cairo:custom_get}}
+{{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:custom_get}}
 ```
 
 The `ref` keyword means that the ownership of the variable will be given back at the end of
@@ -162,15 +162,15 @@ the function. This concept will be explained in more detail in the [References a
 Implementing the `insert` method would follow a similar workflow, except for inserting a new value when finalizing. If we were to implement it, it would look like the following:
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_10_custom_methods/src/lib.cairo:imports}}
+{{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:imports}}
 
-{{#include ../listings/ch03-common-collections/no_listing_10_custom_methods/src/lib.cairo:custom_insert}}
+{{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:custom_insert}}
 ```
 
 As a finalizing note, these two methods are implemented in a similar way to how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows some example usage:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_10_custom_methods/src/lib.cairo:main}}
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:main}}
 ```
 
 ## Dictionaries of types not supported natively
@@ -186,9 +186,9 @@ To compensate this, you can wrap your type inside a `Nullable<T>`.
 Let's show using an example. We will try to store a `Span<felt252>` inside a dictionary. For that, we will use `Nullable<T>` and `Box<T>`. Also, we are storing a `Span<T>` and not an `Array<T>` because the latter does not implement the `Copy<T>` trait which is required for reading from a dictionary.
 
 ```rust,noplayground
-{{#include ../listings/ch03-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:imports}}
+{{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:imports}}
 
-{{#include ../listings/ch03-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:header}}
+{{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:header}}
 
 //...
 ```
@@ -202,7 +202,7 @@ Once the element is inside the dictionary, and we want to get it, we follow the 
 ```rust,noplayground
 //...
 
-{{#include ../listings/ch03-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:footer}}
+{{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:footer}}
 ```
 
 Here we:
@@ -214,5 +214,5 @@ Here we:
 The complete script would look like this:
 
 ```rust
-{{#include ../listings/ch03-common-collections/no_listing_11_dict_of_complex/src/lib.cairo:all}}
+{{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:all}}
 ```

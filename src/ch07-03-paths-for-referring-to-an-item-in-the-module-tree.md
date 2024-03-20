@@ -14,11 +14,11 @@ To illustrate this notion let's take back our example Listing {{#ref front_of_ho
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_02/src/lib.cairo:paths}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:paths}}
 ```
 
 {{#label path-types}}
-<span class="caption">Listing {{#ref path-types}}: Calling the `add_to_waitlist` function using absolute and relative paths</span>
+<span class="caption">Listing {{#ref path-types}}: Calling the `add_to_waitlist` function using absolute and relative paths.</span>
 
 The `eat_at_restaurant` function is part of our library's public API, so we mark it with the `pub` keyword. In the [Exposing Paths with the pub Keyword](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md#exposing-paths-with-the-pub-keyword) section, we’ll go into more detail about `pub`.
 
@@ -67,11 +67,11 @@ Let’s return to the previous error that told us the `hosting` module and the `
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_03_pub/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_03_pub_keyword/src/lib.cairo}}
 ```
 
 {{#label pub-keyword-not-compiling}}
-<span class="caption">Listing {{#ref pub-keyword-not-compiling}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`</span>
+<span class="caption">Listing {{#ref pub-keyword-not-compiling}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`.</span>
 
 Unfortunately, the code in Listing {{#ref pub-keyword-not-compiling}} still results in an error.
 
@@ -82,11 +82,11 @@ Let’s also make the `add_to_waitlist` function public by adding the `pub` keyw
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_pub_compiles/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_04_pub_compiles/src/lib.cairo}}
 ```
 
 {{#label pub-keyword}}
-<span class="caption">Listing {{#ref pub-keyword}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`</span>
+<span class="caption">Listing {{#ref pub-keyword}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`.</span>
 
 Now the code will compile! To see why adding the `pub` keyword lets us use these paths in `add_to_waitlist` with respect to the privacy rules, let’s look at the absolute and the relative paths.
 
@@ -103,11 +103,11 @@ Consider the code in Listing {{#ref relative-path}} that models the situation in
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_03/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_05_super/src/lib.cairo}}
 ```
 
 {{#label relative-path}}
-<span class="caption">Listing {{#ref relative-path}}: Calling a function using a relative path starting with `super`</span>
+<span class="caption">Listing {{#ref relative-path}}: Calling a function using a relative path starting with `super`.</span>
 
 Here you can see directly that you access a parent's module easily using `super`, which wasn't the case previously.
 Note that the `back_of_house` is kept private, as external users are not supposed to interact with the back of house directly.

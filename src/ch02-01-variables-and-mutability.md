@@ -74,8 +74,6 @@ level, the variable is not redeclared so its type cannot change.
 
 For example, let’s change _src/lib.cairo_ to the following:
 
-<span class="filename">Filename: src/lib.cairo</span>
-
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_02_adding_mut/src/lib.cairo}}
 ```
@@ -127,8 +125,7 @@ const ONE_HOUR_IN_SECONDS: u32 = consteval_int!(60 * 60);
 
 We will dive into more detail about macros in the [dedicated section](./ch11-06-macros.md).
 
-Cairo's naming convention for constants is to use all uppercase with
-underscores between words.
+Cairo's naming convention for constants is to use all uppercase with underscores between words.
 
 Constants are valid for the entire time a program runs, within the scope in
 which they were declared. This property makes constants useful for values in
@@ -151,8 +148,6 @@ In effect, the second variable overshadows the first, taking any uses of the
 variable name to itself until either it itself is shadowed or the scope ends.
 We can shadow a variable by using the same variable’s name and repeating the
 use of the `let` keyword as follows:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_03_shadowing/src/lib.cairo}}
@@ -213,8 +208,7 @@ error: The value does not fit within the range of type core::integer::u64.
 error: could not compile `variables` due to previous error
 ```
 
-Now that we’ve explored how variables work, let’s look at more data types they
-can have.
+Now that we’ve explored how variables work, let’s look at more data types they can have.
 
 {{#quiz ../quizzes/ch02-01-variables-and-mutability.toml}}
 

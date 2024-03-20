@@ -10,11 +10,11 @@ scope of the `eat_at_restaurant` function so we only have to specify
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_04/src/lib.cairo:use}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_06_use/src/lib.cairo:use}}
 ```
 
 {{#label use-keyword}}
-<span class="caption">Listing {{#ref use-keyword}}: Bringing a module into scope with `use`</span>
+<span class="caption">Listing {{#ref use-keyword}}: Bringing a module into scope with `use`.</span>
 
 Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use restaurant::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
 
@@ -24,11 +24,11 @@ statement, so the function body won’t compile:
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_05/src/lib.cairo:wrong-path}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:wrong-path}}
 ```
 
 {{#label use-scope}}
-<span class="caption">Listing {{#ref  use-scope}}: A `use` statement only applies in the scope it’s in</span>
+<span class="caption">Listing {{#ref  use-scope}}: A `use` statement only applies in the scope it’s in.</span>
 
 The compiler error shows that the shortcut no longer applies within the `customer` module:
 
@@ -50,11 +50,11 @@ the `add_to_waitlist` function to achieve the same result, as in Listing {{#ref 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_06/src/lib.cairo:unidiomatic-path}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_08_unidiomatic_use/src/lib.cairo:unidiomatic-path}}
 ```
 
 {{#label unidiomatic-use}}
-<span class="caption">Listing {{#ref unidiomatic-use}}: Bringing the `add_to_waitlist` function into scope with `use`, which is unidiomatic</span>
+<span class="caption">Listing {{#ref unidiomatic-use}}: Bringing the `add_to_waitlist` function into scope with `use`, which is unidiomatic.</span>
 
 Although both Listing {{#ref use-keyword}} and {{#ref unidiomatic-use}} accomplish the same task, Listing {{#ref use-keyword}} is
 the idiomatic way to bring a function into scope with `use`. Bringing the
@@ -67,11 +67,11 @@ unclear as to where `add_to_waitlist` is defined.
 On the other hand, when bringing in structs, enums, traits, and other items with `use`, it’s idiomatic to specify the full path. Listing {{#ref idiomatic-use}} shows the idiomatic way to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_07/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_09_idiomatic_import/src/lib.cairo}}
 ```
 
 {{#label idiomatic-use}}
-<span class="caption">Listing {{#ref idiomatic-use}}: Bringing `BitSize` trait into scope in an idiomatic way</span>
+<span class="caption">Listing {{#ref idiomatic-use}}: Bringing `BitSize` trait into scope in an idiomatic way.</span>
 
 There’s no strong reason behind this idiom: it’s just the convention that has
 emerged in the Rust community, and folks have gotten used to reading and writing Rust code this way.
@@ -89,11 +89,11 @@ local name, or _alias_, for the type. Listing {{#ref as-keyword}} shows how you 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_08/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_10_as_keyword/src/lib.cairo}}
 ```
 
 {{#label as-keyword}}
-<span class="caption">Listing {{#ref as-keyword}}: Renaming a trait when it’s brought into scope with the `as` keyword</span>
+<span class="caption">Listing {{#ref as-keyword}}: Renaming a trait when it’s brought into scope with the `as` keyword.</span>
 
 Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier.
 
@@ -113,11 +113,11 @@ use module::{item1, item2, item3};
 Here is an example where we import three structures from the same module:
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_09/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_11_multiple_items/src/lib.cairo}}
 ```
 
 {{#label multiple-imports}}
-<span class="caption">Listing {{#ref multiple-imports}}: Importing multiple items from the same module</span>
+<span class="caption">Listing {{#ref multiple-imports}}: Importing multiple items from the same module.</span>
 
 ## Re-exporting Names in Module Files
 
@@ -131,11 +131,11 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_10/src/lib.cairo:reexporting}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_12_pub_use/src/lib.cairo:reexporting}}
 ```
 
 {{#label reexporting}}
-<span class="caption">Listing {{#ref reexporting}}: Making a name available for any code to use from a new scope with `pub use`</span>
+<span class="caption">Listing {{#ref reexporting}}: Making a name available for any code to use from a new scope with `pub use`.</span>
 
 Before this change, external code would have to call the `add_to_waitlist`
 function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`.

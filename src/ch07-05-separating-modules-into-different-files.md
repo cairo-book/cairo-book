@@ -18,11 +18,11 @@ _src/front_of_house.cairo_ file.
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_11/src/lib.cairo:front-extraction}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_13_front_extraction/src/lib.cairo:front-extraction}}
 ```
 
 {{#label front-extraction}}
-<span class="caption">Listing {{#ref front-extraction}}: Declaring the `front_of_house` module whose body will be in _src/front_of_house.cairo_</span>
+<span class="caption">Listing {{#ref front-extraction}}: Declaring the `front_of_house` module whose body will be in _src/front_of_house.cairo_.</span>
 
 Next, place the code that was in the curly brackets into a new file named
 _src/front_of_house.cairo_, as shown in Listing {{#ref module-foh}}. The compiler knows to look
@@ -32,11 +32,11 @@ with the name `front_of_house`.
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
 ```rust,noplayground
-{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_12/src/lib.cairo}}
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_14_front_definition/src/lib.cairo}}
 ```
 
 {{#label module-foh}}
-<span class="caption">Listing {{#ref module-foh}}: Definitions inside the `front_of_house` module in _src/front_of_house.cairo_</span>
+<span class="caption">Listing {{#ref module-foh}}: Definitions inside the `front_of_house` module in _src/front_of_house.cairo_.</span>
 
 Note that you only need to load a file using a `mod` declaration _once_ in your
 module tree. Once the compiler knows the file is part of the project (and knows
