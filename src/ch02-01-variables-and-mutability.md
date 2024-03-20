@@ -1,4 +1,4 @@
-## Variables and Mutability
+# Variables and Mutability
 
 Cairo uses an immutable memory model, meaning that once a memory cell is written to,
 it can't be overwritten but only read from. To reflect this immutable memory model,
@@ -30,11 +30,11 @@ error: Cannot assign to an immutable variable.
     x = 6;
     ^***^
 
-Error: failed to compile: src/lib.cairo
+error: could not compile `variables` due to previous error
 ```
 
 This example shows how the compiler helps you find errors in your programs.
-Compiler errors can be frustrating, but really they only mean your program
+Compiler errors can be frustrating, but they only mean your program
 isn’t safely doing what you want it to do yet; they do _not_ mean that you’re
 not a good programmer! Experienced Caironautes still get compiler errors.
 
@@ -47,28 +47,32 @@ bugs. If one part of our code operates on the assumption that a value will
 never change and another part of our code changes that value, it’s possible
 that the first part of the code won’t do what it was designed to do. The cause
 of this kind of bug can be difficult to track down after the fact, especially
-when the second piece of code changes the value only _sometimes_. The Cairo
-compiler guarantees that when you state that a value won’t change, it really
-won’t change, so you don’t have to keep track of it yourself. Your code is thus
-easier to reason through.
+when the second piece of code changes the value only _sometimes_.
+
+Cairo, unlike most other languages, has immutable memory. This makes a
+whole class of bugs impossible, because values will never change unexpectedly.
+This makes code easier to reason about.
 
 But mutability can be very useful, and can make code more convenient to write.
 Although variables are immutable by default, you can make them mutable by
 adding `mut` in front of the variable name. Adding `mut` also conveys
 intent to future readers of the code by indicating that other parts of the code
-will be changing this variable’s value.
+will be changing the value associated to this variable.
+
+<!-- TODO: add an illustration of this -->
 
 However, you might be wondering at this point what exactly happens when a variable
 is declared as `mut`, as we previously mentioned that Cairo's memory is immutable.
-The answer is that Cairo's memory is immutable, but the memory address the variable points
-to can be changed. Upon examining the low-level Cairo Assembly code, it becomes clear that
+The answer is that the _value_ is immutable, but the _variable_ isn't. The value
+associated to the variable can be changed. Assigning to a mutable variable in Cairo
+is essentially equivalent to redeclaring it to refer to another value in another memory cell,
+but the compiler handles that for you, and the keyword `mut` makes it explicit.
+Upon examining the low-level Cairo Assembly code, it becomes clear that
 variable mutation is implemented as syntactic sugar, which translates mutation operations
 into a series of steps equivalent to variable shadowing. The only difference is that at the Cairo
 level, the variable is not redeclared so its type cannot change.
 
 For example, let’s change _src/lib.cairo_ to the following:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_02_adding_mut/src/lib.cairo}}
@@ -78,10 +82,8 @@ When we run the program now, we get this:
 
 ```shell
 $ scarb cairo-run
-[DEBUG]                                (raw: 5)
-
-[DEBUG]                                (raw: 6)
-
+The value of x is: 5
+The value of x is: 6
 Run completed successfully, returning []
 ```
 
@@ -89,7 +91,7 @@ We’re allowed to change the value bound to `x` from `5` to `6` when `mut` is
 used. Ultimately, deciding whether to use mutability or not is up to you and
 depends on what you think is clearest in that particular situation.
 
-### Constants
+## Constants
 
 Like immutable variables, _constants_ are values that are bound to a name and
 are not allowed to change, but there are a few differences between constants
@@ -102,21 +104,29 @@ be annotated. We’ll cover types and type annotations in the next section,
 [“Data Types”][data-types], so don’t worry about the details
 right now. Just know that you must always annotate the type.
 
+Constant variables can be declared with any usual data type, including structs, enums and fixed-size arrays.
+
 Constants can only be declared in the global scope, which makes
 them useful for values that many parts of code need to know about.
 
-The last difference is that constants may be set only to a constant expression,
-not the result of a value that could only be computed at runtime. Only literal constants
-are currently supported.
+The last difference is that constants may natively be set only to a constant expression,
+not the result of a value that could only be computed at runtime.
 
-Here’s an example of a constant declaration:
+Here’s an example of constants declaration:
 
-```rust, noplayground
-const ONE_HOUR_IN_SECONDS: u32 = 3600;
+```rust,noplayground
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:const_expressions}}
 ```
 
-Cairo's naming convention for constants is to use all uppercase with
-underscores between words.
+Nonetheless, it is possible to use the `consteval_int!` macro to create a `const` variable that is the result of some computation:
+
+```rust, noplayground
+{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:consteval_const}}
+```
+
+We will dive into more detail about macros in the [dedicated section](./ch11-06-macros.md).
+
+Cairo's naming convention for constants is to use all uppercase with underscores between words.
 
 Constants are valid for the entire time a program runs, within the scope in
 which they were declared. This property makes constants useful for values in
@@ -129,7 +139,7 @@ conveying the meaning of that value to future maintainers of the code. It also
 helps to have only one place in your code you would need to change if the
 hardcoded value needed to be updated in the future.
 
-### Shadowing
+## Shadowing
 
 Variable shadowing refers to the declaration of a
 new variable with the same name as a previous variable. Caironautes say that the
@@ -139,8 +149,6 @@ In effect, the second variable overshadows the first, taking any uses of the
 variable name to itself until either it itself is shadowed or the scope ends.
 We can shadow a variable by using the same variable’s name and repeating the
 use of the `let` keyword as follows:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_03_shadowing/src/lib.cairo}}
@@ -156,15 +164,8 @@ When we run this program, it will output the following:
 
 ```shell
 scarb cairo-run
-[DEBUG] Inner scope x value is:         (raw: 7033328135641142205392067879065573688897582790068499258)
-
-[DEBUG]
-                                       (raw: 12)
-
-[DEBUG] Outer scope x value is:         (raw: 7610641743409771490723378239576163509623951327599620922)
-
-[DEBUG]                                (raw: 6)
-
+Inner scope x value is: 12
+Outer scope x value is: 6
 Run completed successfully, returning []
 ```
 
@@ -199,15 +200,17 @@ The error says we were expecting a `u64` (the original type) but we got a differ
 
 ```shell
 $ scarb cairo-run
-error: Unexpected argument type. Expected: "core::integer::u64", found: "core::felt252".
- --> lib.cairo:9:9
-    x = 100_felt252;
-        ^*********^
 
-Error: failed to compile: src/lib.cairo
+error: The value does not fit within the range of type core::integer::u64.
+ --> lib.cairo:9:9
+    x = 'a short string';
+        ^**************^
+
+error: could not compile `variables` due to previous error
 ```
 
-Now that we’ve explored how variables work, let’s look at more data types they
-can have.
+Now that we’ve explored how variables work, let’s look at more data types they can have.
+
+{{#quiz ../quizzes/ch02-01-variables-and-mutability.toml}}
 
 [data-types]: ch02-02-data-types.md

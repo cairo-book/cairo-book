@@ -10,4 +10,8 @@ However, Cairo is not only for blockchain developers. As a general purpose progr
 
 This book is designed for developers with a basic understanding of programming concepts. It is a friendly and approachable text intended to help you level up your knowledge of Cairo, but also help you develop your programming skills in general. So, dive in and get ready to learn all there is to know about Cairo!
 
-— The Cairo community
+## Acknowledgements
+
+This book would not have been possible without the help of the Cairo community. We would like to thank every contributor for their contributions to this book!
+
+We would like to thank the Rust community for the [Rust Book](https://doc.rust-lang.org/book/), which has been a great source of inspiration for this book. Many examples and explanations have been adapted from the Rust Book to fit the Cairo programming language, as the two languages share many similarities.

@@ -1,12 +1,9 @@
-use debug::PrintTrait;
 fn main() {
     let x = 5;
     let x = x + 1;
     {
         let x = x * 2;
-        'Inner scope x value is:'.print();
-        x.print()
+        println!("Inner scope x value is: {}", x);
     }
-    'Outer scope x value is:'.print();
-    x.print();
+    println!("Outer scope x value is: {}", x);
 }

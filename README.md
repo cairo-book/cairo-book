@@ -1,8 +1,10 @@
+English | [简体中文](translations/README-cn.md)
+
 <div align="center">
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-25-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -12,7 +14,7 @@
 
 ## Description
 
-This repository contains the source of "The Cairo Programming Language" book, a comprehensive documentation of the Cairo 1 programming language. This documentation is your go-to resource for mastering Cairo, created and maintained by the Starknet community. You can read the book [online](https://cairo-book.github.io/).
+This repository contains the source of "The Cairo Programming Language" book, a comprehensive documentation of the Cairo 1 programming language. This documentation is your go-to resource for mastering Cairo, created and maintained by the Starknet community. You can read the book [online](https://book.cairo-lang.org/).
 
 <div align="center">
   <h3> Created by builders, for builders 📜</h3>
@@ -24,9 +26,9 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 1. Rust related packages:
    - Install toolchain providing `cargo` using [rustup](https://rustup.rs/).
-   - Install [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html) and the translation extension:
+   - Install [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html) and the required extensions:
    ```
-   cargo install mdbook mdbook-i18n-helpers
+   cargo install mdbook mdbook-i18n-helpers mdbook-last-changed
    ```
 2. Host machine packages:
 
@@ -53,19 +55,19 @@ All the Markdown files **MUST** be edited in english. To work locally in english
 
 ### Work locally (translations)
 
-This book is targetting international audience, and aims at being gradually translated in several languages.
+This book is targeting international audience, and aims at being gradually translated in several languages.
 
 **All files in the `src` directory MUST be written in english**. This ensures that all the translation files can be
 auto-generated and updated by translators.
 
-To work with translations, those are the steps to update the translated content:
+To work with translations, these are the steps to update the translated content:
 
 - Run a local server for the language you want to edit: `./translations.sh es` for instance. If no language is provided, the script will only extract translations from english.
 
 - Open the translation file you are interested in `po/es.po` for instance. You can also use editors like [poedit](https://poedit.net/) to help you on this task.
 
 - When you are done, you should only have changes into the `po/xx.po` file. Commit them and open a PR.
-  The PR must stars with `i18n` to let the maintainers know that the PR is only changing translation.
+  The PR must start with `i18n` to let the maintainers know that the PR is only changing translation.
 
 The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
 
@@ -110,7 +112,7 @@ For a Starknet contract:
 
 Cairo program:
 
-- If it has a `main` function: `scarb cairo-run`
+- If it has a `main` function: `scarb cairo-run --available-gas=200000000`
 - Else, `scarb build`
 - If it has tests: `scarb test`
 - `scarb fmt -c`
@@ -125,7 +127,7 @@ To specify which tests to run, you can add a comment at the top of your file wit
 Here is a list of available tags:
 
 - `does_not_compile`: don't run `scarb build`
-- `does_not_run`: don't run `scarb cairo-run`
+- `does_not_run`: don't run `scarb cairo-run --available-gas=200000000`
 - `ignore_fmt`: don't run `scarb fmt`
 - `tests_fail`: don't run `scarb test`
 
@@ -163,7 +165,7 @@ The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines i
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.starknet.id/"><img src="https://avatars.githubusercontent.com/u/78437165?v=4?s=100" width="100px;" alt="Fricoben"/><br /><sub><b>Fricoben</b></sub></a><br /><a href="#ideas-fricoben" title="Ideas, Planning, & Feedback">🤔</a> <a href="#fundingFinding-fricoben" title="Funding Finding">🔍</a> <a href="#projectManagement-fricoben" title="Project Management">📆</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/enitrat"><img src="https://avatars.githubusercontent.com/u/60658558?v=4?s=100" width="100px;" alt="Mathieu"/><br /><sub><b>Mathieu</b></sub></a><br /><a href="#ideas-enitrat" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=enitrat" title="Code">💻</a> <a href="#mentoring-enitrat" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/cairo-book/cairo-book/pulls?q=is%3Apr+reviewed-by%3Aenitrat" title="Reviewed Pull Requests">👀</a> <a href="#projectManagement-enitrat" title="Project Management">📆</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/enitrat"><img src="https://avatars.githubusercontent.com/u/60658558?v=4?s=100" width="100px;" alt="Mathieu"/><br /><sub><b>Mathieu</b></sub></a><br /><a href="#ideas-enitrat" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=enitrat" title="Code">💻</a> <a href="#mentoring-enitrat" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/cairo-book/cairo-book/pulls?q=is%3Apr+reviewed-by%3Aenitrat" title="Reviewed Pull Requests">👀</a> <a href="#projectManagement-enitrat" title="Project Management">📆</a> <a href="#maintenance-enitrat" title="Maintenance">🚧</a> <a href="#tool-enitrat" title="Tools">🔧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Nadai2010"><img src="https://avatars.githubusercontent.com/u/112663528?v=4?s=100" width="100px;" alt="Nadai"/><br /><sub><b>Nadai</b></sub></a><br /><a href="#translation-Nadai2010" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/glihm"><img src="https://avatars.githubusercontent.com/u/7962849?v=4?s=100" width="100px;" alt="glihm"/><br /><sub><b>glihm</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=glihm" title="Code">💻</a> <a href="#tool-glihm" title="Tools">🔧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/clementwalter/"><img src="https://avatars.githubusercontent.com/u/18620296?v=4?s=100" width="100px;" alt="Clément Walter"/><br /><sub><b>Clément Walter</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/pulls?q=is%3Apr+reviewed-by%3AClementWalter" title="Reviewed Pull Requests">👀</a></td>
@@ -183,6 +185,14 @@ The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines i
       <td align="center" valign="top" width="14.28%"><a href="http://shramee.me"><img src="https://avatars.githubusercontent.com/u/11048263?v=4?s=100" width="100px;" alt="Shramee Srivastav"/><br /><sub><b>Shramee Srivastav</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=shramee" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/dbejarano820"><img src="https://avatars.githubusercontent.com/u/58019353?v=4?s=100" width="100px;" alt="Daniel Bejarano"/><br /><sub><b>Daniel Bejarano</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=dbejarano820" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/TAdev0"><img src="https://avatars.githubusercontent.com/u/122918260?v=4?s=100" width="100px;" alt="Tristan"/><br /><sub><b>Tristan</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=TAdev0" title="Code">💻</a> <a href="#maintenance-TAdev0" title="Maintenance">🚧</a> <a href="https://github.com/cairo-book/cairo-book/pulls?q=is%3Apr+reviewed-by%3ATAdev0" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://okhaimie.com"><img src="https://avatars.githubusercontent.com/u/57156589?v=4?s=100" width="100px;" alt="okhai.stark ( Tony Stark )"/><br /><sub><b>okhai.stark ( Tony Stark )</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=okhaimie-dev" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Uniblake"><img src="https://avatars.githubusercontent.com/u/31915926?v=4?s=100" width="100px;" alt="shwang"/><br /><sub><b>shwang</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=Uniblake" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kwkr"><img src="https://avatars.githubusercontent.com/u/20127759?v=4?s=100" width="100px;" alt="kwkr"/><br /><sub><b>kwkr</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=kwkr" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ArnaudBD"><img src="https://avatars.githubusercontent.com/u/20355199?v=4?s=100" width="100px;" alt="ArnaudBD"/><br /><sub><b>ArnaudBD</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=ArnaudBD" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/JimmyFate"><img src="https://avatars.githubusercontent.com/u/158521482?v=4?s=100" width="100px;" alt="Jimmy Fate"/><br /><sub><b>Jimmy Fate</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=JimmyFate" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/LeandroCarvajal"><img src="https://avatars.githubusercontent.com/u/99574021?v=4?s=100" width="100px;" alt="SimplementeCao"/><br /><sub><b>SimplementeCao</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=LeandroCarvajal" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/LucasLvy"><img src="https://avatars.githubusercontent.com/u/70894690?v=4?s=100" width="100px;" alt="Lucas @ StarkWare"/><br /><sub><b>Lucas @ StarkWare</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=LucasLvy" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/remybar"><img src="https://avatars.githubusercontent.com/u/57539816?v=4?s=100" width="100px;" alt="Rémy Baranx"/><br /><sub><b>Rémy Baranx</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=remybar" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

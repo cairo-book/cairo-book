@@ -1,4 +1,4 @@
-## Functions
+# Functions
 
 Functions are prevalent in Cairo code. You’ve already seen one of the most
 important functions in the language: the `main` function, which is the entry
@@ -30,15 +30,16 @@ should see the following output:
 
 ```shell
 $ scarb cairo-run
-[DEBUG] Hello, world!                (raw: 5735816763073854953388147237921)
-[DEBUG] Another function.            (raw: 22265147635379277118623944509513687592494)
+Hello, world!
+Another function.
+Run completed successfully, returning []
 ```
 
 The lines execute in the order in which they appear in the `main` function.
-First the “Hello, world!” message prints, and then `another_function` is called
+First the `Hello, world!` message prints, and then `another_function` is called
 and its message is printed.
 
-### Parameters
+## Parameters
 
 We can define functions to have _parameters_, which are special variables that
 are part of a function’s signature. When a function has parameters, you can
@@ -58,12 +59,13 @@ Try running this program; you should get the following output:
 
 ```shell
 $ scarb cairo-run
-[DEBUG]                                 (raw: 5)
+The value of x is: 5
+Run completed successfully, returning []
 ```
 
 The declaration of `another_function` has one parameter named `x`. The type of
 `x` is specified as `felt252`. When we pass `5` in to `another_function`, the
-`.print()` function outputs `5` in the console.
+`println!` macro puts `5` where the pair of curly brackets containing `x` was in the format string.
 
 In function signatures, you _must_ declare the type of each parameter. This is
 a deliberate decision in Cairo’s design: requiring type annotations in function
@@ -78,23 +80,22 @@ commas, like this:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_17_multiple_params/src/lib.cairo}}
 ```
 
-This example creates a function named `another_function` with two
-parameters. The first parameter is named `x` and is an `felt252`. The second is
-named `y` and is type `felt252` too. The function then prints the content of the felt `x` and then the content of the felt `y`.
+This example creates a function named `print_labeled_measurement` with two
+parameters. The first parameter is named `value` and is a `u128`. The second is
+named `unit_label` and is of type `ByteArray` - Cairo's internal type to represent string literals. The function then prints text containing both the `value` and the `unit_label`.
 
 Let’s try running this code. Replace the program currently in your _functions_
 project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run`:
 
 ```shell
 $ scarb cairo-run
-[DEBUG]                                 (raw: 5)
-[DEBUG]                                 (raw: 6)
+The measurement is: 5h
+Run completed successfully, returning []
 ```
 
-Because we called the function with `5` as the value for `x` and `6` as
-the value for `y`, the program output contains those values.
+Because we called the function with `5` as the value for value and `"h"` as the value for `unit_label`, the program output contains those values.
 
-#### Named parameters
+### Named parameters
 
 In Cairo, named parameters allow you to specify the names of arguments when you call a function. This makes the function calls more readable and self-descriptive.
 If you want to use named parameters, you need to specify the name of the parameter and the value you want to pass to it. The syntax is `parameter_name: value`. If you pass a variable that has the same name as the parameter, you can simply write `:parameter_name` instead of `parameter_name: variable_name`.
@@ -102,10 +103,10 @@ If you want to use named parameters, you need to specify the name of the paramet
 Here is an example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_30_named_parameters/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_18_named_parameters/src/lib.cairo}}
 ```
 
-### Statements and Expressions
+## Statements and Expressions
 
 Function bodies are made up of a series of statements optionally ending in an
 expression. So far, the functions we’ve covered haven’t included an ending
@@ -120,23 +121,23 @@ of functions.
 - **Expressions** evaluate to a resultant value. Let’s look at some examples.
 
 We’ve actually already used statements and expressions. Creating a variable and
-assigning a value to it with the `let` keyword is a statement. In Listing 2-1,
+assigning a value to it with the `let` keyword is a statement. In Listing {{#ref fn-main}},
 `let y = 6;` is a statement.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/listing_01_statement/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_19_statement/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 2-1: A `main` function declaration containing one statement</span>
+{{#label fn-main}}
+<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement.</span>
 
-Function definitions are also statements; the entire preceding example is a
-statement in itself.
+Function definitions are also statements; the entire preceding example is a statement in itself.
 
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
 ```rust, noplayground
-{{#include ../listings/ch02-common-programming-concepts/no_listing_18_statements_dont_return_values/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo}}
 ```
 
 When you run this program, the error you’ll get looks like this:
@@ -172,19 +173,21 @@ languages, you can write `x = y = 6` and have both `x` and `y` have the value
 Expressions evaluate to a value and make up most of the rest of the code that
 you’ll write in Cairo. Consider a math operation, such as `5 + 6`, which is an
 expression that evaluates to the value `11`. Expressions can be part of
-statements: in Listing 2-1, the `6` in the statement `let y = 6;` is an
-expression that evaluates to the value `6`. Calling a function is an
-expression. A new scope block created with
-curly brackets is an expression, for example:
+statements: in Listing {{#ref fn-main}}, the `6` in the statement `let y = 6;` is an
+expression that evaluates to the value `6`.
+
+Calling a function is an expression since it always evaluates to a value: the function's explicit return value, if specified, or the 'unit' type `()` otherwise.
+
+A new scope block created with curly brackets is an expression, for example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:all}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_21_blocks_are_expressions/src/lib.cairo:all}}
 ```
 
 This expression:
 
 ```rust, noplayground
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:block_expr}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_21_blocks_are_expressions/src/lib.cairo:block_expr}}
 ```
 
 is a block that, in this case, evaluates to `4`. That value gets bound to `y`
@@ -195,7 +198,7 @@ of an expression, you turn it into a statement, and it will then not return a
 value. Keep this in mind as you explore function return values and expressions
 next.
 
-### Functions with Return Values
+## Functions with Return Values
 
 Functions can return values to the code that calls them. We don’t name return
 values, but we must declare their type after an arrow (`->`). In Cairo, the
@@ -206,7 +209,7 @@ functions return the last expression implicitly. Here’s an example of a
 function that returns a value:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_20_function_return_values/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_values/src/lib.cairo}}
 ```
 
 There are no function calls, or even `let` statements in the `five`
@@ -216,7 +219,8 @@ running this code; the output should look like this:
 
 ```shell
 $ scarb cairo-run
-[DEBUG]                                 (raw: 5)
+The value of x is: 5
+Run completed successfully, returning []
 ```
 
 The `5` in `five` is the function’s return value, which is why the return type
@@ -235,18 +239,16 @@ because it’s an expression whose value we want to return.
 Let’s look at another example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_21_function_return_values_2/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_23_function_return_values_2/src/lib.cairo}}
 ```
 
-Running this code will print `[DEBUG]                    (raw: 6)`. But if we place a
+Running this code will print `x = 6`. But if we place a
 semicolon at the end of the line containing `x + 1`, changing it from an
 expression to a statement, we’ll get an error:
 
 ```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_invalid/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo}}
 ```
-
-Compiling this code produces an error, as follows:
 
 ```shell
 error: Unexpected return type. Expected: "core::integer::u32", found: "()".
@@ -257,3 +259,5 @@ code. The definition of the function `plus_one` says that it will return an
 `u32`, but statements don’t evaluate to a value, which is expressed by `()`,
 the unit type. Therefore, nothing is returned, which contradicts the function
 definition and results in an error.
+
+{{#quiz ../quizzes/ch02-03-functions.toml}}

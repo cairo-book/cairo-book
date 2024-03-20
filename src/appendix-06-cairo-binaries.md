@@ -1,25 +1,26 @@
-# Appendix F: Installing the Cairo binaries
+# Appendix F - Installing the Cairo binaries
 
 If you want to have access to the Cairo binaries, for anything that you could not achieve by purely using Scarb you can install them by following the instructions below.
 
-The first step is to install Cairo. We will download Cairo manually, using cairo repository or with an installation script. You’ll need an internet connection for the download.
-
 ### Prerequisites
 
-First you will need to have Rust and Git installed.
+You will need to have [Rust](https://www.rust-lang.org) and [Git](https://git-scm.com/) installed.
 
+To install Rust, you first need the [`rustup`](https://www.rust-lang.org/tools/install) tool. It allows you to install Rust using the following command:
 ```bash
 # Install stable Rust
 rustup override set stable && rustup update
 ```
 
-Install [Git](https://git-scm.com/).
+Follow the link for information on how to install [Git](https://git-scm.com/downloads).
+
+The next step is to install Cairo. We will download Cairo manually, using Cairo repository or with an installation script. You’ll need an internet connection for the download.
 
 ## Installing Cairo with a Script ([Installer](https://github.com/franalgaba/cairo-installer) by [Fran](https://github.com/franalgaba))
 
 ### Install
 
-If you wish to install a specific release of Cairo rather than the latest head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export CAIRO_GIT_TAG=v2.2.0`).
+If you wish to install a specific release of Cairo rather than the latest head, set the `CAIRO_GIT_TAG` environment variable (e.g. `export CAIRO_GIT_TAG=v2.5.1`).
 
 ```bash
 curl -L https://github.com/franalgaba/cairo-installer/raw/main/bin/cairo-installer | bash
@@ -123,7 +124,7 @@ The below setup should work for the vast majority of users for common use cases.
 In MacOS, you might also want to install [Fig](https://fig.io/) which
 provides alternative shell completions for many command line tools with an
 IDE-like popup interface in the terminal window.
-(Note that their completions are independent from Cairo's codebase
+(Note that their completions are independent of Cairo's codebase
 so they might be slightly out of sync for bleeding-edge interface changes.)
 
 ### Restart your shell
@@ -155,10 +156,10 @@ cd $CAIRO_ROOT && git clone git@github.com:starkware-libs/cairo.git .
 # OPTIONAL/RECOMMENDED: If you want to install a specific version of the compiler
 # Fetch all tags (versions)
 git fetch --all --tags
-# View tags (you can also do this in the cairo compiler repository)
+# View tags (you can also do this in the Cairo compiler repository)
 git describe --tags `git rev-list --tags`
 # Checkout the version you want
-git checkout tags/v2.2.0
+git checkout tags/v2.5.1
 
 # Generate release binaries
 cargo build --all --release

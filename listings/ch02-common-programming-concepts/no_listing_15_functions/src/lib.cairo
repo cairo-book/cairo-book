@@ -1,10 +1,8 @@
-use debug::PrintTrait;
-
 fn another_function() {
-    'Another function.'.print();
+    println!("Another function.");
 }
 
 fn main() {
-    'Hello, world!'.print();
+    println!("Hello, world!");
     another_function();
 }

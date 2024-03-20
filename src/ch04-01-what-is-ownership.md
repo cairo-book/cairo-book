@@ -1,29 +1,39 @@
-## What Is Ownership?
+# Ownership Using a Linear Type System
 
-Cairo implements an ownership system to ensure the safety and correctness of its compiled code.
-The ownership mechanism complements the linear type system, which enforces that objects are used exactly once.
-This helps prevent common operations that can produce runtime errors, such as illegal memory address
-references or multiple writes to the same memory address, and ensures the soundness of Cairo programs
-by checking at compile time that all the dictionaries are squashed.
+Cairo uses a linear type system. In such a type system, any value (a basic type, a struct, an enum) must be used and must only be used once. 'Used' here means that the value is either _destroyed_ or _moved_.
 
-Now that we’re past basic Cairo syntax, we won’t include all the `fn main() {`
-code in examples, so if you’re following along, make sure to put the following
-examples inside a `main` function manually. As a result, our examples will be a
-bit more concise, letting us focus on the actual details rather than
-boilerplate code.
+_Destruction_ can happen in several ways:
 
-### Ownership Rules
+- a variable goes out of scope.
+- a struct is destructured.
+- explicit destruction using `destruct()`.
 
-First, let’s take a look at the ownership rules. Keep these rules in mind as we
-work through the examples that illustrate them:
+_Moving_ a value simply means passing that value to another function.
 
-- Each value in Cairo has an _owner_.
+This results in somewhat similar constraints to the Rust ownership model, but there are some differences.
+In particular, the Rust ownership model exists (in part) to avoid data races and concurrent mutable access to a memory value. This is obviously impossible in Cairo since the memory is immutable.
+Instead, Cairo leverages its linear type system for two main purposes:
+
+- Ensuring that all code is provable and thus verifiable.
+- Abstracting away the immutable memory of the Cairo VM.
+
+### Ownership
+
+In Cairo, ownership applies to _variables_ and not to _values_. A value can safely be referred to by many different variables (even if they are mutable variables), as the value itself is always immutable.
+Variables however can be mutable, so the compiler must ensure that constant variables aren't accidentally modified by the programmer.
+This makes it possible to talk about ownership of a variable: the owner is the code that can read (and write if mutable) the variable.
+
+This means that variables (not values) follow similar rules to Rust values:
+
+- Each variable in Cairo has an owner.
 - There can only be one owner at a time.
-- When the owner goes out of scope, the value will be _dropped_.
+- When the owner goes out of scope, the variable is destroyed.
 
-### Variable Scope
+Now that we’re past basic Cairo syntax, we won’t include all the `fn main() {` code in examples, so if you’re following along, make sure to put the following examples inside a main function manually. As a result, our examples will be a bit more concise, letting us focus on the actual details rather than boilerplate code.
 
-As a first example of ownership, we’ll look at the _scope_ of some variables. A
+## Variable Scope
+
+As a first example of the linear type system, we’ll look at the _scope_ of some variables. A
 scope is the range within a program for which an item is valid. Take the
 following variable:
 
@@ -31,60 +41,44 @@ following variable:
 let s = 'hello';
 ```
 
-The variable `s` refers to a short string, where the value of the string is
-hardcoded into the text of our program. The variable is valid from the point at
-which it’s declared until the end of the current _scope_. Listing 4-1 shows a
+The variable `s` refers to a short string. The variable is valid from the point at
+which it’s declared until the end of the current _scope_. Listing {{#ref variable-scope}} shows a
 program with comments annotating where the variable `s` would be valid.
 
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing_03_01/src/lib.cairo:here}}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing_01_variable_and_scope/src/lib.cairo:here}}
 ```
 
-<span class="caption">Listing 4-1: A variable and the scope in which it is
-valid</span>
+{{#label variable-scope}}
+<span class="caption">Listing {{#ref variable-scope}}: A variable and the scope in which it is valid.</span>
 
 In other words, there are two important points in time here:
 
 - When `s` comes _into_ scope, it is valid.
 - It remains valid until it goes _out of_ scope.
 
-At this point, the relationship between scopes and when variables are valid is
-similar to that in other programming languages. Now we’ll build on top of this
-understanding by using the `Array` type we introduced in the [previous chapter](./ch03-01-arrays.md).
+At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the `Array` type we introduced in the [previous chapter](./ch03-01-arrays.md).
 
-### Ownership with the `Array` Type
+### Moving values - example with Array
 
-To illustrate the rules of ownership, we need a data type that is more complex.
-The types covered in the [Data Types][data-types]<!-- ignore --> section
-of Chapter 2 are of a known size, can be
-quickly and trivially copied to make a new, independent instance if another
-part of code needs to use the same value in a different scope, and can easily
-be dropped when they're no longer used. But what is the behavior with the `Array` type whose size
-is unknown at compile time and which can't be trivially copied?
+As said earlier, _moving_ a value simply means passing that value to another function. When that happens, the variable referring to that value in the original scope is destroyed and can no longer be used, and a new variable is created to hold the same value.
 
+Arrays are an example of a complex type that is moved when passing it to another function.
 Here is a short reminder of what an array looks like:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no_listing_01_array/src/lib.cairo:2:4}}
 ```
 
-So, how does the ownership system ensure that each cell is never written to more than once?
-Consider the following code, where we try to pass the same instance of an array in two consecutive
-function calls:
+How does the type system ensure that the Cairo program never tries to write to the same memory cell twice?
+Consider the following code, where we try to remove the front of the array twice:
 
 ```rust,does_not_compile
 {{#include ../listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo}}
 ```
 
-In this case, we try to pass the same array instance `arr` by value to the functions `foo` and `bar`, which means
-that the parameter used in both function calls is the same instance of the array. If you append a value to the array
-in `foo`, and then try to append another value to the same array in `bar`, what would happen is that
-you would attempt to try to write to the same memory cell twice, which is not allowed in Cairo.
-To prevent this, the ownership of the `arr` variable moves from the `main` function to the `foo` function. When trying
-to call `bar` with `arr` as a parameter, the ownership of `arr` was already moved to the first call. The ownership
-system thus prevents us from using the same instance of `arr` in `foo`.
-
-Running the code above will result in a compile-time error:
+In this case, we try to pass the same value (the array in the `arr` variable) to both function calls. This means our code tries to remove the first element twice, which would try to write to the same memory cell twice - which is forbidden by the Cairo VM, leading to a runtime error.
+Thankfully, this code does not actually compile. Once we have passed the array to the `foo` function, the variable `arr` is no longer usable. We get this compile-time error, telling us that we would need Array to implement the Copy Trait:
 
 ```shell
 error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
@@ -93,53 +87,55 @@ error: Variable was previously moved. Trait has no implementation in context: co
         ^*****^
 ```
 
-### The `Copy` Trait
+## The Copy trait
 
-If a type implements the `Copy` trait, passing it to a function will not move the ownership of the value to the function called, but will instead pass a copy of the value.
-You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components don't implement the Copy trait.
+If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
+The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
+
+All basic types previously described in [Data Types Chapter](ch02-02-data-types.md) implement by default the `Copy` trait.
+
 While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
+You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components doesn't implement the Copy trait.
 
 ```rust,ignore_format
 {{#include ../listings/ch04-understanding-ownership/no_listing_03_copy_trait/src/lib.cairo}}
 ```
 
-In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, and the ownership of `p1` remains with the main function.
+In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid. In ownership terms, this means that the ownership of `p1` remains with the `main` function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
 _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._
 
-### The `Drop` Trait
+## Destroying values - example with FeltDict
 
-You may have noticed that the `Point` type in the previous example also implements the `Drop` trait. In Cairo, a value cannot go out of scope unless it has been previously moved.
-For example, the following code will not compile, because the struct `A` is not moved before it goes out of scope:
+The other way linear types can be _used_ is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In Rust, for example, this could be closing the access to a file, or locking a mutex.
+In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
+This would be very easy to forget, so it is enforced by the type system and the compiler.
+
+### No-op destruction: the `Drop` Trait
+
+You may have noticed that the `Point` type in the previous example also implements the `Drop` trait.
+For example, the following code will not compile, because the struct `A` is not moved or destroyed before it goes out of scope:
 
 ```rust,does_not_compile
 {{#include ../listings/ch04-understanding-ownership/no_listing_04_no_drop_derive_fails/src/lib.cairo}}
 ```
 
-This is to ensure the soundness of Cairo programs. Soundness refers to the fact that if a
-statement during the execution of the program is false, no cheating prover can convince an
-honest verifier that it is true. In our case, we want to ensure the consistency of
-consecutive dictionary key updates during program execution, which is only checked when
-the dictionaries are `squashed` - which moves the ownership of the dictionary to the
-`squash` method, thus allowing the dictionary to go out of scope. Unsquashed dictionaries
-are dangerous, as a malicious prover could prove the correctness of inconsistent updates.
+However, types that implement the `Drop` trait are automatically destroyed when going out of scope. This destruction does nothing, it is a no-op - simply a hint to the compiler that this type can safely be destroyed once it's no longer useful. We call this "dropping" a value.
 
-However, types that implement the `Drop` trait are allowed to go out of scope without being explicitly moved. When a value of a type that implements the `Drop` trait goes out of scope, the `Drop` implementation is called on the type, which moves the value to the `drop` function, allowing it to go out of scope - This is what we call "dropping" a value.
-It is important to note that the implementation of drop is a "no-op", meaning that it doesn't perform any actions other than allowing the value to go out of scope.
-
-The `Drop` implementation can be derived for all types, allowing them to be dropped when going out of scope, except for dictionaries (`Felt252Dict`) and types containing dictionaries.
+At the moment, the `Drop` implementation can be derived for all types, allowing them to be dropped when going out of scope, except for dictionaries (`Felt252Dict`) and types containing dictionaries.
 For example, the following code compiles:
 
 ```rust
 {{#include ../listings/ch04-understanding-ownership/no_listing_05_drop_derive_compiles/src/lib.cairo}}
 ```
 
-### The `Destruct` Trait
+### Destruction with a side-effect: the `Destruct` trait
 
-Manually calling the `squash` method on a dictionary is not very convenient, and it is easy to forget to do so. To make it easier to use dictionaries, Cairo provides the `Destruct` trait, which allows you to specify the behavior of a type when it goes out of scope. While Dictionaries don't implement the `Drop` trait, they do implement the `Destruct` trait, which allows them to automatically be `squashed` when they go out of scope. This means that you can use dictionaries without having to manually call the `squash` method.
+When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
-Consider the following example, in which we define a custom type that contains a dictionary:
+As said earlier, dictionaries in Cairo are types that must be "squashed" when destructed, so that the sequence of access can be proven. This is easy for developers to forget, so instead dictionaries implement the `Destruct` trait to ensure that all dictionaries are _squashed_ when going out of scope.
+As such, the following example will not compile:
 
 ```rust,does_not_compile
 {{#include ../listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo}}
@@ -154,7 +150,7 @@ error: Variable not dropped. Trait has no implementation in context: core::trait
     ^*^
 ```
 
-When A goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
+When `A` goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
 
 ```rust
 {{#include ../listings/ch04-understanding-ownership/no_listing_07_destruct_compiles/src/lib.cairo}}
@@ -162,82 +158,47 @@ When A goes out of scope, it can't be dropped as it implements neither the `Drop
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
 
-### Copy Array data with Clone
+## Copy Array data with Clone
 
-If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in Chapter 6, but because methods are a common feature in many
-programming languages, you’ve probably seen them before.
+If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in [Chapter 5-3](ch05-03-method-syntax.md), but because methods are a common feature in many programming languages, you’ve probably seen them before.
 
 Here’s an example of the `clone` method in action.
-
-> Note: in the following example, we need to import the `Clone` trait from the corelib `clone` module, and its implementation for the array type from the `array` module.
 
 ```rust
 {{#include ../listings/ch04-understanding-ownership/no_listing_08_array_clone/src/lib.cairo}}
 ```
 
-> Note: you will need to run `scarb cairo-run` with the `--available-gas=2000000` option to run this example, because it uses a loop and must be ran with a gas limit.
+When you see a call to `clone`, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
+In this case, the _value_ `arr1` refers to is being copied, resulting in new memory cells being used, and a new _variable_ `arr2` is created, referring to the new copied value.
 
-When you see a call to `clone`, you know that some arbitrary code is being
-executed and that code may be expensive. It’s a visual indicator that something
-different is going on.
+## Return Values and Scope
 
-### Ownership and Functions
-
-Passing a variable to a function will either move it or copy it. As seen in the Array section, passing an `Array` as a function parameter transfers its ownership; let's see what happens with other types.
-
-Listing 4-3 has an example with some annotations
-showing where variables go into and out of scope.
+Returning values is equivalent to _moving_ them. Listing {{#ref move-return-values}} shows an example of a
+function that returns some value, with similar annotations as those in Listing {{#ref variable-scope}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_03_03/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_02_moving_return_values/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-3: Functions with ownership and scope
-annotated</span>
+{{#label move-return-values}}
+<span class="caption">Listing {{#ref move-return-values}}: Moving return values.</span>
 
-If we tried to use `my_struct` after the call to `takes_ownership`, Cairo would throw a
-compile-time error. These static checks protect us from mistakes. Try adding
-code to `main` that uses `my_struct` and `x` to see where you can use them and where
-the ownership rules prevent you from doing so.
+While this works, moving into and out of every function is a bit tedious. What if we want to let a function use a value but not move the value? It’s quite annoying that anything we pass in also needs to be passed back if we want to use it again, in addition to any data resulting from the body of the function that we might want to return as well.
 
-### Return Values and Scope
-
-Returning values can also transfer ownership. Listing 4-4 shows an example of a
-function that returns some value, with similar annotations as those in Listing
-4-3.
+Cairo does let us return multiple values using a tuple, as shown in Listing {{#ref return-multiple-values}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_03_04/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_03_returning_many_values/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-4: Transferring ownership of return
-values</span>
+{{#label return-multiple-values}}
+<span class="caption">Listing {{#ref return-multiple-values}}: Returning many values.</span>
 
-When a variable goes out of scope, its value is dropped, unless ownership of the value has been moved to another variable.
-
-While this works, taking ownership and then returning ownership with every
-function is a bit tedious. What if we want to let a function use a value but
-not take ownership? It’s quite annoying that anything we pass in also needs to
-be passed back if we want to use it again, in addition to any data resulting
-from the body of the function that we might want to return as well.
-
-Cairo does let us return multiple values using a tuple, as shown in Listing 4-5.
-
-<span class="filename">Filename: src/lib.cairo</span>
-
-```rust
-{{#include ../listings/ch04-understanding-ownership/listing_03_05/src/lib.cairo}}
-```
-
-<span class="caption">Listing 4-5: Returning ownership of parameters</span>
-
-But this is too much ceremony and a lot of work for a concept that should be
-common. Luckily for us, Cairo has two features for using a value without
-transferring ownership, called _references_ and _snapshots_.
+But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called _references_ and _snapshots_.
 
 [data-types]: ch02-02-data-types.html#data-types
 [method-syntax]: ch04-03-method-syntax.html#method-syntax

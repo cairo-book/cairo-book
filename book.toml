@@ -6,7 +6,7 @@ src = "src"
 title = "The Cairo Programming Language"
 
 [build]
-extra-watch-dirs = ["po"]
+extra-watch-dirs = ["po", "listings"]
 
 [preprocessor.cairo]
 after = ["links"]
@@ -14,7 +14,19 @@ after = ["links"]
 [preprocessor.gettext]
 after = ["cairo"]
 
+[preprocessor.quiz]
+after = ["gettext"]
+
 [output.html]
-git-repository-url = "https://github.com/cairo-book/cairo-book.github.io/"
+git-repository-url = "https://github.com/cairo-book/cairo-book.github.io"
 edit-url-template = "https://github.com/cairo-book/cairo-book.github.io/edit/main/{path}"
 playground.runnable = true
+google-analytics = "G-0ZJLBV4KE2"
+additional-css = ["theme/css/last-changed.css"]
+mathjax-support = true
+
+[output.html.fold]
+enable = true
+level = 0
+
+[output.markdown]

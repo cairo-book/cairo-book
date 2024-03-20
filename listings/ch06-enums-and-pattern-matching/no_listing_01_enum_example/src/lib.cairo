@@ -1,4 +1,3 @@
-// ANCHOR: all
 // ANCHOR: enum_example
 #[derive(Drop)]
 enum Direction {
@@ -14,6 +13,4 @@ fn main() {
     let direction = Direction::North;
 // ANCHOR_END: here
 }
-// ANCHOR_END: all
-
 

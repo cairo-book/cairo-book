@@ -31,32 +31,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
-      - name: Cairo Verify
-        uses: ./.github/workflows/cairo-verify
-
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
 
-      - name: Build in English
-        run: |
-          mdbook build -d book
+      - name: Build book (English)
+        run: mdbook build -d book
 
       - name: Copy WASM-Cairo pkg
         run: |
-          cp -r theme/pkg book
-          cp -r theme/js book
+          cp -r theme/pkg book/html
+          cp -r theme/js book/html
 
       - name: Build all translations
         run: |
           for po_lang in $(cat ./LANGUAGES); do
               echo "::group::Building $po_lang translation"
               MDBOOK_BOOK__LANGUAGE=$po_lang \
-              mdbook build -d book/$po_lang
+              mdbook build -d book/html/$po_lang
               echo "::endgroup::"
           done
 
@@ -66,7 +64,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./book
+          path: ./book/html
 
       - name: Deploy to GitHub Pages
         id: deployment
