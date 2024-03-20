@@ -25,6 +25,15 @@ fn vending_machine_accept(c: (DayType, Coin)) -> bool {
 }
 // ANCHOR_END: here
 
+// ANCHOR: week
+fn vending_week_machine(c: (DayType, Coin)) -> bool {
+    match c {
+        (DayType::Week, Coin::Quarter) => true,
+        _ => false,
+    }
+}
+// ANCHOR_END: week
+
 #[cfg(test)]
 mod test {
     use super::{DayType, Coin, vending_machine_accept};
