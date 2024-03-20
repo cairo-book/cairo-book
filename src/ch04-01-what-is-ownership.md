@@ -46,11 +46,11 @@ which it’s declared until the end of the current _scope_. Listing {{#ref varia
 program with comments annotating where the variable `s` would be valid.
 
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing_04_01/src/lib.cairo:here}}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing_01_variable_and_scope/src/lib.cairo:here}}
 ```
 
 {{#label variable-scope}}
-<span class="caption">Listing {{#ref variable-scope}}: A variable and the scope in which it is valid</span>
+<span class="caption">Listing {{#ref variable-scope}}: A variable and the scope in which it is valid.</span>
 
 In other words, there are two important points in time here:
 
@@ -179,11 +179,11 @@ function that returns some value, with similar annotations as those in Listing {
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_04_02/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_02_moving_return_values/src/lib.cairo}}
 ```
 
 {{#label move-return-values}}
-<span class="caption">Listing {{#ref move-return-values}}: Moving return values</span>
+<span class="caption">Listing {{#ref move-return-values}}: Moving return values.</span>
 
 While this works, moving into and out of every function is a bit tedious. What if we want to let a function use a value but not move the value? It’s quite annoying that anything we pass in also needs to be passed back if we want to use it again, in addition to any data resulting from the body of the function that we might want to return as well.
 
@@ -192,11 +192,11 @@ Cairo does let us return multiple values using a tuple, as shown in Listing {{#r
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch04-understanding-ownership/listing_04_03/src/lib.cairo}}
+{{#include ../listings/ch04-understanding-ownership/listing_03_returning_many_values/src/lib.cairo}}
 ```
 
 {{#label return-multiple-values}}
-<span class="caption">Listing {{#ref return-multiple-values}}: Returning many values</span>
+<span class="caption">Listing {{#ref return-multiple-values}}: Returning many values.</span>
 
 But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called _references_ and _snapshots_.
 

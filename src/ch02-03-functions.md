@@ -103,7 +103,7 @@ If you want to use named parameters, you need to specify the name of the paramet
 Here is an example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_32_named_parameters/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_18_named_parameters/src/lib.cairo}}
 ```
 
 ## Statements and Expressions
@@ -125,20 +125,19 @@ assigning a value to it with the `let` keyword is a statement. In Listing {{#ref
 `let y = 6;` is a statement.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/listing_01_statement/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_19_statement/src/lib.cairo}}
 ```
 
 {{#label fn-main}}
-<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement</span>
+<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement.</span>
 
-Function definitions are also statements; the entire preceding example is a
-statement in itself.
+Function definitions are also statements; the entire preceding example is a statement in itself.
 
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
 ```rust, noplayground
-{{#include ../listings/ch02-common-programming-concepts/no_listing_18_statements_dont_return_values/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo}}
 ```
 
 When you run this program, the error you’ll get looks like this:
@@ -182,13 +181,13 @@ Calling a function is an expression since it always evaluates to a value: the fu
 A new scope block created with curly brackets is an expression, for example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:all}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_21_blocks_are_expressions/src/lib.cairo:all}}
 ```
 
 This expression:
 
 ```rust, noplayground
-{{#include ../listings/ch02-common-programming-concepts/no_listing_19_blocks_are_expressions/src/lib.cairo:block_expr}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_21_blocks_are_expressions/src/lib.cairo:block_expr}}
 ```
 
 is a block that, in this case, evaluates to `4`. That value gets bound to `y`
@@ -210,7 +209,7 @@ functions return the last expression implicitly. Here’s an example of a
 function that returns a value:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_20_function_return_values/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_values/src/lib.cairo}}
 ```
 
 There are no function calls, or even `let` statements in the `five`
@@ -240,7 +239,7 @@ because it’s an expression whose value we want to return.
 Let’s look at another example:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_21_function_return_values_2/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_23_function_return_values_2/src/lib.cairo}}
 ```
 
 Running this code will print `x = 6`. But if we place a
@@ -248,7 +247,7 @@ semicolon at the end of the line containing `x + 1`, changing it from an
 expression to a statement, we’ll get an error:
 
 ```rust,does_not_compile
-{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_invalid/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo}}
 ```
 
 ```shell

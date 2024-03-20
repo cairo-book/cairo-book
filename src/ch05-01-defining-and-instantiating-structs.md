@@ -7,12 +7,12 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_01_user_struct/src/lib.cairo:user}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_01_user_struct/src/lib.cairo:user}}
 ```
 
 {{#label user-struct}}
 
-<span class="caption">Listing {{#ref user-struct}}: A `User` struct definition</span>
+<span class="caption">Listing {{#ref user-struct}}: A `User` struct definition.</span>
 
 To use a struct after we’ve defined it, we create an _instance_ of that struct by specifying concrete values for each of the fields.
 We create an instance by stating the name of the struct and then add curly brackets containing _key: value_ pairs, where the keys are the names of the fields and the values are the data we want to store in those fields. We don’t have to specify the fields in the same order in which we declared them in the struct. In other words, the struct definition is like a general template for the type, and instances fill in that template with particular data to create values of the type.
@@ -22,22 +22,22 @@ For example, we can declare two particular users as shown in Listing {{#ref user
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_01_user_struct/src/lib.cairo:all}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_01_user_struct/src/lib.cairo:all}}
 ```
 
 {{#label user-instances}}
-<span class="caption">Listing {{#ref user-instances}}: Creating two instances of the `User` struct</span>
+<span class="caption">Listing {{#ref user-instances}}: Creating two instances of the `User` struct.</span>
 
 To get a specific value from a struct, we use dot notation. For example, to access `user1`'s email address, we use `user1.email`. If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field. Listing {{#ref user-mut}} shows how to change the value in the `email` field of a mutable `User` instance.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_02_mut_struct/src/lib.cairo:main}}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_02_mut_struct/src/lib.cairo:main}}
 ```
 
 {{#label user-mut}}
-<span class="caption">Listing {{#ref user-mut}}: Changing the value in the email field of a `User` instance</span>
+<span class="caption">Listing {{#ref user-mut}}: Changing the value in the email field of a `User` instance.</span>
 
 Note that the entire instance must be mutable; Cairo doesn’t allow us to mark only certain fields as mutable.
 
@@ -48,11 +48,11 @@ Listing {{#ref build-user}} shows a `build_user` function that returns a `User` 
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_02_mut_struct/src/lib.cairo:build_user}}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_02_mut_struct/src/lib.cairo:build_user}}
 ```
 
 {{#label build-user}}
-<span class="caption">Listing {{#ref build-user}}: A `build_user` function that takes an email and username and returns a `User` instance</span>
+<span class="caption">Listing {{#ref build-user}}: A `build_user` function that takes an email and username and returns a `User` instance.</span>
 
 It makes sense to name the function parameters with the same name as the struct fields, but having to repeat the `email` and `username` field names and variables is a bit tedious. If the struct had more fields, repeating each name would get even more annoying. Luckily, there’s a convenient shorthand!
 
@@ -63,10 +63,10 @@ Because the parameter names and the struct field names are exactly the same in L
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_05_02_mut_struct/src/lib.cairo:build_user2}}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_02_mut_struct/src/lib.cairo:build_user2}}
 ```
 
 {{#label init-shorthand}}
-<span class="caption">Listing {{#ref init-shorthand}}: A `build_user` function that uses field init shorthand because the `username` and `email` parameters have the same name as struct fields</span>
+<span class="caption">Listing {{#ref init-shorthand}}: A `build_user` function that uses field init shorthand because the `username` and `email` parameters have the same name as struct fields.</span>
 
 Here, we’re creating a new instance of the `User` struct, which has a field named `email`. We want to set the `email` field’s value to the value in the `email` parameter of the `build_user` function. Because the `email` field and the `email` parameter have the same name, we only need to write `email` rather than `email: email`.
