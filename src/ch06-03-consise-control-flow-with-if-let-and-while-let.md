@@ -1,6 +1,6 @@
-# Concise Control Flow with if let & while let
+# Concise Control Flow with `if let` and `while let`
 
-## if let Expressions
+## if let
 
 The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing 6-6 matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
 
@@ -62,13 +62,15 @@ Or we could use an `if let` and `else` expression, like this:
 If you have a situation in which your program has logic that is too verbose to
 express using a `match`, remember that `if let` is in your Cairo toolbox as well.
 
-## while let Expressions
+## while let
 
 Similar to `if let`, `while let` can make awkward `match` sequences more tolorable.
 
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_while_let/src/lib.cairo:here}}
 ```
+
+Using the `while let` make this sequence much nicer.
 
 ## See also
 
