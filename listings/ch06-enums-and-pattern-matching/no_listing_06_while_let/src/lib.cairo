@@ -7,8 +7,8 @@ fn main() {
 fn array_sum(mut arr: Array<felt252>) -> felt252 {
     // ANCHOR: here
     let mut sum = 0;
-    while let Option::Some(x) = arr.pop_front() {
-        sum += x;
+    while let Option::Some(value) = arr.pop_front() {
+        sum += value;
     };
     sum
     // ANCHOR_END: here
