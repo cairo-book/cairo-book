@@ -21,7 +21,7 @@ To upgrade a contract, expose an entry point that executes replace_class_syscall
 {{#label replace-class}}
 <span class="caption">Listing {{#ref replace-class}}: Exposing replace_class_syscall to update the contract's class</span>
 
-> Note: Thoroughly review changes and potential impacts before upgrading, as it's a delicate procedure with security implications.
+> Note: Thoroughly review changes and potential impacts before upgrading, as it's a delicate procedure with security implications. Don't allow arbitrary addresses to upgrade your contract.
 
 ## Upgradeable Component
 
