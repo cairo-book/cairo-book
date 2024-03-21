@@ -138,7 +138,7 @@
     - [Under the hood](./ch16-02-01-under-the-hood.md)
     - [Component dependencies](./ch16-02-02-component-dependencies.md)
     - [Testing components](./ch16-02-03-testing-components.md)
-  - [Upgradability](./ch16-03-upgradeability.md)
+  - [Upgradeability](./ch16-03-upgradeability.md)
   - [L1 <> L2 Messaging](./ch16-04-L1-L2-messaging.md)
   - [Oracle Interactions](./ch16-05-oracle-interactions.md)
     - [Price Feeds]()
