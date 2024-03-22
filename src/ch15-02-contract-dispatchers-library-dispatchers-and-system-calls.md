@@ -99,4 +99,4 @@ In the context of a smart contract, a selector is a unique identifier for a spec
 
 On Starknet, the selector is computed by applying the `sn_keccak` hash function to the string representation of the function name. If the function name is `transfer`, the selector can be computed with `selector!("transfer")`
 
-Note that in `starknet::call_contract_syscall`, we didn't specify the function name as a string, but rather used the `selector!` macro, which computes the `sn_keccak` hash of the provided function signature.
+Note that in `starknet::call_contract_syscall`, we didn't specify the function name as a string, but rather used the `selector!` macro, which computes the `starknet_keccak` hash of the provided function signature.
