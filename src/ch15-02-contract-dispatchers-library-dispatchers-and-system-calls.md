@@ -2,10 +2,10 @@
 
 Each time a contract interface is defined, two dispatchers are automatically created and exported by the compiler. Let's consider an interface that we named IERC20, these would be:
 
-1. The Contract Dispatcher `IERC20Dispatcher`
-2. The Library Dispatcher `IERC20LibraryDispatcher`
+1. The Contract Dispatcher `IERC20Dispatcher` and `IERC20SafeDispatcher`
+2. The Library Dispatcher `IERC20LibraryDispatcher` and `IERC20SafeLibraryDispatcher`
 
-The compiler also generates a trait `IERC20DispatcherTrait`, allowing us to call the functions defined in the interface on the dispatcher struct.
+The compiler also generates trait `IERC20DispatcherTrait` and `IERC20SafeDispatcherTrait`, allowing us to call the functions defined in the interface on the dispatcher struct.
 
 In this chapter, we are going to discuss what these are, how they work and how to use them.
 
