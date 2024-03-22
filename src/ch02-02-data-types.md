@@ -116,7 +116,7 @@ expression. We’ll cover how `if` expressions work in Cairo in the [Control Flo
 
 Cairo doesn't have a native type for strings but provides two ways to handle them: short strings using simple quotes and ByteArray using double quotes.
 
-#### Short strings
+#### Short Strings
 
 A short string is an ASCII string where each character is encoded on one byte (see the [ASCII table](https://www.asciitable.com/)). For example:
 
@@ -135,7 +135,7 @@ Here are some examples of declaring short strings in Cairo:
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:6}}
 ```
 
-#### Byte Array strings
+#### Byte Array Strings
 
 With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
 
@@ -143,7 +143,7 @@ With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 char
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
 
-## Type casting
+## Type Casting
 
 In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library.
 
@@ -193,7 +193,7 @@ For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types/src/lib.cairo}}
 ```
 
-## The unit type ()
+## The Unit Type ()
 
 A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.
@@ -205,3 +205,42 @@ You might be wondering why you would even need a unit type? In Cairo, everything
 
 [control-flow]: ch02-05-control-flow.md
 [appendix_b]: appendix-02-operators-and-symbols.md#operators
+
+## The Fixed Size Array Type
+
+Another way to have a collection of multiple values is with an array. Unlike a tuple, every element of an array must have the same type. In Cairo, the fixed size array type_ provides collections that have a fixed length. Non constant arrays are supported by Cairo as well, but require to use the `ArraitTrait` to create a variable of type `Array<T>` that can be used to add and remove elements in the array.
+
+We write an array’s type using square brackets with the type of each element, a semicolon, and then the number of elements in the array. We write the values in an array as a comma-separated list inside square brackets, like so:
+
+```rust,noplayground
+let fixed_size_array:[u8; 5] = [1, 2, 3, 4, 5];
+```
+
+You can also initialize an array to contain the same value for each element by specifying the initial value, followed by a semicolon, and then the length of the array in square brackets, as shown here:
+
+```rust,noplayground
+let fixed_size_array = [3; 5];
+```
+
+The array named `fixed_size_array` will contain 5 `felt252` elements that will all be set to the value `3` initially. This is the same as writing `let fixed_size_array = [3, 3, 3, 3, 3]`, but in a more concise way.
+
+Arrays are useful when you want to ensure you always have a fixed number of elements. For example, if you were using the names of the month in a program, you would probably use a const array rather than an `Array<T>` because you know it will always contain 12 elements: 
+
+```rust,noplayground
+let months: [felt252; 12] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+];
+```
+
+Cairo doesn't support accessing elements of a fixed size array variable for now. Moreover, this type doesn't implement `Copy` and `Drop` as of today, which makes it very difficult to actually use. This features should be made available very soon.
