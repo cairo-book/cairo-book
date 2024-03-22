@@ -208,7 +208,7 @@ You might be wondering why you would even need a unit type? In Cairo, everything
 
 ## The Fixed Size Array Type
 
-Another way to have a collection of multiple values is with an array. Unlike a tuple, every element of an array must have the same type. In Cairo, the fixed size array type_ provides collections that have a fixed length. Non constant arrays are supported by Cairo as well, but require to use the `ArraitTrait` to create a variable of type `Array<T>` that can be used to add and remove elements in the array.
+Another way to have a collection of multiple values is with an array. Unlike a tuple, every element of an array must have the same type. In Cairo, the _fixed size array type_ provides collections that have a fixed length. Non constant arrays are supported by Cairo as well, but require to use the `ArraitTrait` to create a variable of type `Array<T>` that can be used to add and remove elements in the array.
 
 We write an array’s type using square brackets with the type of each element, a semicolon, and then the number of elements in the array. We write the values in an array as a comma-separated list inside square brackets, like so:
 
