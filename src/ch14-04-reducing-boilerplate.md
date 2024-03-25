@@ -18,6 +18,6 @@ If we had to manually define the trait for the `InternalFunctions` implementatio
 {{#include ../listings/ch14-building-starknet-smart-contracts/no_listing_03_explicit_internal_fn/src/lib.cairo:state_internal}}
 ```
 
-The `#[generate_trait]` attribute is mostly used to define private impl blocks. It might also be used in addition to `#[abi(per_item)]` to define the various entrypoints of a contract, including public functions defined with the `#[external(v0)]` atribute.
+The `#[generate_trait]` attribute is mostly used to define private impl blocks. It might also be used in addition to `#[abi(per_item)]` to define the various entrypoints of a contract, including public functions defined with the `#[external(v0)]` attribute.
 
 Using `#[generate_trait]` in addition to `#[abi(embed_v0)]` for an impl block is not recommended, as it will result in a failure to generate the corresponding ABI. Public functions should only be defined in an impl block annotated with `#[generate_trait]` if this block is also annotated with the `#[abi(per_item)]` attribute.
