@@ -17,7 +17,7 @@ Some important rules to note:
 1. A contract can't have more than one constructor.
 2. The constructor function must be named `constructor`, and must be annotated with the `#[constructor]` attribute.
 
-The `constructor` function might take arguments, which are passed when deploying the contract. In our example, we pass some alue corresponding to a `Person` type as argument in order to store the `owner` informations (address and name) in the contract. 
+The `constructor` function might take arguments, which are passed when deploying the contract. In our example, we pass some value corresponding to a `Person` type as argument in order to store the `owner` information (address and name) in the contract. 
 
 Note that the `constructor` function **must** take `self` as a first argument, corresponding to the state of the contract, generally passed by reference with the `ref` keyword to be able to modify the contract's state. We will explain `self` and its type shortly.
 
