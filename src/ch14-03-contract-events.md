@@ -2,7 +2,7 @@
 
 Events are custom data structures that are emitted by smart contracts during execution. They provide a way for smart contracts to communicate with the external world by logging information about specific occurrences in a contract.
 
-Events play a crucial role in the integration of smart contracts in real-world applications. Take, for instance, the Non-Fungible Tokens (NFTs) minted on Starknet. An event is emitted each time a token is minted. This event is indexed and stored in some database, allowing applications to display almost instantaneously useful informations to users. If the contract doesn't emit an event when minting a new token, it would be less practical, with the need of querying the state of the blockchain to get the data needed. 
+Events play a crucial role in the integration of smart contracts in real-world applications. Take, for instance, the Non-Fungible Tokens (NFTs) minted on Starknet. An event is emitted each time a token is minted. This event is indexed and stored in some database, allowing applications to display almost instantaneously useful information to users. If the contract doesn't emit an event when minting a new token, it would be less practical, with the need of querying the state of the blockchain to get the data needed. 
 
 ## Defining Events
 
