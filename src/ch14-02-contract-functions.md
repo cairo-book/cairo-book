@@ -1,6 +1,6 @@
 # Contract Functions
 
-In this section, we are going to be looking at the different types of functions you could encounter in contracts:
+In this section, we are going to be looking at the different types of functions you could encounter in Starknet smart contracts.
 
 ## 1. Constructors
 
