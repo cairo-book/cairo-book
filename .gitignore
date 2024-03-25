@@ -10,3 +10,6 @@ src/quiz
 .idea/
 
 *Scarb.lock
+
+# trunk
+.trunk/
