@@ -55,7 +55,7 @@
   - [Packages and Crates](ch07-01-packages-and-crates.md)
   - [Defining Modules to Control Scope](ch07-02-defining-modules-to-control-scope.md)
   - [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
-  - [Bringing Paths into Scope with the 'use' Keyword](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
+  - [Bringing Paths into Scope with the use Keyword](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
   - [Separating Modules into Different Files](ch07-05-separating-modules-into-different-files.md)
 
 ## Generic Data Types
@@ -90,7 +90,7 @@
   - [Working with Hashes](ch11-05-hash.md)
   - [Macros](ch11-06-macros.md)
   - [Inlining in Cairo]()
-  - [Gas optimisation]()
+  - [Gas Optimisation]()
   - [Printing](ch11-09-printing.md)
 
 - [Appendix](appendix-00.md)
@@ -135,16 +135,16 @@
 
   - [Optimizing Storage Costs](./ch16-01-optimizing-storage-costs.md)
   - [Composability and Components](./ch16-02-00-composability-and-components.md)
-    - [Under the hood](./ch16-02-01-under-the-hood.md)
-    - [Component dependencies](./ch16-02-02-component-dependencies.md)
-    - [Testing components](./ch16-02-03-testing-components.md)
+    - [Under the Hood](./ch16-02-01-under-the-hood.md)
+    - [Component Dependencies](./ch16-02-02-component-dependencies.md)
+    - [Testing Components](./ch16-02-03-testing-components.md)
   - [Upgradeability](./ch16-03-upgradeability.md)
   - [L1 <> L2 Messaging](./ch16-04-L1-L2-messaging.md)
   - [Oracle Interactions](./ch16-05-oracle-interactions.md)
     - [Price Feeds]()
     - [Randomness]()
-  - [Other examples](./ch16-06-00-other-examples.md)
-    - [Deploying and Interacting with a Voting contract](./ch16-06-01-deploying-and-interacting-with-a-voting-contract.md)
+  - [Other Examples](./ch16-06-00-other-examples.md)
+    - [Deploying and Interacting with a Voting Contract](./ch16-06-01-deploying-and-interacting-with-a-voting-contract.md)
 
 ## Starknet Smart Contracts Security
 

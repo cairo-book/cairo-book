@@ -1,6 +1,6 @@
 # Contract Storage
 
-The most common way for interacting with a contract’s storage is through storage variables. As stated previously, storage variables allow you to store data that will be stored in the contract's storage that is itself stored on the blockchain. These data are persistent and can be accessed and modified anytime once the contract is deployed.
+The most common way for interacting with a contract’s storage is through storage variables. As stated previously, storage variables allow you to store data that will be stored in the contract's storage that is itself stored on the blockchain. These data are persistent and can be accessed and potentially modified anytime once the contract is deployed.
 
 Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
@@ -8,18 +8,20 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:storage}}
 ```
 
-The storage struct is a [struct](./ch05-00-using-structs-to-structure-related-data.md) like any other,
-except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. Moreover, this allows you to define storage mappings using the `LegacyMap` type.
+The `Storage` struct is a [struct](./ch05-00-using-structs-to-structure-related-data.md) like any other,
+except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. Moreover, this allows you to define storage mappings using the dedicated `LegacyMap` type.
 
-Each variable stored in the storage struct is stored in a different location in the contract's storage. The storage address of a variable is determined by the variable's name, and the eventual keys of the variable if it is a mapping.
+Variables declared in the `Storage` struct are not stored contiguously but in different locations in the contract's storage. The storage address of a particular variable is determined by the variable's name, and the eventual keys of the variable if it is a mapping.
 
-## Storage Addresses
+## Addresses of Storage Variables
 
 The address of a storage variable is computed as follows:
 
-- If the variable is a single value (not a mapping), the address is the `sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.
-- If the variable is a [mapping](./ch13-01-contract-storage.html#storage-mappings) with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key.
-- If it is a mapping to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated in the previous points. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
+- If the variable is a single value, the address is the `sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.
+
+- If the variable is composed of multiple values (i.e., a tuple, a struct or an enum), we also use the `sn_keccak` hash of the ASCII encoding of the variable's name to determine the base address in storage. Then, depending on the type, the storage layout will differ. See the [Storing Custom Types](#storing-custom-types) section.
+  
+- If the variable is a [mapping](./ch14-01-contract-storage.html#storage-mappings) with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key. In the case of mappings to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated with the previous formula. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
 You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value.
 
@@ -29,7 +31,7 @@ You can access the address of a storage variable by calling the `address` functi
 
 ## Interacting with Storage Variables
 
-Variables stored in the storage struct can be accessed and modified using the `read` and `write` functions, and you can get their address in storage using the `address` function. These functions are automatically generated by the compiler for each storage variable.
+Variables stored in the `Storage` struct can be accessed and modified using the `read` and `write` functions, respectively. As previously mentioned, you can get their address in storage using the `address` function. All these functions are automatically generated by the compiler for each storage variable.
 
 To read the value of the `owner` storage variable, which is a single value, we call the `read` function on the `owner` variable, passing in no parameters.
 
@@ -43,7 +45,7 @@ To read the value of the storage variable `names`, which is a mapping from `Cont
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read}}
 ```
 
-To write a value to a storage variable, we call the `write` function passing in the eventual keys and the value as arguments. As with the `read` function, the number of arguments depends on the storage variable type, and the number of keys if the variable is a mapping. Here, we only pass in the value to write to the `owner` variable as it is a simple variable.
+To write a new value to the storage slot of a storage variable, we call the `write` function passing in the eventual keys and the value as arguments. As with the `read` function, the number of arguments depends on the storage variable type. Here, we only pass in the value to write to the `owner` variable as it is a simple variable.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:write_owner}}
@@ -57,26 +59,28 @@ In this second example, we need to pass `user` and `name` as arguments, because 
 
 ## Storing Custom Types
 
-The `Store` trait, defined in the `starknet::storage_access` module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it must implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ByteArray`, `ContractAddress`, etc. implement the `Store` trait and can thus be stored without further action.
+The `Store` trait, defined in the `starknet::storage_access` module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it **must** implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ByteArray`, `ContractAddress`, etc. implement the `Store` trait and can thus be stored without further action.
 
 But what if you wanted to store a type that you defined yourself, such as an enum or a struct? In that case, you have to explicitly tell the compiler how to store this type.
 
-In our example, we want to store a `Person` struct in storage, which is possible by implementing the `Store` trait for the `Person` type. This can be achieved by simply adding a `#[derive(starknet::Store)]` attribute on top of our struct definition.
+In our example, we want to store a `Person` struct in storage, which is only possible by implementing the `Store` trait for the `Person` type. This can be simply achieved by adding a `#[derive(starknet::Store)]` attribute on top of our struct definition. Note that all the members of the struct need to implement the `Store` trait.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:person}}
 ```
 
-Similarly, Enums can be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait.
+Similarly, Enums can only be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:enum_store}}
 ```
 
-### Structs storage layout
+You might have noticed that we also derived `Drop` and `Serde` on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.
+
+### Structs Storage Layout
 
 On Starknet, structs are stored in storage as a sequence of primitive types.
-The elements of the struct are stored in the same order as they are defined in the struct definition. The first element of the struct is stored at the base address of the struct, which is computed as specified in [Storage Addresses](#storage-addresses) and can be obtained by calling `var.address()`, and subsequent elements are stored at addresses contiguous to the first element.
+The elements of the struct are stored in the same order as they are defined in the struct definition. The first element of the struct is stored at the base address of the struct, which is computed as specified in [Storage Addresses](#addresses-of-storage-variables) and can be obtained by calling `var.address()`, and subsequent elements are stored at addresses contiguous to the first element.
 For example, the storage layout for the `owner` variable of type `Person` will result in the following layout:
 
 | Fields  | Address            |
@@ -84,21 +88,24 @@ For example, the storage layout for the `owner` variable of type `Person` will r
 | name    | owner.address()    |
 | address | owner.address() +1 |
 
-### Enums storage layout
+Note that tuples are similarly stored in contract's storage, with the first element of the tuple being stored at the base address, and subsequent elements stored contiguously.
 
-When you store an enum variant, what you're essentially storing is the variant's index and an eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
-If your variant has an associated value, it's stored starting from the address immediately following the base address.
-For example, suppose we have the `RegistrationType` enum with the `finite` variant, which carries an associated limit date. The storage layout would look like this:
+### Enums Storage Layout
 
-| Element                           | Address                         |
-| --------------------------------- | ------------------------------- |
-| Variant index (e.g. 0 for finite) | registration_type.address()     |
-| Associated limit date             | registration_type.address() + 1 |
+When you store an enum variant, what you're essentially storing is the variant's index and eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
+If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
+For example, suppose we have the `RegistrationType` enum with the `finite` variant that carries an associated limit date, and the `infinite` variant without associated data. The storage layout would look like this:
+
+| Element                             | Address                         |
+| ----------------------------------- | ------------------------------- |
+| Variant index (e.g., 0 for finite)  | registration_type.address()     |
+| Associated limit date               | registration_type.address() + 1 |
+| Variant index (e.g., 1 for infinite)| registration_type.address() + 2 |
 
 ## Storage Mappings
 
 Storage mappings are similar to hash tables in that they allow mapping keys to values. However, unlike a typical hash table, the key data itself is not stored - only its hash is used to look up the associated value in the contract's storage.
-Mappings do not have a concept of length or whether a key/value pair is set. The only way to remove a mapping is to set its value to the default zero value.
+Mappings do not have a concept of length or whether a key/value pair is set. All values are by default set to 0. The only way to remove a mapping is to set all non-zero values it contains to the default zero value.
 
 Mappings are only used to compute the location of data in the storage of a
 contract given certain keys. They are thus **only allowed as storage variables**.
@@ -124,7 +131,8 @@ You can also create more complex mappings with multiple keys. You can find in Li
 {{#label storage-mapping}}
 <span class="caption">Listing {{#ref storage-mapping}}: Storing a mapping with multiple keys inside a tuple.</span>
 
-The address in storage of a variable stored in a mapping is computed according to the description in the [Storage Addresses](#storage-addresses) section.
+The address in storage of a variable stored in a mapping is computed according to the description in the [Addresses of Storage Variables](#addresses-of-storage-variables) section.
+
 If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have a struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` modulo \\( {2^{251}} - 256\\), where `k_1` and `k_2` are the values of the two fields of the struct.
 
-Similarly, in the case of a nested mapping such as `LegacyMap::<(ContractAddress, ContractAddress), u8>`, the address will be computed in the same way: `h(h(sn_keccak(variable_name),k_1),k_2)`.
+Similarly, in the case of a nested mapping using a tuple as key, such as `LegacyMap::<(ContractAddress, ContractAddress), u8>`, the address will be computed in the same way, with each element of the tuple being a key: `h(h(sn_keccak(variable_name),k_1),k_2)`.
