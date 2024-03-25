@@ -110,7 +110,7 @@ Table B-5 shows symbols that appear in the context of specifying attributes on a
 | `#[abi(embed_v0)]`                   | Defines an implementation of a trait, exposing the functions of the impl as entrypoints of a contract                                         |
 | `#[abi(per_item)]`                   | Allows individual definition of the entrypoint type of functions inside an impl                                                               |
 | `#[external(v0)]`                    | Defines an external function when `#[abi(per_item)]` is used                                                                                  |
-| `#[flat]`                            | Defines a contract event, i.e., a variant of the `Event` enum, that is itself an enum of structs                                                                            |
+| `#[flat]`                            | Defines a contract event, i.e., a variant of the `Event` enum, that is itself an enum of structs, very useful for composability when using Starknet components      |
 
 <span class="caption">Table B-5: Attributes</span>
 
