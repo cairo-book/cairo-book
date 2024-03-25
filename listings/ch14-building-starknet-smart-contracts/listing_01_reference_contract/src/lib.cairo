@@ -30,14 +30,15 @@ mod NameRegistry {
     enum Event {
         StoredName: StoredName,
     }
-
+    //ANCHOR_END: event
+    //ANCHOR: storedname
     #[derive(Drop, starknet::Event)]
     struct StoredName {
         #[key]
         user: ContractAddress,
         name: felt252,
     }
-    //ANCHOR_END: event
+    //ANCHOR_END: storedname
 
     //ANCHOR: person
     #[derive(Drop, Serde, starknet::Store)]

@@ -20,15 +20,19 @@ instantiated with the `Event` type, which in our example is the following enum:
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:event}}
 ```
 
-Each variant of the `Event` enum (i.e., each event) has to be a struct or an enum of structs, and each variant needs to implement the `starknet::Event` trait itself. Moreover, the members of these variants must implement the `Serde` trait (_c.f._ [Appendix C: Serializing with Serde](./appendix-03-derivable-traits.html#serializing-with-serde)), as keys/data are added to the event using a serialization process.
-
-In our example, the `Event` enum contains only one variant, which is a struct named `StoredName`. We chose to name our variant with the same name as the struct name, but this is not enforced.
-
-If a variant of the `Event` enum is an enum of structs, it must be annotated with the `#[flat]` attribute. This feature is very useful in the case of Starknet components, where we can define in the `Event` enum of a contract the `Event` enums of the embedded components.
+Each variant of the `Event` enum has to be a struct or an enum, and each variant needs to implement the `starknet::Event` trait itself. Moreover, the members of these variants must implement the `Serde` trait (_c.f._ [Appendix C: Serializing with Serde](./appendix-03-derivable-traits.html#serializing-with-serde)), as keys/data are added to the event using a serialization process.
 
 The auto-implementation of the `starknet::Event` trait will implement the `append_keys_and_data` function for each variant of our `Event` enum. The generated implementation will append a single key based on the variant name (`StoredName`), and then recursively call `append_keys_and_data` in the impl of the `Event` trait for the variant’s type.
 
-In our contract, we define an event named `StoredName` that emits the contract address of the caller and the name stored within the contract, where the `user` field is serialized as a key and the `name` field is serialized as data.
+In our example, the `Event` enum contains only one variant, which is a struct named `StoredName`. We chose to name our variant with the same name as the struct name, but this is not enforced.
+
+```rust,noplayground
+{{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:storedname}}
+```
+
+Whenever an enum that derives the `starknet::Event` trait has an enum variant, this enum is nested by default. Therefore, the list of keys corresponding to the variant’s name will include the `sn_keccak` hash of the variant's name itself. This might be superfluous, typically when using embedded components in contracts. Indeed, in such cases, we might want the events defined in the components to be emitted without any additionnal data, and it might be useful to annotate the enum variant with the `#[flat]` attribute. By doing so, we allow to opt out of the nested behavior and ignore the variant name in the serialization process. On the other hand, nested events have the benefit of distinguishing between the main contract event and different components events, which might be helpful.  
+
+In our contract, we defined an event named `StoredName` that emits the contract address of the caller and the name stored within the contract, where the `user` field is serialized as a key and the `name` field is serialized as data.
 To index the key of an event, simply annotate it with the `#[key]` as demonstrated in the example for the `user` key.
 
 Indexing allows for more efficient queries and filtering of events. Choosing to index event's fields with `#[key]` or not will depend on your needs. 
