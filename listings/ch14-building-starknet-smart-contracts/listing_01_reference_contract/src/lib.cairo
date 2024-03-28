@@ -113,12 +113,15 @@ mod NameRegistry {
             name: felt252,
             registration_type: RegistrationType
         ) {
-            let mut total_names = self.total_names.read();
+            let total_names = self.total_names.read();
+            let current_name = self.names.read(user);
             //ANCHOR: write
             self.names.write(user, name);
             //ANCHOR_END: write
             self.registration_type.write(user, registration_type);
-            self.total_names.write(total_names + 1);
+            if current_name == 0 {
+                self.total_names.write(total_names + 1);
+            }
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
         //ANCHOR_END: emit_event
