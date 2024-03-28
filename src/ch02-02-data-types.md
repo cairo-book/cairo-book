@@ -49,7 +49,7 @@ Table 3-1 shows the built-in integer types in Cairo. We can use any of these var
 | 32-bit  | `usize`  |
 
 <br>
-<div align="center"><span class="caption">Table 3-1: Integer Types in Cairo</span></div>
+<div align="center"><span class="caption">Table 3-1: Integer Types in Cairo.</span></div>
 
 Each variant has an explicit size. Note that for now, the `usize` type is just an alias for `u32`; however, it might be useful when in the future Cairo can be compiled to MLIR.
 As variables are unsigned, they can't contain a negative number. This code will cause the program to panic:
@@ -76,7 +76,7 @@ It is also possible to use a visual separator `_` for number literals, in order 
 | Binary           | `0b01`    |
 
 <br>
-<div align="center"><span class="caption">Table 3-2: Integer Literals in Cairo</span></div>
+<div align="center"><span class="caption">Table 3-2: Integer Literals in Cairo.</span></div>
 
 So how do you know which type of integer to use? Try to estimate the max value your int can have and choose the good size.
 The primary situation in which you’d use `usize` is when indexing some sort of collection.

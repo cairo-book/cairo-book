@@ -94,7 +94,7 @@ Note that tuples are similarly stored in contract's storage, with the first elem
 
 When you store an enum variant, what you're essentially storing is the variant's index and eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
 If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
-For example, suppose we have the `RegistrationType` enum with the `finite` variant that carries an associated limit date, and the `infinite` variant without associated data. The storage layout would look like this:
+For example, suppose we have the `RegistrationType` enum with the `finite` variant that carries an associated limit date, and the `infinite` variant without associated data. The storage layout for the `finite` variant would look like this:
 
 | Element                             | Address                         |
 | ----------------------------------- | ------------------------------- |
@@ -102,10 +102,16 @@ For example, suppose we have the `RegistrationType` enum with the `finite` varia
 | Associated limit date               | registration_type.address() + 1 |
 | Variant index (e.g., 1 for infinite)| registration_type.address() + 2 |
 
+while the storage layout for the `infinite` would be as follows: 
+
+| Element                             | Address                         |
+| ----------------------------------- | ------------------------------- |
+| Variant index (e.g., 1 for infinite)| registration_type.address()     |
+
 ## Storage Mappings
 
 Storage mappings are similar to hash tables in that they allow mapping keys to values. However, unlike a typical hash table, the key data itself is not stored - only its hash is used to look up the associated value in the contract's storage.
-Mappings do not have a concept of length or whether a key/value pair is set. All values are by default set to 0. The only way to remove a mapping is to set all non-zero values it contains to the default zero value.
+Mappings do not have a concept of length or whether a key/value pair is set. All values are by default set to 0. The only way to remove an entry from a mapping is to set its value to the default zero value.
 
 Mappings are only used to compute the location of data in the storage of a
 contract given certain keys. They are thus **only allowed as storage variables**.

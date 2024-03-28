@@ -46,7 +46,7 @@
 - [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md)
   - [Enums](ch06-01-enums.md)
   - [The Match Control Flow Construct](ch06-02-the-match-control-flow-construct.md)
-  - [Concise Control Flow with if let & while let](ch06-03-consise-control-flow-with-if-let-and-while-let.md)
+  - [Concise Control Flow with `if let` and `while let`](ch06-03-consise-control-flow-with-if-let-and-while-let.md)
 
 ## Managing Cairo Projects with Packages, Crates and Modules
 
@@ -55,7 +55,7 @@
   - [Packages and Crates](ch07-01-packages-and-crates.md)
   - [Defining Modules to Control Scope](ch07-02-defining-modules-to-control-scope.md)
   - [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
-  - [Bringing Paths into Scope with the use Keyword](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
+  - [Bringing Paths into Scope with the `use` Keyword](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
   - [Separating Modules into Different Files](ch07-05-separating-modules-into-different-files.md)
 
 ## Generic Data Types

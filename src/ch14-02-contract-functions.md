@@ -2,7 +2,7 @@
 
 In this section, we are going to be looking at the different types of functions you could encounter in Starknet smart contracts.
 
-Functions can access the contract's storage easily via `self: ContractState`, which abstracts away the complexity of underlying system calls (`storage_read_syscall` and `storage_write_syscall`). The compiler provides two modifiers: `ref` and `@` to decorate `self`, which intends to distinguish view and external functions.
+Functions can access the contract's state easily via `self: ContractState`, which abstracts away the complexity of underlying system calls (`storage_read_syscall` and `storage_write_syscall`). The compiler provides two modifiers: `ref` and `@` to decorate `self`, which intends to distinguish view and external functions.
 
 ## 1. Constructors
 
@@ -33,8 +33,6 @@ Annotating an impl block with the `#[abi(embed_v0]` attribute only affects the v
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:impl_public}}
 ```
 
-Functions, either public or private, can access the contract's storage easily via `self: ContractState`, which abstracts away the complexity of underlying system calls (`storage_read_syscall` and `storage_write_syscall`). The compiler provides two modifiers: `ref` and `@` to decorate `self`, which, in the case of public functions, intends to distinguish view and external functions.
-
 > Similarly to the `constructor` function, all public functions, either standalone functions annotated with the `#[external(v0)]` or functions within an impl block annotated with the `#[abi(embed_v0)]` attribute, **must** take `self` as a first argument. This is not the case for private functions.
 
 ### External functions
@@ -47,7 +45,7 @@ External functions are _public_ functions where the `self: ContractState` argume
 
 ### View functions
 
-View functions are _public_ functions where the `self: ContractState` argument is passed as snapshot, which exposes only the `read` access to storage variables, and no storage write can be made via `self`. The compiler will mark their `state_mutability` to `view`, and view functions can be queried via `starknet_call` on Starknet, which will not create a transaction and hence will not change the state.
+View functions are _public_ functions where the `self: ContractState` argument is passed as snapshot, which only allows the `read` access to storage variables, and restricts writes to storage made via `self` by causing compilation errors. The compiler will mark their `state_mutability` to `view`, preventing any state modification through `self` directly.
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:view}}
@@ -55,7 +53,11 @@ View functions are _public_ functions where the `self: ContractState` argument i
 
 ### State mutability of public functions
 
-However, as you may have noticed, passing `self` as a snapshot only restricts the storage write access via `self`. It does not prevent state modification via direct system calls or calling another contract. Hence the read-only property of view functions is not enforced on Starknet and a view function can be defined and invoked to change states. In conclusion, even though external and view functions are distinguished by the Cairo compiler, **all public functions** have the potential to modify states on Starknet.
+However, as you may have noticed, passing `self` as a snapshot only restricts the storage write access via `self` at compile time. It does not prevent state modification via direct system calls, nor calling another contract that would modify the state.
+
+The read-only property of view functions is not enforced on Starknet, and sending a transaction targeting a view function _could_  change the state.
+
+In conclusion, even though external and view functions are distinguished by the Cairo compiler, **all public functions** can be called through an invoke transaction and have the potential to modify states on Starknet. Also, all public functions can be queried via `starknet_call` on Starknet, which will not create a transaction and hence will not change the state.
 
 > **Warning:** This is different from the EVM where a `staticcall` opcode is provided, which prevents storage modifications in the current context and subcontexts. Hence developers **should not** have the assumption that calling a view function on another contract cannot modify the state.
 
