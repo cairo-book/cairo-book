@@ -19,7 +19,7 @@ runtimes:
 lint:
   enabled:
     - actionlint@1.6.27
-    - checkov@3.2.47
+    - checkov@3.2.48
     - clippy@1.65.0
     - git-diff-check
     - markdownlint@0.39.0
@@ -31,7 +31,7 @@ lint:
     - shfmt@3.6.0
     - svgo@3.2.0
     - taplo@0.8.1
-    - trivy@0.50.0
+    - trivy@0.50.1
     - trufflehog@3.71.0
     - yamllint@1.35.1
 actions:
