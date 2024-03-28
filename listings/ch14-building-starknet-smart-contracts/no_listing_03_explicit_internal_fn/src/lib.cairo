@@ -49,7 +49,7 @@ mod NameRegistry {
         //ANCHOR_END: emit_event
         }
     }
-// ANCHOR: state_internal
+// ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
 
