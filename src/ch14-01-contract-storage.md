@@ -105,7 +105,7 @@ while the storage layout for the `infinite` would be as follows:
 
 | Element                             | Address                         |
 | ----------------------------------- | ------------------------------- |
-| Variant index (1 for infinite)| registration_type.address()     |
+| Variant index (1 for infinite)      | registration_type.address()     |
 
 ## Storage Mappings
 
