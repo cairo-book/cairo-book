@@ -18,9 +18,9 @@ mod NameRegistry {
     #[storage]
     struct Storage {
         names: LegacyMap::<ContractAddress, felt252>,
+        owner: Person,
         registration_type: LegacyMap::<ContractAddress, RegistrationType>,
         total_names: u128,
-        owner: Person
     }
     //ANCHOR_END: storage
 
@@ -30,20 +30,21 @@ mod NameRegistry {
     enum Event {
         StoredName: StoredName,
     }
-
+    //ANCHOR_END: event
+    //ANCHOR: storedname
     #[derive(Drop, starknet::Event)]
     struct StoredName {
         #[key]
         user: ContractAddress,
-        name: felt252
+        name: felt252,
     }
-    //ANCHOR_END: event
+    //ANCHOR_END: storedname
 
     //ANCHOR: person
     #[derive(Drop, Serde, starknet::Store)]
     pub struct Person {
+        address: ContractAddress,
         name: felt252,
-        address: ContractAddress
     }
     //ANCHOR_END: person
 
@@ -80,17 +81,15 @@ mod NameRegistry {
         //ANCHOR: view
         fn get_name(self: @ContractState, address: ContractAddress) -> felt252 {
             //ANCHOR: read
-            let name = self.names.read(address);
-            //ANCHOR_END: read
-            name
+            self.names.read(address)
+        //ANCHOR_END: read
         }
 
         //ANCHOR_END: view
         fn get_owner(self: @ContractState) -> Person {
             //ANCHOR: read_owner
-            let owner = self.owner.read();
-            //ANCHOR_END: read_owner
-            owner
+            self.owner.read()
+        //ANCHOR_END: read_owner
         }
     }
     //ANCHOR_END: impl_public
@@ -114,7 +113,7 @@ mod NameRegistry {
             name: felt252,
             registration_type: RegistrationType
         ) {
-            let mut total_names = self.total_names.read();
+            let total_names = self.total_names.read();
             //ANCHOR: write
             self.names.write(user, name);
             //ANCHOR_END: write
