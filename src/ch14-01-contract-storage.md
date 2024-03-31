@@ -98,15 +98,14 @@ For example, suppose we have the `RegistrationType` enum with the `finite` varia
 
 | Element                             | Address                         |
 | ----------------------------------- | ------------------------------- |
-| Variant index (e.g., 0 for finite)  | registration_type.address()     |
+| Variant index (0 for finite)        | registration_type.address()     |
 | Associated limit date               | registration_type.address() + 1 |
-| Variant index (e.g., 1 for infinite)| registration_type.address() + 2 |
 
 while the storage layout for the `infinite` would be as follows: 
 
 | Element                             | Address                         |
 | ----------------------------------- | ------------------------------- |
-| Variant index (e.g., 1 for infinite)| registration_type.address()     |
+| Variant index (1 for infinite)| registration_type.address()     |
 
 ## Storage Mappings
 
