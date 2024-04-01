@@ -43,17 +43,25 @@ Run completed successfully, returning []
 
 Both `inlined` and `not_inlined` functions output their respective return values in the same manner, regardless of whether they are inlined or not.
 
-Let's take a look at the corresponding Sierra code to see how inlining works under the hood. The `println!` macro usage here will greatly increase the Sierra code size while adding a lot of complexity in it, this is why we will focus on the following program that only calls  `inlined` and `not_inlined` functions without printing their return values : 
+Let's take a look at the corresponding Sierra code to see how inlining works under the hood. The `println!` macro usage here will greatly increase the Sierra code size while adding a lot of complexity in it, this is why we will focus on the following program that only calls  `inlined` and `not_inlined` functions without printing their return values: 
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_03_inlining_sierra/src/lib.cairo}}
 ```
 
-The Sierra code corresponding to this Cairo program is as follows: 
+Listing {{#ref sierra}} exposes the Sierra code corresponding to this Cairo program:
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_03_inlining_sierra/src/inline.sierra}}
 ```
+
+{{#label sierra}}
+<span class="caption">Listing {{#ref sierra}}: The Sierra code of our Cairo program.</span>
+
+It includes:
+- Type and libfunc declarations.
+- Statements that constitute the program.
+- Declaration of the functions of the program.
 
 The Sierra code statements always match the order of function declarations in the Cairo program. This means that the `return([2])` statement on line 26, which is the first `return` instruction of the Sierra program, corresponds to the `main` function return instruction. The `return([3])` statement on line 32 corresponds to the `inlined` function return instruction, and the `return([3])` on line 38 is the return instruction of the `not_inlined` function.
 
@@ -83,7 +91,7 @@ In our specific case, we can observe that the compiler has applied additional op
 
 Because `inlined` return value is never used, the compiler optimizes `main` function execution by creating an empty `ByteArray` and then drop it. This will actually reduce the code length while reducing the number of steps required to execute `main`.
 
-On the opposite, line 23 uses the `function_call` libfunc to execute normally the `not_inlined` function. This means that all the code from line 33 to 38 will be executed :
+On the opposite, line 23 uses the `function_call` libfunc to execute normally the `not_inlined` function. This means that all the code from line 33 to 38 will be executed:
 
 ```rust,noplayground
 33	array_new<bytes31>() -> ([0]) // 12
