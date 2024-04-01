@@ -89,7 +89,7 @@
   - [Operator Overloading](ch11-04-operator-overloading.md)
   - [Working with Hashes](ch11-05-hash.md)
   - [Macros](ch11-06-macros.md)
-  - [Inlining in Cairo]()
+  - [Inlining in Cairo](ch11-07-inlining-in-cairo.md)
   - [Gas Optimisation]()
   - [Printing](ch11-09-printing.md)
 
