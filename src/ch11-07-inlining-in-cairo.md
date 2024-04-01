@@ -17,7 +17,7 @@ Many of the Cairo corelib functions are inlined. User-defined functions may also
 
 However, inlining can also lead to increased code size. Whenever a function is inlined, the call site contains a copy of the function's Sierra code, potentially leading to duplication of code across the codebase.
 
-Therefore, inlining should be applied with cautious. Using the `#[inline]` or `#[inline(always)]` indiscriminately will lead to increased compile time. It is particularly useful to inline small functions, ideally with many arguments. The more frequently a function is called, the more beneficial inlining becomes in terms of performance. By doing so, the number of steps for the execution will be lower, while the code lenght will not grow that much or might even decrease in terms of total number of instructions.
+Therefore, inlining should be applied with cautious. Using the `#[inline]` or `#[inline(always)]` indiscriminately will lead to increased compile time. It is particularly useful to inline small functions, ideally with many arguments. The more frequently a function is called, the more beneficial inlining becomes in terms of performance. By doing so, the number of steps for the execution will be lower, while the code length will not grow that much or might even decrease in terms of total number of instructions.
 
 > Inlining is often a tradeoff between number of steps and code length. Use the `inline` attribute cautiously where it is appropriate.
 
@@ -30,7 +30,7 @@ Let's introduce a short example to illustrate the mechanisms of inlining in Cair
 ```
 
 {{#label inlining}}
-<span class="caption">Listing {{#ref inlining}}: A small programm that prints 2 `ByteArray` values in the `main` function.</span>
+<span class="caption">Listing {{#ref inlining}}: A small program that prints 2 `ByteArray` values in the `main` function.</span>
 
 First of all, let's run our program and see what the result is:
 
