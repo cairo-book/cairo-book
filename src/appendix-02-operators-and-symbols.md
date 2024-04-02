@@ -136,7 +136,7 @@ Table B-6 shows symbols that appear in the context of calling or defining macros
 | `writeln!`               | Write formatted strings in a formatter on a new line                                   |
 | `get_dep_component!`     | Returns the requested component state from a snapshot of the state inside a component  |
 | `get_dep_component_mut!` | Returns the requested component state from a reference of the state inside a component |
-| `component!`             | Macro used in Starknet contract components to generate the `HasComponent<TContractState>` trait impl  |
+| `component!`             | Macro used in Starknet contracts that use components to generate the `HasComponent<TContractState>` trait impl  |
 
 
 <span class="caption">Table B-6: Macros</span>
