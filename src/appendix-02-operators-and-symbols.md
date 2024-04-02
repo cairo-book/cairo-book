@@ -110,7 +110,8 @@ Table B-5 shows symbols that appear in the context of specifying attributes on a
 | `#[abi(embed_v0)]`                   | Defines an implementation of a trait, exposing the functions of the impl as entrypoints of a contract                                         |
 | `#[abi(per_item)]`                   | Allows individual definition of the entrypoint type of functions inside an impl                                                               |
 | `#[external(v0)]`                    | Defines an external function when `#[abi(per_item)]` is used                                                                                  |
-| `#[flat]`                            | Defines a contract event, i.e., a variant of the `Event` enum, that is itself an enum of structs, very useful for composability when using Starknet components      |
+| `#[flat]`                            | Defines a enum variant of the `Event` enum that is not nested, ignoring the variant name in the serialization process, very useful for composability when using Starknet components      |
+| `#[key]`                             | Defines an indexed `Event` enum field, allowing for more efficient queries and filtering of events                    |
 
 <span class="caption">Table B-5: Attributes</span>
 
@@ -126,11 +127,17 @@ Table B-6 shows symbols that appear in the context of calling or defining macros
 | `assert!`                | Evaluates a Boolean and panics if `false`                                              |
 | `assert_eq!`             | Evaluates an equality, and panics if not equal                                         |
 | `assert_ne!`             | Evaluates an equality, and panics if equal                                             |
+| `assert_lt!`             | Evaluates a comparison, and panics if greater or equal                                             |
+| `assert_le!`             | Evaluates a comparison, and panics if greater                                             |
+| `assert_gt!`             | Evaluates a comparison, and panics if lower or equal                                             |
+| `assert_ge!`             | Evaluates a comparison, and panics if lower                                             |
 | `format!`                | Format a string and returns a `ByteArray` with the contents                            |
 | `write!`                 | Write formatted strings in a formatter                                                 |
 | `writeln!`               | Write formatted strings in a formatter on a new line                                   |
 | `get_dep_component!`     | Returns the requested component state from a snapshot of the state inside a component  |
 | `get_dep_component_mut!` | Returns the requested component state from a reference of the state inside a component |
+| `component!`             | Macro used in Starknet contracts to embed a component inside a contract                |
+
 
 <span class="caption">Table B-6: Macros</span>
 
