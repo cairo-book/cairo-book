@@ -23,7 +23,7 @@ The more frequently a function is called, the more beneficial inlining becomes i
 
 > Inlining is often a tradeoff between number of steps and code length. Use the `inline` attribute cautiously where it is appropriate.
 
-## Inlining example
+## Inlining Example
 
 Let's introduce a short example to illustrate the mechanisms of inlining in Cairo. Listing {{#ref inlining}} shows a basic program allowing comparison between inlined and not-inlined functions.
 
@@ -65,7 +65,7 @@ On line 10, we can see the call to the `function_call` libfunc instantiated with
 20	store_temp<felt252>([0]) -> ([0])
 ```
 
-This libfunc call stores the value `2` in `[0]`. After that, Sierra statements from line 11 to 12 are the actualy body of the `inlined` function: 
+This libfunc call stores the value `2` in `[0]`. After that, Sierra statements from line 11 to 12 are the actually body of the `inlined` function: 
 
 ```rust,noplayground
 16	felt252_const<1>() -> ([0])
@@ -89,7 +89,7 @@ Lines 13 to 15 contains the Sierra statements that will add the values contained
 15	return([2]) // 5
 ```
 
-## Additionnal optimizations
+## Additional Optimizations
 
 Let's study another program that shows other benefits that inlining may sometimes provide. Listing {{#ref code_removal}} shows a Cairo program that calls 2 functions and doesn't return anything:
 
