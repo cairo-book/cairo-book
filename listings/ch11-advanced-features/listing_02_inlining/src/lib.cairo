@@ -1,16 +1,14 @@
 fn main() {
-    let inlined: ByteArray = inlined();
-    let not_inlined: ByteArray = not_inlined();
-
-    println!("First function call is {}", inlined);
-    println!("Second function call is {}", not_inlined);
+    inlined();
+    not_inlined();
 }
 
 #[inline(always)]
-fn inlined() -> ByteArray {
-    "inlined"
+fn inlined() -> felt252 {
+    'inlined'
 }
 
-fn not_inlined() -> ByteArray {
-    "not inlined"
+#[inline(never)]
+fn not_inlined() -> felt252 {
+    'not inlined'
 }
