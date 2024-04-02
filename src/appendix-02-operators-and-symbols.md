@@ -170,4 +170,4 @@ Table B-9 shows the contexts in which curly braces are used.
 | `{...}`      | Block expression |
 | `Type {...}` | `struct` literal |
 
-<span class="caption">Table B-8: Curly Braces</span>
+<span class="caption">Table B-9: Curly Braces</span>
