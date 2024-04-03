@@ -1,28 +1,28 @@
-1	// type declarations
-2	type felt252 = felt252 [storable: true, drop: true, dup: true, zero_sized: false]
+// type declarations
+type felt252 = felt252 [storable: true, drop: true, dup: true, zero_sized: false]
 
-3	// libfunc declarations
-4	libfunc function_call<user@main::main::not_inlined> = function_call<user@main::main::not_inlined>
-5	libfunc felt252_const<1> = felt252_const<1>
-6	libfunc store_temp<felt252> = store_temp<felt252>
-7	libfunc felt252_add = felt252_add
-8	libfunc felt252_const<2> = felt252_const<2>
+// libfunc declarations
+libfunc function_call<user@main::main::not_inlined> = function_call<user@main::main::not_inlined>
+libfunc felt252_const<1> = felt252_const<1>
+libfunc store_temp<felt252> = store_temp<felt252>
+libfunc felt252_add = felt252_add
+libfunc felt252_const<2> = felt252_const<2>
 
-9	// statements
-10	function_call<user@main::main::not_inlined>() -> ([0]) // 0
-11	felt252_const<1>() -> ([1]) // 1
-12	store_temp<felt252>([1]) -> ([1]) // 2
-13	felt252_add([1], [0]) -> ([2]) // 3
-14	store_temp<felt252>([2]) -> ([2]) // 4
-15	return([2]) // 5
-16	felt252_const<1>() -> ([0]) // 6
-17	store_temp<felt252>([0]) -> ([0]) // 7
-18	return([0]) // 8
-19	felt252_const<2>() -> ([0]) // 9
-20	store_temp<felt252>([0]) -> ([0]) // 10
-21	return([0]) // 11
+// statements
+00 function_call<user@main::main::not_inlined>() -> ([0])
+01 felt252_const<1>() -> ([1])
+02 store_temp<felt252>([1]) -> ([1])
+03 felt252_add([1], [0]) -> ([2])
+04 store_temp<felt252>([2]) -> ([2])
+05 return([2])
+06 felt252_const<1>() -> ([0])
+07 store_temp<felt252>([0]) -> ([0])
+08 return([0])
+09 felt252_const<2>() -> ([0])
+10 store_temp<felt252>([0]) -> ([0])
+11 return([0])
 
-22	// funcs
-23	main::main::main@0() -> (felt252)
-24	main::main::inlined@6() -> (felt252)
-25	main::main::not_inlined@9() -> (felt252)
+// funcs
+main::main::main@0() -> (felt252)
+main::main::inlined@6() -> (felt252)
+main::main::not_inlined@9() -> (felt252)

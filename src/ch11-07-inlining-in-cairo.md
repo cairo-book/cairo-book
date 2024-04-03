@@ -45,48 +45,53 @@ The Sierra file is structured in three parts:
 - Statements that constitute the program.
 - Declaration of the functions of the program.
 
-The Sierra code statements always match the order of function declarations in the Cairo program. This means that the `return([2])` statement on line 15, which is the first `return` instruction of the Sierra program, corresponds to the `main` function return instruction. The `return([0])` statement on line 18 corresponds to the `inlined` function return instruction, and the `return([0])` on line 21 is the return instruction of the `not_inlined` function.
+The Sierra code statements always match the order of function declarations in the Cairo program. Indeed, the declaration of the functions of the program tells us that:
+- `main` function starts at line 0, and returns a `felt252` on line 5.
+- `inlined` function starts at line 6, and returns a `felt252` on line 8.
+- `not_inlined` function starts at line 9, and returns a `felt252` on line 11.
 
-All statements corresponding to the `main` function are located between lines 10 and 15:
+All statements corresponding to the `main` function are located between lines 0 and 5:
 
 ```rust,noplayground
-10	function_call<user@main::main::not_inlined>() -> ([0]) // 0
-11	felt252_const<1>() -> ([1]) // 1
-12	store_temp<felt252>([1]) -> ([1]) // 2
-13	felt252_add([1], [0]) -> ([2]) // 3
-14	store_temp<felt252>([2]) -> ([2]) // 4
-15	return([2]) // 5
+00 function_call<user@main::main::not_inlined>() -> ([0])
+01 felt252_const<1>() -> ([1])
+02 store_temp<felt252>([1]) -> ([1])
+03 felt252_add([1], [0]) -> ([2])
+04 store_temp<felt252>([2]) -> ([2])
+05 return([2])
 ```
 
-On line 10, we can see the call to the `function_call` libfunc instantiated with the `not_inlined` function and previously declared on line 4, which will execute all the code from lines 19 to 20: 
+The `function_call` libfunc is called on line 0 to execute the `not_inlined` function. This will execute the code from lines 9 to 10 and store the return value in the variable with id `0`.
 
 ```rust,noplayground
-19	felt252_const<2>() -> ([0])
-20	store_temp<felt252>([0]) -> ([0])
+09	felt252_const<2>() -> ([0])
+10	store_temp<felt252>([0]) -> ([0])
 ```
 
-This libfunc call stores the value `2` in `[0]`. After that, Sierra statements from line 11 to 12 are the actually body of the `inlined` function: 
+This code uses a single data type, `felt252`. It uses two library functions - `felt_const<2>`, which returns the constant `felt252` 2, and `store_temp<felt252>`, which pushes a constant value to memory. The first line calls the `felt_const<2>` libfunc to create a variable with id [0]. Then, the second line pushes this variable to memory for later use.
+
+After that, Sierra statements from line 1 to 2 are the actual body of the `inlined` function: 
 
 ```rust,noplayground
-16	felt252_const<1>() -> ([0])
-17	store_temp<felt252>([0]) -> ([0])
+06	felt252_const<1>() -> ([0])
+07	store_temp<felt252>([0]) -> ([0])
 ```
 
-The only difference is that the inlined code will store the `felt252_const` value in `[1]` because `[0]` is not available:
+The only difference is that the inlined code will store the `felt252_const` value in a variable with id `1`, because `[0]` is not available:
 
 ```rust,noplayground
-11	felt252_const<1>() -> ([1])
-12	store_temp<felt252>([1]) -> ([1])
+01	felt252_const<1>() -> ([1])
+02	store_temp<felt252>([1]) -> ([1])
 ```
 
 > Note: in both cases (inlined or not), the `return` instruction of the function being called is not executed, as this would lead to prematurely end the execution of the `main` function. Instead, return values of `inlined` and `not_inlined` will be added and the result will be returned.
 
-Lines 13 to 15 contains the Sierra statements that will add the values contained in `[0]` and `[1]`, store the result in memory and return it:
+Lines 3 to 5 contains the Sierra statements that will add the values contained in variables with ids `[0]` and `[1]`, store the result in memory and return it:
 
 ```rust,noplayground
-13	felt252_add([1], [0]) -> ([2]) // 3
-14	store_temp<felt252>([2]) -> ([2]) // 4
-15	return([2]) // 5
+03	felt252_add([1], [0]) -> ([2])
+04	store_temp<felt252>([2]) -> ([2])
+05	return([2])
 ```
 
 Now, let's take a look at the Casm code corresponding to this program to really understand the benefits of inlining.
@@ -109,24 +114,26 @@ Here is the Casm code for our previous program example:
 11	ret
 ```
 
-Each instruction and each argument for any instruction increments the Program Counter (known as PC) by 1. The `call` and `ret` instructions allow implementation of a function stack:
-- `call` instruction acts like a jump instruction and updates the PC and the Frame Pointer (known as `fp`) registers.
-- `ret` resets the value of `fp` to the value prior to the `call` instruction, and jump back and continue the execution of the code following the call instruction.
+Each instruction and each argument for any instruction increment the Program Counter (known as PC) by 1. The `call` and `ret` instructions allow implementation of a function stack:
+- `call` instruction acts like a jump instruction and updates the PC to a given valur.
+- `ret` instruction jump backs just after the `call` instruction and continues the execution of the code.
 
 We can now decompose how these instructions are executed to understand what this code does:
-- `call rel 3`: this instruction updates the PC and the `fp` to 3 and executes the instruction at this location, which is `call rel 9`.
-- `call rel 9` updates the PC and the `fp` to 9 and executes the instruction at this location.
+- `call rel 3`: this instruction updates the PC to 3 and executes the instruction at this location, which is `call rel 9`.
+- `call rel 9` updates the PC to 9 and executes the instruction at this location.
 - `[ap + 0] = 2, ap++`: `ap` stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value `2` in `[ap - 1]`, as we applied `ap++` at the end of the line. Then, we go to the next line which is `ret`.
-- `ret`: resets the value of `fp` and jumps back to the line after `call rel 9`, so we go to line 4.
+- `ret`: jumps back to the line after `call rel 9`, so we go to line 4.
 - `[ap + 0] = 1, ap++` : we store the value `1` in `[ap]` and we apply `ap++` so that `[ap - 1] = 1`. This means we now have `[ap-1] = 1, [ap-2] = 2` and we go to the next line.
 - `[ap + 0] = [ap + -1] + [ap + -2], ap++`: we sum the values `1` and `2` and store the result in `[ap]`, and we apply `ap++` so the result is `[ap-1] = 3, [ap-2] = 1, [ap-3]=2`.
-- `ret`: resets the value of `fp` and jump back to the line after `call rel 3`, so we go to line 2.
+- `ret`: jumps back to the line after `call rel 3`, so we go to line 2.
 - `ret`: last instruction executed as there is no more `call` instruction where to jump right after. This is the actual return instruction of the Cairo `main` function.
 
-Note the pattern of a call instruction followed immediately by a ret instruction. This is a tail recursion, where the return values of the called function are forwarded. To summary: 
+Note the pattern of a `call` instruction followed immediately by a `ret` instruction. This is a tail recursion, where the return values of the called function are forwarded.
+
+To summary: 
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
-- `call rel 9` triggers the call the `not_inlined` function, which returns `2` and actually stores it at the final location `[ap-3]`.
-- The line 4 is the inlined code of the `inlined` function, which returns `1`  and actually stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is inserted and directly executed.
+- `call rel 9` triggers the call the `not_inlined` function, which returns `2` and stores it at the final location `[ap-3]`.
+- The line 4 is the inlined code of the `inlined` function, which returns `1`  and stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is inserted and directly executed.
 - After that, the sum is computed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns the sum, corresponding to the return value of the `main` function.
 
 It is interesting to note that in both Sierra code and Casm code, the `not_inlined` function will be called and executed before the body of the `inlined` function, even though the Cairo program executes `inlined() + not_inlined()`.
