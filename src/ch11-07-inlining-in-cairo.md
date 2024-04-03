@@ -114,11 +114,11 @@ Each instruction and each argument for any instruction increments the Program Co
 - `ret` resets the value of `fp` to the value prior to the `call` instruction, and jump back and continue the execution of the code following the call instruction.
 
 We can now decompose how these instructions are executed to understand what this code does:
-- `call rel 3`: this instruction updates the PC and the `fp` to 3 and executes the instruction at this location, which is `3	call rel 9`.
+- `call rel 3`: this instruction updates the PC and the `fp` to 3 and executes the instruction at this location, which is `call rel 9`.
 - `call rel 9` updates the PC and the `fp` to 9 and executes the instruction at this location.
 - `[ap + 0] = 2, ap++`: `ap` stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value `2` in `[ap - 1]`, as we applied `ap++` at the end of the line. Then, we go to the next line which is `ret`.
-- `ret`: resets the value of `fp` and jump back to the line after `call rel 9`, so we go to line 4.
-- `[ap + 0] = 1, ap++` : We store the value `1` in `[ap]` and we apply `ap++` so that `[ap - 1] = 1`. This means we now have `[ap-1] = 1, [ap-2] = 2` and we go to the next line.
+- `ret`: resets the value of `fp` and jumps back to the line after `call rel 9`, so we go to line 4.
+- `[ap + 0] = 1, ap++` : we store the value `1` in `[ap]` and we apply `ap++` so that `[ap - 1] = 1`. This means we now have `[ap-1] = 1, [ap-2] = 2` and we go to the next line.
 - `[ap + 0] = [ap + -1] + [ap + -2], ap++`: we sum the values `1` and `2` and store the result in `[ap]`, and we apply `ap++` so the result is `[ap-1] = 3, [ap-2] = 1, [ap-3]=2`.
 - `ret`: resets the value of `fp` and jump back to the line after `call rel 3`, so we go to line 2.
 - `ret`: last instruction executed as there is no more `call` instruction where to jump right after. This is the actual return instruction of the Cairo `main` function.
@@ -126,8 +126,8 @@ We can now decompose how these instructions are executed to understand what this
 Note the pattern of a call instruction followed immediately by a ret instruction. This is a tail recursion, where the return values of the called function are forwarded. To summary: 
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
 - `call rel 9` triggers the call the `not_inlined` function, which returns `2` and actually stores it at the final location `[ap-3]`.
-- The line 4 is the inlined code of the `inlined` function, which returns `1`  and actually stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is directly executed.
-- After that, the sum is executed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns of the sum, corresponding to the return value of the `main` function.
+- The line 4 is the inlined code of the `inlined` function, which returns `1`  and actually stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is inserted and directly executed.
+- After that, the sum is computed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns the sum, corresponding to the return value of the `main` function.
 
 It is interesting to note that in both Sierra code and Casm code, the `not_inlined` function will be called and executed before the body of the `inlined` function, even though the Cairo program executes `inlined() + not_inlined()`.
 
