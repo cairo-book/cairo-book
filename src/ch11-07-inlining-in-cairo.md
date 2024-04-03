@@ -161,25 +161,24 @@ In this specific case, we can observe that the compiler has applied additional o
 
 > Because `inlined` return value is never used, the compiler optimizes the `main` function by skipping the `inlined` function code. This will actually reduce the code length while reducing the number of steps required to execute `main`.
 
-On the opposite, line 12 uses the `function_call` libfunc to execute normally the `not_inlined` function. This means that all the code from line 19 to 21 will be executed:
+On the opposite, line 0 uses the `function_call` libfunc to execute normally the `not_inlined` function. This means that all the code from line 7 to 8 will be executed:
 
 ```rust,noplayground
-19	felt252_const<133508164995039583817065828>() -> ([0]) // 7
-20	store_temp<felt252>([0]) -> ([0]) // 8
-21	return([0]) // 9
+07 felt252_const<133508164995039583817065828>() -> ([0])
+08 store_temp<felt252>([0]) -> ([0])
 ```
 
-Line 21 stores the `felt252` return value in `[0]`.  This value is then dropped on line 13, as it is not used in the `main` function: 
+This value stored in the variable with id `0` is then dropped on line 1, as it is not used in the `main` function: 
 
 ```rust,noplayground
-13	drop<felt252>([0]) -> () // 1
+01 drop<felt252>([0]) -> ()
 ```
 
 Finally, as the `main` function doesn't return any value, a variable of unit type `()` is created and returned: 
 
 ```rust,noplayground
-14	struct_construct<Unit>() -> ([1]) // 2
-15	return([1]) // 3
+02 struct_construct<Unit>() -> ([1])
+03 return([1])
 ```
 
 ## Summary
