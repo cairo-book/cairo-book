@@ -89,6 +89,50 @@ Lines 13 to 15 contains the Sierra statements that will add the values contained
 15	return([2]) // 5
 ```
 
+Now, let's take a look at the Casm code corresponding to this program to really understand the benefits of inlining.
+
+## Casm Code Explanations
+
+Here is the Casm code for our previous program example:
+
+```rust,noplayground
+1	call rel 3
+2	ret
+3	call rel 9
+4	[ap + 0] = 1, ap++
+5	[ap + 0] = [ap + -1] + [ap + -2], ap++
+6	ret
+7	[ap + 0] = 1, ap++
+8	ret
+9	[ap + 0] = 2, ap++
+10	ret
+11	ret
+```
+
+Each instruction and each argument for any instruction increments the Program Counter (known as PC) by 1. The `call` and `ret` instructions allow implementation of a function stack:
+- `call` instruction acts like a jump instruction and updates the PC and the Frame Pointer (known as `fp`) registers.
+- `ret` resets the value of `fp` to the value prior to the `call` instruction, and jump back and continue the execution of the code following the call instruction.
+
+We can now decompose how these instructions are executed to understand what this code does:
+- `call rel 3`: this instruction updates the PC and the `fp` to 3 and executes the instrution at this location, which is `3	call rel 9`.
+- `call rel 9` updates the PC and the `fp` to 9 and executes the instruction at this location.
+- `[ap + 0] = 2, ap++`: `ap` stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value `2` in `[ap - 1]`, as we applied `ap++` at the end of the line. Then, we go to the next line which is `ret`.
+- `ret`: resets the value of `fp` and jump back to the line after `call rel 9`, so we go to line 4.
+- `[ap + 0] = 1, ap++` : We store the value `1` in `[ap]` and we apply `ap++` so that `[ap - 1] = 1`. This means we now have `[ap-1] = 1, [ap-2] = 2` and we go to the next line.
+- `[ap + 0] = [ap + -1] + [ap + -2], ap++`: we sum the values `1` and `2` and store the result in `[ap]`, and we apply `ap++` so the result is `[ap-1] = 3, [ap-2] = 1, [ap-3]=2`.
+- `ret`: resets the value of `fp` and jump back to the line after `call rel 3`, so we go to line 2.
+- `ret`: last instruction executed as there is no more `call` instruction where to jump right after. This is the actual return instruction of the Cairo `main` function.
+
+Note the pattern of a call instruction followed immediately by a ret instruction. This is a tail recursion, where the return values of the called function are forwarded. To summary: 
+- `call rel 3` corresponds to the `main` function, which is obviously not inlined.
+- `call rel 9` triggers the call the `not_inlined` function, which returns `2` and actually stores it at the final location `[ap-3]`.
+- The line 4 is the inlined code of the `inlined` function, whch returns `1`  and actually stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is directly executed.
+- After that, the sum is executed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns of the sum, corresponding to the return value of the `main` function.
+
+It is interesting to note that in both Sierra code and Casm code, the `not_inlined` function will be called and executed before the body of the `inlined` function, even though the Cairo program executes `inlined() + not_inlined()`.
+
+> The Cams code of our program cleary shows that there is a function call for the `non_inlined` function, while the `inlined` function is correctly inlined.
+
 ## Additional Optimizations
 
 Let's study another program that shows other benefits that inlining may sometimes provide. Listing {{#ref code_removal}} shows a Cairo program that calls 2 functions and doesn't return anything:
