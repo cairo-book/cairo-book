@@ -114,7 +114,7 @@ Each instruction and each argument for any instruction increments the Program Co
 - `ret` resets the value of `fp` to the value prior to the `call` instruction, and jump back and continue the execution of the code following the call instruction.
 
 We can now decompose how these instructions are executed to understand what this code does:
-- `call rel 3`: this instruction updates the PC and the `fp` to 3 and executes the instrution at this location, which is `3	call rel 9`.
+- `call rel 3`: this instruction updates the PC and the `fp` to 3 and executes the instruction at this location, which is `3	call rel 9`.
 - `call rel 9` updates the PC and the `fp` to 9 and executes the instruction at this location.
 - `[ap + 0] = 2, ap++`: `ap` stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value `2` in `[ap - 1]`, as we applied `ap++` at the end of the line. Then, we go to the next line which is `ret`.
 - `ret`: resets the value of `fp` and jump back to the line after `call rel 9`, so we go to line 4.
@@ -126,12 +126,12 @@ We can now decompose how these instructions are executed to understand what this
 Note the pattern of a call instruction followed immediately by a ret instruction. This is a tail recursion, where the return values of the called function are forwarded. To summary: 
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
 - `call rel 9` triggers the call the `not_inlined` function, which returns `2` and actually stores it at the final location `[ap-3]`.
-- The line 4 is the inlined code of the `inlined` function, whch returns `1`  and actually stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is directly executed.
+- The line 4 is the inlined code of the `inlined` function, which returns `1`  and actually stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is directly executed.
 - After that, the sum is executed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns of the sum, corresponding to the return value of the `main` function.
 
 It is interesting to note that in both Sierra code and Casm code, the `not_inlined` function will be called and executed before the body of the `inlined` function, even though the Cairo program executes `inlined() + not_inlined()`.
 
-> The Cams code of our program cleary shows that there is a function call for the `non_inlined` function, while the `inlined` function is correctly inlined.
+> The Cams code of our program clearly shows that there is a function call for the `non_inlined` function, while the `inlined` function is correctly inlined.
 
 ## Additional Optimizations
 
