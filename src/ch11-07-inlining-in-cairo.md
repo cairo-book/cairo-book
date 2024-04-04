@@ -77,7 +77,7 @@ After that, Sierra statements from line 1 to 2 are the actual body of the `inlin
 07	store_temp<felt252>([0]) -> ([0])
 ```
 
-The only difference is that the inlined code will store the `felt252_const` value in a variable with id `1`, because `[0]` is not available:
+The only difference is that the inlined code will store the `felt252_const` value in a variable with id `1`, because `[0]` refers to a variable previously assigned:
 
 ```rust,noplayground
 01	felt252_const<1>() -> ([1])
@@ -114,21 +114,23 @@ Here is the Casm code for our previous program example:
 11	ret
 ```
 
-Each instruction and each argument for any instruction increment the Program Counter (known as PC) by 1. The `call` and `ret` instructions allow implementation of a function stack:
-- `call` instruction acts like a jump instruction and updates the PC to a given valur.
+Don't hesitate to use [cairovm.codes](https://cairovm.codes/) playground to follow along and see all the execution trace.
+
+Each instruction and each argument for any instruction increment the Program Counter (known as PC) by 1. This means that `ret` on line 2 is actually the instruction at `PC = 3`, as the argument `3` corresponds to `PC = 2`.
+
+The `call` and `ret` instructions allow implementation of a function stack:
+- `call` instruction acts like a jump instruction, updating the PC to a given value, whether relatively to the current value using `rel` or absolutely using `abs`.
 - `ret` instruction jump backs just after the `call` instruction and continues the execution of the code.
 
 We can now decompose how these instructions are executed to understand what this code does:
-- `call rel 3`: this instruction updates the PC to 3 and executes the instruction at this location, which is `call rel 9`.
-- `call rel 9` updates the PC to 9 and executes the instruction at this location.
-- `[ap + 0] = 2, ap++`: `ap` stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value `2` in `[ap - 1]`, as we applied `ap++` at the end of the line. Then, we go to the next line which is `ret`.
+- `call rel 3`: this instruction increments the PC by 3 and executes the instruction at this location, which is `call rel 9` at `PC = 4`.
+- `call rel 9` increments the PC by 9 and executes the instruction at `PC = 13`, which is actually line 9.
+- `[ap + 0] = 2, ap++`: `ap` stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value `2` in the next free memory cell indicated by the current value of `ap`, after which we increment `ap` by 1. Then, we go to the next line which is `ret`.
 - `ret`: jumps back to the line after `call rel 9`, so we go to line 4.
 - `[ap + 0] = 1, ap++` : we store the value `1` in `[ap]` and we apply `ap++` so that `[ap - 1] = 1`. This means we now have `[ap-1] = 1, [ap-2] = 2` and we go to the next line.
 - `[ap + 0] = [ap + -1] + [ap + -2], ap++`: we sum the values `1` and `2` and store the result in `[ap]`, and we apply `ap++` so the result is `[ap-1] = 3, [ap-2] = 1, [ap-3]=2`.
 - `ret`: jumps back to the line after `call rel 3`, so we go to line 2.
 - `ret`: last instruction executed as there is no more `call` instruction where to jump right after. This is the actual return instruction of the Cairo `main` function.
-
-Note the pattern of a `call` instruction followed immediately by a `ret` instruction. This is a tail recursion, where the return values of the called function are forwarded.
 
 To summary: 
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
@@ -185,4 +187,4 @@ Finally, as the `main` function doesn't return any value, a variable of unit typ
 
 Inlining is a compiler optimization technique that can be very useful in various situations. Inlining a function allows to get rid of the overhead of calling a function with the `function_call` libfunc by injecting the Sierra code directly in the caller function's context, while potentially optimizing the Sierra code executed to reduce the number of steps. If used effectively, inlining can even reduce code length as shown in the previous example.
 
-Nevertheless, applying the `inline` attribute to a function with a lot of code and few parameters might result in an increased code size, especially if the inlined function is used many times in the codebase. Use inlining only where it makes sense to use it.
+Nevertheless, applying the `inline` attribute to a function with a lot of code and few parameters might result in an increased code size, especially if the inlined function is used many times in the codebase. Use inlining only where it makes sense, and be aware that the compiler handles inlining by default. Therefore, manually applying inlining is not recommended in most situations, but can help improve and fine-tune your code's behavior.
