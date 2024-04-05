@@ -1,0 +1,28 @@
+// type declarations
+type felt252 = felt252 [storable: true, drop: true, dup: true, zero_sized: false]
+type Unit = Struct<ut@Tuple> [storable: true, drop: true, dup: true, zero_sized: true]
+
+// libfunc declarations
+libfunc function_call<user@main::main::not_inlined> = function_call<user@main::main::not_inlined>
+libfunc drop<felt252> = drop<felt252>
+libfunc struct_construct<Unit> = struct_construct<Unit>
+libfunc felt252_const<29676284458984804> = felt252_const<29676284458984804>
+libfunc store_temp<felt252> = store_temp<felt252>
+libfunc felt252_const<133508164995039583817065828> = felt252_const<133508164995039583817065828>
+
+// statements
+00 function_call<user@main::main::not_inlined>() -> ([0])
+01 drop<felt252>([0]) -> ()
+02 struct_construct<Unit>() -> ([1])
+03 return([1])
+04 felt252_const<29676284458984804>() -> ([0])
+05 store_temp<felt252>([0]) -> ([0])
+06 return([0])
+07 felt252_const<133508164995039583817065828>() -> ([0])
+08 store_temp<felt252>([0]) -> ([0])
+09 return([0])
+
+// funcs
+main::main::main@0() -> (Unit)
+main::main::inlined@4() -> (felt252)
+main::main::not_inlined@7() -> (felt252)
