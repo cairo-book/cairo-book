@@ -32,7 +32,7 @@ Let's introduce a short example to illustrate the mechanisms of inlining in Cair
 ```
 
 {{#label inlining}}
-<span class="caption">Listing {{#ref inlining}}: A small Cairo program that calls 2 functions, with one of them being inlined.</span>
+<span class="caption">Listing {{#ref inlining}}: A small Cairo program that adds the return value of 2 functions, with one of them being inlined.</span>
 
 Let's take a look at the corresponding Sierra code to see how inlining works under the hood:
 
@@ -68,7 +68,7 @@ The `function_call` libfunc is called on line 0 to execute the `not_inlined` fun
 10	store_temp<felt252>([0]) -> ([0])
 ```
 
-This code uses a single data type, `felt252`. It uses two library functions - `felt_const<2>`, which returns the constant `felt252` 2, and `store_temp<felt252>`, which pushes a constant value to memory. The first line calls the `felt_const<2>` libfunc to create a variable with id [0]. Then, the second line pushes this variable to memory for later use.
+This code uses a single data type, `felt252`. It uses two library functions - `felt_const<2>`, which returns the constant `felt252` 2, and `store_temp<felt252>`, which pushes a constant value to memory. The first line calls the `felt_const<2>` libfunc to create a variable with id `0`. Then, the second line pushes this variable to memory for later use.
 
 After that, Sierra statements from line 1 to 2 are the actual body of the `inlined` function: 
 
@@ -86,7 +86,7 @@ The only difference is that the inlined code will store the `felt252_const` valu
 
 > Note: in both cases (inlined or not), the `return` instruction of the function being called is not executed, as this would lead to prematurely end the execution of the `main` function. Instead, return values of `inlined` and `not_inlined` will be added and the result will be returned.
 
-Lines 3 to 5 contains the Sierra statements that will add the values contained in variables with ids `[0]` and `[1]`, store the result in memory and return it:
+Lines 3 to 5 contain the Sierra statements that will add the values contained in variables with ids `0` and `1`, store the result in memory and return it:
 
 ```rust,noplayground
 03	felt252_add([1], [0]) -> ([2])
@@ -120,7 +120,7 @@ Each instruction and each argument for any instruction increment the Program Cou
 
 The `call` and `ret` instructions allow implementation of a function stack:
 - `call` instruction acts like a jump instruction, updating the PC to a given value, whether relatively to the current value using `rel` or absolutely using `abs`.
-- `ret` instruction jump backs just after the `call` instruction and continues the execution of the code.
+- `ret` instruction jumps back right after the `call` instruction and continues the execution of the code.
 
 We can now decompose how these instructions are executed to understand what this code does:
 - `call rel 3`: this instruction increments the PC by 3 and executes the instruction at this location, which is `call rel 9` at `PC = 4`.
