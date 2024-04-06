@@ -36,13 +36,13 @@ The function `request_my_randomness` initiates a request for verifiable randomne
 ### `request_my_randomness` Inputs
 
 1. `seed`: A value used to initialize the randomness generation process. This should be unique for each request to ensure unpredictable results.
-2. `callback_address`: The contract address where the receive_random_words function will be called to deliver the generated randomness. It is typically the address of your deployed contract implimenting pragma vrf.
+2. `callback_address`: The contract address where the receive_random_words function will be called to deliver the generated randomness. It is typically the address of your deployed contract implementing pragma vrf.
 3. `callback_fee_limit`: The maximum amount of gas you're willing to spend on executing the receive_random_words callback function.
 4. `publish_delay`: The minimum delay (in blocks) between requesting randomness and the Oracle fulfilling the request. This allows time for the Oracle to generate the randomness and proof.
 5. `num_words`: The number of random values (each represented as a felt252) you want to receive in a single callback.
 6. `calldata`: Additional data you want to pass to the receive_random_words callback function. This could be used for context or to customize the behavior of that function.
 
-Listing {{#ref pragma_vrf_contract}} shows a basic implimentation of a randomness contract using Pragma VRF:
+Listing {{#ref pragma_vrf_contract}} shows a basic implementation of a randomness contract using Pragma VRF:
 
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:randomness_contract}}
