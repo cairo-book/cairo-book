@@ -75,14 +75,18 @@ mod Randomness {
     }
 
     #[constructor]
-    fn constructor(ref self: ContractState, randomness_contract_address: ContractAddress, admin: ContractAddress) {
+    fn constructor(
+        ref self: ContractState,
+        randomness_contract_address: ContractAddress,
+        admin: ContractAddress
+    ) {
         self.randomness_contract_address.write(randomness_contract_address);
 
         // AccessControl-related initialization
         self.accesscontrol.initializer();
         self.accesscontrol._grant_role(DEFAULT_ADMIN_ROLE, admin);
     }
-    
+
     #[abi(embed_v0)]
     impl Randomness of IRandomness<ContractState> {
         fn get_last_random(self: @ContractState) -> felt252 {
@@ -133,7 +137,6 @@ mod Randomness {
         }
         //ANCHOR_END: request_my_randomness
 
-
         fn receive_random_words(
             ref self: ContractState,
             requestor_address: ContractAddress,
@@ -183,3 +186,4 @@ mod Randomness {
 //ANCHOR_END: randomness_contract
 
 //ANCHOR_END: all
+
