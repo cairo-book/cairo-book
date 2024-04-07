@@ -2,7 +2,7 @@
 
 When writing a program, it is quite common to print some data to the console, either for the normal process of the program or for debugging purpose. In this chapter, we describe the options you have to print simple and complex data types.
 
-## Printing standard data types
+## Printing Standard Data Types
 
 Cairo provides two macros to print standard data types:
 
@@ -21,6 +21,7 @@ Here are some examples:
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_08_print_macro/src/lib.cairo}}
 ```
+> `print!` and `println!` macros use the `fmt` method of the `Display` trait under the hood, and are therefore used to print the value of types that implement it. This is the case for basic data types, but not for more complexe ones. If you try to print complex data types values with these macros, e.g., for debugging purpose, you will get an error. In that case, you can either [manually implement](./ch11-09-printing.md#printing-custom-data-types) the `fmt` method for your type, or use the `Debug` trait (see [below](./ch11-09-printing.md#print-debug-traces)).
 
 ## Formatting
 
@@ -31,19 +32,27 @@ Cairo also provides a useful macro to handle strings formatting: `format!`. This
 {{#include ../listings/ch11-advanced-features/no_listing_06_format_macro/src/lib.cairo}}
 ```
 
-## Printing custom data types
+## Printing Custom Data Types
 
-If you try to print a custom data type with `print!` and `println!` macros, you'll get an error telling you that the `Display` trait is not implemented for your custom type.
+As previously explained, if you try to print the value of a custom data type with `print!` or `println!` macros, you'll get an error telling you that the `Display` trait is not implemented for your custom type.
 
 Here is the `Display` trait to implement:
 
-```rust
+```rust,noplayground
 trait Display<T> {
     fn fmt(self: @T, ref f: Formatter) -> Result<(), Error>;
 }
 ```
 
-The second parameter `f` is a `Formatter`, which is just a struct containing a `ByteArray`, representing the pending result of formatting.
+The second parameter `f` is a `Formatter`, which is just a struct containing a `ByteArray`, representing the pending result of formatting: 
+
+```rust,noplayground
+#[derive(Default, Drop)]
+pub struct Formatter {
+    /// The pending result of formatting.
+    pub buffer: ByteArray,
+}
+```
 
 Knowing this, here is an example of how to implement the `Display` trait for a custom `Point` struct:
 
@@ -52,18 +61,26 @@ Knowing this, here is an example of how to implement the `Display` trait for a c
 ```
 
 Cairo also provides the `write!` and `writeln!` macros to write formatted strings in a formatter.
-Here are some examples:
+Here are a short example using `write!` macro to concatenate multiple strings on the same line and then print the result:
 
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_07_write_macro/src/lib.cairo}}
 ```
 
-So, you can also implement the `Display` trait for the `Point` struct as follows:
+It is also possible to implement the `Display` trait for the `Point` struct using these macros, as shown here:
 
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_10_display_trait_with_write/src/lib.cairo}}
 ```
 
-## Print debug traces
+> Printing complex data types this way might not be ideal as it requires additional steps to allow the use of `print!` and `println!`. If you need to print complexe data types, especially when debugging, use the `Debug` trait described just after instead.
 
-To print some debug data, Cairo provides the derivable trait `Debug`. Look at the [Derivable Traits](appendix-03-derivable-traits.md) appendix, for more details.
+## Print Debug Traces
+
+Cairo provides the derivable trait `Debug` to print the value of variables when debugging. Simply add `:?` within curly brackets `{}` placeholders in a `print!` or `println!` macro string input.
+
+ This trait is very useful and is implemented by default for basic data types. It can also be simply derived on complex data types using the `derive[Debug]` attribute, as long as all types they contain implement it. It allows to get rid of manually implementing extra-code to print complexe data types values.
+
+ Note that `assert_xx!` macros used in tests require the provided values to implement the `Debug` trait, as they also print the result in case of assertion failure
+
+Please refer to the [Derivable Traits](appendix-03-derivable-traits.md#debug-trait-for-printing-and-debugging) appendix, for more details about the `Debug` trait and its usage for printing value when debugging.
