@@ -78,34 +78,11 @@ In hyphenated words, do not capitalize the parts following the hyphens.
 > **Built-in Targets**<br>
 > **Allowed-by-default Lints**
 
-## Linking
-
-### Adding Links
-
-To simplify link maintenance, follow the rules below:
-
-- Use [link variables][stackoverflow-link-var] with variable names that give a clue on where the link leads.
-- Define link variables right before the end of the section/subsection where they are used.
-
-[stackoverflow-link-var]: https://stackoverflow.com/a/27784490/10308406
-
-Example:
-
-```md
-[`scarb`][scarb-github] Scarb bundles the Cairo compiler and the Cairo language server together in an easy-to-install package so that you can start writing Cairo code right away.
-
-[scarb-github]: https://github.com/software-mansion/scarb
-```
-
 ### Formatting
 
 The Cairo Book usually use the following link formatting:
 
 > Instead, you must define a [Trait](https://book.cairo-lang.org/ch08-02-traits-in-cairo.html) and a, ...
-
-> Look at the [Understanding Ownership](https://book.cairo-lang.org/ch04-00-understanding-ownership.html) chapter for more details...
-
-[The Rust Programming Language](https://github.com/rust-lang-ja/book-ja/blob/master-ja/style-guide.md) book also suggests:
 
 - Make intra-book links relative, so they work both online and locally
 
@@ -118,7 +95,7 @@ Also, consider the following:
 - Do not provide a link to the same location repeatedly in the same or adjacent paragraphs without a good reason, especially using different link text.
 - Do not use the same link text to refer to different locations.
 
-  > `scarb` might have a section in a book and a github repo. In this case, see the [`espup`](https://book.cairo-lang.org/ch01-01-installation.html) section and [`scarb` repo](https://github.com/software-mansion/scarb).
+  > `scarb` might have a section in a book and a github repo. In this case, see the [`scarb`](https://book.cairo-lang.org/ch01-01-installation.html) section and [`scarb` repo](https://github.com/software-mansion/scarb).
 
 See also, the [Using `monospace`](#using-monospace) section.
 
@@ -129,23 +106,19 @@ See also, the [Using `monospace`](#using-monospace) section.
 The following types of lists are usually used in documentation:
 
 - **Bullet list** -- use it if the order or items is not important
-- **Numbered list** -- use it if the order of items is important, such as when describing a process
-  - **Procedure** -- special type of numbered list that gives steps to achieve some goal (to achieve this, do this); for an example of a procedure, see the [Usage](https://doc.rust-lang.org/nightly/rustc/profile-guided-optimization.html#usage) section in The rustc book.
 
 ### Formatting
 
 The Cairo Book usually use the following list formatting:
 
-- Finish an introductory sentence with a colon.
+- Finish an introductory sentence with a dot.
 - Capitalize the first letter of each bullet point.
 
-  > Using C or C++ inside of a Rust project consists of two major parts:
-  >
-  > - Wrapping the exposed C API for use with Rust
-  > - Building your C or C++ code to be integrated with the Rust code
+  > - The package source code, identified by the package name and the crate root, which is the main entry point of the package.
+  > - A subset of the package metadata that identifies crate-level settings of the Cairo compiler, for example, the edition field in the Scarb.toml file.
 
 - If a bullet point is a full sentence, you can end it with a full stop.
-  - If a list has at least one full stop, end all other list items with a full stop.
+- If a list has at least one full stop, end all other list items with a full stop.
 
   > To reliably interact with these peripherals:
   >
@@ -171,10 +144,6 @@ Use monospace font for the following items:
 
   The [Installation](https://book.cairo-lang.org/ch01-01-installation.html) chapter in the Cairo Programming Language book suggests:
 
-  - Start the terminal commands with `$`
-  - Output of previous commands should not start with `$`
-  - For PowerShell-specific examples, use `>` instead of `$`
-
   [The Rust Programming Language](https://github.com/rust-lang-ja/book-ja/blob/master-ja/style-guide.md) book also suggests:
 
   - Use `bash` syntax highlighting
@@ -185,23 +154,16 @@ Use monospace font for the following items:
   > Writing a program that prints `Hello, world!`
 
 - Data types: `u8`, `u128`
-- Names of crates, traits, libraries,
-- Command line tools, plugins, packages
-- Files: `Scarb.toml`
-- Images and containers: `idf-rust`
-- Architectures and targets
-
-  > The `RISC-V` and `Xtensa` architectures.
 
 ### Monospace and Other Types of Formatting
 
 Monospace font can also be used in:
 
-- links
-
-  > [`String`](https://doc.rust-lang.org/std/string/struct.String.html) is a string type provided by ...
-
 - headings
+
+  > **Serializing with `Serde`**
+
+- Important information, notes...
 
   > **Serializing with `Serde`**
 
@@ -273,8 +235,6 @@ In markdown:
 ```md
 > ⚠️ **Note**: Write your note.
 ```
-
-## Appendix A Existing Style Guides
 
 ### Documentation
 
