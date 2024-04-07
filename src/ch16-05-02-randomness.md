@@ -51,13 +51,13 @@ The function `request_my_randomness` initiates a request for verifiable randomne
 5. `num_words`: The number of random values (each represented as a `felt252`) you want to receive in a single callback.
 6. `calldata`: Additional data you want to pass to the `receive_random_words` callback function.
 
-The function `receieve_random_words` is a callback triggered by the Pragma Randomness Oracle when it has generated the randomness requested by your contract.
+The function `receive_random_words` is a callback triggered by the Pragma Randomness Oracle when it has generated the randomness requested by your contract.
 
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:receive_random_words}}
 ```
 
-### `receieve_randomn_words` Inputs
+### `receive_randomn_words` Inputs
 
 1. `requester_address`: The contract address that initiated the randomness request.
 2. `request_id`: A unique identifier assigned to the randomness request.
