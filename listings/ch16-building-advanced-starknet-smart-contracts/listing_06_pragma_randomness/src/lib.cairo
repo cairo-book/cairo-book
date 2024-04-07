@@ -1,11 +1,11 @@
 //ANCHOR: all
 use starknet::ContractAddress;
 
-
 //ANCHOR: randomness_interface
 #[starknet::interface]
 pub trait IRandomness<TContractState> {
     fn get_last_random(self: @TContractState) -> felt252;
+
     //ANCHOR: request_my_randomness
     fn request_my_randomness(
         ref self: TContractState,
@@ -16,7 +16,10 @@ pub trait IRandomness<TContractState> {
         num_words: u64,
         calldata: Array<felt252>
     );
+
     //ANCHOR_END: request_my_randomness
+
+    //ANCHOR: receive_random_words
     fn receive_random_words(
         ref self: TContractState,
         requester_address: ContractAddress,
@@ -24,6 +27,8 @@ pub trait IRandomness<TContractState> {
         random_words: Span<felt252>,
         calldata: Array<felt252>
     );
+    //ANCHOR_END: receive_random_words
+
     fn withdraw_funds(ref self: TContractState, receiver: ContractAddress);
 }
 //ANCHOR_END: randomness_interface
@@ -32,7 +37,7 @@ pub trait IRandomness<TContractState> {
 #[starknet::contract]
 mod Randomness {
     use starknet::{ContractAddress};
-    use starknet::info::{get_block_number, get_caller_address, get_contract_address};
+    use starknet::{get_block_number, get_caller_address, get_contract_address};
     use pragma_lib::abi::{IRandomnessDispatcher, IRandomnessDispatcherTrait};
     use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
     use openzeppelin::access::accesscontrol::AccessControlComponent;
@@ -91,7 +96,8 @@ mod Randomness {
     impl Randomness of IRandomness<ContractState> {
         fn get_last_random(self: @ContractState) -> felt252 {
             let last_random = self.last_random_storage.read();
-            return last_random;
+
+            last_random
         }
 
         //ANCHOR:  request_my_randomness
@@ -132,8 +138,6 @@ mod Randomness {
 
             let current_block_number = get_block_number();
             self.min_block_number_storage.write(current_block_number + publish_delay);
-
-            return ();
         }
         //ANCHOR_END: request_my_randomness
 
@@ -167,8 +171,6 @@ mod Randomness {
             let random_word = *random_words.at(0);
 
             self.last_random_storage.write(random_word);
-
-            return ();
         }
 
         fn withdraw_funds(ref self: ContractState, receiver: ContractAddress) {
