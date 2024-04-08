@@ -174,8 +174,6 @@ ownable_component::Event`).
    Indeed, we don't want to expose externally the functions defined in this
    impl. However, we might still want to access them internally.
 
-<!-- TODO: Add content on impl aliases -->
-
 For example, to embed the `Ownable` component defined above, we would do the
 following:
 
@@ -205,47 +203,3 @@ and audited components for everything else.
 Components can even [depend](./ch16-02-02-component-dependencies.md) on other components by restricting the
 `TContractstate` they're generic on to implement the trait of another component.
 Before we dive into this mechanism, let's first look at [how components work under the hood](./ch16-02-01-under-the-hood.md).
-
-## Troubleshooting
-
-You might encounter some errors when trying to implement components.
-Unfortunately, some of them lack meaningful error messages to help debug. This
-section aims to provide you with some pointers to help you debug your code.
-
-- `Trait not found. Not a trait.`
-
-  This error can occur when you're not importing the component's impl block
-  correctly in your contract. Make sure to respect the following syntax:
-
-  ```rust
-  #[abi(embed_v0)]
-  impl IMPL_NAME = upgradeable::EMBEDDED_NAME<ContractState>
-  ```
-
-  Referring to our previous example, this would be:
-
-  ```rust
-  #[abi(embed_v0)]
-  impl OwnableImpl = upgradeable::Ownable<ContractState>
-  ```
-
-- `Plugin diagnostic: name is not a substorage member in the contract's Storage.
-Consider adding to Storage: (...)`
-
-  The compiler helps you a lot debugging this by giving you recommendation on
-  the action to take. Basically, you forgot to add the component's storage to
-  your contract's storage. Make sure to add the path to the component's storage
-  annotated with the `#[substorage(v0)]` attribute to your contract's storage.
-
-- `Plugin diagnostic: name is not a nested event in the contract's Event enum.
-Consider adding to the Event enum:`
-
-  Similar to the previous error, the compiler, you forgot to add the component's
-  events to your contract's events. Make sure to add the path to the component's
-  events to your contract's events.
-
-- Components functions are not accessible externally
-
-  This can happen if you forgot to annotate the component's impl block with
-  `#[abi(embed_v0)]`. Make sure to add this annotation when embedding the
-  component's impl in your contract.

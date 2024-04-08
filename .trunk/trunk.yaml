@@ -19,7 +19,7 @@ runtimes:
 lint:
   enabled:
     - actionlint@1.6.27
-    - checkov@3.2.50
+    - checkov@3.2.53
     - clippy@1.65.0
     - git-diff-check
     - markdownlint@0.39.0
