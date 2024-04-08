@@ -1,6 +1,6 @@
 # Appendix A - Common Starknet Error Messages
 
-Similarly to Cairo common error messages, a few errors are encountered very oftenly, and it is worth listing them in a dedicated appendix.
+Similarly to Cairo common error messages, a few errors are encountered very often, and it is worth listing them in a dedicated appendix.
 
 ## General Error Messages
 
@@ -19,6 +19,7 @@ section aims to provide you with some pointers to help you debug your code.
   #[abi(embed_v0)]
   impl IMPL_NAME = PATH_TO_COMPONENT::EMBEDDED_NAME<ContractState>
   ```
+
 - `Plugin diagnostic: name is not a substorage member in the contract's Storage. Consider adding to Storage: (...)`: the compiler helps you a lot debugging this by giving you recommendation on the action to take. Basically, you forgot to add the component's storage to your contract's storage. Make sure to add the path to the component's storage annotated with the `#[substorage(v0)]` attribute to your contract's storage.
 
 - `Plugin diagnostic: name is not a nested event in the contract's Event enum. Consider adding to the Event enum:` similar to the previous error, the compiler tells you that you forgot to add the component's events to your contract's events. Make sure to add the path to the component's events to your contract's events.
