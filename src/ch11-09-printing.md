@@ -35,7 +35,13 @@ Cairo also provides a useful macro to handle strings formatting: `format!`. This
 
 ## Printing Custom Data Types
 
-As previously explained, if you try to print the value of a custom data type with `print!` or `println!` macros, you'll get an error telling you that the `Display` trait is not implemented for your custom type.
+As previously explained, if you try to print the value of a custom data type with `print!` or `println!` macros, you'll get an error telling you that the `Display` trait is not implemented for your custom type: 
+
+```shell
+error: Trait has no implementation in context: core::fmt::Display::<package_name::struct_name>
+```
+
+The `println!` macro can do many kinds of formatting, and by default, the curly brackets tell `println!` to use formatting known as `Display`: output intended for direct end user consumption. The primitive types we’ve seen so far implement `Display` by default because there’s only one way you’d want to show a `1` or any other primitive type to a user. But with structs, the way `println!` should format the output is less clear because there are more display possibilities: Do you want commas or not? Do you want to print the curly brackets? Should all the fields be shown? Due to this ambiguity, Cairo doesn’t try to guess what we want, and structs don’t have a provided implementation of `Display` to use with `println!` and the `{}` placeholder.
 
 Here is the `Display` trait to implement:
 

@@ -32,7 +32,7 @@ Example:
 {{#include ../listings/appendix/listing_02_copy/src/lib.cairo}}
 ```
 
-## `Debug` Trait for Printing and Debugging
+## `Debug` for Printing and Debugging
 
 The `Debug` trait enables debug formatting in format strings, which you indicate by adding `:?` within `{}` placeholders.
 
