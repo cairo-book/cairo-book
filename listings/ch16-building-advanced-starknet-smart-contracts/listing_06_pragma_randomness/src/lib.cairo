@@ -16,7 +16,6 @@ pub trait IRandomness<TContractState> {
         num_words: u64,
         calldata: Array<felt252>
     );
-
     //ANCHOR_END: request_my_randomness
 
     //ANCHOR: receive_random_words
@@ -37,7 +36,9 @@ pub trait IRandomness<TContractState> {
 #[starknet::contract]
 mod Randomness {
     use starknet::{ContractAddress};
-    use starknet::{get_block_number, get_caller_address, get_contract_address};
+    use starknet::{
+        contract_address_const, get_block_number, get_caller_address, get_contract_address
+    };
     use pragma_lib::abi::{IRandomnessDispatcher, IRandomnessDispatcherTrait};
     use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
     use openzeppelin::access::accesscontrol::AccessControlComponent;
@@ -96,7 +97,6 @@ mod Randomness {
     impl Randomness of IRandomness<ContractState> {
         fn get_last_random(self: @ContractState) -> felt252 {
             let last_random = self.last_random_storage.read();
-
             last_random
         }
 
@@ -120,14 +120,14 @@ mod Randomness {
             // Approve the randomness contract to transfer the callback fee
             // You would need to send some ETH to this contract first to cover the fees
             let eth_dispatcher = ERC20ABIDispatcher {
-                contract_address: 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7 // ETH Contract Address
-                    .try_into()
-                    .unwrap()
+                contract_address: contract_address_const::<
+                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                >() // ETH Contract Address
             };
             eth_dispatcher
                 .approve(
                     randomness_contract_address,
-                    (callback_fee_limit + (callback_fee_limit / 5)).into()
+                    (callback_fee_limit + callback_fee_limit / 5).into()
                 );
 
             // Request the randomness
@@ -159,26 +159,16 @@ mod Randomness {
             let min_block_number = self.min_block_number_storage.read();
             assert(min_block_number <= current_block_number, 'block number issue');
 
-            // and that the requester_address is what we expect it to be (can be self
-            // or another contract address), checking for self in this case
-            //let contract_address = get_contract_address();
-            //assert(requester_address == contract_address, 'requester is not self');
-
-            // Optionally: Can also make sure that request_id is what you expect it to be,
-            // and that random_words_len==num_words
-
-            // Your code using randomness!
             let random_word = *random_words.at(0);
-
             self.last_random_storage.write(random_word);
         }
 
         fn withdraw_funds(ref self: ContractState, receiver: ContractAddress) {
             self.accesscontrol.assert_only_role(DEFAULT_ADMIN_ROLE);
             let eth_dispatcher = ERC20ABIDispatcher {
-                contract_address: 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7 // ETH Contract Address
-                    .try_into()
-                    .unwrap()
+                contract_address: contract_address_const::<
+                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                >() // ETH Contract Address            
             };
             let balance = eth_dispatcher.balance_of(get_contract_address());
             eth_dispatcher.transfer(receiver, balance);
@@ -188,5 +178,4 @@ mod Randomness {
 //ANCHOR_END: randomness_contract
 
 //ANCHOR_END: all
-
 
