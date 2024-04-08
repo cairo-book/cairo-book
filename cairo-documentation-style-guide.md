@@ -1,6 +1,8 @@
 <!-- omit in toc -->
 # Cairo Documentation Style Guide
 
+_Inspired by the [Rust Documentation Style Guide](https://github.com/esp-rs/book/blob/main/rust-doc-style-guide.md#rust-documentation-style-guide)_
+
 As [The Rust RFC Book](https://rust-lang.github.io/rfcs/2436-style-guide.html#drawbacks) states:
 
 > One can level some criticisms at having a style guide:
@@ -69,7 +71,7 @@ In heading titles, capitalize the first letter of every word **except for**:
 Do not capitalize names of functions, commands, packages, websites, etc.
 
 > **What is `assert`**<br>
-> **Publishing on crates.io**
+> **Bringing Paths into Scope with the `use` Keyword**
 
 See also, the [Using `monospace`](#using-monospace) section.
 
@@ -77,6 +79,25 @@ In hyphenated words, do not capitalize the parts following the hyphens.
 
 > **Built-in Targets**<br>
 > **Allowed-by-default Lints**
+
+## Linking
+
+### Adding Links
+
+To simplify link maintenance, follow the rules below:
+
+- Use [link variables][stackoverflow-link-var] with variable names that give a clue on where the link leads.
+- Define link variables right before the end of the section/subsection where they are used.
+
+[stackoverflow-link-var]: https://stackoverflow.com/a/27784490/10308406
+
+Example:
+
+```md
+[`scarb`][scarb-github] Scarb bundles the Cairo compiler and the Cairo language server together in an easy-to-install package so that you can start writing Cairo code right away.
+
+[scarb-github]: https://github.com/software-mansion/scarb
+```
 
 ### Formatting
 
@@ -106,6 +127,8 @@ See also, the [Using `monospace`](#using-monospace) section.
 The following types of lists are usually used in documentation:
 
 - **Bullet list** -- use it if the order or items is not important
+- **Numbered list** -- use it if the order of items is important, such as when describing a process
+  - **Procedure** -- special type of numbered list that gives steps to achieve some goal (to achieve this, do this); for an example of a procedure, see the [Usage](https://doc.rust-lang.org/nightly/rustc/profile-guided-optimization.html#usage) section in The rustc book.
 
 ### Formatting
 
@@ -113,18 +136,13 @@ The Cairo Book usually use the following list formatting:
 
 - Finish an introductory sentence with a dot.
 - Capitalize the first letter of each bullet point.
-
-  > - The package source code, identified by the package name and the crate root, which is the main entry point of the package.
-  > - A subset of the package metadata that identifies crate-level settings of the Cairo compiler, for example, the edition field in the Scarb.toml file.
-
 - If a bullet point is a full sentence, you can end it with a full stop.
 - If a list has at least one full stop, end all other list items with a full stop.
 
-  > To reliably interact with these peripherals:
+  > A crate is a subset of a package that is used in the actual Cairo compilation. This includes:
   >
-  > - Always use `volatile` methods to read or write to peripheral memory, as it can change at any time.
-  > - In software, we should be able to share any number of read-only accesses to these peripherals.
-  > - If some software should have read-write access to a peripheral, it should hold the only reference to that peripheral.
+  > - The package source code, identified by the package name and the crate root, which is the main entry point of the package.
+  > - A subset of the package metadata that identifies crate-level settings of the Cairo compiler, for example, the edition field in the Scarb.toml file.
 
 - For longer list items, consider using a summary word of phrase to make content [scannable](https://learn.microsoft.com/en-us/style-guide/scannable-content/).
 
@@ -133,8 +151,8 @@ The Cairo Book usually use the following list formatting:
   > - **MSVC**: Recommended ABI, included in ...
   > - **GNU**: ABI used by the GCC toolchain ...
 
-  -  For an example using bold font, see the list in the [Modules Cheat Sheet](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#modules-cheat-sheet) section in The Rust Programming Language book.
-  -  For an example using monospace font, see the [Panicking](https://docs.rust-embedded.org/book/start/panicking.html#panicking) section in The Embedded Rust Book.
+  -  For an example using bold font, see the list in the [Modules Cheat Sheet](https://book.cairo-lang.org/ch07-02-defining-modules-to-control-scope.html#modules-cheat-sheet) section in The Cairo Programming Language book.
+  -  For an example using monospace font, see the [Appendix A](https://book.cairo-lang.org/appendix-01-keywords.html#strict-keywords) section in The Cairo Book.
 
 ## Using `monospace`
 
@@ -142,9 +160,8 @@ Use monospace font for the following items:
 
 - Code snippets
 
-  The [Installation](https://book.cairo-lang.org/ch01-01-installation.html) chapter in the Cairo Programming Language book suggests:
-
-  [The Rust Programming Language](https://github.com/rust-lang-ja/book-ja/blob/master-ja/style-guide.md) book also suggests:
+  - Start the terminal commands with $
+  - Output of previous commands should not start with $
 
   - Use `bash` syntax highlighting
 
@@ -154,10 +171,16 @@ Use monospace font for the following items:
   > Writing a program that prints `Hello, world!`
 
 - Data types: `u8`, `u128`
+- Names of crates, traits, libraries,
+- Command line tools, plugins, packages
 
 ### Monospace and Other Types of Formatting
 
 Monospace font can also be used in:
+
+- links
+
+  > [`String`](https://doc.rust-lang.org/std/string/struct.String.html) is a string type provided by ...
 
 - headings
 
@@ -165,7 +188,7 @@ Monospace font can also be used in:
 
 - Important information, notes...
 
-  > **Serializing with `Serde`**
+  > **Note: This program would not compile without a break condition. For the purpose of the example, we added a `break` statement that will never be reached, but satisfies the compiler.**
 
 ## Using _Italics_
 
@@ -176,8 +199,6 @@ Monospace font can also be used in:
 - Emphasize important concepts or words
 
   > we create an _instance_ of that struct by specifying concrete values for each of the fields
-
-- Do NOT use italics with Espressif product names, such as ESP32.
 
 ## Mode of Narration
 
@@ -197,7 +218,7 @@ Monospace font can also be used in:
 
 - Use _the third person_ (the user, it) when describing how things work from the perspective of hardware or software
 
-  > A driver has to be initialized with an instance of type that implements a certain `trait` of the embedded-hal which is ensured via trait bound and provides its own type instance with a custom set of methods allowing to interact with the driven device.
+  > Cairo uses an immutable memory model, meaning that once a memory cell is written to, it can't be overwritten but only read from. To reflect this immutable memory model, variables in Cairo are immutable by default.
 
 ## Terminology
 
@@ -213,7 +234,7 @@ If you spot other issues with terminology, please add the terms here in alphabet
 ### Recommended Terms
 
 - _Scarb_
-  - Note: always use uppercase _S_
+  - Note: always use uppercase _S_, unless referring to the command `scarb`
 - _VS Code_
   - Use VS Code by default
   - Use only if necessary: Visual Studio Code
@@ -228,7 +249,7 @@ Use the following formatting for notes and warnings:
 
 - Warning
 
-  > 🚨 **Warning**: Use in critical circumstances only, e.g., for irreversible actions or actions potentially harmful to hardware, software, etc.
+  > 🚨 **Warning**: Use in critical circumstances only, e.g., for security risks or actions potentially harmful to users, etc.
 
 In markdown:
 
