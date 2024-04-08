@@ -1,12 +1,12 @@
 # Randomness
 
-Since most well-know blockchains are public ledgers and fundamentally deterministic, generating truly unpredictatable randomness on-chain presents a challenge. This randomness is crucial for fair outcomes in gaming, lotteries, and the unique generation of NFTs. To address this, verifiable random functions (VRFs) provided by oracles offers a solution. VRFs guarantee that the randomness can't be predicted or tampered with, ensuring trust and transparency in these applications.
+Since most well-know blockchains are fundamentally deterministic and public ledgers, generating truly unpredictatable randomness on-chain presents a challenge. This randomness is crucial for fair outcomes in gaming, lotteries, and unique generation of NFTs. To address this, verifiable random functions (VRFs) provided by oracles offers a solution. VRFs guarantee that the randomness can't be predicted or tampered with, ensuring trust and transparency in these applications.
 
 ## Overview on VRFs
 
 Pseudo-random but secure: VRFs use a secret key and a nonce (a unique input) to generate an output that appears random. While technically 'pseudo-random', it's practically impossible for another party to predict the outcome without knowing the secret key.
 
-Verifiable output: VRFs produce not only the random number but also a cryptographic proof that anyone can use to independently verify that the result was generated correctly according to the function's parameters.
+Verifiable output: VRFs produce not only the random number but also a proof that anyone can use to independently verify that the result was generated correctly according to the function's parameters.
 
 [Pragma](https://www.pragma.build/), an oracle on Starknet provides a solution for generating random numbers using VRFs.
 
@@ -14,7 +14,7 @@ Let's dive into how to use Pragma to create randomness in a Cairo contract.
 
 ## Add Pragma as a Dependency
 
-Edit your cairo project's `Scarb.toml` file to include the path to import Pragma.
+Edit your cairo project's `Scarb.toml` file to include the path to use Pragma.
 
 ```toml
 [dependencies]
@@ -44,7 +44,7 @@ The function `request_my_randomness` initiates a request for verifiable randomne
 
 ### `request_my_randomness` Inputs
 
-1. `seed`: A value used to initialize the randomness generation process. This should be unique for each request to ensure unpredictable results.
+1. `seed`: A value used to initialize the randomness generation process. This should be unique to ensure unpredictable results.
 2. `callback_address`: The contract address where the `receive_random_words` function will be called to deliver the generated randomness. It is typically the address of your deployed contract implementing Pragma VRF.
 3. `callback_fee_limit`: The maximum amount of gas you're willing to spend on executing the `receive_random_words` callback function.
 4. `publish_delay`: The minimum delay (in blocks) between requesting randomness and the Oracle fulfilling the request.
@@ -56,6 +56,8 @@ The function `receive_random_words` is a callback triggered by the Pragma Random
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:receive_random_words}}
 ```
+
+<span class="caption">Listing {{#ref receive_random_words}}: `receive_random_word` function</span>
 
 ### `receive_randomn_words` Inputs
 
@@ -77,6 +79,6 @@ Listing {{#ref pragma_vrf_contract}} shows an example randomness contract implem
 
 ### NB: After Contract is Deployed
 
-Once contract is deployed, you need to send enough ETH to the deployed contract address required to cover gas cost of callback function and cost of generating randomness.
+After deploying your contract, ensure it holds sufficient ETH to use the Pragma VRF system. Requesting random values incurs costs associated with both the generation process and the execution of your callback function.
 
 For more information, please refer to the [Pragma](https://docs.pragma.build/Resources/Cairo%201/randomness/randomness) docs.
