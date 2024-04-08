@@ -127,7 +127,7 @@ mod Randomness {
             eth_dispatcher
                 .approve(
                     randomness_contract_address,
-                    (callback_fee_limit + callback_fee_limit / 5).into()
+                    (callback_fee_limit + (callback_fee_limit / 5)).into()
                 );
 
             // Request the randomness
