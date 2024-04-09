@@ -12,7 +12,7 @@ Verifiable output: VRFs produce not only the random number but also a proof that
 
 Let's dive into how to use Pragma to create randomness in a Cairo contract.
 
-## Add Pragma as a Dependency
+### Add Pragma as a Dependency
 
 Edit your cairo project's `Scarb.toml` file to include the path to use Pragma.
 
@@ -21,11 +21,15 @@ Edit your cairo project's `Scarb.toml` file to include the path to use Pragma.
 pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 ```
 
+### Interfaces
+
 Listing {{#ref pragma_vrf_interface}} shows a contract interface of an example randomness contract that uses Pragma VRF:
 
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:randomness_interface}}
 ```
+
+### Description of Entrypoints and their inputs
 
 {{#label pragma_vrf_interface}}
 <span class="caption">Listing {{#ref pragma_vrf_interface}}: Simple Randomness Contract Interface.</span>
@@ -41,7 +45,7 @@ The function `request_my_randomness` initiates a request for verifiable randomne
 
 <span class="caption">Listing {{#ref request_my_randomness}}: `request_my_randomness` function.</span>
 
-### `request_my_randomness` Inputs
+#### `request_my_randomness` Inputs
 
 1. `seed`: A value used to initialize the randomness generation process. This should be unique to ensure unpredictable results.
 2. `callback_address`: The contract address where the `receive_random_words` function will be called to deliver the generated randomness. It is typically the address of your deployed contract implementing Pragma VRF.
@@ -58,14 +62,14 @@ The function `receive_random_words` is a callback triggered by the Pragma Random
 
 <span class="caption">Listing {{#ref receive_random_words}}: `receive_random_word` function.</span>
 
-### `receive_randomn_words` Inputs
+#### `receive_randomn_words` Inputs
 
 1. `requester_address`: The contract address that initiated the randomness request.
 2. `request_id`: A unique identifier assigned to the randomness request.
 3. `random_words`:  An array (span) of the generated random values (represented as `felt252`).
 4. `calldata`:  Additional data passed along with the initial randomness request.
 
-## Example Randomness Contract
+### Contract Example - ( full implimentation )
 
 Listing {{#ref pragma_vrf_contract}} shows an example randomness contract implementing the previous interface:
 
@@ -76,7 +80,7 @@ Listing {{#ref pragma_vrf_contract}} shows an example randomness contract implem
 {{#label pragma_vrf_contract}}
 <span class="caption">Listing {{#ref pragma_vrf_contract}}: Simple Randomness Contract.</span>
 
-### NB: After Contract is Deployed
+#### NB: After Contract is Deployed
 
 After deploying your contract, ensure it holds sufficient ETH to use the Pragma VRF system. Requesting random values incurs costs associated with both the generation process and the execution of your callback function.
 
