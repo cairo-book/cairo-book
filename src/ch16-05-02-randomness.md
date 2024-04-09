@@ -8,6 +8,8 @@ Pseudo-random but secure: VRFs use a secret key and a nonce (a unique input) to 
 
 Verifiable output: VRFs produce not only the random number but also a proof that anyone can use to independently verify that the result was generated correctly according to the function's parameters.
 
+## Randomness Generated with Pragma
+
 [Pragma](https://www.pragma.build/), an oracle on Starknet provides a solution for generating random numbers using VRFs.
 
 Let's dive into how to use Pragma to create randomness in a Cairo contract.
@@ -21,7 +23,7 @@ Edit your cairo project's `Scarb.toml` file to include the path to use Pragma.
 pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 ```
 
-### Interfaces
+### Interface
 
 Listing {{#ref pragma_vrf_interface}} shows a contract interface of an example randomness contract that uses Pragma VRF:
 
@@ -69,7 +71,7 @@ The function `receive_random_words` is a callback triggered by the Pragma Random
 3. `random_words`:  An array (span) of the generated random values (represented as `felt252`).
 4. `calldata`:  Additional data passed along with the initial randomness request.
 
-### Contract Example - ( full implimentation )
+### Contract Example
 
 Listing {{#ref pragma_vrf_contract}} shows an example randomness contract implementing the previous interface:
 
