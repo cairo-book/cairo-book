@@ -114,8 +114,6 @@ mod Randomness {
             let randomness_dispatcher = IRandomnessDispatcher {
                 contract_address: randomness_contract_address
             };
-            let caller = get_caller_address();
-            let _compute_fees = randomness_dispatcher.compute_premium_fee(caller);
 
             // Approve the randomness contract to transfer the callback fee
             // You would need to send some ETH to this contract first to cover the fees
@@ -131,7 +129,7 @@ mod Randomness {
                 );
 
             // Request the randomness
-            let _request_id = randomness_dispatcher
+            randomness_dispatcher
                 .request_random(
                     seed, callback_address, callback_fee_limit, publish_delay, num_words, calldata
                 );
