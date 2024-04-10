@@ -10,7 +10,7 @@ You might encounter error messages when writing Cairo code. Some of them occur v
 
 - `Got an exception while executing a hint: Hint Error: Failed to deserialize param #x.`: this error means that the execution failed because an entrypoint was called without the expected arguments. Make sure that the arguments you provide when calling an entrypoint are correct. There is a classic issue with `u256` variables, which are actually structs of 2 `u128`. Therefore, when calling a function that takes a `u256` as argument, you need to pass 2 values.
   
-- `Item path::item is not visible in this context.`: this error message lets us know that the path to bring an item into scope is correct, but there is a vibility issue. In cairo, all items are private to parent modules by default. To resolve this issue, make sure that all the modules on the path to items and items themselves are declared with `pub(crate)` or `pub` to have accees to them.
+- `Item path::item is not visible in this context.`: this error message lets us know that the path to bring an item into scope is correct, but there is a vibility issue. In cairo, all items are private to parent modules by default. To resolve this issue, make sure that all the modules on the path to items and items themselves are declared with `pub(crate)` or `pub` to have access to them.
 
 - `Identifier not found.`: this error message is a bit aspecific but might indicate that:
   -  A variable is being used before it has been declared. Make sure to declare variables with the `let` keyword.
