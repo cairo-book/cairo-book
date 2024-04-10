@@ -158,5 +158,4 @@
 ## Appendix
 
 - [Appendix](appendix-00.md)
-  - [A - Common Starknet Error Messages](appendix-08-common-starknet-error-messages.md)
-  - [B - System Calls](appendix-09-system-calls.md)
+  - [A - System Calls](appendix-09-system-calls.md)
