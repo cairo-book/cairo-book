@@ -39,6 +39,7 @@ The style guide is based on the best practices collected from the following book
 - [Terminology](#terminology)
   - [Recommended Terms](#recommended-terms)
 - [Admonitions](#admonitions)
+- [Appendix A: Existing Style Guides](#appendix-a-existing-style-guides)
   - [Documentation](#documentation)
   - [Code](#code)
 
@@ -254,6 +255,8 @@ In markdown:
 ```md
 > ⚠️ **Note**: Write your note.
 ```
+
+## Appendix A: Existing Style Guides
 
 ### Documentation
 
