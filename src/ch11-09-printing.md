@@ -2,7 +2,7 @@
 
 When writing a program, it is quite common to print some data to the console, either for the normal process of the program or for debugging purpose. In this chapter, we describe the options you have to print simple and complex data types.
 
-## Printing standard data types
+## Printing Standard Data Types
 
 Cairo provides two macros to print standard data types:
 
@@ -31,7 +31,7 @@ Cairo also provides a useful macro to handle strings formatting: `format!`. This
 {{#include ../listings/ch11-advanced-features/no_listing_06_format_macro/src/lib.cairo}}
 ```
 
-## Printing custom data types
+## Printing Custom Data Types
 
 If you try to print a custom data type with `print!` and `println!` macros, you'll get an error telling you that the `Display` trait is not implemented for your custom type.
 
@@ -64,6 +64,6 @@ So, you can also implement the `Display` trait for the `Point` struct as follows
 {{#include ../listings/ch11-advanced-features/no_listing_10_display_trait_with_write/src/lib.cairo}}
 ```
 
-## Print debug traces
+## Print Debug Traces
 
 To print some debug data, Cairo provides the derivable trait `Debug`. Look at the [Derivable Traits](appendix-03-derivable-traits.md) appendix, for more details.

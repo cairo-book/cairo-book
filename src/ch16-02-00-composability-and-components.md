@@ -67,7 +67,7 @@ ComponentState<TContractState>` (for state-modifying functions) or `self:
 generic over `TContractState`, allowing us to use this component in any
 contract.
 
-### Example: an Ownable component
+### Example: an Ownable Component
 
 > ⚠️ The example shown below has not been audited and is not intended for
 > production use. The authors are not responsible for any damages caused by the
@@ -96,7 +96,7 @@ not be exposed externally and are only meant for internal use. Exposing the
 `assert_only_owner` as part of the interface wouldn't make sense, as it's only
 meant to be used internally by a contract embedding the component.
 
-## A closer look at the `impl` block
+## A Closer Look at the `impl` Block
 
 ```rust
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:impl_signature}}
@@ -143,7 +143,7 @@ For traits that do not have an explicit definition and are generated using
 `TContractState` instead of `ComponentState<TContractState>`, as demonstrated in
 the example with the `InternalTrait`.
 
-## Using components inside a contract
+## Using Components Inside a Contract
 
 The major strength of components is how it allows reusing already built
 primitives inside your contracts with a restricted amount of boilerplate. To

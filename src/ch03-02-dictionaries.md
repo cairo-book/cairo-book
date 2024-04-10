@@ -173,7 +173,7 @@ As a finalizing note, these two methods are implemented in a similar way to how 
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:main}}
 ```
 
-## Dictionaries of types not supported natively
+## Dictionaries of Types not Supported Natively
 
 One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`.
 This trait defines the `zero_default` method which is the one that gets called when a value does not exist in the dictionary.

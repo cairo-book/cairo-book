@@ -1,6 +1,6 @@
 # Packages and Crates
 
-## What is a crate?
+## What is a Crate?
 
 A crate is a subset of a package that is used in the actual Cairo compilation. This includes:
 
@@ -9,11 +9,11 @@ A crate is a subset of a package that is used in the actual Cairo compilation. T
 
 Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.
 
-## What is the crate root?
+## What is the Crate Root?
 
 The crate root is the _lib.cairo_ source file that the Cairo compiler starts from and makes up the root module of your crate. We’ll explain modules in depth in the [Defining Modules to Control Scope](./ch07-02-defining-modules-to-control-scope.md) section.
 
-## What is a package?
+## What is a Package?
 
 A Cairo package is a directory (or equivalent) containing:
 

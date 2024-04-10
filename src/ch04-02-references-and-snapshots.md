@@ -125,7 +125,7 @@ Run completed successfully, returning []
 
 As expected, the `height` and `width` fields of the `rec` variable have been swapped.
 
-## Small recap
+## Small Recap
 
 Let’s recap what we’ve discussed about the linear type system, ownership, snapshots, and references:
 

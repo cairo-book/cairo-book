@@ -39,7 +39,6 @@ The style guide is based on the best practices collected from the following book
 - [Terminology](#terminology)
   - [Recommended Terms](#recommended-terms)
 - [Admonitions](#admonitions)
-- [Appendix A Existing Style Guides](#appendix-a-existing-style-guides)
   - [Documentation](#documentation)
   - [Code](#code)
 
@@ -56,17 +55,16 @@ In heading titles, capitalize the first letter of every word **except for**:
 
 - Articles (a, an, the); unless an article is the first word.
 
-  > **Defining an Enum**<br>
-  > **Generic Types and Traits**
+  > **Defining an Enum**
 
 - Coordinating conjunctions (and, but, for, or, nor).
 
   > **Packages and Crates**
 
-- Prepositions of four letters or less; unless these prepositions are the first or last words.
-  - Prepositions of _five_ letters and above should be capitalized (Before, Through, Versus, Among, Under, Between, Without, etc.).
-
-  > **Peripherals as State Machines**
+- Prepositions of four letters or less should not be capitalized, unless these prepositions are the first or last words. Prepositions of five letters and above should be capitalized (Before, Through, Versus, Among, Under, Between, Without, etc.).
+  
+  > **Using Structs to Structure Related Data**
+  > **Components: Under the Hood**
 
 Do not capitalize names of functions, commands, packages, websites, etc.
 
@@ -101,13 +99,13 @@ Example:
 
 ### Formatting
 
-The Cairo Book usually use the following link formatting:
+The Cairo Book usually uses the following link formatting:
 
-> Instead, you must define a [Trait](https://book.cairo-lang.org/ch08-02-traits-in-cairo.html) and a, ...
+> Instead, you must define a [Trait](./ch08-02-traits-in-cairo.md) and a, ...
 
-- Make intra-book links relative, so they work both online and locally
+- Make intra-book links relative, so they work both online and locally.
 
-Do NOT turn long phrases into links
+Do NOT turn long phrases into links.
 
   > ❌ See the [Cairo Reference’s section on constant evaluation](https://book.cairo-lang.org/ch02-01-variables-and-mutability.html) for more information on what operations can be used when declaring constants.
 
@@ -126,13 +124,13 @@ See also, the [Using `monospace`](#using-monospace) section.
 
 The following types of lists are usually used in documentation:
 
-- **Bullet list** -- use it if the order or items is not important
-- **Numbered list** -- use it if the order of items is important, such as when describing a process
+- **Bullet list** -- use it if the order or items is not important.
+- **Numbered list** -- use it if the order of items is important, such as when describing a process.
   - **Procedure** -- special type of numbered list that gives steps to achieve some goal (to achieve this, do this); for an example of a procedure, see the [Usage](https://doc.rust-lang.org/nightly/rustc/profile-guided-optimization.html#usage) section in The rustc book.
 
 ### Formatting
 
-The Cairo Book usually use the following list formatting:
+The Cairo Book usually uses the following list formatting:
 
 - Finish an introductory sentence with a dot.
 - Capitalize the first letter of each bullet point.
@@ -158,31 +156,31 @@ The Cairo Book usually use the following list formatting:
 
 Use monospace font for the following items:
 
-- Code snippets
+- Code snippets:
 
-  - Start the terminal commands with $
-  - Output of previous commands should not start with $
+  - Start the terminal commands with `$`.
+  - Output of previous commands should not start with `$`.
 
-  - Use `bash` syntax highlighting
+  - Use `bash` syntax highlighting.
 
-- Cairo declarations: commands, functions, arguments, parameters, flags, variables
-- In-line command line output
+- Cairo declarations: commands, functions, arguments, parameters, flags, variables.
+- In-line command line output:
 
   > Writing a program that prints `Hello, world!`
 
-- Data types: `u8`, `u128`
-- Names of crates, traits, libraries,
-- Command line tools, plugins, packages
+- Data types: `u8`, `u128`, etc.
+- Names of crates, traits, libraries.
+- Command line tools, plugins, packages.
 
 ### Monospace and Other Types of Formatting
 
 Monospace font can also be used in:
 
-- links
+- links:
 
-  > [`String`](https://doc.rust-lang.org/std/string/struct.String.html) is a string type provided by ...
+  > [`String`](./ch02-02-data-types.html#string-types) is a string type provided by ...
 
-- headings
+- headings:
 
   > **Serializing with `Serde`**
 
@@ -192,11 +190,11 @@ Monospace font can also be used in:
 
 ## Using _Italics_
 
-- Introduce new terms
+- Introduce new terms:
 
   > Enums, short for "enumerations," are a way to define a custom data type that consists of a fixed set of named values, called _variants_.
 
-- Emphasize important concepts or words
+- Emphasize important concepts or words:
 
   > we create an _instance_ of that struct by specifying concrete values for each of the fields
 
@@ -212,7 +210,7 @@ Monospace font can also be used in:
   >
   > `scarb new hello_world`
   >
-  > 2\. Go into the hello_world directory with the command cd hello_world.
+  > 2\. Go into the _hello_world_ directory with the command cd hello_world.
   >
   > `cd hello_world`
 
@@ -227,17 +225,17 @@ This chapter lists the terms that have inconsistencies in spelling, usage, etc.
 If you spot other issues with terminology, please add the terms here in alphabetical order using the formatting as follows:
 
 - _Recommended term_
-  - Avoid: Add typical phrases in which this term is found
-  - Use: Add recommended phrases
-  - Note: Add more information if needed
+  - Avoid: Add typical phrases in which this term is found.
+  - Use: Add recommended phrases.
+  - Note: Add more information if needed.
 
 ### Recommended Terms
 
 - _Scarb_
-  - Note: always use uppercase _S_, unless referring to the command `scarb`
+  - Note: always use uppercase _S_, unless referring to the command `scarb`.
 - _VS Code_
-  - Use VS Code by default
-  - Use only if necessary: Visual Studio Code
+  - Use VS Code by default.
+  - Use only if necessary: Visual Studio Code.
 
 ## Admonitions
 

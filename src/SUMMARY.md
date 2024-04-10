@@ -150,7 +150,7 @@
 - [Starknet Smart Contracts Security](./ch17-00-starknet-smart-contracts-security.md)
 
   - [General Recommendations](./ch17-01-general-recommendations.md)
-  - [Testing Smart Contracts with Starknet Foundry]()
+  - [Testing Smart Contracts]()
   - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
   - [Formal Verification]()
 

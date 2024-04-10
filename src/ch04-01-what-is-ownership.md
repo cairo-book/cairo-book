@@ -59,7 +59,7 @@ In other words, there are two important points in time here:
 
 At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the `Array` type we introduced in the [previous chapter](./ch03-01-arrays.md).
 
-### Moving values - example with Array
+### Moving values - Example with Array
 
 As said earlier, _moving_ a value simply means passing that value to another function. When that happens, the variable referring to that value in the original scope is destroyed and can no longer be used, and a new variable is created to hold the same value.
 
@@ -87,7 +87,7 @@ error: Variable was previously moved. Trait has no implementation in context: co
         ^*****^
 ```
 
-## The Copy trait
+## The Copy Trait
 
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
 The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
@@ -106,13 +106,13 @@ If you remove the `Copy` trait derivation from the `Point` type, you will get a 
 
 _Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._
 
-## Destroying values - example with FeltDict
+## Destroying Values - Example with FeltDict
 
 The other way linear types can be _used_ is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In Rust, for example, this could be closing the access to a file, or locking a mutex.
 In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
 This would be very easy to forget, so it is enforced by the type system and the compiler.
 
-### No-op destruction: the `Drop` Trait
+### No-op Destruction: the `Drop` Trait
 
 You may have noticed that the `Point` type in the previous example also implements the `Drop` trait.
 For example, the following code will not compile, because the struct `A` is not moved or destroyed before it goes out of scope:
@@ -130,7 +130,7 @@ For example, the following code compiles:
 {{#include ../listings/ch04-understanding-ownership/no_listing_05_drop_derive_compiles/src/lib.cairo}}
 ```
 
-### Destruction with a side-effect: the `Destruct` trait
+### Destruction with a Side-effect: the `Destruct` Trait
 
 When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
@@ -158,7 +158,7 @@ When `A` goes out of scope, it can't be dropped as it implements neither the `Dr
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
 
-## Copy Array data with Clone
+## Copy Array Data with Clone
 
 If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in [Chapter 5-3](ch05-03-method-syntax.md), but because methods are a common feature in many programming languages, you’ve probably seen them before.
 

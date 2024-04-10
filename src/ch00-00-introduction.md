@@ -5,11 +5,11 @@
 Cairo is a programming language designed for a virtual CPU of the same name. The unique aspect of this processor is that it was not created for the physical constraints of our world but for cryptographic ones, making it capable of efficiently proving the execution of any program running on it. This means that you can perform time consuming operations on a machine you don't trust, and check the result very quickly on a cheaper machine.
 While Cairo 0 used to be directly compiled to CASM, the Cairo CPU assembly, Cairo 1 is a higher level language. It first compiles to Sierra, an intermediate representation of Cairo which will compile later down to a safe subset of CASM. The point of Sierra is to ensure your CASM will always be provable, even when the computation fails.
 
-## What can you do with it?
+## What Can you Do with it?
 
 Cairo allows you to compute trustworthy values on untrusted machines. One major usecase is Starknet, a solution to Ethereum scaling. Ethereum is a decentralized blockchain platform that enables the creation of decentralized applications where every single interaction between a user and a d-app is verified by all the participants. Starknet is a Layer 2 built on top of Ethereum. Instead of having all the participants of the network to verify all user interactions, only one node, called the prover, executes the programs and generates proofs that the computations were done correctly. These proofs are then verified by an Ethereum smart contract, requiring significantly less computational power compared to executing the interactions themselves. This approach allows for increased throughput and reduced transaction costs while preserving Ethereum security.
 
-## What are the differences with other programming languages?
+## What Are the Differences with Other Programming Languages?
 
 Cairo is quite different from traditional programming languages, especially when it comes to overhead costs and its primary advantages. Your program can be executed in two different ways:
 

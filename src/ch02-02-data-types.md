@@ -135,7 +135,7 @@ Here are some examples of declaring short strings in Cairo:
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:6}}
 ```
 
-#### Byte Array strings
+#### Byte Array Strings
 
 With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
 
@@ -143,7 +143,7 @@ With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 char
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
 
-## Type casting
+## Type Casting
 
 In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library.
 
@@ -193,7 +193,7 @@ For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types/src/lib.cairo}}
 ```
 
-## The unit type ()
+## The Unit Type ()
 
 A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.

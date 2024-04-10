@@ -60,7 +60,7 @@ Items in a parent module can’t use the private items inside child modules, but
 
 Cairo chose to have the module system function this way so that hiding inner implementation details is the default. That way, you know which parts of the inner code you can change without breaking outer code. However, Cairo does give you the option to expose inner parts of child modules’ code to outer ancestor modules by using the `pub` keyword to make an item public.
 
-## Exposing Paths with the `pub` keyword
+## Exposing Paths with the `pub` Keyword
 
 Let’s return to the previous error that told us the `hosting` module and the `add_to_waitlist` function are not visible. We want the `eat_at_restaurant` function in the parent module to have access to the `add_to_waitlist` function in the child module, so we mark the `hosting` module and the `add_to_waitlist` function with the `pub` keyword, as shown in Listing {{#ref pub-keyword-not-compiling}}.
 
@@ -112,7 +112,7 @@ Consider the code in Listing {{#ref relative-path}} that models the situation in
 Here you can see directly that you access a parent's module easily using `super`, which wasn't the case previously.
 Note that the `back_of_house` is kept private, as external users are not supposed to interact with the back of house directly.
 
-## Making Structs and Enums public
+## Making Structs and Enums Public
 
 We can also use `pub` to designate structs and enums as public, but there are a few details extra to the usage of `pub` with structs and enums.
 

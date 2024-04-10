@@ -74,7 +74,7 @@ Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully f
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:main}}
 ```
 
-## Simulating a dynamic array with dicts
+## Simulating a Dynamic Array with Dicts
 
 First, let's think about how we want our mutable dynamic array to behave. What
 operations should it support?
@@ -95,7 +95,7 @@ We can define this interface in Cairo like:
 This provides a blueprint for the implementation of our dynamic array. We named
 it _Vec_ as it is similar to the `Vec<T>` data structure in Rust.
 
-### Implementing a dynamic array in Cairo
+### Implementing a Dynamic Array in Cairo
 
 To store our data, we'll use a `Felt252Dict<T>` which maps index numbers (felts)
 to values. We'll also store a separate `len` field to track the length.
@@ -134,7 +134,7 @@ The full implementation of the `Vec` structure can be found in the
 community-maintained library
 [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures).
 
-## Simulating a Stack with dicts
+## Simulating a Stack with Dicts
 
 We will now look at a second example and its implementation details: a Stack.
 

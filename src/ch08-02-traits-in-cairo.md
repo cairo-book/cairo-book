@@ -39,7 +39,7 @@ Each type implementing this trait must provide its own custom behavior for the b
 
 A trait can have multiple methods in its body: the method signatures are listed one per line and each line ends in a semicolon.
 
-## Implementing a Trait on a type
+## Implementing a Trait on a Type
 
 Now that we’ve defined the desired signatures of the `Summary` trait’s methods,
 we can implement it on the types in our media aggregator. The following code shows
@@ -115,7 +115,7 @@ because those types don’t implement `Summary`. -->
 
 <!-- TODO NOT AVAILABLE IN CAIRO FOR NOW Using trait bounds to conditionally implement methods -->
 
-## Managing and using external trait
+## Managing and Using External Trait
 
 To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
 If `CircleGeometry` implementation was in a separate module/file named _circle_, then to define `boundary` method on `Circle` struct, we'd need to import `ShapeGeometry` trait in _circle_ module.
@@ -128,7 +128,7 @@ If the code was organized into modules like this, where the implementation of a 
 
 Note that in this example, `CircleGeometry` and `RectangleGeometry` implementations don't need to be declared as `pub`. Indeed, `ShapeGeometry` trait, which is public, is used to print the result in the `main` function. The compiler will find the appropriate implementation for the `ShapeGeometry` public trait, regardless of the implementation visibility.
 
-## Impl aliases
+## Impl Aliases
 
 Implementations can be aliased when imported. This is most useful when you want to instantiate generic impls with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
 
@@ -141,7 +141,7 @@ Implementations can be aliased when imported. This is most useful when you want 
 
 We can define the generic implementation in a private module, use an impl alias to instantiate the generic implementation for these two concrete types, and make these two implementations public, while keeping the generic implementation private and unexposed. This way, we can avoid code duplication using the generic implementation, while keeping the public API clean and simple.
 
-## Negative impls
+## Negative Impls
 
 > Note: This is still an experimental feature and can only be used if `experimental-features = ["negative_impls"]` is enabled in your Scarb.toml file, under the `[package]` section.
 

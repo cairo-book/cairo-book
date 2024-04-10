@@ -50,7 +50,7 @@ In Cairo, memory is immutable, which means that it is not possible to modify the
 
 To access array elements, you can use `get()` or `at()` array methods that return different types. Using `arr.at(index)` is equivalent to using the subscripting operator `arr[index]`.
 
-### `get()` method
+### `get()` Method
 
 The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the [References and Snapshots](ch04-02-references-and-snapshots.md) chapter.
 
@@ -60,7 +60,7 @@ Here is an example with the `get()` method:
 {{#include ../listings/ch03-common-collections/no_listing_03_array_get/src/lib.cairo}}
 ```
 
-### `at()` method
+### `at()` Method
 
 The `at` function, on the other hand, directly returns a snapshot to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. You should only use `at` when you want the program to panic if the provided index is out of the array's bounds, which can prevent unexpected behavior.
 
@@ -82,13 +82,13 @@ If you want to use the subscripting operator `arr[index]`, you will need to expl
 
 In summary, use `at` when you want to panic on out-of-bounds access attempts, and use `get` when you prefer to handle such cases gracefully without panicking.
 
-## Size-related methods
+## Size-related Methods
 
 To determine the number of elements in an array, use the `len()` method. The return value is of type `usize`.
 
 If you want to check if an array is empty or not, you can use the `is_empty()` method, which returns `true` if the array is empty and `false` otherwise.
 
-## `array!` macro
+## `array!` Macro
 
 Sometimes, we need to create arrays with values that are already known at compile time. The basic way of doing that is redundant. You would first declare the array and then append each value one by one. `array!` is a simpler way of doing this task by combining the two steps.
 At compile-time, the compiler will expand the macro to generate the code that appends the items sequentially.
@@ -105,7 +105,7 @@ With `array!`:
 {{#include ../listings/ch03-common-collections/no_listing_06_array_macro/src/lib.cairo:array_macro}}
 ```
 
-## Storing multiple types with Enums
+## Storing Multiple Types with Enums
 
 If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md) chapter.
 
@@ -119,7 +119,7 @@ If you want to store elements of different types in an array, you can use an `En
 
 All methods provided by `Array` can also be used with `Span`, except for the `append()` method.
 
-### Turning an Array into span
+### Turning an Array into Span
 
 To create a `Span` of an `Array`, call the `span()` method:
 

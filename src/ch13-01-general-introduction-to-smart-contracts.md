@@ -13,7 +13,7 @@ Smart contracts possess several unique characteristics. They are **permissionles
 
 For developers to build smart contracts that can interact with each other, it is required to know what the other contracts look like. Hence, Ethereum developers started to build standards for smart contract development, the `ERCxx`. The two most used and famous standards are the `ERC20`, used to build tokens like `USDC`, `DAI` or `STARK`, and the `ERC721`, for NFTs (Non-Fungible Tokens) like `CryptoPunks` or `Everai`.
 
-## Use cases
+## Use Cases
 
 There are many possible use cases for smart contracts. The only limits are the technical constraints of the blockchain and the creativity of developers.
 
@@ -33,7 +33,7 @@ Smart contracts can be used to create secure and transparent voting systems. Vot
 
 Smart contracts can automate royalty payments for artists, musicians, and other content creators. When a piece of content is consumed or sold, the smart contract can automatically calculate and distribute the royalties to the rightful owners, ensuring fair compensation and reducing the need for intermediaries.
 
-### Decentralized identities DIDs
+### Decentralized Identities DIDs
 
 Smart contracts can be used to create and manage digital identities, allowing individuals to control their personal information and share it with third parties securely. The smart contract could verify the authenticity of a user's identity and automatically grant or revoke access to specific services based on the user's credentials.
 
@@ -41,7 +41,7 @@ Smart contracts can be used to create and manage digital identities, allowing in
 <br/>
 As Ethereum continues to mature, we can expect the use cases and applications of smart contracts to expand further, bringing about exciting new opportunities and reshaping traditional systems for the better.
 
-## The rise of Starknet and Cairo
+## The Rise of Starknet and Cairo
 
 Ethereum, being the most widely used and resilient smart contract platform, became a victim of its own success. With the rapid adoption of some previously mentioned use cases, mainly DeFi, the cost of performing transactions became extremely high, rendering the network almost unusable. Engineers and researchers in the ecosystem began working on solutions to address this scalability issue.
 
@@ -59,7 +59,7 @@ Unlike most (if not all) of Starknet's competitors that chose to use the EVM (ei
 
 > Learn more about Account Abstraction in the [Starknet Book](https://book.starknet.io/ch04-00-account-abstraction.html).
 
-## Cairo programs and Starknet contracts: what is the difference?
+## Cairo Programs and Starknet Contracts: What Is the Difference?
 
 Starknet contracts are a special superset of Cairo programs, so the concepts previously learned in this book are still applicable to write Starknet contracts.
 As you may have already noticed, a Cairo program must always have a `main` function that serves as the entry point for this program:
