@@ -22,7 +22,7 @@ Here are some examples:
 {{#include ../listings/ch11-advanced-features/no_listing_08_print_macro/src/lib.cairo}}
 ```
 
-> `print!` and `println!` macros use the `fmt` method of the `Display` trait under the hood, and are therefore used to print the value of types that implement it. This is the case for basic data types, but not for more complexe ones. If you try to print complex data types values with these macros, e.g., for debugging purpose, you will get an error. In that case, you can either [manually implement](./ch11-09-printing.md#printing-custom-data-types) the `fmt` method for your type, or use the `Debug` trait (see [below](./ch11-09-printing.md#print-debug-traces)).
+> `print!` and `println!` macros use the `Display` trait under the hood, and are therefore used to print the value of types that implement it. This is the case for basic data types, but not for more complexe ones. If you try to print complex data types values with these macros, e.g., for debugging purpose, you will get an error. In that case, you can either [manually implement](./ch11-09-printing.md#printing-custom-data-types) the `Display` trait for your type, or use the `Debug` trait (see [below](./ch11-09-printing.md#print-debug-traces)).
 
 ## Formatting
 
@@ -86,7 +86,7 @@ It is also possible to implement the `Display` trait for the `Point` struct usin
 
 Cairo provides the derivable trait `Debug` to print the value of variables when debugging. Simply add `:?` within curly brackets `{}` placeholders in a `print!` or `println!` macro string input.
 
- This trait is very useful and is implemented by default for basic data types. It can also be simply derived on complex data types using the `derive[Debug]` attribute, as long as all types they contain implement it. It allows to get rid of manually implementing extra-code to print complex data types values.
+ This trait is very useful and is implemented by default for basic data types. It can also be simply derived on complex data types using the `derive(Debug)` attribute, as long as all types they contain implement it. It allows to get rid of manually implementing extra-code to print complex data types values.
 
  Note that `assert_xx!` macros used in tests require the provided values to implement the `Debug` trait, as they also print the result in case of assertion failure.
 
