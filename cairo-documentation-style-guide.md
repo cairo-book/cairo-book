@@ -61,7 +61,7 @@ In heading titles, capitalize the first letter of every word **except for**:
 
   > **Packages and Crates**
 
-- Prepositions of four letters or less should not be capitalized, unless these prepositions are the first or last words. Prepositions of five letters and above should be capitalized (Before, Through, Versus, Among, Under, Between, Without, etc.).
+- Prepositions of four letters or less, unless these prepositions are the first or last words. Prepositions of five letters and above should be capitalized (Before, Through, Versus, Among, Under, Between, Without, etc.).
   
   > **Using Structs to Structure Related Data**
   > **Components: Under the Hood**
