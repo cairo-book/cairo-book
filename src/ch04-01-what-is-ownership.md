@@ -87,7 +87,7 @@ error: Variable was previously moved. Trait has no implementation in context: co
         ^*****^
 ```
 
-## The Copy Trait
+## The `Copy` Trait
 
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
 The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
@@ -158,7 +158,7 @@ When `A` goes out of scope, it can't be dropped as it implements neither the `Dr
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
 
-## Copy Array Data with Clone
+## Copy Array Data with `clone`
 
 If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in [Chapter 5-3](ch05-03-method-syntax.md), but because methods are a common feature in many programming languages, you’ve probably seen them before.
 

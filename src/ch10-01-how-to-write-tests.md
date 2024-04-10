@@ -288,7 +288,7 @@ assertion fails. Because both traits are derivable this is usually as straightfo
 `#[derive(Drop, Debug, PartialEq)]` annotation to your struct or enum definition. See
 [Appendix C](./appendix-03-derivable-traits.md) for more detail about these and other derivable traits.
 
-### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros
+### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` Macros
 
 Comparisons in tests can be done using the `assert_xx!` macros:
 - `assert_lt!` checks if a given value is lower than another value, and reverts otherwise.
