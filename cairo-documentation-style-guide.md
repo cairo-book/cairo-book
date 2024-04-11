@@ -60,6 +60,7 @@ In heading titles, capitalize the first letter of every word **except for**:
 
 - Coordinating conjunctions (and, but, for, or, nor).
 
+  > **Generic Types and Traits**
   > **Packages and Crates**
 
 - Prepositions of _four_ letters or less, unless these prepositions are the first or last words. Prepositions of _five_ letters and above should be capitalized (Before, Through, Versus, Among, Under, Between, Without, etc.).
