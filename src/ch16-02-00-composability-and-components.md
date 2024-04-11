@@ -193,7 +193,7 @@ with the components functions externally by calling them using the
 
 The composability of components really shines when combining multiple of them
 together. Each adds its features onto the contract. You can rely on
-[Openzeppelin's](https://github.com/OpenZeppelin/cairo-contracts) implementation
+[Openzeppelin's][OpenZeppelin Cairo Contracts] implementation
 of components to quickly plug-in all the common functionalities you need a contract
 to have.
 
@@ -203,3 +203,6 @@ and audited components for everything else.
 Components can even [depend](./ch16-02-02-component-dependencies.md) on other components by restricting the
 `TContractstate` they're generic on to implement the trait of another component.
 Before we dive into this mechanism, let's first look at [how components work under the hood](./ch16-02-01-under-the-hood.md).
+
+
+[OpenZeppelin Cairo Contracts]: https://github.com/OpenZeppelin/cairo-contracts
