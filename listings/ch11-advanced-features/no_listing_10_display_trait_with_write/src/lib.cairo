@@ -10,7 +10,8 @@ impl PointDisplay of Display<Point> {
     fn fmt(self: @Point, ref f: Formatter) -> Result<(), Error> {
         let x = *self.x;
         let y = *self.y;
-        return writeln!(f, "Point ({x}, {y})");
+
+        writeln!(f, "Point ({x}, {y})")
     }
 }
 

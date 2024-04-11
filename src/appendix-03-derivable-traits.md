@@ -32,13 +32,13 @@ Example:
 {{#include ../listings/appendix/listing_02_copy/src/lib.cairo}}
 ```
 
-## `Debug` for Programmer Output
+## `Debug` for Printing and Debugging
 
 The `Debug` trait enables debug formatting in format strings, which you indicate by adding `:?` within `{}` placeholders.
 
-The `Debug` trait allows you to print instances of a type for debugging purposes, so you and other programmers using your type can inspect an instance at a particular point in a program’s execution.
+It allows you to print instances of a type for debugging purposes, so you and other programmers using this type can inspect an instance at a particular point in a program’s execution.
 
-For example:
+For example, if you want to print the value of a variable of type `Point`, you can do it as follows:
 
 ```rust
 {{#include ../listings/appendix/listing_03_debug/src/lib.cairo}}
@@ -49,7 +49,7 @@ scarb cairo-run
 Point { x: 1, y: 3 }
 ```
 
-The `Debug` trait is required, for example, in use of the `assert_eq!` macro in tests. This macro prints the values of instances given as arguments if the equality assertion fails so programmers can see why the two instances weren’t equal.
+The `Debug` trait is required, for example, when using the `assert_xx!` macros in tests. Theses macros print the values of instances given as arguments if the equality or comparison assertion fails so programmers can see why the two instances weren’t equal.
 
 ## `PartialEq` for Equality Comparisons
 
