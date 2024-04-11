@@ -4,7 +4,7 @@ At its essence, hashing is a process of converting input data (often called a me
 
 In this chapter, we will present the two hash functions implemented natively in the Cairo library: `Poseidon` and `Pedersen`. We will discuss when and how to use them, and see examples with Cairo programs.
 
-### Hash functions in Cairo
+### Hash Functions in Cairo
 
 The Cairo core library provides two hash functions: Pedersen and Poseidon.
 
@@ -12,7 +12,7 @@ Pedersen hash functions are cryptographic algorithms that rely on [elliptic curv
 
 Poseidon is a family of hash functions designed to be very efficient as algebraic circuits. Its design is particularly efficient for Zero-Knowledge proof systems, including STARKs (so, Cairo). Poseidon uses a method called a 'sponge construction,' which soaks up data and transforms it securely using a process known as the Hades permutation. Cairo's version of Poseidon is based on a three-element state permutation with [specific parameters](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt).
 
-#### When to use them?
+#### When to Use Them?
 
 Pedersen was the first hash function used on Starknet, and is still used to compute the addresses of variables in storage (for example, `LegacyMap` uses Pedersen to hash the keys of a storage mapping on Starknet). However, as Poseidon is cheaper and faster than Pedersen when working with STARK proofs system, it's now the recommended hash function to use in Cairo programs.
 
@@ -50,7 +50,7 @@ Here is a short example of Pedersen hashing :
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:main}}
 ```
 
-### Advanced Hashing: Hashing arrays with Poseidon
+### Advanced Hashing: Hashing Arrays with Poseidon
 
 Let us look at an example of hashing a struct that contains a `Span<felt252>`.
 To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can use the built-in function `poseidon_hash_span(mut span: Span<felt252>) -> felt252`. Similarly, you can hash `Array<felt252>` by calling `poseidon_hash_span` on its span.

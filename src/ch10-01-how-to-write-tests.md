@@ -108,7 +108,7 @@ The summary line displays at the end: overall, our test result is `FAILED`. We h
 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
-## Checking Results with the `assert!` macro
+## Checking Results with the `assert!` Macro
 
 The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
 
@@ -182,9 +182,9 @@ Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in `larger_can_hold_smaller` test. Notice that `smaller_cannot_hold_larger` test still passes: to make the test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
 
-## Testing Equality and Comparisons with the `assert_xx!` macros
+## Testing Equality and Comparisons with the `assert_xx!` Macros
 
-### `assert_eq!` and `assert_ne!` macros
+### `assert_eq!` and `assert_ne!` Macros
 
 A common way to verify functionality is to test for equality between the result
 of the code under test and the value you expect the code to return. You could
@@ -288,7 +288,7 @@ assertion fails. Because both traits are derivable this is usually as straightfo
 `#[derive(Drop, Debug, PartialEq)]` annotation to your struct or enum definition. See
 [Appendix C](./appendix-03-derivable-traits.md) for more detail about these and other derivable traits.
 
-### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros
+### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` Macros
 
 Comparisons in tests can be done using the `assert_xx!` macros:
 - `assert_lt!` checks if a given value is lower than another value, and reverts otherwise.
@@ -487,7 +487,7 @@ The `expensive_test` function is listed as ignored.
 
 When you’re at a point where it makes sense to check the results of the ignored tests and you have time to wait for the results, you can run `scarb cairo-test --include-ignored` to run all tests whether they’re ignored or not.
 
-## Testing recursive functions or loops
+## Testing Recursive Functions or Loops
 
 When testing recursive functions or loops, the test is instantiated by default with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. This value is assumed reasonably large enough, but you can override it by adding the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
 
@@ -497,7 +497,7 @@ When testing recursive functions or loops, the test is instantiated by default w
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
 ```
 
-## Benchmarking the gas usage of a specific operation
+## Benchmarking the Gas Usage of a Specific Operation
 
 When you want to benchmark the gas usage of a specific operation, you can use the following pattern in your test function.
 

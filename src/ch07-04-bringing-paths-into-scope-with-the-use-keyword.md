@@ -97,7 +97,7 @@ local name, or _alias_, for the type. Listing {{#ref as-keyword}} shows how you 
 
 Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier.
 
-### Importing multiple items from the same module
+### Importing Multiple Items from the Same Module
 
 When you want to import multiple items (like functions, structs or enums)
 from the same module in Cairo, you can use curly braces `{}` to list all of

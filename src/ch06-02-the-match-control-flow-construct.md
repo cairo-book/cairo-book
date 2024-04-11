@@ -138,7 +138,7 @@ This example also meets the exhaustiveness requirement because we’re explicitl
   TODO move the following in a separate chapter when there's more pattern matching features in upcoming Cairo versions. cf rust book chapter 18
 -->
 
-## Multiple Patterns with the `|` operator
+## Multiple Patterns with the `|` Operator
 
 In `match` expressions, you can match multiple patterns using the `|` syntax, which is the pattern _or_ operator.
 
@@ -170,7 +170,7 @@ Writing `(_, _)` for the last arm of a tuple matching pattern might feel superfl
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:week}}
 ```
 
-## Matching `felt252` and integer variables
+## Matching `felt252` and Integer Variables
 
 You can also match `felt252` and integer variables. This is useful when you want to match against a range of values.
 However, there are some restrictions:

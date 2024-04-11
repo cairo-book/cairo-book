@@ -37,7 +37,7 @@ Note that:
 
 - It is possible to use a same name for a struct attribute and a method associated to this struct. For example, we can define a `width` method for the `Rectangle` type, and Cairo will know that `my_rect.width` refers to the `width` attribute while `my_rect.width()` refers to the `width` method. This is also not a recommended practice.
 
-## The generate_trait attribute
+## The `generate_trait` Attribute
 
 If you are familiar with Rust, you may find Cairo's approach confusing because methods cannot be defined directly on types. Instead, you must define a [trait](./ch08-02-traits-in-cairo.md) and an implementation of this trait associated with the type for which the method is intended.
 However, defining a trait and then implementing it to define methods on a specific type is verbose, and unnecessary: the trait itself will not be reused.
@@ -52,7 +52,7 @@ The previous example can also be written as follows:
 
 Let's use this `#[generate_trait]` in the following chapters to make our code cleaner.
 
-## Snapshots and references
+## Snapshots and References
 
 As the `area` method does not modify the calling instance, `self` is declared as a snapshot of a `Rectangle` instance with the `@` snapshot operator. But, of course, we can also define some methods receiving a mutable reference of this instance, to be able to modify it.
 
@@ -68,7 +68,7 @@ It is also possible to define a method which takes ownership of the instance by 
 
 Look at the [Understanding Ownership](ch04-00-understanding-ownership.md) chapter for more details about these important notions.
 
-## Methods with several parameters
+## Methods with Several Parameters
 
 Let’s practice using methods by implementing another method on the `Rectangle` struct. This time we want to write the method `can_hold` which accepts another instance of `Rectangle` and returns `true` if this rectangle can fit completely within self; otherwise, it should return false.
 
@@ -80,7 +80,7 @@ Let’s practice using methods by implementing another method on the `Rectangle`
 
 Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
-## Methods without self parameter
+## Methods Without `self` Parameter
 
 In Cairo, we can also define a method which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
@@ -96,7 +96,7 @@ Let's create the method `new` which creates a `Rectangle` from a `width` and a `
 
 Note that the `compare` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `Rectangle::compare(rect1, rect2)`, it is called with `rect1.compare(rect2)`.
 
-## Multiple traits and impl blocks
+## Multiple Traits and `impl` Blocks
 
 Each struct is allowed to have multiple `trait` and `impl` blocks. For example,
 the following code is equivalent to the code shown in the _Methods with several parameters_ section, which has each method in its own `trait` and `impl` blocks.

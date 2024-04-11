@@ -1,4 +1,4 @@
-# Component dependencies
+# Component Dependencies
 
 Working with components becomes more complex when we try to use one component inside another. As mentioned earlier, a component can only be embedded within a contract, meaning that it's not possible to embed a component within another component. However, this doesn't mean that we can't use one component inside another. In this section, we will see how to use a component as a dependency of another component.
 
@@ -17,7 +17,7 @@ Listing {{#ref ownable_component}} shows the complete implementation, which we'l
 
 ## Specificities
 
-### Specifying dependencies on another component
+### Specifying Dependencies on Another Component
 
 ```rust
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:component_signature}}
@@ -31,7 +31,7 @@ Although most of the trait bounds were defined using [anonymous parameters](./ch
 
 While this mechanism is verbose and may not be easy to approach at first, it is a powerful leverage of the trait system in Cairo. The inner workings of this mechanism are abstracted away from the user, and all you need to know is that when you embed a component in a contract, all other components in the same contract can access it.
 
-### Using the dependency
+### Using the Dependency
 
 Now that we have made our `impl` depend on the `Ownable` component, we can access its functions, storage, and events within the implementation block. To bring the `Ownable` component into scope, we have two choices, depending on whether we intend to mutate the state of the `Ownable` component or not.
 If we want to access the state of the `Ownable` component without mutating it, we use the `get_dep_component!` macro. If we want to mutate the state of the `Ownable` component (for example, change the current owner), we use the `get_dep_component_mut!` macro.

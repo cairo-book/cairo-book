@@ -60,7 +60,7 @@ sierra: 1.5.0
 
 {{#quiz ../quizzes/ch01-01-installation.toml}}
 
-## Installing the VSCode extension
+## Installing the VSCode Extension
 
 Cairo has a VSCode extension that provides syntax highlighting, code completion, and other useful features. You can install it from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1).
 Once installed, go into the extension settings, and make sure to tick the `Enable Language Server` and `Enable Scarb` options.

@@ -21,7 +21,7 @@ The `constructor` function might take arguments, which are passed when deploying
 
 Note that the `constructor` function **must** take `self` as a first argument, corresponding to the state of the contract, generally passed by reference with the `ref` keyword to be able to modify the contract's state. We will explain `self` and its type shortly.
 
-## 2. Public functions
+## 2. Public Functions
 
 As stated previously, public functions are accessible from outside of the contract. They are usually defined inside an implementation block annotated with the `#[abi(embed_v0)]` attribute, but might also be defined independently under the `#[external(v0)]` attribute.
 
@@ -35,7 +35,7 @@ Annotating an impl block with the `#[abi(embed_v0]` attribute only affects the v
 
 > Similarly to the `constructor` function, all public functions, either standalone functions annotated with the `#[external(v0)]` or functions within an impl block annotated with the `#[abi(embed_v0)]` attribute, **must** take `self` as a first argument. This is not the case for private functions.
 
-### External functions
+### External Functions
 
 External functions are _public_ functions where the `self: ContractState` argument is passed by reference with the `ref` keyword, which exposes both the `read` and `write` access to storage variables. This allows modifying the state of the contract via `self` directly.
 
@@ -43,7 +43,7 @@ External functions are _public_ functions where the `self: ContractState` argume
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:external}}
 ```
 
-### View functions
+### View Functions
 
 View functions are _public_ functions where the `self: ContractState` argument is passed as snapshot, which only allows the `read` access to storage variables, and restricts writes to storage made via `self` by causing compilation errors. The compiler will mark their `state_mutability` to `view`, preventing any state modification through `self` directly.
 
@@ -51,7 +51,7 @@ View functions are _public_ functions where the `self: ContractState` argument i
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:view}}
 ```
 
-### State mutability of public functions
+### State Mutability of Public Functions
 
 However, as you may have noticed, passing `self` as a snapshot only restricts the storage write access via `self` at compile time. It does not prevent state modification via direct system calls, nor calling another contract that would modify the state.
 
@@ -61,7 +61,7 @@ In conclusion, even though external and view functions are distinguished by the 
 
 > **Warning:** This is different from the EVM where a `staticcall` opcode is provided, which prevents storage modifications in the current context and subcontexts. Hence developers **should not** have the assumption that calling a view function on another contract cannot modify the state.
 
-### Standalone public functions
+### Standalone Public Functions
 
 It is also possible to define public functions outside of an implementation of a trait, using the `#[external(v0)]` attribute. Doing this will automatically generate the corresponding ABI, allowing these standalone public functions to be callable by anyone from the outside. These functions can also be called from within the contract just like any function in Starknet contracts. The first parameter must be `self`.
 
@@ -71,7 +71,7 @@ Listing {{#ref standalone_interface}} and listing {{#ref standalone}} show a rew
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:standalone}}
 ```
 
-## 3. Private functions
+## 3. Private Functions
 
 Functions that are not defined with the `#[external(v0)]` attribute or inside a block annotated with the `#[abi(embed_v0)]` attribute are private functions (also called internal functions). They can only be called from within the contract.
 
@@ -89,7 +89,7 @@ The `#[generate_trait]` attribute is mostly used to define private impl blocks. 
 > Note: using `#[generate_trait]` in addition to the `#[abi(embed_v0)]` attribute for a public impl block is not recommended, as it will result in a failure to generate the corresponding ABI. Public functions should only be defined in an impl block annotated with `#[generate_trait]` if this block is also annotated with the `#[abi(per_item)]` attribute.
 
 
-## 4. `[abi(per_item)]` attribute
+## 4. `[abi(per_item)]` Attribute
 
 You can also define the entrypoint type of functions individually inside an impl block using the`#[abi(per_item)]` attribute on top of your impl. It is often used with the `#[generate_trait]` attribute, as it allows you to define entrypoints without an explicit interface. In this case, the functions will not be grouped under an impl in the ABI. Note that when using `#[abi(per_item)]` attribute, public functions need to be annotated with the `#[external(v0)]` attribute - otherwise, they will not be exposed and will be considered as private functions.
 

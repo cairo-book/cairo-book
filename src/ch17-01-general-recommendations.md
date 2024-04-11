@@ -20,7 +20,7 @@ Cairo is a highly safe language inspired by rust. It is designed in a way that f
 
 Adopting a security mindset is the initial step in writing secure smart contracts. Try to always consider all possible scenarios when writing code.
 
-### Viewing smart contract as Finite State Machines
+### Viewing Smart Contracts as Finite State Machines
 
 Transactions in smart contracts are atomic, meaning they either succeed or fail without making any changes.
 
@@ -57,7 +57,7 @@ The pattern consists of following a specific order of operations in your functio
 2. **Effects**: Perform all state changes.
 3. **Interactions**: All external calls to other contracts should be made at the end of the function.
 
-### Access control
+### Access Control
 
 Access control is the process of restricting access to certain features or resources. It is a common security mechanism used to prevent unauthorized access to sensitive information or actions. In smart contracts, some functions may often be restricted to specific users or roles.
 

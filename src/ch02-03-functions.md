@@ -95,7 +95,7 @@ Run completed successfully, returning []
 
 Because we called the function with `5` as the value for value and `"h"` as the value for `unit_label`, the program output contains those values.
 
-### Named parameters
+### Named Parameters
 
 In Cairo, named parameters allow you to specify the names of arguments when you call a function. This makes the function calls more readable and self-descriptive.
 If you want to use named parameters, you need to specify the name of the parameter and the value you want to pass to it. The syntax is `parameter_name: value`. If you pass a variable that has the same name as the parameter, you can simply write `:parameter_name` instead of `parameter_name: variable_name`.
