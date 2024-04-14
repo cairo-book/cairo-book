@@ -4,7 +4,7 @@ version = "0.2.0"
 edition = "2021"
 license = "MIT"
 authors = ["Cairo-book community"]
-description = "A mdbook preprocessor to be used with cairo-verify"
+description = "A mdbook preprocessor to be used with cairo-listings"
 repository = "https://github.com/cairo-book/cairo-book.github.io"
 
 [dependencies]
