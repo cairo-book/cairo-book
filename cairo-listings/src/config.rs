@@ -1,4 +1,4 @@
-use clap::Parser;
+use clap::{Parser, Subcommand};
 use regex::Regex;
 
 #[derive(Parser, Debug)]
@@ -39,6 +39,18 @@ pub struct Config {
     /// Specify file to check
     #[arg(long)]
     pub file: Option<String>,
+
+    #[command(subcommand)]
+    pub command: Option<Commands>,
+}
+
+#[derive(Subcommand, Debug)]
+pub enum Commands {
+    /// Run the verification process
+    Verify,
+
+    /// Process the output.txt file in listings
+    Output,
 }
 
 /// Expected statement in a cairo program for it to be runnable.

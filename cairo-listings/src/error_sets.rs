@@ -1,5 +1,6 @@
-use crate::cmd::Cmd;
 use std::collections::HashSet;
+
+use crate::cmd::ScarbCmd;
 
 pub struct ErrorSets {
     pub compile_errors: HashSet<String>,
@@ -20,12 +21,12 @@ impl ErrorSets {
         }
     }
 
-    pub fn get_mut_error_set(&mut self, cmd: &Cmd) -> &mut HashSet<String> {
+    pub fn get_mut_error_set(&mut self, cmd: &ScarbCmd) -> &mut HashSet<String> {
         match cmd {
-            Cmd::ScarbFormat() => &mut self.format_errors,
-            Cmd::ScarbBuild() => &mut self.compile_errors,
-            Cmd::ScarbCairoRun() => &mut self.run_errors,
-            Cmd::ScarbTest() => &mut self.test_errors,
+            ScarbCmd::Format() => &mut self.format_errors,
+            ScarbCmd::Build() => &mut self.compile_errors,
+            ScarbCmd::CairoRun() => &mut self.run_errors,
+            ScarbCmd::Test() => &mut self.test_errors,
         }
     }
 }

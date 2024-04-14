@@ -82,7 +82,7 @@
 
 ### 本地工作（验证 Cairo 程序）
 
-`cairo-verify` 工具旨在封装所有 cairo and starknet 插件以便快速验证 Cairo 程序。
+`cairo-listings` 工具旨在封装所有 cairo and starknet 插件以便快速验证 Cairo 程序。
 
 #### 设置
 
@@ -90,16 +90,16 @@
 
 详细的安装说明请参阅[这里](https://cairo-book.github.io/ch01-01-installation.html) for more details.
 
-要运行 `cairo-verify` 辅助工具, 请确保您位于存储库的根目录 (与 `README.md` 同级), 然后运行以下命令：
+要运行 `cairo-listings` 辅助工具, 请确保您位于存储库的根目录 (与 `README.md` 同级), 然后运行以下命令：
 
 ```sh
-cargo run --bin cairo-verify
+cargo run --bin cairo-listings
 ```
 
 或者，您也可以使用以下命令安装该工具：
 
 ```sh
-cargo install --path cairo-verify
+cargo install --path cairo-listings
 ```
 
 #### 使用
@@ -135,9 +135,9 @@ Cairo 程序:
 您可以通过添加相应的 tags 来跳过和忽略特定的测试：
 
 ```sh
-$ cairo-verify --help
+$ cairo-listings --help
 
-Usage: cairo-verify [OPTIONS]
+Usage: cairo-listings [OPTIONS]
 
 Options:
   -p, --path <PATH>    The path to explore for *.cairo files [default: ./listings]
@@ -153,7 +153,7 @@ Options:
   -V, --version        Print version
 ```
 
-在 CI 环境中，为了减少输出信息，建议在运行 `cairo-verify` 时使用 `--quiet` 标志。
+在 CI 环境中，为了减少输出信息，建议在运行 `cairo-listings` 时使用 `--quiet` 标志。
 
 mdbook-cairo 是一个 mdbook 预处理器，仅会移除代码块中的 `// TAG` 行。
 

@@ -1,19 +1,20 @@
-use std::process::Command;
+use std::process::{Command, Output};
 
-pub enum Cmd {
-    ScarbFormat(),
-    ScarbBuild(),
-    ScarbCairoRun(),
-    ScarbTest(),
+#[derive(Debug)]
+pub enum ScarbCmd {
+    Format(),
+    Build(),
+    CairoRun(),
+    Test(),
 }
 
-impl Cmd {
+impl ScarbCmd {
     pub fn as_str(&self) -> String {
         let command = match self {
-            Cmd::ScarbFormat() => "fmt",
-            Cmd::ScarbBuild() => "build",
-            Cmd::ScarbCairoRun() => "cairo-run",
-            Cmd::ScarbTest() => "test",
+            ScarbCmd::Format() => "fmt",
+            ScarbCmd::Build() => "build",
+            ScarbCmd::CairoRun() => "cairo-run",
+            ScarbCmd::Test() => "test",
         };
         command.into()
     }
@@ -24,17 +25,17 @@ impl Cmd {
 
     fn args(&self) -> Vec<&str> {
         match self {
-            Cmd::ScarbFormat() => vec!["-c"],
-            Cmd::ScarbBuild() => vec![],
-            Cmd::ScarbCairoRun() => vec!["--available-gas=20000000"],
-            Cmd::ScarbTest() => vec![],
+            ScarbCmd::Format() => vec!["-c"],
+            ScarbCmd::Build() => vec![],
+            ScarbCmd::CairoRun() => vec!["--available-gas=20000000"],
+            ScarbCmd::Test() => vec![],
         }
     }
 
-    pub fn test(&self, manifest_path: &str) -> Result<(), String> {
+    pub fn test(&self, manifest_path: &str) -> Result<Output, String> {
         // Temporary workaround that compiles before trying to run
         // Until Scarb does it by default.
-        if let Cmd::ScarbCairoRun() = self {
+        if let ScarbCmd::CairoRun() = self {
             let mut command = Command::new("scarb");
             command.args(self.manifest_option(manifest_path));
             command.arg("build");
@@ -49,9 +50,9 @@ impl Cmd {
         let output = command.output().expect("Failed to execute scarb");
 
         if !output.status.success() {
-            return Err(String::from_utf8_lossy(&output.stderr).to_string());
+            return Err(String::from_utf8_lossy(&output.stdout).to_string());
         }
 
-        Ok(())
+        Ok(output)
     }
 }

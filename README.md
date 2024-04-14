@@ -4,7 +4,9 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-25-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -81,7 +83,7 @@ If you wish to initiate a new translation for your language without running a lo
 
 ### Work locally (Cairo programs verification)
 
-The `cairo-verify` tool is designed to wrap all cairo and starknet plugins for quickly verifying cairo programs.
+The `cairo-listings` tool is designed to wrap all cairo and starknet plugins for quickly verifying cairo programs. You can verify that listings are correct with the `verify` argument, and generate the corresponding output with the `output` argument.
 
 #### Setup
 
@@ -89,16 +91,16 @@ Firstly, you need to have `scarb` resolved in your path:
 
 They should be available after installing cairo, see [here](https://cairo-book.github.io/ch01-01-installation.html) for more details.
 
-To run the `cairo-verify` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
+To run the `cairo-listings` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
 
 ```sh
-cargo run --bin cairo-verify
+cargo run --bin cairo-listings
 ```
 
 Alternatively, you can also install the tool with:
 
 ```sh
-cargo install --path cairo-verify
+cargo install --path cairo-listings
 ```
 
 #### Usage
@@ -134,9 +136,9 @@ Here is a list of available tags:
 You can skip and ignore a specific test by adding the corresponding flag:
 
 ```sh
-$ cairo-verify --help
+$ cairo-listings --help
 
-Usage: cairo-verify [OPTIONS]
+Usage: cairo-listings [OPTIONS]
 
 Options:
   -p, --path <PATH>    The path to explore for *.cairo files [default: ./listings]
@@ -152,7 +154,7 @@ Options:
   -V, --version        Print version
 ```
 
-In CI, it's preferable to reduce output, so run `cairo-verify` with the `--quiet` flag.
+In CI, it's preferable to reduce output, so run `cairo-listings` with the `--quiet` flag.
 
 The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines in code blocks.
 
