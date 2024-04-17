@@ -2,28 +2,19 @@
 id = "0xaaaaaa"
 type = "MultipleChoice"
 prompt.prompt = """
-What is the result of the first value and second value ?
+How do we remove 12 from this array?
 ```rust
 fn main() {
-    let mut a = ArrayTrait::new();
-    a.append(12);
-    a.append(6);
-    a.append(3);
-
-    let first_value = a.pop_front().unwrap();
-    let second_value = a.pop_front().unwrap();
-
-
-    println!("The first value is {}", first_value);
-
-    println!("The first value is {}", second_value);
+    let mut arr = ArrayTrait::new();
+    arr.append(12);
+    arr.append(6);
+    arr.append(3);
 }
 ```
 """
-answer.answer = "12, 6"
+answer.answer = "`arr.pop_front()`"
 prompt.distractors = [
-  "12, 12",
-  "6, 3"
+  "`arr.pop()`"  
 ]
 
 
@@ -33,7 +24,7 @@ prompt.distractors = [
 id = "0xbbbbbbb"
 type = "MultipleChoice"
 prompt.prompt = """
-What is the best way to store 10, 100 and 1000?
+What is the best way to store "John", 100 and 1000?
 """
 answer.answer = "`enum`"
 prompt.distractors = [
@@ -72,7 +63,7 @@ prompt.distractors = [
 ]
 
 context = """
-The `u8` declaration is used with `get()` method and should not be in this function.
+The function expects `u8` return variable but it does not return anything.
 """
 
 
