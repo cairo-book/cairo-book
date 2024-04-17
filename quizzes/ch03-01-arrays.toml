@@ -1,0 +1,77 @@
+[[questions]]
+id = "0xaaaaaa"
+type = "MultipleChoice"
+prompt.prompt = """
+What is the output of this function?
+```rust
+fn main() {
+    let a = ArrayTrait::new();
+    a.append(12);
+    a.append(6);
+    a.append(3);
+
+    let first_value = a.pop_front().unwrap();
+
+    println!("The first value is {}", first_value);  
+}
+```
+"""
+answer.answer = "It panics"
+prompt.distractors = [
+  "12",
+  "3"
+]
+
+context = """
+The array is not mutable.
+"""
+
+
+
+
+[[questions]]
+id = "0xcccccc"
+type = "MultipleChoice"
+prompt.prompt = """
+What happens when you run this function?
+```rust
+fn main() -> u8 {
+    let mut arr = ArrayTrait::<u8>::new();
+    arr.append(100);
+    arr.append(2);
+
+    let x = *arr.at(2);
+
+    println!("The first value is {}", x); 
+
+    x
+}
+```
+"""
+answer.answer = "It panicks"
+prompt.distractors = [
+  "Returns 2",
+  "Returns 100"
+]
+
+context = """
+It is trying and index outside the array.
+"""
+
+
+
+[[questions]]
+id = "0xbbbbbbb"
+type = "MultipleChoice"
+prompt.prompt = """
+How can we access array elements without modifying the original array?
+"""
+answer.answer = "`array.span();`"
+prompt.distractors = [
+"`array!`",
+"`ArrayTrait::new();`"
+]
+context = """
+`span` provides safe and controlled access to the elements of an array without modifying the original array.
+"""
+
