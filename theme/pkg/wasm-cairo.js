@@ -169,18 +169,20 @@ function isLikeNone(x) {
 /**
 * @param {string} cairo_program
 * @param {number | undefined} available_gas
+* @param {boolean} allow_warnings
 * @param {boolean} print_full_memory
+* @param {boolean} run_profiler
 * @param {boolean} use_dbg_print_hint
 * @returns {string}
 */
-__exports.runCairoProgram = function(cairo_program, available_gas, print_full_memory, use_dbg_print_hint) {
+__exports.runCairoProgram = function(cairo_program, available_gas, allow_warnings, print_full_memory, run_profiler, use_dbg_print_hint) {
     let deferred3_0;
     let deferred3_1;
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
         const ptr0 = passStringToWasm0(cairo_program, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
         const len0 = WASM_VECTOR_LEN;
-        wasm.runCairoProgram(retptr, ptr0, len0, !isLikeNone(available_gas), isLikeNone(available_gas) ? 0 : available_gas, print_full_memory, use_dbg_print_hint);
+        wasm.runCairoProgram(retptr, ptr0, len0, !isLikeNone(available_gas), isLikeNone(available_gas) ? 0 : available_gas, allow_warnings, print_full_memory, run_profiler, use_dbg_print_hint);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
         var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -202,17 +204,18 @@ __exports.runCairoProgram = function(cairo_program, available_gas, print_full_me
 
 /**
 * @param {string} starknet_contract
+* @param {boolean} allow_warnings
 * @param {boolean} replace_ids
 * @returns {string}
 */
-__exports.compileStarknetContract = function(starknet_contract, replace_ids) {
+__exports.compileStarknetContract = function(starknet_contract, allow_warnings, replace_ids) {
     let deferred3_0;
     let deferred3_1;
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
         const ptr0 = passStringToWasm0(starknet_contract, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
         const len0 = WASM_VECTOR_LEN;
-        wasm.compileStarknetContract(retptr, ptr0, len0, replace_ids);
+        wasm.compileStarknetContract(retptr, ptr0, len0, allow_warnings, replace_ids);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
         var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -266,7 +269,7 @@ async function __wbg_load(module, imports) {
 function __wbg_get_imports() {
     const imports = {};
     imports.wbg = {};
-    imports.wbg.__wbg_log_a2726a1882d8751c = function(arg0, arg1) {
+    imports.wbg.__wbg_log_1750cdf009e77ab9 = function(arg0, arg1) {
         console.log(getStringFromWasm0(arg0, arg1));
     };
 

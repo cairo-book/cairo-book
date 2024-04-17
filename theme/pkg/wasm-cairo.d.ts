@@ -15,17 +15,20 @@ declare namespace wasm_bindgen {
 	/**
 	* @param {string} cairo_program
 	* @param {number | undefined} available_gas
+	* @param {boolean} allow_warnings
 	* @param {boolean} print_full_memory
+	* @param {boolean} run_profiler
 	* @param {boolean} use_dbg_print_hint
 	* @returns {string}
 	*/
-	export function runCairoProgram(cairo_program: string, available_gas: number | undefined, print_full_memory: boolean, use_dbg_print_hint: boolean): string;
+	export function runCairoProgram(cairo_program: string, available_gas: number | undefined, allow_warnings: boolean, print_full_memory: boolean, run_profiler: boolean, use_dbg_print_hint: boolean): string;
 	/**
 	* @param {string} starknet_contract
+	* @param {boolean} allow_warnings
 	* @param {boolean} replace_ids
 	* @returns {string}
 	*/
-	export function compileStarknetContract(starknet_contract: string, replace_ids: boolean): string;
+	export function compileStarknetContract(starknet_contract: string, allow_warnings: boolean, replace_ids: boolean): string;
 	
 }
 
@@ -35,8 +38,8 @@ declare interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly greet: (a: number, b: number, c: number) => void;
   readonly compileCairoProgram: (a: number, b: number, c: number, d: number) => void;
-  readonly runCairoProgram: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => void;
-  readonly compileStarknetContract: (a: number, b: number, c: number, d: number) => void;
+  readonly runCairoProgram: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number) => void;
+  readonly compileStarknetContract: (a: number, b: number, c: number, d: number, e: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_export_0: (a: number, b: number) => number;
   readonly __wbindgen_export_1: (a: number, b: number, c: number, d: number) => number;
