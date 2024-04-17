@@ -19,12 +19,12 @@ jobs:
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
-      - name: Install cairo-verify
-        run: cargo install --path cairo-verify --locked
+      - name: Install cairo-listings
+        run: cargo install --path cairo-listings --locked
         shell: bash
 
-      - name: Run cairo-verify and generate summary
-        run: cairo-verify >> $GITHUB_STEP_SUMMARY
+      - name: Run cairo-listings and generate summary
+        run: cairo-listings -- verify >> $GITHUB_STEP_SUMMARY
         shell: bash
 
   typos:
