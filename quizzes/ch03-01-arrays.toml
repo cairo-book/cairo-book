@@ -1,0 +1,78 @@
+[[questions]]
+id = "0xaaaaaa"
+type = "MultipleChoice"
+prompt.prompt = """
+What is the result of the first value and second value ?
+```rust
+fn main() {
+    let mut a = ArrayTrait::new();
+    a.append(12);
+    a.append(6);
+    a.append(3);
+
+    let first_value = a.pop_front().unwrap();
+    let second_value = a.pop_front().unwrap();
+
+
+    println!("The first value is {}", first_value);
+
+    println!("The first value is {}", second_value);
+}
+```
+"""
+answer.answer = "12, 6"
+prompt.distractors = [
+  "12, 12",
+  "6, 3"
+]
+
+
+
+
+[[questions]]
+id = "0xbbbbbbb"
+type = "MultipleChoice"
+prompt.prompt = """
+What is the best way to store 10, 100 and 1000?
+"""
+answer.answer = "`enum`"
+prompt.distractors = [
+"`array.span()`",
+"`array!`"
+]
+context = """
+Enum is used to store multiple data types.
+"""
+
+
+
+
+
+[[questions]]
+id = "0xcccccc"
+type = "MultipleChoice"
+prompt.prompt = """
+What happens when you run this function?
+```rust
+fn main() -> u8 {
+    let mut arr = ArrayTrait::<u8>::new();
+    arr.append(100);
+    arr.append(2);
+
+    let x = *arr.at(1);
+
+    println!("The first value is {}", x); 
+}
+```
+"""
+answer.answer = "It panicks"
+prompt.distractors = [
+  "Returns 2",
+  "Returns 100"
+]
+
+context = """
+The `u8` declaration is used with `get()` method and should not be in this function.
+"""
+
+
