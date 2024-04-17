@@ -3,7 +3,7 @@
   "collaborators": [
     "cryptonerdcn <cryptonerdcn@gmail.com>"
   ],
-  "version": "0.9.3",
+  "version": "0.8.4",
   "files": [
     "wasm-cairo_bg.wasm",
     "wasm-cairo.js",

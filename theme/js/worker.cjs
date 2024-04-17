@@ -13,11 +13,13 @@ onmessage = function (e) {
     let result;
     switch (functionToRun) {
       case "runCairoProgram":
-        const { availableGas, printFullMemory, useDBGPrintHint } = e.data;
+        const { availableGas, allow_warnings, printFullMemory, run_profiler, useDBGPrintHint } = e.data;
         result = runCairoProgram(
           data,
           availableGas,
+          allow_warnings,
           printFullMemory,
+          run_profiler,
           useDBGPrintHint,
         );
         break;

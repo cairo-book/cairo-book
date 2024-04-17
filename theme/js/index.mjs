@@ -6,7 +6,9 @@ window.runFunc = async (cairo_program) => {
     worker.postMessage({
       data: cairo_program,
       availableGas: undefined,
+      allow_warnings: true,
       printFullMemory: false,
+      run_profiler: false,
       useDBGPrintHint: true,
       functionToRun: "runCairoProgram",
     });
