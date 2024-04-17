@@ -2,7 +2,7 @@
 id = "0xaaaaaa"
 type = "MultipleChoice"
 prompt.prompt = """
-What is the output of this function?
+What happens when you run this function?
 ```rust
 fn main() {
     let a = ArrayTrait::new();
@@ -16,10 +16,9 @@ fn main() {
 }
 ```
 """
-answer.answer = "It panics"
+answer.answer = "It does not compile"
 prompt.distractors = [
-  "12",
-  "3"
+  "It compiles"
 ]
 
 context = """
@@ -55,7 +54,7 @@ prompt.distractors = [
 ]
 
 context = """
-It is trying and index outside the array.
+It is trying to access an index outside the array.
 """
 
 
