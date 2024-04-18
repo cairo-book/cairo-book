@@ -5,3 +5,11 @@ Let’s start your Cairo journey! There’s a lot to learn, but every journey st
 - Installing Scarb, which is Cairo's build toolchain and package manager, on Linux, macOS, and Windows.
 - Writing a program that prints `Hello, world!`.
 - Using basic Scarb commands to create a project and execute a program.
+
+## Getting Help
+
+If you have any questions about Starknet or Cairo, you can ask them in the [Starknet Discord server](https://discord.gg/starknet-community). The community is friendly and always willing to help.
+
+## Interacting with the Cairo Chatbot
+
+Cairo has its own chatbot, which can help you with Cairo-related questions. The chatbot is trained on the Cairo book, and uses RAG to efficiently retrieve information to provide help. You can find the chatbot on the [Cairo-Chatbot](https://cairo-chatbot.vercel.app/) website.
