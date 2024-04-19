@@ -34,9 +34,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 The output of this program is:
 
 ```shell
-The length of the array when the snapshot was taken is 0
-The current length of the array is 1
-Run completed successfully, returning []
+{{#include ../listings/ch04-understanding-ownership/no_listing_09_snapshots/output.txt}}
 ```
 
 First, notice that all the tuple code in the variable declaration and the function return value is gone. Second, note
@@ -91,10 +89,7 @@ Listing {{#ref modify-snapshot}}. Spoiler alert: it doesn’t work!
 Here’s the error:
 
 ```shell
-error: Invalid left-hand side of assignment.
- --> ownership.cairo:15:5
-    rec.height = rec.width;
-    ^********^
+{{#include ../listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/output.txt}}
 ```
 
 The compiler prevents us from modifying values associated to snapshots.
@@ -119,8 +114,7 @@ First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` in
 The output of the program is:
 
 ```shell
-height: 10, width: 3
-Run completed successfully, returning []
+{{#include ../listings/ch04-understanding-ownership/listing_05_mutable_reference/output.txt}}
 ```
 
 As expected, the `height` and `width` fields of the `rec` variable have been swapped.

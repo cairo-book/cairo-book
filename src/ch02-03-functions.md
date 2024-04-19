@@ -29,10 +29,7 @@ further. Place the `another_function` example in _src/lib.cairo_ and run it. You
 should see the following output:
 
 ```shell
-$ scarb cairo-run
-Hello, world!
-Another function.
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_15_functions/output.txt}}
 ```
 
 The lines execute in the order in which they appear in the `main` function.
@@ -58,9 +55,7 @@ In this version of `another_function` we add a parameter:
 Try running this program; you should get the following output:
 
 ```shell
-$ scarb cairo-run
-The value of x is: 5
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_16_single_param/output.txt}}
 ```
 
 The declaration of `another_function` has one parameter named `x`. The type of
@@ -88,9 +83,7 @@ Let’s try running this code. Replace the program currently in your _functions_
 project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run`:
 
 ```shell
-$ scarb cairo-run
-The measurement is: 5h
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_17_multiple_params/output.txt}}
 ```
 
 Because we called the function with `5` as the value for value and `"h"` as the value for `unit_label`, the program output contains those values.
@@ -143,25 +136,7 @@ to another variable, as the following code tries to do; you’ll get an error:
 When you run this program, the error you’ll get looks like this:
 
 ```shell
-$ scarb cairo-run
-error: Missing token TerminalRParen.
- --> src/lib.cairo:2:14
-    let x = (let y = 6);
-             ^
-
-error: Missing token TerminalSemicolon.
- --> src/lib.cairo:2:14
-    let x = (let y = 6);
-             ^
-
-error: Missing token TerminalSemicolon.
- --> src/lib.cairo:2:14
-    let x = (let y = 6);
-                      ^
-
-error: Skipped tokens. Expected: statement.
- --> src/lib.cairo:2:14
-    let x = (let y = 6);
+{{#include ../listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/output.txt}}
 ```
 
 The `let y = 6` statement does not return a value, so there isn’t anything for
@@ -218,9 +193,7 @@ Cairo. Note that the function’s return type is specified too, as `-> u32`. Try
 running this code; the output should look like this:
 
 ```shell
-$ scarb cairo-run
-The value of x is: 5
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_values/output.txt}}
 ```
 
 The `5` in `five` is the function’s return value, which is why the return type
@@ -251,7 +224,7 @@ expression to a statement, we’ll get an error:
 ```
 
 ```shell
-error: Unexpected return type. Expected: "core::integer::u32", found: "()".
+{{#include ../listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/output.txt}}
 ```
 
 The main error message, `Unexpected return type`, reveals the core issue with this
