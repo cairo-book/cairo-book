@@ -81,10 +81,7 @@ In this case, we try to pass the same value (the array in the `arr` variable) to
 Thankfully, this code does not actually compile. Once we have passed the array to the `foo` function, the variable `arr` is no longer usable. We get this compile-time error, telling us that we would need Array to implement the Copy Trait:
 
 ```shell
-error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
- --> array.cairo:6:9
-    let mut arr = ArrayTrait::<u128>::new();
-        ^*****^
+{{#include ../listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/output.txt}}
 ```
 
 ## The `Copy` Trait
@@ -144,10 +141,7 @@ As such, the following example will not compile:
 If you try to run this code, you will get a compile-time error:
 
 ```shell
-error: Variable not dropped. Trait has no implementation in context: core::traits::Drop::<temp7::temp7::A>. Trait has no implementation in context: core::traits::Destruct::<temp7::temp7::A>.
- --> temp7.cairo:7:5
-    A {
-    ^*^
+{{#include ../listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/output.txt}}
 ```
 
 When `A` goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
