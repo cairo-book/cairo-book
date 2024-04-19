@@ -15,8 +15,7 @@ Here is how we can call `panic` from inside a program and return the error code 
 Running the program will produce the following output:
 
 ```shell
-$ scarb cairo-run
-Run panicked with [2, ].
+{{#include ../listings/ch09-error-handling/no_listing_01_panic/output.txt}}
 ```
 
 As you can notice in the output, the call to `println!` macro is never reached, as the program terminates after encountering the `panic` statement.

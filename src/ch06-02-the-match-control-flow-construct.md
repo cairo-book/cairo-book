@@ -104,13 +104,8 @@ There’s one other aspect of `match` we need to discuss: the arms’ patterns m
 We didn’t handle the `None` case, so this code will cause a bug.
 Luckily, it’s a bug Cairo knows how to catch. If we try to compile this code, we’ll get this error:
 
-```bash
-$ scarb cairo-run
-error: Missing match arm: `None` not covered.
- --> test.cairo:34:5
-     match x {
-    ^*******^
-error: could not compile `match` due to previous error
+```shell
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/output.txt}}
 ```
 
 Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of `Option<T>`, when Cairo prevents us from forgetting to explicitly handle the `None` case, it protects us from assuming that we have a value when we might have null, thus making the [billion-dollar mistake](https://en.wikipedia.org/wiki/Null_pointer#History) discussed earlier impossible.

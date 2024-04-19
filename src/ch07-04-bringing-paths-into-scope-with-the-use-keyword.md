@@ -33,11 +33,7 @@ statement, so the function body won’t compile:
 The compiler error shows that the shortcut no longer applies within the `customer` module:
 
 ```shell
-$ scarb build
-error: Identifier not found.
- --> lib.cairo:11:9
-        hosting::add_to_waitlist();
-        ^*****^
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/output.txt}}
 ```
 
 ## Creating Idiomatic `use` Paths

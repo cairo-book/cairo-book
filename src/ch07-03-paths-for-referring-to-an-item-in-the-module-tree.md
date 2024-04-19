@@ -31,27 +31,7 @@ The second time we call `add_to_waitlist`, we use a relative path. The path star
 Let’s try to compile Listing {{#ref path-types}} and find out why it won’t compile yet! We get the following error:
 
 ```shell
-error: Item `restaurant::front_of_house::hosting` is not visible in this context.
- --> restaurant/src/lib.cairo:9:33
-    restaurant::front_of_house::hosting::add_to_waitlist();
-                                ^*****^
-
-error: Item `restaurant::front_of_house::hosting::add_to_waitlist` is not visible in this context.
- --> restaurant/src/lib.cairo:9:42
-    restaurant::front_of_house::hosting::add_to_waitlist();
-                                         ^*************^
-
-error: Item `restaurant::front_of_house::hosting` is not visible in this context.
- --> restaurant/src/lib.cairo:12:21
-    front_of_house::hosting::add_to_waitlist();
-                    ^*****^
-
-error: Item `restaurant::front_of_house::hosting::add_to_waitlist` is not visible in this context.
- --> restaurant/src/lib.cairo:12:30
-    front_of_house::hosting::add_to_waitlist();
-                             ^*************^
-
-error: could not compile `restaurant` due to previous error
+{{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/output.txt}}
 ```
 
 The error messages say that module `hosting` and the `add_to_waitlist` function are not visible. In other words, we have the correct paths for the `hosting` module and the `add_to_waitlist` function, but Cairo won’t let us use them because it doesn’t have access to them. In Cairo, all items (functions, methods, structs, enums, modules, and constants) are private to parent modules by default. If you want to make an item like a function or struct private, you put it in a module.

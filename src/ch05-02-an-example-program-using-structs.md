@@ -15,10 +15,8 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 
 Now run the program with `scarb cairo-run`:
 
-```bash
-$ scarb cairo-run
-Area is 300
-Run completed successfully, returning []
+```shell
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing_03_no_struct/output.txt}}
 ```
 
 This code succeeds in figuring out the area of the rectangle by calling the `area` function with each dimension, but we can do more to make this code clear and readable.
