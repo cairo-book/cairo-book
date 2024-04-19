@@ -140,7 +140,7 @@ To summary:
 
 It is interesting to note that in both Sierra code and Casm code, the `not_inlined` function will be called and executed before the body of the `inlined` function, even though the Cairo program executes `inlined() + not_inlined()`.
 
-> The Cams code of our program clearly shows that there is a function call for the `non_inlined` function, while the `inlined` function is correctly inlined.
+> The Casm code of our program clearly shows that there is a function call for the `non_inlined` function, while the `inlined` function is correctly inlined.
 
 ## Additional Optimizations
 
