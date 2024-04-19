@@ -291,12 +291,13 @@ assertion fails. Because both traits are derivable this is usually as straightfo
 ### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` Macros
 
 Comparisons in tests can be done using the `assert_xx!` macros:
+
 - `assert_lt!` checks if a given value is lower than another value, and reverts otherwise.
 - `assert_le!` checks if a given value is lower or equal than another value, and reverts otherwise.
 - `assert_gt!` checks if a given value is greater than another value, and reverts otherwise.
 - `assert_ge!` checks if a given value is greater or equal than another value, and reverts otherwise.
 
- Listing {{#ref assert_macros}} demonstrates how to use these macros: 
+Listing {{#ref assert_macros}} demonstrates how to use these macros:
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_08/src/lib.cairo}}

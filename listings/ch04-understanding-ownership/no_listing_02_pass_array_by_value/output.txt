@@ -1,4 +1,4 @@
-$ scarb cairo-run
+$ scarb cairo-run 
    Compiling no_listing_02_pass_array_by_value v0.1.0 (listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/Scarb.toml)
 warn: Unhandled `#[must_use]` type `core::option::Option::<core::integer::u128>`
  --> listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:3:5

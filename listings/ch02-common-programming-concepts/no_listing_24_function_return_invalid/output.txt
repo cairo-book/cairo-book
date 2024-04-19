@@ -1,4 +1,4 @@
-$ scarb cairo-run
+$ scarb cairo-run 
    Compiling no_listing_22_function_return_invalid v0.1.0 (listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/Scarb.toml)
 error: Unexpected return type. Expected: "core::integer::u32", found: "()".
  --> listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo:9:28

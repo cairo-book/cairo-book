@@ -1,1 +1,0 @@
-$ scarb cairo-run --available-gas=2000000000000

@@ -1,4 +1,4 @@
-$ scarb cairo-run
+$ scarb cairo-run 
    Compiling no_listing_06_format_macro v0.1.0 (listings/ch11-advanced-features/no_listing_06_format_macro/Scarb.toml)
 warn: Unused variable. Consider ignoring by prefixing with `_`.
  --> listings/ch11-advanced-features/no_listing_06_format_macro/src/lib.cairo:5:9
@@ -10,7 +10,7 @@ warn: Unused variable. Consider ignoring by prefixing with `_`.
     let s = format!("{s1}-{s2}-{s3}"); // s1, s2, s3 are not consumed by format!
         ^
 
-    Finished release target(s) in 4 seconds
+    Finished release target(s) in 1 second
      Running no_listing_06_format_macro
 tic-tac-toe
 Run completed successfully, returning []

@@ -141,7 +141,7 @@ fn process_file(manifest_path: &str) {
     if is_contract {
         // This is a contract, it must pass starknet-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.starknet_skip {
-            run_command(ScarbCmd::Build(), manifest_path, file_path);
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
         }
     } else if should_be_runnable {
         // This is a cairo program, it must pass cairo-run
@@ -149,30 +149,30 @@ fn process_file(manifest_path: &str) {
             && !tags.contains(&Tags::DoesNotCompile)
             && !cfg.run_skip
         {
-            run_command(ScarbCmd::CairoRun(), manifest_path, file_path);
+            run_command(ScarbCmd::CairoRun(), manifest_path, file_path, vec![]);
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.compile_skip {
-            run_command(ScarbCmd::Build(), manifest_path, file_path);
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
         }
     };
 
     // TEST CHECKS
     if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        let _ = run_command(ScarbCmd::Test(), manifest_path, file_path);
+        let _ = run_command(ScarbCmd::Test(), manifest_path, file_path, vec![]);
     }
 
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !cfg.formats_skip {
         // This program must pass cairo-format
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path);
+        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, vec![]);
     }
 }
 
-fn run_command(cmd: ScarbCmd, manifest_path: &str, file_path: &str) -> String {
-    match cmd.test(manifest_path) {
+fn run_command(cmd: ScarbCmd, manifest_path: &str, file_path: &str, args: Vec<String>) -> String {
+    match cmd.test(manifest_path, args) {
         Ok(output) => String::from_utf8_lossy(&output.stdout).into_owned(),
         Err(e) => handle_error(e, file_path, cmd),
     }
