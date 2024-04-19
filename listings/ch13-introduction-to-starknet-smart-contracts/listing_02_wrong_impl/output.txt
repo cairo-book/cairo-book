@@ -1,4 +1,4 @@
-$ scarb cairo-run
+$ scarb cairo-run 
    Compiling listing_99_02 v0.1.0 (listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/Scarb.toml)
 error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
  --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:24:16

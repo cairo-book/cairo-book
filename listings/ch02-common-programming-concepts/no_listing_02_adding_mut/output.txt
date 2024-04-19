@@ -1,6 +1,6 @@
-$ scarb cairo-run
+$ scarb cairo-run 
    Compiling no_listing_02_adding_mut v0.1.0 (listings/ch02-common-programming-concepts/no_listing_02_adding_mut/Scarb.toml)
-    Finished release target(s) in 3 seconds
+    Finished release target(s) in 1 second
      Running no_listing_02_adding_mut
 The value of x is: 5
 The value of x is: 6

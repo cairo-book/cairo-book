@@ -1,4 +1,4 @@
-$ scarb cairo-run
+$ scarb cairo-run 
    Compiling listing_07_02 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/Scarb.toml)
 error: Identifier not found.
  --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:22:5

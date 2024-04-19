@@ -1,4 +1,4 @@
-$ scarb cairo-run
+$ scarb cairo-run 
    Compiling no_listing_05_mut_cant_change_type v0.1.0 (listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/Scarb.toml)
 error: The value does not fit within the range of type core::integer::u64.
  --> listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo:6:9
