@@ -16,7 +16,7 @@ This will be interpreted as `const a: felt252 = 8;` by the compiler.
 
 ## `selector!` Macro
 
-See [Entry Point Selector](./ch14-02-contract-dispatchers-library-dispatchers-and-system-calls.md#entry-point-selector).
+See [Entry Point Selector](./ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.md#entry-point-selector).
 
 ## `print!` and `println!` Macros
 
