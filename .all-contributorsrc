@@ -244,6 +244,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "stevencartavia",
+      "name": "Steven Cordero",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112043913?v=4",
+      "profile": "https://github.com/stevencartavia",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
