@@ -22,6 +22,26 @@ runs:
       run: cargo install --path mdbook-cairo --locked
       shell: bash
 
-    - name: Install mdbook-quiz preprocessor
-      run: cargo install mdbook-quiz --locked --version 0.3.4
+    - name: Install cargo-make
+      run: cargo install cargo-make --locked
       shell: bash
+
+    - name: Install Depot
+      run: curl https://raw.githubusercontent.com/cognitive-engineering-lab/depot/main/scripts/install.sh | sh
+      shell: bash
+
+    - name: Clone mdbook-quiz-cairo repository
+      run: |
+        git clone https://github.com/cairo-book/mdbook-quiz-cairo
+        cd mdbook-quiz-cairo
+      shell: bash
+
+    - name: Initialize bindings
+      run: cargo make init-bindings
+      shell: bash
+      working-directory: mdbook-quiz-cairo
+
+    - name: Install mdbook-quiz-cairo
+      run: cargo install --path crates/mdbook-quiz-cairo --locked
+      shell: bash
+      working-directory: mdbook-quiz-cairo
