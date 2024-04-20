@@ -27,7 +27,7 @@ runs:
       shell: bash
 
     - name: Install Depot
-      run: cargo install depot-js --locked
+      run: curl https://raw.githubusercontent.com/cognitive-engineering-lab/depot/main/scripts/install.sh | sh
       shell: bash
 
     - name: Clone mdbook-quiz-cairo repository
