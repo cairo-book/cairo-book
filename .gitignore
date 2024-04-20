@@ -10,3 +10,6 @@ src/quiz
 .idea/
 
 *Scarb.lock
+
+runner_crate/src
+runner_crate/target

@@ -14,7 +14,7 @@ after = ["links"]
 [preprocessor.gettext]
 after = ["cairo"]
 
-[preprocessor.quiz]
+[preprocessor.quiz-cairo]
 after = ["gettext"]
 
 [output.html]
