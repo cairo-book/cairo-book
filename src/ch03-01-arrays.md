@@ -126,3 +126,5 @@ To create a `Span` of an `Array`, call the `span()` method:
 ```rust
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_array_span/src/lib.cairo:3}}
 ```
+
+{{#quiz ../quizzes/ch03-01-arrays.toml}}
