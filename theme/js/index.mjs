@@ -26,7 +26,7 @@ window.runFunc = async (cairo_program) => {
 window.runTests = async (cairo_program) => {
   return new Promise((resolve, reject) => {
     worker.postMessage({
-      cairo_program,
+      data: cairo_program,
       allow_warnings: true,
       filter: "",
       include_ignored: false,
