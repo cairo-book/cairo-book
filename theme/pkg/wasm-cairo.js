@@ -203,6 +203,49 @@ __exports.runCairoProgram = function(cairo_program, available_gas, allow_warning
 };
 
 /**
+* @param {string} cairo_program
+* @param {boolean} allow_warnings
+* @param {string} filter
+* @param {boolean} include_ignored
+* @param {boolean} ignored
+* @param {boolean} starknet
+* @param {string} run_profiler
+* @param {boolean} gas_disabled
+* @param {boolean} print_resource_usage
+* @returns {string}
+*/
+__exports.runTests = function(cairo_program, allow_warnings, filter, include_ignored, ignored, starknet, run_profiler, gas_disabled, print_resource_usage) {
+    let deferred5_0;
+    let deferred5_1;
+    try {
+        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+        const ptr0 = passStringToWasm0(cairo_program, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(filter, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passStringToWasm0(run_profiler, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
+        const len2 = WASM_VECTOR_LEN;
+        wasm.runTests(retptr, ptr0, len0, allow_warnings, ptr1, len1, include_ignored, ignored, starknet, ptr2, len2, gas_disabled, print_resource_usage);
+        var r0 = getInt32Memory0()[retptr / 4 + 0];
+        var r1 = getInt32Memory0()[retptr / 4 + 1];
+        var r2 = getInt32Memory0()[retptr / 4 + 2];
+        var r3 = getInt32Memory0()[retptr / 4 + 3];
+        var ptr4 = r0;
+        var len4 = r1;
+        if (r3) {
+            ptr4 = 0; len4 = 0;
+            throw takeObject(r2);
+        }
+        deferred5_0 = ptr4;
+        deferred5_1 = len4;
+        return getStringFromWasm0(ptr4, len4);
+    } finally {
+        wasm.__wbindgen_add_to_stack_pointer(16);
+        wasm.__wbindgen_export_2(deferred5_0, deferred5_1, 1);
+    }
+};
+
+/**
 * @param {string} starknet_contract
 * @param {boolean} allow_warnings
 * @param {boolean} replace_ids
@@ -269,7 +312,7 @@ async function __wbg_load(module, imports) {
 function __wbg_get_imports() {
     const imports = {};
     imports.wbg = {};
-    imports.wbg.__wbg_log_1750cdf009e77ab9 = function(arg0, arg1) {
+    imports.wbg.__wbg_log_73c9af7d8b9ce99f = function(arg0, arg1) {
         console.log(getStringFromWasm0(arg0, arg1));
     };
 

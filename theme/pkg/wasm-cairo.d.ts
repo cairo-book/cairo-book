@@ -23,6 +23,19 @@ declare namespace wasm_bindgen {
 	*/
 	export function runCairoProgram(cairo_program: string, available_gas: number | undefined, allow_warnings: boolean, print_full_memory: boolean, run_profiler: boolean, use_dbg_print_hint: boolean): string;
 	/**
+	* @param {string} cairo_program
+	* @param {boolean} allow_warnings
+	* @param {string} filter
+	* @param {boolean} include_ignored
+	* @param {boolean} ignored
+	* @param {boolean} starknet
+	* @param {string} run_profiler
+	* @param {boolean} gas_disabled
+	* @param {boolean} print_resource_usage
+	* @returns {string}
+	*/
+	export function runTests(cairo_program: string, allow_warnings: boolean, filter: string, include_ignored: boolean, ignored: boolean, starknet: boolean, run_profiler: string, gas_disabled: boolean, print_resource_usage: boolean): string;
+	/**
 	* @param {string} starknet_contract
 	* @param {boolean} allow_warnings
 	* @param {boolean} replace_ids
@@ -39,6 +52,7 @@ declare interface InitOutput {
   readonly greet: (a: number, b: number, c: number) => void;
   readonly compileCairoProgram: (a: number, b: number, c: number, d: number) => void;
   readonly runCairoProgram: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number) => void;
+  readonly runTests: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number, m: number) => void;
   readonly compileStarknetContract: (a: number, b: number, c: number, d: number, e: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_export_0: (a: number, b: number) => number;
