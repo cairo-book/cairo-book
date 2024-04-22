@@ -1,3 +1,5 @@
+WASM runtime for Cairo language and Starknet
+
 <div align="center">
 
   <h1><code>WASM-Cairo</code></h1>
@@ -17,16 +19,29 @@
 With Modules
 
 ```
-wasm-pack build --release --target web --out-dir ./pkg/module --out-name wasm-cairo
+wasm-pack build --release --target web --out-dir output/module/pkg --out-name wasm-cairo
 ```
 
 No Modules
 
 ```
-wasm-pack build --release --target no-modules --out-dir ./pkg/no_module --out-name wasm-cairo
+wasm-pack build --release --target no-modules --out-dir output/no_module/pkg --out-name wasm-cairo
 ```
 
 You will find `wasm-cairo_bg.wasm` and `wasm-cairo.js` in `pkg` folder.
+
+#### Pack & Publish
+
+With Modules
+```
+wasm-pack pack output/module
+wasm-pack publish  
+```
+
+No Modules
+```
+wasm-pack pack output/no_module 
+```
 
 ### 🛠️ Build WASMTIME's WASM-Cairo Toolkit
 
@@ -45,6 +60,11 @@ Compile Cairo
 Run
 ```
 ./wasmtime_test.sh runCairoProgram ./cairo_files/HelloStarknetAstro.cairo
+```
+
+Run Tests
+```
+./wasmtime_test.sh runTests ./cairo_files/Test.cairo
 ```
 
 Compile Contract
