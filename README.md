@@ -32,8 +32,9 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    ```
 2. Host machine packages:
 
-   - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager:
-     `sudo apt install gettext`.
+	- Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager: `sudo apt install gettext`.
+  	
+	- Install [mdbook-quiz-cairo](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file) following the instructions [here](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file#installation) to be able to add interactive quizzes.
 
 3. Clone this repository.
 
