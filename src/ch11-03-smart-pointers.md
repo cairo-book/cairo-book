@@ -48,7 +48,7 @@ Here is there Sierra code of the previous program:
 {{#include ../listings/ch11-advanced-features/listing_04_box/src/lib.sierra}}
 ```
 
-The first thing that we can notice is the drastic optimization that has been made by the compiler. Indeed, because `complex_const` and `box_complex_const` variables are just created, passed to a function and then droppped, the `main` function that starts on line 9 of the statements actually omits these steps.
+The first thing that we can notice is the drastic optimization that has been made by the compiler. Indeed, because `complex_const` and `box_complex_const` variables are just created, passed to a function and then dropped, the `main` function that starts on line 9 of the statements actually omits these steps.
 
 All that `main` does is:
 - Instantiating a variable of type `Box<RandomStruct>` with the `const_as_immediate` libfunc.
