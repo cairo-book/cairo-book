@@ -6,20 +6,22 @@ Smart pointers, on the other hand, are data structures that act like a pointer b
 
 In the specific case of Cairo, smart pointers play a crucial role in preventing illegal memory address references. Their usage ensures that dereferences cannot fail. Remember that it is not possible to prove the execution of a code that fails with the Cairo VM. Hence, it is mandatory to make sure that failing attempt to dereference a pointer and access an unallocated memory cell will never happen.
 
-## The `Box` Type
+The Cairo VM memory is composed with segments defined by an index, each segment containing slots to store felts. Using smart pointers allows one to store data in a dedicated segment of the memory, while manipulating a pointer variable in the regular segment.
 
-The `Box` type represents the main smart pointer type in Cairo. Inspired by Rust, it allows us to allocate a new memory segment for our type, and access this segment using a pointer that can only be manipulated in one place at a time.
+## The `Box<T>` Type to Safely Store Data
 
-The Cairo VM memory is composed avec segments defined by an index, each segment containing slots to store felts. Each time you instantiate a variable of `Box<T>` type, you allocate and initialize a pointer instance in a new memory segment for this pointer variable.
+The `Box` type represents the main smart pointer type in Cairo. It allows us to store data in the `boxed_segment` segment of the Cairo VM memory. This segment is dedicated to the storage of all boxed values. Whenever you instantiate a new pointer variable of type `Box<T>`, you append the data of type `T` to the boxed segment.
 
-### `BoxTrait` and its methods
+Using boxes can improve efficiency as it allows to pass the variable, which is a pointer, from a function to another without the need to copy the whole value. Indeed, there is no access to the value contained in the box while there is no unbox. We still need to execute steps to copy the value of the pointer itself, but not the value the box points to. If the variable stored in the box is very complex, improvement can be massive. Because there is a dedicated segment for boxes and because a box can only be used in one place at a time, using the `Box<T>` type when manipulating complex data types reduces the number of steps while ensuring soundness in pointers dereferences.
 
-The Cairo corelib provides the `BoxTrait` trait which contains the following methods:
-- `new`: this method takes a variable of type `T` as argument and returns a new `Box<T>` variable. It is guaranteed to never panic.
-- `unbox`: this method takes a variable of type `Box<T>` as argument, unboxes it and returns the variable of type `T` contained in it. It is also guaranteed to never panic.
-- `box_forward_snapshot`: this method takes a variable of type `@Box<T>` (snapshot of a box), and returns a `Box<@T>` variable, which is box that contains a snapshot of the variable of type `T` contained in the box passed as a snapshot in the function.
+Also, the `Box<T>` is of paramount importance for memory safety, especially when dealing with any variable whose size cannot be known at compile time, like recursive structs or arrays. In the case of arrays, the `append` method allows for grow in size depending on conditions, and there is a room for potential illegal out of bounds access that would induce a failure. This is why items of an array are stored in the `boxed_segment` memory segment. Hence, if you want to retrieve the value of an item contained in an array, you will get at some point a `Box<@T>` that you will have to unbox.
 
-`new`, `unbox` and `as_snapshot` methods all use a dedicated libfunc and don't do anything else. The Sierra libfunc is responsible of allocating a new segment in the memory in the case of `new`, or dereferencing a pointer that contains any value in the case of `unbox`. 
+> To resume, the `Box<T>` type is mainly used for 2 purposes : 
+> - Efficiency: Manually defining variables of type `Box<T>` that contain a large amount of data can be very useful in reducing the number of steps as it ensures that the data contained in the box won't be copied when passed from a function to another.
+> 
+> - Safety: variable whose size is not known at compile time need to use the `Box<T` type for items they contain. For example, arrays use by default the `Box<T>` for items they contain. 
+
+Creating a new pointer variable of type `Box<T>` is very straightforward: simply use the `BoxTrait::new(T)` method. To retrieve the value contained in a box, call `unbox` method on your pointer variable.
 
 ### Example with Consts
 
@@ -40,33 +42,11 @@ The `main` function includes 4 function calls:
 
 The important thing to note here is that in the case of `const_passed_by_value`, the compiler actually creates a copy of the  `RandomStruct` with all its fields when passing the variable to the function, while `box_const_passed_by_value` only requires the copy of the value of the pointer which is a felt.
 
-#### Sierra Code
+## The `Nullable<T>` Type for Dictionaries
 
-Here is there Sierra code of the previous program:
+`Nullable<T>` is another type of smart pointer that can either point to a value or be `null` in the absence of value. It is defined at the Sierra level. This type is mainly used in dictionaries that contain types that don't implement the `zero_default` method of the `Felt252DictValue<T>` trait (i.e., arrays and structs).
 
-```rust
-{{#include ../listings/ch11-advanced-features/listing_04_box/src/lib.sierra}}
-```
+If we try to access to an element that does not exist in a dictionarie, the code will fail is the `zero_default` cannot be called.
 
-The first thing that we can notice is the drastic optimization that has been made by the compiler. Indeed, because `complex_const` and `box_complex_const` variables are just created, passed to a function and then dropped, the `main` function that starts on line 9 of the statements actually omits these steps.
+[Chapter 3.2](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively) about dictionaries thoroughly explained how to to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
 
-All that `main` does is:
-- Instantiating a variable of type `Box<RandomStruct>` with the `const_as_immediate` libfunc.
-- Unboxing this variable with the `unbox` libfunc.
-- Drop the previouslys unboxed variable of type `RandomStruct`.
-
-### Quick Recap
-
-Using boxes can improve efficiency as it allows to pass the variable, which is a reference, from a function to another without the need to copy the whole value. Indeed, there is no access to the value contained in the box while there is no unbox. We still need to pay to copy the value of the reference itself, but not the whole `const` struct. Because there is a dedicated segment and because a box can only be used in one place at a time, the `Box<T>` type reduces the number of steps while ensuring soundness in pointers dereferences.
-
-Also, the `Box<T>` is of paramount importance for memory safety, especially when dealing with arrays. Because arrays can grow in size with the `append` method, there is a room for potential illegal out of bounds access that would induce a failure. This is why a new memory segment is allocated when a new array is instantiated. Hence, if you want to retrieve the value of an item contained in an array, you will get at some point a `Box<@T>` that you will have to unbox.
-
-## The `Nullable<T>` Type
-
-`Nullable<T>` is another type of smart pointer that can either point to a value or be null in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option<T>` is that the wrapped value is stored inside a `Box<T>` smart pointer data type.
-
-### Usage
-
-The `Nullable<T>` type is defined at the Sierra level. It is mainly used in dictionaries for types that do not natively implement the `Felt252DictValue<T>` trait, i.e., mainly arrays and structs.
-
-## Conclusion
