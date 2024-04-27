@@ -5,27 +5,18 @@ struct RandomStruct {
     third: felt252
 }
 
-const complexe_const: RandomStruct =
-    RandomStruct { first: true, second: 1, third: 'Cairo stands for CPU AIR' };
-
-fn complex_const() -> RandomStruct {
-    return complexe_const;
+fn struct_passed_by_value(complex_const: RandomStruct) -> RandomStruct {
+    complex_const
 }
 
-fn const_passed_by_value(complex_const: RandomStruct) {}
-
-fn box_complex_const() -> Box<RandomStruct> {
-    BoxTrait::new(complexe_const)
-}
-
-fn box_const_passed_by_value(box_complex_const: Box<RandomStruct>) {
-    let _ = box_complex_const.unbox();
+fn box_struct_passed_by_value(box_complex_const: Box<RandomStruct>) -> Box<RandomStruct> {
+    box_complex_const
 }
 
 fn main() {
-    let complex_const = complex_const();
-    const_passed_by_value(complex_const);
+    let new_struct = RandomStruct { first: true, second: 1, third: 'Cairo' };
+    struct_passed_by_value(new_struct);
 
-    let box_complex_const = box_complex_const();
-    box_const_passed_by_value(box_complex_const);
+    let new_box = BoxTrait::new(RandomStruct { first: true, second: 1, third: 'CPU AIR' });
+    box_struct_passed_by_value(new_box);
 }

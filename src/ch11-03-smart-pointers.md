@@ -35,7 +35,7 @@ Creating a new pointer variable of type `Box<T>` is very straightforward: simply
 
 `first_box` is a box that contains a `felt252` value. `second_box` is a box that contains a tuple of 2 `felt252`.
 
-Let's now take a look at the corresponding CASM code, generated using the Cairo Compiler version 2.5.3 to avoid optimisations applied with last releases.
+Let's now take a look at the corresponding Casm code, generated using the Cairo Compiler version 2.5.3 to avoid optimisations applied with last releases.
 
  ```rust
 {{#include ../listings/ch11-advanced-features/listing_04_basic_box/target/dev/listing_04_basic_box.casm}}
@@ -43,7 +43,7 @@ Let's now take a look at the corresponding CASM code, generated using the Cairo 
 
 The code defined between `%{` and `%}` is what we call a **hint**. A hint is a piece of code that doesn't need to be proven and is only used by the prover, mainly to set some memory cells before executing a Cairo instruction.
 
-As the Cairo VM in production is currently written in Python, so are the hints, and you can see that the generated CASM code contains Python code.
+As the Cairo VM in production is currently written in Python, so are the hints, and you can see that the generated Casm code contains Python code.
 
 The first hint works as follows: `__boxed_segment = segments.add()` creates a new `__boxed_segment` if it doesn't exist yet. Then, `memory[ap + 0] = __boxed_segment` writes at location `ap` the value `__boxed_segment` which is a pointer to the segment that contains boxes. Ultimately, `__boxed_segment += 1`  increments by one the value of the pointer, because `first_box`  contains a single value.
 
@@ -51,24 +51,84 @@ The second hint does almost the same, except that:
 - It doesn't create a new segment but reuse the previously created boxed segment.
 - `__boxed_segment += 2` increments the pointer written at `ap` by 2, because the box contains a tuple of 2 values.
 
-### Example of Box Efficiency with Consts
+### Basic Example of Box Efficiency
 
-Cairo allows to declare complex consts. Let's take a look at the code in Listing {{#ref box}}, which defines a complex `const` and use it in different functions:
+Cairo allows to declare structs that can become very complex. Let's take a look at the code in Listing {{#ref box}}, which defines a simple struct named `RandomStruct` and use it in different functions, whether inside a `Box` or not:
 
 ```rust
 {{#include ../listings/ch11-advanced-features/listing_04_box/src/lib.cairo}}
 ```
 
 {{#label box}}
-<span class="caption">Listing {{#ref box}}: A `main` function that contains multiple function calls that either take or return a `const` or a boxed `const`.</span>
+<span class="caption">Listing {{#ref box}}: A `main` function that contains 2 function calls that take and return a `RandomStruct` or a boxed `RandomStruct`.</span>
 
-The `main` function includes 4 function calls:
-- `complex_const` that returns a variable of type `RandomStruct`.
-- `const_passed_by_value` that takes a variable of type `RandomStruct` and returns nothing.
-- `box_complex_const` that returns a variable of type `Box<RandomStruct>`.
-- `box_const_passed_by_value `that takes a variable of type `Box<RandomStruct>` and returns nothing.
+The `main` function includes 2 function calls:
+- `struct_passed_by_value` that takes a variable of type `RandomStruct` and returns a variable of type `RandomStruct`.
+- `box_struct_passed_by_value` that takes a variable of type `Box<RandomStruct>` and returns a variable of type `Box<RandomStruct>`.
 
-The important thing to note here is that in the case of `const_passed_by_value`, the compiler actually creates a copy of the  `RandomStruct` with all its fields when passing the variable to the function, while `box_const_passed_by_value` only requires the copy of the pointer which is one felt.
+The important thing to note here is that in the case of `struct_passed_by_value`, the compiler actually creates a copy of the  `RandomStruct` with all its fields when passing the variable to the function, while `box_const_passed_by_value` only requires the copy of the `new_box` pointer which is one felt.
+
+Let's see the corresponding non-optimized Casm code to see what happens under the hood:
+
+```rust
+{{#include ../listings/ch11-advanced-features/listing_04_box/target/dev/listing_04_box.casm}}
+```
+
+Lines 1 to 7 correspond to the 2 functions we defined outside of the `main` function, i.e., `struct_passed_by_value` and `box_struct_passed_by_value`.
+
+The `main` function starts on line 8 with the declaration of the `new_struct` variable: 
+
+```rust,noplayground
+8   [ap + 0] = 1, ap++;
+9   [ap + 0] = 1, ap++;
+10  [ap + 0] = 0, ap++;
+11  [ap + 0] = 289397109359, ap++;
+```
+
+Note that the `second` field of our struct is a `u256`, which is is actually stored as 2 `felt252` interpreted as 2 `u128`. This is why we write `1` (low part) and then `0` (high part) to memory for this field. `289397109359` is the decimal represensation of the `felt252` `'Cairo'`.
+
+
+The next line is `call rel -15;`, which will execute the code from lines 1 to 5:
+
+```rust,noplaygroubd
+1   [ap + 0] = [fp + -6], ap++;
+2   [ap + 0] = [fp + -5], ap++;
+3   [ap + 0] = [fp + -4], ap++;
+4   [ap + 0] = [fp + -3], ap++;
+5   ret;
+```
+
+This code extracts from the memory all the fields of our struct that have been passed to the `struct_passed_by_value` function using the Frame Register (equivalent to a stack, that points to memory cells), and writes them again in memory. This shows that when our struct is not contained in a box, passing it to a function requires to copy all its elements from and to the memory in order to use it later. The `ret` tells us to go back to the line after the `call rel` instruction. Therefore, the next lines to be executed start on line 13:
+
+```rust,noplayground
+13  [ap + 0] = 1, ap++;
+14  [ap + 0] = 1, ap++;
+15  [ap + 0] = 0, ap++;
+16  [ap + 0] = 18947149983205714, ap++;
+17  %{
+18  if '__boxed_segment' not in globals():
+19      __boxed_segment = segments.add()
+20  memory[ap + 0] = __boxed_segment
+21  __boxed_segment += 4
+22  %}
+23  [ap + -4] = [[ap + 0] + 0], ap++;
+24  [ap + -4] = [[ap + -1] + 1];
+25  [ap + -3] = [[ap + -1] + 2];
+26  [ap + -2] = [[ap + -1] + 3];
+```
+
+This code declares the `new_box` by writting all the fields of the struct contained in the box in memory. After that, a python hint is used to create a dedicated boxed segment if it doesn't exist yet. Because all the fields of our struct are represented with 4 `felt252`, the hint writes to memory the value of the pointer and then increments by 4 the value of the pointer.
+
+After that, the memory is reorganized, with the value of the pointer written at `[ap + -4]`  and the next cells set to 0.
+
+The next line is `call rel -24;` and corresponds to the call to `box_struct_passed_by_value`  function. This tells us to go back to line 6:
+
+```rust,noplayground
+6   [ap + 0] = [fp + -3], ap++;
+7   ret;
+```
+
+In that case, we can notice that we only write to memory the `new_box` pointer instead of writting all the fields of the struct contained in it. Then, we return and go to line 28 which the final return of the `main` function.
 
 ## The `Nullable<T>` Type for Dictionaries
 
