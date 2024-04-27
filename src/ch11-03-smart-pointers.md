@@ -37,7 +37,7 @@ Creating a new pointer variable of type `Box<T>` is very straightforward: simply
 
 Let's now take a look at the corresponding Casm code, generated using the Cairo Compiler version 2.5.3 to avoid optimisations applied with last releases.
 
- ```rust
+ ```rust,noplayfground
 {{#include ../listings/ch11-advanced-features/listing_04_basic_box/src/listing_04_basic_box.casm}}
 ```
 
