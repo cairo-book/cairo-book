@@ -117,7 +117,7 @@ This code extracts from the memory all the fields of our struct that have been p
 26  [ap + -2] = [[ap + -1] + 3];
 ```
 
-This code declares the `new_box` by writting all the fields of the struct contained in the box in memory. After that, a python hint is used to create a dedicated boxed segment if it doesn't exist yet. Because all the fields of our struct are represented with 4 `felt252`, the hint writes to memory the value of the pointer and then increments by 4 the value of the pointer.
+This code declares the `new_box` by writing all the fields of the struct contained in the box in memory. After that, a python hint is used to create a dedicated boxed segment if it doesn't exist yet. Because all the fields of our struct are represented with 4 `felt252`, the hint writes to memory the value of the pointer and then increments by 4 the value of the pointer.
 
 After that, the memory is reorganized, with the value of the pointer written at `[ap + -4]`  and the next cells set to 0.
 
@@ -128,7 +128,7 @@ The next line is `call rel -24;` and corresponds to the call to `box_struct_pass
 7   ret;
 ```
 
-In that case, we can notice that we only write to memory the `new_box` pointer instead of writting all the fields of the struct contained in it. Then, we return and go to line 28 which the final return of the `main` function.
+In that case, we can notice that we only write to memory the `new_box` pointer instead of writing all the fields of the struct contained in it. Then, we return and go to line 28 which the final return of the `main` function.
 
 ## The `Nullable<T>` Type for Dictionaries
 
