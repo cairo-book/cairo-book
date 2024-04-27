@@ -38,7 +38,7 @@ Creating a new pointer variable of type `Box<T>` is very straightforward: simply
 Let's now take a look at the corresponding Casm code, generated using the Cairo Compiler version 2.5.3 to avoid optimisations applied with last releases.
 
  ```rust
-{{#include ../listings/ch11-advanced-features/listing_04_basic_box/target/dev/listing_04_basic_box.casm}}
+{{#include ../listings/ch11-advanced-features/listing_04_basic_box/src/listing_04_basic_box.casm}}
 ```
 
 The code defined between `%{` and `%}` is what we call a **hint**. A hint is a piece of code that doesn't need to be proven and is only used by the prover, mainly to set some memory cells before executing a Cairo instruction.
@@ -71,7 +71,7 @@ The important thing to note here is that in the case of `struct_passed_by_value`
 Let's see the corresponding non-optimized Casm code to see what happens under the hood:
 
 ```rust
-{{#include ../listings/ch11-advanced-features/listing_04_box/target/dev/listing_04_box.casm}}
+{{#include ../listings/ch11-advanced-features/listing_04_box/src/listing_04_box.casm}}
 ```
 
 Lines 1 to 7 correspond to the 2 functions we defined outside of the `main` function, i.e., `struct_passed_by_value` and `box_struct_passed_by_value`.
