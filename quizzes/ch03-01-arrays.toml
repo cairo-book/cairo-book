@@ -34,7 +34,7 @@ the out-of-bounds index.
 type = "Tracing"
 prompt.program = """
 fn main() {
-    let mut v: Array<ByteArray> array!["Hello "];
+    let mut v: Array<ByteArray> = array!["Hello "];
     let mut s = *v[0];
     s.append(@"world");
     println!("{s}");
