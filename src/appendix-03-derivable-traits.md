@@ -84,7 +84,7 @@ If you run the `main` function, the output will be:
 Run panicked with [2, 99 ('c'), ].
 ```
 
-We can see here that our struct `A` has been serialized into the output array. Note that the `serialize` function takes as argument a snapshot of the type you want to convert into an array. This is why deriving `Drop` for `A` is required here, as the `main` function keeps ownership of the `first_struct` struct. 
+We can see here that our struct `A` has been serialized into the output array. Note that the `serialize` function takes as argument a snapshot of the type you want to convert into, an array in this case. This is why deriving `Drop` for `A` is required here, as the `main` function keeps ownership of the `first_struct` struct. 
 
 Also, we can use the `deserialize` function to convert the serialized array back into our `A` struct.
 
