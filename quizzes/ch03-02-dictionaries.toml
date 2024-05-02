@@ -1,0 +1,68 @@
+[[questions]]
+type = "Tracing"
+prompt.program = """
+use core::dict::Felt252DictTrait;
+fn main() {
+    let mut balances: Felt252Dict<u64> = Default::default();
+    balances.insert('Alex', 100);
+    balances.insert('Maria', 200);
+    let john_balance = balances.get('John') + 100;
+    println!("John : {}", john_balance);
+}
+"""
+answer.doesCompile = true
+answer.stdout = "John : 100"
+context = """
+The code compiles and runs without panicking because the 'get' method returns 0 for a missing key.
+The value of `john_balance` is 0 + 100 = 100.
+"""
+id = "8b538a1f-0cf9-4c57-8304-c4b07e0134dd"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What will be the output of this code snippet?
+
+```
+use core::dict::Felt252DictTrait;
+fn main() {
+    let mut balances: Felt252Dict<u64> = Default::default();
+    balances.insert('Alex', 100);
+    balances.insert('Maria', 200);
+    let alex_balance = balances.get('Alex') - 150;
+    balances.insert('Alex', alex_balance);
+    println!("Alex : {}", alex_balance);
+}
+```
+"""
+prompt.distractors = [
+  "Alex : -50",
+  "Alex : 0",
+  "Alex : 100",
+]
+answer.answer = "There will be a runtime panic."
+context = """
+The value type of this dictionary is `u64`, which is an unsigned integer. So the variable `alex_balance` is a unsigned integer that can't be negative.
+The subtraction operation will cause a runtime panic.
+"""
+id = "af5bc548-fb84-487f-958e-0622d242dc6f"
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+use core::dict::Felt252DictTrait;
+fn main() {
+    let mut balances: Felt252Dict<i64> = Default::default();
+    balances.insert('Alex', 100);
+    balances.insert('Maria', 200);
+    let alex_balance = balances.get('Alex') - 150;
+    println!("Alex : {}", alex_balance);
+}
+"""
+answer.doesCompile = false
+answer.lineNumber = 4
+context = """
+The value type of this dictionary is `i64`, which is not natively supported by the `Felt252Dict`. The code will not compile.
+One must implement custom insert and get functions to deal with `i64` values.
+"""
+id = "f78d9b38-1d3a-4b00-a014-9c618070738c"
