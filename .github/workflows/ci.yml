@@ -16,6 +16,9 @@ jobs:
       - name: Setup Scarb
         uses: software-mansion/setup-scarb@v1
 
+      - name: Setup Starknet-Foundry
+        uses: foundry-rs/setup-snfoundry@v3
+
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
