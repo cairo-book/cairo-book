@@ -93,7 +93,7 @@
   - [Gas Optimisation]()
   - [Printing](ch11-09-printing.md)
 
-- [Appendix](appendix-00.md)
+- [Appendix (Cairo)](appendix-00.md)
 
   - [A - Keywords](appendix-01-keywords.md)
   - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
@@ -157,5 +157,5 @@
 
 ## Appendix
 
-- [Appendix](appendix-00.md)
+- [Appendix (Starknet)](appendix-000.md)
   - [A - System Calls](appendix-08-system-calls.md)
