@@ -1,82 +1,75 @@
 # Smart Pointers
 
-A pointer is a general concept for a variable that contains an address in memory. This address refers to, or “points at,” some other data.
+A pointer is a general concept for a variable that contains a memory address. This address refers to, or “points at,” some other data. While pointers are a powerful feature, they can also be a source of bugs and security vulnerabilities. For example, a pointer can reference an unassigned memory cell, which means that attempting to access the data at that address would cause the program to crash, making it unprovable. To prevent such issues, Cairo uses _Smart Pointers_.
 
-Smart pointers, on the other hand, are data structures that act like a pointer but also have additional metadata and capabilities. The concept of smart pointers isn’t unique to Cairo: smart pointers originated in C++ and exist in other languages like Rust as well.
+Smart pointers, are data structures that act like a pointer, but also have additional metadata and capabilities. The concept of smart pointers isn’t unique to Cairo: smart pointers originated in C++ and exist in other languages like Rust as well. In the specific case of Cairo, smart pointers ensure that memory is not addressed in an unsafe way that could cause a program to be unprovable, by providing a safe way to access memory through strict type checking and ownership rules.
 
-In the specific case of Cairo, smart pointers play a crucial role in preventing illegal memory address references. Their usage ensures that dereferences cannot fail. Remember that it is not possible to prove the execution of a code that fails with the Cairo VM. Hence, it is mandatory to make sure that failing attempt to dereference a pointer and access an unallocated memory cell will never happen.
+Though we didn’t call them as such at the time, we’ve already encountered a few smart pointers in this book, including `Felt252Dict<T>` and `Array<T>` in Chapter 3. Both these types count as smart pointers because they own some memory and allow you to manipulate it. They also have metadata and extra capabilities or guarantees. Arrays, keep track of their current length to ensure that existing elements are not overwritten, and that new elements are only appended to the end.
 
-The Cairo VM memory is composed with segments defined by an index, each segment containing slots to store felts. Using smart pointers allows one to store data in a dedicated segment of the memory, while manipulating a pointer variable in the regular segment.
+The Cairo VM memory is composed by multiple segments indentified by a unique index, each segment containing slots to store felts. When you create an array, you allocate a new segment in the memory to store the array elements. The array itself is just a pointer to that segment where the elements are stored.
 
 ## The `Box<T>` Type to Manipulate Pointers
 
-The `Box<T>` type represents the main smart pointer type in Cairo. It allows us to store data in the `boxed_segment` segment of the Cairo VM memory. This segment is dedicated to the storage of all boxed values. Whenever you instantiate a new pointer variable of type `Box<T>`, you append the data of type `T` to the boxed segment.
+The principal smart pointer type in Cairo is a _box_, whose type is written as `Box<T>`. Boxes allow you to store data in a specific memory segment of the Cairo VM called the _boxed_segment_. This segment is dedicated to store all boxed values, and what remains in the execution segment is only a pointer to the boxed_segment. Whenever you instantiate a new pointer variable of type `Box<T>`, you append the data of type `T` to the boxed segment.
 
-Using boxes can **improve efficiency** as it allows to pass a pointer to some data from a function to another without the need to copy the entire data. Indeed, there is no access to the value contained in the box while there is no unbox. Instead of having to write `n` values into memory before you call a function, you'd only have to write a single value that corresponds to your data pointer. If the data stored in the box is very complex, improvement can be massive.
+Boxes have very little performance overhead, other than writing their inner values to the boxed segment. But they don’t have many extra capabilities either. You’ll use them most often in these situations:
 
-> A `Box<T>` ensures that the data contained in it won't be copied when passed from a function to another.
+- When you have a type whose size can’t be known at compile time and you want to use a value of that type in a context that requires an exact size
+- When you have a large amount of data and you want to transfer ownership but ensure the data won’t be copied when you do so
 
-Also, the `Box<T>` is of paramount importance for **memory safety**, especially when dealing with any variable whose size cannot be known at compile time, like recursive structs. In that case, there is a room for failure due to overlap in memory. Using box ensures that a dedicated segment of memory ca be used to store such data. 
+We’ll demonstrate the first situation in the [“Enabling Recursive Types with Boxes”](./ch11-03-smart-pointers.md#enabling-recursive-types-with-nullable-boxes) section.
+In the second case, transferring ownership of a large amount of data can take a long time because the data is copied around in memory. To improve performance in this situation, we can store the large amount of data to the boxed segment in a box. Then, only the small amount of pointer data is copied around in memory, while the data it references stays in one place on the boxed segment.
 
-Creating a new pointer variable of type `Box<T>` is very straightforward: simply use the `BoxTrait::new(T)` method. To retrieve the value contained in a box, call `unbox` method on your pointer variable. The `unbox` allows one to access the value of a memory cell in a safe manner.
+### Using a `Box<T>` to Store Data in the Boxed Segment
 
-> Note: manually defining a pointer to a memory cell is forbidden in Cairo as it might cause a failure related to dereferencing of a non-allocated memory cell.
+Before we discuss the boxed segment storage use cases for `Box<T>`, we’ll cover the syntax and how to interact with values stored within a `Box<T>`.
 
-### Basic Illustration of `Box<T>` Memory Layout
+Listing {{#ref basic_box}} shows how to use a box to store a value in the boxed segment:
 
- Listing {{#ref basic_box}} shows a basic Cairo program that creates 2 boxes and don't do anything with it:
-
- ```rust
+```rust
 {{#include ../listings/ch11-advanced-features/listing_04_basic_box/src/lib.cairo}}
 ```
 
 {{#label basic_box}}
-<span class="caption">Listing {{#ref basic_box}}: A `main` function that instantiates 2 boxes.</span>
+<span class="caption">Listing {{#ref basic_box}}: Storing a `u128` value in the boxed segment using a box.</span>
 
-`first_box` is a box that contains a `felt252` value. `second_box` is a box that contains a tuple of 2 `felt252`.
+We define the variable `b` to have the value of a `Box` that points to the value `5`, which is stored in the boxed segment. This program will print `b = 5`; in this case, we can access the data in the box similar to how we would if this data was simply in the execution memory. Putting a single value in a box isn’t very useful, so you won’t use boxes by themselves in this way very often. Having values like a single `u128` in the execution memory, where they’re stored by default, is more appropriate in the majority of situations. Let’s look at a case where boxes allow us to define types that we wouldn’t be allowed to if we didn’t have boxes.
 
-Let's now take a look at the corresponding Casm code, generated using the Cairo Compiler version 2.5.3 to avoid optimisations applied with last releases.
+### Enabling Recursive Types with Nullable Boxes
 
- ```rust,noplayfground
-{{#include ../listings/ch11-advanced-features/listing_04_basic_box/src/listing_04_basic_box.casm}}
-```
+<!-- TODO -->
 
-The code defined between `%{` and `%}` is what we call a **hint**. A hint is a piece of code that doesn't need to be proven and is only used by the prover, mainly to set some memory cells before executing a Cairo instruction.
+### Using Boxes to Improve Performance
 
-As the Cairo VM in production is currently written in Python, so are the hints, and you can see that the generated Casm code contains Python code.
+Passing pointers between functions allows you to reference data without copying the data itself. Using boxes can improve performance as it allows you to pass a pointer to some data from one function to another, without the need to copy the entire data in memory before performing the function call. Instead of having to write n values into memory before calling a function, only a single value is written, corresponding to the pointer to the data. If the data stored in the box is very large, the performance improvement can be significant, as you would save `n-1` memory operations before each function call.
 
-The first hint works as follows: `__boxed_segment = segments.add()` creates a new `__boxed_segment` if it doesn't exist yet. Then, `memory[ap + 0] = __boxed_segment` writes at location `ap` the value `__boxed_segment` which is a pointer to the segment that contains boxes. Ultimately, `__boxed_segment += 1`  increments by one the value of the pointer, because `first_box`  contains a single value.
-
-The second hint does almost the same, except that:
-- It doesn't create a new segment but reuse the previously created boxed segment.
-- `__boxed_segment += 2` increments the pointer written at `ap` by 2, because the box contains a tuple of 2 values.
-
-### Basic Example of Box Efficiency
-
-Cairo allows to declare structs that can become very complex. Let's take a look at the code in Listing {{#ref box}}, which defines a simple struct named `RandomStruct` and use it in different functions, whether inside a `Box` or not:
+Let's take a look at the code in Listing {{#ref box}}, which shows two ways of passing data to a function: by value and by pointer.
 
 ```rust
-{{#include ../listings/ch11-advanced-features/listing_04_box/src/lib.cairo}}
+{{#include ../listings/ch11-advanced-features/listing_05_box/src/lib.cairo}}
 ```
 
 {{#label box}}
-<span class="caption">Listing {{#ref box}}: A `main` function that contains 2 function calls that take and return a `RandomStruct` or a boxed `RandomStruct`.</span>
+<span class="caption">Listing {{#ref box}}: Storing large amounts of data in a box for performance.</span>
 
 The `main` function includes 2 function calls:
-- `struct_passed_by_value` that takes a variable of type `RandomStruct` and returns a variable of type `RandomStruct`.
-- `box_struct_passed_by_value` that takes a variable of type `Box<RandomStruct>` and returns a variable of type `Box<RandomStruct>`.
 
-The important thing to note here is that in the case of `struct_passed_by_value`, the compiler actually creates a copy of the  `RandomStruct` with all its fields when passing the variable to the function, while `box_const_passed_by_value` only requires the copy of the `new_box` pointer which is one felt.
+- `pass_data` that takes a variable of type `RandomStruct` and returns it.
+- `pass_pointer` that takes a pointer of type `Box<RandomStruct>` and returns it.
+
+When passing data to a function, the entire data is copied in the last available memory cells right before the function call. Calling `pass_data`, will copy all 3 fields of `RandomStruct` to memory, while `pass_pointer` only requires the copy of the `new_box` pointer which is of size 1.
+
+<!-- TODO: add illustrations rather than CASM Code -->
 
 Let's see the corresponding non-optimized Casm code to see what happens under the hood:
 
 ```rust
-{{#include ../listings/ch11-advanced-features/listing_04_box/src/listing_04_box.casm}}
+{{#include ../listings/ch11-advanced-features/listing_05_box/src/listing_04_box.casm}}
 ```
 
-Lines 1 to 7 correspond to the 2 functions we defined outside of the `main` function, i.e., `struct_passed_by_value` and `box_struct_passed_by_value`.
+Lines 1 to 7 correspond to the 2 functions we defined outside of the `main` function, i.e., `pass_data` and `pass_pointer`.
 
-The `main` function starts on line 8 with the declaration of the `new_struct` variable: 
+The `main` function starts on line 8 with the declaration of the `new_struct` variable:
 
 ```rust,noplayground
 8   [ap + 0] = 1, ap++;
@@ -86,7 +79,6 @@ The `main` function starts on line 8 with the declaration of the `new_struct` va
 ```
 
 Note that the `second` field of our struct is a `u256`, which is is actually stored as 2 `felt252` interpreted as 2 `u128`. This is why we write `1` (low part) and then `0` (high part) to memory for this field. `289397109359` is the decimal represensation of the `felt252` `'Cairo'`.
-
 
 The next line is `call rel -15;`, which will execute the code from lines 1 to 5:
 
@@ -98,7 +90,7 @@ The next line is `call rel -15;`, which will execute the code from lines 1 to 5:
 5   ret;
 ```
 
-This code extracts from the memory all the fields of our struct that have been passed to the `struct_passed_by_value` function using the Frame Register (equivalent to a stack, that points to memory cells), and writes them again in memory. This shows that when our struct is not contained in a box, passing it to a function requires to copy all its elements from and to the memory in order to use it later. The `ret` tells us to go back to the line after the `call rel` instruction. Therefore, the next lines to be executed start on line 13:
+This code extracts from the memory all the fields of our struct that have been passed to the `pass_data` function using the Frame Register (equivalent to a stack, that points to memory cells), and writes them again in memory. This shows that when our struct is not contained in a box, passing it to a function requires to copy all its elements from and to the memory in order to use it later. The `ret` tells us to go back to the line after the `call rel` instruction. Therefore, the next lines to be executed start on line 13:
 
 ```rust,noplayground
 13  [ap + 0] = 1, ap++;
@@ -119,9 +111,9 @@ This code extracts from the memory all the fields of our struct that have been p
 
 This code declares the `new_box` by writing all the fields of the struct contained in the box in memory. After that, a python hint is used to create a dedicated boxed segment if it doesn't exist yet. Because all the fields of our struct are represented with 4 `felt252`, the hint writes to memory the value of the pointer and then increments by 4 the value of the pointer.
 
-After that, the memory is reorganized, with the value of the pointer written at `[ap + -4]`  and the next cells set to 0.
+After that, the memory is reorganized, with the value of the pointer written at `[ap + -4]` and the next cells set to 0.
 
-The next line is `call rel -24;` and corresponds to the call to `box_struct_passed_by_value`  function. This tells us to go back to line 6:
+The next line is `call rel -24;` and corresponds to the call to `pass_pointer` function. This tells us to go back to line 6:
 
 ```rust,noplayground
 6   [ap + 0] = [fp + -3], ap++;
@@ -137,4 +129,3 @@ In that case, we can notice that we only write to memory the `new_box` pointer i
 If we try to access to an element that does not exist in a dictionarie, the code will fail is the `zero_default` cannot be called.
 
 [Chapter 3.2](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively) about dictionaries thoroughly explained how to to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
-

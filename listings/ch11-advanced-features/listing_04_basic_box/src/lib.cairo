@@ -1,4 +1,4 @@
 fn main() {
-    let first_box = BoxTrait::new(1);
-    let second_box = BoxTrait::new((2, 3));
+    let b = BoxTrait::new(5_u128);
+    println!("b = {}", b.unbox())
 }
