@@ -4,13 +4,13 @@ A pointer is a general concept for a variable that contains a memory address. Th
 
 Smart pointers, are data structures that act like a pointer, but also have additional metadata and capabilities. The concept of smart pointers isn’t unique to Cairo: smart pointers originated in C++ and exist in other languages like Rust as well. In the specific case of Cairo, smart pointers ensure that memory is not addressed in an unsafe way that could cause a program to be unprovable, by providing a safe way to access memory through strict type checking and ownership rules.
 
-Though we didn’t call them as such at the time, we’ve already encountered a few smart pointers in this book, including `Felt252Dict<T>` and `Array<T>` in Chapter 3. Both these types count as smart pointers because they own some memory and allow you to manipulate it. They also have metadata and extra capabilities or guarantees. Arrays, keep track of their current length to ensure that existing elements are not overwritten, and that new elements are only appended to the end.
+Though we didn’t call them as such at the time, we’ve already encountered a few smart pointers in this book, including `Felt252Dict<T>` and `Array<T>` in Chapter 3. Both these types count as smart pointers because they own a memory segment and allow you to manipulate it. They also have metadata and extra capabilities or guarantees. Arrays, keep track of their current length to ensure that existing elements are not overwritten, and that new elements are only appended to the end.
 
-The Cairo VM memory is composed by multiple segments indentified by a unique index, each segment containing slots to store felts. When you create an array, you allocate a new segment in the memory to store the array elements. The array itself is just a pointer to that segment where the elements are stored.
+The Cairo VM memory is composed by multiple segments that can store data, each identified by a unique index. When you create an array, you allocate a new segment in the memory to store the future elements. The array itself is just a pointer to that segment where the elements are stored.
 
 ## The `Box<T>` Type to Manipulate Pointers
 
-The principal smart pointer type in Cairo is a _box_, whose type is written as `Box<T>`. Boxes allow you to store data in a specific memory segment of the Cairo VM called the _boxed_segment_. This segment is dedicated to store all boxed values, and what remains in the execution segment is only a pointer to the boxed_segment. Whenever you instantiate a new pointer variable of type `Box<T>`, you append the data of type `T` to the boxed segment.
+The principal smart pointer type in Cairo is a _box_, whose type is written as `Box<T>`. Boxes allow you to store data in a specific memory segment of the Cairo VM called the _boxed_segment_. This segment is dedicated to store all boxed values, and what remains in the execution segment is only a pointer to the boxed segment. Whenever you instantiate a new pointer variable of type `Box<T>`, you append the data of type `T` to the boxed segment.
 
 Boxes have very little performance overhead, other than writing their inner values to the boxed segment. But they don’t have many extra capabilities either. You’ll use them most often in these situations:
 
@@ -41,7 +41,7 @@ We define the variable `b` to have the value of a `Box` that points to the value
 
 ### Using Boxes to Improve Performance
 
-Passing pointers between functions allows you to reference data without copying the data itself. Using boxes can improve performance as it allows you to pass a pointer to some data from one function to another, without the need to copy the entire data in memory before performing the function call. Instead of having to write n values into memory before calling a function, only a single value is written, corresponding to the pointer to the data. If the data stored in the box is very large, the performance improvement can be significant, as you would save `n-1` memory operations before each function call.
+Passing pointers between functions allows you to reference data without copying the data itself. Using boxes can improve performance as it allows you to pass a pointer to some data from one function to another, without the need to copy the entire data in memory before performing the function call. Instead of having to write `n` values into memory before calling a function, only a single value is written, corresponding to the pointer to the data. If the data stored in the box is very large, the performance improvement can be significant, as you would save `n-1` memory operations before each function call.
 
 Let's take a look at the code in Listing {{#ref box}}, which shows two ways of passing data to a function: by value and by pointer.
 
