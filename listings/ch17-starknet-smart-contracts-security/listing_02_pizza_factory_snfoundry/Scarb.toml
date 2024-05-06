@@ -1,5 +1,5 @@
 [package]
-name = "listing_02_pizza"
+name = "listing_02_pizza_snfoundry_test"
 version = "0.1.0"
 edition = "2023_11"
 
@@ -9,3 +9,7 @@ edition = "2023_11"
 starknet = "=2.6.3"
 
 [[target.starknet-contract]]
+
+
+[dev-dependencies]
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.22.0" }
