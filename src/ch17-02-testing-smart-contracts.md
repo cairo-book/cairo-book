@@ -2,112 +2,20 @@
 
 Testing smart contracts is a critical part of the development process. It is important to ensure that the smart contract behaves as expected and that it is secure.
 
-In this section, we will give a brief overview of how to test Cairo smart contracts using Native Test Runner and Starknet Foundry
+In this section, we will give a brief overview of how to test Cairo smart contracts using Native Test Runner and Starknet Foundry. 
 
-We will be testing the following `PizzaFactory` contract:
+Depending on your use case and the complexity of your contract, you can choose the testing tool that best suits your needs.
+
+1. Native Test Runner: For simple and static testing 
+2. Starknet Foundry: For advanced blockchain simulated testing
+ 
+We will be testing our `PizzaFactory` contract: 
 
 ```rust
-use starknet::ContractAddress;
-
-#[starknet::interface]
-pub trait IPizzaFactory<TContractState> {
-    fn increase_pepperoni(ref self: TContractState, amount: u32);
-    fn increase_pineapple(ref self: TContractState, amount: u32);
-    fn make_pizza(ref self: TContractState);
-    fn count_pizza(self: @TContractState) -> u32;
-    fn get_owner(self: @TContractState) -> ContractAddress;
-    fn change_owner(ref self: TContractState, new_owner: ContractAddress);
-}
-
-#[starknet::contract]
-pub mod PizzaFactory {
-    use super::IPizzaFactory;
-    use starknet::ContractAddress;
-    use starknet::get_caller_address;
-
-    #[storage]
-    pub struct Storage {
-        pepperoni: u32,
-        pineapple: u32,
-        owner: ContractAddress,
-        pizzas: u32
-    }
-
-    #[constructor]
-    pub fn constructor(ref self: ContractState, owner: ContractAddress) {
-        self.pepperoni.write(10);
-        self.pineapple.write(10);
-        self.owner.write(owner);
-    }
-
-
-    #[event]
-    #[derive(Drop, starknet::Event)]
-    pub enum Event {
-        PizzaEmission: PizzaEmission
-    }
-
-    #[derive(Drop, starknet::Event)]
-    pub struct PizzaEmission {
-        pub counter: u32
-    }
-
-    #[abi(embed_v0)]
-    pub impl PizzaFactoryimpl of super::IPizzaFactory<ContractState> {
-        fn increase_pepperoni(ref self: ContractState, amount: u32) {
-            assert(amount != 0, 'Amount cannot be 0');
-            self.pepperoni.write(self.pepperoni.read() + amount);
-        }
-
-        fn increase_pineapple(ref self: ContractState, amount: u32) {
-            assert(amount != 0, 'Amount cannot be 0');
-            self.pineapple.write(self.pineapple.read() + amount);
-        }
-
-        fn make_pizza(ref self: ContractState) {
-            assert(self.pepperoni.read() > 0, 'Not enough pepperoni');
-            assert(self.pineapple.read() > 0, 'Not enough pineapple');
-
-            let caller: ContractAddress = get_caller_address();
-            let owner: ContractAddress = self.get_owner();
-
-            assert(caller == owner, 'Only the owner can make pizza');
-
-            self.pepperoni.write(self.pepperoni.read() - 1);
-            self.pineapple.write(self.pineapple.read() - 1);
-            self.pizzas.write(self.pizzas.read() + 1);
-
-            self.emit(PizzaEmission { counter: self.pizzas.read()});
-        }
-
-        fn get_owner(self: @ContractState) -> ContractAddress {
-            self.owner.read()
-        }
-
-        fn change_owner(ref self: ContractState, new_owner: ContractAddress) {
-            self.set_owner(new_owner);
-        }
-
-        fn count_pizza(self: @ContractState) -> u32 {
-            self.pizzas.read()
-        }
-    }
-
-    #[generate_trait]
-    pub impl InternalImpl of InternalTrait {
-        fn set_owner(ref self: ContractState, new_owner: ContractAddress) {
-            let caller: ContractAddress = get_caller_address();
-            assert(caller == self.get_owner(), 'Only owner can change');
-
-            self.owner.write(new_owner);
-        }
-    }
-}
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory/src/pizza.cairo}}
 ```
 
-We will first start with Native Test Runner.
-
-## Testing Smart Contracts with Native Test Runner
+## Introduction to Native Test Runner 
 
 Native Test Runner is a built-in testing tool with `Scarb` and with usage from native libraries from `starknet` which means you can test your cairo contract without any additional installation.
 
@@ -117,88 +25,48 @@ This is the command to run your test contract.
 scarb cairo-test
 ```
 
+List of test functions: 
+
+
+```rust
+// From testing.cairo
+
+fn set_block_number(block_number: u64) 
+fn set_caller_address(address: ContractAddress)
+fn set_contract_address(address: ContractAddress)
+fn set_sequencer_address(address: ContractAddress)
+fn set_block_timestamp(block_timestamp: u64)
+fn set_version(version: felt252)
+fn set_account_contract_address(address: ContractAddress)
+fn set_max_fee(fee: u128)
+fn set_transaction_hash(hash: felt252)
+fn set_chain_id(chain_id: felt252)
+fn set_nonce(nonce: felt252)
+fn set_signature(signature: Span<felt252>)
+```
+
+```rust
+// From info.cairo
+
+fn get_execution_info() -> Box<v2::ExecutionInfo>
+fn get_caller_address() -> ContractAddress
+fn get_contract_address() -> ContractAddress
+fn get_block_info() -> Box<BlockInfo>
+fn get_tx_info() -> Box<v2::TxInfo>
+fn get_block_timestamp() -> u64
+fn get_block_number() -> u64 
+
+```
+We also use functions from syscall library to deploy and interact with the contract. (see [Syscalls](https://github.com/starkware-libs/cairo/blob/main/corelib/src/starknet/syscalls.cairo))
+
+## Testing Smart Contracts with Native Test Runner
+
 Let's look at how we can test our `PizzaFactory` contract using Native Test Runner
 
 Full overview of our test contract:
 
 ```rust
-#[test]
-mod native_test {
-    use source::pizza::{
-        IPizzaFactory, PizzaFactory, IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait
-    };
-
-    use starknet::{
-        ContractAddress, get_caller_address, get_contract_address, contract_address_const
-    };
-
-    use starknet::SyscallResultTrait;
-    use starknet::syscalls::deploy_syscall;
-
-    use starknet::testing::{set_contract_address};
-
-
-    fn deploy(owner_address: ContractAddress) -> IPizzaFactoryDispatcher {
-        let mut calldata = array![];
-        owner_address.serialize(ref calldata);
-
-        let class_hash = PizzaFactory::TEST_CLASS_HASH.try_into().unwrap();
-
-        let (contract_address, _) = deploy_syscall(class_hash, 0, calldata.span(), false)
-            .unwrap_syscall();
-
-        IPizzaFactoryDispatcher { contract_address }
-    }
-
-    #[test]
-    #[available_gas(20000000)]
-    fn test_deploy() {
-        let owner = contract_address_const::<1>();
-        let contract = deploy(owner);
-
-        assert(contract.get_owner() == owner, 'wrong owner');
-    }
-
-    #[test]
-    #[available_gas(20000000)]
-    fn test_set_as_new_owner() {
-        let owner = contract_address_const::<1>();
-        let new_owner = contract_address_const::<2>();
-        let contract = deploy(owner);
-        assert(contract.get_owner() == owner, 'incorrect owner');
-
-        set_contract_address(owner);
-        contract.change_owner(new_owner);
-
-        assert(contract.get_owner() == new_owner, 'incorrect owner');
-    }
-
-    #[test]
-    #[should_panic]
-    #[available_gas(20000000)]
-    fn test_set_not_owner() {
-        let owner = contract_address_const::<1>();
-        let not_owner = contract_address_const::<2>();
-
-        let contract = deploy(owner);
-        assert(contract.get_owner() == not_owner, 'incorrect owner');
-
-        set_contract_address(not_owner);
-        contract.make_pizza();
-    }
-
-    #[test]
-    #[available_gas(20000000)]
-    fn test_pizza_creation() {
-        let owner = contract_address_const::<1>();
-        let contract = deploy(owner);
-        assert(contract.get_owner() == owner, 'incorrect owner');
-
-        set_contract_address(owner);
-        contract.make_pizza();
-        assert(contract.count_pizza() == 1, 'incorrect pizza count')
-    }
-}
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test_overview.cairo}}
 ```
 
 The flow of the deployment process is as follows:
@@ -216,16 +84,7 @@ Let's dive deeper into each test functions
 ### `test_deploy()`
 
 ```rust
-
-    #[test]
-    #[available_gas(20000000)]
-    fn test_deploy() {
-        let owner = contract_address_const::<1>();
-        let contract = deploy(owner);
-
-        assert(contract.get_owner() == owner, 'wrong owner');
-    }
-
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test.cairo:test_1}}
 ```
 
 On here, we first create an instance of contract with the `owner` address.
@@ -236,33 +95,7 @@ We then use `.get_owner()` function to assert that the owner of the contract is 
 ### `test_set_as_new_owner() && test_set_not_owner()`
 
 ```rust
-    #[test]
-    #[available_gas(20000000)]
-    fn test_set_as_new_owner() {
-        let owner = contract_address_const::<1>();
-        let new_owner = contract_address_const::<2>();
-        let contract = deploy(owner);
-        assert(contract.get_owner() == owner, 'incorrect owner');
-
-        set_contract_address(owner);
-        contract.change_owner(new_owner);
-
-        assert(contract.get_owner() == new_owner, 'incorrect owner');
-    }
-
-    #[test]
-    #[should_panic]
-    #[available_gas(20000000)]
-    fn test_set_not_owner() {
-        let owner = contract_address_const::<1>();
-        let not_owner = contract_address_const::<2>();
-
-        let contract = deploy(owner);
-        assert(contract.get_owner() == not_owner, 'incorrect owner');
-
-        set_contract_address(not_owner);
-        contract.make_pizza();
-    }
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test.cairo:test_2}}
 ```
 
 The first function, `test_set_as_new_owner`, we declare two different contract addresses.
@@ -275,17 +108,7 @@ Second function, `test_set_not_owner`, we are utilizing the `[should_panic]` att
 ### `test_pizza_creation()`
 
 ```rust
-    #[test]
-    #[available_gas(20000000)]
-    fn test_pizza_creation() {
-        let owner = contract_address_const::<1>();
-        let contract = deploy(owner);
-        assert(contract.get_owner() == owner, 'incorrect owner');
-
-        set_contract_address(owner);
-        contract.make_pizza();
-        assert(contract.count_pizza() == 1, 'incorrect pizza count')
-    }
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test.cairo:test_3}}
 ```
 
 We are testing the `make_pizza` function and check that the storage variable `pizzas` has been incremented by 1.
@@ -315,114 +138,49 @@ This is the command to run your test contract using Starknet Foundry.
 snforge test
 ```
 
+List of test functions: 
+
+
+```rust
+// From snforge_std
+
+fn test_selector() -> felt252
+fn test_address() -> ContractAddress
+fn roll(target: CheatTarget, block_number: u64, span: CheatSpan)
+fn start_roll(target: CheatTarget, block_number: u64)
+fn stop_roll(target: CheatTarget)
+fn prank(target: CheatTarget, caller_address: ContractAddress, span: CheatSpan)
+fn start_prank(target: CheatTarget, caller_address: ContractAddress)
+fn stop_prank(target: CheatTarget)
+fn warp(target: CheatTarget, block_timestamp: u64, span: CheatSpan)
+fn start_warp(target: CheatTarget, block_timestamp: u64)
+fn stop_warp(target: CheatTarget)
+fn elect(target: CheatTarget, sequencer_address: ContractAddress, span: CheatSpan)
+fn start_elect(target: CheatTarget, sequencer_address: ContractAddress)
+fn stop_elect(target: CheatTarget)
+fn mock_call<T, impl TSerde: core::serde::serde<T>, impl TDestruct: Destruct<T>>(contract_address: ContractAddress, function_selector: felt252, ret_data: T, n_times: u32)
+fn start_mock_call<T, impl TSerde: core::serde::Serde<T>, impl TDestruct: Destruct<T>>(contract_address: ContractAddress, function_selector: felt252, ret_data: T)
+fn stop_mock_call(contract_address: ContractAddress, function_selector: felt252)
+fn replace_bytecode(contract: ContractAddress, new_calss: ClassHash)
+fn validate_cheat_target_and_span(target: @CheatTarget, span: @CheatSpan)
+fn validate_cheat_span(span: @CheatSpan)
+```
+
+There are also other useful modules including:  
+
+```
+mod events;
+mod l1_handler;
+mod contract_class;
+mod tx_info;
+mod fork;
+mod storage; 
+```
+
 Let's look at our test contract:
 
 ```rust
-#[test]
-mod foundry_test {
-    use starknet::{ContractAddress, contract_address_const};
-
-    use snforge_std::{
-        declare, ContractClassTrait, ContractClass, start_prank, stop_prank, CheatTarget, Event,
-        SpyOn, EventSpy, EventAssertions, spy_events, EventFetcher
-    };
-
-    use source::pizza::{
-        IPizzaFactoryDispatcher, IPizzaFactorySafeDispatcher, IPizzaFactoryDispatcherTrait
-    };
-
-    use source::pizza;
-
-    use core::traits::{TryInto, Into};
-    use core::num::traits::Zero;
-
-    use pizza::PizzaFactory::ownerContractMemberStateTrait;
-    use pizza::PizzaFactory::{InternalTrait};
-
-    fn deploy_contract(name: ByteArray) -> ContractAddress {
-        let contract = declare(name).unwrap();
-        let owner: ContractAddress = contract_address_const::<'owner'>();
-
-        let mut constructor_calldata = array![owner.into()];
-
-        let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
-
-        contract_address
-    }
-
-    #[test]
-    fn test_deploy() {
-        let contract_address = deploy_contract("PizzaFactory");
-
-        let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-        let owner_check: ContractAddress = contract_address_const::<'owner'>();
-
-        assert(dispatcher.get_owner() == owner_check, 'owner is not the same');
-
-        start_prank(CheatTarget::One(contract_address), owner_check);
-
-        dispatcher.make_pizza();
-
-        assert(dispatcher.count_pizza() == 1, 'pizza count is not 1');
-    }
-
-
-    #[test]
-    fn test_set_as_new_owner() {
-        let contract_address = deploy_contract("PizzaFactory");
-
-        let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-        let owner_check: ContractAddress = contract_address_const::<'owner'>();
-        let new_owner: ContractAddress = contract_address_const::<'new_owner'>();
-        assert(dispatcher.get_owner() == owner_check, 'owner is not the same');
-
-        start_prank(CheatTarget::One(contract_address), owner_check);
-
-        dispatcher.change_owner(new_owner);
-
-        assert(dispatcher.get_owner() == new_owner, 'owner is not the same');
-    }
-
-    #[test]
-    fn capture_pizza_emission_event() {
-        let contract_address = deploy_contract("PizzaFactory");
-
-        let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-        let owner = dispatcher.get_owner();
-
-        start_prank(CheatTarget::One(contract_address), owner);
-
-        let mut spy = spy_events(SpyOn::One(contract_address));
-
-        dispatcher.make_pizza();
-
-        assert(spy.events.len() == 1, 'events length is not 1');
-
-        spy
-            .assert_emitted(
-                @array![
-                    (
-                        contract_address,
-                        pizza::PizzaFactory::Event::PizzaEmission(
-                            pizza::PizzaFactory::PizzaEmission { counter: dispatcher.count_pizza() }
-                        )
-                    )
-                ]
-            );
-
-        assert(dispatcher.count_pizza() == 1, 'pizza count is not 1');
-    }
-    #[test]
-    fn test_set_as_new_owner_direct() {
-        let mut state = pizza::PizzaFactory::contract_state_for_testing();
-        let owner: ContractAddress = contract_address_const::<'owner'>();
-        state.owner.write(owner);
-        assert(state.owner.read() == owner, 'owner is not the same');
-    }
-}
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test_overview.cairo}}
 ```
 
 The flow of deployment process is as follows:
@@ -436,22 +194,7 @@ Let's look at each test function in detail:
 ### `test_deploy()`
 
 ```rust
-    #[test]
-    fn test_deploy() {
-        let contract_address = deploy_contract("PizzaFactory");
-
-        let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-        let owner_check: ContractAddress = contract_address_const::<'owner'>();
-
-        assert(dispatcher.get_owner() == owner_check, 'owner is not the same');
-
-        start_prank(CheatTarget::One(contract_address), owner_check);
-
-        dispatcher.make_pizza();
-
-        assert(dispatcher.count_pizza() == 1, 'pizza count is not 1');
-    }
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_1}}
 ```
 
 After we deploy our contract and setup the dispatcher, we use cheatcodes to manipulate the contract state. We use the `start_prank` cheatcode to target the deployed contract and et the caller address to be the owner's address. We then call the `make_pizza` function and validate to see if the `pizza` count has been incremented by 1.
@@ -461,22 +204,7 @@ To learn more about cheatcodes, check out the [Cheatcode Section](https://foundr
 ### `test_set_as_new_owner()`
 
 ```rust
-    #[test]
-    fn test_set_as_new_owner() {
-        let contract_address = deploy_contract("PizzaFactory");
-
-        let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-        let owner_check: ContractAddress = contract_address_const::<'owner'>();
-        let new_owner: ContractAddress = contract_address_const::<'new_owner'>();
-        assert(dispatcher.get_owner() == owner_check, 'owner is not the same');
-
-        start_prank(CheatTarget::One(contract_address), owner_check);
-
-        dispatcher.change_owner(new_owner);
-
-        assert(dispatcher.get_owner() == new_owner, 'owner is not the same');
-    }
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_2}}
 ```
 
 On here, our goal is to test the `change_owner` function. We deploy the contract and using `stark_prank` cheatcode, we call the `change_owner` function as the owner and we validate to see if the owner has been changed.
@@ -484,34 +212,7 @@ On here, our goal is to test the `change_owner` function. We deploy the contract
 ### `capture_pizza_emission_event()`
 
 ```rust
-    #[test]
-    fn capture_pizza_emission_event() {
-        let contract_address = deploy_contract("PizzaFactory");
-
-        let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-        let owner = dispatcher.get_owner();
-
-        start_prank(CheatTarget::One(contract_address), owner);
-
-        let mut spy = spy_events(SpyOn::One(contract_address));
-
-        dispatcher.make_pizza();
-
-        spy
-            .assert_emitted(
-                @array![
-                    (
-                        contract_address,
-                        pizza::PizzaFactory::Event::PizzaEmission(
-                            pizza::PizzaFactory::PizzaEmission { counter: dispatcher.count_pizza() }
-                        )
-                    )
-                ]
-            );
-
-        assert(dispatcher.count_pizza() == 1, 'pizza count is not 1');
-    }
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_3}}
 ```
 
 On here, we are testing the event emission of the `make_pizza` function. After deployment, we use `stark_prank` cheatcode to target the deployed contract with owner as the caller, we call the `make_pizza` function to validate if the event has been emitted and the pizza count has been incremented by 1.
@@ -523,13 +224,7 @@ Lastly, we make sure that the `pizza` storage variable has been incremented by 1
 ### `test_set_as_new_owner_direct()`
 
 ```rust
-    #[test]
-    fn test_set_as_new_owner_direct() {
-        let mut state = pizza::PizzaFactory::contract_state_for_testing();
-        let owner: ContractAddress = contract_address_const::<'owner'>();
-        state.owner.write(owner);
-        assert(state.owner.read() == owner, 'owner is not the same');
-    }
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_4}}
 ```
 
 In this test function, we directly create an instance of the contract state using `contract_state_for_testing` function and access the internal functions of the contract instead of declaring/deploying the contract first.
