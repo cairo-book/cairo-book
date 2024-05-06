@@ -54,73 +54,19 @@ Let's take a look at the code in Listing {{#ref box}}, which shows two ways of p
 
 The `main` function includes 2 function calls:
 
-- `pass_data` that takes a variable of type `RandomStruct` and returns it.
-- `pass_pointer` that takes a pointer of type `Box<RandomStruct>` and returns it.
+- `pass_data` that takes a variable of type `Cart` and returns it.
+- `pass_pointer` that takes a pointer of type `Box<Cart>` and returns it.
 
-When passing data to a function, the entire data is copied in the last available memory cells right before the function call. Calling `pass_data`, will copy all 3 fields of `RandomStruct` to memory, while `pass_pointer` only requires the copy of the `new_box` pointer which is of size 1.
+When passing data to a function, the entire data is copied in the last available memory cells right before the function call. Calling `pass_data` will copy all 3 fields of `Cart` to memory, while `pass_pointer` only requires the copy of the `new_box` pointer which is of size 1.
 
-<!-- TODO: add illustrations rather than CASM Code -->
+<div align="center">
+    <img src="box_memory.png" alt="box memory" width="500px"/>
+<div align="center">
+    </div>
+    <span class="caption">CairoVM Memory layout when using boxes</span>
+</div>
 
-Let's see the corresponding non-optimized Casm code to see what happens under the hood:
-
-```rust
-{{#include ../listings/ch11-advanced-features/listing_05_box/src/listing_04_box.casm}}
-```
-
-Lines 1 to 7 correspond to the 2 functions we defined outside of the `main` function, i.e., `pass_data` and `pass_pointer`.
-
-The `main` function starts on line 8 with the declaration of the `new_struct` variable:
-
-```rust,noplayground
-8   [ap + 0] = 1, ap++;
-9   [ap + 0] = 1, ap++;
-10  [ap + 0] = 0, ap++;
-11  [ap + 0] = 289397109359, ap++;
-```
-
-Note that the `second` field of our struct is a `u256`, which is is actually stored as 2 `felt252` interpreted as 2 `u128`. This is why we write `1` (low part) and then `0` (high part) to memory for this field. `289397109359` is the decimal represensation of the `felt252` `'Cairo'`.
-
-The next line is `call rel -15;`, which will execute the code from lines 1 to 5:
-
-```rust,noplaygroubd
-1   [ap + 0] = [fp + -6], ap++;
-2   [ap + 0] = [fp + -5], ap++;
-3   [ap + 0] = [fp + -4], ap++;
-4   [ap + 0] = [fp + -3], ap++;
-5   ret;
-```
-
-This code extracts from the memory all the fields of our struct that have been passed to the `pass_data` function using the Frame Register (equivalent to a stack, that points to memory cells), and writes them again in memory. This shows that when our struct is not contained in a box, passing it to a function requires to copy all its elements from and to the memory in order to use it later. The `ret` tells us to go back to the line after the `call rel` instruction. Therefore, the next lines to be executed start on line 13:
-
-```rust,noplayground
-13  [ap + 0] = 1, ap++;
-14  [ap + 0] = 1, ap++;
-15  [ap + 0] = 0, ap++;
-16  [ap + 0] = 18947149983205714, ap++;
-17  %{
-18  if '__boxed_segment' not in globals():
-19      __boxed_segment = segments.add()
-20  memory[ap + 0] = __boxed_segment
-21  __boxed_segment += 4
-22  %}
-23  [ap + -4] = [[ap + 0] + 0], ap++;
-24  [ap + -4] = [[ap + -1] + 1];
-25  [ap + -3] = [[ap + -1] + 2];
-26  [ap + -2] = [[ap + -1] + 3];
-```
-
-This code declares the `new_box` by writing all the fields of the struct contained in the box in memory. After that, a python hint is used to create a dedicated boxed segment if it doesn't exist yet. Because all the fields of our struct are represented with 4 `felt252`, the hint writes to memory the value of the pointer and then increments by 4 the value of the pointer.
-
-After that, the memory is reorganized, with the value of the pointer written at `[ap + -4]` and the next cells set to 0.
-
-The next line is `call rel -24;` and corresponds to the call to `pass_pointer` function. This tells us to go back to line 6:
-
-```rust,noplayground
-6   [ap + 0] = [fp + -3], ap++;
-7   ret;
-```
-
-In that case, we can notice that we only write to memory the `new_box` pointer instead of writing all the fields of the struct contained in it. Then, we return and go to line 28 which the final return of the `main` function.
+The illustration above demonstrates how the behavior of the memory in both cases. The first instance of `Cart` is stored in the execution segment, and we need to copy all its fields to memory before calling the `pass_data` function. The second instance of `Cart` is stored in the boxed segment, and the pointer to it is stored in the execution segment. When calling the `pass_pointer` function, only the pointer to the struct is copied to memory right before the function call. In both cases, however, instantiating the struct will store all its values in the execution segment: the boxed segment can only be filled with data taken from the execution segment.
 
 ## The `Nullable<T>` Type for Dictionaries
 

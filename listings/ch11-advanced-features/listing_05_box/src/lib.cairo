@@ -1,22 +1,23 @@
 #[derive(Drop)]
-struct RandomStruct {
-    first: bool,
-    second: u256,
-    third: felt252
+struct Cart {
+    paid: bool,
+    items: u256,
+    buyer: ByteArray
 }
 
-fn pass_data(complex_const: RandomStruct) -> RandomStruct {
-    complex_const
+fn pass_data(cart: Cart) {
+    println!("{} is shopping today and bought {} items", cart.buyer, cart.items);
 }
 
-fn pass_pointer(box_complex_const: Box<RandomStruct>) -> Box<RandomStruct> {
-    box_complex_const
+fn pass_pointer(cart: Box<Cart>) {
+    let cart = cart.unbox();
+    println!("{} is shopping today and bought {} items", cart.buyer, cart.items);
 }
 
 fn main() {
-    let new_struct = RandomStruct { first: true, second: 1, third: 'Cairo' };
+    let new_struct = Cart { paid: true, items: 1, buyer: "Eli" };
     pass_data(new_struct);
 
-    let new_box = BoxTrait::new(RandomStruct { first: true, second: 1, third: 'CPU AIR' });
+    let new_box = BoxTrait::new(Cart { paid: false, items: 2, buyer: "Uri" });
     pass_pointer(new_box);
 }
