@@ -1,0 +1,56 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Write the syntax to create a Struct named Student with fields name and age."
+answer.answer = """
+```rust
+Struct Student {
+    name: felt252,
+    age: u8,
+};
+```
+"""
+prompt.distractors = [
+"""
+```rust
+let Student: Struct  = {
+    name: felt525,
+    age: u8,
+}
+```
+""",
+"""
+```rust
+let Student = Student {
+    name: felt525,
+    age: u8,
+}
+```
+""",
+"""
+```rust
+Struct: Student {
+    name: felt525,
+    age: u8,
+}
+```
+"""
+]
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = """Given this code snippet:
+```rust
+    fn main(){
+        let mut student1 = Student{
+            name: 'John Doe',
+            age: 12 
+        };
+    }
+```
+What is the syntax to change the student's age to 18?
+"""
+answer.answer = """
+```rust
+    student1.age = 18;
+```
+"""
