@@ -1,56 +1,56 @@
 [[questions]]
-type = "MultipleChoice"
-prompt.prompt = "Write the syntax to create a Struct named Student with fields name and age."
-answer.answer = """
-```rust
-Struct Student {
+type = "Tracing"
+prompt.program = """Given the code snippet:
+```
+struct Student {
     name: felt252,
     age: u8,
-};
-```
-"""
-prompt.distractors = [
-"""
-```rust
-let Student: Struct  = {
-    name: felt525,
-    age: u8,
+    isActive: bool,
+    isPunctual: bool,
 }
-```
-""",
-"""
-```rust
-let Student = Student {
-    name: felt525,
-    age: u8,
+
+fn main(){
+    let mut student1 = Student{
+        name: 'John Doe', age: 18, isActive: true, isPunctual: true
+    };
+
+    let student2 = Student{
+        ..student1
+    };
+
+
+    println!("{}", student2.age);
 }
-```
-""",
 """
-```rust
-Struct: Student {
-    name: felt525,
-    age: u8,
-}
-```
+answer.doesCompile = false
+answer.lineNumber = 13
+context = """
+A struct in cairo must only be used once. Destruction occurs when the struct is destructured. The variable needs to be dropped due to the potential panic
 """
-]
+
 
 [[questions]]
-type = "ShortAnswer"
-prompt.prompt = """Given this code snippet:
-```rust
-    fn main(){
-        let mut student1 = Student{
-            name: 'John Doe',
-            age: 12 
-        };
+type = "Tracing"
+prompt.program = """
+    struct Student {
+        name: felt252,
+        age: u8,
+        isActive: bool,
     }
-```
-What is the syntax to change the student's age to 18?
+
+    fn create_new_student(name: felt252, age: u8) -> Student{
+        Student {name, age, isActive: true, } 
+    }
+
+    fn main(){
+        let mut student1 = create_new_student('John Doe', 12);
+
+        let mut age = student1.age;
+        age = 18;
+
+        println!("{}", student1.age)
+    }
+
 """
-answer.answer = """
-```rust
-    student1.age = 18;
-```
-"""
+answer.doesCompile = true
+answer.stdout = "12";
