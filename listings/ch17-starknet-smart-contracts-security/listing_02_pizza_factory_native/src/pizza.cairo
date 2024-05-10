@@ -11,13 +11,13 @@ pub trait IPizzaFactory<TContractState> {
 }
 
 #[starknet::contract]
-pub mod PizzaFactory {
+pub(crate) mod PizzaFactory {
     use super::IPizzaFactory;
     use starknet::ContractAddress;
     use starknet::get_caller_address;
 
     #[storage]
-    pub struct Storage {
+    pub(crate) struct Storage {
         pepperoni: u32,
         pineapple: u32,
         owner: ContractAddress,
@@ -25,7 +25,7 @@ pub mod PizzaFactory {
     }
 
     #[constructor]
-    pub fn constructor(ref self: ContractState, owner: ContractAddress) {
+    fn constructor(ref self: ContractState, owner: ContractAddress) {
         self.pepperoni.write(10);
         self.pineapple.write(10);
         self.owner.write(owner);
@@ -34,17 +34,17 @@ pub mod PizzaFactory {
 
     #[event]
     #[derive(Drop, starknet::Event)]
-    pub enum Event {
+    pub(crate) enum Event {
         PizzaEmission: PizzaEmission
     }
 
     #[derive(Drop, starknet::Event)]
-    pub struct PizzaEmission {
+    pub(crate) struct PizzaEmission {
         pub counter: u32
     }
 
     #[abi(embed_v0)]
-    pub impl PizzaFactoryimpl of super::IPizzaFactory<ContractState> {
+    impl PizzaFactoryimpl of super::IPizzaFactory<ContractState> {
         fn increase_pepperoni(ref self: ContractState, amount: u32) {
             assert(amount != 0, 'Amount cannot be 0');
             self.pepperoni.write(self.pepperoni.read() + amount);
@@ -68,7 +68,7 @@ pub mod PizzaFactory {
             self.pineapple.write(self.pineapple.read() - 1);
             self.pizzas.write(self.pizzas.read() + 1);
 
-            self.emit(PizzaEmission { counter: self.pizzas.read()});
+            self.emit(PizzaEmission { counter: self.pizzas.read() });
         }
 
         fn get_owner(self: @ContractState) -> ContractAddress {
@@ -85,7 +85,7 @@ pub mod PizzaFactory {
     }
 
     #[generate_trait]
-    pub impl InternalImpl of InternalTrait {
+    pub(crate) impl InternalImpl of InternalTrait {
         fn set_owner(ref self: ContractState, new_owner: ContractAddress) {
             let caller: ContractAddress = get_caller_address();
             assert(caller == self.get_owner(), 'Only owner can change');

@@ -1,5 +1,5 @@
 [package]
-name = "listing_02_pizza_snfoundry_test"
+name = "source"
 version = "0.1.0"
 edition = "2023_11"
 
