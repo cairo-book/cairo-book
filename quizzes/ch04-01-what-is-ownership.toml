@@ -1,0 +1,35 @@
+[[questions]]
+type = "Tracing"
+prompt.program = """
+struct Dec {
+    a: u32,
+    b: u32,
+}
+
+fn main() {
+    let n9 = Dec { a: 8, b: 3 };
+    bar(n9);
+    bar(n9);
+}
+
+fn bar(n9: Dec) { // do something with p
+}
+"""
+answer.doesCompile = false
+answer.lineNumber = 2
+context = """
+The `Copy` Trait was not implemented on the Dec custom type
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "The reason why dictionary data types must be `squashed` when destructed is:"
+answer.answer = "so that sequence of access can be proven"
+prompt.distractors = [
+  "dictionaries can easily simulate the existence of mutable memory when there is none",
+  "cairo implements dictionarites as a list of entries in order to simulate mutability",
+]
+prompt.answerIndex = 0
+context = """
+Squashing dictionaries in Cairo improves efficiency by reducing memory usage and optimizing data access
+"""

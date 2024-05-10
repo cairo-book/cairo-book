@@ -194,5 +194,7 @@ Cairo does let us return multiple values using a tuple, as shown in Listing {{#r
 
 But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called _references_ and _snapshots_.
 
+{{#quiz ../quizzes/ch04-01-what-is-ownership.toml}}
+
 [data-types]: ch02-02-data-types.html#data-types
 [method-syntax]: ch04-03-method-syntax.html#method-syntax
