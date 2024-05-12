@@ -90,7 +90,7 @@ otherwise use the same values from `user1` that we created in Listing {{#ref use
 {{#label without-update-syntax}}
 
 <span class="caption">Listing {{#ref without-update-syntax}}: Creating a new `User` instance using all but one of
-the values from `user1`</span>
+the values from `user1`.</span>
 
 Using struct update syntax, we can achieve the same effect with less code, as
 shown in Listing {{#ref update-syntax}}. The syntax `..` specifies that the remaining fields not
@@ -106,7 +106,7 @@ explicitly set should have the same value as the fields in the given instance.
 
 <span class="caption">Listing {{#ref update-syntax}}: Using struct update syntax to set a new
 `email` value for a `User` instance but to use the rest of the values from
-`user1`</span>
+`user1`.</span>
 
 The code in Listing {{#ref update-syntax}} also creates an instance in `user2` that has a
 different value for `email` but has the same values for the `username`,
