@@ -1,4 +1,3 @@
-use core::byte_array;
 #[derive(Drop)]
 struct User {
     active: bool,
