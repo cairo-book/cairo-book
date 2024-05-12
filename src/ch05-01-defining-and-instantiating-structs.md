@@ -12,7 +12,7 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 
 {{#label user-struct}}
 
-<span class="caption">Listing {{#ref user-struct}}: A `User` struct definition.</span>
+<span class="caption">Listing {{#ref user-struct}}: A `User` struct definition</span>
 
 To use a struct after we’ve defined it, we create an _instance_ of that struct by specifying concrete values for each of the fields.
 We create an instance by stating the name of the struct and then add curly brackets containing _key: value_ pairs, where the keys are the names of the fields and the values are the data we want to store in those fields. We don’t have to specify the fields in the same order in which we declared them in the struct. In other words, the struct definition is like a general template for the type, and instances fill in that template with particular data to create values of the type.
@@ -26,7 +26,7 @@ For example, we can declare two particular users as shown in Listing {{#ref user
 ```
 
 {{#label user-instances}}
-<span class="caption">Listing {{#ref user-instances}}: Creating two instances of the `User` struct.</span>
+<span class="caption">Listing {{#ref user-instances}}: Creating two instances of the `User` struct</span>
 
 To get a specific value from a struct, we use dot notation. For example, to access `user1`'s email address, we use `user1.email`. If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field. Listing {{#ref user-mut}} shows how to change the value in the `email` field of a mutable `User` instance.
 
@@ -37,7 +37,7 @@ To get a specific value from a struct, we use dot notation. For example, to acce
 ```
 
 {{#label user-mut}}
-<span class="caption">Listing {{#ref user-mut}}: Changing the value in the email field of a `User` instance.</span>
+<span class="caption">Listing {{#ref user-mut}}: Changing the value in the email field of a `User` instance</span>
 
 Note that the entire instance must be mutable; Cairo doesn’t allow us to mark only certain fields as mutable.
 
@@ -89,8 +89,7 @@ otherwise use the same values from `user1` that we created in Listing {{#ref use
 
 {{#label without-update-syntax}}
 
-<span class="caption">Listing {{#ref without-update-syntax}}: Creating a new `User` instance using all but one of
-the values from `user1`</span>
+<span class="caption">Listing {{#ref without-update-syntax}}: Creating a new `User` instance using all but one of the values from `user1`</span>
 
 Using struct update syntax, we can achieve the same effect with less code, as
 shown in Listing {{#ref update-syntax}}. The syntax `..` specifies that the remaining fields not
@@ -105,8 +104,7 @@ explicitly set should have the same value as the fields in the given instance.
 {{#label update-syntax}}
 
 <span class="caption">Listing {{#ref update-syntax}}: Using struct update syntax to set a new
-`email` value for a `User` instance but to use the rest of the values from
-`user1`</span>
+`email` value for a `User` instance but to use the rest of the values from `user1`</span>
 
 The code in Listing {{#ref update-syntax}} also creates an instance in `user2` that has a
 different value for `email` but has the same values for the `username`,
