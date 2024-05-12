@@ -1,35 +1,38 @@
 [[questions]]
 type = "Tracing"
 prompt.program = """
-struct Dec {
-    a: u32,
-    b: u32,
+const PI: u32 = 3.142;
+struct Dimensions {
+    radius: u32,
+    height: u32,
 }
 
 fn main() {
-    let n9 = Dec { a: 8, b: 3 };
-    bar(n9);
-    bar(n9);
+    let rectDimensions = Dimensions { radius: 8, height: 5 };
+    shapeVol(rectDimensions);
+    shapeVol(rectDimensions);
 }
 
-fn bar(n9: Dec) { // do something with p
+fn shapeVol(rectDimensions: Dimensions) -> u32 {
+    const cylinderVol = PI * rectDimensions.radius * rectDimensions.radius * rectDimensions.height;
+    println!("The volume of the cylinder is is {cylinderVol}! ");
 }
 """
 answer.doesCompile = false
 answer.lineNumber = 2
 context = """
-The `Copy` Trait was not implemented on the Dec custom type
+The `Copy` Trait was not implemented on the Dimensions custom type which causes the code not to compile because after calling shapeVol the first time and passing rectDimensions to it, the value has been moved and is no longer avaialable for us to call the second time.
 """
 
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = "The reason why dictionary data types must be `squashed` when destructed is:"
-answer.answer = "so that sequence of access can be proven"
 prompt.distractors = [
   "dictionaries can easily simulate the existence of mutable memory when there is none",
   "cairo implements dictionarites as a list of entries in order to simulate mutability",
 ]
 prompt.answerIndex = 0
+answer.answer = "so that sequence of access can be proven"
 context = """
-Squashing dictionaries in Cairo improves efficiency by reducing memory usage and optimizing data access
+Squashing dictionaries in Cairo is important for provability, to ensure that the program can be verified mathematically.
 """
