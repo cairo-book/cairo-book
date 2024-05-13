@@ -216,3 +216,5 @@ The complete script would look like this:
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:all}}
 ```
+
+{{#quiz ../quizzes/ch03-02-dictionaries.toml}}
