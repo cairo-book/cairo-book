@@ -59,7 +59,7 @@ In other words, there are two important points in time here:
 
 At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the `Array` type we introduced in the [previous chapter](./ch03-01-arrays.md).
 
-### Moving values - Example with Array
+### Moving values
 
 As said earlier, _moving_ a value simply means passing that value to another function. When that happens, the variable referring to that value in the original scope is destroyed and can no longer be used, and a new variable is created to hold the same value.
 
