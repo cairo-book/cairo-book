@@ -12,7 +12,7 @@ fn main() {
 answer.doesCompile = true
 answer.stdout = "John : 100"
 context = """
-The code compiles and runs without panicking because the 'get' method returns 0 for for keys whose associated value is not initialized.
+The code compiles and runs without panicking because the 'get' method returns 0 for keys whose associated value is not initialized.
 The value of `john_balance` is 0 + 100 = 100.
 """
 id = "8b538a1f-0cf9-4c57-8304-c4b07e0134dd"
