@@ -17,7 +17,7 @@ fn main(){
 }
 """
 answer.doesCompile = true
-answer.stdout = "12"
+answer.stdout = "20"
 
 [[questions]]
 type = "Tracing"
