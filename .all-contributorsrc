@@ -253,6 +253,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Symmaque",
+      "name": "Symmaque",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50242998?v=4",
+      "profile": "https://github.com/Symmaque",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
