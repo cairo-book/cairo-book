@@ -95,9 +95,9 @@ how you’d use each numeric operation in a `let` statement:
 Each expression in these statements uses a mathematical operator and evaluates
 to a single value, which is then bound to a variable.
 
-[Appendix B][appendix_b] contains a list of all operators that Cairo provides.
+[Appendix B][operators] contains a list of all operators that Cairo provides.
 
-[appendix_b]: appendix-02-operators-and-symbols.md#operators
+[operators]: ./appendix-02-operators-and-symbols.md#operators
 
 ### The Boolean Type
 
@@ -114,7 +114,7 @@ When declaring a `bool` variable, it is mandatory to use either `true` or `false
 The main way to use Boolean values is through conditionals, such as an `if`
 expression. We’ll cover how `if` expressions work in Cairo in the [Control Flow][control-flow] section.
 
-[control-flow]: ch02-05-control-flow.md
+[control-flow]: ./ch02-05-control-flow.md
 
 ### String Types
 
