@@ -46,23 +46,23 @@ pub(crate) mod PizzaFactory {
     #[abi(embed_v0)]
     impl PizzaFactoryimpl of super::IPizzaFactory<ContractState> {
         fn increase_pepperoni(ref self: ContractState, amount: u32) {
-            assert(amount != 0, 'Amount cannot be 0');
+            assert!(amount != 0, "Amount cannot be 0");
             self.pepperoni.write(self.pepperoni.read() + amount);
         }
 
         fn increase_pineapple(ref self: ContractState, amount: u32) {
-            assert(amount != 0, 'Amount cannot be 0');
+            assert!(amount != 0, "Amount cannot be 0");
             self.pineapple.write(self.pineapple.read() + amount);
         }
 
         fn make_pizza(ref self: ContractState) {
-            assert(self.pepperoni.read() > 0, 'Not enough pepperoni');
-            assert(self.pineapple.read() > 0, 'Not enough pineapple');
+            assert!(self.pepperoni.read() > 0, "Not enough pepperoni");
+            assert!(self.pineapple.read() > 0, "Not enough pineapple");
 
             let caller: ContractAddress = get_caller_address();
             let owner: ContractAddress = self.get_owner();
 
-            assert(caller == owner, 'Only the owner can make pizza');
+            assert!(caller == owner, "Only the owner can make pizza");
 
             self.pepperoni.write(self.pepperoni.read() - 1);
             self.pineapple.write(self.pineapple.read() - 1);
@@ -88,10 +88,9 @@ pub(crate) mod PizzaFactory {
     pub(crate) impl InternalImpl of InternalTrait {
         fn set_owner(ref self: ContractState, new_owner: ContractAddress) {
             let caller: ContractAddress = get_caller_address();
-            assert(caller == self.get_owner(), 'Only owner can change');
+            assert!(caller == self.get_owner(), "Only the owner can set ownership");
 
             self.owner.write(new_owner);
         }
     }
 }
-

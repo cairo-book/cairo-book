@@ -1,201 +1,120 @@
 # Testing Smart Contracts
 
-Testing smart contracts is a critical part of the development process. It is important to ensure that smart contracts behave as expected and that it is secure.
+Testing smart contracts is a critical part of the development process. It is important to ensure that smart contracts behave as expected and that are secure.
 
-In this section, we will give a brief overview of how to test Cairo smart contracts using Native Test Runner and Starknet Foundry. 
+In a previous section of the Cairo Book, we learned how to write and structure our tests for Cairo programs. We demonstrated how these tests could be run using the `scarb` command-line tool.
+While this approach is useful for testing standalone Cairo programs and functions, it lacks functionality for testing smart contracts that require control over the contract state and execution context. Therefore, in this section, we will introduce how to use Starknet Foundry, a smart contract development toolchain for Starknet, to test your Cairo contracts.
 
-Depending on your use case and the complexity of your contract, you can choose the testing tool that best suits your needs.
-
-- Native Test Runner: For simple and static testing 
-- Starknet Foundry: For advanced blockchain simulated testing
- 
-In this chapter, we will be using an example contract `PizzaFactory` to showcase each testing tool. 
+Throughout this chapter, we will be using as an example the `PizzaFactory` contract in Listing {{#ref pizza-factory}} to demonstrate how to write tests with Starknet Foundry.
 
 ```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/pizza.cairo}}
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/pizza.cairo}}
 ```
 
-## Introduction to Native Test Runner 
+{{#label pizza-factory}}
+<span class="caption">Listing {{#ref pizza-factory}}: A pizza factory that needs to be tested</span>
 
-Native Test Runner is a built-in testing tool that comes with `Scarb`, leveraging  `starknet` native libraries which means you can test your cairo contract without any additional installation.
+## Configuring your Scarb project with Starknet Foundry
 
-Scarb provides two commands to run your test contract:
-
-```rust,noplayground
-scarb cairo-test
-scarb test
-```
-
-The `scarb cairo-test` command is used to test our contract in Native Test Runner. 
-
-The `scarb test` is a customizable test command and on default, it is configured to use `scarb cairo-test`. 
-
-As an example, we can change the `scarb test` command to use Starknet Foundry by providing the following in `scarb.toml`:  
+The settings of your Scarb project can be configured in the `Scarb.toml` file. To use Starknet Foundry, as your testing tool, you will need to add it as a dev dependency in your `Scarb.toml` file. At the time of writing, the latest version of Starknet Foundry is `v0.22.0` - but you should use the latest version.
 
 ```toml,noplayground
+[dev-dependencies]
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.22.0" }
+
 [scripts]
 test = "snforge test"
 ```
 
-You can learn more about the commands in the [Scarb documentation](https://docs.swmansion.com/scarb/docs/extensions/testing.html)
+The `scarb test` command is configured to execute `scarb cairo-test` by default. In our settings, we have configured it to execute `snforge test` instead. This will allow us to run our tests using Starknet Foundry when we run the `scarb test` command.
 
-## Testing Smart Contracts with Native Test Runner
-
-Let's look at how we can test our `PizzaFactory` contract using Native Test Runner.
-
-Full overview of our test module:
-
-```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test_overview.cairo}}
-```
-
-The flow of the deployment process is as follows:
-
-1. Create a `calldata` array for `PizzaFactory` constructor arguments
-2. Extract `class_hash` variable from `PizzaFactory::TEST_CLASS_HASH`
-3. Use the `deploy_syscall` function to deploy our contract and destructure `contract_address` from `deploy_syscall` function
-4. Attach `contract_address` to the `IPizzaFactoryDispatcher` struct
-5. Use `IPizzaFactoryDispatcher` to test the individual contract functions
-
-Note that for every individual test function, we use our `deploy` helper function to deploy an instance of the `PizzaFactory` contract.
-
-Let's dive deeper into each test functions.
-
-### `test_deploy()`
-
-```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test.cairo:test_1}}
-```
-
-On here, we first create an instance of contract with the `owner` address.
-We will then, set the dispatcher to the `contract` variable.
-
-We then use `.get_owner()` function to assert that the owner of the contract is the same as the owner we passed in.
-
-### `test_set_as_new_owner() && test_set_not_owner()`
-
-```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test.cairo:test_2}}
-```
-
-The first function, `test_set_as_new_owner`, we declare two different contract addresses.
-
-We first deploy with the contract with the `owner` address and we validate to see if the contract owner is the same as the `owner` address.
-Then, we change the owner address to `new_owner` and we validate to see if the owner address has been changed.
-
-Second function, `test_set_not_owner`, we are utilizing the `[should_panic]` attribute to expect the test function to panic since `make_pizza` function can only be called by the contract owner. In this case, the test will panic since we set the caller to be `not_owner` address.
-
-### `test_pizza_creation()`
-
-```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_native/src/tests/native_test.cairo:test_3}}
-```
-
-We are testing the `make_pizza` function and check that the storage variable `pizzas` has been incremented by 1.
-
-Note that `make_pizza` is owner-only function so we have to set the caller address to be the owner address before calling it.
-
-Once all the test cases have successfully passed, you will see the following output:
-
-```bash
-running 4 tests
-test source::tests::native_test::native_test::test_deploy ... ok (gas usage est.: 242020)
-test source::tests::native_test::native_test::test_set_not_owner ... ok (gas usage est.: 252720)
-test source::tests::native_test::native_test::test_set_as_new_owner ... ok (gas usage est.: 460760)
-test source::tests::native_test::native_test::test_pizza_creation ... ok (gas usage est.: 607720)
-test result: ok. 4 passed; 0 failed; 0 ignored; 0 filtered out;
-```
-
-To learn more about testing with Native Test Runner, check out the libraries directly!
-
-- [testing.cairo](https://github.com/starkware-libs/cairo/blob/main/corelib/src/starknet/testing.cairo#L13C1-L98C2)
-- [info.cairo](https://github.com/starkware-libs/cairo/blob/65b27e7b63dccedeb86514806527449d5da0e3f5/corelib/src/starknet/info.cairo#L45C1-L71C1)
-- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/65b27e7b63dccedeb86514806527449d5da0e3f5/corelib/src/starknet/syscalls.cairo#L6C1-L99C64)
+Once your project is configured, you will need to install Starknet Foundry by following the installation guide from the [Starknet Foundry Documentation](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html). As usual, we recommand to use `asdf` to manage versions of your development tools.
 
 ## Testing Smart Contracts with Starknet Foundry
 
-Starknet Foundry is a toolkit for developing starknet contracts. It also provides a set of testing tools for your starknet contracts. 
+The usual command to run your tests using Starknet Foundry is `snforge test`. However, when we configured our projects, we defined that the `scarb test` command will run the `snforge test` command. Therefore, during the rest of this chapter, consider that the `scarb test` command will be using `snforge test` under the hood.
 
-You can checkout the installation guide from the [Starknet Foundry Documentation](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html).
+The usual testing flow of a contract is as follows:
 
-This is the command to run your test contract using Starknet Foundry:
+1. Declare the class of the contract to test, identified by its name
+2. Serialize the constructor calldata into an array
+3. Deploy the contract and retrieve its address
+4. Interact with the contract's entrypoint to test various scenarios
 
-```rust,noplayground
-snforge test
-```
+### Deploying the Contract to Test
 
-Let's look at our test module:
-
-```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test_overview.cairo}}
-```
-
-The flow of deployment process is as follows:
-
-1. Retrieve contract class hash from `declare` function
-2. Create an array of constructor arguments for the contract
-3. Deploy the contract using `deploy` method and destructure the contract address
-4. Attach `contract_address` to the `IPizzaFactoryDispatcher` struct
-5. Return both dispatcher and the contract address
-
-Let's look at each test function in detail:
-
-### `test_deploy()`
+In Listing {{#ref contract-deployment}}, we wrote a function that deploys the `PizzaFactory` contract and sets up the dispatcher for interactions.
 
 ```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_1}}
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:deployment}}
 ```
 
-After we deploy our contract and setup the dispatcher, we use cheatcodes to manipulate the contract state. We are utilizing `start_prank` to target our contract and set the caller address to be `owner_check`. The first `make_pizza` function call will increment the `pizza` storage variable by 1. However, the second `make_pizza` function call will fail due to being called after `stop_prank` which makes `owner_check` no longer the caller address. Therefore, we expect the test to panic.
+{{#label contract-deployment}}
+<span class="caption">Listing {{#ref contract-deployment}} Deploying the contract to test</span>
 
-### `test_set_as_new_owner()`
+### Testing our Contract
+
+Determining the behavior that your contract should respect is the first step in writing tests. In the `PizzaFactory` contract, we determined that the contract should have the following behavior:
+
+- Upon deployment, the contract owner should be set to the address provided in the constructor, and the factory should have 10 units of pepperoni and pineapple, and no pizzas created.
+- If someone tries to make a pizza and they are not the owner, the operation should fail. Otherwise, the pizza count should be incremented, and an event should be emitted.
+- If someone tries to take ownership of the contract and they are not the owner, the operation should fail. Otherwise, the owner should be updated.
+
+#### Accessing Storage Variables with `load`
 
 ```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_2}}
+{{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_constructor}}
 ```
 
-On here, our goal is to test the `change_owner` function. Using `stark_prank`, we call the `change_owner` function as the owner and we validate to see if the owner has been changed.
+Once our contract is deployed, we want to assert that the initial values are set as expected. If our contract has an entrypoint that returns the value of a storage variable, we can call this entrypoint. Otherwise, we can use the `load` function from `snforge` to load the value of a storage variable inside our contract, even if not exposed by an entrypoint.
 
-### `capture_pizza_emission_event()`
+#### Mocking the Caller Address with `start_prank`
 
 ```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_3}}
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_owner}}
 ```
 
-On here, we are testing the event emission of the `make_pizza` function. We use `stark_prank` to target the deployed contract with owner as the caller, we call the `make_pizza` function to validate if the event has been emitted and the pizza count has been incremented by 1.
-
-We use the `spy_events` method to capture contract events and we provide the expected event parameters on `assert_emitted` method.
-
-Lastly, we make sure that the `pizza` storage variable has been incremented by 1.
-
-### `test_set_as_new_owner_direct()`
+The security of our factory relies on the owner being the only one able to make pizzas and transfer ownership. To test this, we can use the `stark_prank` function to mock the caller address and assert that the contract behaves as expected.
 
 ```rust,noplayground
-{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_4}}
+{{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_owner}}
 ```
 
-In this test function, we directly create an instance of the contract state using `contract_state_for_testing` function and access the internal functions of the contract instead of declaring/deploying the contract first.
+Using `stark_prank`, we call the `change_owner` function as first the owner, and then as a different address. We assert that the operation fails when the caller is not the owner, and that the owner is updated when the caller is the owner.
 
-We first have to import the following to properly access the contract state:
+#### Capturing Events with `spy_events`
+
+When a pizza is created, the contract emits an event. To test this, we can use the `spy_events` function to capture the emitted events and assert that the event was emitted with the expected parameters. Naturally, we can also assert that the pizza count was incremented.
 
 ```rust,noplayground
-    use pizza::PizzaFactory::ownerContractMemberStateTrait;
-    use pizza::PizzaFactory::{InternalTrait};
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:capture_pizza_emission_event}}
 ```
 
-The imports gives us access to our internal functions and the read/write access to `owner` storage variable.
+#### Accessing Internal Functions with `contract_state_for_testing`
 
-We are grabbing the contract state directly and changing the address of the owner by using `.write` method on our `owner` storage variable. Then, we validate to see whether the owner has been updated.
+All the tests we have seen so far have been using a workflow that involves deploying the contract and interacting with the contract's entrypoints. However, sometimes we may want to test the internals of the contract directly, without deploying the contract. How could this be done, if we were reasoning in purely Cairo terms?
 
-Once the test cases have successfully passed, you will see the following output:
+Recall the struct `ContractState`, which is used as a parameter to all the entrypoints of a contract. To make it short, this struct contains empty-sized fields, corresponding to the storage variables of the contract. The only purpose of these fields is to allow the Cairo compiler to generate the correct code for accessing the storage variables. If we could create an instance of this struct, we could access the storage variables directly, without deploying the contract, using the code internal to the contract...
+
+...and this is exactly what the `contract_state_for_testing` function does! It creates an instance of the `ContractState` struct, allowing us to call any function that takes as parameter a `ContractState` struct, without deploying the contract. To interact with the storage variables properly, we need to manually import the traits that define access to the storage variables.
+
+```rust,noplayground
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:import_internal}}
+```
+
+These imports give us access to our internal functions (notably, `set_owner`), as well as the
+read/write access to the `owner` storage variable. Once we have these, we can interact with the
+contract directly, changing the address of the owner by calling the `set_owner` method, accessible
+through `InternalTrait`, and reading the `owner` storage variable.
+
+> Note: Both approaches cannot be used at the same time. If you decide to deploy the contract, you interact with it using the dispatcher. If you decide to test the internal functions, you interact with the `ContractState` object directly.
 
 ```bash,noplayground
-Running 4 test(s) from src/
-[PASS] source::tests::foundry_test::foundry_test::test_set_as_new_owner_direct (gas: ~129)
-[PASS] source::tests::foundry_test::foundry_test::test_deploy (gas: ~366)
-[PASS] source::tests::foundry_test::foundry_test::test_set_as_new_owner (gas: ~300)
-[PASS] source::tests::foundry_test::foundry_test::capture_pizza_emission_event (gas: ~370)
-Tests: 4 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/output.txt}}
 ```
 
-To learn more, check out the official [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/index.html)
+## Summary
+
+In this chapter, we learned how to test smart contracts using Starknet Foundry. We demonstrated how to deploy a contract and interact with it using the dispatcher. We also showed how to test the contract's behavior by mocking the caller address and capturing events. Finally, we demonstrated how to test the internal functions of the contract directly, without deploying the contract.
+
+To learn more about Starknet Foundry, refer to the [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/index.html)

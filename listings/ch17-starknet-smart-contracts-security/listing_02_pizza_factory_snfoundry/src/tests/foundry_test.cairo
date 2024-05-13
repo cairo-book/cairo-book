@@ -2,20 +2,26 @@
 mod foundry_test {
     use source::pizza::{
         IPizzaFactoryDispatcher, IPizzaFactorySafeDispatcher, IPizzaFactoryDispatcherTrait,
-        PizzaFactory::{ownerContractMemberStateTrait, InternalTrait}
+        PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
     };
+    //ANCHOR: import_internal
+    use source::pizza::PizzaFactory::{ownerContractMemberStateTrait, InternalTrait};
+    //ANCHOR_END: import_internal
 
     use starknet::{ContractAddress, contract_address_const};
 
     use snforge_std::{
-        declare, ContractClassTrait, ContractClass, start_prank, stop_prank, CheatTarget, Event,
-        SpyOn, EventSpy, EventAssertions, spy_events, EventFetcher
+        declare, ContractClassTrait, ContractClass, start_prank, stop_prank, CheatTarget, SpyOn,
+        EventSpy, EventAssertions, spy_events, EventFetcher, load, cheatcodes::storage::load_felt252
     };
 
-    use snforge_std as snf;
+    fn owner() -> ContractAddress {
+        contract_address_const::<'owner'>()
+    }
 
-    fn deploy_contract(name: ByteArray) -> (IPizzaFactoryDispatcher, ContractAddress) {
-        let contract = snf::declare(name).unwrap();
+    //ANCHOR: deployment
+    fn deploy_pizza_factory() -> (IPizzaFactoryDispatcher, ContractAddress) {
+        let contract = declare("PizzaFactory").unwrap();
         let owner: ContractAddress = contract_address_const::<'owner'>();
 
         let mut constructor_calldata = array![owner.into()];
@@ -26,83 +32,82 @@ mod foundry_test {
 
         (dispatcher, contract_address)
     }
+    //ANCHOR_END: deployment
 
-    //ANCHOR: test_1
+    //ANCHOR: test_constructor
     #[test]
-    #[should_panic(expected: ('Only the owner can make pizza', ))]
-    fn test_deploy() {
-        let (pizza_factory, pizza_factory_address) = deploy_contract("PizzaFactory");
+    fn test_constructor() {
+        let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
 
-        let owner_check: ContractAddress = contract_address_const::<'owner'>();
-
-        assert_eq!(pizza_factory.get_owner(), owner_check);
-
-        start_prank(CheatTarget::One(pizza_factory_address), owner_check);
-
-        pizza_factory.make_pizza();
-
-        assert_eq!(pizza_factory.count_pizza(), 1);
-
-        stop_prank(CheatTarget::One(pizza_factory_address));
-
-        pizza_factory.make_pizza();
+        let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
+        let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
+        assert_eq!(pepperoni_count, array![10]);
+        assert_eq!(pineapple_count, array![10]);
+        assert_eq!(pizza_factory.get_owner(), owner());
     }
-    //ANCHOR_END: test_1
-    //ANCHOR: test_2
+    //ANCHOR_END: test_constructor
+
+    //ANCHOR: test_owner
     #[test]
-    fn test_set_as_new_owner() {
-        let (pizza_factory, pizza_factory_address) = deploy_contract("PizzaFactory");
+    fn test_change_owner_should_change_owner() {
+        let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
 
-        let owner_check: ContractAddress = contract_address_const::<'owner'>();
         let new_owner: ContractAddress = contract_address_const::<'new_owner'>();
-        assert_eq!(pizza_factory.get_owner(), owner_check);
+        assert_eq!(pizza_factory.get_owner(), owner());
 
-        start_prank(CheatTarget::One(pizza_factory_address), owner_check);
+        start_prank(CheatTarget::One(pizza_factory_address), owner());
 
         pizza_factory.change_owner(new_owner);
 
         assert_eq!(pizza_factory.get_owner(), new_owner);
     }
-    //ANCHOR_END: test_2
-    //ANCHOR: test_3
+
     #[test]
-    fn capture_pizza_emission_event() {
-        let (pizza_factory, pizza_factory_address) = deploy_contract("PizzaFactory");
+    #[should_panic(expected: ("Only the owner can set ownership",))]
+    fn test_change_owner_should_panic_when_not_owner() {
+        let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+        let not_owner = contract_address_const::<'not_owner'>();
+        start_prank(CheatTarget::One(pizza_factory_address), not_owner);
+        pizza_factory.change_owner(not_owner);
+        stop_prank(CheatTarget::One(pizza_factory_address));
+    }
+    //ANCHOR_END: test_owner
 
-        let owner = pizza_factory.get_owner();
-
-        start_prank(CheatTarget::One(pizza_factory_address), owner);
-
-        let mut spy = spy_events(SpyOn::One(pizza_factory_address));
+    //ANCHOR: test_make_pizza
+    #[test]
+    #[should_panic(expected: ("Only the owner can make pizza",))]
+    fn test_make_pizza_should_panic_when_not_owner() {
+        let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+        let not_owner = contract_address_const::<'not_owner'>();
+        start_prank(CheatTarget::One(pizza_factory_address), not_owner);
 
         pizza_factory.make_pizza();
-
-        spy
-            .assert_emitted(
-                @array![
-                    (
-                        pizza_factory_address,
-                        source::pizza::PizzaFactory::Event::PizzaEmission(
-                            source::pizza::PizzaFactory::PizzaEmission {
-                                counter: pizza_factory.count_pizza()
-                            }
-                        )
-                    )
-                ]
-            );
-
-        assert_eq!(pizza_factory.count_pizza(), 1);
     }
-    //ANCHOR_END: test_3
-    //ANCHOR: test_4
+
+    #[test]
+    fn test_make_pizza_should_increment_pizza_counter() {
+        // Setup
+        let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+        start_prank(CheatTarget::One(pizza_factory_address), owner());
+        let mut spy = spy_events(SpyOn::One(pizza_factory_address));
+
+        // When
+        pizza_factory.make_pizza();
+
+        // Then
+        let expected_event = PizzaEvents::PizzaEmission(PizzaEmission { counter: 1 });
+        assert_eq!(pizza_factory.count_pizza(), 1);
+        spy.assert_emitted(@array![(pizza_factory_address, expected_event)]);
+    }
+    //ANCHOR_END: test_make_pizza
+
+    //ANCHOR: test_internals
     #[test]
     fn test_set_as_new_owner_direct() {
-        let mut state = source::pizza::PizzaFactory::contract_state_for_testing();
+        let mut state = PizzaFactory::contract_state_for_testing();
         let owner: ContractAddress = contract_address_const::<'owner'>();
-        state.owner.write(owner);
+        state.set_owner(owner);
         assert_eq!(state.owner.read(), owner);
     }
-    //ANCHOR_END: test_4
+//ANCHOR_END: test_internals
 }
-
-
