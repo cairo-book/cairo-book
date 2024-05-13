@@ -57,7 +57,7 @@ In other words, there are two important points in time here:
 - When `s` comes _into_ scope, it is valid.
 - It remains valid until it goes _out of_ scope.
 
-At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the `Array` type we introduced in the [previous "Arrays" chapter][array].
+At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the `Array` type we introduced in the previous ["Arrays"][array] chapter.
 
 [array]: ./ch03-01-arrays.md
 
@@ -91,7 +91,7 @@ Thankfully, this code does not actually compile. Once we have passed the array t
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
 The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
 
-All basic types previously described in ["Data Types" Chapter][data types] implement by default the `Copy` trait.
+All basic types previously described in ["Data Types"][data types] chapter implement by default the `Copy` trait.
 
 While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
 You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components doesn't implement the Copy trait.

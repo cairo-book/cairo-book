@@ -21,7 +21,7 @@ These functions allow us to manipulate dictionaries like in any other language. 
 
 We can create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and add two individuals, each one with their own balance, using the `insert` method. Finally, we check the balance of our users with the `get` method. These methods are defined in the `Felt252DictTrait` trait in the core library.
 
-Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath][dict underneath].
+Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in ["Dictionaries Underneath"][dict underneath].
 
 Building upon our previous example, let us show a code example where the balance of the same user changes:
 
@@ -111,11 +111,11 @@ In case of a change on any of the values of the first table, squashing would hav
 
 ## Dictionary Destruction
 
-If you run the examples from [Basic Use of Dictionaries][basic use], you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
+If you run the examples from ["Basic Use of Dictionaries"][basic use] section, you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
 
-The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct][drop destruct].
+The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct][drop destruct] section of Appendix C.
 
-Later in [Dictionaries as Struct Members][destruct example], we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
+Later in ["Dictionaries as Struct Members"][destruct example], we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
 
 [basic use]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
 [drop destruct]: ./appendix-03-derivable-traits.md#drop-and-destruct
@@ -131,7 +131,7 @@ We will start by explaining the `entry` method which is part of a dictionary bas
 
 ## Entry and Finalize
 
-In the [Dictionaries Underneath][dict underneath] section, we explained how `Felt252Dict<T>` internally worked. It was a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given a certain `key` and then update it accordingly to whatever operation it was executing. The Cairo language gives us the tools to replicate this ourselves through the `entry` and `finalize` methods.
+In the ["Dictionaries Underneath"][dict underneath] section, we explained how `Felt252Dict<T>` internally worked. It was a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given a certain `key` and then update it accordingly to whatever operation it was executing. The Cairo language gives us the tools to replicate this ourselves through the `entry` and `finalize` methods.
 
 The `entry` method comes as part of `Felt252DictTrait<T>` with the purpose of creating a new entry given a certain key. Once called, this method takes ownership of the dictionary and returns the entry to update. The method signature is as follows:
 
@@ -165,7 +165,7 @@ Implementing our custom get would look like this:
 ```
 
 The `ref` keyword means that the ownership of the variable will be given back at the end of
-the function. This concept will be explained in more detail in the [References and Snapshots][references] section.
+the function. This concept will be explained in more detail in the ["References and Snapshots"][references] section.
 
 Implementing the `insert` method would follow a similar workflow, except for inserting a new value when finalizing. If we were to implement it, it would look like the following:
 
