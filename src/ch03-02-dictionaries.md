@@ -111,23 +111,23 @@ In case of a change on any of the values of the first table, squashing would hav
 
 ## Dictionary Destruction
 
-If you run the examples from ["Basic Use of Dictionaries"][basic use] section, you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
+If you run the examples from ["Basic Use of Dictionaries"][basic dictionaries] section, you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
 
 The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct][drop destruct] section of Appendix C.
 
-Later in ["Dictionaries as Struct Members"][destruct example] section, we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
+Later in ["Dictionaries as Struct Members"][dictionaries in structs] section, we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
 
-[basic use]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
+[basic dictionaries]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
 [drop destruct]: ./appendix-03-derivable-traits.md#drop-and-destruct
-[destruct example]: ./ch11-01-custom-data-structures.html#dictionaries-as-struct-members
+[dictionaries in structs]: ./ch11-01-custom-data-structures.html#dictionaries-as-struct-members
 
 ## More Dictionaries
 
 Up to this point, we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in a certain way. If you haven't understood all of it, don't worry because in this section we will have some more examples using dictionaries.
 
-We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` [interacts][types unsupported] with other complex types such as `Array<T>`.
+We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how to use `Felt252Dict<T>` with other [complex types][nullable dictionaries values] such as `Array<T>`.
 
-[types unsupported]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
+[nullable dictionaries values]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
 ## Entry and Finalize
 

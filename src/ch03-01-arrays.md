@@ -109,17 +109,17 @@ With `array!`:
 
 ## Storing Multiple Types with Enums
 
-If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the ["Enums"][enums] chapter.
+If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the ["Enums and Pattern Matching"][enums] chapter.
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_07_array_with_enums/src/lib.cairo}}
 ```
 
-[enums]: ./ch06-01-enums.md
+[enums]: ./ch06-00-enums-and-pattern-matching.md
 
 ## Span
 
-`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations. See ["References and Snapshots"][references] chapter.
+`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations, as introduced in ["References and Snapshots"][references].
 
 All methods provided by `Array` can also be used with `Span`, except for the `append()` method.
 
