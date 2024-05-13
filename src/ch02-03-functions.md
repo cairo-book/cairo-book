@@ -122,7 +122,7 @@ assigning a value to it with the `let` keyword is a statement. In Listing {{#ref
 ```
 
 {{#label fn-main}}
-<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement.</span>
+<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement</span>
 
 Function definitions are also statements; the entire preceding example is a statement in itself.
 

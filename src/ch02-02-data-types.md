@@ -97,6 +97,8 @@ to a single value, which is then bound to a variable.
 
 [Appendix B][appendix_b] contains a list of all operators that Cairo provides.
 
+[appendix_b]: appendix-02-operators-and-symbols.md#operators
+
 ### The Boolean Type
 
 As in most other programming languages, a Boolean type in Cairo has two possible
@@ -112,13 +114,15 @@ When declaring a `bool` variable, it is mandatory to use either `true` or `false
 The main way to use Boolean values is through conditionals, such as an `if`
 expression. We’ll cover how `if` expressions work in Cairo in the [Control Flow][control-flow] section.
 
+[control-flow]: ch02-05-control-flow.md
+
 ### String Types
 
 Cairo doesn't have a native type for strings but provides two ways to handle them: short strings using simple quotes and ByteArray using double quotes.
 
 #### Short strings
 
-A short string is an ASCII string where each character is encoded on one byte (see the [ASCII table](https://www.asciitable.com/)). For example:
+A short string is an ASCII string where each character is encoded on one byte (see the [ASCII table][ascii]). For example:
 
 - `'a'` is equivalent to `0x61`
 - `'b'` is equivalent to `0x62`
@@ -134,6 +138,8 @@ Here are some examples of declaring short strings in Cairo:
 ```rust
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:6}}
 ```
+
+[ascii]: https://www.asciitable.com/
 
 #### Byte Array Strings
 
@@ -202,6 +208,3 @@ Its size is always zero, and it is guaranteed to not exist in the compiled code.
 You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns `()` implicitly.
 
 {{#quiz ../quizzes/ch02-02-data-types.toml}}
-
-[control-flow]: ch02-05-control-flow.md
-[appendix_b]: appendix-02-operators-and-symbols.md#operators

@@ -131,6 +131,8 @@ conveying the meaning of that value to future maintainers of the code. It also
 helps to have only one place in your code you would need to change if the
 hardcoded value needed to be updated in the future.
 
+[data-types]: ch02-02-data-types.md
+
 ## Shadowing
 
 Variable shadowing refers to the declaration of a
@@ -191,8 +193,6 @@ The error says we were expecting a `u64` (the original type) but we got a differ
 {{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/output.txt}}
 ```
 
-Now that we’ve explored how variables work, let’s look at more data types they can have.
-
 {{#quiz ../quizzes/ch02-01-variables-and-mutability.toml}}
 
-[data-types]: ch02-02-data-types.md
+Now that we’ve explored how variables work, let’s look at more data types they can have.
