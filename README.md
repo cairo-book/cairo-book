@@ -4,7 +4,7 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-26-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -197,6 +197,7 @@ The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines i
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/LucasLvy"><img src="https://avatars.githubusercontent.com/u/70894690?v=4?s=100" width="100px;" alt="Lucas @ StarkWare"/><br /><sub><b>Lucas @ StarkWare</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=LucasLvy" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/remybar"><img src="https://avatars.githubusercontent.com/u/57539816?v=4?s=100" width="100px;" alt="Rémy Baranx"/><br /><sub><b>Rémy Baranx</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=remybar" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/stevencartavia"><img src="https://avatars.githubusercontent.com/u/112043913?v=4?s=100" width="100px;" alt="Steven Cordero"/><br /><sub><b>Steven Cordero</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=stevencartavia" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Symmaque"><img src="https://avatars.githubusercontent.com/u/50242998?v=4?s=100" width="100px;" alt="Symmaque"/><br /><sub><b>Symmaque</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=Symmaque" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=Symmaque" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
