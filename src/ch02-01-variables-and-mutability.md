@@ -131,7 +131,7 @@ conveying the meaning of that value to future maintainers of the code. It also
 helps to have only one place in your code you would need to change if the
 hardcoded value needed to be updated in the future.
 
-[data-types]: ch02-02-data-types.md
+[data-types]: ./ch02-02-data-types.md
 
 ## Shadowing
 

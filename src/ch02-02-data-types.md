@@ -112,7 +112,7 @@ Cairo is specified using `bool`. For example:
 When declaring a `bool` variable, it is mandatory to use either `true` or `false` literals as value. Hence, it is not allowed to use integer literals (i.e. `0` instead of false) for `bool` declarations.
 
 The main way to use Boolean values is through conditionals, such as an `if`
-expression. We’ll cover how `if` expressions work in Cairo in the [Control Flow][control-flow] section.
+expression. We’ll cover how `if` expressions work in Cairo in the ["Control Flow"][control-flow] section.
 
 [control-flow]: ./ch02-05-control-flow.md
 

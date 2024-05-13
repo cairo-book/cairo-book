@@ -115,7 +115,7 @@ If you run the examples from ["Basic Use of Dictionaries"][basic use] section, y
 
 The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct][drop destruct] section of Appendix C.
 
-Later in ["Dictionaries as Struct Members"][destruct example], we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
+Later in ["Dictionaries as Struct Members"][destruct example] section, we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
 
 [basic use]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
 [drop destruct]: ./appendix-03-derivable-traits.md#drop-and-destruct
