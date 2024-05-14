@@ -73,7 +73,9 @@ Function is declared as nopanic but calls a function that may panic.
     ^********************^
 ```
 
-Note that there are two functions that may panic here, `assert` and equality with `==`. We usually don't use `assert` function in practice and use `assert!` macro instead. We will discuss `assert!` macro in more detail in [Testing Cairo Programs](ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro) chapter.
+Note that there are two functions that may panic here, `assert` and equality with `==`. We usually don't use `assert` function in practice and use `assert!` macro instead. We will discuss `assert!` macro in more detail in [Testing Cairo Programs][assert macro] chapter.
+
+[assert macro]: ./ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro
 
 ## `panic_with` Attribute
 

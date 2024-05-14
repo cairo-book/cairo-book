@@ -32,11 +32,11 @@ Let's introduce a short example to illustrate the mechanisms of inlining in Cair
 ```
 
 {{#label inlining}}
-<span class="caption">Listing {{#ref inlining}}: A small Cairo program that adds the return value of 2 functions, with one of them being inlined.</span>
+<span class="caption">Listing {{#ref inlining}}: A small Cairo program that adds the return value of 2 functions, with one of them being inlined</span>
 
 Let's take a look at the corresponding Sierra code to see how inlining works under the hood:
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_03_inlining_example/src/inlining.sierra}}
 ```
 
@@ -155,7 +155,7 @@ Let's study another program that shows other benefits that inlining may sometime
 
 Here is the corresponding Sierra code:
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_02_inlining/src/inlining.sierra}}
 ```
 

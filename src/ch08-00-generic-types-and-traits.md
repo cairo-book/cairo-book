@@ -2,13 +2,15 @@
 
 Every programming language has tools for effectively handling the duplication of concepts. In Cairo, one such tool is generics: abstract stand-ins for concrete types or other properties. We can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
 
-Functions can take parameters of some generic type, instead of a concrete type like `u32` or `bool`, in the same way a function takes parameters with unknown values to run the same code on multiple concrete values. In fact, we’ve already used generics in [Chapter 6](ch06-01-enums.md) with `Option<T>`.
+Functions can take parameters of some generic type, instead of a concrete type like `u32` or `bool`, in the same way a function takes parameters with unknown values to run the same code on multiple concrete values. In fact, we’ve already used generics in [Chapter 6][enums] with `Option<T>`.
 
 In this chapter, you’ll explore how to define your own types, functions, and traits with generics.
 
 Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication. Upon compilation, the compiler creates a new definition for each concrete type that replaces a generic type, reducing development time for the programmer, but code duplication at compile level still exists. This may be of importance if you are writing Starknet contracts and using a generic for multiple types which will cause contract size to increment.
 
 Then you’ll learn how to use traits to define behavior in a generic way. You can combine traits with generic types to constrain a generic type to accept only those types that have a particular behavior, as opposed to just any type.
+
+[enums]: ./ch06-01-enums.md
 
 ## Removing Duplication by Extracting a Function
 
