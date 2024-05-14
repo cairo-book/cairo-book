@@ -29,8 +29,9 @@ You can think of it as a single slot in a database that you can query and modify
 {{#label interface}}
 <span class="caption">Listing {{#ref interface}}: A basic contract interface.</span>
 
+Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world, without including the function body. In Cairo, they're defined by annotating a trait with the `#[starknet::interface]` attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.
 
-Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world. In Cairo, they're defined by annotating a trait with the `#[starknet::interface]` attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.
+> The contract constructor is not part of the interface. Nor are internal functions.
 
 All contract interfaces use a generic type for the `self` parameter, representing the contract state. We chose to name this generic parameter `TContractState` in our interface, but this is not enforced and any name can be chosen.
 
