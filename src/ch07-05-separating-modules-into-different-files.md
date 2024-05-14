@@ -22,7 +22,7 @@ _src/front_of_house.cairo_ file.
 ```
 
 {{#label front-extraction}}
-<span class="caption">Listing {{#ref front-extraction}}: Declaring the `front_of_house` module whose body will be in _src/front_of_house.cairo_.</span>
+<span class="caption">Listing {{#ref front-extraction}}: Declaring the `front_of_house` module whose body will be in _src/front_of_house.cairo_</span>
 
 Next, place the code that was in the curly brackets into a new file named
 _src/front_of_house.cairo_, as shown in Listing {{#ref module-foh}}. The compiler knows to look
@@ -36,13 +36,13 @@ with the name `front_of_house`.
 ```
 
 {{#label module-foh}}
-<span class="caption">Listing {{#ref module-foh}}: Definitions inside the `front_of_house` module in _src/front_of_house.cairo_.</span>
+<span class="caption">Listing {{#ref module-foh}}: Definitions inside the `front_of_house` module in _src/front_of_house.cairo_</span>
 
 Note that you only need to load a file using a `mod` declaration _once_ in your
 module tree. Once the compiler knows the file is part of the project (and knows
 where in the module tree the code resides because of where you’ve put the `mod`
 statement), other files in your project should refer to the loaded file’s code
-using a path to where it was declared, as covered in the [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section.
+using a path to where it was declared, as covered in the ["Paths for Referring to an Item in the Module Tree"][path] chapter.
 In other words, `mod` is _not_ an “include” operation that you may have seen in other
 programming languages.
 
@@ -86,6 +86,8 @@ are compiled as part of the crate. The `mod` keyword declares modules, and Cairo
 looks in a file with the same name as the module for the code that goes into
 that module.
 
+[path]: ./ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md
+
 ## Summary
 
 Cairo lets you split a package into multiple crates and a crate into modules
@@ -93,5 +95,3 @@ so you can refer to items defined in one module from another module. You can do
 this by specifying absolute or relative paths. These paths can be brought into
 scope with a `use` statement so you can use a shorter path for multiple uses of
 the item in that scope. Module code is **private** by default.
-
-[paths]: ch06-03-paths-for-referring-to-an-item-in-the-module-tree.html

@@ -52,13 +52,15 @@ To access array elements, you can use `get()` or `at()` array methods that retur
 
 ### `get()` Method
 
-The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the [References and Snapshots](ch04-02-references-and-snapshots.md) chapter.
+The `get` function returns an `Option<Box<@T>>`, which means it returns an option to a Box type (Cairo's smart-pointer type) containing a snapshot to the element at the specified index if that element exists in the array. If the element doesn't exist, `get` returns `None`. This method is useful when you expect to access indices that may not be within the array's bounds and want to handle such cases gracefully without panics. Snapshots will be explained in more detail in the ["References and Snapshots"][snapshots] chapter.
 
 Here is an example with the `get()` method:
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_03_array_get/src/lib.cairo}}
 ```
+
+[snapshots]: ./ch04-02-references-and-snapshots.md#snapshots
 
 ### `at()` Method
 
@@ -107,17 +109,21 @@ With `array!`:
 
 ## Storing Multiple Types with Enums
 
-If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the [Enums and Pattern Matching](ch06-00-enums-and-pattern-matching.md) chapter.
+If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the ["Enums and Pattern Matching"][enums] chapter.
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_07_array_with_enums/src/lib.cairo}}
 ```
 
+[enums]: ./ch06-00-enums-and-pattern-matching.md
+
 ## Span
 
-`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations (cf. [References and Snapshots](ch04-02-references-and-snapshots.md)).
+`Span` is a struct that represents a snapshot of an `Array`. It is designed to provide safe and controlled access to the elements of an array without modifying the original array. Span is particularly useful for ensuring data integrity and avoiding borrowing issues when passing arrays between functions or when performing read-only operations, as introduced in ["References and Snapshots"][references].
 
 All methods provided by `Array` can also be used with `Span`, except for the `append()` method.
+
+[references]: ./ch04-02-references-and-snapshots.md
 
 ### Turning an Array into Span
 

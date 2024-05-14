@@ -84,7 +84,7 @@ Listing {{#ref modify-snapshot}}. Spoiler alert: it doesn’t work!
 
 {{#label modify-snapshot}}
 
-<span class="caption">Listing {{#ref modify-snapshot}}: Attempting to modify a snapshot value.</span>
+<span class="caption">Listing {{#ref modify-snapshot}}: Attempting to modify a snapshot value</span>
 
 Here’s the error:
 
@@ -107,7 +107,7 @@ In Listing 4-5, we use a mutable reference to modify the value of the `height` a
 {{#include ../listings/ch04-understanding-ownership/listing_05_mutable_reference/src/lib.cairo}}
 ```
 
-<span class="caption">Listing 4-5: Use of a mutable reference to modify a value.</span>
+<span class="caption">Listing 4-5: Use of a mutable reference to modify a value</span>
 
 First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` into `flip` with `ref rec`, and update the function signature to accept a mutable reference with `ref rec: Rectangle`. This makes it very clear that the `flip` function will mutate the value of the `Rectangle` instance passed as parameter.
 
