@@ -21,11 +21,11 @@ Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and it
 ```
 
 {{#label expanded-ierc20-library}}
-<span class="caption">Listing {{#ref expanded-ierc20-library}}: A simplified example of the `IERC20DLibraryDispatcher` ands its associated trait and impl</span>
+<span class="caption">Listing {{#ref expanded-ierc20-library}}: A simplified example of the `IERC20DLibraryDispatcher` and its associated trait and impl</span>
 
 We can notice a few difference with the contract dispatcher:
-- Libary dispatcher structs are instantiated with a `class_hash` field instead of `contract_address`.
-- Libary dispatcher trait implementation uses `library_call_syscall` system call instead of `call_contract_syscall`
+- Library dispatcher structs are instantiated with a `class_hash` field instead of `contract_address`.
+- Library dispatcher trait implementation uses `library_call_syscall` system call instead of `call_contract_syscall`
 
 Otherwise, everything is entirely similar. Let's see how to use library dispatcher to borrow some logic of another contract class.
 
