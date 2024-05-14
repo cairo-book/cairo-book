@@ -132,6 +132,6 @@ The functions have the same behavior for:
 prompt.distractors = ["Some, but not all inputs", "No inputs"]
 answer.answer = "All inputs"
 context = """
-The `match` and `if` perform the same function here. A `match` is like a specialized `if` that checks for equality of the matched object.
+The `match` and `if` perform the same operation here. A `match` is like a specialized `if` that checks for equality of the matched object.
 """
 id = "e07e8e36-2c53-4b30-8040-091c3d4f2fd1"
