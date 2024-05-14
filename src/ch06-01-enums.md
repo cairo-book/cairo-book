@@ -30,7 +30,9 @@ and instantiate it as follows:
 
 In this code, each variant is associated to a `u128` value, representing the direction in degrees. We will see in the next example that it is also possible to associate different data types to each variant.
 
-It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a direction. You can learn more about it in the [Match Control Flow Construct](ch06-02-the-match-control-flow-construct.md) section.
+It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a direction. You can learn more about it in the [Match Control Flow Construct][match] section.
+
+[match]: ./ch06-02-the-match-control-flow-construct.md
 
 ## Enums Combined with Custom Types
 
@@ -90,4 +92,6 @@ We are demonstrating two approaches for the above function:
 
 Enums can be useful in many situations, especially when using the `match` flow construct that we just used. We will describe it in the next section.
 
-Other enums are used very often, such as the `Result` enum, allowing to handle errors gracefully. We will explain the `Result` enum in detail in the [Error Handling](ch09-02-recoverable-errors.md) chapter.
+Other enums are used very often, such as the `Result` enum, allowing to handle errors gracefully. We will explain the `Result` enum in detail in the ["Error Handling"][result enum] chapter.
+
+[result enum]: ./ch09-02-recoverable-errors.md#the-result-enum

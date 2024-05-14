@@ -18,9 +18,9 @@ To illustrate this notion let's take back our example Listing {{#ref front_of_ho
 ```
 
 {{#label path-types}}
-<span class="caption">Listing {{#ref path-types}}: Calling the `add_to_waitlist` function using absolute and relative paths.</span>
+<span class="caption">Listing {{#ref path-types}}: Calling the `add_to_waitlist` function using absolute and relative paths</span>
 
-The `eat_at_restaurant` function is part of our library's public API, so we mark it with the `pub` keyword. In the [Exposing Paths with the pub Keyword](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md#exposing-paths-with-the-pub-keyword) section, we’ll go into more detail about `pub`.
+The `eat_at_restaurant` function is part of our library's public API, so we mark it with the `pub` keyword. We’ll go into more detail about `pub` in the ["Exposing Paths with the `pub` Keyword"][pub] section.
 
 The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
@@ -40,6 +40,8 @@ Items in a parent module can’t use the private items inside child modules, but
 
 Cairo chose to have the module system function this way so that hiding inner implementation details is the default. That way, you know which parts of the inner code you can change without breaking outer code. However, Cairo does give you the option to expose inner parts of child modules’ code to outer ancestor modules by using the `pub` keyword to make an item public.
 
+[pub]: ./ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md#exposing-paths-with-the-pub-keyword
+
 ## Exposing Paths with the `pub` Keyword
 
 Let’s return to the previous error that told us the `hosting` module and the `add_to_waitlist` function are not visible. We want the `eat_at_restaurant` function in the parent module to have access to the `add_to_waitlist` function in the child module, so we mark the `hosting` module and the `add_to_waitlist` function with the `pub` keyword, as shown in Listing {{#ref pub-keyword-not-compiling}}.
@@ -51,7 +53,7 @@ Let’s return to the previous error that told us the `hosting` module and the `
 ```
 
 {{#label pub-keyword-not-compiling}}
-<span class="caption">Listing {{#ref pub-keyword-not-compiling}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`.</span>
+<span class="caption">Listing {{#ref pub-keyword-not-compiling}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`</span>
 
 Unfortunately, the code in Listing {{#ref pub-keyword-not-compiling}} still results in an error.
 
@@ -66,7 +68,7 @@ Let’s also make the `add_to_waitlist` function public by adding the `pub` keyw
 ```
 
 {{#label pub-keyword}}
-<span class="caption">Listing {{#ref pub-keyword}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`.</span>
+<span class="caption">Listing {{#ref pub-keyword}}: Declaring the `hosting` module as `pub` to use it from `eat_at_restaurant`</span>
 
 Now the code will compile! To see why adding the `pub` keyword lets us use these paths in `add_to_waitlist` with respect to the privacy rules, let’s look at the absolute and the relative paths.
 
@@ -87,7 +89,7 @@ Consider the code in Listing {{#ref relative-path}} that models the situation in
 ```
 
 {{#label relative-path}}
-<span class="caption">Listing {{#ref relative-path}}: Calling a function using a relative path starting with `super`.</span>
+<span class="caption">Listing {{#ref relative-path}}: Calling a function using a relative path starting with `super`</span>
 
 Here you can see directly that you access a parent's module easily using `super`, which wasn't the case previously.
 Note that the `back_of_house` is kept private, as external users are not supposed to interact with the back of house directly.

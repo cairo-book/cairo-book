@@ -253,6 +253,25 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Symmaque",
+      "name": "Symmaque",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50242998?v=4",
+      "profile": "https://github.com/Symmaque",
+      "contributions": [
+        "doc",
+        "code"
+      ]
+    },
+    {
+      "login": "No-bodyq",
+      "name": "Asher",
+      "avatar_url": "https://avatars.githubusercontent.com/u/141028690?v=4",
+      "profile": "https://github.com/No-bodyq",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

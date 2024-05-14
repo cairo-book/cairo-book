@@ -93,7 +93,7 @@
   - [Gas Optimisation]()
   - [Printing](ch11-09-printing.md)
 
-- [Appendix](appendix-00.md)
+- [Appendix (Cairo)](appendix-00.md)
 
   - [A - Keywords](appendix-01-keywords.md)
   - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
@@ -151,11 +151,11 @@
 - [Starknet Smart Contracts Security](./ch17-00-starknet-smart-contracts-security.md)
 
   - [General Recommendations](./ch17-01-general-recommendations.md)
-  - [Testing Smart Contracts]()
+  - [Testing Smart Contracts](./ch17-02-testing-smart-contracts.md)
   - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
   - [Formal Verification]()
 
 ## Appendix
 
-- [Appendix](appendix-00.md)
+- [Appendix (Starknet)](appendix-000.md)
   - [A - System Calls](appendix-08-system-calls.md)

@@ -103,11 +103,9 @@ Example:
 
 The Cairo Book usually uses the following link formatting:
 
-> Instead, you must define a [Trait](./ch08-02-traits-in-cairo.md) and a, ...
-
 - Make intra-book links relative, so they work both online and locally.
 
-Do NOT turn long phrases into links.
+- Do NOT turn long phrases into links.
 
   > ❌ See the [Cairo Reference’s section on constant evaluation](https://book.cairo-lang.org/ch02-01-variables-and-mutability.html) for more information on what operations can be used when declaring constants.
 
