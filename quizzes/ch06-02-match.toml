@@ -1,6 +1,7 @@
 [[questions]]
 type = "Tracing"
 prompt.program = """
+#[derive(Copy, Drop)]
 enum Location {
     Point : u32,
     Range : (u32, u32)
