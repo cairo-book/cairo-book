@@ -5,6 +5,7 @@ pub enum ScarbCmd {
     Format(),
     Build(),
     CairoRun(),
+    CairorunGas(),
     Test(),
 }
 
@@ -14,6 +15,7 @@ impl ScarbCmd {
             ScarbCmd::Format() => "fmt",
             ScarbCmd::Build() => "build",
             ScarbCmd::CairoRun() => "cairo-run",
+            ScarbCmd::CairorunGas() => "cairo-run",
             ScarbCmd::Test() => "test",
         };
         command.into()
@@ -27,7 +29,8 @@ impl ScarbCmd {
         match self {
             ScarbCmd::Format() => vec!["-c"],
             ScarbCmd::Build() => vec![],
-            ScarbCmd::CairoRun() => vec!["--available-gas=20000000"],
+            ScarbCmd::CairoRun() => vec![],
+            ScarbCmd::CairorunGas() => vec!["--available-gas=20000000"],
             ScarbCmd::Test() => vec![],
         }
     }

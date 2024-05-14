@@ -27,6 +27,7 @@ fn process_file(manifest_path: &str) {
         let cmd = match command.as_str() {
             "scarb build" => ScarbCmd::Build(),
             "scarb cairo-run" => ScarbCmd::CairoRun(),
+            "scarb cairo-run --available-gas=20000000" => ScarbCmd::CairorunGas(),
             "scarb test" | "scarb cairo-test" => ScarbCmd::Test(),
             "scarb format" => ScarbCmd::Format(),
             _ => {
