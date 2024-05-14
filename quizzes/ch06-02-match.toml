@@ -101,7 +101,7 @@ prompt.distractors = [
 ]
 answer.answer = "Returns the object inside `self` if it exists, and `other` otherwise"
 context = """
-This function "unwraps" the option by consuming ownership of it and retrieving the value inside, but if no value exists then it falls back by returning `other`. This is a real function in the standard library!
+This function "unwraps" the option by consuming ownership of it and retrieving the value inside, but if no value exists then it falls back by returning `other`. This is a real function in the core library!
 """
 id = "72e6696d-379e-4440-af15-803b7255bc80"
 
