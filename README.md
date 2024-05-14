@@ -5,6 +5,7 @@ English | [简体中文](translations/README-cn.md)
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -32,9 +33,8 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    ```
 2. Host machine packages:
 
-	- Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager: `sudo apt install gettext`.
-  	
-	- Install [mdbook-quiz-cairo](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file) following the instructions [here](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file#installation) to be able to add interactive quizzes.
+   - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager: `sudo apt install gettext`.
+   - Install [mdbook-quiz-cairo](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file) following the instructions [here](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file#installation) to be able to add interactive quizzes.
 
 3. Clone this repository.
 
