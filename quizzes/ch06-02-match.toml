@@ -38,6 +38,7 @@ id = "b0621230-c040-4f30-b658-14d31f4fab82"
 [[questions]]
 type = "Tracing"
 prompt.program = """
+#[derive(Drop)]
 enum Either {
     Left : u32,
     Right : ByteArray
