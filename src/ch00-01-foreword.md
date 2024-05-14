@@ -14,4 +14,6 @@ This book is designed for developers with a basic understanding of programming c
 
 This book would not have been possible without the help of the Cairo community. We would like to thank every contributor for their contributions to this book!
 
-We would like to thank the Rust community for the [Rust Book](https://doc.rust-lang.org/book/), which has been a great source of inspiration for this book. Many examples and explanations have been adapted from the Rust Book to fit the Cairo programming language, as the two languages share many similarities.
+We would like to thank the Rust community for the [Rust Book][doc rust], which has been a great source of inspiration for this book. Many examples and explanations have been adapted from the Rust Book to fit the Cairo programming language, as the two languages share many similarities.
+
+[doc rust]: https://doc.rust-lang.org/book/

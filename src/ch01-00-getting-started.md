@@ -8,8 +8,12 @@ Let’s start your Cairo journey! There’s a lot to learn, but every journey st
 
 ## Getting Help
 
-If you have any questions about Starknet or Cairo, you can ask them in the [Starknet Discord server](https://discord.gg/starknet-community). The community is friendly and always willing to help.
+If you have any questions about Starknet or Cairo, you can ask them in the [Starknet Discord server][discord]. The community is friendly and always willing to help.
+
+[discord]: https://discord.gg/starknet-community
 
 ## Interacting with the Cairo Chatbot
 
-Cairo has its own chatbot, which can help you with Cairo-related questions. The chatbot is trained on the Cairo book, and uses RAG to efficiently retrieve information to provide help. You can find the chatbot on the [Cairo-Chatbot](https://cairo-chatbot.vercel.app/) website.
+Cairo has its own chatbot, which can help you with Cairo-related questions. The chatbot is trained on the Cairo book, and uses RAG to efficiently retrieve information to provide help. You can find the chatbot on the [Cairo-Chatbot][cairo gpt] website.
+
+[cairo gpt]: https://cairo-chatbot.vercel.app/

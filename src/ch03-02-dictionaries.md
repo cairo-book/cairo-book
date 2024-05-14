@@ -21,7 +21,7 @@ These functions allow us to manipulate dictionaries like in any other language. 
 
 We can create a new instance of `Felt252Dict<u64>` by using the `default` method of the `Default` trait and add two individuals, each one with their own balance, using the `insert` method. Finally, we check the balance of our users with the `get` method. These methods are defined in the `Felt252DictTrait` trait in the core library.
 
-Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in [Dictionaries Underneath](#dictionaries-underneath).
+Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the `Felt252Dict<T>` type represents a way to overcome this obstacle. We will explain how this is implemented later on in ["Dictionaries Underneath"][dict underneath].
 
 Building upon our previous example, let us show a code example where the balance of the same user changes:
 
@@ -36,6 +36,8 @@ Before heading on and explaining how dictionaries are implemented it is worth me
 Until this point, we have seen all the basic features of `Felt252Dict<T>` and how it mimics the same behavior as the corresponding data structures in any other language, that is, externally of course. Cairo is at its core a non-deterministic Turing-complete programming language, very different from any other popular language in existence, which as a consequence means that dictionaries are implemented very differently as well!
 
 In the following sections, we are going to give some insights about `Felt252Dict<T>` inner mechanisms and the compromises that were taken to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as use the `entry` method as another way to interact with them.
+
+[dict underneath]: ./ch03-02-dictionaries.md#dictionaries-underneath
 
 ## Dictionaries Underneath
 
@@ -109,21 +111,27 @@ In case of a change on any of the values of the first table, squashing would hav
 
 ## Dictionary Destruction
 
-If you run the examples from [Basic Use of Dictionaries](#basic-use-of-dictionaries), you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
+If you run the examples from ["Basic Use of Dictionaries"][basic dictionaries] section, you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the `Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call occurred just before the `balance` dictionary went out of scope.
 
-The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct](/appendix-03-derivable-traits.md#drop-and-destruct).
+The `Destruct<T>` trait represents another way of removing instances out of scope apart from `Drop<T>`. The main difference between these two is that `Drop<T>` is treated as a no-op operation, meaning it does not generate new CASM while `Destruct<T>` does not have this restriction. The only type which actively uses the `Destruct<T>` trait is `Felt252Dict<T>`, for every other type `Destruct<T>` and `Drop<T>` are synonyms. You can read more about these traits in [Drop and Destruct][drop destruct] section of Appendix C.
 
-Later in [Dictionaries as Struct Members](ch11-01-custom-data-structures.html#dictionaries-as-struct-members), we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
+Later in ["Dictionaries as Struct Members"][dictionaries in structs] section, we will have a hands-on example where we implement the `Destruct<T>` trait for a custom type.
+
+[basic dictionaries]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
+[drop destruct]: ./appendix-03-derivable-traits.md#drop-and-destruct
+[dictionaries in structs]: ./ch11-01-custom-data-structures.html#dictionaries-as-struct-members
 
 ## More Dictionaries
 
 Up to this point, we have given a comprehensive overview of the functionality of `Felt252Dict<T>` as well as how and why it is implemented in a certain way. If you haven't understood all of it, don't worry because in this section we will have some more examples using dictionaries.
 
-We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how `Felt252Dict<T>` [interacts](#dictionaries-of-types-not-supported-natively) with other complex types such as `Array<T>`.
+We will start by explaining the `entry` method which is part of a dictionary basic functionality included in `Felt252DictTrait<T>` which we didn't mention at the beginning. Soon after, we will see examples of how to use `Felt252Dict<T>` with other [complex types][nullable dictionaries values] such as `Array<T>`.
+
+[nullable dictionaries values]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
 ## Entry and Finalize
 
-In the [Dictionaries Underneath](#dictionaries-underneath) section, we explained how `Felt252Dict<T>` internally worked. It was a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given a certain `key` and then update it accordingly to whatever operation it was executing. The Cairo language gives us the tools to replicate this ourselves through the `entry` and `finalize` methods.
+In the ["Dictionaries Underneath"][dict underneath] section, we explained how `Felt252Dict<T>` internally worked. It was a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given a certain `key` and then update it accordingly to whatever operation it was executing. The Cairo language gives us the tools to replicate this ourselves through the `entry` and `finalize` methods.
 
 The `entry` method comes as part of `Felt252DictTrait<T>` with the purpose of creating a new entry given a certain key. Once called, this method takes ownership of the dictionary and returns the entry to update. The method signature is as follows:
 
@@ -137,7 +145,7 @@ The `nopanic` notation simply indicates that the function is guaranteed to never
 The next thing to do is to update the entry with the new value. For this, we use the `finalize` method which inserts the entry and returns ownership of the dictionary:
 
 ```rust,noplayground
-fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T> {
+fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T>
 ```
 
 This method receives the entry and the new value as parameters, and returns the updated dictionary.
@@ -157,7 +165,7 @@ Implementing our custom get would look like this:
 ```
 
 The `ref` keyword means that the ownership of the variable will be given back at the end of
-the function. This concept will be explained in more detail in the [References and Snapshots](ch04-02-references-and-snapshots.md) section.
+the function. This concept will be explained in more detail in the ["References and Snapshots"][references] section.
 
 Implementing the `insert` method would follow a similar workflow, except for inserting a new value when finalizing. If we were to implement it, it would look like the following:
 
@@ -172,6 +180,9 @@ As a finalizing note, these two methods are implemented in a similar way to how 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:main}}
 ```
+
+[dict underneath]: ./ch03-02-dictionaries.md#dictionaries-underneath
+[references]: ./ch04-02-references-and-snapshots.md
 
 ## Dictionaries of Types not Supported Natively
 
