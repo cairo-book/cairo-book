@@ -29,7 +29,7 @@ trait ITokenWrapper<TContractState> {
 
     fn transfer_token(
         ref self: TContractState,
-        contract_address: ContractAddress,
+        address: ContractAddress,
         recipient: ContractAddress,
         amount: u256
     ) -> bool;
@@ -40,8 +40,9 @@ trait ITokenWrapper<TContractState> {
 //**** Specify interface here ****//
 #[starknet::contract]
 mod TokenWrapper {
-    use super::IERC20DispatcherTrait;
-    use super::IERC20Dispatcher;
+    //ANCHOR: import
+    use super::{IERC20Dispatcher, IERC20DispatcherTrait};
+    //ANCHOR_END: import
     use super::ITokenWrapper;
     use starknet::ContractAddress;
 
@@ -50,16 +51,22 @@ mod TokenWrapper {
 
     impl TokenWrapper of ITokenWrapper<ContractState> {
         fn token_name(self: @ContractState, contract_address: ContractAddress) -> felt252 {
+            //ANCHOR: no_local_variable
             IERC20Dispatcher { contract_address }.name()
+            //ANCHOR_END: no_local_variable
         }
 
         fn transfer_token(
             ref self: ContractState,
-            contract_address: ContractAddress,
+            address: ContractAddress,
             recipient: ContractAddress,
             amount: u256
         ) -> bool {
-            IERC20Dispatcher { contract_address }.transfer(recipient, amount)
+            //ANCHOR: local_variable
+            let erc20_dispatcher = IERC20Dispatcher { contract_address: address };
+            erc20_dispatcher.transfer(recipient, amount)
+            //ANCHOR_END: local_variable
+
         }
     }
 }

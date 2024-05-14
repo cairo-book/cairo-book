@@ -1,3 +1,6 @@
 {
-  "rust-analyzer.linkedProjects": ["./cairo-listings/Cargo.toml"]
+  "rust-analyzer.linkedProjects": [
+    "./cairo-listings/Cargo.toml"
+  ],
+  "editor.formatOnSave": false
 }

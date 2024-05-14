@@ -123,10 +123,12 @@
 
 ## Starknet Cross-Contract Interactions
 
-- [Starknet Cross-Contract Interactions](./ch15-00-starknet-cross-contract-interactions.md)
+- [Starknet Contract Interactions](./ch15-00-starknet-contract-interactions.md)
 
-  - [ABIs and Contract Interfaces](./ch15-01-abis-and-contract-interfaces.md)
-  - [Contract Dispatchers, Library Dispatchers and System Calls](./ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.md)
+  - [Contract Entrypoints and ABI](./ch15-01-contract-entrypoints-and-abi.md)
+  - [Interacting with Another Contract](./ch15-02-interacting-with-another-contract.md)
+  - [Borrowing Code from Another Contract Contract](./ch15-03-borrowing-code-from-another-contract-class.md)
+
 
 ## Building Advanced Starknet Smart Contracts
 
