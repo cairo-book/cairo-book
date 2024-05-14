@@ -15,7 +15,7 @@ From this contract class is generated a JSON formatted file containing the contr
 
 Function entrypoints are represented by public functions. There are multiple ways to define function entrypoints when writing a Cairo contract:
 - Annotating an impl block with `#[abi(embed_v0)]` attribute. By doing this, all functions defined in the impl block will be publicly exposed.
-- Annotating an impl block with `#[abi(per_item)]` attribue, while manually declaring public functions under the `#[external(v0)]` attribute. 
+- Annotating an impl block with `#[abi(per_item)]` attribute, while manually declaring public functions under the `#[external(v0)]` attribute. 
 - Defining standalone functions annotated with the `#[external(v0)]` attribute.
 
 >  In the first and second cases, the corresponding function entries will be located within the child hierarchy, alongside impls and interfaces in the ABI. Conversely, standalone public functions entries will be found in the same hierarchy as impls and interfaces in the ABI.
@@ -45,7 +45,7 @@ You can refer to the ["Constructor"][constructor] section for more information a
 
 ### L1-Handler Entrypoints
 
-L1-handler functions are defined as separated entrypoints. They allow communication between the Starknet network and the underlying settlement layer. L1-handler are necessarly defined as standalone functions. 
+L1-handler functions are defined as separated entrypoints. They allow communication between the Starknet network and the underlying settlement layer. L1-handler are necessary defined as standalone functions. 
 
 You can learn more about L1-handler functions and L1-L2 messaging system in the [dedicated chapter][L1-L2].
 
