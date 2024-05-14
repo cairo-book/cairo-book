@@ -1,0 +1,45 @@
+[[questions]]
+type = "Tracing"
+prompt.program = """
+fn main() {
+    let x = null;
+    foo(x);
+}
+
+fn foo(x:u8) {
+    println!("{}", x);
+}
+"""
+answer.doesCompile = false
+context = """
+Cairo does not have null pointers, so the null keyword does not exist. 
+An Option type should be used to represent the possibility of an object being null.
+"""
+id = "8b786183-ef9f-43f8-89a6-0e9c0e87c576"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What will be the output of this code snippet?
+```
+fn main() {
+    let x: u8 = 5;
+    let z = sum(Option::Some(x), Option::None);
+    println!("{}", z.unwrap());
+}
+
+fn sum(x:Option<u8>, y:Option<u8>) -> Option<u8> {
+    match (x, y) {
+        (Option::Some(a), Option::Some(b)) => Option::Some(a + b),
+        _ => Option::None
+    }
+}
+```
+"""
+prompt.distractors = ["0", "null", "5"]
+answer.answer = "There will be a runtime panic."
+context = """
+The `sum` function returns an `Option::None` if one of the operands is an `Option::None` which is the case here.
+So the `unwrap` function will panic at runtime.
+"""
+id = "0d9b6f65-bfac-447f-a2d4-a650abc8bc01"

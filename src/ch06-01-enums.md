@@ -94,4 +94,6 @@ Enums can be useful in many situations, especially when using the `match` flow c
 
 Other enums are used very often, such as the `Result` enum, allowing to handle errors gracefully. We will explain the `Result` enum in detail in the ["Error Handling"][result enum] chapter.
 
+{{#quiz ../quizzes/ch06-01-enums.toml}}
+
 [result enum]: ./ch09-02-recoverable-errors.md#the-result-enum
