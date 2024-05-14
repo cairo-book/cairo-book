@@ -20,26 +20,27 @@ id = "8b786183-ef9f-43f8-89a6-0e9c0e87c576"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-What will be the output of this code snippet?
+Consider these two representations of a `Result` type that contains a value `T` if a computation succeeds, or an error `E` if it fails.
 ```
-fn main() {
-    let x: u8 = 5;
-    let z = sum(Option::Some(x), Option::None);
-    println!("{}", z.unwrap());
+struct Result1<T, E> {
+    ok: Option<T>,
+    err: Option<E>,
 }
-
-fn sum(x:Option<u8>, y:Option<u8>) -> Option<u8> {
-    match (x, y) {
-        (Option::Some(a), Option::Some(b)) => Option::Some(a + b),
-        _ => Option::None
-    }
+  
+enum Result2<T, E> {
+    Ok : T,
+    Err : E,
 }
 ```
+The enum `Result2` is considered more idiomatic than the struct `Result1` in Cairo. Which statement below is **NOT** a valid reason why?
 """
-prompt.distractors = ["0", "null", "5"]
-answer.answer = "There will be a runtime panic."
+prompt.distractors = [
+  "The struct is more syntactically verbose to construct than the enum",
+  "The struct uses more space in memory at runtime than the enum",
+  "The struct could have `ok` and `err` both be `None`, while the enum must have at least one of them",
+]
+answer.answer = "The struct contains `Option` types, which are only intended to wrap structs"
 context = """
-The `sum` function returns an `Option::None` if one of the operands is an `Option::None` which is the case here.
-So the `unwrap` function will panic at runtime.
+It's perfectly fine to have structs contain `Option` types as fields (the question asked for which is **NOT** a valid reason). But if your data structure has invariants like "exactly one of two optional fields should be `Some`", then that invariant is better ensured by use of an enum.
 """
 id = "0d9b6f65-bfac-447f-a2d4-a650abc8bc01"
