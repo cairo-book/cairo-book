@@ -5,16 +5,7 @@ English | [简体中文](translations/README-cn.md)
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 [![All Contributors](https://img.shields.io/badge/all_contributors-29-orange.svg?style=flat-square)](#contributors)
-=======
-[![All Contributors](https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square)](#contributors)
-
-> > > > > > > # fd04ebc (docs: add Symmaque as a contributor for doc, and code (#765))
-> > > > > > >
-> > > > > > > [![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors)
-> > > > > > > 60f72a4 (docs: add No-bodyq as a contributor for code (#766))
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
