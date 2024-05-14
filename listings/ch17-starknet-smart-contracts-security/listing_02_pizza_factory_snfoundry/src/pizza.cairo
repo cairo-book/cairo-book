@@ -11,13 +11,13 @@ pub trait IPizzaFactory<TContractState> {
 }
 
 #[starknet::contract]
-pub(crate) mod PizzaFactory {
+pub mod PizzaFactory {
     use super::IPizzaFactory;
     use starknet::ContractAddress;
     use starknet::get_caller_address;
 
     #[storage]
-    pub(crate) struct Storage {
+    pub struct Storage {
         pepperoni: u32,
         pineapple: u32,
         owner: ContractAddress,
@@ -34,12 +34,12 @@ pub(crate) mod PizzaFactory {
 
     #[event]
     #[derive(Drop, starknet::Event)]
-    pub(crate) enum Event {
+    pub enum Event {
         PizzaEmission: PizzaEmission
     }
 
     #[derive(Drop, starknet::Event)]
-    pub(crate) struct PizzaEmission {
+    pub struct PizzaEmission {
         pub counter: u32
     }
 
@@ -85,7 +85,7 @@ pub(crate) mod PizzaFactory {
     }
 
     #[generate_trait]
-    pub(crate) impl InternalImpl of InternalTrait {
+    pub impl InternalImpl of InternalTrait {
         fn set_owner(ref self: ContractState, new_owner: ContractAddress) {
             let caller: ContractAddress = get_caller_address();
             assert!(caller == self.get_owner(), "Only the owner can set ownership");
