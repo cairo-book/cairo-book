@@ -147,10 +147,16 @@ fn process_file(manifest_path: &str) {
         // This is a cairo program, it must pass cairo-run
         if !tags.contains(&Tags::DoesNotRun)
             && !tags.contains(&Tags::DoesNotCompile)
+            && tags.contains(&Tags::GasConsumption)
             && !cfg.run_skip
         {
-            run_command(ScarbCmd::CairoRun(), manifest_path, file_path, vec![]);
+            run_command(ScarbCmd::CairorunGas(), manifest_path, file_path, vec![]);
         }
+    } else if !tags.contains(&Tags::DoesNotRun)
+        && !tags.contains(&Tags::DoesNotCompile)
+        && !cfg.run_skip
+    {
+        run_command(ScarbCmd::CairoRun(), manifest_path, file_path, vec![]);
     } else {
         // This is a cairo program, it must pass cairo-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.compile_skip {
@@ -181,7 +187,7 @@ fn run_command(cmd: ScarbCmd, manifest_path: &str, file_path: &str, args: Vec<St
 fn handle_error(e: String, file_path: &str, cmd: ScarbCmd) -> String {
     let clickable_file = clickable(file_path);
     let msg = match cmd {
-        ScarbCmd::Test() | ScarbCmd::CairoRun() => {
+        ScarbCmd::Test() | ScarbCmd::CairoRun() | ScarbCmd::CairorunGas() => {
             format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
         }
         _ => format!("{} -> {}", cmd.as_str(), clickable_file),

@@ -4,6 +4,7 @@ pub enum Tags {
     DoesNotRun,
     IgnoreFormat,
     FailingTests,
+    GasConsumption,
 }
 
 impl Tags {
