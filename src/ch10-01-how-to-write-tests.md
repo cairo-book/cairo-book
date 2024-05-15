@@ -528,3 +528,5 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
 Here, the gas usage of the `sum_n` function is 163430 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 271290, due to some extra steps required to run the entire test function.
+
+{{#quiz ../quizzes/ch10-01-how_to_write_tests.toml}}
