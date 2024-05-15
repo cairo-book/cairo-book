@@ -208,5 +208,5 @@ Before we dive into this mechanism, let's first look at [how components work und
 
 
 [OpenZeppelin Cairo Contracts]: https://github.com/OpenZeppelin/cairo-contracts
-[component dependendcies]: ./ch16-02-02-component-dependencies.md
+[component dependencies]: ./ch16-02-02-component-dependencies.md
 [components inner working]: ./ch16-02-01-under-the-hood.md
