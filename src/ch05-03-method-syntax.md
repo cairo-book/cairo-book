@@ -116,5 +116,7 @@ and name each piece to make your code clear. In `trait` and `impl` blocks, you
 can define methods, which are functions associated to a type and let you specify
 the behavior that instances of your type have.
 
+{{#quiz ../quizzes/ch05-03-method-syntax.toml}}
+
 But structs aren’t the only way you can create custom types: let’s turn to
 Cairo’s enum feature to add another tool to your toolbox.
