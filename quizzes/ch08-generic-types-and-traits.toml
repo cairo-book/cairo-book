@@ -45,9 +45,9 @@ fn main() {
 Explain how this function obtains the largest number in the array?
 """
 prompt.distractors = [
-    "It Sorts the array in ascending order"
-    "It goes straight to the largest number in the array, obtains it, and stores it in the variable called 'largest'"
-    "It checks for only the smallest number and the largest number in the array, compares them, and returns the largest number"
+    "It Sorts the array in ascending order",
+    "It goes straight to the largest number in the array, obtains it, and stores it in the variable called 'largest'",
+    "It checks for only the smallest number and the largest number in the array, compares them, and returns the largest number",
     "It finds the smallest number in the array and stores it in the variable called 'largest'"
 ]
 answer.answer = "It stores an array of the type u8 called number_list. 
