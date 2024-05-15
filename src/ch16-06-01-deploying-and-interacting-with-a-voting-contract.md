@@ -175,8 +175,6 @@ starkli deploy 0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba5
 
 In this case, the contract has been deployed at an specific address: `0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349`. This address will be different for you. We will use this address to interact with the contract.
 
-[voyager class hash]: https://goerli.voyager.online/class/0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52
-
 ### Voter Eligibility Verification
 
 In our voting contract, we have two functions to validate voter eligibility, `voter_can_vote` and `is_voter_registered`. These are external read functions, which mean they don't alter the state of the contract but only read the current state.

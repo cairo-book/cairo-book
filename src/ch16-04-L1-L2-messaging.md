@@ -198,5 +198,5 @@ If you want to learn more about the messaging mechanism, you can visit the [Star
 
 You can also find a [detailed guide here][glihm messaging guide] to test the messaging system locally.
 
-[starknet messagin doc]: https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/
+[starknet messaging doc]: https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/
 [glihm messaging guide]: https://github.com/glihm/starknet-messaging-dev
