@@ -8,8 +8,7 @@ struct Rectangle {
 }
 
 fn perimeter(r: Rectangle) -> u64 {
-    let perimeter = 2 * (r.width + r.height);
-    perimeter
+    2 * (r.width + r.height)
 }
 
 fn main(){
@@ -22,6 +21,7 @@ fn main(){
 }
 """
 answer.doesCompile = false
+context = "The area function takes ownership of its argument rectangle, which doesn't implement `Copy`. Calling perimeter(rectangle1) therefore moves rectangle1, meaning it cannot be used on the next line."
 
 [[questions]]
 type = "Tracing"
