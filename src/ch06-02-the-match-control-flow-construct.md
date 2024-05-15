@@ -187,4 +187,6 @@ Here's a match that implements that logic:
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_13_match_integers/src/lib.cairo:here}}
 ```
 
+{{#quiz ../quizzes/ch06-02-match.toml}}
+
 > These restrictions are planned to be relaxed in future versions of Cairo.

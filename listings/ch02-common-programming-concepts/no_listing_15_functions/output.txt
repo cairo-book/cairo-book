@@ -5,5 +5,4 @@ $ scarb cairo-run
 Hello, world!
 Another function.
 Run completed successfully, returning []
-Remaining gas: 19951280
 

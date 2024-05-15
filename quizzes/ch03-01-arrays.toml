@@ -29,6 +29,7 @@ If `til = 4`, then for an array of length 3, the loop will attempt to index the 
 which is out of bounds.  This function does not panic if `n = 1` because it returns before reaching
 the out-of-bounds index.
 """
+
 id = "93580296-1099-46da-9ab7-0c67061d38ab"
 
 [[questions]]
@@ -48,6 +49,7 @@ As Cairo's memory layout is immutable, types cannot be moved out of an array by 
 possibility is to copy the value to a new variable using the `*` (desnap) operator.  Therefore, as
 ByteArray is not copyable, the line `let mut s = *v[0];` does not compile.
 """
+
 id = "fcea4de0-83d1-4edd-a7b4-c21c35c541f4"
 
 
@@ -67,4 +69,5 @@ context = """
 `*v[0]` copies the value of the first element of the array to `i`. Therefore, `i` is a copy of the
 value of `v[0]`, and incrementing `i` does not affect `v[0]`.
 """
+
 id = "95d528ee-ae78-4892-a438-a5d97f07f52a"
