@@ -4,5 +4,4 @@ $ scarb cairo-run
      Running listing_04_05
 height: 10, width: 3
 Run completed successfully, returning []
-Remaining gas: 19880750
 
