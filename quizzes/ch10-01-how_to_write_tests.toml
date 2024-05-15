@@ -3,7 +3,7 @@ type = "MultipleChoice"
 prompt.prompt = """
 What test case will NOT fail for `is_even` function?
 ```
-pub fn is_even(x: u64) -> bool {
+fn is_even(x: u64) -> bool {
 	x % 2 == 0
 }
 
@@ -19,11 +19,11 @@ mod tests {
 """
 
 prompt.distractors = [
-	"`assert!(is_even(4) == false, "4 should be even");`",
-	"`assert!(is_even(3), "3 should be odd");`",
-	"`assert!(!is_even(0), "0 should be even");`",
+	'`assert!(is_even(4) == false, "4 should be even");`',
+	'`assert!(is_even(3), "3 should be odd");`',
+	'`assert!(!is_even(0), "0 should be even");`',
 ]
-answer.answer = "`assert!(!is_even(5), "5 should be odd");`"
+answer.answer = '`assert!(!is_even(5), "5 should be odd");`'
 
 context = """
 Recall, assert! macro first argument evaluates to a Boolean.
@@ -104,5 +104,5 @@ One filtered out: division_with_available_gas, because it doesn't match part of 
 Zero failed
 Two passed:
 	- test_multiplication: All the `assert_*` macros return true
-	- test_subtraction: The assert macro returns true
+	- test_subtraction: The `assert` macro returns true
 """
