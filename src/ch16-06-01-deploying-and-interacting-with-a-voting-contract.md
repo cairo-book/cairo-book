@@ -16,7 +16,7 @@ Listing {{#ref voting_contract}} shows the `Vote` contract in detail:
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_05_vote_contract/src/lib.cairo}}
 ```
 {{#label voting_contract}}
-<span class="caption">Listing {{#ref voting_contract}}: A voting smart contract.</span>
+<span class="caption">Listing {{#ref voting_contract}}: A voting smart contract</span>
 
 ## Deploying, Calling and Invoking the Voting Contract
 
@@ -27,22 +27,24 @@ Once the contract is deployed, we can interact with it by calling and invoking i
 - Calling contracts: Interacting with external functions that only read from the state. These functions do not alter the state of the network, so they don't require fees or signing.
 - Invoking contracts: Interacting with external functions that can write to the state. These functions do alter the state of the network and require fees and signing.
 
-We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` in the [Katana: A Local Node](https://book.starknet.io/ch02-04-katana.html) chapter of the Starknet Book.
+We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` in the ["Katana: A Local Node"][katana chapter] chapter of the Starknet Book.
+
+[katana chapter]: https://book.starknet.io/ch02-04-katana.html
 
 ### The `katana` Local Starknet Node
 
-`katana` is designed to support local development by the [Dojo team](https://github.com/dojoengine/dojo/blob/main/crates/katana). It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
+`katana` is designed to support local development by the [Dojo team][dojo katana]. It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
 
-To install `katana` from the source code, please refer to the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation) chapter of the Starknet Book.
+To install `katana` from the source code, please refer to the ["Basic Installation"][katana installation] chapter of the Starknet Book.
 
 > Note: Please verify that the version of `katana` match the specified version provided below.
 >
 > ```bash
 > $ katana --version
-> katana 0.4.4
+> katana 0.6.0
 > ```
 >
-> To upgrade `katana`, refer to the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation) chapter of the Starknet Book.
+> To upgrade `katana` version, refer to the ["Basic Installation"][katana installation] chapter of the Starknet Book.
 
 Once you have `katana` installed, you can start the local Starknet node with:
 
@@ -71,22 +73,26 @@ PREFUNDED ACCOUNTS
 ...
 ```
 
-Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the [Account Abstraction](https://book.starknet.io/ch04-00-account-abstraction.html) chapter of the Starknet Book.
+Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the ["Account Abstraction"][aa chapter] chapter of the Starknet Book.
+
+[dojo katana]: https://github.com/dojoengine/dojo/blob/main/crates/katana
+[katana installation]: https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation
+[aa chapter]: https://book.starknet.io/ch04-00-account-abstraction.html
 
 ### Smart Wallets for Voting
 
-Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the [Basic Installation](https://book.starknet.io/ch02-01-basic-installation.html#starkli-installation) chapter of the Starknet Book.
+Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the ["Basic Installation"][starkli installation] chapter of the Starknet Book.
 
 > Note: Please verify that the version of `starkli` match the specified version provided below.
 >
 > ```bash
 > $ starkli --version
-> 0.1.20 (e4d2307)
+> 0.2.9 (0535f44)
 > ```
 >
-> To upgrade `starkli` to `1.0.20`, use the `starkliup -v 0.1.20` command.
+> To upgrade `starkli` to `0.2.9`, use the `starkliup -v 0.2.9` command, or simply `starkliup` which installed the latest stable version.
 
-For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the [Testnet Deployment](https://book.starknet.io/ch02-05-testnet-deployment.html?highlight=signer#creating-a-signer) chapter of the Starknet Book.
+For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the ["Testnet Deployment"][signer creation] chapter of the Starknet Book.
 
 We can create Signers and Account Descriptors for the accounts we want to use for voting. Let's create a smart wallet for voting in our smart contract.
 
@@ -134,6 +140,9 @@ starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.js
 
 This process is identical for `account_1` and `account_2` in case you want to have a second and a third voter.
 
+[starkli installation]: https://book.starknet.io/ch02-01-basic-installation.html#starkli-installation)
+[signer creation]: https://book.starknet.io/ch02-05-testnet-deployment.html?highlight=signer#creating-a-signer
+
 ### Contract Deployment
 
 Before deploying, we need to declare the contract. We can do this with the `starkli declare` command:
@@ -146,7 +155,7 @@ If the compiler version you're using is older than the one used by Starkli and y
 
 If you're still encountering issues with the compiler version, try upgrading Starkli using the command: `starkliup` to make sure you're using the latest version of starkli.
 
-The class hash of the contract is: `0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`. You can find it [on any block explorer](https://goerli.voyager.online/class/0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52).
+The class hash of the contract is: `0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`. You can declare this contract on Sepolia testnet and see that the class hash will correspond. 
 
 The `--rpc` flag specifies the RPC endpoint to use (the one provided by `katana`). The `--account` flag specifies the account to use for signing the transaction. The account we use here is the one we created in the previous step. The `--keystore` flag specifies the keystore file to use for signing the transaction.
 
@@ -165,6 +174,8 @@ starkli deploy 0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba5
 ```
 
 In this case, the contract has been deployed at an specific address: `0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349`. This address will be different for you. We will use this address to interact with the contract.
+
+[voyager class hash]: https://goerli.voyager.online/class/0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52
 
 ### Voter Eligibility Verification
 

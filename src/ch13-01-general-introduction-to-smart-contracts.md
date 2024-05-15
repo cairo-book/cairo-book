@@ -7,11 +7,13 @@ If you are already familiar with blockchain programming, feel free to skip this 
 
 Smart contracts gained popularity and became more widespread with the birth of Ethereum. Smart contracts are essentially programs deployed on a blockchain. The term "smart contract" is somewhat misleading, as they are neither "smart" nor "contracts" but rather code and instructions that are executed based on specific inputs. They primarily consist of two components: storage and functions. Once deployed, users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to call and with what input). Smart contracts can modify and read the storage of the underlying blockchain. A smart contract has its own address and is considered a blockchain account, meaning it can hold tokens.
 
-The programming language used to write smart contracts varies depending on the blockchain. For example, on Ethereum and the [EVM-compatible ecosystem](https://ethereum.org/en/developers/docs/evm/), the most commonly used language is Solidity, while on Starknet, it is Cairo. The way the code is compiled also differs based on the blockchain. On Ethereum, Solidity is compiled into bytecode. On Starknet, Cairo is compiled into Sierra and then into Cairo Assembly (CASM).
+The programming language used to write smart contracts varies depending on the blockchain. For example, on Ethereum and the [EVM-compatible ecosystem][evm], the most commonly used language is Solidity, while on Starknet, it is Cairo. The way the code is compiled also differs based on the blockchain. On Ethereum, Solidity is compiled into bytecode. On Starknet, Cairo is compiled into Sierra and then into Cairo Assembly (CASM).
 
 Smart contracts possess several unique characteristics. They are **permissionless**, meaning anyone can deploy a smart contract on the network (within the context of a decentralized blockchain, of course). Smart contracts are also **transparent**; the data stored by the smart contract is accessible to anyone. The code that composes the contract can also be transparent, enabling **composability**. This allows developers to write smart contracts that use other smart contracts. Smart contracts can only access and interact with data from the blockchain they are deployed on. They require third-party software (called _oracles_) to access external data (the price of a token for instance).
 
 For developers to build smart contracts that can interact with each other, it is required to know what the other contracts look like. Hence, Ethereum developers started to build standards for smart contract development, the `ERCxx`. The two most used and famous standards are the `ERC20`, used to build tokens like `USDC`, `DAI` or `STARK`, and the `ERC721`, for NFTs (Non-Fungible Tokens) like `CryptoPunks` or `Everai`.
+
+[evm]: https://ethereum.org/en/developers/docs/evm/
 
 ## Use Cases
 
@@ -49,15 +51,19 @@ A famous trilemma called The Blockchain Trilemma in the blockchain space states 
 
 The two primary types of L2s are optimistic rollups and validity rollups. Both approaches involve compressing and batching numerous transactions together, computing the new state, and settling the result on Ethereum (L1). The difference lies in the way the result is settled on L1. For optimistic rollups, the new state is considered valid by default, but there is a 7-day window for nodes to identify malicious transactions.
 
-In contrast, validity rollups, such as Starknet, use cryptography to prove that the new state has been correctly computed. This is the purpose of STARKs, this cryptographic technology could permit validity rollups to scale significantly more than optimistic rollups. You can learn more about STARKs from Starkware's Medium [article](https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a), which serves as a good primer.
+In contrast, validity rollups, such as Starknet, use cryptography to prove that the new state has been correctly computed. This is the purpose of STARKs, this cryptographic technology could permit validity rollups to scale significantly more than optimistic rollups. You can learn more about STARKs from Starkware's Medium [article][starks article], which serves as a good primer.
 
-> Starknet's architecture is thoroughly described in the [Starknet Book](https://book.starknet.io/ch03-00-architecture.html), which is a great resource to learn more about the Starknet network.
+> Starknet's architecture is thoroughly described in the [Starknet Book][starknet architecture], which is a great resource to learn more about the Starknet network.
 
 Remember Cairo? It is, in fact, a language developed specifically to work with STARKs and make them general-purpose. With Cairo, we can write **provable code**. In the context of Starknet, this allows proving the correctness of computations from one state to another.
 
 Unlike most (if not all) of Starknet's competitors that chose to use the EVM (either as-is or adapted) as a base layer, Starknet employs its own VM. This frees developers from the constraints of the EVM, opening up a broader range of possibilities. Coupled with decreased transaction costs, the combination of Starknet and Cairo creates an exciting playground for developers. Native account abstraction enables more complex logic for accounts, that we call "Smart Accounts", and transaction flows. Emerging use cases include **transparent AI** and machine learning applications. Finally, **blockchain games** can be developed entirely **on-chain**. Starknet has been specifically designed to maximize the capabilities of STARK proofs for optimal scalability.
 
-> Learn more about Account Abstraction in the [Starknet Book](https://book.starknet.io/ch04-00-account-abstraction.html).
+> Learn more about Account Abstraction in the [Starknet Book][account abstraction chapter].
+
+[starks article]: https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a
+[starknet architecture]: https://book.starknet.io/ch03-00-architecture.html
+[account abstraction chapter]: https://book.starknet.io/ch04-00-account-abstraction.html
 
 ## Cairo Programs and Starknet Contracts: What Is the Difference?
 
@@ -70,4 +76,6 @@ fn main() {}
 
 Contracts deployed on the Starknet network are essentially programs that are run by the sequencer, and as such, have access to Starknet's state. Contracts do not have a `main` function but one or multiple functions that can serve as entry points.
 
-Starknet contracts are defined within [modules](./ch07-02-defining-modules-to-control-scope.md). For a module to be handled as a contract by the compiler, it must be annotated with the `#[starknet::contract]` attribute.
+Starknet contracts are defined within [modules][module chapter]. For a module to be handled as a contract by the compiler, it must be annotated with the `#[starknet::contract]` attribute.
+
+[module chapter]: ./ch07-02-defining-modules-to-control-scope.md

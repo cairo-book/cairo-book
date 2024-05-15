@@ -84,12 +84,14 @@ Note that these 2 methods are equivalent. Just choose the one that makes your co
 
 > Wait, what is this `#[generate_trait]` attribute? Where is the trait definition for this implementation? Well, the `#[generate_trait]` attribute is a special attribute that tells the compiler to generate a trait definition for the implementation block. This allows you to get rid of the boilerplate code of defining a trait with generic parameters and implementing it for the implementation block. With this attribute, we can simply define the implementation block directly, without any generic parameter, and use `self: ContractState` in our functions.
 
-The `#[generate_trait]` attribute is mostly used to define private impl blocks. It might also be used in addition to `#[abi(per_item)]` to define the various entrypoints of a contract (see [next section](#4-abiper_item-attribute)).
+The `#[generate_trait]` attribute is mostly used to define private impl blocks. It might also be used in addition to `#[abi(per_item)]` to define the various entrypoints of a contract (see [next section][abi per item section]).
 
 > Note: using `#[generate_trait]` in addition to the `#[abi(embed_v0)]` attribute for a public impl block is not recommended, as it will result in a failure to generate the corresponding ABI. Public functions should only be defined in an impl block annotated with `#[generate_trait]` if this block is also annotated with the `#[abi(per_item)]` attribute.
 
+[abi per item section]: ./ch14-02-contract-functions.md#4-abiper_item-attribute
 
-## 4. `[abi(per_item)]` Attribute
+
+## `[abi(per_item)]` Attribute
 
 You can also define the entrypoint type of functions individually inside an impl block using the`#[abi(per_item)]` attribute on top of your impl. It is often used with the `#[generate_trait]` attribute, as it allows you to define entrypoints without an explicit interface. In this case, the functions will not be grouped under an impl in the ABI. Note that when using `#[abi(per_item)]` attribute, public functions need to be annotated with the `#[external(v0)]` attribute - otherwise, they will not be exposed and will be considered as private functions.
 
