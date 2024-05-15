@@ -1,5 +1,5 @@
 importScripts("../pkg/wasm-cairo.js");
-const { greet, compileCairoProgram, runCairoProgram } = wasm_bindgen;
+const { greet, compileCairoProgram, runCairoProgram, runTests } = wasm_bindgen;
 
 (async () => {
   await wasm_bindgen("../pkg/wasm-cairo_bg.wasm");
@@ -8,7 +8,7 @@ const { greet, compileCairoProgram, runCairoProgram } = wasm_bindgen;
 })();
 
 onmessage = function (e) {
-  const { data, functionToRun } = e.data;
+  const { data, allow_warnings, run_profiler, functionToRun } = e.data;
   wasm_bindgen("../pkg/wasm-cairo_bg.wasm").then(() => {
     let result;
     switch (functionToRun) {
@@ -17,8 +17,31 @@ onmessage = function (e) {
         result = runCairoProgram(
           data,
           availableGas,
+          allow_warnings,
           printFullMemory,
-          useDBGPrintHint,
+          run_profiler,
+          useDBGPrintHint
+        );
+        break;
+      case "runTests":
+        const {
+          filter,
+          include_ignored,
+          ignored,
+          starknet,
+          gas_disabled,
+          print_resource_usage,
+        } = e.data;
+        result = runTests(
+          data,
+          allow_warnings,
+          filter,
+          include_ignored,
+          ignored,
+          starknet,
+          run_profiler,
+          gas_disabled,
+          print_resource_usage
         );
         break;
       case "compileCairoProgram":

@@ -1,0 +1,9 @@
+$ scarb build 
+   Compiling no_listing_28_bis_if_not_bool v0.1.0 (listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/Scarb.toml)
+error: Mismatched types. The type `core::bool` cannot be created from a numeric literal.
+ --> listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo:4:18
+    let number = 3;
+                 ^
+
+error: could not compile `no_listing_28_bis_if_not_bool` due to previous error
+

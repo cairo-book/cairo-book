@@ -1,0 +1,15 @@
+$ scarb cairo-run 
+   Compiling no_listing_04_nopanic_wrong v0.1.0 (listings/ch09-error-handling/no_listing_05_nopanic_wrong/Scarb.toml)
+error: Function is declared as nopanic but calls a function that may panic.
+ --> listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:4:12
+    assert(1 == 1, 'what');
+           ^****^
+
+error: Function is declared as nopanic but calls a function that may panic.
+ --> listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:4:5
+    assert(1 == 1, 'what');
+    ^********************^
+
+error: could not compile `no_listing_04_nopanic_wrong` due to previous error
+error: `scarb metadata` exited with error
+

@@ -1,0 +1,35 @@
+$ scarb cairo-run 
+   Compiling no_listing_18_statements_dont_return_values v0.1.0 (listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/Scarb.toml)
+error: Missing token TerminalRParen.
+ --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:14
+    let x = (let y = 6);
+             ^
+
+error: Missing token TerminalSemicolon.
+ --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:14
+    let x = (let y = 6);
+             ^
+
+error: Missing token TerminalSemicolon.
+ --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:23
+    let x = (let y = 6);
+                      ^
+
+error: Skipped tokens. Expected: statement.
+ --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:23
+    let x = (let y = 6);
+                      ^^
+
+warn: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:9
+    let x = (let y = 6);
+        ^
+
+warn: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:18
+    let x = (let y = 6);
+                 ^
+
+error: could not compile `no_listing_18_statements_dont_return_values` due to previous error
+error: `scarb metadata` exited with error
+

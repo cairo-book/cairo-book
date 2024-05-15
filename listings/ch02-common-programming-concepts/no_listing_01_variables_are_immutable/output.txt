@@ -1,0 +1,10 @@
+$ scarb cairo-run 
+   Compiling no_listing_01_variables_are_immutable v0.1.0 (listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/Scarb.toml)
+error: Cannot assign to an immutable variable.
+ --> listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/src/lib.cairo:6:5
+    x = 6;
+    ^***^
+
+error: could not compile `no_listing_01_variables_are_immutable` due to previous error
+error: `scarb metadata` exited with error
+

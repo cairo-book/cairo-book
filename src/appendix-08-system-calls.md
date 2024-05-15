@@ -33,16 +33,16 @@ extern fn get_block_hash_syscall(
 
 Gets the hash of a specific StarkNet block within the range of `[first_v0_12_0_block, current_block - 10]`.
 
-#### Return values
+#### Return Values
 
 Returns the hash of the given block.
 
-#### Error messages
+#### Error Messages
 
 - `Block number out of range`: `block_number` is greater than _`current_block`_`- 10`.
 - `0`: `block_number` is less than the first block number of v0.12.0.
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/0c882679fdb24a818cad19f2c18decbf6ef66153/corelib/src/starknet/syscalls.cairo#L37)
 
@@ -66,11 +66,11 @@ In Cairo 1.0, all block/transaction/execution context getters are batched into t
 
 None.
 
-#### Return values
+#### Return Values
 
 Returns a [struct](https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60faa6e1363fd0152b8fcedbb00a/corelib/src/starknet/info.cairo#L8) containing the execution info.
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L35)
 
@@ -100,11 +100,11 @@ Calls a given contract. This system call expects the address of the called contr
 - _`entry_point_selector`_: A selector for a function within that contract, can be computed with the `selector!` macro.
 - _`calldata`_: The calldata array.
 
-#### Return values
+#### Return Values
 
 The call response, of type `SyscallResult<Span<felt252>>`.
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L10)
 
@@ -136,7 +136,7 @@ Deploys a new instance of a previously declared class.
 - _`calldata`_: The constructor’s calldata. An array of felts.
 - _`deploy_from_zero`_: A flag used for the contract address computation. If not set, the caller address will be used as the new contract’s deployer address, otherwise 0 is used.
 
-#### Return values
+#### Return Values
 
 A tuple wrapped with SyscallResult where:
 
@@ -144,7 +144,7 @@ A tuple wrapped with SyscallResult where:
 
 - The second element is the response array from the contract’s constructor, of type `Span::<felt252>`.
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/4821865770ac9e57442aef6f0ce82edc7020a4d6/corelib/src/starknet/syscalls.cairo#L22)
 
@@ -170,7 +170,7 @@ For more information and a higher-level syntax for emitting events, see [Starkne
 
 - _`data`_: The event’s data.
 
-#### Return values
+#### Return Values
 
 None.
 
@@ -189,7 +189,7 @@ values.append(3);
 emit_event_syscall(keys, values).unwrap_syscall();
 ```
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L30)
 
@@ -217,11 +217,11 @@ This system call replaces the known delegate call functionality from Ethereum, w
 
 - _`calldata`_: The calldata.
 
-#### Return values
+#### Return Values
 
 The call response, of type `SyscallResult<Span<felt252>>`.
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L43)
 
@@ -249,7 +249,7 @@ For more information, see Starknet’s [messaging mechanism](https://docs.starkn
 
 - _`payload`_: The array containing the message payload.
 
-#### Return values
+#### Return Values
 
 None.
 
@@ -264,7 +264,7 @@ payload.append(2);
 send_message_to_l1_syscall(payload).unwrap_syscall();
 ```
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L51)
 
@@ -292,11 +292,11 @@ Once `replace_class` is called, the class of the calling contract (i.e. the cont
 
 - _`class_hash`_: The hash of the class you want to use as a replacement.
 
-#### Return values
+#### Return Values
 
 None.
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L77)
 
@@ -324,7 +324,7 @@ For information on accessing storage by using the storage variables, see [storag
 
 - _`address`_: The requested storage address.
 
-#### Return values
+#### Return Values
 
 The value of the key, of type `SyscallResult<felt252>`.
 
@@ -339,7 +339,7 @@ let storage_address = storage_base_address_from_felt252(353453575475624637547542
 storage_read_syscall(0, storage_address).unwrap_syscall()
 ```
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L60)
 
@@ -369,10 +369,10 @@ For information on accessing storage by using the storage variables, see [storag
 
 - _`value`_: The value to write to the key.
 
-#### Return values
+#### Return Values
 
 None.
 
-#### Common library
+#### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L70)

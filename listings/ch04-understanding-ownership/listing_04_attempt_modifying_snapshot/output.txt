@@ -1,0 +1,15 @@
+$ scarb cairo-run 
+   Compiling listing_04_04 v0.1.0 (listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/Scarb.toml)
+error: Invalid left-hand side of assignment.
+ --> listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo:15:5
+    rec.height = rec.width;
+    ^********^
+
+error: Invalid left-hand side of assignment.
+ --> listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo:16:5
+    rec.width = temp;
+    ^*******^
+
+error: could not compile `listing_04_04` due to previous error
+error: `scarb metadata` exited with error
+

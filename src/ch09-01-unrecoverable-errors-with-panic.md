@@ -1,4 +1,4 @@
-# Unrecoverable Errors with panic
+# Unrecoverable Errors with `panic`
 
 In Cairo, unexpected issues may arise during program execution, resulting in runtime errors. While the `panic` function from the core library doesn't provide a resolution for these errors, it does acknowledge their occurrence and terminates the program. There are two primary ways that a panic can be triggered in Cairo: inadvertently, through actions causing the code to panic (e.g., accessing an array beyond its bounds), or deliberately, by invoking the `panic` function.
 
@@ -15,8 +15,7 @@ Here is how we can call `panic` from inside a program and return the error code 
 Running the program will produce the following output:
 
 ```shell
-$ scarb cairo-run
-Run panicked with [2, ].
+{{#include ../listings/ch09-error-handling/no_listing_01_panic/output.txt}}
 ```
 
 As you can notice in the output, the call to `println!` macro is never reached, as the program terminates after encountering the `panic` statement.
@@ -31,7 +30,7 @@ Let's consider an example:
 
 Executing this program will yield the same error message as before. In that case, if there is no need for an array and multiple values to be returned within the error, `panic_with_felt252` is a more succinct alternative.
 
-## `panic!` macro
+## `panic!` Macro
 
 `panic!` macro can be really helpful. The previous example returning the error code `2` shows how convenient `panic!` macro is. There is no need to create an array and pass it as an argument like `panic` function.
 
@@ -45,7 +44,7 @@ Unlike the `panic_with_felt252` function, using `panic!` allows the input, which
 panic!("the error for panic! macro is not limited to 31 characters anymore");
 ```
 
-## `nopanic` notation
+## `nopanic` Notation
 
 You can use the `nopanic` notation to indicate that a function will never panic. Only `nopanic` functions can be called in a function annotated as `nopanic`.
 
@@ -76,7 +75,7 @@ Function is declared as nopanic but calls a function that may panic.
 
 Note that there are two functions that may panic here, `assert` and equality with `==`. We usually don't use `assert` function in practice and use `assert!` macro instead. We will discuss `assert!` macro in more detail in [Testing Cairo Programs](ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro) chapter.
 
-## `panic_with` attribute
+## `panic_with` Attribute
 
 You can use the `panic_with` attribute to mark a function that returns an `Option` or `Result`. This attribute takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function. It will create a wrapper for your annotated function which will panic if the function returns `None` or `Err`, with the given data as the panic error.
 

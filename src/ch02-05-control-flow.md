@@ -19,9 +19,7 @@ Optionally, we can also include an `else` expression, which we chose to do here,
 Try running this code; you should see the following output:
 
 ```shell
-$ scarb cairo-run
-condition was false and number = 3
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_27_if/output.txt}}
 ```
 
 Let’s try changing the value of `number` to a value that makes the condition `true` to see what happens:
@@ -45,15 +43,7 @@ It’s also worth noting that the condition in this code must be a `bool`. If th
 The `if` condition evaluates to a value of 3 this time, and Cairo throws an error:
 
 ```shell
-$ scarb build
-error: Mismatched types. The type core::bool cannot be created from a numeric literal.
- --> projects/branches/src/lib.cairo:2:18
-    let number = 3;
-                 ^
-
-
-error: could not compile `hello_world` due to previous error
-Error: `scarb metadata` exited with error
+{{#include ../listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/output.txt}}
 ```
 
 The error indicates that Cairo inferred the type of `number` to be a `bool`
@@ -83,14 +73,14 @@ You can use multiple conditions by combining `if` and `else` in an `else if` exp
 This program has four possible paths it can take. After running it, you should see the following output:
 
 ```shell
-$ scarb cairo-run
-number is 3
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_30_else_if/output.txt}}
 ```
 
-When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1` nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. [Chapter 6](./ch06-02-the-match-control-flow-construct.md) describes a powerful Cairo branching construct called `match` for these cases.
+When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1` nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. [Chapter 6][match] describes a powerful Cairo branching construct called `match` for these cases.
 
-## Using `if` in a `let` statement
+[match]: ./ch06-02-the-match-control-flow-construct.md
+
+## Using `if` in a `let` Statement
 
 Because `if` is an expression, we can use it on the right side of a `let` statement to assign the outcome to a variable.
 
@@ -99,9 +89,7 @@ Because `if` is an expression, we can use it on the right side of a `let` statem
 ```
 
 ```shell
-$ scarb cairo-run
-condition was true and number is 5
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_31_if_let/output.txt}}
 ```
 
 The `number` variable will be bound to a value based on the outcome of the `if` expression, which will be 5 here.
@@ -127,7 +115,7 @@ As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
 When we run this program, we’ll see `again!` printed over and over continuously until either the program runs out of gas or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
 
 ```shell
-$ scarb cairo-run --available-gas=2000000000000
+$ scarb cairo-run --available-gas=20000000
    Compiling loops v0.1.0 (file:///projects/loops)
     Finished release target(s) in 0 seconds
      Running loops

@@ -95,7 +95,9 @@ how you’d use each numeric operation in a `let` statement:
 Each expression in these statements uses a mathematical operator and evaluates
 to a single value, which is then bound to a variable.
 
-[Appendix B][appendix_b] contains a list of all operators that Cairo provides.
+[Appendix B][operators] contains a list of all operators that Cairo provides.
+
+[operators]: ./appendix-02-operators-and-symbols.md#operators
 
 ### The Boolean Type
 
@@ -110,7 +112,9 @@ Cairo is specified using `bool`. For example:
 When declaring a `bool` variable, it is mandatory to use either `true` or `false` literals as value. Hence, it is not allowed to use integer literals (i.e. `0` instead of false) for `bool` declarations.
 
 The main way to use Boolean values is through conditionals, such as an `if`
-expression. We’ll cover how `if` expressions work in Cairo in the [Control Flow][control-flow] section.
+expression. We’ll cover how `if` expressions work in Cairo in the ["Control Flow"][control-flow] section.
+
+[control-flow]: ./ch02-05-control-flow.md
 
 ### String Types
 
@@ -118,7 +122,7 @@ Cairo doesn't have a native type for strings but provides two ways to handle the
 
 #### Short strings
 
-A short string is an ASCII string where each character is encoded on one byte (see the [ASCII table](https://www.asciitable.com/)). For example:
+A short string is an ASCII string where each character is encoded on one byte (see the [ASCII table][ascii]). For example:
 
 - `'a'` is equivalent to `0x61`
 - `'b'` is equivalent to `0x62`
@@ -135,7 +139,9 @@ Here are some examples of declaring short strings in Cairo:
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:2:6}}
 ```
 
-#### Byte Array strings
+[ascii]: https://www.asciitable.com/
+
+#### Byte Array Strings
 
 With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
 
@@ -143,7 +149,7 @@ With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 char
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
 
-## Type casting
+## Type Casting
 
 In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library.
 
@@ -193,7 +199,7 @@ For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types/src/lib.cairo}}
 ```
 
-## The unit type ()
+## The Unit Type ()
 
 A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.
@@ -202,6 +208,3 @@ Its size is always zero, and it is guaranteed to not exist in the compiled code.
 You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns `()` implicitly.
 
 {{#quiz ../quizzes/ch02-02-data-types.toml}}
-
-[control-flow]: ch02-05-control-flow.md
-[appendix_b]: appendix-02-operators-and-symbols.md#operators

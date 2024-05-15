@@ -1,0 +1,15 @@
+$ scarb cairo-run 
+   Compiling listing_99_02 v0.1.0 (listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/Scarb.toml)
+error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
+ --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:24:16
+        fn set(ref self: ContractState) {}
+               ^*********************^
+
+error: Wrong number of arguments. Expected 2, found: 1
+ --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo[contract]:80:5
+    SimpleStorage::set(ref contract_state, );
+    ^**************************************^
+
+error: could not compile `listing_99_02` due to previous error
+error: `scarb metadata` exited with error
+

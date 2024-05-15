@@ -1,0 +1,8 @@
+$ scarb cairo-run 
+   Compiling listing_04_05 v0.1.0 (listings/ch04-understanding-ownership/listing_05_mutable_reference/Scarb.toml)
+    Finished release target(s) in 1 second
+     Running listing_04_05
+height: 10, width: 3
+Run completed successfully, returning []
+Remaining gas: 19880750
+

@@ -2,7 +2,7 @@
 
 Most errors aren’t serious enough to require the program to stop entirely. Sometimes, when a function fails, it’s for a reason that you can easily interpret and respond to. For example, if you try to add two large integers and the operation overflows because the sum exceeds the maximum representable value, you might want to return an error or a wrapped result instead of causing undefined behavior or terminating the process.
 
-## The `Result` enum
+## The `Result` Enum
 
 Recall from [Generic data types](ch08-01-generic-data-types.md#enums) section in Chapter 8 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
@@ -72,7 +72,7 @@ Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail
 
 The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message `Invalid integer`.
 
-### The `?` operator
+### The `?` Operator
 
 The last operator we will talk about is the `?` operator. The `?` operator is used for more idiomatic and concise error handling. When you use the `?` operator on a `Result` or `Option` type, it will do the following:
 

@@ -115,22 +115,50 @@ function playground_text(playground, hidden = true) {
     let text = playground_text(code_block);
 
     result_block.innerText = "Running...";
-    window
-      .runFunc(text)
-      .then((data) => {
-        if (data.trim() === "") {
-          result_block.innerText = "No output";
-          result_block.classList.add("result-no-output");
-        } else {
-          result_block.innerText = data;
-          result_block.classList.remove("result-no-output");
-        }
-      })
-      .catch(
-        (error) =>
-          (result_block.innerText =
-            "Playground Communication: " + error.message),
-      );
+    // Only proceed if the text includes #[test]
+    if (text.includes("#[test]")) {
+      text = removeUnwantedLines(text);
+      window
+        .runTests(text)
+        .then((data) => {
+          if (data.trim() === "") {
+            result_block.innerText = "No output";
+            result_block.classList.add("result-no-output");
+          } else {
+            result_block.innerText = data;
+            result_block.classList.remove("result-no-output");
+          }
+        })
+        .catch(
+          (error) =>
+            (result_block.innerText =
+              "Playground Communication: " + error.message)
+        );
+    } else {
+      window
+        .runFunc(text)
+        .then((data) => {
+          if (data.trim() === "") {
+            result_block.innerText = "No output";
+            result_block.classList.add("result-no-output");
+          } else {
+            result_block.innerText = data;
+            result_block.classList.remove("result-no-output");
+          }
+        })
+        .catch(
+          (error) =>
+            (result_block.innerText =
+              "Playground Communication: " + error.message)
+        );
+    }
+  }
+
+  function removeUnwantedLines(text) {
+    const cleanedCode = text
+      .replace(/#!\[allow\(unused\)\][\s]*fn main\(\) \{[\s]*/, "")
+      .replace(/[\s]*\}$/, "");
+    return cleanedCode;
   }
 
   function run_rust_code(code_block) {

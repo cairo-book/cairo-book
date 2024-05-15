@@ -1,4 +1,4 @@
-# Appendix F - Installing the Cairo binaries
+# Appendix G - Installing the Cairo Binaries
 
 If you want to have access to the Cairo binaries, for anything that you could not achieve by purely using Scarb you can install them by following the instructions below.
 
@@ -55,7 +55,7 @@ and finally, restart your shell:
 exec $SHELL
 ```
 
-### Set up your shell environment for Cairo
+### Set Up your Shell Environment for Cairo
 
 - Define environment variable `CAIRO_ROOT` to point to the path where
   Cairo will store its data. `$HOME/.cairo` is the default.
@@ -127,7 +127,7 @@ IDE-like popup interface in the terminal window.
 (Note that their completions are independent of Cairo's codebase
 so they might be slightly out of sync for bleeding-edge interface changes.)
 
-### Restart your shell
+### Restart your Shell
 
 for the `PATH` changes to take effect.
 
@@ -176,7 +176,7 @@ is pull the latest changes and rebuild as follows:
 cd $CAIRO_ROOT && git fetch && git pull && cargo build --all --release
 ```
 
-### Step 2: Add Cairo 1.0 executables to your path
+### Step 2: Add Cairo 1.0 Executables to Your Path
 
 ```bash
 export PATH="$CAIRO_ROOT/target/release:$PATH"

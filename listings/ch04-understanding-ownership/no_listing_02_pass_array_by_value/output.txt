@@ -1,0 +1,20 @@
+$ scarb cairo-run 
+   Compiling no_listing_02_pass_array_by_value v0.1.0 (listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/Scarb.toml)
+warn: Unhandled `#[must_use]` type `core::option::Option::<core::integer::u128>`
+ --> listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:3:5
+    arr.pop_front();
+    ^*************^
+
+error: Variable was previously moved.
+ --> listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:9:9
+    foo(arr);
+        ^*^
+note: variable was previously used here:
+  --> listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:8:9
+    foo(arr);
+        ^*^
+note: Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
+
+error: could not compile `no_listing_02_pass_array_by_value` due to previous error
+error: `scarb metadata` exited with error
+

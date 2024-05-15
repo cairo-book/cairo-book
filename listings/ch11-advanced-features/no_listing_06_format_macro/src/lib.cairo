@@ -11,5 +11,6 @@ fn main() {
     let s = format!("{s1}-{s2}-{s3}"); // s1, s2, s3 are not consumed by format!
     // or
     let s = format!("{}-{}-{}", s1, s2, s3);
+
     println!("{}", s);
 }

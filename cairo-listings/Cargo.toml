@@ -1,5 +1,5 @@
 [package]
-name = "cairo-verify"
+name = "cairo-listings"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
@@ -8,12 +8,12 @@ description = "A tool for running adequate cairo tests tools on cairo files."
 repository = "https://github.com/cairo-book/cairo-book.github.io"
 
 [dependencies]
-clap = { version = "4.3.4", features = ["derive"] }
-colored = "2.0.0"
-env_logger = "0.10.0"
-indicatif = "0.17.5"
+clap = { version = "4.5.4", features = ["derive"] }
+colored = "2.1.0"
+env_logger = "0.10.2"
+indicatif = "0.17.8"
 lazy_static = "1.4.0"
-log = "0.4.19"
-regex = "1.8.4"
-serde = "1.0.164"
-walkdir = "2.3.3"
+log = "0.4.21"
+regex = "1.10.4"
+serde = "1.0.200"
+walkdir = "2.5.0"

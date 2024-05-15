@@ -2,7 +2,7 @@
 
 This mdbook preprocessor removes the `// TAG` lines from the cairo code blocks in the markdown files.
 
-It was made to be used with the `cairo-verify` tool.
+It was made to be used with the `cairo-listings` tool.
 
 # Useful links:
 

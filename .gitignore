@@ -2,11 +2,16 @@ book
 target
 output
 
-# mdbook-quiz
-src/quiz
+# mdbook-quiz-cairo
+src/quiz-cairo
 
 # Editors tmp files.
 *~
 .idea/
 
 *Scarb.lock
+
+runner_crate/src
+runner_crate/target
+
+*.snfoundry_cache

@@ -16,15 +16,24 @@ jobs:
       - name: Setup Scarb
         uses: software-mansion/setup-scarb@v1
 
+      - name: Setup Starknet-Foundry
+        uses: foundry-rs/setup-snfoundry@v3
+
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
-      - name: Install cairo-verify
-        run: cargo install --path cairo-verify --locked
+      - name: Install mdbook
+        uses: ./.github/workflows/install-mdbook
+
+      - name: Build book (English)
+        run: mdbook build -d book
+
+      - name: Install cairo-listings
+        run: cargo install --path cairo-listings --locked
         shell: bash
 
-      - name: Run cairo-verify and generate summary
-        run: cairo-verify >> $GITHUB_STEP_SUMMARY
+      - name: Run cairo-listings and generate summary
+        run: cairo-listings -- verify >> $GITHUB_STEP_SUMMARY
         shell: bash
 
   typos:

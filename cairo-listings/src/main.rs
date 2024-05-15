@@ -14,10 +14,11 @@ mod cmd;
 mod config;
 mod error_sets;
 mod logger;
+mod output;
 mod tags;
 mod utils;
 
-use crate::cmd::Cmd;
+use crate::cmd::ScarbCmd;
 use crate::config::Config;
 use crate::error_sets::ErrorSets;
 use crate::tags::Tags;
@@ -32,6 +33,19 @@ lazy_static! {
 }
 
 fn main() {
+    let args: Vec<String> = std::env::args().collect();
+    if args.len() > 1 {
+        match args[1].as_str() {
+            "verify" => run_verification(),
+            "output" => output::process_outputs(),
+            _ => println!("Invalid command. Usage: cairo-listings -- [verify|output]"),
+        }
+    } else {
+        println!("Please provide a command. Usage: cairo-listings -- [verify|output]");
+    }
+}
+
+fn run_verification() {
     let cfg = &*CFG;
     let scarb_packages = find_scarb_manifests(cfg);
 
@@ -127,10 +141,7 @@ fn process_file(manifest_path: &str) {
     if is_contract {
         // This is a contract, it must pass starknet-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.starknet_skip {
-            match Cmd::ScarbBuild().test(manifest_path) {
-                Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::ScarbBuild()),
-            }
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
         }
     } else if should_be_runnable {
         // This is a cairo program, it must pass cairo-run
@@ -138,44 +149,39 @@ fn process_file(manifest_path: &str) {
             && !tags.contains(&Tags::DoesNotCompile)
             && !cfg.run_skip
         {
-            match Cmd::ScarbCairoRun().test(manifest_path) {
-                Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::ScarbCairoRun()),
-            }
+            run_command(ScarbCmd::CairoRun(), manifest_path, file_path, vec![]);
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
         if !tags.contains(&Tags::DoesNotCompile) && !cfg.compile_skip {
-            match Cmd::ScarbBuild().test(manifest_path) {
-                Ok(_) => {}
-                Err(e) => handle_error(e, file_path, Cmd::ScarbBuild()),
-            }
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
         }
-    }
+    };
 
     // TEST CHECKS
     if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        match Cmd::ScarbTest().test(manifest_path) {
-            Ok(_) => {}
-            Err(e) => handle_error(e, file_path, Cmd::ScarbTest()),
-        }
+        let _ = run_command(ScarbCmd::Test(), manifest_path, file_path, vec![]);
     }
 
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !cfg.formats_skip {
         // This program must pass cairo-format
-        match Cmd::ScarbFormat().test(manifest_path) {
-            Ok(_) => {}
-            Err(e) => handle_error(e, file_path, Cmd::ScarbFormat()),
-        }
+        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, vec![]);
     }
 }
 
-fn handle_error(e: String, file_path: &str, cmd: Cmd) {
+fn run_command(cmd: ScarbCmd, manifest_path: &str, file_path: &str, args: Vec<String>) -> String {
+    match cmd.test(manifest_path, args) {
+        Ok(output) => String::from_utf8_lossy(&output.stdout).into_owned(),
+        Err(e) => handle_error(e, file_path, cmd),
+    }
+}
+
+fn handle_error(e: String, file_path: &str, cmd: ScarbCmd) -> String {
     let clickable_file = clickable(file_path);
     let msg = match cmd {
-        Cmd::ScarbTest() | Cmd::ScarbCairoRun() => {
+        ScarbCmd::Test() | ScarbCmd::CairoRun() => {
             format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
         }
         _ => format!("{} -> {}", cmd.as_str(), clickable_file),
@@ -185,4 +191,6 @@ fn handle_error(e: String, file_path: &str, cmd: Cmd) {
 
     let mut errors = ERRORS.lock().unwrap();
     errors.get_mut_error_set(&cmd).insert(clickable_file);
+
+    e
 }

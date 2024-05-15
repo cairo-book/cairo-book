@@ -50,9 +50,11 @@ In the `match` expression for this code, we add a variable called `state` to the
 
 Because `state` is an `UsState` enum which implements the `Debug` trait, we can print `state` value with `println!` macro.
 
-> Note: `{:?}` is a special formatting syntax that allows you to print a debug form of the parameter passed to the `println!` macro. You can find more information about it [here](appendix-03-derivable-traits.html#debug-for-programmer-output).
+> Note: `{:?}` is a special formatting syntax that allows to print a debug form of the parameter passed to the `println!` macro. You can find more information about it in [Appendix C][debug trait].
 
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the Coin enum variant for Quarter.
+
+[debug trait]: ./appendix-03-derivable-traits.html#debug-for-printing-and-debugging
 
 ## Matching with `Option<T>`
 
@@ -104,16 +106,13 @@ There’s one other aspect of `match` we need to discuss: the arms’ patterns m
 We didn’t handle the `None` case, so this code will cause a bug.
 Luckily, it’s a bug Cairo knows how to catch. If we try to compile this code, we’ll get this error:
 
-```bash
-$ scarb cairo-run
-error: Missing match arm: `None` not covered.
- --> test.cairo:34:5
-     match x {
-    ^*******^
-error: could not compile `match` due to previous error
+```shell
+{{#include ../listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/output.txt}}
 ```
 
-Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of `Option<T>`, when Cairo prevents us from forgetting to explicitly handle the `None` case, it protects us from assuming that we have a value when we might have null, thus making the [billion-dollar mistake](https://en.wikipedia.org/wiki/Null_pointer#History) discussed earlier impossible.
+Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of `Option<T>`, when Cairo prevents us from forgetting to explicitly handle the `None` case, it protects us from assuming that we have a value when we might have null, thus making the [billion-dollar mistake][null pointer] discussed earlier impossible.
+
+[null pointer]: https://en.wikipedia.org/wiki/Null_pointer#History
 
 ## Catch-all with the `_` Placeholder
 
@@ -138,7 +137,7 @@ This example also meets the exhaustiveness requirement because we’re explicitl
   TODO move the following in a separate chapter when there's more pattern matching features in upcoming Cairo versions. cf rust book chapter 18
 -->
 
-## Multiple Patterns with the `|` operator
+## Multiple Patterns with the `|` Operator
 
 In `match` expressions, you can match multiple patterns using the `|` syntax, which is the pattern _or_ operator.
 
@@ -170,7 +169,7 @@ Writing `(_, _)` for the last arm of a tuple matching pattern might feel superfl
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:week}}
 ```
 
-## Matching `felt252` and integer variables
+## Matching `felt252` and Integer Variables
 
 You can also match `felt252` and integer variables. This is useful when you want to match against a range of values.
 However, there are some restrictions:
@@ -187,5 +186,7 @@ Here's a match that implements that logic:
 ```rust,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_13_match_integers/src/lib.cairo:here}}
 ```
+
+{{#quiz ../quizzes/ch06-02-match.toml}}
 
 > These restrictions are planned to be relaxed in future versions of Cairo.

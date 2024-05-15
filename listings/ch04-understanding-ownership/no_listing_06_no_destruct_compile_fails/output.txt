@@ -1,0 +1,12 @@
+$ scarb cairo-run 
+   Compiling no_listing_06_no_destruct_compile_fails v0.1.0 (listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/Scarb.toml)
+error: Variable not dropped.
+ --> listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo:7:5
+    A { dict: Default::default() };
+    ^****************************^
+note: Trait has no implementation in context: core::traits::Drop::<no_listing_06_no_destruct_compile_fails::A>
+note: Trait has no implementation in context: core::traits::Destruct::<no_listing_06_no_destruct_compile_fails::A>
+
+error: could not compile `no_listing_06_no_destruct_compile_fails` due to previous error
+error: `scarb metadata` exited with error
+

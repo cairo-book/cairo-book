@@ -1,4 +1,4 @@
-# Testing components
+# Testing Components
 
 Testing components is a bit different than testing contracts.
 Contracts need to be tested against a specific state, which can be achieved by either deploying the contract in a test, or by simply getting the `ContractState` object and modifying it in the context of your tests.
@@ -14,7 +14,7 @@ Let's consider that we want to test a very simple component called "Counter", th
 {{#label test_component}}
 <span class="caption">Listing {{#ref test_component}}: A simple Counter component.</span>
 
-## Testing the component by deploying a mock contract
+## Testing the Component by Deploying a Mock Contract
 
 The easiest way to test a component is to integrate it within a mock contract. This mock contract is only used for testing purposes, and only integrates the component you want to test. This allows you to test the component in the context of a contract, and to use a Dispatcher to call the component's entry points.
 
@@ -38,7 +38,7 @@ We can now write tests for the component by deploying this mock contract and cal
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/tests_deployed.cairo}}
 ```
 
-## Testing components without deploying a contract
+## Testing Components Without Deploying a Contract
 
 In [Components under the hood](./ch16-02-01-under-the-hood.md), we saw that components leveraged genericity to define storage and logic that could be embedded in multiple contracts. If a contract embeds a component, a `HasComponent` trait is created in this contract, and the component methods are made available.
 

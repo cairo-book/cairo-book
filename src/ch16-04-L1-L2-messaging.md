@@ -54,7 +54,7 @@ Once a message is detected in a log, the sequencer prepares and executes a `L1Ha
 `L2->L1` messages are prepared by contracts execution on L2 and are part of the block produced. When the sequencer produces a block, it sends the hash of each message prepared by contracts execution
 to the `StarknetCore` contract on L1, where they can then be consumed once the block they belong to is proven and verified on Ethereum (which for now is around 3-4 hours).
 
-## Sending messages from Ethereum to Starknet
+## Sending Messages from Ethereum to Starknet
 
 If you want to send messages from Ethereum to Starknet, your Solidity contracts must call the `sendMessageToL2` function of the `StarknetMessaging` contract. To receive these messages on Starknet, you will need to annotate functions that can be called from L1 with the `#[l1_handler]` attribute.
 
@@ -121,7 +121,7 @@ On the Starknet side, to receive this message, we have:
 
 We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be executed by a `L1HandlerTransaction`. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.
 
-## Sending messages from Starknet to Ethereum
+## Sending Messages from Starknet to Ethereum
 
 When sending messages from Starknet to Ethereum, you will have to use the `send_message_to_l1` syscall in your Cairo contracts. This syscall allows you to send messages to the `StarknetMessaging` contract on L1. Unlike `L1->L2` messages, `L2->L1` messages must be consumed manually, which means that you will need your Solidity contract to call the `consumeMessageFromL2` function of the `StarknetMessaging` contract explicitly in order to consume the message.
 

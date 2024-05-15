@@ -50,16 +50,18 @@ program with comments annotating where the variable `s` would be valid.
 ```
 
 {{#label variable-scope}}
-<span class="caption">Listing {{#ref variable-scope}}: A variable and the scope in which it is valid.</span>
+<span class="caption">Listing {{#ref variable-scope}}: A variable and the scope in which it is valid</span>
 
 In other words, there are two important points in time here:
 
 - When `s` comes _into_ scope, it is valid.
 - It remains valid until it goes _out of_ scope.
 
-At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the `Array` type we introduced in the [previous chapter](./ch03-01-arrays.md).
+At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the `Array` type we introduced in the previous ["Arrays"][array] section.
 
-### Moving values - example with Array
+[array]: ./ch03-01-arrays.md
+
+### Moving values
 
 As said earlier, _moving_ a value simply means passing that value to another function. When that happens, the variable referring to that value in the original scope is destroyed and can no longer be used, and a new variable is created to hold the same value.
 
@@ -81,18 +83,15 @@ In this case, we try to pass the same value (the array in the `arr` variable) to
 Thankfully, this code does not actually compile. Once we have passed the array to the `foo` function, the variable `arr` is no longer usable. We get this compile-time error, telling us that we would need Array to implement the Copy Trait:
 
 ```shell
-error: Variable was previously moved. Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>
- --> array.cairo:6:9
-    let mut arr = ArrayTrait::<u128>::new();
-        ^*****^
+{{#include ../listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/output.txt}}
 ```
 
-## The Copy trait
+## The `Copy` Trait
 
 If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
 The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
 
-All basic types previously described in [Data Types Chapter](ch02-02-data-types.md) implement by default the `Copy` trait.
+All basic types previously described in ["Data Types"][data types] implement by default the `Copy` trait.
 
 While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
 You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components doesn't implement the Copy trait.
@@ -104,15 +103,18 @@ You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` 
 In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid. In ownership terms, this means that the ownership of `p1` remains with the `main` function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
-_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5](ch05-00-using-structs-to-structure-related-data.md)._
+_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5][structs]._
 
-## Destroying values - example with FeltDict
+[data types]: ./ch02-02-data-types.md
+[structs]: ./ch05-00-using-structs-to-structure-related-data.md
+
+## Destroying Values - Example with FeltDict
 
 The other way linear types can be _used_ is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In Rust, for example, this could be closing the access to a file, or locking a mutex.
 In Cairo, one type that has such behaviour is `Felt252Dict`. For provability, dicts must be 'squashed' when they are destructed.
 This would be very easy to forget, so it is enforced by the type system and the compiler.
 
-### No-op destruction: the `Drop` Trait
+### No-op Destruction: the `Drop` Trait
 
 You may have noticed that the `Point` type in the previous example also implements the `Drop` trait.
 For example, the following code will not compile, because the struct `A` is not moved or destroyed before it goes out of scope:
@@ -130,7 +132,7 @@ For example, the following code compiles:
 {{#include ../listings/ch04-understanding-ownership/no_listing_05_drop_derive_compiles/src/lib.cairo}}
 ```
 
-### Destruction with a side-effect: the `Destruct` trait
+### Destruction with a Side-effect: the `Destruct` Trait
 
 When a value is destroyed, the compiler first tries to call the `drop` method on that type. If it doesn't exist, then the compiler tries to call `destruct` instead. This method is provided by the `Destruct` trait.
 
@@ -144,10 +146,7 @@ As such, the following example will not compile:
 If you try to run this code, you will get a compile-time error:
 
 ```shell
-error: Variable not dropped. Trait has no implementation in context: core::traits::Drop::<temp7::temp7::A>. Trait has no implementation in context: core::traits::Destruct::<temp7::temp7::A>.
- --> temp7.cairo:7:5
-    A {
-    ^*^
+{{#include ../listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/output.txt}}
 ```
 
 When `A` goes out of scope, it can't be dropped as it implements neither the `Drop` (as it contains a dictionary and can't `derive(Drop)`) nor the `Destruct` trait. To fix this, we can derive the `Destruct` trait implementation for the `A` type:
@@ -158,9 +157,9 @@ When `A` goes out of scope, it can't be dropped as it implements neither the `Dr
 
 Now, when `A` goes out of scope, its dictionary will be automatically `squashed`, and the program will compile.
 
-## Copy Array data with Clone
+## Copy Array Data with `clone`
 
-If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in [Chapter 5-3](ch05-03-method-syntax.md), but because methods are a common feature in many programming languages, you’ve probably seen them before.
+If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in a dedicated section in [Chapter 5][method syntax], but because methods are a common feature in many programming languages, you’ve probably seen them before.
 
 Here’s an example of the `clone` method in action.
 
@@ -170,6 +169,8 @@ Here’s an example of the `clone` method in action.
 
 When you see a call to `clone`, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
 In this case, the _value_ `arr1` refers to is being copied, resulting in new memory cells being used, and a new _variable_ `arr2` is created, referring to the new copied value.
+
+[method syntax]: ./ch05-03-method-syntax.md
 
 ## Return Values and Scope
 
@@ -183,7 +184,7 @@ function that returns some value, with similar annotations as those in Listing {
 ```
 
 {{#label move-return-values}}
-<span class="caption">Listing {{#ref move-return-values}}: Moving return values.</span>
+<span class="caption">Listing {{#ref move-return-values}}: Moving return values</span>
 
 While this works, moving into and out of every function is a bit tedious. What if we want to let a function use a value but not move the value? It’s quite annoying that anything we pass in also needs to be passed back if we want to use it again, in addition to any data resulting from the body of the function that we might want to return as well.
 
@@ -196,9 +197,6 @@ Cairo does let us return multiple values using a tuple, as shown in Listing {{#r
 ```
 
 {{#label return-multiple-values}}
-<span class="caption">Listing {{#ref return-multiple-values}}: Returning many values.</span>
+<span class="caption">Listing {{#ref return-multiple-values}}: Returning many values</span>
 
 But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called _references_ and _snapshots_.
-
-[data-types]: ch02-02-data-types.html#data-types
-[method-syntax]: ch04-03-method-syntax.html#method-syntax

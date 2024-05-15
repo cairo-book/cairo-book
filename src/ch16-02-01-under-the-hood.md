@@ -1,4 +1,4 @@
-# Components under the hood
+# Components: Under the Hood
 
 Components provide powerful modularity to Starknet contracts. But how does this
 magic actually happen behind the scenes?

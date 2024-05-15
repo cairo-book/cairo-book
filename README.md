@@ -4,7 +4,9 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-25-orange.svg?style=flat-square)](#contributors)
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -32,8 +34,8 @@ This repository contains the source of "The Cairo Programming Language" book, a 
    ```
 2. Host machine packages:
 
-   - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager:
-     `sudo apt install gettext`.
+   - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager: `sudo apt install gettext`.
+   - Install [mdbook-quiz-cairo](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file) following the instructions [here](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file#installation) to be able to add interactive quizzes.
 
 3. Clone this repository.
 
@@ -81,7 +83,7 @@ If you wish to initiate a new translation for your language without running a lo
 
 ### Work locally (Cairo programs verification)
 
-The `cairo-verify` tool is designed to wrap all cairo and starknet plugins for quickly verifying cairo programs.
+The `cairo-listings` tool is designed to wrap all cairo and starknet plugins for quickly verifying cairo programs. You can verify that listings are correct with the `verify` argument, and generate the corresponding output with the `output` argument.
 
 #### Setup
 
@@ -89,16 +91,16 @@ Firstly, you need to have `scarb` resolved in your path:
 
 They should be available after installing cairo, see [here](https://cairo-book.github.io/ch01-01-installation.html) for more details.
 
-To run the `cairo-verify` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
+To run the `cairo-listings` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
 
 ```sh
-cargo run --bin cairo-verify
+cargo run --bin cairo-listings
 ```
 
 Alternatively, you can also install the tool with:
 
 ```sh
-cargo install --path cairo-verify
+cargo install --path cairo-listings
 ```
 
 #### Usage
@@ -134,9 +136,9 @@ Here is a list of available tags:
 You can skip and ignore a specific test by adding the corresponding flag:
 
 ```sh
-$ cairo-verify --help
+$ cairo-listings --help
 
-Usage: cairo-verify [OPTIONS]
+Usage: cairo-listings [OPTIONS]
 
 Options:
   -p, --path <PATH>    The path to explore for *.cairo files [default: ./listings]
@@ -152,7 +154,7 @@ Options:
   -V, --version        Print version
 ```
 
-In CI, it's preferable to reduce output, so run `cairo-verify` with the `--quiet` flag.
+In CI, it's preferable to reduce output, so run `cairo-listings` with the `--quiet` flag.
 
 The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines in code blocks.
 
@@ -195,6 +197,9 @@ The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines i
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/LeandroCarvajal"><img src="https://avatars.githubusercontent.com/u/99574021?v=4?s=100" width="100px;" alt="SimplementeCao"/><br /><sub><b>SimplementeCao</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=LeandroCarvajal" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/LucasLvy"><img src="https://avatars.githubusercontent.com/u/70894690?v=4?s=100" width="100px;" alt="Lucas @ StarkWare"/><br /><sub><b>Lucas @ StarkWare</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=LucasLvy" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/remybar"><img src="https://avatars.githubusercontent.com/u/57539816?v=4?s=100" width="100px;" alt="Rémy Baranx"/><br /><sub><b>Rémy Baranx</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=remybar" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/stevencartavia"><img src="https://avatars.githubusercontent.com/u/112043913?v=4?s=100" width="100px;" alt="Steven Cordero"/><br /><sub><b>Steven Cordero</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=stevencartavia" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Symmaque"><img src="https://avatars.githubusercontent.com/u/50242998?v=4?s=100" width="100px;" alt="Symmaque"/><br /><sub><b>Symmaque</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=Symmaque" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=Symmaque" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/No-bodyq"><img src="https://avatars.githubusercontent.com/u/141028690?v=4?s=100" width="100px;" alt="Asher"/><br /><sub><b>Asher</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=No-bodyq" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

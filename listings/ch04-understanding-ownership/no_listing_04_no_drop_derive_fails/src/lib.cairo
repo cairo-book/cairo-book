@@ -2,5 +2,5 @@
 struct A {}
 
 fn main() {
-    A {}; // error: Value not dropped.
+    A {}; // error: Variable not dropped.
 }

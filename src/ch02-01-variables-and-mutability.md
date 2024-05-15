@@ -25,12 +25,7 @@ Save and run the program using `scarb cairo-run`. You should receive an error me
 regarding an immutability error, as shown in this output:
 
 ```shell
-error: Cannot assign to an immutable variable.
- --> lib.cairo:5:5
-    x = 6;
-    ^***^
-
-error: could not compile `variables` due to previous error
+{{#include ../listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/output.txt}}
 ```
 
 This example shows how the compiler helps you find errors in your programs.
@@ -81,10 +76,7 @@ For example, let’s change _src/lib.cairo_ to the following:
 When we run the program now, we get this:
 
 ```shell
-$ scarb cairo-run
-The value of x is: 5
-The value of x is: 6
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_02_adding_mut/output.txt}}
 ```
 
 We’re allowed to change the value bound to `x` from `5` to `6` when `mut` is
@@ -139,6 +131,8 @@ conveying the meaning of that value to future maintainers of the code. It also
 helps to have only one place in your code you would need to change if the
 hardcoded value needed to be updated in the future.
 
+[data-types]: ./ch02-02-data-types.md
+
 ## Shadowing
 
 Variable shadowing refers to the declaration of a
@@ -163,10 +157,7 @@ When that scope is over, the inner shadowing ends and `x` returns to being `6`.
 When we run this program, it will output the following:
 
 ```shell
-scarb cairo-run
-Inner scope x value is: 12
-Outer scope x value is: 6
-Run completed successfully, returning []
+{{#include ../listings/ch02-common-programming-concepts/no_listing_03_shadowing/output.txt}}
 ```
 
 Shadowing is different from marking a variable as `mut` because we’ll get a
@@ -199,18 +190,9 @@ and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try 
 The error says we were expecting a `u64` (the original type) but we got a different type:
 
 ```shell
-$ scarb cairo-run
-
-error: The value does not fit within the range of type core::integer::u64.
- --> lib.cairo:9:9
-    x = 'a short string';
-        ^**************^
-
-error: could not compile `variables` due to previous error
+{{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/output.txt}}
 ```
-
-Now that we’ve explored how variables work, let’s look at more data types they can have.
 
 {{#quiz ../quizzes/ch02-01-variables-and-mutability.toml}}
 
-[data-types]: ch02-02-data-types.md
+Now that we’ve explored how variables work, let’s look at more data types they can have.

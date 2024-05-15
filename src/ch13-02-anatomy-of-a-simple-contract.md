@@ -11,7 +11,7 @@ Let's consider the following contract for the whole chapter. It might not be eas
 {{#label simple-contract}}
 <span class="caption">Listing {{#ref simple-contract}}: A simple storage contract.</span>
 
-## What is this contract?
+## What Is this Contract?
 
 Contracts are defined by encapsulating state and logic within a module annotated with the `#[starknet::contract]` attribute.
 
@@ -20,7 +20,7 @@ The state is defined within the `Storage` struct, and is always initialized empt
 The logic is defined by functions that interact with the state. Here, our contract defines and publicly exposes the functions `set` and `get` that can be used to modify or retrieve the value of the stored variable.
 You can think of it as a single slot in a database that you can query and modify by calling functions of the code that manages the database.
 
-## The interface: the contract's blueprint
+## The Interface: the Contract's Blueprint
 
 ```rust,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:interface}}
@@ -50,20 +50,10 @@ By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from 
 Trying to compile a contract using this implementation will result in the following error:
 
 ```shell
-error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
- --> /SimpleStorage/src/lib.cairo:20:16
-        fn set(ref self: ContractState) {}
-               ^*********************^
-
-error: Wrong number of arguments. Expected 2, found: 1
- --> /SimpleStorage/src/lib.cairo[contract]:80:5
-    SimpleStorage::set(ref contract_state, );
-    ^**************************************^
-
-error: could not compile `SimpleStorage` due to previous error
+{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/output.txt}}
 ```
 
-## Public functions defined in an implementation block
+## Public Functions Defined in an Implementation Block
 
 Before we explore things further down, let's define some terminology.
 
@@ -90,7 +80,7 @@ When writing the implementation of an interface, the `self` parameter in the tra
 Additionally, `ContractState` gives us the ability to emit events. The name `ContractState` is not surprising, as it’s a representation of the contract’s state, which is what we think of `self` in the contract interface trait.
 When `self` is a snapshot of `ContractState`, only read access is allowed, and emitting events is not possible.
 
-## Accessing and modifying the contract's state
+## Accessing and Modifying the Contract's State
 
 Two methods are commonly used to access or modify the state of a contract:
 - `read`, which returns the value of a storage variable. This method is called on the variable itself and does not take any argument.
