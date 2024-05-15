@@ -14,5 +14,4 @@ warn: Unused variable. Consider ignoring by prefixing with `_`.
      Running no_listing_06_format_macro
 tic-tac-toe
 Run completed successfully, returning []
-Remaining gas: 19485650
 
