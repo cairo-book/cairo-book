@@ -4,5 +4,4 @@ $ scarb cairo-run
      Running no_listing_20_function_return_values
 The value of x is: 5
 Run completed successfully, returning []
-Remaining gas: 19932820
 
