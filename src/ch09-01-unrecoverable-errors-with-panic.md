@@ -63,14 +63,7 @@ This function will always return `42` and is guaranteed to never panic. Converse
 If you try to compile this function that includes code that may panic, you will get the following error:
 
 ```shell
-error: Function is declared as nopanic but calls a function that may panic.
- --> test.cairo:2:12
-    assert(1 == 1, 'what');
-           ^****^
-Function is declared as nopanic but calls a function that may panic.
- --> test.cairo:2:5
-    assert(1 == 1, 'what');
-    ^********************^
+{{#include ../listings/ch09-error-handling/no_listing_05_nopanic_wrong/output.txt}}
 ```
 
 Note that there are two functions that may panic here, `assert` and equality with `==`. We usually don't use `assert` function in practice and use `assert!` macro instead. We will discuss `assert!` macro in more detail in [Testing Cairo Programs](ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro) chapter.

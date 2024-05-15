@@ -3,5 +3,4 @@ $ scarb cairo-run
     Finished release target(s) in 1 second
      Running no_listing_01_panic
 Run panicked with [2, ].
-Remaining gas: 19999200
 

@@ -5,5 +5,4 @@ $ scarb cairo-run
 The value of x is: 5
 The value of x is: 6
 Run completed successfully, returning []
-Remaining gas: 19839320
 
