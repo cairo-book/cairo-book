@@ -17,11 +17,11 @@ fn main(){
         width: 20,
         height: 10,
     };
-    println!("{}", perimeter(rectangle1));
+    let p = perimeter(rectangle1);
+    println!("2 * ({} + {}) = {}", rectangle1.width, rectangle1.height, p);
 }
 """
-answer.doesCompile = true
-answer.stdout = "60"
+answer.doesCompile = false
 
 [[questions]]
 type = "Tracing"
@@ -31,8 +31,8 @@ struct Point { x: u128, y: u128, }
 fn main() {
     let p = Point { x: 5, y: 10 };
     let Point { z, w } = p;
-    println!("The value of z and w are: ({}, {})", z, w);
+    println!("The values of z and w are: ({}, {})", z, w);
 }
 """
 answer.doesCompile = false
-context = "In Cairo, similar to tuples, you can use pattern matching to destructure a struct. However, when destructuring a struct, the fields being destructured must match the fields of the struct."
+context = "Destructuring refers to the process of extracting individual fields from a struct and binding them to separate variables. When destructuring a struct, you can either use variables with the same names as the struct fields or explicitly bind the fields to variables with different names using the syntax `field_name: variable_name`."
