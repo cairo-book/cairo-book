@@ -20,3 +20,19 @@ fn main(){
     println!("{}", perimeter(rectangle1));
 }
 """
+answer.doesCompile = true
+answer.stdout = "60"
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+struct Point { x: u128, y: u128, }
+
+fn main() {
+    let p = Point { x: 5, y: 10 };
+    let Point { z, w } = p;
+    println!("The value of z and w are: ({}, {})", z, w);
+}
+"""
+answer.doesCompile = false
+context = "In Cairo, similar to tuples, you can use pattern matching to destructure a struct. However, when destructuring a struct, the fields being destructured must match the fields of the struct."
