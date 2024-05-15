@@ -29,7 +29,7 @@ But, to do that, we need some bitwise operators:
     <span class="caption">Shifting to the left or to the right an integer value</span>
 </div>
 
-- applying a mask (`AND` operator) on an integer value isolates some bits of this integer.
+- applying a mask (`AND` operator) on an integer value isolates some bits of this integer
 
 <div align="center">
     <img src="mask.png" alt="applying a mask" width="500px"/>
