@@ -1,4 +1,5 @@
 [[questions]]
+id = "dd16401e-9f74-4c86-a6ec-da2937cb26e5"
 type = "MultipleChoice"
 prompt.prompt = """
 Which call to this `find_until` function will cause a runtime panic?
@@ -18,19 +19,21 @@ fn find_until(mut v: Span<u64>, n: u64, til: usize) -> Option<usize> {
 }
 ```
 """
-answer.answer = "`find_until(array![1, 2, 3].span(), 4, 4);`"
 prompt.distractors = [
   "`find_until(array![1, 2, 3].span(), 0, 0);`",
   "`find_until(array![1, 2, 3].span(), 3, 3);`",
   "`find_until(array![1, 2, 3].span(), 1, 4);`",
 ]
+answer.answer = "`find_until(array![1, 2, 3].span(), 4, 4);`"
 context = """
 If `til = 4`, then for an array of length 3, the loop will attempt to index the array with `i = 3`,
 which is out of bounds.  This function does not panic if `n = 1` because it returns before reaching
 the out-of-bounds index.
 """
 
+
 [[questions]]
+id = "2e6570eb-8bf4-48b7-9032-5815475bc412"
 type = "Tracing"
 prompt.program = """
 fn main() {
@@ -50,6 +53,7 @@ ByteArray is not copyable, the line `let mut s = *v[0];` does not compile.
 
 
 [[questions]]
+id = "95d528ee-ae78-4892-a438-a5d97f07f52a"
 type = "Tracing"
 prompt.program = """
 fn main() {

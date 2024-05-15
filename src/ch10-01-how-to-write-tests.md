@@ -91,15 +91,7 @@ Now we’ll add another test, but this time we’ll make a test that fails! Test
 Run `scarb cairo-test` and you will see the following output:
 
 ```shell
-$ scarb cairo-test
-testing adder ...
-running 2 tests
-test adder::exploration ... ok (gas usage est.: 53200)
-test adder::another ... fail (gas usage est.: 55870)
-failures:
-   adder::another - Panicked with "Make this test fail".
-
-Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_02/output.txt}}
 ```
 
 Instead of `ok`, the line `adder::another` shows `fail`. A new section appears between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `"Make this test fail"` error.
@@ -152,12 +144,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 Because the correct result of the `can_hold` method, in this case, is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
 
 ```shell
-$ scarb cairo-test
-testing adder ...
-running 2 tests
-test adder::larger_can_hold_smaller ... ok (gas usage est.: 54940)
-test adder::smaller_cannot_hold_larger ... ok (gas usage est.: 55140)
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 filtered out;
+{{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/output.txt}}
 ```
 
 Two tests that pass! Now let’s see what happens to our test results when we introduce a bug in our code. We’ll change the implementation of the `can_hold` method by replacing the `>` sign with a `<` sign when it compares the widths:
@@ -528,3 +515,5 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
 Here, the gas usage of the `sum_n` function is 163430 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 271290, due to some extra steps required to run the entire test function.
+
+{{#quiz ../quizzes/ch10-01-how_to_write_tests.toml}}

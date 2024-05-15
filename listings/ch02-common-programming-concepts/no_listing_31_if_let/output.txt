@@ -4,5 +4,4 @@ $ scarb cairo-run
      Running no_listing_26_if_let
 condition was true and number is 5
 Run completed successfully, returning []
-Remaining gas: 19898920
 

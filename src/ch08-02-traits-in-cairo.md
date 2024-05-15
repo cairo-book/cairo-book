@@ -80,10 +80,7 @@ types. Here’s an example of how a crate could use our `aggregator` crate:
 This code prints the following:
 
 ```shell
-New article available! Cairo has become the most popular language for developers by Cairo Digger (Worldwide)
-New tweet! EliBenSasson: Crypto is full of short-term maximizing projects.
- @Starknet and @StarkWareLtd are about long-term vision maximization.
-Run completed successfully, returning []
+{{#include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/output.txt}}
 ```
 
 Other crates that depend on the _aggregator_ crate can also bring the `Summary` trait into scope to implement `Summary` on their own types.

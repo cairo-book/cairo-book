@@ -1,0 +1,11 @@
+$ scarb cairo-test 
+     Running cairo-test listing_08_06
+   Compiling test(listings/ch10-testing-cairo-programs/listing_10_03/Scarb.toml)
+    Finished release target(s) in 1 second
+testing listing_08_06 ...
+running 2 tests
+test listing_08_06::tests2::smaller_cannot_hold_larger ... ok (gas usage est.: 24180)
+test listing_08_06::tests::larger_can_hold_smaller ... ok (gas usage est.: 23580)
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 filtered out;
+
+

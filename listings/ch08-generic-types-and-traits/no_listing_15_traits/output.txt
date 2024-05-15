@@ -1,0 +1,9 @@
+$ scarb cairo-run 
+   Compiling no_listing_15_traits v0.1.0 (listings/ch08-generic-types-and-traits/no_listing_15_traits/Scarb.toml)
+    Finished release target(s) in 1 second
+     Running no_listing_15_traits
+New article available! Cairo has become the most popular language for developers by Cairo Digger (Worldwide)
+New tweet! EliBenSasson: Crypto is full of short-term maximizing projects. 
+ @Starknet and @StarkWareLtd are about long-term vision maximization.
+Run completed successfully, returning []
+

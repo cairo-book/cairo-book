@@ -71,6 +71,7 @@ Because the parameter names and the struct field names are exactly the same in L
 
 Here, we’re creating a new instance of the `User` struct, which has a field named `email`. We want to set the `email` field’s value to the value in the `email` parameter of the `build_user` function. Because the `email` field and the `email` parameter have the same name, we only need to write `email` rather than `email: email`.
 
+
 ## Creating Instances from Other Instances with Struct Update Syntax
 
 It’s often useful to create a new instance of a struct that includes most of
@@ -123,5 +124,8 @@ longer use `user1` as a whole after creating `user2` because the `ByteArray` in 
 valid after creating `user2`. Both `active` and `sign_in_count` are types that
 implement the `Copy` trait, so the behavior we discussed in the ["`Copy` Trait"][copy]<!-- ignore --> section would apply.
 
+{{#quiz ../quizzes/ch05-01-defining-and-instantiating-structs.toml}}
+
 [move]: ch04-01-what-is-ownership.md#moving-values
 [copy]: ch04-01-what-is-ownership.md#the-copy-trait
+

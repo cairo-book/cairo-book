@@ -85,7 +85,7 @@
 
   - [Custom Data Structures](ch11-01-custom-data-structures.md)
   - [Using Arrays inside Dictionaries]()
-  - [Smart Pointers]()
+  - [Smart Pointers](ch11-03-smart-pointers.md)
   - [Operator Overloading](ch11-04-operator-overloading.md)
   - [Working with Hashes](ch11-05-hash.md)
   - [Macros](ch11-06-macros.md)
@@ -151,7 +151,7 @@
 - [Starknet Smart Contracts Security](./ch17-00-starknet-smart-contracts-security.md)
 
   - [General Recommendations](./ch17-01-general-recommendations.md)
-  - [Testing Smart Contracts]()
+  - [Testing Smart Contracts](./ch17-02-testing-smart-contracts.md)
   - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
   - [Formal Verification]()
 
