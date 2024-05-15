@@ -1,0 +1,88 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Based on the provided code blocks, which code block will cause an inadvertent panic in Cairo?
+
+```
+fn main() {
+    if true {
+        panic!("2");
+    }
+    println!("This line isn't reached");
+}
+```
+```
+fn main() {
+    panic_with_felt252(2);
+}
+```
+```
+fn main() {
+    let arr = array![1, 2, 3];
+    let index = 5;
+
+    let value = arr[index];
+
+    println!("Value at index {}: {}", index, value);
+}
+```
+"""
+answer.answer = "`Code Block 3`"
+prompt.distractors = [
+  "`Code Block 1`",
+  "`Code Block 2`",
+  "`Code Block 1 and Code Block 2`",
+  "`Code Block 3`",
+]
+context = """
+Code Block 3 accesses an array out of bounds, leading to an inadvertent panic as the program attempts to access an invalid memory location. Code Block 1 and Code Block 2 are intentionally causing panics using panic! and panic_with_felt252, respectively, making them deliberate panics.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which panic handling mechanism is generally preferred in Cairo?
+
+"""
+answer.answer = "`panic_with_felt252`"
+prompt.distractors = [
+  "`panic!`",
+  "`panic_with_felt252`",
+  "`panic`",
+
+]
+context = """
+In Cairo, using the `panic_with_felt252` function is generally preferred due to its clearer and more concise expression of intent compared to other panic handling mechanisms.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What happens if you try to compile a function declared as `nopanic` that calls a function that may panic in Cairo?
+
+"""
+answer.answer = "The compiler raises an error indicating a potential panic"
+prompt.distractors = [
+  "The program compiles without any errors",
+  "The compiler raises an error indicating a potential panic",
+  "The function is automatically converted to a panic-handling function",
+]
+context = """
+Cairo's compiler detects potential panics in functions declared as nopanic when they call functions that may panic, ensuring robust error handling.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is the purpose of the panic_with attribute in Cairo?
+
+"""
+answer.answer = "To create a wrapper function that panics on specific conditions"
+prompt.distractors = [
+  "To handle runtime errors gracefully",
+  "To create a wrapper function that panics on specific conditions",
+  "To catch errors and provide a resolution",
+]
+context = """
+The panic_with attribute in Cairo is used to mark a function that returns an Option or Result. It creates a wrapper function for the annotated function that panics if the function returns None or Err, using the specified data as the panic error
+"""
