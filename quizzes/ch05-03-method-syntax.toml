@@ -1,0 +1,35 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which attribute is used to avoid defining unnecessary traits when implementing methods?"
+prompt.distractors = [
+"#[trait]",
+"#[method]",
+"#[type]"
+]
+
+answer.answer = "#[generate_trait]"
+context = """
+The #[generate_trait] attribute is used to avoid defining traits that are unnecessary when implementing methods.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = How can a method that doesn't act on a specific instance be defined?"
+prompt.distractors = [
+"By using a different keyword instead of fn",
+"By defining it outside the type definition",
+"By using the class keyword"
+]
+
+answer.answer = "By omitting the self parameter"
+context = """
+A method that doesn't act on a specific instance can be defined by omitting the self parameter.
+"""
+
+[[questions]]
+type =  "ShortAnswer"
+prompt.prompt = "Are methods defined within the context of a type"
+answer.answer = "Yes"
+context = """
+ Unlike functions, methods are defined within the context of a type.
+ """
