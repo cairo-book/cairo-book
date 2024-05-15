@@ -84,3 +84,5 @@ Example:
 ```rust
 {{#include ../listings/ch09-error-handling/no_listing_06_panic_with/src/lib.cairo}}
 ```
+
+{{#quiz ../quizzes/ch09-01-unrecoverable-errors-with-panic.toml}}
