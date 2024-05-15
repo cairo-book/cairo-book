@@ -1,6 +1,6 @@
 # Randomness
 
-Since all blockchains are fundamentally deterministic and most are public ledgers, generating truly unpredictatable randomness on-chain presents a challenge. This randomness is crucial for fair outcomes in gaming, lotteries, and unique generation of NFTs. To address this, verifiable random functions (VRFs) provided by oracles offers a solution. VRFs guarantee that the randomness can't be predicted or tampered with, ensuring trust and transparency in these applications.
+Since all blockchains are fundamentally deterministic and most are public ledgers, generating truly unpredictatable randomness on-chain presents a challenge. This randomness is crucial for fair outcomes in gaming, lotteries, and unique generation of NFTs. To address this, verifiable random functions (VRFs) provided by oracles offer a solution. VRFs guarantee that the randomness can't be predicted or tampered with, ensuring trust and transparency in these applications.
 
 ## Overview on VRFs
 
@@ -57,7 +57,7 @@ The function `receive_random_words` is a callback triggered by the Pragma Random
 
 ### Dice Game Contract
 
-Listing {{#ref dice_game_vrf}} shows an example of a simple dice game that uses Pragma VRF to generate random number:
+Listing {{#ref dice_game_vrf}} shows an example of a simple dice game that uses Pragma VRF to generate a random number:
 
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:dice_game}}
@@ -66,10 +66,10 @@ Listing {{#ref dice_game_vrf}} shows an example of a simple dice game that uses 
 {{#label dice_game_vrf}}
 <span class="caption">Listing {{#ref dice_game_vrf}}: Simple Dice Game Contract using Pragma VRF.</span>
 
-The contract above let's the contract owner call the `request_randomness_from_pragma` function to generate a random number stored in the `last_random_number` variable storage. The number generated is then reduced to a random number between 1 & 6, and compared to the guess of the caller in the `user_guesses` storage to determine winners of the dice game by the `process_game_winners` function.
+The contract above lets the contract owner call the `request_randomness_from_pragma` function to generate a random number stored in the `last_random_number` variable storage. The number generated is then reduced to a random number between 1 & 6, and compared to the guess of the caller stored in the `user_guesses` mapping.
 
-#### NB: After Contract is Deployed
+#### NB: Fund Your Contract After Deployment to Utilize Pragma VRF
 
-After deploying your contract, ensure it holds sufficient ETH to use the Pragma VRF system. Requesting random values incurs costs associated with both the generation process and the execution of your callback function.
+After deploying your contract that includes Pragma VRF functionalities, ensure it holds sufficient ETH to cover the expenses related to requesting random values. Pragma VRF requires payment for both generating the random numbers and executing the callback function defined in your contract.
 
 For more information, please refer to the [Pragma](https://docs.pragma.build/Resources/Cairo%201/randomness/randomness) docs.

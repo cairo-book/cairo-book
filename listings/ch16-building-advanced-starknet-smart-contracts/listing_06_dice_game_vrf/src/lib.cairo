@@ -113,7 +113,7 @@ mod DiceGame {
             assert(self.last_random_number.read() != 0, 'NO_RANDOM_NUMBER_YET');
 
             let caller = get_caller_address();
-            let user_guess: u8 = self.user_guesses.read(caller).into();
+            let user_guess: u8 = self.user_guesses.read(caller);
             let reduced_random_number: u256 = self.last_random_number.read().into() % 6 + 1;
 
             if user_guess == reduced_random_number.try_into().unwrap() {
