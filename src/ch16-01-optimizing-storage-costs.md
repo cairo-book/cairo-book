@@ -20,7 +20,7 @@ Intuitively, several integers can be combined into a single integer if the size 
 
 But, to do that, we need some bitwise operators:
 
-- multiplying or dividing an integer by a power of 2, shifts the integer value to the left or to the right respectively.
+- multiplying or dividing an integer by a power of 2 shifts the integer value to the left or to the right respectively
 
 <div align="center">
     <img src="shift.png" alt="shift operators" width="500px"/>
