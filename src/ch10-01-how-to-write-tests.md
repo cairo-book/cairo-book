@@ -119,7 +119,7 @@ Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_
 ```
 
 {{#label rectangle}}
-<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from chapter 5</span>
+<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the `assert!` macro. We can write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
