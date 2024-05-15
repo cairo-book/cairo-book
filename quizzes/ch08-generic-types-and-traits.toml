@@ -1,0 +1,55 @@
+[[questions]]
+type = "short_answer"
+prompt.prompt = "What keyword is used in Cairo to define a generic type in a function signature?"
+answer.answer = "T"
+context = "For example, you can declare a struct as a generic type: struct Wallet<T> { balance: T }, 
+with the balance being of a generic type T"
+
+[[questions]]
+type = "short_answer"
+prompt.prompt = "What is the significance of using generics in the context of Starknet contracts, as mentioned?"
+answer.answer = "To reduce code duplication but may increase contract size"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "How can generics and traits together improve code quality in Cairo?"
+prompt.distractors = [
+    "Generics and traits have no impact on code quality.",
+    "By eliminating the need for testing and verification of smart contracts.",
+    "By automatically optimizing code for faster execution on the StarkNet.",
+]
+answer.answer = "By allowing for more concise and flexible code that can work with multiple types."
+context = """
+    Generics are abstract stand-ins for concrete types or other properties, 
+    allowing for the creation of reusable code that can operate on many different types, 
+    thus avoiding code duplication and enhancing code maintainability.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+How does the 'main' function below determine the largest number in the provided array? 
+```
+fn main() {
+    let mut number_list: Array<u8> = array![34, 50, 25, 100, 65];
+    let mut largest = number_list.pop_front().unwrap();
+    while let Option::Some(number) = number_list
+        .pop_front() {
+            if number > largest {
+                largest = number;
+            }
+        };
+    println!("The largest number is {}", largest);
+}
+```
+Explain how this function obtains the largest number in the array?
+"""
+prompt.distractors = [
+    "It Sorts the array in ascending order"
+    "It goes straight to the largest number in the array, obtains it, and stores it in the variable called 'largest'"
+    "It checks for only the smallest number and the largest number in the array, compares them, and returns the largest number"
+    "It finds the smallest number in the array and stores it in the variable called 'largest'"
+]
+answer.answer = "It stores an array of the type u8 called number_list. 
+After finding the largest number and storing it in the variable 'largest', 
+it iterate/loops through the array, updating 'largest' if a greater number is found"
