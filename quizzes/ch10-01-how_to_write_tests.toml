@@ -1,0 +1,139 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What test case will NOT fail for `is_even` function?
+```
+fn is_even(x: u64) -> bool {
+	x % 2 == 0
+}
+
+#[cfg(test)]
+mod tests {
+	#[test]
+	fn test_is_even() {
+		// Your option is placed here during testing
+	}
+}
+```
+"""
+
+prompt.distractors = [
+	"`assert!(is_even(4) == false, \"4 should be even, but!\");`",
+	"`assert!(is_even(3), \"3 should be odd\");`",
+	"`assert!(!is_even(0), \"0 should be even\");`",
+]
+answer.answer = "`assert!(!is_even(5), \"1 should be odd\");`"
+
+context = """
+Recall, assert! macro first argument evaluates to a Boolean.
+If true, nothing happens and the test passes. If the value is false,
+the test fail with a message we defined as the second argument.
+"""
+
+# TO DO FIX id
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+pub fn division_operation(number1: u16, number2:u16) -> u16 {
+    if number2 == 0 {
+        panic!("ZeroDivisionError Not allowed!");
+    }
+    let result = number1 / number2;
+    result
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{ division_operation };
+
+    #[test]
+    #[should_panic(expected: ("Zerodivisionerror Not allowed!",))]
+    fn test_division_operation() {
+        let _ = division_operation(10, 0);
+    }
+}
+"""
+answer.doesCompile = false
+answer.lineNumber = 14
+context = """
+The `expected string` "Zerodivisionerror Not allowed!" should be exactly
+the same as `panic string` "ZeroDivisionError Not allowed!"
+"""
+#TO DO I NEED TO INPUT THE ID
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is the `test result` when this program is run with `scarb cairo-test -f test_`
+```
+// Basic arithmetic operation
+pub fn addition_operation(value1: u16, value2: u16) -> u16 {
+	return (value1 + value2);
+}
+pub fn subtraction_operation(value1: u16, value2: u16) -> u16 {
+	return (value1 - value2);
+}
+pub fn multiplication_operation(value1: u16, value2: u16) -> u16 {
+	return (value1 * value2);
+}
+
+pub fn division_operation(number1: u16, number2:u16) -> u16 {
+    let result = number1 / number2;
+    result
+}
+
+
+#[cfg(test)]
+mod tests {
+	use super::{
+        addition_operation, subtraction_operation,
+        division_operation,multiplication_operation,
+    };
+    use core:: { testing, gas };
+	#[test]
+	#[ignore]
+	fn test_addition() {
+		let result = addition_operation(5, 4);
+		assert_ne!(result, 5);
+	}
+
+	#[test]
+    #[available_gas(1000)]
+	fn division_with_avaliable_gas() {
+        let result = division_operation(10, 5);
+		assert_eq!(2, result);
+	}
+    
+	#[test]
+	fn test_multiplication() {
+		let result = multiplication_operation(3, 2);
+		assert_gt!(8, result);
+		assert_ne!(2, result);
+		assert_lt!(3, result);
+		assert_eq!(6, result);
+	}
+    #[test]
+    #[available_gas(2000000)]
+    fn test_benchmark_subtraction() {
+        let initial_gas = 2000000;
+        let _ = subtraction_operation(10, 2);
+        print!("initial gas: {} and consumed gas: {}\n", initial_gas, initial_gas - testing::get_available_gas());
+    }
+}
+"""
+answer.answer = "test result: ok. 2 passed; 0 failed; 1 ignored; 1 filtered out;"
+prompt.distractors = [
+	"Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;",
+	"test result: ok. 1 passed; 0 failed; 1 ignored; 2 filtered out;",
+	"test result: ok. 2 passed; 0 failed; 2 ignored; 0 filtered out;"
+]
+
+context = """
+One ignored: test_addition, because it has the `ignore` attribute
+One filtered out: division_with_avaliable_gas, because it doesn't match part of the filter option specified `test_`
+Zero failed
+Two passed:
+	- test_multiplication: All the asert_** macros return true
+	- test_benchmark_subtraction: Enough initial gas was provide for the operation to be successful
+"""
