@@ -1,9 +1,10 @@
 [[questions]]
+id = "64ff52eb-b905-43c2-9bd2-d64b2b86a883"
 type = "MultipleChoice"
 prompt.prompt = """
-What test case will NOT fail for `is_even` function?
+What test case will NOT fail for the `is_even` function?
 ```
-pub fn is_even(x: u64) -> bool {
+fn is_even(x: u64) -> bool {
 	x % 2 == 0
 }
 
@@ -12,33 +13,31 @@ mod tests {
 	use super::{is_even};
 	#[test]
 	fn test_is_even() {
-		// Your option is placed here during testing
+		// The answer goes here
 	}
 }
 ```
 """
-
 prompt.distractors = [
-	"`assert!(is_even(4) == false, "4 should be even");`",
-	"`assert!(is_even(3), "3 should be odd");`",
-	"`assert!(!is_even(0), "0 should be even");`",
+  "`assert!(is_even(4) == false, \"4 should be even\");`",
+  "`assert!(is_even(3), \"3 should be odd\");`",
+  "`assert!(!is_even(0), \"0 should be even\");`",
 ]
-answer.answer = "`assert!(!is_even(5), "5 should be odd");`"
+answer.answer = "`assert!(!is_even(5), \"5 should be odd\");`"
 
 context = """
-Recall, assert! macro first argument evaluates to a Boolean.
-If true, nothing happens and the test passes. If the value is false,
-the test fail with a message we defined as the second argument.
+The `assert!` macro evaluates the expression and panics if the condition is false.
 """
 
-
-
 [[questions]]
-type = "Tracing"
-prompt.program = """
-pub fn division_operation(number1: u16, number2: u16) -> u16 {
+id = "4becac9f-5173-4439-bd1f-e1e9958423ab"
+type = "MultipleChoice"
+prompt.prompt = """
+Does the test pass?
+```rust
+fn division_operation(number1: u16, number2: u16) -> u16 {
     if number2 == 0 {
-        panic!("ZeroDivisionError Not allowed!");
+        panic!("ZeroDivisionError not allowed!");
     }
     let result = number1 / number2;
     result
@@ -49,24 +48,28 @@ mod tests {
     use super::{division_operation};
 
     #[test]
-    #[should_panic(expected: ("Zerodivisionerror Not allowed!",))]
+    #[should_panic(expected: ("Zerodivisionerror not allowed!",))]
     fn test_division_operation() {
-        let _ = division_operation(10, 0);
+        division_operation(10, 0);
     }
 }
+```
 """
-answer.doesCompile = false
-answer.lineNumber = 13
+prompt.distractors = ["Yes"]
+answer.answer = "No"
+
 context = """
-The `expected string` "Zerodivisionerror Not allowed!" should be exactly
-the same as `panic string` "ZeroDivisionError Not allowed!"
+The expected string `"Zerodivisionerror not allowed!"` should be exactly
+the same as the panic string `"ZeroDivisionError not allowed!"`
 """
 
+
 [[questions]]
+id = "0b3385b4-069f-4883-ab3f-6feb8ebf72f8"
 type = "MultipleChoice"
 prompt.prompt = """
-What is the `test result` when this program is run with `scarb cairo-test -f test_`
-```
+What is the test result when this program is run with the command `scarb cairo-test -f test_`
+```rust
 #[cfg(test)]
 mod tests {
 	#[test]
@@ -79,7 +82,7 @@ mod tests {
     fn division_function() {
         assert_eq!((10_u8 / 5), 2);
 	}
-    
+
 	#[test]
 	fn test_multiplication() {
 		assert_ne!((3 * 2), 8);
@@ -90,19 +93,18 @@ mod tests {
         assert!((12 - 11) == 1, "The first argument was false");
     }
 }
+```
 """
-answer.answer = "test result: ok. 2 passed; 0 failed; 1 ignored; 1 filtered out;"
 prompt.distractors = [
-	"Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;",
-	"test result: ok. 1 passed; 0 failed; 1 ignored; 2 filtered out;",
-	"test result: ok. 2 passed; 0 failed; 2 ignored; 0 filtered out;"
+  "Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;",
+  "test result: ok. 1 passed; 0 failed; 1 ignored; 2 filtered out;",
+  "test result: ok. 2 passed; 0 failed; 2 ignored; 0 filtered out;",
 ]
+answer.answer = "test result: ok. 2 passed; 0 failed; 1 ignored; 1 filtered out;"
 
 context = """
-One ignored: test_addition, because it has the `ignore` attribute
-One filtered out: division_with_available_gas, because it doesn't match part of the filter option specified `test_`
-Zero failed
-Two passed:
-	- test_multiplication: All the `assert_*` macros return true
-	- test_subtraction: The assert macro returns true
+One ignored: `test_addition`, because it has the `ignore` attribute\n
+One filtered out: `division_with_available_gas`, because its name doesn't match the filter `test_`\n
+Zero failed\n
+Two passed: `test_multiplication` and `test_subtraction`, because all the conditions in the assertions are true
 """
