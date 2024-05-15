@@ -1,0 +1,22 @@
+[[questions]]
+type="Tracing"
+prompt.program = """
+#[derive(Drop)]
+struct Rectangle {
+    width: u64,
+    height: u64,
+}
+
+fn perimeter(r: Rectangle) -> u64 {
+    let perimeter = 2 * (r.width + r.height);
+    perimeter
+}
+
+fn main(){
+    let rectangle1 = Rectangle{
+        width: 20,
+        height: 10,
+    };
+    println!("{}", perimeter(rectangle1));
+}
+"""
