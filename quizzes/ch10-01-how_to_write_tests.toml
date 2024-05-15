@@ -100,7 +100,7 @@ mod tests {
 
 	#[test]
     #[available_gas(1000)]
-	fn division_with_avaliable_gas() {
+	fn division_with_available_gas() {
         let result = division_operation(10, 5);
 		assert_eq!(2, result);
 	}
@@ -131,7 +131,7 @@ prompt.distractors = [
 
 context = """
 One ignored: test_addition, because it has the `ignore` attribute
-One filtered out: division_with_avaliable_gas, because it doesn't match part of the filter option specified `test_`
+One filtered out: division_with_available_gas, because it doesn't match part of the filter option specified `test_`
 Zero failed
 Two passed:
 	- test_multiplication: All the asert_** macros return true
