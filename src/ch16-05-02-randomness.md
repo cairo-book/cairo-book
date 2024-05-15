@@ -8,11 +8,10 @@ Pseudo-random but secure: VRFs use a secret key and a nonce (a unique input) to 
 
 Verifiable output: VRFs produce not only the random number but also a proof that anyone can use to independently verify that the result was generated correctly according to the function's parameters.
 
-## Randomness Generated with Pragma
+## Generating Randomness with Pragma
 
 [Pragma](https://www.pragma.build/), an oracle on Starknet provides a solution for generating random numbers using VRFs.
-
-Let's dive into how to use Pragma to create randomness in a Cairo contract.
+Let's dive into how to use Pragma VRF to generate a random number in a simple dice game contract.
 
 ### Add Pragma as a Dependency
 
@@ -25,29 +24,20 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 
 ### Interface
 
-Listing {{#ref pragma_vrf_interface}} shows a contract interface of an example randomness contract that uses Pragma VRF:
+Listing {{#ref pragma_vrf_interface}} shows a contract interfaces for Pragma VRF and a simple dice game:
 
 ```rust,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:randomness_interface}}
+{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:interfaces}}
 ```
 
-### Description of Entrypoints and their inputs
+### Description of Key IPragmaVRF Entrypoints and Their Inputs
 
-{{#label pragma_vrf_interface}}
-<span class="caption">Listing {{#ref pragma_vrf_interface}}: Simple Randomness Contract Interface.</span>
+The function `request_randomness_from_pragma` initiates a request for verifiable randomness from the Pragma oracle. It does this by emitting an event that triggers the following actions off-chain:
 
-The function `request_my_randomness` initiates a request for verifiable randomness from the Pragma oracle. It does this by emitting an event that triggers the following actions off-chain:
+1. Randomness generation: The oracle generates random values and a corresponding proof.
+2. On-chain submission: The oracle submits the generated randomness and proof back to the blockchain via the `receive_random_words` callback function.
 
-1. Randomness Generation: The oracle generates random values and a corresponding proof.
-2. On-chain Submission: The oracle submits the generated randomness and proof back to the blockchain via the `receive_random_words` callback function.
-
-```rust,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:request_my_randomness}}
-```
-
-<span class="caption">Listing {{#ref request_my_randomness}}: `request_my_randomness` function.</span>
-
-#### `request_my_randomness` Inputs
+#### `request_randomness_from_pragma` Inputs
 
 1. `seed`: A value used to initialize the randomness generation process. This should be unique to ensure unpredictable results.
 2. `callback_address`: The contract address where the `receive_random_words` function will be called to deliver the generated randomness. It is typically the address of your deployed contract implementing Pragma VRF.
@@ -58,12 +48,6 @@ The function `request_my_randomness` initiates a request for verifiable randomne
 
 The function `receive_random_words` is a callback triggered by the Pragma Randomness oracle when it has generated the randomness requested by your contract.
 
-```rust,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:receive_random_words}}
-```
-
-<span class="caption">Listing {{#ref receive_random_words}}: `receive_random_word` function.</span>
-
 #### `receive_randomn_words` Inputs
 
 1. `requester_address`: The contract address that initiated the randomness request.
@@ -71,16 +55,18 @@ The function `receive_random_words` is a callback triggered by the Pragma Random
 3. `random_words`:  An array (span) of the generated random values (represented as `felt252`).
 4. `calldata`:  Additional data passed along with the initial randomness request.
 
-### Contract Example
+### Dice Game Contract
 
-Listing {{#ref pragma_vrf_contract}} shows an example randomness contract implementing the previous interface:
+Listing {{#ref dice_game_vrf}} shows an example of a simple dice game that uses Pragma VRF to generate random number:
 
 ```rust,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_pragma_randomness/src/lib.cairo:randomness_contract}}
+{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:dice_game}}
 ```
 
-{{#label pragma_vrf_contract}}
-<span class="caption">Listing {{#ref pragma_vrf_contract}}: Simple Randomness Contract.</span>
+{{#label dice_game_vrf}}
+<span class="caption">Listing {{#ref dice_game_vrf}}: Simple Dice Game Contract using Pragma VRF.</span>
+
+The contract above let's the contract owner call the `request_randomness_from_pragma` function to generate a random number stored in the `last_random_number` variable storage. The number generated is then reduced to a random number between 1 & 6, and compared to the guess of the caller in the `user_guesses` storage to determine winners of the dice game by the `process_game_winners` function.
 
 #### NB: After Contract is Deployed
 
