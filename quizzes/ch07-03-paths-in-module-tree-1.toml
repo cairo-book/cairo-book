@@ -3,10 +3,12 @@ type = "MultipleChoice"
 prompt.prompt = """
 What is the first word of an absolute path ?
 """
-prompt.distractors = ["Folder name", "Module name", "Package name"]
-answer.answer = "Crate name"
+prompt.distractors = ["Folder name", "Module name"]
+answer.answer = "Package name"
 context = """
-An absolute path is the full path starting from a crate root. The absolute path begins with the crate name.
+An absolute path is the full path starting from a package root. 
+The absolute path begins with the package name which is specified in the `Scarb.toml` file.
+**Note:** The package and crate are equivalent in Cairo since each package has only one crate corresponding to the `lib.cairo` file.
 """
 id = "a434804d-90a4-44ec-9e2e-ed72a7494ead"
 

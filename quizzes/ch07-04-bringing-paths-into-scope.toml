@@ -4,7 +4,7 @@ prompt.prompt = """
 Which of the following statements best describes the function of the `use` keyword?
 """
 prompt.distractors = [
-  "`use` reduces the verbosity of referring to items in the used path",
+  "`use` copies the contents of an item from one module to another",
   "`use` indicates to the compiler that an item will be used and should be optimized",
   "`use` allows access to items that circumvents normal privacy rules",
 ]
