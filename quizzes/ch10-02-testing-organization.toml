@@ -1,7 +1,15 @@
 [[questions]]
-type = "ShortAnswer"
-prompt.prompt = "When implementing Unit tests what attribute tells Cairo to compile and run the test code only when running `scarb cairo-test`"
-answer.answer = "#[cfg(test)]"
+type = "MultipleChoice"
+prompt.prompt = "Which of the following is NOT a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?"
+answer.answer = "To aid testing whether many parts of your library work together correctly"
+prompt.distractors = [
+	"Saves compilation time and reduces the size of the final binary by only compling tests when `scarb cairo-test` runs",
+	"Keeps tests isolated from production code",
+	"Test private functions which are not accessible from outside the module"
+]
+context = """
+Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions.
+"""
 
 [[questions]]
 type = "MultipleChoice"
@@ -30,26 +38,15 @@ To run all integration tests, add to `scarb test` a filter that contains the pat
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = "What is the difference between unit tests and integration tests in Cairo?"
-answer.answer = "Unit tests test one module at a time, while integration tests test many modules together"
+answer.answer = "Unit tests focus on testing individual modules in isolation, while integration tests verify the interaction between multiple modules."
 prompt.distractors = [
 	"Unit test uses `#[cfg(test)] attribute, whereas integration tests does not",
-	"Unit test separates test code from the main code, while integration testing combines both in a single file"
+	"Unit test separates test code from the main code, while integration testing combines both in a single file",
+	"Unit tests test many parts of your library together whereas integration test test each code in isolation from the rest"
 ]
 context = """
 Unit tests are small and more focused, testing one module in isolation at a time,
 and can test private functions. Integration tests use your code in the same way 
 any other external code would, using only the public interface and potentially 
 exercising multiple modules per test.
-"""
-
-[[questions]]
-type = "MultipleChoice"
-prompt.promt = "For a large project with multiple files, thousands of lines of code, and numerous contributors, what type of testing would be most suitable?"
-answer.answer = "Integration tests"
-prompt.distractors = ["Unit tests"]
-context = """
-Integration tests are better suited for large projects with multiple contributors,
-as they test how different components of the project work together. Unit tests,
-which test individual components in isolation, may not be sufficient for catching
-integration issues in such projects
 """
