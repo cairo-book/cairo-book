@@ -56,7 +56,7 @@ prompt.prompt = "What do generics in Cairo allow a programmer to do?"
 prompt.distractors = [
     "Directly interact with the Cairo VM",
     "Increase the runtime speed of their programs",
-    "Encrypt data using zero-knowledge proofs"
+    "Encrypt data using zero-knowledge proofs",
     "Ensure the use of only a specific data type"
 ]
 answer.answer = "Replace specific types with placeholders to reduce code duplication"
