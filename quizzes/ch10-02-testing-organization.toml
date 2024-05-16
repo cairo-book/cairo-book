@@ -12,9 +12,7 @@ prompt.distractors = [
 	"src/tests/arithmetic_test.cairo",
 	"src/lib.cairo"
 ]
-context = """
-The `mod arithmetic_test` should be located in the src/tests.cairo file.
-"""
+context = "The `mod arithmetic_test` should be located in the src/tests.cairo file."
 
 [[questions]]
 type = "MultipleChoice"
@@ -36,7 +34,7 @@ answer.answer = "Unit tests test one module at a time, while integration tests t
 prompt.distractors = [
 	"Unit test uses `#[cfg(test)] attribute, whereas integration tests does not",
 	"Unit test separates test code from the main code, while integration testing combines both in a single file"
-	"Unit test tests many parts of your library together whereas integration test test each code in isolation from the rest"
+	"Unit tests test many parts of your library together whereas integration test test each code in isolation from the rest"
 ]
 context = """
 Unit tests are small and more focused, testing one module in isolation at a time,
