@@ -1,0 +1,44 @@
+[[questions]]
+id = "aac32d9f-b5a4-4946-81f2-eb6bcfc090ed"
+type = "MultipleChoice"
+prompt.prompt = """
+What is the ```if let``` syntax in Cairo?
+"""
+answer.answer = "A syntax that combines if and let into a less verbose way to handle values that match one pattern while ignoring the rest."
+prompt.distractors = [
+"A syntax that allows for exhaustive checking of all possible patterns.",
+"A syntax that is equivalent to a match that runs code when the value matches one pattern and then ignores all other values.",
+"A syntax that is used to declare variables."
+]
+
+[[questions]]
+id = "a89b37cf-aa75-4fc7-b433-3b57d273ce1d"
+type = "MultipleChoice"
+prompt.prompt = """
+ What is the advantage of using ```if let``` over match in Cairo?
+"""
+answer.answer = "```if let``` means less typing, less indentation, and less boilerplate code."
+prompt.distractors = [
+"""```if let``` provides exhaustive checking.""",
+"""```if let``` can handle multiple patterns at once.""",
+"""```if let``` is used to declare variables."""
+]
+
+[[questions]]
+id = "dc1e6fa1-0d7b-479e-98ac-6a514d60eb1b"
+type = "Tracing"
+prompt.program = """
+fn main() {
+    let mut arr = array![1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let mut sum = 0;
+    while Option::Some(value) = arr.pop_front() {
+        sum += value;
+    };
+    println!("{}", sum);
+}
+"""
+answer.doesCompile = false
+answer.lineNumber = 4
+context = """
+The valid Cairo syntax is ```while let``` not ```while```.
+"""
