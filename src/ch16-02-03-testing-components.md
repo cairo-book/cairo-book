@@ -12,7 +12,7 @@ Let's consider that we want to test a very simple component called "Counter", th
 ```
 
 {{#label test_component}}
-<span class="caption">Listing {{#ref test_component}}: A simple Counter component.</span>
+<span class="caption">Listing {{#ref test_component}}: A simple Counter component</span>
 
 ## Testing the Component by Deploying a Mock Contract
 
@@ -40,7 +40,7 @@ We can now write tests for the component by deploying this mock contract and cal
 
 ## Testing Components Without Deploying a Contract
 
-In [Components under the hood](./ch16-02-01-under-the-hood.md), we saw that components leveraged genericity to define storage and logic that could be embedded in multiple contracts. If a contract embeds a component, a `HasComponent` trait is created in this contract, and the component methods are made available.
+In [Components under the hood][components inner working], we saw that components leveraged genericity to define storage and logic that could be embedded in multiple contracts. If a contract embeds a component, a `HasComponent` trait is created in this contract, and the component methods are made available.
 
 This informs us that if we can provide a concrete `TContractState` that implements the `HasComponent` trait to the `ComponentState` struct, should be able to directly invoke the methods of the component using this concrete `ComponentState` object, without having to deploy a mock.
 
@@ -71,3 +71,5 @@ We can now write tests for the component by calling its functions directly, with
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/tests_direct.cairo:test}}
 ```
+
+[components inner working]: ./ch16-02-01-under-the-hood.md
