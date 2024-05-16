@@ -1,9 +1,18 @@
 [[questions]]
-type = "short_answer"
-prompt.prompt = "What keyword is used in Cairo to define a generic type in a function signature?"
-answer.answer = "T"
-context = "For example, you can declare a struct as a generic type: struct Wallet<T> { balance: T }, 
-with the balance being of a generic type T"
+type = "MultipleChoice"
+prompt.prompt = "What is the primary benefit of using traits with generics in Cairo?"
+prompt.distractors = [
+    "To increase the execution speed of functions.",
+    "To ensure that generic types conform to several/different behaviors.",
+    "To reduce the gas cost of transactions on StarkNet.",
+    "To automatically deploy smart contracts."
+]
+answer.answer = "To ensure that generic types conform to certain behaviors"
+context = """
+    Trait involves specifying a set of methods that can be implemented by a type, 
+    similar to interfaces in other programming languages but with some differences.
+    It abstracts common behaviors, Empowering types to customize implementations
+"""
 
 [[questions]]
 type = "short_answer"
@@ -27,29 +36,27 @@ context = """
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = """
-How does the 'main' function below determine the largest number in the provided array? 
-```
-fn main() {
-    let mut number_list: Array<u8> = array![34, 50, 25, 100, 65];
-    let mut largest = number_list.pop_front().unwrap();
-    while let Option::Some(number) = number_list
-        .pop_front() {
-            if number > largest {
-                largest = number;
-            }
-        };
-    println!("The largest number is {}", largest);
-}
-```
-Explain how this function obtains the largest number in the array?
-"""
+prompt.prompt = "How does the Cairo compiler handle generics at compile time?"
 prompt.distractors = [
-    "It Sorts the array in ascending order",
-    "It goes straight to the largest number in the array, obtains it, and stores it in the variable called 'largest'",
-    "It checks for only the smallest number and the largest number in the array, compares them, and returns the largest number",
-    "It finds the smallest number in the array and stores it in the variable called 'largest'"
+    "By dynamically typing all variables",
+    "By encrypting the generic types",
+    "By ignoring them for performance reasons",
+    "By preventing any concrete type from replacing a generic type"
 ]
-answer.answer = "It stores an array of the type u8 called number_list. 
-After finding the largest number and storing it in the variable 'largest', 
-it iterate/loops through the array, updating 'largest' if a greater number is found"
+answer.answer = "By creating a new definition for each concrete type that replaces a generic type"
+context = """
+    Upon compilation, the compiler creates a new definition for each concrete type that replaces a generic type, 
+    this reduces development time for the programmer, 
+    but code duplication at compile level still exists
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What do generics in Cairo allow a programmer to do?"
+prompt.distractors = [
+    "Directly interact with the Cairo VM",
+    "Increase the runtime speed of their programs",
+    "Encrypt data using zero-knowledge proofs"
+    "Ensure the use of only a specific data type"
+]
+answer.answer = "Replace specific types with placeholders to reduce code duplication"
