@@ -1,0 +1,58 @@
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "When implementing Unit tests what attribute tells Cairo to compile and run the test code only when running `scarb cairo-test`"
+answer.answer = "#[cfg(test)]"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "When running integration tests with the file path src/tests/arithmetic_test.cairo, which file contains the module `mod arithmetic_test`?"
+answer.answer = "src/tests.cairo"
+prompt.distractors = [
+	"src/tests/tests.cairo",
+	"src/tests/arithmetic_test.cairo",
+	"src/lib.cairo"
+]
+context = """
+The `mod arithmetic_test` should be located in the src/tests.cairo file.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "How do you run integration tests in a Cairo project"
+answer.answer = "By running `scarb test` with a filter for the integration tests"
+prompt.distractors = [
+	"By running `scarb cairo-test`",
+	"By running `scarb cairo-build` with a filter for the test",
+	"By running `scarb cairo-run`"
+]
+context = """
+To run all integration tests, add to `scarb test` a filter that contains the path with the integration tests"
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What is the difference between unit tests and integration tests in Cairo?"
+answer.answer = "Unit tests test one module at a time, while integration tests test many modules together"
+prompt.distractors = [
+	"Unit test uses `#[cfg(test)] attribute, whereas integration tests does not",
+	"Unit test separates test code from the main code, while integration testing combines both in a single file"
+	"Unit test tests many parts of your library together whereas integration test test each code in isolation from the rest"
+]
+context = """
+Unit tests are small and more focused, testing one module in isolation at a time,
+and can test private functions. Integration tests use your code in the same way 
+any other external code would, using only the public interface and potentially 
+exercising multiple modules per test.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.promt = "For a large project with multiple files, thousands of lines of code, and numerous contributors, what type of testing would be most suitable?"
+answer.answer = "Integration tests"
+prompt.distractors = ["Unit tests"]
+context = """
+Integration tests are better suited for large projects with multiple contributors,
+as they test how different components of the project work together. Unit tests,
+which test individual components in isolation, may not be sufficient for catching
+integration issues in such projects
+"""
