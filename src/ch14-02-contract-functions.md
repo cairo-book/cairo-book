@@ -27,7 +27,7 @@ As stated previously, public functions are accessible from outside of the contra
 
 The `#[abi(embed_v0)]` attribute means that all functions embedded inside it are implementations of the Starknet interface of the contract, and therefore potential entry points.
 
-Annotating an impl block with the `#[abi(embed_v0]` attribute only affects the visibility (i.e., public vs private/internal) of the functions it contains, but it doesn't inform us on the ability of these functions to modify the state of the contract.
+Annotating an impl block with the `#[abi(embed_v0)]` attribute only affects the visibility (i.e., public vs private/internal) of the functions it contains, but it doesn't inform us on the ability of these functions to modify the state of the contract.
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:impl_public}}
