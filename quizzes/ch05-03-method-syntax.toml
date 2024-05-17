@@ -1,35 +1,53 @@
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Which attribute is used to avoid defining unnecessary traits when implementing methods?"
+prompt.prompt = "How are method called on an instance?"
 prompt.distractors = [
-"#[trait]",
-"#[method]",
-"#[type]"
+"instance:method()",
+"method(instance)",
+"method@instance()"
 ]
 
-answer.answer = "#[generate_trait]"
+answer.answer = "instance.method()"
 context = """
-The #[generate_trait] attribute is used to avoid defining traits that are unnecessary when implementing methods.
+methods are called on an instance using the <instance_name>.<method_name> syntax. 
 """
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = How can a method that doesn't act on a specific instance be defined?"
+prompt.prompt = "Which of the following is a correct method definition?"
 prompt.distractors = [
-"By using a different keyword instead of fn",
-"By defining it outside the type definition",
-"By using the class keyword"
+"fn area() -> u64",
+"fn area(rectangle:Rectangle) -> u64",
+"let area(rectangle) -> u64"
 ]
 
-answer.answer = "By omitting the self parameter"
+answer.answer = "fn area(self: @Rectangle) -> u64"
 context = """
-A method that doesn't act on a specific instance can be defined by omitting the self parameter.
+Method definitions in Cairo follow a specific syntax.
 """
 
 [[questions]]
-type =  "ShortAnswer"
-prompt.prompt = "Are methods defined within the context of a type"
-answer.answer = "Yes"
+type = "Tracing"
+prompt.program = """
+trait SquareTrait {
+    fn area(@Square) -> u64;
+}
+impl SquareImpl of SquareTrait {
+    fn area(@Square) -> u64 {
+        return (*self.width) * (*self.height);
+    }
+}
+struct Square {
+    width: u64,
+    height: u64,
+  }
+fn main() {
+    let my_square = Square { width: 30, height: 50 };
+    let area = my_square.area();
+    assert!(area == 1500);
+}
+"""
+answer.doesCompile = false
 context = """
- Unlike functions, methods are defined within the context of a type.
- """
+This is a compiler error because of line 33 and 36, When defining a method within a trait the self parameter represents the instance the method is called on.
+"""
