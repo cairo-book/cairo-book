@@ -17,8 +17,6 @@ answer.answer = "`Felt252Dict<T>` allows us to simulate the behavior of mutable 
 
 
 
-
-
 [[questions]]
 type = "Tracing"
 prompt.program = """
