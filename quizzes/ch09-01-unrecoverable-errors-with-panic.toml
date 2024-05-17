@@ -2,7 +2,18 @@
 id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
 type = "MultipleChoice"
 prompt.prompt = """
-In Cairo, the panic function can be triggered:
+What happens when a ```panic``` occurs in a Cairo program?"""
+answer.answer = "The program terminates abruptly."
+prompt.distractors = [ "The program continues execution", "The program ignores the error", "The program logs the error for debugging." ]
+context = """
+When a panic occurs, it leads to an abrupt termination of the program.
+"""
+
+[[questions]]
+id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
+type = "MultipleChoice"
+prompt.prompt = """
+In Cairo, the ```panic``` function can be triggered in two ways:
 1. Inadvertently, through actions causing the code to panic.
 2. A statement.
 3. A syntactic scope.
@@ -18,20 +29,9 @@ There are two primary ways that a panic can be triggered in Cairo: inadvertently
 id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
 type = "MultipleChoice"
 prompt.prompt = """
-Why is ```panic_with_felt252``` preferred to ```panic```?"""
-answer.answer = """Because of its clearer and more concise expression of intent."""
-prompt.distractors = [ "Because its a syntactic sugar.", "Because it consumes less gas.", "Because it takes less arguments" ]
+What does the ```panic_with``` attribute used for in Cairo?"""
+answer.answer = """To mark a function that returns an Option or Result and creates a wrapper for the annotated function which will panic if the function returns None or Err."""
+prompt.distractors = [ "It ignores errors in a function that returns an Option or Result.", "It logs errors for debugging in a function that returns an Option or Result.", " It continues program execution after an error in a function that returns an Option or Result." ]
 context = """
-```panic_with_felt252``` function serves as an abstraction of the array-defining process and is often preferred due to its clearer and more concise expression of intent.
-"""
-
-[[questions]]
-id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
-type = "MultipleChoice"
-prompt.prompt = """
-What is the difference between```panic``` and ```panic!```?"""
-answer.answer = "```panic!``` takes a string as a parameter."
-prompt.distractors = [ "It consumes less gas.", "It allows the panic error to be mutable.", "It never overflows." ]
-context = """
-Unlike the ```panic_with_felt252``` function, using ```panic!``` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes.
+You can use the ```panic_with``` attribute to mark a function that returns an Option or Result. This attribute takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function. 
 """
