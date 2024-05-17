@@ -1,0 +1,25 @@
+[[questions]]
+type = "Tracing"
+prompt.program = """
+#[derive(Drop)]
+struct Character {
+    health: felt252,
+    attack: felt252,
+}
+
+impl CharacterSub of Sub<Character> {
+    fn sub(p1: Character, p2: Character) -> Character{
+        Character { health: p1.health - p2.attack, attack: p1.attack}
+    }
+}
+
+
+fn main() {
+    let mut player1: Character = Character { health: 100, attack: 2};
+    let player2: Character = Character { health: 100, attack: 5};
+    player1 = player1 - player2;
+    assert(player1.health == 95, '');
+}
+"""
+answer.doesCompile = false;
+context = "When overloading an operator, the parameter names of the implementation function must be lhs and rhs respectively. This is a strict requirement in Cairo, and any deviation from this naming convention will result in a compile error."
