@@ -1,5 +1,5 @@
 [[questions]]
-type="Tracing"
+type = "Tracing"
 prompt.program = """
 fn add_num(n1: u16, n2: u16) -> u16 {
     let result: u16 = n1 + n2;
@@ -22,7 +22,7 @@ answer.doesCompile = false
 context = "The function calculate_sum, which is defined in the calculator module, invokes the add_num function that is defined in the parent module. This is achieved by specifying the path to add_num using the super:: prefix."
 
 [[questions]]
-type="Tracing"
+type = "Tracing"
 prompt.program = """
 pub mod desert {
   pub mod icecream {
@@ -36,4 +36,3 @@ fn main() {
 """
 answer.doesCompile = true
 context = "In the context of desert, it's acceptable to use a relative path to reference elements within ice cream."
-

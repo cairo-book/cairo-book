@@ -1,24 +1,22 @@
 [[questions]]
 type = "MultipleChoice"
-prompt.promt = "
-What is the primary difference between a package and a crate in Cairo, and how do they relate to each other?
-"
+prompt.promt = "What is the primary difference between a package and a crate in Cairo, and how do they relate to each other?"
 answer.answer = "A package is a directory containing a Scarb.toml file, while a crate is a subset of a package that includes the package source code and metadata."
 promt.distractors = [
-    "A crate is a directory containing a Scarb.toml file, while a package is a subset of a crate that includes the crate source code and metadata.",
-    "A package and a crate are interchangeable terms in Cairo, referring to the same concept.",
-    "A package is a collection of crates, while a crate is a single Cairo source file."
+  "A crate is a directory containing a Scarb.toml file, while a package is a subset of a crate that includes the crate source code and metadata.",
+  "A package and a crate are interchangeable terms in Cairo, referring to the same concept.",
+  "A package is a collection of crates, while a crate is a single Cairo source file.",
 ]
 
 [[questions]]
-type="MultipleChoice"
+type = "MultipleChoice"
 prompt.prompt = """
-Is this code snippet valid?: 
+Is this code snippet valid?:
 ```rustz
 [dependencies]
 bar = { git = "https://github.com/example/bar.git" }
 ```
 """
 answer.answer = "Yes"
-prompt.distractors = ["No]
-context =  "the 'path' key can also be used to specify a Git repository or a local package. This specifies that the package depends on the bar crate, which is located in the https://github.com/example/bar.git Git repository. Cargo will automatically clone the repository and compile the bar crate when the package is built."
+prompt.distractors = ["No"]
+context = "the 'path' key can also be used to specify a Git repository or a local package. This specifies that the package depends on the bar crate, which is located in the https://github.com/example/bar.git Git repository. Cargo will automatically clone the repository and compile the bar crate when the package is built."
