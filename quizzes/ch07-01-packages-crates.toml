@@ -1,0 +1,16 @@
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which is the correct order, where "A > B" means "A contains B"?
+"""
+prompt.distractors = [
+  "crate > package > module",
+  "crate > module > package",
+  "package > module > crate",
+]
+answer.answer = "package > crate > module"
+context = """
+A package is the top-level organizational unit, containing crates. A crate contains modules.
+"""
+id = "340f3191-f990-4a3d-89ab-7c98ac6ae0e3"
