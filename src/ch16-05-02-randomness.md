@@ -56,7 +56,7 @@ The function `request_randomness_from_pragma` initiates a request for verifiable
 
 ### Dice Game Contract
 
-This dice game contract allows players to guess a number between 1 & 6 during an active game window. The contract owner then has the ability to toggle the game window to disable new guesses from players. To determine the winning number, the contract owner calls the `request_randomness_from_pragma` function to request a random number from the Pragma VRF oracle. Once the random number is received through the `receive_random_words` callback function, it is stored in the `last_random_number` variable storage. The number generated is then reduced to a number between 1 & 6, and compared to the guesses of the players stored in the `user_guesses` mapping.
+This dice game contract allows players to guess a number between 1 & 6 during an active game window. The contract owner then has the ability to toggle the game window to disable new guesses from players. To determine the winning number, the contract owner calls the `request_randomness_from_pragma` function to request a random number from the Pragma VRF oracle. Once the random number is received through the `receive_random_words` callback function, it is stored in the `last_random_number` storage variable. The number generated is then reduced to a number between 1 & 6, and compared to the guesses of the players stored in the `user_guesses` mapping. Each player has to call `process_game_winners` function to determine if they have won or lost, which leads to the emission of an event `GameWinner` or `GameLost`.
 
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:dice_game}}
