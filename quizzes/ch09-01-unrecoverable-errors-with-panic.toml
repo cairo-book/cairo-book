@@ -1,0 +1,37 @@
+[[questions]]
+id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
+type = "MultipleChoice"
+prompt.prompt = """
+In Cairo, the panic function can be triggered:
+1. Inadvertently, through actions causing the code to panic.
+2. A statement.
+3. A syntactic scope.
+4. Deliberately, by invoking the panic function.
+"""
+answer.answer = "1 and 4"
+prompt.distractors = [ "1 only", "2 only", "2 and 3" ]
+context = """
+There are two primary ways that a panic can be triggered in Cairo: inadvertently, through actions causing the code to panic (e.g., accessing an array beyond its bounds), or deliberately, by invoking the panic function.
+"""
+
+[[questions]]
+id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
+type = "MultipleChoice"
+prompt.prompt = """
+Why is ```panic_with_felt252``` preferred to ```panic```?"""
+answer.answer = """Because of its clearer and more concise expression of intent."""
+prompt.distractors = [ "Because its a syntactic sugar.", "Because it consumes less gas.", "Because it takes less arguments" ]
+context = """
+```panic_with_felt252``` function serves as an abstraction of the array-defining process and is often preferred due to its clearer and more concise expression of intent.
+"""
+
+[[questions]]
+id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
+type = "MultipleChoice"
+prompt.prompt = """
+What is the difference between```panic``` and ```panic!```?"""
+answer.answer = "```panic!``` takes a string as a parameter."
+prompt.distractors = [ "It consumes less gas.", "It allows the panic error to be mutable.", "It never overflows." ]
+context = """
+Unlike the ```panic_with_felt252``` function, using ```panic!``` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes.
+"""
