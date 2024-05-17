@@ -49,5 +49,5 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-This is a compiler error because of line 33 and 36, When defining a method within a trait the self parameter represents the instance the method is called on.
+This is a compiler error because of line 33 and 36, When defining a method within a trait the `self:` parameter represents the instance the method is called on.
 """
