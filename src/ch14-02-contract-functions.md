@@ -27,7 +27,7 @@ As stated previously, public functions are accessible from outside of the contra
 
 The `#[abi(embed_v0)]` attribute means that all functions embedded inside it are implementations of the Starknet interface of the contract, and therefore potential entry points.
 
-Annotating an impl block with the `#[abi(embed_v0]` attribute only affects the visibility (i.e., public vs private/internal) of the functions it contains, but it doesn't inform us on the ability of these functions to modify the state of the contract.
+Annotating an impl block with the `#[abi(embed_v0)]` attribute only affects the visibility (i.e., public vs private/internal) of the functions it contains, but it doesn't inform us on the ability of these functions to modify the state of the contract.
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:impl_public}}
@@ -65,7 +65,7 @@ In conclusion, even though external and view functions are distinguished by the 
 
 It is also possible to define public functions outside of an implementation of a trait, using the `#[external(v0)]` attribute. Doing this will automatically generate the corresponding ABI, allowing these standalone public functions to be callable by anyone from the outside. These functions can also be called from within the contract just like any function in Starknet contracts. The first parameter must be `self`.
 
-Listing {{#ref standalone_interface}} and listing {{#ref standalone}} show a rewrite of the `INameRegistry` interface that doesn't contain the `store_name` function, which is implemented as a standalone public function:
+Here, we define a standalone `get_contract_name` function outside of an impl block:
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:standalone}}

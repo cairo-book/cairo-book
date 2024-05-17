@@ -3,7 +3,7 @@
 enum Direction {
     North: u128,
     East: u128,
-    Sout: u128,
+    South: u128,
     West: u128,
 }
 // ANCHOR_END: enum_example
