@@ -1,8 +1,8 @@
 [[questions]]
 type = "MultipleChoice"
-prompt.promt = "What is the primary difference between a package and a crate in Cairo, and how do they relate to each other?"
+prompt.prompt = "What is the primary difference between a package and a crate in Cairo, and how do they relate to each other?"
 answer.answer = "A package is a directory containing a Scarb.toml file, while a crate is a subset of a package that includes the package source code and metadata."
-promt.distractors = [
+prompt.distractors = [
   "A crate is a directory containing a Scarb.toml file, while a package is a subset of a crate that includes the crate source code and metadata.",
   "A package and a crate are interchangeable terms in Cairo, referring to the same concept.",
   "A package is a collection of crates, while a crate is a single Cairo source file.",
