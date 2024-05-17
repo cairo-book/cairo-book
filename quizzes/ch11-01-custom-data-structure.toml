@@ -1,0 +1,123 @@
+
+
+
+
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which sentence best describes the behavior of Felt252Dict<T>?
+"""
+prompt.distractors = [
+  "`Felt252Dict<T>` allows us to simulate the behavior of mutable data structures",
+  "`Felt252Dict<T>` is a specialized container for mapping felt252 keys to values of type T",
+  "`Felt252Dict<T>` is a framework for ensuring data immutability in voting systems",
+]
+answer.answer = "`Felt252Dict<T>` allows us to simulate the behavior of mutable data structures"
+
+
+
+
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+struct Voting<T> {
+    voters: Felt252Dict<T>,
+}
+pub trait VotingTrait<T> {
+    fn init() -> Voting<T>;
+    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T);
+    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T;
+}
+
+impl VotingImpl<T, +Felt252DictValue<T>> of VotingTrait<T> {
+    fn init() -> Voting<T> {
+        Voting {  voters: Default::default() }
+    }
+
+    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T {
+        self.voters.get(candidate)
+    }
+
+    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T) {
+        self.voters.insert(candidate, vote);
+    }
+}
+
+impl VotingDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<Voting<T>> {
+    fn destruct(self: Voting<T>) nopanic {
+        self.voters.squash();
+    }
+}
+fn main() {
+    let mut election = VotingTrait::init();
+
+    election.record_vote('Alice', 10);
+
+    election.record_vote('Alice', 40);
+    let alice_vote_count = election.get_vote_count('Alice');
+
+    println!("{}", alice_vote_count)
+}
+"""
+answer.doesCompile = true
+answer.stdout = "40"
+context = """
+This is a simple voting system that utilizes a Felt252Dict to record the votes of users. Thanks to the properties of Felt252Dict, it is possible to modify a user’s vote. The code is designed to compile successfully.
+"""
+
+
+
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which sentence best describes the behavior of the Voting program?
+```
+struct Voting<T> {
+    voters: Felt252Dict<T>,
+}
+pub trait VotingTrait<T> {
+    fn init() -> Voting<T>;
+    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T);
+    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T;
+}
+
+impl VotingImpl<T, +Felt252DictValue<T>> of VotingTrait<T> {
+    fn init() -> Voting<T> {
+        Voting {  voters: Default::default() }
+    }
+    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T {
+        self.voters.get(candidate)
+    }
+    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T) {
+        self.voters.insert(candidate, vote);
+    }
+}
+
+impl VotingDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<Voting<T>> {
+    fn destruct(self: Voting<T>) nopanic {
+        self.voters.squash();
+    }
+}
+
+fn main() {
+    let mut election = VotingTrait::init();
+
+    election.record_vote('Alice', 10);
+
+    election.record_vote('Alice', 40);
+    let alice_vote_count = election.get_vote_count('Alice');
+
+    println!("{}", alice_vote_count)
+}
+
+```
+"""
+prompt.distractors = [
+  "The Voting program initializes a mutable voting system, recording and updating votes for candidates, and allowing retrieval of the current vote count for any candidate.",
+  "The Voting program creates an immutable list of candidates and their votes, which cannot be updated once initialized.",
+  "The Voting program records votes for candidates without allowing mutation of votes",
+]
+answer.answer = "The Voting program initializes a mutable voting system, recording and updating votes for candidates, and allowing retrieval of the current vote count for any candidate."
