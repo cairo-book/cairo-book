@@ -18,8 +18,8 @@ fn main() {
     let mut player1: Character = Character { health: 100, attack: 2};
     let player2: Character = Character { health: 100, attack: 5};
     player1 = player1 - player2;
-    assert(player1.health == 95, '');
+     println!("{}", player1.health); 
 }
 """
-answer.doesCompile = false;
-context = "When overloading an operator, the parameter names of the implementation function must be lhs and rhs respectively. This is a strict requirement in Cairo, and any deviation from this naming convention will result in a compile error."
+answer.doesCompile = false
+context = "When implementing a trait, the parameter names in the implementing function must match the parameter names specified in the trait definition."
