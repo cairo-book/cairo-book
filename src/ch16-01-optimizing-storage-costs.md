@@ -1,6 +1,6 @@
 # Optimizing Storage Costs
 
-Bit-packing is a simple concept: Use as few bits as possible to store a piece of data. When done well, it can significantly reduce the size of the data you need to store. This is especially important in smart contracts, where storage is expensive.
+Bit-packing is a simple concept: use as few bits as possible to store a piece of data. When done well, it can significantly reduce the size of the data you need to store. This is especially important in smart contracts, where storage is expensive.
 
 When writing Cairo smart contracts, it is important to optimize storage usage to reduce gas costs. Indeed, most of the cost associated with a transaction is related to storage updates; and each storage slot costs gas to write to.
 This means that by packing multiple values into fewer slots, you can decrease the gas cost incurred by the users of your smart contract.
@@ -20,7 +20,7 @@ Intuitively, several integers can be combined into a single integer if the size 
 
 But, to do that, we need some bitwise operators:
 
-- multiplying or dividing an integer by a power of 2, shifts the integer value to the left or to the right respectively
+- multiplying or dividing an integer by a power of 2 shifts the integer value to the left or to the right respectively
 
 <div align="center">
     <img src="shift.png" alt="shift operators" width="500px"/>
@@ -47,7 +47,7 @@ But, to do that, we need some bitwise operators:
     <span class="caption">Combining two integers</span>
 </div>
 
-With these bitwise operators, let's see how to combine two `u8` integers into a single `u16` integer ( called `packing`) and reversely (called `unpacking`) in the following example:
+With these bitwise operators, let's see how to combine two `u8` integers into a single `u16` integer (called `packing`) and reversely (called `unpacking`) in the following example:
 
 <div align="center">
     <img src="pack.png" alt="packing and unpacking integer values" width="500px"/>
@@ -66,7 +66,7 @@ For example, consider the following `Sizes` struct with 3 fields of different ty
 
 Note that, as it also fits in a `u128`, it's a good practice to use the smallest type to pack all your variables, so here a `u128` should be used.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_01_storage_packing/src/lib.cairo:struct}}
 ```
 
@@ -94,7 +94,7 @@ Cairo provides the `StorePacking` trait to enable packing struct fields into few
 
 Here is the implementation of the example of the previous chapter:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_01_storage_packing/src/lib.cairo:here}}
 ```
 

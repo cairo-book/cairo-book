@@ -36,17 +36,14 @@ code becomes part of the contract it's embedded to.
 
 To create a component, first define it in its own module decorated with a
 `#[starknet::component]` attribute. Within this module, you can declare a `
-Storage` struct and `Event` enum, as usually done in
-[Contracts](./ch13-02-anatomy-of-a-simple-contract.md).
+Storage` struct and `Event` enum, as usually done in [contracts][contract anatomy].
 
 The next step is to define the component interface, containing the signatures of
 the functions that will allow external access to the component's logic. You can
 define the interface of the component by declaring a trait with the
 `#[starknet::interface]` attribute, just as you would with contracts. This
 interface will be used to enable external access to the component's functions
-using the
-[Dispatcher](./ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.md)
-pattern.
+using the [dispatcher][contract dispatcher] pattern.
 
 The actual implementation of the component's external logic is done in an `impl`
 block marked as `#[embeddable_as(name)]`. Usually, this `impl` block will be an
@@ -67,6 +64,9 @@ ComponentState<TContractState>` (for state-modifying functions) or `self:
 generic over `TContractState`, allowing us to use this component in any
 contract.
 
+[contract anatomy]: ./ch13-02-anatomy-of-a-simple-contract.md
+[contract dispatcher]: ./ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.md
+
 ### Example: an Ownable Component
 
 > ⚠️ The example shown below has not been audited and is not intended for
@@ -76,13 +76,13 @@ contract.
 The interface of the Ownable component, defining the methods available
 externally to manage ownership of a contract, would look like this:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:interface}}
 ```
 
 The component itself is defined as:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:component}}
 ```
 
@@ -98,7 +98,7 @@ meant to be used internally by a contract embedding the component.
 
 ## A Closer Look at the `impl` Block
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:impl_signature}}
 ```
 
@@ -112,7 +112,7 @@ the added restriction that `TContractState` must implement the `HasComponent<T>`
 trait. This allows us to use the component in any contract, as long as the
 contract implements the `HasComponent` trait. Understanding this mechanism in
 details is not required to use components, but if you're curious about the inner
-workings, you can read more in the [Components under the hood](./ch16-02-01-under-the-hood.md) section.
+workings, you can read more in the ["Components Under the Hood"][components inner working] section.
 
 One of the major differences from a regular smart contract is that access to
 storage and events is done via the generic `ComponentState<TContractState>` type
@@ -122,6 +122,8 @@ or `self.emit(...).`
 
 > Note: To avoid the confusion between the embeddable name and the impl name, we
 > recommend keeping the suffix `Impl` in the impl name.
+
+[components inner working]: ./ch16-02-01-under-the-hood.md
 
 ## Migrating a Contract to a Component
 
@@ -177,7 +179,7 @@ ownable_component::Event`).
 For example, to embed the `Ownable` component defined above, we would do the
 following:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/contract.cairo:all}}
 ```
 
@@ -200,9 +202,11 @@ to have.
 Developers can focus on their core contract logic while relying on battle-tested
 and audited components for everything else.
 
-Components can even [depend](./ch16-02-02-component-dependencies.md) on other components by restricting the
+Components can even [depend][component dependencies] on other components by restricting the
 `TContractstate` they're generic on to implement the trait of another component.
-Before we dive into this mechanism, let's first look at [how components work under the hood](./ch16-02-01-under-the-hood.md).
+Before we dive into this mechanism, let's first look at [how components work under the hood][components inner working].
 
 
 [OpenZeppelin Cairo Contracts]: https://github.com/OpenZeppelin/cairo-contracts
+[component dependencies]: ./ch16-02-02-component-dependencies.md
+[components inner working]: ./ch16-02-01-under-the-hood.md

@@ -1,0 +1,55 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is the first word of an absolute path ?
+"""
+prompt.distractors = ["Folder name", "Module name"]
+answer.answer = "Package name"
+context = """
+An absolute path is the full path starting from a package root. 
+The absolute path begins with the package name which is specified in the `Scarb.toml` file.
+**Note:** The package and crate are equivalent in Cairo since each package has only one crate corresponding to the `lib.cairo` file.
+"""
+id = "a434804d-90a4-44ec-9e2e-ed72a7494ead"
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+pub mod foo {
+    fn a() { println!("a"); }
+    mod bar {
+        pub fn b() { println!("b"); }
+    }
+}
+
+fn main() {
+    foo::bar::b();
+}
+"""
+answer.doesCompile = false
+context = """
+`b` is not accessible to `main` because the module `bar` is not marked as `pub`.
+"""
+id = "457de43b-c6b5-4b16-a0bb-14102c6d2248"
+
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+pub mod foo {
+    pub mod bar {
+        pub fn b() { println!("b");  }
+    }
+    pub fn a() { bar::b(); }
+}
+
+fn main() {  
+    foo::a();
+}
+"""
+answer.doesCompile = true
+answer.stdout = "b"
+context = """
+It is valid within `foo` to use a relative path to refer to items within `bar`.
+"""
+id = "6404c595-f37f-4131-9e6d-92b0e0ba745f"

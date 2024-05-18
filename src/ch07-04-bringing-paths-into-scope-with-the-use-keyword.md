@@ -170,3 +170,5 @@ After that, simply run `scarb build` to fetch all external dependencies and comp
 Note that it is also possible to add dependencies with the `scarb add` command, which will automatically edit the _Scarb.toml_ file for you. For development dependencies, just use the `scarb add --dev` command.
 
 To remove a dependency, simply remove the corresponding line from your _Scarb.toml_ file, or use the `scarb rm` command.
+
+{{#quiz ../quizzes/ch07-04-bringing-paths-into-scope.toml}}
