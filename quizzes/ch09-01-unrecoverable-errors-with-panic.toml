@@ -15,9 +15,9 @@ type = "MultipleChoice"
 prompt.prompt = """
 In Cairo, the ```panic``` function can be triggered in two ways:
 1. Inadvertently, through actions causing the code to panic.
-2. A statement.
-3. A syntactic scope.
-4. Deliberately, by invoking the panic function.
+2. Executing a valid Cairo program.
+3. """Using the ```nopanic``` notation""".
+4. """Deliberately, by invoking the ```panic``` function""".
 """
 answer.answer = "1 and 4"
 prompt.distractors = [ "1 only", "2 only", "2 and 3" ]
@@ -29,9 +29,9 @@ There are two primary ways that a panic can be triggered in Cairo: inadvertently
 id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
 type = "MultipleChoice"
 prompt.prompt = """
-What does the ```panic_with``` attribute used for in Cairo?"""
-answer.answer = """To mark a function that returns an Option or Result and creates a wrapper for the annotated function which will panic if the function returns None or Err."""
-prompt.distractors = [ "It ignores errors in a function that returns an Option or Result.", "It logs errors for debugging in a function that returns an Option or Result.", " It continues program execution after an error in a function that returns an Option or Result." ]
+What is the ```panic_with``` attribute used for in Cairo?"""
+answer.answer = """To mark a function that returns an Option or Result."""
+prompt.distractors = [ "To ignore errors in a function that returns an Option or Result.", "To log errors for debugging in a function that returns an Option or Result.", " To continue program execution after an error occured in a function." ]
 context = """
 You can use the ```panic_with``` attribute to mark a function that returns an Option or Result. This attribute takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function. 
 """
