@@ -3,7 +3,7 @@ type = "MultipleChoice"
 prompt.prompt = "Which of the following is NOT a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?"
 answer.answer = "To aid testing whether many parts of your library work together correctly"
 prompt.distractors = [
-	"Saves compilation time and reduces the size of the final binary by only compling tests when `scarb cairo-test` runs",
+	"Saves compilation time and reduces the size of the final binary by only compiling tests when `scarb cairo-test` runs",
 	"Keeps tests isolated from production code",
 	"Test private functions which are not accessible from outside the module"
 ]
