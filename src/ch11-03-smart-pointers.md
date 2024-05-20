@@ -75,3 +75,5 @@ The illustration above demonstrates how the memory behaves in both cases. The fi
 If we try to access an element that does not exist in a dictionary, the code will fail if the `zero_default` method cannot be called.
 
 [Chapter 3.2](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively) about dictionaries thoroughly explains how to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
+
+{{#quiz ../quizzes/ch11-03-smart-pointers.toml}}

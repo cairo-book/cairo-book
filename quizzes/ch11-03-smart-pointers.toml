@@ -1,0 +1,77 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which one of the following is NOT true about smart pointers?"
+answer.answer = "A smart pointer stores reference to a value and does not provide any memory management."
+prompt.distractors = [
+	"To prevent unsafe memory access is a primary benefit of smart pointers.",
+	"Smart pointers are data structure that act like pointer but also has additional metadata and capabilities.",
+	"Smart pointers can be used to implement copy semantics"
+]
+context = """
+Smart pointers also have additional metadata and capabilities.
+Smart pointers ensure that memory is not addressed in an unsafe method,
+by providing a safe way to access memory through strick type checking and ownership rules.
+This is a memory management feature provided by smart pointers and not just referencing a value.
+"""
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+#[derive(Drop)]
+struct Student {
+    name: ByteArray,
+    age: u8,
+    id: u32
+}
+
+fn main() {
+    let mut student1 = BoxTrait::new(Student { name: "Peter", age: 12, id: 12345 });
+    let student2 = student1;
+    student1 = BoxTrait::new(Student { name: "James", age: 18, id: 56789 });
+    println!("{}", student2.unbox().name);
+}
+"""
+answer.doesCompile = true
+answer.stdout = "Peter"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does the following program fail to compile successfully?
+```
+use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
+
+fn main() {
+    // Create the dictionary
+    let mut scoreSheet: Felt252Dict<Nullable<Span<felt252>>> = Default::default();
+    let mut score: Felt252Dict<u64> = Default::default();
+
+    // Create and insert key and values in the dictionary
+    let exams = array![60, 70, 80, 90];
+    scoreSheet.insert(0, NullableTrait::new(exams.span()));
+    score.insert('John', 100);
+
+    // Get value back
+    let firstSession = scoreSheet.get(0);
+    let JaneScore = score.get('Jane');
+
+    // Search the value and assert it is not null
+    let record = match match_nullable(firstSession) {
+        FromNullableResult::Null => panic!("No value found"),
+        FromNullableResult::NotNull(firstSession) => firstSession.unbox(),
+    };
+
+    println!("score {}\nexams {}", JaneScore, *record.at(4));
+```
+"""
+answer.answer = "`*record.at(4)` is out of bounds and zero_default method cannot be called"
+prompt.distractors = [
+	"The 'score' dictionary does not have the key 'Jane'",
+	"Both 'scoreSheet' and 'score' dictionaries are 'out of bounds'",
+	"score.get('Jane') is out of bounds and zero_default method cannot be called"
+]
+context = """
+The `Index out of bounds` error occurs due to an attempt to access 
+the fifth element of a four-element array, which is not allowed in Cairo.
+The error message also indicates that the zero_default method is not called in the code.
+"""
