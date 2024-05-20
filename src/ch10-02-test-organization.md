@@ -72,3 +72,5 @@ Then, to run all of our integration tests, we can just add a filter to only run 
 ```
 
 The result of the tests is the same as what we've been seeing: one line for each test.
+
+{{#quiz ../quizzes/ch10-02-testing-organization.toml}}
