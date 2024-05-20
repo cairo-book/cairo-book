@@ -1,0 +1,110 @@
+[[questions]]
+id = "64ff52eb-b905-43c2-9bd2-d64b2b86a883"
+type = "MultipleChoice"
+prompt.prompt = """
+What test case will NOT fail for the `is_even` function?
+```
+fn is_even(x: u64) -> bool {
+	x % 2 == 0
+}
+
+#[cfg(test)]
+mod tests {
+	use super::{is_even};
+	#[test]
+	fn test_is_even() {
+		// The answer goes here
+	}
+}
+```
+"""
+prompt.distractors = [
+  "`assert!(is_even(4) == false, \"4 should be even\");`",
+  "`assert!(is_even(3), \"3 should be odd\");`",
+  "`assert!(!is_even(0), \"0 should be even\");`",
+]
+answer.answer = "`assert!(!is_even(5), \"5 should be odd\");`"
+
+context = """
+The `assert!` macro evaluates the expression and panics if the condition is false.
+"""
+
+[[questions]]
+id = "4becac9f-5173-4439-bd1f-e1e9958423ab"
+type = "MultipleChoice"
+prompt.prompt = """
+Does the test pass?
+```rust
+fn division_operation(number1: u16, number2: u16) -> u16 {
+    if number2 == 0 {
+        panic!("ZeroDivisionError not allowed!");
+    }
+    let result = number1 / number2;
+    result
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{division_operation};
+
+    #[test]
+    #[should_panic(expected: ("Zerodivisionerror not allowed!",))]
+    fn test_division_operation() {
+        division_operation(10, 0);
+    }
+}
+```
+"""
+prompt.distractors = ["Yes"]
+answer.answer = "No"
+
+context = """
+The expected string `"Zerodivisionerror not allowed!"` should be exactly
+the same as the panic string `"ZeroDivisionError not allowed!"`
+"""
+
+
+[[questions]]
+id = "0b3385b4-069f-4883-ab3f-6feb8ebf72f8"
+type = "MultipleChoice"
+prompt.prompt = """
+What is the test result when this program is run with the command `scarb cairo-test -f test_`
+```rust
+#[cfg(test)]
+mod tests {
+	#[test]
+	#[ignore]
+	fn test_addition() {
+        assert_ne!((5 + 4), 5);
+    }
+
+	#[test]
+    fn division_function() {
+        assert_eq!((10_u8 / 5), 2);
+	}
+
+	#[test]
+	fn test_multiplication() {
+		assert_ne!((3 * 2), 8);
+        assert_eq!((5 * 5), 25);
+	}
+    #[test]
+    fn test_subtraction() {
+        assert!((12 - 11) == 1, "The first argument was false");
+    }
+}
+```
+"""
+prompt.distractors = [
+  "Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;",
+  "test result: ok. 1 passed; 0 failed; 1 ignored; 2 filtered out;",
+  "test result: ok. 2 passed; 0 failed; 2 ignored; 0 filtered out;",
+]
+answer.answer = "test result: ok. 2 passed; 0 failed; 1 ignored; 1 filtered out;"
+
+context = """
+One ignored: `test_addition`, because it has the `ignore` attribute\n
+One filtered out: `division_with_available_gas`, because its name doesn't match the filter `test_`\n
+Zero failed\n
+Two passed: `test_multiplication` and `test_subtraction`, because all the conditions in the assertions are true
+"""

@@ -14,3 +14,5 @@ Consider an example where two `Potions` need to be combined. `Potions` have two 
 In the code above, we're implementing the `Add` trait for the `Potion` type. The add function takes two arguments: `lhs` and `rhs` (left and right-hand side). The function body returns a new `Potion` instance, its field values being a combination of `lhs` and `rhs`.
 
 As illustrated in the example, overloading an operator requires specification of the concrete type being overloaded. The overloaded generic trait is `Add<T>`, and we define a concrete implementation for the type `Potion` with `Add<Potion>`.
+
+{{#quiz ../quizzes/ch11-04-operator-overloading.toml}}
