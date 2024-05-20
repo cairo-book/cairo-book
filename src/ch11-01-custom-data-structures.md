@@ -11,7 +11,6 @@ level up. You might try to store the level of the players in an array:
 
 ```rust,noplayground
 {{#include ../listings/ch11-advanced-features/listing_01_array_collection/src/lib.cairo:array_append}}
-
 ```
 
 But then you realize you can't increase the level at a specific index once it's
@@ -62,7 +61,7 @@ The implementation, with all restrictions in place, would be as follow:
 
 Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it doesn't implement the `Drop<T>` trait, nor the `Destruct<T>` trait.
 Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to implement the `Destruct<T>` trait manually (refer to the [Ownership](ch04-01-what-is-ownership.md#the-drop-trait) chapter for more information).
-Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [Generic types](./ch08-00-generic-types-and-traits.md) in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
+Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [Generic types][generics] in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
 
 ```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}
@@ -73,6 +72,8 @@ Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully f
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:main}}
 ```
+
+[generics]: ./ch08-00-generic-types-and-traits.md
 
 ## Simulating a Dynamic Array with Dicts
 
@@ -88,7 +89,7 @@ It should:
 
 We can define this interface in Cairo like:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:trait}}
 ```
 
@@ -102,10 +103,9 @@ to values. We'll also store a separate `len` field to track the length.
 
 Here is what our struct looks like. We wrap the type `T` inside `Nullable`
 pointer to allow using any type `T` in our data structure, as explained in the
-[Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively)
-section:
+[Dictionaries][nullable] section:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 
@@ -126,13 +126,14 @@ The implementation of the rest of the interface is straightforward. The
 implementation of all the methods defined in our interface can be done as follow
 :
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
 ```
 
 The full implementation of the `Vec` structure can be found in the
-community-maintained library
-[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures).
+community-maintained library [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures).
+
+[nullable]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
 ## Simulating a Stack with Dicts
 
@@ -150,7 +151,7 @@ Let us define what operations we need to create a stack :
 
 From these specifications we can define the following interface :
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:trait}}
 ```
 
@@ -162,13 +163,13 @@ length of the stack to iterate over it.
 
 The Stack struct is defined as:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:struct}}
 ```
 
 Next, let's see how our main functions `push` and `pop` are implemented.
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
 ```
 
@@ -182,8 +183,9 @@ accordingly.
 
 The full implementation of the Stack, along with more data structures that you
 can use in your code, can be found in the community-maintained
-[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures)
-library, in the "data_structures" crate.
+[Alexandria][alexandria data structures] library, in the "data_structures" crate.
+
+[alexandria data structures]: https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
 
 ## Summary
 

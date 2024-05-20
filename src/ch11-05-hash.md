@@ -1,16 +1,21 @@
 # Hashes
 
-At its essence, hashing is a process of converting input data (often called a message) of any length into a fixed-size value, typically referred to as a "hash." This transformation is deterministic, meaning that the same input will always produce the same hash value. Hash functions are a fundamental component in various fields, including data storage, cryptography, and data integrity verification - and are very often used when developing smart contracts, especially when working with [Merkle trees](https://en.wikipedia.org/wiki/Merkle_tree#Uses).
+At its essence, hashing is a process of converting input data (often called a message) of any length into a fixed-size value, typically referred to as a "hash." This transformation is deterministic, meaning that the same input will always produce the same hash value. Hash functions are a fundamental component in various fields, including data storage, cryptography, and data integrity verification - and are very often used when developing smart contracts, especially when working with [Merkle trees][merkle tree wiki].
 
 In this chapter, we will present the two hash functions implemented natively in the Cairo library: `Poseidon` and `Pedersen`. We will discuss when and how to use them, and see examples with Cairo programs.
+
+[merkle tree wiki]: https://en.wikipedia.org/wiki/Merkle_tree#Uses
 
 ### Hash Functions in Cairo
 
 The Cairo core library provides two hash functions: Pedersen and Poseidon.
 
-Pedersen hash functions are cryptographic algorithms that rely on [elliptic curve cryptography](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography). These functions perform operations on points along an elliptic curve — essentially, doing math with the locations of these points — which are easy to do in one direction and hard to undo. This one-way difficulty is based on the Elliptic Curve Discrete Logarithm Problem (ECDLP), which is a problem so hard to solve that it ensures the security of the hash function. The difficulty of reversing these operations is what makes the Pedersen hash function secure and reliable for cryptographic purposes.
+Pedersen hash functions are cryptographic algorithms that rely on [elliptic curve cryptography][ec wiki]. These functions perform operations on points along an elliptic curve — essentially, doing math with the locations of these points — which are easy to do in one direction and hard to undo. This one-way difficulty is based on the Elliptic Curve Discrete Logarithm Problem (ECDLP), which is a problem so hard to solve that it ensures the security of the hash function. The difficulty of reversing these operations is what makes the Pedersen hash function secure and reliable for cryptographic purposes.
 
-Poseidon is a family of hash functions designed to be very efficient as algebraic circuits. Its design is particularly efficient for Zero-Knowledge proof systems, including STARKs (so, Cairo). Poseidon uses a method called a 'sponge construction,' which soaks up data and transforms it securely using a process known as the Hades permutation. Cairo's version of Poseidon is based on a three-element state permutation with [specific parameters](https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt).
+Poseidon is a family of hash functions designed to be very efficient as algebraic circuits. Its design is particularly efficient for Zero-Knowledge proof systems, including STARKs (so, Cairo). Poseidon uses a method called a 'sponge construction,' which soaks up data and transforms it securely using a process known as the Hades permutation. Cairo's version of Poseidon is based on a three-element state permutation with [specific parameters][poseidon parameters]
+
+[ec wiki]: https://en.wikipedia.org/wiki/Elliptic-curve_cryptography
+[poseidon parameters]: https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt
 
 #### When to Use Them?
 
@@ -22,7 +27,7 @@ The core library makes it easy to work with hashes. The `Hash` trait is implemen
 
 The `Hash` trait is accompanied by the `HashStateTrait` and `HashStateExTrait` that define the basic methods to work with hashes. They allow you to initialize a hash state that will contain the temporary values of the hash after each application of the hash function; update the hash state, and finalize it when the computation is completed. `HashStateTrait` and `HashStateExTrait` are defined as follows:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_03_hash_trait/src/lib.cairo:hashtrait}}
 ```
 
@@ -44,7 +49,7 @@ As our struct derives the `Hash` trait, we can call the function as follows for 
 
 Pedersen is different from Poseidon, as it starts with a base state. This base state must be of `felt252` type, which forces us to either hash the struct with an arbitrary base state using the `update_with` method, or serialize the struct into an array to loop through all of its fields and hash its elements together.
 
-Here is a short example of Pedersen hashing :
+Here is a short example of Pedersen hashing:
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:main}}
@@ -55,9 +60,9 @@ Here is a short example of Pedersen hashing :
 Let us look at an example of hashing a struct that contains a `Span<felt252>`.
 To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can use the built-in function `poseidon_hash_span(mut span: Span<felt252>) -> felt252`. Similarly, you can hash `Array<felt252>` by calling `poseidon_hash_span` on its span.
 
-First, let us import the following traits and function :
+First, let us import the following traits and function:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:import}}
 ```
 
@@ -65,7 +70,6 @@ Now we define the struct. As you might have noticed, we didn't derive the `Hash`
 
 ```rust, noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:structure}}
-
 ```
 
 In this example, we initialized a `HashState` (`hash`) and updated it and then called the function `finalize()` on the
@@ -73,5 +77,4 @@ In this example, we initialized a `HashState` (`hash`) and updated it and then c
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:main}}
-
 ```
