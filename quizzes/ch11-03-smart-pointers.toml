@@ -62,6 +62,7 @@ fn main() {
     };
 
     println!("score {}\nexams {}", JaneScore, *record.at(4));
+}
 ```
 """
 answer.answer = "`*record.at(4)` is out of bounds and zero_default method cannot be called"
