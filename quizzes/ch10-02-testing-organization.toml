@@ -11,16 +11,6 @@ context = """
 Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions.
 """
 
-[[questions]]
-type = "MultipleChoice"
-prompt.prompt = "When running integration tests with the file path src/tests/arithmetic_test.cairo, which file contains the module `mod arithmetic_test`?"
-answer.answer = "src/tests.cairo"
-prompt.distractors = [
-	"src/tests/tests.cairo",
-	"src/tests/arithmetic_test.cairo",
-	"src/lib.cairo"
-]
-context = "The `mod arithmetic_test` should be located in the src/tests.cairo file."
 
 [[questions]]
 type = "MultipleChoice"
