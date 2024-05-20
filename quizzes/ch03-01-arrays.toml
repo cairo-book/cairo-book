@@ -18,17 +18,18 @@ fn find_until(mut v: Span<u64>, n: u64, til: usize) -> Option<usize> {
 }
 ```
 """
-answer.answer = "`find_until(array![1, 2, 3].span(), 4, 4);`"
 prompt.distractors = [
   "`find_until(array![1, 2, 3].span(), 0, 0);`",
   "`find_until(array![1, 2, 3].span(), 3, 3);`",
   "`find_until(array![1, 2, 3].span(), 1, 4);`",
 ]
+answer.answer = "`find_until(array![1, 2, 3].span(), 4, 4);`"
 context = """
 If `til = 4`, then for an array of length 3, the loop will attempt to index the array with `i = 3`,
 which is out of bounds.  This function does not panic if `n = 1` because it returns before reaching
 the out-of-bounds index.
 """
+id = "1abb19a7-93dd-4f08-9985-5802f88cc223"
 
 [[questions]]
 type = "Tracing"
@@ -47,6 +48,7 @@ As Cairo's memory layout is immutable, types cannot be moved out of an array by 
 possibility is to copy the value to a new variable using the `*` (desnap) operator.  Therefore, as
 ByteArray is not copyable, the line `let mut s = *v[0];` does not compile.
 """
+id = "6e6f6509-676c-40b8-9b14-c353be8d1d16"
 
 
 [[questions]]
@@ -65,3 +67,4 @@ context = """
 `*v[0]` copies the value of the first element of the array to `i`. Therefore, `i` is a copy of the
 value of `v[0]`, and incrementing `i` does not affect `v[0]`.
 """
+id = "caf550bd-bfb8-4cc6-8b69-9856a1ee09ab"

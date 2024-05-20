@@ -8,7 +8,7 @@ struct Dimensions {
 }
 
 fn main() {
-    let rectDimensions = Dimensions { radius: 8, height: 5 };
+    let mut rectDimensions = Dimensions { radius: 8, height: 5 };
     shapeVol(rectDimensions);
     shapeVol(rectDimensions);
 }
@@ -21,18 +21,26 @@ fn shapeVol(rectDimensions: Dimensions) -> u32 {
 answer.doesCompile = false
 answer.lineNumber = 2
 context = """
-The `Copy` Trait was not implemented on the Dimensions custom type which causes the code not to compile because after calling shapeVol the first time and passing rectDimensions to it, the value has been moved and is no longer avaialable for us to call the second time.
+The `Copy` Trait was not implemented on the Dimensions struct which causes the code not to compile because after calling shapeVol the first time and passing rectDimensions to it, the value has been moved and is no longer avaialable for us to call the second time.
 """
 
 [[questions]]
-type = "MultipleChoice"
-prompt.prompt = "The reason why dictionary data types must be `squashed` when destructed is:"
-prompt.distractors = [
-  "dictionaries can easily simulate the existence of mutable memory when there is none",
-  "cairo implements dictionarites as a list of entries in order to simulate mutability",
-]
-prompt.answerIndex = 0
-answer.answer = "so that sequence of access can be proven"
-context = """
-Squashing dictionaries in Cairo is important for provability, to ensure that the program can be verified mathematically.
+type = "Tracing"
+prompt.program = """
+#[derive(Drop)]
+struct Person {
+    name: felt252,
+    age: u8,
+}
+
+fn main() {
+    let person_1 = Person { name: "Vicra", age: 12 }
+    println!("The name of the first user is {}")
+}
 """
+answer.doesCompile = false
+answer.lineNumber = 2
+context = """
+`Debug` and traits were not implemented on the Person struct, which causes the code block not to compile
+"""
+ 
