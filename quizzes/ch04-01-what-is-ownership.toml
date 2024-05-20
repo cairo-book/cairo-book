@@ -1,7 +1,7 @@
 [[questions]]
 type = "Tracing"
 prompt.program = """
-const PI: u32 = 3.142;
+const PI: u32 = 3;
 struct Dimensions {
     radius: u32,
     height: u32,
