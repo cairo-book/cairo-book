@@ -6,7 +6,9 @@ We can use _trait bounds_ to specify that a generic type can be any type that ha
 
 > Note: Traits are similar to a feature often called interfaces in other languages, although with some differences.
 
-While traits can be written to not accept generic types, they are most useful when used with generic types. We already covered generics in the [previous chapter](./ch08-01-generic-data-types.md), and we will use them in this chapter to demonstrate how traits can be used to define shared behavior for generic types.
+While traits can be written to not accept generic types, they are most useful when used with generic types. We already covered generics in the [previous chapter][generics], and we will use them in this chapter to demonstrate how traits can be used to define shared behavior for generic types.
+
+[generics]: ./ch08-01-generic-data-types.md
 
 ## Defining a Trait
 
@@ -80,10 +82,7 @@ types. Here’s an example of how a crate could use our `aggregator` crate:
 This code prints the following:
 
 ```shell
-New article available! Cairo has become the most popular language for developers by Cairo Digger (Worldwide)
-New tweet! EliBenSasson: Crypto is full of short-term maximizing projects.
- @Starknet and @StarkWareLtd are about long-term vision maximization.
-Run completed successfully, returning []
+{{#include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/output.txt}}
 ```
 
 Other crates that depend on the _aggregator_ crate can also bring the `Summary` trait into scope to implement `Summary` on their own types.
@@ -108,10 +107,6 @@ that come from the `Summary` trait, such as `summarize`. We can call `notify`
 and pass in any instance of `NewsArticle` or `Tweet`. Code that calls the
 function with any other type, such as a `String` or an `i32`, won’t compile
 because those types don’t implement `Summary`. -->
-
-<!-- TODO NOT AVAILABLE IN CAIRO FOR NOW trait bound syntax -->
-
-<!-- TODO NOT AVAILABLE IN CAIRO FOR NOW multiple trait bounds -->
 
 <!-- TODO NOT AVAILABLE IN CAIRO FOR NOW Using trait bounds to conditionally implement methods -->
 
@@ -156,6 +151,6 @@ In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements t
 ```
 
 {{#label negative-impls}}
-<span class="caption"> Listing {{#ref negative-impls}}: Using negative impls to enforce that a type cannot implement both Producer and Consumer traits simultaneously</span>
+<span class="caption"> Listing {{#ref negative-impls}}: Using negative impls to enforce that a type cannot implement both `Producer` and `Consumer` traits simultaneously</span>
 
 In the `main` function, we create instances of `ProducerType`, `AnotherType`, and `AThirdType`. We then call the `produce` method on the `producer` instance and pass the result to the `consume` method on the `another_type` and `third_type` instances. Finally, we try to call the `consume` method on the `producer` instance, which results in a compile-time error because `ProducerType` does not implement the `Consumer` trait.

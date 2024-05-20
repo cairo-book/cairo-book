@@ -14,7 +14,7 @@ scope of the `eat_at_restaurant` function so we only have to specify
 ```
 
 {{#label use-keyword}}
-<span class="caption">Listing {{#ref use-keyword}}: Bringing a module into scope with `use`.</span>
+<span class="caption">Listing {{#ref use-keyword}}: Bringing a module into scope with `use`</span>
 
 Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use restaurant::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
 
@@ -50,7 +50,7 @@ the `add_to_waitlist` function to achieve the same result, as in Listing {{#ref 
 ```
 
 {{#label unidiomatic-use}}
-<span class="caption">Listing {{#ref unidiomatic-use}}: Bringing the `add_to_waitlist` function into scope with `use`, which is unidiomatic.</span>
+<span class="caption">Listing {{#ref unidiomatic-use}}: Bringing the `add_to_waitlist` function into scope with `use`, which is unidiomatic</span>
 
 Although both Listing {{#ref use-keyword}} and {{#ref unidiomatic-use}} accomplish the same task, Listing {{#ref use-keyword}} is
 the idiomatic way to bring a function into scope with `use`. Bringing the
@@ -67,7 +67,7 @@ On the other hand, when bringing in structs, enums, traits, and other items with
 ```
 
 {{#label idiomatic-use}}
-<span class="caption">Listing {{#ref idiomatic-use}}: Bringing `BitSize` trait into scope in an idiomatic way.</span>
+<span class="caption">Listing {{#ref idiomatic-use}}: Bringing `BitSize` trait into scope in an idiomatic way</span>
 
 There’s no strong reason behind this idiom: it’s just the convention that has
 emerged in the Rust community, and folks have gotten used to reading and writing Rust code this way.
@@ -89,7 +89,7 @@ local name, or _alias_, for the type. Listing {{#ref as-keyword}} shows how you 
 ```
 
 {{#label as-keyword}}
-<span class="caption">Listing {{#ref as-keyword}}: Renaming a trait when it’s brought into scope with the `as` keyword.</span>
+<span class="caption">Listing {{#ref as-keyword}}: Renaming a trait when it’s brought into scope with the `as` keyword</span>
 
 Here, we brought `ArrayTrait` into scope with the alias `Arr`. We can now access the trait's methods with the `Arr` identifier.
 
@@ -113,7 +113,7 @@ Here is an example where we import three structures from the same module:
 ```
 
 {{#label multiple-imports}}
-<span class="caption">Listing {{#ref multiple-imports}}: Importing multiple items from the same module.</span>
+<span class="caption">Listing {{#ref multiple-imports}}: Importing multiple items from the same module</span>
 
 ## Re-exporting Names in Module Files
 
@@ -131,7 +131,7 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 ```
 
 {{#label reexporting}}
-<span class="caption">Listing {{#ref reexporting}}: Making a name available for any code to use from a new scope with `pub use`.</span>
+<span class="caption">Listing {{#ref reexporting}}: Making a name available for any code to use from a new scope with `pub use`</span>
 
 Before this change, external code would have to call the `add_to_waitlist`
 function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`.
@@ -170,3 +170,5 @@ After that, simply run `scarb build` to fetch all external dependencies and comp
 Note that it is also possible to add dependencies with the `scarb add` command, which will automatically edit the _Scarb.toml_ file for you. For development dependencies, just use the `scarb add --dev` command.
 
 To remove a dependency, simply remove the corresponding line from your _Scarb.toml_ file, or use the `scarb rm` command.
+
+{{#quiz ../quizzes/ch07-04-bringing-paths-into-scope.toml}}

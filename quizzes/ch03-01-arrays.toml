@@ -1,4 +1,5 @@
 [[questions]]
+id = "dd16401e-9f74-4c86-a6ec-da2937cb26e5"
 type = "MultipleChoice"
 prompt.prompt = """
 Which call to this `find_until` function will cause a runtime panic?
@@ -31,7 +32,9 @@ the out-of-bounds index.
 """
 id = "1abb19a7-93dd-4f08-9985-5802f88cc223"
 
+
 [[questions]]
+id = "2e6570eb-8bf4-48b7-9032-5815475bc412"
 type = "Tracing"
 prompt.program = """
 fn main() {
@@ -52,6 +55,7 @@ id = "6e6f6509-676c-40b8-9b14-c353be8d1d16"
 
 
 [[questions]]
+id = "95d528ee-ae78-4892-a438-a5d97f07f52a"
 type = "Tracing"
 prompt.program = """
 fn main() {

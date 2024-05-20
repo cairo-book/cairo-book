@@ -36,7 +36,7 @@ In _lib.cairo_, let's remove the existing content and add a `tests` module conta
 ```
 
 {{#label first-test}}
-<span class="caption">Listing {{#ref first-test}}: A simple test function.</span>
+<span class="caption">Listing {{#ref first-test}}: A simple test function</span>
 
 Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
@@ -59,8 +59,6 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 It’s possible to mark a test as ignored so it doesn’t run in a particular instance; we’ll cover that in the [Ignoring Some Tests Unless Specifically Requested](#ignoring-some-tests-unless-specifically-requested) section later in this chapter. Because we haven’t done that here, the summary shows `0 ignored`. We can also pass an argument to the `scarb cairo-test` command to run only a test whose name matches a string; this is called filtering and we’ll cover that in the [Running Single Tests](#running-single-tests) section. We also haven’t filtered the tests being run, so the end of the summary shows `0 filtered out`.
 
 Let’s start to customize the test to our own needs. First change the name of the `it_works` function to a different name, such as `exploration`, like so:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_01/src/lib.cairo:exploration}}
@@ -86,20 +84,12 @@ Now we’ll add another test, but this time we’ll make a test that fails! Test
 ```
 
 {{#label second-test}}
-<span class="caption">Listing {{#ref second-test}}: Adding a second test in _lib.cairo_ that will fail.</span>
+<span class="caption">Listing {{#ref second-test}}: Adding a second test in _lib.cairo_ that will fail</span>
 
 Run `scarb cairo-test` and you will see the following output:
 
 ```shell
-$ scarb cairo-test
-testing adder ...
-running 2 tests
-test adder::exploration ... ok (gas usage est.: 53200)
-test adder::another ... fail (gas usage est.: 55870)
-failures:
-   adder::another - Panicked with "Make this test fail".
-
-Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_02/output.txt}}
 ```
 
 Instead of `ok`, the line `adder::another` shows `fail`. A new section appears between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `"Make this test fail"` error.
@@ -112,7 +102,7 @@ Now that you’ve seen what the test results look like in different scenarios, l
 
 The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
 
-Remember in [Chapter 5](ch05-03-method-syntax.md), we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing {{#ref rectangle}}. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
+Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing {{#ref rectangle}}. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -121,11 +111,9 @@ Remember in [Chapter 5](ch05-03-method-syntax.md), we used a `Rectangle` struct 
 ```
 
 {{#label rectangle}}
-<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from Chapter 5.</span>
+<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the `assert!` macro. We can write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:test1}}
@@ -149,15 +137,13 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:test2}}
 ```
 
+{{#label another-test}}
+<span class="caption">Listing {{#ref another-test}}: Adding another test in _lib.cairo_ that will pass</span>
+
 Because the correct result of the `can_hold` method, in this case, is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
 
 ```shell
-$ scarb cairo-test
-testing adder ...
-running 2 tests
-test adder::larger_can_hold_smaller ... ok (gas usage est.: 54940)
-test adder::smaller_cannot_hold_larger ... ok (gas usage est.: 55140)
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 filtered out;
+{{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/output.txt}}
 ```
 
 Two tests that pass! Now let’s see what happens to our test results when we introduce a bug in our code. We’ll change the implementation of the `can_hold` method by replacing the `>` sign with a `<` sign when it compares the widths:
@@ -181,6 +167,8 @@ Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in `larger_can_hold_smaller` test. Notice that `smaller_cannot_hold_larger` test still passes: to make the test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
+
+[method syntax]: ./ch05-03-method-syntax.md
 
 ## Testing Equality and Comparisons with the `assert_xx!` Macros
 
@@ -207,7 +195,7 @@ parameter, then we test this function using `assert_eq!` and `assert_ne!` macros
 ```
 
 {{#label add_two}}
-<span class="caption">Listing {{#ref add_two}}: Testing the function `add_two` using `assert_eq!` and `assert_ne!` macros.</span>
+<span class="caption">Listing {{#ref add_two}}: Testing the function `add_two` using `assert_eq!` and `assert_ne!` macros</span>
 
 Let’s check that it passes!
 
@@ -304,7 +292,7 @@ Listing {{#ref assert_macros}} demonstrates how to use these macros:
 ```
 
 {{#label assert_macros}}
-<span class="caption">Listing {{#ref assert_macros}}: Example of tests that use the `assert_xx!` macros for comparisons.</span>
+<span class="caption">Listing {{#ref assert_macros}}: Example of tests that use the `assert_xx!` macros for comparisons</span>
 
 In this example, we throw multiple times a `Dice` struct and compare the result. We need to manually implement the `PartialOrd` trait for our struct so that we can compare `Dices` with `lt`, `le`, `gt` and,`ge` functions, which are used by `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros respectively. We also need to derive the `Copy` trait on our `Dice` struct in order to use multiple times the instantiated structs, as comparison functions take ownership of variables.
 
@@ -313,7 +301,7 @@ In this example, we throw multiple times a `Dice` struct and compare the result.
 You can also add a custom message to be printed with the failure message as
 optional arguments to `assert!`, `assert_eq!`, and `assert_ne!` macros. Any
 arguments specified after the required arguments are passed along to the
-`format!` macro (discussed in [Printing Chapter](./ch11-09-printing.md#formatting)), so you can pass a format string that contains `{}` placeholders and
+`format!` macro (discussed in [Printing Chapter][formatting]), so you can pass a format string that contains `{}` placeholders and
 values to go in those placeholders. Custom messages are useful for documenting
 what an assertion means; when a test fails, you’ll have a better idea of what
 the problem is with the code.
@@ -344,6 +332,8 @@ Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 We can see the value we actually got in the test output, which would help us
 debug what happened instead of what we were expecting to happen.
 
+[formatting]: ./ch11-09-printing.md#formatting
+
 ## Checking for panics with `should_panic`
 
 In addition to checking return values, it’s important to check that our code handles error conditions as we expect. For example, consider the `Guess` type in Listing {{#ref guess}}:
@@ -355,13 +345,11 @@ In addition to checking return values, it’s important to check that our code h
 ```
 
 {{#label guess}}
-<span class="caption">Listing {{#ref guess}}: Guess struct and its `new` method.</span>
+<span class="caption">Listing {{#ref guess}}: Guess struct and its `new` method</span>
 
 Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
 
 We do this by adding the attribute `should_panic` to our test function. The test passes if the code inside the function panics; the test fails if the code inside the function doesn’t panic.
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_05/src/lib.cairo:test}}
@@ -378,8 +366,6 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
 Looks good! Now let’s introduce a bug in our code by removing the condition that the `new` function will panic if the value is greater than `100`:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/no_listing_03_wrong_new_impl/src/lib.cairo:here}}
@@ -408,13 +394,11 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 ```
 
 {{#label guess-2}}
-<span class="caption">Listing {{#ref guess-2}}: `new` implementation that panics with different error messages.</span>
+<span class="caption">Listing {{#ref guess-2}}: `new` implementation that panics with different error messages</span>
 
 The test will pass because the value we put in the `should_panic` attribute’s expected parameter is the string that the `Guess::new` method panics with. We need to specify the entire panic message that we expect.
 
 To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the `if value < 1` and the `else if value > 100` blocks:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:here}}
@@ -447,7 +431,7 @@ To demonstrate how to run a single test, we’ll first create two test functions
 ```
 
 {{#label two-tests}}
-<span class="caption">Listing {{#ref two-tests}}: Two tests with two different names.</span>
+<span class="caption">Listing {{#ref two-tests}}: Two tests with two different names</span>
 
 We can pass the name of any test function to `cairo-test` to run only that test using the `-f` flag:
 
@@ -466,8 +450,6 @@ We can also specify part of a test name, and any test whose name contains that v
 ## Ignoring Some Tests Unless Specifically Requested
 
 Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `scarb cairo-test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `#[ignore]` attribute to exclude them, as shown here:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/src/lib.cairo}}
@@ -491,8 +473,6 @@ When you’re at a point where it makes sense to check the results of the ignore
 ## Testing Recursive Functions or Loops
 
 When testing recursive functions or loops, the test is instantiated by default with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. This value is assumed reasonably large enough, but you can override it by adding the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
@@ -528,3 +508,5 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
 Here, the gas usage of the `sum_n` function is 163430 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 271290, due to some extra steps required to run the entire test function.
+
+{{#quiz ../quizzes/ch10-01-how_to_write_tests.toml}}

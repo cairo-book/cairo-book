@@ -13,3 +13,5 @@ src/quiz-cairo
 
 runner_crate/src
 runner_crate/target
+
+*.snfoundry_cache

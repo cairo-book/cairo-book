@@ -16,8 +16,6 @@ The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run
 
 Recall that when we created the new _adder_ project in the first section of this chapter, we wrote this first test:
 
-<span class="caption">Filename: src/lib.cairo</span>
-
 ```rust
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_08_cfg_attr/src/lib.cairo}}
 ```
@@ -70,11 +68,7 @@ We need to bring our tested functions into each test file scope. For that reason
 Then, to run all of our integration tests, we can just add a filter to only run tests whose path contains "integration_tests".
 
 ```shell
-$ scarb test -f integration_tests
-testing adder ...
-running 1 tests
-test adder::integration_tests::internal ... ok (gas usage est.: 55770)
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/output.txt}}
 ```
 
 The result of the tests is the same as what we've been seeing: one line for each test.

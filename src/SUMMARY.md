@@ -85,7 +85,7 @@
 
   - [Custom Data Structures](ch11-01-custom-data-structures.md)
   - [Using Arrays inside Dictionaries]()
-  - [Smart Pointers]()
+  - [Smart Pointers](ch11-03-smart-pointers.md)
   - [Operator Overloading](ch11-04-operator-overloading.md)
   - [Working with Hashes](ch11-05-hash.md)
   - [Macros](ch11-06-macros.md)
@@ -142,7 +142,7 @@
   - [L1 <> L2 Messaging](./ch16-04-L1-L2-messaging.md)
   - [Oracle Interactions](./ch16-05-oracle-interactions.md)
     - [Price Feeds]()
-    - [Randomness]()
+    - [Randomness](./ch16-05-02-randomness.md)
   - [Other Examples](./ch16-06-00-other-examples.md)
     - [Deploying and Interacting with a Voting Contract](./ch16-06-01-deploying-and-interacting-with-a-voting-contract.md)
 
@@ -151,7 +151,7 @@
 - [Starknet Smart Contracts Security](./ch17-00-starknet-smart-contracts-security.md)
 
   - [General Recommendations](./ch17-01-general-recommendations.md)
-  - [Testing Smart Contracts]()
+  - [Testing Smart Contracts](./ch17-02-testing-smart-contracts.md)
   - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
   - [Formal Verification]()
 

@@ -4,13 +4,15 @@ Most errors aren’t serious enough to require the program to stop entirely. Som
 
 ## The `Result` Enum
 
-Recall from [Generic data types](ch08-01-generic-data-types.md#enums) section in Chapter 8 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
+Recall from [Generic data types][generic enums] section in Chapter 8 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
 ```rust,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_07_result_enum/src/lib.cairo}}
 ```
 
 The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `Ok` which holds the value of type `T` and `Err` which holds the value of type `E`. This definition makes it convenient to use the `Result` enum anywhere we have an operation that might succeed (by returning a value of type `T`) or fail (by returning a value of type `E`).
+
+[generic enums]: ./ch08-01-generic-data-types.md#enums
 
 ## The `ResultTrait`
 
@@ -33,7 +35,7 @@ Finally, the `is_ok` and `is_err` methods are utility functions provided by the 
 
 These methods are helpful when you want to check the success or failure of an operation without consuming the `Result` value, allowing you to perform additional operations or make decisions based on the variant without unwrapping it.
 
-You can find the implementation of the `ResultTrait` [here](https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20).
+You can find the implementation of the `ResultTrait` [here][result corelib].
 
 It is always easier to understand with examples. Have a look at this function signature:
 
@@ -66,11 +68,14 @@ Our two test cases are:
 {{#rustdoc_include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:tests}}
 ```
 
-Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail its meaning in the next [Testing Cairo Programs](ch10-01-how-to-write-tests.md) chapter.
+Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail its meaning in the next [Testing Cairo Programs][tests] chapter.
 
 `#[test]` attribute means the function is a test function, and `#[should_panic]` attribute means this test will pass if the test execution panics.
 
 The first one tests a valid conversion from `felt252` to `u8`, expecting the `unwrap` method not to panic. The second test function attempts to convert a value that is out of the `u8` range, expecting the `unwrap` method to panic with the error message `Invalid integer`.
+
+[result corelib]: https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20
+[tests]: ./ch10-01-how-to-write-tests.md
 
 ### The `?` Operator
 
@@ -102,3 +107,5 @@ The console will print the error `Invalid Integer`.
 We saw that recoverable errors can be handled in Cairo using the `Result` enum, which has two variants: `Ok` and `Err`. The `Result<T, E>` enum is generic, with types `T` and `E` representing the successful and error values, respectively. The `ResultTrait` provides methods for working with `Result<T, E>`, such as unwrapping values, checking if the result is `Ok` or `Err`, and panicking with custom messages.
 
 To handle recoverable errors, a function can return a `Result` type and use pattern matching to handle the success or failure of an operation. The `?` operator can be used to implicitly handle errors by propagating the error or unwrapping the successful value. This allows for more concise and clear error handling, where the caller is responsible for managing errors raised by the called function.
+
+{{#quiz ../quizzes/ch09-02-error-handling-result.toml}}

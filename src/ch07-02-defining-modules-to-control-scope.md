@@ -134,7 +134,7 @@ define some modules and function signatures. Here’s the front of house section
 ```
 
 {{#label front_of_house}}
-<span class="caption">Listing {{#ref front_of_house}}: A `front_of_house` module containing other modules that then contain functions.</span>
+<span class="caption">Listing {{#ref front_of_house}}: A `front_of_house` module containing other modules that then contain functions</span>
 
 We define a module with the `mod` keyword followed by the name of the module
 (in this case, `front_of_house`). The body of the module then goes inside curly
@@ -166,7 +166,7 @@ restaurant
 ```
 
 {{#label module-tree}}
-<span class="caption">Listing {{#ref module-tree}}: The module tree for the code in Listing {{#ref front_of_house}}.</span>
+<span class="caption">Listing {{#ref module-tree}}: The module tree for the code in Listing {{#ref front_of_house}}</span>
 
 This tree shows how some of the modules nest inside one another; for example,
 `hosting` nests inside `front_of_house`. The tree also shows that some modules
@@ -180,3 +180,5 @@ The module tree might remind you of the filesystem’s directory tree on your
 computer; this is a very apt comparison! Just like directories in a filesystem,
 you use modules to organize your code. And just like files in a directory, we
 need a way to find our modules.
+
+{{#quiz ../quizzes/ch07-02-defining-modules-to-control-scope.toml}}

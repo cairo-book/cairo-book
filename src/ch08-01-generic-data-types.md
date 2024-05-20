@@ -20,7 +20,7 @@ The `largest_list` function compares two lists of the same type and returns the 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_02_with_tdrop/src/lib.cairo}}
 ```
 
-The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. The `main` function remains unchanged, the compiler is smart enough to deduce which concrete type is being used and if it implements the `Drop` trait.
+The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. This is what we call _trait bounds_. The `main` function remains unchanged, the compiler is smart enough to deduce which concrete type is being used and if it implements the `Drop` trait.
 
 ### Constraints for Generic Types
 
@@ -32,7 +32,7 @@ Imagine that we want, given a list of elements of some generic type `T`, to find
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_03_missing_tcopy/src/lib.cairo:missing-tcopy}}
 ```
 
-The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes a snapshot of an `Array<T>` as a parameter and returns a copy of the smallest element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we are not required to implement the `Drop` trait for `T` as well. Why it does not compile then?
+The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes a snapshot of an `Array<T>` as a parameter and returns a copy of the smallest element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we are not required to implement the `Drop` trait for `T` as well. Why does it not compile then?
 
 When indexing on `list`, the value results in a snap of the indexed element, unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy from `@T` to `T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that need to be dropped, requiring `T` to implement the `Drop` trait as well. We must then add both `Drop` and `Copy` traits implementation for the function to be correct. After updating the `smallest_element` function the resulting code would be:
 
@@ -40,7 +40,7 @@ When indexing on `list`, the value results in a snap of the indexed element, unl
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_04_with_tcopy/src/lib.cairo}}
 ```
 
-### Anonymous Generic Implementation Parameter (`+` operator)
+### Anonymous Generic Implementation Parameter (`+` Operator)
 
 Until now, we have always specified a name for each implementation of the required generic trait: `TPartialOrd` for `PartialOrd<T>`, `TDrop` for `Drop<T>`, and `TCopy` for `Copy<T>`.
 

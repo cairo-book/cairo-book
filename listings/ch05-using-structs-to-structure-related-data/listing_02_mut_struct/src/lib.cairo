@@ -2,8 +2,8 @@
 #[derive(Drop)]
 struct User {
     active: bool,
-    username: felt252,
-    email: felt252,
+    username: ByteArray,
+    email: ByteArray,
     sign_in_count: u64,
 }
 // ANCHOR: main
