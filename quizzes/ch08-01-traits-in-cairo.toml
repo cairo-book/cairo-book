@@ -1,0 +1,75 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.program = """
+Define a trait Operable that has a method operate returning an integer. Implement this trait for a struct Complex with fields real and imaginary. The operate method should return the magnitude of the complex number (rounded to the nearest integer).
+trait Operable {
+    fn operate(&self) -> i32;
+}
+struct Complex {
+    real: i32,
+    imaginary: i32,
+}
+impl Operable for Complex {
+    fn operate(&self) -> i32 {
+        // Your code here
+    }
+}
+
+answer.answer = " impl Operable for Complex {
+    fn operate(&self) -> i32 {
+        ((self.real.pow(2) + self.imaginary.pow(2)) as f64).sqrt().round() as i32
+    }
+}
+prompt.distractors = [
+    "impl Operable for Complex {
+    fn operate(&self) -> i32 {
+        self.real + self.imaginary
+    }
+}"
+
+    "impl Operable for Complex {
+    fn operate(&self) -> i32 {
+        (self.real.abs() + self.imaginary.abs()) as i32
+    }
+}"
+
+]
+
+[[questions]]
+type = "MultipleChoice"
+prompt.program = """
+Create a trait Transformable with a method transform that returns a new instance of the same type with some transformation applied. Implement this trait for a struct Vector2D with fields x and y, such that transform returns a new Vector2D where both x and y are doubled.
+trait Transformable {
+    fn transform(&self) -> Self;
+}
+
+struct Vector2D {
+    x: i32,
+    y: i32,
+}
+
+impl Transformable for Vector2D {
+    fn transform(&self) -> Self {
+        // Your code here
+    }
+}
+answer.answer = "impl Transformable for Vector2D {
+    fn transform(&self) -> Self {
+        Vector2D { x: self.x * 2, y: self.y * 2 }
+    }
+}
+prompt.distractors = [
+    "impl Transformable for Vector2D {
+    fn transform(&self) -> Self {
+        Vector2D { x: self.x + 2, y: self.y + 2 }
+    }
+}"
+
+    "impl Transformable for Vector2D {
+    fn transform(&self) -> Self {
+        Vector2D { x: self.x / 2, y: self.y / 2 }
+    }
+}"
+]
+
+
