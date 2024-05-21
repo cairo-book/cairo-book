@@ -79,3 +79,5 @@ If we try to access an element that does not exist in a dictionary, the code wil
 [Chapter 3.2][dictionary nullable span] about dictionaries thoroughly explains how to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
 
 [dictionary nullable span]: /ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
+
+{{#quiz ../quizzes/ch11-03-smart-pointers.toml}}
