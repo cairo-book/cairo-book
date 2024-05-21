@@ -19,7 +19,7 @@ instantiated with the `Event` type, which in our example is the following enum:
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:event}}
 ```
 
-Each variant of the `Event` enum has to be a struct or an enum, and each variant needs to implement the `starknet::Event` trait itself. Moreover, the members of these variants must implement the `Serde` trait (_c.f._ [Appendix C: Serializing with Serde](./appendix-03-derivable-traits.html#serializing-with-serde)), as keys/data are added to the event using a serialization process.
+Each variant of the `Event` enum has to be a struct or an enum, and each variant needs to implement the `starknet::Event` trait itself. Moreover, the members of these variants must implement the `Serde` trait (_c.f._ [Appendix C: Serializing with Serde][serde appendix]), as keys/data are added to the event using a serialization process.
 
 The auto-implementation of the `starknet::Event` trait will implement the `append_keys_and_data` function for each variant of our `Event` enum. The generated implementation will append a single key based on the variant name (`StoredName`), and then recursively call `append_keys_and_data` in the impl of the `Event` trait for the variant’s type.
 
@@ -36,6 +36,8 @@ In our contract, we defined an event named `StoredName` that emits the contract 
 Indexing events fields allows for more efficient queries and filtering of events. To index a field as a key of an event, simply annotate it with the `#[key]` attribute as demonstrated in the example for the `user` key. By doing so, any indexed field will allow queries of events that contain a given value for that field with \\( O(log(n)) \\) time complexity, while non indexed fields require any query to iterate over all events, providing \\( O(n) \\) time complexity.
 
 When emitting the event with `self.emit(StoredName { user: user, name: name })`, a key corresponding to the name ` StoredName`, specifically `sn_keccak(StoredName)`, is appended to the keys list. `user`is serialized as key, thanks to the `#[key]` attribute, while address is serialized as data. After everything is processed, we end up with the following keys and data: `keys = [sn_keccak("StoredName"),user]` and `data = [name]`.
+
+[serde appendix]: ./appendix-03-derivable-traits.html#serializing-with-serde
 
 ## Emitting Events
 

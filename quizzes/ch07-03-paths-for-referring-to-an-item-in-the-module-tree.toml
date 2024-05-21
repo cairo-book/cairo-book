@@ -1,0 +1,38 @@
+[[questions]]
+type = "Tracing"
+prompt.program = """
+fn add_num(n1: u16, n2: u16) -> u16 {
+    let result: u16 = n1 + n2;
+    result
+}
+
+mod calculator {
+    fn calculate_sum(num1: u16, num2: u16){
+        add_num(num1, num2);
+    }
+    fn calculate(n1: u8) -> bool {
+        if n1 > 20 {
+            return true;
+        }
+        return false;
+    }
+}
+"""
+answer.doesCompile = false
+context = "The function calculate_sum, which is defined in the calculator module, invokes the add_num function that is defined in the parent module. This is achieved by specifying the path to add_num using the super:: prefix."
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+pub mod desert {
+  pub mod icecream {
+    pub fn make_icecream() { println!("making ice crean");  }
+  }
+  pub fn make_desert() { icecream::make_icecream(); }
+}
+fn main() {
+  desert::make_desert();
+}
+"""
+answer.doesCompile = true
+context = "In the context of desert, it's acceptable to use a relative path to reference elements within ice cream."

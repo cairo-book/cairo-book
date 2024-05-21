@@ -9,7 +9,7 @@ Let's consider the following contract for the whole chapter. It might not be eas
 ```
 
 {{#label simple-contract}}
-<span class="caption">Listing {{#ref simple-contract}}: A simple storage contract.</span>
+<span class="caption">Listing {{#ref simple-contract}}: A simple storage contract</span>
 
 ## What Is this Contract?
 
@@ -27,7 +27,7 @@ You can think of it as a single slot in a database that you can query and modify
 ```
 
 {{#label interface}}
-<span class="caption">Listing {{#ref interface}}: A basic contract interface.</span>
+<span class="caption">Listing {{#ref interface}}: A basic contract interface</span>
 
 
 Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world. In Cairo, they're defined by annotating a trait with the `#[starknet::interface]` attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.
@@ -45,7 +45,7 @@ By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from 
 ```
 
 {{#label wrong-impl}}
-<span class="caption">Listing {{#ref wrong-impl}}: A wrong implementation of the interface of the contract. This does not compile, as the signature of `set` doesn't match the trait's.
+<span class="caption">Listing {{#ref wrong-impl}}: A wrong implementation of the interface of the contract. This does not compile, as the signature of `set` doesn't match the trait's.</span>
 
 Trying to compile a contract using this implementation will result in the following error:
 
@@ -68,7 +68,7 @@ Before we explore things further down, let's define some terminology.
 ```
 
 {{#label implementation}}
-<span class="caption">Listing {{#ref implementation}}: SimpleStorage implementation.</span>
+<span class="caption">Listing {{#ref implementation}}: `SimpleStorage` implementation</span>
 
 Since the contract interface is defined as the `ISimpleStorage` trait, in order to match the interface, the public functions of the contract must be defined in an implementation of this trait — which allows us to make sure that the implementation of the contract matches its interface.
 

@@ -16,8 +16,6 @@ The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run
 
 Recall that when we created the new _adder_ project in the first section of this chapter, we wrote this first test:
 
-<span class="caption">Filename: src/lib.cairo</span>
-
 ```rust
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_08_cfg_attr/src/lib.cairo}}
 ```
@@ -74,3 +72,5 @@ Then, to run all of our integration tests, we can just add a filter to only run 
 ```
 
 The result of the tests is the same as what we've been seeing: one line for each test.
+
+{{#quiz ../quizzes/ch10-02-testing-organization.toml}}

@@ -1,0 +1,42 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of the following is NOT a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?"
+answer.answer = "To aid testing whether many parts of your library work together correctly"
+prompt.distractors = [
+	"Saves compilation time and reduces the size of the final binary by only compiling tests when `scarb cairo-test` runs",
+	"Keeps tests isolated from production code",
+	"Test private functions which are not accessible from outside the module"
+]
+context = """
+Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions.
+"""
+
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "How do you run integration tests in a Cairo project"
+answer.answer = "By running `scarb test` with a filter for the integration tests"
+prompt.distractors = [
+	"By running `scarb cairo-test`",
+	"By running `scarb cairo-build` with a filter for the test",
+	"By running `scarb cairo-run`"
+]
+context = """
+To run all integration tests, add to `scarb test` a filter that contains the path with the integration tests"
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What is the difference between unit tests and integration tests in Cairo?"
+answer.answer = "Unit tests focus on testing individual modules in isolation, while integration tests verify the interaction between multiple modules."
+prompt.distractors = [
+	"Unit test uses `#[cfg(test)] attribute, whereas integration tests does not",
+	"Unit test separates test code from the main code, while integration testing combines both in a single file",
+	"Unit tests test many parts of your library together whereas integration test test each code in isolation from the rest"
+]
+context = """
+Unit tests are small and more focused, testing one module in isolation at a time,
+and can test private functions. Integration tests use your code in the same way 
+any other external code would, using only the public interface and potentially 
+exercising multiple modules per test.
+"""
