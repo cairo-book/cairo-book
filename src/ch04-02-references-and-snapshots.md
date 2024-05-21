@@ -119,6 +119,8 @@ The output of the program is:
 
 As expected, the `height` and `width` fields of the `rec` variable have been swapped.
 
+{{#quiz ../quizzes/ch04-02-references-and-snapshots.toml}}
+
 ## Small Recap
 
 Let’s recap what we’ve discussed about the linear type system, ownership, snapshots, and references:
