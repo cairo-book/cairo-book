@@ -45,32 +45,30 @@ You should write `let mut rect = Rectangle { height: 10, width: 20 };` instead.
 type = "Tracing"
 prompt.program = """
 fn sum(arr: @Array<u128>) -> u128 {
-  let mut span = arr.span();
-  let mut sum = 0;
-  while let Option::Some(x) = span.pop_front() {
-    sum += *x;
-  };
-  sum
+    let mut span = arr.span();
+    let mut sum = 0;
+    while let Option::Some(x) = span.pop_front() {
+        sum += *x;
+    };
+    sum
 }
 
-    arr.len()
-}
 fn main() {
-    let mut arr1: Array<u128> = array![1,2,3];
+    let mut arr1: Array<u128> = array![1, 2, 3];
     let snap = @arr1;
     let mut snap2 = snap;
     arr1.append(4);
     snap2 = @arr1;
-    println!("{}", calculate_length(snap2));
+    println!("{}", sum(snap));
 }
 """
 answer.doesCompile = true
-answer.stdout = "4"
+answer.stdout = "6"
 context = """
-First `snap2` is a snapshot of a memory location that contains the array `arr1`. 
+First `snap` and `snap2` are snapshots of a memory location that contains the array `arr1`. 
 Then, `arr1` is mutated by appending a new element. 
-Finally, `snap2` is updated to be a snapshot of the new array. 
-The function `calculate_length` receives this snapshot and returns its length.
+Finally, `snap2` is updated to be a snapshot of the new array while `snap` remains a snapshot of the old array.
+The function `sum` receives the latter and returns its length before the mutation.
 """
 [[questions]]
 type = "MultipleChoice"
