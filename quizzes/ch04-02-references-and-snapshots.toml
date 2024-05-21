@@ -44,7 +44,15 @@ You should write `let mut rect = Rectangle { height: 10, width: 20 };` instead.
 [[questions]]
 type = "Tracing"
 prompt.program = """
-fn calculate_length(arr: @Array<u128>) -> usize {
+fn sum(arr: @Array<u128>) -> u128 {
+  let mut span = arr.span();
+  let mut sum = 0;
+  while let Option::Some(x) = span.pop_front() {
+    sum += *x;
+  };
+  sum
+}
+
     arr.len()
 }
 fn main() {
