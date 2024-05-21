@@ -80,4 +80,4 @@ If we try to access an element that does not exist in a dictionary, the code wil
 
 [dictionary nullable span]: /ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
-{{#quiz ../quizzes/ch11-03-smart-pointers.toml}}
+{{#quiz ../quizzes/ch11-03-smart_pointers.toml}}
