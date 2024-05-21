@@ -31,13 +31,13 @@ Integration tests use your library in the same way any other code would. Their p
 ### The _tests_ Directory
 
 ```shell
-adder
-├── Scarb.toml
+├── Cargo.lock
+├── Cargo.toml
 ├── src
-│   ├── lib.cairo
-│   ├── tests
-│   │   └── integration_test.cairo
-│   └── tests.cairo
+│   └── lib.cairo
+│   └── tests.cairo
+└── tests
+    └── integration_test.cairo
 ```
 
 First of all, add the following code in your _lib.cairo_ file:
