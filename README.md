@@ -83,18 +83,16 @@ If you wish to initiate a new translation for your language without running a lo
 
 ### Work locally (Cairo programs verification)
 
-The `cairo-listings` tool is designed to wrap all cairo and starknet plugins for quickly verifying cairo programs. You can verify that listings are correct with the `verify` argument, and generate the corresponding output with the `output` argument.
+The `cairo-listings` tool is designed to wrap all Cairo and Starknet plugins for quickly verifying Cairo programs. You can verify that listings are correct with the `verify` argument, and generate the corresponding output with the `output` argument.
 
 #### Setup
 
-Firstly, you need to have `scarb` resolved in your path:
+Firstly, you need to have `scarb` resolved in your path. See [here][installation] for more details.
 
-They should be available after installing cairo, see [here](https://cairo-book.github.io/ch01-01-installation.html) for more details.
-
-To run the `cairo-listings` helper tool, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
+To run the `cairo-listings` helper tool and verify Cairo programs, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
 
 ```sh
-cargo run --bin cairo-listings
+cargo run --bin cairo-listings verify
 ```
 
 Alternatively, you can also install the tool with:
@@ -102,6 +100,14 @@ Alternatively, you can also install the tool with:
 ```sh
 cargo install --path cairo-listings
 ```
+
+and then run:
+
+```sh
+cairo-listings verify
+```
+
+[installation]: ./src/ch01-01-installation.md
 
 #### Usage
 
@@ -132,29 +138,6 @@ Here is a list of available tags:
 - `does_not_run`: don't run `scarb cairo-run --available-gas=200000000`
 - `ignore_fmt`: don't run `scarb fmt`
 - `tests_fail`: don't run `scarb test`
-
-You can skip and ignore a specific test by adding the corresponding flag:
-
-```sh
-$ cairo-listings --help
-
-Usage: cairo-listings [OPTIONS]
-
-Options:
-  -p, --path <PATH>    The path to explore for *.cairo files [default: ./listings]
-  -v, --verbose        Print more information
-  -q, --quiet          Only print final results
-  -f, --formats-skip   Skip cairo-format checks
-  -s, --starknet-skip  Skip starknet-compile checks
-  -c, --compile-skip   Skip cairo-compile checks
-  -r, --run-skip       Skip cairo-run checks
-  -t, --test-skip      Skip cairo-test checks
-      --file <FILE>    Specify file to check
-  -h, --help           Print help
-  -V, --version        Print version
-```
-
-In CI, it's preferable to reduce output, so run `cairo-listings` with the `--quiet` flag.
 
 The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines in code blocks.
 

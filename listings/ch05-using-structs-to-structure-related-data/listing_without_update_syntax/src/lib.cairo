@@ -1,3 +1,4 @@
+//TAG: ignore_fmt
 #[derive(Drop)]
 struct User {
     active: bool,
@@ -24,3 +25,4 @@ fn main() {
     };
 }
 // ANCHOR_END: here
+

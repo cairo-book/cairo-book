@@ -108,3 +108,4 @@ fn test_set_as_new_owner_direct() {
     assert_eq!(state.owner.read(), owner);
 }
 //ANCHOR_END: test_internals
+

@@ -1,3 +1,4 @@
+// TAG: ignore_fmt
 use core::byte_array;
 #[derive(Drop)]
 struct User {
@@ -20,4 +21,5 @@ fn main() {
     let user2 = User { email: "another@example.com", ..user1 };
 }
 // ANCHOR_END: here
+
 
