@@ -30,5 +30,3 @@ enable = true
 level = 0
 
 [output.markdown]
-
-[preprocessor.quiz]
