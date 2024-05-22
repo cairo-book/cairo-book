@@ -1,0 +1,77 @@
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = """
+How would you define a generic function that takes any type of integer 
+and returns its square? Provide a Cairo code snippet as an example.
+"""
+answer.answer = """
+You can define a generic function in Cairo using the `fn` keyword followed by the function 
+name and generic type parameters in angle brackets. For example:
+```
+fn square<T>(x: T) -> T {
+    return x * x;
+}
+```
+"""
+
+[[questions]]
+type = "Tracing"
+prompt.prompt = """
+fn largest<T> (arr1: Array<T>, arr2: Array<T>) -> Array<T> {
+    if arr1.len() > arr2.len() {
+        arr1
+    } else {
+        arr2
+    }
+}
+
+fn main() {
+    let mut arr1 = array![2, 1, 5, 4, 9];
+    let mut arr2 = array![2, 1, 5, 4, 9, 3, 1];
+
+    let largestArr = largest(arr1, arr2);
+}
+"""
+answer.doesCompile = false
+context = "The code won't compile due to the compiler's inability to ensure that an Array<T> 
+is droppable in the main function. For any generic type used, T must implement the Drop trait 
+for it to compile successfully"
+
+[[questions]]
+type = "Tracing"
+prompt.prompt = """
+struct Student<T> {
+    name: T,
+    age: T,
+    level: T
+}
+
+fn main(){
+    let mut studentI = Student {name: 'Celine', age: 19, level: 9, };
+
+    let mut age = studentI.age;
+    let mut level = studentI.level;
+    
+    println!("{}", level);
+}
+"""
+answer.doesCompile = true
+answer.stdout = "9"
+
+[[questions]]
+type = "Tracing"
+prompt.prompt = """
+#[derive(Drop)]
+struct Wallet<T, E> {
+    balance: T,
+    account: E
+}
+
+fn main() {
+    let owner = Wallet { balance: 3, account: 100 };
+    print!("{}", owner.account)
+}
+"""
+answer.doesCompile = true
+answer.stdout = "100"
+
