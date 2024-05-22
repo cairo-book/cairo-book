@@ -1,0 +1,38 @@
+[[questions]]
+type="Tracing"
+prompt.program = """
+#[derive(Drop)]
+struct Rectangle {
+    width: u64,
+    height: u64,
+}
+
+fn perimeter(r: Rectangle) -> u64 {
+    2 * (r.width + r.height)
+}
+
+fn main(){
+    let rectangle1 = Rectangle{
+        width: 20,
+        height: 10,
+    };
+    let p = perimeter(rectangle1);
+    println!("2 * ({} + {}) = {}", rectangle1.width, rectangle1.height, p);
+}
+"""
+answer.doesCompile = false
+context = "The area function takes ownership of its argument rectangle, which doesn't implement `Copy`. Calling perimeter(rectangle1) therefore moves rectangle1, meaning it cannot be used on the next line."
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+struct Point { x: u128, y: u128, }
+
+fn main() {
+    let p = Point { x: 5, y: 10 };
+    let Point { z, w } = p;
+    println!("The values of z and w are: ({}, {})", z, w);
+}
+"""
+answer.doesCompile = false
+context = "Destructuring refers to the process of extracting individual fields from a struct and binding them to separate variables. When destructuring a struct, you can either use variables with the same names as the struct fields or explicitly bind the fields to variables with different names using the syntax `field_name: variable_name`."

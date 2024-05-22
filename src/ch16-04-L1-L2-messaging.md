@@ -2,9 +2,9 @@
 
 A crucial feature of a Layer 2 is its ability to interact with Layer 1.
 
-Starknet has its own `L1-L2` Messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on a chain and use the result of this computation on the other chain.
+Starknet has its own `L1-L2` messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on a chain and use the result of this computation on the other chain.
 
-Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for `L1-L2` messaging would be [DeFi pooling](https://starkware.co/resource/defi-pooling/).
+Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for `L1-L2` messaging would be [DeFi pooling][defi pooling doc].
 
 On Starknet, it's important to note that the messaging system is **asynchronous** and **asymmetric**.
 
@@ -13,9 +13,11 @@ On Starknet, it's important to note that the messaging system is **asynchronous*
 
 Let's dive into the details.
 
+[defi pooling doc]: https://starkware.co/resource/defi-pooling/
+
 ## The StarknetMessaging Contract
 
-The crucial component of the `L1-L2` Messaging system is the [`StarknetCore`](https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4) contract. It is a set of Solidity contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of `StarknetCore` is called `StarknetMessaging` and it is the contract responsible for passing messages between Starknet and Ethereum. `StarknetMessaging` follows an [interface](https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6) with functions allowing to send message to L2, receiving messages on L1 from L2 and canceling messages.
+The crucial component of the `L1-L2` Messaging system is the [`StarknetCore`][starknetcore etherscan] contract. It is a set of Solidity contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of `StarknetCore` is called `StarknetMessaging` and it is the contract responsible for passing messages between Starknet and Ethereum. `StarknetMessaging` follows an [interface][IStarknetMessaging] with functions allowing to send message to L2, receiving messages on L1 from L2 and canceling messages.
 
 ```js
 interface IStarknetMessaging is IStarknetMessagingEvents {
@@ -46,7 +48,7 @@ interface IStarknetMessaging is IStarknetMessagingEvents {
 }
 ```
 
-<span class="caption"> Starknet messaging contract interface.</span>
+<span class="caption"> Starknet messaging contract interface</span>
 
 In the case of `L1->L2` messages, the Starknet sequencer is constantly listening to the logs emitted by the `StarknetMessaging` contract on Ethereum.
 Once a message is detected in a log, the sequencer prepares and executes a `L1HandlerTransaction` to call the function on the target L2 contract. This takes up to 1-2 minutes to be done (few seconds for ethereum block to be mined, and then the sequencer must build and execute the transaction).
@@ -54,12 +56,15 @@ Once a message is detected in a log, the sequencer prepares and executes a `L1Ha
 `L2->L1` messages are prepared by contracts execution on L2 and are part of the block produced. When the sequencer produces a block, it sends the hash of each message prepared by contracts execution
 to the `StarknetCore` contract on L1, where they can then be consumed once the block they belong to is proven and verified on Ethereum (which for now is around 3-4 hours).
 
+[starknetcore etherscan]: https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4
+[IStarknetMessaging]: https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6
+
 ## Sending Messages from Ethereum to Starknet
 
 If you want to send messages from Ethereum to Starknet, your Solidity contracts must call the `sendMessageToL2` function of the `StarknetMessaging` contract. To receive these messages on Starknet, you will need to annotate functions that can be called from L1 with the `#[l1_handler]` attribute.
 
-Let's take a simple contract taken from [this tutorial](https://github.com/glihm/starknet-messaging-dev/blob/main/solidity/src/ContractMsg.sol) where we want to send a message to Starknet.
-The `_snMessaging` is a state variable already initialized with the address of the `StarknetMessaging` contract. You can check those addresses [here](https://docs.starknet.io/documentation/tools/important_addresses/).
+Let's take a simple contract taken from [this tutorial][messaging contract] where we want to send a message to Starknet.
+The `_snMessaging` is a state variable already initialized with the address of the `StarknetMessaging` contract. You can check all Starknet contract and sequencer addresses [here][starknet addresses].
 
 ```js
 // Sends a message on Starknet with a single felt.
@@ -115,11 +120,14 @@ The parameters are as follow:
 
 On the Starknet side, to receive this message, we have:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_handler}}
 ```
 
 We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be executed by a `L1HandlerTransaction`. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.
+
+[messaging contract]: https://github.com/glihm/starknet-messaging-dev/blob/main/solidity/src/ContractMsg.sol
+[starknet addresses]: https://docs.starknet.io/documentation/tools/important_addresses/
 
 ## Sending Messages from Starknet to Ethereum
 
@@ -127,7 +135,7 @@ When sending messages from Starknet to Ethereum, you will have to use the `send_
 
 To send a message from L2 to L1, what we would do on Starknet is:
 
-```rust
+```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_send}}
 ```
 
@@ -186,6 +194,9 @@ payload[0] = 1;
 payload[1] = 0;
 ```
 
-If you want to learn more about the messaging mechanism, you can visit the [Starknet documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/).
+If you want to learn more about the messaging mechanism, you can visit the [Starknet documentation][starknet messaging doc].
 
-You can also find a [detailed guide here](https://github.com/glihm/starknet-messaging-dev) to test the messaging in local.
+You can also find a [detailed guide here][glihm messaging guide] to test the messaging system locally.
+
+[starknet messaging doc]: https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/
+[glihm messaging guide]: https://github.com/glihm/starknet-messaging-dev

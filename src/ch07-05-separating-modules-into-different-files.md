@@ -95,3 +95,5 @@ so you can refer to items defined in one module from another module. You can do
 this by specifying absolute or relative paths. These paths can be brought into
 scope with a `use` statement so you can use a shorter path for multiple uses of
 the item in that scope. Module code is **private** by default.
+
+{{#quiz ../quizzes/ch07-05-separate-modules.toml}}
