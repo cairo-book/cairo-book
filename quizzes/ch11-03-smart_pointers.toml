@@ -35,7 +35,7 @@ answer.stdout = "Peter"
 
 [[questions]]
 type = "Tracing"
-prompt.prompt = """
+prompt.program = """
 use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
 
 fn main() {
