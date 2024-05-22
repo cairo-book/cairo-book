@@ -27,7 +27,7 @@ impl ScarbCmd {
         match self {
             ScarbCmd::Format() => vec!["-c"],
             ScarbCmd::Build() => vec![],
-            ScarbCmd::CairoRun() => vec![],
+            ScarbCmd::CairoRun() => vec!["--available-gas=200000000"],
             ScarbCmd::Test() => vec![],
         }
     }
