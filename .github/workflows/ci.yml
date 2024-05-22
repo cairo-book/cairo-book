@@ -33,7 +33,7 @@ jobs:
         shell: bash
 
       - name: Run cairo-listings and generate summary
-        run: cairo-listings -- verify >> $GITHUB_STEP_SUMMARY
+        run: cairo-listings verify >> $GITHUB_STEP_SUMMARY
         shell: bash
 
   typos:
