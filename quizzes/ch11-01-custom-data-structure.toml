@@ -6,116 +6,82 @@
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Which sentence best describes the behavior of Felt252Dict<T>?
+Which of these options can be used to define a custom data structure with a generic type?
 """
 prompt.distractors = [
-  "`Felt252Dict<T>` allows us to simulate the behavior of mutable data structures",
-  "`Felt252Dict<T>` is a specialized container for mapping felt252 keys to values of type T",
-  "`Felt252Dict<T>` is a framework for ensuring data immutability in voting systems",
+  "Array<T>",
+  "struct<T>",
+  "Felt252Dict<T>",
 ]
-answer.answer = "`Felt252Dict<T>` allows us to simulate the behavior of mutable data structures"
+answer.answer = "struct<T>"
+
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of these in cairo simulate the behavior of mutable data structure?
+"""
+prompt.distractors = [
+  "Array",
+  "struct",
+  "Felt252Dict",
+]
+answer.answer = "Felt252Dict"
 
 
 
 [[questions]]
 type = "Tracing"
 prompt.program = """
-struct Voting<T> {
-    voters: Felt252Dict<T>,
-}
-pub trait VotingTrait<T> {
-    fn init() -> Voting<T>;
-    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T);
-    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T;
+This program employs a custom  data structure along with felt252Dic to enable data mutability. What will be the output of this program?
+```
+struct BookStore<T> {
+    total_books: u64,
+    books:  Felt252Dict<T>,
 }
 
-impl VotingImpl<T, +Felt252DictValue<T>> of VotingTrait<T> {
-    fn init() -> Voting<T> {
-        Voting {  voters: Default::default() }
+pub trait BookTrait<T> {
+    fn init() -> BookStore<T>;
+    fn update_book<+Drop<T>>(ref self: BookStore<T>, author: felt252, book: T);
+    fn get_book<+Copy<T>>(ref self: BookStore<T>,  author: felt252) -> T;
+}
+
+impl BookImpl<T, +Felt252DictValue<T>> of BookTrait<T> {
+
+    fn init() -> BookStore<T> {
+        BookStore { total_books: 0, books: Default::default() }
     }
 
-    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T {
-        self.voters.get(candidate)
+    fn update_book<+Drop<T>>(ref self: BookStore<T>, author: felt252, book: T) {
+        self.books.insert(author, book);
+        self.total_books += 1;
     }
 
-    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T) {
-        self.voters.insert(candidate, vote);
+    fn get_book<+Copy<T>>(ref self: BookStore<T>, author: felt252) -> T {
+        self.books.get(author)
+    }
+
+  
+}
+
+impl BookStoreDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<BookStore<T>> {
+    fn destruct(self: BookStore<T>) nopanic {
+        self.books.squash();
     }
 }
 
-impl VotingDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<Voting<T>> {
-    fn destruct(self: Voting<T>) nopanic {
-        self.voters.squash();
-    }
-}
+
 fn main() {
-    let mut election = VotingTrait::init();
+    let mut book = BookTrait::init();
 
-    election.record_vote('Alice', 10);
+    book.update_book('George', '1984');
+    book.update_book('George', 'Beloved');
 
-    election.record_vote('Alice', 40);
-    let alice_vote_count = election.get_vote_count('Alice');
-
-    println!("{}", alice_vote_count)
+    let author_george = book.get_book('George');
+    println!("{}", author_george)
 }
+```
 """
 answer.doesCompile = true
-answer.stdout = "40"
-context = """
-This is a simple voting system that utilizes a Felt252Dict to record the votes of users. Thanks to the properties of Felt252Dict, it is possible to modify a user’s vote. The code is designed to compile successfully.
-"""
+answer.stdout = "Beloved"
 
-
-
-
-[[questions]]
-type = "MultipleChoice"
-prompt.prompt = """
-Which sentence best describes the behavior of the Voting program?
-```
-struct Voting<T> {
-    voters: Felt252Dict<T>,
-}
-pub trait VotingTrait<T> {
-    fn init() -> Voting<T>;
-    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T);
-    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T;
-}
-
-impl VotingImpl<T, +Felt252DictValue<T>> of VotingTrait<T> {
-    fn init() -> Voting<T> {
-        Voting {  voters: Default::default() }
-    }
-    fn get_vote_count<+Copy<T>>(ref self: Voting<T>, candidate: felt252) -> T {
-        self.voters.get(candidate)
-    }
-    fn record_vote<+Drop<T>>(ref self: Voting<T>, candidate: felt252, vote: T) {
-        self.voters.insert(candidate, vote);
-    }
-}
-
-impl VotingDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<Voting<T>> {
-    fn destruct(self: Voting<T>) nopanic {
-        self.voters.squash();
-    }
-}
-
-fn main() {
-    let mut election = VotingTrait::init();
-
-    election.record_vote('Alice', 10);
-
-    election.record_vote('Alice', 40);
-    let alice_vote_count = election.get_vote_count('Alice');
-
-    println!("{}", alice_vote_count)
-}
-
-```
-"""
-prompt.distractors = [
-  "The Voting program initializes a mutable voting system, recording and updating votes for candidates, and allowing retrieval of the current vote count for any candidate.",
-  "The Voting program creates an immutable list of candidates and their votes, which cannot be updated once initialized.",
-  "The Voting program records votes for candidates without allowing mutation of votes",
-]
-answer.answer = "The Voting program initializes a mutable voting system, recording and updating votes for candidates, and allowing retrieval of the current vote count for any candidate."
