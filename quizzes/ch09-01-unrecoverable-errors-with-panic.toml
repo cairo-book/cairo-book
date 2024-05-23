@@ -69,10 +69,10 @@ type = "MultipleChoice"
 prompt.prompt = """
 What is the purpose of the `#[panic_with]` attribute?
 """
-answer.answer = "If your function is marked with `#[panic_with]` and returns `Result::Err` or `Option::None`, it will cause a runtime panic."
+answer.answer = "To create a wrapper function that panics if the result is `None` or `Err`"
 prompt.distractors = [
-  "If your function is marked with `#[panic_with]` and returns `Result::Err` or `Option::None`, it will cause a runtime panic.",
-  "You can use the `#[panic_with]` attribute to indicate that a function will never panic",
+  "To create a wrapper function that panics if the result is `None` or `Err`",
+  "To indicate that a function will never panic",
   "To catch errors and provide a resolution",
 ]
 context = """
