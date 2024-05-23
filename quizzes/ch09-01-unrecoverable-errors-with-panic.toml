@@ -48,23 +48,18 @@ Code block 3 initializes an array with five elements and accesses the element at
 """
 
 [[questions]]
-type = "MultipleChoice"
-prompt.prompt = """
+type = "Tracing"
+prompt.program = """
 Will this program compiles when you run it? if yes what will be the output.
 
-```
 fn main() nopanic {
     println!("Hello, World!");
 }
-```
+
 """
 
-answer.answer = "The compiler raises an error indicating `Function is declared as nopanic but calls a function that may panic.`"
-prompt.distractors = [
-  "Yes, the program will compile and output `Hello, World!`",
-  "The compiler raises an error indicating `Function is declared as nopanic but calls a function that may panic.`",
-  "The function is automatically converted to a panic-handling function",
-]
+answer.doesCompile = false
+
 context = """
 Cairo's compiler detects potential panics in functions declared as nopanic when they call functions that may panic, ensuring robust error handling.
 """
@@ -77,7 +72,7 @@ What is the purpose of the `panic_with` attribute?
 """
 answer.answer = "To create a wrapper function that panics if the result is `None` or `Err`"
 prompt.distractors = [
-  "You can use the `panic_with` notation to indicate that a function will never panic",
+  "You can use the `#[panic_with]` notation to indicate that a function will never panic",
   "To create a wrapper function that panics if the result is `None` or `Err`",
   "To catch errors and provide a resolution",
 ]
