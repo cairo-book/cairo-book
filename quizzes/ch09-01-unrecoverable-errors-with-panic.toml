@@ -34,7 +34,7 @@ or deliberately with assertions or by invoking the ```panic``` function.
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Based on the provided code blocks, which code block will cause an inadvertent panic in Cairo?
+Based on the provided code blocks, which of the following functions will NOT cause a runtime panic?
 
 ```
 fn main() {
@@ -42,11 +42,6 @@ fn main() {
         panic!("2");
     }
     println!("This line isn't reached");
-}
-```
-```
-fn main() {
-    panic_with_felt252(2);
 }
 ```
 ```
@@ -59,13 +54,27 @@ fn main() {
     println!("Value at index {}: {}", index, value);
 }
 ```
+```
+use core::array::ArrayTrait;
+fn main(){
+    let mut arr = ArrayTrait::<u128>::new();
+    arr.append(5);
+    let index_to_access = 0;
+    match arr.get(index_to_access) {
+        Option::Some(x) => {
+           *x.unbox();
+        },
+        Option::None => { panic!("out of bounds") }
+    }
+}
+```
 """
-answer.answer = "`Code Block 3`"
+answer.answer = "Code Block 3"
 prompt.distractors = [
-  "`Code Block 1`",
-  "`Code Block 2`",
-  "`Code Block 1 and Code Block 2`",
-  "`Code Block 3`",
+  "Code Block 1",
+  "Code Block 2",
+  "Code Block 2 and Code Block 3",
+  "Code Block 3",
 ]
 context = """
 Code Block 3 accesses an array out of bounds, leading to an inadvertent panic as the program attempts to access an invalid memory location. Code Block 1 and Code Block 2 are intentionally causing panics using panic! and panic_with_felt252, respectively, making them deliberate panics.
@@ -74,8 +83,8 @@ Code Block 3 accesses an array out of bounds, leading to an inadvertent panic as
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-What happens if you try to compile a function declared as `nopanic` that calls a function that may panic in Cairo?
-
+What happens if you try to compile a function declared as `nopanic` that calls a function that may
+panic in Cairo?
 """
 answer.answer = "The compiler raises an error indicating a potential panic"
 prompt.distractors = [
@@ -84,7 +93,8 @@ prompt.distractors = [
   "The function is automatically converted to a panic-handling function",
 ]
 context = """
-Cairo's compiler detects potential panics in functions declared as nopanic when they call functions that may panic, ensuring robust error handling.
+Cairo's compiler detects potential panics in functions declared as nopanic when they call functions
+that may panic, ensuring robust error handling.
 """
 
 [[questions]]
