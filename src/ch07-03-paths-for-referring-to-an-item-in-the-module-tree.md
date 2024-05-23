@@ -76,6 +76,8 @@ In the absolute path, we start with the crate root, the root of our crate’s mo
 
 In the relative path, the logic is the same as the absolute path except for the first step: rather than starting from the crate root, the path starts from `front_of_house`. The `front_of_house` module is defined within the same module as `eat_at_restaurant`, so the relative path starting from the module in which `eat_at_restaurant` is defined works. Then, because `hosting` and `add_to_waitlist` are marked with `pub`, the rest of the path works, and this function call is valid!
 
+{{#quiz ../quizzes/ch07-03-paths-in-module-tree-1.toml}}
+
 ## Starting Relative Paths with `super`
 
 We can construct relative paths that begin in the parent module, rather than the current module or the crate root, by using `super` at the start of the path. This is like starting a filesystem path with the `..` syntax. Using `super` allows us to reference an item that we know is in the parent module, which can make rearranging the module tree easier when the module is closely related to the parent, but the parent might be moved elsewhere in the module tree someday.
@@ -102,3 +104,5 @@ We can also use `pub` to designate structs and enums as public, but there are a 
 - In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the enum keyword.
 
 There’s one more situation involving `pub` that we haven’t covered, and that is our last module system feature: the `use` keyword. We’ll cover `use` by itself first, and then we’ll show how to combine `pub` and `use`.
+
+{{#quiz ../quizzes/ch07-03-paths-in-module-tree-2.toml}}

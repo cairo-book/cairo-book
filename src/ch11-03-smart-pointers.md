@@ -17,8 +17,10 @@ Boxes have very little performance overhead, other than writing their inner valu
 - When you have a type whose size can’t be known at compile time and you want to use a value of that type in a context that requires an exact size
 - When you have a large amount of data and you want to transfer ownership but ensure the data won’t be copied when you do so
 
-We’ll demonstrate the first situation in the [“Enabling Recursive Types with Boxes”](./ch11-03-smart-pointers.md#enabling-recursive-types-with-nullable-boxes) section.
+We’ll demonstrate the first situation in the [“Enabling Recursive Types with Boxes”][nullable recursive types] section.
 In the second case, transferring ownership of a large amount of data can take a long time because the data is copied around in memory. To improve performance in this situation, we can store the large amount of data in the boxed segment using a box type. Then, only the small amount of pointer data is copied around in memory, while the data it references stays in one place on the boxed segment.
+
+[nullable recursive types]: ./ch11-03-smart-pointers.md#enabling-recursive-types-with-nullable-boxes
 
 ### Using a `Box<T>` to Store Data in the Boxed Segment
 
@@ -74,4 +76,6 @@ The illustration above demonstrates how the memory behaves in both cases. The fi
 
 If we try to access an element that does not exist in a dictionary, the code will fail if the `zero_default` method cannot be called.
 
-[Chapter 3.2](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively) about dictionaries thoroughly explains how to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
+[Chapter 3.2][dictionary nullable span] about dictionaries thoroughly explains how to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
+
+[dictionary nullable span]: /ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
