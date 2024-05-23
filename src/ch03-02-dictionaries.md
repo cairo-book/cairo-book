@@ -188,7 +188,7 @@ As a finalizing note, these two methods are implemented in a similar way to how 
 
 One restriction of `Felt252Dict<T>` that we haven't talked about is the trait `Felt252DictValue<T>`.
 This trait defines the `zero_default` method which is the one that gets called when a value does not exist in the dictionary.
-This is implemented by some common data types, such as most unsigned integers, `bool` and `felt252` - but it is not implemented for more complex ones types such as arrays, structs (including `u256`), and other types from the core library.
+This is implemented by some common data types, such as most unsigned integers, `bool` and `felt252` - but it is not implemented for more complex types such as arrays, structs (including `u256`), and other types from the core library.
 This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations in order to make the data type a valid dictionary value type.
 To compensate this, you can wrap your type inside a `Nullable<T>`.
 

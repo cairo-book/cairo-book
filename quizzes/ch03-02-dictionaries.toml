@@ -12,7 +12,7 @@ fn main() {
 answer.doesCompile = true
 answer.stdout = "100"
 context = """
-The code compiles and runs without panicking because the 'get' method returns the default value for `u64` when the key is not found.
+The code compiles and runs without panicking because `get` returns the default value for `u64` when the key is not found.
 The value of `john_balance` is `0 + 100 = 100`.
 """
 id = "8b538a1f-0cf9-4c57-8304-c4b07e0134dd"
@@ -55,7 +55,7 @@ fn main() {
 prompt.distractors = ["Alex : -50", "Alex : 0", "Alex : 100"]
 answer.answer = "There will be a runtime panic."
 context = """
-The value type of this dictionary is `u64`, which is an unsigned integer. So the variable `alex_balance` is a unsigned integer that can't be negative.
+The value type of this dictionary is `u64`, which is an unsigned integer. So the variable `alex_balance` is an unsigned integer that can't be negative.
 The subtraction operation will cause a runtime panic.
 """
 id = "8fe876cf-4373-42ca-ae2c-4d13ae23dbed"
@@ -91,7 +91,7 @@ id = "f78d9b38-1d3a-4b00-a014-9c618070738c"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Let's consider the following instructions and the entry table associated:
+Let's consider the following instructions and the associated entry table:
 ```
 balances.insert('Alex', 100);
 balances.insert('Maria', 200);
