@@ -16,7 +16,6 @@ it entails memory handling through strict type checking and ownership rules that
 [[questions]]
 type = "Tracing"
 prompt.program = """
-```
 #[derive(Drop)]
 struct Student {
     name: ByteArray,
@@ -30,7 +29,6 @@ fn main() {
     student1 = BoxTrait::new(Student { name: "James", age: 18, id: 56789 });
     println!("{}", student2.unbox().name);
 }
-```
 """
 answer.doesCompile = true
 answer.stdout = "Peter"
