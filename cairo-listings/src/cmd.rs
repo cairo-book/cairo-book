@@ -23,9 +23,9 @@ impl ScarbCmd {
         vec!["--manifest-path".to_string(), manifest_path.to_string()]
     }
 
-    fn default_args(&self) -> Vec<&str> {
+    fn default_args(&self) -> Vec<String> {
         match self {
-            ScarbCmd::Format() => vec!["-c"],
+            ScarbCmd::Format() => vec!["-c".to_string()],
             ScarbCmd::Build() => vec![],
             ScarbCmd::CairoRun() => vec![],
             ScarbCmd::Test() => vec![],
@@ -37,17 +37,17 @@ impl ScarbCmd {
         command.args(self.manifest_option(manifest_path));
         command.arg(self.as_str());
 
-        let args_not_in_default: Vec<&String> = args
+        let default_args = self.default_args();
+        let all_args = default_args
             .iter()
-            .filter(|arg| !self.default_args().contains(&arg.as_str()))
-            .collect();
-        command.args(self.default_args());
-        command.args(args_not_in_default);
+            .chain(args.iter().filter(|arg| !default_args.contains(arg)));
 
-        let output = command.output().expect("Failed to execute scarb");
+        command.args(all_args);
+
+        let output = command.output().map_err(|_| "Failed to execute scarb")?;
 
         if !output.status.success() {
-            return Err(String::from_utf8_lossy(&output.stdout).to_string());
+            return Err(String::from_utf8_lossy(&output.stdout).into());
         }
 
         Ok(output)

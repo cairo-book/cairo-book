@@ -1,3 +1,4 @@
+//TAG: does_not_run
 fn main() {
     let my_number: u8 = 0;
 
