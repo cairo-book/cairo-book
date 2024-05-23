@@ -67,15 +67,15 @@ Cairo's compiler detects potential panics in functions declared as nopanic when 
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-What is the purpose of the `panic_with` attribute?
-
+What is the purpose of the `#[panic_with]` attribute?
 """
-answer.answer = "To create a wrapper function that panics if the result is `None` or `Err`"
+answer.answer = "If your function is marked with `#[panic_with]` and returns `Result::Err` or `Option::None`, it will cause a runtime panic."
 prompt.distractors = [
-  "You can use the `#[panic_with]` notation to indicate that a function will never panic",
-  "To create a wrapper function that panics if the result is `None` or `Err`",
+  "If your function is marked with `#[panic_with]` and returns `Result::Err` or `Option::None`, it will cause a runtime panic.",
+  "You can use the `#[panic_with]` attribute to indicate that a function will never panic",
   "To catch errors and provide a resolution",
 ]
 context = """
 If your function is marked with `#[panic_with]` and returns `Result::Err` or `Option::None`, it will cause a runtime panic.
 """
+
