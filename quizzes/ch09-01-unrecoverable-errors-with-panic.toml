@@ -36,7 +36,7 @@ fn main(){
 }
 ```
 """
-answer.answer = "`Code Block 4`"
+answer.answer = "`Code Block 3`"
 prompt.distractors = [
   "`Code Block 1`",
   "`Code Block 2`",
@@ -44,7 +44,7 @@ prompt.distractors = [
   "`Code Block 3`",
 ]
 context = """
-Code  block 4 initializes an array with three elements and accesses the element at index 2, which is within bounds. This means the code will compile and run without causing any panics.
+Code block 3 initializes an array with five elements and accesses the element at index 0, which is within bounds. This means the code will compile and run without causing any panics.
 """
 
 [[questions]]
