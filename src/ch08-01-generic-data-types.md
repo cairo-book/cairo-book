@@ -20,7 +20,7 @@ The `largest_list` function compares two lists of the same type and returns the 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_02_with_tdrop/src/lib.cairo}}
 ```
 
-The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. The `main` function remains unchanged, the compiler is smart enough to deduce which concrete type is being used and if it implements the `Drop` trait.
+The new `largest_list` function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. This is what we call _trait bounds_. The `main` function remains unchanged, the compiler is smart enough to deduce which concrete type is being used and if it implements the `Drop` trait.
 
 ### Constraints for Generic Types
 
@@ -40,7 +40,7 @@ When indexing on `list`, the value results in a snap of the indexed element, unl
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_04_with_tcopy/src/lib.cairo}}
 ```
 
-### Anonymous Generic Implementation Parameter (`+` operator)
+### Anonymous Generic Implementation Parameter (`+` Operator)
 
 Until now, we have always specified a name for each implementation of the required generic trait: `TPartialOrd` for `PartialOrd<T>`, `TDrop` for `Drop<T>`, and `TCopy` for `Copy<T>`.
 
