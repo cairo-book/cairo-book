@@ -1,4 +1,3 @@
-//TAG: ignore_fmt
 #[derive(Drop)]
 struct User {
     active: bool,

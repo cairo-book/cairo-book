@@ -1,4 +1,3 @@
-// TAG: ignore_fmt
 use core::byte_array;
 #[derive(Drop)]
 struct User {
