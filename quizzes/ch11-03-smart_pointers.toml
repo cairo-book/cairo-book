@@ -16,6 +16,7 @@ it entails memory handling through strict type checking and ownership rules that
 [[questions]]
 type = "Tracing"
 prompt.program = """
+```
 #[derive(Drop)]
 struct Student {
     name: ByteArray,
@@ -29,13 +30,16 @@ fn main() {
     student1 = BoxTrait::new(Student { name: "James", age: 18, id: 56789 });
     println!("{}", student2.unbox().name);
 }
+```
 """
 answer.doesCompile = true
 answer.stdout = "Peter"
 
 [[questions]]
-type = "Tracing"
-prompt.program = """
+type = "MultipleChoice"
+prompt.prompt = """
+Which of the following statement is TRUE when the following program is run with `scarb cairo-run`?
+```
 use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
 
 fn main() {
@@ -52,9 +56,14 @@ fn main() {
     };
     println!("Exams {}", *record.at(4));
 }
+```
 """
-answer.doesCompile = false
-answer.lineNumber = 12
+answer.answer = "compiles with a 'Index out of bounds' panic because `zero_default` method is not implemented."
+prompt.distractors = [
+	"compiles successfully with the output `Exams 90`",
+	"compiles with a 'No value found' panic because it implements the `zero_default` method.",
+	"Fails to compile with `error: Invalid path.`"
+]
 context = """
 The `Index out of bounds` error occurs due to an attempt to access 
 the fifth element of a four-element array, which is not allowed in Cairo.
