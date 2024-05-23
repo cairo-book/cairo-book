@@ -1,7 +1,7 @@
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Based on the provided code blocks, which code block will cause an inadvertent panic in Cairo?
+Based on the provided code blocks, Which of the following functions will NOT cause a runtime panic?
 
 ```
 fn main() {
@@ -9,11 +9,6 @@ fn main() {
         panic!("2");
     }
     println!("This line isn't reached");
-}
-```
-```
-fn main() {
-    panic_with_felt252(2);
 }
 ```
 ```
@@ -26,45 +21,48 @@ fn main() {
     println!("Value at index {}: {}", index, value);
 }
 ```
+```
+use core::array::ArrayTrait;
+fn main(){
+    let mut arr = ArrayTrait::<u128>::new();
+    arr.append(5);
+    let index_to_access = 0; 
+    match arr.get(index_to_access) {
+        Option::Some(x) => {
+           *x.unbox();
+        },
+        Option::None => { panic!("out of bounds") }
+    }
+}
+```
 """
-answer.answer = "`Code Block 3`"
+answer.answer = "`Code Block 4`"
 prompt.distractors = [
   "`Code Block 1`",
   "`Code Block 2`",
-  "`Code Block 1 and Code Block 2`",
+  "`Code Block 2 and Code Block 3`",
   "`Code Block 3`",
 ]
 context = """
-Code Block 3 accesses an array out of bounds, leading to an inadvertent panic as the program attempts to access an invalid memory location. Code Block 1 and Code Block 2 are intentionally causing panics using panic! and panic_with_felt252, respectively, making them deliberate panics.
+Code  block 4 initializes an array with three elements and accesses the element at index 2, which is within bounds. This means the code will compile and run without causing any panics.
 """
 
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Which panic handling mechanism is generally preferred in Cairo?
+Will this program compiles when you run it? if yes what will be the output.
 
+```
+fn main() nopanic {
+    println!("Hello, World!");
+}
+```
 """
-answer.answer = "`panic_with_felt252`"
+
+answer.answer = "The compiler raises an error indicating `Function is declared as nopanic but calls a function that may panic.`"
 prompt.distractors = [
-  "`panic!`",
-  "`panic_with_felt252`",
-  "`panic`",
-
-]
-context = """
-In Cairo, using the `panic_with_felt252` function is generally preferred due to its clearer and more concise expression of intent compared to other panic handling mechanisms.
-"""
-
-[[questions]]
-type = "MultipleChoice"
-prompt.prompt = """
-What happens if you try to compile a function declared as `nopanic` that calls a function that may panic in Cairo?
-
-"""
-answer.answer = "The compiler raises an error indicating a potential panic"
-prompt.distractors = [
-  "The program compiles without any errors",
-  "The compiler raises an error indicating a potential panic",
+  "Yes, the program will compile and output `Hello, World!`",
+  "The compiler raises an error indicating `Function is declared as nopanic but calls a function that may panic.`",
   "The function is automatically converted to a panic-handling function",
 ]
 context = """
@@ -74,15 +72,15 @@ Cairo's compiler detects potential panics in functions declared as nopanic when 
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-What is the purpose of the panic_with attribute in Cairo?
+What is the purpose of the `panic_with` attribute?
 
 """
-answer.answer = "To create a wrapper function that panics on specific conditions"
+answer.answer = "To create a wrapper function that panics if the result is `None` or `Err`"
 prompt.distractors = [
-  "To handle runtime errors gracefully",
-  "To create a wrapper function that panics on specific conditions",
+  "You can use the `panic_with` notation to indicate that a function will never panic",
+  "To create a wrapper function that panics if the result is `None` or `Err`",
   "To catch errors and provide a resolution",
 ]
 context = """
-The panic_with attribute in Cairo is used to mark a function that returns an Option or Result. It creates a wrapper function for the annotated function that panics if the function returns None or Err, using the specified data as the panic error
+If your function is marked with `#[panic_with]` and returns `Result::Err` or `Option::None`, it will cause a runtime panic.
 """
