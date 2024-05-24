@@ -66,6 +66,7 @@ prompt.distractors = """
     "A trait bound ensures that a generic type implements various behaviors"
 answer.answer = "A trait bound demand that a generic type adopts specific behavior 
 defined by a trait"
+"""
 context = """
 The function smallest_element is bound to types T that must implement PartialOrd, 
 Copy, and Drop traits. T must support comparisons (PartialOrd), copying (Copy), 
