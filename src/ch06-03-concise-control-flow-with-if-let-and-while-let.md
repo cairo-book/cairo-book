@@ -39,7 +39,7 @@ between `match` and `if let` depends on what you’re doing in your particular
 situation and whether gaining conciseness is an appropriate trade-off for
 losing exhaustive checking.
 
-In other words, you can think of `if let` as syntax sugar for a `match` that
+In other words, you can think of `if let` as syntactic sugar for a `match` that
 runs code when the value matches one pattern and then ignores all other values.
 
 We can include an `else` with an `if let`. The block of code that goes with the
