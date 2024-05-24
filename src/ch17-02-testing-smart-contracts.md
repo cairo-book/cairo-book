@@ -71,9 +71,9 @@ Determining the behavior that your contract should respect is the first step in 
 
 Once our contract is deployed, we want to assert that the initial values are set as expected. If our contract has an entrypoint that returns the value of a storage variable, we can call this entrypoint. Otherwise, we can use the `load` function from `snforge` to load the value of a storage variable inside our contract, even if not exposed by an entrypoint.
 
-#### Mocking the Caller Address with `start_prank`
+#### Mocking the Caller Address with `start_cheat_caller_address`
 
-The security of our factory relies on the owner being the only one able to make pizzas and transfer ownership. To test this, we can use the `stark_prank` function to mock the caller address and assert that the contract behaves as expected.
+The security of our factory relies on the owner being the only one able to make pizzas and transfer ownership. To test this, we can use the `start_cheat_caller_address` function to mock the caller address and assert that the contract behaves as expected.
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_owner}}
@@ -82,7 +82,7 @@ The security of our factory relies on the owner being the only one able to make 
 {{#label test-owner}}
 <span class="caption">Listing {{#ref test-owner}}: Testing ownership of the contract by mocking the caller address </span>
 
-Using `stark_prank`, we call the `change_owner` function first as the owner, and then as a different address. We assert that the operation fails when the caller is not the owner, and that the owner is updated when the caller is the owner.
+Using `start_cheat_caller_address`, we call the `change_owner` function first as the owner, and then as a different address. We assert that the operation fails when the caller is not the owner, and that the owner is updated when the caller is the owner.
 
 #### Capturing Events with `spy_events`
 
