@@ -8,7 +8,7 @@ struct Student {
 }
 
 fn main(){
-    let mut student1 = Student {name: 'John Doe', age: 20, isActive: true, };
+    let mut student1 = Student { name: 'John Doe', age: 20, isActive: true, };
 
     let mut age = student1.age;
     age = 18;
@@ -31,19 +31,13 @@ struct Student {
     isPunctual: bool,
 }
 
-fn main(){
-    let mut student1 = Student{
+fn main() {
+    let mut student1 = Student { 
         name: 'John Doe', age: 18, isActive: true, isPunctual: true
     };
-
     student1.age += 1;
-
-    let mut student2 = Student{
-        ..student1
-    };
-
+    let mut student2 = Student { ..student1 };
     student1.age += 2;
-
     println!("{}", student2.age);
 }
 """
