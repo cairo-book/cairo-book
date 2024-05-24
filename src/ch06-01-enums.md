@@ -28,7 +28,7 @@ and instantiate it as follows:
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_with_values_example/src/lib.cairo:here}}
 ```
 
-In this code, each variant is associated with a `u128` value, representing the direction in degrees. We will see in the next example that it is also possible to associate different data types with each variant.
+In this code, each variant is associated with a `u128` value, representing the direction in degrees. In the next example, we will see that it is also possible to associate different data types with each variant.
 
 It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a direction. You can learn more about it in the [Match Control Flow Construct][match] section.
 
