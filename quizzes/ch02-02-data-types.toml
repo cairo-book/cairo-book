@@ -40,3 +40,4 @@ answer.lineNumber = 2
 context = """
 The type `felt32` does not exist. Proper field type is `felt252`.
 """
+

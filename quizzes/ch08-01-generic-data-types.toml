@@ -1,43 +1,4 @@
 [[questions]]
-type = "ShortAnswer"
-prompt.prompt = """
-How would you define a generic function that takes any type of integer 
-and returns its square? Provide a Cairo code snippet as an example.
-"""
-answer.answer = """
-You can define a generic function in Cairo using the `fn` keyword followed by the function 
-name and generic type parameters in angle brackets. For example:
-```
-fn square<T>(x: T) -> T {
-    return x * x;
-}
-```
-"""
-
-[[questions]]
-type = "Tracing"
-prompt.prompt = """
-fn largest<T> (arr1: Array<T>, arr2: Array<T>) -> Array<T> {
-    if arr1.len() > arr2.len() {
-        arr1
-    } else {
-        arr2
-    }
-}
-
-fn main() {
-    let mut arr1 = array![2, 1, 5, 4, 9];
-    let mut arr2 = array![2, 1, 5, 4, 9, 3, 1];
-
-    let largestArr = largest(arr1, arr2);
-}
-"""
-answer.doesCompile = false
-context = "The code won't compile due to the compiler's inability to ensure that an Array<T> 
-is droppable in the main function. For any generic type used, T must implement the Drop trait 
-for it to compile successfully"
-
-[[questions]]
 type = "Tracing"
 prompt.prompt = """
 struct Student<T> {
@@ -57,21 +18,73 @@ fn main(){
 """
 answer.doesCompile = true
 answer.stdout = "9"
+context = """
+This compiles for several reasons, including accurate trait implementations, 
+proper function calls and returns, correct memory management, Adherence to Cairo VM's 
+Constraints, proper variable scope handling, and proper type declarations and usage.
+"""
 
 [[questions]]
 type = "Tracing"
 prompt.prompt = """
 #[derive(Drop)]
-struct Wallet<T, E> {
+struct wallet<T>{
     balance: T,
-    account: E
+    address: W
 }
 
 fn main() {
-    let owner = Wallet { balance: 3, account: 100 };
-    print!("{}", owner.account)
+    let mut account = wallet{ balance: 10, address: 200 };
+
+    let balance = account.balance;
+    print!("wallet balance is {}", balance);
+    let address = account.address;
+    print!("wallet address is {}", address);
 }
 """
-answer.doesCompile = true
-answer.stdout = "100"
+answer.doesCompile = false
+context = """
+The code fails to compile because the struct fields have different types. To address this, 
+another generic type should be introduced after 'T' in the struct definition to maintain 
+consistency. Let's utilize 'W', as it was previously employed as a type for the 'address' 
+field. Consequently, the struct should be implemented as follows:
+```
+struct Wallet<T, W> { 
+    balance: T, 
+    address: W 
+}
+```
+"""
 
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What is a trait bound on a generic type"
+prompt.distractor = """
+    "This is to bound traits together",
+    "A trait bound make it possible for a generic function to compile",
+    "A trait bound ensures that a generic type implements various behaviors"
+answer.answer = "A trait bound demand that a generic type adopts specific behavior 
+defined by a trait"
+context = """
+For example, we have a code snippet of a function that captures a snapshot of an array 
+and returns its smallest element by iterating through the array. This function is trait bound.
+```
+fn smallest_element<T, +PartialOrd<T>, +Copy<T>, +Drop<T>>(list: @Array<T>) -> T {
+    let mut smallest = *list[0];
+    let mut index = 1;
+    loop {
+        if index >= list.len() {
+            break smallest;
+        }
+        if *list[index] < smallest {
+            smallest = *list[index];
+        }
+        index = index + 1;
+    }
+}
+```
+The function smallest_element is bound to types T that must implement PartialOrd, 
+Copy, and Drop traits. T must support comparisons (PartialOrd), copying (Copy), 
+and must be droppable (Drop). The function takes a snapshot of an array 
+of type T and returns the smallest element found in the array
+"""
