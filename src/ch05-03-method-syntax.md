@@ -111,10 +111,10 @@ blocks here, but this is valid syntax.
 ## Summary
 
 Structs let you create custom types that are meaningful for your domain. By
-using structs, you can keep associated pieces of data connected to each other
-and name each piece to make your code clear. In `trait` and `impl` blocks, you
-can define methods, which are functions associated to a type and let you specify
-the behavior that instances of your type have.
+using structs, you can keep related pieces of data together and name each piece
+to make your code clear. In `trait` and `impl` blocks, you can define methods, which
+are functions associated with a type, allowing you to specify the behavior that
+instances of your type have.
 
 But structs aren’t the only way you can create custom types: let’s turn to
 Cairo’s enum feature to add another tool to your toolbox.
