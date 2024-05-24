@@ -1,0 +1,33 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which line of code is correct to return the error code `2` and the error message `This is the error message`?
+"""
+prompt.distractors = [
+  """`panic(array![2, "This is the error message"]);`""",
+  """`panic!("2", "This is the error message");`""",
+  """`core::panic_with_felt252(2, 'This is the error message');`""",
+]
+answer.answer = """`panic(array![2, 'This is the error message']);`"""
+context = """
+The macro `panic!` takes one and only one `ByteArray` argument.
+The function `core::panic_with_felt252` takes one and only one `Felt252` argument.
+The function `panic` takes an array of `Felt252` elements as an argument and returns it.
+"""
+id = "5bf03883-59ab-4063-85e8-8c1d2fafa3e3"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of the following is **NOT** a good reason to use a panic ?
+"""
+prompt.distractors = [
+  "The program is about to perform a dangerous operation",
+  "The program should stop executing as soon as possible",
+  "The program has reached an unrecoverable error state",
+]
+answer.answer = "The program has reached an error state which should be communicated to a caller function"
+context = """
+A panic should not be used to communicate failure *within* the program. The default assumption is that caller functions will not try to catch panics.
+"""
+id = "0e7bb9f9-af5a-441d-83b4-bcd0a97daf70"
