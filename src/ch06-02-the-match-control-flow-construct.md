@@ -17,7 +17,7 @@ Let’s break down the `match` expression in the `value_in_cents` function. Firs
 
 Next are the `match` arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value `Coin::Penny` and then the `=>` operator that separates the pattern and the code to run. The code in this case is just the value `1`. Each arm is separated from the next with a comma.
 
-When the `match` expression executes, it compares the resultant value against the pattern of each arm in the order they are given. If a pattern matches the value, the code associated with that pattern is executed. If the pattern doesn’t match, execution continues to the next arm, much like in a coin-sorting machine. We can have as many arms as we need; in the above example, our `match` has four arms.
+When the `match` expression executes, it compares the resultant value against the pattern of each arm, in the order they are given. If a pattern matches the value, the code associated with that pattern is executed. If that pattern doesn’t match the value, execution continues to the next arm, much as in a coin-sorting machine. We can have as many arms as we need: in the above example, our `match` has four arms.
 
 The code associated with each arm is an expression, and the resultant value of the expression in the matching arm is the value that gets returned for the entire match expression.
 
