@@ -154,3 +154,5 @@ In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements t
 <span class="caption"> Listing {{#ref negative-impls}}: Using negative impls to enforce that a type cannot implement both `Producer` and `Consumer` traits simultaneously</span>
 
 In the `main` function, we create instances of `ProducerType`, `AnotherType`, and `AThirdType`. We then call the `produce` method on the `producer` instance and pass the result to the `consume` method on the `another_type` and `third_type` instances. Finally, we try to call the `consume` method on the `producer` instance, which results in a compile-time error because `ProducerType` does not implement the `Consumer` trait.
+
+{{#quiz ../quizzes/ch08-02-traits.toml}}
