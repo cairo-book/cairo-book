@@ -38,10 +38,10 @@ fn main() {
         match args[1].as_str() {
             "verify" => run_verification(),
             "output" => output::process_outputs(),
-            _ => println!("Invalid command. Usage: cairo-listings -- [verify|output]"),
+            _ => println!("Invalid command. Usage: cairo-listings [verify|output]"),
         }
     } else {
-        println!("Please provide a command. Usage: cairo-listings -- [verify|output]");
+        println!("Please provide a command. Usage: cairo-listings [verify|output]");
     }
 }
 
@@ -149,7 +149,12 @@ fn process_file(manifest_path: &str) {
             && !tags.contains(&Tags::DoesNotCompile)
             && !cfg.run_skip
         {
-            run_command(ScarbCmd::CairoRun(), manifest_path, file_path, vec![]);
+            run_command(
+                ScarbCmd::CairoRun(),
+                manifest_path,
+                file_path,
+                vec!["--available-gas=200000000".to_string()],
+            );
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
