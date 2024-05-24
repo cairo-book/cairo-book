@@ -94,7 +94,7 @@ Let's create the method `new` which creates a `Rectangle` from a `width` and a `
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:main}}
 ```
 
-Note that the `compare` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `RectangleTrait::compare(rect1, rect2)`, it is called with `rect1.compare(rect2)`.
+Note that the `compare` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `RectangleTrait::compare(@rect1, @rect2)`, it is called with `rect1.compare(@rect2)`.
 
 ## Multiple Traits and `impl` Blocks
 
