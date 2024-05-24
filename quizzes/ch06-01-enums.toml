@@ -12,8 +12,8 @@ fn foo(x:u8) {
 """
 answer.doesCompile = false
 context = """
-Cairo does not have null pointers, so the null keyword does not exist. 
-An Option type should be used to represent the possibility of an object being null.
+Cairo does not have null pointers, so the `null` keyword does not exist. 
+An `Option` type should be used to represent the possibility of an object being null.
 """
 id = "8b786183-ef9f-43f8-89a6-0e9c0e87c576"
 
@@ -41,6 +41,6 @@ prompt.distractors = [
 ]
 answer.answer = "The struct contains `Option` types, which are only intended to wrap structs"
 context = """
-It's perfectly fine to have structs contain `Option` types as fields (the question asked for which is **NOT** a valid reason). But if your data structure has invariants like "exactly one of two optional fields should be `Some`", then that invariant is better ensured by use of an enum.
+It's perfectly fine to have structs contain `Option` types as fields (the question asked for a statement which does **NOT** describe a valid reason). But if your data structure has invariants like "exactly one of two optional fields should be `Some`", then that invariant is better ensured by the use of an enum.
 """
 id = "0d9b6f65-bfac-447f-a2d4-a650abc8bc01"
