@@ -86,7 +86,7 @@ In Cairo, we can also define a method which doesn't act on a specific instance (
 
 These methods are often used to build new instances but they may have a lot of different utilities.
 
-Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `compare` which compares two `Rectangle` instances, and returns `true` if both rectangle have the same area and `false` otherwise.
+Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `compare` which compares two `Rectangle` instances, and returns `true` if both rectangles have the same area and `false` otherwise.
 
 ```rust
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:trait_impl}}
