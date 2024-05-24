@@ -9,8 +9,9 @@ use source::pizza::PizzaFactory::{ownerContractMemberStateTrait, InternalTrait};
 use starknet::{ContractAddress, contract_address_const};
 
 use snforge_std::{
-    declare, ContractClassTrait, ContractClass, start_cheat_caller_address, stop_cheat_caller_address, SpyOn,
-    EventSpy, EventAssertions, spy_events, EventFetcher, load, cheatcodes::storage::load_felt252
+    declare, ContractClassTrait, ContractClass, start_cheat_caller_address,
+    stop_cheat_caller_address, SpyOn, EventSpy, EventAssertions, spy_events, EventFetcher, load,
+    cheatcodes::storage::load_felt252
 };
 
 fn owner() -> ContractAddress {
