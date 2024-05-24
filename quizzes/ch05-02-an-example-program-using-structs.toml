@@ -12,13 +12,13 @@ fn perimeter(r: Rectangle) -> u64 {
 }
 
 fn main() {
-    let rectangle1 = Rectangle { width: 20, height: 10, };
-    let p = perimeter(rectangle1);
-    println!("2 * ({} + {}) = {}", rectangle1.width, rectangle1.height, p);
+    let rectangle = Rectangle { width: 20, height: 10, };
+    let p = perimeter(rectangle);
+    println!("2 * ({} + {}) = {}", rectangle.width, rectangle.height, p);
 }
 """
 answer.doesCompile = false
-context = "The area function takes ownership of its argument rectangle1, which doesn't implement `Copy`. Calling perimeter(rectangle1) therefore moves rectangle1, meaning it cannot be used on the next line."
+context = "The area function takes ownership of its argument rectangle, which doesn't implement `Copy`. Calling perimeter(rectangle) therefore moves rectangle, meaning it cannot be used on the next line."
 
 [[questions]]
 type = "Tracing"
