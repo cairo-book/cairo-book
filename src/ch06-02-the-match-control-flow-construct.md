@@ -60,7 +60,7 @@ If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` woul
 
 In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same.
 
-Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there is no value inside, the function should return `None` and not attempt to perform any more operations.
+Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there is no value inside, the function should return the `None` value and not attempt to perform any operations.
 
 This function is very easy to write, thanks to `match`, and will look like Listing {{#ref match-option}}.
 
