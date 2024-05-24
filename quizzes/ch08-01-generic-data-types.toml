@@ -1,3 +1,4 @@
+
 [[questions]]
 type = "Tracing"
 prompt.prompt = """
@@ -59,7 +60,7 @@ struct Wallet<T, W> {
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = "What is a trait bound on a generic type"
-prompt.distractor = """
+prompt.distractors = """
     "This is to bound traits together",
     "A trait bound make it possible for a generic function to compile",
     "A trait bound ensures that a generic type implements various behaviors"
