@@ -109,7 +109,7 @@ explicitly set should have the same value as the fields in the given instance.
 
 The code in Listing {{#ref update-syntax}} also creates an instance of `user2` that has a
 different value for `email` but has the same values for the `username`,
-`active`, and `sign_in_count` fields as `user1`. The `..user1` must come last
+`active`, and `sign_in_count` fields as `user1`. The `..user1` part must come last
 to specify that any remaining fields should get their values from the
 corresponding fields in `user1`, but we can choose to specify values for as
 many fields as we want in any order, regardless of the order of the fields in
