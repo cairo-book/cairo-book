@@ -68,7 +68,6 @@ defined by a trait"
 context = """
 For example, we have a code snippet of a function that captures a snapshot of an array 
 and returns its smallest element by iterating through the array. This function is trait bound.
-```
 fn smallest_element<T, +PartialOrd<T>, +Copy<T>, +Drop<T>>(list: @Array<T>) -> T {
     let mut smallest = *list[0];
     let mut index = 1;
@@ -82,7 +81,6 @@ fn smallest_element<T, +PartialOrd<T>, +Copy<T>, +Drop<T>>(list: @Array<T>) -> T
         index = index + 1;
     }
 }
-```
 The function smallest_element is bound to types T that must implement PartialOrd, 
 Copy, and Drop traits. T must support comparisons (PartialOrd), copying (Copy), 
 and must be droppable (Drop). The function takes a snapshot of an array 
