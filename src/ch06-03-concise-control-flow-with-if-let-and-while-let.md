@@ -28,7 +28,7 @@ code behaves the same as the `match` in Listing {{#ref config_max}}:
 The syntax `if let` takes a pattern and an expression separated by an equal
 sign. It works the same way as a `match`, where the expression is given to the
 `match` and the pattern is its first arm. In this case, the pattern is
-`Option::Some(max)`, and the `max` binds to the value inside the `Option::Some`. We can then
+`Option::Some(max)`, and `max` binds to the value inside `Option::Some`. We can then
 use `max` in the body of the `if let` block in the same way we used `max` in
 the corresponding `match` arm. The code in the `if let` block isn’t run if the
 value doesn’t match the pattern.
