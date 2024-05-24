@@ -107,7 +107,7 @@ explicitly set should have the same value as the fields in the given instance.
 <span class="caption">Listing {{#ref update-syntax}}: Using struct update syntax to set a new
 `email` value for a `User` instance but to use the rest of the values from `user1`</span>
 
-The code in Listing {{#ref update-syntax}} also creates an instance in `user2` that has a
+The code in Listing {{#ref update-syntax}} also creates an instance of `user2` that has a
 different value for `email` but has the same values for the `username`,
 `active`, and `sign_in_count` fields from `user1`. The `..user1` must come last
 to specify that any remaining fields should get their values from the
