@@ -42,13 +42,12 @@ losing exhaustive checking.
 In other words, you can think of `if let` as syntactic sugar for a `match` that
 runs code when the value matches one pattern and then ignores all other values.
 
-We can include an `else` with an `if let`. The block of code that goes with the
-`else` is the same as the block of code that would go with the `_` case in the
-`match` expression that is equivalent to the `if let` and `else`. Recall the
-`Coin` enum definition in Listing {{#ref match-pattern-bind}}, where the `Quarter` variant also held a
-`UsState` value. If we wanted to count all non-quarter coins we see while also
-announcing the state of the quarters, we could do that with a `match`
-expression, like this:
+We can include an `else` with an `if let`. The block of code that goes with `else`
+is the same as the block of code that would go with the `_` case in the `match`
+expression. Recall the `Coin` enum definition in Listing {{#ref match-pattern-bind}},
+where the `Quarter` variant also held a `UsState` value. If we wanted to count
+all non-quarter coins we see while also announcing the state of the quarters,
+we could do that with a `match` expression, like this:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_16_if_let_coiner_match/src/lib.cairo:here}}
@@ -61,7 +60,7 @@ Or we could use an `if let` and `else` expression, like this:
 ```
 
 If you have a situation in which your program has logic that is too verbose to
-express using a `match`, remember that `if let` is in your Cairo toolbox as well.
+express using `match`, remember that `if let` is in your Cairo toolbox as well.
 
 ## `while let`
 
