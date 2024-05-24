@@ -84,7 +84,7 @@ Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
 In Cairo, we can also define a method which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
-These methods are often use to build new instances but they may have a lot of different utilities.
+These methods are often used to build new instances but they may have a lot of different utilities.
 
 Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `compare` which compares two `Rectangle` instances, and returns `true` if both rectangle have the same area and `false` otherwise.
 
