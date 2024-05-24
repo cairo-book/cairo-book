@@ -9,7 +9,7 @@ use source::pizza::PizzaFactory::{ownerContractMemberStateTrait, InternalTrait};
 use starknet::{ContractAddress, contract_address_const};
 
 use snforge_std::{
-    declare, ContractClassTrait, ContractClass, start_prank, stop_prank, CheatTarget, SpyOn,
+    declare, ContractClassTrait, ContractClass, start_cheat_caller_address, stop_cheat_caller_address, SpyOn,
     EventSpy, EventAssertions, spy_events, EventFetcher, load, cheatcodes::storage::load_felt252
 };
 
@@ -53,7 +53,7 @@ fn test_change_owner_should_change_owner() {
     let new_owner: ContractAddress = contract_address_const::<'new_owner'>();
     assert_eq!(pizza_factory.get_owner(), owner());
 
-    start_prank(CheatTarget::One(pizza_factory_address), owner());
+    start_cheat_caller_address(pizza_factory_address, owner());
 
     pizza_factory.change_owner(new_owner);
 
@@ -65,9 +65,9 @@ fn test_change_owner_should_change_owner() {
 fn test_change_owner_should_panic_when_not_owner() {
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
     let not_owner = contract_address_const::<'not_owner'>();
-    start_prank(CheatTarget::One(pizza_factory_address), not_owner);
+    start_cheat_caller_address(pizza_factory_address, not_owner);
     pizza_factory.change_owner(not_owner);
-    stop_prank(CheatTarget::One(pizza_factory_address));
+    stop_cheat_caller_address(pizza_factory_address);
 }
 //ANCHOR_END: test_owner
 
@@ -77,7 +77,7 @@ fn test_change_owner_should_panic_when_not_owner() {
 fn test_make_pizza_should_panic_when_not_owner() {
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
     let not_owner = contract_address_const::<'not_owner'>();
-    start_prank(CheatTarget::One(pizza_factory_address), not_owner);
+    start_cheat_caller_address(pizza_factory_address, not_owner);
 
     pizza_factory.make_pizza();
 }
@@ -86,7 +86,7 @@ fn test_make_pizza_should_panic_when_not_owner() {
 fn test_make_pizza_should_increment_pizza_counter() {
     // Setup
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-    start_prank(CheatTarget::One(pizza_factory_address), owner());
+    start_cheat_caller_address(pizza_factory_address, owner());
     let mut spy = spy_events(SpyOn::One(pizza_factory_address));
 
     // When
