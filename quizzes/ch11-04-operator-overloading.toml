@@ -3,8 +3,8 @@ type = "Tracing"
 prompt.program = """
 #[derive(Drop)]
 struct Character {
-    health: felt252,
-    attack: felt252,
+    health: u8,
+    attack: u8,
 }
 
 impl CharacterSub of Sub<Character> {
