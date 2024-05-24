@@ -13,11 +13,11 @@ Speaking of coins, let’s use them as an example using `match`! We can write a 
 {{#label match-enum}}
 <span class="caption">Listing {{#ref match-enum}}: An enum and a `match` expression that has the variants of the enum as its patterns</span>
 
-Let’s break down the `match` expression in the `value_in_cents` function. First, we list the `match` keyword followed by an expression, which in this case is the value `coin`. This seems very similar to a conditional expression used with if, but there’s a big difference: with if, the condition needs to evaluate to a Boolean value, but here it can be any type. The type of `coin` in this example is the `Coin` enum that we defined on the first line.
+Let’s break down the `match` expression in the `value_in_cents` function. First, we list the `match` keyword followed by an expression, which in this case is the value `coin`. This seems very similar to a conditional expression used with the `if` statement, but there’s a big difference: with `if`, the condition needs to evaluate to a `Boolean` value, but here it can be any type. The type of `coin` in this example is the `Coin` enum that we defined on the first line.
 
 Next are the `match` arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value `Coin::Penny` and then the `=>` operator that separates the pattern and the code to run. The code in this case is just the value `1`. Each arm is separated from the next with a comma.
 
-When the `match` expression executes, it compares the resultant value against the pattern of each arm, in the order they are given. If a pattern matches the value, the code associated with that pattern is executed. If that pattern doesn’t match the value, execution continues to the next arm, much as in a coin-sorting machine. We can have as many arms as we need: in the above example, our `match` has four arms.
+When the `match` expression executes, it compares the resultant value against the pattern of each arm in the order they are given. If a pattern matches the value, the code associated with that pattern is executed. If the pattern doesn’t match, execution continues to the next arm, much like in a coin-sorting machine. We can have as many arms as we need; in the above example, our `match` has four arms.
 
 The code associated with each arm is an expression, and the resultant value of the expression in the matching arm is the value that gets returned for the entire match expression.
 
@@ -52,7 +52,7 @@ Because `state` is an `UsState` enum which implements the `Debug` trait, we can 
 
 > Note: `{:?}` is a special formatting syntax that allows to print a debug form of the parameter passed to the `println!` macro. You can find more information about it in [Appendix C][debug trait].
 
-If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the Coin enum variant for Quarter.
+If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
 
 [debug trait]: ./appendix-03-derivable-traits.html#debug-for-printing-and-debugging
 
@@ -60,7 +60,7 @@ If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` woul
 
 In the previous section, we wanted to get the inner `T` value out of the `Some` case when using `Option<T>`; we can also handle `Option<T>` using `match`, as we did with the `Coin` enum! Instead of comparing coins, we’ll compare the variants of `Option<T>`, but the way the `match` expression works remains the same.
 
-Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there isn’t a value inside, the function should return the `None` value and not attempt to perform any operations.
+Let’s say we want to write a function that takes an `Option<u8>` and, if there’s a value inside, adds `1` to that value. If there is no value inside, the function should return `None` and not attempt to perform any more operations.
 
 This function is very easy to write, thanks to `match`, and will look like Listing {{#ref match-option}}.
 
