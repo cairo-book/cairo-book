@@ -1,16 +1,17 @@
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = "Which one of the following is NOT true about smart pointers?"
-answer.answer = "A smart pointer stores reference to a value and does not provide any memory management."
+answer.answer = "Smart pointers store a reference to a value but do not provide any automatic memory management or ownership tracking."
 prompt.distractors = [
-	"To prevent unsafe memory access is a primary benefit of smart pointers.",
-	"Smart pointers help prevent crashes by avoiding access to unassigned memory cells.",
-	"Transferring large data ownership is enhanced using smart pointers"
+  "Smart pointers help prevent common memory issues such as dereferences unallocated memory and re-writing to existing cells.",
+  "Smart pointers ensure proper initialization and prevent access to uninitialized or invalid memory.",
+  "Smart pointers such as `Box` and `Nullable` enable efficient passing of large data by moving or sharing ownership without expensive copying.",
 ]
 context = """
-Smart pointers possess additional metadata and capabilities beyond serving as a reference to a value.
-Smart pointers offer memory management feature that extends beyond mere referencing,
-it entails memory handling through strict type checking and ownership rules that implement safety measures.
+Smart pointers in Cairo possess additional metadata and capabilities beyond merely serving as a reference to a value.
+They offer memory management features that extend beyond simple referencing, including strict type checking and ownership rules that enforce memory safety.
+Cairo provides several explicit smart pointer types, such as `Box` and `Nullable`, but other types like `Array` of `Felt252Dict` are also a form of smart pointer.
+These smart pointers ensure memory safety through strict ownership rules, preventing common issues like null dereferences.
 """
 
 [[questions]]
@@ -42,10 +43,10 @@ use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
 
 fn main() {
     let mut scoreSheet: Felt252Dict<Nullable<Span<felt252>>> = Default::default();
-    
+
     let exams = array![60, 70, 80, 90];
     scoreSheet.insert(0, NullableTrait::new(exams.span()));
-    
+
     let firstSession = scoreSheet.get(0);
 
     let record = match match_nullable(firstSession) {
@@ -56,14 +57,13 @@ fn main() {
 }
 ```
 """
-answer.answer = "compiles with a 'Index out of bounds' panic because `zero_default` method is not implemented."
+answer.answer = "Panics with an 'Index out of bounds' error"
 prompt.distractors = [
-	"compiles successfully with the output `Exams 90`",
-	"compiles with a 'No value found' panic because it implements the `zero_default` method.",
-	"Fails to compile with `error: Invalid path.`"
+  "Outputs `Exams 90`",
+  "Outpus 'No value found' panic because it implements the `zero_default` method",
+  "Fails to compile",
 ]
 context = """
-The `Index out of bounds` error occurs due to an attempt to access 
-the fifth element of a four-element array, which is not allowed in Cairo.
-The error message also indicates that the zero_default method is not called in the code.
+The `Index out of bounds` error occurs due to an attempt to access
+the fifth element of a four-element array, which is an unallocated memory cell.
 """
