@@ -60,7 +60,7 @@ fn main() {
 answer.answer = "Panics with an 'Index out of bounds' error"
 prompt.distractors = [
   "Outputs `Exams 90`",
-  "Outpus 'No value found' panic because it implements the `zero_default` method",
+  "Outputs 'No value found' panic because it implements the `zero_default` method",
   "Fails to compile",
 ]
 context = """
