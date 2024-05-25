@@ -1,7 +1,7 @@
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Based on the provided code blocks, Which of the following functions will NOT cause a runtime panic?
+Based on the provided code blocks, which of the following functions will NOT cause a runtime panic?
 
 ```
 fn main() {
