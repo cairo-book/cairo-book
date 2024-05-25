@@ -1,32 +1,61 @@
 [[questions]]
-id = "64ff52eb-b905-43c2-9bd2-d64b2b86a883"
+type = "ShortAnswer"
+prompt.prompt = "What is the annotation you add to a function to indicate that it's a test?"
+answer.answer = "#[test]"
+context = """
+This informs scarb to treat the function as a test and not source code.
+"""
+
+[[questions]]
+id = "cd77485f-723a-4978-8da6-c4ca3df44c44"
 type = "MultipleChoice"
 prompt.prompt = """
-What test case will NOT fail for the `is_even` function?
-```
-fn is_even(x: u64) -> bool {
-	x % 2 == 0
-}
+Let's say you have a function with the type signature:
 
-#[cfg(test)]
-mod tests {
-	use super::{is_even};
-	#[test]
-	fn test_is_even() {
-		// The answer goes here
-	}
-}
 ```
+fn f(x: usize) -> Result<usize, ByteArray>;
+```
+
+And you want to test that `f(0)` should return `Err(_)`.
+Which of the following is NOT a valid way to test that?
 """
-prompt.distractors = [
-  "`assert!(is_even(4) == false, \"4 should be even\");`",
-  "`assert!(is_even(3), \"3 should be odd\");`",
-  "`assert!(!is_even(0), \"0 should be even\");`",
-]
-answer.answer = "`assert!(!is_even(5), \"5 should be odd\");`"
-
+answer.answer = """
+```
+#[test]
+#[should_err]
+fn test() -> Result<usize, String> {
+  f(0)
+}
+```
+  """
+prompt.distractors = ["""
+```
+#[test]
+fn test() {
+  assert!(f(0).is_err());
+}
+```
+""", """
+```
+#[test]
+#[should_panic]
+fn test() {
+  f(0).unwrap();
+}
+```
+  """, """
+```
+#[test]
+fn test() {
+  assert!(match f(0) {
+    Ok(_) => false,
+    Err(_) => true
+  });
+}
+```
+  """]
 context = """
-The `assert!` macro evaluates the expression and panics if the condition is false.
+`should_err` does not exist in Cairo &mdash; tests that returns a `Result` will pass even if the result is an `Err`.
 """
 
 [[questions]]
@@ -34,7 +63,7 @@ id = "4becac9f-5173-4439-bd1f-e1e9958423ab"
 type = "MultipleChoice"
 prompt.prompt = """
 Does the test pass?
-```rust
+```
 fn division_operation(number1: u16, number2: u16) -> u16 {
     if number2 == 0 {
         panic!("ZeroDivisionError not allowed!");
@@ -68,7 +97,7 @@ the same as the panic string `"ZeroDivisionError not allowed!"`
 id = "0b3385b4-069f-4883-ab3f-6feb8ebf72f8"
 type = "MultipleChoice"
 prompt.prompt = """
-What is the test result when this program is run with the command `scarb cairo-test -f test_`
+What is the output when these tests are run with the command `scarb cairo-test -f test_`
 ```rust
 #[cfg(test)]
 mod tests {
