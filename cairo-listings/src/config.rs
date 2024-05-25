@@ -47,34 +47,14 @@ pub struct Config {
 #[derive(Subcommand, Debug)]
 pub enum Commands {
     /// Run the verification process
-    Verify(VerifyCommand),
+    Verify(Options),
 
     /// Process the output.txt file in listings
-    Output(OutputCommand),
+    Output(Options),
 }
 
 #[derive(Parser, Debug)]
-pub struct VerifyCommand {
-    #[arg(short, long)]
-    pub verbose: bool,
-    #[arg(short, long)]
-    pub quiet: bool,
-    #[arg(short, long)]
-    pub formats_skip: bool,
-    #[arg(short, long)]
-    pub starknet_skip: bool,
-    #[arg(short, long)]
-    pub compile_skip: bool,
-    #[arg(short, long)]
-    pub run_skip: bool,
-    #[arg(short, long)]
-    pub test_skip: bool,
-    #[arg(long)]
-    pub file: Option<String>,
-}
-
-#[derive(Parser, Debug)]
-pub struct OutputCommand {
+pub struct Options {
     #[arg(short, long)]
     pub verbose: bool,
     #[arg(short, long)]

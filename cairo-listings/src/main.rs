@@ -19,7 +19,7 @@ mod tags;
 mod utils;
 
 use crate::cmd::ScarbCmd;
-use crate::config::{Commands, Config, VerifyCommand};
+use crate::config::{Commands, Config, Options};
 use crate::error_sets::ErrorSets;
 use crate::tags::Tags;
 use crate::utils::{clickable, find_scarb_manifests, print_error_table};
@@ -42,7 +42,7 @@ fn main() {
     }
 }
 
-fn run_verification(cfg: &Config, cmd: &VerifyCommand) {
+fn run_verification(cfg: &Config, cmd: &Options) {
     let scarb_packages = find_scarb_manifests(cfg);
 
     let pb = ProgressBar::new(scarb_packages.len() as u64);
@@ -83,7 +83,7 @@ fn run_verification(cfg: &Config, cmd: &VerifyCommand) {
     }
 }
 
-fn process_file(manifest_path: &str, cmd: &VerifyCommand) {
+fn process_file(manifest_path: &str, cmd: &Options) {
     let manifest_path_as_path = std::path::Path::new(manifest_path);
     let file_path = manifest_path_as_path
         .parent()
