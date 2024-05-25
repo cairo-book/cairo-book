@@ -2,7 +2,7 @@ use clap::{Parser, Subcommand};
 use regex::Regex;
 
 #[derive(Parser, Debug)]
-#[command(author, version, about, long_about = None)]
+#[command(name = "cairo-listings", author, version, about, long_about = None)]
 pub struct Config {
     /// The path to explore for *.cairo files.
     #[arg(short, long, default_value = "./listings")]
