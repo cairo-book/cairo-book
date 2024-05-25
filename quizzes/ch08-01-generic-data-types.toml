@@ -1,90 +1,126 @@
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = """
+Imagine using a third-party function whose implementation you don't know, but whose type signature is this:
+
+```
+fn mystery<T>(x: T) -> T {
+  // ????
+}
+```
+
+Then you call `mystery` like this:
+
+```
+let y = mystery(3);
+```
+
+Then, the value of `y` must be :
+"""
+answer.answer = "3"
+context = """
+The only possible function that has the signature `T -> T` is the identity function:
+
+```
+fn mystery<T>(x: T) -> T {
+  x
+}
+```
+
+The function could of course panic or print, but the return value can only be the input. `mystery` does not know
+what type `T` is, so there is no way for `mystery` to generate or mutate a value of `T`.
+See [Theorems for free!](https://dl.acm.org/doi/pdf/10.1145/99370.99404) for more examples of this idea.
+
+**3 really is the correct answer!**
+"""
+
 
 [[questions]]
+id = "40ae0cfe-3567-4d05-b0d9-54d612a2d654"
 type = "Tracing"
-prompt.prompt = """
-struct Student<T> {
-    name: T,
-    age: T,
-    level: T
+prompt.program = """
+fn print_slice<T>(mut v: Span<T>) {
+    while let Option::Some(x) = v.pop_front() {
+        println!("{x}");
+    }
 }
 
-fn main(){
-    let mut studentI = Student {name: 'Celine', age: 19, level: 9, };
-
-    let mut age = studentI.age;
-    let mut level = studentI.level;
-    
-    println!("{}", level);
+fn main() {
+    let arr = array![1, 2, 3, 4];
+    print_slice(arr.span().slice(1, 3));
 }
 """
-answer.doesCompile = true
-answer.stdout = "9"
+answer.doesCompile = false
+answer.lineNumber = 3
 context = """
-This compiles for several reasons, including accurate trait implementations, 
-proper function calls and returns, correct memory management, Adherence to Cairo VM's 
-Constraints, proper variable scope handling, and proper type declarations and usage.
+If a type is generic (like `T`), we cannot assume anything about it, including the ability to display it. Therefore `println!("{x}")` is invalid
+because `x: @T`.
+"""
+
+[[questions]]
+id = "694bb2d0-f2e6-4b0b-a3e7-2d9f9e8b3d09"
+type = "Tracing"
+prompt.program = """
+#[derive(Drop)]
+struct Point<T> {
+    x: T,
+    y: T
+}
+
+#[generate_trait]
+impl PointImpl of PointTrait {
+    fn f(self: Point<u32>) -> u32 {
+        self.y
+    }
+}
+
+#[generate_trait]
+impl PointImplGeneric<T> of PointTraitGeneric<T> {
+    fn f(self: Point<T>) -> T {
+        self.x
+    }
+}
+
+fn main() {
+    let p: Point<u32> = Point { x: 1, y: 2 };
+    println!("{}", p.f());
+}
+
+"""
+answer.doesCompile = false
+answer.lineNumber = 23
+context = """
+These definitions of `f` conflict, and there is no way for  to determine which `f` should be used when `p.f()` is called. Therefore this is a compiler error.
+Moreover, the generic implementation would require `T` to be droppable, as `self.y` is dropped when the function returns.
 """
 
 [[questions]]
 type = "Tracing"
 prompt.prompt = """
 #[derive(Drop)]
-struct wallet<T>{
+struct Wallet<T>{
     balance: T,
     address: W
 }
 
 fn main() {
-    let mut account = wallet{ balance: 10, address: 200 };
+    let mut account = Wallet{ balance: 10, address: '0xAbDeFG' };
 
-    let balance = account.balance;
-    print!("wallet balance is {}", balance);
-    let address = account.address;
-    print!("wallet address is {}", address);
+    print!("{}", account.balance);
+    print!("{}", account.address);
 }
 """
 answer.doesCompile = false
 context = """
-The code fails to compile because the struct fields have different types. To address this, 
-another generic type should be introduced after 'T' in the struct definition to maintain 
-consistency. Let's utilize 'W', as it was previously employed as a type for the 'address' 
-field. Consequently, the struct should be implemented as follows:
-```
-struct Wallet<T, W> { 
-    balance: T, 
-    address: W 
-}
-```
-"""
+The code fails to compile because the struct `Wallet` is defined with a single generic type `T`, but
+the `address` field uses an undefined type `W`. To fix this, you need to introduce another generic
+type `W` in the struct definition to represent the type of the `address` field.  To fix the code,
+you can modify the struct definition as follows:
 
-[[questions]]
-type = "MultipleChoice"
-prompt.prompt = "What is a trait bound on a generic type"
-prompt.distractors = """
-    "This is to bound traits together",
-    "A trait bound make it possible for a generic function to compile",
-    "A trait bound ensures that a generic type implements various behaviors"
-answer.answer = "A trait bound demand that a generic type adopts specific behavior 
-defined by a trait"
-"""
-context = """
-The function smallest_element is bound to types T that must implement PartialOrd, 
-Copy, and Drop traits. T must support comparisons (PartialOrd), copying (Copy), 
-and must be droppable (Drop). The function takes a snapshot of an array 
-of type T and returns the smallest element found in the array. This function is trait bound.
-```
-fn smallest_element<T, +PartialOrd<T>, +Copy<T>, +Drop<T>>(list: @Array<T>) -> T {
-    let mut smallest = *list[0];
-    let mut index = 1;
-    loop {
-        if index >= list.len() {
-            break smallest;
-        }
-        if *list[index] < smallest {
-            smallest = *list[index];
-        }
-        index = index + 1;
-    }
+```rust
+struct Wallet<T, W> {
+    balance: T,
+    address: W,
 }
 ```
 """

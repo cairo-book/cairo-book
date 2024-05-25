@@ -17,7 +17,7 @@ In general, a **signed** number with *n* bits can represent numbers between -(2<
 id = "4d5cab51-6eca-4aa0-8666-993acdd85c8d"
 type = "MultipleChoice"
 prompt.prompt = "If `x : u8 = 0`, what will happen when computing `x - 1`?"
-answer.answer = "It will always panic." 
+answer.answer = "It will always panic."
 prompt.distractors = [
   "It will return `-1`.",
   "Compiler will issue a warning about underflow.",
@@ -40,4 +40,3 @@ answer.lineNumber = 2
 context = """
 The type `felt32` does not exist. Proper field type is `felt252`.
 """
-
