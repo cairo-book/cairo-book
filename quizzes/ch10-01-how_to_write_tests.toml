@@ -5,6 +5,7 @@ answer.answer = "#[test]"
 context = """
 This informs scarb to treat the function as a test and not source code.
 """
+id = "c7365cd4-c0cf-4d92-8e42-c47ab8936775"
 
 [[questions]]
 id = "cd77485f-723a-4978-8da6-c4ca3df44c44"
@@ -19,15 +20,6 @@ fn f(x: usize) -> Result<usize, ByteArray>;
 And you want to test that `f(0)` should return `Err(_)`.
 Which of the following is NOT a valid way to test that?
 """
-answer.answer = """
-```
-#[test]
-#[should_err]
-fn test() -> Result<usize, String> {
-  f(0)
-}
-```
-  """
 prompt.distractors = ["""
 ```
 #[test]
@@ -54,6 +46,15 @@ fn test() {
 }
 ```
   """]
+answer.answer = """
+```
+#[test]
+#[should_err]
+fn test() -> Result<usize, String> {
+  f(0)
+}
+```
+  """
 context = """
 `should_err` does not exist in Cairo &mdash; tests that returns a `Result` will pass even if the result is an `Err`.
 """
