@@ -28,7 +28,7 @@ code behaves the same as the `match` in Listing {{#ref config_max}}:
 The syntax `if let` takes a pattern and an expression separated by an equal
 sign. It works the same way as a `match`, where the expression is given to the
 `match` and the pattern is its first arm. In this case, the pattern is
-`Option::Some(max)`, and the `max` binds to the value inside the `Option::Some`. We can then
+`Option::Some(max)`, and `max` binds to the value inside `Option::Some`. We can then
 use `max` in the body of the `if let` block in the same way we used `max` in
 the corresponding `match` arm. The code in the `if let` block isn’t run if the
 value doesn’t match the pattern.
@@ -39,16 +39,15 @@ between `match` and `if let` depends on what you’re doing in your particular
 situation and whether gaining conciseness is an appropriate trade-off for
 losing exhaustive checking.
 
-In other words, you can think of `if let` as syntax sugar for a `match` that
+In other words, you can think of `if let` as syntactic sugar for a `match` that
 runs code when the value matches one pattern and then ignores all other values.
 
-We can include an `else` with an `if let`. The block of code that goes with the
-`else` is the same as the block of code that would go with the `_` case in the
-`match` expression that is equivalent to the `if let` and `else`. Recall the
-`Coin` enum definition in Listing {{#ref match-pattern-bind}}, where the `Quarter` variant also held a
-`UsState` value. If we wanted to count all non-quarter coins we see while also
-announcing the state of the quarters, we could do that with a `match`
-expression, like this:
+We can include an `else` with an `if let`. The block of code that goes with `else`
+is the same as the block of code that would go with the `_` case in the `match`
+expression. Recall the `Coin` enum definition in Listing {{#ref match-pattern-bind}},
+where the `Quarter` variant also held a `UsState` value. If we wanted to count
+all non-quarter coins we see while also announcing the state of the quarters,
+we could do that with a `match` expression, like this:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_16_if_let_coiner_match/src/lib.cairo:here}}
@@ -61,7 +60,7 @@ Or we could use an `if let` and `else` expression, like this:
 ```
 
 If you have a situation in which your program has logic that is too verbose to
-express using a `match`, remember that `if let` is in your Cairo toolbox as well.
+express using `match`, remember that `if let` is in your Cairo toolbox as well.
 
 ## `while let`
 
@@ -71,4 +70,4 @@ The `while let` syntax is similar to the `if let` syntax, but it allows you to l
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_18_while_let/src/lib.cairo}}
 ```
 
-Using `while let` provides a more concise and idiomatic way of writing this loop compared to a traditional `while` loop with explicit pattern matching or handling of the `Option` type. However, as with `if let`, you lose the exhaustive checking that a `match` expression provides, so you need to be careful to handle any remaining cases outside the while let loop if necessary.
+Using `while let` provides a more concise and idiomatic way of writing this loop compared to a traditional `while` loop with explicit pattern matching or handling of the `Option` type. However, as with `if let`, you lose the exhaustive checking that a `match` expression provides, so you need to be careful to handle any remaining cases outside the `while let` loop if necessary.

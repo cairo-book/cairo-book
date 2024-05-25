@@ -84,9 +84,9 @@ Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
 In Cairo, we can also define a method which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
-These methods are often use to build new instances but they may have a lot of different utilities.
+These methods are often used to build new instances but they may have a lot of different utilities.
 
-Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `compare` which compares two `Rectangle` instances, and returns `true` if both rectangle have the same area and `false` otherwise.
+Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `compare` which compares two `Rectangle` instances, and returns `true` if both rectangles have the same area and `false` otherwise.
 
 ```rust
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:trait_impl}}
@@ -94,7 +94,7 @@ Let's create the method `new` which creates a `Rectangle` from a `width` and a `
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:main}}
 ```
 
-Note that the `compare` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `Rectangle::compare(rect1, rect2)`, it is called with `rect1.compare(rect2)`.
+Note that the `compare` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `RectangleTrait::compare(@rect1, @rect2)`, it would be called with `rect1.compare(rect2)`.
 
 ## Multiple Traits and `impl` Blocks
 
@@ -111,10 +111,10 @@ blocks here, but this is valid syntax.
 ## Summary
 
 Structs let you create custom types that are meaningful for your domain. By
-using structs, you can keep associated pieces of data connected to each other
-and name each piece to make your code clear. In `trait` and `impl` blocks, you
-can define methods, which are functions associated to a type and let you specify
-the behavior that instances of your type have.
+using structs, you can keep related pieces of data together and name each piece
+to make your code clear. In `trait` and `impl` blocks, you can define methods, which
+are functions associated with a type, allowing you to specify the behavior that
+instances of your type have.
 
 But structs aren’t the only way you can create custom types: let’s turn to
 Cairo’s enum feature to add another tool to your toolbox.

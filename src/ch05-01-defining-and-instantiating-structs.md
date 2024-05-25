@@ -71,7 +71,6 @@ Because the parameter names and the struct field names are exactly the same in L
 
 Here, we’re creating a new instance of the `User` struct, which has a field named `email`. We want to set the `email` field’s value to the value in the `email` parameter of the `build_user` function. Because the `email` field and the `email` parameter have the same name, we only need to write `email` rather than `email: email`.
 
-
 ## Creating Instances from Other Instances with Struct Update Syntax
 
 It’s often useful to create a new instance of a struct that includes most of
@@ -107,9 +106,9 @@ explicitly set should have the same value as the fields in the given instance.
 <span class="caption">Listing {{#ref update-syntax}}: Using struct update syntax to set a new
 `email` value for a `User` instance but to use the rest of the values from `user1`</span>
 
-The code in Listing {{#ref update-syntax}} also creates an instance in `user2` that has a
+The code in Listing {{#ref update-syntax}} also creates an instance of `user2` that has a
 different value for `email` but has the same values for the `username`,
-`active`, and `sign_in_count` fields from `user1`. The `..user1` must come last
+`active`, and `sign_in_count` fields as `user1`. The `..user1` part must come last
 to specify that any remaining fields should get their values from the
 corresponding fields in `user1`, but we can choose to specify values for as
 many fields as we want in any order, regardless of the order of the fields in
@@ -128,4 +127,3 @@ implement the `Copy` trait, so the behavior we discussed in the ["`Copy` Trait"]
 
 [move]: ch04-01-what-is-ownership.md#moving-values
 [copy]: ch04-01-what-is-ownership.md#the-copy-trait
-

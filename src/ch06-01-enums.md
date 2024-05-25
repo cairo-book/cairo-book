@@ -28,7 +28,7 @@ and instantiate it as follows:
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_with_values_example/src/lib.cairo:here}}
 ```
 
-In this code, each variant is associated to a `u128` value, representing the direction in degrees. We will see in the next example that it is also possible to associate different data types to each variant.
+In this code, each variant is associated with a `u128` value, representing the direction in degrees. In the next example, we will see that it is also possible to associate different data types with each variant.
 
 It's easy to write code that acts differently depending on the variant of an enum instance, in this example to run specific code according to a direction. You can learn more about it in the [Match Control Flow Construct][match] section.
 
@@ -68,7 +68,7 @@ Running this code would print `quitting`.
 
 ## The `Option` Enum and Its Advantages
 
-The Option enum is a standard Cairo enum that represents the concept of an optional value. It has two variants: `Some: T` and `None`. `Some: T ` indicates that there's a value of type `T`, while `None` represents the absence of a value.
+The `Option` enum is a standard Cairo enum that represents the concept of an optional value. It has two variants: `Some: T` and `None`. `Some: T` indicates that there's a value of type `T`, while `None` represents the absence of a value.
 
 ```rust,noplayground
 enum Option<T> {
@@ -79,7 +79,7 @@ enum Option<T> {
 
 The `Option` enum is helpful because it allows you to explicitly represent the possibility of a value being absent, making your code more expressive and easier to reason about. Using `Option` can also help prevent bugs caused by using uninitialized or unexpected `null` values.
 
-To give you an example, here is a function which returns the index of the first element of an array with a given value, or None if the element is not present.
+To give you an example, here is a function which returns the index of the first element of an array with a given value, or `None` if the element is not present.
 
 We are demonstrating two approaches for the above function:
 

@@ -1,8 +1,8 @@
 //ANCHOR:all
 fn main() {
-    let width1 = 30;
-    let height1 = 10;
-    let area = area(width1, height1);
+    let width = 30;
+    let height = 10;
+    let area = area(width, height);
     println!("Area is {}", area);
 }
 
