@@ -25,11 +25,11 @@ use crate::tags::Tags;
 use crate::utils::{clickable, find_scarb_manifests, print_error_table};
 
 lazy_static! {
-    static ref ERRORS: Mutex<ErrorSets> = Mutex::new(ErrorSets::new());
+    static ref CFG: Config = Config::parse();
 }
 
 lazy_static! {
-    static ref CFG: Config = Config::parse();
+    static ref ERRORS: Mutex<ErrorSets> = Mutex::new(ErrorSets::new());
 }
 
 fn main() {
