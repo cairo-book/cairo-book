@@ -1,101 +1,86 @@
 [[questions]]
-id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
 type = "MultipleChoice"
 prompt.prompt = """
-What happens when a ```panic``` occurs in a Cairo program?"""
-answer.answer = "The program terminates abruptly."
+Which line of code is correct to return the error code `2` and the error message `This is the error message`?
+"""
 prompt.distractors = [
-  "The program continues execution",
-  "The program ignores the error",
-  "The program logs the error for debugging.",
+  """`panic(array![2, "This is the error message"]);`""",
+  """`panic!("2", "This is the error message");`""",
+  """`core::panic_with_felt252(2, 'This is the error message');`""",
 ]
+answer.answer = """`panic(array![2, 'This is the error message']);`"""
 context = """
-When a panic occurs, the program ends.
+The macro `panic!` takes one and only one `ByteArray` argument.
+The function `core::panic_with_felt252` takes one and only one `felt252` argument.
+The function `panic` takes an array of `felt252` elements as an argument and returns it.
 """
-
-[[questions]]
-prompt.prompt = """
-In Cairo, the `panic` function can be triggered in two ways:
-1. Inadvertently, through actions causing the code to panic.
-2. Executing a valid Cairo program.
-3. Using the `nopanic` notation.
-4. Deliberately, by invoking the `panic` function.
-"""
-id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
-type = "MultipleChoice"
-answer.answer = "1 and 4"
-prompt.distractors = ["1 only", "2 only", "2 and 3"]
-context = """
-There are two primary ways that a panic can be triggered in Cairo: inadvertently, through actions causing the code to panic (e.g., accessing an array beyond its bounds),
-or deliberately with assertions or by invoking the ```panic``` function.
-"""
-
+id = "5bf03883-59ab-4063-85e8-8c1d2fafa3e3"
 
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Based on the provided code blocks, which of the following functions will NOT cause a runtime panic?
+Which of the following is **NOT** a good reason to use a panic ?
+"""
+prompt.distractors = [
+  "The program is about to perform a dangerous operation",
+  "The program should stop executing as soon as possible",
+  "The program has reached an unrecoverable error state",
+]
+answer.answer = "The program has reached an error state which should be communicated to a caller function"
+context = """
+A panic should not be used to communicate failure *within* the program, as they will terminate the program immediately.
+"""
+id = "0e7bb9f9-af5a-441d-83b4-bcd0a97daf70"
+
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of the following programs will NOT cause a runtime panic?
 
 ```
 fn main() {
     if true {
         panic!("2");
     }
-    println!("This line isn't reached");
+    println!("This line shouldn't be reached");
 }
 ```
+
 ```
 fn main() {
     let arr = array![1, 2, 3];
     let index = 5;
 
-    let value = arr[index];
-
-    println!("Value at index {}: {}", index, value);
+    println!("Value at index {}: {}", index, arr[index]);
 }
 ```
+
 ```
-use core::array::ArrayTrait;
-fn main(){
-    let mut arr = ArrayTrait::<u128>::new();
-    arr.append(5);
-    let index_to_access = 0;
-    match arr.get(index_to_access) {
-        Option::Some(x) => {
-           *x.unbox();
-        },
-        Option::None => { panic!("out of bounds") }
-    }
+fn main() {
+    let mut arr: Array<u128> = array![5];
+    let index_to_access = 3;
+    let value = match arr.get(index_to_access) {
+        Option::Some(x) => { *x.unbox() },
+        Option::None => { 0 }
+    };
+
+    println!("Value at index {} is {}", index_to_access, value);
 }
 ```
 """
-answer.answer = "Code Block 3"
+answer.answer = "Program 3"
 prompt.distractors = [
-  "Code Block 1",
-  "Code Block 2",
-  "Code Block 2 and Code Block 3",
-  "Code Block 3",
+  "Program 1",
+  "Program 2",
+  "Program 2 and Program 3",
+  "Program 3",
 ]
 context = """
-Code Block 3 accesses an array out of bounds, leading to an inadvertent panic as the program attempts to access an invalid memory location. Code Block 1 and Code Block 2 are intentionally causing panics using panic! and panic_with_felt252, respectively, making them deliberate panics.
+Program 3 accesses tries to access an element at an index that is out of bounds, but it matches the
+resulting `Option` and returns a default value `0` instead of panicking.
 """
 
-[[questions]]
-type = "MultipleChoice"
-prompt.prompt = """
-What happens if you try to compile a function declared as `nopanic` that calls a function that may
-panic in Cairo?
-"""
-answer.answer = "The compiler raises an error indicating a potential panic"
-prompt.distractors = [
-  "The program compiles without any errors",
-  "The compiler raises an error indicating a potential panic",
-  "The function is automatically converted to a panic-handling function",
-]
-context = """
-Cairo's compiler detects potential panics in functions declared as nopanic when they call functions
-that may panic, ensuring robust error handling.
-"""
 
 [[questions]]
 type = "MultipleChoice"
@@ -110,7 +95,6 @@ prompt.distractors = [
   "To catch errors at compile time",
 ]
 context = """
-The panic_with attribute in Cairo is used to mark a function that returns an `Option or `Result`. It
-creates a wrapper function for the annotated function that panics if the function returns `None` or
-`Err`, using the specified data as the panic error.
+If a function is annotated with `#[panic_with]`, a wrapper function is created that panics if the
+annotated function returns `Option::None` or `Result::Err`.
 """
