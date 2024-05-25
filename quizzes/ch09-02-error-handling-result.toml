@@ -2,7 +2,7 @@
 type = "MultipleChoice"
 prompt.prompt = """
 Let's consider this function that performs the division between two `Option<u32>`.
-Why do we want it to return a `Result` instead of an `Option` ? 
+Why do we want it to return a `Result` instead of an `Option` ?
 ```
 fn option_div (lhs: Option<u32>, rhs: Option<u32>) -> Result<u32, ByteArray> {
     match lhs {
@@ -19,7 +19,7 @@ fn option_div (lhs: Option<u32>, rhs: Option<u32>) -> Result<u32, ByteArray> {
             }
         },
         Option::None => {
-          Result::Err("Dividend is None")  
+          Result::Err("Dividend is None")
         },
     }
 }
@@ -54,7 +54,7 @@ fn option_div (lhs: Option<u32>, rhs: Option<u32>) -> Result<u32, ByteArray> {
             }
         },
         Option::None => {
-          Result::Err("Dividend is None")  
+          Result::Err("Dividend is None")
         },
     }
 }
@@ -65,14 +65,14 @@ fn try_division_by_0 () -> Option<u32> {
     let result = option_div(dividend, divisor)?;
     Option::Some(result)
 }
-  
+
 fn main() {
     println!("{}", try_division_by_0().unwrap());
 }
 """
 answer.doesCompile = false
 context = """
-`option_div` returns a `Result`, but the return type of `try_division_by_0` expects an `Option`. 
+`option_div` returns a `Result`, but the return type of `try_division_by_0` expects an `Option`.
 Therefore it is invalid to use the `?` operator until the `Result` has been converted to an `Option` (e.g. with the `Result::ok` method).
 """
 id = "021a3060-6076-4b40-ba4f-eb305543e449"
@@ -82,22 +82,28 @@ type = "MultipleChoice"
 prompt.prompt = """
 Given an arbitrary expression `e` of type `Result<T, E>`, which code snippet best represents how `e?` is translated?
 """
-prompt.distractors = ["""```
-    if let Result::Err(e) = e {
-        return Result::Err(e);
-    }
-  ```""", """```
-    match e {
-        Result::Ok(x) => x,
-        Result::Err(err) => panic!("{}", err)
-    }
-  ```""", "`e.unwrap()`"]
-answer.answer = """```
-    match e {
-        Result::Ok(v) => v,
-        Result::Err(e) => return Result::Err(e)
-    }
-  ```"""
+prompt.distractors = ["""
+```
+if let Result::Err(e) = e {
+    return Result::Err(e);
+}
+```
+""", """
+```
+match e {
+    Result::Ok(x) => x,
+    Result::Err(err) => panic!("{}", err)
+}
+```
+""", "`e.unwrap()`"]
+answer.answer = """
+```
+match e {
+    Result::Ok(v) => v,
+    Result::Err(e) => return Result::Err(e)
+}
+```
+"""
 context = """
 If `e` is a `Result`, then `e?` extracts the value inside the `Ok` if possible, otherwise returning the `Err` out of the current function.
 """

@@ -16,6 +16,7 @@ context = """
 The code does not compile because the *desnap* operator has to be used on snapshots, not references.
 Inside the `incr` function, the `n` parameter is a reference to a `u32` value, so the `*n` operation is not allowed. The code should be changed to `n += 1;`.
 """
+id = "6555e9b4-5989-40ee-a8e8-e1fd70d7aa1f"
 [[questions]]
 type = "Tracing"
 prompt.program = """
@@ -41,6 +42,7 @@ context = """
 The code does not compile because a `ref` can only be used on mutable variables.
 You should write `let mut rect = Rectangle { height: 10, width: 20 };` instead.
 """
+id = "7237725b-b4d8-4c05-81be-8d8dd4056cc6"
 [[questions]]
 type = "Tracing"
 prompt.program = """
@@ -70,6 +72,7 @@ Then, `arr1` is mutated by appending a new element.
 Finally, `snap2` is updated to be a snapshot of the new array while `snap` remains a snapshot of the old array.
 The function `sum` receives the latter and returns its length before the mutation.
 """
+id = "4512ce8b-c183-4ad1-96e9-bb808456c321"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
@@ -144,3 +147,4 @@ The snapshot can't be used because it is immutable and operating on it does not 
 A mutable reference must be used on mutable variables.
 To pass a mutable reference as an argument, we must use the `ref` keyword in the definition of the function parameter **and** during the call of the function.
 """
+id = "b691d9bd-4047-4eb3-bbc8-096f889bb5ac"

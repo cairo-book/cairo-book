@@ -1,42 +1,57 @@
 [[questions]]
+id = "3da96b29-d975-4cd8-a8eb-b1a6bd9b5c0a"
 type = "MultipleChoice"
-prompt.prompt = "Which of the following is NOT a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?"
-answer.answer = "To aid testing whether many parts of your library work together correctly"
+prompt.prompt = """
+Which of the following is NOT a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?
+"""
+answer.answer = "It gives your tests access to private functions"
 prompt.distractors = [
-	"Saves compilation time and reduces the size of the final binary by only compiling tests when `scarb cairo-test` runs",
-	"Keeps tests isolated from production code",
-	"Test private functions which are not accessible from outside the module"
+  "It can reduce the size of generated compiler artifacts",
+  "It can improve compile times",
+  "It separates test helper functions from library code",
 ]
 context = """
-Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions.
+All unit tests in a given file have access to that file's private functions, regardless of being in a `mod tests` or not.
 """
-
 
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = "How do you run integration tests in a Cairo project"
-answer.answer = "By running `scarb test` with a filter for the integration tests"
 prompt.distractors = [
-	"By running `scarb cairo-test`",
-	"By running `scarb cairo-build` with a filter for the test",
-	"By running `scarb cairo-run`"
+  "By running `scarb cairo-test`",
+  "By running `scarb cairo-build` with a filter for the test",
+  "By running `scarb cairo-run`",
 ]
+answer.answer = "By running `scarb test` with a filter for the integration tests"
 context = """
-To run all integration tests, add to `scarb test` a filter that contains the path with the integration tests"
+To run all integration tests, add to `scarb test` a filter that contains the module path containing the integration tests"
 """
+id = "2b553604-8201-4fad-90d6-1b63d99de219"
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "What is the difference between unit tests and integration tests in Cairo?"
-answer.answer = "Unit tests focus on testing individual modules in isolation, while integration tests verify the interaction between multiple modules."
+prompt.prompt = "What is the difference between unit tests and integration tests?"
 prompt.distractors = [
-	"Unit test uses `#[cfg(test)] attribute, whereas integration tests does not",
-	"Unit test separates test code from the main code, while integration testing combines both in a single file",
-	"Unit tests test many parts of your library together whereas integration test test each code in isolation from the rest"
+  "Unit tests use the #[test] attribute, while integration tests use the #[cfg(test)] attribute.",
+  "Unit tests are limited to testing a single module, while integration tests can test multiple modules but not their interactions.",
+  "Unit tests are written in a separate file, while integration tests are written in the same file as the code being tested.",
 ]
+answer.answer = """Unit tests focus on testing individual functions or modules in isolation, while
+integration tests verify the interaction and behavior of multiple modules or components working
+together."""
 context = """
-Unit tests are small and more focused, testing one module in isolation at a time,
-and can test private functions. Integration tests use your code in the same way 
-any other external code would, using only the public interface and potentially 
-exercising multiple modules per test.
+Unit tests and integration tests serve different purposes and have distinct characteristics:
+
+- Unit tests:
+	- Focus on testing individual functions or modules in isolation.
+	- Aim to ensure the correctness of small, self-contained units of code.
+	- Often test private functions and implementation details.
+	- Located in the same file as the code being tested, typically in a #[cfg(test)] module.
+
+- Integration tests:
+	- Focus on testing the interaction and behavior of multiple modules or components working together.
+	- Verify that different parts of the system integrate correctly and produce the expected results.
+	- Use the public API of the library or application being tested.
+	- Located in the tests/ directory, separate from the main code files.
 """
+id = "93d3c7fb-14af-41f6-aba2-7ceff84a163b"
