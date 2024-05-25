@@ -15,11 +15,11 @@ When a panic occurs, the program ends.
 
 [[questions]]
 prompt.prompt = """
-In Cairo, the ```panic``` function can be triggered in two ways:
+In Cairo, the `panic` function can be triggered in two ways:
 1. Inadvertently, through actions causing the code to panic.
 2. Executing a valid Cairo program.
-3. Using the ```nopanic``` notation.
-4. Deliberately, by invoking the ```panic``` function.
+3. Using the `nopanic` notation.
+4. Deliberately, by invoking the `panic` function.
 """
 id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
 type = "MultipleChoice"
@@ -30,17 +30,87 @@ There are two primary ways that a panic can be triggered in Cairo: inadvertently
 or deliberately with assertions or by invoking the ```panic``` function.
 """
 
+
 [[questions]]
-id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
 type = "MultipleChoice"
 prompt.prompt = """
-What is the ```panic_with``` attribute used for in Cairo?"""
-answer.answer = """To mark a function that returns an Option or Result."""
+Based on the provided code blocks, which of the following functions will NOT cause a runtime panic?
+
+```
+fn main() {
+    if true {
+        panic!("2");
+    }
+    println!("This line isn't reached");
+}
+```
+```
+fn main() {
+    let arr = array![1, 2, 3];
+    let index = 5;
+
+    let value = arr[index];
+
+    println!("Value at index {}: {}", index, value);
+}
+```
+```
+use core::array::ArrayTrait;
+fn main(){
+    let mut arr = ArrayTrait::<u128>::new();
+    arr.append(5);
+    let index_to_access = 0;
+    match arr.get(index_to_access) {
+        Option::Some(x) => {
+           *x.unbox();
+        },
+        Option::None => { panic!("out of bounds") }
+    }
+}
+```
+"""
+answer.answer = "Code Block 3"
 prompt.distractors = [
-  "To ignore errors in a function that returns an Option or Result.",
-  "To log errors for debugging in a function that returns an Option or Result.",
-  "To continue program execution after an error occurred in a function.",
+  "Code Block 1",
+  "Code Block 2",
+  "Code Block 2 and Code Block 3",
+  "Code Block 3",
 ]
 context = """
-You can use the ```panic_with``` attribute to mark a function that returns an Option or Result. This attribute takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function.
+Code Block 3 accesses an array out of bounds, leading to an inadvertent panic as the program attempts to access an invalid memory location. Code Block 1 and Code Block 2 are intentionally causing panics using panic! and panic_with_felt252, respectively, making them deliberate panics.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What happens if you try to compile a function declared as `nopanic` that calls a function that may
+panic in Cairo?
+"""
+answer.answer = "The compiler raises an error indicating a potential panic"
+prompt.distractors = [
+  "The program compiles without any errors",
+  "The compiler raises an error indicating a potential panic",
+  "The function is automatically converted to a panic-handling function",
+]
+context = """
+Cairo's compiler detects potential panics in functions declared as nopanic when they call functions
+that may panic, ensuring robust error handling.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is the purpose of the `panic_with` attribute in Cairo?
+
+"""
+answer.answer = "To create a wrapper function that panics if the annotated function returns `Option::None` or `Result::Err`"
+prompt.distractors = [
+  "To handle runtime errors gracefully",
+  "To indicate that a function may panic",
+  "To catch errors at compile time",
+]
+context = """
+The panic_with attribute in Cairo is used to mark a function that returns an `Option or `Result`. It
+creates a wrapper function for the annotated function that panics if the function returns `None` or
+`Err`, using the specified data as the panic error.
 """
