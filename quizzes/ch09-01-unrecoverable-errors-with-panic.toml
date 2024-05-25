@@ -4,25 +4,30 @@ type = "MultipleChoice"
 prompt.prompt = """
 What happens when a ```panic``` occurs in a Cairo program?"""
 answer.answer = "The program terminates abruptly."
-prompt.distractors = [ "The program continues execution", "The program ignores the error", "The program logs the error for debugging." ]
+prompt.distractors = [
+  "The program continues execution",
+  "The program ignores the error",
+  "The program logs the error for debugging.",
+]
 context = """
-When a panic occurs, it leads to an abrupt termination of the program.
+When a panic occurs, the program ends.
 """
 
 [[questions]]
-id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
-type = "MultipleChoice"
 prompt.prompt = """
 In Cairo, the ```panic``` function can be triggered in two ways:
 1. Inadvertently, through actions causing the code to panic.
 2. Executing a valid Cairo program.
-3. """Using the ```nopanic``` notation""".
-4. """Deliberately, by invoking the ```panic``` function""".
+3. Using the ```nopanic``` notation.
+4. Deliberately, by invoking the ```panic``` function.
 """
+id = "695f318f-539b-4ce8-9c00-92e29f7f1bb3"
+type = "MultipleChoice"
 answer.answer = "1 and 4"
-prompt.distractors = [ "1 only", "2 only", "2 and 3" ]
+prompt.distractors = ["1 only", "2 only", "2 and 3"]
 context = """
-There are two primary ways that a panic can be triggered in Cairo: inadvertently, through actions causing the code to panic (e.g., accessing an array beyond its bounds), or deliberately, by invoking the panic function.
+There are two primary ways that a panic can be triggered in Cairo: inadvertently, through actions causing the code to panic (e.g., accessing an array beyond its bounds),
+or deliberately with assertions or by invoking the ```panic``` function.
 """
 
 [[questions]]
@@ -31,7 +36,11 @@ type = "MultipleChoice"
 prompt.prompt = """
 What is the ```panic_with``` attribute used for in Cairo?"""
 answer.answer = """To mark a function that returns an Option or Result."""
-prompt.distractors = [ "To ignore errors in a function that returns an Option or Result.", "To log errors for debugging in a function that returns an Option or Result.", " To continue program execution after an error occured in a function." ]
+prompt.distractors = [
+  "To ignore errors in a function that returns an Option or Result.",
+  "To log errors for debugging in a function that returns an Option or Result.",
+  "To continue program execution after an error occurred in a function.",
+]
 context = """
-You can use the ```panic_with``` attribute to mark a function that returns an Option or Result. This attribute takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function. 
+You can use the ```panic_with``` attribute to mark a function that returns an Option or Result. This attribute takes two arguments, which are the data that is passed as the panic reason as well as the name for a wrapping function.
 """
