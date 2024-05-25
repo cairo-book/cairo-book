@@ -1,0 +1,69 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which one of the following is NOT true about smart pointers?"
+answer.answer = "Smart pointers store a reference to a value but do not provide any automatic memory management or ownership tracking."
+prompt.distractors = [
+  "Smart pointers help prevent common memory issues such as dereferences unallocated memory and re-writing to existing cells.",
+  "Smart pointers ensure proper initialization and prevent access to uninitialized or invalid memory.",
+  "Smart pointers such as `Box` and `Nullable` enable efficient passing of large data by moving or sharing ownership without expensive copying.",
+]
+context = """
+Smart pointers in Cairo possess additional metadata and capabilities beyond merely serving as a reference to a value.
+They offer memory management features that extend beyond simple referencing, including strict type checking and ownership rules that enforce memory safety.
+Cairo provides several explicit smart pointer types, such as `Box` and `Nullable`, but other types like `Array` of `Felt252Dict` are also a form of smart pointer.
+These smart pointers ensure memory safety through strict ownership rules, preventing common issues like null dereferences.
+"""
+
+[[questions]]
+type = "Tracing"
+prompt.program = """
+#[derive(Drop)]
+struct Student {
+    name: ByteArray,
+    age: u8,
+    id: u32
+}
+
+fn main() {
+    let mut student1 = BoxTrait::new(Student { name: "Peter", age: 12, id: 12345 });
+    let student2 = student1;
+    student1 = BoxTrait::new(Student { name: "James", age: 18, id: 56789 });
+    println!("{}", student2.unbox().name);
+}
+"""
+answer.doesCompile = true
+answer.stdout = "Peter"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of the following statement is TRUE when the following program is run with `scarb cairo-run`?
+```
+use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
+
+fn main() {
+    let mut scoreSheet: Felt252Dict<Nullable<Span<felt252>>> = Default::default();
+
+    let exams = array![60, 70, 80, 90];
+    scoreSheet.insert(0, NullableTrait::new(exams.span()));
+
+    let firstSession = scoreSheet.get(0);
+
+    let record = match match_nullable(firstSession) {
+        FromNullableResult::Null => panic!("No value found"),
+        FromNullableResult::NotNull(firstSession) => firstSession.unbox(),
+    };
+    println!("Exams {}", *record.at(4));
+}
+```
+"""
+answer.answer = "Panics with an 'Index out of bounds' error"
+prompt.distractors = [
+  "Outputs `Exams 90`",
+  "Outputs 'No value found' panic because it implements the `zero_default` method",
+  "Fails to compile",
+]
+context = """
+The `Index out of bounds` error occurs due to an attempt to access
+the fifth element of a four-element array, which is an unallocated memory cell.
+"""
