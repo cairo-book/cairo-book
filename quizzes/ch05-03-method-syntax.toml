@@ -1,6 +1,6 @@
 [[questions]]
 type = "Tracing"
-prompt.program = 
+prompt.program = """
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,
@@ -27,8 +27,9 @@ fn main() {
     let rect2 = rect1.new(10, 20);
     rect1.compare(@rect2);
 }
+"""
 
-answer.doesCompile = True
+answer.doesCompile = true
 Stdout = false
 context = """
 Once the snapshot of a trait is implemented, an instance of a struct is allowed to invoke a method.
