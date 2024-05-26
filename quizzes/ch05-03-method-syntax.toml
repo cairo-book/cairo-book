@@ -62,5 +62,5 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-context = "A Stuct must match the trait defined in a method"
+A Stuct must match the trait defined in a method
 """
