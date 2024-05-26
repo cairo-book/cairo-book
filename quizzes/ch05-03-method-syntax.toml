@@ -1,42 +1,54 @@
 [[questions]]
-type = "MultipleChoice"
-prompt.prompt = "How are method called on an instance?"
-prompt.distractors = [
-"instance:method()",
-"method(instance)",
-"method@instance()"
-]
+type = "Tracing"
+prompt.program = 
+#[derive(Copy, Drop)]
+struct Rectangle {
+    width: u64,
+    height: u64,
+}
+#[generate_trait]
+impl RectangleImpl of RectangleTrait {
+    fn area(self: @Rectangle) -> u64 {
+        (*self.width) * (*self.height)
+    }
+    fn new(self: @Rectangle, width: u64, height: u64) -> Rectangle {
+        Rectangle { width, height }
+    }
+    fn compare(self: Rectangle, r2: @Rectangle) -> bool {
+        let r1_area = self.area();
+        let r2_area = r2.area();
 
-answer.answer = "instance.method()"
+        return r1_area == r2_area;
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {width: 40, height: 50};
+    let rect2 = rect1.new(10, 20);
+    rect1.compare(@rect2);
+}
+
+answer.doesCompile = True
+Stdout = false
 context = """
-methods are called on an instance using the <instance_name>.<method_name> syntax. 
+Once the snapshot of a trait is implemented, an instance of a struct is allowed to invoke a method.
 """
 
-[[questions]]
-type = "MultipleChoice"
-prompt.prompt = "Which of the following is a correct method definition?"
-prompt.distractors = [
-"fn area() -> u64",
-"fn area(rectangle:Rectangle) -> u64",
-"let area(rectangle) -> u64"
-]
 
-answer.answer = "fn area(self: @Rectangle) -> u64"
-context = """
-Method definitions in Cairo follow a specific syntax.
-"""
 
 [[questions]]
 type = "Tracing"
 prompt.program = """
 trait SquareTrait {
-    fn area(@Square) -> u64;
+    fn area(self: @Rectangle) -> u64;
 }
-impl SquareImpl of SquareTrait {
-    fn area(@Square) -> u64 {
+ impl SquareImpl of SquareTrait {
+        fn area(self: @Rectangle) -> u64 {
         return (*self.width) * (*self.height);
     }
 }
+
+#[derive(Drop)]
 struct Square {
     width: u64,
     height: u64,
@@ -49,5 +61,5 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-This is a compiler error because of line 33 and 36, When defining a method within a trait the `self:` parameter represents the instance the method is called on.
+context = "A Stuct must match the trait defined in a method"
 """
