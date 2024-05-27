@@ -101,7 +101,7 @@ Note that the `back_of_house` is kept private, as external users are not suppose
 We can also use `pub` to designate structs and enums as public, but there are a few extra details to consider when using `pub` with structs and enums.
 
 - If we use `pub` before a struct definition, we make the struct public, but the struct’s fields will still be private. We can make each field public or not on a case-by-case basis.
-- In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the enum keyword.
+- In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the `enum` keyword.
 
 There’s one more situation involving `pub` that we haven’t covered, and that is our last module system feature: the `use` keyword. We’ll cover `use` by itself first, and then we’ll show how to combine `pub` and `use`.
 
