@@ -16,9 +16,9 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-While the `Rectangle` structure is public, the fields `width` and `height` are not marked as `pub`. 
+While the `Rectangle` struct is public, the fields `width` and `height` are not marked as `pub`. 
 Therefore instantiating these fields outside of the `rectangle` module is not allowed. It's also impossible to access the field `width` to print it.
-This program would compile if the structure were changed to:
+This program would compile if the struct were changed to:
 ```
 pub struct Rectangle {
     pub width: u64,
