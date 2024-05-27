@@ -38,9 +38,8 @@ The compiler error shows that the shortcut no longer applies within the `custome
 
 ## Creating Idiomatic `use` Paths
 
-In Listing {{#ref use-keyword}}, you might have wondered why we specified `use
-restaurant::front_of_house::hosting` and then called `hosting::add_to_waitlist` in
-`eat_at_restaurant` rather than specifying the `use` path all the way out to
+In Listing {{#ref use-keyword}}, you might have wondered why we specified `use restaurant::front_of_house::hosting`
+and then called `hosting::add_to_waitlist` in `eat_at_restaurant` rather than specifying the `use` path all the way out to
 the `add_to_waitlist` function to achieve the same result, as in Listing {{#ref unidiomatic-use}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
@@ -57,7 +56,7 @@ the idiomatic way to bring a function into scope with `use`. Bringing the
 function’s parent module into scope with `use` means we have to specify the
 parent module when calling the function. Specifying the parent module when
 calling the function makes it clear that the function isn’t locally defined
-while still minimizing repetition of the full path. The code in Listing{{#ref unidiomatic-use}} is
+while still minimizing repetition of the full path. The code in Listing {{#ref unidiomatic-use}} is
 unclear as to where `add_to_waitlist` is defined.
 
 On the other hand, when bringing in structs, enums, traits, and other items with `use`, it’s idiomatic to specify the full path. Listing {{#ref idiomatic-use}} shows the idiomatic way to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
