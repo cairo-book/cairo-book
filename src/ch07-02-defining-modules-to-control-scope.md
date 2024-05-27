@@ -26,9 +26,9 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
 
     ```rust,noplayground
       // crate root file (src/lib.cairo)
-        mod garden {
-        // code defining the garden module goes here
-        }
+      mod garden {
+          // code defining the garden module goes here
+      }
     ```
 
   - In the file _src/garden.cairo_.
