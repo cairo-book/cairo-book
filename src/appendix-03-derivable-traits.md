@@ -57,7 +57,7 @@ The `PartialEq` trait allows for comparison between instances of a type for equa
 
 When `PartialEq` is derived on structs, two instances are equal only if all fields are equal, and the instances are not equal if any fields are not equal. When derived on enums, each variant is equal to itself and not equal to the other variants.
 
-Moreover you can implement your own `eq` (equal) and `ne` (not equal) functions suiting your `struct`. Here is an exemple where we consider that two rectangles are equal if they have the same area:
+Moreover, you can write your own implementation of the `PartialEq` trait for your type, if you don't want to or can't derive it. Here is an example in which we consider that two rectangles are equal if they have the same area:
 
 ```rust
 {{#include ../listings/appendix/listing_04_implpartialeq/src/lib.cairo}}
