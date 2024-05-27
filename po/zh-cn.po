@@ -10447,7 +10447,7 @@ msgstr "例如，我们从示例7-11中的代码开始，我们会将模块的�
 msgid ""
 "First, we’ll extract the `front_of_house` module to its own file. Remove the\n"
 "code inside the curly brackets for the `front_of_house` module, leaving only\n"
-"`mod front_of_house;` declaration, so that _src/lib.cairo_ contains the code\n"
+"the `mod front_of_house;` declaration, so that _src/lib.cairo_ contains the code\n"
 "shown in Listing 7-12. Note that this won’t compile until we create the\n"
 "_src/front_of_house.cairo_ file in Listing 7-13."
 msgstr ""
