@@ -3,8 +3,8 @@ type = "Tracing"
 prompt.program = """
 #[derive(Drop)]
 struct Character {
-    health: felt252,
-    attack: felt252,
+    health: u8,
+    attack: u8,
 }
 
 impl CharacterSub of Sub<Character> {
@@ -23,3 +23,4 @@ fn main() {
 """
 answer.doesCompile = false
 context = "When implementing a trait, the parameter names in the implementing function must match the parameter names specified in the trait definition."
+id = "c1d67428-426d-4ffc-a45c-96c2b34ba90f"

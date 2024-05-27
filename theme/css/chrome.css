@@ -85,8 +85,11 @@ a > .hljs {
 }
 
 .right-buttons {
+  display: flex;
+  align-items: center;
   margin: 0 15px;
 }
+
 .right-buttons a {
   text-decoration: none;
 }
@@ -111,6 +114,44 @@ a > .hljs {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.menu-cairo-home-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+a.menu-cairo-home {
+  display: flex;
+  align-items: center;
+  color: var(--icons);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+a.menu-cairo-home:hover {
+  text-decoration: none;
+  color: var(--icons-hover);
+}
+
+.cairo-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  filter: grayscale(100%);
+}
+
+a.menu-cairo-home:hover .cairo-logo {
+  filter: none;
+}
+
+.menu-cairo-home-text {
+  display: flex;
+  align-items: center;
+}
+
 .js .menu-title {
   cursor: pointer;
 }
