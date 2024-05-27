@@ -11,7 +11,7 @@ _src/lib.cairo_.
 
 First, we’ll extract the `front_of_house` module to its own file. Remove the
 code inside the curly brackets for the `front_of_house` module, leaving only
-the `mod front_of_house;` declaration, so that _src/lib.cairo_ contains the code
+`mod front_of_house;` declaration, so that _src/lib.cairo_ contains the code
 shown in Listing {{#ref front-extraction}}. Note that this won’t compile until we create the
 _src/front_of_house.cairo_ file.
 

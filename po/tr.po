@@ -8104,7 +8104,7 @@ msgstr "Örneğin, birden fazla restoran modülü içeren Listeleme 7-11'deki ko
 msgid ""
 "First, we’ll extract the `front_of_house` module to its own file. Remove the "
 "code inside the curly brackets for the `front_of_house` module, leaving only "
-"the `mod front_of_house;` declaration, so that _src/lib.cairo_ contains the "
+"`mod front_of_house;` declaration, so that _src/lib.cairo_ contains the "
 "code shown in Listing 7-12. Note that this won’t compile until we create the "
 "_src/front_of_house.cairo_ file in Listing 7-13."
 msgstr "İlk olarak, `front_of_house` modülünü kendi dosyasına ayıklayacağız. `front_of_house` modülü için kıvırcık parantezler içindeki kodu kaldırın, yalnızca `mod front_of_house;` bildirimini bırakın, böylece _src/lib.cairo_ Listeleme 7-12'de gösterildiği gibi kodu içerir. Listeleme 7-13'teki _src/front_of_house.cairo_ dosyasını oluşturana kadar bu derlenmeyecektir."
