@@ -76,7 +76,7 @@ Finally, if we want to add a field to `Wallet` representing its address and we w
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_08_two_generics/src/lib.cairo}}
 ```
 
-We add to `Wallet` struct definition a new generic type `U` and then assign this type to the new field member `address`. Notice that the derive attribute for the `Drop` trait works for `U` as well.
+We add to the `Wallet` struct definition a new generic type `U` and then assign this type to the new field member `address`. Notice that the `derive` attribute for the `Drop` trait works for `U` as well.
 
 ## Enums
 
