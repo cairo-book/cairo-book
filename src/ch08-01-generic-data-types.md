@@ -98,7 +98,7 @@ The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `O
 
 ## Generic Methods
 
-We can implement methods on structs and enums, and use the generic types in their definition, too. Using our previous definition of `Wallet<T>` struct, we define a `balance` method for it:
+We can implement methods on structs and enums, and use the generic types in their definitions, too. Using our previous definition of `Wallet<T>` struct, we define a `balance` method for it:
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_11_generic_methods/src/lib.cairo}}
@@ -112,7 +112,7 @@ We can also specify constraints on generic types when defining methods on the ty
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_12_constrained_generics/src/lib.cairo}}
 ```
 
-The new method `receive` increments the size of the balance of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
+The new method `receive` increments the size of `balance` of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
 
 Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and creates a new one with a generic type of each. First, let's rewrite the struct definition:
 
