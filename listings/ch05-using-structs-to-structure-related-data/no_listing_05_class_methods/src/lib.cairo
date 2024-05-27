@@ -4,6 +4,12 @@ struct Rectangle {
     height: u64,
 }
 
+impl RectangleDisplay of core::fmt::Display<Rectangle> {
+    fn fmt(self: @Rectangle, ref f: core::fmt::Formatter) -> Result<(), core::fmt::Error> {
+        write!(f, "Rectangle {{ width: {}, height: {} }}", self.width, self.height)
+    }
+}
+
 // ANCHOR: trait_impl
 #[generate_trait]
 impl RectangleImpl of RectangleTrait {
@@ -15,11 +21,11 @@ impl RectangleImpl of RectangleTrait {
         Rectangle { width, height }
     }
 
-    fn compare(r1: @Rectangle, r2: @Rectangle) -> bool {
-        let r1_area = r1.area();
-        let r2_area = r2.area();
-
-        return r1_area == r2_area;
+    fn avg(lhs: @Rectangle, rhs: @Rectangle) -> Rectangle {
+        Rectangle {
+            width: ((*lhs.width) + (*rhs.width)) / 2,
+            height: ((*lhs.height) + (*rhs.height)) / 2
+        }
     }
 }
 // ANCHOR_END: trait_impl
@@ -29,7 +35,7 @@ fn main() {
     let rect1 = RectangleTrait::new(30, 50);
     let rect2 = RectangleTrait::new(10, 40);
 
-    println!("Are rect1 and rect2 equals ? {}", RectangleTrait::compare(@rect1, @rect2));
+    println!("The average Rectangle of {} and {} is {}", @rect1, @rect2, RectangleTrait::avg(@rect1, @rect2));
 }
 // ANCHOR_END: main
 

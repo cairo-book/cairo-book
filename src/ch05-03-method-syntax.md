@@ -1,10 +1,50 @@
-# Method Syntax
+# Associated functions
+
+Functions defined within an `impl` block are called _associated functions_ because they have to be associated with one and only one type.
+Even if in Cairo you can define in a single `impl` code bloc functions related to multiple types, it is not a good practice and must be avoided.
+
+**Don't** :
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:bad_implementation}}
+```
+
+The problem here is that the _associated function_ `area` is whether associated with the type `Rectangle` or `Circle`.
+
+**Do**
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:good_implementation}}
+```
+
+Here we use a generic trait so that `area` is an _associated function_ associated with the type `T`. This way `area` is associated with one and only one type in each `impl` code bloc.
+Using a generic trait is possible because we can compute the area of a `Rectangle` and `Circle`.
+
+However, when the functions are each specific to a certain type you **have to** declare multiple traits and implementations as seen below.
+
+**Don't**
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:very_bad_implementation}}
+```
+
+Here there is nothing in common between a `Rectangle` instance and a `Cat` instance so declaring a trait with _associated functions_ associated to `Rectangle` and `Cat` is dubious and a generic trait is not the solution.
+
+**Do**
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:good_implementation_splitted}}
+```
+
+Here each trait and each implementation is associated to only one type. This is the way to go!
+
+## Methods
 
 _Methods_ are similar to functions: we declare them with the `fn` keyword and a
 name, they can have parameters and a return value, and they contain some code
 that’s run when the method is called from somewhere else.
 
-Unlike functions, methods are defined within the context of a type, either with their first parameter `self`
+Unlike simple functions, methods are _associated functions_ defined within the context of a type, either with their first parameter `self`
 which represents the instance of the type the method is being called on (also called _instance methods_),
 or by using this type for their parameters and/or return value (also called _class methods_ in Object-Oriented programming).
 
@@ -80,13 +120,13 @@ Let’s practice using methods by implementing another method on the `Rectangle`
 
 Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
-## Methods Without `self` Parameter
+## Associated functions without `self` Parameter / Class methods
 
-In Cairo, we can also define a method which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
+In Cairo, we can also define a associated function which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
-These methods are often used to build new instances but they may have a lot of different utilities.
+These associated fucntions are often used to build new instances but they may have a lot of different utilities.
 
-Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `compare` which compares two `Rectangle` instances, and returns `true` if both rectangles have the same area and `false` otherwise.
+Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `avg` which create a `Rectangle` instance whose attributes are the average of the attributes of two other `Rectangle` instances.
 
 ```rust
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:trait_impl}}
@@ -94,7 +134,7 @@ Let's create the method `new` which creates a `Rectangle` from a `width` and a `
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:main}}
 ```
 
-Note that the `compare` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `RectangleTrait::compare(@rect1, @rect2)`, it would be called with `rect1.compare(rect2)`.
+Note that the `avg` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `RectangleTrait::avg(@rect1, @rect2)`, it would be called with `rect1.avg(rect2)`.
 
 ## Multiple Traits and `impl` Blocks
 
