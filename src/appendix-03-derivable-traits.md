@@ -57,12 +57,18 @@ The `PartialEq` trait allows for comparison between instances of a type for equa
 
 When `PartialEq` is derived on structs, two instances are equal only if all fields are equal, and the instances are not equal if any fields are not equal. When derived on enums, each variant is equal to itself and not equal to the other variants.
 
+Moreover you can implement your own `eq` (equal) and `ne` (not equal) functions suiting your `struct`. Here is an exemple where we consider that two rectangles are equal if they have the same area:
+
+```rust
+{{#include ../listings/appendix/listing_04_implpartialeq/src/lib.cairo}}
+```
+
 The `PartialEq` trait is required, for example, with the use of the `assert_eq!` macro in tests, which needs to be able to compare two instances of a type for equality.
 
 Here is an example:
 
 ```rust
-{{#include ../listings/appendix/listing_04_partialeq/src/lib.cairo}}
+{{#include ../listings/appendix/listing_05_partialeq/src/lib.cairo}}
 ```
 
 ## Serializing with `Serde`
@@ -74,7 +80,7 @@ Here is an example:
 For example:
 
 ```rust
-{{#include ../listings/appendix/listing_05_serialize/src/lib.cairo}}
+{{#include ../listings/appendix/listing_06_serialize/src/lib.cairo}}
 
 ```
 
@@ -84,14 +90,14 @@ If you run the `main` function, the output will be:
 Run panicked with [2, 99 ('c'), ].
 ```
 
-We can see here that our struct `A` has been serialized into the output array. Note that the `serialize` function takes as argument a snapshot of the type you want to convert into an array. This is why deriving `Drop` for `A` is required here, as the `main` function keeps ownership of the `first_struct` struct. 
+We can see here that our struct `A` has been serialized into the output array. Note that the `serialize` function takes as argument a snapshot of the type you want to convert into an array. This is why deriving `Drop` for `A` is required here, as the `main` function keeps ownership of the `first_struct` struct.
 
 Also, we can use the `deserialize` function to convert the serialized array back into our `A` struct.
 
 Here is an example:
 
 ```rust
-{{#include ../listings/appendix/listing_06_deserialize/src/lib.cairo}}
+{{#include ../listings/appendix/listing_07_deserialize/src/lib.cairo}}
 ```
 
 Here we are converting a serialized array span back to the struct `A`. `deserialize` returns an `Option` so we need to unwrap it. When using deserialize we also need to specify the type we want to deserialize into.
