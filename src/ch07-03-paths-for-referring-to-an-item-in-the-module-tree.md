@@ -44,7 +44,7 @@ Cairo chose to have the module system function this way so that hiding inner imp
 
 ## Exposing Paths with the `pub` Keyword
 
-Let’s return to the previous error that told us the `hosting` module and the `add_to_waitlist` function are not visible. We want the `eat_at_restaurant` function in the parent module to have access to the `add_to_waitlist` function in the child module, so we mark the `hosting` module and the `add_to_waitlist` function with the `pub` keyword, as shown in Listing {{#ref pub-keyword-not-compiling}}.
+Let’s return to the previous error that told us the `hosting` module and the `add_to_waitlist` function are not visible. We want the `eat_at_restaurant` function in the parent module to have access to the `add_to_waitlist` function in the child module, so we mark the `hosting` module with the `pub` keyword, as shown in Listing {{#ref pub-keyword-not-compiling}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
