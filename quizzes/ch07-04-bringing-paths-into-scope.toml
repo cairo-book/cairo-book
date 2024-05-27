@@ -10,7 +10,7 @@ prompt.distractors = [
 ]
 answer.answer = "`use` reduces the verbosity of referring to items in the used path"
 context = """
-`use` allows references to items in the used path that are shorter than without the use, reducing the verbosity of reference.
+`use` allows references to items in the used path that are shorter than without `use`, reducing the verbosity of references.
 """
 id = "446098fa-3695-43e9-8d70-a160188b1c30"
 [[questions]]
