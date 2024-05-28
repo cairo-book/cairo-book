@@ -70,11 +70,11 @@ Then run `scarb cairo-test` again. The output now shows `exploration` instead of
 $ scarb cairo-test
 testing adder ...
 running 1 test
-test adder::exploration ... ok (gas usage est.: 53200)
+test adder::tests::exploration ... ok (gas usage est.: 22540)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like Listing {{#ref second-test}}.
+Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like in Listing {{#ref second-test}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
