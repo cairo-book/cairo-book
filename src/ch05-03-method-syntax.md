@@ -25,7 +25,7 @@ However, when the functions are each specific to a certain type you **have to** 
 **Don't**
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_splitted/src/lib.cairo:bad_implementation}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_split/src/lib.cairo:bad_implementation}}
 ```
 
 Here there is nothing in common between a `Rectangle` instance and a `Cat` instance so declaring a trait with _associated functions_ associated to `Rectangle` and `Cat` is dubious and a generic trait is not the solution.
@@ -33,7 +33,7 @@ Here there is nothing in common between a `Rectangle` instance and a `Cat` insta
 **Do**
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_splitted/src/lib.cairo:implementation_splitted}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_split/src/lib.cairo:implementation_split}}
 ```
 
 Here each trait and each implementation is associated to only one type. This is the way to go!
@@ -124,7 +124,7 @@ Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
 In Cairo, we can also define a associated function which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
-These associated fucntions are often used to build new instances but they may have a lot of different utilities.
+These associated functions are often used to build new instances but they may have a lot of different utilities.
 
 Let's create the method `new` which creates a `Rectangle` from a `width` and a `height`, and a method `avg` which create a `Rectangle` instance whose attributes are the average of the attributes of two other `Rectangle` instances.
 

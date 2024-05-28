@@ -24,7 +24,7 @@ impl BadImpl of BadTrait {
 }
 //ANCHOR_END: bad_implementation
 
-//ANCHOR: implementation_splitted
+//ANCHOR: implementation_split
 trait RectangleTrait {
     fn area(self: @Rectangle) -> u64;
 }
@@ -42,6 +42,6 @@ impl CatImpl of CatTrait {
         println!("Meow!");
     }
 }
-//ANCHOR_END: implementation_splitted
+//ANCHOR_END: implementation_split
 
 
