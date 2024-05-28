@@ -56,7 +56,7 @@ fn test() -> Result<usize, String> {
 ```
   """
 context = """
-`should_err` does not exist in Cairo &mdash; tests that returns `Result` will pass even if the result is `Err`.
+`should_err` does not exist in Cairo &mdash; tests that return `Result` will pass even if the result is an `Err`.
 """
 
 [[questions]]
