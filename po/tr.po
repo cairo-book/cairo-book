@@ -9672,17 +9672,17 @@ msgstr "Dosya Adı: src/tests.cairo"
 
 #: src/ch09-02-test-organization.md:68
 msgid ""
-"Enter the code in Listing 9-11 into the _src/tests/integration_test.cairo_ "
+"Enter the code in Listing 9-11 into the _src/tests/integration_tests.cairo_ "
 "file:"
-msgstr "_src/tests/integration_test.cairo_ dosyasına Listeleme 9-11'deki kodu girin:"
+msgstr "_src/tests/integration_tests.cairo_ dosyasına Listeleme 9-11'deki kodu girin:"
 
 #: src/ch09-02-test-organization.md:75
 msgid "\"internal_adder failed\""
 msgstr ""
 
 #: src/ch09-02-test-organization.md:79
-msgid "Filename: src/tests/integration_test.cairo"
-msgstr "Dosya Adı: src/tests/integration_test.cairo"
+msgid "Filename: src/tests/integration_tests.cairo"
+msgstr "Dosya Adı: src/tests/integration_tests.cairo"
 
 #: src/ch09-02-test-organization.md:81
 msgid ""

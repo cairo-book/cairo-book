@@ -7653,12 +7653,12 @@ msgstr ""
 
 #: src/ch09-02-test-organization.md:68
 msgid ""
-"Enter the code in Listing 9-11 into the _src/tests/integration_test.cairo_ "
+"Enter the code in Listing 9-11 into the _src/tests/integration_tests.cairo_ "
 "file:"
 msgstr ""
 
 #: src/ch09-02-test-organization.md:80
-msgid "Filename: src/tests/integration_test.cairo"
+msgid "Filename: src/tests/integration_tests.cairo"
 msgstr ""
 
 #: src/ch09-02-test-organization.md:82

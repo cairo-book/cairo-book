@@ -10408,7 +10408,7 @@ msgstr ""
 #: src/ch09-02-test-organization.md:68
 #, fuzzy
 msgid ""
-"Enter the code in Listing 9-11 into the _src/tests/integration_test.cairo_ "
+"Enter the code in Listing 9-11 into the _src/tests/integration_tests.cairo_ "
 "file:"
 msgstr ""
 "Ingrese el código del Listado 8-11 en el archivo _tests/integration_test."
@@ -10416,8 +10416,8 @@ msgstr ""
 
 #: src/ch09-02-test-organization.md:80
 #, fuzzy
-msgid "Filename: src/tests/integration_test.cairo"
-msgstr "<span class=\"filename\">Filename: tests/integration_test.cairo</span>"
+msgid "Filename: src/tests/integration_tests.cairo"
+msgstr "<span class=\"filename\">Filename: tests/integration_tests.cairo</span>"
 
 #: src/ch09-02-test-organization.md:82
 #, fuzzy
@@ -23672,7 +23672,7 @@ msgstr ""
 #~ "│   └── main.cairo\n"
 #~ "└── tests\n"
 #~ "    ├── lib.cairo\n"
-#~ "    └── integration_test.cairo\n"
+#~ "    └── integration_tests.cairo\n"
 #~ "```"
 #~ msgstr ""
 #~ "```shell\n"
@@ -23683,7 +23683,7 @@ msgstr ""
 #~ "│   └── main.cairo\n"
 #~ "└── tests\n"
 #~ "    ├── lib.cairo\n"
-#~ "    └── integration_test.cairo\n"
+#~ "    └── integration_tests.cairo\n"
 #~ "```"
 
 #~ msgid ""
