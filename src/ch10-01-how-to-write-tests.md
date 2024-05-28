@@ -94,13 +94,13 @@ Run `scarb cairo-test` and you will see the following output:
 
 Instead of `ok`, the line `adder::another` shows `fail`. A new section appears between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `"Make this test fail"` error.
 
-The summary line displays at the end: overall, our test result is `FAILED`. We had one test pass and one test fail.
+The summary line is displayed at the end: overall, our test result is `FAILED`. We had one test pass and one test fail.
 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
 ## Checking Results with the `assert!` Macro
 
-The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro the first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
+The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro the first argument that evaluates to a boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intended.
 
 Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing {{#ref rectangle}}. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
 
@@ -125,7 +125,7 @@ We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `R
 $ scarb cairo-test
 testing adder ...
 running 1 test
-test adder::larger_can_hold_smaller ... ok (gas usage est.: 54940)
+test adder::tests::larger_can_hold_smaller ... ok (gas usage est.: 54940)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
@@ -140,7 +140,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 {{#label another-test}}
 <span class="caption">Listing {{#ref another-test}}: Adding another test in _lib.cairo_ that will pass</span>
 
-Because the correct result of the `can_hold` method, in this case, is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns false:
+Because the correct result of the `can_hold` method, in this case, is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns `false`:
 
 ```shell
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/output.txt}}
@@ -158,15 +158,15 @@ Running the tests now produces the following:
 $ scarb cairo-test
 testing adder ...
 running 2 tests
-test adder::larger_can_hold_smaller ... fail (gas usage est.: 57610)
-test adder::smaller_cannot_hold_larger ... ok (gas usage est.: 55140)
+test adder::tests::larger_can_hold_smaller ... fail (gas usage est.: 57610)
+test adder::tests::smaller_cannot_hold_larger ... ok (gas usage est.: 55140)
 failures:
    adder::larger_can_hold_smaller - Panicked with "rectangle cannot hold".
 
 Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
-Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in `larger_can_hold_smaller` test. Notice that `smaller_cannot_hold_larger` test still passes: to make the test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
+Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in the `larger_can_hold_smaller` test. Notice that the `smaller_cannot_hold_larger` test still passes: to make this test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
 
 [method syntax]: ./ch05-03-method-syntax.md
 
