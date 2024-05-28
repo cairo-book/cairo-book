@@ -138,7 +138,7 @@ We can define the generic implementation in a private module, use an impl alias 
 
 ## Negative Impls
 
-> Note: This is still an experimental feature and can only be used if `experimental-features = ["negative_impls"]` is enabled in your Scarb.toml file, under the `[package]` section.
+> Note: This is still an experimental feature and can only be used if `experimental-features = ["negative_impls"]` is enabled in your _Scarb.toml_ file, under the `[package]` section.
 
 Negative implementations, also known as negative traits or negative bounds, are a mechanism that allows you to express that a type does not implement a certain trait when defining the implementation of a trait over a generic type. Negative impls enable you to write implementations that are applicable only when another implementation does not exist in the current scope.
 
