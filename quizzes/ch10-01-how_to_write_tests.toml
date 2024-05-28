@@ -18,7 +18,7 @@ fn f(x: usize) -> Result<usize, ByteArray>;
 ```
 
 And you want to test that `f(0)` should return `Err(_)`.
-Which of the following is NOT a valid way to test that?
+Which of the following is **NOT** a valid way to test that?
 """
 prompt.distractors = ["""
 ```
