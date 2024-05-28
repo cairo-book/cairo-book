@@ -120,7 +120,7 @@ Let’s practice using methods by implementing another method on the `Rectangle`
 
 Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
-## Associated functions without `self` Parameter / Class methods
+## Associated functions
 
 In Cairo, we can also define a associated function which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
