@@ -42,7 +42,7 @@ Note the `#[test]` annotation: this attribute indicates this is a test function,
 
 We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the next [Testing Organization](ch10-02-test-organization.md) section.
 
-The example function body uses the `assert!` macro, which contains the result of adding 2 and 2, equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how `assert!` works later in this chapter. Let’s run it to see that this test passes.
+The example function body uses the `assert!` macro, which contains the result of adding 2 and 2, which equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how `assert!` works later in this chapter. Let’s run it to see that this test passes.
 
 The `scarb cairo-test` command runs all tests found in our project, and shows the following output:
 
