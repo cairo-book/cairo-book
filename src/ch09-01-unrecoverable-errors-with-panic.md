@@ -32,7 +32,7 @@ Executing this program will yield the same error message as before. In that case
 
 ## `panic!` Macro
 
-`panic!` macro can be really helpful. The previous example returning the error code `2` shows how convenient `panic!` macro is. There is no need to create an array and pass it as an argument like `panic` function.
+`panic!` macro can be really helpful. The previous example returning the error code `2` shows how convenient `panic!` macro is. There is no need to create an array and pass it as an argument like with the `panic` function.
 
 ```rust
 {{#include ../listings/ch09-error-handling/no_listing_03_panic_macro/src/lib.cairo}}
