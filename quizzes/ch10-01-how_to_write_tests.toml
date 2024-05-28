@@ -56,7 +56,7 @@ fn test() -> Result<usize, String> {
 ```
   """
 context = """
-`should_err` does not exist in Cairo &mdash; tests that returns a `Result` will pass even if the result is an `Err`.
+`should_err` does not exist in Cairo &mdash; tests that returns `Result` will pass even if the result is `Err`.
 """
 
 [[questions]]
@@ -118,10 +118,11 @@ mod tests {
 		assert_ne!((3 * 2), 8);
         assert_eq!((5 * 5), 25);
 	}
-    #[test]
-    fn test_subtraction() {
-        assert!((12 - 11) == 1, "The first argument was false");
-    }
+  
+  #[test]
+  fn test_subtraction() {
+      assert!((12 - 11) == 1, "The first argument was false");
+  }
 }
 ```
 """
