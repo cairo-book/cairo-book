@@ -1,14 +1,13 @@
-# Method Syntax
+# Associated functions
 
-## Methods
+We call _associated functions_ functions that are associated with a `Type`. There are 2 ways for a function to be associated with a `Type`:
 
-_Methods_ are similar to functions: we declare them with the `fn` keyword and a
-name, they can have parameters and a return value, and they contain some code
-that’s run when the method is called from somewhere else.
-
-Unlike simple functions, methods are _associated functions_ defined within the context of a type, either with their first parameter `self`
-which represents the instance of the type the method is being called on (also called _instance methods_),
-or by using this type for their parameters and/or return value (also called _class methods_ in Object-Oriented programming).
+- By having its first parameter called `self` and of this `Type`.
+  For instance : `area(self :@Rectangle) -> u64` is an associated function to the type `Rectangle`.
+  This kind of associated function is called a **method**.
+- By returning a instance of type `Type` or having at least one parameter of type `Type`.
+  For instance : `avg(lhs :@Rectangle, rhs: @Rectangle) -> Rectangle` is an associated function to the type `Rectangle`.
+  This kind of associated function is not a **method** because it hasn't `self` as first parameter.
 
 ## Defining Methods
 
@@ -27,7 +26,7 @@ Then, we implement this trait in `RectangleImpl` with the `impl` keyword. In the
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_define_methods/src/lib.cairo:trait_implementation}}
 ```
 
-Finally, we call this `area` method on the `Rectangle` instance `rect1` using the `<instance_name>.<method_name>` syntax. The instance `rect1` will be passed to the `area` method as the `self` parameter.
+Finally, we call this `area` method on the `Rectangle` instance `rect1` using the `<instance_name>.<method_name>` syntax. The instance `rect1` will be passed to the `area` method as the `self` parameter. Methods in Cairo are equivalent to _instance methods_ in object-oriented programming.
 
 ```rust
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_define_methods/src/lib.cairo:main}}
@@ -82,9 +81,9 @@ Let’s practice using methods by implementing another method on the `Rectangle`
 
 Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
-## Associated functions
+## Associated functions without `self`
 
-In Cairo, we can also define a method which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type and thus is an _associated function_. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
+In Cairo, we can also define a function which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type and thus is an _associated function_. This is what we call _class methods_ in Object-Oriented programming. As these functions are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
 These associated functions are often used to build new instances but they may have a lot of different utilities.
 
@@ -96,7 +95,7 @@ Let's create the method `new` which creates a `Rectangle` from a `width` and a `
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:main}}
 ```
 
-Note that the `avg` function could also be written as an _instance method_ with `self` as the first rectangle. In this case, instead of using the method with `RectangleTrait::avg(@rect1, @rect2)`, it would be called with `rect1.avg(rect2)`.
+Note that the `avg` function could also be written as an method with `self` as the first rectangle. In this case, instead of using the method with `RectangleTrait::avg(@rect1, @rect2)`, it would be called with `rect1.avg(rect2)`.
 
 ## Multiple Traits and `impl` Blocks
 
@@ -112,8 +111,8 @@ blocks here, but this is valid syntax.
 
 ## Guidelines about associated functions
 
-_associated functions_ defined within an `impl` bloc should be associated with one and only one type.
-Even if in Cairo you can define in a single `impl` code bloc functions related to multiple types, it is not a good practice and must be avoided.
+_associated functions_ defined within an `impl` block should all be associated with the same type.
+Even if in Cairo you can define in a single `impl` code block functions related to multiple types, it is not a good practice and should be avoided.
 
 **Don't** :
 
@@ -121,7 +120,7 @@ Even if in Cairo you can define in a single `impl` code bloc functions related t
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:bad_implementation}}
 ```
 
-The problem here is that the _associated functions_ `rectangleArea` and `circleArea` are within the same `impl` code bloc but are associated to different types (_ie_ `Rectangle` and `Circle`).
+The problem here is that the _associated functions_ `rectangleArea` and `circleArea` are within the same `impl` code block but are associated to different types (_ie_ `Rectangle` and `Circle`).
 
 **Do**
 
@@ -129,7 +128,7 @@ The problem here is that the _associated functions_ `rectangleArea` and `circleA
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:good_implementation}}
 ```
 
-Here we use a generic trait so that `area` is an _associated function_ associated with the type `T`. This way `area` is associated with one and only one type in each `impl` code bloc.
+Here we use a generic trait so that `area` is an _associated function_ associated with the type `T`. This way `area` is associated with one and only one type in each `impl` code block.
 Using a generic trait is possible because we can compute the area of a `Rectangle` and `Circle`.
 
 However, when the functions are each specific to a certain type you **have to** declare multiple traits and implementations as seen below.
@@ -154,9 +153,8 @@ Here each trait and each implementation is associated to only one type. This is 
 
 Structs let you create custom types that are meaningful for your domain. By
 using structs, you can keep related pieces of data together and name each piece
-to make your code clear. In `trait` and `impl` blocks, you can define methods, which
-are functions associated with a type, allowing you to specify the behavior that
-instances of your type have.
+to make your code clear. In `trait` and `impl` blocks, you can define functions associated with a type. These either can be methods specifying the behavior of
+instances of your type or functions manipulating it, not related to a specific instance your Type.
 
 But structs aren’t the only way you can create custom types: let’s turn to
 Cairo’s enum feature to add another tool to your toolbox.
