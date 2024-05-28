@@ -203,16 +203,16 @@ Let’s check that it passes!
 $ scarb cairo-test
 testing adder ...
 running 2 tests
-test adder::wrong_check ... ok (gas usage est.: 132000)
-test adder::it_adds_two ... ok (gas usage est.: 131500)
+test adder::tests::wrong_check ... ok (gas usage est.: 132000)
+test adder::tests::it_adds_two ... ok (gas usage est.: 131500)
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
 In the `it_adds_two` test, we pass `4` as argument to `assert_eq!` macro, which is equal to the result of
-calling `add_two(2)`. The line for this test is `test adder::it_adds_two ...ok`, and the `ok` text indicates that our test passed.
+calling `add_two(2)`. The line for this test is `test adder::tests::it_adds_two ... ok`, and the `ok` text indicates that our test passed.
 
 In the `wrong_check` test, we pass `0` as argument to `assert_ne!` macro, which is not equal to the result of
-calling `add_two(2)`. Tests that use the `assert_ne!` macro will pass if the two values we give it are not equal and
+calling `add_two(2)`. Tests that use the `assert_ne!` macro will pass if the two values we give it are _not_ equal and
 fail if they’re equal. This macro is most useful for cases when we’re not sure
 what a value _will_ be, but we know what the value definitely _shouldn’t_ be.
 For example, if we’re testing a function that is guaranteed to change its input
@@ -233,8 +233,8 @@ Run the tests again:
 $ scarb cairo-test
 testing adder ...
 running 2 tests
-test adder::wrong_check ... ok (gas usage est.: 132000)
-test adder::it_adds_two ... fail (gas usage est.: 166800)
+test adder::tests::wrong_check ... ok (gas usage est.: 132000)
+test adder::tests::it_adds_two ... fail (gas usage est.: 166800)
 failures:
    adder::tests::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed.
 4: 4
