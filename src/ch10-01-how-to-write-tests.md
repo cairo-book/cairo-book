@@ -50,7 +50,7 @@ The `scarb cairo-test` command runs all tests found in our project, and shows th
 $ scarb cairo-test
 testing adder ...
 running 1 test
-test adder::it_works ... ok (gas usage est.: 53200)
+test adder::tests::it_works ... ok (gas usage est.: 22540)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
