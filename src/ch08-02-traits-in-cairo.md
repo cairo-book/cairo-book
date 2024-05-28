@@ -125,7 +125,7 @@ Note that in this example, `CircleGeometry` and `RectangleGeometry` implementati
 
 ## Impl Aliases
 
-Implementations can be aliased when imported. This is most useful when you want to instantiate generic implementations with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
+Implementations can be aliased when imported. This is most useful when you want to instantiate generic impls with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_impl_aliases/src/lib.cairo}}
