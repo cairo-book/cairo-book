@@ -12,12 +12,12 @@ struct Circle {
 
 //ANCHOR: bad_implementation
 trait RectangleTrait {
-    fn RectangelArea(self: @Rectangle) -> felt252;
+    fn RectangleArea(self: @Rectangle) -> felt252;
     fn CircleArea(self: @Circle) -> felt252;
 }
 
 impl ShapeImpl of RectangleTrait {
-    fn RectangelArea(self: @Rectangle) -> felt252 {
+    fn RectangleArea(self: @Rectangle) -> felt252 {
         (*self.width) * (*self.height)
     }
 
