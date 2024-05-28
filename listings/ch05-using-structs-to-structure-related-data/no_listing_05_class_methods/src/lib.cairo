@@ -1,13 +1,7 @@
-#[derive(Copy, Drop)]
+#[derive(Copy, Drop, Debug)]
 struct Rectangle {
     width: u64,
     height: u64,
-}
-
-impl RectangleDisplay of core::fmt::Display<Rectangle> {
-    fn fmt(self: @Rectangle, ref f: core::fmt::Formatter) -> Result<(), core::fmt::Error> {
-        write!(f, "Rectangle {{ width: {}, height: {} }}", self.width, self.height)
-    }
 }
 
 // ANCHOR: trait_impl
@@ -35,7 +29,7 @@ fn main() {
     let rect1 = RectangleTrait::new(30, 50);
     let rect2 = RectangleTrait::new(10, 40);
 
-    println!("The average Rectangle of {} and {} is {}", @rect1, @rect2, RectangleTrait::avg(@rect1, @rect2));
+    println!("The average Rectangle of {:?} and {:?} is {:?}", @rect1, @rect2, RectangleTrait::avg(@rect1, @rect2));
 }
 // ANCHOR_END: main
 

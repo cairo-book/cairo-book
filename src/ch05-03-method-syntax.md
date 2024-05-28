@@ -6,7 +6,7 @@ Even if in Cairo you can define in a single `impl` code bloc functions related t
 **Don't** :
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:bad_implementation}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:bad_implementation}}
 ```
 
 The problem here is that the _associated function_ `area` is whether associated with the type `Rectangle` or `Circle`.
@@ -14,7 +14,7 @@ The problem here is that the _associated function_ `area` is whether associated 
 **Do**
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:good_implementation}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:good_implementation}}
 ```
 
 Here we use a generic trait so that `area` is an _associated function_ associated with the type `T`. This way `area` is associated with one and only one type in each `impl` code bloc.
@@ -25,7 +25,7 @@ However, when the functions are each specific to a certain type you **have to** 
 **Don't**
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:very_bad_implementation}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_splitted/src/lib.cairo:bad_implementation}}
 ```
 
 Here there is nothing in common between a `Rectangle` instance and a `Cat` instance so declaring a trait with _associated functions_ associated to `Rectangle` and `Cat` is dubious and a generic trait is not the solution.
@@ -33,7 +33,7 @@ Here there is nothing in common between a `Rectangle` instance and a `Cat` insta
 **Do**
 
 ```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_impl_bad_practice/src/lib.cairo:good_implementation_splitted}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_splitted/src/lib.cairo:implementation_splitted}}
 ```
 
 Here each trait and each implementation is associated to only one type. This is the way to go!
