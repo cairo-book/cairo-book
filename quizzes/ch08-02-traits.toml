@@ -70,7 +70,7 @@ prompt.distractors = ["`draw(my_shape);`", "`draw(@my_shape);`"]
 answer.answer = "`my_shape.draw();`"
 context = """
 The `draw` method is a method implemented for the `Shape` type, so it should be called on the `my_shape` object.
-It is also possible to call the method on the snapshot of the object by using the `@` operator : `Drawable::draw(@my_shape)`.
+It is also possible to call the method on the snapshot of the object by using the `@` operator, for example `Drawable::draw(@my_shape)`.
 """
 id = "af789385-e4e4-4405-8fb7-049b9a51bc3b"
 
