@@ -27,7 +27,7 @@ adder
     └── lib.cairo
 ```
 
-In _lib.cairo_, let's remove the existing content and add a `tests` module containing a first test, as shown in Listing {{#ref first-test}}.
+In _lib.cairo_, let's remove the existing content and add a `tests` module containing the first test, as shown in Listing {{#ref first-test}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -100,7 +100,7 @@ Now that you’ve seen what the test results look like in different scenarios, l
 
 ## Checking Results with the `assert!` Macro
 
-The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro a first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
+The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro the first argument that evaluates to a Boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intend.
 
 Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing {{#ref rectangle}}. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
 
@@ -244,7 +244,7 @@ Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
-message: ``Panicked with "assertion `4 == add_two(2)` failed``.
+message: `` Panicked with "assertion `4 == add_two(2)` failed ``.
 It tells us that the assertion that failed was `` "assertion `left == right` failed`` and the `left`
 and `right` values are printed on the next lines as `left: left_value` and `right: right_value`.
 This helps us start debugging: the `left` argument was `4` but the `right` argument, where we had
