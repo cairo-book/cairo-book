@@ -301,7 +301,7 @@ In this example, we roll a `Dice` struct multiple times and compare the results.
 You can also add a custom message to be printed with the failure message as
 optional arguments to `assert!`, `assert_eq!`, and `assert_ne!` macros. Any
 arguments specified after the required arguments are passed along to the
-`format!` macro (discussed in [Printing Chapter][formatting]), so you can pass a format string that contains `{}` placeholders and
+`format!` macro (discussed in the [Printing][formatting] chapter), so you can pass a format string that contains `{}` placeholders and
 values to go in those placeholders. Custom messages are useful for documenting
 what an assertion means; when a test fails, you’ll have a better idea of what
 the problem is with the code.
@@ -320,9 +320,9 @@ Now when we run the test, we’ll get a more informative error message:
 $ scarb cairo-test
 testing adder ...
 running 1 test
-test adder::it_adds_two ... fail (gas usage est.: 590230)
+test adder::tests::it_adds_two ... fail (gas usage est.: 590230)
 failures:
-   adder::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed: Expected 4, got add_two(2)=5
+   adder::tests::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed: Expected 4, got add_two(2)=5
 4: 4
 add_two(2): 5".
 
@@ -345,7 +345,7 @@ In addition to checking return values, it’s important to check that our code h
 ```
 
 {{#label guess}}
-<span class="caption">Listing {{#ref guess}}: Guess struct and its `new` method</span>
+<span class="caption">Listing {{#ref guess}}: `Guess` struct and its `new` method</span>
 
 Other code that uses `Guess` depends on the guarantee that `Guess` instances will contain only values between `1` and `100`. We can write a test that ensures that attempting to create a `Guess` instance with a value outside that range panics.
 
@@ -361,7 +361,7 @@ We place the `#[should_panic]` attribute after the `#[test]` attribute and befor
 $ scarb cairo-test
 testing guess ...
 running 1 test
-test guess::greater_than_100 ... ok (gas usage est.: 57910)
+test guess::tests::greater_than_100 ... ok (gas usage est.: 26850)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
@@ -377,15 +377,16 @@ When we run the test, it will fail:
 $ scarb cairo-test
 testing guess ...
 running 1 test
-test guess::greater_than_100 ... fail (gas usage est.: 54570)
+test guess::tests::greater_than_100 ... fail (gas usage est.: 23910)
 failures:
-   guess::greater_than_100 - expected panic but finished successfully.
+   guess::tests::greater_than_100 - expected panic but finished successfully.
+
 Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 ```
 
 We don’t get a very helpful message in this case, but when we look at the test function, we see that it’s annotated with `#[should_panic]` attribute. The failure we got means that the code in the test function did not cause a panic.
 
-Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `#[should_panic]` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `GuessImpl` in Listing {{#ref guess-2}} where the `new` function panics with different messages depending on whether the value is too small or too large:
+Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional `expected` parameter to the `#[should_panic]` attribute. The test harness will make sure that the failure message contains the provided text. For example, consider the modified code for `GuessImpl` in Listing {{#ref guess-2}} where the `new` function panics with different messages depending on whether the value is too small or too large:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -396,7 +397,7 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 {{#label guess-2}}
 <span class="caption">Listing {{#ref guess-2}}: `new` implementation that panics with different error messages</span>
 
-The test will pass because the value we put in the `should_panic` attribute’s expected parameter is the string that the `Guess::new` method panics with. We need to specify the entire panic message that we expect.
+The test will pass because the value we put in the `should_panic` attribute’s `expected` parameter is the string that the `Guess::new` method panics with. We need to specify the entire panic message that we expect.
 
 To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the `if value < 1` and the `else if value > 100` blocks:
 
@@ -410,9 +411,9 @@ This time when we run the `should_panic` test, it will fail:
 $ scarb cairo-test
 testing guess ...
 running 1 test
-test guess::greater_than_100 ... fail
+test guess::tests::greater_than_100 ... fail (gas usage est.: 26690)
 failures:
-   guess::greater_than_100 - Panicked with "Guess must be >= 1".
+   guess::tests::greater_than_100 - Panicked with "Guess must be >= 1".
 Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 ```
 
@@ -439,11 +440,11 @@ We can pass the name of any test function to `cairo-test` to run only that test 
 $ scarb cairo-test -f add_two_and_two
 testing adder ...
 running 1 test
-test adder::add_two_and_two ... ok (gas usage est.: 53200)
+test adder::tests::add_two_and_two ... ok (gas usage est.: 22540)
 test result: ok. 1 passed; 0 failed; 0 ignored; 1 filtered out;
 ```
 
-Only the test with the name `add_two_and_two` ran; the other test didn’t match that name. The test output lets us know we had one more test that didn’t run by displaying 1 filtered out at the end.
+Only the test with the name `add_two_and_two` ran; the other test didn’t match that name. The test output lets us know we had one more test that didn’t run by displaying `1 filtered out;` at the end.
 
 We can also specify part of a test name, and any test whose name contains that value will be run.
 
@@ -461,18 +462,18 @@ After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now 
 $ scarb cairo-test
 testing adder ...
 running 2 tests
-test adder::expensive_test ... ignored
-test adder:::it_works ... ok
+test adder::tests::expensive_test ... ignored
+test adder::tests::it_works ... ok (gas usage est.: 22540)
 test result: ok. 1 passed; 0 failed; 1 ignored; 0 filtered out;
 ```
 
 The `expensive_test` function is listed as ignored.
 
-When you’re at a point where it makes sense to check the results of the ignored tests and you have time to wait for the results, you can run `scarb cairo-test --include-ignored` to run all tests whether they’re ignored or not.
+When you’re at a point where it makes sense to check the results of the ignored tests and you have time to wait for the results, you can run `scarb cairo-test --include-ignored` to run all tests, whether they’re ignored or not.
 
 ## Testing Recursive Functions or Loops
 
-When testing recursive functions or loops, the test is instantiated by default with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. This value is assumed reasonably large enough, but you can override it by adding the `#[available_gas(<Number>)]` attribute on the test function. The following example shows how to use it:
+When testing recursive functions or loops, the test is instantiated by default with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. This value is assumed reasonably large enough, but you can override it by adding the `#[available_gas(<Number>)]` attribute to the test function. The following example shows how to use it:
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
@@ -501,12 +502,12 @@ The value printed when running `scarb cairo-test` is the amount of gas that was 
 $ scarb cairo-test
 testing adder ...
 running 1 test
-consumed gas: 163430
+consumed gas: 80690
 
-test adder::benchmark_sum_n_gas ... ok (gas usage est.: 271290)
+test adder::tests::benchmark_sum_n_gas ... ok (gas usage est.: 140100)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
 
-Here, the gas usage of the `sum_n` function is 163430 (decimal representation of the hex number). The total amount consumed by the test is slightly higher at 271290, due to some extra steps required to run the entire test function.
+Here, the gas usage of the `sum_n` function is `80690` (decimal representation of the hex number). The total amount consumed by the test is slightly higher at `140100`, due to some extra steps required to run the entire test function.
 
 {{#quiz ../quizzes/ch10-01-how_to_write_tests.toml}}
