@@ -2,7 +2,7 @@
 id = "3da96b29-d975-4cd8-a8eb-b1a6bd9b5c0a"
 type = "MultipleChoice"
 prompt.prompt = """
-Which of the following is NOT a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?
+Which of the following is **NOT** a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?
 """
 answer.answer = "It gives your tests access to private functions"
 prompt.distractors = [
@@ -11,12 +11,12 @@ prompt.distractors = [
   "It separates test helper functions from library code",
 ]
 context = """
-All unit tests in a given file have access to that file's private functions, regardless of being in a `mod tests` or not.
+All unit tests in a given file have access to that file's private functions, regardless of being in `mod tests` or not.
 """
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "How do you run integration tests in a Cairo project"
+prompt.prompt = "How do you run integration tests in a Cairo project?"
 prompt.distractors = [
   "By running `scarb cairo-test`",
   "By running `scarb cairo-build` with a filter for the test",
@@ -24,7 +24,7 @@ prompt.distractors = [
 ]
 answer.answer = "By running `scarb test` with a filter for the integration tests"
 context = """
-To run all integration tests, add to `scarb test` a filter that contains the module path containing the integration tests"
+To run all integration tests, add a filter to `scarb test` that contains the module path containing the integration tests.
 """
 id = "2b553604-8201-4fad-90d6-1b63d99de219"
 
@@ -32,7 +32,7 @@ id = "2b553604-8201-4fad-90d6-1b63d99de219"
 type = "MultipleChoice"
 prompt.prompt = "What is the difference between unit tests and integration tests?"
 prompt.distractors = [
-  "Unit tests use the #[test] attribute, while integration tests use the #[cfg(test)] attribute.",
+  "Unit tests use the `#[test]` attribute, while integration tests use the `#[cfg(test)]` attribute.",
   "Unit tests are limited to testing a single module, while integration tests can test multiple modules but not their interactions.",
   "Unit tests are written in a separate file, while integration tests are written in the same file as the code being tested.",
 ]
@@ -46,12 +46,12 @@ Unit tests and integration tests serve different purposes and have distinct char
 	- Focus on testing individual functions or modules in isolation.
 	- Aim to ensure the correctness of small, self-contained units of code.
 	- Often test private functions and implementation details.
-	- Located in the same file as the code being tested, typically in a #[cfg(test)] module.
+	- Located in the same file as the code being tested, typically in a `#[cfg(test)]` module.
 
 - Integration tests:
 	- Focus on testing the interaction and behavior of multiple modules or components working together.
 	- Verify that different parts of the system integrate correctly and produce the expected results.
 	- Use the public API of the library or application being tested.
-	- Located in the tests/ directory, separate from the main code files.
+	- Located in the _tests/_ directory, separate from the main code files.
 """
 id = "93d3c7fb-14af-41f6-aba2-7ceff84a163b"
