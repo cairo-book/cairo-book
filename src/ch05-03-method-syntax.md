@@ -1,42 +1,4 @@
-# Associated functions
-
-Functions defined within an `impl` block are called _associated functions_ because they have to be associated with one and only one type.
-Even if in Cairo you can define in a single `impl` code bloc functions related to multiple types, it is not a good practice and must be avoided.
-
-**Don't** :
-
-```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:bad_implementation}}
-```
-
-The problem here is that the _associated function_ `area` is whether associated with the type `Rectangle` or `Circle`.
-
-**Do**
-
-```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:good_implementation}}
-```
-
-Here we use a generic trait so that `area` is an _associated function_ associated with the type `T`. This way `area` is associated with one and only one type in each `impl` code bloc.
-Using a generic trait is possible because we can compute the area of a `Rectangle` and `Circle`.
-
-However, when the functions are each specific to a certain type you **have to** declare multiple traits and implementations as seen below.
-
-**Don't**
-
-```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_split/src/lib.cairo:bad_implementation}}
-```
-
-Here there is nothing in common between a `Rectangle` instance and a `Cat` instance so declaring a trait with _associated functions_ associated to `Rectangle` and `Cat` is dubious and a generic trait is not the solution.
-
-**Do**
-
-```rust
-{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_split/src/lib.cairo:implementation_split}}
-```
-
-Here each trait and each implementation is associated to only one type. This is the way to go!
+# Method Syntax
 
 ## Methods
 
@@ -122,7 +84,7 @@ Here, we expect that `rect1` can hold `rect2` but not `rect3`.
 
 ## Associated functions
 
-In Cairo, we can also define a associated function which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
+In Cairo, we can also define a method which doesn't act on a specific instance (so, without any `self` parameter) but which still manipulates the related type and thus is an _associated function_. This is what we call _class methods_ in Object-Oriented programming. As these methods are not called from an instance, we don't use them with the `<instance_name>.<method_name>` syntax but with the `<Trait_or_Impl_name>::<method_name>` syntax as you will see in the next example.
 
 These associated functions are often used to build new instances but they may have a lot of different utilities.
 
@@ -147,6 +109,46 @@ the following code is equivalent to the code shown in the _Methods with several 
 
 There’s no strong reason to separate these methods into multiple `trait` and `impl`
 blocks here, but this is valid syntax.
+
+## Guidelines about associated functions
+
+_associated functions_ defined within an `impl` bloc should be associated with one and only one type.
+Even if in Cairo you can define in a single `impl` code bloc functions related to multiple types, it is not a good practice and must be avoided.
+
+**Don't** :
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:bad_implementation}}
+```
+
+The problem here is that the _associated functions_ `rectangleArea` and `circleArea` are within the same `impl` code bloc but are associated to different types (_ie_ `Rectangle` and `Circle`).
+
+**Do**
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_impl_bad_practice_generic/src/lib.cairo:good_implementation}}
+```
+
+Here we use a generic trait so that `area` is an _associated function_ associated with the type `T`. This way `area` is associated with one and only one type in each `impl` code bloc.
+Using a generic trait is possible because we can compute the area of a `Rectangle` and `Circle`.
+
+However, when the functions are each specific to a certain type you **have to** declare multiple traits and implementations as seen below.
+
+**Don't**
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_split/src/lib.cairo:bad_implementation}}
+```
+
+Here there is nothing in common between a `Rectangle` instance and a `Cat` instance so declaring a trait with _associated functions_ associated to `Rectangle` and `Cat` is dubious and a generic trait is not the solution.
+
+**Do**
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_impl_bad_practice_split/src/lib.cairo:implementation_split}}
+```
+
+Here each trait and each implementation is associated to only one type. This is the way to go!
 
 ## Summary
 

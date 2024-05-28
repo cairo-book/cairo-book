@@ -12,17 +12,17 @@ struct Circle {
 
 //ANCHOR: bad_implementation
 trait RectangleTrait {
-    fn RectangleArea(self: @Rectangle) -> felt252;
-    fn CircleArea(self: @Circle) -> felt252;
+    fn RectangleArea(self: @Rectangle) -> u64;
+    fn CircleArea(self: @Circle) -> u64;
 }
 
 impl ShapeImpl of RectangleTrait {
-    fn RectangleArea(self: @Rectangle) -> felt252 {
+    fn RectangleArea(self: @Rectangle) -> u64 {
         (*self.width) * (*self.height)
     }
 
-    fn CircleArea(self: @Circle) -> felt252 {
-        (*self.radius) * (*self.radius) * 3.14
+    fn CircleArea(self: @Circle) -> u64 {
+        (*self.radius) * (*self.radius) * 3
     }
 }
 //ANCHOR_END: bad_implementation
@@ -32,15 +32,15 @@ trait ShapeTrait<T> {
     fn area(self: @T) -> u64;
 }
 
-impl ShapeImpl of ShapeTrait<Rectangle> {
+impl RectangleImpl of ShapeTrait<Rectangle> {
     fn area(self: @Rectangle) -> u64 {
         (*self.width) * (*self.height)
     }
 }
 
-impl ShapeImpl of ShapeTrait<Circle> {
+impl CircleImpl of ShapeTrait<Circle> {
     fn area(self: @Circle) -> u64 {
-        (*self.radius) * (*self.radius) * 3.14
+        (*self.radius) * (*self.radius) * 3
     }
 }
 //ANCHOR_END: good_implementation
