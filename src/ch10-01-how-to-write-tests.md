@@ -251,7 +251,7 @@ This helps us start debugging: the `left` argument was `4` but the `right` argum
 `add_two(2)`, was `5`. You can imagine that this would be especially helpful
 when we have a lot of tests going on.
 
-Note that in some languages and test frameworks, the parameters to equality
+Note that in some languages and test frameworks, the parameters for equality
 assertion functions are called `expected` and `actual`, and the order in which
 we specify the arguments matters. However, in Cairo, they’re called `left` and
 `right`, and the order in which we specify the value we expect and the value
