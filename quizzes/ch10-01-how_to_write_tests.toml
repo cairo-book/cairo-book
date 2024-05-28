@@ -105,18 +105,18 @@ mod tests {
 	#[test]
 	#[ignore]
 	fn test_addition() {
-        assert_ne!((5 + 4), 5);
-    }
+      assert_ne!((5 + 4), 5);
+  }
 
 	#[test]
-    fn division_function() {
-        assert_eq!((10_u8 / 5), 2);
+  fn division_function() {
+      assert_eq!((10_u8 / 5), 2);
 	}
 
 	#[test]
 	fn test_multiplication() {
-		assert_ne!((3 * 2), 8);
-        assert_eq!((5 * 5), 25);
+		  assert_ne!((3 * 2), 8);
+      assert_eq!((5 * 5), 25);
 	}
   
   #[test]
