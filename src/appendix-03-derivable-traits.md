@@ -51,6 +51,18 @@ Point { x: 1, y: 3 }
 
 The `Debug` trait is required, for example, when using the `assert_xx!` macros in tests. Theses macros print the values of instances given as arguments if the equality or comparison assertion fails so programmers can see why the two instances weren’t equal.
 
+## `Default` for Default Values
+
+The `Default` trait allows creation of a default value of a type. Most common default value is zero. All primitive types in the standard library implement `Default`.
+
+If you want to derive `Default` on a composite type, each of its elements must already implement `Default`. If you have an [`enum` type](ch06-01-enums.md), you must declare its default value by using the `#[default]` attribute on one of its variants.
+
+An example:
+
+```rust
+{{#include ../listings/appendinx/listing_07_default/src/lib.cairo}}
+```
+
 ## `PartialEq` for Equality Comparisons
 
 The `PartialEq` trait allows for comparison between instances of a type for equality, thereby enabling the `==` and `!=` operators.
@@ -84,7 +96,7 @@ If you run the `main` function, the output will be:
 Run panicked with [2, 99 ('c'), ].
 ```
 
-We can see here that our struct `A` has been serialized into the output array. Note that the `serialize` function takes as argument a snapshot of the type you want to convert into an array. This is why deriving `Drop` for `A` is required here, as the `main` function keeps ownership of the `first_struct` struct. 
+We can see here that our struct `A` has been serialized into the output array. Note that the `serialize` function takes as argument a snapshot of the type you want to convert into an array. This is why deriving `Drop` for `A` is required here, as the `main` function keeps ownership of the `first_struct` struct.
 
 Also, we can use the `deserialize` function to convert the serialized array back into our `A` struct.
 
