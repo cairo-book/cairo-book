@@ -9866,7 +9866,7 @@ msgid "// this returns None\n"
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:117
-msgid "// this panic with 'value is 0'\n"
+msgid "// this panics with 'value is 0'\n"
 msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:1

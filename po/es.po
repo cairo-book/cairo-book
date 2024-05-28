@@ -10635,7 +10635,7 @@ msgid "// this returns None\n"
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:98
-msgid "// this panic with 'value is 0'\n"
+msgid "// this panics with 'value is 0'\n"
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:102
@@ -23890,7 +23890,7 @@ msgstr ""
 #~ "\n"
 #~ "fn main() {\n"
 #~ "    wrap_if_not_zero(0); // this returns None\n"
-#~ "    wrap_not_zero(0); // this panic with 'value is 0'\n"
+#~ "    wrap_not_zero(0); // this panics with 'value is 0'\n"
 #~ "}\n"
 #~ "```"
 #~ msgstr ""
@@ -23908,7 +23908,7 @@ msgstr ""
 #~ "\n"
 #~ "fn main() {\n"
 #~ "    wrap_if_not_zero(0); // this returns None\n"
-#~ "    wrap_not_zero(0); // this panic with 'value is 0'\n"
+#~ "    wrap_not_zero(0); // this panics with 'value is 0'\n"
 #~ "}\n"
 #~ "```"
 
