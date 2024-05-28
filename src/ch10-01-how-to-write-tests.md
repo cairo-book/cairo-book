@@ -69,7 +69,7 @@ Then run `scarb cairo-test` again. The output now shows `exploration` instead of
 ```shell
 $ scarb cairo-test
 testing adder ...
-running 1 tests
+running 1 test
 test adder::exploration ... ok (gas usage est.: 53200)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
@@ -124,7 +124,7 @@ We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `R
 ```shell
 $ scarb cairo-test
 testing adder ...
-running 1 tests
+running 1 test
 test adder::larger_can_hold_smaller ... ok (gas usage est.: 54940)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
@@ -319,7 +319,7 @@ Now when we run the test, we’ll get a more informative error message:
 ```shell
 $ scarb cairo-test
 testing adder ...
-running 1 tests
+running 1 test
 test adder::it_adds_two ... fail (gas usage est.: 590230)
 failures:
    adder::it_adds_two - Panicked with "assertion `4 == add_two(2)` failed: Expected 4, got add_two(2)=5
@@ -360,7 +360,7 @@ We place the `#[should_panic]` attribute after the `#[test]` attribute and befor
 ```shell
 $ scarb cairo-test
 testing guess ...
-running 1 tests
+running 1 test
 test guess::greater_than_100 ... ok (gas usage est.: 57910)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 ```
@@ -376,7 +376,7 @@ When we run the test, it will fail:
 ```shell
 $ scarb cairo-test
 testing guess ...
-running 1 tests
+running 1 test
 test guess::greater_than_100 ... fail (gas usage est.: 54570)
 failures:
    guess::greater_than_100 - expected panic but finished successfully.
@@ -409,7 +409,7 @@ This time when we run the `should_panic` test, it will fail:
 ```shell
 $ scarb cairo-test
 testing guess ...
-running 1 tests
+running 1 test
 test guess::greater_than_100 ... fail
 failures:
    guess::greater_than_100 - Panicked with "Guess must be >= 1".
@@ -438,7 +438,7 @@ We can pass the name of any test function to `cairo-test` to run only that test 
 ```shell
 $ scarb cairo-test -f add_two_and_two
 testing adder ...
-running 1 tests
+running 1 test
 test adder::add_two_and_two ... ok (gas usage est.: 53200)
 test result: ok. 1 passed; 0 failed; 0 ignored; 1 filtered out;
 ```
@@ -500,7 +500,7 @@ The value printed when running `scarb cairo-test` is the amount of gas that was 
 ```shell
 $ scarb cairo-test
 testing adder ...
-running 1 tests
+running 1 test
 consumed gas: 163430
 
 test adder::benchmark_sum_n_gas ... ok (gas usage est.: 271290)
