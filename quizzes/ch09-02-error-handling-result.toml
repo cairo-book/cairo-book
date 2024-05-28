@@ -30,7 +30,7 @@ prompt.distractors = [
   "Because `Result` represents the possibility of failure, while `Option` cannot represent failures",
   "Because `Result` represents errors the same way as the underlying system calls",
 ]
-answer.answer = "Because `Result` can represent why an operation failed, the division can fail for many reasons (e.g either at least one operand is None or the divisor is 0)"
+answer.answer = "Because `Result` can represent why an operation failed, the division can fail for many reasons (e.g either at least one operand is `None` or the divisor is 0)"
 context = """
 `Option` can just represent that an operation has failed, but `Result` can explain why the operation has failed.
 """
