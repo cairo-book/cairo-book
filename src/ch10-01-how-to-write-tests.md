@@ -272,9 +272,9 @@ implement `PartialEq` and `Debug` traits. All primitive types and most of
 the core library types implement these traits. For structs and enums that
 you define yourself, you’ll need to implement `PartialEq` to assert equality of
 those types. You’ll also need to implement `Debug` to print the values when the
-assertion fails. Because both traits are derivable this is usually as straightforward as adding the
+assertion fails. Because both traits are derivable, this is usually as straightforward as adding the
 `#[derive(Drop, Debug, PartialEq)]` annotation to your struct or enum definition. See
-[Appendix C](./appendix-03-derivable-traits.md) for more detail about these and other derivable traits.
+[Appendix C](./appendix-03-derivable-traits.md) for more details about these and other derivable traits.
 
 ### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` Macros
 
@@ -294,7 +294,7 @@ Listing {{#ref assert_macros}} demonstrates how to use these macros:
 {{#label assert_macros}}
 <span class="caption">Listing {{#ref assert_macros}}: Example of tests that use the `assert_xx!` macros for comparisons</span>
 
-In this example, we throw multiple times a `Dice` struct and compare the result. We need to manually implement the `PartialOrd` trait for our struct so that we can compare `Dices` with `lt`, `le`, `gt` and,`ge` functions, which are used by `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros respectively. We also need to derive the `Copy` trait on our `Dice` struct in order to use multiple times the instantiated structs, as comparison functions take ownership of variables.
+In this example, we roll a `Dice` struct multiple times and compare the results. We need to manually implement the `PartialOrd` trait for our struct so that we can compare `Dice` instances with `lt`, `le`, `gt` and `ge` functions, which are used by `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` macros, respectively. Additionally, we also need to derive the `Copy` trait on our `Dice` struct to use the instantiated structs multiple times, as the comparison functions take ownership of the variables.
 
 ## Adding Custom Failure Messages
 
