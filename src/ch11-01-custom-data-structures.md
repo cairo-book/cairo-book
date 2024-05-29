@@ -109,6 +109,12 @@ pointer to allow using any type `T` in our data structure, as explained in the
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 
+Since we again have `Felt252Dict<T>` as a struct member, we need to implement the `Destruct<T>` trait to tell the compiler how to make `NullableVec<T>` go out of scope.
+
+```rust,noplayground
+{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:destruct}}
+```
+
 The key thing that makes this vector mutable is that we can insert values into
 the dictionary to set or update values in our data structure. For example, to
 update a value at a specific index, we do:
