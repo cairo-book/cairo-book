@@ -21,10 +21,10 @@ Fortunately, Cairo provides a handy built-in [dictionary type](./ch03-02-diction
 simulate the behavior of mutable data structures. Let's first explore how to create a struct that contains, among others, a `Felt252Dict<T>`.
 
 > Note: Several concepts used in this chapter were already presented earlier in the book. We recommend checking out the following chapters if you need to revise them:
-[Structs](ch05-00-using-structs-to-structure-related-data.md),
-[Methods](./ch05-03-method-syntax.md),
-[Generic types](./ch08-00-generic-types-and-traits.md),
-[Traits](./ch08-02-traits-in-cairo.md).
+> [Structs](ch05-00-using-structs-to-structure-related-data.md),
+> [Methods](./ch05-03-method-syntax.md),
+> [Generic types](./ch08-00-generic-types-and-traits.md),
+> [Traits](./ch08-02-traits-in-cairo.md).
 
 ## Dictionaries as Struct Members
 
@@ -53,7 +53,7 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 2. All value types of a dictionary implement the `Felt252DictValue<T>`, our generic type should do as well.
 3. To insert values, `Felt252DictTrait<T>` requires all value types to be droppable (implement the `Drop<T>` trait).
 
-The implementation, with all restrictions in place, would be as follow:
+The implementation, with all restrictions in place, would be as follows:
 
 ```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
