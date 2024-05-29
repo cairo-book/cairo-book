@@ -59,7 +59,7 @@ The `main` function includes 2 function calls:
 - `pass_data` that takes a variable of type `Cart`.
 - `pass_pointer` that takes a pointer of type `Box<Cart>`.
 
-When passing data to a function, the entire data is copied in the last available memory cells right before the function call. Calling `pass_data` will copy all 3 fields of `Cart` to memory, while `pass_pointer` only requires the copy of the `new_box` pointer which is of size 1.
+When passing data to a function, the entire data is copied into the last available memory cells right before the function call. Calling `pass_data` will copy all 3 fields of `Cart` to memory, while `pass_pointer` only requires the copy of the `new_box` pointer which is of size 1.
 
 <div align="center">
     <img src="box_memory.png" alt="box memory" width="500px"/>
