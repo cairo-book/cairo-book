@@ -149,7 +149,7 @@ A Stack is a LIFO (Last-In, First-Out) collection. The insertion of a new
 element and removal of an existing element takes place at the same end,
 represented as the top of the stack.
 
-Let us define what operations we need to create a stack :
+Let us define what operations we need to create a stack:
 
 - Push an item to the top of the stack.
 - Pop an item from the top of the stack.
@@ -183,9 +183,8 @@ The code uses the `insert` and `get` methods to access the values in the
 `Felt252Dict<T>`. To push an element to the top of the stack, the `push`
 function inserts the element in the dict at index `len` and increases the
 `len` field of the stack to keep track of the position of the stack top. To
-remove a value, the `pop` function retrieves the last value at position `len-1`
-and then decreases the value of `len` to update the position of the stack top
-accordingly.
+remove a value, the `pop` function decreases the value of `len` to update the
+position of the stack top and then retrieves the last value at position `len`.
 
 The full implementation of the Stack, along with more data structures that you
 can use in your code, can be found in the community-maintained
