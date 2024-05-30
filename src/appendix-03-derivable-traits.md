@@ -81,7 +81,7 @@ Here is an example:
 
 `Serde` provides trait implementations for `serialize` and `deserialize` functions for data structures defined in your crate. It allows you to transform your structure into an array (or the opposite).
 
-> **[Serialization](https://en.wikipedia.org/wiki/Serialization)** is a process of transforming data structures into a format that can be easily stored or transmitted. Let's say you are running a program and would like to persist its state to be able to resume it later. To do this, you could take each of the objects your program is using and save information about them, for example in a file. This exactly is a simplified version of serialization. Now if you want to resume your program with this saved state, you would perform **deserialization** which means you would load the state of the objects from some source.
+> **[Serialization](https://en.wikipedia.org/wiki/Serialization)** is a process of transforming data structures into a format that can be easily stored or transmitted. Let's say you are running a program and would like to persist its state to be able to resume it later. To do this, you could take each of the objects your program is using and save their information, for example in a file. This is a simplified version of serialization. Now if you want to resume your program with this saved state, you would perform **deserialization**, which means loading the state of the objects from the saved source.
 
 For example:
 
@@ -106,16 +106,16 @@ Here is an example:
 {{#include ../listings/appendix/listing_06_deserialize/src/lib.cairo}}
 ```
 
-Here we are converting a serialized array span back to the struct `A`. `deserialize` returns an `Option` so we need to unwrap it. When using deserialize we also need to specify the type we want to deserialize into.
+Here we are converting a serialized array span back to the struct `A`. `deserialize` returns an `Option` so we need to unwrap it. When using `deserialize` we also need to specify the type we want to deserialize into.
 
 ## Hashing with `Hash`
 
-It is possible to derive the `Hash` trait on structs and enums. This allows them to be hashed easily using any available hash function. For a struct or an enum to derive the `Hash` attribute, all fields or variants need to be themselves hashable.
+It is possible to derive the `Hash` trait on structs and enums. This allows them to be hashed easily using any available hash function. For a struct or an enum to derive the `Hash` attribute, all fields or variants need to be hashable themselves.
 
 You can refer to the [Hashes section](ch11-05-hash.md) to get more information about how to hash complex data types.
 
 ## Starknet Storage with `starknet::Store`
 
-The `starknet::Store` derive is relevant only when building on [Starknet.](ch13-00-introduction-to-starknet-smart-contracts.md) It allows for a type to be used in smart contract storage by automatically implementing the necessary read and write functions.
+The `starknet::Store` trait is relevant only when building on [Starknet](ch13-00-introduction-to-starknet-smart-contracts.md). It allows for a type to be used in smart contract storage by automatically implementing the necessary read and write functions.
 
-You can find detailed information about the inner workings of Starknet storage in the [Contract storage section.](ch14-01-contract-storage.md)
+You can find detailed information about the inner workings of Starknet storage in the [Contract storage section](ch14-01-contract-storage.md).
