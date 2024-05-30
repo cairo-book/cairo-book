@@ -44,7 +44,7 @@ Cairo chose to have the module system function this way so that hiding inner imp
 
 ## Exposing Paths with the `pub` Keyword
 
-Let’s return to the previous error that told us the `hosting` module and the `add_to_waitlist` function are not visible. We want the `eat_at_restaurant` function in the parent module to have access to the `add_to_waitlist` function in the child module, so we mark the `hosting` module and the `add_to_waitlist` function with the `pub` keyword, as shown in Listing {{#ref pub-keyword-not-compiling}}.
+Let’s return to the previous error that told us the `hosting` module and the `add_to_waitlist` function are not visible. We want the `eat_at_restaurant` function in the parent module to have access to the `add_to_waitlist` function in the child module, so we mark the `hosting` module with the `pub` keyword, as shown in Listing {{#ref pub-keyword-not-compiling}}.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -98,10 +98,10 @@ Note that the `back_of_house` is kept private, as external users are not suppose
 
 ## Making Structs and Enums Public
 
-We can also use `pub` to designate structs and enums as public, but there are a few details extra to the usage of `pub` with structs and enums.
+We can also use `pub` to designate structs and enums as public, but there are a few extra details to consider when using `pub` with structs and enums.
 
 - If we use `pub` before a struct definition, we make the struct public, but the struct’s fields will still be private. We can make each field public or not on a case-by-case basis.
-- In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the enum keyword.
+- In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the `enum` keyword.
 
 There’s one more situation involving `pub` that we haven’t covered, and that is our last module system feature: the `use` keyword. We’ll cover `use` by itself first, and then we’ll show how to combine `pub` and `use`.
 

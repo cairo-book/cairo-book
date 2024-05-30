@@ -2,7 +2,7 @@
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Which of the following is NOT a benefit of using modules?
+Which of the following is **NOT** a benefit of using modules?
 """
 prompt.distractors = [
   "Modules provide a scope to avoid naming conflicts across parts of a codebase",

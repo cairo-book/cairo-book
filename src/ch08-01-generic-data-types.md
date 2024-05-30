@@ -2,7 +2,7 @@
 
 We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo, we can use generics when defining functions, structs, enums, traits, implementations and methods. In this chapter, we are going to take a look at how to effectively use generic types with all of them.
 
-Generics allow us to write reusable code that works with many types, thus avoiding code duplication. while enhancing code maintainability.
+Generics allow us to write reusable code that works with many types, thus avoiding code duplication, while enhancing code maintainability.
 
 ## Generic Functions
 
@@ -14,7 +14,7 @@ When defining a function that uses generics, we place the generics in the functi
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_01_missing_tdrop/src/lib.cairo:generic}}
 ```
 
-The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifying in the function signature of `largest_list` that `T` must implement the drop trait. The correct function definition of `largest_list` is as follows:
+The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifying in the function signature of `largest_list` that `T` must implement the `Drop` trait. The correct function definition of `largest_list` is as follows:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_02_with_tdrop/src/lib.cairo}}
@@ -34,7 +34,7 @@ Imagine that we want, given a list of elements of some generic type `T`, to find
 
 The `smallest_element` function uses a generic type `T` that implements the `PartialOrd` trait, takes a snapshot of an `Array<T>` as a parameter and returns a copy of the smallest element. Because the parameter is of type `@Array<T>`, we no longer need to drop it at the end of the execution and so we are not required to implement the `Drop` trait for `T` as well. Why does it not compile then?
 
-When indexing on `list`, the value results in a snap of the indexed element, unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy from `@T` to `T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that need to be dropped, requiring `T` to implement the `Drop` trait as well. We must then add both `Drop` and `Copy` traits implementation for the function to be correct. After updating the `smallest_element` function the resulting code would be:
+When indexing on `list`, the value results in a snap of the indexed element, and unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy from `@T` to `T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that need to be dropped, requiring `T` to implement the `Drop` trait as well. We must then add both `Drop` and `Copy` traits implementation for the function to be correct. After updating the `smallest_element` function the resulting code would be:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_04_with_tcopy/src/lib.cairo}}
@@ -76,7 +76,7 @@ Finally, if we want to add a field to `Wallet` representing its address and we w
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_08_two_generics/src/lib.cairo}}
 ```
 
-We add to `Wallet` struct definition a new generic type `U` and then assign this type to the new field member `address`. Notice that the derive attribute for the `Drop` trait works for `U` as well.
+We add to the `Wallet` struct definition a new generic type `U` and then assign this type to the new field member `address`. Notice that the `derive` attribute for the `Drop` trait works for `U` as well.
 
 ## Enums
 
@@ -98,7 +98,7 @@ The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `O
 
 ## Generic Methods
 
-We can implement methods on structs and enums, and use the generic types in their definition, too. Using our previous definition of `Wallet<T>` struct, we define a `balance` method for it:
+We can implement methods on structs and enums, and use the generic types in their definitions, too. Using our previous definition of `Wallet<T>` struct, we define a `balance` method for it:
 
 ```rust
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_11_generic_methods/src/lib.cairo}}
@@ -112,7 +112,7 @@ We can also specify constraints on generic types when defining methods on the ty
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_12_constrained_generics/src/lib.cairo}}
 ```
 
-The new method `receive` increments the size of the balance of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
+The new method `receive` increments the size of `balance` of any instance of a `Wallet<u128>`. Notice that we changed the `main` function making `w` a mutable variable in order for it to be able to update its balance. If we were to change the initialization of `w` by changing the type of `balance` the previous code wouldn't compile.
 
 Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and creates a new one with a generic type of each. First, let's rewrite the struct definition:
 

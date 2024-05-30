@@ -20,7 +20,7 @@ For example, let’s say we have a struct `NewsArticle` that holds a news story 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_14_simple_trait/src/lib.cairo:trait}}
 ```
 
-Here, we declare a trait using the trait keyword and then the trait’s name, which is `Summary` in this case.
+Here, we declare a trait using the `trait` keyword and then the trait’s name, which is `Summary` in this case.
 We’ve also declared the trait as `pub` so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.
 
 Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray;`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
@@ -113,7 +113,7 @@ because those types don’t implement `Summary`. -->
 ## Managing and Using External Trait
 
 To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
-If `CircleGeometry` implementation was in a separate module/file named _circle_, then to define `boundary` method on `Circle` struct, we'd need to import `ShapeGeometry` trait in _circle_ module.
+If `CircleGeometry` implementation was in a separate module/file named _circle_, then to define `boundary` method on `Circle` struct, we'd need to import `ShapeGeometry` trait in the _circle_ module.
 
 If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant trait or implementation is required.
 
@@ -125,7 +125,7 @@ Note that in this example, `CircleGeometry` and `RectangleGeometry` implementati
 
 ## Impl Aliases
 
-Implementations can be aliased when imported. This is most useful when you want to instantiate generic impls with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
+Implementations can be aliased when imported. This is most useful when you want to instantiate generic implementations with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_impl_aliases/src/lib.cairo}}
@@ -138,7 +138,7 @@ We can define the generic implementation in a private module, use an impl alias 
 
 ## Negative Impls
 
-> Note: This is still an experimental feature and can only be used if `experimental-features = ["negative_impls"]` is enabled in your Scarb.toml file, under the `[package]` section.
+> Note: This is still an experimental feature and can only be used if `experimental-features = ["negative_impls"]` is enabled in your _Scarb.toml_ file, under the `[package]` section.
 
 Negative implementations, also known as negative traits or negative bounds, are a mechanism that allows you to express that a type does not implement a certain trait when defining the implementation of a trait over a generic type. Negative impls enable you to write implementations that are applicable only when another implementation does not exist in the current scope.
 

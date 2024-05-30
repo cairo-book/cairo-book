@@ -8224,11 +8224,11 @@ msgid "Filename: src/tests.cairo"
 msgstr ""
 
 #: src/ch09-02-test-organization.md:68
-msgid "Enter the code in Listing 9-11 into the _src/tests/integration_test.cairo_ file:"
-msgstr "Masukkan kode dalam Listing 9-11 ke dalam file _src/tests/integration_test.cairo_:"
+msgid "Enter the code in Listing 9-11 into the _src/tests/integration_tests.cairo_ file:"
+msgstr "Masukkan kode dalam Listing 9-11 ke dalam file _src/tests/integration_tests.cairo_:"
 
 #: src/ch09-02-test-organization.md:80
-msgid "Filename: src/tests/integration_test.cairo"
+msgid "Filename: src/tests/integration_tests.cairo"
 msgstr ""
 
 #: src/ch09-02-test-organization.md:82
@@ -8399,7 +8399,7 @@ msgid "// this returns None\n"
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:98
-msgid "// this panic with 'value is 0'\n"
+msgid "// this panics with 'value is 0'\n"
 msgstr ""
 
 #: src/ch10-01-unrecoverable-errors-with-panic.md:102

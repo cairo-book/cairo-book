@@ -34,7 +34,7 @@ adder
 ├── src
 │   ├── lib.cairo
 │   ├── tests
-│   │   └── integration_test.cairo
+│   │   └── integration_tests.cairo
 │   └── tests.cairo
 ```
 
@@ -55,9 +55,9 @@ Then, create a _tests.cairo_ file and fill it as follows:
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/tests.cairo}}
 ```
 
-Finally, enter this code into the _src/tests/integration_test.cairo_ file:
+Finally, enter this code into the _src/tests/integration_tests.cairo_ file:
 
-<span class="caption">Filename: src/tests/integration_test.cairo</span>
+<span class="caption">Filename: src/tests/integration_tests.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/tests/integration_tests.cairo}}

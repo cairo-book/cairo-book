@@ -18,13 +18,13 @@ fn f(x: usize) -> Result<usize, ByteArray>;
 ```
 
 And you want to test that `f(0)` should return `Err(_)`.
-Which of the following is NOT a valid way to test that?
+Which of the following is **NOT** a valid way to test that?
 """
 prompt.distractors = ["""
 ```
 #[test]
 fn test() {
-  assert!(f(0).is_err());
+    assert!(f(0).is_err());
 }
 ```
 """, """
@@ -32,17 +32,17 @@ fn test() {
 #[test]
 #[should_panic]
 fn test() {
-  f(0).unwrap();
+    f(0).unwrap();
 }
 ```
   """, """
 ```
 #[test]
 fn test() {
-  assert!(match f(0) {
-    Ok(_) => false,
-    Err(_) => true
-  });
+    assert!(match f(0) {
+        Ok(_) => false,
+        Err(_) => true
+    });
 }
 ```
   """]
@@ -51,12 +51,12 @@ answer.answer = """
 #[test]
 #[should_err]
 fn test() -> Result<usize, String> {
-  f(0)
+    f(0)
 }
 ```
   """
 context = """
-`should_err` does not exist in Cairo &mdash; tests that returns a `Result` will pass even if the result is an `Err`.
+`should_err` does not exist in Cairo &mdash; tests that return `Result` will pass even if the result is an `Err`.
 """
 
 [[questions]]
@@ -102,22 +102,23 @@ What is the output when these tests are run with the command `scarb cairo-test -
 ```rust
 #[cfg(test)]
 mod tests {
-	#[test]
-	#[ignore]
-	fn test_addition() {
+    #[test]
+    #[ignore]
+    fn test_addition() {
         assert_ne!((5 + 4), 5);
     }
 
-	#[test]
+    #[test]
     fn division_function() {
         assert_eq!((10_u8 / 5), 2);
-	}
+    }
 
-	#[test]
-	fn test_multiplication() {
-		assert_ne!((3 * 2), 8);
+    #[test]
+    fn test_multiplication() {
+        assert_ne!((3 * 2), 8);
         assert_eq!((5 * 5), 25);
-	}
+    }
+    
     #[test]
     fn test_subtraction() {
         assert!((12 - 11) == 1, "The first argument was false");

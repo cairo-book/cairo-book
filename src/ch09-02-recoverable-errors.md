@@ -68,7 +68,7 @@ Our two test cases are:
 {{#rustdoc_include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:tests}}
 ```
 
-Don't worry about `#[cfg(test)]` attribute for now. We'll explain in more detail its meaning in the next [Testing Cairo Programs][tests] chapter.
+Don't worry about the `#[cfg(test)]` attribute for now. We'll explain in more detail its meaning in the next [Testing Cairo Programs][tests] chapter.
 
 `#[test]` attribute means the function is a test function, and `#[should_panic]` attribute means this test will pass if the test execution panics.
 

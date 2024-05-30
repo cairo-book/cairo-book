@@ -17,7 +17,7 @@ call your code without having to know how the
 implementation works.
 
 A related concept is scope: the nested context in which code is written has a
-set of names that are defined as “in scope.” When reading, writing, and
+set of names that are defined as “in scope”. When reading, writing, and
 compiling code, programmers and compilers need to know whether a particular
 name at a particular spot refers to a variable, function, struct, enum, module,
 constant, or other item and what that item means. You can create scopes and
@@ -28,7 +28,7 @@ Cairo has a number of features that allow you to manage your code’s
 organization. These features, sometimes
 collectively referred to as the _module system_, include:
 
-- **Packages:** A Scarb feature that lets you build, test, and share crates
+- **Packages:** A Scarb feature that lets you build, test, and share crates.
 - **Crates:** A tree of modules that corresponds to a single compilation unit.
   It has a root directory, and a root module defined at the _lib.cairo_ file under this directory.
 - **Modules** and **use:** Let you control the organization and scope of items.

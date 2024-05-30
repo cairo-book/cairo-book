@@ -14,7 +14,7 @@ Then you’ll learn how to use traits to define behavior in a generic way. You c
 
 ## Removing Duplication by Extracting a Function
 
-Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication. Before diving into generics syntax, then, let’s first look at how to remove duplication in a way that doesn’t involve generic types by extracting a function that replaces specific values with a placeholder that represents multiple values. Then we’ll apply the same technique to extract a generic function! By learning how to identify duplicated code that can be extracted into a function, you'll start to recognize instances where generics can be used to reduce duplication.
+Generics allow us to replace specific types with a placeholder that represents multiple types to remove code duplication. Before diving into generics syntax, let’s first look at how to remove duplication in a way that doesn’t involve generic types by extracting a function that replaces specific values with a placeholder that represents multiple values. Then we’ll apply the same technique to extract a generic function! By learning how to identify duplicated code that can be extracted into a function, you'll start to recognize instances where generics can be used to reduce duplication.
 
 We begin with a short program that finds the largest number in an array of `u8`:
 
@@ -22,7 +22,7 @@ We begin with a short program that finds the largest number in an array of `u8`:
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_01/src/lib.cairo}}
 ```
 
-We store an array of `u8` in the variable `number_list` and extract the first number in the array in a variable named `largest`. We then iterate through all the numbers in the array, and if the current number is greater than the number stored in `largest`, update the value of `largest`. However, if the current number is less than or equal to the largest number seen so far, the variable doesn’t change, and the code moves on to the next number in the list. After considering all the numbers in the array, `largest` should contain the largest number, which in this case is 100.
+We store an array of `u8` in the variable `number_list` and extract the first number in the array in a variable named `largest`. We then iterate through all the numbers in the array, and if the current number is greater than the number stored in `largest`, we update the value of `largest`. However, if the current number is less than or equal to the largest number seen so far, the variable doesn’t change, and the code moves on to the next number in the list. After considering all the numbers in the array, `largest` should contain the largest number, which in this case is 100.
 
 We've now been tasked with finding the largest number in two different arrays of numbers. To do so, we can choose to duplicate the previous code and use the same logic at two different places in the program, as follows:
 

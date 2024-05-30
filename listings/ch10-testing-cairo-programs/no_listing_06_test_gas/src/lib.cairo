@@ -9,7 +9,7 @@ fn sum_n(n: usize) -> usize {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     use super::sum_n;
 
     #[test]

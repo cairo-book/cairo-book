@@ -19,7 +19,7 @@ id = "5bf03883-59ab-4063-85e8-8c1d2fafa3e3"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Which of the following is **NOT** a good reason to use a panic ?
+Which of the following is **NOT** a good reason to use a panic?
 """
 prompt.distractors = [
   "The program is about to perform a dangerous operation",
@@ -28,7 +28,7 @@ prompt.distractors = [
 ]
 answer.answer = "The program has reached an error state which should be communicated to a caller function"
 context = """
-A panic should not be used to communicate failure *within* the program, as they will terminate the program immediately.
+A panic should not be used to communicate failure *within* the program, as it will terminate the program immediately.
 """
 id = "0e7bb9f9-af5a-441d-83b4-bcd0a97daf70"
 
@@ -36,7 +36,7 @@ id = "0e7bb9f9-af5a-441d-83b4-bcd0a97daf70"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Which of the following programs will NOT cause a runtime panic?
+Which of the following programs will **NOT** cause a runtime panic?
 
 ```
 fn main() {
@@ -73,11 +73,10 @@ prompt.distractors = [
   "Program 1",
   "Program 2",
   "Program 2 and Program 3",
-  "Program 3",
 ]
 answer.answer = "Program 3"
 context = """
-Program 3 accesses tries to access an element at an index that is out of bounds, but it matches the
+Program 3 tries to access an element at an index that is out of bounds, but it matches the
 resulting `Option` and returns a default value `0` instead of panicking.
 """
 id = "b6ee33f0-5b70-4286-a6d9-a08aad66f9c8"
