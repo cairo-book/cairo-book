@@ -53,9 +53,9 @@ The `Debug` trait is required, for example, when using the `assert_xx!` macros i
 
 ## `Default` for Default Values
 
-The `Default` trait allows creation of a default value of a type. Most common default value is zero. All primitive types in the standard library implement `Default`.
+The `Default` trait allows creation of a default value of a type. The most common default value is zero. All primitive types in the standard library implement `Default`.
 
-If you want to derive `Default` on a composite type, each of its elements must already implement `Default`. If you have an [`enum` type](ch06-01-enums.md), you must declare its default value by using the `#[default]` attribute on one of its variants.
+If you want to derive `Default` on a composite type, each of its elements must already implement `Default`. If you have an [`enum`](ch06-01-enums.md) type, you must declare its default value by using the `#[default]` attribute on one of its variants.
 
 An example:
 
