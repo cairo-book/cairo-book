@@ -272,6 +272,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "misicnenad",
+      "name": "Nenad Misić",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19427053?v=4",
+      "profile": "https://misicnenad.github.io",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
