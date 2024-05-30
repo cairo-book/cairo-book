@@ -11,7 +11,7 @@ smart contracts.
 The core library prelude is defined in the
 _[lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.4.0/corelib/src/lib.cairo)_
 file of the corelib crate and contains Cairo's primitive data types, traits,
-operators, and utility functions. This includes: 
+operators, and utility functions. This includes:
 
 - Data types: integers, bools, arrays, dicts, etc.
 - Traits: behaviors for arithmetic, comparison, and serialization operations
@@ -31,23 +31,23 @@ You can choose which prelude to use. For example, adding `edition = "2023_11"` i
 The compiler currently exposes 2 different versions of the prelude:
 
 - A general version, with a lot of traits that are made available, corresponding to `edition = "2023_01"`.
-- A restricted version, including the most essential traits needed for general cairo programming, corresponding to `edition = 2023_11`.
+- A restricted version, including the most essential traits needed for general Cairo programming, corresponding to `edition = 2023_11`.
 
 ## List of Common Types and Traits
 
 The following section provides a brief overview of commonly used types and traits when developing Cairo programs. Most of these are included in the prelude and are therefore not required to be imported explicitly - but not all of them.
 
-| Import                    | Path                                                  | Usage                                                                                                                                                                                  |
-| ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OptionTrait`             | `core::option::OptionTrait`                           | `OptionTrait<T>` defines a set of methods required to manipulate optional values.                                                                                                       |
-| `ResultTrait`             | `core::result::ResultTrait`                           | `ResultTrait<T, E>` defines a set of methods required to manipulate `Result` enum.                                            |
-| `ContractAddress`         | `starknet::ContractAddress`                           | `ContractAddress` is a type to represent the smart contract address.                                                                                      |
-| `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` is the implementation of the trait `Zeroable` for the `ContractAddress` type. It is required to check whether a value of `t:ContractAddress` is zero or not. |
-| `contract_address_const`  | `starknet::contract_address_const`                    | The `contract_address_const` function allows instantiating constant contract address values.                                                                              |
-| `Into`                    | `traits::Into`                                       | `Into<T>` is a trait used for conversion between types. If there is an implementation of `Into<T,S>` for the types `T` and `S`, you can convert `T` into `S`.                                    |
-| `TryInto`                 | `traits::TryInto`                                    | `TryInto<T>` is a trait used for conversion between types. If there is an implementation of `TryInto<T,S>` for the types `T` and `S`, you can try convert `T` into `S` if it is possible. |
-| `get_caller_address`      | `starknet::get_caller_address`                        | `get_caller_address()` is a function that returns the address of the caller of the contract. It can be used to identify the caller of a contract function.                             |
-| `get_contract_address`    | `starknet::info::get_contract_address`                | `get_contract_address()` is a function that returns the address of the current contract. It can be used to obtain the address of the contract being executed.                          |
+| Import                    | Path                                                  | Usage                                                                                                                                                                                     |
+| ------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `OptionTrait`             | `core::option::OptionTrait`                           | `OptionTrait<T>` defines a set of methods required to manipulate optional values.                                                                                                         |
+| `ResultTrait`             | `core::result::ResultTrait`                           | `ResultTrait<T, E>` defines a set of methods required to manipulate `Result` enum.                                                                                                        |
+| `ContractAddress`         | `starknet::ContractAddress`                           | `ContractAddress` is a type to represent the smart contract address.                                                                                                                      |
+| `ContractAddressZeroable` | `starknet::contract_address::ContractAddressZeroable` | `ContractAddressZeroable` is the implementation of the trait `Zeroable` for the `ContractAddress` type. It is required to check whether a value of `t:ContractAddress` is zero or not.    |
+| `contract_address_const`  | `starknet::contract_address_const`                    | The `contract_address_const` function allows instantiating constant contract address values.                                                                                              |
+| `Into`                    | `traits::Into`                                        | `Into<T>` is a trait used for conversion between types. If there is an implementation of `Into<T,S>` for the types `T` and `S`, you can convert `T` into `S`.                             |
+| `TryInto`                 | `traits::TryInto`                                     | `TryInto<T>` is a trait used for conversion between types. If there is an implementation of `TryInto<T,S>` for the types `T` and `S`, you can try convert `T` into `S` if it is possible. |
+| `get_caller_address`      | `starknet::get_caller_address`                        | `get_caller_address()` is a function that returns the address of the caller of the contract. It can be used to identify the caller of a contract function.                                |
+| `get_contract_address`    | `starknet::info::get_contract_address`                | `get_contract_address()` is a function that returns the address of the current contract. It can be used to obtain the address of the contract being executed.                             |
 
 This is not an exhaustive list, but it covers some of the commonly used types
 and traits in contract development. For more details, refer to the official

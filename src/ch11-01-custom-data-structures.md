@@ -21,10 +21,10 @@ Fortunately, Cairo provides a handy built-in [dictionary type](./ch03-02-diction
 simulate the behavior of mutable data structures. Let's first explore how to create a struct that contains, among others, a `Felt252Dict<T>`.
 
 > Note: Several concepts used in this chapter were already presented earlier in the book. We recommend checking out the following chapters if you need to revise them:
-[Structs](ch05-00-using-structs-to-structure-related-data.md),
-[Methods](./ch05-03-method-syntax.md),
-[Generic types](./ch08-00-generic-types-and-traits.md),
-[Traits](./ch08-02-traits-in-cairo.md).
+> [Structs](ch05-00-using-structs-to-structure-related-data.md),
+> [Methods](./ch05-03-method-syntax.md),
+> [Generic types](./ch08-00-generic-types-and-traits.md),
+> [Traits](./ch08-02-traits-in-cairo.md).
 
 ## Dictionaries as Struct Members
 
@@ -53,7 +53,7 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 2. All value types of a dictionary implement the `Felt252DictValue<T>`, our generic type should do as well.
 3. To insert values, `Felt252DictTrait<T>` requires all value types to be droppable (implement the `Drop<T>` trait).
 
-The implementation, with all restrictions in place, would be as follow:
+The implementation, with all restrictions in place, would be as follows:
 
 ```rust,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
@@ -109,6 +109,12 @@ pointer to allow using any type `T` in our data structure, as explained in the
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 
+Since we again have `Felt252Dict<T>` as a struct member, we need to implement the `Destruct<T>` trait to tell the compiler how to make `NullableVec<T>` go out of scope.
+
+```rust,noplayground
+{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:destruct}}
+```
+
 The key thing that makes this vector mutable is that we can insert values into
 the dictionary to set or update values in our data structure. For example, to
 update a value at a specific index, we do:
@@ -143,7 +149,7 @@ A Stack is a LIFO (Last-In, First-Out) collection. The insertion of a new
 element and removal of an existing element takes place at the same end,
 represented as the top of the stack.
 
-Let us define what operations we need to create a stack :
+Let us define what operations we need to create a stack:
 
 - Push an item to the top of the stack.
 - Pop an item from the top of the stack.
@@ -177,9 +183,8 @@ The code uses the `insert` and `get` methods to access the values in the
 `Felt252Dict<T>`. To push an element to the top of the stack, the `push`
 function inserts the element in the dict at index `len` and increases the
 `len` field of the stack to keep track of the position of the stack top. To
-remove a value, the `pop` function retrieves the last value at position `len-1`
-and then decreases the value of `len` to update the position of the stack top
-accordingly.
+remove a value, the `pop` function decreases the value of `len` to update the
+position of the stack top and then retrieves the last value at position `len`.
 
 The full implementation of the Stack, along with more data structures that you
 can use in your code, can be found in the community-maintained

@@ -1,6 +1,6 @@
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Which one of the following is NOT true about smart pointers?"
+prompt.prompt = "Which one of the following is **NOT** true about smart pointers?"
 prompt.distractors = [
   "Smart pointers help prevent common memory issues such as dereferences unallocated memory and re-writing to existing cells.",
   "Smart pointers ensure proper initialization and prevent access to uninitialized or invalid memory.",
@@ -10,7 +10,7 @@ answer.answer = "Smart pointers store a reference to a value but do not provide 
 context = """
 Smart pointers in Cairo possess additional metadata and capabilities beyond merely serving as a reference to a value.
 They offer memory management features that extend beyond simple referencing, including strict type checking and ownership rules that enforce memory safety.
-Cairo provides several explicit smart pointer types, such as `Box` and `Nullable`, but other types like `Array` of `Felt252Dict` are also a form of smart pointer.
+Cairo provides several explicit smart pointer types, such as `Box` and `Nullable`, but other types like `Array` of `Felt252Dict` are also a form of smart pointers.
 These smart pointers ensure memory safety through strict ownership rules, preventing common issues like null dereferences.
 """
 id = "dbf869eb-b27a-41d0-b428-20d9ae00498b"
@@ -34,6 +34,13 @@ fn main() {
 """
 answer.doesCompile = true
 answer.stdout = "Peter"
+context = """
+The `student1` variable was first instantiated as a smart pointer to an instance of the struct `Student`.
+When we assigned `student1` to a new variable `student2`, we merely copied the _smart pointer_ to the previously created struct,
+so both variables referred to the same struct in memory.
+Once `student1` was reinstantiated with a new smart pointer to a new `Student` instance, the `student2` variable
+still referred to the original struct, so printing `student2.name` displayed `"Peter"`.
+"""
 id = "8d7ac906-4579-4d47-8345-4ec30a5f41f3"
 
 [[questions]]

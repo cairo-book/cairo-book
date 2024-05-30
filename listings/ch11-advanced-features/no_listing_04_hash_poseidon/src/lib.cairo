@@ -1,9 +1,6 @@
-//ANCHOR: import
 use core::poseidon::PoseidonTrait;
 use core::hash::{HashStateTrait, HashStateExTrait};
-//ANCHOR_END: import
 
-//ANCHOR: all
 #[derive(Drop, Hash)]
 struct StructForHash {
     first: felt252,
@@ -12,14 +9,9 @@ struct StructForHash {
     last: bool,
 }
 
-//ANCHOR: main
 fn main() -> felt252 {
     let struct_to_hash = StructForHash { first: 0, second: 1, third: (1, 2), last: false };
 
     let hash = PoseidonTrait::new().update_with(struct_to_hash).finalize();
     hash
 }
-//ANCHOR_END: main
-//ANCHOR_END: all
-
-
