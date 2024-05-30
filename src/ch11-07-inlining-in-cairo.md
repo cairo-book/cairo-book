@@ -169,7 +169,7 @@ In this specific case, we can observe that the compiler has applied additional o
 
 > Because `inlined` return value is never used, the compiler optimizes the `main` function by skipping the `inlined` function code. This will actually reduce the code length while reducing the number of steps required to execute `main`.
 
-On the opposite, line 0 uses the `function_call` libfunc to execute normally the `not_inlined` function. This means that all the code from line 7 to 8 will be executed:
+In contrast, line 0 uses the `function_call` libfunc to execute the `not_inlined` function normally. This means that all the code from lines 7 to 8 will be executed:
 
 ```rust,noplayground
 07 felt252_const<133508164995039583817065828>() -> ([0])
