@@ -26,7 +26,7 @@ The more frequently a function is called, the more beneficial inlining becomes i
 
 ## Inlining Example
 
-Let's introduce a short example to illustrate the mechanisms of inlining in Cairo. Listing {{#ref inlining}} shows a basic program allowing comparison between inlined and not-inlined functions.
+Let's introduce a short example to illustrate the mechanisms of inlining in Cairo. Listing {{#ref inlining}} shows a basic program allowing comparison between inlined and non-inlined functions.
 
 ```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_03_inlining_example/src/lib.cairo}}
@@ -146,7 +146,7 @@ To summary:
 
 It is interesting to note that in both Sierra code and Casm code, the `not_inlined` function will be called and executed before the body of the `inlined` function, even though the Cairo program executes `inlined() + not_inlined()`.
 
-> The Casm code of our program clearly shows that there is a function call for the `non_inlined` function, while the `inlined` function is correctly inlined.
+> The Casm code of our program clearly shows that there is a function call for the `not_inlined` function, while the `inlined` function is correctly inlined.
 
 ## Additional Optimizations
 
