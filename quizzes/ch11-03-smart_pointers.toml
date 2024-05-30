@@ -37,7 +37,7 @@ answer.stdout = "Peter"
 context = """
 The `student1` variable was first instantiated as a smart pointer to an instance of the struct `Student`.
 When we assigned `student1` to a new variable `student2`, we merely copied the _smart pointer_ to the previously created struct,
-so both variables pointed to the same struct in memory.
+so both variables referred to the same struct in memory.
 Once `student1` was reinstantiated with a new smart pointer to a new `Student` instance, the `student2` variable
 still pointed to the original struct, so printing `student2.name` displayed `"Peter"`.
 """
