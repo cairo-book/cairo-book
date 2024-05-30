@@ -35,7 +35,7 @@ Listing {{#ref basic_box}} shows how to use a box to store a value in the boxed 
 {{#label basic_box}}
 <span class="caption">Listing {{#ref basic_box}}: Storing a `u128` value in the boxed segment using a box</span>
 
-We define the variable `b` to have the value of `Box` that points to the value `5`, which is stored in the boxed segment. This program will print `b = 5`; in this case, we can access the data in the box similar to how we would if this data was simply in the execution memory. Putting a single value in a box isn’t very useful, so you won’t use boxes by themselves in this way very often. Having values like a single `u128` in the execution memory, where they’re stored by default, is more appropriate in the majority of situations. Let’s look at a case where boxes allow us to define types that we wouldn’t be allowed to if we didn’t have boxes.
+We define the variable `b` to have the value of a `Box` that points to the value `5`, which is stored in the boxed segment. This program will print `b = 5`; in this case, we can access the data in the box similar to how we would if this data was simply in the execution memory. Putting a single value in a box isn’t very useful, so you won’t use boxes by themselves in this way very often. Having values like a single `u128` in the execution memory, where they’re stored by default, is more appropriate in the majority of situations. Let’s look at a case where boxes allow us to define types that we wouldn’t be allowed to if we didn’t have boxes.
 
 ### Enabling Recursive Types with Nullable Boxes
 
