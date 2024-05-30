@@ -6,8 +6,8 @@ When writing a program, it is quite common to print some data to the console, ei
 
 Cairo provides two macros to print standard data types:
 
-- `println!` which prints on a new line.
-- `print!` with inline printing.
+- `println!` which prints on a new line
+- `print!` with inline printing
 
 Both take a `ByteArray` string as first parameter (see [Data Types][byte array]), which can be a simple string to print a message or a string with placeholders to format the way values are printed.
 
