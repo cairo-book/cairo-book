@@ -6,10 +6,10 @@ When writing a program, it is quite common to print some data to the console, ei
 
 Cairo provides two macros to print standard data types:
 
-- `println!` which prints on a new line,
+- `println!` which prints on a new line.
 - `print!` with inline printing.
 
-Both take a `ByteArray` string as first parameter (See [Data Types][byte array]) which can be a simple string to print a message or a string with placeholders to format the way values are printed.
+Both take a `ByteArray` string as first parameter (see [Data Types][byte array]) which can be a simple string to print a message or a string with placeholders to format the way values are printed.
 
 There are two ways to use these placeholders and both can be mixed:
 
@@ -22,7 +22,7 @@ Here are some examples:
 {{#include ../listings/ch11-advanced-features/no_listing_08_print_macro/src/lib.cairo}}
 ```
 
-> `print!` and `println!` macros use the `Display` trait under the hood, and are therefore used to print the value of types that implement it. This is the case for basic data types, but not for more complexe ones. If you try to print complex data types values with these macros, e.g., for debugging purpose, you will get an error. In that case, you can either [manually implement][print with display] the `Display` trait for your type, or use the `Debug` trait (see [below][print with debug]).
+> `print!` and `println!` macros use the `Display` trait under the hood, and are therefore used to print the value of types that implement it. This is the case for basic data types, but not for more complex ones. If you try to print complex data types values with these macros, e.g., for debugging purpose, you will get an error. In that case, you can either [manually implement][print with display] the `Display` trait for your type, or use the `Debug` trait (see [below][print with debug]).
 
 [byte array]: ./ch02-02-data-types.md#byte-array-strings
 [print with display]: ./ch11-09-printing.md#printing-custom-data-types
@@ -39,7 +39,7 @@ Cairo also provides a useful macro to handle strings formatting: `format!`. This
 
 ## Printing Custom Data Types
 
-As previously explained, if you try to print the value of a custom data type with `print!` or `println!` macros, you'll get an error telling you that the `Display` trait is not implemented for your custom type: 
+As previously explained, if you try to print the value of a custom data type with `print!` or `println!` macros, you'll get an error telling you that the `Display` trait is not implemented for your custom type:
 
 ```shell
 error: Trait has no implementation in context: core::fmt::Display::<package_name::struct_name>
@@ -55,7 +55,7 @@ trait Display<T> {
 }
 ```
 
-The second parameter `f` is a `Formatter`, which is just a struct containing a `ByteArray`, representing the pending result of formatting: 
+The second parameter `f` is a `Formatter`, which is just a struct containing a `ByteArray`, representing the pending result of formatting:
 
 ```rust,noplayground
 #[derive(Default, Drop)]
@@ -84,15 +84,15 @@ It is also possible to implement the `Display` trait for the `Point` struct usin
 {{#include ../listings/ch11-advanced-features/no_listing_10_display_trait_with_write/src/lib.cairo}}
 ```
 
-> Printing complex data types this way might not be ideal as it requires additional steps to allow the use of `print!` and `println!` macros. If you need to print complexe data types, especially when debugging, use the `Debug` trait described just after instead.
+> Printing complex data types this way might not be ideal as it requires additional steps to allow the use of `print!` and `println!` macros. If you need to print complex data types, especially when debugging, use the `Debug` trait described just after instead.
 
 ## Print Debug Traces
 
 Cairo provides the derivable trait `Debug` to print the value of variables when debugging. Simply add `:?` within curly brackets `{}` placeholders in a `print!` or `println!` macro string input.
 
- This trait is very useful and is implemented by default for basic data types. It can also be simply derived on complex data types using the `derive(Debug)` attribute, as long as all types they contain implement it. It allows to get rid of manually implementing extra-code to print complex data types values.
+This trait is very useful and is implemented by default for basic data types. It can also be simply derived on complex data types using the `derive(Debug)` attribute, as long as all types they contain implement it. It allows to get rid of manually implementing extra-code to print complex data types values.
 
- Note that `assert_xx!` macros used in tests require the provided values to implement the `Debug` trait, as they also print the result in case of assertion failure.
+Note that `assert_xx!` macros used in tests require the provided values to implement the `Debug` trait, as they also print the result in case of assertion failure.
 
 Please refer to the [Derivable Traits][debug trait] appendix for more detail about the `Debug` trait and its usage for printing value when debugging.
 
