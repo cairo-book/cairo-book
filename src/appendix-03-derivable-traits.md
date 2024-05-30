@@ -60,7 +60,7 @@ If you want to derive `Default` on a composite type, each of its elements must a
 An example:
 
 ```rust
-{{#include ../listings/appendinx/listing_07_default/src/lib.cairo}}
+{{#include ../listings/appendix/listing_07_default/src/lib.cairo}}
 ```
 
 ## `PartialEq` for Equality Comparisons
