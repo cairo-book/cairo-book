@@ -7,6 +7,7 @@ Inlining is a common code optimization technique supported by most compilers. It
 In Cairo, the `inline` attribute suggests whether or not the Sierra code corresponding to the attributed function should be directly injected in the caller function's context, rather than using a `function_call` libfunc to execute that code.
 
 There are three variants of the `inline` attribute that one can use:
+
 - `#[inline]` suggests performing an inline expansion.
 - `#[inline(always)]` suggests that an inline expansion should always be performed.
 - `#[inline(never)]` suggests that an inline expansion should never be performed.
@@ -17,7 +18,7 @@ Many of the Cairo corelib functions are inlined. User-defined functions may also
 
 However, inlining can also lead to increased code size. Whenever a function is inlined, the call site contains a copy of the function's Sierra code, potentially leading to duplication of code across the compiled code.
 
-Therefore, inlining should be applied with cautious. Using the `#[inline]` or `#[inline(always)]` indiscriminately will lead to increased compile time. It is particularly useful to inline small functions, ideally with many arguments. This is because inlining large functions will increase the code length of the program, and handling many arguments will increase the number of steps to execute these functions.
+Therefore, inlining should be applied with cautioun. Using `#[inline]` or `#[inline(always)]` indiscriminately will lead to increased compile time. It is particularly useful to inline small functions, ideally with many arguments. This is because inlining large functions will increase the code length of the program, and handling many arguments will increase the number of steps to execute these functions.
 
 The more frequently a function is called, the more beneficial inlining becomes in terms of performance. By doing so, the number of steps for the execution will be lower, while the code length will not grow that much or might even decrease in terms of total number of instructions.
 
@@ -41,11 +42,13 @@ Let's take a look at the corresponding Sierra code to see how inlining works und
 ```
 
 The Sierra file is structured in three parts:
+
 - Type and libfunc declarations.
 - Statements that constitute the program.
 - Declaration of the functions of the program.
 
 The Sierra code statements always match the order of function declarations in the Cairo program. Indeed, the declaration of the functions of the program tells us that:
+
 - `main` function starts at line 0, and returns a `felt252` on line 5.
 - `inlined` function starts at line 6, and returns a `felt252` on line 8.
 - `not_inlined` function starts at line 9, and returns a `felt252` on line 11.
@@ -70,7 +73,7 @@ The `function_call` libfunc is called on line 0 to execute the `not_inlined` fun
 
 This code uses a single data type, `felt252`. It uses two library functions - `felt_const<2>`, which returns the constant `felt252` 2, and `store_temp<felt252>`, which pushes a constant value to memory. The first line calls the `felt_const<2>` libfunc to create a variable with id `0`. Then, the second line pushes this variable to memory for later use.
 
-After that, Sierra statements from line 1 to 2 are the actual body of the `inlined` function: 
+After that, Sierra statements from line 1 to 2 are the actual body of the `inlined` function:
 
 ```rust,noplayground
 06	felt252_const<1>() -> ([0])
@@ -119,10 +122,12 @@ Don't hesitate to use [cairovm.codes](https://cairovm.codes/) playground to foll
 Each instruction and each argument for any instruction increment the Program Counter (known as PC) by 1. This means that `ret` on line 2 is actually the instruction at `PC = 3`, as the argument `3` corresponds to `PC = 2`.
 
 The `call` and `ret` instructions allow implementation of a function stack:
+
 - `call` instruction acts like a jump instruction, updating the PC to a given value, whether relatively to the current value using `rel` or absolutely using `abs`.
 - `ret` instruction jumps back right after the `call` instruction and continues the execution of the code.
 
 We can now decompose how these instructions are executed to understand what this code does:
+
 - `call rel 3`: this instruction increments the PC by 3 and executes the instruction at this location, which is `call rel 9` at `PC = 4`.
 - `call rel 9` increments the PC by 9 and executes the instruction at `PC = 13`, which is actually line 9.
 - `[ap + 0] = 2, ap++`: `ap` stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value `2` in the next free memory cell indicated by the current value of `ap`, after which we increment `ap` by 1. Then, we go to the next line which is `ret`.
@@ -132,10 +137,11 @@ We can now decompose how these instructions are executed to understand what this
 - `ret`: jumps back to the line after `call rel 3`, so we go to line 2.
 - `ret`: last instruction executed as there is no more `call` instruction where to jump right after. This is the actual return instruction of the Cairo `main` function.
 
-To summary: 
+To summary:
+
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
 - `call rel 9` triggers the call the `not_inlined` function, which returns `2` and stores it at the final location `[ap-3]`.
-- The line 4 is the inlined code of the `inlined` function, which returns `1`  and stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is inserted and directly executed.
+- The line 4 is the inlined code of the `inlined` function, which returns `1` and stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is inserted and directly executed.
 - After that, the sum is computed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns the sum, corresponding to the return value of the `main` function.
 
 It is interesting to note that in both Sierra code and Casm code, the `not_inlined` function will be called and executed before the body of the `inlined` function, even though the Cairo program executes `inlined() + not_inlined()`.
@@ -170,13 +176,13 @@ On the opposite, line 0 uses the `function_call` libfunc to execute normally the
 08 store_temp<felt252>([0]) -> ([0])
 ```
 
-This value stored in the variable with id `0` is then dropped on line 1, as it is not used in the `main` function: 
+This value stored in the variable with id `0` is then dropped on line 1, as it is not used in the `main` function:
 
 ```rust,noplayground
 01 drop<felt252>([0]) -> ()
 ```
 
-Finally, as the `main` function doesn't return any value, a variable of unit type `()` is created and returned: 
+Finally, as the `main` function doesn't return any value, a variable of unit type `()` is created and returned:
 
 ```rust,noplayground
 02 struct_construct<Unit>() -> ([1])
