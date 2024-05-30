@@ -67,9 +67,9 @@ An example:
 
 The `PartialEq` trait allows for comparison between instances of a type for equality, thereby enabling the `==` and `!=` operators.
 
-When `PartialEq` is derived on structs, two instances are equal only if all fields are equal, and the instances are not equal if any fields are not equal. When derived on enums, each variant is equal to itself and not equal to the other variants.
+When `PartialEq` is derived on structs, two instances are equal only if all their fields are equal; they are not equal if any field is different. When derived for enums, each variant is equal to itself and not equal to the other variants.
 
-The `PartialEq` trait is required, for example, with the use of the `assert_eq!` macro in tests, which needs to be able to compare two instances of a type for equality.
+The `PartialEq` trait is required when using the `assert_eq!` macro in tests, which needs to be able to compare two instances of a type for equality.
 
 Here is an example:
 
