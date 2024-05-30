@@ -39,7 +39,7 @@ The `student1` variable was first instantiated as a smart pointer to an instance
 When we assigned `student1` to a new variable `student2`, we merely copied the _smart pointer_ to the previously created struct,
 so both variables referred to the same struct in memory.
 Once `student1` was reinstantiated with a new smart pointer to a new `Student` instance, the `student2` variable
-still pointed to the original struct, so printing `student2.name` displayed `"Peter"`.
+still referred to the original struct, so printing `student2.name` displayed `"Peter"`.
 """
 id = "8d7ac906-4579-4d47-8345-4ec30a5f41f3"
 
