@@ -10,7 +10,7 @@ The Cairo VM memory is composed by multiple segments that can store data, each i
 
 ## The `Box<T>` Type to Manipulate Pointers
 
-The principal smart pointer type in Cairo is a _box_, denoted as `Box<T>`. Manually defining boxes allow you to store data in a specific memory segment of the Cairo VM called _the boxed segment_. This segment is dedicated to store all boxed values, and what remains in the execution segment is only a pointer to the boxed segment. Whenever you instantiate a new pointer variable of type `Box<T>`, you append the data of type `T` to the boxed segment.
+The principal smart pointer type in Cairo is a _box_, denoted as `Box<T>`. Manually defining boxes allow you to store data in a specific memory segment of the Cairo VM called the _boxed segment_. This segment is dedicated to store all boxed values, and what remains in the execution segment is only a pointer to the boxed segment. Whenever you instantiate a new pointer variable of type `Box<T>`, you append the data of type `T` to the boxed segment.
 
 Boxes have very little performance overhead, other than writing their inner values to the boxed segment. But they don’t have many extra capabilities either. You’ll use them most often in these situations:
 
