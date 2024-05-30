@@ -137,7 +137,7 @@ We can now decompose how these instructions are executed to understand what this
 - `ret`: jumps back to the line after `call rel 3`, so we go to line 2.
 - `ret`: last instruction executed as there is no more `call` instruction where to jump right after. This is the actual return instruction of the Cairo `main` function.
 
-To summary:
+To summarize:
 
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
 - `call rel 9` triggers the call the `not_inlined` function, which returns `2` and stores it at the final location `[ap-3]`.
