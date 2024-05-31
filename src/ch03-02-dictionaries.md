@@ -230,17 +230,17 @@ The complete script would look like this:
 
 ## Using Arrays inside Dictionaries
 
-In the previous section, we explored how to store and retrieve a `Span<T>` inside a dictionary using `Nullable<T>` and `Box<T>`. Now, let's take a look at a similar example where we store an array inside a dictionary and dynamically modify its contents.
+In the previous section, we explored how to store and retrieve complex types inside a dictionary using `Nullable<T>` and `Box<T>`. Now, let's take a look at how to store an array inside a dictionary and dynamically modify its contents.
 
 Storing arrays in dictionaries in Cairo is slightly different from storing other types. This is because arrays are more complex data structures that require special handling to avoid issues with memory copying and references.
 
-First, let's look at how to create a dictionary and insert an array into it. This process is straightforward and follows a similar pattern to inserting other types of data:
+First, let's look at how to create a dictionary and insert an array into it. This process is pretty straightforward and follows a similar pattern to inserting other types of data:
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_14_dict_of_array_insert/src/lib.cairo}}
 ```
 
-However, attempting to read an array from the dictionary using the `get` method will result in a compiler error. This is because `get` tries to copy the array in memory, which is not possible for arrays (as we've already mentioned, `Array<T>` does not implement the `Copy<T>` trait):
+However, attempting to read an array from the dictionary using the `get` method will result in a compiler error. This is because `get` tries to copy the array in memory, which is not possible for arrays (as we've already mentioned in the [previous section][nullable dictionaries values], `Array<T>` does not implement the `Copy<T>` trait):
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/src/lib.cairo}}
@@ -258,7 +258,7 @@ To correctly read an array from the dictionary, we need to use dictionary entrie
 
 > Note: We must convert the array to a `Span` before finalizing the entry, because calling `NullableTrait::new(arr)` moves the array, thus making it impossible to return it from the function.
 
-To modify the stored array, such as appending a new value, we can use a similar approach with entries. The following `append_value` function demonstrates this:
+To modify the stored array, such as appending a new value, we can use a similar approach. The following `append_value` function demonstrates this:
 
 ```rust,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:append}}
@@ -268,7 +268,7 @@ In the `append_value` function, we access the dictionary entry, dereference the 
 
 > Note: Removing an item from a stored array can be implemented in a similar manner.
 
-Below is the complete example demonstrating the creation, insertion, reading, and modification of arrays in a dictionary:
+Below is the complete example demonstrating the creation, insertion, reading, and modification of an array in a dictionary:
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:all}}
