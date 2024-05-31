@@ -30,9 +30,9 @@ fn main() {
 """
 
 answer.doesCompile = true
-Stdout = false
+answer.stdout = false
 context = """
-Once the snapshot of a trait is implemented, an instance of a struct is allowed to invoke a method.
+Methods with the self parameter can be called by any object of the specified type.
 """
 
 
@@ -43,8 +43,8 @@ prompt.program = """
 trait SquareTrait {
     fn area(self: @Rectangle) -> u64;
 }
- impl SquareImpl of SquareTrait {
-        fn area(self: @Rectangle) -> u64 {
+impl SquareImpl of SquareTrait {
+    fn area(self: @Rectangle) -> u64 {
         return (*self.width) * (*self.height);
     }
 }
@@ -62,5 +62,5 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-A Stuct must match the trait defined in a method
+The SquareTrait trait is defined expecting a parameter of type Rectangle thus passing a Square struct as input will throw an error.
 """
