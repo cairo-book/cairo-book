@@ -230,4 +230,24 @@ The complete script would look like this:
 
 ## Using Arrays inside Dictionaries
 
+In the previous section, we explored how to store and retrieve a `Span<T>` inside a dictionary using `Nullable<T>` and `Box<T>`. Now, let's take a look at a similar example where we store an array inside a dictionary and dynamically modify its contents.
+
+Storing arrays in dictionaries in Cairo is slightly different from storing other types. This is because arrays are more complex data structures that require special handling to avoid issues with memory copying and references.
+
+First, let's look at how to create a dictionary and insert an array into it. This process is straightforward and follows a similar pattern to inserting other types of data:
+
+```rust
+{{#include ../listings/ch03-common-collections/no_listing_14_dict_of_array_insert/src/lib.cairo}}
+```
+
+However, attempting to read an array from the dictionary using the `get` method will result in a compiler error. This is because `get` tries to copy the value in memory, which is not possible for arrays:
+
+```rust
+{{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/src/lib.cairo}}
+```
+
+```shell
+{{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/output.txt}}
+```
+
 {{#quiz ../quizzes/ch03-02-dictionaries.toml}}
