@@ -256,6 +256,8 @@ To correctly read an array from the dictionary, we need to use dictionary entrie
 {{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:get}}
 ```
 
+> Note: We must convert the array to a `Span` before finalizing the entry, because calling `NullableTrait::new(arr)` moves the array, thus making it impossible to return it from the function.
+
 To modify the stored array, such as appending a new value, we can use a similar approach with entries. The following `append_value` function demonstrates this:
 
 ```rust,noplayground
