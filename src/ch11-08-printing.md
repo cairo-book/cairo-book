@@ -25,8 +25,8 @@ Here are some examples:
 > `print!` and `println!` macros use the `Display` trait under the hood, and are therefore used to print the value of types that implement it. This is the case for basic data types, but not for more complex ones. If you try to print complex data type values with these macros, e.g. for debugging purposes, you will get an error. In that case, you can either [manually implement][print with display] the `Display` trait for your type or use the `Debug` trait (see [below][print with debug]).
 
 [byte array]: ./ch02-02-data-types.md#byte-array-strings
-[print with display]: ./ch11-09-printing.md#printing-custom-data-types
-[print with debug]: ./ch11-09-printing.md#print-debug-traces
+[print with display]: ./ch11-08-printing.md#printing-custom-data-types
+[print with debug]: ./ch11-08-printing.md#print-debug-traces
 
 ## Formatting
 

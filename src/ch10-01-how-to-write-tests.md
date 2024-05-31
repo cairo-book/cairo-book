@@ -332,7 +332,7 @@ Error: test result: FAILED. 0 passed; 1 failed; 0 ignored
 We can see the value we actually got in the test output, which would help us
 debug what happened instead of what we were expecting to happen.
 
-[formatting]: ./ch11-09-printing.md#formatting
+[formatting]: ./ch11-08-printing.md#formatting
 
 ## Checking for panics with `should_panic`
 

@@ -20,7 +20,7 @@ Boxes have very little performance overhead, other than writing their inner valu
 We’ll demonstrate the first situation in the [“Enabling Recursive Types with Boxes”][nullable recursive types] section.
 In the second case, transferring ownership of a large amount of data can take a long time because the data is copied around in memory. To improve performance in this situation, we can store the large amount of data in the boxed segment using a box type. Then, only the small amount of pointer data is copied around in memory, while the data it references stays in one place on the boxed segment.
 
-[nullable recursive types]: ./ch11-03-smart-pointers.md#enabling-recursive-types-with-nullable-boxes
+[nullable recursive types]: ./ch11-02-smart-pointers.md#enabling-recursive-types-with-nullable-boxes
 
 ### Using a `Box<T>` to Store Data in the Boxed Segment
 
@@ -80,4 +80,4 @@ If we try to access an element that does not exist in a dictionary, the code wil
 
 [dictionary nullable span]: /ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
-{{#quiz ../quizzes/ch11-03-smart_pointers.toml}}
+{{#quiz ../quizzes/ch11-02-smart_pointers.toml}}

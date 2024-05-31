@@ -84,14 +84,13 @@
 - [Advanced Cairo Features](ch11-00-advanced-features.md)
 
   - [Custom Data Structures](ch11-01-custom-data-structures.md)
-  - [Using Arrays inside Dictionaries]()
-  - [Smart Pointers](ch11-03-smart-pointers.md)
-  - [Operator Overloading](ch11-04-operator-overloading.md)
-  - [Working with Hashes](ch11-05-hash.md)
-  - [Macros](ch11-06-macros.md)
-  - [Inlining in Cairo](ch11-07-inlining-in-cairo.md)
+  - [Smart Pointers](ch11-02-smart-pointers.md)
+  - [Operator Overloading](ch11-03-operator-overloading.md)
+  - [Working with Hashes](ch11-04-hash.md)
+  - [Macros](ch11-05-macros.md)
+  - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
   - [Gas Optimisation]()
-  - [Printing](ch11-09-printing.md)
+  - [Printing](ch11-08-printing.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
