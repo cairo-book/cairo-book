@@ -1,5 +1,3 @@
-use core::array::ArrayTrait;
-use core::box::BoxTrait;
 use core::nullable::{match_nullable, FromNullableResult};
 
 fn main() {
