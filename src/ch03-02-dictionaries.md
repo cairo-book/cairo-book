@@ -240,7 +240,7 @@ First, let's look at how to create a dictionary and insert an array into it. Thi
 {{#include ../listings/ch03-common-collections/no_listing_14_dict_of_array_insert/src/lib.cairo}}
 ```
 
-However, attempting to read an array from the dictionary using the `get` method will result in a compiler error. This is because `get` tries to copy the value in memory, which is not possible for arrays:
+However, attempting to read an array from the dictionary using the `get` method will result in a compiler error. This is because `get` tries to copy the array in memory, which is not possible for arrays (as we've already mentioned, `Array<T>` does not implement the `Copy<T>` trait):
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/src/lib.cairo}}
@@ -248,6 +248,28 @@ However, attempting to read an array from the dictionary using the `get` method 
 
 ```shell
 {{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/output.txt}}
+```
+
+To correctly read an array from the dictionary, we need to use dictionary entries. This allows us to get a reference to the array value without copying it:
+
+```rust,noplayground
+{{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:get}}
+```
+
+To modify the stored array, such as appending a new value, we can use a similar approach with entries. The following `append_value` function demonstrates this:
+
+```rust,noplayground
+{{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:append}}
+```
+
+In the `append_value` function, we access the dictionary entry, dereference the array, append the new value, and finalize the entry with the updated array.
+
+> Note: Removing an item from a stored array can be implemented in a similar manner.
+
+Below is the complete example demonstrating the creation, insertion, reading, and modification of arrays in a dictionary:
+
+```rust
+{{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:all}}
 ```
 
 {{#quiz ../quizzes/ch03-02-dictionaries.toml}}
