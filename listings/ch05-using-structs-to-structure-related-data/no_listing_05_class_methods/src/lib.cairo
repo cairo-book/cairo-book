@@ -1,4 +1,4 @@
-#[derive(Copy, Drop)]
+#[derive(Copy, Drop, Debug)]
 struct Rectangle {
     width: u64,
     height: u64,
@@ -15,11 +15,14 @@ impl RectangleImpl of RectangleTrait {
         Rectangle { width, height }
     }
 
-    fn compare(r1: @Rectangle, r2: @Rectangle) -> bool {
-        let r1_area = r1.area();
-        let r2_area = r2.area();
+    fn square(size: u64) -> Rectangle {
+        Rectangle { width: size, height: size }
+    }
 
-        return r1_area == r2_area;
+    fn avg(lhs: @Rectangle, rhs: @Rectangle) -> Rectangle {
+        Rectangle {
+            width: ((*lhs.width) + (*rhs.width)) / 2, height: ((*lhs.height) + (*rhs.height)) / 2
+        }
     }
 }
 // ANCHOR_END: trait_impl
@@ -27,9 +30,14 @@ impl RectangleImpl of RectangleTrait {
 // ANCHOR: main
 fn main() {
     let rect1 = RectangleTrait::new(30, 50);
-    let rect2 = RectangleTrait::new(10, 40);
+    let rect2 = RectangleTrait::square(10);
 
-    println!("Are rect1 and rect2 equals ? {}", RectangleTrait::compare(@rect1, @rect2));
+    println!(
+        "The average Rectangle of {:?} and {:?} is {:?}",
+        @rect1,
+        @rect2,
+        RectangleTrait::avg(@rect1, @rect2)
+    );
 }
 // ANCHOR_END: main
 

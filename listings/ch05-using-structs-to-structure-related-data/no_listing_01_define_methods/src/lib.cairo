@@ -1,3 +1,4 @@
+//ANCHOR: all
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,
@@ -24,5 +25,6 @@ fn main() {
     println!("Area is {}", rect1.area());
 }
 //ANCHOR_END: main
+//ANCHOR_END: all
 
 

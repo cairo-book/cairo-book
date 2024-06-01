@@ -69,12 +69,18 @@ The `PartialEq` trait allows for comparison between instances of a type for equa
 
 When `PartialEq` is derived on structs, two instances are equal only if all their fields are equal; they are not equal if any field is different. When derived for enums, each variant is equal to itself and not equal to the other variants.
 
+You can write your own implementation of the `PartialEq` trait for your type, if you can't derive it or if you want to implement your custom rules. In the following example, we write an implementation for `PartialEq` in which we consider that two rectangles are equal if they have the same area:
+
+```rust
+{{#include ../listings/appendix/listing_04_implpartialeq/src/lib.cairo}}
+```
+
 The `PartialEq` trait is required when using the `assert_eq!` macro in tests, which needs to be able to compare two instances of a type for equality.
 
 Here is an example:
 
 ```rust
-{{#include ../listings/appendix/listing_04_partialeq/src/lib.cairo}}
+{{#include ../listings/appendix/listing_05_partialeq/src/lib.cairo}}
 ```
 
 ## Serializing with `Serde`
@@ -86,7 +92,7 @@ Here is an example:
 For example:
 
 ```rust
-{{#include ../listings/appendix/listing_05_serialize/src/lib.cairo}}
+{{#include ../listings/appendix/listing_06_serialize/src/lib.cairo}}
 
 ```
 
@@ -103,7 +109,7 @@ Also, we can use the `deserialize` function to convert the serialized array back
 Here is an example:
 
 ```rust
-{{#include ../listings/appendix/listing_06_deserialize/src/lib.cairo}}
+{{#include ../listings/appendix/listing_07_deserialize/src/lib.cairo}}
 ```
 
 Here we are converting a serialized array span back to the struct `A`. `deserialize` returns an `Option` so we need to unwrap it. When using `deserialize` we also need to specify the type we want to deserialize into.
