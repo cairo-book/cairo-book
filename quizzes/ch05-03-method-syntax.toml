@@ -15,8 +15,7 @@ impl RectangleImpl of RectangleTrait {
     fn new(width: u64, height: u64) -> Rectangle {
         Rectangle { width, height }
     }
-    fn compare(self: @Rectangle, r2: @Rectangle) -> bool {
-        let r1_area = self.area();
+    fn compare_areas(self: @Rectangle, r2: @Rectangle) -> bool {
         self.area() == r2.area()
     }
 }
@@ -24,24 +23,31 @@ impl RectangleImpl of RectangleTrait {
 fn main() {
     let rect1 = Rectangle {width: 40, height: 50};
     let rect2 = RectangleTrait::new(10, 40);
-    rect1.compare(@rect2);
+    println!("{}", rect1.compare_areas(@rect2));
 }
 """
 
 answer.doesCompile = true
-answer.stdout = false
+
+answer.stdout = "false"
 context = """
 It compiles, because the type `Rectangle` on which we call the method on reference is implicitly passed as a `@Rectangle`
 """
+id = "98bbc25c-80b2-4226-9219-a8d7b20fb991"
 
 
 [[questions]]
 type = "Tracing"
 prompt.program = """
 #[derive(Drop)]
-struct Square {
+struct Rectangle {
     width: u64,
     height: u64,
+}
+
+#[derive(Drop)]
+struct Circle {
+    radius: u64,
 }
 
 trait RectangleTrait {
@@ -55,12 +61,16 @@ impl RectangleImpl of RectangleTrait {
 }
 
 fn main() {
-    let my_square = Square { width: 30, height: 50 };
-    let area = my_square.area();
-    assert!(area == 1500);
+    let my_square = Rectangle { width: 30, height: 50 };
+    let my_circle = Circle { radius: 10 };
+    let area = my_circle.area();
+    println!("{}", area)
 }
+
 """
 answer.doesCompile = false
+answer.lineNumber = 25
 context = """
-Methods can only be called on the types they're defined for; here, we try to call `area()` on `Square`, when it's define for `Rectangle`.
+Methods can only be called on the types they're defined for; here, we try to call `area()` on `Circle`, when it's defined for `Rectangle`.
 """
+id = "1e4a5bff-dc92-4c09-9f04-1d95fcf039bb"
