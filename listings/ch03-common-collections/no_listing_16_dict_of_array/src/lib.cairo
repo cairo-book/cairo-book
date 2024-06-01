@@ -2,17 +2,6 @@
 use core::nullable::NullableTrait;
 use core::dict::Felt252DictEntryTrait;
 
-fn main() {
-    let arr = array![20, 19, 26];
-    let mut dict: Felt252Dict<Nullable<Array<u8>>> = Default::default();
-    dict.insert(0, NullableTrait::new(arr));
-    println!("Before insertion: {:?}", get_array_entry(ref dict, 0));
-
-    append_value(ref dict, 0, 30);
-
-    println!("After insertion: {:?}", get_array_entry(ref dict, 0));
-}
-
 //ANCHOR: append
 fn append_value(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252, value: u8) {
     let (entry, arr) = dict.entry(index);
@@ -31,4 +20,17 @@ fn get_array_entry(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252) -
     span
 }
 //ANCHOR_END: get
+
+fn main() {
+    let arr = array![20, 19, 26];
+    let mut dict: Felt252Dict<Nullable<Array<u8>>> = Default::default();
+    dict.insert(0, NullableTrait::new(arr));
+    println!("Before insertion: {:?}", get_array_entry(ref dict, 0));
+
+    append_value(ref dict, 0, 30);
+
+    println!("After insertion: {:?}", get_array_entry(ref dict, 0));
+}
 //ANCHOR_END: all
+
+
