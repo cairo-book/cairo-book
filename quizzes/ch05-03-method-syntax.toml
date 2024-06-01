@@ -29,11 +29,10 @@ fn main() {
 """
 
 answer.doesCompile = true
-answer.stdout = "false"
+answer.stdout = false
 context = """
 It compiles, because the type `Rectangle` on which we call the method on reference is implicitly passed as a `@Rectangle`
 """
-
 
 
 [[questions]]
