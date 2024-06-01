@@ -116,7 +116,7 @@ Nonetheless, it is possible to use the `consteval_int!` macro to create a `const
 {{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:consteval_const}}
 ```
 
-We will dive into more detail about macros in the [dedicated section](./ch11-06-macros.md).
+We will dive into more detail about macros in the [dedicated section](./ch11-05-macros.md).
 
 Cairo's naming convention for constants is to use all uppercase with underscores between words.
 

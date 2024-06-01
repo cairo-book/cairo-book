@@ -15,4 +15,4 @@ In the code above, we're implementing the `Add` trait for the `Potion` type. The
 
 As illustrated in the example, overloading an operator requires specification of the concrete type being overloaded. The overloaded generic trait is `Add<T>`, and we define a concrete implementation for the type `Potion` with `Add<Potion>`.
 
-{{#quiz ../quizzes/ch11-04-operator-overloading.toml}}
+{{#quiz ../quizzes/ch11-03-operator-overloading.toml}}

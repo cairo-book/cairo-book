@@ -118,7 +118,7 @@ Here we are converting a serialized array span back to the struct `A`. `deserial
 
 It is possible to derive the `Hash` trait on structs and enums. This allows them to be hashed easily using any available hash function. For a struct or an enum to derive the `Hash` attribute, all fields or variants need to be hashable themselves.
 
-You can refer to the [Hashes section](ch11-05-hash.md) to get more information about how to hash complex data types.
+You can refer to the [Hashes section](ch11-04-hash.md) to get more information about how to hash complex data types.
 
 ## Starknet Storage with `starknet::Store`
 

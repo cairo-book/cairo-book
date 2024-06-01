@@ -20,7 +20,7 @@ See [Entry Point Selector](./ch15-02-contract-dispatchers-library-dispatchers-an
 
 ## `print!` and `println!` Macros
 
-Please refer to the [Printing](./ch11-09-printing.md) page.
+Please refer to the [Printing](./ch11-08-printing.md) page.
 
 ## `array!` Macro
 
@@ -36,11 +36,11 @@ See [How to Write Tests](./ch10-01-how-to-write-tests.md) page.
 
 ## `format!` Macro
 
-See [Printing](./ch11-09-printing.html#formatting) page.
+See [Printing](./ch11-08-printing.html#formatting) page.
 
 ## `write!` and `writeln!` Macros
 
-See [Printing](./ch11-09-printing.html#printing-custom-data-types) page.
+See [Printing](./ch11-08-printing.html#printing-custom-data-types) page.
 
 ## `get_dep_component!`, `get_dep_component_mut` and `component!` Macros
 

@@ -192,7 +192,7 @@ This is implemented by some common data types, such as most unsigned integers, `
 This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations in order to make the data type a valid dictionary value type.
 To compensate this, you can wrap your type inside a `Nullable<T>`.
 
-`Nullable<T>` is a smart pointer type that can either point to a value or be `null` in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type is a smart pointer that allows us to use a dedicated `boxed_segment` memory segment for our data, and access this segment using a pointer that can only be manipulated in one place at a time. See [Smart Pointers Chapter](./ch11-03-smart-pointers.md) for more information.
+`Nullable<T>` is a smart pointer type that can either point to a value or be `null` in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type is a smart pointer that allows us to use a dedicated `boxed_segment` memory segment for our data, and access this segment using a pointer that can only be manipulated in one place at a time. See [Smart Pointers Chapter](./ch11-02-smart-pointers.md) for more information.
 
 Let's show using an example. We will try to store a `Span<felt252>` inside a dictionary. For that, we will use `Nullable<T>` and `Box<T>`. Also, we are storing a `Span<T>` and not an `Array<T>` because the latter does not implement the `Copy<T>` trait which is required for reading from a dictionary.
 
@@ -226,6 +226,52 @@ The complete script would look like this:
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:all}}
+```
+
+## Using Arrays inside Dictionaries
+
+In the previous section, we explored how to store and retrieve complex types inside a dictionary using `Nullable<T>` and `Box<T>`. Now, let's take a look at how to store an array inside a dictionary and dynamically modify its contents.
+
+Storing arrays in dictionaries in Cairo is slightly different from storing other types. This is because arrays are more complex data structures that require special handling to avoid issues with memory copying and references.
+
+First, let's look at how to create a dictionary and insert an array into it. This process is pretty straightforward and follows a similar pattern to inserting other types of data:
+
+```rust
+{{#include ../listings/ch03-common-collections/no_listing_14_dict_of_array_insert/src/lib.cairo}}
+```
+
+However, attempting to read an array from the dictionary using the `get` method will result in a compiler error. This is because `get` tries to copy the array in memory, which is not possible for arrays (as we've already mentioned in the [previous section][nullable dictionaries values], `Array<T>` does not implement the `Copy<T>` trait):
+
+```rust
+{{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/src/lib.cairo}}
+```
+
+```shell
+{{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/output.txt}}
+```
+
+To correctly read an array from the dictionary, we need to use dictionary entries. This allows us to get a reference to the array value without copying it:
+
+```rust,noplayground
+{{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:get}}
+```
+
+> Note: We must convert the array to a `Span` before finalizing the entry, because calling `NullableTrait::new(arr)` moves the array, thus making it impossible to return it from the function.
+
+To modify the stored array, such as appending a new value, we can use a similar approach. The following `append_value` function demonstrates this:
+
+```rust,noplayground
+{{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:append}}
+```
+
+In the `append_value` function, we access the dictionary entry, dereference the array, append the new value, and finalize the entry with the updated array.
+
+> Note: Removing an item from a stored array can be implemented in a similar manner.
+
+Below is the complete example demonstrating the creation, insertion, reading, and modification of an array in a dictionary:
+
+```rust
+{{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:all}}
 ```
 
 {{#quiz ../quizzes/ch03-02-dictionaries.toml}}
