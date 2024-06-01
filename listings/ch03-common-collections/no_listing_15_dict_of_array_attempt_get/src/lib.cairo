@@ -1,3 +1,4 @@
+//TAG: does_not_compile
 use core::nullable::{match_nullable, FromNullableResult};
 
 fn main() {
