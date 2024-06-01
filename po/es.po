@@ -7556,7 +7556,7 @@ msgstr "## ¿Qué es un Paquete?"
 
 #: src/ch07-01-packages-and-crates.md:13
 msgid ""
-"A cairo package is a bundle of one or more crates with a Scarb.toml file "
+"A Cairo package is a bundle of one or more crates with a Scarb.toml file "
 "that describes how to build those crates. This enables the splitting of code "
 "into smaller, reusable parts and facilitates more structured dependency "
 "management."
@@ -14384,8 +14384,8 @@ msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:11
 msgid ""
-"**Asynchronous**: this means that in your contract code (being solidity or "
-"cairo), you can't wait the result of the message being sent on the other "
+"**Asynchronous**: this means that in your contract code (being Solidity or "
+"Cairo), you can't wait the result of the message being sent on the other "
 "chain within your contract code execution."
 msgstr ""
 
@@ -14488,9 +14488,9 @@ msgstr ""
 msgid ""
 "The function sends a message with a single felt value to the "
 "`StarknetMessaging` contract. Please note that if you want to send more "
-"complex data you can. Just be aware that your cairo contract will only "
+"complex data you can. Just be aware that your Cairo contract will only "
 "understand `felt252` data type. So you must ensure that the serialization of "
-"your data into the `uint256` array follow the cairo serialization scheme."
+"your data into the `uint256` array follow the Cairo serialization scheme."
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:90
@@ -14539,7 +14539,7 @@ msgstr ""
 #: src/ch99-04-00-L1-L2-messaging.md:113
 msgid ""
 "`payload`: The payload is always an array of `felt252` (which are "
-"represented by `uint256` in solidity). For this reason we've inserted the "
+"represented by `uint256` in Solidity). For this reason we've inserted the "
 "input `myFelt` into the array. This is why we need to insert the input data "
 "into an array."
 msgstr ""
@@ -14612,7 +14612,7 @@ msgstr ""
 #: src/ch99-04-00-L1-L2-messaging.md:162
 msgid ""
 "// We expect the payload to contain only a felt252 value (which is a uint256 "
-"in solidity).\n"
+"in Solidity).\n"
 msgstr ""
 
 #: src/ch99-04-00-L1-L2-messaging.md:163
@@ -14655,7 +14655,7 @@ msgstr ""
 msgid ""
 "Before sending messages between L1 and L2, you must remember that Starknet "
 "contracts, written in Cairo, can only understand serialized data. And "
-"serialized data is always an array of `felt252`. On solidity, we have "
+"serialized data is always an array of `felt252`. On Solidity, we have "
 "`uint256` type, and `felt252` are approximately 4 bits smaller than "
 "`uint256`. So we have to pay attention to the values contained in the "
 "payload of the messages we are sending. If, on L1, we build a message with "
