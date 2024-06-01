@@ -173,7 +173,7 @@ It is important to remember that on L1 we are sending a payload of `uint256`, bu
 ## Cairo Serde
 
 Before sending messages between L1 and L2, you must remember that Starknet contracts, written in Cairo, can only understand serialized data. And serialized data is always an array of `felt252`.
-On Solidity, we have `uint256` type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending.
+In Solidity we have `uint256` type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending.
 If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
 
 So for instance, an actual `uint256` value in Cairo is represented by a struct like:

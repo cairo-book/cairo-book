@@ -12420,7 +12420,7 @@ msgstr ""
 #: src/ch99-04-00-L1-L2-messaging.md:178
 msgid ""
 "Before sending messages between L1 and L2, you must remember that Starknet contracts, written in Cairo, can only "
-"understand serialized data. And serialized data is always an array of `felt252`. On Solidity, we have `uint256` "
+"understand serialized data. And serialized data is always an array of `felt252`. In Solidity we have `uint256` "
 "type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values "
 "contained in the payload of the messages we are sending. If, on L1, we build a message with values above the "
 "maximum `felt252`, the message will be stuck and never consumed on L2."
