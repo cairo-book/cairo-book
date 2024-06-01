@@ -239,7 +239,7 @@ extern fn send_message_to_l1_syscall(
 
 Sends a message to L1.
 
-This system call includes the message parameters as part of the proof’s output and exposes these parameters to the Starknet Core Contract on L1 once the state update, including the transaction, is received.
+This system call includes the message parameters as part of the proof’s output and exposes these parameters to the `StarknetCore` contract on L1 once the state update, including the transaction, is received.
 
 For more information, see Starknet’s [messaging mechanism](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/).
 

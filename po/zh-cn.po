@@ -9313,7 +9313,7 @@ msgstr "## 什么是包？"
 
 #: src/ch07-01-packages-and-crates.md:13
 msgid ""
-"A cairo package is a bundle of one or more crates with a Scarb.toml file that describes how to build those crates. This enables the splitting of code into smaller, reusable parts and "
+"A Cairo package is a bundle of one or more crates with a Scarb.toml file that describes how to build those crates. This enables the splitting of code into smaller, reusable parts and "
 "facilitates more structured dependency management."
 msgstr "一个cairo包是一个由一个或多个crate组成的集合，其中的Scarb.toml文件描述如何构建这些板块。这使得代码被分割成更小的、可重复使用的部分，并有利于更有条理的依赖管理。"
 
@@ -21323,7 +21323,7 @@ msgstr "在Starknet上，重要的是要注意消息系统是**异步**和**非�
 
 #: src/ch99-04-00-L1-L2-messaging.md:11
 msgid ""
-"- **Asynchronous**: this means that in your contract code (being solidity or cairo), you can't wait the result of the message being sent on the other chain within your contract code "
+"- **Asynchronous**: this means that in your contract code (being Solidity or Cairo), you can't wait the result of the message being sent on the other chain within your contract code "
 "execution.\n"
 "- **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automatized by the Starknet sequencer, which means that the message is being automatically delivered "
 "to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must "
@@ -21508,8 +21508,8 @@ msgstr ""
 #: src/ch99-04-00-L1-L2-messaging.md:87
 msgid ""
 "The function sends a message with a single felt value to the `StarknetMessaging` contract.\n"
-"Please note that if you want to send more complex data you can. Just be aware that your cairo contract will only understand `felt252` data type. So you must ensure that the "
-"serialization of your data into the `uint256` array follow the cairo serialization scheme."
+"Please note that if you want to send more complex data you can. Just be aware that your Cairo contract will only understand `felt252` data type. So you must ensure that the "
+"serialization of your data into the `uint256` array follow the Cairo serialization scheme."
 msgstr ""
 "该函数向 `StarknetMessaging` 合约发送一个包含单个 felt 值的消息。\n"
 "请注意，如果你想发送更复杂的数据，可以这样做。只是要注意，你的 Cairo 合约只能理解 `felt252` 数据类型。因此，你必须确保将数据序列化为 `uint256` 数组时，要按照 Cairo 的序列化方案进行操"
@@ -21565,7 +21565,7 @@ msgstr "参数如下："
 msgid ""
 "- `toAddress`: The contract address on L2 that will be called.\n"
 "- `selector`: The selector of the function of this contract at `toAddress`. This selector (function) must have the `#[l1_handler]` attribute to be callable.\n"
-"- `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in solidity). For this reason we've inserted the input `myFelt` into the array.\n"
+"- `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in Solidity). For this reason we've inserted the input `myFelt` into the array.\n"
 "  This is why we need to insert the input data into an array."
 msgstr ""
 "- `toAddress` : 在 L2 上将被调用的合约地址。\n"
@@ -21670,7 +21670,7 @@ msgid ""
 "\n"
 "    // You can use the message hash if you want here.\n"
 "\n"
-"    // We expect the payload to contain only a felt252 value (which is a uint256 in solidity).\n"
+"    // We expect the payload to contain only a felt252 value (which is a uint256 in Solidity).\n"
 "    require(payload.length == 1, \"Invalid payload\");\n"
 "\n"
 "    uint256 my_felt = payload[0];\n"
@@ -21691,7 +21691,7 @@ msgstr ""
 "\n"
 "    // You can use the message hash if you want here.\n"
 "\n"
-"    // We expect the payload to contain only a felt252 value (which is a uint256 in solidity).\n"
+"    // We expect the payload to contain only a felt252 value (which is a uint256 in Solidity).\n"
 "    require(payload.length == 1, \"Invalid payload\");\n"
 "\n"
 "    uint256 my_felt = payload[0];\n"
@@ -21726,7 +21726,7 @@ msgstr "## Cairo Serde"
 msgid ""
 "Before sending messages between L1 and L2, you must remember that Starknet contracts, written in Cairo, can only understand serialized data. And serialized data is always an array of "
 "`felt252`.\n"
-"On solidity, we have `uint256` type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages "
+"In Solidity we have `uint256` type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages "
 "we are sending.\n"
 "If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2."
 msgstr ""
@@ -21811,7 +21811,7 @@ msgstr "智能合约在一个公开的环境中执行，任何人都可以检查
 #: src/ch99-03-security-considerations.md:9
 msgid ""
 "This chapter presents general recommendations for writing secure smart contracts. By incorporating these concepts during development, you can create robust and reliable smart "
-"contracts. This reduces the chances of unexpected behavior or vulnerabilities."
+"contracts. This reduces the chance of unexpected behavior or vulnerabilities."
 msgstr "本章介绍了编写安全智能合约的一般建议。在开发过程中，通过融入这些概念，你可以创建健壮可靠的智能合约。这将减少出现意外行为或漏洞的机会。"
 
 #: src/ch99-03-security-considerations.md:11
@@ -21832,7 +21832,7 @@ msgstr "## 安全思维"
 
 #: src/ch99-03-security-considerations.md:19
 msgid ""
-"Cairo is a highly safe language inspired by rust. It is designed in a way that force you to cover all possible cases. Security issues on Starknet mostly arise from the way smart "
+"Cairo is a highly safe language inspired by Rust. It is designed in a way that forces you to cover all possible cases. Security issues on Starknet mostly arise from the way smart "
 "contracts flows are designed, not much from the language itself."
 msgstr "Cairo 是一种受到 Rust 启发的高度安全的语言。它的设计方式强制你覆盖所有可能的情况。在 Starknet 上的安全问题主要源于智能合约流程的设计，而非语言本身。"
 
@@ -21850,7 +21850,7 @@ msgstr "智能合约中的交易是原子性的，这意味着它们要么成功
 
 #: src/ch99-03-security-considerations.md:27
 msgid ""
-"Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external function represents a set of possible state "
+"Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external functions represent a set of possible state "
 "transitions. A transaction is nothing more than a state transition."
 msgstr "将智能合约视为状态机：它们有一组由构造函数约束定义的初始状态，而外部函数表示一组可能的状态转换。所谓交易也不过是一个状态转换。"
 
@@ -24892,8 +24892,8 @@ msgstr "将上面复制的路径更新到Cairo 1.0扩展的`cairo1.languageServe
 #~ "points by sending messages from one chain to the other."
 #~ msgstr "在这里，我们有两个合约，一个在 Ethereum 上，另一个在 Starknet 上。两者相互影响。这个练习的目标是找到一种方法，通过从一个链向另一个链发送信息来赚取积分。"
 
-#~ msgid "Here is a snippet of the solidity code to send a simple message from Ethereum to Starknet:"
-#~ msgstr "下面是一段 solidity 代码，用于从 Ethereum 向 Starknet 发送一条简单的信息："
+#~ msgid "Here is a snippet of the Solidity code to send a simple message from Ethereum to Starknet:"
+#~ msgstr "下面是一段 Solidity 代码，用于从 Ethereum 向 Starknet 发送一条简单的信息："
 
 #~ msgid ""
 #~ "```rust\n"

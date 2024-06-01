@@ -8,7 +8,7 @@ Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge
 
 On Starknet, it's important to note that the messaging system is **asynchronous** and **asymmetric**.
 
-- **Asynchronous**: this means that in your contract code (being solidity or cairo), you can't wait the result of the message being sent on the other chain within your contract code execution.
+- **Asynchronous**: this means that in your contract code (being Solidity or Cairo), you can't wait the result of the message being sent on the other chain within your contract code execution.
 - **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automated by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.
 
 Let's dive into the details.
@@ -90,12 +90,12 @@ function sendMessageFelt(
 ```
 
 The function sends a message with a single felt value to the `StarknetMessaging` contract.
-Please note that if you want to send more complex data you can. Just be aware that your cairo contract will only understand `felt252` data type. So you must ensure that the serialization of your data into the `uint256` array follow the cairo serialization scheme.
+Please note that if you want to send more complex data you can. Just be aware that your Cairo contract will only understand `felt252` data type. So you must ensure that the serialization of your data into the `uint256` array follow the Cairo serialization scheme.
 
 It's important to note that we have `{value: msg.value}`. In fact, the minimum value we've to send here is `20k wei`, due to the fact that the `StarknetMessaging` contract will register
 the hash of our message in the storage of Ethereum.
 
-Additionally to those `20k wei`, as the `L1HandlerTransaction` that will be executed by the sequencer is not bound to any account (the message originates from L1), you must also ensure
+In addition to those `20k wei`, since the `L1HandlerTransaction` executed by the sequencer is not tied to any account (the message originates from L1), you must also ensure
 that you pay enough fees on L1 for your message to be deserialized and processed on L2.
 
 The fees of the `L1HandlerTransaction` are computed in a regular manner as it would be done for an `Invoke` transaction. For this, you can profile
@@ -111,11 +111,11 @@ function sendMessageToL2(
     ) external override returns (bytes32);
 ```
 
-The parameters are as follow:
+The parameters are as follows:
 
 - `toAddress`: The contract address on L2 that will be called.
 - `selector`: The selector of the function of this contract at `toAddress`. This selector (function) must have the `#[l1_handler]` attribute to be callable.
-- `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in solidity). For this reason we've inserted the input `myFelt` into the array.
+- `payload`: The payload is always an array of `felt252` (which are represented by `uint256` in Solidity). For this reason we've inserted the input `myFelt` into the array.
   This is why we need to insert the input data into an array.
 
 On the Starknet side, to receive this message, we have:
@@ -141,7 +141,7 @@ To send a message from L2 to L1, what we would do on Starknet is:
 
 We simply build the payload and pass it, along with the L1 contract address, to the syscall function.
 
-On L1, the important part is to build the same payload sent by the L2. Then you call `consumeMessageFromL2` in you solidity contract by passing the L2 contract address and the payload. Please be aware that the L2 contract address expected by the `consumeMessageFromL2` is the address of the contract that sends the message on the L2 by calling `send_message_to_l1_syscall`.
+On L1, the important part is to build the same payload sent by the L2. Then you call `consumeMessageFromL2` in you Solidity contract by passing the L2 contract address and the payload. Please be aware that the L2 contract address expected by the `consumeMessageFromL2` is the address of the contract that sends the message on the L2 by calling `send_message_to_l1_syscall`.
 
 ```js
 function consumeMessageFelt(
@@ -154,7 +154,7 @@ function consumeMessageFelt(
 
     // You can use the message hash if you want here.
 
-    // We expect the payload to contain only a felt252 value (which is a uint256 in solidity).
+    // We expect the payload to contain only a felt252 value (which is a uint256 in Solidity).
     require(payload.length == 1, "Invalid payload");
 
     uint256 my_felt = payload[0];
@@ -164,16 +164,16 @@ function consumeMessageFelt(
 }
 ```
 
-As you can see, in this context we don't have to verify which contract from L2 is sending the message (as we do on the L2 to verify which contract from L1 is sending the message). But we are actually using the `consumeMessageFromL2` of the starknet core contract to validate the inputs (the contract address on L2 and the payload) to ensure we are only consuming valid messages.
+As you can see, in this context we don't have to verify which contract from L2 is sending the message (as we do on the L2 to verify which contract from L1 is sending the message). But we are actually using the `consumeMessageFromL2` of the `StarknetCore` contract to validate the inputs (the contract address on L2 and the payload) to ensure we are only consuming valid messages.
 
-> **Note:** The `consumeMessageFromL2` function of the starknet core contract is expected to be called from a solidity contract, and not directly on the starknet core contract. The reason of that is because the starknet core contract is using `msg.sender` to actually compute the hash of the message. And this `msg.sender` must correspond to the `to_address` field that is given to the function `send_message_to_l1_syscall` that is called on Starknet.
+> **Note:** The `consumeMessageFromL2` function of the `StarknetCore` contract is expected to be called from a Solidity contract, and not directly on the `StarknetCore` contract. The reason of that is because the `StarknetCore` contract is using `msg.sender` to actually compute the hash of the message. And this `msg.sender` must correspond to the `to_address` field that is given to the function `send_message_to_l1_syscall` that is called on Starknet.
 
 It is important to remember that on L1 we are sending a payload of `uint256`, but the basic data type on Starknet is `felt252`; however, `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending. If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
 
 ## Cairo Serde
 
 Before sending messages between L1 and L2, you must remember that Starknet contracts, written in Cairo, can only understand serialized data. And serialized data is always an array of `felt252`.
-On solidity, we have `uint256` type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending.
+In Solidity we have `uint256` type, and `felt252` are approximately 4 bits smaller than `uint256`. So we have to pay attention to the values contained in the payload of the messages we are sending.
 If, on L1, we build a message with values above the maximum `felt252`, the message will be stuck and never consumed on L2.
 
 So for instance, an actual `uint256` value in Cairo is represented by a struct like:
