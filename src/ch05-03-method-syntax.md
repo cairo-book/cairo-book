@@ -108,3 +108,6 @@ the following code is equivalent to the code shown in the _Methods with several 
 
 There’s no strong reason to separate these methods into multiple `trait` and `impl`
 blocks here, but this is valid syntax.
+
+[enums]: ./ch06-01-enums.md
+[modules]: ./ch07-02-defining-modules-to-control-scope.md
