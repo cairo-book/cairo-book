@@ -95,7 +95,7 @@ Please note that if you want to send more complex data you can. Just be aware th
 It's important to note that we have `{value: msg.value}`. In fact, the minimum value we've to send here is `20k wei`, due to the fact that the `StarknetMessaging` contract will register
 the hash of our message in the storage of Ethereum.
 
-Additional to those `20k wei`, as the `L1HandlerTransaction` that will be executed by the sequencer is not bound to any account (the message originates from L1), you must also ensure
+In addition to those `20k wei`, since the `L1HandlerTransaction` executed by the sequencer is not tied to any account (the message originates from L1), you must also ensure
 that you pay enough fees on L1 for your message to be deserialized and processed on L2.
 
 The fees of the `L1HandlerTransaction` are computed in a regular manner as it would be done for an `Invoke` transaction. For this, you can profile
