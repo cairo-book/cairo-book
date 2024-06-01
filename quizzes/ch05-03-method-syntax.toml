@@ -6,33 +6,32 @@ struct Rectangle {
     width: u64,
     height: u64,
 }
+
 #[generate_trait]
 impl RectangleImpl of RectangleTrait {
     fn area(self: @Rectangle) -> u64 {
         (*self.width) * (*self.height)
     }
-    fn new(self: @Rectangle, width: u64, height: u64) -> Rectangle {
+    fn new(width: u64, height: u64) -> Rectangle {
         Rectangle { width, height }
     }
-    fn compare(self: Rectangle, r2: @Rectangle) -> bool {
+    fn compare(self: @Rectangle, r2: @Rectangle) -> bool {
         let r1_area = self.area();
-        let r2_area = r2.area();
-
-        return r1_area == r2_area;
+        self.area() == r2.area()
     }
 }
 
 fn main() {
     let rect1 = Rectangle {width: 40, height: 50};
-    let rect2 = rect1.new(10, 20);
+    let rect2 = RectangleTrait::new(10, 40);;
     rect1.compare(@rect2);
 }
 """
 
 answer.doesCompile = true
-answer.stdout = false
+answer.stdout = "false"
 context = """
-Methods with the self parameter can be called by any object of the specified type.
+It compiles, because the type `Rectangle` on which we call the method on reference is implicitly passed as a `@Rectangle`
 """
 
 
@@ -40,20 +39,22 @@ Methods with the self parameter can be called by any object of the specified typ
 [[questions]]
 type = "Tracing"
 prompt.program = """
-trait SquareTrait {
+#[derive(Drop)]
+struct Square {
+    width: u64,
+    height: u64,
+}
+
+trait RectangleTrait {
     fn area(self: @Rectangle) -> u64;
 }
-impl SquareImpl of SquareTrait {
+
+impl RectangleImpl of RectangleTrait {
     fn area(self: @Rectangle) -> u64 {
         return (*self.width) * (*self.height);
     }
 }
 
-#[derive(Drop)]
-struct Square {
-    width: u64,
-    height: u64,
-  }
 fn main() {
     let my_square = Square { width: 30, height: 50 };
     let area = my_square.area();
@@ -62,5 +63,5 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-The SquareTrait trait is defined expecting a parameter of type Rectangle thus passing a Square struct as input will throw an error.
+Methods can only be called on the types they're defined for; here, we try to call `area()` on `Square`, when it's define for `Rectangle`.
 """
