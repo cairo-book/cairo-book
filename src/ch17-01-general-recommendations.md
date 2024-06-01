@@ -6,7 +6,7 @@ In smart contract development, security is very important. A single error can re
 
 Smart contracts are executed in a public environment where anyone can examine the code and interact with it. Any errors or vulnerabilities in the code can be exploited by malicious actors.
 
-This chapter presents general recommendations for writing secure smart contracts. By incorporating these concepts during development, you can create robust and reliable smart contracts. This reduces the chances of unexpected behavior or vulnerabilities.
+This chapter presents general recommendations for writing secure smart contracts. By incorporating these concepts during development, you can create robust and reliable smart contracts. This reduces the chance of unexpected behavior or vulnerabilities.
 
 ## Disclaimer
 
@@ -16,7 +16,7 @@ If you are developing smart contracts for production use, it is highly recommend
 
 ## Mindset
 
-Cairo is a highly safe language inspired by rust. It is designed in a way that force you to cover all possible cases. Security issues on Starknet mostly arise from the way smart contracts flows are designed, not much from the language itself.
+Cairo is a highly safe language inspired by Rust. It is designed in a way that force you to cover all possible cases. Security issues on Starknet mostly arise from the way smart contracts flows are designed, not much from the language itself.
 
 Adopting a security mindset is the initial step in writing secure smart contracts. Try to always consider all possible scenarios when writing code.
 
