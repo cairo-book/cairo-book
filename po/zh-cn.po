@@ -21832,7 +21832,7 @@ msgstr "## 安全思维"
 
 #: src/ch99-03-security-considerations.md:19
 msgid ""
-"Cairo is a highly safe language inspired by Rust. It is designed in a way that force you to cover all possible cases. Security issues on Starknet mostly arise from the way smart "
+"Cairo is a highly safe language inspired by Rust. It is designed in a way that forces you to cover all possible cases. Security issues on Starknet mostly arise from the way smart "
 "contracts flows are designed, not much from the language itself."
 msgstr "Cairo 是一种受到 Rust 启发的高度安全的语言。它的设计方式强制你覆盖所有可能的情况。在 Starknet 上的安全问题主要源于智能合约流程的设计，而非语言本身。"
 
@@ -21850,7 +21850,7 @@ msgstr "智能合约中的交易是原子性的，这意味着它们要么成功
 
 #: src/ch99-03-security-considerations.md:27
 msgid ""
-"Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external function represents a set of possible state "
+"Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external functions represent a set of possible state "
 "transitions. A transaction is nothing more than a state transition."
 msgstr "将智能合约视为状态机：它们有一组由构造函数约束定义的初始状态，而外部函数表示一组可能的状态转换。所谓交易也不过是一个状态转换。"
 

@@ -16,7 +16,7 @@ If you are developing smart contracts for production use, it is highly recommend
 
 ## Mindset
 
-Cairo is a highly safe language inspired by Rust. It is designed in a way that force you to cover all possible cases. Security issues on Starknet mostly arise from the way smart contracts flows are designed, not much from the language itself.
+Cairo is a highly safe language inspired by Rust. It is designed in a way that forces you to cover all possible cases. Security issues on Starknet mostly arise from the way smart contract flows are designed, not much from the language itself.
 
 Adopting a security mindset is the initial step in writing secure smart contracts. Try to always consider all possible scenarios when writing code.
 
@@ -24,7 +24,7 @@ Adopting a security mindset is the initial step in writing secure smart contract
 
 Transactions in smart contracts are atomic, meaning they either succeed or fail without making any changes.
 
-Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external function represents a set of possible state transitions. A transaction is nothing more than a state transition.
+Think of smart contracts as state machines: they have a set of initial states defined by the constructor constraints, and external functions represent a set of possible state transitions. A transaction is nothing more than a state transition.
 
 The `assert!` or `panic!` macros can be used to validate conditions before performing specific actions. You can learn more about these on the [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.md) page.
 

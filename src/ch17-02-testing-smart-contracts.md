@@ -16,7 +16,7 @@ Throughout this chapter, we will be using as an example the `PizzaFactory` contr
 
 ## Configuring your Scarb project with Starknet Foundry
 
-The settings of your Scarb project can be configured in the `Scarb.toml` file. To use Starknet Foundry, as your testing tool, you will need to add it as a dev dependency in your `Scarb.toml` file. At the time of writing, the latest version of Starknet Foundry is `v0.22.0` - but you should use the latest version.
+The settings of your Scarb project can be configured in the `Scarb.toml` file. To use Starknet Foundry as your testing tool, you will need to add it as a dev dependency in your `Scarb.toml` file. At the time of writing, the latest version of Starknet Foundry is `v0.22.0` - but you should use the latest version.
 
 ```toml,noplayground
 [dev-dependencies]
@@ -93,7 +93,7 @@ When a pizza is created, the contract emits an event. To test this, we can use t
 ```
 
 {{#label capture-pizza-emission-event}}
-<span class="caption">Testing the events emitted when a pizza is created</span>
+<span class="caption">Listing {{#ref capture-pizza-emission-event}}: Testing the events emitted when a pizza is created</span>
 
 #### Accessing Internal Functions with `contract_state_for_testing`
 
@@ -108,7 +108,7 @@ Recall the struct `ContractState`, which is used as a parameter to all the entry
 ```
 
 {{#label test-internal}}
-<span class="caption">Unit testing our contract without deployment</span>
+<span class="caption">Listing {{#ref test-internal}}: Unit testing our contract without deployment</span>
 
 These imports give us access to our internal functions (notably, `set_owner`), as well as the
 read/write access to the `owner` storage variable. Once we have these, we can interact with the
@@ -127,4 +127,4 @@ The output of the tests shows that all the tests passed successfully, along with
 
 In this chapter, we learned how to test smart contracts using Starknet Foundry. We demonstrated how to deploy a contract and interact with it using the dispatcher. We also showed how to test the contract's behavior by mocking the caller address and capturing events. Finally, we demonstrated how to test the internal functions of the contract directly, without deploying the contract.
 
-To learn more about Starknet Foundry, refer to the [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/index.html)
+To learn more about Starknet Foundry, refer to the [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/index.html).

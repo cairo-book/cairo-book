@@ -12388,7 +12388,7 @@ msgstr ""
 msgid ""
 "Cairo is a highly safe language inspired by Rust. It is designed in a way "
 "that force you to cover all possible cases. Security issues on Starknet "
-"mostly arise from the way smart contracts flows are designed, not much from "
+"mostly arise from the way smart contract flows are designed, not much from "
 "the language itself."
 msgstr ""
 
