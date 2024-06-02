@@ -263,8 +263,8 @@ In markdown:
 ### Code
 
 - [Style Guidelines](https://doc.rust-lang.org/1.0.0/style/README.html)
-- [The Rust RFC Book](https://rust-lang.github.io/rfcs/2436-style-guide.html), chapter _Style Guide_
+- [The Rust RFC Book](https://rust-lang.github.io/rfcs/2436-style-guide.html) chapter _Style Guide_
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 - [Rust Style Guide](https://riptutorial.com/rust/topic/4620/rust-style-guide) (riptutorial.com)
-- [Rust Style Guide](https://github.com/rust-lang/style-team/blob/master/guide/guide.md) (github.com/rust-lang)
+- [Rust Style Guide](https://github.com/rust-lang/rust/blob/master/src/doc/style-guide/src/principles.md) (github.com/rust-lang)
 
