@@ -1,1 +1,3 @@
 # Oracle Interactions
+
+This chapter focuses on the concept of bringing off-chain data to the Starknet blockchain using oracles. Oracles are third-party services that serve as intermediaries, securely transmitting external data, such as asset prices, weather information, or other real-world data, to blockchains and smart contracts. It provides practical examples and code snippets demonstrating how developers can interact with a specific oracle available in the Starknet ecosystem, Pragma, in their Cairo smart contracts, covering topics like querying and handling price data, and verifiable random function (VRF).
