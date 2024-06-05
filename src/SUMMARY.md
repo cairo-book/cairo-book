@@ -124,10 +124,9 @@
 
 - [Starknet Contract Interactions](./ch15-00-starknet-contract-interactions.md)
 
-  - [Contract Entrypoints and ABI](./ch15-01-contract-entrypoints-and-abi.md)
+  - [Contract Class ABI](./ch15-01-contract-class-abi.md)
   - [Interacting with Another Contract](./ch15-02-interacting-with-another-contract.md)
   - [Borrowing Code from Another Contract Contract](./ch15-03-borrowing-code-from-another-contract-class.md)
-
 
 ## Building Advanced Starknet Smart Contracts
 

@@ -14,7 +14,7 @@ When A uses `IBDispatcher` to call functions from the **contract** B, the execut
 
 When A uses `IBLibraryDispatcher` to call functions from the **class** of B, the execution context of the logic defined in B's class is that of A. This means that the value returned by `get_caller_address()` variable in B will be the address of the caller of A, and updating a storage variable in B's class will update the storage of A.
 
-Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and its associated `IERC20DispatcherTrait` trait and impl using the same `IERC20` example: 
+Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and its associated `IERC20DispatcherTrait` trait and impl using the same `IERC20` example:
 
 ```rust,noplayground
 {{#include ../listings/ch15-starknet-cross-contract-interactions/listing_04_expanded_ierc20_library/src/lib.cairo}}
@@ -24,12 +24,13 @@ Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and it
 <span class="caption">Listing {{#ref expanded-ierc20-library}}: A simplified example of the `IERC20DLibraryDispatcher` and its associated trait and impl</span>
 
 We can notice a few difference with the contract dispatcher:
+
 - Library dispatcher structs are instantiated with a `class_hash` field instead of `contract_address`.
 - Library dispatcher trait implementation uses `library_call_syscall` system call instead of `call_contract_syscall`
 
 Otherwise, everything is entirely similar. Let's see how to use library dispatcher to borrow some logic of another contract class.
 
-> Note: there is no `LibraryDispatcherTrait`. The trait used with `ContractDispatcher` and `LibraryDispatcher` structs is the same, because the same functions are callable with both dispatchers. 
+> Note: there is no `LibraryDispatcherTrait`. The trait used with `ContractDispatcher` and `LibraryDispatcher` structs is the same, because the same functions are callable with both dispatchers.
 
 ## Calling Contracts using the Library Dispatcher
 
@@ -62,6 +63,7 @@ To use `library_call_syscall` syscall, we passed in the contract class hash, the
 ## Summary
 
 Congratulations for finishing this chapter! You have learned many new concepts:
+
 - Contract endpoints, allowing to execute some of the code of any contract.
 - Contract ABI, summarizing in a JSON file all entrypoints of a contract, as well as any other additional needed data.
 - Contract Dispatcher and Library Dispatcher, which are structs that implement the `DispatcherTrait`, allowing to either call another contract using the `DispatcherImpl` or borrow code from another contract class using the `LibraryDispatcherImpl`.
