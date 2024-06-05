@@ -5,14 +5,17 @@ We explained in the previous section that the definition of entrypoints containe
 This is where [contract interfaces][interfaces] come into play. They define all the functions a contract exposes publicly, except the standalone public functions. Note that one contract can implement multiple interfaces.
 
 Each time a contract interface is defined, multiple _dispatchers_ are automatically created and exported by the compiler. For example, in the case of the standard `ERC20` contract, importing the `ERC20` interface provides a direct access to:
+
 - The Contract Dispatcher `IERC20Dispatcher` and the Safe Contract Dispatcher `IERC20SafeDispatcher`.
 - The Library Dispatcher `IERC20LibraryDispatcher` and the Safe Library Dispatcher `IERC20SafeLibraryDispatcher`.
 
 These dispatchers are actually structs that contain only one field:
+
 - `contract_address` for contract dispatchers and safe contract dispatchers used to interact with a contract.
 - `class_hash` for library dispatchers and safe library dispatchers used to borrow code from another contract class.
 
 These structs have associated methods, defined in their respective traits. To continue with our `ERC20` example:
+
 - `IERC20DispatcherTrait` and `IERC20SafeDispatcherTrait` define functions used to interact with an `ERC20` contract instance deployed on Starknet network.
 - `IERC20LibraryDispatcherTrait` and `IERC20SafeLibraryDispatcherTrait` define functions used to borrow code from a `ERC20` contract class.
 
@@ -55,14 +58,15 @@ Let's see how to effectively call another contract using a contract dispatcher. 
 <span class="caption">Listing {{#ref contract-dispatcher}}: A sample contract which uses the contract dispatcher to call another contract</span>
 
 In order to be able to call functions on the `ERC20` contract, what you need to do is:
+
 - importing both `IERC20Dispatcher` struct and `IERC20DispatcherTrait` trait. Indeed, both of them are required in the scope to call a method on the struct. This is with the following line:
-  
+
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch15-starknet-cross-contract-interactions/listing_03_contract_dispatcher/src/lib.cairo:import}}
 ```
 
 - calling the desired method on an instance of the struct. This can be achieved without defining a local variable to store the instance of the struct, like this:
-  
+
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch15-starknet-cross-contract-interactions/listing_03_contract_dispatcher/src/lib.cairo:no_local_variable}}
 ```

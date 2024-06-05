@@ -84,14 +84,15 @@ When `self` is a snapshot of `ContractState`, only read access is allowed, and e
 ## Accessing and Modifying the Contract's State
 
 Two methods are commonly used to access or modify the state of a contract:
+
 - `read`, which returns the value of a storage variable. This method is called on the variable itself and does not take any argument.
-  
+
 ```rust,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:read_state}}
 ```
 
 - `write`, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that `write` may take more than one argument, depending on the type of the storage variable. For example, writing on a mapping requires 2 arguments: the key and the value to be written.
-  
+
 ```rust,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:write_state}}
 ```
