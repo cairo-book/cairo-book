@@ -8,8 +8,7 @@ Cairo crate without needing explicit import statements. Cairo's prelude provides
 the basic building blocks developers need to start Cairo programs and writing
 smart contracts.
 
-The core library prelude is defined in the
-_[lib.cairo](https://github.com/starkware-libs/cairo/blob/v2.4.0/corelib/src/lib.cairo)_
+The core library prelude is defined in the _[lib.cairo](https://github.com/starkware-libs/cairo/blob/main/corelib/src/lib.cairo)_
 file of the corelib crate and contains Cairo's primitive data types, traits,
 operators, and utility functions. This includes:
 
