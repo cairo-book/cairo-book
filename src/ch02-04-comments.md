@@ -25,7 +25,7 @@ Comments can also be placed at the end of lines containing code:
 But you’ll more often see them used in this format, with the comment on a separate line above the code it’s annotating:
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_26_comments_2/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_26_comments/src/lib.cairo}}
 ```
 
 {{#quiz ../quizzes/ch02-04-comments.toml}}
