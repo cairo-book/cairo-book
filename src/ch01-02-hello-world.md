@@ -82,7 +82,7 @@ This file is in the [TOML][toml doc] (Tom’s Obvious, Minimal Language) format,
 
 The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other sections.
 
-The next three lines set the configuration information Scarb needs to compile your program: the name of the package and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix D][types, traits, and prelude].
+The next three lines set the configuration information Scarb needs to compile your program: the name of the package and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix D][prelude].
 
 The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
@@ -123,7 +123,7 @@ If you started a project that doesn’t use Scarb, you can convert it to a proje
 <span class="caption"> A sample Scarb project structure</span>
 
 [toml doc]: https://toml.io/
-[types, traits, and prelude]: ./appendix-04-common-types-and-traits-and-cairo-prelude.md
+[prelude]: ./appendix-04-cairo-prelude.md
 [starknet package]: https://docs.swmansion.com/scarb/docs/extensions/starknet/starknet-package.html
 
 ## Building a Scarb Project
@@ -200,7 +200,7 @@ Fourth, we end the line with a semicolon (`;`), which indicates that this
 expression is over and the next one is ready to begin. Most lines of Cairo code
 end with a semicolon.
 
-[devtools]: ./appendix-04-useful-development-tools.md
+[devtools]: ./appendix-06-useful-development-tools.md
 [macros]: ./ch11-05-macros.md
 
 {{#quiz ../quizzes/ch01-02-hello-world.toml}}
