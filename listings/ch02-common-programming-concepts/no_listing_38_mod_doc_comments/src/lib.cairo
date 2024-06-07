@@ -12,5 +12,6 @@
 //!     MyModule.my_selector();
 //!   }
 //! }
+//! ```
 mod MyModule { // rest of implementation...
 }
