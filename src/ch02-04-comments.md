@@ -28,4 +28,12 @@ But you’ll more often see them used in this format, with the comment on a sepa
 {{#include ../listings/ch02-common-programming-concepts/no_listing_26_comments/src/lib.cairo}}
 ```
 
+### Contract-element Documentation Comments
+
+Contract-element documentation comments refer to specific elements such as contract methods, events, implementations, etc. These comments provide a detailed description of the element, examples of usage, and any conditions that might cause a panic. They are prefixed with three slashes (`///`). Some implementations may also include separate sections for parameter and return value descriptions.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_37_contr_elem_comments/src/lib.cairo}}
+```
+
 {{#quiz ../quizzes/ch02-04-comments.toml}}
