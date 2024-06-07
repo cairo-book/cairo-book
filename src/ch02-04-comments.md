@@ -36,4 +36,12 @@ Contract-element documentation comments refer to specific elements such as contr
 {{#include ../listings/ch02-common-programming-concepts/no_listing_37_contr_elem_comments/src/lib.cairo}}
 ```
 
+### Contract Documentation
+
+Contract documentation provides an overview of the entire contract, including its purpose and examples of use. These comments are meant to be placed at the top of the file and are prefixed with `//!`. This type of documentation gives a broad understanding of what the contract does and how it can be used.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_38_contr_doc_comments/src/lib.cairo}}
+```
+
 {{#quiz ../quizzes/ch02-04-comments.toml}}
