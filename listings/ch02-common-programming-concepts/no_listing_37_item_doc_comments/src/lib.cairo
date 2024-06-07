@@ -7,7 +7,7 @@
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```
 /// let a: felt252 = 2;
 /// let b: felt252 = 3;
 /// let c: felt252 = add(a, b);
