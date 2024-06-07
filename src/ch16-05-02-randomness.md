@@ -10,17 +10,7 @@ Verifiable output: VRFs produce not only the random number but also a proof that
 
 ## Generating Randomness with Pragma
 
-[Pragma](https://www.pragma.build/), an oracle on Starknet provides a solution for generating random numbers using VRFs.
 Let's dive into how to use Pragma VRF to generate a random number in a simple dice game contract.
-
-### Add Pragma as a Dependency
-
-Edit your cairo project's `Scarb.toml` file to include the path to use Pragma.
-
-```toml
-[dependencies]
-pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
-```
 
 ### Interface
 

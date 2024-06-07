@@ -1,17 +1,21 @@
 //ANCHOR: here
 use starknet::ContractAddress;
 
+//ANCHOR:price_interface
 #[starknet::interface]
 pub trait IPriceFeedExample<TContractState> {
     fn buy_item(ref self: TContractState);
     fn get_asset_price(self: @TContractState, asset_id: felt252) -> u128;
 }
+//ANCHOR_END:price_interface
 
 #[starknet::contract]
 mod PriceFeedExample {
     use super::ContractAddress;
+    //ANCHOR: pragma_lib
     use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
     use pragma_lib::types::{DataType, PragmaPricesResponse};
+    //ANCHOR_END: pragma_lib
     use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
     use starknet::contract_address::contract_address_const;
     use starknet::{get_caller_address};
@@ -58,6 +62,7 @@ mod PriceFeedExample {
                 );
         }
 
+        //ANCHOR: price_feed_impl
         fn get_asset_price(self: @ContractState, asset_id: felt252) -> u128 {
             // Retrieve the oracle dispatcher
             let oracle_dispatcher = IPragmaABIDispatcher {
@@ -70,6 +75,8 @@ mod PriceFeedExample {
 
             return output.price;
         }
+    //ANCHOR_END: price_feed_impl
     }
 }
 //ANCHOR_END: here
+
