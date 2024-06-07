@@ -192,6 +192,8 @@ can use in your code, can be found in the community-maintained
 
 [alexandria data structures]: https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
 
+{{#quiz ../quizzes/ch11-01-custom-structs.toml}}
+
 ## Summary
 
 Well done! Now you have knowledge of arrays, dictionaries and even custom data structures.
