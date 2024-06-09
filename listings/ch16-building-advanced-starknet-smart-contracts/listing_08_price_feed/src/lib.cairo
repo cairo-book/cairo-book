@@ -1,4 +1,3 @@
-//ANCHOR: here
 use starknet::ContractAddress;
 
 //ANCHOR:price_interface
@@ -9,9 +8,10 @@ pub trait IPriceFeedExample<TContractState> {
 }
 //ANCHOR_END:price_interface
 
+//ANCHOR: here
 #[starknet::contract]
 mod PriceFeedExample {
-    use super::ContractAddress;
+    use super::{ContractAddress, IPriceFeedExample};
     //ANCHOR: pragma_lib
     use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
     use pragma_lib::types::{DataType, PragmaPricesResponse};
@@ -35,7 +35,7 @@ mod PriceFeedExample {
     }
 
     #[abi(embed_v0)]
-    impl PriceFeedExampleImpl of super::IPriceFeedExample<ContractState> {
+    impl PriceFeedExampleImpl of IPriceFeedExample<ContractState> {
         fn buy_item(ref self: ContractState) {
             let caller_address = get_caller_address();
             let eth_price = self.get_asset_price(ETH_USD);
@@ -79,4 +79,5 @@ mod PriceFeedExample {
     }
 }
 //ANCHOR_END: here
+
 
