@@ -71,29 +71,29 @@ impl NullableStackImpl<T, +Drop<T>, +Copy<T>> of StackTrait<NullableStack<T>, T>
 ```
 What is the correct implementation of the function `fn new() -> S` ?"""
 prompt.distractors = ["""```
-    fn new() -> NullableStack<T> {
-        let data: Felt252Dict<T> = Default::default();
-        NullableStack { data, len: 0 }
-    }
+fn new() -> NullableStack<T> {
+    let data: Felt252Dict<T> = Default::default();
+    NullableStack { data, len: 0 }
+}
 ```""", """```
-    fn new() -> NullableStack<T> {
-        NullableStack {
-            data: Felt252Dict::default(),
-            len: 0,
-        }
+fn new() -> NullableStack<T> {
+    NullableStack {
+        data: Felt252Dict::default(),
+        len: 0,
     }
+}
 ```""", """```
-  fn new() -> NullableStack<T> {
-        NullableStack {
-            data: Default::default(),
-        }
+fn new() -> NullableStack<T> {
+    NullableStack {
+        data: Default::default(),
     }
+}
 ```"""]
 answer.answer = """```
-    fn new() -> NullableStack<T> {
-        let data: Felt252Dict<Nullable<T>> = Default::default();
-        NullableStack { data, len: 0 }
-    }
+fn new() -> NullableStack<T> {
+    let data: Felt252Dict<Nullable<T>> = Default::default();
+    NullableStack { data, len: 0 }
+}
 ```"""
 context = """
 The `new` function should return a `NullableStack<T>` with an empty dictionary of type `Nullable<T>` and a length of 0.
