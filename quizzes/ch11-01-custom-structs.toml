@@ -20,7 +20,7 @@ When you have a member of type `Felt252Dict<T>` in your generic data structure, 
 """
 prompt.distractors = [
   "`Drop<T>`",
-  "None, you can just derive the required traits"
+  "None, you can just derive the required traits",
   "`Copy<T>` to read the value of the dictionary",
 ]
 answer.answer = "`Destruct<T>`"
