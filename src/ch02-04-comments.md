@@ -30,7 +30,7 @@ But you’ll more often see them used in this format, with the comment on a sepa
 
 ### Item-level Documentation
 
-Item-level documentation comments refer to specific items such as methods, implementations, etc. These comments provide a detailed description of the item, examples of usage, and any conditions that might cause a panic. They are prefixed with three slashes (`///`). Some implementations may also include separate sections for parameter and return value descriptions.
+Item-level documentation comments refer to specific items such as functions, implementations, traits, etc. They are prefixed with three slashes (`///`). These comments provide a detailed description of the item, examples of usage, and any conditions that might cause a panic. In case of functions, the comments may also include separate sections for parameter and return value descriptions.
 
 ```rust,noplayground
 {{#include ../listings/ch02-common-programming-concepts/no_listing_37_item_doc_comments/src/lib.cairo}}
@@ -38,7 +38,7 @@ Item-level documentation comments refer to specific items such as methods, imple
 
 ### Module Documentation
 
-Module documentation comments provide an overview of the entire module, including its purpose and examples of use. These comments are meant to be placed at the top of the file and are prefixed with `//!`. This type of documentation gives a broad understanding of what the module does and how it can be used.
+Module documentation comments provide an overview of the entire module, including its purpose and examples of use. These comments are meant to be placed above the module they're describing and are prefixed with `//!`. This type of documentation gives a broad understanding of what the module does and how it can be used.
 
 ```rust,noplayground
 {{#include ../listings/ch02-common-programming-concepts/no_listing_38_mod_doc_comments/src/lib.cairo}}
