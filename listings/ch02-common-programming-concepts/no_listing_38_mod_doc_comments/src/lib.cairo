@@ -1,17 +1,17 @@
-//! # MyModule and Implementation
+//! # my_module and implementation
 //!
-//! This is an example description of MyModule and some of its features.
+//! This is an example description of my_module and some of its features.
 //!
 //! # Examples
 //!
 //! ```
-//! mod MyOtherModule {
-//!   use path::to::MyModule;
+//! mod my_other_module {
+//!   use path::to::my_module;
 //!
 //!   fn foo() {
-//!     MyModule.my_selector();
+//!     my_module.bar();
 //!   }
 //! }
 //! ```
-mod MyModule { // rest of implementation...
+mod my_module { // rest of implementation...
 }
