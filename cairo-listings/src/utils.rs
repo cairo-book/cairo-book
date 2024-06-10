@@ -3,9 +3,9 @@ use regex::Regex;
 use std::collections::HashSet;
 use walkdir::WalkDir;
 
-use crate::config::Config;
+use crate::config::{Config, VerifyArgs};
 
-pub fn find_scarb_manifests(cfg: &Config) -> Vec<String> {
+pub fn find_scarb_manifests(cfg: &Config, args: &VerifyArgs) -> Vec<String> {
     let path = cfg.path.as_str();
 
     let mut scarb_manifests: Vec<String> = Vec::new();
@@ -13,7 +13,7 @@ pub fn find_scarb_manifests(cfg: &Config) -> Vec<String> {
     for entry in WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
         if let Some(file_name) = entry.file_name().to_str() {
             if file_name.eq("Scarb.toml") {
-                if cfg.file.is_some() && !file_name.ends_with(cfg.file.as_ref().unwrap()) {
+                if args.file.is_some() && !file_name.ends_with(args.file.as_ref().unwrap()) {
                     continue;
                 }
 

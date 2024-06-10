@@ -8,6 +8,21 @@ pub struct Config {
     #[arg(short, long, default_value = "./listings")]
     pub path: String,
 
+    #[command(subcommand)]
+    pub command: Commands,
+}
+
+#[derive(Subcommand, Debug)]
+pub enum Commands {
+    /// Run the verification process
+    Verify(VerifyArgs),
+
+    /// Process the output.txt file in listings
+    Output,
+}
+
+#[derive(Parser, Debug, Default)]
+pub struct VerifyArgs {
     /// Print more information.
     #[arg(short, long)]
     pub verbose: bool,
@@ -39,18 +54,6 @@ pub struct Config {
     /// Specify file to check
     #[arg(long)]
     pub file: Option<String>,
-
-    #[command(subcommand)]
-    pub command: Option<Commands>,
-}
-
-#[derive(Subcommand, Debug)]
-pub enum Commands {
-    /// Run the verification process
-    Verify,
-
-    /// Process the output.txt file in listings
-    Output,
 }
 
 /// Expected statement in a cairo program for it to be runnable.
