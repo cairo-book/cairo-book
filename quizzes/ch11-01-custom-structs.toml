@@ -1,7 +1,7 @@
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-If your data structure has to contain mutable elements of type `T`, what type should you use as a member of your structure?
+What can you use to implement a mutable data structure?
 """
 prompt.distractors = [
   "`Array<T>`",
@@ -10,24 +10,24 @@ prompt.distractors = [
 ]
 answer.answer = "`Felt252Dict<T>`"
 context = """
-Cairo's memory model is immutable and the `Felt252Dict<T>` type is the only type that allows you to simulate the storage of mutable elements.
+While Cairo has an immutable memory model, you can use the `Felt252Dict<T>` type to simulate mutable data structures.
 """
 id = "43074990-3724-4818-94dd-eeac0c078780"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-When you have a member of type `Felt252Dict<T>` in your data structure working with generic types, what trait **must** you manually implement for the structure?
+When you have a member of type `Felt252Dict<T>` in your generic data structure, what trait do you **must** manually implement for that structure?
 """
 prompt.distractors = [
   "`Drop<T>`",
-  "None, but you have to add `#[derive(Destruct)]` on top of the struct definition",
+  "None, you can just derive the required traits"
   "`Copy<T>` to read the value of the dictionary",
 ]
 answer.answer = "`Destruct<T>`"
 context = """
 The member of type `Felt252Dict<T>` can't be dropped so the struct has to implement the `Destruct<T>` trait.
-Since the struct is working with generic types, `#[derive(Destruct)]` can't be used.
-The type of the elements stored in the dictionary must implement the `Copy<T>` trait to allow reading their values but the struct type itself doesn't necessarily require this implementation.
+Because the struct is working with generic types, the `Destruct` trait cannot be derived.
+The elements stored in the dictionary must implement the `Copy<T>` trait to be read, but the struct type itself doesn't necessarily require this implementation.
 """
 id = "76864942-6f11-4fbf-87a3-46480e26749a"
 
