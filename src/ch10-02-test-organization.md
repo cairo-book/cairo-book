@@ -24,7 +24,7 @@ The attribute `cfg` stands for configuration and tells Cairo that the following 
 
 ## Integration Tests
 
-Integration tests use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a `tests` directory.
+Integration tests use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a `tests` directory at the top level of our project directory, next to _src_.
 
 ### The _tests_ Directory
 
@@ -33,9 +33,10 @@ adder
 ├── Scarb.toml
 ├── src
 │   ├── lib.cairo
-│   ├── tests
-│   │   └── integration_tests.cairo
-│   └── tests.cairo
+├── tests
+│   ├── integration_tests.cairo
+│
+
 ```
 
 First of all, add the following code in your _lib.cairo_ file:
@@ -46,21 +47,14 @@ First of all, add the following code in your _lib.cairo_ file:
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/lib.cairo}}
 ```
 
-Note that we still need to use the `#[cfg(test)]` attribute here, because we are in the _lib.cairo_ file of the _src_ directory.
-Then, create a _tests.cairo_ file and fill it as follows:
+You need to add `pub` otherwise it'll be impossible to import the function in the test files.
 
-<span class="caption">Filename: src/tests.cairo</span>
+Then, we need to write the integration test in the tests/integration*tests.cairo* file:
 
-```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/tests.cairo}}
-```
-
-Finally, enter this code into the _src/tests/integration_tests.cairo_ file:
-
-<span class="caption">Filename: src/tests/integration_tests.cairo</span>
+<span class="caption">Filename: tests/integration_tests.cairo</span>
 
 ```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/tests/integration_tests.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/tests/integration_tests.cairo}}
 ```
 
 We need to bring our tested functions into each test file scope. For that reason we add `use adder::it_adds_two` at the top of the code, which we didn’t need in the unit tests.
