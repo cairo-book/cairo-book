@@ -19,42 +19,39 @@ mod tags;
 mod utils;
 
 use crate::cmd::ScarbCmd;
-use crate::config::Config;
+use crate::config::{Commands, Config, VerifyArgs};
 use crate::error_sets::ErrorSets;
 use crate::tags::Tags;
 use crate::utils::{clickable, find_scarb_manifests, print_error_table};
 
 lazy_static! {
-    static ref CFG: Config = Config::parse();
-}
-
-lazy_static! {
     static ref ERRORS: Mutex<ErrorSets> = Mutex::new(ErrorSets::new());
 }
 
+lazy_static! {
+    static ref CFG: Config = Config::parse();
+}
+
 fn main() {
-    let args: Vec<String> = std::env::args().collect();
-    if args.len() > 1 {
-        match args[1].as_str() {
-            "verify" => run_verification(),
-            "output" => output::process_outputs(),
-            _ => println!("Invalid command. Usage: cairo-listings [verify|output]"),
-        }
-    } else {
-        println!("Please provide a command. Usage: cairo-listings [verify|output]");
+    let cfg = &*CFG;
+    let cfg_clone = cfg;
+    let empty_arg = VerifyArgs::default();
+
+    match &cfg.command {
+        Commands::Verify(args) => run_verification(cfg_clone, &args),
+        Commands::Output => output::process_outputs(cfg_clone, &empty_arg),
     }
 }
 
-fn run_verification() {
-    let cfg = &*CFG;
-    let scarb_packages = find_scarb_manifests(cfg);
+fn run_verification(cfg: &Config, args: &VerifyArgs) {
+    let scarb_packages = find_scarb_manifests(&cfg, &args);
 
     let pb = ProgressBar::new(scarb_packages.len() as u64);
-    logger::setup(cfg, pb.clone());
+    logger::setup(&args, pb.clone());
 
     for file in scarb_packages {
-        process_file(&file);
-        if !cfg.quiet {
+        process_file(&file, &args);
+        if !args.quiet {
             pb.inc(1);
         }
     }
@@ -87,8 +84,7 @@ fn run_verification() {
     }
 }
 
-fn process_file(manifest_path: &str) {
-    let cfg = &*CFG;
+fn process_file(manifest_path: &str, args: &VerifyArgs) {
     let manifest_path_as_path = std::path::Path::new(manifest_path);
     let file_path = manifest_path_as_path
         .parent()
@@ -140,14 +136,14 @@ fn process_file(manifest_path: &str) {
     // COMPILE / RUN CHECKS
     if is_contract {
         // This is a contract, it must pass starknet-compile
-        if !tags.contains(&Tags::DoesNotCompile) && !cfg.starknet_skip {
+        if !tags.contains(&Tags::DoesNotCompile) && !args.starknet_skip {
             run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
         }
     } else if should_be_runnable {
         // This is a cairo program, it must pass cairo-run
         if !tags.contains(&Tags::DoesNotRun)
             && !tags.contains(&Tags::DoesNotCompile)
-            && !cfg.run_skip
+            && !args.run_skip
         {
             run_command(
                 ScarbCmd::CairoRun(),
@@ -158,19 +154,19 @@ fn process_file(manifest_path: &str) {
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
-        if !tags.contains(&Tags::DoesNotCompile) && !cfg.compile_skip {
+        if !tags.contains(&Tags::DoesNotCompile) && !args.compile_skip {
             run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
         }
     };
 
     // TEST CHECKS
-    if should_be_testable && !cfg.test_skip && !tags.contains(&Tags::FailingTests) {
+    if should_be_testable && !args.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
         let _ = run_command(ScarbCmd::Test(), manifest_path, file_path, vec![]);
     }
 
     // FORMAT CHECKS
-    if !tags.contains(&Tags::IgnoreFormat) && !cfg.formats_skip {
+    if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         // This program must pass cairo-format
         let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, vec![]);
     }
