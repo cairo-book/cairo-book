@@ -137,7 +137,7 @@ implementation of all the methods defined in our interface can be done as follow
 ```
 
 The full implementation of the `Vec` structure can be found in the
-community-maintained library [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures).
+community-maintained library [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/packages/data_structures/src).
 
 [nullable]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
@@ -190,7 +190,7 @@ The full implementation of the Stack, along with more data structures that you
 can use in your code, can be found in the community-maintained
 [Alexandria][alexandria data structures] library, in the "data_structures" crate.
 
-[alexandria data structures]: https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures
+[alexandria data structures]: https://github.com/keep-starknet-strange/alexandria/tree/main/packages/data_structures/src
 
 ## Summary
 
