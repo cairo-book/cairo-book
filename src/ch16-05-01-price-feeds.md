@@ -41,12 +41,20 @@ The above example shows the necessary imports you need to add to your contract m
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_feed_impl}}
 ```
 
-The `get_asset_price` function is responsible for retrieving the price of the asset specified in the `asset_id` argument from Pragma Oracle. Inside the function, an instance of the `IPragmaDispatcher` is created which serves as a dispatcher for interacting with the Pragma Oracle. The `get_data_median` method is then called from the created instance by passing the `DataType::SpotEntry(asset_id)` as an argument and assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns a `u128` the price property of `output`, which is the requested asset price.
+The `get_asset_price` function is responsible for retrieving the price of the asset specified in the `asset_id` argument from Pragma Oracle. Inside the function, an instance of the `IPragmaDispatcher` is created which serves as a dispatcher for interacting with the Pragma Oracle. The `get_data_median` method is then called from the created instance by passing the `DataType::SpotEntry(asset_id)` as an argument and assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns a `u128`, the price property of the `output` instance, which is the requested asset price.
 
 ## Example Application Using Pragma Price Feed
 
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:here}}
 ```
+
+The code above is an example implementation of price feed using the Pragma oracle. The contract imports necessary modules and interfaces, including the `IPragmaABIDispatcher` for interacting with the Pragma oracle contract and the `ERC20ABIDispatcher` for interacting with the ETH ERC-20 token contract.
+
+The contract has a `const` that stores the token pair ID of `ETH/USD`, and a `Storage` struct that holds two fields `pragma_contract` and `product_price_in_usd`, then the constructor function initializes the `pragma_contract` address and sets the `product_price_in_usd` to 10.
+
+The `buy_item` function is the main entry point for a user to purchase an item. It retrieves the caller's address. It calls the `get_asset_price` function to get the current price of ETH in USD using the `ETH_USD` asset ID. It calculates the amount of ETH needed to buy the product based on the product price in USD and the ETH price. It checks if the caller has enough ETH by calling the `balance_of` method on the ERC20 ETH contract. If the caller has enough ETH, it calls the `trasfer_from` method of the `eth_dispatcher` instance to transfer the required amount of ETH from the caller to another contract address.
+
+The `get_asset_price` function is the entry point to interact with the Pragma oracle and has been explained in the section above.
 
 You can get a detail guide on consuming data using Pragma price feeds [here](https://docs.pragma.build/Resources/Cairo%201/data-feeds/consuming-data).

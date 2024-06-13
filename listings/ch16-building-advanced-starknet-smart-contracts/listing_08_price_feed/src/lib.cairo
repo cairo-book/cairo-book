@@ -31,7 +31,7 @@ mod PriceFeedExample {
     #[constructor]
     fn constructor(ref self: ContractState, pragma_contract: ContractAddress) {
         self.pragma_contract.write(pragma_contract);
-        self.product_price_in_usd.write(10);
+        self.product_price_in_usd.write(100);
     }
 
     #[abi(embed_v0)]
@@ -50,13 +50,15 @@ mod PriceFeedExample {
                     0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
                 >() // ETH Contract Address
             };
-            eth_dispatcher.approve(caller_address, eth_needed);
+            let caller_balance = eth_dispatcher.balance_of(caller_address);
+            assert(caller_balance > eth_needed, 'Insufficient ETH balance');
+
             // Transfer the ETH to the caller
             eth_dispatcher
                 .transfer_from(
                     caller_address,
                     contract_address_const::<
-                        0x067f9ffb4a1b4f9c233abbad4fc5fc543724ac913e02b99b9e0cbe9875bfae66
+                        0x0237726d12d3c7581156e141c1b132f2db9acf788296a0e6e4e9d0ef27d092a2
                     >(),
                     eth_needed
                 );
