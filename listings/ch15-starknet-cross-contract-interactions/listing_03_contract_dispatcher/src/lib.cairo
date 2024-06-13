@@ -28,13 +28,9 @@ trait ITokenWrapper<TContractState> {
     fn token_name(self: @TContractState, contract_address: ContractAddress) -> felt252;
 
     fn transfer_token(
-        ref self: TContractState,
-        address: ContractAddress,
-        recipient: ContractAddress,
-        amount: u256
+        ref self: TContractState, address: ContractAddress, recipient: ContractAddress, amount: u256
     ) -> bool;
 }
-
 
 //ANCHOR: here
 //**** Specify interface here ****//
@@ -53,7 +49,7 @@ mod TokenWrapper {
         fn token_name(self: @ContractState, contract_address: ContractAddress) -> felt252 {
             //ANCHOR: no_local_variable
             IERC20Dispatcher { contract_address }.name()
-            //ANCHOR_END: no_local_variable
+        //ANCHOR_END: no_local_variable
         }
 
         fn transfer_token(
@@ -65,7 +61,7 @@ mod TokenWrapper {
             //ANCHOR: local_variable
             let erc20_dispatcher = IERC20Dispatcher { contract_address: address };
             erc20_dispatcher.transfer(recipient, amount)
-            //ANCHOR_END: local_variable
+        //ANCHOR_END: local_variable
 
         }
     }
