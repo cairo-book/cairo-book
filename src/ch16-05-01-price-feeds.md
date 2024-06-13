@@ -1,6 +1,6 @@
 # Price Feeds
 
-Price feeds enabled by an oracle serves as a bridge between real-world data feed and the blockchain. It provide real time pricing data that is aggregated from multiple trusted external sources ( e.g. crypto exchanges, financial data providers, etc. ) to the blockchain network.
+Price feeds enabled by an oracle serve as a bridge between real-world data feed and the blockchain. It provides real time pricing data that is aggregated from multiple trusted external sources ( e.g. crypto exchanges, financial data providers, etc. ) to the blockchain network.
 
 For the example in this book section, we will use Pragma Oracle to read the price feed for `ETH/USD` asset pair and also showcase a mini application that utilizes this feed.
 
@@ -17,7 +17,7 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 
 ## Creating a Price Feed Contract
 
-After you add the required dependencies for your project, you'll need to define a contract's interface that includes the required pragma price feed entry point to your contract interface.
+After adding the required dependencies for your project, you'll need to define a contract interface that includes the required pragma price feed entry point.
 
 ### Contract Interface
 
@@ -25,7 +25,7 @@ After you add the required dependencies for your project, you'll need to define 
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_interface}}
 ```
 
-Of the two public functions exposed in the `IPriceFeedExample`, the one necessary to interact with the pragma price feed oracle is the `get_asset_price` function, a read only function that takes in the `asset_id` argument and returns a `u128` value.
+Of the two public functions exposed in the `IPriceFeedExample`, the one necessary to interact with the pragma price feed oracle is the `get_asset_price` function, a view function that takes in the `asset_id` argument and returns a `u128` value.
 
 ### Pragma Dependency Import to Contract
 
@@ -41,7 +41,7 @@ The above example shows the necessary imports you need to add to your contract m
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_feed_impl}}
 ```
 
-The function `get_asset_price`, is responsible for retrieving the price of the asset specified in the `asset_id` argument from Pragma Oracle. Inside the function, an instance of the `IPragmaDispatcher` is created which serves as a dispatcher for interacting with the Pragma Oracle. The `get_data_median` method is then called from the created instance by passing the `DataType::SpotEntry(asset_id)` as an argument and assigned to an `output` variable which is finally used to return the price of the asset requested.
+The `get_asset_price` function is responsible for retrieving the price of the asset specified in the `asset_id` argument from Pragma Oracle. Inside the function, an instance of the `IPragmaDispatcher` is created which serves as a dispatcher for interacting with the Pragma Oracle. The `get_data_median` method is then called from the created instance by passing the `DataType::SpotEntry(asset_id)` as an argument and assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns a `u128` the price property of `output`, which is the requested asset price.
 
 ## Example Application Using Pragma Price Feed
 

@@ -38,11 +38,11 @@ mod PriceFeedExample {
     impl PriceFeedExampleImpl of IPriceFeedExample<ContractState> {
         fn buy_item(ref self: ContractState) {
             let caller_address = get_caller_address();
-            let eth_price = self.get_asset_price(ETH_USD);
+            let eth_price = self.get_asset_price(ETH_USD).into();
             let product_price = self.product_price_in_usd.read();
 
-            // Calculate the amount of ETH needed to buy the iPhone
-            let eth_needed = product_price * (10 * 8) / eth_price.into();
+            // Calculate the amount of ETH needed
+            let eth_needed = product_price * 100000000 / eth_price;
 
             // assert user has enough ETH
             let eth_dispatcher = ERC20ABIDispatcher {
