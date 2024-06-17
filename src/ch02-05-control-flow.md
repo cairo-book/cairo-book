@@ -154,7 +154,7 @@ Executing this program will not print the value of `i` when it is equal to `5`.
 One of the uses of a `loop` is to retry an operation you know might fail, such
 as checking whether an operation has succeeded. You might also need to pass
 the result of that operation out of the loop to the rest of your code. To do
-this, you can add the value you want returned after the `break` expression you
+this, you can add the value you want to be returned after the `break` expression you
 use to stop the loop; that value will be returned out of the loop so you can
 use it, as shown here:
 
