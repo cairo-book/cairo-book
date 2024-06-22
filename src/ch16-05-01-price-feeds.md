@@ -1,6 +1,6 @@
 # Price Feeds
 
-Price feeds enabled by an oracle serve as a bridge between real-world data feed and the blockchain. It provides real time pricing data that is aggregated from multiple trusted external sources ( e.g. crypto exchanges, financial data providers, etc. ) to the blockchain network.
+Price feeds enabled by an oracle serve as a bridge between real-world data feed and the blockchain. They provide real time pricing data that is aggregated from multiple trusted external sources ( e.g. crypto exchanges, financial data providers, etc. ) to the blockchain network.
 
 For the example in this book section, we will use Pragma Oracle to read the price feed for `ETH/USD` asset pair and also showcase a mini application that utilizes this feed.
 
@@ -33,7 +33,7 @@ Of the two public functions exposed in the `IPriceFeedExample`, the one necessar
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:pragma_lib}}
 ```
 
-The above example shows the necessary imports you need to add to your contract module necessary to interact with the Pragma oracle.
+The snippet above shows the necessary imports you need to add to your contract module in order to interact with the Pragma oracle.
 
 ### Required Price Feed Function Impl in Contract
 
@@ -41,7 +41,7 @@ The above example shows the necessary imports you need to add to your contract m
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_feed_impl}}
 ```
 
-The `get_asset_price` function is responsible for retrieving the price of the asset specified in the `asset_id` argument from Pragma Oracle. Inside the function, an instance of the `IPragmaDispatcher` is created which serves as a dispatcher for interacting with the Pragma Oracle. The `get_data_median` method is then called from the created instance by passing the `DataType::SpotEntry(asset_id)` as an argument and assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns a `u128`, the price property of the `output` instance, which is the requested asset price.
+The `get_asset_price` function is responsible for retrieving the price of the asset specified in the `asset_id` argument from Pragma Oracle. Inside the function, an instance of the `IPragmaDispatcher` is created which serves as a dispatcher for interacting with the Pragma Oracle. The `get_data_median` method is then called from the created instance by passing the `DataType::SpotEntry(asset_id)` as an argument and assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns an `output.price` a `u128` which is the price of the `asset_id` requested.
 
 ## Example Application Using Pragma Price Feed
 

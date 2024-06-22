@@ -44,14 +44,11 @@ mod PriceFeedExample {
             // Calculate the amount of ETH needed
             let eth_needed = product_price * 100000000 / eth_price;
 
-            // assert user has enough ETH
             let eth_dispatcher = ERC20ABIDispatcher {
                 contract_address: contract_address_const::<
                     0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
                 >() // ETH Contract Address
             };
-            let caller_balance = eth_dispatcher.balance_of(caller_address);
-            assert(caller_balance > eth_needed, 'Insufficient ETH balance');
 
             // Transfer the ETH to the caller
             eth_dispatcher
@@ -81,5 +78,3 @@ mod PriceFeedExample {
     }
 }
 //ANCHOR_END: here
-
-
