@@ -51,7 +51,7 @@ The `get_asset_price` function is responsible for retrieving the price of the as
 
 The code above is an example implementation of price feed using the Pragma oracle. The contract imports necessary modules and interfaces, including the `IPragmaABIDispatcher` for interacting with the Pragma oracle contract and the `ERC20ABIDispatcher` for interacting with the ETH ERC20 token contract.
 
-The contract has a `const` that stores the token pair ID of `ETH/USD`, and a `Storage` struct that holds two fields `pragma_contract` and `product_price_in_usd`, then the constructor function initializes the `pragma_contract` address and sets the `product_price_in_usd` to 100.
+The contract has a `const` that stores the token pair ID of `ETH/USD`, and a `Storage` struct that holds two fields `pragma_contract` and `product_price_in_usd`. The constructor function initializes the `pragma_contract` address and sets the `product_price_in_usd` to 100.
 
 The `buy_item` function is the main entry point for a user to purchase an item. It retrieves the caller's address. It calls the `get_asset_price` function to get the current price of ETH in USD using the `ETH_USD` asset ID. It calculates the amount of ETH needed to buy the product based on the product price in USD at the corresponding ETH price. It then checks if the caller has enough ETH by calling the `balance_of` method on the ERC20 ETH contract. If the caller has enough ETH, it calls the `transfer_from` method of the `eth_dispatcher` instance to transfer the required amount of ETH from the caller to another contract address.
 
