@@ -41,7 +41,7 @@ The snippet above shows the necessary imports you need to add to your contract m
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_feed_impl}}
 ```
 
-The `get_asset_price` function is responsible for retrieving the price of the asset specified in the `asset_id` argument from Pragma Oracle. Inside the function, an instance of the `IPragmaDispatcher` is created which serves as a dispatcher for interacting with the Pragma Oracle. The `get_data_median` method is then called from the created instance by passing the `DataType::SpotEntry(asset_id)` as an argument and assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns an `output.price` a `u128` which is the price of the `asset_id` requested.
+The `get_asset_price` function is responsible for retrieving the price of the asset specified by the `asset_id` argument from Pragma Oracle. The `get_data_median` method is called from the `IPragmaDispatcher` instance by passing the `DataType::SpotEntry(asset_id)` as an argument and its output is assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns the price of the requested asset as a `u128`.
 
 ## Example Application Using Pragma Price Feed
 
