@@ -21,6 +21,7 @@ mod PriceFeedExample {
     use starknet::{get_caller_address};
 
     const ETH_USD: felt252 = 19514442401534788;
+    const EIGHT_DECIMAL_FACTOR: u256 = 100000000;
 
     #[storage]
     struct Storage {
@@ -42,7 +43,7 @@ mod PriceFeedExample {
             let product_price = self.product_price_in_usd.read();
 
             // Calculate the amount of ETH needed
-            let eth_needed = product_price * 100000000 / eth_price;
+            let eth_needed = product_price * EIGHT_DECIMAL_FACTOR / eth_price;
 
             let eth_dispatcher = ERC20ABIDispatcher {
                 contract_address: contract_address_const::<
