@@ -1,4 +1,5 @@
 use starknet::ContractAddress;
+
 #[starknet::interface]
 trait ITokenWrapper<TContractState> {
     fn transfer_token(
@@ -13,8 +14,7 @@ trait ITokenWrapper<TContractState> {
 #[starknet::contract]
 mod TokenWrapper {
     use super::ITokenWrapper;
-    use core::serde::Serde;
-    use starknet::{SyscallResultTrait, ContractAddress, syscalls};
+    use starknet::{ContractAddress, syscalls, SyscallResultTrait};
 
     #[storage]
     struct Storage {}
@@ -27,13 +27,13 @@ mod TokenWrapper {
             recipient: ContractAddress,
             amount: u256
         ) -> bool {
-            let mut call_data: Array<felt252> = ArrayTrait::new();
+            let mut call_data: Array<felt252> = array![];
             Serde::serialize(@sender, ref call_data);
             Serde::serialize(@recipient, ref call_data);
             Serde::serialize(@amount, ref call_data);
 
             let mut res = syscalls::call_contract_syscall(
-                address, selector!("transferFrom"), call_data.span()
+                address, selector!("transfer_from"), call_data.span()
             )
                 .unwrap_syscall();
 
