@@ -282,6 +282,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "TeddyNotBear",
+      "name": "Teddy Not Bear",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106410805?v=4",
+      "profile": "https://github.com/TeddyNotBear",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
