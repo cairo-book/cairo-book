@@ -7,6 +7,7 @@ If you want to have access to the Cairo binaries, for anything that you could no
 You will need to have [Rust](https://www.rust-lang.org) and [Git](https://git-scm.com/) installed.
 
 To install Rust, you first need the [`rustup`](https://www.rust-lang.org/tools/install) tool. It allows you to install Rust using the following command:
+
 ```bash
 # Install stable Rust
 rustup override set stable && rustup update

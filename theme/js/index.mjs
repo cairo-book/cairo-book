@@ -46,4 +46,4 @@ window.runTests = async (cairo_program) => {
       reject(error);
     };
   });
-}
+};

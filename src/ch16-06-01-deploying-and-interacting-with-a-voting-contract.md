@@ -15,6 +15,7 @@ Listing {{#ref voting_contract}} shows the `Vote` contract in detail:
 ```rust,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_05_vote_contract/src/lib.cairo}}
 ```
+
 {{#label voting_contract}}
 <span class="caption">Listing {{#ref voting_contract}}: A voting smart contract</span>
 
@@ -155,7 +156,7 @@ If the compiler version you're using is older than the one used by Starkli and y
 
 If you're still encountering issues with the compiler version, try upgrading Starkli using the command: `starkliup` to make sure you're using the latest version of starkli.
 
-The class hash of the contract is: `0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`. You can declare this contract on Sepolia testnet and see that the class hash will correspond. 
+The class hash of the contract is: `0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`. You can declare this contract on Sepolia testnet and see that the class hash will correspond.
 
 The `--rpc` flag specifies the RPC endpoint to use (the one provided by `katana`). The `--account` flag specifies the account to use for signing the transaction. The account we use here is the one we created in the previous step. The `--keystore` flag specifies the keystore file to use for signing the transaction.
 

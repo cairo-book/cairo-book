@@ -5,5 +5,5 @@ prompt.prompt = "What is Scarb?"
 answer.answer = "Cairo's package manager and build system"
 prompt.distractors = [
   "a VS Code extension",
-  "the name of the VM that runs Cairo"
+  "the name of the VM that runs Cairo",
 ]

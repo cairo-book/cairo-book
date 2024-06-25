@@ -95,11 +95,11 @@ TContractState`, where access to the component state is made via the
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_02_embeddable_as_output/src/lib.cairo}}
 ```
 
-  Note that thanks to having an impl of `HasComponent<TContractState>`, the
-  compiler was able to wrap our functions in a new impl that doesn’t directly
-  know about the `ComponentState` type. `Ownable`, whose name we chose when
-  writing `embeddable_as(Ownable)`, is the impl that we will embed in a contract
-  that wants ownership.
+Note that thanks to having an impl of `HasComponent<TContractState>`, the
+compiler was able to wrap our functions in a new impl that doesn’t directly
+know about the `ComponentState` type. `Ownable`, whose name we chose when
+writing `embeddable_as(Ownable)`, is the impl that we will embed in a contract
+that wants ownership.
 
 ## Contract Integration
 

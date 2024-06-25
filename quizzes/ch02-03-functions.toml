@@ -32,7 +32,7 @@ In Cairo, a curly-brace block like `{ /* ... */ }` is:
 3. A syntactic scope
 """
 answer.answer = "1 and 3"
-prompt.distractors = [ "1 only", "2 only", "2 and 3" ]
+prompt.distractors = ["1 only", "2 only", "2 and 3"]
 context = """
 A block is an expression (#1) that is allowed to contain statements. It also defines a syntactic scope for let-bindings inside it (#3).
 """

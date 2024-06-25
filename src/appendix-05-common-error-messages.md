@@ -13,8 +13,8 @@ You might encounter error messages when writing Cairo code. Some of them occur v
 - `Item path::item is not visible in this context.`: this error message lets us know that the path to bring an item into scope is correct, but there is a vibility issue. In cairo, all items are private to parent modules by default. To resolve this issue, make sure that all the modules on the path to items and items themselves are declared with `pub(crate)` or `pub` to have access to them.
 
 - `Identifier not found.`: this error message is a bit aspecific but might indicate that:
-  -  A variable is being used before it has been declared. Make sure to declare variables with the `let` keyword.
-  -  The path to bring an item into scope is wrongly defined. Make sure to use valid paths.
+  - A variable is being used before it has been declared. Make sure to declare variables with the `let` keyword.
+  - The path to bring an item into scope is wrongly defined. Make sure to use valid paths.
 
 ## Starknet Components Related Error Messages
 

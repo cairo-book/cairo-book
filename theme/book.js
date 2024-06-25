@@ -132,7 +132,7 @@ function playground_text(playground, hidden = true) {
         .catch(
           (error) =>
             (result_block.innerText =
-              "Playground Communication: " + error.message)
+              "Playground Communication: " + error.message),
         );
     } else {
       window
@@ -149,7 +149,7 @@ function playground_text(playground, hidden = true) {
         .catch(
           (error) =>
             (result_block.innerText =
-              "Playground Communication: " + error.message)
+              "Playground Communication: " + error.message),
         );
     }
   }

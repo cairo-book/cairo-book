@@ -51,8 +51,8 @@ The function `request_randomness_from_pragma` initiates a request for verifiable
 
 1. `requester_address`: The contract address that initiated the randomness request.
 2. `request_id`: A unique identifier assigned to the randomness request.
-3. `random_words`:  An array (span) of the generated random values (represented as `felt252`).
-4. `calldata`:  Additional data passed along with the initial randomness request.
+3. `random_words`: An array (span) of the generated random values (represented as `felt252`).
+4. `calldata`: Additional data passed along with the initial randomness request.
 
 ### Dice Game Contract
 

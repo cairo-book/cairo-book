@@ -69,11 +69,7 @@ fn main() {
 }
 ```
 """
-prompt.distractors = [
-  "Program 1",
-  "Program 2",
-  "Program 2 and Program 3",
-]
+prompt.distractors = ["Program 1", "Program 2", "Program 2 and Program 3"]
 answer.answer = "Program 3"
 context = """
 Program 3 tries to access an element at an index that is out of bounds, but it matches the

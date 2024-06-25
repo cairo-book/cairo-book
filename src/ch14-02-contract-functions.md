@@ -17,7 +17,7 @@ Some important rules to note:
 1. A contract can't have more than one constructor.
 2. The constructor function must be named `constructor`, and must be annotated with the `#[constructor]` attribute.
 
-The `constructor` function might take arguments, which are passed when deploying the contract. In our example, we pass some value corresponding to a `Person` type as argument in order to store the `owner` information (address and name) in the contract. 
+The `constructor` function might take arguments, which are passed when deploying the contract. In our example, we pass some value corresponding to a `Person` type as argument in order to store the `owner` information (address and name) in the contract.
 
 Note that the `constructor` function **must** take `self` as a first argument, corresponding to the state of the contract, generally passed by reference with the `ref` keyword to be able to modify the contract's state. We will explain `self` and its type shortly.
 
@@ -55,7 +55,7 @@ View functions are _public_ functions where the `self: ContractState` argument i
 
 However, as you may have noticed, passing `self` as a snapshot only restricts the storage write access via `self` at compile time. It does not prevent state modification via direct system calls, nor calling another contract that would modify the state.
 
-The read-only property of view functions is not enforced on Starknet, and sending a transaction targeting a view function _could_  change the state.
+The read-only property of view functions is not enforced on Starknet, and sending a transaction targeting a view function _could_ change the state.
 
 In conclusion, even though external and view functions are distinguished by the Cairo compiler, **all public functions** can be called through an invoke transaction and have the potential to modify states on Starknet. Also, all public functions can be queried via `starknet_call` on Starknet, which will not create a transaction and hence will not change the state.
 
@@ -89,7 +89,6 @@ The `#[generate_trait]` attribute is mostly used to define private impl blocks. 
 > Note: using `#[generate_trait]` in addition to the `#[abi(embed_v0)]` attribute for a public impl block is not recommended, as it will result in a failure to generate the corresponding ABI. Public functions should only be defined in an impl block annotated with `#[generate_trait]` if this block is also annotated with the `#[abi(per_item)]` attribute.
 
 [abi per item section]: ./ch14-02-contract-functions.md#4-abiper_item-attribute
-
 
 ## `[abi(per_item)]` Attribute
 

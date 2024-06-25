@@ -20,7 +20,7 @@ onmessage = function (e) {
           allow_warnings,
           printFullMemory,
           run_profiler,
-          useDBGPrintHint
+          useDBGPrintHint,
         );
         break;
       case "runTests":
@@ -41,7 +41,7 @@ onmessage = function (e) {
           starknet,
           run_profiler,
           gas_disabled,
-          print_resource_usage
+          print_resource_usage,
         );
         break;
       case "compileCairoProgram":

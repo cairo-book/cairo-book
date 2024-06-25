@@ -25,7 +25,7 @@ What happens in Cairo if an if condition evaluates to true?
 3. The program terminates immediately.
 """
 answer.answer = "2"
-prompt.distractors = [ "1", "3", "1 and 3" ]
+prompt.distractors = ["1", "3", "1 and 3"]
 context = """
 When an if condition in Cairo evaluates to true, the program executes the block of code associated with that if condition.
 """
@@ -38,9 +38,9 @@ What is the result of running a Cairo program with an if statement where the con
 """
 answer.answer = "The program skips the if block and moves on to the next bit of code."
 prompt.distractors = [
-"The program panics.",
-"The program executes an implicit else block.",
-"The program stops execution."
+  "The program panics.",
+  "The program executes an implicit else block.",
+  "The program stops execution.",
 ]
 
 [[questions]]
@@ -51,8 +51,8 @@ What feature does Cairo provide for repeating code execution until a specified c
 """
 answer.answer = "`loop` or `while` with a break condition."
 prompt.distractors = [
-"Traditional `for` loops similar to those in imperative languages.",
-"Automated mechanisms that handle execution retries for you."
+  "Traditional `for` loops similar to those in imperative languages.",
+  "Automated mechanisms that handle execution retries for you.",
 ]
 context = """
 Cairo supports `loop` and `while` loops that continue execution indefinitely until a break condition is explicitly met or the program runs out of gas.
