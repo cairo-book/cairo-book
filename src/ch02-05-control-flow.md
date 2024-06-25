@@ -149,7 +149,7 @@ Let's add a `continue` statement to our loop to skip the `println!` statement wh
 
 Executing this program will not print the value of `i` when it is equal to `5`.
 
-> When defining `break` or `continue` conditions in loops, it is better design to avoid comparison operators. Indeed, it is much cheaper to check if `i == 11` instead of `i > 10`, because comparison operators involve additionnal Cairo steps related to `range_check` Cairo-VM builtin usage.
+> When defining `break` or `continue` conditions in loops, it is better design to avoid comparison operators. Indeed, it is much cheaper to check if `i == 11` instead of `i > 10`, because comparison operators involve additional Cairo steps related to `range_check` Cairo-VM builtin usage.
 
 The best configuration, if possible, is to start from the latest index + 1, decrement `i`, and check `i == 0`. The previous example can be optimized as follows:
 
