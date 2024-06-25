@@ -47,9 +47,9 @@ First of all, add the following code in your _lib.cairo_ file:
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/lib.cairo}}
 ```
 
-You need to add `pub` otherwise it'll be impossible to import the function in the test files.
+We need to add the `pub` keyword to the `it_adds_two` function, otherwise it will not be possible to import it in the test files.
 
-Then, we need to write the integration test in the tests/integration*tests.cairo* file:
+Then, we need to write the integration test in the _tests/integration_tests.cairo_ file:
 
 <span class="caption">Filename: tests/integration_tests.cairo</span>
 
