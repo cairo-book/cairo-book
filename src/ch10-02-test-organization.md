@@ -40,9 +40,9 @@ Integration tests use your library in the same way any other code would. Their p
 
 ### The _tests_ Directory
 
-We create a _tests_ directory at the top level of our project directory, next to _src_. Scarb knows to look for integration test files in this directory. We can then make as many test files as we want, and Scarb will compile each of the files.
+We create a _tests_ directory at the top level of our project directory, next to _src_. Scarb knows to look for integration test files in this directory. We can then make as many test files as we want, and Scarb will compile each of the files as an individual crate. However, the _tests_ directory can also be organized as a module with a _lib.cairo_ file - in that case, the tests will be compiled as a single crate.
 
-Let’s create an integration test. First make a _tests_ directory, and create a new file named _tests/integration_test.cairo_. Your directory structure should look like this:
+Let’s create an integration test. With the code in Listing {{#ref integration-tests}} still in the src/lib.cairo file, make a tests directory, and create a new file named _tests/integration_test.cairo_. Your directory structure should look like this:
 
 ```shell
 adder
@@ -55,25 +55,20 @@ adder
 
 ```
 
-Add the following code in your _lib.cairo_ file:
+Enter the code in Listing {{#ref integration-tests}} into the _tests/integration_test.cairo_ file:
 
-<span class="caption">Filename: src/lib.cairo</span>
+<span class="caption">Filename: src/integration_test.cairo</span>
 
 ```rust, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/lib.cairo}}
 ```
 
-We need to add the `pub` keyword to the `it_adds_two` function, otherwise it will not be possible to import it in the test files.
+{{#label integration-tests}}
+Listing {{#ref integration-tests}}: : An integration test of a function in the `adder` crate
 
-Then, we need to write the integration test in the _tests/integration_tests.cairo_ file:
+Each file in the `tests` directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add `use adder::add_two` at the top of the code, which we didn’t need in the unit tests.
 
-<span class="caption">Filename: tests/integration_tests.cairo</span>
-
-```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/tests/integration_tests.cairo}}
-```
-
-We need to bring our tested functions into each test file scope. For that reason we add `use adder::it_adds_two` at the top of the code, which we didn’t need in the unit tests.
+We don’t need to annotate any code in _tests/integration_test.cairo_ with `#[cfg(test)]`. Scarb treats the `tests` directory specially and compiles files in this directory only when we run `scarb test`. Run `scarb test` now:
 
 We don’t need to annotate any code in _tests/integration_test.cairo_ with #[cfg(test)]. Scarb treats the tests directory specially and compiles files in this directory only when we run `scarb test`. Run `scarb test` now:
 
