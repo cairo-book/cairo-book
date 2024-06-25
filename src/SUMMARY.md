@@ -140,7 +140,7 @@
   - [Upgradeability](./ch16-03-upgradeability.md)
   - [L1 <> L2 Messaging](./ch16-04-L1-L2-messaging.md)
   - [Oracle Interactions](./ch16-05-oracle-interactions.md)
-    - [Price Feeds]()
+    - [Price Feeds](./ch16-05-01-price-feeds.md)
     - [Randomness](./ch16-05-02-randomness.md)
   - [Other Examples](./ch16-06-00-other-examples.md)
     - [Deploying and Interacting with a Voting Contract](./ch16-06-01-deploying-and-interacting-with-a-voting-contract.md)
