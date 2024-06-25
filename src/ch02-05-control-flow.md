@@ -149,6 +149,14 @@ Let's add a `continue` statement to our loop to skip the `println!` statement wh
 
 Executing this program will not print the value of `i` when it is equal to `5`.
 
+> When defining `break` or `continue` conditions in loops, it is better design to avoid comparison operators. Indeed, it is much cheaper to check if `i == 11` instead of `i > 10`, because comparison operators involve additionnal Cairo steps related to `range_check` Cairo-VM builtin usage.
+
+The best configuration, if possible, is to start from the latest index + 1, decrement `i`, and check `i == 0`. The previous example can be optimized as follows:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_39_loop_optimized/src/lib.cairo}}
+```
+
 ### Returning Values from Loops
 
 One of the uses of a `loop` is to retry an operation you know might fail, such
