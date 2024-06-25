@@ -89,7 +89,6 @@
   - [Working with Hashes](ch11-04-hash.md)
   - [Macros](ch11-05-macros.md)
   - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
-  - [Gas Optimisation]()
   - [Printing](ch11-08-printing.md)
 
 - [Appendix (Cairo)](appendix-00.md)
