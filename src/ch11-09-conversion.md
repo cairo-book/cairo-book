@@ -25,3 +25,13 @@ We can do similarly for defining a conversion for our own type.
 ```rust
 {{#include ../listings/ch11-advanced-features/no_listing_15_into/src/lib.cairo}}
 ```
+
+## TryInto
+
+Similar to `Into`, `TryInto` is a generic trait for converting between types. Unlike `Into`, the `TryInto` trait is used for fallible conversions, and as such, returns [Option][option].
+
+[option]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
+
+```rust
+{{#include ../listings/ch11-advanced-features/no_listing_16_tryinto/src/lib.cairo}}
+```
