@@ -90,6 +90,7 @@
   - [Macros](ch11-05-macros.md)
   - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
   - [Printing](ch11-08-printing.md)
+  - [Conversion](ch11-09-conversion.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
