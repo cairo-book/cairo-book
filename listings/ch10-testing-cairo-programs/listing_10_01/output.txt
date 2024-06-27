@@ -4,8 +4,8 @@ $ scarb cairo-test
     Finished release target(s) in 1 second
 testing listing_08_01_02 ...
 running 2 tests
-test listing_08_01_02::other_tests::exploration ... ok (gas usage est.: 22540)
-test listing_08_01_02::tests::it_works ... ok (gas usage est.: 22540)
+test listing_08_01_02::tests::it_works ... ok (gas usage est.: 113430)
+test listing_08_01_02::other_tests::exploration ... ok (gas usage est.: 127300)
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 filtered out;
 
 

@@ -5,7 +5,7 @@ mod tests {
     #[test]
     fn exploration() {
         let result = 2 + 2;
-        assert!(result == 4, "result is not 4");
+        assert_eq!(result, 4);
     }
 
     #[test]
@@ -15,5 +15,3 @@ mod tests {
     }
 }
 // ANCHOR_END: exploration-and-another
-
-

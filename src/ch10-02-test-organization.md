@@ -12,19 +12,19 @@ The convention is to create a module named `tests` in each file to contain the t
 
 ### The Tests Module and `#[cfg(test)]`
 
-The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run the test code only when you run `scarb cairo-test` or `scarb test`, not when you run `scarb cairo-run`. This saves compile time when you only want to build the library and saves space in the resulting compiled artifact because the tests are not included. You’ll see that because integration tests go in a different directory, they don’t need the `#[cfg(test)]` annotation. However, because unit tests go in the same files as the code, you’ll use `#[cfg(test)]` to specify that they shouldn’t be included in the compiled result.
+The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run the test code only when you run `scarb test`, not when you run `scarb build`. This saves compile time when you only want to build the project and saves space in the resulting compiled artifact because the tests are not included. You’ll see that because integration tests go in a different directory, they don’t need the `#[cfg(test)]` annotation. However, because unit tests go in the same files as the code, you’ll use `#[cfg(test)]` to specify that they shouldn’t be included in the compiled result.
 
-Recall that when we created the new _adder_ project in the first section of this chapter, we wrote this first test:
+Recall that when we created the new `adder` project in the first section of this chapter, we wrote this first test:
 
 ```rust
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_08_cfg_attr/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_01/src/lib.cairo:it_works}}
 ```
 
-The attribute `cfg` stands for configuration and tells Cairo that the following item should only be included given a certain configuration option. In this case, the configuration option is `test`, which is provided by Cairo for compiling and running tests. By using the `cfg` attribute, Cairo compiles our test code only if we actively run the tests with `scarb cairo-test`. This includes any helper functions that might be within this module, in addition to the functions annotated with `#[test]`.
+The attribute `cfg` stands for _configuration_ and tells Cairo that the following item should only be included given a certain configuration option. In this case, the configuration option is `test`, which is provided by Cairo for compiling and running tests. By using the `cfg` attribute, Cairo compiles our test code only if we actively run the tests with `scarb test`. This includes any helper functions that might be within this module, in addition to the functions annotated with `#[test]`.
 
 ### Testing Private Functions
 
-There’s debate within the testing community about whether or not private functions should be tested directly, and other languages make it difficult or impossible to test private functions. Regardless of which testing ideology you adhere to, Rust’s privacy rules do allow you to test private functions. Consider the code below with the private function `internal_adder`.`
+There’s debate within the testing community about whether or not private functions should be tested directly, and other languages make it difficult or impossible to test private functions. Regardless of which testing ideology you adhere to, Cairo's privacy rules do allow you to test private functions. Consider the code below with the private function `internal_adder`.`
 
 <span class="caption">Filename: src/lib.cairo</span>
 
@@ -32,45 +32,46 @@ There’s debate within the testing community about whether or not private funct
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_11_test_private_function/src/lib.cairo}}
 ```
 
-Note that the `internal_adder` function is not marked as `pub`. Tests are just Cairo code, and the tests module is just another module. As we discussed in the [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section, items in child modules can use the items in their ancestor modules. In this test, we bring the `tests` module’s parent’s `internal_adder` into scope with `use super::internal_adder;` and then the test can call `internal_adder`. If you don’t think private functions should be tested, there’s nothing in Cairo that will compel you to do so.
+{{#label test_internal}}
+<span class="caption">Listing {{#ref test_internal}}: Testing a private function</span>
+
+Note that the `internal_adder` function is not marked as `pub`. Tests are just Cairo code, and the tests module is just another module. As we discussed in the ["Paths for Referring to an Item in the Module Tree"](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section, items in child modules can use the items in their ancestor modules. In this test, we bring the `tests` module’s parent’s `internal_adder` into scope with `use super::internal_adder;` and then the test can call `internal_adder`. If you don’t think private functions should be tested, there’s nothing in Cairo that will compel you to do so.
 
 ## Integration Tests
 
-Integration tests use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a `tests` directory at the top level of our project directory, next to _src_.
+Integration tests use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a _tests_ directory.
 
 ### The _tests_ Directory
 
-We create a _tests_ directory at the top level of our project directory, next to _src_. Scarb knows to look for integration test files in this directory. We can then make as many test files as we want, and Scarb will compile each of the files as an individual crate. However, the _tests_ directory can also be organized as a module with a _lib.cairo_ file - in that case, the tests will be compiled as a single crate.
+We create a _tests_ directory at the top level of our project directory, next to _src_. Scarb knows to look for integration test files in this directory. We can then make as many test files as we want, and Scarb will compile each of the files as an individual crate.
 
-Let’s create an integration test. With the code in Listing {{#ref integration-tests}} still in the src/lib.cairo file, make a tests directory, and create a new file named _tests/integration_test.cairo_. Your directory structure should look like this:
+Let’s create an integration test. With the code in Listing {{#ref test_internal}} still in the _src/lib.cairo_ file, make a _tests_ directory, and create a new file named _tests/integration_test.cairo_. Your directory structure should look like this:
 
 ```shell
 adder
+├── Scarb.lock
 ├── Scarb.toml
 ├── src
-│   ├── lib.cairo
-├── tests
-│   ├── integration_tests.cairo
-│
+│   └── lib.cairo
+└── tests
+    └── integration_tests.cairo
 
 ```
 
-Enter the code in Listing {{#ref integration-tests}} into the _tests/integration_test.cairo_ file:
+Enter the code in Listing {{#ref test_integration}} into the _tests/integration_test.cairo_ file:
 
-<span class="caption">Filename: src/integration_test.cairo</span>
+<span class="caption">Filename: tests/integration_tests.cairo</span>
 
 ```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/tests/integration_tests.cairo}}
 ```
 
-{{#label integration-tests}}
-Listing {{#ref integration-tests}}: : An integration test of a function in the `adder` crate
+{{#label test_integration}}
+<span class="caption">Listing {{#ref test_integration}}: An integration test of a function in the `adder` crate</span>
 
 Each file in the `tests` directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add `use adder::add_two` at the top of the code, which we didn’t need in the unit tests.
 
-We don’t need to annotate any code in _tests/integration_test.cairo_ with `#[cfg(test)]`. Scarb treats the `tests` directory specially and compiles files in this directory only when we run `scarb test`. Run `scarb test` now:
-
-We don’t need to annotate any code in _tests/integration_test.cairo_ with #[cfg(test)]. Scarb treats the tests directory specially and compiles files in this directory only when we run `scarb test`. Run `scarb test` now:
+We don’t need to annotate any code in _tests/integration_test.cairo_ with `#[cfg(test)]`. Scarb treats the tests directory specially and compiles files in this directory only when we run `scarb test`. Run `scarb test` now:
 
 ```shell
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/output.txt}}
@@ -83,7 +84,7 @@ Each integration test file has its own section, so if we add more files in the t
 
 The second displayed section is the same as we’ve been seeing: one line for each unit test (one named add that we added just above) and then a summary line for the unit tests.
 
-We can still run a particular integration test function by specifying the test function’s name as an argument of the option -f to `scarb test` like for instance `scarb test -f integration_tests::internal`. To run all the tests in a particular integration test file, we use the same option of `scarb test` but using only the name of the file:
+We can still run a particular integration test function by specifying the test function’s name as an argument of the option -f to `scarb test` like for instance `scarb test -f integration_tests::internal`. To run all the tests in a particular integration test file, we use the same option of `scarb test` but using only the name of the file.
 
 Then, to run all of our integration tests, we can just add a filter to only run tests whose path contains _integration_tests_.
 
@@ -91,7 +92,7 @@ Then, to run all of our integration tests, we can just add a filter to only run 
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/output_integration.txt}}
 ```
 
-We see that in the second section for the unit tests, 1 has been filtered out because not in the file _integration_tests_.
+We see that in the second section for the unit tests, 1 has been filtered out because it is not in the _integration_tests_ file.
 
 ### Submodules in Integration Tests
 
@@ -120,21 +121,37 @@ The different behavior of tests directory files is most noticeable when you have
 When we run the tests with `scarb test`, we’ll see a new section in the test output for the _common.cairo_ file, even though this file doesn’t contain any test functions nor did we call the setup function from anywhere:
 
 ```shell
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/output_common.txt}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/output.txt}}
 ```
 
-To avoid systematically getting a section for each file of the _tests_ folder, we create this _tests/lib.cairo_ file :
+To avoid systematically getting a section for each file of the _tests_ folder, we also have the option of making the `tests/` directory behave like a regular crate, by adding a `tests/lib.cairo` file. In that case, the `tests` directory will no longer compile as one crate per file, but as one crate for the whole directory.
+
+Let's create this _tests/lib.cairo_ file :
 
 <span class="caption">Filename: tests/lib.cairo</span>
 
 ```rust, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/tests/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/tests/lib.cairo}}
+```
+
+The project directory will now look like this :
+
+```shell
+adder
+├── Scarb.lock
+├── Scarb.toml
+├── src
+│   └── lib.cairo
+└── tests
+    ├── common.cairo
+    ├── integration_tests.cairo
+    └── lib.cairo
 ```
 
 When we run the `scarb test` command again, here is the output :
 
 ```shell
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/output.txt}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/output.txt}}
 ```
 
 This way, only the test functions will be tested and the `setup` function can be imported without being tested.

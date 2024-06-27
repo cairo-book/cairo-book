@@ -1,5 +1,5 @@
 [package]
-name = "no_listing_06_cfg_attr"
+name = "adder"
 version = "0.1.0"
 edition = "2023_11"
 
