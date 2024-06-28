@@ -19,9 +19,9 @@ impl TryU32IntoEvenNumber of TryInto<u32, EvenNumber> {
 fn main() {
     let result: Option<EvenNumber> = 8_u32.try_into();
     let expected: Option<EvenNumber> = Option::Some(EvenNumber { value: 8 });
-    assert_eq!(result, expected);
+    assert!(result == expected, "conversion failed");
 
     let result: Option<EvenNumber> = 5_u32.try_into();
     let expected: Option<EvenNumber> = Option::None;
-    assert_eq!(result, expected);
+    assert!(result == expected, "try_into should return Option::None");
 }
