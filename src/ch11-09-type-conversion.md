@@ -1,4 +1,4 @@
-# Conversion
+# Type Conversion
 
 Primitive types can be converted to each other through [casting][casting].
 
