@@ -1,4 +1,4 @@
-# Type Conversion
+# Custom Type Conversion
 
 In the ["Data Types" chapter][type conversion], we have seen how primitive types can be converted to each other.
 
