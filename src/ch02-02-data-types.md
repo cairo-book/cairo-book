@@ -149,20 +149,6 @@ With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 char
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
 
-## Type Conversion
-
-In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library.
-
-The `try_into` method allows for safe type conversion when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value.
-
-On the other hand, the `into` method can be used for type conversion when success is guaranteed, such as when the source type is smaller than the destination type.
-
-To perform the conversion, call `var.into()` or `var.try_into()` on the source value to convert it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_conversion/src/lib.cairo}}
-```
-
 ## The Tuple Type
 
 A _tuple_ is a general way of grouping together a number of values with a
