@@ -1,10 +1,10 @@
 # Type Conversion
 
-Primitive types can be converted to each other through [casting][casting].
+In the ["Data Types" chapter][type conversion], we have seen how primitive types can be converted to each other.
 
 Cairo addresses conversion between custom types (i.e., struct and enum) by the use of `Into` and `TryInto` traits. For converting custom types to string (`ByteArray`), refer to the ["Printing" chapter][printing].
 
-[casting]: ./ch02-02-data-types.md#type-casting
+[type conversion]: ./ch02-02-data-types.md#type-conversion
 [printing]: ./ch11-08-printing.md#printing-custom-data-types
 
 ## Into

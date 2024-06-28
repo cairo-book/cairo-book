@@ -1588,7 +1588,7 @@ msgid ""
 "Keep in mind that Cairo is a _statically typed_ language, which means that "
 "it must know the types of all variables at compile time. The compiler can "
 "usually infer the desired type based on the value and its usage. In cases "
-"when many types are possible, we can use a cast method where we specify the "
+"when many types are possible, we can use a conversion method where we specify the "
 "desired output type."
 msgstr ""
 "기억해야 할 점은 카이로는 _정적으로 타입이 지정된_ 언어이며, 이는 컴파일 시간에 모든 변수의 타입을 알아야 한다는 것을 의미합니다. "
@@ -1978,7 +1978,7 @@ msgid "'C'"
 msgstr "'C'"
 
 #: src/ch02-02-data-types.md:158
-msgid "Type casting"
+msgid "Type Conversion"
 msgstr "형 변환"
 
 #: src/ch02-02-data-types.md:160
@@ -1992,7 +1992,7 @@ msgstr ""
 
 #: src/ch02-02-data-types.md:162
 msgid ""
-"The `try_into` method allows for safe type casting when the target type "
+"The `try_into` method allows for safe type conversion when the target type "
 "might not fit the source value. Keep in mind that `try_into` returns an "
 "`Option<T>` type, which you'll need to unwrap to access the new value."
 msgstr ""
@@ -2001,7 +2001,7 @@ msgstr ""
 
 #: src/ch02-02-data-types.md:164
 msgid ""
-"On the other hand, the `into` method can be used for type casting when "
+"On the other hand, the `into` method can be used for type conversion when "
 "success is guaranteed, such as when the source type is smaller than the "
 "destination type."
 msgstr ""
@@ -2010,7 +2010,7 @@ msgstr ""
 #: src/ch02-02-data-types.md:166
 msgid ""
 "To perform the conversion, call `var.into()` or `var.try_into()` on the "
-"source value to cast it to another type. The new variable's type must be "
+"source value to convert it to another type. The new variable's type must be "
 "explicitly defined, as demonstrated in the example below."
 msgstr ""
 "변환을 수행하려면 소스 값에 `var.into()` 또는 `var.try_into()`를 호출하여 다른 유형으로 캐스팅해야 합니다. 새 "

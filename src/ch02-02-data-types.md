@@ -4,7 +4,7 @@ Every value in Cairo is of a certain _data type_, which tells Cairo what kind of
 data is being specified so it knows how to work with that data. This section covers two subsets of data types: scalars and compounds.
 
 Keep in mind that Cairo is a _statically typed_ language, which means that it
-must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases when many types are possible, we can use a cast method where we specify the desired output type.
+must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases when many types are possible, we can use a conversion method where we specify the desired output type.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_06_data_types/src/lib.cairo}}
@@ -149,18 +149,18 @@ With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 char
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
 
-## Type Casting
+## Type Conversion
 
 In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library.
 
-The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value.
+The `try_into` method allows for safe type conversion when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value.
 
-On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the source type is smaller than the destination type.
+On the other hand, the `into` method can be used for type conversion when success is guaranteed, such as when the source type is smaller than the destination type.
 
-To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
+To perform the conversion, call `var.into()` or `var.try_into()` on the source value to convert it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
 
 ```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_casting/src/lib.cairo}}
+{{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_conversion/src/lib.cairo}}
 ```
 
 ## The Tuple Type
