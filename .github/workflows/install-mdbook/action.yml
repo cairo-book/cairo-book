@@ -1,46 +1,53 @@
 name: Install mdbook and dependencies
-
 description: Install mdbook with the dependencies we need.
-
 runs:
   using: composite
   steps:
     - name: Install mdbook
-      run: cargo install mdbook --locked --version 0.4.31
       shell: bash
+      run: |
+        mkdir -p bin
+        curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+        echo "$(pwd)/bin" >> ${GITHUB_PATH}
 
     - name: Install mdbook-i18n-helpers
-      run: cargo install mdbook-i18n-helpers --locked --version 0.1.0
       shell: bash
+      run: cargo install mdbook-i18n-helpers --locked --version 0.1.0
 
     - name: Install mdbook-last-changed
-      run: cargo install mdbook-last-changed --locked --version 0.1.4
       shell: bash
+      run: |
+        mkdir -p bin
+        curl -sSL https://github.com/badboy/mdbook-last-changed/releases/download/v0.1.4/mdbook-last-changed-v0.1.4-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+        echo "$(pwd)/bin" >> ${GITHUB_PATH}
 
     - name: Install mdbook-cairo preprocessor
-      run: cargo install --path mdbook-cairo --locked
       shell: bash
+      run: cargo install --path mdbook-cairo --locked
 
     - name: Install cargo-make
-      run: cargo install cargo-make --locked
-      shell: bash
+      uses: baptiste0928/cargo-install@v2
+      with:
+        crate: cargo-make
 
     - name: Install Depot
-      run: curl https://raw.githubusercontent.com/cognitive-engineering-lab/depot/main/scripts/install.sh | sh
       shell: bash
+      run: |
+        curl https://raw.githubusercontent.com/cognitive-engineering-lab/depot/main/scripts/install.sh | sh
+        echo "$HOME/.local/bin" >> ${GITHUB_PATH}
 
     - name: Clone mdbook-quiz-cairo repository
+      shell: bash
       run: |
         git clone https://github.com/cairo-book/mdbook-quiz-cairo
         cd mdbook-quiz-cairo
-      shell: bash
 
     - name: Initialize bindings
-      run: cargo make init-bindings
       shell: bash
+      run: cargo make init-bindings
       working-directory: mdbook-quiz-cairo
 
     - name: Install mdbook-quiz-cairo
-      run: cargo install --path crates/mdbook-quiz-cairo --locked
       shell: bash
+      run: cargo install --path crates/mdbook-quiz-cairo --locked
       working-directory: mdbook-quiz-cairo
