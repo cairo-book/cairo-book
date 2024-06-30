@@ -4,7 +4,7 @@ $ scarb cairo-test
     Finished release target(s) in 1 second
 testing listing_08_03 ...
 running 2 tests
-test listing_08_03::tests::exploration ... ok (gas usage est.: 22540)
+test listing_08_03::tests::exploration ... ok (gas usage est.: 127300)
 test listing_08_03::tests::another ... fail (gas usage est.: 24810)
 failures:
    listing_08_03::tests::another - Panicked with "Make this test fail".

@@ -1,4 +1,4 @@
-pub fn add_two(a: u32) -> u32 {
+pub fn add(a: u32, b: u32) -> u32 {
     internal_adder(a, 2)
 }
 
@@ -11,7 +11,7 @@ mod tests {
     use super::internal_adder;
 
     #[test]
-    fn internal() {
+    fn add() {
         assert_eq!(4, internal_adder(2, 2));
     }
 }

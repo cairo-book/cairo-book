@@ -5,7 +5,6 @@ description: Install mdbook with the dependencies we need.
 runs:
   using: composite
   steps:
-    # The --locked flag is important for reproducible builds.
     - name: Install mdbook
       run: cargo install mdbook --locked --version 0.4.31
       shell: bash

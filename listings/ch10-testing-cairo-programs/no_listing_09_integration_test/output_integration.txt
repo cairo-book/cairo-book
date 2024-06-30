@@ -1,0 +1,13 @@
+$ scarb test -f integration_tests
+     Running cairo-test adder
+   Compiling test(adder_unittest) adder v0.1.0 (cairo-book/listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
+   Compiling test(adder_integration_tests) adder_integration_tests v0.1.0 (cairo-book/listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
+    Finished release target(s) in 7 seconds
+testing adder ...
+running 1 test
+test adder_integration_tests::integration_tests::internal ... ok (gas usage est.: 23110)
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
+
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 filtered out;
+
