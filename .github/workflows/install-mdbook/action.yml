@@ -6,7 +6,7 @@ runs:
     - name: Install mdbook
       shell: bash
       run: |
-        mkdir bin
+        mkdir -p bin
         curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
         echo "$(pwd)/bin" >> ${GITHUB_PATH}
 
@@ -16,7 +16,10 @@ runs:
 
     - name: Install mdbook-last-changed
       shell: bash
-      run: cargo install mdbook-last-changed --locked --version 0.1.4
+      run: |
+        mkdir -p bin
+        curl -sSL https://github.com/badboy/mdbook-last-changed/releases/download/v0.1.4/mdbook-last-changed-v0.1.4-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+        echo "$(pwd)/bin" >> ${GITHUB_PATH}
 
     - name: Install mdbook-cairo preprocessor
       shell: bash
