@@ -42,6 +42,6 @@ runs:
       working-directory: mdbook-quiz-cairo
 
     - name: Install mdbook-quiz-cairo
-      run: cargo install --path crates/mdbook-quiz-cairo --locked
+      run: cargo install --path crates/mdbook-quiz --locked
       shell: bash
       working-directory: mdbook-quiz-cairo
