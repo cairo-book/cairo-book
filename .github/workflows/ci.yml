@@ -25,6 +25,16 @@ jobs:
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install JS dependencies
+        run: |
+          cd mdbook-quiz-cairo/js
+          npm install  # Ou yarn install
+
       - name: Build book (English)
         run: mdbook build -d book
 
