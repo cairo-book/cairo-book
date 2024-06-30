@@ -36,11 +36,6 @@ runs:
         cd mdbook-quiz-cairo
       shell: bash
 
-    - name: Install JS dependencies
-      run: npm install
-      shell: bash
-      working-directory: mdbook-quiz-cairo/js
-
     - name: Initialize bindings
       run: cargo make init-bindings
       shell: bash
