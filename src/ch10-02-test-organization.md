@@ -24,7 +24,7 @@ The attribute `cfg` stands for _configuration_ and tells Cairo that the followin
 
 ### Testing Private Functions
 
-There’s debate within the testing community about whether or not private functions should be tested directly, and other languages make it difficult or impossible to test private functions. Regardless of which testing ideology you adhere to, Cairo's privacy rules do allow you to test private functions. Consider the code below with the private function `internal_adder`.`
+There’s debate within the testing community about whether or not private functions should be tested directly, and other languages make it difficult or impossible to test private functions. Regardless of which testing ideology you adhere to, Cairo's privacy rules do allow you to test private functions. Consider the code below with the private function `internal_adder`.
 
 <span class="caption">Filename: src/lib.cairo</span>
 
@@ -35,7 +35,7 @@ There’s debate within the testing community about whether or not private funct
 {{#label test_internal}}
 <span class="caption">Listing {{#ref test_internal}}: Testing a private function</span>
 
-Note that the `internal_adder` function is not marked as `pub`. Tests are just Cairo code, and the tests module is just another module. As we discussed in the ["Paths for Referring to an Item in the Module Tree"](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section, items in child modules can use the items in their ancestor modules. In this test, we bring the `tests` module’s parent’s `internal_adder` into scope with `use super::internal_adder;` and then the test can call `internal_adder`. If you don’t think private functions should be tested, there’s nothing in Cairo that will compel you to do so.
+Note that the `internal_adder` function is not marked as `pub`. Tests are just Cairo code, and the tests module is just another module. As we discussed in the ["Paths for Referring to an Item in the Module Tree"](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md) section, items in child modules can use the items in their ancestor modules. In this test, we bring the `tests` module’s parent `internal_adder` into scope with `use super::internal_adder;` and then the test can call `internal_adder`. If you don’t think private functions should be tested, there’s nothing in Cairo that will compel you to do so.
 
 ## Integration Tests
 
@@ -79,8 +79,8 @@ We don’t need to annotate any code in _tests/integration_test.cairo_ with `#[c
 
 The two sections of output include the unit tests and the integration tests. Note that if any test in a section fails, the following sections will not be run. For example, if a unit test fails, there won’t be any output for integration tests because those tests will only be run if all unit tests are passing.
 
-The first displayed section for the integration tests.
-Each integration test file has its own section, so if we add more files in the tests directory, there will be more integration test sections.
+The first displayed section is for the integration tests.
+Each integration test file has its own section, so if we add more files in the _tests_ directory, there will be more integration test sections.
 
 The second displayed section is the same as we’ve been seeing: one line for each unit test (one named add that we added just above) and then a summary line for the unit tests.
 
@@ -96,7 +96,7 @@ We see that in the second section for the unit tests, 1 has been filtered out be
 
 ### Submodules in Integration Tests
 
-As you add more integration tests, you might want to make more files in the tests directory to help organize them; for example, you can group the test functions by the functionality they’re testing. As mentioned earlier, each file in the tests directory is compiled as its own separate crate, which is useful for creating separate scopes to more closely imitate the way end users will be using your crate. However, this means files in the tests directory don’t share the same behavior as files in _src_ do, as you learned in Chapter 7 regarding how to separate code into modules and files.
+As you add more integration tests, you might want to make more files in the _tests_ directory to help organize them; for example, you can group the test functions by the functionality they’re testing. As mentioned earlier, each file in the tests directory is compiled as its own separate crate, which is useful for creating separate scopes to more closely imitate the way end users will be using your crate. However, this means files in the tests directory don’t share the same behavior as files in _src_ do, as you learned in Chapter 7 regarding how to separate code into modules and files.
 
 The different behavior of tests directory files is most noticeable when you have a set of helper functions to use in multiple integration test files and you try to follow the steps in the [Separating Modules into Different Files](ch07-05-separating-modules-into-different-files.md) section of Chapter 7 to extract them into a common module. For example, if we create _tests/common.cairo_ and place a function named `setup` in it, we can add some code to `setup` that we want to call from multiple test functions in multiple test files:
 
