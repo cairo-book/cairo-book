@@ -6,8 +6,10 @@ runs:
   using: composite
   steps:
     - name: Install mdbook
-      run: cargo install mdbook --locked --version 0.4.31
-      shell: bash
+      run: |
+        mkdir bin
+        curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+        echo "$(pwd)/bin" >> ${GITHUB_PATH}
 
     - name: Install mdbook-i18n-helpers
       run: cargo install mdbook-i18n-helpers --locked --version 0.1.0
@@ -22,12 +24,14 @@ runs:
       shell: bash
 
     - name: Install cargo-make
-      run: cargo install cargo-make --locked
-      shell: bash
+      uses: baptiste0928/cargo-install@v2
+      with:
+        crate: cargo-make
 
     - name: Install Depot
-      run: curl https://raw.githubusercontent.com/cognitive-engineering-lab/depot/main/scripts/install.sh | sh
-      shell: bash
+      run: |
+        curl https://raw.githubusercontent.com/cognitive-engineering-lab/depot/main/scripts/install.sh | sh
+        echo "$HOME/.local/bin" >> ${GITHUB_PATH}
 
     - name: Clone mdbook-quiz-cairo repository
       run: |
