@@ -197,7 +197,7 @@ You might be wondering why you would even need a unit type? In Cairo, everything
 
 ## Type Conversion
 
-Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion of scalar types, and they can be implemented for custom types as well.
+Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for custom types as well.
 
 ### Into
 
