@@ -4,7 +4,7 @@ Every value in Cairo is of a certain _data type_, which tells Cairo what kind of
 data is being specified so it knows how to work with that data. This section covers two subsets of data types: scalars and compounds.
 
 Keep in mind that Cairo is a _statically typed_ language, which means that it
-must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases when many types are possible, we can use a cast method where we specify the desired output type.
+must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases when many types are possible, we can use a conversion method where we specify the desired output type.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_06_data_types/src/lib.cairo}}
@@ -149,21 +149,9 @@ With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 char
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
 
-## Type Casting
+## Compound Types
 
-In Cairo, you can convert scalar types from one type to another by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library.
-
-The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value.
-
-On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the source type is smaller than the destination type.
-
-To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_11_type_casting/src/lib.cairo}}
-```
-
-## The Tuple Type
+### The Tuple Type
 
 A _tuple_ is a general way of grouping together a number of values with a
 variety of types into one compound type. Tuples have a fixed length: once
@@ -199,7 +187,7 @@ For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types/src/lib.cairo}}
 ```
 
-## The Unit Type ()
+#### The Unit Type ()
 
 A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.
@@ -208,3 +196,31 @@ Its size is always zero, and it is guaranteed to not exist in the compiled code.
 You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns `()` implicitly.
 
 {{#quiz ../quizzes/ch02-02-data-types.toml}}
+
+## Type Conversion
+
+Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for [custom types as well][custom-type-conversion].
+
+[custom-type-conversion]: ./ch05-02-an-example-program-using-structs.md#conversions-of-custom-types
+
+### Into
+
+The `Into` trait allows for a type to define how to convert itself into another type. It can be used for type conversion when success is guaranteed, such as when the source type is smaller than the destination type.
+
+To perform the conversion, call `var.into()` on the source value to convert it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_11_into/src/lib.cairo}}
+```
+
+### TryInto
+
+Similar to `Into`, `TryInto` is a generic trait for converting between types. Unlike `Into`, the `TryInto` trait is used for fallible conversions, and as such, returns [Option\<T\>][option]. An example of a fallible conversion is when the target type might not fit the source value.
+
+[option]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
+
+Also similar to `Into` is the process to perform the conversion; just call `var.try_into()` on the source value to convert it to another type. The new variable's type also must be explicitly defined, as demonstrated in the example below.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_39_tryinto/src/lib.cairo}}
+```
