@@ -199,7 +199,9 @@ You might be wondering why you would even need a unit type? In Cairo, everything
 
 ## Type Conversion
 
-Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for custom types as well.
+Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for [custom types as well][custom-type-conversion].
+
+[custom-type-conversion]: ./ch05-02-an-example-program-using-structs.md#conversions-of-custom-types
 
 ### Into
 
@@ -209,12 +211,6 @@ To perform the conversion, call `var.into()` on the source value to convert it t
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_11_into/src/lib.cairo}}
-```
-
-Defining a conversion for a custom type using the `Into` trait will typically require specification of the type to convert into, as the compiler is unable to determine this most of the time. However this is a small trade-off considering we get the functionality for free.
-
-```rust
-{{#include ../listings/ch11-advanced-features/no_listing_39_into/src/lib.cairo}}
 ```
 
 ### TryInto
@@ -227,10 +223,4 @@ Also similar to `Into` is the process to perform the conversion; just call `var.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_39_tryinto/src/lib.cairo}}
-```
-
-Below is an example of implementing the `TryInto` trait for a custom type.
-
-```rust
-{{#include ../listings/ch11-advanced-features/no_listing_40_tryinto/src/lib.cairo}}
 ```

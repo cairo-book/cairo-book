@@ -61,4 +61,28 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 
 Here we’ve defined a struct and named it `Rectangle`. Inside the curly brackets, we defined the fields as `width` and `height`, both of which have type `u64`. Then, in `main`, we created a particular instance of `Rectangle` that has a width of `30` and a height of `10`. Our `area` function is now defined with one parameter, which we’ve named `rectangle` which is of type `Rectangle` struct. We can then access the fields of the instance with dot notation, and it gives descriptive names to the values rather than using the tuple index values of `0` and `1`.
 
+## Conversions of Custom Types
+
+We've already described how to perform type conversion on in-built types, see [Data Types > Type Conversion][type-conversion]. In this section, we will see how to define conversions for custom types.
+
+> Note: conversion can be defined for compound types, e.g. tuples, too.
+
+[type-conversion]: ./ch02-02-data-types.md#type-conversion
+
+### Into
+
+Defining a conversion for a custom type using the `Into` trait will typically require specification of the type to convert into, as the compiler is unable to determine this most of the time. However this is a small trade-off considering we get the functionality for free.
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_into/src/lib.cairo}}
+```
+
+### TryInto
+
+Defining a conversion for `TryInto` is similar to defining it for `Into`.
+
+```rust
+{{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_tryinto/src/lib.cairo}}
+```
+
 {{#quiz ../quizzes/ch05-02-an-example-program-using-structs.toml}}
