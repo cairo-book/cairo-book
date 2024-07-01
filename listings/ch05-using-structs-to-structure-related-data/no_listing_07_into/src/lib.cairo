@@ -1,20 +1,27 @@
 // Compiler automatically imports the core library, so you can omit this import
 use core::traits::Into;
 
-#[derive(Drop, Debug)]
-struct Number {
-    value: u32,
+#[derive(Drop, PartialEq)]
+struct Rectangle {
+    width: u64,
+    height: u64,
 }
 
-impl U32IntoNumber of Into<u32, Number> {
-    fn into(self: u32) -> Number {
-        Number { value: self }
+#[derive(Drop)]
+struct Square {
+    side_length: u64,
+}
+
+impl SquareIntoRectangle of Into<Square, Rectangle> {
+    fn into(self: Square) -> Rectangle {
+        Rectangle { width: self.side_length, height: self.side_length }
     }
 }
 
 fn main() {
-    let int: u32 = 5;
+    let square = Square { side_length: 5 };
     // Compiler will complain if you remove the type annotation
-    let num: Number = int.into();
-    println!("My number is {:?}", num);
+    let result: Rectangle = square.into();
+    let expected = Rectangle { width: 5, height: 5 };
+    assert!(result == expected, "conversion failed");
 }
