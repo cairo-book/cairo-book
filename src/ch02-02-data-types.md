@@ -149,7 +149,9 @@ With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 char
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
 ```
 
-## The Tuple Type
+## Compound Types
+
+### The Tuple Type
 
 A _tuple_ is a general way of grouping together a number of values with a
 variety of types into one compound type. Tuples have a fixed length: once
@@ -185,7 +187,7 @@ For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types/src/lib.cairo}}
 ```
 
-## The Unit Type ()
+#### The Unit Type ()
 
 A _unit type_ is a type which has only one value `()`.
 It is represented by a tuple with no elements.
