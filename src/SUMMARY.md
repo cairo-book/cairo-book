@@ -91,6 +91,7 @@
   - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
   - [Gas Optimisation]()
   - [Printing](ch11-08-printing.md)
+  - [Loops](ch11-09-loops-and-idiomatic-looping.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
