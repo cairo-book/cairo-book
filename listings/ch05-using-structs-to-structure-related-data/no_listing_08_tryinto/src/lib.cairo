@@ -1,15 +1,21 @@
 // Compiler automatically imports the core library, so you can omit this import
 use core::traits::TryInto;
 
-#[derive(Drop, Debug, PartialEq)]
-struct EvenNumber {
-    value: u32
+#[derive(Drop)]
+struct Rectangle {
+    width: u64,
+    height: u64,
 }
 
-impl TryU32IntoEvenNumber of TryInto<u32, EvenNumber> {
-    fn try_into(self: u32) -> Option<EvenNumber> {
-        if self % 2 == 0 {
-            Option::Some(EvenNumber { value: self })
+#[derive(Drop, PartialEq)]
+struct Square {
+    side_length: u64,
+}
+
+impl RectangleIntoSquare of TryInto<Rectangle, Square> {
+    fn try_into(self: Rectangle) -> Option<Square> {
+        if self.height == self.width {
+            Option::Some(Square { side_length: self.height })
         } else {
             Option::None
         }
@@ -17,11 +23,13 @@ impl TryU32IntoEvenNumber of TryInto<u32, EvenNumber> {
 }
 
 fn main() {
-    let result: Option<EvenNumber> = 8_u32.try_into();
-    let expected: Option<EvenNumber> = Option::Some(EvenNumber { value: 8 });
+    let rectangle = Rectangle { width: 8, height: 8 };
+    let result: Option<Square> = rectangle.try_into();
+    let expected: Option<Square> = Option::Some(Square { side_length: 8 });
     assert!(result == expected, "conversion failed");
 
-    let result: Option<EvenNumber> = 5_u32.try_into();
-    let expected: Option<EvenNumber> = Option::None;
+    let rectangle = Rectangle { width: 5, height: 8 };
+    let result: Option<Square> = rectangle.try_into();
+    let expected: Option<Square> = Option::None;
     assert!(result == expected, "try_into should return Option::None");
 }
