@@ -23,5 +23,8 @@ fn main() {
     // Compiler will complain if you remove the type annotation
     let result: Rectangle = square.into();
     let expected = Rectangle { width: 5, height: 5 };
-    assert!(result == expected, "conversion failed");
+    assert!(
+        result == expected,
+        "A square is always convertible to a rectangle with the same width and height!"
+    );
 }
