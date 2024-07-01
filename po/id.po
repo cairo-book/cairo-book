@@ -1445,7 +1445,7 @@ msgstr ""
 msgid ""
 "Keep in mind that Cairo is a _statically typed_ language, which means that it must know the types of all "
 "variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In "
-"cases when many types are possible, we can use a cast method where we specify the desired output type."
+"cases when many types are possible, we can use a conversion method where we specify the desired output type."
 msgstr ""
 "Ingatlah bahwa Cairo adalah bahasa _berjenis statis_, yang berarti bahwa ia harus mengetahui jenis-jenis semua "
 "variabel pada waktu kompilasi. Kompiler biasanya dapat menyimpulkan jenis yang diinginkan berdasarkan nilai dan "
@@ -1796,7 +1796,7 @@ msgid "'C'"
 msgstr "'C'"
 
 #: src/ch02-02-data-types.md:152
-msgid "Type casting"
+msgid "Type Conversion"
 msgstr "Tipe Data casting"
 
 #: src/ch02-02-data-types.md:154
@@ -1809,7 +1809,7 @@ msgstr ""
 
 #: src/ch02-02-data-types.md:156
 msgid ""
-"The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in "
+"The `try_into` method allows for safe type conversion when the target type might not fit the source value. Keep in "
 "mind that `try_into` returns an `Option<T>` type, which you'll need to unwrap to access the new value."
 msgstr ""
 "Metode `try_into` memungkinkan untuk konversi tipe yang aman ketika tipe target mungkin tidak cocok dengan nilai "
@@ -1818,7 +1818,7 @@ msgstr ""
 
 #: src/ch02-02-data-types.md:158
 msgid ""
-"On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the "
+"On the other hand, the `into` method can be used for type conversion when success is guaranteed, such as when the "
 "source type is smaller than the destination type."
 msgstr ""
 "Di sisi lain, metode `into` dapat digunakan untuk konversi tipe ketika keberhasilan dijamin, seperti ketika tipe "
@@ -1826,7 +1826,7 @@ msgstr ""
 
 #: src/ch02-02-data-types.md:160
 msgid ""
-"To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. "
+"To perform the conversion, call `var.into()` or `var.try_into()` on the source value to convert it to another type. "
 "The new variable's type must be explicitly defined, as demonstrated in the example below."
 msgstr ""
 "Untuk melakukan konversi, panggil `var.into()` atau `var.try_into()` pada nilai sumber untuk mengubahnya menjadi "

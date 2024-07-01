@@ -282,6 +282,25 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "TeddyNotBear",
+      "name": "Teddy Not Bear",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106410805?v=4",
+      "profile": "https://github.com/TeddyNotBear",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "zmalatrax",
+      "name": "Malatrax",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71888134?v=4",
+      "profile": "https://audithub.app",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

@@ -1663,7 +1663,7 @@ msgstr ""
 msgid ""
 "Keep in mind that Cairo is a _statically typed_ language, which means that it\n"
 "must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases\n"
-"when many types are possible, we can use a cast method where we specify the desired output type."
+"when many types are possible, we can use a conversion method where we specify the desired output type."
 msgstr ""
 "记住，Cairo 是静态类型（statically typed）语言，也就是说在编译时就必须知道所有变量的类型。根据值及其使用方式，编译器通常可以推断出我们想要用的类型。\n"
 "在可能存在多种类型的情况下，我们可以使用一种称为“类型转换”的方法，在其中指定所需的输出类型。"
@@ -1999,7 +1999,7 @@ msgstr ""
 "```"
 
 #: src/ch02-02-data-types.md:152
-msgid "### Type casting"
+msgid "### Type Conversion"
 msgstr "### 类型转换"
 
 #: src/ch02-02-data-types.md:154
@@ -2008,17 +2008,17 @@ msgstr "在 Cairo 中，你可以使用 `TryInto` 和 `Into` 特性提供的 `tr
 
 #: src/ch02-02-data-types.md:156
 msgid ""
-"The `try_into` method allows for safe type casting when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to "
+"The `try_into` method allows for safe type conversion when the target type might not fit the source value. Keep in mind that `try_into` returns an `Option<T>` type, which you'll need to "
 "unwrap to access the new value."
 msgstr "`try_into` 方法允许在目标类型可能不适合源值时进行安全的类型转换。请记住，`try_into` 会返回一个 `Option<T>` 类型，你需要解开（unwrap）这个类型来访问新的值。"
 
 #: src/ch02-02-data-types.md:158
-msgid "On the other hand, the `into` method can be used for type casting when success is guaranteed, such as when the source type is smaller than the destination type."
+msgid "On the other hand, the `into` method can be used for type conversion when success is guaranteed, such as when the source type is smaller than the destination type."
 msgstr "另一方面，当转换必然成功时，如源类型小于目标类型时，`into` 方法可用于类型转换。"
 
 #: src/ch02-02-data-types.md:160
 msgid ""
-"To perform the conversion, call `var.into()` or `var.try_into()` on the source value to cast it to another type. The new variable's type must be explicitly defined, as demonstrated "
+"To perform the conversion, call `var.into()` or `var.try_into()` on the source value to convert it to another type. The new variable's type must be explicitly defined, as demonstrated "
 "in the example below."
 msgstr "为了进行转换，在源值上调用 `var.into()` 或 `var.try_into()` 来将其转换为另一种类型。新变量的类型必须被明确定义，如下面的例子所示。"
 

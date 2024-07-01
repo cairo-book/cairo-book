@@ -89,7 +89,6 @@
   - [Working with Hashes](ch11-04-hash.md)
   - [Macros](ch11-05-macros.md)
   - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
-  - [Gas Optimisation]()
   - [Printing](ch11-08-printing.md)
   - [Loops](ch11-09-loops-and-idiomatic-looping.md)
 
@@ -141,7 +140,7 @@
   - [Upgradeability](./ch16-03-upgradeability.md)
   - [L1 <> L2 Messaging](./ch16-04-L1-L2-messaging.md)
   - [Oracle Interactions](./ch16-05-oracle-interactions.md)
-    - [Price Feeds]()
+    - [Price Feeds](./ch16-05-01-price-feeds.md)
     - [Randomness](./ch16-05-02-randomness.md)
   - [Other Examples](./ch16-06-00-other-examples.md)
     - [Deploying and Interacting with a Voting Contract](./ch16-06-01-deploying-and-interacting-with-a-voting-contract.md)
@@ -159,3 +158,66 @@
 
 - [Appendix (Starknet)](appendix-000.md)
   - [A - System Calls](appendix-08-system-calls.md)
+
+---
+
+# Cairo VM
+
+- [Introduction](ch200-introduction.md)
+
+- [Architecture]()
+
+## Memory
+
+- [Memory]()
+
+  - [Non-Deterministic Read-only Memory]()
+  - [Segments]()
+  - [Segment Value]()
+  - [Relocation]()
+  - [Layout]()
+
+## Execution Model
+
+- [Execution Model]()
+
+  - [Registers]()
+  - [Instructions]()
+  - [Cairo Assembly (CASM)]()
+  - [State transition]()
+
+## Builtins
+
+- [Builtins]()
+  - [Memory Communication]()
+  - [List of builtins]()
+
+## Hints
+
+- [Hints]()
+  - [Structure]()
+  - [Hint runner]()
+  - [List of hints]()
+
+## Runner
+
+- [Runner]()
+
+  - [Program]()
+    - [Program Artifacts]()
+    - [Program Parsing]()
+  - [Runner Mode]()
+    - [Execution Mode]()
+    - [Proof Mode]()
+  - [Output]()
+    - [Cairo PIE]()
+    - [Memory File]()
+    - [Trace file]()
+    - [AIR public input]()
+    - [AIR private input]()
+
+- [Tracer]()
+
+- [Implementations]()
+
+- [Resources]()
