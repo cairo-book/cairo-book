@@ -15,8 +15,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+
+      - name: Setup Scarb
+        uses: software-mansion/setup-scarb@v1
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
