@@ -40,16 +40,14 @@ mod TokenWrapper {
     use super::{IERC20Dispatcher, IERC20DispatcherTrait};
     //ANCHOR_END: import
     use super::ITokenWrapper;
-    use starknet::ContractAddress;
+    use starknet::{get_caller_address, ContractAddress};
 
     #[storage]
     struct Storage {}
 
     impl TokenWrapper of ITokenWrapper<ContractState> {
         fn token_name(self: @ContractState, contract_address: ContractAddress) -> felt252 {
-            //ANCHOR: no_local_variable
             IERC20Dispatcher { contract_address }.name()
-        //ANCHOR_END: no_local_variable
         }
 
         fn transfer_token(
@@ -58,14 +56,9 @@ mod TokenWrapper {
             recipient: ContractAddress,
             amount: u256
         ) -> bool {
-            //ANCHOR: local_variable
             let erc20_dispatcher = IERC20Dispatcher { contract_address: address };
-            erc20_dispatcher.transfer(recipient, amount)
-        //ANCHOR_END: local_variable
-
+            erc20_dispatcher.transfer_from(get_caller_address(), recipient, amount)
         }
     }
 }
 // ANCHOR_END: here
-
-

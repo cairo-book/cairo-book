@@ -17,7 +17,7 @@ Some important rules to note:
 1. A contract can't have more than one constructor.
 2. The constructor function must be named `constructor`, and must be annotated with the `#[constructor]` attribute.
 
-The `constructor` function might take arguments, which are passed when deploying the contract. In our example, we pass some value corresponding to a `Person` type as argument in order to store the `owner` information (address and name) in the contract. 
+The `constructor` function might take arguments, which are passed when deploying the contract. In our example, we pass some value corresponding to a `Person` type as argument in order to store the `owner` information (address and name) in the contract.
 
 Note that the `constructor` function **must** take `self` as a first argument, corresponding to the state of the contract, generally passed by reference with the `ref` keyword to be able to modify the contract's state. We will explain `self` and its type shortly.
 
@@ -45,7 +45,7 @@ External functions are _public_ functions where the `self: ContractState` argume
 
 ### View Functions
 
-View functions are _public_ functions where the `self: ContractState` argument is passed as snapshot, which only allows the `read` access to storage variables, and restricts writes to storage made via `self` by causing compilation errors. The compiler will mark their `state_mutability` to `view`, preventing any state modification through `self` directly.
+View functions are _public_ functions where the `self: ContractState` argument is passed as snapshot, which only allows the `read` access to storage variables, and restricts writes to storage made via `self` by causing compilation errors. The compiler will mark their _state_mutability_ to `view`, preventing any state modification through `self` directly.
 
 ```rust,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:view}}
@@ -55,15 +55,17 @@ View functions are _public_ functions where the `self: ContractState` argument i
 
 However, as you may have noticed, passing `self` as a snapshot only restricts the storage write access via `self` at compile time. It does not prevent state modification via direct system calls, nor calling another contract that would modify the state.
 
-The read-only property of view functions is not enforced on Starknet, and sending a transaction targeting a view function _could_  change the state.
+The read-only property of view functions is not enforced on Starknet, and sending a transaction targeting a view function _could_ change the state.
 
-In conclusion, even though external and view functions are distinguished by the Cairo compiler, **all public functions** can be called through an invoke transaction and have the potential to modify states on Starknet. Also, all public functions can be queried via `starknet_call` on Starknet, which will not create a transaction and hence will not change the state.
+<!-- TODO: add an example of a view function that could modify the state using low-level syscalls -->
+
+In conclusion, even though external and view functions are distinguished by the Cairo compiler, **all public functions** can be called through an invoke transaction and can potentially modify the Starknet state. Moreover, all public functions can be called with the `starknet_call` RPC method, which will not create a transaction and hence will not change the state.
 
 > **Warning:** This is different from the EVM where a `staticcall` opcode is provided, which prevents storage modifications in the current context and subcontexts. Hence developers **should not** have the assumption that calling a view function on another contract cannot modify the state.
 
 ### Standalone Public Functions
 
-It is also possible to define public functions outside of an implementation of a trait, using the `#[external(v0)]` attribute. Doing this will automatically generate the corresponding ABI, allowing these standalone public functions to be callable by anyone from the outside. These functions can also be called from within the contract just like any function in Starknet contracts. The first parameter must be `self`.
+It is also possible to define public functions outside of an implementation of a trait, using the `#[external(v0)]` attribute. Doing this will automatically generate an entry in the contract ABI, allowing these standalone public functions to be callable by anyone from outside. These functions can also be called from within the contract just like any function in Starknet contracts. The first parameter must be `self`.
 
 Here, we define a standalone `get_contract_name` function outside of an impl block:
 
@@ -89,7 +91,6 @@ The `#[generate_trait]` attribute is mostly used to define private impl blocks. 
 > Note: using `#[generate_trait]` in addition to the `#[abi(embed_v0)]` attribute for a public impl block is not recommended, as it will result in a failure to generate the corresponding ABI. Public functions should only be defined in an impl block annotated with `#[generate_trait]` if this block is also annotated with the `#[abi(per_item)]` attribute.
 
 [abi per item section]: ./ch14-02-contract-functions.md#4-abiper_item-attribute
-
 
 ## `[abi(per_item)]` Attribute
 

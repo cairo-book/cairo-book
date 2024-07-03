@@ -1,4 +1,4 @@
-# Borrowing Code from Another Contract Class
+# Running code from an external class
 
 For now, we focused on calling external contracts in order to execute code in the context of the callee. But what if one want to borrow code from another contract class, allowing to execute external code in the caller context?
 
