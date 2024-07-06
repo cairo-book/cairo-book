@@ -1,18 +1,19 @@
-# Running code from an external class
+# Executing Code from Another Class
 
-For now, we focused on calling external contracts in order to execute code in the context of the callee. But what if one want to borrow code from another contract class, allowing to execute external code in the caller context?
+Up until now, we presented how to call external _contracts_ to execute their logic and update their state. But what if one wants to simply execute some code from another class, without updating the state of another contract?
+Starknet makes this possible with _library calls_, which allow a contract to execute the logic of another class in its own context, updating its own state.
 
-To achieve this, Starknet makes it possible for any contract to use the `library_call_syscall` system call, either directly or through the library dispatcher. The inner working is very similar to external contract calls.
+## Library calls
 
-## Library Dispatcher
+The key difference between the _contract calls_ and _library calls_ lies in the execution context of the logic defined in the class. While contract calls are used to call functions from deployed **contracts**, library calls are used to call stateless **classes** in the context of the caller.
 
-The key difference between the contract dispatcher and the library dispatcher lies in the execution context of the logic defined in the class. While regular dispatchers are used to call functions from deployed **contracts**, library dispatchers are used to call stateless **classes**.
+To illustrate this, let's consider two contracts _A_ and _B_.
 
-Let's consider two contracts A and B.
+When A performs a _contract call_ to the **contract** B, the execution context of the logic defined in B is that of B. As such, the value returned by `get_caller_address()` in B will return the address of A, `get_contract_address()` in B will return the address of B, and any storage updates in B will update the storage of B.
 
-When A uses `IBDispatcher` to call functions from the **contract** B, the execution context of the logic defined in B is that of B. This means that the value returned by `get_caller_address()` in B will return the address of A, and updating a storage variable in B will update the storage of B.
+However, when A uses a _library call_ to call the **class** of B, the execution context of the logic defined in B is that of A. This means that the value returned by `get_caller_address()` variable in B will be the address of the caller of A, `get_contract_address()` in B's class will return the address of A, and updating a storage variable in B's class will update the storage of A.
 
-When A uses `IBLibraryDispatcher` to call functions from the **class** of B, the execution context of the logic defined in B's class is that of A. This means that the value returned by `get_caller_address()` variable in B will be the address of the caller of A, and updating a storage variable in B's class will update the storage of A.
+Library calls can be performed using the dispatcher pattern presented in the previous chapter, only with a class hash instead of a contract address.
 
 Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and its associated `IERC20DispatcherTrait` trait and impl using the same `IERC20` example:
 
@@ -23,33 +24,32 @@ Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and it
 {{#label expanded-ierc20-library}}
 <span class="caption">Listing {{#ref expanded-ierc20-library}}: A simplified example of the `IERC20DLibraryDispatcher` and its associated trait and impl</span>
 
-We can notice a few difference with the contract dispatcher:
+One notable difference with the contract dispatcher is that the library dispatcher uses `library_call_syscall` instead of `call_contract_syscall`. Otherwise, the process is similar.
 
-- Library dispatcher structs are instantiated with a `class_hash` field instead of `contract_address`.
-- Library dispatcher trait implementation uses `library_call_syscall` system call instead of `call_contract_syscall`
+Let's see illustrate how to use library calls to execute the logic of another class in the context of the current contract.
 
-Otherwise, everything is entirely similar. Let's see how to use library dispatcher to borrow some logic of another contract class.
+## Using the Library Dispatcher
 
-> Note: there is no `LibraryDispatcherTrait`. The trait used with `ContractDispatcher` and `LibraryDispatcher` structs is the same, because the same functions are callable with both dispatchers.
+Listing {{#ref library-dispatcher}} defines two contracts: `ValueStoreLogic`, which defines the logic of our example, and `ValueStoreExecutor`, which simply executes the logic of `ValueStoreLogic`'s class.
 
-## Calling Contracts using the Library Dispatcher
-
-Listing {{#ref library-dispatcher}} exposes a sample contract that uses the Library Dispatcher to execute another class hash's code in its own context:
+We first need to import the `IValueStoreDispatcherTrait` and `IValueStoreLibraryDispatcher` which were generated from our interface by the compiler. Then, we can create an instance of `IValueStoreLibraryDispatcher`, passing in the `class_hash` of the class we want to make library calls to. From there, we can call the functions defined in that class, executing its logic in the context of our contract.
 
 ```rust,noplayground
-{{#include ../listings/ch15-starknet-cross-contract-interactions/listing_05_library_dispatcher/src/lib.cairo:here}}
+{{#include ../listings/ch15-starknet-cross-contract-interactions/listing_05_library_dispatcher/src/lib.cairo}}
 ```
 
 {{#label library-dispatcher}}
-<span class="caption">Listing {{#ref library-dispatcher}}: A sample contract using the Library Dispatcher</span>
+<span class="caption">Listing {{#ref library-dispatcher}}: An example contract using a Library Dispatcher</span>
 
-We first need to import the `IContractADispatcherTrait` and `IContractALibraryDispatcher` which were generated from our interface by the compiler. Then, we can create an instance of `IContractALibraryDispatcher`, passing in the `class_hash` of the class we want to make library calls to. From there, we can call the functions defined in that class, executing its logic in the context of our contract. When we call `set_value` on `ContractA`, it will make a library call to the `set_value` function defined in `IContractA` on the given class, updating the value of the storage variable `value` in `ContractA`.
+When we call the `set_value` function on `ValueStoreExecutor`, it will make a library call to the `set_value` function defined in `ValueStoreLogic`. Because we are using a library call, `ValueStoreExecutor`'s storage variable `value` will be updated. Similarly, when we call the `get_value` function, it will make a library call to the `get_value` function defined in `ValueStoreLogic`, returning the value of the storage variable `value` - still in the context of `ValueStoreExecutor`.
 
-## Calling Classes Using `library_call_syscall` Low-level System Calls
+As such, both `get_value` and `get_value_local` return the same value, as they are reading the same storage slot.
 
-Similarly to the case of external calls using `call_contract_syscall` system call, it is possible to borrow code from another class hash using the low level system call `library_call_syscall`. This syscall is an equivalent of the functionality provided by `delegatecall` opcode in Solidity smart contracts.
+## Calling Classes using Low-Level Calls
 
-Listing {{#ref library_syscall}} shows an example demonstrating how to use a `library_call_syscall` to call the `set_value` function of `ContractA` contract:
+Another way to call classes is to directly use `library_call_syscall`. While less convenient than using the dispatcher pattern, this syscall provides more control over the serialization and deserialization process and allows for more customized error handling.
+
+Listing {{#ref library_syscall}} shows an example demonstrating how to use a `library_call_syscall` to call the `set_value` function of `ValueStore` contract:
 
 ```rust,noplayground
 {{#include ../listings/ch15-starknet-cross-contract-interactions/listing_07_library_syscall/src/lib.cairo}}
@@ -58,15 +58,16 @@ Listing {{#ref library_syscall}} shows an example demonstrating how to use a `li
 {{#label library_syscall}}
 <span class="caption">Listing {{#ref library_syscall}}: A sample contract using `library_call_syscall` system call</span>
 
-To use `library_call_syscall` syscall, we passed in the contract class hash, the selector of the function we want to execute, and the serialized call arguments.
+To use this syscall, we passed in the class hash, the selector of the function we want to call and the call arguments.
+The call arguments must be provided as an array of arguments, serialized to a `Span<felt252>`. To serialize the arguments, we can simply use the `Serde` trait, provided that the types being serialized implement this trait. The call returns an array of serialized values, which we'll need to deserialize ourselves!
 
 ## Summary
 
-Congratulations for finishing this chapter! You have learned many new concepts:
+Congratulations for finishing this chapter! You have learned a lot of new concepts:
 
-- Contract endpoints, allowing to execute some of the code of any contract.
-- Contract ABI, summarizing in a JSON file all entrypoints of a contract, as well as any other additional needed data.
-- Contract Dispatcher and Library Dispatcher, which are structs that implement the `DispatcherTrait`, allowing to either call another contract using the `DispatcherImpl` or borrow code from another contract class using the `LibraryDispatcherImpl`.
-- Low level `call_contract_syscall`, `library_call_syscall`, used under the hood by the `DispatcherImpl` and the `LibraryDispatcherImpl`, but manipulable by anyone who wants to use them directly.
+- How _Contracts_ differ from _Classes_ and how the ABI describes them for external sources.
+- How to call functions from other contracts and classes using the _Dispatcher_ pattern.
+- How to use _Library calls_ to execute the logic of another class in the context of the caller.
+- The two syscalls that Starknet provides to interact with contracts and classes:
 
-You should now have all the required tools to know how to interact with a deployed contract, and how to craft a contract that interacts with others or borrows the code form other classes.
+You now have all the required tools to develop complex applications with logic spread across multiple contracts and classes. In the next chapter, we will explore more advanced topics that will help you unleash the full potential of Starknet.
