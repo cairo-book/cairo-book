@@ -15,9 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Scarb
-        uses: software-mansion/setup-scarb@v1
+        with:
+          fetch-depth: 0
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
@@ -42,12 +41,9 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: markdown-output.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./markdown-output.zip
-          asset_name: markdown-output.zip
-          asset_content_type: application/zip
