@@ -3,10 +3,7 @@ use starknet::ContractAddress;
 #[starknet::interface]
 trait ITokenWrapper<TContractState> {
     fn transfer_token(
-        ref self: TContractState,
-        address: ContractAddress,
-        recipient: ContractAddress,
-        amount: u256
+        ref self: TContractState, address: ContractAddress, recipient: ContractAddress, amount: u256
     ) -> bool;
 }
 
