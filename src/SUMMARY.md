@@ -126,7 +126,7 @@
 
   - [Contract Class ABI](./ch15-01-contract-class-abi.md)
   - [Interacting with Another Contract](./ch15-02-interacting-with-another-contract.md)
-  - [Executing Code from Another Class](./ch15-03-borrowing-code-from-another-contract-class.md)
+  - [Executing Code from Another Class](./ch15-03-executing-code-from-another-class.md)
 
 ## Building Advanced Starknet Smart Contracts
 

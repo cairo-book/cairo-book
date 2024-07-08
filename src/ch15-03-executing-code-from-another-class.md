@@ -1,17 +1,16 @@
 # Executing Code from Another Class
 
-Up until now, we presented how to call external _contracts_ to execute their logic and update their state. But what if one wants to simply execute some code from another class, without updating the state of another contract?
-Starknet makes this possible with _library calls_, which allow a contract to execute the logic of another class in its own context, updating its own state.
+In previous chapters, we explored how to call external _contracts_ to execute their logic and update their state. But what if we want to execute code from another class without updating the state of another contract? Starknet makes this possible with _library calls_, which allow a contract to execute the logic of another class in its own context, updating its own state.
 
 ## Library calls
 
-The key difference between the _contract calls_ and _library calls_ lies in the execution context of the logic defined in the class. While contract calls are used to call functions from deployed **contracts**, library calls are used to call stateless **classes** in the context of the caller.
+The key differences between _contract calls_ and _library calls_ lie in the execution context of the logic defined in the class. While contract calls are used to call functions from deployed **contracts**, library calls are used to call stateless **classes** in the context of the caller.
 
 To illustrate this, let's consider two contracts _A_ and _B_.
 
 When A performs a _contract call_ to the **contract** B, the execution context of the logic defined in B is that of B. As such, the value returned by `get_caller_address()` in B will return the address of A, `get_contract_address()` in B will return the address of B, and any storage updates in B will update the storage of B.
 
-However, when A uses a _library call_ to call the **class** of B, the execution context of the logic defined in B is that of A. This means that the value returned by `get_caller_address()` variable in B will be the address of the caller of A, `get_contract_address()` in B's class will return the address of A, and updating a storage variable in B's class will update the storage of A.
+However, when A uses a _library call_ to call the **class** of B, the execution context of the logic defined in B is that of A. This means that the value returned by `get_caller_address()` in B will be the address of the caller of A, `get_contract_address()` in B's class will return the address of A, and updating a storage variable in B's class will update the storage of A.
 
 Library calls can be performed using the dispatcher pattern presented in the previous chapter, only with a class hash instead of a contract address.
 
@@ -26,7 +25,7 @@ Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and it
 
 One notable difference with the contract dispatcher is that the library dispatcher uses `library_call_syscall` instead of `call_contract_syscall`. Otherwise, the process is similar.
 
-Let's see illustrate how to use library calls to execute the logic of another class in the context of the current contract.
+Let's see how to use library calls to execute the logic of another class in the context of the current contract.
 
 ## Using the Library Dispatcher
 
