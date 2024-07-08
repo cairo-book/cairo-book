@@ -71,7 +71,7 @@ The `function_call` libfunc is called on line 0 to execute the `not_inlined` fun
 10	store_temp<felt252>([0]) -> ([0])
 ```
 
-This code uses a single data type, `felt252`. It uses two library functions - `felt_const<2>`, which returns the constant `felt252` 2, and `store_temp<felt252>`, which pushes a constant value to memory. The first line calls the `felt_const<2>` libfunc to create a variable with id `0`. Then, the second line pushes this variable to memory for later use.
+This code uses a single data type, `felt252`. It uses two library functions - `felt252_const<2>`, which returns the constant `felt252` 2, and `store_temp<felt252>`, which pushes a constant value to memory. The first line calls the `felt_const<2>` libfunc to create a variable with id `0`. Then, the second line pushes this variable to memory for later use.
 
 After that, Sierra statements from line 1 to 2 are the actual body of the `inlined` function:
 
