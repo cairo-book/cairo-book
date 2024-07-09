@@ -39,4 +39,4 @@ While this process is often abstracted by libraries and when using dispatchers, 
 
 ## Encoding
 
-Smart contracts are written in a high-level languages like Cairo, using strong types to inform us about the data manipulated. However, the code executed on the blockchain is compiled into a sequence of low-level CASM instructions. The base data type in Starknet is `felt252`, and that's the only data manipulated at the CASM level. As such, all data must be serialized into `felt252` before being sent to the contract. The ABI specifies how types can be encoded into a sequence of `felt252`, and decoded back into their original form.
+Smart contracts are written in a high-level language like Cairo, using strong types to inform us about the data manipulated. However, the code executed on the blockchain is compiled into a sequence of low-level CASM instructions. The base data type in Starknet is `felt252`, and that's the only data manipulated at the CASM level. As such, all data must be serialized into `felt252` before being sent to the contract. The ABI specifies how types can be encoded into a sequence of `felt252`, and decoded back into their original form.
