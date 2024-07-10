@@ -1,5 +1,5 @@
 fn main() {
-    let mut a: Array<felt252> = ArrayTrait::new();
+    let mut a = ArrayTrait::new();
     a.append(0);
     a.append(1);
 
