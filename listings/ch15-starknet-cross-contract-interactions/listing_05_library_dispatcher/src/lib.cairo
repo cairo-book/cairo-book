@@ -1,17 +1,12 @@
-//ANCHOR: here
-use starknet::ContractAddress;
-
 #[starknet::interface]
-trait IContractA<TContractState> {
+trait IValueStore<TContractState> {
     fn set_value(ref self: TContractState, value: u128);
-
     fn get_value(self: @TContractState) -> u128;
 }
 
 #[starknet::contract]
-mod ContractA {
-    use super::{IContractADispatcherTrait, IContractALibraryDispatcher};
-    use starknet::{ContractAddress, class_hash::class_hash_const};
+mod ValueStoreLogic {
+    use starknet::{ContractAddress};
 
     #[storage]
     struct Storage {
@@ -19,10 +14,9 @@ mod ContractA {
     }
 
     #[abi(embed_v0)]
-    impl ContractA of super::IContractA<ContractState> {
+    impl ValueStore of super::IValueStore<ContractState> {
         fn set_value(ref self: ContractState, value: u128) {
-            IContractALibraryDispatcher { class_hash: class_hash_const::<0x1234>() }
-                .set_value(value)
+            self.value.write(value);
         }
 
         fn get_value(self: @ContractState) -> u128 {
@@ -30,6 +24,37 @@ mod ContractA {
         }
     }
 }
-//ANCHOR_END: here
 
+#[starknet::contract]
+mod ValueStoreExecutor {
+    use super::{IValueStoreDispatcherTrait, IValueStoreLibraryDispatcher};
+    use starknet::{ContractAddress, ClassHash};
 
+    #[storage]
+    struct Storage {
+        logic_library: ClassHash,
+        value: u128
+    }
+
+    #[constructor]
+    fn constructor(ref self: ContractState, logic_library: ClassHash) {
+        self.logic_library.write(logic_library);
+    }
+
+    #[abi(embed_v0)]
+    impl ValueStoreExecutor of super::IValueStore<ContractState> {
+        fn set_value(ref self: ContractState, value: u128) {
+            IValueStoreLibraryDispatcher { class_hash: self.logic_library.read() }
+                .set_value((value));
+        }
+
+        fn get_value(self: @ContractState) -> u128 {
+            IValueStoreLibraryDispatcher { class_hash: self.logic_library.read() }.get_value()
+        }
+    }
+
+    #[external(v0)]
+    fn get_value_local(self: @ContractState) -> u128 {
+        self.value.read()
+    }
+}
