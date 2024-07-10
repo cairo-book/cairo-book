@@ -15,7 +15,7 @@ Let's consider the following contract for the whole chapter. It might not be eas
 
 Contracts are defined by encapsulating state and logic within a module annotated with the `#[starknet::contract]` attribute.
 
-The state is defined within the `Storage` struct, and is always initialized empty. Here, our struct contains a single a field called `stored_data` of type `u128` (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \\( {2^{128}} - 1 \\).
+The state is defined within the `Storage` struct, and is always initialized empty. Here, our struct contains a single field called `stored_data` of type `u128` (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \\( {2^{128}} - 1 \\).
 
 The logic is defined by functions that interact with the state. Here, our contract defines and publicly exposes the functions `set` and `get` that can be used to modify or retrieve the value of the stored variable.
 You can think of it as a single slot in a database that you can query and modify by calling functions of the code that manages the database.
