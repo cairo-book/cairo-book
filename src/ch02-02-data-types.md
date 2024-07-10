@@ -195,8 +195,6 @@ Its size is always zero, and it is guaranteed to not exist in the compiled code.
 
 You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns `()` implicitly.
 
-{{#quiz ../quizzes/ch02-02-data-types.toml}}
-
 ## Type Conversion
 
 Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for [custom types as well][custom-type-conversion].
@@ -224,3 +222,5 @@ Also similar to `Into` is the process to perform the conversion; just call `var.
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_39_tryinto/src/lib.cairo}}
 ```
+
+{{#quiz ../quizzes/ch02-02-data-types.toml}}
