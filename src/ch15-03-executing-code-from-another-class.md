@@ -64,9 +64,9 @@ The call arguments must be provided as an array of arguments, serialized to a `S
 
 Congratulations for finishing this chapter! You have learned a lot of new concepts:
 
-- How _Contracts_ differ from _Classes_ and how the ABI describes them for external sources.
-- How to call functions from other contracts and classes using the _Dispatcher_ pattern.
-- How to use _Library calls_ to execute the logic of another class in the context of the caller.
-- The two syscalls that Starknet provides to interact with contracts and classes.
+- How _Contracts_ differ from _Classes_ and how the ABI describes them for external sources
+- How to call functions from other contracts and classes using the _Dispatcher_ pattern
+- How to use _Library calls_ to execute the logic of another class in the context of the caller
+- The two syscalls that Starknet provides to interact with contracts and classes
 
 You now have all the required tools to develop complex applications with logic spread across multiple contracts and classes. In the next chapter, we will explore more advanced topics that will help you unleash the full potential of Starknet.
