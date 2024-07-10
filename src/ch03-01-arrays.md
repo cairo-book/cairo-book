@@ -76,7 +76,7 @@ In this example, the variable named `first` will get the value `0` because that
 is the value at index `0` in the array. The variable named `second` will get
 the value `1` from index `1` in the array.
 
-If you want to use the subscripting operator `arr[index]`, you will need to explicitly define the type of the elements of the array, otherwise it will not compile. For example:
+Here's an example with the subscripting operator `arr[index]`:
 
 ```rust
 {{#include ../listings/ch03-common-collections/no_listing_05_array_at_2/src/lib.cairo}}
