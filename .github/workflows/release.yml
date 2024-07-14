@@ -2,6 +2,8 @@ name: Build and Release mdbook
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 on:
   push:
