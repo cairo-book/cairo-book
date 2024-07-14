@@ -2,6 +2,8 @@ name: Build and Release mdbook
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 on:
   push:
@@ -15,8 +17,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+
+      - name: Setup Scarb
+        uses: software-mansion/setup-scarb@v1
+
+      - name: Setup Scarb
+        uses: software-mansion/setup-scarb@v1
+
+      - name: Setup Starknet-Foundry
+        uses: foundry-rs/setup-snfoundry@v3
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
@@ -30,23 +39,9 @@ jobs:
       - name: Create ZIP file
         run: zip -r markdown-output.zip book/markdown
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: markdown-output.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./markdown-output.zip
-          asset_name: markdown-output.zip
-          asset_content_type: application/zip
