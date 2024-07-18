@@ -195,6 +195,64 @@ Its size is always zero, and it is guaranteed to not exist in the compiled code.
 
 You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns `()` implicitly.
 
+### The Fixed Size Array Type []
+
+Another way to have a collection of multiple values is with an array. Unlike a tuple, every element of an array must have the same type.
+This type of array is similar to Rust's because it has a fixed size. If you want to create an array without a fixed size you should check the Array<T> Type [here][arrays].
+
+[arrays]: ./ch03-01-arrays.md
+
+We write the values in an array as a comma-separated list inside square brackets and we write the array’s type using square brackets with the type of each element, a semicolon, and then the number of elements in the array:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_40_fixed_size_arr_type/src/lib.cairo}}
+```
+
+We have an array of `5` `u64` integers!
+
+Here are examples of creating fixed size arrays:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_41_fixed_size_arr_months/src/lib.cairo}}
+```
+
+#### Accessing Arrays Elements
+
+We have two ways of accessing array elements which are deconstructing the array or using the [Span][span] Type that is a snapshot of the array and supports indexing (the first element has the index 0).
+Here is how to do:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_42_fixed_size_arr_accessing_elements/src/lib.cairo}}
+```
+
+Note that if we plan to repeatedly access the array, then it makes sense to call `.span()` once and keep it available throughout the accesses.
+
+[span]: ./ch03-01-arrays.md#Span
+
+#### Const arrays
+
+We can also use the keyword `const` (["Constants"][consts]) when declaring the array.
+If we were to pass this `const` array to another function, it would be copied to create a new array in the memory segment of this function.
+To avoid this heavy operation, we have to put the `const` array in a `Box<>` to create its own memory segment and then pass the pointer to this segment between functions.
+
+[consts]: ./ch02-01-variables-and-mutability.md#Constants
+
+Let's suppose we have a module called `arrays_utils` with a `fn handling_array (arr: Box<[u64; 5]>)` function :
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_43_fixed_size_arr_const/src/arrays_utils.cairo}}
+```
+
+<span class="filename">Filename: src/arrays_utils.cairo</span>
+
+Then in _src/lib.cairo_ we declare a `const` array and we can call `handling_array` on this array without copying it:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_43_fixed_size_arr_const/src/lib.cairo}}
+```
+
+<span class="filename">Filename: src/lib.cairo</span>
+
 ## Type Conversion
 
 Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for [custom types as well][custom-type-conversion].
