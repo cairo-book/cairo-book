@@ -88,7 +88,7 @@ When using `loop`, there are some ownership issues that you might come across.
 
 This code will output `Failed to infer` error due to the variable `x` being out of scope. 
 
-The issue arises from Cairo's unique ownership states that once a variable goes out of scope, it is destroyed. (see [Ownership][ownership]) Therefore, the variable that you are trying to manipulate inside `loop` must be declared outside of the `loop` block. 
+The issue arises from Cairo's unique ownership which states that once a variable goes out of scope, it is destroyed. (see [Ownership][ownership]) Therefore, the variable that you are trying to manipulate inside `loop` must be declared outside of the `loop` block. 
 
 [ownership]: ./ch04-01-what-is-ownership.md
 
