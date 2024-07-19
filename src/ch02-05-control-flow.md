@@ -110,7 +110,7 @@ As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
 {{#include ../listings/ch02-common-programming-concepts/no_listing_32_infinite_loop/src/lib.cairo}}
 ```
 
-When we run this program, we’ll see `again!` printed over and over continuously until either the program runs out of gas or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
+When we run this program, we’ll see `again!` printed over and over continuously until either the program runs out of memory or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
 
 ```shell
 $ scarb cairo-run --available-gas=20000000
