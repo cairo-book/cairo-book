@@ -38,6 +38,9 @@ jobs:
       - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
         uses: asdf-vm/actions/install@v3
 
+      - name: Set default scarb version # First version in .tool-versions
+        run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
+
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
