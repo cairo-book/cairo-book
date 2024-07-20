@@ -13,8 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Scarb
-        uses: software-mansion/setup-scarb@v1
+      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
+        uses: asdf-vm/actions/install@v3
 
       - name: Setup Starknet-Foundry
         uses: foundry-rs/setup-snfoundry@v3

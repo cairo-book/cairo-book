@@ -35,8 +35,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Scarb
-        uses: software-mansion/setup-scarb@v1
+      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
+        uses: asdf-vm/actions/install@v3
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
