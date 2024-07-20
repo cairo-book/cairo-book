@@ -20,16 +20,16 @@ mod SimpleStorage {
         fn set(ref self: ContractState, x: u128) {
             //ANCHOR: write_state
             self.stored_data.write(x);
-        //ANCHOR_END: write_state
+            //ANCHOR_END: write_state
         }
 
         fn get(self: @ContractState) -> u128 {
             //ANCHOR: read_state
             self.stored_data.read()
-        //ANCHOR_END: read_state
+            //ANCHOR_END: read_state
         }
     }
-//ANCHOR_END: impl
+    //ANCHOR_END: impl
 }
 //ANCHOR_END: all
 

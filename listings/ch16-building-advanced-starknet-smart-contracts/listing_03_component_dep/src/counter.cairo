@@ -52,9 +52,9 @@ mod OwnableCounterComponent {
             let mut ownable_comp = get_dep_component_mut!(ref self, Owner);
             ownable_comp._transfer_ownership(new_owner);
         }
-    //ANCHOR_END: transfer_ownership
+        //ANCHOR_END: transfer_ownership
     }
-//ANCHOR_END: component_impl
+    //ANCHOR_END: component_impl
 }
 //ANCHOR_END: component
 //ANCHOR_END: full

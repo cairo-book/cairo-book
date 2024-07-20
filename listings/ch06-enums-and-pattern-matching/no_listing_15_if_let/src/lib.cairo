@@ -4,6 +4,6 @@ fn main() {
     if let Option::Some(max) = number {
         println!("The maximum is configured to be {}", max);
     }
-// ANCHOR_END: here
+    // ANCHOR_END: here
 }
 
