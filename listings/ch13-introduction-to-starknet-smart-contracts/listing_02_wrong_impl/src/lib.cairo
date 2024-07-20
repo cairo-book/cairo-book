@@ -26,7 +26,7 @@ mod SimpleStorage {
             self.stored_data.read()
         }
     }
-//ANCHOR_END: impl
+    //ANCHOR_END: impl
 }
 //ANCHOR_END: all
 

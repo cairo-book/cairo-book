@@ -33,7 +33,7 @@ mod aggregator {
             format!("{}: {}", self.username, self.content)
         }
     }
-//ANCHOR_END: impl
+    //ANCHOR_END: impl
 }
 
 //ANCHOR: main

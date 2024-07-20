@@ -28,7 +28,7 @@ fn main() {
     // ANCHOR: main
     let msg: Message = Message::Quit;
     msg.process(); // prints "quitting"
-// ANCHOR_END: main
+    // ANCHOR_END: main
 }
 //ANCHOR_END: all
 

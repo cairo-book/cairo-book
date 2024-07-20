@@ -5,5 +5,5 @@ fn main() {
         Option::Some(max) => println!("The maximum is configured to be {}", max),
         _ => (),
     }
-// ANCHOR_END: match
+    // ANCHOR_END: match
 }
