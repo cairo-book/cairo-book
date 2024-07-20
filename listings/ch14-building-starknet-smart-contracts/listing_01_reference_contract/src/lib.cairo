@@ -63,7 +63,7 @@ mod NameRegistry {
         self.total_names.write(1);
         //ANCHOR: write_owner
         self.owner.write(owner);
-    //ANCHOR_END: write_owner
+        //ANCHOR_END: write_owner
     }
     //ANCHOR_END: constructor
 
@@ -82,14 +82,14 @@ mod NameRegistry {
         fn get_name(self: @ContractState, address: ContractAddress) -> felt252 {
             //ANCHOR: read
             self.names.read(address)
-        //ANCHOR_END: read
+            //ANCHOR_END: read
         }
 
         //ANCHOR_END: view
         fn get_owner(self: @ContractState) -> Person {
             //ANCHOR: read_owner
             self.owner.read()
-        //ANCHOR_END: read_owner
+            //ANCHOR_END: read_owner
         }
     }
     //ANCHOR_END: impl_public
@@ -121,7 +121,7 @@ mod NameRegistry {
             self.total_names.write(total_names + 1);
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
-        //ANCHOR_END: emit_event
+            //ANCHOR_END: emit_event
         }
     }
     // ANCHOR_END: generate_trait
@@ -130,9 +130,9 @@ mod NameRegistry {
     fn get_owner_storage_address(self: @ContractState) -> StorageBaseAddress {
         //ANCHOR: owner_address
         self.owner.address()
-    //ANCHOR_END: owner_address
+        //ANCHOR_END: owner_address
     }
-// ANCHOR_END: state_internal
+    // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
 

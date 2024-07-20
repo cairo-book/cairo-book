@@ -18,6 +18,6 @@ const BOOL_FIXED_SIZE_ARRAY: [bool; 2] = [true, false];
 mod consteval {
     // ANCHOR: consteval_const
     const ONE_HOUR_IN_SECONDS: u32 = consteval_int!(60 * 60);
-// ANCHOR_END: consteval_const
+    // ANCHOR_END: consteval_const
 }
 

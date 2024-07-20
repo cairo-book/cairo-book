@@ -14,5 +14,5 @@ fn main() {
         Coin::Quarter => println!("You got a quarter!"),
         _ => count += 1,
     }
-// ANCHOR_END: here
+    // ANCHOR_END: here
 }

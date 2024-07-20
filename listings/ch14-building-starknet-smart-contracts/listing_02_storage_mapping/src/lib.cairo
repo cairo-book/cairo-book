@@ -6,5 +6,5 @@ mod contract {
     struct Storage {
         allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>
     }
-//ANCHOR_END: here
+    //ANCHOR_END: here
 }
