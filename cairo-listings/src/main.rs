@@ -1,11 +1,13 @@
 use clap::Parser;
 use colored::Colorize;
-use indicatif::ProgressBar;
+use indicatif::{ProgressBar, ProgressStyle};
 use log::error;
+use rayon::prelude::*;
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::sync::Mutex;
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 
 #[macro_use]
 extern crate lazy_static;
@@ -38,25 +40,42 @@ fn main() {
     let empty_arg = VerifyArgs::default();
 
     match &cfg.command {
-        Commands::Verify(args) => run_verification(cfg_clone, &args),
+        Commands::Verify(args) => run_verification(cfg_clone, args),
         Commands::Output => output::process_outputs(cfg_clone, &empty_arg),
     }
 }
 
 fn run_verification(cfg: &Config, args: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(&cfg, &args);
+    let scarb_packages = find_scarb_manifests(cfg, args);
 
-    let pb = ProgressBar::new(scarb_packages.len() as u64);
-    logger::setup(&args, pb.clone());
+    let total_packages = scarb_packages.len();
+    let pb = Arc::new(ProgressBar::new(total_packages as u64));
+    pb.set_style(
+        ProgressStyle::default_bar()
+            .template("[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7} {msg}")
+            .unwrap()
+            .progress_chars("##-"),
+    );
 
-    for file in scarb_packages {
-        process_file(&file, &args);
+    let processed_count = Arc::new(AtomicUsize::new(0));
+
+    logger::setup(args, Arc::clone(&pb));
+
+    let args = Arc::new(args);
+
+    scarb_packages.par_iter().for_each(|file| {
+        let args = Arc::clone(&args);
+        process_file(file, &args);
+
         if !args.quiet {
-            pb.inc(1);
-        }
-    }
+            let current = processed_count.fetch_add(1, Ordering::SeqCst) + 1;
+            pb.set_position(current as u64);
 
-    pb.finish_and_clear();
+            if current == total_packages {
+                pb.finish_with_message("Verification complete");
+            }
+        }
+    });
 
     let errors = ERRORS.lock().unwrap();
     let total_errors = errors.compile_errors.len()
