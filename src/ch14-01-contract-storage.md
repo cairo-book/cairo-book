@@ -43,7 +43,10 @@ To read the value of the `owner` storage variable, which is a single value, we c
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner}}
 ```
 
-To read the value of the storage variable names, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the entry obtained from `self.names.entry(address)`. The `entry` function is defined in the `StoragePathEntry` trait and returns a `StoragePath<Self::Value>`, which allows us to access the value associated with the specified key `address`. If the mapping had more than one key, we would similarly obtain entries for each key and call `read` on them as needed.
+To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we first need to retrieve the entry path for the specific key in the mapping. We do this by calling the `entry` method on the `names` variable, passing in the `address` as a parameter. This gives us access to the specific entry in the mapping. 
+Once we have the entry path, we can call the `read` function on it to retrieve the stored value. 
+
+If the mapping had more than one key, we would chain multiple `entry` calls before the final `read`, passing in each key as a parameter.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read}}
@@ -55,7 +58,9 @@ To write a new value to the storage slot of a storage variable, we call the `wri
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:write_owner}}
 ```
 
-In this second example, we need to pass `user` and `name` as arguments because `names` is a mapping, with `user` as the key and `name` as the value. To write the value, we call the `write` function on the entry obtained from `self.names.entry(user)`.
+In this second example, we are working with the `names` mapping, where `user` serves as the key and `name` as the value. First, we need to retrieve the storage entry path corresponding to the `user` key, just as we did when reading the value. Once we have this entry path, we can call the `write` function on it, passing `name` as the value to be stored.
+
+If the mapping had more than one key, we would chain multiple `entry` calls with respective keys before the final `write`, passing in value as a parameter.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:write}}
