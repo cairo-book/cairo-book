@@ -11,5 +11,5 @@ mod tests {
     fn it_adds_two() {
         assert_eq!(4, add_two(2), "Expected {}, got add_two(2)={}", 4, add_two(2));
     }
-// ANCHOR_END: here
+    // ANCHOR_END: here
 }

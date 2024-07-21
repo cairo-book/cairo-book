@@ -46,10 +46,10 @@ mod NameRegistry {
             self.total_names.write(total_names + 1);
             //ANCHOR: emit_event
             self.emit(Event::StoredName(StoredName { user: user, name: name }));
-        //ANCHOR_END: emit_event
+            //ANCHOR_END: emit_event
         }
     }
-// ANCHOR_END: state_internal
+    // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
 

@@ -12,7 +12,12 @@ pub trait INameRegistry<TContractState> {
 
 #[starknet::contract]
 mod NameRegistry {
-    use starknet::{ContractAddress, get_caller_address, storage_access::StorageBaseAddress};
+    use core::starknet::storage::StorageAsPointer;
+    use core::starknet::storage::StorageAsPath;
+    use core::starknet::storage::StoragePointerReadAccess;
+    use core::starknet::storage::StoragePointerWriteAccess;
+    use starknet::{ContractAddress, get_caller_address, storage_access};
+    use starknet::storage::{StoragePathEntry};
 
     //ANCHOR: storage
     #[storage]
@@ -59,11 +64,11 @@ mod NameRegistry {
     //ANCHOR: constructor
     #[constructor]
     fn constructor(ref self: ContractState, owner: Person) {
-        self.names.write(owner.address, owner.name);
+        self.names.entry(owner.address).write(owner.name);
         self.total_names.write(1);
         //ANCHOR: write_owner
         self.owner.write(owner);
-    //ANCHOR_END: write_owner
+        //ANCHOR_END: write_owner
     }
     //ANCHOR_END: constructor
 
@@ -81,15 +86,15 @@ mod NameRegistry {
         //ANCHOR: view
         fn get_name(self: @ContractState, address: ContractAddress) -> felt252 {
             //ANCHOR: read
-            self.names.read(address)
-        //ANCHOR_END: read
+            self.names.entry(address).read()
+            //ANCHOR_END: read
         }
 
         //ANCHOR_END: view
         fn get_owner(self: @ContractState) -> Person {
             //ANCHOR: read_owner
             self.owner.read()
-        //ANCHOR_END: read_owner
+            //ANCHOR_END: read_owner
         }
     }
     //ANCHOR_END: impl_public
@@ -115,24 +120,24 @@ mod NameRegistry {
         ) {
             let total_names = self.total_names.read();
             //ANCHOR: write
-            self.names.write(user, name);
+            self.names.entry(user).write(name);
             //ANCHOR_END: write
-            self.registration_type.write(user, registration_type);
+            self.registration_type.entry(user).write(registration_type);
             self.total_names.write(total_names + 1);
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
-        //ANCHOR_END: emit_event
+            //ANCHOR_END: emit_event
         }
     }
     // ANCHOR_END: generate_trait
 
     // Free function
-    fn get_owner_storage_address(self: @ContractState) -> StorageBaseAddress {
+    fn get_owner_storage_address(self: @ContractState) -> felt252 {
         //ANCHOR: owner_address
-        self.owner.address()
-    //ANCHOR_END: owner_address
+        self.owner.address
+        //ANCHOR_END: owner_address
     }
-// ANCHOR_END: state_internal
+    // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
 

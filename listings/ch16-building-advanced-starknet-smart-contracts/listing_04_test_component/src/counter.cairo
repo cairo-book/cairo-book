@@ -28,7 +28,7 @@ pub mod CounterComponent {
         fn increment(ref self: ComponentState<TContractState>) {
             self.value.write(self.value.read() + 1);
         }
-    //ANCHOR_END: increment
+        //ANCHOR_END: increment
     }
 }
 //ANCHOR_END: component

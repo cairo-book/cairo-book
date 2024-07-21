@@ -13,5 +13,5 @@ fn main() {
     balances.insert('Maria', 50_u64);
     balances.insert('Alex', 200_u64);
     balances.get('Maria');
-// ANCHOR_END: inserts
+    // ANCHOR_END: inserts
 }

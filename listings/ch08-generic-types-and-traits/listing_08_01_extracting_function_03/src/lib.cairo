@@ -1,12 +1,11 @@
 fn largest(ref number_list: Array<u8>) -> u8 {
     let mut largest = number_list.pop_front().unwrap();
 
-    while let Option::Some(number) = number_list
-        .pop_front() {
-            if number > largest {
-                largest = number;
-            }
-        };
+    while let Option::Some(number) = number_list.pop_front() {
+        if number > largest {
+            largest = number;
+        }
+    };
 
     largest
 }

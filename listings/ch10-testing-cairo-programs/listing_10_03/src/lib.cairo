@@ -44,6 +44,6 @@ mod tests2 {
 
         assert!(!smaller.can_hold(@larger), "rectangle cannot hold");
     }
-// ANCHOR_END: test2
+    // ANCHOR_END: test2
 }
 

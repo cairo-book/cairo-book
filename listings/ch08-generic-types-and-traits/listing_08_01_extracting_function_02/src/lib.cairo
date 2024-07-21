@@ -3,12 +3,11 @@ fn main() {
 
     let mut largest = number_list.pop_front().unwrap();
 
-    while let Option::Some(number) = number_list
-        .pop_front() {
-            if number > largest {
-                largest = number;
-            }
-        };
+    while let Option::Some(number) = number_list.pop_front() {
+        if number > largest {
+            largest = number;
+        }
+    };
 
     println!("The largest number is {}", largest);
 
@@ -16,12 +15,11 @@ fn main() {
 
     let mut largest = number_list.pop_front().unwrap();
 
-    while let Option::Some(number) = number_list
-        .pop_front() {
-            if number > largest {
-                largest = number;
-            }
-        };
+    while let Option::Some(number) = number_list.pop_front() {
+        if number > largest {
+            largest = number;
+        }
+    };
 
     println!("The largest number is {}", largest);
 }
