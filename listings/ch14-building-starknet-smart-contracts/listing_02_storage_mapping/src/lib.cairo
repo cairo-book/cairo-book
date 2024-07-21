@@ -4,7 +4,7 @@ mod contract {
     //ANCHOR: here
     #[storage]
     struct Storage {
-        allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>
+        allowances: Map<ContractAddress, Map<ContractAddress, u256>>,
     }
     //ANCHOR_END: here
 }

@@ -8,7 +8,7 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:storage}}
 ```
 
-The `Storage` struct is a [struct][structs chapter] like any other, except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. Moreover, this allows you to define storage mappings using the dedicated `LegacyMap` type.
+The `Storage` struct is a [struct][structs chapter] like any other, except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. Moreover, this allows you to define storage mappings using the dedicated `Map` type.
 
 Variables declared in the `Storage` struct are not stored contiguously but in different locations in the contract's storage. The storage address of a particular variable is determined by the variable's name, and the eventual keys of the variable if it is a mapping.
 
@@ -43,7 +43,7 @@ To read the value of the `owner` storage variable, which is a single value, we c
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner}}
 ```
 
-To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the `names` variable, passing in the key `address` as a parameter. If the mapping had more than one key, we would pass in the other keys as parameters as well.
+To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the `names` variable, passing in the key `address` as a parameter. If the mapping had more than one key, we would pass in the other keys as parameters as well ( we do it with the `nested_names` mapping).
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read}}
@@ -56,6 +56,7 @@ To write a new value to the storage slot of a storage variable, we call the `wri
 ```
 
 In this second example, we need to pass `user` and `name` as arguments, because `names` is a mapping, with `user` as key and `name` as value.
+If the mapping had more than one key, we would pass in the other keys as parameters as well ( we do it with the `nested_names` mapping).
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:write}}
@@ -133,6 +134,13 @@ and cannot be used as types inside structs.
 To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
+Please note: In the following lines, we will use the new mapings type `Map` over the old mappings type `LegacyMap` that is depreceated.
+
+Map is a new and more flexible type for maintaining mappings in a contract storage. With Map<K,V> we can:
+- Have nested Maps (rather than having a tuple type key with LegacyMap)
+- Have Map as a member of a struct (we will dive into this in the following storage_node section)
+Note that the storage layout of Map<K, V> is identical to that LegacyMap<K,V>, hence you can safely migrate to the new type.
+
 You can also create more complex mappings with multiple keys. You can find in Listing {{#ref storage-mapping}} the popular `allowances` storage variable of the ERC20 Standard which maps an `owner` and an allowed `spender` to their `allowance` amount using multiple keys passed inside a tuple:
 
 ```rust,noplayground
@@ -146,6 +154,6 @@ The address in storage of a variable stored in a mapping is computed according t
 
 If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have a struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` modulo \\( {2^{251}} - 256\\), where `k_1` and `k_2` are the values of the two fields of the struct.
 
-Similarly, in the case of a nested mapping using a tuple as key, such as `LegacyMap::<(ContractAddress, ContractAddress), u8>`, the address will be computed in the same way, with each element of the tuple being a key: `h(h(sn_keccak(variable_name),k_1),k_2)`.
+Similarly, in the case of a nested mapping using a tuple as key, such as `Map<ContractAddress, Map<ContractAddress, u256>>,`, the address will be computed in the same way, with each element of the tuple being a key: `h(h(sn_keccak(variable_name),k_1),k_2)`.
 
 [storage addresses]: ./ch14-01-contract-storage.html#addresses-of-storage-variables

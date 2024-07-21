@@ -22,9 +22,10 @@ mod NameRegistry {
     //ANCHOR: storage
     #[storage]
     struct Storage {
-        names: LegacyMap::<ContractAddress, felt252>,
+        names: Map::<ContractAddress, felt252>,
         owner: Person,
-        registration_type: LegacyMap::<ContractAddress, RegistrationType>,
+        registration_type: Map<ContractAddress, RegistrationType>,
+        nested_names: Map::<ContractAddress, Map<ContractAddress, felt252>>,
         total_names: u128,
     }
     //ANCHOR_END: storage
@@ -87,6 +88,7 @@ mod NameRegistry {
         fn get_name(self: @ContractState, address: ContractAddress) -> felt252 {
             //ANCHOR: read
             self.names.entry(address).read()
+            self.nested_names.entry(address).entry(address2).read()
             //ANCHOR_END: read
         }
 
@@ -121,6 +123,7 @@ mod NameRegistry {
             let total_names = self.total_names.read();
             //ANCHOR: write
             self.names.entry(user).write(name);
+            self.nested_names.entry(user).entry(user2).write(name);
             //ANCHOR_END: write
             self.registration_type.entry(user).write(registration_type);
             self.total_names.write(total_names + 1);
@@ -140,5 +143,3 @@ mod NameRegistry {
     // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
-
-
