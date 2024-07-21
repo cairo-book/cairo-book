@@ -24,7 +24,7 @@ The address of a storage variable is computed as follows:
   
 - If the variable is a [mapping][storage mappings] with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key. In the case of mappings to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated with the previous formula. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
-You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value.
+You can access the base address of a storage variable by calling the `address` attribute on the variable, which returns a `felt252` value.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:owner_address}}
@@ -43,7 +43,7 @@ To read the value of the `owner` storage variable, which is a single value, we c
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner}}
 ```
 
-To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the `names` variable, passing in the key `address` as a parameter. If the mapping had more than one key, we would pass in the other keys as parameters as well.
+To read the value of the storage variable names, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the entry obtained from `self.names.entry(address)`. The `entry` function is defined in the `StoragePathEntry` trait and returns a `StoragePath<Self::Value>`, which allows us to access the value associated with the specified key `address`. If the mapping had more than one key, we would similarly obtain entries for each key and call `read` on them as needed.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read}}
@@ -55,7 +55,7 @@ To write a new value to the storage slot of a storage variable, we call the `wri
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:write_owner}}
 ```
 
-In this second example, we need to pass `user` and `name` as arguments, because `names` is a mapping, with `user` as key and `name` as value.
+In this second example, we need to pass `user` and `name` as arguments because `names` is a mapping, with `user` as the key and `name` as the value. To write the value, we call the `write` function on the entry obtained from `self.names.entry(user)`.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:write}}
