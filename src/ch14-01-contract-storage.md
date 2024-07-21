@@ -8,7 +8,7 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:storage}}
 ```
 
-The `Storage` struct is a [struct][structs chapter] like any other, except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. Moreover, this allows you to define storage mappings using the dedicated `LegacyMap` type.
+The `Storage` struct is a [struct][structs chapter] like any other, except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. Moreover, this allows you to define storage mappings using the dedicated `Map` type.
 
 Variables declared in the `Storage` struct are not stored contiguously but in different locations in the contract's storage. The storage address of a particular variable is determined by the variable's name, and the eventual keys of the variable if it is a mapping.
 
@@ -21,7 +21,7 @@ The address of a storage variable is computed as follows:
 - If the variable is a single value, the address is the `sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.
 
 - If the variable is composed of multiple values (i.e., a tuple, a struct or an enum), we also use the `sn_keccak` hash of the ASCII encoding of the variable's name to determine the base address in storage. Then, depending on the type, the storage layout will differ. See the ["Storing Custom Types"][custom types storage layout] section.
-  
+
 - If the variable is a [mapping][storage mappings] with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key. In the case of mappings to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated with the previous formula. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
 You can access the base address of a storage variable by calling the `address` attribute on the variable, which returns a `felt252` value.
@@ -43,8 +43,8 @@ To read the value of the `owner` storage variable, which is a single value, we c
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner}}
 ```
 
-To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we first need to retrieve the entry path for the specific key in the mapping. We do this by calling the `entry` method on the `names` variable, passing in the `address` as a parameter. This gives us access to the specific entry in the mapping. 
-Once we have the entry path, we can call the `read` function on it to retrieve the stored value. 
+To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we first need to retrieve the entry path for the specific key in the mapping. We do this by calling the `entry` method on the `names` variable, passing in the `address` as a parameter. This gives us access to the specific entry in the mapping.
+Once we have the entry path, we can call the `read` function on it to retrieve the stored value.
 
 If the mapping had more than one key, we would chain multiple `entry` calls before the final `read`, passing in each key as a parameter.
 
@@ -112,7 +112,7 @@ For example, suppose we have the `RegistrationType` enum with the `finite` varia
 | Variant index (0 for finite)        | registration_type.address()     |
 | Associated limit date               | registration_type.address() + 1 |
 
-while the storage layout for the `infinite` would be as follows: 
+while the storage layout for the `infinite` would be as follows:
 
 | Element                             | Address                         |
 | ----------------------------------- | ------------------------------- |
@@ -138,6 +138,13 @@ and cannot be used as types inside structs.
 To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
+Please note: In the following lines, we will use the new mapings type `Map` over the old mappings type `LegacyMap` that is depreceated.
+
+Map is a new and more flexible type for maintaining mappings in a contract storage. With Map<K,V> we can:
+- Have nested Maps (rather than having a tuple type key with LegacyMap)
+- Have Map as a member of a struct (we will dive into this in the following storage_node section)
+Note that the storage layout of Map<K, V> is identical to that LegacyMap<K,V>, hence you can safely migrate to the new type.
+
 You can also create more complex mappings with multiple keys. You can find in Listing {{#ref storage-mapping}} the popular `allowances` storage variable of the ERC20 Standard which maps an `owner` and an allowed `spender` to their `allowance` amount using multiple keys passed inside a tuple:
 
 ```rust,noplayground
@@ -151,6 +158,6 @@ The address in storage of a variable stored in a mapping is computed according t
 
 If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have a struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` modulo \\( {2^{251}} - 256\\), where `k_1` and `k_2` are the values of the two fields of the struct.
 
-Similarly, in the case of a nested mapping using a tuple as key, such as `LegacyMap::<(ContractAddress, ContractAddress), u8>`, the address will be computed in the same way, with each element of the tuple being a key: `h(h(sn_keccak(variable_name),k_1),k_2)`.
+Similarly, in the case of a nested mapping using a tuple as key, such as `Map<ContractAddress, Map<ContractAddress, u256>>,`, the address will be computed in the same way, with each element of the tuple being a key: `h(h(sn_keccak(variable_name),k_1),k_2)`.
 
 [storage addresses]: ./ch14-01-contract-storage.html#addresses-of-storage-variables
