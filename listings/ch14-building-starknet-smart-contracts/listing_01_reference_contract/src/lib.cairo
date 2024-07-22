@@ -25,7 +25,6 @@ mod NameRegistry {
         names: Map::<ContractAddress, felt252>,
         owner: Person,
         registration_type: Map<ContractAddress, RegistrationType>,
-        nested_names: Map::<ContractAddress, Map<ContractAddress, felt252>>,
         total_names: u128,
     }
     //ANCHOR_END: storage

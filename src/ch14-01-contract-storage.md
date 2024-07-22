@@ -135,11 +135,6 @@ specifying the key and value types.
 
 Note: You might encounter `LegacyMap` in older code or documentation. This was the previous mapping type used in Cairo contracts, but it has been deprecated in favor of the more flexible `Map` type. If you come across `LegacyMap`, it's recommended to update it to `Map` that provides more control over storage, as they have identical storage layouts allowing for a safe migration.
 
-Map is a new and more flexible type for maintaining mappings in a contract storage. With Map<K,V> we can:
-- Have nested Maps (rather than having a tuple type key with LegacyMap)
-- Have Map as a member of a struct (we will dive into this in the following storage_node section)
-Note that the storage layout of Map<K, V> is identical to that LegacyMap<K,V>, hence you can safely migrate to the new type.
-
 You can also create more complex mappings with multiple keys. You can find in Listing {{#ref storage-mapping}} the popular `allowances` storage variable of the ERC20 Standard which maps an `owner` and an allowed `spender` to their `allowance` amount using multiple keys passed inside a tuple:
 
 ```rust,noplayground
@@ -153,6 +148,6 @@ The address in storage of a variable stored in a mapping is computed according t
 
 If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute. For example, if you have a struct with two fields, the address will be `h(h(sn_keccak(variable_name),k_1),k_2)` modulo \\( {2^{251}} - 256\\), where `k_1` and `k_2` are the values of the two fields of the struct.
 
-Similarly, in the case of a nested mapping using a tuple as key, such as `Map<ContractAddress, Map<ContractAddress, u256>>,`, the address will be computed in the same way, with each element of the tuple being a key: `h(h(sn_keccak(variable_name),k_1),k_2)`.
+Similarly, in the case of a nested mapping using a tuple as key, such as `Map<ContractAddress, Map<ContractAddress, u8>>,`, the address will be computed in the same way, with each element of the tuple being a key: `h(h(sn_keccak(variable_name),k_1),k_2)`.
 
 [storage addresses]: ./ch14-01-contract-storage.html#addresses-of-storage-variables
