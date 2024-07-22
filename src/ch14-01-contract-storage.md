@@ -56,7 +56,6 @@ To write a new value to the storage slot of a storage variable, we call the `wri
 ```
 
 In this second example, we need to pass `user` and `name` as arguments, because `names` is a mapping, with `user` as key and `name` as value.
-If the mapping had more than one key, we would pass in the other keys as parameters as well ( we do it with the `nested_names` mapping).
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:write}}
@@ -134,7 +133,7 @@ and cannot be used as types inside structs.
 To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
-Please note: In the following lines, we will use the new mapings type `Map` over the old mappings type `LegacyMap` that is depreceated.
+Note: You might encounter `LegacyMap` in older code or documentation. This was the previous mapping type used in Cairo contracts, but it has been deprecated in favor of the more flexible `Map` type. If you come across `LegacyMap`, it's recommended to update it to `Map` that provides more control over storage, as they have identical storage layouts allowing for a safe migration.
 
 Map is a new and more flexible type for maintaining mappings in a contract storage. With Map<K,V> we can:
 - Have nested Maps (rather than having a tuple type key with LegacyMap)

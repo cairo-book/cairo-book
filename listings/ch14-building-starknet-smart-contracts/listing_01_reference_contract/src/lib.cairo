@@ -123,7 +123,6 @@ mod NameRegistry {
             let total_names = self.total_names.read();
             //ANCHOR: write
             self.names.entry(user).write(name);
-            self.nested_names.entry(user).entry(user2).write(name);
             //ANCHOR_END: write
             self.registration_type.entry(user).write(registration_type);
             self.total_names.write(total_names + 1);
