@@ -21,7 +21,7 @@ The address of a storage variable is computed as follows:
 - If the variable is a single value, the address is the `sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.
 
 - If the variable is composed of multiple values (i.e., a tuple, a struct or an enum), we also use the `sn_keccak` hash of the ASCII encoding of the variable's name to determine the base address in storage. Then, depending on the type, the storage layout will differ. See the ["Storing Custom Types"][custom types storage layout] section.
-  
+
 - If the variable is a [mapping][storage mappings] with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key. In the case of mappings to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated with the previous formula. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
 You can access the address of a storage variable by calling the `address` function on the variable, which returns a `StorageBaseAddress` value.
@@ -43,7 +43,7 @@ To read the value of the `owner` storage variable, which is a single value, we c
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner}}
 ```
 
-To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the `names` variable, passing in the key `address` as a parameter. If the mapping had more than one key, we would pass in the other keys as parameters as well ( we do it with the `nested_names` mapping).
+To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we call the `read` function on the `names` variable, passing in the key `address` as a parameter. If the mapping had more than one key, we would pass in the other keys as parameters as well.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read}}
@@ -107,7 +107,7 @@ For example, suppose we have the `RegistrationType` enum with the `finite` varia
 | Variant index (0 for finite)        | registration_type.address()     |
 | Associated limit date               | registration_type.address() + 1 |
 
-while the storage layout for the `infinite` would be as follows: 
+while the storage layout for the `infinite` would be as follows:
 
 | Element                             | Address                         |
 | ----------------------------------- | ------------------------------- |

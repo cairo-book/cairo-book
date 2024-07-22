@@ -88,7 +88,6 @@ mod NameRegistry {
         fn get_name(self: @ContractState, address: ContractAddress) -> felt252 {
             //ANCHOR: read
             self.names.entry(address).read()
-            self.nested_names.entry(address).entry(address2).read()
             //ANCHOR_END: read
         }
 
