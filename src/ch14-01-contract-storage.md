@@ -138,7 +138,7 @@ and cannot be used as types inside structs.
 To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
-Please note: In the following lines, we will use the new mapings type `Map` over the old mappings type `LegacyMap` that is depreceated.
+Note: You might encounter `LegacyMap` in older code or documentation. This was the previous mapping type used in Cairo contracts, but it has been deprecated in favor of the more flexible `Map` type. If you come across `LegacyMap`, it's recommended to update it to `Map` that provides more control over storage, as they have identical storage layouts allowing for a safe migration.
 
 Map is a new and more flexible type for maintaining mappings in a contract storage. With Map<K,V> we can:
 - Have nested Maps (rather than having a tuple type key with LegacyMap)
