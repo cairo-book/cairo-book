@@ -1,5 +1,6 @@
 //ANCHOR: all
 use starknet::ContractAddress;
+use starknet::storage::{Map, StoragePathEntry};
 
 #[starknet::interface]
 pub trait INameRegistry<TContractState> {
