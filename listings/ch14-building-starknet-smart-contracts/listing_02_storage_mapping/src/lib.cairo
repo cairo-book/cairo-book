@@ -1,6 +1,7 @@
 #[starknet::contract]
 mod contract {
     use starknet::ContractAddress;
+    use starknet::storage::{Map, StoragePathEntry};
     //ANCHOR: here
     #[storage]
     struct Storage {
