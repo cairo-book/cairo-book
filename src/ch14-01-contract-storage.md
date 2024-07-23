@@ -107,16 +107,16 @@ When you store an enum variant, what you're essentially storing is the variant's
 If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
 For example, suppose we have the `RegistrationType` enum with the `finite` variant that carries an associated limit date, and the `infinite` variant without associated data. The storage layout for the `finite` variant would look like this:
 
-| Element                             | Address                         |
-| ----------------------------------- | ------------------------------- |
-| Variant index (0 for finite)        | registration_type.address()     |
-| Associated limit date               | registration_type.address() + 1 |
+| Element                      | Address                         |
+| ---------------------------- | ------------------------------- |
+| Variant index (0 for finite) | registration_type.address()     |
+| Associated limit date        | registration_type.address() + 1 |
 
 while the storage layout for the `infinite` would be as follows:
 
-| Element                             | Address                         |
-| ----------------------------------- | ------------------------------- |
-| Variant index (1 for infinite)      | registration_type.address()     |
+| Element                        | Address                     |
+| ------------------------------ | --------------------------- |
+| Variant index (1 for infinite) | registration_type.address() |
 
 ## Storage Mappings
 
