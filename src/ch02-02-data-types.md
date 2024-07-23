@@ -230,12 +230,15 @@ As fixed-size array is a data structure known at compile time, it is directly co
 We have two different ways of accessing fixed size array elements:
 
 - Deconstructing the array into multiple variables
-- Converting the array to a [Span][span], that supports indexing. However, converting the array
-
-Here is how to do:
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_42_fixed_size_arr_accessing_elements/src/lib.cairo}}
+```
+
+- Converting the array to a [Span][span], that supports indexing. However, converting the array
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_44_fixed_size_arr_accessing_elements_span/src/lib.cairo}}
 ```
 
 Note that if we plan to repeatedly access the array, then it makes sense to call `.span()` only once and keep it available throughout the accesses.
