@@ -10,5 +10,5 @@ fn main() {
 
     //ANCHOR: array_macro
     let arr = array![1, 2, 3, 4, 5];
-//ANCHOR_END: array_macro
+    //ANCHOR_END: array_macro
 }

@@ -32,7 +32,8 @@ mod Vote {
         registered_voter: LegacyMap::<ContractAddress, bool>,
     }
 
-    /// @dev Contract constructor initializing the contract with a list of registered voters and 0 vote count
+    /// @dev Contract constructor initializing the contract with a list of registered voters and 0
+    /// vote count
     #[constructor]
     fn constructor(
         ref self: ContractState,

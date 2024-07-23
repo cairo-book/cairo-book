@@ -7,3 +7,6 @@ edition = "2023_11"
 
 [dependencies]
 # foo = { path = "vendor/foo" }
+
+[dev-dependencies]
+cairo_test = "2.7.0-rc.3"

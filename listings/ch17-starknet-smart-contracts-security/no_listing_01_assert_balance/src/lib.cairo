@@ -20,7 +20,7 @@ mod contract {
 
             self.balance.write(current_balance - amount);
         }
-    //ANCHOR_END: withdraw
+        //ANCHOR_END: withdraw
 
     }
 }
