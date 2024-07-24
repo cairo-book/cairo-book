@@ -195,11 +195,57 @@ Its size is always zero, and it is guaranteed to not exist in the compiled code.
 
 You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns `()` implicitly.
 
+### The Fixed Size Array Type
+
+Another way to have a collection of multiple values is with a _fixed size array_. Unlike a tuple, every element of a fixed size array must have the same type.
+
+We write the values in a fixed-size array as a comma-separated list inside square brackets. The array’s type is written using square brackets with the type of each element, a semicolon, and then the number of elements in the array, like so:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_40_fixed_size_arr_type/src/lib.cairo}}
+```
+
+In the type annotation `[u64; 5]`, `u64` specifies the type of each element, while `5` after the semicolon defines the array's length. This syntax ensures that the array always contains exactly 5 elements of type `u64`.
+
+Fixed size arrays are useful when you want to hardcode a potentially long sequence of data directly in your program. This type of array must not be confused with the [`Array<T>` type][arrays], which is a similar collection type provided by the core library that _is_ allowed to grow in size. If you're unsure whether to use a fixed size array or the `Array<T>` type, chances are that you are looking for the `Array<T>` type.
+
+Because their size is known at compile-time, fixed-size arrays don't require runtime memory management, which makes them more efficient than dynamically-sized arrays. Overall, they're more useful when you know the number of elements will not need to change. For example, they can be used to efficiently store lookup tables that won't change during runtime. If you were using the names of the month in a program, you would probably use a fixed size array rather than an `Array<T>` because you know it will always contain 12 elements:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_41_fixed_size_arr_months/src/lib.cairo:months}}
+```
+
+You can also initialize an array to contain the same value for each element by specifying the initial value, followed by a semicolon, and then the length of the array in square brackets, as shown here:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_41_fixed_size_arr_months/src/lib.cairo:repeated_values}}
+```
+
+The array named `a` will contain `5` elements that will all be set to the value `3` initially. This is the same as writing `let a = [3, 3, 3, 3, 3];` but in a more concise way.
+
+#### Accessing Fixed Size Arrays Elements
+
+As a fixed-size array is a data structure known at compile time, it's content is represented as a sequence of values in the program bytecode. Accessing an element of that array will simply read that value from the program bytecode efficiently.
+
+We have two different ways of accessing fixed size array elements:
+
+- Deconstructing the array into multiple variables, as we did with tuples.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_42_fixed_size_arr_accessing_elements/src/lib.cairo}}
+```
+
+- Converting the array to a [Span][span], that supports indexing. This operation is _free_ and doesn't incur any runtime cost.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_44_fixed_size_arr_accessing_elements_span/src/lib.cairo}}
+```
+
+Note that if we plan to repeatedly access the array, then it makes sense to call `.span()` only once and keep it available throughout the accesses.
+
 ## Type Conversion
 
 Cairo addresses conversion between types by using the `try_into` and `into` methods provided by the `TryInto` and `Into` traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for [custom types as well][custom-type-conversion].
-
-[custom-type-conversion]: ./ch05-02-an-example-program-using-structs.md#conversions-of-custom-types
 
 ### Into
 
@@ -215,8 +261,6 @@ To perform the conversion, call `var.into()` on the source value to convert it t
 
 Similar to `Into`, `TryInto` is a generic trait for converting between types. Unlike `Into`, the `TryInto` trait is used for fallible conversions, and as such, returns [Option\<T\>][option]. An example of a fallible conversion is when the target type might not fit the source value.
 
-[option]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
-
 Also similar to `Into` is the process to perform the conversion; just call `var.try_into()` on the source value to convert it to another type. The new variable's type also must be explicitly defined, as demonstrated in the example below.
 
 ```rust
@@ -224,3 +268,8 @@ Also similar to `Into` is the process to perform the conversion; just call `var.
 ```
 
 {{#quiz ../quizzes/ch02-02-data-types.toml}}
+
+[arrays]: ./ch03-01-arrays.md
+[option]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
+[custom-type-conversion]: ./ch05-02-an-example-program-using-structs.md#conversions-of-custom-types
+[span]: ./ch03-01-arrays.md#Span
