@@ -205,11 +205,11 @@ We write the values in a fixed-size array as a comma-separated list inside squar
 {{#include ../listings/ch02-common-programming-concepts/no_listing_40_fixed_size_arr_type/src/lib.cairo}}
 ```
 
-Here, `u64` is the type of each element. After the semicolon, the number `5` indicates the array contains five elements.
+In the type annotation `[u64; 5]`, `u64` specifies the type of each element, while `5` after the semicolon defines the array's length. This syntax ensures that the array always contains exactly 5 elements of type `u64`.
 
-Fixed size arrays are useful when you want to hardcode a potentially long sequence of data in directly in our program, for example to <complete sentence>. This type of array must not be confused with the [`Array<T>` type][arrays], which is a similar collection type provided by the core library that _is_ allowed to grow in size. If you're unsure whether to use a fixed size array or the `Array<T>` type, chances are that you are looking for the `Array<T>` type.
+Fixed size arrays are useful when you want to hardcode a potentially long sequence of data directly in your program. This type of array must not be confused with the [`Array<T>` type][arrays], which is a similar collection type provided by the core library that _is_ allowed to grow in size. If you're unsure whether to use a fixed size array or the `Array<T>` type, chances are that you are looking for the `Array<T>` type.
 
-However, fixed size arrays are more useful when you know the number of elements will not need to change. For example, if you were using the names of the month in a program, you would probably use a fixed size array rather than an `Array<T>` because you know it will always contain 12 elements:
+Because their size is known at compile-time, fixed-size arrays don't require runtime memory management, which makes them more efficient than dynamically-sized arrays. Overall, they're more useful when you know the number of elements will not need to change. For example, they can be used to efficiently store lookup tables that won't change during runtime. If you were using the names of the month in a program, you would probably use a fixed size array rather than an `Array<T>` because you know it will always contain 12 elements:
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_41_fixed_size_arr_months/src/lib.cairo:months}}
@@ -225,45 +225,23 @@ The array named `a` will contain `5` elements that will all be set to the value 
 
 #### Accessing Fixed Size Arrays Elements
 
-As fixed-size array is a data structure known at compile time, it is directly compiled into the program bytecode as a sequence of hardcoded values. Accessing an element of that array will simply read from the value in the program bytecode.
+As a fixed-size array is a data structure known at compile time, it's content is represented as a sequence of values in the program bytecode. Accessing an element of that array will simply read that value from the program bytecode efficiently.
 
 We have two different ways of accessing fixed size array elements:
 
-- Deconstructing the array into multiple variables
+- Deconstructing the array into multiple variables, as we did with tuples.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_42_fixed_size_arr_accessing_elements/src/lib.cairo}}
 ```
 
-- Converting the array to a [Span][span], that supports indexing. However, converting the array
+- Converting the array to a [Span][span], that supports indexing. This operation is _free_ and doesn't incur any runtime cost.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_44_fixed_size_arr_accessing_elements_span/src/lib.cairo}}
 ```
 
 Note that if we plan to repeatedly access the array, then it makes sense to call `.span()` only once and keep it available throughout the accesses.
-
-#### Const arrays
-
-We can also use the keyword `const` (["Constants"][consts]) when declaring the array.
-If we were to pass this `const` array to another function, it would be copied to create a new array in the memory segment of this function.
-To avoid this heavy operation, we have to put the `const` array in a `Box<>` to create its own memory segment and then pass the pointer to this segment between functions.
-
-Let's suppose we have a module called `arrays_utils` with a `fn handling_array (arr: Box<[u64; 5]>)` function :
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_43_fixed_size_arr_const/src/arrays_utils.cairo}}
-```
-
-<span class="filename">Filename: src/arrays_utils.cairo</span>
-
-Then in _src/lib.cairo_ we declare a `const` array and we can call `handling_array` on this array without copying it:
-
-```rust
-{{#include ../listings/ch02-common-programming-concepts/no_listing_43_fixed_size_arr_const/src/lib.cairo}}
-```
-
-<span class="filename">Filename: src/lib.cairo</span>
 
 ## Type Conversion
 
@@ -294,5 +272,4 @@ Also similar to `Into` is the process to perform the conversion; just call `var.
 [arrays]: ./ch03-01-arrays.md
 [option]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
 [custom-type-conversion]: ./ch05-02-an-example-program-using-structs.md#conversions-of-custom-types
-[consts]: ./ch02-01-variables-and-mutability.md#Constants
 [span]: ./ch03-01-arrays.md#Span
