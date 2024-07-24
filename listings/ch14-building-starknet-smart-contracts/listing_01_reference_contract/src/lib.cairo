@@ -8,7 +8,7 @@ pub trait INameRegistry<TContractState> {
     );
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
     fn get_owner(self: @TContractState) -> NameRegistry::Person;
-    fn get_owner_address(self: @ContractState) -> ContractAddress;
+    fn get_owner_name(self: @ContractState) -> felt252;
 }
 
 #[starknet::contract]
@@ -94,10 +94,10 @@ mod NameRegistry {
             //ANCHOR_END: read_owner
         }
 
-        fn get_owner_address(self: @ContractState) -> ContractAddress {
-            //ANCHOR: read_owner_address
-            self.owner.address.read()
-            //ANCHOR_END: read_owner_address
+        fn get_owner_name(self: @ContractState) -> felt252 {
+            //ANCHOR: get_owner_name
+            self.owner.name.read()
+            //ANCHOR_END: get_owner_name
         }
     }
     //ANCHOR_END: impl_public
