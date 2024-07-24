@@ -12,19 +12,15 @@ pub trait INameRegistry<TContractState> {
 
 #[starknet::contract]
 mod NameRegistry {
-    use core::starknet::storage::StorageAsPointer;
-    use core::starknet::storage::StorageAsPath;
-    use core::starknet::storage::StoragePointerReadAccess;
-    use core::starknet::storage::StoragePointerWriteAccess;
     use starknet::{ContractAddress, get_caller_address, storage_access};
-    use starknet::storage::{StoragePathEntry};
+    use starknet::storage::{Map, StoragePathEntry};
 
     //ANCHOR: storage
     #[storage]
     struct Storage {
-        names: LegacyMap::<ContractAddress, felt252>,
+        names: Map::<ContractAddress, felt252>,
         owner: Person,
-        registration_type: LegacyMap::<ContractAddress, RegistrationType>,
+        registration_type: Map<ContractAddress, RegistrationType>,
         total_names: u128,
     }
     //ANCHOR_END: storage
