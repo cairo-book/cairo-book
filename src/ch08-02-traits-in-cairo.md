@@ -99,7 +99,8 @@ Below we specify a default string for the `summarize` method of the `Summary` tr
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_def_impl/src/lib.cairo:trait}}
 ```
 
-<span class="caption">Defining a `Summary` trait with a default implementation of the `summarize` method</span>
+{{#label default_impl}}
+<span class="caption"> Listing {{#ref default_impl}}: Defining a `Summary` trait with a default implementation of the `summarize` method</span>
 
 To use a default implementation to summarize instances of `NewsArticle`, we specify an empty `impl` block with `impl NewsArticleSummary of Summary<NewsArticle> {}`.
 
