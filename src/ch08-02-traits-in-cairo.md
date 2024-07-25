@@ -103,7 +103,7 @@ In Listing {{#ref default_impl}} we specify a default string for the `summarize`
 <span class="caption">Filename: src/lib.cairo</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_def_impl/src/lib.cairo:trait}}
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_default_impl/src/lib.cairo:trait}}
 ```
 
 {{#label default_impl}}
@@ -114,7 +114,7 @@ To use a default implementation to summarize instances of `NewsArticle`, we spec
 Even though we’re no longer defining the `summarize` method on `NewsArticle` directly, we’ve provided a default implementation and specified that `NewsArticle` implements the `Summary` trait. As a result, we can still call the `summarize` method on an instance of `NewsArticle`, like this:
 
 ```rust
-{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_def_impl/src/lib.cairo:main}}
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_default_impl/src/lib.cairo:main}}
 ```
 
 This code prints `New article available! (Read more...)`.
@@ -124,19 +124,19 @@ Creating a default implementation doesn’t require us to change anything about 
 Default implementations can call other methods in the same trait, even if those other methods don’t have a default implementation. In this way, a trait can provide a lot of useful functionality and only require implementors to specify a small part of it. For example, we could define the `Summary` trait to have a `summarize_author` method whose implementation is required, and then define a `summarize` method that has a default implementation that calls the `summarize_author` method:
 
 ```rust
-{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:trait}}
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:trait}}
 ```
 
 To use this version of `Summary`, we only need to define `summarize_author` when we implement the trait on a type:
 
 ```rust
-{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:impl}}
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:impl}}
 ```
 
 After we define `summarize_author`, we can call `summarize` on instances of the `Tweet` struct, and the default implementation of `summarize` will call the definition of `summarize_author` that we’ve provided. Because we’ve implemented `summarize_author`, the `Summary` trait has given us the behavior of the `summarize` method without requiring us to write any more code.
 
 ```rust
-{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:main}}
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:main}}
 ```
 
 This code prints `1 new tweet: (Read more from @EliBenSasson...)`.

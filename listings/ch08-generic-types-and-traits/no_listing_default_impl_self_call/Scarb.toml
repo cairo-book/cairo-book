@@ -1,5 +1,5 @@
 [package]
-name = "no_listing_19_def_impl"
+name = "no_listing_default_impl_self_call"
 version = "0.1.0"
 edition = "2023_11"
 
