@@ -85,7 +85,6 @@ types. Here’s an example of how a crate could use our `aggregator` crate:
 ```
 
 {{#label trait_main}}
-<span class="caption"> Listing {{#ref trait_main}}: Calling the `summarize` method on a `NewsArticle` and a `Tweet`</span>
 
 This code prints the following:
 
@@ -118,9 +117,6 @@ Even though we’re no longer defining the `summarize` method on `NewsArticle` d
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_def_impl/src/lib.cairo:main}}
 ```
 
-{{#label default_impl_main}}
-<span class="caption"> Listing {{#ref default_impl_main}}: Calling the default implementation of the `summarize` method</span>
-
 This code prints `New article available! (Read more...)`.
 
 Creating a default implementation doesn’t require us to change anything about the previous implementation of `Summary` on `Tweet`. The reason is that the syntax for overriding a default implementation is the same as the syntax for implementing a trait method that doesn’t have a default implementation.
@@ -131,26 +127,17 @@ Default implementations can call other methods in the same trait, even if those 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:trait}}
 ```
 
-{{#label default_impl_bis_trait}}
-<span class="caption"> Listing {{#ref default_impl_bis_trait}}: Signature of `summarize_author` method called by the default implementation of the `summarize` method</span>
-
-To use the version of `Summary` defined in Listing {{#ref default_impl_bis_trait}}, we only need to define `summarize_author` when we implement the trait on a type:
+To use this version of `Summary`, we only need to define `summarize_author` when we implement the trait on a type:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:impl}}
 ```
-
-{{#label default_impl_bis}}
-<span class="caption"> Listing {{#ref default_impl_bis}}: Defining the `summarize_author` method for `Tweet`</span>
 
 After we define `summarize_author`, we can call `summarize` on instances of the `Tweet` struct, and the default implementation of `summarize` will call the definition of `summarize_author` that we’ve provided. Because we’ve implemented `summarize_author`, the `Summary` trait has given us the behavior of the `summarize` method without requiring us to write any more code.
 
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:main}}
 ```
-
-{{#label default_impl_main_bis}}
-<span class="caption"> Listing {{#ref default_impl_main_bis}}: Calling the new `summarize` method on a `Tweet`</span>
 
 This code prints `1 new tweet: (Read more from @EliBenSasson...)`.
 

@@ -10,7 +10,6 @@ mod aggregator {
     }
     //ANCHOR_END: trait
 
-    //ANCHOR: impl
     #[derive(Drop)]
     pub struct Tweet {
         pub username: ByteArray,
@@ -19,6 +18,7 @@ mod aggregator {
         pub retweet: bool,
     }
 
+    //ANCHOR: impl
     impl TweetSummary of Summary<Tweet> {
         fn summarize_author(self: @Tweet) -> ByteArray {
             format!("@{}", self.username)
@@ -41,5 +41,3 @@ fn main() {
     println!("1 new tweet: {}", tweet.summarize());
 }
 //ANCHOR_END: main
-
-
