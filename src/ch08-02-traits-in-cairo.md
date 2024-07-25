@@ -20,7 +20,10 @@ For example, let’s say we have a struct `NewsArticle` that holds a news story 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_14_simple_trait/src/lib.cairo:trait}}
 ```
 
-Here, we declare a trait using the `trait` keyword and then the trait’s name, which is `Summary` in this case.
+{{#label first_trait_signature}}
+<span class="caption"> Listing {{#ref first_trait_signature}}: A `Summary` trait that consists of the behavior provided by a `summarize` method</span>
+
+In Listing {{#ref first_trait_signature}}, we declare a trait using the `trait` keyword and then the trait’s name, which is `Summary` in this case.
 We’ve also declared the trait as `pub` so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.
 
 Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray;`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
@@ -35,7 +38,8 @@ Now, consider that we want to make a media aggregator library crate named _aggre
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:trait}}
 ```
 
-<span class="caption">A `Summary` trait that consists of the behavior provided by a `summarize` method</span>
+{{#label trait_signature}}
+<span class="caption"> Listing {{#ref trait_signature}}: A `Summary` trait that consists of the behavior provided by a `summarize` method for a generic type</span>
 
 Each type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that implements the `Summary` trait will have the method `summarize` defined with this signature exactly.
 
@@ -51,11 +55,12 @@ the headline, the author, and the location to create the return value of
 followed by the entire text of the tweet, assuming that tweet content is
 already limited to 280 characters.
 
-<!-- TODO: standardize Listing quotations - none in this chapter, systematic in Modules chapter -->
-
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:impl}}
 ```
+
+{{#label trait_impl}}
+<span class="caption"> Listing {{#ref trait_impl}}: Implementation of the `Summary` trait on `NewsArticle` and `Tweet`</span>
 
 Implementing a trait on a type is similar to implementing regular methods. The
 difference is that after `impl`, we put a name for the implementation,
@@ -78,6 +83,9 @@ types. Here’s an example of how a crate could use our `aggregator` crate:
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:main}}
 ```
+
+{{#label trait_main}}
+<span class="caption"> Listing {{#ref trait_main}}: Calling the `summarize` method on a `NewsArticle` and a `Tweet`</span>
 
 This code prints the following:
 
@@ -110,6 +118,9 @@ Even though we’re no longer defining the `summarize` method on `NewsArticle` d
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_def_impl/src/lib.cairo:main}}
 ```
 
+{{#label default_impl_main}}
+<span class="caption"> Listing {{#ref default_impl_main}}: Calling the default implementation of the `summarize` method</span>
+
 This code prints `New article available! (Read more...)`.
 
 Creating a default implementation doesn’t require us to change anything about the previous implementation of `Summary` on `Tweet`. The reason is that the syntax for overriding a default implementation is the same as the syntax for implementing a trait method that doesn’t have a default implementation.
@@ -120,17 +131,26 @@ Default implementations can call other methods in the same trait, even if those 
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:trait}}
 ```
 
-To use this version of `Summary`, we only need to define `summarize_author` when we implement the trait on a type:
+{{#label default_impl_bis_trait}}
+<span class="caption"> Listing {{#ref default_impl_bis_trait}}: Signature of `summarize_author` method called by the default implementation of the `summarize` method</span>
+
+To use the version of `Summary` defined in Listing {{#ref default_impl_bis_trait}}, we only need to define `summarize_author` when we implement the trait on a type:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:impl}}
 ```
+
+{{#label default_impl_bis}}
+<span class="caption"> Listing {{#ref default_impl_bis}}: Defining the `summarize_author` method for `Tweet`</span>
 
 After we define `summarize_author`, we can call `summarize` on instances of the `Tweet` struct, and the default implementation of `summarize` will call the definition of `summarize_author` that we’ve provided. Because we’ve implemented `summarize_author`, the `Summary` trait has given us the behavior of the `summarize` method without requiring us to write any more code.
 
 ```rust
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_def_impl_bis/src/lib.cairo:main}}
 ```
+
+{{#label default_impl_main_bis}}
+<span class="caption"> Listing {{#ref default_impl_main_bis}}: Calling the new `summarize` method on a `Tweet`</span>
 
 This code prints `1 new tweet: (Read more from @EliBenSasson...)`.
 
@@ -164,13 +184,16 @@ because those types don’t implement `Summary`. -->
 To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
 If `CircleGeometry` implementation was in a separate module/file named _circle_, then to define `boundary` method on `Circle` struct, we'd need to import `ShapeGeometry` trait in the _circle_ module.
 
-If the code was organized into modules like this, where the implementation of a trait was defined in a different module than the trait itself, explicitly importing the relevant trait or implementation is required.
+If the code were to be organized into modules like in Listing {{#ref external_trait}} where the implementation of a trait is defined in a different module than the trait itself, explicitly importing the relevant trait or implementation would be required.
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_17_generic_traits/src/lib.cairo}}
 ```
 
-Note that in this example, `CircleGeometry` and `RectangleGeometry` implementations don't need to be declared as `pub`. Indeed, `ShapeGeometry` trait, which is public, is used to print the result in the `main` function. The compiler will find the appropriate implementation for the `ShapeGeometry` public trait, regardless of the implementation visibility.
+{{#label external_trait}}
+<span class="caption"> Listing {{#ref external_trait}}: Implementing an external trait</span>
+
+Note that in Listing {{#ref external_trait}}, `CircleGeometry` and `RectangleGeometry` implementations don't need to be declared as `pub`. Indeed, `ShapeGeometry` trait, which is public, is used to print the result in the `main` function. The compiler will find the appropriate implementation for the `ShapeGeometry` public trait, regardless of the implementation visibility.
 
 ## Impl Aliases
 
