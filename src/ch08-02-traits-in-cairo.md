@@ -91,7 +91,7 @@ Other crates that depend on the _aggregator_ crate can also bring the `Summary` 
 
 Sometimes it’s useful to have default behavior for some or all of the methods in a trait instead of requiring implementations for all methods on every type. Then, as we implement the trait on a particular type, we can keep or override each method’s default behavior.
 
-Below we specify a default string for the `summarize` method of the `Summary` trait instead of only defining the method signature, as we did previously.
+In Listing {{#ref default_impl}} we specify a default string for the `summarize` method of the `Summary` trait instead of only defining the method signature, as we did in Listing {{#ref trait_signature}}.
 
 <span class="caption">Filename: src/lib.cairo</span>
 
