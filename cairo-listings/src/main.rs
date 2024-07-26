@@ -259,9 +259,6 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
     let mut tags: HashSet<Tags> = HashSet::new();
     let mut in_tag_block = true;
 
-    // Program info
-    let mut is_contract = false;
-
     reader.lines().for_each(|line| {
         if let Ok(line_contents) = line {
             // Parse tags
@@ -282,16 +279,16 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
                 // Stop parsing tags when we reach the first non-comment line
                 in_tag_block = false;
             }
-
-            // Check for statements
-            is_contract |= line_contents.contains(config::STATEMENT_IS_CONTRACT);
         }
     });
 
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         // This program must pass cairo-format
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, vec![]);
+        let format_cmd = ScarbCmd::Format();
+        let args_without_check = format_cmd.args_without_check();
+
+        let _ = run_command(format_cmd, manifest_path, file_path, args_without_check);
     }
 }
 
