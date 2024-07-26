@@ -118,7 +118,6 @@ fn run_format(cfg: &Config, arg: &VerifyArgs) {
 
     logger::setup(arg, Arc::clone(&pb));
 
-    // TODO - format
     for file in scarb_packages {
         process_file_format(&file);
     }
@@ -139,7 +138,7 @@ fn run_format(cfg: &Config, arg: &VerifyArgs) {
         println!("\n{}", "Please review the errors above. Do not hesitate to ask for help by commenting on the issue on Github.".red().italic());
         std::process::exit(1);
     } else {
-        println!("\n{}\n", "ALL TESTS PASSED!".green().bold());
+        println!("\n{}\n", "FORMATTING COMPLETED!".green().bold());
     }
 }
 
