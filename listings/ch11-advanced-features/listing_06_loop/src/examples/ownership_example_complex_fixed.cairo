@@ -6,12 +6,12 @@ fn main() {
 
     let mut ingredient = ArrayTrait::<felt252>::new();
 
-    append(pizza_ingredients, mushroom, ingredient);
+    let result = append(pizza_ingredients, mushroom, ingredient);
 
-    println!("mushroom is at index 0 = {}", ingredient.at(0));
+    println!("mushroom is at index 0 = {}", result.at(0));
 }
 
-fn append(mut pizza_ingredients: Array<felt252>, target: felt252, mut array: Array<felt252>) {
+fn append(mut pizza_ingredients: Array<felt252>, target: felt252, mut array: Array<felt252>) -> Array<felt252> {
 
     loop {
         match pizza_ingredients.pop_front() {
@@ -26,4 +26,6 @@ fn append(mut pizza_ingredients: Array<felt252>, target: felt252, mut array: Arr
             }
         }
     };
+
+    array
 }
