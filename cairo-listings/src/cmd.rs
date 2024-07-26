@@ -37,6 +37,13 @@ impl ScarbCmd {
         }
     }
 
+    pub fn args_without_check(&self) -> Vec<String> {
+        self.default_args()
+            .into_iter()
+            .filter(|arg| arg != "-c")
+            .collect()
+    }
+
     pub fn test(&self, manifest_path: &str, args: Vec<String>) -> Result<Output, String> {
         let manifest_dir = Path::new(manifest_path)
             .parent()
