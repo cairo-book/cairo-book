@@ -270,8 +270,6 @@ fn process_file_format(manifest_path: &str) {
                 in_tag_block = false;
             }
 
-            // Check for statements
-            is_contract |= line_contents.contains(config::STATEMENT_IS_CONTRACT);
         }
     });
 
