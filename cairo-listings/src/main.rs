@@ -42,6 +42,7 @@ fn main() {
     match &cfg.command {
         Commands::Verify(args) => run_verification(cfg_clone, args),
         Commands::Output => output::process_outputs(cfg_clone, &empty_arg),
+        Commands::Format => run_format(cfg_clone, &empty_arg),
     }
 }
 
@@ -89,6 +90,33 @@ fn run_verification(cfg: &Config, args: &VerifyArgs) {
         print_error_table(&errors.compile_errors, "Compile Errors");
         print_error_table(&errors.run_errors, "Run Errors");
         print_error_table(&errors.test_errors, "Test Errors");
+        print_error_table(&errors.format_errors, "Format Errors");
+
+        println!(
+            "{}",
+            format!("Total errors: {}", total_errors.to_string().red()).bold()
+        );
+
+        println!("\n{}", "Please review the errors above. Do not hesitate to ask for help by commenting on the issue on Github.".red().italic());
+        std::process::exit(1);
+    } else {
+        println!("\n{}\n", "ALL TESTS PASSED!".green().bold());
+    }
+}
+
+fn run_format(cfg: &Config, arg: &VerifyArgs) {
+    let scarb_packages = find_scarb_manifests(cfg, arg);
+
+    let total_packages = scarb_packages.len();
+
+    // TODO - format
+
+    let errors = ERRORS.lock().unwrap();
+    let total_errors = errors.format_errors.len();
+
+    if total_errors > 0 {
+        println!("{}\n", "  ==== RESULT ===  ".red().bold());
+
         print_error_table(&errors.format_errors, "Format Errors");
 
         println!(
