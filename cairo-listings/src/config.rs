@@ -19,6 +19,9 @@ pub enum Commands {
 
     /// Process the output.txt file in listings
     Output,
+
+    /// Run the format process
+    Format,
 }
 
 #[derive(Parser, Debug, Default)]
