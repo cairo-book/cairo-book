@@ -116,11 +116,24 @@ fn run_format(cfg: &Config, arg: &VerifyArgs) {
             .progress_chars("##-"),
     );
 
+    let processed_count = Arc::new(AtomicUsize::new(0));
+
     logger::setup(arg, Arc::clone(&pb));
 
-    for file in scarb_packages {
-        process_file_format(&file);
-    }
+    let arg = Arc::new(arg);
+
+    scarb_packages.par_iter().for_each(|file| {
+        process_file_format(file, &arg);
+
+        if !arg.quiet {
+            let current = processed_count.fetch_add(1, Ordering::SeqCst) + 1;
+            pb.set_position(current as u64);
+
+            if current == total_packages {
+                pb.finish_with_message("Verification complete");
+            }
+        }
+    });
 
     let errors = ERRORS.lock().unwrap();
     let total_errors = errors.format_errors.len();
@@ -230,7 +243,7 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
     }
 }
 
-fn process_file_format(manifest_path: &str) {
+fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
     let manifest_path_as_path = std::path::Path::new(manifest_path);
     let file_path = manifest_path_as_path
         .parent()
@@ -270,11 +283,13 @@ fn process_file_format(manifest_path: &str) {
                 in_tag_block = false;
             }
 
+            // Check for statements
+            is_contract |= line_contents.contains(config::STATEMENT_IS_CONTRACT);
         }
     });
 
     // FORMAT CHECKS
-    if !tags.contains(&Tags::IgnoreFormat) {
+    if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         // This program must pass cairo-format
         let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, vec![]);
     }
