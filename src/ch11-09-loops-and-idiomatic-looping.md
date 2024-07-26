@@ -2,13 +2,10 @@
 
 In Cairo, the `loop` keyword is used to assign a specific code block to run indefinitely until a predefined condition is satisfied. We use the keyword `break` to explicitly end the loop. 
 
-We also utilized Sierra to analyze the similarities between recursion and `loop` keyword.  
-
 In this chapter, we will uncover the following topics about `loop` keyword: 
 
 1. How `loop` compiles down to recursion by looking at Sierra and gas usage. 
 2. Possible ownership issues that might come across when using `loop`. 
-
 
 ## Comparing Loop and Recursion
 
@@ -66,7 +63,7 @@ From the result, we can see that both examples have nearly identical gas usage. 
 
 We will look at how iterating and accessing values in `loop` can cause ownership issues. 
 
-From our example, we are iterating over the `pizza_ingredients` array and appending the felt252 value of `mushroom` to the `ingredient` array. In the case where `mushroom` is not found, it prints `Ingredients not found` message. After `append`, we print the value of `ingredient.at(0)`. 
+From our example, we are iterating over the `pizza_ingredients` array and appending the felt252 value of `mushroom` to the `ingredient` array. In the case where `mushroom` is not found, it panics and prints `Ingredients not found` message. After `append`, we print the value of `ingredient.at(0)`. 
 
 ```rust,noplayground
 {{#include ../listings/ch11-advanced-features/listing_06_loop/src/examples/ownership_example_complex.cairo}}
