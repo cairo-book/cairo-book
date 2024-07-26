@@ -58,13 +58,11 @@ In Cairo, you can define traits and implement them for your custom enums. This a
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:trait_impl}}
 ```
 
-In this example, we implemented the `Processing` trait for `Message`. Here is how it could be used to process a Quit message:
+In this example, we implemented the `Processing` trait for `Message`. Here is how it could be used to process a `Quit` message:
 
-```rust, noplayground
+```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:main}}
 ```
-
-Running this code would print `quitting`.
 
 ## The `Option` Enum and Its Advantages
 

@@ -1,5 +1,5 @@
 #[starknet::contract]
-mod AbiAttribute {
+mod ContractExample {
     #[storage]
     struct Storage {}
 

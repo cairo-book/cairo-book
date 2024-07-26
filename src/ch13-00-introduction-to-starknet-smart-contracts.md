@@ -24,7 +24,7 @@ name = "package_name"
 version = "0.1.0"
 
 [dependencies]
-starknet = ">=2.6.3"
+starknet = ">=2.7.0-rc.3"
 
 [[target.starknet-contract]]
 ```

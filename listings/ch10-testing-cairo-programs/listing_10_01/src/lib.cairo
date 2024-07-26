@@ -23,5 +23,5 @@ mod other_tests {
         let result = 2 + 2;
         assert_eq!(result, 4);
     }
-// ANCHOR_END: exploration
+    // ANCHOR_END: exploration
 }

@@ -15,7 +15,7 @@ Let's consider the following contract for the whole chapter. It might not be eas
 
 Contracts are defined by encapsulating state and logic within a module annotated with the `#[starknet::contract]` attribute.
 
-The state is defined within the `Storage` struct, and is always initialized empty. Here, our struct contains a single a field called `stored_data` of type `u128` (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \\( {2^{128}} - 1 \\).
+The state is defined within the `Storage` struct, and is always initialized empty. Here, our struct contains a single field called `stored_data` of type `u128` (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \\( {2^{128}} - 1 \\).
 
 The logic is defined by functions that interact with the state. Here, our contract defines and publicly exposes the functions `set` and `get` that can be used to modify or retrieve the value of the stored variable.
 You can think of it as a single slot in a database that you can query and modify by calling functions of the code that manages the database.
@@ -29,8 +29,9 @@ You can think of it as a single slot in a database that you can query and modify
 {{#label interface}}
 <span class="caption">Listing {{#ref interface}}: A basic contract interface</span>
 
+Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world, without including the function body. In Cairo, they're defined by annotating a trait with the `#[starknet::interface]` attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.
 
-Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world. In Cairo, they're defined by annotating a trait with the `#[starknet::interface]` attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.
+> The contract constructor is not part of the interface. Nor are internal functions.
 
 All contract interfaces use a generic type for the `self` parameter, representing the contract state. We chose to name this generic parameter `TContractState` in our interface, but this is not enforced and any name can be chosen.
 
@@ -83,14 +84,15 @@ When `self` is a snapshot of `ContractState`, only read access is allowed, and e
 ## Accessing and Modifying the Contract's State
 
 Two methods are commonly used to access or modify the state of a contract:
+
 - `read`, which returns the value of a storage variable. This method is called on the variable itself and does not take any argument.
-  
+
 ```rust,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:read_state}}
 ```
 
 - `write`, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that `write` may take more than one argument, depending on the type of the storage variable. For example, writing on a mapping requires 2 arguments: the key and the value to be written.
-  
+
 ```rust,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:write_state}}
 ```

@@ -15,7 +15,7 @@ trait IOwnable<TContractState> {
     fn owner(self: @TContractState) -> ContractAddress;
     fn transfer_ownership(ref self: TContractState, new_owner: ContractAddress);
     fn renounce_ownership(ref self: TContractState);
-//ANCHOR_END: trait_def
+    //ANCHOR_END: trait_def
 }
 //ANCHOR_END: interface
 

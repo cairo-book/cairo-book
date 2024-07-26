@@ -11,5 +11,5 @@ enum Direction {
 fn main() {
     // ANCHOR: here
     let direction = Direction::North(10);
-// ANCHOR_END: here
+    // ANCHOR_END: here
 }

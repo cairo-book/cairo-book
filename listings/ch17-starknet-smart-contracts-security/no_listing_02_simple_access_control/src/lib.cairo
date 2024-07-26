@@ -67,12 +67,12 @@ mod access_control_contract {
 
         fn role_a_action(ref self: ContractState) {
             Contract::only_role_a(@self);
-        // ...
+            // ...
         }
 
         fn allowed_action(ref self: ContractState) {
             Contract::only_allowed(@self);
-        // ...
+            // ...
         }
     }
 }

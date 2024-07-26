@@ -27,8 +27,8 @@ impl ProcessingImpl of Processing {
 fn main() {
     // ANCHOR: main
     let msg: Message = Message::Quit;
-    msg.process();
-// ANCHOR_END: main
+    msg.process(); // prints "quitting"
+    // ANCHOR_END: main
 }
 //ANCHOR_END: all
 
