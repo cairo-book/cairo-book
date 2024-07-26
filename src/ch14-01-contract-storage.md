@@ -43,6 +43,13 @@ To read the value of the `owner` storage variable, which is a single value, we c
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner}}
 ```
 
+The `owner` variable type is `Person` thus it has one attribute called `name` (a `felt252` variable).
+To read the `name` of the `owner` we also call the `read` function on the `owner.name` variable.
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner_name}}
+```
+
 To read the value of the storage variable `names`, which is a mapping from `ContractAddress` to `felt252`, we first need to retrieve the entry path for the specific key in the mapping. We do this by calling the `entry` method on the `names` variable, passing in the `address` as a parameter. This gives us access to the specific entry in the mapping.
 Once we have the entry path, we can call the `read` function on it to retrieve the stored value.
 

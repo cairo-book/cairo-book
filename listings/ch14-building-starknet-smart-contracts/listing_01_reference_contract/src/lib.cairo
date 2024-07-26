@@ -95,9 +95,9 @@ mod NameRegistry {
         }
 
         fn get_owner_name(self: @ContractState) -> felt252 {
-            //ANCHOR: get_owner_name
+            //ANCHOR: read_owner_name
             self.owner.name.read()
-            //ANCHOR_END: get_owner_name
+            //ANCHOR_END: read_owner_name
         }
     }
     //ANCHOR_END: impl_public
