@@ -189,7 +189,7 @@ While a condition evaluates to `true`, the code runs; otherwise, it exits the lo
 
 ### Looping Through a Collection with `for`
 
-You can also use the while construct to loop over the elements of a collection, such as an array. For example, the loop in Listing {{#ref iter-while}} prints each element in the array `a` (actually a `Span` to be able to read the elements of the array).
+You can also use the while construct to loop over the elements of a collection, such as an array. For example, the loop in Listing {{#ref iter-while}} prints each element in the array `a`.
 
 ```rust
 {{#include ../listings/ch02-common-programming-concepts/no_listing_45_iter_loop_while/src/lib.cairo}}
