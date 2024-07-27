@@ -239,7 +239,12 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         // This program must pass cairo-format
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, vec![]);
+        let mut format_args = vec![];
+
+        // Add the -c flag for verification
+        format_args.push("-c".to_string());
+
+        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
     }
 }
 
@@ -284,11 +289,8 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
 
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
-        // This program must pass cairo-format
-        let format_cmd = ScarbCmd::Format();
-        let args_without_check = format_cmd.args_without_check();
-
-        let _ = run_command(format_cmd, manifest_path, file_path, args_without_check);
+        let format_args = vec![];
+        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
     }
 }
 
