@@ -239,10 +239,7 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         // This program must pass cairo-format
-        let mut format_args = vec![];
-
-        // Add the -c flag for verification
-        format_args.push("-c".to_string());
+        let mut format_args = vec!["-c".to_string()];
 
         let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
     }
