@@ -219,7 +219,7 @@ As a more concise alternative, you can use a `for` loop and execute some code fo
 
 When we run this code, we’ll see the same output as in Listing {{#ref iter-while}}. More importantly, we’ve now increased the safety of the code and eliminated the chance of bugs that might result from going beyond the end of the array or not going far enough and missing some items.
 
-Using the for loop, you wouldn’t need to remember to change any other code if you changed the number of values in the array, as you would with the method used in Listing {{#ref iter-while}}.
+Using the `for` loop, you wouldn’t need to remember to change any other code if you changed the number of values in the array, as you would with the method used in Listing {{#ref iter-while}}.
 
 {{#quiz ../quizzes/ch02-05-control-flow.toml}}
 
