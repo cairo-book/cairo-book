@@ -98,7 +98,7 @@ The `number` variable will be bound to a value based on the outcome of the `if` 
 
 It’s often useful to execute a block of code more than once. For this task, Cairo provides a simple loop syntax, which will run through the code inside the loop body to the end and then start immediately back at the beginning. To experiment with loops, let’s create a new project called _loops_.
 
-Cairo has two kinds of loops: `loop` and `while`.
+Cairo has three kinds of loops: `loop`, `while`, and `for`. Let’s try each one.
 
 ### Repeating Code with `loop`
 
