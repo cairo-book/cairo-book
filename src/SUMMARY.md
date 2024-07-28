@@ -85,6 +85,7 @@
 
   - [Custom Data Structures](ch11-01-custom-data-structures.md)
   - [Smart Pointers](ch11-02-smart-pointers.md)
+  - [Deref Coercion](ch11-09-deref-coercion.md)
   - [Operator Overloading](ch11-03-operator-overloading.md)
   - [Working with Hashes](ch11-04-hash.md)
   - [Macros](ch11-05-macros.md)
