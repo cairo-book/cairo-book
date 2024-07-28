@@ -1,4 +1,4 @@
-//ANCHOR: UserProfile
+// ANCHOR: UserProfile
 // Define a struct for UserProfile
 #[derive(Drop)]
 struct UserProfile {
@@ -6,7 +6,7 @@ struct UserProfile {
     email: felt252,
     age: u16,
 }
-ANCHOR_END: UserProfile
+// ANCHOR_END: UserProfile
 
 // ANCHOR: Account
 // Define a struct for Account which contains UserProfile
@@ -54,7 +54,7 @@ fn main() {
     print_age(account);
 
     // Update the age
-    update_age(account);
+    update_age(account, 25);
 
     // Print the updated age
     print_age(account);
