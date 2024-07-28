@@ -20,12 +20,12 @@ error: Skipped tokens. Expected: statement.
     let x = (let y = 6);
                       ^^
 
-warn: Unused variable. Consider ignoring by prefixing with `_`.
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
  --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:9
     let x = (let y = 6);
         ^
 
-warn: Unused variable. Consider ignoring by prefixing with `_`.
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
  --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:3:18
     let x = (let y = 6);
                  ^
