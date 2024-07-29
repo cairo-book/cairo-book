@@ -1,6 +1,8 @@
 [[questions]]
 type = "Tracing"
 prompt.program = """
+use core::dict::Felt252Dict;
+
 fn main() {
     let mut balances: Felt252Dict<u64> = Default::default();
     balances.insert('Alex', 100);
@@ -20,6 +22,8 @@ id = "8b538a1f-0cf9-4c57-8304-c4b07e0134dd"
 [[questions]]
 type = "Tracing"
 prompt.program = """
+use core::dict::Felt252Dict;
+
 fn main() {
     let mut dict: Felt252Dict<Span<felt252>> = Default::default();
     let a = array![8, 9, 10];
@@ -41,6 +45,8 @@ type = "MultipleChoice"
 prompt.prompt = """
 What will be the output of this code snippet?
 ```
+use core::dict::Felt252Dict;
+
 fn main() {
     let mut balances: Felt252Dict<u64> = Default::default();
     balances.insert('Alex', 200);
