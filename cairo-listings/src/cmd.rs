@@ -30,7 +30,7 @@ impl ScarbCmd {
 
     fn default_args(&self) -> Vec<String> {
         match self {
-            ScarbCmd::Format() => vec!["-c".to_string()],
+            ScarbCmd::Format() => vec![],
             ScarbCmd::Build() => vec![],
             ScarbCmd::CairoRun() => vec![],
             ScarbCmd::Test() => vec![],
