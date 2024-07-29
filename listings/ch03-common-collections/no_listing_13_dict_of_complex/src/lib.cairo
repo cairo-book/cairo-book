@@ -1,5 +1,6 @@
 // ANCHOR: all
 // ANCHOR: imports
+use core::dict::Felt252Dict;
 use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
 // ANCHOR_END: imports
 
@@ -33,5 +34,4 @@ fn main() {
 // ANCHOR_END: footer
 
 // ANCHOR_END: all
-
 

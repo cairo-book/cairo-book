@@ -1,5 +1,6 @@
 //TAG: does_not_compile
 use core::nullable::{match_nullable, FromNullableResult};
+use core::dict::Felt252Dict;
 
 fn main() {
     let arr = array![20, 19, 26];

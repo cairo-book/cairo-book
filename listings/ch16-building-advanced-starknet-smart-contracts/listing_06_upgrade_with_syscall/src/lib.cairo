@@ -1,5 +1,5 @@
-use starknet::{ClassHash, syscalls};
-use starknet::class_hash::class_hash_const;
+use core::starknet::{ClassHash, syscalls};
+use core::starknet::class_hash::class_hash_const;
 use core::num::traits::Zero;
 
 fn _upgrade(new_class_hash: ClassHash) {

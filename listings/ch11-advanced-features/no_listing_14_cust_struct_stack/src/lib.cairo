@@ -1,7 +1,7 @@
 // ANCHOR: all
 
 // ANCHOR: imports
-use core::dict::Felt252DictTrait;
+use core::dict::Felt252Dict;
 use core::nullable::{match_nullable, FromNullableResult, NullableTrait};
 // ANCHOR_END: imports
 
@@ -47,5 +47,4 @@ impl NullableStackImpl<T, +Drop<T>, +Copy<T>> of StackTrait<NullableStack<T>, T>
     }
 }
 // ANCHOR_END: implem
-
 

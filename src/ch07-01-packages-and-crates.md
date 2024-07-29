@@ -49,7 +49,7 @@ my_package/
 [package]
 name = "my_package"
 version = "0.1.0"
-edition = "2023_11"
+edition = "2024_07"
 
 [dependencies]
 # foo = { path = "vendor/foo" }

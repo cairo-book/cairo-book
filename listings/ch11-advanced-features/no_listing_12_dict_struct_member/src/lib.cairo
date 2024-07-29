@@ -1,3 +1,5 @@
+use core::dict::Felt252Dict;
+
 // ANCHOR: struct
 struct UserDatabase<T> {
     users_updates: u64,
@@ -58,5 +60,4 @@ fn main() {
     assert!(maria_latest_balance == 0, "Expected 0");
 }
 // ANCHOR_END: main
-
 

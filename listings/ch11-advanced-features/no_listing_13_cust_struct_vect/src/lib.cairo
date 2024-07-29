@@ -1,7 +1,7 @@
 // ANCHOR: all
 
 // ANCHOR: imports
-use core::dict::Felt252DictTrait;
+use core::dict::Felt252Dict;
 use core::nullable::{match_nullable, FromNullableResult, NullableTrait};
 use core::integer;
 // ANCHOR_END: imports
@@ -66,5 +66,4 @@ impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
     }
 }
 // ANCHOR_END: implem
-
 

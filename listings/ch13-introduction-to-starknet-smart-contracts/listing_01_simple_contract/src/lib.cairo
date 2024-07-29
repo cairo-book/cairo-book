@@ -9,6 +9,8 @@ trait ISimpleStorage<TContractState> {
 
 #[starknet::contract]
 mod SimpleStorage {
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
     #[storage]
     struct Storage {
         stored_data: u128
@@ -32,5 +34,4 @@ mod SimpleStorage {
     //ANCHOR_END: impl
 }
 //ANCHOR_END: all
-
 

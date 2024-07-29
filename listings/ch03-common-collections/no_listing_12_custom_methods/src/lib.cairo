@@ -1,5 +1,5 @@
 // ANCHOR: imports
-use core::dict::Felt252DictEntryTrait;
+use core::dict::{Felt252Dict, Felt252DictEntryTrait};
 // ANCHOR_END: imports
 
 // ANCHOR: custom_get
@@ -46,5 +46,4 @@ fn main() {
     assert!(val == 100, "Expecting 100");
 }
 // ANCHOR_END: main
-
 

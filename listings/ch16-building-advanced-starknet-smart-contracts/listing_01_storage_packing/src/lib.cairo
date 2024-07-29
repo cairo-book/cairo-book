@@ -1,5 +1,5 @@
 //ANCHOR:here
-use starknet::storage_access::StorePacking;
+use core::starknet::storage_access::StorePacking;
 
 #[derive(Drop, Serde)]
 //ANCHOR:struct
@@ -38,6 +38,7 @@ impl SizesStorePacking of StorePacking<Sizes, u128> {
 mod SizeFactory {
     use super::Sizes;
     use super::SizesStorePacking; //don't forget to import it!
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
     struct Storage {
@@ -64,7 +65,7 @@ mod SizeFactory {
 #[cfg(test)]
 mod tests {
     use super::{SizesStorePacking, Sizes};
-    use starknet::storage_access::StorePacking;
+    use core::starknet::storage_access::StorePacking;
 
     #[test]
     fn test_pack_unpack() {

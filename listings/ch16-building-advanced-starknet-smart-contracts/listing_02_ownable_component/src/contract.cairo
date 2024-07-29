@@ -2,6 +2,7 @@
 #[starknet::contract]
 mod OwnableCounter {
     use listing_01_ownable::component::ownable_component;
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     component!(path: ownable_component, storage: ownable, event: OwnableEvent);
 
@@ -34,5 +35,4 @@ mod OwnableCounter {
     }
 }
 //ANCHOR_END: all
-
 
