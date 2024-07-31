@@ -27,7 +27,7 @@ In this case, the `recursive` function will call itself until `x == 2` condition
 
 Next, we will examine the two Cairo examples in Sierra and note any findings that can help us understand how the `loop` keyword is compiled to recursion. 
 
->Note: For our example, our findings came from understanding the **statments** section in Sierra that shows the execution traces of the two programs. If you are curious to learn more about Sierra, check out the three [blog](https://medium.com/nethermind-eth/under-the-hood-of-cairo-1-0-exploring-sierra-7f32808421f5) series by Mathieu. 
+>Note: For our example, our findings came from understanding the **statements** section in Sierra that shows the execution traces of the two programs. If you are curious to learn more about Sierra, check out the three [blog](https://medium.com/nethermind-eth/under-the-hood-of-cairo-1-0-exploring-sierra-7f32808421f5) series by Mathieu. 
 
 Notable findings from Sierra: 
 
