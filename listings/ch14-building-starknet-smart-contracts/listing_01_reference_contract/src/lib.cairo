@@ -137,7 +137,7 @@ mod NameRegistry {
     // Free function
     fn get_owner_storage_address(self: @ContractState) -> felt252 {
         //ANCHOR: owner_address
-        self.owner.address
+        self.owner.__base_address__
         //ANCHOR_END: owner_address
     }
     // ANCHOR_END: state_internal
