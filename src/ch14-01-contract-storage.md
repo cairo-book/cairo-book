@@ -24,7 +24,7 @@ The address of a storage variable is computed as follows:
 
 - If the variable is a [mapping][storage mappings] with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key. In the case of mappings to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated with the previous formula. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
-You can access the base address of a storage variable by calling the `address` attribute on the variable, which returns a `felt252` value.
+You can access the base address of a storage variable by accessing the `__base_address__` attribute on the variable, which returns a `felt252` value.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:owner_address}}
@@ -99,13 +99,13 @@ You might have noticed that we also derived `Drop` and `Serde` on our custom typ
 ### Structs Storage Layout
 
 On Starknet, structs are stored in storage as a sequence of primitive types.
-The elements of the struct are stored in the same order as they are defined in the struct definition. The first element of the struct is stored at the base address of the struct, which is computed as specified in ["Addresses of Storage Variables"][storage addresses] section and can be obtained by calling `var.address()`, and subsequent elements are stored at addresses contiguous to the first element.
+The elements of the struct are stored in the same order as they are defined in the struct definition. The first element of the struct is stored at the base address of the struct, which is computed as specified in ["Addresses of Storage Variables"][storage addresses] section and can be obtained with `var.__base_address__` and subsequent elements are stored at addresses contiguous to the first element.
 For example, the storage layout for the `owner` variable of type `Person` will result in the following layout:
 
-| Fields  | Address            |
-| ------- | ------------------ |
-| name    | owner.address()    |
-| address | owner.address() +1 |
+| Fields  | Address                     |
+| ------- | --------------------------- |
+| name    | `owner.__base_address__`    |
+| address | `owner.__base_address__ +1` |
 
 Note that tuples are similarly stored in contract's storage, with the first element of the tuple being stored at the base address, and subsequent elements stored contiguously.
 
@@ -117,16 +117,16 @@ When you store an enum variant, what you're essentially storing is the variant's
 If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
 For example, suppose we have the `RegistrationType` enum with the `finite` variant that carries an associated limit date, and the `infinite` variant without associated data. The storage layout for the `finite` variant would look like this:
 
-| Element                      | Address                         |
-| ---------------------------- | ------------------------------- |
-| Variant index (0 for finite) | registration_type.address()     |
-| Associated limit date        | registration_type.address() + 1 |
+| Element                      | Address                                  |
+| ---------------------------- | ---------------------------------------- |
+| Variant index (0 for finite) | `registration_type.__base_address__`     |
+| Associated limit date        | `registration_type.__base_address__ + 1` |
 
 while the storage layout for the `infinite` would be as follows:
 
-| Element                        | Address                     |
-| ------------------------------ | --------------------------- |
-| Variant index (1 for infinite) | registration_type.address() |
+| Element                        | Address                              |
+| ------------------------------ | ------------------------------------ |
+| Variant index (1 for infinite) | `registration_type.__base_address__` |
 
 ## Storage Mappings
 
