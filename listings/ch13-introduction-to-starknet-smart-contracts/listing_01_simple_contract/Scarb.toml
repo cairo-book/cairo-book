@@ -7,4 +7,4 @@ edition = "2023_11"
 
 [dependencies]
 # foo = { path = "vendor/foo" }
-starknet = ">=2.7.0-rc.3"
+starknet = ">=2.7.0"
