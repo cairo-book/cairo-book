@@ -3,14 +3,15 @@ use source::pizza::{
     PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
 };
 //ANCHOR: import_internal
-use source::pizza::PizzaFactory::{ownerContractMemberStateTrait, InternalTrait};
+use source::pizza::PizzaFactory::{InternalTrait};
+use source::pizza::IPizzaFactory;
 //ANCHOR_END: import_internal
 
 use core::starknet::{ContractAddress, contract_address_const};
 
 use snforge_std::{
     declare, ContractClassTrait, ContractClass, start_cheat_caller_address,
-    stop_cheat_caller_address, SpyOn, EventSpy, EventAssertions, spy_events, EventFetcher, load,
+    stop_cheat_caller_address, EventSpy, EventSpyAssertionsTrait, spy_events, load,
     cheatcodes::storage::load_felt252
 };
 
@@ -88,7 +89,7 @@ fn test_make_pizza_should_increment_pizza_counter() {
     // Setup
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
     start_cheat_caller_address(pizza_factory_address, owner());
-    let mut spy = spy_events(SpyOn::One(pizza_factory_address));
+    let mut spy = spy_events();
 
     // When
     pizza_factory.make_pizza();
@@ -106,7 +107,8 @@ fn test_set_as_new_owner_direct() {
     let mut state = PizzaFactory::contract_state_for_testing();
     let owner: ContractAddress = contract_address_const::<'owner'>();
     state.set_owner(owner);
-    assert_eq!(state.owner.read(), owner);
+    let state_owner = state.get_owner();
+    assert_eq!(state_owner, owner);
 }
 //ANCHOR_END: test_internals
 
