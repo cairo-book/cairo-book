@@ -1,6 +1,6 @@
 //ANCHOR: all
 use core::nullable::NullableTrait;
-use core::dict::Felt252DictEntryTrait;
+use core::dict::{Felt252Dict, Felt252DictEntryTrait};
 
 //ANCHOR: append
 fn append_value(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252, value: u8) {

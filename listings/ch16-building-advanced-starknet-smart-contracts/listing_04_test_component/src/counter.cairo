@@ -9,8 +9,10 @@ pub trait ICounter<TContractState> {
 //ANCHOR: component
 #[starknet::component]
 pub mod CounterComponent {
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
     #[storage]
-    struct Storage {
+    pub struct Storage {
         value: u32
     }
 

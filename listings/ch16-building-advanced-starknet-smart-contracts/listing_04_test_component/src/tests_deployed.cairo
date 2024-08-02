@@ -1,7 +1,7 @@
 use super::MockContract;
 use super::counter::{ICounterDispatcher, ICounterDispatcherTrait};
-use starknet::deploy_syscall;
-use starknet::SyscallResultTrait;
+use core::starknet::deploy_syscall;
+use core::starknet::SyscallResultTrait;
 
 fn setup_counter() -> ICounterDispatcher {
     let (address, _) = deploy_syscall(

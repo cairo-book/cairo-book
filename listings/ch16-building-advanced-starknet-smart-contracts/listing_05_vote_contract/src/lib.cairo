@@ -1,5 +1,5 @@
 /// @dev Core Library Imports for the Traits outside the Starknet Contract
-use starknet::ContractAddress;
+use core::starknet::ContractAddress;
 
 /// @dev Trait defining the functions that can be implemented or called by the Starknet Contract
 #[starknet::interface]
@@ -17,8 +17,12 @@ trait VoteTrait<T> {
 /// @dev Starknet Contract allowing three registered voters to vote on a proposal
 #[starknet::contract]
 mod Vote {
-    use starknet::ContractAddress;
-    use starknet::get_caller_address;
+    use core::starknet::ContractAddress;
+    use core::starknet::get_caller_address;
+    use core::starknet::storage::{
+        StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
+        StorageMapWriteAccess, Map
+    };
 
     const YES: u8 = 1_u8;
     const NO: u8 = 0_u8;
@@ -28,8 +32,8 @@ mod Vote {
     struct Storage {
         yes_votes: u8,
         no_votes: u8,
-        can_vote: LegacyMap::<ContractAddress, bool>,
-        registered_voter: LegacyMap::<ContractAddress, bool>,
+        can_vote: Map::<ContractAddress, bool>,
+        registered_voter: Map::<ContractAddress, bool>,
     }
 
     /// @dev Contract constructor initializing the contract with a list of registered voters and 0

@@ -6,7 +6,7 @@ use source::pizza::{
 use source::pizza::PizzaFactory::{ownerContractMemberStateTrait, InternalTrait};
 //ANCHOR_END: import_internal
 
-use starknet::{ContractAddress, contract_address_const};
+use core::starknet::{ContractAddress, contract_address_const};
 
 use snforge_std::{
     declare, ContractClassTrait, ContractClass, start_cheat_caller_address,

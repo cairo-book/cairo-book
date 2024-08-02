@@ -1,5 +1,5 @@
 //TAG: does_not_compile
-use starknet::ContractAddress;
+use core::starknet::ContractAddress;
 
 trait IERC20DispatcherTrait<T> {
     fn name(self: T) -> felt252;
