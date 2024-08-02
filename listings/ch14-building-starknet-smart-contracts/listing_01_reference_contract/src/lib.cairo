@@ -14,7 +14,10 @@ pub trait INameRegistry<TContractState> {
 #[starknet::contract]
 mod NameRegistry {
     use core::starknet::{ContractAddress, get_caller_address, storage_access};
-    use core::starknet::storage::{Map, StoragePathEntry};
+    use core::starknet::storage::{
+        Map, StoragePathEntry, StoragePointerReadAccess, StorageMapReadAccess,
+        StorageMapWriteAccess, StoragePointerWriteAccess
+    };
 
     //ANCHOR: storage
     #[storage]
@@ -143,4 +146,3 @@ mod NameRegistry {
     // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
-
