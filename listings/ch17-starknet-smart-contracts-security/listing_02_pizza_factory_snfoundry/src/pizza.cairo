@@ -20,7 +20,7 @@ pub mod PizzaFactory {
     pub struct Storage {
         pepperoni: u32,
         pineapple: u32,
-        owner: ContractAddress,
+        pub owner: ContractAddress,
         pizzas: u32
     }
 
