@@ -14,12 +14,13 @@ pub trait IPizzaFactory<TContractState> {
 pub mod PizzaFactory {
     use super::IPizzaFactory;
     use core::starknet::{ContractAddress, get_caller_address};
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
     pub struct Storage {
         pepperoni: u32,
         pineapple: u32,
-        owner: ContractAddress,
+        pub owner: ContractAddress,
         pizzas: u32
     }
 
@@ -29,7 +30,6 @@ pub mod PizzaFactory {
         self.pineapple.write(10);
         self.owner.write(owner);
     }
-
 
     #[event]
     #[derive(Drop, starknet::Event)]
