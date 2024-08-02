@@ -67,3 +67,4 @@ impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
 }
 // ANCHOR_END: implem
 
+

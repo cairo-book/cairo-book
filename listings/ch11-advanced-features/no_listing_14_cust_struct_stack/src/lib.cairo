@@ -48,3 +48,4 @@ impl NullableStackImpl<T, +Drop<T>, +Copy<T>> of StackTrait<NullableStack<T>, T>
 }
 // ANCHOR_END: implem
 
+

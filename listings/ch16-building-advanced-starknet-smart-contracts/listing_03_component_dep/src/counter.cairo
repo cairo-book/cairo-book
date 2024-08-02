@@ -60,3 +60,4 @@ mod OwnableCounterComponent {
 //ANCHOR_END: component
 //ANCHOR_END: full
 
+
