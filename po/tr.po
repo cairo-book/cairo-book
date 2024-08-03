@@ -879,7 +879,7 @@ msgid ""
 "[package]\n"
 "name = \"hello_world\"\n"
 "version = \"0.1.0\"\n"
-"edition = \"2024_07\"\n"
+"edition = \"2023_11\"\n"
 "\n"
 "# See more keys and their definitions at https://docs.swmansion.com/scarb/"
 "docs/reference/manifest\n"
@@ -892,7 +892,7 @@ msgstr ""
 "[package]\n"
 "name = \"hello_world\"\n"
 "version = \"0.1.0\"\n"
-"edition = \"2024_07\"\n"
+"edition = \"2023_11\"\n"
 "\n"
 "# Daha fazla anahtar ve tanımlarına https://docs.swmansion.com/scarb/docs/reference/manifest adresinden bakın."
 "\n"
@@ -1771,12 +1771,12 @@ msgid ""
 "\\( \\frac{x}{y} \\cdot y == x \\\\), depending on the divisibility of `x` "
 "by `y`."
 msgstr ""
-"En önemli fark, tam sayılar ile alan elemanları arasında bölmedir: Alan "
-"elemanlarının bölünmesi (ve dolayısıyla Cairo'daki bölme) normal CPU bölmesinden "
-"farklıdır, burada tam sayı bölmesi \\\\( \\frac{x}{y} \\\\) \\\\( \\left\\lfloor "
-"\\frac{x}{y} \\right\\rfloor \\\\) olarak tanımlanır ve bölenin tam kısmı geri "
-"döndürülür (bu yüzden \\( \\frac{7}{3} = 2 \\\\) alırsınız) ve bu denklem \\( "
-"\\frac{x}{y} \\cdot y == x \\\\) bağlı olarak `x`'in `y`'e bölünebilirliğine "
+"En önemli fark, tam sayılar ile alan elemanları arasında bölmedir: Alan " 
+"elemanlarının bölünmesi (ve dolayısıyla Cairo'daki bölme) normal CPU bölmesinden " 
+"farklıdır, burada tam sayı bölmesi \\\\( \\frac{x}{y} \\\\) \\\\( \\left\\lfloor " 
+"\\frac{x}{y} \\right\\rfloor \\\\) olarak tanımlanır ve bölenin tam kısmı geri " 
+"döndürülür (bu yüzden \\( \\frac{7}{3} = 2 \\\\) alırsınız) ve bu denklem \\( " 
+"\\frac{x}{y} \\cdot y == x \\\\) bağlı olarak `x`'in `y`'e bölünebilirliğine " 
 "göre tatmin edilir veya edilmez. "
 
 
@@ -1791,12 +1791,12 @@ msgid ""
 "\\( \\frac{1}{2} \\\\) in Cairo is \\\\( \\frac{P + 1}{2} \\\\) (and not 0 "
 "or 0.5), as it satisfies the above equation."
 msgstr ""
-"Cairo'da, \\\\( \\frac{x}{y} \\\\) sonucu her zaman \\\\( \\frac{x}{y} \\cdot y "
-"== x \\\\) denklemini tatmin edecek şekilde tanımlanır. Eğer y, x'i tam sayılar "
-"olarak bölerse, Cairo'da beklenen sonucu alırsınız (örneğin \\( \\frac{6}{2} \\) "
-"gerçekten `3` sonucunu verir). Ancak y, x'i bölmüyorsa, şaşırtıcı bir sonuç alabilirsiniz: "
-"örneğin, \\\\( 2 \\cdot \\frac{P + 1}{2} = P + 1 \\equiv 1 \\mod P \\\\) olduğundan, "
-"Cairo'daki \\( \\frac{1}{2} \\) değeri \\\\( \\frac{P + 1}{2} \\\\) (ve 0 veya 0.5 "
+"Cairo'da, \\\\( \\frac{x}{y} \\\\) sonucu her zaman \\\\( \\frac{x}{y} \\cdot y " 
+"== x \\\\) denklemini tatmin edecek şekilde tanımlanır. Eğer y, x'i tam sayılar " 
+"olarak bölerse, Cairo'da beklenen sonucu alırsınız (örneğin \\( \\frac{6}{2} \\) " 
+"gerçekten `3` sonucunu verir). Ancak y, x'i bölmüyorsa, şaşırtıcı bir sonuç alabilirsiniz: " 
+"örneğin, \\\\( 2 \\cdot \\frac{P + 1}{2} = P + 1 \\equiv 1 \\mod P \\\\) olduğundan, " 
+"Cairo'daki \\( \\frac{1}{2} \\) değeri \\\\( \\frac{P + 1}{2} \\\\) (ve 0 veya 0.5 " 
 "değil) olarak tanımlanır, çünkü bu yukarıdaki denklemi tatmin eder. "
 
 #: src/ch02-02-data-types.md:38
@@ -1820,13 +1820,13 @@ msgid ""
 msgstr ""
 "felt252 türü, temel kütüphanedeki tüm türlerin oluşturulması için temel olarak hizmet veren temel bir türdür. Ancak, programcıların mümkün "
 "olduğunda `felt252` türünün yerine `integer` türlerini kullanmaları şiddetle tavsiye edilir, çünkü "
-"`integer` türleri, kodda potansiyel zafiyetlere karşı ekstra koruma sağlayan
-"ek güvenlik özellikleri ile gelir, örneğin taşma ve taşma altı kontrolleri. Bu
-"integer türlerini kullanarak, programcılar programlarının daha güvenli ve saldırılara
-"veya diğer güvenlik tehditlerine karşı daha az hassas olduğundan emin olabilirler. Bir
-"`integer`, kesirli bir bileşeni olmayan bir sayıdır. Bu tür bildirimi, programcının
-"integer'ı depolamak için kullanabileceği bit sayısını gösterir. Tablo 3-1, Cairo'daki
-"yerleşik integer türlerini gösterir. Bu çeşitlerden herhangi birini kullanarak integer
+"`integer` türleri, kodda potansiyel zafiyetlere karşı ekstra koruma sağlayan 
+"ek güvenlik özellikleri ile gelir, örneğin taşma ve taşma altı kontrolleri. Bu  
+"integer türlerini kullanarak, programcılar programlarının daha güvenli ve saldırılara  
+"veya diğer güvenlik tehditlerine karşı daha az hassas olduğundan emin olabilirler. Bir  
+"`integer`, kesirli bir bileşeni olmayan bir sayıdır. Bu tür bildirimi, programcının  
+"integer'ı depolamak için kullanabileceği bit sayısını gösterir. Tablo 3-1, Cairo'daki 
+"yerleşik integer türlerini gösterir. Bu çeşitlerden herhangi birini kullanarak integer  
 "değerinin türünü beyan edebiliriz."
 
 
@@ -1901,9 +1901,9 @@ msgid ""
 "Cairo can be compiled to MLIR. As variables are unsigned, they can't contain "
 "a negative number. This code will cause the program to panic:"
 msgstr ""
-"Her çeşidin açık bir boyutu vardır. Şimdilik, `usize` türü sadece `u32` için bir
-"takma addır; ancak, gelecekte Cairo MLIR'ye derlenebilecek olduğunda faydalı
-"olabilir. Değişkenler işaretsiz olduğundan, negatif bir sayı içeremezler. Bu kod
+"Her çeşidin açık bir boyutu vardır. Şimdilik, `usize` türü sadece `u32` için bir  
+"takma addır; ancak, gelecekte Cairo MLIR'ye derlenebilecek olduğunda faydalı  
+"olabilir. Değişkenler işaretsiz olduğundan, negatif bir sayı içeremezler. Bu kod  
 "programın paniklemesine neden olacaktır: "
 
 #: src/ch02-02-data-types.md:72
@@ -1912,9 +1912,9 @@ msgid ""
 "`u256` which needs 4 more bits to be stored. Under the hood, `u256` is "
 "basically a struct with 2 fields: `u256 {low: u128, high: u128}`."
 msgstr ""
-"Tüm önceden bahsedilen tam sayı
-"türleri bir `felt252` içine sığar, ancak `u256` saklanmak için 4 fazladan bit
-"ihtiyacı var. Kaputun altında, `u256` temelde 2 alana sahip bir yapıdır: `u256
+"Tüm önceden bahsedilen tam sayı  
+"türleri bir `felt252` içine sığar, ancak `u256` saklanmak için 4 fazladan bit  
+"ihtiyacı var. Kaputun altında, `u256` temelde 2 alana sahip bir yapıdır: `u256 
 "{low: u128, high: u128}`. "
 
 #: src/ch02-02-data-types.md:74
@@ -1927,12 +1927,12 @@ msgid ""
 "numbers from \\\\( -({2^7}) \\\\) to \\\\( {2^7} - 1 \\\\), which equals "
 "`-128` to `127`."
 msgstr ""
-"Cairo ayrıca, `i` öneki ile başlayan işaretli tam sayılar için de destek
-"sağlar. Bu tam sayılar hem pozitif hem de negatif değerleri temsil edebilir,
-"boyutları `i8`'den `i128`'e kadar değişir. Her işaretli çeşit \\\\( -({2^{n -
-"1}}) \\\\) ile \\\\( {2^{n - 1}} - 1 \\\\) arasında sayıları depolayabilir,
-"burada `n`, o çeşidin kullandığı bit sayısıdır. Yani bir i8 \\\\( -({2^7}) \\\\)
-"ile \\\\( {2^7} - 1 \\\\) arasında sayıları depolayabilir, bu da `-128` ile
+"Cairo ayrıca, `i` öneki ile başlayan işaretli tam sayılar için de destek  
+"sağlar. Bu tam sayılar hem pozitif hem de negatif değerleri temsil edebilir,  
+"boyutları `i8`'den `i128`'e kadar değişir. Her işaretli çeşit \\\\( -({2^{n -  
+"1}}) \\\\) ile \\\\( {2^{n - 1}} - 1 \\\\) arasında sayıları depolayabilir,  
+"burada `n`, o çeşidin kullandığı bit sayısıdır. Yani bir i8 \\\\( -({2^7}) \\\\)  
+"ile \\\\( {2^7} - 1 \\\\) arasında sayıları depolayabilir, bu da `-128` ile  
 "`127`'ye eşittir."
 
 
@@ -1943,9 +1943,9 @@ msgid ""
 "such as `57_u8`, to designate the type. It is also possible to use a visual "
 "separator `_` for number literals, in order to improve code readability."
 msgstr ""
-"Tam sayı sabitlerini, Tablo 3-2'de gösterilen herhangi bir formatta yazabilirsiniz.
-"Not edin ki, birden fazla sayısal tür olabilen sayı sabitleri, türü belirtmek için
-"`57_u8` gibi bir tür soneki kullanmaya izin verir. Ayrıca, kod okunurluğunu artırmak
+"Tam sayı sabitlerini, Tablo 3-2'de gösterilen herhangi bir formatta yazabilirsiniz. 
+"Not edin ki, birden fazla sayısal tür olabilen sayı sabitleri, türü belirtmek için  
+"`57_u8` gibi bir tür soneki kullanmaya izin verir. Ayrıca, kod okunurluğunu artırmak  
 "için sayı sabitlerinde görsel bir ayırıcı `_` kullanmak da mümkündür."
 
 
@@ -2001,8 +2001,8 @@ msgid ""
 "value your int can have and choose the good size. The primary situation in "
 "which you’d use `usize` is when indexing some sort of collection."
 msgstr ""
-"Bir tam sayının hangi türünü kullanacağınızı nasıl anlarsınız? Tam sayınızın
-"alabileceği maksimum değeri tahmin etmeye çalışın ve uygun boyutu seçin.
+"Bir tam sayının hangi türünü kullanacağınızı nasıl anlarsınız? Tam sayınızın  
+"alabileceği maksimum değeri tahmin etmeye çalışın ve uygun boyutu seçin.  
 "`usize` kullanmanın başlıca durumu, bir tür koleksiyonu dizinlendiğinde olur.
 
 
@@ -2018,9 +2018,9 @@ msgid ""
 "The following code shows how you’d use each numeric operation in a `let` "
 "statement:"
 msgstr ""
-"Cairo, tüm tam sayı türleri için beklediğiniz temel matematik işlemlerini
-"destekler: toplama, çıkarma, çarpma, bölme ve kalan. Tam sayı bölmesi sıfıra
-"doğru kesirli kısmı atarak en yakın tam sayıya yuvarlar. Aşağıdaki kod, bir
+"Cairo, tüm tam sayı türleri için beklediğiniz temel matematik işlemlerini  
+"destekler: toplama, çıkarma, çarpma, bölme ve kalan. Tam sayı bölmesi sıfıra  
+"doğru kesirli kısmı atarak en yakın tam sayıya yuvarlar. Aşağıdaki kod, bir  
 "`let` ifadesinde her bir sayısal işlemi nasıl kullanacağınızı gösterir:"
 
 
@@ -2061,7 +2061,7 @@ msgid ""
 "Each expression in these statements uses a mathematical operator and "
 "evaluates to a single value, which is then bound to a variable."
 msgstr ""
-"Bu ifadelerdeki her bir ifade, matematiksel bir operatör kullanır ve tek bir
+"Bu ifadelerdeki her bir ifade, matematiksel bir operatör kullanır ve tek bir  
 "değere değerlendirilir, ardından bu değer bir değişkene bağlanır.
 
 
@@ -2070,7 +2070,7 @@ msgid ""
 "[Appendix B](appendix-02-operators-and-symbols.md#operators) contains a list "
 "of all operators that Cairo provides."
 msgstr ""
-"[Ek B](appendix-02-operators-and-symbols.md#operators), Cairo'nun sağladığı
+"[Ek B](appendix-02-operators-and-symbols.md#operators), Cairo'nun sağladığı  
 "tüm operatörlerin bir listesini içerir."
 
 
@@ -2084,8 +2084,8 @@ msgid ""
 "possible values: `true` and `false`. Booleans are one `felt252` in size. The "
 "Boolean type in Cairo is specified using `bool`. For example:"
 msgstr ""
-"Diğer çoğu programlama dilinde olduğu gibi, Cairo'daki bir Boolean türünün
-"iki olası değeri vardır: `true` ve `false`. Booleanlar bir `felt252` boyutundadır.
+"Diğer çoğu programlama dilinde olduğu gibi, Cairo'daki bir Boolean türünün  
+"iki olası değeri vardır: `true` ve `false`. Booleanlar bir `felt252` boyutundadır.  
 "Cairo'da Boolean türü `bool` kullanılarak belirtilir. Örneğin:"
 
 
@@ -2099,8 +2099,8 @@ msgid ""
 "`false` literals as value. Hence, it is not allowed to use integer literals "
 "(i.e. `0` instead of false) for `bool` declarations. "
 msgstr ""
-"Bir `bool` değişkeni tanımlarken, değer olarak ya `true` ya da `false`
-"sabitlerinin kullanılması zorunludur. Dolayısıyla, `bool` tanımlamaları için
+"Bir `bool` değişkeni tanımlarken, değer olarak ya `true` ya da `false`  
+"sabitlerinin kullanılması zorunludur. Dolayısıyla, `bool` tanımlamaları için  
 "tam sayı sabitleri (yani `0` yerine false) kullanmak mümkün değildir. "
 
 
@@ -2110,8 +2110,8 @@ msgid ""
 "expression. We’ll cover how `if` expressions work in Cairo in the [“Control "
 "Flow”](ch02-05-control-flow.md) section."
 msgstr ""
-"Boolean değerlerini kullanmanın ana yolu, bir `if` ifadesi gibi koşullulardır.
-"Cairo'da `if` ifadelerinin nasıl çalıştığı [“Kontrol Akışı”](ch02-05-control-flow.md)
+"Boolean değerlerini kullanmanın ana yolu, bir `if` ifadesi gibi koşullulardır.  
+"Cairo'da `if` ifadelerinin nasıl çalıştığı [“Kontrol Akışı”](ch02-05-control-flow.md)  
 "bölümünde ele alınacaktır."
 
 
@@ -2127,10 +2127,10 @@ msgid ""
 "felt (a felt is 252 bits, one ASCII char is 8 bits). Here are some examples "
 "of declaring values by putting them between single quotes:"
 msgstr ""
-"Cairo, yerleşik bir string türüne sahip değildir, ancak `felt252` içinde
-"\"kısa string\" olarak adlandırdığımız karakterleri saklayabilirsiniz. Bir kısa
-"stringin maksimum uzunluğu 31 karakterdir. Bu, tek bir felt içine sığdırılabilmesini
-"sağlamak içindir (bir felt 252 bit, bir ASCII karakteri 8 bittir). İşte tek tırnak
+"Cairo, yerleşik bir string türüne sahip değildir, ancak `felt252` içinde  
+"\"kısa string\" olarak adlandırdığımız karakterleri saklayabilirsiniz. Bir kısa  
+"stringin maksimum uzunluğu 31 karakterdir. Bu, tek bir felt içine sığdırılabilmesini  
+"sağlamak içindir (bir felt 252 bit, bir ASCII karakteri 8 bittir). İşte tek tırnak  
 "arasına değerleri koyarak değer tanımlama örnekleri:"
 
 
@@ -2148,8 +2148,8 @@ msgid ""
 "`try_into` and `into` methods provided by the `TryInto` and `Into` traits "
 "from the core library."
 msgstr ""
-"Cairo'da, temel kütüphaneden sağlanan `TryInto` ve `Into` traitlerinin
-"`try_into` ve `into` yöntemlerini kullanarak skaler türleri birbirine
+"Cairo'da, temel kütüphaneden sağlanan `TryInto` ve `Into` traitlerinin  
+"`try_into` ve `into` yöntemlerini kullanarak skaler türleri birbirine  
 "çevirebilirsiniz."
 
 
@@ -2159,8 +2159,8 @@ msgid ""
 "might not fit the source value. Keep in mind that `try_into` returns an "
 "`Option<T>` type, which you'll need to unwrap to access the new value."
 msgstr ""
-"`try_into` yöntemi, hedef tür kaynak değere sığmayabileceği durumlarda güvenli
-"tür dönüşümü sağlar. `try_into`'nun bir `Option<T>` türü döndürdüğünü ve yeni
+"`try_into` yöntemi, hedef tür kaynak değere sığmayabileceği durumlarda güvenli  
+"tür dönüşümü sağlar. `try_into`'nun bir `Option<T>` türü döndürdüğünü ve yeni  
 "değere erişmek için bunun açılması gerektiğini unutmayın."
 
 
@@ -2170,7 +2170,7 @@ msgid ""
 "success is guaranteed, such as when the source type is smaller than the "
 "destination type."
 msgstr ""
-"Diğer yandan, `into` yöntemi, kaynak tür hedef türden daha küçük olduğu gibi,
+"Diğer yandan, `into` yöntemi, kaynak tür hedef türden daha küçük olduğu gibi, 
 "başarının garanti edildiği tür dönüşümleri için kullanılabilir."
 
 
@@ -2180,8 +2180,8 @@ msgid ""
 "source value to convert it to another type. The new variable's type must be "
 "explicitly defined, as demonstrated in the example below."
 msgstr ""
-"Dönüşümü gerçekleştirmek için, kaynak değeri başka bir türe dönüştürmek için
-"`var.into()` veya `var.try_into()` çağırın. Yeni değişkenin türü, aşağıdaki
+"Dönüşümü gerçekleştirmek için, kaynak değeri başka bir türe dönüştürmek için  
+"`var.into()` veya `var.try_into()` çağırın. Yeni değişkenin türü, aşağıdaki 
 "örnekte gösterildiği gibi açıkça tanımlanmalıdır."
 
 
@@ -2205,8 +2205,8 @@ msgid ""
 "variety of types into one compound type. Tuples have a fixed length: once "
 "declared, they cannot grow or shrink in size."
 msgstr ""
-"Bir _tuple_, çeşitli türlerdeki bir dizi değeri tek bir bileşik tür olarak
-"bir araya getirmenin genel bir yoludur. Tupleların sabit bir uzunluğu vardır:
+"Bir _tuple_, çeşitli türlerdeki bir dizi değeri tek bir bileşik tür olarak  
+"bir araya getirmenin genel bir yoludur. Tupleların sabit bir uzunluğu vardır:  
 "bir kez tanımlandıktan sonra, boyutları büyüyemez veya küçülemez."
 
 
@@ -2217,9 +2217,9 @@ msgid ""
 "different values in the tuple don’t have to be the same. We’ve added "
 "optional type annotations in this example:"
 msgstr ""
-"Bir tuple'ı, parantez içinde virgülle ayrılmış bir değer listesi yazarak
-"oluştururuz. Tupledaki her pozisyonun bir türü vardır ve tupledaki farklı
-"değerlerin türleri aynı olmak zorunda değildir. Bu örnekte isteğe bağlı tür
+"Bir tuple'ı, parantez içinde virgülle ayrılmış bir değer listesi yazarak  
+"oluştururuz. Tupledaki her pozisyonun bir türü vardır ve tupledaki farklı  
+"değerlerin türleri aynı olmak zorunda değildir. Bu örnekte isteğe bağlı tür  
 "annotasyonları ekledik:"
 
 
@@ -2229,8 +2229,8 @@ msgid ""
 "single compound element. To get the individual values out of a tuple, we can "
 "use pattern matching to destructure a tuple value, like this:"
 msgstr ""
-"`tup` değişkeni, bir tuple'ın tek bir bileşik eleman olarak kabul edilmesi
-"nedeniyle tüm tuple'ı bağlar. Bir tupledan tekil değerleri çıkarmak için, bir
+"`tup` değişkeni, bir tuple'ın tek bir bileşik eleman olarak kabul edilmesi  
+"nedeniyle tüm tuple'ı bağlar. Bir tupledan tekil değerleri çıkarmak için, bir  
 "tuple değerini yapılandırmak için kalıp eşleştirmeyi kullanabiliriz, şöyle ki:"
 
 
@@ -2246,10 +2246,10 @@ msgid ""
 "breaks the single tuple into three parts. Finally, the program prints `y is "
 "six` as the value of `y` is `6`."
 msgstr ""
-"Bu program ilk olarak bir tuple oluşturur ve onu `tup` değişkenine bağlar.
-"Ardından `let` ile bir kalıp kullanarak `tup`'ı alır ve onu `x`, `y` ve `z`
-"olmak üzere üç ayrı değişkene dönüştürür. Bu, tek bir tuple'ı üç parçaya
-"ayırması nedeniyle _yapılandırma_ olarak adlandırılır. Son olarak, program
+"Bu program ilk olarak bir tuple oluşturur ve onu `tup` değişkenine bağlar.  
+"Ardından `let` ile bir kalıp kullanarak `tup`'ı alır ve onu `x`, `y` ve `z` 
+"olmak üzere üç ayrı değişkene dönüştürür. Bu, tek bir tuple'ı üç parçaya  
+"ayırması nedeniyle _yapılandırma_ olarak adlandırılır. Son olarak, program  
 "`y is six` olarak `y`'nin değerinin `6` olduğunu yazdırır."
 
 
@@ -2258,7 +2258,7 @@ msgid ""
 "We can also declare the tuple with value and types, and destructure it at "
 "the same time. For example:"
 msgstr ""
-"Aynı zamanda değer ve türlerle tuple'ı bildirebilir ve onu yapılandırabiliriz.
+"Aynı zamanda değer ve türlerle tuple'ı bildirebilir ve onu yapılandırabiliriz. 
 "Örneğin:"
 
 
@@ -2272,8 +2272,8 @@ msgid ""
 "a tuple with no elements. Its size is always zero, and it is guaranteed to "
 "not exist in the compiled code."
 msgstr ""
-"Bir _birim türü_, yalnızca bir değeri `()` olan bir türdür. Hiçbir elemanı
-"olmayan bir tuple temsil edilir. Boyutu her zaman sıfırdır ve derlenmiş
+"Bir _birim türü_, yalnızca bir değeri `()` olan bir türdür. Hiçbir elemanı  
+"olmayan bir tuple temsil edilir. Boyutu her zaman sıfırdır ve derlenmiş  
 "kodda var olmadığı garanti edilir."
 
 
@@ -2284,8 +2284,8 @@ msgid ""
 "point of many programs. You’ve also seen the `fn` keyword, which allows you "
 "to declare new functions."
 msgstr ""
-"Fonksiyonlar Cairo kodunda yaygındır. Dilin en önemli fonksiyonlarından birini
-"zaten gördünüz: birçok programın giriş noktası olan `main` fonksiyonu. Ayrıca yeni
+"Fonksiyonlar Cairo kodunda yaygındır. Dilin en önemli fonksiyonlarından birini  
+"zaten gördünüz: birçok programın giriş noktası olan `main` fonksiyonu. Ayrıca yeni  
 "fonksiyonlar bildirmenize izin veren `fn` anahtar kelimesini de gördünüz."
 
 
@@ -2295,8 +2295,8 @@ msgid ""
 "variable names, in which all letters are lowercase and underscores separate "
 "words. Here’s a program that contains an example function definition:"
 msgstr ""
-"Cairo kodu, fonksiyon ve değişken adları için geleneksel stil olarak _snake case_
-"kullanır, burada tüm harfler küçük harftir ve alt çizgiler kelimeleri ayırır. İşte bir
+"Cairo kodu, fonksiyon ve değişken adları için geleneksel stil olarak _snake case_  
+"kullanır, burada tüm harfler küçük harftir ve alt çizgiler kelimeleri ayırır. İşte bir  
 "fonksiyon tanımı içeren bir program örneği:"
 
 
@@ -2314,8 +2314,8 @@ msgid ""
 "and a set of parentheses. The curly brackets tell the compiler where the "
 "function body begins and ends."
 msgstr ""
-"Bir fonksiyonu Cairo'da `fn`'yi takiben bir fonksiyon adı ve bir parantez kümesi
-"girerek tanımlarız. Süslü parantezler, fonksiyon gövdesinin nerede başlayıp
+"Bir fonksiyonu Cairo'da `fn`'yi takiben bir fonksiyon adı ve bir parantez kümesi  
+"girerek tanımlarız. Süslü parantezler, fonksiyon gövdesinin nerede başlayıp  
 "bittiğini derleyiciye söyler."
 
 
@@ -2329,11 +2329,11 @@ msgid ""
 "functions, only that they’re defined somewhere in a scope that can be seen "
 "by the caller."
 msgstr ""
-"Tanımladığımız herhangi bir fonksiyonu, adını takiben bir parantez kümesi girerek
-"çağırabiliriz. Programda `another_function` tanımlandığından, `main` fonksiyonunun
-"içinden çağrılabilir. Kaynak kodda `another_function`'ı `main` fonksiyonundan
-"_önce_ tanımladığımızı unutmayın; bunu sonrasında da tanımlayabilirdik. Cairo,
-"fonksiyonlarınızı nerede tanımladığınızı umursamaz, yeter ki çağıran tarafından
+"Tanımladığımız herhangi bir fonksiyonu, adını takiben bir parantez kümesi girerek  
+"çağırabiliriz. Programda `another_function` tanımlandığından, `main` fonksiyonunun  
+"içinden çağrılabilir. Kaynak kodda `another_function`'ı `main` fonksiyonundan  
+"_önce_ tanımladığımızı unutmayın; bunu sonrasında da tanımlayabilirdik. Cairo,  
+"fonksiyonlarınızı nerede tanımladığınızı umursamaz, yeter ki çağıran tarafından  
 "görülebilecek bir kapsamda tanımlansınlar."
 
 
@@ -2343,8 +2343,8 @@ msgid ""
 "further. Place the `another_function` example in _src/lib.cairo_ and run it. "
 "You should see the following output:"
 msgstr ""
-"Fonksiyonları daha fazla keşfetmek için Scarb ile _functions_ adında yeni bir
-"proje başlatalım. `another_function` örneğini _src/lib.cairo_ içine yerleştirin ve
+"Fonksiyonları daha fazla keşfetmek için Scarb ile _functions_ adında yeni bir  
+"proje başlatalım. `another_function` örneğini _src/lib.cairo_ içine yerleştirin ve  
 "çalıştırın. Aşağıdaki çıktıyı görmelisiniz:"
 
 
@@ -2354,8 +2354,8 @@ msgid ""
 "First the “Hello, world!” message prints, and then `another_function` is "
 "called and its message is printed."
 msgstr ""
-"Satırlar, `main` fonksiyonunda göründükleri sırayla çalışır. İlk olarak “Hello,
-"world!” mesajı yazdırılır ve ardından `another_function` çağrılır ve onun mesajı
+"Satırlar, `main` fonksiyonunda göründükleri sırayla çalışır. İlk olarak “Hello,  
+"world!” mesajı yazdırılır ve ardından `another_function` çağrılır ve onun mesajı  
 "yazdırılır."
 
 
@@ -2373,11 +2373,11 @@ msgid ""
 "the variables in a function’s definition or the concrete values passed in "
 "when you call a function."
 msgstr ""
-"Fonksiyonları, fonksiyonun imzasının bir parçası olan özel değişkenler olan _parametreler_
-"ile tanımlayabiliriz. Bir fonksiyonun parametreleri olduğunda, bu parametreler için somut
-"değerler sağlayabilirsiniz. Teknik olarak, somut değerlere _argümanlar_ denir, ancak
-"günlük konuşmada, insanlar genellikle fonksiyonun tanımındaki değişkenler veya fonksiyonu
-"çağırdığınızda geçirilen somut değerler için _parametre_ ve _argüman_ kelimelerini birbirinin
+"Fonksiyonları, fonksiyonun imzasının bir parçası olan özel değişkenler olan _parametreler_  
+"ile tanımlayabiliriz. Bir fonksiyonun parametreleri olduğunda, bu parametreler için somut  
+"değerler sağlayabilirsiniz. Teknik olarak, somut değerlere _argümanlar_ denir, ancak  
+"günlük konuşmada, insanlar genellikle fonksiyonun tanımındaki değişkenler veya fonksiyonu  
+"çağırdığınızda geçirilen somut değerler için _parametre_ ve _argüman_ kelimelerini birbirinin  
 "yerine kullanır."
 
 
@@ -2396,8 +2396,8 @@ msgid ""
 "the `println!` macro puts `5` where the pair of curly brackets containing "
 "`x` was in the format string."
 msgstr ""
-"`another_function`'ın bildirimi `x` adında bir parametreye sahiptir. `x`'in türü
-"`felt252` olarak belirtilmiştir. `another_function`'a `5` geçirdiğimizde, `println!` makrosu
+"`another_function`'ın bildirimi `x` adında bir parametreye sahiptir. `x`'in türü  
+"`felt252` olarak belirtilmiştir. `another_function`'a `5` geçirdiğimizde, `println!` makrosu  
 "`x`'i içeren süslü parantez çiftinin olduğu yere format dizgisinde `5` koyar."
 
 
@@ -2410,10 +2410,10 @@ msgid ""
 "able to give more helpful error messages if it knows what types the function "
 "expects."
 msgstr ""
-"Fonksiyon imzalarında, her parametrenin türünü _mutlaka_ belirtmelisiniz. Bu, Cairo’nun
-"tasarımında bilinçli bir karardır: fonksiyon tanımlarında tür annotasyonları gerektirmek,
-"kodun geri kalanında ne tür bir şey kastettiğinizi anlamak için derleyicinin neredeyse hiç
-"sizin tarafınızdan bunları kullanmanızı gerektirmez. Derleyici, fonksiyonun hangi türleri
+"Fonksiyon imzalarında, her parametrenin türünü _mutlaka_ belirtmelisiniz. Bu, Cairo’nun  
+"tasarımında bilinçli bir karardır: fonksiyon tanımlarında tür annotasyonları gerektirmek,  
+"kodun geri kalanında ne tür bir şey kastettiğinizi anlamak için derleyicinin neredeyse hiç  
+"sizin tarafınızdan bunları kullanmanızı gerektirmez. Derleyici, fonksiyonun hangi türleri  
 "beklediğini bildiğinde daha yardımcı hata mesajları verebilir."
 
 
@@ -2440,9 +2440,9 @@ msgid ""
 "represent string literals. The function then prints text containing both the "
 "`value` and the `unit_label`."
 msgstr ""
-"Bu örnek, `value` ve `unit_label` adında iki parametre ile `print_labeled_measurement` adında
-"bir fonksiyon oluşturur. İlk parametre `value` adını taşır ve bir `u128`'dir. İkincisi `unit_label`
-"adında ve `ByteArray` türündedir - Cairo'nun string literallerini temsil etmek için içsel türü.
+"Bu örnek, `value` ve `unit_label` adında iki parametre ile `print_labeled_measurement` adında  
+"bir fonksiyon oluşturur. İlk parametre `value` adını taşır ve bir `u128`'dir. İkincisi `unit_label`  
+"adında ve `ByteArray` türündedir - Cairo'nun string literallerini temsil etmek için içsel türü.  
 "Fonksiyon daha sonra hem `value` hem de `unit_label` içeren bir metin yazdırır."
 
 
@@ -2452,7 +2452,7 @@ msgid ""
 "_functions_ project’s _src/lib.cairo_ file with the preceding example and "
 "run it using `scarb cairo-run`:"
 msgstr ""
-"Bu kodu çalıştırmayı deneyelim. _functions_ projesinin _src/lib.cairo_ dosyasındaki mevcut
+"Bu kodu çalıştırmayı deneyelim. _functions_ projesinin _src/lib.cairo_ dosyasındaki mevcut  
 "programı önceki örnekle değiştirin ve `scarb cairo-run` kullanarak çalıştırın:"
 
 
@@ -2461,7 +2461,7 @@ msgid ""
 "Because we called the function with `5` as the value for value and `\"h\"` "
 "as the value for `unit_label`, the program output contains those values."
 msgstr ""
-"Fonksiyonu `value` için `5` değeriyle ve `unit_label` için `\"h\"` değeriyle çağırdığımız için,
+"Fonksiyonu `value` için `5` değeriyle ve `unit_label` için `\"h\"` değeriyle çağırdığımız için,  
 "program çıktısı bu değerleri içerir."
 
 
@@ -2479,12 +2479,12 @@ msgid ""
 "the parameter, you can simply write `:parameter_name` instead of "
 "`parameter_name: variable_name`."
 msgstr ""
-"Cairo'da, adlandırılmış parametreler bir fonksiyonu çağırırken argümanların
-"isimlerini belirtmenize olanak tanır. Bu, fonksiyon çağrılarını daha okunabilir
-"ve kendini açıklayıcı hale getirir. Eğer adlandırılmış parametreleri kullanmak
-"istiyorsanız, parametrenin adını ve ona geçirmek istediğiniz değeri belirtmeniz
-"gereklidir. Sözdizimi şöyledir: `parameter_name: value`. Eğer parametre ile aynı
-"ada sahip bir değişken geçirirseniz, `parameter_name: variable_name` yerine
+"Cairo'da, adlandırılmış parametreler bir fonksiyonu çağırırken argümanların  
+"isimlerini belirtmenize olanak tanır. Bu, fonksiyon çağrılarını daha okunabilir  
+"ve kendini açıklayıcı hale getirir. Eğer adlandırılmış parametreleri kullanmak  
+"istiyorsanız, parametrenin adını ve ona geçirmek istediğiniz değeri belirtmeniz  
+"gereklidir. Sözdizimi şöyledir: `parameter_name: value`. Eğer parametre ile aynı  
+"ada sahip bir değişken geçirirseniz, `parameter_name: variable_name` yerine  
 "sadece `:parameter_name` yazabilirsiniz."
 
 
@@ -2506,11 +2506,11 @@ msgid ""
 "so let’s look at what statements and expressions are and how their "
 "differences affect the bodies of functions."
 msgstr ""
-"Fonksiyon gövdeleri, isteğe bağlı olarak bir expression ile sonlanan bir dizi statement'tan
-"oluşur. Şu ana kadar ele aldığımız fonksiyonlar, bir sonlandırma expression'ı içermemişti,
-"ancak bir statement içinde bir expression görmüşsünüzdür. Cairo bir expression tabanlı dil
-"olduğundan, bu önemli bir ayrımı anlamak önemlidir. Diğer diller aynı ayrımlara sahip değildir,
-"bu yüzden statement'lar ve expression'lar neyi ifade eder ve farklılıkları fonksiyon gövdelerini
+"Fonksiyon gövdeleri, isteğe bağlı olarak bir expression ile sonlanan bir dizi statement'tan  
+"oluşur. Şu ana kadar ele aldığımız fonksiyonlar, bir sonlandırma expression'ı içermemişti,  
+"ancak bir statement içinde bir expression görmüşsünüzdür. Cairo bir expression tabanlı dil  
+"olduğundan, bu önemli bir ayrımı anlamak önemlidir. Diğer diller aynı ayrımlara sahip değildir,  
+"bu yüzden statement'lar ve expression'lar neyi ifade eder ve farklılıkları fonksiyon gövdelerini  
 "nasıl etkiler, bunlara bakalım."
 
 
@@ -2531,8 +2531,8 @@ msgid ""
 "and assigning a value to it with the `let` keyword is a statement. In "
 "Listing 2-1, `let y = 6;` is a statement."
 msgstr ""
-"Biz aslında zaten statement'lar ve expression'lar kullanmışızdır. Bir değişken oluşturmak ve
-"`let` anahtar kelimesi ile ona bir değer atamak bir statement'dır. Listing 2-1'de, `let y = 6;`
+"Biz aslında zaten statement'lar ve expression'lar kullanmışızdır. Bir değişken oluşturmak ve  
+"`let` anahtar kelimesi ile ona bir değer atamak bir statement'dır. Listing 2-1'de, `let y = 6;`  
 "bir statement'dır."
 
 
@@ -2553,7 +2553,7 @@ msgid ""
 "statement to another variable, as the following code tries to do; you’ll get "
 "an error:"
 msgstr ""
-"Statement'lar değer döndürmez. Bu nedenle, bir `let` statement'ını başka bir değişkene
+"Statement'lar değer döndürmez. Bu nedenle, bir `let` statement'ını başka bir değişkene  
 "atayamazsınız, aşağıdaki kodun yapmaya çalıştığı gibi; bir hata alırsınız:"
 
 
@@ -2569,11 +2569,11 @@ msgid ""
 "assignment. In those languages, you can write `x = y = 6` and have both `x` "
 "and `y` have the value `6`; that is not the case in Cairo."
 msgstr ""
-"`let y = 6` statement'ı bir değer döndürmez, bu yüzden `x`'in bağlanacak bir şeyi yoktur. Bu, C
-"ve Ruby gibi diğer dillerde olanlardan farklıdır, bu dillerde atama, atamanın değerini döndürür.
-"Bu dillerde `x = y = 6` yazabilir ve hem `x` hem de `y`'nin değeri `6` olur; bu Cairo'da söz
+"`let y = 6` statement'ı bir değer döndürmez, bu yüzden `x`'in bağlanacak bir şeyi yoktur. Bu, C  
+"ve Ruby gibi diğer dillerde olanlardan farklıdır, bu dillerde atama, atamanın değerini döndürür.  
+"Bu dillerde `x = y = 6` yazabilir ve hem `x` hem de `y`'nin değeri `6` olur; bu Cairo'da söz  
 "konusu değildir."
-
+ 
 
 #: src/ch02-03-functions.md:205
 msgid ""
@@ -2583,9 +2583,9 @@ msgid ""
 "part of statements: in Listing 2-1, the `6` in the statement `let y = 6;` is "
 "an expression that evaluates to the value `6`."
 msgstr ""
-"Expression'lar bir değere değerlendirilir ve Cairo'da yazacağınız kodun çoğunu oluşturur. Örneğin,
-"`5 + 6` gibi bir matematik işlemi, değeri `11` olarak değerlendirilen bir expression'dır.
-"Expression'lar statement'ların bir parçası olabilir: Listing 2-1'de, `let y = 6;` statement'ındaki
+"Expression'lar bir değere değerlendirilir ve Cairo'da yazacağınız kodun çoğunu oluşturur. Örneğin,  
+"`5 + 6` gibi bir matematik işlemi, değeri `11` olarak değerlendirilen bir expression'dır.  
+"Expression'lar statement'ların bir parçası olabilir: Listing 2-1'de, `let y = 6;` statement'ındaki  
 "`6`, değeri `6` olarak değerlendirilen bir expression'dır."
 
 
@@ -2595,7 +2595,7 @@ msgid ""
 "the function's explicit return value, if specified, or the 'unit' type `()` "
 "otherwise."
 msgstr ""
-"Bir fonksiyonu çağırmak bir expression'dır çünkü her zaman bir değere değerlendirilir: belirtilmişse
+"Bir fonksiyonu çağırmak bir expression'dır çünkü her zaman bir değere değerlendirilir: belirtilmişse  
 "fonksiyonun açık dönüş değeri, aksi takdirde 'unit' türü `()`."
 
 
@@ -2623,10 +2623,10 @@ msgid ""
 "return a value. Keep this in mind as you explore function return values and "
 "expressions next."
 msgstr ""
-"bu durumda `4` olarak değerlendirilen bir bloktur. Bu değer, `let` statement'ının bir parçası olarak
-"`y`'e bağlanır. `x + 1` satırının sonunda, şimdiye kadar gördüğünüz çoğu satırdan farklı olarak bir
-"noktalı virgül yoktur. Expression'lar sonunda noktalı virgül içermez. Bir expression'ın sonuna
-"noktalı virgül eklerseniz, onu bir statement'a dönüştürürsünüz ve o zaman bir değer döndürmez.
+"bu durumda `4` olarak değerlendirilen bir bloktur. Bu değer, `let` statement'ının bir parçası olarak  
+"`y`'e bağlanır. `x + 1` satırının sonunda, şimdiye kadar gördüğünüz çoğu satırdan farklı olarak bir  
+"noktalı virgül yoktur. Expression'lar sonunda noktalı virgül içermez. Bir expression'ın sonuna  
+"noktalı virgül eklerseniz, onu bir statement'a dönüştürürsünüz ve o zaman bir değer döndürmez.  
 "Bunu, fonksiyon dönüş değerlerini ve expression'ları keşfederken aklınızda bulundurun."
 
 
@@ -2644,12 +2644,12 @@ msgid ""
 "but most functions return the last expression implicitly. Here’s an example "
 "of a function that returns a value:"
 msgstr ""
-"Fonksiyonlar, onları çağıran koda değerler döndürebilir. Dönüş değerlerini
-"isimlendirmeyiz, ancak türlerini bir ok (`->`) sonrasında belirtmeliyiz.
-"Cairo'da, fonksiyonun dönüş değeri, fonksiyonun gövde bloğundaki son
-"expression ile eşanlamlıdır. `return` anahtar kelimesini kullanarak ve bir
-"değer belirterek bir fonksiyondan erken dönüş yapabilirsiniz, ancak çoğu
-"fonksiyon son expression'ı dolaylı olarak döndürür. İşte bir değer döndüren
+"Fonksiyonlar, onları çağıran koda değerler döndürebilir. Dönüş değerlerini  
+"isimlendirmeyiz, ancak türlerini bir ok (`->`) sonrasında belirtmeliyiz.  
+"Cairo'da, fonksiyonun dönüş değeri, fonksiyonun gövde bloğundaki son  
+"expression ile eşanlamlıdır. `return` anahtar kelimesini kullanarak ve bir  
+"değer belirterek bir fonksiyondan erken dönüş yapabilirsiniz, ancak çoğu  
+"fonksiyon son expression'ı dolaylı olarak döndürür. İşte bir değer döndüren  
 "bir fonksiyonun örneği:"
 
 
@@ -2660,9 +2660,9 @@ msgid ""
 "Note that the function’s return type is specified too, as `-> u32`. Try "
 "running this code; the output should look like this:"
 msgstr ""
-"`five` fonksiyonunda fonksiyon çağrıları veya hatta `let` statement'ları
-"yoktur—sadece tek başına `5` numarası vardır. Bu, Cairo'da geçerli bir
-"fonksiyondur. Fonksiyonun dönüş türünün de `-> u32` olarak belirtildiğine
+"`five` fonksiyonunda fonksiyon çağrıları veya hatta `let` statement'ları  
+"yoktur—sadece tek başına `5` numarası vardır. Bu, Cairo'da geçerli bir  
+"fonksiyondur. Fonksiyonun dönüş türünün de `-> u32` olarak belirtildiğine  
 "dikkat edin. Bu kodu çalıştırmayı deneyin; çıktı şöyle görünmelidir:"
 
 
@@ -2674,10 +2674,10 @@ msgid ""
 "value of a function to initialize a variable. Because the function `five` "
 "returns a `5`, that line is the same as the following:"
 msgstr ""
-"`five` içindeki `5`, fonksiyonun dönüş değeridir, bu yüzden dönüş türü
-"`u32`'dir. Bunu daha detaylı inceleyelim. İki önemli nokta var: ilk olarak,
-"`let x = five();` satırı, bir fonksiyonun dönüş değerini bir değişkeni
-"başlatmak için kullandığımızı gösterir. Çünkü `five` fonksiyonu bir `5`
+"`five` içindeki `5`, fonksiyonun dönüş değeridir, bu yüzden dönüş türü  
+"`u32`'dir. Bunu daha detaylı inceleyelim. İki önemli nokta var: ilk olarak,  
+"`let x = five();` satırı, bir fonksiyonun dönüş değerini bir değişkeni  
+"başlatmak için kullandığımızı gösterir. Çünkü `five` fonksiyonu bir `5`  
 "döndürür, bu satır aşağıdakiyle aynıdır:"
 
 
@@ -2688,9 +2688,9 @@ msgid ""
 "because it’s an expression whose value we want to return. Let’s look at "
 "another example:"
 msgstr ""
-"İkincisi, `five` fonksiyonunun parametreleri yoktur ve dönüş değerinin
-"türünü tanımlar, ancak fonksiyonun gövdesi, döndürmek istediğimiz değerin
-"bir expression'ı olduğu için noktalı virgül olmadan yalnız bir `5`'tir.
+"İkincisi, `five` fonksiyonunun parametreleri yoktur ve dönüş değerinin  
+"türünü tanımlar, ancak fonksiyonun gövdesi, döndürmek istediğimiz değerin  
+"bir expression'ı olduğu için noktalı virgül olmadan yalnız bir `5`'tir.  
 "Bir başka örneğe bakalım:"
 
 
@@ -2700,8 +2700,8 @@ msgid ""
 "of the line containing `x + 1`, changing it from an expression to a "
 "statement, we’ll get an error:"
 msgstr ""
-"Bu kodu çalıştırmak `x = 6` yazdıracaktır. Ancak, `x + 1` satırının sonuna
-"noktalı virgül koyarsak, bunu bir expression'dan bir statement'a çevirirsek,
+"Bu kodu çalıştırmak `x = 6` yazdıracaktır. Ancak, `x + 1` satırının sonuna  
+"noktalı virgül koyarsak, bunu bir expression'dan bir statement'a çevirirsek,  
 "bir hata alırız:"
 
 
@@ -2713,7 +2713,7 @@ msgid ""
 "```"
 msgstr ""
 "```shell\n"
-"error: Unexpected return type. Expected: \"core::integer::u32\", found:
+"error: Unexpected return type. Expected: \"core::integer::u32\", found: 
 "\"()\".\n"
 "```"
 
@@ -2726,10 +2726,10 @@ msgid ""
 "expressed by `()`, the unit type. Therefore, nothing is returned, which "
 "contradicts the function definition and results in an error."
 msgstr ""
-"Ana hata mesajı olan `Unexpected return type`, bu kodla ilgili temel sorunu
-"ortaya koyar. `plus_one` fonksiyonunun tanımı, bir `u32` döndüreceğini
-"söyler, ancak statement'lar bir değere değerlendirilmez, bu `()`, yani unit
-"türü ile ifade edilir. Dolayısıyla, hiçbir şey döndürülmez, bu da fonksiyonun
+"Ana hata mesajı olan `Unexpected return type`, bu kodla ilgili temel sorunu  
+"ortaya koyar. `plus_one` fonksiyonunun tanımı, bir `u32` döndüreceğini  
+"söyler, ancak statement'lar bir değere değerlendirilmez, bu `()`, yani unit  
+"türü ile ifade edilir. Dolayısıyla, hiçbir şey döndürülmez, bu da fonksiyonun  
 "tanımı ile çelişir ve bir hataya neden olur. "
 
 
@@ -2740,9 +2740,9 @@ msgid ""
 "in their source code that the compiler will ignore but people reading the "
 "source code may find useful."
 msgstr ""
-"Tüm programcılar kodlarını anlaşılır kılmaya çalışır, ancak bazen ek açıklama
-"gerekebilir. Bu durumlarda, programcılar kaynak kodlarında derleyicinin
-"yoksayacağı ancak kaynak kodunu okuyanların faydalı bulabileceği yorumlar
+"Tüm programcılar kodlarını anlaşılır kılmaya çalışır, ancak bazen ek açıklama  
+"gerekebilir. Bu durumlarda, programcılar kaynak kodlarında derleyicinin  
+"yoksayacağı ancak kaynak kodunu okuyanların faydalı bulabileceği yorumlar  
 "bırakır."
 
 
@@ -2760,8 +2760,8 @@ msgid ""
 "the comment continues until the end of the line. For comments that extend "
 "beyond a single line, you’ll need to include `//` on each line, like this:"
 msgstr ""
-"Cairo'da, özdeş yorum stili bir yorumu iki eğik çizgi ile başlatır ve yorum
-"satırın sonuna kadar devam eder. Tek bir satırın ötesine uzanan yorumlar için,
+"Cairo'da, özdeş yorum stili bir yorumu iki eğik çizgi ile başlatır ve yorum  
+"satırın sonuna kadar devam eder. Tek bir satırın ötesine uzanan yorumlar için,  
 "her satırda `//` eklemeniz gerekir, şöyle ki:"
 
 
@@ -2785,7 +2785,7 @@ msgid ""
 "But you’ll more often see them used in this format, with the comment on a "
 "separate line above the code it’s annotating:"
 msgstr ""
-"Ancak onları daha sık bu formatta, yorumunun açıkladığı kodun üzerinde ayrı bir
+"Ancak onları daha sık bu formatta, yorumunun açıkladığı kodun üzerinde ayrı bir  
 "satırda göreceksiniz:"
 
 
@@ -2800,9 +2800,9 @@ msgid ""
 "in most programming languages. The most common constructs that let you "
 "control the flow of execution of Cairo code are if expressions and loops."
 msgstr ""
-"Bir koşul doğru olduğunda bazı kodların çalıştırılması ve bir koşul doğru
-"olduğu sürece bazı kodların tekrar tekrar çalıştırılması, çoğu programlama
-"dilinde temel yapı taşlarıdır. Cairo kodunun yürütme akışını kontrol etmenize
+"Bir koşul doğru olduğunda bazı kodların çalıştırılması ve bir koşul doğru  
+"olduğu sürece bazı kodların tekrar tekrar çalıştırılması, çoğu programlama  
+"dilinde temel yapı taşlarıdır. Cairo kodunun yürütme akışını kontrol etmenize  
 "izin veren en yaygın yapılar if ifadeleri ve döngülerdir."
 
 
@@ -2816,8 +2816,8 @@ msgid ""
 "provide a condition and then state, “If this condition is met, run this "
 "block of code. If the condition is not met, do not run this block of code.”"
 msgstr ""
-"Bir if ifadesi, koşullara bağlı olarak kodunuzu dallandırmanıza olanak tanır.
-"Bir koşul sağlarsınız ve ardından, “Bu koşul karşılanırsa, bu kod bloğunu
+"Bir if ifadesi, koşullara bağlı olarak kodunuzu dallandırmanıza olanak tanır.  
+"Bir koşul sağlarsınız ve ardından, “Bu koşul karşılanırsa, bu kod bloğunu  
 "çalıştır. Koşul karşılanmazsa, bu kod bloğunu çalıştırma.” dersiniz."
 
 
@@ -2827,7 +2827,7 @@ msgid ""
 "explore the `if` expression. In the _src/lib.cairo_ file, input the "
 "following:"
 msgstr ""
-"_cairo_projects_ dizininizde _branches_ adında yeni bir proje oluşturun ve
+"_cairo_projects_ dizininizde _branches_ adında yeni bir proje oluşturun ve  
 "`if` ifadesini keşfedin. _src/lib.cairo_ dosyasına aşağıdakileri girin:"
 
 
@@ -2846,9 +2846,9 @@ msgid ""
 "a value equal to 5. We place the block of code to execute if the condition "
 "is `true` immediately after the condition inside curly brackets."
 msgstr ""
-"Tüm `if` ifadeleri `if` anahtar kelimesiyle başlar, ardından bir koşul gelir.
-"Bu durumda, koşul `number` değişkeninin değerinin 5'e eşit olup olmadığını
-"kontrol eder. Koşul `true` ise yürütülecek kod bloğunu koşulun hemen ardından
+"Tüm `if` ifadeleri `if` anahtar kelimesiyle başlar, ardından bir koşul gelir.  
+"Bu durumda, koşul `number` değişkeninin değerinin 5'e eşit olup olmadığını  
+"kontrol eder. Koşul `true` ise yürütülecek kod bloğunu koşulun hemen ardından  
 "süslü parantezler içine yerleştiririz."
 
 
@@ -2860,9 +2860,9 @@ msgid ""
 "the condition is `false`, the program will just skip the `if` block and move "
 "on to the next bit of code."
 msgstr ""
-"İsteğe bağlı olarak, koşul `false` olarak değerlendirilirse programın
-"yürüteceği alternatif bir kod bloğu vermek için burada yaptığımız gibi bir
-"`else` ifadesi de ekleyebiliriz. Bir `else` ifadesi sağlamazsanız ve koşul
+"İsteğe bağlı olarak, koşul `false` olarak değerlendirilirse programın  
+"yürüteceği alternatif bir kod bloğu vermek için burada yaptığımız gibi bir  
+"`else` ifadesi de ekleyebiliriz. Bir `else` ifadesi sağlamazsanız ve koşul  
 "`false` ise, program `if` bloğunu atlayıp kodun bir sonraki kısmına geçer."
 
 
@@ -2875,7 +2875,7 @@ msgid ""
 "Let’s try changing the value of `number` to a value that makes the condition "
 "`true` to see what happens:"
 msgstr ""
-"Koşulun `true` olmasını sağlayacak bir değere `number` değerini değiştirip
+"Koşulun `true` olmasını sağlayacak bir değere `number` değerini değiştirip  
 "ne olacağını görelim:"
 
 
@@ -2885,8 +2885,8 @@ msgid ""
 "the condition isn’t a `bool`, we’ll get an error. For example, try running "
 "the following code:"
 msgstr ""
-"Bu kodda koşulun bir `bool` olması gerektiğini belirtmek de önemlidir.
-"Koşul bir `bool` değilse, bir hata alırız. Örneğin, aşağıdaki kodu
+"Bu kodda koşulun bir `bool` olması gerektiğini belirtmek de önemlidir.  
+"Koşul bir `bool` değilse, bir hata alırız. Örneğin, aşağıdaki kodu  
 "çalıştırmayı deneyin:"
 
 
@@ -2911,13 +2911,13 @@ msgid ""
 "the `if` code block to run only when a number is not equal to 0, for "
 "example, we can change the if expression to the following:"
 msgstr ""
-"Hata, `number`'ın daha sonra `if` ifadesinin koşulu olarak kullanılmasına
-"dayanarak Cairo'nun `number` için `bool` türünü çıkardığını gösterir. Değer
-"`3`'ten bir `bool` oluşturmaya çalışır, ancak Cairo zaten bir sayısal
-"literalden `bool` oluşturmayı desteklemez - bir `bool` oluşturmak için sadece
-"`true` veya `false` kullanabilirsiniz. Ruby ve JavaScript gibi dillerin
-"aksine, Cairo otomatik olarak Boolean olmayan türleri Boolean'a dönüştürmeye
-"çalışmaz. Örneğin, bir sayı 0'a eşit olmadığında `if` kod bloğunun yalnızca
+"Hata, `number`'ın daha sonra `if` ifadesinin koşulu olarak kullanılmasına  
+"dayanarak Cairo'nun `number` için `bool` türünü çıkardığını gösterir. Değer  
+"`3`'ten bir `bool` oluşturmaya çalışır, ancak Cairo zaten bir sayısal  
+"literalden `bool` oluşturmayı desteklemez - bir `bool` oluşturmak için sadece  
+"`true` veya `false` kullanabilirsiniz. Ruby ve JavaScript gibi dillerin  
+"aksine, Cairo otomatik olarak Boolean olmayan türleri Boolean'a dönüştürmeye  
+"çalışmaz. Örneğin, bir sayı 0'a eşit olmadığında `if` kod bloğunun yalnızca  
 "çalışmasını istiyorsak, if ifadesini şu şekilde değiştirebiliriz:"
 
 
@@ -2938,7 +2938,7 @@ msgid ""
 "You can use multiple conditions by combining `if` and `else` in an `else if` "
 "expression. For example:"
 msgstr ""
-"`if` ve `else`'i bir `else if` ifadesinde birleştirerek birden fazla koşulu
+"`if` ve `else`'i bir `else if` ifadesinde birleştirerek birden fazla koşulu  
 "kullanabilirsiniz. Örneğin:"
 
 
@@ -2963,7 +2963,7 @@ msgid ""
 "This program has four possible paths it can take. After running it, you "
 "should see the following output:"
 msgstr ""
-"Bu programın alabileceği dört olası yolu vardır. Çalıştırdıktan sonra,
+"Bu programın alabileceği dört olası yolu vardır. Çalıştırdıktan sonra,  
 "şu çıktıyı görmelisiniz:"
 
 
@@ -2980,14 +2980,14 @@ msgid ""
 "match-control-flow-construct.md) describes a powerful Cairo branching "
 "construct called `match` for these cases."
 msgstr ""
-"Bu program çalıştırıldığında, sırayla her `if` ifadesini kontrol eder ve
-"koşul `true` olarak değerlendirilen ilk gövdeyi yürütür. `number - 2 == 1`
-"`true` olsa da, çıktı olarak `number minus 2 is 1` ya da `else` bloğundan
-"`number not found` metnini görmeyiz. Çünkü Cairo, ilk `true` koşulunun
-"bloğunu yürütür ve bir tane bulduğunda, geri kalanını bile kontrol etmez.
-"Çok fazla `else if` ifadesi kullanmak kodunuzu karışık hale getirebilir, bu
-"yüzden birden fazla varsa kodunuzu yeniden düzenlemek isteyebilirsiniz.
-"[6. Bölüm](./ch06-02-the-match-control-flow-construct.md) bu durumlar için
+"Bu program çalıştırıldığında, sırayla her `if` ifadesini kontrol eder ve  
+"koşul `true` olarak değerlendirilen ilk gövdeyi yürütür. `number - 2 == 1`  
+"`true` olsa da, çıktı olarak `number minus 2 is 1` ya da `else` bloğundan  
+"`number not found` metnini görmeyiz. Çünkü Cairo, ilk `true` koşulunun  
+"bloğunu yürütür ve bir tane bulduğunda, geri kalanını bile kontrol etmez.  
+"Çok fazla `else if` ifadesi kullanmak kodunuzu karışık hale getirebilir, bu  
+"yüzden birden fazla varsa kodunuzu yeniden düzenlemek isteyebilirsiniz.  
+"[6. Bölüm](./ch06-02-the-match-control-flow-construct.md) bu durumlar için  
 "`match` adında güçlü bir Cairo dallanma yapısını tanımlar."
 
 
@@ -3000,7 +3000,7 @@ msgid ""
 "Because `if` is an expression, we can use it on the right side of a `let` "
 "statement to assign the outcome to a variable."
 msgstr ""
-"`if` bir ifade olduğu için, sonucu bir değişkene atamak için bir `let`
+"`if` bir ifade olduğu için, sonucu bir değişkene atamak için bir `let`  
 "ifadesinin sağ tarafında kullanabiliriz."
 
 
@@ -3013,7 +3013,7 @@ msgid ""
 "The `number` variable will be bound to a value based on the outcome of the "
 "`if` expression, which will be 5 here."
 msgstr ""
-"`number` değişkeni, `if` ifadesinin sonucuna bağlı olarak bir değere bağlanır,
+"`number` değişkeni, `if` ifadesinin sonucuna bağlı olarak bir değere bağlanır,  
 "burada bu değer 5 olacaktır."
 
 
@@ -3028,9 +3028,9 @@ msgid ""
 "the loop body to the end and then start immediately back at the beginning. "
 "To experiment with loops, let’s create a new project called _loops_."
 msgstr ""
-"Bir kod bloğunu birden fazla kez çalıştırmak sıklıkla faydalıdır. Bu görev için,
-"Cairo, döngü gövdesi içindeki kodun sonuna kadar çalıştırıp ardından hemen başa
-"dönecek basit bir döngü sözdizimi sağlar. Döngülerle deney yapmak için _loops_
+"Bir kod bloğunu birden fazla kez çalıştırmak sıklıkla faydalıdır. Bu görev için,  
+"Cairo, döngü gövdesi içindeki kodun sonuna kadar çalıştırıp ardından hemen başa  
+"dönecek basit bir döngü sözdizimi sağlar. Döngülerle deney yapmak için _loops_  
 "adında yeni bir proje oluşturalım."
 
 
@@ -3047,7 +3047,7 @@ msgid ""
 "The `loop` keyword tells Cairo to execute a block of code over and over "
 "again forever or until you explicitly tell it to stop."
 msgstr ""
-"`loop` anahtar kelimesi, Cairo'ya bir kod bloğunu sürekli olarak ya da siz
+"`loop` anahtar kelimesi, Cairo'ya bir kod bloğunu sürekli olarak ya da siz  
 "açıkça durmasını söyleyene kadar tekrar tekrar çalıştırmasını söyler."
 
 
@@ -3056,7 +3056,7 @@ msgid ""
 "As an example, change the _src/lib.cairo_ file in your _loops_ directory to "
 "look like this:"
 msgstr ""
-"Örnek olarak, _loops_ dizininizdeki _src/lib.cairo_ dosyasını şu şekilde
+"Örnek olarak, _loops_ dizininizdeki _src/lib.cairo_ dosyasını şu şekilde  
 "değiştirin:"
 
 
@@ -3070,8 +3070,8 @@ msgid ""
 "purpose of the example, we added a `break` statement that will never be "
 "reached, but satisfies the compiler."
 msgstr ""
-"Not: Bu program, bir kırılma koşulu olmadan derlenmez. Örneğin amacıyla,
-"hiç ulaşılmayacak bir `break` ifadesi ekledik, ancak bu derleyiciyi
+"Not: Bu program, bir kırılma koşulu olmadan derlenmez. Örneğin amacıyla,  
+"hiç ulaşılmayacak bir `break` ifadesi ekledik, ancak bu derleyiciyi  
 "tatmin eder."
 
 
@@ -3082,9 +3082,9 @@ msgid ""
 "manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a "
 "program that is stuck in a continual loop. Give it a try:"
 msgstr ""
-"Bu programı çalıştırdığımızda, program ya gazı tükenene kadar ya da biz
-"programı manuel olarak durdurana kadar sürekli olarak tekrar yazdırıldığını
-"göreceğiz. Çoğu terminal, sürekli bir döngüde takılıp kalan bir programı
+"Bu programı çalıştırdığımızda, program ya gazı tükenene kadar ya da biz  
+"programı manuel olarak durdurana kadar sürekli olarak tekrar yazdırıldığını  
+"göreceğiz. Çoğu terminal, sürekli bir döngüde takılıp kalan bir programı  
 "kesmek için ctrl-c klavye kısayolunu destekler. Bir deneyin:"
 
 
@@ -3108,8 +3108,8 @@ msgid ""
 "the word `again!` printed after the ^C, depending on where the code was in "
 "the loop when it received the interrupt signal."
 msgstr ""
-"`^C` sembolü, ctrl-c'ye bastığınız yeri temsil eder. Kod döngüde kesme
-"sinyalini aldığında neredeyse bağlı olarak, ^C'den sonra `again!` yazılıp
+"`^C` sembolü, ctrl-c'ye bastığınız yeri temsil eder. Kod döngüde kesme  
+"sinyalini aldığında neredeyse bağlı olarak, ^C'den sonra `again!` yazılıp  
 "yazılmadığını görebilir veya göremeyebilirsiniz."
 
 
@@ -3124,12 +3124,12 @@ msgid ""
 "previous case, we set the gas limit high enough for the the program to run "
 "for quite some time."
 msgstr ""
-"Not: Cairo, gaz sayacı içeren bir programın sonsuz döngülerle çalışmasını
-"önler. Gaz sayacı, bir programda yapılabilecek hesaplamanın miktarını sınırlayan
-"bir mekanizmadır. `--available-gas` bayrağına bir değer ayarlayarak, programa
-"müsait maksimum gaz miktarını ayarlayabiliriz. Gaz, bir talimatın hesaplama
-"maliyetini ifade eden bir ölçüm birimidir. Gaz sayacı tükendiğinde, program
-"durur. Önceki durumda, programın oldukça uzun bir süre çalışması için gaz
+"Not: Cairo, gaz sayacı içeren bir programın sonsuz döngülerle çalışmasını  
+"önler. Gaz sayacı, bir programda yapılabilecek hesaplamanın miktarını sınırlayan  
+"bir mekanizmadır. `--available-gas` bayrağına bir değer ayarlayarak, programa  
+"müsait maksimum gaz miktarını ayarlayabiliriz. Gaz, bir talimatın hesaplama  
+"maliyetini ifade eden bir ölçüm birimidir. Gaz sayacı tükendiğinde, program  
+"durur. Önceki durumda, programın oldukça uzun bir süre çalışması için gaz  
 "limitini yeterince yüksek ayarladık."
 
 
@@ -3141,10 +3141,10 @@ msgid ""
 "it with the `--available-gas` flag set to a value that is large enough to "
 "run the program."
 msgstr ""
-"Akıllı kontratların Starknet üzerinde dağıtılması bağlamında, ağda sonsuz
-"döngülerin çalışmasını önlemek özellikle önemlidir. Eğer bir döngü
-"çalıştırması gereken bir program yazıyorsanız, programı çalıştırmak için
-"yeterince büyük bir değere sahip `--available-gas` bayrağı ile çalıştırmanız
+"Akıllı kontratların Starknet üzerinde dağıtılması bağlamında, ağda sonsuz  
+"döngülerin çalışmasını önlemek özellikle önemlidir. Eğer bir döngü  
+"çalıştırması gereken bir program yazıyorsanız, programı çalıştırmak için  
+"yeterince büyük bir değere sahip `--available-gas` bayrağı ile çalıştırmanız  
 "gerekecek."
 
 
@@ -3155,9 +3155,9 @@ msgid ""
 "program only prints `again!` 3 times before it stops, as it ran out of gas "
 "to keep executing the loop."
 msgstr ""
-"Şimdi, aynı programı tekrar çalıştırın, ancak bu sefer `--available-gas`
-"bayrağını `2000000000000` yerine `200000` olarak ayarlayın. Programın yalnızca
-"3 kez `tekrar!` yazdırdığını ve döngüyü sürdürmek için gazı tükendiği için
+"Şimdi, aynı programı tekrar çalıştırın, ancak bu sefer `--available-gas`  
+"bayrağını `2000000000000` yerine `200000` olarak ayarlayın. Programın yalnızca  
+"3 kez `tekrar!` yazdırdığını ve döngüyü sürdürmek için gazı tükendiği için  
 "durduğunu göreceksiniz."
 
 
@@ -3167,8 +3167,8 @@ msgid ""
 "You can place the `break` keyword within the loop to tell the program when "
 "to stop executing the loop."
 msgstr ""
-"Şans eseri, Cairo ayrıca kod kullanarak bir döngüden çıkmanın bir yolunu da
-"sağlar. Programa döngüyü ne zaman durdurması gerektiğini söylemek için döngü
+"Şans eseri, Cairo ayrıca kod kullanarak bir döngüden çıkmanın bir yolunu da  
+"sağlar. Programa döngüyü ne zaman durdurması gerektiğini söylemek için döngü  
 "içine `break` anahtar kelimesini yerleştirebilirsiniz."
 
 
@@ -3183,9 +3183,9 @@ msgid ""
 "`continue` statement to our loop to skip the `print` statement when `i` is "
 "equal to `5`."
 msgstr ""
-"`continue` anahtar kelimesi, programın döngünün bir sonraki yinelemesine
-"gitmesini ve bu yinelemedeki kodun geri kalanını atlamasını söyler. Döngümüze
-"`i` `5`e eşit olduğunda `print` ifadesini atlamak için bir `continue`
+"`continue` anahtar kelimesi, programın döngünün bir sonraki yinelemesine  
+"gitmesini ve bu yinelemedeki kodun geri kalanını atlamasını söyler. Döngümüze  
+"`i` `5`e eşit olduğunda `print` ifadesini atlamak için bir `continue`  
 "ifadesi ekleyelim."
 
 
@@ -3208,11 +3208,11 @@ msgid ""
 "expression you use to stop the loop; that value will be returned out of the "
 "loop so you can use it, as shown here:"
 msgstr ""
-"`loop` kullanımının yollarından biri, başarılı olup olmadığını kontrol etmek
-"gibi, başarısız olabileceğini bildiğiniz bir işlemi tekrar denemektir. Ayrıca,
-"bu işlemin sonucunu döngüden kodunuzun geri kalanına aktarmanız gerekebilir.
-"Bunu yapmak için, döngüyü durdurmak için kullandığınız `break` ifadesinin
-"ardından döndürmek istediğiniz değeri ekleyebilirsiniz; bu değer döngüden
+"`loop` kullanımının yollarından biri, başarılı olup olmadığını kontrol etmek  
+"gibi, başarısız olabileceğini bildiğiniz bir işlemi tekrar denemektir. Ayrıca,  
+"bu işlemin sonucunu döngüden kodunuzun geri kalanına aktarmanız gerekebilir.  
+"Bunu yapmak için, döngüyü durdurmak için kullandığınız `break` ifadesinin  
+"ardından döndürmek istediğiniz değeri ekleyebilirsiniz; bu değer döngüden  
 "döndürülecek ve aşağıda gösterildiği gibi kullanabilirsiniz:"
 
 
@@ -3231,13 +3231,13 @@ msgid ""
 "value to `result`. Finally, we print the value in `result`, which in this "
 "case is `20`."
 msgstr ""
-"Döngüden önce, `counter` adında bir değişken tanımlarız ve onu `0` olarak
-"başlatırız. Sonra döngüden dönen değeri tutacak `result` adında bir değişken
-"tanımlarız. Döngünün her yinelemesinde, `counter`'ın `10`'a eşit olup
-"olmadığını kontrol eder ve sonra `counter` değişkenine `1` ekleriz. Koşul
-"karşılandığında, `counter * 2` değeri ile `break` anahtar kelimesini
-"kullanırız. Döngüden sonra, `result`'a değeri atayan ifadeyi sonlandırmak için
-"bir noktalı virgül kullanırız. Sonunda, bu durumda `20` olan `result`
+"Döngüden önce, `counter` adında bir değişken tanımlarız ve onu `0` olarak  
+"başlatırız. Sonra döngüden dönen değeri tutacak `result` adında bir değişken  
+"tanımlarız. Döngünün her yinelemesinde, `counter`'ın `10`'a eşit olup  
+"olmadığını kontrol eder ve sonra `counter` değişkenine `1` ekleriz. Koşul  
+"karşılandığında, `counter * 2` değeri ile `break` anahtar kelimesini  
+"kullanırız. Döngüden sonra, `result`'a değeri atayan ifadeyi sonlandırmak için  
+"bir noktalı virgül kullanırız. Sonunda, bu durumda `20` olan `result`  
 "değerini yazdırırız."
 
 
@@ -3255,12 +3255,12 @@ msgid ""
 "so common that Cairo has a built-in language construct for it, called a "
 "`while` loop."
 msgstr ""
-"Bir program sıklıkla döngü içinde bir koşulu değerlendirmeye ihtiyaç duyar.
-"Koşul `true` olduğu sürece döngü çalışır. Koşul artık `true` olmadığında,
-"program `break`'i çağırır, döngüyü durdurur. Bu tür bir davranışı `loop`,
-"`if`, `else` ve `break` kombinasyonunu kullanarak uygulamak mümkündür;
-"isterseniz şimdi bir programda bunu deneyebilirsiniz. Ancak, bu desen o kadar
-"yaygındır ki, Cairo bunun için yerleşik bir dil yapısı sunar, buna `while`
+"Bir program sıklıkla döngü içinde bir koşulu değerlendirmeye ihtiyaç duyar.  
+"Koşul `true` olduğu sürece döngü çalışır. Koşul artık `true` olmadığında,  
+"program `break`'i çağırır, döngüyü durdurur. Bu tür bir davranışı `loop`,  
+"`if`, `else` ve `break` kombinasyonunu kullanarak uygulamak mümkündür;  
+"isterseniz şimdi bir programda bunu deneyebilirsiniz. Ancak, bu desen o kadar  
+"yaygındır ki, Cairo bunun için yerleşik bir dil yapısı sunar, buna `while`  
 "döngüsü denir."
 
 
@@ -3270,8 +3270,8 @@ msgid ""
 "down each time after printing the value of `number`, and then, after the "
 "loop, print a message and exit."
 msgstr ""
-"Listing 2-3'te, programı üç kez döngüye almak için `while` kullanırız, her
-"seferinde `number` değerini yazdırdıktan sonra sayımı azaltırız ve sonra,
+"Listing 2-3'te, programı üç kez döngüye almak için `while` kullanırız, her  
+"seferinde `number` değerini yazdırdıktan sonra sayımı azaltırız ve sonra,  
 "döngüden sonra, bir mesaj yazdırır ve çıkarız."
 
 
@@ -3295,8 +3295,8 @@ msgid ""
 "used `loop`, `if`, `else`, and `break`, and it’s clearer. While a condition "
 "evaluates to `true`, the code runs; otherwise, it exits the loop."
 msgstr ""
-"Bu yapı, `loop`, `if`, `else` ve `break` kullanıldığında gerekli olacak
-"çok fazla iç içe geçmeyi ortadan kaldırır ve daha açıktır. Bir koşul `true`
+"Bu yapı, `loop`, `if`, `else` ve `break` kullanıldığında gerekli olacak  
+"çok fazla iç içe geçmeyi ortadan kaldırır ve daha açıktır. Bir koşul `true`  
 "olarak değerlendirildiğinde, kod çalışır; aksi takdirde, döngüden çıkar."
 
 
@@ -3307,9 +3307,9 @@ msgid ""
 "concepts discussed in this chapter, try building programs to do the "
 "following:"
 msgstr ""
-"Başardınız! Oldukça büyük bir bölümdü: değişkenler, veri tipleri, fonksiyonlar,
-"yorumlar, `if` ifadeleri ve döngüler hakkında öğrendiniz! Bu bölümde
-"tartışılan kavramlarla pratik yapmak için, aşağıdaki programları
+"Başardınız! Oldukça büyük bir bölümdü: değişkenler, veri tipleri, fonksiyonlar,  
+"yorumlar, `if` ifadeleri ve döngüler hakkında öğrendiniz! Bu bölümde  
+"tartışılan kavramlarla pratik yapmak için, aşağıdaki programları  
 "oluşturmayı deneyin"
 
 
@@ -3334,9 +3334,9 @@ msgid ""
 "flexible, and easy to use. This section introduces the primary collection "
 "types available in Cairo: Arrays and Dictionaries."
 msgstr ""
-"Cairo, verileri saklamak ve manipüle etmek için kullanılabilecek ortak
-"koleksiyon tipleri sunar. Bu koleksiyonlar verimli, esnek ve kullanımı kolay
-"olarak tasarlanmıştır. Bu bölüm, Cairo'da mevcut olan temel koleksiyon
+"Cairo, verileri saklamak ve manipüle etmek için kullanılabilecek ortak  
+"koleksiyon tipleri sunar. Bu koleksiyonlar verimli, esnek ve kullanımı kolay  
+"olarak tasarlanmıştır. Bu bölüm, Cairo'da mevcut olan temel koleksiyon  
 "tiplerini tanıtır: Diziler ve Sözlükler."
 
 
@@ -3345,8 +3345,8 @@ msgid ""
 "An array is a collection of elements of the same type. You can create and "
 "use array methods by using the `ArrayTrait` trait from the core library."
 msgstr ""
-"Bir dizi, aynı türden elemanların bir koleksiyonudur. `ArrayTrait` trait'ini
-"çekirdek kütüphaneden kullanarak dizi metodları oluşturabilir ve
+"Bir dizi, aynı türden elemanların bir koleksiyonudur. `ArrayTrait` trait'ini  
+"çekirdek kütüphaneden kullanarak dizi metodları oluşturabilir ve  
 "kullanabilirsiniz."
 
 
@@ -3358,10 +3358,10 @@ msgid ""
 "overwritten, but only read from it. You can only append items to the end of "
 "an array and remove items from the front."
 msgstr ""
-"Dikkat edilmesi gereken önemli bir nokta, dizilerin sınırlı modifikasyon
-"seçeneklerine sahip olmasıdır. Diziler, aslında değerleri değiştirilemeyen
-"kuyruklardır. Bu, bir bellek yuvasına yazıldıktan sonra, üzerine yazılamayacağı
-"ancak ondan okunabileceği gerçeğiyle ilgilidir. Bir dizinin sonuna yalnızca
+"Dikkat edilmesi gereken önemli bir nokta, dizilerin sınırlı modifikasyon  
+"seçeneklerine sahip olmasıdır. Diziler, aslında değerleri değiştirilemeyen  
+"kuyruklardır. Bu, bir bellek yuvasına yazıldıktan sonra, üzerine yazılamayacağı  
+"ancak ondan okunabileceği gerçeğiyle ilgilidir. Bir dizinin sonuna yalnızca  
 "eleman ekleyebilir ve önünden eleman çıkarabilirsiniz."
 
 
@@ -3374,7 +3374,7 @@ msgid ""
 "Creating an array is done with the `ArrayTrait::new()` call. Here is an "
 "example of the creation of an array to which we append 3 elements:"
 msgstr ""
-"Bir dizi oluşturmak, `ArrayTrait::new()` çağrısı ile yapılır. İşte 3 eleman
+"Bir dizi oluşturmak, `ArrayTrait::new()` çağrısı ile yapılır. İşte 3 eleman  
 "eklediğimiz bir dizi oluşturma örneği:"
 
 
@@ -3384,7 +3384,7 @@ msgid ""
 "instantiating the array like this, or explicitly define the type of the "
 "variable."
 msgstr ""
-"Gerekirse, dizi örneğini oluştururken dizinin içindeki elemanların beklenen
+"Gerekirse, dizi örneğini oluştururken dizinin içindeki elemanların beklenen  
 "türünü bu şekilde geçirebilir veya değişkenin türünü açıkça tanımlayabilirsiniz."
 
 
@@ -3412,8 +3412,8 @@ msgid ""
 "`pop_front()` method. This method returns an `Option` that can be unwrapped, "
 "containing the removed element, or `Option::None` if the array is empty."
 msgstr ""
-"`pop_front()` metodunu kullanarak bir diziden yalnızca ön taraftaki elemanları
-"çıkarabilirsiniz. Bu metod, kaldırılan elemanı içeren bir `Option` veya dizi
+"`pop_front()` metodunu kullanarak bir diziden yalnızca ön taraftaki elemanları  
+"çıkarabilirsiniz. Bu metod, kaldırılan elemanı içeren bir `Option` veya dizi  
 "boşsa `Option::None` döndürür."
 
 
@@ -3426,7 +3426,7 @@ msgid ""
 "The above code will print `The first value is 10` as we remove the first "
 "element that was added."
 msgstr ""
-"Yukarıdaki kod, eklenen ilk elemanı çıkardığımız için `The first value is 10`
+"Yukarıdaki kod, eklenen ilk elemanı çıkardığımız için `The first value is 10`  
 "yazdıracaktır."
 
 
@@ -3438,10 +3438,10 @@ msgid ""
 "operations do not require memory mutation, as they involve updating pointers "
 "rather than directly modifying the memory cells."
 msgstr ""
-"Cairo'da, bellek değişmezdir, bu da ekledikten sonra bir dizinin elemanlarını
-"değiştirmenin mümkün olmadığı anlamına gelir. Bir dizinin sonuna yalnızca
-"eleman ekleyebilir ve bir dizinin önünden eleman çıkarabilirsiniz. Bu
-"işlemler, bellek hücrelerini doğrudan değiştirmek yerine işaretçileri
+"Cairo'da, bellek değişmezdir, bu da ekledikten sonra bir dizinin elemanlarını  
+"değiştirmenin mümkün olmadığı anlamına gelir. Bir dizinin sonuna yalnızca  
+"eleman ekleyebilir ve bir dizinin önünden eleman çıkarabilirsiniz. Bu  
+"işlemler, bellek hücrelerini doğrudan değiştirmek yerine işaretçileri  
 "güncellemeyi içerdiğinden, bellek mutasyonu gerektirmez."
 
 
@@ -3455,8 +3455,8 @@ msgid ""
 "return different types. Using `arr.at(index)` is equivalent to using the "
 "subscripting operator `arr[index]`."
 msgstr ""
-"Dizi elemanlarına erişmek için, farklı türler döndüren `get()` veya `at()`
-"dizi metodlarını kullanabilirsiniz. `arr.at(index)` kullanmak, alt dizin
+"Dizi elemanlarına erişmek için, farklı türler döndüren `get()` veya `at()`  
+"dizi metodlarını kullanabilirsiniz. `arr.at(index)` kullanmak, alt dizin  
 "operatörü `arr[index]` kullanmakla eşdeğerdir."
 
 
@@ -3475,13 +3475,13 @@ msgid ""
 "explained in more detail in the [References and Snapshots](ch04-02-"
 "references-and-snapshots.md) chapter."
 msgstr ""
-"`get` fonksiyonu bir `Option<Box<@T>>` döndürür, bu da belirtilen indeksteki
-"eleman dizi içinde varsa, o elemana ait bir kutu türüne (Cairo'nun akıllı
-"işaretçi türü) bir seçenek döndürdüğü anlamına gelir. Eleman mevcut değilse,
-"`get` `None` döndürür. Bu yöntem, dizinin sınırları içinde olmayabilecek
-"indekslere erişmeyi beklediğiniz ve böyle durumları panik olmadan zarif bir
-"şekilde ele almak istediğinizde kullanışlıdır. Snapshot'lar [Referanslar ve
-"Snapshot'lar](ch04-02-references-and-snapshots.md) bölümünde daha detaylı
+"`get` fonksiyonu bir `Option<Box<@T>>` döndürür, bu da belirtilen indeksteki  
+"eleman dizi içinde varsa, o elemana ait bir kutu türüne (Cairo'nun akıllı  
+"işaretçi türü) bir seçenek döndürdüğü anlamına gelir. Eleman mevcut değilse,  
+"`get` `None` döndürür. Bu yöntem, dizinin sınırları içinde olmayabilecek  
+"indekslere erişmeyi beklediğiniz ve böyle durumları panik olmadan zarif bir  
+"şekilde ele almak istediğinizde kullanışlıdır. Snapshot'lar [Referanslar ve  
+"Snapshot'lar](ch04-02-references-and-snapshots.md) bölümünde daha detaylı  
 "bir şekilde açıklanacaktır."
 
 
@@ -3519,12 +3519,12 @@ msgid ""
 "You should only use `at` when you want the program to panic if the provided "
 "index is out of the array's bounds, which can prevent unexpected behavior."
 msgstr ""
-"`at` fonksiyonu ise, `unbox()` operatörünü kullanarak belirtilen indeksteki
-"elemana doğrudan bir snapshot döndürür. İndeks sınırların dışındaysa bir
-"panik hatası oluşur. Yalnızca sağlanan indeks dizinin sınırlarının dışında
-"olduğunda programın paniklemesini istiyorsanız `at` kullanmalısınız, bu
+"`at` fonksiyonu ise, `unbox()` operatörünü kullanarak belirtilen indeksteki  
+"elemana doğrudan bir snapshot döndürür. İndeks sınırların dışındaysa bir  
+"panik hatası oluşur. Yalnızca sağlanan indeks dizinin sınırlarının dışında  
+"olduğunda programın paniklemesini istiyorsanız `at` kullanmalısınız, bu  
 "beklenmeyen davranışları önleyebilir."
-
+ 
 
 #: src/ch03-01-arrays.md:98
 msgid "İşte `at()` methodu ile bir örnek:"
@@ -3536,8 +3536,8 @@ msgid ""
 "that is the value at index `0` in the array. The variable named `second` "
 "will get the value `1` from index `1` in the array."
 msgstr ""
-"Bu örnekte, `first` adlı değişken `0` değerini alacak çünkü bu, dizide `0`
-"indeksindeki değerdir. `second` adlı değişken, dizide `1` indeksinden `1`
+"Bu örnekte, `first` adlı değişken `0` değerini alacak çünkü bu, dizide `0`  
+"indeksindeki değerdir. `second` adlı değişken, dizide `1` indeksinden `1` 
 "değerini alacak."
 
 
@@ -3547,8 +3547,8 @@ msgid ""
 "explicitly define the type of the elements of the array, otherwise it will "
 "not compile. For example:"
 msgstr ""
-"Eğer alt dizin operatörü `arr[index]` kullanmak istiyorsanız, dizinin
-"elemanlarının türünü açıkça tanımlamanız gerekecektir, aksi takdirde
+"Eğer alt dizin operatörü `arr[index]` kullanmak istiyorsanız, dizinin  
+"elemanlarının türünü açıkça tanımlamanız gerekecektir, aksi takdirde  
 "derlenmeyecektir. Örneğin:"
 
 
@@ -3558,8 +3558,8 @@ msgid ""
 "attempts, and use `get` when you prefer to handle such cases gracefully "
 "without panicking."
 msgstr ""
-"Özetle, sınırların dışındaki erişim girişimlerinde paniklemek istiyorsanız
-"`at` kullanın ve bu tür durumları panik olmadan zarif bir şekilde ele almak
+"Özetle, sınırların dışındaki erişim girişimlerinde paniklemek istiyorsanız  
+"`at` kullanın ve bu tür durumları panik olmadan zarif bir şekilde ele almak  
 "istiyorsanız `get` kullanın."
 
 
@@ -3572,7 +3572,7 @@ msgid ""
 "To determine the number of elements in an array, use the `len()` method. The "
 "return value is of type `usize`."
 msgstr ""
-"Bir dizideki eleman sayısını belirlemek için `len()` metodunu kullanın.
+"Bir dizideki eleman sayısını belirlemek için `len()` metodunu kullanın.  
 "Dönüş değeri `usize` türündedir."
 
 
@@ -3582,8 +3582,8 @@ msgid ""
 "`is_empty()` method, which returns `true` if the array is empty and `false` "
 "otherwise."
 msgstr ""
-"Bir dizinin boş olup olmadığını kontrol etmek istiyorsanız, `is_empty()`
-"metodunu kullanabilirsiniz, bu metod dizi boşsa `true`, aksi takdirde `false`
+"Bir dizinin boş olup olmadığını kontrol etmek istiyorsanız, `is_empty()`  
+"metodunu kullanabilirsiniz, bu metod dizi boşsa `true`, aksi takdirde `false`  
 "döndürür."
 
 
@@ -3600,10 +3600,10 @@ msgid ""
 "the compiler will expand the macro to generate the code that appends the "
 "items sequentially."
 msgstr ""
-"Bazen, derleme zamanında zaten bilinen değerlere sahip diziler oluşturmamız
-"gerekiyor. Bunun temel yolu fazlalıklıdır. İlk olarak diziyi tanımlar ve
-"sonra her bir değeri tek tek eklerdiniz. `array!` bu görevi iki adımı
-"birleştirerek daha basit bir şekilde yapmanın yoludur. Derleme zamanında,
+"Bazen, derleme zamanında zaten bilinen değerlere sahip diziler oluşturmamız  
+"gerekiyor. Bunun temel yolu fazlalıklıdır. İlk olarak diziyi tanımlar ve  
+"sonra her bir değeri tek tek eklerdiniz. `array!` bu görevi iki adımı  
+"birleştirerek daha basit bir şekilde yapmanın yoludur. Derleme zamanında,  
 "derleyici makroyu genişleterek öğeleri sırayla ekleyen kodu oluşturacaktır."
 
 
@@ -3626,9 +3626,9 @@ msgid ""
 "be explained in more detail in the [Enums and Pattern Matching](ch06-00-"
 "enums-and-pattern-matching.md) chapter."
 msgstr ""
-"Farklı türlerdeki elemanları bir dizide saklamak istiyorsanız, birden fazla
-"türü tutabilen özel bir veri türü tanımlamak için bir `Enum` kullanabilirsiniz.
-"Enumlar [Enumlar ve Desen Eşleştirme](ch06-00-enums-and-pattern-matching.md)
+"Farklı türlerdeki elemanları bir dizide saklamak istiyorsanız, birden fazla  
+"türü tutabilen özel bir veri türü tanımlamak için bir `Enum` kullanabilirsiniz.  
+"Enumlar [Enumlar ve Desen Eşleştirme](ch06-00-enums-and-pattern-matching.md)  
 "bölümünde daha detaylı bir şekilde açıklanacaktır."
 
 
@@ -3645,11 +3645,11 @@ msgid ""
 "functions or when performing read-only operations (cf. [References and "
 "Snapshots](ch04-02-references-and-snapshots.md))"
 msgstr ""
-"`Span`, bir `Array`'in bir snapshot'ını temsil eden bir yapıdır. Orijinal
-"diziyi değiştirmeden bir dizinin elemanlarına güvenli ve kontrollü erişim
-"sağlamak için tasarlanmıştır. Span, özellikle veri bütünlüğünü sağlamak ve
-"fonksiyonlar arasında diziler geçirirken veya salt okunur işlemler
-"gerçekleştirirken ödünç alma sorunlarını önlemek için faydalıdır (bkz.
+"`Span`, bir `Array`'in bir snapshot'ını temsil eden bir yapıdır. Orijinal  
+"diziyi değiştirmeden bir dizinin elemanlarına güvenli ve kontrollü erişim  
+"sağlamak için tasarlanmıştır. Span, özellikle veri bütünlüğünü sağlamak ve  
+"fonksiyonlar arasında diziler geçirirken veya salt okunur işlemler  
+"gerçekleştirirken ödünç alma sorunlarını önlemek için faydalıdır (bkz.  
 "[Referanslar ve Snapshot'lar](ch04-02-references-and-snapshots.md))"
 
 
@@ -3658,7 +3658,7 @@ msgid ""
 "All methods provided by `Array` can also be used with `Span`, with the "
 "exception of the `append()` method."
 msgstr ""
-"`Array` tarafından sağlanan tüm metodlar `Span` ile de kullanılabilir,
+"`Array` tarafından sağlanan tüm metodlar `Span` ile de kullanılabilir,  
 "`append()` metodunun istisnası dışında."
 
 
@@ -3678,10 +3678,10 @@ msgid ""
 "data structure is known differently across different programming languages "
 "such as maps, hash tables, associative arrays and many others."
 msgstr ""
-"Cairo, çekirdek kütüphanesinde bir sözlük benzeri tür sunar. `Felt252Dict<T>`
-"veri türü, her bir anahtarın benzersiz olduğu ve karşılık gelen bir değerle
-"ilişkilendirildiği anahtar-değer çiftlerinin bir koleksiyonunu temsil eder. Bu
-"tür veri yapıları, farklı programlama dillerinde haritalar, karma tablolar, "
+"Cairo, çekirdek kütüphanesinde bir sözlük benzeri tür sunar. `Felt252Dict<T>`  
+"veri türü, her bir anahtarın benzersiz olduğu ve karşılık gelen bir değerle  
+"ilişkilendirildiği anahtar-değer çiftlerinin bir koleksiyonunu temsil eder. Bu  
+"tür veri yapıları, farklı programlama dillerinde haritalar, karma tablolar, " 
 "ilişkisel diziler ve daha birçok farklı isimle bilinir."
 
 
@@ -3692,9 +3692,9 @@ msgid ""
 "Cairo dictionaries also allow the programmer to easily simulate the "
 "existence of mutable memory when there is none."
 msgstr ""
-"`Felt252Dict<T>` türü, verilerinizi belirli bir şekilde düzenlemek istediğinizde
-"ve bir `Array<T>` kullanmanın ve indekslemenin yetersiz kaldığı durumlar için
-"faydalıdır. Cairo sözlükleri, ayrıca programcıya, mevcut olmayan değiştirilebilir
+"`Felt252Dict<T>` türü, verilerinizi belirli bir şekilde düzenlemek istediğinizde  
+"ve bir `Array<T>` kullanmanın ve indekslemenin yetersiz kaldığı durumlar için  
+"faydalıdır. Cairo sözlükleri, ayrıca programcıya, mevcut olmayan değiştirilebilir  
 "belleğin varlığını kolayca simüle etme imkanı da tanır."
 
 
@@ -3709,9 +3709,9 @@ msgid ""
 "`felt252`, leaving only the possibility to specify the value data type, "
 "represented by `T` in `Felt252Dict<T>`."
 msgstr ""
-"Diğer dillerde yeni bir sözlük oluştururken genellikle anahtar ve değerin veri
-"türlerini tanımlamak normaldir. Cairo'da, anahtar türü `felt252` ile sınırlıdır,
-"bu da sadece değer veri türünü belirtme olasılığını bırakır, `Felt252Dict<T>`'de
+"Diğer dillerde yeni bir sözlük oluştururken genellikle anahtar ve değerin veri  
+"türlerini tanımlamak normaldir. Cairo'da, anahtar türü `felt252` ile sınırlıdır,  
+"bu da sadece değer veri türünü belirtme olasılığını bırakır, `Felt252Dict<T>`'de  
 "bu `T` ile temsil edilir."
 
 
@@ -3721,7 +3721,7 @@ msgid ""
 "`Felt252DictTrait` which includes all basic operations. Among them we can "
 "find:"
 msgstr ""
-"`Felt252Dict<T>`'nin temel işlevselliği, tüm temel işlemleri içeren
+"`Felt252Dict<T>`'nin temel işlevselliği, tüm temel işlemleri içeren  
 "`Felt252DictTrait` trait'inde uygulanmıştır. Bunlar arasında şunları bulabiliriz:"
 
 
@@ -3739,8 +3739,8 @@ msgid ""
 "language. In the following example, we create a dictionary to represent a "
 "mapping between individuals and their balance:"
 msgstr ""
-"Bu fonksiyonlar, diğer dillerdeki gibi sözlükleri manipüle etmemize olanak tanır.
-"Aşağıdaki örnekte, bireyler ve bakiyeleri arasındaki eşlemeyi temsil eden bir
+"Bu fonksiyonlar, diğer dillerdeki gibi sözlükleri manipüle etmemize olanak tanır.  
+"Aşağıdaki örnekte, bireyler ve bakiyeleri arasındaki eşlemeyi temsil eden bir  
 "sözlük oluşturuyoruz:"
 
 
@@ -3760,10 +3760,10 @@ msgid ""
 "users with the `get` method. These methods are defined in the "
 "`Felt252DictTrait` trait in the core library."
 msgstr ""
-"`Felt252Dict<u64>`'ün yeni bir örneğini, `Default` trait'inin `default` metodu
-"kullanılarak oluşturabilir ve `insert` metodu kullanarak her biri kendi bakiyesine
-"sahip iki birey ekleyebiliriz. Son olarak, `get` metodu ile kullanıcılarımızın
-"bakiyelerini kontrol ederiz. Bu metodlar çekirdek kütüphanedeki `Felt252DictTrait`
+"`Felt252Dict<u64>`'ün yeni bir örneğini, `Default` trait'inin `default` metodu  
+"kullanılarak oluşturabilir ve `insert` metodu kullanarak her biri kendi bakiyesine  
+"sahip iki birey ekleyebiliriz. Son olarak, `get` metodu ile kullanıcılarımızın  
+"bakiyelerini kontrol ederiz. Bu metodlar çekirdek kütüphanedeki `Felt252DictTrait`  
 "trait'inde tanımlanmıştır."
 
 
@@ -3774,9 +3774,9 @@ msgid ""
 "type represents a way to overcome this obstacle. We will explain how this is "
 "implemented later on in [Dictionaries Underneath](#dictionaries-underneath)."
 msgstr ""
-"Kitap boyunca, Cairo'nun belleğinin değişmez olduğundan, yani bir bellek hücresine
-"yalnızca bir kez yazılabileceğinden bahsettik, ancak `Felt252Dict<T>` türü, bu
-"engelin üstesinden gelmenin bir yolunu temsil eder. Bunun nasıl uygulandığını daha
+"Kitap boyunca, Cairo'nun belleğinin değişmez olduğundan, yani bir bellek hücresine  
+"yalnızca bir kez yazılabileceğinden bahsettik, ancak `Felt252Dict<T>` türü, bu  
+"engelin üstesinden gelmenin bir yolunu temsil eder. Bunun nasıl uygulandığını daha  
 "sonra [Sözlüklerin Altında](#dictionaries-underneath) bölümünde açıklayacağız."
 
 
@@ -3785,7 +3785,7 @@ msgid ""
 "Building upon our previous example, let us show a code example where the "
 "balance of the same user changes:"
 msgstr ""
-"Önceki örneğimizi temel alarak, aynı kullanıcının bakiyesinin nasıl değiştiğini
+"Önceki örneğimizi temel alarak, aynı kullanıcının bakiyesinin nasıl değiştiğini  
 "gösteren bir kod örneği sunalım:"
 
 
@@ -3820,9 +3820,9 @@ msgid ""
 "had the last value inserted! `Felt252Dict<T>` effectively allows us to "
 "\"rewrite\" the stored value for any given key."
 msgstr ""
-"Bu örnekte 'Alex' kişisini iki kez eklediğimize dikkat edin, her seferinde farklı bir
-"bakiye kullanıldı ve bakiyesi kontrol edildiğinde her zaman son eklenen değeri aldı!
-"`Felt252Dict<T>` bize verilen herhangi bir anahtar için saklanan değeri \"yeniden yazma\"
+"Bu örnekte 'Alex' kişisini iki kez eklediğimize dikkat edin, her seferinde farklı bir  
+"bakiye kullanıldı ve bakiyesi kontrol edildiğinde her zaman son eklenen değeri aldı!  
+"`Felt252Dict<T>` bize verilen herhangi bir anahtar için saklanan değeri \"yeniden yazma\"  
 "imkanı sağlar."
 
 
@@ -3836,11 +3836,11 @@ msgid ""
 "is no way to delete data from a dictionary. Something to take into account "
 "when incorporating this structure into your code."
 msgstr ""
-"Sözlüklerin nasıl uygulandığını açıklamadan önce, bir `Felt252Dict<T>` örneği
-"oluşturduğunuzda, perde arkasında tüm anahtarların ilişkili değerlerinin sıfır olarak
-"başlatıldığını belirtmek önemlidir. Bu, örneğin, mevcut olmayan bir kullanıcının bakiyesini
-"almaya çalıştığınızda bir hata veya tanımsız bir değer yerine 0 alacağınız anlamına gelir.
-"Bu aynı zamanda bir sözlükten veri silmenin mümkün olmadığı anlamına gelir. Bu yapının
+"Sözlüklerin nasıl uygulandığını açıklamadan önce, bir `Felt252Dict<T>` örneği  
+"oluşturduğunuzda, perde arkasında tüm anahtarların ilişkili değerlerinin sıfır olarak  
+"başlatıldığını belirtmek önemlidir. Bu, örneğin, mevcut olmayan bir kullanıcının bakiyesini  
+"almaya çalıştığınızda bir hata veya tanımsız bir değer yerine 0 alacağınız anlamına gelir.  
+"Bu aynı zamanda bir sözlükten veri silmenin mümkün olmadığı anlamına gelir. Bu yapının  
 "kodunuza dahil ederken göz önünde bulundurulması gereken bir noktadır."
 
 
@@ -3853,10 +3853,10 @@ msgid ""
 "any other popular language in existence, which as a consequence means that "
 "dictionaries are implemented very differently as well!"
 msgstr ""
-"Bu noktaya kadar, `Felt252Dict<T>`'nin tüm temel özelliklerini ve diğer dillerdeki
-"karşılık gelen veri yapılarının aynı davranışını nasıl taklit ettiğini gördük, tabii ki
-"dışarıdan. Cairo, temelde belirsiz bir Turing-tam programlama dilidir, var olan diğer
-"popüler dillerden çok farklıdır, bu da sözlüklerin de çok farklı şekilde uygulandığı
+"Bu noktaya kadar, `Felt252Dict<T>`'nin tüm temel özelliklerini ve diğer dillerdeki  
+"karşılık gelen veri yapılarının aynı davranışını nasıl taklit ettiğini gördük, tabii ki  
+"dışarıdan. Cairo, temelde belirsiz bir Turing-tam programlama dilidir, var olan diğer  
+"popüler dillerden çok farklıdır, bu da sözlüklerin de çok farklı şekilde uygulandığı  
 "anlamına gelir!"
 
 
@@ -3868,9 +3868,9 @@ msgid ""
 "dictionaries with other data structures as well as use the `entry` method as "
 "another way to interact with them."
 msgstr ""
-"Takip eden bölümlerde, `Felt252Dict<T>` iç mekanizmaları ve onları çalışır hale getirmek
-"için yapılan kompromisler hakkında bazı içgörüler sunacağız. Bundan sonra, sözlükleri diğer
-"veri yapılarıyla nasıl kullanacağımıza ve onlarla etkileşimde bulunmanın başka bir yolu
+"Takip eden bölümlerde, `Felt252Dict<T>` iç mekanizmaları ve onları çalışır hale getirmek  
+"için yapılan kompromisler hakkında bazı içgörüler sunacağız. Bundan sonra, sözlükleri diğer  
+"veri yapılarıyla nasıl kullanacağımıza ve onlarla etkileşimde bulunmanın başka bir yolu  
 "olarak `entry` metodunu nasıl kullanacağımıza bakacağız."
 
 
@@ -3886,9 +3886,9 @@ msgid ""
 "represents a time when a dictionary was accessed for reading/updating/"
 "writing purposes. An entry has three fields:"
 msgstr ""
-"Cairo'nun belirsiz tasarımının kısıtlamalarından biri, bellek sisteminin değişmez olmasıdır,
-"bu nedenle değiştirilebilirliği simüle etmek için dil, `Felt252Dict<T>`'yi girişlerin bir
-"listesi olarak uygular. Girişlerin her biri, bir sözlüğün okuma/güncelleme/yazma amaçları için
+"Cairo'nun belirsiz tasarımının kısıtlamalarından biri, bellek sisteminin değişmez olmasıdır,  
+"bu nedenle değiştirilebilirliği simüle etmek için dil, `Felt252Dict<T>`'yi girişlerin bir  
+"listesi olarak uygular. Girişlerin her biri, bir sözlüğün okuma/güncelleme/yazma amaçları için  
 "erişildiği bir zamanı temsil eder. Bir girişin üç alanı vardır:"
 
 
@@ -3920,9 +3920,9 @@ msgid ""
 "information about what key-value pair it represents and the previous and new "
 "values it holds. The definition of `Entry<T>` would be:"
 msgstr ""
-"Eğer `Felt252Dict<T>`'yi yüksek seviye yapılar kullanarak uygulamaya çalışırsak,
-"içsel olarak onu `Array<Entry<T>>` olarak tanımlarız, burada her `Entry<T>`,
-"temsil ettiği anahtar-değer çifti hakkında bilgi ve tuttuğu önceki ve yeni değerleri içerir.
+"Eğer `Felt252Dict<T>`'yi yüksek seviye yapılar kullanarak uygulamaya çalışırsak,  
+"içsel olarak onu `Array<Entry<T>>` olarak tanımlarız, burada her `Entry<T>`,  
+"temsil ettiği anahtar-değer çifti hakkında bilgi ve tuttuğu önceki ve yeni değerleri içerir.  
 "`Entry<T>`'nin tanımı şu şekilde olurdu:"
 
 
@@ -3939,7 +3939,7 @@ msgid ""
 "A `get` would register an entry where there is no change in state, and "
 "previous and new values are stored with the same value."
 msgstr ""
-"`get`, durumda bir değişiklik olmadığı ve önceki ile yeni değerlerin aynı değerle
+"`get`, durumda bir değişiklik olmadığı ve önceki ile yeni değerlerin aynı değerle  
 "kaydedildiği bir giriş kaydeder."
 
 
@@ -3950,8 +3950,8 @@ msgid ""
 "inserted before this. In case it is the first entry for a certain key, then "
 "the previous value will be zero."
 msgstr ""
-"`insert`, `new_value`'nun eklenen eleman ve `previous_value`'nun bu öncesi eklenen
-"son eleman olduğu yeni bir `Entry<T>` kaydeder. Belirli bir anahtar için bu ilk giriş
+"`insert`, `new_value`'nun eklenen eleman ve `previous_value`'nun bu öncesi eklenen  
+"son eleman olduğu yeni bir `Entry<T>` kaydeder. Belirli bir anahtar için bu ilk giriş  
 "ise, önceki değer sıfır olacaktır."
 
 
@@ -3962,9 +3962,9 @@ msgid ""
 "example of this using the `balances` dictionary from the previous section "
 "and inserting the users 'Alex' and 'Maria':"
 msgstr ""
-"Bu giriş listesinin kullanımı, herhangi bir yeniden yazımın olmadığını, sadece
-"`Felt252Dict<T>` etkileşimi başına yeni bellek hücrelerinin oluşturulduğunu gösterir.
-"Bunu, önceki bölümden `balances` sözlüğünü kullanarak 'Alex' ve 'Maria' kullanıcılarını
+"Bu giriş listesinin kullanımı, herhangi bir yeniden yazımın olmadığını, sadece  
+"`Felt252Dict<T>` etkileşimi başına yeni bellek hücrelerinin oluşturulduğunu gösterir.  
+"Bunu, önceki bölümden `balances` sözlüğünü kullanarak 'Alex' ve 'Maria' kullanıcılarını  
 "ekleyerek gösterelim:"
 
 
@@ -4026,8 +4026,8 @@ msgid ""
 "`previous` and `current` values are set properly. Also reading from 'Maria' "
 "registered an entry with no change from previous to current values."
 msgstr ""
-"'Alex' iki kez eklendiğinden, iki kez görünür ve `previous` ile `current` değerleri
-"doğru şekilde ayarlanmıştır. Ayrıca, 'Maria'dan okuma, önceki ile mevcut değerler arasında
+"'Alex' iki kez eklendiğinden, iki kez görünür ve `previous` ile `current` değerleri  
+"doğru şekilde ayarlanmıştır. Ayrıca, 'Maria'dan okuma, önceki ile mevcut değerler arasında  
 "bir değişiklik olmadan bir giriş kaydetti."
 
 
@@ -4041,10 +4041,10 @@ msgid ""
 "worst-case time complexity of `O(n)` where `n` is the number of entries in "
 "the list."
 msgstr ""
-"`Felt252Dict<T>`'yi bu şekilde uygulamanın anlamı, her okuma/yazma işlemi için, aynı
-"`key` ile son girişi aramak üzere tüm giriş listesinin taranmasıdır. Giriş bulunduğunda,
-"`new_value`'si çıkarılır ve yeni eklenen girişte `previous_value` olarak kullanılır. Bu,
-"`Felt252Dict<T>` ile etkileşimin en kötü durum zaman karmaşıklığının `O(n)` olduğu anlamına
+"`Felt252Dict<T>`'yi bu şekilde uygulamanın anlamı, her okuma/yazma işlemi için, aynı  
+"`key` ile son girişi aramak üzere tüm giriş listesinin taranmasıdır. Giriş bulunduğunda,  
+"`new_value`'si çıkarılır ve yeni eklenen girişte `previous_value` olarak kullanılır. Bu, 
+"`Felt252Dict<T>` ile etkileşimin en kötü durum zaman karmaşıklığının `O(n)` olduğu anlamına  
 "geliyor, burada `n` liste içindeki girişlerin sayısıdır."
 
 
@@ -4060,11 +4060,11 @@ msgid ""
 "of \"dictionary squashing\" and that requires information on both previous "
 "and new values for every entry."
 msgstr ""
-"`Felt252Dict<T>`'yi uygulamanın alternatif yollarını düşünürseniz, muhtemelen `previous_value`
-"alanının tamamen gereksiz olduğu yöntemler bulabilirsiniz, yine de, Cairo normal bir dil
-"olmadığı için bu işe yaramaz. Cairo'nun amaçlarından biri, STARK ispat sistemi ile, hesaplama
-"bütünlüğünün kanıtlarını üretmektir. Bu, programın doğru ve Cairo kısıtlamaları içinde
-"çalıştığını doğrulamanız gerektiği anlamına gelir. Bu sınır kontrollerinden biri
+"`Felt252Dict<T>`'yi uygulamanın alternatif yollarını düşünürseniz, muhtemelen `previous_value`  
+"alanının tamamen gereksiz olduğu yöntemler bulabilirsiniz, yine de, Cairo normal bir dil  
+"olmadığı için bu işe yaramaz. Cairo'nun amaçlarından biri, STARK ispat sistemi ile, hesaplama  
+"bütünlüğünün kanıtlarını üretmektir. Bu, programın doğru ve Cairo kısıtlamaları içinde  
+"çalıştığını doğrulamanız gerektiği anlamına gelir. Bu sınır kontrollerinden biri  
 "\"sözlük sıkıştırması\"dır ve bu, her giriş için önceki ve yeni değerler hakkında bilgi gerektirir."
 
 
@@ -4080,9 +4080,9 @@ msgid ""
 "`squash_dict` that reviews each entry of the entry list and checks that "
 "access to the dictionary remains coherent throughout the execution."
 msgstr ""
-"`Felt252Dict<T>` kullanan bir Cairo programının yürütmesiyle üretilen kanıtın doğru olduğunu
-"doğrulamak için, sözlükle herhangi bir yasa dışı oynama yapılmadığını kontrol etmemiz gerekir.
-"Bu, her girişi gözden geçiren ve yürütme boyunca sözlüğe erişimin tutarlı kaldığını kontrol eden
+"`Felt252Dict<T>` kullanan bir Cairo programının yürütmesiyle üretilen kanıtın doğru olduğunu  
+"doğrulamak için, sözlükle herhangi bir yasa dışı oynama yapılmadığını kontrol etmemiz gerekir.  
+"Bu, her girişi gözden geçiren ve yürütme boyunca sözlüğe erişimin tutarlı kaldığını kontrol eden  
 "`squash_dict` adlı bir yöntem aracılığıyla yapılır."
 
 
@@ -4092,8 +4092,8 @@ msgid ""
 "`k`, taken in the same order as they were inserted, verify that the ith "
 "entry `new_value` is equal to the ith + 1 entry `previous_value`."
 msgstr ""
-"Sıkıştırma işlemi şu şekildedir: belirli bir anahtar `k` ile tüm girişler, eklenme sıraları
-"göz önünde bulundurularak alınır, i'nci girişin `new_value`'si i+1'inci girişin `previous_value`
+"Sıkıştırma işlemi şu şekildedir: belirli bir anahtar `k` ile tüm girişler, eklenme sıraları  
+"göz önünde bulundurularak alınır, i'nci girişin `new_value`'si i+1'inci girişin `previous_value`  
 "ile eşit olduğu doğrulanır."
 
 
@@ -4157,10 +4157,10 @@ msgid ""
 "`Felt252Dict<T>` implementation of the `Destruct<T>` trait. This call "
 "occurred just before the `balance` dictionary went out of scope."
 msgstr ""
-"[Sözlüklerin Temel Kullanımı](#basic-use-of-dictionaries) bölümündeki örnekleri çalıştırdığınızda,
-"sözlük sıkıştırma çağrısının yapılmadığını ancak programın yine de başarıyla derlendiğini fark
-"etmiş olabilirsiniz. Perde arkasında olan şey, `Felt252Dict<T>`'nin `Destruct<T>` trait'inin
-"uygulanması aracılığıyla squash'ın otomatik olarak çağrıldığıydı. Bu çağrı, `balance` sözlüğü
+"[Sözlüklerin Temel Kullanımı](#basic-use-of-dictionaries) bölümündeki örnekleri çalıştırdığınızda,  
+"sözlük sıkıştırma çağrısının yapılmadığını ancak programın yine de başarıyla derlendiğini fark  
+"etmiş olabilirsiniz. Perde arkasında olan şey, `Felt252Dict<T>`'nin `Destruct<T>` trait'inin 
+"uygulanması aracılığıyla squash'ın otomatik olarak çağrıldığıydı. Bu çağrı, `balance` sözlüğü  
 "kapsam dışına çıkmadan hemen önce gerçekleşti."
 
 
@@ -4175,12 +4175,12 @@ msgid ""
 "traits in [Drop and Destruct](/appendix-03-derivable-traits.md#drop-and-"
 "destruct)."
 msgstr ""
-"`Destruct<T>` trait'i, `Drop<T>`'den farklı olarak, nesneleri kapsam dışına çıkarma
-"yöntemlerinden birini temsil eder. Bu ikisi arasındaki ana fark, `Drop<T>`'nin bir
-"no-op işlemi olarak ele alınması, yani yeni CASM üretmemesi, `Destruct<T>`'nin bu
-"kısıtlamaya sahip olmamasıdır. Aktif olarak `Destruct<T>` trait'ini kullanan tek tür
-"`Felt252Dict<T>`'dir, diğer her tür için `Destruct<T>` ve `Drop<T>` eşanlamlıdır. Bu
-"trait'ler hakkında daha fazla bilgiyi [Drop ve Destruct](/appendix-03-derivable-traits.md#drop-and-destruct)
+"`Destruct<T>` trait'i, `Drop<T>`'den farklı olarak, nesneleri kapsam dışına çıkarma  
+"yöntemlerinden birini temsil eder. Bu ikisi arasındaki ana fark, `Drop<T>`'nin bir  
+"no-op işlemi olarak ele alınması, yani yeni CASM üretmemesi, `Destruct<T>`'nin bu  
+"kısıtlamaya sahip olmamasıdır. Aktif olarak `Destruct<T>` trait'ini kullanan tek tür  
+"`Felt252Dict<T>`'dir, diğer her tür için `Destruct<T>` ve `Drop<T>` eşanlamlıdır. Bu  
+"trait'ler hakkında daha fazla bilgiyi [Drop ve Destruct](/appendix-03-derivable-traits.md#drop-and-destruct)  
 "bölümünde okuyabilirsiniz."
 
 
@@ -4190,7 +4190,7 @@ msgid ""
 "we will have a hands-on example where we implement the `Destruct<T>` trait "
 "for a custom type."
 msgstr ""
-"[Yapı Üyeleri Olarak Sözlükler](#dictionaries-as-struct-members) bölümünde, özel bir tür için
+"[Yapı Üyeleri Olarak Sözlükler](#dictionaries-as-struct-members) bölümünde, özel bir tür için  
 "`Destruct<T>` trait'ini uyguladığımız uygulamalı bir örneğe sahip olacağız."
 
 
@@ -4205,8 +4205,8 @@ msgid ""
 "in a certain way. If you haven't understood all of it, don't worry because "
 "in this section we will have some more examples using dictionaries."
 msgstr ""
-"Bu noktaya kadar, `Felt252Dict<T>`'nin işlevselliğine ve belirli bir şekilde nasıl ve neden
-"uygulandığına dair kapsamlı bir genel bakış verdik. Hepsini anlamadıysanız endişelenmeyin,
+"Bu noktaya kadar, `Felt252Dict<T>`'nin işlevselliğine ve belirli bir şekilde nasıl ve neden  
+"uygulandığına dair kapsamlı bir genel bakış verdik. Hepsini anlamadıysanız endişelenmeyin,  
 "çünkü bu bölümde sözlükleri kullanarak daha fazla örneğe sahip olacağız."
 
 
@@ -4219,9 +4219,9 @@ msgid ""
 "with other complex types such as `Array<T>` and how to [implement]"
 "(#dictionaries-as-struct-members) a struct with a dictionary as a member."
 msgstr ""
-"`Felt252DictTrait<T>`'nin temel işlevselliğinin bir parçası olan ve başta bahsetmediğimiz
-"`entry` metodunu açıklayarak başlayacağız. Hemen ardından, `Felt252Dict<T>`'nin [doğal olarak
-"desteklenmeyen türlerle etkileşimi](#dictionaries-of-types-not-supported-natively) hakkında
+"`Felt252DictTrait<T>`'nin temel işlevselliğinin bir parçası olan ve başta bahsetmediğimiz  
+"`entry` metodunu açıklayarak başlayacağız. Hemen ardından, `Felt252Dict<T>`'nin [doğal olarak  
+"desteklenmeyen türlerle etkileşimi](#dictionaries-of-types-not-supported-natively) hakkında  
 "örnekler göreceğiz, örneğin `Array<T>` ve bir yapıyı sözlük üyesi olarak [uygulama](#dictionaries-as-struct-members)."
 
 
@@ -4238,9 +4238,9 @@ msgid ""
 "whatever operation it was executing. The Cairo language gives us the tools "
 "to replicate this ourselves through the `entry` and `finalize` methods."
 msgstr ""
-"[Sözlüklerin Alt Yapısı](#dictionaries-underneath) bölümünde, `Felt252Dict<T>`'nin iç
-"çalışmasını açıkladık. Her sözlüğe erişimde, herhangi bir şekilde, belirli bir `key` için son
-"girişi bulup onu uygun operasyona göre güncelleyerek bir girişler listesiydi. Cairo dilinde,
+"[Sözlüklerin Alt Yapısı](#dictionaries-underneath) bölümünde, `Felt252Dict<T>`'nin iç  
+"çalışmasını açıkladık. Her sözlüğe erişimde, herhangi bir şekilde, belirli bir `key` için son  
+"girişi bulup onu uygun operasyona göre güncelleyerek bir girişler listesiydi. Cairo dilinde,  
 "`entry` ve `finalize` metodları aracılığıyla bunu kendimiz tekrarlamak için gereken araçları elde ederiz."
 
 
@@ -4251,8 +4251,8 @@ msgid ""
 "ownership of the dictionary and returns the entry to update. The method "
 "signature is as follows:"
 msgstr ""
-"`entry` metodu, belirli bir anahtar için yeni bir giriş oluşturma amacıyla `Felt252DictTrait<T>`
-"ile gelir. Çağrıldığında, bu metod sözlüğün sahipliğini alır ve güncellenecek girişi döndürür.
+"`entry` metodu, belirli bir anahtar için yeni bir giriş oluşturma amacıyla `Felt252DictTrait<T>`  
+"ile gelir. Çağrıldığında, bu metod sözlüğün sahipliğini alır ve güncellenecek girişi döndürür.  
 "Metod imzası şöyle:"
 
 
@@ -4265,9 +4265,9 @@ msgid ""
 "`nopanic` notation simply indicates that the function is guaranteed to never "
 "panic."
 msgstr ""
-"İlk giriş parametresi, sözlüğün sahipliğini alırken, ikincisi uygun girişi oluşturmak için kullanılır.
-"Bir `Felt252DictEntry<T>`, Cairo'nun sözlük girişlerini temsil etmek için kullandığı tür, ve
-"önceden tutulan bir `T` değeri içeren bir demet döndürür. `nopanic` notasyonu, fonksiyonun
+"İlk giriş parametresi, sözlüğün sahipliğini alırken, ikincisi uygun girişi oluşturmak için kullanılır.  
+"Bir `Felt252DictEntry<T>`, Cairo'nun sözlük girişlerini temsil etmek için kullandığı tür, ve  
+"önceden tutulan bir `T` değeri içeren bir demet döndürür. `nopanic` notasyonu, fonksiyonun  
 "asla panik olmayacağının garantilendiğini belirtir."
 
 
@@ -4277,7 +4277,7 @@ msgid ""
 "use the `finalize` method which inserts the entry and returns ownership of "
 "the dictionary:"
 msgstr ""
-"Bir sonraki adım, girişi yeni değerle güncellemektir. Bunun için, girişi ekleyen ve sözlüğün
+"Bir sonraki adım, girişi yeni değerle güncellemektir. Bunun için, girişi ekleyen ve sözlüğün  
 "sahipliğini geri döndüren `finalize` metodunu kullanırız:"
 
 
@@ -4294,8 +4294,8 @@ msgid ""
 "implement our own version of the `get` method from a dictionary. We should "
 "then do the following:"
 msgstr ""
-"`entry` ve `finalize` kullanarak bir örneği inceleyelim. Sözlükten `get`
-"metodunun kendi versiyonumuzu uygulamak istediğimizi hayal edelim. O zaman "
+"`entry` ve `finalize` kullanarak bir örneği inceleyelim. Sözlükten `get`  
+"metodunun kendi versiyonumuzu uygulamak istediğimizi hayal edelim. O zaman " 
 "şunu yapmalıyız:"
 
 
@@ -4342,8 +4342,8 @@ msgid ""
 "detail in the [References and Snapshots](ch04-02-references-and-snapshots."
 "md) section."
 msgstr ""
-"`ref` anahtar kelimesi, değişkenin sahipliğinin fonksiyonun sonunda geri
-"verileceği anlamına gelir. Bu kavram, [Referanslar ve Snapshot'lar](ch04-02-references-and-snapshots.md)
+"`ref` anahtar kelimesi, değişkenin sahipliğinin fonksiyonun sonunda geri  
+"verileceği anlamına gelir. Bu kavram, [Referanslar ve Snapshot'lar](ch04-02-references-and-snapshots.md)  
 "bölümünde daha detaylı açıklanacaktır."
 
 
@@ -4353,8 +4353,8 @@ msgid ""
 "inserting a new value when finalizing. If we were to implement it, it would "
 "look like the following:"
 msgstr ""
-"`insert` metodunu uygulamak benzer bir iş akışını takip eder, sadece
-"sonlandırırken yeni bir değer eklenir. Uygulayacak olsaydık, şöyle
+"`insert` metodunu uygulamak benzer bir iş akışını takip eder, sadece  
+"sonlandırırken yeni bir değer eklenir. Uygulayacak olsaydık, şöyle  
 "görünecekti:"
 
 
@@ -4377,8 +4377,8 @@ msgid ""
 "how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows "
 "some example usage:"
 msgstr ""
-"Son bir not olarak, bu iki metod, `Felt252Dict<T>` için `insert` ve `get`
-"nasıl uygulandıysa benzer bir şekilde uygulanır. Bu kod, bazı örnek
+"Son bir not olarak, bu iki metod, `Felt252Dict<T>` için `insert` ve `get`  
+"nasıl uygulandıysa benzer bir şekilde uygulanır. Bu kod, bazı örnek  
 "kullanımları gösterir:"
 
 
@@ -4428,13 +4428,13 @@ msgid ""
 "valid dictionary value type. To compensate this, you can wrap your type "
 "inside a `Nullable<T>`."
 msgstr ""
-"`Felt252Dict<T>`'nin konuşmadığımız bir kısıtlaması, `Felt252DictValue<T>`
-"trait'idir. Bu trait, sözlükte bir değer mevcut değilken çağrılan `zero_default`
-"metodunu tanımlar. Bu, çoğu işaretsiz tamsayı, `bool` ve `felt252` gibi bazı yaygın
-"veri türleri tarafından uygulanır - ancak diziler, yapılar ( `u256` dahil) ve çekirdek
-"kütüphaneden diğer türler gibi daha karmaşık türler için uygulanmaz. Bu, doğal olarak
-"desteklenmeyen türlerin sözlüğünü yapmanın basit bir iş olmadığı anlamına gelir, çünkü
-"veri türünü geçerli bir sözlük değer türü yapmak için birkaç trait uygulaması yazmanız
+"`Felt252Dict<T>`'nin konuşmadığımız bir kısıtlaması, `Felt252DictValue<T>`  
+"trait'idir. Bu trait, sözlükte bir değer mevcut değilken çağrılan `zero_default`  
+"metodunu tanımlar. Bu, çoğu işaretsiz tamsayı, `bool` ve `felt252` gibi bazı yaygın  
+"veri türleri tarafından uygulanır - ancak diziler, yapılar ( `u256` dahil) ve çekirdek  
+"kütüphaneden diğer türler gibi daha karmaşık türler için uygulanmaz. Bu, doğal olarak  
+"desteklenmeyen türlerin sözlüğünü yapmanın basit bir iş olmadığı anlamına gelir, çünkü  
+"veri türünü geçerli bir sözlük değer türü yapmak için birkaç trait uygulaması yazmanız  
 "gerekecektir. Bunu telafi etmek için, türünüzü `Nullable<T>` içine sarabilirsiniz."
 
 
@@ -4448,12 +4448,12 @@ msgid ""
 "allocate a new memory segment for our type, and access this segment using a "
 "pointer that can only be manipulated in one place at a time."
 msgstr ""
-"`Nullable<T>`, bir değere işaret edebilen veya değer yokluğunda `null`
-"olabilen akıllı bir işaretçi türüdür. Genellikle, bir referansın hiçbir yere
-"işaret etmediği Nesne Yönelimli Programlama Dillerinde kullanılır. `Option` ile
-"farkı, sarılı değerin `Box<T>` veri türü içinde depolanmasıdır. Rust'tan esinlenilen
-"`Box<T>` türü, türümüz için yeni bir bellek segmenti tahsis etmemize ve bu segmente
-"bir seferde yalnızca bir yerden manipüle edilebilen bir işaretçi kullanarak erişmemize
+"`Nullable<T>`, bir değere işaret edebilen veya değer yokluğunda `null`  
+"olabilen akıllı bir işaretçi türüdür. Genellikle, bir referansın hiçbir yere  
+"işaret etmediği Nesne Yönelimli Programlama Dillerinde kullanılır. `Option` ile  
+"farkı, sarılı değerin `Box<T>` veri türü içinde depolanmasıdır. Rust'tan esinlenilen  
+"`Box<T>` türü, türümüz için yeni bir bellek segmenti tahsis etmemize ve bu segmente  
+"bir seferde yalnızca bir yerden manipüle edilebilen bir işaretçi kullanarak erişmemize  
 "olanak tanır."
 
 
@@ -4465,9 +4465,9 @@ msgid ""
 "implement the `Copy<T>` trait which is required for reading from a "
 "dictionary."
 msgstr ""
-"Bir örnekle kullanımını gösterelim. Bir sözlük içinde `Span<felt252>`
-"saklamayı deneyeceğiz. Bunun için `Nullable<T>` ve `Box<T>` kullanacağız. Ayrıca,
-"`Array<T>` yerine bir `Span<T>` saklıyoruz çünkü sonuncusu, bir sözlükten okuma için
+"Bir örnekle kullanımını gösterelim. Bir sözlük içinde `Span<felt252>`  
+"saklamayı deneyeceğiz. Bunun için `Nullable<T>` ve `Box<T>` kullanacağız. Ayrıca,  
+"`Array<T>` yerine bir `Span<T>` saklıyoruz çünkü sonuncusu, bir sözlükten okuma için  
 "gerekli olan `Copy<T>` trait'ini uygulamaz."
 
 
@@ -4493,8 +4493,8 @@ msgid ""
 "`d`. We want it to hold a `Nullable<Span>`. After that, we created an array "
 "and filled it with values."
 msgstr ""
-"Bu kod parçacığında, ilk olarak `d` adında yeni bir sözlük oluşturduk. Onun
-"`Nullable<Span>` tutmasını istiyoruz. Bunun ardından, bir dizi oluşturduk ve
+"Bu kod parçacığında, ilk olarak `d` adında yeni bir sözlük oluşturduk. Onun  
+"`Nullable<Span>` tutmasını istiyoruz. Bunun ardından, bir dizi oluşturduk ve  
 "değerlerle doldurduk."
 
 
@@ -4503,7 +4503,7 @@ msgid ""
 "The last step is inserting the array as a span inside the dictionary. Notice "
 "that we didn't do that directly, but instead, we took some steps in between:"
 msgstr ""
-"Son adım, diziyi sözlük içinde bir span olarak eklemek. Bunu doğrudan yapmadık,
+"Son adım, diziyi sözlük içinde bir span olarak eklemek. Bunu doğrudan yapmadık,  
 "ancak arada bazı adımlar attık:"
 
 
@@ -4530,7 +4530,7 @@ msgid ""
 "the same steps but in reverse order. The following code shows how to achieve "
 "that:"
 msgstr ""
-"Eleman bir kez sözlük içine girdiğinde ve onu almak istediğimizde, aynı adımları
+"Eleman bir kez sözlük içine girdiğinde ve onu almak istediğimizde, aynı adımları  
 "ters sırada takip ediyoruz. Aşağıdaki kod, bunun nasıl yapılabileceğini gösterir:"
 
 
@@ -4589,10 +4589,10 @@ msgid ""
 "that arrays have one big limitation - the data stored in them is immutable. "
 "Once you append a value to an array, you can't modify it."
 msgstr ""
-"Cairo'da programlamaya başladığınızda, veri koleksiyonlarını saklamak için
-"dizileri (`Array<T>`) kullanmak isteyeceksiniz. Ancak, dizilerin bir büyük
-"kısıtlaması olduğunu hızlıca fark edeceksiniz - içlerinde saklanan veriler
-"değiştirilemez. Bir dizinin sonuna bir değer ekledikten sonra, bu değeri
+"Cairo'da programlamaya başladığınızda, veri koleksiyonlarını saklamak için  
+"dizileri (`Array<T>`) kullanmak isteyeceksiniz. Ancak, dizilerin bir büyük  
+"kısıtlaması olduğunu hızlıca fark edeceksiniz - içlerinde saklanan veriler  
+"değiştirilemez. Bir dizinin sonuna bir değer ekledikten sonra, bu değeri  
 "modifiye edemezsiniz."
 
 
@@ -4602,9 +4602,9 @@ msgid ""
 "example, say you're making a game where the players have a level, and they "
 "can level up. You might try to store the level of the players in an array:"
 msgstr ""
-"Bu, değiştirilebilir bir veri yapısı kullanmak istediğinizde sinir bozucu
-"olabilir. Örneğin, oyuncuların bir seviyesi olduğu ve seviye atlayabildikleri
-"bir oyun yapıyorsunuz diyelim. Oyuncuların seviyelerini bir diziye saklamayı
+"Bu, değiştirilebilir bir veri yapısı kullanmak istediğinizde sinir bozucu  
+"olabilir. Örneğin, oyuncuların bir seviyesi olduğu ve seviye atlayabildikleri  
+"bir oyun yapıyorsunuz diyelim. Oyuncuların seviyelerini bir diziye saklamayı  
 "deneyebilirsiniz:"
 
 
@@ -4614,8 +4614,8 @@ msgid ""
 "it's set. If a player dies, you cannot remove it from the array unless he "
 "happens to be in the first position."
 msgstr ""
-"Ancak daha sonra, belirli bir indeksteki seviyeyi ayarlandıktan sonra
-"artıramayacağınızı fark edersiniz. Bir oyuncu ölürse, ilk pozisyonda değilse,
+"Ancak daha sonra, belirli bir indeksteki seviyeyi ayarlandıktan sonra  
+"artıramayacağınızı fark edersiniz. Bir oyuncu ölürse, ilk pozisyonda değilse,  
 "onu diziden çıkaramazsınız."
 
 
@@ -4626,9 +4626,9 @@ msgid ""
 "behavior of mutable data structures. Let's first explore how to create a "
 "struct that contains, among others, a `Felt252Dict<T>`."
 msgstr ""
-"Şans eseri, Cairo değiştirilebilir veri yapılarının davranışını simüle
-"etmemize izin veren `Felt252Dict<T>` adında kullanışlı yerleşik bir [sözlük
-"türü](./ch03-02-dictionaries.md) sunar. Önce, aralarında bir `Felt252Dict<T>`
+"Şans eseri, Cairo değiştirilebilir veri yapılarının davranışını simüle  
+"etmemize izin veren `Felt252Dict<T>` adında kullanışlı yerleşik bir [sözlük  
+"türü](./ch03-02-dictionaries.md) sunar. Önce, aralarında bir `Felt252Dict<T>`  
 "içeren bir yapı oluşturmayı inceleyelim."
 
 
@@ -4640,9 +4640,9 @@ msgid ""
 "ch05-03-method-syntax.md), [Generic types](./ch08-00-generic-types-and-"
 "traits.md), [Traits](./ch08-02-traits-in-cairo.md)."
 msgstr ""
-"Not: Bu bölümde kullanılan bazı kavramlar kitabın sonraki kısımlarında
-"sunulmuştur. Önce şu bölümlere göz atmanızı öneririz: [Yapılar](ch05-00-using-structs-to-structure-related-data.md),
-"[Metodlar](./ch05-03-method-syntax.md), [Genel türler](./ch08-00-generic-types-and-traits.md),
+"Not: Bu bölümde kullanılan bazı kavramlar kitabın sonraki kısımlarında  
+"sunulmuştur. Önce şu bölümlere göz atmanızı öneririz: [Yapılar](ch05-00-using-structs-to-structure-related-data.md),  
+"[Metodlar](./ch05-03-method-syntax.md), [Genel türler](./ch08-00-generic-types-and-traits.md),  
 "[Özellikler](./ch08-02-traits-in-cairo.md)."
 
 
@@ -4658,10 +4658,10 @@ msgid ""
 "will need to define a struct to represent the new type and a trait to define "
 "its functionality:"
 msgstr ""
-"Cairo'da yapı üyeleri olarak sözlükleri tanımlamak mümkündür ancak onlarla
-"doğru şekilde etkileşim kurmak tamamen sorunsuz olmayabilir. Kullanıcıları
-"ekleyebileceğimiz ve sorgulayabileceğimiz özel bir _kullanıcı veritabanı_
-"uygulamayı deneyelim. Yeni tipi temsil etmek için bir yapı ve işlevselliğini
+"Cairo'da yapı üyeleri olarak sözlükleri tanımlamak mümkündür ancak onlarla  
+"doğru şekilde etkileşim kurmak tamamen sorunsuz olmayabilir. Kullanıcıları  
+"ekleyebileceğimiz ve sorgulayabileceğimiz özel bir _kullanıcı veritabanı_  
+"uygulamayı deneyelim. Yeni tipi temsil etmek için bir yapı ve işlevselliğini  
 "tanımlamak için bir özellik tanımlamamız gerekecek:"
 
 
@@ -4671,8 +4671,8 @@ msgid ""
 "over the balances of the users, giving major flexibility to whoever uses our "
 "data type. Its two members are:"
 msgstr ""
-"Yeni tipimiz `UserDatabase<T>`, kullanıcıların bir veritabanını temsil eder.
-"Kullanıcıların bakiyeleri üzerinden genel olarak tanımlanmıştır, bu da
+"Yeni tipimiz `UserDatabase<T>`, kullanıcıların bir veritabanını temsil eder.  
+"Kullanıcıların bakiyeleri üzerinden genel olarak tanımlanmıştır, bu da  
 "veri tipimizi kullanan herkese büyük bir esneklik sağlar. İki üyesi vardır:"
 
 
@@ -4689,7 +4689,7 @@ msgid ""
 "The database core functionality is defined by `UserDatabaseTrait`. The "
 "following methods are defined:"
 msgstr ""
-"Veritabanının temel işlevselliği `UserDatabaseTrait` tarafından tanımlanır.
+"Veritabanının temel işlevselliği `UserDatabaseTrait` tarafından tanımlanır.  
 "Tanımlanan metodlar şunlardır:"
 
 
@@ -4712,9 +4712,9 @@ msgid ""
 "ch08-00-generic-types-and-traits.md) we also need to correctly establish the "
 "requirements of `T` so it can be a valid `Felt252Dict<T>` value type:"
 msgstr ""
-"`UserDatabaseTrait` içindeki her bir metodun uygulanması kalan tek adımdır,
-"ancak [genel türler](/src/ch08-00-generic-types-and-traits.md) ile çalıştığımız için, `T`'nin
-"geçerli bir `Felt252Dict<T>` değer türü olabilmesi için gereksinimleri doğru bir şekilde
+"`UserDatabaseTrait` içindeki her bir metodun uygulanması kalan tek adımdır,  
+"ancak [genel türler](/src/ch08-00-generic-types-and-traits.md) ile çalıştığımız için, `T`'nin  
+"geçerli bir `Felt252Dict<T>` değer türü olabilmesi için gereksinimleri doğru bir şekilde 
 "belirlememiz gerekiyor:"
 
 
@@ -4723,7 +4723,7 @@ msgid ""
 "`T` should implement the `Copy<T>` since it's required for getting values "
 "from a `Felt252Dict<T>`."
 msgstr ""
-"`T`, bir `Felt252Dict<T>`'den değerler almak için gereken `Copy<T>` trait'ini
+"`T`, bir `Felt252Dict<T>`'den değerler almak için gereken `Copy<T>` trait'ini  
 "uygulamalıdır."
 
 
@@ -4732,7 +4732,7 @@ msgid ""
 "All value types of a dictionary implement the `Felt252DictValue<T>`, our "
 "generic type should do as well."
 msgstr ""
-"Bir sözlüğün tüm değer türleri `Felt252DictValue<T>`'i uygular, bizim genel
+"Bir sözlüğün tüm değer türleri `Felt252DictValue<T>`'i uygular, bizim genel  
 "türümüz de bunu yapmalıdır."
 
 
@@ -4741,7 +4741,7 @@ msgid ""
 "To insert values, `Felt252DictTrait<T>` requires all value types to be "
 "destructible."
 msgstr ""
-"Değerleri eklemek için, `Felt252DictTrait<T>` tüm değer türlerinin
+"Değerleri eklemek için, `Felt252DictTrait<T>` tüm değer türlerinin  
 "yok edilebilir olmasını gerektirir."
 
 
@@ -4777,13 +4777,13 @@ msgid ""
 "generic-types-and-traits.md) in the struct definition. We need to code the "
 "`Destruct<T>` trait implementation by ourselves:"
 msgstr ""
-"Veritabanı uygulamamız neredeyse tamamlandı, tek bir eksik var: derleyici,
-"`UserDatabase<T>`'nin kapsam dışına çıkma şeklini bilmiyor, çünkü `Drop<T>`
-"trait'ini veya `Destruct<T>` trait'ini uygulamıyor. Bir `Felt252Dict<T>`'yi
-"üye olarak içerdiği için bırakılamaz, bu yüzden `Destruct<T>` trait'ini
-"manuel olarak uygulamak zorundayız ([Sahiplik](ch04-01-what-is-ownership.md#the-drop-trait)
-"bölümüne daha fazla bilgi için bakınız). `UserDatabase<T>` tanımının üstüne
-"`#[derive(Destruct)]` kullanmak, yapı tanımında [genellik](/src/ch08-00-generic-types-and-traits.md)
+"Veritabanı uygulamamız neredeyse tamamlandı, tek bir eksik var: derleyici,  
+"`UserDatabase<T>`'nin kapsam dışına çıkma şeklini bilmiyor, çünkü `Drop<T>`  
+"trait'ini veya `Destruct<T>` trait'ini uygulamıyor. Bir `Felt252Dict<T>`'yi  
+"üye olarak içerdiği için bırakılamaz, bu yüzden `Destruct<T>` trait'ini  
+"manuel olarak uygulamak zorundayız ([Sahiplik](ch04-01-what-is-ownership.md#the-drop-trait)  
+"bölümüne daha fazla bilgi için bakınız). `UserDatabase<T>` tanımının üstüne  
+"`#[derive(Destruct)]` kullanmak, yapı tanımında [genellik](/src/ch08-00-generic-types-and-traits.md)  
 "kullanımı nedeniyle işe yaramaz. `Destruct<T>` trait uygulamasını kendimiz kodlamalıyız:"
 
 
@@ -4792,7 +4792,7 @@ msgid ""
 "Implementing `Destruct<T>` for `UserDatabase` was our last step to get a "
 "fully functional database. We can now try it out:"
 msgstr ""
-"`UserDatabase` için `Destruct<T>`'yi uygulamak, tamamen işlevsel bir veritabanına
+"`UserDatabase` için `Destruct<T>`'yi uygulamak, tamamen işlevsel bir veritabanına  
 "sahip olmak için son adımımızdı. Şimdi bunu deneyebiliriz:"
 
 
@@ -4813,7 +4813,7 @@ msgid ""
 "First, let's think about how we want our mutable dynamic array to behave. "
 "What operations should it support?"
 msgstr ""
-"Öncelikle, değiştirilebilir dinamik dizimizin nasıl davranmasını istediğimiz
+"Öncelikle, değiştirilebilir dinamik dizimizin nasıl davranmasını istediğimiz  
 "hakkında düşünelim. Hangi işlemleri desteklemelidir?"
 
 
@@ -4846,7 +4846,7 @@ msgid ""
 "This provides a blueprint for the implementation of our dynamic array. We "
 "named it _Vec_ as it is similar to the `Vec<T>` data structure in Rust."
 msgstr ""
-"Bu, dinamik dizimizin uygulaması için bir plan sağlar. Bunu Rust'taki `Vec<T>`
+"Bu, dinamik dizimizin uygulaması için bir plan sağlar. Bunu Rust'taki `Vec<T>`  
 "veri yapısına benzer olduğu için _Vec_ olarak adlandırdık."
 
 
@@ -4860,7 +4860,7 @@ msgid ""
 "(felts) to values. We'll also store a separate `len` field to track the "
 "length."
 msgstr ""
-"Verilerimizi saklamak için, indeks numaralarını (felts) değerlere eşleyen bir
+"Verilerimizi saklamak için, indeks numaralarını (felts) değerlere eşleyen bir  
 "`Felt252Dict<T>` kullanacağız. Ayrıca, uzunluğu takip etmek için ayrı bir `len` alanı saklayacağız."
 
 
@@ -4871,8 +4871,8 @@ msgid ""
 "the [Dictionaries](./ch03-02-dictionaries.md#dictionaries-of-types-not-"
 "supported-natively) section:"
 msgstr ""
-"İşte yapımızın nasıl göründüğü. `T` türünü `Nullable` işaretçi içine sarıyoruz ki,
-"[Sözlükler](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively) bölümünde açıklandığı gibi,
+"İşte yapımızın nasıl göründüğü. `T` türünü `Nullable` işaretçi içine sarıyoruz ki,  
+"[Sözlükler](./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively) bölümünde açıklandığı gibi,  
 "veri yapımızda herhangi bir `T` türünü kullanabilmemize izin verilsin:"
 
 
@@ -4882,8 +4882,8 @@ msgid ""
 "into the dictionary to set or update values in our data structure. For "
 "example, to update a value at a specific index, we do:"
 msgstr ""
-"Bu vektörü değiştirilebilir kılan ana şey, veri yapımızda değerleri ayarlamak veya
-"güncellemek için sözlüğe değerler ekleyebilmemizdir. Örneğin, belirli bir indeksteki
+"Bu vektörü değiştirilebilir kılan ana şey, veri yapımızda değerleri ayarlamak veya  
+"güncellemek için sözlüğe değerler ekleyebilmemizdir. Örneğin, belirli bir indeksteki  
 "değeri güncellemek için şunu yaparız:"
 
 
@@ -4905,7 +4905,7 @@ msgid ""
 "While arrays are immutable, dictionaries provide the flexibility we need for "
 "modifiable data structures like vectors."
 msgstr ""
-"Diziler değiştirilemezken, sözlükler vektörler gibi değiştirilebilir veri yapıları "
+"Diziler değiştirilemezken, sözlükler vektörler gibi değiştirilebilir veri yapıları " 
 "için ihtiyacımız olan esnekliği sağlar."
 
 
@@ -4915,7 +4915,7 @@ msgid ""
 "implementation of all the methods defined in our interface can be done as "
 "follow :"
 msgstr ""
-"Arayüzün geri kalanının uygulanması basittir. Arayüzümüzde tanımlanan tüm metodların "
+"Arayüzün geri kalanının uygulanması basittir. Arayüzümüzde tanımlanan tüm metodların " 
 "uygulanması şu şekilde yapılabilir:"
 
 
@@ -4925,7 +4925,7 @@ msgid ""
 "maintained library [Alexandria](https://github.com/keep-starknet-strange/"
 "alexandria/tree/main/src/data_structures)."
 msgstr ""
-"`Vec` yapısının tam uygulaması, topluluk tarafından sürdürülen [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures)
+"`Vec` yapısının tam uygulaması, topluluk tarafından sürdürülen [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures)  
 "kütüphanesinde bulunabilir."
 
 
@@ -4946,8 +4946,8 @@ msgid ""
 "element and removal of an existing element takes place at the same end, "
 "represented as the top of the stack."
 msgstr ""
-"Bir Yığın, LIFO (Last-In, First-Out) bir koleksiyondur. Yeni bir elemanın ekleme
-"ve mevcut bir elemanın çıkarma işlemi aynı uçta, yığının tepesi olarak temsil
+"Bir Yığın, LIFO (Last-In, First-Out) bir koleksiyondur. Yeni bir elemanın ekleme  
+"ve mevcut bir elemanın çıkarma işlemi aynı uçta, yığının tepesi olarak temsil  
 "edilen yerde gerçekleşir."
 
 
@@ -4986,8 +4986,8 @@ msgid ""
 "`Felt252Dict<T>` to store the values of the stack along with a `usize` field "
 "to keep track of the length of the stack to iterate over it."
 msgstr ""
-"Cairo'da bir yığın veri yapısı oluşturmak için, yığının değerlerini saklamak ve
-"üzerinde yineleme yapmak için yığının uzunluğunu takip etmek amacıyla bir `usize`
+"Cairo'da bir yığın veri yapısı oluşturmak için, yığının değerlerini saklamak ve  
+"üzerinde yineleme yapmak için yığının uzunluğunu takip etmek amacıyla bir `usize`  
 "alanı ile birlikte yine bir `Felt252Dict<T>` kullanabiliriz."
 
 
@@ -5011,10 +5011,10 @@ msgid ""
 "`len-1` and then decreases the value of `len` to update the position of the "
 "stack top accordingly."
 msgstr ""
-"Kod, `Felt252Dict<T>` içindeki değerlere erişmek için `insert` ve `get` metodlarını
-"kullanır. Yığının tepesine bir eleman eklemek için, `push` fonksiyonu elemanı `len`
-"indeksinde sözlüğe ekler ve yığının tepesinin pozisyonunu takip etmek için `len` alanını
-"artırır. Bir değeri kaldırmak için, `pop` fonksiyonu `len-1` pozisyonundaki son değeri
+"Kod, `Felt252Dict<T>` içindeki değerlere erişmek için `insert` ve `get` metodlarını 
+"kullanır. Yığının tepesine bir eleman eklemek için, `push` fonksiyonu elemanı `len`  
+"indeksinde sözlüğe ekler ve yığının tepesinin pozisyonunu takip etmek için `len` alanını 
+"artırır. Bir değeri kaldırmak için, `pop` fonksiyonu `len-1` pozisyonundaki son değeri 
 "alır ve ardından yığının tepesinin pozisyonunu güncellemek için `len` değerini azaltır. "
 
 
@@ -5025,9 +5025,9 @@ msgid ""
 "[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/"
 "src/data_structures) library, in the \"data_structures\" crate."
 msgstr ""
-"Yığının tam uygulaması, kodunuzda kullanabileceğiniz daha
-"fazla veri yapısı ile birlikte, topluluk tarafından sürdürülen
-"[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures)
+"Yığının tam uygulaması, kodunuzda kullanabileceğiniz daha 
+"fazla veri yapısı ile birlikte, topluluk tarafından sürdürülen  
+"[Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/src/data_structures)  
 "kütüphanesinde, \"data_structures\" crate'inde bulunabilir. "
 
 
@@ -5041,12 +5041,12 @@ msgid ""
 "applications, effectively hiding the complexity of the underlying memory "
 "model."
 msgstr ""
-"Harika! Artık diziler, sözlükler ve hatta özel veri yapıları
-"hakkında bilgiye sahipsiniz. Cairo'nun bellek modeli değiştirilemez
-"olduğu ve değiştirilebilir veri yapılarını uygulamayı zorlaştırabileceği
-"halde, neyse ki `Felt252Dict<T>` türünü değiştirilebilir veri yapılarını
-"simüle etmek için kullanabiliriz. Bu, birçok uygulama için yararlı olan
-"geniş bir veri yapısı yelpazesini uygulamamıza olanak tanır, etkili bir
+"Harika! Artık diziler, sözlükler ve hatta özel veri yapıları 
+"hakkında bilgiye sahipsiniz. Cairo'nun bellek modeli değiştirilemez 
+"olduğu ve değiştirilebilir veri yapılarını uygulamayı zorlaştırabileceği 
+"halde, neyse ki `Felt252Dict<T>` türünü değiştirilebilir veri yapılarını  
+"simüle etmek için kullanabiliriz. Bu, birçok uygulama için yararlı olan 
+"geniş bir veri yapısı yelpazesini uygulamamıza olanak tanır, etkili bir 
 "şekilde altta yatan bellek modelinin karmaşıklığını gizler."
 
 
@@ -5056,7 +5056,7 @@ msgid ""
 "with Rust and that doesn’t commonly exist in other programming languages: "
 "ownership."
 msgstr ""
-"Hazır olduğunuzda, Cairo'nun Rust ile paylaştığı ve diğer programlama
+"Hazır olduğunuzda, Cairo'nun Rust ile paylaştığı ve diğer programlama  
 "dillerinde yaygın olmayan bir kavramdan bahsedeceğiz: sahiplik."
 
 
