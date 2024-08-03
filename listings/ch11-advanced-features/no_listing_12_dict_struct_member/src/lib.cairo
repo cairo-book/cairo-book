@@ -1,3 +1,5 @@
+use core::dict::Felt252Dict;
+
 // ANCHOR: struct
 struct UserDatabase<T> {
     users_updates: u64,

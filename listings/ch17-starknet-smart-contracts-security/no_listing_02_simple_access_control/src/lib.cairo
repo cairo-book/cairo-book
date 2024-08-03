@@ -1,7 +1,11 @@
 #[starknet::contract]
 mod access_control_contract {
-    use starknet::ContractAddress;
-    use starknet::get_caller_address;
+    use core::starknet::storage::{
+        StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
+        StorageMapWriteAccess, Map
+    };
+    use core::starknet::ContractAddress;
+    use core::starknet::get_caller_address;
 
     trait IContract<TContractState> {
         fn is_owner(self: @TContractState) -> bool;
@@ -19,7 +23,7 @@ mod access_control_contract {
         // Role 'owner': only one address
         owner: ContractAddress,
         // Role 'role_a': a set of addresses
-        role_a: LegacyMap::<ContractAddress, bool>
+        role_a: Map::<ContractAddress, bool>
     }
 
     #[constructor]
@@ -42,23 +46,23 @@ mod access_control_contract {
 
         #[inline(always)]
         fn only_owner(self: @ContractState) {
-            assert!(Contract::is_owner(self), "Not owner");
+            assert!(Self::is_owner(self), "Not owner");
         }
 
         #[inline(always)]
         fn only_role_a(self: @ContractState) {
-            assert!(Contract::is_role_a(self), "Not role A");
+            assert!(Self::is_role_a(self), "Not role A");
         }
 
         // You can easily combine guards to perform complex checks
         fn only_allowed(self: @ContractState) {
-            assert!(Contract::is_owner(self) || Contract::is_role_a(self), "Not allowed");
+            assert!(Self::is_owner(self) || Contract::is_role_a(self), "Not allowed");
         }
 
         // Functions to manage roles
 
         fn set_role_a(ref self: ContractState, _target: ContractAddress, _active: bool) {
-            Contract::only_owner(@self);
+            Self::only_owner(@self);
             self.role_a.write(_target, _active);
         }
 
@@ -66,14 +70,13 @@ mod access_control_contract {
         // and reduce the complexity of your code by using guard functions
 
         fn role_a_action(ref self: ContractState) {
-            Contract::only_role_a(@self);
+            Self::only_role_a(@self);
             // ...
         }
 
         fn allowed_action(ref self: ContractState) {
-            Contract::only_allowed(@self);
+            Self::only_allowed(@self);
             // ...
         }
     }
 }
-

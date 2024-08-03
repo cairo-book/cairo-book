@@ -18,6 +18,7 @@ Here is a list of the system calls available in Cairo 1.0:
 - [replace_class](#replace_class)
 - [storage_read](#storage_read)
 - [storage_write](#storage_write)
+- [sha256_process_block](#sha256_process_block)
 
 ## `get_block_hash`
 
@@ -376,3 +377,32 @@ None.
 #### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L70)
+
+## `sha256_process_block`
+
+#### Syntax
+
+```rust,noplayground
+pub extern fn sha256_process_block_syscall(
+    state: core::sha256::Sha256StateHandle, input: Box<[u32; 16]>
+) -> SyscallResult<core::sha256::Sha256StateHandle> implicits(GasBuiltin, System) nopanic;
+```
+
+#### Description 
+
+Computes the next SHA-256 state of the input with the given state. 
+
+This syscall computes the next SHA-256 state by combining the current `state` with a 512-bit block of `input` data.
+
+#### Arguments
+
+- _`state`_: The current sha256 state. 
+- _`input`_: The value to be processed into sha256. 
+
+#### Return Values
+
+Returns a new sha256 state of the `input` data. 
+
+#### Common Library
+
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106)

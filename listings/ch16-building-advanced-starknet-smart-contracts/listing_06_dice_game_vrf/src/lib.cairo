@@ -1,5 +1,5 @@
 //ANCHOR: interfaces
-use starknet::ContractAddress;
+use core::starknet::ContractAddress;
 
 #[starknet::interface]
 pub trait IPragmaVRF<TContractState> {
@@ -35,7 +35,7 @@ pub trait IDiceGame<TContractState> {
 //ANCHOR: dice_game
 #[starknet::contract]
 mod DiceGame {
-    use starknet::{
+    use core::starknet::{
         ContractAddress, contract_address_const, get_block_number, get_caller_address,
         get_contract_address
     };
@@ -215,7 +215,7 @@ mod DiceGame {
             let eth_dispatcher = ERC20ABIDispatcher {
                 contract_address: contract_address_const::<
                     0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
-                >() // ETH Contract Address            
+                >() // ETH Contract Address
             };
             let balance = eth_dispatcher.balance_of(get_contract_address());
             eth_dispatcher.transfer(receiver, balance);
