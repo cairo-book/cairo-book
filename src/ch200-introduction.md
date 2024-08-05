@@ -2,7 +2,11 @@
 
 Ever wondered how your Cairo programs were executed?
 
-Everything happens in the Cairo Virtual Machine, or _Cairo VM_ for short.
+First, they are compiled by the Cairo Compiler, then executed
+by the Cairo Virtual Machine, or _Cairo VM_ for short,
+which generates a trace of execution, used by the Prover
+to generate a STARK proof of that execution. This proof can later
+be verified by a Verifier.
 
 The following chapters will go deep inside the inner workings of the Cairo VM.
 We'll cover its architecture, its memory model, and its execution model.
@@ -15,12 +19,12 @@ But first, what do we mean by "virtual machine"?
 
 Virtual Machines (VMs) are software emulations of physical computers.
 They provide a complete programming environment through an API which
-includes everything required for the correct executions of programs above it.
+includes everything required for the correct execution of programs above it.
 
 Every virtual machine API includes an instruction set architecture (ISA)
 in which to express programs. It could be the same instruction set as some
-physical machine, or an artificial one to implement in software and generate
-with a compiler.
+physical machine (e.g. RISC-V), or a dedicated one implemented in the VM
+(e.g. Cairo assembly, CASM).
 
 Those that emulate an OS are called _System Virtual Machines_, such as Xen and VMWare.
 We're not interested in them here.
@@ -35,21 +39,30 @@ The most well-known process VM might be the Java Virtual Machine (JVM).
 - The JVM verifies that the bytecode is safe to run.
 - The bytecode is either interpreted (slow) or compiled to machine code just in time (JIT, fast).
 - If using JIT, the bytecode is translated to machine code while executing the program.
+- Java programs could also be directly compiled to a specific CPU architecture (read machine code),
+  this is called Ahead of Time compilation (AOT), mainly provided by a now dead project `gcj`.
 
-The Cairo VM is also a process VM, similar to the JVM:
+The Cairo VM is also a process VM, similar to the JVM, with one significant difference:
+Java and its JVM are designed for (platform-independent) general-purpose computing,
+while Cairo and its Cairo VM are specifically designed for (platform-independent)
+_provable_ general-purpose computing.
 
 - A Cairo program `prgm.cairo` is compiled into compilation artifacts `prgm.json`,
-  containing _Cairo bytecode_ (_CASM_, the Cairo instruction set, and extra data).
+  containing _Cairo bytecode_ (encoded CASM, the Cairo instruction set, and extra data).
 - As seen in the [introduction](ch00-00-introduction.md), Cairo Zero directly compiles to CASM
   while Cairo first compiles to _Sierra_ and then to a safe subset of CASM.
 - The Cairo VM _interprets_ the provided CASM and generates a trace of the program execution.
+- The obtained trace data can be fed to the Cairo Prover in order to generate a STARK proof,
+  allowing to prove the correct execution of a program. Creating this _validity proof_ is the
+  main purpose of Cairo.
 
 An ongoing project, [Cairo Native][cairo-native] works on providing
-Sierra to machine code compilation, including JIT, for executing Cairo programs.
+Sierra to machine code compilation, including JIT and AOT, for executing Cairo programs.
 
 Even though the high-level flow of both VMs is similar, their actual architectures
-are extremely different. This is because Cairo is built to prove program execution
-rather than merely performing it.
+are extremely different: the instruction set, the non-deterministic memory model and
+the output. This is because Java programs are merely executed while
+Cairo ones have their execution proven.
 
 [cairo-native]: https://github.com/lambdaclass/cairo_native
 
