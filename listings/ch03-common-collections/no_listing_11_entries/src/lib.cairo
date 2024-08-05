@@ -1,3 +1,5 @@
+use core::dict::Felt252Dict;
+
 // ANCHOR: struct
 struct Entry<T> {
     key: felt252,

@@ -1,13 +1,17 @@
 //ANCHOR: all
-use starknet::ContractAddress;
+use core::starknet::ContractAddress;
 
 #[starknet::contract]
 mod NameRegistry {
-    use starknet::{ContractAddress, get_caller_address};
+    use core::starknet::{ContractAddress, get_caller_address};
+    use core::starknet::storage::{
+        StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
+        StorageMapWriteAccess, Map
+    };
 
     #[storage]
     struct Storage {
-        names: LegacyMap::<ContractAddress, felt252>,
+        names: Map::<ContractAddress, felt252>,
         total_names: u128,
         owner: Person
     }

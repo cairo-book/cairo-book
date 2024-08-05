@@ -67,7 +67,7 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 [package]
 name = "hello_world"
 version = "0.1.0"
-edition = "2023_11"
+edition = "2024_07"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 

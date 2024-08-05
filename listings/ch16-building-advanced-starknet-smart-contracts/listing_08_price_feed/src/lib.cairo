@@ -1,4 +1,4 @@
-use starknet::ContractAddress;
+use core::starknet::ContractAddress;
 
 //ANCHOR:price_interface
 #[starknet::interface]
@@ -17,8 +17,8 @@ mod PriceFeedExample {
     use pragma_lib::types::{DataType, PragmaPricesResponse};
     //ANCHOR_END: pragma_lib
     use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
-    use starknet::contract_address::contract_address_const;
-    use starknet::{get_caller_address};
+    use core::starknet::contract_address::contract_address_const;
+    use core::starknet::get_caller_address;
 
     const ETH_USD: felt252 = 19514442401534788;
     const EIGHT_DECIMAL_FACTOR: u256 = 100000000;

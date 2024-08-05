@@ -1,5 +1,5 @@
 // ANCHOR: imports
-use core::dict::Felt252DictEntryTrait;
+use core::dict::{Felt252Dict, Felt252DictEntryTrait};
 // ANCHOR_END: imports
 
 // ANCHOR: custom_get

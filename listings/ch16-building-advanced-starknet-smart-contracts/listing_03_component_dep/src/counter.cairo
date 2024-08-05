@@ -1,6 +1,6 @@
 //ANCHOR: full
 //ANCHOR: interface
-use starknet::ContractAddress;
+use core::starknet::ContractAddress;
 
 #[starknet::interface]
 trait IOwnableCounter<TContractState> {
@@ -14,10 +14,11 @@ trait IOwnableCounter<TContractState> {
 #[starknet::component]
 mod OwnableCounterComponent {
     use listing_03_component_dep::owner::{ownable_component, ownable_component::InternalImpl};
-    use starknet::ContractAddress;
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use core::starknet::ContractAddress;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         value: u32
     }
 

@@ -10,8 +10,8 @@ trait ISimpleStorage<TContractState> {
 
 #[starknet::contract]
 mod SimpleStorage {
-    use starknet::get_caller_address;
-    use starknet::ContractAddress;
+    use core::starknet::get_caller_address;
+    use core::starknet::ContractAddress;
 
     #[storage]
     struct Storage {
