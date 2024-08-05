@@ -4,7 +4,7 @@ Ever wondered how your Cairo programs were executed?
 
 Everything happens in the Cairo Virtual Machine, or _Cairo VM_ for short.
 
-The following sections will go deep inside the inner workings of the Cairo VM.
+The following chapters will go deep inside the inner workings of the Cairo VM.
 We'll cover its architecture, its memory model, and its execution model.
 Next, we'll explore builtins and hints, their purpose, and how they work.
 Finally, we'll look at the runner, which orchestrates the execution of a Cairo program.
