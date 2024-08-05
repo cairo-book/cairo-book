@@ -1,6 +1,6 @@
 # How Builtins Work
 
-In this section we'll see how builtins work.
+In this section, we'll see how builtins work.
 
 Builtins are AIRs that enforce specific properties.
 During a program execution, a builtin is assigned
@@ -31,8 +31,10 @@ the builtin is split into blocks of cells, with _input_
 and _output_ cells.
 
 The input cells might hold a validation property (e.g. only felts).
+This property could either be checked when asserting a value to the cell,
+or when reading an output cell, thus using the input cells.
 
-The output cells are computed from the input cells value and
+The output cells are computed from the input cells' value and
 the specification of the builtin.
 
 From the point of view of the prover, while the input cells
@@ -41,7 +43,7 @@ computed nondeterministically. When read, their value is
 computed and then asserted to the cell.
 If not read, the cell will be left empty.
 
-For example, the _pedersen_ builtin works with triplet of cells:
+For example, the _Pedersen_ builtin works with triplets of cells:
 
 - Two input cells to store two felts, `a` and `b`.
 - One output cell which will store `Pedersen(a, b)`.
@@ -51,7 +53,8 @@ how the validation and deduction properties work.
 
 The program is in the state n, the instructions that follow
 compute the Pedersen hash of 17 and 38 and assert it
-to the output segment. Finally, it tries to assert
-a relocatable to the output segment which crashes the VM.
+to the output segment, leaving the program in state n+3.
+Finally, it tries to assert a relocatable to the output
+segment which crashes the VM.
 
 ![Diagram of the memory while computing the pedersen hash of two values and storing it in the output segment](builtin-example-pedersen-output.png)
