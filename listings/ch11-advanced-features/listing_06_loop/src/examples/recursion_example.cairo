@@ -1,5 +1,4 @@
 fn main() {
-    
     let mut x: felt252 = 0;
     recursive_function(x);
 }
