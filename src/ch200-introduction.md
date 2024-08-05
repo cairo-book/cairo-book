@@ -52,16 +52,23 @@ _provable_ general-purpose computing.
   while Cairo first compiles to _Sierra_ and then to a safe subset of CASM.
 - The Cairo VM _interprets_ the provided CASM and generates a trace of the program execution.
 - The obtained trace data can be fed to the Cairo Prover in order to generate a STARK proof,
-  allowing to prove the correct execution of a program. Creating this _validity proof_ is the
+  allowing to prove the correct execution of the program. Creating this _validity proof_ is the
   main purpose of Cairo.
+
+Here is a high-level flow diagram showing how a Java program and a Cairo one are executed
+with their respective compiler and VM. The proof generation of a Cairo program is included.
+
+<div align="center">
+  <img src="java-cairo-execution-flow.png" alt="Java and Cairo execution flow" width="800px"/>
+  <span class="caption">Java and Cairo program high-level execution flow diagram</span>
+</div>
 
 An ongoing project, [Cairo Native][cairo-native] works on providing
 Sierra to machine code compilation, including JIT and AOT, for executing Cairo programs.
 
 Even though the high-level flow of both VMs is similar, their actual architectures
-are extremely different: the instruction set, the non-deterministic memory model and
-the output. This is because Java programs are merely executed while
-Cairo ones have their execution proven.
+are extremely different: the instruction set, the memory model, Cairo non-determinism
+and the output.
 
 [cairo-native]: https://github.com/lambdaclass/cairo_native
 
