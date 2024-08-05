@@ -39,8 +39,7 @@ The most well-known process VM might be the Java Virtual Machine (JVM).
 - The JVM verifies that the bytecode is safe to run.
 - The bytecode is either interpreted (slow) or compiled to machine code just in time (JIT, fast).
 - If using JIT, the bytecode is translated to machine code while executing the program.
-- Java programs could also be directly compiled to a specific CPU architecture (read machine code),
-  this is called Ahead of Time compilation (AOT), mainly provided by a now dead project `gcj`.
+- Java programs could also be directly compiled to a specific CPU architecture (read machine code) through a process called _ahead-of-time compilation_ (AOT).
 
 The Cairo VM is also a process VM, similar to the JVM, with one significant difference:
 Java and its JVM are designed for (platform-independent) general-purpose computing,
