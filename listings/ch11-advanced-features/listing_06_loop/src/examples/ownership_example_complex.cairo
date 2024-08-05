@@ -8,7 +8,8 @@ fn main() {
 
     append(pizza_ingredients, mushroom, ingredient);
 
-    println!("mushroom is at index 0 = {}", ingredient.at(0));
+    // Error on this line.
+    // println!("mushroom is at index 0 = {}", ingredient.at(0));
 }
 
 fn append(mut pizza_ingredients: Array<felt252>, target: felt252, mut array: Array<felt252>)  {
