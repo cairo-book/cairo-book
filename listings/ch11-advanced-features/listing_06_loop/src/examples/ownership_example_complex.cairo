@@ -8,7 +8,7 @@ fn main() {
     let mut ingredient = ArrayTrait::<felt252>::new();
 
     append(pizza_ingredients, mushroom, ingredient);
-// Error on this line.
+    // Error on this line.
 // println!("mushroom is at index 0 = {}", ingredient.at(0));
 }
 
