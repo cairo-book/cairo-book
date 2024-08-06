@@ -98,7 +98,7 @@ The `number` variable will be bound to a value based on the outcome of the `if` 
 
 It’s often useful to execute a block of code more than once. For this task, Cairo provides a simple loop syntax, which will run through the code inside the loop body to the end and then start immediately back at the beginning. To experiment with loops, let’s create a new project called _loops_.
 
-Cairo has two kinds of loops: `loop` and `while`.
+Cairo has three kinds of loops: `loop`, `while`, and `for`. Let’s try each one.
 
 ### Repeating Code with `loop`
 
@@ -186,6 +186,40 @@ In Listing {{#ref while-true}}, we use `while` to loop the program three times, 
 
 This construct eliminates a lot of nesting that would be necessary if you used `loop`, `if`, `else`, and `break`, and it’s clearer.
 While a condition evaluates to `true`, the code runs; otherwise, it exits the loop.
+
+### Looping Through a Collection with `for`
+
+You can also use the while construct to loop over the elements of a collection, such as an array. For example, the loop in Listing {{#ref iter-while}} prints each element in the array `a`.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_45_iter_loop_while/src/lib.cairo}}
+```
+
+{{#label iter-while}}
+<span class="caption">Listing {{#ref iter-while}}: Looping through each element of a collection using a `while` loop</span>
+
+Here, the code counts up through the elements in the array. It starts at index `0`, and then loops until it reaches the final index in the array (that is, when `index < 5` is no longer `true`). Running this code will print every element in the array:
+
+```shell
+{{#include ../listings/ch02-common-programming-concepts/no_listing_45_iter_loop_while/output.txt}}
+```
+
+All five array values appear in the terminal, as expected. Even though `index` will reach a value of `5` at some point, the loop stops executing before trying to fetch a sixth value from the array.
+
+However, this approach is error prone; we could cause the program to panic if the index value or test condition is incorrect. For example, if you changed the definition of the `a` array to have four elements but forgot to update the condition to `while index < 4`, the code would panic. It’s also slow, because the compiler adds runtime code to perform the conditional check of whether the index is within the bounds of the array on every iteration through the loop.
+
+As a more concise alternative, you can use a `for` loop and execute some code for each item in a collection. A `for` loop looks like the code in Listing {{#ref iter-for}}.
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_46_iter_loop_for/src/lib.cairo}}
+```
+
+{{#label iter-for}}
+<span class="caption">Listing {{#ref iter-for}}: Looping through each element of a collection using a `for` loop</span>
+
+When we run this code, we’ll see the same output as in Listing {{#ref iter-while}}. More importantly, we’ve now increased the safety of the code and eliminated the chance of bugs that might result from going beyond the end of the array or not going far enough and missing some items.
+
+Using the `for` loop, you wouldn’t need to remember to change any other code if you changed the number of values in the array, as you would with the method used in Listing {{#ref iter-while}}.
 
 {{#quiz ../quizzes/ch02-05-control-flow.toml}}
 

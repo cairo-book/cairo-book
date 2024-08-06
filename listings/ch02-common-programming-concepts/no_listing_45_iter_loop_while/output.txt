@@ -1,0 +1,11 @@
+$ scarb cairo-run 
+   Compiling no_listing_45_iter_loop_while v0.1.0 (listings/ch02-common-programming-concepts/no_listing_45_iter_loop_while/Scarb.toml)
+    Finished release target(s) in 2 seconds
+     Running no_listing_45_iter_loop_while
+the value is: 10
+the value is: 20
+the value is: 30
+the value is: 40
+the value is: 50
+Run completed successfully, returning []
+

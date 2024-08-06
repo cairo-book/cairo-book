@@ -9,7 +9,7 @@ edition = "2023_11"
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.21.0" }
 pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.12.0" }
-starknet = "2.6.3"
+starknet = ">=2.6.3"
 
 [[target.starknet-contract]]
 casm = true

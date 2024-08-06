@@ -8,7 +8,7 @@ edition = "2023_11"
 [dependencies]
 pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.13.0" }
-starknet = "2.6.3"
+starknet = ">=2.6.3"
 
 [dev-dependencies]
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.23.0" }

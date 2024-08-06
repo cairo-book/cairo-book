@@ -1,9 +1,9 @@
 [package]
-name = "listing_99_14_abi_per_item_attribute"
+name = "no_listing_01_abi_per_item_attribute"
 version = "0.1.0"
-edition = "2023_11"
+edition = "2024_07"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = ">=2.7.0-rc.3"
+starknet = ">=2.7.0"

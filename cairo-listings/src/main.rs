@@ -42,6 +42,7 @@ fn main() {
     match &cfg.command {
         Commands::Verify(args) => run_verification(cfg_clone, args),
         Commands::Output => output::process_outputs(cfg_clone, &empty_arg),
+        Commands::Format => run_format(cfg_clone, &empty_arg),
     }
 }
 
@@ -100,6 +101,57 @@ fn run_verification(cfg: &Config, args: &VerifyArgs) {
         std::process::exit(1);
     } else {
         println!("\n{}\n", "ALL TESTS PASSED!".green().bold());
+    }
+}
+
+fn run_format(cfg: &Config, arg: &VerifyArgs) {
+    let scarb_packages = find_scarb_manifests(cfg, arg);
+
+    let total_packages = scarb_packages.len();
+    let pb = Arc::new(ProgressBar::new(total_packages as u64));
+    pb.set_style(
+        ProgressStyle::default_bar()
+            .template("[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7} {msg}")
+            .unwrap()
+            .progress_chars("##-"),
+    );
+
+    let processed_count = Arc::new(AtomicUsize::new(0));
+
+    logger::setup(arg, Arc::clone(&pb));
+
+    let arg = Arc::new(arg);
+
+    scarb_packages.par_iter().for_each(|file| {
+        process_file_format(file, &arg);
+
+        if !arg.quiet {
+            let current = processed_count.fetch_add(1, Ordering::SeqCst) + 1;
+            pb.set_position(current as u64);
+
+            if current == total_packages {
+                pb.finish_with_message("Verification complete");
+            }
+        }
+    });
+
+    let errors = ERRORS.lock().unwrap();
+    let total_errors = errors.format_errors.len();
+
+    if total_errors > 0 {
+        println!("{}\n", "  ==== RESULT ===  ".red().bold());
+
+        print_error_table(&errors.format_errors, "Format Errors");
+
+        println!(
+            "{}",
+            format!("Total errors: {}", total_errors.to_string().red()).bold()
+        );
+
+        println!("\n{}", "Please review the errors above. Do not hesitate to ask for help by commenting on the issue on Github.".red().italic());
+        std::process::exit(1);
+    } else {
+        println!("\n{}\n", "FORMATTING COMPLETED!".green().bold());
     }
 }
 
@@ -187,7 +239,55 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         // This program must pass cairo-format
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, vec![]);
+        let mut format_args = vec!["-c".to_string()];
+
+        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
+    }
+}
+
+fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
+    let manifest_path_as_path = std::path::Path::new(manifest_path);
+    let file_path = manifest_path_as_path
+        .parent()
+        .unwrap()
+        .join("src/lib.cairo");
+    let file_path = file_path.to_str().unwrap();
+
+    let file =
+        File::open(file_path).unwrap_or_else(|_| panic!("Failed to open file {}", file_path));
+    let reader = BufReader::new(file);
+
+    // Parsed tags (if any)
+    let mut tags: HashSet<Tags> = HashSet::new();
+    let mut in_tag_block = true;
+
+    reader.lines().for_each(|line| {
+        if let Ok(line_contents) = line {
+            // Parse tags
+            if in_tag_block && config::TAG_REGEX.is_match(&line_contents) {
+                let line_contents = config::TAG_REGEX.replace(&line_contents, "");
+                let tags_in_line: Vec<&str> = line_contents
+                    .trim()
+                    .split(',')
+                    .map(|tag| tag.trim())
+                    .collect();
+
+                tags_in_line.iter().for_each(|tag| {
+                    if let Some(tag_enum) = tags::Tags::from_str(tag) {
+                        tags.insert(tag_enum);
+                    }
+                });
+            } else {
+                // Stop parsing tags when we reach the first non-comment line
+                in_tag_block = false;
+            }
+        }
+    });
+
+    // FORMAT CHECKS
+    if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
+        let format_args = vec![];
+        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
     }
 }
 
