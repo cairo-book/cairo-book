@@ -19,7 +19,7 @@ _validation_ and _deduction_ properties.
 A validation property defines constraints a value must
 hold to be asserted in a cell of a builtin segment.
 
-For example, the _output_ builtin only accepts felts.
+For example, the _Output_ builtin only accepts felts.
 Trying to assert a relocatable to one of its cells would
 make the Cairo VM throw.
 
@@ -51,12 +51,15 @@ For example, the _Pedersen_ builtin works with triplets of cells:
 The following diagram shows in a simplified way
 how the validation and deduction properties work,
 by focusing ourselves on the memory when running instructions
-involving builtin segments.
+involving the Pedersen and Output builtin segments.
 
-![Diagram of the memory while computing the pedersen hash of two values and storing it in the output segment](builtin-example-pedersen-output.png)
+<div align="center">
+    <img src="builtin-example-pedersen-output.png" alt="Diagram of Cairo VM memory using Pedersen and Output builtins" width="800px"/>
+    <span class="caption">Diagram of the Cairo VM memory using the Pedersen and Output builtins</span>
+</div>
 
 - The memory is in the state n.
-  The segment of index 2 is the output segment.
+  The segment of index 2 is the Output segment.
   The segment of index 3 is the Pedersen segment.
 - The first two instructions assert two felts `17` and `38`
   to the input cells `3:0` and `3:1`.
@@ -76,5 +79,5 @@ involving builtin segments.
 
 - The memory is now in the state n+3.
   The last instruction tries asserting `1:4`
-  to the `2:1`, of the output segment:
+  to the `2:1`, of the Output segment:
   - Is `1:2` a Felt? No. The VM crashes.
