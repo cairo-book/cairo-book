@@ -67,7 +67,7 @@ An ongoing project, [Cairo Native][cairo-native] works on providing
 Sierra to machine code compilation, including JIT and AOT, for executing Cairo programs.
 
 Even though the high-level flow of both VMs is similar, their actual architectures
-are extremely different: the instruction set, the memory model, Cairo non-determinism
+are extremely different: the instruction set, the memory model, Cairo's non-determinism
 and the output.
 
 [cairo-native]: https://github.com/lambdaclass/cairo_native
