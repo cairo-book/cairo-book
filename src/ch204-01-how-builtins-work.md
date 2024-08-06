@@ -49,12 +49,32 @@ For example, the _Pedersen_ builtin works with triplets of cells:
 - One output cell which will store `Pedersen(a, b)`.
 
 The following diagram shows in a simplified way
-how the validation and deduction properties work.
-
-The program is in the state n, the instructions that follow
-compute the Pedersen hash of 17 and 38 and assert it
-to the output segment, leaving the program in state n+3.
-Finally, it tries to assert a relocatable to the output
-segment which crashes the VM.
+how the validation and deduction properties work,
+by focusing ourselves on the memory when running instructions
+involving builtin segments.
 
 ![Diagram of the memory while computing the pedersen hash of two values and storing it in the output segment](builtin-example-pedersen-output.png)
+
+- The memory is in the state n.
+  The segment of index 2 is the output segment.
+  The segment of index 3 is the Pedersen segment.
+- The first two instructions assert two felts `17` and `38`
+  to the input cells `3:0` and `3:1`.
+- The memory is now in the state n+2. Let's deconstruct this instruction:
+
+  1. Read the value at `3:2`
+     - The cell `3:2` is read.
+     - It is an output cell for Pedersen, which is empty.
+     - Then, the Cairo VM must compute the Pedersen hash
+       of the two previous input cells: `3:0` and `3:1` and store it at `3:2`.
+     - Read the values at `3:0` and `3:1`.
+       Are the two values stored Felt ? Yes, `17` and `38`.
+     - Compute `Pedersen(17, 38)`.
+     - Store it on `3:2` cell.
+  2. Assert the read value `Pedersen(17, 38)` to `2:0`
+     - Is `Pedersen(17, 38)` a Felt? Yes.
+
+- The memory is now in the state n+3.
+  The last instruction tries asserting `1:4`
+  to the `2:1`, of the output segment:
+  - Is `1:2` a Felt? No. The VM crashes.
