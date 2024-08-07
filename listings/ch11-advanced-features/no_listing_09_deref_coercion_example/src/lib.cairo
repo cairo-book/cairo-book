@@ -41,14 +41,10 @@ impl DerefMutWrapper<T, +Copy<T>> of DerefMut<Wrapper<T>> {
 // Example usage
 fn main() {
     // Create a new UserProfile
-    let mut profile = UserProfile {
-        username: 'john_doe',
-        email: 'john@example.com',
-        age: 30,
-    };
+    let mut profile = UserProfile { username: 'john_doe', email: 'john@example.com', age: 30, };
 
     // Wrap the UserProfile in Wrapper
-    let mut wrapped_profile = Wrapper{ value: profile };
+    let mut wrapped_profile = Wrapper { value: profile };
 
     // Access and print the username directly
     print_username(wrapped_profile);
@@ -80,7 +76,13 @@ fn print_age(wrapped_profile: Wrapper<UserProfile>) {
 #[inline(never)]
 fn update_age(ref wrapped_profile: Wrapper<UserProfile>, age: u16) {
     // Mutably access the UserProfile via deref_mut coercion
-    let updated_profile = Wrapper{value: UserProfile{username: wrapped_profile.username, email: wrapped_profile.email, age: age}};
+    let updated_profile = Wrapper {
+        value: UserProfile {
+            username: wrapped_profile.username, email: wrapped_profile.email, age: age
+        }
+    };
     wrapped_profile = updated_profile;
 }
 // ANCHOR_END: main
+
+
