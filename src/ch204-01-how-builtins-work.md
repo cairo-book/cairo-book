@@ -47,12 +47,12 @@ A block of cells has two categories of cells:
 
 - _Input cells_ - cells the program can write to,
   their constraints are similar to a validation property.
-- _Output cells_ - cells the program must read to,
+- _Output cells_ - cells the program must read,
   and their value is computed based on the deduction
   property and the input cells value.
 
 A program that only writes to the input cells, without
-ever reading the output cell is valid, as long as the constraints
+ever reading the output cell, is valid as long as the constraints
 on those cells hold. Though, it is useless.
 
 For example, the _Pedersen_ builtin works with triplets of cells:
