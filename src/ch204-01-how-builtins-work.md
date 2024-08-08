@@ -32,8 +32,10 @@ only if those two constraints hold. Those two constraints
 represent the validation property of the Range Check builtin.
 
 <div align="center">
-    <img src="range-check-validation-property.png" alt="Diagram snapshot Cairo memory using the Range Check builtin" width="800px"/>
-    <span class="caption">Diagram of the Cairo VM memory using the Range Check builtin</span>
+  <img src="range-check-validation-property.png" alt="Diagram snapshot Cairo memory using the Range Check builtin" width="800px"/>
+</div>
+<div align="center">
+  <span class="caption">Diagram of the Cairo VM memory using the Range Check builtin</span>
 </div>
 
 ## Deduction Property
@@ -65,6 +67,8 @@ highlighting its deduction property: the output cell `2:2`
 being read when writing its value to the cell `1:5`.
 
 <div align="center">
-    <img src="pedersen-deduction-property.png" alt="Diagram of Cairo VM memory Pedersen builtins" width="800px"/>
-    <span class="caption">Diagram of the Cairo VM memory using the Pedersen builtin</span>
+  <img src="pedersen-deduction-property.png" alt="Diagram of Cairo VM memory Pedersen builtins" width="800px"/>
+</div>
+<div align="center">
+  <span class="caption">Diagram of the Cairo VM memory using the Pedersen builtin</span>
 </div>

@@ -60,6 +60,8 @@ with their respective compiler and VM. The proof generation of a Cairo program i
 
 <div align="center">
   <img src="java-cairo-execution-flow.png" alt="Java and Cairo execution flow" width="800px"/>
+</div>
+<div align="center">
   <span class="caption">Java and Cairo program high-level execution flow diagram</span>
 </div>
 

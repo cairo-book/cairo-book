@@ -32,8 +32,10 @@ the output cell `3:5` has not been read yet, so
 the Pedersen hash of 93 and 5 has not been computed yet.
 
 <div align="center">
-    <img src="pedersen-builtin-valid.png" alt="valid pedersen builtin segment" width="300px"/>
-    <span class="caption">Pedersen builtin segment with valid inputs</span>
+  <img src="pedersen-builtin-valid.png" alt="valid pedersen builtin segment" width="300px"/>
+</div>
+<div align="center">
+  <span class="caption">Snapshot 1 - Pedersen builtin segment with valid inputs</span>
 </div>
 
 On the second snapshot, both triplets of cells would throw
@@ -56,8 +58,10 @@ it could have been caught earlier if the input cells were validated
 as being felts only.
 
 <div align="center">
-    <img src="pedersen-builtin-error.png" alt="invalid pedersen builtin segment" width="300px"/>
-    <span class="caption">Pedersen builtin segment with an invalid input</span>
+  <img src="pedersen-builtin-error.png" alt="Invalid pedersen builtin segment" width="300px"/>
+</div>
+<div align="center">
+  <span class="caption">Snapshot 2 - Pedersen builtin segment with invalid inputs</span>
 </div>
 
 ## Implementation References
