@@ -5,7 +5,7 @@ to perform specific tasks, such as computing a hash.
 
 Each builtin works on a dedicated memory segment,
 which represents in the end a fixed address range.
-This commmunication method is called _memory-mapped I/O_:
+This communication method is called _memory-mapped I/O_:
 specific ranges of memory addresses dedicated to builtins.
 
 For a Cairo program to interact with a builtin, it simply
