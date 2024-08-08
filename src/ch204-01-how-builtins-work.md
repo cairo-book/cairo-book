@@ -1,83 +1,67 @@
 # How Builtins Work
 
-In this section, we'll see how builtins work.
+A builtin enforces some constraints on the Cairo memory
+to perform specific tasks, such as computing a hash.
 
-Builtins are AIRs that enforce specific properties.
-During a program execution, a builtin is assigned
-a memory segment with properties that match its AIR.
+Each builtin works on a dedicated memory segment,
+which represents in the end a fixed address range.
+This commmunication method is called _memory-mapped I/O_:
+specific ranges of memory addresses dedicated to builtins.
 
-When reading a cell value or asserting a value to a cell,
-the properties of the builtin must always hold.
-If it doesn't, it means that the program execution
-cannot be proven, and the Cairo VM terminates.
+For a Cairo program to interact with a builtin, it simply
+needs to read or write to the corresponding memory cells.
 
-There are two types of properties for builtin segments,
-_validation_ and _deduction_ properties.
+There are two main types of builtin constraints that we'll
+refer as _validation property_ and _deduction property_.
+The builtins with a deduction property are usually split
+in block of cells where some cells are constrained by
+a validation property
 
 ## Validation Property
 
 A validation property defines constraints a value must
-hold to be asserted in a cell of a builtin segment.
+hold for it to be written to a builtin memory cell.
 
-For example, the _Output_ builtin only accepts felts.
-Trying to assert a relocatable to one of its cells would
-make the Cairo VM throw.
+For example, the _Range Check_ builtin only accepts felts and verify
+that such a felt is within the range `[0, 2**128)`.
+A program can write a value to the Range Check builtin
+only if those two constraints hold. Those two constraints
+represent the validation property of the Range Check builtin.
+
+<div align="center">
+    <img src="range-check-validation-property.png" alt="Diagram snapshot Cairo memory using the Range Check builtin" width="800px"/>
+    <span class="caption">Diagram of the Cairo VM memory using the Range Check builtin</span>
+</div>
 
 ## Deduction Property
 
-Deduction properties are used for builtins that compute
-a value based on some other values. To properly work,
-the builtin is split into blocks of cells, with _input_
-and _output_ cells.
+A deduction property defines constraints on a block
+of cells, when reading or writing to a cell.
 
-The input cells might hold a validation property (e.g. only felts).
-This property could either be checked when asserting a value to the cell,
-or when reading an output cell, thus using the input cells.
+A block of cells has two categories of cells:
 
-The output cells are computed from the input cells' value and
-the specification of the builtin.
-
-From the point of view of the prover, while the input cells
-are directly asserted to, the output cells are only read, they are
-computed nondeterministically. When read, their value is
-computed and then asserted to the cell.
-If not read, the cell will be left empty.
+- _Input cells_ - cells the program can write to,
+  their constraints are similar to a validation property.
+- _Output cells_ - cells the program must read to,
+  and their value is computed based on the deduction
+  property and the input cells value.
 
 For example, the _Pedersen_ builtin works with triplets of cells:
 
 - Two input cells to store two felts, `a` and `b`.
 - One output cell which will store `Pedersen(a, b)`.
 
-The following diagram shows in a simplified way
-how the validation and deduction properties work,
-by focusing ourselves on the memory when running instructions
-involving the Pedersen and Output builtin segments.
+To compute the Pedersen hash of `a` and `b`, the program must:
+
+- Write `a` to the first cell
+- Write `b` to the second cell
+- Read the third cell, which will compute and write `Pedersen(a, b) to it.
+
+In the following diagram, the Pedersen builtin is used,
+highlighting its deduction property: the output cell `2:2`
+being read when writing its value to the cell `1:5`.
 
 <div align="center">
-    <img src="builtin-example-pedersen-output.png" alt="Diagram of Cairo VM memory using Pedersen and Output builtins" width="800px"/>
-    <span class="caption">Diagram of the Cairo VM memory using the Pedersen and Output builtins</span>
+    <img src="pedersen-deduction-property.png" alt="Diagram of Cairo VM memory Pedersen builtins" width="800px"/>
+    <span class="caption">Diagram of the Cairo VM memory using the Pedersen builtin</span>
 </div>
-
-- The memory is in the state n.
-  The segment of index 2 is the Output segment.
-  The segment of index 3 is the Pedersen segment.
-- The first two instructions assert two felts `17` and `38`
-  to the input cells `3:0` and `3:1`.
-- The memory is now in the state n+2. Let's deconstruct this instruction:
-
-  1. Read the value at `3:2`
-     - The cell `3:2` is read.
-     - It is an output cell for Pedersen, which is empty.
-     - Then, the Cairo VM must compute the Pedersen hash
-       of the two previous input cells: `3:0` and `3:1` and store it at `3:2`.
-     - Read the values at `3:0` and `3:1`.
-       Are the two values stored Felt ? Yes, `17` and `38`.
-     - Compute `Pedersen(17, 38)`.
-     - Store it on `3:2` cell.
-  2. Assert the read value `Pedersen(17, 38)` to `2:0`
-     - Is `Pedersen(17, 38)` a Felt? Yes.
-
-- The memory is now in the state n+3.
-  The last instruction tries asserting `1:4`
-  to the `2:1`, of the Output segment:
-  - Is `1:2` a Felt? No. The VM crashes.
