@@ -17,6 +17,9 @@ The builtins with a deduction property are usually split
 in block of cells where some cells are constrained by
 a validation property
 
+If the defined property doesn't hold, then the Cairo VM
+will panic.
+
 ## Validation Property
 
 A validation property defines constraints a value must
