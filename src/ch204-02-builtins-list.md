@@ -1,15 +1,13 @@
 # Builtins List
 
-In this section, we'll list the different builtins that
-exist and give a brief description of their purpose.
-The sub-sections that follows details how each builtin
-is working, its cells organization if any andreferences
-to their actual implementation in different Cairo VM
-projects.
+The following table lists the different builtins implemented
+in the Cairo VM and gives a brief description of their purpose.
+For each builtin, a specific section details how it works,
+its cells organization if any, and references their actual
+implementation in different implementations of the Cairo VM.
 
-Some topics related to the builtin might peak your interest,
-so external resources are provided for you to read.
-For example how the Pedersen hash function works.
+Additional resources related to the operation performed
+by the builtin are provided if relevant.
 
 | Builtin                  | Description                                                                                                                            |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -24,9 +22,9 @@ For example how the Pedersen hash function works.
 | [Range Check96][rc96]    | Verify that a felt `x` is within the bounds `[0, 2**96)`.                                                                              |
 | [AddMod][add_mod]        | Arithmetic Circuit Support - Computes the modular addition `c` of two felts `a`, `b` by batches. `c ≡ a + b mod(p)`                    |
 | [MulMod][mul_mod]        | Arithmetic Circuit Support - Computes the modular multiplication `c` of two felts `a`, `b` by batches. `c ≡ a * b mod(p)`              |
-| [Segment Arena][seg_are] | Manages the Cairo dictionaries Only used by Cairo >= 1.0                                                                               |
-| [Gas][gas]               | Manages the available gas during the run. Used by StarkNet to handle its gas usage and avoid DoS.                                      |
-| [System][system]         | Manages the StarkNet syscalls & cheatcodes.                                                                                            |
+| [Segment Arena][seg_are] | Manages the Cairo dictionaries Not used in Cairo Zero.                                                                                 |
+| [Gas][gas]               | Manages the available gas during the run. Used by Starknet to handle its gas usage and avoid DoS.                                      |
+| [System][system]         | Manages the Starknet syscalls & cheatcodes.                                                                                            |
 
 [output]: ch204-02-00-output.md
 [pedersen]: ch204-02-01-pedersen.md
