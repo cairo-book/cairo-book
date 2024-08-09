@@ -1,13 +1,13 @@
 # Architecture
 
-Cairo is made of three softwares:
+Cairo is made of three software:
 
 - Cairo compiler
 - Cairo VM
 - Cairo prover and verifier
 
 The Cairo VM takes the Cairo bytecode produced
-by the Cairo compiler, interprets it and provides
+by the Cairo compiler, interprets it, and provides
 the expected input for the prover to generate
 a STARK proof. The verifier can later
 (i.e. asynchronously) verify the
@@ -20,13 +20,13 @@ the _Execution Model_, also called CPU,
 the _Memory model_ and the _Runner_.
 
 The CPU defines the _Instruction Set Architecture_ (ISA):
-the available instructions, the registers and the state transition algorithm.
+the available instructions, the registers, and the state transition algorithm.
 
 The Memory model defines how memory is managed when executing a Cairo program.
 
 The Runner orchestrates all the different parts of the architecture,
 it is the entrypoint and the endpoint when executing a program.
-It handles the initialization of the run, the run and its finalization.
+It handles the initialization of the run, the run, and its finalization.
 
 Those three components are enough to run a basic Cairo program.
 
@@ -37,7 +37,7 @@ introduced by the memory model.
 
 ## Deterministic and Non-Deterministic Machine
 
-There are two different view of the Cairo VM,
+There are two different views of the Cairo VM,
 the _deterministic machine_ and the _non-deterministic_
 machine.
 
@@ -51,8 +51,8 @@ There are three key differences between the deterministic and
 non-deterministic machine:
 
 - Hints are only available to the deterministic machine.
-- The deterministic machine has a full access to the memory,
-  while the non-deterministic one has only a partial access to the memory,
+- The deterministic machine has full access to the memory,
+  while the non-deterministic one has only partial access to the memory,
   called the _Public memory_.
 - The deterministic machine has the full list of states (values taken
   by the registers) available while the non-deterministic one only has
@@ -78,14 +78,14 @@ as a deterministic machine and a non-deterministic one.
 ## Arithmetic Intermediate Representation - AIR
 
 When proving a program execution, one way is writing
-an AIR for such program. An AIR can be seen as a
+an AIR for such a program. An AIR can be seen as a
 system of polynomial equations, which defines constraints.
 However, it can become tedious to design AIR for every
-program that you wanna prove, as this process is quite hard.
+program that you want to prove, as this process is quite hard.
 
-The goal of Cairo is to abstracts those AIR, by defining
+The goal of Cairo is to abstract those AIR, by defining
 a single AIR representing the CPU and its memory
-which is able to execute any program.
+which can execute any program.
 As Cairo is Turing-complete, any program
 can be proven from the defined AIR.
 
