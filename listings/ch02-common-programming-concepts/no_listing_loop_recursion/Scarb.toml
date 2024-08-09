@@ -1,0 +1,11 @@
+[package]
+name = "no_listing_loop_recursion"
+version = "0.1.0"
+edition = "2024_07"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
+
+[dependencies]
+
+[lib]
+sierra-text = true
