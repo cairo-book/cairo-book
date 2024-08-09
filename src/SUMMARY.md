@@ -188,9 +188,23 @@
 
 ## Builtins
 
-- [Builtins]()
-  - [Memory Communication]()
-  - [List of builtins]()
+- [Builtins](ch204-00-builtins.md)
+  - [How Builtins Work](ch204-01-how-builtins-work.md)
+  - [Builtins List](ch204-02-builtins-list.md)
+    - [Output]()
+    - [Pedersen](ch204-02-01-pedersen.md)
+    - [Range Check]()
+    - [ECDSA]()
+    - [Bitwise]()
+    - [EC OP]()
+    - [Keccak]()
+    - [Poseidon]()
+    - [Range Check96]()
+    - [AddMod]()
+    - [MulMod]()
+    - [Segment Arena]()
+    - [Gas]()
+    - [System]()
 
 ## Hints
 
