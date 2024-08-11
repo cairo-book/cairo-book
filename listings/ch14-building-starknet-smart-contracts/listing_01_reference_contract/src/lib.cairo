@@ -9,6 +9,9 @@ pub trait INameRegistry<TContractState> {
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
     fn get_owner(self: @TContractState) -> NameRegistry::Person;
     fn get_owner_name(self: @TContractState) -> felt252;
+    fn get_registration_info(
+        self: @TContractState, address: ContractAddress
+    ) -> NameRegistry::RegistrationInfo;
 }
 
 #[starknet::contract]
@@ -24,7 +27,7 @@ mod NameRegistry {
     struct Storage {
         names: Map::<ContractAddress, felt252>,
         owner: Person,
-        registration_type: Map<ContractAddress, RegistrationType>,
+        registrations: Map<ContractAddress, RegistrationNode>,
         total_names: u128,
     }
     //ANCHOR_END: storage
@@ -54,12 +57,28 @@ mod NameRegistry {
     //ANCHOR_END: person
 
     //ANCHOR: enum_store
-    #[derive(Drop, Serde, starknet::Store)]
+    #[derive(Copy, Drop, Serde, starknet::Store)]
     pub enum RegistrationType {
         finite: u64,
         infinite
     }
     //ANCHOR_END: enum_store
+
+    //ANCHOR: storage_node_def
+    #[starknet::storage_node]
+    struct RegistrationNode {
+        count: u64,
+        info: RegistrationInfo,
+        history: Map<u64, RegistrationInfo>,
+    }
+    //ANCHOR_END: storage_node_def
+
+    #[derive(Copy, Drop, Serde, starknet::Store)]
+    pub struct RegistrationInfo {
+        name: felt252,
+        registration_type: RegistrationType,
+        registration_date: u64,
+    }
 
     //ANCHOR: constructor
     #[constructor]
@@ -102,6 +121,12 @@ mod NameRegistry {
             self.owner.name.read()
             //ANCHOR_END: read_owner_name
         }
+
+        fn get_registration_info(
+            self: @ContractState, address: ContractAddress
+        ) -> RegistrationInfo {
+            self.registrations.entry(address).info.read()
+        }
     }
     //ANCHOR_END: impl_public
 
@@ -125,11 +150,28 @@ mod NameRegistry {
             registration_type: RegistrationType
         ) {
             let total_names = self.total_names.read();
+
             //ANCHOR: write
             self.names.entry(user).write(name);
             //ANCHOR_END: write
-            self.registration_type.entry(user).write(registration_type);
+
+            //ANCHOR: storage_node
+            let registration_info = RegistrationInfo {
+                name: name,
+                registration_type: registration_type,
+                registration_date: starknet::get_block_timestamp(),
+            };
+            let mut registration_node = self.registrations.entry(user);
+            registration_node.info.write(registration_info);
+
+            let count = registration_node.count.read();
+            registration_node.history.entry(count).write(registration_info);
+            registration_node.count.write(count + 1);
+            //ANCHOR_END: storage_node
+
+            // self.registration_type.entry(user).write(registration_type);
             self.total_names.write(total_names + 1);
+
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
             //ANCHOR_END: emit_event
@@ -146,5 +188,3 @@ mod NameRegistry {
     // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
-
-

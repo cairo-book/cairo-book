@@ -24,6 +24,8 @@ The address of a storage variable is computed as follows:
 
 - If the variable is a [mapping][storage mappings] with a key `k`, the address of the value at key `k` is `h(sn_keccak(variable_name),k)`, where ℎ is the Pedersen hash and the final value is taken modulo \\( {2^{251}} - 256\\). If the key is composed of more than one `felt252`, the address of the value will be `h(...h(h(sn_keccak(variable_name),k_1),k_2),...,k_n)`, with `k_1,...,k_n` being all `felt252` that constitute the key. In the case of mappings to complex values (e.g., tuples or structs), then this complex value lies in a continuous segment starting from the address calculated with the previous formula. Note that 256 field elements is the current limitation on the maximal size of a complex storage value.
 
+- If the variable is part of a [storage node][storage nodes], its address is based on a chain of hashes that reflects the structure of the node. For a storage node member `m` within a storage variable `variable_name`, the path to that member is computed as `h(sn_keccak(variable_name), sn_keccak(m))`, where `h` is the Pedersen hash. This process continues for nested storage nodes, building a chain of hashes that represents the path to a leaf node. Once a leaf node is reached he storage calculation proceeds as it normally would for that type of variable.
+
 You can access the base address of a storage variable by accessing the `__base_address__` attribute on the variable, which returns a `felt252` value.
 
 ```rust, noplayground
@@ -31,7 +33,8 @@ You can access the base address of a storage variable by accessing the `__base_a
 ```
 
 [custom types storage layout]: ./ch14-01-contract-storage.md#storing-custom-types
-[storage mappings]: ./ch14-01-contract-storage.html#storage-mappings
+[storage mappings]: ./ch14-01-contract-storage.md#storage-mappings
+[storage nodes]: ./ch14-01-contract-storage.md#storage-nodes
 
 ## Accessing Storage Variables
 
@@ -96,7 +99,50 @@ Similarly, Enums can only be written to storage if they implement the `Store` tr
 
 You might have noticed that we also derived `Drop` and `Serde` on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.
 
-### Structs Storage Layout
+## Storage Nodes
+
+A storage node is a special kind of struct that can contain storage-specific types, such as `Map` or `Vec`, as members. Unlike regular structs, storage nodes can only exist within contract storage and cannot be instantiated or used outside of it.
+You can think of storage nodes as intermediate nodes in a tree representing the contract's storage space:
+
+- The actual storage content is stored in the leaves of this tree.
+- Storage nodes are internal branches, allowing you to create more complex paths to these leaves.
+- This tree-like structure enables more flexible and sophisticated storage layouts in Cairo contracts.
+
+The main benefits of storage nodes is that they allow you to create more sophisticated storage layouts, including nested mappings and custom types, and allow you to logically group related data, improving code readability and maintainability.
+
+### Using Storage Nodes
+
+Here's how you define a storage node:
+
+```rust
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:storage_node_def}}
+```
+
+The `#[starknet::storage_node]` attribute tells the compiler that this struct is a storage node. This allows us to use types like Map within the struct, which wouldn't be possible with a regular struct in storage.
+
+In our contract's storage, the `registrations` field is a mapping where each value points to a `RegistrationNode`.
+
+When accessing a storage node, you can't `read` or `write` it directly. Instead, you access its individual members. Here's an example from our `NameRegistry` contract:
+
+```rust
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:storage_node}}
+```
+
+In this example, we create a new `RegistrationInfo`, and access the `RegistrationNode` for a specific user. We write to the `info` field of the node, read the current value of `count`, use it to write to the `history` map, and then increment it.
+
+### Comparison with Regular Structs
+
+The following table summarizes the differences between regular structs and storage nodes:
+
+| Aspect        | Regular Structs                           | Storage Nodes                                           |
+| ------------- | ----------------------------------------- | ------------------------------------------------------- |
+| Usage         | Can be used anywhere in the code          | Can only be used within contract storage                |
+| Members       | Limited to other regular types            | Can include storage-specific types like `Map` and `Vec` |
+| Storage       | Stored contiguously in storage            | Members can be spread across storage                    |
+| Flexibility   | Less flexible for complex storage layouts | More flexible, allowing nested and complex structures   |
+| Instantiation | Can be instantiated in memory             | Cannot be instantiated, only used as storage references |
+
+## Structs Storage Layout
 
 On Starknet, structs are stored in storage as a sequence of primitive types.
 The elements of the struct are stored in the same order as they are defined in the struct definition. The first element of the struct is stored at the base address of the struct, which is computed as specified in ["Addresses of Storage Variables"][storage addresses] section and can be obtained with `var.__base_address__` and subsequent elements are stored at addresses contiguous to the first element.
@@ -111,7 +157,7 @@ Note that tuples are similarly stored in contract's storage, with the first elem
 
 [storage addresses]: ./ch14-01-contract-storage.html#addresses-of-storage-variables
 
-### Enums Storage Layout
+## Enums Storage Layout
 
 When you store an enum variant, what you're essentially storing is the variant's index and eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
 If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
@@ -145,10 +191,10 @@ and cannot be used as types inside structs.
     <span class="caption">Mapping keys to storage values</span>
 </div>
 
-To declare a mapping, use the `LegacyMap` type enclosed in angle brackets `<>`,
+To declare a mapping, use the `Map` type enclosed in angle brackets `<>`,
 specifying the key and value types.
 
-Note: You might encounter `LegacyMap` in older code or documentation. This was the previous mapping type used in Cairo contracts, but it has been deprecated in favor of the more flexible `Map` type. If you come across `LegacyMap`, it's recommended to update it to `Map` that provides more control over storage, as they have identical storage layouts allowing for a safe migration.
+Note: You might encounter `LegacyMap` in older code or documentation. This was the previous mapping type used in Cairo contracts, but it has been deprecated in favor of the more flexible `Map` type. If you are using `LegacyMap`, it's recommended to update it to `Map` that provides more control over storage, as they have identical storage layouts allowing for a safe migration.
 
 You can also create more complex mappings with multiple keys. You can find in Listing {{#ref storage-mapping}} the popular `allowances` storage variable of the ERC20 Standard which maps an `owner` and an allowed `spender` to their `allowance` amount using multiple keys passed inside a tuple:
 
