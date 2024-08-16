@@ -79,6 +79,22 @@ When working with structs, instead of calling `read` and `write` on the struct v
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner_name}}
 ```
 
+## Storing Collections
+
+If one wants to store a collections demanding sequential access like an array, one can use the `Vec` type, which allows keeping vectors in a contract’s storage.
+
+Let's consider this new storage :
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/no_listing_04_storing_collections/src/lib.cairo:storage}}
+```
+
+Here is an example of how an array can be stored into the storage variable of type `Vec<u64>` (here called `vector`).
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/no_listing_04_storing_collections/src/lib.cairo:store_array}}
+```
+
 ## Storing Custom Types
 
 The `Store` trait, defined in the `starknet::storage_access` module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it **must** implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ByteArray`, `ContractAddress`, etc. implement the `Store` trait and can thus be stored without further action.
