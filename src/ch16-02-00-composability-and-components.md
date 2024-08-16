@@ -65,7 +65,7 @@ generic over `TContractState`, allowing us to use this component in any
 contract.
 
 [contract anatomy]: ./ch13-02-anatomy-of-a-simple-contract.md
-[contract dispatcher]: ./ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.md
+[contract dispatcher]: ./ch15-02-interacting-with-another-contract.md
 
 ### Example: an Ownable Component
 
