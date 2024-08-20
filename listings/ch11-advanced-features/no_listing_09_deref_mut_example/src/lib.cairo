@@ -1,4 +1,4 @@
-//TAG: does_not_conpile
+//TAG: does_not_compile
 
 use core::ops::DerefMut;
 
@@ -43,4 +43,3 @@ fn main() {
     println!("Current age: {}", wrapped_profile.age);
 }
 // ANCHOR_END: example
-
