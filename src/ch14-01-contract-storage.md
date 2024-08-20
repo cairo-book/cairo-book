@@ -79,22 +79,6 @@ When working with structs, instead of calling `read` and `write` on the struct v
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:read_owner_name}}
 ```
 
-## Storing Collections
-
-If one wants to store a collections demanding sequential access like an array, one can use the `Vec` type, which allows keeping vectors in a contract’s storage.
-
-Let's consider this new storage :
-
-```rust, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/no_listing_04_storing_collections/src/lib.cairo:storage}}
-```
-
-Here is an example of how an array can be stored into the storage variable of type `Vec<u64>` (here called `vector`).
-
-```rust, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/no_listing_04_storing_collections/src/lib.cairo:store_array}}
-```
-
 ## Storing Custom Types
 
 The `Store` trait, defined in the `starknet::storage_access` module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it **must** implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ByteArray`, `ContractAddress`, etc. implement the `Store` trait and can thus be stored without further action.
@@ -114,6 +98,21 @@ Similarly, Enums can only be written to storage if they implement the `Store` tr
 ```
 
 You might have noticed that we also derived `Drop` and `Serde` on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.
+
+## Storing Collections
+
+When working with smart contracts, you may need to store collections of values. While Cairo doesn't allow direct storage of arrays of type `Array<T>`, the core library provides a storage-specific type named `Vec`. The `Vec` type enables you to maintain vector-like collections within your contract's storage.
+
+In our registry contract, we would like to be able to track all the addresses that have registered a name. To do this, we will use a `Vec` to store all the registered addresses.
+Everytime a new registration is made, we will push the address to the `all_addresses` storage variable.
+
+<!-- TODO: illustrate how one can append an address to the vec -->
+
+<!-- show how we read all addresses and return them fro man entrypoint-->
+
+We would also like to be able to get the entire list of registered addresses. To do this, we will sequentially read all the addresses stored in the `all_addresses` variable and return them as an `Array<ContractAddress>`.
+
+<!-- TODO: illustrate this -->
 
 ## Storage Nodes
 
