@@ -43,3 +43,4 @@ fn main() {
     println!("Current age: {}", wrapped_profile.age);
 }
 // ANCHOR_END: example
+
