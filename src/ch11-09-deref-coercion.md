@@ -1,76 +1,70 @@
 # Deref Coercion
 
-In Cairo, deref coercion simplifies the way we interact with nested or wrapped data structures by allowing an instance of one type to behave like an instance of another type. This mechanism is enabled by implementing the `Deref` trait, which allows implicit conversion (or coercion) to a different type, providing direct access to the underlying data. Additionally, the `DerefMut` trait allows similar coercion, enabling direct modification of the target data. For now, only member access via deref is supported, i.e. implementations with functions whose `self` argument is of the original type will not be applicable when holding an instance of the coerced type.
+Deref coercion simplifies the way we interact with nested or wrapped data structures by allowing an instance of one type to behave like an instance of another type. This mechanism is enabled by implementing the `Deref` trait, which allows implicit conversion (or coercion) to a different type, providing direct access to the underlying data.
 
-## Understanding Deref Coercion
+> Note: For now, deref coercion allows you to access a member of a type `T` as if it was a type `K`, but will not allow you to call functions whose `self` argument is of the original type when holding an instance of the coerced type.
 
-In Cairo, the `Deref` and `DerefMut` traits allow you to customize the behavior of accessing members of a type through another type. When a type `T` implements `Deref` or `DerefMut` to type `K`, instances of `T` can access the members of `K` directly.  
-
-Let's look at the `Deref` and `DerefMut` traits closely :-  
+Deref coercion is implemented via the `Deref` and `DerefMut` traits. When a type `T` implements `Deref` or `DerefMut` to type `K`, instances of `T` can access the members of `K` directly.
 
 The `Deref` trait in Cairo is defined as follows:
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_09_deref_coercion/src/lib.cairo:Deref}}
 ```
-Where:
-- `type Target`: Specifies the target type `K` that the type `T` will dereference to.
-- `fn deref(self: T) -> Self::Target`: This method allows you to define how an instance of type `T` converts into type `K`. When implemented, you can access members of `K` through an instance of `T`.  
 
-The `DerefMut` trait works similarly but is used for mutable access:
+The `Target` type specifies the result of dereferencing, and the `deref` method defines how to transform `T` into `K`.
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_09_deref_coercion/src/lib.cairo:DerefMut}}
-```
-Where:
-- `fn deref_mut(ref self: T) -> Self::Target`: This method allows mutable access to the target type `K` through a mutable reference to type `T`.
+## Using Deref Coercion
 
-## Deref in Action
-
-To better understand how deref coercion works, let's look at a practical example. We'll create a simple generic wrapper type called `Wrapper<T>` and use it to wrap a `UserProfile` struct.
+To better understand how deref coercion works, let's look at a practical example. We'll create a simple generic wrapper type around a type `T` called `Wrapper<T>`, and use it to wrap a `UserProfile` struct.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_example/src/lib.cairo:Wrapper}}
 ```
-The `UserProfile` struct represents a user profile with fields `username`, `email`, and `age`.  
-The `Wrapper` struct wraps a single value of type `T`. Normally, accessing this value would require going through `Wrapper.value`.  
 
-To simplify access to the wrapped value, we implement the `Deref` trait for `Wrapper<T>`.
+The `Wrapper` struct wraps a single value generic of type `T`. To simplify access to the wrapped value, we implement the `Deref` trait for `Wrapper<T>`.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_example/src/lib.cairo:deref}}
 ```
-With this implementation, we can access the value inside `Wrapper<T>` directly, without needing to manually unwrap it.    
 
-Here’s how it works in practice:  
+This implementation is quite simple. The `deref` method returns the wrapped value, allowing instances of `Wrapper<T>` to access the members of `T` directly.
 
-```rust, noplayground
+In practice, this mechanism is totally transparent. The following example demonstrates how, holding
+an instance of `Wrapper<UserProfile>`, we can print the `username` and `age` fields of the underlying
+`UserProfile` instance.
+
+```rust
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_example/src/lib.cairo:main}}
 ```
 
-## Restricting Deref Coercion with `DerefMut`
+### Restricting Deref Coercion to Mutable Variables
 
-While `Deref` works for both mutable and immutable references, `DerefMut` is specifically for mutable access. Here’s an example of how `DerefMut` can be implemented:  
+While `Deref` works for both mutable and immutable variables, `DerefMut` will only be applicable to mutable variables. Contrary to what the name might suggest, `DerefMut` does not provide mutable access to the underlying data.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:derefMut}}
 ```
 
-However, `DerefMut` only works with mutable references. If you try to use `DerefMut` with an immutable reference, the compiler will throw an error.  
-
-Here’s an example that demonstrates this restriction:  
+If you try to use `DerefMut` with an immutable variable, the compiler would throw an error. Here’s an example:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:error}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/output.txt}}
 ```
 
-For the above to work we need to define `wrapped_profile` as a mutable variable. Also `DerefMut` allows us to directly modify the `age` field of `UserProfile` through the `wrapped_profile` instance.  
-Here’s an example that demonstrates working with `DerefMut`:  
+Compiling this code will result in the following error:
+
+```plaintext
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/output.txt}}
+```
+
+For the above code to work, we need to define `wrapped_profile` as a mutable variable.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:example}}
 ```
 
-By using the `Deref` and `DerefMut` traits, we can create a generic wrapper type like `Wrapper<T>` that allows seamless access to the underlying data. This pattern is common in core libraries for abstracting away the complexity of working with various data types while maintaining clear and concise code.  
+## Summary
 
-This example illustrates the power and flexibility of `Deref` and `DerefMut` in Cairo, enabling us to build more intuitive and user-friendly abstractions.
+By using the `Deref` and `DerefMut` traits, we can transparently convert one type into another, simplifying the access to nested or wrapped data structures. This feature is particularly useful when working with generic types or building abstractions that require seamless access to the underlying data and can help reduce boilerplate code.
+However, this functionality is quite limited, as you cannot call functions whose `self` argument is of the original type when holding an instance of the coerced type.
