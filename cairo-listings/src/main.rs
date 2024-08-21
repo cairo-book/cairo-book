@@ -21,7 +21,7 @@ mod tags;
 mod utils;
 
 use crate::cmd::ScarbCmd;
-use crate::config::{Commands, Config, VerifyArgs};
+use crate::config::{Commands, Config, VerifyArgs, OutputArgs};
 use crate::error_sets::ErrorSets;
 use crate::tags::Tags;
 use crate::utils::{clickable, find_scarb_manifests, print_error_table};
@@ -38,10 +38,11 @@ fn main() {
     let cfg = &*CFG;
     let cfg_clone = cfg;
     let empty_arg = VerifyArgs::default();
+    let empty_package = OutputArgs::default();
 
     match &cfg.command {
         Commands::Verify(args) => run_verification(cfg_clone, args),
-        Commands::Output => output::process_outputs(cfg_clone, &empty_arg),
+        Commands::Output(args) => output::process_outputs(cfg_clone, args),
         Commands::Format => run_format(cfg_clone, &empty_arg),
     }
 }
