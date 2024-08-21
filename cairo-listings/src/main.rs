@@ -41,13 +41,13 @@ fn main() {
 
     match &cfg.command {
         Commands::Verify(args) => run_verification(cfg_clone, args),
-        Commands::Output => output::process_outputs(cfg_clone, &empty_arg),
+        Commands::Output(args) => output::process_outputs(cfg_clone, args),
         Commands::Format => run_format(cfg_clone, &empty_arg),
     }
 }
 
 fn run_verification(cfg: &Config, args: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, args);
+    let scarb_packages = find_scarb_manifests(cfg, args.file.clone());
 
     let total_packages = scarb_packages.len();
     let pb = Arc::new(ProgressBar::new(total_packages as u64));
@@ -105,7 +105,7 @@ fn run_verification(cfg: &Config, args: &VerifyArgs) {
 }
 
 fn run_format(cfg: &Config, arg: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, arg);
+    let scarb_packages = find_scarb_manifests(cfg, arg.file.clone());
 
     let total_packages = scarb_packages.len();
     let pb = Arc::new(ProgressBar::new(total_packages as u64));

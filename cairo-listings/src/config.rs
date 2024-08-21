@@ -18,7 +18,7 @@ pub enum Commands {
     Verify(VerifyArgs),
 
     /// Process the output.txt file in listings
-    Output,
+    Output(OutputArgs),
 
     /// Run the format process
     Format,
@@ -57,6 +57,13 @@ pub struct VerifyArgs {
     /// Specify file to check
     #[arg(long)]
     pub file: Option<String>,
+}
+
+#[derive(Parser, Debug, Default)]
+pub struct OutputArgs {
+    /// Specify file to check
+    #[arg(long)]
+    pub package: Option<String>,
 }
 
 /// Expected statement in a cairo program for it to be runnable.

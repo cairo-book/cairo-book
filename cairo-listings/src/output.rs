@@ -6,11 +6,10 @@ use std::{
 
 use regex::Regex;
 
-use crate::{cmd::ScarbCmd, config::VerifyArgs, run_command, utils::find_scarb_manifests, Config};
+use crate::{cmd::ScarbCmd, config::OutputArgs, run_command, utils::find_scarb_manifests, Config};
 
-pub fn process_outputs(cfg: &Config, arg: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, arg);
-
+pub fn process_outputs(cfg: &Config, arg: &OutputArgs) {
+    let scarb_packages = find_scarb_manifests(cfg, arg.package.clone());
     for file in scarb_packages {
         process_file(&file);
     }
