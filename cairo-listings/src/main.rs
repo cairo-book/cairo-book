@@ -21,7 +21,7 @@ mod tags;
 mod utils;
 
 use crate::cmd::ScarbCmd;
-use crate::config::{Commands, Config, VerifyArgs, OutputArgs};
+use crate::config::{Commands, Config, VerifyArgs};
 use crate::error_sets::ErrorSets;
 use crate::tags::Tags;
 use crate::utils::{clickable, find_scarb_manifests, print_error_table};
@@ -38,7 +38,6 @@ fn main() {
     let cfg = &*CFG;
     let cfg_clone = cfg;
     let empty_arg = VerifyArgs::default();
-    let empty_package = OutputArgs::default();
 
     match &cfg.command {
         Commands::Verify(args) => run_verification(cfg_clone, args),
@@ -48,7 +47,7 @@ fn main() {
 }
 
 fn run_verification(cfg: &Config, args: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, args);
+    let scarb_packages = find_scarb_manifests(cfg, args.file.clone());
 
     let total_packages = scarb_packages.len();
     let pb = Arc::new(ProgressBar::new(total_packages as u64));
@@ -106,7 +105,7 @@ fn run_verification(cfg: &Config, args: &VerifyArgs) {
 }
 
 fn run_format(cfg: &Config, arg: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, arg);
+    let scarb_packages = find_scarb_manifests(cfg, arg.file.clone());
 
     let total_packages = scarb_packages.len();
     let pb = Arc::new(ProgressBar::new(total_packages as u64));

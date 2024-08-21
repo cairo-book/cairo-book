@@ -6,31 +6,12 @@ use std::{
 
 use regex::Regex;
 
-use crate::{cmd::ScarbCmd, config::VerifyArgs, config::OutputArgs, run_command, utils::find_scarb_manifests, Config};
+use crate::{cmd::ScarbCmd, config::OutputArgs, run_command, utils::find_scarb_manifests, Config};
 
 pub fn process_outputs(cfg: &Config, arg: &OutputArgs) {
-    let empty_args = VerifyArgs::default();
-    let scarb_packages = find_scarb_manifests(cfg, &empty_args);
-    
-    // Check if a specific package name is provided
-    if let Some(package_path) = &arg.package {
-        let mut package_found = false;
-        for file in scarb_packages {
-            if file.contains(package_path) {
-                process_file(&file);
-                package_found = true;
-                println!("Processed output.txt for {:?}", package_path);
-            }
-        }
-
-        if !package_found {
-            println!("package {:?} not found", package_path);
-        }
-    } else {
-        // If no specific package is provided, process all packages
-        for file in scarb_packages {
-            process_file(&file);
-        }
+    let scarb_packages = find_scarb_manifests(cfg, arg.package.clone());
+    for file in scarb_packages {
+        process_file(&file);
     }
 }
 

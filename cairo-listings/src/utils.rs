@@ -1,28 +1,25 @@
 use colored::Colorize;
 use regex::Regex;
 use std::collections::HashSet;
+use std::path::Path;
 use walkdir::WalkDir;
 
-use crate::config::{Config, VerifyArgs};
+use crate::config::{Config};
 
-pub fn find_scarb_manifests(cfg: &Config, args: &VerifyArgs) -> Vec<String> {
-    let path = cfg.path.as_str();
+pub fn find_scarb_manifests(cfg: &Config, package: Option<String>) -> Vec<String> {
+    let path = Path::new(&cfg.path);
 
-    let mut scarb_manifests: Vec<String> = Vec::new();
-
-    for entry in WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
-        if let Some(file_name) = entry.file_name().to_str() {
-            if file_name.eq("Scarb.toml") {
-                if args.file.is_some() && !file_name.ends_with(args.file.as_ref().unwrap()) {
-                    continue;
-                }
-
-                scarb_manifests.push(entry.path().display().to_string());
-            }
-        }
-    }
-
-    scarb_manifests
+    WalkDir::new(path)
+        .into_iter()
+        .filter_map(|entry| entry.ok())
+        .filter(|entry| entry.file_name() == "Scarb.toml")
+        .filter(|entry| {
+            package.as_ref().map_or(true, |p| {
+                entry.path().to_str().map_or(false, |s| s.contains(p))
+            })
+        })
+        .map(|entry| entry.path().display().to_string())
+        .collect()
 }
 
 /// Will replace the file path contained in the input string with a clickable format for better output
