@@ -12,7 +12,6 @@ pub trait INameRegistry<TContractState> {
     fn get_registration_info(
         self: @TContractState, address: ContractAddress
     ) -> NameRegistry::RegistrationInfo;
-    fn store_address(ref self: TContractState, address: ContractAddress);
     fn get_addresses(self: @TContractState) -> Array<ContractAddress>;
 }
 
@@ -21,7 +20,7 @@ mod NameRegistry {
     use core::starknet::{ContractAddress, get_caller_address, storage_access};
     use core::starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, StoragePointerWriteAccess
+        StorageMapWriteAccess, StoragePointerWriteAccess, Vec, MutableVecTrait, VecTrait
     };
 
     //ANCHOR: storage
@@ -131,19 +130,15 @@ mod NameRegistry {
             self.registrations.entry(address).info.read()
         }
 
-        //ANCHOR: store_address
-        fn store_address(ref self: ContractState, address: ContractAddress) {
-            self.all_addresses.append().write(address);
-        }
-        //ANCHOR_END: store_address
 
         //ANCHOR: get_addresses
-
         fn get_addresses(self: @ContractState) -> Array<ContractAddress> {
-            let mut addresses = Array::<ContractAddress>::new(self.all_addresses.len());
-            for address in self.all_addresses {
-                addresses.append(address.read());
-            }
+            let mut addresses = array![];
+            let mut i = 0;
+            while i != self.all_addresses.len() {
+                addresses.append(self.all_addresses.at(i).read());
+                i += 1;
+            };
             addresses
         }
         //ANCHOR_END: get_addresses
@@ -190,8 +185,11 @@ mod NameRegistry {
             registration_node.count.write(count + 1);
             //ANCHOR_END: storage_node
 
-            // self.registration_type.entry(user).write(registration_type);
             self.total_names.write(total_names + 1);
+
+            //ANCHOR: store_address
+            self.all_addresses.append().write(user);
+            //ANCHOR_END: store_address
 
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });
@@ -209,5 +207,4 @@ mod NameRegistry {
     // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
-
 

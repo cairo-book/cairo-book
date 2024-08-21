@@ -110,8 +110,6 @@ Everytime a new registration is made, we will push the address to the `all_addre
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:store_address}}
 ```
 
-<!-- show how we read all addresses and return them fro man entrypoint-->
-
 We would also like to be able to get the entire list of registered addresses. To do this, we will sequentially read all the addresses stored in the `all_addresses` variable and return them as an `Array<ContractAddress>`.
 
 ```rust, noplayground
