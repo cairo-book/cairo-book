@@ -1,0 +1,9 @@
+$ scarb build 
+   Compiling no_listing_09_deref_coercion_example v0.1.0 (listings/ch11-advanced-features/no_listing_09_deref_mut_example/Scarb.toml)
+error: Type "no_listing_09_deref_coercion_example::Wrapper::<no_listing_09_deref_coercion_example::UserProfile>" has no member "username"
+ --> listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:32:46
+    println!("Username: {}", wrapped_profile.username);
+                                             ^******^
+
+error: could not compile `no_listing_09_deref_coercion_example` due to previous error
+
