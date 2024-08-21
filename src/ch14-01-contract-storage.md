@@ -106,13 +106,17 @@ When working with smart contracts, you may need to store collections of values. 
 In our registry contract, we would like to be able to track all the addresses that have registered a name. To do this, we will use a `Vec` to store all the registered addresses.
 Everytime a new registration is made, we will push the address to the `all_addresses` storage variable.
 
-<!-- TODO: illustrate how one can append an address to the vec -->
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:store_address}}
+```
 
 <!-- show how we read all addresses and return them fro man entrypoint-->
 
 We would also like to be able to get the entire list of registered addresses. To do this, we will sequentially read all the addresses stored in the `all_addresses` variable and return them as an `Array<ContractAddress>`.
 
-<!-- TODO: illustrate this -->
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:get_addresses}}
+```
 
 ## Storage Nodes
 

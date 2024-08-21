@@ -12,6 +12,8 @@ pub trait INameRegistry<TContractState> {
     fn get_registration_info(
         self: @TContractState, address: ContractAddress
     ) -> NameRegistry::RegistrationInfo;
+    fn store_address(ref self: TContractState, address: ContractAddress);
+    fn get_addresses(self: @TContractState) -> Array<ContractAddress>;
 }
 
 #[starknet::contract]
@@ -29,6 +31,7 @@ mod NameRegistry {
         owner: Person,
         registrations: Map<ContractAddress, RegistrationNode>,
         total_names: u128,
+        all_addresses: Vec<ContractAddress>
     }
     //ANCHOR_END: storage
 
@@ -127,6 +130,24 @@ mod NameRegistry {
         ) -> RegistrationInfo {
             self.registrations.entry(address).info.read()
         }
+
+        //ANCHOR: store_address
+        fn store_address(ref self: ContractState, address: ContractAddress) {
+            self.all_addresses.append().write(address);
+        }
+        //ANCHOR_END: store_address
+
+        //ANCHOR: get_addresses
+
+        fn get_addresses(self: @ContractState) -> Array<ContractAddress> {
+            let mut addresses = Array::<ContractAddress>::new(self.all_addresses.len());
+            for address in self.all_addresses {
+                addresses.append(address.read());
+            }
+            addresses
+        }
+        //ANCHOR_END: get_addresses
+
     }
     //ANCHOR_END: impl_public
 
