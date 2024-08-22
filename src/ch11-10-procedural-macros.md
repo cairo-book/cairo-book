@@ -8,11 +8,13 @@ Generally there are three ways to use procedural macros:
 2. attributes ( `#[macro]` )
 3. derive ( `#[derive(Macro)]` )
 
-> To use procedural macros in your Cairo project, you need to have the Rust toolchain setup on your machine.
+> To use procedural macros in your Cairo project, you need to have the Rust toolchain setup on your machine. This is because Cairo procedural macros are implemented in Rust. To set up Rust, visit rustup.rs and follow the installation instructions for your operating system.
 
 ## How to Use an Already Existing Procedural Macro
 
-To use a procedural macros in your project, a developer needs to add the marco as a dependency in their `Scarb.toml` file and then import and use it in their Cairo program.
+To use a procedural macros in your project, a developer needs to add the macro as a dependency in their `Scarb.toml` file and then import and use it in their Cairo program.
+
+> You do not need to know Rust to use procedural macros in your Cairo project.
 
 ```toml
 [package]
@@ -33,15 +35,18 @@ use example_expression_macro::macro_one;
 use example_attribute_macro::macro_two;
 use example_derive_macro::macro_three;
 
+// This is a derive macro that implements some trait for ExampleStruct
 #[derive(macro_three)]
 struct ExampleStruct {
     field: u32,
 }
 
+// This attribute macro would modify the function in some way
 #[macro_two]
 fn main() -> u32 {
     let: u32 a = ExampleStruct { field: 1 };
     let: u32 b = ExampleStruct { field: 2 };
+    // This expression macro performs an operation on the two values
     macro_one!(a.to_value(), b.to_value());
 }
 ```
