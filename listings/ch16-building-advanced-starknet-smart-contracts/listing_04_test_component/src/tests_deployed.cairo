@@ -1,6 +1,6 @@
 use super::MockContract;
 use super::counter::{ICounterDispatcher, ICounterDispatcherTrait};
-use core::starknet::deploy_syscall;
+use core::starknet::syscalls::deploy_syscall;
 use core::starknet::SyscallResultTrait;
 
 fn setup_counter() -> ICounterDispatcher {
