@@ -201,6 +201,7 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
             is_contract |= line_contents.contains(config::STATEMENT_IS_CONTRACT);
             should_be_runnable |= line_contents.contains(config::STATEMENT_IS_RUNNABLE);
             should_be_testable |= line_contents.contains(config::STATEMENT_IS_TESTABLE);
+            should_be_testable |= line_contents.contains(config::STATEMENT_TEST_MODULE);
         }
     });
 

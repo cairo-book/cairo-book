@@ -72,6 +72,7 @@ pub const STATEMENT_IS_RUNNABLE: &str = "fn main()";
 pub const STATEMENT_IS_CONTRACT: &str = "#[starknet::contract]";
 /// Expected statement in a cairo program containing tests.
 pub const STATEMENT_IS_TESTABLE: &str = "#[test]";
+pub const STATEMENT_TEST_MODULE: &str = "#[cfg(test)]";
 /// Expected regex for tags
 const TAG_REGEX_PATTERN: &str = r"^//\s*TAG(S)?\s*(:)?\s*";
 
