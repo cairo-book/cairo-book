@@ -4,7 +4,7 @@ use std::collections::HashSet;
 use std::path::Path;
 use walkdir::WalkDir;
 
-use crate::config::{Config};
+use crate::config::Config;
 
 pub fn find_scarb_manifests(cfg: &Config, package: Option<String>) -> Vec<String> {
     let path = Path::new(&cfg.path);
