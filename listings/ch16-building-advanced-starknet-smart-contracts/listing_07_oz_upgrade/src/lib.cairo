@@ -45,7 +45,7 @@ mod UpgradeableContract {
             self.ownable.assert_only_owner();
 
             // Replace the class hash upgrading the contract
-            self.upgradeable._upgrade(new_class_hash);
+            self.upgradeable.upgrade(new_class_hash);
         }
     }
 }
