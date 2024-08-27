@@ -4,10 +4,6 @@ use regex::Regex;
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct Config {
-    /// The path to explore for *.cairo files.
-    #[arg(short, long, default_value = "./listings")]
-    pub path: String,
-
     #[command(subcommand)]
     pub command: Commands,
 }
@@ -21,7 +17,7 @@ pub enum Commands {
     Output(OutputArgs),
 
     /// Run the format process
-    Format,
+    Format(VerifyArgs),
 }
 
 #[derive(Parser, Debug, Default)]
@@ -54,16 +50,16 @@ pub struct VerifyArgs {
     #[arg(short, long)]
     pub test_skip: bool,
 
-    /// Specify file to check
-    #[arg(long)]
-    pub file: Option<String>,
+    /// Specify path to check (file or directory)
+    #[arg(long, default_value = "./listings")]
+    pub path: String,
 }
 
 #[derive(Parser, Debug, Default)]
 pub struct OutputArgs {
-    /// Specify file to check
-    #[arg(long)]
-    pub package: Option<String>,
+    /// Specify path to check (file or directory)
+    #[arg(long, default_value = "./listings")]
+    pub path: String,
 }
 
 /// Expected statement in a cairo program for it to be runnable.

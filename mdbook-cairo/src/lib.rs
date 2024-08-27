@@ -40,7 +40,7 @@ impl LabelsProcessor {
         for cap in LABEL_REGEX.captures_iter(line) {
             let label = &cap[1];
             let listing_number = format!("{}-{}", chapter_number, self.current_label);
-            if let Some(_existing) = self.labels.get(&label.to_string()) {
+            if let Some(_existing) = self.labels.get(label) {
                 return Err(anyhow::anyhow!("Duplicate entry for label: {}", label));
             }
             self.labels.insert(label.to_string(), listing_number);
