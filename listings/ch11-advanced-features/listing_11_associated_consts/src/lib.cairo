@@ -24,3 +24,10 @@ impl WarriorCharacter of Character<Warrior> {
     const strength: u32 = 100;
     fn fight(self: Warrior) {}
 }
+
+fn main() {
+    let warrior = Warrior { name: "Warrior", hp: 1000, };
+    let wizard = Wizard { name: "Wizard", hp: 1000, };
+
+    warrior.fight()
+}

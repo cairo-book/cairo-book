@@ -1,3 +1,5 @@
+// TAG: does_not_run
+
 // T is the collection type
 pub trait Iterator<T> {
     type Item;
@@ -24,11 +26,3 @@ impl ArrayIterator<T> of Iterator<ArrayIter<T>> {
         self.array.pop_front()
     }
 }
-// impl ArrayIntoIterator<T> of core::iter::IntoIterator<Array<T>> {
-//     type IntoIter = ArrayIter<T>;
-//     fn into_iter(self: Array<T>) -> ArrayIter<T> {
-//         ArrayIter { array: self }
-//     }
-// }
-
-

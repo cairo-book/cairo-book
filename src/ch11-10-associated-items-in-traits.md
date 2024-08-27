@@ -68,4 +68,12 @@ Since `strength` is fixed per character type, associated consts allow us to bind
 
 ## Associated Impls
 
+The new `iterator` traits are a good example to highlight when one might need to use associated impls. Consider the new `iterator` traits from _iterator.cairo_ in the Cairo corelib:
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo}}
+```
+
+
+
 ## Summary
