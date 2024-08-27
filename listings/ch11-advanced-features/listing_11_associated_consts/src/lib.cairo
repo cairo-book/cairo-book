@@ -1,19 +1,26 @@
 #[derive(Drop)]
-struct Warrior { ... }
+struct Warrior {
+    name: ByteArray,
+    hp: u128
+}
+
 #[derive(Drop)]
-struct Wizard { ... }
+struct Wizard {
+    name: ByteArray,
+    hp: u128
+}
 
 trait Character<T> {
-    const hp: u32;
+    const strength: u32;
     fn fight(self: T);
 }
 
 impl WizardCharacter of Character<Wizard> {
-    const hp: u32 = 70;
-    fn fight(self: Wizard) { ... } 
+    const strength: u32 = 70;
+    fn fight(self: Wizard) {}
 }
 
 impl WarriorCharacter of Character<Warrior> {
-    const hp: u32 = 100;
-    fn fight(self: Warrior) { ... } 
+    const strength: u32 = 100;
+    fn fight(self: Warrior) {}
 }

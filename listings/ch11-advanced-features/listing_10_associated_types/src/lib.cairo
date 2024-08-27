@@ -1,3 +1,5 @@
+
+
 // ANCHOR: AssociatedTypes
 trait Add<T, U> {
     type Result;
@@ -8,11 +10,12 @@ trait Add<T, U> {
 
 // ANCHOR: GenericsUsage
 trait AddGeneric<T, U, V> {
-    fn add<T, U, V>(a: T, b: U) -> V;
+    fn add<T, U, V>(self: T, other: U) -> V;
 }
 
 fn foo<T, U, V, +AddGeneric<T, U, V>>(a: T, b: U) -> V {
-    a + b
+    let result: V = a.add(b);
+    result
 }
 // ANCHOR_END: GenericsUsage
 
