@@ -75,9 +75,8 @@ mod PriceFeedExample {
 
             return output.price;
         }
-    //ANCHOR_END: price_feed_impl
+        //ANCHOR_END: price_feed_impl
     }
 }
 //ANCHOR_END: here
-
 
