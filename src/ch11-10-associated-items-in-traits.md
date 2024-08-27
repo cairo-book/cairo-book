@@ -74,6 +74,4 @@ The new `iterator` traits are a good example to highlight when one might need to
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo}}
 ```
 
-
-
 ## Summary
