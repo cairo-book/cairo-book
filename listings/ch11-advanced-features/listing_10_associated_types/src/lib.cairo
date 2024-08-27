@@ -1,30 +1,26 @@
 // ANCHOR: AssociatedTypes
-trait Add<T, U> {
+trait CustomAdd<T, U> {
     type Result;
 
-    fn add(self: T, rhs: U) -> Self::Result;
+    fn add(self: T, other: U) -> Self::Result;
 }
 // ANCHOR_END: AssociatedTypes
 
 // ANCHOR: AssociatedTypesImpl
-impl AddImpl<T, U> of Add<T, U> {
+impl CustomAddImplU32 of CustomAdd<u32, u32> {
     type Result = u32;
 
-    fn add(self: T, rhs: U) -> Self::Result {
-        self.add(rhs)
+    fn add(self: u32, other: u32) -> Self::Result {
+        self + other
     }
 }
 // ANCHOR_END: AssociatedTypesImpl
 
-// ANCHOR: BarBaz
-fn bar<T, U, impl AddImpl: Add<T, U>>(self: T, other: U) -> AddImpl::Result {
-    AddImpl::add(self, other)
+// ANCHOR: Bar
+fn bar<T, U, impl AddImpl: CustomAdd<T, U>>(self: T, b: U) -> AddImpl::Result {
+    AddImpl::add(self, b)
 }
-
-fn baz<T, U>(self: T, other: U) -> AddImpl::<T, U>::Result {
-    self.add(other)
-}
-// ANCHOR_END: BarBaz
+// ANCHOR_END: Bar
 
 // ANCHOR: GenericsUsage
 trait AddGeneric<T, U, V> {
@@ -49,13 +45,11 @@ fn main() {
     let a: u32 = 3;
     let b: u32 = 4;
 
-    let x: u32 = foo(a, b);
+    let x = foo(a, b);
     let y = bar(a, b);
-    let z = baz(a, b);
 
     println!("x: {}", x);
     println!("y: {}", y);
-    println!("z: {}", z);
 }
 // ANCHOR_END: Main
 
