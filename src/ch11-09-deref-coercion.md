@@ -54,7 +54,7 @@ If you try to use `DerefMut` with an immutable variable, the compiler would thro
 
 Compiling this code will result in the following error:
 
-```rust, noplayground
+```plaintext
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/output.txt}}
 ```
 
