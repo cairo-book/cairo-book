@@ -1,6 +1,6 @@
 # Procedural Macros
 
-Cairo procedural macros are actually Rust functions that takes Cairo code as input and returns a modified Cairo code as output. The main concept behind this type of macros is to grant developers the ability to create custom macros to support Cairo packages.
+Cairo procedural macros are actually Rust functions that takes Cairo code as input and returns a modified Cairo code as output. The main concept behind this type of macros is to grant developers the ability to create custom macros that supports Cairo packages.
 
 Generally there are three ways to use procedural macros:
 
@@ -8,13 +8,13 @@ Generally there are three ways to use procedural macros:
 2. attributes ( `#[macro]` )
 3. derive ( `#[derive(Macro)]` )
 
-> To use procedural macros in your Cairo project, you need to have the Rust toolchain setup on your machine. This is because Cairo procedural macros are implemented in Rust. To set up Rust, visit rustup.rs and follow the installation instructions for your operating system.
+> To use procedural macros in your Cairo project, you need to have the Rust toolchain setup on your machine. This is because Cairo procedural macros are implemented in Rust. To set up Rust, visit [rustup](https://rustup.rs) and follow the installation instructions for your operating system.
 
-## How to Use an Already Existing Procedural Macro
+## How to Use Existing Procedural Macros
 
 To use a procedural macros in your project, a developer needs to add the macro as a dependency in their `Scarb.toml` file and then import and use it in their Cairo program.
 
-> You do not need to know Rust to use procedural macros in your Cairo project.
+> You do not need to know Rust to use already existing procedural macros in your Cairo project.
 
 ```toml
 [package]
@@ -51,21 +51,28 @@ fn main() -> u32 {
 }
 ```
 {{#label procedural-macros-impl}}
-<span class="caption">Listing {{#ref procedural-macros-impl}}: Example program using procedural macros.</span>
+<span class="caption">Listing {{#ref procedural-macros-impl}}: Example Cairo program using procedural macros.</span>
 
 ## How to Create a Procedural Macro
 
-To create a new procedural macros, a developer needs to create a new Cairo program, then include `[cairo-plugin]` target type in the `Scarb.toml`. Next, the developer needs to add `Cargo.toml` to the root directory ( same level as the `Scarb.toml` file ), since procedural macros are in fact Rust functions. In the `Cargo.toml` file, the developer needs to add a `crate-type = ["cdylib"]` on the `[lib]` target, and also add th `cairo-lang-macro` crate as a dependency.
+To create a procedural macro, a developer needs to create a new Cairo program, then include `[cairo-plugin]` target type in the `Scarb.toml`. Next, the developer needs to add `Cargo.toml` to the root directory ( same level as the `Scarb.toml` file ), since procedural macros are in fact Rust functions. In the `Cargo.toml` file, the developer needs to add a `crate-type = ["cdylib"]` on the `[lib]` target, and also add the `cairo-lang-macro` crate as a dependency.
 
 Below is an example of the `Scarb.toml` and `Cargo.toml` files:
 
 ```toml
 # Scarb.toml
 [package]
-name = "some_macro"
+name = "no_listing_15_pow_macro"
 version = "0.1.0"
+edition = "2024_07"
 
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 [cairo-plugin]
+
+[dependencies]
+
+[dev-dependencies]
+cairo_test = "2.7.0"
 ```
 {{#label procedural-macros-scarb-file}}
 <span class="caption">Listing {{#ref procedural-macros-scarb-file}}: Example `Scarb.toml` file needed for building a procedural macro.</span>
@@ -73,16 +80,35 @@ version = "0.1.0"
 ```toml
 # Cargo.toml
 [package]
-name = "some_macro"
+name = "no_listing_15_pow_macro"
 version = "0.1.0"
 edition = "2021"
-publish = false
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-cairo-lang-macro = "0.1.0"
+bigdecimal = "0.4.5"
+cairo-lang-macro = "0.1"
+cairo-lang-parser = "2.7.0"
+cairo-lang-syntax = "2.7.0"
+
+[workspace]
 ```
+
 {{#label some-macro}}
 <span class="caption">Listing {{#ref some-macro}}: Example `Cargo.toml` file needed for building a procedural macro.</span>
+
+
+> Make sure the package name of both `Scarb.toml` and `Cargo.toml` files are the same or this will lead to an error.
+
+Also notice that you can also add other rust dependencies in your `Cargo.toml` file. In the example above, we added the `bigdecimal`, `cairo-lang-parser` and `cairo-lang-syntax` crates as a dependencies.
+
+Listing {{#ref pow_macro}} shows the rust code for creating an inline macro in Rust:
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_15_pow_macro/src/lib.rs:main}}
+```
+
+{{#label pow_macro}}
+<span class="caption">Listing {{#ref pow_macro}}: Code for creating inline pow procedural macro</span>
