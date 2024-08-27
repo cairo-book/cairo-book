@@ -24,19 +24,31 @@ Let's consider the following `Add` trait:
 
 The type `Result` is a placeholder, and the method’s definition that follows shows that it will return values of type `Self::Result`. Implementors of the `Add` trait will specify the concrete type for `Result`, and the next method will return a value of that concrete type.
 
-Let's suppose now that a function `foo<T, U>` needs the ability to add `T` and `U`. If we had defined the `Add` trait with an additional generic parameter that is used to describe the result, then the signature of our function would have looked like this:
+Let's suppose now that a function `foo<T, U>` needs the ability to add `T` and `U`. If we had defined a `AddGeneric` trait with an additional generic parameter that is used to describe the result, then this trait and one potential implementation using `u32` type for all involved generic types would have looked like this:
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:GenericsUsage}}
 ```
 
-Nevertheless, when using associated types, we can get the result type from the impl of `Add`, and we don’t need to pollute `foo` with an additional generic argument:
+with `foo` being implemented as follows:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:AssociatedTypesUsage}}
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:Foo}}
 ```
 
-The point is that `foo` doesn’t necessarily need to generic on the addition result type, this information is associated with the impl of the `Add` trait.
+However, when using associated types, we can get the result type from the impl of `Add`, and we don’t need to pollute `foo` with an additional generic argument. In the following snippet, we define a `AddImpl` impl of `Add<T, U>` trait with `Result` type being a `u32` :
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:AssociatedTypesImpl}}
+```
+
+with `bar` and `baz` functions which are 2 valid ways to implement `foo` function using an associated type:
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:BarBaz}}
+```
+
+The point is that `bar` and `baz` don't need to use a third generic type for the addition result type, this information is associated with the impl of the `Add` trait.
 
 Associated types might seem like a similar concept to generics, in that the latter allows us to define a function without specifying what types it can handle. The difference is that when using generics, we must annotate the types in each implementation. In other words, when a trait has a generic parameter, it can be implemented for a type multiple times, changing the concrete types of the generic type parameters each time.
 
