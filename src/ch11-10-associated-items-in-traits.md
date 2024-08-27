@@ -1,6 +1,6 @@
 # Associated Items in Traits
 
-Associated items connect a item placeholder with a trait such that the trait method definitions can use these placeholder items in their signatures. The implementor of a trait will specify the concrete item to be used instead of the placeholder item for the particular implementation. That way, we can define a trait that uses some items without needing to know exactly what the types of those items are until the trait is implemented.
+Associated items connect an item placeholder with a trait such that the trait method definitions can use these placeholder items in their signatures. The implementor of a trait will specify the concrete item to be used instead of the placeholder item for the particular implementation. That way, we can define a trait that uses some items without needing to know exactly what the types of those items are until the trait is implemented.
 
 Associated items may include:
 - Associated types
@@ -8,6 +8,10 @@ Associated items may include:
 - Associated impls
 
 In this chapter, we will illustrate these associated items with short examples, showing how to use them and why they might be useful.
+
+Examples in this chapter have been strongly inspired from [FeedTheFed post] regarding Cairo 2.7 upgrade in the Starknet Community Forum.
+
+[FeedTheFed post]: https://community.starknet.io/t/cairo-v2-7-0-is-coming/114362
 
 ## Associated Types
 
