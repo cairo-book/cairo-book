@@ -198,8 +198,8 @@ Note: You might encounter `LegacyMap` in older code or documentation. This was t
 
 You can also create more complex mappings with multiple keys. You can find in Listing {{#ref storage-mapping}} the popular `allowances` storage variable of the ERC20 Standard which maps an `owner` and an allowed `spender` to their `allowance` amount using multiple keys passed inside a tuple:
 
-```rust,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:here}}
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:here}}
 ```
 
 {{#label storage-mapping}}
