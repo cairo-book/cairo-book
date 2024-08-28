@@ -78,7 +78,25 @@ A potential battle between a `Warrior` and a `Wizard` could look like this:
 The new `iterator` traits are a good example to highlight when one might need to use associated impls. Consider the new `iterator` traits from _iterator.cairo_ in the Cairo corelib:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo}}
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:AssociatedImpl}}
 ```
 
-## Summary
+An implementation of `IntoIterator` trait is expected to take a collection and return a corresponding `IntoIter` iterator type. How can we enforce that the returned type is indeed an iterator, i.e. something that implements that `Iterator` trait? This is where the associated impl `Iterator` comes in, which is by definition an impl of the `Iterator` trait for the associated `IntoIter` iterator type.
+
+The important observation is that any implementation of `IntoIterator` should return an iterator. Thus, while we can use generic impl parameters to enforce a specific implementation of `IntoIterator` returning an actual iterator, it should be already determined at the trait level. Associated impls are exactly the tool that allows us to do it.
+
+Note that an implementation of `IntoIterator` does not necessarily need to specify the `Iterator` impl, if one exists in your context then it will be deduced, similarly to generic impl params.
+
+Let's focus on the following example to better grasp the concept of associated impls:
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:EniExample}}
+```
+
+We define a generic struct `TupleThree<T>`, as well as a generic impl `IndexTupleThree<T, +Copy<T>>` corresponding to the  `IndexView` trait form the corelib and that implements a `index` method that matches an index to retrieve the corresponding field value of our `TupleThree<T>` struct.
+
+After that, we define a `TupleThreeTrait` trait that contains a `at_index` method and uses an associated impl `impl IndexImpl: core::ops::IndexView<TupleThree<T>` corresponding to our previously implemented `IndexTupleThree<T, +Copy<T>> ` impl. Finally, we implement our `TupleThreeTrait` trait and will use it in the following `main` function: 
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:Main}}
+```
