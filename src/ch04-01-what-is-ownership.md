@@ -88,8 +88,7 @@ Thankfully, this code does not actually compile. Once we have passed the array t
 
 ## The `Copy` Trait
 
-If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value.
-The important thing to note here is that this is a completely free operation because variables are a Cairo abstraction only and because _values_ in Cairo are always immutable. This, in particular, conceptually differs from the Rust version of the `Copy` trait, where the value is potentially copied in memory.
+If a type implements the `Copy` trait, passing a value of that type to a function does not move the value. Instead, a new variable is created, referring to the same value. On the other hand, Rust version of the `Copy` trait creates a a new copy of its value in memory. We can view `Copy` trait in Cairo as a guardrail mechanism to ensure data types adhere to Cairo's linear type system and allow existing data types to be referenced without moving them.
 
 All basic types previously described in ["Data Types"][data types] implement by default the `Copy` trait.
 
