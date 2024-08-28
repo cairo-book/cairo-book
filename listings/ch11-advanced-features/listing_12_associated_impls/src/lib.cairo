@@ -53,6 +53,7 @@ impl TupleThreeTraitImpl<
 // ANCHOR: Main
 fn main() {
     let tuple = TupleThree { x: 1, y: 2, z: 3 };
+
     println!("The first element is {}", tuple[0]);
     println!("The second element is {}", tuple[1]);
     println!("The third element is {}", tuple[2]);
