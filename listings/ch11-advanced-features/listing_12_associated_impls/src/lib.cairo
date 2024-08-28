@@ -1,5 +1,3 @@
-// TAG: does_not_run
-
 // ANCHOR: AssociatedImpl
 // T is the collection type
 pub trait Iterator<T> {
