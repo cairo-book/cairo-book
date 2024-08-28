@@ -61,10 +61,17 @@ The point is that `bar` don't need to use a third generic type for the addition 
 Let's now imagine that we are building a game with multiple character types, in our case `Wizard` and `Warrior`, and each character has some fixed `strength` based on its type. We can model this scenario as follows:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo}}
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:AssociatedConsts}}
 ```
 
 Since `strength` is fixed per character type, associated consts allow us to bind this constant number to the character trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
+
+A potential battle between a `Warrior` and a `Wizard` could look like this:
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:Battle}}
+```
+
 
 ## Associated Impls
 

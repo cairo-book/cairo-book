@@ -1,33 +1,49 @@
+// ANCHOR: AssociatedConsts
 #[derive(Drop)]
 struct Warrior {
-    name: ByteArray,
-    hp: u128
+    name: felt252,
+    hp: u32
 }
 
 #[derive(Drop)]
 struct Wizard {
-    name: ByteArray,
-    hp: u128
+    name: felt252,
+    hp: u32
 }
 
-trait Character<T> {
+trait Character<T, U> {
     const strength: u32;
-    fn fight(self: T);
+    fn fight(self: @T, ref enemy: U);
 }
 
-impl WizardCharacter of Character<Wizard> {
-    const strength: u32 = 70;
-    fn fight(self: Wizard) {}
+impl WizardCharacter of Character<Wizard, Warrior> {
+    const strength: u32 = 50;
+    fn fight(self: @Wizard, ref enemy: Warrior) {
+        enemy.hp -= Self::strength;
+    }
 }
 
-impl WarriorCharacter of Character<Warrior> {
+impl WarriorCharacter of Character<Warrior, Wizard> {
     const strength: u32 = 100;
-    fn fight(self: Warrior) {}
+    fn fight(self: @Warrior, ref enemy: Wizard) {
+        enemy.hp -= Self::strength;
+    }
 }
+// ANCHOR_END: AssociatedConsts
 
+// ANCHOR: Battle
 fn main() {
-    let warrior = Warrior { name: "Warrior", hp: 1000, };
-    let wizard = Wizard { name: "Wizard", hp: 1000, };
+    let mut warrior = Warrior { name: 'Ares', hp: 1000, };
+    let mut wizard = Wizard { name: 'Merlin', hp: 1000, };
 
-    warrior.fight()
+    while (warrior.hp != 0 && wizard.hp != 0) {
+        warrior.fight(ref wizard);
+        wizard.fight(ref warrior);
+    };
+
+    println!("Ares hp is {}", warrior.hp);
+    println!("Merlin hp is {}", wizard.hp);
 }
+// ANCHOR: End
+
+
