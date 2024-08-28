@@ -49,13 +49,13 @@ While `Deref` works for both mutable and immutable variables, `DerefMut` will on
 If you try to use `DerefMut` with an immutable variable, the compiler would throw an error. Here’s an example:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/output.txt}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:error}}
 ```
 
 Compiling this code will result in the following error:
 
 ```plaintext
-{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/output.txt}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/output.txt}}
 ```
 
 For the above code to work, we need to define `wrapped_profile` as a mutable variable.
