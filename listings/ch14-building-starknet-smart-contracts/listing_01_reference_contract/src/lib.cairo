@@ -17,10 +17,10 @@ pub trait INameRegistry<TContractState> {
 
 #[starknet::contract]
 mod NameRegistry {
-    use core::starknet::{ContractAddress, get_caller_address, storage_access};
+    use core::starknet::{ContractAddress, get_caller_address};
     use core::starknet::storage::{
-        Map, StoragePathEntry, StoragePointerReadAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, StoragePointerWriteAccess, Vec, MutableVecTrait, VecTrait
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess, Vec,
+        MutableVecTrait, VecTrait
     };
 
     //ANCHOR: storage
@@ -135,10 +135,10 @@ mod NameRegistry {
         fn get_addresses(self: @ContractState) -> Array<ContractAddress> {
             let mut addresses = array![];
             let mut i = 0;
-            while i != self.all_addresses.len() {
-                addresses.append(self.all_addresses.at(i).read());
-                i += 1;
-            };
+            for i in 0
+                ..self.all_addresses.len() {
+                    addresses.append(self.all_addresses.at(i).read());
+                };
             addresses
         }
         //ANCHOR_END: get_addresses
@@ -207,5 +207,3 @@ mod NameRegistry {
     // ANCHOR_END: state_internal
 }
 //ANCHOR_END: all
-
-
