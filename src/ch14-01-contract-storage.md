@@ -99,6 +99,23 @@ Similarly, Enums can only be written to storage if they implement the `Store` tr
 
 You might have noticed that we also derived `Drop` and `Serde` on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.
 
+## Storing Collections
+
+When working with smart contracts, you may need to store collections of values. While Cairo doesn't allow direct storage of arrays of type `Array<T>`, the core library provides a storage-specific type named `Vec`. The `Vec` type enables you to maintain vector-like collections within your contract's storage.
+
+In our registry contract, we would like to be able to track all the addresses that have registered a name. To do this, we will use a `Vec` to store all the registered addresses.
+Everytime a new registration is made, we will push the address to the `all_addresses` storage variable.
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:store_address}}
+```
+
+We would also like to be able to get the entire list of registered addresses. To do this, we will sequentially read all the addresses stored in the `all_addresses` variable and return them as an `Array<ContractAddress>`.
+
+```rust, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:get_addresses}}
+```
+
 ## Storage Nodes
 
 A storage node is a special kind of struct that can contain storage-specific types, such as `Map` or `Vec`, as members. Unlike regular structs, storage nodes can only exist within contract storage and cannot be instantiated or used outside of it.

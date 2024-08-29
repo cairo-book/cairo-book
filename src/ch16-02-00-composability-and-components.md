@@ -206,7 +206,6 @@ Components can even [depend][component dependencies] on other components by rest
 `TContractstate` they're generic on to implement the trait of another component.
 Before we dive into this mechanism, let's first look at [how components work under the hood][components inner working].
 
-
 [OpenZeppelin Cairo Contracts]: https://github.com/OpenZeppelin/cairo-contracts
 [component dependencies]: ./ch16-02-02-component-dependencies.md
 [components inner working]: ./ch16-02-01-under-the-hood.md
