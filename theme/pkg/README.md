@@ -84,6 +84,30 @@ Compile Contract
 * [`Cairo`](https://github.com/starkware-libs/cairo) for Cairo-lang support.
 * `LICENSE-APACHE` and `LICENSE-MIT`: most Rust projects are licensed this way, so these are included for you
 
+## Cairo-Specific Syntax Highlighting
+
+### Feature: Cairo-Specific Syntax Highlighting
+
+#### Overview
+
+This update introduces syntax highlighting tailored specifically for the Cairo programming language, replacing the existing Rust syntax highlighting.
+
+#### Changes Implemented
+
+1. **Highlight.js Replacement:**
+   - The entire `highlight.js` file was replaced with Cairo syntax highlighting code, approximately 10,000 lines of code, to ensure accurate and specific syntax highlighting for Cairo.
+   
+2. **Syntax Registration:**
+   - The Cairo language was registered in the highlight configuration file.
+   
+3. **Global Replacement:**
+   - A find-and-replace operation was performed to change all instances of ```rust``` to ```cairo``` in the codebase, ensuring that Cairo syntax highlighting is applied universally where needed.
+
+#### Impact
+
+- Documentation: No changes were made to the documentation files. The Cairo-specific highlighting now ensures that code snippets written in Cairo are accurately highlighted, improving readability and consistency throughout the project.
+- Ensured there are no regressions or issues related to the new syntax highlighting.
+
 ## License
 
 * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
