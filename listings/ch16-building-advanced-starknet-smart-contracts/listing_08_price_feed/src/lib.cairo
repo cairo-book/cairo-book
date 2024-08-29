@@ -11,9 +11,7 @@ pub trait IPriceFeedExample<TContractState> {
 //ANCHOR: here
 #[starknet::contract]
 mod PriceFeedExample {
-    use core::starknet::storage::{
-        StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess
-    };
+    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
     use super::{ContractAddress, IPriceFeedExample};
     //ANCHOR: pragma_lib
     use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
