@@ -221,6 +221,16 @@ When we run this code, we’ll see the same output as in Listing {{#ref iter-whi
 
 Using the `for` loop, you wouldn’t need to remember to change any other code if you changed the number of values in the array, as you would with the method used in Listing {{#ref iter-while}}.
 
+The safety and conciseness of `for` loops make them the most commonly used loop construct in Cairo. Even in situations in which you want to run some code a certain number of times, as in the countdown example that used a while loop in Listing {{#ref while-true}}. Another way to run code a certain number of times would be to use a `Range`, provided by the core library, which generates all numbers in sequence starting from one number and ending before another number.
+
+Here’s how you can use a `Range` to count from 1 to 3:
+
+```rust
+{{#include ../listings/ch02-common-programming-concepts/no_listing_47_for_range/src/lib.cairo}}
+```
+
+This code is a bit nicer, isn’t it?
+
 {{#quiz ../quizzes/ch02-05-control-flow.toml}}
 
 ## Equivalence Between Loops and Recursive Functions

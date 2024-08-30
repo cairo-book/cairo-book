@@ -7,7 +7,6 @@ pub struct ErrorSets {
     pub run_errors: HashSet<String>,
     pub test_errors: HashSet<String>,
     pub format_errors: HashSet<String>,
-    pub starknet_errors: HashSet<String>,
 }
 
 impl ErrorSets {
@@ -17,7 +16,6 @@ impl ErrorSets {
             run_errors: HashSet::new(),
             test_errors: HashSet::new(),
             format_errors: HashSet::new(),
-            starknet_errors: HashSet::new(),
         }
     }
 
