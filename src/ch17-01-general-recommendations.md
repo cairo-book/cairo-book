@@ -37,7 +37,7 @@ These validations can include:
 
 For example, you could use the `assert!` macro to validate that a user has enough funds to perform a withdraw transaction. If the condition is not met, the transaction will fail and the state of the contract will not change.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch17-starknet-smart-contracts-security/no_listing_01_assert_balance/src/lib.cairo:withdraw}}
 ```
 
@@ -63,6 +63,6 @@ Access control is the process of restricting access to certain features or resou
 
 You can implement the access control pattern to easily manage permissions. This pattern consists of defining a set of roles and assigning them to specific users. Each function can then be restricted to specific roles.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch17-starknet-smart-contracts-security/no_listing_02_simple_access_control/src/lib.cairo}}
 ```

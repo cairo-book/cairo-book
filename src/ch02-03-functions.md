@@ -9,7 +9,7 @@ Cairo code uses _snake case_ as the conventional style for function and variable
 names, in which all letters are lowercase and underscores separate words.
 Here’s a program that contains an example function definition:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_15_functions/src/lib.cairo}}
 ```
 
@@ -48,7 +48,7 @@ function.
 
 In this version of `another_function` we add a parameter:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_16_single_param/src/lib.cairo}}
 ```
 
@@ -71,7 +71,7 @@ more helpful error messages if it knows what types the function expects.
 When defining multiple parameters, separate the parameter declarations with
 commas, like this:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_17_multiple_params/src/lib.cairo}}
 ```
 
@@ -95,7 +95,7 @@ If you want to use named parameters, you need to specify the name of the paramet
 
 Here is an example:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_18_named_parameters/src/lib.cairo}}
 ```
 
@@ -117,7 +117,7 @@ We’ve actually already used statements and expressions. Creating a variable an
 assigning a value to it with the `let` keyword is a statement. In Listing {{#ref fn-main}},
 `let y = 6;` is a statement.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_19_statement/src/lib.cairo}}
 ```
 
@@ -129,7 +129,7 @@ Function definitions are also statements; the entire preceding example is a stat
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo}}
 ```
 
@@ -155,13 +155,13 @@ Calling a function is an expression since it always evaluates to a value: the fu
 
 A new scope block created with curly brackets is an expression, for example:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_21_blocks_are_expressions/src/lib.cairo:all}}
 ```
 
 This expression:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch02-common-programming-concepts/no_listing_21_blocks_are_expressions/src/lib.cairo:block_expr}}
 ```
 
@@ -183,7 +183,7 @@ function by using the `return` keyword and specifying a value, but most
 functions return the last expression implicitly. Here’s an example of a
 function that returns a value:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_values/src/lib.cairo}}
 ```
 
@@ -202,7 +202,7 @@ first, the line `let x = five();` shows that we’re using the return value of a
 function to initialize a variable. Because the function `five` returns a `5`,
 that line is the same as the following:
 
-```rust, noplayground
+```cairo, noplayground
 let x = 5;
 ```
 
@@ -211,7 +211,7 @@ return value, but the body of the function is a lonely `5` with no semicolon
 because it’s an expression whose value we want to return.
 Let’s look at another example:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_23_function_return_values_2/src/lib.cairo}}
 ```
 
@@ -219,7 +219,7 @@ Running this code will print `x = 6`. But if we place a
 semicolon at the end of the line containing `x + 1`, changing it from an
 expression to a statement, we’ll get an error:
 
-```rust,does_not_compile
+```cairo,does_not_compile
 {{#include ../listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo}}
 ```
 

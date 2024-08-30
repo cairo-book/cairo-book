@@ -20,7 +20,7 @@ Deriving `Clone` implements the `clone` method, which, in turn, calls clone on e
 
 Here is a simple example:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_01_clone/src/lib.cairo}}
 ```
 
@@ -28,7 +28,7 @@ The `Copy` trait allows for the duplication of values. You can derive `Copy` on 
 
 Example:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_02_copy/src/lib.cairo}}
 ```
 
@@ -40,7 +40,7 @@ It allows you to print instances of a type for debugging purposes, so you and ot
 
 For example, if you want to print the value of a variable of type `Point`, you can do it as follows:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_03_debug/src/lib.cairo}}
 ```
 
@@ -59,7 +59,7 @@ If you want to derive `Default` on a composite type, each of its elements must a
 
 An example:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_07_default/src/lib.cairo}}
 ```
 
@@ -71,7 +71,7 @@ When `PartialEq` is derived on structs, two instances are equal only if all thei
 
 You can write your own implementation of the `PartialEq` trait for your type, if you can't derive it or if you want to implement your custom rules. In the following example, we write an implementation for `PartialEq` in which we consider that two rectangles are equal if they have the same area:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_04_implpartialeq/src/lib.cairo}}
 ```
 
@@ -79,7 +79,7 @@ The `PartialEq` trait is required when using the `assert_eq!` macro in tests, wh
 
 Here is an example:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_05_partialeq/src/lib.cairo}}
 ```
 
@@ -91,7 +91,7 @@ Here is an example:
 
 For example:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_06_serialize/src/lib.cairo}}
 
 ```
@@ -108,7 +108,7 @@ Also, we can use the `deserialize` function to convert the serialized array back
 
 Here is an example:
 
-```rust
+```cairo
 {{#include ../listings/appendix/listing_07_deserialize/src/lib.cairo}}
 ```
 

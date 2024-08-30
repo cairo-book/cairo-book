@@ -13,7 +13,7 @@ At this point, you should have multiple questions that come to mind:
 
 Luckily, we'll be answering all these questions in this chapter. Let's consider the `NameRegistry` contract in Listing {{#ref reference-contract}} that we'll be using throughout this chapter:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:all}}
 ```
 

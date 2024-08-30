@@ -7,7 +7,7 @@ Components are a generic construct, meant to be integrated in contracts, that ca
 
 Let's consider that we want to test a very simple component called "Counter", that will allow each contract to have a counter that can be incremented. The component is defined in Listing {{#ref test_component}}:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/counter.cairo:component}}
 ```
 
@@ -20,7 +20,7 @@ The easiest way to test a component is to integrate it within a mock contract. T
 
 We can define such a mock contract as follows:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/lib.cairo:mock_contract}}
 ```
 
@@ -28,13 +28,13 @@ This contract is entirely dedicated to testing the `Counter` component. It embed
 
 We also need to define an interface that will be required to interact externally with this mock contract.
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/counter.cairo:interface}}
 ```
 
 We can now write tests for the component by deploying this mock contract and calling its entry points, as we would with a typical contract.
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/tests_deployed.cairo}}
 ```
 
@@ -48,7 +48,7 @@ Let's see how we can do that by using type aliases. We still need to define a mo
 
 First, we need to define a concrete implementation of the generic `ComponentState` type using a type alias. We will use the `MockContract::ContractState` type to do so.
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/tests_direct.cairo:type_alias}}
 ```
 
@@ -68,7 +68,7 @@ Let's summarize what we've done so far:
 
 We can now write tests for the component by calling its functions directly, without having to deploy a mock contract. This approach is more lightweight than the previous one, and it allows testing internal functions of the component that are not exposed to the outside world trivially.
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_04_test_component/src/tests_direct.cairo:test}}
 ```
 

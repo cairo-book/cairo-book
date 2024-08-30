@@ -4,7 +4,7 @@
 
 The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing {{#ref config_max}} that matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_14_if_let_match_one/src/lib.cairo:match}}
 ```
 
@@ -21,7 +21,7 @@ add.
 Instead, we could write this in a shorter way using `if let`. The following
 code behaves the same as the `match` in Listing {{#ref config_max}}:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_15_if_let/src/lib.cairo:here}}
 ```
 
@@ -49,13 +49,13 @@ where the `Quarter` variant also held a `UsState` value. If we wanted to count
 all non-quarter coins we see while also announcing the state of the quarters,
 we could do that with a `match` expression, like this:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_16_if_let_coiner_match/src/lib.cairo:here}}
 ```
 
 Or we could use an `if let` and `else` expression, like this:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_17_if_let_coiner/src/lib.cairo:here}}
 ```
 
@@ -66,7 +66,7 @@ express using `match`, remember that `if let` is in your Cairo toolbox as well.
 
 The `while let` syntax is similar to the `if let` syntax, but it allows you to loop over a collection of values and execute a block of code for each value that matches a specified pattern. In the case below, the pattern is `Option::Some(x)`, which matches any `Some` variant of the `Option` enum.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_18_while_let/src/lib.cairo}}
 ```
 

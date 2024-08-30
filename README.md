@@ -132,7 +132,7 @@ Cairo program:
 
 To specify which tests to run, you can add a comment at the top of your file with the following format:
 
-```rust
+```cairo
 // TAG: <tag1>
 // TAGS: <tag1>, <tag2>
 ```
