@@ -2,20 +2,20 @@
 
 Events are custom data structures that are emitted by smart contracts during execution. They provide a way for smart contracts to communicate with the external world by logging information about specific occurrences in a contract.
 
-Events play a crucial role in the integration of smart contracts in real-world applications. Take, for instance, the Non-Fungible Tokens (NFTs) minted on Starknet. An event is emitted each time a token is minted. This event is indexed and stored in some database, allowing applications to display almost instantaneously useful information to users. If the contract doesn't emit an event when minting a new token, it would be less practical, with the need of querying the state of the blockchain to get the data needed. 
+Events play a crucial role in the integration of smart contracts in real-world applications. Take, for instance, the Non-Fungible Tokens (NFTs) minted on Starknet. An event is emitted each time a token is minted. This event is indexed and stored in some database, allowing applications to display almost instantaneously useful information to users. If the contract doesn't emit an event when minting a new token, it would be less practical, with the need of querying the state of the blockchain to get the data needed.
 
 ## Defining Events
 
 All the different events in a contract are defined under the `Event` enum, which must implement the `starknet::Event` trait. This trait is defined in the core library as follows:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/no_listing_02_event_trait/src/lib.cairo}}
 ```
 
 The `#[derive(starknet::Event)]` attribute causes the compiler to generate an implementation for the above trait,
 instantiated with the `Event` type, which in our example is the following enum:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:event}}
 ```
 
@@ -25,11 +25,11 @@ The auto-implementation of the `starknet::Event` trait will implement the `appen
 
 In our example, the `Event` enum contains only one variant, which is a struct named `StoredName`. We chose to name our variant with the same name as the struct name, but this is not enforced.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:storedname}}
 ```
 
-Whenever an enum that derives the `starknet::Event` trait has an enum variant, this enum is nested by default. Therefore, the list of keys corresponding to the variant’s name will include the `sn_keccak` hash of the variant's name itself. This can be superfluous, typically when using embedded components in contracts. Indeed, in such cases, we might want the events defined in the components to be emitted without any additional data, and it could be useful to annotate the enum variant with the `#[flat]` attribute. By doing so, we allow to opt out of the nested behavior and ignore the variant name in the serialization process. On the other hand, nested events have the benefit of distinguishing between the main contract event and different components events, which might be helpful.  
+Whenever an enum that derives the `starknet::Event` trait has an enum variant, this enum is nested by default. Therefore, the list of keys corresponding to the variant’s name will include the `sn_keccak` hash of the variant's name itself. This can be superfluous, typically when using embedded components in contracts. Indeed, in such cases, we might want the events defined in the components to be emitted without any additional data, and it could be useful to annotate the enum variant with the `#[flat]` attribute. By doing so, we allow to opt out of the nested behavior and ignore the variant name in the serialization process. On the other hand, nested events have the benefit of distinguishing between the main contract event and different components events, which might be helpful.
 
 In our contract, we defined an event named `StoredName` that emits the contract address of the caller and the name stored within the contract, where the `user` field is serialized as a key and the `name` field is serialized as data.
 
@@ -43,7 +43,7 @@ When emitting the event with `self.emit(StoredName { user: user, name: name })`,
 
 After defining events, we can emit them using `self.emit`, with the following syntax:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:emit_event}}
 ```
 

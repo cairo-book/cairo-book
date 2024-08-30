@@ -14,8 +14,8 @@ after = ["links"]
 [preprocessor.gettext]
 after = ["cairo"]
 
-[preprocessor.quiz-cairo]
-after = ["gettext"]
+# [preprocessor.quiz-cairo]
+# after = ["gettext"]
 
 [output.html]
 git-repository-url = "https://github.com/cairo-book/cairo-book.github.io"
@@ -24,6 +24,9 @@ playground.runnable = true
 google-analytics = "G-0ZJLBV4KE2"
 additional-css = ["theme/css/last-changed.css"]
 mathjax-support = true
+
+[output.html.code.hidelines]
+cairo = "#"
 
 [output.html.fold]
 enable = true

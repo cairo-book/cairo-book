@@ -28,7 +28,7 @@ Before we discuss the boxed segment storage use cases for `Box<T>`, we’ll cove
 
 Listing {{#ref basic_box}} shows how to use a box to store a value in the boxed segment:
 
-```rust
+```cairo
 {{#include ../listings/ch11-advanced-features/listing_04_basic_box/src/lib.cairo}}
 ```
 
@@ -47,7 +47,7 @@ Passing pointers between functions allows you to reference data without copying 
 
 Let's take a look at the code in Listing {{#ref box}}, which shows two ways of passing data to a function: by value and by pointer.
 
-```rust
+```cairo
 {{#include ../listings/ch11-advanced-features/listing_05_box/src/lib.cairo}}
 ```
 
