@@ -124,4 +124,4 @@ You can refer to the [Hashes section](ch11-04-hash.md) to get more information a
 
 The `starknet::Store` trait is relevant only when building on [Starknet](ch13-00-introduction-to-starknet-smart-contracts.md). It allows for a type to be used in smart contract storage by automatically implementing the necessary read and write functions.
 
-You can find detailed information about the inner workings of Starknet storage in the [Contract storage section](ch14-01-contract-storage.md).
+You can find detailed information about the inner workings of Starknet storage in the [Contract storage section](ch14-01-00-contract-storage.md).
