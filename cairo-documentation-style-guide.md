@@ -1,4 +1,5 @@
 <!-- omit in toc -->
+
 # Cairo Documentation Style Guide
 
 _Inspired by the [Rust Documentation Style Guide](https://github.com/esp-rs/book/blob/main/rust-doc-style-guide.md#rust-documentation-style-guide)_
@@ -22,6 +23,7 @@ The style guide is based on the best practices collected from the following book
 - [The Rust on ESP Book](https://esp-rs.github.io/book/)
 
 <!-- omit in toc -->
+
 ## Contents of This Style Guide
 
 - [Heading Titles](#heading-titles)
@@ -47,8 +49,7 @@ The style guide is based on the best practices collected from the following book
 
 The Cairo Book usually have heading titles based on nouns or gerunds:
 
-> **Design Patterns**
-> **Using Structs to Structure Related Data**
+> **Design Patterns** > **Using Structs to Structure Related Data**
 
 ### Capitalization
 
@@ -61,16 +62,19 @@ In heading titles, capitalize the first letter of every word **except for**:
 - Coordinating conjunctions (and, but, for, or, nor).
 
   > **Generic Types and Traits**
+
   > **Packages and Crates**
 
 - Prepositions of _four_ letters or less, unless these prepositions are the first or last words. Prepositions of _five_ letters and above should be capitalized (Before, Through, Versus, Among, Under, Between, Without, etc.).
-  
+
   > **Using Structs to Structure Related Data**
+
   > **Components: Under the Hood**
 
 Do not capitalize names of functions, commands, packages, websites, etc.
 
 > **What is `assert`**
+
 > **Bringing Paths into Scope with the `use` Keyword**
 
 See also, the [Using `monospace`](#using-monospace) section.
@@ -78,6 +82,7 @@ See also, the [Using `monospace`](#using-monospace) section.
 In hyphenated words, do not capitalize the parts following the hyphens.
 
 > **Built-in Targets**
+
 > **Allowed-by-default Lints**
 
 ## Linking
@@ -149,8 +154,8 @@ The Cairo Book usually uses the following list formatting:
   > - **MSVC**: Recommended ABI, included in ...
   > - **GNU**: ABI used by the GCC toolchain ...
 
-  -  For an example using bold font, see the list in the [Modules Cheat Sheet](https://book.cairo-lang.org/ch07-02-defining-modules-to-control-scope.html#modules-cheat-sheet) section in The Cairo Programming Language book.
-  -  For an example using monospace font, see the [Appendix A](https://book.cairo-lang.org/appendix-01-keywords.html#strict-keywords) section in The Cairo Book.
+  - For an example using bold font, see the list in the [Modules Cheat Sheet](https://book.cairo-lang.org/ch07-02-defining-modules-to-control-scope.html#modules-cheat-sheet) section in The Cairo Programming Language book.
+  - For an example using monospace font, see the [Appendix A](https://book.cairo-lang.org/appendix-01-keywords.html#strict-keywords) section in The Cairo Book.
 
 ## Using `monospace`
 
@@ -177,7 +182,7 @@ Monospace font can also be used in:
 
 - Links
 
-  > [`String`](./ch02-02-data-types.html#string-types) is a string type provided by ...
+  > [`ByteArray`](./src/ch02-02-data-types.md#byte-array-strings) is a string type provided by ...
 
 - Headings
 
@@ -267,4 +272,3 @@ In markdown:
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 - [Rust Style Guide](https://riptutorial.com/rust/topic/4620/rust-style-guide) (riptutorial.com)
 - [Rust Style Guide](https://github.com/rust-lang/rust/blob/master/src/doc/style-guide/src/principles.md) (github.com/rust-lang)
-
