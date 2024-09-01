@@ -55,7 +55,13 @@ edition = "2024_07"
 # foo = { path = "vendor/foo" }
 ```
 
-As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional _.cairo_ files within the _src_ directory or its subdirectories.
+As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional _.cairo_ files within the _src_ directory or its subdirectories. When doing so, you can use the `crate` keyword to refer to the root of your crate, which helps to keep your module references clear and concise.
+
+For instance, if you have a module `foo` in `src/foo.cairo` and you want to use a function `my_function()` from that module in `lib.cairo`, you would write:
+
+```cairo,noplayground
+crate::foo::my_function();
+```
 
 {{#quiz ../quizzes/ch07-01-packages-crates.toml}}
 
