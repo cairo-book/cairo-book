@@ -20,7 +20,7 @@ Storage variables in Starknet contracts are stored in a special struct called `S
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:storage}}
 ```
 
-The `Storage` struct is a [struct][structs] like any other, except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. This struct can contain any type that implements the `Store` trait, including other structs, enums, as well as [Storage Mappings][storage mappings], [Storage Vectors][storage vecs] and [Storage Nodes][storage nodes]. In this section, we'll focus on simple storage variables, and we'll see how to store more complex types in the next sections.
+The `Storage` struct is a [struct][structs] like any other, except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. This struct can contain any type that implements the `Store` trait, including other structs, enums, as well as [Storage Mappings][storage mappings], [Storage Vectors][storage vecs], and [Storage Nodes][storage nodes]. In this section, we'll focus on simple storage variables, and we'll see how to store more complex types in the next sections.
 
 [storage mappings]: ./ch14-01-01-storage-mappings.md
 [storage vecs]: ./ch14-01-02-storage-vecs.md
@@ -43,7 +43,7 @@ To write a new value to the storage slot of a storage variable, we call the `wri
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:write_owner}}
 ```
 
-When working compound types, instead of calling `read` and `write` on the struct variable itself, which ends up performing a storage operation for each member, you can call `read` and `write` on specific members of the struct. This allows you to access and modify the values of the struct members directly, minimizing the amount of storage operations performed. In the following example, the `owner` variable is of type `Person`. Thus, it has one attribute called `name`, on which we can call the `read` and `write` functions to access and modify the value of the `name` attribute.
+When working compound types, instead of calling `read` and `write` on the struct variable itself, which would perform a storage operation for each member, you can call `read` and `write` on specific members of the struct. This allows you to access and modify the values of the struct members directly, minimizing the amount of storage operations performed. In the following example, the `owner` variable is of type `Person`. Thus, it has one attribute called `name`, on which we can call the `read` and `write` functions to access and modify the value of the `name` attribute.
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:read_owner_name}}
@@ -104,7 +104,7 @@ while the storage layout for the `infinite` would be as follows:
 ## Storage Nodes
 
 A storage node is a special kind of struct that can contain storage-specific types, such as [`Map`][storage mappings], [`Vec`][storage vecs], or other storage nodes, as members. Unlike regular structs, storage nodes can only exist within contract storage and cannot be instantiated or used outside of it.
-You can think of storage nodes as intermediate nodes involved in address calculations in the tree representing the contract's storage space. In the next subsection, we will introduce how this is modeled in the core library.
+You can think of storage nodes as intermediate nodes involved in address calculations within the tree representing the contract's storage space. In the next subsection, we will introduce how this concept is modeled in the core library.
 
 The main benefits of storage nodes is that they allow you to create more sophisticated storage layouts, including mappings or vectors inside custom types, and allow you to logically group related data, improving code readability and maintainability.
 
@@ -136,7 +136,7 @@ The address of a storage variable is computed as follows:
 
 - If the variable is composed of multiple values (i.e., a tuple, a struct or an enum), we also use the `sn_keccak` hash of the ASCII encoding of the variable's name to determine the base address in storage. Then, depending on the type, the storage layout will differ. See the ["Storing Custom Types"][custom types storage layout] section.
 
-- If the variable is part of a [storage node][storage nodes], its address is based on a chain of hashes that reflects the structure of the node. For a storage node member `m` within a storage variable `variable_name`, the path to that member is computed as `h(sn_keccak(variable_name), sn_keccak(m))`, where `h` is the Pedersen hash. This process continues for nested storage nodes, building a chain of hashes that represents the path to a leaf node. Once a leaf node is reached he storage calculation proceeds as it normally would for that type of variable.
+- If the variable is part of a [storage node][storage nodes], its address is based on a chain of hashes that reflects the structure of the node. For a storage node member `m` within a storage variable `variable_name`, the path to that member is computed as `h(sn_keccak(variable_name), sn_keccak(m))`, where `h` is the Pedersen hash. This process continues for nested storage nodes, building a chain of hashes that represents the path to a leaf node. Once a leaf node is reached, the storage calculation proceeds as it normally would for that type of variable.
 
 - If the variable is a [Map][storage mappings] or a [Vec][storage vecs], the address is computed relative to the storage base address, which is the `sn_keccak` hash of the variable's name, and the keys of the mapping or indexes in the Vec. The exact computation is described in the ["Storage Mappings"][storage mappings] and ["Storage Vecs"][storage vecs] sections.
 
@@ -150,14 +150,14 @@ You can access the base address of a storage variable by accessing the `__base_a
 
 This address calculation mechanism is performed through a modelisation of the contract storage space using a concept of StoragePointers and StoragePaths that we'll now introduce.
 
-## Modelisation of the Contract Storage in the Core Library
+## Modeling of the Contract Storage in the Core Library
 
-To understand how storage variables are stored in Cairo, it's important to note that they are not stored contiguously but in different locations in the contract's storage. To easily retrieve these addresses, the core library provides a modelisation of the contract storage through a system of StoragePointers and StoragePaths.
+To understand how storage variables are stored in Cairo, it's important to note that they are not stored contiguously but in different locations in the contract's storage. To facilitate the retrieval of these addresses, the core library provides a model of the contract storage through a system of `StoragePointers` and `StoragePaths`.
 
 Each storage variable can be converted to a `StoragePointer`. This pointer contains two main fields:
 
-- The address to the base storage variable in the contract's storage.
-- The offset, relative to the base address, of the storage slot being pointed to.
+- The base address of the storage variable in the contract's storage.
+- The offset, relative to the base address, of the specific storage slot being pointed to.
 
 An example is worth a thousand words. Let's consider the `Person` struct defined in the previous section:
 
@@ -166,9 +166,9 @@ An example is worth a thousand words. Let's consider the `Person` struct defined
 ```
 
 When we write `let x = self.owner;`, we access a variable of type `StorageBase` that represents the base location of the `owner` variable in the contract's storage.
-From this base address, we can get either get pointers to the struct's fields (like `name` or `address`), or a pointer to the struct itself. On these pointers, we can call `read` and `write`, defined in the `Store` trait, to read and write the values pointed to.
+From this base address, we can either get pointers to the struct's fields (like `name` or `address`) or a pointer to the struct itself. On these pointers, we can call `read` and `write`, defined in the `Store` trait, to read and write the values pointed to.
 
-Of course, all of this is transparent to us. We can read and write to the struct's fields as if we were accessing regular variables, but the compiler translates these accesses into the appropriate `StoragePointer` manipulations under the hood.
+Of course, all of this is transparent to the developer. We can read and write to the struct's fields as if we were accessing regular variables, but the compiler translates these accesses into the appropriate `StoragePointer` manipulations under the hood.
 
 For storage mappings, the process is similar, except that we introduce an intermediate type, `StoragePath`. A `StoragePath` is a chain of storage nodes and struct fields that form a path to a specific storage slot. For example, to access a value contained in a `Map<ContractAddress, u128>`, the process would be the following:
 

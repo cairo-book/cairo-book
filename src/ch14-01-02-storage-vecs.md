@@ -1,14 +1,14 @@
 # Storing Collections with Vectors
 
-The `Vec` type provides a way to store collections of values in the contract's storage. In this section, we will explore how to declare, add elements to, and retrieve elements from a `Vec`, as well as how the storage addresses for `Vec` variables are computed.
+The `Vec` type provides a way to store collections of values in the contract's storage. In this section, we will explore how to declare, add elements to and retrieve elements from a `Vec`, as well as how the storage addresses for `Vec` variables are computed.
 
 The `Vec` type is provided by the Cairo core library, inside the `core::starknet::storage` module. Its associated methods are defined in the `VecTrait` and `MutableVecTrait` traits that you will also need to import for read and write operations on the `Vec` type.
 
-> Unlike the `Array<T>` type, which is a **memory** type that cannot be stored, the `Vec` type is a [phantom type][phantom types] that can only be used as a storage variable. It can't be instantiated, used as a function parameter, or as a regular struct member.
+> The `Array<T>` type is a **memory** type and cannot be directly stored in contract storage. For storage, use the `Vec<T>` type, which is a [phantom type][phantom types] designed specifically for contract storage. However, `Vec<T>` has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. To work with the full contents of a `Vec<T>`, you'll need to copy its elements to and from a memory `Array<T>`.
 
 [phantom types]: ./ch10-02-phantom-data.html#phantom-type-in-generics
 
-## Declaring and Using Storage Mappings
+## Declaring and Using Storage Vectors
 
 To declare a Vec, use the `Vec` type enclosed in angle brackets `<>`, specifying the type of elements it will store. In Listing {{#ref storage-vecs}}, we create a simple contract that registers all the addresses that call it and stores them in a Vec. We can then retrieve the `n`-th registered address, or all registered addresses.
 
@@ -40,7 +40,7 @@ At this point, you should be familiar with the concept of storage pointers and s
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:modify}}
 ```
 
-The answer is failry simple: get a mutable pointer to the storage pointer at the desired index, and use the `write` method to modify the value at that index.
+The answer is fairly simple: get a mutable pointer to the storage pointer at the desired index, and use the `write` method to modify the value at that index.
 
 [contract-storage]: ./ch14-01-00-contract-storage.md
 
@@ -53,8 +53,8 @@ The address in storage of a variable stored in a Vec is computed according to th
 
 ## Summary
 
-- Use the `Vec` type to store collections of values in contract storage.
-- Access Vecs using the `append` method to add elements, and the `at` or `get` methods to read elements.
-- The address of a Vec variable is computed using the `sn_keccak` and the Pedersen hash functions.
+- Use the `Vec` type to store collections of values in contract storage
+- Access Vecs using the `append` method to add elements, and the `at` or `get` methods to read elements
+- The address of a Vec variable is computed using the `sn_keccak` and the Pedersen hash functions
 
 This wraps up our tour of the Contract Storage! In the next section, we'll start looking at the different kind of functions defined in a contract. You already know most of them, as we used them in the previous chapters, but we'll explain them in more detail.
