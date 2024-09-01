@@ -69,4 +69,6 @@ This dice game contract allows players to guess a number between 1 & 6 during an
 
 After deploying your contract that includes Pragma VRF functionalities, ensure it holds sufficient ETH to cover the expenses related to requesting random values. Pragma VRF requires payment for both generating the random numbers and executing the callback function defined in your contract.
 
-For more information, please refer to the [Pragma](https://docs.pragma.build/Resources/Cairo%201/randomness/randomness) docs.
+For more information, please refer to the [Pragma][pragma] docs.
+
+[pragma]: https://docs.pragma.build/Resources/Starknet/randomness/randomness

@@ -23,7 +23,7 @@ To effectively break down the concepts involved, we will use the `ERC20` interfa
 
 [interfaces]: ./ch13-02-anatomy-of-a-simple-contract.md#the-interface-the-contracts-blueprint
 [syscalls]: ./appendix-08-system-calls.md
-[library dispatcher]: ./ch15-03-executing-code-from-another-class
+[library dispatcher]: ./ch15-03-executing-code-from-another-class.md
 
 ## The Dispatcher Pattern
 
