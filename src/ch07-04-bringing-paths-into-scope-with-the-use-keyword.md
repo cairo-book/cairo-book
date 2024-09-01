@@ -36,9 +36,9 @@ The compiler error shows that the shortcut no longer applies within the `custome
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/output.txt}}
 ```
 
-## Creating Idiomatic `use` Paths
+## Creating Idiomatic `use` Paths with `crate`
 
-In Listing {{#ref use-keyword}}, you might have wondered why we specified `use restaurant::front_of_house::hosting`
+In Listing {{#ref use-keyword}}, you might have wondered why we specified `use crate::front_of_house::hosting`
 and then called `hosting::add_to_waitlist` in `eat_at_restaurant` rather than specifying the `use` path all the way out to
 the `add_to_waitlist` function to achieve the same result, as in Listing {{#ref unidiomatic-use}}.
 
@@ -133,9 +133,9 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 <span class="caption">Listing {{#ref reexporting}}: Making a name available for any code to use from a new scope with `pub use`</span>
 
 Before this change, external code would have to call the `add_to_waitlist`
-function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`.
+function by using the path `crate::front_of_house::hosting::add_to_waitlist()`.
 Now that this `pub use` has re-exported the `hosting` module from the root module, external code
-can now use the path `restaurant::hosting::add_to_waitlist()` instead.
+can now use the path `crate::hosting::add_to_waitlist()` instead.
 
 Re-exporting is useful when the internal structure of your code is different
 from how programmers calling your code would think about the domain. For

@@ -7,7 +7,7 @@ mod front_of_house {
     }
 }
 
-use restaurant::front_of_house::hosting;
+use crate::front_of_house::hosting;
 
 mod customer {
     pub fn eat_at_restaurant() {
