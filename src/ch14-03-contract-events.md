@@ -37,7 +37,7 @@ Indexing events fields allows for more efficient queries and filtering of events
 
 When emitting the event with `self.emit(StoredName { user: user, name: name })`, a key corresponding to the name ` StoredName`, specifically `sn_keccak(StoredName)`, is appended to the keys list. `user`is serialized as key, thanks to the `#[key]` attribute, while address is serialized as data. After everything is processed, we end up with the following keys and data: `keys = [sn_keccak("StoredName"),user]` and `data = [name]`.
 
-[serde appendix]: ./appendix-03-derivable-traits.html#serializing-with-serde
+[serde appendix]: ./appendix-03-derivable-traits.md#serializing-with_serde
 
 ## Emitting Events
 

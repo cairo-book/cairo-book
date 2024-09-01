@@ -59,4 +59,4 @@ The `buy_item` function is the main entry point for a user to purchase an item. 
 
 The `get_asset_price` function is the entry point to interact with the Pragma oracle and has been explained in the section above.
 
-You can get a detailed guide on consuming data using Pragma price feeds [here](https://docs.pragma.build/Resources/Cairo%201/data-feeds/consuming-data).
+You can get a detailed guide on consuming data using Pragma price feeds on their [documentation](https://docs.pragma.build/Resources/Starknet/data-feeds/consuming-data).

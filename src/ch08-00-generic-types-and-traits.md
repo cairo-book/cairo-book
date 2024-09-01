@@ -10,7 +10,7 @@ Generics allow us to replace specific types with a placeholder that represents m
 
 Then you’ll learn how to use traits to define behavior in a generic way. You can combine traits with generic types to constrain a generic type to accept only those types that have a particular behavior, as opposed to just any type.
 
-[option enum]: ./ch06-01-enums.html#the-option-enum-and-its-advantages
+[option enum]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
 
 ## Removing Duplication by Extracting a Function
 

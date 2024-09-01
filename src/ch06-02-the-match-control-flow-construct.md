@@ -54,7 +54,7 @@ Because `state` is an `UsState` enum which implements the `Debug` trait, we can 
 
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
 
-[debug trait]: ./appendix-03-derivable-traits.html#debug-for-printing-and-debugging
+[debug trait]: ./appendix-03-derivable-traits.md#debug-for-printing-and-debugging
 
 ## Matching with `Option<T>`
 
