@@ -1,7 +1,7 @@
 # Defining Modules to Control Scope
 
 In this section, we’ll talk about modules and other parts of the module system,
-namely _paths_ that allow you to name items, the `crate` and the `use` keyword that brings a
+namely _paths_ that allow you to name items and the `use` keyword that brings a
 path into scope. 
 
 First, we’re going to start with a list of rules for easy reference when you’re
