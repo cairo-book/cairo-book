@@ -34,7 +34,17 @@ To retrieve an element, you can use the `at` or `get` methods to get a storage p
 If you want to retrieve all the elements of the Vec, you can iterate over the indices of the storage `Vec`, read the value at each index, and append it to a memory `Array<T>`.
 Similarly, you can't store an `Array<T>` in storage: you would need to iterate over the elements of the array and append them to a storage `Vec<T>`.
 
-## Address Computation for Vecs
+At this point, you should be familiar with the concept of storage pointers and storage paths introduced in the ["Contract Storage"][contract-storage] section and how they are used to access storage variables through a pointer-based model. Thus how would you modify the address stored at a specific index of a Vec?
+
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:modify}}
+```
+
+The answer is failry simple: get a mutable pointer to the storage pointer at the desired index, and use the `write` method to modify the value at that index.
+
+[contract-storage]: ./ch14-01-00-contract-storage.md
+
+## Storage Address Computation for Vecs
 
 The address in storage of a variable stored in a Vec is computed according to the following rules:
 
@@ -46,3 +56,5 @@ The address in storage of a variable stored in a Vec is computed according to th
 - Use the `Vec` type to store collections of values in contract storage.
 - Access Vecs using the `append` method to add elements, and the `at` or `get` methods to read elements.
 - The address of a Vec variable is computed using the `sn_keccak` and the Pedersen hash functions.
+
+This wraps up our tour of the Contract Storage! In the next section, we'll start looking at the different kind of functions defined in a contract. You already know most of them, as we used them in the previous chapters, but we'll explain them in more detail.
