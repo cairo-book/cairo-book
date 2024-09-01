@@ -6,7 +6,7 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_03_no_struct/src/lib.cairo:all}}
 ```
 
@@ -23,11 +23,11 @@ This code succeeds in figuring out the area of the rectangle by calling the `are
 
 The issue with this code is evident in the signature of `area`:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_03_no_struct/src/lib.cairo:here}}
 ```
 
-The `area` function is supposed to calculate the area of one rectangle, but the function we wrote has two parameters, and it’s not clear anywhere in our program that the parameters are related. It would be more readable and more manageable to group width and height together. We’ve already discussed one way we might do that in the [Tuple Section of Chapter 2](ch02-02-data-types.html#the-tuple-type).
+The `area` function is supposed to calculate the area of one rectangle, but the function we wrote has two parameters, and it’s not clear anywhere in our program that the parameters are related. It would be more readable and more manageable to group width and height together. We’ve already discussed one way we might do that in the [Tuple Section of Chapter 2](./ch02-02-data-types.md#the-tuple-type).
 
 ## Refactoring with Tuples
 
@@ -35,7 +35,7 @@ Listing {{#ref rectangle-tuple}} shows another version of our program that uses 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_04_w_tuples/src/lib.cairo}}
 ```
 
@@ -52,7 +52,7 @@ We use structs to add meaning by labeling the data. We can transform the tuple w
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_05_w_structs/src/lib.cairo}}
 ```
 
@@ -73,7 +73,7 @@ We've already described how to perform type conversion on in-built types, see [D
 
 Defining a conversion for a custom type using the `Into` trait will typically require specification of the type to convert into, as the compiler is unable to determine this most of the time. However this is a small trade-off considering we get the functionality for free.
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_into/src/lib.cairo}}
 ```
 
@@ -81,7 +81,7 @@ Defining a conversion for a custom type using the `Into` trait will typically re
 
 Defining a conversion for `TryInto` is similar to defining it for `Into`.
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_08_tryinto/src/lib.cairo}}
 ```
 

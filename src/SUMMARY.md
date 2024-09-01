@@ -101,7 +101,6 @@
   - [D - The Cairo Prelude](appendix-04-cairo-prelude.md)
   - [E - Common Error Messages](appendix-05-common-error-messages.md)
   - [F - Useful Development Tools](appendix-06-useful-development-tools.md)
-  - [G - Installing Cairo binaries](appendix-07-cairo-binaries.md)
 
 ---
 

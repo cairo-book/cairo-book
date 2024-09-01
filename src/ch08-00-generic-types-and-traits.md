@@ -10,7 +10,7 @@ Generics allow us to replace specific types with a placeholder that represents m
 
 Then you’ll learn how to use traits to define behavior in a generic way. You can combine traits with generic types to constrain a generic type to accept only those types that have a particular behavior, as opposed to just any type.
 
-[option enum]: ./ch06-01-enums.html#the-option-enum-and-its-advantages
+[option enum]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
 
 ## Removing Duplication by Extracting a Function
 
@@ -18,7 +18,7 @@ Generics allow us to replace specific types with a placeholder that represents m
 
 We begin with a short program that finds the largest number in an array of `u8`:
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_01/src/lib.cairo}}
 ```
 
@@ -26,7 +26,7 @@ We store an array of `u8` in the variable `number_list` and extract the first nu
 
 We've now been tasked with finding the largest number in two different arrays of numbers. To do so, we can choose to duplicate the previous code and use the same logic at two different places in the program, as follows:
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_02/src/lib.cairo}}
 ```
 
@@ -36,7 +36,7 @@ To eliminate this duplication, we’ll create an abstraction by defining a funct
 
 To do that, we extract the code that finds the largest number into a function named `largest`. Then we call the function to find the largest number in the two arrays. We could also use the function on any other array of `u8` values we might have in the future.
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/listing_08_01_extracting_function_03/src/lib.cairo}}
 ```
 

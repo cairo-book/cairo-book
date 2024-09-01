@@ -16,7 +16,7 @@ The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run
 
 Recall that when we created the new `adder` project in the first section of this chapter, we wrote this first test:
 
-```rust
+```cairo
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_01/src/lib.cairo:it_works}}
 ```
 
@@ -28,7 +28,7 @@ There’s debate within the testing community about whether or not private funct
 
 <span class="caption">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_11_test_private_function/src/lib.cairo}}
 ```
 
@@ -62,7 +62,7 @@ Enter the code in Listing {{#ref test_integration}} into the _tests/integration_
 
 <span class="caption">Filename: tests/integration_tests.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/tests/integration_tests.cairo}}
 ```
 
@@ -102,19 +102,19 @@ The different behavior of tests directory files is most noticeable when you have
 
 <span class="caption">Filename: tests/common.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/tests/common.cairo}}
 ```
 
 <span class="caption">Filename: tests/integration_tests.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/tests/integration_tests.cairo}}
 ```
 
 <span class="caption">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/src/lib.cairo}}
 ```
 
@@ -130,7 +130,7 @@ Let's create this _tests/lib.cairo_ file :
 
 <span class="caption">Filename: tests/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/tests/lib.cairo}}
 ```
 
