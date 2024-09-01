@@ -1,8 +1,8 @@
 # Defining Modules to Control Scope
 
 In this section, we’ll talk about modules and other parts of the module system,
-namely _paths_ that allow you to name items and the `use` keyword that brings a
-path into scope.
+namely _paths_ that allow you to name items, the `crate` and the `use` keyword that brings a
+path into scope. 
 
 First, we’re going to start with a list of rules for easy reference when you’re
 organizing your code in the future. Then we’ll explain each of the rules in
@@ -53,13 +53,13 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
 - **Paths to code in modules**: Once a module is part of your crate, you can
   refer to code in that module from anywhere else in that same crate, using the path
   to the code. For example, an `Asparagus` type in the `vegetables` submodule would be found at
-  `backyard::garden::vegetables::Asparagus`.
+  `crate::garden::vegetables::Asparagus`.
 - **Private vs public**: Code within a module is private from its parent modules by default. This means that it may only be
   accessed by the current module and its descendants. To make a module public, declare it with `pub mod` instead of `mod`. To make items within a public module public as well, use `pub` before their declarations. Cairo also provides the `pub(crate)` keyword, allowing an item or module to be only visible within the crate in which the definition is included.
 - **The `use` keyword**: Within a scope, the `use` keyword creates shortcuts to
   items to reduce repetition of long paths. In any scope that can refer to
-  `backyard::garden::vegetables::Asparagus`, you can create a shortcut with
-  `use backyard::garden::vegetables::Asparagus;` and from then on you only need to
+  `crate::garden::vegetables::Asparagus`, you can create a shortcut with
+  `use crate::garden::vegetables::Asparagus;` and from then on you only need to
   write `Asparagus` to make use of that type in the scope.
 
 Here we create a crate named `backyard` that illustrates these rules. The
@@ -98,7 +98,7 @@ Here, `pub mod vegetables;` means the code in *src/garden/vegetables.cairo* 
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
 ```
 
-The line `use garden::vegetables::Asparagus;` lets us bring the `Asparagus` type into scope,
+The line `use crate::garden::vegetables::Asparagus;` lets us bring the `Asparagus` type into scope,
 so we can use it in the `main` function.
 
 Now let’s get into the details of these rules and demonstrate them in action!
