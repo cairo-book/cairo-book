@@ -30,7 +30,7 @@ To declare a mapping, use the `Map` type enclosed in angle brackets `<>`, specif
 {{#label storage-mappings}}
 <span class="caption">Listing {{#ref storage-mappings}}: Declaring a storage mapping in the Storage struct</span>
 
-To read the value corresponding to a key in a mapping, you first need to retrieve the storage pointer associated with this key. This is done by calling the `entry` method on the storage mapping variable, passing in the key as a parameter. Once you have the entry path, you can call the `read` function on it to retrieve the stored value. Listing {{#ref read-write-mapping}} demonstrates how to read and write to a simple storage mapping.
+To read the value corresponding to a key in a mapping, you first need to retrieve the storage pointer associated with this key. This is done by calling the `entry` method on the storage mapping variable, passing in the key as a parameter. Once you have the entry path, you can call the `read` function on it to retrieve the stored value.
 
 ```rust, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:read}}
@@ -58,7 +58,7 @@ In this case, the same principle applies for accessing the stored values. You ne
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_nested_storage_mapping/src/lib.cairo:accesses}}
 ```
 
-## Address Computation for Mappings
+## Storage Address Computation for Mappings
 
 The address in storage of a variable stored in a mapping is computed according to the following rules:
 
@@ -78,5 +78,3 @@ If the key of a mapping is a struct, each element of the struct constitutes a ke
 - Access mappings using the `entry` method and `read`/`write` functions.
 - Mappings can contain other mappings, creating nested storage mappings.
 - The address of a mapping variable is computed using the `sn_keccak` and the Pedersen hash functions.
-
-[storage addresses]: ./ch14-01-00-contract-storage.html#addresses-of-storage-variables
