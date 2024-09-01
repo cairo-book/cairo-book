@@ -70,7 +70,7 @@ Unlike most (if not all) of Starknet's competitors that chose to use the EVM (ei
 Starknet contracts are a special superset of Cairo programs, so the concepts previously learned in this book are still applicable to write Starknet contracts.
 As you may have already noticed, a Cairo program must always have a `main` function that serves as the entry point for this program:
 
-```rust
+```cairo
 fn main() {}
 ```
 

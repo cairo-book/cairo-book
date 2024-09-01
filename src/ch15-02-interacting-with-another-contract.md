@@ -29,7 +29,7 @@ To effectively break down the concepts involved, we will use the `ERC20` interfa
 
 We mentioned that the compiler would automatically generate the dispatcher struct and the dispatcher trait for a given interface. Listing {{#ref expanded-ierc20dispatcher}} shows an example of the generated items for an `IERC20` interface that exposes a `name` view function and a `transfer` external function:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch15-starknet-cross-contract-interactions/listing_02_expanded_ierc20_dispatcher/src/lib.cairo}}
 ```
 
@@ -46,7 +46,7 @@ As you can see, the contract dispatcher is a simple struct that wraps a contract
 
 To illustrate the use of the contract dispatcher, let's create a simple contract that interacts with an ERC20 contract. This wrapper contract will allow us to call the `name` and `transfer_from` functions on the ERC20 contract, as shown in Listing {{#ref contract-dispatcher}}:
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch15-starknet-cross-contract-interactions/listing_03_contract_dispatcher/src/lib.cairo:here}}
 ```
 
@@ -63,7 +63,7 @@ Another way to call other contracts is to directly use the `call_contract_syscal
 
 Listing {{#ref syscalls}} shows an example demonstrating how to call the `transfer_from` function of an `ERC20` contract with a low-level `call_contract_sycall` syscall:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch15-starknet-cross-contract-interactions/listing_06_syscalls/src/lib.cairo}}
 ```
 

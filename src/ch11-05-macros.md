@@ -8,7 +8,7 @@ In some situations, a developer might need to declare a constant that is the res
 
 Here is an example of `consteval_int!`:
 
-```rust,noplayground
+```cairo,noplayground
 const a: felt252 = consteval_int!(2 * 2 * 2);
 ```
 

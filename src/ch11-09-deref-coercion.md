@@ -8,7 +8,7 @@ Deref coercion is implemented via the `Deref` and `DerefMut` traits. When a type
 
 The `Deref` trait in Cairo is defined as follows:
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_09_deref_coercion/src/lib.cairo:Deref}}
 ```
 
@@ -18,13 +18,13 @@ The `Target` type specifies the result of dereferencing, and the `deref` method 
 
 To better understand how deref coercion works, let's look at a practical example. We'll create a simple generic wrapper type around a type `T` called `Wrapper<T>`, and use it to wrap a `UserProfile` struct.
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_example/src/lib.cairo:Wrapper}}
 ```
 
 The `Wrapper` struct wraps a single value generic of type `T`. To simplify access to the wrapped value, we implement the `Deref` trait for `Wrapper<T>`.
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_example/src/lib.cairo:deref}}
 ```
 
@@ -34,7 +34,7 @@ In practice, this mechanism is totally transparent. The following example demons
 an instance of `Wrapper<UserProfile>`, we can print the `username` and `age` fields of the underlying
 `UserProfile` instance.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_example/src/lib.cairo:main}}
 ```
 
@@ -42,13 +42,13 @@ an instance of `Wrapper<UserProfile>`, we can print the `username` and `age` fie
 
 While `Deref` works for both mutable and immutable variables, `DerefMut` will only be applicable to mutable variables. Contrary to what the name might suggest, `DerefMut` does not provide mutable access to the underlying data.
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:derefMut}}
 ```
 
 If you try to use `DerefMut` with an immutable variable, the compiler would throw an error. Here’s an example:
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:error}}
 ```
 
@@ -60,7 +60,7 @@ Compiling this code will result in the following error:
 
 For the above code to work, we need to define `wrapped_profile` as a mutable variable.
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:example}}
 ```
 

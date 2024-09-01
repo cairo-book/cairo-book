@@ -16,7 +16,7 @@ Library calls can be performed using the dispatcher pattern presented in the pre
 
 Listing {{#ref expanded-ierc20-library}} describes the library dispatcher and its associated `IERC20DispatcherTrait` trait and impl using the same `IERC20` example:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch15-starknet-cross-contract-interactions/listing_04_expanded_ierc20_library/src/lib.cairo}}
 ```
 
@@ -33,7 +33,7 @@ Listing {{#ref library-dispatcher}} defines two contracts: `ValueStoreLogic`, wh
 
 We first need to import the `IValueStoreDispatcherTrait` and `IValueStoreLibraryDispatcher` which were generated from our interface by the compiler. Then, we can create an instance of `IValueStoreLibraryDispatcher`, passing in the `class_hash` of the class we want to make library calls to. From there, we can call the functions defined in that class, executing its logic in the context of our contract.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch15-starknet-cross-contract-interactions/listing_05_library_dispatcher/src/lib.cairo}}
 ```
 
@@ -50,7 +50,7 @@ Another way to call classes is to directly use `library_call_syscall`. While les
 
 Listing {{#ref library_syscall}} shows an example demonstrating how to use a `library_call_syscall` to call the `set_value` function of `ValueStore` contract:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch15-starknet-cross-contract-interactions/listing_07_library_syscall/src/lib.cairo}}
 ```
 

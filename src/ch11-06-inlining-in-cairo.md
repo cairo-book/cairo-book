@@ -28,7 +28,7 @@ The more frequently a function is called, the more beneficial inlining becomes i
 
 Let's introduce a short example to illustrate the mechanisms of inlining in Cairo. Listing {{#ref inlining}} shows a basic program allowing comparison between inlined and non-inlined functions.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_03_inlining_example/src/lib.cairo}}
 ```
 
@@ -37,7 +37,7 @@ Let's introduce a short example to illustrate the mechanisms of inlining in Cair
 
 Let's take a look at the corresponding Sierra code to see how inlining works under the hood:
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_03_inlining_example/src/inlining.sierra}}
 ```
 
@@ -55,7 +55,7 @@ The Sierra code statements always match the order of function declarations in th
 
 All statements corresponding to the `main` function are located between lines 0 and 5:
 
-```rust,noplayground
+```cairo,noplayground
 00 function_call<user@main::main::not_inlined>() -> ([0])
 01 felt252_const<1>() -> ([1])
 02 store_temp<felt252>([1]) -> ([1])
@@ -66,7 +66,7 @@ All statements corresponding to the `main` function are located between lines 0 
 
 The `function_call` libfunc is called on line 0 to execute the `not_inlined` function. This will execute the code from lines 9 to 10 and store the return value in the variable with id `0`.
 
-```rust,noplayground
+```cairo,noplayground
 09	felt252_const<2>() -> ([0])
 10	store_temp<felt252>([0]) -> ([0])
 ```
@@ -75,14 +75,14 @@ This code uses a single data type, `felt252`. It uses two library functions - 
 
 After that, Sierra statements from line 1 to 2 are the actual body of the `inlined` function:
 
-```rust,noplayground
+```cairo,noplayground
 06	felt252_const<1>() -> ([0])
 07	store_temp<felt252>([0]) -> ([0])
 ```
 
 The only difference is that the inlined code will store the `felt252_const` value in a variable with id `1`, because `[0]` refers to a variable previously assigned:
 
-```rust,noplayground
+```cairo,noplayground
 01	felt252_const<1>() -> ([1])
 02	store_temp<felt252>([1]) -> ([1])
 ```
@@ -91,7 +91,7 @@ The only difference is that the inlined code will store the `felt252_const` valu
 
 Lines 3 to 5 contain the Sierra statements that will add the values contained in variables with ids `0` and `1`, store the result in memory and return it:
 
-```rust,noplayground
+```cairo,noplayground
 03	felt252_add([1], [0]) -> ([2])
 04	store_temp<felt252>([2]) -> ([2])
 05	return([2])
@@ -103,7 +103,7 @@ Now, let's take a look at the Casm code corresponding to this program to really 
 
 Here is the Casm code for our previous program example:
 
-```rust,noplayground
+```cairo,noplayground
 1	call rel 3
 2	ret
 3	call rel 9
@@ -152,7 +152,7 @@ It is interesting to note that in both Sierra code and Casm code, the `not_inlin
 
 Let's study another program that shows other benefits that inlining may sometimes provide. Listing {{#ref code_removal}} shows a Cairo program that calls 2 functions and doesn't return anything:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_02_inlining/src/lib.cairo}}
 ```
 
@@ -161,7 +161,7 @@ Let's study another program that shows other benefits that inlining may sometime
 
 Here is the corresponding Sierra code:
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_02_inlining/src/inlining.sierra}}
 ```
 
@@ -171,20 +171,20 @@ In this specific case, we can observe that the compiler has applied additional o
 
 In contrast, line 0 uses the `function_call` libfunc to execute the `not_inlined` function normally. This means that all the code from lines 7 to 8 will be executed:
 
-```rust,noplayground
+```cairo,noplayground
 07 felt252_const<133508164995039583817065828>() -> ([0])
 08 store_temp<felt252>([0]) -> ([0])
 ```
 
 This value stored in the variable with id `0` is then dropped on line 1, as it is not used in the `main` function:
 
-```rust,noplayground
+```cairo,noplayground
 01 drop<felt252>([0]) -> ()
 ```
 
 Finally, as the `main` function doesn't return any value, a variable of unit type `()` is created and returned:
 
-```rust,noplayground
+```cairo,noplayground
 02 struct_construct<Unit>() -> ([1])
 03 return([1])
 ```

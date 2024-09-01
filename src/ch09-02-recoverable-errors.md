@@ -6,7 +6,7 @@ Most errors aren’t serious enough to require the program to stop entirely. Som
 
 Recall from [Generic data types][generic enums] section in Chapter 8 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_07_result_enum/src/lib.cairo}}
 ```
 
@@ -18,7 +18,7 @@ The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `O
 
 The `ResultTrait` trait provides methods for working with the `Result<T, E>` enum, such as unwrapping values, checking whether the `Result` is `Ok` or `Err`, and panicking with a custom message. The `ResultTraitImpl` implementation defines the logic of these methods.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_08_result_trait/src/lib.cairo}}
 ```
 
@@ -39,7 +39,7 @@ You can find the implementation of the `ResultTrait` [here][result corelib].
 
 It is always easier to understand with examples. Have a look at this function signature:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_09_result_example/src/lib.cairo:overflow}}
 ```
 
@@ -47,7 +47,7 @@ It takes two `u128` integers, `a` and `b`, and returns a `Result<u128, u128>` wh
 
 Now, we can use this function elsewhere. For instance:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_09_result_example/src/lib.cairo:checked-add}}
 
 ```
@@ -56,7 +56,7 @@ Here, it accepts two `u128` integers, `a` and `b`, and returns an `Option<u128>`
 
 Let's take another example:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:function}}
 ```
 
@@ -64,7 +64,7 @@ In this example, the `parse_u8` function takes a `felt252` and tries to convert 
 
 Our two test cases are:
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:tests}}
 ```
 
@@ -88,7 +88,7 @@ The `?` operator is useful when you want to handle errors implicitly and let the
 
 Here is an example:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/listing_09_02/src/lib.cairo:function}}
 ```
 
@@ -96,7 +96,7 @@ We can see that `do_something_with_parse_u8` function takes a `felt252` value as
 
 And with a little test case:
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch09-error-handling/listing_09_02/src/lib.cairo:tests}}
 ```
 

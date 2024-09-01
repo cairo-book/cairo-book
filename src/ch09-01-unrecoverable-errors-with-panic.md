@@ -8,7 +8,7 @@ Here is how we can call `panic` from inside a program and return the error code 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch09-error-handling/no_listing_01_panic/src/lib.cairo}}
 ```
 
@@ -24,7 +24,7 @@ An alternative and more idiomatic approach to panic in Cairo would be to use the
 
 Let's consider an example:
 
-```rust
+```cairo
 {{#include ../listings/ch09-error-handling/no_listing_02_with_felt252/src/lib.cairo}}
 ```
 
@@ -34,13 +34,13 @@ Executing this program will yield the same error message as before. In that case
 
 `panic!` macro can be really helpful. The previous example returning the error code `2` shows how convenient `panic!` macro is. There is no need to create an array and pass it as an argument like with the `panic` function.
 
-```rust
+```cairo
 {{#include ../listings/ch09-error-handling/no_listing_03_panic_macro/src/lib.cairo}}
 ```
 
 Unlike the `panic_with_felt252` function, using `panic!` allows the input, which is ultimately the panic error, to be a literal longer than 31 bytes. This is because `panic!` takes a string as a parameter. For example, the following line of code will successfully compile:
 
-```rust, noplayground
+```cairo, noplayground
 panic!("the error for panic! macro is not limited to 31 characters anymore");
 ```
 
@@ -50,13 +50,13 @@ You can use the `nopanic` notation to indicate that a function will never panic.
 
 Here is an example:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_04_nopanic/src/lib.cairo}}
 ```
 
 This function will always return `42` and is guaranteed to never panic. Conversely, the following function is not guaranteed to never panic:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:wrong-nopanic}}
 ```
 
@@ -76,7 +76,7 @@ You can use the `panic_with` attribute to mark a function that returns an `Optio
 
 Example:
 
-```rust
+```cairo
 {{#include ../listings/ch09-error-handling/no_listing_06_panic_with/src/lib.cairo}}
 ```
 

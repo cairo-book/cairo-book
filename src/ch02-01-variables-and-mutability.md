@@ -16,7 +16,7 @@ code with the following code, which won’t compile just yet:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,does_not_compile
+```cairo,does_not_compile
 {{#include ../listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/src/lib.cairo}}
 
 ```
@@ -69,7 +69,7 @@ level, the variable is not redeclared so its type cannot change.
 
 For example, let’s change _src/lib.cairo_ to the following:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_02_adding_mut/src/lib.cairo}}
 ```
 
@@ -106,13 +106,13 @@ not the result of a value that could only be computed at runtime.
 
 Here’s an example of constants declaration:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:const_expressions}}
 ```
 
 Nonetheless, it is possible to use the `consteval_int!` macro to create a `const` variable that is the result of some computation:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:consteval_const}}
 ```
 
@@ -144,7 +144,7 @@ variable name to itself until either it itself is shadowed or the scope ends.
 We can shadow a variable by using the same variable’s name and repeating the
 use of the `let` keyword as follows:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_03_shadowing/src/lib.cairo}}
 ```
 
@@ -174,7 +174,7 @@ The only difference is that by shadowing a variable, the compiler will not compl
 if you change its type. For example, say our program performs a type conversion between the
 `u64` and `felt252` types.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_04_shadowing_different_type/src/lib.cairo}}
 ```
 
@@ -183,7 +183,7 @@ Shadowing thus spares us from having to come up with different names, such as `x
 and `x_felt252`; instead, we can reuse the simpler `x` name. However, if we try to use
 `mut` for this, as shown here, we’ll get a compile-time error:
 
-```rust,does_not_compile
+```cairo,does_not_compile
 {{#include ../listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo}}
 ```
 

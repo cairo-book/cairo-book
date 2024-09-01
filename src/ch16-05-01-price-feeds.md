@@ -21,7 +21,7 @@ After adding the required dependencies for your project, you'll need to define a
 
 ### Contract Interface
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_interface}}
 ```
 
@@ -29,7 +29,7 @@ Of the two public functions exposed in the `IPriceFeedExample`, the one necessar
 
 ### Pragma Dependency Import to Contract
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:pragma_lib}}
 ```
 
@@ -37,7 +37,7 @@ The snippet above shows the necessary imports you need to add to your contract m
 
 ### Required Price Feed Function Impl in Contract
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_feed_impl}}
 ```
 
@@ -45,7 +45,7 @@ The `get_asset_price` function is responsible for retrieving the price of the as
 
 ## Example Application Using Pragma Price Feed
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:here}}
 ```
 

@@ -120,7 +120,7 @@ The parameters are as follows:
 
 On the Starknet side, to receive this message, we have:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_handler}}
 ```
 
@@ -135,7 +135,7 @@ When sending messages from Starknet to Ethereum, you will have to use the `send_
 
 To send a message from L2 to L1, what we would do on Starknet is:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_send}}
 ```
 
@@ -178,7 +178,7 @@ If, on L1, we build a message with values above the maximum `felt252`, the messa
 
 So for instance, an actual `uint256` value in Cairo is represented by a struct like:
 
-```rust,does_not_compile
+```cairo,does_not_compile
 struct u256 {
     low: u128,
     high: u128,

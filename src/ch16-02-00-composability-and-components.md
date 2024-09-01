@@ -76,13 +76,13 @@ contract.
 The interface of the Ownable component, defining the methods available
 externally to manage ownership of a contract, would look like this:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:interface}}
 ```
 
 The component itself is defined as:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:component}}
 ```
 
@@ -98,7 +98,7 @@ meant to be used internally by a contract embedding the component.
 
 ## A Closer Look at the `impl` Block
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:impl_signature}}
 ```
 
@@ -179,7 +179,7 @@ ownable_component::Event`).
 For example, to embed the `Ownable` component defined above, we would do the
 following:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/contract.cairo:all}}
 ```
 
@@ -187,7 +187,7 @@ The component's logic is now seamlessly part of the contract! We can interact
 with the components functions externally by calling them using the
 `IOwnableDispatcher` instantiated with the contract's address.
 
-```rust
+```cairo
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:interface}}
 ```
 

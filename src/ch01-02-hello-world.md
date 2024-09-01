@@ -90,7 +90,7 @@ The last line, `[dependencies]`, is the start of a section for you to list any o
 
 The other file created by Scarb is _src/lib.cairo_, let's delete all the content and put in the following content, we will explain the reason later.
 
-```rust,noplayground
+```cairo,noplayground
 mod hello_world;
 ```
 
@@ -98,7 +98,7 @@ Then create a new file called _src/hello_world.cairo_ and put the following code
 
 <span class="filename">Filename: src/hello_world.cairo</span>
 
-```rust,file=hello_world.cairo
+```cairo,file=hello_world.cairo
 fn main() {
     println!("Hello, World!");
 }
@@ -158,7 +158,7 @@ program. That makes you a Cairo programmer — welcome!
 Let’s review this “Hello, world!” program in detail. Here’s the first piece of
 the puzzle:
 
-```rust,noplayground
+```cairo,noplayground
 fn main() {
 
 }
@@ -182,7 +182,7 @@ line as the function declaration, adding one space in between.
 
 The body of the `main` function holds the following code:
 
-```rust,noplayground
+```cairo,noplayground
     println!("Hello, World!");
 ```
 

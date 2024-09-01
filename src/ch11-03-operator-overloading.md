@@ -7,7 +7,7 @@ However, it's essential to use operator overloading judiciously. Misuse can lead
 
 Consider an example where two `Potions` need to be combined. `Potions` have two data fields, mana and health. Combining two `Potions` should add their respective fields.
 
-```rust
+```cairo
 {{#include ../listings/ch11-advanced-features/no_listing_01_potions/src/lib.cairo}}
 ```
 

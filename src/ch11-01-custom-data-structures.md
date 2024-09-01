@@ -9,7 +9,7 @@ This can be frustrating when you want to use a mutable data structure. For
 example, say you're making a game where the players have a level, and they can
 level up. You might try to store the level of the players in an array:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/listing_01_array_collection/src/lib.cairo:array_append}}
 ```
 
@@ -30,7 +30,7 @@ simulate the behavior of mutable data structures. Let's first explore how to cre
 
 Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom _user database_ that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:struct}}
 
 {{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:trait}}
@@ -55,7 +55,7 @@ The only remaining step is to implement each of the methods in `UserDatabaseTrai
 
 The implementation, with all restrictions in place, would be as follows:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:impl}}
 ```
 
@@ -63,13 +63,13 @@ Our database implementation is almost complete, except for one thing: the compil
 Since it has a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to implement the `Destruct<T>` trait manually (refer to the [Ownership](ch04-01-what-is-ownership.md#the-drop-trait) chapter for more information).
 Using `#[derive(Destruct)]` on top of the `UserDatabase<T>` definition won't work because of the use of [Generic types][generics] in the struct definition. We need to code the `Destruct<T>` trait implementation by ourselves:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}
 ```
 
 Implementing `Destruct<T>` for `UserDatabase` was our last step to get a fully functional database. We can now try it out:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:main}}
 ```
 
@@ -89,7 +89,7 @@ It should:
 
 We can define this interface in Cairo like:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:trait}}
 ```
 
@@ -105,13 +105,13 @@ Here is what our struct looks like. We wrap the type `T` inside `Nullable`
 pointer to allow using any type `T` in our data structure, as explained in the
 [Dictionaries][nullable] section:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 
 Since we again have `Felt252Dict<T>` as a struct member, we need to implement the `Destruct<T>` trait to tell the compiler how to make `NullableVec<T>` go out of scope.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:destruct}}
 ```
 
@@ -119,7 +119,7 @@ The key thing that makes this vector mutable is that we can insert values into
 the dictionary to set or update values in our data structure. For example, to
 update a value at a specific index, we do:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:set}}
 ```
 
@@ -132,7 +132,7 @@ The implementation of the rest of the interface is straightforward. The
 implementation of all the methods defined in our interface can be done as follow
 :
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
 ```
 
@@ -157,7 +157,7 @@ Let us define what operations we need to create a stack:
 
 From these specifications we can define the following interface :
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:trait}}
 ```
 
@@ -169,13 +169,13 @@ length of the stack to iterate over it.
 
 The Stack struct is defined as:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:struct}}
 ```
 
 Next, let's see how our main functions `push` and `pop` are implemented.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
 ```
 

@@ -6,7 +6,7 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_01_user_struct/src/lib.cairo:user}}
 ```
 
@@ -21,7 +21,7 @@ For example, we can declare two particular users as shown in Listing {{#ref user
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_01_user_struct/src/lib.cairo:all}}
 ```
 
@@ -32,7 +32,7 @@ To get a specific value from a struct, we use dot notation. For example, to acce
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_02_mut_struct/src/lib.cairo:main}}
 ```
 
@@ -47,7 +47,7 @@ Listing {{#ref build-user}} shows a `build_user` function that returns a `User` 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_02_mut_struct/src/lib.cairo:build_user}}
 ```
 
@@ -62,7 +62,7 @@ Because the parameter names and the struct field names are exactly the same in L
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_02_mut_struct/src/lib.cairo:build_user2}}
 ```
 
@@ -83,7 +83,7 @@ otherwise use the same values from `user1` that we created in Listing {{#ref use
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_without_update_syntax/src/lib.cairo:here}}
 ```
 
@@ -97,7 +97,7 @@ explicitly set should have the same value as the fields in the given instance.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing_update_syntax/src/lib.cairo:here}}
 ```
 

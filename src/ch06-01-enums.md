@@ -6,25 +6,25 @@ Enums, short for "enumerations," are a way to define a custom data type that con
 
 Here's a simple example of an enum:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_01_enum_example/src/lib.cairo:enum_example}}
 ```
 
 In this example, we've defined an enum called `Direction` with four variants: `North`, `East`, `South`, and `West`. The naming convention is to use PascalCase for enum variants. Each variant represents a distinct value of the `Direction` type. In this particular example, variants don't have any associated value. One variant can be instantiated using this syntax:
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_01_enum_example/src/lib.cairo:here}}
 ```
 
 Now let's imagine that our variants have associated values, that store the exact degree of the direction. We can define a new `Direction` enum:
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_with_values_example/src/lib.cairo:enum_example}}
 ```
 
 and instantiate it as follows:
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_02_enum_with_values_example/src/lib.cairo:here}}
 ```
 
@@ -38,7 +38,7 @@ It's easy to write code that acts differently depending on the variant of an enu
 
 Enums can also be used to store more interesting custom data associated with each variant. For example:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:message}}
 ```
 
@@ -54,13 +54,13 @@ You could even use a Struct or another enum you defined inside one of your enum 
 
 In Cairo, you can define traits and implement them for your custom enums. This allows you to define methods and behaviors associated with the enum. Here's an example of defining a trait and implementing it for the previous `Message` enum:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:trait_impl}}
 ```
 
 In this example, we implemented the `Processing` trait for `Message`. Here is how it could be used to process a `Quit` message:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_03_enum_message/src/lib.cairo:main}}
 ```
 
@@ -68,7 +68,7 @@ In this example, we implemented the `Processing` trait for `Message`. Here is ho
 
 The `Option` enum is a standard Cairo enum that represents the concept of an optional value. It has two variants: `Some: T` and `None`. `Some: T` indicates that there's a value of type `T`, while `None` represents the absence of a value.
 
-```rust,noplayground
+```cairo,noplayground
 enum Option<T> {
     Some: T,
     None,
@@ -84,7 +84,7 @@ We are demonstrating two approaches for the above function:
 - Recursive approach with `find_value_recursive`.
 - Iterative approach with `find_value_iterative`.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_04_enum_option/src/lib.cairo}}
 ```
 

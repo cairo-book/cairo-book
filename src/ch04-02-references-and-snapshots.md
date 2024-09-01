@@ -25,7 +25,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch04-understanding-ownership/no_listing_09_snapshots/src/lib.cairo}}
 ```
 
@@ -42,7 +42,7 @@ that we pass `@arr1` into `calculate_length` and, in its definition, we take `@A
 
 Let’s take a closer look at the function call here:
 
-```rust
+```cairo
 let second_length = calculate_length(@arr1); // Calculate the current length of the array
 ```
 
@@ -50,7 +50,7 @@ The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a s
 
 Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:
 
-```rust, noplayground
+```cairo, noplayground
 fn calculate_length(
     array_snapshot: @Array<u128> // array_snapshot is a snapshot of an Array
 ) -> usize {
@@ -69,7 +69,7 @@ Only `Copy` types can be desnapped. However, in the general case, because the va
 
 In the following example, we want to calculate the area of a rectangle, but we don't want to take ownership of the rectangle in the `calculate_area` function, because we might want to use the rectangle again after the function call. Since our function doesn't mutate the rectangle instance, we can pass the snapshot of the rectangle to the function, and then transform the snapshots back into values using the `desnap` operator `*`.
 
-```rust
+```cairo
 {{#include ../listings/ch04-understanding-ownership/no_listing_10_desnap/src/lib.cairo}}
 ```
 
@@ -78,7 +78,7 @@ Listing {{#ref modify-snapshot}}. Spoiler alert: it doesn’t work!
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,does_not_compile
+```cairo,does_not_compile
 {{#include ../listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo}}
 ```
 
@@ -103,7 +103,7 @@ In Cairo, a parameter can be passed as _mutable reference_ using the `ref` modif
 
 In Listing 4-5, we use a mutable reference to modify the value of the `height` and `width` fields of the `Rectangle` instance in the `flip` function.
 
-```rust
+```cairo
 {{#include ../listings/ch04-understanding-ownership/listing_05_mutable_reference/src/lib.cairo}}
 ```
 

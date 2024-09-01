@@ -17,7 +17,7 @@ _src/front_of_house.cairo_ file.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_13_front_extraction/src/lib.cairo:front-extraction}}
 ```
 
@@ -31,7 +31,7 @@ with the name `front_of_house`.
 
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_14_front_definition/src/lib.cairo}}
 ```
 
@@ -56,7 +56,7 @@ declaration of the `hosting` module:
 
 <span class="filename">Filename: src/front_of_house.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 pub mod hosting;
 ```
 
@@ -65,7 +65,7 @@ contain the definitions made in the `hosting` module:
 
 <span class="filename">Filename: src/front_of_house/hosting.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 pub fn add_to_waitlist() {}
 ```
 

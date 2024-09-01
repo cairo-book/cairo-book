@@ -24,7 +24,7 @@ Here is a list of the system calls available in Cairo 1.0:
 
 #### Syntax
 
-```rust
+```cairo
 extern fn get_block_hash_syscall(
     block_number: u64
 ) -> SyscallResult<felt252> implicits(GasBuiltin, System) nopanic;
@@ -51,7 +51,7 @@ Returns the hash of the given block.
 
 #### Syntax
 
-```rust
+```cairo
 extern fn get_execution_info_syscall() -> SyscallResult<Box<starknet::info::ExecutionInfo>> implicits(
     GasBuiltin, System
 ) nopanic;
@@ -79,7 +79,7 @@ Returns a [struct](https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60fa
 
 #### Syntax
 
-```rust
+```cairo
 extern fn call_contract_syscall(
     address: ContractAddress, entry_point_selector: felt252, calldata: Span<felt252>
 ) -> SyscallResult<Span<felt252>> implicits(GasBuiltin, System) nopanic;
@@ -117,7 +117,7 @@ The call response, of type `SyscallResult<Span<felt252>>`.
 
 #### Syntax
 
-```rust
+```cairo
 extern fn deploy_syscall(
     class_hash: ClassHash,
     contract_address_salt: felt252,
@@ -153,7 +153,7 @@ A tuple wrapped with SyscallResult where:
 
 #### Syntax
 
-```rust
+```cairo
 extern fn emit_event_syscall(
     keys: Span<felt252>, data: Span<felt252>
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
@@ -179,7 +179,7 @@ None.
 
 The following example emits an event with two keys, the strings `status` and `deposit` and three data elements: `1`, `2`, and `3`.
 
-```rust
+```cairo
 let keys = ArrayTrait::new();
 keys.append('key');
 keys.append('deposit');
@@ -198,7 +198,7 @@ emit_event_syscall(keys, values).unwrap_syscall();
 
 #### Syntax
 
-```rust
+```cairo
 extern fn library_call_syscall(
     class_hash: ClassHash, function_selector: felt252, calldata: Span<felt252>
 ) -> SyscallResult<Span<felt252>> implicits(GasBuiltin, System) nopanic;
@@ -230,7 +230,7 @@ The call response, of type `SyscallResult<Span<felt252>>`.
 
 #### Syntax
 
-```rust
+```cairo
 extern fn send_message_to_l1_syscall(
     to_address: felt252, payload: Span<felt252>
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
@@ -258,7 +258,7 @@ None.
 
 The following example sends a message whose content is `(1,2)` to the L1 contract whose address is `3423542542364363`.
 
-```rust
+```cairo
 let payload = ArrayTrait::new();
 payload.append(1);
 payload.append(2);
@@ -273,7 +273,7 @@ send_message_to_l1_syscall(payload).unwrap_syscall();
 
 #### Syntax
 
-```rust
+```cairo
 extern fn replace_class_syscall(
     class_hash: ClassHash
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
@@ -305,7 +305,7 @@ None.
 
 #### Syntax
 
-```rust
+```cairo
 extern fn storage_read_syscall(
     address_domain: u32, address: StorageAddress,
 ) -> SyscallResult<felt252> implicits(GasBuiltin, System) nopanic;
@@ -331,7 +331,7 @@ The value of the key, of type `SyscallResult<felt252>`.
 
 #### Example
 
-```rust
+```cairo
 use starknet::storage_access::storage_base_address_from_felt252;
 
 ...
@@ -348,7 +348,7 @@ storage_read_syscall(0, storage_address).unwrap_syscall()
 
 #### Syntax
 
-```rust
+```cairo
 extern fn storage_write_syscall(
     address_domain: u32, address: StorageAddress, value: felt252
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
@@ -382,26 +382,26 @@ None.
 
 #### Syntax
 
-```rust,noplayground
+```cairo,noplayground
 pub extern fn sha256_process_block_syscall(
     state: core::sha256::Sha256StateHandle, input: Box<[u32; 16]>
 ) -> SyscallResult<core::sha256::Sha256StateHandle> implicits(GasBuiltin, System) nopanic;
 ```
 
-#### Description 
+#### Description
 
-Computes the next SHA-256 state of the input with the given state. 
+Computes the next SHA-256 state of the input with the given state.
 
 This syscall computes the next SHA-256 state by combining the current `state` with a 512-bit block of `input` data.
 
 #### Arguments
 
-- _`state`_: The current sha256 state. 
-- _`input`_: The value to be processed into sha256. 
+- _`state`_: The current sha256 state.
+- _`input`_: The value to be processed into sha256.
 
 #### Return Values
 
-Returns a new sha256 state of the `input` data. 
+Returns a new sha256 state of the `input` data.
 
 #### Common Library
 

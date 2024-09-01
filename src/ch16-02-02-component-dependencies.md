@@ -8,7 +8,7 @@ The first way to implement this is to create a single component that contains bo
 
 Listing {{#ref ownable_component}} shows the complete implementation, which we'll break down right after:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:full}}
 ```
 
@@ -19,7 +19,7 @@ Listing {{#ref ownable_component}} shows the complete implementation, which we'l
 
 ### Specifying Dependencies on Another Component
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:component_signature}}
 ```
 
@@ -32,6 +32,7 @@ While this mechanism is verbose and may not be easy to approach at first, it is 
 
 [cairo traits]: ./ch08-02-traits-in-cairo.md
 [component impl]: ch16-02-01-under-the-hood.md#inside-components-generic-impls
+
 [anonymous generic impl operator]: ./ch08-01-generic-data-types md#anonymous-generic-implementation-parameter--operator
 
 ### Using the Dependency
@@ -40,7 +41,7 @@ Now that we have made our `impl` depend on the `Ownable` component, we can acces
 If we want to access the state of the `Ownable` component without mutating it, we use the `get_dep_component!` macro. If we want to mutate the state of the `Ownable` component (for example, change the current owner), we use the `get_dep_component_mut!` macro.
 Both macros take two arguments: the first is `self`, either as a snapshot or by reference depending on mutability, representing the state of the component using the dependency, and the second is the component to access.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:increment}}
 ```
 
@@ -49,7 +50,7 @@ the `assert_only_owner` function from the `Ownable` component. We'll use the `ge
 
 For the `transfer_ownership` function, we want to mutate that state to change the current owner. We need to use the `get_dep_component_mut!` macro, which will return the requested component state as a mutable reference, and call `transfer_ownership` on it.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:transfer_ownership}}
 ```
 

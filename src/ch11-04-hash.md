@@ -27,7 +27,7 @@ The core library makes it easy to work with hashes. The `Hash` trait is implemen
 
 The `Hash` trait is accompanied by the `HashStateTrait` and `HashStateExTrait` that define the basic methods to work with hashes. They allow you to initialize a hash state that will contain the temporary values of the hash after each application of the hash function, update the hash state and finalize it when the computation is completed. `HashStateTrait` and `HashStateExTrait` are defined as follows:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_03_hash_trait/src/lib.cairo:hashtrait}}
 ```
 
@@ -35,7 +35,7 @@ To use hashes in your code, you must first import the relevant traits and functi
 
 The first step is to initialize the hash with either `PoseidonTrait::new() -> HashState` or `PedersenTrait::new(base: felt252) -> HashState` depending on which hash function we want to work with. Then the hash state can be updated with the `update(self: HashState, value: felt252) -> HashState` or `update_with(self: S, value: T) -> S` functions as many times as required. Then the function `finalize(self: HashState) -> felt252` is called on the hash state and it returns the value of the hash as a `felt252`.
 
-```rust
+```cairo
 {{#include ../listings/ch11-advanced-features/no_listing_04_hash_poseidon/src/lib.cairo}}
 ```
 
@@ -43,7 +43,7 @@ Pedersen is different from Poseidon, as it starts with a base state. This base s
 
 Here is a short example of Pedersen hashing:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_04_hash_pedersen/src/lib.cairo:main}}
 ```
 
@@ -54,19 +54,19 @@ To hash a `Span<felt252>` or a struct that contains a `Span<felt252>` you can us
 
 First, let us import the following traits and function:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:import}}
 ```
 
 Now we define the struct. As you might have noticed, we didn't derive the `Hash` trait. If you attempt to derive the `Hash` trait for this struct, it will result in an error because the structure contains a field that is not hashable.
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch11-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:structure}}
 ```
 
 In this example, we initialized a `HashState` (`hash`), updated it and then called the function `finalize()` on the
 `HashState` to get the computed hash `hash_felt252`. We used `poseidon_hash_span` on the `Span` of the `Array<felt252>` to compute its hash.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:main}}
 ```

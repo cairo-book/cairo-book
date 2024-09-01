@@ -132,7 +132,7 @@ function playground_text(playground, hidden = true) {
         .catch(
           (error) =>
             (result_block.innerText =
-              "Playground Communication: " + error.message)
+              "Playground Communication: " + error.message),
         );
     } else {
       window
@@ -149,7 +149,7 @@ function playground_text(playground, hidden = true) {
         .catch(
           (error) =>
             (result_block.innerText =
-              "Playground Communication: " + error.message)
+              "Playground Communication: " + error.message),
         );
     }
   }
@@ -229,14 +229,14 @@ function playground_text(playground, hidden = true) {
     });
 
   if (window.ace) {
-    // language-rust class needs to be removed for editable
+    // language-cairo class needs to be removed for editable
     // blocks or highlightjs will capture events
     code_nodes
       .filter(function (node) {
         return node.classList.contains("editable");
       })
       .forEach(function (block) {
-        block.classList.remove("language-rust");
+        block.classList.remove("language-cairo");
       });
 
     code_nodes
@@ -258,7 +258,7 @@ function playground_text(playground, hidden = true) {
     block.classList.add("hljs");
   });
 
-  Array.from(document.querySelectorAll("code.language-rust")).forEach(
+  Array.from(document.querySelectorAll("code.language-cairo")).forEach(
     function (block) {
       var lines = Array.from(block.querySelectorAll(".boring"));
       // If no lines were hidden, return

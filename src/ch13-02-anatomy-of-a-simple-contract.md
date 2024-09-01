@@ -4,7 +4,7 @@ This chapter will introduce you to the basics of Starknet contracts using a very
 
 Let's consider the following contract for the whole chapter. It might not be easy to understand it all at once, but we will go through it step by step:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:all}}
 ```
 
@@ -22,7 +22,7 @@ You can think of it as a single slot in a database that you can query and modify
 
 ## The Interface: the Contract's Blueprint
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:interface}}
 ```
 
@@ -41,7 +41,7 @@ On the other hand, the `get` function takes a snapshot of `TContractState`, whic
 
 By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface. For example, Listing {{#ref wrong-impl}} shows a wrong implementation of the `ISimpleStorage` interface, containing a slightly different `set` function that doesn't have the same signature.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:impl}}
 ```
 
@@ -64,7 +64,7 @@ Before we explore things further down, let's define some terminology.
 
 - A _view_ function is a public function that is typically read-only and cannot mutate the state of the contract. However, this limitation is only enforced by the compiler, and not by Starknet itself. We will discuss the implications of this in a later section. `get` is a view function.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:impl}}
 ```
 
@@ -87,13 +87,13 @@ Two methods are commonly used to access or modify the state of a contract:
 
 - `read`, which returns the value of a storage variable. This method is called on the variable itself and does not take any argument.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:read_state}}
 ```
 
 - `write`, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that `write` may take more than one argument, depending on the type of the storage variable. For example, writing on a mapping requires 2 arguments: the key and the value to be written.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:write_state}}
 ```
 

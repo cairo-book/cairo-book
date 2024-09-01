@@ -24,7 +24,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
 
   - Inline, within curly brackets that replace the semicolon following `mod garden`.
 
-    ```rust,noplayground
+    ```cairo,noplayground
       // crate root file (src/lib.cairo)
       mod garden {
           // code defining the garden module goes here
@@ -41,7 +41,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
   - Inline, directly following `mod vegetables`, within curly brackets instead
     of the semicolon.
 
-    ```rust,noplayground
+    ```cairo,noplayground
     // src/garden.cairo file
     mod vegetables {
         // code defining the vegetables submodule goes here
@@ -79,7 +79,7 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo:crate}}
 ```
 
@@ -88,13 +88,13 @@ This line tells the compiler to include the code it finds in _src/garden.cairo_,
 
 <span class="filename">Filename: src/garden.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 pub mod vegetables;
 ```
 
 Here, `pub mod vegetables;` means the code in *src/garden/vegetables.cairo* is included too. That code is:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
 ```
 
@@ -129,7 +129,7 @@ define some modules and function signatures. Here’s the front of house section
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_01_basic_nested_modules/src/lib.cairo:front_of_house}}
 ```
 

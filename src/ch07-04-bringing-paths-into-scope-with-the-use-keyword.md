@@ -9,7 +9,7 @@ scope of the `eat_at_restaurant` function so we only have to specify
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_06_use/src/lib.cairo:use}}
 ```
 
@@ -23,7 +23,7 @@ statement, so the function body won’t compile:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:wrong-path}}
 ```
 
@@ -44,7 +44,7 @@ the `add_to_waitlist` function to achieve the same result, as in Listing {{#ref 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_08_unidiomatic_use/src/lib.cairo:unidiomatic-path}}
 ```
 
@@ -61,7 +61,7 @@ unclear as to where `add_to_waitlist` is defined.
 
 On the other hand, when bringing in structs, enums, traits, and other items with `use`, it’s idiomatic to specify the full path. Listing {{#ref idiomatic-use}} shows the idiomatic way to bring the core library’s `BitSize` trait into the scope, allowing to call `bits` method to retrieve the size in bits of a type.
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_09_idiomatic_import/src/lib.cairo}}
 ```
 
@@ -83,7 +83,7 @@ local name, or _alias_, for the type. Listing {{#ref as-keyword}} shows how you 
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_10_as_keyword/src/lib.cairo}}
 ```
 
@@ -101,13 +101,13 @@ to read by avoiding a long list of individual `use` statements.
 
 The general syntax for importing multiple items from the same module is:
 
-```rust
+```cairo
 use module::{item1, item2, item3};
 ```
 
 Here is an example where we import three structures from the same module:
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_11_multiple_items/src/lib.cairo}}
 ```
 
@@ -125,7 +125,7 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_12_pub_use/src/lib.cairo:reexporting}}
 ```
 
@@ -150,14 +150,14 @@ the library and programmers calling the library.
 
 You might need to use external packages to leverage the functionality provided by the community. Scarb allows you to use dependencies by cloning packages from their Git repositories. To use an external package in your project with Scarb, simply declare the Git repository URL of the dependency you want to add in a dedicated `[dependencies]` section in your _Scarb.toml_ configuration file. Note that the URL might correspond to the main branch, or any specific commit, branch or tag. For this, you will have to pass an extra `rev`, `branch`, or `tag` field, respectively. For example, the following code imports the main branch of _alexandria_math_ crate from _alexandria_ package:
 
-```rust
+```cairo
 [dependencies]
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
 ```
 
 while the following code imports a specific branch (which is deprecated and should not be used):
 
-```rust
+```cairo
 [dependencies]
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git", branch = "cairo-v2.3.0-rc0" }
 ```
