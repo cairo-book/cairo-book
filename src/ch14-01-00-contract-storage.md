@@ -3,7 +3,7 @@
 The contract’s storage is a persistent storage space where you can read, write, modify, and persist data. The storage is a map with
 \\(2^{251}\\) slots, where each slot is a `felt252` initialized to 0.
 
-Each storage slot is identified by a `felt252` value, called the storage address, which is computed from the variable's name and parameters that depend on the type of the variable, outlined in the ["Addresses of Storage Variables"][storage addresses] section.
+Each storage slot is identified by a `felt252` value, called the storage address, which is computed from the variable's name and parameters that depend on the variable's type, outlined in the ["Addresses of Storage Variables"][storage addresses] section.
 
 [storage addresses]: ./ch14-01-00-contract-storage.md#addresses-of-storage-variables
 
