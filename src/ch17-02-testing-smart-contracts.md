@@ -7,7 +7,7 @@ While this approach is useful for testing standalone Cairo programs and function
 
 Throughout this chapter, we will be using as an example the `PizzaFactory` contract in Listing {{#ref pizza-factory}} to demonstrate how to write tests with Starknet Foundry.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/pizza.cairo}}
 ```
 
@@ -45,7 +45,7 @@ The usual testing flow of a contract is as follows:
 
 In Listing {{#ref contract-deployment}}, we wrote a function that deploys the `PizzaFactory` contract and sets up the dispatcher for interactions.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:deployment}}
 ```
 
@@ -62,7 +62,7 @@ Determining the behavior that your contract should respect is the first step in 
 
 #### Accessing Storage Variables with `load`
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_constructor}}
 ```
 
@@ -75,7 +75,7 @@ Once our contract is deployed, we want to assert that the initial values are set
 
 The security of our factory relies on the owner being the only one able to make pizzas and transfer ownership. To test this, we can use the `start_cheat_caller_address` function to mock the caller address and assert that the contract behaves as expected.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_owner}}
 ```
 
@@ -88,7 +88,7 @@ Using `start_cheat_caller_address`, we call the `change_owner` function first as
 
 When a pizza is created, the contract emits an event. To test this, we can use the `spy_events` function to capture the emitted events and assert that the event was emitted with the expected parameters. Naturally, we can also assert that the pizza count was incremented, and that only the owner can make a pizza.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_make_pizza}}
 ```
 
@@ -103,7 +103,7 @@ Recall the struct `ContractState`, which is used as a parameter to all the entry
 
 ...and this is exactly what the `contract_state_for_testing` function does! It creates an instance of the `ContractState` struct, allowing us to call any function that takes as parameter a `ContractState` struct, without deploying the contract. To interact with the storage variables properly, we need to manually import the traits that define access to the storage variables.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:import_internal}}
 ```
 

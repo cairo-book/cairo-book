@@ -6,7 +6,7 @@ Think of a `match` expression as being like a coin-sorting machine: coins slide 
 
 Speaking of coins, let’s use them as an example using `match`! We can write a function that takes an unknown US coin and, in a similar way as the counting machine, determines which coin it is and returns its value in cents, as shown in Listing {{#ref match-enum}}.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_05_match_example/src/lib.cairo:all}}
 ```
 
@@ -23,7 +23,7 @@ The code associated with each arm is an expression, and the resultant value of t
 
 We don’t typically use curly brackets if the `match` arm code is short, as it is in our example where each arm just returns a value. If you want to run multiple lines of code in a `match` arm, you must use curly brackets, with a comma following the arm. For example, the following code prints “Lucky penny!” every time the method is called with a `Coin::Penny`, but still returns the last value of the block, `1`:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_06_match_arms_block/src/lib.cairo:here}}
 ```
 
@@ -33,7 +33,7 @@ Another useful feature of `match` arms is that they can bind to the parts of the
 
 As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our `enum` by changing the `Quarter` variant to include a `UsState` value stored inside it, which we’ve done in Listing {{#ref match-pattern-bind}}.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_07_match_pattern_bind/src/lib.cairo:enum_def}}
 ```
 
@@ -44,7 +44,7 @@ Let’s imagine that a friend is trying to collect all 50 state quarters. While 
 
 In the `match` expression for this code, we add a variable called `state` to the pattern that matches values of the variant `Coin::Quarter`. When a `Coin::Quarter` matches, the `state` variable will bind to the value of that quarter’s state. Then we can use `state` in the code for that arm, like so:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_07_match_pattern_bind/src/lib.cairo:function}}
 ```
 
@@ -54,7 +54,7 @@ Because `state` is an `UsState` enum which implements the `Debug` trait, we can 
 
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin` would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each of the match arms, none of them match until we reach `Coin::Quarter(state)`. At that point, the binding for `state` will be the value `UsState::Alaska`. We can then use that binding in `println!` macro, thus getting the inner state value out of the `Coin` enum variant for `Quarter`.
 
-[debug trait]: ./appendix-03-derivable-traits.html#debug-for-printing-and-debugging
+[debug trait]: ./appendix-03-derivable-traits.md#debug-for-printing-and-debugging
 
 ## Matching with `Option<T>`
 
@@ -64,7 +64,7 @@ Let’s say we want to write a function that takes an `Option<u8>` and, if there
 
 This function is very easy to write, thanks to `match`, and will look like Listing {{#ref match-option}}.
 
-```rust
+```cairo
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_08_match_option/src/lib.cairo:all}}
 ```
 
@@ -73,7 +73,7 @@ This function is very easy to write, thanks to `match`, and will look like Listi
 
 Let’s examine the first execution of `plus_one` in more detail. When we call `plus_one(five)`, the variable `x` in the body of `plus_one` will have the value `Some(5)`. We then compare that against each `match` arm:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_08_match_option/src/lib.cairo:option_some}}
 ```
 
@@ -81,13 +81,13 @@ Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! We 
 
 Now let’s consider the second call of `plus_one` in our main function, where `x` is `Option::None`. We enter the `match` and compare to the first arm:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_08_match_option/src/lib.cairo:option_some}}
 ```
 
 The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so we continue to the next arm:
 
-```rust
+```cairo
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_08_match_option/src/lib.cairo:option_none}}
 ```
 
@@ -99,7 +99,7 @@ Combining `match` and enums is useful in many situations. You’ll see this patt
 
 There’s one other aspect of `match` we need to discuss: the arms’ patterns must cover all possibilities. Consider this version of our `plus_one` function, which has a bug and won’t compile:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/src/lib.cairo:here}}
 ```
 
@@ -125,7 +125,7 @@ We want to have a function that processes inserted coins and returns `true` only
 
 Here's a `vending_machine_accept` function that implements this logic:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_10_match_catch_all/src/lib.cairo:here}}
 ```
 
@@ -143,7 +143,7 @@ In `match` expressions, you can match multiple patterns using the `|` syntax, wh
 
 For example, in the following code we modified the `vending_machine_accept` function to accept both `Dime` and `Quarter` coins in a single arm:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_11_match_or/src/lib.cairo:here}}
 ```
 
@@ -152,20 +152,20 @@ For example, in the following code we modified the `vending_machine_accept` func
 It is possible to match tuples.
 Let's introduce a new `DayType` enum:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:enum_def}}
 ```
 
 Now, let's suppose that our vending machine accepts any coin on weekdays, but only accepts quarters and dimes on weekends and holidays.
 We can modify the `vending_machine_accept` function to accept a tuple of a `Coin` and a `Weekday` and return `true` only if the given coin is accepted on the specified day:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:here}}
 ```
 
 Writing `(_, _)` for the last arm of a tuple matching pattern might feel superfluous. Hence, we can use the `_ =>` syntax if we want, for example, that our vending machine only accepts quarters on weekdays:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:week}}
 ```
 
@@ -183,7 +183,7 @@ If you have 0, 1 or 2 you win. If you have 3, you can roll again. For all other 
 
 Here's a match that implements that logic:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_13_match_integers/src/lib.cairo:here}}
 ```
 

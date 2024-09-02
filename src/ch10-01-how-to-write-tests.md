@@ -31,7 +31,7 @@ In _lib.cairo_, let's remove the existing content and add a `tests` module conta
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_01/src/lib.cairo:it_works}}
 ```
 
@@ -60,7 +60,7 @@ It’s possible to mark a test as ignored so it doesn’t run in a particular in
 
 Let’s start to customize the test to our own needs. First change the name of the `it_works` function to a different name, such as `exploration`, like so:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_01/src/lib.cairo:exploration}}
 ```
 
@@ -78,7 +78,7 @@ Now we’ll add another test, but this time we’ll make a test that fails! Test
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_02/src/lib.cairo:exploration-and-another}}
 
 ```
@@ -106,7 +106,7 @@ Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:trait_impl}}
 ```
 
@@ -115,7 +115,7 @@ Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the `assert!` macro. We can write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:test1}}
 ```
 
@@ -133,7 +133,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:test2}}
 ```
 
@@ -148,7 +148,7 @@ Because the correct result of the `can_hold` method, in this case, is `false`, w
 
 Two tests that pass! Now let’s see what happens to our test results when we introduce a bug in our code. We’ll change the implementation of the `can_hold` method by replacing the `>` sign with a `<` sign when it compares the widths:
 
-```rust
+```cairo
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/src/lib.cairo:wrong_impl}}
 ```
 
@@ -190,7 +190,7 @@ parameter, then we test this function using `assert_eq!` and `assert_ne!` macros
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_04/src/add_two.cairo}}
 ```
 
@@ -223,7 +223,7 @@ output of the function is not equal to the input.
 Let’s introduce a bug into our code to see what `assert_eq!` looks like when it
 fails. Change the implementation of the `add_two` function to instead add `3`:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_04/src/wrong_add_two.cairo}}
 ```
 
@@ -244,7 +244,7 @@ Error: test result: FAILED. 1 passed; 1 failed; 0 ignored
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
-message: `` Panicked with "assertion `4 == add_two(2)` failed ``.
+message: ``Panicked with "assertion `4 == add_two(2)` failed``.
 It tells us that the assertion that failed was `` "assertion `left == right` failed`` and the `left`
 and `right` values are printed on the next lines as `left: left_value` and `right: right_value`.
 This helps us start debugging: the `left` argument was `4` but the `right` argument, where we had
@@ -261,7 +261,7 @@ that displays `` assertion failed: `(left == right)` ``.
 
 Here is a simple example comparing two structs, showing how to use `assert_eq!` and `assert_ne!` macros:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_10_assert_eq_ne_macro/src/lib.cairo}}
 ```
 
@@ -287,7 +287,7 @@ Comparisons in tests can be done using the `assert_xx!` macros:
 
 Listing {{#ref assert_macros}} demonstrates how to use these macros:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_08/src/lib.cairo}}
 ```
 
@@ -310,7 +310,7 @@ Let’s add a custom failure message composed of a format
 string with a placeholder filled in with the actual value we got from the
 `add_two` function:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/src/lib.cairo:here}}
 ```
 
@@ -340,7 +340,7 @@ In addition to checking return values, it’s important to check that our code h
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_05/src/lib.cairo:guess}}
 ```
 
@@ -351,7 +351,7 @@ Other code that uses `Guess` depends on the guarantee that `Guess` instances wil
 
 We do this by adding the attribute `should_panic` to our test function. The test passes if the code inside the function panics; the test fails if the code inside the function doesn’t panic.
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_05/src/lib.cairo:test}}
 ```
 
@@ -367,7 +367,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 
 Looks good! Now let’s introduce a bug in our code by removing the condition that the `new` function will panic if the value is greater than `100`:
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/no_listing_03_wrong_new_impl/src/lib.cairo:here}}
 ```
 
@@ -390,7 +390,7 @@ Tests that use `should_panic` can be imprecise. A `should_panic` test would pass
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_06/src/lib.cairo:here}}
 ```
 
@@ -401,7 +401,7 @@ The test will pass because the value we put in the `should_panic` attribute’s 
 
 To see what happens when a `should_panic` test with an expected message fails, let’s again introduce a bug into our code by swapping the bodies of the `if value < 1` and the `else if value > 100` blocks:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:here}}
 ```
 
@@ -427,7 +427,7 @@ To demonstrate how to run a single test, we’ll first create two test functions
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_07/src/lib.cairo}}
 ```
 
@@ -452,7 +452,7 @@ We can also specify part of a test name, and any test whose name contains that v
 
 Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `scarb cairo-test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `#[ignore]` attribute to exclude them, as shown here:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/src/lib.cairo}}
 ```
 
@@ -475,7 +475,7 @@ When you’re at a point where it makes sense to check the results of the ignore
 
 When testing recursive functions or loops, the test is instantiated by default with a maximum amount of gas that it can consume. This prevents running infinite loops or consuming too much gas, and can help you benchmark the efficiency of your implementations. This value is assumed reasonably large enough, but you can override it by adding the `#[available_gas(<Number>)]` attribute to the test function. The following example shows how to use it:
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
 ```
 
@@ -483,7 +483,7 @@ When testing recursive functions or loops, the test is instantiated by default w
 
 When you want to benchmark the gas usage of a specific operation, you can use the following pattern in your test function.
 
-```rust, noplayground
+```cairo, noplayground
 let initial = testing::get_available_gas();
 gas::withdraw_gas().unwrap();
     /// code we want to bench.
@@ -492,7 +492,7 @@ println!("{}\n", initial - testing::get_available_gas());
 
 The following example shows how to use it to test the gas function of the `sum_n` function above.
 
-```rust
+```cairo
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_07_benchmark_gas/src/lib.cairo}}
 ```
 

@@ -24,7 +24,7 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 
 ### Interface
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:interfaces}}
 ```
 
@@ -51,14 +51,14 @@ The function `request_randomness_from_pragma` initiates a request for verifiable
 
 1. `requester_address`: The contract address that initiated the randomness request.
 2. `request_id`: A unique identifier assigned to the randomness request.
-3. `random_words`:  An array (span) of the generated random values (represented as `felt252`).
-4. `calldata`:  Additional data passed along with the initial randomness request.
+3. `random_words`: An array (span) of the generated random values (represented as `felt252`).
+4. `calldata`: Additional data passed along with the initial randomness request.
 
 ### Dice Game Contract
 
 This dice game contract allows players to guess a number between 1 & 6 during an active game window. The contract owner then has the ability to toggle the game window to disable new guesses from players. To determine the winning number, the contract owner calls the `request_randomness_from_pragma` function to request a random number from the Pragma VRF oracle. Once the random number is received through the `receive_random_words` callback function, it is stored in the `last_random_number` storage variable. Each player has to call `process_game_winners` function to determine if they have won or lost. The `last_random_number` generated is then reduced to a number between 1 & 6, and compared to the guesses of the players stored in the `user_guesses` mapping, which leads to the emission of an event `GameWinner` or `GameLost`.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:dice_game}}
 ```
 
@@ -69,4 +69,6 @@ This dice game contract allows players to guess a number between 1 & 6 during an
 
 After deploying your contract that includes Pragma VRF functionalities, ensure it holds sufficient ETH to cover the expenses related to requesting random values. Pragma VRF requires payment for both generating the random numbers and executing the callback function defined in your contract.
 
-For more information, please refer to the [Pragma](https://docs.pragma.build/Resources/Cairo%201/randomness/randomness) docs.
+For more information, please refer to the [Pragma][pragma] docs.
+
+[pragma]: https://docs.pragma.build/Resources/Starknet/randomness/randomness

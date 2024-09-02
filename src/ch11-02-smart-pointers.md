@@ -28,7 +28,7 @@ Before we discuss the boxed segment storage use cases for `Box<T>`, we’ll cove
 
 Listing {{#ref basic_box}} shows how to use a box to store a value in the boxed segment:
 
-```rust
+```cairo
 {{#include ../listings/ch11-advanced-features/listing_04_basic_box/src/lib.cairo}}
 ```
 
@@ -47,7 +47,7 @@ Passing pointers between functions allows you to reference data without copying 
 
 Let's take a look at the code in Listing {{#ref box}}, which shows two ways of passing data to a function: by value and by pointer.
 
-```rust
+```cairo
 {{#include ../listings/ch11-advanced-features/listing_05_box/src/lib.cairo}}
 ```
 
@@ -78,6 +78,6 @@ If we try to access an element that does not exist in a dictionary, the code wil
 
 [Chapter 3.2][dictionary nullable span] about dictionaries thoroughly explains how to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
 
-[dictionary nullable span]: /ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
+[dictionary nullable span]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
 {{#quiz ../quizzes/ch11-02-smart_pointers.toml}}
