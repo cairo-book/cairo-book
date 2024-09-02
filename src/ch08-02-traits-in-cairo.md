@@ -16,7 +16,7 @@ A type’s behavior consists of the methods we can call on that type. Different 
 
 For example, let’s say we have a struct `NewsArticle` that holds a news story in a particular location. We can define a trait `Summary` that describes the behavior of something that can summarize the `NewsArticle` type.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_14_simple_trait/src/lib.cairo:trait}}
 ```
 
@@ -34,7 +34,7 @@ As the trait is not generic, the `self` parameter is not generic either and is o
 
 Now, consider that we want to make a media aggregator library crate named _aggregator_ that can display summaries of data that might be stored in a `NewsArticle` or `Tweet` instance. To do this, we need a summary from each type, and we’ll request that summary by calling a summarize method on an instance of that type. By defining the `Summary` trait on generic type `T`, we can implement the `summarize` method on any type we want to be able to summarize.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:trait}}
 ```
 
@@ -55,7 +55,7 @@ the headline, the author, and the location to create the return value of
 followed by the entire text of the tweet, assuming that tweet content is
 already limited to 280 characters.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:impl}}
 ```
 
@@ -80,7 +80,7 @@ Now that the library has implemented the `Summary` trait on `NewsArticle` and
 difference is that the user must bring the trait into scope as well as the
 types. Here’s an example of how a crate could use our `aggregator` crate:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:main}}
 ```
 
@@ -102,7 +102,7 @@ In Listing {{#ref default_impl}} we specify a default string for the `summarize`
 
 <span class="caption">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_default_impl/src/lib.cairo:trait}}
 ```
 
@@ -113,7 +113,7 @@ To use a default implementation to summarize instances of `NewsArticle`, we spec
 
 Even though we’re no longer defining the `summarize` method on `NewsArticle` directly, we’ve provided a default implementation and specified that `NewsArticle` implements the `Summary` trait. As a result, we can still call the `summarize` method on an instance of `NewsArticle`, like this:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_default_impl/src/lib.cairo:main}}
 ```
 
@@ -123,19 +123,19 @@ Creating a default implementation doesn’t require us to change anything about 
 
 Default implementations can call other methods in the same trait, even if those other methods don’t have a default implementation. In this way, a trait can provide a lot of useful functionality and only require implementors to specify a small part of it. For example, we could define the `Summary` trait to have a `summarize_author` method whose implementation is required, and then define a `summarize` method that has a default implementation that calls the `summarize_author` method:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:trait}}
 ```
 
 To use this version of `Summary`, we only need to define `summarize_author` when we implement the trait on a type:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:impl}}
 ```
 
 After we define `summarize_author`, we can call `summarize` on instances of the `Tweet` struct, and the default implementation of `summarize` will call the definition of `summarize_author` that we’ve provided. Because we’ve implemented `summarize_author`, the `Summary` trait has given us the behavior of the `summarize` method without requiring us to write any more code.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:main}}
 ```
 
@@ -149,8 +149,7 @@ Note that it isn’t possible to call the default implementation from an overrid
 Now that you know how to define and implement traits, we can explore how to use
 traits to define functions that accept many different types. We'll use the
 `Summary` trait we implemented on the `NewsArticle` and `Tweet` types to define a `notify` function that calls the `summarize` method
-on its `item` parameter, which is of some type that implements the `Summary`
-trait. To do this, we use the `impl Trait` syntax. 
+on its `item` parameter, which is of some type that implements the `Summary` trait. To do this, we use the `impl Trait` syntax. 
 
 Instead of a concrete type for the `item` parameter, we specify the `impl`
 keyword and the trait name. This parameter accepts any type that implements the
@@ -169,7 +168,7 @@ If `CircleGeometry` implementation was in a separate module/file named _circle_,
 
 If the code were to be organized into modules like in Listing {{#ref external_trait}} where the implementation of a trait is defined in a different module than the trait itself, explicitly importing the relevant trait or implementation would be required.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_17_generic_traits/src/lib.cairo}}
 ```
 
@@ -182,7 +181,7 @@ Note that in Listing {{#ref external_trait}}, `CircleGeometry` and `RectangleGeo
 
 Implementations can be aliased when imported. This is most useful when you want to instantiate generic implementations with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
 
-```rust,noplayground
+```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_impl_aliases/src/lib.cairo}}
 ```
 
@@ -201,7 +200,7 @@ For example, let's say we have a trait `Producer` and a trait `Consumer`, and we
 
 In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements the `Producer` trait, and two other types, `AnotherType` and `AThirdType`, which do not implement the `Producer` trait. We then use negative impls to create a default implementation of the `Consumer` trait for all types that do not implement the `Producer` trait.
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_18_negative_impl/src/lib.cairo}}
 ```
 

@@ -17,7 +17,7 @@ Starknet natively supports upgradeable contracts through the `replace_class_sysc
 
 To upgrade a contract, expose an entry point that executes `replace_class_syscall` with the new class hash as an argument:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_06_upgrade_with_syscall/src/lib.cairo}}
 ```
 
@@ -30,7 +30,7 @@ To upgrade a contract, expose an entry point that executes `replace_class_syscal
 
 OpenZeppelin Contracts for Cairo provides the `Upgradeable` component that can be embedded into your contract to make it upgradeable. This component is a simple way to add upgradeability to your contract while relying on an audited library. It can be combined with the `Ownable` component to restrict the upgradeability to a single address, so that the contract owner has the exclusive right to upgrade the contract.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_07_oz_upgrade/src/lib.cairo}}
 ```
 

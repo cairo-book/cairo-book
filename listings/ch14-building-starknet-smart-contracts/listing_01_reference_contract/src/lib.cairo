@@ -16,10 +16,9 @@ pub trait INameRegistry<TContractState> {
 
 #[starknet::contract]
 mod NameRegistry {
-    use core::starknet::{ContractAddress, get_caller_address, storage_access};
+    use core::starknet::{ContractAddress, get_caller_address};
     use core::starknet::storage::{
-        Map, StoragePathEntry, StoragePointerReadAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, StoragePointerWriteAccess
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess
     };
 
     //ANCHOR: storage
@@ -169,7 +168,6 @@ mod NameRegistry {
             registration_node.count.write(count + 1);
             //ANCHOR_END: storage_node
 
-            // self.registration_type.entry(user).write(registration_type);
             self.total_names.write(total_names + 1);
 
             //ANCHOR: emit_event

@@ -36,8 +36,7 @@ pub trait IDiceGame<TContractState> {
 #[starknet::contract]
 mod DiceGame {
     use core::starknet::storage::{
-        Map, StoragePathEntry, StoragePointerReadAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, StoragePointerWriteAccess
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess
     };
     use core::starknet::{
         ContractAddress, contract_address_const, get_block_number, get_caller_address,

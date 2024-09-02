@@ -13,7 +13,7 @@ To illustrate this notion let's take back our example Listing {{#ref front_of_ho
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:paths}}
 ```
 
@@ -48,7 +48,7 @@ Let’s return to the previous error that told us the `hosting` module and the `
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_03_pub_keyword/src/lib.cairo}}
 ```
 
@@ -63,7 +63,7 @@ Let’s also make the `add_to_waitlist` function public by adding the `pub` keyw
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_04_pub_compiles/src/lib.cairo}}
 ```
 
@@ -86,7 +86,7 @@ Consider the code in Listing {{#ref relative-path}} that models the situation in
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_05_super/src/lib.cairo}}
 ```
 

@@ -39,10 +39,14 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 3. Clone this repository.
 
-4. Install mdbook-cairo [for Cairo code blocks](#work-locally-cairo-programs-verification)
+4. Install mdbook-cairo to process references and labels, and custom tags.
    ```
    cargo install --path mdbook-cairo
    ```
+
+### Guidelines
+
+Read the [CONTRIBUTING.md](./CONTRIBUTING.md) file for more details on the style guide and guidelines for contributions to the book.
 
 ### Work locally (english, main language)
 
@@ -81,9 +85,10 @@ If you wish to initiate a new translation for your language without running a lo
 - To update your `xx.po` file, execute the command `./translations.sh xx` (replace `xx` with your language code), as mentioned in the previous chapter.
 - If the `xx.po` file already exists (which means you are not initiating a new translation), you should not run this command.
 
-### Work locally (Cairo programs verification)
+### Verifying your Cairo Programs
 
-The `cairo-listings` tool is designed to wrap all Cairo and Starknet plugins for quickly verifying Cairo programs. You can verify that listings are correct with the `verify` argument, and generate the corresponding output with the `output` argument.
+The `cairo-listings` CLI tool is designed to wrap all Cairo and Starknet plugins for quickly verifying Cairo programs. You can verify that listings are correct with the `verify` argument, and generate the corresponding output with the `output` argument.
+Install this tool with:
 
 #### Setup
 
@@ -127,7 +132,7 @@ Cairo program:
 
 To specify which tests to run, you can add a comment at the top of your file with the following format:
 
-```rust
+```cairo
 // TAG: <tag1>
 // TAGS: <tag1>, <tag2>
 ```
