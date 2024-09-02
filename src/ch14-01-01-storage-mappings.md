@@ -52,7 +52,7 @@ The `user_warehouse` mapping is a storage mapping that maps `ContractAddress` to
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_nested_storage_mapping/src/lib.cairo:storage}}
 ```
 
-In this case, the same principle applies for accessing the stored values. You need to traverse the keys step by step, using the `entry` method to get the storage pointer to the next key in the sequence, and finally calling `read` or `write` on the innermost mapping.
+In this case, the same principle applies for accessing the stored values. You need to traverse the keys step by step, using the `entry` method to get the storage path to the next key in the sequence, and finally calling `read` or `write` on the innermost mapping.
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_nested_storage_mapping/src/lib.cairo:accesses}}
