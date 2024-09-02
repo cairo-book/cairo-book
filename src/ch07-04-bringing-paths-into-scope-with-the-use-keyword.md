@@ -2,7 +2,7 @@
 
 Having to write out the paths to call functions can feel inconvenient and repetitive. Fortunately, there’s a way to simplify this process: we can create a shortcut to a path with the `use` keyword once, and then use the shorter name everywhere else in the scope.
 
-In Listing {{#ref use-keyword}}, we bring the `restaurant::front_of_house::hosting` module into the
+In Listing {{#ref use-keyword}}, we bring the `crate::front_of_house::hosting` module into the
 scope of the `eat_at_restaurant` function so we only have to specify
 `hosting::add_to_waitlist` to call the `add_to_waitlist` function in
 `eat_at_restaurant`.
@@ -16,7 +16,7 @@ scope of the `eat_at_restaurant` function so we only have to specify
 {{#label use-keyword}}
 <span class="caption">Listing {{#ref use-keyword}}: Bringing a module into scope with `use`</span>
 
-Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use restaurant::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
+Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use crate::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
 
 Note that `use` only creates the shortcut for the particular scope in which the `use` occurs. Listing {{#ref  use-scope}} moves the `eat_at_restaurant` function into a new child module named `customer`, which is then a different scope than the `use`
 statement, so the function body won’t compile:
@@ -133,9 +133,9 @@ For example, let's re-export the `add_to_waitlist` function in the restaurant ex
 <span class="caption">Listing {{#ref reexporting}}: Making a name available for any code to use from a new scope with `pub use`</span>
 
 Before this change, external code would have to call the `add_to_waitlist`
-function by using the path `crate::front_of_house::hosting::add_to_waitlist()`.
+function by using the path `restaurant::front_of_house::hosting::add_to_waitlist()`.
 Now that this `pub use` has re-exported the `hosting` module from the root module, external code
-can now use the path `crate::hosting::add_to_waitlist()` instead.
+can now use the path `restaurant::hosting::add_to_waitlist()` instead.
 
 Re-exporting is useful when the internal structure of your code is different
 from how programmers calling your code would think about the domain. For
