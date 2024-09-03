@@ -36,7 +36,7 @@ The compiler error shows that the shortcut no longer applies within the `custome
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/output.txt}}
 ```
 
-## Creating Idiomatic `use` Paths with `crate`
+## Creating Idiomatic `use` Paths
 
 In Listing {{#ref use-keyword}}, you might have wondered why we specified `use crate::front_of_house::hosting`
 and then called `hosting::add_to_waitlist` in `eat_at_restaurant` rather than specifying the `use` path all the way out to
