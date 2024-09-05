@@ -143,7 +143,9 @@ Here are some examples of declaring short strings in Cairo:
 
 #### Byte Array Strings
 
-With the `ByteArray` struct added in Cairo 2.4.0, you are not limited to 31 characters anymore. These `ByteArray` strings are written in double quotes like in the following example:
+`ByteArray` strings in Cairo are represented as a combination of an array of byte31 words and a pending `felt252` word. The pending word is a placeholder for words that has not been fully accumulated 31 bytes of data. When the pending word accumulates exactly 31 bytes, it's automatically converted to a byte31. This structure allows for efficient building and manipulation of ByteArrays. The conversion between byte31 and felt252 words are handled internally and is hidden from Cairo developers, who can interact with `ByteArray` as if it were a simple sequence of bytes. 
+
+Unlike short strings, ByteArray strings allow you to write beyond 31 characters and they are written in double quotes:
 
 ```cairo
 {{#rustdoc_include ../listings/ch02-common-programming-concepts/no_listing_10_short_string_type/src/lib.cairo:8:8}}
