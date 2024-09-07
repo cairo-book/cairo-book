@@ -73,7 +73,7 @@ Since `strength` is fixed per character type, associated consts allow us to bind
 
 A potential battle between a `Warrior` and a `Wizard` could look like this:
 
-```cairo, noplayground
+```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:battle}}
 ```
 
