@@ -22,40 +22,40 @@ Associated types are _type aliases_ allowing you to define abstract type placeho
 
 Let's consider the following `CustomAdd` trait:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:AssociatedTypes}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types}}
 ```
 
 The type `Result` is a placeholder, and the method’s definition that follows shows that it will return values of type `Self::Result`. Implementors of the `CustomAdd` trait will specify the concrete type for `Result`, and the next method will return a value of that concrete type.
 
 Let's suppose now that a function `foo<T, U>` needs the ability to add `T` and `U`. If we had defined a `AddGeneric` trait with an additional generic parameter that is used to describe the result, then this trait and one potential implementation using `u32` type for all involved generic types would have looked like this:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:GenericsUsage}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:generics_usage}}
 ```
 
 with `foo` being implemented as follows:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:Foo}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:foo}}
 ```
 
 However, when using associated types, we can get the result type from the impl of `CustomAdd`, and we don’t need to pollute `foo` with an additional generic argument. In the following snippet, we define a `CustomAddImplU32` impl of `CustomAdd<T, U>` trait with `Result` type being a `u32` :
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:AssociatedTypesImpl}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types_impl}}
 ```
 
 with `bar` function corresponding to the `foo` function but using an associated type:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:Bar}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:bar}}
 ```
 
 Finally, we can run `foo`, and `bar` in our `main` and see that they both produce the same result:
 
-```rust
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:Main}}
+```cairo
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:main}}
 ```
 
 The point is that `bar` don't need to use a third generic type for the addition result type, this information is actually associated with the impl of the `CustomAdd` trait.
@@ -65,16 +65,16 @@ The point is that `bar` don't need to use a third generic type for the addition 
 Associated constants are constants associated with a type. They are declared using the `const` keyword and are defined in a trait or implementation.
 In our next example, we are building a game with two character types &mdash; `Wizard` and `Warrior`, and each character type has a constant `strength` attribute. We can model this scenario as follows:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:AssociatedConsts}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:associated_consts}}
 ```
 
 Since `strength` is fixed per character type, associated consts allow us to bind this constant number to the character trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
 
 A potential battle between a `Warrior` and a `Wizard` could look like this:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:Battle}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:battle}}
 ```
 
 ## Associated Implementations
@@ -83,8 +83,8 @@ Associated implementations allow you to declare that a trait implementation must
 
 To understand the utility of associated impls, let's examine the `Iterator` and `IntoIterator` traits from the Cairo core library:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:AssociatedImpl}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:associated_impls}}
 ```
 
 In this example, the `IntoIterator` trait has an associated type `IntoIter` and an associated impl `Iterator: Iterator<Self::IntoIter>`. Let's break down why this is useful:
@@ -100,14 +100,14 @@ This design ensures that any type implementing `IntoIterator` will produce an it
 
 Let's focus on the following example to better grasp the concept of associated impls:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:EniExample}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:example}}
 ```
 
 We define a generic struct `TupleThree<T>`, as well as a generic impl `IndexTupleThree<T, +Copy<T>>` corresponding to the `IndexView` trait form the corelib and that implements a `index` method that matches an index to retrieve the corresponding field value of our `TupleThree<T>` struct.
 
 After that, we define a `TupleThreeTrait` trait that contains a `at_index` method and uses an associated impl `impl IndexImpl: core::ops::IndexView<TupleThree<T>` corresponding to our previously implemented `IndexTupleThree<T, +Copy<T>> ` impl. Finally, we implement our `TupleThreeTrait` trait and will use it in the following `main` function:
 
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:Main}}
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:main}}
 ```

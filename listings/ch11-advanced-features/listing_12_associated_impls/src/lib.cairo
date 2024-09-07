@@ -1,4 +1,4 @@
-// ANCHOR: AssociatedImpl
+// ANCHOR: associated_impls
 // T is the collection type
 pub trait Iterator<T> {
     type Item;
@@ -13,9 +13,9 @@ pub trait IntoIterator<T> {
 
     fn into_iter(self: T) -> Self::IntoIter;
 }
-// ANCHOR_END: AssociatedImpl}
+// ANCHOR_END: associated_impls}
 
-// ANCHOR: EniExample
+// ANCHOR: example
 #[derive(Drop, Copy)]
 struct TupleThree<T> {
     x: T,
@@ -46,9 +46,9 @@ impl TupleThreeTraitImpl<
         return self[index];
     }
 }
-// ANCHOR_END: EniExample
+// ANCHOR_END: example
 
-// ANCHOR: Main
+// ANCHOR: main
 fn main() {
     let tuple = TupleThree { x: 1, y: 2, z: 3 };
 
@@ -60,6 +60,6 @@ fn main() {
     println!("The second element is {}", tuple.at_index(1));
     println!("The third element is {}", tuple.at_index(2));
 }
-// ANCHOR_END: Main
+// ANCHOR_END: main
 
 

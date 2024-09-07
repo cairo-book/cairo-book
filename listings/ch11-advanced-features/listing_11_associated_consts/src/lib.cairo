@@ -1,4 +1,4 @@
-// ANCHOR: AssociatedConsts
+// ANCHOR: associated_consts
 #[derive(Drop)]
 struct Warrior {
     name: felt252,
@@ -29,9 +29,9 @@ impl WarriorCharacter of Character<Warrior, Wizard> {
         enemy.hp -= Self::strength;
     }
 }
-// ANCHOR_END: AssociatedConsts
+// ANCHOR_END: associated_consts
 
-// ANCHOR: Battle
+// ANCHOR: battle
 fn main() {
     let mut warrior = Warrior { name: 'Ares', hp: 1000, };
     let mut wizard = Wizard { name: 'Merlin', hp: 1000, };
@@ -44,6 +44,6 @@ fn main() {
     println!("Ares hp is {}", warrior.hp);
     println!("Merlin hp is {}", wizard.hp);
 }
-// ANCHOR: End
+// ANCHOR: battle
 
 
