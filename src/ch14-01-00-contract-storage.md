@@ -51,7 +51,7 @@ When working with compound types, instead of calling `read` and `write` on the s
 
 ## Storing Custom Types with the `Store` Trait
 
-The `Store` trait, defined in the `starknet::storage_access` module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it **must** implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ByteArray`, `ContractAddress`, etc. implement the `Store` trait and can thus be stored without further action.
+The `Store` trait, defined in the `starknet::storage_access` module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it **must** implement the `Store` trait. Most types from the core library, such as unsigned integers (`u8`, `u128`, `u256`...), `felt252`, `bool`, `ByteArray`, `ContractAddress`, etc. implement the `Store` trait and can thus be stored without further action. However, **memory collections**, such as `Array<T>` and `Felt252Dict<T>`, **cannot** be stored in contract storage - you will have to use the special types `Vec<T>` and `Map<K, V>` instead.
 
 But what if you wanted to store a type that you defined yourself, such as an enum or a struct? In that case, you have to explicitly tell the compiler how to store this type.
 

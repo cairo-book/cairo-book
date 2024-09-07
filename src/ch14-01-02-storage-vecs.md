@@ -13,7 +13,7 @@ The `Vec` type is provided by the Cairo core library, inside the `core::starknet
 To declare a Storage Vector, use the `Vec` type enclosed in angle brackets `<>`, specifying the type of elements it will store. In Listing {{#ref storage-vecs}}, we create a simple contract that registers all the addresses that call it and stores them in a `Vec`. We can then retrieve the `n`-th registered address, or all registered addresses.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:storage_vecs}}
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:contract}}
 ```
 
 {{#label storage-vecs}}
