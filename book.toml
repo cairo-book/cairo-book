@@ -26,7 +26,7 @@ additional-css = ["theme/css/last-changed.css"]
 mathjax-support = true
 
 [output.html.code.hidelines]
-cairo = "#"
+cairo = "# "
 
 [output.html.fold]
 enable = true
