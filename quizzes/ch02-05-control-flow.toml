@@ -57,7 +57,7 @@ prompt.distractors = [
 ]
 context = """
 Cairo supports `loop` and `while` loops that continue execution indefinitely until a break condition is explicitly met or the program runs out of gas.
-The safety and conciseness of for loops make them the most commonly used loop construct in Cairo.
+The safety and conciseness of `for` loops make them the most commonly used loop construct in Cairo.
 """
 
 [[questions]]
