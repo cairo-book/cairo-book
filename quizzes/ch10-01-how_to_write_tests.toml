@@ -99,7 +99,7 @@ id = "0b3385b4-069f-4883-ab3f-6feb8ebf72f8"
 type = "MultipleChoice"
 prompt.prompt = """
 What is the output when these tests are run with the command `scarb cairo-test -f test_`
-```rust
+```
 #[cfg(test)]
 mod tests {
     #[test]

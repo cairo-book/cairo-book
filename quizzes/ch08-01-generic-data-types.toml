@@ -117,7 +117,7 @@ the `address` field uses an undefined type `W`. To fix this, you need to introdu
 type `W` in the struct definition to represent the type of the `address` field.  To fix the code,
 you can modify the struct definition as follows:
 
-```rust
+```
 struct Wallet<T, W> {
     balance: T,
     address: W,
