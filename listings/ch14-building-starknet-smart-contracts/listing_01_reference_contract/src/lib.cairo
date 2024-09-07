@@ -38,14 +38,14 @@ mod NameRegistry {
         StoredName: StoredName,
     }
     //ANCHOR_END: event
-    //ANCHOR: storedname
+    //ANCHOR: stored_name
     #[derive(Drop, starknet::Event)]
     struct StoredName {
         #[key]
         user: ContractAddress,
         name: felt252,
     }
-    //ANCHOR_END: storedname
+    //ANCHOR_END: stored_name
 
     //ANCHOR: person
     #[derive(Drop, Serde, starknet::Store)]
