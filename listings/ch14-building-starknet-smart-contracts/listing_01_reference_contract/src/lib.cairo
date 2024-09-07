@@ -12,15 +12,13 @@ pub trait INameRegistry<TContractState> {
     fn get_registration_info(
         self: @TContractState, address: ContractAddress
     ) -> NameRegistry::RegistrationInfo;
-    fn get_addresses(self: @TContractState) -> Array<ContractAddress>;
 }
 
 #[starknet::contract]
 mod NameRegistry {
     use core::starknet::{ContractAddress, get_caller_address};
     use core::starknet::storage::{
-        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess, Vec,
-        MutableVecTrait, VecTrait
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess
     };
 
     //ANCHOR: storage
@@ -30,7 +28,6 @@ mod NameRegistry {
         owner: Person,
         registrations: Map<ContractAddress, RegistrationNode>,
         total_names: u128,
-        all_addresses: Vec<ContractAddress>
     }
     //ANCHOR_END: storage
 
@@ -129,20 +126,6 @@ mod NameRegistry {
         ) -> RegistrationInfo {
             self.registrations.entry(address).info.read()
         }
-
-
-        //ANCHOR: get_addresses
-        fn get_addresses(self: @ContractState) -> Array<ContractAddress> {
-            let mut addresses = array![];
-            let mut i = 0;
-            for i in 0
-                ..self.all_addresses.len() {
-                    addresses.append(self.all_addresses.at(i).read());
-                };
-            addresses
-        }
-        //ANCHOR_END: get_addresses
-
     }
     //ANCHOR_END: impl_public
 
@@ -186,10 +169,6 @@ mod NameRegistry {
             //ANCHOR_END: storage_node
 
             self.total_names.write(total_names + 1);
-
-            //ANCHOR: store_address
-            self.all_addresses.append().write(user);
-            //ANCHOR_END: store_address
 
             //ANCHOR: emit_event
             self.emit(StoredName { user: user, name: name });

@@ -260,6 +260,14 @@ function playground_text(playground, hidden = true) {
 
   Array.from(document.querySelectorAll("code.language-cairo")).forEach(
     function (block) {
+      // Wrap the code block in a playground
+      let parent = block.parentNode;
+      let wrapper = document.createElement("pre");
+      wrapper.className = "playground";
+      parent.replaceChild(wrapper, block);
+      wrapper.appendChild(block);
+
+      // Handle boring lines
       var lines = Array.from(block.querySelectorAll(".boring"));
       // If no lines were hidden, return
       if (!lines.length) {
