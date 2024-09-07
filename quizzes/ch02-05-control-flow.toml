@@ -65,19 +65,15 @@ id = "d2bcb7e6-f234-47b8-9498-4c2332acbd0e"
 type = "Tracing"
 prompt.program = """
 fn main() {
-    let mut i: usize = 0;
     let mut sum: usize = 0;
-    loop {
-        if i >= 5 {
-            break;
-        }
+
+    for i in 0..5_usize {
         if i == 2 {
-            i += 1;
             continue;
         }
         sum += 10;
-        i += 1;
     };
+
     println!("{}", sum);
 }
 """
