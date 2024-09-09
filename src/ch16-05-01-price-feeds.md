@@ -6,7 +6,9 @@ For the example in this book section, we will use Pragma Oracle to read the pric
 
 [Pragma Oracle](https://www.pragma.build/) is a leading zero knowledge oracle that provides access to off-chain data on Starknet blockchain in a verifiable way.
 
-## Add Pragma as a Project Dependency
+## Setting Up Your Contract for Price Feeds
+
+### Add Pragma as a Project Dependency
 
 To get started with integrating Pragma on your Cairo smart contract for price feed data, edit your project's `Scarb.toml` file to include the path to use Pragma.
 
@@ -15,11 +17,11 @@ To get started with integrating Pragma on your Cairo smart contract for price fe
 pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 ```
 
-## Creating a Price Feed Contract
+### Creating a Price Feed Contract
 
 After adding the required dependencies for your project, you'll need to define a contract interface that includes the required pragma price feed entry point.
 
-### Contract Interface
+### Define the Contract Interface
 
 ```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_interface}}
@@ -27,7 +29,7 @@ After adding the required dependencies for your project, you'll need to define a
 
 Of the two public functions exposed in the `IPriceFeedExample`, the one necessary to interact with the pragma price feed oracle is the `get_asset_price` function, a view function that takes in the `asset_id` argument and returns a `u128` value.
 
-### Pragma Dependency Import to Contract
+### Import Pragma Dependencies
 
 ```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:pragma_lib}}
@@ -49,7 +51,7 @@ The `get_asset_price` function is responsible for retrieving the price of the as
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:here}}
 ```
 
-> Note: Pragma returns the value of different token pairs using the decimal factor of 6 or 8. You can convert the value to the required decimal factor by dividing the value by \\( {10^{n}} \\), where `n` is the decimal factor.
+> **Note**: Pragma returns the value of different token pairs using the decimal factor of 6 or 8. You can convert the value to the required decimal factor by dividing the value by \\( {10^{n}} \\), where `n` is the decimal factor.
 
 The code above is an example implementation of an applications consuming a price feed from the Pragma oracle. The contract imports necessary modules and interfaces, including the `IPragmaABIDispatcher` for interacting with the Pragma oracle contract and the `ERC20ABIDispatcher` for interacting with the ETH ERC20 token contract.
 
