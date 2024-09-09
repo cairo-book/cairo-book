@@ -4,10 +4,8 @@ Since all blockchains are fundamentally deterministic and most are public ledger
 
 ## Overview on VRFs
 
-### Pseudo-random but secure
 VRFs use a secret key and a nonce (a unique input) to generate an output that appears random. While technically 'pseudo-random', it's practically impossible for another party to predict the outcome without knowing the secret key.
 
-### Verifiable output
 VRFs produce not only the random number but also a proof that anyone can use to independently verify that the result was generated correctly according to the function's parameters.
 
 ## Generating Randomness with Pragma

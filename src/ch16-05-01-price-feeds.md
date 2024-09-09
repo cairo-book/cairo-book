@@ -21,7 +21,6 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 
 After adding the required dependencies for your project, you'll need to define a contract interface that includes the required pragma price feed entry point.
 
-### Define the Contract Interface
 
 ```cairo,noplayground
 {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_interface}}
