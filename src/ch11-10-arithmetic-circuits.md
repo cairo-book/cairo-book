@@ -22,7 +22,7 @@ Arithmetic circuits consist of:
 
 Because of the modulo properties, we can build four basic arithmetic gates:
 - Addition: `AddModGate`
-- Substraction: `SubModGate`
+- Subtraction: `SubModGate`
 - Multiplication: `MulModGate`
 - Inverse: `InvModGate`
 

@@ -1,3 +1,8 @@
+[default]
+extend-ignore-identifiers-re = [
+    "Groth16"
+]
+
 [type.po]
 extend-glob = ["*.po", "*.css", "*.js"]
 check-file = false
