@@ -140,7 +140,7 @@ We can now decompose how these instructions are executed to understand what this
 To summarize:
 
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
-- `call rel 9` triggers the call the `not_inlined` function, which returns `2` and stores it at the final location `[ap-3]`.
+- `call rel 9` triggers the call to the `not_inlined` function, which returns `2` and stores it at the final location `[ap-3]`.
 - The line 4 is the inlined code of the `inlined` function, which returns `1` and stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is inserted and directly executed.
 - After that, the sum is computed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns the sum, corresponding to the return value of the `main` function.
 
