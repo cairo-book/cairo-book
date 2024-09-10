@@ -2,8 +2,7 @@
 
 // ANCHOR: imports
 use core::dict::Felt252Dict;
-use core::nullable::{match_nullable, FromNullableResult, NullableTrait};
-use core::integer;
+use core::nullable::NullableTrait;
 // ANCHOR_END: imports
 
 // ANCHOR: trait
@@ -53,7 +52,7 @@ impl MemoryVecImpl<T, +Drop<T>, +Copy<T>> of MemoryVecTrait<MemoryVec<T>, T> {
 
     fn push(ref self: MemoryVec<T>, value: T) -> () {
         self.data.insert(self.len.into(), NullableTrait::new(value));
-        self.len = core::integer::u32_wrapping_add(self.len, 1_usize);
+        self.len = core::num::traits::WrappingAdd::wrapping_add(self.len, 1_usize);
     }
     // ANCHOR: set
     fn set(ref self: MemoryVec<T>, index: usize, value: T) {
@@ -66,4 +65,5 @@ impl MemoryVecImpl<T, +Drop<T>, +Copy<T>> of MemoryVecTrait<MemoryVec<T>, T> {
     }
 }
 // ANCHOR_END: implem
+
 
