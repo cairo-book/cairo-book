@@ -1,50 +1,71 @@
 # Contract Events
 
-Events are custom data structures that are emitted by smart contracts during execution. They provide a way for smart contracts to communicate with the external world by logging information about specific occurrences in a contract.
+Events are a way for smart contracts to inform the external world about any changes that happen during their execution. They play a crucial role in the integration of smart contracts in real-world applications.
 
-Events play a crucial role in the integration of smart contracts in real-world applications. Take, for instance, the Non-Fungible Tokens (NFTs) minted on Starknet. An event is emitted each time a token is minted. This event is indexed and stored in some database, allowing applications to display almost instantaneously useful information to users. If the contract doesn't emit an event when minting a new token, it would be less practical, with the need of querying the state of the blockchain to get the data needed.
+Technically speaking, an event is a custom data structures emitted by a smart contract during its execution, and stored in the corresponding transaction receipt, allowing any external tools to parse and index them.
 
 ## Defining Events
 
-All the different events in a contract are defined under the `Event` enum, which must implement the `starknet::Event` trait. This trait is defined in the core library as follows:
+The events of a smart contract are defined in an enum annotated with the attribute `#[event]`. This enum must be named `Event`.
 
 ```cairo,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/no_listing_02_event_trait/src/lib.cairo}}
+{{#include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:event}}
 ```
 
-The `#[derive(starknet::Event)]` attribute causes the compiler to generate an implementation for the above trait,
-instantiated with the `Event` type, which in our example is the following enum:
+Each variant, like `BookAdded` or `FieldUpdated` represents an event that can be emitted by the contract. The variant data represents the data associated to an event. It could be a `struct` or an `enum`.
+
+Each data structure used in events definition (`Event` enum included) must implement the derivable trait `starknet::Event`. This can be simply achieved by adding a `#[derive(starknet::Event)]` attribute on top of our data structure definition.
+
+Each event data field can be annotated with the attribute `#[key]`. Key fields are then stored separately than data fields to be used by external tools to easily filter events on these keys.
+
+TODO `#[flat]`.
+TODO `Serde` trait required for event data ?
 
 ```cairo,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:event}}
+{{#include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:full_events}}
 ```
 
-Each variant of the `Event` enum has to be a struct or an enum, and each variant needs to implement the `starknet::Event` trait itself. Moreover, the members of these variants must implement the `Serde` trait (_c.f._ [Appendix C: Serializing with Serde][serde appendix]), as keys/data are added to the event using a serialization process.
+In this example:
 
-The auto-implementation of the `starknet::Event` trait will implement the `append_keys_and_data` function for each variant of our `Event` enum. The generated implementation will append a single key based on the variant name (`StoredName`), and then recursively call `append_keys_and_data` in the impl of the `Event` trait for the variant’s type.
+- There are 3 events: `BookAdded`, `FieldUpdated` and `BookRemoved`,
+- `BookAdded` and `BookRemoved` events use a simple `struct` to store their data while the `FieldUpdated` event uses an `enum` of structs,
+- In the `BookAdded` event, the `author` field is a key field and will be used outside of the smart contract to filter `BookAdded` events by `author`, while `id` and `title` are data fields.
 
-In our example, the `Event` enum contains only one variant, which is a struct named `StoredName`. We chose to name our variant with the same name as the struct name, but this is not enforced.
-
-```cairo,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:stored_name}}
-```
-
-Whenever an enum that derives the `starknet::Event` trait has an enum variant, this enum is nested by default. Therefore, the list of keys corresponding to the variant’s name will include the `sn_keccak` hash of the variant's name itself. This can be superfluous, typically when using embedded components in contracts. Indeed, in such cases, we might want the events defined in the components to be emitted without any additional data, and it could be useful to annotate the enum variant with the `#[flat]` attribute. By doing so, we allow to opt out of the nested behavior and ignore the variant name in the serialization process. On the other hand, nested events have the benefit of distinguishing between the main contract event and different components events, which might be helpful.
-
-In our contract, we defined an event named `StoredName` that emits the contract address of the caller and the name stored within the contract, where the `user` field is serialized as a key and the `name` field is serialized as data.
-
-Indexing events fields allows for more efficient queries and filtering of events. To index a field as a key of an event, simply annotate it with the `#[key]` attribute as demonstrated in the example for the `user` key. By doing so, any indexed field will allow queries of events that contain a given value for that field with \\( O(log(n)) \\) time complexity, while non indexed fields require any query to iterate over all events, providing \\( O(n) \\) time complexity.
-
-When emitting the event with `self.emit(StoredName { user: user, name: name })`, a key corresponding to the name ` StoredName`, specifically `sn_keccak(StoredName)`, is appended to the keys list. `user`is serialized as key, thanks to the `#[key]` attribute, while address is serialized as data. After everything is processed, we end up with the following keys and data: `keys = [sn_keccak("StoredName"),user]` and `data = [name]`.
-
-[serde appendix]: ./appendix-03-derivable-traits.md#serializing-with_serde
+> The **variant** and its associated data structure can be named differently even if it's a common practice to use the same name. The **variant name** will be used internally as the **first event key** to represent the name of the event and to help filtering events, while the **variant data name** will be used in the smart contract to **build the event** before emitting it.
 
 ## Emitting Events
 
-After defining events, we can emit them using `self.emit`, with the following syntax:
+Once you have defined your list of events, you want to emit them in your smart contracts. This can be simply achieved by calling `self.emit()` with an event data structure in parameter.
 
 ```cairo,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:emit_event}}
+{{#include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:emit_event}}
 ```
 
-The `emit` function is called on `self` and takes a reference to `self`, i.e., state modification capabilities are required. Therefore, it is not possible to emit events in view functions.
+To have a better understanding of what happens under the hood, let's see an example of emitted event and how it is stored in the transaction receipt:
+
+```cairo
+    change_book_author(42, 'Stephen King');
+```
+
+This `change_book_author` call emits a `FieldUpdated` event with the event data `FieldUpdated::Author(UpdatedAuthorData { id: 42, title: author: 'Stephen King' })`. If you read the "events" section of the transaction receipt, you will get something like:
+
+```json
+"events": [
+    {
+      "from_address": "0xdeadcb856227d67f9a6a811f9c58e4faea3429d8594b6ced361943bf195beef",
+      "keys": [
+        "0x1b90a4a3fc9e1658a4afcd28ad839182217a69668000c6104560d6db882b0e1",
+        "0x5374657068656e204b696e67"
+      ],
+      "data": [
+        "0x2a"
+      ]
+    }
+  ]
+```
+
+In this receipt:
+
+- `from_address` is the address of your smart contract,
+- `keys` contains the key fields of the emitted `FieldUpdated` event, serialized in an array of `felt252`. The first item `0x1b90a4a3fc9e1658a4afcd28ad839182217a69668000c6104560d6db882b0e1` is [TBD] and the second item `0x5374657068656e204b696e67 = 'Stephen King'` is the `new_author` field of your event as it has been defined using the `#[key]` attribute,
+- `data` contains the data fields of the emitted `FieldUpdated` event, serialized in an array of `felt252`. The first and only item `0x2a = 42` is the `id` data field.
