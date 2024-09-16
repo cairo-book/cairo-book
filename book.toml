@@ -14,8 +14,8 @@ after = ["links"]
 [preprocessor.gettext]
 after = ["cairo"]
 
-[preprocessor.quiz-cairo]
-after = ["gettext"]
+# [preprocessor.quiz-cairo]
+# after = ["gettext"]
 
 [output.html]
 git-repository-url = "https://github.com/cairo-book/cairo-book.github.io"
