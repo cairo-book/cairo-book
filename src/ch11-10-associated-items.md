@@ -1,9 +1,7 @@
 # Associated Items
 
 _Associated Items_ are the items declared in [traits] or defined in
-[implementations]. They are called like this because they are defined on an associate
-type &mdash; the type in the implementation. Specifically, there are [associated
-functions] (including methods, that we already covered in Chapter 5), [associated types], [associated constants], and [associated implementations].
+[implementations]. Specifically, there are [associated functions] (including methods, that we already covered in Chapter 5), [associated types], [associated constants], and [associated implementations].
 
 [traits]: ./ch08-02-traits-in-cairo.md
 [implementations]: ./ch08-02-traits-in-cairo.md#implementing-a-trait-on-a-type
@@ -12,7 +10,7 @@ functions] (including methods, that we already covered in Chapter 5), [associate
 [associated constants]: ./ch11-10-associated-items-in-traits.md#associated-constants
 [associated implementations]: ./ch11-10-associated-items-in-traits.md#associated-implementations
 
-Associated items are useful when the associated item logically is related to the associating item. For example, the `is_some` method on `Option` is intrinsically related to Options, so should be associated.
+Associated items are useful when they are logically related to the implementation. For example, the `is_some` method on `Option` is intrinsically related to Options, so should be associated.
 
 Every associated item kind comes in two varieties: definitions that contain the actual implementation and declarations that declare signatures for definitions.
 
@@ -20,15 +18,15 @@ Every associated item kind comes in two varieties: definitions that contain the 
 
 Associated types are _type aliases_ allowing you to define abstract type placeholders within traits. Instead of specifying concrete types in the trait definition, associated types let trait implementors choose the actual types to use. This provides a flexible way to define traits with "placeholder" types that get filled in later.
 
-Let's consider the following `CustomAdd` trait:
+Let's consider the following `Concatenate` trait:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types}}
 ```
 
-The type `Result` is a placeholder, and the method’s definition that follows shows that it will return values of type `Self::Result`. Implementors of the `CustomAdd` trait will specify the concrete type for `Result`, and the next method will return a value of that concrete type.
+The type `Result` is a placeholder, and the method’s definition that follows shows that it will return values of type `Self::Result`. Implementors of the `Concatenate` trait will specify the concrete type for `Result`, and the next method will return a value of that concrete type.
 
-Let's suppose now that a function `foo<T, U>` needs the ability to add `T` and `U`. If we had defined a `AddGeneric` trait with an additional generic parameter that is used to describe the result, then this trait and one potential implementation using `u32` type for all involved generic types would have looked like this:
+Let's suppose now that a function `foo` needs the ability to concatenate 2 variables of type `T`. If we had defined a `ConcatenateGeneric` trait with an additional generic parameter that is used to describe the result, then this trait and one potential implementation using `u32` type for the generic arguments and `u64` for the result would have looked like this:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:generics_usage}}
@@ -40,7 +38,7 @@ with `foo` being implemented as follows:
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:foo}}
 ```
 
-However, when using associated types, we can get the result type from the impl of `CustomAdd`, and we don’t need to pollute `foo` with an additional generic argument. In the following snippet, we define a `CustomAddImplU32` impl of `CustomAdd<T, U>` trait with `Result` type being a `u32` :
+However, when using associated types, we can get the result type from the impl of `Concatenate`, and we don’t need to pollute `foo` with an additional generic argument. In the following snippet, we define a `ConcatenateU32Impl` impl of `Concatenate<T>` trait with `Result` type being a `u64` :
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types_impl}}
@@ -58,7 +56,7 @@ Finally, we can run `foo`, and `bar` in our `main` and see that they both produc
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:main}}
 ```
 
-The point is that `bar` don't need to use a third generic type for the addition result type, this information is actually associated with the impl of the `CustomAdd` trait.
+The point is that `bar` doesn't need to use a second generic type for the concatenation result type, this information is actually associated with the impl of the `Concatenate` trait.
 
 ## Associated Constants
 
