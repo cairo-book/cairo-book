@@ -44,6 +44,6 @@ fn main() {
     println!("Ares hp is {}", warrior.hp);
     println!("Merlin hp is {}", wizard.hp);
 }
-// ANCHOR: battle
+// ANCHOR_END: battle
 
 
