@@ -4,7 +4,7 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-41-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-42-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -203,6 +203,7 @@ The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines i
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/blocksorcerer"><img src="https://avatars.githubusercontent.com/u/175638109?v=4?s=100" width="100px;" alt="blocksorcerer"/><br /><sub><b>blocksorcerer</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=blocksorcerer" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=blocksorcerer" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/quentin-abei"><img src="https://avatars.githubusercontent.com/u/98474907?v=4?s=100" width="100px;" alt="quentin-abei"/><br /><sub><b>quentin-abei</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=quentin-abei" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=quentin-abei" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.0xjarix.com/"><img src="https://avatars.githubusercontent.com/u/55955137?v=4?s=100" width="100px;" alt="0xjarix"/><br /><sub><b>0xjarix</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=0xjarix" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kkawula"><img src="https://avatars.githubusercontent.com/u/57270771?v=4?s=100" width="100px;" alt="kkawula"/><br /><sub><b>kkawula</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=kkawula" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=kkawula" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
