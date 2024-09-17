@@ -398,6 +398,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "kkawula",
+      "name": "kkawula",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57270771?v=4",
+      "profile": "https://github.com/kkawula",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
