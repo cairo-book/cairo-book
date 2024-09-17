@@ -33,7 +33,7 @@ impl ArrayIntoIterator<T> of IntoIterator<Array<T>> {
         ArrayIter { array: self }
     }
 }
-// ANCHOR_END: associated_impls}
+// ANCHOR_END: associated_impls
 
 // ANCHOR: main
 fn main() {
