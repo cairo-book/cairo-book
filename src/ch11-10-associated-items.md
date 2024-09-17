@@ -96,7 +96,7 @@ This design ensures that any type implementing `IntoIterator` will produce an it
 - The `into_iter` method will always return a type that implements `Iterator`.
 - This relationship is enforced for all implementations of `IntoIterator`, not just on a case-by-case basis.
 
-The following `main` function uses creates an array, converts it into an `ArrayIter` type and ultimately uses the `Iterator` implemntation to print each element:
+The following `main` function creates an array of `felt252`, converts it into an `ArrayIter` type and ultimately uses the `Iterator` implementation to print each element:
 
 ```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:main}}
