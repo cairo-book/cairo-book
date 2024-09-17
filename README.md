@@ -4,7 +4,7 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-35-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -194,6 +194,7 @@ The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines i
       <td align="center" valign="top" width="14.28%"><a href="http://alankang.xyz"><img src="https://avatars.githubusercontent.com/u/55970530?v=4?s=100" width="100px;" alt="Beeyoung"/><br /><sub><b>Beeyoung</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=FriendlyLifeguard" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=FriendlyLifeguard" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/chachaleo"><img src="https://avatars.githubusercontent.com/u/49371958?v=4?s=100" width="100px;" alt="Charlotte"/><br /><sub><b>Charlotte</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=chachaleo" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=chachaleo" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/obatirou"><img src="https://avatars.githubusercontent.com/u/92337658?v=4?s=100" width="100px;" alt="Oba"/><br /><sub><b>Oba</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=obatirou" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/martinvibes"><img src="https://avatars.githubusercontent.com/u/127976766?v=4?s=100" width="100px;" alt="martin machiebe"/><br /><sub><b>martin machiebe</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=martinvibes" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
