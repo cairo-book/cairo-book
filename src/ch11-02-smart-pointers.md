@@ -37,9 +37,51 @@ Listing {{#ref basic_box}} shows how to use a box to store a value in the boxed 
 
 We define the variable `b` to have the value of a `Box` that points to the value `5`, which is stored in the boxed segment. This program will print `b = 5`; in this case, we can access the data in the box similar to how we would if this data was simply in the execution memory. Putting a single value in a box isn’t very useful, so you won’t use boxes by themselves in this way very often. Having values like a single `u128` in the execution memory, where they’re stored by default, is more appropriate in the majority of situations. Let’s look at a case where boxes allow us to define types that we wouldn’t be allowed to if we didn’t have boxes.
 
-### Enabling Recursive Types with Nullable Boxes
+### Enabling Recursive Types with Boxes
 
-<!-- TODO -->
+A value of recursive type can have another value of the same type as part of itself. Recursive types pose an issue because at compile time because Cairo needs to know how much space a type takes up. However, the nesting of values of recursive types could theoretically continue infinitely, so Cairo can’t know how much space the value needs. Because boxes have a known size, we can enable recursive types by inserting a box in the recursive type definition.
+
+As an example of a recursive type, let’s explore the implementation of a binary tree. The binary tree type we’ll define is straightforward except for the recursion; therefore, the concepts in the example we’ll work with will be useful any time you get into more complex situations involving recursive types.
+
+A binary tree is a tree data structure in which each node has at most two children, which are referred to as the left child and the right child. The last element of a branch is a leaf, which is a node without children.
+
+Listing {{#ref recursive_types_wrong}} shows an attempt to implement a binary tree of `u32` values. Note that this code won’t compile yet because the `BinaryTree` type doesn’t have a known size, which we’ll demonstrate.
+
+```cairo, noplayground
+{{#include ../listings/ch11-advanced-features/listing_recursive_types_wrong/src/lib.cairo}}
+```
+
+{{#label recursive_types_wrong}}
+<span class="caption">Listing {{#ref recursive_types_wrong}}: The first attempt at implementing a binary tree of `u32` values</span>
+
+> Note: We’re implementing a binary tree that holds only u32 values for the purposes of this example. We could have implemented it using generics, as we discussed in Chapter 8, to define a binary tree that could store values of any type.
+
+The root node contains 5 and two child nodes. The left child is a leaf containing 1. The right child is another node containing 4, which in turn has two leaf children: one containing 2 and another containing 3. This structure forms a simple binary tree with a depth of 2.
+
+If we try to compile the code in listing {{#ref recursive_types_wrong}}, we get the following error:
+
+```plaintext
+{{#include ../listings/ch11-advanced-features/listing_recursive_types_wrong/output.txt}}
+```
+
+The error shows this type “has infinite size.” The reason is that we’ve defined `BinaryTree` with a variant that is recursive: it holds another value of itself directly. As a result, Cairo can’t figure out how much space it needs to store a `BinaryTree` value.
+
+<!-- TODO: explain why we get this error? -->
+
+Hopefully, we can fix this error by using a `Box<T>` to store the recursive variant of `BinaryTree`. Because a `Box<T>` is a pointer, Cairo always knows how much space a `Box<T>` needs: a pointer’s size doesn’t change based on the amount of data it’s pointing to. This means we can put a `Box<T>` inside the `Node` variant instead of another `BinaryTree` value directly. The `Box<T>` will point to the child `BinaryTree` values that will be stored in their own segment, rather than inside the `Node` variant. Conceptually, we still have a binary tree, created with binary trees holding other binary trees, but this implementation is now more like placing the items next to one another rather than inside one another.
+
+We can change the definition of the `BinaryTree` enum in Listing {{#ref recursive_types_wrong}} and the usage of the `BinaryTree` in Listing {{#ref recursive_types_wrong}} to the code in Listing {{#ref recursive_types}}, which will compile:
+
+```cairo
+{{#include ../listings/ch11-advanced-features/listing_recursive_types/src/lib.cairo}}
+```
+
+{{#label recursive_types}}
+<span class="caption">Listing {{#ref recursive_types}}: Defining a recursive Binary Tree using Boxes</span>
+
+The `Node` variant now holds a `(u32, Box<BinaryTree>, Box<BinaryTree>)`, indicating that the `Node` variant will store a `u32` value, and two `Box<BinaryTree>` values. Now, we know that the `Node` variant will need a size of `u32` plus the size of the two `Box<BinaryTree>` values. By using a box, we’ve broken the infinite, recursive chain, so the compiler can figure out the size it needs to store a `BinaryTree` value.
+
+<!--  Figure {{label Node-size}} shows what the Node variant looks like now. -->
 
 ### Using Boxes to Improve Performance
 

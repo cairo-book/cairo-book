@@ -92,6 +92,7 @@
   - [Macros](ch11-05-macros.md)
   - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
   - [Printing](ch11-08-printing.md)
+  - [Arithmetic Circuits](ch11-10-arithmetic-circuits.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
@@ -155,7 +156,6 @@
   - [General Recommendations](./ch17-01-general-recommendations.md)
   - [Testing Smart Contracts](./ch17-02-testing-smart-contracts.md)
   - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
-  - [Formal Verification]()
 
 ## Appendix
 

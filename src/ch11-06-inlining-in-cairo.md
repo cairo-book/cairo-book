@@ -24,6 +24,16 @@ The more frequently a function is called, the more beneficial inlining becomes i
 
 > Inlining is often a tradeoff between number of steps and code length. Use the `inline` attribute cautiously where it is appropriate.
 
+## Inlining decision process
+
+The Cairo compiler follows the `inline` attribute but for functions without explicit inline directives, it will use a heuristic approach. The decision to inline or not a function will be made depending on the complexity of the attributed function and mostly rely on the threshold `DEFAULT_INLINE_SMALL_FUNCTIONS_THRESHOLD`.
+
+The compiler calculates a function's "weight" using the `ApproxCasmInlineWeight` struct, which estimates the number of Cairo Assembly (CASM) statements the function will generate. This weight calculation provides a more nuanced view of the function's complexity than a simple statement count. If a function's weight falls below the threshold, it will be inlined.
+
+In addition to the weight-based approach, the compiler also considers the raw statement count. Functions with fewer statements than the threshold are typically inlined, promoting the optimization of small, frequently called functions.
+
+The inlining process also accounts for special cases. Very simple functions, such as those that only call another function or return a constant, are always inlined regardless of other factors. Conversely, functions with complex control flow structures like `Match` or those ending with a `Panic` are generally not inlined.
+
 ## Inlining Example
 
 Let's introduce a short example to illustrate the mechanisms of inlining in Cairo. Listing {{#ref inlining}} shows a basic program allowing comparison between inlined and non-inlined functions.
@@ -140,7 +150,7 @@ We can now decompose how these instructions are executed to understand what this
 To summarize:
 
 - `call rel 3` corresponds to the `main` function, which is obviously not inlined.
-- `call rel 9` triggers the call the `not_inlined` function, which returns `2` and stores it at the final location `[ap-3]`.
+- `call rel 9` triggers the call to the `not_inlined` function, which returns `2` and stores it at the final location `[ap-3]`.
 - The line 4 is the inlined code of the `inlined` function, which returns `1` and stores it at the final location `[ap-2]`. We clearly see that there is no `call` instruction in this case, because the body of the function is inserted and directly executed.
 - After that, the sum is computed and we ultimately go back to the line 2 which contains the final `ret` instruction that returns the sum, corresponding to the return value of the `main` function.
 

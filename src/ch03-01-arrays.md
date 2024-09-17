@@ -7,7 +7,7 @@ This has to do with the fact that once a memory slot is written to, it cannot be
 
 ## Creating an Array
 
-Creating an array is done with the `ArrayTrait::new()` call. Here's an example of creating an array and appending 3 elements to it::
+Creating an array is done with the `ArrayTrait::new()` call. Here's an example of creating an array and appending 3 elements to it:
 
 ```cairo
 {{#include ../listings/ch03-common-collections/no_listing_01_array_new_append/src/lib.cairo}}

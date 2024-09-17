@@ -67,10 +67,6 @@ The address in storage of a variable stored in a mapping is computed according t
 
 If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the `Hash` trait, which can be derived with the `#[derive(Hash)]` attribute.
 
-```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:struct_key_mapping}}
-```
-
 ## Summary
 
 - Storage mappings allow you to map keys to values in contract storage.
