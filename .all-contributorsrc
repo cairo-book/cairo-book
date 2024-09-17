@@ -321,6 +321,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "obatirou",
+      "name": "Oba",
+      "avatar_url": "https://avatars.githubusercontent.com/u/92337658?v=4",
+      "profile": "https://github.com/obatirou",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
