@@ -1,16 +1,16 @@
 // ANCHOR: associated_types
-trait Concatenate<T> {
+trait Pack<T> {
     type Result;
 
-    fn concatenate(self: T, other: T) -> Self::Result;
+    fn pack(self: T, other: T) -> Self::Result;
 }
 // ANCHOR_END: associated_types
 
 // ANCHOR: associated_types_impl
-impl ConcatenateU32Impl of Concatenate<u32> {
+impl PackU32Impl of Pack<u32> {
     type Result = u64;
 
-    fn concatenate(self: u32, other: u32) -> Self::Result {
+    fn pack(self: u32, other: u32) -> Self::Result {
         let shift: u64 = 0x100000000; // 2^32
         self.into() * shift + other.into()
     }
@@ -18,18 +18,18 @@ impl ConcatenateU32Impl of Concatenate<u32> {
 // ANCHOR_END: associated_types_impl
 
 // ANCHOR: bar
-fn bar<T, impl ConcatenateImpl: Concatenate<T>>(self: T, b: T) -> ConcatenateImpl::Result {
-    ConcatenateImpl::concatenate(self, b)
+fn bar<T, impl PackImpl: Pack<T>>(self: T, b: T) -> PackImpl::Result {
+    PackImpl::pack(self, b)
 }
 // ANCHOR_END: bar
 
 // ANCHOR: generics_usage
-trait ConcatenateGeneric<T, U> {
-    fn concatenate_generic(self: T, other: T) -> U;
+trait PackGeneric<T, U> {
+    fn pack_generic(self: T, other: T) -> U;
 }
 
-impl ConcatenateGenericU32 of ConcatenateGeneric<u32, u64> {
-    fn concatenate_generic(self: u32, other: u32) -> u64 {
+impl ConcatenateGenericU32 of PackGeneric<u32, u64> {
+    fn pack_generic(self: u32, other: u32) -> u64 {
         let shift: u64 = 0x100000000; // 2^32
         self.into() * shift + other.into()
     }
@@ -37,8 +37,8 @@ impl ConcatenateGenericU32 of ConcatenateGeneric<u32, u64> {
 // ANCHOR_END: generics_usage
 
 // ANCHOR: foo
-fn foo<T, U, +ConcatenateGeneric<T, U>>(self: T, other: T) -> U {
-    self.concatenate_generic(other)
+fn foo<T, U, +PackGeneric<T, U>>(self: T, other: T) -> U {
+    self.pack_generic(other)
 }
 // ANCHOR_END: foo
 

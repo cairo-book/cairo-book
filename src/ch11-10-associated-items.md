@@ -18,15 +18,15 @@ Every associated item kind comes in two varieties: definitions that contain the 
 
 Associated types are _type aliases_ allowing you to define abstract type placeholders within traits. Instead of specifying concrete types in the trait definition, associated types let trait implementors choose the actual types to use. This provides a flexible way to define traits with "placeholder" types that get filled in later.
 
-Let's consider the following `Concatenate` trait:
+Let's consider the following `Pack` trait:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types}}
 ```
 
-The type `Result` is a placeholder, and the method’s definition that follows shows that it will return values of type `Self::Result`. Implementors of the `Concatenate` trait will specify the concrete type for `Result`, and the next method will return a value of that concrete type.
+The type `Result` is a placeholder, and the method’s definition that follows shows that it will return values of type `Self::Result`. Implementors of the `Pack` trait will specify the concrete type for `Result`, and the next method will return a value of that concrete type.
 
-Let's suppose now that a function `foo` needs the ability to concatenate 2 variables of type `T`. If we had defined a `ConcatenateGeneric` trait with an additional generic parameter that is used to describe the result, then this trait and one potential implementation using `u32` type for the generic arguments and `u64` for the result would have looked like this:
+Let's suppose now that a function `foo` needs the ability to pack 2 variables of type `T`. If we had defined a `PackGeneric` trait with an additional generic parameter that is used to describe the result, then this trait and one potential implementation using `u32` type for the generic arguments and `u64` for the result would have looked like this:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:generics_usage}}
@@ -38,7 +38,7 @@ with `foo` being implemented as follows:
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:foo}}
 ```
 
-However, when using associated types, we can get the result type from the impl of `Concatenate`, and we don’t need to pollute `foo` with an additional generic argument. In the following snippet, we define a `ConcatenateU32Impl` impl of `Concatenate<T>` trait with `Result` type being a `u64` :
+However, when using associated types, we can get the result type from the impl of `Pack`, and we don’t need to pollute `foo` with an additional generic argument. In the following snippet, we define a `PackU32Impl` impl of `Pack<T>` trait with `Result` type being a `u64` :
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types_impl}}
@@ -56,7 +56,7 @@ Finally, we can run `foo`, and `bar` in our `main` and see that they both produc
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:main}}
 ```
 
-The point is that `bar` doesn't need to use a second generic type for the concatenation result type, this information is actually associated with the impl of the `Concatenate` trait.
+The point is that `bar` doesn't need to use a second generic type for the packing result type, this information is actually associated with the impl of the `Pack` trait.
 
 ## Associated Constants
 
