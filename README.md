@@ -4,7 +4,7 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-38-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-39-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -200,6 +200,7 @@ The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines i
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Jeanmichel7"><img src="https://avatars.githubusercontent.com/u/59661788?v=4?s=100" width="100px;" alt="Jean-Michel"/><br /><sub><b>Jean-Michel</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=Jeanmichel7" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=Jeanmichel7" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/NueloSE"><img src="https://avatars.githubusercontent.com/u/124416278?v=4?s=100" width="100px;" alt="Emmanuel A Akalo"/><br /><sub><b>Emmanuel A Akalo</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=NueloSE" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=NueloSE" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/supreme2580"><img src="https://avatars.githubusercontent.com/u/100731397?v=4?s=100" width="100px;" alt="Supreme Labs"/><br /><sub><b>Supreme Labs</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=supreme2580" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=supreme2580" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/blocksorcerer"><img src="https://avatars.githubusercontent.com/u/175638109?v=4?s=100" width="100px;" alt="blocksorcerer"/><br /><sub><b>blocksorcerer</b></sub></a><br /><a href="https://github.com/cairo-book/cairo-book/commits?author=blocksorcerer" title="Documentation">📖</a> <a href="https://github.com/cairo-book/cairo-book/commits?author=blocksorcerer" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
