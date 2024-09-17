@@ -389,6 +389,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "0xjarix",
+      "name": "0xjarix",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55955137?v=4",
+      "profile": "https://www.0xjarix.com/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
