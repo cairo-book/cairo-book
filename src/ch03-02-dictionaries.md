@@ -119,7 +119,7 @@ Later in ["Dictionaries as Struct Members"][dictionaries in structs] section, we
 
 [basic dictionaries]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
 [drop destruct]: ./appendix-03-derivable-traits.md#drop-and-destruct
-[dictionaries in structs]: ./ch11-01-custom-data-structures.html#dictionaries-as-struct-members
+[dictionaries in structs]: ./ch11-01-custom-data-structures.md#dictionaries-as-struct-members
 
 ## More Dictionaries
 

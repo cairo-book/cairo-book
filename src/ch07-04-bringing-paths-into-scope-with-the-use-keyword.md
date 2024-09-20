@@ -2,7 +2,7 @@
 
 Having to write out the paths to call functions can feel inconvenient and repetitive. Fortunately, there’s a way to simplify this process: we can create a shortcut to a path with the `use` keyword once, and then use the shorter name everywhere else in the scope.
 
-In Listing {{#ref use-keyword}}, we bring the `restaurant::front_of_house::hosting` module into the
+In Listing {{#ref use-keyword}}, we bring the `crate::front_of_house::hosting` module into the
 scope of the `eat_at_restaurant` function so we only have to specify
 `hosting::add_to_waitlist` to call the `add_to_waitlist` function in
 `eat_at_restaurant`.
@@ -16,7 +16,7 @@ scope of the `eat_at_restaurant` function so we only have to specify
 {{#label use-keyword}}
 <span class="caption">Listing {{#ref use-keyword}}: Bringing a module into scope with `use`</span>
 
-Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use restaurant::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
+Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem. By adding `use crate::front_of_house::hosting;` in the crate root, `hosting` is now a valid name in that scope, just as though the `hosting` module had been defined in the crate root.
 
 Note that `use` only creates the shortcut for the particular scope in which the `use` occurs. Listing {{#ref  use-scope}} moves the `eat_at_restaurant` function into a new child module named `customer`, which is then a different scope than the `use`
 statement, so the function body won’t compile:
@@ -38,7 +38,7 @@ The compiler error shows that the shortcut no longer applies within the `custome
 
 ## Creating Idiomatic `use` Paths
 
-In Listing {{#ref use-keyword}}, you might have wondered why we specified `use restaurant::front_of_house::hosting`
+In Listing {{#ref use-keyword}}, you might have wondered why we specified `use crate::front_of_house::hosting`
 and then called `hosting::add_to_waitlist` in `eat_at_restaurant` rather than specifying the `use` path all the way out to
 the `add_to_waitlist` function to achieve the same result, as in Listing {{#ref unidiomatic-use}}.
 

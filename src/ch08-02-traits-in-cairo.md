@@ -149,12 +149,7 @@ Note that it isn’t possible to call the default implementation from an overrid
 Now that you know how to define and implement traits, we can explore how to use
 traits to define functions that accept many different types. We'll use the
 `Summary` trait we implemented on the `NewsArticle` and `Tweet` types to define a `notify` function that calls the `summarize` method
-on its `item` parameter, which is of some type that implements the `Summary`
-trait. To do this, we use the `impl Trait` syntax, like this:
-
-```cairo,ignore
-{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-04-traits-as-parameters/src/lib.rs:here}}
-```
+on its `item` parameter, which is of some type that implements the `Summary` trait. To do this, we use the `impl Trait` syntax. 
 
 Instead of a concrete type for the `item` parameter, we specify the `impl`
 keyword and the trait name. This parameter accepts any type that implements the

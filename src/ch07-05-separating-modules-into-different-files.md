@@ -80,7 +80,7 @@ the same. The function calls in `eat_at_restaurant` will work without any
 modification, even though the definitions live in different files. This
 technique lets you move modules to new files as they grow in size.
 
-Note that the `use restaurant::front_of_house::hosting;` statement in
+Note that the `use crate::front_of_house::hosting;` statement in
 _src/lib.cairo_ also hasn’t changed, nor does `use` have any impact on what files
 are compiled as part of the crate. The `mod` keyword declares modules, and Cairo
 looks in a file with the same name as the module for the code that goes into

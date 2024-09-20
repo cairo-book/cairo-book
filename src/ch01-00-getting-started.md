@@ -12,8 +12,10 @@ If you have any questions about Starknet or Cairo, you can ask them in the [Star
 
 [discord]: https://discord.gg/starknet-community
 
-## Interacting with the Cairo Chatbot
+## Interacting with the Starknet AI Agent
 
-Cairo has its own chatbot, which can help you with Cairo-related questions. The chatbot is trained on the Cairo book, and uses RAG to efficiently retrieve information to provide help. You can find the chatbot on the [Cairo-Chatbot][cairo gpt] website.
+Starknet proposes its own AI agent designed to assist with Cairo and Starknet-related questions. This AI agent is trained on the Cairo book and the Starknet documentation, using Retrieval-Augmented Generation (RAG) to efficiently retrieve information and provide accurate assistance.
 
-[cairo gpt]: https://cairo-chatbot.vercel.app/
+You can find the Starknet Agent on the [Starknet Agent][agent gpt] website.
+
+[agent gpt]: https://agent.starknet.id/

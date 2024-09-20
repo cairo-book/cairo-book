@@ -49,11 +49,58 @@ type = "MultipleChoice"
 prompt.prompt = """
 What feature does Cairo provide for repeating code execution until a specified condition is met or gas runs out?
 """
-answer.answer = "`loop` or `while` with a break condition."
+answer.answer = "`loop`, `while` or `for` with a break condition."
 prompt.distractors = [
-"Traditional `for` loops similar to those in imperative languages.",
-"Automated mechanisms that handle execution retries for you."
+"Automated mechanisms that handle execution retries for you.",
+"`while`, `for` or `repeat` until a certain number of iterations is reached.",
+"An `if` statement that checks for a condition and repeats execution until the condition is met."
 ]
 context = """
 Cairo supports `loop` and `while` loops that continue execution indefinitely until a break condition is explicitly met or the program runs out of gas.
+The safety and conciseness of `for` loops make them the most commonly used loop construct in Cairo.
+"""
+
+[[questions]]
+id = "d2bcb7e6-f234-47b8-9498-4c2332acbd0e"
+type = "Tracing"
+prompt.program = """
+fn main() {
+    let mut sum: usize = 0;
+
+    for i in 0..5_usize {
+        if i == 2 {
+            continue;
+        }
+        sum += 10;
+    };
+
+    println!("{}", sum);
+}
+"""
+answer.doesCompile = true
+answer.stdout = "40"
+context = """
+The 'continue' keyword in Cairo skips the remaining code in the current iteration of the loop. In this case, it skips the sum += 10 when 'i = 2'.
+"""
+
+[[questions]]
+id = "5e2ff5a8-ad4a-47bd-805b-ca58f7821122"
+type = "Tracing"
+prompt.program = """
+fn main() {
+    let mut i = 0;
+
+     let result = while(i < 10) {
+        if i == 5 {
+            break i * 2;
+        }
+        i += 1;
+    };
+    
+    println!("The result is {}", result);
+}
+"""
+answer.doesCompile = false
+context = """
+Can only break with a value inside a `loop`
 """

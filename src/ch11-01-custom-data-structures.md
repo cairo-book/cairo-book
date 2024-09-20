@@ -94,7 +94,10 @@ We can define this interface in Cairo like:
 ```
 
 This provides a blueprint for the implementation of our dynamic array. We named
-it _Vec_ as it is similar to the `Vec<T>` data structure in Rust.
+it _MemoryVec_ as it is similar to the `Vec<T>` data structure in Rust.
+
+> Note: The core library of Cairo already includes a `Vec<T>` data structure, strictly used as a storage type in smart contracts.
+> To differentiate our data structure from the core library's one, we named our implementation _MemoryVec_.
 
 ### Implementing a Dynamic Array in Cairo
 
@@ -106,13 +109,13 @@ pointer to allow using any type `T` in our data structure, as explained in the
 [Dictionaries][nullable] section:
 
 ```cairo,noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:struct}}
 ```
 
-Since we again have `Felt252Dict<T>` as a struct member, we need to implement the `Destruct<T>` trait to tell the compiler how to make `NullableVec<T>` go out of scope.
+Since we again have `Felt252Dict<T>` as a struct member, we need to implement the `Destruct<T>` trait to tell the compiler how to make `MemoryVec<T>` go out of scope.
 
 ```cairo,noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:destruct}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:destruct}}
 ```
 
 The key thing that makes this vector mutable is that we can insert values into
@@ -120,7 +123,7 @@ the dictionary to set or update values in our data structure. For example, to
 update a value at a specific index, we do:
 
 ```cairo,noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:set}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:set}}
 ```
 
 This overwrites the previously existing value at that index in the dictionary.
@@ -133,11 +136,11 @@ implementation of all the methods defined in our interface can be done as follow
 :
 
 ```cairo,noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_13_cust_struct_vect/src/lib.cairo:implem}}
 ```
 
-The full implementation of the `Vec` structure can be found in the
-community-maintained library [Alexandria](https://github.com/keep-starknet-strange/alexandria/tree/main/packages/data_structures/src).
+The full implementation of the `MemoryVec` structure can be found in the
+community-maintained library [Alexandria](https://github.com/keep-starknet-strange/alexandria/blob/main/packages/data_structures/src/vec.cairo).
 
 [nullable]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 
@@ -176,7 +179,7 @@ The Stack struct is defined as:
 Next, let's see how our main functions `push` and `pop` are implemented.
 
 ```cairo,noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_14_cust_struct_stack/src/lib.cairo:implem}}
 ```
 
 The code uses the `insert` and `get` methods to access the values in the

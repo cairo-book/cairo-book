@@ -1,11 +1,39 @@
+use core::starknet::ContractAddress;
+
+#[starknet::interface]
+trait IUserValues<TState> {
+    fn set(ref self: TState, amount: u64);
+    fn get(self: @TState, address: ContractAddress) -> u64;
+}
+
+//ANCHOR: contract
 #[starknet::contract]
-mod contract {
-    use core::starknet::ContractAddress;
-    use core::starknet::storage::{Map, StoragePathEntry};
-    //ANCHOR: here
+mod UserValues {
+    use starknet::storage::{
+        StoragePointerReadAccess, StoragePointerWriteAccess, StoragePathEntry, Map
+    };
+    use core::starknet::{ContractAddress, get_caller_address};
+
     #[storage]
     struct Storage {
-        allowances: Map<ContractAddress, Map<ContractAddress, u256>>,
+        user_values: Map<ContractAddress, u64>,
     }
-    //ANCHOR_END: here
+
+    impl UserValuesImpl of super::IUserValues<ContractState> {
+        // ANCHOR: write
+        fn set(ref self: ContractState, amount: u64) {
+            let caller = get_caller_address();
+            self.user_values.entry(caller).write(amount);
+        }
+        // ANCHOR_END: write
+
+        // ANCHOR: read
+        fn get(self: @ContractState, address: ContractAddress) -> u64 {
+            self.user_values.entry(address).read()
+        }
+        // ANCHOR_END: read
+    }
 }
+//ANCHOR_END: contract
+
+

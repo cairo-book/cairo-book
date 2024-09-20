@@ -92,6 +92,7 @@
   - [Procedural Macros](ch11-10-procedural-macros.md)
   - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
   - [Printing](ch11-08-printing.md)
+  - [Arithmetic Circuits](ch11-10-arithmetic-circuits.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
@@ -101,7 +102,6 @@
   - [D - The Cairo Prelude](appendix-04-cairo-prelude.md)
   - [E - Common Error Messages](appendix-05-common-error-messages.md)
   - [F - Useful Development Tools](appendix-06-useful-development-tools.md)
-  - [G - Installing Cairo binaries](appendix-07-cairo-binaries.md)
 
 ---
 
@@ -118,7 +118,9 @@
 
 - [Building Starknet Smart Contracts](./ch14-00-building-starknet-smart-contracts.md)
 
-  - [Contract Storage](./ch14-01-contract-storage.md)
+  - [Contract Storage](./ch14-01-00-contract-storage.md)
+    - [Storage Mappings](./ch14-01-01-storage-mappings.md)
+    - [Storage Vecs](./ch14-01-02-storage-vecs.md)
   - [Contract Functions](./ch14-02-contract-functions.md)
   - [Contract Events](./ch14-03-contract-events.md)
 
@@ -154,7 +156,6 @@
   - [General Recommendations](./ch17-01-general-recommendations.md)
   - [Testing Smart Contracts](./ch17-02-testing-smart-contracts.md)
   - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
-  - [Formal Verification]()
 
 ## Appendix
 
