@@ -96,7 +96,7 @@ The next three lines set the configuration information Scarb needs to compile yo
 
 The `[dependencies]` section, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
-The `[dev-dependencies]` section is about your added dependencies through scarb ( we'll revisit it later in detail ) .
+The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project.
 
 > Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation][starknet package].
 
