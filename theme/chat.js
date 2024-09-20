@@ -1,9 +1,14 @@
 // IIFE to encapsulate our chat functionality and avoid polluting the global scope
 (function () {
   // Configuration object
+  // const CONFIG = {
+  //   API_URL: "https://backend.agent.starknet.id/api",
+  //   WS_URL: "wss://backend.agent.starknet.id/ws",
+  //   MAX_RECONNECT_ATTEMPTS: 5,
+  // };
   const CONFIG = {
-    API_URL: "https://backend.agent.starknet.id/api",
-    WS_URL: "wss://backend.agent.starknet.id/ws",
+    API_URL: "http://localhost:3001/api",
+    WS_URL: "ws://localhost:3001/ws",
     MAX_RECONNECT_ATTEMPTS: 5,
   };
 
@@ -67,7 +72,7 @@
         </div>
         <div id="chat-messages"></div>
         <div id="chat-input">
-          <input type="text" id="message-input" placeholder="Ask the Cairo Bot...">
+          <input type="text" id="message-input" placeholder="Ask anything about Cairo...">
           <button id="send-message">Send</button>
         </div>
       `;
@@ -141,7 +146,6 @@
       console.log("[DEBUG] WebSocket connection opened");
       this.setWSReady(true);
       this.reconnectAttempts = 0;
-      this.showToast("Connected to chat server", "success");
     }
 
     handleWebSocketClose() {
@@ -152,7 +156,6 @@
 
     handleWebSocketError(error) {
       console.error("WebSocket error:", error);
-      this.showToast("WebSocket connection error.", "error");
     }
 
     handleWebSocketMessage(event) {
@@ -350,6 +353,17 @@
         },
       );
 
+      // Add formatted sources at the end
+      if (sources && sources.length > 0) {
+        const formattedSources = sources
+          .map(
+            (source, i) =>
+              `[${i + 1}] <a href="${source.metadata.url}" target="_blank">${source.metadata.title || "Untitled"}</a>`,
+          )
+          .join("\n");
+        processedContent += `\n\nRelevant pages:\n${formattedSources}`;
+      }
+
       return processedContent;
     }
 
@@ -414,7 +428,7 @@
           content: message,
         },
         copilot: false,
-        focusMode: "cairoBookSearch",
+        focusMode: "succintCairoBookSearch",
         history: this.messageHistory,
       };
       this.chatSocket.send(JSON.stringify(messageData));
