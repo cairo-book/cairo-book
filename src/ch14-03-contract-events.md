@@ -9,7 +9,7 @@ Technically speaking, an event is a custom data structure emitted by a smart con
 The events of a smart contract are defined in an enum annotated with the attribute `#[event]`. This enum must be named `Event`.
 
 ```cairo,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:event}}
+{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:event}}
 ```
 
 Each variant, like `BookAdded` or `FieldUpdated` represents an event that can be emitted by the contract. The variant data represents the data associated to an event. It could be a `struct` or an `enum`.
