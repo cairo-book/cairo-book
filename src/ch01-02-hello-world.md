@@ -49,8 +49,16 @@ Navigate to your _cairo_projects_ directory (or wherever you decided to store yo
 ```bash
 scarb new hello_world
 ```
+Scarb will ask you about the dependencies you want to add.
+You will be given two options :
 
-It creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
+```
+❯ Cairo Test (default)
+❯ Starknet Foundry (recommended, requires snforge installed: https://github.com/foundry-rs/starknet-foundry)
+```
+For our `hello_world` program , we'll use the first one `❯ Cairo Test (default)` and will explore the latter later.
+
+This creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
 
 Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated two files and one directory for us: a _Scarb.toml_ file and a _src_ directory with a _lib.cairo_ file inside.
 
@@ -69,10 +77,12 @@ name = "hello_world"
 version = "0.1.0"
 edition = "2024_07"
 
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-# foo = { path = "vendor/foo" }
+
+[dev-dependencies]
+cairo_test = "2.8.2"
 ```
 
 {{#label scarb-content}}
@@ -84,7 +94,9 @@ The first line, `[package]`, is a section heading that indicates that the follow
 
 The next three lines set the configuration information Scarb needs to compile your program: the name of the package and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix D][prelude].
 
-The last line, `[dependencies]`, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
+The `[dependencies]` section, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
+
+The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project.
 
 > Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation][starknet package].
 
