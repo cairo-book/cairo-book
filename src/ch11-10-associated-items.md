@@ -24,7 +24,7 @@ Let's consider the following `Pack` trait:
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types}}
 ```
 
-The type `Result` is a placeholder, and the method’s definition that follows shows that it will return values of type `Self::Result`. Implementors of the `Pack` trait will specify the concrete type for `Result`, and the next method will return a value of that concrete type.
+The `Result` type in our `Pack` trait acts as placeholders for a type that will be filled in later. Think of associated types as leaving a blank space in your trait for each implementation to write in the specific type it needs. This approach keeps your trait definition clean and flexible. When you use the trait, you don't need to worry about specifying these types - they're already chosen for you by the implementation. In our `Pack` trait, the type `Result` is such a placeholder. The method's definition shows that it will return values of type `Self::Result`, but it doesn't specify what `Result` actually is. This is left to the implementers of the `Pack` trait, who will specify the concrete type for `Result`. When the `pack` method is called, it will return a value of that chosen concrete type, whatever it may be.
 
 Let's suppose now that a function `foo` needs the ability to pack 2 variables of type `T`. If we had defined a `PackGeneric` trait with an additional generic parameter that is used to describe the result, then this trait and one potential implementation using `u32` type for the generic arguments and `u64` for the result would have looked like this:
 
