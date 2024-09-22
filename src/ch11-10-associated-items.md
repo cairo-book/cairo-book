@@ -61,18 +61,24 @@ The point is that `bar` doesn't need to use a second generic type for the packin
 ## Associated Constants
 
 Associated constants are constants associated with a type. They are declared using the `const` keyword and are defined in a trait or implementation.
-In our next example, we are building a game with two character types &mdash; `Wizard` and `Warrior`, and each character type has a constant `strength` attribute. We can model this scenario as follows:
+In our next example, we define a `Shape<T>` trait that we implement for a `Triangle` and a `Square`. This trait includes an associated constant, defining the number of sides of the type that implements the trait. 
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:associated_consts}}
 ```
 
-Since `strength` is fixed per character type, associated consts allow us to bind this constant number to the character trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
+After that, we create a `print_shape_info` generic function, which requires that the generic argument implements the `Shape<T>`trait. This function will use the associated constant to retrieve the number of sides of the geometric figure, and print it along with its description.
 
-A potential battle between a `Warrior` and a `Wizard` could look like this:
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:print_info}}
+```
+
+Associated consts allow us to bind a constant number to the `Shape<T>` trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
+
+We can ultimately run the `print_shape_info` and see the output for both `Triangle` and `Square`:
 
 ```cairo
-{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:battle}}
+{{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:main}}
 ```
 
 ## Associated Implementations

@@ -1,49 +1,38 @@
 // ANCHOR: associated_consts
-#[derive(Drop)]
-struct Warrior {
-    name: felt252,
-    hp: u32
+trait Shape<T> {
+    const SIDES: u32;
+    fn describe() -> ByteArray;
 }
 
-#[derive(Drop)]
-struct Wizard {
-    name: felt252,
-    hp: u32
-}
+struct Triangle {}
 
-trait Character<T, U> {
-    const strength: u32;
-    fn fight(self: @T, ref enemy: U);
-}
-
-impl WizardCharacter of Character<Wizard, Warrior> {
-    const strength: u32 = 50;
-    fn fight(self: @Wizard, ref enemy: Warrior) {
-        enemy.hp -= Self::strength;
+impl TriangleShape of Shape<Triangle> {
+    const SIDES: u32 = 3;
+    fn describe() -> ByteArray {
+        "I am a triangle."
     }
 }
 
-impl WarriorCharacter of Character<Warrior, Wizard> {
-    const strength: u32 = 100;
-    fn fight(self: @Warrior, ref enemy: Wizard) {
-        enemy.hp -= Self::strength;
+struct Square {}
+
+impl SquareShape of Shape<Square> {
+    const SIDES: u32 = 4;
+    fn describe() -> ByteArray {
+        "I am a square."
     }
 }
 // ANCHOR_END: associated_consts
 
-// ANCHOR: battle
-fn main() {
-    let mut warrior = Warrior { name: 'Ares', hp: 1000, };
-    let mut wizard = Wizard { name: 'Merlin', hp: 1000, };
-
-    while (warrior.hp != 0 && wizard.hp != 0) {
-        warrior.fight(ref wizard);
-        wizard.fight(ref warrior);
-    };
-
-    println!("Ares hp is {}", warrior.hp);
-    println!("Merlin hp is {}", wizard.hp);
+// ANCHOR: print_info
+fn print_shape_info<T, impl ShapeImpl: Shape<T>>() {
+    println!("I have {} sides. {}", ShapeImpl::SIDES, ShapeImpl::describe());
 }
-// ANCHOR_END: battle
+// ANCHOR_END: print_info
 
+// ANCHOR: main
+fn main() {
+    print_shape_info::<Triangle>();
+    print_shape_info::<Square>();
+}
+// ANCHOR_END: main
 
