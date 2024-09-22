@@ -61,19 +61,19 @@ As you can see, `bar` doesn't need to specify a second generic type for the pack
 ## Associated Constants
 
 Associated constants are constants associated with a type. They are declared using the `const` keyword and are defined in a trait or implementation.
-In our next example, we define a `Shape<T>` trait that we implement for a `Triangle` and a `Square`. This trait includes an associated constant, defining the number of sides of the type that implements the trait. 
+In our next example, we define a generic `Shape` trait that we implement for a `Triangle` and a `Square`. This trait includes an associated constant, defining the number of sides of the type that implements the trait. 
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:associated_consts}}
 ```
 
-After that, we create a `print_shape_info` generic function, which requires that the generic argument implements the `Shape<T>`trait. This function will use the associated constant to retrieve the number of sides of the geometric figure, and print it along with its description.
+After that, we create a `print_shape_info` generic function, which requires that the generic argument implements the `Shape`trait. This function will use the associated constant to retrieve the number of sides of the geometric figure, and print it along with its description.
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:print_info}}
 ```
 
-Associated constants allow us to bind a constant number to the `Shape<T>` trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
+Associated constants allow us to bind a constant number to the `Shape` trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
 
 We can ultimately run the `print_shape_info` and see the output for both `Triangle` and `Square`:
 
