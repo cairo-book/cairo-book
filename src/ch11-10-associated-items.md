@@ -85,18 +85,17 @@ To understand the utility of associated implementations, let's examine the `Iter
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:associated_impls}}
 ```
 
-In this example, the `IntoIterator` trait has an associated type `IntoIter` and an associated impl `Iterator: Iterator<Self::IntoIter>`. Let's break down why this is useful:
-
 1. The `IntoIterator` trait is designed to convert a collection into an iterator.
-2. The `IntoIter` associated type represents the specific iterator type that will be created.
-3. The associated implementation `Iterator: Iterator<Self::IntoIter>` declares that this `IntoIter` type must implement the `Iterator` trait.
+2. The `IntoIter` associated type represents the specific iterator type that will be created. This allows different collections to define their own efficient iterator types.
+3. The associated implementation `Iterator: Iterator<Self::IntoIter>` (the key feature we're discussing) declares that this `IntoIter` type must implement the `Iterator` trait.
+4. This design allows for type-safe iteration without needing to specify the iterator type explicitly every time, improving code ergonomics.
 
-This design ensures that any type implementing `IntoIterator` will produce an iterator that adheres to the `Iterator` trait. The associated implementation creates a binding at the trait level, guaranteeing that:
+The associated implementation creates a binding at the trait level, guaranteeing that:
 
 - The `into_iter` method will always return a type that implements `Iterator`.
 - This relationship is enforced for all implementations of `IntoIterator`, not just on a case-by-case basis.
 
-The following `main` function creates an array of `felt252`, converts it into an `ArrayIter` type and ultimately uses the `Iterator` implementation to print each element:
+The following `main` function demonstrates how this works in practice for an `Array<felt252>`:
 
 ```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:main}}
