@@ -67,7 +67,7 @@ In our next example, we define a generic `Shape` trait that we implement for a `
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:associated_consts}}
 ```
 
-After that, we create a `print_shape_info` generic function, which requires that the generic argument implements the `Shape`trait. This function will use the associated constant to retrieve the number of sides of the geometric figure, and print it along with its description.
+After that, we create a `print_shape_info` generic function, which requires that the generic argument implements the `Shape` trait. This function will use the associated constant to retrieve the number of sides of the geometric figure, and print it along with its description.
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:print_info}}
