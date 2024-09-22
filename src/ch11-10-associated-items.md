@@ -79,7 +79,7 @@ A potential battle between a `Warrior` and a `Wizard` could look like this:
 
 Associated implementations allow you to declare that a trait implementation must exist for an associated type. This feature is particularly useful when you want to enforce relationships between types and implementations at the trait level. It ensures type safety and consistency across different implementations of a trait, which is important in generic programming contexts.
 
-To understand the utility of associated impls, let's examine the `Iterator` and `IntoIterator` traits from the Cairo core library, with their respective implementations using `ArrayIter<T>` struct as the collection type:
+To understand the utility of associated implementations, let's examine the `Iterator` and `IntoIterator` traits from the Cairo core library, with their respective implementations using `ArrayIter<T>` as the collection type:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_12_associated_impls/src/lib.cairo:associated_impls}}
