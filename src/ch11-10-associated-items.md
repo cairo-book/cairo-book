@@ -32,7 +32,7 @@ Let's see how associated types compare to a more traditional generic approach. S
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:generics_usage}}
 ```
 
-with `foo` being implemented as follows:
+With this approach, `foo` would be implemented as:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:foo}}
