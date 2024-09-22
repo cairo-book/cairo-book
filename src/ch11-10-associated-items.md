@@ -50,7 +50,7 @@ with `bar` function corresponding to the `foo` function but using an associated 
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:bar}}
 ```
 
-Finally, we can run `foo`, and `bar` in our `main` and see that they both produce the same result:
+Finally, let's see both approaches in action, demonstrating that the end result is the same:
 
 ```cairo
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:main}}
