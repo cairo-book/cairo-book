@@ -16,7 +16,7 @@ Every associated item kind comes in two varieties: definitions that contain the 
 
 ## Associated Types
 
-Associated types are _type aliases_ allowing you to define abstract type placeholders within traits. Instead of specifying concrete types in the trait definition, associated types let trait implementors choose the actual types to use. This provides a flexible way to define traits with "placeholder" types that get filled in later.
+Associated types are _type aliases_ allowing you to define abstract type placeholders within traits. Instead of specifying concrete types in the trait definition, associated types let trait implementers choose the actual types to use.
 
 Let's consider the following `Pack` trait:
 
