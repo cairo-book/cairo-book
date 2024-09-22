@@ -38,7 +38,7 @@ With this approach, `foo` would be implemented as:
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:foo}}
 ```
 
-However, when using associated types, we can get the result type from the impl of `Pack`, and we don’t need to pollute `foo` with an additional generic argument. In the following snippet, we define a `PackU32Impl` impl of `Pack<T>` trait with `Result` type being a `u64` :
+Notice how `foo` needs to specify both `T` and `U` as generic parameters. Now, let's compare this to our `Pack` trait with an associated type:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types_impl}}
