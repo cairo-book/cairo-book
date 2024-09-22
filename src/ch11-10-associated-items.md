@@ -44,7 +44,7 @@ However, when using associated types, we can get the result type from the impl o
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:associated_types_impl}}
 ```
 
-with `bar` function corresponding to the `foo` function but using an associated type:
+With associated types, we can define `bar` more concisely:
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:bar}}
