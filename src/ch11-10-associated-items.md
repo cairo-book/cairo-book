@@ -56,7 +56,7 @@ Finally, let's see both approaches in action, demonstrating that the end result 
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_10_associated_types/src/lib.cairo:main}}
 ```
 
-The point is that `bar` doesn't need to use a second generic type for the packing result type, this information is actually associated with the impl of the `Pack` trait.
+As you can see, `bar` doesn't need to specify a second generic type for the packing result. This information is hidden in the implementation of the `Pack` trait, making the function signature cleaner and more flexible. Associated types allow us to express the same functionality with less verbosity, while still maintaining the flexibility of generic programming.
 
 ## Associated Constants
 
