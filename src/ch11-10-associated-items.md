@@ -73,7 +73,7 @@ After that, we create a `print_shape_info` generic function, which requires that
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:print_info}}
 ```
 
-Associated consts allow us to bind a constant number to the `Shape<T>` trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
+Associated constants allow us to bind a constant number to the `Shape<T>` trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
 
 We can ultimately run the `print_shape_info` and see the output for both `Triangle` and `Square`:
 
