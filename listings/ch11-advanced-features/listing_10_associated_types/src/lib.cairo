@@ -28,7 +28,7 @@ trait PackGeneric<T, U> {
     fn pack_generic(self: T, other: T) -> U;
 }
 
-impl ConcatenateGenericU32 of PackGeneric<u32, u64> {
+impl PackGenericU32 of PackGeneric<u32, u64> {
     fn pack_generic(self: u32, other: u32) -> u64 {
         let shift: u64 = 0x100000000; // 2^32
         self.into() * shift + other.into()
