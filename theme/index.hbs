@@ -134,10 +134,16 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
+                
+                <a href="https://book.cairo-lang.org/">
+                    <img src="{{ path_to_root }}/icons/Cairo_hor_logo_red.png" alt="Cairo Logo" class="sidebar-logo" style="height: 40px; display: block; margin-left: 0; padding-left: 10px; margin-bottom: 25%;">
+                </a>
+
                 {{#toc}}{{/toc}}
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
+
 
         <div id="page-wrapper" class="page-wrapper">
 
@@ -157,10 +163,7 @@
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="dark">Dark</button></li>
                         </ul>
                         {{#if search_enabled}}
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
@@ -183,12 +186,12 @@
                                 <span class="menu-cairo-home-text">Cairo Home</span>
                             </a>
                         </div>
-                        <button id="language-toggle" class="icon-button" type="button" title="Change language"
+                        <!--<button id="language-toggle" class="icon-button" type="button" title="Change language"
                             aria-label="Change language" aria-haspopup="true" aria-expanded="false"
                             aria-controls="language-list">
                             <i class="fa fa-globe"></i>
                         </button>
-                        <ul id="language-list" class="theme-popup" aria-label="Languages" role="menu">
+                         <ul id="language-list" class="theme-popup" aria-label="Languages" role="menu">
                             <li role="none"><button role="menuitem" class="theme">
                                     <a id="en">English</a>
                                 </button></li>
@@ -207,7 +210,7 @@
                             <li role="none"><button role="menuitem" class="theme">
                                     <a id="tr">Turkçe</a>
                                 </button></li>
-                        </ul>
+                        </ul> --> 
                         <script>
                             let langToggle = document.getElementById("language-toggle");
                             let langList = document.getElementById("language-list");
@@ -219,11 +222,11 @@
 
                             // The path to the root, taking the current
                             // language into account.
-                            { { #if(eq language "en") } }
+                            {{#if(eq language "en")}}
                             let full_path_to_root = "{{ path_to_root }}";
-                            { {else } }
+                            {{else}}
                             let full_path_to_root = "{{ path_to_root }}../";
-                            { {/if } }
+                            {{/if}}
                             // The page path (mdbook only gives us
                             // access to the path to the Markdown file).
                             let path = "{{ path }}".replace(/\.md$/, ".html");
@@ -236,11 +239,11 @@
                             }
                         </script>
 
-                        {{#if print_enable}}
+                        <!--{{#if print_enable}}
                         <a href="{{ path_to_root }}print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        {{/if}}
+                        {{/if}}-->
                         {{#if git_repository_url}}
                         <a href="{{git_repository_url}}" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa {{git_repository_icon}}"></i>
@@ -283,43 +286,34 @@
                         {{{ content }}}
                     </main>
 
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
+                        <!-- Navigation buttons at the bottom of the page -->
+                        <div class="navigation-buttons">
                         {{#previous}}
-                        <a rel="prev" href="{{ path_to_root }}{{link}}" class="mobile-nav-chapters previous"
-                            title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <a href="{{ path_to_root }}{{link}}" class="prev-button">
+                            <div class="button-content">
                             <i class="fa fa-angle-left"></i>
+                            <div class="text-content">
+                                <span class="button-label">PREVIOUS</span>
+                                <span class="chapter-name">{{ title }}</span>
+                            </div>
+                            </div>
                         </a>
                         {{/previous}}
 
                         {{#next}}
-                        <a rel="next" href="{{ path_to_root }}{{link}}" class="mobile-nav-chapters next"
-                            title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <a href="{{ path_to_root }}{{link}}" class="next-button">
+                            <div class="button-content">
+                            <div class="text-content">
+                                <span class="button-label">NEXT</span>
+                                <span class="chapter-name">{{ title }}</span>
+                            </div>
                             <i class="fa fa-angle-right"></i>
+                            </div>
                         </a>
                         {{/next}}
 
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
+                    </div>
             </div>
-
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                {{#previous}}
-                <a rel="prev" href="{{ path_to_root }}{{link}}" class="nav-chapters previous" title="Previous chapter"
-                    aria-label="Previous chapter" aria-keyshortcuts="Left">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                {{/previous}}
-
-                {{#next}}
-                <a rel="next" href="{{ path_to_root }}{{link}}" class="nav-chapters next" title="Next chapter"
-                    aria-label="Next chapter" aria-keyshortcuts="Right">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                {{/next}}
-            </nav>
-
         </div>
 
         {{#if live_reload_endpoint}}

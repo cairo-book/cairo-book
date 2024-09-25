@@ -8,7 +8,7 @@
 }
 
 html {
-  font-family: "Open Sans", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   color: var(--fg);
   background-color: var(--bg);
   text-size-adjust: none;
@@ -217,8 +217,8 @@ kbd {
   background-color: #333;
   transform: translateX(
     -50%
-  ); /* Center by moving tooltip 50% of its width left */
-  left: -8px; /* Half of the width of the icon */
+  );
+  left: -8px;
   top: -35px;
   font-size: 0.8em;
   text-align: center;
