@@ -60,8 +60,8 @@ As you can see, `bar` doesn't need to specify a second generic type for the pack
 
 ## Associated Constants
 
-Associated constants are constants associated with a type. They are declared using the `const` keyword and are defined in a trait or implementation.
-In our next example, we define a generic `Shape` trait that we implement for a `Triangle` and a `Square`. This trait includes an associated constant, defining the number of sides of the type that implements the trait. 
+Associated constants are constants associated with a type. They are declared using the `const` keyword in a trait and defined in its implementation.
+In our next example, we define a generic `Shape` trait that we implement for a `Triangle` and a `Square`. This trait includes an associated constant, defining the number of sides of the type that implements the trait.
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:associated_consts}}
@@ -73,7 +73,13 @@ After that, we create a `print_shape_info` generic function, which requires that
 {{#rustdoc_include ../listings/ch11-advanced-features/listing_11_associated_consts/src/lib.cairo:print_info}}
 ```
 
-Associated constants allow us to bind a constant number to the `Shape` trait rather than adding it to the struct or just hardcoding the value in the implementation. It provides an overall more elegant solution.
+Associated constants allow us to bind a constant number to the `Shape` trait rather than adding it to the struct or just hardcoding the value in the implementation. This approach provides several benefits:
+
+1. It keeps the constant closely tied to the trait, improving code organization.
+2. It allows for compile-time checks to ensure all implementors define the required constant.
+3. It ensures two instances of the same type have the same number of sides.
+
+Associated constants can also be used for type-specific behavior or configuration, making them a versatile tool in trait design.
 
 We can ultimately run the `print_shape_info` and see the output for both `Triangle` and `Square`:
 
