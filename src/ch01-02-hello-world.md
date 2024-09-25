@@ -49,13 +49,15 @@ Navigate to your _cairo_projects_ directory (or wherever you decided to store yo
 ```bash
 scarb new hello_world
 ```
+
 Scarb will ask you about the dependencies you want to add.
 You will be given two options :
 
-```
+```text
 ❯ Cairo Test (default)
 ❯ Starknet Foundry (recommended, requires snforge installed: https://github.com/foundry-rs/starknet-foundry)
 ```
+
 For our `hello_world` program , we'll use the first one `❯ Cairo Test (default)` and will explore the latter later.
 
 This creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
