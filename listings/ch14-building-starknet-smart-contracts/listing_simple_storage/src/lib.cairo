@@ -32,6 +32,7 @@ mod SimpleStorage {
     #[derive(Copy, Drop, Serde, starknet::Store)]
     pub enum Expiration {
         finite: u64,
+        #[default]
         infinite
     }
     //ANCHOR_END: enum
@@ -86,5 +87,4 @@ mod SimpleStorage {
 
 }
 //ANCHOR_END: all
-
 

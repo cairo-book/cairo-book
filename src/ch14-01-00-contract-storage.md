@@ -63,9 +63,15 @@ In our example, we want to store a `Person` struct in storage, which is only pos
 
 Similarly, Enums can only be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait.
 
+Enums used in contract storage **must** define a default variant. This default variant is returned when reading an empty storage slot - otherwise, it will result in a runtime error.
+
+Here's an example of how to properly define an enum for use in contract storage:
+
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:enum}}
 ```
+
+In this example, we've added the `#[default]` attribute to the `infinite` variant. This tells the Cairo compiler that if we try to read an uninitialized enum from storage, the `infinite` variant should be returned.
 
 You might have noticed that we also derived `Drop` and `Serde` on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.
 
