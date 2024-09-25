@@ -71,7 +71,7 @@ Here's an example of how to properly define an enum for use in contract storage:
 {{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:enum}}
 ```
 
-In this example, we've added the `#[default]` attribute to the `infinite` variant. This tells the Cairo compiler that if we try to read an uninitialized enum from storage, the `infinite` variant should be returned.
+In this example, we've added the `#[default]` attribute to the `Infinite` variant. This tells the Cairo compiler that if we try to read an uninitialized enum from storage, the `Infinite` variant should be returned.
 
 You might have noticed that we also derived `Drop` and `Serde` on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.
 
@@ -92,18 +92,18 @@ Note that tuples are similarly stored in contract's storage, with the first elem
 
 When you store an enum variant, what you're essentially storing is the variant's index and eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
 If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
-For example, suppose we have the `Expiration` enum with the `finite` variant that carries an associated limit date, and the `infinite` variant without associated data. The storage layout for the `finite` variant would look like this:
+For example, suppose we have the `Expiration` enum with the `Finite` variant that carries an associated limit date, and the `Infinite` variant without associated data. The storage layout for the `Finite` variant would look like this:
 
 | Element                      | Address                           |
 | ---------------------------- | --------------------------------- |
-| Variant index (0 for finite) | `expiration.__base_address__`     |
+| Variant index (0 for Finite) | `expiration.__base_address__`     |
 | Associated limit date        | `expiration.__base_address__ + 1` |
 
-while the storage layout for the `infinite` would be as follows:
+while the storage layout for the `Infinite` variant would be as follows:
 
 | Element                        | Address                       |
 | ------------------------------ | ----------------------------- |
-| Variant index (1 for infinite) | `expiration.__base_address__` |
+| Variant index (1 for Infinite) | `expiration.__base_address__` |
 
 <!-- TODO: add example -->
 
