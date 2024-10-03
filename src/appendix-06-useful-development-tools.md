@@ -28,7 +28,7 @@ let table: Array<ByteArray> = array![
 ];
 ```
 
-This attribute can be applied to modules, functions, statements or structs.
+This attribute can be applied to modules, functions, statements or struct defintions.
 
 ## IDE Integration Using `cairo-language-server`
 
