@@ -19,7 +19,7 @@ scarb fmt
 
 For things you do not want `scarb fmt` to mangle, use `#[cairofmt::skip]`:
 
-```cairo
+```cairo, noplayground
 #[cairofmt::skip]
 let table: Array<ByteArray> = array![
     "oxo",
