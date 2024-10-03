@@ -17,6 +17,17 @@ To format any Cairo project, enter the following inside the project directory:
 scarb fmt
 ```
 
+For things you do not want `scarb fmt` to mangle, use `#[cairofmt::skip]`:
+
+```cairo
+#[cairofmt::skip]
+let table: Array<ByteArray> = array![
+    "oxo",
+    "xox",
+    "oxo",
+];
+```
+
 ## IDE Integration Using `cairo-language-server`
 
 To help IDE integration, the Cairo community recommends using the
