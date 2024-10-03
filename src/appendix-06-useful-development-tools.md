@@ -17,7 +17,7 @@ To format any Cairo project, enter the following inside the project directory:
 scarb fmt
 ```
 
-For things you do not want `scarb fmt` to mangle, use `#[cairofmt::skip]`:
+For items (modules, functions, structs) or statements you do not want `scarb fmt` to mangle, use `#[cairofmt::skip]`:
 
 ```cairo, noplayground
 #[cairofmt::skip]
@@ -27,8 +27,6 @@ let table: Array<ByteArray> = array![
     "oxo",
 ];
 ```
-
-This attribute can be applied to modules, functions, statements or struct definitions.
 
 ## IDE Integration Using `cairo-language-server`
 
