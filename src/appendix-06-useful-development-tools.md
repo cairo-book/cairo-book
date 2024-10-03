@@ -28,6 +28,8 @@ let table: Array<ByteArray> = array![
 ];
 ```
 
+This attribute can be applied to modules, functions, or statements.
+
 ## IDE Integration Using `cairo-language-server`
 
 To help IDE integration, the Cairo community recommends using the
