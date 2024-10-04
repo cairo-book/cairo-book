@@ -58,8 +58,9 @@ mod NameRegistry {
     //ANCHOR: enum_store
     #[derive(Copy, Drop, Serde, starknet::Store)]
     pub enum RegistrationType {
-        finite: u64,
-        infinite
+        Finite: u64,
+        #[default]
+        Infinite
     }
     //ANCHOR_END: enum_store
 
