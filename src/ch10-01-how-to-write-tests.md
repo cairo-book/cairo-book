@@ -506,7 +506,7 @@ Let's reuse the `sum_n` function studied above:
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
 ```
 
-After generating the trace file and the profile output, running `go tool pprof` in your project will start the web server where you can find many useful informations about the test that you ran:
+After generating the trace file and the profile output, running `go tool pprof` in your project will start the web server where you can find many useful information about the test that you ran:
 
 - The test includes one function call, corresponding to the call to the test function:
 
@@ -524,7 +524,7 @@ Calling `sum_n` multiple times in the test function will still return 1 call. Th
 
 Note that 30 additional steps are used, allowing `snforge` to handle potential cheatcodes.
 
-Other informations are also available such as memory holes (i.e., unused memory cells) or builtins usage. The Cairo Profiler is under active development, and many other features will be made available in the future. 
+Other information is also available such as memory holes (i.e., unused memory cells) or builtins usage. The Cairo Profiler is under active development, and many other features will be made available in the future. 
 
 [starknet foundry]: https://foundry-rs.github.io/starknet-foundry/index.html
 [snfoundry intro]: ./ch13-00-introduction-to-starknet-smart-contracts.md#starknet-foundry
