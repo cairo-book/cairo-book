@@ -16,7 +16,7 @@ Let’s look at the features Cairo provides for writing tests that take these ac
 
 ### The Anatomy of a Test Function
 
-At its simplest, a test in Cairo is a function that’s annotated with the `#[test]` attribute. Attributes are metadata about pieces of Cairo code; one example is the `#[derive()]` attribute we used with structs in [Chapter 5](ch05-01-defining-and-instantiating-structs.md). To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb cairo-test` command, Scarb runs Cairo's test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
+At its simplest, a test in Cairo is a function that’s annotated with the `#[test]` attribute. Attributes are metadata about pieces of Cairo code; one example is the `#[derive()]` attribute we used with structs in [Chapter 5][structs]. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb cairo-test` command, Scarb runs Cairo's test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
 
 Let's create a new project called _adder_ using Scarb with the command `scarb new adder`:
 
@@ -40,7 +40,7 @@ In _lib.cairo_, let's remove the existing content and add a `tests` module conta
 
 Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
-We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the next [Testing Organization](ch10-02-test-organization.md) section.
+We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the next [Testing Organization][testing organization] section.
 
 The example function body uses the `assert!` macro, which contains the result of adding 2 and 2, which equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how `assert!` works later in this chapter. Let’s run it to see that this test passes.
 
@@ -97,6 +97,9 @@ Instead of `ok`, the line `adder::another` shows `fail`. A new section appears b
 The summary line is displayed at the end: overall, our test result is `FAILED`. We had one test pass and one test fail.
 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
+
+[structs]: ./ch05-01-defining-and-instantiating-structs.md
+[testing organization]: ./ch10-02-testing-organization.md
 
 ## Checking Results with the `assert!` Macro
 
@@ -274,7 +277,9 @@ you define yourself, you’ll need to implement `PartialEq` to assert equality o
 those types. You’ll also need to implement `Debug` to print the values when the
 assertion fails. Because both traits are derivable, this is usually as straightforward as adding the
 `#[derive(Drop, Debug, PartialEq)]` annotation to your struct or enum definition. See
-[Appendix C](./appendix-03-derivable-traits.md) for more details about these and other derivable traits.
+[Appendix C][derivable traits] for more details about these and other derivable traits.
+
+[derivable traits]: ./appendix-03-derivable-traits.md
 
 ### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` Macros
 
@@ -479,35 +484,55 @@ When testing recursive functions or loops, the test is instantiated by default w
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
 ```
 
-## Benchmarking the Gas Usage of a Specific Operation
+## Benchmarking Cairo Programs Using Starknet Foundry and Cairo Profiler
 
-When you want to benchmark the gas usage of a specific operation, you can use the following pattern in your test function.
+[Starknet Foundry][starknet foundry] is a [toolchain][snfoundry intro] for developing smart contracts in Cairo. The second part of the book dedicated to Cairo Smart Contracts will describe the main features it allows.
 
-```cairo, noplayground
-let initial = testing::get_available_gas();
-gas::withdraw_gas().unwrap();
-    /// code we want to bench.
-println!("{}\n", initial - testing::get_available_gas());
-```
+Starknet Foundry contains a profiling feature that might also be useful for benchmarking the number of steps used for Cairo programs, or only specific operations within programs.
 
-The following example shows how to use it to test the gas function of the `sum_n` function above.
+As mentioned in the [Hello, World][hello world] chapter, you can choose to set up Starknet Foundry as a dependency when creating a new project. 
+
+The [profiling][profiling] feature allows you to produce the execution trace for every successful test you run, and use this trace to generate the profile output. That way, you can create custom tests, containing calls to functions of your program, or even isolated portions of Cairo code you want to benchmark.
+
+1. Install [Cairo Profiler][cairo profiler] from Software Mansion.
+2. Install [Go][go], [Graphviz][graphviz] and [pprof][pprof], all of them are required to visualize the generated profile output. 
+3. Run `snforge test` command with `--save-trace-data` flag. `snforge` will produce a trace file for each passing test. These files will be stored in the _snfoundry_trace_ directory of your project.
+4. Run `snforge test --build-profile`, generating the corresponding output files in the _profile_ directory.
+5. Run `go tool pprof -http=":8000" path/to/profile/output.pb.gz` to analyse a profile. This will start a web server at the specified port.
+
+Let's reuse the `sum_n` function studied above:
 
 ```cairo
-{{#include ../listings/ch10-testing-cairo-programs/no_listing_07_benchmark_gas/src/lib.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
 ```
 
-The value printed when running `scarb cairo-test` is the amount of gas that was consumed by the benchmarked operation.
+After generating the trace file and the profile output, running `go tool pprof` in your project will start the web server where you can find many useful informations about the test that you ran:
 
-```shell
-$ scarb cairo-test
-testing adder ...
-running 1 test
-consumed gas: 80690
+- The test includes one function call, corresponding to the call to the test function:
 
-test adder::tests::benchmark_sum_n_gas ... ok (gas usage est.: 140100)
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
-```
+<div align="center">
+    <img src="pprof-function-call.png" alt="pprof function calls" width="800px"/>
+</div>
 
-Here, the gas usage of the `sum_n` function is `80690` (decimal representation of the hex number). The total amount consumed by the test is slightly higher at `140100`, due to some extra steps required to run the entire test function.
+Calling `sum_n` multiple times in the test function will still return 1 call. This is because `snforge` simulates a contract call when executing a test.
+
+- Overall, running the test required 325 Cairo steps, with 321 steps used by the test itself, including 256 steps to execute the `sum_n` function, and 35 steps used for the rest of the code of the test function:  
+
+<div align="center">
+    <img src="pprof-steps.png" alt="pprof number of steps" width="800px"/>
+</div>
+
+Note that 30 additional steps are used, allowing `snforge` to handle potential cheatcodes.
+
+Other informations are also available such as memory holes (i.e., unused memory cells) or builtins usage. The Cairo Profiler is under active development, and many other features will be made available in the future. 
+
+[starknet foundry]: https://foundry-rs.github.io/starknet-foundry/index.html
+[snfoundry intro]: ./ch13-00-introduction-to-starknet-smart-contracts.md#starknet-foundry
+[hello world]: ./ch01-02-hello-world.md#creating-a-project-with-scarb
+[profiling]: https://foundry-rs.github.io/starknet-foundry/snforge-advanced-features/profiling.html
+[cairo profiler]: https://github.com/software-mansion/cairo-profiler
+[go]: https://go.dev/doc/install
+[Graphviz]: https://www.graphviz.org/download/
+[pprof]: https://github.com/google/pprof?tab=readme-ov-file#building-pprof
 
 {{#quiz ../quizzes/ch10-01-how_to_write_tests.toml}}

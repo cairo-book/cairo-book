@@ -77,7 +77,7 @@
 - [Testing Cairo Programs](ch10-00-testing-cairo-programs.md)
 
   - [How To Write Tests](ch10-01-how-to-write-tests.md)
-  - [Testing Organization](ch10-02-test-organization.md)
+  - [Testing Organization](ch10-02-testing-organization.md)
 
 ## Advanced Cairo Features
 
