@@ -112,7 +112,7 @@ The `[dev-dependencies]` section is about dependencies that are required for dev
 
 The `[[target.starknet-contract]]` section allows to build contracts. We can remove it for now.
 
-The `[script]` section allows to define custom scripts. By default, there is one script that allows to run tests using `snforge` with the `scarb test` command. We can also remove it for now.
+The `[script]` section allows to define custom scripts. By default, there is one script for running tests using `snforge` with the `scarb test` command. We can also remove it for now.
 
 The other file created by Scarb is _src/lib.cairo_, let's delete all the content and put in the following content, we will explain the reason later.
 
