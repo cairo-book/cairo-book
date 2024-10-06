@@ -495,9 +495,8 @@ The [profiling][profiling] feature allows you to produce the execution trace for
 
 1. Install [Cairo Profiler][cairo profiler] from Software Mansion.
 2. Install [Go][go], [Graphviz][graphviz] and [pprof][pprof], all of them are required to visualize the generated profile output. 
-3. Run `snforge test` command with `--save-trace-data` flag. `snforge` will produce a trace file for each passing test. These files will be stored in the _snfoundry_trace_ directory of your project.
-4. Run `snforge test --build-profile`, generating the corresponding output files in the _profile_ directory.
-5. Run `go tool pprof -http=":8000" path/to/profile/output.pb.gz` to analyse a profile. This will start a web server at the specified port.
+3. Run `snforge test --build-profile`, generating a trace file for each passing test, stored in the _snfoundry_trace_ directory of your project. This command also generates the corresponding output files in the _profile_ directory.
+4. Run `go tool pprof -http=":8000" path/to/profile/output.pb.gz` to analyse a profile. This will start a web server at the specified port.
 
 Let's reuse the `sum_n` function studied above:
 
