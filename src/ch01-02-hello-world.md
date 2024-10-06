@@ -86,7 +86,7 @@ edition = "2023_11"
 starknet = "2.8.2"
 
 [dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.30.0" }
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.30.1" }
 
 [[target.starknet-contract]]
 sierra = true
@@ -110,7 +110,7 @@ The `[dependencies]` section, is the start of a section for you to list any of y
 
 The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project.
 
-The `[[target.starknet-contract]]` section allows to build contracts and generate the corresponding Sierra file. We can remove it for now.
+The `[[target.starknet-contract]]` section allows to build contracts. We can remove it for now.
 
 The `[script]` section allows to define custom scripts. By default, there is one script that allows to run tests using `snforge` with the `scarb test` command. We can also remove it for now.
 
