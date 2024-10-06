@@ -551,13 +551,11 @@ After generating the trace file and the profile output, running `go tool pprof` 
 
 - The test includes one function call, corresponding to the call to the test function. Calling `sum_n` multiple times in the test function will still return 1 call. This is because `snforge` simulates a contract call when executing a test.
 
-- Overall, running the test required 325 Cairo steps, with 321 steps used by the test itself, including 256 steps to execute the `sum_n` function, and 35 steps used for the rest of the code of the test function:  
+- The `sum_n` function execution uses 256 Cairo steps:  
 
 <div align="center">
     <img src="pprof-steps.png" alt="pprof number of steps" width="800px"/>
 </div>
-
-Note that 30 additional steps are used, allowing `snforge` to handle potential cheatcodes.
 
 Other information is also available such as memory holes (i.e., unused memory cells) or builtins usage. The Cairo Profiler is under active development, and many other features will be made available in the future. 
 
