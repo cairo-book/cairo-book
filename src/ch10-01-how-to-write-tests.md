@@ -534,7 +534,7 @@ When testing recursive functions or loops, the test is instantiated by default w
 
 Starknet Foundry contains a profiling feature that is useful to analyze and optimize the performance of your Cairo programs.
 
-The [profiling][profiling] feature allows you to produce the execution trace for every successful test you run, and use this trace to generate the profile output. That way, you can create custom tests, containing calls to functions of your program, or even isolated portions of Cairo code you want to benchmark.
+The [profiling][profiling] feature generates execution traces for successful tests, which are used to create profile outputs. This allows you to benchmark specific parts of your code.
 
 1. Install [Cairo Profiler][cairo profiler] from Software Mansion.
 2. Install [Go][go], [Graphviz][graphviz] and [pprof][pprof], all of them are required to visualize the generated profile output. 
