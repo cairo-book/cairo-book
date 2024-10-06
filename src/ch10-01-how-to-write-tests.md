@@ -507,10 +507,7 @@ Let's reuse the `sum_n` function studied above:
 
 After generating the trace file and the profile output, running `go tool pprof` in your project will start the web server where you can find many useful information about the test that you ran:
 
-- The test includes one function call, corresponding to the call to the test function:
-
-
-Calling `sum_n` multiple times in the test function will still return 1 call. This is because `snforge` simulates a contract call when executing a test.
+- The test includes one function call, corresponding to the call to the test function. Calling `sum_n` multiple times in the test function will still return 1 call. This is because `snforge` simulates a contract call when executing a test.
 
 - Overall, running the test required 325 Cairo steps, with 321 steps used by the test itself, including 256 steps to execute the `sum_n` function, and 35 steps used for the rest of the code of the test function:  
 
