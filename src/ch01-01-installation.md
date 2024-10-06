@@ -77,10 +77,10 @@ $ snforge --version
 snforge 0.31.0
 ```
 
-We'll describe Starknet Foundry in more detail in [Chapter 10][writting tests] for Cairo programs testing and in [Chapter 17][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
+We'll describe Starknet Foundry in more detail in [Chapter 10][writing tests] for Cairo programs testing and in [Chapter 17][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
 
 [snfoundry download]: https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html
-[writting tests]: ./ch10-01-how-to-write-tests.md
+[writing tests]: ./ch10-01-how-to-write-tests.md
 [testing with snfoundry]: ./ch17-02-testing-smart-contracts.md#testing-smart-contracts-with-starknet-foundry
 
 ## Installing the VSCode Extension
