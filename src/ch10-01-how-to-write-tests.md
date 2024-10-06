@@ -43,7 +43,7 @@ In _lib.cairo_, let's remove the existing content and add a `tests` module conta
 
 Note the `#[test]` annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test. We might also have non-test functions to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
 
-We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the [Test Organization][test organization] section.
+We use the `#[cfg(test)]` attribute for the `tests` module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the `#[test]` attribute in a _lib.cairo_ file, it will not compile. We will talk more about the `#[cfg(test)]` attribute in the next [Test Organization][test organization] section.
 
 The example function body uses the `assert_eq!` macro, which contains the result of adding 2 and 2, which equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how `assert_eq!` works later in this chapter. Let’s run it to see that this test passes.
 
@@ -105,9 +105,9 @@ Failures:
     adder::tests::another
 ```
 
-Instead of `ok`, the line `adder::tests::another` shows `[FAIL]`. A new section appears between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `"Make this test fail"` error.
+Instead of `[PASS]`, the line `adder::tests::another` shows `[FAIL]`. A new section appears between the individual results and the summary. It displays the detailed reason for each test failure. In this case, we get the details that `another` failed because it panicked with `"Make this test fail"` error.
 
-The summary line is displayed at the end: we had one test pass and one test fail. After that, we see a list of the failing tests.
+After that, the summary line is displayed: we had one test pass and one test fail. At the end, we see a list of the failing tests.
 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
