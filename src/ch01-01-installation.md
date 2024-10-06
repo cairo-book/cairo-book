@@ -8,10 +8,13 @@ Scarb handles a lot of tasks for you, such as building your code (either pure Ca
 
 As you write more complex Cairo programs, you might add dependencies, and if you start a project using Scarb, managing external code and dependencies will be a lot easier to do.
 
-Let's start by installing Scarb.
+[Starknet Foundry][sn foundry] is a toolchain for Cairo programs and Starknet smart contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
+
+Let's start by installing Scarb and Starknet Foundry.
 
 [scarb doc]: https://docs.swmansion.com/scarb/docs
 [cargo doc]: https://doc.rust-lang.org/cargo/
+[sn foundry]: https://foundry-rs.github.io/starknet-foundry/index.html
 
 ## Installing Scarb
 
@@ -54,7 +57,7 @@ In both cases, you can verify installation by running the following command in a
 
 ```bash
 $ scarb --version
-$scarb 2.8.3 (54938ce3b 2024-09-26)
+scarb 2.8.3 (54938ce3b 2024-09-26)
 cairo: 2.8.2 (https://crates.io/crates/cairo-lang-compiler/2.8.2)
 sierra: 1.6.0
 ```
@@ -66,7 +69,14 @@ sierra: 1.6.0
 ## Installing Starknet Foundry
 
 To install Starknet Foundry, please refer to the [installation instructions][snfoundry download]. We also recommend that you install it via asdf.
-Starknet Foundry is a toolchain for Cairo programs and Starknet smart contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
+
+Once installed, you can run the following command:
+
+```bash
+$ snforge --version
+snforge 0.31.0
+
+```
 
 We'll describe Starknet Foundry in more detail in [Chapter 17][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
 
