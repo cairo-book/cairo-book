@@ -490,7 +490,6 @@ When testing recursive functions or loops, the test is instantiated by default w
 
 Starknet Foundry contains a profiling feature that is useful to analyze and optimize the performance of your Cairo programs.
 
-As mentioned in the [Hello, World][hello world] chapter, you can choose to set up Starknet Foundry as a dependency when creating a new project. 
 
 The [profiling][profiling] feature allows you to produce the execution trace for every successful test you run, and use this trace to generate the profile output. That way, you can create custom tests, containing calls to functions of your program, or even isolated portions of Cairo code you want to benchmark.
 
