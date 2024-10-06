@@ -509,9 +509,6 @@ After generating the trace file and the profile output, running `go tool pprof` 
 
 - The test includes one function call, corresponding to the call to the test function:
 
-<div align="center">
-    <img src="pprof-function-call.png" alt="pprof function calls" width="800px"/>
-</div>
 
 Calling `sum_n` multiple times in the test function will still return 1 call. This is because `snforge` simulates a contract call when executing a test.
 
