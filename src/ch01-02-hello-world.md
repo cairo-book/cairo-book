@@ -54,15 +54,16 @@ Scarb will ask you about the dependencies you want to add.
 You will be given two options :
 
 ```text
-❯ Cairo Test (default)
-❯ Starknet Foundry (recommended, requires snforge installed: https://github.com/foundry-rs/starknet-foundry)
+? Which test runner do you want to set up? ›
+❯ Starknet Foundry (default)
+  Cairo Test
 ```
 
-For our `hello_world` program , we'll use the first one `❯ Cairo Test (default)` and will explore the latter later.
+In general, we'll prefer using the first one `❯ Starknet Foundry (default)`.
 
 This creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
 
-Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated two files and one directory for us: a _Scarb.toml_ file and a _src_ directory with a _lib.cairo_ file inside.
+Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated three files and two directory for us: a _Scarb.toml_ file, a _src_ directory with a _lib.cairo_ file inside and a _tests_ directory containing a _test_contract.cairo_ file. For now, we can remove this _tests_ directory.
 
 It has also initialized a new Git repository along with a `.gitignore` file
 
@@ -77,14 +78,21 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 [package]
 name = "hello_world"
 version = "0.1.0"
-edition = "2024_07"
+edition = "2023_11"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
+starknet = "2.8.2"
 
 [dev-dependencies]
-cairo_test = "2.8.2"
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.30.0" }
+
+[[target.starknet-contract]]
+sierra = true
+
+[scripts]
+test = "snforge test"
 ```
 
 {{#label scarb-content}}
@@ -98,9 +106,13 @@ The next three lines set the configuration information Scarb needs to compile yo
 
 The `[dependencies]` section, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
+> Note: By default, using Starknet Foundry adds the `starknet` dependency, so that you can also build contracts for Starknet.
+
 The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project.
 
-> Note: If you're building contracts for Starknet, you will need to add the `starknet` dependency as mentioned in the [Scarb documentation][starknet package].
+The `[[target.starknet-contract]]` section allows to build contracts and generate the corresponding Sierra file. We can remove it for now.
+
+The `[script]` section allows to define custom scripts. By default, there is one script that allows to run tests using `snforge` with the `scarb test` command. We can also remove it for now.
 
 The other file created by Scarb is _src/lib.cairo_, let's delete all the content and put in the following content, we will explain the reason later.
 

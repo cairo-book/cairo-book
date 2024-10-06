@@ -486,10 +486,7 @@ When testing recursive functions or loops, the test is instantiated by default w
 
 ## Benchmarking Cairo Programs
 
-[Starknet Foundry][starknet foundry] is a [toolchain][snfoundry intro] for developing smart contracts in Cairo. The second part of the book dedicated to Cairo Smart Contracts will describe the main features it allows.
-
 Starknet Foundry contains a profiling feature that is useful to analyze and optimize the performance of your Cairo programs.
-
 
 The [profiling][profiling] feature allows you to produce the execution trace for every successful test you run, and use this trace to generate the profile output. That way, you can create custom tests, containing calls to functions of your program, or even isolated portions of Cairo code you want to benchmark.
 
@@ -518,8 +515,6 @@ Note that 30 additional steps are used, allowing `snforge` to handle potential c
 
 Other information is also available such as memory holes (i.e., unused memory cells) or builtins usage. The Cairo Profiler is under active development, and many other features will be made available in the future. 
 
-[starknet foundry]: https://foundry-rs.github.io/starknet-foundry/index.html
-[snfoundry intro]: ./ch13-00-introduction-to-starknet-smart-contracts.md#starknet-foundry
 [hello world]: ./ch01-02-hello-world.md#creating-a-project-with-scarb
 [profiling]: https://foundry-rs.github.io/starknet-foundry/snforge-advanced-features/profiling.html
 [cairo profiler]: https://github.com/software-mansion/cairo-profiler
