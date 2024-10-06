@@ -110,7 +110,7 @@ The `[dependencies]` section, is the start of a section for you to list any of y
 
 The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project.
 
-The `[[target.starknet-contract]]` section allows to build contracts. We can remove it for now.
+The `[[target.starknet-contract]]` section allows to build Starknet smart contracts. We can remove it for now.
 
 The `[script]` section allows to define custom scripts. By default, there is one script for running tests using `snforge` with the `scarb test` command. We can also remove it for now.
 
