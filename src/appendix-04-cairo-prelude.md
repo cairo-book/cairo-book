@@ -25,5 +25,5 @@ imports. This prevents repetition and provides a better devX. This is what
 allows you to use `ArrayTrait::append()` or the `Default` trait without bringing
 them explicitly into scope.
 
-You can choose which prelude to use. For example, adding `edition = "2024_07"` in the _Scarb.toml_ configuration file will load the prelude from July 2024. Note that when you create a new project using `scarb new` command, the _Scarb.toml_ file will automatically include `edition = "2024_07"`.
+You can choose which prelude to use. For example, adding `edition = "2024_07"` in the _Scarb.toml_ configuration file will load the prelude from July 2024. Note that when you create a new project using `scarb new` command with Starknet Foundry as a test runner, the _Scarb.toml_ file will automatically include `edition = "2023_11"`.
 Different prelude versions will expose different functions and traits, so it is important to specify the correct edition in the _Scarb.toml_ file. Generally, you want to start a new project using the latest edition, and migrate to newer editions as they are released.
