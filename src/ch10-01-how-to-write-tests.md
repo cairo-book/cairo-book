@@ -99,7 +99,7 @@ The summary line is displayed at the end: overall, our test result is `FAILED`. 
 Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
 [structs]: ./ch05-01-defining-and-instantiating-structs.md
-[testing organization]: ./ch10-02-testing-organization.md
+[test organization]: ./ch10-02-test-organization.md
 
 ## Checking Results with the `assert!` Macro
 
