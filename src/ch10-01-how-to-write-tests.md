@@ -488,7 +488,7 @@ When testing recursive functions or loops, the test is instantiated by default w
 
 [Starknet Foundry][starknet foundry] is a [toolchain][snfoundry intro] for developing smart contracts in Cairo. The second part of the book dedicated to Cairo Smart Contracts will describe the main features it allows.
 
-Starknet Foundry contains a profiling feature that might also be useful for benchmarking the number of steps used for Cairo programs, or only specific operations within programs.
+Starknet Foundry contains a profiling feature that is useful to analyze and optimize the performance of your Cairo programs.
 
 As mentioned in the [Hello, World][hello world] chapter, you can choose to set up Starknet Foundry as a dependency when creating a new project. 
 
