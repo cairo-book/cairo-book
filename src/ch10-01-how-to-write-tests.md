@@ -484,7 +484,7 @@ When testing recursive functions or loops, the test is instantiated by default w
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo}}
 ```
 
-## Benchmarking Cairo Programs Using Starknet Foundry and Cairo Profiler
+## Benchmarking Cairo Programs
 
 [Starknet Foundry][starknet foundry] is a [toolchain][snfoundry intro] for developing smart contracts in Cairo. The second part of the book dedicated to Cairo Smart Contracts will describe the main features it allows.
 
