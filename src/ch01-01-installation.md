@@ -8,10 +8,13 @@ Scarb handles a lot of tasks for you, such as building your code (either pure Ca
 
 As you write more complex Cairo programs, you might add dependencies, and if you start a project using Scarb, managing external code and dependencies will be a lot easier to do.
 
-Let's start by installing Scarb.
+[Starknet Foundry][sn foundry] is a toolchain for Cairo programs and Starknet smart contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
+
+Let's start by installing Scarb and Starknet Foundry.
 
 [scarb doc]: https://docs.swmansion.com/scarb/docs
 [cargo doc]: https://doc.rust-lang.org/cargo/
+[sn foundry]: https://foundry-rs.github.io/starknet-foundry/index.html
 
 ## Installing Scarb
 
@@ -21,9 +24,7 @@ Scarb requires a Git executable to be available in the `PATH` environment variab
 
 ### Installation
 
-To install Scarb, please refer to the [installation instructions][scarb download]. We strongly recommend that you install
-Scarb [via asdf][scarb asdf], a CLI tool that can manage multiple language runtime versions on a per-project basis.
-This will ensure that the version of Scarb you use to work on a project always matches the one defined in the project settings, avoiding problems related to version mismatches.
+To install Scarb, please refer to the [installation instructions][scarb download]. We strongly recommend that you install Scarb [via asdf][scarb asdf], a CLI tool that can manage multiple language runtime versions on a per-project basis. This will ensure that the version of Scarb you use to work on a project always matches the one defined in the project settings, avoiding problems related to version mismatches.
 
 Please refer to the [asdf documentation][asdf doc] to install all prerequisites.
 
@@ -36,13 +37,13 @@ asdf plugin add scarb
 This will allow you to download specific versions:
 
 ```bash
-asdf install scarb 2.8.1
+asdf install scarb 2.8.3
 ```
 
 and set a global version:
 
 ```bash
-asdf global scarb 2.8.1
+asdf global scarb 2.8.3
 ```
 
 Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This will install the latest stable release of Scarb.
@@ -56,14 +57,31 @@ In both cases, you can verify installation by running the following command in a
 
 ```bash
 $ scarb --version
-scarb 2.8.1 (09590f5fc 2024-08-27)
-cairo: 2.8.0 (https://crates.io/crates/cairo-lang-compiler/2.8.0)
+scarb 2.8.3 (54938ce3b 2024-09-26)
+cairo: 2.8.2 (https://crates.io/crates/cairo-lang-compiler/2.8.2)
 sierra: 1.6.0
 ```
 
 [scarb download]: https://docs.swmansion.com/scarb/download
 [scarb asdf]: https://docs.swmansion.com/scarb/download.html#install-via-asdf
 [asdf doc]: https://asdf-vm.com/guide/getting-started.html
+
+## Installing Starknet Foundry
+
+To install Starknet Foundry, please refer to the [installation instructions][snfoundry download]. We also recommend that you install it via asdf.
+
+Once installed, you can run the following command to see the version:
+
+```bash
+$ snforge --version
+snforge 0.31.0
+```
+
+We'll describe Starknet Foundry in more detail in [Chapter 10][writing tests] for Cairo programs testing and in [Chapter 17][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
+
+[snfoundry download]: https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html
+[writing tests]: ./ch10-01-how-to-write-tests.md
+[testing with snfoundry]: ./ch17-02-testing-smart-contracts.md#testing-smart-contracts-with-starknet-foundry
 
 ## Installing the VSCode Extension
 
