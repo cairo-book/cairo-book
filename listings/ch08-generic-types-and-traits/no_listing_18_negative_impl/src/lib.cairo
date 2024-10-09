@@ -33,7 +33,7 @@ fn main() {
     let third_type = AThirdType {};
     let production = producer.produce();
 
-    // producer.consumer(production); Invalid: ProducerType does not implement Consumer
+    // producer.consume(production); Invalid: ProducerType does not implement Consumer
     another_type.consume(production);
     third_type.consume(production);
 }
