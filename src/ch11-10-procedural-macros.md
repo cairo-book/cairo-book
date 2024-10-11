@@ -1,20 +1,44 @@
 # Procedural Macros
 
-Cairo procedural macros are actually Rust functions that takes Cairo code as input and returns a modified Cairo code as output. The main concept behind this type of macros is to grant developers the ability to create custom macros that supports Cairo packages.
+Cairo procedural macros are actually Rust functions that takes Cairo code as input and returns a modified Cairo code as output. The main concept behind this is to grant developers the ability to create custom macros that supports Cairo packages.
 
-Generally there are three ways to use procedural macros:
+## Types of Procedural Macros
 
-1. expressions ( `macro!()` )
-2. attributes ( `#[macro]` )
-3. derive ( `#[derive(Macro)]` )
+There are three main types of procedural macros in Cairo:
 
-> To use procedural macros in your Cairo project, you need to have the Rust toolchain setup on your machine. This is because Cairo procedural macros are implemented in Rust. To set up Rust, visit [rustup](https://rustup.rs) and follow the installation instructions for your operating system.
+1. **Expression Macros** (`macro!()`)
+   These macros are used like function calls and can generate code based on their arguments.
+
+2. **Attribute Macros** (`#[macro]`)
+   These macros can be attached to items like functions or structs to modify their behavior or implementation.
+
+3. **Derive Macros** (`#[derive(Macro)]`)
+   These macros automatically implement traits for structs or enums.
 
 ## How to Use Existing Procedural Macros
 
-To use a procedural macros in your project, a developer needs to add the macro as a dependency in their `Scarb.toml` file and then import and use it in their Cairo program.
+Using existing procedural macros in your Cairo project involves:
 
-> You do not need to know Rust to use already existing procedural macros in your Cairo project.
+1. Setting up your environment
+2. Incorporating the macro into your project
+
+### 1. Setting Up Your Environment
+
+Before using procedural macros, ensure you have the necessary tools:
+
+- **Rust Toolchain**: Cairo procedural macros are implemented in Rust, so you need the Rust toolchain on your machine.
+- To set up Rust, visit [rustup](https://rustup.rs) and follow the installation instructions for your operating system.
+
+> **Note**: While you need Rust installed to use procedural macros, you don't need to know Rust programming to use existing macros in your Cairo project.
+
+### 2. Incorporating the Macro Into Your Project
+
+To use a procedural macro in your project:
+
+- Add the macro as a dependency in your `Scarb.toml` file.
+- Import and use the macro in your Cairo program.
+
+Here's an example of how to add a macro dependency:
 
 ```toml
 [package]
@@ -112,3 +136,7 @@ Listing {{#ref pow_macro}} shows the rust code for creating an inline macro in R
 
 {{#label pow_macro}}
 <span class="caption">Listing {{#ref pow_macro}}: Code for creating inline pow procedural macro</span>
+
+## Conclusion
+
+Procedural macros offer a powerful way to extend Cairo's capabilities by leveraging Rust functions to generate new Cairo code. They allow for code generation, custom syntax, and automated implementations, making them a valuable tool for Cairo developers. While they require some setup and careful consideration of performance impacts, the flexibility they provide can significantly enhance your Cairo development experience.
