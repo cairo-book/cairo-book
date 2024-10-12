@@ -27,7 +27,6 @@ mod Vote {
     const YES: u8 = 1_u8;
     const NO: u8 = 0_u8;
 
-    ///  Structure that stores vote counts and voter states
     #[storage]
     struct Storage {
         yes_votes: u8,
@@ -36,8 +35,7 @@ mod Vote {
         registered_voter: Map::<ContractAddress, bool>,
     }
 
-    /// Contract constructor initializing the contract with a list of registered voters and 0
-    /// vote count
+    /
     #[constructor]
     fn constructor(
         ref self: ContractState,
@@ -45,15 +43,12 @@ mod Vote {
         voter_2: ContractAddress,
         voter_3: ContractAddress
     ) {
-        // Register all voters by calling the _register_voters function
         self._register_voters(voter_1, voter_2, voter_3);
 
-        // Initialize the vote count to 0
         self.yes_votes.write(0_u8);
         self.no_votes.write(0_u8);
     }
 
-    ///  Event that gets emitted when a vote is cast
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
@@ -61,40 +56,33 @@ mod Vote {
         UnauthorizedAttempt: UnauthorizedAttempt,
     }
 
-    /// Represents a vote that was cast
     #[derive(Drop, starknet::Event)]
     struct VoteCast {
         voter: ContractAddress,
         vote: u8,
     }
 
-    /// Represents an unauthorized attempt to vote
     #[derive(Drop, starknet::Event)]
     struct UnauthorizedAttempt {
         unauthorized_address: ContractAddress,
     }
 
-    /// Implementation of VoteTrait for ContractState
     #[abi(embed_v0)]
     impl VoteImpl of super::VoteTrait<ContractState> {
-        /// Returns the voting results
         fn get_vote_status(self: @ContractState) -> (u8, u8, u8, u8) {
             let (n_yes, n_no) = self._get_voting_result();
             let (yes_percentage, no_percentage) = self._get_voting_result_in_percentage();
             (n_yes, n_no, yes_percentage, no_percentage)
         }
 
-        /// Check whether a voter is allowed to vote
         fn voter_can_vote(self: @ContractState, user_address: ContractAddress) -> bool {
             self.can_vote.read(user_address)
         }
 
-        /// Check whether an address is registered as a voter
         fn is_voter_registered(self: @ContractState, address: ContractAddress) -> bool {
             self.registered_voter.read(address)
         }
 
-        /// Submit a vote
         fn vote(ref self: ContractState, vote: u8) {
             assert!(vote == NO || vote == YES, "VOTE_0_OR_1");
             let caller: ContractAddress = get_caller_address();
@@ -112,10 +100,8 @@ mod Vote {
         }
     }
 
-    /// Internal Functions implementation for the Vote contract
     #[generate_trait]
     impl InternalFunctions of InternalFunctionsTrait {
-        /// Registers the voters and initializes their voting status to true (can vote)
         fn _register_voters(
             ref self: ContractState,
             voter_1: ContractAddress,
@@ -133,10 +119,8 @@ mod Vote {
         }
     }
 
-    /// Asserts implementation for the Vote contract
     #[generate_trait]
     impl AssertsImpl of AssertsTrait {
-        //  Internal function that checks if an address is allowed to vote
         fn _assert_allowed(ref self: ContractState, address: ContractAddress) {
             let is_voter: bool = self.registered_voter.read((address));
             let can_vote: bool = self.can_vote.read((address));
@@ -150,10 +134,8 @@ mod Vote {
         }
     }
 
-    /// Implement the VotingResultTrait for the Vote contract
     #[generate_trait]
     impl VoteResultFunctionsImpl of VoteResultFunctionsTrait {
-        // Internal function to get the voting results (yes and no vote counts)
         fn _get_voting_result(self: @ContractState) -> (u8, u8) {
             let n_yes: u8 = self.yes_votes.read();
             let n_no: u8 = self.no_votes.read();
@@ -161,7 +143,6 @@ mod Vote {
             (n_yes, n_no)
         }
 
-        // Internal function to calculate the voting results in percentage
         fn _get_voting_result_in_percentage(self: @ContractState) -> (u8, u8) {
             let n_yes: u8 = self.yes_votes.read();
             let n_no: u8 = self.no_votes.read();
