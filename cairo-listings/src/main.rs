@@ -272,6 +272,7 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
     });
 
     // FORMAT CHECKS
+    //checking format 
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         let format_args = vec![];
         let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
