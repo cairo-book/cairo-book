@@ -1,11 +1,19 @@
 const TWO_TEN: u128 = pow!(12, 2);
 
+#[derive(Add, AddAssign, Sub, SubAssign, Mul, MulAssign, Div, DivAssign, Debug, Drop, PartialEq)]
+pub struct B {
+  pub a: u8,
+  pub b: u16
+}
+
 fn main() {
     println!("{}", TWO_TEN);
 }
 
 #[cfg(test)]
 mod tests {
+    use super::B;
+
     #[test]
     fn test_pow_macro() {
         assert_eq!(super::TWO_TEN, 144);
@@ -15,5 +23,13 @@ mod tests {
             pow!(2, 255),
             57896044618658097711785492504343953926634992332820282019728792003956564819968_u256
         );
+    }
+
+    #[test]
+    fn test_add_derive() {
+        let b1 = B { a: 1, b: 2 };
+        let b2 = B { a: 3, b: 4 };
+        let b3 = b1 + b2;
+        assert_eq!(b3, B { a: 4, b: 6 });
     }
 }

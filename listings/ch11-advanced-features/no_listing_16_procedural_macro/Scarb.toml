@@ -6,7 +6,7 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-no_listing_15_pow_macro = { path = "../no_listing_15_pow_macro" }
+no_listing_15_macro = { path = "../no_listing_15_macro" }
 
 [dev-dependencies]
 cairo_test = "2.7.0"

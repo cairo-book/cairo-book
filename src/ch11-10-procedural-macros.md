@@ -131,7 +131,7 @@ Also notice that you can also add other rust dependencies in your `Cargo.toml` f
 Listing {{#ref pow_macro}} shows the rust code for creating an inline macro in Rust:
 
 ```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_15_pow_macro/src/lib.rs:main}}
+{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_15_macro/src/pow.rs:main}}
 ```
 
 {{#label pow_macro}}

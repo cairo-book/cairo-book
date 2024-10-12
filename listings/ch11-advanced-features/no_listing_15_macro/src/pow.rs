@@ -1,5 +1,4 @@
 // ANCHOR: all
-
 use bigdecimal::{num_traits::pow, BigDecimal};
 use cairo_lang_macro::{inline_macro, Diagnostic, ProcMacroResult, TokenStream};
 use cairo_lang_parser::utils::SimpleParserDatabase;
@@ -13,7 +12,6 @@ use cairo_lang_syntax::node::kind::SyntaxKind::Arg;
 /// const MEGABYTE: u64 = pow!(2, 20);
 /// assert_eq!(MEGABYTE, 1048576);
 /// ```
-// ANCHOR: main
 #[inline_macro]
 pub fn pow(token_stream: TokenStream) -> ProcMacroResult {
     let db = SimpleParserDatabase::default();
