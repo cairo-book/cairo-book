@@ -1,0 +1,12 @@
+     Running cairo-test cairo_book
+warn: `cairo_test` plugin not found
+please add the following snippet to your Scarb.toml manifest:
+```
+[dev-dependencies]
+cairo_test = "2.8.4"
+```
+
+   Compiling test(cairo_book_unittest) cairo_book v0.1.0 (/Users/nathan/cairo-book/Scarb.toml)
+error: /Users/nathan/cairo-book/src/lib.cairo not found
+error: could not compile `cairo_book` due to previous error
+Error: `scarb metadata` exited with error

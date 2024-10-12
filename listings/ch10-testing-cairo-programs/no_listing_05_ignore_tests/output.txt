@@ -1,0 +1,17 @@
+     Running test no_listing_05_ignore_tests (snforge test)
+    Updating git repository https://github.com/foundry-rs/starknet-foundry
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.40s
+   Compiling test(no_listing_05_ignore_tests_unittest) no_listing_05_ignore_tests v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/Scarb.toml)
+error: Plugin diagnostic: Attribute should only appear on tests.
+ --> /Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/src/lib.cairo:14:1
+
+^
+
+error: Plugin diagnostic: Attribute should only appear on tests.
+ --> /Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/src/lib.cairo:14:1
+
+^
+
+error: could not compile `no_listing_05_ignore_tests` due to previous error
+[ERROR] Failed to build test artifacts with Scarb: `scarb` exited with error
