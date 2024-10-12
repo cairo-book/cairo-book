@@ -1,4 +1,4 @@
-$ scarb cairo-test 
+$ scarb test 
      Running cairo-test listing_08_06
    Compiling test(listings/ch10-testing-cairo-programs/listing_10_03/Scarb.toml)
     Finished `dev` profile target(s) in 4 seconds

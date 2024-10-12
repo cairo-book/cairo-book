@@ -7,6 +7,8 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
+use std::fs;
+use std::path::Path;
 
 #[macro_use]
 extern crate lazy_static;
@@ -277,9 +279,9 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
 }
 
 fn run_command(cmd: ScarbCmd, manifest_path: &str, file_path: &str, args: Vec<String>) -> String {
-    match cmd.test(manifest_path, args) {
-        Ok(output) => String::from_utf8_lossy(&output.stdout).into_owned(),
-        Err(e) => handle_error(e, file_path, cmd),
+    match read_output_file(manifest_path, &cmd) {
+        Ok(content) => content,
+        Err(e) => handle_error(e.to_string(), file_path, cmd),
     }
 }
 
@@ -348,4 +350,10 @@ fn print_error_category(category: &str, errors: &HashSet<String>) {
             println!("  • {}", error);
         }
     }
+}
+
+fn read_output_file(manifest_path: &str, cmd: &ScarbCmd) -> Result<String, std::io::Error> {
+    let parent_dir = Path::new(manifest_path).parent().unwrap();
+    let output_file = parent_dir.join(format!("output_{}.txt", cmd.as_str()));
+    fs::read_to_string(output_file)
 }

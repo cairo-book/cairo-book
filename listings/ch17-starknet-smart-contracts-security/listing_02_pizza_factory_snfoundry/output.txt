@@ -1,46 +1,116 @@
      Running test source (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.48s
+    Finished `release` profile [optimized] target(s) in 0.77s
    Compiling test(source_unittest) source v0.1.0 (/Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/Scarb.toml)
 warn: Unused import: `source::tests::foundry_test::PizzaEvents`
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:4:35
-use source::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission, InternalTrait};
-                                  ^******************^
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:34
+    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+                                 ^******************^
 
 warn: Unused import: `source::tests::foundry_test::PizzaEmission`
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:4:57
-use source::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission, InternalTrait};
-                                                        ^***********^
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:56
+    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+                                                       ^***********^
 
-error[E0002]: Method `deploy` not found on type `core::result::Result::<snforge_std::cheatcodes::contract_class::DeclareResult, core::array::Array::<core::felt252>>`. Did you import the correct trait and impl?
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:23:37
-    let contract_address = contract.deploy(constructor_calldata).unwrap();
-                                    ^****^
+warn: Unused import: `source::tests::foundry_test::declare`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:12:5
+    declare, start_cheat_caller_address,
+    ^*****^
 
-error: Ambiguous method call. More than one applicable trait function with a suitable self type was found: OptionTrait::unwrap and ResultTrait::unwrap. Consider adding type annotations or explicitly refer to the impl function.
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:23:66
-    let contract_address = contract.deploy(constructor_calldata).unwrap();
-                                                                 ^****^
+warn: Unused import: `source::tests::foundry_test::start_cheat_caller_address`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:12:14
+    declare, start_cheat_caller_address,
+             ^************************^
 
-warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:22:9
-    let constructor_calldata = array![owner.into()];
-        ^******************^
+warn: Unused import: `source::tests::foundry_test::EventSpyAssertionsTrait`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:5
+    EventSpyAssertionsTrait, spy_events, load,
+    ^*********************^
 
-error: Mismatched types. The type `@core::felt252` cannot be created from a numeric literal.
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:27:1
-//ANCHOR_END: deployment
-^**********************^
+warn: Unused import: `source::tests::foundry_test::spy_events`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:30
+    EventSpyAssertionsTrait, spy_events, load,
+                             ^********^
 
-error: Wrong number of arguments. Expected 0, found: 1
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:78:1
+warn: Unused import: `source::tests::foundry_test::load`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:42
+    EventSpyAssertionsTrait, spy_events, load,
+                                         ^**^
 
-^
+warning: Unused import: `source::tests::foundry_test::PizzaEvents`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:34
+    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+                                 ^******************^
 
-error: The value does not fit within the range of type core::felt252.
- --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:56:1
+warning: Unused import: `source::tests::foundry_test::PizzaEmission`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:56
+    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+                                                       ^***********^
 
-^
+warning: Unused import: `source::tests::foundry_test::declare`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:12:5
+    declare, start_cheat_caller_address,
+    ^*****^
 
-error: could not compile `source` due to previous error
-[ERROR] Failed to build test artifacts with Scarb: `scarb` exited with error
+warning: Unused import: `source::tests::foundry_test::start_cheat_caller_address`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:12:14
+    declare, start_cheat_caller_address,
+             ^************************^
+
+warning: Unused import: `source::tests::foundry_test::EventSpyAssertionsTrait`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:5
+    EventSpyAssertionsTrait, spy_events, load,
+    ^*********************^
+
+warning: Unused import: `source::tests::foundry_test::spy_events`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:30
+    EventSpyAssertionsTrait, spy_events, load,
+                             ^********^
+
+warning: Unused import: `source::tests::foundry_test::load`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:42
+    EventSpyAssertionsTrait, spy_events, load,
+                                         ^**^
+
+warn: Unused import: `source::tests::foundry_test::PizzaEvents`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:34
+    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+                                 ^******************^
+
+warn: Unused import: `source::tests::foundry_test::PizzaEmission`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:56
+    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+                                                       ^***********^
+
+warn: Unused import: `source::tests::foundry_test::declare`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:12:5
+    declare, start_cheat_caller_address,
+    ^*****^
+
+warn: Unused import: `source::tests::foundry_test::start_cheat_caller_address`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:12:14
+    declare, start_cheat_caller_address,
+             ^************************^
+
+warn: Unused import: `source::tests::foundry_test::EventSpyAssertionsTrait`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:5
+    EventSpyAssertionsTrait, spy_events, load,
+    ^*********************^
+
+warn: Unused import: `source::tests::foundry_test::spy_events`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:30
+    EventSpyAssertionsTrait, spy_events, load,
+                             ^********^
+
+warn: Unused import: `source::tests::foundry_test::load`
+ --> /Users/nathan/cairo-book/listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:13:42
+    EventSpyAssertionsTrait, spy_events, load,
+                                         ^**^
+
+    Finished `dev` profile target(s) in 19 seconds
+
+
+Collected 1 test(s) from source package
+Running 1 test(s) from src/
+[PASS] source::tests::foundry_test::test_set_as_new_owner_direct (gas: ~130)
+Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out

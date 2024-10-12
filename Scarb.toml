@@ -6,3 +6,7 @@ edition = "2023_11"
 # Only required to have LS enabled in this directory.
 
 [dependencies]
+
+
+[dev-dependencies]
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.31.0" }
