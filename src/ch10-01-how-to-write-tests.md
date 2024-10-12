@@ -16,7 +16,7 @@ Let’s look at the features Cairo provides for writing tests that take these ac
 - `#[should_panic]` attribute.
 
 > Note: Make sure to select Starknet Foundry as a test runner when creating your project.
- 
+
 ### The Anatomy of a Test Function
 
 At its simplest, a test in Cairo is a function that’s annotated with the `#[test]` attribute. Attributes are metadata about pieces of Cairo code; one example is the `#[derive()]` attribute we used with structs in [Chapter {{#chap using-structs-to-structure-related-data}}][structs]. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb test` command, Scarb runs Starknet Foundry's test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
@@ -51,10 +51,18 @@ The `scarb test` command runs all tests found in our project, and shows the foll
 
 ```shell
 $ scarb test
-Collected 1 test(s) from adder package
-Running 1 test(s) from src/
-[PASS] adder::tests::it_works (gas: ~1)
-Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 `scarb test` compiled and ran the test. We see the line `Collected 1 test(s) from adder package` followed by the line `Running 1 test(s) from src/`. The next line shows the name of the test function, called `it_works`, and that the result of running that test is `ok`. The test runner also provides an estimation of the gas consumption. The overall summary shows that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
@@ -71,10 +79,18 @@ Then run `scarb test` again. The output now shows `exploration` instead of `it_w
 
 ```shell
 $ scarb test
-Collected 1 test(s) from adder package
-Running 1 test(s) from src/
-[PASS] adder::tests::exploration (gas: ~1)
-Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like in Listing {{#ref second-test}}.
@@ -139,10 +155,18 @@ We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `R
 
 ```shell
 $ scarb test
-Collected 1 test(s) from rectangle package
-Running 1 test(s) from src/
-[PASS] rectangle::tests::larger_can_hold_smaller (gas: ~1)
-Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 It does pass! Let’s add another test, this time asserting that a smaller rectangle cannot hold a larger rectangle:
@@ -177,18 +201,18 @@ Running the tests now produces the following:
 
 ```shell
 $ scarb test
-Collected 2 test(s) from rectangle package
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
 Running 2 test(s) from src/
-[FAIL] rectangle::tests::larger_can_hold_smaller
-
-Failure data:
-    "rectangle cannot hold"
-
-[PASS] rectangle::tests::smaller_cannot_hold_larger (gas: ~1)
-Tests: 1 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
-
-Failures:
-    rectangle::tests::larger_can_hold_smaller
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in the `larger_can_hold_smaller` test. Notice that the `smaller_cannot_hold_larger` test still passes: to make this test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
@@ -226,10 +250,17 @@ Let’s check that it passes!
 
 ```shell
 $ scarb test
-Collected 2 test(s) from adder package
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
 Running 2 test(s) from src/
-[PASS] adder::tests::wrong_check (gas: ~1)
-[PASS] adder::tests::it_adds_two (gas: ~1)
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
 Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
@@ -256,20 +287,18 @@ Run the tests again:
 
 ```shell
 $ scarb test
-Collected 2 test(s) from adder package
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
 Running 2 test(s) from src/
-[FAIL] adder::tests::it_adds_two
-
-Failure data:
-    "assertion `4 == add_two(2)` failed.
-    4: 4
-    add_two(2): 5"
-
-[PASS] adder::tests::wrong_check (gas: ~1)
-Tests: 1 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
-
-Failures:
-    adder::tests::it_adds_two
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
@@ -349,20 +378,18 @@ Now when we run the test, we’ll get a more informative error message:
 
 ```shell
 $ scarb test
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
 
-Collected 1 test(s) from adder package
-Running 1 test(s) from src/
-[FAIL] adder::tests::it_adds_two
 
-Failure data:
-    "assertion `4 == add_two(2)` failed: Expected 4, got add_two(2)=5
-    4: 4
-    add_two(2): 5"
-
-Tests: 0 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
-
-Failures:
-    adder::tests::it_adds_two
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 We can see the value we actually got in the test output, which would help us
@@ -395,14 +422,18 @@ We place the `#[should_panic]` attribute after the `#[test]` attribute and befor
 
 ```shell
 $ scarb test
-Collected 1 test(s) from guess package
-Running 1 test(s) from src/
-[PASS] guess::tests::greater_than_100 (gas: ~1)
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
 
-Success data:
-    "Guess must be >= 1 and <= 100"
 
-Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 Looks good! The result also prints the success data, corresponding to the error message triggered when the function panicked. Now let’s introduce a bug in our code by removing the condition that the `new` function will panic if the value is greater than `100`:
@@ -415,17 +446,18 @@ When we run the test, it will fail:
 
 ```shell
 $ scarb test
-Collected 1 test(s) from guess package
-Running 1 test(s) from src/
-[FAIL] guess::tests::greater_than_100
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
 
-Failure data:
-    Expected to panic but didn't
 
-Tests: 0 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
-
-Failures:
-    guess::tests::greater_than_100
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 We don’t get a very helpful message in this case, but when we look at the test function, we see that it’s annotated with `#[should_panic]` attribute. The failure we got means that the code in the test function did not cause a panic.
@@ -453,19 +485,18 @@ This time when we run the `should_panic` test, it will fail:
 
 ```shell
 $ scarb test
-Collected 1 test(s) from guess package
-Running 1 test(s) from src/
-[FAIL] guess::tests::greater_than_100
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
 
-Failure data:
-    Incorrect panic data
-    Actual:    [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203e3d2031, 0x12] (Guess must be >= 1)
-    Expected:  [0x4775657373206d757374206265203c3d20313030] (Guess must be <= 100)
 
-Tests: 0 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
-
-Failures:
-    guess::tests::greater_than_100
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 The failure message indicates that this test did indeed panic as we expected, but the panic message did not include the expected string. The panic message that we did get in this case was `Guess must be >= 1`. Now we can start figuring out where our bug is!
@@ -489,10 +520,18 @@ We can pass the name of any test function to `scarb test` to run only that test:
 
 ```shell
 $ scarb test add_two_and_two
-collected 1 test(s) from adder package
-Running 1 test(s) from src/
-[PASS] adder::tests::add_two_and_two (gas: ~1)
-Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 1 filtered out
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
+Running 2 test(s) from src/
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 Only the test with the name `add_two_and_two` ran; the other test didn’t match that name. The test output lets us know we had one more test that didn’t run by displaying `1 filtered out;` at the end.
@@ -511,11 +550,18 @@ After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now 
 
 ```shell
 $ scarb test
-Collected 2 test(s) from adder package
+     Running test listing_08_01_02 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.49s
+   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 2 test(s) from listing_08_01_02 package
 Running 2 test(s) from src/
-[IGNORE] adder::tests::expensive_test
-[PASS] adder::tests::it_works (gas: ~1)
-Tests: 1 passed, 0 failed, 0 skipped, 1 ignored, 0 filtered out
+[PASS] listing_08_01_02::tests::it_works (gas: ~1)
+[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 ```
 
 The `expensive_test` function is listed as ignored.
@@ -538,7 +584,7 @@ The [profiling][profiling] feature generates execution traces for successful tes
 
 To use the profiler, you will need to:
 1. Install [Cairo Profiler][cairo profiler] from Software Mansion.
-2. Install [Go][go], [Graphviz][graphviz] and [pprof][pprof], all of them are required to visualize the generated profile output. 
+2. Install [Go][go], [Graphviz][graphviz] and [pprof][pprof], all of them are required to visualize the generated profile output.
 3. Run `snforge test --build-profile` command, which generates a trace file for each passing test, stored in the _snfoundry_trace_ directory of your project. This command also generates the corresponding output files in the _profile_ directory.
 4. Run `go tool pprof -http=":8000" path/to/profile/output.pb.gz` to analyse a profile. This will start a web server at the specified port.
 
@@ -552,13 +598,13 @@ After generating the trace file and the profile output, running `go tool pprof` 
 
 - The test includes one function call, corresponding to the call to the test function. Calling `sum_n` multiple times in the test function will still return 1 call. This is because `snforge` simulates a contract call when executing a test.
 
-- The `sum_n` function execution uses 256 Cairo steps:  
+- The `sum_n` function execution uses 256 Cairo steps:
 
 <div align="center">
     <img src="pprof-steps.png" alt="pprof number of steps" width="800px"/>
 </div>
 
-Other information is also available such as memory holes (i.e., unused memory cells) or builtins usage. The Cairo Profiler is under active development, and many other features will be made available in the future. 
+Other information is also available such as memory holes (i.e., unused memory cells) or builtins usage. The Cairo Profiler is under active development, and many other features will be made available in the future.
 
 [hello world]: ./ch01-02-hello-world.md#creating-a-project-with-scarb
 [profiling]: https://foundry-rs.github.io/starknet-foundry/snforge-advanced-features/profiling.html

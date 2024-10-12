@@ -1,12 +1,19 @@
-$ scarb cairo-test 
-     Running cairo-test listing_08_03
-   Compiling test(listings/ch10-testing-cairo-programs/listing_10_02/Scarb.toml)
-    Finished release target(s) in 1 second
-testing listing_08_03 ...
-running 2 tests
-test listing_08_03::tests::exploration ... ok (gas usage est.: 127300)
-test listing_08_03::tests::another ... fail (gas usage est.: 24810)
-failures:
-   listing_08_03::tests::another - Panicked with "Make this test fail".
+     Running test listing_08_03 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.48s
+   Compiling test(listing_08_03_unittest) listing_08_03 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_02/Scarb.toml)
+    Finished `dev` profile target(s) in 9 seconds
 
 
+Collected 2 test(s) from listing_08_03 package
+Running 2 test(s) from src/
+[PASS] listing_08_03::tests::exploration (gas: ~1)
+[FAIL] listing_08_03::tests::another
+
+Failure data:
+    "Make this test fail"
+
+Tests: 1 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
+
+Failures:
+    listing_08_03::tests::another
