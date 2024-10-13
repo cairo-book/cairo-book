@@ -7,8 +7,8 @@
   //   MAX_RECONNECT_ATTEMPTS: 5,
   // };
   const CONFIG = {
-    API_URL: "http://localhost:3001/api",
-    WS_URL: "ws://localhost:3001/ws",
+    API_URL: "https://backend.agent.starknet.id/api",
+    WS_URL: "wss://backend.agent.starknet.id/ws",
     MAX_RECONNECT_ATTEMPTS: 5,
   };
 
