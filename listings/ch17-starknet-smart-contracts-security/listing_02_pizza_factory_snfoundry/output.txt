@@ -1,47 +1,8 @@
 $ scarb test 
      Running test source (snforge test)
-[WARNING] Package snforge_std version does not meet the recommended version requirement =0.31.0, it might result in unexpected behaviour
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.38s
    Compiling test(listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/Scarb.toml)
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:39:1
-#[test]
-^*****^
-
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:52:1
-#[test]
-^*****^
-
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:66:1
-#[test]
-^*****^
-
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:67:1
-#[should_panic(expected: ("Only the owner can set ownership",))]
-^**************************************************************^
-
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:78:1
-#[test]
-^*****^
-
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:79:1
-#[should_panic(expected: ("Only the owner can make pizza",))]
-^***********************************************************^
-
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:88:1
-#[test]
-^*****^
-
-error: Plugin diagnostic: Unsupported attribute.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:106:1
-#[test]
-^*****^
-
 warn: Unused import: `source::tests::foundry_test::IPizzaFactorySafeDispatcher`
  --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:30
     IPizzaFactoryDispatcher, IPizzaFactorySafeDispatcher, IPizzaFactoryDispatcherTrait,
@@ -52,10 +13,10 @@ warn: Unused import: `source::tests::foundry_test::IPizzaFactory`
 use source::pizza::IPizzaFactory;
                    ^***********^
 
-warn: Unused import: `source::tests::foundry_test::StoragePointerReadAccess`
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:11:30
-use core::starknet::storage::StoragePointerReadAccess;
-                             ^**********************^
+warn: Unused import: `source::tests::foundry_test::ContractClassTrait`
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:14:14
+    declare, ContractClassTrait, ContractClass, start_cheat_caller_address,
+             ^****************^
 
 warn: Unused import: `source::tests::foundry_test::ContractClass`
  --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:14:34
@@ -72,55 +33,41 @@ warn: Unused import: `source::tests::foundry_test::load_felt252`
     cheatcodes::storage::load_felt252
                          ^**********^
 
-error: Inline macro `assert_eq` not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:45:5
-    assert_eq!(pepperoni_count, array![10]);
-    ^*************************************^
+error[E0002]: Method `deploy` could not be called on type `snforge_std::cheatcodes::contract_class::DeclareResult`.
+Candidate `ContractClassTrait::deploy` inference failed with: Type mismatch: `snforge_std::cheatcodes::contract_class::DeclareResult` and `@snforge_std::cheatcodes::contract_class::ContractClass`.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:30:42
+    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+                                         ^****^
 
-error: Inline macro `assert_eq` not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:46:5
-    assert_eq!(pineapple_count, array![10]);
-    ^*************************************^
+error: Ambiguous method call. More than one applicable trait function with a suitable self type was found: OptionTrait::unwrap and ResultTrait::unwrap. Consider adding type annotations or explicitly refer to the impl function.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:30:72
+    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+                                                                       ^****^
 
-error: Inline macro `assert_eq` not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:47:5
-    assert_eq!(pizza_factory.get_owner(), owner());
-    ^********************************************^
+error: Unexpected type for tuple pattern. "<missing>" is not a tuple.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:30:9
+    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+        ^*******************^
+
+error: Variable "contract_address" not found.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:32:48
+    let dispatcher = IPizzaFactoryDispatcher { contract_address };
+                                               ^**************^
+
+error: Identifier not found.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:34:18
+    (dispatcher, contract_address)
+                 ^**************^
 
 warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:41:10
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-         ^***********^
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:28:13
+    let mut constructor_calldata = array![owner.into()];
+            ^******************^
 
-warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:43:9
-    let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
-        ^*************^
+error: The value does not fit within the range of type core::felt252.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:65:1
 
-warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:44:9
-    let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
-        ^*************^
-
-error: Inline macro `assert_eq` not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:57:5
-    assert_eq!(pizza_factory.get_owner(), owner());
-    ^********************************************^
-
-error: Inline macro `assert_eq` not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:63:5
-    assert_eq!(pizza_factory.get_owner(), new_owner);
-    ^**********************************************^
-
-error: Inline macro `assert_eq` not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:100:5
-    assert_eq!(pizza_factory.count_pizza(), 1);
-    ^****************************************^
-
-error: Inline macro `assert_eq` not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:111:5
-    assert_eq!(state.owner.read(), owner);
-    ^***********************************^
+^
 
 error: could not compile `source` due to previous error
 [ERROR] Failed to build test artifacts with Scarb: `scarb` exited with error

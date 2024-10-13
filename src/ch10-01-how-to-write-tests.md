@@ -88,7 +88,7 @@ Instead of `ok`, the line `adder::another` shows `fail`. A new section appears b
 
 The summary line is displayed at the end: overall, our test result is `FAILED`. We had one test pass and one test fail.
 
-Now that you���ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
+Now that you've seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
 ## Checking Results with the `assert!` Macro
 
