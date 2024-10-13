@@ -1,18 +1,8 @@
 $ scarb test 
      Running test no_listing_04_new_bug (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.55s
+    Finished `release` profile [optimized] target(s) in 0.46s
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_04_new_bug/Scarb.toml)
-error: Plugin diagnostic: Attribute should only appear on tests.
- --> listings/ch10-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:27:1
-
-^
-
-error: Plugin diagnostic: Attribute should only appear on tests.
- --> listings/ch10-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:27:1
-
-^
-
 error: Plugin diagnostic: #[should_panic] <expected> argument must be string, short string, number or list of short strings or numbers in regular brackets ()
  --> listings/ch10-testing-cairo-programs/no_listing_04_new_bug/src/lib.cairo:27:1
 
