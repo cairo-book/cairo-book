@@ -1,5 +1,45 @@
+/**
+ * Chat Window for mdBook Integration
+ *
+ * This script implements a chat window that integrates with mdBook documentation.
+ * It provides an interactive AI-powered assistant to help users with questions
+ * about the documentation content.
+ *
+ * Integration with mdBook:
+ * - The chat window is dynamically injected into the mdBook page.
+ * - It appears as a floating chat button in the bottom-right corner of the page.
+ * - When clicked, it expands into a full chat interface.
+ *
+ * Main Features:
+ * 1. Real-time chat with an AI assistant
+ * 2. Persistent chat history across page navigation
+ * 3. Markdown rendering for chat messages
+ * 4. Code syntax highlighting
+ * 5. Ability to clear chat history
+ * 6. Automatic reconnection on connection loss
+ *
+ * WebSocket Communication:
+ * - The chat connects to an LLM (Language Model) backend via WebSocket.
+ * - It handles different message types from the server:
+ *   a. 'error': Displays error messages to the user
+ *   b. 'sources': Receives and stores relevant documentation sources
+ *   c. 'message': Receives and displays AI responses in real-time
+ *   d. 'messageEnd': Finalizes the AI response and updates the chat history
+ *
+ * The ChatManager class encapsulates all the functionality for the chat window,
+ * including UI creation, WebSocket handling, and chat history management.
+ */
+
 // IIFE to encapsulate our chat functionality and avoid polluting the global scope
 (function () {
+  /**
+   * Configuration object for the chat window.
+   * @typedef {Object} ChatConfig
+   * @property {string} API_URL - The base URL for API requests.
+   * @property {string} WS_URL - The WebSocket URL for real-time communication.
+   * @property {number} MAX_RECONNECT_ATTEMPTS - Maximum number of reconnection attempts.
+   * @property {number} MAX_HISTORY_LENGTH - Maximum number of messages to keep in history.
+   */
   const CONFIG = {
     API_URL: "https://backend.agent.starknet.id/api",
     WS_URL: "wss://backend.agent.starknet.id/ws",
@@ -9,12 +49,39 @@
 
   class ChatManager {
     constructor() {
+      /**
+       * @type {WebSocket|null} The WebSocket connection to the chat server.
+       */
       this.chatSocket = null;
+
+      /**
+       * @type {string} Unique identifier for the current chat session.
+       */
       this.chatId = this.generateUniqueId();
+
+      /**
+       * @type {number} Number of reconnection attempts made.
+       */
       this.reconnectAttempts = 0;
+
+      /**
+       * @type {string|null} ID of the current message being processed.
+       */
       this.currentMessageId = null;
+
+      /**
+       * @type {Array} Array of source objects for the current message.
+       */
       this.currentSources = [];
+
+      /**
+       * @type {string} Content of the current message being streamed.
+       */
       this.currentMessageContent = "";
+
+      /**
+       * @type {Array<Array<string>>} Array of [role, content] pairs representing the chat history.
+       */
       this.messageHistory = [];
 
       this.initializeDOMElements();
@@ -23,6 +90,10 @@
       this.initializeChat();
     }
 
+    /**
+     * Initializes DOM elements for the chat window.
+     * This method creates and appends the chat button, chat window, and status element to the document body.
+     */
     initializeDOMElements() {
       this.chatButton = this.createChatButton();
       this.chatWindow = this.createChatWindow();
@@ -83,6 +154,10 @@
       return status;
     }
 
+    /**
+     * Attaches event listeners to various chat window elements.
+     * This includes listeners for opening/closing the chat, sending messages, and clearing history.
+     */
     attachEventListeners() {
       this.chatButton.addEventListener("click", () => this.toggleChatWindow());
       document
@@ -101,6 +176,10 @@
         .addEventListener("click", () => this.clearChatHistory());
     }
 
+    /**
+     * Initializes the chat by fetching models and connecting to WebSocket.
+     * @async
+     */
     async initializeChat() {
       try {
         await this.fetchModels();
@@ -114,6 +193,11 @@
       }
     }
 
+    /**
+     * Fetches available language models from the server.
+     * @async
+     * @returns {Promise<Object>} A promise that resolves to the available models.
+     */
     async fetchModels() {
       try {
         const response = await fetch(`${CONFIG.API_URL}/models`);
@@ -127,6 +211,10 @@
       }
     }
 
+    /**
+     * Establishes a WebSocket connection with the chat server.
+     * The connection URL includes query parameters for specifying the chat and embedding models.
+     */
     connectWebSocket() {
       const wsURL = new URL(CONFIG.WS_URL);
       wsURL.search = new URLSearchParams({
@@ -140,6 +228,9 @@
       this.setupWebSocketHandlers();
     }
 
+    /**
+     * Sets up WebSocket event handlers for open, close, error, and message events.
+     */
     setupWebSocketHandlers() {
       this.chatSocket.onopen = () => this.handleWebSocketOpen();
       this.chatSocket.onclose = () => this.handleWebSocketClose();
@@ -163,19 +254,28 @@
       console.error("WebSocket error:", error);
     }
 
+    /**
+     * Handles incoming WebSocket messages.
+     * @param {MessageEvent} event - The WebSocket message event.
+     */
     handleWebSocketMessage(event) {
       try {
         const data = JSON.parse(event.data);
         console.log("Received WebSocket message:", data);
 
-        if (data.type === "error") {
-          this.handleErrorMessage(data);
-        } else if (data.type === "sources") {
-          this.handleSourcesMessage(data);
-        } else if (data.type === "message") {
-          this.handleContentMessage(data);
-        } else if (data.type === "messageEnd") {
-          this.handleMessageEnd();
+        switch (data.type) {
+          case "error":
+            this.handleErrorMessage(data);
+            break;
+          case "sources":
+            this.handleSourcesMessage(data);
+            break;
+          case "message":
+            this.handleContentMessage(data);
+            break;
+          case "messageEnd":
+            this.handleMessageEnd();
+            break;
         }
       } catch (error) {
         console.error("Error processing WebSocket message:", error);
@@ -334,10 +434,21 @@
       setTimeout(() => toast.remove(), 3000);
     }
 
+    /**
+     * Generates a unique identifier for messages or chat sessions.
+     * @returns {string} A unique identifier string.
+     */
     generateUniqueId() {
       return `${Date.now().toString(36)}${Math.random().toString(36).substr(2)}`;
     }
 
+    /**
+     * Processes markdown content and converts it to HTML.
+     * This method handles bold, italic, code blocks, and source links.
+     * @param {string} content - The markdown content to process.
+     * @param {Array} sources - An array of source objects.
+     * @returns {string} The processed HTML content.
+     */
     processMarkdown(content, sources = []) {
       let processedContent = content
         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -413,6 +524,11 @@
       }
     }
 
+    /**
+     * Sends a user message to the server.
+     * This method prepares the message data, sends it via WebSocket, and updates the UI.
+     * @param {string} message - The user's message to send.
+     */
     sendMessageToServer(message) {
       const messageId = this.generateUniqueId();
       const messageData = {
@@ -433,6 +549,10 @@
       this.appendMessage("user", message, messageId);
     }
 
+    /**
+     * Attempts to reconnect to the WebSocket server.
+     * This method implements an exponential backoff strategy for reconnection attempts.
+     */
     attemptReconnect() {
       this.reconnectAttempts++;
       if (this.reconnectAttempts <= CONFIG.MAX_RECONNECT_ATTEMPTS) {
@@ -462,11 +582,19 @@
       this.showToast("Chat history cleared", "info");
     }
 
+    /**
+     * Saves the current chat history to local storage.
+     * This method stores both the message history and the chat ID.
+     */
     saveChatHistory() {
       localStorage.setItem("chatHistory", JSON.stringify(this.messageHistory));
       localStorage.setItem("chatId", this.chatId);
     }
 
+    /**
+     * Loads the chat history from local storage.
+     * This method retrieves the saved message history and chat ID, and restores the chat state.
+     */
     loadChatHistory() {
       const savedHistory = localStorage.getItem("chatHistory");
       const savedChatId = localStorage.getItem("chatId");
@@ -487,9 +615,17 @@
     }
   }
 
+  /**
+   * Initializes the ChatManager when the DOM is fully loaded.
+   * This ensures that all required DOM elements are available before the chat is initialized.
+   */
   document.addEventListener("DOMContentLoaded", () => {
     window.chatManager = new ChatManager();
 
+    /**
+     * Saves the chat history before the window is unloaded.
+     * This ensures that the chat history is preserved between page reloads or navigation.
+     */
     window.addEventListener("beforeunload", () => {
       window.chatManager.saveChatHistory();
     });
