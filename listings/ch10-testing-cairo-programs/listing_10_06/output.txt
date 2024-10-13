@@ -1,22 +1,23 @@
-$ scarb test   
+$ scarb test 
      Running test listing_09_09 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.46s
-   Compiling test(listing_09_09_unittest) listing_09_09 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_06/Scarb.toml)
+    Finished `release` profile [optimized] target(s) in 0.48s
+   Compiling test(listings/ch10-testing-cairo-programs/listing_10_06/Scarb.toml)
 error: Plugin diagnostic: Attribute should only appear on tests.
- --> /Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_06/src/lib.cairo:26:1
+ --> listings/ch10-testing-cairo-programs/listing_10_06/src/lib.cairo:26:1
 
 ^
 
 error: Plugin diagnostic: Attribute should only appear on tests.
- --> /Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_06/src/lib.cairo:26:1
+ --> listings/ch10-testing-cairo-programs/listing_10_06/src/lib.cairo:26:1
 
 ^
 
 error: Plugin diagnostic: #[should_panic] <expected> argument must be string, short string, number or list of short strings or numbers in regular brackets ()
- --> /Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_06/src/lib.cairo:26:1
+ --> listings/ch10-testing-cairo-programs/listing_10_06/src/lib.cairo:26:1
 
 ^
 
 error: could not compile `listing_09_09` due to previous error
 [ERROR] Failed to build test artifacts with Scarb: `scarb` exited with error
+

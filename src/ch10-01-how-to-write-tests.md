@@ -18,7 +18,7 @@ Let’s look at the features Cairo provides for writing tests that take these ac
 
 At its simplest, a test in Cairo is a function that’s annotated with the `#[test]` attribute. Attributes are metadata about pieces of Cairo code; one example is the `#[derive()]` attribute we used with structs in [Chapter 5](ch05-01-defining-and-instantiating-structs.md). To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb test` command, Scarb runs Cairo's test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
 
-Let's create a new project called _adder_ using Scarb with the command `scarb new adder`:
+Let’s create a new project called _adder_ using Scarb with the command `scarb new adder`:
 
 ```shell
 adder
@@ -47,19 +47,7 @@ The example function body uses the `assert!` macro, which contains the result of
 The `scarb test` command runs all tests found in our project, and shows the following output:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_01/output.txt}}
 ```
 
 `scarb test` compiled and ran the test. We see the line `running 1 test`. The next line shows the name of the test function, called `it_works`, and that the result of running that test is `ok`. The test runner also provides an estimation of the gas consumption. The overall summary `test result: ok.` means that all the tests passed, and the portion that reads `1 passed; 0 failed` totals the number of tests that passed or failed.
@@ -75,19 +63,7 @@ Let’s start to customize the test to our own needs. First change the name of t
 Then run `scarb test` again. The output now shows `exploration` instead of `it_works`:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_01/output.txt}}
 ```
 
 Now we’ll add another test, but this time we’ll make a test that fails! Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed. Enter the new test as a function named `another`, so your _src/lib.cairo_ file looks like in Listing {{#ref second-test}}.
@@ -112,7 +88,7 @@ Instead of `ok`, the line `adder::another` shows `fail`. A new section appears b
 
 The summary line is displayed at the end: overall, our test result is `FAILED`. We had one test pass and one test fail.
 
-Now that you’ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
+Now that you���ve seen what the test results look like in different scenarios, let’s look at some functions that are useful in tests.
 
 ## Checking Results with the `assert!` Macro
 
@@ -138,19 +114,7 @@ The `can_hold` method returns a `bool`, which means it’s a perfect use case fo
 We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `Rectangle` instances that we need. Then we called the `assert!` macro and passed it the result of calling `larger.can_hold(@smaller)`. This expression is supposed to return `true`, so our test should pass. Let’s find out!
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_03/output.txt}}
 ```
 
 It does pass! Let’s add another test, this time asserting that a smaller rectangle cannot hold a larger rectangle:
@@ -167,7 +131,7 @@ It does pass! Let’s add another test, this time asserting that a smaller recta
 Because the correct result of the `can_hold` method, in this case, is `false`, we need to negate that result before we pass it to the `assert!` macro. As a result, our test will pass if `can_hold` returns `false`:
 
 ```shell
-{{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/output.txt}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_03/output.txt}}
 ```
 
 Two tests that pass! Now let’s see what happens to our test results when we introduce a bug in our code. We’ll change the implementation of the `can_hold` method by replacing the `>` sign with a `<` sign when it compares the widths:
@@ -179,19 +143,7 @@ Two tests that pass! Now let’s see what happens to our test results when we in
 Running the tests now produces the following:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/output.txt}}
 ```
 
 Our tests caught the bug! Because `larger.width` is `8` and `smaller.width` is `5`, the comparison of the widths in `can_hold` now returns `false` (`8` is not less than `5`) in the `larger_can_hold_smaller` test. Notice that the `smaller_cannot_hold_larger` test still passes: to make this test fail, the height comparison should also be modified in `can_hold` method, replacing the `>` sign with a `<` sign.
@@ -228,19 +180,7 @@ parameter, then we test this function using `assert_eq!` and `assert_ne!` macros
 Let’s check that it passes!
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/output.txt}}
 ```
 
 In the `it_adds_two` test, we pass `4` as argument to `assert_eq!` macro, which is equal to the result of
@@ -265,19 +205,7 @@ fails. Change the implementation of the `add_two` function to instead add `3`:
 Run the tests again:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/output.txt}}
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
@@ -354,19 +282,7 @@ string with a placeholder filled in with the actual value we got from the
 Now when we run the test, we’ll get a more informative error message:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/output.txt}}
 ```
 
 We can see the value we actually got in the test output, which would help us
@@ -398,19 +314,7 @@ We do this by adding the attribute `should_panic` to our test function. The test
 We place the `#[should_panic]` attribute after the `#[test]` attribute and before the test function it applies to. Let’s look at the result to see that this test passes:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_05/output.txt}}
 ```
 
 Looks good! Now let’s introduce a bug in our code by removing the condition that the `new` function will panic if the value is greater than `100`:
@@ -422,19 +326,7 @@ Looks good! Now let’s introduce a bug in our code by removing the condition th
 When we run the test, it will fail:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_03_wrong_new_impl/output.txt}}
 ```
 
 We don’t get a very helpful message in this case, but when we look at the test function, we see that it’s annotated with `#[should_panic]` attribute. The failure we got means that the code in the test function did not cause a panic.
@@ -461,19 +353,7 @@ To see what happens when a `should_panic` test with an expected message fails, l
 This time when we run the `should_panic` test, it will fail:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_04_new_bug/output.txt}}
 ```
 
 The failure message indicates that this test did indeed panic as we expected, but the panic message did not include the expected string. The panic message that we did get in this case was `Guess must be >= 1`. Now we can start figuring out where our bug is!
@@ -496,19 +376,7 @@ To demonstrate how to run a single test, we’ll first create two test functions
 We can pass the name of any test function to `test` to run only that test using the `-f` flag:
 
 ```shell
-$ scarb test -f add_two_and_two
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_07/output.txt}}
 ```
 
 Only the test with the name `add_two_and_two` ran; the other test didn’t match that name. The test output lets us know we had one more test that didn’t run by displaying `1 filtered out;` at the end.
@@ -526,19 +394,7 @@ Sometimes a few specific tests can be very time-consuming to execute, so you mig
 After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now when we run our tests, `it_works` runs, but `expensive_test` doesn’t:
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/output.txt}}
 ```
 
 The `expensive_test` function is listed as ignored.
@@ -573,19 +429,7 @@ The following example shows how to use it to test the gas function of the `sum_n
 The value printed when running `scarb test` is the amount of gas that was consumed by the benchmarked operation.
 
 ```shell
-$ scarb test
-     Running test listing_08_01_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.49s
-   Compiling test(listing_08_01_02_unittest) listing_08_01_02 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 8 seconds
-
-
-Collected 2 test(s) from listing_08_01_02 package
-Running 2 test(s) from src/
-[PASS] listing_08_01_02::tests::it_works (gas: ~1)
-[PASS] listing_08_01_02::other_tests::exploration (gas: ~1)
-Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+{{#include ../listings/ch10-testing-cairo-programs/no_listing_07_benchmark_gas/output.txt}}
 ```
 
 Here, the gas usage of the `sum_n` function is `80690` (decimal representation of the hex number). The total amount consumed by the test is slightly higher at `140100`, due to some extra steps required to run the entire test function. Review

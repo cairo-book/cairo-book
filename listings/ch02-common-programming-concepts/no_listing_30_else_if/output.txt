@@ -1,6 +1,6 @@
 $ scarb cairo-run 
    Compiling no_listing_25_else_if v0.1.0 (listings/ch02-common-programming-concepts/no_listing_30_else_if/Scarb.toml)
-    Finished release target(s) in 1 second
+    Finished `dev` profile target(s) in 11 seconds
      Running no_listing_25_else_if
 number is 3
 Run completed successfully, returning []

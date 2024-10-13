@@ -1,18 +1,18 @@
-$ scarb test   
+$ scarb test 
      Running test no_listing_08_test_gas (snforge test)
-    Updating git repository https://github.com/foundry-rs/starknet-foundry
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.47s
-   Compiling test(no_listing_08_test_gas_unittest) no_listing_08_test_gas v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/no_listing_06_test_gas/Scarb.toml)
+    Finished `release` profile [optimized] target(s) in 0.42s
+   Compiling test(listings/ch10-testing-cairo-programs/no_listing_06_test_gas/Scarb.toml)
 error: Plugin diagnostic: Attribute should only appear on tests.
- --> /Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo:14:1
+ --> listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo:14:1
 
 ^
 
 error: Plugin diagnostic: Attribute should only appear on tests.
- --> /Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo:14:1
+ --> listings/ch10-testing-cairo-programs/no_listing_06_test_gas/src/lib.cairo:14:1
 
 ^
 
 error: could not compile `no_listing_08_test_gas` due to previous error
 [ERROR] Failed to build test artifacts with Scarb: `scarb` exited with error
+
