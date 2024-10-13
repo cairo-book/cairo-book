@@ -97,10 +97,8 @@
     initializeDOMElements() {
       this.chatButton = this.createChatButton();
       this.chatWindow = this.createChatWindow();
-      this.statusElement = this.createStatusElement();
       document.body.appendChild(this.chatButton);
       document.body.appendChild(this.chatWindow);
-      document.body.appendChild(this.statusElement);
     }
 
     createChatButton() {
@@ -133,8 +131,13 @@
       window.style.display = "none";
       window.innerHTML = `
         <div id="chat-header">
-          <span>Chat</span>
-          <button id="clear-history">Clear History</button>
+          <span id="connection-status" class="disconnected">Disconnected</span>
+          <span class="chat-title">Chat</span>
+          <button id="clear-history" class="icon-button" title="Clear History">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+            </svg>
+          </button>
           <button id="close-chat">×</button>
         </div>
         <div id="chat-messages"></div>
@@ -142,16 +145,9 @@
           <input type="text" id="message-input" placeholder="Ask anything about Cairo...">
           <button id="send-message">Send</button>
         </div>
+        <div id="chat-toasts"></div>
       `;
       return window;
-    }
-
-    createStatusElement() {
-      const status = document.createElement("div");
-      status.id = "connection-status";
-      status.className = "disconnected";
-      status.textContent = "Disconnected";
-      return status;
     }
 
     /**
@@ -427,11 +423,22 @@
     }
 
     showToast(message, type) {
+      const toastContainer = document.getElementById("chat-toasts");
+      if (!toastContainer) {
+        console.error("Toast container not found");
+        return;
+      }
+
       const toast = document.createElement("div");
-      toast.className = `toast ${type}`;
+      toast.className = `chat-toast ${type}`;
       toast.textContent = message;
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
+
+      toastContainer.appendChild(toast);
+
+      // Remove the toast after 3 seconds
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
     }
 
     /**
@@ -579,7 +586,6 @@
       }
       this.chatId = this.generateUniqueId();
       this.saveChatHistory();
-      this.showToast("Chat history cleared", "info");
     }
 
     /**

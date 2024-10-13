@@ -42,21 +42,95 @@
 }
 
 #chat-header {
-  padding: 15px;
-  background-color: var(--chat-primary);
-  color: var(--chat-bg);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--sidebar-bg);
+}
+
+.chat-title {
+  font-size: 16px;
   font-weight: bold;
+  color: var(--fg);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#connection-status {
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 10px;
+}
+
+#connection-status.connected {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+#connection-status.disconnected {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
+#clear-history {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: var(--fg);
+  opacity: 0.7;
+  transition:
+    opacity 0.3s,
+    transform 0.1s;
+}
+
+#clear-history:hover {
+  opacity: 1;
+}
+
+#clear-history:active {
+  transform: scale(0.9);
+}
+
+#clear-history svg {
+  vertical-align: middle;
 }
 
 #close-chat {
+  font-size: 20px;
   background: none;
   border: none;
-  color: var(--chat-bg);
-  font-size: 18px;
   cursor: pointer;
+  color: var(--fg);
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+#close-chat:hover {
+  opacity: 1;
+}
+
+.chat-controls {
+  display: flex;
+  align-items: center;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  margin-left: 10px;
+  color: var(--fg);
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.icon-button:hover {
+  opacity: 1;
 }
 
 #chat-messages {
@@ -86,18 +160,13 @@
 }
 
 #send-message {
-  padding: 10px 15px;
-  background-color: var(--chat-primary);
-  color: var(--chat-bg);
+  background-color: var(--links);
+  color: var(--bg);
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 16px;
 }
 
 #send-message:hover {
-  background-color: var(--chat-primary-hover);
+  opacity: 0.9;
 }
 
 .message {
@@ -209,26 +278,6 @@
 }
 .toast.warning {
   background-color: var(--chat-toast-warning);
-}
-
-/* Connection status */
-#connection-status {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  z-index: 1000;
-}
-
-#connection-status.connected {
-  background-color: var(--chat-toast-success);
-  color: white;
-}
-#connection-status.disconnected {
-  background-color: var(--chat-toast-error);
-  color: white;
 }
 
 /* Prevent background scrolling when chat is open */
