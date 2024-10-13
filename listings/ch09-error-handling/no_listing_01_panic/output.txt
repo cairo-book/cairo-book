@@ -1,6 +1,6 @@
 $ scarb cairo-run 
    Compiling no_listing_01_panic v0.1.0 (listings/ch09-error-handling/no_listing_01_panic/Scarb.toml)
-    Finished release target(s) in 1 second
+    Finished `dev` profile target(s) in 14 seconds
      Running no_listing_01_panic
 Run panicked with [2, ].
 
