@@ -1,5 +1,5 @@
+$ scarb test   
      Running test listing_09_09 (snforge test)
-    Updating git repository https://github.com/foundry-rs/starknet-foundry
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Finished `release` profile [optimized] target(s) in 0.46s
    Compiling test(listing_09_09_unittest) listing_09_09 v0.1.0 (/Users/nathan/cairo-book/listings/ch10-testing-cairo-programs/listing_10_06/Scarb.toml)
