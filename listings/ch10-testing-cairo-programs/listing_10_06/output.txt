@@ -1,22 +1,19 @@
 $ scarb test 
      Running test listing_09_09 (snforge test)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.50s
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Finished `release` profile [optimized] target(s) in 2.89s
    Compiling test(listings/ch10-testing-cairo-programs/listing_10_06/Scarb.toml)
-    Finished `dev` profile target(s) in 7 seconds
+    Finished `dev` profile target(s) in 19 seconds
 
 
 Collected 1 test(s) from listing_09_09 package
 Running 1 test(s) from src/
-[FAIL] listing_09_09::tests::greater_than_100
-
-Failure data:
-    Incorrect panic data
-    Actual:    [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203c3d20313030, 0x14] (Guess must be <= 100)
-    Expected:  [0x4775657373206d757374206265203c3d20313030] (Guess must be <= 100)
-
-Tests: 0 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
-
-Failures:
-    listing_09_09::tests::greater_than_100
+[PASS] listing_09_09::tests::greater_than_100 (gas: ~1)
+Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

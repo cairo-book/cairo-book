@@ -1,6 +1,6 @@
 $ scarb cairo-run 
    Compiling no_listing_09_snapshots v0.1.0 (listings/ch04-understanding-ownership/no_listing_09_snapshots/Scarb.toml)
-    Finished `dev` profile target(s) in 16 seconds
+    Finished `dev` profile target(s) in 21 seconds
      Running no_listing_09_snapshots
 The length of the array when the snapshot was taken is 0
 The current length of the array is 1
