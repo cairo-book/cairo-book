@@ -10,6 +10,7 @@ lazy_static! {
     static ref REF_REGEX: Regex = Regex::new(r"\{\{#ref\s*([\w-]+)\s*\}\}").expect("Invalid regex");
     static ref LABEL_REGEX: Regex =
         Regex::new(r"\{\{#label\s*([\w-]+)\s*\}\}").expect("Invalid regex");
+    static ref CHAP_REF_REGEX: Regex = Regex::new(r"\{\{#chap\s*([\w-]+)\s*\}\}").expect("Invalid regex");
 }
 
 pub struct Cairo;
@@ -46,6 +47,7 @@ struct CairoBookProcessor {
     labels: HashMap<String, String>,
     current_label: usize,
     current_chapter: u32,
+    chapter_numbers: HashMap<String, u32>,
 }
 
 impl CairoBookProcessor {
@@ -54,21 +56,28 @@ impl CairoBookProcessor {
             labels: HashMap::new(),
             current_label: 1,
             current_chapter: 0,
+            chapter_numbers: HashMap::new(),
         }
     }
 
     fn process_book(&mut self, book: &mut Book) -> Result<()> {
-        self.collect_labels(book)?;
+        self.collect(book)?;
         self.process_references(book)?;
         Ok(())
     }
 
-    fn collect_labels(&mut self, book: &mut Book) -> Result<()> {
+    fn collect(&mut self, book: &mut Book) -> Result<()> {
         book.for_each_mut_parent_first(|item| {
             if let BookItem::Chapter(chapter) = item {
                 self.process_chapter_labels(chapter).unwrap_or_else(|e| {
                     eprintln!(
                         "Error processing labels in chapter '{}': {}",
+                        chapter.name, e
+                    )
+                });
+                self.collect_chapter_number(chapter, self.current_chapter).unwrap_or_else(|e| {
+                    eprintln!(
+                        "Error processing chapter number in chapter '{}': {}",
                         chapter.name, e
                     )
                 });
@@ -113,6 +122,12 @@ impl CairoBookProcessor {
         Ok(())
     }
 
+    fn collect_chapter_number(&mut self, chapter: &mut Chapter, chapter_counter: u32) -> Result<()> {
+        let chapter_name = chapter.name.to_lowercase().replace(" ", "-");
+        self.chapter_numbers.insert(chapter_name, chapter_counter);
+        Ok(())
+    }
+
     fn process_references(&self, book: &mut Book) -> Result<()> {
         book.for_each_mut(|item| {
             if let BookItem::Chapter(chapter) = item {
@@ -150,6 +165,7 @@ impl CairoBookProcessor {
             }
 
             skip_next_empty = false;
+            // Process ref
             for cap in REF_REGEX.captures_iter(line) {
                 let ref_name = &cap[1];
                 let replacement = self
@@ -158,6 +174,16 @@ impl CairoBookProcessor {
                     .with_context(|| format!("Reference to label '{}' not found", ref_name))?;
 
                 processed_line = processed_line.replace(&cap[0], replacement);
+            }
+
+            // Process chapter ref
+            for cap in CHAP_REF_REGEX.captures_iter(line) {
+                let chapter_name = &cap[1];
+                let replacement = self
+                    .chapter_numbers
+                    .get(chapter_name)
+                    .with_context(|| format!("Reference to chapter name '{}' not found", chapter_name))?;
+                processed_line = processed_line.replace(&cap[0], &replacement.to_string());
             }
 
             new_content.push_str(&processed_line);
@@ -286,6 +312,88 @@ mod tests {
                 processed_chapter.content,
                 "This is a reference {{#ref label1}} in the text.\n\
                  This line has an error {{#ref label2}}.\n\
+                 This is another valid line.",
+                "Chapter content should remain unchanged due to error"
+            );
+        } else {
+            panic!("Expected chapter");
+        }
+    }
+
+    #[test]
+    fn test_collect_chapter_number() {
+        let mut processor = CairoBookProcessor::new();
+
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content = "This is a valid line.\n".to_string();
+        book.push_item(chapter);
+
+        let result = processor.collect(&mut book);
+
+        assert!(
+            result.is_ok(),
+            "collect should not return an error"
+        );
+
+        assert_eq!(*processor.chapter_numbers.get("test-chapter").expect("test-chapter should be in the HashMap"), 0);
+    }
+
+    #[test]
+    fn test_process_chapter_numbers() {
+        let mut processor = CairoBookProcessor::new();
+
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content = "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
+        chapter.content += "This is another valid line.";
+        book.push_item(chapter);
+
+        // Collect chapter numbers and process 
+        let result = processor.process_book(&mut book);
+
+        assert!(
+            result.is_ok(),
+            "process_references should not return an error"
+        );
+
+        if let BookItem::Chapter(processed_chapter) = &book.sections[0] {
+            println!("content : {}", processed_chapter.content);
+            assert_eq!(
+                processed_chapter.content,
+                "This is a chap reference Chapter 0 in the text.\n\
+                 This is another valid line.\n",
+            );
+        } else {
+            panic!("Expected chapter");
+        }
+    }
+
+    #[test]
+    fn test_process_chapter_number_with_error() {
+        let mut processor = CairoBookProcessor::new();
+
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content = "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
+        chapter.content += "This line has an error Chapter {{#chap unknown-chapter}}.\n";
+        chapter.content += "This is another valid line.";
+        book.push_item(chapter);
+
+        // Collect chapter numbers and process 
+        let result = processor.process_book(&mut book);
+
+        assert!(
+            result.is_ok(),
+            "process_references should not return an error"
+        );
+
+        if let BookItem::Chapter(processed_chapter) = &book.sections[0] {
+            println!("content : {}", processed_chapter.content);
+            assert_eq!(
+                processed_chapter.content,
+                "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n\
+                 This line has an error Chapter {{#chap unknown-chapter}}.\n\
                  This is another valid line.",
                 "Chapter content should remain unchanged due to error"
             );

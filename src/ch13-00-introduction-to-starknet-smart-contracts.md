@@ -38,6 +38,6 @@ To compile contracts defined in your package's dependencies, please refer to the
 
 Starknet Foundry is a toolchain for Starknet smart contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.
 
-We'll describe Starknet Foundry in more detail in [Chapter 17][testing with snfoundry] when discussing Starknet smart contract testing and security.
+We'll describe Starknet Foundry in more detail in [Chapter {{#chap starknet-smart-contracts-security}}][testing with snfoundry] when discussing Starknet smart contract testing and security.
 
 [testing with snfoundry]: ./ch17-02-testing-smart-contracts.md#testing-smart-contracts-with-starknet-foundry

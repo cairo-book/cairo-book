@@ -102,7 +102,7 @@ You can implement the `Copy` trait on your type by adding the `#[derive(Copy)]` 
 In this example, we can pass `p1` twice to the foo function because the `Point` type implements the `Copy` trait. This means that when we pass `p1` to `foo`, we are actually passing a copy of `p1`, so `p1` remains valid. In ownership terms, this means that the ownership of `p1` remains with the `main` function.
 If you remove the `Copy` trait derivation from the `Point` type, you will get a compile-time error when trying to compile the code.
 
-_Don't worry about the `Struct` keyword. We will introduce this in [Chapter 5][structs]._
+_Don't worry about the `Struct` keyword. We will introduce this in [Chapter {{#chap using-structs-to-structure-related-data}}][structs]._
 
 [data types]: ./ch02-02-data-types.md
 [structs]: ./ch05-00-using-structs-to-structure-related-data.md
@@ -158,7 +158,7 @@ Now, when `A` goes out of scope, its dictionary will be automatically `squashed`
 
 ## Copy Array Data with `clone`
 
-If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in a dedicated section in [Chapter 5][method syntax], but because methods are a common feature in many programming languages, you’ve probably seen them before.
+If we _do_ want to deeply copy the data of an `Array`, we can use a common method called `clone`. We’ll discuss method syntax in a dedicated section in [Chapter {{#chap using-structs-to-structure-related-data}}][method syntax], but because methods are a common feature in many programming languages, you’ve probably seen them before.
 
 Here’s an example of the `clone` method in action.
 

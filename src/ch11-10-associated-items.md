@@ -1,7 +1,7 @@
 # Associated Items
 
 _Associated Items_ are the items declared in [traits] or defined in
-[implementations]. Specifically, there are [associated functions] (including methods, that we already covered in Chapter 5), [associated types], [associated constants], and [associated implementations].
+[implementations]. Specifically, there are [associated functions] (including methods, that we already covered in Chapter {{#chap using-structs-to-structure-related-data}}), [associated types], [associated constants], and [associated implementations].
 
 [traits]: ./ch08-02-traits-in-cairo.md
 [implementations]: ./ch08-02-traits-in-cairo.md#implementing-a-trait-on-a-type
