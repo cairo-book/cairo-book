@@ -8,9 +8,11 @@ edition = "2024_07"
 [dependencies]
 starknet = ">=2.7"
 
+
 [dev-dependencies]
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.31.0" }
 assert_macros = "2.8.2"
+
 
 [[target.starknet-contract]]
 
