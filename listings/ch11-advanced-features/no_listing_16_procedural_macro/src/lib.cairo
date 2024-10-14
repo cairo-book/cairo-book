@@ -1,4 +1,3 @@
-// ANCHOR: all
 const TWO_TEN: u128 = pow!(12, 2);
 
 // ANCHOR: derive_macro
@@ -46,5 +45,3 @@ mod tests {
         assert_eq!(b3, B { a: 4, b: 6 });
     }
 }
-// ANCHOR_END: all
-
