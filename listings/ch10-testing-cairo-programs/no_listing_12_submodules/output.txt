@@ -1,10 +1,10 @@
 $ scarb test 
      Running test adder (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.51s
+    Finished `release` profile [optimized] target(s) in 0.44s
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
-    Finished `dev` profile target(s) in 15 seconds
+    Finished `dev` profile target(s) in 11 seconds
 
 
 Collected 2 test(s) from adder package
