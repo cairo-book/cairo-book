@@ -432,6 +432,6 @@ The value printed when running `scarb test` is the amount of gas that was consum
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_07_benchmark_gas/output.txt}}
 ```
 
-Here, the gas usage of the `sum_n` function is `80690` (decimal representation of the hex number). The total amount consumed by the test is slightly higher at `140100`, due to some extra steps required to run the entire test function. Review changes tests
+Here, the gas usage of the `sum_n` function is `80690` (decimal representation of the hex number). The total amount consumed by the test is slightly higher at `140100`, due to some extra steps required to run the entire test function.
 
 {{#quiz ../quizzes/ch10-01-how_to_write_tests.toml}}
