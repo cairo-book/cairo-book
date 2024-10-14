@@ -80,7 +80,7 @@ Listing {{#ref pow_macro}} shows the rust code for creating an inline macro in R
 {{#label pow_macro}}
 <span class="caption">Listing {{#ref pow_macro}}: Code for creating inline pow procedural macro</span>
 
-The essential dependency for building a cairo macro `cairo_lang_macro` is imported here with `inline_macro, Diagnostic, ProcMacroResult, TokenStream`. The `inline_macro` is used for implimenting an expression macro, `ProcMacroResult` is used for the function return, `TokenStream` as the input, and the `Diagnostic` is used for error handling. We also use the `cairo-lang-parser` crate to parse the input code. Then the `pow` function is defined utilizing the imports to create a macro that calculate the pow based on the `TokenStream` input.
+The essential dependency for building a cairo macro `cairo_lang_macro` is imported here with `inline_macro, Diagnostic, ProcMacroResult, TokenStream`. The `inline_macro` is used for implementing an expression macro, `ProcMacroResult` is used for the function return, `TokenStream` as the input, and the `Diagnostic` is used for error handling. We also use the `cairo-lang-parser` crate to parse the input code. Then the `pow` function is defined utilizing the imports to create a macro that calculate the pow based on the `TokenStream` input.
 
 ## How to Use Existing Procedural Macros
 
