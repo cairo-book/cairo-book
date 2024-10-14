@@ -1,2 +1,4 @@
 scarb 2.8.4
 starknet-foundry 0.31.0
+katana 0.7.4
+starkli 0.3.5

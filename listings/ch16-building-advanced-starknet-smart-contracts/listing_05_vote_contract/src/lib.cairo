@@ -35,7 +35,7 @@ mod Vote {
         registered_voter: Map::<ContractAddress, bool>,
     }
 
-    /
+    
     #[constructor]
     fn constructor(
         ref self: ContractState,
