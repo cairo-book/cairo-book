@@ -1,71 +1,96 @@
 $ scarb test 
      Running test source (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.38s
+    Finished `release` profile [optimized] target(s) in 0.39s
    Compiling test(listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/Scarb.toml)
-warn: Unused import: `source::tests::foundry_test::IPizzaFactorySafeDispatcher`
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:2:30
-    IPizzaFactoryDispatcher, IPizzaFactorySafeDispatcher, IPizzaFactoryDispatcherTrait,
-                             ^*************************^
-
-warn: Unused import: `source::tests::foundry_test::IPizzaFactory`
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:7:20
-use source::pizza::IPizzaFactory;
-                   ^***********^
-
 warn: Unused import: `source::tests::foundry_test::ContractClassTrait`
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:14:14
-    declare, ContractClassTrait, ContractClass, start_cheat_caller_address,
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:8:14
+    declare, ContractClassTrait, start_cheat_caller_address,
              ^****************^
 
-warn: Unused import: `source::tests::foundry_test::ContractClass`
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:14:34
-    declare, ContractClassTrait, ContractClass, start_cheat_caller_address,
-                                 ^***********^
+warn: Unused import: `source::tests::foundry_test::stop_cheat_caller_address`
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:9:5
+    stop_cheat_caller_address, EventSpyTrait, spy_events, CheatTarget,
+    ^***********************^
 
-warn: Unused import: `source::tests::foundry_test::EventSpy`
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:15:32
-    stop_cheat_caller_address, EventSpy, EventSpyAssertionsTrait, spy_events, load,
-                               ^******^
+warn: Unused import: `source::tests::foundry_test::EventSpyTrait`
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:9:32
+    stop_cheat_caller_address, EventSpyTrait, spy_events, CheatTarget,
+                               ^***********^
 
-warn: Unused import: `source::tests::foundry_test::load_felt252`
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:16:26
-    cheatcodes::storage::load_felt252
-                         ^**********^
+error: Identifier not found.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:9:59
+    stop_cheat_caller_address, EventSpyTrait, spy_events, CheatTarget,
+                                                          ^*********^
 
 error[E0002]: Method `deploy` could not be called on type `snforge_std::cheatcodes::contract_class::DeclareResult`.
 Candidate `ContractClassTrait::deploy` inference failed with: Type mismatch: `snforge_std::cheatcodes::contract_class::DeclareResult` and `@snforge_std::cheatcodes::contract_class::ContractClass`.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:30:42
-    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
-                                         ^****^
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:22:37
+    let contract_address = contract.deploy(@constructor_calldata).unwrap::<ContractClassTrait>(); // Specify unwrap
+                                    ^****^
 
 error: Ambiguous method call. More than one applicable trait function with a suitable self type was found: OptionTrait::unwrap and ResultTrait::unwrap. Consider adding type annotations or explicitly refer to the impl function.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:30:72
-    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
-                                                                       ^****^
-
-error: Unexpected type for tuple pattern. "<missing>" is not a tuple.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:30:9
-    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
-        ^*******************^
-
-error: Variable "contract_address" not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:32:48
-    let dispatcher = IPizzaFactoryDispatcher { contract_address };
-                                               ^**************^
-
-error: Identifier not found.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:34:18
-    (dispatcher, contract_address)
-                 ^**************^
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:22:67
+    let contract_address = contract.deploy(@constructor_calldata).unwrap::<ContractClassTrait>(); // Specify unwrap
+                                                                  ^**************************^
 
 warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:28:13
-    let mut constructor_calldata = array![owner.into()];
-            ^******************^
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:21:9
+    let constructor_calldata = array![owner.into()];
+        ^******************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:28:1
+//ANCHOR_END: deployment
+^**********************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:38:1
+//ANCHOR_END: test_constructor
+^****************************^
+
+error: Identifier not found.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:74:1
+
+^
+
+error: Wrong number of arguments. Expected 0, found: 1
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:74:1
+
+^
+
+error[E0002]: Method `assert_emitted` not found on type `<missing>`. Did you import the correct trait and impl?
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:74:1
+
+^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:74:1
+
+^
+
+error[E0002]: Method `set_owner` not found on type `source::pizza::PizzaFactory::ContractState`. Did you import the correct trait and impl?
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:87:1
+//ANCHOR_END: test_make_pizza
+^***************************^
+
+error[E0002]: Method `read` not found on type `core::starknet::storage::storage_base::StorageBase::<core::starknet::storage::Mutable::<core::starknet::contract_address::ContractAddress>>`. Did you import the correct trait and impl?
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:87:1
+//ANCHOR_END: test_make_pizza
+^***************************^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:53:1
+
+^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:62:1
+//ANCHOR_END: test_owner
+^**********************^
 
 error: The value does not fit within the range of type core::felt252.
- --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:65:1
+ --> listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:53:1
 
 ^
 
