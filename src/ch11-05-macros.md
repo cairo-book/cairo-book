@@ -8,7 +8,7 @@ In some situations, a developer might need to declare a constant that is the res
 
 Here is an example of `consteval_int!`:
 
-```rust,noplayground
+```cairo,noplayground
 const a: felt252 = consteval_int!(2 * 2 * 2);
 ```
 
@@ -16,7 +16,7 @@ This will be interpreted as `const a: felt252 = 8;` by the compiler.
 
 ## `selector!` Macro
 
-See [Entry Point Selector](./ch15-02-contract-dispatchers-library-dispatchers-and-system-calls.md#entry-point-selector).
+`selector!("function_name")` macro generates the entry point selector for the given function name.
 
 ## `print!` and `println!` Macros
 
@@ -28,7 +28,7 @@ Please refer to the [Arrays](./ch03-01-arrays.md) page.
 
 ## `panic!` Macro
 
-See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.html#panic-macro) page.
+See [Unrecoverable Errors with panic](./ch09-01-unrecoverable-errors-with-panic.md#panic-macro) page.
 
 ## `assert!` and `assert_xx!` Macros
 
@@ -36,11 +36,11 @@ See [How to Write Tests](./ch10-01-how-to-write-tests.md) page.
 
 ## `format!` Macro
 
-See [Printing](./ch11-08-printing.html#formatting) page.
+See [Printing](./ch11-08-printing.md#formatting) page.
 
 ## `write!` and `writeln!` Macros
 
-See [Printing](./ch11-08-printing.html#printing-custom-data-types) page.
+See [Printing](./ch11-08-printing.md#printing-custom-data-types) page.
 
 ## `get_dep_component!`, `get_dep_component_mut` and `component!` Macros
 

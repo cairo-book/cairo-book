@@ -193,7 +193,7 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
     if is_contract {
         // This is a contract, it must pass starknet-compile
         if !tags.contains(&Tags::DoesNotCompile) && !args.starknet_skip {
-            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![], true);
         }
     } else if should_be_runnable {
         // This is a cairo program, it must pass cairo-run
@@ -206,19 +206,20 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
                 manifest_path,
                 file_path,
                 vec!["--available-gas=200000000".to_string()],
+                true,
             );
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
         if !tags.contains(&Tags::DoesNotCompile) && !args.compile_skip {
-            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![], true);
         }
     };
 
     // TEST CHECKS
     if should_be_testable && !args.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        let _ = run_command(ScarbCmd::Test(), manifest_path, file_path, vec![]);
+        let _ = run_command(ScarbCmd::Test(), manifest_path, file_path, vec![], true);
     }
 
     // FORMAT CHECKS
@@ -226,7 +227,13 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
         // This program must pass cairo-format
         let format_args = vec!["-c".to_string()];
 
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
+        let _ = run_command(
+            ScarbCmd::Format(),
+            manifest_path,
+            file_path,
+            format_args,
+            true,
+        );
     }
 }
 
@@ -272,40 +279,54 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         let format_args = vec![];
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
+        let _ = run_command(
+            ScarbCmd::Format(),
+            manifest_path,
+            file_path,
+            format_args,
+            true,
+        );
     }
 }
 
-fn run_command(cmd: ScarbCmd, manifest_path: &str, file_path: &str, args: Vec<String>) -> String {
+fn run_command(
+    cmd: ScarbCmd,
+    manifest_path: &str,
+    file_path: &str,
+    args: Vec<String>,
+    verbose: bool,
+) -> String {
     match cmd.test(manifest_path, args) {
         Ok(output) => String::from_utf8_lossy(&output.stdout).into_owned(),
-        Err(e) => handle_error(e, file_path, cmd),
+        Err(e) => handle_error(e, file_path, cmd, verbose),
     }
 }
 
-fn handle_error(e: String, file_path: &str, cmd: ScarbCmd) -> String {
+fn handle_error(e: String, file_path: &str, cmd: ScarbCmd, verbose: bool) -> String {
     let clickable_file = clickable(file_path);
 
-    println!("\n{}", "=".repeat(80).yellow());
-    println!(
-        "{} in {}",
-        "Error".red().bold(),
-        file_path.blue().underline()
-    );
-    println!("{}", "=".repeat(80).yellow());
+    if verbose {
+        println!("\n{}", "=".repeat(80).yellow());
+        println!(
+            "{} in {}",
+            "Error".red().bold(),
+            file_path.blue().underline()
+        );
+        println!("{}", "=".repeat(80).yellow());
 
-    println!("{}:", "Command".cyan().bold());
-    println!("  {}", cmd.as_str().green());
+        println!("{}:", "Command".cyan().bold());
+        println!("  {}", cmd.as_str().green());
 
-    println!("{}:", "File".cyan().bold());
-    println!("  {}", clickable_file);
+        println!("{}:", "File".cyan().bold());
+        println!("  {}", clickable_file);
 
-    println!("{}:", "Details".cyan().bold());
-    for line in e.lines() {
-        println!("  {}", line);
+        println!("{}:", "Details".cyan().bold());
+        for line in e.lines() {
+            println!("  {}", line);
+        }
+
+        println!("{}", "=".repeat(80).yellow());
     }
-
-    println!("{}", "=".repeat(80).yellow());
 
     let mut errors = ERRORS.lock().unwrap();
     errors.get_mut_error_set(&cmd).insert(file_path.to_string());

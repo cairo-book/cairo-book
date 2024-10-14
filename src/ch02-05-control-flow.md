@@ -8,7 +8,7 @@ An if expression allows you to branch your code depending on conditions. You pro
 
 Create a new project called _branches_ in your _cairo_projects_ directory to explore the `if` expression. In the _src/lib.cairo_ file, input the following:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_27_if/src/lib.cairo}}
 ```
 
@@ -24,7 +24,7 @@ Try running this code; you should see the following output:
 
 Let’s try changing the value of `number` to a value that makes the condition `true` to see what happens:
 
-```rust, noplayground
+```cairo, noplayground
     let number = 5;
 ```
 
@@ -36,7 +36,7 @@ Run completed successfully, returning []
 
 It’s also worth noting that the condition in this code must be a `bool`. If the condition isn’t a `bool`, we’ll get an error. For example, try running the following code:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo}}
 ```
 
@@ -55,7 +55,7 @@ automatically try to convert non-Boolean types to a Boolean. If we want the `if`
 code block to run only when a number is not equal to 0, for example, we can
 change the if expression to the following:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_29_ter_if_not_equal_zero/src/lib.cairo}}
 
 ```
@@ -66,7 +66,7 @@ Running this code will print `number was something other than zero`.
 
 You can use multiple conditions by combining `if` and `else` in an `else if` expression. For example:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_30_else_if/src/lib.cairo}}
 ```
 
@@ -76,7 +76,7 @@ This program has four possible paths it can take. After running it, you should s
 {{#include ../listings/ch02-common-programming-concepts/no_listing_30_else_if/output.txt}}
 ```
 
-When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1` nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. [Chapter 6][match] describes a powerful Cairo branching construct called `match` for these cases.
+When this program executes, it checks each `if` expression in turn and executes the first body for which the condition evaluates to `true`. Note that even though `number - 2 == 1` is `true`, we don’t see the output `number minus 2 is 1` nor do we see the `number not found` text from the `else` block. That’s because Cairo only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest. Using too many `else if` expressions can clutter your code, so if you have more than one, you might want to refactor your code. [Chapter {{#chap enums-and-pattern-matching}}][match] describes a powerful Cairo branching construct called `match` for these cases.
 
 [match]: ./ch06-02-the-match-control-flow-construct.md
 
@@ -84,7 +84,7 @@ When this program executes, it checks each `if` expression in turn and executes 
 
 Because `if` is an expression, we can use it on the right side of a `let` statement to assign the outcome to a variable.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_31_if_let/src/lib.cairo}}
 ```
 
@@ -106,7 +106,7 @@ The `loop` keyword tells Cairo to execute a block of code over and over again fo
 
 As an example, change the _src/lib.cairo_ file in your _loops_ directory to look like this:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_32_infinite_loop/src/lib.cairo}}
 ```
 
@@ -134,14 +134,14 @@ Now, try running the same program again, but this time with the `--available-gas
 
 Fortunately, Cairo also provides a way to break out of a loop using code. You can place the `break` keyword within the loop to tell the program when to stop executing the loop.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_33_loop_break/src/lib.cairo}}
 ```
 
 The `continue` keyword tells the program to go to the next iteration of the loop and to skip the rest of the code in this iteration.
 Let's add a `continue` statement to our loop to skip the `println!` statement when `i` is equal to `5`.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_34_loop_continue/src/lib.cairo}}
 ```
 
@@ -156,7 +156,7 @@ this, you can add the value you want returned after the `break` expression you
 use to stop the loop; that value will be returned out of the loop so you can
 use it, as shown here:
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_35_loop_return_values/src/lib.cairo}}
 ```
 
@@ -177,7 +177,7 @@ However, this pattern is so common that Cairo has a built-in language construct 
 
 In Listing {{#ref while-true}}, we use `while` to loop the program three times, counting down each time after printing the value of `number`, and then, after the loop, print a message and exit.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_36_while_loop/src/lib.cairo}}
 ```
 
@@ -191,7 +191,7 @@ While a condition evaluates to `true`, the code runs; otherwise, it exits the lo
 
 You can also use the while construct to loop over the elements of a collection, such as an array. For example, the loop in Listing {{#ref iter-while}} prints each element in the array `a`.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_45_iter_loop_while/src/lib.cairo}}
 ```
 
@@ -210,7 +210,7 @@ However, this approach is error prone; we could cause the program to panic if th
 
 As a more concise alternative, you can use a `for` loop and execute some code for each item in a collection. A `for` loop looks like the code in Listing {{#ref iter-for}}.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_46_iter_loop_for/src/lib.cairo}}
 ```
 
@@ -221,19 +221,27 @@ When we run this code, we’ll see the same output as in Listing {{#ref iter-whi
 
 Using the `for` loop, you wouldn’t need to remember to change any other code if you changed the number of values in the array, as you would with the method used in Listing {{#ref iter-while}}.
 
-{{#quiz ../quizzes/ch02-05-control-flow.toml}}
+The safety and conciseness of `for` loops make them the most commonly used loop construct in Cairo. Even in situations in which you want to run some code a certain number of times, as in the countdown example that used a while loop in Listing {{#ref while-true}}. Another way to run code a certain number of times would be to use a `Range`, provided by the core library, which generates all numbers in sequence starting from one number and ending before another number.
+
+Here’s how you can use a `Range` to count from 1 to 3:
+
+```cairo
+{{#include ../listings/ch02-common-programming-concepts/no_listing_47_for_range/src/lib.cairo}}
+```
+
+This code is a bit nicer, isn’t it?
 
 ## Equivalence Between Loops and Recursive Functions
 
 Loops and recursive functions are two common ways to repeat a block of code multiple times. The `loop` keyword is used to create an infinite loop that can be broken by using the `break` keyword.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_loop_recursion/src/examples/loop_example.cairo}}
 ```
 
 Loops can be transformed into recursive functions by calling the function within itself. Here is an example of a recursive function that mimics the behavior of the `loop` example above.
 
-```rust
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_loop_recursion/src/examples/recursion_example.cairo}}
 ```
 
@@ -246,9 +254,11 @@ In Cairo, loops and recursions are not only conceptually equivalent: they are al
 sierra-text = true
 ```
 
-Then, run `scarb build` to compile both examples. You will find the Sierra code generated by for both examples is extremely similar, as the loop is compiled to an recursive function in the Sierra statements.
+Then, run `scarb build` to compile both examples. You will find the Sierra code generated by for both examples is extremely similar, as the loop is compiled to a recursive function in the Sierra statements.
 
 > Note: For our example, our findings came from understanding the **statements** section in Sierra that shows the execution traces of the two programs. If you are curious to learn more about Sierra, check out [Exploring Sierra](https://medium.com/nethermind-eth/under-the-hood-of-cairo-1-0-exploring-sierra-7f32808421f5).
+
+{{#quiz ../quizzes/ch02-05-control-flow.toml}}
 
 ## Summary
 

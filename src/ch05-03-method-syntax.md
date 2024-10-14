@@ -1,12 +1,12 @@
 # Method Syntax
 
-_Methods_ are similar to functions: we declare them with the `fn` keyword and a name, they can have parameters and a return value, and they contain some code that’s run when the method is called from somewhere else. Unlike functions, methods are defined within the context of a struct (or an enum which we cover in [Chapter 6][enums]), and their first parameter is always `self`, which represents the instance of the type the method is being called on.
+_Methods_ are similar to functions: we declare them with the `fn` keyword and a name, they can have parameters and a return value, and they contain some code that’s run when the method is called from somewhere else. Unlike functions, methods are defined within the context of a struct (or an enum which we cover in [Chapter {{#chap enums-and-pattern-matching}}][enums]), and their first parameter is always `self`, which represents the instance of the type the method is being called on.
 
 ## Defining Methods
 
 Let’s change the `area` function that has a `Rectangle` instance as a parameter and instead make an `area` method defined on the `Rectangle` struct, as shown in Listing {{#ref area-method}}
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_01_define_methods/src/lib.cairo:all}}
 ```
 
@@ -33,7 +33,7 @@ So, to avoid defining useless traits, Cairo provides the `#[generate_trait]` att
 
 The previous example can also be written as follows:
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_02_gen_trait/src/lib.cairo}}
 ```
 
@@ -45,7 +45,7 @@ As the `area` method does not modify the calling instance, `self` is declared as
 
 Let's write a new method `scale` which resizes a rectangle of a `factor` given as parameter:
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_03_references/src/lib.cairo:trait_impl}}
 
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_03_references/src/lib.cairo:main}}
@@ -59,7 +59,7 @@ Look at the [Understanding Ownership](ch04-00-understanding-ownership.md) chapte
 
 Let’s practice using methods by implementing another method on the `Rectangle` struct. This time we want to write the method `can_hold` which accepts another instance of `Rectangle` and returns `true` if this rectangle can fit completely within self; otherwise, it should return false.
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_04_some_params/src/lib.cairo:trait_impl}}
 
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_04_some_params/src/lib.cairo:main}}
@@ -83,7 +83,7 @@ value twice:
 
 Let's create the function `new` which creates a `Rectangle` from a `width` and a `height`, `square` which creates a square `Rectangle` from a `size` and `avg` which computes the average of two `Rectangle` instances:
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:trait_impl}}
 
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_05_class_methods/src/lib.cairo:main}}
@@ -102,7 +102,7 @@ Note that the `avg` function could also be written as a method with `self` as th
 Each struct is allowed to have multiple `trait` and `impl` blocks. For example,
 the following code is equivalent to the code shown in the _Methods with several parameters_ section, which has each method in its own `trait` and `impl` blocks.
 
-```rust
+```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_06_multiple_traits/src/lib.cairo:here}}
 ```
 

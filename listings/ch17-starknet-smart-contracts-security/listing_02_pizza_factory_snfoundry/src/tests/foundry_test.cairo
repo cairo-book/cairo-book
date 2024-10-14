@@ -64,3 +64,15 @@ fn test_make_multiple_pizzas() {
     
     assert(pizza_factory.count_pizza() == 3, 'Pizza count should be 3');
 }
+//ANCHOR_END: test_make_pizza
+
+//ANCHOR: test_internals
+#[test]
+fn test_set_as_new_owner_direct() {
+    let mut state = PizzaFactory::contract_state_for_testing();
+    let owner: ContractAddress = contract_address_const::<'owner'>();
+    state.set_owner(owner);
+    assert_eq!(state.owner.read(), owner);
+}
+//ANCHOR_END: test_internals
+

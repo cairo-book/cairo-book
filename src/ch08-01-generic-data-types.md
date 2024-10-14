@@ -10,13 +10,13 @@ Making a function generic means it can operate on different types, avoiding the 
 
 When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two `Array` of items, will return the largest one. If we need to perform this operation for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_01_missing_tdrop/src/lib.cairo:generic}}
 ```
 
 The `largest_list` function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an `Array<T>` is droppable when executing the `main` function. In order to drop an array of `T`, the compiler must first know how to drop `T`. This can be fixed by specifying in the function signature of `largest_list` that `T` must implement the `Drop` trait. The correct function definition of `largest_list` is as follows:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_02_with_tdrop/src/lib.cairo}}
 ```
 
@@ -28,7 +28,7 @@ When defining generic types, it is useful to have information about them. Knowin
 
 Imagine that we want, given a list of elements of some generic type `T`, to find the smallest element among them. Initially, we know that for an element of type `T` to be comparable, it must implement the `PartialOrd` trait. The resulting function would be:
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_03_missing_tcopy/src/lib.cairo:missing-tcopy}}
 ```
 
@@ -36,7 +36,7 @@ The `smallest_element` function uses a generic type `T` that implements the `Par
 
 When indexing on `list`, the value results in a snap of the indexed element, and unless `PartialOrd` is implemented for `@T` we need to desnap the element using `*`. The `*` operation requires a copy from `@T` to `T`, which means that `T` needs to implement the `Copy` trait. After copying an element of type `@T` to `T`, there are now variables with type `T` that need to be dropped, requiring `T` to implement the `Drop` trait as well. We must then add both `Drop` and `Copy` traits implementation for the function to be correct. After updating the `smallest_element` function the resulting code would be:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_04_with_tcopy/src/lib.cairo}}
 ```
 
@@ -50,7 +50,7 @@ For example, `+PartialOrd<T>` is equivalent to `impl TPartialOrd: PartialOrd<T>`
 
 We can rewrite the `smallest_element` function signature as follows:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_05_with_anonymous_impl/src/lib.cairo:1}}
 ```
 
@@ -58,13 +58,13 @@ We can rewrite the `smallest_element` function signature as follows:
 
 We can also define structs to use a generic type parameter for one or more fields using the `<>` syntax, similar to function definitions. First, we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition `Wallet<T>` which has a `balance` field of type `T`.
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_06_derive_generics/src/lib.cairo}}
 ```
 
 The above code derives the `Drop` trait for the `Wallet` type automatically. It is equivalent to writing the following code:
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_07_drop_explicit/src/lib.cairo}}
 ```
 
@@ -72,7 +72,7 @@ We avoid using the `derive` macro for `Drop` implementation of `Wallet` and inst
 
 Finally, if we want to add a field to `Wallet` representing its address and we want that field to be different than `T` but generic as well, we can simply add another generic type between the `<>`:
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_08_two_generics/src/lib.cairo}}
 ```
 
@@ -82,7 +82,7 @@ We add to the `Wallet` struct definition a new generic type `U` and then assign 
 
 As we did with structs, we can define enums to hold generic data types in their variants. For example the `Option<T>` enum provided by the Cairo core library:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_09_option/src/lib.cairo}}
 ```
 
@@ -90,7 +90,7 @@ The `Option<T>` enum is generic over a type `T` and has two variants: `Some`, wh
 
 Enums can use multiple generic types as well, like the definition of the `Result<T, E>` enum that the core library provides:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_10_result/src/lib.cairo}}
 ```
 
@@ -100,7 +100,7 @@ The `Result<T, E>` enum has two generic types, `T` and `E`, and two variants: `O
 
 We can implement methods on structs and enums, and use the generic types in their definitions, too. Using our previous definition of `Wallet<T>` struct, we define a `balance` method for it:
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_11_generic_methods/src/lib.cairo}}
 ```
 
@@ -108,7 +108,7 @@ We first define `WalletTrait<T>` trait using a generic type `T` which defines a 
 
 We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for `Wallet<u128>` instances rather than `Wallet<T>`. In the code example, we define an implementation for wallets which have a concrete type of `u128` for the `balance` field.
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_12_constrained_generics/src/lib.cairo}}
 ```
 
@@ -116,26 +116,26 @@ The new method `receive` increments the size of `balance` of any instance of a `
 
 Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from `Wallet<U, V>` we are going to define a trait that picks two wallets of different generic types and creates a new one with a generic type of each. First, let's rewrite the struct definition:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_13_not_compiling/src/lib.cairo:struct}}
 ```
 
 Next, we are going to naively define the mixup trait and implementation:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_13_not_compiling/src/lib.cairo:trait_impl}}
 
 ```
 
 We are creating a trait `WalletMixTrait<T1, U1>` with the `mixup<T2, U2>` method which given an instance of `Wallet<T1, U1>` and `Wallet<T2, U2>` creates a new `Wallet<T1, U2>`. As `mixup` signature specifies, both `self` and `other` are getting dropped at the end of the function, which is why this code does not compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the `Drop` trait for the compiler to know how to drop instances of `Wallet<T, U>`. The updated implementation is as follows:
 
-```rust
+```cairo
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_14_compiling/src/lib.cairo:trait_impl}}
 ```
 
 We add the requirements for `T1` and `U1` to be droppable on `WalletMixImpl` declaration. Then we do the same for `T2` and `U2`, this time as part of `mixup` signature. We can now try the `mixup` function:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_14_compiling/src/lib.cairo:main}}
 ```
 

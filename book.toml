@@ -25,8 +25,11 @@ google-analytics = "G-0ZJLBV4KE2"
 additional-css = ["theme/css/last-changed.css"]
 mathjax-support = true
 
+[output.html.code.hidelines]
+cairo = "# "
+
 [output.html.fold]
 enable = true
-level = 0
+level = 2
 
 [output.markdown]

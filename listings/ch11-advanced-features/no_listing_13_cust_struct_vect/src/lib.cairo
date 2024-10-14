@@ -2,12 +2,12 @@
 
 // ANCHOR: imports
 use core::dict::Felt252Dict;
-use core::nullable::{match_nullable, FromNullableResult, NullableTrait};
-use core::integer;
+use core::nullable::NullableTrait;
+use core::num::traits::WrappingAdd;
 // ANCHOR_END: imports
 
 // ANCHOR: trait
-trait VecTrait<V, T> {
+trait MemoryVecTrait<V, T> {
     fn new() -> V;
     fn get(ref self: V, index: usize) -> Option<T>;
     fn at(ref self: V, index: usize) -> T;
@@ -18,27 +18,27 @@ trait VecTrait<V, T> {
 // ANCHOR_END: trait
 
 // ANCHOR: struct
-struct NullableVec<T> {
+struct MemoryVec<T> {
     data: Felt252Dict<Nullable<T>>,
     len: usize
 }
 // ANCHOR_END: struct
 
 // ANCHOR: destruct
-impl DestructNullableVec<T, +Drop<T>> of Destruct<NullableVec<T>> {
-    fn destruct(self: NullableVec<T>) nopanic {
+impl DestructMemoryVec<T, +Drop<T>> of Destruct<MemoryVec<T>> {
+    fn destruct(self: MemoryVec<T>) nopanic {
         self.data.squash();
     }
 }
 // ANCHOR_END: destruct
 
 // ANCHOR: implem
-impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
-    fn new() -> NullableVec<T> {
-        NullableVec { data: Default::default(), len: 0 }
+impl MemoryVecImpl<T, +Drop<T>, +Copy<T>> of MemoryVecTrait<MemoryVec<T>, T> {
+    fn new() -> MemoryVec<T> {
+        MemoryVec { data: Default::default(), len: 0 }
     }
 
-    fn get(ref self: NullableVec<T>, index: usize) -> Option<T> {
+    fn get(ref self: MemoryVec<T>, index: usize) -> Option<T> {
         if index < self.len() {
             Option::Some(self.data.get(index.into()).deref())
         } else {
@@ -46,22 +46,22 @@ impl NullableVecImpl<T, +Drop<T>, +Copy<T>> of VecTrait<NullableVec<T>, T> {
         }
     }
 
-    fn at(ref self: NullableVec<T>, index: usize) -> T {
+    fn at(ref self: MemoryVec<T>, index: usize) -> T {
         assert!(index < self.len(), "Index out of bounds");
         self.data.get(index.into()).deref()
     }
 
-    fn push(ref self: NullableVec<T>, value: T) -> () {
+    fn push(ref self: MemoryVec<T>, value: T) -> () {
         self.data.insert(self.len.into(), NullableTrait::new(value));
-        self.len = core::integer::u32_wrapping_add(self.len, 1_usize);
+        self.len.wrapping_add(1_usize);
     }
     // ANCHOR: set
-    fn set(ref self: NullableVec<T>, index: usize, value: T) {
+    fn set(ref self: MemoryVec<T>, index: usize, value: T) {
         assert!(index < self.len(), "Index out of bounds");
         self.data.insert(index.into(), NullableTrait::new(value));
     }
     // ANCHOR_END: set
-    fn len(self: @NullableVec<T>) -> usize {
+    fn len(self: @MemoryVec<T>) -> usize {
         *self.len
     }
 }
