@@ -1,4 +1,4 @@
-// ANCHOR: all
+// ANCHOR: main
 use bigdecimal::{num_traits::pow, BigDecimal};
 use cairo_lang_macro::{inline_macro, Diagnostic, ProcMacroResult, TokenStream};
 use cairo_lang_parser::utils::SimpleParserDatabase;

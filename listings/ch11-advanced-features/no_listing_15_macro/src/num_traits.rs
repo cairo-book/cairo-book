@@ -94,7 +94,7 @@ of core::ops::{1}Assign<{0}{3}, {0}{3}> {{
 
 /// Adds implementation for the `core::traits::Add` trait.
 ///
-/// Allows you to use the `+` oprator on a type. All members of
+/// Allows you to use the `+` operator on a type. All members of
 /// the struct must already implement the `Add` trait.
 #[derive_macro]
 pub fn add(token_stream: TokenStream) -> ProcMacroResult {

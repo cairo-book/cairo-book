@@ -16,7 +16,7 @@ pub(crate) fn parse_struct_info(token_stream: TokenStream) -> StructInfo {
     let (parsed, _diag) = db.parse_virtual_with_diagnostics(token_stream);
     let mut nodes = parsed.descendants(&db);
 
-    // find struct name - the next TokenIdentifier after TeminalStruct
+    // find struct name - the next TokenIdentifier after TerminalStruct
     let mut struct_name = String::new();
     for node in nodes.by_ref() {
         if node.kind(&db) == TerminalStruct {
