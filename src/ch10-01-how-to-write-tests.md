@@ -19,7 +19,7 @@ Let’s look at the features Cairo provides for writing tests that take these ac
  
 ### The Anatomy of a Test Function
 
-At its simplest, a test in Cairo is a function that’s annotated with the `#[test]` attribute. Attributes are metadata about pieces of Cairo code; one example is the `#[derive()]` attribute we used with structs in [Chapter 5][structs]. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb test` command, Scarb runs Starknet Foundry's test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
+At its simplest, a test in Cairo is a function that’s annotated with the `#[test]` attribute. Attributes are metadata about pieces of Cairo code; one example is the `#[derive()]` attribute we used with structs in [Chapter {{#chap using-structs-to-structure-related-data}}][structs]. To change a function into a test function, add `#[test]` on the line before `fn`. When you run your tests with the `scarb test` command, Scarb runs Starknet Foundry's test runner binary that runs the annotated functions and reports on whether each test function passes or fails.
 
 Let's create a new project called _adder_ using Scarb with the command `scarb new adder`. Remove the _tests_ folder.
 
@@ -118,7 +118,7 @@ Now that you’ve seen what the test results look like in different scenarios, l
 
 The `assert!` macro, provided by Cairo, is useful when you want to ensure that some condition in a test evaluates to `true`. We give the `assert!` macro the first argument that evaluates to a boolean. If the value is `true`, nothing happens and the test passes. If the value is `false`, the `assert!` macro calls `panic()` to cause the test to fail with a message we defined as the second argument. Using the `assert!` macro helps us check that our code is functioning in the way we intended.
 
-Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing {{#ref rectangle}}. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
+Remember in [Chapter {{#chap using-structs-to-structure-related-data}}][method syntax], we used a `Rectangle` struct and a `can_hold` method, which are repeated here in Listing {{#ref rectangle}}. Let’s put this code in the _src/lib.cairo_ file, then write some tests for it using the `assert!` macro.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -127,7 +127,7 @@ Remember in [Chapter 5][method syntax], we used a `Rectangle` struct and a `can_
 ```
 
 {{#label rectangle}}
-<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from Chapter 5</span>
+<span class="caption">Listing {{#ref rectangle}}: Using the `Rectangle` struct and its `can_hold` method from Chapter {{#chap using-structs-to-structure-related-data}}</span>
 
 The `can_hold` method returns a `bool`, which means it’s a perfect use case for the `assert!` macro. We can write a test that exercises the `can_hold` method by creating a `Rectangle` instance that has a width of `8` and a height of `7` and asserting that it can hold another `Rectangle` instance that has a width of `5` and a height of `1`.
 

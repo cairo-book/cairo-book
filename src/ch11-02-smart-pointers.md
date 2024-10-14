@@ -4,7 +4,7 @@ A pointer is a general concept for a variable that contains a memory address. Th
 
 Smart pointers are data structures that act like a pointer, but also have additional metadata and capabilities. The concept of smart pointers isn’t unique to Cairo: smart pointers originated in C++ and exist in other languages like Rust as well. In the specific case of Cairo, smart pointers ensure that memory is not addressed in an unsafe way that could cause a program to be unprovable, by providing a safe way to access memory through strict type checking and ownership rules.
 
-Though we didn’t call them as such at the time, we’ve already encountered a few smart pointers in this book, including `Felt252Dict<T>` and `Array<T>` in Chapter 3. Both these types count as smart pointers because they own a memory segment and allow you to manipulate it. They also have metadata and extra capabilities or guarantees. Arrays keep track of their current length to ensure that existing elements are not overwritten, and that new elements are only appended to the end.
+Though we didn’t call them as such at the time, we’ve already encountered a few smart pointers in this book, including `Felt252Dict<T>` and `Array<T>` in Chapter {{#chap common-collections}}. Both these types count as smart pointers because they own a memory segment and allow you to manipulate it. They also have metadata and extra capabilities or guarantees. Arrays keep track of their current length to ensure that existing elements are not overwritten, and that new elements are only appended to the end.
 
 The Cairo VM memory is composed by multiple segments that can store data, each identified by a unique index. When you create an array, you allocate a new segment in the memory to store the future elements. The array itself is just a pointer to that segment where the elements are stored.
 
@@ -54,7 +54,7 @@ Listing {{#ref recursive_types_wrong}} shows an attempt to implement a binary tr
 {{#label recursive_types_wrong}}
 <span class="caption">Listing {{#ref recursive_types_wrong}}: The first attempt at implementing a binary tree of `u32` values</span>
 
-> Note: We’re implementing a binary tree that holds only u32 values for the purposes of this example. We could have implemented it using generics, as we discussed in Chapter 8, to define a binary tree that could store values of any type.
+> Note: We’re implementing a binary tree that holds only u32 values for the purposes of this example. We could have implemented it using generics, as we discussed in Chapter {{#chap generic-types-and-traits}}, to define a binary tree that could store values of any type.
 
 The root node contains 5 and two child nodes. The left child is a leaf containing 1. The right child is another node containing 4, which in turn has two leaf children: one containing 2 and another containing 3. This structure forms a simple binary tree with a depth of 2.
 
@@ -118,7 +118,7 @@ The illustration above demonstrates how the memory behaves in both cases. The fi
 
 If we try to access an element that does not exist in a dictionary, the code will fail if the `zero_default` method cannot be called.
 
-[Chapter 3.2][dictionary nullable span] about dictionaries thoroughly explains how to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
+[Chapter {{#chap common-collections}}][dictionary nullable span] about dictionaries thoroughly explains how to store a `Span<felt252>` variable inside a dictionary using the `Nullable<T>` type. Please refer to it for further information.
 
 [dictionary nullable span]: ./ch03-02-dictionaries.md#dictionaries-of-types-not-supported-natively
 

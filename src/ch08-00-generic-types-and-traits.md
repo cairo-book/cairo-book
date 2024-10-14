@@ -2,7 +2,7 @@
 
 Every programming language has tools for effectively handling the duplication of concepts. In Cairo, one such tool is generics: abstract stand-ins for concrete types or other properties. We can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
 
-Functions can take parameters of some generic type, instead of a concrete type like `u32` or `bool`, in the same way a function takes parameters with unknown values to run the same code on multiple concrete values. In fact, we’ve already used generics in [Chapter 6][option enum] with `Option<T>`.
+Functions can take parameters of some generic type, instead of a concrete type like `u32` or `bool`, in the same way a function takes parameters with unknown values to run the same code on multiple concrete values. In fact, we’ve already used generics in [Chapter {{#chap enums-and-pattern-matching}}][option enum] with `Option<T>`.
 
 In this chapter, you’ll explore how to define your own types, functions, and traits with generics.
 

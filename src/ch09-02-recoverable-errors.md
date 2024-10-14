@@ -4,7 +4,7 @@ Most errors aren’t serious enough to require the program to stop entirely. Som
 
 ## The `Result` Enum
 
-Recall from [Generic data types][generic enums] section in Chapter 8 that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
+Recall from [Generic data types][generic enums] section in Chapter {{#chap generic-types-and-traits}} that the `Result` enum is defined as having two variants, `Ok` and `Err`, as follows:
 
 ```cairo,noplayground
 {{#include ../listings/ch09-error-handling/no_listing_07_result_enum/src/lib.cairo}}
