@@ -5,10 +5,10 @@ _Associated Items_ are the items declared in [traits] or defined in
 
 [traits]: ./ch08-02-traits-in-cairo.md
 [implementations]: ./ch08-02-traits-in-cairo.md#implementing-a-trait-on-a-type
-[associated types]: ./ch11-10-associated-items-in-traits.md#associated-types
+[associated types]: ./ch11-10-associated-items.md#associated-types
 [associated functions]: ./ch05-03-method-syntax.md#associated-functions
-[associated constants]: ./ch11-10-associated-items-in-traits.md#associated-constants
-[associated implementations]: ./ch11-10-associated-items-in-traits.md#associated-implementations
+[associated constants]: ./ch11-10-associated-items.md#associated-constants
+[associated implementations]: ./ch11-10-associated-items.md#associated-implementations
 
 Associated items are useful when they are logically related to the implementation. For example, the `is_some` method on `Option` is intrinsically related to Options, so should be associated.
 
