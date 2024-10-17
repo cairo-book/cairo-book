@@ -67,7 +67,7 @@ fn test_change_owner_should_change_owner() {
 }
 
 #[test]
-#[should_panic]
+#[should_panic(expected: "Only the owner can set ownership")]
 fn test_change_owner_should_panic_when_not_owner() {
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
     let not_owner = contract_address_const::<'not_owner'>();
@@ -79,7 +79,7 @@ fn test_change_owner_should_panic_when_not_owner() {
 
 //ANCHOR: test_make_pizza
 #[test]
-#[should_panic]
+#[should_panic(expected: "Only the owner can make pizza")]
 fn test_make_pizza_should_panic_when_not_owner() {
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
     let not_owner = contract_address_const::<'not_owner'>();

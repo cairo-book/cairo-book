@@ -1,22 +1,12 @@
 $ scarb cairo-run 
    Compiling listing_99_02 v0.1.0 (listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/Scarb.toml)
-warn: Unused import: `listing_99_02::SimpleStorage::get_caller_address`
- --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:13:25
-    use core::starknet::get_caller_address;
-                        ^****************^
-
-warn: Unused import: `listing_99_02::SimpleStorage::ContractAddress`
- --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:14:25
-    use core::starknet::ContractAddress;
-                        ^*************^
-
 error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
- --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:25:16
+ --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:23:16
         fn set(ref self: ContractState) {}
                ^*********************^
 
 error: Wrong number of arguments. Expected 2, found: 1
- --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:25:9
+ --> listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:23:9
         fn set(ref self: ContractState) {}
         ^********************************^
 
