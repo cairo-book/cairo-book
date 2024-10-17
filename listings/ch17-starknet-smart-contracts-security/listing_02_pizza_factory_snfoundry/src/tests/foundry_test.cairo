@@ -20,17 +20,12 @@ fn owner() -> ContractAddress {
 
 //ANCHOR: deployment
 fn deploy_pizza_factory() -> (IPizzaFactoryDispatcher, ContractAddress) {
-    // Declare the contract
-    let contract = declare("PizzaFactory");
-
-    // Check if declaration was successful and get the contract class
-    let contract_class = contract.unwrap().contract_class();
+    let contract = declare("PizzaFactory").unwrap().contract_class();
 
     let owner: ContractAddress = contract_address_const::<'owner'>();
     let constructor_calldata = array![owner.into()];
 
-    // Deploy the contract
-    let (contract_address, _) = contract_class.deploy(@constructor_calldata).unwrap();
+    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 
     let dispatcher = IPizzaFactoryDispatcher { contract_address };
 
@@ -114,5 +109,3 @@ fn test_set_as_new_owner_direct() {
     assert_eq!(state.owner.read(), owner);
 }
 //ANCHOR_END: test_internals
-
-

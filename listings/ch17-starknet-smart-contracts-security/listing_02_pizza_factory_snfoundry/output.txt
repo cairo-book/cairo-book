@@ -1,18 +1,18 @@
 $ scarb test 
      Running test listing_02_pizza_factory_snfoundry (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.13s
+    Finished `release` profile [optimized] target(s) in 0.99s
    Compiling test(listings/ch17-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/Scarb.toml)
-    Finished `dev` profile target(s) in 5 seconds
+    Finished `dev` profile target(s) in 7 seconds
 
 
 Collected 6 test(s) from listing_02_pizza_factory_snfoundry package
 Running 6 test(s) from src/
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (gas: ~368)
 [PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_set_as_new_owner_direct (gas: ~130)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (gas: ~298)
 [PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (gas: ~298)
 [PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (gas: ~297)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (gas: ~298)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (gas: ~368)
 [PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (gas: ~303)
 Tests: 6 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

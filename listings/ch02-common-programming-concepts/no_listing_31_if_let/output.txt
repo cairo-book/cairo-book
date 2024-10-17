@@ -1,6 +1,6 @@
 $ scarb cairo-run 
    Compiling no_listing_26_if_let v0.1.0 (listings/ch02-common-programming-concepts/no_listing_31_if_let/Scarb.toml)
-    Finished `dev` profile target(s) in 3 seconds
+    Finished `dev` profile target(s) in 2 seconds
      Running no_listing_26_if_let
 condition was true and number is 5
 Run completed successfully, returning []
