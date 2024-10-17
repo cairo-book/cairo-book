@@ -1,6 +1,6 @@
 use crate::pizza::{
-    IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait,
-    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+    IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory,
+    PizzaFactory::{Event as PizzaEvents, PizzaEmission}
 };
 //ANCHOR: import_internal
 use crate::pizza::PizzaFactory::{InternalTrait};
@@ -114,3 +114,5 @@ fn test_set_as_new_owner_direct() {
     assert_eq!(state.owner.read(), owner);
 }
 //ANCHOR_END: test_internals
+
+
