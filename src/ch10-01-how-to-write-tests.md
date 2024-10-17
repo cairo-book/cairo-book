@@ -434,6 +434,7 @@ Starknet Foundry contains a profiling feature that is useful to analyze and opti
 The [profiling][profiling] feature generates execution traces for successful tests, which are used to create profile outputs. This allows you to benchmark specific parts of your code.
 
 To use the profiler, you will need to:
+
 1. Install [Cairo Profiler][cairo profiler] from Software Mansion.
 2. Install [Go][go], [Graphviz][graphviz] and [pprof][pprof], all of them are required to visualize the generated profile output.
 3. Run `snforge test --build-profile` command, which generates a trace file for each passing test, stored in the _snfoundry_trace_ directory of your project. This command also generates the corresponding output files in the _profile_ directory.
