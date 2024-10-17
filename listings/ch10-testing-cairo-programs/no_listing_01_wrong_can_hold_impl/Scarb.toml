@@ -1,5 +1,5 @@
 [package]
-name = "no_listing_02_wrong_can_hold_impl"
+name = "no_listing_01_wrong_can_hold_impl"
 version = "0.1.0"
 edition = "2024_07"
 
@@ -7,3 +7,9 @@ edition = "2024_07"
 
 [dependencies]
 # foo = { path = "vendor/foo" }
+
+[dev-dependencies]
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.31.0" }
+assert_macros = "2.8.2"
+[scripts]
+test = "snforge test"

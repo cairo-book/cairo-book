@@ -1,0 +1,23 @@
+$ scarb test 
+     Running test no_listing_02_custom_messages (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Blocking waiting for file lock on build directory
+    Finished `release` profile [optimized] target(s) in 0.39s
+   Compiling test(listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/Scarb.toml)
+    Finished `dev` profile target(s) in 4 seconds
+
+
+Collected 1 test(s) from no_listing_02_custom_messages package
+Running 1 test(s) from src/
+[FAIL] no_listing_02_custom_messages::tests::it_adds_two
+
+Failure data:
+    "assertion `4 == add_two(2)` failed: Expected 4, got add_two(2)=5
+    4: 4
+    add_two(2): 5"
+
+Tests: 0 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
+
+Failures:
+    no_listing_02_custom_messages::tests::it_adds_two
+

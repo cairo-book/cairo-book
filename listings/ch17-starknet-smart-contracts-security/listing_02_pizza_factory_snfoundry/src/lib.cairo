@@ -1,4 +1,4 @@
-pub mod pizza;
+mod pizza;
 
 #[cfg(test)]
 mod tests {
