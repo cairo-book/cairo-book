@@ -225,7 +225,7 @@ Run the tests again:
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
-message: ``Panicked with "assertion `4 == add_two(2)` failed``.
+message: ``"assertion `4 == add_two(2)` failed``.
 It tells us that the assertion that failed was `` "assertion `left == right` failed`` and the `left`
 and `right` values are printed on the next lines as `left: left_value` and `right: right_value`.
 This helps us start debugging: the `left` argument was `4` but the `right` argument, where we had
