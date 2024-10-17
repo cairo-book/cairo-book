@@ -1,5 +1,5 @@
 [package]
-name = "listing_08_06"
+name = "listing_10_03"
 version = "0.1.0"
 edition = "2024_07"
 
@@ -11,5 +11,6 @@ edition = "2024_07"
 [dev-dependencies]
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.31.0" }
 assert_macros = "2.8.2"
+
 [scripts]
 test = "snforge test"

@@ -1,15 +1,9 @@
 $ scarb test 
      Running test listing_09_09 (snforge test)
-    Blocking waiting for file lock on package cache
-    Blocking waiting for file lock on package cache
-    Blocking waiting for file lock on package cache
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Blocking waiting for file lock on package cache
-    Blocking waiting for file lock on package cache
-    Blocking waiting for file lock on package cache
-    Finished `release` profile [optimized] target(s) in 2.89s
+    Finished `release` profile [optimized] target(s) in 0.56s
    Compiling test(listings/ch10-testing-cairo-programs/listing_10_06/Scarb.toml)
-    Finished `dev` profile target(s) in 19 seconds
+    Finished `dev` profile target(s) in 5 seconds
 
 
 Collected 1 test(s) from listing_09_09 package

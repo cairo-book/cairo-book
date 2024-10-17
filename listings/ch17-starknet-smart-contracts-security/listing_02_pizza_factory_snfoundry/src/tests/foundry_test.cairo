@@ -1,9 +1,9 @@
-use source::pizza::{
+use crate::pizza::{
     IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait,
     PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
 };
 //ANCHOR: import_internal
-use source::pizza::PizzaFactory::{InternalTrait};
+use crate::pizza::PizzaFactory::{InternalTrait};
 //ANCHOR_END: import_internal
 
 use core::starknet::{ContractAddress, contract_address_const};
@@ -22,7 +22,7 @@ fn owner() -> ContractAddress {
 fn deploy_pizza_factory() -> (IPizzaFactoryDispatcher, ContractAddress) {
     // Declare the contract
     let contract = declare("PizzaFactory");
-    
+
     // Check if declaration was successful and get the contract class
     let contract_class = contract.unwrap().contract_class();
 
@@ -114,7 +114,3 @@ fn test_set_as_new_owner_direct() {
     assert_eq!(state.owner.read(), owner);
 }
 //ANCHOR_END: test_internals
-
-
-
-
