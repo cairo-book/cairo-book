@@ -68,8 +68,15 @@ fn process_file(manifest_path: &str) {
         let re2 = Regex::new(r"-->\s*.*?(listings/.*)").expect("Failed to create regex");
         output = re2.replace_all(&output, "--> $1").to_string();
 
+        // Remove the `Blocking waiting for file lock on package cache` lines
+        output = output
+            .lines()
+            .filter(|line| !line.contains("Blocking waiting for file lock on package cache"))
+            .collect::<Vec<&str>>()
+            .join("\n");
+
         // Keep the command in the first line of the output file
-        let to_write = format!("$ {} {}\n{}\n", command, args.join(" "), output);
+        let to_write = format!("$ {} {}\n{}\n\n", command, args.join(" "), output);
 
         if let Err(e) = write_output_file(&output_file_path, &to_write) {
             eprintln!("Failed to write output file: {}", e);

@@ -6,5 +6,11 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
 [dependencies]
-# foo = { path = "vendor/foo" }
-starknet = ">=2.7.0"
+starknet = ">=2.8.2"
+
+[dev-dependencies]
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.31.0" }
+assert_macros = "2.8.2"
+
+[scripts]
+test = "snforge test"
