@@ -6,8 +6,6 @@ The `Vec` type is provided by the Cairo core library, inside the `core::starknet
 
 > The `Array<T>` type is a **memory** type and cannot be directly stored in contract storage. For storage, use the `Vec<T>` type, which is a [phantom type][phantom types] designed specifically for contract storage. However, `Vec<T>` has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. To work with the full contents of a `Vec<T>`, you'll need to copy its elements to and from a memory `Array<T>`.
 
-[phantom types]: ./ch11-05-phantom-data.html#phantom-type-in-generics
-
 ## Declaring and Using Storage Vectors
 
 To declare a Storage Vector, use the `Vec` type enclosed in angle brackets `<>`, specifying the type of elements it will store. In Listing {{#ref storage-vecs}}, we create a simple contract that registers all the addresses that call it and stores them in a `Vec`. We can then retrieve the `n`-th registered address, or all registered addresses.
