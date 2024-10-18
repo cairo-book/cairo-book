@@ -1,0 +1,23 @@
+$ scarb test 
+     Running test no_listing_04_new_bug (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Blocking waiting for file lock on build directory
+    Finished `release` profile [optimized] target(s) in 1.01s
+   Compiling test(listings/ch10-testing-cairo-programs/no_listing_04_new_bug/Scarb.toml)
+    Finished `dev` profile target(s) in 6 seconds
+
+
+Collected 1 test(s) from no_listing_04_new_bug package
+Running 1 test(s) from src/
+[FAIL] no_listing_04_new_bug::tests::greater_than_100
+
+Failure data:
+    Incorrect panic data
+    Actual:    [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203e3d2031, 0x12] (Guess must be >= 1)
+    Expected:  [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203c3d20313030, 0x14] (Guess must be <= 100)
+
+Tests: 0 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
+
+Failures:
+    no_listing_04_new_bug::tests::greater_than_100
+

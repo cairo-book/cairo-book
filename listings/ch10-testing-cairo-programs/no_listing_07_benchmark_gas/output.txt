@@ -1,0 +1,15 @@
+$ scarb test 
+     Running test no_listing_09_benchmark_gas (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.44s
+   Compiling test(listings/ch10-testing-cairo-programs/no_listing_07_benchmark_gas/Scarb.toml)
+    Finished `dev` profile target(s) in 8 seconds
+
+
+Collected 1 test(s) from no_listing_09_benchmark_gas package
+Running 1 test(s) from src/
+consumed gas: 80490
+
+[PASS] no_listing_09_benchmark_gas::tests::benchmark_sum_n_gas (gas: ~5)
+Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+
