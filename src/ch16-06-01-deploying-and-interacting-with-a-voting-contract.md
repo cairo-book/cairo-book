@@ -42,7 +42,7 @@ To install `katana` from the source code, please refer to the ["Basic Installati
 >
 > ```bash
 > $ katana --version
-> katana 0.6.0
+> katana 0.7.4
 > ```
 >
 > To upgrade `katana` version, refer to the ["Basic Installation"][katana installation] chapter of the Starknet Book.
@@ -50,7 +50,7 @@ To install `katana` from the source code, please refer to the ["Basic Installati
 Once you have `katana` installed, you can start the local Starknet node with:
 
 ```bash
-katana --accounts 3 --seed 0 --gas-price 250
+katana --accounts 3 --seed 0 --eth-gas-price 250
 ```
 
 This command will start a local Starknet node with 3 deployed accounts. We will use these accounts to deploy and interact with the voting contract:
@@ -88,19 +88,20 @@ Aside from Scarb you will need to have Starkli installed. Starkli is a command l
 >
 > ```bash
 > $ starkli --version
-> 0.2.9 (0535f44)
+> 0.3.5 (fa4f0e3)
 > ```
 >
-> To upgrade `starkli` to `0.2.9`, use the `starkliup -v 0.2.9` command, or simply `starkliup` which installed the latest stable version.
+> To upgrade `starkli` to `0.3.5`, use the `starkliup -v 0.3.5` command, or simply `starkliup` which installed the latest stable version.
 
 For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the ["Testnet Deployment"][signer creation] chapter of the Starknet Book.
 
 We can create Signers and Account Descriptors for the accounts we want to use for voting. Let's create a smart wallet for voting in our smart contract.
 
+
 Firstly, we create a signer from a private key:
 
 ```bash
-starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json
+starkli signer keystore new ~/.starkli-wallets/deployer/account0_keystore.json
 ```
 
 Then, we create the Account Descriptor by fetching the katana account we want to use:
@@ -148,8 +149,12 @@ This process is identical for `account_1` and `account_2` in case you want to ha
 
 Before deploying, we need to declare the contract. We can do this with the `starkli declare` command:
 
-```bash
+<!-- ```bash
 starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+``` -->
+
+```bash
+starkli declare target/dev/listing_99_12_vote_contract.sierra.json --rpc http://localhost:9545/ --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
 ```
 
 If the compiler version you're using is older than the one used by Starkli and you encounter a `compiler-version` error while using the command above, you can specify a compiler version to use in the command by adding the `--compiler-version x.y.z` flag.
@@ -184,7 +189,7 @@ The `is_voter_registered` function checks whether a particular address is regist
 
 You can call these functions using the `starkli call` command. Note that the `call` command is used for read functions, while the `invoke` command is used for functions that can also write to storage. The `call` command does not require signing, while the `invoke` command does.
 
-```bash+
+```bash
 starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 voter_can_vote 0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 --rpc http://0.0.0.0:5050
 ```
 
