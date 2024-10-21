@@ -2,14 +2,14 @@
 
 A crucial feature of a Layer 2 is its ability to interact with Layer 1.
 
-Starknet has its own `L1-L2` messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on a chain and use the result of this computation on the other chain.
+Starknet has its own `L1-L2` messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on one chain and use the result of this computation on the other chain.
 
-Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens in the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for `L1-L2` messaging would be [DeFi pooling][defi pooling doc].
+Bridges on Starknet all use `L1-L2` messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens into the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for `L1-L2` messaging would be [DeFi pooling][defi pooling doc].
 
 On Starknet, it's important to note that the messaging system is **asynchronous** and **asymmetric**.
 
-- **Asynchronous**: this means that in your contract code (being Solidity or Cairo), you can't wait the result of the message being sent on the other chain within your contract code execution.
-- **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automated by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent on L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.
+- **Asynchronous**: this means that in your contract code (being Solidity or Cairo), you can't await the result of the message being sent on the other chain within your contract code execution.
+- **Asymmetric**: sending a message from Ethereum to Starknet (`L1->L2`) is fully automated by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (`L2->L1`), only the hash of the message is sent to L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.
 
 Let's dive into the details.
 
