@@ -2,18 +2,42 @@ use std::{
     fs::File,
     io::{BufRead, BufReader, Write},
     path::PathBuf,
+    sync::{
+        atomic::{AtomicUsize, Ordering},
+        Arc,
+    },
 };
 
+use indicatif::{ProgressBar, ProgressStyle};
+use rayon::prelude::*;
 use regex::Regex;
 
-use crate::{cmd::ScarbCmd, config::VerifyArgs, run_command, utils::find_scarb_manifests, Config};
+use crate::{cmd::ScarbCmd, config::OutputArgs, run_command, utils::find_scarb_manifests};
 
-pub fn process_outputs(cfg: &Config, arg: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, arg);
+pub fn process_outputs(arg: &OutputArgs) {
+    let scarb_packages = find_scarb_manifests(arg.path.as_str());
 
-    for file in scarb_packages {
-        process_file(&file);
-    }
+    let total_packages = scarb_packages.len();
+    let pb = Arc::new(ProgressBar::new(total_packages as u64));
+    pb.set_style(
+        ProgressStyle::default_bar()
+            .template("[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7} {msg}")
+            .unwrap()
+            .progress_chars("##-"),
+    );
+
+    let processed_count = Arc::new(AtomicUsize::new(0));
+
+    scarb_packages.par_iter().for_each(|file| {
+        process_file(file);
+
+        let current = processed_count.fetch_add(1, Ordering::SeqCst) + 1;
+        pb.set_position(current as u64);
+
+        if current == total_packages {
+            pb.finish_with_message("Output processing complete");
+        }
+    });
 }
 
 fn process_file(manifest_path: &str) {
@@ -35,7 +59,7 @@ fn process_file(manifest_path: &str) {
             }
         };
 
-        let mut output = run_command(cmd, manifest_path, manifest_path, args.clone());
+        let mut output = run_command(cmd, manifest_path, manifest_path, args.clone(), false);
 
         // Remove the part before "listings" after the first parenthesis using regex
         let re = Regex::new(r"\(.*?(listings/.*)").expect("Failed to create regex");
@@ -44,13 +68,18 @@ fn process_file(manifest_path: &str) {
         let re2 = Regex::new(r"-->\s*.*?(listings/.*)").expect("Failed to create regex");
         output = re2.replace_all(&output, "--> $1").to_string();
 
+        // Remove the `Blocking waiting for file lock on package cache` lines
+        output = output
+            .lines()
+            .filter(|line| !line.contains("Blocking waiting for file lock on package cache"))
+            .collect::<Vec<&str>>()
+            .join("\n");
+
         // Keep the command in the first line of the output file
-        let to_write = format!("$ {} {}\n{}\n", command, args.join(" "), output);
+        let to_write = format!("$ {} {}\n{}\n\n", command, args.join(" "), output);
 
         if let Err(e) = write_output_file(&output_file_path, &to_write) {
             eprintln!("Failed to write output file: {}", e);
-        } else {
-            println!("Processed output.txt for {:?}", output_file_path);
         }
     }
 }

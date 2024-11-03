@@ -2,7 +2,7 @@
 
 You might encounter error messages when writing Cairo code. Some of them occur very frequently, which is why we will be listing the most common error messages in this appendix to help you resolve common issues.
 
-- `Variable not dropped.`: this error message means that you are trying to make a variable with a type that do not implement the `Drop` trait go out of scope, withtout destroying it. Make sure that variables that need to be dropped at the end of the execution of a function implement the `Drop` trait or the `Destruct` trait. See [Ownership](ch04-01-what-is-ownership.md#destroying-values---example-with-feltdict) section.
+- `Variable not dropped.`: this error message means that you are trying to make a variable with a type that do not implement the `Drop` trait go out of scope, without destroying it. Make sure that variables that need to be dropped at the end of the execution of a function implement the `Drop` trait or the `Destruct` trait. See [Ownership](ch04-01-what-is-ownership.md#destroying-values---example-with-feltdict) section.
 
 - `Variable was previously moved.`: this error message means that you are trying to use a variable whose ownership has already been transferred to another function. When a variable doesn't implement the `Copy` trait, it is passed by value to functions, and ownership of the variable is transferred to the function. Such a variable cannot be used anymore in the current context after its ownership has been transferred. It is often useful to use the `clone` method in this situation.
 
@@ -13,8 +13,8 @@ You might encounter error messages when writing Cairo code. Some of them occur v
 - `Item path::item is not visible in this context.`: this error message lets us know that the path to bring an item into scope is correct, but there is a vibility issue. In cairo, all items are private to parent modules by default. To resolve this issue, make sure that all the modules on the path to items and items themselves are declared with `pub(crate)` or `pub` to have access to them.
 
 - `Identifier not found.`: this error message is a bit aspecific but might indicate that:
-  -  A variable is being used before it has been declared. Make sure to declare variables with the `let` keyword.
-  -  The path to bring an item into scope is wrongly defined. Make sure to use valid paths.
+  - A variable is being used before it has been declared. Make sure to declare variables with the `let` keyword.
+  - The path to bring an item into scope is wrongly defined. Make sure to use valid paths.
 
 ## Starknet Components Related Error Messages
 
@@ -25,7 +25,7 @@ section aims to provide you with some pointers to help you debug your code.
 - `Trait not found. Not a trait.`: this error can occur when you're not importing the component's impl block
   correctly in your contract. Make sure to respect the following syntax:
 
-  ```rust,noplayground
+  ```cairo,noplayground
   #[abi(embed_v0)]
   impl IMPL_NAME = PATH_TO_COMPONENT::EMBEDDED_NAME<ContractState>
   ```

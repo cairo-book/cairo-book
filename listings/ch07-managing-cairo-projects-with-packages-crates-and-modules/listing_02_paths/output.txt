@@ -1,9 +1,14 @@
 $ scarb cairo-run 
    Compiling listing_07_02 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/Scarb.toml)
-error: Identifier not found.
- --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:22:5
-    restaurant::front_of_house::hosting::add_to_waitlist();
-    ^********^
+error: Item `listing_07_02::front_of_house::hosting` is not visible in this context.
+ --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:22:28
+    crate::front_of_house::hosting::add_to_waitlist();
+                           ^*****^
+
+error: Item `listing_07_02::front_of_house::hosting::add_to_waitlist` is not visible in this context.
+ --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:22:37
+    crate::front_of_house::hosting::add_to_waitlist();
+                                    ^*************^
 
 error: Item `listing_07_02::front_of_house::hosting` is not visible in this context.
  --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:25:21

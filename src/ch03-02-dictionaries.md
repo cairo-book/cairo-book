@@ -15,7 +15,7 @@ The core functionality of a `Felt252Dict<T>` is implemented in the trait `Felt25
 
 These functions allow us to manipulate dictionaries like in any other language. In the following example, we create a dictionary to represent a mapping between individuals and their balance:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_09_intro/src/lib.cairo}}
 ```
 
@@ -25,7 +25,7 @@ Throughout the book we have talked about how Cairo's memory is immutable, meanin
 
 Building upon our previous example, let us show a code example where the balance of the same user changes:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_10_intro_rewrite/src/lib.cairo}}
 ```
 
@@ -49,7 +49,7 @@ One of the constraints of Cairo's non-deterministic design is that its memory sy
 
 If we try implementing `Felt252Dict<T>` using high-level structures we would internally define it as `Array<Entry<T>>` where each `Entry<T>` has information about what key-value pair it represents and the previous and new values it holds. The definition of `Entry<T>` would be:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_11_entries/src/lib.cairo:struct}}
 ```
 
@@ -60,7 +60,7 @@ For each time we interact with a `Felt252Dict<T>`, a new `Entry<T>` will be regi
 
 The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per `Felt252Dict<T>` interaction. Let's show an example of this using the `balances` dictionary from the previous section and inserting the users 'Alex' and 'Maria':
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_11_entries/src/lib.cairo:inserts}}
 ```
 
@@ -119,7 +119,7 @@ Later in ["Dictionaries as Struct Members"][dictionaries in structs] section, we
 
 [basic dictionaries]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
 [drop destruct]: ./appendix-03-derivable-traits.md#drop-and-destruct
-[dictionaries in structs]: ./ch11-01-custom-data-structures.html#dictionaries-as-struct-members
+[dictionaries in structs]: ./ch11-01-custom-data-structures.md#dictionaries-as-struct-members
 
 ## More Dictionaries
 
@@ -135,7 +135,7 @@ In the ["Dictionaries Underneath"][dict underneath] section, we explained how `F
 
 The `entry` method comes as part of `Felt252DictTrait<T>` with the purpose of creating a new entry given a certain key. Once called, this method takes ownership of the dictionary and returns the entry to update. The method signature is as follows:
 
-```rust,noplayground
+```cairo,noplayground
 fn entry(self: Felt252Dict<T>, key: felt252) -> (Felt252DictEntry<T>, T) nopanic
 ```
 
@@ -144,7 +144,7 @@ The `nopanic` notation simply indicates that the function is guaranteed to never
 
 The next thing to do is to update the entry with the new value. For this, we use the `finalize` method which inserts the entry and returns ownership of the dictionary:
 
-```rust,noplayground
+```cairo,noplayground
 fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T>
 ```
 
@@ -158,7 +158,7 @@ Let us see an example using `entry` and `finalize`. Imagine we would like to imp
 
 Implementing our custom get would look like this:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:imports}}
 
 {{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:custom_get}}
@@ -169,7 +169,7 @@ the function. This concept will be explained in more detail in the ["References 
 
 Implementing the `insert` method would follow a similar workflow, except for inserting a new value when finalizing. If we were to implement it, it would look like the following:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:imports}}
 
 {{#include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:custom_insert}}
@@ -177,7 +177,7 @@ Implementing the `insert` method would follow a similar workflow, except for ins
 
 As a finalizing note, these two methods are implemented in a similar way to how `insert` and `get` are implemented for `Felt252Dict<T>`. This code shows some example usage:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_12_custom_methods/src/lib.cairo:main}}
 ```
 
@@ -196,7 +196,7 @@ To compensate this, you can wrap your type inside a `Nullable<T>`.
 
 Let's show using an example. We will try to store a `Span<felt252>` inside a dictionary. For that, we will use `Nullable<T>` and `Box<T>`. Also, we are storing a `Span<T>` and not an `Array<T>` because the latter does not implement the `Copy<T>` trait which is required for reading from a dictionary.
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:imports}}
 
 {{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:header}}
@@ -210,7 +210,7 @@ The last step is inserting the array as a span inside the dictionary. Notice tha
 
 Once the element is inside the dictionary, and we want to get it, we follow the same steps but in reverse order. The following code shows how to achieve that:
 
-```rust,noplayground
+```cairo,noplayground
 //...
 
 {{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:footer}}
@@ -224,7 +224,7 @@ Here we:
 
 The complete script would look like this:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_13_dict_of_complex/src/lib.cairo:all}}
 ```
 
@@ -236,13 +236,13 @@ Storing arrays in dictionaries in Cairo is slightly different from storing other
 
 First, let's look at how to create a dictionary and insert an array into it. This process is pretty straightforward and follows a similar pattern to inserting other types of data:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_14_dict_of_array_insert/src/lib.cairo}}
 ```
 
 However, attempting to read an array from the dictionary using the `get` method will result in a compiler error. This is because `get` tries to copy the array in memory, which is not possible for arrays (as we've already mentioned in the [previous section][nullable dictionaries values], `Array<T>` does not implement the `Copy<T>` trait):
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/src/lib.cairo}}
 ```
 
@@ -252,7 +252,7 @@ However, attempting to read an array from the dictionary using the `get` method 
 
 To correctly read an array from the dictionary, we need to use dictionary entries. This allows us to get a reference to the array value without copying it:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:get}}
 ```
 
@@ -260,7 +260,7 @@ To correctly read an array from the dictionary, we need to use dictionary entrie
 
 To modify the stored array, such as appending a new value, we can use a similar approach. The following `append_value` function demonstrates this:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:append}}
 ```
 
@@ -270,7 +270,7 @@ In the `append_value` function, we access the dictionary entry, dereference the 
 
 Below is the complete example demonstrating the creation, insertion, reading, and modification of an array in a dictionary:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_16_dict_of_array/src/lib.cairo:all}}
 ```
 

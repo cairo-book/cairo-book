@@ -4,10 +4,6 @@ use regex::Regex;
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct Config {
-    /// The path to explore for *.cairo files.
-    #[arg(short, long, default_value = "./listings")]
-    pub path: String,
-
     #[command(subcommand)]
     pub command: Commands,
 }
@@ -18,10 +14,10 @@ pub enum Commands {
     Verify(VerifyArgs),
 
     /// Process the output.txt file in listings
-    Output,
+    Output(OutputArgs),
 
     /// Run the format process
-    Format,
+    Format(VerifyArgs),
 }
 
 #[derive(Parser, Debug, Default)]
@@ -54,9 +50,16 @@ pub struct VerifyArgs {
     #[arg(short, long)]
     pub test_skip: bool,
 
-    /// Specify file to check
-    #[arg(long)]
-    pub file: Option<String>,
+    /// Specify path to check (file or directory)
+    #[arg(long, default_value = "./listings")]
+    pub path: String,
+}
+
+#[derive(Parser, Debug, Default)]
+pub struct OutputArgs {
+    /// Specify path to check (file or directory)
+    #[arg(long, default_value = "./listings")]
+    pub path: String,
 }
 
 /// Expected statement in a cairo program for it to be runnable.
@@ -65,6 +68,7 @@ pub const STATEMENT_IS_RUNNABLE: &str = "fn main()";
 pub const STATEMENT_IS_CONTRACT: &str = "#[starknet::contract]";
 /// Expected statement in a cairo program containing tests.
 pub const STATEMENT_IS_TESTABLE: &str = "#[test]";
+pub const STATEMENT_TEST_MODULE: &str = "#[cfg(test)]";
 /// Expected regex for tags
 const TAG_REGEX_PATTERN: &str = r"^//\s*TAG(S)?\s*(:)?\s*";
 

@@ -1,0 +1,19 @@
+$ scarb build 
+   Compiling listing_recursive_types_wrong v0.1.0 (listings/ch11-advanced-features/listing_recursive_types_wrong/Scarb.toml)
+error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::BinaryTree, listing_recursive_types_wrong::BinaryTree)" has infinite size.
+ --> listings/ch11-advanced-features/listing_recursive_types_wrong/src/lib.cairo:6:5
+    Node: (u32, BinaryTree, BinaryTree),
+    ^*********************************^
+
+error: Recursive type "listing_recursive_types_wrong::BinaryTree" has infinite size.
+ --> listings/ch11-advanced-features/listing_recursive_types_wrong/src/lib.cairo:10:17
+    let leaf1 = BinaryTree::Leaf(1);
+                ^*****************^
+
+error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::BinaryTree, listing_recursive_types_wrong::BinaryTree)" has infinite size.
+ --> listings/ch11-advanced-features/listing_recursive_types_wrong/src/lib.cairo:13:33
+    let node = BinaryTree::Node((4, leaf2, leaf3));
+                                ^***************^
+
+error: could not compile `listing_recursive_types_wrong` due to previous error
+

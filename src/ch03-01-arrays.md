@@ -7,19 +7,19 @@ This has to do with the fact that once a memory slot is written to, it cannot be
 
 ## Creating an Array
 
-Creating an array is done with the `ArrayTrait::new()` call. Here's an example of creating an array and appending 3 elements to it::
+Creating an array is done with the `ArrayTrait::new()` call. Here's an example of creating an array and appending 3 elements to it:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_01_array_new_append/src/lib.cairo}}
 ```
 
 When required, you can pass the expected type of items inside the array when instantiating the array like this, or explicitly define the type of the variable.
 
-```rust, noplayground
+```cairo, noplayground
 let mut arr = ArrayTrait::<u128>::new();
 ```
 
-```rust, noplayground
+```cairo, noplayground
 let mut arr:Array<u128> = ArrayTrait::new();
 ```
 
@@ -29,7 +29,7 @@ let mut arr:Array<u128> = ArrayTrait::new();
 
 To add an element to the end of an array, you can use the `append()` method:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_01_array_new_append/src/lib.cairo:5}}
 ```
 
@@ -38,7 +38,7 @@ To add an element to the end of an array, you can use the `append()` method:
 You can only remove elements from the front of an array by using the `pop_front()` method.
 This method returns an `Option` that can be unwrapped, containing the removed element, or `Option::None` if the array is empty.
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_02_array_pop_front/src/lib.cairo}}
 ```
 
@@ -56,7 +56,7 @@ The `get` function returns an `Option<Box<@T>>`, which means it returns an optio
 
 Here is an example with the `get()` method:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_03_array_get/src/lib.cairo}}
 ```
 
@@ -66,7 +66,7 @@ Here is an example with the `get()` method:
 
 The `at` function, and its equivalent the subscripting operator, on the other hand, directly return a snapshot to the element at the specified index using the `unbox()` operator to extract the value stored in a box. If the index is out of bounds, a panic error occurs. You should only use `at` when you want the program to panic if the provided index is out of the array's bounds, which can prevent unexpected behavior.
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_04_array_at/src/lib.cairo}}
 ```
 
@@ -89,13 +89,13 @@ At compile-time, the compiler will expand the macro to generate the code that ap
 
 Without `array!`:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_06_array_macro/src/lib.cairo:no_macro}}
 ```
 
 With `array!`:
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_06_array_macro/src/lib.cairo:array_macro}}
 ```
 
@@ -103,7 +103,7 @@ With `array!`:
 
 If you want to store elements of different types in an array, you can use an `Enum` to define a custom data type that can hold multiple types. Enums will be explained in more detail in the ["Enums and Pattern Matching"][enums] chapter.
 
-```rust
+```cairo
 {{#include ../listings/ch03-common-collections/no_listing_07_array_with_enums/src/lib.cairo}}
 ```
 
@@ -121,7 +121,7 @@ All methods provided by `Array` can also be used with `Span`, except for the `ap
 
 To create a `Span` of an `Array`, call the `span()` method:
 
-```rust
+```cairo
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_array_span/src/lib.cairo:3}}
 ```
 

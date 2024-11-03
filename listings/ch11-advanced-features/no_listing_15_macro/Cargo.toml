@@ -1,0 +1,15 @@
+[package]
+name = "no_listing_15_macro"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+bigdecimal = "0.4.5"
+cairo-lang-macro = "0.1"
+cairo-lang-parser = "2.7.0"
+cairo-lang-syntax = "2.7.0"
+
+[workspace]

@@ -1,15 +1,17 @@
 $ scarb test 
-     Running cairo-test adder
+     Running test adder (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Blocking waiting for file lock on build directory
+    Finished `release` profile [optimized] target(s) in 0.88s
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
-    Finished release target(s) in 4 seconds
-testing adder ...
-running 1 test
-test adder_integrationtest::integration_tests::it_adds_two ... ok (gas usage est.: 131100)
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
+    Finished `dev` profile target(s) in 9 seconds
 
-running 1 test
-test adder::tests::internal ... ok (gas usage est.: 131100)
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out;
 
+Collected 2 test(s) from adder package
+Running 1 test(s) from tests/
+[PASS] adder_integrationtest::integration_tests::it_adds_two (gas: ~1)
+Running 1 test(s) from src/
+[PASS] adder::tests::internal (gas: ~1)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

@@ -1,4 +1,4 @@
-# Testing Organization
+# Test Organization
 
 We'll think about tests in terms of two main categories: unit tests and integration tests. Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions. Integration tests use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test.
 
@@ -16,7 +16,7 @@ The `#[cfg(test)]` annotation on the tests module tells Cairo to compile and run
 
 Recall that when we created the new `adder` project in the first section of this chapter, we wrote this first test:
 
-```rust
+```cairo
 {{#include ../listings/ch10-testing-cairo-programs/listing_10_01/src/lib.cairo:it_works}}
 ```
 
@@ -28,7 +28,7 @@ There’s debate within the testing community about whether or not private funct
 
 <span class="caption">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_11_test_private_function/src/lib.cairo}}
 ```
 
@@ -62,7 +62,7 @@ Enter the code in Listing {{#ref test_integration}} into the _tests/integration_
 
 <span class="caption">Filename: tests/integration_tests.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_09_integration_test/tests/integration_tests.cairo}}
 ```
 
@@ -96,25 +96,25 @@ We see that in the second section for the unit tests, 1 has been filtered out be
 
 ### Submodules in Integration Tests
 
-As you add more integration tests, you might want to make more files in the _tests_ directory to help organize them; for example, you can group the test functions by the functionality they’re testing. As mentioned earlier, each file in the tests directory is compiled as its own separate crate, which is useful for creating separate scopes to more closely imitate the way end users will be using your crate. However, this means files in the tests directory don’t share the same behavior as files in _src_ do, as you learned in Chapter 7 regarding how to separate code into modules and files.
+As you add more integration tests, you might want to make more files in the _tests_ directory to help organize them; for example, you can group the test functions by the functionality they’re testing. As mentioned earlier, each file in the tests directory is compiled as its own separate crate, which is useful for creating separate scopes to more closely imitate the way end users will be using your crate. However, this means files in the tests directory don’t share the same behavior as files in _src_ do, as you learned in Chapter {{#chap packages-and-crates}} regarding how to separate code into modules and files.
 
-The different behavior of tests directory files is most noticeable when you have a set of helper functions to use in multiple integration test files and you try to follow the steps in the [Separating Modules into Different Files](ch07-05-separating-modules-into-different-files.md) section of Chapter 7 to extract them into a common module. For example, if we create _tests/common.cairo_ and place a function named `setup` in it, we can add some code to `setup` that we want to call from multiple test functions in multiple test files:
+The different behavior of tests directory files is most noticeable when you have a set of helper functions to use in multiple integration test files and you try to follow the steps in the [Separating Modules into Different Files](ch07-05-separating-modules-into-different-files.md) section of Chapter {{#chap packages-and-crates}} to extract them into a common module. For example, if we create _tests/common.cairo_ and place a function named `setup` in it, we can add some code to `setup` that we want to call from multiple test functions in multiple test files:
 
 <span class="caption">Filename: tests/common.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/tests/common.cairo}}
 ```
 
 <span class="caption">Filename: tests/integration_tests.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/tests/integration_tests.cairo}}
 ```
 
 <span class="caption">Filename: src/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_12_submodules/src/lib.cairo}}
 ```
 
@@ -130,7 +130,7 @@ Let's create this _tests/lib.cairo_ file :
 
 <span class="caption">Filename: tests/lib.cairo</span>
 
-```rust, noplayground
+```cairo, noplayground
 {{#include ../listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/tests/lib.cairo}}
 ```
 

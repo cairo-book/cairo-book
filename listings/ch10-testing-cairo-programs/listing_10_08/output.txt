@@ -1,0 +1,14 @@
+$ scarb test 
+     Running test listing_10_08 (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Blocking waiting for file lock on build directory
+    Finished `release` profile [optimized] target(s) in 1.21s
+   Compiling test(listings/ch10-testing-cairo-programs/listing_10_08/Scarb.toml)
+    Finished `dev` profile target(s) in 6 seconds
+
+
+Collected 1 test(s) from listing_10_08 package
+Running 1 test(s) from src/
+[PASS] listing_10_08::test_struct_equality (gas: ~1)
+Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+

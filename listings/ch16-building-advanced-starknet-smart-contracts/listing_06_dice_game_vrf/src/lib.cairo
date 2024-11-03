@@ -35,6 +35,9 @@ pub trait IDiceGame<TContractState> {
 //ANCHOR: dice_game
 #[starknet::contract]
 mod DiceGame {
+    use core::starknet::storage::{
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess
+    };
     use core::starknet::{
         ContractAddress, contract_address_const, get_block_number, get_caller_address,
         get_contract_address
@@ -51,7 +54,7 @@ mod DiceGame {
 
     #[storage]
     struct Storage {
-        user_guesses: LegacyMap<ContractAddress, u8>,
+        user_guesses: Map<ContractAddress, u8>,
         pragma_vrf_contract_address: ContractAddress,
         game_window: bool,
         min_block_number_storage: u64,
@@ -94,7 +97,7 @@ mod DiceGame {
             assert(guess >= 1 && guess <= 6, 'INVALID_GUESS');
 
             let caller = get_caller_address();
-            self.user_guesses.write(caller, guess);
+            self.user_guesses.entry(caller).write(guess);
         }
 
         fn toggle_play_window(ref self: ContractState) {
@@ -113,7 +116,7 @@ mod DiceGame {
             assert(self.last_random_number.read() != 0, 'NO_RANDOM_NUMBER_YET');
 
             let caller = get_caller_address();
-            let user_guess: u8 = self.user_guesses.read(caller);
+            let user_guess: u8 = self.user_guesses.entry(caller).read();
             let reduced_random_number: u256 = self.last_random_number.read().into() % 6 + 1;
 
             if user_guess == reduced_random_number.try_into().unwrap() {

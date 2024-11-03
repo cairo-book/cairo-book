@@ -1,59 +1,29 @@
 use colored::Colorize;
-use regex::Regex;
 use std::collections::HashSet;
+use std::path::Path;
 use walkdir::WalkDir;
 
-use crate::config::{Config, VerifyArgs};
-
-pub fn find_scarb_manifests(cfg: &Config, args: &VerifyArgs) -> Vec<String> {
-    let path = cfg.path.as_str();
-
-    let mut scarb_manifests: Vec<String> = Vec::new();
-
-    for entry in WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
-        if let Some(file_name) = entry.file_name().to_str() {
-            if file_name.eq("Scarb.toml") {
-                if args.file.is_some() && !file_name.ends_with(args.file.as_ref().unwrap()) {
-                    continue;
-                }
-
-                scarb_manifests.push(entry.path().display().to_string());
-            }
-        }
-    }
-
-    scarb_manifests
+pub fn find_scarb_manifests(path: &str) -> Vec<String> {
+    let path = Path::new(path);
+    WalkDir::new(path)
+        .into_iter()
+        .filter_map(|entry| entry.ok())
+        .filter(|entry| entry.file_name() == "Scarb.toml")
+        .map(|entry| entry.path().display().to_string())
+        .collect()
 }
 
 /// Will replace the file path contained in the input string with a clickable format for better output
-pub fn clickable(relative_path: &str) -> String {
-    let full_path = std::env::current_dir()
-        .unwrap()
-        .join(relative_path)
-        .display()
-        .to_string();
-    let mut path_parts: Vec<&str> = full_path.split(|c: char| c == '\\' || c == '/').collect();
+pub fn clickable(file_path: &str) -> String {
+    let path = Path::new(file_path);
+    let absolute_path = path.canonicalize().unwrap_or_else(|_| path.to_path_buf());
 
-    let file_listing_path: Vec<&str> = full_path.split("listings").collect();
-    let mut filename: String = file_listing_path.last().unwrap_or(&"")[1..].to_string();
-    let re = Regex::new(r"([^:]+(:\d+:\d+)?)(:\s|$)").unwrap();
-    if let Some(captures) = re.captures(filename.as_str()) {
-        filename = captures.get(1).map_or("", |m| m.as_str()).to_string();
-    }
-
-    if let Some(parts) = path_parts.last_mut() {
-        *parts = &filename;
-    }
-
-    let clickable_format = format!(
-        "\u{1b}]8;;file://{}\u{1b}\\{}\u{1b}]8;;\u{1b}\\",
-        full_path, filename
+    // Use OSC 8 hyperlink escape sequences
+    format!(
+        "\x1B]8;;file://{}\x07{}\x1B]8;;\x07",
+        absolute_path.display(),
+        file_path
     )
-    .bold()
-    .red()
-    .to_string();
-
-    full_path.replacen(&full_path, &clickable_format, 1)
 }
 
 pub fn print_error_table(errors: &HashSet<String>, section_name: &str) {

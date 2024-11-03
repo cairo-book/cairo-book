@@ -1,7 +1,6 @@
 use clap::Parser;
 use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
-use log::error;
 use rayon::prelude::*;
 use std::collections::HashSet;
 use std::fs::File;
@@ -35,19 +34,17 @@ lazy_static! {
 }
 
 fn main() {
-    let cfg = &*CFG;
-    let cfg_clone = cfg;
-    let empty_arg = VerifyArgs::default();
+    let cfg = Config::parse();
 
     match &cfg.command {
-        Commands::Verify(args) => run_verification(cfg_clone, args),
-        Commands::Output => output::process_outputs(cfg_clone, &empty_arg),
-        Commands::Format => run_format(cfg_clone, &empty_arg),
+        Commands::Verify(args) => run_verification(args),
+        Commands::Output(args) => output::process_outputs(args),
+        Commands::Format(args) => run_format(args),
     }
 }
 
-fn run_verification(cfg: &Config, args: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, args);
+fn run_verification(args: &VerifyArgs) {
+    let scarb_packages = find_scarb_manifests(args.path.as_str());
 
     let total_packages = scarb_packages.len();
     let pb = Arc::new(ProgressBar::new(total_packages as u64));
@@ -79,33 +76,20 @@ fn run_verification(cfg: &Config, args: &VerifyArgs) {
     });
 
     let errors = ERRORS.lock().unwrap();
-    let total_errors = errors.compile_errors.len()
+    print_error_summary(&errors);
+
+    if errors.compile_errors.len()
         + errors.run_errors.len()
         + errors.test_errors.len()
-        + errors.format_errors.len();
-
-    if total_errors > 0 {
-        println!("{}\n", "  ==== RESULT ===  ".red().bold());
-
-        print_error_table(&errors.compile_errors, "Compile Errors");
-        print_error_table(&errors.run_errors, "Run Errors");
-        print_error_table(&errors.test_errors, "Test Errors");
-        print_error_table(&errors.format_errors, "Format Errors");
-
-        println!(
-            "{}",
-            format!("Total errors: {}", total_errors.to_string().red()).bold()
-        );
-
-        println!("\n{}", "Please review the errors above. Do not hesitate to ask for help by commenting on the issue on Github.".red().italic());
+        + errors.format_errors.len()
+        > 0
+    {
         std::process::exit(1);
-    } else {
-        println!("\n{}\n", "ALL TESTS PASSED!".green().bold());
     }
 }
 
-fn run_format(cfg: &Config, arg: &VerifyArgs) {
-    let scarb_packages = find_scarb_manifests(cfg, arg);
+fn run_format(args: &VerifyArgs) {
+    let scarb_packages = find_scarb_manifests(args.path.as_str());
 
     let total_packages = scarb_packages.len();
     let pb = Arc::new(ProgressBar::new(total_packages as u64));
@@ -118,14 +102,14 @@ fn run_format(cfg: &Config, arg: &VerifyArgs) {
 
     let processed_count = Arc::new(AtomicUsize::new(0));
 
-    logger::setup(arg, Arc::clone(&pb));
+    logger::setup(args, Arc::clone(&pb));
 
-    let arg = Arc::new(arg);
+    let args = Arc::new(args);
 
     scarb_packages.par_iter().for_each(|file| {
-        process_file_format(file, &arg);
+        process_file_format(file, &args);
 
-        if !arg.quiet {
+        if !args.quiet {
             let current = processed_count.fetch_add(1, Ordering::SeqCst) + 1;
             pb.set_position(current as u64);
 
@@ -201,6 +185,7 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
             is_contract |= line_contents.contains(config::STATEMENT_IS_CONTRACT);
             should_be_runnable |= line_contents.contains(config::STATEMENT_IS_RUNNABLE);
             should_be_testable |= line_contents.contains(config::STATEMENT_IS_TESTABLE);
+            should_be_testable |= line_contents.contains(config::STATEMENT_TEST_MODULE);
         }
     });
 
@@ -208,7 +193,7 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
     if is_contract {
         // This is a contract, it must pass starknet-compile
         if !tags.contains(&Tags::DoesNotCompile) && !args.starknet_skip {
-            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![], true);
         }
     } else if should_be_runnable {
         // This is a cairo program, it must pass cairo-run
@@ -221,27 +206,34 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
                 manifest_path,
                 file_path,
                 vec!["--available-gas=200000000".to_string()],
+                true,
             );
         }
     } else {
         // This is a cairo program, it must pass cairo-compile
         if !tags.contains(&Tags::DoesNotCompile) && !args.compile_skip {
-            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![]);
+            run_command(ScarbCmd::Build(), manifest_path, file_path, vec![], true);
         }
     };
 
     // TEST CHECKS
     if should_be_testable && !args.test_skip && !tags.contains(&Tags::FailingTests) {
         // This program has tests, it must pass cairo-test
-        let _ = run_command(ScarbCmd::Test(), manifest_path, file_path, vec![]);
+        let _ = run_command(ScarbCmd::Test(), manifest_path, file_path, vec![], true);
     }
 
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         // This program must pass cairo-format
-        let mut format_args = vec!["-c".to_string()];
+        let format_args = vec!["-c".to_string()];
 
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
+        let _ = run_command(
+            ScarbCmd::Format(),
+            manifest_path,
+            file_path,
+            format_args,
+            true,
+        );
     }
 }
 
@@ -287,30 +279,94 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
     // FORMAT CHECKS
     if !tags.contains(&Tags::IgnoreFormat) && !args.formats_skip {
         let format_args = vec![];
-        let _ = run_command(ScarbCmd::Format(), manifest_path, file_path, format_args);
+        let _ = run_command(
+            ScarbCmd::Format(),
+            manifest_path,
+            file_path,
+            format_args,
+            true,
+        );
     }
 }
 
-fn run_command(cmd: ScarbCmd, manifest_path: &str, file_path: &str, args: Vec<String>) -> String {
+fn run_command(
+    cmd: ScarbCmd,
+    manifest_path: &str,
+    file_path: &str,
+    args: Vec<String>,
+    verbose: bool,
+) -> String {
     match cmd.test(manifest_path, args) {
         Ok(output) => String::from_utf8_lossy(&output.stdout).into_owned(),
-        Err(e) => handle_error(e, file_path, cmd),
+        Err(e) => handle_error(e, file_path, cmd, verbose),
     }
 }
 
-fn handle_error(e: String, file_path: &str, cmd: ScarbCmd) -> String {
+fn handle_error(e: String, file_path: &str, cmd: ScarbCmd, verbose: bool) -> String {
     let clickable_file = clickable(file_path);
-    let msg = match cmd {
-        ScarbCmd::Test() | ScarbCmd::CairoRun() => {
-            format!("{} -> {}: {}", clickable_file, cmd.as_str(), e.as_str())
-        }
-        _ => format!("{} -> {}", cmd.as_str(), clickable_file),
-    };
 
-    error!("{}", msg);
+    if verbose {
+        println!("\n{}", "=".repeat(80).yellow());
+        println!(
+            "{} in {}",
+            "Error".red().bold(),
+            file_path.blue().underline()
+        );
+        println!("{}", "=".repeat(80).yellow());
+
+        println!("{}:", "Command".cyan().bold());
+        println!("  {}", cmd.as_str().green());
+
+        println!("{}:", "File".cyan().bold());
+        println!("  {}", clickable_file);
+
+        println!("{}:", "Details".cyan().bold());
+        for line in e.lines() {
+            println!("  {}", line);
+        }
+
+        println!("{}", "=".repeat(80).yellow());
+    }
 
     let mut errors = ERRORS.lock().unwrap();
-    errors.get_mut_error_set(&cmd).insert(clickable_file);
+    errors.get_mut_error_set(&cmd).insert(file_path.to_string());
 
     e
+}
+
+fn print_error_summary(errors: &ErrorSets) {
+    let total_errors = errors.compile_errors.len()
+        + errors.run_errors.len()
+        + errors.test_errors.len()
+        + errors.format_errors.len();
+
+    if total_errors > 0 {
+        println!("\n{}", "=".repeat(80).yellow());
+        println!("{}", "  ERROR SUMMARY  ".red().bold().on_black());
+        println!("{}", "=".repeat(80).yellow());
+
+        print_error_category("Compile Errors", &errors.compile_errors);
+        print_error_category("Run Errors", &errors.run_errors);
+        print_error_category("Test Errors", &errors.test_errors);
+        print_error_category("Format Errors", &errors.format_errors);
+
+        println!("{}", "=".repeat(80).yellow());
+        println!("  Total Errors: {}", total_errors.to_string().red().bold());
+        println!("{}", "=".repeat(80).yellow());
+
+        println!("\n{}", "Please review the errors above. If you need assistance, consider opening an issue on GitHub.".yellow().italic());
+    } else {
+        println!("\n{}", "=".repeat(80).green());
+        println!("{}", "  ALL TESTS PASSED  ".green().bold().on_black());
+        println!("{}", "=".repeat(80).green());
+    }
+}
+
+fn print_error_category(category: &str, errors: &HashSet<String>) {
+    if !errors.is_empty() {
+        println!("\n{} ({})", category.cyan().bold(), errors.len());
+        for error in errors {
+            println!("  • {}", error);
+        }
+    }
 }

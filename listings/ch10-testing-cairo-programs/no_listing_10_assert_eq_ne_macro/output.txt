@@ -1,0 +1,14 @@
+$ scarb test 
+     Running test no_listing_11_assert_eq_ne_macro (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Blocking waiting for file lock on build directory
+    Finished `release` profile [optimized] target(s) in 0.48s
+   Compiling test(listings/ch10-testing-cairo-programs/no_listing_10_assert_eq_ne_macro/Scarb.toml)
+    Finished `dev` profile target(s) in 4 seconds
+
+
+Collected 1 test(s) from no_listing_11_assert_eq_ne_macro package
+Running 1 test(s) from src/
+[PASS] no_listing_11_assert_eq_ne_macro::test_struct_equality (gas: ~1)
+Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+

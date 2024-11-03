@@ -1,84 +1,23 @@
-use std::collections::HashMap;
-
-use anyhow::anyhow;
+use anyhow::{bail, Context, Result};
 use lazy_static::lazy_static;
-use mdbook::book::{Book, BookItem};
-use mdbook::errors::Error;
+use mdbook::book::{Book, BookItem, Chapter};
 use mdbook::preprocess::{Preprocessor, PreprocessorContext};
 use regex::Regex;
-
-const TAG_REGEX_PATTERN: &str = r"^//\s*TAG";
-
-lazy_static! {
-    static ref TAG_REGEX: Regex = Regex::new(TAG_REGEX_PATTERN).expect("Invalid regex");
-}
+use std::collections::HashMap;
 
 lazy_static! {
+    static ref TAG_REGEX: Regex = Regex::new(r"^//\s*TAG").expect("Invalid regex");
     static ref REF_REGEX: Regex = Regex::new(r"\{\{#ref\s*([\w-]+)\s*\}\}").expect("Invalid regex");
-}
-
-lazy_static! {
     static ref LABEL_REGEX: Regex =
         Regex::new(r"\{\{#label\s*([\w-]+)\s*\}\}").expect("Invalid regex");
+    static ref CHAP_REF_REGEX: Regex = Regex::new(r"\{\{#chap\s*([\w-]+)\s*\}\}").expect("Invalid regex");
 }
 
-pub struct LabelsProcessor {
-    labels: HashMap<String, String>,
-    current_label: usize,
-}
-
-impl LabelsProcessor {
-    pub fn new() -> LabelsProcessor {
-        LabelsProcessor {
-            labels: HashMap::new(),
-            current_label: 1,
-        }
-    }
-
-    fn process_labels(&mut self, line: &str, chapter_number: u32) -> Result<bool, Error> {
-        let is_label = LABEL_REGEX.is_match(line);
-        for cap in LABEL_REGEX.captures_iter(line) {
-            let label = &cap[1];
-            let listing_number = format!("{}-{}", chapter_number, self.current_label);
-            if let Some(_existing) = self.labels.get(&label.to_string()) {
-                return Err(anyhow::anyhow!("Duplicate entry for label: {}", label));
-            }
-            self.labels.insert(label.to_string(), listing_number);
-            self.current_label += 1;
-        }
-        Ok(is_label)
-    }
-
-    fn process_references(&mut self, line: &str) -> Result<String, Error> {
-        let mut new_line = line.to_string();
-        for cap in REF_REGEX.captures_iter(line) {
-            let ref_name = &cap[1];
-            match self.labels.get(ref_name) {
-                Some(label) => {
-                    let replacement = label.to_string();
-                    new_line = new_line.replace(&cap[0], &replacement);
-                }
-                None => {
-                    return Err(anyhow!("Reference to label '{}' not found", ref_name));
-                }
-            }
-        }
-        Ok(new_line)
-    }
-}
-
-impl Default for LabelsProcessor {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-/// The actual implementation of the `Cairo` preprocessor.
 pub struct Cairo;
 
 impl Cairo {
-    pub fn new() -> Cairo {
-        Cairo
+    pub fn new() -> Self {
+        Self
     }
 }
 
@@ -88,19 +27,198 @@ impl Default for Cairo {
     }
 }
 
-/// Trait to allow for iterating over the book processing parent items first
+impl Preprocessor for Cairo {
+    fn name(&self) -> &str {
+        "cairo-preprocessor"
+    }
+
+    fn run(&self, _ctx: &PreprocessorContext, mut book: Book) -> Result<Book> {
+        let mut processor = CairoBookProcessor::new();
+        processor.process_book(&mut book)?;
+        Ok(book)
+    }
+
+    fn supports_renderer(&self, renderer: &str) -> bool {
+        renderer != "not-supported"
+    }
+}
+
+struct CairoBookProcessor {
+    labels: HashMap<String, String>,
+    current_label: usize,
+    current_chapter: u32,
+    chapter_numbers: HashMap<String, u32>,
+}
+
+impl CairoBookProcessor {
+    fn new() -> Self {
+        Self {
+            labels: HashMap::new(),
+            current_label: 1,
+            current_chapter: 0,
+            chapter_numbers: HashMap::new(),
+        }
+    }
+
+    fn process_book(&mut self, book: &mut Book) -> Result<()> {
+        self.collect(book)?;
+        self.process_references(book)?;
+        Ok(())
+    }
+
+    fn collect(&mut self, book: &mut Book) -> Result<()> {
+        book.for_each_mut_parent_first(|item| {
+            if let BookItem::Chapter(chapter) = item {
+                self.process_chapter_labels(chapter).unwrap_or_else(|e| {
+                    eprintln!(
+                        "Error processing labels in chapter '{}': {}",
+                        chapter.name, e
+                    )
+                });
+                self.collect_chapter_number(chapter, self.current_chapter).unwrap_or_else(|e| {
+                    eprintln!(
+                        "Error processing chapter number in chapter '{}': {}",
+                        chapter.name, e
+                    )
+                });
+            }
+        });
+        Ok(())
+    }
+
+    fn process_chapter_labels(&mut self, chapter: &mut Chapter) -> Result<()> {
+        let chapter_number = chapter.number.as_ref().map_or(0, |n| n[0]);
+
+        // Reset current_label when chapter changes
+        if chapter_number != self.current_chapter {
+            self.current_chapter = chapter_number;
+            self.current_label = 1;
+        }
+
+        let mut new_content = String::new();
+
+        for line in chapter.content.lines() {
+            if let Some(cap) = LABEL_REGEX.captures(line) {
+                let label = &cap[1];
+                let listing_number = format!("{}-{}", self.current_chapter, self.current_label);
+                if self.labels.contains_key(label) {
+                    bail!("Duplicate entry for label: {}", label);
+                }
+                self.labels.insert(label.to_string(), listing_number);
+                self.current_label += 1;
+                // We don't add this line to new_content, effectively removing it
+            } else {
+                new_content.push_str(line);
+                new_content.push('\n');
+            }
+        }
+
+        // Remove the last newline if the original content didn't end with one
+        if !chapter.content.ends_with('\n') {
+            new_content.pop();
+        }
+
+        chapter.content = new_content;
+        Ok(())
+    }
+
+    fn collect_chapter_number(&mut self, chapter: &mut Chapter, chapter_counter: u32) -> Result<()> {
+        let chapter_name = chapter.name.to_lowercase().replace(" ", "-");
+        self.chapter_numbers.insert(chapter_name, chapter_counter);
+        Ok(())
+    }
+
+    fn process_references(&self, book: &mut Book) -> Result<()> {
+        book.for_each_mut(|item| {
+            if let BookItem::Chapter(chapter) = item {
+                self.process_chapter_references(chapter)
+                    .unwrap_or_else(|e| {
+                        eprintln!(
+                            "Error processing references in chapter '{}': {}",
+                            chapter.name, e
+                        )
+                    });
+            }
+        });
+        Ok(())
+    }
+
+    fn process_chapter_references(&self, chapter: &mut Chapter) -> Result<()> {
+        let mut new_content = String::new();
+        let mut in_code_block = false;
+        let mut skip_next_empty = false;
+
+        for line in chapter.content.lines() {
+            let mut processed_line = line.to_string();
+
+            in_code_block ^= line.starts_with("```");
+
+            if in_code_block && TAG_REGEX.is_match(line) {
+                // Skip the next empty line
+                skip_next_empty = true;
+                continue;
+            }
+
+            if skip_next_empty && line.is_empty() {
+                skip_next_empty = false;
+                continue;
+            }
+
+            skip_next_empty = false;
+            // Process ref
+            for cap in REF_REGEX.captures_iter(line) {
+                let ref_name = &cap[1];
+                let replacement = self
+                    .labels
+                    .get(ref_name)
+                    .with_context(|| format!("Reference to label '{}' not found", ref_name))?;
+
+                processed_line = processed_line.replace(&cap[0], replacement);
+            }
+
+            // Process chapter ref
+            for cap in CHAP_REF_REGEX.captures_iter(line) {
+                let chapter_name = &cap[1];
+                let replacement = self
+                    .chapter_numbers
+                    .get(chapter_name)
+                    .with_context(|| format!("Reference to chapter name '{}' not found", chapter_name))?;
+                processed_line = processed_line.replace(&cap[0], &replacement.to_string());
+            }
+
+            new_content.push_str(&processed_line);
+            new_content.push('\n');
+        }
+
+        chapter.content = new_content;
+        Ok(())
+    }
+}
+
 trait BookExt {
-    fn for_each_mut_parent_first<F>(&mut self, func: F)
+    fn for_each_mut_parent_first<F>(&mut self, f: F)
     where
         F: FnMut(&mut BookItem);
 }
 
 impl BookExt for Book {
-    fn for_each_mut_parent_first<F>(&mut self, mut func: F)
+    fn for_each_mut_parent_first<F>(&mut self, mut f: F)
     where
         F: FnMut(&mut BookItem),
     {
-        for_each_mut_parent_first(&mut func, &mut self.sections);
+        fn process_items<F>(items: &mut [BookItem], f: &mut F)
+        where
+            F: FnMut(&mut BookItem),
+        {
+            for item in items {
+                f(item);
+                if let BookItem::Chapter(ch) = item {
+                    process_items(&mut ch.sub_items, f);
+                }
+            }
+        }
+
+        process_items(&mut self.sections, &mut f);
     }
 }
 
@@ -117,175 +235,27 @@ where
     }
 }
 
-impl Preprocessor for Cairo {
-    fn name(&self) -> &str {
-        "cairo-preprocessor"
-    }
-
-    fn run(&self, _ctx: &PreprocessorContext, mut book: Book) -> Result<Book, Error> {
-        let mut label_processor = LabelsProcessor::new();
-        let mut prev_chapter_number = 0;
-        // First pass: collect all labels - process parents items first to have correct labels numerotation
-        book.for_each_mut_parent_first(|item| {
-            if let BookItem::Chapter(ref mut chapter) = *item {
-                let chapter_number = chapter.number.as_ref().map_or(0, |s| s[0]);
-
-                // Reset label count after each chapter
-                if chapter_number != prev_chapter_number {
-                    prev_chapter_number = chapter_number;
-                    label_processor.current_label = 1;
-                }
-
-                let mut new_content = String::new();
-                let lines = chapter.content.split_terminator('\n').peekable();
-
-                for line in lines {
-                    match label_processor.process_labels(line, chapter_number) {
-                        Ok(is_label) => {
-                            if is_label {
-                                continue;
-                            }
-                        }
-                        Err(e) => {
-                            eprintln!(
-                                "Error: {}. In chapter: {}. In line: {}",
-                                e, chapter.name, line
-                            );
-                        }
-                    };
-                    new_content.push_str(line);
-                    new_content.push('\n');
-                }
-
-                chapter.content = new_content;
-            }
-        });
-
-        // Second pass: replace references with correct numbers
-        book.for_each_mut(|item| {
-            if let BookItem::Chapter(ref mut chapter) = *item {
-                let mut new_content = String::new();
-                let lines = chapter.content.split_terminator('\n').peekable();
-                let mut in_code_block = false;
-                let mut skip_empty_lines = false;
-
-                for line in lines {
-                    in_code_block ^= line.starts_with("```");
-
-                    if in_code_block && TAG_REGEX.is_match(line) {
-                        // skip following empty line
-                        skip_empty_lines = true;
-                        continue;
-                    }
-
-                    if skip_empty_lines && line.is_empty() {
-                        // skip empty lines after the tag
-                        continue;
-                    }
-                    skip_empty_lines = false;
-
-                    let maybe_new_line = label_processor.process_references(line);
-                    match maybe_new_line {
-                        Ok(new_line) => {
-                            new_content.push_str(new_line.as_str());
-                            new_content.push('\n');
-                        }
-                        Err(e) => {
-                            eprintln!(
-                                "Error: {}. In chapter: {}. In line: {}",
-                                e, chapter.name, line
-                            );
-                        }
-                    }
-                }
-
-                chapter.content = new_content;
-            }
-        });
-
-        // Return updated version of the book
-        Ok(book)
-    }
-
-    fn supports_renderer(&self, renderer: &str) -> bool {
-        renderer != "not-supported"
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_process_labels() {
-        let mut processor = LabelsProcessor::new();
+    fn test_process_chapter_labels() {
+        let mut processor = CairoBookProcessor::new();
 
-        let line = "{{#label label1}}";
-        processor.process_labels(line, 0).unwrap();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content =
+            "{{#label label1}}\nSome content\n{{#label label2}}\nMore content".to_string();
 
-        assert_eq!(processor.labels.get("label1"), Some(&String::from("0-1")));
-    }
-
-    #[test]
-    fn test_process_labels_multiple() {
-        let mut processor = LabelsProcessor::new();
-
-        let line = "{{#label label1}}";
-        processor.process_labels(line, 0).unwrap();
-
-        let line = "{{#label label2}}";
-        processor.process_labels(line, 0).unwrap();
+        processor.process_chapter_labels(&mut chapter).unwrap();
 
         assert_eq!(processor.labels.get("label1"), Some(&String::from("0-1")));
         assert_eq!(processor.labels.get("label2"), Some(&String::from("0-2")));
     }
 
     #[test]
-    fn test_process_labels_not_label() {
-        let mut processor = LabelsProcessor::new();
-
-        let line = "This is not a label";
-        processor.process_labels(line, 0).unwrap();
-
-        assert_eq!(processor.labels.get("label1"), None);
-    }
-
-    #[test]
     fn test_process_references() {
-        let mut processor = LabelsProcessor::new();
-        processor
-            .labels
-            .insert("label1".to_string(), "1-1".to_string());
-
-        let line = "This is a reference {{#ref label1 }} in the text.";
-        let processed = processor.process_references(line).unwrap();
-
-        assert_eq!(processed, "This is a reference 1-1 in the text.");
-    }
-
-    #[test]
-    fn test_process_references_missing_label() {
-        let mut processor = LabelsProcessor::new();
-
-        let line = "This is a reference {{#ref label1 }} in the text.";
-        let result = processor.process_references(line);
-
-        assert!(result.is_err());
-    }
-
-    #[test]
-    fn test_process_references_no_reference() {
-        let mut processor = LabelsProcessor::new();
-
-        let line = "This is a reference in the text.";
-        let processed = processor.process_references(line).unwrap();
-
-        assert_eq!(processed, line);
-    }
-
-    #[test]
-    fn test_process_references_multiple() {
-        let mut processor = LabelsProcessor::new();
+        let mut processor = CairoBookProcessor::new();
         processor
             .labels
             .insert("label1".to_string(), "1-1".to_string());
@@ -293,13 +263,142 @@ mod tests {
             .labels
             .insert("label2".to_string(), "1-2".to_string());
 
-        let line =
-            "This is a reference {{#ref label1 }} in the text. And another one {{#ref label2 }}.";
-        let processed = processor.process_references(line).unwrap();
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content =
+            "This is a reference {{#ref label1}} in the text. And another one {{#ref label2}}.\n"
+                .to_string();
+        chapter.content += "This is a line in the text.";
+        book.push_item(chapter);
 
-        assert_eq!(
-            processed,
-            "This is a reference 1-1 in the text. And another one 1-2."
+        processor.process_references(&mut book).unwrap();
+
+        if let BookItem::Chapter(processed_chapter) = &book.sections[0] {
+            eprintln!("Processed chapter: {}", processed_chapter.content);
+            assert_eq!(
+                processed_chapter.content,
+                "This is a reference 1-1 in the text. And another one 1-2.\n\
+                 This is a line in the text.\n"
+            );
+        } else {
+            panic!("Expected chapter");
+        }
+    }
+
+    #[test]
+    fn test_process_references_with_error() {
+        let mut processor = CairoBookProcessor::new();
+        processor
+            .labels
+            .insert("label1".to_string(), "1-1".to_string());
+        // Intentionally not inserting "label2"
+
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content = "This is a reference {{#ref label1}} in the text.\n".to_string();
+        chapter.content += "This line has an error {{#ref label2}}.\n";
+        chapter.content += "This is another valid line.";
+        book.push_item(chapter);
+
+        let result = processor.process_references(&mut book);
+
+        assert!(
+            result.is_ok(),
+            "process_references should not return an error"
         );
+
+        if let BookItem::Chapter(processed_chapter) = &book.sections[0] {
+            assert_eq!(
+                processed_chapter.content,
+                "This is a reference {{#ref label1}} in the text.\n\
+                 This line has an error {{#ref label2}}.\n\
+                 This is another valid line.",
+                "Chapter content should remain unchanged due to error"
+            );
+        } else {
+            panic!("Expected chapter");
+        }
+    }
+
+    #[test]
+    fn test_collect_chapter_number() {
+        let mut processor = CairoBookProcessor::new();
+
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content = "This is a valid line.\n".to_string();
+        book.push_item(chapter);
+
+        let result = processor.collect(&mut book);
+
+        assert!(
+            result.is_ok(),
+            "collect should not return an error"
+        );
+
+        assert_eq!(*processor.chapter_numbers.get("test-chapter").expect("test-chapter should be in the HashMap"), 0);
+    }
+
+    #[test]
+    fn test_process_chapter_numbers() {
+        let mut processor = CairoBookProcessor::new();
+
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content = "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
+        chapter.content += "This is another valid line.";
+        book.push_item(chapter);
+
+        // Collect chapter numbers and process 
+        let result = processor.process_book(&mut book);
+
+        assert!(
+            result.is_ok(),
+            "process_references should not return an error"
+        );
+
+        if let BookItem::Chapter(processed_chapter) = &book.sections[0] {
+            println!("content : {}", processed_chapter.content);
+            assert_eq!(
+                processed_chapter.content,
+                "This is a chap reference Chapter 0 in the text.\n\
+                 This is another valid line.\n",
+            );
+        } else {
+            panic!("Expected chapter");
+        }
+    }
+
+    #[test]
+    fn test_process_chapter_number_with_error() {
+        let mut processor = CairoBookProcessor::new();
+
+        let mut book = Book::new();
+        let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
+        chapter.content = "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
+        chapter.content += "This line has an error Chapter {{#chap unknown-chapter}}.\n";
+        chapter.content += "This is another valid line.";
+        book.push_item(chapter);
+
+        // Collect chapter numbers and process 
+        let result = processor.process_book(&mut book);
+
+        assert!(
+            result.is_ok(),
+            "process_references should not return an error"
+        );
+
+        if let BookItem::Chapter(processed_chapter) = &book.sections[0] {
+            println!("content : {}", processed_chapter.content);
+            assert_eq!(
+                processed_chapter.content,
+                "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n\
+                 This line has an error Chapter {{#chap unknown-chapter}}.\n\
+                 This is another valid line.",
+                "Chapter content should remain unchanged due to error"
+            );
+        } else {
+            panic!("Expected chapter");
+        }
     }
 }

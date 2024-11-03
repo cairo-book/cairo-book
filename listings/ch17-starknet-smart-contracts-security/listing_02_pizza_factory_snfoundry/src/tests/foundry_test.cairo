@@ -1,19 +1,17 @@
-use source::pizza::{
-    IPizzaFactoryDispatcher, IPizzaFactorySafeDispatcher, IPizzaFactoryDispatcherTrait,
-    PizzaFactory, PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+use crate::pizza::{
+    IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory,
+    PizzaFactory::{Event as PizzaEvents, PizzaEmission}
 };
 //ANCHOR: import_internal
-use source::pizza::PizzaFactory::{InternalTrait};
-use source::pizza::IPizzaFactory;
+use crate::pizza::PizzaFactory::{InternalTrait};
 //ANCHOR_END: import_internal
 
 use core::starknet::{ContractAddress, contract_address_const};
 use core::starknet::storage::StoragePointerReadAccess;
 
 use snforge_std::{
-    declare, ContractClassTrait, ContractClass, start_cheat_caller_address,
-    stop_cheat_caller_address, EventSpy, EventSpyAssertionsTrait, spy_events, load,
-    cheatcodes::storage::load_felt252
+    declare, ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
+    stop_cheat_caller_address, EventSpyAssertionsTrait, spy_events, load
 };
 
 fn owner() -> ContractAddress {
@@ -22,10 +20,10 @@ fn owner() -> ContractAddress {
 
 //ANCHOR: deployment
 fn deploy_pizza_factory() -> (IPizzaFactoryDispatcher, ContractAddress) {
-    let contract = declare("PizzaFactory").unwrap();
-    let owner: ContractAddress = contract_address_const::<'owner'>();
+    let contract = declare("PizzaFactory").unwrap().contract_class();
 
-    let mut constructor_calldata = array![owner.into()];
+    let owner: ContractAddress = contract_address_const::<'owner'>();
+    let constructor_calldata = array![owner.into()];
 
     let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 
@@ -64,7 +62,7 @@ fn test_change_owner_should_change_owner() {
 }
 
 #[test]
-#[should_panic(expected: ("Only the owner can set ownership",))]
+#[should_panic(expected: "Only the owner can set ownership")]
 fn test_change_owner_should_panic_when_not_owner() {
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
     let not_owner = contract_address_const::<'not_owner'>();
@@ -76,7 +74,7 @@ fn test_change_owner_should_panic_when_not_owner() {
 
 //ANCHOR: test_make_pizza
 #[test]
-#[should_panic(expected: ("Only the owner can make pizza",))]
+#[should_panic(expected: "Only the owner can make pizza")]
 fn test_make_pizza_should_panic_when_not_owner() {
     let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
     let not_owner = contract_address_const::<'not_owner'>();

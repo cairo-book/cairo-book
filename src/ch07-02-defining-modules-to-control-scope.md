@@ -2,7 +2,7 @@
 
 In this section, we’ll talk about modules and other parts of the module system,
 namely _paths_ that allow you to name items and the `use` keyword that brings a
-path into scope.
+path into scope. 
 
 First, we’re going to start with a list of rules for easy reference when you’re
 organizing your code in the future. Then we’ll explain each of the rules in
@@ -24,7 +24,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
 
   - Inline, within curly brackets that replace the semicolon following `mod garden`.
 
-    ```rust,noplayground
+    ```cairo,noplayground
       // crate root file (src/lib.cairo)
       mod garden {
           // code defining the garden module goes here
@@ -41,7 +41,7 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
   - Inline, directly following `mod vegetables`, within curly brackets instead
     of the semicolon.
 
-    ```rust,noplayground
+    ```cairo,noplayground
     // src/garden.cairo file
     mod vegetables {
         // code defining the vegetables submodule goes here
@@ -53,13 +53,13 @@ work. You can create a new Scarb project with `scarb new backyard` to follow alo
 - **Paths to code in modules**: Once a module is part of your crate, you can
   refer to code in that module from anywhere else in that same crate, using the path
   to the code. For example, an `Asparagus` type in the `vegetables` submodule would be found at
-  `backyard::garden::vegetables::Asparagus`.
+  `crate::garden::vegetables::Asparagus`.
 - **Private vs public**: Code within a module is private from its parent modules by default. This means that it may only be
   accessed by the current module and its descendants. To make a module public, declare it with `pub mod` instead of `mod`. To make items within a public module public as well, use `pub` before their declarations. Cairo also provides the `pub(crate)` keyword, allowing an item or module to be only visible within the crate in which the definition is included.
 - **The `use` keyword**: Within a scope, the `use` keyword creates shortcuts to
   items to reduce repetition of long paths. In any scope that can refer to
-  `backyard::garden::vegetables::Asparagus`, you can create a shortcut with
-  `use backyard::garden::vegetables::Asparagus;` and from then on you only need to
+  `crate::garden::vegetables::Asparagus`, you can create a shortcut with
+  `use crate::garden::vegetables::Asparagus;` and from then on you only need to
   write `Asparagus` to make use of that type in the scope.
 
 Here we create a crate named `backyard` that illustrates these rules. The
@@ -79,7 +79,7 @@ The crate root file in this case is _src/lib.cairo_, and it contains:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust
+```cairo
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_01_lib/src/lib.cairo:crate}}
 ```
 
@@ -88,17 +88,17 @@ This line tells the compiler to include the code it finds in _src/garden.cairo_,
 
 <span class="filename">Filename: src/garden.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 pub mod vegetables;
 ```
 
 Here, `pub mod vegetables;` means the code in *src/garden/vegetables.cairo* is included too. That code is:
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/no_listing_02_garden/src/lib.cairo}}
 ```
 
-The line `use garden::vegetables::Asparagus;` lets us bring the `Asparagus` type into scope,
+The line `use crate::garden::vegetables::Asparagus;` lets us bring the `Asparagus` type into scope,
 so we can use it in the `main` function.
 
 Now let’s get into the details of these rules and demonstrate them in action!
@@ -129,7 +129,7 @@ define some modules and function signatures. Here’s the front of house section
 
 <span class="filename">Filename: src/lib.cairo</span>
 
-```rust,noplayground
+```cairo,noplayground
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_01_basic_nested_modules/src/lib.cairo:front_of_house}}
 ```
 

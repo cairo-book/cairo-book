@@ -1,0 +1,12 @@
+$ scarb test 
+     Running test no_listing_06_assert (snforge test)
+   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
+    Finished `release` profile [optimized] target(s) in 0.24s
+   Compiling test(listings/ch10-testing-cairo-programs/no_listing_06_assert/Scarb.toml)
+    Finished `dev` profile target(s) in 4 seconds
+
+
+Collected 0 test(s) from no_listing_06_assert package
+Running 0 test(s) from src/
+Tests: 0 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+
