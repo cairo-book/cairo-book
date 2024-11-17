@@ -38,7 +38,7 @@
   box-shadow: 0 4px 12px var(--chat-shadow);
   z-index: 999;
   /* If --chat-bg is not defined or is transparent, use a fallback color */
-  background-color: var(--chat-bg, #2b2b2b);
+  background-color: var(--bg, #2b2b2b);
 }
 
 #chat-header {
@@ -143,7 +143,7 @@
 #chat-input {
   display: flex;
   padding: 15px;
-  background-color: var(--chat-input-bg);
+  background-color: var(--chat-input-bg, var(--bg));
   border-top: 1px solid var(--chat-border);
   height: 60px; /* Fixed height for the input area */
 }
@@ -154,7 +154,7 @@
   padding: 10px;
   border: 1px solid var(--chat-border);
   border-radius: 4px;
-  background-color: var(--chat-bg);
+  background-color: var(--chat-input-bg, var(--bg));
   color: var(--chat-text);
   font-size: 16px;
 }
@@ -180,15 +180,15 @@
 }
 
 .message.user {
-  background-color: #4a86e8;
-  color: white;
+  background-color: var(--chat-user-msg-bg, #4a86e8);
+  color: var(--chat-user-msg-text, white);
   align-self: flex-end;
   margin-left: auto;
 }
 
 .message.ai {
-  background-color: #424242;
-  color: white;
+  background-color: var(--chat-ai-msg-bg, #424242);
+  color: var(--chat-ai-msg-text, white);
   align-self: flex-start;
 }
 
