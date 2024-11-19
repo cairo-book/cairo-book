@@ -24,11 +24,13 @@
 
 #chat-window {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  height: 80vh;
+  bottom: 20px;
+  right: 20px;
+  transform: none;
+  width: 400px;
+  height: 600px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 40px);
   border: 1px solid var(--chat-border);
   background-color: var(--chat-bg);
   display: flex;
@@ -294,5 +296,15 @@ body.chat-open {
 
   .message {
     max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  #chat-window {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
   }
 }
