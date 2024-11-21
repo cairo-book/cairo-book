@@ -556,6 +556,19 @@
       this.appendMessage("user", message, messageId);
     }
 
+    showLoadingIndicator() {
+      const loadingElement = document.createElement("div");
+      loadingElement.className = "message loading";
+      loadingElement.innerHTML = `
+        Thinking
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+      `;
+      document.getElementById("chat-messages").appendChild(loadingElement);
+      this.scrollToBottom();
+    }
+
     /**
      * Attempts to reconnect to the WebSocket server.
      * This method implements an exponential backoff strategy for reconnection attempts.
