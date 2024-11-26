@@ -49,7 +49,7 @@ whole class of bugs impossible, because values will never change unexpectedly.
 This makes code easier to reason about.
 
 But mutability can be very useful, and can make code more convenient to write.
-Although variables are immutable by default, you can make them mutable by
+Although variables are immutable by default, you can make them act mutable by
 adding `mut` in front of the variable name. Adding `mut` also conveys
 intent to future readers of the code by indicating that other parts of the code
 will be changing the value associated to this variable.
