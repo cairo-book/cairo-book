@@ -84,9 +84,9 @@ dependencies = [
 
 [[package]]
 name = "cairo-lang-macro"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26c60c78d20f833d8229fa6442de629d73d01e6a238714afdf9c7269d56b4bb7"
+checksum = "dda77fe9404e438edaa80c9acaf0d72260aa883ba433812d0a745f5a72f31881"
 dependencies = [
  "cairo-lang-macro-attributes",
  "cairo-lang-macro-stable",
