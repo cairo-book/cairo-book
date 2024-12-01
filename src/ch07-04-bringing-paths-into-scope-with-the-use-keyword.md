@@ -170,4 +170,27 @@ Note that it is also possible to add dependencies with the `scarb add` command, 
 
 To remove a dependency, simply remove the corresponding line from your _Scarb.toml_ file, or use the `scarb rm` command.
 
+## The Glob Operator
+
+If we want to bring _all_ public items defined in a path into scope, we can
+specify that path followed by the `*` glob operator:
+
+```rust
+use core::num::traits::*;
+```
+
+This `use` statement brings all public items defined in `core::num::traits` into
+the current scope. Be careful when using the glob operator! Glob can make it
+harder to tell what names are in scope and where a name used in your program
+was defined.
+
+The glob operator is often used when testing to bring everything under test
+into the `tests` module; we’ll talk about that in the [“How to Write
+Tests”][writing-tests]<!-- ignore --> section in Chapter {{#chap how-to-write-tests}}. The glob operator
+is also sometimes used as part of the prelude pattern: see [the standard
+library documentation](../std/prelude/index.html#other-preludes)<!-- ignore -->
+for more information on that pattern.
+
+[writing-tests]: ./ch10-01-how-to-write-tests.md
+
 {{#quiz ../quizzes/ch07-04-bringing-paths-into-scope.toml}}
