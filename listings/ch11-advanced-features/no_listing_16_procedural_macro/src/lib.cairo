@@ -22,7 +22,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::B;
+    use super::*;
 
     // ANCHOR: pow_macro
     #[test]

@@ -16,7 +16,7 @@ fn vending_machine_accept(coin: Coin) -> bool {
 
 #[cfg(test)]
 mod test {
-    use super::{Coin, vending_machine_accept};
+    use super::*;
 
     #[test]
     #[available_gas(2000000)]

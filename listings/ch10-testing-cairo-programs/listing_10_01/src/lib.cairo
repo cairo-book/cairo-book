@@ -5,7 +5,7 @@ pub fn add(left: usize, right: usize) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use super::add;
+    use super::*;
 
     #[test]
     fn it_works() {
