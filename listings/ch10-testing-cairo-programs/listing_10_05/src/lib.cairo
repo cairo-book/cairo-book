@@ -22,7 +22,7 @@ impl GuessImpl of GuessTrait {
 // ANCHOR: test
 #[cfg(test)]
 mod tests {
-    use super::GuessTrait;
+    use super::*;
 
     #[test]
     #[should_panic]

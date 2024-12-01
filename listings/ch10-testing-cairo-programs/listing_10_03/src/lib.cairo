@@ -19,8 +19,7 @@ impl RectangleImpl of RectangleTrait {
 // ANCHOR: test1
 #[cfg(test)]
 mod tests {
-    use super::Rectangle;
-    use super::RectangleTrait;
+    use super::*;
 
     #[test]
     fn larger_can_hold_smaller() {
@@ -33,8 +32,7 @@ mod tests {
 //ANCHOR_END: test1
 #[cfg(test)]
 mod tests2 {
-    use super::Rectangle;
-    use super::RectangleTrait;
+    use super::*;
 
     // ANCHOR: test2
     #[test]
@@ -46,4 +44,3 @@ mod tests2 {
     }
     // ANCHOR_END: test2
 }
-

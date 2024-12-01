@@ -10,7 +10,7 @@ fn parse_u8(s: felt252) -> Result<u8, felt252> {
 //ANCHOR: tests
 #[cfg(test)]
 mod tests {
-    use super::parse_u8;
+    use super::*;
 
     #[test]
     fn test_felt252_to_u8() {

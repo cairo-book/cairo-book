@@ -5,7 +5,7 @@ pub fn add_two(a: u32) -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use super::add_two;
+    use super::*;
     // ANCHOR: here
     #[test]
     fn it_adds_two() {

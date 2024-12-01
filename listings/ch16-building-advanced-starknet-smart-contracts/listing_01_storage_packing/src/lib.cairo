@@ -64,7 +64,7 @@ mod SizeFactory {
 
 #[cfg(test)]
 mod tests {
-    use super::{SizesStorePacking, Sizes};
+    use super::*;
     use core::starknet::storage_access::StorePacking;
 
     #[test]
