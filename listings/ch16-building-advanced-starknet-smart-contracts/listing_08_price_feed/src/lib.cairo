@@ -48,7 +48,7 @@ mod PriceFeedExample {
 
             let eth_dispatcher = ERC20ABIDispatcher {
                 contract_address: contract_address_const::<
-                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7,
                 >() // ETH Contract Address
             };
 
@@ -57,9 +57,9 @@ mod PriceFeedExample {
                 .transfer_from(
                     caller_address,
                     contract_address_const::<
-                        0x0237726d12d3c7581156e141c1b132f2db9acf788296a0e6e4e9d0ef27d092a2
+                        0x0237726d12d3c7581156e141c1b132f2db9acf788296a0e6e4e9d0ef27d092a2,
                     >(),
-                    eth_needed
+                    eth_needed,
                 );
         }
 
@@ -67,7 +67,7 @@ mod PriceFeedExample {
         fn get_asset_price(self: @ContractState, asset_id: felt252) -> u128 {
             // Retrieve the oracle dispatcher
             let oracle_dispatcher = IPragmaABIDispatcher {
-                contract_address: self.pragma_contract.read()
+                contract_address: self.pragma_contract.read(),
             };
 
             // Call the Oracle contract, for a spot entry

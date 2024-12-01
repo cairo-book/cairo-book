@@ -33,6 +33,6 @@ fn test_struct_equality() {
     assert_ge!(first_throw, fourth_throw);
     assert_lt!(second_throw, third_throw);
     assert_le!(
-        first_throw, fourth_throw, "{:?},{:?} should be lower or equal", first_throw, fourth_throw
+        first_throw, fourth_throw, "{:?},{:?} should be lower or equal", first_throw, fourth_throw,
     );
 }

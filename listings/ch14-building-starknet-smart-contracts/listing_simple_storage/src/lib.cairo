@@ -16,7 +16,7 @@ mod SimpleStorage {
     #[storage]
     struct Storage {
         owner: Person,
-        expiration: Expiration
+        expiration: Expiration,
     }
     //ANCHOR_END: storage
 
@@ -33,7 +33,7 @@ mod SimpleStorage {
     pub enum Expiration {
         Finite: u64,
         #[default]
-        Infinite
+        Infinite,
     }
     //ANCHOR_END: enum
 

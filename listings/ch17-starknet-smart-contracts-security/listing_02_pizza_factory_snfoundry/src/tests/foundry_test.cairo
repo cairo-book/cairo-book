@@ -1,6 +1,6 @@
 use crate::pizza::{
     IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory,
-    PizzaFactory::{Event as PizzaEvents, PizzaEmission}
+    PizzaFactory::{Event as PizzaEvents, PizzaEmission},
 };
 //ANCHOR: import_internal
 use crate::pizza::PizzaFactory::{InternalTrait};
@@ -11,7 +11,7 @@ use core::starknet::storage::StoragePointerReadAccess;
 
 use snforge_std::{
     declare, ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
-    stop_cheat_caller_address, EventSpyAssertionsTrait, spy_events, load
+    stop_cheat_caller_address, EventSpyAssertionsTrait, spy_events, load,
 };
 
 fn owner() -> ContractAddress {

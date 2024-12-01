@@ -3,6 +3,6 @@
 fn main() {
     let mut x: u64 = 2;
     println!("The value of x is: {}", x);
-    x = 'a short string';
+    x = 5_u8;
     println!("The value of x is: {}", x);
 }

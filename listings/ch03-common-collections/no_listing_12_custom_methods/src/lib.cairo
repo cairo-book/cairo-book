@@ -4,7 +4,7 @@ use core::dict::{Felt252Dict, Felt252DictEntryTrait};
 
 // ANCHOR: custom_get
 fn custom_get<T, +Felt252DictValue<T>, +Drop<T>, +Copy<T>>(
-    ref dict: Felt252Dict<T>, key: felt252
+    ref dict: Felt252Dict<T>, key: felt252,
 ) -> T {
     // Get the new entry and the previous value held at `key`
     let (entry, prev_value) = dict.entry(key);
@@ -22,7 +22,7 @@ fn custom_get<T, +Felt252DictValue<T>, +Drop<T>, +Copy<T>>(
 
 // ANCHOR: custom_insert
 fn custom_insert<T, +Felt252DictValue<T>, +Destruct<T>, +Drop<T>>(
-    ref dict: Felt252Dict<T>, key: felt252, value: T
+    ref dict: Felt252Dict<T>, key: felt252, value: T,
 ) {
     // Get the last entry associated with `key`
     // Notice that if `key` does not exist, `_prev_value` will

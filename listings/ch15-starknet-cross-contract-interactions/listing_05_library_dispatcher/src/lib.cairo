@@ -11,7 +11,7 @@ mod ValueStoreLogic {
 
     #[storage]
     struct Storage {
-        value: u128
+        value: u128,
     }
 
     #[abi(embed_v0)]
@@ -35,7 +35,7 @@ mod ValueStoreExecutor {
     #[storage]
     struct Storage {
         logic_library: ClassHash,
-        value: u128
+        value: u128,
     }
 
     #[constructor]

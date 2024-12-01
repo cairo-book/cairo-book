@@ -2,12 +2,12 @@
 mod shapes {
     #[derive(Drop)]
     pub struct Square {
-        pub side: u32
+        pub side: u32,
     }
 
     #[derive(Drop)]
     pub struct Circle {
-        pub radius: u32
+        pub radius: u32,
     }
 
     #[derive(Drop)]

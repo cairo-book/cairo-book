@@ -20,7 +20,7 @@ trait MemoryVecTrait<V, T> {
 // ANCHOR: struct
 struct MemoryVec<T> {
     data: Felt252Dict<Nullable<T>>,
-    len: usize
+    len: usize,
 }
 // ANCHOR_END: struct
 

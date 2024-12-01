@@ -1,6 +1,6 @@
 #[derive(Copy, Drop)]
 struct Wallet<T> {
-    balance: T
+    balance: T,
 }
 
 trait WalletTrait<T> {

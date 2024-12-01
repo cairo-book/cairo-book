@@ -21,7 +21,7 @@ impl RectangleImpl of RectangleTrait {
 
 //ANCHOR: main
 fn main() {
-    let rect1 = Rectangle { width: 30, height: 50, };
+    let rect1 = Rectangle { width: 30, height: 50 };
     println!("Area is {}", rect1.area());
 }
 //ANCHOR_END: main

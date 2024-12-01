@@ -2,7 +2,7 @@
 struct Cart {
     paid: bool,
     items: u256,
-    buyer: ByteArray
+    buyer: ByteArray,
 }
 
 fn pass_data(cart: Cart) {

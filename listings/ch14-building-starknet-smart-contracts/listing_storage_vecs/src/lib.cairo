@@ -12,7 +12,7 @@ trait IAddressList<TState> {
 #[starknet::contract]
 mod AddressList {
     use starknet::storage::{
-        StoragePointerReadAccess, StoragePointerWriteAccess, Vec, VecTrait, MutableVecTrait
+        StoragePointerReadAccess, StoragePointerWriteAccess, Vec, VecTrait, MutableVecTrait,
     };
     use core::starknet::{get_caller_address, ContractAddress};
 
@@ -33,7 +33,7 @@ mod AddressList {
 
         //ANCHOR: read
         fn get_n_th_registered_address(
-            self: @ContractState, index: u64
+            self: @ContractState, index: u64,
         ) -> Option<ContractAddress> {
             if let Option::Some(storage_ptr) = self.addresses.get(index) {
                 return Option::Some(storage_ptr.read());

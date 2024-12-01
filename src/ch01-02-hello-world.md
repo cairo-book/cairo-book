@@ -86,7 +86,7 @@ edition = "2024_07"
 starknet = "2.8.2"
 
 [dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.31.0" }
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.33.0" }
 
 [[target.starknet-contract]]
 sierra = true

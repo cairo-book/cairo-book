@@ -1,7 +1,7 @@
 #[derive(Default, Drop)]
 struct A {
     item1: felt252,
-    item2: u64
+    item2: u64,
 }
 
 #[derive(Default, Drop, PartialEq)]

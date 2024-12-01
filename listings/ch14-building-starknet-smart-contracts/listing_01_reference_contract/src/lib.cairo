@@ -4,13 +4,13 @@ use core::starknet::ContractAddress;
 #[starknet::interface]
 pub trait INameRegistry<TContractState> {
     fn store_name(
-        ref self: TContractState, name: felt252, registration_type: NameRegistry::RegistrationType
+        ref self: TContractState, name: felt252, registration_type: NameRegistry::RegistrationType,
     );
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
     fn get_owner(self: @TContractState) -> NameRegistry::Person;
     fn get_owner_name(self: @TContractState) -> felt252;
     fn get_registration_info(
-        self: @TContractState, address: ContractAddress
+        self: @TContractState, address: ContractAddress,
     ) -> NameRegistry::RegistrationInfo;
 }
 
@@ -18,7 +18,7 @@ pub trait INameRegistry<TContractState> {
 mod NameRegistry {
     use core::starknet::{ContractAddress, get_caller_address};
     use core::starknet::storage::{
-        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
 
     //ANCHOR: storage
@@ -60,7 +60,7 @@ mod NameRegistry {
     pub enum RegistrationType {
         Finite: u64,
         #[default]
-        Infinite
+        Infinite,
     }
     //ANCHOR_END: enum_store
 
@@ -123,7 +123,7 @@ mod NameRegistry {
         }
 
         fn get_registration_info(
-            self: @ContractState, address: ContractAddress
+            self: @ContractState, address: ContractAddress,
         ) -> RegistrationInfo {
             self.registrations.entry(address).info.read()
         }
@@ -147,7 +147,7 @@ mod NameRegistry {
             ref self: ContractState,
             user: ContractAddress,
             name: felt252,
-            registration_type: RegistrationType
+            registration_type: RegistrationType,
         ) {
             let total_names = self.total_names.read();
 

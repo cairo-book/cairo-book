@@ -1,7 +1,7 @@
 #[derive(Drop, Debug, PartialEq)]
 struct MyStruct {
     var1: u8,
-    var2: u8
+    var2: u8,
 }
 
 #[cfg(test)]

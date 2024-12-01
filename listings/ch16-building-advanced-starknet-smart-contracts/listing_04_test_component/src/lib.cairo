@@ -20,7 +20,7 @@ mod MockContract {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        CounterEvent: CounterComponent::Event
+        CounterEvent: CounterComponent::Event,
     }
 
     #[abi(embed_v0)]

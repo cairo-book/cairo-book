@@ -29,13 +29,13 @@ pub mod ownable_component {
 
     #[storage]
     pub struct Storage {
-        owner: ContractAddress
+        owner: ContractAddress,
     }
 
     #[event]
     #[derive(Drop, starknet::Event)]
     pub enum Event {
-        OwnershipTransferred: OwnershipTransferred
+        OwnershipTransferred: OwnershipTransferred,
     }
 
     #[derive(Drop, starknet::Event)]
@@ -47,7 +47,7 @@ pub mod ownable_component {
     //ANCHOR: impl_signature
     #[embeddable_as(Ownable)]
     impl OwnableImpl<
-        TContractState, +HasComponent<TContractState>
+        TContractState, +HasComponent<TContractState>,
     > of super::IOwnable<ComponentState<TContractState>> {
         //ANCHOR_END: impl_signature
         fn owner(self: @ComponentState<TContractState>) -> ContractAddress {
@@ -55,7 +55,7 @@ pub mod ownable_component {
         }
 
         fn transfer_ownership(
-            ref self: ComponentState<TContractState>, new_owner: ContractAddress
+            ref self: ComponentState<TContractState>, new_owner: ContractAddress,
         ) {
             assert(!new_owner.is_zero(), Errors::ZERO_ADDRESS_OWNER);
             self.assert_only_owner();
@@ -70,7 +70,7 @@ pub mod ownable_component {
 
     #[generate_trait]
     pub impl InternalImpl<
-        TContractState, +HasComponent<TContractState>
+        TContractState, +HasComponent<TContractState>,
     > of InternalTrait<TContractState> {
         fn initializer(ref self: ComponentState<TContractState>, owner: ContractAddress) {
             self._transfer_ownership(owner);
@@ -84,13 +84,13 @@ pub mod ownable_component {
         }
 
         fn _transfer_ownership(
-            ref self: ComponentState<TContractState>, new_owner: ContractAddress
+            ref self: ComponentState<TContractState>, new_owner: ContractAddress,
         ) {
             let previous_owner: ContractAddress = self.owner.read();
             self.owner.write(new_owner);
             self
                 .emit(
-                    OwnershipTransferred { previous_owner: previous_owner, new_owner: new_owner }
+                    OwnershipTransferred { previous_owner: previous_owner, new_owner: new_owner },
                 );
         }
     }

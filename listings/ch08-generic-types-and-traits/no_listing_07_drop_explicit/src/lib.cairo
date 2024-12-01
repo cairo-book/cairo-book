@@ -1,5 +1,5 @@
 struct Wallet<T> {
-    balance: T
+    balance: T,
 }
 
 impl WalletDrop<T, +Drop<T>> of Drop<Wallet<T>>;

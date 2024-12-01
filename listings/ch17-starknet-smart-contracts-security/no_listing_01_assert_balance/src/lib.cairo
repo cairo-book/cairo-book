@@ -10,7 +10,7 @@ mod contract {
 
     #[storage]
     struct Storage {
-        balance: u256
+        balance: u256,
     }
 
     //ANCHOR: withdraw
