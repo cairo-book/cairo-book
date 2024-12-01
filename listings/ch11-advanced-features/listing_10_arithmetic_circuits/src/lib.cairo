@@ -1,7 +1,7 @@
 // ANCHOR: full
 use core::circuit::{
     CircuitElement, CircuitInput, circuit_add, circuit_mul, EvalCircuitTrait, CircuitOutputsTrait,
-    CircuitModulus, AddInputResultTrait, CircuitInputs, u384
+    CircuitModulus, AddInputResultTrait, CircuitInputs, u384,
 };
 
 // Circuit: a * (a + b)
@@ -32,7 +32,7 @@ fn eval_circuit() -> (u384, u384) {
 
     // ANCHOR: modulus
     let bn254_modulus = TryInto::<
-        _, CircuitModulus
+        _, CircuitModulus,
     >::try_into([0x6871ca8d3c208c16d87cfd47, 0xb85045b68181585d97816a91, 0x30644e72e131a029, 0x0])
         .unwrap();
     // ANCHOR_END: modulus

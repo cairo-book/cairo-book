@@ -24,8 +24,8 @@ mod tests {
 
     #[test]
     fn larger_can_hold_smaller() {
-        let larger = Rectangle { height: 7, width: 8, };
-        let smaller = Rectangle { height: 1, width: 5, };
+        let larger = Rectangle { height: 7, width: 8 };
+        let smaller = Rectangle { height: 1, width: 5 };
 
         assert!(larger.can_hold(@smaller), "rectangle cannot hold");
     }
@@ -39,8 +39,8 @@ mod tests2 {
     // ANCHOR: test2
     #[test]
     fn smaller_cannot_hold_larger() {
-        let larger = Rectangle { height: 7, width: 8, };
-        let smaller = Rectangle { height: 1, width: 5, };
+        let larger = Rectangle { height: 7, width: 8 };
+        let smaller = Rectangle { height: 1, width: 5 };
 
         assert!(!smaller.can_hold(@larger), "rectangle cannot hold");
     }

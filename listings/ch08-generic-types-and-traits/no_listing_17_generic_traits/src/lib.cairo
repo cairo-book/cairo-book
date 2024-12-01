@@ -32,7 +32,7 @@ mod circle {
 
     #[derive(Copy, Drop)]
     pub struct Circle {
-        pub radius: u64
+        pub radius: u64,
     }
 
     // Implementation CircleGeometry passes in <Circle>

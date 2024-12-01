@@ -10,7 +10,7 @@ trait IWarehouseContract<TState> {
 #[starknet::contract]
 mod WarehouseContract {
     use starknet::storage::{
-        StoragePointerReadAccess, StoragePointerWriteAccess, StoragePathEntry, Map
+        StoragePointerReadAccess, StoragePointerWriteAccess, StoragePathEntry, Map,
     };
     use core::starknet::{ContractAddress, get_caller_address};
 

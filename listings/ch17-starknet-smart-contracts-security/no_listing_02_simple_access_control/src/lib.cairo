@@ -2,7 +2,7 @@
 mod access_control_contract {
     use core::starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, Map
+        StorageMapWriteAccess, Map,
     };
     use core::starknet::ContractAddress;
     use core::starknet::get_caller_address;
@@ -23,7 +23,7 @@ mod access_control_contract {
         // Role 'owner': only one address
         owner: ContractAddress,
         // Role 'role_a': a set of addresses
-        role_a: Map::<ContractAddress, bool>
+        role_a: Map::<ContractAddress, bool>,
     }
 
     #[constructor]

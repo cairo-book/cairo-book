@@ -5,7 +5,7 @@ use core::starknet::SyscallResultTrait;
 
 fn setup_counter() -> ICounterDispatcher {
     let (address, _) = deploy_syscall(
-        MockContract::TEST_CLASS_HASH.try_into().unwrap(), 0, array![].span(), false
+        MockContract::TEST_CLASS_HASH.try_into().unwrap(), 0, array![].span(), false,
     )
         .unwrap_syscall();
     ICounterDispatcher { contract_address: address }

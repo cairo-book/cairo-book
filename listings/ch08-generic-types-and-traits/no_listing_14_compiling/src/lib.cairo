@@ -7,13 +7,13 @@ struct Wallet<T, U> {
 // ANCHOR: trait_impl
 trait WalletMixTrait<T1, U1> {
     fn mixup<T2, +Drop<T2>, U2, +Drop<U2>>(
-        self: Wallet<T1, U1>, other: Wallet<T2, U2>
+        self: Wallet<T1, U1>, other: Wallet<T2, U2>,
     ) -> Wallet<T1, U2>;
 }
 
 impl WalletMixImpl<T1, +Drop<T1>, U1, +Drop<U1>> of WalletMixTrait<T1, U1> {
     fn mixup<T2, +Drop<T2>, U2, +Drop<U2>>(
-        self: Wallet<T1, U1>, other: Wallet<T2, U2>
+        self: Wallet<T1, U1>, other: Wallet<T2, U2>,
     ) -> Wallet<T1, U2> {
         Wallet { balance: self.balance, address: other.address }
     }

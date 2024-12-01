@@ -20,7 +20,7 @@ mod ValueStore {
         Serde::serialize(@value, ref call_data);
 
         let mut res = syscalls::library_call_syscall(
-            self.logic_library.read(), selector!("set_value"), call_data.span()
+            self.logic_library.read(), selector!("set_value"), call_data.span(),
         )
             .unwrap_syscall();
 

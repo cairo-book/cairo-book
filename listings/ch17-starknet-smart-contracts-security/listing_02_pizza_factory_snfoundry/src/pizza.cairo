@@ -21,7 +21,7 @@ pub mod PizzaFactory {
         pepperoni: u32,
         pineapple: u32,
         pub owner: ContractAddress,
-        pizzas: u32
+        pizzas: u32,
     }
 
     #[constructor]
@@ -34,12 +34,12 @@ pub mod PizzaFactory {
     #[event]
     #[derive(Drop, starknet::Event)]
     pub enum Event {
-        PizzaEmission: PizzaEmission
+        PizzaEmission: PizzaEmission,
     }
 
     #[derive(Drop, starknet::Event)]
     pub struct PizzaEmission {
-        pub counter: u32
+        pub counter: u32,
     }
 
     #[abi(embed_v0)]

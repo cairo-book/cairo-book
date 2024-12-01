@@ -26,7 +26,7 @@ impl DerefMutWrapper<T, +Copy<T>> of DerefMut<Wrapper<T>> {
 // ANCHOR: error
 fn error() {
     let wrapped_profile = Wrapper {
-        value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 }
+        value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 },
     };
     // Uncommenting the next line will cause a compilation error
     println!("Username: {}", wrapped_profile.username);
@@ -36,7 +36,7 @@ fn error() {
 // ANCHOR: example
 fn main() {
     let mut wrapped_profile = Wrapper {
-        value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 }
+        value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 },
     };
 
     println!("Username: {}", wrapped_profile.username);

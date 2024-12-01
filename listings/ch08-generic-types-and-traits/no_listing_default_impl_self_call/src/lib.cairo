@@ -2,7 +2,7 @@ mod aggregator {
     //ANCHOR: trait
     pub trait Summary<T> {
         fn summarize(
-            self: @T
+            self: @T,
         ) -> ByteArray {
             format!("(Read more from {}...)", Self::summarize_author(self))
         }
@@ -35,7 +35,7 @@ fn main() {
         username: "EliBenSasson",
         content: "Crypto is full of short-term maximizing projects. \n @Starknet and @StarkWareLtd are about long-term vision maximization.",
         reply: false,
-        retweet: false
+        retweet: false,
     };
 
     println!("1 new tweet: {}", tweet.summarize());

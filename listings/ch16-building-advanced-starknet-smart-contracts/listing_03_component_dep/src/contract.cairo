@@ -17,13 +17,13 @@ mod OwnableCounter {
     struct Storage {
         counter: u128,
         #[substorage(v0)]
-        ownable: ownable_component::Storage
+        ownable: ownable_component::Storage,
     }
 
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        OwnableEvent: ownable_component::Event
+        OwnableEvent: ownable_component::Event,
     }
 
     #[abi(embed_v0)]

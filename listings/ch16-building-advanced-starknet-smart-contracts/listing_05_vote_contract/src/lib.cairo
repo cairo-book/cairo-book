@@ -21,7 +21,7 @@ mod Vote {
     use core::starknet::get_caller_address;
     use core::starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, Map
+        StorageMapWriteAccess, Map,
     };
 
     const YES: u8 = 1_u8;
@@ -43,7 +43,7 @@ mod Vote {
         ref self: ContractState,
         voter_1: ContractAddress,
         voter_2: ContractAddress,
-        voter_3: ContractAddress
+        voter_3: ContractAddress,
     ) {
         // Register all voters by calling the _register_voters function
         self._register_voters(voter_1, voter_2, voter_3);
@@ -108,7 +108,7 @@ mod Vote {
                 self.yes_votes.write(self.yes_votes.read() + 1_u8);
             }
 
-            self.emit(VoteCast { voter: caller, vote: vote, });
+            self.emit(VoteCast { voter: caller, vote: vote });
         }
     }
 
@@ -120,7 +120,7 @@ mod Vote {
             ref self: ContractState,
             voter_1: ContractAddress,
             voter_2: ContractAddress,
-            voter_3: ContractAddress
+            voter_3: ContractAddress,
         ) {
             self.registered_voter.write(voter_1, true);
             self.can_vote.write(voter_1, true);
@@ -142,7 +142,7 @@ mod Vote {
             let can_vote: bool = self.can_vote.read((address));
 
             if (!can_vote) {
-                self.emit(UnauthorizedAttempt { unauthorized_address: address, });
+                self.emit(UnauthorizedAttempt { unauthorized_address: address });
             }
 
             assert!(is_voter, "USER_NOT_REGISTERED");

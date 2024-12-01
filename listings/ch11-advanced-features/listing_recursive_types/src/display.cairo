@@ -10,7 +10,7 @@ pub(crate) impl DebugBinaryTree of Debug<BinaryTree> {
 }
 
 fn fmt_helper(
-    self: @BinaryTree, ref f: Formatter, depth: usize, is_last: bool
+    self: @BinaryTree, ref f: Formatter, depth: usize, is_last: bool,
 ) -> Result<(), Error> {
     let mut indent: ByteArray = "";
     let mut i = 0;

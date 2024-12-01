@@ -1,12 +1,12 @@
 // ANCHOR: const_expressions
 struct AnyStruct {
     a: u256,
-    b: u32
+    b: u32,
 }
 
 enum AnyEnum {
     A: felt252,
-    B: (usize, u256)
+    B: (usize, u256),
 }
 
 const ONE_HOUR_IN_SECONDS: u32 = 3600;

@@ -13,7 +13,7 @@ mod SimpleStorage {
 
     #[storage]
     struct Storage {
-        stored_data: u128
+        stored_data: u128,
     }
 
     //ANCHOR: impl

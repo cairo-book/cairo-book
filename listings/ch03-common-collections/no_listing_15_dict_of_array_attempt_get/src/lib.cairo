@@ -13,7 +13,7 @@ fn get_array_entry(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252) -
     let val = dict.get(0); // This will cause a compiler error
     let arr = match match_nullable(val) {
         FromNullableResult::Null => panic!("No value!"),
-        FromNullableResult::NotNull(val) => val.unbox()
+        FromNullableResult::NotNull(val) => val.unbox(),
     };
     arr.span()
 }

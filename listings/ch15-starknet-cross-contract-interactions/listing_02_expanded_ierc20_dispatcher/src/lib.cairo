@@ -18,7 +18,7 @@ impl IERC20DispatcherImpl of IERC20DispatcherTrait<IERC20Dispatcher> {
             self.contract_address, selector!("name"), core::array::ArrayTrait::span(@__calldata__),
         );
         let mut __dispatcher_return_data__ = starknet::SyscallResultTrait::unwrap_syscall(
-            __dispatcher_return_data__
+            __dispatcher_return_data__,
         );
         core::option::OptionTrait::expect(
             core::serde::Serde::<felt252>::deserialize(ref __dispatcher_return_data__),
@@ -36,7 +36,7 @@ impl IERC20DispatcherImpl of IERC20DispatcherTrait<IERC20Dispatcher> {
             core::array::ArrayTrait::span(@__calldata__),
         );
         let mut __dispatcher_return_data__ = starknet::SyscallResultTrait::unwrap_syscall(
-            __dispatcher_return_data__
+            __dispatcher_return_data__,
         );
         ()
     }
