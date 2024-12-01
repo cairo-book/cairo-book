@@ -127,6 +127,15 @@ The `can_hold` method returns a `bool`, which means it’s a perfect use case fo
 {{#rustdoc_include ../listings/ch10-testing-cairo-programs/listing_10_03/src/lib.cairo:test1}}
 ```
 
+Note the `use super::*;` line inside the `tests` module. The `tests` module is
+a regular module that follows the usual visibility rules we covered in Chapter
+{{#chap paths-for-referring-to-an-item-in-the-module-tree}} in the [“Paths for Referring to an Item in the Module
+Tree”][paths-for-referring-to-an-item-in-the-module-tree]<!-- ignore -->
+section. Because the `tests` module is an inner module, we need to bring the
+code under test in the outer module into the scope of the inner module. We use
+a glob here, so anything we define in the outer module is available to this
+`tests` module.
+
 We’ve named our test `larger_can_hold_smaller`, and we’ve created the two `Rectangle` instances that we need. Then we called the `assert!` macro and passed it the result of calling `larger.can_hold(@smaller)`. This expression is supposed to return `true`, so our test should pass. Let’s find out!
 
 ```shell
@@ -464,5 +473,6 @@ Other information is also available such as memory holes (i.e., unused memory ce
 [go]: https://go.dev/doc/install
 [Graphviz]: https://www.graphviz.org/download/
 [pprof]: https://github.com/google/pprof?tab=readme-ov-file#building-pprof
+[paths-for-referring-to-an-item-in-the-module-tree]: ./ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md
 
 {{#quiz ../quizzes/ch10-01-how_to_write_tests.toml}}
