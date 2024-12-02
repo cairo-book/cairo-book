@@ -33,7 +33,7 @@ jobs:
         uses: foundry-rs/setup-snfoundry@v3
 
       - name: Setup Rust cache
-        uses: ./.github/workflows/setup-rust-cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook

@@ -1,0 +1,43 @@
+name: Common Setup
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      cache-hit: ${{ steps.cache-deps.outputs.cache-hit }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache dependencies
+        id: cache-deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/
+            ~/.pnpm-store
+            **/node_modules
+            bin/
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/Cargo.lock', '**/pnpm-lock.yaml', '.tool-versions') }}
+
+      - name: Install pnpm
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
+        uses: asdf-vm/actions/install@v3
+
+      - name: Set default scarb version # First version in .tool-versions
+        run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
+
+      - name: Setup Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install mdbook and tools
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        uses: ./.github/workflows/install-mdbook

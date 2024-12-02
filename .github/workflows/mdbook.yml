@@ -20,47 +20,30 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
-  publish:
+  setup:
+    uses: ./.github/workflows/common-setup.yml
+
+  build-and-deploy:
+    needs: setup
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
-        uses: asdf-vm/actions/install@v3
-
-      - name: Set default scarb version # First version in .tool-versions
-        run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
-
-      - name: Setup Rust cache
-        uses: ./.github/workflows/setup-rust-cache
-
-      - name: Install mdbook
-        uses: ./.github/workflows/install-mdbook
 
       - name: Build book (English)
         run: mdbook build -d book
 
-      - name: Copy WASM-Cairo pkg
+      - name: Copy WASM-Cairo assets
         run: |
           cp -r theme/pkg book/html
           cp -r theme/js book/html
 
-      - name: Build all translations
+      - name: Build translations
         run: |
           for po_lang in $(cat ./LANGUAGES); do
               echo "::group::Building $po_lang translation"
@@ -70,14 +53,10 @@ jobs:
               echo "::endgroup::"
           done
 
-      - name: Setup Pages
+      - name: Deploy to Pages
         uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+      - uses: actions/upload-pages-artifact@v1
         with:
           path: ./book/html
-
-      - name: Deploy to GitHub Pages
+      - uses: actions/deploy-pages@v2
         id: deployment
-        uses: actions/deploy-pages@v2
