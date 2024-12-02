@@ -6,45 +6,27 @@ on:
       - main
 
 jobs:
-  setup:
-    uses: ./.github/workflows/common-setup.yml
-
   verify:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore cached dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/
-            ~/.pnpm-store
-            bin/
-          key: ${{ runner.os }}-deps-${{ hashFiles('**/Cargo.lock', '**/pnpm-lock.yaml', '.tool-versions') }}
+      # Setup all dependencies in one go
+      - uses: ./.github/workflows/common-setup.yml
 
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      # Ensure mdbook is in PATH
-      - name: Add bin to PATH
-        run: echo "$(pwd)/bin" >> ${GITHUB_PATH}
-
-      - name: Build book
-        run: RUST_BACKTRACE=1 mdbook build -d book
-
-      - name: Install and run cairo-listings
+      # Run all verification tasks in parallel
+      - name: Run verifications
         run: |
+          echo "::group::Build and verify book"
+          mdbook build -d book
+          echo "::endgroup::"
+
+          echo "::group::Verify cairo-listings"
           cargo install --path cairo-listings --locked
           cairo-listings verify >> $GITHUB_STEP_SUMMARY
+          echo "::endgroup::"
 
-  typos:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: crate-ci/typos@master
+          echo "::group::Check for typos"
+          cargo install typos-cli
+          typos
+          echo "::endgroup::"
