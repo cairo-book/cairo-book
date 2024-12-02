@@ -186,10 +186,7 @@ was defined.
 
 The glob operator is often used when testing to bring everything under test
 into the `tests` module; we’ll talk about that in the [“How to Write
-Tests”][writing-tests]<!-- ignore --> section in Chapter {{#chap how-to-write-tests}}. The glob operator
-is also sometimes used as part of the prelude pattern: see [the standard
-library documentation](../std/prelude/index.html#other-preludes)<!-- ignore -->
-for more information on that pattern.
+Tests”][writing-tests] section in Chapter {{#chap how-to-write-tests}}.
 
 [writing-tests]: ./ch10-01-how-to-write-tests.md
 
