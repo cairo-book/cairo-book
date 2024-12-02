@@ -9,4 +9,4 @@ edition = "2024_07"
 no_listing_15_macro = { path = "../no_listing_15_macro" }
 
 [dev-dependencies]
-cairo_test = "2.7.0"
+cairo_test = "2.9.1"

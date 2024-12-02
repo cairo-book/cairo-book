@@ -6,21 +6,21 @@ mod NameRegistry {
     use core::starknet::{ContractAddress, get_caller_address};
     use core::starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, Map
+        StorageMapWriteAccess, Map,
     };
 
     #[storage]
     struct Storage {
         names: Map::<ContractAddress, felt252>,
         total_names: u128,
-        owner: Person
+        owner: Person,
     }
 
     //ANCHOR: person
     #[derive(Copy, Drop, Serde, starknet::Store)]
     struct Person {
         name: felt252,
-        address: ContractAddress
+        address: ContractAddress,
     }
     //ANCHOR_END: person
 
@@ -35,7 +35,7 @@ mod NameRegistry {
     struct StoredName {
         #[key]
         user: ContractAddress,
-        name: felt252
+        name: felt252,
     }
 
     // ANCHOR: state_internal

@@ -2,7 +2,7 @@
 mod VotingSystem {
     use starknet::{ContractAddress, get_caller_address};
     use core::starknet::storage::{
-        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
 
     #[storage]

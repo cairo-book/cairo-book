@@ -7,14 +7,13 @@ Cairo procedural macros are Rust functions that takes Cairo code as input and re
 There are three types of procedural macros in Cairo:
 
 - **Expression Macros** (`macro!()`):
-   These macros are used like function calls and can generate code based on their arguments.
+  These macros are used like function calls and can generate code based on their arguments.
 
 - **Attribute Macros** (`#[macro]`):
-   These macros can be attached to items like functions or structs to modify their behavior or implementation.
+  These macros can be attached to items like functions or structs to modify their behavior or implementation.
 
 - **Derive Macros** (`#[derive(Macro)]`):
-   These macros automatically implement traits for structs or enums.
-
+  These macros automatically implement traits for structs or enums.
 
 ## Creating a Procedural Macro
 
@@ -42,8 +41,9 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.7.0"
+cairo_test = "2.9.1"
 ```
+
 {{#label procedural-macros-scarb-file}}
 <span class="caption">Listing {{#ref procedural-macros-scarb-file}}: Example `Scarb.toml` file needed for building a procedural macro.</span>
 
@@ -60,8 +60,8 @@ crate-type = ["cdylib"]
 [dependencies]
 bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1"
-cairo-lang-parser = "2.7.0"
-cairo-lang-syntax = "2.7.0"
+cairo-lang-parser = "2.9.1"
+cairo-lang-syntax = "2.9.1"
 
 [workspace]
 ```

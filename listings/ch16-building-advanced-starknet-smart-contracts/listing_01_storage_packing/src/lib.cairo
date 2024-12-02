@@ -42,7 +42,7 @@ mod SizeFactory {
 
     #[storage]
     struct Storage {
-        remaining_sizes: Sizes
+        remaining_sizes: Sizes,
     }
 
     #[abi(embed_v0)]
@@ -69,7 +69,7 @@ mod tests {
 
     #[test]
     fn test_pack_unpack() {
-        let value = Sizes { tiny: 0x12, small: 0x12345678, medium: 0x1234567890, };
+        let value = Sizes { tiny: 0x12, small: 0x12345678, medium: 0x1234567890 };
 
         let packed = SizesStorePacking::pack(value);
         assert(packed == 0x12345678901234567812, 'wrong packed value');

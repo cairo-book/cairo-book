@@ -25,6 +25,6 @@ fn main() {
     let expected = Rectangle { width: 5, height: 5 };
     assert!(
         result == expected,
-        "A square is always convertible to a rectangle with the same width and height!"
+        "A square is always convertible to a rectangle with the same width and height!",
     );
 }

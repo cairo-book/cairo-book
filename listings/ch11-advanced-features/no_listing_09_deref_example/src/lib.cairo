@@ -24,7 +24,7 @@ impl DerefWrapper<T> of Deref<Wrapper<T>> {
 // ANCHOR: main
 fn main() {
     let wrapped_profile = Wrapper {
-        value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 }
+        value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 },
     };
     // Access fields directly via deref coercion
     println!("Username: {}", wrapped_profile.username);

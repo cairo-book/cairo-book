@@ -4,7 +4,7 @@ trait Two<T> {
 
 mod one_based {
     pub impl TwoImpl<
-        T, +Copy<T>, +Drop<T>, +Add<T>, impl One: core::num::traits::One<T>
+        T, +Copy<T>, +Drop<T>, +Add<T>, impl One: core::num::traits::One<T>,
     > of super::Two<T> {
         fn two() -> T {
             One::one() + One::one()

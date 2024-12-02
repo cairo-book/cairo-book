@@ -3,7 +3,7 @@
 enum DayType {
     Week,
     Weekend,
-    Holiday
+    Holiday,
 }
 // ANCHOR_END: enum_def
 

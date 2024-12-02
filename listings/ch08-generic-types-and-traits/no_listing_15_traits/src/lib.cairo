@@ -51,7 +51,7 @@ fn main() {
         username: "EliBenSasson",
         content: "Crypto is full of short-term maximizing projects. \n @Starknet and @StarkWareLtd are about long-term vision maximization.",
         reply: false,
-        retweet: false
+        retweet: false,
     }; // Tweet instantiation
 
     println!("New article available! {}", news.summarize());

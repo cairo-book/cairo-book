@@ -1,6 +1,6 @@
 #[derive(PartialEq, Drop)]
 struct A {
-    item: felt252
+    item: felt252,
 }
 
 fn main() {

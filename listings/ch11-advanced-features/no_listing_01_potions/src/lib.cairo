@@ -1,11 +1,11 @@
 struct Potion {
     health: felt252,
-    mana: felt252
+    mana: felt252,
 }
 
 impl PotionAdd of Add<Potion> {
     fn add(lhs: Potion, rhs: Potion) -> Potion {
-        Potion { health: lhs.health + rhs.health, mana: lhs.mana + rhs.mana, }
+        Potion { health: lhs.health + rhs.health, mana: lhs.mana + rhs.mana }
     }
 }
 

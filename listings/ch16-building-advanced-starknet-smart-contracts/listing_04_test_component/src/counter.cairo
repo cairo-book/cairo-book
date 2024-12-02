@@ -13,12 +13,12 @@ pub mod CounterComponent {
 
     #[storage]
     pub struct Storage {
-        value: u32
+        value: u32,
     }
 
     #[embeddable_as(CounterImpl)]
     impl Counter<
-        TContractState, +HasComponent<TContractState>
+        TContractState, +HasComponent<TContractState>,
     > of super::ICounter<ComponentState<TContractState>> {
         //ANCHOR: get_counter
         fn get_counter(self: @ComponentState<TContractState>) -> u32 {

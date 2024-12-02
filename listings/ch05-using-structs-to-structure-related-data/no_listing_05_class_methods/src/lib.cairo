@@ -21,7 +21,7 @@ impl RectangleImpl of RectangleTrait {
 
     fn avg(lhs: @Rectangle, rhs: @Rectangle) -> Rectangle {
         Rectangle {
-            width: ((*lhs.width) + (*rhs.width)) / 2, height: ((*lhs.height) + (*rhs.height)) / 2
+            width: ((*lhs.width) + (*rhs.width)) / 2, height: ((*lhs.height) + (*rhs.height)) / 2,
         }
     }
 }
@@ -36,7 +36,7 @@ fn main() {
         "The average Rectangle of {:?} and {:?} is {:?}",
         @rect1,
         @rect2,
-        RectangleTrait::avg(@rect1, @rect2)
+        RectangleTrait::avg(@rect1, @rect2),
     );
 }
 // ANCHOR_END: main

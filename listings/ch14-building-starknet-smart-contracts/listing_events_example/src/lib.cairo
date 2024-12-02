@@ -29,27 +29,27 @@ mod EventExample {
         pub id: u32,
         pub title: felt252,
         #[key]
-        pub author: felt252
+        pub author: felt252,
     }
 
     #[derive(Drop, starknet::Event)]
     pub enum FieldUpdated {
         Title: UpdatedTitleData,
-        Author: UpdatedAuthorData
+        Author: UpdatedAuthorData,
     }
 
     #[derive(Drop, starknet::Event)]
     pub struct UpdatedTitleData {
         #[key]
         pub id: u32,
-        pub new_title: felt252
+        pub new_title: felt252,
     }
 
     #[derive(Drop, starknet::Event)]
     pub struct UpdatedAuthorData {
         #[key]
         pub id: u32,
-        pub new_author: felt252
+        pub new_author: felt252,
     }
 
     #[derive(Drop, starknet::Event)]

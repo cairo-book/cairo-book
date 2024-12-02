@@ -14,7 +14,7 @@ impl GuessImpl of GuessTrait {
             panic!("Guess must be >= 1 and <= 100");
         }
 
-        Guess { value, }
+        Guess { value }
     }
 }
 // ANCHOR_END: here

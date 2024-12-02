@@ -9,6 +9,6 @@ fn main() -> u128 {
                 .unbox() // Don't worry about * for now, if you are curious see Chapter 4.2 #desnap operator
             // It basically means "transform what get(idx) returned into a real value"
         },
-        Option::None => { panic!("out of bounds") }
+        Option::None => { panic!("out of bounds") },
     }
 }

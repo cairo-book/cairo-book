@@ -17,7 +17,7 @@ trait IERC20<TContractState> {
     fn transfer(ref self: TContractState, recipient: ContractAddress, amount: u256) -> bool;
 
     fn transfer_from(
-        ref self: TContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256
+        ref self: TContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256,
     ) -> bool;
 
     fn approve(ref self: TContractState, spender: ContractAddress, amount: u256) -> bool;
@@ -28,7 +28,10 @@ trait ITokenWrapper<TContractState> {
     fn token_name(self: @TContractState, contract_address: ContractAddress) -> felt252;
 
     fn transfer_token(
-        ref self: TContractState, address: ContractAddress, recipient: ContractAddress, amount: u256
+        ref self: TContractState,
+        address: ContractAddress,
+        recipient: ContractAddress,
+        amount: u256,
     ) -> bool;
 }
 
@@ -54,7 +57,7 @@ mod TokenWrapper {
             ref self: ContractState,
             address: ContractAddress,
             recipient: ContractAddress,
-            amount: u256
+            amount: u256,
         ) -> bool {
             let erc20_dispatcher = IERC20Dispatcher { contract_address: address };
             erc20_dispatcher.transfer_from(get_caller_address(), recipient, amount)

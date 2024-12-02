@@ -4,7 +4,7 @@ const TWO_TEN: u128 = pow!(12, 2);
 #[derive(Add, AddAssign, Sub, SubAssign, Mul, MulAssign, Div, DivAssign, Debug, Drop, PartialEq)]
 pub struct B {
     pub a: u8,
-    pub b: u16
+    pub b: u16,
 }
 // ANCHOR_END: derive_macro
 
@@ -32,7 +32,7 @@ mod tests {
         assert_eq!(pow!(20, 30), 1073741824000000000000000000000000000000_felt252);
         assert_eq!(
             pow!(2, 255),
-            57896044618658097711785492504343953926634992332820282019728792003956564819968_u256
+            57896044618658097711785492504343953926634992332820282019728792003956564819968_u256,
         );
     }
     // ANCHOR_END: pow_macro

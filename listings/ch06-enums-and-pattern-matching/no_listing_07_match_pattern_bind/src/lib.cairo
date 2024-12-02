@@ -24,7 +24,7 @@ fn value_in_cents(coin: Coin) -> felt252 {
         Coin::Quarter(state) => {
             println!("State quarter from {:?}!", state);
             25
-        }
+        },
     }
 }
 // ANCHOR_END: function

@@ -19,7 +19,7 @@ mod OwnableCounterComponent {
 
     #[storage]
     pub struct Storage {
-        value: u32
+        value: u32,
     }
 
     //ANCHOR: component_impl
@@ -29,7 +29,7 @@ mod OwnableCounterComponent {
         TContractState,
         +HasComponent<TContractState>,
         +Drop<TContractState>,
-        impl Owner: ownable_component::HasComponent<TContractState>
+        impl Owner: ownable_component::HasComponent<TContractState>,
     > of super::IOwnableCounter<ComponentState<TContractState>> {
         //ANCHOR_END: component_signature
         //ANCHOR: get_counter
@@ -48,7 +48,7 @@ mod OwnableCounterComponent {
 
         //ANCHOR: transfer_ownership
         fn transfer_ownership(
-            ref self: ComponentState<TContractState>, new_owner: ContractAddress
+            ref self: ComponentState<TContractState>, new_owner: ContractAddress,
         ) {
             let mut ownable_comp = get_dep_component_mut!(ref self, Owner);
             ownable_comp._transfer_ownership(new_owner);

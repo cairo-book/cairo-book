@@ -3,7 +3,7 @@ use core::fmt::{Display, Formatter, Error};
 #[derive(Copy, Drop)]
 struct Point {
     x: u8,
-    y: u8
+    y: u8,
 }
 
 impl PointDisplay of Display<Point> {
