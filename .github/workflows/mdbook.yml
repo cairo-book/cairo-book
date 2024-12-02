@@ -35,6 +35,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Restore cached dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/
+            ~/.pnpm-store
+            **/node_modules
+            bin/
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/Cargo.lock', '**/pnpm-lock.yaml', '.tool-versions') }}
+
+      - name: Add bin to PATH
+        run: echo "$(pwd)/bin" >> ${GITHUB_PATH}
+
       - name: Build book (English)
         run: mdbook build -d book
 

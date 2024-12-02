@@ -15,6 +15,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Restore cached dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/
+            ~/.pnpm-store
+            **/node_modules
+            bin/
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/Cargo.lock', '**/pnpm-lock.yaml', '.tool-versions') }}
+
+      # Ensure mdbook is in PATH
+      - name: Add bin to PATH
+        run: echo "$(pwd)/bin" >> ${GITHUB_PATH}
+
       - name: Build book
         run: mdbook build -d book
 
