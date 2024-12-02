@@ -22,7 +22,7 @@ impl GuessImpl of GuessTrait {
 
 #[cfg(test)]
 mod tests {
-    use super::GuessTrait;
+    use super::*;
 
     #[test]
     #[should_panic(expected: "Guess must be <= 100")]

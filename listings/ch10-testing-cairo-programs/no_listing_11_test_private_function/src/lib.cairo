@@ -8,7 +8,7 @@ fn internal_adder(a: u32, b: u32) -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use super::internal_adder;
+    use super::*;
 
     #[test]
     fn add() {

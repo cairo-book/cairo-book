@@ -36,7 +36,7 @@ fn vending_week_machine(c: (DayType, Coin)) -> bool {
 
 #[cfg(test)]
 mod test {
-    use super::{DayType, Coin, vending_machine_accept};
+    use super::*;
 
     #[test]
     #[available_gas(2000000)]
