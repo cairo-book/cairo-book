@@ -68,8 +68,11 @@ The `at` function, and its equivalent the subscripting operator, on the other ha
 
 ```cairo
 {{#include ../listings/ch03-common-collections/no_listing_04_array_at/src/lib.cairo}}
+//  The first element of the array 'a', accessed using the .at() method.
+let first = *(a.at(0)); 
+// The second element of the array 'a', accessed using the .at() method.
+let second = *(a.at(1)); 
 ```
-
 In this example, the variable named `first` will get the value `0` because that
 is the value at index `0` in the array. The variable named `second` will get
 the value `1` from index `1` in the array.
