@@ -4,8 +4,3 @@ version = "0.1.0"
 edition = "2024_07"
 
 [cairo-plugin]
-
-[dependencies]
-
-[dev-dependencies]
-cairo_test = "2.9.1"

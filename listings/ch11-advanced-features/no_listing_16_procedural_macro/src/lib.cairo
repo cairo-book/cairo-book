@@ -1,4 +1,3 @@
-use no_listing_15_macro::pow;
 const TWO_TEN: u128 = pow!(12, 2);
 
 // ANCHOR: derive_macro

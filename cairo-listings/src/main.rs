@@ -147,8 +147,16 @@ fn process_file(manifest_path: &str, args: &VerifyArgs) {
         .join("src/lib.cairo");
     let file_path = file_path.to_str().unwrap();
 
-    let file =
-        File::open(file_path).unwrap_or_else(|_| panic!("Failed to open file {}", file_path));
+    let file = match File::open(file_path) {
+        Ok(f) => f,
+        Err(_) => {
+            println!(
+                "{}",
+                format!("Warning: Failed to open file {}", file_path).yellow()
+            );
+            return;
+        }
+    };
     let reader = BufReader::new(file);
 
     // Parsed tags (if any)
@@ -244,9 +252,16 @@ fn process_file_format(manifest_path: &str, args: &VerifyArgs) {
         .unwrap()
         .join("src/lib.cairo");
     let file_path = file_path.to_str().unwrap();
-
-    let file =
-        File::open(file_path).unwrap_or_else(|_| panic!("Failed to open file {}", file_path));
+    let file = match File::open(file_path) {
+        Ok(f) => f,
+        Err(_) => {
+            println!(
+                "{}",
+                format!("Warning: Failed to open file {}", file_path).yellow()
+            );
+            return;
+        }
+    };
     let reader = BufReader::new(file);
 
     // Parsed tags (if any)
