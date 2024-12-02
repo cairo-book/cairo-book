@@ -5,11 +5,11 @@ of arbitrary computation. STARK-friendly means that the Cairo design favors the 
 proof system while being capable of using another proof system backend.
 It is a Turing-complete process virtual machine.
 
-Cairo is made of three software:
+Cairo is made of three softwares:
 
-1. Cairo compiler
-2. Cairo Virtual Machine (CairoVM)
-3. Cairo prover and verifier
+1. The Cairo compiler
+2. The Cairo Virtual Machine (CairoVM)
+3. The Cairo prover and verifier
 
 The Cairo compiler transforms the Cairo code you've written to Cairo bytecode (encoded instructions and metadata).
 We usually refer to the compiler output as the _compilation artifacts_.
@@ -18,7 +18,7 @@ The CairoVM implements the theoretic _Cairo machine_,
 reading the compilation artifacts and executing the instructions
 to produce the information required by the prover to generate a proof,
 and for the verifier to verify it.
-Its outputs are referred to as the _AIR private input_ (witness) and _AIR public input_:
+Its outputs are referred to as the _AIR (Arithmetic Intermediate Representation) private input_ (witness) and _AIR public input_:
 
 - The AIR private input includes the _execution trace_, or simply the trace, and the _memory_.
 - The AIR public input includes the _initial & final states_ — the first and last entry of the trace —
@@ -30,7 +30,7 @@ of the corresponding program execution.
 The verifier can then (i.e. asynchronously) verify the
 proof's correctness, given the proof and the AIR public input.
 
-What are AIRs though?
+What are AIRs, though?
 
 ## Arithmetic Intermediate Representation - AIR
 
@@ -38,7 +38,7 @@ AIR stands for _Arithmetic Intermediate Representation_, which is an arithmetiza
 technique. Arithmetization is the basis of every proof system: STARK uses AIRs,
 though other proof systems might rely on different techniques (e.g. R1CS, PLONKish arithmetization...).
 It allows converting a computational statement into a set of polynomial equations.
-Those polynomial equations then represent the constraints of your system:
+These polynomial equations then represent the constraints of your system:
 If they all hold while following the proof system protocol, then the proof is valid;
 otherwise, it's not.
 
@@ -70,7 +70,7 @@ Two models define the Cairo Machine:
 - Memory model - Non-deterministic Read-only Memory
 
 The Execution model defines the ISA: the instruction set, the registers `(pc, ap, fp)`, and
-the state transition algorithm. Cairo has its own ISA optimized for proof generation/verification: it is a custom ZK-ISA, compared to general-purpose ISA such as RISC-V.
+the state transition algorithm. Cairo has its own ISA optimized for proof generation/verification: it is a custom ZK-ISA, oppsed to general-purpose ISA such as RISC-V.
 The Memory model defines how the CPU interacts with the memory.
 Following a Von Neumann architecture, the same memory stores both the program and instruction data.
 
@@ -83,13 +83,13 @@ Why are there two versions of the Cairo machine, one for the prover and one for 
 
 The deterministic machine takes a trace (a sequence of states) and the whole memory
 (a memory function), and verifies that the transition between two consecutive states is valid.
-It returns 'accept' if all state transitions are valid and 'reject' otherwise.
+It returns `accept` if all state transitions are valid and `reject` otherwise.
 This machine does not perform any computation, it only asserts the validity of a trace
 and its memory.
 
 The non-deterministic machine relies on the deterministic one: it only takes the initial
 state, the final state, and a partial memory function (i.e. the public memory)
-and returns 'accept' if there exists a sequence of states (a trace)
+and returns `accept` if there exists a sequence of states (a trace)
 with the same initial and final states and a memory function that extends the partial memory
 (a whole memory that includes the public-memory) which is accepted by the deterministic machine.
 
@@ -99,12 +99,12 @@ machine allows the verifier to verify the proof succinctly in a zero-knowledge w
 
 The CairoVM is the implementation of this theoretical machine,
 including some functionalities to benefit from its design (_builtins_ & _hints_).
-Among the various implementations of the CairoVM, what we call the Cairo Runner is the
+Among the various implementations of the CairoVM, what we call the _Cairo Runner_ is the
 entrypoint for running a Cairo program and generating the AIR inputs needed for proof.
 
 When a Cairo program is executed by the CairoVM, we could view the memory model as a Write-Once one.
 
-#### Recap - Differences between the two Cairo machine
+#### Recap - Differences between the two Cairo machines
 
 We could recap in a table the key differences between the deterministic Cairo machine,
 and the non-deterministic one.
