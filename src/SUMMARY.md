@@ -169,7 +169,7 @@
 
 - [Introduction](ch200-introduction.md)
 
-- [Architecture]()
+- [Architecture](ch201-architecture.md)
 
 ## Memory
 
