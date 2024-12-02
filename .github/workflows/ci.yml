@@ -21,10 +21,16 @@ jobs:
           path: |
             ~/.cargo/
             ~/.pnpm-store
-            **/node_modules
             bin/
           key: ${{ runner.os }}-deps-${{ hashFiles('**/Cargo.lock', '**/pnpm-lock.yaml', '.tool-versions') }}
 
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       # Ensure mdbook is in PATH
       - name: Add bin to PATH
         run: echo "$(pwd)/bin" >> ${GITHUB_PATH}
