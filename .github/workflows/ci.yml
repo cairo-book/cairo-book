@@ -6,15 +6,18 @@ on:
       - main
 
 jobs:
+  # First call the reusable workflow as a job
+  setup:
+    uses: ./.github/workflows/common-setup.yml
+
+  # Then use it as a dependency for our verify job
   verify:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      # Setup all dependencies in one go
-      - uses: ./.github/workflows/common-setup.yml
-
-      # Run all verification tasks in parallel
+      # Verification steps (after setup is complete)
       - name: Run verifications
         run: |
           echo "::group::Build and verify book"
