@@ -18,7 +18,7 @@ However, Cairo's potential extends beyond blockchain. Any scenario where computa
 
 This book caters to three main audiences, each with their own learning path:
 
-1. **General-Purpose Developers**: If you're interested in Cairo for its verifiable computation capabilities outside of blockchain, you'll want to focus on chapters {{#chap getting-started}}-{{#chap advanced-features}}. These chapters cover the core language features and programming concepts without diving deep into smart contract specifics.
+1. **General-Purpose Developers**: If you're interested in Cairo for its verifiable computation capabilities outside of blockchain, you'll want to focus on chapters {{#chap getting-started}}-{{#chap advanced-cairo-features}}. These chapters cover the core language features and programming concepts without diving deep into smart contract specifics.
 
 2. **New Smart Contract Developers**: If you're new to both Cairo and smart contracts, we recommend reading the book front to back. This will give you a solid foundation in both the language fundamentals and smart contract development principles.
 
