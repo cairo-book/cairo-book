@@ -30,7 +30,7 @@ jobs:
         run: echo "$(pwd)/bin" >> ${GITHUB_PATH}
 
       - name: Build book
-        run: mdbook build -d book
+        run: RUST_BACKTRACE=1 mdbook build -d book
 
       - name: Install and run cairo-listings
         run: |
