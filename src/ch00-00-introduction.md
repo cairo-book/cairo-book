@@ -2,22 +2,33 @@
 
 ## What is Cairo?
 
-Cairo is a programming language designed for a virtual CPU of the same name. The unique aspect of this processor is that it was not created for the physical constraints of our world but for cryptographic ones, making it capable of efficiently proving the execution of any program running on it. This means that you can perform time consuming operations on a machine you don't trust, and check the result very quickly on a cheaper machine.
-While Cairo 0 used to be directly compiled to CASM, the Cairo CPU assembly, Cairo 1 is a higher level language. It first compiles to Sierra, an intermediate representation of Cairo which will compile later down to a safe subset of CASM. The point of Sierra is to ensure your CASM will always be provable, even when the computation fails.
+Cairo is a programming language designed to leverage the power of mathematical proofs for computational integrity. Just as C.S. Lewis defined integrity as "doing the right thing, even when no one is watching," Cairo enables programs to prove they've done the right computation, even when executed on untrusted machines.
 
-## What Can you Do with It?
+The language is built on STARK technology, a modern evolution of PCP (Probabilistically Checkable Proofs) that transforms computational claims into constraint systems. While Cairo's ultimate purpose is to generate these mathematical proofs that can be verified efficiently and with absolute certainty.
 
-Cairo allows you to compute trustworthy values on untrusted machines. One major usecase is Starknet, a solution to Ethereum scaling. Ethereum is a decentralized blockchain platform that enables the creation of decentralized applications where every single interaction between a user and a d-app is verified by all the participants. Starknet is a Layer 2 built on top of Ethereum. Instead of having all the participants of the network to verify all user interactions, only one node, called the prover, executes the programs and generates proofs that the computations were done correctly. These proofs are then verified by an Ethereum smart contract, requiring significantly less computational power compared to executing the interactions themselves. This approach allows for increased throughput and reduced transaction costs while preserving Ethereum security.
+## What Can You Do with It?
 
-## What Are the Differences with Other Programming Languages?
+Cairo enables a paradigm shift in how we think about trusted computation. Its primary application today is Starknet, a Layer 2 scaling solution for Ethereum that addresses one of blockchain's fundamental challenges: scalability without sacrificing security.
 
-Cairo is quite different from traditional programming languages, especially when it comes to overhead costs and its primary advantages. Your program can be executed in two different ways:
+In the traditional blockchain model, every participant must verify every computation. Starknet changes this by using Cairo's proof system: computations are executed off-chain by a prover who generates a STARK proof, which is then verified by an Ethereum smart contract. This verification requires significantly less computational power than re-executing the computations, enabling massive scalability while maintaining security.
 
-- When executed by the prover, it is similar to any other language. Because Cairo is virtualized, and because the operations were not specifically designed for maximum efficiency, this can lead to some performance overhead but it is not the most relevant part to optimize.
+However, Cairo's potential extends beyond blockchain. Any scenario where computational integrity needs to be verified efficiently can benefit from Cairo's verifiable computation capabilities.
 
-- When the generated proof is verified by a verifier, it is a bit different. This has to be as cheap as possible since it could potentially be verified on many very small machines. Fortunately verifying is faster than computing and Cairo has some unique advantages to improve it even more. A notable one is non-determinism. This is a topic you will cover in more detail later in this book, but the idea is that you can theoretically use a different algorithm for verifying than for computing. Currently, writing custom non-deterministic code is not supported for the developers, but the standard library leverages non-determinism for improved performance. For example sorting an array in Cairo costs the same price as copying it. Because the verifier doesn't sort the array, it just checks that it is sorted, which is cheaper.
+## Who Is This Book For?
 
-Another aspect that sets the language apart is its memory model. In Cairo, memory access is immutable, meaning that once a value is written to memory, it cannot be changed. Cairo 1 provides abstractions that help developers work with these constraints, but it does not fully simulate mutability. Therefore, developers must think carefully about how they manage memory and data structures in their programs to optimize performance.
+This book caters to three main audiences, each with their own learning path:
+
+1. **General-Purpose Developers**: If you're interested in Cairo for its verifiable computation capabilities outside of blockchain, you'll want to focus on chapters {{#chap getting-started}}-{{#chap advanced-cairo-features}}. These chapters cover the core language features and programming concepts without diving deep into smart contract specifics.
+
+2. **New Smart Contract Developers**: If you're new to both Cairo and smart contracts, we recommend reading the book front to back. This will give you a solid foundation in both the language fundamentals and smart contract development principles.
+
+3. **Experienced Smart Contract Developers**: If you're already familiar with smart contract development in other languages, or Rust, you might want to follow this focused path:
+   - Chapters {{#chap getting-started}}-{{#chap common-collections}} for Cairo basics
+   - Chapter {{#chap generic-types-and-traits}} for Cairo's trait and generics system
+   - Skip to Chapter {{#chap building-starknet-smart-contracts}} for smart contract development
+   - Reference other chapters as needed
+
+Regardless of your background, this book assumes basic programming knowledge such as variables, functions, and common data structures. While prior experience with Rust can be helpful (as Cairo shares many similarities), it's not required.
 
 ## References
 
