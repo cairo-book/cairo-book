@@ -119,5 +119,5 @@
 - [Website](https://www.cairo-lang.org/)
 - [Discord](https://starknet.io/discord/)
 - [X](https://twitter.com/CairoLang)
-- [Github](https://github.com/starkware-libs/cairo)
+- [Github](https://github.com/cairo-book/cairo-book)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/cairo-lang)
