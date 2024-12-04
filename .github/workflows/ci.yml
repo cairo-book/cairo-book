@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - ci/dependency-caching
 
 jobs:
   compile_and_verify:
@@ -13,10 +14,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache pnpm and node modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules
+          key: pnpm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
+      - name: Cache asdf tools
+        uses: actions/cache@v3
+        with:
+          path: ~/.asdf
+          key: asdf-${{ runner.os }}-${{ hashFiles('.tool-versions') }}
+          restore-keys: |
+            asdf-${{ runner.os }}-
 
       - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
         uses: asdf-vm/actions/install@v3
@@ -29,6 +48,16 @@ jobs:
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
+
+      - name: Cache mdbook dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: mdbook-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            mdbook-${{ runner.os }}-
 
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
