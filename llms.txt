@@ -2,13 +2,6 @@
 
 ## Docs
 
-- [Appendix A - Keywords](https://book.cairo-lang.org/appendix-01-keywords) : The following list contains keywords that are reserved for current or future use by the Cairo language.
-- [Appendix B - Operators and Symbols](https://book.cairo-lang.org/appendix-02-operators-and-symbols): This appendix contains a glossary of Cairo's syntax, including operators and other symbols that appear by themselves or in the context of paths, generics, macros, attributes, comments, tuples, and brackets.
-- [Appendix C - Derivable Traits](https://book.cairo-lang.org/appendix-03-derivable-traits): In this appendix, we provide a comprehensive reference detailing all the traits in the standard library compatible with the derive attribute.
-- [Appendix D - The Cairo Prelude](https://book.cairo-lang.org/appendix-04-cairo-prelude): Cairo's prelude provides the basic building blocks developers need to start Cairo programs and writing smart contracts.
-- [Appendix E - Common Error Messages](https://book.cairo-lang.org/appendix-05-common-error-messages): Listing of the most common error messages in this appendix to help resolve common issues.
-- [Appendix F - Useful Development Tools](https://book.cairo-lang.org/appendix-06-useful-development-tools): In this appendix, we talk about some useful development tools that the Cairo project provides. We’ll look at automatic formatting, quick ways to apply warning fixes, a linter, and integrating with IDEs.
-- [Appendix A - System Calls](https://book.cairo-lang.org/appendix-08-system-calls): Listing of Starknet system calls
 - [Introduction](https://book.cairo-lang.org/ch00-00-introduction): Introduction of Cairo and the book
 - [Foreword](https://book.cairo-lang.org/ch00-01-foreword): The purpose of Cairo
 - [Getting Started](https://book.cairo-lang.org/ch01-00-getting-started): Introduction to chapter 1 to start using Cairo.
@@ -62,7 +55,13 @@
 - [Arithmetic Circuits](https://book.cairo-lang.org/ch11-10-arithmetic-circuits): How to use Arithmetic Circuits. Arithmetic circuits are mathematical models used to represent polynomial computations.
 - [Associated Items](https://book.cairo-lang.org/ch11-10-associated-items): How to use Associated Items. Associated Items are the items declared in traits or defined in implementations.
 - [Procedural Macros](https://book.cairo-lang.org/ch11-10-procedural-macros): How to use Procedural Macros. Cairo procedural macros are Rust functions that takes Cairo code as input and returns a modified Cairo code as output, enabling developers to extend Cairo's syntax and create reusable code patterns.
-- [Introduction to Starknet Smart Contracts](https://book.cairo-lang.org/ch13-00-introduction-to-starknet-smart-contracts): Introduction to chapter 13 to learn about Starknet Smart Contracts. All through the previous sections, you've mostly written programs with a main entrypoint. In the coming sections, you will learn to write and deploy Starknet contracts.
+- [Appendix A - Keywords](https://book.cairo-lang.org/appendix-01-keywords) : The following list contains keywords that are reserved for current or future use by the Cairo language.
+- [Appendix B - Operators and Symbols](https://book.cairo-lang.org/appendix-02-operators-and-symbols): This appendix contains a glossary of Cairo's syntax, including operators and other symbols that appear by themselves or in the context of paths, generics, macros, attributes, comments, tuples, and brackets.
+- [Appendix C - Derivable Traits](https://book.cairo-lang.org/appendix-03-derivable-traits): In this appendix, we provide a comprehensive reference detailing all the traits in the standard library compatible with the derive attribute.
+- [Appendix D - The Cairo Prelude](https://book.cairo-lang.org/appendix-04-cairo-prelude): Cairo's prelude provides the basic building blocks developers need to start Cairo programs and writing smart contracts.
+- [Appendix E - Common Error Messages](https://book.cairo-lang.org/appendix-05-common-error-messages): Listing of the most common error messages in this appendix to help resolve common issues.
+- [Appendix F - Useful Development Tools](https://book.cairo-lang.org/appendix-06-useful-development-tools): In this appendix, we talk about some useful development tools that the Cairo project provides. We’ll look at automatic formatting, quick ways to apply warning fixes, a linter, and integrating with IDEs.
+- [Introduction to Starknet Smart Contracts](https://book.cairo-lang.org/ch13-00-introduction-to-starknet-smart-contracts): Introduction to chapter 13 to learn about Starknet Smart Contracts. All through the previous sections, the programs were written with a main entrypoint. In the coming sections, we focus on writing and deploying Starknet contracts.
 - [General Introduction to Smart Contracts](https://book.cairo-lang.org/ch13-01-general-introduction-to-smart-contracts): High level introduction to what smart contracts are, what they are used for, and why blockchain developers would use Cairo and Starknet.
 - [Anatomy of a Simple Contract](https://book.cairo-lang.org/ch13-02-anatomy-of-a-simple-contract): Introduction to the anatomy of a simple contract.
 - [Building Starknet Smart Contracts](https://book.cairo-lang.org/ch14-00-building-starknet-smart-contracts): Introduction to chapter 14 to learn how to build Starknet Smart Contracts.
@@ -92,6 +91,7 @@
 - [General Recommendations](https://book.cairo-lang.org/ch17-01-general-recommendations): General recommendations for writing secure smart contracts.
 - [Testing Smart Contracts](https://book.cairo-lang.org/ch17-02-testing-smart-contracts): How to test smart contracts.
 - [Static Analysis Tools](https://book.cairo-lang.org/ch17-03-static-analysis-tools): How to use static analysis tools.
+- [Appendix A - System Calls](https://book.cairo-lang.org/appendix-08-system-calls): Listing of Starknet system calls
 - [Introduction](https://book.cairo-lang.org/ch200-introduction): Introduction to the Cairo VM.
 - [Architecture](https://book.cairo-lang.org/ch201-architecture): What is the architecture of Cairo. Cairo is a STARK-friendly Von Neumann architecture capable of generating validity proofs for arbitrary computations. Being STARK-friendly means that Cairo's design is optimized for the STARK proof system, while remaining compatible with other proof system backends. It implements a Turing-complete process virtual machine.
 - [Builtins](https://book.cairo-lang.org/ch204-00-builtins): Introduction to chapter 20.4 to learn about the builtins in Cairo. The Cairo whitepaper defines builtins as "predefined optimized low-level execution units".
