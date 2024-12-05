@@ -60,6 +60,9 @@ jobs:
           cp -r theme/pkg book/html
           cp -r theme/js book/html
 
+      - name: Copy LLMs file
+        run: cp llms.txt book/html/
+
       - name: Build all translations
         run: |
           for po_lang in $(cat ./LANGUAGES); do
