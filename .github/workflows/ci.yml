@@ -37,6 +37,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
+      - name: Create package.json if not exists
+        run: |
+          if [ ! -f package.json ]; then
+            echo '{"name": "cairo-book", "version": "1.0.0", "private": true}' > package.json
+          fi
+
       - name: Install dependencies
         run: pnpm install
 
