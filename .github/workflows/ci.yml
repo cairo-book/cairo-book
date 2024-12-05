@@ -16,54 +16,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
       - name: Cache pnpm and node modules
         uses: actions/cache@v3
         with:
           path: |
-            ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+            ~/.pnpm-store
             node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-
+            pnpm-${{ runner.os }}-
 
-      - name: Create package.json if not exists
-        run: |
-          if [ ! -f package.json ]; then
-            echo '{"name": "cairo-book", "version": "1.0.0", "private": true}' > package.json
-          fi
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Cache asdf tools
         uses: actions/cache@v3
-        id: asdf-cache
         with:
           path: |
             ~/.asdf
             ~/.cache/scarb
             ~/.cache/starknet-foundry
-          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions') }}
+          key: asdf-${{ runner.os }}-${{ hashFiles('.tool-versions') }}
           restore-keys: |
-            ${{ runner.os }}-asdf-
+            asdf-${{ runner.os }}-
 
-      - name: Install asdf & tools
+      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
         uses: asdf-vm/actions/install@v3
-        if: steps.asdf-cache.outputs.cache-hit != 'true'
 
-      - name: Set default scarb version
-        run: asdf global scarb $(grep scarb .tool-versions | cut -d ' ' -f 2 | head -n 1)
+      - name: Set default scarb version # First version in .tool-versions
+        run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Setup Starknet-Foundry
         uses: foundry-rs/setup-snfoundry@v3
@@ -75,31 +58,32 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-rust-${{ hashFiles('**/Cargo.lock') }}
+          key: rust-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-rust-
+            rust-${{ runner.os }}-
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
       - name: Cache mdbook dependencies
+        id: cache-mdbook
         uses: actions/cache@v3
-        id: mdbook-cache
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
             target
+            bin
             ~/.cargo/bin
             mdbook-quiz-cairo
             ~/.local/bin
-          key: ${{ runner.os }}-mdbook-${{ hashFiles('**/Cargo.lock', '**/pnpm-lock.yaml', 'mdbook-quiz-cairo/Cargo.toml') }}
+          key: mdbook-${{ runner.os }}-${{ hashFiles('**/Cargo.lock', '**/package-lock.json', 'mdbook-quiz-cairo/Cargo.toml') }}
           restore-keys: |
-            ${{ runner.os }}-mdbook-
+            mdbook-${{ runner.os }}-
 
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
-        if: steps.mdbook-cache.outputs.cache-hit != 'true'
+        if: steps.cache-mdbook.outputs.cache-hit != 'true'
 
       - name: Build book (English)
         run: mdbook build -d book
