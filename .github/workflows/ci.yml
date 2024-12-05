@@ -66,24 +66,18 @@ jobs:
         uses: ./.github/workflows/setup-rust-cache
 
       - name: Cache mdbook dependencies
-        id: cache-mdbook
         uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
             target
-            bin
-            ~/.cargo/bin
-            mdbook-quiz-cairo
-            ~/.local/bin
-          key: mdbook-${{ runner.os }}-${{ hashFiles('**/Cargo.lock', '**/package-lock.json', 'mdbook-quiz-cairo/Cargo.toml') }}
+          key: mdbook-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             mdbook-${{ runner.os }}-
 
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
-        if: steps.cache-mdbook.outputs.cache-hit != 'true'
 
       - name: Build book (English)
         run: mdbook build -d book
