@@ -2,6 +2,7 @@
 
 ## Docs
 
+- [The Cairo Book](https://book.cairo-lang.org/title-page): The main entry point of the Cairo Book, explaining the version requirements and available tools.
 - [Introduction](https://book.cairo-lang.org/ch00-00-introduction): Introduction of Cairo and the book
 - [Foreword](https://book.cairo-lang.org/ch00-01-foreword): The purpose of Cairo
 - [Getting Started](https://book.cairo-lang.org/ch01-00-getting-started): Introduction to chapter 1 to start using Cairo.
@@ -49,7 +50,6 @@
 - [Hashes](https://book.cairo-lang.org/ch11-04-hash): How to use hashes.
 - [Macros](https://book.cairo-lang.org/ch11-05-macros): How to use macros.
 - [Inlining in Cairo](https://book.cairo-lang.org/ch11-06-inlining-in-cairo): How to use inlining in Cairo.
-- [Gas Optimisation](https://book.cairo-lang.org/ch11-07-gas-optimisation): How to optimize gas.
 - [Printing](https://book.cairo-lang.org/ch11-08-printing): How to print data to the console in Cairo.
 - [Deref Coercion](https://book.cairo-lang.org/ch11-09-deref-coercion): How to use Deref Coercion. It simplifies the way we interact with nested or wrapped data structures by allowing an instance of one type to behave like an instance of another type.
 - [Arithmetic Circuits](https://book.cairo-lang.org/ch11-10-arithmetic-circuits): How to use Arithmetic Circuits. Arithmetic circuits are mathematical models used to represent polynomial computations.
@@ -83,7 +83,7 @@
 - [Upgradeable Contracts](https://book.cairo-lang.org/ch16-03-upgradeability): How to upgrade contracts.
 - [L1-L2 Messaging](https://book.cairo-lang.org/ch16-04-L1-L2-messaging): How to use L1-L2 messaging.
 - [Oracle Interactions](https://book.cairo-lang.org/ch16-05-oracle-interactions): Introduction to chapter 16.5 to learn how to interact with oracles.
-- [Price Feeds](https://book.cairo-lang.org/ch16-05-01-price-feeds): How to use price feeds. Price feeds enabled by an oracle serve as a bridge between real-world data feed and the blockchain. 
+- [Price Feeds](https://book.cairo-lang.org/ch16-05-01-price-feeds): How to use price feeds. Price feeds enabled by an oracle serve as a bridge between real-world data feed and the blockchain.
 - [Randomness](https://book.cairo-lang.org/ch16-05-02-randomness): How to use randomness. Verifiable random functions (VRFs) provided by oracles guarantee that the randomness can't be predicted or tampered with, ensuring trust and transparency in these applications.
 - [Other Examples](https://book.cairo-lang.org/ch16-06-00-other-examples): Introduction to chapter 16.6 listing other examples.
 - [Deploying and Interacting with a Voting contract](https://book.cairo-lang.org/ch16-06-01-deploying-and-interacting-with-a-voting-contract): Example of deploying and interacting with a voting contract.
@@ -93,11 +93,10 @@
 - [Static Analysis Tools](https://book.cairo-lang.org/ch17-03-static-analysis-tools): How to use static analysis tools.
 - [Appendix A - System Calls](https://book.cairo-lang.org/appendix-08-system-calls): Listing of Starknet system calls
 - [Introduction](https://book.cairo-lang.org/ch200-introduction): Introduction to the Cairo VM.
-- [Architecture](https://book.cairo-lang.org/ch201-architecture): What is the architecture of Cairo. Cairo is a STARK-friendly Von Neumann architecture capable of generating validity proofs for arbitrary computations. Being STARK-friendly means that Cairo's design is optimized for the STARK proof system, while remaining compatible with other proof system backends. It implements a Turing-complete process virtual machine.
-- [Builtins](https://book.cairo-lang.org/ch204-00-builtins): Introduction to chapter 20.4 to learn about the builtins in Cairo. The Cairo whitepaper defines builtins as "predefined optimized low-level execution units".
-- [How Builtins Work](https://book.cairo-lang.org/ch204-01-how-builtins-work): How builtins work in Cairo. A builtin enforces some constraints on the Cairo memory to perform specific tasks, such as computing a hash.
-- [Builtins List](https://book.cairo-lang.org/ch204-02-builtins-list): List of builtins in Cairo.
-- [Pedersen Builtin](https://book.cairo-lang.org/ch204-02-01-pedersen): The Pedersen builtin is dedicated to computing the pedersen hash of two felts.
+- [Architecture](https://book.cairo-lang.org/ch201-architecture): Understanding Cairo's STARK-friendly Von Neumann architecture, its components (compiler, VM, prover/verifier), and how they work together to generate and verify proofs.
+- [Builtins](https://book.cairo-lang.org/ch204-00-builtins): Understanding builtins as predefined optimized low-level execution units that enhance Cairo's performance.
+- [How Builtins Work](https://book.cairo-lang.org/ch204-01-how-builtins-work): Deep dive into how builtins enforce constraints on Cairo memory to perform specific optimized tasks.
+- [Pedersen Builtin](https://book.cairo-lang.org/ch204-02-01-pedersen): Understanding the Pedersen hash builtin and its implementation for efficient hash computation.
 
 
 ## Optional
