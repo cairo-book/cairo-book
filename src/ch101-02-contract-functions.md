@@ -9,7 +9,7 @@ Functions can access the contract's state easily via `self: ContractState`, whic
 Constructors are a special type of function that only runs once when deploying a contract, and can be used to initialize the state of a contract.
 
 ```cairo,noplayground
-{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:constructor}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:constructor}}
 ```
 
 Some important rules to note:
@@ -30,7 +30,7 @@ The `#[abi(embed_v0)]` attribute means that all functions embedded inside it are
 Annotating an impl block with the `#[abi(embed_v0)]` attribute only affects the visibility (i.e., public vs private/internal) of the functions it contains, but it doesn't inform us on the ability of these functions to modify the state of the contract.
 
 ```cairo,noplayground
-{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:impl_public}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:impl_public}}
 ```
 
 > Similarly to the `constructor` function, all public functions, either standalone functions annotated with the `#[external(v0)]` or functions within an impl block annotated with the `#[abi(embed_v0)]` attribute, **must** take `self` as a first argument. This is not the case for private functions.
@@ -40,7 +40,7 @@ Annotating an impl block with the `#[abi(embed_v0)]` attribute only affects the 
 External functions are _public_ functions where the `self: ContractState` argument is passed by reference with the `ref` keyword, which exposes both the `read` and `write` access to storage variables. This allows modifying the state of the contract via `self` directly.
 
 ```cairo,noplayground
-{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:external}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:external}}
 ```
 
 ### View Functions
@@ -48,7 +48,7 @@ External functions are _public_ functions where the `self: ContractState` argume
 View functions are _public_ functions where the `self: ContractState` argument is passed as snapshot, which only allows the `read` access to storage variables, and restricts writes to storage made via `self` by causing compilation errors. The compiler will mark their _state_mutability_ to `view`, preventing any state modification through `self` directly.
 
 ```cairo,noplayground
-{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:view}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:view}}
 ```
 
 ### State Mutability of Public Functions
@@ -70,7 +70,7 @@ It is also possible to define public functions outside of an implementation of a
 Here, we define a standalone `get_contract_name` function outside of an impl block:
 
 ```cairo,noplayground
-{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:standalone}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:standalone}}
 ```
 
 ## 3. Private Functions
@@ -81,7 +81,7 @@ They can be grouped in a dedicated impl block (e.g., in components, to easily im
 Note that these 2 methods are equivalent. Just choose the one that makes your code more readable and easy to use.
 
 ```cairo,noplayground
-{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:state_internal}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:state_internal}}
 ```
 
 > Wait, what is this `#[generate_trait]` attribute? Where is the trait definition for this implementation? Well, the `#[generate_trait]` attribute is a special attribute that tells the compiler to generate a trait definition for the implementation block. This allows you to get rid of the boilerplate code of defining a trait with generic parameters and implementing it for the implementation block. With this attribute, we can simply define the implementation block directly, without any generic parameter, and use `self: ContractState` in our functions.
@@ -99,7 +99,7 @@ You can also define the entrypoint type of functions individually inside an impl
 Here is a short example:
 
 ```cairo,noplayground
-{{#include ../listings/ch101-building-starknet-smart-contracts/no_listing_01_abi_per_item_attribute/src/lib.cairo}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/no_listing_01_abi_per_item_attribute/src/lib.cairo}}
 ```
 
 In the case of `#[abi(per_item)]` attribute usage without `#[generate_trait]`, it will only be possible to include `constructor`, `l1-handler` and `internal` functions in the trait implementation. Indeed, `#[abi(per_item)]` only works with a trait that is not defined as a Starknet interface. Hence, it will be mandatory to create another trait defined as interface to implement public functions.

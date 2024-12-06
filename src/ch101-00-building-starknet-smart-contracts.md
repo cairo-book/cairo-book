@@ -11,7 +11,8 @@ At this point, you should have multiple questions that come to mind:
 - How can I emit events? How can I index them?
 - Is there a way to reduce the boilerplate?
 
-Luckily, we'll be answering all these questions in this chapter. Let's consider the `NameRegistry` contract in Listing {{#ref reference-contract}} that we'll be using throughout this chapter:
+Luckily, we'll be answering all these questions in this chapter.
+<!-- Let's consider the `NameRegistry` contract in Listing {{#ref reference-contract}} that we'll be using throughout this chapter:
 
 ```cairo,noplayground
 {{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:all}}
