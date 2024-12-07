@@ -48,10 +48,22 @@ jobs:
       - name: Setup Starknet-Foundry
         uses: foundry-rs/setup-snfoundry@v3
 
+      - name: Cache Rust dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: rust-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            rust-${{ runner.os }}-
+
       - name: Setup Rust cache
-        uses: Swatinem/rust-cache@v2
+        uses: ./.github/workflows/setup-rust-cache
 
       - name: Cache mdbook binaries and dependencies
+        id: cache-mdbook
         uses: actions/cache@v3
         with:
           path: |
@@ -61,15 +73,17 @@ jobs:
             ~/.cargo/git
             ./target
             ./mdbook-quiz-cairo
-          key: mdbook-${{ runner.os }}-v3-${{ hashFiles('.tool-versions', '**/Cargo.lock', '.github/workflows/install-mdbook') }}
+          key: mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions', '**/Cargo.lock', '.github/workflows/install-mdbook') }}
 
       - name: Install mdbook and dependencies
+        if: steps.cache-mdbook.outputs.cache-hit != 'true'
         uses: ./.github/workflows/install-mdbook
 
       - name: Build book (English)
         run: mdbook build -d book
 
       - name: Install cairo-listings
+        if: steps.cache-mdbook.outputs.cache-hit != 'true'
         run: cargo install --path cairo-listings --locked
         shell: bash
 
