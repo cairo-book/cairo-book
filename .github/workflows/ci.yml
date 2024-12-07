@@ -1,9 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - ci/dependency-caching
   pull_request:
     branches:
       - main
@@ -42,10 +39,10 @@ jobs:
           restore-keys: |
             asdf-${{ runner.os }}-
 
-      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
+      - name: Install asdf & tools
         uses: asdf-vm/actions/install@v3
 
-      - name: Set default scarb version # First version in .tool-versions
+      - name: Set default scarb version
         run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Setup Starknet-Foundry
@@ -66,7 +63,6 @@ jobs:
         uses: ./.github/workflows/setup-rust-cache
 
       - name: Cache mdbook binaries
-        id: cache-mdbook-bins
         uses: actions/cache@v3
         with:
           path: |
@@ -76,7 +72,6 @@ jobs:
           key: mdbook-bins-${{ runner.os }}-v1-${{ hashFiles('.tool-versions') }}
 
       - name: Cache mdbook build artifacts
-        id: cache-mdbook-build
         uses: actions/cache@v3
         with:
           path: |
@@ -86,16 +81,7 @@ jobs:
             ./mdbook-quiz-cairo
           key: mdbook-build-${{ runner.os }}-v1-${{ hashFiles('mdbook-cairo/Cargo.lock', 'mdbook-quiz-cairo/Cargo.lock') }}
 
-      - name: Debug cache hit status
-        run: |
-          echo "Cache mdbook bins hit: ${{ steps.cache-mdbook-bins.outputs.cache-hit }}"
-          echo "Cache mdbook build hit: ${{ steps.cache-mdbook-build.outputs.cache-hit }}"
-
-      - name: Ensure mdbook in PATH
-        run: echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-
       - name: Install mdbook
-        if: ${{ steps.cache-mdbook-bins.outputs.cache-hit != 'true' || steps.cache-mdbook-build.outputs.cache-hit != 'true' }}
         uses: ./.github/workflows/install-mdbook
 
       - name: Build book (English)
@@ -114,3 +100,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: crate-ci/typos@master
+
