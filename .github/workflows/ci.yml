@@ -48,7 +48,6 @@ jobs:
       - name: Setup Starknet-Foundry
         uses: foundry-rs/setup-snfoundry@v3
 
-
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2
 
@@ -87,4 +86,3 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: crate-ci/typos@master
-
