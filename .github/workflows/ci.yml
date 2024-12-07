@@ -62,34 +62,19 @@ jobs:
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
-      - name: Cache mdbook binaries
+      - name: Cache mdbook binaries and dependencies
         uses: actions/cache@v3
         with:
           path: |
             ./bin
-            ~/.local/bin
             ~/.cargo/bin
-          key: mdbook-bins-${{ runner.os }}-v1-${{ hashFiles('.tool-versions') }}
-
-      - name: Cache mdbook build artifacts
-        uses: actions/cache@v3
-        with:
-          path: |
             ~/.cargo/registry
             ~/.cargo/git
             ./target
             ./mdbook-quiz-cairo
-          key: mdbook-build-${{ runner.os }}-v1-${{ hashFiles('mdbook-cairo/Cargo.lock', 'mdbook-quiz-cairo/Cargo.lock') }}
+          key: mdbook-${{ runner.os }}-v2-${{ hashFiles('.tool-versions', '**/Cargo.lock', '.github/workflows/install-mdbook') }}
 
-      - name: Clean mdbook-quiz-cairo directory if exists
-        run: rm -rf mdbook-quiz-cairo
-        shell: bash
-
-      - name: Clone mdbook-quiz-cairo
-        run: git clone https://github.com/cairo-book/mdbook-quiz-cairo
-        shell: bash
-
-      - name: Install mdbook
+      - name: Install mdbook and dependencies
         uses: ./.github/workflows/install-mdbook
 
       - name: Build book (English)
