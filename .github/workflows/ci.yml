@@ -11,7 +11,6 @@ on:
 jobs:
   compile_and_verify:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,10 +41,10 @@ jobs:
           restore-keys: |
             asdf-${{ runner.os }}-
 
-      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
+      - name: Install asdf & tools
         uses: asdf-vm/actions/install@v3
 
-      - name: Set default scarb version # First version in .tool-versions
+      - name: Set default scarb version
         run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Setup Starknet-Foundry
@@ -70,10 +69,28 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ./bin
-            ~/.local/bin
             ~/.cargo/bin
-          key: mdbook-bins-${{ runner.os }}-v1-${{ hashFiles('.tool-versions') }}
+            ~/.local/bin
+          key: mdbook-bins-${{ runner.os }}-${{ hashFiles('.tool-versions') }}
+
+      - name: Add mdbook to PATH
+        run: |
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Verify mdbook installation
+        run: |
+          if command -v mdbook &> /dev/null; then
+            echo "mdbook is installed"
+            mdbook --version
+          else
+            echo "mdbook is not installed"
+            exit 1
+          fi
+
+      - name: Install mdbook
+        if: steps.cache-mdbook-bins.outputs.cache-hit != 'true'
+        uses: ./.github/workflows/install-mdbook
 
       - name: Cache mdbook build artifacts
         id: cache-mdbook-build
@@ -86,9 +103,10 @@ jobs:
             ./mdbook-quiz-cairo
           key: mdbook-build-${{ runner.os }}-v1-${{ hashFiles('mdbook-cairo/Cargo.lock', 'mdbook-quiz-cairo/Cargo.lock') }}
 
-      - name: Install mdbook
-        if: ${{ steps.cache-mdbook-bins.outputs.cache-hit != 'true' || steps.cache-mdbook-build.outputs.cache-hit != 'true' }}
-        uses: ./.github/workflows/install-mdbook
+      - name: Debug cache hit status
+        run: |
+          echo "Cache mdbook bins hit: ${{ steps.cache-mdbook-bins.outputs.cache-hit }}"
+          echo "Cache mdbook build hit: ${{ steps.cache-mdbook-build.outputs.cache-hit }}"
 
       - name: Build book (English)
         run: mdbook build -d book
