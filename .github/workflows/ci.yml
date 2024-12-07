@@ -1,6 +1,9 @@
 name: CI
 
 on:
+  push:
+    branches:
+      - ci/dependency-caching
   pull_request:
     branches:
       - main
@@ -62,18 +65,29 @@ jobs:
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
 
-      - name: Cache mdbook dependencies
+      - name: Cache mdbook binaries
+        id: cache-mdbook-bins
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./bin
+            ~/.local/bin
+            ~/.cargo/bin
+          key: mdbook-bins-${{ runner.os }}-v1-${{ hashFiles('.tool-versions') }}
+
+      - name: Cache mdbook build artifacts
+        id: cache-mdbook-build
         uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            target
-          key: mdbook-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            mdbook-${{ runner.os }}-
+            ./target
+            ./mdbook-quiz-cairo
+          key: mdbook-build-${{ runner.os }}-v1-${{ hashFiles('mdbook-cairo/Cargo.lock', 'mdbook-quiz-cairo/Cargo.lock') }}
 
       - name: Install mdbook
+        if: steps.cache-mdbook-bins.outputs.cache-hit != 'true' || steps.cache-mdbook-build.outputs.cache-hit != 'true'
         uses: ./.github/workflows/install-mdbook
 
       - name: Build book (English)
