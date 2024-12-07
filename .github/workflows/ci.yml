@@ -87,7 +87,7 @@ jobs:
           key: mdbook-build-${{ runner.os }}-v1-${{ hashFiles('mdbook-cairo/Cargo.lock', 'mdbook-quiz-cairo/Cargo.lock') }}
 
       - name: Install mdbook
-        if: steps.cache-mdbook-bins.outputs.cache-hit != 'true' || steps.cache-mdbook-build.outputs.cache-hit != 'true'
+        if: ${{ steps.cache-mdbook-bins.outputs.cache-hit != 'true' || steps.cache-mdbook-build.outputs.cache-hit != 'true' }}
         uses: ./.github/workflows/install-mdbook
 
       - name: Build book (English)
