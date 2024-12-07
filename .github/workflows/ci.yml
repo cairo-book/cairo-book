@@ -81,6 +81,14 @@ jobs:
             ./mdbook-quiz-cairo
           key: mdbook-build-${{ runner.os }}-v1-${{ hashFiles('mdbook-cairo/Cargo.lock', 'mdbook-quiz-cairo/Cargo.lock') }}
 
+      - name: Clean mdbook-quiz-cairo directory if exists
+        run: rm -rf mdbook-quiz-cairo
+        shell: bash
+
+      - name: Clone mdbook-quiz-cairo
+        run: git clone https://github.com/cairo-book/mdbook-quiz-cairo
+        shell: bash
+
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
 
