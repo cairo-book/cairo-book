@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - ci/dependency-caching 
+      - ci/dependency-caching
   pull_request:
     branches:
       - main
@@ -77,6 +77,9 @@ jobs:
             ./target
             ./mdbook-quiz-cairo
           key: mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions', '**/Cargo.lock', '.github/workflows/install-mdbook') }}
+
+      - name: Add cargo bin to PATH
+        run: echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Install mdbook and dependencies
         if: steps.cache-mdbook.outputs.cache-hit != 'true'
