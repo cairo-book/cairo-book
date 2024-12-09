@@ -19,6 +19,7 @@ Here is a list of the system calls available in Cairo 1.0:
 - [replace_class](#replace_class)
 - [storage_read](#storage_read)
 - [storage_write](#storage_write)
+- [keccak](#keccak)
 - [sha256_process_block](#sha256_process_block)
 
 ## `get_block_hash`
@@ -405,6 +406,33 @@ None.
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L70)
 
+## `keccak`
+
+#### Syntax
+
+```cairo,noplayground
+pub extern fn keccak_syscall(
+    input: Span<u64>,
+) -> SyscallResult<u256> implicits(GasBuiltin, System) nopanic;
+```
+
+#### Description
+
+Computes the Keccak-256 hash of a given input.
+
+#### Arguments
+
+- _`input`_: A `Span<u64>` Keccak-256 input.
+
+#### Return Values
+
+Returns the hash result as a `u256`.
+
+#### Common Library
+
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/67c6eff9c276d11bd1cc903d7a3981d8d0eb2fa2/corelib/src/starknet/syscalls.cairo#L107)
+
+
 ## `sha256_process_block`
 
 #### Syntax
@@ -423,12 +451,12 @@ This syscall computes the next SHA-256 state by combining the current `state` wi
 
 #### Arguments
 
-- _`state`_: The current sha256 state.
-- _`input`_: The value to be processed into sha256.
+- _`state`_: The current SHA-256 state.
+- _`input`_: The value to be processed into SHA-256.
 
 #### Return Values
 
-Returns a new sha256 state of the `input` data.
+Returns a new SHA-256 state of the `input` data.
 
 #### Common Library
 
