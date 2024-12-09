@@ -51,39 +51,41 @@ jobs:
       - name: Setup Starknet-Foundry
         uses: foundry-rs/setup-snfoundry@v3
 
-      - name: Cache Rust dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: rust-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            rust-${{ runner.os }}-
-
       - name: Setup Rust cache
-        uses: ./.github/workflows/setup-rust-cache
+        uses: Swatinem/rust-cache@v2
 
-      - name: Cache mdbook binaries and dependencies
+      - name: Cache mdbook binaries
         id: cache-mdbook
         uses: actions/cache@v3
         with:
           path: |
-            ./bin
-            ~/.cargo/bin
-            ~/.cargo/registry
-            ~/.cargo/git
-            ./target
+            $(pwd)/bin
+            ~/.local/bin
             ./mdbook-quiz-cairo
-          key: mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions', '**/Cargo.lock', '.github/workflows/install-mdbook') }}
-
-      - name: Add cargo bin to PATH
-        run: echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          key: mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions', '.github/workflows/install-mdbook/action.yml') }}
 
       - name: Install mdbook and dependencies
         if: steps.cache-mdbook.outputs.cache-hit != 'true'
         uses: ./.github/workflows/install-mdbook
+
+      - name: Add binary paths to PATH
+        run: |
+          echo "$(pwd)/bin" >> $GITHUB_PATH
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        shell: bash
+
+      - name: Debug cache locations
+        run: |
+          echo "Content of ~/.cargo/bin:"
+          ls -la ~/.cargo/bin
+          echo "Content of $(pwd)/bin"
+          ls -la $(pwd)/bin
+          echo "Which mdbook:"
+          which mdbook || echo "mdbook not in PATH"
+          echo "PATH:"
+          echo $PATH
+
 
       - name: Build book (English)
         run: mdbook build -d book
