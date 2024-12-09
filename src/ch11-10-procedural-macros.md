@@ -1,56 +1,55 @@
 # Procedural Macros
 
-Cairo procedural macros are Rust functions that takes Cairo code as input and returns a modified Cairo code as output, enabling developers to extend Cairo's syntax and create reusable code patterns. In the previous chapter, we discussed some Cairo built-in macros like `println!`, `format!`, etc. In this chapter, we will explore how to create and use custom procedural macros in Cairo.
+All trough the book we have used a few macro such as `println!`, `assert!`and `panic!` which are expression macro. Procedural macros accept some code as an input, operate on that code, and produce some code as an output. The three kinds of procedural macros are expression macro (`macro!()`), attribute macro (`#[macro]`) and custom derive (`#[derive(Macro)]`) and all work in a similar fashion.
 
-## Types of Procedural Macros
+In this chapter we will see what procedural macro are, how they are defined, and discuss for each of the 3 types how to use and create them.
 
-There are three types of procedural macros in Cairo:
+## Cairo Procedural macro are Rust function
 
-- **Expression Macros** (`macro!()`):
-  These macros are used like function calls and can generate code based on their arguments.
+Macros actually share similarities with compilers in how they operate. Just as the Cairo compiler is written in Rust, macros are in fact Rust functions that take Cairo code as input and return modified Cairo code as an output. To define macros, you need a package with both a Cargo.toml and a Scarb.toml file. The first defines macro implementation dependencies, the second marks the package as macro and defines metadata.
 
-- **Attribute Macros** (`#[macro]`):
-  These macros can be attached to items like functions or structs to modify their behavior or implementation.
+The function that defines a procedural macro takes a `TokenStream` as an input and produces a `ProcMacroResult` as an output. Both types are defined in the [cairo_lang_macro](https://docs.rs/cairo-lang-macro/latest/cairo_lang_macro/) Rust crate. `TokenStream` is defined as some encapsulation of code represented in plain Cairo. `Tokenstream` can be created from a String and be converted into a String with `to_string()` method. `ProcMacroResult` extends `TokenStream` with additionnal fields to support diagnostic emission. Diagnostics can be used to emit warnings / errors to the user during the compilation.
 
-- **Derive Macros** (`#[derive(Macro)]`):
-  These macros automatically implement traits for structs or enums.
+The function implementing the macro should be wrapped with one on the tree attributes : `#[inline_macro]` for expression macro, `[attribute_macro]` for attribute macro or `#[derive_macro]` for custom derive.
 
-## Creating a Procedural Macro
+Here are the signatures for each types : 
+```rust
+#[inline_macro]
+pub fn inline(code: TokenStream) -> ProcMacroResult {}
 
-Before creating or using procedural macros, we need to ensure that the necessary tools are installed:
+#[attribute_macro]
+pub fn attribute(attr: TokenStream, code: TokenStream) -> ProcMacroResult {}
 
-- **Rust Toolchain**: Cairo procedural macros are implemented in Rust, so we will need the Rust toolchain setup on our machine.
-- To set up Rust, visit [rustup](https://rustup.rs) and follow the installation instructions for your operating system.
-
-Since procedural macros are in fact Rust functions, we will need to add a `Cargo.toml` file to the root directory ( same level as the `Scarb.toml` file ). In the `Cargo.toml` file, we need to add a `crate-type = ["cdylib"]` on the `[lib]` target, and also add the `cairo-lang-macro` crate as a dependency.
-
-> It is essential that both the `Scarb.toml` and `Cargo.toml` have the same package name, or there will be an error when trying to use the macro.
-
-Below is an example of the `Scarb.toml` and `Cargo.toml` files:
-
-```toml
-# Scarb.toml
-[package]
-name = "no_listing_15_pow_macro"
-version = "0.1.0"
-edition = "2024_07"
-
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
-[cairo-plugin]
-
-[dependencies]
-
-[dev-dependencies]
-cairo_test = "2.9.1"
+#[derive_macro]
+pub fn derive(code: TokenStream) -> ProcMacroResult {}
 ```
 
-{{#label procedural-macros-scarb-file}}
-<span class="caption">Listing {{#ref procedural-macros-scarb-file}}: Example `Scarb.toml` file needed for building a procedural macro.</span>
+### Install dependancies
 
-```toml
-# Cargo.toml
+To use procedural macros, you need to have Rust toolchain (Cargo) installed on your machine. To install Rust using Rustup, you can run the following command in you terminal : 
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+## Create your macro
+
+Now let's review what you need to create your own marco. You will need to have a Rust project where the macro code in defined and a very basic Scarb manifest file to declare the macro. The project will look like this, we will go through each of the items:
+
+```bash
+├── Cargo.toml
+├── Scarb.toml
+├── src
+│   └── lib.rs
+```
+
+The project contains a `Scarb.toml`and a `Cargo.toml`file in the root directory. 
+
+The Cargo manifest file needs to contain a `crate-type = ["cdylib"]` on `[lib]` target, the cairo-lang-macro crate on `[dependencies]` target. Here is an example : 
+
+```rust
 [package]
-name = "no_listing_15_pow_macro"
+name = "macro_name"
 version = "0.1.0"
 edition = "2021"
 
@@ -58,60 +57,136 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1"
-cairo-lang-parser = "2.9.1"
-cairo-lang-syntax = "2.9.1"
-
-[workspace]
 ```
 
-{{#label some-macro}}
-<span class="caption">Listing {{#ref some-macro}}: Example `Cargo.toml` file needed for building a procedural macro.</span>
+The Scarb manifest file must define a `[cairo-plugin]` target type. Here is an example : 
 
-Also notice that you can also add other rust dependencies in your `Cargo.toml` file. In the example above, we added the `bigdecimal`, `cairo-lang-parser` and `cairo-lang-syntax` crates as a dependencies.
+```rust
+[package]
+name = "macro_name"
+version = "0.1.0"
+edition = "2024_07"
 
-Listing {{#ref pow_macro}} shows the rust code for creating an inline macro in Rust:
-
-```rust, noplayground
-{{#rustdoc_include ../listings/ch11-advanced-features/no_listing_15_macro/src/pow.rs:main}}
+[cairo-plugin]
 ```
 
-{{#label pow_macro}}
-<span class="caption">Listing {{#ref pow_macro}}: Code for creating inline pow procedural macro</span>
+Finally the project needs to contain a Rust library (`lib.rs`), inside the `src/` directory that implements the procedural macro API. 
 
-The essential dependency for building a cairo macro `cairo_lang_macro` is imported here with `inline_macro, Diagnostic, ProcMacroResult, TokenStream`. The `inline_macro` is used for implementing an expression macro, `ProcMacroResult` is used for the function return, `TokenStream` as the input, and the `Diagnostic` is used for error handling. We also use the `cairo-lang-parser` crate to parse the input code. Then the `pow` function is defined utilizing the imports to create a macro that calculate the pow based on the `TokenStream` input.
+As you might have notice the project doesn't need any cairo code, it only requires the `Scarb.toml` manifest file mentionned.
 
-## How to Use Existing Procedural Macros
+## Using your macro
+From the user's perspective, you only need to add the package defining the macro in your dependencies. In the project using the macro you will have a Scarb manifest file with :
 
-> **Note**: While you need Rust installed to use procedural macros, you don't need to know Rust programming to use existing macros in your Cairo project.
+```rust
+[package]
+name = "using_macro"
+version = "0.1.0"
+edition = "2024_07"
 
-### Incorporating an Existing Procedural Macro Into Your Project
-
-Similar to how you add a library dependency in your Cairo project, you can also add a procedural macro as a dependency in your `Scarb.toml` file.
-
-```rust, noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_16_procedural_macro/src/lib.cairo:pow_macro}}
+[dependencies]
+macro_name = { path = "path/to/macro_name" }
 ```
 
-{{#label using_pow_macro}}
-<span class="caption">Listing {{#ref using_pow_macro}}: Using pow procedural macro</span>
+## Expression Macros
 
-You'd notice a `pow!` macro, which is not a built-in Cairo macro being used in this example above. It is a custom procedural macro that calculates the power of a number as defined in the example above on creating a procedural macro.
+Expression macros look like function calls but with extended possibilities. They are more flexible than functions, for example they can take an number of arguments that is not predifined,or have inputs argument of not predifined types. Allowing to code funtions in a more generic ways.
 
-```rust, noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_16_procedural_macro/src/lib.cairo:derive_macro}}
+
+### Creating an expression Macros
+To understand how to create an expression macro we will look at a pow macro implementation from [Alexandria](https://github.com/keep-starknet-strange/alexandria) library.
+
+The core code of the macro implementation is a Rust code that uses three Rust crates : `cairo_lang_macro` specific to macros implementation, `cairo_lang_parser` crate with function related to the compiler parser and `cairo_lang_syntax` related to the compiler syntax. The two latters were initially created for the Cairo lang compiler, as macro functions operate at the Cairo syntax level, we can reuse the logic directly from the syntax functions created for the compiler to create macros.
+
+> **Note:**
+> To understand better the Cairo compiler and some of the concepts we only mention here such as the Cairo parser or the > > Cairo syntax you can read the [Cairo compiler workshop](https://github.com/software-mansion-labs/cairo-compiler-workshop).
+
+
+
+In the pow function example below the input is processed to extract the value of the base argument and the exponant argument to return the result of $base^{exponant}$.
+
+
+```rust
+{{#include ../listings/ch11-advanced-features/no_listing_16_procedural_macro_expression/src/lib.rs::pow}}
 ```
 
-{{#label using_derive_macro}}
-<span class="caption">Listing {{#ref using_derive_macro}}: Using derive procedural macro</span>
+Now that the macro is defined, we can use it. In a Cairo project we need to have `pow = { path = "path/to/pow" }` in the `[dependencies]` target of the `Scarb.toml` manifest file. And then we can use it without further import like this :
 
-The example above shows using a derive macro on a `struct` B, which grants the custom struct the ability to perform addition, subtraction, multiplication, and division operations on the struct.
-
-```rust, noplayground
-{{#include ../listings/ch11-advanced-features/no_listing_16_procedural_macro/src/lib.cairo:b_struct}}
+```rust
+fn main() {
+    let res = pow(2, 16);
+}
 ```
 
-## Summary
+## Derive Macros
 
-Procedural macros offer a powerful way to extend Cairo's capabilities by leveraging Rust functions to generate new Cairo code. They allow for code generation, custom syntax, and automated implementations, making them a valuable tool for Cairo developers. While they require some setup and careful consideration of performance impacts, the flexibility they provide can significantly enhance your Cairo development experience.
+Derive macros automatically implement traits, it's only used for structs or enums. Rather than having to implement a trait for multiple types, you can create a procedural macro and annotate the types with #[derive(Macro)] to get a default and auto-generated implementation of a trait.
+
+
+### Creating a derive macro
+
+In this example, we will implement a derive macro that will implement the `Hello` Trait. The `Hello` trait will have a `hello()` function that will print : `Hello, StructName!`, where *StructName* is the name of the struct.
+
+Here is the definition of the `Hello` trait : 
+
+```cairo
+{{#include ../listings/ch11-advanced-features/no_listing_15_procedural_macro/src/lib.cairo::hello_trait}}
+```
+
+Let's check the marcro implementation, first the `hello_derive` function parses the input token stream and then extracts the `struct_name` to implement the trait for that specific struct.
+
+Then hello derived returns a hard-coded piece of code containing the implementation of `Hello` trait for the type *StructName*.
+
+```rust
+{{#include ../listings/ch11-advanced-features/no_listing_17_procedural_macro_derive/src/lib.rs::hello}}
+```
+
+Now that the macro is defined, we can use it. In a Cairo project we need to have `hello_macro = { path = "path/to/hello_macro" }` in the `[dependencies]` target of the `Scarb.toml` manifest file. And we can then use it without further import on any struct :
+
+```cairo
+{{#include ../listings/ch11-advanced-features/no_listing_15_procedural_macro/src/lib.cairo::some_struct}}
+```
+
+And now we can call the implemented function `hello` on an variable of the type *SomeType*.
+
+```cairo
+{{#include ../listings/ch11-advanced-features/no_listing_15_procedural_macro/src/lib.cairo::some_example}}
+```
+
+Note that the `Hello` trait that is implemented in the macro has to be defined somewhere in the code or imported.
+
+## Attribute Macros
+
+Attribute-like macros are similar to custom derive macros, but allowing more possibilities, they are not retricted to struct and enum and can be applied to other items as well, such as functions. They can be used for more diverse code generation than implementing trait. It could be used to modify the name of a struct, add fiels in the structure, execute some code before a function, change the signature of a function and many other possibilities.
+
+The extra possibilities also come from the fact that they are defined with a second argument `TokenStream`, indeed the signature looks like this : 
+```rust
+#[attribute_macro]
+pub fn attribute(attr: TokenStream, code: TokenStream) -> ProcMacroResult {}
+```
+
+With the first attribute (`attr`) for the attribute arguments (#[macro(arguments)]) and second for the actual code on which the attribute is applied to, the second attribute is the only one the two other macros have.
+
+### Creating an attribute macro
+
+Now let's look at an example of a custom made attribute macro, in this example we will create a macro that will rename the struct.
+
+```rust
+{{#include ../listings/ch11-advanced-features/no_listing_18_procedural_macro_attribute/src/lib.rs::rename}}
+```
+
+Again, to use the macro in a Cairo project we need to have `rename_macro = { path = "path/to/rename_macro" }` in the `[dependencies]` target of the `Scarb.toml` manifest file. And we can then use it without further import on any struct.
+
+The rename macro can be derrived as follow :
+
+```cairo
+{{#include ../listings/ch11-advanced-features/no_listing_15_procedural_macro/src/lib.cairo::old_trait}}
+```
+
+Now the compiler knows the *RenamedType* struct, therefor we can create an intance as such :
+
+```cairo
+{{#include ../listings/ch11-advanced-features/no_listing_15_procedural_macro/src/lib.cairo::rename_example}}
+```
+
+You can notice that the names *OldType* and *RenamedType* were harcoded in the example but could be variables leveraging the second arg of rattribute macro. Also note that due to the order of compilation, the derive of other macro such as *Drop* here as to be done in the code generated by the macro. Some deeper understanding of Cairo compilation can be required for custum macro creation.

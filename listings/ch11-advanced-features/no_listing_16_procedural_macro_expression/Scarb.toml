@@ -1,5 +1,5 @@
 [package]
-name = "no_listing_15_macro"
+name = "pow"
 version = "0.1.0"
 
 [cairo-plugin]
