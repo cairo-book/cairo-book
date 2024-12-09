@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cache pnpm and node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.pnpm-store
@@ -32,7 +32,7 @@ jobs:
           version: 9
 
       - name: Cache asdf tools
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.asdf
@@ -56,12 +56,11 @@ jobs:
 
       - name: Cache mdbook binaries
         id: cache-mdbook
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
-            $(pwd)/bin
+            ~/.cargo/bin
             ~/.local/bin
-            ./mdbook-quiz-cairo
           key: mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions', '.github/workflows/install-mdbook/action.yml') }}
 
       - name: Install mdbook and dependencies
@@ -70,22 +69,9 @@ jobs:
 
       - name: Add binary paths to PATH
         run: |
-          echo "$(pwd)/bin" >> $GITHUB_PATH
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
           echo "$HOME/.local/bin" >> $GITHUB_PATH
         shell: bash
-
-      - name: Debug cache locations
-        run: |
-          echo "Content of ~/.cargo/bin:"
-          ls -la ~/.cargo/bin
-          echo "Content of $(pwd)/bin"
-          ls -la $(pwd)/bin
-          echo "Which mdbook:"
-          which mdbook || echo "mdbook not in PATH"
-          echo "PATH:"
-          echo $PATH
-
 
       - name: Build book (English)
         run: mdbook build -d book
