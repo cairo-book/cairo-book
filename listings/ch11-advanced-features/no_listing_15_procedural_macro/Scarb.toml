@@ -7,8 +7,8 @@ edition = "2024_07"
 
 [dependencies]
 pow = { path = "../no_listing_16_procedural_macro_expression" }
-hello_macro =  { path = "../no_listing_17_procedural_macro_derive" }
-rename_macro =  { path = "../no_listing_18_procedural_macro_attribute" }
+hello_macro = { path = "../no_listing_17_procedural_macro_derive" }
+rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]

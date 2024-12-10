@@ -20,8 +20,6 @@ fn main() {
 struct SomeType {}
 // ANCHOR_END: some_struct
 
-
-
 // ANCHOR: old_trait
 #[rename]
 struct OldType {}

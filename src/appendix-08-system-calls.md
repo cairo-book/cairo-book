@@ -432,7 +432,6 @@ Returns the hash result as a `u256`.
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/67c6eff9c276d11bd1cc903d7a3981d8d0eb2fa2/corelib/src/starknet/syscalls.cairo#L107)
 
-
 ## `sha256_process_block`
 
 #### Syntax

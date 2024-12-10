@@ -1,9 +1,7 @@
 // ANCHOR: hello
-use cairo_lang_macro::{ProcMacroResult, TokenStream, derive_macro};
-use cairo_lang_syntax::node::kind::SyntaxKind::{TerminalStruct, TokenIdentifier
-};
+use cairo_lang_macro::{derive_macro, ProcMacroResult, TokenStream};
 use cairo_lang_parser::utils::SimpleParserDatabase;
-
+use cairo_lang_syntax::node::kind::SyntaxKind::{TerminalStruct, TokenIdentifier};
 
 #[derive_macro]
 pub fn hello_macro(token_stream: TokenStream) -> ProcMacroResult {
@@ -21,15 +19,13 @@ pub fn hello_macro(token_stream: TokenStream) -> ProcMacroResult {
             break;
         }
     }
-    
-    ProcMacroResult::new(TokenStream::new(
-        indoc::formatdoc! {r#"
+
+    ProcMacroResult::new(TokenStream::new(indoc::formatdoc! {r#"
             impl SomeHelloImpl of Hello<{0}> {{
                 fn hello(self: @{0}) {{
                     println!("Hello {0}!");
                 }}
             }}
-        "#, struct_name}
-    ))
+        "#, struct_name}))
 }
 // ANCHOR_END: hello
