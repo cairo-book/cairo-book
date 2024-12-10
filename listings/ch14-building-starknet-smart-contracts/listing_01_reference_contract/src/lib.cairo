@@ -90,7 +90,7 @@ mod NameRegistry {
     // Could be a group of functions about a same topic
     #[generate_trait]
     impl InternalFunctions of InternalFunctionsTrait {
-        fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252,) {
+        fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252) {
             let total_names = self.total_names.read();
 
             //ANCHOR: write
