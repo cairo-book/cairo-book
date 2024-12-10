@@ -1,16 +1,56 @@
 # Procedural Macros
 
-All through the book we have used macros such as `println!`, `assert!` and `panic!`, which are expression macros. Procedural macros accept code as input, operate on that code, and produce modified code as output. There are three kinds of procedural macros: expression macros (`macro!()`), attribute macros (`#[macro]`), and custom derive macros (`#[derive(Macro)]`), all of which work in a similar fashion.
+Cairo provides macros as a fundamental feature that lets you write code that generates other code (known as metaprogramming). When you use macros, you can extend Cairo's capabilities beyond what regular functions offer. Throughout this book, we've used macros like `println!` and `assert!`, but haven't fully explored how we can create our own macros.
+
+Before diving into procedural macros specifically, let's understand why we need macros when we already have functions:
+
+## The Difference Between Macros and Functions
+
+Fundamentally, macros are a way of writing code that writes other code, which
+is known as _metaprogramming_. In Appendix C, we discuss derivable traits and the `derive`
+attribute, which generates an implementation of various traits for you. We’ve
+also used the `println!` and `array!` macros throughout the book. All of these
+macros _expand_ to produce more code than the code you’ve written manually.
+
+Metaprogramming is useful for reducing the amount of code you have to write and
+maintain, which is also one of the roles of functions. However, macros have
+some additional powers that functions don’t.
+
+A function signature must declare the number and type of parameters the
+function has. Macros, on the other hand, can take a variable number of
+parameters: we can call `println!("hello")` with one argument or
+`println!("hello {}", name)` with two arguments. Also, macros are expanded
+before the compiler interprets the meaning of the code, so a macro can, for
+example, implement a trait on a given type. A function can’t, because it gets
+called at runtime and a trait needs to be implemented at compile time.
+
+Another important difference between macros and functions is that the design of Cairo macros is complex: they're written in Rust, but operate on Cairo code. Due to
+this indirection and the combination of the two languages, macro definitions are generally more
+difficult to read, understand, and maintain than function definitions.
+
+We call _procedural macros_ macros that allow you to run code at compile time that operates over
+Cairo syntax, both consuming and producing Cairo syntax. You can sort of think of procedural macros
+as functions from an AST to another AST. The three kinds of procedural macros are custom derive,
+attribute-like, and function-like, and all work in a similar fashion.
 
 In this chapter, we'll explore what procedural macros are, how they're defined, and examine each of the three types in detail.
 
 ## Cairo Procedural Macros are Rust Functions
 
-Just as the Cairo compiler is written in Rust, procedural macros are Rust functions that transform Cairo code. These functions take Cairo code as input and return modified Cairo code as output. To implement macros, you'll need a package with both a Cargo.toml and a Scarb.toml file. The Cargo.toml defines the macro implementation dependencies, while the Scarb.toml marks the package as a macro and defines its metadata.
+Just as the Cairo compiler is written in Rust, procedural macros are Rust functions that transform Cairo code. These functions take Cairo code as input and return modified Cairo code as output. To implement macros, you'll need a package with both a `Cargo.toml` and a `Scarb.toml` file. The `Cargo.toml` defines the macro implementation dependencies, while the `Scarb.toml` marks the package as a macro and defines its metadata.
 
-The function that defines a procedural macro takes a `TokenStream` as an input and produces a `ProcMacroResult` as an output. Both types are defined in the [cairo_lang_macro](https://docs.rs/cairo-lang-macro/latest/cairo_lang_macro/) Rust crate. `TokenStream` is defined as some encapsulation of code represented in plain Cairo. `Tokenstream` can be created from a String and be converted into a String with `to_string()` method. `ProcMacroResult` extends `TokenStream` with additional fields to support diagnostic emission. Diagnostics can be used to emit warnings / errors to the user during the compilation.
+The function that defines a procedural macro operates on two key types:
 
-The function implementing the macro should be wrapped with one on the tree attributes : `#[inline_macro]` for expression macro, `[attribute_macro]` for attribute macro or `#[derive_macro]` for custom derive.
+- `TokenStream`: A sequence of Cairo tokens representing your source code. Tokens are the smallest units of code that the compiler recognizes (like identifiers, keywords, and operators).
+- `ProcMacroResult`: An enhanced version of TokenStream that includes both the generated code and any diagnostic messages (warnings or errors) that should be shown to the user during compilation.
+
+The function implementing the macro must be decorated with one of three special attributes that tell the compiler how the macro should be used:
+
+- `#[inline_macro]`: For macros that look like function calls (e.g., `println!()`)
+- `#[attribute_macro]`: For macros that act as attributes (e.g., `#[derive(...)]`)
+- `#[derive_macro]`: For macros that implement traits automatically
+
+Each attribute type corresponds to a different use case and affects how the macro can be invoked in your code.
 
 Here are the signatures for each types :
 
@@ -35,7 +75,18 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ## Create your macro
 
-Now, let's review what you need to create your own marco. You will need to have a Rust project where the macro code in defined and a very basic Scarb manifest file to declare the macro. The project will look like this, we will go through each of the items:
+Creating a procedural macro requires setting up a specific project structure. Your macro project needs:
+
+1. A Rust Project (where you implement the macro):
+
+   - `Cargo.toml`: Defines Rust dependencies and build settings
+   - `src/lib.rs`: Contains the macro implementation
+
+2. A Cairo Project:
+   - `Scarb.toml`: Declares the macro for Cairo projects
+   - No Cairo source files needed
+
+Let's walk through each component and understand its role:
 
 ```bash
 ├── Cargo.toml
@@ -92,7 +143,14 @@ macro_name = { path = "path/to/macro_name" }
 
 ## Expression Macros
 
-Expression macros look like function calls but with extended possibilities. They are more flexible than functions, for example they can take an number of arguments that is not predefined,or have inputs argument of not predefined types. Allowing to code functions in a more generic ways.
+Expression macros provide functionality similar to function calls but with enhanced capabilities. Unlike regular functions, they can:
+
+- Accept a variable number of arguments
+- Handle arguments of different types
+- Generate code at compile time
+- Perform more complex code transformations
+
+This flexibility makes them powerful tools for generic programming and code generation. Let's examine a practical example: implementing a compile-time power function.
 
 ### Creating an expression Macros
 
@@ -119,7 +177,13 @@ fn main() {
 
 ## Derive Macros
 
-Derive macros automatically implement traits, it's only used for structs or enums. Rather than having to implement a trait for multiple types, you can create a procedural macro and annotate the types with #[derive(Macro)] to get a default and auto-generated implementation of a trait.
+Derive macros let you define custom trait implementations that can be automatically applied to types. When you annotate a type with `#[derive(TraitName)]`, your derive macro:
+
+1. Receives the type's structure as input
+2. Contains your custom logic for generating the trait implementation
+3. Outputs the implementation code that will be included in the crate
+
+Writing derive macros eliminates repetitive trait implementation code by using a generic logic on how to generate the trait implementation.
 
 ### Creating a derive macro
 
