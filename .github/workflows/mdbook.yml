@@ -47,7 +47,7 @@ jobs:
         run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Setup Rust cache
-        uses: ./.github/workflows/setup-rust-cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
@@ -59,6 +59,9 @@ jobs:
         run: |
           cp -r theme/pkg book/html
           cp -r theme/js book/html
+
+      - name: Copy LLMs file
+        run: cp llms.txt book/html/
 
       - name: Build all translations
         run: |

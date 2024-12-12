@@ -1,0 +1,108 @@
+# Cairo book
+
+## Docs
+
+- [The Cairo Book](https://book.cairo-lang.org/title-page): The main entry point of the Cairo Book, explaining the version requirements and available tools.
+- [Introduction](https://book.cairo-lang.org/ch00-00-introduction): Introduction of Cairo and the book
+- [Foreword](https://book.cairo-lang.org/ch00-01-foreword): The purpose of Cairo
+- [Getting Started](https://book.cairo-lang.org/ch01-00-getting-started): Introduction to chapter 1 to start using Cairo.
+- [Installation](https://book.cairo-lang.org/ch01-01-installation): How to install Cairo.
+- [Hello, World](https://book.cairo-lang.org/ch01-02-hello-world): Run the first program.
+- [Common Programming Concepts](https://book.cairo-lang.org/ch02-00-common-programming-concepts): Introduction to chapter 2 to learn the common programming concepts in Cairo.
+- [Variables and Mutability](https://book.cairo-lang.org/ch02-01-variables-and-mutability): Learn to handle variables and mutability in Cairo.
+- [Data Types](https://book.cairo-lang.org/ch02-02-data-types): What are the different data types in Cairo.
+- [Functions](https://book.cairo-lang.org/ch02-03-functions): How to write functions in Cairo.
+- [Comments](https://book.cairo-lang.org/ch02-04-comments): How to comment the code.
+- [Control Flow](https://book.cairo-lang.org/ch02-05-control-flow): Learn the control flow expressions.
+- [Common Collections](https://book.cairo-lang.org/ch03-00-common-collections): Introduction to chapter 3 to handle the common collections in Cairo.
+- [Arrays](https://book.cairo-lang.org/ch03-01-arrays): How to use arrays in Cairo.
+- [Dictionaries](https://book.cairo-lang.org/ch03-02-dictionaries): How to use dictionaries in Cairo.
+- [Understanding Cairo's Ownership system](https://book.cairo-lang.org/ch04-00-understanding-ownership): Introduction to chapter 4 to understand the ownership in Cairo.
+- [Ownership Using a Linear Type System](https://book.cairo-lang.org/ch04-01-what-is-ownership): What is the ownership.
+- [References and Snapshots](https://book.cairo-lang.org/ch04-02-references-and-snapshots): How to use references and snapshots.
+- [Using Structs to Structure Related Data](https://book.cairo-lang.org/ch05-00-using-structs-to-structure-related-data): Introduction to chapter 5 to understand the Structs and structs related types.
+- [Defining and Instantiating Structs](https://book.cairo-lang.org/ch05-01-defining-and-instantiating-structs): How to use and define Structs.
+- [An Example Program Using Structs](https://book.cairo-lang.org/ch05-02-an-example-program-using-structs): An example of a program using structs.
+- [Method Syntax](https://book.cairo-lang.org/ch05-03-method-syntax): What are methods and how to use them in Cairo.
+- [Enums and Pattern Matching](https://book.cairo-lang.org/ch06-00-enums-and-pattern-matching): Introduction to chapter 6 to understand how enums work and how to use the match keyword.
+- [Enums](https://book.cairo-lang.org/ch06-01-enums): What are enums and how to use them in Cairo.
+- [The Match Control Flow Construct](https://book.cairo-lang.org/ch06-02-the-match-control-flow-construct): How to use the match keyword.
+- [Concise Control Flow with `if let` and `while let`](https://book.cairo-lang.org/ch06-03-concise-control-flow-with-if-let-and-while-let): How to create concise control flow with 'if let' and 'while let' keywords.
+- [Managing Cairo Projects with Packages, Crates and Modules](https://book.cairo-lang.org/ch07-00-managing-cairo-projects-with-packages-crates-and-modules): Introduction to chapter 7 to manage Cairo Projects with Packages, Crates and Modules
+- [Packages and Crates](https://book.cairo-lang.org/ch07-01-packages-and-crates): What are Packages and Crates in Cairo and how to use them.
+- [Defining Modules to Control Scope](https://book.cairo-lang.org/ch07-02-defining-modules-to-control-scope): How to use modules.
+- [Paths for Referring to an Item in the Module Tree](https://book.cairo-lang.org/ch07-03-paths-for-referring-to-an-item-in-the-module-tree): How paths work in Cairo.
+- [Bringing Paths into Scope with the `use` Keyword](https://book.cairo-lang.org/ch07-04-bringing-paths-into-scope-with-the-use-keyword): How to bring paths into scope with the `use` keyword.
+- [Separating Modules into Different Files](https://book.cairo-lang.org/ch07-05-separating-modules-into-different-files): How to separate modules into different files.
+- [Generic Types and Traits](https://book.cairo-lang.org/ch08-00-generic-types-and-traits): Introduction to chapter 8 to handle generic types and traits in Cairo.
+- [Generic Data Types](https://book.cairo-lang.org/ch08-01-generic-data-types): What are the generic Data Types and how to use them in Cairo.
+- [Traits in Cairo](https://book.cairo-lang.org/ch08-02-traits-in-cairo): What are the traits in Cairo and how to use them.
+- [Error handling](https://book.cairo-lang.org/ch09-00-error-handling): Introduction to chapter 9 to handle errors.
+- [Unrecoverable Errors with `panic`](https://book.cairo-lang.org/ch09-01-unrecoverable-errors-with-panic): What are the unrecoverable errors and how to use 'panic'.
+- [Recoverable Errors with `Result`](https://book.cairo-lang.org/ch09-02-recoverable-errors): What are the unrecoverable errors and how to use 'Result'.
+- [Testing Cairo Programs](https://book.cairo-lang.org/ch10-00-testing-cairo-programs): Introduction to chapter 10 to test Cairo programs.
+- [How To Write Tests](https://book.cairo-lang.org/ch10-01-how-to-write-tests): How to write tests.
+- [Test Organization](https://book.cairo-lang.org/ch10-02-test-organization): How to organize the tests.
+- [Advanced Features](https://book.cairo-lang.org/ch11-00-advanced-features): Introduction to chapter 11 to learn the advanced features in Cairo.
+- [Custom Data Structures](https://book.cairo-lang.org/ch11-01-custom-data-structures): How to create custom data structures.
+- [Smart Pointers](https://book.cairo-lang.org/ch11-02-smart-pointers): How to use smart pointers.
+- [Operator Overloading](https://book.cairo-lang.org/ch11-03-operator-overloading): How to overload operators.
+- [Hashes](https://book.cairo-lang.org/ch11-04-hash): How to use hashes.
+- [Macros](https://book.cairo-lang.org/ch11-05-macros): How to use macros.
+- [Inlining in Cairo](https://book.cairo-lang.org/ch11-06-inlining-in-cairo): How to use inlining in Cairo.
+- [Printing](https://book.cairo-lang.org/ch11-08-printing): How to print data to the console in Cairo.
+- [Deref Coercion](https://book.cairo-lang.org/ch11-09-deref-coercion): How to use Deref Coercion. It simplifies the way we interact with nested or wrapped data structures by allowing an instance of one type to behave like an instance of another type.
+- [Arithmetic Circuits](https://book.cairo-lang.org/ch11-10-arithmetic-circuits): How to use Arithmetic Circuits. Arithmetic circuits are mathematical models used to represent polynomial computations.
+- [Associated Items](https://book.cairo-lang.org/ch11-10-associated-items): How to use Associated Items. Associated Items are the items declared in traits or defined in implementations.
+- [Procedural Macros](https://book.cairo-lang.org/ch11-10-procedural-macros): How to use Procedural Macros. Cairo procedural macros are Rust functions that takes Cairo code as input and returns a modified Cairo code as output, enabling developers to extend Cairo's syntax and create reusable code patterns.
+- [Appendix A - Keywords](https://book.cairo-lang.org/appendix-01-keywords) : The following list contains keywords that are reserved for current or future use by the Cairo language.
+- [Appendix B - Operators and Symbols](https://book.cairo-lang.org/appendix-02-operators-and-symbols): This appendix contains a glossary of Cairo's syntax, including operators and other symbols that appear by themselves or in the context of paths, generics, macros, attributes, comments, tuples, and brackets.
+- [Appendix C - Derivable Traits](https://book.cairo-lang.org/appendix-03-derivable-traits): In this appendix, we provide a comprehensive reference detailing all the traits in the standard library compatible with the derive attribute.
+- [Appendix D - The Cairo Prelude](https://book.cairo-lang.org/appendix-04-cairo-prelude): Cairo's prelude provides the basic building blocks developers need to start Cairo programs and writing smart contracts.
+- [Appendix E - Common Error Messages](https://book.cairo-lang.org/appendix-05-common-error-messages): Listing of the most common error messages in this appendix to help resolve common issues.
+- [Appendix F - Useful Development Tools](https://book.cairo-lang.org/appendix-06-useful-development-tools): In this appendix, we talk about some useful development tools that the Cairo project provides. We’ll look at automatic formatting, quick ways to apply warning fixes, a linter, and integrating with IDEs.
+- [Introduction to Starknet Smart Contracts](https://book.cairo-lang.org/ch13-00-introduction-to-starknet-smart-contracts): Introduction to chapter 13 to learn about Starknet Smart Contracts. All through the previous sections, the programs were written with a main entrypoint. In the coming sections, we focus on writing and deploying Starknet contracts.
+- [General Introduction to Smart Contracts](https://book.cairo-lang.org/ch13-01-general-introduction-to-smart-contracts): High level introduction to what smart contracts are, what they are used for, and why blockchain developers would use Cairo and Starknet.
+- [Anatomy of a Simple Contract](https://book.cairo-lang.org/ch13-02-anatomy-of-a-simple-contract): Introduction to the anatomy of a simple contract.
+- [Building Starknet Smart Contracts](https://book.cairo-lang.org/ch14-00-building-starknet-smart-contracts): Introduction to chapter 14 to learn how to build Starknet Smart Contracts.
+- [Contract Storage](https://book.cairo-lang.org/ch14-01-00-contract-storage): Introduction to contract storage.
+- [Storing Key-Value Pairs with Mappings](https://book.cairo-lang.org/ch14-01-01-storage-mappings): How to store key-value pairs with mappings.
+- [Storing Collections with Vectors](https://book.cairo-lang.org/ch14-01-02-storage-vecs): How to store collections with vectors.
+- [Contract Functions](https://book.cairo-lang.org/ch14-02-contract-functions): Introduction to contract functions.
+- [Contract Events](https://book.cairo-lang.org/ch14-03-contract-events): Introduction to contract events.
+- [Interacting with Starknet Contracts](https://book.cairo-lang.org/ch15-00-starknet-contract-interactions): Introduction to chapter 15 to learn how to interact with Starknet contracts.
+- [Contract Class ABI](https://book.cairo-lang.org/ch15-01-contract-class-abi): Introduction to contract class ABI.
+- [Interacting with Another Contract](https://book.cairo-lang.org/ch15-02-interacting-with-another-contract): How to interact with another contract.
+- [Executing Code from Another Class](https://book.cairo-lang.org/ch15-03-executing-code-from-another-class): How to execute code from another class.
+- [Building Advanced Starknet Smart Contracts](https://book.cairo-lang.org/ch16-00-building-advanced-starknet-smart-contracts): Introduction to chapter 16 to learn how to build advanced Starknet Smart Contracts.
+- [Optimizing Storage Costs](https://book.cairo-lang.org/ch16-01-optimizing-storage-costs): How to optimize storage costs.
+- [Components: Lego-Like Building Blocks for Smart Contracts](https://book.cairo-lang.org/ch16-02-00-composability-and-components): Introduction to components.
+- [Components: Under the Hood](https://book.cairo-lang.org/ch16-02-01-under-the-hood): How components work under the hood.
+- [Component Dependencies](https://book.cairo-lang.org/ch16-02-02-component-dependencies): How to handle component dependencies.
+- [Testing Components](https://book.cairo-lang.org/ch16-02-03-testing-components): How to test components.
+- [Upgradeable Contracts](https://book.cairo-lang.org/ch16-03-upgradeability): How to upgrade contracts.
+- [L1-L2 Messaging](https://book.cairo-lang.org/ch16-04-L1-L2-messaging): How to use L1-L2 messaging.
+- [Oracle Interactions](https://book.cairo-lang.org/ch16-05-oracle-interactions): Introduction to chapter 16.5 to learn how to interact with oracles.
+- [Price Feeds](https://book.cairo-lang.org/ch16-05-01-price-feeds): How to use price feeds. Price feeds enabled by an oracle serve as a bridge between real-world data feed and the blockchain.
+- [Randomness](https://book.cairo-lang.org/ch16-05-02-randomness): How to use randomness. Verifiable random functions (VRFs) provided by oracles guarantee that the randomness can't be predicted or tampered with, ensuring trust and transparency in these applications.
+- [Other Examples](https://book.cairo-lang.org/ch16-06-00-other-examples): Introduction to chapter 16.6 listing other examples.
+- [Deploying and Interacting with a Voting contract](https://book.cairo-lang.org/ch16-06-01-deploying-and-interacting-with-a-voting-contract): Example of deploying and interacting with a voting contract.
+- [Starknet Smart Contracts Security](https://book.cairo-lang.org/ch17-00-starknet-smart-contracts-security): Introduction to chapter 17 to learn about Starknet Smart Contracts Security.
+- [General Recommendations](https://book.cairo-lang.org/ch17-01-general-recommendations): General recommendations for writing secure smart contracts.
+- [Testing Smart Contracts](https://book.cairo-lang.org/ch17-02-testing-smart-contracts): How to test smart contracts.
+- [Static Analysis Tools](https://book.cairo-lang.org/ch17-03-static-analysis-tools): How to use static analysis tools.
+- [Appendix A - System Calls](https://book.cairo-lang.org/appendix-08-system-calls): Listing of Starknet system calls
+- [Introduction](https://book.cairo-lang.org/ch200-introduction): Introduction to the Cairo VM.
+- [Architecture](https://book.cairo-lang.org/ch201-architecture): Understanding Cairo's STARK-friendly Von Neumann architecture, its components (compiler, VM, prover/verifier), and how they work together to generate and verify proofs.
+- [Builtins](https://book.cairo-lang.org/ch204-00-builtins): Understanding builtins as predefined optimized low-level execution units that enhance Cairo's performance.
+- [How Builtins Work](https://book.cairo-lang.org/ch204-01-how-builtins-work): Deep dive into how builtins enforce constraints on Cairo memory to perform specific optimized tasks.
+- [Pedersen Builtin](https://book.cairo-lang.org/ch204-02-01-pedersen): Understanding the Pedersen hash builtin and its implementation for efficient hash computation.
+
+
+## Optional
+
+- [Website](https://www.cairo-lang.org/)
+- [Discord](https://starknet.io/discord/)
+- [X](https://twitter.com/CairoLang)
+- [Github](https://github.com/cairo-book/cairo-book)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/cairo-lang)
