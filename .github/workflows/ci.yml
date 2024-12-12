@@ -85,9 +85,6 @@ jobs:
         run: cairo-listings verify >> $GITHUB_STEP_SUMMARY
         shell: bash
 
-      - name: Clean up mdbook-quiz-cairo
-        run: rm -rf mdbook-quiz-cairo
-        shell: bash
 
   typos:
     runs-on: ubuntu-latest
