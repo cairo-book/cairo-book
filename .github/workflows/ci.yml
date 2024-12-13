@@ -13,36 +13,75 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache pnpm and node modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules
+          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
+      - name: Cache asdf tools
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.asdf
+            ~/.cache/scarb
+            ~/.cache/starknet-foundry
+          key: asdf-${{ runner.os }}-${{ hashFiles('.tool-versions') }}
+          restore-keys: |
+            asdf-${{ runner.os }}-
+
+      - name: Install asdf & tools
         uses: asdf-vm/actions/install@v3
 
-      - name: Set default scarb version # First version in .tool-versions
+      - name: Set default scarb version
         run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Setup Starknet-Foundry
         uses: foundry-rs/setup-snfoundry@v3
 
       - name: Setup Rust cache
-        uses: ./.github/workflows/setup-rust-cache
+        uses: Swatinem/rust-cache@v2
 
-      - name: Install mdbook
+      - name: Cache mdbook binaries
+        id: cache-mdbook
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.local/bin
+          key: mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions', '.github/workflows/install-mdbook/action.yml') }}
+
+      - name: Install mdbook and dependencies
+        if: steps.cache-mdbook.outputs.cache-hit != 'true'
         uses: ./.github/workflows/install-mdbook
+
+      - name: Add binary paths to PATH
+        run: |
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        shell: bash
 
       - name: Build book (English)
         run: mdbook build -d book
 
       - name: Install cairo-listings
+        if: steps.cache-mdbook.outputs.cache-hit != 'true'
         run: cargo install --path cairo-listings --locked
         shell: bash
 
       - name: Run cairo-listings and generate summary
         run: cairo-listings verify >> $GITHUB_STEP_SUMMARY
         shell: bash
+
 
   typos:
     runs-on: ubuntu-latest
