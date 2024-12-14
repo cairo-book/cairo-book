@@ -86,6 +86,14 @@ It is also possible to implement the `Display` trait for the `Point` struct usin
 
 > Printing complex data types this way might not be ideal as it requires additional steps to use the `print!` and `println!` macros. If you need to print complex data types, especially when debugging, use the `Debug` trait described below instead.
 
+## Print in Hexadecimal
+
+By default, the `Display` trait prints integer values in decimal. But, as in Rust, you can use the `{:x}` notation to print them in hexadecimal.
+
+Under the hood, Cairo implements the `LowerHex` trait for common types such as unsigned integers, `felt252` and `NonZero` but also for common Starknet types such as `ContractAddress` and `ClassHash`.
+
+If it makes sense for you, you can also implement the `LowerHex` trait for your custom types using the same approach as for the `Display` trait (see [Printing Custom Data Types][print with display]).
+
 ## Print Debug Traces
 
 Cairo provides the `Debug` trait, which can be derived to print the value of variables when debugging. Simply add `:?` within the curly brackets `{}` placeholders in a `print!` or `println!` macro string.
