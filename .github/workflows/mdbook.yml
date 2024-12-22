@@ -55,6 +55,16 @@ jobs:
       - name: Build book (English)
         run: mdbook build -d book
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Generate redirects
+        run: |
+          echo "Generating redirects for old URLs..."
+          bun run scripts/generate-redirects.ts
+
       - name: Copy WASM-Cairo pkg
         run: |
           cp -r theme/pkg book/html
