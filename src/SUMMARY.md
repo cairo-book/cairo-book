@@ -110,10 +110,7 @@
 
 ## Introduction to Starknet Smart Contracts
 
-- [Introduction to Starknet Smart Contracts](./ch13-00-introduction-to-starknet-smart-contracts.md)
-
-  - [General Introduction to Smart Contracts](./ch13-01-general-introduction-to-smart-contracts.md)
-  - [Anatomy of a Simple Contract](./ch13-02-anatomy-of-a-simple-contract.md)
+- [Introduction to Smart Contracts](./ch13-01-introduction-to-smart-contracts.md)
 
 ## Building Starknet Smart Contracts
 
