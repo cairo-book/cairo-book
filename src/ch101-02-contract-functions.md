@@ -2,7 +2,7 @@
 
 In this section, we are going to be looking at the different types of functions you could encounter in Starknet smart contracts.
 
-Functions can access the contract's state easily via `self: ContractState`, which abstracts away the complexity of underlying system calls (`storage_read_syscall` and `storage_write_syscall`). The compiler provides two modifiers: `ref` and `@` to decorate `self`, which intends to distinguish view and external functions.
+Functions can access the contract's state easily via the `self: ContractState` object, which abstracts away the complexity of underlying system calls (`storage_read_syscall` and `storage_write_syscall`). The compiler provides two modifiers: `ref` and `@` to decorate `self`, which intends to distinguish view and external functions.
 
 Let's consider the `NameRegistry` contract in Listing {{#ref reference-contract}} that we'll be using throughout this chapter:
 
@@ -12,8 +12,6 @@ Let's consider the `NameRegistry` contract in Listing {{#ref reference-contract}
 
 {{#label reference-contract}}
 <span class="caption">Listing {{#ref reference-contract}}: Our reference contract for this chapter</span>
-
-[contract interface]: ./ch13-02-anatomy-of-a-simple-contract.md#the-interface-the-contracts-blueprint
 
 ## 1. Constructors
 
