@@ -94,6 +94,7 @@
   - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
   - [Printing](ch11-08-printing.md)
   - [Arithmetic Circuits](ch11-10-arithmetic-circuits.md)
+  - [Closures](ch11-11-closures.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
