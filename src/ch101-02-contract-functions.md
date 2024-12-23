@@ -7,7 +7,7 @@ Functions can access the contract's state easily via the `self: ContractState` o
 Let's consider the `NameRegistry` contract in Listing {{#ref reference-contract}} that we'll be using throughout this chapter:
 
 ```cairo,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:all}}
+{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:all}}
 ```
 
 {{#label reference-contract}}
