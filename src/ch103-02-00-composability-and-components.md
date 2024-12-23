@@ -64,8 +64,8 @@ ComponentState<TContractState>` (for state-modifying functions) or `self:
 generic over `TContractState`, allowing us to use this component in any
 contract.
 
-[contract anatomy]: ./ch13-02-anatomy-of-a-simple-contract.md
-[contract dispatcher]: ./ch15-02-interacting-with-another-contract.md
+[contract anatomy]: ./ch100-00-introduction-to-smart-contracts.md#
+[contract dispatcher]: ./ch102-02-interacting-with-another-contract.md
 
 ### Example: an Ownable Component
 
@@ -77,13 +77,13 @@ The interface of the Ownable component, defining the methods available
 externally to manage ownership of a contract, would look like this:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:interface}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:interface}}
 ```
 
 The component itself is defined as:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:component}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:component}}
 ```
 
 This syntax is actually quite similar to the syntax used for contracts. The only
@@ -99,7 +99,7 @@ meant to be used internally by a contract embedding the component.
 ## A Closer Look at the `impl` Block
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:impl_signature}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:impl_signature}}
 ```
 
 The `#[embeddable_as]` attribute is used to mark the impl as embeddable inside a
@@ -123,7 +123,7 @@ or `self.emit(...).`
 > Note: To avoid the confusion between the embeddable name and the impl name, we
 > recommend keeping the suffix `Impl` in the impl name.
 
-[components inner working]: ./ch16-02-01-under-the-hood.md
+[components inner working]: ./ch103-02-01-under-the-hood.md
 
 ## Migrating a Contract to a Component
 
@@ -180,7 +180,7 @@ For example, to embed the `Ownable` component defined above, we would do the
 following:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/contract.cairo:all}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/contract.cairo:all}}
 ```
 
 The component's logic is now seamlessly part of the contract! We can interact
@@ -188,7 +188,7 @@ with the components functions externally by calling them using the
 `IOwnableDispatcher` instantiated with the contract's address.
 
 ```cairo
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:interface}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:interface}}
 ```
 
 ## Stacking Components for Maximum Composability
@@ -207,5 +207,5 @@ Components can even [depend][component dependencies] on other components by rest
 Before we dive into this mechanism, let's first look at [how components work under the hood][components inner working].
 
 [OpenZeppelin Cairo Contracts]: https://github.com/OpenZeppelin/cairo-contracts
-[component dependencies]: ./ch16-02-02-component-dependencies.md
-[components inner working]: ./ch16-02-01-under-the-hood.md
+[component dependencies]: ./ch103-02-02-component-dependencies.md
+[components inner working]: ./ch103-02-01-under-the-hood.md

@@ -9,7 +9,7 @@ The first way to implement this is to create a single component that contains bo
 Listing {{#ref ownable_component}} shows the complete implementation, which we'll break down right after:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:full}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:full}}
 ```
 
 {{#label ownable_component}}
@@ -20,7 +20,7 @@ Listing {{#ref ownable_component}} shows the complete implementation, which we'l
 ### Specifying Dependencies on Another Component
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:component_signature}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:component_signature}}
 ```
 
 In [chapter 8][cairo traits], we introduced trait bounds, which are used to specify that a generic type must implement a certain trait. In the same way, we can specify that a component depends on another component by restricting the `impl` block to be available only for contracts that contain the required component.
@@ -31,7 +31,7 @@ Although most of the trait bounds were defined using [anonymous parameters][anon
 While this mechanism is verbose and may not be easy to approach at first, it is a powerful leverage of the trait system in Cairo. The inner workings of this mechanism are abstracted away from the user, and all you need to know is that when you embed a component in a contract, all other components in the same contract can access it.
 
 [cairo traits]: ./ch08-02-traits-in-cairo.md
-[component impl]: ch16-02-01-under-the-hood.md#inside-components-generic-impls
+[component impl]: ch103-02-01-under-the-hood.md#inside-components-generic-impls
 
 [anonymous generic impl operator]: ./ch08-01-generic-data-types md#anonymous-generic-implementation-parameter--operator
 
@@ -42,7 +42,7 @@ If we want to access the state of the `Ownable` component without mutating it, w
 Both macros take two arguments: the first is `self`, either as a snapshot or by reference depending on mutability, representing the state of the component using the dependency, and the second is the component to access.
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:increment}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:increment}}
 ```
 
 In this function, we want to make sure that only the owner can call the `increment` function. We need to use
@@ -51,7 +51,7 @@ the `assert_only_owner` function from the `Ownable` component. We'll use the `ge
 For the `transfer_ownership` function, we want to mutate that state to change the current owner. We need to use the `get_dep_component_mut!` macro, which will return the requested component state as a mutable reference, and call `transfer_ownership` on it.
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:transfer_ownership}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:transfer_ownership}}
 ```
 
 It works exactly the same as `get_dep_component!` except that we need to pass the state as a `ref` so we can

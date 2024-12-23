@@ -24,7 +24,7 @@ To declare a mapping, use the `Map` type enclosed in angle brackets `<>`, specif
 <!-- [phantom types]: ./ch11-03-intro-to-phantom-data.html -->
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:contract}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:contract}}
 ```
 
 {{#label storage-mappings}}
@@ -33,13 +33,13 @@ To declare a mapping, use the `Map` type enclosed in angle brackets `<>`, specif
 To read the value corresponding to a key in a mapping, you first need to retrieve the storage pointer associated with that key. This is done by calling the `entry` method on the storage mapping variable, passing in the key as a parameter. Once you have the entry path, you can call the `read` function on it to retrieve the stored value.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:read}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:read}}
 ```
 
 Similarly, to write a value in a storage mapping, you need to retrieve the storage pointer corresponding to the key. Once you have this storage pointer, you can call the `write` function on it with the value to write.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:write}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:write}}
 ```
 
 ## Nested Mappings
@@ -49,13 +49,13 @@ You can also create more complex mappings with multiple keys. To illustrate this
 The `user_warehouse` mapping is a storage mapping that maps `ContractAddress` to another mapping that maps `u64` (item ID) to `u64` (quantity). This can be implemented by declaring a `Map<ContractAddress, Map<u64, u64>>` in the storage struct. Each `ContractAddress` key in the `user_warehouse` mapping corresponds to a user's warehouse, and each user's warehouse contains a mapping of item IDs to their respective quantities.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_nested_storage_mapping/src/lib.cairo:storage}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_nested_storage_mapping/src/lib.cairo:storage}}
 ```
 
 In this case, the same principle applies for accessing the stored values. You need to traverse the keys step by step, using the `entry` method to get the storage path to the next key in the sequence, and finally calling `read` or `write` on the innermost mapping.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_nested_storage_mapping/src/lib.cairo:accesses}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_nested_storage_mapping/src/lib.cairo:accesses}}
 ```
 
 ## Storage Address Computation for Mappings

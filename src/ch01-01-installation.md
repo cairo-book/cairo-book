@@ -81,7 +81,7 @@ We'll describe Starknet Foundry in more detail in [Chapter {{#chap testing-cairo
 
 [snfoundry download]: https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html
 [writing tests]: ./ch10-01-how-to-write-tests.md
-[testing with snfoundry]: ./ch17-02-testing-smart-contracts.md#testing-smart-contracts-with-starknet-foundry
+[testing with snfoundry]: ./ch104-02-testing-smart-contracts.md#testing-smart-contracts-with-starknet-foundry
 
 ## Installing the VSCode Extension
 

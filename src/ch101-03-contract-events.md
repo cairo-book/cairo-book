@@ -9,7 +9,7 @@ Technically speaking, an event is a custom data structure emitted by a smart con
 The events of a smart contract are defined in an enum annotated with the attribute `#[event]`. This enum must be named `Event`.
 
 ```cairo,noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:event}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:event}}
 ```
 
 Each variant, like `BookAdded` or `FieldUpdated` represents an event that can be emitted by the contract. The variant data represents the data associated to an event. It can be any `struct` or `enum` that implements the `starknet::Event` trait.
@@ -20,7 +20,7 @@ Each event data field can be annotated with the attribute `#[key]`. Key fields a
 Let's look at the full event definition of this example to add, update and remove books:
 
 ```cairo,noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:full_events}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:full_events}}
 ```
 
 In this example:
@@ -42,7 +42,7 @@ If you have more than 2 nested enums, you can use the `#[flat]` attribute on mul
 Once you have defined your list of events, you want to emit them in your smart contracts. This can be simply achieved by calling `self.emit()` with an event data structure in parameter.
 
 ```cairo,noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:emit_event}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_events_example/src/lib.cairo:emit_event}}
 ```
 
 To have a better understanding of what happens under the hood, let's see two examples of emitted events and how they are stored in the transaction receipt:

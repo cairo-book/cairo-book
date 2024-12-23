@@ -21,9 +21,8 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 
 After adding the required dependencies for your project, you'll need to define a contract interface that includes the required pragma price feed entry point.
 
-
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_interface}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_interface}}
 ```
 
 Of the two public functions exposed in the `IPriceFeedExample`, the one necessary to interact with the pragma price feed oracle is the `get_asset_price` function, a view function that takes in the `asset_id` argument and returns a `u128` value.
@@ -31,7 +30,7 @@ Of the two public functions exposed in the `IPriceFeedExample`, the one necessar
 ### Import Pragma Dependencies
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:pragma_lib}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:pragma_lib}}
 ```
 
 The snippet above shows the necessary imports you need to add to your contract module in order to interact with the Pragma oracle.
@@ -39,7 +38,7 @@ The snippet above shows the necessary imports you need to add to your contract m
 ### Required Price Feed Function Impl in Contract
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_feed_impl}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:price_feed_impl}}
 ```
 
 The `get_asset_price` function is responsible for retrieving the price of the asset specified by the `asset_id` argument from Pragma Oracle. The `get_data_median` method is called from the `IPragmaDispatcher` instance by passing the `DataType::SpotEntry(asset_id)` as an argument and its output is assigned to a variable named `output` of type `PragmaPricesResponse`. Finally, the function returns the price of the requested asset as a `u128`.
@@ -47,7 +46,7 @@ The `get_asset_price` function is responsible for retrieving the price of the as
 ## Example Application Using Pragma Price Feed
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:here}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_08_price_feed/src/lib.cairo:here}}
 ```
 
 > **Note**: Pragma returns the value of different token pairs using the decimal factor of 6 or 8. You can convert the value to the required decimal factor by dividing the value by \\( {10^{n}} \\), where `n` is the decimal factor.

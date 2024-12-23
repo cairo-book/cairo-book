@@ -25,9 +25,9 @@ There are 3 different types of entrypoints in a Starknet contract:
 
 - L1-Handlers, functions that can only be triggered by the sequencer after receiving a [message][L1-L2 messaging] from the L1 network whose payload contains an instruction to call a contract.
 
-[public function]: ./ch14-02-contract-functions.md#2-public-functions
-[constructor]: ./ch14-02-contract-functions.md#1-constructors
-[L1-L2 messaging]: ./ch16-04-L1-L2-messaging.md
+[public function]: ./ch101-02-contract-functions.md#2-public-functions
+[constructor]: ./ch101-02-contract-functions.md#1-constructors
+[L1-L2 messaging]: ./ch103-04-L1-L2-messaging.md
 
 A function entrypoint is represented by a _selector_ and a `function_idx` in a Cairo contract class.
 

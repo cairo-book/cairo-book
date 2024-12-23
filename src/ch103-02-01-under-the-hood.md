@@ -17,7 +17,7 @@ new entry points and modifying the ABI of the contract.
 Let's look at an example to see this in action:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_01_embeddable/src/lib.cairo}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_01_embeddable/src/lib.cairo}}
 ```
 
 By embedding `SimpleImpl`, we externally expose `ret4` in the contract's ABI.
@@ -30,7 +30,7 @@ components build on this.
 Recall the impl block syntax used in components:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:impl_signature}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:impl_signature}}
 ```
 
 The key points:
@@ -67,7 +67,7 @@ TContractState`, where access to the component state is made via the
   contract that wants to use it. The opposite direction
   (`ComponentState<TContractState>` to `ContractState`) is useful for
   dependencies (see the `Upgradeable` component depending on an `IOwnable`
-  implementation example in the [Components dependencies ](./ch16-02-02-component-dependencies.md) section).
+  implementation example in the [Components dependencies ](./ch103-02-02-component-dependencies.md) section).
 
   To put it briefly, one should think of an implementation of the above
   `HasComponent<T>` as saying: **“Contract whose state T has the upgradeable
@@ -82,7 +82,7 @@ TContractState`, where access to the component state is made via the
   expect to get an impl with the following functions:
 
   ```cairo,noplayground
-  {{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:trait_def}}
+  {{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/component.cairo:trait_def}}
   ```
 
   Note that while starting with a function receiving the generic type
@@ -92,7 +92,7 @@ TContractState`, where access to the component state is made via the
   the `embeddable_as(Ownable)` annotation:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_02_embeddable_as_output/src/lib.cairo}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_02_embeddable_as_output/src/lib.cairo}}
 ```
 
 Note that thanks to having an impl of `HasComponent<TContractState>`, the
@@ -110,7 +110,7 @@ The contract uses an **impl alias** to instantiate the component's generic impl
 with the concrete `ContractState` of the contract.
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/contract.cairo:embedded_impl}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_02_ownable_component/src/contract.cairo:embedded_impl}}
 ```
 
 The above lines use the Cairo impl embedding mechanism alongside the impl alias

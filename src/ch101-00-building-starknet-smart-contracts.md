@@ -14,10 +14,10 @@ At this point, you should have multiple questions that come to mind:
 Luckily, we'll be answering all these questions in this chapter. Let's consider the `NameRegistry` contract in Listing {{#ref reference-contract}} that we'll be using throughout this chapter:
 
 ```cairo,noplayground
-{{#include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:all}}
+{{#include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:all}}
 ```
 
 {{#label reference-contract}}
 <span class="caption">Listing {{#ref reference-contract}}: Our reference contract for this chapter</span>
 
-[contract interface]: ./ch13-02-anatomy-of-a-simple-contract.md#the-interface-the-contracts-blueprint
+[contract interface]: ./ch100-00-introduction-to-smart-contracts.md#the-interface-the-contracts-blueprint

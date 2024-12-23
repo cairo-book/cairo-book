@@ -5,7 +5,7 @@ The contract’s storage is a persistent storage space where you can read, write
 
 Each storage slot is identified by a `felt252` value, called the storage address, which is computed from the variable's name and parameters that depend on the variable's type, outlined in the ["Addresses of Storage Variables"][storage addresses] section.
 
-[storage addresses]: ./ch14-01-00-contract-storage.md#addresses-of-storage-variables
+[storage addresses]: ./ch101-01-00-contract-storage.md#addresses-of-storage-variables
 
 We can interact with the contract's storage in two ways:
 
@@ -17,14 +17,14 @@ We can interact with the contract's storage in two ways:
 Storage variables in Starknet contracts are stored in a special struct called `Storage`:
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:storage}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:storage}}
 ```
 
 The `Storage` struct is a [struct][structs] like any other, except that it **must** be annotated with the `#[storage]` attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. This struct can contain any type that implements the `Store` trait, including other structs, enums, as well as [Storage Mappings][storage mappings], [Storage Vectors][storage vecs], and [Storage Nodes][storage nodes]. In this section, we'll focus on simple storage variables, and we'll see how to store more complex types in the next sections.
 
-[storage mappings]: ./ch14-01-01-storage-mappings.md
-[storage vecs]: ./ch14-01-02-storage-vecs.md
-[storage nodes]: ./ch14-01-00-contract-storage.md#storage-nodes
+[storage mappings]: ./ch101-01-01-storage-mappings.md
+[storage vecs]: ./ch101-01-02-storage-vecs.md
+[storage nodes]: ./ch101-01-00-contract-storage.md#storage-nodes
 [structs]: ./ch05-00-using-structs-to-structure-related-data.md
 
 ### Accessing Storage Variables
@@ -34,19 +34,19 @@ Variables stored in the `Storage` struct can be accessed and modified using the 
 To read the value of the `owner` storage variable, which is of type `Person`, we call the `read` function on the `owner` variable, passing in no arguments.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:read_owner}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:read_owner}}
 ```
 
 To write a new value to the storage slot of a storage variable, we call the `write` function, passing in the value as argument. Here, we only pass in the value to write to the `owner` variable as it is a simple variable.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:write_owner}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:write_owner}}
 ```
 
 When working with compound types, instead of calling `read` and `write` on the struct variable itself, which would perform a storage operation for each member, you can call `read` and `write` on specific members of the struct. This allows you to access and modify the values of the struct members directly, minimizing the amount of storage operations performed. In the following example, the `owner` variable is of type `Person`. Thus, it has one attribute called `name`, on which we can call the `read` and `write` functions to access and modify its value.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:read_owner_name}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:read_owner_name}}
 ```
 
 ## Storing Custom Types with the `Store` Trait
@@ -58,7 +58,7 @@ But what if you wanted to store a type that you defined yourself, such as an enu
 In our example, we want to store a `Person` struct in storage, which is only possible by implementing the `Store` trait for the `Person` type. This can be simply achieved by adding a `#[derive(starknet::Store)]` attribute on top of our struct definition. Note that all the members of the struct need to implement the `Store` trait for the trait to be derived.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:person}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:person}}
 ```
 
 Similarly, Enums can only be written to storage if they implement the `Store` trait, which can be trivially derived as long as all associated types implement the `Store` trait.
@@ -68,7 +68,7 @@ Enums used in contract storage **must** define a default variant. This default v
 Here's an example of how to properly define an enum for use in contract storage:
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:enum}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:enum}}
 ```
 
 In this example, we've added the `#[default]` attribute to the `Infinite` variant. This tells the Cairo compiler that if we try to read an uninitialized enum from storage, the `Infinite` variant should be returned.
@@ -117,19 +117,19 @@ The main benefits of storage nodes is that they allow you to create more sophist
 Storage nodes are structs defined with the `#[starknet::storage_node]` attribute. In this new contract that implements a voting system, we implement a `ProposalNode` storage node containing a `Map<ContractAddress, bool>` to keep track of the voters of the proposal, along with other fields to store the proposal's metadata.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_node/src/lib.cairo:storage_node}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_node/src/lib.cairo:storage_node}}
 ```
 
 When accessing a storage node, you can't `read` or `write` it directly. Instead, you have to access its individual members. Here's an example from our `VotingSystem` contract that demonstrates how we populate each field of the `ProposalNode` storage node:
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_node/src/lib.cairo:create_proposal}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_node/src/lib.cairo:create_proposal}}
 ```
 
 Because no voter has voted on this proposal yet, we don't need to populate the `voters` map when creating the proposal. But we could very well access the `voters` map to check if a given address has already voted on this proposal when it tries to cast its vote:
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_node/src/lib.cairo:vote}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_node/src/lib.cairo:vote}}
 ```
 
 In this example, we access the `ProposalNode` for a specific proposal ID. We then check if the caller has already voted by reading from the `voters` map within the storage node. If they haven't voted yet, we write to the `voters` map to mark that they have now voted.
@@ -149,12 +149,12 @@ The address of a storage variable is computed as follows:
 You can access the base address of a storage variable by accessing the `__base_address__` attribute on the variable, which returns a `felt252` value.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:owner_address}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:owner_address}}
 ```
 
 This address calculation mechanism is performed through a modelisation of the contract storage space using a concept of StoragePointers and StoragePaths that we'll now introduce.
 
-[custom types storage layout]: ./ch14-01-00-contract-storage.md#storing-custom-types
+[custom types storage layout]: ./ch101-01-00-contract-storage.md#storing-custom-types
 
 ## Modeling of the Contract Storage in the Core Library
 
@@ -168,7 +168,7 @@ Each storage variable can be converted to a `StoragePointer`. This pointer conta
 An example is worth a thousand words. Let's consider the `Person` struct defined in the previous section:
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:person}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_simple_storage/src/lib.cairo:person}}
 ```
 
 When we write `let x = self.owner;`, we access a variable of type `StorageBase` that represents the base location of the `owner` variable in the contract's storage.

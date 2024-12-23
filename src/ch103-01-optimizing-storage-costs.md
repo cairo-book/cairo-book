@@ -67,7 +67,7 @@ For example, consider the following `Sizes` struct with 3 fields of different ty
 Note that, as it also fits in a `u128`, it's a good practice to use the smallest type to pack all your variables, so here a `u128` should be used.
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_01_storage_packing/src/lib.cairo:struct}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_01_storage_packing/src/lib.cairo:struct}}
 ```
 
 To pack these 3 variables into a `u128` we have to successively shift them to the left, and finally sum them.
@@ -95,7 +95,7 @@ Cairo provides the `StorePacking` trait to enable packing struct fields into few
 Here is the implementation of the example of the previous chapter:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_01_storage_packing/src/lib.cairo:here}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_01_storage_packing/src/lib.cairo:here}}
 ```
 
 <div align="center">
