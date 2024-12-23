@@ -227,7 +227,7 @@ expression is over and the next one is ready to begin. Most lines of Cairo code
 end with a semicolon.
 
 [devtools]: ./appendix-06-useful-development-tools.md
-[macros]: ./ch11-05-macros.md
+[macros]: ./ch12-05-macros.md
 
 {{#quiz ../quizzes/ch01-02-hello-world.toml}}
 

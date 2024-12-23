@@ -21,7 +21,7 @@ To declare a mapping, use the `Map` type enclosed in angle brackets `<>`, specif
 ## Declaring and Using Storage Mappings
 
 <!-- TODO PHANTOM TYPES -->
-<!-- [phantom types]: ./ch11-03-intro-to-phantom-data.html -->
+<!-- [phantom types]: ./ch12-03-intro-to-phantom-data.html -->
 
 ```cairo, noplayground
 {{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_02_storage_mapping/src/lib.cairo:contract}}

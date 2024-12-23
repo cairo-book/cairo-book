@@ -79,22 +79,27 @@
   - [How To Write Tests](ch10-01-how-to-write-tests.md)
   - [Test Organization](ch10-02-test-organization.md)
 
+## Thinking in Rust
+
+- [Functional Language Features: Iterators and Closures](ch11-00-functional-features.md)
+  - [Closures: Anonymous Functions that Capture Their Environment](ch11-01-closures.md)
+  <!-- - [Processing a Series of Items with Iterators](ch11-02-iterators.md) -->
+
 ## Advanced Cairo Features
 
-- [Advanced Cairo Features](ch11-00-advanced-features.md)
+- [Advanced Cairo Features](ch12-00-advanced-features.md)
 
-  - [Custom Data Structures](ch11-01-custom-data-structures.md)
-  - [Smart Pointers](ch11-02-smart-pointers.md)
-  - [Deref Coercion](ch11-09-deref-coercion.md)
-  - [Associated Items](ch11-10-associated-items.md)
-  - [Operator Overloading](ch11-03-operator-overloading.md)
-  - [Working with Hashes](ch11-04-hash.md)
-  - [Macros](ch11-05-macros.md)
-  - [Procedural Macros](ch11-10-procedural-macros.md)
-  - [Inlining in Cairo](ch11-06-inlining-in-cairo.md)
-  - [Printing](ch11-08-printing.md)
-  - [Arithmetic Circuits](ch11-10-arithmetic-circuits.md)
-  - [Closures](ch11-11-closures.md)
+  - [Custom Data Structures](ch12-01-custom-data-structures.md)
+  - [Smart Pointers](ch12-02-smart-pointers.md)
+  - [Deref Coercion](ch12-09-deref-coercion.md)
+  - [Associated Items](ch12-10-associated-items.md)
+  - [Operator Overloading](ch12-03-operator-overloading.md)
+  - [Working with Hashes](ch12-04-hash.md)
+  - [Macros](ch12-05-macros.md)
+  - [Procedural Macros](ch12-10-procedural-macros.md)
+  - [Inlining in Cairo](ch12-06-inlining-in-cairo.md)
+  - [Printing](ch12-08-printing.md)
+  - [Arithmetic Circuits](ch12-10-arithmetic-circuits.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
