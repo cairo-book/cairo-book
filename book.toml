@@ -4,6 +4,7 @@ language = "en"
 multilingual = false
 src = "src"
 title = "The Cairo Programming Language"
+description = "The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet."
 
 [build]
 extra-watch-dirs = ["po", "listings"]
@@ -25,6 +26,10 @@ google-analytics = "G-0ZJLBV4KE2"
 additional-css = ["theme/css/last-changed.css", "theme/css/chat.css"]
 additional-js = ["theme/chat.js"]
 mathjax-support = true
+
+# Redirects to avoid dead links
+[output.html.redirect]
+"/ch13-01-general-introduction-to-smart-contracts.html" = "/ch13-01-introduction-to-smart-contracts.html"
 
 [output.html.code.hidelines]
 cairo = "# "
