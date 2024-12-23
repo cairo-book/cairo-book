@@ -13,7 +13,7 @@ Together, these functions, states, constants, and events create a structured vot
 Listing {{#ref voting_contract}} shows the `Vote` contract in detail:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/listing_05_vote_contract/src/lib.cairo}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_05_vote_contract/src/lib.cairo}}
 ```
 
 {{#label voting_contract}}

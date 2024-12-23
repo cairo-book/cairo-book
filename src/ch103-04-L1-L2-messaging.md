@@ -121,7 +121,7 @@ The parameters are as follows:
 On the Starknet side, to receive this message, we have:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_handler}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_handler}}
 ```
 
 We need to add the `#[l1_handler]` attribute to our function. L1 handlers are special functions that can only be executed by an `L1HandlerTransaction`. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your `#[l1_handler]` functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.
@@ -136,7 +136,7 @@ When sending messages from Starknet to Ethereum, you will have to use the `send_
 To send a message from L2 to L1, what we would do on Starknet is:
 
 ```cairo,noplayground
-{{#include ../listings/ch16-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_send}}
+{{#include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_03_L1_L2_messaging/src/lib.cairo:felt_msg_send}}
 ```
 
 We simply build the payload and pass it, along with the L1 contract address, to the syscall function.

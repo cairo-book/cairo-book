@@ -89,7 +89,7 @@ This chapter will introduce you to the basics of Starknet contracts using a very
 Let's consider the following contract for the whole chapter. It might not be easy to understand it all at once, but we will go through it step by step:
 
 ```cairo,noplayground
-{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:all}}
+{{#include ../listings/ch100-introduction-to-smart-contracts/listing_01_simple_contract/src/lib.cairo:all}}
 ```
 
 {{#label simple-contract}}
@@ -107,7 +107,7 @@ You can think of it as a single slot in a database that you can query and modify
 ### The Interface: the Contract's Blueprint
 
 ```cairo,noplayground
-{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:interface}}
+{{#include ../listings/ch100-introduction-to-smart-contracts/listing_01_simple_contract/src/lib.cairo:interface}}
 ```
 
 {{#label interface}}
@@ -126,7 +126,7 @@ On the other hand, the `get` function takes a snapshot of `TContractState`, whic
 By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface. For example, Listing {{#ref wrong-impl}} shows a wrong implementation of the `ISimpleStorage` interface, containing a slightly different `set` function that doesn't have the same signature.
 
 ```cairo,noplayground
-{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/src/lib.cairo:impl}}
+{{#include ../listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/src/lib.cairo:impl}}
 ```
 
 {{#label wrong-impl}}
@@ -135,7 +135,7 @@ By leveraging the [traits & impls](./ch08-02-traits-in-cairo.md) mechanism from 
 Trying to compile a contract using this implementation will result in the following error:
 
 ```shell
-{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_02_wrong_impl/output.txt}}
+{{#include ../listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/output.txt}}
 ```
 
 ### Public Functions Defined in an Implementation Block
@@ -149,7 +149,7 @@ Before we explore things further down, let's define some terminology.
 - A _view_ function is a public function that is typically read-only and cannot mutate the state of the contract. However, this limitation is only enforced by the compiler, and not by Starknet itself. We will discuss the implications of this in a later section. `get` is a view function.
 
 ```cairo,noplayground
-{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:impl}}
+{{#include ../listings/ch100-introduction-to-smart-contracts/listing_01_simple_contract/src/lib.cairo:impl}}
 ```
 
 {{#label implementation}}
@@ -172,13 +172,13 @@ Two methods are commonly used to access or modify the state of a contract:
 - `read`, which returns the value of a storage variable. This method is called on the variable itself and does not take any argument.
 
 ```cairo,noplayground
-{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:read_state}}
+{{#include ../listings/ch100-introduction-to-smart-contracts/listing_01_simple_contract/src/lib.cairo:read_state}}
 ```
 
 - `write`, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that `write` may take more than one argument, depending on the type of the storage variable. For example, writing on a mapping requires 2 arguments: the key and the value to be written.
 
 ```cairo,noplayground
-{{#include ../listings/ch13-introduction-to-starknet-smart-contracts/listing_01_simple_contract/src/lib.cairo:write_state}}
+{{#include ../listings/ch100-introduction-to-smart-contracts/listing_01_simple_contract/src/lib.cairo:write_state}}
 ```
 
 > Reminder: if the contract state is passed as a snapshot with `@` instead of passed by reference with `ref`, attempting to modify the contract state will result in a compilation error.

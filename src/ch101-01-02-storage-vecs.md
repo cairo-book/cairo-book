@@ -11,7 +11,7 @@ The `Vec` type is provided by the Cairo core library, inside the `core::starknet
 To declare a Storage Vector, use the `Vec` type enclosed in angle brackets `<>`, specifying the type of elements it will store. In Listing {{#ref storage-vecs}}, we create a simple contract that registers all the addresses that call it and stores them in a `Vec`. We can then retrieve the `n`-th registered address, or all registered addresses.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:contract}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:contract}}
 ```
 
 {{#label storage-vecs}}
@@ -20,13 +20,13 @@ To declare a Storage Vector, use the `Vec` type enclosed in angle brackets `<>`,
 To add an element to a `Vec`, you use the `append` method to get a storage pointer to the next available slot, and then call the `write` function on it with the value to add.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:append}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:append}}
 ```
 
 To retrieve an element, you can use the `at` or `get` methods to get a storage pointer to the element at the specified index, and then call the `read` method to get the value. If the index is out of bounds, the `at` method panics, while the `get` method returns `None`.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:read}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:read}}
 ```
 
 If you want to retrieve all the elements of the Vec, you can iterate over the indices of the storage `Vec`, read the value at each index, and append it to a memory `Array<T>`.
@@ -35,12 +35,12 @@ Similarly, you can't store an `Array<T>` in storage: you would need to iterate o
 At this point, you should be familiar with the concept of storage pointers and storage paths introduced in the ["Contract Storage"][contract-storage] section and how they are used to access storage variables through a pointer-based model. Thus how would you modify the address stored at a specific index of a `Vec`?
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch14-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:modify}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:modify}}
 ```
 
 The answer is fairly simple: get a mutable pointer to the storage pointer at the desired index, and use the `write` method to modify the value at that index.
 
-[contract-storage]: ./ch14-01-00-contract-storage.md
+[contract-storage]: ./ch101-01-00-contract-storage.md
 
 ## Storage Address Computation for Vecs
 

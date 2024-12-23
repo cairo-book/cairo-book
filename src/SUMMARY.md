@@ -111,50 +111,50 @@
 
 ## Introduction to Starknet Smart Contracts
 
-- [Introduction to Smart Contracts](./ch13-01-introduction-to-smart-contracts.md)
+- [Introduction to Smart Contracts](./ch100-00-introduction-to-smart-contracts.md)
 
 ## Building Starknet Smart Contracts
 
-- [Building Starknet Smart Contracts](./ch14-00-building-starknet-smart-contracts.md)
+- [Building Starknet Smart Contracts](./ch101-00-building-starknet-smart-contracts.md)
 
-  - [Contract Storage](./ch14-01-00-contract-storage.md)
-    - [Storage Mappings](./ch14-01-01-storage-mappings.md)
-    - [Storage Vecs](./ch14-01-02-storage-vecs.md)
-  - [Contract Functions](./ch14-02-contract-functions.md)
-  - [Contract Events](./ch14-03-contract-events.md)
+  - [Contract Storage](./ch101-01-00-contract-storage.md)
+    - [Storage Mappings](./ch101-01-01-storage-mappings.md)
+    - [Storage Vecs](./ch101-01-02-storage-vecs.md)
+  - [Contract Functions](./ch101-02-contract-functions.md)
+  - [Contract Events](./ch101-03-contract-events.md)
 
 ## Starknet Cross-Contract Interactions
 
-- [Starknet Contract Interactions](./ch15-00-starknet-contract-interactions.md)
+- [Starknet Contract Interactions](./ch102-00-starknet-contract-interactions.md)
 
-  - [Contract Class ABI](./ch15-01-contract-class-abi.md)
-  - [Interacting with Another Contract](./ch15-02-interacting-with-another-contract.md)
-  - [Executing Code from Another Class](./ch15-03-executing-code-from-another-class.md)
+  - [Contract Class ABI](./ch102-01-contract-class-abi.md)
+  - [Interacting with Another Contract](./ch102-02-interacting-with-another-contract.md)
+  - [Executing Code from Another Class](./ch102-03-executing-code-from-another-class.md)
 
 ## Building Advanced Starknet Smart Contracts
 
-- [Building Advanced Starknet Smart Contracts](./ch16-00-building-advanced-starknet-smart-contracts.md)
+- [Building Advanced Starknet Smart Contracts](./ch103-00-building-advanced-starknet-smart-contracts.md)
 
-  - [Optimizing Storage Costs](./ch16-01-optimizing-storage-costs.md)
-  - [Composability and Components](./ch16-02-00-composability-and-components.md)
-    - [Under the Hood](./ch16-02-01-under-the-hood.md)
-    - [Component Dependencies](./ch16-02-02-component-dependencies.md)
-    - [Testing Components](./ch16-02-03-testing-components.md)
-  - [Upgradeability](./ch16-03-upgradeability.md)
-  - [L1 <> L2 Messaging](./ch16-04-L1-L2-messaging.md)
-  - [Oracle Interactions](./ch16-05-oracle-interactions.md)
-    - [Price Feeds](./ch16-05-01-price-feeds.md)
-    - [Randomness](./ch16-05-02-randomness.md)
-  - [Other Examples](./ch16-06-00-other-examples.md)
-    - [Deploying and Interacting with a Voting Contract](./ch16-06-01-deploying-and-interacting-with-a-voting-contract.md)
+  - [Optimizing Storage Costs](./ch103-01-optimizing-storage-costs.md)
+  - [Composability and Components](./ch103-02-00-composability-and-components.md)
+    - [Under the Hood](./ch103-02-01-under-the-hood.md)
+    - [Component Dependencies](./ch103-02-02-component-dependencies.md)
+    - [Testing Components](./ch103-02-03-testing-components.md)
+  - [Upgradeability](./ch103-03-upgradeability.md)
+  - [L1 <> L2 Messaging](./ch103-04-L1-L2-messaging.md)
+  - [Oracle Interactions](./ch103-05-oracle-interactions.md)
+    - [Price Feeds](./ch103-05-01-price-feeds.md)
+    - [Randomness](./ch103-05-02-randomness.md)
+  - [Other Examples](./ch103-06-00-other-examples.md)
+    - [Deploying and Interacting with a Voting Contract](./ch103-06-01-deploying-and-interacting-with-a-voting-contract.md)
 
 ## Starknet Smart Contracts Security
 
-- [Starknet Smart Contracts Security](./ch17-00-starknet-smart-contracts-security.md)
+- [Starknet Smart Contracts Security](./ch104-00-starknet-smart-contracts-security.md)
 
-  - [General Recommendations](./ch17-01-general-recommendations.md)
-  - [Testing Smart Contracts](./ch17-02-testing-smart-contracts.md)
-  - [Static Analysis Tools](./ch17-03-static-analysis-tools.md)
+  - [General Recommendations](./ch104-01-general-recommendations.md)
+  - [Testing Smart Contracts](./ch104-02-testing-smart-contracts.md)
+  - [Static Analysis Tools](./ch104-03-static-analysis-tools.md)
 
 ## Appendix
 

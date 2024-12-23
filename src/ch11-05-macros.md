@@ -44,4 +44,4 @@ See [Printing](./ch11-08-printing.md#printing-custom-data-types) page.
 
 ## `get_dep_component!`, `get_dep_component_mut` and `component!` Macros
 
-Please refer to the [Composability and Components](./ch16-02-00-composability-and-components.md) chapter.
+Please refer to the [Composability and Components](./ch103-02-00-composability-and-components.md) chapter.
