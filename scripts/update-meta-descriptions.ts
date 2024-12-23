@@ -30,14 +30,20 @@ async function updateMetaDescriptions() {
       const htmlFilePath = `book/html/${htmlPath}`;
       const htmlContent = await Bun.file(htmlFilePath).text();
 
-      // Replace meta description
+      // Remove YAML frontmatter section from HTML, its rendered heading, and the hr tag
       const updatedHtml = htmlContent.replace(
+        /<hr \/>\n?<h2 id="meta[^>]*><a class="header"[^>]*>meta: "[^"]*"<\/a><\/h2>\n?/,
+        "",
+      );
+
+      // Replace meta description
+      const finalHtml = updatedHtml.replace(
         /<meta name="description" content="[^"]*">/,
         `<meta name="description" content="${frontmatter.meta}">`,
       );
 
       // Write updated HTML back to file
-      await Bun.write(htmlFilePath, updatedHtml);
+      await Bun.write(htmlFilePath, finalHtml);
 
       console.log(`Updated meta description for ${htmlPath}`);
     } catch (error: any) {
