@@ -1,7 +1,8 @@
-# Introduction to Smart Contracts
+---
+meta: "Explore the fundamentals of smart contracts in this comprehensive introduction, tailored for developers using Cairo. Learn how smart contracts work and their role in blockchain technology."
+---
 
-<!-- Add meta description -->
-<meta name="description" content="Explore the fundamentals of smart contracts in this comprehensive introduction, tailored for developers using Cairo. Learn how smart contracts work and their role in blockchain technology.">
+# Introduction to Smart Contracts
 
 This chapter will give you a high level introduction to what smart contracts are, what they are used for, and why blockchain developers would use Cairo and Starknet.
 If you are already familiar with blockchain programming, feel free to skip this chapter. The last part might still be interesting though.

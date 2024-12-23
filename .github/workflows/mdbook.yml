@@ -62,8 +62,8 @@ jobs:
 
       - name: Generate redirects
         run: |
-          echo "Generating redirects for old URLs..."
-          bun run scripts/generate-redirects.ts
+          echo "Updating meta descriptions..."
+          bun run scripts/update-meta-descriptions.ts
 
       - name: Copy WASM-Cairo pkg
         run: |
