@@ -119,7 +119,7 @@ Later in ["Dictionaries as Struct Members"][dictionaries in structs] section, we
 
 [basic dictionaries]: ./ch03-02-dictionaries.md#basic-use-of-dictionaries
 [drop destruct]: ./appendix-03-derivable-traits.md#drop-and-destruct
-[dictionaries in structs]: ./ch11-01-custom-data-structures.md#dictionaries-as-struct-members
+[dictionaries in structs]: ./ch12-01-custom-data-structures.md#dictionaries-as-struct-members
 
 ## More Dictionaries
 
@@ -192,7 +192,7 @@ This is implemented by some common data types, such as most unsigned integers, `
 This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations in order to make the data type a valid dictionary value type.
 To compensate this, you can wrap your type inside a `Nullable<T>`.
 
-`Nullable<T>` is a smart pointer type that can either point to a value or be `null` in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type is a smart pointer that allows us to use a dedicated `boxed_segment` memory segment for our data, and access this segment using a pointer that can only be manipulated in one place at a time. See [Smart Pointers Chapter](./ch11-02-smart-pointers.md) for more information.
+`Nullable<T>` is a smart pointer type that can either point to a value or be `null` in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with `Option` is that the wrapped value is stored inside a `Box<T>` data type. The `Box<T>` type is a smart pointer that allows us to use a dedicated `boxed_segment` memory segment for our data, and access this segment using a pointer that can only be manipulated in one place at a time. See [Smart Pointers Chapter](./ch12-02-smart-pointers.md) for more information.
 
 Let's show using an example. We will try to store a `Span<felt252>` inside a dictionary. For that, we will use `Nullable<T>` and `Box<T>`. Also, we are storing a `Span<T>` and not an `Array<T>` because the latter does not implement the `Copy<T>` trait which is required for reading from a dictionary.
 

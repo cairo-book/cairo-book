@@ -1,7 +1,7 @@
 # Pedersen Builtin
 
 The _Pedersen_ builtin is dedicated to computing the pedersen hash
-of two felts. Its use in Cairo is explained on section 11.4 [Working with Hashes](ch11-04-hash.md).
+of two felts. Its use in Cairo is explained on section 11.4 [Working with Hashes](ch12-04-hash.md).
 
 ## Cells organization
 

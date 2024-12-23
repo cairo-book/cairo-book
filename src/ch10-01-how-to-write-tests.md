@@ -315,7 +315,7 @@ Now when we run the test, we’ll get a more informative error message:
 We can see the value we actually got in the test output, which would help us
 debug what happened instead of what we were expecting to happen.
 
-[formatting]: ./ch11-08-printing.md#formatting
+[formatting]: ./ch12-08-printing.md#formatting
 
 ## Checking for panics with `should_panic`
 
