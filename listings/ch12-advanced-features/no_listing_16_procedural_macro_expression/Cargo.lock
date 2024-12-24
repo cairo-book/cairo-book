@@ -325,16 +325,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
 
 [[package]]
-name = "no_listing_15_macro"
-version = "0.1.0"
-dependencies = [
- "bigdecimal",
- "cairo-lang-macro",
- "cairo-lang-parser",
- "cairo-lang-syntax",
-]
-
-[[package]]
 name = "num-bigint"
 version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -409,6 +399,16 @@ name = "pin-project-lite"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "915a1e146535de9163f3987b8944ed8cf49a18bb0056bcebcdcece385cece4ff"
+
+[[package]]
+name = "pow"
+version = "0.1.0"
+dependencies = [
+ "bigdecimal",
+ "cairo-lang-macro",
+ "cairo-lang-parser",
+ "cairo-lang-syntax",
+]
 
 [[package]]
 name = "proc-macro2"
