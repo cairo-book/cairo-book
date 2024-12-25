@@ -210,8 +210,6 @@
     - [AddMod]()
     - [MulMod]()
     - [Segment Arena]()
-    - [Gas]()
-    - [System]()
 
 ## Hints
 
