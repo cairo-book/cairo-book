@@ -1,5 +1,5 @@
 [package]
-name = "no_listing_15_macro"
+name = "pow"
 version = "0.1.0"
 edition = "2021"
 publish = false
@@ -9,8 +9,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 bigdecimal = "0.4.5"
-cairo-lang-macro = "0.1"
-cairo-lang-parser = "2.9.1"
-cairo-lang-syntax = "2.9.1"
+cairo-lang-macro = "0.1.1"
+cairo-lang-parser = "2.9.0"
+cairo-lang-syntax = "2.9.0"
 
 [workspace]
