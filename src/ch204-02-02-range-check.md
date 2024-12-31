@@ -25,17 +25,15 @@ Let us review a program execution by the following memory snapshots:
 
 ![Valid Range Check Segment Diagram_](https://github.com/user-attachments/assets/5960b8e5-740d-415b-98b9-5d3e70c45b77)
 
-**Snapshot 1 - Valid Range Check Segment**:
+**Snapshot - Valid Range Check Segment**:
+You can download the associated JSON data using the link below:
+
+[Download JSON File](https://drive.google.com/uc?export=download&id=1yUNB4m9jOegY4NR6D6_NjGxvzPINoK1s)
 
   - Cell 2:0 holds the value 15, which is within the range [0, 2^128).
   - Cell 2:1 contains the value 93, also within the range [0, 2^128).
 
 Both cells contain valid felts that are within the permitted or defined range; thus, no errors will pop up during the validation process.
-
-![INValid Range Check Segment Diagram 234](https://github.com/user-attachments/assets/c2585808-3985-488e-bde2-c75e0973880e)
-**Snapshot 2 - Invalid Range Check Segment**:
-
-In the defined cell 2:2, the value is 1, which is valid, the defined cell 2:3, the value is 2^128, which is out of range. If it reads from 2:3, it is going to give an output error because 2^128 is bigger than the defined [0, 2^128).
 
 **Implementation References**
 
@@ -43,6 +41,7 @@ Below are some reference implementations for the Range Check intrinsic:
 - [TypeScript Range Check](https://www.webdevtutor.net/blog/typescript-check-number-is-in-range)
 - [Python Range Check Builtin](https://www.codecademy.com/resources/docs/python/built-in-functions/range)
 - [Rust Range Check Builtin](https://docs.rs/range_check/latest/range_check/)
+- [Cairo VM](https://github.com/lambdaclass/cairo-vm/releases)
 
 
 **Range Check Resources**  
