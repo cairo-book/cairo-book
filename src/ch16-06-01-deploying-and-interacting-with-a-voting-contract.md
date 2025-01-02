@@ -28,29 +28,29 @@ Once the contract is deployed, we can interact with it by calling and invoking i
 - Calling contracts: Interacting with external functions that only read from the state. These functions do not alter the state of the network, so they don't require fees or signing.
 - Invoking contracts: Interacting with external functions that can write to the state. These functions do alter the state of the network and require fees and signing.
 
-We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` in the ["Katana: A Local Node"][katana chapter] chapter of the Starknet Book.
+We will setup a local development node using `katana` to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of `katana`. However, we recommend using `katana` for local development and testing. You can find the complete tutorial for `katana` in the ["Using a development network"][katana chapter] chapter of the Starknet Docs.
 
-[katana chapter]: https://book.starknet.io/ch02-04-katana.html
+[katana chapter]: https://docs.starknet.io/quick-start/using_devnet/
 
 ### The `katana` Local Starknet Node
 
 `katana` is designed to support local development by the [Dojo team][dojo katana]. It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
 
-To install `katana` from the source code, please refer to the ["Basic Installation"][katana installation] chapter of the Starknet Book.
+To install `katana` from the source code, please refer to the ["Using Katana"][katana installation] chapter of the Starknet Docs.
 
 > Note: Please verify that the version of `katana` match the specified version provided below.
 >
 > ```bash
 > $ katana --version
-> katana 0.6.0
+> katana 1.0.9-dev
 > ```
 >
-> To upgrade `katana` version, refer to the ["Basic Installation"][katana installation] chapter of the Starknet Book.
+> To upgrade `katana` version, refer to the ["Using Katana"][katana installation] chapter of the Starknet Docs.
 
 Once you have `katana` installed, you can start the local Starknet node with:
 
 ```bash
-katana --accounts 3 --seed 0 --gas-price 250
+katana --dev --dev.accounts 3
 ```
 
 This command will start a local Starknet node with 3 deployed accounts. We will use these accounts to deploy and interact with the voting contract:
@@ -74,11 +74,11 @@ PREFUNDED ACCOUNTS
 ...
 ```
 
-Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the ["Account Abstraction"][aa chapter] chapter of the Starknet Book.
+Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the ["Account Abstraction"][aa chapter] chapter of the Starknet Docs.
 
 [dojo katana]: https://github.com/dojoengine/dojo/blob/main/crates/katana
-[katana installation]: https://book.starknet.io/ch02-01-basic-installation.html#katana-node-installation
-[aa chapter]: https://book.starknet.io/ch04-00-account-abstraction.html
+[katana installation]: https://docs.starknet.io/quick-start/using_devnet/#using_katana
+[aa chapter]: https://docs.starknet.io/architecture-and-concepts/accounts/introduction/#account_abstraction
 
 ### Smart Wallets for Voting
 
