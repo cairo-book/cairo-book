@@ -42,7 +42,7 @@ To install `katana` from the source code, please refer to the ["Using Katana"][k
 >
 > ```bash
 > $ katana --version
-> katana 1.0.9-dev
+> katana 1.0.9-dev (38b3c2a6)
 > ```
 >
 > To upgrade `katana` version, refer to the ["Using Katana"][katana installation] chapter of the Starknet Docs.
@@ -88,7 +88,7 @@ Aside from Scarb you will need to have Starkli installed. Starkli is a command l
 >
 > ```bash
 > $ starkli --version
-> 0.2.9 (0535f44)
+> 0.3.6 (8d6db8c)
 > ```
 >
 > To upgrade `starkli` to `0.2.9`, use the `starkliup -v 0.2.9` command, or simply `starkliup` which installed the latest stable version.
