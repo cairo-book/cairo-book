@@ -10,7 +10,8 @@ lazy_static! {
     static ref REF_REGEX: Regex = Regex::new(r"\{\{#ref\s*([\w-]+)\s*\}\}").expect("Invalid regex");
     static ref LABEL_REGEX: Regex =
         Regex::new(r"\{\{#label\s*([\w-]+)\s*\}\}").expect("Invalid regex");
-    static ref CHAP_REF_REGEX: Regex = Regex::new(r"\{\{#chap\s*([\w-]+)\s*\}\}").expect("Invalid regex");
+    static ref CHAP_REF_REGEX: Regex =
+        Regex::new(r"\{\{#chap\s*([\w-]+)\s*\}\}").expect("Invalid regex");
 }
 
 pub struct Cairo;
@@ -75,12 +76,13 @@ impl CairoBookProcessor {
                         chapter.name, e
                     )
                 });
-                self.collect_chapter_number(chapter, self.current_chapter).unwrap_or_else(|e| {
-                    eprintln!(
-                        "Error processing chapter number in chapter '{}': {}",
-                        chapter.name, e
-                    )
-                });
+                self.collect_chapter_number(chapter, self.current_chapter)
+                    .unwrap_or_else(|e| {
+                        eprintln!(
+                            "Error processing chapter number in chapter '{}': {}",
+                            chapter.name, e
+                        )
+                    });
             }
         });
         Ok(())
@@ -122,7 +124,11 @@ impl CairoBookProcessor {
         Ok(())
     }
 
-    fn collect_chapter_number(&mut self, chapter: &mut Chapter, chapter_counter: u32) -> Result<()> {
+    fn collect_chapter_number(
+        &mut self,
+        chapter: &mut Chapter,
+        chapter_counter: u32,
+    ) -> Result<()> {
         let chapter_name = chapter.name.to_lowercase().replace(" ", "-");
         self.chapter_numbers.insert(chapter_name, chapter_counter);
         Ok(())
@@ -179,10 +185,9 @@ impl CairoBookProcessor {
             // Process chapter ref
             for cap in CHAP_REF_REGEX.captures_iter(line) {
                 let chapter_name = &cap[1];
-                let replacement = self
-                    .chapter_numbers
-                    .get(chapter_name)
-                    .with_context(|| format!("Reference to chapter name '{}' not found", chapter_name))?;
+                let replacement = self.chapter_numbers.get(chapter_name).with_context(|| {
+                    format!("Reference to chapter name '{}' not found", chapter_name)
+                })?;
                 processed_line = processed_line.replace(&cap[0], &replacement.to_string());
             }
 
@@ -331,12 +336,15 @@ mod tests {
 
         let result = processor.collect(&mut book);
 
-        assert!(
-            result.is_ok(),
-            "collect should not return an error"
-        );
+        assert!(result.is_ok(), "collect should not return an error");
 
-        assert_eq!(*processor.chapter_numbers.get("test-chapter").expect("test-chapter should be in the HashMap"), 0);
+        assert_eq!(
+            *processor
+                .chapter_numbers
+                .get("test-chapter")
+                .expect("test-chapter should be in the HashMap"),
+            0
+        );
     }
 
     #[test]
@@ -345,11 +353,12 @@ mod tests {
 
         let mut book = Book::new();
         let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
-        chapter.content = "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
+        chapter.content =
+            "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
         chapter.content += "This is another valid line.";
         book.push_item(chapter);
 
-        // Collect chapter numbers and process 
+        // Collect chapter numbers and process
         let result = processor.process_book(&mut book);
 
         assert!(
@@ -375,12 +384,13 @@ mod tests {
 
         let mut book = Book::new();
         let mut chapter = Chapter::new("Test Chapter", String::new(), "test.md", Vec::new());
-        chapter.content = "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
+        chapter.content =
+            "This is a chap reference Chapter {{#chap test-chapter}} in the text.\n".to_string();
         chapter.content += "This line has an error Chapter {{#chap unknown-chapter}}.\n";
         chapter.content += "This is another valid line.";
         book.push_item(chapter);
 
-        // Collect chapter numbers and process 
+        // Collect chapter numbers and process
         let result = processor.process_book(&mut book);
 
         assert!(
