@@ -201,7 +201,7 @@
     - [Output]()
     - [Pedersen](ch204-02-01-pedersen.md)
     - [Range Check]()
-    - [ECDSA]()
+    - [ECDSA](ch204-02-03-ecdsa.md)
     - [Bitwise]()
     - [EC OP]()
     - [Keccak]()
