@@ -6,4 +6,4 @@ extend-glob = ["*.po", "*.css", "*.js"]
 check-file = false
 
 [files]
-extend-exclude = ["po/*.po", "listings/**/*.json", "src/*.excalidraw"]
+extend-exclude = ["po/*.po", "listings/**/*.json", "*.excalidraw"]
