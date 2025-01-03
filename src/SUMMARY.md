@@ -205,7 +205,7 @@
     - [Bitwise]()
     - [EC OP](ch204-02-05-ec-op.md)
     - [Keccak](ch204-02-06-keccak.md)
-    - [Poseidon]()
+    - [Poseidon](ch204-02-07-poseidon.md)
     - [Range Check96]()
     - [AddMod]()
     - [MulMod]()
