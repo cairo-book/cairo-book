@@ -51,7 +51,7 @@ mod OwnableCounterComponent {
             ref self: ComponentState<TContractState>, new_owner: ContractAddress,
         ) {
             let mut ownable_comp = get_dep_component_mut!(ref self, Owner);
-            ownable_comp._transfer_ownership(new_owner);
+            ownable_comp.transfer_ownership(new_owner);
         }
         //ANCHOR_END: transfer_ownership
     }
