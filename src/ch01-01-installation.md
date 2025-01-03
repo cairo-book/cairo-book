@@ -37,13 +37,13 @@ asdf plugin add scarb
 This will allow you to download specific versions:
 
 ```bash
-asdf install scarb 2.9.1
+asdf install scarb 2.9.2
 ```
 
 and set a global version:
 
 ```bash
-asdf global scarb 2.9.1
+asdf global scarb 2.9.2
 ```
 
 Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This will install the latest stable release of Scarb.
@@ -57,8 +57,8 @@ In both cases, you can verify installation by running the following command in a
 
 ```bash
 $ scarb --version
-scarb 2.9.1 (aba4f604a 2024-11-29)
-cairo: 2.9.1 (https://crates.io/crates/cairo-lang-compiler/2.9.1)
+scarb 2.9.2 (5070ff374 2024-12-11)
+cairo: 2.9.2 (https://crates.io/crates/cairo-lang-compiler/2.9.2)
 sierra: 1.6.0
 ```
 
@@ -74,7 +74,7 @@ Once installed, you can run the following command to see the version:
 
 ```bash
 $ snforge --version
-snforge 0.33.0
+snforge 0.35.1
 ```
 
 We'll describe Starknet Foundry in more detail in [Chapter {{#chap testing-cairo-programs}}][writing tests] for Cairo programs testing and in [Chapter {{#chap starknet-smart-contracts-security}}][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
