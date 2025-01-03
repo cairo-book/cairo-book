@@ -37,8 +37,9 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-It is not possible for a trait function to have a body in Cairo. 
-The `make_noise` method should be declared without a body. Only the implementations can have a body.
+The `MakeNoise` trait is not implemented for the `Cat` type.
+To make use of the default implementation for `Cat`, we would need to add `impl MakeNoiseImpl of MakeNoise<Cat> {}`.
+The empty implementation block `{}` tells Cairo to use the default implementation from the trait
 """
 id = "4120c3cf-a86a-4d30-b307-4a50b2e9d627"
 
