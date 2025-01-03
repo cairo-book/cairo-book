@@ -8,10 +8,10 @@ crate-type = ["cdylib"]
 
 [dependencies]
 cairo-lang-macro = "0.1.0"
-cairo-lang-defs = "2.9.0"
-cairo-lang-diagnostics = "2.9.0"
-cairo-lang-parser = "2.9.0"
-cairo-lang-syntax = "2.9.0"
+cairo-lang-defs = "2.9.2"
+cairo-lang-diagnostics = "2.9.2"
+cairo-lang-parser = "2.9.2"
+cairo-lang-syntax = "2.9.2"
 indoc = "1.0"
 
 [workspace]
