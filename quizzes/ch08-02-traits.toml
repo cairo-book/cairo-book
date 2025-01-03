@@ -37,9 +37,9 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-`Barking` trait is not implemented for the `Cat` type.
-To make use of the default implementation for `Cat`, add the following code inside the `cat` module.
-`impl Barking of MakeNoise<Cat> {}`
+The `MakeNoise` trait is not implemented for the `Cat` type.
+To make use of the default implementation for `Cat`, we would need to add `impl MakeNoiseImpl of MakeNoise<Cat> {}`.
+The empty implementation block `{}` tells Cairo to use the default implementation from the trait
 """
 id = "4120c3cf-a86a-4d30-b307-4a50b2e9d627"
 
