@@ -1,11 +1,9 @@
 [default]
-extend-ignore-identifiers-re = [
-    "Groth16"
-]
+extend-ignore-identifiers-re = ["Groth16"]
 
 [type.po]
 extend-glob = ["*.po", "*.css", "*.js"]
 check-file = false
 
 [files]
-extend-exclude = ["po/*.po", "listings/**/*.json"]
+extend-exclude = ["po/*.po", "listings/**/*.json", "src/*.excalidraw"]
