@@ -12,4 +12,4 @@ rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.9.1"
+cairo_test = "2.9.2"
