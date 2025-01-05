@@ -204,7 +204,7 @@
     - [ECDSA]()
     - [Bitwise]()
     - [EC OP]()
-    - [Keccak]()
+    - [Keccak](ch204-02-06-keccak.md)
     - [Poseidon]()
     - [Range Check96]()
     - [AddMod]()
