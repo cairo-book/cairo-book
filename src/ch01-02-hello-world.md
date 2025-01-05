@@ -83,16 +83,19 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.8.2"
+starknet = "2.9.2"
 
 [dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.33.0" }
+snforge_std = "0.35.1"
+assert_macros = "2.9.2"
 
 [[target.starknet-contract]]
 sierra = true
 
 [scripts]
 test = "snforge test"
+
+# ...
 ```
 
 {{#label scarb-content}}
@@ -106,13 +109,30 @@ The next three lines set the configuration information Scarb needs to compile yo
 
 The `[dependencies]` section, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
-> Note: By default, using Starknet Foundry adds the `starknet` dependency, so that you can also build contracts for Starknet.
-
-The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project.
+The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project. `snforge_std` and `assert_macros` are two examples of such dependencies. If you want to test your project without using Starknet Foundry, you can use `cairo_test`.
 
 The `[[target.starknet-contract]]` section allows to build Starknet smart contracts. We can remove it for now.
 
 The `[script]` section allows to define custom scripts. By default, there is one script for running tests using `snforge` with the `scarb test` command. We can also remove it for now.
+
+Starknet Foundry also have more options, check out [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/appendix/scarb-toml.html) for more information.
+
+By default, using Starknet Foundry adds the `starknet` dependency and the `[[target.starknet-contract]]` section, so that you can build contracts for Starknet out of the box. We will start with only Cairo programs, so you can edit your _Scarb.toml_ file to the following:
+
+<span class="filename">Filename: Scarb.toml</span>
+
+```toml
+[package]
+name = "hello_world"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+
+```
+
+{{#label modified-scarb-content}}
+<span class="caption">Listing {{#ref modified-scarb-content}}: Contents of modified _Scarb.toml_</span>
 
 The other file created by Scarb is _src/lib.cairo_, let's delete all the content and put in the following content, we will explain the reason later.
 
@@ -134,7 +154,7 @@ We have just created a file called _lib.cairo_, which contains a module declarat
 
 Scarb requires your source files to be located within the _src_ directory.
 
-The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
+The top-level project directory is reserved for _README_ files, license information, configuration files, and any other non-code-related content.
 Scarb ensures a designated location for all project components, maintaining a structured organization.
 
 If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the _src_ directory and create an appropriate _Scarb.toml_ file. You can also use `scarb init` command to generate the _src_ folder and the _Scarb.toml_ it contains.
@@ -158,17 +178,19 @@ From your _hello_world_ directory, build your project by entering the following 
 
 ```bash
 $ scarb build
-   Compiling hello_world v0.1.0 (file:///projects/Scarb.toml)
-    Finished release target(s) in 0 seconds
+   Compiling hello_world v0.1.0 (file://hello_world/Scarb.toml)
+    Finished `dev` profile target(s) in 0 seconds
 ```
 
-This command creates a `sierra` file in _target/dev_, let's ignore the `sierra` file for now.
+This command creates a `hello_world.sierra.json` file in _target/dev_, let's ignore the `sierra` file for now.
 
 If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb cairo-run` command and see the following output:
 
 ```shell
 $ scarb cairo-run
-Running hello_world
+   Compiling hello_world v0.1.0 (file://hello_world/Scarb.toml)
+    Finished `dev` profile target(s) in 0 seconds
+     Running hello_world
 Hello, World!
 Run completed successfully, returning []
 ```
