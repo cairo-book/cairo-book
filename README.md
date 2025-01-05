@@ -44,7 +44,7 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 ### Guidelines
 
-Read the [CONTRIBUTING.md](./CONTRIBUTING.md) file for more details on the style guide and guidelines for contributions to the book.
+Read the [CONTRIBUTING.md](./docs/CONTRIBUTING.md) file for more details on the style guide and guidelines for contributions to the book.
 
 ### Work locally (english, main language)
 
