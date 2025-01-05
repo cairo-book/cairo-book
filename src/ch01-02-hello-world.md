@@ -75,27 +75,7 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 <span class="filename">Filename: Scarb.toml</span>
 
 ```toml
-[package]
-name = "hello_world"
-version = "0.1.0"
-edition = "2024_07"
-
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
-
-[dependencies]
-starknet = "2.9.2"
-
-[dev-dependencies]
-snforge_std = "0.35.1"
-assert_macros = "2.9.2"
-
-[[target.starknet-contract]]
-sierra = true
-
-[scripts]
-test = "snforge test"
-
-# ...
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/initial_Scarb.toml:main}}
 ```
 
 {{#label scarb-content}}
@@ -122,13 +102,7 @@ By default, using Starknet Foundry adds the `starknet` dependency and the `[[tar
 <span class="filename">Filename: Scarb.toml</span>
 
 ```toml
-[package]
-name = "hello_world"
-version = "0.1.0"
-edition = "2024_07"
-
-[dependencies]
-
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/Scarb.toml}}
 ```
 
 {{#label modified-scarb-content}}
@@ -137,17 +111,15 @@ edition = "2024_07"
 The other file created by Scarb is _src/lib.cairo_, let's delete all the content and put in the following content, we will explain the reason later.
 
 ```cairo,noplayground
-mod hello_world;
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/src/lib.cairo}}
 ```
 
 Then create a new file called _src/hello_world.cairo_ and put the following code in it:
 
 <span class="filename">Filename: src/hello_world.cairo</span>
 
-```cairo,file=hello_world.cairo
-fn main() {
-    println!("Hello, World!");
-}
+```cairo
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/src/hello_world.cairo}}
 ```
 
 We have just created a file called _lib.cairo_, which contains a module declaration referencing another module named `hello_world`, as well as the file _hello_world.cairo_, containing the implementation details of the `hello_world` module.
@@ -177,9 +149,7 @@ If you started a project that doesn’t use Scarb, you can convert it to a proje
 From your _hello_world_ directory, build your project by entering the following command:
 
 ```bash
-$ scarb build
-   Compiling hello_world v0.1.0 (file://hello_world/Scarb.toml)
-    Finished `dev` profile target(s) in 0 seconds
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output-build.txt}}
 ```
 
 This command creates a `hello_world.sierra.json` file in _target/dev_, let's ignore the `sierra` file for now.
@@ -187,13 +157,9 @@ This command creates a `hello_world.sierra.json` file in _target/dev_, let's ign
 If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb cairo-run` command and see the following output:
 
 ```shell
-$ scarb cairo-run
-   Compiling hello_world v0.1.0 (file://hello_world/Scarb.toml)
-    Finished `dev` profile target(s) in 0 seconds
-     Running hello_world
-Hello, World!
-Run completed successfully, returning []
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output-run.txt}}
 ```
+
 
 Regardless of your operating system, the string `Hello, world!` should be printed to
 the terminal.
