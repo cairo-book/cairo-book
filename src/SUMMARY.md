@@ -203,7 +203,7 @@
     - [Range Check]()
     - [ECDSA](ch204-02-03-ecdsa.md)
     - [Bitwise]()
-    - [EC OP]()
+    - [EC OP](ch204-02-05-ec-op.md)
     - [Keccak]()
     - [Poseidon]()
     - [Range Check96]()
