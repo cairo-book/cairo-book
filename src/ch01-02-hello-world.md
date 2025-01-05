@@ -149,7 +149,7 @@ If you started a project that doesn’t use Scarb, you can convert it to a proje
 From your _hello_world_ directory, build your project by entering the following command:
 
 ```bash
-{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output-build.txt}}
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_build.txt}}
 ```
 
 This command creates a `hello_world.sierra.json` file in _target/dev_, let's ignore the `sierra` file for now.
@@ -157,7 +157,7 @@ This command creates a `hello_world.sierra.json` file in _target/dev_, let's ign
 If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb cairo-run` command and see the following output:
 
 ```shell
-{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output-run.txt}}
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_run.txt}}
 ```
 
 
