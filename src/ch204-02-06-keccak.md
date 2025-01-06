@@ -20,7 +20,7 @@ Here is the expected hash of the input state `s` [0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 
 
 ## Implementation References
 
-These implementation references of the Pedersen builtin might not be exhaustive.
+These implementation references of the keccak builtin might not be exhaustive.
 
 - [TypeScript Keccak Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/58fd07d81cff4a4bb45c30ab99976ba66f0576ad/src/builtins/keccak.ts)
 - [Python Keccak Builtin](https://github.com/starkware-libs/cairo-lang/blob/0e4dab8a6065d80d1c726394f5d9d23cb451706a/src/starkware/cairo/lang/builtins/keccak/keccak_builtin_runner.py)
