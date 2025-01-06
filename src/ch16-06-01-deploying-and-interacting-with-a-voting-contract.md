@@ -82,7 +82,7 @@ Before we can interact with the voting contract, we need to prepare the voter an
 
 ### Smart Wallets for Voting
 
-Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the ["Basic Installation"][starkli installation] chapter of the Starknet Book.
+Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the ["Setting up Starkli"][starkli installation] chapter of the Starknet Docs.
 
 > Note: Please verify that the version of `starkli` match the specified version provided below.
 >
@@ -91,15 +91,16 @@ Aside from Scarb you will need to have Starkli installed. Starkli is a command l
 > 0.3.6 (8d6db8c)
 > ```
 >
-> To upgrade `starkli` to `0.2.9`, use the `starkliup -v 0.2.9` command, or simply `starkliup` which installed the latest stable version.
+> To upgrade `starkli` to `0.3.6`, use the `starkliup -v 0.3.6` command, or simply `starkliup` which installed the latest stable version.
 
-For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the ["Testnet Deployment"][signer creation] chapter of the Starknet Book.
+For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the ["Creating a Signer"][signer creation] chapter of the Starknet Docs.
 
 We can create Signers and Account Descriptors for the accounts we want to use for voting. Let's create a smart wallet for voting in our smart contract.
 
 Firstly, we create a signer from a private key:
 
 ```bash
+mkdir -p ~/.starkli-wallets/deployer
 starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json
 ```
 
@@ -141,8 +142,8 @@ starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.js
 
 This process is identical for `account_1` and `account_2` in case you want to have a second and a third voter.
 
-[starkli installation]: https://book.starknet.io/ch02-01-basic-installation.html#starkli-installation)
-[signer creation]: https://book.starknet.io/ch02-05-testnet-deployment.html?highlight=signer#creating-a-signer
+[starkli installation]: https://docs.starknet.io/quick-start/environment-setup/
+[signer creation]: https://docs.starknet.io/quick-start/set-up-an-account/#creating_a_signer
 
 ### Contract Deployment
 
