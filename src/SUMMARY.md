@@ -209,7 +209,7 @@
     - [Range Check96]()
     - [AddMod]()
     - [MulMod]()
-    - [Segment Arena]()
+    - [Segment Arena](ch204-02-11-segment-arena.md)
 
 ## Hints
 
