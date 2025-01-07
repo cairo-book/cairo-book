@@ -75,24 +75,7 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 <span class="filename">Filename: Scarb.toml</span>
 
 ```toml
-[package]
-name = "hello_world"
-version = "0.1.0"
-edition = "2024_07"
-
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
-
-[dependencies]
-starknet = "2.8.2"
-
-[dev-dependencies]
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.33.0" }
-
-[[target.starknet-contract]]
-sierra = true
-
-[scripts]
-test = "snforge test"
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/initial_Scarb.toml:main}}
 ```
 
 {{#label scarb-content}}
@@ -106,35 +89,44 @@ The next three lines set the configuration information Scarb needs to compile yo
 
 The `[dependencies]` section, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
 
-> Note: By default, using Starknet Foundry adds the `starknet` dependency, so that you can also build contracts for Starknet.
-
-The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project.
+The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project. `snforge_std` and `assert_macros` are two examples of such dependencies. If you want to test your project without using Starknet Foundry, you can use `cairo_test`.
 
 The `[[target.starknet-contract]]` section allows to build Starknet smart contracts. We can remove it for now.
 
 The `[script]` section allows to define custom scripts. By default, there is one script for running tests using `snforge` with the `scarb test` command. We can also remove it for now.
 
+Starknet Foundry also have more options, check out [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/appendix/scarb-toml.html) for more information.
+
+By default, using Starknet Foundry adds the `starknet` dependency and the `[[target.starknet-contract]]` section, so that you can build contracts for Starknet out of the box. We will start with only Cairo programs, so you can edit your _Scarb.toml_ file to the following:
+
+<span class="filename">Filename: Scarb.toml</span>
+
+```toml
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/Scarb.toml}}
+```
+
+{{#label modified-scarb-content}}
+<span class="caption">Listing {{#ref modified-scarb-content}}: Contents of modified _Scarb.toml_</span>
+
 The other file created by Scarb is _src/lib.cairo_, let's delete all the content and put in the following content, we will explain the reason later.
 
 ```cairo,noplayground
-mod hello_world;
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/src/lib.cairo}}
 ```
 
 Then create a new file called _src/hello_world.cairo_ and put the following code in it:
 
 <span class="filename">Filename: src/hello_world.cairo</span>
 
-```cairo,file=hello_world.cairo
-fn main() {
-    println!("Hello, World!");
-}
+```cairo
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/src/hello_world.cairo}}
 ```
 
 We have just created a file called _lib.cairo_, which contains a module declaration referencing another module named `hello_world`, as well as the file _hello_world.cairo_, containing the implementation details of the `hello_world` module.
 
 Scarb requires your source files to be located within the _src_ directory.
 
-The top-level project directory is reserved for README files, license information, configuration files, and any other non-code-related content.
+The top-level project directory is reserved for _README_ files, license information, configuration files, and any other non-code-related content.
 Scarb ensures a designated location for all project components, maintaining a structured organization.
 
 If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the _src_ directory and create an appropriate _Scarb.toml_ file. You can also use `scarb init` command to generate the _src_ folder and the _Scarb.toml_ it contains.
@@ -157,21 +149,17 @@ If you started a project that doesn’t use Scarb, you can convert it to a proje
 From your _hello_world_ directory, build your project by entering the following command:
 
 ```bash
-$ scarb build
-   Compiling hello_world v0.1.0 (file:///projects/Scarb.toml)
-    Finished release target(s) in 0 seconds
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_build.txt}}
 ```
 
-This command creates a `sierra` file in _target/dev_, let's ignore the `sierra` file for now.
+This command creates a `hello_world.sierra.json` file in _target/dev_, let's ignore the `sierra` file for now.
 
 If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb cairo-run` command and see the following output:
 
 ```shell
-$ scarb cairo-run
-Running hello_world
-Hello, World!
-Run completed successfully, returning []
+{{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_run.txt}}
 ```
+
 
 Regardless of your operating system, the string `Hello, world!` should be printed to
 the terminal.
@@ -227,7 +215,7 @@ expression is over and the next one is ready to begin. Most lines of Cairo code
 end with a semicolon.
 
 [devtools]: ./appendix-06-useful-development-tools.md
-[macros]: ./ch11-05-macros.md
+[macros]: ./ch12-05-macros.md
 
 {{#quiz ../quizzes/ch01-02-hello-world.toml}}
 

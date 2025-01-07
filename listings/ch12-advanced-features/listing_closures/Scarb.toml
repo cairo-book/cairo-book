@@ -1,0 +1,6 @@
+[package]
+name = "listing_closures"
+version = "0.1.0"
+edition = "2024_07"
+
+experimental-features = ["associated_item_constraints"]

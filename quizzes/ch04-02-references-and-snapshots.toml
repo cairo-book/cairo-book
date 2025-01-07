@@ -70,7 +70,7 @@ context = """
 First `snap` and `snap2` are snapshots of a memory location that contains the array `arr1`. 
 Then, `arr1` is mutated by appending a new element. 
 Finally, `snap2` is updated to be a snapshot of the new array while `snap` remains a snapshot of the old array.
-The function `sum` receives the latter and returns its length before the mutation.
+The function `sum` receives the latter and returns its sum before the mutation.
 """
 id = "4512ce8b-c183-4ad1-96e9-bb808456c321"
 [[questions]]

@@ -8,6 +8,7 @@ use std::{
     },
 };
 
+use glob::glob;
 use indicatif::{ProgressBar, ProgressStyle};
 use rayon::prelude::*;
 use regex::Regex;
@@ -41,45 +42,53 @@ pub fn process_outputs(arg: &OutputArgs) {
 }
 
 fn process_file(manifest_path: &str) {
-    let output_file_path = PathBuf::from(manifest_path)
+    // Find all output*.txt files in the manifest directory
+    let glob_pattern = PathBuf::from(manifest_path)
         .parent()
         .expect("Failed to get parent directory")
-        .join("output.txt");
+        .join("output*.txt");
 
-    if let Some(command_with_args) = read_command_from_output_file(&output_file_path) {
-        let (command, args) = command_with_args;
-        let cmd = match command.as_str() {
-            "scarb build" => ScarbCmd::Build(),
-            "scarb cairo-run" => ScarbCmd::CairoRun(),
-            "scarb test" | "scarb cairo-test" => ScarbCmd::Test(),
-            "scarb format" => ScarbCmd::Format(),
-            _ => {
-                eprintln!("Unknown command in output.txt: {}", command);
-                return;
+    let output_files = glob(glob_pattern.to_str().unwrap())
+        .expect("Failed to read glob pattern")
+        .filter_map(Result::ok)
+        .collect::<Vec<PathBuf>>();
+
+    for output_file_path in output_files {
+        if let Some(command_with_args) = read_command_from_output_file(&output_file_path) {
+            let (command, args) = command_with_args;
+            let cmd = match command.as_str() {
+                "scarb build" => ScarbCmd::Build(),
+                "scarb cairo-run" => ScarbCmd::CairoRun(),
+                "scarb test" | "scarb cairo-test" => ScarbCmd::Test(),
+                "scarb format" => ScarbCmd::Format(),
+                _ => {
+                    eprintln!("Unknown command in {:?}: {}", output_file_path, command);
+                    continue;
+                }
+            };
+
+            let mut output = run_command(cmd, manifest_path, manifest_path, args.clone(), false);
+
+            // Remove the part before "listings" after the first parenthesis using regex
+            let re = Regex::new(r"\(.*?(listings/.*)").expect("Failed to create regex");
+            output = re.replace_all(&output, "($1").to_string();
+
+            let re2 = Regex::new(r"-->\s*.*?(listings/.*)").expect("Failed to create regex");
+            output = re2.replace_all(&output, "--> $1").to_string();
+
+            // Remove the `Blocking waiting for file lock on package cache` lines
+            output = output
+                .lines()
+                .filter(|line| !line.contains("Blocking waiting for file lock on package cache"))
+                .collect::<Vec<&str>>()
+                .join("\n");
+
+            // Keep the command in the first line of the output file
+            let to_write = format!("$ {} {}\n{}\n\n", command, args.join(" "), output);
+
+            if let Err(e) = write_output_file(&output_file_path, &to_write) {
+                eprintln!("Failed to write output file {:?}: {}", output_file_path, e);
             }
-        };
-
-        let mut output = run_command(cmd, manifest_path, manifest_path, args.clone(), false);
-
-        // Remove the part before "listings" after the first parenthesis using regex
-        let re = Regex::new(r"\(.*?(listings/.*)").expect("Failed to create regex");
-        output = re.replace_all(&output, "($1").to_string();
-
-        let re2 = Regex::new(r"-->\s*.*?(listings/.*)").expect("Failed to create regex");
-        output = re2.replace_all(&output, "--> $1").to_string();
-
-        // Remove the `Blocking waiting for file lock on package cache` lines
-        output = output
-            .lines()
-            .filter(|line| !line.contains("Blocking waiting for file lock on package cache"))
-            .collect::<Vec<&str>>()
-            .join("\n");
-
-        // Keep the command in the first line of the output file
-        let to_write = format!("$ {} {}\n{}\n\n", command, args.join(" "), output);
-
-        if let Err(e) = write_output_file(&output_file_path, &to_write) {
-            eprintln!("Failed to write output file: {}", e);
         }
     }
 }

@@ -1,6 +1,6 @@
 # Appendix A - System Calls
 
-This chapter is based on the StarkNet documentation available at [StarkNet Docs](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/).
+This chapter is based on the Starknet documentation available at [Starknet Docs](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/).
 
 Writing smart contracts requires various associated operations, such as calling another contract or accessing the contract’s storage, that standalone programs do not require.
 
@@ -15,24 +15,26 @@ Here is a list of the system calls available in Cairo 1.0:
 - [emit_event](#emit_event)
 - [library_call](#library_call)
 - [send_message_to_L1](#send_message_to_l1)
+- [get_class_hash_at](#get_class_hash_at)
 - [replace_class](#replace_class)
 - [storage_read](#storage_read)
 - [storage_write](#storage_write)
+- [keccak](#keccak)
 - [sha256_process_block](#sha256_process_block)
 
 ## `get_block_hash`
 
 #### Syntax
 
-```cairo
-extern fn get_block_hash_syscall(
-    block_number: u64
+```cairo,noplayground
+pub extern fn get_block_hash_syscall(
+    block_number: u64,
 ) -> SyscallResult<felt252> implicits(GasBuiltin, System) nopanic;
 ```
 
 #### Description
 
-Gets the hash of a specific StarkNet block within the range of `[first_v0_12_0_block, current_block - 10]`.
+Gets the hash of a specific Starknet block within the range of `[first_v0_12_0_block, current_block - 10]`.
 
 #### Return Values
 
@@ -51,10 +53,10 @@ Returns the hash of the given block.
 
 #### Syntax
 
-```cairo
-extern fn get_execution_info_syscall() -> SyscallResult<Box<starknet::info::ExecutionInfo>> implicits(
-    GasBuiltin, System
-) nopanic;
+```cairo,noplayground
+pub extern fn get_execution_info_syscall() -> SyscallResult<
+    Box<starknet::info::ExecutionInfo>,
+> implicits(GasBuiltin, System) nopanic;
 ```
 
 #### Description
@@ -79,9 +81,9 @@ Returns a [struct](https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60fa
 
 #### Syntax
 
-```cairo
-extern fn call_contract_syscall(
-    address: ContractAddress, entry_point_selector: felt252, calldata: Span<felt252>
+```cairo,noplayground
+pub extern fn call_contract_syscall(
+    address: ContractAddress, entry_point_selector: felt252, calldata: Span<felt252>,
 ) -> SyscallResult<Span<felt252>> implicits(GasBuiltin, System) nopanic;
 ```
 
@@ -117,13 +119,13 @@ The call response, of type `SyscallResult<Span<felt252>>`.
 
 #### Syntax
 
-```cairo
-extern fn deploy_syscall(
+```cairo,noplayground
+pub extern fn deploy_syscall(
     class_hash: ClassHash,
     contract_address_salt: felt252,
     calldata: Span<felt252>,
     deploy_from_zero: bool,
-) -> SyscallResult<(ContractAddress, Span::<felt252>)> implicits(GasBuiltin, System) nopanic;
+) -> SyscallResult<(ContractAddress, Span<felt252>)> implicits(GasBuiltin, System) nopanic;
 ```
 
 #### Description
@@ -153,9 +155,9 @@ A tuple wrapped with SyscallResult where:
 
 #### Syntax
 
-```cairo
-extern fn emit_event_syscall(
-    keys: Span<felt252>, data: Span<felt252>
+```cairo,noplayground
+pub extern fn emit_event_syscall(
+    keys: Span<felt252>, data: Span<felt252>,
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
 ```
 
@@ -179,7 +181,7 @@ None.
 
 The following example emits an event with two keys, the strings `status` and `deposit` and three data elements: `1`, `2`, and `3`.
 
-```cairo
+```cairo,noplayground
 let keys = ArrayTrait::new();
 keys.append('key');
 keys.append('deposit');
@@ -198,9 +200,9 @@ emit_event_syscall(keys, values).unwrap_syscall();
 
 #### Syntax
 
-```cairo
-extern fn library_call_syscall(
-    class_hash: ClassHash, function_selector: felt252, calldata: Span<felt252>
+```cairo,noplayground
+pub extern fn library_call_syscall(
+    class_hash: ClassHash, function_selector: felt252, calldata: Span<felt252>,
 ) -> SyscallResult<Span<felt252>> implicits(GasBuiltin, System) nopanic;
 ```
 
@@ -230,9 +232,9 @@ The call response, of type `SyscallResult<Span<felt252>>`.
 
 #### Syntax
 
-```cairo
-extern fn send_message_to_l1_syscall(
-    to_address: felt252, payload: Span<felt252>
+```cairo,noplayground
+pub extern fn send_message_to_l1_syscall(
+    to_address: felt252, payload: Span<felt252>,
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
 ```
 
@@ -258,7 +260,7 @@ None.
 
 The following example sends a message whose content is `(1,2)` to the L1 contract whose address is `3423542542364363`.
 
-```cairo
+```cairo,noplayground
 let payload = ArrayTrait::new();
 payload.append(1);
 payload.append(2);
@@ -269,13 +271,39 @@ send_message_to_l1_syscall(payload).unwrap_syscall();
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L51)
 
+## `get_class_hash_at`
+
+#### Syntax
+
+```cairo,noplayground
+pub extern fn get_class_hash_at_syscall(
+    contract_address: ContractAddress,
+) -> SyscallResult<ClassHash> implicits(GasBuiltin, System) nopanic;
+```
+
+#### Description
+
+Gets the class hash of the contract at the given address.
+
+#### Arguments
+
+- _`contract_address`_: The address of the deployed contract.
+
+#### Return Values
+
+The class hash of the contract's originating code.
+
+#### Common Library
+
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/67c6eff9c276d11bd1cc903d7a3981d8d0eb2fa2/corelib/src/starknet/syscalls.cairo#L99)
+
 ## `replace_class`
 
 #### Syntax
 
-```cairo
-extern fn replace_class_syscall(
-    class_hash: ClassHash
+```cairo,noplayground
+pub extern fn replace_class_syscall(
+    class_hash: ClassHash,
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
 ```
 
@@ -305,8 +333,8 @@ None.
 
 #### Syntax
 
-```cairo
-extern fn storage_read_syscall(
+```cairo,noplayground
+pub extern fn storage_read_syscall(
     address_domain: u32, address: StorageAddress,
 ) -> SyscallResult<felt252> implicits(GasBuiltin, System) nopanic;
 ```
@@ -331,7 +359,7 @@ The value of the key, of type `SyscallResult<felt252>`.
 
 #### Example
 
-```cairo
+```cairo,noplayground
 use starknet::storage_access::storage_base_address_from_felt252;
 
 ...
@@ -348,9 +376,9 @@ storage_read_syscall(0, storage_address).unwrap_syscall()
 
 #### Syntax
 
-```cairo
-extern fn storage_write_syscall(
-    address_domain: u32, address: StorageAddress, value: felt252
+```cairo,noplayground
+pub extern fn storage_write_syscall(
+    address_domain: u32, address: StorageAddress, value: felt252,
 ) -> SyscallResult<()> implicits(GasBuiltin, System) nopanic;
 ```
 
@@ -378,6 +406,32 @@ None.
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L70)
 
+## `keccak`
+
+#### Syntax
+
+```cairo,noplayground
+pub extern fn keccak_syscall(
+    input: Span<u64>,
+) -> SyscallResult<u256> implicits(GasBuiltin, System) nopanic;
+```
+
+#### Description
+
+Computes the Keccak-256 hash of a given input.
+
+#### Arguments
+
+- _`input`_: A `Span<u64>` Keccak-256 input.
+
+#### Return Values
+
+Returns the hash result as a `u256`.
+
+#### Common Library
+
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/67c6eff9c276d11bd1cc903d7a3981d8d0eb2fa2/corelib/src/starknet/syscalls.cairo#L107)
+
 ## `sha256_process_block`
 
 #### Syntax
@@ -396,12 +450,12 @@ This syscall computes the next SHA-256 state by combining the current `state` wi
 
 #### Arguments
 
-- _`state`_: The current sha256 state.
-- _`input`_: The value to be processed into sha256.
+- _`state`_: The current SHA-256 state.
+- _`input`_: The value to be processed into SHA-256.
 
 #### Return Values
 
-Returns a new sha256 state of the `input` data.
+Returns a new SHA-256 state of the `input` data.
 
 #### Common Library
 

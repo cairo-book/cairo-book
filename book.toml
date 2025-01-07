@@ -4,9 +4,11 @@ language = "en"
 multilingual = false
 src = "src"
 title = "The Cairo Programming Language"
+description = "The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet."
 
 [build]
 extra-watch-dirs = ["po", "listings"]
+create-missing = false
 
 [preprocessor.cairo]
 after = ["links"]
@@ -25,6 +27,51 @@ google-analytics = "G-0ZJLBV4KE2"
 additional-css = ["theme/css/last-changed.css", "theme/css/chat.css"]
 additional-js = ["theme/chat.js"]
 mathjax-support = true
+
+# Redirects to avoid dead links
+[output.html.redirect]
+"/ch13-01-general-introduction-to-smart-contracts.html" = "/ch13-01-introduction-to-smart-contracts.html"
+"/ch13-01-introduction-to-smart-contracts.html" = "/ch100-00-introduction-to-smart-contracts.html"
+"/ch14-00-building-starknet-smart-contracts.html" = "/ch101-00-building-starknet-smart-contracts.html"
+"/ch14-01-00-contract-storage.html" = "/ch101-01-00-contract-storage.html"
+"/ch14-01-01-storage-mappings.html" = "/ch101-01-01-storage-mappings.html"
+"/ch14-01-02-storage-vecs.html" = "/ch101-01-02-storage-vecs.html"
+"/ch14-02-contract-functions.html" = "/ch101-02-contract-functions.html"
+"/ch14-03-contract-events.html" = "/ch101-03-contract-events.html"
+"/ch15-00-starknet-contract-interactions.html" = "/ch102-00-starknet-contract-interactions.html"
+"/ch15-01-contract-class-abi.html" = "/ch102-01-contract-class-abi.html"
+"/ch15-02-interacting-with-another-contract.html" = "/ch102-02-interacting-with-another-contract.html"
+"/ch15-03-executing-code-from-another-class.html" = "/ch102-03-executing-code-from-another-class.html"
+"/ch16-00-building-advanced-starknet-smart-contracts.html" = "/ch103-00-building-advanced-starknet-smart-contracts.html"
+"/ch16-01-optimizing-storage-costs.html" = "/ch103-01-optimizing-storage-costs.html"
+"/ch16-02-00-composability-and-components.html" = "/ch103-02-00-composability-and-components.html"
+"/ch16-02-01-under-the-hood.html" = "/ch103-02-01-under-the-hood.html"
+"/ch16-02-02-component-dependencies.html" = "/ch103-02-02-component-dependencies.html"
+"/ch16-02-03-testing-components.html" = "/ch103-02-03-testing-components.html"
+"/ch16-03-upgradeability.html" = "/ch103-03-upgradeability.html"
+"/ch16-04-L1-L2-messaging.html" = "/ch103-04-L1-L2-messaging.html"
+"/ch16-05-01-price-feeds.html" = "/ch103-05-01-price-feeds.html"
+"/ch16-05-02-randomness.html" = "/ch103-05-02-randomness.html"
+"/ch16-05-oracle-interactions.html" = "/ch103-05-oracle-interactions.html"
+"/ch16-06-00-other-examples.html" = "/ch103-06-00-other-examples.html"
+"/ch16-06-01-deploying-and-interacting-with-a-voting-contract.html" = "/ch103-06-01-deploying-and-interacting-with-a-voting-contract.html"
+"/ch17-00-starknet-smart-contracts-security.html" = "/ch104-00-starknet-smart-contracts-security.html"
+"/ch17-01-general-recommendations.html" = "/ch104-01-general-recommendations.html"
+"/ch17-02-testing-smart-contracts.html" = "/ch104-02-testing-smart-contracts.html"
+"/ch17-03-static-analysis-tools.html" = "/ch104-03-static-analysis-tools.html"
+"/ch11-00-advanced-features.html" = "/ch12-00-advanced-features.html"
+"/ch11-01-custom-data-structures.html" = "/ch12-01-custom-data-structures.html"
+"/ch11-02-smart-pointers.html" = "/ch12-02-smart-pointers.html"
+"/ch11-03-operator-overloading.html" = "/ch12-03-operator-overloading.html"
+"/ch11-04-hash.html" = "/ch12-04-hash.html"
+"/ch11-05-macros.html" = "/ch12-05-macros.html"
+"/ch11-06-inlining-in-cairo.html" = "/ch12-06-inlining-in-cairo.html"
+"/ch11-07-gas-optimisation.html" = "/ch12-07-gas-optimisation.html"
+"/ch11-08-printing.html" = "/ch12-08-printing.html"
+"/ch11-09-deref-coercion.html" = "/ch12-09-deref-coercion.html"
+"/ch11-10-arithmetic-circuits.html" = "/ch12-10-arithmetic-circuits.html"
+"/ch11-10-associated-items.html" = "/ch12-10-associated-items.html"
+"/ch11-10-procedural-macros.html" = "/ch12-10-procedural-macros.html"
 
 [output.html.code.hidelines]
 cairo = "# "

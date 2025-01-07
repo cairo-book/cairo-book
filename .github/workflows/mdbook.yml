@@ -47,13 +47,23 @@ jobs:
         run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Setup Rust cache
-        uses: ./.github/workflows/setup-rust-cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
 
       - name: Build book (English)
         run: mdbook build -d book
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Generate redirects
+        run: |
+          echo "Updating meta descriptions..."
+          bun run scripts/update-meta-descriptions.ts
 
       - name: Copy WASM-Cairo pkg
         run: |

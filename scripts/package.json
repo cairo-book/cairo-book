@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "fuzzysort": "^2.0.4",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "yaml": "^2.6.1"
   }
 }

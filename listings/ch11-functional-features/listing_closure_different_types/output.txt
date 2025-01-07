@@ -1,0 +1,19 @@
+$ scarb build 
+   Compiling listing_closure_different_types v0.1.0 (listings/ch11-functional-features/listing_closure_different_types/Scarb.toml)
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:6:9
+    let s = example_closure(5_u64);
+        ^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:7:9
+    let n = example_closure(5_u32);
+        ^
+
+error: Type annotations needed. Failed to infer ?7.
+ --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:7:13
+    let n = example_closure(5_u32);
+            ^********************^
+
+error: could not compile `listing_closure_different_types` due to previous error
+

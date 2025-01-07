@@ -1,0 +1,15 @@
+[package]
+name = "no_listing_15_procedural_macro"
+version = "0.1.0"
+edition = "2024_07"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
+
+[dependencies]
+pow = { path = "../no_listing_16_procedural_macro_expression" }
+hello_macro = { path = "../no_listing_17_procedural_macro_derive" }
+rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
+
+
+[dev-dependencies]
+cairo_test = "2.9.2"

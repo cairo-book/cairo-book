@@ -118,10 +118,10 @@ Here we are converting a serialized array span back to the struct `A`. `deserial
 
 It is possible to derive the `Hash` trait on structs and enums. This allows them to be hashed easily using any available hash function. For a struct or an enum to derive the `Hash` attribute, all fields or variants need to be hashable themselves.
 
-You can refer to the [Hashes section](ch11-04-hash.md) to get more information about how to hash complex data types.
+You can refer to the [Hashes section](ch12-04-hash.md) to get more information about how to hash complex data types.
 
 ## Starknet Storage with `starknet::Store`
 
-The `starknet::Store` trait is relevant only when building on [Starknet](ch13-00-introduction-to-starknet-smart-contracts.md). It allows for a type to be used in smart contract storage by automatically implementing the necessary read and write functions.
+The `starknet::Store` trait is relevant only when building on [Starknet](ch100-00-introduction-to-smart-contracts.md). It allows for a type to be used in smart contract storage by automatically implementing the necessary read and write functions.
 
-You can find detailed information about the inner workings of Starknet storage in the [Contract storage section](ch14-01-00-contract-storage.md).
+You can find detailed information about the inner workings of Starknet storage in the [Contract storage section](ch101-01-00-contract-storage.md).
