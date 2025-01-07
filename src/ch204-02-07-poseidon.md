@@ -37,12 +37,14 @@ In the first snapshot, we see both single-value and sequence hashing:
 
 When hashing a value 42, the computation proceeds as:
 1. Value is added to initial state (s0 = 42)
-2. During finalization: hades_permutation(43, 0, 0) is computed (s0 + 1, s1, s2)
-3. First element of permutation result becomes the hash
+2. During finalization: `hades_permutation(43, 0, 0)` is computed (s0 + 1, s1, s2)
+3. First element of permutation result becomes the hash i.e. cell `3:3`
 
 For sequence [73, 91]:
 1. First value updates s0 = 73
-2. Second value triggers hades_permutation(73, 91, 0)
+2. Second value updates s1 = 91
+3. During finalization: `hades_permutation(73, 91, 0)` is computed (s0, s1+1, s2)
+4. All three output states are stored in respective sequential cells for further rounds
 
 In the second snapshot, we see error conditions:
 
