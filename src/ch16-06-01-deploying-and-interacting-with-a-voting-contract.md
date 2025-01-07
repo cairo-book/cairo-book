@@ -45,15 +45,15 @@ To install `katana` from the source code, please refer to the ["Using Katana"][k
 > katana 1.0.9-dev (38b3c2a6)
 > ```
 >
-> To upgrade `katana` version, refer to the ["Using Katana"][katana installation] chapter of the Starknet Docs.
+> To upgrade `katana` version, refer to the ["Using Katana"][katana installation] chapter of the Dojo Engine.
 
 Once you have `katana` installed, you can start the local Starknet node with:
 
 ```bash
-katana --dev --dev.accounts 3
+katana
 ```
 
-This command will start a local Starknet node with 3 deployed accounts. We will use these accounts to deploy and interact with the voting contract:
+This command will start a local Starknet node with predeployed accounts. We will use these accounts to deploy and interact with the voting contract:
 
 ```bash
 ...
@@ -77,7 +77,7 @@ PREFUNDED ACCOUNTS
 Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the ["Account Abstraction"][aa chapter] chapter of the Starknet Docs.
 
 [dojo katana]: https://github.com/dojoengine/dojo/blob/main/crates/katana
-[katana installation]: https://docs.starknet.io/quick-start/using_devnet/#using_katana
+[katana installation]: https://www.dojoengine.org/toolchain/katana/interact#starkli-built-in-accounts-and-configuration
 [aa chapter]: https://docs.starknet.io/architecture-and-concepts/accounts/introduction/#account_abstraction
 
 ### Smart Wallets for Voting
@@ -93,64 +93,20 @@ Aside from Scarb you will need to have Starkli installed. Starkli is a command l
 >
 > To upgrade `starkli` to `0.3.6`, use the `starkliup -v 0.3.6` command, or simply `starkliup` which installed the latest stable version.
 
-For each smart wallet we'll use, we must create a Signer within the encrypted keystore and an Account Descriptor. This process is also detailed in the ["Creating a Signer"][signer creation] chapter of the Starknet Docs.
-
-We can create Signers and Account Descriptors for the accounts we want to use for voting. Let's create a smart wallet for voting in our smart contract.
-
-Firstly, we create a signer from a private key:
-
-```bash
-mkdir -p ~/.starkli-wallets/deployer
-starkli signer keystore from-key ~/.starkli-wallets/deployer/account0_keystore.json
-```
-
-Then, we create the Account Descriptor by fetching the katana account we want to use:
-
-```bash
-starkli account fetch <KATANA ACCOUNT ADDRESS> --rpc http://0.0.0.0:5050 --output ~/.starkli-wallets/deployer/account0_account.json
-```
-
-This command will create a new `account0_account.json` file containing the following details:
-
-```bash
-{
-  "version": 1,
-  "variant": {
-        "type": "open_zeppelin",
-        "version": 1,
-        "public_key": "<SMART_WALLET_PUBLIC_KEY>"
-  },
-    "deployment": {
-        "status": "deployed",
-        "class_hash": "<SMART_WALLET_CLASS_HASH>",
-        "address": "<SMART_WALLET_ADDRESS>"
-  }
-}
-```
-
 You can retrieve the smart wallet class hash (it will be the same for all your smart wallets) with the following command. Notice the use of the `--rpc` flag and the RPC endpoint provided by `katana`:
 
 ```
 starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
 ```
 
-For the public key, you can use the `starkli signer keystore inspect` command with the directory of the keystore json file:
-
-```bash
-starkli signer keystore inspect ~/.starkli-wallets/deployer/account0_keystore.json
-```
-
-This process is identical for `account_1` and `account_2` in case you want to have a second and a third voter.
-
 [starkli installation]: https://docs.starknet.io/quick-start/environment-setup/
-[signer creation]: https://docs.starknet.io/quick-start/set-up-an-account/#creating_a_signer
 
 ### Contract Deployment
 
 Before deploying, we need to declare the contract. We can do this with the `starkli declare` command:
 
 ```bash
-starkli declare target/dev/starknetbook_chapter_2_Vote.sierra.json --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+starkli declare target/dev/listing_99_12_vote_contract_Vote.contract_class.json --rpc http://0.0.0.0:5050 --account katana-0
 ```
 
 If the compiler version you're using is older than the one used by Starkli and you encounter a `compiler-version` error while using the command above, you can specify a compiler version to use in the command by adding the `--compiler-version x.y.z` flag.
@@ -159,20 +115,20 @@ If you're still encountering issues with the compiler version, try upgrading Sta
 
 The class hash of the contract is: `0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`. You can declare this contract on Sepolia testnet and see that the class hash will correspond.
 
-The `--rpc` flag specifies the RPC endpoint to use (the one provided by `katana`). The `--account` flag specifies the account to use for signing the transaction. The account we use here is the one we created in the previous step. The `--keystore` flag specifies the keystore file to use for signing the transaction.
+The `--rpc` flag specifies the RPC endpoint to use (the one provided by `katana`). The `--account` flag specifies the account to use for signing the transaction.
 
 Since we are using a local node, the transaction will achieve finality immediately. If you are using the Goerli Testnet, you will need to wait for the transaction to be final, which usually takes a few seconds.
 
 The following command deploys the voting contract and registers voter_0, voter_1, and voter_2 as eligible voters. These are the constructor arguments, so add a voter account that you can later vote with.
 
 ```bash
-starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account katana-0
 ```
 
 An example command:
 
 ```bash
-starkli deploy 0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52 0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 0x033c627a3e5213790e246a917770ce23d7e562baa5b4d2917c23b1be6d91961c 0x01d98d835e43b032254ffbef0f150c5606fa9c5c9310b1fae370ab956a7919f5 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+starkli deploy 0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52 0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 0x033c627a3e5213790e246a917770ce23d7e562baa5b4d2917c23b1be6d91961c 0x01d98d835e43b032254ffbef0f150c5606fa9c5c9310b1fae370ab956a7919f5 --rpc http://0.0.0.0:5050 --account katana-0
 ```
 
 In this case, the contract has been deployed at an specific address: `0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349`. This address will be different for you. We will use this address to interact with the contract.
@@ -209,10 +165,10 @@ The `invoke` command syntax resembles the `call` command, but for voting, we sub
 
 ```bash
 //Voting Yes
-starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account katana-0
 
 //Voting No
-starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account0_account.json --keystore ~/.starkli-wallets/deployer/account0_keystore.json
+starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account katana-0
 ```
 
 You will be prompted to enter the password for the signer. Once you enter the password, the transaction will be signed and submitted to the Starknet network. You will receive the transaction hash as output. With the starkli transaction command, you can get more details about the transaction:
@@ -272,9 +228,9 @@ assert!(can_vote, "USER_ALREADY_VOTED");
 We can repeat the process to create Signers and Account Descriptors for the accounts we want to use for voting. Remember that each Signer must be created from a private key, and each Account Descriptor must be created from a public key, a smart wallet address, and the smart wallet class hash (which is the same for each voter).
 
 ```bash
-starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account1_account.json --keystore ~/.starkli-wallets/deployer/account1_keystore.json
+starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account katana-0
 
-starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account ~/.starkli-wallets/deployer/account2_account.json --keystore ~/.starkli-wallets/deployer/account2_keystore.json
+starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account katana-0
 ```
 
 ### Visualizing Vote Outcomes
