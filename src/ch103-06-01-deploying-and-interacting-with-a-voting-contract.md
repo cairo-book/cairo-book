@@ -36,7 +36,7 @@ We will setup a local development node using `katana` to deploy the voting contr
 
 `katana` is designed to support local development by the [Dojo team][dojo katana]. It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.
 
-To install `katana` from the source code, please refer to the ["Using Katana"][katana installation] chapter of the Starknet Docs.
+To install `katana` from the source code, please refer to the ["Using Katana"][katana installation] chapter of the Dojo Engine.
 
 > Note: Please verify that the version of `katana` match the specified version provided below.
 >
