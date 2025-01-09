@@ -1,20 +1,20 @@
 # Segment Arena Builtin
 
-The _Segment Arena_ builtin is a critical component in Cairo VM that manages memory segments and dictionaries. It serves as the backbone for Cairo's dynamic memory allocation and dictionary operations, making it essential for programs that require flexible memory management.
+The _Segment Arena_ extends Cairo VM's memory handling by tracking segment endpoints. This approach simplifies memory operations where segments need to be allocated and finalized.
 
 ## Cells Organization
 
 Each Segment Arena builtin instance works with blocks of 3 cells that maintain the state of dictionaries:
 
 - First cell: Contains the base address of the info pointer
-- Second cell: Contains the current number of allocated dictionaries
-- Third cell: Contains the current number of squashed dictionaries
+- Second cell: Contains the current number of allocated segments
+- Third cell: Contains the current number of squashed/finalized segments
 
 This structure works in close conjunction with an Info segment, which is also organized in blocks of 3 cells:
 
-- First cell: Base address of a dictionary
-- Second cell: End address of a dictionary (when squashed)
-- Third cell: Current number of squashed dictionaries (squashing index)
+- First cell: Base address of the segment
+- Second cell: End address of the segment (when squashed)
+- Third cell: Current number of squashed segments (squashing index)
 
 <div align="center">
   <img src="segment-arena.png" alt="segment arena builtin segment"/>
@@ -36,7 +36,7 @@ Now, In the second case one more dictionary is allocated:
 - Info segment grows by three cells per dictionary
 - Squashed dictionaries have end addresses set
 - Squashing indices assigned sequentially
-- Unfinished dictionaries have zero end address
+- Unfinished dictionaries have `0` end address
 
 <div align="center">
   <img src="segment-arena-valid.png" alt="valid segment arena builtin segment"/>
@@ -45,8 +45,7 @@ Now, In the second case one more dictionary is allocated:
   <span class="caption">Snapshot 1 - Valid Segment Arena builtin segment</span>
 </div>
 
-On the second snapshot both the cases shows the error consitions where in the first case invalid state occurs when `info_ptr` contains _non-relocatable_ value `ABC`. Error triggered when accessing info segment.
-In The second case the error triggers when there's a inconsistent state.
+The second snapshot shows two error conditions. In the first case, an invalid state occurs when `info_ptr` contains the _non-relocatable_ value `ABC`. The error is triggered when accessing the info segment. In the second case, the error occurs when there's an inconsistent state as shown in the snapshot, `n_squashed` is greater than `n_segments`.
 
 <div align="center">
   <img src="segment-arena-error.png" alt="invalid segment arena builtin segment"/>
@@ -59,11 +58,11 @@ In The second case the error triggers when there's a inconsistent state.
 
 The builtin enforces several critical rules:
 
-- The Info segment must exist when dictionaries are allocated
+- Each segment must be allocated and finalized exactly once
 - All cell values must be valid field elements
-- Dictionary counts must remain consistent
+- Segment sizes must be non-negative
 - Squashing operations must maintain sequential order
-- Info segment entries must correspond to dictionary allocations
+- Info segment entries must correspond to segment allocations
 
 ## Implementation References
 
