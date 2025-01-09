@@ -198,7 +198,7 @@
 - [Builtins](ch204-00-builtins.md)
   - [How Builtins Work](ch204-01-how-builtins-work.md)
   - [Builtins List](ch204-02-builtins-list.md)
-    - [Output]((ch204-02-00-ecdsa.md))
+    - [Output](ch204-02-00-output.md)
     - [Pedersen](ch204-02-01-pedersen.md)
     - [Range Check]()
     - [ECDSA](ch204-02-03-ecdsa.md)
