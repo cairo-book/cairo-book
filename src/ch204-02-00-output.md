@@ -24,6 +24,36 @@ The Output builtin follows these rules:
 * Reading from an unwritten cell will result in an error
 * The total number of outputs must match the number declared when initializing the builtin
 
+Here are some examples of the Output segment during program execution:
+
+### Snapshot 1 - Valid Output Builtin Usage
+
+
+<div align="center">
+  <img src="valid-sequential-output.png" alt="Valid Output Builtin Usage" height="350px"/>
+</div>
+<div align="center">
+  <span class="caption">Snapshot 1 </span>
+</div>
+
+
+In this snapshot, the program has written three values sequentially. The remaining cells are unwritten but available for future outputs.
+
+
+
+### Snapshot 2 - Invalid Output Builtin Usage
+
+
+<div align="center">
+  <img src="Invalid-sequential-output.png" alt="Invalid Output Builtin Usage" height="350px"/>
+</div>
+<div align="center">
+  <span class="caption">Snapshot 2 </span>
+</div>
+
+
+This snapshot shows an invalid state where the program attempted to write to offset 2 before writing to offset 1. This will result in an error because outputs must be sequential.
+
 
 ## Implementation References
 
