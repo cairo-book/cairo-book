@@ -56,7 +56,7 @@ The second snapshot shows two error conditions. In the first case, an invalid st
 
 ### Key Validation Rules
 
-The builtin enforces several critical rules:
+The builtin enforces several rules:
 
 - Each segment must be allocated and finalized exactly once
 - All cell values must be valid field elements
