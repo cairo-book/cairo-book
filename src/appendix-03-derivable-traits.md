@@ -49,7 +49,7 @@ scarb cairo-run
 Point { x: 1, y: 3 }
 ```
 
-The `Debug` trait is required, for example, when using the `assert_xx!` macros in tests. Theses macros print the values of instances given as arguments if the equality or comparison assertion fails so programmers can see why the two instances weren’t equal.
+The `Debug` trait is required, for example, when using the `assert_xx!` macros in tests. These macros print the values of instances given as arguments if the equality or comparison assertion fails so programmers can see why the two instances weren’t equal.
 
 ## `Default` for Default Values
 
