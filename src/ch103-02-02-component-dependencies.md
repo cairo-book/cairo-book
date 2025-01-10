@@ -32,8 +32,7 @@ While this mechanism is verbose and may not be easy to approach at first, it is 
 
 [cairo traits]: ./ch08-02-traits-in-cairo.md
 [component impl]: ch103-02-01-under-the-hood.md#inside-components-generic-impls
-
-[anonymous generic impl operator]: ./ch08-01-generic-data-types md#anonymous-generic-implementation-parameter--operator
+[anonymous generic impl operator]: ./ch08-01-generic-data-types.md#anonymous-generic-implementation-parameter--operator
 
 ### Using the Dependency
 

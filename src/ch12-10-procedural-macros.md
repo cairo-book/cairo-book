@@ -224,7 +224,7 @@ The rename macro can be derived as follow :
 {{#rustdoc_include ../listings/ch12-advanced-features/no_listing_15_procedural_macro/src/lib.cairo:old_trait}}
 ```
 
-Now the compiler knows the _RenamedType_ struct, therefor we can create an instance as such :
+Now the compiler knows the _RenamedType_ struct, therefore we can create an instance as such :
 
 ```cairo
 {{#rustdoc_include ../listings/ch12-advanced-features/no_listing_15_procedural_macro/src/lib.cairo:rename_example}}

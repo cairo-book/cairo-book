@@ -14,7 +14,7 @@ There are three variants of the `inline` attribute that one can use:
 
 > Note: the `inline` attribute in every form is a hint, with no requirements on the language to place a copy of the attributed function in the caller. This means that the attribute may be ignored by the compiler. In practice, `#[inline(always)]` will cause inlining in all but the most exceptional cases.
 
-Many of the Cairo corelib functions are inlined. User-defined functions may also be annotated with the `inline` attribute. Annoting functions with the `#[inline(always)]` attribute reduces the total number of steps required when calling these attributed functions. Indeed, injecting the Sierra code at the caller site avoids the step-cost involved in calling functions and obtaining their arguments.
+Many of the Cairo corelib functions are inlined. User-defined functions may also be annotated with the `inline` attribute. Annotating functions with the `#[inline(always)]` attribute reduces the total number of steps required when calling these attributed functions. Indeed, injecting the Sierra code at the caller site avoids the step-cost involved in calling functions and obtaining their arguments.
 
 However, inlining can also lead to increased code size. Whenever a function is inlined, the call site contains a copy of the function's Sierra code, potentially leading to duplication of code across the compiled code.
 
