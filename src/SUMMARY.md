@@ -206,7 +206,7 @@
     - [EC OP]()
     - [Keccak]()
     - [Poseidon]()
-    - [Range Check96]()
+    - [Range Check96](ch204-02-08-range-check-96.md)
     - [AddMod]()
     - [MulMod]()
     - [Segment Arena]()
