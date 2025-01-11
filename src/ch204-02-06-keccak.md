@@ -9,6 +9,11 @@ The Keccak builtin has its own segment during a Cairo VM run which is organized 
 - The 8 first cells are used to store the input state `s`. The state is a 1600-bit array, so each cell stores 200 bits.
 - The 8 next cells are used to store the output state `s'`. The state is a 1600-bit array, so each cell stores 200 bits.
 
+If the input of a cell is larger than 200 bits - or is not a valid integer, the VM will throw an
+error. Upon accessing any of the output cells, the VM will compute the hash state of the 8 input
+cells, and store the results in a cache to avoid re-computing it in case the same output cell is
+accessed again.
+
 Here is the expected hash of the input state `s` [0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8]:
 
 <div align="center">
