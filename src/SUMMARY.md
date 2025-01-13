@@ -207,7 +207,7 @@
     - [Keccak](ch204-02-06-keccak.md)
     - [Poseidon]()
     - [Range Check96]()
-    - [AddMod]()
+    - [AddMod](ch204-02-09-add-mod.md)
     - [MulMod]()
     - [Segment Arena]()
 
