@@ -149,12 +149,12 @@ The address of a storage variable is computed as follows:
 You can access the base address of a storage variable by accessing the `__base_address__` attribute on the variable, which returns a `felt252` value.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:owner_address}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_01_reference_contract/src/lib.cairo:total_names_address}}
 ```
 
 This address calculation mechanism is performed through a modelisation of the contract storage space using a concept of StoragePointers and StoragePaths that we'll now introduce.
 
-[custom types storage layout]: ./ch101-01-00-contract-storage.md#storing-custom-types
+[custom types storage layout]: ./ch101-01-00-contract-storage.md#storing-custom-types-with-the-store-trait
 
 ## Modeling of the Contract Storage in the Core Library
 
