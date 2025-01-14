@@ -4,25 +4,12 @@ The Output builtin is dedicated to writing values to an output segment that can 
 
 ## Memory Organization
 
-The Output builtin has its own segment during a Cairo VM run. It consists of consecutive cells that are written to in sequential order. Unlike other builtins that work with fixed-size blocks of cells (like EC_OP's 7-cell blocks or Pedersen's 3-cell blocks), the Output builtin works with individual cells that are filled one at a time.
+The Output builtin segment accepts both felt values and relocatable values. The segment's memory cells have no validation or deduction properties - any value that can be stored in Cairo memory can be written to an Output builtin cell.
+The segment's memory is organized using a paging system that splits outputs into groups. Each group is identified by a page ID. In Starknet's implementation, this system enforces a maximum page size of 3800 values for on-chain data storage.
 
-Key characteristics of the Output segment:
+## Attribute System
 
-* Each cell can store a single felt value
-* Values must be written sequentially starting from offset 0
-* Cells cannot be written to out of order
-* Once written, cells cannot be modified
-* The segment size is determined by how many values the program outputs
-
-## Cell Organization
-
-The Output builtin follows these rules:
-
-* Each cell must store a felt value - relocatable values (pointers) are not allowed
-* Values must be written to consecutive cells starting at offset 0
-* Attempting to write to a cell at offset n when offset n-1 hasn't been written will result in an error
-* Reading from an unwritten cell will result in an error
-* The total number of outputs must match the number declared when initializing the builtin
+The Output builtin implements an attribute system for memory segment metadata. These attributes, combined with page IDs, define how memory values should be deserialized. The attribute system encodes type information and structural metadata needed for correct interpretation of the segment's contents during proof verification.
 
 Here are some examples of the Output segment during program execution:
 
