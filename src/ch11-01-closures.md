@@ -216,7 +216,7 @@ as we continue!
 
 Under the hood, closures are implemented through `FnOnce` and `Fn` traits. `FnOnce` is implemented for closures that may consume captured variables, where `Fn` is implemented for closures that capture only copyable variables.
 
-## Implementing Your Functional Programing Patterns with Closures
+## Implementing Your Functional Programming Patterns with Closures
 
 Another great interest of closures is that, like any type of variables, you can pass them as function arguments. This mechanism is massively used in functional programming, through classic functions like `map`, `filter` or `reduce`.
 
