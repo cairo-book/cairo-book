@@ -200,7 +200,7 @@
   - [Builtins List](ch204-02-builtins-list.md)
     - [Output]()
     - [Pedersen](ch204-02-01-pedersen.md)
-    - [Range Check]()
+    - [Range Check](ch204-02-02-range-check.md)
     - [ECDSA](ch204-02-03-ecdsa.md)
     - [Bitwise]()
     - [EC OP](ch204-02-05-ec-op.md)
