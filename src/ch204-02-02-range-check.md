@@ -4,7 +4,7 @@ The _Range Check_ builtin is used to check whether a field element is in the ran
 It is used when instantiating and comparing the various integer types.
 There's two variants of this builtin, the standard one that operates on a \\(2^{128}-1\\) upper bound and another variant named _Range Check 96_ that operates on a \\(2^{96}-1\\) upper bound. We will focus on the standard one in this section, but the same principles apply to the 96 variant.
 
-One of the usage of this builtin is to implement primitive integer arithmetic operations over bounded integers or modulo other numbers found in standard architectures, using only the basic word in Cairo which is a field element.
+While it's possible to implement range checking using pure Cairo code (for example, by decomposing a number into its binary representation and verifying each bit), using the builtin is significantly more efficient. A pure Cairo implementation would require at least 384 instructions to verify a single range check, whereas the builtin achieves the same result with computational cost equivalent to about 1.5 instructions. This efficiency makes the Range Check builtin essential for the implementation of bounded integer arithmetic and other operations that require value range verification.
 
 ## Cells organization
 
