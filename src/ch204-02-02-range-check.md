@@ -1,9 +1,8 @@
 # Range Check Builtin
 
-The _Range Check_ builtin is used to check whether a field element is in the range \\([0,2^{128}-1]\\).
+The _Range Check_ builtin is used to check whether a field element is in the range \\([0,n]\\).
 It is used when instantiating and comparing the various integer types.
-All arithmetic comparisons use the range check builtin.
-There's two variants of this builtin, the standard one that operates on a \\(2^{128}-1\\) upper bound and another variant named _Range Check 96_ that operates on a \\(2^{96}-1\\) upper bound.
+There's two variants of this builtin, the standard one that operates on a \\(2^{128}-1\\) upper bound and another variant named _Range Check 96_ that operates on a \\(2^{96}-1\\) upper bound. We will focus on the standard one in this section, but the same principles apply to the 96 variant.
 
 One of the usage of this builtin is to implement primitive integer arithmetic operations over bounded integers or modulo other numbers found in standard architectures, using only the basic word in Cairo which is a field element.
 
@@ -11,7 +10,7 @@ One of the usage of this builtin is to implement primitive integer arithmetic op
 
 The Range Check builtin enforces that all values written to its memory cells are within the range \\([0,2^{128}-1]\\).
 The memory cells constrained by this builtin are called range-checked cells as every values written to this memory segment must be contained within the range \\([0,2^{128}-1]\\) otherwise an out of range error will be thrown.
-These range-checked cells must store field elements, relocatables are forbidden.
+These range-checked cells must store valid field elements, not relocatable values.
 
 In the following example, a Cairo program writes 0, 256 and \\(2^{128}-1\\) to the Range Check memory segment, since these 3 field elements are constrained within the \\([0,2^{128}-1]\\) range, the program execution is valid.
 
