@@ -29,7 +29,7 @@ The main reason for using methods instead of functions, in addition to providing
 If you are familiar with Rust, you may find Cairo's approach confusing because methods cannot be defined directly on types. Instead, you must define a [trait](./ch08-02-traits-in-cairo.md) and an implementation of this trait associated with the type for which the method is intended.
 However, defining a trait and then implementing it to define methods on a specific type is verbose, and unnecessary: the trait itself will not be reused.
 
-So, to avoid defining useless traits, Cairo provides the `#[generate_trait]` attribute to add above a trait implementation, which tells to the compiler to generate the corresponding trait definition for you, and let's you focus on the implementation only. Both approaches are equivalent, but it's considered a best practice to not explicitly define traits in this case.
+So, to avoid defining useless traits, Cairo provides the `#[generate_trait]` attribute to add above a trait implementation, which tells the compiler to generate the corresponding trait definition for you, and let's you focus on the implementation only. Both approaches are equivalent, but it's considered a best practice to not explicitly define traits in this case.
 
 The previous example can also be written as follows:
 
@@ -90,8 +90,8 @@ Let's create the function `new` which creates a `Rectangle` from a `width` and a
 ```
 
 To call the `square` associated function, we use the `::` syntax with the struct name;
-`let sq = Rectangle::square(3);` is an example. This function is namespaced by
-the struct: the `::` syntax is used for both associated functions and
+`let sq = RectangleTrait::square(3);` is an example. This function is namespaced by
+the trait: the `::` syntax is used for both associated functions and
 namespaces created by modules. We’ll discuss modules in [Chapter
 7][modules].
 
