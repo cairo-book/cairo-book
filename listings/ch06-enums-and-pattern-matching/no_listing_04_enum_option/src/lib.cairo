@@ -1,8 +1,10 @@
 fn find_value_recursive(mut arr: Span<felt252>, value: felt252, index: usize) -> Option<usize> {
     match arr.pop_front() {
-        Option::Some(index_value) => { if (*index_value == value) {
-            return Option::Some(index);
-        } },
+        Option::Some(index_value) => {
+            if (*index_value == value) {
+                return Option::Some(index);
+            }
+        },
         Option::None => { return Option::None; },
     };
 
