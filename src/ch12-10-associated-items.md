@@ -14,6 +14,8 @@ Associated items are useful when they are logically related to the implementatio
 
 Every associated item kind comes in two varieties: definitions that contain the actual implementation and declarations that declare signatures for definitions.
 
+> Currently, associated items are considered an experimental feature. In order to use them, you need to add the following to your `Scarb.toml` under the `[package]` section: `experimental-features = ["associated_item_constraints"]`.
+
 ## Associated Types
 
 Associated types are _type aliases_ allowing you to define abstract type placeholders within traits. Instead of specifying concrete types in the trait definition, associated types let trait implementers choose the actual types to use.
