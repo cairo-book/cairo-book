@@ -209,4 +209,23 @@ In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements t
 
 In the `main` function, we create instances of `ProducerType`, `AnotherType`, and `AThirdType`. We then call the `produce` method on the `producer` instance and pass the result to the `consume` method on the `another_type` and `third_type` instances. Finally, we try to call the `consume` method on the `producer` instance, which results in a compile-time error because `ProducerType` does not implement the `Consumer` trait.
 
+## Constraint traits on associated items
+
+> Currently, associated items are considered an experimental feature. In order to use them, you need to add the following to your `Scarb.toml` under the `[package]` section: `experimental-features = ["associated_item_constraints"]`.
+
+In some cases, you may want to constrain the [associated items] of a trait based on the type of the generic parameter. You can do this using the `[AssociatedItem: ConstrainedValue]` syntax after a trait bound.
+
+[associated items]: ./ch12-10-associated-items.md
+
+Let's say you want to implement an `extend` method for collections. This method takes an iterator and add its elements to the collection. To ensure type safety, we want the iterator's elements to match the collection's element type. We can achieve this by constraining the `Iterator::Item` associated type to match the collection's type.
+
+In Listing {{#ref associated-items-constraints}}, we implement this by defining a trait `Extend<T, A>` and use `[Item: A]` as a constraint on the `extend` function's trait bound. Additionally, we use the `Destruct` trait to ensure that the iterator is consumed, and show an example implementation for `Extend<Array<T>, T>`.
+
+```cairo
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_associated_items_constraints/src/lib.cairo}}
+```
+
+{{#label associated-items-constraints}}
+<span class="caption"> Listing {{#ref associated-items-constraints}}: Using associated items constraints to ensure that a type matches the associated type of another type</span>
+
 {{#quiz ../quizzes/ch08-02-traits.toml}}

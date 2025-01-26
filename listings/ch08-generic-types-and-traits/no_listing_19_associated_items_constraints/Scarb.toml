@@ -1,0 +1,10 @@
+[package]
+name = "no_listing_19_associated_items_constraints"
+version = "0.1.0"
+edition = "2024_07"
+experimental-features = ["associated_item_constraints"]
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+
+[dependencies]
+# foo = { path = "vendor/foo" }
