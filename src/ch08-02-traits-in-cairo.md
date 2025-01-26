@@ -149,7 +149,7 @@ Note that it isn’t possible to call the default implementation from an overrid
 Now that you know how to define and implement traits, we can explore how to use
 traits to define functions that accept many different types. We'll use the
 `Summary` trait we implemented on the `NewsArticle` and `Tweet` types to define a `notify` function that calls the `summarize` method
-on its `item` parameter, which is of some type that implements the `Summary` trait. To do this, we use the `impl Trait` syntax. 
+on its `item` parameter, which is of some type that implements the `Summary` trait. To do this, we use the `impl Trait` syntax.
 
 Instead of a concrete type for the `item` parameter, we specify the `impl`
 keyword and the trait name. This parameter accepts any type that implements the
@@ -227,5 +227,33 @@ In Listing {{#ref associated-items-constraints}}, we implement this by defining 
 
 {{#label associated-items-constraints}}
 <span class="caption"> Listing {{#ref associated-items-constraints}}: Using associated items constraints to ensure that a type matches the associated type of another type</span>
+
+## `TypeEqual` Trait for type equality constraints
+
+The `TypeEqual` trait from the `core::metaprogramming` module lets you create constraints based on type equality. In most of the cases, you don't need `+TypeEqual` and you can achieve the same using only generic arguments and associated type constraints, but `TypeEqual` can be useful in some advanced scenarios.
+
+The first use case is implementing a trait for all types that match certain conditions, except for specific types. We do this using a negative implementation on the `TypeEqual` trait.
+
+In Listing {{#ref type-equal-negative-constraints}}, we create a `SafeDefault` trait and implement it for any type `T` that implements `Default`. However, we exclude the `SensitiveData` type using `-TypeEqual<T, SensitiveData>`.
+
+```cairo
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_type_equal/src/safe_default.cairo}}
+```
+
+{{#label type-equal-negative-constraints}}
+<span class="caption"> Listing {{#ref type-equal-negative-constraints}}: Using the `TypeEqual` trait to exclude a specific type from an implementation</span>
+
+The second use case is ensuring that two types are equal, particularly useful when working with [associated types].
+
+[associated types]: ./ch12-10-associated-items.md#associated-types
+
+In Listing {{#ref type-equal-constraints}}, we show this with a `StateMachine` trait that has an associated type `State`. We create two types, `TA` and `TB`, both using `StateCounter` as their `State`. Then we implement a `combine` function that works only when both state machines have the same state type, using the bound `TypeEqual<A::State, B::State>`.
+
+```cairo
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_type_equal/src/state_machine.cairo}}
+```
+
+{{#label type-equal-constraints}}
+<span class="caption"> Listing {{#ref type-equal-constraints}}: Using the `TypeEqual` trait to ensure two types have matching associated types</span>
 
 {{#quiz ../quizzes/ch08-02-traits.toml}}
