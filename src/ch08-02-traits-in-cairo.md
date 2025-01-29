@@ -149,7 +149,7 @@ Note that it isn’t possible to call the default implementation from an overrid
 Now that you know how to define and implement traits, we can explore how to use
 traits to define functions that accept many different types. We'll use the
 `Summary` trait we implemented on the `NewsArticle` and `Tweet` types to define a `notify` function that calls the `summarize` method
-on its `item` parameter, which is of some type that implements the `Summary` trait. To do this, we use the `impl Trait` syntax. 
+on its `item` parameter, which is of some type that implements the `Summary` trait. To do this, we use the `impl Trait` syntax.
 
 Instead of a concrete type for the `item` parameter, we specify the `impl`
 keyword and the trait name. This parameter accepts any type that implements the
@@ -208,5 +208,52 @@ In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements t
 <span class="caption"> Listing {{#ref negative-impls}}: Using negative impls to enforce that a type cannot implement both `Producer` and `Consumer` traits simultaneously</span>
 
 In the `main` function, we create instances of `ProducerType`, `AnotherType`, and `AThirdType`. We then call the `produce` method on the `producer` instance and pass the result to the `consume` method on the `another_type` and `third_type` instances. Finally, we try to call the `consume` method on the `producer` instance, which results in a compile-time error because `ProducerType` does not implement the `Consumer` trait.
+
+## Constraint traits on associated items
+
+> Currently, associated items are considered an experimental feature. In order to use them, you need to add the following to your `Scarb.toml` under the `[package]` section: `experimental-features = ["associated_item_constraints"]`.
+
+In some cases, you may want to constrain the [associated items] of a trait based on the type of the generic parameter. You can do this using the `[AssociatedItem: ConstrainedValue]` syntax after a trait bound.
+
+[associated items]: ./ch12-10-associated-items.md
+
+Let's say you want to implement an `extend` method for collections. This method takes an iterator and add its elements to the collection. To ensure type safety, we want the iterator's elements to match the collection's element type. We can achieve this by constraining the `Iterator::Item` associated type to match the collection's type.
+
+In Listing {{#ref associated-items-constraints}}, we implement this by defining a trait `Extend<T, A>` and use `[Item: A]` as a constraint on the `extend` function's trait bound. Additionally, we use the `Destruct` trait to ensure that the iterator is consumed, and show an example implementation for `Extend<Array<T>, T>`.
+
+```cairo
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_associated_items_constraints/src/lib.cairo}}
+```
+
+{{#label associated-items-constraints}}
+<span class="caption"> Listing {{#ref associated-items-constraints}}: Using associated items constraints to ensure that a type matches the associated type of another type</span>
+
+## `TypeEqual` Trait for type equality constraints
+
+The `TypeEqual` trait from the `core::metaprogramming` module lets you create constraints based on type equality. In most of the cases, you don't need `+TypeEqual` and you can achieve the same using only generic arguments and associated type constraints, but `TypeEqual` can be useful in some advanced scenarios.
+
+The first use case is implementing a trait for all types that match certain conditions, except for specific types. We do this using a negative implementation on the `TypeEqual` trait.
+
+In Listing {{#ref type-equal-negative-constraints}}, we create a `SafeDefault` trait and implement it for any type `T` that implements `Default`. However, we exclude the `SensitiveData` type using `-TypeEqual<T, SensitiveData>`.
+
+```cairo
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_type_equal/src/safe_default.cairo}}
+```
+
+{{#label type-equal-negative-constraints}}
+<span class="caption"> Listing {{#ref type-equal-negative-constraints}}: Using the `TypeEqual` trait to exclude a specific type from an implementation</span>
+
+The second use case is ensuring that two types are equal, particularly useful when working with [associated types].
+
+[associated types]: ./ch12-10-associated-items.md#associated-types
+
+In Listing {{#ref type-equal-constraints}}, we show this with a `StateMachine` trait that has an associated type `State`. We create two types, `TA` and `TB`, both using `StateCounter` as their `State`. Then we implement a `combine` function that works only when both state machines have the same state type, using the bound `TypeEqual<A::State, B::State>`.
+
+```cairo
+{{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_type_equal/src/state_machine.cairo}}
+```
+
+{{#label type-equal-constraints}}
+<span class="caption"> Listing {{#ref type-equal-constraints}}: Using the `TypeEqual` trait to ensure two types have matching associated types</span>
 
 {{#quiz ../quizzes/ch08-02-traits.toml}}
