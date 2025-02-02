@@ -25,7 +25,13 @@ edit-url-template = "https://github.com/cairo-book/cairo-book.github.io/edit/mai
 playground.runnable = true
 google-analytics = "G-0ZJLBV4KE2"
 additional-css = ["theme/css/last-changed.css", "theme/css/chat.css"]
-additional-js = ["theme/chat.js"]
+additional-js = [
+  "theme/chat.js",
+  "theme/js/index.mjs",
+  "theme/pkg/wasm-cairo.js",
+  "theme/pkg/wasm-cairo_bg.wasm",
+  "theme/js/worker.cjs",
+]
 mathjax-support = true
 
 # Redirects to avoid dead links
