@@ -46,6 +46,9 @@ jobs:
       - name: Set default scarb version # First version in .tool-versions
         run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
+      - name: Set default starknet-foundry version
+        run: asdf global starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
+
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2
 
@@ -59,16 +62,6 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-
-      - name: Generate redirects
-        run: |
-          echo "Updating meta descriptions..."
-          bun run scripts/update-meta-descriptions.ts
-
-      - name: Copy WASM-Cairo pkg
-        run: |
-          cp -r theme/pkg book/html
-          cp -r theme/js book/html
 
       - name: Copy LLMs file
         run: cp llms.txt book/html/
@@ -84,13 +77,13 @@ jobs:
           done
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./book/html
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

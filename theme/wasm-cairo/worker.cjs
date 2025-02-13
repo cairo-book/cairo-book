@@ -1,12 +1,12 @@
 (function () {
   if (typeof window === "undefined") {
-    importScripts("../pkg/wasm-cairo.js");
+    importScripts("pkg/wasm-cairo.js");
   }
   const { greet, compileCairoProgram, runCairoProgram, runTests } =
     wasm_bindgen;
 
   (async () => {
-    await wasm_bindgen("../pkg/wasm-cairo_bg.wasm");
+    await wasm_bindgen("pkg/wasm-cairo_bg.wasm");
     console.log("WASM-Cairo ready!");
   })();
 
@@ -15,7 +15,7 @@
     if (!functionToRun) {
       return;
     }
-    wasm_bindgen("../pkg/wasm-cairo_bg.wasm").then(() => {
+    wasm_bindgen("pkg/wasm-cairo_bg.wasm").then(() => {
       let result;
       switch (functionToRun) {
         case "runCairoProgram":
