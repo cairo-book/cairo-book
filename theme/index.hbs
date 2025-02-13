@@ -219,11 +219,11 @@
 
                             // The path to the root, taking the current
                             // language into account.
-                            { { #if(eq language "en") } }
+                            {{#if (eq language "en")}}
                             let full_path_to_root = "{{ path_to_root }}";
-                            { {else } }
+                            {{else}}
                             let full_path_to_root = "{{ path_to_root }}../";
-                            { {/if } }
+                            {{/if}}
                             // The page path (mdbook only gives us
                             // access to the path to the Markdown file).
                             let path = "{{ path }}".replace(/\.md$/, ".html");
@@ -391,10 +391,21 @@
         <script src="{{ path_to_root }}clipboard.min.js"></script>
         <script src="{{ path_to_root }}highlight.js"></script>
         <script src="{{ path_to_root }}book.js"></script>
+        <script>
+            window.rootPath = "{{ path_to_root }}";
+        </script>
 
         <!-- Custom JS scripts -->
         {{#each additional_js}}
+        {{!-- We skip the content of `wasm-cairo` which is not meant to be loaded in the html output --}}
+        {{!-- We only need it in the source files --}}
+        {{#if (not (eq this "theme/wasm-cairo/pkg/wasm-cairo.js"))}}
+        {{#if (not (eq this "theme/wasm-cairo/pkg/wasm-cairo_bg.wasm"))}}
+        {{#if (not (eq this "theme/wasm-cairo/worker.cjs"))}}
         <script src="{{ ../path_to_root }}{{this}}"></script>
+        {{/if}}
+        {{/if}}
+        {{/if}}
         {{/each}}
 
         {{#if is_print}}
