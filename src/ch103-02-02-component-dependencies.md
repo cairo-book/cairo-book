@@ -48,7 +48,7 @@ Both macros take two arguments: the first is `self`, either as a snapshot or by 
 In this function, we want to make sure that only the owner can call the `increment` function. We need to use
 the `assert_only_owner` function from the `Ownable` component. We'll use the `get_dep_component!` macro which will return a snapshot of the requested component state, and call `assert_only_owner` on it, as a method of that component.
 
-For the `transfer_ownership` function, we want to mutate that state to change the current owner. We need to use the `get_dep_component_mut!` macro, which will return the requested component state as a mutable reference, and call `transfer_ownership` on it.
+For the `transfer_ownership` function, we want to mutate that state to change the current owner. Because we know the contract embedding this component implements the `ownable component` trait, we can directly call the `transfer_ownership` function from the `Ownable` component.
 
 ```cairo,noplayground
 {{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_03_component_dep/src/counter.cairo:transfer_ownership}}
