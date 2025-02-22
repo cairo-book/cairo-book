@@ -13,8 +13,8 @@ To get started, ensure you have Scarb 2.10.0 or later installed (see [Installati
 Open a terminal in your projects directory and create a new Scarb project:
 
 ```bash
-$ scarb new prime_prover
-$ cd prime_prover
+scarb new prime_prover
+cd prime_prover
 ```
 
 The scarb new command creates a new directory called `prime_prover` with a basic project structure. Let’s examine the generated Scarb.toml file:
@@ -80,7 +80,7 @@ This is a straightforward implementation, but it’s perfect for demonstrating p
 Now let’s run the program with Scarb to test it. Use the scarb execute command and provide an input number as an argument:
 
 ```bash
-$ scarb execute -p prime_prover --print-program-output --arguments 17
+scarb execute -p prime_prover --print-program-output --arguments 17
 ```
 
 - `-p prime_prover` specifies the package name (matches Scarb.toml).
@@ -89,7 +89,7 @@ $ scarb execute -p prime_prover --print-program-output --arguments 17
 
 You should see output like this:
 
-```
+```bash
 {{#include ../listings/ch01-getting-started/prime_prover/output.txt}}
 ```
 
@@ -109,7 +109,7 @@ The execution creates a folder under `./target/execute/prime_prover/execution1/`
 Now for the exciting part: proving that the primality check was computed correctly without revealing the input! Cairo 2.10 integrates the Stwo prover via Scarb, allowing us to generate a proof directly. Run:
 
 ```bash
-$ scarb prove --execution-id 1
+{{#include ../listings/ch01-getting-started/prime_prover/output_prove.txt}}
 ```
 
 `--execution_id 1` points to the first execution (from the `execution1` folder).
@@ -121,16 +121,10 @@ This command generates a `proof.json` file in `./target/execute/prime_prover/exe
 To ensure the proof is valid, verify it with:
 
 ```bash
-$ scarb verify --execution-id 1
+{{#include ../listings/ch01-getting-started/prime_prover/output_verify.txt}}
 ```
 
 If successful, you’ll see a confirmation message. This verifies that the computation (primality check) was performed correctly, aligning with the public inputs, without needing to re-run the program.
-
-```bash
-$ scarb verify --execution-id 1
-   Verifying prime_prover
-    Verified proof successfully
-```
 
 ## Improving the Program: Handling Input Errors
 
