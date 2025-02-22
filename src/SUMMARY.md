@@ -12,6 +12,7 @@
 
   - [Installation](ch01-01-installation.md)
   - [Hello, World!](ch01-02-hello-world.md)
+  - [Proving That A Number Is Prime](ch01-03-proving-a-prime-number.md)
 
 ## Common Programming Concepts
 
