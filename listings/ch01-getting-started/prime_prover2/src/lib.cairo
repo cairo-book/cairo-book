@@ -35,7 +35,7 @@ fn is_prime(n: u128) -> bool {
 
 #[executable]
 fn main(input: u128) -> bool {
-    if input > 1000000 {  // Arbitrary limit for demo purposes
+    if input > 1000000 { // Arbitrary limit for demo purposes
         panic!("Input too large, must be <= 1,000,000");
     }
     is_prime(input)

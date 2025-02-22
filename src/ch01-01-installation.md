@@ -36,10 +36,9 @@ starkup: Installation complete.
 After installation, starkup will automatically install the latest stable versions of Cairo, Scarb, and Starknet Foundry. You can verify the installations by running the following commands in a new terminal session:
 
 ```bash
-$ scarb --version
-scarb 2.9.2 (5070ff374 2024-12-11)
-cairo: 2.9.2 (https://crates.io/crates/cairo-lang-compiler/2.9.2)
-sierra: 1.6.0
+scarb 2.10.0 (f190630a5 2025-02-17)
+cairo: 2.10.0 (https://crates.io/crates/cairo-lang-compiler/2.10.0)
+sierra: 1.7.0
 
 $ snforge --version
 snforge 0.37.0
