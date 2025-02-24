@@ -63,6 +63,11 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Fix meta descriptions
+        run: |
+          echo "Updating meta descriptions..."
+          bun run scripts/update-meta-descriptions.ts
+
       - name: Copy LLMs file
         run: cp llms.txt book/html/
 
