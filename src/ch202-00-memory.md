@@ -1,9 +1,6 @@
 # Memory
 
-Memory in Cairo stores traces during program execution and each occupied memory space is divided into segments depending on the purpose of the new entry.
+Cairo's memory model is designed to efficiently represent and manage memory access during program execution. Unlike the traditional random access read-write memory model found in most high-level programming languages, Cairo’s memory model is specifically tailored for efficient representation of each memory access for AIR which allows for more streamlined proof generation. 
 
-Cairo's memory is designed to provide efficient memory access in AIR for converting operations into a sequence of mathematical equations aka AIR constraints for proof verification.
+In this chapter, we will explore the key aspects of Cairo’s memory model, including how values in memory are structured, accessed, and managed.
 
-As a result, Cairo's memory model is different from random access read-write memory model that is widely used in modern high level programming languages.
-
-In this chapter, we will dive deep into Cairo's unique memory model and understand its behavior during program execution.
