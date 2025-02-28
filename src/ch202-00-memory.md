@@ -1,6 +1,6 @@
 # Memory
 
-Cairo's memory model is designed to efficiently represent and manage memory access during program execution. Unlike the traditional random access read-write memory model found in most high-level programming languages, Cairo’s memory model is specifically tailored for efficient representation of each memory access for AIR which allows for more streamlined proof generation. 
+In most computing systems, memory is primarily used to store temporary values during program execution. However, in CairoVM, the memory model plays a crucial role in proof generation by defining how memory accesses are recorded in trace cells. To optimize proof generation, Cairo's memory model is designed to efficiently represent memory values, streamlining the STARK proving process.
 
-In this chapter, we will explore the key aspects of Cairo’s memory model, including how values in memory are structured, accessed, and managed.
+In this chapter, we will explore Cairo's unique memory model and examine how its structure enhances proof generation efficiency.
 
