@@ -1,0 +1,5 @@
+$ scarb prove --execution-id 1
+     Proving prime_prover
+warn: soundness of proof is not yet guaranteed by Stwo, use at your own risk
+Saving proof to: target/execute/prime_prover/execution1/proof/proof.json
+

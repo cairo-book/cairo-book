@@ -1,0 +1,4 @@
+$ scarb verify --execution-id 1
+   Verifying prime_prover
+    Verified proof successfully
+
