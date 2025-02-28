@@ -13,4 +13,4 @@ These two properties effectively make the memory model a write-once memory model
 
 This approach differs significantly from other virtual machines, like the Ethereum Virtual Machine (EVM), which uses a read-write memory model. In contrast, CairoVM's memory model prioritizes efficiency in proof generation. As a result, it requires only 5 trace cells per memory access. Another way to think about this is that Cairo's memory model focuses on the number of memory accesses, rather than the number of memory addresses used. Consequently, rewriting to an existing memory cell incurs a similar cost to writing to a new one.
 
-
+The memory in Cairo almost must be continuous... 
