@@ -182,7 +182,6 @@
   - [Non-Deterministic Read-only Memory](ch202-01-non-deterministic-read-only-memory.md)
   - [Segments](ch202-02-segments.md)
   - [Relocation](ch202-03-relocation.md)
-  - [Layout](ch202-04-layout.md)
 
 ## Execution Model
 
