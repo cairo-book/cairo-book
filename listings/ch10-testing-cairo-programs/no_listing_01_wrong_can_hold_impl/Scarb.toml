@@ -9,7 +9,7 @@ edition = "2024_07"
 # foo = { path = "vendor/foo" }
 
 [dev-dependencies]
-snforge_std = "0.37.0"
-assert_macros = "2.10.0"
+snforge_std = "0.38.0"
+assert_macros = "2.10.1"
 [scripts]
 test = "snforge test"

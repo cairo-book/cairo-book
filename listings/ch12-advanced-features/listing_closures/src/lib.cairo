@@ -1,7 +1,7 @@
 //ANCHOR: array_map
 #[generate_trait]
 impl ArrayExt of ArrayExtTrait {
-    // Needed in Cairo 2.10.0 because of a bug in inlining analysis.
+    // Needed in Cairo 2.10.1 because of a bug in inlining analysis.
     #[inline(never)]
     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
         self: Array<T>, f: F,
@@ -18,7 +18,7 @@ impl ArrayExt of ArrayExtTrait {
 //ANCHOR: array_filter
 #[generate_trait]
 impl ArrayFilterExt of ArrayFilterExtTrait {
-    // Needed in Cairo 2.10.0 because of a bug in inlining analysis.
+    // Needed in Cairo 2.10.1 because of a bug in inlining analysis.
     #[inline(never)]
     fn filter<
         T,
