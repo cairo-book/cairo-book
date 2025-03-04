@@ -177,13 +177,11 @@
 
 ## Memory
 
-- [Memory]()
+- [Memory](ch202-00-memory.md)
 
-  - [Non-Deterministic Read-only Memory]()
-  - [Segments]()
-  - [Segment Value]()
-  - [Relocation]()
-  - [Layout]()
+  - [Non-Deterministic Read-only Memory](ch202-01-non-deterministic-read-only-memory.md)
+  - [Segments](ch202-02-segments.md)
+  - [Relocation](ch202-03-relocation.md)
 
 ## Execution Model
 
