@@ -44,10 +44,10 @@ jobs:
         uses: asdf-vm/actions/install@v3
 
       - name: Set default scarb version # First version in .tool-versions
-        run: asdf set scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
+        run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Set default starknet-foundry version
-        run: asdf set starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
+        run: asdf global starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
 
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2
