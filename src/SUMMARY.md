@@ -207,8 +207,7 @@
     - [EC OP](ch204-02-05-ec-op.md)
     - [Keccak](ch204-02-06-keccak.md)
     - [Poseidon](ch204-02-07-poseidon.md)
-    - [AddMod]()
-    - [MulMod]()
+    - [Mod Builtin](ch204-02-08-mod-builtin.md)
     - [Segment Arena](ch204-02-11-segment-arena.md)
 
 ## Hints
