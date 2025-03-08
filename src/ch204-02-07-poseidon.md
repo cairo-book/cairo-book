@@ -1,57 +1,80 @@
 # Poseidon Builtin
 
-The _Poseidon_ builtin is dedicated to computing the Poseidon hash in Cairo VM. It is specifically designed for efficient computation in algebraic circuits and is a core component in Cairo's cryptographic operations.
-It uses the Hades permutation strategy, which combines full rounds and partial rounds to achieve both security and efficiency in zero-knowledge STARK proofs.
+The _Poseidon_ builtin computes cryptographic hashes using the Poseidon hash function, which is specifically optimized for zero-knowledge proofs and efficient computation in algebraic circuits. As a core component in Cairo's cryptographic operations, it uses the Hades permutation strategy that combines full rounds and partial rounds to achieve both security and performance within STARK proofs.
 
-## Cells organization
+Poseidon is particularly important for Cairo applications because it offers:
 
-The Poseidon builtin has a dedicated segment in the Cairo VM. It follows a deduction property where input cells store the integer values to be hashed, and output cells store the computed hash results. The values in the output cells are deduced from the values in the input cells upon accessing them. Once an instruction tries reading an output cell, the VM computes the Poseidon hash by applying Hades permutations on the input cells.
+- Better performance than Pedersen for multiple inputs
+- ZK-friendly design (optimized for constraints in ZK proof systems)
+- Strong cryptographic security properties
 
-The Poseidon builtin operates in instances of 6 cells during VM execution. Each instance contains:
+## Cells Organization
 
-- Three input cells [0-2] for the Hades permutation inputs
-- Three output cells [3-5] for storing computed hash results
+The Poseidon builtin operates with a dedicated memory segment and follows a deduction property pattern:
 
-Let's examine two snapshots of a Poseidon segment during the execution of a dummy program by the Cairo VM.
+| Cells              | Purpose                                 |
+| ------------------ | --------------------------------------- |
+| Input cells [0-2]  | Store input state for Hades permutation |
+| Output cells [3-5] | Store computed permutation results      |
 
-In the first snapshot, we see both single-value and sequence hashing:
+Each operation works with 6 consecutive cells - a block of 3 inputs followed by 3 outputs. When a program reads any output cell, the VM applies the Hades permutation to the input cells and populates all three output cells with the results.
+
+### Single Value Hashing Example
 
 <div align="center">
   <img src="poseidon-builtin-valid.png" alt="valid poseidon builtin segment" width="600px"/>
 </div>
 <div align="center">
-  <span class="caption">Snapshot 1 - Poseidon builtin segment with valid inputs</span>
+  <span class="caption">Poseidon builtin segment with valid inputs</span>
 </div>
 
-When hashing a value 42, the computation proceeds as:
+For hashing a single value (42) in the first instance:
 
-1. Value is added to initial state (s0 = 42)
-2. During finalization: `hades_permutation(43, 0, 0)` is computed (s0 + 1, s1, s2)
-3. First element of permutation result becomes the hash i.e. cell `3:3`
+1. The program writes the value to the first input cell (position 3:0)
+2. The other input cells remain at their default value (0)
+3. When reading the output cell (3:3), the VM:
+   - Takes the initial state (42, 0, 0)
+   - Applies padding: (42+1, 0, 0) = (43, 0, 0)
+   - Computes the Hades permutation
+   - Stores the result in output cell 3:3
 
-For sequence [73, 91]:
+The permutation result's first component becomes the hash output when hashing a single value.
 
-1. First value updates s0 = 73
-2. Second value updates s1 = 91
-3. During finalization: `hades_permutation(73, 91, 0)` is computed (s0, s1+1, s2)
-4. All three output states are stored in respective sequential cells for further rounds
+### Sequence Hashing Example
 
-In the second snapshot, we see error conditions:
+For hashing a sequence of values (73, 91) in the second instance:
+
+1. The program writes values to the first two input cells (positions 3:6 and 3:7)
+2. Upon reading any output cell, the VM:
+   - Takes the state (73, 91, 0)
+   - Applies appropriate padding: (73, 91+1, 0)
+   - Computes the Hades permutation
+   - Stores all three results in the output cells (3:9, 3:10, 3:11)
+
+When hashing sequences, all three output state components may be used for further computation or chaining in multi-round hashing.
+
+### Error Condition
 
 <div align="center">
   <img src="poseidon-builtin-error.png" alt="invalid poseidon builtin segment" width="300px"/>
 </div>
 <div align="center">
-  <span class="caption">Snapshot 1 - Poseidon builtin segment with invalid input</span>
+  <span class="caption">Poseidon builtin segment with invalid input</span>
 </div>
 
-When trying to read `3:3`, an error occurs because the input in `3:0` is a relocatable value (pointer to cell `7:1`). The Poseidon builtin cannot hash relocatable values - it only operates on field elements - and the VM will panic.
+In this error example:
+
+- The program attempts to write a relocatable value (pointer to cell 7:1) to input cell 3:0
+- When trying to read output cell 3:3, the VM throws an error
+- The error occurs because the Poseidon builtin can only operate on field elements, not memory addresses
+
+Input validation occurs at the time the output is read, rather than when inputs are written, which is consistent with the deduction property pattern.
 
 ## Implementation References
 
-These implementation references of the Poseidon builtin might not be exhaustive.
+These implementation references of the Poseidon builtin in various Cairo VM implementations:
 
-- [Typescript Poseidon Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/58fd07d81cff4a4bb45c30ab99976ba66f0576ad/src/builtins/poseidon.ts)
+- [TypeScript Poseidon Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/58fd07d81cff4a4bb45c30ab99976ba66f0576ad/src/builtins/poseidon.ts)
 - [Python Poseidon Builtin](https://github.com/starkware-libs/cairo-lang/blob/0e4dab8a6065d80d1c726394f5d9d23cb451706a/src/starkware/cairo/lang/builtins/poseidon/poseidon_builtin_runner.py)
 - [Rust Poseidon Builtin](https://github.com/lambdaclass/cairo-vm/blob/052e7cef977b336305c869fccbf24e1794b116ff/vm/src/vm/runners/builtin_runner/poseidon.rs)
 - [Go Poseidon Builtin](https://github.com/NethermindEth/cairo-vm-go/blob/dc02d614497f5e59818313e02d2d2f321941cbfa/pkg/vm/builtins/poseidon.go)
@@ -59,9 +82,10 @@ These implementation references of the Poseidon builtin might not be exhaustive.
 
 ## Resources on Poseidon Hash
 
-If you're interested about the Poseidon hash and its use, take a look at those references:
+If you're interested in the Poseidon hash function and its applications:
 
-- StarkNet - [Hash Functions: Poseidon Hash](https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#poseidon-hash)
-- StarkWare - [Poseidon](https://github.com/starkware-industries/poseidon/tree/main)
-- [Poseidon Journal](https://autoparallel.github.io/overview/index.html)
+- [StarkNet - Hash Functions: Poseidon Hash](https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#poseidon-hash)
+- [StarkWare - Poseidon Implementation](https://github.com/starkware-industries/poseidon/tree/main)
+- [Poseidon: A New Hash Function for Zero-Knowledge Proof Systems](https://eprint.iacr.org/2019/458.pdf) (original paper)
 - [Poseidon: ZK-friendly Hashing](https://www.poseidon-hash.info/)
+- [Poseidon Journal](https://autoparallel.github.io/overview/index.html)
