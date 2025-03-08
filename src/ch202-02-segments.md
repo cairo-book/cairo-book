@@ -1,29 +1,31 @@
 # Introduction to Segments
 
-During execution of a Cairo program, different parts of Cairo program might finish at different time periods which means we cannot predict the number of memory addresses being allocated until at the end of runtime. As mentioned from [non-deterministic section](ch202-01-non-deterministic-read-only-memory.md), memory addresses are immutable and they have to be continous.
+Cairo ensures that allocated memory remains immutable after being written to, while allowing dynamic expansion of memory segments at runtime. All this is possible with organizing memory addresses into **segments**.
 
-To satisfy these requirements, Cairo organizes memory addresses into **segments**. 
-1. During runtime, It groups allocated memory addresses into segments with an unique segment identifier and an offset to indicate the continuation of the memory addresses belonging to each segment, `<segment_id>:<offset>`. This temporary value that we are marking to each memory address during runtime is called a **relocatable value**. 
+The process of organizing memory addresses into segments is as follows:
+1. During runtime, It groups allocated memory addresses into segments with a unique segment identifier and an offset to indicate the continuation of the memory addresses belonging to each segment, `<segment_id>:<offset>`. This temporary value that we are marking to each memory address is called a **relocatable value**. 
 
-2. At end of runtime, the relocatable values are relocated into a single, contiguous memory address space and a separate **relocation table** is created to give context to the linear memory address space. Let's first understand each individual segment and its general layout. 
+2. At the end of execution, the relocatable values are transformed into a single, contiguous memory address space and a separate **relocation table** is created to give context to the linear memory address space.
 
-Cairo supports the following segments:
+## Segment Values
+
+Cairo's memory model contains the following segments:
 
 - **Program Segment** = Stores the bytecode of Cairo program. Another way to say is it stores the instructions of a cairo program. Program Counter, `pc` starts at the beginning of this segment.  
-- **Execution Segment** = Stores any data while executing a Cairo program (temporary variables, pointer to the next unused memory address). Allocation pointer, `ap` and frame pointer, `fp` starts on this segment. 
-- **Builtin Segment** = Stores builtins that is actively used by the Cairo program. Each builtin has its own segment and the type of program determines which builtins to be used. Check out the common builtins in the [Builtin Section](ch204-00-builtins.md) to learn more about individual builtins. 
-- **User Segment** = Stores general purpose segments such as user defined data structures. 
+- **Execution Segment** = Stores any data while executing a Cairo program (temporary variables, function call frames, and pointers). Allocation pointer, `ap` and frame pointer, `fp` starts on this segment. 
+- **Builtin Segment** = Stores builtins that is actively used by the Cairo program. Each Cairo builtin has its own dedicated segment, allocated dynamically based on the builtins used in the program. Check out [Builtin Section](ch204-00-builtins.md) to learn more about individual builtins. 
+- **User Segment** = Stores program outputs, arrays, and dynamically allocated data structures.
 
-*Every segment except Program segment has a dynamic address space which means that the length of the used memory address space is unknown until the program has finished executing. The Program segment is an exception as it is used to store the bytecode of the Cairo program which has a fixed size during execution.*
+*Every segment except Program Segment has a dynamic address space which means that the length of the allocated memory address space is unknown until the program has finished executing. The Program Segment is an exception as it is used to store the bytecode of the Cairo program which has a fixed size during execution.*
 
-# Segment Layout
+## Segment Layout
 
-The layout that we are referring to is the **relocatable value** during runtime. 
+The layout of Cairo memory is ordered by segments in the following order:
 
-- **Segment 0** = Program Segment
-- **Segment 1** = Execution Segment
-- **Segment 2 to x** = Builtin Segments
-- **Segment x + 1 to y** = User Segments
+1. **Segment 0** = Program Segment
+2. **Segment 1** = Execution Segment
+3. **Segment 2 to x** = Builtin Segments
+4. **Segment x + 1 to y** = User Segments
 
 *The number of builtin and user segments are dynamic and depends on the type of program.*
 
@@ -139,4 +141,11 @@ Addr  Value
 ```
 
 The relocation table gives context for the prover on which index a new segment starts by labeling the segment identifier with its starting index. 
+
+To summarize, tne big picture of how Cairo organizes memory addresses into segments is as follows:
+
+**Image here**
+
+
+
 
