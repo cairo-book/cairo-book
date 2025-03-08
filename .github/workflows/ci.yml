@@ -82,7 +82,6 @@ jobs:
         run: cairo-listings verify >> $GITHUB_STEP_SUMMARY
         shell: bash
 
-
   typos:
     runs-on: ubuntu-latest
     steps:

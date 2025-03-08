@@ -8,11 +8,11 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.9.2"
+starknet = "2.10.1"
 
 [dev-dependencies]
-snforge_std = "0.35.1"
-assert_macros = "2.9.2"
+snforge_std = "0.38.0"
+assert_macros = "2.10.1"
 
 [[target.starknet-contract]]
 sierra = true
@@ -37,7 +37,7 @@ test = "snforge test"
 
 # [[tool.snforge.fork]]
 # name = "SOME_SECOND_NAME"
-# url = "http://your.second.rpc.url"                         
+# url = "http://your.second.rpc.url"
 # block_id.number = "123"                                    # Block to fork from (block number)
 
 # [[tool.snforge.fork]]

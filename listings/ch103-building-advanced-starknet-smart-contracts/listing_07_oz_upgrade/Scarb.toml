@@ -7,7 +7,7 @@ edition = "2024_07"
 
 [dependencies]
 openzeppelin = "0.20.0"
-starknet = ">=2.9.2"
+starknet = ">=2.10.1"
 
 [[target.starknet-contract]]
 casm = true

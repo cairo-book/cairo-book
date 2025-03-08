@@ -9,4 +9,4 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.10.0"
+cairo_execute = "2.10.1"
