@@ -203,7 +203,7 @@
     - [Pedersen](ch204-02-01-pedersen.md)
     - [Range Check](ch204-02-02-range-check.md)
     - [ECDSA](ch204-02-03-ecdsa.md)
-    - [Bitwise]()
+    - [Bitwise](ch204-02-04-bitwise.md)
     - [EC OP](ch204-02-05-ec-op.md)
     - [Keccak](ch204-02-06-keccak.md)
     - [Poseidon](ch204-02-07-poseidon.md)
