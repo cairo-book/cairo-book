@@ -15,3 +15,5 @@ runner_crate/src
 runner_crate/target
 
 *.snfoundry_cache
+
+CLAUDE.md
