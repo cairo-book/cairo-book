@@ -31,9 +31,7 @@ The layout of Cairo memory is ordered by segments in the following order:
 
 # Relocation
 
-In the [non-deterministic section](ch202-01-non-deterministic-read-only-memory.md), we discussed the importance of continuous memory requirement in Cairo and its efficiency in proof generation. 
-
-We will be looking at an example of Cairo Zero program and how its segments are defined during runtime with relocatable values and how it becomes a contiguous memory address space at the end of execution.
+To understand the overall process of how memory is handled throughout the execution of a Cairo program, we will be looking at an example of Cairo Zero program and how its segments are defined during runtime with relocatable values and how the memory addresses are relocated to one contiguous memory address space at the end of execution.
 
 **Cairo Zero program:**
 
@@ -61,7 +59,7 @@ func main(output_ptr: felt*) -> (output_ptr: felt*) {
 
 *The output builtin allows the final output to be stored in a new segment.* 
 
-The Cairo Zero program stores three values which are 10, 100 and 110 (addition of 10 and 100) and these values are stored in three different memory addresses under Segment 1. 
+The Cairo Zero program stores three values which are `10`, `100` and `110`(addition of `10` and `100`) and these values are stored in three different memory addresses under Segment 1. 
 
 Using the output builtin, the final output is stored in a new segment in Segment 2. 
 
@@ -70,7 +68,9 @@ Using the output builtin, the final output is stored in a new segment in Segment
 ```
 Addr  Value
 -----------
-⋮
+
+// Segment 0
+
 0:0   5189976364521848832
 0:1   10
 0:2   5189976364521848832
@@ -84,6 +84,8 @@ Addr  Value
 0:10  1
 0:11  2345108766317314046
 ⋮
+// Segment 1
+
 1:0   2:0
 1:1   3:0
 1:2   4:0
@@ -94,18 +96,19 @@ Addr  Value
 1:7   110
 1:8   2:1
 ⋮
+// Segment 2
+
 2:0   110
 
 ```
 
-To reiterate, after the execution of the program, the relocatable values turn into one contiguous memory address space with the help of the relocation table to give context to the linear memory address space.
+Once the program is finished executing,the relocatable values turn into one contiguous memory address space with the help of the relocation table to give context to the linear memory address space.
 
-**Turns into linear memory after relocation:**
+**From relocation value to one contiguous memory address space:**
 
 ```
 Addr  Value
 -----------
-⋮
 1     5189976364521848832
 2     10
 3     5189976364521848832
@@ -133,18 +136,18 @@ Addr  Value
 **Relocation table:**
 
 ```
-0     1
-1     13
-2     22
-3     23
-4     23
+segment_id  starting_index
+----------------------------
+0            1
+1            13
+2            22
+3            23
+4            23
 ```
 
-The relocation table gives context for the prover on which index a new segment starts by labeling the segment identifier with its starting index. 
+The relocation table gives context for the prover on which index a new segment starts by labeling the segment identifier with its own starting index. 
 
-To summarize, tne big picture of how Cairo organizes memory addresses into segments is as follows:
 
-**Image here**
 
 
 
