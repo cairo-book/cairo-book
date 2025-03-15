@@ -9,7 +9,7 @@ Let's break down the two core properties:
 2. **Read-only**
 - This means that when a Cairo program runs, the value in memory does not change. 
 
-These two properties effectively make the memory model a write-once memory model. Once a value is assigned to a memory address, it cannot be overwritten. Subsequent operations are limited to reading or verifying the value at that address. Morever, the memory address space is contiguous, meaning if the program accesses memory address x and y, it cannot skip an address in between.
+These two properties effectively make the memory model a write-once memory model. Once a value is assigned to a memory address, it cannot be overwritten. Subsequent operations are limited to reading or verifying the value at that address. Moreover, the memory address space is contiguous, meaning if the program accesses memory address x and y, it cannot skip an address in between.
 
 This approach differs significantly from other virtual machines, like the Ethereum Virtual Machine (EVM), which uses a read-write memory model. In contrast, Cairo's memory model prioritizes efficiency in proof generation. As a result, it requires only 5 trace cells per memory access.
 
