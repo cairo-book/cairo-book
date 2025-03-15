@@ -48,6 +48,8 @@ let second_length = calculate_length(@arr1); // Calculate the current length of 
 
 The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value at a specific point in time, the usual rules of the linear type system are not enforced. In particular, snapshot variables always implement the `Drop` trait, never the `Destruct` trait, even dictionary snapshots.
 
+It’s worth noting that `@T` is not a pointer—snapshots are passed by value to functions, just like regular variables. This means that the size of `@T` is the same as the size of `T`, and when you pass `@arr1` to `calculate_length`, the entire array type (in this case, an `Array<u128>` descriptor) is copied to the function’s stack. For large data structures, this copying can be avoided by using `Box<T>`, which we’ll explore in [Chapter {{#chap smart-pointers}}][chap-smart-pointers], but for now, understand that snapshots rely on this by-value mechanism.
+
 Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:
 
 ```cairo, noplayground
@@ -111,6 +113,8 @@ In Listing 4-5, we use a mutable reference to modify the value of the `height` a
 
 First, we change `rec` to be `mut`. Then we pass a mutable reference of `rec` into `flip` with `ref rec`, and update the function signature to accept a mutable reference with `ref rec: Rectangle`. This makes it very clear that the `flip` function will mutate the value of the `Rectangle` instance passed as parameter.
 
+Unlike snapshots, mutable references allow mutation, but like snapshots, `ref` arguments are not pointers—they are also passed by value. When you pass `ref rec`, the entire `Rectangle` type is copied to the function’s stack, regardless of whether it implements `Copy`. This ensures the function operates on its own local version of the data, which is then implicitly returned to the caller. To avoid this copying for large types, Cairo provides the `Box<T>` type introduced in [Chapter {{#chap smart-pointers}}][chap-smart-pointers] as an alternative, but for this example, the `ref` modifier suits our needs perfectly.
+
 The output of the program is:
 
 ```shell
@@ -130,3 +134,5 @@ Let’s recap what we’ve discussed about the linear type system, ownership, sn
 - If you pass-by-value, ownership of the variable is transferred to the function.
 - If you want to keep ownership of the variable and know that your function won’t mutate it, you can pass it as a snapshot with `@`.
 - If you want to keep ownership of the variable and know that your function will mutate it, you can pass it as a mutable reference with `ref`.
+
+[chap-smart-pointers]: ./ch12-02-smart-pointers.md
