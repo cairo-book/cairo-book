@@ -1,15 +1,19 @@
-fn main() {
-    let mut arr1: Array<u128> = array![];
-    let first_snapshot = @arr1; // Take a snapshot of `arr1` at this point in time
-    arr1.append(1); // Mutate `arr1` by appending a value
-    let first_length = calculate_length(
-        first_snapshot,
-    ); // Calculate the length of the array when the snapshot was taken
-    let second_length = calculate_length(@arr1); // Calculate the current length of the array
-    println!("The length of the array when the snapshot was taken is {}", first_length);
-    println!("The current length of the array is {}", second_length);
+#[derive(Drop)]
+struct Rectangle {
+    height: u64,
+    width: u64,
 }
 
-fn calculate_length(arr: @Array<u128>) -> usize {
-    arr.len()
+fn main() {
+    let mut rec = Rectangle { height: 3, width: 10 };
+    let first_snapshot = @rec; // Take a snapshot of `rec` at this point in time
+    rec.height = 5; // Mutate `rec` by changing its height
+    let first_area = calculate_area(first_snapshot); // Calculate the area of the snapshot
+    let second_area = calculate_area(@rec); // Calculate the current area
+    println!("The area of the rectangle when the snapshot was taken is {}", first_area);
+    println!("The current area of the rectangle is {}", second_area);
+}
+
+fn calculate_area(rec: @Rectangle) -> u64 {
+    *rec.height * *rec.width
 }

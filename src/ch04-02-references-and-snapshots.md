@@ -7,21 +7,11 @@ call to `calculate_length`, because the `Array` was moved into
 
 ## Snapshots
 
-In the previous chapter, we talked about how Cairo's ownership system prevents
-us from using a variable after we've moved it, protecting us from potentially
-writing twice to the same memory cell. However, it's not very convenient.
-Let's see how we can retain ownership of the variable in the calling function using snapshots.
+In the previous chapter, we talked about how Cairo's ownership system prevents us from using a variable after we've moved it, protecting us from potentially writing twice to the same memory cell. However, it's not very convenient. Let's see how we can retain ownership of the variable in the calling function using snapshots.
 
-In Cairo, a snapshot is an immutable view of a value at a certain point in time.
-Recall that memory is immutable, so modifying a value actually creates a new memory cell.
-The old memory cell still exists, and snapshots are variables that refer to that "old" value.
-In this sense, snapshots are a view "into the past".
+In Cairo, a snapshot is an immutable view of a value at a certain point in the execution of the program. Recall that memory is immutable, so modifying a variable actually fills a new memory cell. The old memory cell still exists, and snapshots are variables that refer to that "old" value. In this sense, snapshots are a view "into the past".
 
-Here is how you would define and use a `calculate_length` function that takes a
-snapshot of an array as a parameter instead of taking ownership of the underlying value. In this example,
-the `calculate_length` function returns the length of the array passed as a parameter.
-As we're passing it as a snapshot, which is an immutable view of the array, we can be sure that
-the `calculate_length` function will not mutate the array, and ownership of the array is kept in the `main` function.
+Here is how you would define and use a `calculate_area` function that takes a snapshot of a `Rectangle` struct as a parameter instead of taking ownership of the underlying value. In this example, the `calculate_area` function returns the area of the `Rectangle` passed as a snapshot. Since we’re passing it as an immutable view, we can be sure that `calculate_area` will not mutate the `Rectangle`, and ownership remains in the `main` function.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -29,7 +19,7 @@ the `calculate_length` function will not mutate the array, and ownership of the 
 {{#include ../listings/ch04-understanding-ownership/no_listing_09_snapshots/src/lib.cairo}}
 ```
 
-> Note: it is only possible to call the `len()` method on an array snapshot because it is defined as such in the `ArrayTrait` trait. If you try to call a method that is not defined for snapshots on a snapshot, you will get a compilation error. However, you can call methods expecting a snapshot on non-snapshot types.
+> Note: Accessing fields of a snapshot (e.g., `rec.height`) yields snapshots of those fields, which we desnap with `*` to get the values. This works here because `u64` implements `Copy`. You’ll learn more about desnapping in the next section.
 
 The output of this program is:
 
@@ -37,8 +27,7 @@ The output of this program is:
 {{#include ../listings/ch04-understanding-ownership/no_listing_09_snapshots/output.txt}}
 ```
 
-First, notice that all the tuple code in the variable declaration and the function return value is gone. Second, note
-that we pass `@arr1` into `calculate_length` and, in its definition, we take `@Array<u128>` rather than `Array<u128>`.
+First, notice that all the tuple code in the variable declaration and the function return value is gone. Second, note that we pass `@rec` into `calculate_area` and, in its definition, we take `@Rectangle` rather than `Rectangle`.
 
 Let’s take a closer look at the function call here:
 
@@ -46,22 +35,22 @@ Let’s take a closer look at the function call here:
 let second_length = calculate_length(@arr1); // Calculate the current length of the array
 ```
 
-The `@arr1` syntax lets us create a snapshot of the value in `arr1`. Because a snapshot is an immutable view of a value at a specific point in time, the usual rules of the linear type system are not enforced. In particular, snapshot variables always implement the `Drop` trait, never the `Destruct` trait, even dictionary snapshots.
+The `@rec` syntax lets us create a snapshot of the value in `rec`. Because a snapshot is an immutable view of a value at a specific point in execution, the usual rules of the linear type system are not enforced. In particular, snapshot variables always implement the `Drop` trait, never the `Destruct` trait, even dictionary snapshots.
 
-It’s worth noting that `@T` is not a pointer—snapshots are passed by value to functions, just like regular variables. This means that the size of `@T` is the same as the size of `T`, and when you pass `@arr1` to `calculate_length`, the entire array type (in this case, an `Array<u128>` descriptor) is copied to the function’s stack. For large data structures, this copying can be avoided by using `Box<T>`, which we’ll explore in [Chapter {{#chap smart-pointers}}][chap-smart-pointers], but for now, understand that snapshots rely on this by-value mechanism.
+It’s worth noting that `@T` is not a pointer—snapshots are passed by value to functions, just like regular variables. This means that the size of `@T` is the same as the size of `T`, and when you pass `@rec` to `calculate_area`, the entire struct (in this case, a `Rectangle` with two `u64` fields) is copied to the function’s stack. For large data structures, this copying can be avoided by using `Box<T>`—provided that there's no need to mutate the value, which we’ll explore in [Chapter 12][chap-smart-pointers], but for now, understand that snapshots rely on this by-value mechanism.
 
 Similarly, the signature of the function uses `@` to indicate that the type of the parameter `arr` is a snapshot. Let’s add some explanatory annotations:
 
 ```cairo, noplayground
-fn calculate_length(
-    array_snapshot: @Array<u128> // array_snapshot is a snapshot of an Array
-) -> usize {
-    array_snapshot.len()
-} // Here, array_snapshot goes out of scope and is dropped.
-// However, because it is only a view of what the original array `arr` contains, the original `arr` can still be used.
+fn calculate_area(
+    rec_snapshot: @Rectangle // rec_snapshot is a snapshot of a Rectangle
+) -> u64 {
+    *rec_snapshot.height * *rec_snapshot.width
+} // Here, rec_snapshot goes out of scope and is dropped.
+// However, because it is only a view of what the original `rec` contains, the original `rec` can still be used.
 ```
 
-The scope in which the variable `array_snapshot` is valid is the same as any function parameter’s scope, but the underlying value of the snapshot is not dropped when `array_snapshot` stops being used. When functions have snapshots as parameters instead of the actual values, we won’t need to return the values in order to give back ownership of the original value, because we never had it.
+The scope in which the variable `rec_snapshot` is valid is the same as any function parameter’s scope, but the underlying value of the snapshot is not dropped when `rec_snapshot` stops being used. When functions have snapshots as parameters instead of the actual values, we won’t need to return the values in order to give back ownership of the original value, because we never had it.
 
 ### Desnap Operator
 
