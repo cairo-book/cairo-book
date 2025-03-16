@@ -87,6 +87,8 @@ The `Node` variant now holds a `(u32, Box<BinaryTree>, Box<BinaryTree>)`, indica
 
 Passing pointers between functions allows you to reference data without copying the data itself. Using boxes can improve performance as it allows you to pass a pointer to some data from one function to another, without the need to copy the entire data in memory before performing the function call. Instead of having to write `n` values into memory before calling a function, only a single value is written, corresponding to the pointer to the data. If the data stored in the box is very large, the performance improvement can be significant, as you would save `n-1` memory operations before each function call.
 
+> Note: This only works if the data stored in the box is not mutated. If the data is mutated, a new `Box<T>` will be created, which will require copying the data to the new box.
+
 Let's take a look at the code in Listing {{#ref box}}, which shows two ways of passing data to a function: by value and by pointer.
 
 ```cairo
