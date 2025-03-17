@@ -14,7 +14,7 @@ As you write more complex Cairo programs, you might add dependencies, and if you
 
 Let's start by installing starkup, which will help us manage Cairo, Scarb, and Starknet Foundry.
 
-[starkup]: https://github.com/starkware-libs/starkup
+[starkup]: https://github.com/software-mansion/starkup
 [scarb doc]: https://docs.swmansion.com/scarb/docs
 [cargo doc]: https://doc.rust-lang.org/cargo/
 [sn foundry]: https://foundry-rs.github.io/starknet-foundry/index.html
