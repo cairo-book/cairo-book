@@ -45,7 +45,7 @@
     WS_URL: "wss://backend.agent.starknet.id/ws",
     MAX_RECONNECT_ATTEMPTS: 5,
     MAX_HISTORY_LENGTH: 10,
-    FOCUS_MODE: "succintCairoBookSearch",
+    FOCUS_MODE: "docChatMode",
   };
 
   class ChatManager {
@@ -174,12 +174,11 @@
     }
 
     /**
-     * Initializes the chat by fetching models and connecting to WebSocket.
+     * Initializes the chat by connecting to WebSocket.
      * @async
      */
     async initializeChat() {
       try {
-        await this.fetchModels();
         this.connectWebSocket();
       } catch (error) {
         console.error("Error initializing chat:", error);
@@ -191,36 +190,11 @@
     }
 
     /**
-     * Fetches available language models from the server.
-     * @async
-     * @returns {Promise<Object>} A promise that resolves to the available models.
-     */
-    async fetchModels() {
-      try {
-        const response = await fetch(`${CONFIG.API_URL}/models`);
-        return await response.json();
-      } catch (error) {
-        console.error("Error fetching models:", error);
-        this.showToast(
-          "Failed to fetch models. Please try again later.",
-          "error",
-        );
-      }
-    }
-
-    /**
      * Establishes a WebSocket connection with the chat server.
      * The connection URL includes query parameters for specifying the chat and embedding models.
      */
     connectWebSocket() {
       const wsURL = new URL(CONFIG.WS_URL);
-      wsURL.search = new URLSearchParams({
-        chatModel: "Claude 3.5 Sonnet",
-        chatModelProvider: "anthropic",
-        embeddingModel: "Text embedding 3 large",
-        embeddingModelProvider: "openai",
-      }).toString();
-
       this.chatSocket = new WebSocket(wsURL.toString());
       this.setupWebSocketHandlers();
     }
@@ -510,16 +484,38 @@
     sendMessage() {
       const input = document.getElementById("message-input");
       const message = input.value.trim();
-      if (message && this.chatSocket.readyState === WebSocket.OPEN) {
-        input.value = "";
-        this.sendMessageToServer(message);
-        this.showLoadingIndicator();
-      } else if (this.chatSocket.readyState !== WebSocket.OPEN) {
-        this.showToast(
-          "Not connected to the chat server. Please try again later.",
-          "error",
-        );
+
+      if (message) {
+        if (this.chatSocket.readyState === WebSocket.OPEN) {
+          // Connection is open, send message normally
+          input.value = "";
+          this.sendMessageToServer(message);
+          this.showLoadingIndicator();
+        } else {
+          // Try to connect once
+          this.tryConnectAndSend(message, input);
+        }
       }
+    }
+
+    tryConnectAndSend(message, input) {
+      this.connectWebSocket();
+
+      // Check if connection succeeded after a short delay
+      setTimeout(() => {
+        if (this.chatSocket.readyState === WebSocket.OPEN) {
+          // Connection successful, send the message
+          input.value = "";
+          this.sendMessageToServer(message);
+          this.showLoadingIndicator();
+        } else {
+          // Connection failed, show error toast
+          this.showToast(
+            "Not connected to the chat server. Please try again later.",
+            "error",
+          );
+        }
+      }, 1000); // Wait 1 second to see if connection established
     }
 
     /**
