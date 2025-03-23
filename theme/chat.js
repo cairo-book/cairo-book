@@ -30,534 +30,6 @@
  * including UI creation, WebSocket handling, and chat history management.
  */
 
-// Configuration
-const CONFIG = {
-  API_URL: "https://backend.agent.starknet.id/api",
-  WS_URL: "wss://backend.agent.starknet.id/ws",
-  MAX_RECONNECT_ATTEMPTS: 10,
-  MAX_HISTORY_LENGTH: 10,
-  HEARTBEAT_INTERVAL: 30000,
-  RECONNECT_BASE_DELAY: 1000,
-  WS_PARAMS: {
-    chatModel: "Claude 3.5 Sonnet",
-    chatModelProvider: "anthropic",
-    embeddingModel: "Text embedding 3 large",
-    embeddingModelProvider: "openai",
-  }
-};
-
-// UI Templates
-const UI = {
-  chatWindow: `
-    <div id="chat-header">
-      <div class="header-left">
-        <div id="connection-status" class="disconnected" title="Disconnected from server">⬤</div>
-        <span class="chat-title">Cairo Assistant</span>
-      </div>
-      <div class="header-right">
-        <button id="clear-history" class="icon-button" title="Clear History">
-          <svg viewBox="0 0 24 24" width="16" height="16">
-            <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-          </svg>
-        </button>
-        <button id="close-chat" class="icon-button" title="Close Chat">
-          <svg viewBox="0 0 24 24" width="16" height="16">
-            <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div id="chat-messages"></div>
-    <div id="chat-input">
-      <input type="text" id="message-input" placeholder="Ask anything about Cairo...">
-      <button id="send-message" class="icon-button" title="Send Message">
-        <svg viewBox="0 0 24 24" width="20" height="20">
-          <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
-        </svg>
-      </button>
-    </div>
-    <div id="chat-toasts"></div>
-  `
-};
-
-class ChatUI {
-  static createChatButton() {
-    const button = document.createElement("div");
-    button.id = "chat-button";
-    button.innerHTML = "💬";
-    Object.assign(button.style, {
-      position: "fixed",
-      bottom: "20px",
-      right: "20px",
-      width: "50px",
-      height: "50px",
-      backgroundColor: "var(--links)",
-      color: "var(--bg)",
-      borderRadius: "50%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      cursor: "pointer",
-      fontSize: "24px",
-      boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-      zIndex: "1000",
-    });
-    return button;
-  }
-
-  static createChatWindow() {
-    const window = document.createElement("div");
-    window.id = "chat-window";
-    window.style.display = "none";
-    window.innerHTML = UI.chatWindow;
-    return window;
-  }
-
-  static showToast(message, type) {
-    const toastContainer = document.getElementById("chat-toasts");
-    if (!toastContainer) return;
-
-    const toast = document.createElement("div");
-    toast.className = `chat-toast ${type}`;
-    toast.textContent = message;
-    toastContainer.appendChild(toast);
-
-    setTimeout(() => toast.remove(), 3000);
-  }
-}
-
-class MessageProcessor {
-  static processMarkdown(content, sources = []) {
-    let processedContent = content
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.*?)\*/g, "<em>$1</em>")
-      .replace(/\[(\d+)\]/g, (match, p1) => {
-        const sourceIndex = parseInt(p1) - 1;
-        return sources[sourceIndex]?.metadata?.url 
-          ? `<a href="${sources[sourceIndex].metadata.url}" target="_blank">[${p1}]</a>`
-          : match;
-      });
-
-    processedContent = processedContent.replace(
-      /```(\w+)?\n([\s\S]*?)```/g,
-      (_, language, code) =>
-        `<pre><code class="language-${language || "plaintext"}">${MessageProcessor.escapeHtml(code.trim())}</code></pre>`
-    );
-
-    if (sources.length > 0) {
-      const formattedSources = sources
-        .map((source, i) => 
-          `[${i + 1}] <a href="${source.metadata.url}" target="_blank">${source.metadata.title || "Untitled"}</a>`
-        )
-        .join("\n");
-      processedContent += `\n\nRelevant pages:\n${formattedSources}`;
-    }
-
-    return processedContent;
-  }
-
-  static escapeHtml(unsafe) {
-    return unsafe
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-}
-
-class ChatManager {
-  constructor() {
-    this.state = {
-      chatSocket: null,
-      chatId: this.generateUniqueId(),
-      reconnectAttempts: 0,
-      currentMessageId: null,
-      currentSources: [],
-      currentMessageContent: "",
-      messageHistory: []
-    };
-
-    this.initializeDOMElements();
-    this.attachEventListeners();
-    this.loadChatHistory();
-    this.initializeChat();
-  }
-
-  async initializeChat() {
-    try {
-      await this.fetchModels();
-      this.connectWebSocket();
-    } catch (error) {
-      console.error("Error initializing chat:", error);
-      ChatUI.showToast("Failed to initialize chat. Please try again later.", "error");
-    }
-  }
-
-  initializeDOMElements() {
-    this.elements = {
-      chatButton: ChatUI.createChatButton(),
-      chatWindow: ChatUI.createChatWindow()
-    };
-    document.body.appendChild(this.elements.chatButton);
-    document.body.appendChild(this.elements.chatWindow);
-  }
-
-  attachEventListeners() {
-    this.elements.chatButton.addEventListener("click", () => this.toggleChatWindow());
-    document.getElementById("close-chat").addEventListener("click", () => this.closeChatWindow());
-    document.getElementById("send-message").addEventListener("click", () => this.sendMessage());
-    document.getElementById("message-input").addEventListener("keypress", (e) => {
-      if (e.key === "Enter") this.sendMessage();
-    });
-    document.getElementById("clear-history").addEventListener("click", () => this.clearChatHistory());
-  }
-
-  async fetchModels() {
-    try {
-      const response = await fetch(`${CONFIG.API_URL}/models`);
-      return await response.json();
-    } catch (error) {
-      console.error("Error fetching models:", error);
-      ChatUI.showToast("Failed to fetch models. Please try again later.", "error");
-    }
-  }
-
-  connectWebSocket() {
-    const wsURL = new URL(CONFIG.WS_URL);
-    wsURL.search = new URLSearchParams(CONFIG.WS_PARAMS).toString();
-    
-    try {
-      this.state.chatSocket = new WebSocket(wsURL.toString());
-      this.setupWebSocketHandlers();
-      this.setupHeartbeat();
-    } catch (error) {
-      console.error("Error creating WebSocket:", error);
-      this.handleWebSocketError(error);
-    }
-  }
-
-  setupWebSocketHandlers() {
-    const ws = this.state.chatSocket;
-    ws.onopen = () => this.handleWebSocketOpen();
-    ws.onclose = () => this.handleWebSocketClose();
-    ws.onerror = (error) => this.handleWebSocketError(error);
-    ws.onmessage = (event) => this.handleWebSocketMessage(event);
-  }
-
-  setupHeartbeat() {
-    if (this.heartbeatInterval) {
-      clearInterval(this.heartbeatInterval);
-    }
-
-    this.heartbeatInterval = setInterval(() => {
-      if (this.state.chatSocket?.readyState === WebSocket.OPEN) {
-        try {
-          this.state.chatSocket.send(JSON.stringify({ type: "ping" }));
-        } catch (error) {
-          console.error("Error sending heartbeat:", error);
-          this.handleWebSocketError(error);
-        }
-      }
-    }, CONFIG.HEARTBEAT_INTERVAL);
-  }
-
-  handleWebSocketMessage(event) {
-    try {
-      const data = JSON.parse(event.data);
-      const handlers = {
-        error: () => this.handleErrorMessage(data),
-        sources: () => this.handleSourcesMessage(data),
-        message: () => this.handleContentMessage(data),
-        messageEnd: () => this.handleMessageEnd()
-      };
-
-      handlers[data.type]?.();
-    } catch (error) {
-      console.error("Error processing WebSocket message:", error);
-    }
-  }
-
-  handleErrorMessage(data) {
-    console.error("Received error message:", data.data);
-    ChatUI.showToast(data.data, "error");
-    this.removeLoadingIndicator();
-  }
-
-  handleSourcesMessage(data) {
-    this.state.currentSources = data.data;
-    this.state.currentMessageId = data.messageId;
-  }
-
-  handleContentMessage(data) {
-    if (this.state.currentMessageId !== data.messageId) {
-      this.state.currentMessageId = data.messageId;
-      this.state.currentMessageContent = "";
-      this.appendStreamingMessage(this.state.currentMessageId);
-    }
-    this.state.currentMessageContent += data.data;
-    this.updateStreamingMessage(
-      this.state.currentMessageId,
-      this.state.currentMessageContent,
-      this.state.currentSources
-    );
-  }
-
-  handleMessageEnd() {
-    this.removeLoadingIndicator();
-    this.updateStreamingMessage(
-      this.state.currentMessageId,
-      this.state.currentMessageContent,
-      this.state.currentSources
-    );
-    this.state.messageHistory.push(["ai", this.state.currentMessageContent]);
-    this.trimMessageHistory();
-    this.saveChatHistory();
-    this.resetCurrentMessageState();
-  }
-
-  sendMessage() {
-    const input = document.getElementById("message-input");
-    const message = input.value.trim();
-    
-    if (!message) return;
-    
-    if (this.state.chatSocket.readyState === WebSocket.OPEN) {
-      input.value = "";
-      this.sendMessageToServer(message);
-      this.showLoadingIndicator();
-    } else {
-      ChatUI.showToast("Not connected to the chat server. Please try again later.", "error");
-    }
-  }
-
-  sendMessageToServer(message) {
-    const messageId = this.generateUniqueId();
-    const messageData = {
-      type: "message",
-      message: {
-        messageId,
-        chatId: this.state.chatId,
-        content: message,
-      },
-      copilot: false,
-      focusMode: "succintCairoBookSearch",
-      history: this.state.messageHistory,
-    };
-    
-    this.state.chatSocket.send(JSON.stringify(messageData));
-    this.state.messageHistory.push(["human", message]);
-    this.trimMessageHistory();
-    this.appendMessage("user", message, messageId);
-  }
-
-  // Storage methods
-  saveChatHistory() {
-    localStorage.setItem("chatHistory", JSON.stringify(this.state.messageHistory));
-    localStorage.setItem("chatId", this.state.chatId);
-  }
-
-  loadChatHistory() {
-    const savedHistory = localStorage.getItem("chatHistory");
-    const savedChatId = localStorage.getItem("chatId");
-
-    if (savedHistory) {
-      this.state.messageHistory = JSON.parse(savedHistory);
-      this.state.chatId = savedChatId || this.generateUniqueId();
-
-      const chatMessages = document.getElementById("chat-messages");
-      chatMessages.innerHTML = "";
-      this.state.messageHistory.forEach(([role, content]) => {
-        this.appendMessage(role === "human" ? "user" : "ai", content);
-      });
-    }
-  }
-
-  // Utility methods
-  generateUniqueId() {
-    return `${Date.now().toString(36)}${Math.random().toString(36).substr(2)}`;
-  }
-
-  trimMessageHistory() {
-    if (this.state.messageHistory.length > CONFIG.MAX_HISTORY_LENGTH) {
-      this.state.messageHistory = this.state.messageHistory.slice(-CONFIG.MAX_HISTORY_LENGTH);
-    }
-  }
-
-  resetCurrentMessageState() {
-    this.state.currentSources = [];
-    this.state.currentMessageId = null;
-    this.state.currentMessageContent = "";
-  }
-
-  showLoadingIndicator() {
-    const loadingElement = document.createElement("div");
-    loadingElement.className = "message loading";
-    loadingElement.textContent = "AI is thinking...";
-    document.getElementById("chat-messages").appendChild(loadingElement);
-    this.scrollToBottom();
-  }
-
-  removeLoadingIndicator() {
-    const loadingElement = document.querySelector(".message.loading");
-    if (loadingElement) {
-      loadingElement.remove();
-    }
-  }
-
-  scrollToBottom() {
-    const chatMessages = document.getElementById("chat-messages");
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  toggleChatWindow() {
-    const isVisible = this.elements.chatWindow.style.display === "flex";
-    this.elements.chatWindow.style.display = isVisible ? "none" : "flex";
-    document.body.classList.toggle("chat-open", !isVisible);
-    this.elements.chatButton.style.display = isVisible ? "flex" : "none";
-  }
-
-  closeChatWindow() {
-    this.elements.chatWindow.style.display = "none";
-    document.body.classList.remove("chat-open");
-    this.elements.chatButton.style.display = "flex";
-    this.saveChatHistory();
-  }
-
-  appendMessage(role, content, messageId = null) {
-    const chatMessages = document.getElementById("chat-messages");
-    if (!chatMessages) {
-      console.error("Chat messages container not found");
-      return;
-    }
-
-    const messageElement = document.createElement("div");
-    messageElement.className = `message ${role}`;
-    if (messageId) {
-      messageElement.id = `message-${messageId}`;
-    }
-
-    const contentElement = document.createElement("div");
-    contentElement.className = "content";
-    contentElement.innerHTML = this.processMarkdown(content);
-    messageElement.appendChild(contentElement);
-
-    chatMessages.appendChild(messageElement);
-    this.scrollToBottom();
-    this.saveChatHistory();
-  }
-
-  appendStreamingMessage(messageId) {
-    const chatMessages = document.getElementById("chat-messages");
-    if (!chatMessages) {
-      console.error("Chat messages container not found");
-      return null;
-    }
-
-    const messageElement = document.createElement("div");
-    messageElement.className = "message ai streaming";
-    messageElement.id = `message-${messageId}`;
-
-    const contentElement = document.createElement("div");
-    contentElement.className = "content";
-    messageElement.appendChild(contentElement);
-
-    chatMessages.appendChild(messageElement);
-    this.scrollToBottom();
-
-    return messageElement;
-  }
-
-  updateStreamingMessage(messageId, content, sources) {
-    let messageElement = document.getElementById(`message-${messageId}`);
-    if (!messageElement) {
-      console.log(
-        `Creating new message element for ID: message-${messageId}`,
-      );
-      messageElement = this.appendStreamingMessage(messageId);
-    }
-
-    const contentElement = messageElement.querySelector(".content");
-    if (contentElement) {
-      const processedContent = this.processMarkdown(content, sources);
-      contentElement.innerHTML = processedContent;
-      this.highlightCodeBlocks();
-      this.scrollToBottom();
-    } else {
-      console.error(`Content element not found in message-${messageId}`);
-    }
-  }
-
-  highlightCodeBlocks() {
-    if (window.Prism) {
-      Prism.highlightAll();
-    }
-  }
-
-  processMarkdown(content, sources = []) {
-    return MessageProcessor.processMarkdown(content, sources);
-  }
-
-  handleWebSocketOpen() {
-    console.log("WebSocket connection opened");
-    this.setWSReady(true);
-    this.state.reconnectAttempts = 0;
-    this.setupHeartbeat();
-  }
-
-  handleWebSocketClose() {
-    console.log("WebSocket connection closed");
-    this.setWSReady(false);
-    if (this.heartbeatInterval) {
-      clearInterval(this.heartbeatInterval);
-    }
-    this.attemptReconnect();
-  }
-
-  handleWebSocketError(error) {
-    console.error("WebSocket error:", error);
-    if (this.state.chatSocket?.readyState === WebSocket.OPEN) {
-      this.state.chatSocket.close();
-    }
-  }
-
-  setWSReady(isReady) {
-    const statusElement = document.getElementById("connection-status");
-    if (statusElement) {
-      statusElement.className = isReady ? "connected" : "disconnected";
-      statusElement.title = isReady ? "Connected to server" : "Disconnected from server";
-    }
-  }
-
-  attemptReconnect() {
-    this.state.reconnectAttempts++;
-    if (this.state.reconnectAttempts <= CONFIG.MAX_RECONNECT_ATTEMPTS) {
-      ChatUI.showToast(
-        "Connection lost. Attempting to reconnect...",
-        "warning",
-      );
-      console.log(`Reconnect attempt ${this.state.reconnectAttempts}`);
-      
-      const delay = Math.min(1000 * 2 ** this.state.reconnectAttempts, 30000);
-      setTimeout(() => this.connectWebSocket(), delay);
-    } else {
-      ChatUI.showToast(
-        "Failed to connect after multiple attempts. Please try again later.",
-        "error",
-      );
-    }
-  }
-
-  clearChatHistory() {
-    this.state.messageHistory = [];
-    const chatMessages = document.getElementById("chat-messages");
-    if (chatMessages) {
-      chatMessages.innerHTML = "";
-    }
-    this.state.chatId = this.generateUniqueId();
-  }
-}
-
 // IIFE to encapsulate our chat functionality and avoid polluting the global scope
 (function () {
   /**
@@ -632,24 +104,12 @@ class ChatManager {
     createChatButton() {
       const button = document.createElement("div");
       button.id = "chat-button";
-      button.innerHTML = "💬";
-      Object.assign(button.style, {
-        position: "fixed",
-        bottom: "20px",
-        right: "20px",
-        width: "50px",
-        height: "50px",
-        backgroundColor: "var(--links)",
-        color: "var(--bg)",
-        borderRadius: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: "pointer",
-        fontSize: "24px",
-        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-        zIndex: "1000",
-      });
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        </svg>
+      `;
+      // No inline styles here; moved to CSS
       return button;
     }
 
@@ -670,8 +130,8 @@ class ChatManager {
               </svg>
             </button>
             <button id="close-chat" class="icon-button" title="Close Chat">
-              <svg viewBox="0 0 24 24" width="16" height="16">
-                <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
               </svg>
             </button>
           </div>
@@ -775,13 +235,11 @@ class ChatManager {
     }
 
     handleWebSocketOpen() {
-      console.log("WebSocket connection opened");
       this.setWSReady(true);
       this.reconnectAttempts = 0;
     }
 
     handleWebSocketClose() {
-      console.log("WebSocket connection closed");
       this.setWSReady(false);
       this.attemptReconnect();
     }
@@ -797,7 +255,6 @@ class ChatManager {
     handleWebSocketMessage(event) {
       try {
         const data = JSON.parse(event.data);
-        console.log("Received WebSocket message:", data);
 
         switch (data.type) {
           case "error":
@@ -917,9 +374,6 @@ class ChatManager {
     updateStreamingMessage(messageId, content, sources) {
       let messageElement = document.getElementById(`message-${messageId}`);
       if (!messageElement) {
-        console.log(
-          `Creating new message element for ID: message-${messageId}`,
-        );
         messageElement = this.appendStreamingMessage(messageId);
       }
 
@@ -932,14 +386,6 @@ class ChatManager {
       } else {
         console.error(`Content element not found in message-${messageId}`);
       }
-    }
-
-    showLoadingIndicator() {
-      const loadingElement = document.createElement("div");
-      loadingElement.className = "message loading";
-      loadingElement.textContent = "AI is thinking...";
-      document.getElementById("chat-messages").appendChild(loadingElement);
-      this.scrollToBottom();
     }
 
     removeLoadingIndicator() {
@@ -955,10 +401,14 @@ class ChatManager {
     }
 
     setWSReady(isReady) {
+      const sendButton = this.chatWindow.querySelector("#send-message");
+      sendButton.disabled = !isReady;
       const statusElement = document.getElementById("connection-status");
       if (statusElement) {
         statusElement.className = isReady ? "connected" : "disconnected";
-        statusElement.title = isReady ? "Connected to server" : "Disconnected from server";
+        statusElement.title = isReady
+          ? "Connected to server"
+          : "Disconnected from server";
       }
     }
 
