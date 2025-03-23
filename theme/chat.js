@@ -45,6 +45,7 @@
     WS_URL: "wss://backend.agent.starknet.id/ws",
     MAX_RECONNECT_ATTEMPTS: 5,
     MAX_HISTORY_LENGTH: 10,
+    FOCUS_MODE: "succintCairoBookSearch",
   };
 
   class ChatManager {
@@ -536,7 +537,7 @@
           content: message,
         },
         copilot: false,
-        focusMode: "succintCairoBookSearch",
+        focusMode: CONFIG.FOCUS_MODE,
         history: this.messageHistory,
       };
       this.chatSocket.send(JSON.stringify(messageData));
