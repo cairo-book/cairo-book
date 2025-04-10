@@ -53,7 +53,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install mdbook
-        uses: ./.github/workflows/install-mdbook
+        uses: cairo-book/.github/workflows/install-mdbook
 
       - name: Build book (English)
         run: mdbook build -d book
@@ -87,7 +87,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./book/html
+          path: cairo-book/book/html
 
       - name: Deploy to GitHub Pages
         id: deployment
