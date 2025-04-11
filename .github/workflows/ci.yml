@@ -78,7 +78,7 @@ jobs:
 
       - name: Install cairo-listings
         if: steps.cache-mdbook.outputs.cache-hit != 'true'
-        run: cargo install --path cairo-listings --locked
+        run: cargo install --git https://github.com/enitrat/cairo-listings --locked
         shell: bash
 
       - name: Run cairo-listings and generate summary

@@ -4,7 +4,9 @@ English | [简体中文](translations/README-cn.md)
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-42-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <h1>The Cairo Programming Language Book</h1>
@@ -37,10 +39,11 @@ This repository contains the source of "The Cairo Programming Language" book, a 
 
 3. Clone this repository.
 
-4. Install mdbook-cairo to process references and labels, and custom tags.
-   ```
-   cargo install --path mdbook-cairo
-   ```
+4. Install [mdbook-cairo](https://github.com/enitrat/mdbook-cairo) to process references and labels, and custom tags.
+
+```bash
+cargo install --git https://github.com/enitrat/mdbook-cairo
+```
 
 ### Guidelines
 
@@ -92,16 +95,12 @@ Install this tool with:
 
 Firstly, you need to have `scarb` resolved in your path. See [here][installation] for more details.
 
-To run the `cairo-listings` helper tool and verify Cairo programs, ensure that you are at the root of the repository (same directory of this `README.md` file), and run:
+To run the `cairo-listings` helper tool and verify Cairo programs, ensure that you are at the root of the repository (same directory of this `README.md` file).
+
+Install the tool with:
 
 ```sh
-cargo run --bin cairo-listings verify
-```
-
-Alternatively, you can also install the tool with:
-
-```sh
-cargo install --path cairo-listings
+cargo install --git https://github.com/enitrat/cairo-listings --locked
 ```
 
 and then run:
