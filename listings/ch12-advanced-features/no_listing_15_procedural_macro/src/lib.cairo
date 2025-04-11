@@ -31,3 +31,4 @@ trait Hello<T> {
 }
 // ANCHOR_END: hello_trait
 
+

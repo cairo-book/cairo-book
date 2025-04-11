@@ -40,7 +40,7 @@ id = "40ae0cfe-3567-4d05-b0d9-54d612a2d654"
 type = "Tracing"
 prompt.program = """
 fn print_slice<T>(mut v: Span<T>) {
-    while let Option::Some(x) = v.pop_front() {
+    while let Some(x) = v.pop_front() {
         println!("{x}");
     }
 }

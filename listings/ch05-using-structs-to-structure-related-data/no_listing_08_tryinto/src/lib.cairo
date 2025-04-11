@@ -15,9 +15,9 @@ struct Square {
 impl RectangleIntoSquare of TryInto<Rectangle, Square> {
     fn try_into(self: Rectangle) -> Option<Square> {
         if self.height == self.width {
-            Option::Some(Square { side_length: self.height })
+            Some(Square { side_length: self.height })
         } else {
-            Option::None
+            None
         }
     }
 }

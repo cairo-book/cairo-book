@@ -10,7 +10,7 @@ impl PointDisplay of Display<Point> {
     fn fmt(self: @Point, ref f: Formatter) -> Result<(), Error> {
         let str: ByteArray = format!("Point ({}, {})", *self.x, *self.y);
         f.buffer.append(@str);
-        Result::Ok(())
+        Ok(())
     }
 }
 

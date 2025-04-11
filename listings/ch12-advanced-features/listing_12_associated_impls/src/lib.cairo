@@ -8,10 +8,11 @@ fn main() {
     // Uses the iterator to print each element
     loop {
         match iter.next() {
-            Option::Some(item) => println!("Item: {}", item),
-            Option::None => { break; },
+            Some(item) => println!("Item: {}", item),
+            None => { break; },
         };
     }
 }
 // ANCHOR_END: main
+
 

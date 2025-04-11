@@ -167,8 +167,8 @@ pub impl OptionTraitImpl<T> of OptionTrait<T> {
         self: Option<T>, f: F,
     ) -> T {
         match self {
-            Option::Some(x) => x,
-            Option::None => f(),
+            Some(x) => x,
+            None => f(),
         }
     }
 }

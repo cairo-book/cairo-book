@@ -9,10 +9,10 @@ fn find_until(mut v: Span<u64>, n: u64, til: usize) -> Option<usize> {
     let mut i = 0;
     loop {
         if i == til {
-            break Option::None;
+            break None;
         }
         if *v[i] == n {
-            break Option::Some(i);
+            break Some(i);
         }
         i += 1;
     }

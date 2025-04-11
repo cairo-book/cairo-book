@@ -61,19 +61,15 @@ fn main() {
     let mut arr: Array<u128> = array![5];
     let index_to_access = 3;
     let value = match arr.get(index_to_access) {
-        Option::Some(x) => { *x.unbox() },
-        Option::None => { 0 }
+        Some(x) => { *x.unbox() },
+        None => { 0 }
     };
 
     println!("Value at index {} is {}", index_to_access, value);
 }
 ```
 """
-prompt.distractors = [
-  "Program 1",
-  "Program 2",
-  "Program 2 and Program 3",
-]
+prompt.distractors = ["Program 1", "Program 2", "Program 2 and Program 3"]
 answer.answer = "Program 3"
 context = """
 Program 3 tries to access an element at an index that is out of bounds, but it matches the
@@ -93,9 +89,9 @@ prompt.distractors = [
   "To indicate that a function may panic",
   "To catch errors at compile time",
 ]
-answer.answer = "To create a wrapper function that panics if the annotated function returns `Option::None` or `Result::Err`"
+answer.answer = "To create a wrapper function that panics if the annotated function returns `None` or `Err`"
 context = """
 If a function is annotated with `#[panic_with]`, a wrapper function is created that panics if the
-annotated function returns `Option::None` or `Result::Err`.
+annotated function returns `None` or `Err`.
 """
 id = "f618cfc9-3419-4cde-962d-72210879b3b3"

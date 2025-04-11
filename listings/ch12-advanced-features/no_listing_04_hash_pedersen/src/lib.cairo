@@ -25,9 +25,9 @@ fn main() -> (felt252, felt252) {
     let first_element = serialized_struct.pop_front().unwrap();
     let mut state = PedersenTrait::new(first_element);
 
-    while let Option::Some(value) = serialized_struct.pop_front() {
+    while let Some(value) = serialized_struct.pop_front() {
         state = state.update(value);
-    };
+    }
 
     // hash2 is the result of hashing only the fields of the struct
     let hash2 = state.finalize();

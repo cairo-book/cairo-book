@@ -6,20 +6,20 @@ Why do we want it to return a `Result` instead of an `Option` ?
 ```
 fn option_div (lhs: Option<u32>, rhs: Option<u32>) -> Result<u32, ByteArray> {
     match lhs {
-        Option::Some(dividend) => {
+        Some(dividend) => {
             match rhs {
-                Option::Some(divisor) => {
+                Some(divisor) => {
                     if divisor == 0 {
-                        Result::Err("Divisor is 0")
+                        Err("Divisor is 0")
                     } else {
-                        Result::Ok(dividend / divisor)
+                        Ok(dividend / divisor)
                     }
                 },
-                Option::None => Result::Err("Divisor is None")
+                None => Err("Divisor is None")
             }
         },
-        Option::None => {
-          Result::Err("Dividend is None")
+        None => {
+          Err("Dividend is None")
         },
     }
 }
@@ -41,29 +41,29 @@ type = "Tracing"
 prompt.program = """
 fn option_div (lhs: Option<u32>, rhs: Option<u32>) -> Result<u32, ByteArray> {
     match lhs {
-        Option::Some(dividend) => {
+        Some(dividend) => {
             match rhs {
-                Option::Some(divisor) => {
+                Some(divisor) => {
                     if divisor == 0 {
-                        Result::Err("Divisor is 0")
+                        Err("Divisor is 0")
                     } else {
-                        Result::Ok(dividend / divisor)
+                        Ok(dividend / divisor)
                     }
                 },
-                Option::None => Result::Err("Divisor is None")
+                None => Err("Divisor is None")
             }
         },
-        Option::None => {
-          Result::Err("Dividend is None")
+        None => {
+          Err("Dividend is None")
         },
     }
 }
 
 fn try_division_by_0 () -> Option<u32> {
-    let dividend = Option::Some(10);
-    let divisor = Option::Some(0);
+    let dividend = Some(10);
+    let divisor = Some(0);
     let result = option_div(dividend, divisor)?;
-    Option::Some(result)
+    Some(result)
 }
 
 fn main() {
@@ -73,7 +73,7 @@ fn main() {
 answer.doesCompile = false
 context = """
 `option_div` returns a `Result`, but the return type of `try_division_by_0` expects an `Option`.
-Therefore it is invalid to use the `?` operator until the `Result` has been converted to an `Option` (e.g. with the `Result::Ok` method).
+Therefore it is invalid to use the `?` operator until the `Result` has been converted to an `Option` (e.g. with the `Ok` method).
 """
 id = "021a3060-6076-4b40-ba4f-eb305543e449"
 
@@ -84,23 +84,23 @@ Given an arbitrary expression `e` of type `Result<T, E>`, which code snippet bes
 """
 prompt.distractors = ["""
 ```
-if let Result::Err(e) = e {
-    return Result::Err(e);
+if let Err(e) = e {
+    return Err(e);
 }
 ```
 """, """
 ```
 match e {
-    Result::Ok(x) => x,
-    Result::Err(err) => panic!("{}", err)
+    Ok(x) => x,
+    Err(err) => panic!("{}", err)
 }
 ```
 """, "`e.unwrap()`"]
 answer.answer = """
 ```
 match e {
-    Result::Ok(v) => v,
-    Result::Err(e) => return Result::Err(e)
+    Ok(v) => v,
+    Err(e) => return Err(e)
 }
 ```
 """

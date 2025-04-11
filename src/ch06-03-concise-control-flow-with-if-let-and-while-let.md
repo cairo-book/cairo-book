@@ -2,7 +2,7 @@
 
 ## `if let`
 
-The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing {{#ref config_max}} that matches on an `Option::Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Option::Some` variant.
+The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing {{#ref config_max}} that matches on an `Some<u8>` value in the `config_max` variable but only wants to execute code if the value is `Some` variant.
 
 ```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_14_if_let_match_one/src/lib.cairo:match}}
@@ -10,9 +10,9 @@ The `if let` syntax lets you combine `if` and `let` into a less verbose way to h
 
 {{#label config_max}}
 <span class="caption">Listing {{#ref config_max}}: A `match` that only cares about executing
-code when the value is `Option::Some`</span>
+code when the value is `Some`</span>
 
-If the value is `Option::Some`, we print out the value in the `Option::Some` variant by binding
+If the value is `Some`, we print out the value in the `Some` variant by binding
 the value to the variable `max` in the pattern. We don’t want to do anything
 with the `None` value. To satisfy the `match` expression, we have to add `_ =>
 ()` after processing just one variant, which is annoying boilerplate code to
@@ -28,7 +28,7 @@ code behaves the same as the `match` in Listing {{#ref config_max}}:
 The syntax `if let` takes a pattern and an expression separated by an equal
 sign. It works the same way as a `match`, where the expression is given to the
 `match` and the pattern is its first arm. In this case, the pattern is
-`Option::Some(max)`, and `max` binds to the value inside `Option::Some`. We can then
+`Some(max)`, and `max` binds to the value inside `Some`. We can then
 use `max` in the body of the `if let` block in the same way we used `max` in
 the corresponding `match` arm. The code in the `if let` block isn’t run if the
 value doesn’t match the pattern.
@@ -64,7 +64,7 @@ express using `match`, remember that `if let` is in your Cairo toolbox as well.
 
 ## `while let`
 
-The `while let` syntax is similar to the `if let` syntax, but it allows you to loop over a collection of values and execute a block of code for each value that matches a specified pattern. In the case below, the pattern is `Option::Some(x)`, which matches any `Some` variant of the `Option` enum.
+The `while let` syntax is similar to the `if let` syntax, but it allows you to loop over a collection of values and execute a block of code for each value that matches a specified pattern. In the case below, the pattern is `Some(x)`, which matches any `Some` variant of the `Option` enum.
 
 ```cairo
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_18_while_let/src/lib.cairo}}

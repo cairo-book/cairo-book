@@ -35,17 +35,17 @@ mod AddressList {
         fn get_n_th_registered_address(
             self: @ContractState, index: u64,
         ) -> Option<ContractAddress> {
-            if let Option::Some(storage_ptr) = self.addresses.get(index) {
-                return Option::Some(storage_ptr.read());
+            if let Some(storage_ptr) = self.addresses.get(index) {
+                return Some(storage_ptr.read());
             }
-            return Option::None;
+            return None;
         }
 
         fn get_all_addresses(self: @ContractState) -> Array<ContractAddress> {
             let mut addresses = array![];
             for i in 0..self.addresses.len() {
                 addresses.append(self.addresses.at(i).read());
-            };
+            }
             addresses
         }
         //ANCHOR_END: read
