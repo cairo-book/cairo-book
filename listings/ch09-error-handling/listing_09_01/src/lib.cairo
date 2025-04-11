@@ -1,8 +1,8 @@
 //ANCHOR: function
 fn parse_u8(s: felt252) -> Result<u8, felt252> {
     match s.try_into() {
-        Option::Some(value) => Result::Ok(value),
-        Option::None => Result::Err('Invalid integer'),
+        Some(value) => Ok(value),
+        None => Err('Invalid integer'),
     }
 }
 //ANCHOR_END: function

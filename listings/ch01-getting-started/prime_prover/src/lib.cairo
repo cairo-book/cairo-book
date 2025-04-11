@@ -29,7 +29,7 @@ fn is_prime(n: u32) -> bool {
             break;
         }
         i += 2;
-    };
+    }
     is_prime
 }
 

@@ -24,7 +24,7 @@ The `ResultTrait` trait provides methods for working with the `Result<T, E>` enu
 
 The `expect` and `unwrap` methods are similar in that they both attempt to extract the value of type `T` from a `Result<T, E>` when it is in the `Ok` variant. If the `Result` is `Ok(x)`, both methods return the value `x`. However, the key difference between the two methods lies in their behavior when the `Result` is in the `Err` variant. The `expect` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap` method panics with a default error message, providing less information about the cause of the panic.
 
-The `expect_err` and `unwrap_err` methods have the exact opposite behavior. If the `Result` is `Err(x)`, both methods return the value `x`. However, the key difference between the two methods is in case of `Result::Ok()`. The `expect_err` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap_err` method panics with a default error message, providing less information about the cause of the panic.
+The `expect_err` and `unwrap_err` methods have the exact opposite behavior. If the `Result` is `Err(x)`, both methods return the value `x`. However, the key difference between the two methods is in case of `Ok()`. The `expect_err` method allows you to provide a custom error message (as a `felt252` value) that will be used when panicking, giving you more control and context over the panic. On the other hand, the `unwrap_err` method panics with a default error message, providing less information about the cause of the panic.
 
 A careful reader may have noticed the `<+Drop<T>>` and `<+Drop<E>>` in the first four methods signatures. This syntax represents generic type constraints in the Cairo language, as seen in the previous chapter. These constraints indicate that the associated functions require an implementation of the `Drop` trait for the generic types `T` and `E`, respectively.
 
@@ -52,7 +52,7 @@ Now, we can use this function elsewhere. For instance:
 
 ```
 
-Here, it accepts two `u128` integers, `a` and `b`, and returns an `Option<u128>`. It uses the `Result` returned by `u128_overflowing_add` to determine the success or failure of the addition operation. The `match` expression checks the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it returns `Option::None` to indicate that the operation has failed due to overflow. The function does not panic in case of an overflow.
+Here, it accepts two `u128` integers, `a` and `b`, and returns an `Option<u128>`. It uses the `Result` returned by `u128_overflowing_add` to determine the success or failure of the addition operation. The `match` expression checks the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it returns `Some(r)` containing the sum. If the result is `Err(r)`, it returns `None` to indicate that the operation has failed due to overflow. The function does not panic in case of an overflow.
 
 Let's take another example:
 
@@ -60,7 +60,7 @@ Let's take another example:
 {{#include ../listings/ch09-error-handling/listing_09_01/src/lib.cairo:function}}
 ```
 
-In this example, the `parse_u8` function takes a `felt252` and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Result::Ok(value)`, otherwise it returns `Result::Err('Invalid integer')`.
+In this example, the `parse_u8` function takes a `felt252` and tries to convert it into a `u8` integer using the `try_into` method. If successful, it returns `Ok(value)`, otherwise it returns `Err('Invalid integer')`.
 
 Our two test cases are:
 
@@ -81,8 +81,8 @@ The first one tests a valid conversion from `felt252` to `u8`, expecting the `un
 
 The last operator we will talk about is the `?` operator. The `?` operator is used for more idiomatic and concise error handling. When you use the `?` operator on a `Result` or `Option` type, it will do the following:
 
-- If the value is `Result::Ok(x)` or `Option::Some(x)`, it will return the inner value `x` directly.
-- If the value is `Result::Err(e)` or `Option::None`, it will propagate the error or `None` by immediately returning from the function.
+- If the value is `Ok(x)` or `Some(x)`, it will return the inner value `x` directly.
+- If the value is `Err(e)` or `None`, it will propagate the error or `None` by immediately returning from the function.
 
 The `?` operator is useful when you want to handle errors implicitly and let the calling function deal with them.
 

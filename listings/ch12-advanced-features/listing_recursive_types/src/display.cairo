@@ -24,7 +24,7 @@ fn fmt_helper(
             "|   "
         };
         i += 1;
-    };
+    }
 
     let branch: ByteArray = if is_last {
         "`-- "

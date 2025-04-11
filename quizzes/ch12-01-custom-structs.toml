@@ -56,10 +56,10 @@ impl NullableStackImpl<T, +Drop<T>, +Copy<T>> of StackTrait<NullableStack<T>, T>
 
     fn pop(ref self: NullableStack<T>) -> Option<T> {
         if self.is_empty() {
-            return Option::None;
+            return None;
         }
         self.len -= 1;
-        Option::Some(self.data.get(self.len.into()).deref())
+        Some(self.data.get(self.len.into()).deref())
     }
 
     fn is_empty(self: @NullableStack<T>) -> bool {

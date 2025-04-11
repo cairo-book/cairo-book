@@ -9,7 +9,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, imp
             smallest = *list[index];
         }
         index = index + 1;
-    };
+    }
 
     smallest
 }

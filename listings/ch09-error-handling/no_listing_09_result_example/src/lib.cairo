@@ -6,8 +6,8 @@ fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;
 // ANCHOR: checked-add
 fn u128_checked_add(a: u128, b: u128) -> Option<u128> {
     match u128_overflowing_add(a, b) {
-        Result::Ok(r) => Option::Some(r),
-        Result::Err(r) => Option::None,
+        Ok(r) => Some(r),
+        Err(r) => None,
     }
 }
 // ANCHOR_END: checked-add

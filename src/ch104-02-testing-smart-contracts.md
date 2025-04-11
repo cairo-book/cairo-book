@@ -16,14 +16,17 @@ Throughout this chapter, we will be using as an example the `PizzaFactory` contr
 
 ## Configuring your Scarb project with Starknet Foundry
 
-The settings of your Scarb project can be configured in the `Scarb.toml` file. To use Starknet Foundry as your testing tool, you will need to add it as a dev dependency in your `Scarb.toml` file. At the time of writing, the latest version of Starknet Foundry is `v0.22.0` - but you should use the latest version.
+The settings of your Scarb project can be configured in the `Scarb.toml` file. To use Starknet Foundry as your testing tool, you will need to add it as a dev dependency in your `Scarb.toml` file. At the time of writing, the latest version of Starknet Foundry is `v0.39.0` - but you should use the latest version.
 
 ```toml,noplayground
 [dev-dependencies]
-snforge_std = "0.38.0"
+snforge_std = "0.39.0"
 
 [scripts]
 test = "snforge test"
+
+[tool.scarb]
+allow-prebuilt-plugins = ["snforge_std"]
 ```
 
 The `scarb test` command is configured to execute `scarb cairo-test` by default. In our settings, we have configured it to execute `snforge test` instead. This will allow us to run our tests using Starknet Foundry when we run the `scarb test` command.

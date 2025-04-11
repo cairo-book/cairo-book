@@ -40,9 +40,9 @@ impl MemoryVecImpl<T, +Drop<T>, +Copy<T>> of MemoryVecTrait<MemoryVec<T>, T> {
 
     fn get(ref self: MemoryVec<T>, index: usize) -> Option<T> {
         if index < self.len() {
-            Option::Some(self.data.get(index.into()).deref())
+            Some(self.data.get(index.into()).deref())
         } else {
-            Option::None
+            None
         }
     }
 

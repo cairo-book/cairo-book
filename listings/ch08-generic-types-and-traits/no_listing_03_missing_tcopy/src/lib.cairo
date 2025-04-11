@@ -16,7 +16,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
             smallest = *list[index];
         }
         index = index + 1;
-    };
+    }
 
     smallest
 }

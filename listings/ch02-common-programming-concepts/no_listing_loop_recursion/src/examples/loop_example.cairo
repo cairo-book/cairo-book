@@ -6,6 +6,6 @@ fn main() -> felt252 {
         } else {
             x += 1;
         }
-    };
+    }
     x
 }

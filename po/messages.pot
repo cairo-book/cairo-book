@@ -2606,7 +2606,7 @@ msgstr ""
 msgid ""
 "You can only remove elements from the front of an array by using the "
 "`pop_front()` method. This method returns an `Option` that can be unwrapped, "
-"containing the removed element, or `Option::None` if the array is empty."
+"containing the removed element, or `None` if the array is empty."
 msgstr ""
 
 #: src/ch03-01-arrays.md:59
@@ -5511,30 +5511,30 @@ msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:133
 msgid ""
-"Does `Option::Some(5)` value match the pattern `Option::Some(val)`? It does! "
+"Does `Some(5)` value match the pattern `Some(val)`? It does! "
 "We have the same variant. The `val` binds to the value contained in "
-"`Option::Some`, so `val` takes the value `5`. The code in the `match` arm is "
+"`Some`, so `val` takes the value `5`. The code in the `match` arm is "
 "then executed, so we add `1` to the value of `val` and create a new "
-"`Option::Some` value with our total `6` inside. Because the first arm "
+"`Some` value with our total `6` inside. Because the first arm "
 "matched, no other arms are compared."
 msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:135
 msgid ""
 "Now let’s consider the second call of `plus_one` in our main function, where "
-"`x` is `Option::None`. We enter the `match` and compare to the first arm:"
+"`x` is `None`. We enter the `match` and compare to the first arm:"
 msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:141
 msgid ""
-"The `Option::Some(val)` value doesn’t match the pattern `Option::None`, so "
+"The `Some(val)` value doesn’t match the pattern `None`, so "
 "we continue to the next arm:"
 msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:147
 msgid ""
 "It matches! There’s no value to add to, so the matching construct ends and "
-"returns the `Option::None` value on the right side of `=>`."
+"returns the `None` value on the right side of `=>`."
 msgstr ""
 
 #: src/ch06-02-the-match-control-flow-construct.md:149
@@ -8258,7 +8258,7 @@ msgstr ""
 msgid ""
 "The `expect_err` and `unwrap_err` have the exact opposite behavior. If the "
 "`Result` is `Err(x)`, both methods return the value `x`. However, the key "
-"difference between the two methods is in case of `Result::Ok()`. The "
+"difference between the two methods is in case of `Ok()`. The "
 "`expect_err` method allows you to provide a custom error message (as a "
 "`felt252` value) that will be used when panicking, giving you more control "
 "and context over the panic. On the other hand, the `unwrap_err` method "
@@ -8334,8 +8334,8 @@ msgid ""
 "It uses the `Result` returned by `u128_overflowing_add` to determine the "
 "success or failure of the addition operation. The match expression checks "
 "the `Result` from `u128_overflowing_add`. If the result is `Ok(r)`, it "
-"returns `Option::Some(r)` containing the sum. If the result is `Err(r)`, it "
-"returns `Option::None` to indicate that the operation has failed due to "
+"returns `Some(r)` containing the sum. If the result is `Err(r)`, it "
+"returns `None` to indicate that the operation has failed due to "
 "overflow. The function does not panic in case of an overflow."
 msgstr ""
 
@@ -8351,8 +8351,8 @@ msgstr ""
 msgid ""
 "In this example, the `parse_u8` function takes a `felt252` integer and tries "
 "to convert it into a `u8` integer using the `try_into` method. If "
-"successful, it returns `Result::Ok(value)`, otherwise it returns "
-"`Result::Err('Invalid integer')`."
+"successful, it returns `Ok(value)`, otherwise it returns "
+"`Err('Invalid integer')`."
 msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:96
@@ -8388,13 +8388,13 @@ msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:134
 msgid ""
-"If the value is `Result::Ok(x)` or `Option::Some(x)`, it will return the "
+"If the value is `Ok(x)` or `Some(x)`, it will return the "
 "inner value `x` directly."
 msgstr ""
 
 #: src/ch10-02-recoverable-errors.md:135
 msgid ""
-"If the value is `Result::Err(e)` or `Option::None`, it will propagate the "
+"If the value is `Err(e)` or `None`, it will propagate the "
 "error or `None` by immediately returning from the function."
 msgstr ""
 

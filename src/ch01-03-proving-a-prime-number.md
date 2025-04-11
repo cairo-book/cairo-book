@@ -8,7 +8,7 @@ Here’s how it works: the program will take an input number from the user and c
 
 ## Setting Up a New Project
 
-To get started, ensure you have Scarb 2.10.1 or later installed (see [Installation][installation] for details). We’ll use Scarb to create and manage our Cairo project.
+To get started, ensure you have Scarb 2.11.4 or later installed (see [Installation][installation] for details). We’ll use Scarb to create and manage our Cairo project.
 
 Open a terminal in your projects directory and create a new Scarb project:
 
@@ -30,7 +30,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.10.1"
+cairo_test = "2.11.4"
 ```
 
 This is a minimal manifest file for a Cairo project. However, since we want to create an executable program that we can prove, we need to modify it. Update Scarb.toml to define an executable target and include the `cairo_execute` plugin:
@@ -45,7 +45,7 @@ Here’s what we’ve added:
 
 - `[[target.executable]]` specifies that this package compiles to a Cairo executable (not a library or Starknet contract).
 - `[cairo] enable-gas = false` disables gas tracking, which is required for executable targets since gas is specific to Starknet contracts.
-  `[dependencies] cairo_execute = "2.10.1"` adds the plugin needed to execute and prove our program.
+  `[dependencies] cairo_execute = "2.11.4"` adds the plugin needed to execute and prove our program.
 
 Now, check the generated `src/lib.cairo`, which is a simple placeholder. Since we’re building an executable, we’ll replace this with a function annotated with `#[executable]` to define our entry point.
 

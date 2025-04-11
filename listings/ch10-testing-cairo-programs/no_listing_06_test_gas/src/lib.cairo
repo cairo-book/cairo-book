@@ -4,7 +4,7 @@ fn sum_n(n: usize) -> usize {
     while i <= n {
         sum += i;
         i += 1;
-    };
+    }
     sum
 }
 

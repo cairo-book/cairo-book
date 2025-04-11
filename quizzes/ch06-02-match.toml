@@ -8,7 +8,7 @@ enum Location {
 }
 
 fn main() {
-    let loc: Location = Location::Range((2, 5));  
+    let loc: Location = Location::Range((2, 5));
     let n: u32 = match loc {
         Location::Point(p) => p,
         Location::Range(r) => match r {
@@ -36,8 +36,8 @@ enum Either {
     Left: u32,
     Right: ByteArray
 }
-  
-fn main() {  
+
+fn main() {
     let x = Either::Right("Hello World");
     let simple = match x {
       Either::Left(n) => n,
@@ -61,14 +61,14 @@ type = "Tracing"
 prompt.program = """
 fn decr_twice(n: u32) -> Option<u32> {
     match n {
-        0 | 1 => Option::None,
-        val => Option::Some(val - 2)
+        0 | 1 => None,
+        val => Some(val - 2)
     }
 }
 """
 answer.doesCompile = false
 context = """
-There's no catch-all pattern in Cairo that allows you to use the value of the pattern. 
+There's no catch-all pattern in Cairo that allows you to use the value of the pattern.
 You have to use the placeholder `_` instead.
 """
 id = "bb07c951-7f3d-4225-ae54-adff59774b76"
@@ -80,8 +80,8 @@ Consider this method implemented for the `Option` type:
 ```
 fn unwrap_or<+Drop<T>>(self: Option<T>, default: T) -> T {
     match self {
-        Option::Some(x) => x,
-        Option::None => default,
+        Some(x) => x,
+        None => default,
     }
 }
 ```
@@ -105,18 +105,18 @@ Consider these two implementations of a function to decrement an unsigned number
 ```
 fn decr_twice_v1(n: u32) -> Option<u32> {
     match n {
-        0 | 1 => Option::None,
-        _ => Option::Some(n - 2)
+        0 | 1 => None,
+        _ => Some(n - 2)
     }
 }
-  
+
 fn decr_twice_v2(n: u32) -> Option<u32> {
     if n == 0 {
-        Option::None
+        None
     } else if n == 1 {
-        Option::None
+        None
     } else {
-        Option::Some(n - 2)
+        Some(n - 2)
     }
 }
 ```
