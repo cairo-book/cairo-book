@@ -21,9 +21,10 @@ runs:
         curl -sSL https://github.com/badboy/mdbook-last-changed/releases/download/v0.1.4/mdbook-last-changed-v0.1.4-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory="${HOME}/.cargo/bin"
         echo "${HOME}/.cargo/bin" >> ${GITHUB_PATH}
 
-    - name: Install mdbook-cairo preprocessor
+    - name: Install mdbook-cairo
       shell: bash
-      run: cargo install --path mdbook-cairo --locked
+      run: |
+        cargo install --git https://github.com/enitrat/mdbook-cairo --locked
 
     - name: Install cargo-make
       uses: baptiste0928/cargo-install@v2
