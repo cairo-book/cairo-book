@@ -39,13 +39,26 @@
    * @property {string} WS_URL - The WebSocket URL for real-time communication.
    * @property {number} MAX_RECONNECT_ATTEMPTS - Maximum number of reconnection attempts.
    * @property {number} MAX_HISTORY_LENGTH - Maximum number of messages to keep in history.
+   * @property {string} FOCUS_MODE - Focus mode for the chat.
+   * @property {string} CHAT_TITLE - The title displayed in the chat header.
    */
-  const CONFIG = {
+  // Default configuration
+  const defaultConfig = {
     API_URL: "https://backend.agent.starknet.id/api",
     WS_URL: "wss://backend.agent.starknet.id/ws",
     MAX_RECONNECT_ATTEMPTS: 5,
     MAX_HISTORY_LENGTH: 10,
     FOCUS_MODE: "docChatMode",
+    CHAT_TITLE: "Cairo Assistant",
+    CHAT_PLACEHOLDER: "Ask anything about Cairo...",
+    CHAT_DISCLAIMER:
+      "This assistant is an AI-powered chatbot developed by LFG Labs, designed to help with inquiries related to Starknet and Cairo. While it strives to provide accurate and helpful responses, it cannot guarantee the completeness or accuracy of the information provided. For official information, please refer to the documentation on the website.",
+  };
+
+  // Merge with external config if it exists
+  const CONFIG = {
+    ...defaultConfig,
+    ...(window.chatExternalConfig || {}),
   };
 
   class ChatManager {
@@ -122,7 +135,7 @@
         <div id="chat-header">
           <div class="header-left">
             <div id="connection-status" class="disconnected" title="Disconnected from server">⬤</div>
-            <span class="chat-title">Cairo Assistant</span>
+            <span class="chat-title">${this.escapeHtml(CONFIG.CHAT_TITLE)}</span>
           </div>
           <div class="header-right">
             <button id="clear-history" class="icon-button" title="Clear History">
@@ -139,7 +152,7 @@
         </div>
         <div id="chat-messages"></div>
         <div id="chat-input">
-          <input type="text" id="message-input" placeholder="Ask anything about Cairo...">
+          <input type="text" id="message-input" placeholder="${this.escapeHtml(CONFIG.CHAT_PLACEHOLDER)}">
           <button id="send-message" class="icon-button" title="Send Message">
             <svg viewBox="0 0 24 24" width="20" height="20">
               <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
@@ -486,6 +499,12 @@
       const message = input.value.trim();
 
       if (message) {
+        // remove disclaimer if it exists
+        const disclaimerElement = document.querySelector(".message-disclaimer");
+        if (disclaimerElement) {
+          disclaimerElement.remove();
+        }
+
         if (this.chatSocket.readyState === WebSocket.OPEN) {
           // Connection is open, send message normally
           input.value = "";
@@ -581,6 +600,9 @@
         chatMessages.innerHTML = "";
       }
       this.chatId = this.generateUniqueId();
+      localStorage.removeItem("chatHistory");
+      localStorage.removeItem("chatId");
+      this.showDisclaimerIfEmpty();
     }
 
     /**
@@ -599,20 +621,76 @@
     loadChatHistory() {
       const savedHistory = localStorage.getItem("chatHistory");
       const savedChatId = localStorage.getItem("chatId");
+      const chatMessages = document.getElementById("chat-messages");
+      chatMessages.innerHTML = "";
 
-      if (savedHistory) {
-        this.messageHistory = JSON.parse(savedHistory);
+      let parsedHistory = null;
+      try {
+        parsedHistory = savedHistory ? JSON.parse(savedHistory) : null;
+      } catch (e) {
+        console.error("Error parsing chat history:", e);
+        localStorage.removeItem("chatHistory");
+      }
+
+      if (parsedHistory && parsedHistory.length > 0) {
+        this.messageHistory = parsedHistory;
         this.chatId = savedChatId || this.generateUniqueId();
 
-        const chatMessages = document.getElementById("chat-messages");
-        chatMessages.innerHTML = "";
         this.messageHistory.forEach(([role, content]) => {
-          this.appendMessage(role === "human" ? "user" : "ai", content);
+          const messageElement = this.createMessageElement(
+            role === "human" ? "user" : "ai",
+            content,
+          );
+          chatMessages.appendChild(messageElement);
         });
       } else {
         this.messageHistory = [];
         this.chatId = this.generateUniqueId();
       }
+
+      this.showDisclaimerIfEmpty();
+      this.scrollToBottom();
+    }
+
+    /**
+     * Checks if message history is empty and shows the disclaimer message if it is.
+     */
+    showDisclaimerIfEmpty() {
+      if (this.messageHistory.length === 0) {
+        const chatMessages = document.getElementById("chat-messages");
+        if (chatMessages) {
+          const disclaimerElement = document.createElement("div");
+          disclaimerElement.className = "message-disclaimer";
+          disclaimerElement.innerHTML = CONFIG.CHAT_DISCLAIMER;
+          chatMessages.prepend(disclaimerElement);
+          this.scrollToBottom();
+        }
+      }
+    }
+
+    /**
+     * Helper function to create a message element (user or AI).
+     * Does NOT append to DOM or save history.
+     * @param {string} role - 'user' or 'ai'
+     * @param {string} content - The message content
+     * @param {string|null} messageId - Optional message ID
+     * @returns {HTMLElement} The created message element
+     */
+    createMessageElement(role, content, messageId = null) {
+      const messageElement = document.createElement("div");
+      messageElement.className = `message ${role}`;
+      if (messageId) {
+        messageElement.id = `message-${messageId}`;
+      }
+
+      const contentElement = document.createElement("div");
+      contentElement.className = "content";
+      contentElement.innerHTML =
+        role === "ai"
+          ? this.processMarkdown(content)
+          : this.escapeHtml(content);
+      messageElement.appendChild(contentElement);
+      return messageElement;
     }
   }
 
