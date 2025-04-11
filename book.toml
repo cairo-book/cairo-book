@@ -1,7 +1,6 @@
 [book]
 authors = ["Starknet community, with support from Starkware and Voyager"]
 language = "en"
-multilingual = false
 src = "src"
 title = "The Cairo Programming Language"
 description = "The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet."
