@@ -15,8 +15,7 @@ fn find_value_iterative(mut arr: Span<felt252>, value: felt252) -> Option<usize>
 
     while let Some(array_value) = arr.pop_front() {
         if (*array_value == value) {
-            result = Some(index);
-            break;
+            return Some(index);
         }
 
         index += 1;
