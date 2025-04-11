@@ -94,7 +94,40 @@ Associated implementations allow you to declare that a trait implementation must
 To understand the utility of associated implementations, let's examine the `Iterator` and `IntoIterator` traits from the Cairo core library, with their respective implementations using `ArrayIter<T>` as the collection type:
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch12-advanced-features/listing_12_associated_impls/src/lib.cairo:associated_impls}}
+// Collection type that contains a simple array
+#[derive(Drop)]
+pub struct ArrayIter<T> {
+    array: Array<T>,
+}
+
+// T is the collection type
+pub trait Iterator<T> {
+    type Item;
+    fn next(ref self: T) -> Option<Self::Item>;
+}
+
+impl ArrayIterator<T> of Iterator<ArrayIter<T>> {
+    type Item = T;
+    fn next(ref self: ArrayIter<T>) -> Option<T> {
+        self.array.pop_front()
+    }
+}
+
+/// Turns a collection of values into an iterator
+pub trait IntoIterator<T> {
+    /// The iterator type that will be created
+    type IntoIter;
+    impl Iterator: Iterator<Self::IntoIter>;
+
+    fn into_iter(self: T) -> Self::IntoIter;
+}
+
+impl ArrayIntoIterator<T> of IntoIterator<Array<T>> {
+    type IntoIter = ArrayIter<T>;
+    fn into_iter(self: Array<T>) -> ArrayIter<T> {
+        ArrayIter { array: self }
+    }
+}
 ```
 
 1. The `IntoIterator` trait is designed to convert a collection into an iterator.

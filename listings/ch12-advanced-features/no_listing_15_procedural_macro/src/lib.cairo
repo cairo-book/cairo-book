@@ -26,10 +26,8 @@ struct OldType {}
 // ANCHOR_END: old_trait
 
 // ANCHOR: hello_trait
-#[derive(Drop, Destruct)]
 trait Hello<T> {
     fn hello(self: @T);
 }
 // ANCHOR_END: hello_trait
-
 
