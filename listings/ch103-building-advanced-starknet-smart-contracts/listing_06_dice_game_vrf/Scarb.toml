@@ -8,7 +8,7 @@ edition = "2024_07"
 [dependencies]
 pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib", rev = "c4cdeaafbec19d99d740df61afc0301d78975204" }
 openzeppelin = "0.20.0"
-starknet = ">=2.10.1"
+starknet = ">=2.11.4"
 
 [[target.starknet-contract]]
 casm = true

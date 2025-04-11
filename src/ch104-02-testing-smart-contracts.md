@@ -20,7 +20,7 @@ The settings of your Scarb project can be configured in the `Scarb.toml` file. T
 
 ```toml,noplayground
 [dev-dependencies]
-snforge_std = "0.38.0"
+snforge_std = "0.39.0"
 
 [scripts]
 test = "snforge test"

@@ -8,7 +8,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-snforge_std = "0.38.0"
-assert_macros = "2.10.1"
+snforge_std = "0.39.0"
+assert_macros = "2.11.4"
 [scripts]
 test = "snforge test"
