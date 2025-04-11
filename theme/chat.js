@@ -563,10 +563,6 @@
     attemptReconnect() {
       this.reconnectAttempts++;
       if (this.reconnectAttempts <= CONFIG.MAX_RECONNECT_ATTEMPTS) {
-        this.showToast(
-          "Connection lost. Attempting to reconnect...",
-          "warning",
-        );
         console.log(`Reconnect attempt ${this.reconnectAttempts}`);
         const delay = Math.min(1000 * 2 ** this.reconnectAttempts, 30000);
         setTimeout(() => this.connectWebSocket(), delay);
