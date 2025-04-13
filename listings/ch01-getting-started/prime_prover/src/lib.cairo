@@ -19,18 +19,15 @@ fn is_prime(n: u32) -> bool {
         return false;
     }
     let mut i = 3;
-    let mut is_prime = true;
     loop {
         if i * i > n {
-            break;
+            return true;
         }
         if n % i == 0 {
-            is_prime = false;
-            break;
+            return false;
         }
         i += 2;
     }
-    is_prime
 }
 
 // Executable entry point
