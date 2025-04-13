@@ -1,5 +1,3 @@
-English | [简体中文](translations/README-cn.md)
-
 <div align="center">
 <!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
 
@@ -49,9 +47,9 @@ cargo install --git https://github.com/enitrat/mdbook-cairo
 
 Read the [CONTRIBUTING.md](./docs/CONTRIBUTING.md) file for more details on the style guide and guidelines for contributions to the book.
 
-### Work locally (english, main language)
+### Work locally
 
-All the Markdown files **MUST** be edited in english. To work locally in english:
+All the Markdown files **MUST** be edited in english. To work locally:
 
 - Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
   You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
@@ -59,32 +57,6 @@ All the Markdown files **MUST** be edited in english. To work locally in english
 - Make changes to the book and refresh the browser to see the changes.
 
 - Open a PR with your changes.
-
-### Work locally (translations)
-
-This book is targeting international audience, and aims at being gradually translated in several languages.
-
-**All files in the `src` directory MUST be written in english**. This ensures that all the translation files can be
-auto-generated and updated by translators.
-
-To work with translations, these are the steps to update the translated content:
-
-- Run a local server for the language you want to edit: `./translations.sh es` for instance. If no language is provided, the script will only extract translations from english.
-
-- Open the translation file you are interested in `po/es.po` for instance. You can also use editors like [poedit](https://poedit.net/) to help you on this task.
-
-- When you are done, you should only have changes into the `po/xx.po` file. Commit them and open a PR.
-  The PR must start with `i18n` to let the maintainers know that the PR is only changing translation.
-
-The translation work is inspired from [Comprehensive Rust repository](https://github.com/google/comprehensive-rust/blob/main/TRANSLATIONS.md).
-
-#### Initiate a new translation for your language
-
-If you wish to initiate a new translation for your language without running a local server, consider the following tips:
-
-- Execute the command `./translations.sh new xx` (replace `xx` with your language code). This method can generate the `xx.po` file of your language for you.
-- To update your `xx.po` file, execute the command `./translations.sh xx` (replace `xx` with your language code), as mentioned in the previous chapter.
-- If the `xx.po` file already exists (which means you are not initiating a new translation), you should not run this command.
 
 ### Verifying your Cairo Programs
 
