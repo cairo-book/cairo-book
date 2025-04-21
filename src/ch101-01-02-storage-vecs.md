@@ -17,10 +17,10 @@ To declare a Storage Vector, use the `Vec` type enclosed in angle brackets `<>`,
 {{#label storage-vecs}}
 <span class="caption">Listing {{#ref storage-vecs}}: Declaring a storage `Vec` in the Storage struct</span>
 
-To add an element to a `Vec`, you use the `append` method to get a storage pointer to the next available slot, and then call the `write` function on it with the value to add.
+To add an element to a `Vec`, you can use the `push` method to add an element to the end of the `Vec`.
 
 ```cairo, noplayground
-{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:append}}
+{{#rustdoc_include ../listings/ch101-building-starknet-smart-contracts/listing_storage_vecs/src/lib.cairo:push}}
 ```
 
 To retrieve an element, you can use the `at` or `get` methods to get a storage pointer to the element at the specified index, and then call the `read` method to get the value. If the index is out of bounds, the `at` method panics, while the `get` method returns `None`.
@@ -52,7 +52,7 @@ The address in storage of a variable stored in a `Vec` is computed according to 
 ## Summary
 
 - Use the `Vec` type to store collections of values in contract storage
-- Access Vecs using the `append` method to add elements, and the `at` or `get` methods to read elements
+- Access Vecs using the `push` method to add elements, and the `at` or `get` methods to read elements
 - The address of a `Vec` variable is computed using the `sn_keccak` and the Pedersen hash functions
 
 This wraps up our tour of the Contract Storage! In the next section, we'll start looking at the different kind of functions defined in a contract. You already know most of them, as we used them in the previous chapters, but we'll explain them in more detail.

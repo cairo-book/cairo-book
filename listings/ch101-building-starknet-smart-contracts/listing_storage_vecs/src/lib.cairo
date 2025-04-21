@@ -24,12 +24,12 @@ mod AddressList {
     //ANCHOR_END: storage_vecs
 
     impl AddressListImpl of super::IAddressList<ContractState> {
-        //ANCHOR: append
+        //ANCHOR: push
         fn register_caller(ref self: ContractState) {
             let caller = get_caller_address();
-            self.addresses.append().write(caller);
+            self.addresses.push(caller);
         }
-        //ANCHOR_END: append
+        //ANCHOR_END: push
 
         //ANCHOR: read
         fn get_n_th_registered_address(
