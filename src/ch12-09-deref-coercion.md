@@ -2,8 +2,6 @@
 
 Deref coercion simplifies the way we interact with nested or wrapped data structures by allowing an instance of one type to behave like an instance of another type. This mechanism is enabled by implementing the `Deref` trait, which allows implicit conversion (or coercion) to a different type, providing direct access to the underlying data.
 
-> Note: For now, deref coercion allows you to access a member of a type `T` as if it was a type `K`, but will not allow you to call functions whose `self` argument is of the original type when holding an instance of the coerced type.
-
 Deref coercion is implemented via the `Deref` and `DerefMut` traits. When a type `T` implements `Deref` or `DerefMut` to type `K`, instances of `T` can access the members of `K` directly.
 
 The `Deref` trait in Cairo is defined as follows:
@@ -64,7 +62,16 @@ For the above code to work, we need to define `wrapped_profile` as a mutable var
 {{#rustdoc_include ../listings/ch12-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:example}}
 ```
 
+## Calling Methods via Deref Coercion
+
+In addition to accessing members, deref coercion also allows calling methods defined on the target type directly on the source type instance. Let's illustrate this with an example:
+
+```cairo
+{{#rustdoc_include ../listings/ch12-advanced-features/no_listing_09_deref_fn_arg/src/lib.cairo}}
+```
+
+In this example, `MySource` implements `Deref` to `MyTarget`. The `MyTarget` struct has an implementation `TargetImpl` of the trait `TargetTrait` which defines a method `foo`. Because `MySource` dereferences to `MyTarget`, we can call the `foo` method directly on an instance of `MySource`, as demonstrated in the `main` function.
+
 ## Summary
 
-By using the `Deref` and `DerefMut` traits, we can transparently convert one type into another, simplifying the access to nested or wrapped data structures. This feature is particularly useful when working with generic types or building abstractions that require seamless access to the underlying data and can help reduce boilerplate code.
-However, this functionality is quite limited, as you cannot call functions whose `self` argument is of the original type when holding an instance of the coerced type.
+By using the `Deref` and `DerefMut` traits, we can transparently convert one type into another, simplifying the access to nested or wrapped data structures and enabling method calls defined on the target type. This feature is particularly useful when working with generic types or building abstractions that require easy access to the underlying data and can help reduce boilerplate code.
