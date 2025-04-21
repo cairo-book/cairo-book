@@ -6,8 +6,8 @@ trait IValueStore<TContractState> {
 
 #[starknet::contract]
 mod ValueStoreLogic {
-    use core::starknet::{ContractAddress};
-    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::{ContractAddress};
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
     struct Storage {
@@ -29,8 +29,8 @@ mod ValueStoreLogic {
 #[starknet::contract]
 mod ValueStoreExecutor {
     use super::{IValueStoreDispatcherTrait, IValueStoreLibraryDispatcher};
-    use core::starknet::{ContractAddress, ClassHash};
-    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::{ContractAddress, ClassHash};
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
     struct Storage {

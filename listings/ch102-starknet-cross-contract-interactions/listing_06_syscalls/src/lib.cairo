@@ -1,4 +1,4 @@
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::interface]
 trait ITokenWrapper<TContractState> {
@@ -13,7 +13,7 @@ trait ITokenWrapper<TContractState> {
 #[starknet::contract]
 mod TokenWrapper {
     use super::ITokenWrapper;
-    use core::starknet::{ContractAddress, syscalls, SyscallResultTrait, get_caller_address};
+    use starknet::{ContractAddress, syscalls, SyscallResultTrait, get_caller_address};
 
     #[storage]
     struct Storage {}

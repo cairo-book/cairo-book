@@ -1,4 +1,4 @@
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 //ANCHOR:price_interface
 #[starknet::interface]
@@ -11,15 +11,15 @@ pub trait IPriceFeedExample<TContractState> {
 //ANCHOR: here
 #[starknet::contract]
 mod PriceFeedExample {
-    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
     use super::{ContractAddress, IPriceFeedExample};
     //ANCHOR: pragma_lib
     use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
     use pragma_lib::types::{DataType, PragmaPricesResponse};
     //ANCHOR_END: pragma_lib
     use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
-    use core::starknet::contract_address::contract_address_const;
-    use core::starknet::get_caller_address;
+    use starknet::contract_address::contract_address_const;
+    use starknet::get_caller_address;
 
     const ETH_USD: felt252 = 19514442401534788;
     const EIGHT_DECIMAL_FACTOR: u256 = 100000000;

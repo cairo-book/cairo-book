@@ -1,5 +1,5 @@
 /// Core Library Imports for the Traits outside the Starknet Contract
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 /// Trait defining the functions that can be implemented or called by the Starknet Contract
 #[starknet::interface]
@@ -17,9 +17,9 @@ trait VoteTrait<T> {
 /// Starknet Contract allowing three registered voters to vote on a proposal
 #[starknet::contract]
 mod Vote {
-    use core::starknet::ContractAddress;
-    use core::starknet::get_caller_address;
-    use core::starknet::storage::{
+    use starknet::ContractAddress;
+    use starknet::get_caller_address;
+    use starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
         StorageMapWriteAccess, Map,
     };

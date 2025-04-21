@@ -1,5 +1,5 @@
 //ANCHOR: all
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::interface]
 pub trait INameRegistry<TContractState> {
@@ -9,8 +9,8 @@ pub trait INameRegistry<TContractState> {
 
 #[starknet::contract]
 mod NameRegistry {
-    use core::starknet::{ContractAddress, get_caller_address};
-    use core::starknet::storage::{
+    use starknet::{ContractAddress, get_caller_address};
+    use starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
 

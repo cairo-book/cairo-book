@@ -1,4 +1,4 @@
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::interface]
 trait IAddressList<TState> {
@@ -14,7 +14,7 @@ mod AddressList {
     use starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, Vec, VecTrait, MutableVecTrait,
     };
-    use core::starknet::{get_caller_address, ContractAddress};
+    use starknet::{get_caller_address, ContractAddress};
 
     //ANCHOR: storage_vecs
     #[storage]

@@ -1,7 +1,7 @@
 #[starknet::contract]
 mod ValueStore {
-    use core::starknet::{ClassHash, syscalls, SyscallResultTrait};
-    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::{ClassHash, syscalls, SyscallResultTrait};
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
     struct Storage {

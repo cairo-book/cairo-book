@@ -2,7 +2,7 @@
 #[starknet::contract]
 mod OwnableCounter {
     use listing_03_component_dep::owner::ownable_component;
-    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     component!(path: ownable_component, storage: ownable, event: OwnableEvent);
 

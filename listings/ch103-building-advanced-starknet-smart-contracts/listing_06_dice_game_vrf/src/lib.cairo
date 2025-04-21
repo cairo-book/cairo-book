@@ -1,5 +1,5 @@
 //ANCHOR: interfaces
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::interface]
 pub trait IPragmaVRF<TContractState> {
@@ -35,10 +35,10 @@ pub trait IDiceGame<TContractState> {
 //ANCHOR: dice_game
 #[starknet::contract]
 mod DiceGame {
-    use core::starknet::storage::{
+    use starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
-    use core::starknet::{
+    use starknet::{
         ContractAddress, contract_address_const, get_block_number, get_caller_address,
         get_contract_address,
     };
