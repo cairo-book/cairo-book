@@ -1,4 +1,4 @@
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::interface]
 trait IWarehouseContract<TState> {
@@ -12,7 +12,7 @@ mod WarehouseContract {
     use starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, StoragePathEntry, Map,
     };
-    use core::starknet::{ContractAddress, get_caller_address};
+    use starknet::{ContractAddress, get_caller_address};
 
     // ANCHOR: storage
     #[storage]

@@ -10,7 +10,7 @@ trait ISimpleStorage<TContractState> {
 
 #[starknet::contract]
 mod SimpleStorage {
-    use core::starknet::storage::StoragePointerReadAccess;
+    use starknet::storage::StoragePointerReadAccess;
 
     #[storage]
     struct Storage {

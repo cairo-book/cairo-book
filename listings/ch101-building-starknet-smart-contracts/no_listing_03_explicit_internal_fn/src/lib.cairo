@@ -1,10 +1,10 @@
 //ANCHOR: all
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::contract]
 mod NameRegistry {
-    use core::starknet::{ContractAddress, get_caller_address};
-    use core::starknet::storage::{
+    use starknet::{ContractAddress, get_caller_address};
+    use starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
         StorageMapWriteAccess, Map,
     };

@@ -1,4 +1,4 @@
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::interface]
 trait IERC20<TContractState> {
@@ -43,7 +43,7 @@ mod TokenWrapper {
     use super::{IERC20Dispatcher, IERC20DispatcherTrait};
     //ANCHOR_END: import
     use super::ITokenWrapper;
-    use core::starknet::{get_caller_address, ContractAddress};
+    use starknet::{get_caller_address, ContractAddress};
 
     #[storage]
     struct Storage {}

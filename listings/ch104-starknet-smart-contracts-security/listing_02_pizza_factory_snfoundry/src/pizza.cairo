@@ -1,4 +1,4 @@
-use core::starknet::ContractAddress;
+use starknet::ContractAddress;
 
 #[starknet::interface]
 pub trait IPizzaFactory<TContractState> {
@@ -13,8 +13,8 @@ pub trait IPizzaFactory<TContractState> {
 #[starknet::contract]
 pub mod PizzaFactory {
     use super::IPizzaFactory;
-    use core::starknet::{ContractAddress, get_caller_address};
-    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::{ContractAddress, get_caller_address};
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
     pub struct Storage {

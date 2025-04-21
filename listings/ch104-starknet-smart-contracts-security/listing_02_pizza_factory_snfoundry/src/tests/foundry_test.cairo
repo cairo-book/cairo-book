@@ -6,8 +6,8 @@ use crate::pizza::{
 use crate::pizza::PizzaFactory::{InternalTrait};
 //ANCHOR_END: import_internal
 
-use core::starknet::{ContractAddress, contract_address_const};
-use core::starknet::storage::StoragePointerReadAccess;
+use starknet::{ContractAddress, contract_address_const};
+use starknet::storage::StoragePointerReadAccess;
 
 use snforge_std::{
     declare, ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,

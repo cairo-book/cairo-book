@@ -1,11 +1,11 @@
 #[starknet::contract]
 mod access_control_contract {
-    use core::starknet::storage::{
+    use starknet::storage::{
         StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
         StorageMapWriteAccess, Map,
     };
-    use core::starknet::ContractAddress;
-    use core::starknet::get_caller_address;
+    use starknet::ContractAddress;
+    use starknet::get_caller_address;
 
     trait IContract<TContractState> {
         fn is_owner(self: @TContractState) -> bool;

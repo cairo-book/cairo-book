@@ -37,9 +37,9 @@ trait IContractL1<T> {
 #[starknet::contract]
 mod contract_msg {
     use super::{IContractL1, MyData};
-    use core::starknet::{EthAddress, SyscallResultTrait, syscalls};
+    use starknet::{EthAddress, SyscallResultTrait, syscalls};
     use core::num::traits::Zero;
-    use core::starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
     struct Storage {
