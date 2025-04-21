@@ -46,10 +46,10 @@ jobs:
           asdf_version: 0.16.7
 
       - name: Set default scarb version # First version in .tool-versions
-        run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
+        run: asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Set default starknet-foundry version
-        run: asdf global starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
+        run: asdf set -u starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
 
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2

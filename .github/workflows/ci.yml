@@ -48,7 +48,7 @@ jobs:
           asdf_version: 0.16.7
 
       - name: Set default scarb version
-        run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
+        run: asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Setup Starknet-Foundry
         uses: foundry-rs/setup-snfoundry@v3
