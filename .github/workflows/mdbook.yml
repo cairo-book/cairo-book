@@ -41,7 +41,9 @@ jobs:
           version: 9
 
       - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
-        uses: asdf-vm/actions/install@v3
+        uses: asdf-vm/actions/setup@9cd779f40fe38688dd19505ccbc4eaaf018b44e7
+        with:
+          asdf_version: 0.16.7
 
       - name: Set default scarb version # First version in .tool-versions
         run: asdf global scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
