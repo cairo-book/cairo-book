@@ -15,8 +15,6 @@ These dispatchers serve different purposes:
 - Library dispatchers wrap a class hash and are used to call functions on classes. Library dispatchers will be discussed in the next chapter, ["Executing code from another class"][library dispatcher].
 - _'Safe'_ dispatchers allow the caller to handle potential errors during the execution of the call.
 
-> Note: As of Starknet 0.13.2, error handling in contract calls is not yet available. This means that if a contract call fails, the entire transaction will fail. This will change in the future, allowing safe dispatchers to be used on Starknet.
-
 Under the hood, these dispatchers use the low-level [`contract_call_syscall`][syscalls], which allows us to call functions on other contracts by passing the contract address, the function selector, and the function arguments. The dispatcher abstracts away the complexity of this syscall, providing a clean and type-safe way to interact with other contracts.
 
 To effectively break down the concepts involved, we will use the `ERC20` interface as an illustration.
@@ -57,6 +55,34 @@ In this contract, we import the `IERC20Dispatcher` struct and the `IERC20Dispatc
 
 Calling `transfer_token` external function will modify the state of the contract deployed at `contract_address`.
 
+## Handling Errors with Safe Dispatchers
+
+As mentioned earlier, 'Safe' dispatchers, like `IERC20SafeDispatcher`, allow the calling contract to gracefully handle potential errors that occur during the execution of the called function.
+
+When a function called via a safe dispatcher panics, the execution returns to the caller contract, and the safe dispatcher returns a `Result::Err` containing the panic reason. This allows developers to implement custom error handling logic within their contracts.
+
+Consider the following example using a hypothetical `IFailableContract` interface:
+
+```cairo,noplayground
+{{#include ../listings/ch102-starknet-cross-contract-interactions/listing_safe_dispatcher/src/lib.cairo}}
+```
+
+{{#label safe-dispatcher}}
+<span class="caption">Listing {{#ref safe-dispatcher}}: Handling errors using a Safe Dispatcher</span>
+
+In this code, we first obtain an instance of `IFailableContractSafeDispatcher` for the target contract address. Calling the `can_fail()` function using this safe dispatcher returns a `Result<u32, Array<felt252>>`, which encapsulates either the successful `u32` result or the failure information. We can then properly handle this result, as seen in [Chapter {{#chap error-handling}}: Error Handling][error-handling].
+
+> It's important to note that some scenarios still lead to an immediate transaction revert, meaning the error cannot be caught by the caller using a safe dispatcher. These include:
+>
+> - Failure in a Cairo Zero contract call.
+> - Library call with a non-existent class hash.
+> - Contract call to a non-existent contract address.
+> - Failure within the `deploy` syscall (e.g., panic in the constructor, deploying to an existing address).
+> - Using the `deploy` syscall with a non-existent class hash.
+> - Using the `replace_class` syscall with a non-existent class hash.
+>
+> These cases are expected to be handled in future Starknet versions.
+
 ## Calling Contracts using Low-Level Calls
 
 Another way to call other contracts is to directly use the `call_contract_syscall`. While less convenient than using the dispatcher pattern, this syscall provides more control over the serialization and deserialization process and allows for more customized error handling.
@@ -72,3 +98,5 @@ Listing {{#ref syscalls}} shows an example demonstrating how to call the `transf
 
 To use this syscall, we passed in the contract address, the selector of the function we want to call and the call arguments.
 The call arguments must be provided as an array of arguments, serialized to a `Span<felt252>`. To serialize the arguments, we can simply use the `Serde` trait, provided that the types being serialized implement this trait. The call returns an array of serialized values, which we'll need to deserialize ourselves!
+
+[error-handling]: ./ch09-00-error-handling.md
