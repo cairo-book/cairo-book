@@ -7,7 +7,7 @@ runs:
       shell: bash
       run: |
         mkdir -p "${HOME}/.cargo/bin"
-        curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory="${HOME}/.cargo/bin"
+        curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.48/mdbook-v0.4.48-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory="${HOME}/.cargo/bin"
         echo "${HOME}/.cargo/bin" >> ${GITHUB_PATH}
 
     - name: Install mdbook-i18n-helpers
@@ -41,7 +41,6 @@ runs:
       shell: bash
       run: |
         git clone https://github.com/cairo-book/mdbook-quiz-cairo
-        cd mdbook-quiz-cairo
 
     - name: Initialize bindings
       shell: bash
