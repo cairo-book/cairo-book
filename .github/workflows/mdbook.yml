@@ -40,8 +40,8 @@ jobs:
         with:
           version: 9
 
-      - name: Install asdf & tools # For multiple versions of scarb - reads from .tool-versions and installs them
-        uses: asdf-vm/actions/setup@9cd779f40fe38688dd19505ccbc4eaaf018b44e7
+      - name: Install asdf & tools
+        uses: asdf-vm/actions/install@9cd779f40fe38688dd19505ccbc4eaaf018b44e7
         with:
           asdf_version: 0.16.7
 
