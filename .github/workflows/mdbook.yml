@@ -73,6 +73,11 @@ jobs:
       - name: Copy LLMs file
         run: cp llms.txt book/html/
 
+      - name: Combine Markdown Files for LLMs-full.txt
+        run: |
+          chmod +x scripts/combine-markdown.sh
+          scripts/combine-markdown.sh
+
       - name: Build all translations
         run: |
           for po_lang in $(cat ./LANGUAGES); do
