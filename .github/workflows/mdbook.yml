@@ -99,3 +99,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Combine Markdown Files for LLMs
+        run: |
+          chmod +x scripts/combine-markdown.sh
+          scripts/combine-markdown.sh
