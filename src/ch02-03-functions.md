@@ -241,7 +241,7 @@ Declaring a function as `const` restricts the types that arguments and the retur
 
 Several functions in the core library are marked as `const`. Here's an example from the core library showing the `pow` function implemented as a `const fn`:
 
-```cairo, noplayground
+```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_const_fn/src/lib.cairo}}
 ```
 
