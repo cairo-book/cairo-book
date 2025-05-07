@@ -1,6 +1,11 @@
 $ scarb verify --execution-id 1
-   Verifying prime_prover
-error: proof file does not exist at path: /Users/msaug/workspace/cairo-book/listings/ch01-getting-started/prime_prover2/target/execute/prime_prover/execution1/proof/proof.json
-help: run `scarb prove --execution-id=1` first
+error: failed to parse manifest at: /Users/msaug/workspace/cairo-book/listings/ch01-getting-started/prime_prover2/Scarb.toml
 
+Caused by:
+    TOML parse error at line 11, column 1
+       |
+    11 | [cairo]
+       | ^
+    invalid table header
+    duplicate key `cairo` in document root
 

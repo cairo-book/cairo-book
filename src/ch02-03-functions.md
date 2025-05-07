@@ -80,7 +80,7 @@ parameters. The first parameter is named `value` and is a `u128`. The second is
 named `unit_label` and is of type `ByteArray` - Cairo's internal type to represent string literals. The function then prints text containing both the `value` and the `unit_label`.
 
 Let’s try running this code. Replace the program currently in your _functions_
-project’s _src/lib.cairo_ file with the preceding example and run it using `scarb cairo-run`:
+project’s _src/lib.cairo_ file with the preceding example and run it using `scarb execute`:
 
 ```shell
 {{#include ../listings/ch02-common-programming-concepts/no_listing_17_multiple_params/output.txt}}

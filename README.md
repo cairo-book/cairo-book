@@ -94,7 +94,7 @@ For a Starknet contract:
 
 Cairo program:
 
-- If it has a `main` function: `scarb cairo-run --available-gas=200000000`
+- If it has a `main` function: `scarb execute --available-gas=200000000`
 - Else, `scarb build`
 - If it has tests: `scarb test`
 - `scarb fmt -c`
@@ -109,7 +109,7 @@ To specify which tests to run, you can add a comment at the top of your file wit
 Here is a list of available tags:
 
 - `does_not_compile`: don't run `scarb build`
-- `does_not_run`: don't run `scarb cairo-run --available-gas=200000000`
+- `does_not_run`: don't run `scarb execute --available-gas=200000000`
 - `ignore_fmt`: don't run `scarb fmt`
 - `tests_fail`: don't run `scarb test`
 
