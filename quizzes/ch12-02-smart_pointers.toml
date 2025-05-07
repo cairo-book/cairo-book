@@ -46,7 +46,7 @@ id = "8d7ac906-4579-4d47-8345-4ec30a5f41f3"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-Which of the following statement is TRUE when the following program is run with `scarb cairo-run`?
+Which of the following statement is TRUE when the following program is run with `scarb execute`?
 ```
 use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
 

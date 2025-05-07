@@ -1,9 +1,11 @@
 $ scarb execute -p prime_prover --print-program-output --arguments 17
-   Compiling prime_prover v0.1.0 (listings/ch01-getting-started/prime_prover/Scarb.toml)
-    Finished `dev` profile target(s) in 2 seconds
-   Executing prime_prover
-Program output:
-0
-1
-Saving output to: target/execute/prime_prover/execution2
+error: failed to parse manifest at: /Users/msaug/workspace/cairo-book/listings/ch01-getting-started/prime_prover/Scarb.toml
+
+Caused by:
+    TOML parse error at line 11, column 1
+       |
+    11 | [cairo]
+       | ^
+    invalid table header
+    duplicate key `cairo` in document root
 
