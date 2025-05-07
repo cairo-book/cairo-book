@@ -1,4 +1,11 @@
 $ scarb verify --execution-id 1
-   Verifying prime_prover
-    Verified proof successfully
+error: failed to parse manifest at: /Users/msaug/workspace/cairo-book/listings/ch01-getting-started/prime_prover/Scarb.toml
+
+Caused by:
+    TOML parse error at line 11, column 1
+       |
+    11 | [cairo]
+       | ^
+    invalid table header
+    duplicate key `cairo` in document root
 

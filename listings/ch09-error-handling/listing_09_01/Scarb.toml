@@ -5,8 +5,13 @@ edition = "2024_07"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
+[executable]
+
+[cairo]
+enable-gas = false
+
 [dependencies]
-# foo = { path = "vendor/foo" }
+cairo_execute = "2.11.4"
 
 [dev-dependencies]
 cairo_test = "2.11.4"

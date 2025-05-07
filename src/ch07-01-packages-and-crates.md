@@ -51,8 +51,13 @@ name = "my_package"
 version = "0.1.0"
 edition = "2024_07"
 
+[executable]
+
+[cairo]
+enable-gas = false
+
 [dependencies]
-# foo = { path = "vendor/foo" }
+cairo_execute = "2.11.4"
 ```
 
 As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional _.cairo_ files within the _src_ directory or its subdirectories.

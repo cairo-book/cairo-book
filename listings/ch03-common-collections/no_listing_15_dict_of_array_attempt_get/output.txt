@@ -1,9 +1,9 @@
-$ scarb cairo-run 
+$ scarb execute 
    Compiling no_listing_15_dict_of_array_attempt_get v0.1.0 (listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/Scarb.toml)
 error: Trait has no implementation in context: core::traits::Copy::<core::nullable::Nullable::<core::array::Array::<core::integer::u8>>>.
  --> listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/src/lib.cairo:13:20
     let val = dict.get(0); // This will cause a compiler error
-                   ^*^
+                   ^^^
 
 error: could not compile `no_listing_15_dict_of_array_attempt_get` due to previous error
 error: `scarb metadata` exited with error

@@ -29,7 +29,7 @@ Let’s try changing the value of `number` to a value that makes the condition `
 ```
 
 ```shell
-$ scarb cairo-run
+$ scarb execute
 condition was true and number = 5
 Run completed successfully, returning []
 ```
@@ -113,7 +113,7 @@ As an example, change the _src/lib.cairo_ file in your _loops_ directory to look
 When we run this program, we’ll see `again!` printed over and over continuously until either the program runs out of gas or we stop the program manually. Most terminals support the keyboard shortcut ctrl-c to interrupt a program that is stuck in a continual loop. Give it a try:
 
 ```shell
-$ scarb cairo-run --available-gas=20000000
+$ scarb execute --available-gas=20000000
    Compiling loops v0.1.0 (file:///projects/loops)
     Finished release target(s) in 0 seconds
      Running loops

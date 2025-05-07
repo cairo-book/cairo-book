@@ -1,10 +1,6 @@
-$ scarb cairo-run 
-warn: `scarb cairo-run` will be deprecated soon
-help: use `scarb execute` instead
+$ scarb execute 
    Compiling no_listing_09_snapshots v0.1.0 (listings/ch04-understanding-ownership/no_listing_09_snapshots/Scarb.toml)
-    Finished `dev` profile target(s) in 2 seconds
-     Running no_listing_09_snapshots
-The area of the rectangle when the snapshot was taken is 30
-The current area of the rectangle is 50
-Run completed successfully, returning []
+error: Requested `#[executable]` not found.
+error: could not compile `no_listing_09_snapshots` due to previous error
+error: `scarb metadata` exited with error
 
