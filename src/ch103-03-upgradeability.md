@@ -37,6 +37,6 @@ OpenZeppelin Contracts for Cairo provides the `Upgradeable` component that can b
 {{#label upgradeable-contract}}
 <span class="caption">Listing {{#ref upgradeable-contract}} Integrating OpenZeppelin's Upgradeable component in a contract</span>
 
-For more information, please refer to the [OpenZeppelin docs API reference][oz upgradeability api].
+For more information, please refer to the [OpenZeppelin docs upgradeability guide][oz upgradeability docs].
 
-[oz upgradeability api]: https://docs.openzeppelin.com/contracts-cairo/0.19.0/api/upgrades
+[oz upgradeability docs]: https://docs.openzeppelin.com/contracts-cairo/1.0.0/guides/upgrades
