@@ -73,10 +73,14 @@ jobs:
       - name: Copy LLMs file
         run: cp llms.txt book/html/
 
-      - name: Combine Markdown Files for LLMs-full.txt
-        run: |
-          chmod +x scripts/combine-markdown.sh
-          scripts/combine-markdown.sh
+      # Disabled in favor of using the summary.md file
+      # - name: Combine Markdown Files for LLMs-full.txt
+      #   run: |
+      #     chmod +x scripts/combine-markdown.sh
+      #     scripts/combine-markdown.sh
+
+      - name: Copy summary.md to book/html/
+        run: cp summary.md book/html/llms-full.txt
 
       - name: Build all translations
         run: |
