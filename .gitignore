@@ -17,3 +17,5 @@ runner_crate/target
 *.snfoundry_cache
 
 CLAUDE.md
+
+.env
