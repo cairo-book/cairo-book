@@ -1,7 +1,6 @@
-$ scarb cairo-run 
+$ scarb execute 
    Compiling listing_04_05 v0.1.0 (listings/ch04-understanding-ownership/listing_05_mutable_reference/Scarb.toml)
-    Finished `dev` profile target(s) in 3 seconds
-     Running listing_04_05
-height: 10, width: 3
-Run completed successfully, returning []
+error: Requested `#[executable]` not found.
+error: could not compile `listing_04_05` due to previous error
+error: `scarb metadata` exited with error
 
