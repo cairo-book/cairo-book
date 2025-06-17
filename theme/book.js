@@ -103,6 +103,114 @@ function playground_text(playground, hidden = true) {
     }
   }
 
+  // WebSocket connection for Cairo code execution
+  let cairoWS = null;
+  let isRequestInProgress = false;
+  let currentRequestResolve = null;
+  let currentRequestReject = null;
+
+  function initCairoWebSocket() {
+    if (cairoWS && cairoWS.readyState === WebSocket.OPEN) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      cairoWS = new WebSocket("wss://api2.cairovm.codes/ws");
+
+      cairoWS.onopen = () => {
+        console.log("Cairo WebSocket connected");
+        resolve();
+      };
+
+      cairoWS.onmessage = (event) => {
+        try {
+          console.log("Cairo WebSocket message:", event.data);
+          const response = JSON.parse(event.data);
+
+          if (isRequestInProgress && currentRequestResolve) {
+            currentRequestResolve(response);
+            isRequestInProgress = false;
+            currentRequestResolve = null;
+            currentRequestReject = null;
+          }
+        } catch (error) {
+          console.error("Error parsing WebSocket response:", error);
+          if (isRequestInProgress && currentRequestReject) {
+            currentRequestReject(error);
+            isRequestInProgress = false;
+            currentRequestResolve = null;
+            currentRequestReject = null;
+          }
+        }
+      };
+
+      cairoWS.onerror = (error) => {
+        console.error("Cairo WebSocket error:", error);
+        if (isRequestInProgress && currentRequestReject) {
+          currentRequestReject(error);
+          isRequestInProgress = false;
+          currentRequestResolve = null;
+          currentRequestReject = null;
+        }
+        reject(error);
+      };
+
+      cairoWS.onclose = () => {
+        console.log("Cairo WebSocket disconnected");
+        cairoWS = null;
+        if (isRequestInProgress && currentRequestReject) {
+          currentRequestReject(new Error("WebSocket connection closed"));
+          isRequestInProgress = false;
+          currentRequestResolve = null;
+          currentRequestReject = null;
+        }
+      };
+    });
+  }
+
+  function executeCairoCode(code) {
+    return new Promise(async (resolve, reject) => {
+      // Reject if another request is already in progress
+      if (isRequestInProgress) {
+        reject(new Error("Another request is already in progress"));
+        return;
+      }
+
+      try {
+        await initCairoWebSocket();
+
+        isRequestInProgress = true;
+        currentRequestResolve = resolve;
+        currentRequestReject = reject;
+
+        const message = {
+          cairo_program_code: code,
+          program_arguments: "",
+          proof_required: false,
+          verification_required: false,
+        };
+
+        console.log("Sending message to Cairo WebSocket:", message);
+        cairoWS.send(JSON.stringify(message));
+
+        // Set timeout for request
+        setTimeout(() => {
+          if (isRequestInProgress) {
+            reject(new Error("Request timeout"));
+            isRequestInProgress = false;
+            currentRequestResolve = null;
+            currentRequestReject = null;
+          }
+        }, 10000); // 10 second timeout
+      } catch (error) {
+        isRequestInProgress = false;
+        currentRequestResolve = null;
+        currentRequestReject = null;
+        reject(error);
+      }
+    });
+  }
+
   function run_cairo_code(code_block) {
     var result_block = code_block.querySelector(".result");
     if (!result_block) {
@@ -115,43 +223,83 @@ function playground_text(playground, hidden = true) {
     let text = playground_text(code_block);
 
     result_block.innerText = "Running...";
-    // Only proceed if the text includes #[test]
+
+    // Clean up test code if present
     if (text.includes("#[test]")) {
       text = removeUnwantedLines(text);
-      window
-        .runTests(text)
-        .then((data) => {
-          if (data.trim() === "") {
-            result_block.innerText = "No output";
-            result_block.classList.add("result-no-output");
-          } else {
-            result_block.innerText = data;
-            result_block.classList.remove("result-no-output");
-          }
-        })
-        .catch(
-          (error) =>
-            (result_block.innerText =
-              "Playground Communication: " + error.message),
-        );
-    } else {
-      window
-        .runFunc(text)
-        .then((data) => {
-          if (data.trim() === "") {
-            result_block.innerText = "No output";
-            result_block.classList.add("result-no-output");
-          } else {
-            result_block.innerText = data;
-            result_block.classList.remove("result-no-output");
-          }
-        })
-        .catch(
-          (error) =>
-            (result_block.innerText =
-              "Playground Communication: " + error.message),
-        );
     }
+
+    executeCairoCode(text)
+      .then((response) => {
+        if (response.RunnerResult) {
+          const result = response.RunnerResult;
+
+          // Check for compilation or execution errors
+          if (
+            !result.is_compilation_successful ||
+            !result.is_execution_successful
+          ) {
+            let errorMsg = "";
+
+            // Check for compilation errors in logs
+            if (result.logs && result.logs.length > 0) {
+              const errorLogs = result.logs.filter(
+                (log) => log.log_type === "Error",
+              );
+              if (errorLogs.length > 0) {
+                errorMsg = errorLogs
+                  .map((log) => {
+                    // Sanitize the error message by removing the filename path
+                    return log.message.replace(
+                      /\/opt\/app\/[a-f0-9-]+\/main\.cairo/g,
+                      "main.cairo",
+                    );
+                  })
+                  .join("\n\n");
+              }
+            }
+
+            // Fallback to execution panic message or generic error
+            if (!errorMsg) {
+              errorMsg =
+                result.execution_panic_message ||
+                "Compilation or execution failed";
+            }
+
+            result_block.innerText = errorMsg;
+            result_block.classList.remove("result-no-output");
+            return;
+          }
+
+          // Combine output and stdout
+          let output = "";
+          if (
+            result.serialized_output &&
+            result.serialized_output.trim() !== ""
+          ) {
+            output += result.serialized_output;
+          }
+          if (result.stdout_captured && result.stdout_captured.trim() !== "") {
+            if (output) output += "\n";
+            output += result.stdout_captured;
+          }
+
+          if (output.trim() === "") {
+            result_block.innerText = "No output";
+            result_block.classList.add("result-no-output");
+          } else {
+            result_block.innerText = output;
+            result_block.classList.remove("result-no-output");
+          }
+        } else {
+          result_block.innerText = "Unexpected response format";
+          result_block.classList.remove("result-no-output");
+        }
+      })
+      .catch((error) => {
+        result_block.innerText = "Playground Communication: " + error.message;
+        result_block.classList.remove("result-no-output");
+      });
   }
 
   function removeUnwantedLines(text) {
