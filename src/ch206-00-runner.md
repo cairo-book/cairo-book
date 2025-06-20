@@ -2,7 +2,7 @@
 
 The Cairo Runner is the main executable program that orchestrates the execution of a compiled Cairo program. It is the practical implementation of the theoretical Cairo machine, bringing together the memory model, execution model, builtins, and hints.
 
-Its current implementation is written in Rust, developped by [LambdaClass](https://github.com/lambdaclass/cairo-vm) and it is available as a standalone binary, as well as a library.
+Its current implementation is written in Rust, developed by [LambdaClass](https://github.com/lambdaclass/cairo-vm) and it is available as a standalone binary, as well as a library.
 
 ## Runner Modes
 
