@@ -46,10 +46,10 @@ mod circle {
         }
     }
 }
-
-use rectangle::Rectangle;
 use circle::Circle;
+use rectangle::Rectangle;
 
+#[executable]
 fn main() {
     let rect = Rectangle { height: 5, width: 7 };
     println!("Rectangle area: {}", ShapeGeometry::area(rect)); //35

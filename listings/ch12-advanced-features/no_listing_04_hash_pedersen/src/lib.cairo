@@ -1,6 +1,6 @@
 //ANCHOR: import
+use core::hash::{HashStateExTrait, HashStateTrait};
 use core::pedersen::PedersenTrait;
-use core::hash::{HashStateTrait, HashStateExTrait};
 //ANCHOR_END: import
 
 //ANCHOR: structure
@@ -14,6 +14,7 @@ struct StructForHash {
 //ANCHOR_END: structure
 
 //ANCHOR: main
+#[executable]
 fn main() -> (felt252, felt252) {
     let struct_to_hash = StructForHash { first: 0, second: 1, third: (1, 2), last: false };
 

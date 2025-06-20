@@ -45,7 +45,7 @@ For example, if you want to print the value of a variable of type `Point`, you c
 ```
 
 ```shell
-scarb cairo-run
+scarb execute
 Point { x: 1, y: 3 }
 ```
 

@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     // ANCHOR: hello_example
     let a = SomeType {};

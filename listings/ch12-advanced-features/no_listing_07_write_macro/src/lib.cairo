@@ -1,5 +1,6 @@
 use core::fmt::Formatter;
 
+#[executable]
 fn main() {
     let mut formatter: Formatter = Default::default();
     let a = 10;

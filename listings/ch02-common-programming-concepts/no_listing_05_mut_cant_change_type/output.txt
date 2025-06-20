@@ -1,9 +1,9 @@
-$ scarb cairo-run 
+$ scarb execute 
    Compiling no_listing_05_mut_cant_change_type v0.1.0 (listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/Scarb.toml)
 error: Unexpected argument type. Expected: "core::integer::u64", found: "core::integer::u8".
- --> listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo:6:9
+ --> listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo:7:9
     x = 5_u8;
-        ^**^
+        ^^^^
 
 error: could not compile `no_listing_05_mut_cant_change_type` due to previous error
 error: `scarb metadata` exited with error

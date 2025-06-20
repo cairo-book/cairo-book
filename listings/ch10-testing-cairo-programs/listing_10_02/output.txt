@@ -1,9 +1,10 @@
 $ scarb test 
      Running test listing_10_02 (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.33s
+    Blocking waiting for file lock on registry db cache
+    Blocking waiting for file lock on registry db cache
    Compiling test(listings/ch10-testing-cairo-programs/listing_10_02/Scarb.toml)
-    Finished `dev` profile target(s) in 4 seconds
+    Finished `dev` profile target(s) in 13 seconds
+[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/listing_10_02/target/dev/listing_10_02_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 2 test(s) from listing_10_02 package
@@ -13,7 +14,7 @@ Running 2 test(s) from src/
 Failure data:
     "Make this test fail"
 
-[PASS] listing_10_02::tests::exploration (gas: ~1)
+[PASS] listing_10_02::tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Tests: 1 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
 
 Failures:

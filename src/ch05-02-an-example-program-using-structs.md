@@ -13,7 +13,7 @@ Let’s make a new project with Scarb called _rectangles_ that will take the wid
 {{#label area-fn}}
 <span class="caption">Listing {{#ref area-fn}}: Calculating the area of a rectangle specified by separate width and height variables.</span>
 
-Now run the program with `scarb cairo-run`:
+Now run the program with `scarb execute`:
 
 ```shell
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing_03_no_struct/output.txt}}

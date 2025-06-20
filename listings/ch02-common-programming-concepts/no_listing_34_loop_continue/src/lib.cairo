@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let mut i: usize = 0;
     loop {

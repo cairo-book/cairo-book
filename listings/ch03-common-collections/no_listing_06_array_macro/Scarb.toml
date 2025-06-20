@@ -5,5 +5,13 @@ edition = "2024_07"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
+[cairo]
+enable-gas = false
+
 [dependencies]
-# foo = { path = "vendor/foo" }
+cairo_execute = "2.11.4"
+
+
+[[target.executable]]
+name = "main"
+function = "no_listing_02_array_macro::main"

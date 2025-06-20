@@ -43,6 +43,7 @@ fn foo<T, U, +PackGeneric<T, U>>(self: T, other: T) -> U {
 // ANCHOR_END: foo
 
 // ANCHOR: main
+#[executable]
 fn main() {
     let a: u32 = 1;
     let b: u32 = 1;

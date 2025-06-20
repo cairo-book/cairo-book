@@ -1,18 +1,15 @@
-use crate::pizza::{
-    IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory,
-    PizzaFactory::{Event as PizzaEvents, PizzaEmission},
+use snforge_std::{
+    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+    start_cheat_caller_address, stop_cheat_caller_address,
 };
-//ANCHOR: import_internal
-use crate::pizza::PizzaFactory::{InternalTrait};
+use starknet::storage::StoragePointerReadAccess;
 //ANCHOR_END: import_internal
 
 use starknet::{ContractAddress, contract_address_const};
-use starknet::storage::StoragePointerReadAccess;
-
-use snforge_std::{
-    declare, ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
-    stop_cheat_caller_address, EventSpyAssertionsTrait, spy_events, load,
-};
+use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
+//ANCHOR: import_internal
+use crate::pizza::PizzaFactory::{InternalTrait};
+use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 
 fn owner() -> ContractAddress {
     contract_address_const::<'owner'>()

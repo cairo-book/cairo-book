@@ -3,6 +3,7 @@ struct Rectangle {
     height: u64,
 }
 
+#[executable]
 fn main() {
     let rectangle = Rectangle { width: 30, height: 10 };
     let area = area(rectangle);

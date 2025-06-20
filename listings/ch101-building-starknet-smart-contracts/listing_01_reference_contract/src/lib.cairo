@@ -9,15 +9,15 @@ pub trait INameRegistry<TContractState> {
 
 #[starknet::contract]
 mod NameRegistry {
-    use starknet::{ContractAddress, get_caller_address};
     use starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
+    use starknet::{ContractAddress, get_caller_address};
 
     //ANCHOR: storage
     #[storage]
     struct Storage {
-        names: Map::<ContractAddress, felt252>,
+        names: Map<ContractAddress, felt252>,
         total_names: u128,
     }
     //ANCHOR_END: storage

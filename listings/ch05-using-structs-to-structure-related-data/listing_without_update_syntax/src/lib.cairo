@@ -7,6 +7,7 @@ struct User {
 }
 
 // ANCHOR: here
+#[executable]
 fn main() {
     // --snip--
     // ANCHOR_END: here

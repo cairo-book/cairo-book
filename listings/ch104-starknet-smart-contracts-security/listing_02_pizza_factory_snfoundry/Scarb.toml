@@ -10,7 +10,7 @@ starknet = ">=2.11.4"
 
 
 [dev-dependencies]
-snforge_std = "0.39.0"
+snforge_std = "0.44.0"
 assert_macros = "2.11.4"
 
 
@@ -21,3 +21,6 @@ test = "snforge test"
 
 [tool.scarb]
 allow-prebuilt-plugins = ["snforge_std"]
+
+[cairo]
+enable-gas = true

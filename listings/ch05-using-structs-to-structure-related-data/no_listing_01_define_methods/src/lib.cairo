@@ -20,6 +20,7 @@ impl RectangleImpl of RectangleTrait {
 //ANCHOR_END: trait_implementation
 
 //ANCHOR: main
+#[executable]
 fn main() {
     let rect1 = Rectangle { width: 30, height: 50 };
     println!("Area is {}", rect1.area());

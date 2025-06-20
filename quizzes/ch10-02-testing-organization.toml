@@ -20,7 +20,7 @@ prompt.prompt = "How do you run integration tests in a Cairo project?"
 prompt.distractors = [
   "By running `scarb cairo-test`",
   "By running `scarb cairo-build` with a filter for the test",
-  "By running `scarb cairo-run`",
+  "By running `scarb execute`",
 ]
 answer.answer = "By running `scarb test` with a filter for the integration tests"
 context = """

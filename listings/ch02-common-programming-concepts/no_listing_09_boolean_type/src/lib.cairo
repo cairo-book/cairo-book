@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let t = true;
 

@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let mut number_list: Array<u8> = array![34, 50, 25, 100, 65];
 

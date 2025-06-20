@@ -4,3 +4,14 @@ version = "0.1.0"
 edition = "2024_07"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
+
+[dependencies]
+cairo_execute = "2.11.4"
+
+[cairo]
+enable-gas = false
+
+
+[[target.executable]]
+name = "main"
+function = "listing_12_associated_impls::main"

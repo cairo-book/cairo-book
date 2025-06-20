@@ -10,3 +10,6 @@ starknet = ">=2.11.4"
 
 [[target.starknet-contract]]
 casm = true
+
+[cairo]
+enable-gas = true

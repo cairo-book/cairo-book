@@ -36,6 +36,7 @@ fn custom_insert<T, +Felt252DictValue<T>, +Destruct<T>, +Drop<T>>(
 // ANCHOR_END: custom_insert
 
 // ANCHOR: main
+#[executable]
 fn main() {
     let mut dict: Felt252Dict<u64> = Default::default();
 

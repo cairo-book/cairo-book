@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let mut arr = array![1, 2, 3, 4, 5, 6, 7, 8, 9];
     let mut sum = 0;

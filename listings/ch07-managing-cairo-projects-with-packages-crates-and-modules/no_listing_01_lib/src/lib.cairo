@@ -3,6 +3,7 @@
 pub mod garden;
 use crate::garden::vegetables::Asparagus;
 
+#[executable]
 fn main() {
     let plant = Asparagus {};
     println!("I'm growing {:?}!", plant);

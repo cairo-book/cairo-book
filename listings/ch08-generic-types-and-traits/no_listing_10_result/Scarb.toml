@@ -5,5 +5,6 @@ edition = "2024_07"
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
+[cairo]
+
 [dependencies]
-# foo = { path = "vendor/foo" }

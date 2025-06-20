@@ -1,2 +1,2 @@
-mod integration_tests;
 mod common;
+mod integration_tests;

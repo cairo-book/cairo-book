@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     // ANCHOR: match
     let config_max = Some(5);

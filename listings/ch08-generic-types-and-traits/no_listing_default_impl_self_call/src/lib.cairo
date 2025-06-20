@@ -30,6 +30,7 @@ mod aggregator {
 //ANCHOR: main
 use aggregator::{Summary, Tweet};
 
+#[executable]
 fn main() {
     let tweet = Tweet {
         username: "EliBenSasson",

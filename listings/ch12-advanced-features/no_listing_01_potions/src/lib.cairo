@@ -9,6 +9,7 @@ impl PotionAdd of Add<Potion> {
     }
 }
 
+#[executable]
 fn main() {
     let health_potion: Potion = Potion { health: 100, mana: 0 };
     let mana_potion: Potion = Potion { health: 0, mana: 100 };

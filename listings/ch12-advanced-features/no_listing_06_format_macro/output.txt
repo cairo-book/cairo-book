@@ -1,17 +1,17 @@
-$ scarb cairo-run 
+$ scarb execute 
    Compiling no_listing_06_format_macro v0.1.0 (listings/ch12-advanced-features/no_listing_06_format_macro/Scarb.toml)
 warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch12-advanced-features/no_listing_06_format_macro/src/lib.cairo:5:9
+ --> listings/ch12-advanced-features/no_listing_06_format_macro/src/lib.cairo:6:9
     let s = s1 + "-" + s2 + "-" + s3;
         ^
 
 warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch12-advanced-features/no_listing_06_format_macro/src/lib.cairo:11:9
+ --> listings/ch12-advanced-features/no_listing_06_format_macro/src/lib.cairo:12:9
     let s = format!("{s1}-{s2}-{s3}"); // s1, s2, s3 are not consumed by format!
         ^
 
     Finished `dev` profile target(s) in 4 seconds
-     Running no_listing_06_format_macro
+   Executing no_listing_06_format_macro
 tic-tac-toe
-Run completed successfully, returning []
+
 

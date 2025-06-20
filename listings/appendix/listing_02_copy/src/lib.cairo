@@ -3,6 +3,7 @@ struct A {
     item: felt252,
 }
 
+#[executable]
 fn main() {
     let first_struct = A { item: 2 };
     let second_struct = first_struct;

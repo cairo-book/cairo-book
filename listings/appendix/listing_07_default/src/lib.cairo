@@ -12,6 +12,7 @@ enum CaseWithDefault {
     C: u64,
 }
 
+#[executable]
 fn main() {
     let defaulted: A = Default::default();
     assert!(defaulted.item1 == 0_felt252, "item1 mismatch");

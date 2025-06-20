@@ -40,10 +40,10 @@ trait ITokenWrapper<TContractState> {
 #[starknet::contract]
 mod TokenWrapper {
     //ANCHOR: import
-    use super::{IERC20Dispatcher, IERC20DispatcherTrait};
+    use starknet::{ContractAddress, get_caller_address};
     //ANCHOR_END: import
     use super::ITokenWrapper;
-    use starknet::{get_caller_address, ContractAddress};
+    use super::{IERC20Dispatcher, IERC20DispatcherTrait};
 
     #[storage]
     struct Storage {}

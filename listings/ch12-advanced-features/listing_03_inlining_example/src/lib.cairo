@@ -1,3 +1,4 @@
+#[executable]
 fn main() -> felt252 {
     inlined() + not_inlined()
 }
