@@ -118,6 +118,7 @@
 ## Introduction to Starknet Smart Contracts
 
 - [Introduction to Smart Contracts](./ch100-00-introduction-to-smart-contracts.md)
+  - [Starknet contract classes and instances](ch100-01-contracts-classes-and-instances.md)
 
 ## Building Starknet Smart Contracts
 
@@ -166,6 +167,7 @@
 
 - [Appendix (Starknet)](appendix-000.md)
   - [A - System Calls](appendix-08-system-calls.md)
+  - [B - Sierra](appendix-09-sierra.md)
 
 ---
 
