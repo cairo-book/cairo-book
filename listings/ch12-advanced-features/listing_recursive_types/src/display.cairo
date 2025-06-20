@@ -1,4 +1,3 @@
-use core::nullable::{NullableTrait};
 use core::fmt::{Debug, Formatter, Error};
 use core::ops::Deref;
 use super::BinaryTree;
@@ -14,10 +13,7 @@ fn fmt_helper(
 ) -> Result<(), Error> {
     let mut indent: ByteArray = "";
     let mut i = 0;
-    loop {
-        if i == depth {
-            break;
-        }
+    while i != depth {
         indent += if i == depth - 1 && is_last {
             "    "
         } else {
