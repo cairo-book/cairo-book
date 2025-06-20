@@ -1,12 +1,7 @@
 $ scarb execute 
    Compiling hello_world v0.1.0 (listings/ch01-getting-started/no_listing_01_hello_world/Scarb.toml)
-    Finished `dev` profile target(s) in 6 seconds
-error: no executable target found for package `hello_world`
-help: you can add `executable` target to the package manifest with following excerpt
--> Scarb.toml
-    [executable]
-
-    [dependencies]
-    cairo_execute = "2.11.4"
+    Finished `dev` profile target(s) in 4 seconds
+   Executing hello_world
+Hello, World!
 
 

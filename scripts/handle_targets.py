@@ -535,6 +535,52 @@ def add_executable_config(scarb_path: Path) -> bool:
         return False
 
 
+def check_and_remove_legacy_executable(scarb_path: Path) -> bool:
+    """Check if Scarb.toml has both [executable] and [[target.executable]] sections, and remove [executable] if so."""
+    try:
+        content = scarb_path.read_text(encoding='utf-8')
+
+        has_executable_section = '[executable]' in content
+        has_target_executable_section = '[[target.executable]]' in content
+
+        if has_executable_section and has_target_executable_section:
+            print("    ⚠ Found both [executable] and [[target.executable]] sections")
+            print("    + Removing legacy [executable] section")
+
+            lines = content.splitlines()
+            new_lines = []
+            skip_executable_section = False
+
+            for line in lines:
+                stripped = line.strip()
+
+                # Check for [executable] section
+                if stripped == '[executable]':
+                    skip_executable_section = True
+                    continue
+
+                # Check for new section (not executable)
+                if stripped.startswith('[') and stripped != '[executable]':
+                    skip_executable_section = False
+
+                # Skip lines in [executable] section
+                if skip_executable_section:
+                    continue
+
+                new_lines.append(line)
+
+            new_content = '\n'.join(new_lines)
+            if new_content != content:
+                scarb_path.write_text(new_content, encoding='utf-8')
+                return True
+
+        return False
+
+    except Exception as e:
+        print(f"Error checking/removing legacy executable config in {scarb_path}: {e}")
+        return False
+
+
 def remove_executable_config(scarb_path: Path) -> bool:
     """Remove [[target.executable]] sections, [executable] section, cairo_execute dependency, and cairo enable-gas=false setting from Scarb.toml."""
     try:
@@ -643,6 +689,13 @@ def process_crate(crate_path: Path) -> None:
     src_dir = crate_path / "src"
     scarb_toml_path = crate_path / "Scarb.toml"
 
+    # First, check and remove legacy [executable] section if [[target.executable]] exists
+    print("  + Checking for conflicting executable configurations")
+    if check_and_remove_legacy_executable(scarb_toml_path):
+        print("    ✓ Removed legacy [executable] section")
+    else:
+        print("    ✓ No conflicting executable configurations found")
+
     # Check for Starknet contracts first
     is_starknet_contract = has_starknet_contract_target(scarb_toml_path)
     if is_starknet_contract:
@@ -721,7 +774,7 @@ def process_crate(crate_path: Path) -> None:
 def main():
     """Main function."""
     script_dir = Path(__file__).parent
-    listings_dir = script_dir / "listings"
+    listings_dir = script_dir / "../listings"
 
     if not listings_dir.exists():
         print(f"Error: listings directory not found at {listings_dir}")

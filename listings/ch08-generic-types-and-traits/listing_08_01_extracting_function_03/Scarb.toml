@@ -11,8 +11,6 @@ cairo_execute = "2.11.4"
 [dev-dependencies]
 assert_macros = "2.11.4"
 
-[executable]
-
 [cairo]
 enable-gas = false
 

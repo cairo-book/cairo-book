@@ -1,6 +1,6 @@
 $ scarb execute 
    Compiling no_listing_01_panic v0.1.0 (listings/ch09-error-handling/no_listing_01_panic/Scarb.toml)
-error: Requested `#[executable]` not found.
-error: could not compile `no_listing_01_panic` due to previous error
-error: `scarb metadata` exited with error
+    Finished `dev` profile target(s) in 5 seconds
+   Executing no_listing_01_panic
+error: Panicked with 0x2.
 

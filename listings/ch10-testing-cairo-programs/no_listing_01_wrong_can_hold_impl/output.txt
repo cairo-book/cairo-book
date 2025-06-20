@@ -1,8 +1,9 @@
 $ scarb test 
      Running test no_listing_01_wrong_can_hold_impl (snforge test)
     Blocking waiting for file lock on registry db cache
+    Blocking waiting for file lock on registry db cache
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/Scarb.toml)
-    Finished `dev` profile target(s) in 10 seconds
+    Finished `dev` profile target(s) in 13 seconds
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/target/dev/no_listing_01_wrong_can_hold_impl_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 

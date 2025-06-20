@@ -1,6 +1,7 @@
 $ scarb execute 
    Compiling listing_04_06_no_struct v0.1.0 (listings/ch05-using-structs-to-structure-related-data/listing_03_no_struct/Scarb.toml)
-error: Requested `#[executable]` not found.
-error: could not compile `listing_04_06_no_struct` due to previous error
-error: `scarb metadata` exited with error
+    Finished `dev` profile target(s) in 4 seconds
+   Executing listing_04_06_no_struct
+Area is 300
+
 

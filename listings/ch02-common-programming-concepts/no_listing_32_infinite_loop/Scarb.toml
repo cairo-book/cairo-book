@@ -11,6 +11,7 @@ enable-gas = false
 [dependencies]
 cairo_execute = "2.11.4"
 
+
 [[target.executable]]
 name = "main"
 function = "no_listing_27_infinite_loop::main"

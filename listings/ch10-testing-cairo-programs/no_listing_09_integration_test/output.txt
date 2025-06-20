@@ -4,8 +4,15 @@ $ scarb test
     Blocking waiting for file lock on registry db cache
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
-    Finished `dev` profile target(s) in 22 seconds
+    Finished `dev` profile target(s) in 19 seconds
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_09_integration_test/target/dev/adder_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_09_integration_test/target/dev/adder_integrationtest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
-[ERROR] Error while compiling Sierra. Make sure you have the latest universal-sierra-compiler binary installed. Contact us if it doesn't help: Command universal-sierra-compiler failed with status exit status: 2
+
+
+Collected 2 test(s) from adder package
+Running 1 test(s) from tests/
+[PASS] adder_integrationtest::integration_tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+Running 1 test(s) from src/
+[PASS] adder::tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

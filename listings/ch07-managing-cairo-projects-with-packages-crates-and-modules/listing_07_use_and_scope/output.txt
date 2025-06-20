@@ -1,12 +1,12 @@
 $ scarb build 
    Compiling listing_07_05 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/Scarb.toml)
 warn: Unused import: `listing_07_05::hosting`
- --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:10:28
+ --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:9:28
 use crate::front_of_house::hosting;
                            ^^^^^^^
 
 error[E0006]: Identifier not found.
- --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:14:9
+ --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:13:9
         hosting::add_to_waitlist();
         ^^^^^^^
 

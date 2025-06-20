@@ -1,14 +1,14 @@
 $ scarb test 
      Running test listing_10_08 (snforge test)
+    Blocking waiting for file lock on registry db cache
+    Blocking waiting for file lock on registry db cache
    Compiling test(listings/ch10-testing-cairo-programs/listing_10_08/Scarb.toml)
-    Finished `dev` profile target(s) in 11 seconds
+    Finished `dev` profile target(s) in 14 seconds
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/listing_10_08/target/dev/listing_10_08_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 1 test(s) from listing_10_08 package
 Running 1 test(s) from src/
 [PASS] listing_10_08::test_struct_equality (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-
-
 Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

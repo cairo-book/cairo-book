@@ -8,8 +8,6 @@ experimental-features = ["associated_item_constraints"]
 [dependencies]
 cairo_execute = "2.11.4"
 
-[executable]
-
 [cairo]
 enable-gas = false
 

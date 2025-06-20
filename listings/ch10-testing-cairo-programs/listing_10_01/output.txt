@@ -1,7 +1,13 @@
 $ scarb test 
      Running test listing_10_01 (snforge test)
    Compiling test(listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
-    Finished `dev` profile target(s) in 12 seconds
+    Finished `dev` profile target(s) in 8 seconds
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/listing_10_01/target/dev/listing_10_01_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
-[ERROR] Error while compiling Sierra. Make sure you have the latest universal-sierra-compiler binary installed. Contact us if it doesn't help: Command universal-sierra-compiler failed with status exit status: 2
+
+
+Collected 2 test(s) from listing_10_01 package
+Running 2 test(s) from src/
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

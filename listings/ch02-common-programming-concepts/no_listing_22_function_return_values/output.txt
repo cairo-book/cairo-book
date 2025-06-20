@@ -1,6 +1,7 @@
 $ scarb execute 
    Compiling no_listing_20_function_return_values v0.1.0 (listings/ch02-common-programming-concepts/no_listing_22_function_return_values/Scarb.toml)
-error: Requested `#[executable]` not found.
-error: could not compile `no_listing_20_function_return_values` due to previous error
-error: `scarb metadata` exited with error
+    Finished `dev` profile target(s) in 3 seconds
+   Executing no_listing_20_function_return_values
+The value of x is: 5
+
 

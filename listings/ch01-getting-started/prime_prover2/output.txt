@@ -1,11 +1,6 @@
 $ scarb execute -p prime_prover --print-program-output --arguments 1000001
-error: failed to parse manifest at: /Users/msaug/workspace/cairo-book/listings/ch01-getting-started/prime_prover2/Scarb.toml
-
-Caused by:
-    TOML parse error at line 11, column 1
-       |
-    11 | [cairo]
-       | ^
-    invalid table header
-    duplicate key `cairo` in document root
+   Compiling prime_prover v0.1.0 (listings/ch01-getting-started/prime_prover2/Scarb.toml)
+    Finished `dev` profile target(s) in 4 seconds
+   Executing prime_prover
+error: Panicked with "Input too large, must be <= 1,000,000".
 

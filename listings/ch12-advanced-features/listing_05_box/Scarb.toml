@@ -10,8 +10,6 @@ casm = true
 [dependencies]
 cairo_execute = "2.11.4"
 
-[executable]
-
 [cairo]
 enable-gas = false
 

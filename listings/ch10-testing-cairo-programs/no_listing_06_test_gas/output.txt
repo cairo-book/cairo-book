@@ -1,9 +1,13 @@
 $ scarb test 
      Running test no_listing_08_test_gas (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_06_test_gas/Scarb.toml)
-    Finished `dev` profile target(s) in 6 seconds
+    Finished `dev` profile target(s) in 4 seconds
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_06_test_gas/target/dev/no_listing_08_test_gas_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
-[ERROR] Error while compiling Sierra. Make sure you have the latest universal-sierra-compiler binary installed. Contact us if it doesn't help: Command universal-sierra-compiler failed with status exit status: 2
+
+
+Collected 1 test(s) from no_listing_08_test_gas package
+Running 1 test(s) from src/
+[WARNING] Setting available_gas with unnamed argument is deprecated. Consider setting resource bounds (l1_gas, l1_data_gas and l2_gas) explicitly.
+[PASS] no_listing_08_test_gas::tests::test_sum_n (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~80000)
+Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

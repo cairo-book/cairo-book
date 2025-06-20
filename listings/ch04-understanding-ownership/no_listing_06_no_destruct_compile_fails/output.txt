@@ -1,7 +1,7 @@
 $ scarb execute 
    Compiling no_listing_06_no_destruct_compile_fails v0.1.0 (listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/Scarb.toml)
 error: Variable not dropped.
- --> listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo:9:5
+ --> listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo:10:5
     A { dict: Default::default() };
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 note: Trait has no implementation in context: core::traits::Drop::<no_listing_06_no_destruct_compile_fails::A>.

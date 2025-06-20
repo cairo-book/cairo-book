@@ -1,17 +1,17 @@
 $ scarb build 
    Compiling listing_closure_different_types v0.1.0 (listings/ch11-functional-features/listing_closure_different_types/Scarb.toml)
 warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:6:9
+ --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:7:9
     let s = example_closure(5_u64);
         ^
 
 warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
- --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:7:9
+ --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:8:9
     let n = example_closure(5_u32);
         ^
 
-error: Trait has no implementation in context: core::ops::function::Fn::<{closure@/Users/msaug/workspace/cairo-book/listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:4:27: 4:30}, (core::integer::u32,)>.
- --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:7:13
+error: Trait has no implementation in context: core::ops::function::Fn::<{closure@/Users/msaug/workspace/cairo-book/listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:5:27: 5:30}, (core::integer::u32,)>.
+ --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:8:13
     let n = example_closure(5_u32);
             ^^^^^^^^^^^^^^^^^^^^^^
 

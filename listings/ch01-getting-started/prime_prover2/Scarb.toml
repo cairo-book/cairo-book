@@ -9,8 +9,6 @@ enable-gas = false
 [dependencies]
 cairo_execute = "2.11.4"
 
-[executable]
-
 
 [[target.executable]]
 name = "main"

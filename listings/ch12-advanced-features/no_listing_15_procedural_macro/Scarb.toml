@@ -15,8 +15,6 @@ rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 [dev-dependencies]
 cairo_test = "2.11.4"
 
-[executable]
-
 [cairo]
 enable-gas = false
 
