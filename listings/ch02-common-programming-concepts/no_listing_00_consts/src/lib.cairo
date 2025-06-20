@@ -15,3 +15,5 @@ const STRUCT_INSTANCE: AnyStruct = AnyStruct { a: 0, b: 1 };
 const ENUM_INSTANCE: AnyEnum = AnyEnum::A('any enum');
 const BOOL_FIXED_SIZE_ARRAY: [bool; 2] = [true, false];
 // ANCHOR_END: const_expressions
+
+
