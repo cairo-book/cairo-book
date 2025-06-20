@@ -137,6 +137,7 @@
   - [Contract Class ABI](./ch102-01-contract-class-abi.md)
   - [Interacting with Another Contract](./ch102-02-interacting-with-another-contract.md)
   - [Executing Code from Another Class](./ch102-03-executing-code-from-another-class.md)
+  - [Serialization of Cairo types](./ch102-04-serialization-of-cairo-types.md)
 
 ## Building Advanced Starknet Smart Contracts
 
