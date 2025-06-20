@@ -34,6 +34,7 @@ fn error() {
 // ANCHOR_END: error
 
 // ANCHOR: example
+#[executable]
 fn main() {
     let mut wrapped_profile = Wrapper {
         value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 },

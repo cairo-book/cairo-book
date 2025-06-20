@@ -27,6 +27,7 @@ impl TConsumerImpl<T, +core::fmt::Debug<T>, +Drop<T>, -Producer<T>> of Consumer<
     }
 }
 
+#[executable]
 fn main() {
     let producer = ProducerType {};
     let another_type = AnotherType {};

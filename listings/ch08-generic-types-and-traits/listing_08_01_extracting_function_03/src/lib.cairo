@@ -10,6 +10,7 @@ fn largest(ref number_list: Array<u8>) -> u8 {
     largest
 }
 
+#[executable]
 fn main() {
     let mut number_list = array![34, 50, 25, 100, 65];
 

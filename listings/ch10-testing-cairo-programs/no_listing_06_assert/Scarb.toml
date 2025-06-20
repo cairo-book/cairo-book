@@ -14,7 +14,7 @@ enable-gas = false
 cairo_execute = "2.11.4"
 
 [dev-dependencies]
-snforge_std = "0.39.0"
+snforge_std = "0.44.0"
 assert_macros = "2.11.4"
 
 [scripts]
@@ -22,3 +22,8 @@ test = "snforge test"
 
 [tool.scarb]
 allow-prebuilt-plugins = ["snforge_std"]
+
+
+[[target.executable]]
+name = "main"
+function = "no_listing_06_assert::main"

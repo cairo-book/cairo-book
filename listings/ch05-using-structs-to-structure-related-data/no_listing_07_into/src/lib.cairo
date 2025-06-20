@@ -18,6 +18,7 @@ impl SquareIntoRectangle of Into<Square, Rectangle> {
     }
 }
 
+#[executable]
 fn main() {
     let square = Square { side_length: 5 };
     // Compiler will complain if you remove the type annotation

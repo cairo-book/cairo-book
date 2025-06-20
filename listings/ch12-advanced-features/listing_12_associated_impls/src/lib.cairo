@@ -1,4 +1,5 @@
 // ANCHOR: main
+#[executable]
 fn main() {
     let mut arr: Array<felt252> = array![1, 2, 3];
 

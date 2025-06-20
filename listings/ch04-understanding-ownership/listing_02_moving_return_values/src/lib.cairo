@@ -2,6 +2,7 @@
 #[derive(Drop)]
 struct A {}
 
+#[executable]
 fn main() {
     let a1 = gives_ownership();           // gives_ownership moves its return
                                           // value into a1
@@ -29,7 +30,7 @@ fn gives_ownership() -> A {               // gives_ownership will move its
 // This function takes an instance some_a of A and returns it
 fn takes_and_gives_back(some_a: A) -> A { // some_a comes into scope
 
-    some_a                                // some_a is returned and 
+    some_a                                // some_a is returned and
                                           // moves ownership to the calling
                                           // function
 }

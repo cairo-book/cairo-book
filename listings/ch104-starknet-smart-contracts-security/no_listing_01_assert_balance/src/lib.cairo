@@ -5,8 +5,8 @@ trait IContract<TContractState> {
 
 #[starknet::contract]
 mod contract {
-    use super::IContract;
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use super::IContract;
 
     #[storage]
     struct Storage {

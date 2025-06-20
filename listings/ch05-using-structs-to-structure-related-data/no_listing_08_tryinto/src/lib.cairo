@@ -22,6 +22,7 @@ impl RectangleIntoSquare of TryInto<Rectangle, Square> {
     }
 }
 
+#[executable]
 fn main() {
     let rectangle = Rectangle { width: 8, height: 8 };
     let result: Square = rectangle.try_into().unwrap();

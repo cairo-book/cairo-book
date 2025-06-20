@@ -17,12 +17,11 @@ trait VoteTrait<T> {
 /// Starknet Contract allowing three registered voters to vote on a proposal
 #[starknet::contract]
 mod Vote {
-    use starknet::ContractAddress;
-    use starknet::get_caller_address;
     use starknet::storage::{
-        StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, Map,
+        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+        StoragePointerWriteAccess,
     };
+    use starknet::{ContractAddress, get_caller_address};
 
     const YES: u8 = 1_u8;
     const NO: u8 = 0_u8;
@@ -31,8 +30,8 @@ mod Vote {
     struct Storage {
         yes_votes: u8,
         no_votes: u8,
-        can_vote: Map::<ContractAddress, bool>,
-        registered_voter: Map::<ContractAddress, bool>,
+        can_vote: Map<ContractAddress, bool>,
+        registered_voter: Map<ContractAddress, bool>,
     }
 
     #[constructor]

@@ -1,3 +1,6 @@
+// TAG: does_not_run
+
+#[executable]
 fn main() {
     let my_u256: u256 = 10;
 

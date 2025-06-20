@@ -7,6 +7,7 @@ struct User {
     sign_in_count: u64,
 }
 // ANCHOR: main
+#[executable]
 fn main() {
     let mut user1 = User {
         active: true, username: "someusername123", email: "someone@example.com", sign_in_count: 1,

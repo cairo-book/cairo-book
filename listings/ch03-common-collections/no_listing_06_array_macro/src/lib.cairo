@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     //ANCHOR: no_macro
     let mut arr = ArrayTrait::new();

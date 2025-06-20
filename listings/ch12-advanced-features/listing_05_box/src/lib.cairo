@@ -14,6 +14,7 @@ fn pass_pointer(cart: Box<Cart>) {
     println!("{} is shopping today and bought {} items", cart.buyer, cart.items);
 }
 
+#[executable]
 fn main() {
     let new_struct = Cart { paid: true, items: 1, buyer: "Eli" };
     pass_data(new_struct);

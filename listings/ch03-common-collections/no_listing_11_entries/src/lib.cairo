@@ -8,6 +8,7 @@ struct Entry<T> {
 }
 // ANCHOR_END: struct
 
+#[executable]
 fn main() {
     let mut balances: Felt252Dict<u64> = Default::default();
     // ANCHOR: inserts

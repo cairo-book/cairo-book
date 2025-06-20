@@ -30,6 +30,7 @@ fn print_shape_info<T, impl ShapeImpl: Shape<T>>() {
 // ANCHOR_END: print_info
 
 // ANCHOR: main
+#[executable]
 fn main() {
     print_shape_info::<Triangle>();
     print_shape_info::<Square>();

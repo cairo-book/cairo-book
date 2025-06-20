@@ -10,6 +10,7 @@ struct User {
 // ANCHOR_END: user
 
 // ANCHOR: main
+#[executable]
 fn main() {
     let user1 = User {
         active: true, username: "someusername123", email: "someone@example.com", sign_in_count: 1,

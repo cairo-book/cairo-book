@@ -9,6 +9,7 @@ fn largest_list<T>(l1: Array<T>, l2: Array<T>) -> Array<T> {
     }
 }
 
+#[executable]
 fn main() {
     let mut l1 = array![1, 2];
     let mut l2 = array![3, 4, 5];

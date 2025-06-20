@@ -20,6 +20,7 @@ impl SourceDeref of Deref<MySource> {
     }
 }
 
+#[executable]
 fn main() {
     let source = MySource { data: 5 };
     // Thanks to the Deref impl, we can call foo directly on MySource

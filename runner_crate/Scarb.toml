@@ -14,7 +14,7 @@ enable-gas = false
 cairo_execute = "2.11.4"
 
 [dev-dependencies]
-snforge_std = "0.39.0"
+snforge_std = "0.44.0"
 assert_macros = "2.11.4"
 
 [scripts]

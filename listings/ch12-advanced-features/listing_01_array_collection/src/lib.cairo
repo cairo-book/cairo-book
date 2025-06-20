@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     //ANCHOR: array_append
     let mut level_players = array![5, 1, 10];

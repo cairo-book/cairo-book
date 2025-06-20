@@ -5,6 +5,7 @@ enum Data {
     Tuple: (u32, u32),
 }
 
+#[executable]
 fn main() {
     let mut messages: Array<Data> = array![];
     messages.append(Data::Integer(100));

@@ -12,3 +12,8 @@ enable-gas = false
 
 [dependencies]
 cairo_execute = "2.11.4"
+
+
+[[target.executable]]
+name = "main"
+function = "no_listing_44_fixed_size_arr_accessing_elements_span::main"

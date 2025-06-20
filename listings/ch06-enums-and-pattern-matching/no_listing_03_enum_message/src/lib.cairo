@@ -24,6 +24,7 @@ impl ProcessingImpl of Processing {
     }
 }
 // ANCHOR_END: trait_impl
+#[executable]
 fn main() {
     // ANCHOR: main
     let msg: Message = Message::Quit;

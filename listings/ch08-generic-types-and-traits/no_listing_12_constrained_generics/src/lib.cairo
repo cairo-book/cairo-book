@@ -25,6 +25,7 @@ impl WalletReceiveImpl of WalletReceiveTrait {
     }
 }
 
+#[executable]
 fn main() {
     let mut w = Wallet { balance: 50 };
     assert!(w.balance() == 50);

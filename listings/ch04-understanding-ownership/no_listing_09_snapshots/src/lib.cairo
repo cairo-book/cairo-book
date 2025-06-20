@@ -4,6 +4,7 @@ struct Rectangle {
     width: u64,
 }
 
+#[executable]
 fn main() {
     let mut rec = Rectangle { height: 3, width: 10 };
     let first_snapshot = @rec; // Take a snapshot of `rec` at this point in time

@@ -22,6 +22,7 @@ impl DerefWrapper<T> of Deref<Wrapper<T>> {
 // ANCHOR_END: deref
 
 // ANCHOR: main
+#[executable]
 fn main() {
     let wrapped_profile = Wrapper {
         value: UserProfile { username: 'john_doe', email: 'john@example.com', age: 30 },

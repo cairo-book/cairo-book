@@ -1,5 +1,6 @@
 //TAG: does_not_compile
 
+#[executable]
 fn main() {
     let x = 5;
     println!("The value of x is: {}", x);

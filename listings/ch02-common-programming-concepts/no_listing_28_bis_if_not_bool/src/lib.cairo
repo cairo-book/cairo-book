@@ -1,5 +1,6 @@
 //TAG: does_not_compile
 
+#[executable]
 fn main() {
     let number = 3;
 

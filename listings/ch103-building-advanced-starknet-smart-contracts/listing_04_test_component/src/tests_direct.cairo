@@ -1,6 +1,6 @@
-use super::counter::{CounterComponent};
+use CounterComponent::CounterImpl;
 use super::MockContract;
-use CounterComponent::{CounterImpl};
+use super::counter::CounterComponent;
 
 //ANCHOR: type_alias
 type TestingState = CounterComponent::ComponentState<MockContract::ContractState>;

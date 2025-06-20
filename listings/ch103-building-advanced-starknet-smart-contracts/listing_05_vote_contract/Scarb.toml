@@ -6,11 +6,8 @@ edition = "2024_07"
 [[target.starknet-contract]]
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
-[executable]
-
 [cairo]
-enable-gas = false
+enable-gas = true
 
 [dependencies]
-cairo_execute = "2.11.4"
 starknet = ">=2.11.4"

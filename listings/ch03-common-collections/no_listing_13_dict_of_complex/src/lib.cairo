@@ -1,10 +1,11 @@
 // ANCHOR: all
 // ANCHOR: imports
 use core::dict::Felt252Dict;
-use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
+use core::nullable::{FromNullableResult, NullableTrait, match_nullable};
 // ANCHOR_END: imports
 
 // ANCHOR: header
+#[executable]
 fn main() {
     // Create the dictionary
     let mut d: Felt252Dict<Nullable<Span<felt252>>> = Default::default();

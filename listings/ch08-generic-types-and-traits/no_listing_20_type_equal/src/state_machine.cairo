@@ -33,6 +33,7 @@ fn combine<
     B::transition(ref self);
 }
 
+#[executable]
 fn main() {
     let mut initial = StateCounter { counter: 0 };
     combine::<TA, TB>(ref initial);

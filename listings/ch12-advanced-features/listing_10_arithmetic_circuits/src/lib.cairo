@@ -1,7 +1,7 @@
 // ANCHOR: full
 use core::circuit::{
-    CircuitElement, CircuitInput, circuit_add, circuit_mul, EvalCircuitTrait, CircuitOutputsTrait,
-    CircuitModulus, AddInputResultTrait, CircuitInputs, u384,
+    AddInputResultTrait, CircuitElement, CircuitInput, CircuitInputs, CircuitModulus,
+    CircuitOutputsTrait, EvalCircuitTrait, circuit_add, circuit_mul, u384,
 };
 
 // Circuit: a * (a + b)
@@ -53,6 +53,7 @@ fn eval_circuit() -> (u384, u384) {
 }
 // ANCHOR_END: full
 
+#[executable]
 fn main() {
     eval_circuit();
 }

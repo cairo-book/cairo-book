@@ -1,4 +1,5 @@
 //TAG: does_not_run
+#[executable]
 fn main() {
     let my_number: u8 = 0;
 

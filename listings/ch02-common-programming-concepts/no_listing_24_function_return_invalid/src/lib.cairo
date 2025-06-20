@@ -1,5 +1,6 @@
 //TAG: does_not_compile
 
+#[executable]
 fn main() {
     let x = plus_one(5);
 

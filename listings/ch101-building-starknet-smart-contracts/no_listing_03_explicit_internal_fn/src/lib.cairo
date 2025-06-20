@@ -3,15 +3,15 @@ use starknet::ContractAddress;
 
 #[starknet::contract]
 mod NameRegistry {
-    use starknet::{ContractAddress, get_caller_address};
     use starknet::storage::{
-        StoragePointerReadAccess, StoragePointerWriteAccess, StorageMapReadAccess,
-        StorageMapWriteAccess, Map,
+        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+        StoragePointerWriteAccess,
     };
+    use starknet::{ContractAddress, get_caller_address};
 
     #[storage]
     struct Storage {
-        names: Map::<ContractAddress, felt252>,
+        names: Map<ContractAddress, felt252>,
         total_names: u128,
         owner: Person,
     }

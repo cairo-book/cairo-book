@@ -1,5 +1,6 @@
 //TAG: does_not_compile
 
+#[executable]
 fn main() {
     let mut x: u64 = 2;
     println!("The value of x is: {}", x);
