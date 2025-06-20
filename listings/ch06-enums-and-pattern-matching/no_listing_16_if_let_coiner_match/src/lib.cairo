@@ -6,6 +6,7 @@ enum Coin {
     Quarter,
 }
 
+#[executable]
 fn main() {
     // ANCHOR: here
     let coin = Coin::Quarter;

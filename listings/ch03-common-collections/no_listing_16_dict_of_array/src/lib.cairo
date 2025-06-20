@@ -1,6 +1,6 @@
 //ANCHOR: all
-use core::nullable::NullableTrait;
 use core::dict::{Felt252Dict, Felt252DictEntryTrait};
+use core::nullable::NullableTrait;
 
 //ANCHOR: append
 fn append_value(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252, value: u8) {
@@ -21,6 +21,7 @@ fn get_array_entry(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252) -
 }
 //ANCHOR_END: get
 
+#[executable]
 fn main() {
     let arr = array![20, 19, 26];
     let mut dict: Felt252Dict<Nullable<Array<u8>>> = Default::default();

@@ -4,6 +4,7 @@ struct Rectangle {
     width: u64,
 }
 
+#[executable]
 fn main() {
     let mut rec = Rectangle { height: 3, width: 10 };
     flip(ref rec);

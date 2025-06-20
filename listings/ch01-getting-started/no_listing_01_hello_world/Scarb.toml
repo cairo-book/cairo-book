@@ -3,4 +3,13 @@ name = "hello_world"
 version = "0.1.0"
 edition = "2024_07"
 
+[cairo]
+enable-gas = false
+
 [dependencies]
+cairo_execute = "2.11.4"
+
+
+[[target.executable]]
+name = "hello_world_main"
+function = "hello_world::hello_world::main"

@@ -6,6 +6,7 @@ enum BinaryTree {
     Node: (u32, BinaryTree, BinaryTree),
 }
 
+#[executable]
 fn main() {
     let leaf1 = BinaryTree::Leaf(1);
     let leaf2 = BinaryTree::Leaf(2);

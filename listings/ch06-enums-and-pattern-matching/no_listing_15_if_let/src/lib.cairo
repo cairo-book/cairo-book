@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     // ANCHOR: here
     let number = Some(5);

@@ -1,3 +1,4 @@
+#[executable]
 fn main() -> felt252 {
     let mut x: felt252 = 0;
     loop {

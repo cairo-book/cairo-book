@@ -4,3 +4,14 @@ version = "0.1.0"
 edition = "2024_07"
 
 experimental-features = ["associated_item_constraints"]
+
+[dependencies]
+cairo_execute = "2.11.4"
+
+[cairo]
+enable-gas = false
+
+
+[[target.executable]]
+name = "main"
+function = "listing_closures::main"

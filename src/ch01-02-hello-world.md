@@ -154,12 +154,11 @@ From your _hello_world_ directory, build your project by entering the following 
 
 This command creates a `hello_world.sierra.json` file in _target/dev_, let's ignore the `sierra` file for now.
 
-If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb cairo-run` command and see the following output:
+If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb execute` command and see the following output:
 
 ```shell
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_run.txt}}
 ```
-
 
 Regardless of your operating system, the string `Hello, world!` should be printed to
 the terminal.
@@ -226,7 +225,7 @@ Let’s recap what we’ve learned so far about Scarb:
 - We can install one or multiple Scarb versions, either the latest stable or a specific one, using asdf.
 - We can create a project using `scarb new`.
 - We can build a project using `scarb build` to generate the compiled Sierra code.
-- We can execute a Cairo program using the `scarb cairo-run` command.
+- We can execute a Cairo program using the `scarb execute` command.
 
 An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
 

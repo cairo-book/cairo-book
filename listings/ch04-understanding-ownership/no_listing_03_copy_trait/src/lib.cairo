@@ -4,6 +4,7 @@ struct Point {
     y: u128,
 }
 
+#[executable]
 fn main() {
     let p1 = Point { x: 5, y: 10 };
     foo(p1);

@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     // addition
     let sum = 5_u128 + 10_u128;

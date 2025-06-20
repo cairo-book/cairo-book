@@ -44,6 +44,7 @@ impl UserDatabaseDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<UserDat
 // ANCHOR_END: destruct
 
 // ANCHOR: main
+#[executable]
 fn main() {
     let mut db = UserDatabaseTrait::<u64>::new();
 

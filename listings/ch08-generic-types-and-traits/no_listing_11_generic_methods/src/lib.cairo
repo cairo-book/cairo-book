@@ -13,6 +13,7 @@ impl WalletImpl<T, +Copy<T>> of WalletTrait<T> {
     }
 }
 
+#[executable]
 fn main() {
     let w = Wallet { balance: 50 };
     assert!(w.balance() == 50);

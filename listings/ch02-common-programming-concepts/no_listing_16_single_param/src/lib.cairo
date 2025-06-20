@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     another_function(5);
 }

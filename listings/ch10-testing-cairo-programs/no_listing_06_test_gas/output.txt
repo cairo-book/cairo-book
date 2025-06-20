@@ -1,13 +1,13 @@
 $ scarb test 
      Running test no_listing_08_test_gas (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.13s
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_06_test_gas/Scarb.toml)
-    Finished `dev` profile target(s) in 3 seconds
+    Finished `dev` profile target(s) in 4 seconds
+[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_06_test_gas/target/dev/no_listing_08_test_gas_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 1 test(s) from no_listing_08_test_gas package
 Running 1 test(s) from src/
-[PASS] no_listing_08_test_gas::tests::test_sum_n (gas: ~2)
+[WARNING] Setting available_gas with unnamed argument is deprecated. Consider setting resource bounds (l1_gas, l1_data_gas and l2_gas) explicitly.
+[PASS] no_listing_08_test_gas::tests::test_sum_n (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~80000)
 Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

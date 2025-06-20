@@ -1,7 +1,6 @@
 //ANCHOR: import
-use core::poseidon::PoseidonTrait;
-use core::poseidon::poseidon_hash_span;
-use core::hash::{HashStateTrait, HashStateExTrait};
+use core::hash::{HashStateExTrait, HashStateTrait};
+use core::poseidon::{PoseidonTrait, poseidon_hash_span};
 //ANCHOR_END: import
 
 //ANCHOR: structure
@@ -14,6 +13,7 @@ struct StructForHashArray {
 //ANCHOR_END: structure
 
 //ANCHOR: main
+#[executable]
 fn main() {
     let struct_to_hash = StructForHashArray { first: 0, second: 1, third: array![1, 2, 3, 4, 5] };
 

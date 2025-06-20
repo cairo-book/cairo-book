@@ -12,9 +12,9 @@ trait IAddressList<TState> {
 #[starknet::contract]
 mod AddressList {
     use starknet::storage::{
-        StoragePointerReadAccess, StoragePointerWriteAccess, Vec, VecTrait, MutableVecTrait,
+        MutableVecTrait, StoragePointerReadAccess, StoragePointerWriteAccess, Vec, VecTrait,
     };
-    use starknet::{get_caller_address, ContractAddress};
+    use starknet::{ContractAddress, get_caller_address};
 
     //ANCHOR: storage_vecs
     #[storage]

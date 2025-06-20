@@ -9,8 +9,8 @@ pub trait ISimpleStorage<TContractState> {
 //ANCHOR: all
 #[starknet::contract]
 mod SimpleStorage {
-    use starknet::{ContractAddress, get_caller_address};
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::{ContractAddress, get_caller_address};
 
     //ANCHOR: storage
     #[storage]

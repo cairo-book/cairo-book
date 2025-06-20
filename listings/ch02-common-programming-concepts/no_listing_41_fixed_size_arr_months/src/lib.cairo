@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     //ANCHOR: months
     let months = [

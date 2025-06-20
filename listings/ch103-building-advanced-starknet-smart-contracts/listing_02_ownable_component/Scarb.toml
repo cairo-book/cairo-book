@@ -9,3 +9,6 @@ edition = "2024_07"
 starknet = ">=2.11.4"
 
 [[target.starknet-contract]]
+
+[cairo]
+enable-gas = true

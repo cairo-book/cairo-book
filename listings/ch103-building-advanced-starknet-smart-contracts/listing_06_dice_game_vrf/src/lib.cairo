@@ -35,6 +35,9 @@ pub trait IDiceGame<TContractState> {
 //ANCHOR: dice_game
 #[starknet::contract]
 mod DiceGame {
+    use openzeppelin::access::ownable::OwnableComponent;
+    use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
+    use pragma_lib::abi::{IRandomnessDispatcher, IRandomnessDispatcherTrait};
     use starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
@@ -42,9 +45,6 @@ mod DiceGame {
         ContractAddress, contract_address_const, get_block_number, get_caller_address,
         get_contract_address,
     };
-    use pragma_lib::abi::{IRandomnessDispatcher, IRandomnessDispatcherTrait};
-    use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
-    use openzeppelin::access::ownable::OwnableComponent;
 
     component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);
 

@@ -23,10 +23,10 @@ trait IOwnable<TContractState> {
 //ANCHOR: component
 #[starknet::component]
 pub mod ownable_component {
-    use starknet::{ContractAddress, get_caller_address};
-    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
-    use super::Errors;
     use core::num::traits::Zero;
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::{ContractAddress, get_caller_address};
+    use super::Errors;
 
     #[storage]
     pub struct Storage {

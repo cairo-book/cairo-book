@@ -42,6 +42,7 @@ impl ArrayFilterExt of ArrayFilterExtTrait {
 }
 //ANCHOR_END: array_filter
 
+#[executable]
 fn main() {
     //ANCHOR: basic
     let double = |value| value * 2;

@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let x: u64 = 2;
     println!("The value of x is {} of type u64", x);

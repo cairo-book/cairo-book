@@ -16,6 +16,7 @@ impl SafeDefaultImpl<
     }
 }
 
+#[executable]
 fn main() {
     let _safe: u8 = SafeDefault::safe_default();
     let _unsafe: SensitiveData = Default::default(); // Allowed

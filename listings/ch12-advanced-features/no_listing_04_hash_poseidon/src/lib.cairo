@@ -1,5 +1,5 @@
+use core::hash::{HashStateExTrait, HashStateTrait};
 use core::poseidon::PoseidonTrait;
-use core::hash::{HashStateTrait, HashStateExTrait};
 
 #[derive(Drop, Hash)]
 struct StructForHash {
@@ -9,6 +9,7 @@ struct StructForHash {
     last: bool,
 }
 
+#[executable]
 fn main() -> felt252 {
     let struct_to_hash = StructForHash { first: 0, second: 1, third: (1, 2), last: false };
 

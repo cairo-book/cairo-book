@@ -8,6 +8,7 @@ enum Direction {
 }
 // ANCHOR_END: enum_example
 
+#[executable]
 fn main() {
     // ANCHOR: here
     let direction = Direction::North(10);

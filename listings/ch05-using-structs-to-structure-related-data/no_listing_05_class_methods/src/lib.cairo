@@ -28,6 +28,7 @@ impl RectangleImpl of RectangleTrait {
 // ANCHOR_END: trait_impl
 
 // ANCHOR: main
+#[executable]
 fn main() {
     let rect1 = RectangleTrait::new(30, 50);
     let rect2 = RectangleTrait::square(10);

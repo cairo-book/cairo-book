@@ -6,6 +6,7 @@ enum Coin {
     Quarter,
 }
 
+#[executable]
 fn main() {
     // ANCHOR: here
     let coin = Coin::Quarter;
@@ -18,4 +19,3 @@ fn main() {
     // ANCHOR_END: here
     println!("{}", count);
 }
-

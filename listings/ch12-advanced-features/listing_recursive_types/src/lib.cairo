@@ -1,4 +1,4 @@
-use core::box::{BoxTrait};
+use core::box::BoxTrait;
 
 mod display;
 use display::DebugBinaryTree;
@@ -10,6 +10,7 @@ enum BinaryTree {
 }
 
 
+#[executable]
 fn main() {
     let leaf1 = BinaryTree::Leaf(1);
     let leaf2 = BinaryTree::Leaf(2);

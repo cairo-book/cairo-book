@@ -21,7 +21,7 @@ code with the following code, which won’t compile just yet:
 
 ```
 
-Save and run the program using `scarb cairo-run`. You should receive an error message
+Save and run the program using `scarb execute`. You should receive an error message
 regarding an immutability error, as shown in this output:
 
 ```shell

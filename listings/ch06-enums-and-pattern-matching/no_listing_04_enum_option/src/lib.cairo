@@ -4,7 +4,7 @@ fn find_value_recursive(mut arr: Span<felt252>, value: felt252, index: usize) ->
             return Some(index);
         } },
         None => { return None; },
-    };
+    }
 
     find_value_recursive(arr, value, index + 1)
 }
@@ -17,10 +17,10 @@ fn find_value_iterative(mut arr: Span<felt252>, value: felt252) -> Option<usize>
         if (*array_value == value) {
             result = Some(index);
             break;
-        };
+        }
 
         index += 1;
-    };
+    }
 
     result
 }

@@ -1,4 +1,4 @@
-use core::fmt::{Display, Formatter, Error};
+use core::fmt::{Display, Error, Formatter};
 
 #[derive(Copy, Drop)]
 struct Point {
@@ -15,6 +15,7 @@ impl PointDisplay of Display<Point> {
     }
 }
 
+#[executable]
 fn main() {
     let p = Point { x: 1, y: 3 };
     println!("{}", p); // Point: (1, 3)

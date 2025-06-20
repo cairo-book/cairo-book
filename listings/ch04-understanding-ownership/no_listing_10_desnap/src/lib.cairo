@@ -4,6 +4,7 @@ struct Rectangle {
     width: u64,
 }
 
+#[executable]
 fn main() {
     let rec = Rectangle { height: 3, width: 10 };
     let area = calculate_area(@rec);

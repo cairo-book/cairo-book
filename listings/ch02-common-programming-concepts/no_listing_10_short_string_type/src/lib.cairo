@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let my_first_char = 'C';
     let my_first_char_in_hex = 0x43;

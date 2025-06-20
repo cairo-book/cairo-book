@@ -1,5 +1,6 @@
 use core::dict::Felt252Dict;
 
+#[executable]
 fn main() {
     let mut balances: Felt252Dict<u64> = Default::default();
 

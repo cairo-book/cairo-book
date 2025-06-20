@@ -19,9 +19,10 @@ mod shapes {
 
 // We can import the structures `Square`, `Circle`, and `Triangle` from the `shapes` module like
 // this:
-use shapes::{Square, Circle, Triangle};
+use shapes::{Circle, Square, Triangle};
 
 // Now we can directly use `Square`, `Circle`, and `Triangle` in our code.
+#[executable]
 fn main() {
     let sq = Square { side: 5 };
     let cr = Circle { radius: 3 };

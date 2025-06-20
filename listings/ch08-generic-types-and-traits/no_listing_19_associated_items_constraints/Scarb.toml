@@ -6,5 +6,6 @@ experimental-features = ["associated_item_constraints"]
 
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
+[cairo]
+
 [dependencies]
-# foo = { path = "vendor/foo" }

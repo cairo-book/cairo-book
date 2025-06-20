@@ -12,8 +12,8 @@ trait ITokenWrapper<TContractState> {
 
 #[starknet::contract]
 mod TokenWrapper {
+    use starknet::{ContractAddress, SyscallResultTrait, get_caller_address, syscalls};
     use super::ITokenWrapper;
-    use starknet::{ContractAddress, syscalls, SyscallResultTrait, get_caller_address};
 
     #[storage]
     struct Storage {}

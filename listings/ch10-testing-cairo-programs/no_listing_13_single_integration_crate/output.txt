@@ -1,16 +1,16 @@
 $ scarb test 
      Running test adder (snforge test)
-   Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
-    Finished `release` profile [optimized] target(s) in 0.51s
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
-    Finished `dev` profile target(s) in 7 seconds
+    Finished `dev` profile target(s) in 9 seconds
+[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/target/dev/adder_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
+[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/target/dev/adder_tests.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from tests/
-[PASS] adder_tests::integration_tests::internal (gas: ~1)
 Running 1 test(s) from src/
-[PASS] adder::tests::add (gas: ~1)
+[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+Running 1 test(s) from tests/
+[PASS] adder_tests::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 

@@ -1,4 +1,5 @@
 //ANCHOR: all
+#[executable]
 fn main() {
     //ANCHOR: block_expr
     let y = {

@@ -4,6 +4,7 @@ struct Wallet<T, U> {
     address: U,
 }
 
+#[executable]
 fn main() {
     let w = Wallet { balance: 3, address: 14 };
 }

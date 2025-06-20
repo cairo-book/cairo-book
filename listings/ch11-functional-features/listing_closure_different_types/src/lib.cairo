@@ -1,4 +1,5 @@
 //TAG: does_not_compile
+#[executable]
 fn main() {
     // ANCHOR: here
     let example_closure = |x| x;

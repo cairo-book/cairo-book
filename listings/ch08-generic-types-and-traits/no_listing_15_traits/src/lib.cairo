@@ -37,8 +37,9 @@ mod aggregator {
 }
 
 //ANCHOR: main
-use aggregator::{Summary, NewsArticle, Tweet};
+use aggregator::{NewsArticle, Summary, Tweet};
 
+#[executable]
 fn main() {
     let news = NewsArticle {
         headline: "Cairo has become the most popular language for developers",

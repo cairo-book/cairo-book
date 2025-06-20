@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     inlined();
     not_inlined();

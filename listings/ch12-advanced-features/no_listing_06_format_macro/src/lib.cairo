@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let s1: ByteArray = "tic";
     let s2: ByteArray = "tac";

@@ -8,6 +8,7 @@ fn plus_one(x: Option<u8>) -> Option<u8> {
 }
 //ANCHOR_END: here
 
+#[executable]
 fn main() {
     let five: Option<u8> = Some(5);
     let six: Option<u8> = plus_one(five);

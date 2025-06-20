@@ -1,4 +1,5 @@
 //ANCHOR:all
+#[executable]
 fn main() {
     let width = 30;
     let height = 10;

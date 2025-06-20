@@ -1,3 +1,4 @@
+#[executable]
 fn main() {
     let tup = (500, 6, true);
 

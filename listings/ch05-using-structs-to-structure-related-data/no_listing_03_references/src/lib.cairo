@@ -18,6 +18,7 @@ impl RectangleImpl of RectangleTrait {
 //ANCHOR_END: trait_impl
 
 //ANCHOR: main
+#[executable]
 fn main() {
     let mut rect2 = Rectangle { width: 10, height: 20 };
     rect2.scale(2);

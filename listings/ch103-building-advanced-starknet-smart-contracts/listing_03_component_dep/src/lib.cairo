@@ -1,3 +1,3 @@
-mod owner;
-mod counter;
 mod contract;
+mod counter;
+mod owner;

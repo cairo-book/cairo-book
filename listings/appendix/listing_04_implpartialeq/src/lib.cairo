@@ -14,6 +14,7 @@ impl PartialEqImpl of PartialEq<Rectangle> {
     }
 }
 
+#[executable]
 fn main() {
     let rect1 = Rectangle { width: 30, height: 50 };
     let rect2 = Rectangle { width: 50, height: 30 };

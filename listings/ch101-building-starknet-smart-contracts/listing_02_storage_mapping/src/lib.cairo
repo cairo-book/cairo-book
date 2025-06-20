@@ -10,7 +10,7 @@ trait IUserValues<TState> {
 #[starknet::contract]
 mod UserValues {
     use starknet::storage::{
-        StoragePointerReadAccess, StoragePointerWriteAccess, StoragePathEntry, Map,
+        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
     use starknet::{ContractAddress, get_caller_address};
 

@@ -21,6 +21,7 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>>(list: @Array<T>) -> T {
     smallest
 }
 
+#[executable]
 fn main() {
     let list: Array<u8> = array![5, 3, 10];
 
