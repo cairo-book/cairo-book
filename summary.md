@@ -814,8 +814,6 @@ Constants are immutable values bound to a name. Unlike `mut` variables, constant
 
 Constants can be declared with any data type, including structs, enums, and fixed-size arrays. They can only be declared in the global scope and must be set to a constant expression, not a value computed at runtime.
 
-However, the `consteval_int!` macro allows defining constants that are the result of computations.
-
 #### Declaration Examples
 
 ```cairo,noplayground
@@ -830,18 +828,11 @@ enum AnyEnum {
 }
 
 const ONE_HOUR_IN_SECONDS: u32 = 3600;
+const ONE_HOUR_IN_SECONDS_2: u32 = 60 * 60;
 const STRUCT_INSTANCE: AnyStruct = AnyStruct { a: 0, b: 1 };
 const ENUM_INSTANCE: AnyEnum = AnyEnum::A('any enum');
 const BOOL_FIXED_SIZE_ARRAY: [bool; 2] = [true, false];
 ```
-
-#### Using `consteval_int!`
-
-```cairo, noplayground
-    const ONE_HOUR_IN_SECONDS: u32 = consteval_int!(60 * 60);
-```
-
-Variable Shadowing
 
 ### Variable Shadowing
 
@@ -4484,16 +4475,6 @@ Common and Built-in Macros
 ### Common and Built-in Macros
 
 Cairo provides `inline_macros` which are a way of writing code that generates other code, simplifying development.
-
-#### `consteval_int!` Macro
-
-This macro is used to declare a constant that is the result of an integer computation at compile time. For example:
-
-```cairo,noplayground
-const a: felt252 = consteval_int!(2 * 2 * 2);
-```
-
-This will be interpreted by the compiler as `const a: felt252 = 8;`.
 
 #### `selector!` Macro
 

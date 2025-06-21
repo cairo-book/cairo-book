@@ -110,14 +110,6 @@ Here’s an example of constants declaration:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:const_expressions}}
 ```
 
-Nonetheless, it is possible to use the `consteval_int!` macro to create a `const` variable that is the result of some computation:
-
-```cairo, noplayground
-{{#include ../listings/ch02-common-programming-concepts/no_listing_00_consts/src/lib.cairo:consteval_const}}
-```
-
-We will dive into more detail about macros in the [dedicated section](./ch12-05-macros.md).
-
 Cairo's naming convention for constants is to use all uppercase with underscores between words.
 
 Constants are valid for the entire time a program runs, within the scope in
