@@ -124,6 +124,7 @@
 
 - [Building Starknet Smart Contracts](./ch101-00-building-starknet-smart-contracts.md)
 
+  - [Starknet Types](./ch101-01-starknet-types.md)
   - [Contract Storage](./ch101-01-00-contract-storage.md)
     - [Storage Mappings](./ch101-01-01-storage-mappings.md)
     - [Storage Vecs](./ch101-01-02-storage-vecs.md)
