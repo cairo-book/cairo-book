@@ -32,7 +32,7 @@ Required tools:
 The book is structured in the following way:
 
 - `src/`: The main book content - this is where you should write the book. Don't write code examples here, use `listings/` for that, and then refer to the listing using mdbook's `{{#include <filename>}}` or `{{#rustdoc_include <filename>}}` (if referring to specific Anchor tags) macros.
-- `listings/`: Code listings for the book. Each listing is a specific Scarb package. To create a new listing, navigate to the proper `listings/ch-name` and run `scarb new <listing-name>`. Create the package with the Starknet Foundry template.
+- `listings/`: Code listings for the book. Each listing is a specific Scarb package. To create a new listing, navigate to the proper `listings/ch-name` and run `scarb new <listing-name>`. Create the package with the Starknet Foundry template. Instantly delete the created `package_name/.git` directory.
 - `scripts/`: Helper scripts for the book.
 - `book.toml`: The book configuration file.
 - `SUMMARY.md`: The book summary file. Table of Content for the book. All pages of the book must be referenced there.
