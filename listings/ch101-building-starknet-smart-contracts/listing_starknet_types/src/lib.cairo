@@ -84,19 +84,12 @@ mod EthAddressExample {
         fn send_message_to_l1(ref self: ContractState, recipient: EthAddress, amount: felt252) {
             // Send a message to L1 with recipient and amount
             let payload = array![recipient.into(), amount];
-            send_message_to_l1_syscall(
-                self.l1_contract.read().into(),
-                payload.span()
-            ).unwrap();
+            send_message_to_l1_syscall(self.l1_contract.read().into(), payload.span()).unwrap();
         }
     }
 
     #[l1_handler]
-    fn handle_message_from_l1(
-        ref self: ContractState,
-        from_address: felt252,
-        amount: felt252
-    ) {
+    fn handle_message_from_l1(ref self: ContractState, from_address: felt252, amount: felt252) {
         // Verify the message comes from the expected L1 contract
         assert(from_address == self.l1_contract.read().into(), 'Invalid L1 sender');
         // Process the message...
@@ -177,3 +170,5 @@ mod BlockInfoExample {
     }
 }
 // ANCHOR_END: block_tx_info
+
+
