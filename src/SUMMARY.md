@@ -155,6 +155,7 @@
     - [Randomness](./ch103-05-02-randomness.md)
   - [Other Examples](./ch103-06-00-other-examples.md)
     - [Deploying and Interacting with a Voting Contract](./ch103-06-01-deploying-and-interacting-with-a-voting-contract.md)
+    - [Working with ERC20 Token](./ch103-06-02-working-with-erc20-token.md)
 
 ## Starknet Smart Contracts Security
 
