@@ -2,18 +2,6 @@
 
 The Cairo language has some plugins that allow developers to simplify their code. They are called `inline_macros` and are a way of writing code that generates other code.
 
-## `consteval_int!` Macro
-
-In some situations, a developer might need to declare a constant that is the result of a computation of integers. To compute a constant expression and use its result at compile time, it is required to use the `consteval_int!` macro.
-
-Here is an example of `consteval_int!`:
-
-```cairo,noplayground
-const a: felt252 = consteval_int!(2 * 2 * 2);
-```
-
-This will be interpreted as `const a: felt252 = 8;` by the compiler.
-
 ## `selector!` Macro
 
 `selector!("function_name")` macro generates the entry point selector for the given function name.

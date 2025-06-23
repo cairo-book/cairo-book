@@ -124,6 +124,7 @@
 
 - [Building Starknet Smart Contracts](./ch101-00-building-starknet-smart-contracts.md)
 
+  - [Starknet Types](./ch101-01-starknet-types.md)
   - [Contract Storage](./ch101-01-00-contract-storage.md)
     - [Storage Mappings](./ch101-01-01-storage-mappings.md)
     - [Storage Vecs](./ch101-01-02-storage-vecs.md)
@@ -155,6 +156,7 @@
     - [Randomness](./ch103-05-02-randomness.md)
   - [Other Examples](./ch103-06-00-other-examples.md)
     - [Deploying and Interacting with a Voting Contract](./ch103-06-01-deploying-and-interacting-with-a-voting-contract.md)
+    - [Working with ERC20 Token](./ch103-06-02-working-with-erc20-token.md)
 
 ## Starknet Smart Contracts Security
 
@@ -187,12 +189,7 @@
 
 ## Execution Model
 
-- [Execution Model]()
-
-  - [Registers]()
-  - [Instructions]()
-  - [Cairo Assembly (CASM)]()
-  - [State transition]()
+- [Execution Model](ch203-00-execution-model.md)
 
 ## Builtins
 
@@ -212,14 +209,11 @@
 
 ## Hints
 
-- [Hints]()
-  - [Structure]()
-  - [Hint runner]()
-  - [List of hints]()
+- [Hints](./ch205-00-hints.md)
 
 ## Runner
 
-- [Runner]()
+- [Runner](./ch206-00-runner.md)
 
   - [Program]()
     - [Program Artifacts]()
