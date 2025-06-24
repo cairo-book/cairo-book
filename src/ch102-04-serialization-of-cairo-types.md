@@ -58,11 +58,11 @@ A `u256` value in Cairo is represented by two `felt252` values, as follows:
 
 For example:
 
-* A `u256` variable whose decimal value is `2` is serialized as `[2,0]`. To understand why, examine the binary representation of `2` and split it into two 128-bit parts, as follows:
+* A `u256` variable whose decimal value is 2 is serialized as `[2,0]`. To understand why, examine the binary representation of 2 and split it into two 128-bit parts, as follows:
     - 128 high bits: \\(0 \cdots 0 \\)
     - 128 low bits: \\( 0 \cdots 10 \\)
 * A `u256` variable whose decimal value is \\( 2^{128} \\) is serialized as `[0,1]`. To understand why, examine the binary representation of \\( 2^{128} \\) and split it into two 128-bit parts, as follows:
-    - 128 high bits: \\( 0 \cdots 10 \\)
+    - 128 high bits: \\( 0 \cdots 01 \\)
     - 128 low bits: \\(0 \cdots 0 \\)
 
 * A `u256` variable whose decimal value is \\( 2^{129}+2^{128}+20 \\), is serialized as `[20,3]`. To understand why, examine the binary representation of the \\( 2^{129}+2^{128}+20 \\) and split it into two 128-bit parts, as follows:
@@ -188,8 +188,8 @@ Combining the above, the struct is serialized as `[2,0,5,3,1,2,3]`.
 A string is represented in Cairo as a `ByteArray` type. A byte array is actually a struct with the following members:
 
 * `data: Array<felt252>`: Contains 31-byte chunks of the byte array. Each `felt252` value has exactly 31 bytes. If the number of bytes in the byte array is less than 31, then this array is empty.
-*`pending_word: felt252`: The bytes that remain after filling the `data` array with full 31-byte chunks. The pending word consists of at most 30 bytes.
-*`pending_word_len: usize`: The number of bytes in `pending_word`.
+* `pending_word: felt252`: The bytes that remain after filling the `data` array with full 31-byte chunks. The pending word consists of at most 30 bytes.
+* `pending_word_len: usize`: The number of bytes in `pending_word`.
 
 **Example #1: A string shorter than 31 characters**
 
