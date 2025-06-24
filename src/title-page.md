@@ -8,13 +8,14 @@ This book is open source. Find a typo or want to contribute? Check out the book'
 
 Additional resources for mastering Cairo:
 
-* [The Scarb documentation](https://docs.swmansion.com/scarb/docs.html): The official documentation for Cairo’s package manager and build tool, covering how to create and manage packages, use dependencies, run builds, and configure projects
-
-* [The Cairo Playground](https://www.cairo-lang.org/cairovm/): A browser-based playground for Cairo, enabling to explore and experiment with Cairo by writing, compiling, debugging, and proving Cairo code without any setup, making it the ideal entrypoint for exploring and experimenting with Cairo
+* [The Cairo Playground](https://www.cairo-lang.org/cairovm/): A browser-based playground for Cairo, enabling to explore and experiment with Cairo by writing, compiling, debugging, and proving Cairo code without any setup
+    > Note: You can use the Cairo Playground to experiment with the book's code snippets and see how they compile into Sierra (Intermediate Representation) and Casm (Cairo Assembly).
 
 * [The Cairo Core Library Docs](https://docs.cairo-lang.org/core?_=60): The documentation for Cairo's Core library, the standard set of types, traits, and utilities built into the language which provides essential building blocks basic used throughout the Cairo ecosystem and is automatically available in every Cairo project
 
 * [The Cairo Package Registry](https://scarbs.xyz/): The host for Cairo's growing collection of reusable libraries, including [Alexandria](https://github.com/keep-starknet-strange/alexandria), [Open Zeppelin Contracts for Cairo](https://docs.openzeppelin.com/contracts-cairo/1.0.0/), all of which can be easily integrated via Scarb, streamlining development and dependency management
+
+* [The Scarb documentation](https://docs.swmansion.com/scarb/docs.html): The official documentation for Cairo’s package manager and build tool, covering how to create and manage packages, use dependencies, run builds, and configure projects
 
 * [The Cairo whitepaper](https://eprint.iacr.org/2021/1063.pdf): The original paper introducing Cairo by StarkWare, which explains Cairo as a language for writing provable programs, details its architecture, and shows how it enables scalable, verifiable computation without relying on trusted setups
 
