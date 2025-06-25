@@ -2,7 +2,7 @@
 
 Events are a way for smart contracts to inform the outside world of any changes that occur during their execution. They play a critical role in the integration of smart contracts into real-world applications.
 
-Technically speaking, an event is a custom data structure emitted by a smart contract during its execution and stored in the corresponding transaction receipt, allowing any external tool to parse and index it.
+Technically speaking, an event is a custom data structure emitted by a smart contract during its execution and stored in the corresponding transaction receipt, allowing any external tool to parse and index it (most commonly, a [Starknet SDK](https://docs.starknet.io/tools/overview/) such as [Starknet.js](https://starknetjs.com/docs/guides/events/)).
 
 ## Defining Events
 
