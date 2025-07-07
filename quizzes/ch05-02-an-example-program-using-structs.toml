@@ -18,7 +18,7 @@ fn main() {
 }
 """
 answer.doesCompile = false
-context = "The area function takes ownership of its argument `rectangle`, which doesn't implement `Copy`. Calling `perimeter(rectangle)` therefore moves `rectangle`, meaning it cannot be used on the next line."
+context = "The perimeter function takes ownership of its argument `rectangle`, which doesn't implement `Copy`. Calling `perimeter(rectangle)` therefore moves `rectangle`, meaning it cannot be used on the next line."
 id = "3d5a7161-f117-46c6-a293-ccbabe4b4a9d"
 
 [[questions]]
