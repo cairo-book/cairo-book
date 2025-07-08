@@ -168,6 +168,9 @@ Writing `(_, _)` for the last arm of a tuple matching pattern might feel superfl
 ```cairo,noplayground
 {{#include ../listings/ch06-enums-and-pattern-matching/no_listing_12_match_tuple/src/lib.cairo:week}}
 ```
+> **Note**: Currently, `match` on tuples only supports enums as tuple members.  
+Matching tuples containing primitive types like `(u8, u8)` or `(felt252, bool)` is not yet supported and will result in a compile-time error.  
+Support for more tuple types in pattern matching is expected in future Cairo versions.
 
 ## Matching `felt252` and Integer Variables
 
