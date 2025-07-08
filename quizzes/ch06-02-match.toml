@@ -13,10 +13,8 @@ fn main() {
         Location::Point(p) => p,
         Location::Range(r) => match r {
             (0, _) => 0,
-            (_, n) => n,
-            _ => 404
-        },
-        _ => 403
+            (_, n) => n
+        }
     };
     println!("{}", n);
 }
