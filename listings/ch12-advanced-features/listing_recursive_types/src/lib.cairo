@@ -1,5 +1,3 @@
-use core::box::BoxTrait;
-
 mod display;
 use display::DebugBinaryTree;
 

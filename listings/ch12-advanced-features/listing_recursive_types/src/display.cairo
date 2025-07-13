@@ -1,6 +1,4 @@
 use core::fmt::{Debug, Error, Formatter};
-use core::nullable::NullableTrait;
-use core::ops::Deref;
 use super::BinaryTree;
 
 pub(crate) impl DebugBinaryTree of Debug<BinaryTree> {
