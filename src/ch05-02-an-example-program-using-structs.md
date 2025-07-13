@@ -76,6 +76,10 @@ Defining a conversion for a custom type using the `Into` trait will typically re
 ```cairo
 {{#include ../listings/ch05-using-structs-to-structure-related-data/no_listing_07_into/src/lib.cairo}}
 ```
+> **Note :**  
+> The `PartialEq` trait allows for equality comparisons (`==`) between instances of a type.  
+> When derived on structs, two instances are considered equal only if **all their fields** are equal.  
+> For more details, see [PartialEq for Equality Comparisons](https://book.cairo-lang.org/appendix-03-derivable-traits.html#:~:text=PartialEq%20for%20Equality%20Comparisons)
 
 ### TryInto
 
