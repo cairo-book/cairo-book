@@ -698,7 +698,7 @@
    * Initializes the ChatManager when the DOM is fully loaded.
    * This ensures that all required DOM elements are available before the chat is initialized.
    */
-  document.addEventListener("DOMContentLoaded", () => {
+  function initializeChatManager() {
     window.chatManager = new ChatManager();
 
     /**
@@ -708,5 +708,14 @@
     window.addEventListener("beforeunload", () => {
       window.chatManager.saveChatHistory();
     });
-  });
+  }
+
+  // Check if DOM is already loaded
+  if (document.readyState === "loading") {
+    // DOM is still loading, wait for DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", initializeChatManager);
+  } else {
+    // DOM is already loaded, initialize immediately
+    initializeChatManager();
+  }
 })();
