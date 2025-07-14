@@ -55,6 +55,18 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     {{/if}}
 
+
+    {{!-- Canonical URL for SEO - will be set by script below --}}
+    <link rel="canonical" id="canonical-link" href="" />
+    <script>
+        (function () {
+            var path = "{{ path }}";
+            var canonicalPath = path === "" ? "" : path.replace(/\.md$/, ".html");
+            var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
+            document.getElementById("canonical-link").href = canonicalUrl;
+        })();
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -130,6 +142,7 @@
             gtag('js', new Date());
 
             gtag('config', 'G-0ZJLBV4KE2');
+            gtag('config', 'G-WY42TERK5P')
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -183,6 +196,13 @@
                                 <span class="menu-cairo-home-text">Cairo Home</span>
                             </a>
                         </div>
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://starknet.io" class="menu-cairo-home" title="Starknet" aria-label="Starknet">
+                                <img src="{{ path_to_root }}/icons/SN_logo.png" alt="Starknet Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Starknet</span>
+                            </a>
+                        </div>
                         <button id="language-toggle" class="icon-button" type="button" title="Change language"
                             aria-label="Change language" aria-haspopup="true" aria-expanded="false"
                             aria-controls="language-list">
@@ -204,11 +224,11 @@
 
                             // The path to the root, taking the current
                             // language into account.
-                            {{#if (eq language "en")}}
+                            { { #if(eq language "en") } }
                             let full_path_to_root = "{{ path_to_root }}";
-                            {{else}}
+                            { {else } }
                             let full_path_to_root = "{{ path_to_root }}../";
-                            {{/if}}
+                            { {/if } }
                             // The page path (mdbook only gives us
                             // access to the path to the Markdown file).
                             let path = "{{ path }}".replace(/\.md$/, ".html");
