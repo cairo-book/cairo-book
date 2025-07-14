@@ -14,6 +14,10 @@ To define a struct, we enter the keyword `struct` and name the entire struct. A 
 
 <span class="caption">Listing {{#ref user-struct}}: A `User` struct definition</span>
 
+> **Note :**  
+> You can derive additional traits on structs, such as `PartialEq` for comparison and `Debug` for debug-printing.  
+> See the [Appendix on Derivable Traits](https://www.starknet.io/cairo-book/appendix-03-derivable-traits.html) for a complete list and examples.
+
 To use a struct after we’ve defined it, we create an _instance_ of that struct by specifying concrete values for each of the fields.
 We create an instance by stating the name of the struct and then add curly brackets containing _key: value_ pairs, where the keys are the names of the fields and the values are the data we want to store in those fields. We don’t have to specify the fields in the same order in which we declared them in the struct. In other words, the struct definition is like a general template for the type, and instances fill in that template with particular data to create values of the type.
 
