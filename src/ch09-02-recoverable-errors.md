@@ -84,7 +84,14 @@ The last operator we will talk about is the `?` operator. The `?` operator is us
 - If the value is `Ok(x)` or `Some(x)`, it will return the inner value `x` directly.
 - If the value is `Err(e)` or `None`, it will propagate the error or `None` by immediately returning from the function.
 
-The `?` operator is useful when you want to handle errors implicitly and let the calling function deal with them.
+Another important aspect to consider is that the `?` operator can only be used if the function it's inside of returns a `Result` or an `Option`, and the type must match the value being unwrapped.
+
+- If you use `?` on a `Result<T, E>`, your function must return a `Result`
+- If you use `?` on an `Option<T>`, your function must return an `Option`
+
+Otherwise, the compiler will raise a type mismatch error.
+
+The `?` operator is thus useful when you want to handle errors implicitly and let the calling function deal with them.
 
 Here is an example:
 
