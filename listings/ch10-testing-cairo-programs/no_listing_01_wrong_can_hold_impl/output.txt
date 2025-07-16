@@ -1,5 +1,9 @@
 $ scarb test 
     Running test no_listing_01_wrong_can_hold_impl (snforge test)
+   Compiling test(no_listing_01_wrong_can_hold_impl_unittest) no_listing_01_wrong_can_hold_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/Scarb.toml)
+    Finished `dev` profile target(s) in 9 seconds
+
+
 Collected 2 test(s) from no_listing_01_wrong_can_hold_impl package
 Running 2 test(s) from src/
 [FAIL] no_listing_01_wrong_can_hold_impl::tests::larger_can_hold_smaller
