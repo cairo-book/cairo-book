@@ -1,0 +1,20 @@
+$ scarb test 
+     Running test listing_10_04 (snforge test)
+   Compiling test(listing_10_04_unittest) listing_10_04 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04/Scarb.toml)
+    Finished `dev` profile target(s) in 9 seconds
+
+
+Collected 2 test(s) from listing_10_04 package
+Running 2 test(s) from src/
+[FAIL] listing_10_04::wrong_add_two::tests::it_adds_two
+
+Failure data:
+    "assertion `4 == add_two(2)` failed.
+    4: 4
+    add_two(2): 5"
+
+[PASS] listing_10_04::wrong_add_two::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+Tests: 1 passed, 1 failed, 0 ignored, 0 filtered out
+
+Failures:
+    listing_10_04::wrong_add_two::tests::it_adds_two
