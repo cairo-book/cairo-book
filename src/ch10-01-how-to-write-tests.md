@@ -230,7 +230,7 @@ fails. Change the implementation of the `add_two` function to instead add `3`:
 Run the tests again:
 
 ```shell
-{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/output.txt}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/output-wrong_add.txt}}
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following
