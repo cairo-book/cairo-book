@@ -2,6 +2,7 @@ $ scarb test
      Running test listing_10_04 (snforge test)
    Compiling test(listing_10_04_unittest) listing_10_04 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04/Scarb.toml)
     Finished `dev` profile target(s) in 9 seconds
+[WARNING] File = /Users/sidarths/workspace/cairo-book/listings/ch10-testing-cairo-programs/listing_10_04/target/dev/listing_10_04_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 2 test(s) from listing_10_04 package
