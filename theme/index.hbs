@@ -57,15 +57,33 @@
 
 
     {{!-- Canonical URL for SEO - will be set by script below --}}
+    {{#unless is_print}}
     <link rel="canonical" id="canonical-link" href="" />
     <script>
         (function () {
             var path = "{{ path }}";
-            var canonicalPath = path === "" ? "" : path.replace(/\.md$/, ".html");
+            var canonicalPath;
+            
+            // Special handling for different cases
+            if (path === "" || path === "index.md") {
+                // Homepage should not have index.html
+                canonicalPath = "";
+            } else {
+                // Other pages: replace .md with .html
+                canonicalPath = path.replace(/\.md$/, ".html");
+            }
+            
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
+            
+            // Remove trailing slash if present (except for root)
+            if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
+                canonicalUrl = canonicalUrl.slice(0, -1);
+            }
+            
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
+    {{/unless}}
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
