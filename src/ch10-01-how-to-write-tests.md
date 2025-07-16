@@ -224,7 +224,7 @@ Let’s introduce a bug into our code to see what `assert_eq!` looks like when i
 fails. Change the implementation of the `add_two` function to instead add `3`:
 
 ```cairo, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/src/wrong_add_two.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/src/wrong_add_two.cairo:here}}
 ```
 
 Run the tests again:
