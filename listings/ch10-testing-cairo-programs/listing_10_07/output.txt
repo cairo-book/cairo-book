@@ -1,4 +1,4 @@
-$ scarb test add_three_and_two
+$ scarb test add_two_and_two
      Running test listing_10_07 (snforge test)
    Compiling test(listing_10_07_unittest) listing_10_07 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_07/Scarb.toml)
     Finished `dev` profile target(s) in 8 seconds
@@ -7,6 +7,6 @@ $ scarb test add_three_and_two
 
 Collected 1 test(s) from listing_10_07 package
 Running 1 test(s) from src/
-[PASS] listing_10_07::tests::add_three_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Tests: 1 passed, 0 failed, 0 ignored, 1 filtered out
 
