@@ -3,19 +3,34 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 50px;
-  height: 50px;
+  width: auto;
+  height: auto;
+  padding: 12px 20px;
   background-color: var(--links);
   color: var(--bg);
-  border-radius: 50%;
+  border-radius: 24px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: 500;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   z-index: 1000;
+}
+
+#chat-button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+#chat-button span {
+  line-height: 1;
+  white-space: nowrap;
 }
 
 #chat-button:hover {
