@@ -196,7 +196,7 @@ parameter, then we test this function using `assert_eq!` and `assert_ne!` macros
 <span class="filename">Filename: src/lib.cairo</span>
 
 ```cairo, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/src/add_two.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/src/lib.cairo}}
 ```
 
 {{#label add_two}}
@@ -224,13 +224,13 @@ Let’s introduce a bug into our code to see what `assert_eq!` looks like when i
 fails. Change the implementation of the `add_two` function to instead add `3`:
 
 ```cairo, noplayground
-{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/src/wrong_add_two.cairo}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_04_wong_add/src/lib.cairo:here}}
 ```
 
 Run the tests again:
 
 ```shell
-{{#include ../listings/ch10-testing-cairo-programs/listing_10_04/output.txt}}
+{{#include ../listings/ch10-testing-cairo-programs/listing_10_04_wong_add/output.txt}}
 ```
 
 Our test caught the bug! The `it_adds_two` test failed with the following

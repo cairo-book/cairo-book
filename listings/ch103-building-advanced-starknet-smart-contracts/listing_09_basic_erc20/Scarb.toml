@@ -10,7 +10,7 @@ starknet = "2.11.4"
 openzeppelin_token = "2.0.0"
 
 [dev-dependencies]
-snforge_std = "0.44.0"
+snforge_std = "0.46.0"
 assert_macros = "2.11.4"
 
 [[target.starknet-contract]]
@@ -36,7 +36,7 @@ allow-prebuilt-plugins = ["snforge_std"]
 
 # [[tool.snforge.fork]]
 # name = "SOME_SECOND_NAME"
-# url = "http://your.second.rpc.url"                         
+# url = "http://your.second.rpc.url"
 # block_id.number = "123"                                    # Block to fork from (block number)
 
 # [[tool.snforge.fork]]

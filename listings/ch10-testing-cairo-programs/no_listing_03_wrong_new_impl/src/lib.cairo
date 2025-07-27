@@ -1,3 +1,5 @@
+// TAG: tests_fail
+
 #[derive(Drop)]
 struct Guess {
     value: u64,
@@ -18,5 +20,18 @@ impl GuessImpl of GuessTrait {
     }
 }
 // ANCHOR_END: here
+
+// ANCHOR: test
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[should_panic]
+    fn greater_than_100() {
+        GuessTrait::new(200);
+    }
+}
+// ANCHOR_END: test
 
 

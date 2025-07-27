@@ -1,0 +1,23 @@
+$ scarb test 
+     Running test listing_10_04_wong_add (snforge test)
+    Blocking waiting for file lock on registry db cache
+    Blocking waiting for file lock on registry db cache
+   Compiling test(listings/ch10-testing-cairo-programs/listing_10_04_wong_add/Scarb.toml)
+    Finished `dev` profile target(s) in 3 seconds
+[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/listing_10_04_wong_add/target/dev/listing_10_04_wong_add_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
+
+
+Collected 1 test(s) from listing_10_04_wong_add package
+Running 1 test(s) from src/
+[FAIL] listing_10_04_wong_add::tests::it_adds_two
+
+Failure data:
+    "assertion `4 == add_two(2)` failed.
+    4: 4
+    add_two(2): 5"
+
+Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
+
+Failures:
+    listing_10_04_wong_add::tests::it_adds_two
+

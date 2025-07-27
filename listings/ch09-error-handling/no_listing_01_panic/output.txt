@@ -1,6 +1,6 @@
 $ scarb execute 
    Compiling no_listing_01_panic v0.1.0 (listings/ch09-error-handling/no_listing_01_panic/Scarb.toml)
-    Finished `dev` profile target(s) in 5 seconds
+    Finished `dev` profile target(s) in 0 seconds
    Executing no_listing_01_panic
 error: Panicked with 0x2.
 

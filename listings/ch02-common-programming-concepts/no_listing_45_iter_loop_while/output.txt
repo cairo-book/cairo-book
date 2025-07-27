@@ -1,6 +1,6 @@
 $ scarb execute 
    Compiling no_listing_45_iter_loop_while v0.1.0 (listings/ch02-common-programming-concepts/no_listing_45_iter_loop_while/Scarb.toml)
-    Finished `dev` profile target(s) in 4 seconds
+    Finished `dev` profile target(s) in 0 seconds
    Executing no_listing_45_iter_loop_while
 the value is: 10
 the value is: 20
