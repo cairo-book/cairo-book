@@ -1,0 +1,14 @@
+$ scarb build 
+   Compiling listing_invalid_qmark v0.1.0 (listings/ch09-error-handling/listing_invalid_qmark/Scarb.toml)
+error: `?` can only be used in a function with `Option` or `Result` return type.
+ --> listings/ch09-error-handling/listing_invalid_qmark/src/lib.cairo:4:20
+    let some_num = parse_u8(258)?;
+                   ^^^^^^^^^^^^^^
+
+warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
+ --> listings/ch09-error-handling/listing_invalid_qmark/src/lib.cairo:4:9
+    let some_num = parse_u8(258)?;
+        ^^^^^^^^
+
+error: could not compile `listing_invalid_qmark` due to previous error
+

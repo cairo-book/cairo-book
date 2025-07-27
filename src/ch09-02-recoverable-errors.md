@@ -77,30 +77,64 @@ The first one tests a valid conversion from `felt252` to `u8`, expecting the `un
 [result corelib]: https://github.com/starkware-libs/cairo/blob/main/corelib/src/result.cairo#L20
 [tests]: ./ch10-01-how-to-write-tests.md
 
-### The `?` Operator
+## Propagating Errors
 
-The last operator we will talk about is the `?` operator. The `?` operator is used for more idiomatic and concise error handling. When you use the `?` operator on a `Result` or `Option` type, it will do the following:
+When a function’s implementation calls something that might fail, instead of handling the error within the function itself you can return the error to the calling code so that it can decide what to do. This is known as _propagating_ the error and gives more control to the calling code, where there might be more information or logic that dictates how the error should be handled than what you have available in the context of your code.
 
-- If the value is `Ok(x)` or `Some(x)`, it will return the inner value `x` directly.
-- If the value is `Err(e)` or `None`, it will propagate the error or `None` by immediately returning from the function.
+For example, Listing {{#ref match-example}} shows an implementation of a function that tries to parse a number as `u8` and uses a match expression to handle a potential error.
 
-The `?` operator is useful when you want to handle errors implicitly and let the calling function deal with them.
-
-Here is an example:
-
-```cairo,noplayground
-{{#include ../listings/ch09-error-handling/listing_09_02/src/lib.cairo:function}}
+```cairo, noplayground
+{{#include ../listings/ch09-error-handling/listing_result_match/src/lib.cairo:function}}
 ```
 
-We can see that `do_something_with_parse_u8` function takes a `felt252` value as input and calls `parse_u8` function. The `?` operator is used to propagate the error, if any, or unwrap the successful value.
+{{#label match-example}}
+<span class="caption">Listing {{#ref match-example}}: A function that returns errors to the calling code using a `match` expression.</span>
 
-And with a little test case:
+The code that calls this `parse_u8` will handle getting either an `Ok` value that contains a number or an `Err` value that contains an error message. It’s up to the calling code to decide what to do with those values. If the calling code gets an `Err` value, it could call `panic!` and crash the program, or use a default value. We don’t have enough information on what the calling code is actually trying to do, so we propagate all the success or error information upward for it to handle appropriately.
 
-```cairo,noplayground
-{{#rustdoc_include ../listings/ch09-error-handling/listing_09_02/src/lib.cairo:tests}}
+This pattern of propagating errors is so common in Cairo that Cairo provides the question mark operator `?` to make this easier.
+
+## A Shortcut for Propagating Errors: the `?` Operator
+
+Listing {{#ref question-operator}} shows an implementation of `mutate_byte` that has the same functionality as the one in Listing {{#ref match-example}} but uses the `?` operator to gracefully handle errors.
+
+```cairo, noplayground
+{{#rustdoc_include ../listings/ch09-error-handling/listing_qmark_op/src/lib.cairo:function}}
 ```
 
-The console will print the error `Invalid Integer`.
+{{#label question-operator}}
+<span class="caption">Listing {{#ref question-operator}}: A function that returns errors to the calling code using the `?` operator.</span>
+
+The `?` placed after a `Result` value is defined to work in almost the same way as the `match` expressions we defined to handle the `Result` values in Listing 1. If the value of the `Result` is an `Ok`, the value inside the `Ok` will get returned from this expression, and the program will continue. If the value is an `Err`, the `Err` will be returned from the whole function as if we had used the `return` keyword so the error value gets propagated to the calling code.
+
+In the context of Listing 2, the `?` at the end of the `parse_u8` call will return the value inside an `Ok` to the variable `input_to_u8`. If an error occurs, the `?` operator will return early out of the whole function and give any `Err` value to the calling code.
+
+The `?` operator eliminates a lot of boilerplate and makes this function’s implementation simpler and more ergonomic.
+
+### Where The `?` Operator Can Be Used
+
+The `?` operator can only be used in functions whose return type is compatible with the value the `?` is used on. This is because the `?` operator is defined to perform an early return of a value out of the function, in the same manner as the `match` expression we defined in Listing {{#ref match-example}}. In Listing {{#ref match-example}}, the `match` was using a `Result` value, and the early return arm returned an `Err(e)` value. The return type of the function has to be a `Result` so that it’s compatible with this return.
+
+In Listing {{#ref question-operator-wrong-return}}, let’s look at the error we’ll get if we use the `?` operator in a function with a return type that is incompatible with the type of the value we use `?` on.
+
+```cairo
+{{#rustdoc_include ../listings/ch09-error-handling/listing_invalid_qmark/src/lib.cairo:main}}
+```
+
+{{#label question-operator-wrong-return}}
+<span class="caption">Listing {{#ref question-operator-wrong-return}}: Attempting to use the `?` in a `main` function that returns `()` won’t compile.</span>
+
+This code calls a function that might fail. The `?` operator follows the `Result` value returned by `parse_u8`, but this `main` function has the return type of `()`, not `Result`. When we compile this code, we get an error message similar to this:
+
+```text
+{{#include ../listings/ch09-error-handling/listing_invalid_qmark/output.txt}}
+```
+
+This error points out that we’re only allowed to use the `?` operator in a function that returns `Result` or `Option`.
+
+To fix the error, you have two choices. One choice is to change the return type of your function to be compatible with the value you’re using the `?` operator on as long as you have no restrictions preventing that. The other choice is to use a `match` to handle the `Result<T, E>` in whatever way is appropriate.
+
+The error message also mentioned that `?` can be used with `Option<T>` values as well. As with using `?` on `Result`, you can only use `?` on `Option` in a function that returns an `Option`. The behavior of the `?` operator when called on an `Option<T>` is similar to its behavior when called on a `Result<T, E>`: if the value is `None`, the `None` will be returned early from the function at that point. If the value is `Some`, the value inside the `Some` is the resultant value of the expression, and the function continues.
 
 ### Summary
 
