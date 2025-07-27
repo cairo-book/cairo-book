@@ -1,3 +1,5 @@
+//TAG: does_not_compile
+
 //ANCHOR: main
 #[executable]
 fn main() {
