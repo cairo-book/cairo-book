@@ -45,8 +45,8 @@ fn eval_circuit() -> (u384, u384) {
     let add_output = res.get_output(add);
     let circuit_output = res.get_output(mul);
 
-    assert(add_output == u384 { limb0: 30, limb1: 0, limb2: 0, limb3: 0 }, 'add_output');
-    assert(circuit_output == u384 { limb0: 300, limb1: 0, limb2: 0, limb3: 0 }, 'circuit_output');
+    assert!(add_output == u384 { limb0: 30, limb1: 0, limb2: 0, limb3: 0 }, "add_output");
+    assert!(circuit_output == u384 { limb0: 300, limb1: 0, limb2: 0, limb3: 0 }, "circuit_output");
     // ANCHOR_END: output_values
 
     (add_output, circuit_output)

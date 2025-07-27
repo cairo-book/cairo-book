@@ -49,10 +49,10 @@ mod contract_msg {
     //ANCHOR: felt_msg_handler
     #[l1_handler]
     fn msg_handler_felt(ref self: ContractState, from_address: felt252, my_felt: felt252) {
-        assert(from_address == self.allowed_message_sender.read(), 'Invalid message sender');
+        assert!(from_address == self.allowed_message_sender.read(), "Invalid message sender");
 
         // You can now use the data, automatically deserialized from the message payload.
-        assert(my_felt == 123, 'Invalid value');
+        assert!(my_felt == 123, "Invalid value");
     }
     //ANCHOR_END: felt_msg_handler
 
@@ -60,8 +60,8 @@ mod contract_msg {
     fn msg_handler_struct(ref self: ContractState, from_address: felt252, data: MyData) {
         // assert(from_address == ...);
 
-        assert(!data.a.is_zero(), 'data.a is invalid');
-        assert(!data.b.is_zero(), 'data.b is invalid');
+        assert!(!data.a.is_zero(), "data.a is invalid");
+        assert!(!data.b.is_zero(), "data.b is invalid");
     }
 
     #[abi(embed_v0)]

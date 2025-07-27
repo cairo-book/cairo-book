@@ -71,11 +71,11 @@ mod tests {
         let value = Sizes { tiny: 0x12, small: 0x12345678, medium: 0x1234567890 };
 
         let packed = SizesStorePacking::pack(value);
-        assert(packed == 0x12345678901234567812, 'wrong packed value');
+        assert!(packed == 0x12345678901234567812, "wrong packed value");
 
         let unpacked = SizesStorePacking::unpack(packed);
-        assert(unpacked.tiny == 0x12, 'wrong unpacked tiny');
-        assert(unpacked.small == 0x12345678, 'wrong unpacked small');
-        assert(unpacked.medium == 0x1234567890, 'wrong unpacked medium');
+        assert!(unpacked.tiny == 0x12, "wrong unpacked tiny");
+        assert!(unpacked.small == 0x12345678, "wrong unpacked small");
+        assert!(unpacked.medium == 0x1234567890, "wrong unpacked medium");
     }
 }
