@@ -181,7 +181,7 @@ def make_chunks(merged_content: str, target_chunk_size: int = 1000) -> List[str]
 
 if __name__ == "__main__":
     # weave.init('cairobook-summarizer')
-    lm = dspy.LM('gemini/gemini-2.5-flash-preview-05-20', api_key=os.getenv('GEMINI_API_KEY'), max_tokens=10000, temperature=0.50)
+    lm = dspy.LM('gemini/gemini-2.5-flash', api_key=os.getenv('GEMINI_API_KEY'), max_tokens=30000, temperature=0.50)
     dspy.settings.configure(lm=lm)
     docs_dir = os.path.join('book', 'markdown') # Insert a path to your docs directory here
     output_file = 'merged_docs.md'
