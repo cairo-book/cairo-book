@@ -93,8 +93,8 @@ mod DiceGame {
     #[abi(embed_v0)]
     impl DiceGame of super::IDiceGame<ContractState> {
         fn guess(ref self: ContractState, guess: u8) {
-            assert(self.game_window.read(), 'GAME_INACTIVE');
-            assert(guess >= 1 && guess <= 6, 'INVALID_GUESS');
+            assert!(self.game_window.read(), "GAME_INACTIVE");
+            assert!(guess >= 1 && guess <= 6, "INVALID_GUESS");
 
             let caller = get_caller_address();
             self.user_guesses.entry(caller).write(guess);
@@ -112,8 +112,8 @@ mod DiceGame {
         }
 
         fn process_game_winners(ref self: ContractState) {
-            assert(!self.game_window.read(), 'GAME_ACTIVE');
-            assert(self.last_random_number.read() != 0, 'NO_RANDOM_NUMBER_YET');
+            assert!(!self.game_window.read(), "GAME_ACTIVE");
+            assert!(self.last_random_number.read() != 0, "NO_RANDOM_NUMBER_YET");
 
             let caller = get_caller_address();
             let user_guess: u8 = self.user_guesses.entry(caller).read();
@@ -200,14 +200,14 @@ mod DiceGame {
         ) {
             // Have to make sure that the caller is the Pragma Randomness Oracle contract
             let caller_address = get_caller_address();
-            assert(
+            assert!(
                 caller_address == self.pragma_vrf_contract_address.read(),
-                'caller not randomness contract',
+                "caller not randomness contract",
             );
             // and that the current block is within publish_delay of the request block
             let current_block_number = get_block_number();
             let min_block_number = self.min_block_number_storage.read();
-            assert(min_block_number <= current_block_number, 'block number issue');
+            assert!(min_block_number <= current_block_number, "block number issue");
 
             let random_word = *random_words.at(0);
             self.last_random_number.write(random_word);

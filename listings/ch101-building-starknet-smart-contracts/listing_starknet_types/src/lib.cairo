@@ -30,7 +30,7 @@ mod AddressExample {
 
         fn transfer_ownership(ref self: ContractState, new_owner: ContractAddress) {
             let caller = get_caller_address();
-            assert(caller == self.owner.read(), 'Only owner can transfer');
+            assert!(caller == self.owner.read(), "Only owner can transfer");
             self.owner.write(new_owner);
         }
     }
@@ -91,7 +91,7 @@ mod EthAddressExample {
     #[l1_handler]
     fn handle_message_from_l1(ref self: ContractState, from_address: felt252, amount: felt252) {
         // Verify the message comes from the expected L1 contract
-        assert(from_address == self.l1_contract.read().into(), 'Invalid L1 sender');
+        assert!(from_address == self.l1_contract.read().into(), "Invalid L1 sender");
         // Process the message...
     }
 }

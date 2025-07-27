@@ -15,6 +15,6 @@ fn main() {
     let mana_potion: Potion = Potion { health: 0, mana: 100 };
     let super_potion: Potion = health_potion + mana_potion;
     // Both potions were combined with the `+` operator.
-    assert(super_potion.health == 100, '');
-    assert(super_potion.mana == 100, '');
+    assert!(super_potion.health == 100);
+    assert!(super_potion.mana == 100);
 }
