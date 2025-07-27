@@ -291,6 +291,48 @@ function playground_text(playground, hidden = true) {
             result_block.innerText = output;
             result_block.classList.remove("result-no-output");
           }
+        } else if (response.CompilerAndRunnerError) {
+          // The CompilerAndRunnerError is a string that contains a Rust Debug format
+          // We need to extract the logs from it since it's not valid JSON
+          let errorMsg = "";
+
+          try {
+            const errorString = response.CompilerAndRunnerError;
+
+            // Try to extract error messages using regex patterns
+            // Look for error messages in the format: message: "error: ..."
+            const errorPattern = /message: "([^"]+)"/g;
+            const errorMatches = [...errorString.matchAll(errorPattern)];
+
+            if (errorMatches.length > 0) {
+              errorMsg = errorMatches
+                .map((match) => {
+                  let message = match[1];
+                  // Unescape the message and sanitize file paths
+                  message = message.replace(/\\n/g, "\n");
+                  message = message.replace(/\\\\/g, "\\");
+                  message = message.replace(
+                    /\/opt\/app\/[a-f0-9-]+\/main\.cairo/g,
+                    "main.cairo",
+                  );
+                  return message;
+                })
+                .filter((msg) => msg.startsWith("error:")) // Only include actual errors
+                .join("\n\n");
+            }
+
+            // Fallback if no error messages found
+            if (!errorMsg) {
+              errorMsg = "Compilation or execution failed";
+            }
+
+            result_block.innerText = errorMsg;
+            result_block.classList.remove("result-no-output");
+          } catch (parseError) {
+            result_block.innerText =
+              "Error parsing compiler response: " + parseError.message;
+            result_block.classList.remove("result-no-output");
+          }
         } else {
           result_block.innerText = "Unexpected response format";
           result_block.classList.remove("result-no-output");
