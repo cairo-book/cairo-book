@@ -1,3 +1,5 @@
+// TAG: tests_fail
+
 #[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,
@@ -15,7 +17,6 @@ impl RectangleImpl of RectangleTrait {
     }
 }
 // ANCHOR_END: wrong_impl
-
 
 // ANCHOR: test1
 #[cfg(test)]
@@ -45,4 +46,3 @@ mod tests2 {
     }
     // ANCHOR_END: test2
 }
-

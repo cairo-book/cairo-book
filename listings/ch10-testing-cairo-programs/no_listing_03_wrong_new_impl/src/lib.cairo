@@ -1,3 +1,5 @@
+// TAG: tests_fail
+
 #[derive(Drop)]
 struct Guess {
     value: u64,
@@ -31,3 +33,5 @@ mod tests {
     }
 }
 // ANCHOR_END: test
+
+
