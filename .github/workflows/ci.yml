@@ -47,6 +47,10 @@ jobs:
         with:
           asdf_version: 0.16.7
 
+      - name: Install Universal Sierra Compiler
+        run: |
+          curl -L https://raw.githubusercontent.com/software-mansion/universal-sierra-compiler/master/scripts/install.sh | sh
+
       - name: Set default scarb version
         run: asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
