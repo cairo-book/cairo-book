@@ -3,12 +3,13 @@ $ scarb test
     Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
    Compiling test(listings/ch10-testing-cairo-programs/no_listing_10_assert_eq_ne_macro/Scarb.toml)
-    Finished `dev` profile target(s) in 12 seconds
+    Finished `dev` profile target(s) in 3 seconds
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_10_assert_eq_ne_macro/target/dev/no_listing_11_assert_eq_ne_macro_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 1 test(s) from no_listing_11_assert_eq_ne_macro package
 Running 1 test(s) from src/
 [PASS] no_listing_11_assert_eq_ne_macro::test_struct_equality (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+Tests: 1 passed, 0 failed, 0 ignored, 0 filtered out
+
 

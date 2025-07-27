@@ -3,19 +3,19 @@ $ scarb test
     Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
    Compiling test(listings/ch10-testing-cairo-programs/listing_10_02/Scarb.toml)
-    Finished `dev` profile target(s) in 13 seconds
+    Finished `dev` profile target(s) in 3 seconds
 [WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/listing_10_02/target/dev/listing_10_02_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 2 test(s) from listing_10_02 package
 Running 2 test(s) from src/
+[PASS] listing_10_02::tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 [FAIL] listing_10_02::tests::another
 
 Failure data:
     "Make this test fail"
 
-[PASS] listing_10_02::tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-Tests: 1 passed, 1 failed, 0 skipped, 0 ignored, 0 filtered out
+Tests: 1 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
     listing_10_02::tests::another

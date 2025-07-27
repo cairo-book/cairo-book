@@ -1,8 +1,10 @@
 $ scarb test 
      Running test no_listing_05_ignore_tests (snforge test)
-   Compiling test(no_listing_05_ignore_tests_unittest) no_listing_05_ignore_tests v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/Scarb.toml)
-    Finished `dev` profile target(s) in 9 seconds
-[WARNING] File = /Users/sidarths/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/target/dev/no_listing_05_ignore_tests_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
+    Blocking waiting for file lock on registry db cache
+    Blocking waiting for file lock on registry db cache
+   Compiling test(listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/Scarb.toml)
+    Finished `dev` profile target(s) in 3 seconds
+[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/target/dev/no_listing_05_ignore_tests_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
 
 
 Collected 2 test(s) from no_listing_05_ignore_tests package
@@ -10,4 +12,5 @@ Running 2 test(s) from src/
 [IGNORE] no_listing_05_ignore_tests::tests::expensive_test
 [PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Tests: 1 passed, 0 failed, 1 ignored, 0 filtered out
+
 

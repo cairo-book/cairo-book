@@ -8,16 +8,17 @@ warn: Usage of deprecated feature `"deprecated-starknet-consts"` with no `#[feat
 use starknet::{ContractAddress, contract_address_const};
                                 ^^^^^^^^^^^^^^^^^^^^^^
 
-    Finished `dev` profile target(s) in 12 seconds
+    Finished `dev` profile target(s) in 4 seconds
 
 
 Collected 6 test(s) from listing_02_pizza_factory_snfoundry package
 Running 6 test(s) from src/
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_set_as_new_owner_direct (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~80000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~695360)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
 [PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~600000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_set_as_new_owner_direct (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~80000)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~655360)
 [PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-Tests: 6 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
+Tests: 6 passed, 0 failed, 0 ignored, 0 filtered out
+
 
