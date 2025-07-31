@@ -14,8 +14,15 @@ Open a terminal in your projects directory and create a new Scarb project:
 
 ```bash
 scarb new prime_prover
+```
+
+>🛠️ During the setup, you’ll be prompted to choose a test runner. Just select Cairo Test.
+```
 cd prime_prover
 ```
+
+The `scarb new` command creates a new directory called `prime_prover` with a basic project structure. Let’s examine the generated `Scarb.toml`...
+
 
 The scarb new command creates a new directory called `prime_prover` with a basic project structure. Let’s examine the generated Scarb.toml file:
 
