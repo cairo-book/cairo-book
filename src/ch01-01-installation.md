@@ -42,7 +42,10 @@ cairo: 2.11.4 (https://crates.io/crates/cairo-lang-compiler/2.11.4)
 sierra: 1.7.0
 
 $ snforge --version
-snforge 0.39.0
+snforge 0.47.0
+
+$ sncast --version
+sncast 0.47.0
 ```
 
 We'll describe Starknet Foundry in more detail in [Chapter {{#chap testing-cairo-programs}}][writing tests] for Cairo programs testing and in [Chapter {{#chap starknet-smart-contracts-security}}][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
