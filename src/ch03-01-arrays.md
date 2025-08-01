@@ -122,7 +122,7 @@ All methods provided by `Array` can also be used with `Span`, except for the `ap
 To create a `Span` of an `Array`, call the `span()` method:
 
 ```cairo
-{{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_array_span/src/lib.cairo:3}}
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_array_span/src/lib.cairo}}
 ```
 
 {{#quiz ../quizzes/ch03-01-arrays.toml}}
