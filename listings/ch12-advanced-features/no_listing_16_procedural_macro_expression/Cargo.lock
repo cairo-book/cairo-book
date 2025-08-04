@@ -35,7 +35,7 @@ checksum = "5c8214115b7bf84099f1309324e63141d4c5d7cc26862f97a0a857dbefe165bd"
 
 [[package]]
 name = "cairo-lang-debug"
-version = "2.11.4"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "94e438aea97ef0d360b0e1eff98c9bd7077407993fae735ac450031faf0a7cb1"
 dependencies = [
@@ -44,7 +44,7 @@ dependencies = [
 
 [[package]]
 name = "cairo-lang-diagnostics"
-version = "2.11.4"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0366f2ba4f0d523e1da8bae918566bb67a0030b15958b7185a889df58475dc7"
 dependencies = [
@@ -56,7 +56,7 @@ dependencies = [
 
 [[package]]
 name = "cairo-lang-filesystem"
-version = "2.11.4"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de819fdd43ea61c051c7a876d0ea44626c7ee7447a72ef63f48672c7745c86b5"
 dependencies = [
@@ -100,7 +100,7 @@ checksum = "c49906d6b1c215e5814be7c5c65ecf2328898b335bee8c2409ec07cfb5530daf"
 
 [[package]]
 name = "cairo-lang-parser"
-version = "2.11.4"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0154b6c5bf6e75cc672a5a47775829f4248946c96855a2483e0b41f7e43c0248"
 dependencies = [
@@ -127,7 +127,7 @@ checksum = "123ac0ecadf31bacae77436d72b88fa9caef2b8e92c89ce63a125ae911a12fae"
 
 [[package]]
 name = "cairo-lang-syntax"
-version = "2.11.4"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ea0e2287233244b6a49835724c932726d9e951fdfdbcc24ca5402f667d745209"
 dependencies = [
@@ -145,7 +145,7 @@ dependencies = [
 
 [[package]]
 name = "cairo-lang-syntax-codegen"
-version = "2.11.4"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c69eb6919b69a9a7bb92f79d73c568d09ef77efa0b5d265efb763234ec979d4"
 dependencies = [
@@ -155,7 +155,7 @@ dependencies = [
 
 [[package]]
 name = "cairo-lang-utils"
-version = "2.11.4"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c387a696a29cea52ddedb3097706dd8168958ef5388157d6e5b388a2c0de061"
 dependencies = [

@@ -8,4 +8,4 @@ edition = "2024_07"
 [cairo]
 
 [dependencies]
-starknet = ">=2.11.4"
+starknet = ">=2.12.0"

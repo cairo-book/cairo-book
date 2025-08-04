@@ -22,7 +22,7 @@ MIGRATION RULES AND CASES:
         - lib.cairo -> uses parent directory as module
         - other files -> full path as module (e.g., utils/helper.cairo -> utils::helper)
    - Scarb.toml configuration:
-     a) Add cairo_execute = "2.11.4" to [dependencies]
+     a) Add cairo_execute = "2.12.0" to [dependencies]
      b) Add [cairo] section with enable-gas = false
      c) Create [[target.executable]] sections for each main function:
         - name: Generated from module path (e.g., "utils_helper_main")
@@ -376,7 +376,7 @@ def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict])
                     j += 1
 
                 if not cairo_execute_exists:
-                    new_lines.append('cairo_execute = "2.11.4"')
+                    new_lines.append('cairo_execute = "2.12.0"')
                 continue
 
             # Handle cairo section
@@ -403,7 +403,7 @@ def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict])
         if not dependencies_found:
             new_lines.append('')
             new_lines.append('[dependencies]')
-            new_lines.append('cairo_execute = "2.11.4"')
+            new_lines.append('cairo_execute = "2.12.0"')
 
         # Add cairo section if it doesn't exist
         if not cairo_section_found:
@@ -483,7 +483,7 @@ def add_executable_config(scarb_path: Path) -> bool:
                     j += 1
 
                 if not cairo_execute_exists:
-                    new_lines.append('cairo_execute = "2.11.4"')
+                    new_lines.append('cairo_execute = "2.12.0"')
                 continue
 
             # Handle cairo section
@@ -510,7 +510,7 @@ def add_executable_config(scarb_path: Path) -> bool:
         if not dependencies_found:
             new_lines.append('')
             new_lines.append('[dependencies]')
-            new_lines.append('cairo_execute = "2.11.4"')
+            new_lines.append('cairo_execute = "2.12.0"')
 
         # Add cairo section if it doesn't exist
         if not cairo_section_found:
@@ -732,7 +732,7 @@ def process_crate(crate_path: Path) -> None:
         if add_multiple_executable_config(scarb_toml_path, main_functions):
             print("    ✓ Added executable configuration to Scarb.toml")
             print("      - Added [[target.executable]] sections")
-            print("      - Added cairo_execute = \"2.11.4\" dependency")
+            print("      - Added cairo_execute = \"2.12.0\" dependency")
             print("      - Added [cairo] enable-gas = false")
             for main_func in main_functions:
                 if main_func['module_path']:

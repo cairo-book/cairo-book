@@ -37,12 +37,12 @@ After installation, starkup will automatically install the latest stable version
 
 ```bash
 $ scarb --version
-scarb 2.11.4 (c0ef5ec6a 2025-04-09)
-cairo: 2.11.4 (https://crates.io/crates/cairo-lang-compiler/2.11.4)
+scarb 2.12.0 (639d0a65e 2025-08-04)
+cairo: 2.12.0 (https://crates.io/crates/cairo-lang-compiler/2.12.0)
 sierra: 1.7.0
 
 $ snforge --version
-snforge 0.39.0
+snforge 0.48.0
 ```
 
 We'll describe Starknet Foundry in more detail in [Chapter {{#chap testing-cairo-programs}}][writing tests] for Cairo programs testing and in [Chapter {{#chap starknet-smart-contracts-security}}][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.

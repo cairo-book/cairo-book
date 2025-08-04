@@ -11,7 +11,7 @@ experimental-features = ["associated_item_constraints", "negative_impls"]
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.11.4"
+cairo_execute = "2.12.0"
 
 
 [[target.executable]]
