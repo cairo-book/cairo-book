@@ -117,12 +117,12 @@ After installation, starkup will automatically install the latest stable version
 
 ```bash
 $ scarb --version
-scarb 2.11.4 (c0ef5ec6a 2025-04-09)
-cairo: 2.11.4 (https://crates.io/crates/cairo-lang-compiler/2.11.4)
+scarb 2.12.0 (c0ef5ec6a 2025-04-09)
+cairo: 2.12.0 (https://crates.io/crates/cairo-lang-compiler/2.12.0)
 sierra: 1.7.0
 
 $ snforge --version
-snforge 0.39.0
+snforge 0.48.0
 ```
 
 We'll describe Starknet Foundry in more detail in [Chapter 10][writing tests] for Cairo programs testing and in [Chapter 18][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
@@ -225,11 +225,11 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.11.4"
+starknet = "2.12.0"
 
 [dev-dependencies]
-snforge_std = "0.39.0"
-assert_macros = "2.11.4"
+snforge_std = "0.48.0"
+assert_macros = "2.12.0"
 
 [[target.starknet-contract]]
 sierra = true
@@ -419,7 +419,7 @@ Here’s how it works: the program will take an input number from the user and c
 
 ## Setting Up a New Project
 
-To get started, ensure you have Scarb 2.11.4 or later installed (see [Installation][installation] for details). We’ll use Scarb to create and manage our Cairo project.
+To get started, ensure you have Scarb 2.12.0 or later installed (see [Installation][installation] for details). We’ll use Scarb to create and manage our Cairo project.
 
 Open a terminal in your projects directory and create a new Scarb project:
 
@@ -441,7 +441,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.11.4"
+cairo_test = "2.12.0"
 ```
 
 This is a minimal manifest file for a Cairo project. However, since we want to create an executable program that we can prove, we need to modify it. Update Scarb.toml to define an executable target and include the `cairo_execute` plugin:
@@ -463,14 +463,14 @@ enable-gas = false
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.11.4"
+cairo_execute = "2.12.0"
 ```
 
 Here’s what we’ve added:
 
 - `[[target.executable]]` specifies that this package compiles to a Cairo executable (not a library or Starknet contract).
 - `[cairo] enable-gas = false` disables gas tracking, which is required for executable targets since gas is specific to Starknet contracts.
-  `[dependencies] cairo_execute = "2.11.4"` adds the plugin needed to execute and prove our program.
+  `[dependencies] cairo_execute = "2.12.0"` adds the plugin needed to execute and prove our program.
 
 Now, check the generated `src/lib.cairo`, which is a simple placeholder. Since we’re building an executable, we’ll replace this with a function annotated with `#[executable]` to define our entry point.
 
@@ -4944,7 +4944,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.11.4"
+cairo_execute = "2.12.0"
 ```
 
 As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional _.cairo_ files within the _src_ directory or its subdirectories.
@@ -14180,7 +14180,7 @@ The settings of your Scarb project can be configured in the `Scarb.toml` file. T
 
 ```toml,noplayground
 [dev-dependencies]
-snforge_std = "0.39.0"
+snforge_std = "0.48.0"
 
 [scripts]
 test = "snforge test"
@@ -14855,7 +14855,7 @@ Consider a simple example where we want to process numbers differently based on 
 ```cairo
 # #[generate_trait]
 # impl ArrayExt of ArrayExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
 #         self: Array<T>, f: F,
@@ -14870,7 +14870,7 @@ Consider a simple example where we want to process numbers differently based on 
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -14941,7 +14941,7 @@ In the following example, `my_closure` use a binding to `x` to compute `x + valu
 ```cairo
 # #[generate_trait]
 # impl ArrayExt of ArrayExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
 #         self: Array<T>, f: F,
@@ -14956,7 +14956,7 @@ In the following example, `my_closure` use a binding to `x` to compute `x + valu
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -15252,7 +15252,7 @@ Here is a potential implementation of `map` to apply a same function to all the 
 ```cairo, noplayground
 #[generate_trait]
 impl ArrayExt of ArrayExtTrait {
-    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+    // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
     #[inline(never)]
     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
         self: Array<T>, f: F,
@@ -15267,7 +15267,7 @@ impl ArrayExt of ArrayExtTrait {
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -15333,7 +15333,7 @@ This means that your `f` closure can return the same type of elements like as fo
 ```cairo
 # #[generate_trait]
 # impl ArrayExt of ArrayExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
 #         self: Array<T>, f: F,
@@ -15348,7 +15348,7 @@ This means that your `f` closure can return the same type of elements like as fo
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -15414,7 +15414,7 @@ This criteria will be provided through a closure which takes an element as input
 ```cairo, noplayground
 # #[generate_trait]
 # impl ArrayExt of ArrayExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
 #         self: Array<T>, f: F,
@@ -15429,7 +15429,7 @@ This criteria will be provided through a closure which takes an element as input
 #
 #[generate_trait]
 impl ArrayFilterExt of ArrayFilterExtTrait {
-    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+    // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
     #[inline(never)]
     fn filter<
         T,
@@ -15489,7 +15489,7 @@ impl ArrayFilterExt of ArrayFilterExtTrait {
 ```cairo
 # #[generate_trait]
 # impl ArrayExt of ArrayExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
 #         self: Array<T>, f: F,
@@ -15504,7 +15504,7 @@ impl ArrayFilterExt of ArrayFilterExtTrait {
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -18482,8 +18482,8 @@ crate-type = ["cdylib"]
 [dependencies]
 bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1.1"
-cairo-lang-parser = "2.11.4"
-cairo-lang-syntax = "2.11.4"
+cairo-lang-parser = "2.12.0"
+cairo-lang-syntax = "2.12.0"
 
 [workspace]
 ```
@@ -18521,7 +18521,7 @@ rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.11.4"
+cairo_test = "2.12.0"
 ```
 
 ## Expression Macros
@@ -20060,7 +20060,7 @@ by the builtin are provided if relevant.
 
 _By the Cairo Community and its [contributors](https://github.com/cairo-book/cairo-book.github.io). Special thanks to [StarkWare](https://starkware.co/) through [OnlyDust](https://www.onlydust.xyz/), and [Voyager](https://voyager.online/) for supporting the creation of this book._
 
-This version of the text assumes you’re using [Cairo](https://github.com/starkware-libs/cairo) [version 2.11.4](https://github.com/starkware-libs/cairo/releases) and [Starknet Foundry](https://foundry-rs.github.io/starknet-foundry/index.html) [version 0.39.0](https://github.com/foundry-rs/starknet-foundry/releases). See the [Installation](ch01-01-installation.md) section of Chapter 1 to install or update Cairo and Starknet Foundry.
+This version of the text assumes you’re using [Cairo](https://github.com/starkware-libs/cairo) [version 2.12.0](https://github.com/starkware-libs/cairo/releases) and [Starknet Foundry](https://foundry-rs.github.io/starknet-foundry/index.html) [version 0.39.0](https://github.com/foundry-rs/starknet-foundry/releases). See the [Installation](ch01-01-installation.md) section of Chapter 1 to install or update Cairo and Starknet Foundry.
 
 While reading this book, if you want to experiment with Cairo code and see how it compiles into Sierra (Intermediate Representation) and CASM (Cairo Assembly), you can use the [cairovm.codes](https://cairovm.codes/) playground.
 
