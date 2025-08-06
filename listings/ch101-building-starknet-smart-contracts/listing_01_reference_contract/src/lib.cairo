@@ -7,6 +7,7 @@ pub trait INameRegistry<TContractState> {
     fn get_name(self: @TContractState, address: ContractAddress) -> felt252;
 }
 
+// ANCHOR: contract
 #[starknet::contract]
 mod NameRegistry {
     use starknet::storage::{
@@ -92,6 +93,9 @@ mod NameRegistry {
     }
     // ANCHOR_END: state_internal
 }
+// ANCHOR_END: contract
 //ANCHOR_END: all
 
+#[cfg(test)]
+mod tests;
 

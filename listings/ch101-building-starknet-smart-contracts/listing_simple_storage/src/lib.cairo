@@ -7,6 +7,7 @@ pub trait ISimpleStorage<TContractState> {
 }
 
 //ANCHOR: all
+// ANCHOR: contract
 #[starknet::contract]
 mod SimpleStorage {
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
@@ -86,6 +87,9 @@ mod SimpleStorage {
     //ANCHOR_END: owner_address
 
 }
+// ANCHOR_END: contract
 //ANCHOR_END: all
 
+#[cfg(test)]
+mod tests;
 
