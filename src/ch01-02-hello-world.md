@@ -152,7 +152,7 @@ From your _hello_world_ directory, build your project by entering the following 
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_build.txt}}
 ```
 
-This command creates a `hello_world.sierra.json` file in _target/dev_, let's ignore the `sierra` file for now.
+This command creates a `hello_world_main_executable.json` file in _target/dev_, let's ignore this file for now.
 
 If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb execute` command and see the following output:
 
