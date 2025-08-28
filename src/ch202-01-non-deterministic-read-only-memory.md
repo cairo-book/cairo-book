@@ -18,4 +18,4 @@ This approach differs significantly from other virtual machines, like the Ethere
 
 Another way to think about this is that the effective cost of using Cairo's memory is from the number of memory accesses, rather than the number of memory addresses used. Consequently, rewriting to an existing memory cell incurs a similar cost to writing to a new one.
 
-This memory model is particularly useful for proving the correctness of a program. It's easier to describe constraints on the values of memory when these values can only be set once, rather than expressing the same constraints on a read-write memory model, where the value of a memory cell is dependant on the "execution time".
+This memory model is particularly useful for proving the correctness of a program. It's easier to describe constraints on the values of memory when these values can only be set once, rather than expressing the same constraints on a read-write memory model, where the value of a memory cell is dependent on the "execution time".
