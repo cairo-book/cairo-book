@@ -7,11 +7,8 @@ fn main() {
     let mut iter = arr.into_iter();
 
     // Uses the iterator to print each element
-    loop {
-        match iter.next() {
-            Some(item) => println!("Item: {}", item),
-            None => { break; },
-        };
+    while let Some(item) = iter.next() {
+        println!("Item: {}", item);
     }
 }
 // ANCHOR_END: main
