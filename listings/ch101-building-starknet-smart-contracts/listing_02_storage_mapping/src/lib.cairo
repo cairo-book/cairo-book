@@ -19,6 +19,7 @@ mod UserValues {
         user_values: Map<ContractAddress, u64>,
     }
 
+    #[abi(embed_v0)]
     impl UserValuesImpl of super::IUserValues<ContractState> {
         // ANCHOR: write
         fn set(ref self: ContractState, amount: u64) {
@@ -36,4 +37,6 @@ mod UserValues {
 }
 //ANCHOR_END: contract
 
+#[cfg(test)]
+mod tests;
 

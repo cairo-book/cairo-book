@@ -7,6 +7,7 @@ trait ISimpleStorage<TContractState> {
 }
 //ANCHOR_END: interface
 
+// ANCHOR: contract
 #[starknet::contract]
 mod SimpleStorage {
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
@@ -33,6 +34,8 @@ mod SimpleStorage {
     }
     //ANCHOR_END: impl
 }
+// ANCHOR_END: contract
 //ANCHOR_END: all
 
-
+#[cfg(test)]
+mod tests;

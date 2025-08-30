@@ -7,6 +7,7 @@ pub trait IEventExample<TContractState> {
 }
 
 //ANCHOR: all
+// ANCHOR: contract
 #[starknet::contract]
 mod EventExample {
     #[storage]
@@ -81,6 +82,9 @@ mod EventExample {
 
     }
 }
+// ANCHOR_END: contract
 //ANCHOR_END: all
 
+#[cfg(test)]
+mod tests;
 
