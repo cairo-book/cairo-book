@@ -48,6 +48,7 @@ mod TokenWrapper {
     #[storage]
     struct Storage {}
 
+    #[abi(embed_v0)]
     impl TokenWrapper of ITokenWrapper<ContractState> {
         fn token_name(self: @ContractState, contract_address: ContractAddress) -> felt252 {
             IERC20Dispatcher { contract_address }.name()
@@ -66,4 +67,6 @@ mod TokenWrapper {
 }
 // ANCHOR_END: here
 
+#[cfg(test)]
+mod tests;
 

@@ -1,21 +1,18 @@
 //ANCHOR: full
 //ANCHOR: interface
-use starknet::ContractAddress;
 
 #[starknet::interface]
 trait IOwnableCounter<TContractState> {
     fn get_counter(self: @TContractState) -> u32;
     fn increment(ref self: TContractState);
-    fn transfer_ownership(ref self: TContractState, new_owner: ContractAddress);
 }
 //ANCHOR_END: interface
 
 //ANCHOR: component
 #[starknet::component]
-mod OwnableCounterComponent {
-    use listing_03_component_dep::owner::ownable_component;
-    use listing_03_component_dep::owner::ownable_component::InternalImpl;
-    use starknet::ContractAddress;
+pub mod OwnableCounterComponent {
+    use listing_03_component_dep::owner::OwnableComponent;
+    use listing_03_component_dep::owner::OwnableComponent::InternalImpl;
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
 
     #[storage]
@@ -30,7 +27,7 @@ mod OwnableCounterComponent {
         TContractState,
         +HasComponent<TContractState>,
         +Drop<TContractState>,
-        impl Owner: ownable_component::HasComponent<TContractState>,
+        impl Owner: OwnableComponent::HasComponent<TContractState>,
     > of super::IOwnableCounter<ComponentState<TContractState>> {
         //ANCHOR_END: component_signature
         //ANCHOR: get_counter
@@ -46,14 +43,6 @@ mod OwnableCounterComponent {
             self.value.write(self.value.read() + 1);
         }
         //ANCHOR_END: increment
-
-        //ANCHOR: transfer_ownership
-        fn transfer_ownership(
-            ref self: ComponentState<TContractState>, new_owner: ContractAddress,
-        ) {
-            self.transfer_ownership(new_owner);
-        }
-        //ANCHOR_END: transfer_ownership
     }
     //ANCHOR_END: component_impl
 }

@@ -11,7 +11,7 @@ pub mod Errors {
 
 // ANCHOR: interface
 #[starknet::interface]
-trait IOwnable<TContractState> {
+pub trait IOwnable<TContractState> {
     //ANCHOR: trait_def
     fn owner(self: @TContractState) -> ContractAddress;
     fn transfer_ownership(ref self: TContractState, new_owner: ContractAddress);
@@ -22,7 +22,7 @@ trait IOwnable<TContractState> {
 
 //ANCHOR: component
 #[starknet::component]
-pub mod ownable_component {
+pub mod OwnableComponent {
     use core::num::traits::Zero;
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
     use starknet::{ContractAddress, get_caller_address};
