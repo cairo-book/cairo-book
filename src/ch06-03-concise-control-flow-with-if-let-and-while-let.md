@@ -71,3 +71,21 @@ The `while let` syntax is similar to the `if let` syntax, but it allows you to l
 ```
 
 Using `while let` provides a more concise and idiomatic way of writing this loop compared to a traditional `while` loop with explicit pattern matching or handling of the `Option` type. However, as with `if let`, you lose the exhaustive checking that a `match` expression provides, so you need to be careful to handle any remaining cases outside the `while let` loop if necessary.
+
+## Let Chains
+
+Cairo supports let chains to combine multiple conditions involving `if let` or `while let` without nesting. This lets you pattern-match and apply additional boolean conditions in a single expression:
+
+```cairo
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_19_let_chains/src/lib.cairo}}
+```
+
+> Note: `else` is not yet supported for let chain expressions; this will be added in a later version.
+
+## `let else`
+
+`let else` enables refutable pattern matching in a `let` binding and allows the `else` block to diverge (for example with `return`, `break`, `continue`, or `panic!`) when the pattern does not match:
+
+```cairo
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no_listing_20_let_else/src/lib.cairo}}
+```
