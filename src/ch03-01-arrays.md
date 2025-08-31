@@ -85,7 +85,7 @@ If you want to check if an array is empty or not, you can use the `is_empty()` m
 ## `array!` Macro
 
 Sometimes, we need to create arrays with values that are already known at compile time. The basic way of doing that is redundant. You would first declare the array and then append each value one by one. `array!` is a simpler way of doing this task by combining the two steps.
-At compile-time, the compiler will expand the macro to generate the code that appends the items sequentially.
+At compile time, the macro expands into code that appends the items sequentially. For a deeper explanation of how declarative macros match patterns and expand, see [Macros → Declarative Inline Macros](./ch12-05-macros.md#declarative-inline-macros-for-general-metaprogramming).
 
 Without `array!`:
 

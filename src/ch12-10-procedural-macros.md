@@ -4,36 +4,7 @@ Cairo provides macros as a fundamental feature that lets you write code that gen
 
 Before diving into procedural macros specifically, let's understand why we need macros when we already have functions:
 
-## The Difference Between Macros and Functions
-
-Fundamentally, macros are a way of writing code that writes other code, which
-is known as _metaprogramming_. In Appendix C, we discuss derivable traits and the `derive`
-attribute, which generates an implementation of various traits for you. We’ve
-also used the `println!` and `array!` macros throughout the book. All of these
-macros _expand_ to produce more code than the code you’ve written manually.
-
-Metaprogramming is useful for reducing the amount of code you have to write and
-maintain, which is also one of the roles of functions. However, macros have
-some additional powers that functions don’t.
-
-A function signature must declare the number and type of parameters the
-function has. Macros, on the other hand, can take a variable number of
-parameters: we can call `println!("hello")` with one argument or
-`println!("hello {}", name)` with two arguments. Also, macros are expanded
-before the compiler interprets the meaning of the code, so a macro can, for
-example, implement a trait on a given type. A function can’t, because it gets
-called at runtime and a trait needs to be implemented at compile time.
-
-Another important difference between macros and functions is that the design of Cairo macros is complex: they're written in Rust, but operate on Cairo code. Due to
-this indirection and the combination of the two languages, macro definitions are generally more
-difficult to read, understand, and maintain than function definitions.
-
-We call _procedural macros_ macros that allow you to run code at compile time that operates over
-Cairo syntax, both consuming and producing Cairo syntax. You can sort of think of procedural macros
-as functions from an AST to another AST. The three kinds of procedural macros are _custom derive_,
-_attribute-like_, and _function-like_, and all work in a similar fashion.
-
-In this chapter, we'll explore what procedural macros are, how they're defined, and examine each of the three types in detail.
+> Tip: For many expression-level use cases, prefer the declarative inline macros written directly in Cairo (see [Macros → Declarative Inline Macros](./ch12-05-macros.md#declarative-inline-macros-for-general-metaprogramming)). Use procedural macros when you need attributes/derives or advanced transformations that operate across items or require Rust-side logic.
 
 ## Cairo Procedural Macros are Rust Functions
 
@@ -123,14 +94,7 @@ From the user's perspective, you only need to add the package defining the macro
 
 ## Expression Macros
 
-Expression macros provide functionality similar to function calls but with enhanced capabilities. Unlike regular functions, they can:
-
-- Accept a variable number of arguments
-- Handle arguments of different types
-- Generate code at compile time
-- Perform more complex code transformations
-
-This flexibility makes them powerful tools for generic programming and code generation. Let's examine a practical example: implementing a compile-time power function.
+Note: If your goal is to generate or transform expressions and small blocks, the inline declarative macros covered earlier are simpler to write and maintain. Use procedural expression macros when you specifically need Rust-powered parsing or when your macro logic lives outside Cairo. As a concrete example, let’s look at a compile-time power function implemented as a procedural macro.
 
 ### Creating an expression Macros
 
