@@ -45,8 +45,8 @@ pub mod OwnableComponent {
     }
 
     //ANCHOR: impl_signature
-    #[embeddable_as(Ownable)]
-    impl OwnableImpl<
+    #[embeddable_as(OwnableImpl)]
+    impl Ownable<
         TContractState, +HasComponent<TContractState>,
     > of super::IOwnable<ComponentState<TContractState>> {
         //ANCHOR_END: impl_signature

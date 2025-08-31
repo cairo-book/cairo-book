@@ -1,4 +1,4 @@
-use CounterComponent::CounterImpl;
+use CounterComponent::Counter;
 use super::MockContract;
 use super::counter::CounterComponent;
 

@@ -17,7 +17,7 @@ pub mod CounterComponent {
     }
 
     #[embeddable_as(CounterImpl)]
-    impl Counter<
+    pub impl Counter<
         TContractState, +HasComponent<TContractState>,
     > of super::ICounter<ComponentState<TContractState>> {
         //ANCHOR: get_counter
