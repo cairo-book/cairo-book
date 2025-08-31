@@ -1,0 +1,10 @@
+[package]
+name = "my_oracle"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+anyhow = "1"
+cairo-oracle-server = "0.1"
+starknet-core = "0.11"
