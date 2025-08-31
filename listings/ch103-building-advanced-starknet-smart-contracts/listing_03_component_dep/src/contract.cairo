@@ -1,35 +1,41 @@
 //ANCHOR: all
 #[starknet::contract]
 mod OwnableCounter {
-    use listing_03_component_dep::owner::ownable_component;
-    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use listing_03_component_dep::counter::OwnableCounterComponent;
+    use listing_03_component_dep::owner::OwnableComponent;
+    use starknet::ContractAddress;
 
-    component!(path: ownable_component, storage: ownable, event: OwnableEvent);
+    component!(path: OwnableCounterComponent, storage: counter, event: CounterEvent);
+    component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);
 
     //ANCHOR:  embedded_impl
     #[abi(embed_v0)]
-    impl OwnableImpl = ownable_component::Ownable<ContractState>;
-
-    impl OwnableInternalImpl = ownable_component::InternalImpl<ContractState>;
+    impl OwnableCounterImpl =
+        OwnableCounterComponent::OwnableCounterImpl<ContractState>;
     //ANCHOR_END: embedded_impl
+
+    #[abi(embed_v0)]
+    impl OwnableImpl = OwnableComponent::Ownable<ContractState>;
+    impl OwnableInternalImpl = OwnableComponent::InternalImpl<ContractState>;
 
     #[storage]
     struct Storage {
-        counter: u128,
         #[substorage(v0)]
-        ownable: ownable_component::Storage,
+        counter: OwnableCounterComponent::Storage,
+        #[substorage(v0)]
+        ownable: OwnableComponent::Storage,
     }
 
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        OwnableEvent: ownable_component::Event,
+        CounterEvent: OwnableCounterComponent::Event,
+        OwnableEvent: OwnableComponent::Event,
     }
 
-    #[abi(embed_v0)]
-    fn foo(ref self: ContractState) {
-        self.ownable.assert_only_owner();
-        self.counter.write(self.counter.read() + 1);
+    #[constructor]
+    fn constructor(ref self: ContractState, owner: ContractAddress) {
+        self.ownable.initializer(owner);
     }
 }
 //ANCHOR_END: all

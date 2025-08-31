@@ -21,7 +21,7 @@ trait IOwnable<TContractState> {
 
 //ANCHOR: component
 #[starknet::component]
-pub mod ownable_component {
+pub mod OwnableComponent {
     use core::num::traits::Zero;
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
     use starknet::{ContractAddress, get_caller_address};

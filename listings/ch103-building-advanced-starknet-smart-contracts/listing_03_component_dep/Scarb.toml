@@ -10,5 +10,15 @@ starknet = ">=2.12.0"
 
 [[target.starknet-contract]]
 
+[dev-dependencies]
+snforge_std = "0.48.0"
+assert_macros = "2.12.0"
+
+[scripts]
+test = "snforge test"
+
+[tool.scarb]
+allow-prebuilt-plugins = ["snforge_std"]
+
 [cairo]
 enable-gas = true
