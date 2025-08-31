@@ -1,6 +1,6 @@
 $ scarb execute 
    Compiling listing_04_06_no_struct v0.1.0 (listings/ch05-using-structs-to-structure-related-data/listing_03_no_struct/Scarb.toml)
-    Finished `dev` profile target(s) in 0 seconds
+    Finished `dev` profile target(s) in 1 second
    Executing listing_04_06_no_struct
 Area is 300
 

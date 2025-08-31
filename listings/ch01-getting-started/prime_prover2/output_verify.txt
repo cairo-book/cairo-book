@@ -1,6 +1,0 @@
-$ scarb verify --execution-id 1
-   Verifying prime_prover
-error: proof file does not exist at path: /Users/msaug/workspace/cairo-book/listings/ch01-getting-started/prime_prover2/target/execute/prime_prover/execution1/proof/proof.json
-help: run `scarb prove --execution-id=1` first
-
-

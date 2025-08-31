@@ -1,6 +1,6 @@
 $ scarb execute 
    Compiling no_listing_09_snapshots v0.1.0 (listings/ch04-understanding-ownership/no_listing_09_snapshots/Scarb.toml)
-    Finished `dev` profile target(s) in 4 seconds
+    Finished `dev` profile target(s) in 1 second
    Executing no_listing_09_snapshots
 The area of the rectangle when the snapshot was taken is 30
 The current area of the rectangle is 50

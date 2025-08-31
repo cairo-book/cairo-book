@@ -9,5 +9,5 @@ error: Missing match arm: `None` not covered.
 |_____^
 
 error: could not compile `no_listing_08_missing_match_arm` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

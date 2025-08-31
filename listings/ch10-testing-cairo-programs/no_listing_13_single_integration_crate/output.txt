@@ -2,11 +2,9 @@ $ scarb test
      Running test adder (snforge test)
     Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
-   Compiling test(listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
-   Compiling test(listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
-    Finished `dev` profile target(s) in 3 seconds
-[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/target/dev/adder_tests.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
-[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/target/dev/adder_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
+   Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
+   Compiling test(adder_tests) adder_tests v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
+    Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from adder package

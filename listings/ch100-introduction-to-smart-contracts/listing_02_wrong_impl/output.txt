@@ -11,5 +11,5 @@ error: Wrong number of arguments. Expected 2, found: 1
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 error: could not compile `listing_99_02` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

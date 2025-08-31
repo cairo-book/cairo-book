@@ -11,5 +11,5 @@ error: Function is declared as nopanic but calls a function that may panic.
     ^^^^^^^^^^^^^^^^^^^^^^^
 
 error: could not compile `no_listing_04_nopanic_wrong` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

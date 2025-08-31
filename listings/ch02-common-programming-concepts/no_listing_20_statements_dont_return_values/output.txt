@@ -31,5 +31,5 @@ warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
                  ^
 
 error: could not compile `no_listing_18_statements_dont_return_values` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

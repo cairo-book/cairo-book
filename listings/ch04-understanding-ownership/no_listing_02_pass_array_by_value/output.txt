@@ -16,5 +16,5 @@ note: variable was previously used here:
 note: Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>.
 
 error: could not compile `no_listing_02_pass_array_by_value` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

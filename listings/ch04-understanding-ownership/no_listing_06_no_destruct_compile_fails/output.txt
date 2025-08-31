@@ -8,5 +8,5 @@ note: Trait has no implementation in context: core::traits::Drop::<no_listing_06
 note: Trait has no implementation in context: core::traits::Destruct::<no_listing_06_no_destruct_compile_fails::A>.
 
 error: could not compile `no_listing_06_no_destruct_compile_fails` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

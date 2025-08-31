@@ -2,19 +2,18 @@ $ scarb test
      Running test no_listing_01_wrong_can_hold_impl (snforge test)
     Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
-   Compiling test(listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/Scarb.toml)
-    Finished `dev` profile target(s) in 4 seconds
-[WARNING] File = /Users/msaug/workspace/cairo-book/listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/target/dev/no_listing_01_wrong_can_hold_impl_unittest.test.starknet_artifacts.json missing when it should be existing, perhaps due to Scarb problem.
+   Compiling test(no_listing_01_wrong_can_hold_impl_unittest) no_listing_01_wrong_can_hold_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/Scarb.toml)
+    Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from no_listing_01_wrong_can_hold_impl package
 Running 2 test(s) from src/
-[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 [FAIL] no_listing_01_wrong_can_hold_impl::tests::larger_can_hold_smaller
 
 Failure data:
     "rectangle cannot hold"
 
+[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Tests: 1 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:

@@ -6,5 +6,5 @@ error: Trait has no implementation in context: core::traits::Copy::<core::nullab
                    ^^^
 
 error: could not compile `no_listing_15_dict_of_array_attempt_get` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

@@ -6,5 +6,5 @@ error: Cannot assign to an immutable variable.
     ^^^^^
 
 error: could not compile `no_listing_01_variables_are_immutable` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

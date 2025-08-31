@@ -6,5 +6,5 @@ fn plus_one(x: u32) -> u32 {
                        ^^^
 
 error: could not compile `no_listing_22_function_return_invalid` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 

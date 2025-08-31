@@ -11,5 +11,5 @@ error: Invalid left-hand side of assignment.
     ^^^^^^^^^
 
 error: could not compile `listing_04_04` due to previous error
-error: `scarb metadata` exited with error
+error: `scarb` command exited with error
 
