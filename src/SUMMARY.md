@@ -101,6 +101,7 @@
   - [Inlining in Cairo](ch12-06-inlining-in-cairo.md)
   - [Printing](ch12-08-printing.md)
   - [Arithmetic Circuits](ch12-10-arithmetic-circuits.md)
+  - [Offloading Computations with Oracles](ch12-11-offloading-computations-with-oracles.md)
 
 - [Appendix (Cairo)](appendix-00.md)
 
