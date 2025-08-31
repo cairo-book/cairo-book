@@ -54,7 +54,7 @@ First, we need to define a concrete implementation of the generic `ComponentStat
 
 We defined the `TestingState` type as an alias of the `CounterComponent::ComponentState<MockContract::ContractState>` type. By passing the `MockContract::ContractState` type as a concrete type for `ComponentState`, we aliased a concrete implementation of the `ComponentState` struct to `TestingState`.
 
-Because `MockContract` embeds `CounterComponent`, the methods of `CounterComponent` defined in the `CounterImpl` block can now be used on a `TestingState` object.
+Because `MockContract` embeds `CounterComponent`, the methods of `CounterComponent` defined in the `Counter` impl block (exposed via the `CounterImpl` embeddable alias) can now be used on a `TestingState` object.
 
 Now that we have made these methods available, we need to instantiate an object of type `TestingState`, that we will use to test the component. We can do so by calling the `component_state_for_testing` function, which automatically infers that it should return an object of type `TestingState`.
 

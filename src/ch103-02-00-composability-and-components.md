@@ -105,7 +105,7 @@ meant to be used internally by a contract embedding the component.
 The `#[embeddable_as]` attribute is used to mark the impl as embeddable inside a
 contract. It allows us to specify the name of the impl that will be used in the
 contract to refer to this component. In this case, the component will be
-referred to as `Ownable` in contracts embedding it.
+referred to as `OwnableImpl` in contracts embedding it.
 
 The implementation itself is generic over `ComponentState<TContractState>`, with
 the added restriction that `TContractState` must implement the `HasComponent<T>`
@@ -120,8 +120,10 @@ and not `ContractState`. Note that while the type is different, accessing
 storage or emitting events is done similarly via `self.storage_var_name.read()`
 or `self.emit(...).`
 
-> Note: To avoid the confusion between the embeddable name and the impl name, we
-> recommend keeping the suffix `Impl` in the impl name.
+> Note: To avoid confusion, follow OpenZeppelin’s pattern: keep the `Impl`
+> suffix in the embeddable name and in the contract’s impl alias (e.g.,
+> `OwnableImpl`), while the local component impl is named after the trait
+> without the suffix (e.g., `impl Ownable<...>`).
 
 [components inner working]: ./ch103-02-01-under-the-hood.md
 

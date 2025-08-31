@@ -8,7 +8,7 @@ mod OwnableCounter {
 
     //ANCHOR:  embedded_impl
     #[abi(embed_v0)]
-    impl OwnableImpl = OwnableComponent::Ownable<ContractState>;
+    impl OwnableImpl = OwnableComponent::OwnableImpl<ContractState>;
 
     impl OwnableInternalImpl = OwnableComponent::InternalImpl<ContractState>;
     //ANCHOR_END: embedded_impl
