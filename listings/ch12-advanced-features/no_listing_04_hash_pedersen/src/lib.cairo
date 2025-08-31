@@ -26,7 +26,7 @@ fn main() -> (felt252, felt252) {
     let first_element = serialized_struct.pop_front().unwrap();
     let mut state = PedersenTrait::new(first_element);
 
-    while let Some(value) = serialized_struct.pop_front() {
+    for value in serialized_struct {
         state = state.update(value);
     }
 

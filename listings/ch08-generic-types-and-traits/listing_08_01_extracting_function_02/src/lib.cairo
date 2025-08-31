@@ -4,7 +4,7 @@ fn main() {
 
     let mut largest = number_list.pop_front().unwrap();
 
-    while let Some(number) = number_list.pop_front() {
+    for number in number_list {
         if number > largest {
             largest = number;
         }
@@ -16,7 +16,7 @@ fn main() {
 
     let mut largest = number_list.pop_front().unwrap();
 
-    while let Some(number) = number_list.pop_front() {
+    for number in number_list {
         if number > largest {
             largest = number;
         }

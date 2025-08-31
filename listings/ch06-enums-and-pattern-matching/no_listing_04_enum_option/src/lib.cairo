@@ -10,17 +10,10 @@ fn find_value_recursive(mut arr: Span<felt252>, value: felt252, index: usize) ->
 }
 
 fn find_value_iterative(mut arr: Span<felt252>, value: felt252) -> Option<usize> {
-    let mut result = None;
-    let mut index = 0;
-
-    while let Some(array_value) = arr.pop_front() {
+    for (idx, array_value) in arr.into_iter().enumerate() {
         if (*array_value == value) {
-            result = Some(index);
-            break;
+            return Some(idx);
         }
-
-        index += 1;
     }
-
-    result
+    None
 }
