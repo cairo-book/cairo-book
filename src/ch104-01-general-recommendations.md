@@ -16,7 +16,7 @@ The most common criticals in Starknet audits are still “who can call this?” 
 
 ### Own your privileged paths
 
-Always make sure that upgrades can only be done by authorized roles. If a non-authorized user can upgrade your contract, it can replace the class with anything and get full control over the contract. The same applies for pause/resume functions, bridge handlers (who can call this contract from L1), and meta-execution. All these cricical functions should be guarded using the OwnableComponent from OpenZeppelin.
+Always make sure that upgrades can only be done by authorized roles. If a non-authorized user can upgrade your contract, it can replace the class with anything and get full control over the contract. The same applies for pause/resume functions, bridge handlers (who can call this contract from L1), and meta-execution. All these critical functions should be guarded using the OwnableComponent from OpenZeppelin.
 
 ```cairo, noplayground
 // components
