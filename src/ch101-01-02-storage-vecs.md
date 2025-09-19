@@ -4,7 +4,7 @@ The `Vec` type provides a way to store collections of values in the contract's s
 
 The `Vec` type is provided by the Cairo core library, inside the `starknet::storage` module. Its associated methods are defined in the `VecTrait` and `MutableVecTrait` traits that you will also need to import for read and write operations on the `Vec` type.
 
-> The `Array<T>` type is a **memory** type and cannot be directly stored in contract storage. For storage, use the `Vec<T>` type, which is a [phantom type][phantom types] designed specifically for contract storage. However, `Vec<T>` has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. To work with the full contents of a `Vec<T>`, you'll need to copy its elements to and from a memory `Array<T>`.
+> The `Array<T>` type is a **memory** type and cannot be directly stored in contract storage. For storage, use the `Vec<T>` type, which is a phantom type designed specifically for contract storage. However, `Vec<T>` has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. To work with the full contents of a `Vec<T>`, you'll need to copy its elements to and from a memory `Array<T>`.
 
 ## Declaring and Using Storage Vectors
 
