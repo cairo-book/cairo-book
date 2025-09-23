@@ -8,18 +8,17 @@ VRFs use a secret key and a nonce (a unique input) to generate an output that ap
 
 VRFs produce not only the random number but also a proof that anyone can use to independently verify that the result was generated correctly according to the function's parameters.
 
-## Generating Randomness with Pragma
+## Generating Randomness with Cartridge VRF
 
-[Pragma](https://www.pragma.build/), an oracle on Starknet provides a solution for generating random numbers using VRFs.
-Let's dive into how to use Pragma VRF to generate a random number in a simple dice game contract.
+[Cartridge VRF](https://github.com/cartridge-gg/vrf) provides synchronous, onchain verifiable randomness designed for games on Starknet - although it can be used for other purposes. It uses a simple flow: a transaction prefixes a `request_random` call to the VRF provider, then your contract calls `consume_random` to obtain a verified random value within the same transaction.
 
-### Add Pragma as a Dependency
+### Add Cartridge VRF as a Dependency
 
-Edit your cairo project's `Scarb.toml` file to include the path to use Pragma.
+Edit your Cairo project's `Scarb.toml` file to include Cartridge VRF.
 
 ```toml
 [dependencies]
-pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
+cartridge_vrf = { git = "https://github.com/cartridge-gg/vrf" }
 ```
 
 ### Define the Contract Interface
@@ -28,47 +27,50 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 {{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:interfaces}}
 ```
 
-{{#label pragma_vrf_interface}}
-<span class="caption">Listing {{#ref pragma_vrf_interface}} shows a contract interfaces for Pragma VRF and a simple dice game.</span>
+{{#label cartridge_vrf_interface}}
+<span class="caption">Listing {{#ref cartridge_vrf_interface}} shows interfaces for integrating Cartridge VRF with a simple dice game.</span>
 
-### Description of Key IPragmaVRF Entrypoints and Their Inputs
+### Cartridge VRF Flow and Key Entrypoints
 
-The function `request_randomness_from_pragma` initiates a request for verifiable randomness from the Pragma oracle. It does this by emitting an event that triggers the following actions off-chain:
+Cartridge VRF works in a single transaction using two calls:
 
-1. **Randomness generation**: The oracle generates random values and a corresponding proof.
-2. **On-chain submission**: The oracle submits the generated randomness and proof back to the blockchain via the `receive_random_words` callback function.
+1. `request_random(caller, source)` — Must be the first call in the transaction's multicall. It signals that your contract at `caller` will consume a random value using the specified `source`.
+2. `consume_random(source)` — Called by your game contract to synchronously retrieve the random value. The VRF proof is verified onchain, and the value is immediately available for use.
 
-#### `request_randomness_from_pragma` Inputs
+Common `source` choices:
 
-1. `seed`: A value used to initialize the randomness generation process. This should be unique to ensure unpredictable results.
-2. `callback_address`: The contract address where the `receive_random_words` function will be called to deliver the generated randomness. It is typically the address of your deployed contract implementing Pragma VRF.
-3. `callback_fee_limit`: The maximum amount of gas you're willing to spend on executing the `receive_random_words` callback function.
-4. `publish_delay`: The minimum delay (in blocks) between requesting randomness and the oracle fulfilling the request.
-5. `num_words`: The number of random values (each represented as a `felt252`) you want to receive in a single callback.
-6. `calldata`: Additional data you want to pass to the `receive_random_words` callback function.
-
-#### `receive_randomn_words` Inputs
-
-1. `requester_address`: The contract address that initiated the randomness request.
-2. `request_id`: A unique identifier assigned to the randomness request.
-3. `random_words`: An array (span) of the generated random values (represented as `felt252`).
-4. `calldata`: Additional data passed along with the initial randomness request.
+- `Source::Nonce(ContractAddress)` — Uses the provider’s internal nonce for the provided address, ensuring a unique random value per request.
+- `Source::Salt(felt252)` — Uses a static salt. Using the same salt will return the same random value.
 
 ## Dice Game Contract
 
-This dice game contract allows players to guess a number between 1 & 6 during an active game window. The contract owner then has the ability to toggle the game window to disable new guesses from players. To determine the winning number, the contract owner calls the `request_randomness_from_pragma` function to request a random number from the Pragma VRF oracle. Once the random number is received through the `receive_random_words` callback function, it is stored in the `last_random_number` storage variable. Each player has to call `process_game_winners` function to determine if they have won or lost. The `last_random_number` generated is then reduced to a number between 1 & 6, and compared to the guesses of the players stored in the `user_guesses` mapping, which leads to the emission of an event `GameWinner` or `GameLost`.
+This dice game contract allows players to guess a number between 1 & 6 during an active game window. The contract owner can toggle the game window to disable new guesses. To determine the winning number, the contract owner calls `settle_random`, which consumes a random value from the Cartridge VRF provider and stores it in `last_random_number`. Each player then calls `process_game_winners` to determine if they have won or lost. The stored `last_random_number` is reduced to a number between 1 & 6 and compared to the player's guess, emitting either `GameWinner` or `GameLost`.
 
 ```cairo,noplayground
 {{#include ../listings/ch103-building-advanced-starknet-smart-contracts/listing_06_dice_game_vrf/src/lib.cairo:dice_game}}
 ```
 
 {{#label dice_game_vrf}}
-<span class="caption">Listing {{#ref dice_game_vrf}}: Simple Dice Game Contract using Pragma VRF.</span>
+<span class="caption">Listing {{#ref dice_game_vrf}}: Simple Dice Game Contract using Cartridge VRF.</span>
 
-#### NB: Fund Your Contract After Deployment to Utilize Pragma VRF
+#### Calling Pattern for Cartridge VRF
 
-After deploying your contract that includes Pragma VRF functionalities, ensure it holds sufficient ETH to cover the expenses related to requesting random values. Pragma VRF requires payment for both generating the random numbers and executing the callback function defined in your contract.
+When you call your `settle_random` entrypoint from an account, prefix the transaction’s multicall with a call to the VRF provider’s `request_random` using the same `source` that the contract will pass to `consume_random` (in this example, `Source::Nonce(<dice_contract>)`). For example:
 
-For more information, please refer to the [Pragma][pragma] docs.
+1. `VRF.request_random(caller: <dice_contract>, source: Source::Nonce(<dice_contract>))`
+2. `<dice_contract>.settle_random()`
 
-[pragma]: https://docs.pragma.build/Resources/Starknet/randomness/randomness
+This ensures the VRF server can submit and verify the proof onchain and that the random value is available to your contract during execution.
+
+#### Deployments
+
+- Mainnet
+  - Class hash: https://voyager.online/class/0x00be3edf412dd5982aa102524c0b8a0bcee584c5a627ed1db6a7c36922047257
+  - Contract: https://voyager.online/contract/0x051fea4450da9d6aee758bdeba88b2f665bcbf549d2c61421aa724e9ac0ced8f
+- Sepolia
+  - Class hash: https://sepolia.voyager.online/class/0x00be3edf412dd5982aa102524c0b8a0bcee584c5a627ed1db6a7c36922047257
+  - Contract: https://sepolia.voyager.online/contract/0x051fea4450da9d6aee758bdeba88b2f665bcbf549d2c61421aa724e9ac0ced8f
+
+Use the network’s VRF provider address as the `vrf_provider` constructor argument (or via `set_vrf_provider`) in the example contract.
+
+More details and updates: see the [Cartridge VRF repository](https://github.com/cartridge-gg/vrf).

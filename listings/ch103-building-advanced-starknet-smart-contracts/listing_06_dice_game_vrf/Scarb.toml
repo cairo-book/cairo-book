@@ -6,8 +6,8 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib", rev = "c4cdeaafbec19d99d740df61afc0301d78975204" }
-openzeppelin = "0.20.0"
+cartridge_vrf = { git = "https://github.com/cartridge-gg/vrf" }
+openzeppelin = "0.18.0"
 starknet = ">=2.12.0"
 
 [[target.starknet-contract]]
