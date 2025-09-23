@@ -128,7 +128,7 @@ affecting what, if anything, is moved _out of_ the closure). A closure body can 
 following: move a captured value out of the closure, neither move nor mutate the value, or capture
 nothing from the environment to begin with.
 
-<!-- TODO: later, closures will be able to do any of the followings: -->
+<!-- TODO: later, closures will be able to do any of the following: -->
 <!-- A closure body can
 do any of the following: move a captured value out of the closure, mutate the
 captured value, neither move nor mutate the value, or capture nothing from the
