@@ -1,9 +1,9 @@
 #[starknet::contract]
 pub mod PausableERC20 {
-    use openzeppelin_access::accesscontrol::AccessControlComponent;
-    use openzeppelin_introspection::src5::SRC5Component;
-    use openzeppelin_security::pausable::PausableComponent;
-    use openzeppelin_token::erc20::{DefaultConfig, ERC20Component};
+    use openzeppelin::access::accesscontrol::AccessControlComponent;
+    use openzeppelin::introspection::src5::SRC5Component;
+    use openzeppelin::security::pausable::PausableComponent;
+    use openzeppelin::token::erc20::{DefaultConfig, ERC20Component};
     use starknet::ContractAddress;
 
     const PAUSER_ROLE: felt252 = selector!("PAUSER_ROLE");

@@ -20,15 +20,15 @@ pub trait IDiceGame<TContractState> {
 //ANCHOR: dice_game
 #[starknet::contract]
 mod DiceGame {
+    use cartridge_vrf::Source;
+
+    // Cartridge VRF consumer component and types
+    use cartridge_vrf::vrf_consumer::vrf_consumer_component::VrfConsumerComponent;
     use openzeppelin::access::ownable::OwnableComponent;
     use starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
     use starknet::{ContractAddress, get_caller_address, get_contract_address};
-
-    // Cartridge VRF consumer component and types
-    use cartridge_vrf::vrf_consumer::vrf_consumer_component::VrfConsumerComponent;
-    use cartridge_vrf::Source;
 
     component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);
     component!(path: VrfConsumerComponent, storage: vrf_consumer, event: VrfConsumerEvent);
@@ -145,9 +145,7 @@ mod DiceGame {
         fn settle_random(ref self: ContractState) {
             self.ownable.assert_only_owner();
             // Consume a random value tied to this contract's own nonce
-            let random = self
-                .vrf_consumer
-                .consume_random(Source::Nonce(get_contract_address()));
+            let random = self.vrf_consumer.consume_random(Source::Nonce(get_contract_address()));
             self.last_random_number.write(random);
         }
 
@@ -158,4 +156,5 @@ mod DiceGame {
     }
 }
 //ANCHOR_END: dice_game
+
 

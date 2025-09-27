@@ -3,15 +3,20 @@ name = "listing_06_dice_game_vrf"
 version = "0.1.0"
 edition = "2024_07"
 
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
-
 [dependencies]
-cartridge_vrf = { git = "https://github.com/cartridge-gg/vrf" }
-openzeppelin = "0.18.0"
-starknet = ">=2.12.0"
+cartridge_vrf = { git = "https://github.com/cartridge-gg/vrf", rev = "adf6eee280b3d017d1421e7d63715142d156f62d" }
+starknet = "2.12.0"
+openzeppelin = "2.0.0"
+
+[dev-dependencies]
+snforge_std = "0.48.0"
+assert_macros = "2.12.0"
 
 [[target.starknet-contract]]
-casm = true
+sierra = true
 
-[cairo]
-enable-gas = true
+[scripts]
+test = "snforge test"
+
+[tool.scarb]
+allow-prebuilt-plugins = ["snforge_std"]
