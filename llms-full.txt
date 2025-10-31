@@ -61,7 +61,7 @@ We would like to thank the Rust community for the [Rust Book][doc rust], which h
 Let’s start your Cairo journey! There’s a lot to learn, but every journey starts somewhere. In this chapter, we’ll discuss:
 
 - Installing Scarb, which is Cairo's build toolchain and package manager, on Linux, macOS, and Windows.
-- Installing Starknet Foundry, which is the default test runnner when creating a Cairo project.
+- Installing Starknet Foundry, which is the default test runner when creating a Cairo project.
 - Writing a program that prints `Hello, world!`.
 - Using basic Scarb commands to create a project and execute a program.
 
