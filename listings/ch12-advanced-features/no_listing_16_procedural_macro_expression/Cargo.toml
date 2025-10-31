@@ -10,7 +10,7 @@ crate-type = ["cdylib"]
 [dependencies]
 bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1.1"
-cairo-lang-parser = "2.12.0"
-cairo-lang-syntax = "2.12.0"
+cairo-lang-parser = "2.13.1"
+cairo-lang-syntax = "2.13.1"
 
 [workspace]

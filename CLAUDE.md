@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Required tools:
 
 - **mdBook**: `cargo install mdbook`
-- **scarb**: v2.12.0 (via asdf: `asdf install`)
+- **scarb**: v2.13.1 (via asdf: `asdf install`)
 - **starknet-foundry**: v0.44.0 (via asdf)
 - **mdbook-cairo**: Custom preprocessor (install via `cargo install --git https://github.com/enitrat/mdbook-cairo`)
 - **cairo-listings**: Verification tool (install via `cargo install --git https://github.com/enitrat/cairo-listings --locked`)

@@ -117,12 +117,12 @@ After installation, starkup will automatically install the latest stable version
 
 ```bash
 $ scarb --version
-scarb 2.12.0 (639d0a65e 2025-08-04)
-cairo: 2.12.0 (https://crates.io/crates/cairo-lang-compiler/2.12.0)
+scarb 2.13.1 (639d0a65e 2025-08-04)
+cairo: 2.13.1 (https://crates.io/crates/cairo-lang-compiler/2.13.1)
 sierra: 1.7.0
 
 $ snforge --version
-snforge 0.48.0
+snforge 0.51.1
 ```
 
 We'll describe Starknet Foundry in more detail in [Chapter 10][writing tests] for Cairo programs testing and in [Chapter 18][testing with snfoundry] when discussing Starknet smart contract testing and security in the second part of the book.
@@ -225,11 +225,11 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.12.0"
+starknet = "2.13.1"
 
 [dev-dependencies]
-snforge_std = "0.48.0"
-assert_macros = "2.12.0"
+snforge_std = "0.51.1"
+assert_macros = "2.13.1"
 
 [[target.starknet-contract]]
 sierra = true
@@ -272,7 +272,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 
 
 [[target.executable]]
@@ -428,7 +428,7 @@ Here’s how it works: the program will take an input number from the user and c
 
 ## Setting Up a New Project
 
-To get started, ensure you have Scarb 2.12.0 or later installed (see [Installation][installation] for details). We’ll use Scarb to create and manage our Cairo project.
+To get started, ensure you have Scarb 2.13.1 or later installed (see [Installation][installation] for details). We’ll use Scarb to create and manage our Cairo project.
 
 Open a terminal in your projects directory and create a new Scarb project:
 
@@ -450,7 +450,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.12.0"
+cairo_test = "2.13.1"
 ```
 
 This is a minimal manifest file for a Cairo project. However, since we want to create an executable program that we can prove, we need to modify it. Update Scarb.toml to define an executable target and include the `cairo_execute` plugin:
@@ -467,7 +467,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 
 
 [[target.executable]]
@@ -479,7 +479,7 @@ Here’s what we’ve added:
 
 - `[[target.executable]]` specifies that this package compiles to a Cairo executable (not a library or Starknet contract).
 - `[cairo] enable-gas = false` disables gas tracking, which is required for executable targets since gas is specific to Starknet contracts.
-  `[dependencies] cairo_execute = "2.12.0"` adds the plugin needed to execute and prove our program.
+  `[dependencies] cairo_execute = "2.13.1"` adds the plugin needed to execute and prove our program.
 
 Now, check the generated `src/lib.cairo`, which is a simple placeholder. Since we’re building an executable, we’ll replace this with a function annotated with `#[executable]` to define our entry point.
 
@@ -5084,7 +5084,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 ```
 
 As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional _.cairo_ files within the _src_ directory or its subdirectories.
@@ -16231,7 +16231,7 @@ The settings of your Scarb project can be configured in the `Scarb.toml` file. T
 
 ```toml,noplayground
 [dev-dependencies]
-snforge_std = "0.48.0"
+snforge_std = "0.51.1"
 
 [scripts]
 test = "snforge test"
@@ -18893,11 +18893,11 @@ experimental-features = ["user_defined_inline_macros"]
 # [cairo]
 #
 # [dependencies]
-# cairo_execute = "2.12.0"
+# cairo_execute = "2.13.1"
 #
 # [dev-dependencies]
-# snforge_std = "0.48.0"
-# assert_macros = "2.12.0"
+# snforge_std = "0.51.1"
+# assert_macros = "2.13.1"
 #
 # [scripts]
 # test = "snforge test"
@@ -21027,8 +21027,8 @@ crate-type = ["cdylib"]
 [dependencies]
 bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1.1"
-cairo-lang-parser = "2.12.0"
-cairo-lang-syntax = "2.12.0"
+cairo-lang-parser = "2.13.1"
+cairo-lang-syntax = "2.13.1"
 
 [workspace]
 ```
@@ -21060,14 +21060,14 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 pow = { path = "../no_listing_16_procedural_macro_expression" }
 hello_macro = { path = "../no_listing_17_procedural_macro_derive" }
 rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.12.0"
+cairo_test = "2.13.1"
 
 [cairo]
 enable-gas = false
@@ -21415,7 +21415,7 @@ edition = "2024_07"
 publish = false
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 oracle = "0.1.0-dev.4"
 
 [executable]
@@ -22860,7 +22860,7 @@ In **Proof Mode**, the runner not only executes the program but also prepares th
 
 _By the Cairo Community and its [contributors](https://github.com/cairo-book/cairo-book.github.io). Special thanks to [StarkWare](https://starkware.co/) through [OnlyDust](https://www.onlydust.xyz/), and [Voyager](https://voyager.online/) for supporting the creation of this book._
 
-This version of the text assumes you’re using [Cairo](https://github.com/starkware-libs/cairo) [version 2.12.0](https://github.com/starkware-libs/cairo/releases) and [Starknet Foundry](https://foundry-rs.github.io/starknet-foundry/index.html) [version 0.48.0](https://github.com/foundry-rs/starknet-foundry/releases). See the [Installation](ch01-01-installation.md) section of Chapter 1 to install or update Cairo and Starknet Foundry.
+This version of the text assumes you’re using [Cairo](https://github.com/starkware-libs/cairo) [version 2.13.1](https://github.com/starkware-libs/cairo/releases) and [Starknet Foundry](https://foundry-rs.github.io/starknet-foundry/index.html) [version 0.51.1](https://github.com/foundry-rs/starknet-foundry/releases). See the [Installation](ch01-01-installation.md) section of Chapter 1 to install or update Cairo and Starknet Foundry.
 
 This book is open source. Find a typo or want to contribute? Check out the book's [GitHub repository](https://github.com/cairo-book/cairo-book).
 
