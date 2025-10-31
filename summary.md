@@ -42,12 +42,12 @@ After installation, verify the versions of Scarb and Starknet Foundry in a new t
 
 ```bash
 $ scarb --version
-scarb 2.12.0 (c0ef5ec6a 2025-04-09)
-cairo: 2.12.0 (https://crates.io/crates/cairo-lang-compiler/2.12.0)
+scarb 2.13.1 (c0ef5ec6a 2025-04-09)
+cairo: 2.13.1 (https://crates.io/crates/cairo-lang-compiler/2.13.1)
 sierra: 1.7.0
 
 $ snforge --version
-snforge 0.48.0
+snforge 0.51.1
 ```
 
 ## Creating a Project Directory
@@ -89,7 +89,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.12.0"
+cairo_test = "2.13.1"
 ```
 
 ## Installing the VSCode Extension
@@ -241,14 +241,14 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 ```
 
 The additions include:
 
 - `[[target.executable]]`: Specifies that this package compiles to a Cairo executable.
 - `[cairo] enable-gas = false`: Disables gas tracking, which is specific to Starknet contracts and not required for executables.
-- `[dependencies] cairo_execute = "2.12.0"`: Adds the plugin necessary to execute and prove the program.
+- `[dependencies] cairo_execute = "2.13.1"`: Adds the plugin necessary to execute and prove the program.
 
 #### Writing the Prime-Checking Logic
 
@@ -3539,7 +3539,7 @@ Cairo 2.9 and later (with `experimental-features = ["associated_item_constraints
 ```cairo, noplayground
 #[generate_trait]
 impl ArrayFilterExt of ArrayFilterExtTrait {
-    // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
+    // Needed in Cairo 2.13.1 because of a bug in inlining analysis.
     #[inline(never)]
     fn filter<
         T,
@@ -4170,8 +4170,8 @@ Creating a procedural macro requires a specific project structure:
         [dependencies]
         bigdecimal = "0.4.5"
         cairo-lang-macro = "0.1.1"
-        cairo-lang-parser = "2.12.0"
-        cairo-lang-syntax = "2.12.0"
+        cairo-lang-parser = "2.13.1"
+        cairo-lang-syntax = "2.13.1"
 
         [workspace]
         ```
@@ -4211,7 +4211,7 @@ rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.12.0"
+cairo_test = "2.13.1"
 ```
 
 #### Expression Macros
@@ -5552,7 +5552,7 @@ Closures are defined using pipes (`|`) for arguments and can have a single-line 
 ```cairo
 # #[generate_trait]
 # impl ArrayExt of ArrayExtTrait {
-#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.13.1 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
 #         self: Array<T>, f: F,
@@ -5567,7 +5567,7 @@ Closures are defined using pipes (`|`) for arguments and can have a single-line 
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.13.1 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -5631,7 +5631,7 @@ Closures can include bindings from their enclosing scope. For example, `my_closu
 ```cairo
 # #[generate_trait]
 # impl ArrayExt of ArrayExtTrait {
-#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.13.1 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
 #         self: Array<T>, f: F,
@@ -5646,7 +5646,7 @@ Closures can include bindings from their enclosing scope. For example, `my_closu
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.13.1 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -5802,7 +5802,7 @@ Below is an example demonstrating the implementation of `map` and `filter` for a
 ```cairo, noplayground
 #[generate_trait]
 impl ArrayExt of ArrayExtTrait {
-    // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
+    // Needed in Cairo 2.13.1 because of a bug in inlining analysis.
     #[inline(never)]
     fn map<T, +Drop<T>, F, +Drop<F>, impl func: core::ops::Fn<F, (T,)>, +Drop<func::Output>>(
         self: Array<T>, f: F,
@@ -5817,7 +5817,7 @@ impl ArrayExt of ArrayExtTrait {
 #
 # #[generate_trait]
 # impl ArrayFilterExt of ArrayFilterExtTrait {
-#     // Needed in Cairo 2.12.0 because of a bug in inlining analysis.
+#     // Needed in Cairo 2.13.1 because of a bug in inlining analysis.
 #     #[inline(never)]
 #     fn filter<
 #         T,
@@ -5874,7 +5874,7 @@ impl ArrayExt of ArrayExtTrait {
 # }
 ```
 
-In the `map` implementation, the output array's element type (`Array<func::Output>`) is derived from the closure's return type (`func::Output`), allowing flexible transformations. The `#[inline(never)]` attribute is used to work around an inlining analysis bug in Cairo 2.12.0. The `main` function demonstrates how `map` and `filter` can be used with closures to transform and filter array elements.
+In the `map` implementation, the output array's element type (`Array<func::Output>`) is derived from the closure's return type (`func::Output`), allowing flexible transformations. The `#[inline(never)]` attribute is used to work around an inlining analysis bug in Cairo 2.13.1. The `main` function demonstrates how `map` and `filter` can be used with closures to transform and filter array elements.
 
 Conclusion
 
@@ -11056,7 +11056,7 @@ To use Starknet Foundry for testing, add it as a dev dependency in your `Scarb.t
 
 ```toml,noplayground
 [dev-dependencies]
-snforge_std = "0.48.0"
+snforge_std = "0.51.1"
 
 [scripts]
 test = "snforge test"

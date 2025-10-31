@@ -15,7 +15,8 @@ pub fn hello_macro(token_stream: TokenStream) -> ProcMacroResult {
             struct_name = nodes
                 .find(|node| node.kind(&db) == TokenIdentifier)
                 .unwrap()
-                .get_text(&db);
+                .get_text(&db)
+                .to_string();
             break;
         }
     }

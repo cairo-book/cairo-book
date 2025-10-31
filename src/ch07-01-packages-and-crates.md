@@ -57,7 +57,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 ```
 
 As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional _.cairo_ files within the _src_ directory or its subdirectories.

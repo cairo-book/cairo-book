@@ -6,14 +6,14 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 pow = { path = "../no_listing_16_procedural_macro_expression" }
 hello_macro = { path = "../no_listing_17_procedural_macro_derive" }
 rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.12.0"
+cairo_test = "2.13.1"
 
 [cairo]
 enable-gas = false

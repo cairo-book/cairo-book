@@ -13,7 +13,7 @@ mod tests {
     use super::*;
 
     #[test]
-    #[available_gas(2000000)]
+    #[available_gas(l2_gas: 2000000)]
     fn test_sum_n() {
         let result = sum_n(10);
         assert!(result == 55, "result is not 55");

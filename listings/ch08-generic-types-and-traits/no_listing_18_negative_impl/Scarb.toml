@@ -10,7 +10,7 @@ experimental-features = ["negative_impls"]
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.12.0"
+cairo_execute = "2.13.1"
 
 
 [[target.executable]]
