@@ -1,6 +1,6 @@
 #[starknet::contract]
 mod UpgradeableContract {
-    use openzeppelin_access::ownable::OwnableComponent;
+    use openzeppelin::access::ownable::OwnableComponent;
     use openzeppelin_upgrades::UpgradeableComponent;
     use openzeppelin_upgrades::interface::IUpgradeable;
     use starknet::{ClassHash, ContractAddress};
