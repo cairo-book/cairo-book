@@ -19,3 +19,5 @@ Additional resources for mastering Cairo:
 - [The Scarb documentation](https://docs.swmansion.com/scarb/docs.html): The official documentation for Cairo’s package manager and build tool, covering how to create and manage packages, use dependencies, run builds, and configure projects
 
 - [The Cairo whitepaper](https://eprint.iacr.org/2021/1063.pdf): The original paper introducing Cairo by StarkWare, which explains Cairo as a language for writing provable programs, details its architecture, and shows how it enables scalable, verifiable computation without relying on trusted setups
+
+If you have any questions, feedback or comments, you can reach out through [Github Issues](https://github.com/cairo-book/cairo-book/issues) or directly to [maintainers](https://relens.ai/blog/author/eni).
