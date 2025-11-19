@@ -44,6 +44,6 @@ Visit the `vscode-cairo` [page][vscode-cairo]<!-- ignore -->
 to install it on VSCode. You will get abilities such as autocompletion, jump to
 definition, and inline errors.
 
-[cairo-language-server]: https://github.com/starkware-libs/cairo/tree/main/crates/cairo-lang-language-server
+[cairo-language-server]: https://github.com/software-mansion/cairols
 
 > Note: If you have Scarb installed, it should work out of the box with the Cairo VSCode extension, without a manual installation of the language server.

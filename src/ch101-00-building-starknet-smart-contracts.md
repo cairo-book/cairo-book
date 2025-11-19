@@ -13,4 +13,4 @@ At this point, you should have multiple questions that come to mind:
 
 Luckily, we'll be answering all these questions in this chapter.
 
-[contract interface]: ./ch13-01-introduction-to-smart-contracts.md#the-interface-the-contracts-blueprint
+[contract interface]: ./ch100-00-introduction-to-smart-contracts.md#the-interface-the-contracts-blueprint

@@ -20,5 +20,5 @@ The Output Builtin’s integration with public memory is required for STARK proo
 
 These implementation references of the Output Builtin in various Cairo VM implementations:
 
-- [TypeScript Output Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/58fd07d81cff4a4bb45c30ab99976ba66f0576ad/src/builtins/output.ts#L4)
+- [TypeScript Output Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/main/src/builtins/output.ts#L4)
 - [Python Output Builtin](https://github.com/starkware-libs/cairo-lang/blob/0e4dab8a6065d80d1c726394f5d9d23cb451706a/src/starkware/cairo/lang/vm/output_builtin_runner.py)

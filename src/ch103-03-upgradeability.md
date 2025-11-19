@@ -67,4 +67,4 @@ Upgrades can be very sensitive operations, and security should always be top of 
 - **Storage collisions** (e.g. mistakenly reusing the same storage slot from another component) are also possible, although less likely if best practices are followed, for example prepending storage variables with the component's name.
 - Always check for backwards compatibility before upgrading between versions of OpenZeppelin Contracts.
 
-[oz upgradeability api]: https://docs.openzeppelin.com/contracts-cairo/2.0.0/api/upgrades
+[oz upgradeability api]: https://docs.openzeppelin.com/contracts-cairo/alpha/api/upgrades

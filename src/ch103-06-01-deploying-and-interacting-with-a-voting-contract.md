@@ -76,8 +76,8 @@ PREFUNDED ACCOUNTS
 
 Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the ["Account Abstraction"][aa chapter] chapter of the Starknet Docs.
 
-[dojo katana]: https://github.com/dojoengine/dojo/blob/main/crates/katana
-[katana installation]: https://www.dojoengine.org/toolchain/katana/interact#starkli-built-in-accounts-and-configuration
+[dojo katana]: https://book.dojoengine.org/toolchain/katana
+[katana installation]: https://book.dojoengine.org/toolchain/katana#getting-started
 [aa chapter]: https://docs.starknet.io/architecture-and-concepts/accounts/introduction/#account_abstraction
 
 ### Smart Wallets for Voting

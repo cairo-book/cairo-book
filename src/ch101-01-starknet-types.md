@@ -14,7 +14,7 @@ Contract addresses in Starknet have a value range of `[0, 2^251)`, which is enfo
 
 ## Storage Address
 
-The `StorageAddress` type represents the location of a value within a contract's storage. While you typically won't create these addresses directly (the storage system handles this for you through types like [Map](./ch101-02-01-storage-mappings.md) and [Vec](./ch101-02-02-storage-vecs.md)), understanding this type is important for advanced storage patterns. Each value stored in the `Storage` struct has its own `StorageAddress`, and can be accessed directly following the rules defined in the [Storage](./ch101-01-00-contract-storage.md) chapter.
+The `StorageAddress` type represents the location of a value within a contract's storage. While you typically won't create these addresses directly (the storage system handles this for you through types like [Map](./ch101-01-01-storage-mappings.md) and [Vec](./ch101-01-02-storage-vecs.md)), understanding this type is important for advanced storage patterns. Each value stored in the `Storage` struct has its own `StorageAddress`, and can be accessed directly following the rules defined in the [Storage](./ch101-01-00-contract-storage.md) chapter.
 
 ```cairo
 {{#include ../listings/ch101-building-starknet-smart-contracts/listing_starknet_types/src/lib.cairo:storage_address}}
