@@ -27,12 +27,14 @@ Let's take a look at two snapshots of a Segment Arena segment,
 during the execution of a dummy program by the Cairo VM.
 
 In the first snapshot, Let's look at first case when a dictionary is allocated:
+
 - `info_ptr` points to new info segment
 - `n_dicts` increments to 1
 - Info segment created with three cells
 - Dictionary gets new segment `<3:0>`
 
 Now, In the second case one more dictionary is allocated:
+
 - Info segment grows by three cells per dictionary
 - Squashed dictionaries have end addresses set
 - Squashing indices assigned sequentially
@@ -68,6 +70,6 @@ The builtin enforces several rules:
 
 These implementation references of the Segment Arena builtin might not be exhaustive.
 
-- [TypeScript Segment Arena Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/58fd07d81cff4a4bb45c30ab99976ba66f0576ad/src/builtins/segmentArena.ts)
+- [TypeScript Segment Arena Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/main/src/builtins/segmentArena.ts)
 - [Rust Segment Arena Builtin](https://github.com/lambdaclass/cairo-vm/blob/41476335884bf600b62995f0c005be7d384eaec5/vm/src/vm/runners/builtin_runner/segment_arena.rs)
 - [Zig Segment Arena Builtin](https://github.com/keep-starknet-strange/ziggy-starkdust/blob/55d83e61968336f6be93486d7acf8530ba868d7e/src/vm/builtins/builtin_runner/segment_arena.zig)
