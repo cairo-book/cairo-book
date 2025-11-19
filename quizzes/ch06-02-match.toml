@@ -7,6 +7,7 @@ enum Location {
     Range : (u32, u32)
 }
 
+#[executable]
 fn main() {
     let loc: Location = Location::Range((2, 5));
     let n: u32 = match loc {
@@ -37,6 +38,7 @@ enum Either {
     Right: ByteArray
 }
 
+#[executable]
 fn main() {
     let x = Either::Right("Hello World");
     let simple = match x {

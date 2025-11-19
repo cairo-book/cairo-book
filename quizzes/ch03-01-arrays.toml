@@ -36,6 +36,7 @@ the out-of-bounds index.
 id = "2e6570eb-8bf4-48b7-9032-5815475bc412"
 type = "Tracing"
 prompt.program = """
+#[executable]
 fn main() {
     let mut v: Array<ByteArray> = array!["Hello "];
     let mut s = *v[0];
@@ -56,6 +57,7 @@ ByteArray is not copyable, the line `let mut s = *v[0];` does not compile.
 id = "95d528ee-ae78-4892-a438-a5d97f07f52a"
 type = "Tracing"
 prompt.program = """
+#[executable]
 fn main() {
     let mut v: Array<usize> = array![1, 2, 3];
     let mut i = *v[0];

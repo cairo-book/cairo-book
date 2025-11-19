@@ -13,11 +13,12 @@ impl CharacterSub of Sub<Character> {
     }
 }
 
+#[executable]
 fn main() {
     let mut player1: Character = Character { health: 100, attack: 2 };
     let player2: Character = Character { health: 100, attack: 5 };
     player1 = player1 - player2;
-    println!("{}", player1.health); 
+    println!("{}", player1.health);
 }
 """
 answer.doesCompile = false

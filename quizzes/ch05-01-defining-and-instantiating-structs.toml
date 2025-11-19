@@ -8,6 +8,7 @@ struct Point {
   y: u32,
 }
 
+#[executable]
 fn main() {
   let mut a = Point { x: 1, y: 2 };
   a.x += 1;
@@ -32,6 +33,7 @@ struct Point {
     y: u32,
 }
 
+#[executable]
 fn main() {
     let mut p = Point { x: 1, y: 2 };
     let mut x = p.x;

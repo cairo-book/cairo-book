@@ -11,6 +11,7 @@ fn perimeter(r: Rectangle) -> u64 {
     2 * (r.width + r.height)
 }
 
+#[executable]
 fn main() {
     let rectangle = Rectangle { width: 20, height: 10, };
     let p = perimeter(rectangle);
@@ -26,6 +27,7 @@ type = "Tracing"
 prompt.program = """
 struct Point { x: u128, y: u128, }
 
+#[executable]
 fn main() {
     let p = Point { x: 5, y: 10 };
     let Point { z, w } = p;

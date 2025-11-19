@@ -30,18 +30,19 @@ pub mod parent {
 
 use parent::{a, child as alias};
 
+#[executable]
 fn main() {
     // here
 }
 ```
 Inside `main`, what is the total number of paths that can refer to `a`, `b`, or `c` (not including those that use `self` and `super`)?
-Write your answer as a digit such as 0 or 1. 
+Write your answer as a digit such as 0 or 1.
 For example, if the only two valid paths were `a` and `parent::b`, then the answer would be 2.
 """
 answer.answer = "4"
 context = """
-There are two paths to `a`: `parent::a` and `a`. 
-There is no path to `b`, because it is private. 
+There are two paths to `a`: `parent::a` and `a`.
+There is no path to `b`, because it is private.
 There are two paths to `c`: `parent::child::c`, and `alias::c`.
 """
 id = "21fd3314-cf90-4b32-9223-d5d773f484dd"

@@ -25,6 +25,7 @@ struct Student {
     id: u32
 }
 
+#[executable]
 fn main() {
     let mut student1 = BoxTrait::new(Student { name: "Peter", age: 12, id: 12345 });
     let student2 = student1;
@@ -50,6 +51,7 @@ Which of the following statement is TRUE when the following program is run with 
 ```
 use core::nullable::{NullableTrait, match_nullable, FromNullableResult};
 
+#[executable]
 fn main() {
     let mut scoreSheet: Felt252Dict<Nullable<Span<felt252>>> = Default::default();
 

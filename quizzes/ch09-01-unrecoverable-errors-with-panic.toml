@@ -39,6 +39,7 @@ prompt.prompt = """
 Which of the following programs will **NOT** cause a runtime panic?
 
 ```
+#[executable]
 fn main() {
     if true {
         panic!("2");
@@ -48,6 +49,7 @@ fn main() {
 ```
 
 ```
+#[executable]
 fn main() {
     let arr = array![1, 2, 3];
     let index = 5;
@@ -57,6 +59,7 @@ fn main() {
 ```
 
 ```
+#[executable]
 fn main() {
     let mut arr: Array<u128> = array![5];
     let index_to_access = 3;

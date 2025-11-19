@@ -27,6 +27,7 @@ pub mod cat {
     pub struct Cat {}
 }
 
+#[executable]
 fn main() {
     let dog = dog::Dog {};
     dog.make_noise();
@@ -61,6 +62,7 @@ impl DrawableShape of Drawable<Shape> {
     }
 }
 
+#[executable]
 fn main() {
     let my_shape = Shape{};
     // the line goes here
@@ -113,6 +115,7 @@ impl ThirdConsumerImpl of Consumer<AThirdType> {
     }
 }
 
+#[executable]
 fn main() {
     let producer = ProducerType {};
     let another_type = AnotherType {};
