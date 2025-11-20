@@ -9,6 +9,7 @@ pub mod rectangle {
     }
 }
 
+#[executable]
 fn main() {
     let r = rectangle::Rectangle { width: 10, height: 20 };
     println!("{}", r.width);
@@ -16,7 +17,7 @@ fn main() {
 """
 answer.doesCompile = false
 context = """
-While the `Rectangle` structure is public, the fields `width` and `height` are not marked as `pub`. 
+While the `Rectangle` structure is public, the fields `width` and `height` are not marked as `pub`.
 Therefore instantiating these fields outside of the `rectangle` module is not allowed. It's also impossible to access the field `width` to print it.
 This program would compile if the structure were changed to:
 ```
@@ -62,6 +63,7 @@ pub mod b {
     }
 }
 
+#[executable]
 fn main() {
     a::entry();
 }
@@ -69,7 +71,7 @@ fn main() {
 answer.doesCompile = true
 answer.stdout = "c2"
 context = """
-`entry` uses the path `super::b::c::f`. `entry` is within the module `a`, so `super` refers to the parent module of `a`, which is the root crate. 
+`entry` uses the path `super::b::c::f`. `entry` is within the module `a`, so `super` refers to the parent module of `a`, which is the root crate.
 Then the child `b` of the root is the outermost module `b`, whose child `c` contains a function `f` that prints "c2".
 """
 id = "2f0361e2-b5d4-46cd-ac72-dca753a553c8"

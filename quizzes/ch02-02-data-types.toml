@@ -30,6 +30,7 @@ context = """
 id = "dc1e6fa1-0d7b-479e-98ac-6a514d60eb1b"
 type = "Tracing"
 prompt.program = """
+#[executable]
 fn main() {
   let x: felt32 = 2;
   println!("{x}");

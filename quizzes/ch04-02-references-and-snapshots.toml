@@ -5,6 +5,7 @@ fn incr(ref n: u32) {
     *n += 1;
 }
 
+#[executable]
 fn main() {
     let mut n : u32 = 1;
     incr(ref n);
@@ -31,6 +32,7 @@ fn double_rect(ref rect: Rectangle) {
     rect.width *= 2;
 }
 
+#[executable]
 fn main() {
     let rect = Rectangle { height: 10, width: 20 };
     double_rect(ref rect);
@@ -55,6 +57,7 @@ fn sum(arr: @Array<u128>) -> u128 {
     sum
 }
 
+#[executable]
 fn main() {
     let mut arr1: Array<u128> = array![1, 2, 3];
     let snap = @arr1;
@@ -85,6 +88,7 @@ fn give_and_take(arr: @Array<u128>, n: u128) -> u128 {
     arr.append(n);
     arr.pop_front().unwrap_or(0)
 }
+#[executable]
 fn main() {
     let mut arr1: Array<u128> = array![1,2,3];
     let elem = give_and_take(@arr1, 4);
@@ -97,6 +101,7 @@ fn give_and_take(arr: @Array<u128>, n: u128) -> u128 {
     *arr.append(n);
     *arr.pop_front().unwrap_or(0)
 }
+#[executable]
 fn main() {
     let mut arr1: Array<u128> = array![1,2,3];
     let elem = give_and_take(@arr1, 4);
@@ -109,6 +114,7 @@ fn give_and_take(ref arr: Array<u128>, n: u128) -> u128 {
     arr.append(n);
     arr.pop_front().unwrap_or(0)
 }
+#[executable]
 fn main() {
     let mut arr1: Array<u128> = array![1,2,3];
     let elem = give_and_take(arr1, 4);
@@ -121,6 +127,7 @@ fn give_and_take(ref arr: Array<u128>, n: u128) -> u128 {
     arr.append(n);
     arr.pop_front().unwrap_or(0)
 }
+#[executable]
 fn main() {
     let arr1: Array<u128> = array![1,2,3];
     let elem = give_and_take(ref arr1, 4);
@@ -134,6 +141,7 @@ fn give_and_take(ref arr: Array<u128>, n: u128) -> u128 {
     arr.append(n);
     arr.pop_front().unwrap_or(0)
 }
+#[executable]
 fn main() {
     let mut arr1: Array<u128> = array![1,2,3];
     let elem = give_and_take(ref arr1, 4);

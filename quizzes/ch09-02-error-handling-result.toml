@@ -66,6 +66,7 @@ fn try_division_by_0 () -> Option<u32> {
     Some(result)
 }
 
+#[executable]
 fn main() {
     println!("{}", try_division_by_0().unwrap());
 }

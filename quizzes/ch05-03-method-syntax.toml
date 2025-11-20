@@ -20,6 +20,7 @@ impl RectangleImpl of RectangleTrait {
     }
 }
 
+#[executable]
 fn main() {
     let rect1 = Rectangle {width: 40, height: 50};
     let rect2 = RectangleTrait::new(10, 40);
@@ -60,6 +61,7 @@ impl RectangleImpl of RectangleTrait {
     }
 }
 
+#[executable]
 fn main() {
     let my_square = Rectangle { width: 30, height: 50 };
     let my_circle = Circle { radius: 10 };

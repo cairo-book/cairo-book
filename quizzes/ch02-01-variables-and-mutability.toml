@@ -7,18 +7,15 @@ answer.answer = """
 let mut x = 99;
 ```
 """
-prompt.distractors = [
-"""
+prompt.distractors = ["""
 ```rust
 const MINUTES_PER_HOUR = 60;
 ```
-""",
-"""
+""", """
 ```rust
 let y = 10;
 ```
-"""
-]
+"""]
 
 [[questions]]
 id = "0a902a6d-3fca-4d72-b455-5e9ab12441d9"
@@ -26,6 +23,7 @@ type = "MultipleChoice"
 prompt.prompt = """
 What will be the output of the following program?
 ```rust
+#[executable]
 fn main() {
     let initial_balance = 9;
     let initial_balance = initial_balance - 3;
@@ -37,7 +35,4 @@ fn main() {
 ```
 """
 answer.answer = "`Final balance is: 6`"
-prompt.distractors = [
-  "`Final balance is: 12`",
-  "The program won't compile."
-]
+prompt.distractors = ["`Final balance is: 12`", "The program won't compile."]

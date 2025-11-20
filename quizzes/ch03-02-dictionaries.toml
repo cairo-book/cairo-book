@@ -3,6 +3,7 @@ type = "Tracing"
 prompt.program = """
 use core::dict::Felt252Dict;
 
+#[executable]
 fn main() {
     let mut balances: Felt252Dict<u64> = Default::default();
     balances.insert('Alex', 100);
@@ -24,6 +25,7 @@ type = "Tracing"
 prompt.program = """
 use core::dict::Felt252Dict;
 
+#[executable]
 fn main() {
     let mut dict: Felt252Dict<Span<felt252>> = Default::default();
     let a = array![8, 9, 10];
@@ -47,6 +49,7 @@ What will be the output of this code snippet?
 ```
 use core::dict::Felt252Dict;
 
+#[executable]
 fn main() {
     let mut balances: Felt252Dict<u64> = Default::default();
     balances.insert('Alex', 200);

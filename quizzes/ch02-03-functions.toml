@@ -8,10 +8,11 @@ answer.answer = "fn"
 id = "6343598f-380f-4a59-b6fb-7dfadc397f74"
 type = "Tracing"
 prompt.program = """
-fn f(x) { 
+fn f(x) {
   println!("{x}");
 }
 
+#[executable]
 fn main() {
   f(0);
 }
@@ -32,7 +33,7 @@ In Cairo, a curly-brace block like `{ /* ... */ }` is:
 3. A syntactic scope
 """
 answer.answer = "1 and 3"
-prompt.distractors = [ "1 only", "2 only", "2 and 3" ]
+prompt.distractors = ["1 only", "2 only", "2 and 3"]
 context = """
 A block is an expression (#1) that is allowed to contain statements. It also defines a syntactic scope for let-bindings inside it (#3).
 """
@@ -42,6 +43,7 @@ id = "7bbc0afb-2ad7-4d8d-97fd-610a65a85e38"
 type = "Tracing"
 prompt.program = """
 fn f(x: usize) -> usize { x + 1 }
+#[executable]
 fn main() {
   println!("{}", f({
     let y = 1;

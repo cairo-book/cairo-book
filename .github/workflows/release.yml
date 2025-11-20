@@ -23,19 +23,31 @@ jobs:
         with:
           version: 9
 
+      - name: Cache asdf tools
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.asdf
+            ~/.cache/scarb
+            ~/.cache/starknet-foundry
+          key: asdf-${{ runner.os }}-${{ hashFiles('.tool-versions') }}
+          restore-keys: |
+            asdf-${{ runner.os }}-
+
       - name: Install asdf & tools
         uses: asdf-vm/actions/install@9cd779f40fe38688dd19505ccbc4eaaf018b44e7
         with:
           asdf_version: 0.16.7
+
+      - name: Install Universal Sierra Compiler
+        run: |
+          curl -L https://raw.githubusercontent.com/software-mansion/universal-sierra-compiler/master/scripts/install.sh | sh
 
       - name: Set default scarb version
         run: asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Set default starknet-foundry version
         run: asdf set -u starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
-
-      - name: Setup Starknet-Foundry
-        uses: foundry-rs/setup-snfoundry@v3
 
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2

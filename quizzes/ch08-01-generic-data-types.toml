@@ -45,6 +45,7 @@ fn print_slice<T>(mut v: Span<T>) {
     }
 }
 
+#[executable]
 fn main() {
     let arr = array![1, 2, 3, 4];
     print_slice(arr.span().slice(1, 3));
@@ -81,6 +82,7 @@ impl PointImplGeneric<T> of PointTraitGeneric<T> {
     }
 }
 
+#[executable]
 fn main() {
     let p: Point<u32> = Point { x: 1, y: 2 };
     println!("{}", p.f());
@@ -103,6 +105,7 @@ struct Wallet<T>{
     address: W
 }
 
+#[executable]
 fn main() {
     let mut account = Wallet{ balance: 10, address: '0xAbDeFG' };
 

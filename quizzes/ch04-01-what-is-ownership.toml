@@ -6,6 +6,7 @@ fn add_suffix(mut s: ByteArray) -> ByteArray {
   s
 }
 
+#[executable]
 fn main() {
   let s = "hello";
   let s2 = add_suffix(s);
@@ -21,6 +22,7 @@ This program is valid because `s` is not used after moving it into `add_suffix`.
 [[questions]]
 type = "Tracing"
 prompt.program = """
+#[executable]
 fn main() {
   let mut s: ByteArray = "hello";
   let b = false;

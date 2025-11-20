@@ -7,6 +7,7 @@ enum Location {
     Range : (u32, u32)
 }
 
+#[executable]
 fn main() {
     let loc: Location = Location::Range((2, 5));
     let n: u32 = match loc {
@@ -21,10 +22,11 @@ fn main() {
     println!("{}", n);
 }
 """
-answer.doesCompile = false
+answer.doesCompile = true
+answer.stdout = "5"
 context = """
-Cairo does not support matching for tuples whose members are not enums yet.
-As `u32` is not an enum, the matching of `r` can't be done.
+Cairo supports matching for tuples. The program matches the `Range` variant,
+then matches the tuple `(2, 5)` against the pattern `(_, n)`, binding `n` to `5`.
 """
 id = "b0621230-c040-4f30-b658-14d31f4fab82"
 
@@ -37,6 +39,7 @@ enum Either {
     Right: ByteArray
 }
 
+#[executable]
 fn main() {
     let x = Either::Right("Hello World");
     let simple = match x {

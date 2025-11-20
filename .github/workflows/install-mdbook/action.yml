@@ -41,6 +41,8 @@ runs:
       shell: bash
       run: |
         git clone https://github.com/cairo-book/mdbook-quiz-cairo
+        cd mdbook-quiz-cairo
+        git checkout b7450fdf51eafec73dbee0d6afe873e5f3979b28
 
     - name: Initialize bindings
       shell: bash
