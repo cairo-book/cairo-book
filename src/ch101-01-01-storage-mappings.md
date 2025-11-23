@@ -16,7 +16,7 @@ The `Map` type, provided by the Cairo core library, inside the `core::starknet::
 
 To declare a mapping, use the `Map` type enclosed in angle brackets `<>`, specifying the key and value types. In Listing {{#ref storage-mappings}}, we create a simple contract that stores values mapped to the caller's address.
 
-> The `Felt252Dict` type is a **memory** type that cannot be stored in contract storage. For persistent storage of key-value pairs, use the `Map` type, which is a [phantom type][phantom types] designed specifically for contract storage. However, `Map` has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. `Map` can only be used as a storage variable within a contract's storage struct. To work with the contents of a `Map` in memory or perform complex operations, you'll need to copy its elements to and from a `Felt252Dict` or other suitable data structure.
+> The `Felt252Dict` type is a **memory** type that cannot be stored in contract storage. For persistent storage of key-value pairs, use the `Map` type, which is a phantom type designed specifically for contract storage. However, `Map` has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. `Map` can only be used as a storage variable within a contract's storage struct. To work with the contents of a `Map` in memory or perform complex operations, you'll need to copy its elements to and from a `Felt252Dict` or other suitable data structure.
 
 ## Declaring and Using Storage Mappings
 
