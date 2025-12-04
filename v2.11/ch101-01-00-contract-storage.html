@@ -1,0 +1,1181 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Contract Storage - The Cairo Programming Language</title>
+
+
+    <!-- Custom HTML head -->
+
+    <meta name="description" content="The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/css/last-changed.css">
+    <link rel="stylesheet" href="theme/css/chat.css">
+
+    <!-- MathJax -->
+    <script async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+    <link rel="canonical" id="canonical-link" href="" />
+    <script>
+        (function () {
+            var path = "ch101-01-00-contract-storage.md";
+            var canonicalPath;
+            
+            // Special handling for different cases
+            if (path === "" || path === "index.md") {
+                // Homepage should not have index.html
+                canonicalPath = "";
+            } else {
+                // Other pages: replace .md with .html
+                canonicalPath = path.replace(/\.md$/, ".html");
+            }
+            
+            var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
+            
+            // Remove trailing slash if present (except for root)
+            if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
+                canonicalUrl = canonicalUrl.slice(0, -1);
+            }
+            
+            document.getElementById("canonical-link").href = canonicalUrl;
+        })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M6M97KJP');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6M97KJP" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ZJLBV4KE2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-0ZJLBV4KE2');
+            gtag('config', 'G-WY42TERK5P')
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">The Cairo Book</a></li><li class="chapter-item expanded affix "><a href="ch00-01-foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Cairo Programming Language</li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-proving-a-prime-number.html"><strong aria-hidden="true">1.3.</strong> Proving That A Number Is Prime</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-common-programming-concepts.html"><strong aria-hidden="true">2.</strong> Common Programming Concepts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-variables-and-mutability.html"><strong aria-hidden="true">2.1.</strong> Variables and Mutability</a></li><li class="chapter-item expanded "><a href="ch02-02-data-types.html"><strong aria-hidden="true">2.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="ch02-03-functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="ch02-04-comments.html"><strong aria-hidden="true">2.4.</strong> Comments</a></li><li class="chapter-item expanded "><a href="ch02-05-control-flow.html"><strong aria-hidden="true">2.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-common-collections.html"><strong aria-hidden="true">3.</strong> Common Collections</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-arrays.html"><strong aria-hidden="true">3.1.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="ch03-02-dictionaries.html"><strong aria-hidden="true">3.2.</strong> Dictionaries</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Understanding Ownership</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> What is Ownership?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-snapshots.html"><strong aria-hidden="true">4.2.</strong> References and Snapshots</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-using-structs-to-structure-related-data.html"><strong aria-hidden="true">5.</strong> Using Structs to Structure Related Data</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-and-instantiating-structs.html"><strong aria-hidden="true">5.1.</strong> Defining and Instantiating Structs</a></li><li class="chapter-item expanded "><a href="ch05-02-an-example-program-using-structs.html"><strong aria-hidden="true">5.2.</strong> An Example Program Using Structs</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Method Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums-and-pattern-matching.html"><strong aria-hidden="true">6.</strong> Enums and Pattern Matching</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-enums.html"><strong aria-hidden="true">6.1.</strong> Enums</a></li><li class="chapter-item expanded "><a href="ch06-02-the-match-control-flow-construct.html"><strong aria-hidden="true">6.2.</strong> The Match Control Flow Construct</a></li><li class="chapter-item expanded "><a href="ch06-03-concise-control-flow-with-if-let-and-while-let.html"><strong aria-hidden="true">6.3.</strong> Concise Control Flow with if let and while let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-cairo-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Managing Cairo Projects with Packages, Crates and Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Packages and Crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope.html"><strong aria-hidden="true">7.2.</strong> Defining Modules to Control Scope</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Paths for Referring to an Item in the Module Tree</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Bringing Paths into Scope with the use Keyword</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Separating Modules into Different Files</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-generic-types-and-traits.html"><strong aria-hidden="true">8.</strong> Generic Types and Traits</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-generic-data-types.html"><strong aria-hidden="true">8.1.</strong> Generic Data Types</a></li><li class="chapter-item expanded "><a href="ch08-02-traits-in-cairo.html"><strong aria-hidden="true">8.2.</strong> Traits in Cairo</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Unrecoverable Errors with panic</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors.html"><strong aria-hidden="true">9.2.</strong> Recoverable Errors with Result</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-testing-cairo-programs.html"><strong aria-hidden="true">10.</strong> Testing Cairo Programs</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-how-to-write-tests.html"><strong aria-hidden="true">10.1.</strong> How To Write Tests</a></li><li class="chapter-item expanded "><a href="ch10-02-test-organization.html"><strong aria-hidden="true">10.2.</strong> Test Organization</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-functional-features.html"><strong aria-hidden="true">11.</strong> Functional Language Features: Iterators and Closures</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-closures.html"><strong aria-hidden="true">11.1.</strong> Closures: Anonymous Functions that Capture Their Environment</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-advanced-features.html"><strong aria-hidden="true">12.</strong> Advanced Cairo Features</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-custom-data-structures.html"><strong aria-hidden="true">12.1.</strong> Custom Data Structures</a></li><li class="chapter-item expanded "><a href="ch12-02-smart-pointers.html"><strong aria-hidden="true">12.2.</strong> Smart Pointers</a></li><li class="chapter-item expanded "><a href="ch12-09-deref-coercion.html"><strong aria-hidden="true">12.3.</strong> Deref Coercion</a></li><li class="chapter-item expanded "><a href="ch12-10-associated-items.html"><strong aria-hidden="true">12.4.</strong> Associated Items</a></li><li class="chapter-item expanded "><a href="ch12-03-operator-overloading.html"><strong aria-hidden="true">12.5.</strong> Operator Overloading</a></li><li class="chapter-item expanded "><a href="ch12-04-hash.html"><strong aria-hidden="true">12.6.</strong> Working with Hashes</a></li><li class="chapter-item expanded "><a href="ch12-05-macros.html"><strong aria-hidden="true">12.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="ch12-10-procedural-macros.html"><strong aria-hidden="true">12.8.</strong> Procedural Macros</a></li><li class="chapter-item expanded "><a href="ch12-06-inlining-in-cairo.html"><strong aria-hidden="true">12.9.</strong> Inlining in Cairo</a></li><li class="chapter-item expanded "><a href="ch12-08-printing.html"><strong aria-hidden="true">12.10.</strong> Printing</a></li><li class="chapter-item expanded "><a href="ch12-10-arithmetic-circuits.html"><strong aria-hidden="true">12.11.</strong> Arithmetic Circuits</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">13.</strong> Appendix (Cairo)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">13.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="appendix-02-operators-and-symbols.html"><strong aria-hidden="true">13.2.</strong> B - Operators and Symbols</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">13.3.</strong> C - Derivable Traits</a></li><li class="chapter-item expanded "><a href="appendix-04-cairo-prelude.html"><strong aria-hidden="true">13.4.</strong> D - The Cairo Prelude</a></li><li class="chapter-item expanded "><a href="appendix-05-common-error-messages.html"><strong aria-hidden="true">13.5.</strong> E - Common Error Messages</a></li><li class="chapter-item expanded "><a href="appendix-06-useful-development-tools.html"><strong aria-hidden="true">13.6.</strong> F - Useful Development Tools</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Smart Contracts in Cairo</li><li class="chapter-item expanded "><a href="ch100-00-introduction-to-smart-contracts.html"><strong aria-hidden="true">14.</strong> Introduction to Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch100-01-contracts-classes-and-instances.html"><strong aria-hidden="true">14.1.</strong> Starknet contract classes and instances</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-00-building-starknet-smart-contracts.html"><strong aria-hidden="true">15.</strong> Building Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch101-01-starknet-types.html"><strong aria-hidden="true">15.1.</strong> Starknet Types</a></li><li class="chapter-item expanded "><a href="ch101-01-00-contract-storage.html"><strong aria-hidden="true">15.2.</strong> Contract Storage</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch101-01-01-storage-mappings.html"><strong aria-hidden="true">15.2.1.</strong> Storage Mappings</a></li><li class="chapter-item "><a href="ch101-01-02-storage-vecs.html"><strong aria-hidden="true">15.2.2.</strong> Storage Vecs</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-02-contract-functions.html"><strong aria-hidden="true">15.3.</strong> Contract Functions</a></li><li class="chapter-item expanded "><a href="ch101-03-contract-events.html"><strong aria-hidden="true">15.4.</strong> Contract Events</a></li></ol></li><li class="chapter-item expanded "><a href="ch102-00-starknet-contract-interactions.html"><strong aria-hidden="true">16.</strong> Starknet Contract Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch102-01-contract-class-abi.html"><strong aria-hidden="true">16.1.</strong> Contract Class ABI</a></li><li class="chapter-item expanded "><a href="ch102-02-interacting-with-another-contract.html"><strong aria-hidden="true">16.2.</strong> Interacting with Another Contract</a></li><li class="chapter-item expanded "><a href="ch102-03-executing-code-from-another-class.html"><strong aria-hidden="true">16.3.</strong> Executing Code from Another Class</a></li><li class="chapter-item expanded "><a href="ch102-04-serialization-of-cairo-types.html"><strong aria-hidden="true">16.4.</strong> Serialization of Cairo types</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-00-building-advanced-starknet-smart-contracts.html"><strong aria-hidden="true">17.</strong> Building Advanced Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch103-01-optimizing-storage-costs.html"><strong aria-hidden="true">17.1.</strong> Optimizing Storage Costs</a></li><li class="chapter-item expanded "><a href="ch103-02-00-composability-and-components.html"><strong aria-hidden="true">17.2.</strong> Composability and Components</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-02-01-under-the-hood.html"><strong aria-hidden="true">17.2.1.</strong> Under the Hood</a></li><li class="chapter-item "><a href="ch103-02-02-component-dependencies.html"><strong aria-hidden="true">17.2.2.</strong> Component Dependencies</a></li><li class="chapter-item "><a href="ch103-02-03-testing-components.html"><strong aria-hidden="true">17.2.3.</strong> Testing Components</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-03-upgradeability.html"><strong aria-hidden="true">17.3.</strong> Upgradeability</a></li><li class="chapter-item expanded "><a href="ch103-04-L1-L2-messaging.html"><strong aria-hidden="true">17.4.</strong> L1 &lt;&gt; L2 Messaging</a></li><li class="chapter-item expanded "><a href="ch103-05-oracle-interactions.html"><strong aria-hidden="true">17.5.</strong> Oracle Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-05-01-price-feeds.html"><strong aria-hidden="true">17.5.1.</strong> Price Feeds</a></li><li class="chapter-item "><a href="ch103-05-02-randomness.html"><strong aria-hidden="true">17.5.2.</strong> Randomness</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-06-00-other-examples.html"><strong aria-hidden="true">17.6.</strong> Other Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-06-01-deploying-and-interacting-with-a-voting-contract.html"><strong aria-hidden="true">17.6.1.</strong> Deploying and Interacting with a Voting Contract</a></li><li class="chapter-item "><a href="ch103-06-02-working-with-erc20-token.html"><strong aria-hidden="true">17.6.2.</strong> Working with ERC20 Token</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch104-00-starknet-smart-contracts-security.html"><strong aria-hidden="true">18.</strong> Starknet Smart Contracts Security</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch104-01-general-recommendations.html"><strong aria-hidden="true">18.1.</strong> General Recommendations</a></li><li class="chapter-item expanded "><a href="ch104-02-testing-smart-contracts.html"><strong aria-hidden="true">18.2.</strong> Testing Smart Contracts</a></li><li class="chapter-item expanded "><a href="ch104-03-static-analysis-tools.html"><strong aria-hidden="true">18.3.</strong> Static Analysis Tools</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-000.html"><strong aria-hidden="true">19.</strong> Appendix (Starknet)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-08-system-calls.html"><strong aria-hidden="true">19.1.</strong> A - System Calls</a></li><li class="chapter-item expanded "><a href="appendix-09-sierra.html"><strong aria-hidden="true">19.2.</strong> B - Sierra</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Cairo VM</li><li class="chapter-item expanded "><a href="ch200-introduction.html"><strong aria-hidden="true">20.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="ch201-architecture.html"><strong aria-hidden="true">21.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="ch202-00-memory.html"><strong aria-hidden="true">22.</strong> Memory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch202-01-non-deterministic-read-only-memory.html"><strong aria-hidden="true">22.1.</strong> Non-Deterministic Read-only Memory</a></li><li class="chapter-item expanded "><a href="ch202-02-segments.html"><strong aria-hidden="true">22.2.</strong> Segments and Relocation</a></li></ol></li><li class="chapter-item expanded "><a href="ch203-00-execution-model.html"><strong aria-hidden="true">23.</strong> Execution Model</a></li><li class="chapter-item expanded "><a href="ch204-00-builtins.html"><strong aria-hidden="true">24.</strong> Builtins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch204-01-how-builtins-work.html"><strong aria-hidden="true">24.1.</strong> How Builtins Work</a></li><li class="chapter-item expanded "><a href="ch204-02-builtins-list.html"><strong aria-hidden="true">24.2.</strong> Builtins List</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch204-02-00-output.html"><strong aria-hidden="true">24.2.1.</strong> Output</a></li><li class="chapter-item "><a href="ch204-02-01-pedersen.html"><strong aria-hidden="true">24.2.2.</strong> Pedersen</a></li><li class="chapter-item "><a href="ch204-02-02-range-check.html"><strong aria-hidden="true">24.2.3.</strong> Range Check</a></li><li class="chapter-item "><a href="ch204-02-03-ecdsa.html"><strong aria-hidden="true">24.2.4.</strong> ECDSA</a></li><li class="chapter-item "><a href="ch204-02-04-bitwise.html"><strong aria-hidden="true">24.2.5.</strong> Bitwise</a></li><li class="chapter-item "><a href="ch204-02-05-ec-op.html"><strong aria-hidden="true">24.2.6.</strong> EC OP</a></li><li class="chapter-item "><a href="ch204-02-06-keccak.html"><strong aria-hidden="true">24.2.7.</strong> Keccak</a></li><li class="chapter-item "><a href="ch204-02-07-poseidon.html"><strong aria-hidden="true">24.2.8.</strong> Poseidon</a></li><li class="chapter-item "><a href="ch204-02-08-mod-builtin.html"><strong aria-hidden="true">24.2.9.</strong> Mod Builtin</a></li><li class="chapter-item "><a href="ch204-02-11-segment-arena.html"><strong aria-hidden="true">24.2.10.</strong> Segment Arena</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch205-00-hints.html"><strong aria-hidden="true">25.</strong> Hints</a></li><li class="chapter-item expanded "><a href="ch206-00-runner.html"><strong aria-hidden="true">26.</strong> Runner</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">26.1.</strong> Program</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.1.1.</strong> Program Artifacts</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.1.2.</strong> Program Parsing</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.2.</strong> Runner Mode</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.2.1.</strong> Execution Mode</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.2.2.</strong> Proof Mode</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.3.</strong> Output</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.3.1.</strong> Cairo PIE</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.2.</strong> Memory File</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.3.</strong> Trace file</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.4.</strong> AIR public input</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.5.</strong> AIR private input</div></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Tracer</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Implementations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Resources</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                            aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                            aria-label="Change theme" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Cairo Programming Language</h1>
+
+
+                    <div class="right-buttons">
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://cairo-lang.org" class="menu-cairo-home" title="Cairo Home"
+                                aria-label="Cairo Home">
+                                <img src="/icons/Cairo_logo_500x500.png" alt="Cairo Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Cairo Home</span>
+                            </a>
+                        </div>
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://starknet.io" class="menu-cairo-home" title="Starknet" aria-label="Starknet">
+                                <img src="/icons/SN_logo.png" alt="Starknet Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Starknet</span>
+                            </a>
+                        </div>
+                        <button id="language-toggle" class="icon-button" type="button" title="Change language"
+                            aria-label="Change language" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="language-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="language-list" class="theme-popup" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme">
+                                    <a id="en">English</a>
+                                </button></li>
+                        </ul>
+                        <script>
+                            let langToggle = document.getElementById("language-toggle");
+                            let langList = document.getElementById("language-list");
+                            langToggle.addEventListener("click", (event) => {
+                                langList.style.display = langList.style.display == "block" ? "none" : "block";
+                            });
+                            let selectedLang = document.getElementById("en");
+                            selectedLang.parentNode.classList.add("theme-selected");
+
+                            // The path to the root, taking the current
+                            // language into account.
+                            { { #if(eq language "en") } }
+                            let full_path_to_root = "";
+                            { {else } }
+                            let full_path_to_root = "../";
+                            { {/if } }
+                            // The page path (mdbook only gives us
+                            // access to the path to the Markdown file).
+                            let path = "ch101-01-00-contract-storage.md".replace(/\.md$/, ".html");
+                            for (let lang of langList.querySelectorAll("a")) {
+                                if (lang.id == "en") {
+                                    lang.href = `${full_path_to_root}${path}`;
+                                } else {
+                                    lang.href = `${full_path_to_root}${lang.id}/${path}`;
+                                }
+                            }
+                        </script>
+
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io/edit/main/src/ch101-01-00-contract-storage.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..."
+                            aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="contract-storage"><a class="header" href="#contract-storage">Contract Storage</a></h1>
+<p>The contract’s storage is a persistent storage space where you can read, write, modify, and persist data. The storage is a map with
+\(2^{251}\) slots, where each slot is a <code>felt252</code> initialized to 0.</p>
+<p>Each storage slot is identified by a <code>felt252</code> value, called the storage address, which is computed from the variable's name and parameters that depend on the variable's type, outlined in the <a href="./ch101-01-00-contract-storage.html#addresses-of-storage-variables">"Addresses of Storage Variables"</a> section.</p>
+<p>We can interact with the contract's storage in two ways:</p>
+<ol>
+<li>Through high-level storage variables, which are declared in a special <code>Storage</code> struct annotated with the <code>#[storage]</code> attribute.</li>
+<li>Directly accessing storage slots using their computed address and the low-level <code>storage_read</code> and <code>storage_write</code> syscalls. This is useful when you need to perform custom storage operations that don't fit well with the structured approach of storage variables, but should generally be avoided; as such, we will not cover them in this chapter.</li>
+</ol>
+<h2 id="declaring-and-using-storage-variables"><a class="header" href="#declaring-and-using-storage-variables">Declaring and Using Storage Variables</a></h2>
+<p>Storage variables in Starknet contracts are stored in a special struct called <code>Storage</code>:</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
+</span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
+</span><span class="boring">    fn get_owner_name(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_expiration(self: @TContractState) -&gt; SimpleStorage::Expiration;
+</span><span class="boring">    fn change_expiration(ref self: TContractState, expiration: SimpleStorage::Expiration);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod SimpleStorage {
+</span><span class="boring">    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span>    #[storage]
+    struct Storage {
+        owner: Person,
+        expiration: Expiration,
+    }
+<span class="boring">
+</span><span class="boring">    #[derive(Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub struct Person {
+</span><span class="boring">        address: ContractAddress,
+</span><span class="boring">        name: felt252,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Copy, Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub enum Expiration {
+</span><span class="boring">        Finite: u64,
+</span><span class="boring">        #[default]
+</span><span class="boring">        Infinite,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, owner: Person) {
+</span><span class="boring">        self.owner.write(owner);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl SimpleCounterImpl of super::ISimpleStorage&lt;ContractState&gt; {
+</span><span class="boring">        fn get_owner(self: @ContractState) -&gt; Person {
+</span><span class="boring">            self.owner.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_owner_name(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">            self.owner.name.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_expiration(self: @ContractState) -&gt; Expiration {
+</span><span class="boring">            self.expiration.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn change_expiration(ref self: ContractState, expiration: Expiration) {
+</span><span class="boring">            if get_caller_address() != self.owner.address.read() {
+</span><span class="boring">                panic!("Only the owner can change the expiration");
+</span><span class="boring">            }
+</span><span class="boring">            self.expiration.write(expiration);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.__base_address__
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_name_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.name.__storage_pointer_address__.into()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>The <code>Storage</code> struct is a <a href="./ch05-00-using-structs-to-structure-related-data.html">struct</a> like any other, except that it <strong>must</strong> be annotated with the <code>#[storage]</code> attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. This struct can contain any type that implements the <code>Store</code> trait, including other structs, enums, as well as <a href="./ch101-01-01-storage-mappings.html">Storage Mappings</a>, <a href="./ch101-01-02-storage-vecs.html">Storage Vectors</a>, and <a href="./ch101-01-00-contract-storage.html#storage-nodes">Storage Nodes</a>. In this section, we'll focus on simple storage variables, and we'll see how to store more complex types in the next sections.</p>
+<h3 id="accessing-storage-variables"><a class="header" href="#accessing-storage-variables">Accessing Storage Variables</a></h3>
+<p>Variables stored in the <code>Storage</code> struct can be accessed and modified using the <code>read</code> and <code>write</code> functions, respectively. All these functions are automatically generated by the compiler for each storage variable.</p>
+<p>To read the value of the <code>owner</code> storage variable, which is of type <code>Person</code>, we call the <code>read</code> function on the <code>owner</code> variable, passing in no arguments.</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
+</span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
+</span><span class="boring">    fn get_owner_name(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_expiration(self: @TContractState) -&gt; SimpleStorage::Expiration;
+</span><span class="boring">    fn change_expiration(ref self: TContractState, expiration: SimpleStorage::Expiration);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod SimpleStorage {
+</span><span class="boring">    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        owner: Person,
+</span><span class="boring">        expiration: Expiration,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub struct Person {
+</span><span class="boring">        address: ContractAddress,
+</span><span class="boring">        name: felt252,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Copy, Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub enum Expiration {
+</span><span class="boring">        Finite: u64,
+</span><span class="boring">        #[default]
+</span><span class="boring">        Infinite,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, owner: Person) {
+</span><span class="boring">        self.owner.write(owner);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl SimpleCounterImpl of super::ISimpleStorage&lt;ContractState&gt; {
+</span>        fn get_owner(self: @ContractState) -&gt; Person {
+            self.owner.read()
+        }
+<span class="boring">
+</span><span class="boring">        fn get_owner_name(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">            self.owner.name.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_expiration(self: @ContractState) -&gt; Expiration {
+</span><span class="boring">            self.expiration.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn change_expiration(ref self: ContractState, expiration: Expiration) {
+</span><span class="boring">            if get_caller_address() != self.owner.address.read() {
+</span><span class="boring">                panic!("Only the owner can change the expiration");
+</span><span class="boring">            }
+</span><span class="boring">            self.expiration.write(expiration);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.__base_address__
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_name_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.name.__storage_pointer_address__.into()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>To write a new value to the storage slot of a storage variable, we call the <code>write</code> function, passing in the value as argument. Here, we only pass in the value to write to the <code>owner</code> variable as it is a simple variable.</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
+</span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
+</span><span class="boring">    fn get_owner_name(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_expiration(self: @TContractState) -&gt; SimpleStorage::Expiration;
+</span><span class="boring">    fn change_expiration(ref self: TContractState, expiration: SimpleStorage::Expiration);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod SimpleStorage {
+</span><span class="boring">    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        owner: Person,
+</span><span class="boring">        expiration: Expiration,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub struct Person {
+</span><span class="boring">        address: ContractAddress,
+</span><span class="boring">        name: felt252,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Copy, Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub enum Expiration {
+</span><span class="boring">        Finite: u64,
+</span><span class="boring">        #[default]
+</span><span class="boring">        Infinite,
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    #[constructor]
+    fn constructor(ref self: ContractState, owner: Person) {
+        self.owner.write(owner);
+    }
+<span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl SimpleCounterImpl of super::ISimpleStorage&lt;ContractState&gt; {
+</span><span class="boring">        fn get_owner(self: @ContractState) -&gt; Person {
+</span><span class="boring">            self.owner.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_owner_name(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">            self.owner.name.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_expiration(self: @ContractState) -&gt; Expiration {
+</span><span class="boring">            self.expiration.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn change_expiration(ref self: ContractState, expiration: Expiration) {
+</span><span class="boring">            if get_caller_address() != self.owner.address.read() {
+</span><span class="boring">                panic!("Only the owner can change the expiration");
+</span><span class="boring">            }
+</span><span class="boring">            self.expiration.write(expiration);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.__base_address__
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_name_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.name.__storage_pointer_address__.into()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>When working with compound types, instead of calling <code>read</code> and <code>write</code> on the struct variable itself, which would perform a storage operation for each member, you can call <code>read</code> and <code>write</code> on specific members of the struct. This allows you to access and modify the values of the struct members directly, minimizing the amount of storage operations performed. In the following example, the <code>owner</code> variable is of type <code>Person</code>. Thus, it has one attribute called <code>name</code>, on which we can call the <code>read</code> and <code>write</code> functions to access and modify its value.</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
+</span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
+</span><span class="boring">    fn get_owner_name(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_expiration(self: @TContractState) -&gt; SimpleStorage::Expiration;
+</span><span class="boring">    fn change_expiration(ref self: TContractState, expiration: SimpleStorage::Expiration);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod SimpleStorage {
+</span><span class="boring">    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        owner: Person,
+</span><span class="boring">        expiration: Expiration,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub struct Person {
+</span><span class="boring">        address: ContractAddress,
+</span><span class="boring">        name: felt252,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Copy, Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub enum Expiration {
+</span><span class="boring">        Finite: u64,
+</span><span class="boring">        #[default]
+</span><span class="boring">        Infinite,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, owner: Person) {
+</span><span class="boring">        self.owner.write(owner);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl SimpleCounterImpl of super::ISimpleStorage&lt;ContractState&gt; {
+</span><span class="boring">        fn get_owner(self: @ContractState) -&gt; Person {
+</span><span class="boring">            self.owner.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span>        fn get_owner_name(self: @ContractState) -&gt; felt252 {
+            self.owner.name.read()
+        }
+<span class="boring">
+</span><span class="boring">        fn get_expiration(self: @ContractState) -&gt; Expiration {
+</span><span class="boring">            self.expiration.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn change_expiration(ref self: ContractState, expiration: Expiration) {
+</span><span class="boring">            if get_caller_address() != self.owner.address.read() {
+</span><span class="boring">                panic!("Only the owner can change the expiration");
+</span><span class="boring">            }
+</span><span class="boring">            self.expiration.write(expiration);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.__base_address__
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_name_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.name.__storage_pointer_address__.into()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<h2 id="storing-custom-types-with-the-store-trait"><a class="header" href="#storing-custom-types-with-the-store-trait">Storing Custom Types with the <code>Store</code> Trait</a></h2>
+<p>The <code>Store</code> trait, defined in the <code>starknet::storage_access</code> module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it <strong>must</strong> implement the <code>Store</code> trait. Most types from the core library, such as unsigned integers (<code>u8</code>, <code>u128</code>, <code>u256</code>...), <code>felt252</code>, <code>bool</code>, <code>ByteArray</code>, <code>ContractAddress</code>, etc. implement the <code>Store</code> trait and can thus be stored without further action. However, <strong>memory collections</strong>, such as <code>Array&lt;T&gt;</code> and <code>Felt252Dict&lt;T&gt;</code>, <strong>cannot</strong> be stored in contract storage - you will have to use the special types <code>Vec&lt;T&gt;</code> and <code>Map&lt;K, V&gt;</code> instead.</p>
+<p>But what if you wanted to store a type that you defined yourself, such as an enum or a struct? In that case, you have to explicitly tell the compiler how to store this type.</p>
+<p>In our example, we want to store a <code>Person</code> struct in storage, which is only possible by implementing the <code>Store</code> trait for the <code>Person</code> type. This can be simply achieved by adding a <code>#[derive(starknet::Store)]</code> attribute on top of our struct definition. Note that all the members of the struct need to implement the <code>Store</code> trait for the trait to be derived.</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
+</span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
+</span><span class="boring">    fn get_owner_name(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_expiration(self: @TContractState) -&gt; SimpleStorage::Expiration;
+</span><span class="boring">    fn change_expiration(ref self: TContractState, expiration: SimpleStorage::Expiration);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod SimpleStorage {
+</span><span class="boring">    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        owner: Person,
+</span><span class="boring">        expiration: Expiration,
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    #[derive(Drop, Serde, starknet::Store)]
+    pub struct Person {
+        address: ContractAddress,
+        name: felt252,
+    }
+<span class="boring">
+</span><span class="boring">    #[derive(Copy, Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub enum Expiration {
+</span><span class="boring">        Finite: u64,
+</span><span class="boring">        #[default]
+</span><span class="boring">        Infinite,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, owner: Person) {
+</span><span class="boring">        self.owner.write(owner);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl SimpleCounterImpl of super::ISimpleStorage&lt;ContractState&gt; {
+</span><span class="boring">        fn get_owner(self: @ContractState) -&gt; Person {
+</span><span class="boring">            self.owner.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_owner_name(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">            self.owner.name.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_expiration(self: @ContractState) -&gt; Expiration {
+</span><span class="boring">            self.expiration.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn change_expiration(ref self: ContractState, expiration: Expiration) {
+</span><span class="boring">            if get_caller_address() != self.owner.address.read() {
+</span><span class="boring">                panic!("Only the owner can change the expiration");
+</span><span class="boring">            }
+</span><span class="boring">            self.expiration.write(expiration);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.__base_address__
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_name_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.name.__storage_pointer_address__.into()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>Similarly, Enums can only be written to storage if they implement the <code>Store</code> trait, which can be trivially derived as long as all associated types implement the <code>Store</code> trait.</p>
+<p>Enums used in contract storage <strong>must</strong> define a default variant. This default variant is returned when reading an empty storage slot - otherwise, it will result in a runtime error.</p>
+<p>Here's an example of how to properly define an enum for use in contract storage:</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
+</span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
+</span><span class="boring">    fn get_owner_name(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_expiration(self: @TContractState) -&gt; SimpleStorage::Expiration;
+</span><span class="boring">    fn change_expiration(ref self: TContractState, expiration: SimpleStorage::Expiration);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod SimpleStorage {
+</span><span class="boring">    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        owner: Person,
+</span><span class="boring">        expiration: Expiration,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub struct Person {
+</span><span class="boring">        address: ContractAddress,
+</span><span class="boring">        name: felt252,
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    #[derive(Copy, Drop, Serde, starknet::Store)]
+    pub enum Expiration {
+        Finite: u64,
+        #[default]
+        Infinite,
+    }
+<span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, owner: Person) {
+</span><span class="boring">        self.owner.write(owner);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl SimpleCounterImpl of super::ISimpleStorage&lt;ContractState&gt; {
+</span><span class="boring">        fn get_owner(self: @ContractState) -&gt; Person {
+</span><span class="boring">            self.owner.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_owner_name(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">            self.owner.name.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_expiration(self: @ContractState) -&gt; Expiration {
+</span><span class="boring">            self.expiration.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn change_expiration(ref self: ContractState, expiration: Expiration) {
+</span><span class="boring">            if get_caller_address() != self.owner.address.read() {
+</span><span class="boring">                panic!("Only the owner can change the expiration");
+</span><span class="boring">            }
+</span><span class="boring">            self.expiration.write(expiration);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.__base_address__
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_name_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.name.__storage_pointer_address__.into()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>In this example, we've added the <code>#[default]</code> attribute to the <code>Infinite</code> variant. This tells the Cairo compiler that if we try to read an uninitialized enum from storage, the <code>Infinite</code> variant should be returned.</p>
+<p>You might have noticed that we also derived <code>Drop</code> and <code>Serde</code> on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.</p>
+<h2 id="structs-storage-layout"><a class="header" href="#structs-storage-layout">Structs Storage Layout</a></h2>
+<p>On Starknet, structs are stored in storage as a sequence of primitive types.
+The elements of the struct are stored in the same order as they are defined in the struct definition. The first element of the struct is stored at the base address of the struct, which is computed as specified in the <a href="./ch101-01-00-contract-storage.html#addresses-of-storage-variables">"Addresses of Storage Variables"</a> section and can be obtained with <code>var.__base_address__</code>. Subsequent elements are stored at addresses contiguous to the previous element.
+For example, the storage layout for the <code>owner</code> variable of type <code>Person</code> will result in the following layout:</p>
+<div class="table-wrapper"><table><thead><tr><th>Fields</th><th>Address</th></tr></thead><tbody>
+<tr><td>name</td><td><code>owner.__base_address__</code></td></tr>
+<tr><td>address</td><td><code>owner.__base_address__ +1</code></td></tr>
+</tbody></table>
+</div>
+<p>Note that tuples are similarly stored in contract's storage, with the first element of the tuple being stored at the base address, and subsequent elements stored contiguously.</p>
+<h2 id="enums-storage-layout"><a class="header" href="#enums-storage-layout">Enums Storage Layout</a></h2>
+<p>When you store an enum variant, what you're essentially storing is the variant's index and eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
+If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
+For example, suppose we have the <code>Expiration</code> enum with the <code>Finite</code> variant that carries an associated limit date, and the <code>Infinite</code> variant without associated data. The storage layout for the <code>Finite</code> variant would look like this:</p>
+<div class="table-wrapper"><table><thead><tr><th>Element</th><th>Address</th></tr></thead><tbody>
+<tr><td>Variant index (0 for Finite)</td><td><code>expiration.__base_address__</code></td></tr>
+<tr><td>Associated limit date</td><td><code>expiration.__base_address__ + 1</code></td></tr>
+</tbody></table>
+</div>
+<p>while the storage layout for the <code>Infinite</code> variant would be as follows:</p>
+<div class="table-wrapper"><table><thead><tr><th>Element</th><th>Address</th></tr></thead><tbody>
+<tr><td>Variant index (1 for Infinite)</td><td><code>expiration.__base_address__</code></td></tr>
+</tbody></table>
+</div><!-- TODO: add example -->
+<h2 id="storage-nodes"><a class="header" href="#storage-nodes">Storage Nodes</a></h2>
+<p>A storage node is a special kind of struct that can contain storage-specific types, such as <a href="./ch101-01-01-storage-mappings.html"><code>Map</code></a>, <a href="./ch101-01-02-storage-vecs.html"><code>Vec</code></a>, or other storage nodes, as members. Unlike regular structs, storage nodes can only exist within contract storage and cannot be instantiated or used outside of it.
+You can think of storage nodes as intermediate nodes involved in address calculations within the tree representing the contract's storage space. In the next subsection, we will introduce how this concept is modeled in the core library.</p>
+<p>The main benefits of storage nodes is that they allow you to create more sophisticated storage layouts, including mappings or vectors inside custom types, and allow you to logically group related data, improving code readability and maintainability.</p>
+<p>Storage nodes are structs defined with the <code>#[starknet::storage_node]</code> attribute. In this new contract that implements a voting system, we implement a <code>ProposalNode</code> storage node containing a <code>Map&lt;ContractAddress, bool&gt;</code> to keep track of the voters of the proposal, along with other fields to store the proposal's metadata.</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::contract]
+</span><span class="boring">mod VotingSystem {
+</span><span class="boring">    use starknet::storage::{
+</span><span class="boring">        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
+</span><span class="boring">    };
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        proposals: Map&lt;u32, ProposalNode&gt;,
+</span><span class="boring">        proposal_count: u32,
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    #[starknet::storage_node]
+    struct ProposalNode {
+        title: felt252,
+        description: felt252,
+        yes_votes: u32,
+        no_votes: u32,
+        voters: Map&lt;ContractAddress, bool&gt;,
+    }
+<span class="boring">
+</span><span class="boring">    #[external(v0)]
+</span><span class="boring">    fn create_proposal(ref self: ContractState, title: felt252, description: felt252) -&gt; u32 {
+</span><span class="boring">        let mut proposal_count = self.proposal_count.read();
+</span><span class="boring">        let new_proposal_id = proposal_count + 1;
+</span><span class="boring">
+</span><span class="boring">        let mut proposal = self.proposals.entry(new_proposal_id);
+</span><span class="boring">        proposal.title.write(title);
+</span><span class="boring">        proposal.description.write(description);
+</span><span class="boring">        proposal.yes_votes.write(0);
+</span><span class="boring">        proposal.no_votes.write(0);
+</span><span class="boring">
+</span><span class="boring">        self.proposal_count.write(new_proposal_id);
+</span><span class="boring">
+</span><span class="boring">        new_proposal_id
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[external(v0)]
+</span><span class="boring">    fn vote(ref self: ContractState, proposal_id: u32, vote: bool) {
+</span><span class="boring">        let mut proposal = self.proposals.entry(proposal_id);
+</span><span class="boring">        let caller = get_caller_address();
+</span><span class="boring">        let has_voted = proposal.voters.entry(caller).read();
+</span><span class="boring">        if has_voted {
+</span><span class="boring">            return;
+</span><span class="boring">        }
+</span><span class="boring">        proposal.voters.entry(caller).write(true);
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>When accessing a storage node, you can't <code>read</code> or <code>write</code> it directly. Instead, you have to access its individual members. Here's an example from our <code>VotingSystem</code> contract that demonstrates how we populate each field of the <code>ProposalNode</code> storage node:</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::contract]
+</span><span class="boring">mod VotingSystem {
+</span><span class="boring">    use starknet::storage::{
+</span><span class="boring">        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
+</span><span class="boring">    };
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        proposals: Map&lt;u32, ProposalNode&gt;,
+</span><span class="boring">        proposal_count: u32,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[starknet::storage_node]
+</span><span class="boring">    struct ProposalNode {
+</span><span class="boring">        title: felt252,
+</span><span class="boring">        description: felt252,
+</span><span class="boring">        yes_votes: u32,
+</span><span class="boring">        no_votes: u32,
+</span><span class="boring">        voters: Map&lt;ContractAddress, bool&gt;,
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    #[external(v0)]
+    fn create_proposal(ref self: ContractState, title: felt252, description: felt252) -&gt; u32 {
+        let mut proposal_count = self.proposal_count.read();
+        let new_proposal_id = proposal_count + 1;
+
+        let mut proposal = self.proposals.entry(new_proposal_id);
+        proposal.title.write(title);
+        proposal.description.write(description);
+        proposal.yes_votes.write(0);
+        proposal.no_votes.write(0);
+
+        self.proposal_count.write(new_proposal_id);
+
+        new_proposal_id
+    }
+<span class="boring">
+</span><span class="boring">    #[external(v0)]
+</span><span class="boring">    fn vote(ref self: ContractState, proposal_id: u32, vote: bool) {
+</span><span class="boring">        let mut proposal = self.proposals.entry(proposal_id);
+</span><span class="boring">        let caller = get_caller_address();
+</span><span class="boring">        let has_voted = proposal.voters.entry(caller).read();
+</span><span class="boring">        if has_voted {
+</span><span class="boring">            return;
+</span><span class="boring">        }
+</span><span class="boring">        proposal.voters.entry(caller).write(true);
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<p>Because no voter has voted on this proposal yet, we don't need to populate the <code>voters</code> map when creating the proposal. But we could very well access the <code>voters</code> map to check if a given address has already voted on this proposal when it tries to cast its vote:</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::contract]
+</span><span class="boring">mod VotingSystem {
+</span><span class="boring">    use starknet::storage::{
+</span><span class="boring">        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
+</span><span class="boring">    };
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        proposals: Map&lt;u32, ProposalNode&gt;,
+</span><span class="boring">        proposal_count: u32,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[starknet::storage_node]
+</span><span class="boring">    struct ProposalNode {
+</span><span class="boring">        title: felt252,
+</span><span class="boring">        description: felt252,
+</span><span class="boring">        yes_votes: u32,
+</span><span class="boring">        no_votes: u32,
+</span><span class="boring">        voters: Map&lt;ContractAddress, bool&gt;,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[external(v0)]
+</span><span class="boring">    fn create_proposal(ref self: ContractState, title: felt252, description: felt252) -&gt; u32 {
+</span><span class="boring">        let mut proposal_count = self.proposal_count.read();
+</span><span class="boring">        let new_proposal_id = proposal_count + 1;
+</span><span class="boring">
+</span><span class="boring">        let mut proposal = self.proposals.entry(new_proposal_id);
+</span><span class="boring">        proposal.title.write(title);
+</span><span class="boring">        proposal.description.write(description);
+</span><span class="boring">        proposal.yes_votes.write(0);
+</span><span class="boring">        proposal.no_votes.write(0);
+</span><span class="boring">
+</span><span class="boring">        self.proposal_count.write(new_proposal_id);
+</span><span class="boring">
+</span><span class="boring">        new_proposal_id
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    #[external(v0)]
+    fn vote(ref self: ContractState, proposal_id: u32, vote: bool) {
+        let mut proposal = self.proposals.entry(proposal_id);
+        let caller = get_caller_address();
+        let has_voted = proposal.voters.entry(caller).read();
+        if has_voted {
+            return;
+        }
+        proposal.voters.entry(caller).write(true);
+    }
+<span class="boring">}
+</span></code></pre>
+<p>In this example, we access the <code>ProposalNode</code> for a specific proposal ID. We then check if the caller has already voted by reading from the <code>voters</code> map within the storage node. If they haven't voted yet, we write to the <code>voters</code> map to mark that they have now voted.</p>
+<h2 id="addresses-of-storage-variables"><a class="header" href="#addresses-of-storage-variables">Addresses of Storage Variables</a></h2>
+<p>The address of a storage variable is computed as follows:</p>
+<ul>
+<li>
+<p>If the variable is a single value, the address is the <code>sn_keccak</code> hash of the ASCII encoding of the variable's name. <code>sn_keccak</code> is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.</p>
+</li>
+<li>
+<p>If the variable is composed of multiple values (i.e., a tuple, a struct or an enum), we also use the <code>sn_keccak</code> hash of the ASCII encoding of the variable's name to determine the base address in storage. Then, depending on the type, the storage layout will differ. See the <a href="./ch101-01-00-contract-storage.html#storing-custom-types-with-the-store-trait">"Storing Custom Types"</a> section.</p>
+</li>
+<li>
+<p>If the variable is part of a <a href="./ch101-01-00-contract-storage.html#storage-nodes">storage node</a>, its address is based on a chain of hashes that reflects the structure of the node. For a storage node member <code>m</code> within a storage variable <code>variable_name</code>, the path to that member is computed as <code>h(sn_keccak(variable_name), sn_keccak(m))</code>, where <code>h</code> is the Pedersen hash. This process continues for nested storage nodes, building a chain of hashes that represents the path to a leaf node. Once a leaf node is reached, the storage calculation proceeds as it normally would for that type of variable.</p>
+</li>
+<li>
+<p>If the variable is a <a href="./ch101-01-01-storage-mappings.html">Map</a> or a <a href="./ch101-01-02-storage-vecs.html">Vec</a>, the address is computed relative to the storage base address, which is the <code>sn_keccak</code> hash of the variable's name, and the keys of the mapping or indexes in the Vec. The exact computation is described in the <a href="./ch101-01-01-storage-mappings.html">"Storage Mappings"</a> and <a href="./ch101-01-02-storage-vecs.html">"Storage Vecs"</a> sections.</p>
+</li>
+</ul>
+<p>You can access the base address of a storage variable by accessing the <code>__base_address__</code> attribute on the variable, which returns a <code>felt252</code> value.</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
+</span><span class="boring">
+</span><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait INameRegistry&lt;TContractState&gt; {
+</span><span class="boring">    fn store_name(ref self: TContractState, name: felt252);
+</span><span class="boring">    fn get_name(self: @TContractState, address: ContractAddress) -&gt; felt252;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod NameRegistry {
+</span><span class="boring">    use starknet::storage::{
+</span><span class="boring">        Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
+</span><span class="boring">    };
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        names: Map&lt;ContractAddress, felt252&gt;,
+</span><span class="boring">        total_names: u128,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[derive(Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub struct Person {
+</span><span class="boring">        address: ContractAddress,
+</span><span class="boring">        name: felt252,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, owner: Person) {
+</span><span class="boring">        self.names.entry(owner.address).write(owner.name);
+</span><span class="boring">        self.total_names.write(1);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Public functions inside an impl block
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl NameRegistry of super::INameRegistry&lt;ContractState&gt; {
+</span><span class="boring">        fn store_name(ref self: ContractState, name: felt252) {
+</span><span class="boring">            let caller = get_caller_address();
+</span><span class="boring">            self._store_name(caller, name);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_name(self: @ContractState, address: ContractAddress) -&gt; felt252 {
+</span><span class="boring">            self.names.entry(address).read()
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Standalone public function
+</span><span class="boring">    #[external(v0)]
+</span><span class="boring">    fn get_contract_name(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        'Name Registry'
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Could be a group of functions about a same topic
+</span><span class="boring">    #[generate_trait]
+</span><span class="boring">    impl InternalFunctions of InternalFunctionsTrait {
+</span><span class="boring">        fn _store_name(ref self: ContractState, user: ContractAddress, name: felt252) {
+</span><span class="boring">            let total_names = self.total_names.read();
+</span><span class="boring">
+</span><span class="boring">            self.names.entry(user).write(name);
+</span><span class="boring">
+</span><span class="boring">            self.total_names.write(total_names + 1);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Free function
+</span><span class="boring">    fn get_total_names_storage_address(self: @ContractState) -&gt; felt252 {
+</span>        self.total_names.__base_address__
+<span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>This address calculation mechanism is performed through a modelisation of the contract storage space using a concept of StoragePointers and StoragePaths that we'll now introduce.</p>
+<h2 id="modeling-of-the-contract-storage-in-the-core-library"><a class="header" href="#modeling-of-the-contract-storage-in-the-core-library">Modeling of the Contract Storage in the Core Library</a></h2>
+<p>To understand how storage variables are stored in Cairo, it's important to note that they are not stored contiguously but in different locations in the contract's storage. To facilitate the retrieval of these addresses, the core library provides a model of the contract storage through a system of <code>StoragePointers</code> and <code>StoragePaths</code>.</p>
+<p>Each storage variable can be converted to a <code>StoragePointer</code>. This pointer contains two main fields:</p>
+<ul>
+<li>The base address of the storage variable in the contract's storage.</li>
+<li>The offset, relative to the base address, of the specific storage slot being pointed to.</li>
+</ul>
+<p>An example is worth a thousand words. Let's consider the <code>Person</code> struct defined in the previous section:</p>
+<pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
+</span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
+</span><span class="boring">    fn get_owner_name(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_expiration(self: @TContractState) -&gt; SimpleStorage::Expiration;
+</span><span class="boring">    fn change_expiration(ref self: TContractState, expiration: SimpleStorage::Expiration);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">mod SimpleStorage {
+</span><span class="boring">    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+</span><span class="boring">    use starknet::{ContractAddress, get_caller_address};
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        owner: Person,
+</span><span class="boring">        expiration: Expiration,
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    #[derive(Drop, Serde, starknet::Store)]
+    pub struct Person {
+        address: ContractAddress,
+        name: felt252,
+    }
+<span class="boring">
+</span><span class="boring">    #[derive(Copy, Drop, Serde, starknet::Store)]
+</span><span class="boring">    pub enum Expiration {
+</span><span class="boring">        Finite: u64,
+</span><span class="boring">        #[default]
+</span><span class="boring">        Infinite,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, owner: Person) {
+</span><span class="boring">        self.owner.write(owner);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl SimpleCounterImpl of super::ISimpleStorage&lt;ContractState&gt; {
+</span><span class="boring">        fn get_owner(self: @ContractState) -&gt; Person {
+</span><span class="boring">            self.owner.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_owner_name(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">            self.owner.name.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_expiration(self: @ContractState) -&gt; Expiration {
+</span><span class="boring">            self.expiration.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn change_expiration(ref self: ContractState, expiration: Expiration) {
+</span><span class="boring">            if get_caller_address() != self.owner.address.read() {
+</span><span class="boring">                panic!("Only the owner can change the expiration");
+</span><span class="boring">            }
+</span><span class="boring">            self.expiration.write(expiration);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.__base_address__
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get_owner_name_storage_address(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">        self.owner.name.__storage_pointer_address__.into()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>When we write <code>let x = self.owner;</code>, we access a variable of type <code>StorageBase</code> that represents the base location of the <code>owner</code> variable in the contract's storage.
+From this base address, we can either get pointers to the struct's fields (like <code>name</code> or <code>address</code>) or a pointer to the struct itself. On these pointers, we can call <code>read</code> and <code>write</code>, defined in the <code>Store</code> trait, to read and write the values pointed to.</p>
+<p>Of course, all of this is transparent to the developer. We can read and write to the struct's fields as if we were accessing regular variables, but the compiler translates these accesses into the appropriate <code>StoragePointer</code> manipulations under the hood.</p>
+<p>For storage mappings, the process is similar, except that we introduce an intermediate type, <code>StoragePath</code>. A <code>StoragePath</code> is a chain of storage nodes and struct fields that form a path to a specific storage slot. For example, to access a value contained in a <code>Map&lt;ContractAddress, u128&gt;</code>, the process would be the following:</p>
+<ol>
+<li>Start at <code>StorageBase</code> of the <code>Map</code>, and convert it to a <code>StoragePath</code>.</li>
+<li>Walk the <code>StoragePath</code> to reach the desired value using the <code>entry</code> method, which, in the case of a <code>Map</code>, hashes the current path with the next key to
+generate the next <code>StoragePath</code>.</li>
+<li>Repeat step 2 until the <code>StoragePath</code> points to the desired value, converting the final value to a <code>StoragePointer</code></li>
+<li>Read or write the value at that pointer.</li>
+</ol>
+<p>Note that we need to convert the <code>ContractAddress</code> to a <code>StoragePointer</code> before being able to read or write to it.</p>
+<p><img src="mermaid-storage-model.png" alt="Modelisation of the Storage Space in the Core Library" /></p>
+<!-- ./mermaid-storage-model.txt -->
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>In this chapter, we covered the following key points:</p>
+<ul>
+<li><strong>Storage Variables</strong>: These are used to store persistent data on the blockchain. They are defined in a special <code>Storage</code> struct annotated with the <code>#[storage]</code> attribute.</li>
+<li><strong>Accessing Storage Variables</strong>: You can read and write storage variables using automatically generated <code>read</code> and <code>write</code> functions. For structs, you can access individual members directly.</li>
+<li><strong>Custom Types with the <code>Store</code> Trait</strong>: To store custom types like structs and enums, they must implement the <code>Store</code> trait. This can be achieved using the <code>#[derive(starknet::Store)]</code> attribute or writing your own implementation.</li>
+<li><strong>Addresses of Storage Variables</strong>: The address of a storage variable is computed using the <code>sn_keccak</code> hash of its name, and additional steps for special types. For complex types, the storage layout is determined by the type's structure.</li>
+<li><strong>Structs and Enums Storage Layout</strong>: Structs are stored as a sequence of primitive types, while enums store the variant index and potential associated values.</li>
+<li><strong>Storage Nodes</strong>: Special structs that can contain storage-specific types like <code>Map</code> or <code>Vec</code>. They allow for more sophisticated storage layouts and can only exist within contract storage.</li>
+</ul>
+<p>Next, we'll focus on the <code>Map</code> and <code>Vec</code> types in depth.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <a rel="prev" href="ch101-01-starknet-types.html" class="mobile-nav-chapters previous"
+                            title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+
+                        <a rel="next" href="ch101-01-01-storage-mappings.html" class="mobile-nav-chapters next"
+                            title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                <a rel="prev" href="ch101-01-starknet-types.html" class="nav-chapters previous" title="Previous chapter"
+                    aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                <a rel="next" href="ch101-01-01-storage-mappings.html" class="nav-chapters next" title="Next chapter"
+                    aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </nav>
+
+        </div>
+
+
+        <!-- Google Analytics Tag -->
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'G-WY42TERK5P', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+        <script>
+            window.rootPath = "";
+        </script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/chat.js"></script>
+        <script src="theme/js/index.mjs"></script>
+
+
+    </div>
+</body>
+
+</html>
