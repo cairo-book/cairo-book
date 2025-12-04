@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -910,7 +911,7 @@ through <code>InternalTrait</code>, and reading the <code>owner</code> storage v
 <blockquote>
 <p>Note: Both approaches cannot be used at the same time. If you decide to deploy the contract, you interact with it using the dispatcher. If you decide to test the internal functions, you interact with the <code>ContractState</code> object directly.</p>
 </blockquote>
-<pre><code class="language-bash noplayground">$ scarb test 
+<pre><code class="language-bash noplayground">$ scarb test
      Running test listing_02_pizza_factory_snfoundry (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Finished `release` profile [optimized] target(s) in 0.99s
@@ -1005,8 +1006,9 @@ Tests: 6 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

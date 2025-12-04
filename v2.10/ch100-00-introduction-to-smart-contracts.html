@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -354,7 +355,7 @@ trait ISimpleStorage&lt;TContractState&gt; {
 </code></pre>
 <p><span class="caption">Listing 14-3: A wrong implementation of the interface of the contract. This does not compile, as the signature of <code>set</code> doesn't match the trait's.</span></p>
 <p>Trying to compile a contract using this implementation will result in the following error:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling listing_99_02 v0.1.0 (listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/Scarb.toml)
 error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
  --&gt; listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/src/lib.cairo:23:16
@@ -489,8 +490,9 @@ When <code>self</code> is a snapshot of <code>ContractState</code>, only read ac
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

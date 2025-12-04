@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -43,7 +44,7 @@
         (function () {
             var path = "ch11-01-closures.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -52,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -523,7 +524,7 @@ which we’ve done here with <code>u64</code> the first time. If we then try to 
 </span></code></pre>
 <p>Listing 11-2: Attempting to call a closure whose types are inferred with two different types</p>
 <p>The compiler gives us this error:</p>
-<pre><code>$ scarb build 
+<pre><code>$ scarb build
    Compiling listing_closure_different_types v0.1.0 (listings/ch11-functional-features/listing_closure_different_types/Scarb.toml)
 warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
  --&gt; listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:7:9
@@ -1012,8 +1013,9 @@ impl ArrayFilterExt of ArrayFilterExtTrait {
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

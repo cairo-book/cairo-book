@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -363,7 +364,7 @@ fn main() {
 </code></pre>
 <p>We didn’t handle the <code>None</code> case, so this code will cause a bug.
 Luckily, it’s a bug Cairo knows how to catch. If we try to compile this code, we’ll get this error:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling no_listing_08_missing_match_arm v0.1.0 (listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/Scarb.toml)
 error: Missing match arm: `None` not covered.
  --&gt; listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/src/lib.cairo:5:5
@@ -529,8 +530,9 @@ If you have 0, 1 or 2 you win. If you have 3, you can roll again. For all other 
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

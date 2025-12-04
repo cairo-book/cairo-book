@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -43,7 +44,7 @@
         (function () {
             var path = "ch04-01-what-is-ownership.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -52,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -349,7 +350,7 @@ fn main() {
 </code></pre>
 <p>In this case, we try to pass the same value (the array in the <code>arr</code> variable) to both function calls. This means our code tries to remove the first element twice, which would try to write to the same memory cell twice - which is forbidden by the Cairo VM, leading to a runtime error.
 Thankfully, this code does not actually compile. Once we have passed the array to the <code>foo</code> function, the variable <code>arr</code> is no longer usable. We get this compile-time error, telling us that we would need Array to implement the Copy Trait:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_02_pass_array_by_value v0.1.0 (listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/Scarb.toml)
 warn: Unhandled `#[must_use]` type `core::option::Option::&lt;core::integer::u128&gt;`
  --&gt; listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:3:5
@@ -435,7 +436,7 @@ fn main() {
 }
 </code></pre>
 <p>If you try to run this code, you will get a compile-time error:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_06_no_destruct_compile_fails v0.1.0 (listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/Scarb.toml)
 error: Variable not dropped.
  --&gt; listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo:10:5
@@ -604,8 +605,9 @@ fn calculate_length(arr: Array&lt;u128&gt;) -&gt; (Array&lt;u128&gt;, usize) {
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

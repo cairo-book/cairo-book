@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -43,7 +44,7 @@
         (function () {
             var path = "ch07-04-bringing-paths-into-scope-with-the-use-keyword.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -52,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -311,7 +312,7 @@ mod customer {
 </code></pre>
 <p><span class="caption">Listing 7-8: A <code>use</code> statement only applies in the scope it’s in.</span></p>
 <p>The compiler error shows that the shortcut no longer applies within the <code>customer</code> module:</p>
-<pre><code class="language-shell">$ scarb build 
+<pre><code class="language-shell">$ scarb build
    Compiling listing_07_05 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/Scarb.toml)
 warn: Unused import: `listing_07_05::hosting`
  --&gt; listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:9:28
@@ -554,8 +555,9 @@ Tests”</a> section in Chapter 10.</p>
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

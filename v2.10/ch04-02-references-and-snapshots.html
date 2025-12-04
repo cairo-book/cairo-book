@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -281,7 +282,7 @@ fn calculate_area(rec: @Rectangle) -&gt; u64 {
 <p>Note: Accessing fields of a snapshot (e.g., <code>rec.height</code>) yields snapshots of those fields, which we desnap with <code>*</code> to get the values. This works here because <code>u64</code> implements <code>Copy</code>. You’ll learn more about desnapping in the next section.</p>
 </blockquote>
 <p>The output of this program is:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
 warn: `scarb cairo-run` will be deprecated soon
 help: use `scarb execute` instead
    Compiling no_listing_09_snapshots v0.1.0 (listings/ch04-understanding-ownership/no_listing_09_snapshots/Scarb.toml)
@@ -353,7 +354,7 @@ fn flip(rec: @Rectangle) {
 </code></pre>
 <p><span class="caption">Listing 4-4: Attempting to modify a snapshot value</span></p>
 <p>Here’s the error:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling listing_04_04 v0.1.0 (listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/Scarb.toml)
 error: Invalid left-hand side of assignment.
  --&gt; listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo:15:5
@@ -399,7 +400,7 @@ fn flip(ref rec: Rectangle) {
 <p>First, we change <code>rec</code> to be <code>mut</code>. Then we pass a mutable reference of <code>rec</code> into <code>flip</code> with <code>ref rec</code>, and update the function signature to accept a mutable reference with <code>ref rec: Rectangle</code>. This makes it very clear that the <code>flip</code> function will mutate the value of the <code>Rectangle</code> instance passed as parameter.</p>
 <p>Unlike snapshots, mutable references allow mutation, but like snapshots, <code>ref</code> arguments are not pointers—they are also passed by value. When you pass <code>ref rec</code>, the entire <code>Rectangle</code> type is copied to the function’s stack, regardless of whether it implements <code>Copy</code>. This ensures the function operates on its own local version of the data, which is then implicitly returned to the caller. To avoid this copying for large types, Cairo provides the <code>Box&lt;T&gt;</code> type introduced in <a href="./ch12-02-smart-pointers.html">Chapter 12</a> as an alternative, but for this example, the <code>ref</code> modifier suits our needs perfectly.</p>
 <p>The output of the program is:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling listing_04_05 v0.1.0 (listings/ch04-understanding-ownership/listing_05_mutable_reference/Scarb.toml)
     Finished `dev` profile target(s) in 3 seconds
      Running listing_04_05
@@ -490,8 +491,9 @@ Run completed successfully, returning []
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

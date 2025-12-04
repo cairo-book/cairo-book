@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -43,7 +44,7 @@
         (function () {
             var path = "ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -52,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -313,7 +314,7 @@ we use an absolute path. The <code>add_to_waitlist</code> function is defined in
 crate as <code>eat_at_restaurant</code>. In Cairo, absolute paths start from the crate root, which you need to refer to by using the crate name. You can imagine a filesystem with the same structure: we’d specify the path <em>/front_of_house/hosting/add_to_waitlist</em> to run the <em>add_to_waitlist</em> program; using the crate name to start from the crate root is like using a slash (<code>/</code>) to start from the filesystem root in your shell.</p>
 <p>The second time we call <code>add_to_waitlist</code>, we use a relative path. The path starts with <code>front_of_house</code>, the name of the module defined at the same level of the module tree as <code>eat_at_restaurant</code>. Here the filesystem equivalent would be using the path <em>./front_of_house/hosting/add_to_waitlist</em>. Starting with a module name means that the path is relative to the current module.</p>
 <p>Let’s try to compile Listing 7-3 and find out why it won’t compile yet! We get the following error:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling listing_07_02 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/Scarb.toml)
 error: Item `listing_07_02::front_of_house::hosting` is not visible in this context.
  --&gt; listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:22:28
@@ -481,8 +482,9 @@ Note that the <code>back_of_house</code> is kept private, as external users are 
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

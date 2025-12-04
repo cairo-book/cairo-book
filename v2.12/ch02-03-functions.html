@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -43,7 +44,7 @@
         (function () {
             var path = "ch02-03-functions.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -52,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -301,7 +302,7 @@ defined somewhere in a scope that can be seen by the caller.</p>
 <p>Let’s start a new project with Scarb named <em>functions</em> to explore functions
 further. Place the <code>another_function</code> example in <em>src/lib.cairo</em> and run it. You
 should see the following output:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_15_functions v0.1.0 (listings/ch02-common-programming-concepts/no_listing_15_functions/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_15_functions
@@ -332,7 +333,7 @@ fn another_function(x: felt252) {
 }
 </code></pre>
 <p>Try running this program; you should get the following output:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_16_single_param v0.1.0 (listings/ch02-common-programming-concepts/no_listing_16_single_param/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_16_single_param
@@ -364,7 +365,7 @@ parameters. The first parameter is named <code>value</code> and is a <code>u128<
 named <code>unit_label</code> and is of type <code>ByteArray</code> - Cairo's internal type to represent string literals. The function then prints text containing both the <code>value</code> and the <code>unit_label</code>.</p>
 <p>Let’s try running this code. Replace the program currently in your <em>functions</em>
 project’s <em>src/lib.cairo</em> file with the preceding example and run it using <code>scarb execute</code>:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_17_multiple_params v0.1.0 (listings/ch02-common-programming-concepts/no_listing_17_multiple_params/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_17_multiple_params
@@ -420,7 +421,7 @@ fn main() {
 }
 </code></pre>
 <p>When you run this program, the error you’ll get looks like this:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_18_statements_dont_return_values v0.1.0 (listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/Scarb.toml)
 error: Missing token ')'.
  --&gt; listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:14
@@ -513,7 +514,7 @@ fn main() {
 function—just the number <code>5</code> by itself. That’s a perfectly valid function in
 Cairo. Note that the function’s return type is specified too, as <code>-&gt; u32</code>. Try
 running this code; the output should look like this:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_20_function_return_values v0.1.0 (listings/ch02-common-programming-concepts/no_listing_22_function_return_values/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_20_function_return_values
@@ -557,7 +558,7 @@ fn plus_one(x: u32) -&gt; u32 {
     x + 1;
 }
 </code></pre>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_22_function_return_invalid v0.1.0 (listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/Scarb.toml)
 error: Unexpected return type. Expected: "core::integer::u32", found: "()".
  --&gt; listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo:10:24
@@ -663,8 +664,9 @@ fn main() {
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

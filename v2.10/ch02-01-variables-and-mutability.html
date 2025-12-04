@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -270,7 +271,7 @@ code with the following code, which won’t compile just yet:</p>
 </code></pre>
 <p>Save and run the program using <code>scarb cairo-run</code>. You should receive an error message
 regarding an immutability error, as shown in this output:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling no_listing_01_variables_are_immutable v0.1.0 (listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/Scarb.toml)
 error: Cannot assign to an immutable variable.
  --&gt; listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/src/lib.cairo:6:5
@@ -322,7 +323,7 @@ level, the variable is not redeclared so its type cannot change.</p>
 }
 </code></pre>
 <p>When we run the program now, we get this:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling no_listing_02_adding_mut v0.1.0 (listings/ch02-common-programming-concepts/no_listing_02_adding_mut/Scarb.toml)
     Finished `dev` profile target(s) in 4 seconds
      Running no_listing_02_adding_mut
@@ -405,7 +406,7 @@ brackets, the third <code>let</code> statement also shadows <code>x</code> and c
 variable, multiplying the previous value by <code>2</code> to give <code>x</code> a value of <code>12</code>.
 When that scope is over, the inner shadowing ends and <code>x</code> returns to being <code>6</code>.
 When we run this program, it will output the following:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling no_listing_03_shadowing v0.1.0 (listings/ch02-common-programming-concepts/no_listing_03_shadowing/Scarb.toml)
     Finished `dev` profile target(s) in 4 seconds
      Running no_listing_03_shadowing
@@ -445,7 +446,7 @@ and <code>x_felt252</code>; instead, we can reuse the simpler <code>x</code> nam
 }
 </code></pre>
 <p>The error says we were expecting a <code>u64</code> (the original type) but we got a different type:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling no_listing_05_mut_cant_change_type v0.1.0 (listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/Scarb.toml)
 error: Unexpected argument type. Expected: "core::integer::u64", found: "core::integer::u8".
  --&gt; listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo:6:9
@@ -530,8 +531,9 @@ error: `scarb metadata` exited with error
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

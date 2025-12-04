@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -43,7 +44,7 @@
         (function () {
             var path = "ch10-02-test-organization.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -52,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -345,7 +346,7 @@ fn it_adds_two() {
 <p><span class="caption">Listing 10-11: An integration test of a function in the <code>adder</code> crate</span></p>
 <p>Each file in the <code>tests</code> directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add <code>use adder::add_two</code> at the top of the code, which we didn’t need in the unit tests.</p>
 <p>We don’t need to annotate any code in <em>tests/integration_test.cairo</em> with <code>#[cfg(test)]</code>. Scarb treats the tests directory specially and compiles files in this directory only when we run <code>scarb test</code>. Run <code>scarb test</code> now:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test adder (snforge test)
     Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
@@ -406,7 +407,7 @@ mod tests {
 }
 </code></pre>
 <p>When we run the tests with <code>scarb test</code>, we’ll see a new section in the test output for the <em>common.cairo</em> file, even though this file doesn’t contain any test functions nor did we call the setup function from anywhere:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test adder (snforge test)
     Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
@@ -444,7 +445,7 @@ mod integration_tests;
     └── lib.cairo
 </code></pre>
 <p>When we run the <code>scarb test</code> command again, here is the output :</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test adder (snforge test)
     Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
@@ -540,8 +541,9 @@ Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

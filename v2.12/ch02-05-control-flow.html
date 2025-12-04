@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -43,7 +44,7 @@
         (function () {
             var path = "ch02-05-control-flow.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -52,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -290,7 +291,7 @@ fn main() {
 <p>All <code>if</code> expressions start with the keyword <code>if</code>, followed by a condition. In this case, the condition checks whether or not the variable <code>number</code> has a value equal to 5. We place the block of code to execute if the condition is <code>true</code> immediately after the condition inside curly brackets.</p>
 <p>Optionally, we can also include an <code>else</code> expression, which we chose to do here, to give the program an alternative block of code to execute should the condition evaluate to <code>false</code>. If you don’t provide an <code>else</code> expression and the condition is <code>false</code>, the program will just skip the <code>if</code> block and move on to the next bit of code.</p>
 <p>Try running this code; you should see the following output:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_24_if v0.1.0 (listings/ch02-common-programming-concepts/no_listing_27_if/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_24_if
@@ -316,7 +317,7 @@ fn main() {
 }
 </code></pre>
 <p>The <code>if</code> condition evaluates to a value of 3 this time, and Cairo throws an error:</p>
-<pre><code class="language-shell">$ scarb build 
+<pre><code class="language-shell">$ scarb build
    Compiling no_listing_28_bis_if_not_bool v0.1.0 (listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/Scarb.toml)
 error: Mismatched types. The type `core::bool` cannot be created from a numeric literal.
  --&gt; listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo:5:18
@@ -363,7 +364,7 @@ fn main() {
 }
 </code></pre>
 <p>This program has four possible paths it can take. After running it, you should see the following output:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_25_else_if v0.1.0 (listings/ch02-common-programming-concepts/no_listing_30_else_if/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_25_else_if
@@ -388,7 +389,7 @@ fn main() {
     }
 }
 </code></pre>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_26_if_let v0.1.0 (listings/ch02-common-programming-concepts/no_listing_31_if_let/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_26_if_let
@@ -525,7 +526,7 @@ fn main() {
 </code></pre>
 <p><span class="caption">Listing 2-3: Looping through each element of a collection using a <code>while</code> loop</span></p>
 <p>Here, the code counts up through the elements in the array. It starts at index <code>0</code>, and then loops until it reaches the final index in the array (that is, when <code>index &lt; 5</code> is no longer <code>true</code>). Running this code will print every element in the array:</p>
-<pre><code class="language-shell">$ scarb execute 
+<pre><code class="language-shell">$ scarb execute
    Compiling no_listing_45_iter_loop_while v0.1.0 (listings/ch02-common-programming-concepts/no_listing_45_iter_loop_while/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_45_iter_loop_while
@@ -683,8 +684,9 @@ try building programs to do the following:</p>
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

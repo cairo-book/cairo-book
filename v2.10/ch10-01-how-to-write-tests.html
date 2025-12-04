@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -295,7 +296,7 @@ mod tests {
 <p>We use the <code>#[cfg(test)]</code> attribute for the <code>tests</code> module, so that the compiler knows the code it contains needs to be compiled only when running tests. This is actually not an option: if you put a simple test with the <code>#[test]</code> attribute in a <em>lib.cairo</em> file, it will not compile. We will talk more about the <code>#[cfg(test)]</code> attribute in the next <a href="./ch10-02-test-organization.html">Test Organization</a> section.</p>
 <p>The example function body uses the <code>assert_eq!</code> macro, which contains the result of adding 2 and 2, which equals 4. This assertion serves as an example of the format for a typical test. We'll explain in more detail how <code>assert_eq!</code> works later in this chapter. Let’s run it to see that this test passes.</p>
 <p>The <code>scarb test</code> command runs all tests found in our project, and shows the following output:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_10_01 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -321,7 +322,7 @@ Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
     }
 </code></pre>
 <p>Then run <code>scarb test</code> again. The output now shows <code>exploration</code> instead of <code>it_works</code>:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_10_01 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -444,7 +445,7 @@ code under test in the outer module into the scope of the inner module. We use
 a glob here, so anything we define in the outer module is available to this
 <code>tests</code> module.</p>
 <p>We’ve named our test <code>larger_can_hold_smaller</code>, and we’ve created the two <code>Rectangle</code> instances that we need. Then we called the <code>assert!</code> macro and passed it the result of calling <code>larger.can_hold(@smaller)</code>. This expression is supposed to return <code>true</code>, so our test should pass. Let’s find out!</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_10_03 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Finished `release` profile [optimized] target(s) in 1.04s
@@ -504,7 +505,7 @@ Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 </span></code></pre>
 <p><span class="caption">Listing 10-4: Adding another test in <em>lib.cairo</em> that will pass</span></p>
 <p>Because the correct result of the <code>can_hold</code> method, in this case, is <code>false</code>, we need to negate that result before we pass it to the <code>assert!</code> macro. As a result, our test will pass if <code>can_hold</code> returns <code>false</code>:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_10_03 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Finished `release` profile [optimized] target(s) in 1.04s
@@ -527,7 +528,7 @@ Tests: 2 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 }
 </code></pre>
 <p>Running the tests now produces the following:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test no_listing_01_wrong_can_hold_impl (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -578,7 +579,7 @@ mod tests {
 </code></pre>
 <p><span class="caption">Listing 10-5: Testing the function <code>add_two</code> using <code>assert_eq!</code> and <code>assert_ne!</code> macros</span></p>
 <p>Let’s check that it passes!</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_10_04 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -611,7 +612,7 @@ fails. Change the implementation of the <code>add_two</code> function to instead
 }
 </code></pre>
 <p>Run the tests again:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_10_04 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -738,7 +739,7 @@ string with a placeholder filled in with the actual value we got from the previo
     }
 </code></pre>
 <p>Now when we run the test, we’ll get a more informative error message:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test no_listing_02_custom_messages (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -801,7 +802,7 @@ mod tests {
 }
 </code></pre>
 <p>We place the <code>#[should_panic]</code> attribute after the <code>#[test]</code> attribute and before the test function it applies to. Let’s look at the result to see that this test passes:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_09_08 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -843,7 +844,7 @@ Tests: 1 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 </span><span class="boring">
 </span></code></pre>
 <p>When we run the test, it will fail:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test no_listing_03_wrong_new_impl (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Finished `release` profile [optimized] target(s) in 0.14s
@@ -920,7 +921,7 @@ mod tests {
 }
 </code></pre>
 <p>This time when we run the <code>should_panic</code> test, it will fail:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test no_listing_04_new_bug (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -966,7 +967,7 @@ mod tests {
 </code></pre>
 <p><span class="caption">Listing 10-9: Two tests with two different names</span></p>
 <p>We can pass the name of any test function to <code>scarb test</code> to run only that test:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test listing_10_07 (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -1007,7 +1008,7 @@ mod tests {
 }
 </code></pre>
 <p>After <code>#[test]</code> we add the <code>#[ignore]</code> line to the test we want to exclude. Now when we run our tests, <code>it_works</code> runs, but <code>expensive_test</code> doesn’t:</p>
-<pre><code class="language-shell">$ scarb test 
+<pre><code class="language-shell">$ scarb test
      Running test no_listing_05_ignore_tests (snforge test)
    Compiling snforge_scarb_plugin v0.31.0 (git+https://github.com/foundry-rs/starknet-foundry.git?tag=v0.31.0#72ea785ca354e9e506de3e5d687da9fb2c1b3c67)
     Blocking waiting for file lock on build directory
@@ -1168,8 +1169,9 @@ mod tests {
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

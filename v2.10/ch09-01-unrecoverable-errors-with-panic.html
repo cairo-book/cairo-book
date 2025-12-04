@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -262,7 +263,7 @@
 }
 </code></pre>
 <p>Running the program will produce the following output:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling no_listing_01_panic v0.1.0 (listings/ch09-error-handling/no_listing_01_panic/Scarb.toml)
     Finished `dev` profile target(s) in 4 seconds
      Running no_listing_01_panic
@@ -304,7 +305,7 @@ fn main() {
 }
 </code></pre>
 <p>If you try to compile this function that includes code that may panic, you will get the following error:</p>
-<pre><code class="language-shell">$ scarb cairo-run 
+<pre><code class="language-shell">$ scarb cairo-run
    Compiling no_listing_04_nopanic_wrong v0.1.0 (listings/ch09-error-handling/no_listing_05_nopanic_wrong/Scarb.toml)
 error: Function is declared as nopanic but calls a function that may panic.
  --&gt; listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:4:12
@@ -411,8 +412,9 @@ fn main() {
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>

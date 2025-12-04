@@ -15,10 +15,10 @@
 
     <link rel="icon" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/chrome.css">
-    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -30,8 +30,9 @@
     <link rel="stylesheet" href="ayu-highlight.css">
 
     <!-- Custom theme stylesheets -->
-    <link rel="stylesheet" href="theme/css/last-changed.css">
-    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/last-changed.css">
+    <link rel="stylesheet" href="../theme/css/chat.css">
+    <link rel="stylesheet" href="../theme/css/version-switcher.css">
 
     <!-- MathJax -->
     <script async
@@ -288,15 +289,15 @@ func main(output_ptr: felt*) -&gt; (output_ptr: felt*) {
     [ap] = 100, ap++;
     [ap] = [ap - 2] + [ap - 1], ap++;
 
-    // We set value of output_ptr to the address of where the output will be stored.  
-    // This is part of the output builtin requirement. 
+    // We set value of output_ptr to the address of where the output will be stored.
+    // This is part of the output builtin requirement.
     [ap] = output_ptr, ap++;
 
     // Asserts that output_ptr equals to 110.
     assert [output_ptr] = 110;
 
     // Returns the output_ptr + 1 as the next unused memory address.
-    return (output_ptr=output_ptr + 1); 
+    return (output_ptr=output_ptr + 1);
 }
 </code></pre>
 <p><em>The output builtin allows the final output to be stored in a new segment.</em></p>
@@ -447,8 +448,9 @@ func main(output_ptr: felt*) -&gt; (output_ptr: felt*) {
         </script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
+        <script src="../theme/chat.js"></script>
+        <script src="../theme/js/index.mjs"></script>
+        <script src="../theme/js/version-switcher.js"></script>
 
 
     </div>
