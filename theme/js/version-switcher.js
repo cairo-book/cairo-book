@@ -1,8 +1,20 @@
 (function () {
+  // Default fallback when versions.json is not available (e.g., PR previews)
+  const defaultData = {
+    latest: "2.13",
+    versions: [{ version: "2.13", path: "/", label: "2.13 (latest)" }],
+  };
+
   fetch("/versions.json")
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) throw new Error("versions.json not found");
+      return response.json();
+    })
     .then((data) => createVersionSwitcher(data))
-    .catch((err) => console.warn("Could not load versions.json:", err));
+    .catch((err) => {
+      console.warn("Could not load versions.json, using defaults:", err);
+      createVersionSwitcher(defaultData);
+    });
 
   function createVersionSwitcher(data) {
     const currentPath = window.location.pathname;
