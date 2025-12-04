@@ -1,5 +1,6 @@
 (function () {
-  fetch("/versions.json")
+  const basePath = window.location.pathname.match(/^\/[^/]+\//) ? '/cairo-book' : '';
+  fetch(basePath + "/versions.json")
     .then((response) => response.json())
     .then((data) => createVersionSwitcher(data))
     .catch((err) => console.warn("Could not load versions.json:", err));
