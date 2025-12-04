@@ -7,6 +7,16 @@
       "label": "2.13 (latest)"
     },
     {
+      "version": "2.12",
+      "path": "/v2.12/",
+      "label": "2.12"
+    },
+    {
+      "version": "2.11",
+      "path": "/v2.11/",
+      "label": "2.11"
+    },
+    {
       "version": "2.10",
       "path": "/v2.10/",
       "label": "2.10"
