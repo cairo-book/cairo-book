@@ -1,4 +1,4 @@
-# Sample workflow for building and deploying a mdBook site to GitHub Pages
+# Workflow for building and deploying mdBook site to GitHub Pages (gh-pages branch)
 #
 # To get started with mdBook see: https://rust-lang.github.io/mdBook/index.html
 #
@@ -11,9 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 # Allow one concurrent deployment
 concurrency:
@@ -25,9 +23,6 @@ env:
 
 jobs:
   publish:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -73,12 +68,6 @@ jobs:
       - name: Copy LLMs file
         run: cp llms.txt book/html/
 
-      # Disabled in favor of using the summary.md file
-      # - name: Combine Markdown Files for LLMs-full.txt
-      #   run: |
-      #     chmod +x scripts/combine-markdown.sh
-      #     scripts/combine-markdown.sh
-
       - name: Copy summary.md to book/html/
         run: cp summary.md book/html/llms-full.txt
 
@@ -92,14 +81,27 @@ jobs:
               echo "::endgroup::"
           done
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Deploy to gh-pages
+        run: |
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./book/html
+          # Save build output
+          mv book/html /tmp/book-html
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          # Checkout gh-pages branch
+          git checkout gh-pages
+
+          # Remove old root content but preserve version directories and versions.json
+          find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name 'v*' ! -name 'versions.json' ! -name '.nojekyll' ! -name 'CNAME' -exec rm -rf {} +
+
+          # Copy new build content
+          cp -r /tmp/book-html/* .
+
+          # Stage and commit
+          git add -A
+          git diff --cached --quiet || git commit -m "Deploy from ${GITHUB_SHA::8}"
+
+          # Push to gh-pages
+          git push origin gh-pages
