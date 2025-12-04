@@ -1,11 +1,23 @@
 (function () {
-  // Detect base path (e.g., "/cairo-book" when hosted at github.io/cairo-book/)
-  const pathParts = window.location.pathname.split("/").filter(Boolean);
-  const firstPart = pathParts[0] || "";
-  // If first part is not a version dir or html file, it's a base path
-  const isBasePath =
-    firstPart && !firstPart.match(/^v[\d.]+$/) && !firstPart.endsWith(".html");
-  const basePath = isBasePath ? "/" + firstPart : "";
+  // Detect base path specifically for cairo-book deployments
+  // Handles cases like:
+  // - https://book.cairo-lang.org/ -> basePath = ""
+  // - https://www.starknet.io/cairo-book/ -> basePath = "/cairo-book"
+  // - https://cairo-book.github.io/cairo-book/ -> basePath = "/cairo-book"
+
+  const fullPath = window.location.pathname;
+
+  // Check if path contains "/cairo-book/" or starts with "/cairo-book"
+  let basePath = "";
+  if (fullPath.includes("/cairo-book")) {
+    const cairoBookIndex = fullPath.indexOf("/cairo-book");
+    basePath = fullPath.substring(0, cairoBookIndex + "/cairo-book".length);
+  }
+
+  // Determine relative path (everything after basePath)
+  const relativePath = basePath
+    ? fullPath.substring(basePath.length)
+    : fullPath;
 
   fetch(basePath + "/versions.json")
     .then((response) => response.json())
@@ -13,18 +25,18 @@
     .catch((err) => console.warn("Could not load versions.json:", err));
 
   function createVersionSwitcher(data, basePath) {
-    const currentPath = window.location.pathname;
+    const fullPath = window.location.pathname;
 
     // Remove base path to get the relative path
     const relativePath = basePath
-      ? currentPath.replace(new RegExp("^" + basePath), "")
-      : currentPath;
+      ? fullPath.substring(basePath.length)
+      : fullPath;
 
     // Determine current version from path
     let currentVersion = data.latest;
-    const versionMatch = relativePath.match(/^\/(v[\d.]+)\//);
+    const versionMatch = relativePath.match(/^\/v([\d.]+)(\/|$)/);
     if (versionMatch) {
-      currentVersion = versionMatch[1].substring(1); // Remove 'v' prefix
+      currentVersion = versionMatch[1];
     }
 
     // Create dropdown
@@ -63,8 +75,20 @@
           pagePath = relativePath.replace(/^\/v[\d.]+/, "");
         }
 
+        // Ensure pagePath starts with / if not empty
+        if (pagePath && !pagePath.startsWith("/")) {
+          pagePath = "/" + pagePath;
+        }
+
         // Construct new path: basePath + versionPath + pagePath
-        const newPath = basePath + newVersionPath.replace(/\/$/, "") + pagePath;
+        // Remove trailing slash from versionPath if pagePath exists
+        let cleanVersionPath = newVersionPath;
+        if (pagePath && pagePath !== "/") {
+          cleanVersionPath = newVersionPath.replace(/\/$/, "");
+        }
+
+        const newPath =
+          basePath + cleanVersionPath + (pagePath === "/" ? "" : pagePath);
         window.location.href = newPath;
       });
   }
