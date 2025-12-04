@@ -1,18 +1,30 @@
 (function () {
-  const basePath = window.location.pathname.match(/^\/[^/]+\//) ? '/cairo-book' : '';
+  // Detect base path (e.g., "/cairo-book" when hosted at github.io/cairo-book/)
+  const pathParts = window.location.pathname.split("/").filter(Boolean);
+  const firstPart = pathParts[0] || "";
+  // If first part is not a version dir or html file, it's a base path
+  const isBasePath =
+    firstPart && !firstPart.match(/^v[\d.]+$/) && !firstPart.endsWith(".html");
+  const basePath = isBasePath ? "/" + firstPart : "";
+
   fetch(basePath + "/versions.json")
     .then((response) => response.json())
-    .then((data) => createVersionSwitcher(data))
+    .then((data) => createVersionSwitcher(data, basePath))
     .catch((err) => console.warn("Could not load versions.json:", err));
 
-  function createVersionSwitcher(data) {
+  function createVersionSwitcher(data, basePath) {
     const currentPath = window.location.pathname;
+
+    // Remove base path to get the relative path
+    const relativePath = basePath
+      ? currentPath.replace(new RegExp("^" + basePath), "")
+      : currentPath;
 
     // Determine current version from path
     let currentVersion = data.latest;
-    const versionMatch = currentPath.match(/^\/v([\d.]+)\//);
+    const versionMatch = relativePath.match(/^\/(v[\d.]+)\//);
     if (versionMatch) {
-      currentVersion = versionMatch[1];
+      currentVersion = versionMatch[1].substring(1); // Remove 'v' prefix
     }
 
     // Create dropdown
@@ -43,15 +55,16 @@
     document
       .getElementById("version-select")
       .addEventListener("change", function (e) {
-        const newBasePath = e.target.value;
-        let pagePath = currentPath;
+        const newVersionPath = e.target.value; // e.g., "/" or "/v2.10/"
 
+        // Get page path without version prefix
+        let pagePath = relativePath;
         if (versionMatch) {
-          pagePath = currentPath.replace(/^\/v[\d.]+\//, "/");
+          pagePath = relativePath.replace(/^\/v[\d.]+/, "");
         }
 
-        const newPath =
-          newBasePath === "/" ? pagePath : newBasePath + pagePath.substring(1);
+        // Construct new path: basePath + versionPath + pagePath
+        const newPath = basePath + newVersionPath.replace(/\/$/, "") + pagePath;
         window.location.href = newPath;
       });
   }
