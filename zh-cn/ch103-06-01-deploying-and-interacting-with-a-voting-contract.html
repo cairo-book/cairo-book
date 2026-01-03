@@ -1,0 +1,661 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" class="sidebar-visible no-js light">
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Deploying and Interacting with a Voting Contract - The Cairo Programming Language</title>
+
+
+    <!-- Custom HTML head -->
+
+    <meta name="description" content="The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/css/last-changed.css">
+    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="theme/css/version-switcher.css">
+
+    <!-- MathJax -->
+    <script async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+    <link rel="canonical" id="canonical-link" href="" />
+    <script>
+        (function () {
+            var path = "ch103-06-01-deploying-and-interacting-with-a-voting-contract.md";
+            var canonicalPath;
+            
+            // Special handling for different cases
+            if (path === "" || path === "index.md") {
+                // Homepage should not have index.html
+                canonicalPath = "";
+            } else {
+                // Other pages: replace .md with .html
+                canonicalPath = path.replace(/\.md$/, ".html");
+            }
+            
+            var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
+            
+            // Remove trailing slash if present (except for root)
+            if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
+                canonicalUrl = canonicalUrl.slice(0, -1);
+            }
+            
+            document.getElementById("canonical-link").href = canonicalUrl;
+        })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M6M97KJP');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6M97KJP" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ZJLBV4KE2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-0ZJLBV4KE2');
+            gtag('config', 'G-WY42TERK5P')
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">The Cairo Book</a></li><li class="chapter-item expanded affix "><a href="ch00-01-foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Cairo Programming Language</li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-proving-a-prime-number.html"><strong aria-hidden="true">1.3.</strong> Proving That A Number Is Prime</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-common-programming-concepts.html"><strong aria-hidden="true">2.</strong> Common Programming Concepts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-variables-and-mutability.html"><strong aria-hidden="true">2.1.</strong> Variables and Mutability</a></li><li class="chapter-item expanded "><a href="ch02-02-data-types.html"><strong aria-hidden="true">2.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="ch02-03-functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="ch02-04-comments.html"><strong aria-hidden="true">2.4.</strong> Comments</a></li><li class="chapter-item expanded "><a href="ch02-05-control-flow.html"><strong aria-hidden="true">2.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-common-collections.html"><strong aria-hidden="true">3.</strong> Common Collections</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-arrays.html"><strong aria-hidden="true">3.1.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="ch03-02-dictionaries.html"><strong aria-hidden="true">3.2.</strong> Dictionaries</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Understanding Ownership</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> What is Ownership?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-snapshots.html"><strong aria-hidden="true">4.2.</strong> References and Snapshots</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-using-structs-to-structure-related-data.html"><strong aria-hidden="true">5.</strong> Using Structs to Structure Related Data</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-and-instantiating-structs.html"><strong aria-hidden="true">5.1.</strong> Defining and Instantiating Structs</a></li><li class="chapter-item expanded "><a href="ch05-02-an-example-program-using-structs.html"><strong aria-hidden="true">5.2.</strong> An Example Program Using Structs</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Method Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums-and-pattern-matching.html"><strong aria-hidden="true">6.</strong> Enums and Pattern Matching</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-enums.html"><strong aria-hidden="true">6.1.</strong> Enums</a></li><li class="chapter-item expanded "><a href="ch06-02-the-match-control-flow-construct.html"><strong aria-hidden="true">6.2.</strong> The Match Control Flow Construct</a></li><li class="chapter-item expanded "><a href="ch06-03-concise-control-flow-with-if-let-and-while-let.html"><strong aria-hidden="true">6.3.</strong> Concise Control Flow with if let and while let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-cairo-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Managing Cairo Projects with Packages, Crates and Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Packages and Crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope.html"><strong aria-hidden="true">7.2.</strong> Defining Modules to Control Scope</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Paths for Referring to an Item in the Module Tree</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Bringing Paths into Scope with the use Keyword</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Separating Modules into Different Files</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-generic-types-and-traits.html"><strong aria-hidden="true">8.</strong> Generic Types and Traits</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-generic-data-types.html"><strong aria-hidden="true">8.1.</strong> Generic Data Types</a></li><li class="chapter-item expanded "><a href="ch08-02-traits-in-cairo.html"><strong aria-hidden="true">8.2.</strong> Traits in Cairo</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Unrecoverable Errors with panic</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors.html"><strong aria-hidden="true">9.2.</strong> Recoverable Errors with Result</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-testing-cairo-programs.html"><strong aria-hidden="true">10.</strong> Testing Cairo Programs</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-how-to-write-tests.html"><strong aria-hidden="true">10.1.</strong> How To Write Tests</a></li><li class="chapter-item expanded "><a href="ch10-02-test-organization.html"><strong aria-hidden="true">10.2.</strong> Test Organization</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-functional-features.html"><strong aria-hidden="true">11.</strong> Functional Language Features: Iterators and Closures</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-closures.html"><strong aria-hidden="true">11.1.</strong> Closures: Anonymous Functions that Capture Their Environment</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-advanced-features.html"><strong aria-hidden="true">12.</strong> Advanced Cairo Features</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-custom-data-structures.html"><strong aria-hidden="true">12.1.</strong> Custom Data Structures</a></li><li class="chapter-item expanded "><a href="ch12-02-smart-pointers.html"><strong aria-hidden="true">12.2.</strong> Smart Pointers</a></li><li class="chapter-item expanded "><a href="ch12-09-deref-coercion.html"><strong aria-hidden="true">12.3.</strong> Deref Coercion</a></li><li class="chapter-item expanded "><a href="ch12-10-associated-items.html"><strong aria-hidden="true">12.4.</strong> Associated Items</a></li><li class="chapter-item expanded "><a href="ch12-03-operator-overloading.html"><strong aria-hidden="true">12.5.</strong> Operator Overloading</a></li><li class="chapter-item expanded "><a href="ch12-04-hash.html"><strong aria-hidden="true">12.6.</strong> Working with Hashes</a></li><li class="chapter-item expanded "><a href="ch12-05-macros.html"><strong aria-hidden="true">12.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="ch12-10-procedural-macros.html"><strong aria-hidden="true">12.8.</strong> Procedural Macros</a></li><li class="chapter-item expanded "><a href="ch12-06-inlining-in-cairo.html"><strong aria-hidden="true">12.9.</strong> Inlining in Cairo</a></li><li class="chapter-item expanded "><a href="ch12-08-printing.html"><strong aria-hidden="true">12.10.</strong> Printing</a></li><li class="chapter-item expanded "><a href="ch12-10-arithmetic-circuits.html"><strong aria-hidden="true">12.11.</strong> Arithmetic Circuits</a></li><li class="chapter-item expanded "><a href="ch12-11-offloading-computations-with-oracles.html"><strong aria-hidden="true">12.12.</strong> Offloading Computations with Oracles</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">13.</strong> Appendix (Cairo)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">13.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="appendix-02-operators-and-symbols.html"><strong aria-hidden="true">13.2.</strong> B - Operators and Symbols</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">13.3.</strong> C - Derivable Traits</a></li><li class="chapter-item expanded "><a href="appendix-04-cairo-prelude.html"><strong aria-hidden="true">13.4.</strong> D - The Cairo Prelude</a></li><li class="chapter-item expanded "><a href="appendix-05-common-error-messages.html"><strong aria-hidden="true">13.5.</strong> E - Common Error Messages</a></li><li class="chapter-item expanded "><a href="appendix-06-useful-development-tools.html"><strong aria-hidden="true">13.6.</strong> F - Useful Development Tools</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Smart Contracts in Cairo</li><li class="chapter-item expanded "><a href="ch100-00-introduction-to-smart-contracts.html"><strong aria-hidden="true">14.</strong> Introduction to Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch100-01-contracts-classes-and-instances.html"><strong aria-hidden="true">14.1.</strong> Starknet contract classes and instances</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-00-building-starknet-smart-contracts.html"><strong aria-hidden="true">15.</strong> Building Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch101-01-starknet-types.html"><strong aria-hidden="true">15.1.</strong> Starknet Types</a></li><li class="chapter-item expanded "><a href="ch101-01-00-contract-storage.html"><strong aria-hidden="true">15.2.</strong> Contract Storage</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch101-01-01-storage-mappings.html"><strong aria-hidden="true">15.2.1.</strong> Storage Mappings</a></li><li class="chapter-item "><a href="ch101-01-02-storage-vecs.html"><strong aria-hidden="true">15.2.2.</strong> Storage Vecs</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-02-contract-functions.html"><strong aria-hidden="true">15.3.</strong> Contract Functions</a></li><li class="chapter-item expanded "><a href="ch101-03-contract-events.html"><strong aria-hidden="true">15.4.</strong> Contract Events</a></li></ol></li><li class="chapter-item expanded "><a href="ch102-00-starknet-contract-interactions.html"><strong aria-hidden="true">16.</strong> Starknet Contract Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch102-01-contract-class-abi.html"><strong aria-hidden="true">16.1.</strong> Contract Class ABI</a></li><li class="chapter-item expanded "><a href="ch102-02-interacting-with-another-contract.html"><strong aria-hidden="true">16.2.</strong> Interacting with Another Contract</a></li><li class="chapter-item expanded "><a href="ch102-03-executing-code-from-another-class.html"><strong aria-hidden="true">16.3.</strong> Executing Code from Another Class</a></li><li class="chapter-item expanded "><a href="ch102-04-serialization-of-cairo-types.html"><strong aria-hidden="true">16.4.</strong> Serialization of Cairo types</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-00-building-advanced-starknet-smart-contracts.html"><strong aria-hidden="true">17.</strong> Building Advanced Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch103-01-optimizing-storage-costs.html"><strong aria-hidden="true">17.1.</strong> Optimizing Storage Costs</a></li><li class="chapter-item expanded "><a href="ch103-02-00-composability-and-components.html"><strong aria-hidden="true">17.2.</strong> Composability and Components</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-02-01-under-the-hood.html"><strong aria-hidden="true">17.2.1.</strong> Under the Hood</a></li><li class="chapter-item "><a href="ch103-02-02-component-dependencies.html"><strong aria-hidden="true">17.2.2.</strong> Component Dependencies</a></li><li class="chapter-item "><a href="ch103-02-03-testing-components.html"><strong aria-hidden="true">17.2.3.</strong> Testing Components</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-03-upgradeability.html"><strong aria-hidden="true">17.3.</strong> Upgradeability</a></li><li class="chapter-item expanded "><a href="ch103-04-L1-L2-messaging.html"><strong aria-hidden="true">17.4.</strong> L1 &lt;&gt; L2 Messaging</a></li><li class="chapter-item expanded "><a href="ch103-05-oracle-interactions.html"><strong aria-hidden="true">17.5.</strong> Oracle Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-05-01-price-feeds.html"><strong aria-hidden="true">17.5.1.</strong> Price Feeds</a></li><li class="chapter-item "><a href="ch103-05-02-randomness.html"><strong aria-hidden="true">17.5.2.</strong> Randomness</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-06-00-other-examples.html"><strong aria-hidden="true">17.6.</strong> Other Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-06-01-deploying-and-interacting-with-a-voting-contract.html"><strong aria-hidden="true">17.6.1.</strong> Deploying and Interacting with a Voting Contract</a></li><li class="chapter-item "><a href="ch103-06-02-working-with-erc20-token.html"><strong aria-hidden="true">17.6.2.</strong> Working with ERC20 Token</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch104-00-starknet-smart-contracts-security.html"><strong aria-hidden="true">18.</strong> Starknet Smart Contracts Security</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch104-01-general-recommendations.html"><strong aria-hidden="true">18.1.</strong> General Recommendations</a></li><li class="chapter-item expanded "><a href="ch104-02-testing-smart-contracts.html"><strong aria-hidden="true">18.2.</strong> Testing Smart Contracts</a></li><li class="chapter-item expanded "><a href="ch104-03-static-analysis-tools.html"><strong aria-hidden="true">18.3.</strong> Static Analysis Tools</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-000.html"><strong aria-hidden="true">19.</strong> Appendix (Starknet)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-08-system-calls.html"><strong aria-hidden="true">19.1.</strong> A - System Calls</a></li><li class="chapter-item expanded "><a href="appendix-09-sierra.html"><strong aria-hidden="true">19.2.</strong> B - Sierra</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Cairo VM</li><li class="chapter-item expanded "><a href="ch200-introduction.html"><strong aria-hidden="true">20.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="ch201-architecture.html"><strong aria-hidden="true">21.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="ch202-00-memory.html"><strong aria-hidden="true">22.</strong> Memory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch202-01-non-deterministic-read-only-memory.html"><strong aria-hidden="true">22.1.</strong> Non-Deterministic Read-only Memory</a></li><li class="chapter-item expanded "><a href="ch202-02-segments.html"><strong aria-hidden="true">22.2.</strong> Segments and Relocation</a></li></ol></li><li class="chapter-item expanded "><a href="ch203-00-execution-model.html"><strong aria-hidden="true">23.</strong> Execution Model</a></li><li class="chapter-item expanded "><a href="ch204-00-builtins.html"><strong aria-hidden="true">24.</strong> Builtins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch204-01-how-builtins-work.html"><strong aria-hidden="true">24.1.</strong> How Builtins Work</a></li><li class="chapter-item expanded "><a href="ch204-02-builtins-list.html"><strong aria-hidden="true">24.2.</strong> Builtins List</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch204-02-00-output.html"><strong aria-hidden="true">24.2.1.</strong> Output</a></li><li class="chapter-item "><a href="ch204-02-01-pedersen.html"><strong aria-hidden="true">24.2.2.</strong> Pedersen</a></li><li class="chapter-item "><a href="ch204-02-02-range-check.html"><strong aria-hidden="true">24.2.3.</strong> Range Check</a></li><li class="chapter-item "><a href="ch204-02-03-ecdsa.html"><strong aria-hidden="true">24.2.4.</strong> ECDSA</a></li><li class="chapter-item "><a href="ch204-02-04-bitwise.html"><strong aria-hidden="true">24.2.5.</strong> Bitwise</a></li><li class="chapter-item "><a href="ch204-02-05-ec-op.html"><strong aria-hidden="true">24.2.6.</strong> EC OP</a></li><li class="chapter-item "><a href="ch204-02-06-keccak.html"><strong aria-hidden="true">24.2.7.</strong> Keccak</a></li><li class="chapter-item "><a href="ch204-02-07-poseidon.html"><strong aria-hidden="true">24.2.8.</strong> Poseidon</a></li><li class="chapter-item "><a href="ch204-02-08-mod-builtin.html"><strong aria-hidden="true">24.2.9.</strong> Mod Builtin</a></li><li class="chapter-item "><a href="ch204-02-11-segment-arena.html"><strong aria-hidden="true">24.2.10.</strong> Segment Arena</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch205-00-hints.html"><strong aria-hidden="true">25.</strong> Hints</a></li><li class="chapter-item expanded "><a href="ch206-00-runner.html"><strong aria-hidden="true">26.</strong> Runner</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">26.1.</strong> Program</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.1.1.</strong> Program Artifacts</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.1.2.</strong> Program Parsing</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.2.</strong> Runner Mode</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.2.1.</strong> Execution Mode</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.2.2.</strong> Proof Mode</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.3.</strong> Output</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.3.1.</strong> Cairo PIE</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.2.</strong> Memory File</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.3.</strong> Trace file</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.4.</strong> AIR public input</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.5.</strong> AIR private input</div></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Tracer</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Implementations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Resources</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                            aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                            aria-label="Change theme" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Cairo Programming Language</h1>
+
+
+                    <div class="right-buttons">
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://cairo-lang.org" class="menu-cairo-home" title="Cairo Home"
+                                aria-label="Cairo Home">
+                                <img src="/icons/Cairo_logo_500x500.png" alt="Cairo Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Cairo Home</span>
+                            </a>
+                        </div>
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://starknet.io" class="menu-cairo-home" title="Starknet" aria-label="Starknet">
+                                <img src="/icons/SN_logo.png" alt="Starknet Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Starknet</span>
+                            </a>
+                        </div>
+                        <button id="language-toggle" class="icon-button" type="button" title="Change language"
+                            aria-label="Change language" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="language-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="language-list" class="theme-popup" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme">
+                                    <a id="en">English</a>
+                                </button></li>
+                        </ul>
+                        <script>
+                            let langToggle = document.getElementById("language-toggle");
+                            let langList = document.getElementById("language-list");
+                            langToggle.addEventListener("click", (event) => {
+                                langList.style.display = langList.style.display == "block" ? "none" : "block";
+                            });
+                            let selectedLang = document.getElementById("zh-cn");
+                            selectedLang.parentNode.classList.add("theme-selected");
+
+                            // The path to the root, taking the current
+                            // language into account.
+                            { { #if(eq language "en") } }
+                            let full_path_to_root = "";
+                            { {else } }
+                            let full_path_to_root = "../";
+                            { {/if } }
+                            // The page path (mdbook only gives us
+                            // access to the path to the Markdown file).
+                            let path = "ch103-06-01-deploying-and-interacting-with-a-voting-contract.md".replace(/\.md$/, ".html");
+                            for (let lang of langList.querySelectorAll("a")) {
+                                if (lang.id == "en") {
+                                    lang.href = `${full_path_to_root}${path}`;
+                                } else {
+                                    lang.href = `${full_path_to_root}${lang.id}/${path}`;
+                                }
+                            }
+                        </script>
+
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io/edit/main/src/ch103-06-01-deploying-and-interacting-with-a-voting-contract.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..."
+                            aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="deploying-and-interacting-with-a-voting-contract"><a class="header" href="#deploying-and-interacting-with-a-voting-contract">Deploying and Interacting with a Voting contract</a></h1>
+<p>The <strong><code>Vote</code></strong> contract in Starknet begins by registering voters through the contract's constructor. Three voters are initialized at this stage, and their addresses are passed to an internal function <strong><code>_register_voters</code></strong>. This function adds the voters to the contract's state, marking them as registered and eligible to vote.</p>
+<p>Within the contract, the constants <strong><code>YES</code></strong> and <strong><code>NO</code></strong> are defined to represent the voting options (1 and 0, respectively). These constants facilitate the voting process by standardizing the input values.</p>
+<p>Once registered, a voter is able to cast a vote using the <strong><code>vote</code></strong> function, selecting either the 1 (YES) or 0 (NO) as their vote. When voting, the state of the contract is updated, recording the vote and marking the voter as having voted. This ensures that the voter is not able to cast a vote again within the same proposal. The casting of a vote triggers the <strong><code>VoteCast</code></strong> event, logging the action.</p>
+<p>The contract also monitors unauthorized voting attempts. If an unauthorized action is detected, such as a non-registered user attempting to vote or a user trying to vote again, the <strong><code>UnauthorizedAttempt</code></strong> event is emitted.</p>
+<p>Together, these functions, states, constants, and events create a structured voting system, managing the lifecycle of a vote from registration to casting, event logging, and result retrieval within the Starknet environment. Constants like <strong><code>YES</code></strong> and <strong><code>NO</code></strong> help streamline the voting process, while events play a vital role in ensuring transparency and traceability.</p>
+<p>Listing 17-8 shows the <code>Vote</code> contract in detail:</p>
+<pre><code class="language-cairo noplayground">/// Core Library Imports for the Traits outside the Starknet Contract
+use starknet::ContractAddress;
+
+/// Trait defining the functions that can be implemented or called by the Starknet Contract
+#[starknet::interface]
+trait VoteTrait&lt;T&gt; {
+    /// Returns the current vote status
+    fn get_vote_status(self: @T) -&gt; (u8, u8, u8, u8);
+    /// Checks if the user at the specified address is allowed to vote
+    fn voter_can_vote(self: @T, user_address: ContractAddress) -&gt; bool;
+    /// Checks if the specified address is registered as a voter
+    fn is_voter_registered(self: @T, address: ContractAddress) -&gt; bool;
+    /// Allows a user to vote
+    fn vote(ref self: T, vote: u8);
+}
+
+/// Starknet Contract allowing three registered voters to vote on a proposal
+#[starknet::contract]
+mod Vote {
+    use starknet::storage::{
+        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+        StoragePointerWriteAccess,
+    };
+    use starknet::{ContractAddress, get_caller_address};
+
+    const YES: u8 = 1_u8;
+    const NO: u8 = 0_u8;
+
+    #[storage]
+    struct Storage {
+        yes_votes: u8,
+        no_votes: u8,
+        can_vote: Map&lt;ContractAddress, bool&gt;,
+        registered_voter: Map&lt;ContractAddress, bool&gt;,
+    }
+
+    #[constructor]
+    fn constructor(
+        ref self: ContractState,
+        voter_1: ContractAddress,
+        voter_2: ContractAddress,
+        voter_3: ContractAddress,
+    ) {
+        self._register_voters(voter_1, voter_2, voter_3);
+
+        self.yes_votes.write(0_u8);
+        self.no_votes.write(0_u8);
+    }
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        VoteCast: VoteCast,
+        UnauthorizedAttempt: UnauthorizedAttempt,
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct VoteCast {
+        voter: ContractAddress,
+        vote: u8,
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct UnauthorizedAttempt {
+        unauthorized_address: ContractAddress,
+    }
+
+    #[abi(embed_v0)]
+    impl VoteImpl of super::VoteTrait&lt;ContractState&gt; {
+        fn get_vote_status(self: @ContractState) -&gt; (u8, u8, u8, u8) {
+            let (n_yes, n_no) = self._get_voting_result();
+            let (yes_percentage, no_percentage) = self._get_voting_result_in_percentage();
+            (n_yes, n_no, yes_percentage, no_percentage)
+        }
+
+        fn voter_can_vote(self: @ContractState, user_address: ContractAddress) -&gt; bool {
+            self.can_vote.read(user_address)
+        }
+
+        fn is_voter_registered(self: @ContractState, address: ContractAddress) -&gt; bool {
+            self.registered_voter.read(address)
+        }
+
+        fn vote(ref self: ContractState, vote: u8) {
+            assert!(vote == NO || vote == YES, "VOTE_0_OR_1");
+            let caller: ContractAddress = get_caller_address();
+            self._assert_allowed(caller);
+            self.can_vote.write(caller, false);
+
+            if (vote == NO) {
+                self.no_votes.write(self.no_votes.read() + 1_u8);
+            }
+            if (vote == YES) {
+                self.yes_votes.write(self.yes_votes.read() + 1_u8);
+            }
+
+            self.emit(VoteCast { voter: caller, vote: vote });
+        }
+    }
+
+    #[generate_trait]
+    impl InternalFunctions of InternalFunctionsTrait {
+        fn _register_voters(
+            ref self: ContractState,
+            voter_1: ContractAddress,
+            voter_2: ContractAddress,
+            voter_3: ContractAddress,
+        ) {
+            self.registered_voter.write(voter_1, true);
+            self.can_vote.write(voter_1, true);
+
+            self.registered_voter.write(voter_2, true);
+            self.can_vote.write(voter_2, true);
+
+            self.registered_voter.write(voter_3, true);
+            self.can_vote.write(voter_3, true);
+        }
+    }
+
+    #[generate_trait]
+    impl AssertsImpl of AssertsTrait {
+        fn _assert_allowed(ref self: ContractState, address: ContractAddress) {
+            let is_voter: bool = self.registered_voter.read((address));
+            let can_vote: bool = self.can_vote.read((address));
+
+            if (!can_vote) {
+                self.emit(UnauthorizedAttempt { unauthorized_address: address });
+            }
+
+            assert!(is_voter, "USER_NOT_REGISTERED");
+            assert!(can_vote, "USER_ALREADY_VOTED");
+        }
+    }
+
+    #[generate_trait]
+    impl VoteResultFunctionsImpl of VoteResultFunctionsTrait {
+        fn _get_voting_result(self: @ContractState) -&gt; (u8, u8) {
+            let n_yes: u8 = self.yes_votes.read();
+            let n_no: u8 = self.no_votes.read();
+
+            (n_yes, n_no)
+        }
+
+        fn _get_voting_result_in_percentage(self: @ContractState) -&gt; (u8, u8) {
+            let n_yes: u8 = self.yes_votes.read();
+            let n_no: u8 = self.no_votes.read();
+
+            let total_votes: u8 = n_yes + n_no;
+
+            if (total_votes == 0_u8) {
+                return (0, 0);
+            }
+            let yes_percentage: u8 = (n_yes * 100_u8) / (total_votes);
+            let no_percentage: u8 = (n_no * 100_u8) / (total_votes);
+
+            (yes_percentage, no_percentage)
+        }
+    }
+}
+</code></pre>
+<p><span class="caption">Listing 17-8: A voting smart contract</span></p>
+<h2 id="deploying-calling-and-invoking-the-voting-contract"><a class="header" href="#deploying-calling-and-invoking-the-voting-contract">Deploying, Calling and Invoking the Voting Contract</a></h2>
+<p>Part of the Starknet experience is deploying and interacting with smart contracts.</p>
+<p>Once the contract is deployed, we can interact with it by calling and invoking its functions:</p>
+<ul>
+<li>Calling contracts: Interacting with external functions that only read from the state. These functions do not alter the state of the network, so they don't require fees or signing.</li>
+<li>Invoking contracts: Interacting with external functions that can write to the state. These functions do alter the state of the network and require fees and signing.</li>
+</ul>
+<p>We will setup a local development node using <code>katana</code> to deploy the voting contract. Then, we'll interact with the contract by calling and invoking its functions. You can also use the Goerli Testnet instead of <code>katana</code>. However, we recommend using <code>katana</code> for local development and testing. You can find the complete tutorial for <code>katana</code> in the <a href="https://docs.starknet.io/quick-start/using_devnet/">"Using a development network"</a> chapter of the Starknet Docs.</p>
+<h3 id="the-katana-local-starknet-node"><a class="header" href="#the-katana-local-starknet-node">The <code>katana</code> Local Starknet Node</a></h3>
+<p><code>katana</code> is designed to support local development by the <a href="https://book.dojoengine.org/toolchain/katana">Dojo team</a>. It will allow you to do everything you need to do with Starknet, but locally. It is a great tool for development and testing.</p>
+<p>To install <code>katana</code> from the source code, please refer to the <a href="https://book.dojoengine.org/toolchain/katana#getting-started">"Using Katana"</a> chapter of the Dojo Engine.</p>
+<blockquote>
+<p>Note: Please verify that the version of <code>katana</code> match the specified version provided below.</p>
+<pre><code class="language-bash">$ katana --version
+katana 1.0.9-dev (38b3c2a6)
+</code></pre>
+<p>To upgrade <code>katana</code> version, refer to the <a href="https://book.dojoengine.org/toolchain/katana#getting-started">"Using Katana"</a> chapter of the Dojo Engine.</p>
+</blockquote>
+<p>Once you have <code>katana</code> installed, you can start the local Starknet node with:</p>
+<pre><code class="language-bash">katana
+</code></pre>
+<p>This command will start a local Starknet node with predeployed accounts. We will use these accounts to deploy and interact with the voting contract:</p>
+<pre><code class="language-bash">...
+PREFUNDED ACCOUNTS
+==================
+
+| Account address |  0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0
+| Private key     |  0x0300001800000000300000180000000000030000000000003006001800006600
+| Public key      |  0x01b7b37a580d91bc3ad4f9933ed61f3a395e0e51c9dd5553323b8ca3942bb44e
+
+| Account address |  0x033c627a3e5213790e246a917770ce23d7e562baa5b4d2917c23b1be6d91961c
+| Private key     |  0x0333803103001800039980190300d206608b0070db0012135bd1fb5f6282170b
+| Public key      |  0x04486e2308ef3513531042acb8ead377b887af16bd4cdd8149812dfef1ba924d
+
+| Account address |  0x01d98d835e43b032254ffbef0f150c5606fa9c5c9310b1fae370ab956a7919f5
+| Private key     |  0x07ca856005bee0329def368d34a6711b2d95b09ef9740ebf2c7c7e3b16c1ca9c
+| Public key      |  0x07006c42b1cfc8bd45710646a0bb3534b182e83c313c7bc88ecf33b53ba4bcbc
+...
+</code></pre>
+<p>Before we can interact with the voting contract, we need to prepare the voter and admin accounts on Starknet. Each voter account must be registered and sufficiently funded for voting. For a more detailed understanding of how accounts operate with Account Abstraction, refer to the <a href="https://docs.starknet.io/architecture-and-concepts/accounts/introduction/#account_abstraction">"Account Abstraction"</a> chapter of the Starknet Docs.</p>
+<h3 id="smart-wallets-for-voting"><a class="header" href="#smart-wallets-for-voting">Smart Wallets for Voting</a></h3>
+<p>Aside from Scarb you will need to have Starkli installed. Starkli is a command line tool that allows you to interact with Starknet. You can find the installation instructions in the <a href="https://docs.starknet.io/quick-start/environment-setup/">"Setting up Starkli"</a> chapter of the Starknet Docs.</p>
+<blockquote>
+<p>Note: Please verify that the version of <code>starkli</code> match the specified version provided below.</p>
+<pre><code class="language-bash">$ starkli --version
+0.3.6 (8d6db8c)
+</code></pre>
+<p>To upgrade <code>starkli</code> to <code>0.3.6</code>, use the <code>starkliup -v 0.3.6</code> command, or simply <code>starkliup</code> which installed the latest stable version.</p>
+</blockquote>
+<p>You can retrieve the smart wallet class hash (it will be the same for all your smart wallets) with the following command. Notice the use of the <code>--rpc</code> flag and the RPC endpoint provided by <code>katana</code>:</p>
+<pre><code>starkli class-hash-at &lt;SMART_WALLET_ADDRESS&gt; --rpc http://0.0.0.0:5050
+</code></pre>
+<h3 id="contract-deployment"><a class="header" href="#contract-deployment">Contract Deployment</a></h3>
+<p>Before deploying, we need to declare the contract. We can do this with the <code>starkli declare</code> command:</p>
+<pre><code class="language-bash">starkli declare target/dev/listing_99_12_vote_contract_Vote.contract_class.json --rpc http://0.0.0.0:5050 --account katana-0
+</code></pre>
+<p>If the compiler version you're using is older than the one used by Starkli and you encounter a <code>compiler-version</code> error while using the command above, you can specify a compiler version to use in the command by adding the <code>--compiler-version x.y.z</code> flag.</p>
+<p>If you're still encountering issues with the compiler version, try upgrading Starkli using the command: <code>starkliup</code> to make sure you're using the latest version of starkli.</p>
+<p>The class hash of the contract is: <code>0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52</code>. You can declare this contract on Sepolia testnet and see that the class hash will correspond.</p>
+<p>The <code>--rpc</code> flag specifies the RPC endpoint to use (the one provided by <code>katana</code>). The <code>--account</code> flag specifies the account to use for signing the transaction.</p>
+<p>Since we are using a local node, the transaction will achieve finality immediately. If you are using the Goerli Testnet, you will need to wait for the transaction to be final, which usually takes a few seconds.</p>
+<p>The following command deploys the voting contract and registers voter_0, voter_1, and voter_2 as eligible voters. These are the constructor arguments, so add a voter account that you can later vote with.</p>
+<pre><code class="language-bash">starkli deploy &lt;class_hash_of_the_contract_to_be_deployed&gt; &lt;voter_0_address&gt; &lt;voter_1_address&gt; &lt;voter_2_address&gt; --rpc http://0.0.0.0:5050 --account katana-0
+</code></pre>
+<p>An example command:</p>
+<pre><code class="language-bash">starkli deploy 0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52 0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 0x033c627a3e5213790e246a917770ce23d7e562baa5b4d2917c23b1be6d91961c 0x01d98d835e43b032254ffbef0f150c5606fa9c5c9310b1fae370ab956a7919f5 --rpc http://0.0.0.0:5050 --account katana-0
+</code></pre>
+<p>In this case, the contract has been deployed at an specific address: <code>0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349</code>. This address will be different for you. We will use this address to interact with the contract.</p>
+<h3 id="voter-eligibility-verification"><a class="header" href="#voter-eligibility-verification">Voter Eligibility Verification</a></h3>
+<p>In our voting contract, we have two functions to validate voter eligibility, <code>voter_can_vote</code> and <code>is_voter_registered</code>. These are external read functions, which mean they don't alter the state of the contract but only read the current state.</p>
+<p>The <code>is_voter_registered</code> function checks whether a particular address is registered as an eligible voter in the contract. The <code>voter_can_vote</code> function, on the other hand, checks whether the voter at a specific address is currently eligible to vote, i.e., they are registered and haven't voted already.</p>
+<p>You can call these functions using the <code>starkli call</code> command. Note that the <code>call</code> command is used for read functions, while the <code>invoke</code> command is used for functions that can also write to storage. The <code>call</code> command does not require signing, while the <code>invoke</code> command does.</p>
+<pre><code class="language-bash+">starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 voter_can_vote 0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0 --rpc http://0.0.0.0:5050
+</code></pre>
+<p>First we added the address of the contract, then the function we want to call, and finally the input for the function. In this case, we are checking whether the voter at the address <code>0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0</code> can vote.</p>
+<p>Since we provided a registered voter address as an input, the result is 1 (boolean true), indicating the voter is eligible to vote.</p>
+<p>Next, let's call the <code>is_voter_registered</code> function using an unregistered account address to observe the output:</p>
+<pre><code class="language-bash">starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 is_voter_registered 0x44444444444444444 --rpc http://0.0.0.0:5050
+</code></pre>
+<p>With an unregistered account address, the terminal output is 0 (i.e., false), confirming that the account is not eligible to vote.</p>
+<h3 id="casting-a-vote"><a class="header" href="#casting-a-vote">Casting a Vote</a></h3>
+<p>Now that we have established how to verify voter eligibility, we can vote! To vote, we interact with the <code>vote</code> function, which is flagged as external, necessitating the use of the <code>starknet invoke</code> command.</p>
+<p>The <code>invoke</code> command syntax resembles the <code>call</code> command, but for voting, we submit either <code>1</code> (for Yes) or <code>0</code> (for No) as our input. When we invoke the <code>vote</code> function, we are charged a fee, and the transaction must be signed by the voter; we are writing to the contract's storage.</p>
+<pre><code class="language-bash">//Voting Yes
+starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account katana-0
+
+//Voting No
+starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account katana-0
+</code></pre>
+<p>You will be prompted to enter the password for the signer. Once you enter the password, the transaction will be signed and submitted to the Starknet network. You will receive the transaction hash as output. With the starkli transaction command, you can get more details about the transaction:</p>
+<pre><code class="language-bash">starkli transaction &lt;TRANSACTION_HASH&gt; --rpc http://0.0.0.0:5050
+</code></pre>
+<p>This returns:</p>
+<pre><code class="language-bash">{
+  "transaction_hash": "0x5604a97922b6811060e70ed0b40959ea9e20c726220b526ec690de8923907fd",
+  "max_fee": "0x430e81",
+  "version": "0x1",
+  "signature": [
+    "0x75e5e4880d7a8301b35ff4a1ed1e3d72fffefa64bb6c306c314496e6e402d57",
+    "0xbb6c459b395a535dcd00d8ab13d7ed71273da4a8e9c1f4afe9b9f4254a6f51"
+  ],
+  "nonce": "0x3",
+  "type": "INVOKE",
+  "sender_address": "0x3ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0",
+  "calldata": [
+    "0x1",
+    "0x5ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349",
+    "0x132bdf85fc8aa10ac3c22f02317f8f53d4b4f52235ed1eabb3a4cbbe08b5c41",
+    "0x0",
+    "0x1",
+    "0x1",
+    "0x1"
+  ]
+}
+</code></pre>
+<p>If you try to vote twice with the same signer you will get an error:</p>
+<pre><code class="language-bash">Error: code=ContractError, message="Contract error"
+</code></pre>
+<p>The error is not very informative, but you can get more details when looking at the output in the terminal where you started <code>katana</code> (our local Starknet node):</p>
+<pre><code class="language-bash">...
+Transaction execution error: "Error in the called contract (0x03ee9e18edc71a6df30ac3aca2e0b02a198fbce19b7480a63a0d71cbd76652e0):
+    Error at pc=0:81:
+    Got an exception while executing a hint: Custom Hint Error: Execution failed. Failure reason: \"USER_ALREADY_VOTED\".
+    ...
+</code></pre>
+<p>The key for the error is <code>USER_ALREADY_VOTED</code>.</p>
+<pre><code class="language-bash">assert!(can_vote, "USER_ALREADY_VOTED");
+</code></pre>
+<p>We can repeat the process to create Signers and Account Descriptors for the accounts we want to use for voting. Remember that each Signer must be created from a private key, and each Account Descriptor must be created from a public key, a smart wallet address, and the smart wallet class hash (which is the same for each voter).</p>
+<pre><code class="language-bash">starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account katana-0
+
+starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 1 --rpc http://0.0.0.0:5050 --account katana-0
+</code></pre>
+<h3 id="visualizing-vote-outcomes"><a class="header" href="#visualizing-vote-outcomes">Visualizing Vote Outcomes</a></h3>
+<p>To examine the voting results, we invoke the <code>get_vote_status</code> function, another view function, through the <code>starknet call</code> command.</p>
+<pre><code class="language-bash">starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 get_vote_status --rpc http://0.0.0.0:5050
+</code></pre>
+<p>The output reveals the tally of "Yes" and "No" votes along with their relative percentages.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <a rel="prev" href="ch103-06-00-other-examples.html" class="mobile-nav-chapters previous"
+                            title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+
+                        <a rel="next" href="ch103-06-02-working-with-erc20-token.html" class="mobile-nav-chapters next"
+                            title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                <a rel="prev" href="ch103-06-00-other-examples.html" class="nav-chapters previous" title="Previous chapter"
+                    aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                <a rel="next" href="ch103-06-02-working-with-erc20-token.html" class="nav-chapters next" title="Next chapter"
+                    aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </nav>
+
+        </div>
+
+
+        <!-- Google Analytics Tag -->
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'G-WY42TERK5P', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+        <script>
+            window.rootPath = "";
+        </script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/chat.js"></script>
+        <script src="theme/js/index.mjs"></script>
+        <script src="theme/js/version-switcher.js"></script>
+
+
+    </div>
+</body>
+
+</html>

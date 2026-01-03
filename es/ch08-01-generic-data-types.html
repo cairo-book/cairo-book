@@ -1,0 +1,618 @@
+<!DOCTYPE HTML>
+<html lang="es" class="sidebar-visible no-js light">
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Generic Data Types - The Cairo Programming Language</title>
+
+
+    <!-- Custom HTML head -->
+
+    <meta name="description" content="The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/css/last-changed.css">
+    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="theme/css/version-switcher.css">
+
+    <!-- MathJax -->
+    <script async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+    <link rel="canonical" id="canonical-link" href="" />
+    <script>
+        (function () {
+            var path = "ch08-01-generic-data-types.md";
+            var canonicalPath;
+            
+            // Special handling for different cases
+            if (path === "" || path === "index.md") {
+                // Homepage should not have index.html
+                canonicalPath = "";
+            } else {
+                // Other pages: replace .md with .html
+                canonicalPath = path.replace(/\.md$/, ".html");
+            }
+            
+            var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
+            
+            // Remove trailing slash if present (except for root)
+            if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
+                canonicalUrl = canonicalUrl.slice(0, -1);
+            }
+            
+            document.getElementById("canonical-link").href = canonicalUrl;
+        })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M6M97KJP');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6M97KJP" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ZJLBV4KE2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-0ZJLBV4KE2');
+            gtag('config', 'G-WY42TERK5P')
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">The Cairo Book</a></li><li class="chapter-item expanded affix "><a href="ch00-01-foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Cairo Programming Language</li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-proving-a-prime-number.html"><strong aria-hidden="true">1.3.</strong> Proving That A Number Is Prime</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-common-programming-concepts.html"><strong aria-hidden="true">2.</strong> Common Programming Concepts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-variables-and-mutability.html"><strong aria-hidden="true">2.1.</strong> Variables and Mutability</a></li><li class="chapter-item expanded "><a href="ch02-02-data-types.html"><strong aria-hidden="true">2.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="ch02-03-functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="ch02-04-comments.html"><strong aria-hidden="true">2.4.</strong> Comments</a></li><li class="chapter-item expanded "><a href="ch02-05-control-flow.html"><strong aria-hidden="true">2.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-common-collections.html"><strong aria-hidden="true">3.</strong> Common Collections</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-arrays.html"><strong aria-hidden="true">3.1.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="ch03-02-dictionaries.html"><strong aria-hidden="true">3.2.</strong> Dictionaries</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Understanding Ownership</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> What is Ownership?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-snapshots.html"><strong aria-hidden="true">4.2.</strong> References and Snapshots</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-using-structs-to-structure-related-data.html"><strong aria-hidden="true">5.</strong> Using Structs to Structure Related Data</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-and-instantiating-structs.html"><strong aria-hidden="true">5.1.</strong> Defining and Instantiating Structs</a></li><li class="chapter-item expanded "><a href="ch05-02-an-example-program-using-structs.html"><strong aria-hidden="true">5.2.</strong> An Example Program Using Structs</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Method Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums-and-pattern-matching.html"><strong aria-hidden="true">6.</strong> Enums and Pattern Matching</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-enums.html"><strong aria-hidden="true">6.1.</strong> Enums</a></li><li class="chapter-item expanded "><a href="ch06-02-the-match-control-flow-construct.html"><strong aria-hidden="true">6.2.</strong> The Match Control Flow Construct</a></li><li class="chapter-item expanded "><a href="ch06-03-concise-control-flow-with-if-let-and-while-let.html"><strong aria-hidden="true">6.3.</strong> Concise Control Flow with if let and while let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-cairo-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Managing Cairo Projects with Packages, Crates and Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Packages and Crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope.html"><strong aria-hidden="true">7.2.</strong> Defining Modules to Control Scope</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Paths for Referring to an Item in the Module Tree</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Bringing Paths into Scope with the use Keyword</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Separating Modules into Different Files</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-generic-types-and-traits.html"><strong aria-hidden="true">8.</strong> Generic Types and Traits</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-generic-data-types.html"><strong aria-hidden="true">8.1.</strong> Generic Data Types</a></li><li class="chapter-item expanded "><a href="ch08-02-traits-in-cairo.html"><strong aria-hidden="true">8.2.</strong> Traits in Cairo</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Unrecoverable Errors with panic</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors.html"><strong aria-hidden="true">9.2.</strong> Recoverable Errors with Result</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-testing-cairo-programs.html"><strong aria-hidden="true">10.</strong> Testing Cairo Programs</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-how-to-write-tests.html"><strong aria-hidden="true">10.1.</strong> How To Write Tests</a></li><li class="chapter-item expanded "><a href="ch10-02-test-organization.html"><strong aria-hidden="true">10.2.</strong> Test Organization</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-functional-features.html"><strong aria-hidden="true">11.</strong> Functional Language Features: Iterators and Closures</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-closures.html"><strong aria-hidden="true">11.1.</strong> Closures: Anonymous Functions that Capture Their Environment</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-advanced-features.html"><strong aria-hidden="true">12.</strong> Advanced Cairo Features</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-custom-data-structures.html"><strong aria-hidden="true">12.1.</strong> Custom Data Structures</a></li><li class="chapter-item expanded "><a href="ch12-02-smart-pointers.html"><strong aria-hidden="true">12.2.</strong> Smart Pointers</a></li><li class="chapter-item expanded "><a href="ch12-09-deref-coercion.html"><strong aria-hidden="true">12.3.</strong> Deref Coercion</a></li><li class="chapter-item expanded "><a href="ch12-10-associated-items.html"><strong aria-hidden="true">12.4.</strong> Associated Items</a></li><li class="chapter-item expanded "><a href="ch12-03-operator-overloading.html"><strong aria-hidden="true">12.5.</strong> Operator Overloading</a></li><li class="chapter-item expanded "><a href="ch12-04-hash.html"><strong aria-hidden="true">12.6.</strong> Working with Hashes</a></li><li class="chapter-item expanded "><a href="ch12-05-macros.html"><strong aria-hidden="true">12.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="ch12-10-procedural-macros.html"><strong aria-hidden="true">12.8.</strong> Procedural Macros</a></li><li class="chapter-item expanded "><a href="ch12-06-inlining-in-cairo.html"><strong aria-hidden="true">12.9.</strong> Inlining in Cairo</a></li><li class="chapter-item expanded "><a href="ch12-08-printing.html"><strong aria-hidden="true">12.10.</strong> Printing</a></li><li class="chapter-item expanded "><a href="ch12-10-arithmetic-circuits.html"><strong aria-hidden="true">12.11.</strong> Arithmetic Circuits</a></li><li class="chapter-item expanded "><a href="ch12-11-offloading-computations-with-oracles.html"><strong aria-hidden="true">12.12.</strong> Offloading Computations with Oracles</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">13.</strong> Appendix (Cairo)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">13.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="appendix-02-operators-and-symbols.html"><strong aria-hidden="true">13.2.</strong> B - Operators and Symbols</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">13.3.</strong> C - Derivable Traits</a></li><li class="chapter-item expanded "><a href="appendix-04-cairo-prelude.html"><strong aria-hidden="true">13.4.</strong> D - The Cairo Prelude</a></li><li class="chapter-item expanded "><a href="appendix-05-common-error-messages.html"><strong aria-hidden="true">13.5.</strong> E - Common Error Messages</a></li><li class="chapter-item expanded "><a href="appendix-06-useful-development-tools.html"><strong aria-hidden="true">13.6.</strong> F - Useful Development Tools</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Smart Contracts in Cairo</li><li class="chapter-item expanded "><a href="ch100-00-introduction-to-smart-contracts.html"><strong aria-hidden="true">14.</strong> Introduction to Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch100-01-contracts-classes-and-instances.html"><strong aria-hidden="true">14.1.</strong> Starknet contract classes and instances</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-00-building-starknet-smart-contracts.html"><strong aria-hidden="true">15.</strong> Building Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch101-01-starknet-types.html"><strong aria-hidden="true">15.1.</strong> Starknet Types</a></li><li class="chapter-item expanded "><a href="ch101-01-00-contract-storage.html"><strong aria-hidden="true">15.2.</strong> Contract Storage</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch101-01-01-storage-mappings.html"><strong aria-hidden="true">15.2.1.</strong> Storage Mappings</a></li><li class="chapter-item "><a href="ch101-01-02-storage-vecs.html"><strong aria-hidden="true">15.2.2.</strong> Storage Vecs</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-02-contract-functions.html"><strong aria-hidden="true">15.3.</strong> Contract Functions</a></li><li class="chapter-item expanded "><a href="ch101-03-contract-events.html"><strong aria-hidden="true">15.4.</strong> Contract Events</a></li></ol></li><li class="chapter-item expanded "><a href="ch102-00-starknet-contract-interactions.html"><strong aria-hidden="true">16.</strong> Starknet Contract Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch102-01-contract-class-abi.html"><strong aria-hidden="true">16.1.</strong> Contract Class ABI</a></li><li class="chapter-item expanded "><a href="ch102-02-interacting-with-another-contract.html"><strong aria-hidden="true">16.2.</strong> Interacting with Another Contract</a></li><li class="chapter-item expanded "><a href="ch102-03-executing-code-from-another-class.html"><strong aria-hidden="true">16.3.</strong> Executing Code from Another Class</a></li><li class="chapter-item expanded "><a href="ch102-04-serialization-of-cairo-types.html"><strong aria-hidden="true">16.4.</strong> Serialization of Cairo types</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-00-building-advanced-starknet-smart-contracts.html"><strong aria-hidden="true">17.</strong> Building Advanced Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch103-01-optimizing-storage-costs.html"><strong aria-hidden="true">17.1.</strong> Optimizing Storage Costs</a></li><li class="chapter-item expanded "><a href="ch103-02-00-composability-and-components.html"><strong aria-hidden="true">17.2.</strong> Composability and Components</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-02-01-under-the-hood.html"><strong aria-hidden="true">17.2.1.</strong> Under the Hood</a></li><li class="chapter-item "><a href="ch103-02-02-component-dependencies.html"><strong aria-hidden="true">17.2.2.</strong> Component Dependencies</a></li><li class="chapter-item "><a href="ch103-02-03-testing-components.html"><strong aria-hidden="true">17.2.3.</strong> Testing Components</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-03-upgradeability.html"><strong aria-hidden="true">17.3.</strong> Upgradeability</a></li><li class="chapter-item expanded "><a href="ch103-04-L1-L2-messaging.html"><strong aria-hidden="true">17.4.</strong> L1 &lt;&gt; L2 Messaging</a></li><li class="chapter-item expanded "><a href="ch103-05-oracle-interactions.html"><strong aria-hidden="true">17.5.</strong> Oracle Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-05-01-price-feeds.html"><strong aria-hidden="true">17.5.1.</strong> Price Feeds</a></li><li class="chapter-item "><a href="ch103-05-02-randomness.html"><strong aria-hidden="true">17.5.2.</strong> Randomness</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-06-00-other-examples.html"><strong aria-hidden="true">17.6.</strong> Other Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-06-01-deploying-and-interacting-with-a-voting-contract.html"><strong aria-hidden="true">17.6.1.</strong> Deploying and Interacting with a Voting Contract</a></li><li class="chapter-item "><a href="ch103-06-02-working-with-erc20-token.html"><strong aria-hidden="true">17.6.2.</strong> Working with ERC20 Token</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch104-00-starknet-smart-contracts-security.html"><strong aria-hidden="true">18.</strong> Starknet Smart Contracts Security</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch104-01-general-recommendations.html"><strong aria-hidden="true">18.1.</strong> General Recommendations</a></li><li class="chapter-item expanded "><a href="ch104-02-testing-smart-contracts.html"><strong aria-hidden="true">18.2.</strong> Testing Smart Contracts</a></li><li class="chapter-item expanded "><a href="ch104-03-static-analysis-tools.html"><strong aria-hidden="true">18.3.</strong> Static Analysis Tools</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-000.html"><strong aria-hidden="true">19.</strong> Appendix (Starknet)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-08-system-calls.html"><strong aria-hidden="true">19.1.</strong> A - System Calls</a></li><li class="chapter-item expanded "><a href="appendix-09-sierra.html"><strong aria-hidden="true">19.2.</strong> B - Sierra</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Cairo VM</li><li class="chapter-item expanded "><a href="ch200-introduction.html"><strong aria-hidden="true">20.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="ch201-architecture.html"><strong aria-hidden="true">21.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="ch202-00-memory.html"><strong aria-hidden="true">22.</strong> Memory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch202-01-non-deterministic-read-only-memory.html"><strong aria-hidden="true">22.1.</strong> Non-Deterministic Read-only Memory</a></li><li class="chapter-item expanded "><a href="ch202-02-segments.html"><strong aria-hidden="true">22.2.</strong> Segments and Relocation</a></li></ol></li><li class="chapter-item expanded "><a href="ch203-00-execution-model.html"><strong aria-hidden="true">23.</strong> Execution Model</a></li><li class="chapter-item expanded "><a href="ch204-00-builtins.html"><strong aria-hidden="true">24.</strong> Builtins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch204-01-how-builtins-work.html"><strong aria-hidden="true">24.1.</strong> How Builtins Work</a></li><li class="chapter-item expanded "><a href="ch204-02-builtins-list.html"><strong aria-hidden="true">24.2.</strong> Builtins List</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch204-02-00-output.html"><strong aria-hidden="true">24.2.1.</strong> Output</a></li><li class="chapter-item "><a href="ch204-02-01-pedersen.html"><strong aria-hidden="true">24.2.2.</strong> Pedersen</a></li><li class="chapter-item "><a href="ch204-02-02-range-check.html"><strong aria-hidden="true">24.2.3.</strong> Range Check</a></li><li class="chapter-item "><a href="ch204-02-03-ecdsa.html"><strong aria-hidden="true">24.2.4.</strong> ECDSA</a></li><li class="chapter-item "><a href="ch204-02-04-bitwise.html"><strong aria-hidden="true">24.2.5.</strong> Bitwise</a></li><li class="chapter-item "><a href="ch204-02-05-ec-op.html"><strong aria-hidden="true">24.2.6.</strong> EC OP</a></li><li class="chapter-item "><a href="ch204-02-06-keccak.html"><strong aria-hidden="true">24.2.7.</strong> Keccak</a></li><li class="chapter-item "><a href="ch204-02-07-poseidon.html"><strong aria-hidden="true">24.2.8.</strong> Poseidon</a></li><li class="chapter-item "><a href="ch204-02-08-mod-builtin.html"><strong aria-hidden="true">24.2.9.</strong> Mod Builtin</a></li><li class="chapter-item "><a href="ch204-02-11-segment-arena.html"><strong aria-hidden="true">24.2.10.</strong> Segment Arena</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch205-00-hints.html"><strong aria-hidden="true">25.</strong> Hints</a></li><li class="chapter-item expanded "><a href="ch206-00-runner.html"><strong aria-hidden="true">26.</strong> Runner</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">26.1.</strong> Program</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.1.1.</strong> Program Artifacts</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.1.2.</strong> Program Parsing</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.2.</strong> Runner Mode</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.2.1.</strong> Execution Mode</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.2.2.</strong> Proof Mode</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.3.</strong> Output</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.3.1.</strong> Cairo PIE</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.2.</strong> Memory File</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.3.</strong> Trace file</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.4.</strong> AIR public input</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.5.</strong> AIR private input</div></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Tracer</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Implementations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Resources</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                            aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                            aria-label="Change theme" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Cairo Programming Language</h1>
+
+
+                    <div class="right-buttons">
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://cairo-lang.org" class="menu-cairo-home" title="Cairo Home"
+                                aria-label="Cairo Home">
+                                <img src="/icons/Cairo_logo_500x500.png" alt="Cairo Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Cairo Home</span>
+                            </a>
+                        </div>
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://starknet.io" class="menu-cairo-home" title="Starknet" aria-label="Starknet">
+                                <img src="/icons/SN_logo.png" alt="Starknet Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Starknet</span>
+                            </a>
+                        </div>
+                        <button id="language-toggle" class="icon-button" type="button" title="Change language"
+                            aria-label="Change language" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="language-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="language-list" class="theme-popup" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme">
+                                    <a id="en">English</a>
+                                </button></li>
+                        </ul>
+                        <script>
+                            let langToggle = document.getElementById("language-toggle");
+                            let langList = document.getElementById("language-list");
+                            langToggle.addEventListener("click", (event) => {
+                                langList.style.display = langList.style.display == "block" ? "none" : "block";
+                            });
+                            let selectedLang = document.getElementById("es");
+                            selectedLang.parentNode.classList.add("theme-selected");
+
+                            // The path to the root, taking the current
+                            // language into account.
+                            { { #if(eq language "en") } }
+                            let full_path_to_root = "";
+                            { {else } }
+                            let full_path_to_root = "../";
+                            { {/if } }
+                            // The page path (mdbook only gives us
+                            // access to the path to the Markdown file).
+                            let path = "ch08-01-generic-data-types.md".replace(/\.md$/, ".html");
+                            for (let lang of langList.querySelectorAll("a")) {
+                                if (lang.id == "en") {
+                                    lang.href = `${full_path_to_root}${path}`;
+                                } else {
+                                    lang.href = `${full_path_to_root}${lang.id}/${path}`;
+                                }
+                            }
+                        </script>
+
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io/edit/main/src/ch08-01-generic-data-types.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..."
+                            aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="generic-data-types"><a class="header" href="#generic-data-types">Generic Data Types</a></h1>
+<p>We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo, we can use generics when defining functions, structs, enums, traits, implementations and methods. In this chapter, we are going to take a look at how to effectively use generic types with all of them.</p>
+<p>Generics allow us to write reusable code that works with many types, thus avoiding code duplication, while enhancing code maintainability.</p>
+<h2 id="generic-functions"><a class="header" href="#generic-functions">Generic Functions</a></h2>
+<p>Making a function generic means it can operate on different types, avoiding the need for multiple, type-specific implementations. This leads to significant code reduction and increases the flexibility of the code.</p>
+<p>When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two <code>Array</code> of items, will return the largest one. If we need to perform this operation for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.</p>
+<pre><code class="language-cairo">// Specify generic type T between the angulars
+fn largest_list&lt;T&gt;(l1: Array&lt;T&gt;, l2: Array&lt;T&gt;) -&gt; Array&lt;T&gt; {
+    if l1.len() &gt; l2.len() {
+        l1
+    } else {
+        l2
+    }
+}
+
+#[executable]
+fn main() {
+    let mut l1 = array![1, 2];
+    let mut l2 = array![3, 4, 5];
+
+    // There is no need to specify the concrete type of T because
+    // it is inferred by the compiler
+    let l3 = largest_list(l1, l2);
+}
+</code></pre>
+<p>The <code>largest_list</code> function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an <code>Array&lt;T&gt;</code> is droppable when executing the <code>main</code> function. In order to drop an array of <code>T</code>, the compiler must first know how to drop <code>T</code>. This can be fixed by specifying in the function signature of <code>largest_list</code> that <code>T</code> must implement the <code>Drop</code> trait. The correct function definition of <code>largest_list</code> is as follows:</p>
+<pre><code class="language-cairo">fn largest_list&lt;T, impl TDrop: Drop&lt;T&gt;&gt;(l1: Array&lt;T&gt;, l2: Array&lt;T&gt;) -&gt; Array&lt;T&gt; {
+    if l1.len() &gt; l2.len() {
+        l1
+    } else {
+        l2
+    }
+}
+</code></pre>
+<p>The new <code>largest_list</code> function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. This is what we call <em>trait bounds</em>. The <code>main</code> function remains unchanged, the compiler is smart enough to deduce which concrete type is being used and if it implements the <code>Drop</code> trait.</p>
+<h3 id="constraints-for-generic-types"><a class="header" href="#constraints-for-generic-types">Constraints for Generic Types</a></h3>
+<p>When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allows us to use it more effectively in a function's logic at the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the <code>TDrop</code> implementation as part of the generic arguments of <code>largest_list</code>. While <code>TDrop</code> was added to satisfy the compiler's requirements, we can also add constraints to benefit our function logic.</p>
+<p>Imagine we have a list of elements of some generic type <code>T</code>, and we want to find the smallest element among them. Initially, we know that for an element of type <code>T</code> to be comparable, it must implement the <code>PartialOrd</code> trait. The resulting function would be:</p>
+<pre><code class="language-cairo">// Given a list of T get the smallest one
+// The PartialOrd trait implements comparison operations for T
+fn smallest_element&lt;T, impl TPartialOrd: PartialOrd&lt;T&gt;&gt;(list: @Array&lt;T&gt;) -&gt; T {
+    // This represents the smallest element through the iteration
+    // Notice that we use the desnap (*) operator
+    let mut smallest = *list[0];
+
+    // The index we will use to move through the list
+    let mut index = 1;
+
+    // Iterate through the whole list storing the smallest
+    while index &lt; list.len() {
+        if *list[index] &lt; smallest {
+            smallest = *list[index];
+        }
+        index = index + 1;
+    }
+
+    smallest
+}
+
+#[executable]
+fn main() {
+    let list: Array&lt;u8&gt; = array![5, 3, 10];
+
+    // We need to specify that we are passing a snapshot of `list` as an argument
+    let s = smallest_element(@list);
+    assert!(s == 3);
+}
+</code></pre>
+<p>The <code>smallest_element</code> function uses a generic type <code>T</code> that implements the <code>PartialOrd</code> trait, takes a snapshot of an <code>Array&lt;T&gt;</code> as a parameter and returns a copy of the smallest element. Because the parameter is of type <code>@Array&lt;T&gt;</code>, we no longer need to drop it at the end of the execution and so we are not required to implement the <code>Drop</code> trait for <code>T</code> as well. Why does it not compile then?</p>
+<p>When indexing on <code>list</code>, the value results in a snap of the indexed element, and unless <code>PartialOrd</code> is implemented for <code>@T</code> we need to desnap the element using <code>*</code>. The <code>*</code> operation requires a copy from <code>@T</code> to <code>T</code>, which means that <code>T</code> needs to implement the <code>Copy</code> trait. After copying an element of type <code>@T</code> to <code>T</code>, there are now variables with type <code>T</code> that need to be dropped, requiring <code>T</code> to implement the <code>Drop</code> trait as well. We must then add both <code>Drop</code> and <code>Copy</code> traits implementation for the function to be correct. After updating the <code>smallest_element</code> function the resulting code would be:</p>
+<pre><code class="language-cairo">fn smallest_element&lt;T, impl TPartialOrd: PartialOrd&lt;T&gt;, impl TCopy: Copy&lt;T&gt;, impl TDrop: Drop&lt;T&gt;&gt;(
+    list: @Array&lt;T&gt;,
+) -&gt; T {
+    let mut smallest = *list[0];
+    let mut index = 1;
+
+    while index &lt; list.len() {
+        if *list[index] &lt; smallest {
+            smallest = *list[index];
+        }
+        index = index + 1;
+    }
+
+    smallest
+}
+</code></pre>
+<h3 id="anonymous-generic-implementation-parameter--operator"><a class="header" href="#anonymous-generic-implementation-parameter--operator">Anonymous Generic Implementation Parameter (<code>+</code> Operator)</a></h3>
+<p>Until now, we have always specified a name for each implementation of the required generic trait: <code>TPartialOrd</code> for <code>PartialOrd&lt;T&gt;</code>, <code>TDrop</code> for <code>Drop&lt;T&gt;</code>, and <code>TCopy</code> for <code>Copy&lt;T&gt;</code>.</p>
+<p>However, most of the time, we don't use the implementation in the function body; we only use it as a constraint. In these cases, we can use the <code>+</code> operator to specify that the generic type must implement a trait without naming the implementation. This is referred to as an <em>anonymous generic implementation parameter</em>.</p>
+<p>For example, <code>+PartialOrd&lt;T&gt;</code> is equivalent to <code>impl TPartialOrd: PartialOrd&lt;T&gt;</code>.</p>
+<p>We can rewrite the <code>smallest_element</code> function signature as follows:</p>
+<pre><code class="language-cairo">fn smallest_element&lt;T, +PartialOrd&lt;T&gt;, +Copy&lt;T&gt;, +Drop&lt;T&gt;&gt;(list: @Array&lt;T&gt;) -&gt; T {
+<span class="boring">    let mut smallest = *list[0];
+</span><span class="boring">    for element in list {
+</span><span class="boring">        if *element &lt; smallest {
+</span><span class="boring">            smallest = *element;
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">    smallest
+</span><span class="boring">}
+</span></code></pre>
+<h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
+<p>We can also define structs to use a generic type parameter for one or more fields using the <code>&lt;&gt;</code> syntax, similar to function definitions. First, we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition <code>Wallet&lt;T&gt;</code> which has a <code>balance</code> field of type <code>T</code>.</p>
+<pre><code class="language-cairo">#[derive(Drop)]
+struct Wallet&lt;T&gt; {
+    balance: T,
+}
+
+#[executable]
+fn main() {
+    let w = Wallet { balance: 3 };
+}
+</code></pre>
+<p>The above code derives the <code>Drop</code> trait for the <code>Wallet</code> type automatically. It is equivalent to writing the following code:</p>
+<pre><code class="language-cairo">struct Wallet&lt;T&gt; {
+    balance: T,
+}
+
+impl WalletDrop&lt;T, +Drop&lt;T&gt;&gt; of Drop&lt;Wallet&lt;T&gt;&gt;;
+
+#[executable]
+fn main() {
+    let w = Wallet { balance: 3 };
+}
+</code></pre>
+<p>We avoid using the <code>derive</code> macro for <code>Drop</code> implementation of <code>Wallet</code> and instead define our own <code>WalletDrop</code> implementation. Notice that we must define, just like functions, an additional generic type for <code>WalletDrop</code> saying that <code>T</code> implements the <code>Drop</code> trait as well. We are basically saying that the struct <code>Wallet&lt;T&gt;</code> is droppable as long as <code>T</code> is also droppable.</p>
+<p>Finally, if we want to add a field to <code>Wallet</code> representing its address and we want that field to be different than <code>T</code> but generic as well, we can simply add another generic type between the <code>&lt;&gt;</code>:</p>
+<pre><code class="language-cairo">#[derive(Drop)]
+struct Wallet&lt;T, U&gt; {
+    balance: T,
+    address: U,
+}
+
+#[executable]
+fn main() {
+    let w = Wallet { balance: 3, address: 14 };
+}
+</code></pre>
+<p>We add to the <code>Wallet</code> struct definition a new generic type <code>U</code> and then assign this type to the new field member <code>address</code>. Notice that the <code>derive</code> attribute for the <code>Drop</code> trait works for <code>U</code> as well.</p>
+<h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
+<p>As we did with structs, we can define enums to hold generic data types in their variants. For example the <code>Option&lt;T&gt;</code> enum provided by the Cairo core library:</p>
+<pre><code class="language-cairo noplayground">enum Option&lt;T&gt; {
+    Some: T,
+    None,
+}
+</code></pre>
+<p>The <code>Option&lt;T&gt;</code> enum is generic over a type <code>T</code> and has two variants: <code>Some</code>, which holds one value of type <code>T</code> and <code>None</code> that doesn't hold any value. By using the <code>Option&lt;T&gt;</code> enum, it is possible for us to express the abstract concept of an optional value and because the value has a generic type <code>T</code> we can use this abstraction with any type.</p>
+<p>Enums can use multiple generic types as well, like the definition of the <code>Result&lt;T, E&gt;</code> enum that the core library provides:</p>
+<pre><code class="language-cairo noplayground">enum Result&lt;T, E&gt; {
+    Ok: T,
+    Err: E,
+}
+</code></pre>
+<p>The <code>Result&lt;T, E&gt;</code> enum has two generic types, <code>T</code> and <code>E</code>, and two variants: <code>Ok</code> which holds the value of type <code>T</code> and <code>Err</code> which holds the value of type <code>E</code>. This definition makes it convenient to use the <code>Result</code> enum anywhere we have an operation that might succeed (by returning a value of type <code>T</code>) or fail (by returning a value of type <code>E</code>).</p>
+<h2 id="generic-methods"><a class="header" href="#generic-methods">Generic Methods</a></h2>
+<p>We can implement methods on structs and enums, and use the generic types in their definitions, too. Using our previous definition of <code>Wallet&lt;T&gt;</code> struct, we define a <code>balance</code> method for it:</p>
+<pre><code class="language-cairo">#[derive(Copy, Drop)]
+struct Wallet&lt;T&gt; {
+    balance: T,
+}
+
+trait WalletTrait&lt;T&gt; {
+    fn balance(self: @Wallet&lt;T&gt;) -&gt; T;
+}
+
+impl WalletImpl&lt;T, +Copy&lt;T&gt;&gt; of WalletTrait&lt;T&gt; {
+    fn balance(self: @Wallet&lt;T&gt;) -&gt; T {
+        return *self.balance;
+    }
+}
+
+#[executable]
+fn main() {
+    let w = Wallet { balance: 50 };
+    assert!(w.balance() == 50);
+}
+</code></pre>
+<p>We first define <code>WalletTrait&lt;T&gt;</code> trait using a generic type <code>T</code> which defines a method that returns the value of the field <code>balance</code> from <code>Wallet</code>. Then we give an implementation for the trait in <code>WalletImpl&lt;T&gt;</code>. Note that you need to include a generic type in both definitions of the trait and the implementation.</p>
+<p>We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for <code>Wallet&lt;u128&gt;</code> instances rather than <code>Wallet&lt;T&gt;</code>. In the code example, we define an implementation for wallets which have a concrete type of <code>u128</code> for the <code>balance</code> field.</p>
+<pre><code class="language-cairo">#[derive(Copy, Drop)]
+struct Wallet&lt;T&gt; {
+    balance: T,
+}
+
+/// Generic trait for wallets
+trait WalletTrait&lt;T&gt; {
+    fn balance(self: @Wallet&lt;T&gt;) -&gt; T;
+}
+
+impl WalletImpl&lt;T, +Copy&lt;T&gt;&gt; of WalletTrait&lt;T&gt; {
+    fn balance(self: @Wallet&lt;T&gt;) -&gt; T {
+        return *self.balance;
+    }
+}
+
+/// Trait for wallets of type u128
+trait WalletReceiveTrait {
+    fn receive(ref self: Wallet&lt;u128&gt;, value: u128);
+}
+
+impl WalletReceiveImpl of WalletReceiveTrait {
+    fn receive(ref self: Wallet&lt;u128&gt;, value: u128) {
+        self.balance += value;
+    }
+}
+
+#[executable]
+fn main() {
+    let mut w = Wallet { balance: 50 };
+    assert!(w.balance() == 50);
+
+    w.receive(100);
+    assert!(w.balance() == 150);
+}
+</code></pre>
+<p>The new method <code>receive</code> increments the size of <code>balance</code> of any instance of a <code>Wallet&lt;u128&gt;</code>. Notice that we changed the <code>main</code> function making <code>w</code> a mutable variable in order for it to be able to update its balance. If we were to change the initialization of <code>w</code> by changing the type of <code>balance</code> the previous code wouldn't compile.</p>
+<p>Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from <code>Wallet&lt;U, V&gt;</code> we are going to define a trait that picks two wallets of different generic types and creates a new one with a generic type of each. First, let's rewrite the struct definition:</p>
+<pre><code class="language-cairo noplayground">struct Wallet&lt;T, U&gt; {
+    balance: T,
+    address: U,
+}
+</code></pre>
+<p>Next, we are going to naively define the mixup trait and implementation:</p>
+<pre><code class="language-cairo noplayground">// This does not compile!
+trait WalletMixTrait&lt;T1, U1&gt; {
+    fn mixup&lt;T2, U2&gt;(self: Wallet&lt;T1, U1&gt;, other: Wallet&lt;T2, U2&gt;) -&gt; Wallet&lt;T1, U2&gt;;
+}
+
+impl WalletMixImpl&lt;T1, U1&gt; of WalletMixTrait&lt;T1, U1&gt; {
+    fn mixup&lt;T2, U2&gt;(self: Wallet&lt;T1, U1&gt;, other: Wallet&lt;T2, U2&gt;) -&gt; Wallet&lt;T1, U2&gt; {
+        Wallet { balance: self.balance, address: other.address }
+    }
+}
+
+</code></pre>
+<p>We are creating a trait <code>WalletMixTrait&lt;T1, U1&gt;</code> with the <code>mixup&lt;T2, U2&gt;</code> method which given an instance of <code>Wallet&lt;T1, U1&gt;</code> and <code>Wallet&lt;T2, U2&gt;</code> creates a new <code>Wallet&lt;T1, U2&gt;</code>. As <code>mixup</code> signature specifies, both <code>self</code> and <code>other</code> are getting dropped at the end of the function, which is why this code does not compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the <code>Drop</code> trait for the compiler to know how to drop instances of <code>Wallet&lt;T, U&gt;</code>. The updated implementation is as follows:</p>
+<pre><code class="language-cairo">trait WalletMixTrait&lt;T1, U1&gt; {
+    fn mixup&lt;T2, +Drop&lt;T2&gt;, U2, +Drop&lt;U2&gt;&gt;(
+        self: Wallet&lt;T1, U1&gt;, other: Wallet&lt;T2, U2&gt;,
+    ) -&gt; Wallet&lt;T1, U2&gt;;
+}
+
+impl WalletMixImpl&lt;T1, +Drop&lt;T1&gt;, U1, +Drop&lt;U1&gt;&gt; of WalletMixTrait&lt;T1, U1&gt; {
+    fn mixup&lt;T2, +Drop&lt;T2&gt;, U2, +Drop&lt;U2&gt;&gt;(
+        self: Wallet&lt;T1, U1&gt;, other: Wallet&lt;T2, U2&gt;,
+    ) -&gt; Wallet&lt;T1, U2&gt; {
+        Wallet { balance: self.balance, address: other.address }
+    }
+}
+</code></pre>
+<p>We add the requirements for <code>T1</code> and <code>U1</code> to be droppable on <code>WalletMixImpl</code> declaration. Then we do the same for <code>T2</code> and <code>U2</code>, this time as part of <code>mixup</code> signature. We can now try the <code>mixup</code> function:</p>
+<pre><code class="language-cairo noplayground">#[executable]
+fn main() {
+    let w1: Wallet&lt;bool, u128&gt; = Wallet { balance: true, address: 10 };
+    let w2: Wallet&lt;felt252, u8&gt; = Wallet { balance: 32, address: 100 };
+
+    let w3 = w1.mixup(w2);
+
+    assert!(w3.balance);
+    assert!(w3.address == 100);
+}
+</code></pre>
+<p>We first create two instances: one of <code>Wallet&lt;bool, u128&gt;</code> and the other of <code>Wallet&lt;felt252, u8&gt;</code>. Then, we call <code>mixup</code> and create a new <code>Wallet&lt;bool, u8&gt;</code> instance.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <a rel="prev" href="ch08-00-generic-types-and-traits.html" class="mobile-nav-chapters previous"
+                            title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+
+                        <a rel="next" href="ch08-02-traits-in-cairo.html" class="mobile-nav-chapters next"
+                            title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                <a rel="prev" href="ch08-00-generic-types-and-traits.html" class="nav-chapters previous" title="Previous chapter"
+                    aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                <a rel="next" href="ch08-02-traits-in-cairo.html" class="nav-chapters next" title="Next chapter"
+                    aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </nav>
+
+        </div>
+
+
+        <!-- Google Analytics Tag -->
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'G-WY42TERK5P', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+        <script>
+            window.rootPath = "";
+        </script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/chat.js"></script>
+        <script src="theme/js/index.mjs"></script>
+        <script src="theme/js/version-switcher.js"></script>
+
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE HTML>
+<html lang="id" class="sidebar-visible no-js light">
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Data Types - The Cairo Programming Language</title>
+
+
+    <!-- Custom HTML head -->
+
+    <meta name="description" content="The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/css/last-changed.css">
+    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="theme/css/version-switcher.css">
+
+    <!-- MathJax -->
+    <script async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+    <link rel="canonical" id="canonical-link" href="" />
+    <script>
+        (function () {
+            var path = "ch02-02-data-types.md";
+            var canonicalPath;
+            
+            // Special handling for different cases
+            if (path === "" || path === "index.md") {
+                // Homepage should not have index.html
+                canonicalPath = "";
+            } else {
+                // Other pages: replace .md with .html
+                canonicalPath = path.replace(/\.md$/, ".html");
+            }
+            
+            var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
+            
+            // Remove trailing slash if present (except for root)
+            if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
+                canonicalUrl = canonicalUrl.slice(0, -1);
+            }
+            
+            document.getElementById("canonical-link").href = canonicalUrl;
+        })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M6M97KJP');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6M97KJP" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ZJLBV4KE2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-0ZJLBV4KE2');
+            gtag('config', 'G-WY42TERK5P')
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">The Cairo Book</a></li><li class="chapter-item expanded affix "><a href="ch00-01-foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Cairo Programming Language</li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-proving-a-prime-number.html"><strong aria-hidden="true">1.3.</strong> Proving That A Number Is Prime</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-common-programming-concepts.html"><strong aria-hidden="true">2.</strong> Common Programming Concepts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-variables-and-mutability.html"><strong aria-hidden="true">2.1.</strong> Variables and Mutability</a></li><li class="chapter-item expanded "><a href="ch02-02-data-types.html"><strong aria-hidden="true">2.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="ch02-03-functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="ch02-04-comments.html"><strong aria-hidden="true">2.4.</strong> Comments</a></li><li class="chapter-item expanded "><a href="ch02-05-control-flow.html"><strong aria-hidden="true">2.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-common-collections.html"><strong aria-hidden="true">3.</strong> Common Collections</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-arrays.html"><strong aria-hidden="true">3.1.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="ch03-02-dictionaries.html"><strong aria-hidden="true">3.2.</strong> Dictionaries</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Understanding Ownership</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> What is Ownership?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-snapshots.html"><strong aria-hidden="true">4.2.</strong> References and Snapshots</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-using-structs-to-structure-related-data.html"><strong aria-hidden="true">5.</strong> Using Structs to Structure Related Data</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-and-instantiating-structs.html"><strong aria-hidden="true">5.1.</strong> Defining and Instantiating Structs</a></li><li class="chapter-item expanded "><a href="ch05-02-an-example-program-using-structs.html"><strong aria-hidden="true">5.2.</strong> An Example Program Using Structs</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Method Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums-and-pattern-matching.html"><strong aria-hidden="true">6.</strong> Enums and Pattern Matching</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-enums.html"><strong aria-hidden="true">6.1.</strong> Enums</a></li><li class="chapter-item expanded "><a href="ch06-02-the-match-control-flow-construct.html"><strong aria-hidden="true">6.2.</strong> The Match Control Flow Construct</a></li><li class="chapter-item expanded "><a href="ch06-03-concise-control-flow-with-if-let-and-while-let.html"><strong aria-hidden="true">6.3.</strong> Concise Control Flow with if let and while let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-cairo-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Managing Cairo Projects with Packages, Crates and Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Packages and Crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope.html"><strong aria-hidden="true">7.2.</strong> Defining Modules to Control Scope</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Paths for Referring to an Item in the Module Tree</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Bringing Paths into Scope with the use Keyword</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Separating Modules into Different Files</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-generic-types-and-traits.html"><strong aria-hidden="true">8.</strong> Generic Types and Traits</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-generic-data-types.html"><strong aria-hidden="true">8.1.</strong> Generic Data Types</a></li><li class="chapter-item expanded "><a href="ch08-02-traits-in-cairo.html"><strong aria-hidden="true">8.2.</strong> Traits in Cairo</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Unrecoverable Errors with panic</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors.html"><strong aria-hidden="true">9.2.</strong> Recoverable Errors with Result</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-testing-cairo-programs.html"><strong aria-hidden="true">10.</strong> Testing Cairo Programs</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-how-to-write-tests.html"><strong aria-hidden="true">10.1.</strong> How To Write Tests</a></li><li class="chapter-item expanded "><a href="ch10-02-test-organization.html"><strong aria-hidden="true">10.2.</strong> Test Organization</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-functional-features.html"><strong aria-hidden="true">11.</strong> Functional Language Features: Iterators and Closures</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-closures.html"><strong aria-hidden="true">11.1.</strong> Closures: Anonymous Functions that Capture Their Environment</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-advanced-features.html"><strong aria-hidden="true">12.</strong> Advanced Cairo Features</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-custom-data-structures.html"><strong aria-hidden="true">12.1.</strong> Custom Data Structures</a></li><li class="chapter-item expanded "><a href="ch12-02-smart-pointers.html"><strong aria-hidden="true">12.2.</strong> Smart Pointers</a></li><li class="chapter-item expanded "><a href="ch12-09-deref-coercion.html"><strong aria-hidden="true">12.3.</strong> Deref Coercion</a></li><li class="chapter-item expanded "><a href="ch12-10-associated-items.html"><strong aria-hidden="true">12.4.</strong> Associated Items</a></li><li class="chapter-item expanded "><a href="ch12-03-operator-overloading.html"><strong aria-hidden="true">12.5.</strong> Operator Overloading</a></li><li class="chapter-item expanded "><a href="ch12-04-hash.html"><strong aria-hidden="true">12.6.</strong> Working with Hashes</a></li><li class="chapter-item expanded "><a href="ch12-05-macros.html"><strong aria-hidden="true">12.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="ch12-10-procedural-macros.html"><strong aria-hidden="true">12.8.</strong> Procedural Macros</a></li><li class="chapter-item expanded "><a href="ch12-06-inlining-in-cairo.html"><strong aria-hidden="true">12.9.</strong> Inlining in Cairo</a></li><li class="chapter-item expanded "><a href="ch12-08-printing.html"><strong aria-hidden="true">12.10.</strong> Printing</a></li><li class="chapter-item expanded "><a href="ch12-10-arithmetic-circuits.html"><strong aria-hidden="true">12.11.</strong> Arithmetic Circuits</a></li><li class="chapter-item expanded "><a href="ch12-11-offloading-computations-with-oracles.html"><strong aria-hidden="true">12.12.</strong> Offloading Computations with Oracles</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">13.</strong> Appendix (Cairo)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">13.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="appendix-02-operators-and-symbols.html"><strong aria-hidden="true">13.2.</strong> B - Operators and Symbols</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">13.3.</strong> C - Derivable Traits</a></li><li class="chapter-item expanded "><a href="appendix-04-cairo-prelude.html"><strong aria-hidden="true">13.4.</strong> D - The Cairo Prelude</a></li><li class="chapter-item expanded "><a href="appendix-05-common-error-messages.html"><strong aria-hidden="true">13.5.</strong> E - Common Error Messages</a></li><li class="chapter-item expanded "><a href="appendix-06-useful-development-tools.html"><strong aria-hidden="true">13.6.</strong> F - Useful Development Tools</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Smart Contracts in Cairo</li><li class="chapter-item expanded "><a href="ch100-00-introduction-to-smart-contracts.html"><strong aria-hidden="true">14.</strong> Introduction to Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch100-01-contracts-classes-and-instances.html"><strong aria-hidden="true">14.1.</strong> Starknet contract classes and instances</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-00-building-starknet-smart-contracts.html"><strong aria-hidden="true">15.</strong> Building Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch101-01-starknet-types.html"><strong aria-hidden="true">15.1.</strong> Starknet Types</a></li><li class="chapter-item expanded "><a href="ch101-01-00-contract-storage.html"><strong aria-hidden="true">15.2.</strong> Contract Storage</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch101-01-01-storage-mappings.html"><strong aria-hidden="true">15.2.1.</strong> Storage Mappings</a></li><li class="chapter-item "><a href="ch101-01-02-storage-vecs.html"><strong aria-hidden="true">15.2.2.</strong> Storage Vecs</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-02-contract-functions.html"><strong aria-hidden="true">15.3.</strong> Contract Functions</a></li><li class="chapter-item expanded "><a href="ch101-03-contract-events.html"><strong aria-hidden="true">15.4.</strong> Contract Events</a></li></ol></li><li class="chapter-item expanded "><a href="ch102-00-starknet-contract-interactions.html"><strong aria-hidden="true">16.</strong> Starknet Contract Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch102-01-contract-class-abi.html"><strong aria-hidden="true">16.1.</strong> Contract Class ABI</a></li><li class="chapter-item expanded "><a href="ch102-02-interacting-with-another-contract.html"><strong aria-hidden="true">16.2.</strong> Interacting with Another Contract</a></li><li class="chapter-item expanded "><a href="ch102-03-executing-code-from-another-class.html"><strong aria-hidden="true">16.3.</strong> Executing Code from Another Class</a></li><li class="chapter-item expanded "><a href="ch102-04-serialization-of-cairo-types.html"><strong aria-hidden="true">16.4.</strong> Serialization of Cairo types</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-00-building-advanced-starknet-smart-contracts.html"><strong aria-hidden="true">17.</strong> Building Advanced Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch103-01-optimizing-storage-costs.html"><strong aria-hidden="true">17.1.</strong> Optimizing Storage Costs</a></li><li class="chapter-item expanded "><a href="ch103-02-00-composability-and-components.html"><strong aria-hidden="true">17.2.</strong> Composability and Components</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-02-01-under-the-hood.html"><strong aria-hidden="true">17.2.1.</strong> Under the Hood</a></li><li class="chapter-item "><a href="ch103-02-02-component-dependencies.html"><strong aria-hidden="true">17.2.2.</strong> Component Dependencies</a></li><li class="chapter-item "><a href="ch103-02-03-testing-components.html"><strong aria-hidden="true">17.2.3.</strong> Testing Components</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-03-upgradeability.html"><strong aria-hidden="true">17.3.</strong> Upgradeability</a></li><li class="chapter-item expanded "><a href="ch103-04-L1-L2-messaging.html"><strong aria-hidden="true">17.4.</strong> L1 &lt;&gt; L2 Messaging</a></li><li class="chapter-item expanded "><a href="ch103-05-oracle-interactions.html"><strong aria-hidden="true">17.5.</strong> Oracle Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-05-01-price-feeds.html"><strong aria-hidden="true">17.5.1.</strong> Price Feeds</a></li><li class="chapter-item "><a href="ch103-05-02-randomness.html"><strong aria-hidden="true">17.5.2.</strong> Randomness</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-06-00-other-examples.html"><strong aria-hidden="true">17.6.</strong> Other Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-06-01-deploying-and-interacting-with-a-voting-contract.html"><strong aria-hidden="true">17.6.1.</strong> Deploying and Interacting with a Voting Contract</a></li><li class="chapter-item "><a href="ch103-06-02-working-with-erc20-token.html"><strong aria-hidden="true">17.6.2.</strong> Working with ERC20 Token</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch104-00-starknet-smart-contracts-security.html"><strong aria-hidden="true">18.</strong> Starknet Smart Contracts Security</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch104-01-general-recommendations.html"><strong aria-hidden="true">18.1.</strong> General Recommendations</a></li><li class="chapter-item expanded "><a href="ch104-02-testing-smart-contracts.html"><strong aria-hidden="true">18.2.</strong> Testing Smart Contracts</a></li><li class="chapter-item expanded "><a href="ch104-03-static-analysis-tools.html"><strong aria-hidden="true">18.3.</strong> Static Analysis Tools</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-000.html"><strong aria-hidden="true">19.</strong> Appendix (Starknet)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-08-system-calls.html"><strong aria-hidden="true">19.1.</strong> A - System Calls</a></li><li class="chapter-item expanded "><a href="appendix-09-sierra.html"><strong aria-hidden="true">19.2.</strong> B - Sierra</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Cairo VM</li><li class="chapter-item expanded "><a href="ch200-introduction.html"><strong aria-hidden="true">20.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="ch201-architecture.html"><strong aria-hidden="true">21.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="ch202-00-memory.html"><strong aria-hidden="true">22.</strong> Memory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch202-01-non-deterministic-read-only-memory.html"><strong aria-hidden="true">22.1.</strong> Non-Deterministic Read-only Memory</a></li><li class="chapter-item expanded "><a href="ch202-02-segments.html"><strong aria-hidden="true">22.2.</strong> Segments and Relocation</a></li></ol></li><li class="chapter-item expanded "><a href="ch203-00-execution-model.html"><strong aria-hidden="true">23.</strong> Execution Model</a></li><li class="chapter-item expanded "><a href="ch204-00-builtins.html"><strong aria-hidden="true">24.</strong> Builtins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch204-01-how-builtins-work.html"><strong aria-hidden="true">24.1.</strong> How Builtins Work</a></li><li class="chapter-item expanded "><a href="ch204-02-builtins-list.html"><strong aria-hidden="true">24.2.</strong> Builtins List</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch204-02-00-output.html"><strong aria-hidden="true">24.2.1.</strong> Output</a></li><li class="chapter-item "><a href="ch204-02-01-pedersen.html"><strong aria-hidden="true">24.2.2.</strong> Pedersen</a></li><li class="chapter-item "><a href="ch204-02-02-range-check.html"><strong aria-hidden="true">24.2.3.</strong> Range Check</a></li><li class="chapter-item "><a href="ch204-02-03-ecdsa.html"><strong aria-hidden="true">24.2.4.</strong> ECDSA</a></li><li class="chapter-item "><a href="ch204-02-04-bitwise.html"><strong aria-hidden="true">24.2.5.</strong> Bitwise</a></li><li class="chapter-item "><a href="ch204-02-05-ec-op.html"><strong aria-hidden="true">24.2.6.</strong> EC OP</a></li><li class="chapter-item "><a href="ch204-02-06-keccak.html"><strong aria-hidden="true">24.2.7.</strong> Keccak</a></li><li class="chapter-item "><a href="ch204-02-07-poseidon.html"><strong aria-hidden="true">24.2.8.</strong> Poseidon</a></li><li class="chapter-item "><a href="ch204-02-08-mod-builtin.html"><strong aria-hidden="true">24.2.9.</strong> Mod Builtin</a></li><li class="chapter-item "><a href="ch204-02-11-segment-arena.html"><strong aria-hidden="true">24.2.10.</strong> Segment Arena</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch205-00-hints.html"><strong aria-hidden="true">25.</strong> Hints</a></li><li class="chapter-item expanded "><a href="ch206-00-runner.html"><strong aria-hidden="true">26.</strong> Runner</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">26.1.</strong> Program</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.1.1.</strong> Program Artifacts</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.1.2.</strong> Program Parsing</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.2.</strong> Runner Mode</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.2.1.</strong> Execution Mode</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.2.2.</strong> Proof Mode</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.3.</strong> Output</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.3.1.</strong> Cairo PIE</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.2.</strong> Memory File</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.3.</strong> Trace file</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.4.</strong> AIR public input</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.5.</strong> AIR private input</div></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Tracer</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Implementations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Resources</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                            aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                            aria-label="Change theme" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Cairo Programming Language</h1>
+
+
+                    <div class="right-buttons">
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://cairo-lang.org" class="menu-cairo-home" title="Cairo Home"
+                                aria-label="Cairo Home">
+                                <img src="/icons/Cairo_logo_500x500.png" alt="Cairo Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Cairo Home</span>
+                            </a>
+                        </div>
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://starknet.io" class="menu-cairo-home" title="Starknet" aria-label="Starknet">
+                                <img src="/icons/SN_logo.png" alt="Starknet Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Starknet</span>
+                            </a>
+                        </div>
+                        <button id="language-toggle" class="icon-button" type="button" title="Change language"
+                            aria-label="Change language" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="language-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="language-list" class="theme-popup" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme">
+                                    <a id="en">English</a>
+                                </button></li>
+                        </ul>
+                        <script>
+                            let langToggle = document.getElementById("language-toggle");
+                            let langList = document.getElementById("language-list");
+                            langToggle.addEventListener("click", (event) => {
+                                langList.style.display = langList.style.display == "block" ? "none" : "block";
+                            });
+                            let selectedLang = document.getElementById("id");
+                            selectedLang.parentNode.classList.add("theme-selected");
+
+                            // The path to the root, taking the current
+                            // language into account.
+                            { { #if(eq language "en") } }
+                            let full_path_to_root = "";
+                            { {else } }
+                            let full_path_to_root = "../";
+                            { {/if } }
+                            // The page path (mdbook only gives us
+                            // access to the path to the Markdown file).
+                            let path = "ch02-02-data-types.md".replace(/\.md$/, ".html");
+                            for (let lang of langList.querySelectorAll("a")) {
+                                if (lang.id == "en") {
+                                    lang.href = `${full_path_to_root}${path}`;
+                                } else {
+                                    lang.href = `${full_path_to_root}${lang.id}/${path}`;
+                                }
+                            }
+                        </script>
+
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io/edit/main/src/ch02-02-data-types.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..."
+                            aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="data-types"><a class="header" href="#data-types">Data Types</a></h1>
+<p>Every value in Cairo is of a certain <em>data type</em>, which tells Cairo what kind of
+data is being specified so it knows how to work with that data. This section covers two subsets of data types: scalars and compounds.</p>
+<p>Keep in mind that Cairo is a <em>statically typed</em> language, which means that it
+must know the types of all variables at compile time. The compiler can usually infer the desired type based on the value and its usage. In cases when many types are possible, we can use a conversion method where we specify the desired output type.</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let x: felt252 = 3;
+    let y: u32 = x.try_into().unwrap();
+}
+</code></pre>
+<p>You’ll see different type annotations for other data types.</p>
+<h2 id="scalar-types"><a class="header" href="#scalar-types">Scalar Types</a></h2>
+<p>A <em>scalar</em> type represents a single value. Cairo has three primary scalar types:
+felts, integers, and booleans. You may recognize
+these from other programming languages. Let’s jump into how they work in Cairo.</p>
+<h3 id="felt-type"><a class="header" href="#felt-type">Felt Type</a></h3>
+<p>In Cairo, if you don't specify the type of a variable or argument, its type defaults to a field element, represented by the keyword <code>felt252</code>. In the context of Cairo, when we say “a field element” we mean an integer in the range \( 0 \leq x &lt; P \),
+where \( P \) is a very large prime number currently equal to \( {2^{251}} + 17 \cdot {2^{192}} + 1 \). When adding, subtracting, or multiplying, if the result falls outside the specified range of the prime number, an overflow (or underflow) occurs, and an appropriate multiple of \( P \) is added or subtracted to bring the result back within the range (i.e., the result is computed \( \mod P \) ).</p>
+<p>The most important difference between integers and field elements is division: Division of field elements (and therefore division in Cairo) is unlike regular CPUs division, where
+integer division \( \frac{x}{y} \) is defined as \( \left\lfloor \frac{x}{y} \right\rfloor \)
+where the integer part of the quotient is returned (so you get \( \frac{7}{3} = 2 \)) and it may or may not satisfy the equation \( \frac{x}{y} \cdot y == x \),
+depending on the divisibility of <code>x</code> by <code>y</code>.</p>
+<p>In Cairo, the result of \( \frac{x}{y} \) is defined to always satisfy the equation \( \frac{x}{y} \cdot y == x \). If y divides x as integers, you will get the expected result in Cairo (for example \( \frac{6}{2} \) will indeed result in <code>3</code>).
+But when y does not divide x, you may get a surprising result: for example, since \( 2 \cdot \frac{P + 1}{2} = P + 1 \equiv 1 \mod P \), the value of \( \frac{1}{2} \) in Cairo is \( \frac{P + 1}{2} \) (and not 0 or 0.5), as it satisfies the above equation.</p>
+<h3 id="integer-types"><a class="header" href="#integer-types">Integer Types</a></h3>
+<p>The felt252 type is a fundamental type that serves as the basis for creating all types in the core library.
+However, it is highly recommended for programmers to use the integer types instead of the <code>felt252</code> type whenever possible, as the <code>integer</code> types come with added security features that provide extra protection against potential vulnerabilities in the code, such as overflow and underflow checks. By using these integer types, programmers can ensure that their programs are more secure and less susceptible to attacks or other security threats.
+An <code>integer</code> is a number without a fractional component. This type declaration indicates the number of bits the programmer can use to store the integer.
+Table 3-1 shows the built-in integer types in Cairo. We can use any of these variants to declare the type of an integer value.</p>
+<div class="table-wrapper"><table><thead><tr><th>Length</th><th>Unsigned</th></tr></thead><tbody>
+<tr><td>8-bit</td><td><code>u8</code></td></tr>
+<tr><td>16-bit</td><td><code>u16</code></td></tr>
+<tr><td>32-bit</td><td><code>u32</code></td></tr>
+<tr><td>64-bit</td><td><code>u64</code></td></tr>
+<tr><td>128-bit</td><td><code>u128</code></td></tr>
+<tr><td>256-bit</td><td><code>u256</code></td></tr>
+<tr><td>32-bit</td><td><code>usize</code></td></tr>
+</tbody></table>
+</div><br>
+<div align="center"><span class="caption">Table 3-1: Integer Types in Cairo.</span></div>
+<p>Each variant has an explicit size. Note that for now, the <code>usize</code> type is just an alias for <code>u32</code>; however, it might be useful when in the future Cairo can be compiled to MLIR.
+As variables are unsigned, they can't contain a negative number. This code will cause the program to panic:</p>
+<pre><code class="language-cairo">fn sub_u8s(x: u8, y: u8) -&gt; u8 {
+    x - y
+}
+
+#[executable]
+fn main() {
+    sub_u8s(1, 3);
+}
+</code></pre>
+<p>All integer types previously mentioned fit into a <code>felt252</code>, except for <code>u256</code> which needs 4 more bits to be stored. Under the hood, <code>u256</code> is basically a struct with 2 fields: <code>u256 {low: u128, high: u128}</code>.</p>
+<p>Cairo also provides support for signed integers, starting with the prefix <code>i</code>. These integers can represent both positive and negative values, with sizes ranging from <code>i8</code> to <code>i128</code>.
+Each signed variant can store numbers from \( -({2^{n - 1}}) \) to \( {2^{n - 1}} - 1 \) inclusive, where <code>n</code> is the number of bits that variant uses. So an i8 can store numbers from \( -({2^7}) \) to \( {2^7} - 1 \), which equals <code>-128</code> to <code>127</code>.</p>
+<p>You can write integer literals in any of the forms shown in Table 3-2. Note
+that number literals that can be multiple numeric types allow a type suffix,
+such as <code>57_u8</code>, to designate the type.
+It is also possible to use a visual separator <code>_</code> for number literals, in order to improve code readability.</p>
+<div class="table-wrapper"><table><thead><tr><th>Numeric literals</th><th>Example</th></tr></thead><tbody>
+<tr><td>Decimal</td><td><code>98222</code></td></tr>
+<tr><td>Hex</td><td><code>0xff</code></td></tr>
+<tr><td>Octal</td><td><code>0o04321</code></td></tr>
+<tr><td>Binary</td><td><code>0b01</code></td></tr>
+</tbody></table>
+</div><br>
+<div align="center"><span class="caption">Table 3-2: Integer Literals in Cairo.</span></div>
+<p>So how do you know which type of integer to use? Try to estimate the max value your int can have and choose the good size.
+The primary situation in which you’d use <code>usize</code> is when indexing some sort of collection.</p>
+<h3 id="numeric-operations"><a class="header" href="#numeric-operations">Numeric Operations</a></h3>
+<p>Cairo supports the basic mathematical operations you’d expect for all the integer
+types: addition, subtraction, multiplication, division, and remainder. Integer
+division truncates toward zero to the nearest integer. The following code shows
+how you’d use each numeric operation in a <code>let</code> statement:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    // addition
+    let sum = 5_u128 + 10_u128;
+
+    // subtraction
+    let difference = 95_u128 - 4_u128;
+
+    // multiplication
+    let product = 4_u128 * 30_u128;
+
+    // division
+    let quotient = 56_u128 / 32_u128; //result is 1
+    let quotient = 64_u128 / 32_u128; //result is 2
+
+    // remainder
+    let remainder = 43_u128 % 5_u128; // result is 3
+}
+</code></pre>
+<p>Each expression in these statements uses a mathematical operator and evaluates
+to a single value, which is then bound to a variable.</p>
+<p><a href="./appendix-02-operators-and-symbols.html#operators">Appendix B</a> contains a list of all operators that Cairo provides.</p>
+<h3 id="the-boolean-type"><a class="header" href="#the-boolean-type">The Boolean Type</a></h3>
+<p>As in most other programming languages, a Boolean type in Cairo has two possible
+values: <code>true</code> and <code>false</code>. Booleans are one <code>felt252</code> in size. The Boolean type in
+Cairo is specified using <code>bool</code>. For example:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let t = true;
+
+    let f: bool = false; // with explicit type annotation
+}
+</code></pre>
+<p>When declaring a <code>bool</code> variable, it is mandatory to use either <code>true</code> or <code>false</code> literals as value. Hence, it is not allowed to use integer literals (i.e. <code>0</code> instead of false) for <code>bool</code> declarations.</p>
+<p>The main way to use Boolean values is through conditionals, such as an <code>if</code>
+expression. We’ll cover how <code>if</code> expressions work in Cairo in the <a href="./ch02-05-control-flow.html">"Control Flow"</a> section.</p>
+<h3 id="string-types"><a class="header" href="#string-types">String Types</a></h3>
+<p>Cairo doesn't have a native type for strings but provides two ways to handle them: short strings using simple quotes and ByteArray using double quotes.</p>
+<h4 id="short-strings"><a class="header" href="#short-strings">Short strings</a></h4>
+<p>A short string is an ASCII string where each character is encoded on one byte (see the <a href="https://www.asciitable.com/">ASCII table</a>). For example:</p>
+<ul>
+<li><code>'a'</code> is equivalent to <code>0x61</code></li>
+<li><code>'b'</code> is equivalent to <code>0x62</code></li>
+<li><code>'c'</code> is equivalent to <code>0x63</code></li>
+<li><code>0x616263</code> is equivalent to <code>'abc'</code>.</li>
+</ul>
+<p>Cairo uses the <code>felt252</code> for short strings. As the <code>felt252</code> is on 251 bits, a short string is limited to 31 characters (31 * 8 = 248 bits, which is the maximum multiple of 8 that fits in 251 bits).</p>
+<p>You can choose to represent your short string with an hexadecimal value like <code>0x616263</code> or by directly writing the string using simple quotes like <code>'abc'</code>, which is more convenient.</p>
+<p>Here are some examples of declaring short strings in Cairo:</p>
+<pre><code class="language-cairo"><span class="boring">#[executable]
+</span>fn main() {
+    let my_first_char = 'C';
+    let my_first_char_in_hex = 0x43;
+
+    let my_first_string = 'Hello world';
+<span class="boring">    let my_first_string_in_hex = 0x48656C6C6F20776F726C64;
+</span><span class="boring">
+</span><span class="boring">    let long_string: ByteArray = "this is a string which has more than 31 characters";
+</span><span class="boring">}
+</span></code></pre>
+<h4 id="byte-array-strings"><a class="header" href="#byte-array-strings">Byte Array Strings</a></h4>
+<p>Cairo's Core Library provides a <code>ByteArray</code> type for handling strings and byte sequences longer than short strings. This type is particularly useful for longer strings or when you need to perform operations on the string data.</p>
+<p>The <code>ByteArray</code> in Cairo is implemented as a combination of two parts:</p>
+<ol>
+<li>An array of <code>bytes31</code> words, where each word contains 31 bytes of data.</li>
+<li>A pending <code>felt252</code> word that acts as a buffer for bytes that haven't yet filled a complete <code>bytes31</code> word.</li>
+</ol>
+<p>This design enables efficient handling of byte sequences while aligning with Cairo's memory model and basic types. Developers interact with <code>ByteArray</code> through its provided methods and operators, abstracting away the internal implementation details.</p>
+<p>Unlike short strings, <code>ByteArray</code> strings can contain more than 31 characters and are written using double quotes:</p>
+<pre><code class="language-cairo"><span class="boring">#[executable]
+</span><span class="boring">fn main() {
+</span><span class="boring">    let my_first_char = 'C';
+</span><span class="boring">    let my_first_char_in_hex = 0x43;
+</span><span class="boring">
+</span><span class="boring">    let my_first_string = 'Hello world';
+</span><span class="boring">    let my_first_string_in_hex = 0x48656C6C6F20776F726C64;
+</span>
+<span class="boring">    let long_string: ByteArray = "this is a string which has more than 31 characters";
+</span><span class="boring">}
+</span></code></pre>
+<h2 id="compound-types"><a class="header" href="#compound-types">Compound Types</a></h2>
+<h3 id="the-tuple-type"><a class="header" href="#the-tuple-type">The Tuple Type</a></h3>
+<p>A <em>tuple</em> is a general way of grouping together a number of values with a
+variety of types into one compound type. Tuples have a fixed length: once
+declared, they cannot grow or shrink in size.</p>
+<p>We create a tuple by writing a comma-separated list of values inside
+parentheses. Each position in the tuple has a type, and the types of the
+different values in the tuple don’t have to be the same. We’ve added optional
+type annotations in this example:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let tup: (u32, u64, bool) = (10, 20, true);
+}
+</code></pre>
+<p>The variable <code>tup</code> binds to the entire tuple because a tuple is considered a
+single compound element. To get the individual values out of a tuple, we can
+use pattern matching to destructure a tuple value, like this:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let tup = (500, 6, true);
+
+    let (x, y, z) = tup;
+
+    if y == 6 {
+        println!("y is 6!");
+    }
+}
+</code></pre>
+<p>This program first creates a tuple and binds it to the variable <code>tup</code>. It then
+uses a pattern with <code>let</code> to take <code>tup</code> and turn it into three separate
+variables, <code>x</code>, <code>y</code>, and <code>z</code>. This is called <em>destructuring</em> because it breaks
+the single tuple into three parts. Finally, the program prints <code>y is 6!</code> as the value of
+<code>y</code> is <code>6</code>.</p>
+<p>We can also declare the tuple with value and types, and destructure it at the same time.
+For example:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let (x, y): (felt252, felt252) = (2, 3);
+}
+</code></pre>
+<h4 id="the-unit-type-"><a class="header" href="#the-unit-type-">The Unit Type ()</a></h4>
+<p>A <em>unit type</em> is a type which has only one value <code>()</code>.
+It is represented by a tuple with no elements.
+Its size is always zero, and it is guaranteed to not exist in the compiled code.</p>
+<p>You might be wondering why you would even need a unit type? In Cairo, everything is an expression, and an expression that returns nothing actually returns <code>()</code> implicitly.</p>
+<h3 id="the-fixed-size-array-type"><a class="header" href="#the-fixed-size-array-type">The Fixed Size Array Type</a></h3>
+<p>Another way to have a collection of multiple values is with a <em>fixed size array</em>. Unlike a tuple, every element of a fixed size array must have the same type.</p>
+<p>We write the values in a fixed-size array as a comma-separated list inside square brackets. The array’s type is written using square brackets with the type of each element, a semicolon, and then the number of elements in the array, like so:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let arr1: [u64; 5] = [1, 2, 3, 4, 5];
+}
+</code></pre>
+<p>In the type annotation <code>[u64; 5]</code>, <code>u64</code> specifies the type of each element, while <code>5</code> after the semicolon defines the array's length. This syntax ensures that the array always contains exactly 5 elements of type <code>u64</code>.</p>
+<p>Fixed size arrays are useful when you want to hardcode a potentially long sequence of data directly in your program. This type of array must not be confused with the <a href="./ch03-01-arrays.html"><code>Array&lt;T&gt;</code> type</a>, which is a similar collection type provided by the core library that <em>is</em> allowed to grow in size. If you're unsure whether to use a fixed size array or the <code>Array&lt;T&gt;</code> type, chances are that you are looking for the <code>Array&lt;T&gt;</code> type.</p>
+<p>Because their size is known at compile-time, fixed-size arrays don't require runtime memory management, which makes them more efficient than dynamically-sized arrays. Overall, they're more useful when you know the number of elements will not need to change. For example, they can be used to efficiently store lookup tables that won't change during runtime. If you were using the names of the month in a program, you would probably use a fixed size array rather than an <code>Array&lt;T&gt;</code> because you know it will always contain 12 elements:</p>
+<pre><code class="language-cairo">    let months = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+        'October', 'November', 'December',
+    ];
+
+</code></pre>
+<p>You can also initialize an array to contain the same value for each element by specifying the initial value, followed by a semicolon, and then the length of the array in square brackets, as shown here:</p>
+<pre><code class="language-cairo">    let a = [3; 5];
+</code></pre>
+<p>The array named <code>a</code> will contain <code>5</code> elements that will all be set to the value <code>3</code> initially. This is the same as writing <code>let a = [3, 3, 3, 3, 3];</code> but in a more concise way.</p>
+<h4 id="accessing-fixed-size-arrays-elements"><a class="header" href="#accessing-fixed-size-arrays-elements">Accessing Fixed Size Arrays Elements</a></h4>
+<p>As a fixed-size array is a data structure known at compile time, it's content is represented as a sequence of values in the program bytecode. Accessing an element of that array will simply read that value from the program bytecode efficiently.</p>
+<p>We have two different ways of accessing fixed size array elements:</p>
+<ul>
+<li>Deconstructing the array into multiple variables, as we did with tuples.</li>
+</ul>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let my_arr = [1, 2, 3, 4, 5];
+
+    // Accessing elements of a fixed-size array by deconstruction
+    let [a, b, c, _, _] = my_arr;
+    println!("c: {}", c); // c: 3
+}
+</code></pre>
+<ul>
+<li>Converting the array to a <a href="./ch03-01-arrays.html#Span">Span</a>, that supports indexing. This operation is <em>free</em> and doesn't incur any runtime cost.</li>
+</ul>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let my_arr = [1, 2, 3, 4, 5];
+
+    // Accessing elements of a fixed-size array by index
+    let my_span = my_arr.span();
+    println!("my_span[2]: {}", my_span[2]); // my_span[2]: 3
+}
+</code></pre>
+<p>Note that if we plan to repeatedly access the array, then it makes sense to call <code>.span()</code> only once and keep it available throughout the accesses.</p>
+<h2 id="type-conversion"><a class="header" href="#type-conversion">Type Conversion</a></h2>
+<p>Cairo addresses conversion between types by using the <code>try_into</code> and <code>into</code> methods provided by the <code>TryInto</code> and <code>Into</code> traits from the core library. There are numerous implementations of these traits within the standard library for conversion between types, and they can be implemented for <a href="./ch05-02-an-example-program-using-structs.html#conversions-of-custom-types">custom types as well</a>.</p>
+<h3 id="into"><a class="header" href="#into">Into</a></h3>
+<p>The <code>Into</code> trait allows for a type to define how to convert itself into another type. It can be used for type conversion when success is guaranteed, such as when the source type is smaller than the destination type.</p>
+<p>To perform the conversion, call <code>var.into()</code> on the source value to convert it to another type. The new variable's type must be explicitly defined, as demonstrated in the example below.</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let my_u8: u8 = 10;
+    let my_u16: u16 = my_u8.into();
+    let my_u32: u32 = my_u16.into();
+    let my_u64: u64 = my_u32.into();
+    let my_u128: u128 = my_u64.into();
+
+    let my_felt252 = 10;
+    // As a felt252 is smaller than a u256, we can use the into() method
+    let my_u256: u256 = my_felt252.into();
+    let my_other_felt252: felt252 = my_u8.into();
+    let my_third_felt252: felt252 = my_u16.into();
+}
+</code></pre>
+<h3 id="tryinto"><a class="header" href="#tryinto">TryInto</a></h3>
+<p>Similar to <code>Into</code>, <code>TryInto</code> is a generic trait for converting between types. Unlike <code>Into</code>, the <code>TryInto</code> trait is used for fallible conversions, and as such, returns <a href="./ch06-01-enums.html#the-option-enum-and-its-advantages">Option&lt;T&gt;</a>. An example of a fallible conversion is when the target type might not fit the source value.</p>
+<p>Also similar to <code>Into</code> is the process to perform the conversion; just call <code>var.try_into()</code> on the source value to convert it to another type. The new variable's type also must be explicitly defined, as demonstrated in the example below.</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let my_u256: u256 = 10;
+
+    // Since a u256 might not fit in a felt252, we need to unwrap the Option&lt;T&gt; type
+    let my_felt252: felt252 = my_u256.try_into().unwrap();
+    let my_u128: u128 = my_felt252.try_into().unwrap();
+    let my_u64: u64 = my_u128.try_into().unwrap();
+    let my_u32: u32 = my_u64.try_into().unwrap();
+    let my_u16: u16 = my_u32.try_into().unwrap();
+    let my_u8: u8 = my_u16.try_into().unwrap();
+
+    let my_large_u16: u16 = 2048;
+    let my_large_u8: u8 = my_large_u16.try_into().unwrap(); // panics with 'Option::unwrap failed.'
+}
+</code></pre>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch02-02-data-types&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;In general, a **signed** number with *n* bits can represent numbers between -(2&lt;sup&gt;n - 1&lt;/sup&gt;) and 2&lt;sup&gt;n - 1&lt;/sup&gt; - 1. For **unsigned** numbers the range is from 0 to 2&lt;sup&gt;n&lt;/sup&gt; - 1.\n&quot;,&quot;id&quot;:&quot;4fd0bdba-6ef4-44ad-b552-953b09b814d7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;2&lt;sup&gt;127&lt;/sup&gt; - 1&quot;},&quot;prompt&quot;:{&quot;answerIndex&quot;:3,&quot;distractors&quot;:[&quot;2&lt;sup&gt;127&lt;/sup&gt;&quot;,&quot;2&lt;sup&gt;128&lt;/sup&gt;&quot;,&quot;This type can hold any number.&quot;],&quot;prompt&quot;:&quot;The largest number representable by the type `i128` is:&quot;}},{&quot;context&quot;:&quot;`u8` is an unsigned integer type which cannot contain negative numbers.\n&quot;,&quot;id&quot;:&quot;4d5cab51-6eca-4aa0-8666-993acdd85c8d&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;It will always panic.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;It will return `-1`.&quot;,&quot;Compiler will issue a warning about underflow.&quot;],&quot;prompt&quot;:&quot;If `x : u8 = 0`, what will happen when computing `x - 1`?&quot;}},{&quot;context&quot;:&quot;The type `felt32` does not exist. Proper field type is `felt252`.\n&quot;,&quot;id&quot;:&quot;dc1e6fa1-0d7b-479e-98ac-6a514d60eb1b&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:2},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[executable]\nfn main() {\n  let x: felt32 = 2;\n  println!(\&quot;{x}\&quot;);\n}\n&quot;}}]}"></div>
+<script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <a rel="prev" href="ch02-01-variables-and-mutability.html" class="mobile-nav-chapters previous"
+                            title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+
+                        <a rel="next" href="ch02-03-functions.html" class="mobile-nav-chapters next"
+                            title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                <a rel="prev" href="ch02-01-variables-and-mutability.html" class="nav-chapters previous" title="Previous chapter"
+                    aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                <a rel="next" href="ch02-03-functions.html" class="nav-chapters next" title="Next chapter"
+                    aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </nav>
+
+        </div>
+
+
+        <!-- Google Analytics Tag -->
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'G-WY42TERK5P', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+        <script>
+            window.rootPath = "";
+        </script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/chat.js"></script>
+        <script src="theme/js/index.mjs"></script>
+        <script src="theme/js/version-switcher.js"></script>
+
+
+    </div>
+</body>
+
+</html>

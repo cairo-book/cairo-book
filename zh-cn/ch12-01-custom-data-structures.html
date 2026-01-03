@@ -1,0 +1,857 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" class="sidebar-visible no-js light">
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Custom Data Structures - The Cairo Programming Language</title>
+
+
+    <!-- Custom HTML head -->
+
+    <meta name="description" content="The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/css/last-changed.css">
+    <link rel="stylesheet" href="theme/css/chat.css">
+    <link rel="stylesheet" href="theme/css/version-switcher.css">
+
+    <!-- MathJax -->
+    <script async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+    <link rel="canonical" id="canonical-link" href="" />
+    <script>
+        (function () {
+            var path = "ch12-01-custom-data-structures.md";
+            var canonicalPath;
+            
+            // Special handling for different cases
+            if (path === "" || path === "index.md") {
+                // Homepage should not have index.html
+                canonicalPath = "";
+            } else {
+                // Other pages: replace .md with .html
+                canonicalPath = path.replace(/\.md$/, ".html");
+            }
+            
+            var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
+            
+            // Remove trailing slash if present (except for root)
+            if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
+                canonicalUrl = canonicalUrl.slice(0, -1);
+            }
+            
+            document.getElementById("canonical-link").href = canonicalUrl;
+        })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M6M97KJP');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6M97KJP" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ZJLBV4KE2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-0ZJLBV4KE2');
+            gtag('config', 'G-WY42TERK5P')
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">The Cairo Book</a></li><li class="chapter-item expanded affix "><a href="ch00-01-foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Cairo Programming Language</li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-proving-a-prime-number.html"><strong aria-hidden="true">1.3.</strong> Proving That A Number Is Prime</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-common-programming-concepts.html"><strong aria-hidden="true">2.</strong> Common Programming Concepts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-variables-and-mutability.html"><strong aria-hidden="true">2.1.</strong> Variables and Mutability</a></li><li class="chapter-item expanded "><a href="ch02-02-data-types.html"><strong aria-hidden="true">2.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="ch02-03-functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="ch02-04-comments.html"><strong aria-hidden="true">2.4.</strong> Comments</a></li><li class="chapter-item expanded "><a href="ch02-05-control-flow.html"><strong aria-hidden="true">2.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-common-collections.html"><strong aria-hidden="true">3.</strong> Common Collections</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-arrays.html"><strong aria-hidden="true">3.1.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="ch03-02-dictionaries.html"><strong aria-hidden="true">3.2.</strong> Dictionaries</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Understanding Ownership</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> What is Ownership?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-snapshots.html"><strong aria-hidden="true">4.2.</strong> References and Snapshots</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-using-structs-to-structure-related-data.html"><strong aria-hidden="true">5.</strong> Using Structs to Structure Related Data</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-and-instantiating-structs.html"><strong aria-hidden="true">5.1.</strong> Defining and Instantiating Structs</a></li><li class="chapter-item expanded "><a href="ch05-02-an-example-program-using-structs.html"><strong aria-hidden="true">5.2.</strong> An Example Program Using Structs</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Method Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums-and-pattern-matching.html"><strong aria-hidden="true">6.</strong> Enums and Pattern Matching</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-enums.html"><strong aria-hidden="true">6.1.</strong> Enums</a></li><li class="chapter-item expanded "><a href="ch06-02-the-match-control-flow-construct.html"><strong aria-hidden="true">6.2.</strong> The Match Control Flow Construct</a></li><li class="chapter-item expanded "><a href="ch06-03-concise-control-flow-with-if-let-and-while-let.html"><strong aria-hidden="true">6.3.</strong> Concise Control Flow with if let and while let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-cairo-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Managing Cairo Projects with Packages, Crates and Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Packages and Crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope.html"><strong aria-hidden="true">7.2.</strong> Defining Modules to Control Scope</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Paths for Referring to an Item in the Module Tree</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Bringing Paths into Scope with the use Keyword</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Separating Modules into Different Files</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-generic-types-and-traits.html"><strong aria-hidden="true">8.</strong> Generic Types and Traits</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-generic-data-types.html"><strong aria-hidden="true">8.1.</strong> Generic Data Types</a></li><li class="chapter-item expanded "><a href="ch08-02-traits-in-cairo.html"><strong aria-hidden="true">8.2.</strong> Traits in Cairo</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Unrecoverable Errors with panic</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors.html"><strong aria-hidden="true">9.2.</strong> Recoverable Errors with Result</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-testing-cairo-programs.html"><strong aria-hidden="true">10.</strong> Testing Cairo Programs</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-how-to-write-tests.html"><strong aria-hidden="true">10.1.</strong> How To Write Tests</a></li><li class="chapter-item expanded "><a href="ch10-02-test-organization.html"><strong aria-hidden="true">10.2.</strong> Test Organization</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-functional-features.html"><strong aria-hidden="true">11.</strong> Functional Language Features: Iterators and Closures</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-closures.html"><strong aria-hidden="true">11.1.</strong> Closures: Anonymous Functions that Capture Their Environment</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-advanced-features.html"><strong aria-hidden="true">12.</strong> Advanced Cairo Features</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-custom-data-structures.html"><strong aria-hidden="true">12.1.</strong> Custom Data Structures</a></li><li class="chapter-item expanded "><a href="ch12-02-smart-pointers.html"><strong aria-hidden="true">12.2.</strong> Smart Pointers</a></li><li class="chapter-item expanded "><a href="ch12-09-deref-coercion.html"><strong aria-hidden="true">12.3.</strong> Deref Coercion</a></li><li class="chapter-item expanded "><a href="ch12-10-associated-items.html"><strong aria-hidden="true">12.4.</strong> Associated Items</a></li><li class="chapter-item expanded "><a href="ch12-03-operator-overloading.html"><strong aria-hidden="true">12.5.</strong> Operator Overloading</a></li><li class="chapter-item expanded "><a href="ch12-04-hash.html"><strong aria-hidden="true">12.6.</strong> Working with Hashes</a></li><li class="chapter-item expanded "><a href="ch12-05-macros.html"><strong aria-hidden="true">12.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="ch12-10-procedural-macros.html"><strong aria-hidden="true">12.8.</strong> Procedural Macros</a></li><li class="chapter-item expanded "><a href="ch12-06-inlining-in-cairo.html"><strong aria-hidden="true">12.9.</strong> Inlining in Cairo</a></li><li class="chapter-item expanded "><a href="ch12-08-printing.html"><strong aria-hidden="true">12.10.</strong> Printing</a></li><li class="chapter-item expanded "><a href="ch12-10-arithmetic-circuits.html"><strong aria-hidden="true">12.11.</strong> Arithmetic Circuits</a></li><li class="chapter-item expanded "><a href="ch12-11-offloading-computations-with-oracles.html"><strong aria-hidden="true">12.12.</strong> Offloading Computations with Oracles</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">13.</strong> Appendix (Cairo)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">13.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="appendix-02-operators-and-symbols.html"><strong aria-hidden="true">13.2.</strong> B - Operators and Symbols</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">13.3.</strong> C - Derivable Traits</a></li><li class="chapter-item expanded "><a href="appendix-04-cairo-prelude.html"><strong aria-hidden="true">13.4.</strong> D - The Cairo Prelude</a></li><li class="chapter-item expanded "><a href="appendix-05-common-error-messages.html"><strong aria-hidden="true">13.5.</strong> E - Common Error Messages</a></li><li class="chapter-item expanded "><a href="appendix-06-useful-development-tools.html"><strong aria-hidden="true">13.6.</strong> F - Useful Development Tools</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Smart Contracts in Cairo</li><li class="chapter-item expanded "><a href="ch100-00-introduction-to-smart-contracts.html"><strong aria-hidden="true">14.</strong> Introduction to Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch100-01-contracts-classes-and-instances.html"><strong aria-hidden="true">14.1.</strong> Starknet contract classes and instances</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-00-building-starknet-smart-contracts.html"><strong aria-hidden="true">15.</strong> Building Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch101-01-starknet-types.html"><strong aria-hidden="true">15.1.</strong> Starknet Types</a></li><li class="chapter-item expanded "><a href="ch101-01-00-contract-storage.html"><strong aria-hidden="true">15.2.</strong> Contract Storage</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch101-01-01-storage-mappings.html"><strong aria-hidden="true">15.2.1.</strong> Storage Mappings</a></li><li class="chapter-item "><a href="ch101-01-02-storage-vecs.html"><strong aria-hidden="true">15.2.2.</strong> Storage Vecs</a></li></ol></li><li class="chapter-item expanded "><a href="ch101-02-contract-functions.html"><strong aria-hidden="true">15.3.</strong> Contract Functions</a></li><li class="chapter-item expanded "><a href="ch101-03-contract-events.html"><strong aria-hidden="true">15.4.</strong> Contract Events</a></li></ol></li><li class="chapter-item expanded "><a href="ch102-00-starknet-contract-interactions.html"><strong aria-hidden="true">16.</strong> Starknet Contract Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch102-01-contract-class-abi.html"><strong aria-hidden="true">16.1.</strong> Contract Class ABI</a></li><li class="chapter-item expanded "><a href="ch102-02-interacting-with-another-contract.html"><strong aria-hidden="true">16.2.</strong> Interacting with Another Contract</a></li><li class="chapter-item expanded "><a href="ch102-03-executing-code-from-another-class.html"><strong aria-hidden="true">16.3.</strong> Executing Code from Another Class</a></li><li class="chapter-item expanded "><a href="ch102-04-serialization-of-cairo-types.html"><strong aria-hidden="true">16.4.</strong> Serialization of Cairo types</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-00-building-advanced-starknet-smart-contracts.html"><strong aria-hidden="true">17.</strong> Building Advanced Starknet Smart Contracts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch103-01-optimizing-storage-costs.html"><strong aria-hidden="true">17.1.</strong> Optimizing Storage Costs</a></li><li class="chapter-item expanded "><a href="ch103-02-00-composability-and-components.html"><strong aria-hidden="true">17.2.</strong> Composability and Components</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-02-01-under-the-hood.html"><strong aria-hidden="true">17.2.1.</strong> Under the Hood</a></li><li class="chapter-item "><a href="ch103-02-02-component-dependencies.html"><strong aria-hidden="true">17.2.2.</strong> Component Dependencies</a></li><li class="chapter-item "><a href="ch103-02-03-testing-components.html"><strong aria-hidden="true">17.2.3.</strong> Testing Components</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-03-upgradeability.html"><strong aria-hidden="true">17.3.</strong> Upgradeability</a></li><li class="chapter-item expanded "><a href="ch103-04-L1-L2-messaging.html"><strong aria-hidden="true">17.4.</strong> L1 &lt;&gt; L2 Messaging</a></li><li class="chapter-item expanded "><a href="ch103-05-oracle-interactions.html"><strong aria-hidden="true">17.5.</strong> Oracle Interactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-05-01-price-feeds.html"><strong aria-hidden="true">17.5.1.</strong> Price Feeds</a></li><li class="chapter-item "><a href="ch103-05-02-randomness.html"><strong aria-hidden="true">17.5.2.</strong> Randomness</a></li></ol></li><li class="chapter-item expanded "><a href="ch103-06-00-other-examples.html"><strong aria-hidden="true">17.6.</strong> Other Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch103-06-01-deploying-and-interacting-with-a-voting-contract.html"><strong aria-hidden="true">17.6.1.</strong> Deploying and Interacting with a Voting Contract</a></li><li class="chapter-item "><a href="ch103-06-02-working-with-erc20-token.html"><strong aria-hidden="true">17.6.2.</strong> Working with ERC20 Token</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch104-00-starknet-smart-contracts-security.html"><strong aria-hidden="true">18.</strong> Starknet Smart Contracts Security</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch104-01-general-recommendations.html"><strong aria-hidden="true">18.1.</strong> General Recommendations</a></li><li class="chapter-item expanded "><a href="ch104-02-testing-smart-contracts.html"><strong aria-hidden="true">18.2.</strong> Testing Smart Contracts</a></li><li class="chapter-item expanded "><a href="ch104-03-static-analysis-tools.html"><strong aria-hidden="true">18.3.</strong> Static Analysis Tools</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-000.html"><strong aria-hidden="true">19.</strong> Appendix (Starknet)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-08-system-calls.html"><strong aria-hidden="true">19.1.</strong> A - System Calls</a></li><li class="chapter-item expanded "><a href="appendix-09-sierra.html"><strong aria-hidden="true">19.2.</strong> B - Sierra</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Cairo VM</li><li class="chapter-item expanded "><a href="ch200-introduction.html"><strong aria-hidden="true">20.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="ch201-architecture.html"><strong aria-hidden="true">21.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="ch202-00-memory.html"><strong aria-hidden="true">22.</strong> Memory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch202-01-non-deterministic-read-only-memory.html"><strong aria-hidden="true">22.1.</strong> Non-Deterministic Read-only Memory</a></li><li class="chapter-item expanded "><a href="ch202-02-segments.html"><strong aria-hidden="true">22.2.</strong> Segments and Relocation</a></li></ol></li><li class="chapter-item expanded "><a href="ch203-00-execution-model.html"><strong aria-hidden="true">23.</strong> Execution Model</a></li><li class="chapter-item expanded "><a href="ch204-00-builtins.html"><strong aria-hidden="true">24.</strong> Builtins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch204-01-how-builtins-work.html"><strong aria-hidden="true">24.1.</strong> How Builtins Work</a></li><li class="chapter-item expanded "><a href="ch204-02-builtins-list.html"><strong aria-hidden="true">24.2.</strong> Builtins List</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ch204-02-00-output.html"><strong aria-hidden="true">24.2.1.</strong> Output</a></li><li class="chapter-item "><a href="ch204-02-01-pedersen.html"><strong aria-hidden="true">24.2.2.</strong> Pedersen</a></li><li class="chapter-item "><a href="ch204-02-02-range-check.html"><strong aria-hidden="true">24.2.3.</strong> Range Check</a></li><li class="chapter-item "><a href="ch204-02-03-ecdsa.html"><strong aria-hidden="true">24.2.4.</strong> ECDSA</a></li><li class="chapter-item "><a href="ch204-02-04-bitwise.html"><strong aria-hidden="true">24.2.5.</strong> Bitwise</a></li><li class="chapter-item "><a href="ch204-02-05-ec-op.html"><strong aria-hidden="true">24.2.6.</strong> EC OP</a></li><li class="chapter-item "><a href="ch204-02-06-keccak.html"><strong aria-hidden="true">24.2.7.</strong> Keccak</a></li><li class="chapter-item "><a href="ch204-02-07-poseidon.html"><strong aria-hidden="true">24.2.8.</strong> Poseidon</a></li><li class="chapter-item "><a href="ch204-02-08-mod-builtin.html"><strong aria-hidden="true">24.2.9.</strong> Mod Builtin</a></li><li class="chapter-item "><a href="ch204-02-11-segment-arena.html"><strong aria-hidden="true">24.2.10.</strong> Segment Arena</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="ch205-00-hints.html"><strong aria-hidden="true">25.</strong> Hints</a></li><li class="chapter-item expanded "><a href="ch206-00-runner.html"><strong aria-hidden="true">26.</strong> Runner</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">26.1.</strong> Program</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.1.1.</strong> Program Artifacts</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.1.2.</strong> Program Parsing</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.2.</strong> Runner Mode</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.2.1.</strong> Execution Mode</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.2.2.</strong> Proof Mode</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.3.</strong> Output</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">26.3.1.</strong> Cairo PIE</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.2.</strong> Memory File</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.3.</strong> Trace file</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.4.</strong> AIR public input</div></li><li class="chapter-item "><div><strong aria-hidden="true">26.3.5.</strong> AIR private input</div></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Tracer</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Implementations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Resources</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                            aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                            aria-label="Change theme" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Cairo Programming Language</h1>
+
+
+                    <div class="right-buttons">
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://cairo-lang.org" class="menu-cairo-home" title="Cairo Home"
+                                aria-label="Cairo Home">
+                                <img src="/icons/Cairo_logo_500x500.png" alt="Cairo Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Cairo Home</span>
+                            </a>
+                        </div>
+                        <div class="menu-cairo-home-wrapper">
+                            <a href="https://starknet.io" class="menu-cairo-home" title="Starknet" aria-label="Starknet">
+                                <img src="/icons/SN_logo.png" alt="Starknet Logo"
+                                    class="cairo-logo">
+                                <span class="menu-cairo-home-text">Starknet</span>
+                            </a>
+                        </div>
+                        <button id="language-toggle" class="icon-button" type="button" title="Change language"
+                            aria-label="Change language" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="language-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="language-list" class="theme-popup" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme">
+                                    <a id="en">English</a>
+                                </button></li>
+                        </ul>
+                        <script>
+                            let langToggle = document.getElementById("language-toggle");
+                            let langList = document.getElementById("language-list");
+                            langToggle.addEventListener("click", (event) => {
+                                langList.style.display = langList.style.display == "block" ? "none" : "block";
+                            });
+                            let selectedLang = document.getElementById("zh-cn");
+                            selectedLang.parentNode.classList.add("theme-selected");
+
+                            // The path to the root, taking the current
+                            // language into account.
+                            { { #if(eq language "en") } }
+                            let full_path_to_root = "";
+                            { {else } }
+                            let full_path_to_root = "../";
+                            { {/if } }
+                            // The page path (mdbook only gives us
+                            // access to the path to the Markdown file).
+                            let path = "ch12-01-custom-data-structures.md".replace(/\.md$/, ".html");
+                            for (let lang of langList.querySelectorAll("a")) {
+                                if (lang.id == "en") {
+                                    lang.href = `${full_path_to_root}${path}`;
+                                } else {
+                                    lang.href = `${full_path_to_root}${lang.id}/${path}`;
+                                }
+                            }
+                        </script>
+
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io/edit/main/src/ch12-01-custom-data-structures.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..."
+                            aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="custom-data-structures"><a class="header" href="#custom-data-structures">Custom Data Structures</a></h1>
+<p>When you first start programming in Cairo, you'll likely want to use arrays
+(<code>Array&lt;T&gt;</code>) to store collections of data. However, you will quickly realize
+that arrays have one big limitation - the data stored in them is immutable. Once
+you append a value to an array, you can't modify it.</p>
+<p>This can be frustrating when you want to use a mutable data structure. For
+example, say you're making a game where the players have a level, and they can
+level up. You might try to store the level of the players in an array:</p>
+<pre><code class="language-cairo noplayground">    let mut level_players = array![5, 1, 10];
+</code></pre>
+<p>But then you realize you can't increase the level at a specific index once it's
+set. If a player dies, you cannot remove it from the array unless he happens to
+be in the first position.</p>
+<p>Fortunately, Cairo provides a handy built-in <a href="./ch03-02-dictionaries.html">dictionary type</a> called <code>Felt252Dict&lt;T&gt;</code> that allows us to
+simulate the behavior of mutable data structures. Let's first explore how to create a struct that contains, among others, a <code>Felt252Dict&lt;T&gt;</code>.</p>
+<blockquote>
+<p>Note: Several concepts used in this chapter were already presented earlier in the book. We recommend checking out the following chapters if you need to revise them:
+<a href="ch05-00-using-structs-to-structure-related-data.html">Structs</a>,
+<a href="./ch05-03-method-syntax.html">Methods</a>,
+<a href="./ch08-00-generic-types-and-traits.html">Generic types</a>,
+<a href="./ch08-02-traits-in-cairo.html">Traits</a>.</p>
+</blockquote>
+<h2 id="dictionaries-as-struct-members"><a class="header" href="#dictionaries-as-struct-members">Dictionaries as Struct Members</a></h2>
+<p>Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom <em>user database</em> that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:</p>
+<pre><code class="language-cairo noplayground">struct UserDatabase&lt;T&gt; {
+    users_updates: u64,
+    balances: Felt252Dict&lt;T&gt;,
+}
+
+trait UserDatabaseTrait&lt;T&gt; {
+    fn new() -&gt; UserDatabase&lt;T&gt;;
+    fn update_user&lt;+Drop&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252, balance: T);
+    fn get_balance&lt;+Copy&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252) -&gt; T;
+}
+</code></pre>
+<p>Our new type <code>UserDatabase&lt;T&gt;</code> represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are:</p>
+<ul>
+<li><code>users_updates</code>, the number of users updates in the dictionary.</li>
+<li><code>balances</code>, a mapping of each user to its balance.</li>
+</ul>
+<p>The database core functionality is defined by <code>UserDatabaseTrait</code>. The following methods are defined:</p>
+<ul>
+<li><code>new</code> for easily creating new <code>UserDatabase</code> types.</li>
+<li><code>update_user</code> to update the balance of users in the database.</li>
+<li><code>get_balance</code> to find user's balance in the database.</li>
+</ul>
+<p>The only remaining step is to implement each of the methods in <code>UserDatabaseTrait</code>, but since we are working with <a href="./ch08-00-generic-types-and-traits.html">Generic types</a> we also need to correctly establish the requirements of <code>T</code> so it can be a valid <code>Felt252Dict&lt;T&gt;</code> value type:</p>
+<ol>
+<li><code>T</code> should implement the <code>Copy&lt;T&gt;</code> since it's required for getting values from a <code>Felt252Dict&lt;T&gt;</code>.</li>
+<li>All value types of a dictionary implement the <code>Felt252DictValue&lt;T&gt;</code>, our generic type should do as well.</li>
+<li>To insert values, <code>Felt252DictTrait&lt;T&gt;</code> requires all value types to be droppable (implement the <code>Drop&lt;T&gt;</code> trait).</li>
+</ol>
+<p>The implementation, with all restrictions in place, would be as follows:</p>
+<pre><code class="language-cairo noplayground">impl UserDatabaseImpl&lt;T, +Felt252DictValue&lt;T&gt;&gt; of UserDatabaseTrait&lt;T&gt; {
+    // Creates a database
+    fn new() -&gt; UserDatabase&lt;T&gt; {
+        UserDatabase { users_updates: 0, balances: Default::default() }
+    }
+
+    // Get the user's balance
+    fn get_balance&lt;+Copy&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252) -&gt; T {
+        self.balances.get(name)
+    }
+
+    // Add a user
+    fn update_user&lt;+Drop&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252, balance: T) {
+        self.balances.insert(name, balance);
+        self.users_updates += 1;
+    }
+}
+</code></pre>
+<p>Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a <code>UserDatabase&lt;T&gt;</code> go out of scope, since it doesn't implement the <code>Drop&lt;T&gt;</code> trait, nor the <code>Destruct&lt;T&gt;</code> trait.
+Since it has a <code>Felt252Dict&lt;T&gt;</code> as a member, it cannot be dropped, so we are forced to implement the <code>Destruct&lt;T&gt;</code> trait manually (refer to the <a href="ch04-01-what-is-ownership.html#the-drop-trait">Ownership</a> chapter for more information).
+Using <code>#[derive(Destruct)]</code> on top of the <code>UserDatabase&lt;T&gt;</code> definition won't work because of the use of <a href="./ch08-00-generic-types-and-traits.html">Generic types</a> in the struct definition. We need to code the <code>Destruct&lt;T&gt;</code> trait implementation by ourselves:</p>
+<pre><code class="language-cairo noplayground">impl UserDatabaseDestruct&lt;T, +Drop&lt;T&gt;, +Felt252DictValue&lt;T&gt;&gt; of Destruct&lt;UserDatabase&lt;T&gt;&gt; {
+    fn destruct(self: UserDatabase&lt;T&gt;) nopanic {
+        self.balances.squash();
+    }
+}
+</code></pre>
+<p>Implementing <code>Destruct&lt;T&gt;</code> for <code>UserDatabase</code> was our last step to get a fully functional database. We can now try it out:</p>
+<pre><code class="language-cairo"><span class="boring">use core::dict::Felt252Dict;
+</span><span class="boring">
+</span><span class="boring">struct UserDatabase&lt;T&gt; {
+</span><span class="boring">    users_updates: u64,
+</span><span class="boring">    balances: Felt252Dict&lt;T&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">trait UserDatabaseTrait&lt;T&gt; {
+</span><span class="boring">    fn new() -&gt; UserDatabase&lt;T&gt;;
+</span><span class="boring">    fn update_user&lt;+Drop&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252, balance: T);
+</span><span class="boring">    fn get_balance&lt;+Copy&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252) -&gt; T;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl UserDatabaseImpl&lt;T, +Felt252DictValue&lt;T&gt;&gt; of UserDatabaseTrait&lt;T&gt; {
+</span><span class="boring">    // Creates a database
+</span><span class="boring">    fn new() -&gt; UserDatabase&lt;T&gt; {
+</span><span class="boring">        UserDatabase { users_updates: 0, balances: Default::default() }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Get the user's balance
+</span><span class="boring">    fn get_balance&lt;+Copy&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252) -&gt; T {
+</span><span class="boring">        self.balances.get(name)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Add a user
+</span><span class="boring">    fn update_user&lt;+Drop&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252, balance: T) {
+</span><span class="boring">        self.balances.insert(name, balance);
+</span><span class="boring">        self.users_updates += 1;
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl UserDatabaseDestruct&lt;T, +Drop&lt;T&gt;, +Felt252DictValue&lt;T&gt;&gt; of Destruct&lt;UserDatabase&lt;T&gt;&gt; {
+</span><span class="boring">    fn destruct(self: UserDatabase&lt;T&gt;) nopanic {
+</span><span class="boring">        self.balances.squash();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[executable]
+fn main() {
+    let mut db = UserDatabaseTrait::&lt;u64&gt;::new();
+
+    db.update_user('Alex', 100);
+    db.update_user('Maria', 80);
+
+    db.update_user('Alex', 40);
+    db.update_user('Maria', 0);
+
+    let alex_latest_balance = db.get_balance('Alex');
+    let maria_latest_balance = db.get_balance('Maria');
+
+    assert!(alex_latest_balance == 40, "Expected 40");
+    assert!(maria_latest_balance == 0, "Expected 0");
+}
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<h2 id="simulating-a-dynamic-array-with-dicts"><a class="header" href="#simulating-a-dynamic-array-with-dicts">Simulating a Dynamic Array with Dicts</a></h2>
+<p>First, let's think about how we want our mutable dynamic array to behave. What
+operations should it support?</p>
+<p>It should:</p>
+<ul>
+<li>Allow us to append items at the end.</li>
+<li>Let us access any item by index.</li>
+<li>Allow setting the value of an item at a specific index.</li>
+<li>Return the current length.</li>
+</ul>
+<p>We can define this interface in Cairo like:</p>
+<pre><code class="language-cairo noplayground">trait MemoryVecTrait&lt;V, T&gt; {
+    fn new() -&gt; V;
+    fn get(ref self: V, index: usize) -&gt; Option&lt;T&gt;;
+    fn at(ref self: V, index: usize) -&gt; T;
+    fn push(ref self: V, value: T) -&gt; ();
+    fn set(ref self: V, index: usize, value: T);
+    fn len(self: @V) -&gt; usize;
+}
+</code></pre>
+<p>This provides a blueprint for the implementation of our dynamic array. We named
+it <em>MemoryVec</em> as it is similar to the <code>Vec&lt;T&gt;</code> data structure in Rust.</p>
+<blockquote>
+<p>Note: The core library of Cairo already includes a <code>Vec&lt;T&gt;</code> data structure, strictly used as a storage type in smart contracts.
+To differentiate our data structure from the core library's one, we named our implementation <em>MemoryVec</em>.</p>
+</blockquote>
+<h3 id="implementing-a-dynamic-array-in-cairo"><a class="header" href="#implementing-a-dynamic-array-in-cairo">Implementing a Dynamic Array in Cairo</a></h3>
+<p>To store our data, we'll use a <code>Felt252Dict&lt;T&gt;</code> which maps index numbers (felts)
+to values. We'll also store a separate <code>len</code> field to track the length.</p>
+<p>Here is what our struct looks like. We wrap the type <code>T</code> inside <code>Nullable</code>
+pointer to allow using any type <code>T</code> in our data structure, as explained in the
+<a href="./ch03-02-dictionaries.html#dictionaries-of-types-not-supported-natively">Dictionaries</a> section:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">
+</span><span class="boring">use core::dict::Felt252Dict;
+</span><span class="boring">use core::nullable::NullableTrait;
+</span><span class="boring">use core::num::traits::WrappingAdd;
+</span><span class="boring">
+</span><span class="boring">trait MemoryVecTrait&lt;V, T&gt; {
+</span><span class="boring">    fn new() -&gt; V;
+</span><span class="boring">    fn get(ref self: V, index: usize) -&gt; Option&lt;T&gt;;
+</span><span class="boring">    fn at(ref self: V, index: usize) -&gt; T;
+</span><span class="boring">    fn push(ref self: V, value: T) -&gt; ();
+</span><span class="boring">    fn set(ref self: V, index: usize, value: T);
+</span><span class="boring">    fn len(self: @V) -&gt; usize;
+</span><span class="boring">}
+</span><span class="boring">
+</span>struct MemoryVec&lt;T&gt; {
+    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,
+    len: usize,
+}
+<span class="boring">
+</span><span class="boring">impl DestructMemoryVec&lt;T, +Drop&lt;T&gt;&gt; of Destruct&lt;MemoryVec&lt;T&gt;&gt; {
+</span><span class="boring">    fn destruct(self: MemoryVec&lt;T&gt;) nopanic {
+</span><span class="boring">        self.data.squash();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl MemoryVecImpl&lt;T, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt; of MemoryVecTrait&lt;MemoryVec&lt;T&gt;, T&gt; {
+</span><span class="boring">    fn new() -&gt; MemoryVec&lt;T&gt; {
+</span><span class="boring">        MemoryVec { data: Default::default(), len: 0 }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; Option&lt;T&gt; {
+</span><span class="boring">        if index &lt; self.len() {
+</span><span class="boring">            Some(self.data.get(index.into()).deref())
+</span><span class="boring">        } else {
+</span><span class="boring">            None
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn at(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; T {
+</span><span class="boring">        assert!(index &lt; self.len(), "Index out of bounds");
+</span><span class="boring">        self.data.get(index.into()).deref()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn push(ref self: MemoryVec&lt;T&gt;, value: T) -&gt; () {
+</span><span class="boring">        self.data.insert(self.len.into(), NullableTrait::new(value));
+</span><span class="boring">        self.len.wrapping_add(1_usize);
+</span><span class="boring">    }
+</span><span class="boring">    fn set(ref self: MemoryVec&lt;T&gt;, index: usize, value: T) {
+</span><span class="boring">        assert!(index &lt; self.len(), "Index out of bounds");
+</span><span class="boring">        self.data.insert(index.into(), NullableTrait::new(value));
+</span><span class="boring">    }
+</span><span class="boring">    fn len(self: @MemoryVec&lt;T&gt;) -&gt; usize {
+</span><span class="boring">        *self.len
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>Since we again have <code>Felt252Dict&lt;T&gt;</code> as a struct member, we need to implement the <code>Destruct&lt;T&gt;</code> trait to tell the compiler how to make <code>MemoryVec&lt;T&gt;</code> go out of scope.</p>
+<pre><code class="language-cairo noplayground"><span class="boring">
+</span><span class="boring">use core::dict::Felt252Dict;
+</span><span class="boring">use core::nullable::NullableTrait;
+</span><span class="boring">use core::num::traits::WrappingAdd;
+</span><span class="boring">
+</span><span class="boring">trait MemoryVecTrait&lt;V, T&gt; {
+</span><span class="boring">    fn new() -&gt; V;
+</span><span class="boring">    fn get(ref self: V, index: usize) -&gt; Option&lt;T&gt;;
+</span><span class="boring">    fn at(ref self: V, index: usize) -&gt; T;
+</span><span class="boring">    fn push(ref self: V, value: T) -&gt; ();
+</span><span class="boring">    fn set(ref self: V, index: usize, value: T);
+</span><span class="boring">    fn len(self: @V) -&gt; usize;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct MemoryVec&lt;T&gt; {
+</span><span class="boring">    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,
+</span><span class="boring">    len: usize,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl DestructMemoryVec&lt;T, +Drop&lt;T&gt;&gt; of Destruct&lt;MemoryVec&lt;T&gt;&gt; {
+    fn destruct(self: MemoryVec&lt;T&gt;) nopanic {
+        self.data.squash();
+    }
+}
+<span class="boring">
+</span><span class="boring">impl MemoryVecImpl&lt;T, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt; of MemoryVecTrait&lt;MemoryVec&lt;T&gt;, T&gt; {
+</span><span class="boring">    fn new() -&gt; MemoryVec&lt;T&gt; {
+</span><span class="boring">        MemoryVec { data: Default::default(), len: 0 }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; Option&lt;T&gt; {
+</span><span class="boring">        if index &lt; self.len() {
+</span><span class="boring">            Some(self.data.get(index.into()).deref())
+</span><span class="boring">        } else {
+</span><span class="boring">            None
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn at(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; T {
+</span><span class="boring">        assert!(index &lt; self.len(), "Index out of bounds");
+</span><span class="boring">        self.data.get(index.into()).deref()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn push(ref self: MemoryVec&lt;T&gt;, value: T) -&gt; () {
+</span><span class="boring">        self.data.insert(self.len.into(), NullableTrait::new(value));
+</span><span class="boring">        self.len.wrapping_add(1_usize);
+</span><span class="boring">    }
+</span><span class="boring">    fn set(ref self: MemoryVec&lt;T&gt;, index: usize, value: T) {
+</span><span class="boring">        assert!(index &lt; self.len(), "Index out of bounds");
+</span><span class="boring">        self.data.insert(index.into(), NullableTrait::new(value));
+</span><span class="boring">    }
+</span><span class="boring">    fn len(self: @MemoryVec&lt;T&gt;) -&gt; usize {
+</span><span class="boring">        *self.len
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>The key thing that makes this vector mutable is that we can insert values into
+the dictionary to set or update values in our data structure. For example, to
+update a value at a specific index, we do:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">
+</span><span class="boring">use core::dict::Felt252Dict;
+</span><span class="boring">use core::nullable::NullableTrait;
+</span><span class="boring">use core::num::traits::WrappingAdd;
+</span><span class="boring">
+</span><span class="boring">trait MemoryVecTrait&lt;V, T&gt; {
+</span><span class="boring">    fn new() -&gt; V;
+</span><span class="boring">    fn get(ref self: V, index: usize) -&gt; Option&lt;T&gt;;
+</span><span class="boring">    fn at(ref self: V, index: usize) -&gt; T;
+</span><span class="boring">    fn push(ref self: V, value: T) -&gt; ();
+</span><span class="boring">    fn set(ref self: V, index: usize, value: T);
+</span><span class="boring">    fn len(self: @V) -&gt; usize;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct MemoryVec&lt;T&gt; {
+</span><span class="boring">    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,
+</span><span class="boring">    len: usize,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl DestructMemoryVec&lt;T, +Drop&lt;T&gt;&gt; of Destruct&lt;MemoryVec&lt;T&gt;&gt; {
+</span><span class="boring">    fn destruct(self: MemoryVec&lt;T&gt;) nopanic {
+</span><span class="boring">        self.data.squash();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl MemoryVecImpl&lt;T, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt; of MemoryVecTrait&lt;MemoryVec&lt;T&gt;, T&gt; {
+</span><span class="boring">    fn new() -&gt; MemoryVec&lt;T&gt; {
+</span><span class="boring">        MemoryVec { data: Default::default(), len: 0 }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn get(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; Option&lt;T&gt; {
+</span><span class="boring">        if index &lt; self.len() {
+</span><span class="boring">            Some(self.data.get(index.into()).deref())
+</span><span class="boring">        } else {
+</span><span class="boring">            None
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn at(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; T {
+</span><span class="boring">        assert!(index &lt; self.len(), "Index out of bounds");
+</span><span class="boring">        self.data.get(index.into()).deref()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn push(ref self: MemoryVec&lt;T&gt;, value: T) -&gt; () {
+</span><span class="boring">        self.data.insert(self.len.into(), NullableTrait::new(value));
+</span><span class="boring">        self.len.wrapping_add(1_usize);
+</span><span class="boring">    }
+</span>    fn set(ref self: MemoryVec&lt;T&gt;, index: usize, value: T) {
+        assert!(index &lt; self.len(), "Index out of bounds");
+        self.data.insert(index.into(), NullableTrait::new(value));
+    }
+<span class="boring">    fn len(self: @MemoryVec&lt;T&gt;) -&gt; usize {
+</span><span class="boring">        *self.len
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>This overwrites the previously existing value at that index in the dictionary.</p>
+<p>While arrays are immutable, dictionaries provide the flexibility we need for
+modifiable data structures like vectors.</p>
+<p>The implementation of the rest of the interface is straightforward. The
+implementation of all the methods defined in our interface can be done as follow
+:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">
+</span><span class="boring">use core::dict::Felt252Dict;
+</span><span class="boring">use core::nullable::NullableTrait;
+</span><span class="boring">use core::num::traits::WrappingAdd;
+</span><span class="boring">
+</span><span class="boring">trait MemoryVecTrait&lt;V, T&gt; {
+</span><span class="boring">    fn new() -&gt; V;
+</span><span class="boring">    fn get(ref self: V, index: usize) -&gt; Option&lt;T&gt;;
+</span><span class="boring">    fn at(ref self: V, index: usize) -&gt; T;
+</span><span class="boring">    fn push(ref self: V, value: T) -&gt; ();
+</span><span class="boring">    fn set(ref self: V, index: usize, value: T);
+</span><span class="boring">    fn len(self: @V) -&gt; usize;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct MemoryVec&lt;T&gt; {
+</span><span class="boring">    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,
+</span><span class="boring">    len: usize,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl DestructMemoryVec&lt;T, +Drop&lt;T&gt;&gt; of Destruct&lt;MemoryVec&lt;T&gt;&gt; {
+</span><span class="boring">    fn destruct(self: MemoryVec&lt;T&gt;) nopanic {
+</span><span class="boring">        self.data.squash();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl MemoryVecImpl&lt;T, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt; of MemoryVecTrait&lt;MemoryVec&lt;T&gt;, T&gt; {
+    fn new() -&gt; MemoryVec&lt;T&gt; {
+        MemoryVec { data: Default::default(), len: 0 }
+    }
+
+    fn get(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; Option&lt;T&gt; {
+        if index &lt; self.len() {
+            Some(self.data.get(index.into()).deref())
+        } else {
+            None
+        }
+    }
+
+    fn at(ref self: MemoryVec&lt;T&gt;, index: usize) -&gt; T {
+        assert!(index &lt; self.len(), "Index out of bounds");
+        self.data.get(index.into()).deref()
+    }
+
+    fn push(ref self: MemoryVec&lt;T&gt;, value: T) -&gt; () {
+        self.data.insert(self.len.into(), NullableTrait::new(value));
+        self.len.wrapping_add(1_usize);
+    }
+    fn set(ref self: MemoryVec&lt;T&gt;, index: usize, value: T) {
+        assert!(index &lt; self.len(), "Index out of bounds");
+        self.data.insert(index.into(), NullableTrait::new(value));
+    }
+    fn len(self: @MemoryVec&lt;T&gt;) -&gt; usize {
+        *self.len
+    }
+}
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>The full implementation of the <code>MemoryVec</code> structure can be found in the
+community-maintained library <a href="https://github.com/keep-starknet-strange/alexandria/blob/main/packages/data_structures/src/vec.cairo">Alexandria</a>.</p>
+<h2 id="simulating-a-stack-with-dicts"><a class="header" href="#simulating-a-stack-with-dicts">Simulating a Stack with Dicts</a></h2>
+<p>We will now look at a second example and its implementation details: a Stack.</p>
+<p>A Stack is a LIFO (Last-In, First-Out) collection. The insertion of a new
+element and removal of an existing element takes place at the same end,
+represented as the top of the stack.</p>
+<p>Let us define what operations we need to create a stack:</p>
+<ul>
+<li>Push an item to the top of the stack.</li>
+<li>Pop an item from the top of the stack.</li>
+<li>Check whether there are still any elements in the stack.</li>
+</ul>
+<p>From these specifications we can define the following interface :</p>
+<pre><code class="language-cairo noplayground">trait StackTrait&lt;S, T&gt; {
+    fn push(ref self: S, value: T);
+    fn pop(ref self: S) -&gt; Option&lt;T&gt;;
+    fn is_empty(self: @S) -&gt; bool;
+}
+</code></pre>
+<h3 id="implementing-a-mutable-stack-in-cairo"><a class="header" href="#implementing-a-mutable-stack-in-cairo">Implementing a Mutable Stack in Cairo</a></h3>
+<p>To create a stack data structure in Cairo, we can again use a <code>Felt252Dict&lt;T&gt;</code>
+to store the values of the stack along with a <code>usize</code> field to keep track of the
+length of the stack to iterate over it.</p>
+<p>The Stack struct is defined as:</p>
+<pre><code class="language-cairo noplayground">struct NullableStack&lt;T&gt; {
+    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,
+    len: usize,
+}
+</code></pre>
+<p>Next, let's see how our main functions <code>push</code> and <code>pop</code> are implemented.</p>
+<pre><code class="language-cairo noplayground"><span class="boring">
+</span><span class="boring">use core::dict::Felt252Dict;
+</span><span class="boring">use core::nullable::{FromNullableResult, NullableTrait, match_nullable};
+</span><span class="boring">
+</span><span class="boring">trait StackTrait&lt;S, T&gt; {
+</span><span class="boring">    fn push(ref self: S, value: T);
+</span><span class="boring">    fn pop(ref self: S) -&gt; Option&lt;T&gt;;
+</span><span class="boring">    fn is_empty(self: @S) -&gt; bool;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct NullableStack&lt;T&gt; {
+</span><span class="boring">    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,
+</span><span class="boring">    len: usize,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl DestructNullableStack&lt;T, +Drop&lt;T&gt;&gt; of Destruct&lt;NullableStack&lt;T&gt;&gt; {
+</span><span class="boring">    fn destruct(self: NullableStack&lt;T&gt;) nopanic {
+</span><span class="boring">        self.data.squash();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span>impl NullableStackImpl&lt;T, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt; of StackTrait&lt;NullableStack&lt;T&gt;, T&gt; {
+    fn push(ref self: NullableStack&lt;T&gt;, value: T) {
+        self.data.insert(self.len.into(), NullableTrait::new(value));
+        self.len += 1;
+    }
+
+    fn pop(ref self: NullableStack&lt;T&gt;) -&gt; Option&lt;T&gt; {
+        if self.is_empty() {
+            return None;
+        }
+        self.len -= 1;
+        Some(self.data.get(self.len.into()).deref())
+    }
+
+    fn is_empty(self: @NullableStack&lt;T&gt;) -&gt; bool {
+        *self.len == 0
+    }
+}
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>The code uses the <code>insert</code> and <code>get</code> methods to access the values in the
+<code>Felt252Dict&lt;T&gt;</code>. To push an element to the top of the stack, the <code>push</code>
+function inserts the element in the dict at index <code>len</code> and increases the
+<code>len</code> field of the stack to keep track of the position of the stack top. To
+remove a value, the <code>pop</code> function decreases the value of <code>len</code> to update the
+position of the stack top and then retrieves the last value at position <code>len</code>.</p>
+<p>The full implementation of the Stack, along with more data structures that you
+can use in your code, can be found in the community-maintained
+<a href="https://github.com/keep-starknet-strange/alexandria/tree/main/packages/data_structures/src">Alexandria</a> library, in the "data_structures" crate.</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch12-01-custom-structs&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;While Cairo has an immutable memory model, you can use the `Felt252Dict&lt;T&gt;` type to simulate mutable data structures.\n&quot;,&quot;id&quot;:&quot;43074990-3724-4818-94dd-eeac0c078780&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`Felt252Dict&lt;T&gt;`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`Array&lt;T&gt;`&quot;,&quot;`Box&lt;T&gt;`&quot;,&quot;Nothing in particular, just make sure to declare the structure as mutable.&quot;],&quot;prompt&quot;:&quot;What can you use to implement a mutable data structure?\n&quot;}},{&quot;context&quot;:&quot;The member of type `Felt252Dict&lt;T&gt;` can't be dropped so the struct has to implement the `Destruct&lt;T&gt;` trait.\nBecause the struct is working with generic types, the `Destruct` trait cannot be derived.\nThe elements stored in the dictionary must implement the `Copy&lt;T&gt;` trait to be read, but the struct type itself doesn't necessarily require this implementation.\n&quot;,&quot;id&quot;:&quot;76864942-6f11-4fbf-87a3-46480e26749a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`Destruct&lt;T&gt;`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`Drop&lt;T&gt;`&quot;,&quot;None, you can just derive the required traits&quot;,&quot;`Copy&lt;T&gt;` to read the value of the dictionary&quot;],&quot;prompt&quot;:&quot;When you have a member of type `Felt252Dict&lt;T&gt;` in your generic data structure, what trait do you **must** manually implement for that structure?\n&quot;}},{&quot;context&quot;:&quot;The `new` function should return a `NullableStack&lt;T&gt;` with an empty dictionary of type `Nullable&lt;T&gt;` and a length of 0.\n&quot;,&quot;id&quot;:&quot;743ccd28-548f-453c-a4a2-edfecc90ed37&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    let data: Felt252Dict&lt;Nullable&lt;T&gt;&gt; = Default::default();\n    NullableStack { data, len: 0 }\n}\n```&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    let data: Felt252Dict&lt;T&gt; = Default::default();\n    NullableStack { data, len: 0 }\n}\n```&quot;,&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    NullableStack {\n        data: Felt252Dict::default(),\n        len: 0,\n    }\n}\n```&quot;,&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    NullableStack {\n        data: Default::default(),\n    }\n}\n```&quot;],&quot;prompt&quot;:&quot;Consider the following code snippet:\n```\nstruct NullableStack&lt;T&gt; {\n    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,\n    len: usize,\n}\n\ntrait StackTrait&lt;S, T&gt; {\n    fn push(ref self: S, value: T);\n    fn pop(ref self: S) -&gt; Option&lt;T&gt;;\n    fn is_empty(self: @S) -&gt; bool;\n    fn new() -&gt; S;\n}\n\nimpl NullableStackImpl&lt;T, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt; of StackTrait&lt;NullableStack&lt;T&gt;, T&gt; {\n    fn push(ref self: NullableStack&lt;T&gt;, value: T) {\n        self.data.insert(self.len.into(), NullableTrait::new(value));\n        self.len += 1;\n    }\n\n    fn pop(ref self: NullableStack&lt;T&gt;) -&gt; Option&lt;T&gt; {\n        if self.is_empty() {\n            return None;\n        }\n        self.len -= 1;\n        Some(self.data.get(self.len.into()).deref())\n    }\n\n    fn is_empty(self: @NullableStack&lt;T&gt;) -&gt; bool {\n        *self.len == 0\n    }\n\n    // The implementation goes here\n}\n```\nWhat is the correct implementation of the function `fn new() -&gt; S` ?&quot;}}]}"></div>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>Well done! Now you have knowledge of arrays, dictionaries and even custom data structures.
+While Cairo's memory model is immutable and can make it difficult to implement
+mutable data structures, we can fortunately use the <code>Felt252Dict&lt;T&gt;</code> type to
+simulate mutable data structures. This allows us to implement a wide range of
+data structures that are useful for many applications, effectively hiding the
+complexity of the underlying memory model.</p>
+<script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <a rel="prev" href="ch12-00-advanced-features.html" class="mobile-nav-chapters previous"
+                            title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+
+                        <a rel="next" href="ch12-02-smart-pointers.html" class="mobile-nav-chapters next"
+                            title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                <a rel="prev" href="ch12-00-advanced-features.html" class="nav-chapters previous" title="Previous chapter"
+                    aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                <a rel="next" href="ch12-02-smart-pointers.html" class="nav-chapters next" title="Next chapter"
+                    aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </nav>
+
+        </div>
+
+
+        <!-- Google Analytics Tag -->
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'G-WY42TERK5P', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+        <script>
+            window.rootPath = "";
+        </script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/chat.js"></script>
+        <script src="theme/js/index.mjs"></script>
+        <script src="theme/js/version-switcher.js"></script>
+
+
+    </div>
+</body>
+
+</html>
