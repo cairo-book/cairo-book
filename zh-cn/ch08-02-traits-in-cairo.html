@@ -44,7 +44,7 @@
         (function () {
             var path = "ch08-02-traits-in-cairo.md";
             var canonicalPath;
-            
+
             // Special handling for different cases
             if (path === "" || path === "index.md") {
                 // Homepage should not have index.html
@@ -53,14 +53,14 @@
                 // Other pages: replace .md with .html
                 canonicalPath = path.replace(/\.md$/, ".html");
             }
-            
+
             var canonicalUrl = "https://www.starknet.io/cairo-book/" + canonicalPath;
-            
+
             // Remove trailing slash if present (except for root)
             if (canonicalUrl.endsWith("/") && canonicalUrl !== "https://www.starknet.io/cairo-book/") {
                 canonicalUrl = canonicalUrl.slice(0, -1);
             }
-            
+
             document.getElementById("canonical-link").href = canonicalUrl;
         })();
     </script>
@@ -1081,7 +1081,6 @@ fn main() {
 
         <!-- Custom JS scripts -->
         <script src="theme/chat.js"></script>
-        <script src="theme/js/index.mjs"></script>
         <script src="theme/js/version-switcher.js"></script>
 
 
