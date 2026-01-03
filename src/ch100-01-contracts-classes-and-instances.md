@@ -1,6 +1,11 @@
 # Starknet contract classes and instances
 
-As in object-oriented programming, Starknet distinguishes between a contract and its implementation by separating contracts into [classes](#contract-classes) and [instances](#contract-instances) A contract class is the definition of a contract, while a contract instance is a deployed contract that corresponds to a class. Only contract instances act as true contracts, in that they have their own storage and can be called by transactions or other contracts.
+As in object-oriented programming, Starknet distinguishes between a contract and
+its implementation by separating contracts into [classes](#contract-classes) and
+[instances](#contract-instances) A contract class is the definition of a
+contract, while a contract instance is a deployed contract that corresponds to a
+class. Only contract instances act as true contracts, in that they have their
+own storage and can be called by transactions or other contracts.
 
 <!-- > Note: A contract class does not necessarily require a deployed instance in Starknet. -->
 
@@ -21,7 +26,9 @@ The components that define a class are:
 
 ### Class hash
 
-Each class is uniquely identified by its _class hash_, comparable to a class name in traditional object-oriented programming languages. The hash of the class is the chain hash of its components, computed as follows:
+Each class is uniquely identified by its _class hash_, comparable to a class
+name in traditional object-oriented programming languages. The hash of the class
+is the chain hash of its components, computed as follows:
 
 ```
 class_hash = h(
@@ -37,34 +44,55 @@ class_hash = h(
 Where:
 
 - `h` is the Poseidon hash function
-- The hash of an entry point array \\( (selector,index)\_{i=1}^n] \\) is given by \\( h(\text{selector}\_1,\text{index}\_1,...,\text{selector}\_n,\text{index}\_n) \\)
+- The hash of an entry point array \\( (selector,index)\_{i=1}^n] \\) is given
+  by \\(
+  h(\text{selector}\_1,\text{index}\_1,...,\text{selector}\_n,\text{index}\_n)
+  \\)
 - `sierra_program_hash` is the Poseidon hash of the program's bytecode array
 
-> Note: The Starknet OS currently supports contract class version 0.1.0, which is represented in the above hash computation as the ASCII encoding of the string `CONTRACT_CLASS_V0.1.0` (hashing the version in this manner gives us domain separation between the hashes of classes and other objects).
-> For more details, see the [Cairo implementation](https://github.com/starkware-libs/cairo-lang/blob/7712b21fc3b1cb02321a58d0c0579f5370147a8b/src/starkware/starknet/core/os/contracts.cairo#L47).
+> Note: The Starknet OS currently supports contract class version 0.1.0, which
+> is represented in the above hash computation as the ASCII encoding of the
+> string `CONTRACT_CLASS_V0.1.0` (hashing the version in this manner gives us
+> domain separation between the hashes of classes and other objects). For more
+> details, see the
+> [Cairo implementation](https://github.com/starkware-libs/cairo-lang/blob/7712b21fc3b1cb02321a58d0c0579f5370147a8b/src/starkware/starknet/core/os/contracts.cairo#L47).
 
 ### Working with classes
 
-- Adding new classes: To introduce new classes to Starknet's state, use the `DECLARE` transaction.
-- Deploying instances: To deploy a new instance of a previously declared class, use the `deploy` system call.
-- Using class functionality: To use the functionality of a declared class without deploying an instance, use the `library_call` system call. Analogous to Ethereum's `delegatecall`, it enables you to use code in an existing class without deploying a contract instance.
+- Adding new classes: To introduce new classes to Starknet's state, use the
+  `DECLARE` transaction.
+- Deploying instances: To deploy a new instance of a previously declared class,
+  use the `deploy` system call.
+- Using class functionality: To use the functionality of a declared class
+  without deploying an instance, use the `library_call` system call. Analogous
+  to Ethereum's `delegatecall`, it enables you to use code in an existing class
+  without deploying a contract instance.
 
 ## Contract instances
 
 ### Contract nonce
 
-A contract instance has a nonce, the value of which is the number of transactions originating from this address plus 1. For example, when you deploy an account with a `DEPLOY_ACCOUNT` transaction, the nonce of the account contract in the transaction is `0`. After the `DEPLOY_ACCOUNT` transaction, until the account contract sends its next transaction, the nonce is `1`.
+A contract instance has a nonce, the value of which is the number of
+transactions originating from this address plus 1. For example, when you deploy
+an account with a `DEPLOY_ACCOUNT` transaction, the nonce of the account
+contract in the transaction is `0`. After the `DEPLOY_ACCOUNT` transaction,
+until the account contract sends its next transaction, the nonce is `1`.
 
 ### Contract address
 
-The contract address is a unique identifier of the contract on Starknet. It is a chain hash of the following information:
+The contract address is a unique identifier of the contract on Starknet. It is a
+chain hash of the following information:
 
-- `prefix`: The ASCII encoding of the constant string `STARKNET_CONTRACT_ADDRESS`.
+- `prefix`: The ASCII encoding of the constant string
+  `STARKNET_CONTRACT_ADDRESS`.
 - `deployer_address`, which is:
   - `0` when the contract is deployed via a `DEPLOY_ACCOUNT` transaction
-  - determined by the value of the `deploy_from_zero` parameter when the contract is deployed via the `deploy` system call
-    > Note: For information on the `deploy_from_zero` parameter, see the [`deploy` system call]().
-- `salt`: The salt passed by the contract calling the syscall, provided by the transaction sender.
+  - determined by the value of the `deploy_from_zero` parameter when the
+    contract is deployed via the `deploy` system call
+    > Note: For information on the `deploy_from_zero` parameter, see the
+    > [`deploy` system call]().
+- `salt`: The salt passed by the contract calling the syscall, provided by the
+  transaction sender.
 - `class_hash`: See [Class hash](#class-hash).
 - `constructor_calldata_hash`:: Array hash of the inputs to the constructor.
 
@@ -79,7 +107,11 @@ contract_address = pedersen(
     constructor_calldata_hash)
 ```
 
-> Note: A random `salt` ensures unique addresses for smart contract deployments, preventing conflicts when deploying identical contract classes.
-> It also thwarts replay attacks by influencing the transaction hash with a unique sender address.
+> Note: A random `salt` ensures unique addresses for smart contract deployments,
+> preventing conflicts when deploying identical contract classes. It also
+> thwarts replay attacks by influencing the transaction hash with a unique
+> sender address.
 
-For more information on the address computation, see [`contract_address.cairo`](https://github.com/starkware-libs/cairo/blob/2c96b181a6debe9a564b51dbeaaf48fa75808d53/corelib/src/starknet/contract_address.cairo) in the Cairo GitHub repository.
+For more information on the address computation, see
+[`contract_address.cairo`](https://github.com/starkware-libs/cairo/blob/2c96b181a6debe9a564b51dbeaaf48fa75808d53/corelib/src/starknet/contract_address.cairo)
+in the Cairo GitHub repository.

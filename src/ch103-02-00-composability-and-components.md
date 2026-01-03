@@ -35,8 +35,9 @@ code becomes part of the contract it's embedded to.
 ## Creating Components
 
 To create a component, first define it in its own module decorated with a
-`#[starknet::component]` attribute. Within this module, you can declare a `
-Storage` struct and `Event` enum, as usually done in [contracts][contract anatomy].
+`#[starknet::component]` attribute. Within this module, you can declare a
+` Storage` struct and `Event` enum, as usually done in
+[contracts][contract anatomy].
 
 The next step is to define the component interface, containing the signatures of
 the functions that will allow external access to the component's logic. You can
@@ -58,10 +59,10 @@ by simply omitting the `#[embeddable_as(name)]` attribute above the internal
 contract you embed the component in, but not interact with it from outside, as
 they're not a part of the abi of the contract.
 
-Functions within these `impl` block expect arguments like `ref self:
-ComponentState<TContractState>` (for state-modifying functions) or `self:
-@ComponentState<TContractState>` (for view functions). This makes the impl
-generic over `TContractState`, allowing us to use this component in any
+Functions within these `impl` block expect arguments like
+`ref self: ComponentState<TContractState>` (for state-modifying functions) or
+`self: @ComponentState<TContractState>` (for view functions). This makes the
+impl generic over `TContractState`, allowing us to use this component in any
 contract.
 
 [contract anatomy]: ./ch100-00-introduction-to-smart-contracts.md#
@@ -112,7 +113,8 @@ the added restriction that `TContractState` must implement the `HasComponent<T>`
 trait. This allows us to use the component in any contract, as long as the
 contract implements the `HasComponent` trait. Understanding this mechanism in
 details is not required to use components, but if you're curious about the inner
-workings, you can read more in the ["Components Under the Hood"][components inner working] section.
+workings, you can read more in the ["Components Under the
+Hood"][components inner working] section.
 
 One of the major differences from a regular smart contract is that access to
 storage and events is done via the generic `ComponentState<TContractState>` type
@@ -154,7 +156,6 @@ primitives inside your contracts with a restricted amount of boilerplate. To
 integrate a component into your contract, you need to:
 
 1. Declare it with the `component!()` macro, specifying
-
    1. The path to the component `path::to::component`.
    2. The name of the variable in your contract's storage referring to this
       component's storage (e.g. `ownable`).
@@ -163,8 +164,8 @@ integrate a component into your contract, you need to:
 
 2. Add the path to the component's storage and events to the contract's
    `Storage` and `Event`. They must match the names provided in step 1 (e.g.
-   `ownable: ownable_component::Storage` and `OwnableEvent:
-ownable_component::Event`).
+   `ownable: ownable_component::Storage` and
+   `OwnableEvent: ownable_component::Event`).
 
    The storage variable **MUST** be annotated with the `#[substorage(v0)]`
    attribute.
@@ -197,16 +198,16 @@ with the components functions externally by calling them using the
 
 The composability of components really shines when combining multiple of them
 together. Each adds its features onto the contract. You can rely on
-[Openzeppelin's][OpenZeppelin Cairo Contracts] implementation
-of components to quickly plug-in all the common functionalities you need a contract
-to have.
+[Openzeppelin's][OpenZeppelin Cairo Contracts] implementation of components to
+quickly plug-in all the common functionalities you need a contract to have.
 
 Developers can focus on their core contract logic while relying on battle-tested
 and audited components for everything else.
 
-Components can even [depend][component dependencies] on other components by restricting the
-`TContractstate` they're generic on to implement the trait of another component.
-Before we dive into this mechanism, let's first look at [how components work under the hood][components inner working].
+Components can even [depend][component dependencies] on other components by
+restricting the `TContractstate` they're generic on to implement the trait of
+another component. Before we dive into this mechanism, let's first look at [how
+components work under the hood][components inner working].
 
 [OpenZeppelin Cairo Contracts]: https://github.com/OpenZeppelin/cairo-contracts
 [component dependencies]: ./ch103-02-02-component-dependencies.md

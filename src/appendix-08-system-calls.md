@@ -1,10 +1,17 @@
 # Appendix A - System Calls
 
-This chapter is based on the Starknet documentation available at [Starknet Docs](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/).
+This chapter is based on the Starknet documentation available at
+[Starknet Docs](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/).
 
-Writing smart contracts requires various associated operations, such as calling another contract or accessing the contract’s storage, that standalone programs do not require.
+Writing smart contracts requires various associated operations, such as calling
+another contract or accessing the contract’s storage, that standalone programs
+do not require.
 
-The Starknet contract language supports these operations by using system calls. System calls enable a contract to require services from the Starknet OS. You can use system calls in a function to get information that depends on the broader state of Starknet, which would otherwise be inaccessible, rather than local variables that appear in the function’s scope.
+The Starknet contract language supports these operations by using system calls.
+System calls enable a contract to require services from the Starknet OS. You can
+use system calls in a function to get information that depends on the broader
+state of Starknet, which would otherwise be inaccessible, rather than local
+variables that appear in the function’s scope.
 
 Here is a list of the system calls available in Cairo 1.0:
 
@@ -34,7 +41,8 @@ pub extern fn get_block_hash_syscall(
 
 #### Description
 
-Gets the hash of a specific Starknet block within the range of `[first_v0_12_0_block, current_block - 10]`.
+Gets the hash of a specific Starknet block within the range of
+`[first_v0_12_0_block, current_block - 10]`.
 
 #### Return Values
 
@@ -42,7 +50,8 @@ Returns the hash of the given block.
 
 #### Error Messages
 
-- `Block number out of range`: `block_number` is greater than _`current_block`_`- 10`.
+- `Block number out of range`: `block_number` is greater than
+  _`current_block`_`- 10`.
 - `0`: `block_number` is less than the first block number of v0.12.0.
 
 #### Common Library
@@ -63,7 +72,8 @@ pub extern fn get_execution_info_syscall() -> SyscallResult<
 
 Gets information about the original transaction.
 
-In Cairo 1.0, all block/transaction/execution context getters are batched into this single system call.
+In Cairo 1.0, all block/transaction/execution context getters are batched into
+this single system call.
 
 #### Arguments
 
@@ -71,7 +81,9 @@ None.
 
 #### Return Values
 
-Returns a [struct](https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60faa6e1363fd0152b8fcedbb00a/corelib/src/starknet/info.cairo#L8) containing the execution info.
+Returns a
+[struct](https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60faa6e1363fd0152b8fcedbb00a/corelib/src/starknet/info.cairo#L8)
+containing the execution info.
 
 #### Common Library
 
@@ -89,18 +101,22 @@ pub extern fn call_contract_syscall(
 
 #### Description
 
-Calls a given contract. This system call expects the address of the called contract, a selector for a function within that contract, and call arguments.
+Calls a given contract. This system call expects the address of the called
+contract, a selector for a function within that contract, and call arguments.
 
 > **Note:**
 >
-> An internal call can’t return Err(\_) as this is not handled by the sequencer and the Starknet OS.
+> An internal call can’t return Err(\_) as this is not handled by the sequencer
+> and the Starknet OS.
 >
-> If call_contract_syscall fails, this can’t be caught and will therefore result in the entire transaction being reverted.
+> If call_contract_syscall fails, this can’t be caught and will therefore result
+> in the entire transaction being reverted.
 
 #### Arguments
 
 - _`address`_: The address of the contract you want to call.
-- _`entry_point_selector`_: A selector for a function within that contract, can be computed with the `selector!` macro.
+- _`entry_point_selector`_: A selector for a function within that contract, can
+  be computed with the `selector!` macro.
 - _`calldata`_: The calldata array.
 
 #### Return Values
@@ -111,9 +127,9 @@ The call response, of type `SyscallResult<Span<felt252>>`.
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L10)
 
-> **Note:**
-> This is considered a lower-level syntax for calling contracts.
-> If the interface of the called contract is available, then you can use a more straightforward syntax.
+> **Note:** This is considered a lower-level syntax for calling contracts. If
+> the interface of the called contract is available, then you can use a more
+> straightforward syntax.
 
 ## `deploy`
 
@@ -135,17 +151,22 @@ Deploys a new instance of a previously declared class.
 #### Arguments
 
 - _`class_hash`_: The class hash of the contract to be deployed.
-- _`contract_address_salt`_: The salt, an arbitrary value provided by the sender. It is used in the computation of the contract’s address.
+- _`contract_address_salt`_: The salt, an arbitrary value provided by the
+  sender. It is used in the computation of the contract’s address.
 - _`calldata`_: The constructor’s calldata. An array of felts.
-- _`deploy_from_zero`_: A flag used for the contract address computation. If not set, the caller address will be used as the new contract’s deployer address, otherwise 0 is used.
+- _`deploy_from_zero`_: A flag used for the contract address computation. If not
+  set, the caller address will be used as the new contract’s deployer address,
+  otherwise 0 is used.
 
 #### Return Values
 
 A tuple wrapped with SyscallResult where:
 
-- The first element is the address of the deployed contract, of type `ContractAddress`.
+- The first element is the address of the deployed contract, of type
+  `ContractAddress`.
 
-- The second element is the response array from the contract’s constructor, of type `Span::<felt252>`.
+- The second element is the response array from the contract’s constructor, of
+  type `Span::<felt252>`.
 
 #### Common Library
 
@@ -165,11 +186,13 @@ pub extern fn emit_event_syscall(
 
 Emits an event with a given set of keys and data.
 
-For more information and a higher-level syntax for emitting events, see [Starknet events](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/starknet-events/).
+For more information and a higher-level syntax for emitting events, see
+[Starknet events](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/starknet-events/).
 
 #### Arguments
 
-- _`keys`_: The event’s keys. These are analogous to Ethereum’s event topics, you can use the starknet_getEvents method to filter by these keys.
+- _`keys`_: The event’s keys. These are analogous to Ethereum’s event topics,
+  you can use the starknet_getEvents method to filter by these keys.
 
 - _`data`_: The event’s data.
 
@@ -179,7 +202,8 @@ None.
 
 #### Example
 
-The following example emits an event with two keys, the strings `status` and `deposit` and three data elements: `1`, `2`, and `3`.
+The following example emits an event with two keys, the strings `status` and
+`deposit` and three data elements: `1`, `2`, and `3`.
 
 ```cairo,noplayground
 let keys = ArrayTrait::new();
@@ -208,15 +232,18 @@ pub extern fn library_call_syscall(
 
 #### Description
 
-Calls the requested function in any previously declared class. The class is only used for its logic.
+Calls the requested function in any previously declared class. The class is only
+used for its logic.
 
-This system call replaces the known delegate call functionality from Ethereum, with the important difference that there is only one contract involved.
+This system call replaces the known delegate call functionality from Ethereum,
+with the important difference that there is only one contract involved.
 
 #### Arguments
 
 - _`class_hash`_: The hash of the class you want to use.
 
-- _`function_selector`_: A selector for a function within that class, can be computed with the `selector!` macro.
+- _`function_selector`_: A selector for a function within that class, can be
+  computed with the `selector!` macro.
 
 - _`calldata`_: The calldata.
 
@@ -242,9 +269,12 @@ pub extern fn send_message_to_l1_syscall(
 
 Sends a message to L1.
 
-This system call includes the message parameters as part of the proof’s output and exposes these parameters to the `StarknetCore` contract on L1 once the state update, including the transaction, is received.
+This system call includes the message parameters as part of the proof’s output
+and exposes these parameters to the `StarknetCore` contract on L1 once the state
+update, including the transaction, is received.
 
-For more information, see Starknet’s [messaging mechanism](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/).
+For more information, see Starknet’s
+[messaging mechanism](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/).
 
 #### Arguments
 
@@ -258,7 +288,8 @@ None.
 
 #### Example
 
-The following example sends a message whose content is `(1,2)` to the L1 contract whose address is `3423542542364363`.
+The following example sends a message whose content is `(1,2)` to the L1
+contract whose address is `3423542542364363`.
 
 ```cairo,noplayground
 let payload = ArrayTrait::new();
@@ -309,13 +340,19 @@ pub extern fn replace_class_syscall(
 
 #### Description
 
-Once `replace_class` is called, the class of the calling contract (i.e. the contract whose address is returned by `get_contract_address` at the time the syscall is called) will be replaced by the class whose hash is given by the class_hash argument.
+Once `replace_class` is called, the class of the calling contract (i.e. the
+contract whose address is returned by `get_contract_address` at the time the
+syscall is called) will be replaced by the class whose hash is given by the
+class_hash argument.
 
 > **Note:**
 >
-> After calling `replace_class`, the code currently executing from the old class will finish running.
+> After calling `replace_class`, the code currently executing from the old class
+> will finish running.
 >
-> The new class will be used from the next transaction onwards or if the contract is called via the `call_contract` syscall in the same transaction (after the replacement).
+> The new class will be used from the next transaction onwards or if the
+> contract is called via the `call_contract` syscall in the same transaction
+> (after the replacement).
 
 #### Arguments
 
@@ -343,13 +380,22 @@ pub extern fn storage_read_syscall(
 
 Gets the value of a key in the storage of the calling contract.
 
-This system call provides direct access to any possible key in storage, in contrast with `var.read()`, which enables you to read storage variables that are defined explicitly in the contract.
+This system call provides direct access to any possible key in storage, in
+contrast with `var.read()`, which enables you to read storage variables that are
+defined explicitly in the contract.
 
-For information on accessing storage by using the storage variables, see [storage variables](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables).
+For information on accessing storage by using the storage variables, see
+[storage variables](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables).
 
 #### Arguments
 
-- _`address_domain`_: The domain of the key, used to separate between different data availability modes. This separation is used in Starknet to offer different data availability modes. Currently, only the onchain mode (where all updates go to L1), indicated by domain `0`, is supported. Other address domains which will be introduced in the future will behave differently in terms of publication (in particular, they will not be posted on L1, creating a tradeoff between cost and security).
+- _`address_domain`_: The domain of the key, used to separate between different
+  data availability modes. This separation is used in Starknet to offer
+  different data availability modes. Currently, only the onchain mode (where all
+  updates go to L1), indicated by domain `0`, is supported. Other address
+  domains which will be introduced in the future will behave differently in
+  terms of publication (in particular, they will not be posted on L1, creating a
+  tradeoff between cost and security).
 
 - _`address`_: The requested storage address.
 
@@ -386,13 +432,22 @@ pub extern fn storage_write_syscall(
 
 Sets the value of a key in the storage of the calling contract.
 
-This system call provides direct access to any possible key in storage, in contrast with `var.write()`, which enables you to write to storage variables that are defined explicitly in the contract.
+This system call provides direct access to any possible key in storage, in
+contrast with `var.write()`, which enables you to write to storage variables
+that are defined explicitly in the contract.
 
-For information on accessing storage by using the storage variables, see [storage variables](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables).
+For information on accessing storage by using the storage variables, see
+[storage variables](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables).
 
 #### Arguments
 
-- _`address_domain`_: The domain of the key, used to separate between different data availability modes. This separation is used in Starknet to offer different data availability modes. Currently, only the onchain mode (where all updates go to L1), indicated by domain `0`, is supported. Other address domains which will be introduced in the future will behave differently in terms of publication (in particular, they will not be posted on L1, creating a tradeoff between cost and security).
+- _`address_domain`_: The domain of the key, used to separate between different
+  data availability modes. This separation is used in Starknet to offer
+  different data availability modes. Currently, only the onchain mode (where all
+  updates go to L1), indicated by domain `0`, is supported. Other address
+  domains which will be introduced in the future will behave differently in
+  terms of publication (in particular, they will not be posted on L1, creating a
+  tradeoff between cost and security).
 
 - _`address`_: The requested storage address.
 
@@ -446,7 +501,8 @@ pub extern fn sha256_process_block_syscall(
 
 Computes the next SHA-256 state of the input with the given state.
 
-This syscall computes the next SHA-256 state by combining the current `state` with a 512-bit block of `input` data.
+This syscall computes the next SHA-256 state by combining the current `state`
+with a 512-bit block of `input` data.
 
 #### Arguments
 

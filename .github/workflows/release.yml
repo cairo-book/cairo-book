@@ -42,10 +42,13 @@ jobs:
           curl -L https://raw.githubusercontent.com/software-mansion/universal-sierra-compiler/master/scripts/install.sh | sh
 
       - name: Set default scarb version
-        run: asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
+        run:
+          asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Set default starknet-foundry version
-        run: asdf set -u starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
+        run:
+          asdf set -u starknet-foundry $(cat .tool-versions | grep
+          starknet-foundry | cut -d ' ' -f 2)
 
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2

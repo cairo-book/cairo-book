@@ -4,21 +4,33 @@
 
 #### What is Cairo?
 
-Cairo is a general-purpose programming language designed for creating provable programs, leveraging STARK (Scalable Transparent ARguments of Knowledge) technology for computational integrity. It abstracts underlying cryptographic complexities, allowing developers to focus on program logic.
+Cairo is a general-purpose programming language designed for creating provable
+programs, leveraging STARK (Scalable Transparent ARguments of Knowledge)
+technology for computational integrity. It abstracts underlying cryptographic
+complexities, allowing developers to focus on program logic.
 
 #### Cairo's Role in the Ecosystem
 
-Cairo's primary application is Starknet, an Ethereum Layer 2 scaling solution. It enables off-chain computations where a prover generates a STARK proof, which is then verified on Ethereum (L1). This significantly scales transactions by reducing the computational burden on L1. Unlike most competitors, Starknet uses its own VM, offering more flexibility than the EVM. This, combined with native account abstraction, opens possibilities for advanced smart accounts, transparent AI, machine learning, and fully on-chain blockchain games.
+Cairo's primary application is Starknet, an Ethereum Layer 2 scaling solution.
+It enables off-chain computations where a prover generates a STARK proof, which
+is then verified on Ethereum (L1). This significantly scales transactions by
+reducing the computational burden on L1. Unlike most competitors, Starknet uses
+its own VM, offering more flexibility than the EVM. This, combined with native
+account abstraction, opens possibilities for advanced smart accounts,
+transparent AI, machine learning, and fully on-chain blockchain games.
 
 #### Cairo Programs and Starknet Smart Contracts: What Is the Difference?
 
-Starknet contracts are a special superset of Cairo programs. A standard Cairo program must have a `main` function as its entry point:
+Starknet contracts are a special superset of Cairo programs. A standard Cairo
+program must have a `main` function as its entry point:
 
 ```cairo
 fn main() {}
 ```
 
-Conversely, contracts deployed on Starknet do not have a `main` function but instead have one or multiple functions that serve as entry points, and they can access Starknet's state.
+Conversely, contracts deployed on Starknet do not have a `main` function but
+instead have one or multiple functions that serve as entry points, and they can
+access Starknet's state.
 
 Setting Up Your Cairo Development Environment
 
@@ -26,7 +38,8 @@ Setting Up Your Cairo Development Environment
 
 ## Installation
 
-To install Cairo, Scarb (Cairo's build toolchain and package manager), and Starknet Foundry (the default test runner), use `starkup`.
+To install Cairo, Scarb (Cairo's build toolchain and package manager), and
+Starknet Foundry (the default test runner), use `starkup`.
 
 For Linux or macOS, open a terminal and enter the following command:
 
@@ -34,11 +47,13 @@ For Linux or macOS, open a terminal and enter the following command:
 curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.dev | sh
 ```
 
-If the installation is successful, you will see `starkup: Installation complete.`
+If the installation is successful, you will see
+`starkup: Installation complete.`
 
 ## Verifying Installation
 
-After installation, verify the versions of Scarb and Starknet Foundry in a new terminal session:
+After installation, verify the versions of Scarb and Starknet Foundry in a new
+terminal session:
 
 ```bash
 $ scarb --version
@@ -52,7 +67,8 @@ snforge 0.51.1
 
 ## Creating a Project Directory
 
-It's recommended to create a dedicated directory for your Cairo projects, such as `cairo_projects` in your home directory.
+It's recommended to create a dedicated directory for your Cairo projects, such
+as `cairo_projects` in your home directory.
 
 For Linux, macOS, and PowerShell on Windows:
 
@@ -70,13 +86,17 @@ For Windows CMD:
 
 ## Creating a New Project with Scarb
 
-Navigate to your `cairo_projects` directory and use Scarb to create a new project. For example, to create a project named `hello_world`:
+Navigate to your `cairo_projects` directory and use Scarb to create a new
+project. For example, to create a project named `hello_world`:
 
 ```bash
 scarb new hello_world
 ```
 
-Scarb will prompt you to choose a test runner; select `Starknet Foundry (default)`. This command creates a new directory with the project name and a basic `Scarb.toml` file. An example `Scarb.toml` structure is:
+Scarb will prompt you to choose a test runner; select
+`Starknet Foundry (default)`. This command creates a new directory with the
+project name and a basic `Scarb.toml` file. An example `Scarb.toml` structure
+is:
 
 <span class="filename">Filename: Scarb.toml</span>
 
@@ -94,14 +114,21 @@ cairo_test = "2.13.1"
 
 ## Installing the VSCode Extension
 
-Install the Cairo VSCode extension from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1). After installation, go to the extension settings and ensure `Enable Language Server` and `Enable Scarb` options are ticked.
+Install the Cairo VSCode extension from the
+[VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1).
+After installation, go to the extension settings and ensure
+`Enable Language Server` and `Enable Scarb` options are ticked.
 
 ## Common Compiler Diagnostics
 
 When working with Cairo components, you might encounter compiler diagnostics:
 
-- `Plugin diagnostic: name is not a substorage member in the contract's Storage. Consider adding to Storage: (...)`: This indicates you need to add the component's storage to your contract's storage, annotated with the `#[substorage(v0)]` attribute.
-- `Plugin diagnostic: name is not a nested event in the contract's Event enum. Consider adding to the Event enum:`: This means you need to add the component's events to your contract's events enum.
+- `Plugin diagnostic: name is not a substorage member in the contract's Storage. Consider adding to Storage: (...)`:
+  This indicates you need to add the component's storage to your contract's
+  storage, annotated with the `#[substorage(v0)]` attribute.
+- `Plugin diagnostic: name is not a nested event in the contract's Event enum. Consider adding to the Event enum:`:
+  This means you need to add the component's events to your contract's events
+  enum.
 
 Cairo Project Structure and Scarb Basics
 
@@ -109,11 +136,17 @@ Cairo Project Structure and Scarb Basics
 
 #### Packages and Crates
 
-A Cairo **package** is a directory containing a `Scarb.toml` manifest file and associated source code. A package can contain multiple crates. A **crate** is a subset of a package used in Cairo compilation, identified by its package name and a crate root. It includes package source code and metadata like the `edition` field in `Scarb.toml`. Crates can contain modules, which may be defined in other files.
+A Cairo **package** is a directory containing a `Scarb.toml` manifest file and
+associated source code. A package can contain multiple crates. A **crate** is a
+subset of a package used in Cairo compilation, identified by its package name
+and a crate root. It includes package source code and metadata like the
+`edition` field in `Scarb.toml`. Crates can contain modules, which may be
+defined in other files.
 
 #### The Crate Root
 
-The **crate root** is the `lib.cairo` source file from which the Cairo compiler starts compilation, forming the root module of your crate.
+The **crate root** is the `lib.cairo` source file from which the Cairo compiler
+starts compilation, forming the root module of your crate.
 
 #### Creating a Package with Scarb
 
@@ -123,7 +156,8 @@ To create a new Cairo package, use the `scarb new` command:
 scarb new my_package
 ```
 
-This command generates a new package directory named `my_package` with the following default structure:
+This command generates a new package directory named `my_package` with the
+following default structure:
 
 ```
 my_package/
@@ -134,11 +168,13 @@ my_package/
 
 - `src/`: The main directory for all Cairo source files.
 - `lib.cairo`: The default root module and main entry point of the crate.
-- `Scarb.toml`: The package manifest file, containing metadata and configuration options.
+- `Scarb.toml`: The package manifest file, containing metadata and configuration
+  options.
 
 #### The `Scarb.toml` Manifest File
 
-`Scarb.toml` is a TOML-formatted file that configures your Cairo project. A newly generated `Scarb.toml` typically looks like this:
+`Scarb.toml` is a TOML-formatted file that configures your Cairo project. A
+newly generated `Scarb.toml` typically looks like this:
 
 ```toml
 [package]
@@ -153,8 +189,10 @@ edition = "2024_07"
 Key sections include:
 
 - `[package]`: Defines package name, version, and Cairo edition.
-- `[dependencies]`: Lists project dependencies (other Cairo packages, also known as crates).
-- `[dev-dependencies]`: Specifies dependencies required only for development (e.g., `snforge_std`, `assert_macros`).
+- `[dependencies]`: Lists project dependencies (other Cairo packages, also known
+  as crates).
+- `[dev-dependencies]`: Specifies dependencies required only for development
+  (e.g., `snforge_std`, `assert_macros`).
 - `[[target.starknet-contract]]`: Configures building Starknet smart contracts.
 - `[scripts]`: Allows defining custom scripts (e.g., `test = "snforge test"`).
 
@@ -171,7 +209,10 @@ edition = "2024_07"
 
 #### Source File Organization
 
-Scarb requires source files to be located within the `src` directory. The top-level project directory is reserved for non-code content like `README` files or license information. If you have an existing project not using Scarb, you can convert it by moving code into `src` and creating an appropriate `Scarb.toml`.
+Scarb requires source files to be located within the `src` directory. The
+top-level project directory is reserved for non-code content like `README` files
+or license information. If you have an existing project not using Scarb, you can
+convert it by moving code into `src` and creating an appropriate `Scarb.toml`.
 
 For a simple
 
@@ -183,15 +224,26 @@ Cairo Language Fundamentals
 
 Cairo defines several categories of keywords:
 
-- **Strict Keywords**: These can only be used in their correct contexts and cannot be used as names for items. Examples include `as`, `break`, `const`, `continue`, `else`, `enum`, `extern`, `false`, `fn`, `if`, `impl`, `implicits`, `let`, `loop`, `match`, `mod`, `mut`, `nopanic`, `of`, `pub`, `ref`, `return`, `struct`, `trait`, `true`, `type`, `use`, and `while`.
-- **Loose Keywords**: These are associated with specific behavior but can also be used to define items. Examples are `self` (method subject) and `super` (parent module).
-- **Reserved Keywords**: These are not explicitly listed but are implied to exist.
+- **Strict Keywords**: These can only be used in their correct contexts and
+  cannot be used as names for items. Examples include `as`, `break`, `const`,
+  `continue`, `else`, `enum`, `extern`, `false`, `fn`, `if`, `impl`,
+  `implicits`, `let`, `loop`, `match`, `mod`, `mut`, `nopanic`, `of`, `pub`,
+  `ref`, `return`, `struct`, `trait`, `true`, `type`, `use`, and `while`.
+- **Loose Keywords**: These are associated with specific behavior but can also
+  be used to define items. Examples are `self` (method subject) and `super`
+  (parent module).
+- **Reserved Keywords**: These are not explicitly listed but are implied to
+  exist.
 
-Additionally, functions from the core library, while not reserved, are not recommended for use as item names to follow good practices.
+Additionally, functions from the core library, while not reserved, are not
+recommended for use as item names to follow good practices.
 
 #### Anatomy of a Cairo Program
 
-Every executable Cairo program starts with a `main` function. This function is special as it's always the first code to run. Its body is enclosed in curly brackets `{}`. Cairo style dictates four-space indentation and placing the opening curly bracket on the same line as the function declaration.
+Every executable Cairo program starts with a `main` function. This function is
+special as it's always the first code to run. Its body is enclosed in curly
+brackets `{}`. Cairo style dictates four-space indentation and placing the
+opening curly bracket on the same line as the function declaration.
 
 ```cairo,noplayground
 fn main() {
@@ -199,19 +251,33 @@ fn main() {
 }
 ```
 
-Inside the `main` function, operations like printing text are performed using macros. For example, `println!` is a macro (denoted by the `!`) used to print to the screen.
+Inside the `main` function, operations like printing text are performed using
+macros. For example, `println!` is a macro (denoted by the `!`) used to print to
+the screen.
 
 ```cairo,noplayground
     println!("Hello, World!");
 ```
 
-The `scarb fmt` tool can be used to automatically format Cairo code to a standard style.
+The `scarb fmt` tool can be used to automatically format Cairo code to a
+standard style.
 
 #### Core Library and Editions
 
-The Cairo core library prelude, defined in `corelib/src/lib.cairo`, provides fundamental programming constructs without requiring explicit imports. It includes primitive data types (integers, bools, arrays, dicts), traits (for arithmetic, comparison, serialization), operators (arithmetic, logical, bitwise), and utility functions. This automatic import simplifies development by making common elements like `ArrayTrait::append()` or the `Default` trait readily available.
+The Cairo core library prelude, defined in `corelib/src/lib.cairo`, provides
+fundamental programming constructs without requiring explicit imports. It
+includes primitive data types (integers, bools, arrays, dicts), traits (for
+arithmetic, comparison, serialization), operators (arithmetic, logical,
+bitwise), and utility functions. This automatic import simplifies development by
+making common elements like `ArrayTrait::append()` or the `Default` trait
+readily available.
 
-Cairo supports different **editions**, which are versions of the core library prelude. The desired edition is specified in the `Scarb.toml` configuration file (e.g., `edition = "2024_07"`). When creating a new project with `scarb new`, the latest edition is automatically included. Different editions expose different functions and traits, making it important to specify the correct version for project compatibility and to leverage the latest features.
+Cairo supports different **editions**, which are versions of the core library
+prelude. The desired edition is specified in the `Scarb.toml` configuration file
+(e.g., `edition = "2024_07"`). When creating a new project with `scarb new`, the
+latest edition is automatically included. Different editions expose different
+functions and traits, making it important to specify the correct version for
+project compatibility and to leverage the latest features.
 
 | Version   | Details                                                                                                    |
 | :-------- | :--------------------------------------------------------------------------------------------------------- |
@@ -221,11 +287,13 @@ Writing and Executing Cairo Programs
 
 ### Writing and Executing Cairo Programs
 
-To create an executable Cairo program, the `Scarb.toml` manifest file needs to be configured, and the program's entry point defined.
+To create an executable Cairo program, the `Scarb.toml` manifest file needs to
+be configured, and the program's entry point defined.
 
 #### Project Setup: Modifying Scarb.toml
 
-For an executable program that can be proven, modify `Scarb.toml` to define an executable target and include the `cairo_execute` plugin.
+For an executable program that can be proven, modify `Scarb.toml` to define an
+executable target and include the `cairo_execute` plugin.
 
 <span class="filename">Filename: Scarb.toml</span>
 
@@ -246,13 +314,18 @@ cairo_execute = "2.13.1"
 
 The additions include:
 
-- `[[target.executable]]`: Specifies that this package compiles to a Cairo executable.
-- `[cairo] enable-gas = false`: Disables gas tracking, which is specific to Starknet contracts and not required for executables.
-- `[dependencies] cairo_execute = "2.13.1"`: Adds the plugin necessary to execute and prove the program.
+- `[[target.executable]]`: Specifies that this package compiles to a Cairo
+  executable.
+- `[cairo] enable-gas = false`: Disables gas tracking, which is specific to
+  Starknet contracts and not required for executables.
+- `[dependencies] cairo_execute = "2.13.1"`: Adds the plugin necessary to
+  execute and prove the program.
 
 #### Writing the Prime-Checking Logic
 
-Replace the contents of `src/lib.cairo` with the following code to implement a prime-checking program. The `#[executable]` attribute marks the `main` function as the program's entry point.
+Replace the contents of `src/lib.cairo` with the following code to implement a
+prime-checking program. The `#[executable]` attribute marks the `main` function
+as the program's entry point.
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -299,11 +372,15 @@ fn main(input: u32) -> bool {
 }
 ```
 
-The `is_prime` function takes a `u32` and returns a `bool`, checking for primality using a trial division algorithm. The `main` function, marked with `#[executable]`, serves as the program's entry point, taking a `u32` input and calling `is_prime`.
+The `is_prime` function takes a `u32` and returns a `bool`, checking for
+primality using a trial division algorithm. The `main` function, marked with
+`#[executable]`, serves as the program's entry point, taking a `u32` input and
+calling `is_prime`.
 
 #### Executing the Program
 
-To run the program, use the `scarb execute` command, providing the package name and input arguments.
+To run the program, use the `scarb execute` command, providing the package name
+and input arguments.
 
 ```bash
 scarb execute -p prime_prover --print-program-output --arguments 17
@@ -327,7 +404,8 @@ Saving output to: target/execute/prime_prover/execution2
 
 ```
 
-The output `0` indicates successful execution (no panic), and `1` represents `true` (17 is prime).
+The output `0` indicates successful execution (no panic), and `1` represents
+`true` (17 is prime).
 
 Example outputs for other numbers:
 
@@ -338,7 +416,8 @@ $ scarb execute -p prime_prover --print-program-output --arguments 23
 [0, 1]  # 23 is prime
 ```
 
-Here, `0` in `[0, 0]` means `false` (4 is not prime), and `1` in `[0, 1]` means `true` (23 is prime).
+Here, `0` in `[0, 0]` means `false` (4 is not prime), and `1` in `[0, 1]` means
+`true` (23 is prime).
 
 Data Types
 
@@ -346,7 +425,9 @@ Scalar and Primitive Types
 
 ## Scalar and Primitive Types
 
-Cairo is a statically typed language, requiring variable types to be known at compile time. While the compiler often infers types, explicit type annotations or conversion methods can be used when multiple types are possible.
+Cairo is a statically typed language, requiring variable types to be known at
+compile time. While the compiler often infers types, explicit type annotations
+or conversion methods can be used when multiple types are possible.
 
 ```cairo
 fn main() {
@@ -355,17 +436,26 @@ fn main() {
 }
 ```
 
-A _scalar_ type represents a single value. Cairo's primary scalar types are felts, integers, and booleans.
+A _scalar_ type represents a single value. Cairo's primary scalar types are
+felts, integers, and booleans.
 
 ### Felt Type
 
-The default type in Cairo, if not specified, is `felt252` (a field element). This represents an integer in the range \( 0 \leq x < P \), where \( P \) is a large prime (currently \( {2^{251}} + 17 \cdot {2^{192}} + 1 \)). Arithmetic operations (`mod P`) wrap around within this range.
+The default type in Cairo, if not specified, is `felt252` (a field element).
+This represents an integer in the range \( 0 \leq x < P \), where \( P \) is a
+large prime (currently \( {2^{251}} + 17 \cdot {2^{192}} + 1 \)). Arithmetic
+operations (`mod P`) wrap around within this range.
 
-Unlike standard integer division, division of field elements in Cairo always satisfies the equation \( \frac{x}{y} \cdot y == x \). For example, \( \frac{1}{2} \) in Cairo is \( \frac{P + 1}{2} \) (not 0 or 0.5), because \( 2 \cdot \frac{P + 1}{2} = P + 1 \equiv 1 \mod P \).
+Unlike standard integer division, division of field elements in Cairo always
+satisfies the equation \( \frac{x}{y} \cdot y == x \). For example, \(
+\frac{1}{2} \) in Cairo is \( \frac{P + 1}{2} \) (not 0 or 0.5), because \( 2
+\cdot \frac{P + 1}{2} = P + 1 \equiv 1 \mod P \).
 
 ### Integer Types
 
-While `felt252` is fundamental, using integer types is highly recommended for enhanced security due to built-in overflow and underflow checks. An `integer` is a number without a fractional component, with an explicit bit size.
+While `felt252` is fundamental, using integer types is highly recommended for
+enhanced security due to built-in overflow and underflow checks. An `integer` is
+a number without a fractional component, with an explicit bit size.
 
 Table 3-1 shows the built-in unsigned integer types:
 
@@ -382,7 +472,9 @@ Table 3-1 shows the built-in unsigned integer types:
 <br>
 <div align="center"><span class="caption">Table 3-1: Integer Types in Cairo.</span></div>
 
-`usize` is currently an alias for `u32` and is primarily used for indexing collections. Unsigned integers cannot hold negative values; attempting to do so will cause a program panic:
+`usize` is currently an alias for `u32` and is primarily used for indexing
+collections. Unsigned integers cannot hold negative values; attempting to do so
+will cause a program panic:
 
 ```cairo
 fn sub_u8s(x: u8, y: u8) -> u8 {
@@ -394,11 +486,16 @@ fn main() {
 }
 ```
 
-All integer types fit into a `felt252` except `u256`, which is internally represented as a struct: `u256 {low: u128, high: u128}`.
+All integer types fit into a `felt252` except `u256`, which is internally
+represented as a struct: `u256 {low: u128, high: u128}`.
 
-Cairo also supports signed integers, prefixed with `i` (e.g., `i8` to `i128`). An `in` type can store numbers from \( -({2^{n - 1}}) \) to \( {2^{n - 1}} - 1 \) inclusive.
+Cairo also supports signed integers, prefixed with `i` (e.g., `i8` to `i128`).
+An `in` type can store numbers from \( -({2^{n - 1}}) \) to \( {2^{n - 1}} - 1
+\) inclusive.
 
-Integer literals can be written in various forms, as shown in Table 3-2. Type suffixes (e.g., `57_u8`) can specify the type, and `_` can be used as a visual separator.
+Integer literals can be written in various forms, as shown in Table 3-2. Type
+suffixes (e.g., `57_u8`) can specify the type, and `_` can be used as a visual
+separator.
 
 | Numeric literals | Example   |
 | ---------------- | --------- |
@@ -414,7 +511,9 @@ Choose the appropriate integer type based on the maximum expected value.
 
 ### Numeric Operations
 
-Cairo supports standard mathematical operations for all integer types: addition, subtraction, multiplication, division, and remainder. Integer division truncates toward zero.
+Cairo supports standard mathematical operations for all integer types: addition,
+subtraction, multiplication, division, and remainder. Integer division truncates
+toward zero.
 
 ```cairo
 fn main() {
@@ -438,7 +537,8 @@ fn main() {
 
 ### The Boolean Type
 
-The Boolean type in Cairo has two values: `true` and `false`. It is specified using the `bool` keyword and occupies one `felt252` in size.
+The Boolean type in Cairo has two values: `true` and `false`. It is specified
+using the `bool` keyword and occupies one `felt252` in size.
 
 ```cairo
 fn main() {
@@ -448,17 +548,23 @@ fn main() {
 }
 ```
 
-When declaring a `bool` variable, it is mandatory to use `true` or `false` literals; integer literals (e.g., `0`) are not allowed. Booleans are primarily used in conditional expressions.
+When declaring a `bool` variable, it is mandatory to use `true` or `false`
+literals; integer literals (e.g., `0`) are not allowed. Booleans are primarily
+used in conditional expressions.
 
 String Types
 
 ### String Types
 
-Cairo lacks a native string type but handles them using short strings (single quotes) and `ByteArray` (double quotes).
+Cairo lacks a native string type but handles them using short strings (single
+quotes) and `ByteArray` (double quotes).
 
 #### Short Strings
 
-Short strings are ASCII strings where each character is encoded on one byte. They are stored as `felt252` and are limited to 31 characters (248 bits) due to the `felt252`'s 251-bit size. They can be represented directly with single quotes or as hexadecimal values.
+Short strings are ASCII strings where each character is encoded on one byte.
+They are stored as `felt252` and are limited to 31 characters (248 bits) due to
+the `felt252`'s 251-bit size. They can be represented directly with single
+quotes or as hexadecimal values.
 
 ```cairo
 # fn main() {
@@ -474,7 +580,10 @@ Short strings are ASCII strings where each character is encoded on one byte. The
 
 #### Byte Array Strings
 
-The `ByteArray` type from Cairo's Core Library handles strings and byte sequences longer than short strings, and is useful for string operations. It is implemented as an array of `bytes31` words combined with a pending `felt252` word for incomplete byte sequences.
+The `ByteArray` type from Cairo's Core Library handles strings and byte
+sequences longer than short strings, and is useful for string operations. It is
+implemented as an array of `bytes31` words combined with a pending `felt252`
+word for incomplete byte sequences.
 
 Tuples and Fixed-Size Arrays
 
@@ -482,7 +591,12 @@ Tuples and Fixed-Size Arrays
 
 #### The Tuple Type
 
-A _tuple_ is a general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length; once declared, they cannot grow or shrink in size. Tuples are created by writing a comma-separated list of values inside parentheses. Each position in the tuple has a type, and the types of the different values in the tuple don’t have to be the same.
+A _tuple_ is a general way of grouping together a number of values with a
+variety of types into one compound type. Tuples have a fixed length; once
+declared, they cannot grow or shrink in size. Tuples are created by writing a
+comma-separated list of values inside parentheses. Each position in the tuple
+has a type, and the types of the different values in the tuple don’t have to be
+the same.
 
 ```cairo
 fn main() {
@@ -490,7 +604,8 @@ fn main() {
 }
 ```
 
-To get individual values out of a tuple, you can use pattern matching to destructure it:
+To get individual values out of a tuple, you can use pattern matching to
+destructure it:
 
 ```cairo
 fn main() {
@@ -504,7 +619,8 @@ fn main() {
 }
 ```
 
-Tuples can also be declared with values and types, and destructured simultaneously:
+Tuples can also be declared with values and types, and destructured
+simultaneously:
 
 ```cairo
 fn main() {
@@ -514,11 +630,18 @@ fn main() {
 
 ##### The Unit Type `()`
 
-The _unit type_ is a type which has only one value `()`. It is represented by a tuple with no elements, has a size of zero, and is guaranteed not to exist in the compiled code. In Cairo, everything is an expression, and an expression that returns nothing actually returns `()` implicitly.
+The _unit type_ is a type which has only one value `()`. It is represented by a
+tuple with no elements, has a size of zero, and is guaranteed not to exist in
+the compiled code. In Cairo, everything is an expression, and an expression that
+returns nothing actually returns `()` implicitly.
 
 #### The Fixed Size Array Type
 
-A _fixed size array_ is a collection of multiple values where every element must have the same type. Values are written as a comma-separated list inside square brackets. The array’s type is written using square brackets with the type of each element, a semicolon, and then the number of elements in the array, like so:
+A _fixed size array_ is a collection of multiple values where every element must
+have the same type. Values are written as a comma-separated list inside square
+brackets. The array’s type is written using square brackets with the type of
+each element, a semicolon, and then the number of elements in the array, like
+so:
 
 ```cairo
 fn main() {
@@ -526,7 +649,12 @@ fn main() {
 }
 ```
 
-In `[u64; 5]`, `u64` specifies the element type, and `5` defines the array's length. Fixed-size arrays are useful when you want to hardcode a potentially long sequence of data directly in your program. Because their size is known at compile-time, they don't require runtime memory management, making them more efficient than dynamically-sized arrays like `Array<T>`. They are ideal for lookup tables that won't change during runtime.
+In `[u64; 5]`, `u64` specifies the element type, and `5` defines the array's
+length. Fixed-size arrays are useful when you want to hardcode a potentially
+long sequence of data directly in your program. Because their size is known at
+compile-time, they don't require runtime memory management, making them more
+efficient than dynamically-sized arrays like `Array<T>`. They are ideal for
+lookup tables that won't change during runtime.
 
 ```cairo
     let months = [
@@ -546,7 +674,8 @@ This creates an array `a` with 5 elements, all set to `3`.
 
 ##### Accessing Fixed Size Array Elements
 
-Fixed-size array content is represented as a sequence of values in the program bytecode, allowing efficient access. There are two ways to access elements:
+Fixed-size array content is represented as a sequence of values in the program
+bytecode, allowing efficient access. There are two ways to access elements:
 
 1.  **Deconstructing the array into multiple variables:**
 
@@ -560,7 +689,8 @@ Fixed-size array content is represented as a sequence of values in the program b
     }
     ```
 
-2.  **Converting the array to a `Span` that supports indexing:** This operation is free and incurs no runtime cost.
+2.  **Converting the array to a `Span` that supports indexing:** This operation
+    is free and incurs no runtime cost.
 
     ```cairo
     fn main() {
@@ -578,7 +708,9 @@ Enums and Advanced Array Concepts
 
 ### Enums
 
-Enums, short for "enumerations," define a custom data type consisting of a fixed set of named values, called _variants_. They are useful for representing a collection of related, distinct values.
+Enums, short for "enumerations," define a custom data type consisting of a fixed
+set of named values, called _variants_. They are useful for representing a
+collection of related, distinct values.
 
 ```cairo, noplayground
 #[derive(Drop)]
@@ -590,7 +722,8 @@ enum Direction {
 }
 ```
 
-Variants can be instantiated using `Enum::Variant` syntax, e.g., `let direction = Direction::North;`. Variants can also have associated values:
+Variants can be instantiated using `Enum::Variant` syntax, e.g.,
+`let direction = Direction::North;`. Variants can also have associated values:
 
 ```cairo, noplayground
 #[derive(Drop)]
@@ -619,7 +752,10 @@ enum Message {
 
 ### The `Option` Enum
 
-The `Option` enum is a standard Cairo enum representing an optional value. It has two variants: `Some: T` (value of type `T` is present) and `None` (absence of a value). This helps explicitly represent the possibility of a value being absent, preventing issues like `null` values.
+The `Option` enum is a standard Cairo enum representing an optional value. It
+has two variants: `Some: T` (value of type `T` is present) and `None` (absence
+of a value). This helps explicitly represent the possibility of a value being
+absent, preventing issues like `null` values.
 
 ```cairo,noplayground
 enum Option<T> {
@@ -661,7 +797,8 @@ fn find_value_iterative(mut arr: Span<felt252>, value: felt252) -> Option<usize>
 
 ### Storing Multiple Types in Arrays with Enums
 
-To store elements of different types in an array, you can use an enum to define a custom data type that can hold multiple types:
+To store elements of different types in an array, you can use an enum to define
+a custom data type that can hold multiple types:
 
 ```cairo
 #[derive(Copy, Drop)]
@@ -681,7 +818,10 @@ fn main() {
 
 ### Span
 
-`Span` is a struct that represents a snapshot of an `Array`. It provides safe, controlled, read-only access to array elements without modifying the original array, useful for data integrity and avoiding borrowing issues. All methods provided by `Array` can also be used with `Span`, except for `append()`.
+`Span` is a struct that represents a snapshot of an `Array`. It provides safe,
+controlled, read-only access to array elements without modifying the original
+array, useful for data integrity and avoiding borrowing issues. All methods
+provided by `Array` can also be used with `Span`, except for `append()`.
 
 To create a `Span` from an `Array`, call the `span()` method:
 
@@ -696,11 +836,17 @@ Type Conversion
 
 ### Type Conversion
 
-Cairo facilitates type conversion using the `into` and `try_into` methods, provided by the `Into` and `TryInto` traits from the core library. These traits have numerous standard library implementations and can also be implemented for custom types.
+Cairo facilitates type conversion using the `into` and `try_into` methods,
+provided by the `Into` and `TryInto` traits from the core library. These traits
+have numerous standard library implementations and can also be implemented for
+custom types.
 
 #### Into
 
-The `Into` trait defines how a type converts itself into another when success is guaranteed, such as converting a smaller type to a larger one. To perform the conversion, call `var.into()` on the source value. The new variable's type must be explicitly defined.
+The `Into` trait defines how a type converts itself into another when success is
+guaranteed, such as converting a smaller type to a larger one. To perform the
+conversion, call `var.into()` on the source value. The new variable's type must
+be explicitly defined.
 
 ```cairo
 fn main() {
@@ -720,7 +866,11 @@ fn main() {
 
 #### TryInto
 
-The `TryInto` trait is used for fallible conversions, where the target type might not fit the source value. It returns an `Option<T>`. Similar to `Into`, conversion is done by calling `var.try_into()` on the source value, and the new variable's type must be explicitly defined. The `Option<T>` result often requires unwrapping.
+The `TryInto` trait is used for fallible conversions, where the target type
+might not fit the source value. It returns an `Option<T>`. Similar to `Into`,
+conversion is done by calling `var.try_into()` on the source value, and the new
+variable's type must be explicitly defined. The `Option<T>` result often
+requires unwrapping.
 
 ```cairo
 fn main() {
@@ -745,11 +895,15 @@ Variables and Mutability
 
 ## Variables and Mutability
 
-Cairo utilizes an immutable memory model where memory cells, once written, cannot be overwritten. Consequently, variables in Cairo are immutable by default. This design prevents certain classes of bugs and makes code easier to reason about.
+Cairo utilizes an immutable memory model where memory cells, once written,
+cannot be overwritten. Consequently, variables in Cairo are immutable by
+default. This design prevents certain classes of bugs and makes code easier to
+reason about.
 
 ### Immutable Variables
 
-Once a value is bound to an immutable variable, it cannot be changed. Attempting to reassign an immutable variable results in a compile-time error. For instance:
+Once a value is bound to an immutable variable, it cannot be changed. Attempting
+to reassign an immutable variable results in a compile-time error. For instance:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -780,7 +934,12 @@ error: `scarb metadata` exited with error
 
 ### Mutable Variables
 
-While values are immutable, variables can be made mutable using the `mut` keyword. This explicitly indicates that the variable's associated value can change. In Cairo, assigning to a mutable variable is syntactic sugar for redeclaring it to refer to a new value in a different memory cell, effectively shadowing the previous value. The compiler handles this abstraction, and the variable's type cannot change upon reassignment.
+While values are immutable, variables can be made mutable using the `mut`
+keyword. This explicitly indicates that the variable's associated value can
+change. In Cairo, assigning to a mutable variable is syntactic sugar for
+redeclaring it to refer to a new value in a different memory cell, effectively
+shadowing the previous value. The compiler handles this abstraction, and the
+variable's type cannot change upon reassignment.
 
 Consider the following example with `mut`:
 
@@ -810,9 +969,13 @@ Constants
 
 ### Constants
 
-Constants are immutable values bound to a name. Unlike `mut` variables, constants are always immutable and are declared using the `const` keyword instead of `let`. Their type must always be explicitly annotated.
+Constants are immutable values bound to a name. Unlike `mut` variables,
+constants are always immutable and are declared using the `const` keyword
+instead of `let`. Their type must always be explicitly annotated.
 
-Constants can be declared with any data type, including structs, enums, and fixed-size arrays. They can only be declared in the global scope and must be set to a constant expression, not a value computed at runtime.
+Constants can be declared with any data type, including structs, enums, and
+fixed-size arrays. They can only be declared in the global scope and must be set
+to a constant expression, not a value computed at runtime.
 
 #### Declaration Examples
 
@@ -836,7 +999,10 @@ const BOOL_FIXED_SIZE_ARRAY: [bool; 2] = [true, false];
 
 ### Variable Shadowing
 
-Variable shadowing involves declaring a new variable with the same name as a previous one, effectively making the new variable visible to the compiler until it is itself shadowed or its scope ends. This is achieved by repeating the `let` keyword with the same variable name.
+Variable shadowing involves declaring a new variable with the same name as a
+previous one, effectively making the new variable visible to the compiler until
+it is itself shadowed or its scope ends. This is achieved by repeating the `let`
+keyword with the same variable name.
 
 #### Shadowing Example
 
@@ -852,7 +1018,9 @@ fn main() {
 }
 ```
 
-This program first binds `x` to `5`, then shadows it to `6` (`5 + 1`). Inside an inner scope, `x` is shadowed again to `12` (`6 * 2`). After the inner scope, `x` reverts to `6`.
+This program first binds `x` to `5`, then shadows it to `6` (`5 + 1`). Inside an
+inner scope, `x` is shadowed again to `12` (`6 * 2`). After the inner scope, `x`
+reverts to `6`.
 
 ```shell
 $ scarb cairo-run
@@ -869,8 +1037,12 @@ Run completed successfully, returning []
 
 Shadowing differs from marking a variable as `mut` in two key ways:
 
-1.  **Compile-time Errors:** With `mut`, attempting to reassign without the `let` keyword results in a compile-time error. Shadowing, by using `let` again, creates a new variable, thus avoiding this.
-2.  **Type Changing:** Shadowing allows changing the type of the value while reusing the same name, as a new variable is created. This is not possible with `mut` variables.
+1.  **Compile-time Errors:** With `mut`, attempting to reassign without the
+    `let` keyword results in a compile-time error. Shadowing, by using `let`
+    again, creates a new variable, thus avoiding this.
+2.  **Type Changing:** Shadowing allows changing the type of the value while
+    reusing the same name, as a new variable is created. This is not possible
+    with `mut` variables.
 
 **Example: Type Change with Shadowing**
 
@@ -896,15 +1068,19 @@ fn main() {
 }
 ```
 
-This `mut` example will result in a compile-time error because `u64` cannot be directly reassigned with a `u8` value.
+This `mut` example will result in a compile-time error because `u64` cannot be
+directly reassigned with a `u8` value.
 
 Statements and Expressions
 
 ### Statements and Expressions
 
-Statements in Cairo do not return values. Consequently, you cannot assign a `let` statement to another variable, as it would result in an error because there is no value to assign.
+Statements in Cairo do not return values. Consequently, you cannot assign a
+`let` statement to another variable, as it would result in an error because
+there is no value to assign.
 
-For example, the following code attempts to assign the result of `let y = 6` to `x`, which is invalid:
+For example, the following code attempts to assign the result of `let y = 6` to
+`x`, which is invalid:
 
 ```cairo, noplayground
 fn main() {
@@ -912,7 +1088,9 @@ fn main() {
 }
 ```
 
-Running this program yields errors indicating missing tokens and skipped statements, confirming that `let y = 6` does not produce a value that can be assigned:
+Running this program yields errors indicating missing tokens and skipped
+statements, confirming that `let y = 6` does not produce a value that can be
+assigned:
 
 ```shell
 $ scarb cairo-run
@@ -958,21 +1136,30 @@ Cairo's Linear Type System and Ownership Basics
 
 ### Cairo's Linear Type System and Ownership Basics
 
-Cairo utilizes a linear type system, meaning every value (basic type, struct, enum) must be used exactly once. 'Used' implies a value is either _destroyed_ or _moved_.
+Cairo utilizes a linear type system, meaning every value (basic type, struct,
+enum) must be used exactly once. 'Used' implies a value is either _destroyed_ or
+_moved_.
 
 #### Destruction
 
-Destruction occurs when a variable goes out of scope, a struct is destructured, or `destruct()` is explicitly called.
+Destruction occurs when a variable goes out of scope, a struct is destructured,
+or `destruct()` is explicitly called.
 
 #### Moving
 
-_Moving_ a value means passing it to another function. When a value is moved, the original variable referring to it is destroyed and can no longer be used, and a new variable is created in the new scope to hold the value.
+_Moving_ a value means passing it to another function. When a value is moved,
+the original variable referring to it is destroyed and can no longer be used,
+and a new variable is created in the new scope to hold the value.
 
-Cairo's linear type system serves two main purposes: ensuring code provability for verification and abstracting away the Cairo VM's immutable memory.
+Cairo's linear type system serves two main purposes: ensuring code provability
+for verification and abstracting away the Cairo VM's immutable memory.
 
 #### Ownership
 
-In Cairo, ownership applies to _variables_, not _values_, as values are always immutable. Variables, however, can be mutable, and the compiler prevents accidental modification of constant variables. Variables adhere to rules similar to Rust's values:
+In Cairo, ownership applies to _variables_, not _values_, as values are always
+immutable. Variables, however, can be mutable, and the compiler prevents
+accidental modification of constant variables. Variables adhere to rules similar
+to Rust's values:
 
 - Each variable has an owner.
 - There can only be one owner at a time.
@@ -980,7 +1167,8 @@ In Cairo, ownership applies to _variables_, not _values_, as values are always i
 
 #### Variable Scope
 
-A variable's scope defines the range within a program where it is valid. A variable is valid from its declaration until the end of its current scope.
+A variable's scope defines the range within a program where it is valid. A
+variable is valid from its declaration until the end of its current scope.
 
 ```cairo
 # //TAG: ignore_fmt
@@ -994,7 +1182,10 @@ A variable's scope defines the range within a program where it is valid. A varia
 
 #### Moving Values in Practice
 
-Complex types like `Array` are moved when passed to functions. This prevents operations that would violate the Cairo VM's immutable memory, such as attempting to write to the same memory cell twice. The compiler enforces this by preventing reuse of a variable after its value has been moved.
+Complex types like `Array` are moved when passed to functions. This prevents
+operations that would violate the Cairo VM's immutable memory, such as
+attempting to write to the same memory cell twice. The compiler enforces this by
+preventing reuse of a variable after its value has been moved.
 
 Consider this example which attempts to call `foo(arr)` twice:
 
@@ -1010,7 +1201,8 @@ fn main() {
 }
 ```
 
-This code will not compile, resulting in an error indicating the variable `arr` was previously moved:
+This code will not compile, resulting in an error indicating the variable `arr`
+was previously moved:
 
 ```shell
 $ scarb cairo-run
@@ -1037,7 +1229,9 @@ error: `scarb metadata` exited with error
 
 #### Cloning Values
 
-To create a deep copy of data, such as an `Array`, the `clone()` method can be used. This operation copies the value to new memory cells, and a new variable refers to this copied value.
+To create a deep copy of data, such as an `Array`, the `clone()` method can be
+used. This operation copies the value to new memory cells, and a new variable
+refers to this copied value.
 
 ```cairo
 fn main() {
@@ -1048,7 +1242,8 @@ fn main() {
 
 #### Return Values and Scope
 
-Returning values from a function is equivalent to moving them. The ownership of the returned value is transferred to the calling function.
+Returning values from a function is equivalent to moving them. The ownership of
+the returned value is transferred to the calling function.
 
 ````cairo
 #[derive(Drop)]
@@ -1095,11 +1290,20 @@ The `Copy` Trait for Implicit Duplication
 
 ### The `Copy` Trait for Implicit Duplication
 
-The `Copy` trait enables simple types to be duplicated by copying felts, avoiding new memory allocations. This contrasts with Cairo's default "move" semantics, which transfer ownership to ensure memory safety. `Copy` is implemented for types where duplication is safe and efficient, bypassing move semantics. Basic types implement `Copy` by default.
+The `Copy` trait enables simple types to be duplicated by copying felts,
+avoiding new memory allocations. This contrasts with Cairo's default "move"
+semantics, which transfer ownership to ensure memory safety. `Copy` is
+implemented for types where duplication is safe and efficient, bypassing move
+semantics. Basic types implement `Copy` by default.
 
-Types like `Array` and `Felt252Dict` cannot implement `Copy` because manipulating them in different scopes is forbidden by the type system. However, custom types that do not contain such non-copyable components can implement `Copy`.
+Types like `Array` and `Felt252Dict` cannot implement `Copy` because
+manipulating them in different scopes is forbidden by the type system. However,
+custom types that do not contain such non-copyable components can implement
+`Copy`.
 
-To implement `Copy` for a custom type, add the `#[derive(Copy)]` annotation to its definition. Cairo enforces that a type can only be annotated with `Copy` if the type itself and all its components implement the `Copy` trait.
+To implement `Copy` for a custom type, add the `#[derive(Copy)]` annotation to
+its definition. Cairo enforces that a type can only be annotated with `Copy` if
+the type itself and all its components implement the `Copy` trait.
 
 Consider the `Point` struct:
 
@@ -1120,19 +1324,30 @@ fn foo(p: Point) { // do something with p
 }
 ```
 
-In this example, `p1` can be passed twice to the `foo` function because the `Point` type implements `Copy`. This means a copy of `p1` is passed, and `p1` remains valid in the `main` function, retaining its ownership. Removing the `Copy` trait derivation would result in a compile-time error.
+In this example, `p1` can be passed twice to the `foo` function because the
+`Point` type implements `Copy`. This means a copy of `p1` is passed, and `p1`
+remains valid in the `main` function, retaining its ownership. Removing the
+`Copy` trait derivation would result in a compile-time error.
 
 Managing Value Destruction: The `Destruct` Trait
 
 ### Managing Value Destruction: The `Destruct` Trait
 
-Linear types in Cairo can be destroyed, requiring proper resource release. For instance, `Felt252Dict` must be 'squashed' upon destruction for provability, a process enforced by the type system. Cairo provides two traits for managing value destruction: `Drop` for no-op destruction and `Destruct` for destruction with side-effects.
+Linear types in Cairo can be destroyed, requiring proper resource release. For
+instance, `Felt252Dict` must be 'squashed' upon destruction for provability, a
+process enforced by the type system. Cairo provides two traits for managing
+value destruction: `Drop` for no-op destruction and `Destruct` for destruction
+with side-effects.
 
 #### No-op Destruction: The `Drop` Trait
 
-The `Drop` trait signifies a no-op destruction. Types implementing `Drop` are automatically destroyed when they go out of scope, serving as a hint to the compiler that the value can be safely discarded. This trait can be derived for all types, except for dictionaries (`Felt252Dict`) and types containing them.
+The `Drop` trait signifies a no-op destruction. Types implementing `Drop` are
+automatically destroyed when they go out of scope, serving as a hint to the
+compiler that the value can be safely discarded. This trait can be derived for
+all types, except for dictionaries (`Felt252Dict`) and types containing them.
 
-The following code will not compile because `A` is not moved or explicitly dropped:
+The following code will not compile because `A` is not moved or explicitly
+dropped:
 
 ```cairo,does_not_compile
 struct A {}
@@ -1155,11 +1370,17 @@ fn main() {
 
 #### Destruction with a Side-effect: The `Destruct` Trait
 
-When a value is destroyed, the compiler first attempts to call its `drop` method. If `drop` is not implemented, the compiler then tries to call `destruct`, which is provided by the `Destruct` trait. This trait is used for types that require specific actions (side-effects) during destruction.
+When a value is destroyed, the compiler first attempts to call its `drop`
+method. If `drop` is not implemented, the compiler then tries to call
+`destruct`, which is provided by the `Destruct` trait. This trait is used for
+types that require specific actions (side-effects) during destruction.
 
-Dictionaries (`Felt252Dict`) are a prime example, as they must be "squashed" when they go out of scope to ensure provability. This behavior is enforced by `Felt252Dict` implementing the `Destruct` trait.
+Dictionaries (`Felt252Dict`) are a prime example, as they must be "squashed"
+when they go out of scope to ensure provability. This behavior is enforced by
+`Felt252Dict` implementing the `Destruct` trait.
 
-The following example will not compile because `A` contains a `Felt252Dict` and doesn't implement `Drop` or `Destruct`:
+The following example will not compile because `A` contains a `Felt252Dict` and
+doesn't implement `Drop` or `Destruct`:
 
 ```cairo,does_not_compile
 use core::dict::Felt252Dict;
@@ -1190,7 +1411,8 @@ fn main() {
 
 When `A` goes out of scope, its dictionary will be automatically squashed.
 
-For types that manually manage dictionaries, the `Destruct` trait can be implemented to explicitly call `squash()`:
+For types that manually manage dictionaries, the `Destruct` trait can be
+implemented to explicitly call `squash()`:
 
 ```cairo,noplayground
 #
@@ -1255,11 +1477,18 @@ Non-Owning Data Access: Snapshots (`@` Operator)
 
 ### Non-Owning Data Access: Snapshots (`@` Operator)
 
-Cairo's ownership system prevents using a variable after it has been moved. Snapshots provide an immutable view of a value at a specific point in program execution, allowing functions to access data without taking ownership. This means the original variable retains ownership and can be used after the function call.
+Cairo's ownership system prevents using a variable after it has been moved.
+Snapshots provide an immutable view of a value at a specific point in program
+execution, allowing functions to access data without taking ownership. This
+means the original variable retains ownership and can be used after the function
+call.
 
-A snapshot is created using the `@` operator (e.g., `@rec`). When a variable is modified, it fills a new memory cell, and a snapshot refers to the "old" value, effectively providing a view "into the past."
+A snapshot is created using the `@` operator (e.g., `@rec`). When a variable is
+modified, it fills a new memory cell, and a snapshot refers to the "old" value,
+effectively providing a view "into the past."
 
-Consider the `calculate_area` function that takes a snapshot of a `Rectangle` struct:
+Consider the `calculate_area` function that takes a snapshot of a `Rectangle`
+struct:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -1285,7 +1514,8 @@ fn calculate_area(rec: @Rectangle) -> u64 {
 }
 ```
 
-The output demonstrates how `first_snapshot` retains the value of `rec` before mutation, while `@rec` in the second call reflects the current state:
+The output demonstrates how `first_snapshot` retains the value of `rec` before
+mutation, while `@rec` in the second call reflects the current state:
 
 ```shell
 $ scarb cairo-run
@@ -1300,13 +1530,21 @@ Run completed successfully, returning []
 
 ```
 
-When passing `@rec` to `calculate_area`, the function's parameter type is `@Rectangle`. Snapshots are immutable views, so the usual rules of the linear type system are not enforced. Snapshot variables always implement the `Drop` trait, never `Destruct`.
+When passing `@rec` to `calculate_area`, the function's parameter type is
+`@Rectangle`. Snapshots are immutable views, so the usual rules of the linear
+type system are not enforced. Snapshot variables always implement the `Drop`
+trait, never `Destruct`.
 
-It's important to note that `@T` is not a pointer; snapshots are passed by value, meaning the entire struct is copied to the function's stack. The size of `@T` is the same as the size of `T`.
+It's important to note that `@T` is not a pointer; snapshots are passed by
+value, meaning the entire struct is copied to the function's stack. The size of
+`@T` is the same as the size of `T`.
 
 #### Desnap Operator (`*`)
 
-To convert a snapshot back into a regular variable, the `desnap` operator `*` is used. This is the opposite of the `@` operator. Desnapping is only possible for `Copy` types. Since the value is not modified, the new variable created by `*` reuses the old value, making desnapping a free operation.
+To convert a snapshot back into a regular variable, the `desnap` operator `*` is
+used. This is the opposite of the `@` operator. Desnapping is only possible for
+`Copy` types. Since the value is not modified, the new variable created by `*`
+reuses the old value, making desnapping a free operation.
 
 Here's another example illustrating the use of the desnap operator:
 
@@ -1332,7 +1570,8 @@ fn calculate_area(rec: @Rectangle) -> u64 {
 }
 ```
 
-Attempting to modify a value through a snapshot will result in a compile-time error, as snapshots provide an immutable view:
+Attempting to modify a value through a snapshot will result in a compile-time
+error, as snapshots provide an immutable view:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -1379,13 +1618,19 @@ Mutable Data Access: Mutable References (`ref` Keyword)
 
 ### Mutable Data Access: Mutable References (`ref` Keyword)
 
-Mutable references provide a way to modify values within a function while retaining ownership in the calling context. Unlike snapshots, which prevent modification, mutable references allow mutation and are implicitly returned at the function's end, transferring ownership back to the caller.
+Mutable references provide a way to modify values within a function while
+retaining ownership in the calling context. Unlike snapshots, which prevent
+modification, mutable references allow mutation and are implicitly returned at
+the function's end, transferring ownership back to the caller.
 
 #### Usage with `ref` Keyword
 
-In Cairo, a parameter can be passed as a mutable reference using the `ref` modifier. It's crucial that the variable being passed is declared as mutable with `mut`.
+In Cairo, a parameter can be passed as a mutable reference using the `ref`
+modifier. It's crucial that the variable being passed is declared as mutable
+with `mut`.
 
-Consider the following example where a `Rectangle`'s dimensions are swapped using a mutable reference:
+Consider the following example where a `Rectangle`'s dimensions are swapped
+using a mutable reference:
 
 ```cairo
 #[derive(Drop)]
@@ -1407,11 +1652,18 @@ fn flip(ref rec: Rectangle) {
 }
 ```
 
-In this code, `rec` is declared `mut`. When `flip(ref rec)` is called, a mutable reference of `rec` is passed. The function signature `fn flip(ref rec: Rectangle)` clearly indicates that `flip` will mutate the `Rectangle` instance.
+In this code, `rec` is declared `mut`. When `flip(ref rec)` is called, a mutable
+reference of `rec` is passed. The function signature
+`fn flip(ref rec: Rectangle)` clearly indicates that `flip` will mutate the
+`Rectangle` instance.
 
 #### Behavior of Mutable References
 
-Similar to snapshots, `ref` arguments are passed by value, meaning the entire type is copied to the function's stack. The function operates on its local copy, which is then implicitly returned to the caller, ensuring the original value is updated and ownership is maintained. For large types where copying is undesirable, Cairo offers the `Box<T>` type as an alternative.
+Similar to snapshots, `ref` arguments are passed by value, meaning the entire
+type is copied to the function's stack. The function operates on its local copy,
+which is then implicitly returned to the caller, ensuring the original value is
+updated and ownership is maintained. For large types where copying is
+undesirable, Cairo offers the `Box<T>` type as an alternative.
 
 Running the example program yields the following output:
 
@@ -1425,7 +1677,8 @@ Run completed successfully, returning []
 
 ```
 
-As demonstrated, the `height` and `width` fields of the `rec` variable are successfully swapped.
+As demonstrated, the `height` and `width` fields of the `rec` variable are
+successfully swapped.
 
 Functions and Methods
 
@@ -1433,11 +1686,16 @@ Functions
 
 ### Functions
 
-Functions are fundamental in Cairo code, with the `main` function serving as the entry point for many programs. New functions are declared using the `fn` keyword, adhering to the `snake_case` naming convention.
+Functions are fundamental in Cairo code, with the `main` function serving as the
+entry point for many programs. New functions are declared using the `fn`
+keyword, adhering to the `snake_case` naming convention.
 
 #### Defining and Calling Functions
 
-Functions are defined by `fn` followed by a name and parentheses, with the body enclosed in curly brackets. They can be called by their name followed by parentheses. Cairo allows functions to be defined before or after their callers, as long as they are in a visible scope.
+Functions are defined by `fn` followed by a name and parentheses, with the body
+enclosed in curly brackets. They can be called by their name followed by
+parentheses. Cairo allows functions to be defined before or after their callers,
+as long as they are in a visible scope.
 
 ```cairo
 fn another_function() {
@@ -1452,7 +1710,10 @@ fn main() {
 
 #### Parameters
 
-Functions can accept _parameters_, which are special variables in the function's signature. Concrete values passed to these parameters are called _arguments_. Each parameter's type _must_ be explicitly declared in the function signature. Multiple parameters are separated by commas.
+Functions can accept _parameters_, which are special variables in the function's
+signature. Concrete values passed to these parameters are called _arguments_.
+Each parameter's type _must_ be explicitly declared in the function signature.
+Multiple parameters are separated by commas.
 
 ```cairo
 fn main() {
@@ -1476,7 +1737,9 @@ fn print_labeled_measurement(value: u128, unit_label: ByteArray) {
 
 ##### Named Parameters
 
-Cairo supports named parameters for improved readability. Arguments can be passed using `parameter_name: value`. If the argument variable has the same name as the parameter, a shorthand `:parameter_name` can be used.
+Cairo supports named parameters for improved readability. Arguments can be
+passed using `parameter_name: value`. If the argument variable has the same name
+as the parameter, a shorthand `:parameter_name` can be used.
 
 ```cairo
 fn foo(x: u8, y: u8) {}
@@ -1493,12 +1756,16 @@ fn main() {
 
 #### Statements and Expressions
 
-Function bodies consist of statements, optionally ending with an expression. This distinction is crucial in Cairo:
+Function bodies consist of statements, optionally ending with an expression.
+This distinction is crucial in Cairo:
 
-- **Statements** are instructions that perform an action but do not return a value (e.g., `let y = 6;`, function definitions).
-- **Expressions** evaluate to a resultant value (e.g., `5 + 6`, function calls, code blocks).
+- **Statements** are instructions that perform an action but do not return a
+  value (e.g., `let y = 6;`, function definitions).
+- **Expressions** evaluate to a resultant value (e.g., `5 + 6`, function calls,
+  code blocks).
 
-Adding a semicolon to an expression turns it into a statement, preventing it from returning a value.
+Adding a semicolon to an expression turns it into a statement, preventing it
+from returning a value.
 
 ```cairo
 fn main() {
@@ -1513,7 +1780,10 @@ fn main() {
 
 #### Functions with Return Values
 
-Functions can return values, whose type must be declared after an arrow (`->`) in the signature. The return value is implicitly the value of the final expression in the function body. The `return` keyword can be used for early returns.
+Functions can return values, whose type must be declared after an arrow (`->`)
+in the signature. The return value is implicitly the value of the final
+expression in the function body. The `return` keyword can be used for early
+returns.
 
 ```cairo
 fn five() -> u32 {
@@ -1526,7 +1796,9 @@ fn main() {
 }
 ```
 
-If the final expression has a semicolon, it becomes a statement and returns the unit type `()`, leading to an error if the function expects a different return type.
+If the final expression has a semicolon, it becomes a statement and returns the
+unit type `()`, leading to an error if the function expects a different return
+type.
 
 ```cairo,does_not_compile
 fn main() {
@@ -1542,7 +1814,10 @@ fn plus_one(x: u32) -> u32 {
 
 #### Const Functions
 
-Functions evaluable at compile time can be marked `const` using `const fn`. This allows them to be called from a constant context and interpreted by the compiler. `const fn` restricts argument and return types, and limits the function body to constant expressions.
+Functions evaluable at compile time can be marked `const` using `const fn`. This
+allows them to be called from a constant context and interpreted by the
+compiler. `const fn` restricts argument and return types, and limits the
+function body to constant expressions.
 
 ```cairo
 use core::num::traits::Pow;
@@ -1558,7 +1833,9 @@ fn main() {
 
 #### Example: Abstracting Duplicate Code
 
-Functions are used to eliminate code duplication and create abstractions. The following `largest` function demonstrates finding the largest number in an array, abstracting the logic so it can be reused for different arrays.
+Functions are used to eliminate code duplication and create abstractions. The
+following `largest` function demonstrates finding the largest number in an
+array, abstracting the logic so it can be reused for different arrays.
 
 ```cairo
 fn largest(ref number_list: Array<u8>) -> u8 {
@@ -1586,17 +1863,26 @@ fn main() {
 }
 ```
 
-To achieve this, the process involves identifying duplicate code, extracting it into a function with defined inputs and return values, and then updating the original instances to call the new function.
+To achieve this, the process involves identifying duplicate code, extracting it
+into a function with defined inputs and return values, and then updating the
+original instances to call the new function.
 
 Methods and Associated Functions
 
 ### Methods and Associated Functions
 
-Methods are functions defined within the context of a struct (or enum) via an `impl` block for a trait. Unlike regular functions, their first parameter is always `self`, which represents the instance on which the method is called. This provides method syntax (`instance.method()`) and helps organize code by grouping functionalities related to a specific type.
+Methods are functions defined within the context of a struct (or enum) via an
+`impl` block for a trait. Unlike regular functions, their first parameter is
+always `self`, which represents the instance on which the method is called. This
+provides method syntax (`instance.method()`) and helps organize code by grouping
+functionalities related to a specific type.
 
 #### Defining Methods
 
-To define a method, an `impl` block for a trait must be created, and the method moved inside, changing its first parameter to `self`. Cairo requires methods to be defined within a trait and its `impl` block; the `#[generate_trait]` attribute can simplify this.
+To define a method, an `impl` block for a trait must be created, and the method
+moved inside, changing its first parameter to `self`. Cairo requires methods to
+be defined within a trait and its `impl` block; the `#[generate_trait]`
+attribute can simplify this.
 
 ```cairo, noplayground
 #[derive(Copy, Drop)]
@@ -1621,7 +1907,9 @@ fn main() {
 }
 ```
 
-The `self` parameter can take various forms: `self: @Type` (snapshot, most common), `ref self: Type` (mutable reference), or `self` (takes ownership, rare, used for transformations).
+The `self` parameter can take various forms: `self: @Type` (snapshot, most
+common), `ref self: Type` (mutable reference), or `self` (takes ownership, rare,
+used for transformations).
 
 #### Methods with Several Parameters
 
@@ -1656,7 +1944,10 @@ fn main() {
 
 #### Associated Functions
 
-Associated functions are functions defined inside an `impl` block that do not take `self` as their first parameter. They are associated with a type but do not require an instance of that type to be called. They are often used as constructors, such as `new` or `square`, returning a new instance of the type.
+Associated functions are functions defined inside an `impl` block that do not
+take `self` as their first parameter. They are associated with a type but do not
+require an instance of that type to be called. They are often used as
+constructors, such as `new` or `square`, returning a new instance of the type.
 
 ```cairo
 #[generate_trait]
@@ -1693,7 +1984,8 @@ fn main() {
 }
 ```
 
-Associated functions are called using the double colon (`::`) syntax with the trait name, e.g., `RectangleTrait::square(3)`.
+Associated functions are called using the double colon (`::`) syntax with the
+trait name, e.g., `RectangleTrait::square(3)`.
 
 Structs
 
@@ -1701,11 +1993,17 @@ Introduction to Structs: Concepts and Motivation
 
 ### Introduction to Structs: Concepts and Motivation
 
-Structs are custom data types that group multiple related values, similar to an object's data attributes in object-oriented languages. While similar to tuples in holding multiple related values of potentially different types, structs differ by allowing you to name each piece of data (called fields). This naming provides clarity about the values' meaning and offers greater flexibility, as you don't rely on data order for specification or access.
+Structs are custom data types that group multiple related values, similar to an
+object's data attributes in object-oriented languages. While similar to tuples
+in holding multiple related values of potentially different types, structs
+differ by allowing you to name each piece of data (called fields). This naming
+provides clarity about the values' meaning and offers greater flexibility, as
+you don't rely on data order for specification or access.
 
 #### Defining and Instantiating Structs
 
-To define a struct, use the `struct` keyword followed by the struct's chosen name. Inside curly brackets, define the names and types of its fields.
+To define a struct, use the `struct` keyword followed by the struct's chosen
+name. Inside curly brackets, define the names and types of its fields.
 
 ```cairo
 #[derive(Drop)]
@@ -1717,7 +2015,9 @@ struct User {
 }
 ```
 
-To use a struct, create an instance by stating the struct's name, followed by curly brackets containing `key: value` pairs for each field. The order of fields during instantiation does not need to match the definition.
+To use a struct, create an instance by stating the struct's name, followed by
+curly brackets containing `key: value` pairs for each field. The order of fields
+during instantiation does not need to match the definition.
 
 ```cairo
 #[derive(Drop)]
@@ -1740,10 +2040,12 @@ fn main() {
 
 #### Structuring Related Data: A Motivational Example
 
-To illustrate the benefit of structs, consider calculating the area of a rectangle.
+To illustrate the benefit of structs, consider calculating the area of a
+rectangle.
 
-**Using Separate Variables:**
-Initially, `width` and `height` can be passed as separate variables, but their relationship is not explicit in the `area` function's signature.
+**Using Separate Variables:** Initially, `width` and `height` can be passed as
+separate variables, but their relationship is not explicit in the `area`
+function's signature.
 
 ```cairo
 fn main() {
@@ -1758,8 +2060,9 @@ fn area(width: u64, height: u64) -> u64 {
 }
 ```
 
-**Refactoring with Tuples:**
-Using a tuple groups the dimensions, but elements are accessed by index (e.g., `dimension.0`), which reduces clarity and makes the code less obvious and potentially prone to errors if the order is confused.
+**Refactoring with Tuples:** Using a tuple groups the dimensions, but elements
+are accessed by index (e.g., `dimension.0`), which reduces clarity and makes the
+code less obvious and potentially prone to errors if the order is confused.
 
 ```cairo
 fn main() {
@@ -1774,8 +2077,10 @@ fn area(dimension: (u64, u64)) -> u64 {
 }
 ```
 
-**Refactoring with Structs: Adding More Meaning:**
-Structs provide the most readable and manageable solution by labeling the data. This allows access to fields by name (e.g., `rectangle.width`), making the code clearer and less error-prone.
+**Refactoring with Structs: Adding More Meaning:** Structs provide the most
+readable and manageable solution by labeling the data. This allows access to
+fields by name (e.g., `rectangle.width`), making the code clearer and less
+error-prone.
 
 ```cairo
 struct Rectangle {
@@ -1796,7 +2101,10 @@ fn area(rectangle: Rectangle) -> u64 {
 
 #### Structs for Complex Types
 
-Structs are also essential for representing complex data types, especially when serialization is required. For example, a `u256` value in Cairo is represented by a struct composed of two `u128` fields, which will be serialized as two `felt252` values.
+Structs are also essential for representing complex data types, especially when
+serialization is required. For example, a `u256` value in Cairo is represented
+by a struct composed of two `u128` fields, which will be serialized as two
+`felt252` values.
 
 ```cairo,does_not_compile
 struct u256 {
@@ -1809,7 +2117,10 @@ Working with Structs: Access, Modification, and Type Conversion
 
 ### Accessing and Modifying Struct Fields
 
-To access a specific value from a struct, use dot notation (e.g., `user1.email`). If the struct instance is mutable, you can change a field's value using dot notation and assignment. Note that the entire instance must be mutable; individual fields cannot be marked as mutable.
+To access a specific value from a struct, use dot notation (e.g.,
+`user1.email`). If the struct instance is mutable, you can change a field's
+value using dot notation and assignment. Note that the entire instance must be
+mutable; individual fields cannot be marked as mutable.
 
 ```cairo
 # #[derive(Drop)]
@@ -1839,7 +2150,8 @@ fn main() {
 
 ### Returning Struct Instances from Functions
 
-A new instance of a struct can be constructed as the last expression in a function body to implicitly return that instance.
+A new instance of a struct can be constructed as the last expression in a
+function body to implicitly return that instance.
 
 ```cairo
 # #[derive(Drop)]
@@ -1869,7 +2181,9 @@ fn build_user(email: ByteArray, username: ByteArray) -> User {
 
 ### Custom Type Conversion with `Into`
 
-For custom types, conversion can be defined using the `Into` trait. This typically requires specifying the target type, as the compiler often cannot infer it automatically.
+For custom types, conversion can be defined using the `Into` trait. This
+typically requires specifying the target type, as the compiler often cannot
+infer it automatically.
 
 ```cairo
 // Compiler automatically imports the core library, so you can omit this import
@@ -1912,9 +2226,12 @@ Cairo provides convenient shorthand for initializing and updating structs.
 
 #### Field Init Shorthand
 
-When a function parameter name is identical to a struct field name, you can use the field init shorthand to avoid repetition. Instead of `field_name: field_name`, you can simply write `field_name`.
+When a function parameter name is identical to a struct field name, you can use
+the field init shorthand to avoid repetition. Instead of
+`field_name: field_name`, you can simply write `field_name`.
 
-For example, if a `build_user` function takes `email` and `username` parameters that match the `User` struct's fields, the initialization can be streamlined:
+For example, if a `build_user` function takes `email` and `username` parameters
+that match the `User` struct's fields, the initialization can be streamlined:
 
 ```cairo
 # #[derive(Drop)]
@@ -1944,7 +2261,9 @@ fn build_user_short(email: ByteArray, username: ByteArray) -> User {
 
 #### Struct Update Syntax
 
-To create a new struct instance based on an existing one, modifying only a few fields, you can use the struct update syntax (`..`). This syntax copies the values of unspecified fields from another instance.
+To create a new struct instance based on an existing one, modifying only a few
+fields, you can use the struct update syntax (`..`). This syntax copies the
+values of unspecified fields from another instance.
 
 For example, to create `user2` from `user1` but with a different email:
 
@@ -1971,7 +2290,11 @@ fn main() {
 #
 ```
 
-The `..user1` part must come last. This syntax moves data; if fields like `ByteArray` (which do not implement `Copy`) are moved from `user1` to `user2`, `user1` can no longer be used as a whole. However, fields with types implementing the `Copy` trait (e.g., `bool`, `u64`) are copied, allowing the original instance to remain valid for those fields.
+The `..user1` part must come last. This syntax moves data; if fields like
+`ByteArray` (which do not implement `Copy`) are moved from `user1` to `user2`,
+`user1` can no longer be used as a whole. However, fields with types
+implementing the `Copy` trait (e.g., `bool`, `u64`) are copied, allowing the
+original instance to remain valid for those fields.
 
 Control Flow
 
@@ -1979,13 +2302,20 @@ If and Else If Expressions
 
 ### If and Else If Expressions
 
-Control flow in Cairo allows code execution to branch based on conditions. `if` expressions are fundamental for this, enabling conditional execution of code blocks.
+Control flow in Cairo allows code execution to branch based on conditions. `if`
+expressions are fundamental for this, enabling conditional execution of code
+blocks.
 
 #### `if` Expressions
 
-An `if` expression allows you to execute a block of code only if a specified condition is true. Optionally, an `else` expression can provide an alternative block of code to run if the condition is false. If no `else` is provided and the condition is false, the `if` block is simply skipped.
+An `if` expression allows you to execute a block of code only if a specified
+condition is true. Optionally, an `else` expression can provide an alternative
+block of code to run if the condition is false. If no `else` is provided and the
+condition is false, the `if` block is simply skipped.
 
-The condition in an `if` expression _must_ evaluate to a `bool`. Unlike some other languages, Cairo does not implicitly convert non-Boolean types (e.g., numbers) to Booleans.
+The condition in an `if` expression _must_ evaluate to a `bool`. Unlike some
+other languages, Cairo does not implicitly convert non-Boolean types (e.g.,
+numbers) to Booleans.
 
 **Example:**
 
@@ -2028,7 +2358,8 @@ Run completed successfully, returning []
 
 **Non-Boolean Condition Error:**
 
-Attempting to use a non-boolean value as a condition will result in a compilation error:
+Attempting to use a non-boolean value as a condition will result in a
+compilation error:
 
 ```cairo
 fn main() {
@@ -2069,7 +2400,9 @@ This will print `number was something other than zero`.
 
 #### Handling Multiple Conditions with `else if`
 
-For handling multiple conditions, `if` and `else` can be combined with `else if` expressions. The conditions are checked sequentially, and the first `true` condition's block is executed.
+For handling multiple conditions, `if` and `else` can be combined with `else if`
+expressions. The conditions are checked sequentially, and the first `true`
+condition's block is executed.
 
 **Example:**
 
@@ -2104,11 +2437,13 @@ Looping Constructs
 
 ### Looping Constructs
 
-Cairo provides three kinds of loops for executing a block of code multiple times: `loop`, `while`, and `for`.
+Cairo provides three kinds of loops for executing a block of code multiple
+times: `loop`, `while`, and `for`.
 
 #### Repeating Code with `loop`
 
-The `loop` keyword executes a block of code repeatedly until explicitly told to stop. This typically involves using the `break` keyword.
+The `loop` keyword executes a block of code repeatedly until explicitly told to
+stop. This typically involves using the `break` keyword.
 
 ```cairo
 fn main() {
@@ -2118,7 +2453,10 @@ fn main() {
 }
 ```
 
-Programs with infinite loops are prevented by Cairo's gas meter, which limits computation. To run such a program, the `--available-gas` flag must be set to a sufficiently large value. This mechanism is particularly important for smart contracts on Starknet.
+Programs with infinite loops are prevented by Cairo's gas meter, which limits
+computation. To run such a program, the `--available-gas` flag must be set to a
+sufficiently large value. This mechanism is particularly important for smart
+contracts on Starknet.
 
 The `break` keyword stops the execution of the loop.
 
@@ -2135,7 +2473,8 @@ fn main() {
 }
 ```
 
-The `continue` keyword tells the program to skip the rest of the current iteration and proceed to the next.
+The `continue` keyword tells the program to skip the rest of the current
+iteration and proceed to the next.
 
 ```cairo
 fn main() {
@@ -2156,7 +2495,8 @@ fn main() {
 
 #### Returning Values from Loops
 
-A `loop` can return a value by placing the desired value after the `break` expression.
+A `loop` can return a value by placing the desired value after the `break`
+expression.
 
 ```cairo
 fn main() {
@@ -2175,7 +2515,8 @@ fn main() {
 
 #### Conditional Loops with `while`
 
-The `while` loop executes a block of code as long as a specified condition remains `true`.
+The `while` loop executes a block of code as long as a specified condition
+remains `true`.
 
 ```cairo
 fn main() {
@@ -2190,7 +2531,8 @@ fn main() {
 }
 ```
 
-While `while` can iterate over collections, it is error-prone and potentially slower due to manual indexing and runtime bounds checks.
+While `while` can iterate over collections, it is error-prone and potentially
+slower due to manual indexing and runtime bounds checks.
 
 ```cairo
 fn main() {
@@ -2206,7 +2548,9 @@ fn main() {
 
 #### Looping Through a Collection with `for`
 
-The `for` loop is the most commonly used loop construct in Cairo for iterating over collections safely and concisely, eliminating the risk of out-of-bounds errors.
+The `for` loop is the most commonly used loop construct in Cairo for iterating
+over collections safely and concisely, eliminating the risk of out-of-bounds
+errors.
 
 ```cairo
 fn main() {
@@ -2218,7 +2562,8 @@ fn main() {
 }
 ```
 
-For running code a specific number of times, a `Range` can be used with a `for` loop.
+For running code a specific number of times, a `Range` can be used with a `for`
+loop.
 
 ```cairo
 fn main() {
@@ -2231,7 +2576,9 @@ fn main() {
 
 #### Equivalence Between Loops and Recursive Functions
 
-Loops and recursive functions are two common ways to repeat a block of code. Loops can often be transformed into recursive functions, which achieve repetition by calling themselves.
+Loops and recursive functions are two common ways to repeat a block of code.
+Loops can often be transformed into recursive functions, which achieve
+repetition by calling themselves.
 
 Example `loop`:
 
@@ -2269,11 +2616,15 @@ If Let Expressions
 
 ### If Let Expressions
 
-The `if let` syntax provides a more concise way to handle values that match a specific pattern, ignoring all others. It combines `if` and `let` into a less verbose expression, acting as syntactic sugar for a `match` expression that only cares about one variant and uses `_ => ()` for all other cases.
+The `if let` syntax provides a more concise way to handle values that match a
+specific pattern, ignoring all others. It combines `if` and `let` into a less
+verbose expression, acting as syntactic sugar for a `match` expression that only
+cares about one variant and uses `_ => ()` for all other cases.
 
 #### Basic Usage
 
-Consider a `match` expression that only executes code if the value is a `Some` variant:
+Consider a `match` expression that only executes code if the value is a `Some`
+variant:
 
 ```cairo
 # fn main() {
@@ -2296,11 +2647,15 @@ This can be written more succinctly using `if let`:
 # }
 ```
 
-The `if let` expression takes a pattern (`Some(max)`) and an expression (`number`). If the value matches the pattern, `max` binds to the value inside `Some`, and the code block is executed. If it doesn't match, the block is skipped.
+The `if let` expression takes a pattern (`Some(max)`) and an expression
+(`number`). If the value matches the pattern, `max` binds to the value inside
+`Some`, and the code block is executed. If it doesn't match, the block is
+skipped.
 
 #### `if let` with `else`
 
-An `else` block can be included with `if let`, serving the same purpose as the `_` case in a `match` expression. For example, to handle `Coin` enum variants:
+An `else` block can be included with `if let`, serving the same purpose as the
+`_` case in a `match` expression. For example, to handle `Coin` enum variants:
 
 Using `match`:
 
@@ -2349,7 +2704,10 @@ Using `if let` and `else`:
 
 #### Trade-offs
 
-While `if let` reduces boilerplate, typing, and indentation, it sacrifices the exhaustive checking enforced by `match` expressions. The choice between `match` and `if let` depends on whether conciseness is an appropriate trade-off for losing exhaustive pattern matching in a given situation.
+While `if let` reduces boilerplate, typing, and indentation, it sacrifices the
+exhaustive checking enforced by `match` expressions. The choice between `match`
+and `if let` depends on whether conciseness is an appropriate trade-off for
+losing exhaustive pattern matching in a given situation.
 
 Error Handling and Panics
 
@@ -2361,7 +2719,9 @@ Recoverable Errors: The Result and Option Enums
 
 ### Recoverable Errors: The Result and Option Enums
 
-Most errors don’t require a program to stop entirely. When a function fails, it might be for a reason that allows for interpretation and response. Cairo provides the `Result` enum for handling such recoverable errors.
+Most errors don’t require a program to stop entirely. When a function fails, it
+might be for a reason that allows for interpretation and response. Cairo
+provides the `Result` enum for handling such recoverable errors.
 
 #### The `Result` Enum
 
@@ -2374,11 +2734,15 @@ enum Result<T, E> {
 }
 ```
 
-`Result<T, E>` is a generic enum where `Ok` holds a value of type `T` (success) and `Err` holds a value of type `E` (failure). This makes it suitable for operations that might succeed or fail.
+`Result<T, E>` is a generic enum where `Ok` holds a value of type `T` (success)
+and `Err` holds a value of type `E` (failure). This makes it suitable for
+operations that might succeed or fail.
 
 #### The `ResultTrait`
 
-The `ResultTrait` provides methods for working with the `Result<T, E>` enum, including unwrapping values, checking its variant, and panicking with custom messages. The `ResultTraitImpl` defines the logic for these methods:
+The `ResultTrait` provides methods for working with the `Result<T, E>` enum,
+including unwrapping values, checking its variant, and panicking with custom
+messages. The `ResultTraitImpl` defines the logic for these methods:
 
 ```cairo,noplayground
 trait ResultTrait<T, E> {
@@ -2396,11 +2760,19 @@ trait ResultTrait<T, E> {
 }
 ```
 
-- **`expect` and `unwrap`**: Both extract the `T` value from an `Ok` variant. If the `Result` is `Err`, they panic. `expect` allows a custom panic message, while `unwrap` uses a default message.
-- **`expect_err` and `unwrap_err`**: These are the opposite. They extract the `E` value from an `Err` variant. If the `Result` is `Ok`, they panic. `expect_err` allows a custom panic message, while `unwrap_err` uses a default message.
-- **`is_ok` and `is_err`**: These utility functions check the `Result` variant without consuming it. `is_ok` returns `true` for `Ok`, `false` for `Err`. `is_err` returns `true` for `Err`, `false` for `Ok`.
+- **`expect` and `unwrap`**: Both extract the `T` value from an `Ok` variant. If
+  the `Result` is `Err`, they panic. `expect` allows a custom panic message,
+  while `unwrap` uses a default message.
+- **`expect_err` and `unwrap_err`**: These are the opposite. They extract the
+  `E` value from an `Err` variant. If the `Result` is `Ok`, they panic.
+  `expect_err` allows a custom panic message, while `unwrap_err` uses a default
+  message.
+- **`is_ok` and `is_err`**: These utility functions check the `Result` variant
+  without consuming it. `is_ok` returns `true` for `Ok`, `false` for `Err`.
+  `is_err` returns `true` for `Err`, `false` for `Ok`.
 
-Note the `<+Drop<T>>` and `<+Drop<E>>` syntax, which are generic type constraints requiring the `Drop` trait implementation for types `T` and `E`.
+Note the `<+Drop<T>>` and `<+Drop<E>>` syntax, which are generic type
+constraints requiring the `Drop` trait implementation for types `T` and `E`.
 
 #### Examples
 
@@ -2410,7 +2782,9 @@ Consider a function signature for `u128_overflowing_add`:
 fn u128_overflowing_add(a: u128, b: u128) -> Result<u128, u128>;
 ```
 
-This function takes two `u128` integers and returns `Ok(sum)` if no overflow occurs, or `Err(overflowed_value)` if it does. This `Result` can then be used, for example, to return an `Option<u128>`:
+This function takes two `u128` integers and returns `Ok(sum)` if no overflow
+occurs, or `Err(overflowed_value)` if it does. This `Result` can then be used,
+for example, to return an `Option<u128>`:
 
 ```cairo,noplayground
 fn u128_checked_add(a: u128, b: u128) -> Option<u128> {
@@ -2422,7 +2796,8 @@ fn u128_checked_add(a: u128, b: u128) -> Option<u128> {
 
 ```
 
-Here, `u128_checked_add` converts the `Result` into an `Option`, returning `Some(sum)` on success and `None` on overflow, without panicking.
+Here, `u128_checked_add` converts the `Result` into an `Option`, returning
+`Some(sum)` on success and `None` on overflow, without panicking.
 
 Another example is `parse_u8`:
 
@@ -2435,7 +2810,8 @@ fn parse_u8(s: felt252) -> Result<u8, felt252> {
 }
 ```
 
-This function attempts to convert a `felt252` to a `u8`, returning `Ok(value)` on success or `Err('Invalid integer')` on failure.
+This function attempts to convert a `felt252` to a `u8`, returning `Ok(value)`
+on success or `Err('Invalid integer')` on failure.
 
 Test cases for `parse_u8`:
 
@@ -2470,14 +2846,18 @@ mod tests {
 #
 ```
 
-`#[test]` marks a function as a test, and `#[should_panic]` indicates the test passes if execution panics. The first test verifies a valid conversion doesn't panic, while the second expects a panic for an out-of-range value.
+`#[test]` marks a function as a test, and `#[should_panic]` indicates the test
+passes if execution panics. The first test verifies a valid conversion doesn't
+panic, while the second expects a panic for an out-of-range value.
 
 #### The `?` Operator
 
-The `?` operator provides concise error handling for `Result` and `Option` types:
+The `?` operator provides concise error handling for `Result` and `Option`
+types:
 
 - If the value is `Ok(x)` or `Some(x)`, it unwraps and returns `x`.
-- If the value is `Err(e)` or `None`, it immediately returns from the function, propagating the error or `None`.
+- If the value is `Err(e)` or `None`, it immediately returns from the function,
+  propagating the error or `None`.
 
 Example using the `?` operator:
 
@@ -2490,7 +2870,8 @@ fn do_something_with_parse_u8(input: felt252) -> Result<u8, felt252> {
 }
 ```
 
-Here, `parse_u8(input)?` will either assign the `u8` value to `input_to_u8` or return the `Err` variant from `do_something_with_parse_u8` if `parse_u8` fails.
+Here, `parse_u8(input)?` will either assign the `u8` value to `input_to_u8` or
+return the `Err` variant from `do_something_with_parse_u8` if `parse_u8` fails.
 
 Test case for `do_something_with_parse_u8`:
 
@@ -2527,9 +2908,14 @@ Unrecoverable Errors: Panicking in Cairo
 
 ### Unrecoverable Errors: Panicking in Cairo
 
-In Cairo, unexpected runtime issues can lead to program termination via the `panic` function from the core library. Panics can be triggered inadvertently (e.g., array out-of-bounds access) or deliberately by calling `panic`. When a panic occurs, the program terminates abruptly, variables are dropped, and dictionaries are squashed to ensure soundness.
+In Cairo, unexpected runtime issues can lead to program termination via the
+`panic` function from the core library. Panics can be triggered inadvertently
+(e.g., array out-of-bounds access) or deliberately by calling `panic`. When a
+panic occurs, the program terminates abruptly, variables are dropped, and
+dictionaries are squashed to ensure soundness.
 
-The `panic` function takes an array as an argument for an error message. For example:
+The `panic` function takes an array as an argument for an error message. For
+example:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -2559,7 +2945,10 @@ The `println!` macro is never reached as the program terminates.
 
 #### `panic_with_felt252` Function
 
-An idiomatic alternative is `panic_with_felt252`, which abstracts the array-defining process, allowing a one-liner panic with a `felt252` error message. It is preferred for clearer intent when only a single value is needed for the error message.
+An idiomatic alternative is `panic_with_felt252`, which abstracts the
+array-defining process, allowing a one-liner panic with a `felt252` error
+message. It is preferred for clearer intent when only a single value is needed
+for the error message.
 
 ```cairo
 use core::panic_with_felt252;
@@ -2573,7 +2962,9 @@ This yields the same error message as the previous example.
 
 #### `panic!` Macro
 
-The `panic!` macro simplifies error handling by taking a string as a parameter, eliminating the need to create an array. It also allows for error messages longer than 31 bytes.
+The `panic!` macro simplifies error handling by taking a string as a parameter,
+eliminating the need to create an array. It also allows for error messages
+longer than 31 bytes.
 
 ```cairo
 fn main() {
@@ -2592,7 +2983,8 @@ panic!("the error for panic! macro is not limited to 31 characters anymore");
 
 #### `nopanic` Notation
 
-The `nopanic` notation indicates that a function will never panic. Only `nopanic` functions can be called within a function annotated as `nopanic`.
+The `nopanic` notation indicates that a function will never panic. Only
+`nopanic` functions can be called within a function annotated as `nopanic`.
 
 ```cairo,noplayground
 fn function_never_panic() -> felt252 nopanic {
@@ -2600,7 +2992,8 @@ fn function_never_panic() -> felt252 nopanic {
 }
 ```
 
-Attempting to compile a `nopanic` function that calls a function which may panic (like `assert` or `==` for equality) will result in a compilation error:
+Attempting to compile a `nopanic` function that calls a function which may panic
+(like `assert` or `==` for equality) will result in a compilation error:
 
 ```cairo,noplayground
 fn function_never_panic() nopanic {
@@ -2628,7 +3021,10 @@ error: `scarb metadata` exited with error
 
 #### `panic_with` Attribute
 
-The `panic_with` attribute marks a function that returns an `Option` or `Result`. It takes two arguments: the data for the panic reason and the name for a wrapping function. This attribute creates a wrapper that will panic with the given data if the annotated function returns `None` or `Err`.
+The `panic_with` attribute marks a function that returns an `Option` or
+`Result`. It takes two arguments: the data for the panic reason and the name for
+a wrapping function. This attribute creates a wrapper that will panic with the
+given data if the annotated function returns `None` or `Err`.
 
 ```cairo
 #[panic_with('value is 0', wrap_not_zero)]
@@ -2650,38 +3046,58 @@ Common Error Messages and Debugging Tips
 
 ### Common Error Messages and Debugging Tips
 
-This section lists common error messages encountered in Cairo, along with their explanations and debugging tips.
+This section lists common error messages encountered in Cairo, along with their
+explanations and debugging tips.
 
 #### `Variable not dropped.`
 
-This error occurs when a variable with a type that does not implement the `Drop` trait goes out of scope without being destroyed. Ensure such variables implement either the `Drop` or `Destruct` trait. Refer to the [Ownership](ch04-01-what-is-ownership.md#destroying-values---example-with-feltdict) section.
+This error occurs when a variable with a type that does not implement the `Drop`
+trait goes out of scope without being destroyed. Ensure such variables implement
+either the `Drop` or `Destruct` trait. Refer to the
+[Ownership](ch04-01-what-is-ownership.md#destroying-values---example-with-feltdict)
+section.
 
 #### `Variable was previously moved.`
 
-This indicates an attempt to use a variable whose ownership has already been transferred to another function. For types not implementing `Copy`, ownership is moved on function calls, making the variable unusable in the original context. Consider using the `clone` method if you need to retain the original value.
+This indicates an attempt to use a variable whose ownership has already been
+transferred to another function. For types not implementing `Copy`, ownership is
+moved on function calls, making the variable unusable in the original context.
+Consider using the `clone` method if you need to retain the original value.
 
 #### `error: Trait has no implementation in context: core::fmt::Display::<package_name::struct_name>`
 
-This error arises when trying to print an instance of a custom data type using `{}` placeholders in `print!` or `println!` macros. To fix this, either manually implement the `Display` trait for your type or apply `derive(Debug)` to your type and use `{:?}` placeholders for printing.
+This error arises when trying to print an instance of a custom data type using
+`{}` placeholders in `print!` or `println!` macros. To fix this, either manually
+implement the `Display` trait for your type or apply `derive(Debug)` to your
+type and use `{:?}` placeholders for printing.
 
 #### `Got an exception while executing a hint: Hint Error: Failed to deserialize param #x.`
 
-This error signifies that an entrypoint was called with incorrect or missing arguments. Verify that the arguments provided match the expected signature. A common issue is with `u256` variables, which are structs of two `u128`s; thus, functions expecting a `u256` require two values as arguments.
+This error signifies that an entrypoint was called with incorrect or missing
+arguments. Verify that the arguments provided match the expected signature. A
+common issue is with `u256` variables, which are structs of two `u128`s; thus,
+functions expecting a `u256` require two values as arguments.
 
 #### `Item path::item is not visible in this context.`
 
-This means the path to an item is correct, but there's a visibility issue. By default, all Cairo items are private to parent modules. To resolve this, declare all modules on the path and the items themselves with `pub(crate)` or `pub`.
+This means the path to an item is correct, but there's a visibility issue. By
+default, all Cairo items are private to parent modules. To resolve this, declare
+all modules on the path and the items themselves with `pub(crate)` or `pub`.
 
 #### `Identifier not found.`
 
 This general error can indicate two main issues:
 
-- A variable is used before declaration. Ensure variables are declared with the `let` keyword.
-- The path to bring an item into scope is incorrectly defined. Verify the path's validity.
+- A variable is used before declaration. Ensure variables are declared with the
+  `let` keyword.
+- The path to bring an item into scope is incorrectly defined. Verify the path's
+  validity.
 
 #### `Trait not found. Not a trait.` (Starknet Components Related)
 
-This error often occurs when the component's `impl` block is not imported correctly in your contract. Ensure you respect the following syntax for embedding:
+This error often occurs when the component's `impl` block is not imported
+correctly in your contract. Ensure you respect the following syntax for
+embedding:
 
 ```cairo,noplayground
 #[abi(embed_v0)]
@@ -2694,11 +3110,19 @@ Introduction to Generics
 
 ### Introduction to Generics
 
-Generics are abstract stand-ins for concrete types or other properties, allowing the creation of definitions for item declarations (like structs, functions, enums, traits, implementations, and methods) that can be used with many different concrete data types. This enables writing reusable code, avoiding duplication, and enhancing maintainability. While generics reduce development time for programmers, the compiler creates a new definition for each concrete type, which can increase contract size in Starknet.
+Generics are abstract stand-ins for concrete types or other properties, allowing
+the creation of definitions for item declarations (like structs, functions,
+enums, traits, implementations, and methods) that can be used with many
+different concrete data types. This enables writing reusable code, avoiding
+duplication, and enhancing maintainability. While generics reduce development
+time for programmers, the compiler creates a new definition for each concrete
+type, which can increase contract size in Starknet.
 
 #### Generic Functions
 
-Functions can operate on different types by placing generic type parameters in their signature. This avoids the need for multiple type-specific implementations.
+Functions can operate on different types by placing generic type parameters in
+their signature. This avoids the need for multiple type-specific
+implementations.
 
 ```cairo
 // Specify generic type T between the angulars
@@ -2720,7 +3144,9 @@ fn main() {
 }
 ```
 
-For generic trait implementations used only as constraints, the `+` operator can specify an _anonymous generic implementation parameter_, e.g., `+PartialOrd<T>` is equivalent to `impl TPartialOrd: PartialOrd<T>`.
+For generic trait implementations used only as constraints, the `+` operator can
+specify an _anonymous generic implementation parameter_, e.g., `+PartialOrd<T>`
+is equivalent to `impl TPartialOrd: PartialOrd<T>`.
 
 ```cairo
 fn smallest_element<T, +PartialOrd<T>, +Copy<T>, +Drop<T>>(list: @Array<T>) -> T {
@@ -2740,7 +3166,8 @@ fn smallest_element<T, +PartialOrd<T>, +Copy<T>, +Drop<T>>(list: @Array<T>) -> T
 
 #### Generic Structs
 
-Structs can use generic type parameters for one or more fields. The type parameter is declared in angle brackets after the struct's name.
+Structs can use generic type parameters for one or more fields. The type
+parameter is declared in angle brackets after the struct's name.
 
 ```cairo
 #[derive(Drop)]
@@ -2753,7 +3180,9 @@ fn main() {
 }
 ```
 
-Manually implementing `Drop` for a generic struct requires an additional generic type for the implementation, indicating that the struct is droppable if its generic type `T` is also droppable.
+Manually implementing `Drop` for a generic struct requires an additional generic
+type for the implementation, indicating that the struct is droppable if its
+generic type `T` is also droppable.
 
 ```cairo
 struct Wallet<T> {
@@ -2805,7 +3234,9 @@ enum Result<T, E> {
 
 #### Generic Methods
 
-Methods can be implemented on structs and enums using generic types defined in their definitions. Both the trait and its implementation must include the generic type.
+Methods can be implemented on structs and enums using generic types defined in
+their definitions. Both the trait and its implementation must include the
+generic type.
 
 ```cairo
 #[derive(Copy, Drop)]
@@ -2829,7 +3260,8 @@ fn main() {
 }
 ```
 
-Constraints can be specified on generic types for methods, allowing implementations only for specific concrete types.
+Constraints can be specified on generic types for methods, allowing
+implementations only for specific concrete types.
 
 ```cairo
 #[derive(Copy, Drop)]
@@ -2881,13 +3313,20 @@ Introduction to Traits
 
 ### Introduction to Traits
 
-In Cairo, a trait defines a set of methods that a type can implement, allowing for shared behavior in an abstract way, similar to interfaces in other languages. Traits combined with generic types define functionality a particular type has and can share.
+In Cairo, a trait defines a set of methods that a type can implement, allowing
+for shared behavior in an abstract way, similar to interfaces in other
+languages. Traits combined with generic types define functionality a particular
+type has and can share.
 
 #### Defining a Trait
 
-A trait definition groups method signatures together to define a set of behaviors. You declare a trait using the `trait` keyword, followed by its name. Inside curly brackets, you list method signatures ending with a semicolon, without providing an implementation.
+A trait definition groups method signatures together to define a set of
+behaviors. You declare a trait using the `trait` keyword, followed by its name.
+Inside curly brackets, you list method signatures ending with a semicolon,
+without providing an implementation.
 
-Traits can be generic, allowing them to define behavior for various types. For instance, a `Summary` trait could be defined for a generic type `T`:
+Traits can be generic, allowing them to define behavior for various types. For
+instance, a `Summary` trait could be defined for a generic type `T`:
 
 ```cairo,noplayground
 mod aggregator {
@@ -2899,9 +3338,15 @@ mod aggregator {
 
 #### Implementing a Trait on a Type
 
-To implement a trait for a type, use the `impl` keyword, followed by a name for the implementation, then the `of` keyword, and the trait name. If the trait is generic, specify the generic type in angle brackets after the trait name. Within the `impl` block, provide the method bodies for all signatures defined in the trait.
+To implement a trait for a type, use the `impl` keyword, followed by a name for
+the implementation, then the `of` keyword, and the trait name. If the trait is
+generic, specify the generic type in angle brackets after the trait name. Within
+the `impl` block, provide the method bodies for all signatures defined in the
+trait.
 
-For a trait method to be accessible, its implementation must be visible in the scope where the method is called, and the trait itself must be brought into scope.
+For a trait method to be accessible, its implementation must be visible in the
+scope where the method is called, and the trait itself must be brought into
+scope.
 
 **Example: `Summary` Trait Implementation**
 
@@ -3011,7 +3456,9 @@ fn main() {
 
 **Example: `Display` Trait for Custom Types**
 
-To print custom data types using `println!` with the `{}` placeholder, you must implement the `core::fmt::Display` trait for your type. The `fmt` method takes a snapshot of `self` and a mutable reference to a `Formatter`.
+To print custom data types using `println!` with the `{}` placeholder, you must
+implement the `core::fmt::Display` trait for your type. The `fmt` method takes a
+snapshot of `self` and a mutable reference to a `Formatter`.
 
 ```cairo
 use core::fmt::{Display, Formatter, Error};
@@ -3038,7 +3485,8 @@ fn main() {
 
 **Example: Trait Implementations for Enums**
 
-Traits can also be implemented for enums, allowing you to define methods and behaviors associated with enum variants.
+Traits can also be implemented for enums, allowing you to define methods and
+behaviors associated with enum variants.
 
 ```cairo
 #[derive(Drop)]
@@ -3069,11 +3517,16 @@ fn main() {
 
 #### The `#[generate_trait]` Attribute
 
-For cases where a trait is defined and immediately implemented without being reused, Cairo provides the `#[generate_trait]` attribute. Placing this attribute above an `impl` block tells the compiler to automatically generate the corresponding trait definition, simplifying the code by removing the need for an explicit `trait` declaration.
+For cases where a trait is defined and immediately implemented without being
+reused, Cairo provides the `#[generate_trait]` attribute. Placing this attribute
+above an `impl` block tells the compiler to automatically generate the
+corresponding trait definition, simplifying the code by removing the need for an
+explicit `trait` declaration.
 
 **Example: `#[generate_trait]` with Snapshot and Mutable References**
 
-Trait methods can take `self` as a snapshot (`@self`) if they don't modify the instance, or as a mutable reference (`ref self`) if they do.
+Trait methods can take `self` as a snapshot (`@self`) if they don't modify the
+instance, or as a mutable reference (`ref self`) if they do.
 
 ```cairo
 #[derive(Copy, Drop)]
@@ -3105,13 +3558,17 @@ fn main() {
 
 #### Multiple `impl` Blocks
 
-A struct can have multiple `impl` blocks, even if they implement different traits or methods. This allows for organizing methods into logical groups, though it's not always necessary.
+A struct can have multiple `impl` blocks, even if they implement different
+traits or methods. This allows for organizing methods into logical groups,
+though it's not always necessary.
 
 Default Trait Implementations
 
 ### Default Trait Implementations
 
-Default behavior for trait methods can be defined, allowing implementors to either keep or override this behavior. This avoids requiring full implementations for all methods on every type.
+Default behavior for trait methods can be defined, allowing implementors to
+either keep or override this behavior. This avoids requiring full
+implementations for all methods on every type.
 
 For example, the `Summary` trait can define a default `summarize` method:
 
@@ -3164,7 +3621,8 @@ For example, the `Summary` trait can define a default `summarize` method:
 #
 ```
 
-To use this default implementation for `NewsArticle`, an empty `impl` block is used:
+To use this default implementation for `NewsArticle`, an empty `impl` block is
+used:
 
 ```cairo
 # mod aggregator {
@@ -3217,9 +3675,14 @@ fn main() {
 
 This will print: `New article available! (Read more...)`.
 
-Overriding a default implementation uses the same syntax as implementing a trait method without a default. Default implementations can also call other methods within the same trait, even if those methods don't have default implementations. This allows traits to provide significant functionality while requiring implementors to specify only a small part.
+Overriding a default implementation uses the same syntax as implementing a trait
+method without a default. Default implementations can also call other methods
+within the same trait, even if those methods don't have default implementations.
+This allows traits to provide significant functionality while requiring
+implementors to specify only a small part.
 
-For instance, `Summary` could require `summarize_author` and provide a default `summarize` that calls it:
+For instance, `Summary` could require `summarize_author` and provide a default
+`summarize` that calls it:
 
 ```cairo
 # mod aggregator {
@@ -3263,7 +3726,8 @@ For instance, `Summary` could require `summarize_author` and provide a default `
 #
 ```
 
-To use this `Summary` version, only `summarize_author` needs to be defined when implementing the trait for `Tweet`:
+To use this `Summary` version, only `summarize_author` needs to be defined when
+implementing the trait for `Tweet`:
 
 ```cairo
 # mod aggregator {
@@ -3307,7 +3771,8 @@ To use this `Summary` version, only `summarize_author` needs to be defined when 
 #
 ```
 
-Calling `summarize` on a `Tweet` instance will then use the default implementation, which in turn calls the provided `summarize_author`:
+Calling `summarize` on a `Tweet` instance will then use the default
+implementation, which in turn calls the provided `summarize_author`:
 
 ```cairo
 # mod aggregator {
@@ -3353,15 +3818,22 @@ fn main() {
 
 This code prints: `1 new tweet: (Read more from @EliBenSasson...)`.
 
-Note that it's not possible to call a default implementation from an overriding implementation of the same method.
+Note that it's not possible to call a default implementation from an overriding
+implementation of the same method.
 
 Trait Bounds and Constraints
 
 ### Trait Bounds and Constraints
 
-When working with generic types, the Cairo compiler needs guarantees about their capabilities, especially concerning ownership and operations. This is achieved through _trait bounds_, which specify that a generic type must implement certain traits.
+When working with generic types, the Cairo compiler needs guarantees about their
+capabilities, especially concerning ownership and operations. This is achieved
+through _trait bounds_, which specify that a generic type must implement certain
+traits.
 
-For instance, the `largest_list` function compares two lists of a generic type `T` and returns the longer one. If `T` is an `Array<T>`, the compiler cannot guarantee `Array<T>` is droppable without knowing how to drop `T`. To resolve this, `T` must implement the `Drop` trait:
+For instance, the `largest_list` function compares two lists of a generic type
+`T` and returns the longer one. If `T` is an `Array<T>`, the compiler cannot
+guarantee `Array<T>` is droppable without knowing how to drop `T`. To resolve
+this, `T` must implement the `Drop` trait:
 
 ```cairo
 fn largest_list<T, impl TDrop: Drop<T>>(l1: Array<T>, l2: Array<T>) -> Array<T> {
@@ -3373,11 +3845,14 @@ fn largest_list<T, impl TDrop: Drop<T>>(l1: Array<T>, l2: Array<T>) -> Array<T> 
 }
 ```
 
-This `TDrop: Drop<T>` syntax is a trait bound, ensuring `T` is droppable. The compiler can then deduce the concrete type's `Drop` implementation in `main`.
+This `TDrop: Drop<T>` syntax is a trait bound, ensuring `T` is droppable. The
+compiler can then deduce the concrete type's `Drop` implementation in `main`.
 
 #### Constraints for Generic Types
 
-Trait bounds are crucial for enabling specific logic within functions. For example, to find the smallest element in an `Array<T>`, `T` must implement `PartialOrd` for comparison. Initially, you might write:
+Trait bounds are crucial for enabling specific logic within functions. For
+example, to find the smallest element in an `Array<T>`, `T` must implement
+`PartialOrd` for comparison. Initially, you might write:
 
 ```cairo
 // Given a list of T get the smallest one
@@ -3410,7 +3885,10 @@ fn main() {
 }
 ```
 
-However, this code won't compile. Indexing `list[index]` yields a snapshot `@T`. The `*` desnap operator requires `T` to implement `Copy`. Furthermore, after copying, the new `T` value needs to be dropped, requiring `T` to also implement `Drop`. The correct function signature includes all necessary bounds:
+However, this code won't compile. Indexing `list[index]` yields a snapshot `@T`.
+The `*` desnap operator requires `T` to implement `Copy`. Furthermore, after
+copying, the new `T` value needs to be dropped, requiring `T` to also implement
+`Drop`. The correct function signature includes all necessary bounds:
 
 ```cairo
 fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>>(
@@ -3430,7 +3908,8 @@ fn smallest_element<T, impl TPartialOrd: PartialOrd<T>, impl TCopy: Copy<T>, imp
 }
 ```
 
-Generic methods within generic traits also require explicit trait bounds. Consider a `WalletMixTrait` that combines two `Wallet` instances:
+Generic methods within generic traits also require explicit trait bounds.
+Consider a `WalletMixTrait` that combines two `Wallet` instances:
 
 ```cairo,noplayground
 struct Wallet<T, U> {
@@ -3451,7 +3930,9 @@ impl WalletMixImpl<T1, U1> of WalletMixTrait<T1, U1> {
 
 ```
 
-This fails because `self` and `other` are dropped at the end of `mixup`, and the compiler needs to know how to drop `Wallet<T, U>`. This means all generic types (`T1`, `U1`, `T2`, `U2`) must implement `Drop`:
+This fails because `self` and `other` are dropped at the end of `mixup`, and the
+compiler needs to know how to drop `Wallet<T, U>`. This means all generic types
+(`T1`, `U1`, `T2`, `U2`) must implement `Drop`:
 
 ```cairo
 trait WalletMixTrait<T1, U1> {
@@ -3471,7 +3952,8 @@ impl WalletMixImpl<T1, +Drop<T1>, U1, +Drop<U1>> of WalletMixTrait<T1, U1> {
 
 #### Dictionaries as Struct Members
 
-When a struct contains a `Felt252Dict<T>`, `T` requires specific trait bounds for correct interaction. For a `UserDatabase<T>`:
+When a struct contains a `Felt252Dict<T>`, `T` requires specific trait bounds
+for correct interaction. For a `UserDatabase<T>`:
 
 ```cairo,noplayground
 struct UserDatabase<T> {
@@ -3486,11 +3968,14 @@ trait UserDatabaseTrait<T> {
 }
 ```
 
-To implement `UserDatabaseTrait`, `T` must satisfy `Felt252Dict<T>` requirements:
+To implement `UserDatabaseTrait`, `T` must satisfy `Felt252Dict<T>`
+requirements:
 
-1.  `T` must implement `Copy<T>` for getting values from `Felt252Dict<T>`. (`get_balance` requires `+Copy<T>`).
+1.  `T` must implement `Copy<T>` for getting values from `Felt252Dict<T>`.
+    (`get_balance` requires `+Copy<T>`).
 2.  `T` must implement `Felt252DictValue<T>` as all dictionary value types do.
-3.  `T` must implement `Drop<T>` for inserting values. (`update_user` requires `+Drop<T>`).
+3.  `T` must implement `Drop<T>` for inserting values. (`update_user` requires
+    `+Drop<T>`).
 
 The implementation with these constraints is:
 
@@ -3514,7 +3999,11 @@ impl UserDatabaseImpl<T, +Felt252DictValue<T>> of UserDatabaseTrait<T> {
 }
 ```
 
-Finally, because `UserDatabase<T>` contains a `Felt252Dict<T>` and uses generics, it doesn't automatically implement `Drop<T>` or `Destruct<T>`. `#[derive(Destruct)]` won't work. Thus, `Destruct<UserDatabase<T>>` must be implemented manually, requiring `Drop<T>` and `Felt252DictValue<T>` bounds for `T`:
+Finally, because `UserDatabase<T>` contains a `Felt252Dict<T>` and uses
+generics, it doesn't automatically implement `Drop<T>` or `Destruct<T>`.
+`#[derive(Destruct)]` won't work. Thus, `Destruct<UserDatabase<T>>` must be
+implemented manually, requiring `Drop<T>` and `Felt252DictValue<T>` bounds for
+`T`:
 
 ```cairo,noplayground
 impl UserDatabaseDestruct<T, +Drop<T>, +Felt252DictValue<T>> of Destruct<UserDatabase<T>> {
@@ -3528,13 +4017,23 @@ Associated Items in Traits
 
 ### Associated Items in Traits
 
-Associated items are elements logically related to a trait's implementation, including associated functions, types, constants, and implementations. Each kind comes in two varieties: definitions (actual implementations) and declarations (signatures).
+Associated items are elements logically related to a trait's implementation,
+including associated functions, types, constants, and implementations. Each kind
+comes in two varieties: definitions (actual implementations) and declarations
+(signatures).
 
 #### Associated Types
 
-Associated types are type aliases that define abstract type placeholders within traits. They allow trait implementers to choose the actual types to use, keeping the trait definition clean and flexible. The `Result` type in the `Pack` trait below is an example of such a placeholder, where its concrete type is specified by the trait implementer.
+Associated types are type aliases that define abstract type placeholders within
+traits. They allow trait implementers to choose the actual types to use, keeping
+the trait definition clean and flexible. The `Result` type in the `Pack` trait
+below is an example of such a placeholder, where its concrete type is specified
+by the trait implementer.
 
-Cairo 2.9 and later (with `experimental-features = ["associated_item_constraints"]` in `Scarb.toml`) allows specifying the associated type of a trait, such as requiring a closure to return a `boolean` for a `filter` function:
+Cairo 2.9 and later (with
+`experimental-features = ["associated_item_constraints"]` in `Scarb.toml`)
+allows specifying the associated type of a trait, such as requiring a closure to
+return a `boolean` for a `filter` function:
 
 ```cairo, noplayground
 #[generate_trait]
@@ -3573,7 +4072,10 @@ trait Pack<T> {
 }
 ```
 
-Compared to a generic approach where a function `foo` might need to specify both `T` and `U` (e.g., `fn foo<T, U, +PackGeneric<T, U>>(self: T, other: T) -> U`), associated types allow for a more concise definition. For instance, `bar` only needs `T`:
+Compared to a generic approach where a function `foo` might need to specify both
+`T` and `U` (e.g., `fn foo<T, U, +PackGeneric<T, U>>(self: T, other: T) -> U`),
+associated types allow for a more concise definition. For instance, `bar` only
+needs `T`:
 
 ```cairo, noplayground
 fn bar<T, impl PackImpl: Pack<T>>(self: T, b: T) -> PackImpl::Result {
@@ -3581,7 +4083,8 @@ fn bar<T, impl PackImpl: Pack<T>>(self: T, b: T) -> PackImpl::Result {
 }
 ```
 
-Here's how `Pack` can be implemented and how `PackGeneric` would look for comparison:
+Here's how `Pack` can be implemented and how `PackGeneric` would look for
+comparison:
 
 ```cairo, noplayground
 impl PackU32Impl of Pack<u32> {
@@ -3605,7 +4108,8 @@ impl PackGenericU32 of PackGeneric<u32, u64> {
 }
 ```
 
-Both approaches yield the same result, but associated types lead to cleaner function signatures:
+Both approaches yield the same result, but associated types lead to cleaner
+function signatures:
 
 ```cairo
 fn main() {
@@ -3623,7 +4127,10 @@ fn main() {
 
 #### Associated Constants
 
-Associated constants are constants defined within a trait using the `const` keyword and implemented in its associated types. They bind a constant value directly to the trait, improving code organization, enabling compile-time checks, and ensuring consistency across instances of the same type.
+Associated constants are constants defined within a trait using the `const`
+keyword and implemented in its associated types. They bind a constant value
+directly to the trait, improving code organization, enabling compile-time
+checks, and ensuring consistency across instances of the same type.
 
 ```cairo, noplayground
 trait Shape<T> {
@@ -3669,7 +4176,10 @@ fn main() {
 
 #### Associated Implementations
 
-Associated implementations declare that a trait implementation must exist for an associated type, enforcing relationships between types and implementations at the trait level. This ensures type safety and consistency in generic programming contexts.
+Associated implementations declare that a trait implementation must exist for an
+associated type, enforcing relationships between types and implementations at
+the trait level. This ensures type safety and consistency in generic programming
+contexts.
 
 Consider the `Iterator` and `IntoIterator` traits from the Cairo core library:
 
@@ -3710,9 +4220,14 @@ impl ArrayIntoIterator<T> of IntoIterator<Array<T>> {
 }
 ```
 
-The `impl Iterator: Iterator<Self::IntoIter>;` line in `IntoIterator` is an associated implementation. It ensures that the `IntoIter` type, which represents the iterator created from a collection, always implements the `Iterator` trait. This guarantees that `into_iter` returns an iterable type, improving code ergonomics and enforcing type safety.
+The `impl Iterator: Iterator<Self::IntoIter>;` line in `IntoIterator` is an
+associated implementation. It ensures that the `IntoIter` type, which represents
+the iterator created from a collection, always implements the `Iterator` trait.
+This guarantees that `into_iter` returns an iterable type, improving code
+ergonomics and enforcing type safety.
 
-Another example is using the `TypeEqual` trait to ensure two state machines have the same associated state type:
+Another example is using the `TypeEqual` trait to ensure two state machines have
+the same associated state type:
 
 ```cairo
 trait StateMachine {
@@ -3760,16 +4275,22 @@ Common and Derivable Traits
 
 ### Common and Derivable Traits
 
-In Cairo, the `derive` attribute automatically generates code to implement a default trait on a struct or enum definition. This section details the standard library traits compatible with the `derive` attribute.
+In Cairo, the `derive` attribute automatically generates code to implement a
+default trait on a struct or enum definition. This section details the standard
+library traits compatible with the `derive` attribute.
 
 #### `Drop` and `Destruct`
 
-- **`Drop`**: Intervenes when variables move out of scope, handling their destruction. More details can be found in the ownership chapter.
-- **`Destruct`**: Allows Dictionaries to be automatically squashed when they go out of scope, preventing manual calls to `squash`.
+- **`Drop`**: Intervenes when variables move out of scope, handling their
+  destruction. More details can be found in the ownership chapter.
+- **`Destruct`**: Allows Dictionaries to be automatically squashed when they go
+  out of scope, preventing manual calls to `squash`.
 
 #### `Clone` and `Copy` for Duplicating Values
 
-- **`Clone`**: Provides functionality to explicitly create a deep copy of a value. Deriving `Clone` implements the `clone` method by calling `clone` on each of the type's components, requiring all fields to also implement `Clone`.
+- **`Clone`**: Provides functionality to explicitly create a deep copy of a
+  value. Deriving `Clone` implements the `clone` method by calling `clone` on
+  each of the type's components, requiring all fields to also implement `Clone`.
 
   ```cairo
   #[derive(Clone, Drop)]
@@ -3784,7 +4305,8 @@ In Cairo, the `derive` attribute automatically generates code to implement a def
   }
   ```
 
-- **`Copy`**: Allows for the duplication of values. You can derive `Copy` on any type whose parts all implement `Copy`.
+- **`Copy`**: Allows for the duplication of values. You can derive `Copy` on any
+  type whose parts all implement `Copy`.
 
   ```cairo
   #[derive(Copy, Drop)]
@@ -3803,7 +4325,11 @@ In Cairo, the `derive` attribute automatically generates code to implement a def
 
 #### `Debug` for Printing and Debugging
 
-The `Debug` trait enables debug formatting in format strings using `:?` within `{}` placeholders. It allows printing instances of a type for debugging purposes, making it useful for inspecting values during program execution. This trait is also required by `assert_xx!` macros in tests for printing values upon assertion failure.
+The `Debug` trait enables debug formatting in format strings using `:?` within
+`{}` placeholders. It allows printing instances of a type for debugging
+purposes, making it useful for inspecting values during program execution. This
+trait is also required by `assert_xx!` macros in tests for printing values upon
+assertion failure.
 
 ```cairo
 #[derive(Copy, Drop, Debug)]
@@ -3826,7 +4352,10 @@ Point { x: 1, y: 3 }
 
 #### `Default` for Default Values
 
-The `Default` trait allows the creation of a default value for a type, commonly zero for primitive types. For composite types, all elements must implement `Default`. For `enum` types, the default variant must be declared using the `#[default]` attribute.
+The `Default` trait allows the creation of a default value for a type, commonly
+zero for primitive types. For composite types, all elements must implement
+`Default`. For `enum` types, the default variant must be declared using the
+`#[default]` attribute.
 
 ```cairo
 #[derive(Default, Drop)]
@@ -3855,7 +4384,11 @@ fn main() {
 
 #### `PartialEq` for Equality Comparisons
 
-The `PartialEq` trait enables comparison between instances of a type for equality, allowing the use of `==` and `!=` operators. When derived for structs, two instances are equal if all their fields are equal. For enums, each variant is equal only to itself. Custom implementations are possible for specific comparison logic, such as comparing rectangles by area.
+The `PartialEq` trait enables comparison between instances of a type for
+equality, allowing the use of `==` and `!=` operators. When derived for structs,
+two instances are equal if all their fields are equal. For enums, each variant
+is equal only to itself. Custom implementations are possible for specific
+comparison logic, such as comparing rectangles by area.
 
 ```cairo
 #[derive(Copy, Drop)]
@@ -3882,7 +4415,8 @@ fn main() {
 }
 ```
 
-`PartialEq` is also required by the `assert_eq!` macro in tests for comparing two instances.
+`PartialEq` is also required by the `assert_eq!` macro in tests for comparing
+two instances.
 
 ```cairo
 #[derive(PartialEq, Drop)]
@@ -3899,7 +4433,10 @@ fn main() {
 
 #### Serializing with `Serde`
 
-`Serde` provides trait implementations for `serialize` and `deserialize` functions, allowing transformation of data structures into a format for storage or transmission (serialization) and vice-versa (deserialization). This is useful for persisting program state.
+`Serde` provides trait implementations for `serialize` and `deserialize`
+functions, allowing transformation of data structures into a format for storage
+or transmission (serialization) and vice-versa (deserialization). This is useful
+for persisting program state.
 
 ```cairo
 #[derive(Serde, Drop)]
@@ -3923,13 +4460,18 @@ Output:
 Run panicked with [2, 99 ('c'), ].
 ```
 
-In the example, `struct A` is serialized into an array. Deriving `Drop` for `A` is necessary because the `main` function retains ownership of `first_struct`.
+In the example, `struct A` is serialized into an array. Deriving `Drop` for `A`
+is necessary because the `main` function retains ownership of `first_struct`.
 
 Advanced Trait Concepts
 
 ### Impl Aliases
 
-Implementations can be aliased when imported, which is useful for instantiating generic implementations with concrete types. This allows defining a generic implementation in a private module and then exposing specific instantiations publicly via aliases, avoiding code duplication while keeping the public API clean.
+Implementations can be aliased when imported, which is useful for instantiating
+generic implementations with concrete types. This allows defining a generic
+implementation in a private module and then exposing specific instantiations
+publicly via aliases, avoiding code duplication while keeping the public API
+clean.
 
 ```cairo,noplayground
 trait Two<T> {
@@ -3952,9 +4494,15 @@ pub impl U128Two = one_based::TwoImpl<u128>;
 
 ### Negative Impls
 
-**Note:** This is an experimental feature; enable it by adding `experimental-features = ["negative_impls"]` under the `[package]` section in your `Scarb.toml`.
+**Note:** This is an experimental feature; enable it by adding
+`experimental-features = ["negative_impls"]` under the `[package]` section in
+your `Scarb.toml`.
 
-Negative implementations allow expressing that a type does not implement a certain trait, enabling implementations that apply only when another implementation does not exist. For example, you can define a default `Consumer` trait implementation for all types _except_ those that also implement `Producer`.
+Negative implementations allow expressing that a type does not implement a
+certain trait, enabling implementations that apply only when another
+implementation does not exist. For example, you can define a default `Consumer`
+trait implementation for all types _except_ those that also implement
+`Producer`.
 
 ```cairo
 #[derive(Drop)]
@@ -4000,9 +4548,14 @@ fn main() {
 
 ### Constraint traits on associated items
 
-**Note:** This is an experimental feature; enable it by adding `experimental-features = ["associated_item_constraints"]` under the `[package]` section in your `Scarb.toml`.
+**Note:** This is an experimental feature; enable it by adding
+`experimental-features = ["associated_item_constraints"]` under the `[package]`
+section in your `Scarb.toml`.
 
-Associated items of a trait can be constrained based on the generic parameter's type using the `[AssociatedItem: ConstrainedValue]` syntax after a trait bound. This is useful, for instance, to ensure an iterator's elements match a collection's element type when extending it.
+Associated items of a trait can be constrained based on the generic parameter's
+type using the `[AssociatedItem: ConstrainedValue]` syntax after a trait bound.
+This is useful, for instance, to ensure an iterator's elements match a
+collection's element type when extending it.
 
 ```cairo
 trait Extend<T, A> {
@@ -4020,9 +4573,13 @@ impl ArrayExtend<T, +Drop<T>> of Extend<Array<T>, T> {
 
 ### `TypeEqual` Trait for type equality constraints
 
-The `core::metaprogramming::TypeEqual` trait allows creating constraints based on type equality, useful in advanced scenarios to exclude specific types from an implementation or to ensure two types are equal (especially with associated types).
+The `core::metaprogramming::TypeEqual` trait allows creating constraints based
+on type equality, useful in advanced scenarios to exclude specific types from an
+implementation or to ensure two types are equal (especially with associated
+types).
 
-One use case is implementing a trait for all types matching certain conditions, _except_ for specific types, using a negative implementation on `TypeEqual`.
+One use case is implementing a trait for all types matching certain conditions,
+_except_ for specific types, using a negative implementation on `TypeEqual`.
 
 ```cairo
 trait SafeDefault<T> {
@@ -4057,7 +4614,8 @@ Operators and Syntax Reference
 
 #### Cairo Operators
 
-This section provides a reference for operators and syntax elements used in Cairo.
+This section provides a reference for operators and syntax elements used in
+Cairo.
 
 | Operator | Example                    | Explanation                              | Overloadable? |
 | -------- | -------------------------- | ---------------------------------------- | ------------- | -------------------------------- | --- |
@@ -4092,36 +4650,57 @@ Introduction to Cairo Macros
 
 ### Introduction to Cairo Macros
 
-Cairo provides macros as a fundamental feature for metaprogramming, allowing you to write code that generates other code. This extends Cairo's capabilities beyond what regular functions offer, helping reduce the amount of code to write and maintain.
+Cairo provides macros as a fundamental feature for metaprogramming, allowing you
+to write code that generates other code. This extends Cairo's capabilities
+beyond what regular functions offer, helping reduce the amount of code to write
+and maintain.
 
 #### The Difference Between Macros and Functions
 
 Macros differ from functions in several key ways:
 
-- **Variable Parameters**: Unlike functions, which require a fixed number and type of parameters in their signature, macros can take a variable number of arguments (e.g., `println!("hello")` vs. `println!("hello {}", name)`).
-- **Expansion Time**: Macros are expanded _before_ the compiler interprets the code, enabling them to perform actions like implementing a trait on a given type at compile time, which functions cannot do as they are called at runtime.
-- **Complexity**: Cairo macros are written in Rust and operate on Cairo code, making their definitions generally more complex to read, understand, and maintain compared to function definitions.
+- **Variable Parameters**: Unlike functions, which require a fixed number and
+  type of parameters in their signature, macros can take a variable number of
+  arguments (e.g., `println!("hello")` vs. `println!("hello {}", name)`).
+- **Expansion Time**: Macros are expanded _before_ the compiler interprets the
+  code, enabling them to perform actions like implementing a trait on a given
+  type at compile time, which functions cannot do as they are called at runtime.
+- **Complexity**: Cairo macros are written in Rust and operate on Cairo code,
+  making their definitions generally more complex to read, understand, and
+  maintain compared to function definitions.
 
 #### Procedural Macros
 
-_Procedural macros_ are a type of macro that allows you to run code at compile time, operating over Cairo syntax by both consuming and producing it. They can be thought of as functions that transform an Abstract Syntax Tree (AST) into another AST. The three kinds of procedural macros are _custom derive_, _attribute-like_, and _function-like_.
+_Procedural macros_ are a type of macro that allows you to run code at compile
+time, operating over Cairo syntax by both consuming and producing it. They can
+be thought of as functions that transform an Abstract Syntax Tree (AST) into
+another AST. The three kinds of procedural macros are _custom derive_,
+_attribute-like_, and _function-like_.
 
 #### Cairo Procedural Macros are Rust Functions
 
-Just like the Cairo compiler, procedural macros are Rust functions that take Cairo code as input and return modified Cairo code. To implement them, a package requires both a `Cargo.toml` (for macro implementation dependencies) and a `Scarb.toml` (to mark the package as a macro and define its metadata). These functions operate on key types representing Cairo code.
+Just like the Cairo compiler, procedural macros are Rust functions that take
+Cairo code as input and return modified Cairo code. To implement them, a package
+requires both a `Cargo.toml` (for macro implementation dependencies) and a
+`Scarb.toml` (to mark the package as a macro and define its metadata). These
+functions operate on key types representing Cairo code.
 
 Creating Procedural Macros
 
 ### Creating Procedural Macros
 
-Procedural macros operate on `TokenStream` and `ProcMacroResult` types. A `TokenStream` is a sequence of Cairo tokens, the smallest units of code recognized by the compiler. `ProcMacroResult` is an enhanced `TokenStream` that includes generated code and diagnostic messages.
+Procedural macros operate on `TokenStream` and `ProcMacroResult` types. A
+`TokenStream` is a sequence of Cairo tokens, the smallest units of code
+recognized by the compiler. `ProcMacroResult` is an enhanced `TokenStream` that
+includes generated code and diagnostic messages.
 
 #### Macro Types and Signatures
 
 Macro functions are decorated with one of three special attributes:
 
 - `#[inline_macro]`: For function-like macros (e.g., `println!()`).
-- `#[attribute_macro]`: For macros acting as attributes (e.g., `#[generate_trait]`).
+- `#[attribute_macro]`: For macros acting as attributes (e.g.,
+  `#[generate_trait]`).
 - `#[derive_macro]`: For macros that automatically implement traits.
 
 Here are their signatures:
@@ -4154,7 +4733,10 @@ Creating a procedural macro requires a specific project structure:
 │   └── lib.rs
 ```
 
-1.  **Rust Project**: Contains the macro implementation. \* `Cargo.toml`: Defines Rust dependencies and build settings. It must include `crate-type = ["cdylib"]` under `[lib]` and `cairo-lang-macro` as a dependency.
+1.  **Rust Project**: Contains the macro implementation. \* `Cargo.toml`:
+    Defines Rust dependencies and build settings. It must include
+    `crate-type = ["cdylib"]` under `[lib]` and `cairo-lang-macro` as a
+    dependency.
 
         ```toml
         [package]
@@ -4179,7 +4761,6 @@ Creating a procedural macro requires a specific project structure:
         *   `src/lib.rs`: Implements the procedural macro API.
 
 2.  **Cairo Project**: Declares the macro for Cairo projects.
-
     - `Scarb.toml`: Must define a `[cairo-plugin]` target type.
 
     ```toml
@@ -4190,11 +4771,13 @@ Creating a procedural macro requires a specific project structure:
     [cairo-plugin]
     ```
 
-    The project does not require any Cairo source files, only the `Scarb.toml` manifest.
+    The project does not require any Cairo source files, only the `Scarb.toml`
+    manifest.
 
 #### Using Your Macro
 
-From the user's perspective, the macro package is added to the `[dependencies]` in the Cairo project's `Scarb.toml`:
+From the user's perspective, the macro package is added to the `[dependencies]`
+in the Cairo project's `Scarb.toml`:
 
 ```toml
 [package]
@@ -4216,11 +4799,16 @@ cairo_test = "2.13.1"
 
 #### Expression Macros
 
-Expression macros provide function-like functionality with enhanced capabilities, allowing variable arguments, different argument types, compile-time code generation, and complex transformations. An example is a compile-time power function.
+Expression macros provide function-like functionality with enhanced
+capabilities, allowing variable arguments, different argument types,
+compile-time code generation, and complex transformations. An example is a
+compile-time power function.
 
 ##### Creating an Expression Macro
 
-Here's an implementation of a `pow` macro from the Alexandria library, which computes the power of a number at compile time. It uses `cairo_lang_macro`, `cairo_lang_parser`, and `cairo_lang_syntax` crates.
+Here's an implementation of a `pow` macro from the Alexandria library, which
+computes the power of a number at compile time. It uses `cairo_lang_macro`,
+`cairo_lang_parser`, and `cairo_lang_syntax` crates.
 
 ```rust, noplayground
 use bigdecimal::{num_traits::pow, BigDecimal};
@@ -4274,7 +4862,8 @@ pub fn pow(token_stream: TokenStream) -> ProcMacroResult {
 }
 ```
 
-Once defined, the `pow` macro can be used in a Cairo project after adding its path to `[dependencies]` in `Scarb.toml`:
+Once defined, the `pow` macro can be used in a Cairo project after adding its
+path to `[dependencies]` in `Scarb.toml`:
 
 ```cairo
 # fn main() {
@@ -4303,11 +4892,16 @@ Once defined, the `pow` macro can be used in a Cairo project after adding its pa
 
 #### Derive Macros
 
-Derive macros enable automatic trait implementation for types. When a type is annotated with `#[derive(TraitName)]`, the derive macro receives the type's structure, applies custom logic to generate the trait implementation, and outputs the code to be included in the crate. This eliminates repetitive trait implementation code.
+Derive macros enable automatic trait implementation for types. When a type is
+annotated with `#[derive(TraitName)]`, the derive macro receives the type's
+structure, applies custom logic to generate the trait implementation, and
+outputs the code to be included in the crate. This eliminates repetitive trait
+implementation code.
 
 ##### Creating a Derive Macro
 
-Consider implementing a derive macro for a `Hello` trait, which has a `hello()` function that prints "Hello, StructName!".
+Consider implementing a derive macro for a `Hello` trait, which has a `hello()`
+function that prints "Hello, StructName!".
 
 First, the `Hello` trait definition:
 
@@ -4336,7 +4930,9 @@ First, the `Hello` trait definition:
 #
 ```
 
-The `hello_macro` function parses the input token stream, extracts the struct name, and returns a hard-coded implementation of the `Hello` trait for that struct:
+The `hello_macro` function parses the input token stream, extracts the struct
+name, and returns a hard-coded implementation of the `Hello` trait for that
+struct:
 
 ```rust, noplayground
 use cairo_lang_macro::{derive_macro, ProcMacroResult, TokenStream};
@@ -4370,7 +4966,8 @@ pub fn hello_macro(token_stream: TokenStream) -> ProcMacroResult {
 }
 ```
 
-To use this macro, add `hello_macro = { path = "path/to/hello_macro" }` to the `[dependencies]` in your Cairo project's `Scarb.toml`:
+To use this macro, add `hello_macro = { path = "path/to/hello_macro" }` to the
+`[dependencies]` in your Cairo project's `Scarb.toml`:
 
 ```cairo, noplayground
 #[derive(HelloMacro, Drop, Destruct)]
@@ -4408,7 +5005,11 @@ Types of Procedural Macros
 
 ### Attribute Macros
 
-Attribute-like macros are similar to custom derive macros but offer broader possibilities, not being restricted to structs and enums. They can be applied to other items like functions and are used for diverse code generation, such as modifying item names, adding fields, executing code before functions, or changing function signatures.
+Attribute-like macros are similar to custom derive macros but offer broader
+possibilities, not being restricted to structs and enums. They can be applied to
+other items like functions and are used for diverse code generation, such as
+modifying item names, adding fields, executing code before functions, or
+changing function signatures.
 
 Their signature includes a second `TokenStream` argument:
 
@@ -4417,7 +5018,9 @@ Their signature includes a second `TokenStream` argument:
 pub fn attribute(attr: TokenStream, code: TokenStream) -> ProcMacroResult {}
 ```
 
-The first argument (`attr`) is for attribute arguments (e.g., `#[macro(arguments)]`), while the second (`code`) is for the actual code the attribute is applied to.
+The first argument (`attr`) is for attribute arguments (e.g.,
+`#[macro(arguments)]`), while the second (`code`) is for the actual code the
+attribute is applied to.
 
 #### Creating an Attribute Macro
 
@@ -4437,7 +5040,9 @@ pub fn rename(_attr: TokenStream, token_stream: TokenStream) -> ProcMacroResult 
 }
 ```
 
-To use this macro in a Cairo project, add `rename_macro = { path = "path/to/rename_macro" }` to the `[dependencies]` target in `Scarb.toml`. It can then be used directly on any struct:
+To use this macro in a Cairo project, add
+`rename_macro = { path = "path/to/rename_macro" }` to the `[dependencies]`
+target in `Scarb.toml`. It can then be used directly on any struct:
 
 ```cairo
 # fn main() {
@@ -4474,11 +5079,13 @@ Common and Built-in Macros
 
 ### Common and Built-in Macros
 
-Cairo provides `inline_macros` which are a way of writing code that generates other code, simplifying development.
+Cairo provides `inline_macros` which are a way of writing code that generates
+other code, simplifying development.
 
 #### `selector!` Macro
 
-The `selector!("function_name")` macro generates the entry point selector for the given function name.
+The `selector!("function_name")` macro generates the entry point selector for
+the given function name.
 
 #### Printing Macros (`print!`, `println!`, `write!`, `writeln!`)
 
@@ -4493,7 +5100,8 @@ The `array!` macro is used to instantiate and fill arrays.
 
 #### Panic and Assertion Macros (`panic!`, `assert!`, `assert_xx!`)
 
-- `panic!`: Calls the `panic` function and allows providing an error message longer than 31 characters.
+- `panic!`: Calls the `panic` function and allows providing an error message
+  longer than 31 characters.
 - `assert!`: Evaluates a Boolean expression and panics if `false`.
 - `assert_eq!`: Evaluates an equality and panics if not equal.
 - `assert_ne!`: Evaluates an equality and panics if equal.
@@ -4504,23 +5112,31 @@ The `array!` macro is used to instantiate and fill arrays.
 
 #### String Formatting Macro (`format!`)
 
-The `format!` macro formats a string and returns a `ByteArray` with the contents.
+The `format!` macro formats a string and returns a `ByteArray` with the
+contents.
 
 #### Component Macros (`get_dep_component!`, `get_dep_component_mut!`, `component!`)
 
-- `get_dep_component!`: Returns the requested component state from a snapshot of the state inside a component.
-- `get_dep_component_mut!`: Returns the requested component state from a reference of the state inside a component.
-- `component!`: Used in Starknet contracts to embed a component inside a contract.
+- `get_dep_component!`: Returns the requested component state from a snapshot of
+  the state inside a component.
+- `get_dep_component_mut!`: Returns the requested component state from a
+  reference of the state inside a component.
+- `component!`: Used in Starknet contracts to embed a component inside a
+  contract.
 
 Output and Formatting Macros
 
 ### Output and Formatting Macros
 
-Cairo provides several macros for outputting and formatting strings, primarily `print!`, `println!`, `format!`, `write!`, and `writeln!`. These macros leverage traits like `Display` and `LowerHex` for type-specific formatting.
+Cairo provides several macros for outputting and formatting strings, primarily
+`print!`, `println!`, `format!`, `write!`, and `writeln!`. These macros leverage
+traits like `Display` and `LowerHex` for type-specific formatting.
 
 #### `println!` and `print!` Macros
 
-`println!` and `print!` macros are used for printing output to the console. They support positional arguments using empty curly brackets `{}` and named arguments using variable names within curly brackets, e.g., `{variable_name}`.
+`println!` and `print!` macros are used for printing output to the console. They
+support positional arguments using empty curly brackets `{}` and named arguments
+using variable names within curly brackets, e.g., `{variable_name}`.
 
 ```cairo
 fn main() {
@@ -4534,11 +5150,18 @@ fn main() {
 }
 ```
 
-These macros internally use the `Display` trait. They work seamlessly with basic data types that implement `Display`. However, attempting to print complex data types directly with `println!` or `print!` will result in an error unless the `Display` trait is manually implemented for that type. For debugging complex types, the `Debug` trait is often preferred.
+These macros internally use the `Display` trait. They work seamlessly with basic
+data types that implement `Display`. However, attempting to print complex data
+types directly with `println!` or `print!` will result in an error unless the
+`Display` trait is manually implemented for that type. For debugging complex
+types, the `Debug` trait is often preferred.
 
 #### `format!` Macro
 
-The `format!` macro is similar to `println!` but instead of printing to the screen, it returns a `ByteArray` containing the formatted string. A key advantage of `format!` is that it uses snapshots, meaning it does not take ownership of its parameters, unlike string concatenation with the `+` operator.
+The `format!` macro is similar to `println!` but instead of printing to the
+screen, it returns a `ByteArray` containing the formatted string. A key
+advantage of `format!` is that it uses snapshots, meaning it does not take
+ownership of its parameters, unlike string concatenation with the `+` operator.
 
 ```cairo
 fn main() {
@@ -4561,7 +5184,9 @@ fn main() {
 
 #### `write!` and `writeln!` Macros
 
-`write!` and `writeln!` macros are used to write formatted strings into a `Formatter`. This is particularly useful for building strings incrementally or for implementing custom display logic for types.
+`write!` and `writeln!` macros are used to write formatted strings into a
+`Formatter`. This is particularly useful for building strings incrementally or
+for implementing custom display logic for types.
 
 ```cairo
 use core::fmt::Formatter;
@@ -4578,7 +5203,8 @@ fn main() {
 }
 ```
 
-These macros are also instrumental in implementing the `Display` trait for custom data types, allowing them to be printed using `println!` or `print!`.
+These macros are also instrumental in implementing the `Display` trait for
+custom data types, allowing them to be printed using `println!` or `print!`.
 
 ```cairo
 use core::fmt::{Display, Formatter, Error};
@@ -4604,11 +5230,17 @@ fn main() {
 }
 ```
 
-For debugging complex data types, it's generally recommended to use the `Debug` trait instead of manually implementing `Display`.
+For debugging complex data types, it's generally recommended to use the `Debug`
+trait instead of manually implementing `Display`.
 
 #### Print in Hexadecimal
 
-By default, the `Display` trait prints integer values in decimal. To print them in hexadecimal, you can use the `{:x}` notation within the formatting string. This functionality relies on the `LowerHex` trait, which is implemented for common types like unsigned integers, `felt252`, `NonZero`, `ContractAddress`, and `ClassHash`. You can also implement `LowerHex` for your custom types if needed.
+By default, the `Display` trait prints integer values in decimal. To print them
+in hexadecimal, you can use the `{:x}` notation within the formatting string.
+This functionality relies on the `LowerHex` trait, which is implemented for
+common types like unsigned integers, `felt252`, `NonZero`, `ContractAddress`,
+and `ClassHash`. You can also implement `LowerHex` for your custom types if
+needed.
 
 Collections
 
@@ -4616,15 +5248,25 @@ Felt252Dict: Core Concepts and Operations
 
 ### Felt252Dict: Core Concepts and Operations
 
-The `Felt252Dict<T>` data type in Cairo's core library represents a collection of unique key-value pairs, similar to maps or hash tables in other languages. Its key type is fixed to `felt252`, while the value type `T` can be specified. This type is crucial for organizing data where array indexing is insufficient and for simulating mutable memory in Cairo's otherwise immutable environment.
+The `Felt252Dict<T>` data type in Cairo's core library represents a collection
+of unique key-value pairs, similar to maps or hash tables in other languages.
+Its key type is fixed to `felt252`, while the value type `T` can be specified.
+This type is crucial for organizing data where array indexing is insufficient
+and for simulating mutable memory in Cairo's otherwise immutable environment.
 
 #### Basic Operations
 
-The core functionality of `Felt252Dict<T>` is provided by the `Felt252DictTrait` trait, which includes `insert(felt252, T) -> ()` for writing and `get(felt252) -> T` for reading values.
+The core functionality of `Felt252Dict<T>` is provided by the `Felt252DictTrait`
+trait, which includes `insert(felt252, T) -> ()` for writing and
+`get(felt252) -> T` for reading values.
 
-When a new `Felt252Dict<T>` instance is created (e.g., using `Default::default()`), all keys are implicitly initialized with a zero value. This means `get` on a non-existent key will return `0` (or the default value of `T`) instead of an error, and there is no direct way to delete entries.
+When a new `Felt252Dict<T>` instance is created (e.g., using
+`Default::default()`), all keys are implicitly initialized with a zero value.
+This means `get` on a non-existent key will return `0` (or the default value of
+`T`) instead of an error, and there is no direct way to delete entries.
 
-The `Felt252Dict<T>` effectively allows "rewriting" stored values for a given key, simulating mutability despite Cairo's immutable memory model.
+The `Felt252Dict<T>` effectively allows "rewriting" stored values for a given
+key, simulating mutability despite Cairo's immutable memory model.
 
 ```cairo
 use core::dict::Felt252Dict;
@@ -4650,7 +5292,10 @@ fn main() {
 
 #### Dictionaries Underneath
 
-Cairo's immutable memory constraint means `Felt252Dict<T>` is implemented as a list of entries. Each interaction (read/write/update) with the dictionary registers a new `Entry<T>`. An `Entry<T>` struct has three fields: `key`, `previous_value`, and `new_value`.
+Cairo's immutable memory constraint means `Felt252Dict<T>` is implemented as a
+list of entries. Each interaction (read/write/update) with the dictionary
+registers a new `Entry<T>`. An `Entry<T>` struct has three fields: `key`,
+`previous_value`, and `new_value`.
 
 ```cairo,noplayground
 struct Entry<T> {
@@ -4660,10 +5305,16 @@ struct Entry<T> {
 }
 ```
 
-- A `get` operation registers an entry where `previous_value` and `new_value` are identical.
-- An `insert` operation registers an entry where `new_value` is the inserted element, and `previous_value` is the last value held at that key (or zero if it's the first entry for that key).
+- A `get` operation registers an entry where `previous_value` and `new_value`
+  are identical.
+- An `insert` operation registers an entry where `new_value` is the inserted
+  element, and `previous_value` is the last value held at that key (or zero if
+  it's the first entry for that key).
 
-This mechanism avoids actual rewriting, instead creating new memory cells for each interaction. For example, operations like `balances.insert('Alex', 100); balances.insert('Maria', 50); balances.insert('Alex', 200); balances.get('Maria');` would produce the following entry list:
+This mechanism avoids actual rewriting, instead creating new memory cells for
+each interaction. For example, operations like
+`balances.insert('Alex', 100); balances.insert('Maria', 50); balances.insert('Alex', 200); balances.get('Maria');`
+would produce the following entry list:
 
 | key   | previous | new |
 | :---- | -------- | --- |
@@ -4674,19 +5325,26 @@ This mechanism avoids actual rewriting, instead creating new memory cells for ea
 
 #### Dictionary Destruction
 
-When a `Felt252Dict<T>` instance goes out of scope, the `Destruct<T>` trait implementation automatically calls a "squash" operation on the dictionary. Squashing reduces the list of entries to only the final state for each key. Unlike `Drop<T>`, `Destruct<T>` can generate CASM.
+When a `Felt252Dict<T>` instance goes out of scope, the `Destruct<T>` trait
+implementation automatically calls a "squash" operation on the dictionary.
+Squashing reduces the list of entries to only the final state for each key.
+Unlike `Drop<T>`, `Destruct<T>` can generate CASM.
 
 #### Entry and Finalize Methods
 
-Cairo provides `entry` and `finalize` methods, part of `Felt252DictTrait<T>`, to manually interact with dictionary entries, mirroring the internal mechanism.
+Cairo provides `entry` and `finalize` methods, part of `Felt252DictTrait<T>`, to
+manually interact with dictionary entries, mirroring the internal mechanism.
 
-The `entry` method takes ownership of the dictionary and a `key`, returning a `Felt252DictEntry<T>` (the type representing dictionary entries) and the `previous_value` held at that key.
+The `entry` method takes ownership of the dictionary and a `key`, returning a
+`Felt252DictEntry<T>` (the type representing dictionary entries) and the
+`previous_value` held at that key.
 
 ```cairo,noplayground
 fn entry(self: Felt252Dict<T>, key: felt252) -> (Felt252DictEntry<T>, T) nopanic
 ```
 
-The `finalize` method takes the `Felt252DictEntry<T>` and a `new_value`, inserting the updated entry and returning ownership of the dictionary.
+The `finalize` method takes the `Felt252DictEntry<T>` and a `new_value`,
+inserting the updated entry and returning ownership of the dictionary.
 
 ```cairo,noplayground
 fn finalize(self: Felt252DictEntry<T>, new_value: T) -> Felt252Dict<T>
@@ -4782,17 +5440,24 @@ fn main() {
 
 #### Felt252DictValue Trait
 
-The `Felt252DictValue<T>` trait is a restriction on the value type `T` for `Felt252Dict<T>`. It defines the `zero_default` method, which is invoked when a value for a given key does not exist in the dictionary, providing the default zero value.
+The `Felt252DictValue<T>` trait is a restriction on the value type `T` for
+`Felt252Dict<T>`. It defines the `zero_default` method, which is invoked when a
+value for a given key does not exist in the dictionary, providing the default
+zero value.
 
 Felt252Dict: Storing and Managing Arrays
 
 ### Felt252Dict: Storing and Managing Arrays
 
-Storing arrays and array-like structures such as `Span` in `Felt252Dict` requires careful handling due to Cairo's memory model and trait implementations. `Nullable<T>` is commonly used to wrap these types.
+Storing arrays and array-like structures such as `Span` in `Felt252Dict`
+requires careful handling due to Cairo's memory model and trait implementations.
+`Nullable<T>` is commonly used to wrap these types.
 
 #### Storing and Retrieving Spans
 
-To store a `Span<felt252>` in a `Felt252Dict`, you wrap it in `Nullable<Span<felt252>>` using `NullableTrait::new()`. Retrieval involves using `d.get()` and then `match_nullable` to unbox the value.
+To store a `Span<felt252>` in a `Felt252Dict`, you wrap it in
+`Nullable<Span<felt252>>` using `NullableTrait::new()`. Retrieval involves using
+`d.get()` and then `match_nullable` to unbox the value.
 
 ```cairo
 use core::dict::Felt252Dict;
@@ -4827,7 +5492,9 @@ fn main() {
 
 #### Storing and Managing Arrays (`Array<T>`)
 
-Storing `Array<T>` directly in a `Felt252Dict` is also possible, but retrieving it using `get` will result in a compiler error because `Array<T>` does not implement the `Copy` trait, which `get` attempts to use for copying the value.
+Storing `Array<T>` directly in a `Felt252Dict` is also possible, but retrieving
+it using `get` will result in a compiler error because `Array<T>` does not
+implement the `Copy` trait, which `get` attempts to use for copying the value.
 
 ```cairo
 use core::dict::Felt252Dict;
@@ -4849,7 +5516,9 @@ error: Trait has no implementation in context: core::traits::Copy::<core::nullab
                    ^*^
 ```
 
-To correctly read and modify arrays stored in a `Felt252Dict`, you must use dictionary entries via `dict.entry()`. This allows getting a reference to the array value without copying it.
+To correctly read and modify arrays stored in a `Felt252Dict`, you must use
+dictionary entries via `dict.entry()`. This allows getting a reference to the
+array value without copying it.
 
 ##### Reading Arrays using Entries
 
@@ -4863,11 +5532,14 @@ fn get_array_entry(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252) -
 }
 ```
 
-> Note: The array must be converted to a `Span` before finalizing the entry, as calling `NullableTrait::new(arr)` moves the array.
+> Note: The array must be converted to a `Span` before finalizing the entry, as
+> calling `NullableTrait::new(arr)` moves the array.
 
 ##### Modifying Arrays using Entries
 
-To modify a stored array, access its entry, dereference the array, perform modifications (e.g., `append`), and then finalize the entry with the updated array.
+To modify a stored array, access its entry, dereference the array, perform
+modifications (e.g., `append`), and then finalize the entry with the updated
+array.
 
 ```cairo,noplayground
 fn append_value(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252, value: u8) {
@@ -4915,7 +5587,8 @@ Simulating Data Structures with Felt252Dict
 
 ### UserDatabase Example
 
-Implementing `Destruct<T>` for `UserDatabase` enables a fully functional database. Here's an example demonstrating its usage:
+Implementing `Destruct<T>` for `UserDatabase` enables a fully functional
+database. Here's an example demonstrating its usage:
 
 ```cairo
 # use core::dict::Felt252Dict;
@@ -4976,7 +5649,9 @@ fn main() {
 
 ### Simulating a Dynamic Array (MemoryVec)
 
-To simulate a mutable dynamic array, named `MemoryVec`, we define a trait that supports operations like appending, accessing by index, setting values, and getting the current length.
+To simulate a mutable dynamic array, named `MemoryVec`, we define a trait that
+supports operations like appending, accessing by index, setting values, and
+getting the current length.
 
 ```cairo,noplayground
 trait MemoryVecTrait<V, T> {
@@ -4989,7 +5664,9 @@ trait MemoryVecTrait<V, T> {
 }
 ```
 
-The `MemoryVec` struct uses a `Felt252Dict<Nullable<T>>` to store data (mapping index numbers to values) and a `usize` field to track the length. The `Nullable` pointer allows for any type `T`.
+The `MemoryVec` struct uses a `Felt252Dict<Nullable<T>>` to store data (mapping
+index numbers to values) and a `usize` field to track the length. The `Nullable`
+pointer allows for any type `T`.
 
 ```cairo,noplayground
 #
@@ -5051,7 +5728,8 @@ struct MemoryVec<T> {
 #
 ```
 
-Updating a value at a specific index is achieved by inserting into the dictionary, overwriting any previous value:
+Updating a value at a specific index is achieved by inserting into the
+dictionary, overwriting any previous value:
 
 ```cairo,noplayground
 #
@@ -5177,7 +5855,9 @@ impl MemoryVecImpl<T, +Drop<T>, +Copy<T>> of MemoryVecTrait<MemoryVec<T>, T> {
 
 ### Simulating a Stack (NullableStack)
 
-A Stack is a LIFO (Last-In, First-Out) collection. Its operations include pushing an item to the top, popping an item from the top, and checking if it's empty. The trait for a Stack is defined as:
+A Stack is a LIFO (Last-In, First-Out) collection. Its operations include
+pushing an item to the top, popping an item from the top, and checking if it's
+empty. The trait for a Stack is defined as:
 
 ```cairo,noplayground
 trait StackTrait<S, T> {
@@ -5187,7 +5867,9 @@ trait StackTrait<S, T> {
 }
 ```
 
-The `NullableStack` struct, similar to `MemoryVec`, uses a `Felt252Dict<Nullable<T>>` to store values and a `usize` field for tracking the length.
+The `NullableStack` struct, similar to `MemoryVec`, uses a
+`Felt252Dict<Nullable<T>>` to store values and a `usize` field for tracking the
+length.
 
 ```cairo,noplayground
 struct NullableStack<T> {
@@ -5247,11 +5929,17 @@ Cairo Native Arrays
 
 ### Cairo Native Arrays
 
-An array in Cairo is a collection of elements of the same type, utilizing the `ArrayTrait` from the core library. A key characteristic is their limited modification options: arrays function as queues where values cannot be modified once written to a memory slot. Instead, items can only be appended to the end and removed from the front, as these operations involve updating pointers rather than direct memory mutation.
+An array in Cairo is a collection of elements of the same type, utilizing the
+`ArrayTrait` from the core library. A key characteristic is their limited
+modification options: arrays function as queues where values cannot be modified
+once written to a memory slot. Instead, items can only be appended to the end
+and removed from the front, as these operations involve updating pointers rather
+than direct memory mutation.
 
 #### Creating an Array
 
-Arrays are created using `ArrayTrait::new()`. You can optionally specify the item type explicitly:
+Arrays are created using `ArrayTrait::new()`. You can optionally specify the
+item type explicitly:
 
 ```cairo
 fn main() {
@@ -5272,7 +5960,8 @@ let mut arr:Array<u128> = ArrayTrait::new();
 
 #### Updating an Array
 
-**Adding Elements:** Use the `append()` method to add an element to the end of an array.
+**Adding Elements:** Use the `append()` method to add an element to the end of
+an array.
 
 ```cairo
 # fn main() {
@@ -5283,7 +5972,9 @@ let mut arr:Array<u128> = ArrayTrait::new();
 # }
 ```
 
-**Removing Elements:** Elements can only be removed from the front using `pop_front()`, which returns an `Option` containing the removed element or `None` if the array is empty.
+**Removing Elements:** Elements can only be removed from the front using
+`pop_front()`, which returns an `Option` containing the removed element or
+`None` if the array is empty.
 
 ```cairo
 fn main() {
@@ -5299,9 +5990,12 @@ fn main() {
 
 #### Reading Elements from an Array
 
-To access elements, use `get()` or `at()`. The subscripting operator `arr[index]` is equivalent to `arr.at(index)`.
+To access elements, use `get()` or `at()`. The subscripting operator
+`arr[index]` is equivalent to `arr.at(index)`.
 
-**`get()` Method:** Returns an `Option<Box<@T>>`. It provides a snapshot of the element at the specified index or `None` if the index is out of bounds. This is useful for graceful error handling.
+**`get()` Method:** Returns an `Option<Box<@T>>`. It provides a snapshot of the
+element at the specified index or `None` if the index is out of bounds. This is
+useful for graceful error handling.
 
 ```cairo
 fn main() -> u128 {
@@ -5320,7 +6014,9 @@ fn main() -> u128 {
 }
 ```
 
-**`at()` Method:** Directly returns a snapshot to the element using `unbox()`. It panics if the index is out of bounds, making it suitable when out-of-bounds access should halt program execution.
+**`at()` Method:** Directly returns a snapshot to the element using `unbox()`.
+It panics if the index is out of bounds, making it suitable when out-of-bounds
+access should halt program execution.
 
 ```cairo
 fn main() {
@@ -5340,11 +6036,13 @@ fn main() {
 #### Size-related Methods
 
 - `len()`: Returns the number of elements in the array as `usize`.
-- `is_empty()`: Returns `true` if the array contains no elements, `false` otherwise.
+- `is_empty()`: Returns `true` if the array contains no elements, `false`
+  otherwise.
 
 #### `array!` Macro
 
-The `array!` macro provides a concise way to create arrays with compile-time known values, expanding into sequential `append` calls.
+The `array!` macro provides a concise way to create arrays with compile-time
+known values, expanding into sequential `append` calls.
 
 Without `array!`:
 
@@ -5363,11 +6061,23 @@ Introduction to Smart Pointers
 
 ### Introduction to Smart Pointers
 
-A pointer is a general concept for a variable that contains a memory address, referring to other data. While powerful, pointers can be a source of bugs and security vulnerabilities, such as referencing unassigned memory, which can cause a program to crash and become unprovable. To prevent such issues, Cairo utilizes _Smart Pointers_.
+A pointer is a general concept for a variable that contains a memory address,
+referring to other data. While powerful, pointers can be a source of bugs and
+security vulnerabilities, such as referencing unassigned memory, which can cause
+a program to crash and become unprovable. To prevent such issues, Cairo utilizes
+_Smart Pointers_.
 
-Smart pointers are data structures that act like a pointer but possess additional metadata and capabilities. This concept is not unique to Cairo, originating in C++ and also present in languages like Rust. In Cairo, smart pointers ensure memory is accessed safely through strict type checking and ownership rules, thereby guaranteeing program provability.
+Smart pointers are data structures that act like a pointer but possess
+additional metadata and capabilities. This concept is not unique to Cairo,
+originating in C++ and also present in languages like Rust. In Cairo, smart
+pointers ensure memory is accessed safely through strict type checking and
+ownership rules, thereby guaranteeing program provability.
 
-Examples of smart pointers previously encountered in this book include `Felt252Dict<T>` and `Array<T>`. These types own a memory segment and allow its manipulation. They also provide metadata and guarantees; for instance, `Array<T>` tracks its current length to ensure existing elements are not overwritten and new elements are only appended.
+Examples of smart pointers previously encountered in this book include
+`Felt252Dict<T>` and `Array<T>`. These types own a memory segment and allow its
+manipulation. They also provide metadata and guarantees; for instance,
+`Array<T>` tracks its current length to ensure existing elements are not
+overwritten and new elements are only appended.
 
 The `Box<T>` Smart Pointer
 
@@ -5375,20 +6085,30 @@ The `Box<T>` Smart Pointer
 
 #### Overview
 
-`Box<T>` is the principal smart pointer type in Cairo. It allows data to be stored in a dedicated memory segment called the _boxed segment_. When a `Box<T>` variable is instantiated, the data of type `T` is appended to this segment, and only a pointer to it remains in the execution segment. Boxes have minimal performance overhead, primarily for writing inner values to the boxed segment.
+`Box<T>` is the principal smart pointer type in Cairo. It allows data to be
+stored in a dedicated memory segment called the _boxed segment_. When a `Box<T>`
+variable is instantiated, the data of type `T` is appended to this segment, and
+only a pointer to it remains in the execution segment. Boxes have minimal
+performance overhead, primarily for writing inner values to the boxed segment.
 
 #### Use Cases
 
 `Box<T>` is most often used in these situations:
 
-- When a type's size cannot be known at compile time, but an exact size is required (e.g., for recursive types).
-- When transferring ownership of a large amount of data without copying the entire data. By storing the data in the boxed segment, only the small pointer data is copied, improving performance as the referenced data remains in one place.
+- When a type's size cannot be known at compile time, but an exact size is
+  required (e.g., for recursive types).
+- When transferring ownership of a large amount of data without copying the
+  entire data. By storing the data in the boxed segment, only the small pointer
+  data is copied, improving performance as the referenced data remains in one
+  place.
 
 `Box<T>` for Recursive Data Structures
 
 ### `Box<T>` for Recursive Data Structures
 
-`Box<T>` allows storing values in the boxed segment. While not typically useful for single values, its primary utility lies in enabling recursive data structures.
+`Box<T>` allows storing values in the boxed segment. While not typically useful
+for single values, its primary utility lies in enabling recursive data
+structures.
 
 ```cairo
 fn main() {
@@ -5397,13 +6117,19 @@ fn main() {
 }
 ```
 
-<span class="caption">Listing 12-1: Storing a `u128` value in the boxed segment using a box</span>
+<span class="caption">Listing 12-1: Storing a `u128` value in the boxed segment
+using a box</span>
 
 #### Enabling Recursive Types with Boxes
 
-Recursive types, where a value of the type can contain another value of the same type, pose a challenge for the Cairo compiler because it needs to know the type's size at compile time. Infinite nesting in recursive types leads to an unknown size. `Box<T>` resolves this by having a known, fixed size (that of a pointer), regardless of the data it points to.
+Recursive types, where a value of the type can contain another value of the same
+type, pose a challenge for the Cairo compiler because it needs to know the
+type's size at compile time. Infinite nesting in recursive types leads to an
+unknown size. `Box<T>` resolves this by having a known, fixed size (that of a
+pointer), regardless of the data it points to.
 
-Consider an attempt to implement a binary tree, a common recursive data structure:
+Consider an attempt to implement a binary tree, a common recursive data
+structure:
 
 ```cairo, noplayground
 #[derive(Copy, Drop)]
@@ -5421,11 +6147,16 @@ fn main() {
 }
 ```
 
-<span class="caption">Listing 12-2: The first attempt at implementing a binary tree of `u32` values</span>
+<span class="caption">Listing 12-2: The first attempt at implementing a binary
+tree of `u32` values</span>
 
-Compiling this code results in an "infinite size" error because the `Node` variant directly contains `BinaryTree` values, making its size indeterminable.
+Compiling this code results in an "infinite size" error because the `Node`
+variant directly contains `BinaryTree` values, making its size indeterminable.
 
-To fix this, we use `Box<T>` to store the recursive `BinaryTree` variants. The `Box<T>` acts as a pointer to the child `BinaryTree` values, which are then stored in their own segment, effectively breaking the infinite size dependency for the compiler.
+To fix this, we use `Box<T>` to store the recursive `BinaryTree` variants. The
+`Box<T>` acts as a pointer to the child `BinaryTree` values, which are then
+stored in their own segment, effectively breaking the infinite size dependency
+for the compiler.
 
 ```cairo
 use core::box::{BoxTrait};
@@ -5451,13 +6182,21 @@ fn main() {
 }
 ```
 
-<span class="caption">Listing 12-3: Defining a recursive Binary Tree using Boxes</span>
+<span class="caption">Listing 12-3: Defining a recursive Binary Tree using
+Boxes</span>
 
-With `Box<T>`, the `Node` variant's size becomes known (the size of `u32` plus the size of two `Box<BinaryTree>` values), allowing the compiler to determine the overall `BinaryTree`'s size.
+With `Box<T>`, the `Node` variant's size becomes known (the size of `u32` plus
+the size of two `Box<BinaryTree>` values), allowing the compiler to determine
+the overall `BinaryTree`'s size.
 
 #### Using Boxes to Improve Performance
 
-`Box<T>` can also enhance performance by enabling data to be passed by pointer instead of by value, which avoids copying large data structures when passed to functions. This can significantly reduce memory operations. However, this performance benefit is only realized if the data within the `Box<T>` is not mutated, as mutation would necessitate creating a new `Box<T>` and copying the data.
+`Box<T>` can also enhance performance by enabling data to be passed by pointer
+instead of by value, which avoids copying large data structures when passed to
+functions. This can significantly reduce memory operations. However, this
+performance benefit is only realized if the data within the `Box<T>` is not
+mutated, as mutation would necessitate creating a new `Box<T>` and copying the
+data.
 
 ```cairo
 #[derive(Drop)]
@@ -5493,9 +6232,15 @@ Introduction to Closures and Iterators
 
 ### Introduction to Closures and Iterators
 
-Cairo's design draws significant inspiration from functional programming, a paradigm that often involves treating functions as first-class values—passing them as arguments, returning them, or assigning them to variables. This chapter introduces two key functional features in Cairo: closures and iterators.
+Cairo's design draws significant inspiration from functional programming, a
+paradigm that often involves treating functions as first-class values—passing
+them as arguments, returning them, or assigning them to variables. This chapter
+introduces two key functional features in Cairo: closures and iterators.
 
-Initially, handling value passing in Cairo can be tedious. While Cairo allows returning multiple values using a tuple, as shown below, this approach can add significant ceremony, especially when a function needs to use a value but not move or destroy it.
+Initially, handling value passing in Cairo can be tedious. While Cairo allows
+returning multiple values using a tuple, as shown below, this approach can add
+significant ceremony, especially when a function needs to use a value but not
+move or destroy it.
 
 ```cairo
 fn main() {
@@ -5511,15 +6256,20 @@ fn calculate_length(arr: Array<u128>) -> (Array<u128>, usize) {
 }
 ```
 
-To address such scenarios, Cairo provides _references_ and _snapshots_, which allow values to be used by functions without being moved. Building on this, Cairo offers more advanced functional constructs:
+To address such scenarios, Cairo provides _references_ and _snapshots_, which
+allow values to be used by functions without being moved. Building on this,
+Cairo offers more advanced functional constructs:
 
 #### Closures
 
-Closures are function-like constructs that can be stored in variables and passed around.
+Closures are function-like constructs that can be stored in variables and passed
+around.
 
 #### Iterators
 
-Iterators provide an efficient way to process a series of elements. The following example demonstrates how to convert an array into an iterator and then process each element:
+Iterators provide an efficient way to process a series of elements. The
+following example demonstrates how to convert an array into an iterator and then
+process each element:
 
 ```cairo
 fn main() {
@@ -5541,13 +6291,23 @@ Defining and Inferring Closures
 
 ### Defining and Inferring Closures
 
-Closures are anonymous functions that can be saved in variables or passed as arguments. Unlike regular functions, closures can capture values from the scope in which they are defined. They provide a way to define behavior inline, which is particularly useful for collections, error handling, and customizing function behavior.
+Closures are anonymous functions that can be saved in variables or passed as
+arguments. Unlike regular functions, closures can capture values from the scope
+in which they are defined. They provide a way to define behavior inline, which
+is particularly useful for collections, error handling, and customizing function
+behavior.
 
-> Note: Closures were introduced in Cairo 2.9 and are still under development. This page will evolve as new features are introduced.
+> Note: Closures were introduced in Cairo 2.9 and are still under development.
+> This page will evolve as new features are introduced.
 
 #### Understanding Closures
 
-Closures are defined using pipes (`|`) for arguments and can have a single-line expression body or a multi-line body enclosed in curly braces `{}`. Argument and return types are typically inferred by the compiler based on usage, similar to variable type inference. However, if a closure is used with different types after its types have been inferred from an initial call, a `Type annotations needed` error will occur.
+Closures are defined using pipes (`|`) for arguments and can have a single-line
+expression body or a multi-line body enclosed in curly braces `{}`. Argument and
+return types are typically inferred by the compiler based on usage, similar to
+variable type inference. However, if a closure is used with different types
+after its types have been inferred from an initial call, a
+`Type annotations needed` error will occur.
 
 ```cairo
 # #[generate_trait]
@@ -5626,7 +6386,8 @@ Closures are defined using pipes (`|`) for arguments and can have a single-line 
 
 #### Capturing the Environment with Closures
 
-Closures can include bindings from their enclosing scope. For example, `my_closure` below uses a binding to `x`.
+Closures can include bindings from their enclosing scope. For example,
+`my_closure` below uses a binding to `x`.
 
 ```cairo
 # #[generate_trait]
@@ -5703,11 +6464,16 @@ Closures can include bindings from their enclosing scope. For example, `my_closu
 # }
 ```
 
-> Note that, at the moment, closures are still not allowed to capture mutable variables, but this will be supported in future Cairo versions.
+> Note that, at the moment, closures are still not allowed to capture mutable
+> variables, but this will be supported in future Cairo versions.
 
 #### Closure Type Inference and Annotation
 
-Unlike `fn` functions, closures typically don't require explicit type annotations for parameters or return values because the compiler can infer them from their usage within their narrow context. However, you can add type annotations for increased explicitness and clarity, similar to `fn` function syntax.
+Unlike `fn` functions, closures typically don't require explicit type
+annotations for parameters or return values because the compiler can infer them
+from their usage within their narrow context. However, you can add type
+annotations for increased explicitness and clarity, similar to `fn` function
+syntax.
 
 ```cairo
 # fn generate_workout(intensity: u32, random_number: u32) {
@@ -5733,7 +6499,8 @@ Unlike `fn` functions, closures typically don't require explicit type annotation
 # }
 ```
 
-For comparison, here are various ways to define a function and closures with similar behavior, showcasing the optional syntax:
+For comparison, here are various ways to define a function and closures with
+similar behavior, showcasing the optional syntax:
 
 ```cairo, ignore
 fn  add_one_v1   (x: u32) -> u32 { x + 1 }
@@ -5742,7 +6509,9 @@ let add_one_v3 = |x|             { x + 1 };
 let add_one_v4 = |x|               x + 1  ;
 ```
 
-The compiler infers one concrete type for each parameter and the return value of a closure. Once inferred, these types are locked. Attempting to call the same closure with a different type will result in a compilation error.
+The compiler infers one concrete type for each parameter and the return value of
+a closure. Once inferred, these types are locked. Attempting to call the same
+closure with a different type will result in a compilation error.
 
 ```cairo, noplayground
 # //TAG: does_not_compile
@@ -5754,7 +6523,9 @@ The compiler infers one concrete type for each parameter and the return value of
 # }
 ```
 
-This code will produce a `Type annotations needed` error because `example_closure`'s type is inferred as `u64` from the first call, making the subsequent call with `u32` invalid.
+This code will produce a `Type annotations needed` error because
+`example_closure`'s type is inferred as `u64` from the first call, making the
+subsequent call with `u32` invalid.
 
 Closure Traits and Capture Behavior
 
@@ -5762,18 +6533,28 @@ Closure Traits and Capture Behavior
 
 #### How Closures Capture Values
 
-A closure's body defines the behavior of captured references or values upon evaluation, affecting what is moved out. A closure can move a captured value out, neither move nor mutate it, or capture nothing from its environment.
+A closure's body defines the behavior of captured references or values upon
+evaluation, affecting what is moved out. A closure can move a captured value
+out, neither move nor mutate it, or capture nothing from its environment.
 
 #### The Fn Traits
 
-The way a closure captures and handles values determines which `Fn` traits it implements. These traits allow functions and structs to specify the kinds of closures they can use. Closures automatically implement these traits additively:
+The way a closure captures and handles values determines which `Fn` traits it
+implements. These traits allow functions and structs to specify the kinds of
+closures they can use. Closures automatically implement these traits additively:
 
-- **`FnOnce`**: Applies to closures that can be called only once. All closures implement this trait. A closure that moves captured values out of its body will only implement `FnOnce`.
-- **`Fn`**: Applies to closures that do not move or mutate captured values, or capture nothing from their environment. These closures can be called multiple times without mutating their environment, which is useful for concurrent calls.
+- **`FnOnce`**: Applies to closures that can be called only once. All closures
+  implement this trait. A closure that moves captured values out of its body
+  will only implement `FnOnce`.
+- **`Fn`**: Applies to closures that do not move or mutate captured values, or
+  capture nothing from their environment. These closures can be called multiple
+  times without mutating their environment, which is useful for concurrent
+  calls.
 
 #### Example: unwrap_or_else and FnOnce
 
-The `unwrap_or_else` method on `OptionTrait<T>` demonstrates the use of `FnOnce`:
+The `unwrap_or_else` method on `OptionTrait<T>` demonstrates the use of
+`FnOnce`:
 
 ```cairo
 pub impl OptionTraitImpl<T> of OptionTrait<T> {
@@ -5789,15 +6570,25 @@ pub impl OptionTraitImpl<T> of OptionTrait<T> {
 }
 ```
 
-The `unwrap_or_else` function has a generic type parameter `F` for the closure `f`. The trait bound `impl func: core::ops::FnOnce<F, ()>[Output: T]` specifies that `F` must be callable once, take no arguments (unit type `()`), and return a `T`. This bound ensures that `unwrap_or_else` will call `f` at most once (only if the `Option` is `None`). Since all closures implement `FnOnce`, `unwrap_or_else` is flexible in the types of closures it accepts.
+The `unwrap_or_else` function has a generic type parameter `F` for the closure
+`f`. The trait bound `impl func: core::ops::FnOnce<F, ()>[Output: T]` specifies
+that `F` must be callable once, take no arguments (unit type `()`), and return a
+`T`. This bound ensures that `unwrap_or_else` will call `f` at most once (only
+if the `Option` is `None`). Since all closures implement `FnOnce`,
+`unwrap_or_else` is flexible in the types of closures it accepts.
 
 Applying Closures in Functional Patterns
 
 ### Applying Closures in Functional Patterns
 
-Closures are instrumental in functional programming, allowing patterns like `map`, `filter`, or `reduce` by being passed as function arguments. Under the hood, closures are implemented via `FnOnce` (for consuming captured variables) and `Fn` (for capturing copyable variables) traits. Many iterator methods in Cairo corelib also accept closure arguments.
+Closures are instrumental in functional programming, allowing patterns like
+`map`, `filter`, or `reduce` by being passed as function arguments. Under the
+hood, closures are implemented via `FnOnce` (for consuming captured variables)
+and `Fn` (for capturing copyable variables) traits. Many iterator methods in
+Cairo corelib also accept closure arguments.
 
-Below is an example demonstrating the implementation of `map` and `filter` for arrays using closures:
+Below is an example demonstrating the implementation of `map` and `filter` for
+arrays using closures:
 
 ```cairo, noplayground
 #[generate_trait]
@@ -5874,7 +6665,12 @@ impl ArrayExt of ArrayExtTrait {
 # }
 ```
 
-In the `map` implementation, the output array's element type (`Array<func::Output>`) is derived from the closure's return type (`func::Output`), allowing flexible transformations. The `#[inline(never)]` attribute is used to work around an inlining analysis bug in Cairo 2.13.1. The `main` function demonstrates how `map` and `filter` can be used with closures to transform and filter array elements.
+In the `map` implementation, the output array's element type
+(`Array<func::Output>`) is derived from the closure's return type
+(`func::Output`), allowing flexible transformations. The `#[inline(never)]`
+attribute is used to work around an inlining analysis bug in Cairo 2.13.1. The
+`main` function demonstrates how `map` and `filter` can be used with closures to
+transform and filter array elements.
 
 Conclusion
 
@@ -5886,31 +6682,41 @@ Introduction to Cairo's Module System
 
 ### Introduction to Cairo's Module System
 
-As projects grow, organizing code into multiple modules, files, and eventually separate packages (crates) becomes essential. Cairo's module system facilitates this organization, enabling code reuse and encapsulation of implementation details.
+As projects grow, organizing code into multiple modules, files, and eventually
+separate packages (crates) becomes essential. Cairo's module system facilitates
+this organization, enabling code reuse and encapsulation of implementation
+details.
 
-A related concept is **scope**, which defines the set of names available at a particular point in the code, ensuring clarity for programmers and compilers regarding item references (variables, functions, structs, etc.).
+A related concept is **scope**, which defines the set of names available at a
+particular point in the code, ensuring clarity for programmers and compilers
+regarding item references (variables, functions, structs, etc.).
 
 Cairo's module system features include:
 
 - **Packages**: A Scarb feature for building, testing, and sharing crates.
-- **Crates**: A tree of modules forming a single compilation unit, rooted at `_lib.cairo_`.
-- **Modules** and **use**: Mechanisms to control the organization and scope of items.
+- **Crates**: A tree of modules forming a single compilation unit, rooted at
+  `_lib.cairo_`.
+- **Modules** and **use**: Mechanisms to control the organization and scope of
+  items.
 - **Paths**: A way to name items like structs, functions, or modules.
 
-These features collectively manage code organization and scope within Cairo projects.
+These features collectively manage code organization and scope within Cairo
+projects.
 
 Module Paths and Item Visibility
 
 ### Module Paths and Item Visibility
 
-To refer to an item within Cairo's module tree, a path is used, similar to filesystem paths. A path can be either:
+To refer to an item within Cairo's module tree, a path is used, similar to
+filesystem paths. A path can be either:
 
 - An _absolute path_: Starts from the crate root, beginning with the crate name.
 - A _relative path_: Starts from the current module.
 
 Both path types use double colons (`::`) to separate identifiers.
 
-Consider the following example demonstrating absolute and relative paths to call the `add_to_waitlist` function:
+Consider the following example demonstrating absolute and relative paths to call
+the `add_to_waitlist` function:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -5940,11 +6746,18 @@ pub fn eat_at_restaurant() {
 }
 ```
 
-By default, all items (functions, methods, structs, enums, modules, constants) in Cairo are private to their parent modules. This means items in a parent module cannot use private items inside child modules. However, child modules can use items in their ancestor modules. This default privacy hides implementation details.
+By default, all items (functions, methods, structs, enums, modules, constants)
+in Cairo are private to their parent modules. This means items in a parent
+module cannot use private items inside child modules. However, child modules can
+use items in their ancestor modules. This default privacy hides implementation
+details.
 
 #### Exposing Paths with the `pub` Keyword
 
-To make items visible and accessible from parent modules, the `pub` keyword is used. Simply making a module `pub` makes the module itself accessible, but its contents remain private. To access items within a public module, those items must also be explicitly marked `pub`.
+To make items visible and accessible from parent modules, the `pub` keyword is
+used. Simply making a module `pub` makes the module itself accessible, but its
+contents remain private. To access items within a public module, those items
+must also be explicitly marked `pub`.
 
 For example, to make `add_to_waitlist` accessible from `eat_at_restaurant`:
 
@@ -5966,11 +6779,15 @@ pub fn eat_at_restaurant() {
 }
 ```
 
-With `front_of_house` being a sibling to `eat_at_restaurant`, `hosting` marked `pub`, and `add_to_waitlist` marked `pub`, both absolute and relative paths successfully resolve.
+With `front_of_house` being a sibling to `eat_at_restaurant`, `hosting` marked
+`pub`, and `add_to_waitlist` marked `pub`, both absolute and relative paths
+successfully resolve.
 
 #### Starting Relative Paths with `super`
 
-Relative paths can also begin in the parent module using the `super` keyword, similar to `..` in a filesystem. This is useful for referencing items in a closely related parent module.
+Relative paths can also begin in the parent module using the `super` keyword,
+similar to `..` in a filesystem. This is useful for referencing items in a
+closely related parent module.
 
 ```cairo,noplayground
 fn deliver_order() {}
@@ -5987,19 +6804,26 @@ mod back_of_house {
 
 #### Making Structs and Enums Public
 
-- **Structs**: Marking a struct `pub` makes the struct public, but its fields remain private by default. Each field must be individually marked `pub` to be public.
-- **Enums**: Marking an enum `pub` makes all of its variants public automatically. Only the `enum` keyword needs `pub`."
-  the `pub` prefix."
+- **Structs**: Marking a struct `pub` makes the struct public, but its fields
+  remain private by default. Each field must be individually marked `pub` to be
+  public.
+- **Enums**: Marking an enum `pub` makes all of its variants public
+  automatically. Only the `enum` keyword needs `pub`." the `pub` prefix."
 
 Structuring Modules Across Files
 
 ### Structuring Modules Across Files
 
-When modules become large, moving their definitions to separate files improves code navigation. This section details how to extract modules and submodules into their own files.
+When modules become large, moving their definitions to separate files improves
+code navigation. This section details how to extract modules and submodules into
+their own files.
 
 #### Separating Top-Level Modules
 
-To separate a top-level module, such as `front_of_house`, from the crate root file (`src/lib.cairo`), replace its inline definition with a `mod` declaration followed by a semicolon. The module's content is then placed in a new file named after the module, e.g., `src/front_of_house.cairo`.
+To separate a top-level module, such as `front_of_house`, from the crate root
+file (`src/lib.cairo`), replace its inline definition with a `mod` declaration
+followed by a semicolon. The module's content is then placed in a new file named
+after the module, e.g., `src/front_of_house.cairo`.
 
 **Example: `src/lib.cairo`**
 
@@ -6021,13 +6845,19 @@ pub mod hosting {
 }
 ```
 
-The compiler automatically looks for the module's code in `src/front_of_house.cairo` because of the `mod front_of_house;` declaration in `src/lib.cairo`. Note that `mod` is not an 'include' operation; it declares a module, and the compiler then knows where to find its code.
+The compiler automatically looks for the module's code in
+`src/front_of_house.cairo` because of the `mod front_of_house;` declaration in
+`src/lib.cairo`. Note that `mod` is not an 'include' operation; it declares a
+module, and the compiler then knows where to find its code.
 
 #### Separating Submodules
 
-For child modules, like `hosting` within `front_of_house`, the process is similar but involves creating a directory named after the parent module. For instance, `hosting` would reside in `src/front_of_house/hosting.cairo`.
+For child modules, like `hosting` within `front_of_house`, the process is
+similar but involves creating a directory named after the parent module. For
+instance, `hosting` would reside in `src/front_of_house/hosting.cairo`.
 
-First, update the parent module's file (`src/front_of_house.cairo`) to declare the submodule:
+First, update the parent module's file (`src/front_of_house.cairo`) to declare
+the submodule:
 
 **Example: Updated `src/front_of_house.cairo`**
 
@@ -6035,7 +6865,8 @@ First, update the parent module's file (`src/front_of_house.cairo`) to declare t
 pub mod hosting;
 ```
 
-Then, create the directory `src/front_of_house/` and place the submodule's content in `hosting.cairo` within that directory:
+Then, create the directory `src/front_of_house/` and place the submodule's
+content in `hosting.cairo` within that directory:
 
 **Example: `src/front_of_house/hosting.cairo`**
 
@@ -6043,15 +6874,28 @@ Then, create the directory `src/front_of_house/` and place the submodule's conte
 pub fn add_to_waitlist() {}
 ```
 
-Placing `hosting.cairo` in the `src` directory instead would cause the compiler to expect it as a top-level module, not a child of `front_of_house`.
+Placing `hosting.cairo` in the `src` directory instead would cause the compiler
+to expect it as a top-level module, not a child of `front_of_house`.
 
 #### Summary of Module Structuring Rules
 
-- **Declaring top-level modules**: In the crate root file (`src/lib.cairo`), declare a module with `mod module_name;`. The compiler will look for its code in `src/module_name.cairo` or `src/module_name/mod.cairo`.
-- **Declaring submodules**: In any file other than the crate root (e.g., `src/parent_module.cairo`), declare a submodule with `mod submodule_name;`. The compiler will look for its code in `src/parent_module/submodule_name.cairo` or inline within curly brackets.
-- **Paths to code**: Once a module is part of your crate, refer to its code using its full path (e.g., `crate::garden::vegetables::Asparagus`).
-- **Private vs public**: Code within a module is private by default, accessible only by the current module and its descendants. Use `pub mod` to make a module public and `pub` before items within a public module to make them public. `pub(crate)` restricts visibility to within the current crate.
-- **The `use` keyword**: Use `use` within a scope to create shortcuts to items, reducing repetition of long paths (e.g., `use crate::garden::vegetables::Asparagus;` allows using `Asparagus` directly).
+- **Declaring top-level modules**: In the crate root file (`src/lib.cairo`),
+  declare a module with `mod module_name;`. The compiler will look for its code
+  in `src/module_name.cairo` or `src/module_name/mod.cairo`.
+- **Declaring submodules**: In any file other than the crate root (e.g.,
+  `src/parent_module.cairo`), declare a submodule with `mod submodule_name;`.
+  The compiler will look for its code in
+  `src/parent_module/submodule_name.cairo` or inline within curly brackets.
+- **Paths to code**: Once a module is part of your crate, refer to its code
+  using its full path (e.g., `crate::garden::vegetables::Asparagus`).
+- **Private vs public**: Code within a module is private by default, accessible
+  only by the current module and its descendants. Use `pub mod` to make a module
+  public and `pub` before items within a public module to make them public.
+  `pub(crate)` restricts visibility to within the current crate.
+- **The `use` keyword**: Use `use` within a scope to create shortcuts to items,
+  reducing repetition of long paths (e.g.,
+  `use crate::garden::vegetables::Asparagus;` allows using `Asparagus`
+  directly).
 
 Importing and Re-exporting Items
 
@@ -6059,7 +6903,10 @@ Importing and Re-exporting Items
 
 #### Bringing Paths into Scope with the `use` Keyword
 
-To simplify calling functions with long paths, the `use` keyword creates a shortcut within a specific scope. For example, `use crate::front_of_house::hosting;` allows `hosting::add_to_waitlist()` instead of the full path.
+To simplify calling functions with long paths, the `use` keyword creates a
+shortcut within a specific scope. For example,
+`use crate::front_of_house::hosting;` allows `hosting::add_to_waitlist()`
+instead of the full path.
 
 ```cairo
 // section "Defining Modules to Control Scope"
@@ -6077,7 +6924,9 @@ pub fn eat_at_restaurant() {
 }
 ```
 
-Note that `use` statements are scope-specific. If the function using the shortcut is moved to a different module, the `use` statement in the parent scope will not apply, leading to a compilation error.
+Note that `use` statements are scope-specific. If the function using the
+shortcut is moved to a different module, the `use` statement in the parent scope
+will not apply, leading to a compilation error.
 
 ```cairo
 mod front_of_house {
@@ -6099,7 +6948,10 @@ mod customer {
 
 Cairo follows conventions for `use` paths:
 
-- **Functions**: It's idiomatic to bring the function's parent module into scope, then specify the parent module when calling the function. This clarifies that the function is not locally defined while minimizing repetition.
+- **Functions**: It's idiomatic to bring the function's parent module into
+  scope, then specify the parent module when calling the function. This
+  clarifies that the function is not locally defined while minimizing
+  repetition.
 
   ```cairo
   mod front_of_house {
@@ -6115,7 +6967,8 @@ Cairo follows conventions for `use` paths:
   }
   ```
 
-- **Structs, Enums, Traits**: It's idiomatic to specify the full path when bringing these items into scope.
+- **Structs, Enums, Traits**: It's idiomatic to specify the full path when
+  bringing these items into scope.
 
   ```cairo
   use core::num::traits::BitSize;
@@ -6126,11 +6979,13 @@ Cairo follows conventions for `use` paths:
   }
   ```
 
-An exception to this idiom is when importing two items with the same name, which Cairo does not allow directly.
+An exception to this idiom is when importing two items with the same name, which
+Cairo does not allow directly.
 
 #### Providing New Names with the `as` Keyword
 
-To resolve naming conflicts or provide a shorter, more convenient name, you can use the `as` keyword to create an alias for an imported item.
+To resolve naming conflicts or provide a shorter, more convenient name, you can
+use the `as` keyword to create an alias for an imported item.
 
 ```cairo
 use core::array::ArrayTrait as Arr;
@@ -6143,7 +6998,8 @@ fn main() {
 
 #### Importing Multiple Items from the Same Module
 
-To import multiple items from the same module, use curly braces `{}` to list them, keeping your code clean.
+To import multiple items from the same module, use curly braces `{}` to list
+them, keeping your code clean.
 
 ```cairo
 // Assuming we have a module called `shapes` with the structures `Square`, `Circle`, and `Triangle`.
@@ -6180,7 +7036,10 @@ fn main() {
 
 #### Re-exporting Names in Module Files
 
-Re-exporting, using `pub use`, makes an item brought into scope available for other code to import from the current scope. This is useful when the internal structure of your code differs from how users might expect to access its functionality.
+Re-exporting, using `pub use`, makes an item brought into scope available for
+other code to import from the current scope. This is useful when the internal
+structure of your code differs from how users might expect to access its
+functionality.
 
 ```cairo
 mod front_of_house {
@@ -6196,17 +7055,22 @@ fn eat_at_restaurant() {
 }
 ```
 
-With `pub use crate::front_of_house::hosting;`, external code can now use `restaurant::hosting::add_to_waitlist()` instead of the longer `restaurant::front_of_house::hosting::add_to_waitlist()`.
+With `pub use crate::front_of_house::hosting;`, external code can now use
+`restaurant::hosting::add_to_waitlist()` instead of the longer
+`restaurant::front_of_house::hosting::add_to_waitlist()`.
 
 #### The Glob Operator
 
-The glob operator `*` brings all public items defined in a path into the current scope. Use it with caution, as it can make it harder to determine where a name was defined.
+The glob operator `*` brings all public items defined in a path into the current
+scope. Use it with caution, as it can make it harder to determine where a name
+was defined.
 
 ```rust
 use core::num::traits::*;
 ```
 
-This operator is often used in tests to bring everything under test into the `tests` module.
+This operator is often used in tests to bring everything under test into the
+`tests` module.
 
 Adding Comments and Documentation
 
@@ -6214,7 +7078,9 @@ Adding Comments and Documentation
 
 #### Basic Comments
 
-Comments in Cairo are typically single-line, prefixed with `//`. They can be placed at the end of a line of code or, more commonly, on a separate line above the code they annotate.
+Comments in Cairo are typically single-line, prefixed with `//`. They can be
+placed at the end of a line of code or, more commonly, on a separate line above
+the code they annotate.
 
 ```cairo
 fn main() -> felt252 {
@@ -6231,7 +7097,11 @@ fn main() -> felt252 {
 
 #### Item-level Documentation
 
-Item-level documentation comments describe specific items like functions, implementations, or traits. They are prefixed with three slashes (`///`) and provide detailed descriptions, usage examples, and conditions that might cause a panic. For functions, they can also include sections for parameter and return value descriptions.
+Item-level documentation comments describe specific items like functions,
+implementations, or traits. They are prefixed with three slashes (`///`) and
+provide detailed descriptions, usage examples, and conditions that might cause a
+panic. For functions, they can also include sections for parameter and return
+value descriptions.
 
 ````cairo,noplayground
 /// Returns the sum of `arg1` and `arg2`.
@@ -6257,7 +7127,9 @@ fn add(arg1: felt252, arg2: felt252) -> felt252 {
 
 #### Module Documentation
 
-Module documentation comments provide an overview of an entire module, including its purpose and examples of use. These comments are prefixed with `//!` and are placed above the module they describe.
+Module documentation comments provide an overview of an entire module, including
+its purpose and examples of use. These comments are prefixed with `//!` and are
+placed above the module they describe.
 
 ````cairo,noplayground
 //! # my_module and implementation
@@ -6283,30 +7155,58 @@ Cairo Virtual Machine Overview
 
 ### What is a Virtual Machine?
 
-Virtual Machines (VMs) are software emulations of physical computers, providing a complete programming environment through an API and an instruction set architecture (ISA). Process Virtual Machines, such as the Java Virtual Machine (JVM), specifically provide the environment needed by a single user-level process.
+Virtual Machines (VMs) are software emulations of physical computers, providing
+a complete programming environment through an API and an instruction set
+architecture (ISA). Process Virtual Machines, such as the Java Virtual Machine
+(JVM), specifically provide the environment needed by a single user-level
+process.
 
 ### The Cairo VM in Action
 
-The Cairo Virtual Machine (Cairo VM) is a process VM, similar to the JVM, but uniquely designed for _provable_ general-purpose computing. A Cairo program (`.cairo`) is compiled into Cairo bytecode (encoded CASM, the Cairo instruction set, and extra data). The Cairo VM interprets this CASM, generating an execution trace. This trace data is then fed to the Cairo Prover to generate a STARK proof, which allows for proving the correct execution of the program.
+The Cairo Virtual Machine (Cairo VM) is a process VM, similar to the JVM, but
+uniquely designed for _provable_ general-purpose computing. A Cairo program
+(`.cairo`) is compiled into Cairo bytecode (encoded CASM, the Cairo instruction
+set, and extra data). The Cairo VM interprets this CASM, generating an execution
+trace. This trace data is then fed to the Cairo Prover to generate a STARK
+proof, which allows for proving the correct execution of the program.
 
-The Cairo VM processes the compilation artifacts and executes instructions to produce two key outputs required for proof generation and verification:
+The Cairo VM processes the compilation artifacts and executes instructions to
+produce two key outputs required for proof generation and verification:
 
 - **AIR Private Input (Witness)**: Comprises the execution trace and the memory.
-- **AIR Public Input**: Includes the initial and final states, public memory (a subset of the memory), and configuration data.
+- **AIR Public Input**: Includes the initial and final states, public memory (a
+  subset of the memory), and configuration data.
 
 ### Cairo Machine Theoretical Model
 
-The Cairo machine is the theoretical model that defines a STARK-friendly Von Neumann architecture, capable of generating validity proofs for arbitrary computations. It implements a Turing-complete process virtual machine and is defined by two core models:
+The Cairo machine is the theoretical model that defines a STARK-friendly Von
+Neumann architecture, capable of generating validity proofs for arbitrary
+computations. It implements a Turing-complete process virtual machine and is
+defined by two core models:
 
-- **CPU (Execution Model)**: Specifies the instruction set (a custom zero-knowledge ISA, or ZK-ISA, optimized for proof generation), the registers (`pc`, `ap`, `fp`), and the state transition algorithm.
-- **Memory Model**: Defines how the CPU interacts with the memory, which is a non-deterministic Read-only Memory. Following Von Neumann architecture principles, a single memory stores both program and instruction data.
+- **CPU (Execution Model)**: Specifies the instruction set (a custom
+  zero-knowledge ISA, or ZK-ISA, optimized for proof generation), the registers
+  (`pc`, `ap`, `fp`), and the state transition algorithm.
+- **Memory Model**: Defines how the CPU interacts with the memory, which is a
+  non-deterministic Read-only Memory. Following Von Neumann architecture
+  principles, a single memory stores both program and instruction data.
 
 ### Deterministic vs. Non-deterministic Cairo Machine
 
-The Cairo machine exists in two versions, one for the prover and one for the verifier, each with a distinct role:
+The Cairo machine exists in two versions, one for the prover and one for the
+verifier, each with a distinct role:
 
-- **Deterministic Machine (Prover)**: Takes an execution trace (sequence of states) and the entire memory (a memory function). It verifies that the transition between any two consecutive states is valid, returning `accept` if all transitions are valid and `reject` otherwise. This machine solely asserts the validity of a trace and its memory, without performing computation.
-- **Non-deterministic Machine (Verifier)**: Relies on the deterministic machine. It takes only the initial state, the final state, and a partial memory function (public memory). It returns `accept` if there exists a sequence of states (a trace) with the given initial and final states, and a memory function that extends the partial memory, which would be accepted by the deterministic machine.
+- **Deterministic Machine (Prover)**: Takes an execution trace (sequence of
+  states) and the entire memory (a memory function). It verifies that the
+  transition between any two consecutive states is valid, returning `accept` if
+  all transitions are valid and `reject` otherwise. This machine solely asserts
+  the validity of a trace and its memory, without performing computation.
+- **Non-deterministic Machine (Verifier)**: Relies on the deterministic machine.
+  It takes only the initial state, the final state, and a partial memory
+  function (public memory). It returns `accept` if there exists a sequence of
+  states (a trace) with the given initial and final states, and a memory
+  function that extends the partial memory, which would be accepted by the
+  deterministic machine.
 
 Cairo Machine Design and Arithmetization
 
@@ -6314,11 +7214,23 @@ Cairo Machine Design and Arithmetization
 
 #### Arithmetic Intermediate Representation (AIR)
 
-Arithmetic Intermediate Representation (AIR) is an arithmetization technique that converts computational statements into a set of polynomial equations, representing system constraints. These equations form the basis for proof systems, where their validity confirms the proof. The prover generates a proof from the AIR's private and public inputs, which the verifier then asynchronously verifies.
+Arithmetic Intermediate Representation (AIR) is an arithmetization technique
+that converts computational statements into a set of polynomial equations,
+representing system constraints. These equations form the basis for proof
+systems, where their validity confirms the proof. The prover generates a proof
+from the AIR's private and public inputs, which the verifier then asynchronously
+verifies.
 
 #### The Cairo Machine
 
-The Cairo machine is a collection of AIRs that together form a Turing-complete machine for the Cairo ISA. This design abstracts away the need for developers to write AIRs for their programs, providing a high-level interface. Each component of the Cairo machine, including the CPU, Memory, and Builtins, has its own corresponding AIR. Optimal AIRs are critical for efficient proof generation and verification. The CairoVM provides the necessary inputs for the Cairo prover to generate proofs, and the prover/verifier ensure that the constraints defined by the Cairo AIRs hold for the CairoVM outputs.
+The Cairo machine is a collection of AIRs that together form a Turing-complete
+machine for the Cairo ISA. This design abstracts away the need for developers to
+write AIRs for their programs, providing a high-level interface. Each component
+of the Cairo machine, including the CPU, Memory, and Builtins, has its own
+corresponding AIR. Optimal AIRs are critical for efficient proof generation and
+verification. The CairoVM provides the necessary inputs for the Cairo prover to
+generate proofs, and the prover/verifier ensure that the constraints defined by
+the Cairo AIRs hold for the CairoVM outputs.
 
 Cairo Memory Model
 
@@ -6326,24 +7238,46 @@ Cairo Memory Model
 
 #### Non-Deterministic Read-only Memory
 
-Cairo utilizes a non-deterministic read-only memory model. **Non-determinism** means memory addresses and values are asserted by the prover, not determined by a traditional memory management system. For example, the prover asserts that at memory address `x`, the value `7` is stored, eliminating the need to explicitly check its existence. **Read-only** signifies that memory values remain immutable once assigned. These properties make it a write-once memory model: a value, once assigned to an address, cannot be overwritten. Memory addresses are contiguous; accessing `x` and `y` implies no skipped addresses in between.
+Cairo utilizes a non-deterministic read-only memory model. **Non-determinism**
+means memory addresses and values are asserted by the prover, not determined by
+a traditional memory management system. For example, the prover asserts that at
+memory address `x`, the value `7` is stored, eliminating the need to explicitly
+check its existence. **Read-only** signifies that memory values remain immutable
+once assigned. These properties make it a write-once memory model: a value, once
+assigned to an address, cannot be overwritten. Memory addresses are contiguous;
+accessing `x` and `y` implies no skipped addresses in between.
 
-This model differs from read-write models like EVM, prioritizing efficiency in proof generation, requiring only 5 trace cells per memory access. The effective cost of using Cairo's memory is based on the number of memory accesses, not the number of addresses used; rewriting an existing cell costs similarly to writing to a new one.
+This model differs from read-write models like EVM, prioritizing efficiency in
+proof generation, requiring only 5 trace cells per memory access. The effective
+cost of using Cairo's memory is based on the number of memory accesses, not the
+number of addresses used; rewriting an existing cell costs similarly to writing
+to a new one.
 
 #### Memory Segments and Relocation
 
-Cairo ensures immutable, allocated memory while allowing dynamic expansion through **segments**. Memory addresses are grouped into segments, each with a unique segment identifier and an offset (`<segment_id>:<offset>`). This temporary value is called a **relocatable value**.
+Cairo ensures immutable, allocated memory while allowing dynamic expansion
+through **segments**. Memory addresses are grouped into segments, each with a
+unique segment identifier and an offset (`<segment_id>:<offset>`). This
+temporary value is called a **relocatable value**.
 
-At the end of execution, these relocatable values are transformed into a single, contiguous memory address space, and a separate **relocation table** is created to provide context.
+At the end of execution, these relocatable values are transformed into a single,
+contiguous memory address space, and a separate **relocation table** is created
+to provide context.
 
 Cairo's memory model contains the following segments:
 
-- **Program Segment**: Stores the bytecode (instructions) of the Cairo program. The Program Counter (`pc`) starts here. This segment has a fixed size.
-- **Execution Segment**: Stores runtime data like temporary variables, function call frames, and pointers. The Allocation Pointer (`ap`) and Frame Pointer (`fp`) start here.
-- **Builtin Segment**: Stores builtins actively used by the program. Each builtin has its own dynamically allocated segment.
-- **User Segment**: Stores program outputs, arrays, and dynamically allocated data structures.
+- **Program Segment**: Stores the bytecode (instructions) of the Cairo program.
+  The Program Counter (`pc`) starts here. This segment has a fixed size.
+- **Execution Segment**: Stores runtime data like temporary variables, function
+  call frames, and pointers. The Allocation Pointer (`ap`) and Frame Pointer
+  (`fp`) start here.
+- **Builtin Segment**: Stores builtins actively used by the program. Each
+  builtin has its own dynamically allocated segment.
+- **User Segment**: Stores program outputs, arrays, and dynamically allocated
+  data structures.
 
-All segments except the Program Segment have a dynamic address space, meaning their allocated memory length is unknown until execution completes.
+All segments except the Program Segment have a dynamic address space, meaning
+their allocated memory length is unknown until execution completes.
 
 **Segment Layout**
 
@@ -6382,13 +7316,19 @@ func main(output_ptr: felt*) -> (output_ptr: felt*) {
 }
 ```
 
-This program stores three values (`10`, `100`, and `110`) in three different memory addresses under Segment 1 (the Execution Segment). The `output` builtin allows the final output to be stored in a new segment.
+This program stores three values (`10`, `100`, and `110`) in three different
+memory addresses under Segment 1 (the Execution Segment). The `output` builtin
+allows the final output to be stored in a new segment.
 
 Cairo VM Instruction Set and Execution Flow
 
 ### Cairo VM Instruction Set and Execution Flow
 
-Sierra statements define operations like addition and return. For instance, lines 3-5 show `felt252_add` and `store_temp`, followed by `return`. Notably, the `return` instruction of a called function (whether inlined or not) is not executed if it would prematurely end the `main` function; instead, return values are added and the result returned.
+Sierra statements define operations like addition and return. For instance,
+lines 3-5 show `felt252_add` and `store_temp`, followed by `return`. Notably,
+the `return` instruction of a called function (whether inlined or not) is not
+executed if it would prematurely end the `main` function; instead, return values
+are added and the result returned.
 
 ```cairo,noplayground
 03	felt252_add([1], [0]) -> ([2])
@@ -6414,21 +7354,32 @@ To understand inlining benefits, consider the Casm code:
 11	ret
 ```
 
-Each instruction and argument increments the Program Counter (PC) by 1. The `call` and `ret` instructions implement a function stack:
+Each instruction and argument increments the Program Counter (PC) by 1. The
+`call` and `ret` instructions implement a function stack:
 
 - `call`: Jumps to a given PC value (relative `rel` or absolute `abs`).
 - `ret`: Jumps back to the instruction immediately following the `call`.
 
 **Execution Flow Breakdown:**
 
-1.  `call rel 3` (PC=1): Increments PC by 3, executing instruction at PC=4 (line 3 `call rel 9`). This corresponds to the `main` function call.
-2.  `call rel 9` (PC=4): Increments PC by 9, executing instruction at PC=13 (line 9 `[ap + 0] = 2, ap++`). This is the `not_inlined` function call.
-3.  `[ap + 0] = 2, ap++` (PC=13): Stores `2` at the current Allocation Pointer (`ap`) address, then increments `ap`. The value `2` is stored at `[ap-3]` after the full execution.
+1.  `call rel 3` (PC=1): Increments PC by 3, executing instruction at PC=4 (line
+    3 `call rel 9`). This corresponds to the `main` function call.
+2.  `call rel 9` (PC=4): Increments PC by 9, executing instruction at PC=13
+    (line 9 `[ap + 0] = 2, ap++`). This is the `not_inlined` function call.
+3.  `[ap + 0] = 2, ap++` (PC=13): Stores `2` at the current Allocation Pointer
+    (`ap`) address, then increments `ap`. The value `2` is stored at `[ap-3]`
+    after the full execution.
 4.  `ret` (PC=14): Jumps back to the line after `call rel 9`, which is line 4.
-5.  `[ap + 0] = 1, ap++` (PC=5): Stores `1` at `[ap]`, then increments `ap`. This is the inlined code of the `inlined` function. No `call` instruction is used here; the body is directly inserted. The value `1` is stored at `[ap-2]`.
-6.  `[ap + 0] = [ap + -1] + [ap + -2], ap++` (PC=6): Sums the values `1` and `2` (from `[ap-1]` and `[ap-2]`), stores the result (`3`) at `[ap]`, then increments `ap`. The result `3` is stored at `[ap-1]`.
+5.  `[ap + 0] = 1, ap++` (PC=5): Stores `1` at `[ap]`, then increments `ap`.
+    This is the inlined code of the `inlined` function. No `call` instruction is
+    used here; the body is directly inserted. The value `1` is stored at
+    `[ap-2]`.
+6.  `[ap + 0] = [ap + -1] + [ap + -2], ap++` (PC=6): Sums the values `1` and `2`
+    (from `[ap-1]` and `[ap-2]`), stores the result (`3`) at `[ap]`, then
+    increments `ap`. The result `3` is stored at `[ap-1]`.
 7.  `ret` (PC=7): Jumps back to the line after `call rel 3`, which is line 2.
-8.  `ret` (PC=3): The final instruction, returning the sum as the `main` function's return value.
+8.  `ret` (PC=3): The final instruction, returning the sum as the `main`
+    function's return value.
 
 Builtins
 
@@ -6438,30 +7389,49 @@ Introduction to Cairo Builtins
 
 #### What are Builtins?
 
-Builtins are defined in the Cairo whitepaper as "predefined optimized low-level execution units." They are logic blocks embedded in the Cairo architecture designed to significantly enhance performance compared to implementing the same logic using Cairo's standard instruction set. They can be compared to Ethereum precompiles, which are primitive operations implemented in the client's language rather than EVM opcodes.
+Builtins are defined in the Cairo whitepaper as "predefined optimized low-level
+execution units." They are logic blocks embedded in the Cairo architecture
+designed to significantly enhance performance compared to implementing the same
+logic using Cairo's standard instruction set. They can be compared to Ethereum
+precompiles, which are primitive operations implemented in the client's language
+rather than EVM opcodes.
 
 #### How Builtins Work?
 
-Builtins enforce specific constraints on Cairo memory to perform tasks like hash computations. Each builtin operates on a dedicated memory segment, representing a fixed address range, a communication method known as _memory-mapped I/O_. Cairo programs interact with builtins by reading from or writing to their corresponding memory cells.
+Builtins enforce specific constraints on Cairo memory to perform tasks like hash
+computations. Each builtin operates on a dedicated memory segment, representing
+a fixed address range, a communication method known as _memory-mapped I/O_.
+Cairo programs interact with builtins by reading from or writing to their
+corresponding memory cells.
 
 There are two main types of builtin constraints:
 
-- **Validation Property**: Defines constraints a value must satisfy to be written to a builtin memory cell. For example, the Range Check builtin only accepts felts within the `[0, 2**128)` range.
-- **Deduction Property**: Builtins with this property are often split into blocks of cells where some cells are constrained by a validation property.
+- **Validation Property**: Defines constraints a value must satisfy to be
+  written to a builtin memory cell. For example, the Range Check builtin only
+  accepts felts within the `[0, 2**128)` range.
+- **Deduction Property**: Builtins with this property are often split into
+  blocks of cells where some cells are constrained by a validation property.
 
 If a defined property is not met, the Cairo VM will panic.
 
-Cairo includes various builtins, such as Output, Pedersen, Range Check, ECDSA, Bitwise, EC OP, Keccak, Poseidon, Range Check96, AddMod, MulMod, Segment Arena, Gas, and System. Each has a specific purpose and detailed documentation on its operation and memory organization.
+Cairo includes various builtins, such as Output, Pedersen, Range Check, ECDSA,
+Bitwise, EC OP, Keccak, Poseidon, Range Check96, AddMod, MulMod, Segment Arena,
+Gas, and System. Each has a specific purpose and detailed documentation on its
+operation and memory organization.
 
 Bitwise Builtin
 
 ### Bitwise Builtin
 
-The _Bitwise Builtin_ in the Cairo VM enables bitwise operations (AND `&`, XOR `^`, and OR `|`) on field elements. It's an integral part of the VM's architecture, complementing the base instruction set for tasks like bit masking or combining values.
+The _Bitwise Builtin_ in the Cairo VM enables bitwise operations (AND `&`, XOR
+`^`, and OR `|`) on field elements. It's an integral part of the VM's
+architecture, complementing the base instruction set for tasks like bit masking
+or combining values.
 
 ### How It Works
 
-The Bitwise builtin operates on a dedicated memory segment. Each operation consumes a block of 5 memory cells:
+The Bitwise builtin operates on a dedicated memory segment. Each operation
+consumes a block of 5 memory cells:
 
 | Offset | Description   | Role   |
 | ------ | ------------- | ------ |
@@ -6471,7 +7441,8 @@ The Bitwise builtin operates on a dedicated memory segment. Each operation consu
 | 3      | x ^ y result  | Output |
 | 4      | x \| y result | Output |
 
-For example, if `x = 5` (binary `101`) and `y = 3` (binary `011`), the outputs are:
+For example, if `x = 5` (binary `101`) and `y = 3` (binary `011`), the outputs
+are:
 
 - `5 & 3 = 1` (binary `001`)
 - `5 ^ 3 = 6` (binary `110`)
@@ -6481,7 +7452,8 @@ This structure ensures efficient, native computation with strict validation.
 
 ### Example Usage
 
-Here’s a simple Cairo function demonstrating the Bitwise Builtin using Cairo Zero:
+Here’s a simple Cairo function demonstrating the Bitwise Builtin using Cairo
+Zero:
 
 ```cairo
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
@@ -6501,11 +7473,15 @@ Keccak Builtin
 
 ### Keccak Builtin
 
-The Keccak builtin implements the core functionality of the SHA-3 family of hash functions by computing the new state `s'` from an input state `s` using 24 rounds of the keccak-f1600 permutation. It is crucial for Ethereum compatibility, as Ethereum uses Keccak-256 for various cryptographic operations.
+The Keccak builtin implements the core functionality of the SHA-3 family of hash
+functions by computing the new state `s'` from an input state `s` using 24
+rounds of the keccak-f1600 permutation. It is crucial for Ethereum
+compatibility, as Ethereum uses Keccak-256 for various cryptographic operations.
 
 #### Cells Organization
 
-The Keccak builtin uses a dedicated memory segment organized into blocks of 16 consecutive cells:
+The Keccak builtin uses a dedicated memory segment organized into blocks of 16
+consecutive cells:
 
 | Cell Range    | Purpose           | Description                                            |
 | ------------- | ----------------- | ------------------------------------------------------ |
@@ -6514,16 +7490,21 @@ The Keccak builtin uses a dedicated memory segment organized into blocks of 16 c
 
 Each block is processed independently, adhering to these rules:
 
-1.  **Input validation**: Each input cell must contain a valid field element not exceeding 200 bits (0 ≤ value < 2^200).
-2.  **Lazy computation**: The output state is only computed when any output cell is accessed.
-3.  **Caching**: Once computed, results are cached to prevent redundant calculations if other output cells from the same block are accessed.
+1.  **Input validation**: Each input cell must contain a valid field element not
+    exceeding 200 bits (0 ≤ value < 2^200).
+2.  **Lazy computation**: The output state is only computed when any output cell
+    is accessed.
+3.  **Caching**: Once computed, results are cached to prevent redundant
+    calculations if other output cells from the same block are accessed.
 
 ##### Example Operation
 
 In a complete operation within the Keccak builtin segment:
 
-- The program writes input values (e.g., `[0x1, ..., 0x8]`) to the first 8 cells.
-- Upon reading any of the output cells, the VM computes the keccak-f1600 permutation on the entire state.
+- The program writes input values (e.g., `[0x1, ..., 0x8]`) to the first 8
+  cells.
+- Upon reading any of the output cells, the VM computes the keccak-f1600
+  permutation on the entire state.
 - The resulting output state is stored in the next 8 cells.
 - This computation occurs only once per block and is cached.
 
@@ -6533,19 +7514,29 @@ Output Builtin
 
 ### Output Builtin
 
-The **Output Builtin** in the Cairo Virtual Machine (VM) manages the memory's output segment via `output_ptr`, acting as a bridge between program execution and the external world. It stores values in **public memory** for verification within the proof system.
+The **Output Builtin** in the Cairo Virtual Machine (VM) manages the memory's
+output segment via `output_ptr`, acting as a bridge between program execution
+and the external world. It stores values in **public memory** for verification
+within the proof system.
 
 #### Memory Organization
 
-The output segment is a contiguous block of public memory cells, starting at a base address. All cells within this segment are public and can be written to and read from without special requirements.
+The output segment is a contiguous block of public memory cells, starting at a
+base address. All cells within this segment are public and can be written to and
+read from without special requirements.
 
 #### Role in STARK Proofs
 
-The Output Builtin's integration with public memory is crucial for STARK proof construction and verification:
+The Output Builtin's integration with public memory is crucial for STARK proof
+construction and verification:
 
-1.  **Public Commitment**: Values written to `output_ptr` become part of the public memory, committing the program to these outputs in the proof.
-2.  **Proof Structure**: The output segment, with its boundaries (`begin_addr`, `stop_ptr`), is included in the public input of a trace for verification.
-3.  **Verification Process**: The verifier extracts and hashes the output segment (typically all cells together) to create a commitment, enabling efficient verification without re-execution.
+1.  **Public Commitment**: Values written to `output_ptr` become part of the
+    public memory, committing the program to these outputs in the proof.
+2.  **Proof Structure**: The output segment, with its boundaries (`begin_addr`,
+    `stop_ptr`), is included in the public input of a trace for verification.
+3.  **Verification Process**: The verifier extracts and hashes the output
+    segment (typically all cells together) to create a commitment, enabling
+    efficient verification without re-execution.
 
 #### Implementation References
 
@@ -6555,7 +7546,8 @@ Range Check Builtin
 
 ### Range Check Builtin
 
-The _Range Check_ builtin verifies that field elements fall within a specific range, which is fundamental for Cairo's integer types and comparisons.
+The _Range Check_ builtin verifies that field elements fall within a specific
+range, which is fundamental for Cairo's integer types and comparisons.
 
 Two variants exist:
 
@@ -6566,11 +7558,17 @@ This section focuses on the standard variant.
 
 #### Purpose and Importance
 
-While range checking can be implemented in pure Cairo, the builtin is significantly more efficient. A pure Cairo implementation would require at least 384 instructions, whereas the builtin achieves the same result with a computational cost equivalent to about 1.5 instructions. This efficiency is crucial for bounded integer arithmetic and other operations requiring value range verification.
+While range checking can be implemented in pure Cairo, the builtin is
+significantly more efficient. A pure Cairo implementation would require at least
+384 instructions, whereas the builtin achieves the same result with a
+computational cost equivalent to about 1.5 instructions. This efficiency is
+crucial for bounded integer arithmetic and other operations requiring value
+range verification.
 
 #### Cells Organization
 
-The Range Check builtin operates on a dedicated memory segment with immediate validation upon cell write.
+The Range Check builtin operates on a dedicated memory segment with immediate
+validation upon cell write.
 
 | Characteristic    | Description                             |
 | ----------------- | --------------------------------------- |
@@ -6582,7 +7580,8 @@ The Range Check builtin operates on a dedicated memory segment with immediate va
 
 ##### Valid Operation Example
 
-In this example, a program successfully writes `0`, `256`, and `2^128-1` to the Range Check segment, all within the permitted range.
+In this example, a program successfully writes `0`, `256`, and `2^128-1` to the
+Range Check segment, all within the permitted range.
 
 <div align="center">
   <img src="range-check-builtin-valid.png" alt="valid range_check builtin segment" width="300px"/>
@@ -6593,7 +7592,9 @@ In this example, a program successfully writes `0`, `256`, and `2^128-1` to the 
 
 ##### Out-of-Range Error Example
 
-Here, attempting to write `2^128` to cell `2:2` (exceeding the maximum allowed value) causes the VM to immediately throw an out-of-range error and abort execution.
+Here, attempting to write `2^128` to cell `2:2` (exceeding the maximum allowed
+value) causes the VM to immediately throw an out-of-range error and abort
+execution.
 
 <div align="center">
   <img src="range-check-builtin-error1.png" alt="invalid range_check builtin segment" width="300px"/>
@@ -6604,7 +7605,9 @@ Here, attempting to write `2^128` to cell `2:2` (exceeding the maximum allowed v
 
 ##### Invalid Type Error Example
 
-In this case, attempting to write a relocatable address (pointer to cell `1:7`) to the Range Check segment results in an error and abortion, as the builtin only accepts field elements.
+In this case, attempting to write a relocatable address (pointer to cell `1:7`)
+to the Range Check segment results in an error and abortion, as the builtin only
+accepts field elements.
 
 <div align="center">
   <img src="range-check-builtin-error2.png" alt="invalid range_check builtin segment" width="300px"/>
@@ -6623,11 +7626,15 @@ EC OP and Segment Arena Builtins
 
 ## EC OP Builtin
 
-The _EC OP_ (Elliptic Curve OPeration) builtin performs elliptic curve operations on the STARK curve, specifically computing R = P + mQ, where P and Q are points and m is a scalar multiplier. This enables efficient implementation of cryptographic algorithms.
+The _EC OP_ (Elliptic Curve OPeration) builtin performs elliptic curve
+operations on the STARK curve, specifically computing R = P + mQ, where P and Q
+are points and m is a scalar multiplier. This enables efficient implementation
+of cryptographic algorithms.
 
 ### Cells Organization
 
-The EC OP builtin has a dedicated segment, with each operation represented by a block of 7 cells:
+The EC OP builtin has a dedicated segment, with each operation represented by a
+block of 7 cells:
 
 | Offset | Description    | Role   |
 | ------ | -------------- | ------ |
@@ -6639,15 +7646,21 @@ The EC OP builtin has a dedicated segment, with each operation represented by a 
 | 5      | R.x coordinate | Output |
 | 6      | R.y coordinate | Output |
 
-The first five cells are inputs written by the program, while the last two are outputs computed by the VM upon read.
+The first five cells are inputs written by the program, while the last two are
+outputs computed by the VM upon read.
 
 ### Valid Operation Example
 
-A valid operation involves the program properly setting Point P coordinates, Point Q coordinates, and the scalar m value. When output cells (offsets 5 and 6) are read, the VM computes R = P + mQ and returns the result coordinates.
+A valid operation involves the program properly setting Point P coordinates,
+Point Q coordinates, and the scalar m value. When output cells (offsets 5 and 6)
+are read, the VM computes R = P + mQ and returns the result coordinates.
 
 ### Error Condition Example
 
-An error occurs if inputs are incomplete or invalid. For instance, if Point Q coordinates are missing, the VM cannot perform the calculation and will throw an error when output cells are accessed. All five input cells must contain valid field elements before reading the output.
+An error occurs if inputs are incomplete or invalid. For instance, if Point Q
+coordinates are missing, the VM cannot perform the calculation and will throw an
+error when output cells are accessed. All five input cells must contain valid
+field elements before reading the output.
 
 ### Implementation References
 
@@ -6659,16 +7672,21 @@ An error occurs if inputs are incomplete or invalid. For instance, if Point Q co
 
 ### Resources on Elliptic Curve Operations
 
-- StarkNet, [STARK Curve](https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/)
-- Andrea Corbellini, [Elliptic Curve Cryptography: a gentle introduction](https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/)
+- StarkNet,
+  [STARK Curve](https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/)
+- Andrea Corbellini,
+  [Elliptic Curve Cryptography: a gentle introduction](https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/)
 
 ## Segment Arena Builtin
 
-The _Segment Arena_ builtin extends Cairo VM's memory handling by tracking segment endpoints, simplifying memory operations where segments need to be allocated and finalized.
+The _Segment Arena_ builtin extends Cairo VM's memory handling by tracking
+segment endpoints, simplifying memory operations where segments need to be
+allocated and finalized.
 
 ### Cells Organization
 
-Each Segment Arena builtin instance uses blocks of 3 cells to maintain dictionary states:
+Each Segment Arena builtin instance uses blocks of 3 cells to maintain
+dictionary states:
 
 - First cell: Base address of the info pointer
 - Second cell: Current number of allocated segments
@@ -6680,11 +7698,18 @@ This works with an Info segment, also organized in blocks of 3 cells:
 - Second cell: End address of the segment (when squashed)
 - Third cell: Current number of squashed segments (squashing index)
 
-When a dictionary is allocated, `info_ptr` points to a new info segment, `n_dicts` increments, and a new info segment is created. With further allocations, the info segment grows, squashed dictionaries get end addresses, and squashing indices are assigned sequentially. Unfinished dictionaries have `0` as their end address.
+When a dictionary is allocated, `info_ptr` points to a new info segment,
+`n_dicts` increments, and a new info segment is created. With further
+allocations, the info segment grows, squashed dictionaries get end addresses,
+and squashing indices are assigned sequentially. Unfinished dictionaries have
+`0` as their end address.
 
 ### Error Conditions
 
-Errors can occur due to an invalid state, such as `info_ptr` containing a non-relocatable value (e.g., `ABC`), triggering an error when accessing the info segment. Another error condition is an inconsistent state where `n_squashed` is greater than `n_segments`.
+Errors can occur due to an invalid state, such as `info_ptr` containing a
+non-relocatable value (e.g., `ABC`), triggering an error when accessing the info
+segment. Another error condition is an inconsistent state where `n_squashed` is
+greater than `n_segments`.
 
 ### Key Validation Rules
 
@@ -6698,7 +7723,8 @@ The builtin enforces several rules:
 
 ### Implementation References
 
-These implementation references of the Segment Arena builtin might not be exhaustive.
+These implementation references of the Segment Arena builtin might not be
+exhaustive.
 
 Poseidon Builtin
 
@@ -6706,7 +7732,10 @@ Poseidon Builtin
 
 #### Overview
 
-The Poseidon builtin computes cryptographic hashes using the Poseidon hash function, optimized for zero-knowledge proofs and efficient computation in algebraic circuits. It utilizes the Hades permutation strategy, combining full and partial rounds for security and performance within STARK proofs.
+The Poseidon builtin computes cryptographic hashes using the Poseidon hash
+function, optimized for zero-knowledge proofs and efficient computation in
+algebraic circuits. It utilizes the Hades permutation strategy, combining full
+and partial rounds for security and performance within STARK proofs.
 
 Poseidon is crucial for Cairo applications due to its:
 
@@ -6716,14 +7745,16 @@ Poseidon is crucial for Cairo applications due to its:
 
 #### Cells Organization
 
-The Poseidon builtin operates within a dedicated memory segment and adheres to a deduction property pattern. Each operation involves 6 consecutive cells:
+The Poseidon builtin operates within a dedicated memory segment and adheres to a
+deduction property pattern. Each operation involves 6 consecutive cells:
 
 | Cells              | Purpose                                 |
 | :----------------- | :-------------------------------------- |
 | Input cells [0-2]  | Store input state for Hades permutation |
 | Output cells [3-5] | Store computed permutation results      |
 
-When a program reads any output cell, the VM applies the Hades permutation to the input cells and populates all three output cells with the results.
+When a program reads any output cell, the VM applies the Hades permutation to
+the input cells and populates all three output cells with the results.
 
 #### Hashing Examples
 
@@ -6744,18 +7775,22 @@ To hash a single value (e.g., 42):
     - Takes the initial state (42, 0, 0).
     - Applies padding: (42+1, 0, 0) = (43, 0, 0).
     - Computes the Hades permutation.
-    - Stores the result in output cell 3:3. The first component of the permutation result is the hash output.
+    - Stores the result in output cell 3:3. The first component of the
+      permutation result is the hash output.
 
 ##### Sequence Hashing
 
 To hash a sequence of values (e.g., 73, 91):
 
-1.  The program writes values to the first two input cells (e.g., positions 3:6 and 3:7).
+1.  The program writes values to the first two input cells (e.g., positions 3:6
+    and 3:7).
 2.  Upon reading any output cell, the VM:
     - Takes the state (73, 91, 0).
     - Applies appropriate padding: (73, 91+1, 0).
     - Computes the Hades permutation.
-    - Stores all three results in the output cells (e.g., 3:9, 3:10, 3:11). All three output state components can be used for further computation or chaining.
+    - Stores all three results in the output cells (e.g., 3:9, 3:10, 3:11). All
+      three output state components can be used for further computation or
+      chaining.
 
 #### Error Condition
 
@@ -6766,7 +7801,12 @@ To hash a sequence of values (e.g., 73, 91):
   <span class="caption">Poseidon builtin segment with invalid input</span>
 </div>
 
-An error occurs if a program attempts to write a relocatable value (e.g., a pointer to cell 7:1) to an input cell (e.g., 3:0). When an output cell (e.g., 3:3) is subsequently read, the VM throws an error because the Poseidon builtin only operates on field elements, not memory addresses. Input validation is performed when the output is read, consistent with the deduction property pattern.
+An error occurs if a program attempts to write a relocatable value (e.g., a
+pointer to cell 7:1) to an input cell (e.g., 3:0). When an output cell (e.g.,
+3:3) is subsequently read, the VM throws an error because the Poseidon builtin
+only operates on field elements, not memory addresses. Input validation is
+performed when the output is read, consistent with the deduction property
+pattern.
 
 #### Implementation References
 
@@ -6778,23 +7818,34 @@ Pedersen Builtin
 
 ### Pedersen Builtin
 
-The Pedersen builtin is dedicated to efficiently computing the Pedersen hash of two field elements (felts) natively within the Cairo VM. For a guide on using hashes, refer to section 11.4 [Working with Hashes](ch12-04-hash.md).
+The Pedersen builtin is dedicated to efficiently computing the Pedersen hash of
+two field elements (felts) natively within the Cairo VM. For a guide on using
+hashes, refer to section 11.4 [Working with Hashes](ch12-04-hash.md).
 
 #### Cells Organization
 
-The Pedersen builtin operates with its own dedicated segment in the Cairo VM, following a deduction property pattern. It is organized in _triplets of cells_: two input cells and one output cell.
+The Pedersen builtin operates with its own dedicated segment in the Cairo VM,
+following a deduction property pattern. It is organized in _triplets of cells_:
+two input cells and one output cell.
 
-- **Input cells**: Must store field elements (felts); relocatable values (pointers) are forbidden, as hashing a memory address is not well-defined.
-- **Output cell**: Its value is deduced from the input cells. When an instruction attempts to read this cell, the VM computes the Pedersen hash of the two input cells and writes the result to the output cell.
+- **Input cells**: Must store field elements (felts); relocatable values
+  (pointers) are forbidden, as hashing a memory address is not well-defined.
+- **Output cell**: Its value is deduced from the input cells. When an
+  instruction attempts to read this cell, the VM computes the Pedersen hash of
+  the two input cells and writes the result to the output cell.
 
-Errors, such as an empty input cell or an input cell containing a relocatable value, only manifest when the output cell is read, as the VM cannot compute a hash with missing or invalid input data.
+Errors, such as an empty input cell or an input cell containing a relocatable
+value, only manifest when the output cell is read, as the VM cannot compute a
+hash with missing or invalid input data.
 
 #### Deduction Property
 
-The Pedersen builtin exemplifies a deduction property, where output cell values are computed based on input cells. For the Pedersen builtin, this means:
+The Pedersen builtin exemplifies a deduction property, where output cell values
+are computed based on input cells. For the Pedersen builtin, this means:
 
 - Writing two felts, `a` and `b`, to the first two input cells.
-- Reading the third output cell, which triggers the computation and storage of `Pedersen(a, b)` in that cell.
+- Reading the third output cell, which triggers the computation and storage of
+  `Pedersen(a, b)` in that cell.
 
 <div align="center">
   <img src="pedersen-deduction-property.png" alt="Diagram of Cairo VM memory Pedersen builtins" width="800px"/>
@@ -6813,26 +7864,44 @@ The Pedersen builtin exemplifies a deduction property, where output cell values 
 
 #### Resources on Pedersen Hash
 
-- StarkNet, [Hash Functions - Pedersen Hash](https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#pedersen-hash)
-- nccgroup, [Breaking Pedersen Hashes in Practice](https://research.nccgroup.com/2023/03/22/breaking-pedersen-hashes-in-practice/), 2023, March 22
-- Ryan S., [Pedersen Hash Function Overview](https://rya-sge.github.io/access-denied/2024/05/07/pedersen-hash-function/), 2024, May 07
+- StarkNet,
+  [Hash Functions - Pedersen Hash](https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#pedersen-hash)
+- nccgroup,
+  [Breaking Pedersen Hashes in Practice](https://research.nccgroup.com/2023/03/22/breaking-pedersen-hashes-in-practice/),
+  2023, March 22
+- Ryan S.,
+  [Pedersen Hash Function Overview](https://rya-sge.github.io/access-denied/2024/05/07/pedersen-hash-function/),
+  2024, May 07
 
 Modular Arithmetic Builtins
 
 ### Modular Arithmetic Builtins
 
-Modular arithmetic is crucial for many cryptographic protocols and zero-knowledge proof systems. Implementing these operations in pure Cairo code would lead to significant computational overhead. The Mod Builtin offers an optimized solution for efficient handling of these operations, used implicitly when manipulating Arithmetic Circuits.
+Modular arithmetic is crucial for many cryptographic protocols and
+zero-knowledge proof systems. Implementing these operations in pure Cairo code
+would lead to significant computational overhead. The Mod Builtin offers an
+optimized solution for efficient handling of these operations, used implicitly
+when manipulating Arithmetic Circuits.
 
 #### Structure and Operation
 
 Each instance of the Mod Builtin starts with seven input cells:
 
-- `p0`, `p1`, `p2`, `p3`: Define the modulus `p` as a multi-word integer, typically a `UInt384` (four 96-bit chunks).
+- `p0`, `p1`, `p2`, `p3`: Define the modulus `p` as a multi-word integer,
+  typically a `UInt384` (four 96-bit chunks).
 - `values_ptr`: Stores operands and results.
-- `offsets_ptr`: Points to a table that specifies where to read or write values relative to `values_ptr`.
-- `n`: Specifies the number of operations to perform, which must be a multiple of the batch size.
+- `offsets_ptr`: Points to a table that specifies where to read or write values
+  relative to `values_ptr`.
+- `n`: Specifies the number of operations to perform, which must be a multiple
+  of the batch size.
 
-The builtin's core functionality is deduction: given two parts of a triplet (e.g., `a` and `b`), it computes the third (`c`) based on the operation and modulus, ensuring `op(a, b) = c + k * p`. The quotient `k` is bounded (small for addition, larger for multiplication). These triplets are processed in batches, typically using the `run_mod_p_circuit` function. The `values_ptr` often overlaps with the `range_check96_ptr` segment to ensure each word is under `2^96`, and offsets are defined as program literals using `dw` directives.
+The builtin's core functionality is deduction: given two parts of a triplet
+(e.g., `a` and `b`), it computes the third (`c`) based on the operation and
+modulus, ensuring `op(a, b) = c + k * p`. The quotient `k` is bounded (small for
+addition, larger for multiplication). These triplets are processed in batches,
+typically using the `run_mod_p_circuit` function. The `values_ptr` often
+overlaps with the `range_check96_ptr` segment to ensure each word is under
+`2^96`, and offsets are defined as program literals using `dw` directives.
 
 #### Example: Modular Addition
 
@@ -6892,28 +7961,49 @@ func add{range_check96_ptr: felt*, add_mod_ptr: ModBuiltin*, mul_mod_ptr: ModBui
 }
 ```
 
-In this function, `x` and `y` are loaded into the `range_check96_ptr` segment. The `add_offsets` array `[0, 4, 8]` directs the builtin to `x`, `y`, and the result `c`. The `run_mod_p_circuit` call triggers the `AddMod` builtin to compute `x + y (mod p)` and store the result at offset 8. The `range_check96_ptr` is then adjusted, and a pointer to the result is returned. For example, if `p=5`, `x=3`, and `y=4`, the values table might hold `[3, 4, 2]`, and the builtin verifies `3 + 4 = 7`, `7 mod 5 = 2`. The builtin includes safeguards such as `MissingOperand` for missing inputs, `ZeroDivisor` for `MulMod` if `b` and `p` are not coprime when `a` is unknown, and range check failures if any word exceeds `2^96`.
+In this function, `x` and `y` are loaded into the `range_check96_ptr` segment.
+The `add_offsets` array `[0, 4, 8]` directs the builtin to `x`, `y`, and the
+result `c`. The `run_mod_p_circuit` call triggers the `AddMod` builtin to
+compute `x + y (mod p)` and store the result at offset 8. The
+`range_check96_ptr` is then adjusted, and a pointer to the result is returned.
+For example, if `p=5`, `x=3`, and `y=4`, the values table might hold
+`[3, 4, 2]`, and the builtin verifies `3 + 4 = 7`, `7 mod 5 = 2`. The builtin
+includes safeguards such as `MissingOperand` for missing inputs, `ZeroDivisor`
+for `MulMod` if `b` and `p` are not coprime when `a` is unknown, and range check
+failures if any word exceeds `2^96`.
 
 #### Design Principles
 
 The Mod Builtin's design focuses on efficiency and reliability:
 
-- **96-bit Chunks:** Numbers like `UInt384` are split into four 96-bit chunks. This aligns with Cairo's `range_check96` system, allowing the VM to efficiently ensure each chunk stays below `2^96`.
-- **Quotient Bounds (`k`):** The quotient `k` (in `op(a, b) = c + k * p`) has different bounds for `AddMod` and `MulMod`. For `AddMod`, `k` is limited to 2, as `a + b` is at most `2p - 2`. For `MulMod`, `a * b` can be significantly larger, so the default quotient bound is set higher, up to `2^384`.
-- **Deduction:** The builtin can deduce missing values. For `AddMod`, if `a` and `b` are provided, it computes `c`. If `c` and one operand (e.g., `b`) are given, it solves for the other (`a`), testing `k=0` or `k=1`. For `MulMod`, it uses the extended GCD algorithm to solve `a * b = c (mod p)`. If `b` and `p` share factors (i.e., are not coprime), it flags a `ZeroDivisor` error.
+- **96-bit Chunks:** Numbers like `UInt384` are split into four 96-bit chunks.
+  This aligns with Cairo's `range_check96` system, allowing the VM to
+  efficiently ensure each chunk stays below `2^96`.
+- **Quotient Bounds (`k`):** The quotient `k` (in `op(a, b) = c + k * p`) has
+  different bounds for `AddMod` and `MulMod`. For `AddMod`, `k` is limited to 2,
+  as `a + b` is at most `2p - 2`. For `MulMod`, `a * b` can be significantly
+  larger, so the default quotient bound is set higher, up to `2^384`.
+- **Deduction:** The builtin can deduce missing values. For `AddMod`, if `a` and
+  `b` are provided, it computes `c`. If `c` and one operand (e.g., `b`) are
+  given, it solves for the other (`a`), testing `k=0` or `k=1`. For `MulMod`, it
+  uses the extended GCD algorithm to solve `a * b = c (mod p)`. If `b` and `p`
+  share factors (i.e., are not coprime), it flags a `ZeroDivisor` error.
 
 ECDSA Builtin
 
 ### ECDSA Builtin
 
-The _ECDSA_ (Elliptic Curve Digital Signature Algorithm) builtin verifies cryptographic signatures on the STARK curve, primarily used to validate if a message hash was signed by a specific private key holder.
+The _ECDSA_ (Elliptic Curve Digital Signature Algorithm) builtin verifies
+cryptographic signatures on the STARK curve, primarily used to validate if a
+message hash was signed by a specific private key holder.
 
 #### Memory Organization
 
 The ECDSA builtin has two interconnected components:
 
 1.  **Memory Segment**: Stores public keys and message hashes as field elements.
-2.  **Signature Dictionary**: Maps public key offsets to their corresponding signatures.
+2.  **Signature Dictionary**: Maps public key offsets to their corresponding
+    signatures.
 
 ##### Cell Layout in the Memory Segment
 
@@ -6922,25 +8012,37 @@ The ECDSA segment arranges cells in pairs:
 - **Even offsets** (`2n`) store public keys.
 - **Odd offsets** (`2n+1`) store message hashes.
 
-Each public key at `2n` is associated with a message hash at `2n+1` (e.g., key at offset 0 pairs with hash at offset 1).
+Each public key at `2n` is associated with a message hash at `2n+1` (e.g., key
+at offset 0 pairs with hash at offset 1).
 
 #### Signature Verification Process
 
-Signatures must be explicitly registered in the signature dictionary before use. The VM performs verification when values are written to the ECDSA segment:
+Signatures must be explicitly registered in the signature dictionary before use.
+The VM performs verification when values are written to the ECDSA segment:
 
-- Writing a public key at `2n`: VM checks if it matches the key used for the signature registered at that offset.
-- Writing a message hash at `2n+1`: VM verifies it matches the hash that was signed.
+- Writing a public key at `2n`: VM checks if it matches the key used for the
+  signature registered at that offset.
+- Writing a message hash at `2n+1`: VM verifies it matches the hash that was
+  signed.
 
 If either check fails, the VM immediately throws an error.
 
 ##### Valid Usage Example
 
-In a valid scenario, `public key_0` at offset 0 and `hash_0` at offset 1 are verified against the signature at dictionary key 0. Similarly, `public key_1` at offset 2 and `hash_1` at offset 3 are verified against the signature at dictionary key 2. All verifications pass if keys and hashes match the original signed data.
+In a valid scenario, `public key_0` at offset 0 and `hash_0` at offset 1 are
+verified against the signature at dictionary key 0. Similarly, `public key_1` at
+offset 2 and `hash_1` at offset 3 are verified against the signature at
+dictionary key 2. All verifications pass if keys and hashes match the original
+signed data.
 
 ##### Error Conditions
 
-- **Invalid Hash Error**: Occurs when a program writes a hash (e.g., "1324" at offset 5) that does not match the hash (e.g., "2025") for which the signature at the corresponding dictionary key (e.g., key 4) was created.
-- **Invalid Public Key Error**: Occurs when a program writes a public key (e.g., "0000" at offset 4) that does not match the public key (e.g., "1515") used to create the signature at the corresponding dictionary key (e.g., key 4).
+- **Invalid Hash Error**: Occurs when a program writes a hash (e.g., "1324" at
+  offset 5) that does not match the hash (e.g., "2025") for which the signature
+  at the corresponding dictionary key (e.g., key 4) was created.
+- **Invalid Public Key Error**: Occurs when a program writes a public key (e.g.,
+  "0000" at offset 4) that does not match the public key (e.g., "1515") used to
+  create the signature at the corresponding dictionary key (e.g., key 4).
 
 #### Implementation References
 
@@ -6952,11 +8054,16 @@ Hashing Techniques and Traits
 
 ### Hashing Techniques and Traits
 
-Hashing in Cairo involves initializing a hash state, updating it with values, and then finalizing it to get the hash result.
+Hashing in Cairo involves initializing a hash state, updating it with values,
+and then finalizing it to get the hash result.
 
 #### Poseidon Hashing
 
-To use Poseidon, initialize the hash state with `PoseidonTrait::new() -> HashState`. The state can then be updated using `update(self: HashState, value: felt252) -> HashState` or `update_with(self: S, value: T) -> S` multiple times. Finally, call `finalize(self: HashState) -> felt252` to get the hash value as a `felt252`.
+To use Poseidon, initialize the hash state with
+`PoseidonTrait::new() -> HashState`. The state can then be updated using
+`update(self: HashState, value: felt252) -> HashState` or
+`update_with(self: S, value: T) -> S` multiple times. Finally, call
+`finalize(self: HashState) -> felt252` to get the hash value as a `felt252`.
 
 ```cairo
 use core::poseidon::PoseidonTrait;
@@ -6980,7 +8087,11 @@ fn main() -> felt252 {
 
 #### Pedersen Hashing
 
-Pedersen hashing differs from Poseidon by starting with a `felt252` base state, initialized with `PedersenTrait::new(base: felt252) -> HashState`. When hashing a struct, you can either use `update_with` with an arbitrary base state or serialize the struct into an array and loop through its elements, updating the hash state with each field.
+Pedersen hashing differs from Poseidon by starting with a `felt252` base state,
+initialized with `PedersenTrait::new(base: felt252) -> HashState`. When hashing
+a struct, you can either use `update_with` with an arbitrary base state or
+serialize the struct into an array and loop through its elements, updating the
+hash state with each field.
 
 ```cairo
 # use core::pedersen::PedersenTrait;
@@ -7020,7 +8131,11 @@ fn main() -> (felt252, felt252) {
 
 #### Hashing Arrays with Poseidon
 
-To hash a `Span<felt252>` or a struct containing one, use the built-in function `poseidon_hash_span(mut span: Span<felt252>) -> felt252`. This also applies to `Array<felt252>` by calling `poseidon_hash_span` on its span. Note that structs containing unhashable fields (like `Array<felt252>`) cannot derive the `Hash` trait.
+To hash a `Span<felt252>` or a struct containing one, use the built-in function
+`poseidon_hash_span(mut span: Span<felt252>) -> felt252`. This also applies to
+`Array<felt252>` by calling `poseidon_hash_span` on its span. Note that structs
+containing unhashable fields (like `Array<felt252>`) cannot derive the `Hash`
+trait.
 
 ```cairo,noplayground
 use core::poseidon::PoseidonTrait;
@@ -7037,7 +8152,9 @@ struct StructForHashArray {
 }
 ```
 
-The example below demonstrates hashing a struct that includes an array by individually updating the hash state with its `felt252` fields and the result of `poseidon_hash_span` for the array's span.
+The example below demonstrates hashing a struct that includes an array by
+individually updating the hash state with its `felt252` fields and the result of
+`poseidon_hash_span` for the array's span.
 
 ```cairo
 # use core::poseidon::PoseidonTrait;
@@ -7069,40 +8186,68 @@ Inlining as a Compiler Optimization in Cairo
 
 ### What is Inlining?
 
-Inlining is a common code optimization technique where a function call at the call site is replaced with the actual code of the called function. This eliminates overhead associated with function calls, potentially improving performance by reducing executed instructions.
+Inlining is a common code optimization technique where a function call at the
+call site is replaced with the actual code of the called function. This
+eliminates overhead associated with function calls, potentially improving
+performance by reducing executed instructions.
 
-However, inlining may increase the total program size. Factors to consider when deciding to inline include function size, parameters, call frequency, and its effect on compiled code size.
+However, inlining may increase the total program size. Factors to consider when
+deciding to inline include function size, parameters, call frequency, and its
+effect on compiled code size.
 
 ### The `inline` Attribute
 
-In Cairo, the `inline` attribute suggests whether the Sierra code for an attributed function should be directly injected into the caller's context, rather than using a `function_call` libfunc.
+In Cairo, the `inline` attribute suggests whether the Sierra code for an
+attributed function should be directly injected into the caller's context,
+rather than using a `function_call` libfunc.
 
 There are three variants:
 
 - `#[inline]`: Suggests performing an inline expansion.
-- `#[inline(always)]`: Strongly suggests an inline expansion should always be performed.
-- `#[inline(never)]`: Strongly suggests an inline expansion should never be performed.
+- `#[inline(always)]`: Strongly suggests an inline expansion should always be
+  performed.
+- `#[inline(never)]`: Strongly suggests an inline expansion should never be
+  performed.
 
-It's important to note that the `inline` attribute, in any form, is a hint and may be ignored by the compiler. In practice, `#[inline(always)]` generally causes inlining except in exceptional cases.
+It's important to note that the `inline` attribute, in any form, is a hint and
+may be ignored by the compiler. In practice, `#[inline(always)]` generally
+causes inlining except in exceptional cases.
 
-Annotating functions with `#[inline(always)]` can reduce the total number of steps required, as injecting Sierra code at the caller site avoids the step-cost of function calls and argument handling. This is particularly beneficial for small functions, ideally with many arguments, or frequently called functions, as it lowers execution steps without significantly increasing code length.
+Annotating functions with `#[inline(always)]` can reduce the total number of
+steps required, as injecting Sierra code at the caller site avoids the step-cost
+of function calls and argument handling. This is particularly beneficial for
+small functions, ideally with many arguments, or frequently called functions, as
+it lowers execution steps without significantly increasing code length.
 
-However, inlining can increase code size due to duplication of the function's Sierra code at each call site. Indiscriminate use of `#[inline]` or `#[inline(always)]` can lead to increased compile time. Inlining is often a tradeoff between the number of steps and code length, and should be applied cautiously.
+However, inlining can increase code size due to duplication of the function's
+Sierra code at each call site. Indiscriminate use of `#[inline]` or
+`#[inline(always)]` can lead to increased compile time. Inlining is often a
+tradeoff between the number of steps and code length, and should be applied
+cautiously.
 
 ### Inlining Decision Process
 
-For functions without explicit `inline` directives, the Cairo compiler uses a heuristic approach. The decision primarily relies on the `DEFAULT_INLINE_SMALL_FUNCTIONS_THRESHOLD`.
+For functions without explicit `inline` directives, the Cairo compiler uses a
+heuristic approach. The decision primarily relies on the
+`DEFAULT_INLINE_SMALL_FUNCTIONS_THRESHOLD`.
 
-The compiler calculates a function's "weight" using the `ApproxCasmInlineWeight` struct, which estimates the number of Cairo Assembly (CASM) statements the function will generate. If a function's weight falls below this threshold, it will be inlined. The compiler also considers the raw statement count, typically inlining functions with fewer statements than the threshold.
+The compiler calculates a function's "weight" using the `ApproxCasmInlineWeight`
+struct, which estimates the number of Cairo Assembly (CASM) statements the
+function will generate. If a function's weight falls below this threshold, it
+will be inlined. The compiler also considers the raw statement count, typically
+inlining functions with fewer statements than the threshold.
 
 Special cases are also considered:
 
-- Very simple functions (e.g., those that only call another function or return a constant) are always inlined.
-- Functions with complex control flow structures like `Match` or those ending with a `Panic` are generally not inlined.
+- Very simple functions (e.g., those that only call another function or return a
+  constant) are always inlined.
+- Functions with complex control flow structures like `Match` or those ending
+  with a `Panic` are generally not inlined.
 
 ### Inlining Example
 
-Listing 12-5 shows a basic program allowing comparison between inlined and non-inlined functions.
+Listing 12-5 shows a basic program allowing comparison between inlined and
+non-inlined functions.
 
 ```cairo
 fn main() -> felt252 {
@@ -7120,9 +8265,11 @@ fn not_inlined() -> felt252 {
 }
 ```
 
-<span class="caption">Listing 12-5: A small Cairo program that adds the return value of 2 functions, with one of them being inlined</span>
+<span class="caption">Listing 12-5: A small Cairo program that adds the return
+value of 2 functions, with one of them being inlined</span>
 
-Let's take a look at the corresponding Sierra code to see how inlining works under the hood:
+Let's take a look at the corresponding Sierra code to see how inlining works
+under the hood:
 
 ```cairo,noplayground
 // type declarations
@@ -7159,11 +8306,15 @@ Impact of Inlining on Sierra and Casm
 
 ### Impact of Inlining on Sierra and Casm
 
-Inlining is a compiler optimization that directly impacts the generated Sierra and Casm code by embedding a function's body into the caller's context, thereby eliminating the overhead of a function call.
+Inlining is a compiler optimization that directly impacts the generated Sierra
+and Casm code by embedding a function's body into the caller's context, thereby
+eliminating the overhead of a function call.
 
 #### Inlining vs. Function Calls in Sierra
 
-The Sierra file structure includes type/libfunc declarations, statements, and function declarations. For a non-inlined function, a `function_call` libfunc is used. For example, if `main` calls `not_inlined`:
+The Sierra file structure includes type/libfunc declarations, statements, and
+function declarations. For a non-inlined function, a `function_call` libfunc is
+used. For example, if `main` calls `not_inlined`:
 
 ```cairo,noplayground
 00 function_call<user@main::main::not_inlined>() -> ([0])
@@ -7181,7 +8332,9 @@ Here, `function_call` on line 0 executes `not_inlined`, whose code is:
 10	store_temp<felt252>([0]) -> ([0])
 ```
 
-In contrast, an inlined function's code is directly inserted into the caller. For an `inlined` function returning `1`, its Sierra code appears within the caller, avoiding a separate function call:
+In contrast, an inlined function's code is directly inserted into the caller.
+For an `inlined` function returning `1`, its Sierra code appears within the
+caller, avoiding a separate function call:
 
 ```cairo,noplayground
 06	felt252_const<1>() -> ([0])
@@ -7190,7 +8343,9 @@ In contrast, an inlined function's code is directly inserted into the caller. Fo
 
 #### Additional Optimizations through Inlining
 
-Inlining can enable further compiler optimizations. Consider a program where `inlined()` is `#[inline(always)]` and `not_inlined()` is `#[inline(never)]`, and `main` calls both but doesn't use their return values:
+Inlining can enable further compiler optimizations. Consider a program where
+`inlined()` is `#[inline(always)]` and `not_inlined()` is `#[inline(never)]`,
+and `main` calls both but doesn't use their return values:
 
 ```cairo
 fn main() {
@@ -7242,9 +8397,15 @@ main::main::inlined@4() -> (felt252)
 main::main::not_inlined@7() -> (felt252)
 ```
 
-In this specific case, the `inlined` function's code (lines 4-6) is entirely omitted from `main`'s statements (lines 0-3) because its return value is never used. The `not_inlined` function is called (line 0), its return value is dropped (line 1), and a unit type is returned for `main` (lines 2-3). This optimization reduces both code length and execution steps.
+In this specific case, the `inlined` function's code (lines 4-6) is entirely
+omitted from `main`'s statements (lines 0-3) because its return value is never
+used. The `not_inlined` function is called (line 0), its return value is dropped
+(line 1), and a unit type is returned for `main` (lines 2-3). This optimization
+reduces both code length and execution steps.
 
-In summary, inlining eliminates `function_call` overhead, embeds code directly, and can lead to further optimizations like dead code elimination, ultimately reducing code size and execution cost.
+In summary, inlining eliminates `function_call` overhead, embeds code directly,
+and can lead to further optimizations like dead code elimination, ultimately
+reducing code size and execution cost.
 
 Smart Contracts: Core Concepts
 
@@ -7252,60 +8413,100 @@ Introduction to Smart Contracts
 
 ### Introduction to Smart Contracts
 
-This chapter provides a high-level introduction to smart contracts, their uses, and why blockchain developers utilize Cairo and Starknet.
+This chapter provides a high-level introduction to smart contracts, their uses,
+and why blockchain developers utilize Cairo and Starknet.
 
 #### Smart Contracts - Introduction
 
-Smart contracts are programs deployed on a blockchain, gaining prominence with Ethereum. Despite their name, they are code and instructions executed based on specific inputs, primarily consisting of storage and functions. Users interact by initiating blockchain transactions to call functions with inputs. Smart contracts can modify and read blockchain storage, possess their own address, and are considered blockchain accounts capable of holding tokens.
+Smart contracts are programs deployed on a blockchain, gaining prominence with
+Ethereum. Despite their name, they are code and instructions executed based on
+specific inputs, primarily consisting of storage and functions. Users interact
+by initiating blockchain transactions to call functions with inputs. Smart
+contracts can modify and read blockchain storage, possess their own address, and
+are considered blockchain accounts capable of holding tokens.
 
-Programming languages vary by blockchain: Solidity is common for Ethereum/EVM, while Cairo is used on Starknet. Compilation also differs: Solidity compiles to bytecode, whereas Cairo compiles to Sierra and then Cairo Assembly (CASM).
+Programming languages vary by blockchain: Solidity is common for Ethereum/EVM,
+while Cairo is used on Starknet. Compilation also differs: Solidity compiles to
+bytecode, whereas Cairo compiles to Sierra and then Cairo Assembly (CASM).
 
 Smart contracts are:
 
 - **Permissionless**: Anyone can deploy them on a decentralized blockchain.
 - **Transparent**: Stored data is publicly accessible.
-- **Composability**: Their transparent code allows developers to build contracts that interact with other contracts.
+- **Composability**: Their transparent code allows developers to build contracts
+  that interact with other contracts.
 
-They can only access data from the blockchain they are deployed on, requiring third-party software (oracles) for external data. To facilitate inter-contract communication, developers have established standards like `ERC20` for tokens (e.g., USDC, DAI) and `ERC721` for NFTs (e.g., CryptoPunks).
+They can only access data from the blockchain they are deployed on, requiring
+third-party software (oracles) for external data. To facilitate inter-contract
+communication, developers have established standards like `ERC20` for tokens
+(e.g., USDC, DAI) and `ERC721` for NFTs (e.g., CryptoPunks).
 
 #### Smart Contracts - Use Cases
 
-The potential applications of smart contracts are vast, limited only by technical constraints and developer creativity.
+The potential applications of smart contracts are vast, limited only by
+technical constraints and developer creativity.
 
-- **DeFi (Decentralized Finance)**: Enables financial applications that bypass traditional intermediaries, including lending/borrowing, decentralized exchanges (DEX), on-chain derivatives, stablecoins, and insurance.
-- **Tokenization**: Facilitates dividing real-world assets (e.g., real estate, art) into digital tokens for easier trading, increased liquidity, fractional ownership, and simplified buying/selling.
-- **Voting**: Creates secure and transparent voting systems where votes are immutably recorded on the blockchain. The contract automatically tallies results, minimizing fraud.
-- **Royalties**: Automates royalty payments for content creators, ensuring fair compensation and reducing intermediaries when content is consumed or sold.
-- **Decentralized Identities (DIDs)**: Manages digital identities, allowing individuals to control and securely share personal information. Contracts can verify identity and grant/revoke access to services based on credentials.
+- **DeFi (Decentralized Finance)**: Enables financial applications that bypass
+  traditional intermediaries, including lending/borrowing, decentralized
+  exchanges (DEX), on-chain derivatives, stablecoins, and insurance.
+- **Tokenization**: Facilitates dividing real-world assets (e.g., real estate,
+  art) into digital tokens for easier trading, increased liquidity, fractional
+  ownership, and simplified buying/selling.
+- **Voting**: Creates secure and transparent voting systems where votes are
+  immutably recorded on the blockchain. The contract automatically tallies
+  results, minimizing fraud.
+- **Royalties**: Automates royalty payments for content creators, ensuring fair
+  compensation and reducing intermediaries when content is consumed or sold.
+- **Decentralized Identities (DIDs)**: Manages digital identities, allowing
+  individuals to control and securely share personal information. Contracts can
+  verify identity and grant/revoke access to services based on credentials.
 
-As blockchain technology matures, the applications of smart contracts are expected to expand, creating new opportunities and transforming traditional systems.
+As blockchain technology matures, the applications of smart contracts are
+expected to expand, creating new opportunities and transforming traditional
+systems.
 
 Starknet Smart Contract Structure and Deployment
 
 ### Starknet Smart Contract Structure and Deployment
 
-Starknet smart contracts are defined within modules annotated with the `#[starknet::contract]` attribute.
+Starknet smart contracts are defined within modules annotated with the
+`#[starknet::contract]` attribute.
 
 #### Contract Class and Instance
 
-A**Contract Class** defines the semantics of a contract, including its logic, entry points, storage variable addresses, and events. Each class is uniquely identified by its class hash and does not have its own storage. When declared, the network registers it and assigns a unique hash.
+A**Contract Class** defines the semantics of a contract, including its logic,
+entry points, storage variable addresses, and events. Each class is uniquely
+identified by its class hash and does not have its own storage. When declared,
+the network registers it and assigns a unique hash.
 
-A**Contract Instance** is a deployed contract corresponding to a class, possessing its own unique storage.
+A**Contract Instance** is a deployed contract corresponding to a class,
+possessing its own unique storage.
 
 #### Contract Class ABI
 
-The **Application Binary Interface (ABI)** is the high-level specification of a contract's interface. It describes callable functions, their parameters, and return values, enabling external sources (off-chain or other contracts) to communicate by encoding/decoding data.
+The **Application Binary Interface (ABI)** is the high-level specification of a
+contract's interface. It describes callable functions, their parameters, and
+return values, enabling external sources (off-chain or other contracts) to
+communicate by encoding/decoding data.
 
-- **JSON Representation**: External sources (e.g., block explorers like Voyager or Starkscan) typically use a JSON representation of the ABI, generated from the contract class, containing types, functions, or events.
-- **Dispatcher Pattern**: Other contracts interact directly in Cairo using the _dispatcher_ pattern, a specific type with auto-generated methods for calling functions and handling data encoding/decoding.
+- **JSON Representation**: External sources (e.g., block explorers like Voyager
+  or Starkscan) typically use a JSON representation of the ABI, generated from
+  the contract class, containing types, functions, or events.
+- **Dispatcher Pattern**: Other contracts interact directly in Cairo using the
+  _dispatcher_ pattern, a specific type with auto-generated methods for calling
+  functions and handling data encoding/decoding.
 
 #### Entrypoints
 
-All functions exposed in a contract's ABI are called **entrypoints**, meaning they can be called from outside the contract class. There are 3 different types of entrypoints in a Starknet contract.
+All functions exposed in a contract's ABI are called **entrypoints**, meaning
+they can be called from outside the contract class. There are 3 different types
+of entrypoints in a Starknet contract.
 
 #### Anatomy of a Simple Contract
 
-Contracts encapsulate state and logic within a `#[starknet::contract]` annotated module. The contract's state is defined within a `#[storage]` struct, which is initialized empty.
+Contracts encapsulate state and logic within a `#[starknet::contract]` annotated
+module. The contract's state is defined within a `#[storage]` struct, which is
+initialized empty.
 
 Here's an example of a simple storage contract:
 
@@ -7338,11 +8539,17 @@ mod SimpleStorage {
 }
 ```
 
-This contract defines a `Storage` struct with a `stored_data` field of type `u128`, allowing it to store an unsigned 128-bit integer. The `set` and `get` functions, exposed via the `ISimpleStorage` trait and `#[abi(embed_v0)]` implementation, allow interaction with this storage.
+This contract defines a `Storage` struct with a `stored_data` field of type
+`u128`, allowing it to store an unsigned 128-bit integer. The `set` and `get`
+functions, exposed via the `ISimpleStorage` trait and `#[abi(embed_v0)]`
+implementation, allow interaction with this storage.
 
 #### Upgrading Contracts
 
-Starknet supports upgradeable contracts via the `replace_class_syscall` system call, which enables simple contract upgrades without affecting the contract's state. To upgrade, expose an entry point that executes `replace_class_syscall` with the new class hash:
+Starknet supports upgradeable contracts via the `replace_class_syscall` system
+call, which enables simple contract upgrades without affecting the contract's
+state. To upgrade, expose an entry point that executes `replace_class_syscall`
+with the new class hash:
 
 ```cairo,noplayground
 use starknet::{ClassHash, syscalls};
@@ -7355,13 +8562,18 @@ fn _upgrade(new_class_hash: ClassHash) {
 }
 ```
 
-It is crucial to thoroughly review changes and potential impacts before upgrading and to restrict who can initiate the upgrade.
+It is crucial to thoroughly review changes and potential impacts before
+upgrading and to restrict who can initiate the upgrade.
 
 Defining and Interacting with Contract Functions
 
 ### Defining and Interacting with Contract Functions
 
-Starknet smart contract functions access the contract's state via the `self: ContractState` object, which abstracts underlying system calls like `storage_read_syscall` and `storage_write_syscall`. The compiler uses `ref` and `@` modifiers on `self` to distinguish between external (state-modifying) and view (read-only) functions.
+Starknet smart contract functions access the contract's state via the
+`self: ContractState` object, which abstracts underlying system calls like
+`storage_read_syscall` and `storage_write_syscall`. The compiler uses `ref` and
+`@` modifiers on `self` to distinguish between external (state-modifying) and
+view (read-only) functions.
 
 Let's consider the `NameRegistry` contract:
 
@@ -7439,11 +8651,17 @@ mod NameRegistry {
 
 ### Constructor Functions
 
-Each contract can have only one constructor, named `constructor` and annotated with `#[constructor]`. It takes `self` as its first argument, typically by reference (`ref self: ContractState`) to allow initial state modification. Constructor arguments are passed during contract deployment.
+Each contract can have only one constructor, named `constructor` and annotated
+with `#[constructor]`. It takes `self` as its first argument, typically by
+reference (`ref self: ContractState`) to allow initial state modification.
+Constructor arguments are passed during contract deployment.
 
 ### Public Functions
 
-Public functions are accessible from outside the contract. They are usually defined within an implementation block annotated with `#[abi(embed_v0)]` or independently with `#[external(v0)]`. All public functions must take `self` as their first argument.
+Public functions are accessible from outside the contract. They are usually
+defined within an implementation block annotated with `#[abi(embed_v0)]` or
+independently with `#[external(v0)]`. All public functions must take `self` as
+their first argument.
 
 ```cairo,noplayground
 # use starknet::ContractAddress;
@@ -7521,7 +8739,9 @@ Public functions are accessible from outside the contract. They are usually defi
 
 #### External Functions
 
-External functions are public functions where `self: ContractState` is passed by reference (`ref` keyword), exposing both read and write access to storage variables. This allows modifying the contract's state.
+External functions are public functions where `self: ContractState` is passed by
+reference (`ref` keyword), exposing both read and write access to storage
+variables. This allows modifying the contract's state.
 
 ```cairo,noplayground
 # use starknet::ContractAddress;
@@ -7599,7 +8819,10 @@ External functions are public functions where `self: ContractState` is passed by
 
 #### View Functions
 
-View functions are public functions where `self: ContractState` is passed as a snapshot (`@` modifier), allowing only read access to storage variables. The compiler prevents direct state modifications via `self` by marking their `state_mutability` as `view`.
+View functions are public functions where `self: ContractState` is passed as a
+snapshot (`@` modifier), allowing only read access to storage variables. The
+compiler prevents direct state modifications via `self` by marking their
+`state_mutability` as `view`.
 
 ```cairo,noplayground
 # use starknet::ContractAddress;
@@ -7677,11 +8900,22 @@ View functions are public functions where `self: ContractState` is passed as a s
 
 #### State Mutability of Public Functions
 
-While the compiler restricts state modification via `self` for view functions, this read-only property is not enforced by Starknet itself. A view function can still modify state through direct system calls or by calling another contract that modifies state. Therefore, all public functions, whether external or view, can potentially modify the Starknet state if called via an invoke transaction. All public functions can also be called with the `starknet_call` RPC method, which does not create a transaction and thus does not change the state. Unlike EVM's `staticcall`, developers should not assume that calling a view function on another contract cannot modify the state.
+While the compiler restricts state modification via `self` for view functions,
+this read-only property is not enforced by Starknet itself. A view function can
+still modify state through direct system calls or by calling another contract
+that modifies state. Therefore, all public functions, whether external or view,
+can potentially modify the Starknet state if called via an invoke transaction.
+All public functions can also be called with the `starknet_call` RPC method,
+which does not create a transaction and thus does not change the state. Unlike
+EVM's `staticcall`, developers should not assume that calling a view function on
+another contract cannot modify the state.
 
 #### Standalone Public Functions
 
-Public functions can also be defined outside an implementation of a trait using the `#[external(v0)]` attribute. These functions automatically generate an entry in the contract ABI, making them callable externally. They also require `self` as their first parameter.
+Public functions can also be defined outside an implementation of a trait using
+the `#[external(v0)]` attribute. These functions automatically generate an entry
+in the contract ABI, making them callable externally. They also require `self`
+as their first parameter.
 
 ```cairo,noplayground
 # use starknet::ContractAddress;
@@ -7759,7 +8993,15 @@ Public functions can also be defined outside an implementation of a trait using 
 
 ### Interfaces: The Contract's Blueprint
 
-Interfaces, defined by annotating a trait with `#[starknet::interface]`, serve as the contract's blueprint. They declare the public functions a contract exposes without including their bodies. All functions in an interface trait are public and callable externally. Constructors and internal functions are not part of the interface. The `self` parameter in interface functions uses a generic type (e.g., `TContractState`). The `ref` modifier indicates potential state modification, while `@` signifies read-only access. Cairo's trait and impl mechanisms ensure that the contract's implementation conforms to its declared interface, leading to compilation errors if signatures don't match.
+Interfaces, defined by annotating a trait with `#[starknet::interface]`, serve
+as the contract's blueprint. They declare the public functions a contract
+exposes without including their bodies. All functions in an interface trait are
+public and callable externally. Constructors and internal functions are not part
+of the interface. The `self` parameter in interface functions uses a generic
+type (e.g., `TContractState`). The `ref` modifier indicates potential state
+modification, while `@` signifies read-only access. Cairo's trait and impl
+mechanisms ensure that the contract's implementation conforms to its declared
+interface, leading to compilation errors if signatures don't match.
 
 ```cairo,noplayground
 #[starknet::interface]
@@ -7771,9 +9013,18 @@ trait ISimpleStorage<TContractState> {
 
 ### Other Attributes
 
-- `#[generate_trait]`: This attribute instructs the compiler to generate a trait definition for an implementation block, reducing boilerplate. It's commonly used for private impl blocks or in conjunction with `#[abi(per_item)]`. Using it with `#[abi(embed_v0)]` for public impl blocks is not recommended as it can prevent ABI generation.
+- `#[generate_trait]`: This attribute instructs the compiler to generate a trait
+  definition for an implementation block, reducing boilerplate. It's commonly
+  used for private impl blocks or in conjunction with `#[abi(per_item)]`. Using
+  it with `#[abi(embed_v0)]` for public impl blocks is not recommended as it can
+  prevent ABI generation.
 
-- `#[abi(per_item)]`: Applied to an impl block, this attribute allows defining the entrypoint type of functions individually. It's often used with `#[generate_trait]` to define entrypoints without an explicit interface. When `#[abi(per_item)]` is used, public functions within the impl block must also be annotated with `#[external(v0)]` to be exposed; otherwise, they are considered private.
+- `#[abi(per_item)]`: Applied to an impl block, this attribute allows defining
+  the entrypoint type of functions individually. It's often used with
+  `#[generate_trait]` to define entrypoints without an explicit interface. When
+  `#[abi(per_item)]` is used, public functions within the impl block must also
+  be annotated with `#[external(v0)]` to be exposed; otherwise, they are
+  considered private.
 
 Here is an example demonstrating `#[abi(per_item)]` and `#[generate_trait]`:
 
@@ -7810,7 +9061,12 @@ Practical Smart Contract Examples
 
 #### Dice Game Contract
 
-This contract implements a dice game where players guess a number between 1 and 6. The contract owner controls the game window. Randomness is obtained from the Pragma VRF oracle via `request_randomness_from_pragma`, with the result stored in `last_random_number` through the `receive_random_words` callback. Players call `process_game_winners` to determine if their guess matches the reduced random number (1-6), emitting `GameWinner` or `GameLost` events.
+This contract implements a dice game where players guess a number between 1
+and 6. The contract owner controls the game window. Randomness is obtained from
+the Pragma VRF oracle via `request_randomness_from_pragma`, with the result
+stored in `last_random_number` through the `receive_random_words` callback.
+Players call `process_game_winners` to determine if their guess matches the
+reduced random number (1-6), emitting `GameWinner` or `GameLost` events.
 
 ```cairo,noplayground
 #[starknet::contract]
@@ -8009,7 +9265,14 @@ mod DiceGame {
 
 #### Voting Contract
 
-The `Vote` contract in Starknet registers voters via its constructor, adding them to the contract's state as eligible to vote. It defines `YES` (1) and `NO` (0) constants for voting options. Registered voters can cast a vote using the `vote` function, which updates the contract state, marks the voter as having voted (preventing re-voting), and emits a `VoteCast` event. Unauthorized attempts (non-registered users or re-voting) trigger an `UnauthorizedAttempt` event. This system manages voting from registration to result retrieval, ensuring transparency and traceability through events.
+The `Vote` contract in Starknet registers voters via its constructor, adding
+them to the contract's state as eligible to vote. It defines `YES` (1) and `NO`
+(0) constants for voting options. Registered voters can cast a vote using the
+`vote` function, which updates the contract state, marks the voter as having
+voted (preventing re-voting), and emits a `VoteCast` event. Unauthorized
+attempts (non-registered users or re-voting) trigger an `UnauthorizedAttempt`
+event. This system manages voting from registration to result retrieval,
+ensuring transparency and traceability through events.
 
 ```cairo,noplayground
 /// Core Library Imports for the Traits outside the Starknet Contract
@@ -8182,7 +9445,11 @@ Introduction to Cairo Storage
 
 #### Declaring Storage Variables
 
-Storage variables in Starknet contracts are defined within a `struct` named `Storage`, which **must** be annotated with the `#[storage]` attribute. This attribute enables the compiler to generate the necessary code for blockchain state interaction, allowing data reading and writing. The `Storage` struct can contain any type that implements the `Store` trait.
+Storage variables in Starknet contracts are defined within a `struct` named
+`Storage`, which **must** be annotated with the `#[storage]` attribute. This
+attribute enables the compiler to generate the necessary code for blockchain
+state interaction, allowing data reading and writing. The `Storage` struct can
+contain any type that implements the `Store` trait.
 
 ```cairo, noplayground
     #[storage]
@@ -8194,45 +9461,71 @@ Storage variables in Starknet contracts are defined within a `struct` named `Sto
 
 #### Accessing and Modifying Contract State
 
-To interact with storage variables, the `self` parameter in trait methods **must** be of type `ContractState`. This compiler-generated type provides access to storage variables defined in the `Storage` struct and allows for event emission. A snapshot `self: @ContractState` only permits read access and prevents event emission.
+To interact with storage variables, the `self` parameter in trait methods
+**must** be of type `ContractState`. This compiler-generated type provides
+access to storage variables defined in the `Storage` struct and allows for event
+emission. A snapshot `self: @ContractState` only permits read access and
+prevents event emission.
 
 Two primary methods are used to access or modify the contract's state:
 
-- `read()`: Returns the value of a storage variable. This method is called directly on the variable and takes no arguments.
+- `read()`: Returns the value of a storage variable. This method is called
+  directly on the variable and takes no arguments.
 
   ```cairo,noplayground
               self.stored_data.read()
   ```
 
-- `write()`: Allows writing a new value to a storage slot. This method is also called on the variable itself and takes the value to be written as an argument. For types like mappings, `write` may require multiple arguments (e.g., key and value).
+- `write()`: Allows writing a new value to a storage slot. This method is also
+  called on the variable itself and takes the value to be written as an
+  argument. For types like mappings, `write` may require multiple arguments
+  (e.g., key and value).
 
   ```cairo,noplayground
               self.stored_data.write(x);
   ```
 
-Functions intended to be callable from outside the contract must be part of an implementation block annotated with `#[abi(embed_v0)]`. Forgetting this attribute will make the functions uncallable. Direct access to storage slots using low-level `storage_read` and `storage_write` syscalls is generally discouraged.
+Functions intended to be callable from outside the contract must be part of an
+implementation block annotated with `#[abi(embed_v0)]`. Forgetting this
+attribute will make the functions uncallable. Direct access to storage slots
+using low-level `storage_read` and `storage_write` syscalls is generally
+discouraged.
 
 Optimizing Storage (Packing)
 
 ### Optimizing Storage (Packing)
 
-Optimizing storage usage in Cairo smart contracts is crucial for reducing gas costs, as storage updates are a primary contributor to transaction expenses. Packing multiple values into fewer storage slots can significantly decrease gas costs.
+Optimizing storage usage in Cairo smart contracts is crucial for reducing gas
+costs, as storage updates are a primary contributor to transaction expenses.
+Packing multiple values into fewer storage slots can significantly decrease gas
+costs.
 
 #### Integer Structure and Bitwise Operators
 
-Integers are represented by a specific number of bits (e.g., `u8` uses 8 bits). Multiple integers can be combined into a single larger integer if the total bit size fits. This process relies on bitwise operators:
+Integers are represented by a specific number of bits (e.g., `u8` uses 8 bits).
+Multiple integers can be combined into a single larger integer if the total bit
+size fits. This process relies on bitwise operators:
 
-- **Shifting:** Multiplying or dividing an integer by a power of 2 shifts its value left or right, respectively.
+- **Shifting:** Multiplying or dividing an integer by a power of 2 shifts its
+  value left or right, respectively.
 - **Masking (`AND`):** Applying a mask isolates specific bits of an integer.
-- **Combining (`OR`):** Adding two integers combines their values into a single one.
+- **Combining (`OR`):** Adding two integers combines their values into a single
+  one.
 
 #### Bit-packing in Cairo
 
-Starknet smart contract storage consists of `felt252` slots. To minimize gas costs, variables should be organized and packed. For instance, a `Sizes` struct with `u8`, `u32`, and `u64` fields (total 104 bits) can be packed into a single `u128` (or `felt252`) slot. Packing involves successively shifting variables left and summing them, while unpacking requires shifting right and using masks to isolate values.
+Starknet smart contract storage consists of `felt252` slots. To minimize gas
+costs, variables should be organized and packed. For instance, a `Sizes` struct
+with `u8`, `u32`, and `u64` fields (total 104 bits) can be packed into a single
+`u128` (or `felt252`) slot. Packing involves successively shifting variables
+left and summing them, while unpacking requires shifting right and using masks
+to isolate values.
 
 #### The `StorePacking` Trait
 
-Cairo provides the `StorePacking<T, PackedT>` trait, which defines `pack` and `unpack` functions to enable packing struct fields into fewer storage slots. `T` is the type to pack, and `PackedT` is the destination type.
+Cairo provides the `StorePacking<T, PackedT>` trait, which defines `pack` and
+`unpack` functions to enable packing struct fields into fewer storage slots. `T`
+is the type to pack, and `PackedT` is the destination type.
 
 Here is an example implementation for the `Sizes` struct:
 
@@ -8298,17 +9591,29 @@ mod SizeFactory {
 }
 ```
 
-In this example, `TWO_POW_8` and `TWO_POW_40` are used for shifting, and `MASK_8` and `MASK_32` for isolating variables. All variables are converted to `u128` to use bitwise operators. When a type implements `StorePacking`, the compiler automatically uses `StoreUsingPacking` to pack data before writing and unpack after reading from storage. The `PackedT` type must also implement the `Store` trait for this mechanism to work.
+In this example, `TWO_POW_8` and `TWO_POW_40` are used for shifting, and
+`MASK_8` and `MASK_32` for isolating variables. All variables are converted to
+`u128` to use bitwise operators. When a type implements `StorePacking`, the
+compiler automatically uses `StoreUsingPacking` to pack data before writing and
+unpack after reading from storage. The `PackedT` type must also implement the
+`Store` trait for this mechanism to work.
 
 Storage Vectors (Vec Type)
 
 ### Storage Vectors (Vec Type)
 
-The `Vec` type, part of the Cairo core library (`core::starknet::storage`), is specifically designed for contract storage. Its methods are defined in the `VecTrait` and `MutableVecTrait` traits. Unlike the `Array<T>` type, which is a memory type, `Vec<T>` is a phantom type that cannot be instantiated as a regular variable, used as a function parameter, or included in regular structs. To work with its full contents, elements must be copied to and from a memory `Array<T>`.
+The `Vec` type, part of the Cairo core library (`core::starknet::storage`), is
+specifically designed for contract storage. Its methods are defined in the
+`VecTrait` and `MutableVecTrait` traits. Unlike the `Array<T>` type, which is a
+memory type, `Vec<T>` is a phantom type that cannot be instantiated as a regular
+variable, used as a function parameter, or included in regular structs. To work
+with its full contents, elements must be copied to and from a memory `Array<T>`.
 
 #### Declaring and Using Storage Vectors
 
-To declare a Storage Vector, use `Vec<T>` within the `#[storage]` struct, specifying the element type. The following example demonstrates a contract that stores caller addresses in a `Vec`:
+To declare a Storage Vector, use `Vec<T>` within the `#[storage]` struct,
+specifying the element type. The following example demonstrates a contract that
+stores caller addresses in a `Vec`:
 
 ```cairo, noplayground
 # use starknet::ContractAddress;
@@ -8424,7 +9729,9 @@ To add an element to a `Vec`, use the `push` method:
 #
 ```
 
-To retrieve an element, use `at` or `get` to obtain a storage pointer, then call `read`. `at` panics if the index is out of bounds, while `get` returns `Option<StoragePointer<T>>`.
+To retrieve an element, use `at` or `get` to obtain a storage pointer, then call
+`read`. `at` panics if the index is out of bounds, while `get` returns
+`Option<StoragePointer<T>>`.
 
 ```cairo, noplayground
 # use starknet::ContractAddress;
@@ -8482,9 +9789,12 @@ To retrieve an element, use `at` or `get` to obtain a storage pointer, then call
 #
 ```
 
-To retrieve all elements of a `Vec`, iterate over its indices, read each value, and append it to a memory `Array<T>`. Similarly, to store an `Array<T>` in storage, iterate its elements and append them to a `Vec<T>`.
+To retrieve all elements of a `Vec`, iterate over its indices, read each value,
+and append it to a memory `Array<T>`. Similarly, to store an `Array<T>` in
+storage, iterate its elements and append them to a `Vec<T>`.
 
-To modify an element at a specific index, obtain a mutable storage pointer using `at` and then use the `write` method:
+To modify an element at a specific index, obtain a mutable storage pointer using
+`at` and then use the `write` method:
 
 ```cairo, noplayground
 # use starknet::ContractAddress;
@@ -8546,8 +9856,11 @@ To modify an element at a specific index, obtain a mutable storage pointer using
 
 The storage address for a `Vec` variable is computed as follows:
 
-- The `Vec`'s length is stored at its base address, calculated as `sn_keccak(variable_name)`.
-- The elements of the `Vec` are stored at addresses computed as `h(base_address, i)`, where `i` is the element's index and `h` is the Pedersen hash function.
+- The `Vec`'s length is stored at its base address, calculated as
+  `sn_keccak(variable_name)`.
+- The elements of the `Vec` are stored at addresses computed as
+  `h(base_address, i)`, where `i` is the element's index and `h` is the Pedersen
+  hash function.
 
 Custom Types and Storage Layout
 
@@ -8555,9 +9868,14 @@ Custom Types and Storage Layout
 
 #### Storing Custom Types with the `Store` Trait
 
-To store custom types like structs and enums in contract storage, they **must** implement the `Store` trait, defined in `starknet::storage_access`. Core library types like `u8`, `felt252`, `ContractAddress` already implement `Store`. However, memory collections (`Array<T>`, `Felt252Dict<T>`) cannot be stored; use `Vec<T>` and `Map<K, V>` instead.
+To store custom types like structs and enums in contract storage, they **must**
+implement the `Store` trait, defined in `starknet::storage_access`. Core library
+types like `u8`, `felt252`, `ContractAddress` already implement `Store`.
+However, memory collections (`Array<T>`, `Felt252Dict<T>`) cannot be stored; use
+`Vec<T>` and `Map<K, V>` instead.
 
-For custom structs, `#[derive(starknet::Store)]` can be used, provided all struct members also implement `Store`:
+For custom structs, `#[derive(starknet::Store)]` can be used, provided all
+struct members also implement `Store`:
 
 ```cairo, noplayground
 # #[starknet::interface]
@@ -8632,7 +9950,9 @@ For custom structs, `#[derive(starknet::Store)]` can be used, provided all struc
 #
 ```
 
-Enums also require the `Store` trait, derivable if all associated types implement `Store`. Enums used in storage must define a default variant with `#[default]` to handle uninitialized slots, preventing runtime errors:
+Enums also require the `Store` trait, derivable if all associated types
+implement `Store`. Enums used in storage must define a default variant with
+`#[default]` to handle uninitialized slots, preventing runtime errors:
 
 ```cairo, noplayground
 # #[starknet::interface]
@@ -8707,11 +10027,13 @@ Enums also require the `Store` trait, derivable if all associated types implemen
 #
 ```
 
-`Drop` and `Serde` traits are also typically derived for custom types to enable proper serialization/deserialization of entrypoint arguments and outputs.
+`Drop` and `Serde` traits are also typically derived for custom types to enable
+proper serialization/deserialization of entrypoint arguments and outputs.
 
 #### Storage Operations for Custom Types
 
-Simple storage variables use `write` to set values, as shown in the constructor for `owner`:
+Simple storage variables use `write` to set values, as shown in the constructor
+for `owner`:
 
 ```cairo, noplayground
 # #[starknet::interface]
@@ -8786,7 +10108,9 @@ Simple storage variables use `write` to set values, as shown in the constructor 
 #
 ```
 
-For compound types like structs, `read` and `write` are called on individual members to minimize storage operations, rather than on the entire struct variable:
+For compound types like structs, `read` and `write` are called on individual
+members to minimize storage operations, rather than on the entire struct
+variable:
 
 ```cairo, noplayground
 # #[starknet::interface]
@@ -8863,18 +10187,23 @@ For compound types like structs, `read` and `write` are called on individual mem
 
 #### Structs Storage Layout
 
-Structs are stored as a sequence of their primitive type members. The first member is at the struct's base address (`var.__base_address__`), and subsequent members are stored contiguously. For a `Person` struct with `address` and `name` fields:
+Structs are stored as a sequence of their primitive type members. The first
+member is at the struct's base address (`var.__base_address__`), and subsequent
+members are stored contiguously. For a `Person` struct with `address` and `name`
+fields:
 
 | Fields  | Address                     |
 | ------- | --------------------------- |
 | address | `owner.__base_address__`    |
 | name    | `owner.__base_address__ +1` |
 
-Tuples are stored similarly, with elements stored contiguously from the base address.
+Tuples are stored similarly, with elements stored contiguously from the base
+address.
 
 #### Enums Storage Layout
 
-Enums store the variant's index (starting from 0) and any associated values. Associated values are stored immediately after the index.
+Enums store the variant's index (starting from 0) and any associated values.
+Associated values are stored immediately after the index.
 
 For `Expiration::Finite(u64)` (index 0):
 
@@ -8891,7 +10220,11 @@ For `Expiration::Infinite` (index 1):
 
 #### Storage Nodes
 
-A storage node is a special struct defined with `#[starknet::storage_node]` that can contain storage-specific types like `Map` or `Vec`, or other storage nodes. They exist only within contract storage and cannot be instantiated outside it. Storage nodes help organize complex storage layouts and improve code readability.
+A storage node is a special struct defined with `#[starknet::storage_node]` that
+can contain storage-specific types like `Map` or `Vec`, or other storage nodes.
+They exist only within contract storage and cannot be instantiated outside it.
+Storage nodes help organize complex storage layouts and improve code
+readability.
 
 Example of a `ProposalNode` storage node:
 
@@ -8947,7 +10280,8 @@ Example of a `ProposalNode` storage node:
 # }
 ```
 
-Storage nodes cannot be `read` or `write` directly; their individual members must be accessed:
+Storage nodes cannot be `read` or `write` directly; their individual members
+must be accessed:
 
 ```cairo, noplayground
 # #[starknet::contract]
@@ -9005,18 +10339,28 @@ Advanced Storage Addressing and Internals
 
 ### Advanced Storage Addressing and Internals
 
-Cairo's contract storage utilizes a sophisticated addressing mechanism and an internal model based on `StoragePointers` and `StoragePaths` to manage non-contiguous data.
+Cairo's contract storage utilizes a sophisticated addressing mechanism and an
+internal model based on `StoragePointers` and `StoragePaths` to manage
+non-contiguous data.
 
 #### Address Computation
 
 The address of a storage variable is computed based on its type:
 
-- **Single Value**: The `sn_keccak` hash of the ASCII encoding of the variable's name. `sn_keccak` is Starknet's Keccak256 truncated to 250 bits.
-- **Composite Types (tuple, struct, enum)**: The `sn_keccak` hash of the ASCII encoding of the variable's name determines the base address. The internal layout then varies.
-- **Storage Node Members**: For a member `m` within a storage variable `variable_name`, the address is `h(sn_keccak(variable_name), sn_keccak(m))`, where `h` is the Pedersen hash. This chain of hashes extends for nested nodes until a leaf is reached, where standard calculation applies.
-- **Maps and Vecs**: Addresses are computed relative to the `sn_keccak` hash of the variable's name, incorporating mapping keys or Vec indexes.
+- **Single Value**: The `sn_keccak` hash of the ASCII encoding of the variable's
+  name. `sn_keccak` is Starknet's Keccak256 truncated to 250 bits.
+- **Composite Types (tuple, struct, enum)**: The `sn_keccak` hash of the ASCII
+  encoding of the variable's name determines the base address. The internal
+  layout then varies.
+- **Storage Node Members**: For a member `m` within a storage variable
+  `variable_name`, the address is `h(sn_keccak(variable_name), sn_keccak(m))`,
+  where `h` is the Pedersen hash. This chain of hashes extends for nested nodes
+  until a leaf is reached, where standard calculation applies.
+- **Maps and Vecs**: Addresses are computed relative to the `sn_keccak` hash of
+  the variable's name, incorporating mapping keys or Vec indexes.
 
-The base address of any storage variable can be accessed using its `__base_address__` attribute, which returns a `felt252` value.
+The base address of any storage variable can be accessed using its
+`__base_address__` attribute, which returns a `felt252` value.
 
 ```cairo, noplayground
 # use starknet::ContractAddress;
@@ -9094,19 +10438,26 @@ The base address of any storage variable can be accessed using its `__base_addre
 
 #### Storage Model: Pointers and Paths
 
-The Cairo core library models contract storage using `StoragePointers` and `StoragePaths` to abstract the non-contiguous storage locations.
+The Cairo core library models contract storage using `StoragePointers` and
+`StoragePaths` to abstract the non-contiguous storage locations.
 
-- **StoragePointer**: Represents a specific storage slot, containing a base address and an offset relative to that base.
-- **StoragePath**: A chain of storage nodes and struct fields that forms a path to a specific storage slot.
+- **StoragePointer**: Represents a specific storage slot, containing a base
+  address and an offset relative to that base.
+- **StoragePath**: A chain of storage nodes and struct fields that forms a path
+  to a specific storage slot.
 
-While developers interact with storage variables as if they were regular variables, the compiler translates these accesses into `StoragePointer` manipulations.
+While developers interact with storage variables as if they were regular
+variables, the compiler translates these accesses into `StoragePointer`
+manipulations.
 
 For storage mappings (`Map`), `StoragePath` is crucial:
 
 1.  Start with the `StorageBase` of the `Map`, converting it to a `StoragePath`.
-2.  Traverse the `StoragePath` using the `entry` method, which hashes the current path with the next key to generate the subsequent `StoragePath`.
+2.  Traverse the `StoragePath` using the `entry` method, which hashes the
+    current path with the next key to generate the subsequent `StoragePath`.
 3.  Repeat step 2 until the `StoragePath` points to the target value.
-4.  Convert the final `StoragePath` to a `StoragePointer` and then `read` or `write` the value.
+4.  Convert the final `StoragePath` to a `StoragePointer` and then `read` or
+    `write` the value.
 
 Smart Contracts: Interaction and Syscalls
 
@@ -9114,17 +10465,26 @@ Inter-Contract Communication using Dispatchers
 
 ### Inter-Contract Communication using Dispatchers
 
-When a contract interface is defined, the Cairo compiler automatically generates and exports multiple dispatchers to facilitate inter-contract communication. These include:
+When a contract interface is defined, the Cairo compiler automatically generates
+and exports multiple dispatchers to facilitate inter-contract communication.
+These include:
 
-- **Contract Dispatchers** (`IERC20Dispatcher`, `IERC20SafeDispatcher`): Wrap a contract address to call functions on other deployed contracts.
-- **Library Dispatchers** (`IERC20LibraryDispatcher`, `IERC20SafeLibraryDispatcher`): Wrap a class hash to call functions on classes (discussed in a later chapter).
-- **'Safe' Dispatchers**: Allow the caller to handle potential errors during the execution of the call.
+- **Contract Dispatchers** (`IERC20Dispatcher`, `IERC20SafeDispatcher`): Wrap a
+  contract address to call functions on other deployed contracts.
+- **Library Dispatchers** (`IERC20LibraryDispatcher`,
+  `IERC20SafeLibraryDispatcher`): Wrap a class hash to call functions on classes
+  (discussed in a later chapter).
+- **'Safe' Dispatchers**: Allow the caller to handle potential errors during the
+  execution of the call.
 
-Under the hood, dispatchers abstract the low-level `contract_call_syscall`, providing a type-safe interface for interaction.
+Under the hood, dispatchers abstract the low-level `contract_call_syscall`,
+providing a type-safe interface for interaction.
 
 #### The Dispatcher Pattern
 
-The compiler generates a dispatcher struct and a corresponding trait for a given interface. For an `IERC20` interface with `name` and `transfer` functions, the `IERC20Dispatcher` and its trait implementation would look like this:
+The compiler generates a dispatcher struct and a corresponding trait for a given
+interface. For an `IERC20` interface with `name` and `transfer` functions, the
+`IERC20Dispatcher` and its trait implementation would look like this:
 
 ```cairo,noplayground
 use starknet::ContractAddress;
@@ -9172,11 +10532,15 @@ impl IERC20DispatcherImpl of IERC20DispatcherTrait<IERC20Dispatcher> {
 }
 ```
 
-This implementation involves serializing arguments into `__calldata__`, performing a `contract_call_syscall` with the target address, function selector, and calldata, and then deserializing the return value.
+This implementation involves serializing arguments into `__calldata__`,
+performing a `contract_call_syscall` with the target address, function selector,
+and calldata, and then deserializing the return value.
 
 #### Calling Contracts Using the Contract Dispatcher
 
-To interact with another contract, you instantiate its dispatcher with the target contract's address. The following `TokenWrapper` contract demonstrates calling `name` and `transfer_from` on an ERC20 contract:
+To interact with another contract, you instantiate its dispatcher with the
+target contract's address. The following `TokenWrapper` contract demonstrates
+calling `name` and `transfer_from` on an ERC20 contract:
 
 ```cairo,noplayground
 # use starknet::ContractAddress;
@@ -9246,7 +10610,10 @@ mod TokenWrapper {
 
 #### Handling Errors with Safe Dispatchers
 
-Safe dispatchers, such as `IERC20SafeDispatcher`, enable robust error handling. If a function called via a safe dispatcher panics, execution returns to the caller, and the dispatcher returns a `Result::Err` containing the panic reason. This allows for custom error handling logic:
+Safe dispatchers, such as `IERC20SafeDispatcher`, enable robust error handling.
+If a function called via a safe dispatcher panics, execution returns to the
+caller, and the dispatcher returns a `Result::Err` containing the panic reason.
+This allows for custom error handling logic:
 
 ```cairo,noplayground
 #[starknet::interface]
@@ -9277,13 +10644,23 @@ Library Calls
 
 ### Library Calls
 
-Library calls enable a contract to execute the logic of another class in its own context, updating its own state, without affecting the state of the called class. This differs from _contract calls_, which execute logic in the context of the called contract, updating its state.
+Library calls enable a contract to execute the logic of another class in its own
+context, updating its own state, without affecting the state of the called
+class. This differs from _contract calls_, which execute logic in the context of
+the called contract, updating its state.
 
-When contract A performs a _contract call_ to contract B, `get_caller_address()` in B returns A's address, `get_contract_address()` in B returns B's address, and storage updates affect B's storage. Conversely, when A uses a _library call_ to B's class, the execution context is A's: `get_caller_address()` in B's class returns A's caller, `get_contract_address()` returns A's address, and storage updates affect A's storage.
+When contract A performs a _contract call_ to contract B, `get_caller_address()`
+in B returns A's address, `get_contract_address()` in B returns B's address, and
+storage updates affect B's storage. Conversely, when A uses a _library call_ to
+B's class, the execution context is A's: `get_caller_address()` in B's class
+returns A's caller, `get_contract_address()` returns A's address, and storage
+updates affect A's storage.
 
 #### Using the Library Dispatcher
 
-Library calls can be performed using a dispatcher pattern, similar to contract calls, but using a class hash instead of a contract address, and `library_call_syscall` instead of `call_contract_syscall`.
+Library calls can be performed using a dispatcher pattern, similar to contract
+calls, but using a class hash instead of a contract address, and
+`library_call_syscall` instead of `call_contract_syscall`.
 
 Listing 16-5 shows a simplified `IERC20LibraryDispatcher`:
 
@@ -9312,9 +10689,12 @@ impl IERC20LibraryDispatcherImpl of IERC20DispatcherTrait<IERC20LibraryDispatche
 }
 ```
 
-To use a library dispatcher, import the generated trait and dispatcher, then create an instance with the target class's hash. Calls to functions on this dispatcher will execute the logic in the current contract's context.
+To use a library dispatcher, import the generated trait and dispatcher, then
+create an instance with the target class's hash. Calls to functions on this
+dispatcher will execute the logic in the current contract's context.
 
-Listing 16-6 demonstrates `ValueStoreExecutor` using a library dispatcher to call `ValueStoreLogic`:
+Listing 16-6 demonstrates `ValueStoreExecutor` using a library dispatcher to
+call `ValueStoreLogic`:
 
 ```cairo,noplayground
 #[starknet::interface]
@@ -9381,11 +10761,15 @@ mod ValueStoreExecutor {
 }
 ```
 
-Calling `set_value` or `get_value` on `ValueStoreExecutor` will execute the logic from `ValueStoreLogic` but update/read `ValueStoreExecutor`'s `value` storage variable. Thus, `get_value` (via library call) and `get_value_local` (direct read) return the same value.
+Calling `set_value` or `get_value` on `ValueStoreExecutor` will execute the
+logic from `ValueStoreLogic` but update/read `ValueStoreExecutor`'s `value`
+storage variable. Thus, `get_value` (via library call) and `get_value_local`
+(direct read) return the same value.
 
 #### Calling Classes using Low-Level Calls
 
-For more control over serialization/deserialization and error handling, `library_call_syscall` can be used directly, as shown in Listing 16-7:
+For more control over serialization/deserialization and error handling,
+`library_call_syscall` can be used directly, as shown in Listing 16-7:
 
 ```cairo,noplayground
 #[starknet::contract]
@@ -9428,11 +10812,15 @@ Interacting with External Oracles
 
 ### Interacting with External Oracles
 
-Interacting with external oracles, such as the Pragma price feed, typically involves using a dedicated function to retrieve data. For Pragma, the `get_asset_price` view function is crucial, taking an `asset_id` and returning a `u128` price.
+Interacting with external oracles, such as the Pragma price feed, typically
+involves using a dedicated function to retrieve data. For Pragma, the
+`get_asset_price` view function is crucial, taking an `asset_id` and returning a
+`u128` price.
 
 #### Pragma Price Feed Interaction
 
-To interact with the Pragma oracle, you need to import specific dependencies and implement a function to call the oracle contract.
+To interact with the Pragma oracle, you need to import specific dependencies and
+implement a function to call the oracle contract.
 
 ##### Import Pragma Dependencies
 
@@ -9445,7 +10833,9 @@ Add the following imports to your contract module:
 
 ##### Required Price Feed Function Implementation
 
-The `get_asset_price` function retrieves the price of an asset from the Pragma Oracle. It initializes an `IPragmaABIDispatcher` and calls `get_data_median` with `DataType::SpotEntry(asset_id)` to get the price.
+The `get_asset_price` function retrieves the price of an asset from the Pragma
+Oracle. It initializes an `IPragmaABIDispatcher` and calls `get_data_median`
+with `DataType::SpotEntry(asset_id)` to get the price.
 
 ```cairo,noplayground
         fn get_asset_price(self: @ContractState, asset_id: felt252) -> u128 {
@@ -9462,15 +10852,24 @@ The `get_asset_price` function retrieves the price of an asset from the Pragma O
         }
 ```
 
-**Note**: Pragma returns token pair values using a decimal factor of 6 or 8. Convert the value to the required decimal factor by dividing by \\( {10^{n}} \\), where `n` is the decimal factor.
+**Note**: Pragma returns token pair values using a decimal factor of 6 or 8.
+Convert the value to the required decimal factor by dividing by \\( {10^{n}}
+\\), where `n` is the decimal factor.
 
 #### Example Application Using Pragma Price Feed
 
-This example demonstrates a contract consuming a price feed from the Pragma oracle to facilitate an item purchase. It imports `IPragmaABIDispatcher` for Pragma interaction and `ERC20ABIDispatcher` for ETH token interaction.
+This example demonstrates a contract consuming a price feed from the Pragma
+oracle to facilitate an item purchase. It imports `IPragmaABIDispatcher` for
+Pragma interaction and `ERC20ABIDispatcher` for ETH token interaction.
 
-The contract stores the `ETH/USD` token pair ID (`ETH_USD`), the Pragma contract address (`pragma_contract`), and the `product_price_in_usd`. The constructor initializes `pragma_contract` and sets `product_price_in_usd` to 100.
+The contract stores the `ETH/USD` token pair ID (`ETH_USD`), the Pragma contract
+address (`pragma_contract`), and the `product_price_in_usd`. The constructor
+initializes `pragma_contract` and sets `product_price_in_usd` to 100.
 
-The `buy_item` function: retrieves the caller's address, calls `get_asset_price` to get the current ETH/USD price, calculates the amount of ETH needed, and then transfers the required ETH from the caller to a specified contract address using the `ERC20ABIDispatcher`.
+The `buy_item` function: retrieves the caller's address, calls `get_asset_price`
+to get the current ETH/USD price, calculates the amount of ETH needed, and then
+transfers the required ETH from the caller to a specified contract address using
+the `ERC20ABIDispatcher`.
 
 ```cairo,noplayground
 #[starknet::contract]
@@ -9551,13 +10950,21 @@ Introduction to Components
 
 ### Introduction to Components
 
-Components are akin to Lego-like building blocks for smart contracts, designed to address the challenges of reusing common logic and storage. They allow for the modular inclusion of specific functionalities into a contract, separating the core logic from other features, thereby reducing bugs and improving reusability.
+Components are akin to Lego-like building blocks for smart contracts, designed
+to address the challenges of reusing common logic and storage. They allow for
+the modular inclusion of specific functionalities into a contract, separating
+the core logic from other features, thereby reducing bugs and improving
+reusability.
 
 #### Data Type Traits for Components
 
-Several traits are fundamental for defining data types that can be effectively used within smart contracts and components:
+Several traits are fundamental for defining data types that can be effectively
+used within smart contracts and components:
 
-- **`Serde`**: This trait enables serialization and deserialization of structs and enums, allowing them to be converted to and from arrays. The `deserialize` function converts a serialized array span back into the original struct, requiring type specification and returning an `Option`.
+- **`Serde`**: This trait enables serialization and deserialization of structs
+  and enums, allowing them to be converted to and from arrays. The `deserialize`
+  function converts a serialized array span back into the original struct,
+  requiring type specification and returning an `Option`.
 
   ```cairo
   #[derive(Serde, Drop)]
@@ -9575,13 +10982,22 @@ Several traits are fundamental for defining data types that can be effectively u
   }
   ```
 
-- **`Hash`**: This trait can be derived on structs and enums, enabling easy hashing using available hash functions. All fields or variants within the struct or enum must also be hashable.
+- **`Hash`**: This trait can be derived on structs and enums, enabling easy
+  hashing using available hash functions. All fields or variants within the
+  struct or enum must also be hashable.
 
-- **`starknet::Store`**: Relevant for Starknet development, this trait automatically implements necessary read and write functions for a type, allowing it to be used in smart contract storage.
+- **`starknet::Store`**: Relevant for Starknet development, this trait
+  automatically implements necessary read and write functions for a type,
+  allowing it to be used in smart contract storage.
 
 #### Private Functions
 
-Functions not marked with `#[external(v0)]` or within an `#[abi(embed_v0)]` block are considered private (or internal) and can only be called from within the contract. They can be grouped in a dedicated `impl` block, which is particularly useful in components for easily importing internal functions into embedding contracts, or added as free functions within the contract module. Both methods are equivalent; the choice depends on readability.
+Functions not marked with `#[external(v0)]` or within an `#[abi(embed_v0)]`
+block are considered private (or internal) and can only be called from within
+the contract. They can be grouped in a dedicated `impl` block, which is
+particularly useful in components for easily importing internal functions into
+embedding contracts, or added as free functions within the contract module. Both
+methods are equivalent; the choice depends on readability.
 
 ```cairo,noplayground
 # use starknet::ContractAddress;
@@ -9661,17 +11077,22 @@ Integrating and Managing Components
 
 ### Integrating and Managing Components
 
-Components are designed for reusability and seamless integration into smart contracts.
+Components are designed for reusability and seamless integration into smart
+contracts.
 
 #### Migrating a Contract to a Component
 
-Migrating a contract to a component is straightforward due to their similarities. The required changes are:
+Migrating a contract to a component is straightforward due to their
+similarities. The required changes are:
 
 - Add `#[starknet::component]` attribute to the module.
 - Add `#[embeddable_as(name)]` to the `impl` block to be embedded.
-- Add `TContractState` as a generic parameter to the `impl` block, along with `+HasComponent<TContractState>` as an impl restriction.
-- Change the `self` argument type in `impl` block functions from `ContractState` to `ComponentState<TContractState>`.
-- For `#[generate_trait]` traits, the trait is generic over `TContractState` instead of `ComponentState<TContractState>`.
+- Add `TContractState` as a generic parameter to the `impl` block, along with
+  `+HasComponent<TContractState>` as an impl restriction.
+- Change the `self` argument type in `impl` block functions from `ContractState`
+  to `ComponentState<TContractState>`.
+- For `#[generate_trait]` traits, the trait is generic over `TContractState`
+  instead of `ComponentState<TContractState>`.
 
 #### Using Components Inside a Contract
 
@@ -9681,8 +11102,12 @@ To integrate a component into a contract:
     - `path::to::component`
     - Storage variable name (e.g., `ownable`)
     - Event enum variant name (e.g., `OwnableEvent`)
-2.  **Add component's storage and events** to the contract's `Storage` and `Event` enums. The storage variable **MUST** be annotated with `#[substorage(v0)]`.
-3.  **Embed the component's logic** by instantiating its generic impl with the concrete `ContractState` using an impl alias. This alias must be annotated with `#[abi(embed_v0)]` to expose functions externally.
+2.  **Add component's storage and events** to the contract's `Storage` and
+    `Event` enums. The storage variable **MUST** be annotated with
+    `#[substorage(v0)]`.
+3.  **Embed the component's logic** by instantiating its generic impl with the
+    concrete `ContractState` using an impl alias. This alias must be annotated
+    with `#[abi(embed_v0)]` to expose functions externally.
 
 Example:
 
@@ -9724,9 +11149,11 @@ mod OwnableCounter {
 
 #### Using a Component as a Dependency of Another Component
 
-While a component cannot embed another component directly, it can use another component as a dependency. This allows for modularity and reusability.
+While a component cannot embed another component directly, it can use another
+component as a dependency. This allows for modularity and reusability.
 
-Example of an `OwnableCounterComponent` depending on `Ownable` for ownership features:
+Example of an `OwnableCounterComponent` depending on `Ownable` for ownership
+features:
 
 ```cairo,noplayground
 use starknet::ContractAddress;
@@ -9779,7 +11206,8 @@ mod OwnableCounterComponent {
 
 To access functions, storage, or events of a dependent component:
 
-- Use `get_dep_component!(@self, ComponentName)` for read-only access (returns a snapshot).
+- Use `get_dep_component!(@self, ComponentName)` for read-only access (returns a
+  snapshot).
 - Use `get_dep_component_mut!(ref self, ComponentName)` for mutable access.
 
 For example, in the `increment` function:
@@ -9792,7 +11220,8 @@ For example, in the `increment` function:
         }
 ```
 
-For `transfer_ownership`, you can directly call the function as the embedding contract implements the trait:
+For `transfer_ownership`, you can directly call the function as the embedding
+contract implements the trait:
 
 ```cairo,noplayground
         fn transfer_ownership(
@@ -9804,9 +11233,15 @@ For `transfer_ownership`, you can directly call the function as the embedding co
 
 #### Contract Integration
 
-The `embeddable_as(<name>)` attribute on a component's `impl` block, combined with the compiler-generated `HasComponent<TContractState>` trait, enables seamless integration. The `HasComponent` trait provides an interface to bridge between the contract's `TContractState` and the component's `ComponentState<TContractState>`, allowing functions to be called with the contract's state type.
+The `embeddable_as(<name>)` attribute on a component's `impl` block, combined
+with the compiler-generated `HasComponent<TContractState>` trait, enables
+seamless integration. The `HasComponent` trait provides an interface to bridge
+between the contract's `TContractState` and the component's
+`ComponentState<TContractState>`, allowing functions to be called with the
+contract's state type.
 
-The compiler generates a wrapper `impl` for `embeddable_as` annotated components:
+The compiler generates a wrapper `impl` for `embeddable_as` annotated
+components:
 
 ```cairo,noplayground
 #[starknet::embeddable]
@@ -9830,17 +11265,24 @@ impl Ownable<
 }
 ```
 
-This generated `impl` is what is embedded in the contract, allowing component functions to be called directly on the `ContractState`.
+This generated `impl` is what is embedded in the contract, allowing component
+functions to be called directly on the `ContractState`.
 
 #### Key Takeaways
 
-- **Embeddable impls** inject component logic into contracts, modifying the contract ABI and adding entry points.
-- The compiler automatically generates a **`HasComponent` trait implementation** when a component is used, bridging the contract's state (`TContractState`) and the component's state (`ComponentState<TContractState>`).
-- Components encapsulate reusable logic generically, integrated via **impl aliases** and accessed through the generated `HasComponent` trait.
+- **Embeddable impls** inject component logic into contracts, modifying the
+  contract ABI and adding entry points.
+- The compiler automatically generates a **`HasComponent` trait implementation**
+  when a component is used, bridging the contract's state (`TContractState`) and
+  the component's state (`ComponentState<TContractState>`).
+- Components encapsulate reusable logic generically, integrated via **impl
+  aliases** and accessed through the generated `HasComponent` trait.
 
 #### Example: Combining OpenZeppelin Components
 
-The `Upgradeable` and `Ownable` components from OpenZeppelin Contracts for Cairo can be combined to create an upgradeable contract where only the owner can initiate upgrades.
+The `Upgradeable` and `Ownable` components from OpenZeppelin Contracts for Cairo
+can be combined to create an upgradeable contract where only the owner can
+initiate upgrades.
 
 ```cairo,noplayground
 #[starknet::contract]
@@ -9900,13 +11342,21 @@ Smart Contracts: Events
 
 ## Smart Contracts: Events
 
-Events allow smart contracts to inform the outside world about changes during execution, serving as a critical integration point for real-world applications. Technically, an event is a custom data structure emitted by a contract and stored in the transaction receipt, enabling external tools to parse and index it.
+Events allow smart contracts to inform the outside world about changes during
+execution, serving as a critical integration point for real-world applications.
+Technically, an event is a custom data structure emitted by a contract and
+stored in the transaction receipt, enabling external tools to parse and index
+it.
 
 ### Defining Events
 
-Contract events are defined in an enum named `Event`, annotated with `#[event]`. Each variant in this enum represents an event that can be emitted, and its associated data must implement the `starknet::Event` trait, typically achieved by adding `#[derive(Drop, starknet::Event)]` to its definition.
+Contract events are defined in an enum named `Event`, annotated with `#[event]`.
+Each variant in this enum represents an event that can be emitted, and its
+associated data must implement the `starknet::Event` trait, typically achieved
+by adding `#[derive(Drop, starknet::Event)]` to its definition.
 
-Event data fields can be annotated with `#[key]`, causing them to be stored separately for easier filtering by external tools.
+Event data fields can be annotated with `#[key]`, causing them to be stored
+separately for easier filtering by external tools.
 
 ```cairo,noplayground
 # #[starknet::interface]
@@ -9992,16 +11442,23 @@ Event data fields can be annotated with `#[key]`, causing them to be stored sepa
 In the example above:
 
 - `BookAdded`, `FieldUpdated`, and `BookRemoved` are the defined events.
-- `BookAdded` and `BookRemoved` use simple structs, while `FieldUpdated` uses an enum of structs.
-- The `author` field in `BookAdded` and `id` field in `UpdatedTitleData`/`UpdatedAuthorData` are key fields.
+- `BookAdded` and `BookRemoved` use simple structs, while `FieldUpdated` uses an
+  enum of structs.
+- The `author` field in `BookAdded` and `id` field in
+  `UpdatedTitleData`/`UpdatedAuthorData` are key fields.
 
 ### The `#[flat]` attribute
 
-For complex event structures with nested enums, the `#[flat]` attribute can be used. When applied to an enum variant (e.g., `FieldUpdated` in the example), the inner variant name (e.g., `Title` or `Author`) is used as the event name instead of the outer variant name (`FieldUpdated`). This flattens the event name for external tools.
+For complex event structures with nested enums, the `#[flat]` attribute can be
+used. When applied to an enum variant (e.g., `FieldUpdated` in the example), the
+inner variant name (e.g., `Title` or `Author`) is used as the event name instead
+of the outer variant name (`FieldUpdated`). This flattens the event name for
+external tools.
 
 ### Emitting Events
 
-Events are emitted by calling `self.emit()` with the event data structure as a parameter.
+Events are emitted by calling `self.emit()` with the event data structure as a
+parameter.
 
 ```cairo,noplayground
 # #[starknet::interface]
@@ -10090,7 +11547,8 @@ Emitted events are stored in the transaction receipt. Here's how they appear:
 
 **Example 1: Add a book (BookAdded event)**
 
-Invoking `add_book` with `id = 42`, `title = 'Misery'`, `author = 'S. King'` results in:
+Invoking `add_book` with `id = 42`, `title = 'Misery'`, `author = 'S. King'`
+results in:
 
 ```json
 "events": [
@@ -10110,15 +11568,18 @@ Invoking `add_book` with `id = 42`, `title = 'Misery'`, `author = 'S. King'` res
 
 - `from_address`: The contract's address.
 - `keys`: Contains serialized `felt252` values of key fields.
-  - The first key (`0x2d00...bc`) is the selector of the event name, `selector!("BookAdded")`.
-  - The second key (`0x532e...67`) is the `author` field ('S. King') due to `#[key]` annotation.
+  - The first key (`0x2d00...bc`) is the selector of the event name,
+    `selector!("BookAdded")`.
+  - The second key (`0x532e...67`) is the `author` field ('S. King') due to
+    `#[key]` annotation.
 - `data`: Contains serialized `felt252` values of data fields.
   - `0x2a` is the `id` (42).
   - `0x4d69...79` is the `title` ('Misery').
 
 **Example 2: Update a book author (FieldUpdated::Author event)**
 
-Invoking `change_book_author` with `id = 42`, `new_author = 'Stephen King'` results in:
+Invoking `change_book_author` with `id = 42`, `new_author = 'Stephen King'`
+results in:
 
 ```json
 "events": [
@@ -10135,7 +11596,8 @@ Invoking `change_book_author` with `id = 42`, `new_author = 'Stephen King'` resu
   ]
 ```
 
-- The first key (`0x1b90...e1`) is the selector of the event name, which is `selector!("Author")` because the `FieldUpdated` variant is `#[flat]`.
+- The first key (`0x1b90...e1`) is the selector of the event name, which is
+  `selector!("Author")` because the `FieldUpdated` variant is `#[flat]`.
 - The second key (`0x2a`) is the `id` (42).
 - The `data` field (`0x5374...67`) contains the `new_author` ('Stephen King').
 
@@ -10145,20 +11607,31 @@ Introduction to Starknet L1-L2 Messaging
 
 ### Introduction to Starknet L1-L2 Messaging
 
-L1-L2 messaging is a fundamental feature enabling smart contracts on Layer 1 (L1) to interact with those on Layer 2 (L2), facilitating "cross-chain" transactions. This system is crucial for functionalities like bridging tokens (e.g., from Ethereum to Starknet) and DeFi pooling.
+L1-L2 messaging is a fundamental feature enabling smart contracts on Layer 1
+(L1) to interact with those on Layer 2 (L2), facilitating "cross-chain"
+transactions. This system is crucial for functionalities like bridging tokens
+(e.g., from Ethereum to Starknet) and DeFi pooling.
 
 #### Messaging Characteristics
 
 Starknet's messaging system is **asynchronous** and **asymmetric**:
 
-- **Asynchronous**: Contract code cannot await the result of a message sent on the other chain within its execution.
+- **Asynchronous**: Contract code cannot await the result of a message sent on
+  the other chain within its execution.
 - **Asymmetric**:
-  - **L1 to L2 (L1->L2)**: Fully automated by the Starknet sequencer, which automatically delivers the message to the target L2 contract.
-  - **L2 to L1 (L2->L1)**: Only the hash of the message is sent to L1 by the sequencer; manual consumption via an L1 transaction is subsequently required.
+  - **L1 to L2 (L1->L2)**: Fully automated by the Starknet sequencer, which
+    automatically delivers the message to the target L2 contract.
+  - **L2 to L1 (L2->L1)**: Only the hash of the message is sent to L1 by the
+    sequencer; manual consumption via an L1 transaction is subsequently
+    required.
 
 #### The StarknetMessaging Contract
 
-The crucial component of the L1-L2 Messaging system is the `StarknetMessaging` contract, part of the `StarknetCore` Solidity contracts deployed on Ethereum. This contract is responsible for passing messages between Starknet and Ethereum. Its interface includes functions for sending messages to L2, receiving messages on L1 from L2, and canceling messages.
+The crucial component of the L1-L2 Messaging system is the `StarknetMessaging`
+contract, part of the `StarknetCore` Solidity contracts deployed on Ethereum.
+This contract is responsible for passing messages between Starknet and Ethereum.
+Its interface includes functions for sending messages to L2, receiving messages
+on L1 from L2, and canceling messages.
 
 ```solidity
 interface IStarknetMessaging is IStarknetMessagingEvents {
@@ -10191,14 +11664,23 @@ interface IStarknetMessaging is IStarknetMessagingEvents {
 
 #### Message Flow
 
-- **L1->L2 Messages**: The Starknet sequencer continuously monitors logs emitted by the `StarknetMessaging` contract on Ethereum. Upon detecting a message, the sequencer prepares and executes an `L1HandlerTransaction` to call the function on the target L2 contract. This process typically takes 1-2 minutes.
-- **L2->L1 Messages**: These messages are prepared during contract execution on L2 and are part of the block produced. When the sequencer produces a block, it sends only the hash of each prepared message to L1.
+- **L1->L2 Messages**: The Starknet sequencer continuously monitors logs emitted
+  by the `StarknetMessaging` contract on Ethereum. Upon detecting a message, the
+  sequencer prepares and executes an `L1HandlerTransaction` to call the function
+  on the target L2 contract. This process typically takes 1-2 minutes.
+- **L2->L1 Messages**: These messages are prepared during contract execution on
+  L2 and are part of the block produced. When the sequencer produces a block, it
+  sends only the hash of each prepared message to L1.
 
 Sending Messages from L1 to L2
 
 ### Sending Messages from L1 to L2
 
-To send messages from Ethereum (L1) to Starknet (L2), Solidity contracts must call the `sendMessageToL2` function of the `StarknetMessaging` contract on L1. These messages are consumed on L2 once the block they belong to is proven and verified on Ethereum. On the Starknet side, functions designed to receive these messages must be annotated with the `#[l1_handler]` attribute.
+To send messages from Ethereum (L1) to Starknet (L2), Solidity contracts must
+call the `sendMessageToL2` function of the `StarknetMessaging` contract on L1.
+These messages are consumed on L2 once the block they belong to is proven and
+verified on Ethereum. On the Starknet side, functions designed to receive these
+messages must be annotated with the `#[l1_handler]` attribute.
 
 #### L1 Implementation (`sendMessageToL2`)
 
@@ -10213,10 +11695,17 @@ function sendMessageToL2(
 ```
 
 - `toAddress`: The contract address on L2 that will be called.
-- `selector`: The selector of the L2 function at `toAddress`. This function must have the `#[l1_handler]` attribute.
-- `payload`: An array of `felt252` values (represented by `uint256` in Solidity). Data serialization into this array must follow the Cairo serialization scheme.
+- `selector`: The selector of the L2 function at `toAddress`. This function must
+  have the `#[l1_handler]` attribute.
+- `payload`: An array of `felt252` values (represented by `uint256` in
+  Solidity). Data serialization into this array must follow the Cairo
+  serialization scheme.
 
-A minimum `msg.value` of `20,000 wei` is required when calling `sendMessageToL2` because the `StarknetMessaging` contract registers the message's hash in Ethereum storage. Additionally, sufficient fees must be paid on L1 for the `L1HandlerTransaction` to be deserialized and processed on L2, as this transaction is not tied to any account.
+A minimum `msg.value` of `20,000 wei` is required when calling `sendMessageToL2`
+because the `StarknetMessaging` contract registers the message's hash in
+Ethereum storage. Additionally, sufficient fees must be paid on L1 for the
+`L1HandlerTransaction` to be deserialized and processed on L2, as this
+transaction is not tied to any account.
 
 Here's an example of a Solidity function sending a single felt value:
 
@@ -10245,7 +11734,9 @@ function sendMessageFelt(
 
 #### L2 Implementation (`#[l1_handler]`)
 
-On the Starknet side, functions receiving L1 messages must use the `#[l1_handler]` attribute. The message payload is automatically deserialized into the function parameters.
+On the Starknet side, functions receiving L1 messages must use the
+`#[l1_handler]` attribute. The message payload is automatically deserialized
+into the function parameters.
 
 ```cairo,noplayground
     #[l1_handler]
@@ -10263,11 +11754,19 @@ Starknet-Side Message Processing
 
 #### Receiving Messages from L1
 
-To receive messages from L1, functions must be marked with the `#[l1_handler]` attribute. These functions are exclusively executed by an `L1HandlerTransaction`, with messages automatically relayed by the sequencer. It is crucial to verify the sender of the L1 message within these functions to ensure interaction only with trusted L1 contracts.
+To receive messages from L1, functions must be marked with the `#[l1_handler]`
+attribute. These functions are exclusively executed by an
+`L1HandlerTransaction`, with messages automatically relayed by the sequencer. It
+is crucial to verify the sender of the L1 message within these functions to
+ensure interaction only with trusted L1 contracts.
 
 #### Sending Messages to L1
 
-To send messages from Starknet to Ethereum, use the `send_message_to_l1` syscall. These messages are directed to the `StarknetMessaging` contract on L1 and must be consumed manually by an L1 contract calling its `consumeMessageFromL2` function. The payload for the syscall must be a `Span<felt252>`.
+To send messages from Starknet to Ethereum, use the `send_message_to_l1`
+syscall. These messages are directed to the `StarknetMessaging` contract on L1
+and must be consumed manually by an L1 contract calling its
+`consumeMessageFromL2` function. The payload for the syscall must be a
+`Span<felt252>`.
 
 ```cairo,noplayground
         fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {
@@ -10282,11 +11781,23 @@ Consuming L2 to L1 Messages on Ethereum
 
 ### Consuming L2 to L1 Messages on Ethereum
 
-To consume L2 to L1 messages on Ethereum (L1), you must first build the same payload that was sent from L2. In your Solidity contract, call `consumeMessageFromL2`, passing the L2 contract address and the payload. The L2 contract address expected by `consumeMessageFromL2` is the address of the contract that initiated the message on L2 by calling `send_message_to_l1_syscall`.
+To consume L2 to L1 messages on Ethereum (L1), you must first build the same
+payload that was sent from L2. In your Solidity contract, call
+`consumeMessageFromL2`, passing the L2 contract address and the payload. The L2
+contract address expected by `consumeMessageFromL2` is the address of the
+contract that initiated the message on L2 by calling
+`send_message_to_l1_syscall`.
 
 #### Validation
 
-While you don't explicitly verify the L2 sending contract on L1 (unlike L2 verifying L1 senders), the `consumeMessageFromL2` function of the `StarknetCore` contract validates the inputs (L2 contract address and payload) to ensure only valid messages are consumed. It's crucial to call `consumeMessageFromL2` from your Solidity contract, not directly on the `StarknetCore` contract. This is because `StarknetCore` uses `msg.sender` to compute the message hash, and `msg.sender` must correspond to the `to_address` field provided to the `send_message_to_l1_syscall` on Starknet.
+While you don't explicitly verify the L2 sending contract on L1 (unlike L2
+verifying L1 senders), the `consumeMessageFromL2` function of the `StarknetCore`
+contract validates the inputs (L2 contract address and payload) to ensure only
+valid messages are consumed. It's crucial to call `consumeMessageFromL2` from
+your Solidity contract, not directly on the `StarknetCore` contract. This is
+because `StarknetCore` uses `msg.sender` to compute the message hash, and
+`msg.sender` must correspond to the `to_address` field provided to the
+`send_message_to_l1_syscall` on Starknet.
 
 #### Example
 
@@ -10317,11 +11828,13 @@ Unit and Integration Testing for Cairo Programs
 
 ### Unit and Integration Testing for Cairo Programs
 
-Cairo provides robust support for writing tests to ensure program correctness. Tests are categorized into unit tests and integration tests.
+Cairo provides robust support for writing tests to ensure program correctness.
+Tests are categorized into unit tests and integration tests.
 
 #### The Anatomy of a Test Function
 
-Tests in Cairo are functions annotated with the `#[test]` attribute. They typically perform three actions:
+Tests in Cairo are functions annotated with the `#[test]` attribute. They
+typically perform three actions:
 
 1.  Set up any needed data or state.
 2.  Run the code to be tested.
@@ -10331,10 +11844,12 @@ Cairo offers several macros and attributes for testing:
 
 - `#[test]` attribute
 - `assert!` macro
-- `assert_eq!`, `assert_ne!`, `assert_lt!`, `assert_le!`, `assert_gt!`, `assert_ge!` macros (require `assert_macros` as a dev dependency).
+- `assert_eq!`, `assert_ne!`, `assert_lt!`, `assert_le!`, `assert_gt!`,
+  `assert_ge!` macros (require `assert_macros` as a dev dependency).
 - `#[should_panic]` attribute.
 
-When running tests with `scarb test`, Starknet Foundry's test runner executes these annotated functions and reports their pass/fail status.
+When running tests with `scarb test`, Starknet Foundry's test runner executes
+these annotated functions and reports their pass/fail status.
 
 For example, a simple test for an `add` function:
 
@@ -10357,7 +11872,9 @@ mod tests {
 
 #### Checking Results with the `assert!` Macro
 
-The `assert!` macro ensures a condition evaluates to `true`. If `false`, it calls `panic()` to fail the test with an optional custom message. This is useful for checking general conditions.
+The `assert!` macro ensures a condition evaluates to `true`. If `false`, it
+calls `panic()` to fail the test with an optional custom message. This is useful
+for checking general conditions.
 
 ```cairo, noplayground
 # #[derive(Drop)]
@@ -10406,7 +11923,10 @@ mod tests {
 
 ##### `assert_eq!` and `assert_ne!` Macros
 
-These macros compare two arguments for equality (`==`) or inequality (`!=`). They are preferred over `assert!(left == right)` because they print the `left` and `right` values if the assertion fails, aiding debugging. For custom types, `PartialEq` and `Debug` traits must be implemented (often derivable).
+These macros compare two arguments for equality (`==`) or inequality (`!=`).
+They are preferred over `assert!(left == right)` because they print the `left`
+and `right` values if the assertion fails, aiding debugging. For custom types,
+`PartialEq` and `Debug` traits must be implemented (often derivable).
 
 ```cairo, noplayground
 pub fn add_two(a: u32) -> u32 {
@@ -10454,7 +11974,10 @@ fn test_struct_equality() {
 
 ##### `assert_lt!`, `assert_le!`, `assert_gt!` and `assert_ge!` Macros
 
-These macros check for less than (`lt!`), less than or equal (`le!`), greater than (`gt!`), and greater than or equal (`ge!`) conditions. For custom types, the `PartialOrd` trait must be manually implemented, and `Copy` derived if values are used multiple times.
+These macros check for less than (`lt!`), less than or equal (`le!`), greater
+than (`gt!`), and greater than or equal (`ge!`) conditions. For custom types,
+the `PartialOrd` trait must be manually implemented, and `Copy` derived if
+values are used multiple times.
 
 ```cairo, noplayground
 #[derive(Drop, Copy, Debug, PartialEq)]
@@ -10499,7 +12022,9 @@ fn test_struct_equality() {
 
 #### Adding Custom Failure Messages
 
-`assert!`, `assert_eq!`, and `assert_ne!` macros accept optional arguments after the required ones, which are passed to the `format!` macro. This allows for custom, informative failure messages.
+`assert!`, `assert_eq!`, and `assert_ne!` macros accept optional arguments after
+the required ones, which are passed to the `format!` macro. This allows for
+custom, informative failure messages.
 
 ```cairo, noplayground
     #[test]
@@ -10510,7 +12035,9 @@ fn test_struct_equality() {
 
 #### Checking for Panics with `should_panic`
 
-The `#[should_panic]` attribute marks a test that is expected to panic. The test passes if the function panics and fails if it doesn't. For more precision, an `expected` parameter can be added to match a specific panic message.
+The `#[should_panic]` attribute marks a test that is expected to panic. The test
+passes if the function panics and fails if it doesn't. For more precision, an
+`expected` parameter can be added to match a specific panic message.
 
 ```cairo, noplayground
 #[derive(Drop)]
@@ -10586,7 +12113,9 @@ mod tests {
 
 #### Running Single Tests
 
-To run a specific test, pass its name as an argument to `scarb test` (e.g., `scarb test add_two_and_two`). You can also specify part of a test name to run all matching tests.
+To run a specific test, pass its name as an argument to `scarb test` (e.g.,
+`scarb test add_two_and_two`). You can also specify part of a test name to run
+all matching tests.
 
 ```cairo, noplayground
 #[cfg(test)]
@@ -10607,7 +12136,9 @@ mod tests {
 
 #### Ignoring Some Tests Unless Specifically Requested
 
-The `#[ignore]` attribute can be used to skip time-consuming tests during regular `scarb test` runs. To run ignored tests, use `scarb test --include-ignored`.
+The `#[ignore]` attribute can be used to skip time-consuming tests during
+regular `scarb test` runs. To run ignored tests, use
+`scarb test --include-ignored`.
 
 ```cairo, noplayground
 pub fn add(left: usize, right: usize) -> usize {
@@ -10633,7 +12164,8 @@ mod tests {
 
 #### Testing Recursive Functions or Loops
 
-Tests for recursive functions or loops have a default gas limit. This can be overridden using the `#[available_gas(<Number>)]` attribute.
+Tests for recursive functions or loops have a default gas limit. This can be
+overridden using the `#[available_gas(<Number>)]` attribute.
 
 ```cairo, noplayground
 fn sum_n(n: usize) -> usize {
@@ -10661,11 +12193,15 @@ mod tests {
 
 #### Unit Tests
 
-Unit tests are small, focused tests that examine individual units of code in isolation. They are placed in the `src` directory alongside the code they test.
+Unit tests are small, focused tests that examine individual units of code in
+isolation. They are placed in the `src` directory alongside the code they test.
 
 ##### The Tests Module and `#[cfg(test)]`
 
-Unit tests are typically contained within a module named `tests` annotated with `#[cfg(test)]`. This attribute ensures the test code is only compiled and run when `scarb test` is executed, saving compile time and space in the final artifact.
+Unit tests are typically contained within a module named `tests` annotated with
+`#[cfg(test)]`. This attribute ensures the test code is only compiled and run
+when `scarb test` is executed, saving compile time and space in the final
+artifact.
 
 ```cairo
 pub fn add(left: usize, right: usize) -> usize {
@@ -10686,7 +12222,9 @@ mod tests {
 
 ##### Testing Private Functions
 
-Cairo's privacy rules allow testing private functions from within the `tests` module. Since the `tests` module is an inner module, it can bring items from its parent module into scope using `use super::*;` or `use super::internal_adder;`.
+Cairo's privacy rules allow testing private functions from within the `tests`
+module. Since the `tests` module is an inner module, it can bring items from its
+parent module into scope using `use super::*;` or `use super::internal_adder;`.
 
 ```cairo, noplayground
 pub fn add(a: u32, b: u32) -> u32 {
@@ -10710,11 +12248,16 @@ mod tests {
 
 #### Integration Tests
 
-Integration tests verify that multiple parts of your library work correctly together, using only the public interface. They are placed in a `tests` directory at the top level of your project.
+Integration tests verify that multiple parts of your library work correctly
+together, using only the public interface. They are placed in a `tests`
+directory at the top level of your project.
 
 ##### The `tests` Directory
 
-Scarb looks for integration test files in the `tests` directory. Each file within this directory is compiled as a separate crate. Therefore, you must explicitly bring your library into scope (e.g., `use adder::add_two;`). `#[cfg(test)]` is not needed here as Scarb treats this directory specially.
+Scarb looks for integration test files in the `tests` directory. Each file
+within this directory is compiled as a separate crate. Therefore, you must
+explicitly bring your library into scope (e.g., `use adder::add_two;`).
+`#[cfg(test)]` is not needed here as Scarb treats this directory specially.
 
 Project structure:
 
@@ -10740,11 +12283,15 @@ fn it_adds_two() {
 }
 ```
 
-When `scarb test` is run, output will show separate sections for unit and integration tests.
+When `scarb test` is run, output will show separate sections for unit and
+integration tests.
 
 ##### Submodules in Integration Tests
 
-By default, each file in the `tests` directory is a separate crate. To organize integration tests into submodules and treat the `tests` directory as a single crate, create a `tests/lib.cairo` file. This file will declare the modules within the `tests` directory, similar to how `src/lib.cairo` works.
+By default, each file in the `tests` directory is a separate crate. To organize
+integration tests into submodules and treat the `tests` directory as a single
+crate, create a `tests/lib.cairo` file. This file will declare the modules
+within the `tests` directory, similar to how `src/lib.cairo` works.
 
 Example `tests/common.cairo` helper function:
 
@@ -10754,7 +12301,8 @@ pub fn setup() {
 }
 ```
 
-To make `tests/common.cairo` and other test files part of a single integration test crate, create `tests/lib.cairo`:
+To make `tests/common.cairo` and other test files part of a single integration
+test crate, create `tests/lib.cairo`:
 
 ```cairo, noplayground
 mod integration_tests;
@@ -10775,13 +12323,17 @@ adder
     └── lib.cairo
 ```
 
-This setup allows for better organization and shared helper functions across integration tests within a single crate.
+This setup allows for better organization and shared helper functions across
+integration tests within a single crate.
 
 Testing Cairo Components
 
 ### Testing Cairo Components
 
-Testing components differs from testing contracts because components are generic constructs meant for integration into contracts; they cannot be deployed independently and lack a `ContractState` object. To illustrate, consider a simple `CounterComponent`:
+Testing components differs from testing contracts because components are generic
+constructs meant for integration into contracts; they cannot be deployed
+independently and lack a `ContractState` object. To illustrate, consider a
+simple `CounterComponent`:
 
 ```cairo, noplayground
 #[starknet::component]
@@ -10810,7 +12362,9 @@ pub mod CounterComponent {
 
 #### Testing Components by Deploying a Mock Contract
 
-The most straightforward method is to integrate the component into a mock contract designed solely for testing. This allows testing the component within a contract's context and using a Dispatcher to call its entry points.
+The most straightforward method is to integrate the component into a mock
+contract designed solely for testing. This allows testing the component within a
+contract's context and using a Dispatcher to call its entry points.
 
 Define a mock contract that embeds the component and exposes its entry points:
 
@@ -10848,7 +12402,8 @@ pub trait ICounter<TContractState> {
 }
 ```
 
-Tests can then be written by deploying this mock contract and calling its entry points like any typical contract:
+Tests can then be written by deploying this mock contract and calling its entry
+points like any typical contract:
 
 ```cairo, noplayground
 use super::MockContract;
@@ -10880,9 +12435,14 @@ fn test_increment() {
 
 #### Testing Components Without Deploying a Contract
 
-Components leverage genericity, defining storage and logic embeddable in multiple contracts. When a contract embeds a component, a `HasComponent` trait is created, making component methods available. This allows direct invocation of component methods using a concrete `ComponentState` object that implements `HasComponent`, without deploying a mock contract.
+Components leverage genericity, defining storage and logic embeddable in
+multiple contracts. When a contract embeds a component, a `HasComponent` trait
+is created, making component methods available. This allows direct invocation of
+component methods using a concrete `ComponentState` object that implements
+`HasComponent`, without deploying a mock contract.
 
-First, define a concrete implementation of the generic `ComponentState` type using a type alias, typically with the `MockContract::ContractState` type:
+First, define a concrete implementation of the generic `ComponentState` type
+using a type alias, typically with the `MockContract::ContractState` type:
 
 ```cairo, noplayground
 # use super::counter::{CounterComponent};
@@ -10911,9 +12471,13 @@ impl TestingStateDefault of Default<TestingState> {
 #
 ```
 
-Since `MockContract` embeds `CounterComponent`, the methods defined in `CounterImpl` can be used on a `TestingState` object. Instantiate `TestingState` using `component_state_for_testing`, or by implementing the `Default` trait for convenience.
+Since `MockContract` embeds `CounterComponent`, the methods defined in
+`CounterImpl` can be used on a `TestingState` object. Instantiate `TestingState`
+using `component_state_for_testing`, or by implementing the `Default` trait for
+convenience.
 
-This approach is more lightweight and allows testing internal component functions not exposed externally:
+This approach is more lightweight and allows testing internal component
+functions not exposed externally:
 
 ```cairo, noplayground
 # use super::counter::{CounterComponent};
@@ -10948,7 +12512,12 @@ Testing Cairo Smart Contracts with Starknet Foundry
 
 #### Introduction
 
-Testing smart contracts is a critical part of the development process to ensure expected behavior and security. While `scarb` is useful for testing standalone Cairo programs, it lacks functionality for testing smart contracts that require control over contract state and execution context. This section introduces Starknet Foundry, a smart contract development toolchain for Starknet, using the `PizzaFactory` contract (Listing 18-1) as an example.
+Testing smart contracts is a critical part of the development process to ensure
+expected behavior and security. While `scarb` is useful for testing standalone
+Cairo programs, it lacks functionality for testing smart contracts that require
+control over contract state and execution context. This section introduces
+Starknet Foundry, a smart contract development toolchain for Starknet, using the
+`PizzaFactory` contract (Listing 18-1) as an example.
 
 ```cairo,noplayground
 use starknet::ContractAddress;
@@ -11048,11 +12617,13 @@ pub mod PizzaFactory {
 }
 ```
 
-<span class="caption">Listing 18-1: A pizza factory that needs to be tested</span>
+<span class="caption">Listing 18-1: A pizza factory that needs to be
+tested</span>
 
 #### Configuring Scarb for Starknet Foundry
 
-To use Starknet Foundry for testing, add it as a dev dependency in your `Scarb.toml` file and configure the `test` script to use `snforge test`:
+To use Starknet Foundry for testing, add it as a dev dependency in your
+`Scarb.toml` file and configure the `test` script to use `snforge test`:
 
 ```toml,noplayground
 [dev-dependencies]
@@ -11065,11 +12636,14 @@ test = "snforge test"
 allow-prebuilt-plugins = ["snforge_std"]
 ```
 
-This configuration makes `scarb test` execute `snforge test`. Install Starknet Foundry separately following its documentation.
+This configuration makes `scarb test` execute `snforge test`. Install Starknet
+Foundry separately following its documentation.
 
 #### Testing Smart Contracts with Starknet Foundry
 
-The usual command to run tests with Starknet Foundry is `snforge test`, which is aliased to `scarb test` as configured above. The typical testing flow for a contract involves:
+The usual command to run tests with Starknet Foundry is `snforge test`, which is
+aliased to `scarb test` as configured above. The typical testing flow for a
+contract involves:
 
 1.  Declaring the contract class.
 2.  Serializing constructor calldata.
@@ -11078,7 +12652,8 @@ The usual command to run tests with Starknet Foundry is `snforge test`, which is
 
 ##### Deploying the Contract to Test
 
-The following function deploys the `PizzaFactory` contract and sets up the dispatcher for interactions:
+The following function deploys the `PizzaFactory` contract and sets up the
+dispatcher for interactions:
 
 ```cairo,noplayground
 # use crate::pizza::{
@@ -11196,7 +12771,9 @@ The `PizzaFactory` contract's behavior should be tested for:
 
 ###### Accessing Storage Variables with `load`
 
-To assert initial values, you can call contract entrypoints or use `snforge`'s `load` function to directly read storage variables, even if not exposed by an entrypoint.
+To assert initial values, you can call contract entrypoints or use `snforge`'s
+`load` function to directly read storage variables, even if not exposed by an
+entrypoint.
 
 ```cairo,noplayground
 # use crate::pizza::{
@@ -11302,11 +12879,14 @@ fn test_constructor() {
 #
 ```
 
-<span class="caption">Listing 18-3: Testing the initial state by loading storage variables </span>
+<span class="caption">Listing 18-3: Testing the initial state by loading storage
+variables </span>
 
 ###### Mocking the Caller Address with `start_cheat_caller_address`
 
-To test access control, `start_cheat_caller_address` can mock the caller. This allows asserting that operations fail when an unauthorized address calls them, and succeed when the owner calls them.
+To test access control, `start_cheat_caller_address` can mock the caller. This
+allows asserting that operations fail when an unauthorized address calls them,
+and succeed when the owner calls them.
 
 ```cairo,noplayground
 # use crate::pizza::{
@@ -11412,11 +12992,14 @@ fn test_change_owner_should_panic_when_not_owner() {
 #
 ```
 
-<span class="caption">Listing 18-4: Testing ownership of the contract by mocking the caller address </span>
+<span class="caption">Listing 18-4: Testing ownership of the contract by mocking
+the caller address </span>
 
 ###### Capturing Events with `spy_events`
 
-To test emitted events, use `spy_events` to capture and assert that the event was emitted with expected parameters. This is combined with tests for pizza count increment and owner-only access.
+To test emitted events, use `spy_events` to capture and assert that the event
+was emitted with expected parameters. This is combined with tests for pizza
+count increment and owner-only access.
 
 ```cairo,noplayground
 # use crate::pizza::{
@@ -11522,11 +13105,15 @@ fn test_make_pizza_should_increment_pizza_counter() {
 #
 ```
 
-<span class="caption">Listing 18-5: Testing the events emitted when a pizza is created</span>
+<span class="caption">Listing 18-5: Testing the events emitted when a pizza is
+created</span>
 
 ###### Accessing Internal Functions with `contract_state_for_testing`
 
-For unit testing internal contract functions without deployment, `contract_state_for_testing` creates an instance of the `ContractState` struct. This allows direct interaction with storage variables and internal methods by importing necessary traits.
+For unit testing internal contract functions without deployment,
+`contract_state_for_testing` creates an instance of the `ContractState` struct.
+This allows direct interaction with storage variables and internal methods by
+importing necessary traits.
 
 ```cairo,noplayground
 # use crate::pizza::{
@@ -11632,9 +13219,11 @@ fn test_set_as_new_owner_direct() {
 #
 ```
 
-<span class="caption">Listing 18-6: Unit testing our contract without deployment</span>
+<span class="caption">Listing 18-6: Unit testing our contract without
+deployment</span>
 
-Note: You cannot mix the deployment approach (using a dispatcher) and the `ContractState` direct interaction approach within the same test.
+Note: You cannot mix the deployment approach (using a dispatcher) and the
+`ContractState` direct interaction approach within the same test.
 
 #### Running Tests
 
@@ -11661,11 +13250,16 @@ Tests: 6 passed, 0 failed, 0 skipped, 0 ignored, 0 filtered out
 
 ```
 
-The output shows that all tests passed successfully, along with an estimation of the gas consumed by each test.
+The output shows that all tests passed successfully, along with an estimation of
+the gas consumed by each test.
 
 #### Summary
 
-This section covered how to test smart contracts using Starknet Foundry, including contract deployment, interaction via dispatcher, mocking caller addresses, capturing events, and direct testing of internal functions. For more details, refer to the [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/index.html).
+This section covered how to test smart contracts using Starknet Foundry,
+including contract deployment, interaction via dispatcher, mocking caller
+addresses, capturing events, and direct testing of internal functions. For more
+details, refer to the
+[Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/index.html).
 
 Interacting with Starknet (CLI)
 
@@ -11673,16 +13267,22 @@ Setting up the Starknet Local Development Environment
 
 ### Setting up the Starknet Local Development Environment
 
-To interact with smart contracts on Starknet, you can set up a local development node using `katana`. `katana` is a local Starknet node designed by the Dojo team to support local development and testing, allowing you to deploy, call, and invoke smart contracts without fees or signing for read-only operations.
+To interact with smart contracts on Starknet, you can set up a local development
+node using `katana`. `katana` is a local Starknet node designed by the Dojo team
+to support local development and testing, allowing you to deploy, call, and
+invoke smart contracts without fees or signing for read-only operations.
 
 Interacting with contracts involves:
 
-- **Calling contracts**: For external functions that only read from the state. These do not alter the network state, so they don't require fees or signing.
-- **Invoking contracts**: For external functions that write to the state. These alter the network state and require fees and signing.
+- **Calling contracts**: For external functions that only read from the state.
+  These do not alter the network state, so they don't require fees or signing.
+- **Invoking contracts**: For external functions that write to the state. These
+  alter the network state and require fees and signing.
 
 #### The `katana` Local Starknet Node
 
-To install `katana`, refer to the "Using Katana" chapter of the Dojo Engine documentation. Verify your `katana` version:
+To install `katana`, refer to the "Using Katana" chapter of the Dojo Engine
+documentation. Verify your `katana` version:
 
 ```bash
 $ katana --version
@@ -11695,7 +13295,9 @@ Once installed, start the local Starknet node with:
 katana
 ```
 
-This command starts `katana` with predeployed accounts, which can be used to deploy and interact with contracts. An example output showing prefunded accounts is:
+This command starts `katana` with predeployed accounts, which can be used to
+deploy and interact with contracts. An example output showing prefunded accounts
+is:
 
 ```bash
 ...
@@ -11718,7 +13320,10 @@ PREFUNDED ACCOUNTS
 
 #### Smart Wallets for Voting
 
-Before interacting with a contract, voter and admin accounts on Starknet must be prepared (registered and funded). For command-line interaction with Starknet, you will need `Starkli`, a CLI tool. Installation instructions for `Starkli` can be found in the "Setting up Starkli" chapter of the Starknet Docs.
+Before interacting with a contract, voter and admin accounts on Starknet must be
+prepared (registered and funded). For command-line interaction with Starknet,
+you will need `Starkli`, a CLI tool. Installation instructions for `Starkli` can
+be found in the "Setting up Starkli" chapter of the Starknet Docs.
 
 Essential `starkli` Commands for Contract Interaction
 
@@ -11726,7 +13331,9 @@ Essential `starkli` Commands for Contract Interaction
 
 #### Starkli Version and Upgrade
 
-Ensure your `starkli` version matches the specified `0.3.6`. You can check it with `starkli --version` and upgrade using `starkliup -v 0.3.6` or `starkliup` for the latest stable version.
+Ensure your `starkli` version matches the specified `0.3.6`. You can check it
+with `starkli --version` and upgrade using `starkliup -v 0.3.6` or `starkliup`
+for the latest stable version.
 
 ```bash
 $ starkli --version
@@ -11735,7 +13342,8 @@ $ starkli --version
 
 #### Retrieve Smart Wallet Class Hash
 
-To get the class hash of your smart wallet, use `starkli class-hash-at` with your wallet address and RPC endpoint:
+To get the class hash of your smart wallet, use `starkli class-hash-at` with
+your wallet address and RPC endpoint:
 
 ```
 starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
@@ -11743,21 +13351,25 @@ starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
 
 #### Contract Deployment
 
-Before deploying, a contract must be declared, then deployed. The `--rpc` flag specifies the RPC endpoint, and `--account` specifies the account for signing.
+Before deploying, a contract must be declared, then deployed. The `--rpc` flag
+specifies the RPC endpoint, and `--account` specifies the account for signing.
 
 ##### Declare Contract
 
-Declare the contract using `starkli declare`. If compiler version issues arise, use `--compiler-version x.y.z` or upgrade `starkli`.
+Declare the contract using `starkli declare`. If compiler version issues arise,
+use `--compiler-version x.y.z` or upgrade `starkli`.
 
 ```bash
 starkli declare target/dev/listing_99_12_vote_contract_Vote.contract_class.json --rpc http://0.0.0.0:5050 --account katana-0
 ```
 
-An example class hash for the declared contract is `0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`.
+An example class hash for the declared contract is
+`0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba52`.
 
 ##### Deploy Contract
 
-Deploy the contract using `starkli deploy`, providing the class hash and constructor arguments (e.g., voter addresses).
+Deploy the contract using `starkli deploy`, providing the class hash and
+constructor arguments (e.g., voter addresses).
 
 ```bash
 starkli deploy <class_hash_of_the_contract_to_be_deployed> <voter_0_address> <voter_1_address> <voter_2_address> --rpc http://0.0.0.0:5050 --account katana-0
@@ -11771,7 +13383,10 @@ starkli deploy 0x06974677a079b7edfadcd70aa4d12aac0263a4cda379009fca125e0ab1a9ba5
 
 #### Voter Eligibility Verification
 
-For external read functions that don't alter contract state, use `starkli call`. This command does not require signing. The `voter_can_vote` function checks if a voter is registered and hasn't voted, while `is_voter_registered` only checks registration.
+For external read functions that don't alter contract state, use `starkli call`.
+This command does not require signing. The `voter_can_vote` function checks if a
+voter is registered and hasn't voted, while `is_voter_registered` only checks
+registration.
 
 Call `voter_can_vote` for a registered voter:
 
@@ -11791,7 +13406,8 @@ starkli call 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 
 
 #### Casting a Vote
 
-To interact with functions that modify contract storage, such as `vote`, use `starkli invoke`. This command requires signing and incurs a fee.
+To interact with functions that modify contract storage, such as `vote`, use
+`starkli invoke`. This command requires signing and incurs a fee.
 
 ```bash
 //Voting Yes
@@ -11801,7 +13417,8 @@ starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f3334
 starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account katana-0
 ```
 
-After invoking, you'll be prompted for your signer password. You can then check transaction details using its hash:
+After invoking, you'll be prompted for your signer password. You can then check
+transaction details using its hash:
 
 ```bash
 starkli transaction <TRANSACTION_HASH> --rpc http://0.0.0.0:5050
@@ -11811,11 +13428,14 @@ Debugging and Managing Starknet Transactions
 
 ### Debugging and Managing Starknet Transactions
 
-When interacting with Starknet via the CLI, transactions return a hash and other details upon submission.
+When interacting with Starknet via the CLI, transactions return a hash and other
+details upon submission.
 
 #### Transaction Output
 
-A successful transaction returns a JSON object with details like `transaction_hash`, `max_fee`, `version`, `signature`, `nonce`, `type`, `sender_address`, and `calldata`:
+A successful transaction returns a JSON object with details like
+`transaction_hash`, `max_fee`, `version`, `signature`, `nonce`, `type`,
+`sender_address`, and `calldata`:
 
 ```bash
 {
@@ -11843,13 +13463,16 @@ A successful transaction returns a JSON object with details like `transaction_ha
 
 #### Debugging Contract Errors
 
-If an invalid operation is attempted, such as voting twice with the same signer, `starkli` may return a generic error message:
+If an invalid operation is attempted, such as voting twice with the same signer,
+`starkli` may return a generic error message:
 
 ```bash
 Error: code=ContractError, message="Contract error"
 ```
 
-For more detailed debugging, examine the output in the terminal where your local Starknet node (`katana`) is running. This output provides specific execution failure reasons:
+For more detailed debugging, examine the output in the terminal where your local
+Starknet node (`katana`) is running. This output provides specific execution
+failure reasons:
 
 ```bash
 ...
@@ -11859,9 +13482,11 @@ Transaction execution error: "Error in the called contract (0x03ee9e18edc71a6df3
     ...
 ```
 
-The key error message, in this case, is `USER_ALREADY_VOTED`, which originates from an `assert!` statement within the contract.
+The key error message, in this case, is `USER_ALREADY_VOTED`, which originates
+from an `assert!` statement within the contract.
 
-Attempting to invoke the `vote` function multiple times with the same account will trigger this error:
+Attempting to invoke the `vote` function multiple times with the same account
+will trigger this error:
 
 ```bash
 starkli invoke 0x05ea3a690be71c7fcd83945517f82e8861a97d42fca8ec9a2c46831d11f33349 vote 0 --rpc http://0.0.0.0:5050 --account katana-0
@@ -11875,11 +13500,21 @@ Zero-Knowledge Proofs in Cairo
 
 ### Zero-Knowledge Proofs in Cairo
 
-Cairo is designed to generate proofs of computational integrity using the STARK proof system. This ensures that program execution is correct and adheres to Cairo's restrictions.
+Cairo is designed to generate proofs of computational integrity using the STARK
+proof system. This ensures that program execution is correct and adheres to
+Cairo's restrictions.
 
 #### Dictionary Squashing
 
-One crucial boundary check in Cairo is "dictionary squashing," which is required for `Felt252Dict<T>` to verify that dictionary access remains coherent throughout execution. `Felt252Dict<T>` operations have a worst-case time complexity of `O(n)` due to scanning for the last entry with the same key to extract its `new_value` as the `previous_value` for the new entry. The squashing process verifies that for all entries with a key `k`, taken in insertion order, the `new_value` of the `i`-th entry equals the `previous_value` of the `i+1`-th entry. This mechanism requires both previous and new values for every entry to ensure no illegal tampering occurred.
+One crucial boundary check in Cairo is "dictionary squashing," which is required
+for `Felt252Dict<T>` to verify that dictionary access remains coherent
+throughout execution. `Felt252Dict<T>` operations have a worst-case time
+complexity of `O(n)` due to scanning for the last entry with the same key to
+extract its `new_value` as the `previous_value` for the new entry. The squashing
+process verifies that for all entries with a key `k`, taken in insertion order,
+the `new_value` of the `i`-th entry equals the `previous_value` of the `i+1`-th
+entry. This mechanism requires both previous and new values for every entry to
+ensure no illegal tampering occurred.
 
 For example, given the following entry list, squashing verifies consistency:
 
@@ -11895,7 +13530,10 @@ For example, given the following entry list, squashing verifies consistency:
 
 #### Generating and Verifying Proofs
 
-Cairo 2.10 integrates the Stwo prover via Scarb, allowing direct generation of proofs. After executing a Cairo program, artifacts like `air_public_input.json`, `air_private_input.json`, `trace.bin`, and `memory.bin` are created in `./target/execute/<program_name>/execution1/`.
+Cairo 2.10 integrates the Stwo prover via Scarb, allowing direct generation of
+proofs. After executing a Cairo program, artifacts like `air_public_input.json`,
+`air_private_input.json`, `trace.bin`, and `memory.bin` are created in
+`./target/execute/<program_name>/execution1/`.
 
 To generate a zero-knowledge proof, run:
 
@@ -11907,7 +13545,8 @@ Saving proof to: target/execute/prime_prover/execution1/proof/proof.json
 
 ```
 
-This command generates a `proof.json` file, demonstrating that the program executed correctly for some input without revealing the input itself.
+This command generates a `proof.json` file, demonstrating that the program
+executed correctly for some input without revealing the input itself.
 
 To verify the proof, use:
 
@@ -11918,9 +13557,12 @@ $ scarb verify --execution-id 1
 
 ```
 
-Successful verification confirms the computation was performed correctly, aligning with public inputs, without re-running the program.
+Successful verification confirms the computation was performed correctly,
+aligning with public inputs, without re-running the program.
 
-An example of a Cairo program that can be proved is a primality checker. This can be improved to handle larger inputs or errors, for instance, by using `u128` and adding input validation:
+An example of a Cairo program that can be proved is a primality checker. This
+can be improved to handle larger inputs or errors, for instance, by using `u128`
+and adding input validation:
 
 <span class="filename">Filename: src/lib.cairo</span>
 
@@ -11971,21 +13613,34 @@ fn main(input: u128) -> bool {
 
 #### Emulating Other Proof Systems
 
-Cairo, by allowing emulated arithmetic circuits, can be used to implement zk-SNARKs proof verification inside STARK proofs. An example is the Garaga Groth16 verifier.
+Cairo, by allowing emulated arithmetic circuits, can be used to implement
+zk-SNARKs proof verification inside STARK proofs. An example is the Garaga
+Groth16 verifier.
 
 #### Hash Functions in Cairo ZKPs
 
-Cairo's STARK proof system benefits from hash functions optimized for algebraic circuits. Pedersen hash functions, based on elliptic curve cryptography, were initially used on Starknet for storage address computation (e.g., `LegacyMap`). However, Poseidon, designed for efficiency in Zero-Knowledge proof systems, is now the recommended hash function in Cairo programs due to its lower cost and faster performance with STARKs. Poseidon uses a sponge construction with the Hades permutation and Cairo's version is based on a three-element state permutation.
+Cairo's STARK proof system benefits from hash functions optimized for algebraic
+circuits. Pedersen hash functions, based on elliptic curve cryptography, were
+initially used on Starknet for storage address computation (e.g., `LegacyMap`).
+However, Poseidon, designed for efficiency in Zero-Knowledge proof systems, is
+now the recommended hash function in Cairo programs due to its lower cost and
+faster performance with STARKs. Poseidon uses a sponge construction with the
+Hades permutation and Cairo's version is based on a three-element state
+permutation.
 
 Oracles and Off-Chain Data Integration
 
 ### Oracles and Off-Chain Data Integration
 
-Oracles are third-party services that securely transmit external real-world data, such as asset prices or weather information, to blockchains and smart contracts. This section demonstrates interacting with Pragma Oracle on Starknet for price data and verifiable random functions (VRF).
+Oracles are third-party services that securely transmit external real-world
+data, such as asset prices or weather information, to blockchains and smart
+contracts. This section demonstrates interacting with Pragma Oracle on Starknet
+for price data and verifiable random functions (VRF).
 
 #### Adding Pragma as a Project Dependency
 
-To integrate Pragma into your Cairo smart contract, add the following to your project's `Scarb.toml` file:
+To integrate Pragma into your Cairo smart contract, add the following to your
+project's `Scarb.toml` file:
 
 ```toml
 [dependencies]
@@ -11994,9 +13649,12 @@ pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 
 #### Price Feeds
 
-Price feeds use oracles to bridge real-world pricing data from trusted external sources (e.g., crypto exchanges) to the blockchain. Pragma Oracle provides verifiable access to off-chain price data like `ETH/USD` on Starknet.
+Price feeds use oracles to bridge real-world pricing data from trusted external
+sources (e.g., crypto exchanges) to the blockchain. Pragma Oracle provides
+verifiable access to off-chain price data like `ETH/USD` on Starknet.
 
-To create a price feed contract, define an interface including Pragma's price feed entry points:
+To create a price feed contract, define an interface including Pragma's price
+feed entry points:
 
 ```cairo,noplayground
 #[starknet::interface]
@@ -12008,7 +13666,9 @@ pub trait IPriceFeedExample<TContractState> {
 
 #### Verifiable Random Functions (VRF)
 
-VRFs generate pseudo-random numbers and a cryptographic proof, making the randomness verifiable without revealing the secret key. Pragma Oracle on Starknet offers a VRF solution.
+VRFs generate pseudo-random numbers and a cryptographic proof, making the
+randomness verifiable without revealing the secret key. Pragma Oracle on
+Starknet offers a VRF solution.
 
 To use Pragma VRF, define a contract interface with the necessary entry points:
 
@@ -12046,12 +13706,16 @@ pub trait IDiceGame<TContractState> {
 }
 ```
 
-The `request_randomness_from_pragma` function initiates a request for verifiable randomness. It emits an event that triggers off-chain randomness generation by the oracle, which then submits the randomness and proof back on-chain via the `receive_random_words` callback.
+The `request_randomness_from_pragma` function initiates a request for verifiable
+randomness. It emits an event that triggers off-chain randomness generation by
+the oracle, which then submits the randomness and proof back on-chain via the
+`receive_random_words` callback.
 
 Key inputs for `request_randomness_from_pragma`:
 
 - `seed`: A unique value to initialize randomness generation.
-- `callback_address`: The contract address where `receive_random_words` will be called.
+- `callback_address`: The contract address where `receive_random_words` will be
+  called.
 - `callback_fee_limit`: Maximum gas for the `receive_random_words` callback.
 - `publish_delay`: Minimum block delay before the oracle fulfills the request.
 - `num_words`: Number of random `felt252` values to receive.
@@ -12064,15 +13728,21 @@ Key inputs for `receive_random_words`:
 - `random_words`: An array (span) of the generated random `felt252` values.
 - `calldata`: Additional data from the initial request.
 
-**Important**: After deploying a contract using Pragma VRF, ensure it is funded with sufficient ETH to cover the costs of requesting random values, which includes generating numbers and executing the callback function.
+**Important**: After deploying a contract using Pragma VRF, ensure it is funded
+with sufficient ETH to cover the costs of requesting random values, which
+includes generating numbers and executing the callback function.
 
 Cairo Core Concepts: Data Structures and Hashing
 
 ### Cairo Core Concepts: Data Structures and Hashing
 
-Cairo's core library facilitates hashing. The `Hash` trait is implemented for types convertible to `felt252`. For structs, deriving `Hash` is possible if all fields are hashable; however, it cannot be derived for structs containing un-hashable types like `Array<T>` or `Felt252Dict<T>`.
+Cairo's core library facilitates hashing. The `Hash` trait is implemented for
+types convertible to `felt252`. For structs, deriving `Hash` is possible if all
+fields are hashable; however, it cannot be derived for structs containing
+un-hashable types like `Array<T>` or `Felt252Dict<T>`.
 
-Hash operations are managed by `HashStateTrait` and `HashStateExTrait`, which define methods for initializing, updating, and finalizing a hash state.
+Hash operations are managed by `HashStateTrait` and `HashStateExTrait`, which
+define methods for initializing, updating, and finalizing a hash state.
 
 ```cairo,noplayground
 /// A trait for hash state accumulators.
@@ -12100,7 +13770,9 @@ Introduction to Arithmetic Circuits
 
 ### Introduction to Arithmetic Circuits
 
-Arithmetic circuits are mathematical models designed to represent polynomial computations. They are defined over a field, typically a finite field \\(F_p\\) where \\(p\\) is a prime number.
+Arithmetic circuits are mathematical models designed to represent polynomial
+computations. They are defined over a field, typically a finite field \\(F_p\\)
+where \\(p\\) is a prime number.
 
 These circuits are composed of:
 
@@ -12116,13 +13788,20 @@ Building and Defining Circuits in Cairo
 
 ### Building and Defining Circuits in Cairo
 
-Cairo supports emulated arithmetic circuits with modulo up to 384 bits. These are useful for implementing verification for other proof systems, cryptographic primitives, and creating low-level programs with reduced overhead.
+Cairo supports emulated arithmetic circuits with modulo up to 384 bits. These
+are useful for implementing verification for other proof systems, cryptographic
+primitives, and creating low-level programs with reduced overhead.
 
-Circuit constructs are available in the `core::circuit` module. Arithmetic circuits utilize `AddMod` and `MulMod` builtins, allowing for four basic arithmetic gates: `AddModGate`, `SubModGate`, `MulModGate`, and `InvModGate`. Functions like `circuit_add`, `circuit_sub`, `circuit_mul`, and `circuit_inverse` are used to combine circuit elements.
+Circuit constructs are available in the `core::circuit` module. Arithmetic
+circuits utilize `AddMod` and `MulMod` builtins, allowing for four basic
+arithmetic gates: `AddModGate`, `SubModGate`, `MulModGate`, and `InvModGate`.
+Functions like `circuit_add`, `circuit_sub`, `circuit_mul`, and
+`circuit_inverse` are used to combine circuit elements.
 
 #### Defining a Circuit
 
-To define a circuit, such as `a * (a + b)` over the BN254 prime field, you start by defining inputs as `CircuitElement<CircuitInput<N>>`:
+To define a circuit, such as `a * (a + b)` over the BN254 prime field, you start
+by defining inputs as `CircuitElement<CircuitInput<N>>`:
 
 ```cairo, noplayground
 # use core::circuit::{
@@ -12216,7 +13895,11 @@ Next, combine these inputs using circuit functions to define the operations:
 # }
 ```
 
-`a`, `b`, and `add` are intermediate `CircuitElement<T>` types, where `T` describes the circuit's structure. The outputs of the circuit are defined as a tuple of circuit elements. This tuple must include all gates whose output signal is not used as an input for any other gate (degree 0 gates). For the `a * (a + b)` example, only `mul` is needed:
+`a`, `b`, and `add` are intermediate `CircuitElement<T>` types, where `T`
+describes the circuit's structure. The outputs of the circuit are defined as a
+tuple of circuit elements. This tuple must include all gates whose output signal
+is not used as an input for any other gate (degree 0 gates). For the
+`a * (a + b)` example, only `mul` is needed:
 
 ```cairo, noplayground
 # use core::circuit::{
@@ -12263,7 +13946,8 @@ Next, combine these inputs using circuit functions to define the operations:
 # }
 ```
 
-Inputs are assigned `u384` values, which are represented as a fixed array of four `u96` limbs.
+Inputs are assigned `u384` values, which are represented as a fixed array of
+four `u96` limbs.
 
 Circuit Evaluation and Result Retrieval
 
@@ -12273,7 +13957,10 @@ To evaluate an arithmetic circuit and retrieve its results, follow these steps:
 
 #### 1. Input Initialization
 
-Inputs are initialized using `new_inputs()` and assigned values by calling `next()` on the `CircuitInputAccumulator` variant returned by `AddInputResult`. The `AddInputResult` enum indicates whether more inputs are needed (`More`) or if all inputs have been filled (`Done`).
+Inputs are initialized using `new_inputs()` and assigned values by calling
+`next()` on the `CircuitInputAccumulator` variant returned by `AddInputResult`.
+The `AddInputResult` enum indicates whether more inputs are needed (`More`) or
+if all inputs have been filled (`Done`).
 
 ```cairo, noplayground
     let mut inputs = output.new_inputs();
@@ -12292,11 +13979,13 @@ pub enum AddInputResult<C> {
 }
 ```
 
-Calling `done()` on the `inputs` accumulator yields the complete circuit instance as `CircuitData<C>`.
+Calling `done()` on the `inputs` accumulator yields the complete circuit
+instance as `CircuitData<C>`.
 
 #### 2. Modulus Definition
 
-Define the circuit's modulus, which can be up to a 384-bit modulus. For example, to use the BN254 prime field modulus:
+Define the circuit's modulus, which can be up to a 384-bit modulus. For example,
+to use the BN254 prime field modulus:
 
 ```cairo, noplayground
     let bn254_modulus = TryInto::<
@@ -12307,7 +13996,9 @@ Define the circuit's modulus, which can be up to a 384-bit modulus. For example,
 
 #### 3. Circuit Evaluation
 
-The circuit is evaluated by calling the `eval` function on the `CircuitData` instance, passing the defined modulus. This process propagates input signals through all gates to compute output values.
+The circuit is evaluated by calling the `eval` function on the `CircuitData`
+instance, passing the defined modulus. This process propagates input signals
+through all gates to compute output values.
 
 ```cairo, noplayground
     let res = instance.eval(bn254_modulus).unwrap();
@@ -12315,7 +14006,9 @@ The circuit is evaluated by calling the `eval` function on the `CircuitData` ins
 
 #### 4. Result Retrieval
 
-To retrieve the value of a specific output or any intermediate gate, use the `get_output` function on the evaluation results (`res`), providing the `CircuitElement` instance of the desired gate.
+To retrieve the value of a specific output or any intermediate gate, use the
+`get_output` function on the evaluation results (`res`), providing the
+`CircuitElement` instance of the desired gate.
 
 ```cairo, noplayground
     let add_output = res.get_output(add);
@@ -12329,7 +14022,10 @@ Arithmetic Circuits in Zero-Knowledge Proof Systems
 
 ### Arithmetic Circuits in Zero-Knowledge Proof Systems
 
-In zero-knowledge proof systems, a prover creates a proof of computational statements, which a verifier can check without performing the full computation. These statements must first be converted into a suitable representation for the proof system.
+In zero-knowledge proof systems, a prover creates a proof of computational
+statements, which a verifier can check without performing the full computation.
+These statements must first be converted into a suitable representation for the
+proof system.
 
 #### Circuit Definition and Evaluation Steps
 
@@ -12343,7 +14039,8 @@ To recap the process of defining and evaluating an arithmetic circuit:
 - Evaluate the circuit
 - Get the output values
 
-The full Cairo code for evaluating a circuit `a * (a + b)` with `a = 10, b = 20` is provided below:
+The full Cairo code for evaluating a circuit `a * (a + b)` with `a = 10, b = 20`
+is provided below:
 
 ```cairo, noplayground
 use core::circuit::{
@@ -12396,7 +14093,13 @@ Deref Coercion
 
 ## Deref Coercion
 
-Deref coercion simplifies how we interact with nested or wrapped data structures by allowing an instance of one type to behave like an instance of another. This mechanism is enabled by implementing the `Deref` trait, which allows implicit conversion (or coercion) to a different type, providing direct access to the underlying data. Deref coercion is implemented via the `Deref` and `DerefMut` traits; when a type `T` implements `Deref` or `DerefMut` to type `K`, instances of `T` can directly access `K`'s members.
+Deref coercion simplifies how we interact with nested or wrapped data structures
+by allowing an instance of one type to behave like an instance of another. This
+mechanism is enabled by implementing the `Deref` trait, which allows implicit
+conversion (or coercion) to a different type, providing direct access to the
+underlying data. Deref coercion is implemented via the `Deref` and `DerefMut`
+traits; when a type `T` implements `Deref` or `DerefMut` to type `K`, instances
+of `T` can directly access `K`'s members.
 
 ### The `Deref` Trait
 
@@ -12409,11 +14112,13 @@ pub trait Deref<T> {
 }
 ```
 
-The `Target` type specifies the result of dereferencing, and the `deref` method defines how to transform `T` into `K`.
+The `Target` type specifies the result of dereferencing, and the `deref` method
+defines how to transform `T` into `K`.
 
 ### Using Deref Coercion
 
-To understand deref coercion, consider a generic wrapper type, `Wrapper<T>`, for a `UserProfile` struct:
+To understand deref coercion, consider a generic wrapper type, `Wrapper<T>`, for
+a `UserProfile` struct:
 
 ```cairo, noplayground
 #[derive(Drop, Copy)]
@@ -12429,7 +14134,8 @@ struct Wrapper<T> {
 }
 ```
 
-To simplify access to the wrapped value, we implement the `Deref` trait for `Wrapper<T>`:
+To simplify access to the wrapped value, we implement the `Deref` trait for
+`Wrapper<T>`:
 
 ```cairo, noplayground
 impl DerefWrapper<T> of Deref<Wrapper<T>> {
@@ -12440,7 +14146,10 @@ impl DerefWrapper<T> of Deref<Wrapper<T>> {
 }
 ```
 
-This implementation allows instances of `Wrapper<T>` to directly access the members of `T`. The mechanism is transparent, as demonstrated below where `wrapped_profile` (an instance of `Wrapper<UserProfile>`) can directly access `username` and `age` fields of the underlying `UserProfile`:
+This implementation allows instances of `Wrapper<T>` to directly access the
+members of `T`. The mechanism is transparent, as demonstrated below where
+`wrapped_profile` (an instance of `Wrapper<UserProfile>`) can directly access
+`username` and `age` fields of the underlying `UserProfile`:
 
 ```cairo
 fn main() {
@@ -12455,7 +14164,9 @@ fn main() {
 
 ### Restricting Deref Coercion to Mutable Variables
 
-While `Deref` works for both mutable and immutable variables, `DerefMut` is only applicable to mutable variables. Note that `DerefMut` does not provide mutable access to the underlying data itself.
+While `Deref` works for both mutable and immutable variables, `DerefMut` is only
+applicable to mutable variables. Note that `DerefMut` does not provide mutable
+access to the underlying data itself.
 
 Here's an implementation of `DerefMut`:
 
@@ -12468,7 +14179,8 @@ impl DerefMutWrapper<T, +Copy<T>> of DerefMut<Wrapper<T>> {
 }
 ```
 
-If you try to use `DerefMut` with an immutable variable, the compiler will throw an error:
+If you try to use `DerefMut` with an immutable variable, the compiler will throw
+an error:
 
 ```cairo, noplayground
 fn error() {
@@ -12493,7 +14205,8 @@ error: Type "no_listing_09_deref_coercion_example::Wrapper::<no_listing_09_deref
 error: could not compile `no_listing_09_deref_coercion_example` due to previous error
 ```
 
-For the above code to work, `wrapped_profile` needs to be defined as a mutable variable:
+For the above code to work, `wrapped_profile` needs to be defined as a mutable
+variable:
 
 ```cairo, noplayground
 fn main() {
@@ -12510,7 +14223,12 @@ Static Analysis Tools
 
 ## Static Analysis Tools
 
-Static analysis refers to the process of examining code without its execution, focusing on its structure, syntax, and properties. It involves analyzing the source code to identify potential issues, vulnerabilities, or violations of specified rules. By defining rules, such as coding conventions or security guidelines, developers can utilize static analysis tools to automatically check the code against these standards.
+Static analysis refers to the process of examining code without its execution,
+focusing on its structure, syntax, and properties. It involves analyzing the
+source code to identify potential issues, vulnerabilities, or violations of
+specified rules. By defining rules, such as coding conventions or security
+guidelines, developers can utilize static analysis tools to automatically check
+the code against these standards.
 
 ### Recommended Tools
 
@@ -12523,7 +14241,8 @@ Appendices and References
 
 ### Resources on Range Check
 
-If you're interested in how the Range Check builtin works and its usage in the Cairo VM:
+If you're interested in how the Range Check builtin works and its usage in the
+Cairo VM:
 
 #### Range Check Builtin Implementations
 
@@ -12534,17 +14253,24 @@ If you're interested in how the Range Check builtin works and its usage in the C
 
 #### Range Check Documentation
 
-- Starknet, [CairoZero documentation, Range Checks section of Builtins and implicit arguments](https://docs.cairo-lang.org/how_cairo_works/builtins.html#range-checks)
-- Lior G., Shahar P., Michael R., [Cairo Whitepaper, Sections 2.8 and 8](https://eprint.iacr.org/2021/1063.pdf)
+- Starknet,
+  [CairoZero documentation, Range Checks section of Builtins and implicit arguments](https://docs.cairo-lang.org/how_cairo_works/builtins.html#range-checks)
+- Lior G., Shahar P., Michael R.,
+  [Cairo Whitepaper, Sections 2.8 and 8](https://eprint.iacr.org/2021/1063.pdf)
 - [StarkWare Range Check implementation](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/math.cairo)
 
 ### Appendix B - Operators and Symbols
 
-This appendix contains a glossary of Cairo's syntax, including operators and other symbols that appear by themselves or in the context of paths, generics, macros, attributes, comments, tuples, and brackets.
+This appendix contains a glossary of Cairo's syntax, including operators and
+other symbols that appear by themselves or in the context of paths, generics,
+macros, attributes, comments, tuples, and brackets.
 
 #### Operators
 
-Table B-1 contains the operators in Cairo, an example of how the operator would appear in context, a short explanation, and whether that operator is overloadable. If an operator is overloadable, the relevant trait to use to overload that operator is listed.
+Table B-1 contains the operators in Cairo, an example of how the operator would
+appear in context, a short explanation, and whether that operator is
+overloadable. If an operator is overloadable, the relevant trait to use to
+overload that operator is listed.
 
 | `<`                       | `expr < expr`                       | Less than comparison                | `PartialOrd` |
 | :------------------------ | :---------------------------------- | :---------------------------------- | :----------- |
@@ -12563,9 +14289,11 @@ Table B-1 contains the operators in Cairo, an example of how the operator would 
 
 #### Non Operator Symbols
 
-The following list contains all symbols that are not used as operators; that is, they do not have the same behavior as a function or method call.
+The following list contains all symbols that are not used as operators; that is,
+they do not have the same behavior as a function or method call.
 
-Table B-2 shows symbols that appear on their own and are valid in a variety of locations.
+Table B-2 shows symbols that appear on their own and are valid in a variety of
+locations.
 
 | Symbol                                  | Explanation                               |
 | :-------------------------------------- | :---------------------------------------- |
@@ -12576,7 +14304,8 @@ Table B-2 shows symbols that appear on their own and are valid in a variety of l
 
 <span class="caption">Table B-2: Stand-Alone Syntax</span>
 
-Table B-3 shows symbols that are used within the context of a module hierarchy path to access an item.
+Table B-3 shows symbols that are used within the context of a module hierarchy
+path to access an item.
 
 | Symbol               | Explanation                                                      |
 | :------------------- | :--------------------------------------------------------------- |
@@ -12586,7 +14315,8 @@ Table B-3 shows symbols that are used within the context of a module hierarchy p
 
 <span class="caption">Table B-3: Path-Related Syntax</span>
 
-Table B-4 shows symbols that appear in the context of using generic type parameters.
+Table B-4 shows symbols that appear in the context of using generic type
+parameters.
 
 | Symbol                         | Explanation                                                                                                  |
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------- |

@@ -63,11 +63,9 @@ PROCESSING ORDER:
 Usage: uv run migrate_to_executable.py
 """
 
-import os
 import re
 import sys
 from pathlib import Path
-from typing import Optional, Tuple
 
 
 def find_cairo_crates(listings_dir: Path) -> list[Path]:
@@ -115,7 +113,7 @@ def find_main_functions_in_file(cairo_file: Path, src_dir: Path) -> list[dict]:
         return []
 
     try:
-        content = cairo_file.read_text(encoding='utf-8')
+        content = cairo_file.read_text(encoding="utf-8")
         lines = content.splitlines()
 
         main_functions = []
@@ -124,30 +122,32 @@ def find_main_functions_in_file(cairo_file: Path, src_dir: Path) -> list[dict]:
         relative_path = cairo_file.relative_to(src_dir)
         if relative_path.name == "lib.cairo":
             # For lib.cairo, use the parent directory name or empty if it's the root
-            if relative_path.parent == Path('.'):
+            if relative_path.parent == Path("."):
                 module_path = ""
             else:
-                module_path = str(relative_path.parent).replace('/', '::')
+                module_path = str(relative_path.parent).replace("/", "::")
         else:
             # For other files, use the full path without .cairo extension
-            module_path = str(relative_path.with_suffix('')).replace('/', '::')
+            module_path = str(relative_path.with_suffix("")).replace("/", "::")
 
         for i, line in enumerate(lines):
             # Look for fn main( pattern
-            if re.search(r'fn\s+main\s*\(', line):
+            if re.search(r"fn\s+main\s*\(", line):
                 # Check if previous lines have #[executable] attribute
                 has_executable_attr = False
-                for j in range(max(0, i-5), i):  # Check up to 5 lines before
-                    if '#[executable]' in lines[j]:
+                for j in range(max(0, i - 5), i):  # Check up to 5 lines before
+                    if "#[executable]" in lines[j]:
                         has_executable_attr = True
                         break
 
-                main_functions.append({
-                    'file_path': cairo_file,
-                    'module_path': module_path,
-                    'has_executable_attr': has_executable_attr,
-                    'line_number': i + 1
-                })
+                main_functions.append(
+                    {
+                        "file_path": cairo_file,
+                        "module_path": module_path,
+                        "has_executable_attr": has_executable_attr,
+                        "line_number": i + 1,
+                    }
+                )
 
         return main_functions
 
@@ -170,11 +170,11 @@ def find_all_main_functions(src_dir: Path) -> list[dict]:
 
 def add_executable_attribute_to_main(main_func_info: dict) -> bool:
     """Add #[executable] attribute to a specific main function if missing."""
-    cairo_file = main_func_info['file_path']
-    line_number = main_func_info['line_number']
+    cairo_file = main_func_info["file_path"]
+    line_number = main_func_info["line_number"]
 
     try:
-        content = cairo_file.read_text(encoding='utf-8')
+        content = cairo_file.read_text(encoding="utf-8")
         lines = content.splitlines()
 
         # Find the specific main function at the given line number
@@ -186,14 +186,14 @@ def add_executable_attribute_to_main(main_func_info: dict) -> bool:
         main_line = lines[main_line_idx]
 
         # Check if there's already an #[executable] attribute before this main function
-        for i in range(max(0, main_line_idx-5), main_line_idx):
-            if '#[executable]' in lines[i]:
+        for i in range(max(0, main_line_idx - 5), main_line_idx):
+            if "#[executable]" in lines[i]:
                 return False  # Already has attribute
 
         # Get the indentation of the main function
-        indentation = ''
+        indentation = ""
         for char in main_line:
-            if char in [' ', '\t']:
+            if char in [" ", "\t"]:
                 indentation += char
             else:
                 break
@@ -202,8 +202,8 @@ def add_executable_attribute_to_main(main_func_info: dict) -> bool:
         lines.insert(main_line_idx, f"{indentation}#[executable]")
 
         # Write back the modified content
-        new_content = '\n'.join(lines)
-        cairo_file.write_text(new_content, encoding='utf-8')
+        new_content = "\n".join(lines)
+        cairo_file.write_text(new_content, encoding="utf-8")
         return True
 
     except Exception as e:
@@ -217,25 +217,25 @@ def parse_scarb_toml(scarb_path: Path) -> dict:
         return {}
 
     try:
-        content = scarb_path.read_text(encoding='utf-8')
+        content = scarb_path.read_text(encoding="utf-8")
         result = {}
         current_section = None
 
         for line in content.splitlines():
             line = line.strip()
-            if not line or line.startswith('#'):
+            if not line or line.startswith("#"):
                 continue
 
             # Section headers
-            if line.startswith('[') and line.endswith(']'):
+            if line.startswith("[") and line.endswith("]"):
                 current_section = line[1:-1]
                 if current_section not in result:
                     result[current_section] = {}
                 continue
 
             # Key-value pairs
-            if '=' in line and current_section:
-                key, value = line.split('=', 1)
+            if "=" in line and current_section:
+                key, value = line.split("=", 1)
                 key = key.strip()
                 value = value.strip().strip('"')
                 result[current_section][key] = value
@@ -253,8 +253,8 @@ def has_starknet_contract_target(scarb_path: Path) -> bool:
         return False
 
     try:
-        content = scarb_path.read_text(encoding='utf-8')
-        return '[[target.starknet-contract]]' in content
+        content = scarb_path.read_text(encoding="utf-8")
+        return "[[target.starknet-contract]]" in content
     except Exception as e:
         print(f"Error reading {scarb_path}: {e}")
         return False
@@ -263,11 +263,11 @@ def has_starknet_contract_target(scarb_path: Path) -> bool:
 def add_starknet_contract_config(scarb_path: Path) -> bool:
     """Add [cairo] enable-gas=true for Starknet contracts."""
     try:
-        content = scarb_path.read_text(encoding='utf-8')
+        content = scarb_path.read_text(encoding="utf-8")
 
         # Check if already has cairo section with enable-gas = true
-        has_cairo_section = '[cairo]' in content
-        has_enable_gas_true = 'enable-gas = true' in content
+        has_cairo_section = "[cairo]" in content
+        has_enable_gas_true = "enable-gas = true" in content
 
         if has_cairo_section and has_enable_gas_true:
             return False  # Already configured
@@ -280,36 +280,36 @@ def add_starknet_contract_config(scarb_path: Path) -> bool:
             stripped = line.strip()
 
             # Handle cairo section
-            if stripped == '[cairo]':
+            if stripped == "[cairo]":
                 cairo_section_found = True
                 new_lines.append(line)
 
                 # Check if enable-gas setting exists in this section
                 j = i + 1
                 enable_gas_exists = False
-                while j < len(lines) and not lines[j].strip().startswith('['):
-                    if 'enable-gas' in lines[j]:
+                while j < len(lines) and not lines[j].strip().startswith("["):
+                    if "enable-gas" in lines[j]:
                         enable_gas_exists = True
                         # Replace with enable-gas = true
-                        lines[j] = 'enable-gas = true'
+                        lines[j] = "enable-gas = true"
                         break
                     j += 1
 
                 if not enable_gas_exists:
-                    new_lines.append('enable-gas = true')
+                    new_lines.append("enable-gas = true")
                 continue
 
             new_lines.append(line)
 
         # Add cairo section if it doesn't exist
         if not cairo_section_found:
-            new_lines.append('')
-            new_lines.append('[cairo]')
-            new_lines.append('enable-gas = true')
+            new_lines.append("")
+            new_lines.append("[cairo]")
+            new_lines.append("enable-gas = true")
 
-        new_content = '\n'.join(new_lines)
+        new_content = "\n".join(new_lines)
         if new_content != content:
-            scarb_path.write_text(new_content, encoding='utf-8')
+            scarb_path.write_text(new_content, encoding="utf-8")
             return True
 
         return False
@@ -319,10 +319,12 @@ def add_starknet_contract_config(scarb_path: Path) -> bool:
         return False
 
 
-def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict]) -> bool:
+def add_multiple_executable_config(
+    scarb_path: Path, main_functions: list[dict]
+) -> bool:
     """Add multiple [[target.executable]] sections, cairo_execute dependency, and cairo enable-gas=false to Scarb.toml."""
     try:
-        content = scarb_path.read_text(encoding='utf-8')
+        content = scarb_path.read_text(encoding="utf-8")
 
         # Check if already has all required configuration
         # Extract package name from [package] section
@@ -330,12 +332,9 @@ def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict])
         lines = content.splitlines()
         for line in lines:
             stripped = line.strip()
-            if stripped.startswith('name = '):
-                package_name = stripped.split('=')[1].strip().strip('"')
+            if stripped.startswith("name = "):
+                package_name = stripped.split("=")[1].strip().strip('"')
                 break
-        has_cairo_execute_dep = 'cairo_execute' in content
-        has_cairo_section = '[cairo]' in content
-        has_enable_gas_false = 'enable-gas = false' in content
 
         lines = content.splitlines()
         new_lines = []
@@ -349,28 +348,28 @@ def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict])
             stripped = line.strip()
 
             # Skip existing [[target.executable]] sections
-            if stripped.startswith('[[target.executable]]'):
+            if stripped.startswith("[[target.executable]]"):
                 skip_target_executable = True
                 continue
 
             # Check for new section that's not target.executable
-            if stripped.startswith('[[') or stripped.startswith('['):
-                if not stripped.startswith('[[target.executable]]'):
+            if stripped.startswith("[[") or stripped.startswith("["):
+                if not stripped.startswith("[[target.executable]]"):
                     skip_target_executable = False
 
             if skip_target_executable:
                 continue
 
             # Handle dependencies section
-            if stripped == '[dependencies]':
+            if stripped == "[dependencies]":
                 dependencies_found = True
                 new_lines.append(line)
 
                 # Check if cairo_execute is already in this section
                 j = i + 1
                 cairo_execute_exists = False
-                while j < len(lines) and not lines[j].strip().startswith('['):
-                    if 'cairo_execute' in lines[j]:
+                while j < len(lines) and not lines[j].strip().startswith("["):
+                    if "cairo_execute" in lines[j]:
                         cairo_execute_exists = True
                         break
                     j += 1
@@ -380,44 +379,44 @@ def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict])
                 continue
 
             # Handle cairo section
-            if stripped == '[cairo]':
+            if stripped == "[cairo]":
                 cairo_section_found = True
                 new_lines.append(line)
 
                 # Check if enable-gas = false is already in this section
                 j = i + 1
                 enable_gas_exists = False
-                while j < len(lines) and not lines[j].strip().startswith('['):
-                    if 'enable-gas' in lines[j]:
+                while j < len(lines) and not lines[j].strip().startswith("["):
+                    if "enable-gas" in lines[j]:
                         enable_gas_exists = True
                         break
                     j += 1
 
                 if not enable_gas_exists:
-                    new_lines.append('enable-gas = false')
+                    new_lines.append("enable-gas = false")
                 continue
 
             new_lines.append(line)
 
         # Add dependencies section if it doesn't exist
         if not dependencies_found:
-            new_lines.append('')
-            new_lines.append('[dependencies]')
+            new_lines.append("")
+            new_lines.append("[dependencies]")
             new_lines.append('cairo_execute = "2.13.1"')
 
         # Add cairo section if it doesn't exist
         if not cairo_section_found:
-            new_lines.append('')
-            new_lines.append('[cairo]')
-            new_lines.append('enable-gas = false')
+            new_lines.append("")
+            new_lines.append("[cairo]")
+            new_lines.append("enable-gas = false")
 
         # Add executable targets for each main function
         for i, main_func in enumerate(main_functions):
-            new_lines.append('')
-            new_lines.append('[[target.executable]]')
+            new_lines.append("")
+            new_lines.append("[[target.executable]]")
 
             # Generate target name
-            if main_func['module_path']:
+            if main_func["module_path"]:
                 target_name = f"{main_func['module_path'].replace('::', '_')}_main"
                 function_path = f"{package_name}::{main_func['module_path']}::main"
             else:
@@ -434,9 +433,9 @@ def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict])
             new_lines.append(f'name = "{target_name}"')
             new_lines.append(f'function = "{function_path}"')
 
-        new_content = '\n'.join(new_lines)
+        new_content = "\n".join(new_lines)
         if new_content != content:
-            scarb_path.write_text(new_content, encoding='utf-8')
+            scarb_path.write_text(new_content, encoding="utf-8")
             return True
 
         return False
@@ -449,15 +448,20 @@ def add_multiple_executable_config(scarb_path: Path, main_functions: list[dict])
 def add_executable_config(scarb_path: Path) -> bool:
     """Add [executable] section, cairo_execute dependency, and cairo enable-gas=false to Scarb.toml."""
     try:
-        content = scarb_path.read_text(encoding='utf-8')
+        content = scarb_path.read_text(encoding="utf-8")
 
         # Check if already has all required configuration
-        has_executable_section = '[executable]' in content
-        has_cairo_execute_dep = 'cairo_execute' in content
-        has_cairo_section = '[cairo]' in content
-        has_enable_gas_false = 'enable-gas = false' in content
+        has_executable_section = "[executable]" in content
+        has_cairo_execute_dep = "cairo_execute" in content
+        has_cairo_section = "[cairo]" in content
+        has_enable_gas_false = "enable-gas = false" in content
 
-        if has_executable_section and has_cairo_execute_dep and has_cairo_section and has_enable_gas_false:
+        if (
+            has_executable_section
+            and has_cairo_execute_dep
+            and has_cairo_section
+            and has_enable_gas_false
+        ):
             return False  # Already fully configured
 
         lines = content.splitlines()
@@ -469,15 +473,15 @@ def add_executable_config(scarb_path: Path) -> bool:
             stripped = line.strip()
 
             # Handle dependencies section
-            if stripped == '[dependencies]':
+            if stripped == "[dependencies]":
                 dependencies_found = True
                 new_lines.append(line)
 
                 # Check if cairo_execute is already in this section
                 j = i + 1
                 cairo_execute_exists = False
-                while j < len(lines) and not lines[j].strip().startswith('['):
-                    if 'cairo_execute' in lines[j]:
+                while j < len(lines) and not lines[j].strip().startswith("["):
+                    if "cairo_execute" in lines[j]:
                         cairo_execute_exists = True
                         break
                     j += 1
@@ -487,45 +491,45 @@ def add_executable_config(scarb_path: Path) -> bool:
                 continue
 
             # Handle cairo section
-            if stripped == '[cairo]':
+            if stripped == "[cairo]":
                 cairo_section_found = True
                 new_lines.append(line)
 
                 # Check if enable-gas = false is already in this section
                 j = i + 1
                 enable_gas_exists = False
-                while j < len(lines) and not lines[j].strip().startswith('['):
-                    if 'enable-gas' in lines[j]:
+                while j < len(lines) and not lines[j].strip().startswith("["):
+                    if "enable-gas" in lines[j]:
                         enable_gas_exists = True
                         break
                     j += 1
 
                 if not enable_gas_exists:
-                    new_lines.append('enable-gas = false')
+                    new_lines.append("enable-gas = false")
                 continue
 
             new_lines.append(line)
 
         # Add dependencies section if it doesn't exist
         if not dependencies_found:
-            new_lines.append('')
-            new_lines.append('[dependencies]')
+            new_lines.append("")
+            new_lines.append("[dependencies]")
             new_lines.append('cairo_execute = "2.13.1"')
 
         # Add cairo section if it doesn't exist
         if not cairo_section_found:
-            new_lines.append('')
-            new_lines.append('[cairo]')
-            new_lines.append('enable-gas = false')
+            new_lines.append("")
+            new_lines.append("[cairo]")
+            new_lines.append("enable-gas = false")
 
         # Add executable section if missing
         if not has_executable_section:
-            new_lines.append('')
-            new_lines.append('[executable]')
+            new_lines.append("")
+            new_lines.append("[executable]")
 
-        new_content = '\n'.join(new_lines)
+        new_content = "\n".join(new_lines)
         if new_content != content:
-            scarb_path.write_text(new_content, encoding='utf-8')
+            scarb_path.write_text(new_content, encoding="utf-8")
             return True
 
         return False
@@ -538,10 +542,10 @@ def add_executable_config(scarb_path: Path) -> bool:
 def check_and_remove_legacy_executable(scarb_path: Path) -> bool:
     """Check if Scarb.toml has both [executable] and [[target.executable]] sections, and remove [executable] if so."""
     try:
-        content = scarb_path.read_text(encoding='utf-8')
+        content = scarb_path.read_text(encoding="utf-8")
 
-        has_executable_section = '[executable]' in content
-        has_target_executable_section = '[[target.executable]]' in content
+        has_executable_section = "[executable]" in content
+        has_target_executable_section = "[[target.executable]]" in content
 
         if has_executable_section and has_target_executable_section:
             print("    ⚠ Found both [executable] and [[target.executable]] sections")
@@ -555,12 +559,12 @@ def check_and_remove_legacy_executable(scarb_path: Path) -> bool:
                 stripped = line.strip()
 
                 # Check for [executable] section
-                if stripped == '[executable]':
+                if stripped == "[executable]":
                     skip_executable_section = True
                     continue
 
                 # Check for new section (not executable)
-                if stripped.startswith('[') and stripped != '[executable]':
+                if stripped.startswith("[") and stripped != "[executable]":
                     skip_executable_section = False
 
                 # Skip lines in [executable] section
@@ -569,9 +573,9 @@ def check_and_remove_legacy_executable(scarb_path: Path) -> bool:
 
                 new_lines.append(line)
 
-            new_content = '\n'.join(new_lines)
+            new_content = "\n".join(new_lines)
             if new_content != content:
-                scarb_path.write_text(new_content, encoding='utf-8')
+                scarb_path.write_text(new_content, encoding="utf-8")
                 return True
 
         return False
@@ -584,7 +588,7 @@ def check_and_remove_legacy_executable(scarb_path: Path) -> bool:
 def remove_executable_config(scarb_path: Path) -> bool:
     """Remove [[target.executable]] sections, [executable] section, cairo_execute dependency, and cairo enable-gas=false setting from Scarb.toml."""
     try:
-        content = scarb_path.read_text(encoding='utf-8')
+        content = scarb_path.read_text(encoding="utf-8")
         lines = content.splitlines()
         new_lines = []
         skip_section = False
@@ -593,52 +597,58 @@ def remove_executable_config(scarb_path: Path) -> bool:
         in_cairo_section = False
         skip_target_executable = False
 
-        for i, line in enumerate(lines):
+        for _i, line in enumerate(lines):
             stripped = line.strip()
 
             # Track current section
-            if stripped.startswith('[') and stripped.endswith(']'):
+            if stripped.startswith("[") and stripped.endswith("]"):
                 # If we were in a cairo section, process it
                 if in_cairo_section:
                     # Filter out enable-gas = false, keep other settings
                     filtered_cairo_lines = []
                     for cairo_line in cairo_section_lines:
-                        if 'enable-gas' in cairo_line and 'false' in cairo_line:
+                        if "enable-gas" in cairo_line and "false" in cairo_line:
                             continue  # Remove enable-gas = false
                         filtered_cairo_lines.append(cairo_line)
 
                     # Only add cairo section if it has content after filtering
                     if filtered_cairo_lines:
-                        new_lines.append('[cairo]')
+                        new_lines.append("[cairo]")
                         new_lines.extend(filtered_cairo_lines)
 
                     cairo_section_lines = []
                     in_cairo_section = False
 
-                current_section = stripped[1:-1] if not stripped.startswith('[[') else stripped[2:-2]
+                current_section = (
+                    stripped[1:-1] if not stripped.startswith("[[") else stripped[2:-2]
+                )
 
             # Check for [[target.executable]] section
-            if stripped.startswith('[[target.executable]]'):
+            if stripped.startswith("[[target.executable]]"):
                 skip_target_executable = True
                 continue
 
             # Check for [executable] section
-            if stripped == '[executable]':
+            if stripped == "[executable]":
                 skip_section = True
                 continue
 
             # Check for [cairo] section
-            if stripped == '[cairo]':
+            if stripped == "[cairo]":
                 in_cairo_section = True
                 continue
 
             # Check for new section (not executable or target.executable)
-            if stripped.startswith('[') and not stripped.startswith('[[target.executable]]') and stripped != '[executable]':
+            if (
+                stripped.startswith("[")
+                and not stripped.startswith("[[target.executable]]")
+                and stripped != "[executable]"
+            ):
                 skip_section = False
                 skip_target_executable = False
 
             # Skip lines in [executable] section
-            if skip_section and current_section == 'executable':
+            if skip_section and current_section == "executable":
                 continue
 
             # Skip lines in [[target.executable]] section
@@ -651,7 +661,7 @@ def remove_executable_config(scarb_path: Path) -> bool:
                 continue
 
             # Remove cairo_execute dependency
-            if 'cairo_execute' in line and '=' in line:
+            if "cairo_execute" in line and "=" in line:
                 continue
 
             new_lines.append(line)
@@ -660,19 +670,19 @@ def remove_executable_config(scarb_path: Path) -> bool:
         if in_cairo_section:
             filtered_cairo_lines = []
             for cairo_line in cairo_section_lines:
-                if 'enable-gas' in cairo_line and 'false' in cairo_line:
+                if "enable-gas" in cairo_line and "false" in cairo_line:
                     continue  # Remove enable-gas = false
                 filtered_cairo_lines.append(cairo_line)
 
             # Only add cairo section if it has content after filtering
             if filtered_cairo_lines:
-                new_lines.append('[cairo]')
+                new_lines.append("[cairo]")
                 new_lines.extend(filtered_cairo_lines)
 
         # Write back only if changes were made
-        new_content = '\n'.join(new_lines)
+        new_content = "\n".join(new_lines)
         if new_content != content:
-            scarb_path.write_text(new_content, encoding='utf-8')
+            scarb_path.write_text(new_content, encoding="utf-8")
             return True
 
         return False
@@ -704,7 +714,9 @@ def process_crate(crate_path: Path) -> None:
         if add_starknet_contract_config(scarb_toml_path):
             print("    ✓ Added [cairo] enable-gas = true for Starknet contract")
         else:
-            print("    ✓ Scarb.toml already has correct Starknet contract configuration")
+            print(
+                "    ✓ Scarb.toml already has correct Starknet contract configuration"
+            )
         return  # Don't process as executable if it's a Starknet contract
 
     # Find all main functions in all Cairo files
@@ -716,26 +728,32 @@ def process_crate(crate_path: Path) -> None:
         # Add #[executable] attribute to each main function that doesn't have it
         functions_modified = 0
         for main_func in main_functions:
-            if not main_func['has_executable_attr']:
-                print(f"    + Adding #[executable] attribute to main in {main_func['file_path'].name}")
+            if not main_func["has_executable_attr"]:
+                print(
+                    f"    + Adding #[executable] attribute to main in {main_func['file_path'].name}"
+                )
                 if add_executable_attribute_to_main(main_func):
-                    print(f"      ✓ Added #[executable] attribute at line {main_func['line_number']}")
-                    main_func['has_executable_attr'] = True  # Update the flag
+                    print(
+                        f"      ✓ Added #[executable] attribute at line {main_func['line_number']}"
+                    )
+                    main_func["has_executable_attr"] = True  # Update the flag
                     functions_modified += 1
                 else:
-                    print(f"      ⚠ Failed to add #[executable] attribute")
+                    print("      ⚠ Failed to add #[executable] attribute")
             else:
-                print(f"    ✓ #[executable] attribute already present in {main_func['file_path'].name}")
+                print(
+                    f"    ✓ #[executable] attribute already present in {main_func['file_path'].name}"
+                )
 
         # Configure Scarb.toml with multiple executable targets
         print("  + Configuring Scarb.toml with executable targets")
         if add_multiple_executable_config(scarb_toml_path, main_functions):
             print("    ✓ Added executable configuration to Scarb.toml")
             print("      - Added [[target.executable]] sections")
-            print("      - Added cairo_execute = \"2.13.1\" dependency")
+            print('      - Added cairo_execute = "2.13.1" dependency')
             print("      - Added [cairo] enable-gas = false")
             for main_func in main_functions:
-                if main_func['module_path']:
+                if main_func["module_path"]:
                     target_name = f"{main_func['module_path'].replace('::', '_')}_main"
                     function_path = f"{main_func['module_path']}::main"
                 else:
@@ -750,15 +768,15 @@ def process_crate(crate_path: Path) -> None:
 
         # Check if Scarb.toml has executable config that should be removed
         scarb_config = parse_scarb_toml(scarb_toml_path)
-        has_executable_section = 'executable' in scarb_config
+        has_executable_section = "executable" in scarb_config
         has_cairo_execute_dep = (
-            'dependencies' in scarb_config and
-            'cairo_execute' in scarb_config['dependencies']
+            "dependencies" in scarb_config
+            and "cairo_execute" in scarb_config["dependencies"]
         )
         has_enable_gas_false = (
-            'cairo' in scarb_config and
-            'enable-gas' in scarb_config['cairo'] and
-            scarb_config['cairo']['enable-gas'] == 'false'
+            "cairo" in scarb_config
+            and "enable-gas" in scarb_config["cairo"]
+            and scarb_config["cairo"]["enable-gas"] == "false"
         )
 
         if has_executable_section or has_cairo_execute_dep or has_enable_gas_false:

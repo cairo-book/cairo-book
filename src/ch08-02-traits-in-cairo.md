@@ -1,78 +1,113 @@
 # Traits in Cairo
 
-A trait defines a set of methods that can be implemented by a type. These methods can be called on instances of the type when this trait is implemented.
-A trait combined with a generic type defines functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way.
-We can use _trait bounds_ to specify that a generic type can be any type that has certain behavior.
+A trait defines a set of methods that can be implemented by a type. These
+methods can be called on instances of the type when this trait is implemented. A
+trait combined with a generic type defines functionality a particular type has
+and can share with other types. We can use traits to define shared behavior in
+an abstract way. We can use _trait bounds_ to specify that a generic type can be
+any type that has certain behavior.
 
-> Note: Traits are similar to a feature often called interfaces in other languages, although with some differences.
+> Note: Traits are similar to a feature often called interfaces in other
+> languages, although with some differences.
 
-While traits can be written to not accept generic types, they are most useful when used with generic types. We already covered generics in the [previous chapter][generics], and we will use them in this chapter to demonstrate how traits can be used to define shared behavior for generic types.
+While traits can be written to not accept generic types, they are most useful
+when used with generic types. We already covered generics in the [previous
+chapter][generics], and we will use them in this chapter to demonstrate how
+traits can be used to define shared behavior for generic types.
 
 [generics]: ./ch08-01-generic-data-types.md
 
 ## Defining a Trait
 
-A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.
+A type’s behavior consists of the methods we can call on that type. Different
+types share the same behavior if we can call the same methods on all of those
+types. Trait definitions are a way to group method signatures together to define
+a set of behaviors necessary to accomplish some purpose.
 
-For example, let’s say we have a struct `NewsArticle` that holds a news story in a particular location. We can define a trait `Summary` that describes the behavior of something that can summarize the `NewsArticle` type.
+For example, let’s say we have a struct `NewsArticle` that holds a news story in
+a particular location. We can define a trait `Summary` that describes the
+behavior of something that can summarize the `NewsArticle` type.
 
 ```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_14_simple_trait/src/lib.cairo:trait}}
 ```
 
-{{#label first_trait_signature}}
-<span class="caption"> Listing {{#ref first_trait_signature}}: A `Summary` trait that consists of the behavior provided by a `summarize` method</span>
+{{#label first_trait_signature}} <span class="caption"> Listing
+{{#ref first_trait_signature}}: A `Summary` trait that consists of the behavior
+provided by a `summarize` method</span>
 
-In Listing {{#ref first_trait_signature}}, we declare a trait using the `trait` keyword and then the trait’s name, which is `Summary` in this case.
-We’ve also declared the trait as `pub` so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.
+In Listing {{#ref first_trait_signature}}, we declare a trait using the `trait`
+keyword and then the trait’s name, which is `Summary` in this case. We’ve also
+declared the trait as `pub` so that crates depending on this crate can make use
+of this trait too, as we’ll see in a few examples.
 
-Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is `fn summarize(self: @NewsArticle) -> ByteArray;`. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.
+Inside the curly brackets, we declare the method signatures that describe the
+behaviors of the types that implement this trait, which in this case is
+`fn summarize(self: @NewsArticle) -> ByteArray;`. After the method signature,
+instead of providing an implementation within curly brackets, we use a
+semicolon.
 
 > Note: the `ByteArray` type is the type used to represent strings in Cairo.
 
-As the trait is not generic, the `self` parameter is not generic either and is of type `@NewsArticle`. This means that the `summarize` method can only be called on instances of `NewsArticle`.
+As the trait is not generic, the `self` parameter is not generic either and is
+of type `@NewsArticle`. This means that the `summarize` method can only be
+called on instances of `NewsArticle`.
 
-Now, consider that we want to make a media aggregator library crate named _aggregator_ that can display summaries of data that might be stored in a `NewsArticle` or `Tweet` instance. To do this, we need a summary from each type, and we’ll request that summary by calling a summarize method on an instance of that type. By defining the `Summary` trait on generic type `T`, we can implement the `summarize` method on any type we want to be able to summarize.
+Now, consider that we want to make a media aggregator library crate named
+_aggregator_ that can display summaries of data that might be stored in a
+`NewsArticle` or `Tweet` instance. To do this, we need a summary from each type,
+and we’ll request that summary by calling a summarize method on an instance of
+that type. By defining the `Summary` trait on generic type `T`, we can implement
+the `summarize` method on any type we want to be able to summarize.
 
 ```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:trait}}
 ```
 
-{{#label trait_signature}}
-<span class="caption"> Listing {{#ref trait_signature}}: A `Summary` trait that consists of the behavior provided by a `summarize` method for a generic type</span>
+{{#label trait_signature}} <span class="caption"> Listing
+{{#ref trait_signature}}: A `Summary` trait that consists of the behavior
+provided by a `summarize` method for a generic type</span>
 
-Each type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that implements the `Summary` trait will have the method `summarize` defined with this signature exactly.
+Each type implementing this trait must provide its own custom behavior for the
+body of the method. The compiler will enforce that any type that implements the
+`Summary` trait will have the method `summarize` defined with this signature
+exactly.
 
-A trait can have multiple methods in its body: the method signatures are listed one per line and each line ends in a semicolon.
+A trait can have multiple methods in its body: the method signatures are listed
+one per line and each line ends in a semicolon.
 
 ## Implementing a Trait on a Type
 
 Now that we’ve defined the desired signatures of the `Summary` trait’s methods,
-we can implement it on the types in our media aggregator. The following code shows
-an implementation of the `Summary` trait on the `NewsArticle` struct that uses
-the headline, the author, and the location to create the return value of
+we can implement it on the types in our media aggregator. The following code
+shows an implementation of the `Summary` trait on the `NewsArticle` struct that
+uses the headline, the author, and the location to create the return value of
 `summarize`. For the `Tweet` struct, we define `summarize` as the username
-followed by the entire text of the tweet, assuming that tweet content is
-already limited to 280 characters.
+followed by the entire text of the tweet, assuming that tweet content is already
+limited to 280 characters.
 
 ```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/src/lib.cairo:impl}}
 ```
 
-{{#label trait_impl}}
-<span class="caption"> Listing {{#ref trait_impl}}: Implementation of the `Summary` trait on `NewsArticle` and `Tweet`</span>
+{{#label trait_impl}} <span class="caption"> Listing {{#ref trait_impl}}:
+Implementation of the `Summary` trait on `NewsArticle` and `Tweet`</span>
 
 Implementing a trait on a type is similar to implementing regular methods. The
-difference is that after `impl`, we put a name for the implementation,
-then use the `of` keyword, and then specify the name of the trait we are writing the implementation for.
-If the implementation is for a generic type, we place the generic type name in the angle brackets after the trait name.
+difference is that after `impl`, we put a name for the implementation, then use
+the `of` keyword, and then specify the name of the trait we are writing the
+implementation for. If the implementation is for a generic type, we place the
+generic type name in the angle brackets after the trait name.
 
-Note that for the trait method to be accessible, there must be an implementation of that trait visible from the scope where the method is called. If the trait is `pub` and the implementation is not, and the implementation is not visible in the scope where the trait method is called, this will cause a compilation error.
+Note that for the trait method to be accessible, there must be an implementation
+of that trait visible from the scope where the method is called. If the trait is
+`pub` and the implementation is not, and the implementation is not visible in
+the scope where the trait method is called, this will cause a compilation error.
 
-Within the `impl` block, we put the method signatures
-that the trait definition has defined. Instead of adding a semicolon after each
-signature, we use curly brackets and fill in the method body with the specific
-behavior that we want the methods of the trait to have for the particular type.
+Within the `impl` block, we put the method signatures that the trait definition
+has defined. Instead of adding a semicolon after each signature, we use curly
+brackets and fill in the method body with the specific behavior that we want the
+methods of the trait to have for the particular type.
 
 Now that the library has implemented the `Summary` trait on `NewsArticle` and
 `Tweet`, users of the crate can call the trait methods on instances of
@@ -92,13 +127,19 @@ This code prints the following:
 {{#include ../listings/ch08-generic-types-and-traits/no_listing_15_traits/output.txt}}
 ```
 
-Other crates that depend on the _aggregator_ crate can also bring the `Summary` trait into scope to implement `Summary` on their own types.
+Other crates that depend on the _aggregator_ crate can also bring the `Summary`
+trait into scope to implement `Summary` on their own types.
 
 ## Default Implementations
 
-Sometimes it’s useful to have default behavior for some or all of the methods in a trait instead of requiring implementations for all methods on every type. Then, as we implement the trait on a particular type, we can keep or override each method’s default behavior.
+Sometimes it’s useful to have default behavior for some or all of the methods in
+a trait instead of requiring implementations for all methods on every type.
+Then, as we implement the trait on a particular type, we can keep or override
+each method’s default behavior.
 
-In Listing {{#ref default_impl}} we specify a default string for the `summarize` method of the `Summary` trait instead of only defining the method signature, as we did in Listing {{#ref trait_signature}}.
+In Listing {{#ref default_impl}} we specify a default string for the `summarize`
+method of the `Summary` trait instead of only defining the method signature, as
+we did in Listing {{#ref trait_signature}}.
 
 <span class="caption">Filename: src/lib.cairo</span>
 
@@ -106,12 +147,18 @@ In Listing {{#ref default_impl}} we specify a default string for the `summarize`
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_default_impl/src/lib.cairo:trait}}
 ```
 
-{{#label default_impl}}
-<span class="caption"> Listing {{#ref default_impl}}: Defining a `Summary` trait with a default implementation of the `summarize` method</span>
+{{#label default_impl}} <span class="caption"> Listing {{#ref default_impl}}:
+Defining a `Summary` trait with a default implementation of the `summarize`
+method</span>
 
-To use a default implementation to summarize instances of `NewsArticle`, we specify an empty `impl` block with `impl NewsArticleSummary of Summary<NewsArticle> {}`.
+To use a default implementation to summarize instances of `NewsArticle`, we
+specify an empty `impl` block with
+`impl NewsArticleSummary of Summary<NewsArticle> {}`.
 
-Even though we’re no longer defining the `summarize` method on `NewsArticle` directly, we’ve provided a default implementation and specified that `NewsArticle` implements the `Summary` trait. As a result, we can still call the `summarize` method on an instance of `NewsArticle`, like this:
+Even though we’re no longer defining the `summarize` method on `NewsArticle`
+directly, we’ve provided a default implementation and specified that
+`NewsArticle` implements the `Summary` trait. As a result, we can still call the
+`summarize` method on an instance of `NewsArticle`, like this:
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_default_impl/src/lib.cairo:main}}
@@ -119,21 +166,35 @@ Even though we’re no longer defining the `summarize` method on `NewsArticle` d
 
 This code prints `New article available! (Read more...)`.
 
-Creating a default implementation doesn’t require us to change anything about the previous implementation of `Summary` on `Tweet`. The reason is that the syntax for overriding a default implementation is the same as the syntax for implementing a trait method that doesn’t have a default implementation.
+Creating a default implementation doesn’t require us to change anything about
+the previous implementation of `Summary` on `Tweet`. The reason is that the
+syntax for overriding a default implementation is the same as the syntax for
+implementing a trait method that doesn’t have a default implementation.
 
-Default implementations can call other methods in the same trait, even if those other methods don’t have a default implementation. In this way, a trait can provide a lot of useful functionality and only require implementors to specify a small part of it. For example, we could define the `Summary` trait to have a `summarize_author` method whose implementation is required, and then define a `summarize` method that has a default implementation that calls the `summarize_author` method:
+Default implementations can call other methods in the same trait, even if those
+other methods don’t have a default implementation. In this way, a trait can
+provide a lot of useful functionality and only require implementors to specify a
+small part of it. For example, we could define the `Summary` trait to have a
+`summarize_author` method whose implementation is required, and then define a
+`summarize` method that has a default implementation that calls the
+`summarize_author` method:
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:trait}}
 ```
 
-To use this version of `Summary`, we only need to define `summarize_author` when we implement the trait on a type:
+To use this version of `Summary`, we only need to define `summarize_author` when
+we implement the trait on a type:
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:impl}}
 ```
 
-After we define `summarize_author`, we can call `summarize` on instances of the `Tweet` struct, and the default implementation of `summarize` will call the definition of `summarize_author` that we’ve provided. Because we’ve implemented `summarize_author`, the `Summary` trait has given us the behavior of the `summarize` method without requiring us to write any more code.
+After we define `summarize_author`, we can call `summarize` on instances of the
+`Tweet` struct, and the default implementation of `summarize` will call the
+definition of `summarize_author` that we’ve provided. Because we’ve implemented
+`summarize_author`, the `Summary` trait has given us the behavior of the
+`summarize` method without requiring us to write any more code.
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_default_impl_self_call/src/lib.cairo:main}}
@@ -141,7 +202,8 @@ After we define `summarize_author`, we can call `summarize` on instances of the 
 
 This code prints `1 new tweet: (Read more from @EliBenSasson...)`.
 
-Note that it isn’t possible to call the default implementation from an overriding implementation of that same method.
+Note that it isn’t possible to call the default implementation from an
+overriding implementation of that same method.
 
 <!-- TODO: NOT AVAILABLE IN CAIRO FOR NOW move traits as parameters here -->
 <!-- ## Traits as parameters
@@ -163,97 +225,166 @@ because those types don’t implement `Summary`. -->
 
 ## Managing and Using External Trait
 
-To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
-If `CircleGeometry` implementation was in a separate module/file named _circle_, then to define `boundary` method on `Circle` struct, we'd need to import `ShapeGeometry` trait in the _circle_ module.
+To use traits methods, you need to make sure the correct
+traits/implementation(s) are imported. In some cases you might need to import
+not only the trait but also the implementation if they are declared in separate
+modules. If `CircleGeometry` implementation was in a separate module/file named
+_circle_, then to define `boundary` method on `Circle` struct, we'd need to
+import `ShapeGeometry` trait in the _circle_ module.
 
-If the code were to be organized into modules like in Listing {{#ref external_trait}} where the implementation of a trait is defined in a different module than the trait itself, explicitly importing the relevant trait or implementation would be required.
+If the code were to be organized into modules like in Listing
+{{#ref external_trait}} where the implementation of a trait is defined in a
+different module than the trait itself, explicitly importing the relevant trait
+or implementation would be required.
 
 ```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_17_generic_traits/src/lib.cairo}}
 ```
 
-{{#label external_trait}}
-<span class="caption"> Listing {{#ref external_trait}}: Implementing an external trait</span>
+{{#label external_trait}} <span class="caption"> Listing
+{{#ref external_trait}}: Implementing an external trait</span>
 
-Note that in Listing {{#ref external_trait}}, `CircleGeometry` and `RectangleGeometry` implementations don't need to be declared as `pub`. Indeed, `ShapeGeometry` trait, which is public, is used to print the result in the `main` function. The compiler will find the appropriate implementation for the `ShapeGeometry` public trait, regardless of the implementation visibility.
+Note that in Listing {{#ref external_trait}}, `CircleGeometry` and
+`RectangleGeometry` implementations don't need to be declared as `pub`. Indeed,
+`ShapeGeometry` trait, which is public, is used to print the result in the
+`main` function. The compiler will find the appropriate implementation for the
+`ShapeGeometry` public trait, regardless of the implementation visibility.
 
 ## Impl Aliases
 
-Implementations can be aliased when imported. This is most useful when you want to instantiate generic implementations with concrete types. For example, let's say we define a trait `Two` that is used to return the value `2` for a type `T`. We can write a trivial generic implementation of `Two` for all types that implement the `One` trait, simply by adding twice the value of `one` and returning it. However, in our public API, we may only want to expose the `Two` implementation for the `u8` and `u128` types.
+Implementations can be aliased when imported. This is most useful when you want
+to instantiate generic implementations with concrete types. For example, let's
+say we define a trait `Two` that is used to return the value `2` for a type `T`.
+We can write a trivial generic implementation of `Two` for all types that
+implement the `One` trait, simply by adding twice the value of `one` and
+returning it. However, in our public API, we may only want to expose the `Two`
+implementation for the `u8` and `u128` types.
 
 ```cairo,noplayground
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/listing_impl_aliases/src/lib.cairo}}
 ```
 
-{{#label impl-aliases}}
-<span class="caption"> Listing {{#ref impl-aliases}}: Using impl aliases to instantiate generic impls with concrete types</span>
+{{#label impl-aliases}} <span class="caption"> Listing {{#ref impl-aliases}}:
+Using impl aliases to instantiate generic impls with concrete types</span>
 
-We can define the generic implementation in a private module, use an impl alias to instantiate the generic implementation for these two concrete types, and make these two implementations public, while keeping the generic implementation private and unexposed. This way, we can avoid code duplication using the generic implementation, while keeping the public API clean and simple.
+We can define the generic implementation in a private module, use an impl alias
+to instantiate the generic implementation for these two concrete types, and make
+these two implementations public, while keeping the generic implementation
+private and unexposed. This way, we can avoid code duplication using the generic
+implementation, while keeping the public API clean and simple.
 
 ## Negative Impls
 
-> Note: This is still an experimental feature and can only be used if `experimental-features = ["negative_impls"]` is enabled in your _Scarb.toml_ file, under the `[package]` section.
+> Note: This is still an experimental feature and can only be used if
+> `experimental-features = ["negative_impls"]` is enabled in your _Scarb.toml_
+> file, under the `[package]` section.
 
-Negative implementations, also known as negative traits or negative bounds, are a mechanism that allows you to express that a type does not implement a certain trait when defining the implementation of a trait over a generic type. Negative impls enable you to write implementations that are applicable only when another implementation does not exist in the current scope.
+Negative implementations, also known as negative traits or negative bounds, are
+a mechanism that allows you to express that a type does not implement a certain
+trait when defining the implementation of a trait over a generic type. Negative
+impls enable you to write implementations that are applicable only when another
+implementation does not exist in the current scope.
 
-For example, let's say we have a trait `Producer` and a trait `Consumer`, and we want to define a generic behavior where all types implement the `Consumer` trait by default. However, we want to ensure that no type can be both a `Consumer` and a `Producer`. We can use negative impls to express this restriction.
+For example, let's say we have a trait `Producer` and a trait `Consumer`, and we
+want to define a generic behavior where all types implement the `Consumer` trait
+by default. However, we want to ensure that no type can be both a `Consumer` and
+a `Producer`. We can use negative impls to express this restriction.
 
-In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements the `Producer` trait, and two other types, `AnotherType` and `AThirdType`, which do not implement the `Producer` trait. We then use negative impls to create a default implementation of the `Consumer` trait for all types that do not implement the `Producer` trait.
+In Listing {{#ref negative-impls}}, we define a `ProducerType` that implements
+the `Producer` trait, and two other types, `AnotherType` and `AThirdType`, which
+do not implement the `Producer` trait. We then use negative impls to create a
+default implementation of the `Consumer` trait for all types that do not
+implement the `Producer` trait.
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_18_negative_impl/src/lib.cairo}}
 ```
 
-{{#label negative-impls}}
-<span class="caption"> Listing {{#ref negative-impls}}: Using negative impls to enforce that a type cannot implement both `Producer` and `Consumer` traits simultaneously</span>
+{{#label negative-impls}} <span class="caption"> Listing
+{{#ref negative-impls}}: Using negative impls to enforce that a type cannot
+implement both `Producer` and `Consumer` traits simultaneously</span>
 
-In the `main` function, we create instances of `ProducerType`, `AnotherType`, and `AThirdType`. We then call the `produce` method on the `producer` instance and pass the result to the `consume` method on the `another_type` and `third_type` instances. Finally, we try to call the `consume` method on the `producer` instance, which results in a compile-time error because `ProducerType` does not implement the `Consumer` trait.
+In the `main` function, we create instances of `ProducerType`, `AnotherType`,
+and `AThirdType`. We then call the `produce` method on the `producer` instance
+and pass the result to the `consume` method on the `another_type` and
+`third_type` instances. Finally, we try to call the `consume` method on the
+`producer` instance, which results in a compile-time error because
+`ProducerType` does not implement the `Consumer` trait.
 
 ## Constraint traits on associated items
 
-> Currently, associated items are considered an experimental feature. In order to use them, you need to add the following to your `Scarb.toml` under the `[package]` section: `experimental-features = ["associated_item_constraints"]`.
+> Currently, associated items are considered an experimental feature. In order
+> to use them, you need to add the following to your `Scarb.toml` under the
+> `[package]` section:
+> `experimental-features = ["associated_item_constraints"]`.
 
-In some cases, you may want to constrain the [associated items] of a trait based on the type of the generic parameter. You can do this using the `[AssociatedItem: ConstrainedValue]` syntax after a trait bound.
+In some cases, you may want to constrain the [associated items] of a trait based
+on the type of the generic parameter. You can do this using the
+`[AssociatedItem: ConstrainedValue]` syntax after a trait bound.
 
 [associated items]: ./ch12-10-associated-items.md
 
-Let's say you want to implement an `extend` method for collections. This method takes an iterator and add its elements to the collection. To ensure type safety, we want the iterator's elements to match the collection's element type. We can achieve this by constraining the `Iterator::Item` associated type to match the collection's type.
+Let's say you want to implement an `extend` method for collections. This method
+takes an iterator and add its elements to the collection. To ensure type safety,
+we want the iterator's elements to match the collection's element type. We can
+achieve this by constraining the `Iterator::Item` associated type to match the
+collection's type.
 
-In Listing {{#ref associated-items-constraints}}, we implement this by defining a trait `Extend<T, A>` and use `[Item: A]` as a constraint on the `extend` function's trait bound. Additionally, we use the `Destruct` trait to ensure that the iterator is consumed, and show an example implementation for `Extend<Array<T>, T>`.
+In Listing {{#ref associated-items-constraints}}, we implement this by defining
+a trait `Extend<T, A>` and use `[Item: A]` as a constraint on the `extend`
+function's trait bound. Additionally, we use the `Destruct` trait to ensure that
+the iterator is consumed, and show an example implementation for
+`Extend<Array<T>, T>`.
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_19_associated_items_constraints/src/lib.cairo}}
 ```
 
-{{#label associated-items-constraints}}
-<span class="caption"> Listing {{#ref associated-items-constraints}}: Using associated items constraints to ensure that a type matches the associated type of another type</span>
+{{#label associated-items-constraints}} <span class="caption"> Listing
+{{#ref associated-items-constraints}}: Using associated items constraints to
+ensure that a type matches the associated type of another type</span>
 
 ## `TypeEqual` Trait for type equality constraints
 
-The `TypeEqual` trait from the `core::metaprogramming` module lets you create constraints based on type equality. In most of the cases, you don't need `+TypeEqual` and you can achieve the same using only generic arguments and associated type constraints, but `TypeEqual` can be useful in some advanced scenarios.
+The `TypeEqual` trait from the `core::metaprogramming` module lets you create
+constraints based on type equality. In most of the cases, you don't need
+`+TypeEqual` and you can achieve the same using only generic arguments and
+associated type constraints, but `TypeEqual` can be useful in some advanced
+scenarios.
 
-The first use case is implementing a trait for all types that match certain conditions, except for specific types. We do this using a negative implementation on the `TypeEqual` trait.
+The first use case is implementing a trait for all types that match certain
+conditions, except for specific types. We do this using a negative
+implementation on the `TypeEqual` trait.
 
-In Listing {{#ref type-equal-negative-constraints}}, we create a `SafeDefault` trait and implement it for any type `T` that implements `Default`. However, we exclude the `SensitiveData` type using `-TypeEqual<T, SensitiveData>`.
+In Listing {{#ref type-equal-negative-constraints}}, we create a `SafeDefault`
+trait and implement it for any type `T` that implements `Default`. However, we
+exclude the `SensitiveData` type using `-TypeEqual<T, SensitiveData>`.
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_type_equal/src/safe_default.cairo}}
 ```
 
-{{#label type-equal-negative-constraints}}
-<span class="caption"> Listing {{#ref type-equal-negative-constraints}}: Using the `TypeEqual` trait to exclude a specific type from an implementation</span>
+{{#label type-equal-negative-constraints}} <span class="caption"> Listing
+{{#ref type-equal-negative-constraints}}: Using the `TypeEqual` trait to exclude
+a specific type from an implementation</span>
 
-The second use case is ensuring that two types are equal, particularly useful when working with [associated types].
+The second use case is ensuring that two types are equal, particularly useful
+when working with [associated types].
 
 [associated types]: ./ch12-10-associated-items.md#associated-types
 
-In Listing {{#ref type-equal-constraints}}, we show this with a `StateMachine` trait that has an associated type `State`. We create two types, `TA` and `TB`, both using `StateCounter` as their `State`. Then we implement a `combine` function that works only when both state machines have the same state type, using the bound `TypeEqual<A::State, B::State>`.
+In Listing {{#ref type-equal-constraints}}, we show this with a `StateMachine`
+trait that has an associated type `State`. We create two types, `TA` and `TB`,
+both using `StateCounter` as their `State`. Then we implement a `combine`
+function that works only when both state machines have the same state type,
+using the bound `TypeEqual<A::State, B::State>`.
 
 ```cairo
 {{#rustdoc_include ../listings/ch08-generic-types-and-traits/no_listing_20_type_equal/src/state_machine.cairo}}
 ```
 
-{{#label type-equal-constraints}}
-<span class="caption"> Listing {{#ref type-equal-constraints}}: Using the `TypeEqual` trait to ensure two types have matching associated types</span>
+{{#label type-equal-constraints}} <span class="caption"> Listing
+{{#ref type-equal-constraints}}: Using the `TypeEqual` trait to ensure two types
+have matching associated types</span>
 
 {{#quiz ../quizzes/ch08-02-traits.toml}}

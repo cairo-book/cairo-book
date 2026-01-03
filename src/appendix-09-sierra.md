@@ -1,47 +1,76 @@
 # Sierra
 
-Starting with Starknet Alpha v0.11.0, the contract class resulting from compiling Cairo include instructions in an intermediate representation called Safe Intermediate Representation, _Sierra_ for short.
-This new contract class is then compiled by the sequencer, via the Sierra &rarr; Casm compiler, to generate the Cairo assembly associated with this class. The Casm code is then executed by the Starknet OS.
+Starting with Starknet Alpha v0.11.0, the contract class resulting from
+compiling Cairo include instructions in an intermediate representation called
+Safe Intermediate Representation, _Sierra_ for short. This new contract class is
+then compiled by the sequencer, via the Sierra &rarr; Casm compiler, to generate
+the Cairo assembly associated with this class. The Casm code is then executed by
+the Starknet OS.
 
 ## Why do we need Casm?
 
-Starknet is a validity rollup, which means that the execution inside every block needs to be proven, and this is where STARKs come in handy.
-However, STARK proofs can address statements that are formulated in the language of polynomial constraints, and have no knowledge of smart contract execution. To overcome this gap, we developed Cairo.
+Starknet is a validity rollup, which means that the execution inside every block
+needs to be proven, and this is where STARKs come in handy. However, STARK
+proofs can address statements that are formulated in the language of polynomial
+constraints, and have no knowledge of smart contract execution. To overcome this
+gap, we developed Cairo.
 
-Cairo instructions, previously referred to as Casm, are translated to polynomial constraints that enforce the correct execution of a program according to the Cairo semantics defined in [_Cairo-a Turing-complete STARK-friendly CPU architecture_](https://github.com/starknet-io/starknet-stack-resources/blob/main/Cairo/Cairo%20%E2%80%93%20a%20Turing-complete%20STARK-friendly%20CPU%20architecture.pdf).
+Cairo instructions, previously referred to as Casm, are translated to polynomial
+constraints that enforce the correct execution of a program according to the
+Cairo semantics defined in
+[_Cairo-a Turing-complete STARK-friendly CPU architecture_](https://github.com/starknet-io/starknet-stack-resources/blob/main/Cairo/Cairo%20%E2%80%93%20a%20Turing-complete%20STARK-friendly%20CPU%20architecture.pdf).
 
-Thanks to Cairo, we can formulate the statement "This Starknet block is valid" in a way that we can prove.
-Be aware that we can only prove things about Casm. That is, regardless of what the user sends to the Starknet sequencer, what's proven is the correct Casm execution.
+Thanks to Cairo, we can formulate the statement "This Starknet block is valid"
+in a way that we can prove. Be aware that we can only prove things about Casm.
+That is, regardless of what the user sends to the Starknet sequencer, what's
+proven is the correct Casm execution.
 
-This means that we need a way to translate Sierra into Casm, and this is achieved with the Sierra -> Casm compiler.
+This means that we need a way to translate Sierra into Casm, and this is
+achieved with the Sierra -> Casm compiler.
 
 ## Why do we need Sierra?
 
-To understand why we chose to add an additional layer between the code that the user writes and the code that is being proven (Casm), we need to consider more components in the system, and the limitations of Cairo.
+To understand why we chose to add an additional layer between the code that the
+user writes and the code that is being proven (Casm), we need to consider more
+components in the system, and the limitations of Cairo.
 
 ### Reverted transactions, unsatisfiable AIRs, and DoS attacks
 
-A crucial property of every decentralized L2 is that the sequencers are guaranteed to be compensated for the work they do.
-The notion of reverted transactions is a good example: even if the user's transaction failed mid execution, the sequencer should be able to include it in a block and charge execution fees up to the point of failure.
+A crucial property of every decentralized L2 is that the sequencers are
+guaranteed to be compensated for the work they do. The notion of reverted
+transactions is a good example: even if the user's transaction failed mid
+execution, the sequencer should be able to include it in a block and charge
+execution fees up to the point of failure.
 
-If the sequencer cannot charge for such transactions, then sending transactions that will eventually fail (after a lot of computation steps) is an obvious DoS attack on the sequencer.
-The sequencer cannot look at a transaction and conclude that it would fail without actually doing the work (this is equivalent to solving the halting problem).
+If the sequencer cannot charge for such transactions, then sending transactions
+that will eventually fail (after a lot of computation steps) is an obvious DoS
+attack on the sequencer. The sequencer cannot look at a transaction and conclude
+that it would fail without actually doing the work (this is equivalent to
+solving the halting problem).
 
+The obvious solution to the above predicament is to include such transactions in
+the block, similar to Ethereum. However, this may not be as simple to do in a
+validity rollup. With Cairo Zero, there is no separating layer between user code
+and what is being proven.
 
-The obvious solution to the above predicament is to include such transactions in the block, similar to Ethereum. However, this may not be as simple to do in a validity rollup.
-With Cairo Zero, there is no separating layer between user code and what is being proven.
-
-This means that users can write code which is unprovable in some cases. In fact, such code is very easy to write, e.g. `assert 0=1` is a valid
-Cairo instruction that cannot be proven, as it translates to polynomial constraints that are not satisfiable. Any Casm execution that contains this instruction cannot be proven.
-Sierra is the layer between user code and the provable statement, that allows us to make sure all transactions are eventually provable.
+This means that users can write code which is unprovable in some cases. In fact,
+such code is very easy to write, e.g. `assert 0=1` is a valid Cairo instruction
+that cannot be proven, as it translates to polynomial constraints that are not
+satisfiable. Any Casm execution that contains this instruction cannot be proven.
+Sierra is the layer between user code and the provable statement, that allows us
+to make sure all transactions are eventually provable.
 
 ### Safe Casm
 
-The method by which Sierra guarantees that user code is always provable is by compiling Sierra instructions to a subset of Casm, which we call "safe Casm".
-The important property that we require from safe Casm is being provable for all inputs. A canonical example for safe Casm is using `if/else` instructions instead of `assert`, that is, making sure all failures are
-graceful.
+The method by which Sierra guarantees that user code is always provable is by
+compiling Sierra instructions to a subset of Casm, which we call "safe Casm".
+The important property that we require from safe Casm is being provable for all
+inputs. A canonical example for safe Casm is using `if/else` instructions
+instead of `assert`, that is, making sure all failures are graceful.
 
-To better understand the considerations that go into designing the Sierra &rarr; Casm compiler, consider the `find_element` function from the common library of Cairo Zero:
+To better understand the considerations that go into designing the Sierra &rarr;
+Casm compiler, consider the `find_element` function from the common library of
+Cairo Zero:
 
 ```
 func find_element{range_check_ptr}(array_ptr: felt*, elm_size, n_elms, key) -> (elm_ptr: felt*) {
@@ -57,29 +86,54 @@ func find_element{range_check_ptr}(array_ptr: felt*, elm_size, n_elms, key) -> (
 }
 ```
 
-> Below we abuse the "Casm" notation by not distinguishing Cairo Zero from Casm and referring to the above as Casm (while we actually refer to the compilation result of the above).
+> Below we abuse the "Casm" notation by not distinguishing Cairo Zero from Casm
+> and referring to the above as Casm (while we actually refer to the compilation
+> result of the above).
 
-For brevity, we have omitted the hint in the above snippet, but it's clear that this function can only execute correctly if the requested element exists in the array (otherwise it would fail for every possible hint - there is nothing we can substitute `index` for, that makes the following lines run successfully).
+For brevity, we have omitted the hint in the above snippet, but it's clear that
+this function can only execute correctly if the requested element exists in the
+array (otherwise it would fail for every possible hint - there is nothing we can
+substitute `index` for, that makes the following lines run successfully).
 
-Such Casm cannot be generated by the Sierra->Casm compiler.
-Furthermore, simply replacing the assertion with an if/else statement doesn't do, as this results in non-deterministic execution. That is, for the same input, different hint values can yield different results.
-A malicious prover can use this freedom to harm the user - in this example, they are able to make it seem as if an element isn't part of the array, even though it actually is.
+Such Casm cannot be generated by the Sierra->Casm compiler. Furthermore, simply
+replacing the assertion with an if/else statement doesn't do, as this results in
+non-deterministic execution. That is, for the same input, different hint values
+can yield different results. A malicious prover can use this freedom to harm the
+user - in this example, they are able to make it seem as if an element isn't
+part of the array, even though it actually is.
 
-The safe Casm for finding an element in an array behaves like the above snippet in the happy flow (element is there): an index is given in a hint, and we verify that the array at the hinted index contains the requested element. However, in the unhappy flow (element isn't there), we *must* go over the entire array to verify this.
+The safe Casm for finding an element in an array behaves like the above snippet
+in the happy flow (element is there): an index is given in a hint, and we verify
+that the array at the hinted index contains the requested element. However, in
+the unhappy flow (element isn't there), we _must_ go over the entire array to
+verify this.
 
-This was not the case in Cairo 0, as we were fine with certain paths not being provable (in the above snippet, the unhappy flow in which the element isn't in the array is never provable).
+This was not the case in Cairo 0, as we were fine with certain paths not being
+provable (in the above snippet, the unhappy flow in which the element isn't in
+the array is never provable).
 
-> Sierra's gas metering adds further complications to the above example. Even looking through the array to verify that the element isn't there may leave some flexibility to the prover.  
+> Sierra's gas metering adds further complications to the above example. Even
+> looking through the array to verify that the element isn't there may leave
+> some flexibility to the prover.
 
-If we take gas limitations into consideration, the user may have enough gas for the happy flow, but not for the unhappy one, making the execution stop mid-search, and allowing the prover to get away with lying about the element not being present.  
+If we take gas limitations into consideration, the user may have enough gas for
+the happy flow, but not for the unhappy one, making the execution stop
+mid-search, and allowing the prover to get away with lying about the element not
+being present.
 
-The way we plan to handle this is by requiring the user to have enough gas for the unhappy flow before actually calling `find_element`.
+The way we plan to handle this is by requiring the user to have enough gas for
+the unhappy flow before actually calling `find_element`.
 
 ### Hints in Cairo
 
-Smart contracts written with Cairo cannot contain user defined hints. This is already true with Cairo Zero contracts (only whitelisted hints are accepted), but with Cairo the hints in use are
-determined by the Sierra &rarr; Casm compiler. Since this compilation is there to ensure that only
-"safe" Casm is generated, there is no room for hints that are not generated by the compiler.
+Smart contracts written with Cairo cannot contain user defined hints. This is
+already true with Cairo Zero contracts (only whitelisted hints are accepted),
+but with Cairo the hints in use are determined by the Sierra &rarr; Casm
+compiler. Since this compilation is there to ensure that only "safe" Casm is
+generated, there is no room for hints that are not generated by the compiler.
 
-In the future, native Cairo may contain hint syntax similar to Cairo 0, but it will not be available in Starknet smart contracts ([L3s](https://medium.com/starkware/fractal-scaling-from-l2-to-l3-7fe238ecfb4f) on top of Starknet may make use of such functionality).
-Note that this is currently not part of Starknet's roadmap.
+In the future, native Cairo may contain hint syntax similar to Cairo 0, but it
+will not be available in Starknet smart contracts
+([L3s](https://medium.com/starkware/fractal-scaling-from-l2-to-l3-7fe238ecfb4f)
+on top of Starknet may make use of such functionality). Note that this is
+currently not part of Starknet's roadmap.

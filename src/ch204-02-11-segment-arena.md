@@ -1,16 +1,20 @@
 # Segment Arena Builtin
 
-The _Segment Arena_ extends Cairo VM's memory handling by tracking segment endpoints. This approach simplifies memory operations where segments need to be allocated and finalized.
+The _Segment Arena_ extends Cairo VM's memory handling by tracking segment
+endpoints. This approach simplifies memory operations where segments need to be
+allocated and finalized.
 
 ## Cells Organization
 
-Each Segment Arena builtin instance works with blocks of 3 cells that maintain the state of dictionaries:
+Each Segment Arena builtin instance works with blocks of 3 cells that maintain
+the state of dictionaries:
 
 - First cell: Contains the base address of the info pointer
 - Second cell: Contains the current number of allocated segments
 - Third cell: Contains the current number of squashed/finalized segments
 
-This structure works in close conjunction with an Info segment, which is also organized in blocks of 3 cells:
+This structure works in close conjunction with an Info segment, which is also
+organized in blocks of 3 cells:
 
 - First cell: Base address of the segment
 - Second cell: End address of the segment (when squashed)
@@ -23,8 +27,8 @@ This structure works in close conjunction with an Info segment, which is also or
   <span class="caption">Segment Arena builtin segment</span>
 </div>
 
-Let's take a look at two snapshots of a Segment Arena segment,
-during the execution of a dummy program by the Cairo VM.
+Let's take a look at two snapshots of a Segment Arena segment, during the
+execution of a dummy program by the Cairo VM.
 
 In the first snapshot, Let's look at first case when a dictionary is allocated:
 
@@ -47,7 +51,11 @@ Now, In the second case one more dictionary is allocated:
   <span class="caption">Snapshot 1 - Valid Segment Arena builtin segment</span>
 </div>
 
-The second snapshot shows two error conditions. In the first case, an invalid state occurs when `info_ptr` contains the _non-relocatable_ value `ABC`. The error is triggered when accessing the info segment. In the second case, the error occurs when there's an inconsistent state as shown in the snapshot, `n_squashed` is greater than `n_segments`.
+The second snapshot shows two error conditions. In the first case, an invalid
+state occurs when `info_ptr` contains the _non-relocatable_ value `ABC`. The
+error is triggered when accessing the info segment. In the second case, the
+error occurs when there's an inconsistent state as shown in the snapshot,
+`n_squashed` is greater than `n_segments`.
 
 <div align="center">
   <img src="segment-arena-error.png" alt="invalid segment arena builtin segment"/>
@@ -68,7 +76,8 @@ The builtin enforces several rules:
 
 ## Implementation References
 
-These implementation references of the Segment Arena builtin might not be exhaustive.
+These implementation references of the Segment Arena builtin might not be
+exhaustive.
 
 - [TypeScript Segment Arena Builtin](https://github.com/kkrt-labs/cairo-vm-ts/blob/main/src/builtins/segmentArena.ts)
 - [Rust Segment Arena Builtin](https://github.com/lambdaclass/cairo-vm/blob/41476335884bf600b62995f0c005be7d384eaec5/vm/src/vm/runners/builtin_runner/segment_arena.rs)

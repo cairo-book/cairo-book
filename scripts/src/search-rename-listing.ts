@@ -1,10 +1,10 @@
 import prompts from "prompts";
 import { fuzzySearchFolders } from "./prompt";
 import {
-  extractFolderName,
-  getChapterNumber,
-  getSubSubfolders,
-  renameListing,
+	extractFolderName,
+	getChapterNumber,
+	getSubSubfolders,
+	renameListing,
 } from "./utils";
 
 /**
@@ -17,32 +17,32 @@ import {
  * @returns A promise that resolves when the operation is complete.
  */
 export async function searchAndRenameListing(
-  srcFolderPath: string,
-  listingsPath: string,
+	srcFolderPath: string,
+	listingsPath: string,
 ) {
-  const folders = getSubSubfolders(listingsPath);
-  const selectedFolder = await fuzzySearchFolders(folders);
+	const folders = getSubSubfolders(listingsPath);
+	const selectedFolder = await fuzzySearchFolders(folders);
 
-  if (selectedFolder) {
-    console.log(`Selected folder: ${selectedFolder}`);
+	if (selectedFolder) {
+		console.log(`Selected folder: ${selectedFolder}`);
 
-    const oldFolderName = extractFolderName(selectedFolder);
-    const response = await prompts({
-      type: "text",
-      name: "newFolderName",
-      message: `Enter a new name for the folder (${oldFolderName}):`,
-    });
+		const oldFolderName = extractFolderName(selectedFolder);
+		const response = await prompts({
+			type: "text",
+			name: "newFolderName",
+			message: `Enter a new name for the folder (${oldFolderName}):`,
+		});
 
-    const chapterNumber = getChapterNumber(selectedFolder)!;
+		const chapterNumber = getChapterNumber(selectedFolder)!;
 
-    if (response.newFolderName) {
-      renameListing(
-        srcFolderPath,
-        chapterNumber,
-        selectedFolder,
-        oldFolderName,
-        response.newFolderName,
-      );
-    }
-  }
+		if (response.newFolderName) {
+			renameListing(
+				srcFolderPath,
+				chapterNumber,
+				selectedFolder,
+				oldFolderName,
+				response.newFolderName,
+			);
+		}
+	}
 }

@@ -6,19 +6,19 @@ point of many programs. You’ve also seen the `fn` keyword, which allows you to
 declare new functions.
 
 Cairo code uses _snake case_ as the conventional style for function and variable
-names, in which all letters are lowercase and underscores separate words.
-Here’s a program that contains an example function definition:
+names, in which all letters are lowercase and underscores separate words. Here’s
+a program that contains an example function definition:
 
 ```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_15_functions/src/lib.cairo}}
 ```
 
 We define a function in Cairo by entering `fn` followed by a function name and a
-set of parentheses. The curly brackets tell the compiler where the function
-body begins and ends.
+set of parentheses. The curly brackets tell the compiler where the function body
+begins and ends.
 
-We can call any function we’ve defined by entering its name followed by a set
-of parentheses. Because `another_function` is defined in the program, it can be
+We can call any function we’ve defined by entering its name followed by a set of
+parentheses. Because `another_function` is defined in the program, it can be
 called from inside the `main` function. Note that we defined `another_function`
 _before_ the `main` function in the source code; we could have defined it after
 as well. Cairo doesn’t care where you define your functions, only that they’re
@@ -42,8 +42,8 @@ We can define functions to have _parameters_, which are special variables that
 are part of a function’s signature. When a function has parameters, you can
 provide it with concrete values for those parameters. Technically, the concrete
 values are called _arguments_, but in casual conversation, people tend to use
-the words _parameter_ and _argument_ interchangeably for either the variables
-in a function’s definition or the concrete values passed in when you call a
+the words _parameter_ and _argument_ interchangeably for either the variables in
+a function’s definition or the concrete values passed in when you call a
 function.
 
 In this version of `another_function` we add a parameter:
@@ -60,10 +60,11 @@ Try running this program; you should get the following output:
 
 The declaration of `another_function` has one parameter named `x`. The type of
 `x` is specified as `felt252`. When we pass `5` in to `another_function`, the
-`println!` macro puts `5` where the pair of curly brackets containing `x` was in the format string.
+`println!` macro puts `5` where the pair of curly brackets containing `x` was in
+the format string.
 
-In function signatures, you _must_ declare the type of each parameter. This is
-a deliberate decision in Cairo’s design: requiring type annotations in function
+In function signatures, you _must_ declare the type of each parameter. This is a
+deliberate decision in Cairo’s design: requiring type annotations in function
 definitions means the compiler almost never needs you to use them elsewhere in
 the code to figure out what type you mean. The compiler is also able to give
 more helpful error messages if it knows what types the function expects.
@@ -77,21 +78,30 @@ commas, like this:
 
 This example creates a function named `print_labeled_measurement` with two
 parameters. The first parameter is named `value` and is a `u128`. The second is
-named `unit_label` and is of type `ByteArray` - Cairo's internal type to represent string literals. The function then prints text containing both the `value` and the `unit_label`.
+named `unit_label` and is of type `ByteArray` - Cairo's internal type to
+represent string literals. The function then prints text containing both the
+`value` and the `unit_label`.
 
 Let’s try running this code. Replace the program currently in your _functions_
-project’s _src/lib.cairo_ file with the preceding example and run it using `scarb execute`:
+project’s _src/lib.cairo_ file with the preceding example and run it using
+`scarb execute`:
 
 ```shell
 {{#include ../listings/ch02-common-programming-concepts/no_listing_17_multiple_params/output.txt}}
 ```
 
-Because we called the function with `5` as the value for value and `"h"` as the value for `unit_label`, the program output contains those values.
+Because we called the function with `5` as the value for value and `"h"` as the
+value for `unit_label`, the program output contains those values.
 
 ### Named Parameters
 
-In Cairo, named parameters allow you to specify the names of arguments when you call a function. This makes the function calls more readable and self-descriptive.
-If you want to use named parameters, you need to specify the name of the parameter and the value you want to pass to it. The syntax is `parameter_name: value`. If you pass a variable that has the same name as the parameter, you can simply write `:parameter_name` instead of `parameter_name: variable_name`.
+In Cairo, named parameters allow you to specify the names of arguments when you
+call a function. This makes the function calls more readable and
+self-descriptive. If you want to use named parameters, you need to specify the
+name of the parameter and the value you want to pass to it. The syntax is
+`parameter_name: value`. If you pass a variable that has the same name as the
+parameter, you can simply write `:parameter_name` instead of
+`parameter_name: variable_name`.
 
 Here is an example:
 
@@ -109,22 +119,23 @@ understand. Other languages don’t have the same distinctions, so let’s look 
 what statements and expressions are and how their differences affect the bodies
 of functions.
 
-- **Statements** are instructions that perform some action and do not return
-  a value.
+- **Statements** are instructions that perform some action and do not return a
+  value.
 - **Expressions** evaluate to a resultant value. Let’s look at some examples.
 
 We’ve actually already used statements and expressions. Creating a variable and
-assigning a value to it with the `let` keyword is a statement. In Listing {{#ref fn-main}},
-`let y = 6;` is a statement.
+assigning a value to it with the `let` keyword is a statement. In Listing
+{{#ref fn-main}}, `let y = 6;` is a statement.
 
 ```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_19_statement/src/lib.cairo}}
 ```
 
-{{#label fn-main}}
-<span class="caption">Listing {{#ref fn-main}}: A `main` function declaration containing one statement</span>
+{{#label fn-main}} <span class="caption">Listing {{#ref fn-main}}: A `main`
+function declaration containing one statement</span>
 
-Function definitions are also statements; the entire preceding example is a statement in itself.
+Function definitions are also statements; the entire preceding example is a
+statement in itself.
 
 Statements do not return values. Therefore, you can’t assign a `let` statement
 to another variable, as the following code tries to do; you’ll get an error:
@@ -148,10 +159,12 @@ languages, you can write `x = y = 6` and have both `x` and `y` have the value
 Expressions evaluate to a value and make up most of the rest of the code that
 you’ll write in Cairo. Consider a math operation, such as `5 + 6`, which is an
 expression that evaluates to the value `11`. Expressions can be part of
-statements: in Listing {{#ref fn-main}}, the `6` in the statement `let y = 6;` is an
-expression that evaluates to the value `6`.
+statements: in Listing {{#ref fn-main}}, the `6` in the statement `let y = 6;`
+is an expression that evaluates to the value `6`.
 
-Calling a function is an expression since it always evaluates to a value: the function's explicit return value, if specified, or the 'unit' type `()` otherwise.
+Calling a function is an expression since it always evaluates to a value: the
+function's explicit return value, if specified, or the 'unit' type `()`
+otherwise.
 
 A new scope block created with curly brackets is an expression, for example:
 
@@ -165,13 +178,12 @@ This expression:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_21_blocks_are_expressions/src/lib.cairo:block_expr}}
 ```
 
-is a block that, in this case, evaluates to `4`. That value gets bound to `y`
-as part of the `let` statement. Note that the `x + 1` line doesn’t have a
-semicolon at the end, which is unlike most of the lines you’ve seen so far.
-Expressions do not include ending semicolons. If you add a semicolon to the end
-of an expression, you turn it into a statement, and it will then not return a
-value. Keep this in mind as you explore function return values and expressions
-next.
+is a block that, in this case, evaluates to `4`. That value gets bound to `y` as
+part of the `let` statement. Note that the `x + 1` line doesn’t have a semicolon
+at the end, which is unlike most of the lines you’ve seen so far. Expressions do
+not include ending semicolons. If you add a semicolon to the end of an
+expression, you turn it into a statement, and it will then not return a value.
+Keep this in mind as you explore function return values and expressions next.
 
 ## Functions with Return Values
 
@@ -180,8 +192,8 @@ values, but we must declare their type after an arrow (`->`). In Cairo, the
 return value of the function is synonymous with the value of the final
 expression in the block of the body of a function. You can return early from a
 function by using the `return` keyword and specifying a value, but most
-functions return the last expression implicitly. Here’s an example of a
-function that returns a value:
+functions return the last expression implicitly. Here’s an example of a function
+that returns a value:
 
 ```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_22_function_return_values/src/lib.cairo}}
@@ -206,18 +218,17 @@ that line is the same as the following:
 let x = 5;
 ```
 
-Second, the `five` function has no parameters and defines the type of the
-return value, but the body of the function is a lonely `5` with no semicolon
-because it’s an expression whose value we want to return.
-Let’s look at another example:
+Second, the `five` function has no parameters and defines the type of the return
+value, but the body of the function is a lonely `5` with no semicolon because
+it’s an expression whose value we want to return. Let’s look at another example:
 
 ```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_23_function_return_values_2/src/lib.cairo}}
 ```
 
-Running this code will print `x = 6`. But if we place a
-semicolon at the end of the line containing `x + 1`, changing it from an
-expression to a statement, we’ll get an error:
+Running this code will print `x = 6`. But if we place a semicolon at the end of
+the line containing `x + 1`, changing it from an expression to a statement,
+we’ll get an error:
 
 ```cairo,does_not_compile
 {{#include ../listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo}}
@@ -227,26 +238,33 @@ expression to a statement, we’ll get an error:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/output.txt}}
 ```
 
-The main error message, `Unexpected return type`, reveals the core issue with this
-code. The definition of the function `plus_one` says that it will return an
-`u32`, but statements don’t evaluate to a value, which is expressed by `()`,
-the unit type. Therefore, nothing is returned, which contradicts the function
+The main error message, `Unexpected return type`, reveals the core issue with
+this code. The definition of the function `plus_one` says that it will return an
+`u32`, but statements don’t evaluate to a value, which is expressed by `()`, the
+unit type. Therefore, nothing is returned, which contradicts the function
 definition and results in an error.
 
 ### Const Functions
 
-Functions that can be evaluated at compile time can be marked as `const` using the `const fn` syntax. This allows the function to be called from a constant context and interpreted by the compiler at compile time.
+Functions that can be evaluated at compile time can be marked as `const` using
+the `const fn` syntax. This allows the function to be called from a constant
+context and interpreted by the compiler at compile time.
 
-Declaring a function as `const` restricts the types that arguments and the return type may use, and limits the function body to constant expressions.
+Declaring a function as `const` restricts the types that arguments and the
+return type may use, and limits the function body to constant expressions.
 
-Several functions in the core library are marked as `const`. Here's an example from the core library showing the `pow` function implemented as a `const fn`:
+Several functions in the core library are marked as `const`. Here's an example
+from the core library showing the `pow` function implemented as a `const fn`:
 
 ```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_const_fn/src/lib.cairo}}
 ```
 
-In this example, `pow` is a `const` function, allowing it to be used in a constant expression to define `mask` at compile time. Here's a snippet of how `pow` is defined in the core library using `const fn`:
+In this example, `pow` is a `const` function, allowing it to be used in a
+constant expression to define `mask` at compile time. Here's a snippet of how
+`pow` is defined in the core library using `const fn`:
 
-Note that declaring a function as `const` has no effect on existing uses; it only imposes restrictions for constant contexts.
+Note that declaring a function as `const` has no effect on existing uses; it
+only imposes restrictions for constant contexts.
 
 {{#quiz ../quizzes/ch02-03-functions.toml}}

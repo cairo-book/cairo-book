@@ -1,10 +1,15 @@
 # Appendix B - Operators and Symbols
 
-This appendix contains a glossary of Cairo's syntax, including operators and other symbols that appear by themselves or in the context of paths, generics, macros, attributes, comments, tuples, and brackets.
+This appendix contains a glossary of Cairo's syntax, including operators and
+other symbols that appear by themselves or in the context of paths, generics,
+macros, attributes, comments, tuples, and brackets.
 
 ## Operators
 
-Table B-1 contains the operators in Cairo, an example of how the operator would appear in context, a short explanation, and whether that operator is overloadable. If an operator is overloadable, the relevant trait to use to overload that operator is listed.
+Table B-1 contains the operators in Cairo, an example of how the operator would
+appear in context, a short explanation, and whether that operator is
+overloadable. If an operator is overloadable, the relevant trait to use to
+overload that operator is listed.
 
 | Operator                  | Example                                                 | Explanation                              | Overloadable? |
 | ------------------------- | ------------------------------------------------------- | ---------------------------------------- | ------------- |
@@ -48,9 +53,11 @@ Table B-1 contains the operators in Cairo, an example of how the operator would 
 
 ## Non Operator Symbols
 
-The following list contains all symbols that are not used as operators; that is, they do not have the same behavior as a function or method call.
+The following list contains all symbols that are not used as operators; that is,
+they do not have the same behavior as a function or method call.
 
-Table B-2 shows symbols that appear on their own and are valid in a variety of locations.
+Table B-2 shows symbols that appear on their own and are valid in a variety of
+locations.
 
 | Symbol                                  | Explanation                               |
 | --------------------------------------- | ----------------------------------------- |
@@ -61,7 +68,8 @@ Table B-2 shows symbols that appear on their own and are valid in a variety of l
 
 <span class="caption">Table B-2: Stand-Alone Syntax</span>
 
-Table B-3 shows symbols that are used within the context of a module hierarchy path to access an item.
+Table B-3 shows symbols that are used within the context of a module hierarchy
+path to access an item.
 
 | Symbol               | Explanation                                                      |
 | -------------------- | ---------------------------------------------------------------- |
@@ -71,7 +79,8 @@ Table B-3 shows symbols that are used within the context of a module hierarchy p
 
 <span class="caption">Table B-3: Path-Related Syntax</span>
 
-Table B-4 shows symbols that appear in the context of using generic type parameters.
+Table B-4 shows symbols that appear in the context of using generic type
+parameters.
 
 | Symbol                         | Explanation                                                                                                  |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
@@ -84,7 +93,8 @@ Table B-4 shows symbols that appear in the context of using generic type paramet
 
 <span class="caption">Table B-4: Generics</span>
 
-Table B-5 shows symbols that appear in the context of specifying attributes on an item.
+Table B-5 shows symbols that appear in the context of specifying attributes on
+an item.
 
 | Symbol                               | Explanation                                                                                                                                                                         |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -115,7 +125,8 @@ Table B-5 shows symbols that appear in the context of specifying attributes on a
 
 <span class="caption">Table B-5: Attributes</span>
 
-Table B-6 shows symbols that appear in the context of calling or defining macros.
+Table B-6 shows symbols that appear in the context of calling or defining
+macros.
 
 | Symbol                   | Explanation                                                                            |
 | ------------------------ | -------------------------------------------------------------------------------------- |

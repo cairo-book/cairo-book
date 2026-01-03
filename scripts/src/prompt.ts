@@ -11,31 +11,31 @@ import { extractFolderName, getSubSubfolders } from "./utils";
  * @returns A promise that resolves to the selected folder name, or undefined if no matches are found.
  */
 export async function fuzzySearchFolders(
-  folders: string[],
+	folders: string[],
 ): Promise<string | undefined> {
-  const response = await prompts({
-    type: "text",
-    name: "listingName",
-    message: "Enter the name of the listing to rename:",
-  });
+	const response = await prompts({
+		type: "text",
+		name: "listingName",
+		message: "Enter the name of the listing to rename:",
+	});
 
-  const results = fuzzysort.go(response.listingName, folders, { limit: 10 });
-  const choices = results.map((result) => ({
-    title: result.target,
-    value: result.target,
-  }));
+	const results = fuzzysort.go(response.listingName, folders, { limit: 10 });
+	const choices = results.map((result) => ({
+		title: result.target,
+		value: result.target,
+	}));
 
-  if (choices.length === 0) {
-    console.log("No match found.");
-    return undefined;
-  }
+	if (choices.length === 0) {
+		console.log("No match found.");
+		return undefined;
+	}
 
-  const selection = await prompts({
-    type: "select",
-    name: "folder",
-    message: "Select the corresponding folder",
-    choices,
-  });
+	const selection = await prompts({
+		type: "select",
+		name: "folder",
+		message: "Select the corresponding folder",
+		choices,
+	});
 
-  return selection.folder;
+	return selection.folder;
 }

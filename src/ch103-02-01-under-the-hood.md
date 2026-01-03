@@ -40,9 +40,9 @@ The key points:
   automatically generated with the `component!()` macro when using a component
   inside a contract.
 
-  The compiler will generate an embeddable impl that wraps any function in `Ownable`,
-  replacing the `self: ComponentState<TContractState>` argument with `self:
-TContractState`, where access to the component state is made via the
+  The compiler will generate an embeddable impl that wraps any function in
+  `Ownable`, replacing the `self: ComponentState<TContractState>` argument with
+  `self: TContractState`, where access to the component state is made via the
   `get_component` function in the `HasComponent<TContractState>` trait.
 
   For each component, the compiler generates a `HasComponent` trait. This trait
@@ -67,7 +67,8 @@ TContractState`, where access to the component state is made via the
   contract that wants to use it. The opposite direction
   (`ComponentState<TContractState>` to `ContractState`) is useful for
   dependencies (see the `Upgradeable` component depending on an `IOwnable`
-  implementation example in the [Components dependencies ](./ch103-02-02-component-dependencies.md) section).
+  implementation example in the
+  [Components dependencies ](./ch103-02-02-component-dependencies.md) section).
 
   To put it briefly, one should think of an implementation of the above
   `HasComponent<T>` as saying: **“Contract whose state T has the upgradeable
@@ -96,10 +97,10 @@ TContractState`, where access to the component state is made via the
 ```
 
 Note that thanks to having an impl of `HasComponent<TContractState>`, the
-compiler was able to wrap our functions in a new impl that doesn’t directly
-know about the `ComponentState` type. `OwnableImpl`, whose name we chose when
-writing `embeddable_as(OwnableImpl)`, is the impl that we will embed in a contract
-that wants ownership.
+compiler was able to wrap our functions in a new impl that doesn’t directly know
+about the `ComponentState` type. `OwnableImpl`, whose name we chose when writing
+`embeddable_as(OwnableImpl)`, is the impl that we will embed in a contract that
+wants ownership.
 
 ## Contract Integration
 
@@ -119,9 +120,8 @@ syntax. We’re instantiating the embeddable generated impl
 that the generic impl is `Ownable<TContractState>`, and the `component!` macro
 provides `HasComponent<TContractState>` so the wrapper can delegate to it.
 
-Note that only the using contract
-could have implemented this trait since only it knows about both the contract
-state and the component state.
+Note that only the using contract could have implemented this trait since only
+it knows about both the contract state and the component state.
 
 This glues everything together to inject the component logic into the contract.
 

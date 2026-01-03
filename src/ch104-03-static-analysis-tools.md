@@ -1,8 +1,13 @@
 # Static Analysis Tools
 
-Static analysis refers to the process of examining code without its execution, focusing on its structure, syntax, and properties. It involves analyzing the source code to identify potential issues, vulnerabilities, or violations of specified rules.
+Static analysis refers to the process of examining code without its execution,
+focusing on its structure, syntax, and properties. It involves analyzing the
+source code to identify potential issues, vulnerabilities, or violations of
+specified rules.
 
-By defining rules, such as coding conventions or security guidelines, developers can utilize static analysis tools to automatically check the code against these standards.
+By defining rules, such as coding conventions or security guidelines, developers
+can utilize static analysis tools to automatically check the code against these
+standards.
 
 Reference:
 

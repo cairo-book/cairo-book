@@ -1,16 +1,17 @@
 # Hello, World
 
-Now that you’ve installed Cairo through Scarb, it’s time to write your first Cairo program.
-It’s traditional when learning a new language to write a little program that
-prints the text `Hello, world!` to the screen, so we’ll do the same here!
+Now that you’ve installed Cairo through Scarb, it’s time to write your first
+Cairo program. It’s traditional when learning a new language to write a little
+program that prints the text `Hello, world!` to the screen, so we’ll do the same
+here!
 
 > Note: This book assumes basic familiarity with the command line. Cairo makes
 > no specific demands about your editing or tooling or where your code lives, so
 > if you prefer to use an integrated development environment (IDE) instead of
-> the command line, feel free to use your favorite IDE. The Cairo team has developed
-> a VSCode extension for the Cairo language that you can use to get the features from
-> the language server and code highlighting. See [Appendix F][devtools]
-> for more details.
+> the command line, feel free to use your favorite IDE. The Cairo team has
+> developed a VSCode extension for the Cairo language that you can use to get
+> the features from the language server and code highlighting. See [Appendix
+> F][devtools] for more details.
 
 [devtools]: ./appendix-06-useful-development-tools.md
 
@@ -18,10 +19,11 @@ prints the text `Hello, world!` to the screen, so we’ll do the same here!
 
 You’ll start by making a directory to store your Cairo code. It doesn’t matter
 to Cairo where your code lives, but for the exercises and projects in this book,
-we suggest making a _cairo_projects_ directory in your home directory and keeping all
-your projects there.
+we suggest making a _cairo_projects_ directory in your home directory and
+keeping all your projects there.
 
-Open a terminal and enter the following commands to make a _cairo_projects_ directory.
+Open a terminal and enter the following commands to make a _cairo_projects_
+directory.
 
 For Linux, macOS, and PowerShell on Windows, enter this:
 
@@ -37,21 +39,24 @@ For Windows CMD, enter this:
 > cd /d "%USERPROFILE%\cairo_projects"
 ```
 
-> Note: From now on, for each example shown in the book, we assume that
-> you will be working from a Scarb project directory. If you are not using Scarb, and try to run the examples from a different directory, you might need to adjust the commands accordingly or create a Scarb project.
+> Note: From now on, for each example shown in the book, we assume that you will
+> be working from a Scarb project directory. If you are not using Scarb, and try
+> to run the examples from a different directory, you might need to adjust the
+> commands accordingly or create a Scarb project.
 
 ## Creating a Project with Scarb
 
 Let’s create a new project using Scarb.
 
-Navigate to your _cairo_projects_ directory (or wherever you decided to store your code). Then run the following:
+Navigate to your _cairo_projects_ directory (or wherever you decided to store
+your code). Then run the following:
 
 ```bash
 scarb new hello_world
 ```
 
-Scarb will ask you about the dependencies you want to add.
-You will be given two options :
+Scarb will ask you about the dependencies you want to add. You will be given two
+options :
 
 ```text
 ? Which test runner do you want to set up? ›
@@ -61,16 +66,24 @@ You will be given two options :
 
 In general, we'll prefer using the first one `❯ Starknet Foundry (default)`.
 
-This creates a new directory and project called _hello_world_. We’ve named our project _hello_world_, and Scarb creates its files in a directory of the same name.
+This creates a new directory and project called _hello_world_. We’ve named our
+project _hello_world_, and Scarb creates its files in a directory of the same
+name.
 
-Go into the _hello_world_ directory with the command `cd hello_world`. You’ll see that Scarb has generated three files and two directory for us: a _Scarb.toml_ file, a _src_ directory with a _lib.cairo_ file inside and a _tests_ directory containing a _test_contract.cairo_ file. For now, we can remove this _tests_ directory.
+Go into the _hello_world_ directory with the command `cd hello_world`. You’ll
+see that Scarb has generated three files and two directory for us: a
+_Scarb.toml_ file, a _src_ directory with a _lib.cairo_ file inside and a
+_tests_ directory containing a _test_contract.cairo_ file. For now, we can
+remove this _tests_ directory.
 
 It has also initialized a new Git repository along with a `.gitignore` file
 
-> Note: Git is a common version control system. You can stop using version control system by using the `--no-vcs` flag.
-> Run `scarb new --help` to see the available options.
+> Note: Git is a common version control system. You can stop using version
+> control system by using the `--no-vcs` flag. Run `scarb new --help` to see the
+> available options.
 
-Open _Scarb.toml_ in your text editor of choice. It should look similar to the code in Listing {{#ref scarb-content}}.
+Open _Scarb.toml_ in your text editor of choice. It should look similar to the
+code in Listing {{#ref scarb-content}}.
 
 <span class="filename">Filename: Scarb.toml</span>
 
@@ -78,26 +91,47 @@ Open _Scarb.toml_ in your text editor of choice. It should look similar to the c
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/initial_Scarb.toml:main}}
 ```
 
-{{#label scarb-content}}
-<span class="caption">Listing {{#ref scarb-content}}: Contents of _Scarb.toml_ generated by `scarb new`</span>
+{{#label scarb-content}} <span class="caption">Listing {{#ref scarb-content}}:
+Contents of _Scarb.toml_ generated by `scarb new`</span>
 
-This file is in the [TOML][toml doc] (Tom’s Obvious, Minimal Language) format, which is Scarb’s configuration format.
+This file is in the [TOML][toml doc] (Tom’s Obvious, Minimal Language) format,
+which is Scarb’s configuration format.
 
-The first line, `[package]`, is a section heading that indicates that the following statements are configuring a package. As we add more information to this file, we’ll add other sections.
+The first line, `[package]`, is a section heading that indicates that the
+following statements are configuring a package. As we add more information to
+this file, we’ll add other sections.
 
-The next three lines set the configuration information Scarb needs to compile your program: the name of the package and the version of Scarb to use, and the edition of the prelude to use. The prelude is the collection of the most commonly used items that are automatically imported into every Cairo program. You can learn more about the prelude in [Appendix D][prelude].
+The next three lines set the configuration information Scarb needs to compile
+your program: the name of the package and the version of Scarb to use, and the
+edition of the prelude to use. The prelude is the collection of the most
+commonly used items that are automatically imported into every Cairo program.
+You can learn more about the prelude in [Appendix D][prelude].
 
-The `[dependencies]` section, is the start of a section for you to list any of your project’s dependencies. In Cairo, packages of code are referred to as crates. We won’t need any other crates for this project.
+The `[dependencies]` section, is the start of a section for you to list any of
+your project’s dependencies. In Cairo, packages of code are referred to as
+crates. We won’t need any other crates for this project.
 
-The `[dev-dependencies]` section is about dependencies that are required for development, but are not needed for the actual production build of the project. `snforge_std` and `assert_macros` are two examples of such dependencies. If you want to test your project without using Starknet Foundry, you can use `cairo_test`.
+The `[dev-dependencies]` section is about dependencies that are required for
+development, but are not needed for the actual production build of the project.
+`snforge_std` and `assert_macros` are two examples of such dependencies. If you
+want to test your project without using Starknet Foundry, you can use
+`cairo_test`.
 
-The `[[target.starknet-contract]]` section allows to build Starknet smart contracts. We can remove it for now.
+The `[[target.starknet-contract]]` section allows to build Starknet smart
+contracts. We can remove it for now.
 
-The `[script]` section allows to define custom scripts. By default, there is one script for running tests using `snforge` with the `scarb test` command. We can also remove it for now.
+The `[script]` section allows to define custom scripts. By default, there is one
+script for running tests using `snforge` with the `scarb test` command. We can
+also remove it for now.
 
-Starknet Foundry also have more options, check out [Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/appendix/scarb-toml.html) for more information.
+Starknet Foundry also have more options, check out
+[Starknet Foundry documentation](https://foundry-rs.github.io/starknet-foundry/appendix/scarb-toml.html)
+for more information.
 
-By default, using Starknet Foundry adds the `starknet` dependency and the `[[target.starknet-contract]]` section, so that you can build contracts for Starknet out of the box. We will start with only Cairo programs, so you can edit your _Scarb.toml_ file to the following:
+By default, using Starknet Foundry adds the `starknet` dependency and the
+`[[target.starknet-contract]]` section, so that you can build contracts for
+Starknet out of the box. We will start with only Cairo programs, so you can edit
+your _Scarb.toml_ file to the following:
 
 <span class="filename">Filename: Scarb.toml</span>
 
@@ -105,16 +139,18 @@ By default, using Starknet Foundry adds the `starknet` dependency and the `[[tar
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/Scarb.toml}}
 ```
 
-{{#label modified-scarb-content}}
-<span class="caption">Listing {{#ref modified-scarb-content}}: Contents of modified _Scarb.toml_</span>
+{{#label modified-scarb-content}} <span class="caption">Listing
+{{#ref modified-scarb-content}}: Contents of modified _Scarb.toml_</span>
 
-The other file created by Scarb is _src/lib.cairo_, let's delete all the content and put in the following content, we will explain the reason later.
+The other file created by Scarb is _src/lib.cairo_, let's delete all the content
+and put in the following content, we will explain the reason later.
 
 ```cairo,noplayground
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/src/lib.cairo}}
 ```
 
-Then create a new file called _src/hello_world.cairo_ and put the following code in it:
+Then create a new file called _src/hello_world.cairo_ and put the following code
+in it:
 
 <span class="filename">Filename: src/hello_world.cairo</span>
 
@@ -122,14 +158,22 @@ Then create a new file called _src/hello_world.cairo_ and put the following code
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/src/hello_world.cairo}}
 ```
 
-We have just created a file called _lib.cairo_, which contains a module declaration referencing another module named `hello_world`, as well as the file _hello_world.cairo_, containing the implementation details of the `hello_world` module.
+We have just created a file called _lib.cairo_, which contains a module
+declaration referencing another module named `hello_world`, as well as the file
+_hello_world.cairo_, containing the implementation details of the `hello_world`
+module.
 
 Scarb requires your source files to be located within the _src_ directory.
 
-The top-level project directory is reserved for _README_ files, license information, configuration files, and any other non-code-related content.
-Scarb ensures a designated location for all project components, maintaining a structured organization.
+The top-level project directory is reserved for _README_ files, license
+information, configuration files, and any other non-code-related content. Scarb
+ensures a designated location for all project components, maintaining a
+structured organization.
 
-If you started a project that doesn’t use Scarb, you can convert it to a project that does use Scarb. Move the project code into the _src_ directory and create an appropriate _Scarb.toml_ file. You can also use `scarb init` command to generate the _src_ folder and the _Scarb.toml_ it contains.
+If you started a project that doesn’t use Scarb, you can convert it to a project
+that does use Scarb. Move the project code into the _src_ directory and create
+an appropriate _Scarb.toml_ file. You can also use `scarb init` command to
+generate the _src_ folder and the _Scarb.toml_ it contains.
 
 ```txt
 ├── Scarb.toml
@@ -142,26 +186,31 @@ If you started a project that doesn’t use Scarb, you can convert it to a proje
 
 [toml doc]: https://toml.io/
 [prelude]: ./appendix-04-cairo-prelude.md
-[starknet package]: https://docs.swmansion.com/scarb/docs/extensions/starknet/starknet-package.html
+[starknet package]:
+  https://docs.swmansion.com/scarb/docs/extensions/starknet/starknet-package.html
 
 ## Building a Scarb Project
 
-From your _hello_world_ directory, build your project by entering the following command:
+From your _hello_world_ directory, build your project by entering the following
+command:
 
 ```bash
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_build.txt}}
 ```
 
-This command creates a `hello_world_main_executable.json` file in _target/dev_, let's ignore this file for now.
+This command creates a `hello_world_main_executable.json` file in _target/dev_,
+let's ignore this file for now.
 
-If you have installed Cairo correctly, you should be able to run the `main` function of your program with the `scarb execute` command and see the following output:
+If you have installed Cairo correctly, you should be able to run the `main`
+function of your program with the `scarb execute` command and see the following
+output:
 
 ```shell
 {{#include ../listings/ch01-getting-started/no_listing_01_hello_world/output_run.txt}}
 ```
 
-Regardless of your operating system, the string `Hello, world!` should be printed to
-the terminal.
+Regardless of your operating system, the string `Hello, world!` should be
+printed to the terminal.
 
 If `Hello, world!` did print, congratulations! You’ve officially written a Cairo
 program. That makes you a Cairo programmer — welcome!
@@ -187,11 +236,10 @@ function bodies. It’s good style to place the opening curly bracket on the sam
 line as the function declaration, adding one space in between.
 
 > Note: If you want to stick to a standard style across Cairo projects, you can
-> use the automatic formatter tool available with `scarb fmt` to format your code in a
-> particular style (more on `scarb fmt` in
-> [Appendix F][devtools]). The Cairo team has included this tool
-> with the standard Cairo distribution, as `cairo-run` is, so it should already be
-> installed on your computer!
+> use the automatic formatter tool available with `scarb fmt` to format your
+> code in a particular style (more on `scarb fmt` in [Appendix F][devtools]).
+> The Cairo team has included this tool with the standard Cairo distribution, as
+> `cairo-run` is, so it should already be installed on your computer!
 
 The body of the `main` function holds the following code:
 
@@ -204,10 +252,14 @@ screen. There are four important details to notice here.
 
 First, Cairo style is to indent with four spaces, not a tab.
 
-Second, `println!` calls a Cairo macro. If it had called a function instead, it would be entered as `println` (without the `!`).
-We’ll discuss Cairo macros in more detail in the ["Macros"][macros] chapter. For now, you just need to know that using a `!` means that you’re calling a macro instead of a normal function and that macros don’t always follow the same rules as functions.
+Second, `println!` calls a Cairo macro. If it had called a function instead, it
+would be entered as `println` (without the `!`). We’ll discuss Cairo macros in
+more detail in the ["Macros"][macros] chapter. For now, you just need to know
+that using a `!` means that you’re calling a macro instead of a normal function
+and that macros don’t always follow the same rules as functions.
 
-Third, you see the `"Hello, world!"` string. We pass this string as an argument to `println!`, and the string is printed to the screen.
+Third, you see the `"Hello, world!"` string. We pass this string as an argument
+to `println!`, and the string is printed to the screen.
 
 Fourth, we end the line with a semicolon (`;`), which indicates that this
 expression is over and the next one is ready to begin. Most lines of Cairo code
@@ -222,11 +274,17 @@ end with a semicolon.
 
 Let’s recap what we’ve learned so far about Scarb:
 
-- We can install one or multiple Scarb versions, either the latest stable or a specific one, using asdf.
+- We can install one or multiple Scarb versions, either the latest stable or a
+  specific one, using asdf.
 - We can create a project using `scarb new`.
-- We can build a project using `scarb build` to generate the compiled Sierra code.
+- We can build a project using `scarb build` to generate the compiled Sierra
+  code.
 - We can execute a Cairo program using the `scarb execute` command.
 
-An additional advantage of using Scarb is that the commands are the same no matter which operating system you’re working on. So, at this point, we’ll no longer provide specific instructions for Linux and macOS versus Windows.
+An additional advantage of using Scarb is that the commands are the same no
+matter which operating system you’re working on. So, at this point, we’ll no
+longer provide specific instructions for Linux and macOS versus Windows.
 
-You’re already off to a great start on your Cairo journey! This is a great time to build a more substantial program to get used to reading and writing Cairo code.
+You’re already off to a great start on your Cairo journey! This is a great time
+to build a more substantial program to get used to reading and writing Cairo
+code.
