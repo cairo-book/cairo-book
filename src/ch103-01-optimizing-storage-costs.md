@@ -58,11 +58,11 @@ With these bitwise operators, let's see how to combine two `u8` integers into a 
 
 ## Bit-packing in Cairo
 
-The storage of a Starknet smart contract is a map with 2<sup>251</sup> slots, where each slot is a `felt252` which is initialized to 0.
+The storage of a Starknet smart contract is a map with 2<sup>251</sup>+17*2^<sup>192</sup>+1 slots, where each slot is a `felt252` which is initialized to 0.
 
 As we saw earlier, to reduce gas costs due to storage updates, we have to use as few bits as possible, so we have to organize stored variables by packing them.
 
-For example, consider the following `Sizes` struct with 3 fields of different types: one `u8`, one `u32` and one `u64`. The total size is 8 + 32 + 64 = 104 bits. This is less than a slot size (i.e 251 bits) so we can pack them together to be stored into a single slot.
+For example, consider the following `Sizes` struct with 3 fields of different types: one `u8`, one `u32` and one `u64`. The total size is 8 + 32 + 64 = 104 bits. This is less than a slot size (i.e 252 bits) so we can pack them together to be stored into a single slot.
 
 Note that, as it also fits in a `u128`, it's a good practice to use the smallest type to pack all your variables, so here a `u128` should be used.
 
