@@ -1,13 +1,12 @@
 # Builtins List
 
-The following table lists the different builtins implemented
-in the Cairo VM and gives a brief description of their purpose.
-For each builtin, a specific section details how it works,
-its cells organization if any, and references their actual
+The following table lists the different builtins implemented in the Cairo VM and
+gives a brief description of their purpose. For each builtin, a specific section
+details how it works, its cells organization if any, and references their actual
 implementation in different implementations of the Cairo VM.
 
-Additional resources related to the operation performed
-by the builtin are provided if relevant.
+Additional resources related to the operation performed by the builtin are
+provided if relevant.
 
 | Builtin                  | Description                                                                                                                            |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |

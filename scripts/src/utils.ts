@@ -10,22 +10,22 @@ import path from "path";
  * @returns A promise that resolves to an array of strings, each string being a path to a sub-subfolder.
  */
 export function getSubSubfolders(basePath: string): string[] {
-  let folders: string[] = [];
+	const folders: string[] = [];
 
-  for (const folder of fs.readdirSync(basePath, { withFileTypes: true })) {
-    if (folder.isDirectory()) {
-      const subFolderPath = path.join(basePath, folder.name);
-      for (const subFolder of fs.readdirSync(subFolderPath, {
-        withFileTypes: true,
-      })) {
-        if (subFolder.isDirectory()) {
-          folders.push(path.join(subFolderPath, subFolder.name));
-        }
-      }
-    }
-  }
+	for (const folder of fs.readdirSync(basePath, { withFileTypes: true })) {
+		if (folder.isDirectory()) {
+			const subFolderPath = path.join(basePath, folder.name);
+			for (const subFolder of fs.readdirSync(subFolderPath, {
+				withFileTypes: true,
+			})) {
+				if (subFolder.isDirectory()) {
+					folders.push(path.join(subFolderPath, subFolder.name));
+				}
+			}
+		}
+	}
 
-  return folders;
+	return folders;
 }
 
 /**
@@ -35,7 +35,7 @@ export function getSubSubfolders(basePath: string): string[] {
  * @returns The base name of the folder.
  */
 export function extractFolderName(folderPath: string): string {
-  return path.basename(folderPath);
+	return path.basename(folderPath);
 }
 
 /**
@@ -48,17 +48,17 @@ export function extractFolderName(folderPath: string): string {
  * @param newName - The new name to replace the old one.
  */
 export function updateScarbTomlFile(
-  folderPath: string,
-  oldName: string,
-  newName: string,
+	folderPath: string,
+	oldName: string,
+	newName: string,
 ) {
-  const tomlFilePath = path.join(folderPath, "Scarb.toml");
-  let tomlContent = fs.readFileSync(tomlFilePath, "utf8");
-  tomlContent = tomlContent.replace(
-    new RegExp(`name = "${oldName}"`, "g"),
-    `name = "${newName}"`,
-  );
-  fs.writeFileSync(tomlFilePath, tomlContent, "utf8");
+	const tomlFilePath = path.join(folderPath, "Scarb.toml");
+	let tomlContent = fs.readFileSync(tomlFilePath, "utf8");
+	tomlContent = tomlContent.replace(
+		new RegExp(`name = "${oldName}"`, "g"),
+		`name = "${newName}"`,
+	);
+	fs.writeFileSync(tomlFilePath, tomlContent, "utf8");
 }
 
 /**
@@ -70,25 +70,25 @@ export function updateScarbTomlFile(
  * @param temp - Whether the folder is a temporary folder.
  */
 export function renameFolder(
-  folderPath: string,
-  newName: string,
-  temp: boolean,
+	folderPath: string,
+	newName: string,
+	temp: boolean,
 ) {
-  newName = temp ? newName + "_tmp" : newName;
-  const newFolderPath = path.join(folderPath, "..", newName);
-  fs.renameSync(folderPath, newFolderPath);
+	newName = temp ? newName + "_tmp" : newName;
+	const newFolderPath = path.join(folderPath, "..", newName);
+	fs.renameSync(folderPath, newFolderPath);
 }
 
 export function printDiff(oldStr: string, newStr: string) {
-  const oldLines = oldStr.split("\n");
-  const newLines = newStr.split("\n");
+	const oldLines = oldStr.split("\n");
+	const newLines = newStr.split("\n");
 
-  oldLines.forEach((line, i) => {
-    if (line !== newLines[i]) {
-      console.log("\x1b[31m%s\x1b[0m", `- ${line}`); // red for old line
-      console.log("\x1b[32m%s\x1b[0m", `+ ${newLines[i]}`); // green for new line
-    }
-  });
+	oldLines.forEach((line, i) => {
+		if (line !== newLines[i]) {
+			console.log("\x1b[31m%s\x1b[0m", `- ${line}`); // red for old line
+			console.log("\x1b[32m%s\x1b[0m", `+ ${newLines[i]}`); // green for new line
+		}
+	});
 }
 
 /**
@@ -101,34 +101,34 @@ export function printDiff(oldStr: string, newStr: string) {
  * @param newName - The new name of the folder.
  */
 export function updateMarkdownFiles(
-  srcFolderPath: string,
-  chapterNumber: number,
-  oldName: string,
-  newName: string,
+	srcFolderPath: string,
+	chapterNumber: number,
+	oldName: string,
+	newName: string,
 ) {
-  const paddedChapterNumber = chapterNumber.toString().padStart(2, "0");
-  const files = fs.readdirSync(srcFolderPath);
+	const paddedChapterNumber = chapterNumber.toString().padStart(2, "0");
+	const files = fs.readdirSync(srcFolderPath);
 
-  for (const file of files) {
-    const chapterPrefix = `ch${paddedChapterNumber}`;
-    if (!file.includes(chapterPrefix)) {
-      continue;
-    }
-    const filePath = path.join(srcFolderPath, file);
-    const stats = fs.statSync(filePath);
+	for (const file of files) {
+		const chapterPrefix = `ch${paddedChapterNumber}`;
+		if (!file.includes(chapterPrefix)) {
+			continue;
+		}
+		const filePath = path.join(srcFolderPath, file);
+		const stats = fs.statSync(filePath);
 
-    if (stats.isFile() && filePath.endsWith(".md")) {
-      let content = fs.readFileSync(filePath, "utf8");
-      // Regex with capturing group for the chapter name
-      // Regex with capturing group for the chapter name
-      const regex = new RegExp(`(listings/[^/]+/)${oldName}/`, "g");
-      const oldContent = content;
-      content = content.replace(regex, `$1${newName}/`);
-      printDiff(oldContent, content);
+		if (stats.isFile() && filePath.endsWith(".md")) {
+			let content = fs.readFileSync(filePath, "utf8");
+			// Regex with capturing group for the chapter name
+			// Regex with capturing group for the chapter name
+			const regex = new RegExp(`(listings/[^/]+/)${oldName}/`, "g");
+			const oldContent = content;
+			content = content.replace(regex, `$1${newName}/`);
+			printDiff(oldContent, content);
 
-      fs.writeFileSync(filePath, content, "utf8");
-    }
-  }
+			fs.writeFileSync(filePath, content, "utf8");
+		}
+	}
 }
 
 /**
@@ -146,27 +146,27 @@ export function updateMarkdownFiles(
  * @returns A promise that resolves when the operation is complete.
  */
 export async function renameListing(
-  srcFolderPath: string,
-  chapterNumber: number,
-  selectedFolder: string,
-  oldFolderName: string,
-  newFolderName: string,
-  temp = false,
+	srcFolderPath: string,
+	chapterNumber: number,
+	selectedFolder: string,
+	oldFolderName: string,
+	newFolderName: string,
+	temp = false,
 ) {
-  try {
-    updateScarbTomlFile(selectedFolder, oldFolderName, newFolderName);
-    renameFolder(selectedFolder, newFolderName, temp);
-    updateMarkdownFiles(
-      srcFolderPath,
-      chapterNumber,
-      oldFolderName,
-      newFolderName,
-    );
-    // wait 50 ms for file system to update - bad but works
-    await new Promise((resolve) => setTimeout(resolve, 50));
-  } catch (e) {
-    console.log(e);
-  }
+	try {
+		updateScarbTomlFile(selectedFolder, oldFolderName, newFolderName);
+		renameFolder(selectedFolder, newFolderName, temp);
+		updateMarkdownFiles(
+			srcFolderPath,
+			chapterNumber,
+			oldFolderName,
+			newFolderName,
+		);
+		// wait 50 ms for file system to update - bad but works
+		await new Promise((resolve) => setTimeout(resolve, 50));
+	} catch (e) {
+		console.log(e);
+	}
 }
 
 /**
@@ -177,8 +177,8 @@ export async function renameListing(
  * @returns The chapter number as an integer, or null if no chapter number was found.
  */
 export function getChapterNumber(file: string): number | null {
-  const chapterMatch = file.match(/ch(\d+)(-\d+-[\w-]+)?/);
-  return chapterMatch ? parseInt(chapterMatch[1], 10) : null;
+	const chapterMatch = file.match(/ch(\d+)(-\d+-[\w-]+)?/);
+	return chapterMatch ? parseInt(chapterMatch[1], 10) : null;
 }
 
 /**
@@ -189,13 +189,13 @@ export function getChapterNumber(file: string): number | null {
  * @returns The name of the found folder, or null if no folder was found.
  */
 export function findFileIncludingString(
-  path: string,
-  searchString: string,
+	path: string,
+	searchString: string,
 ): string | null {
-  const listingsFolder = fs
-    .readdirSync(path)
-    .find(
-      (folder) => folder.includes(searchString) && !folder.includes("_tmp"),
-    );
-  return listingsFolder || null;
+	const listingsFolder = fs
+		.readdirSync(path)
+		.find(
+			(folder) => folder.includes(searchString) && !folder.includes("_tmp"),
+		);
+	return listingsFolder || null;
 }

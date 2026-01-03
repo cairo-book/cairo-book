@@ -43,7 +43,8 @@ book.toml               → mdBook configuration
 - Second person ("you") for instructions
 - New terms in _italics_
 - Code references in `backticks`
-- See [docs/cairo-documentation-style-guide.md](./docs/cairo-documentation-style-guide.md)
+- See
+  [docs/cairo-documentation-style-guide.md](./docs/cairo-documentation-style-guide.md)
 
 ## Contributing Cairo Code
 

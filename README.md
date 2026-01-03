@@ -16,25 +16,35 @@
 
 **[Read the Cairo Book online](https://www.starknet.io/cairo-book/)**
 
-The Cairo Programming Language Book is your comprehensive guide to mastering Cairo, the programming language for Starknet smart contracts and provable programs. Created and maintained by the Starknet community.
+The Cairo Programming Language Book is your comprehensive guide to mastering
+Cairo, the programming language for Starknet smart contracts and provable
+programs. Created and maintained by the Starknet community.
 
 ## Features
 
-The online book includes several interactive features to enhance your learning experience:
+The online book includes several interactive features to enhance your learning
+experience:
 
-- **Run Code in Browser**: Execute Cairo code snippets directly in the browser without any local setup.
-- **AI Chat Assistant**: Ask questions and get help understanding concepts with the built-in AI assistant.
-- **Version Switcher**: Access documentation for previous Cairo versions to match your project's requirements.
+- **Run Code in Browser**: Execute Cairo code snippets directly in the browser
+  without any local setup.
+- **AI Chat Assistant**: Ask questions and get help understanding concepts with
+  the built-in AI assistant.
+- **Version Switcher**: Access documentation for previous Cairo versions to
+  match your project's requirements.
 - **Code Folding**: Expand and collapse code sections to focus on what matters.
-- **Syntax Highlighting**: Proper Cairo syntax highlighting for better code readability.
+- **Syntax Highlighting**: Proper Cairo syntax highlighting for better code
+  readability.
 - **Full-Text Search**: Quickly find topics and concepts across the entire book.
-- **Multi-Language Support**: Available in English, Spanish, French, Chinese, Indonesian, and Turkish.
+- **Multi-Language Support**: Available in English, Spanish, French, Chinese,
+  Indonesian, and Turkish.
 
 ## Contribute
 
-We welcome contributions from the community! Whether you want to fix a typo, improve explanations, add examples, or translate content.
+We welcome contributions from the community! Whether you want to fix a typo,
+improve explanations, add examples, or translate content.
 
-**[Read the Development Guide](./docs/development.md)** to get started with contributing.
+**[Read the Development Guide](./docs/development.md)** to get started with
+contributing.
 
 ## Contributors
 

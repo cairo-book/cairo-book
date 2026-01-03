@@ -1,7 +1,6 @@
 # The Cairo Book
 
-[The Cairo Book](title-page.md)
-[Foreword](ch00-01-foreword.md)
+[The Cairo Book](title-page.md) [Foreword](ch00-01-foreword.md)
 [Introduction](ch00-00-introduction.md)
 
 # The Cairo Programming Language
@@ -9,7 +8,6 @@
 ## Getting Started
 
 - [Getting Started](ch01-00-getting-started.md)
-
   - [Installation](ch01-01-installation.md)
   - [Hello, World!](ch01-02-hello-world.md)
   - [Proving That A Number Is Prime](ch01-03-proving-a-prime-number.md)
@@ -52,7 +50,6 @@
 ## Managing Cairo Projects with Packages, Crates and Modules
 
 - [Managing Cairo Projects with Packages, Crates and Modules](ch07-00-managing-cairo-projects-with-packages-crates-and-modules.md)
-
   - [Packages and Crates](ch07-01-packages-and-crates.md)
   - [Defining Modules to Control Scope](ch07-02-defining-modules-to-control-scope.md)
   - [Paths for Referring to an Item in the Module Tree](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
@@ -62,21 +59,18 @@
 ## Generic Data Types
 
 - [Generic Types and Traits](ch08-00-generic-types-and-traits.md)
-
   - [Generic Data Types](ch08-01-generic-data-types.md)
   - [Traits in Cairo](ch08-02-traits-in-cairo.md)
 
 ## Error Handling
 
 - [Error Handling](ch09-00-error-handling.md)
-
   - [Unrecoverable Errors with panic](ch09-01-unrecoverable-errors-with-panic.md)
   - [Recoverable Errors with Result](ch09-02-recoverable-errors.md)
 
 ## Testing Cairo Programs
 
 - [Testing Cairo Programs](ch10-00-testing-cairo-programs.md)
-
   - [How To Write Tests](ch10-01-how-to-write-tests.md)
   - [Test Organization](ch10-02-test-organization.md)
 
@@ -89,7 +83,6 @@
 ## Advanced Cairo Features
 
 - [Advanced Cairo Features](ch12-00-advanced-features.md)
-
   - [Custom Data Structures](ch12-01-custom-data-structures.md)
   - [Smart Pointers](ch12-02-smart-pointers.md)
   - [Deref Coercion](ch12-09-deref-coercion.md)
@@ -104,7 +97,6 @@
   - [Offloading Computations with Oracles](ch12-11-offloading-computations-with-oracles.md)
 
 - [Appendix (Cairo)](appendix-00.md)
-
   - [A - Keywords](appendix-01-keywords.md)
   - [B - Operators and Symbols](appendix-02-operators-and-symbols.md)
   - [C - Derivable Traits](appendix-03-derivable-traits.md)
@@ -124,7 +116,6 @@
 ## Building Starknet Smart Contracts
 
 - [Building Starknet Smart Contracts](./ch101-00-building-starknet-smart-contracts.md)
-
   - [Starknet Types](./ch101-01-starknet-types.md)
   - [Contract Storage](./ch101-01-00-contract-storage.md)
     - [Storage Mappings](./ch101-01-01-storage-mappings.md)
@@ -135,7 +126,6 @@
 ## Starknet Cross-Contract Interactions
 
 - [Starknet Contract Interactions](./ch102-00-starknet-contract-interactions.md)
-
   - [Contract Class ABI](./ch102-01-contract-class-abi.md)
   - [Interacting with Another Contract](./ch102-02-interacting-with-another-contract.md)
   - [Executing Code from Another Class](./ch102-03-executing-code-from-another-class.md)
@@ -144,7 +134,6 @@
 ## Building Advanced Starknet Smart Contracts
 
 - [Building Advanced Starknet Smart Contracts](./ch103-00-building-advanced-starknet-smart-contracts.md)
-
   - [Optimizing Storage Costs](./ch103-01-optimizing-storage-costs.md)
   - [Composability and Components](./ch103-02-00-composability-and-components.md)
     - [Under the Hood](./ch103-02-01-under-the-hood.md)
@@ -162,7 +151,6 @@
 ## Starknet Smart Contracts Security
 
 - [Starknet Smart Contracts Security](./ch104-00-starknet-smart-contracts-security.md)
-
   - [General Recommendations](./ch104-01-general-recommendations.md)
   - [Testing Smart Contracts](./ch104-02-testing-smart-contracts.md)
   - [Static Analysis Tools](./ch104-03-static-analysis-tools.md)
@@ -184,7 +172,6 @@
 ## Memory
 
 - [Memory](ch202-00-memory.md)
-
   - [Non-Deterministic Read-only Memory](ch202-01-non-deterministic-read-only-memory.md)
   - [Segments and Relocation](ch202-02-segments.md)
 
@@ -215,7 +202,6 @@
 ## Runner
 
 - [Runner](./ch206-00-runner.md)
-
   - [Program]()
     - [Program Artifacts]()
     - [Program Parsing]()

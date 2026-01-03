@@ -1,0 +1,12 @@
+version: "0.2"
+suggestionsTimeout: 5000
+words:
+  - commitlint
+  - mdbook
+  - scarb
+  - println
+  - msvc
+  - rustup
+  - rustc
+  - rustdoc
+  - starknet

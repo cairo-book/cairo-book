@@ -1,22 +1,44 @@
 # Introduction to Segments
 
-Cairo ensures that allocated memory remains immutable after being written to, while allowing dynamic expansion of memory segments at runtime. All this is possible with organizing memory addresses into **segments**.
+Cairo ensures that allocated memory remains immutable after being written to,
+while allowing dynamic expansion of memory segments at runtime. All this is
+possible with organizing memory addresses into **segments**.
 
 The process of organizing memory addresses into segments is as follows:
-1. During runtime, It groups allocated memory addresses into segments with a unique segment identifier and an offset to indicate the continuation of the memory addresses belonging to each segment, `<segment_id>:<offset>`. This temporary value that we are marking to each memory address is called a **relocatable value**. 
 
-2. At the end of execution, the relocatable values are transformed into a single, contiguous memory address space and a separate **relocation table** is created to give context to the linear memory address space.
+1. During runtime, It groups allocated memory addresses into segments with a
+   unique segment identifier and an offset to indicate the continuation of the
+   memory addresses belonging to each segment, `<segment_id>:<offset>`. This
+   temporary value that we are marking to each memory address is called a
+   **relocatable value**.
+
+2. At the end of execution, the relocatable values are transformed into a
+   single, contiguous memory address space and a separate **relocation table**
+   is created to give context to the linear memory address space.
 
 ## Segment Values
 
 Cairo's memory model contains the following segments:
 
-- **Program Segment** = Stores the bytecode of Cairo program. Another way to say is it stores the instructions of a cairo program. Program Counter, `pc` starts at the beginning of this segment.  
-- **Execution Segment** = Stores any data while executing a Cairo program (temporary variables, function call frames, and pointers). Allocation pointer, `ap` and frame pointer, `fp` starts on this segment. 
-- **Builtin Segment** = Stores builtins that is actively used by the Cairo program. Each Cairo builtin has its own dedicated segment, allocated dynamically based on the builtins used in the program. Check out [Builtin Section](ch204-00-builtins.md) to learn more about individual builtins. 
-- **User Segment** = Stores program outputs, arrays, and dynamically allocated data structures.
+- **Program Segment** = Stores the bytecode of Cairo program. Another way to say
+  is it stores the instructions of a cairo program. Program Counter, `pc` starts
+  at the beginning of this segment.
+- **Execution Segment** = Stores any data while executing a Cairo program
+  (temporary variables, function call frames, and pointers). Allocation pointer,
+  `ap` and frame pointer, `fp` starts on this segment.
+- **Builtin Segment** = Stores builtins that is actively used by the Cairo
+  program. Each Cairo builtin has its own dedicated segment, allocated
+  dynamically based on the builtins used in the program. Check out
+  [Builtin Section](ch204-00-builtins.md) to learn more about individual
+  builtins.
+- **User Segment** = Stores program outputs, arrays, and dynamically allocated
+  data structures.
 
-*Every segment except Program Segment has a dynamic address space which means that the length of the allocated memory address space is unknown until the program has finished executing. The Program Segment is an exception as it is used to store the bytecode of the Cairo program which has a fixed size during execution.*
+_Every segment except Program Segment has a dynamic address space which means
+that the length of the allocated memory address space is unknown until the
+program has finished executing. The Program Segment is an exception as it is
+used to store the bytecode of the Cairo program which has a fixed size during
+execution._
 
 ## Segment Layout
 
@@ -27,11 +49,16 @@ The layout of Cairo memory is ordered by segments in the following order:
 3. **Segment 2 to x** = Builtin Segments
 4. **Segment x + 1 to y** = User Segments
 
-*The number of builtin and user segments are dynamic and depends on the type of program.*
+_The number of builtin and user segments are dynamic and depends on the type of
+program._
 
 # Relocation
 
-To understand the overall process of how memory is handled throughout the execution of a Cairo program, we will be looking at an example of Cairo Zero program and how its segments are defined during runtime with relocatable values and how the memory addresses are relocated to one contiguous memory address space at the end of execution.
+To understand the overall process of how memory is handled throughout the
+execution of a Cairo program, we will be looking at an example of Cairo Zero
+program and how its segments are defined during runtime with relocatable values
+and how the memory addresses are relocated to one contiguous memory address
+space at the end of execution.
 
 **Cairo Zero program:**
 
@@ -45,23 +72,26 @@ func main(output_ptr: felt*) -> (output_ptr: felt*) {
     [ap] = 100, ap++;
     [ap] = [ap - 2] + [ap - 1], ap++;
 
-    // We set value of output_ptr to the address of where the output will be stored.  
-    // This is part of the output builtin requirement. 
+    // We set value of output_ptr to the address of where the output will be stored.
+    // This is part of the output builtin requirement.
     [ap] = output_ptr, ap++;
 
     // Asserts that output_ptr equals to 110.
     assert [output_ptr] = 110;
 
     // Returns the output_ptr + 1 as the next unused memory address.
-    return (output_ptr=output_ptr + 1); 
+    return (output_ptr=output_ptr + 1);
 }
 ```
 
-*The output builtin allows the final output to be stored in a new segment.* 
+_The output builtin allows the final output to be stored in a new segment._
 
-The Cairo Zero program stores three values which are `10`, `100` and `110`(addition of `10` and `100`) and these values are stored in three different memory addresses under Segment 1. 
+The Cairo Zero program stores three values which are `10`, `100` and
+`110`(addition of `10` and `100`) and these values are stored in three different
+memory addresses under Segment 1.
 
-Using the output builtin, the final output is stored in a new segment in Segment 2. 
+Using the output builtin, the final output is stored in a new segment in
+Segment 2.
 
 **The relocatable values are :**
 
@@ -102,7 +132,9 @@ Addr  Value
 
 ```
 
-Once the program is finished executing,the relocatable values turn into one contiguous memory address space with the help of the relocation table to give context to the linear memory address space.
+Once the program is finished executing,the relocatable values turn into one
+contiguous memory address space with the help of the relocation table to give
+context to the linear memory address space.
 
 **From relocation value to one contiguous memory address space:**
 
@@ -145,10 +177,5 @@ segment_id  starting_index
 4            23
 ```
 
-The relocation table gives context for the prover on which index a new segment starts by labeling the segment identifier with its own starting index. 
-
-
-
-
-
-
+The relocation table gives context for the prover on which index a new segment
+starts by labeling the segment identifier with its own starting index.

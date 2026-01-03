@@ -52,10 +52,13 @@ jobs:
           curl -L https://raw.githubusercontent.com/software-mansion/universal-sierra-compiler/master/scripts/install.sh | sh
 
       - name: Set default scarb version
-        run: asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
+        run:
+          asdf set -u scarb $(cat .tool-versions | grep scarb | cut -d ' ' -f 2)
 
       - name: Set default starknet-foundry version
-        run: asdf set -u starknet-foundry $(cat .tool-versions | grep starknet-foundry | cut -d ' ' -f 2)
+        run:
+          asdf set -u starknet-foundry $(cat .tool-versions | grep
+          starknet-foundry | cut -d ' ' -f 2)
 
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2
@@ -67,7 +70,9 @@ jobs:
           path: |
             ~/.cargo/bin
             ~/.local/bin
-          key: mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions', '.github/workflows/install-mdbook/action.yml') }}
+          key:
+            mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions',
+            '.github/workflows/install-mdbook/action.yml') }}
 
       - name: Install mdbook and dependencies
         if: steps.cache-mdbook.outputs.cache-hit != 'true'
@@ -84,7 +89,8 @@ jobs:
 
       - name: Install cairo-listings
         if: steps.cache-mdbook.outputs.cache-hit != 'true'
-        run: cargo install --git https://github.com/enitrat/cairo-listings --locked
+        run:
+          cargo install --git https://github.com/enitrat/cairo-listings --locked
         shell: bash
 
       - name: Run cairo-listings and generate summary

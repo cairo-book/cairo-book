@@ -1,6 +1,7 @@
 # Development Guide
 
-This guide covers everything you need to know to contribute to The Cairo Programming Language Book.
+This guide covers everything you need to know to contribute to The Cairo
+Programming Language Book.
 
 ## Getting Started
 
@@ -10,12 +11,14 @@ Ensure you have the following installed:
 
 - **Rust toolchain**: Install via [rustup](https://rustup.rs/)
 - **asdf** (recommended): For version management of Scarb and Starknet Foundry
-- **gettext**: For translations (`sudo apt install gettext` on Linux, `brew install gettext` on macOS)
+- **gettext**: For translations (`sudo apt install gettext` on Linux,
+  `brew install gettext` on macOS)
 - **Node.js**: For helper scripts — or `bun` if you prefer.
 
 ### Tool Versions
 
-The project uses specific tools, whose versions are defined and updated in `.tool-versions`:
+The project uses specific tools, whose versions are defined and updated in
+`.tool-versions`:
 
 - **Scarb**
 - **Starknet Foundry**
@@ -98,7 +101,9 @@ cairo-book/
 
 ### Style and Tone
 
-Follow the [Cairo Documentation Style Guide](./cairo-documentation-style-guide.md) and the [Contribution Guide](./CONTRIBUTING.md) for writing guidelines.
+Follow the
+[Cairo Documentation Style Guide](./cairo-documentation-style-guide.md) and the
+[Contribution Guide](./CONTRIBUTING.md) for writing guidelines.
 
 Key points:
 
@@ -109,7 +114,8 @@ Key points:
 
 ### Adding New Chapters
 
-1. Create the markdown file in `src/` following the naming convention: `ch01-01-section-name.md`
+1. Create the markdown file in `src/` following the naming convention:
+   `ch01-01-section-name.md`
 2. Add the chapter to `src/SUMMARY.md`
 3. Create corresponding code listings in `listings/`
 
@@ -147,7 +153,8 @@ Then reference:
 {{#rustdoc_include ../listings/ch01-getting-started/my_example/src/lib.cairo:main}}
 ```
 
-Using `rustdoc_include` to include the specific function allows the user to selectively expand the code example to see the full code.
+Using `rustdoc_include` to include the specific function allows the user to
+selectively expand the code example to see the full code.
 
 ### TAG Comment System
 
@@ -223,7 +230,8 @@ Every PR runs these checks:
 Pushes to `main` trigger automatic deployment:
 
 1. Book is built with `mdbook build`
-2. Translations are built for: Spanish (es), French (fr), Chinese (zh-cn), Indonesian (id), Turkish (tr)
+2. Translations are built for: Spanish (es), French (fr), Chinese (zh-cn),
+   Indonesian (id), Turkish (tr)
 3. Content is deployed to the `gh-pages` branch
 4. Live at [starknet.io/cairo-book](https://www.starknet.io/cairo-book/)
 
@@ -290,13 +298,16 @@ Translations are managed in the `po/` directory. The book supports:
 - Indonesian (id)
 - Turkish (tr)
 
-See the [mdbook-i18n-helpers](https://github.com/nicosantangelo/mdbook-i18n-helpers) documentation for translation workflows.
+See the
+[mdbook-i18n-helpers](https://github.com/nicosantangelo/mdbook-i18n-helpers)
+documentation for translation workflows.
 
 ## Troubleshooting
 
 ### mdbook-quiz-cairo Issues
 
-If quizzes fail to build, you can remove the preprocessor from `book.toml` for local development:
+If quizzes fail to build, you can remove the preprocessor from `book.toml` for
+local development:
 
 ```toml
 # Comment out or remove:
