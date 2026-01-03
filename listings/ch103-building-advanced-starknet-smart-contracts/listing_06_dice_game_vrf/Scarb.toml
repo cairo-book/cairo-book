@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024_07"
 
 [dependencies]
-cartridge_vrf = { git = "https://github.com/cartridge-gg/vrf", rev = "f748d4acab736464dcd96c5a4d047ed3aeb63801" }
+cartridge_vrf = { git = "https://github.com/cartridge-gg/vrf", rev = "f748d4a" }
 starknet = "2.13.1"
 openzeppelin = "2.0.0"
 
