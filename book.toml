@@ -28,14 +28,7 @@ additional-css = [
   "theme/css/chat.css",
   "theme/css/version-switcher.css",
 ]
-additional-js = [
-  "theme/chat.js",
-  "theme/js/index.mjs",
-  "theme/js/version-switcher.js",
-  "theme/wasm-cairo/pkg/wasm-cairo.js",
-  "theme/wasm-cairo/pkg/wasm-cairo_bg.wasm",
-  "theme/wasm-cairo/worker.cjs",
-]
+additional-js = ["theme/chat.js", "theme/js/version-switcher.js"]
 mathjax-support = true
 
 # Redirects to avoid dead links
