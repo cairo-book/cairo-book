@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,10 +274,13 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="bringing-paths-into-scope-with-the-use-keyword"><a class="header" href="#bringing-paths-into-scope-with-the-use-keyword">Bringing Paths into Scope with the <code>use</code> Keyword</a></h1>
-<p>Having to write out the paths to call functions can feel inconvenient and repetitive. Fortunately, there’s a way to simplify this process: we can create a shortcut to a path with the <code>use</code> keyword once, and then use the shorter name everywhere else in the scope.</p>
-<p>In Listing 7-7, we bring the <code>crate::front_of_house::hosting</code> module into the
-scope of the <code>eat_at_restaurant</code> function so we only have to specify
-<code>hosting::add_to_waitlist</code> to call the <code>add_to_waitlist</code> function in
+<p>Having to write out the paths to call functions can feel inconvenient and
+repetitive. Fortunately, there’s a way to simplify this process: we can create a
+shortcut to a path with the <code>use</code> keyword once, and then use the shorter name
+everywhere else in the scope.</p>
+<p>In Listing 7-7, we bring the <code>crate::front_of_house::hosting</code>
+module into the scope of the <code>eat_at_restaurant</code> function so we only have to
+specify <code>hosting::add_to_waitlist</code> to call the <code>add_to_waitlist</code> function in
 <code>eat_at_restaurant</code>.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">// section "Defining Modules to Control Scope"
@@ -292,10 +296,15 @@ pub fn eat_at_restaurant() {
     hosting::add_to_waitlist(); // ✅ Shorter path
 }
 </code></pre>
-<p><span class="caption">Listing 7-7: Bringing a module into scope with <code>use</code></span></p>
-<p>Adding <code>use</code> and a path in a scope is similar to creating a symbolic link in the filesystem. By adding <code>use crate::front_of_house::hosting;</code> in the crate root, <code>hosting</code> is now a valid name in that scope, just as though the <code>hosting</code> module had been defined in the crate root.</p>
-<p>Note that <code>use</code> only creates the shortcut for the particular scope in which the <code>use</code> occurs. Listing 7-8 moves the <code>eat_at_restaurant</code> function into a new child module named <code>customer</code>, which is then a different scope than the <code>use</code>
-statement, so the function body won’t compile:</p>
+<p>Bringing a module into scope with <code>use</code></span></p>
+<p>Adding <code>use</code> and a path in a scope is similar to creating a symbolic link in the
+filesystem. By adding <code>use crate::front_of_house::hosting;</code> in the crate root,
+<code>hosting</code> is now a valid name in that scope, just as though the <code>hosting</code> module
+had been defined in the crate root.</p>
+<p>Note that <code>use</code> only creates the shortcut for the particular scope in which the
+<code>use</code> occurs. Listing 7-8 moves the <code>eat_at_restaurant</code> function
+into a new child module named <code>customer</code>, which is then a different scope than
+the <code>use</code> statement, so the function body won’t compile:</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">mod front_of_house {
     pub mod hosting {
@@ -310,8 +319,9 @@ mod customer {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 7-8: A <code>use</code> statement only applies in the scope it’s in.</span></p>
-<p>The compiler error shows that the shortcut no longer applies within the <code>customer</code> module:</p>
+<p>statement only applies in the scope it’s in.</span></p>
+<p>The compiler error shows that the shortcut no longer applies within the
+<code>customer</code> module:</p>
 <pre><code class="language-shell">$ scarb build 
    Compiling listing_07_05 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/Scarb.toml)
 warn: Unused import: `listing_07_05::hosting`
@@ -328,9 +338,11 @@ error: could not compile `listing_07_05` due to previous error
 
 </code></pre>
 <h2 id="creating-idiomatic-use-paths"><a class="header" href="#creating-idiomatic-use-paths">Creating Idiomatic <code>use</code> Paths</a></h2>
-<p>In Listing 7-7, you might have wondered why we specified <code>use crate::front_of_house::hosting</code>
-and then called <code>hosting::add_to_waitlist</code> in <code>eat_at_restaurant</code> rather than specifying the <code>use</code> path all the way out to
-the <code>add_to_waitlist</code> function to achieve the same result, as in Listing 7-9.</p>
+<p>In Listing 7-7, you might have wondered why we specified
+<code>use crate::front_of_house::hosting</code> and then called <code>hosting::add_to_waitlist</code>
+in <code>eat_at_restaurant</code> rather than specifying the <code>use</code> path all the way out to
+the <code>add_to_waitlist</code> function to achieve the same result, as in Listing
+7-9.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">mod front_of_house {
     pub mod hosting {
@@ -343,15 +355,20 @@ pub fn eat_at_restaurant() {
     add_to_waitlist();
 }
 </code></pre>
-<p><span class="caption">Listing 7-9: Bringing the <code>add_to_waitlist</code> function into scope with <code>use</code>, which is unidiomatic</span></p>
-<p>Although both Listing 7-7 and 7-9 accomplish the same task, Listing 7-7 is
-the idiomatic way to bring a function into scope with <code>use</code>. Bringing the
-function’s parent module into scope with <code>use</code> means we have to specify the
-parent module when calling the function. Specifying the parent module when
-calling the function makes it clear that the function isn’t locally defined
-while still minimizing repetition of the full path. The code in Listing 7-9 is
-unclear as to where <code>add_to_waitlist</code> is defined.</p>
-<p>On the other hand, when bringing in structs, enums, traits, and other items with <code>use</code>, it’s idiomatic to specify the full path. Listing 7-10 shows the idiomatic way to bring the core library’s <code>BitSize</code> trait into the scope, allowing to call <code>bits</code> method to retrieve the size in bits of a type.</p>
+<p>7-9: Bringing the <code>add_to_waitlist</code> function into scope
+with <code>use</code>, which is unidiomatic</span></p>
+<p>Although both Listing 7-7 and 7-9
+accomplish the same task, Listing 7-7 is the idiomatic way to
+bring a function into scope with <code>use</code>. Bringing the function’s parent module
+into scope with <code>use</code> means we have to specify the parent module when calling
+the function. Specifying the parent module when calling the function makes it
+clear that the function isn’t locally defined while still minimizing repetition
+of the full path. The code in Listing 7-9 is unclear as to
+where <code>add_to_waitlist</code> is defined.</p>
+<p>On the other hand, when bringing in structs, enums, traits, and other items with
+<code>use</code>, it’s idiomatic to specify the full path. Listing 7-10
+shows the idiomatic way to bring the core library’s <code>BitSize</code> trait into the
+scope, allowing to call <code>bits</code> method to retrieve the size in bits of a type.</p>
 <pre><code class="language-cairo">use core::num::traits::BitSize;
 
 #[executable]
@@ -360,16 +377,18 @@ fn main() {
     println!("A u8 variable has {} bits", u8_size)
 }
 </code></pre>
-<p><span class="caption">Listing 7-10: Bringing <code>BitSize</code> trait into scope in an idiomatic way</span></p>
+<p>Bringing <code>BitSize</code> trait into scope in an idiomatic way</span></p>
 <p>There’s no strong reason behind this idiom: it’s just the convention that has
-emerged in the Rust community, and folks have gotten used to reading and writing Rust code this way.
-As Cairo shares many idioms with Rust, we follow this convention as well.</p>
+emerged in the Rust community, and folks have gotten used to reading and writing
+Rust code this way. As Cairo shares many idioms with Rust, we follow this
+convention as well.</p>
 <p>The exception to this idiom is if we’re bringing two items with the same name
 into scope with <code>use</code> statements, because Cairo doesn’t allow that.</p>
 <h3 id="providing-new-names-with-the-as-keyword"><a class="header" href="#providing-new-names-with-the-as-keyword">Providing New Names with the <code>as</code> Keyword</a></h3>
 <p>There’s another solution to the problem of bringing two types of the same name
 into the same scope with <code>use</code>: after the path, we can specify <code>as</code> and a new
-local name, or <em>alias</em>, for the type. Listing 7-11 shows how you can rename an import with <code>as</code>:</p>
+local name, or <em>alias</em>, for the type. Listing 7-11 shows how you
+can rename an import with <code>as</code>:</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">use core::array::ArrayTrait as Arr;
 
@@ -379,13 +398,14 @@ fn main() {
     arr.append(1);
 }
 </code></pre>
-<p><span class="caption">Listing 7-11: Renaming a trait when it’s brought into scope with the <code>as</code> keyword</span></p>
-<p>Here, we brought <code>ArrayTrait</code> into scope with the alias <code>Arr</code>. We can now access the trait's methods with the <code>Arr</code> identifier.</p>
+<p>Renaming a trait when it’s brought into scope with the <code>as</code> keyword</span></p>
+<p>Here, we brought <code>ArrayTrait</code> into scope with the alias <code>Arr</code>. We can now access
+the trait's methods with the <code>Arr</code> identifier.</p>
 <h3 id="importing-multiple-items-from-the-same-module"><a class="header" href="#importing-multiple-items-from-the-same-module">Importing Multiple Items from the Same Module</a></h3>
-<p>When you want to import multiple items (like functions, structs or enums)
-from the same module in Cairo, you can use curly braces <code>{}</code> to list all of
-the items that you want to import. This helps to keep your code clean and easy
-to read by avoiding a long list of individual <code>use</code> statements.</p>
+<p>When you want to import multiple items (like functions, structs or enums) from
+the same module in Cairo, you can use curly braces <code>{}</code> to list all of the items
+that you want to import. This helps to keep your code clean and easy to read by
+avoiding a long list of individual <code>use</code> statements.</p>
 <p>The general syntax for importing multiple items from the same module is:</p>
 <pre><code class="language-cairo">use module::{item1, item2, item3};
 </code></pre>
@@ -422,13 +442,15 @@ fn main() {
     // ...
 }
 </code></pre>
-<p><span class="caption">Listing 7-12: Importing multiple items from the same module</span></p>
+<p>7-12: Importing multiple items from the same module</span></p>
 <h2 id="re-exporting-names-in-module-files"><a class="header" href="#re-exporting-names-in-module-files">Re-exporting Names in Module Files</a></h2>
 <p>When we bring a name into scope with the <code>use</code> keyword, the name available in
 the new scope can be imported as if it had been defined in that code’s scope.
-This technique is called <em>re-exporting</em> because we’re bringing an item into scope,
-but also making that item available for others to bring into their scope, with the <code>pub</code> keyword.</p>
-<p>For example, let's re-export the <code>add_to_waitlist</code> function in the restaurant example:</p>
+This technique is called <em>re-exporting</em> because we’re bringing an item into
+scope, but also making that item available for others to bring into their scope,
+with the <code>pub</code> keyword.</p>
+<p>For example, let's re-export the <code>add_to_waitlist</code> function in the restaurant
+example:</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">mod front_of_house {
     pub mod hosting {
@@ -442,11 +464,13 @@ fn eat_at_restaurant() {
     hosting::add_to_waitlist();
 }
 </code></pre>
-<p><span class="caption">Listing 7-13: Making a name available for any code to use from a new scope with <code>pub use</code></span></p>
+<p>Making a name available for any code to use from a new scope with
+<code>pub use</code></span></p>
 <p>Before this change, external code would have to call the <code>add_to_waitlist</code>
-function by using the path <code>restaurant::front_of_house::hosting::add_to_waitlist()</code>.
-Now that this <code>pub use</code> has re-exported the <code>hosting</code> module from the root module, external code
-can now use the path <code>restaurant::hosting::add_to_waitlist()</code> instead.</p>
+function by using the path
+<code>restaurant::front_of_house::hosting::add_to_waitlist()</code>. Now that this
+<code>pub use</code> has re-exported the <code>hosting</code> module from the root module, external
+code can now use the path <code>restaurant::hosting::add_to_waitlist()</code> instead.</p>
 <p>Re-exporting is useful when the internal structure of your code is different
 from how programmers calling your code would think about the domain. For
 example, in this restaurant metaphor, the people running the restaurant think
@@ -456,18 +480,34 @@ probably won’t think about the parts of the restaurant in those terms. With
 structure. Doing so makes our library well organized for programmers working on
 the library and programmers calling the library.</p>
 <h2 id="using-external-packages-in-cairo-with-scarb"><a class="header" href="#using-external-packages-in-cairo-with-scarb">Using External Packages in Cairo with Scarb</a></h2>
-<p>You might need to use external packages to leverage the functionality provided by the community. Scarb allows you to use dependencies by cloning packages from their Git repositories. To use an external package in your project with Scarb, simply declare the Git repository URL of the dependency you want to add in a dedicated <code>[dependencies]</code> section in your <em>Scarb.toml</em> configuration file. Note that the URL might correspond to the main branch, or any specific commit, branch or tag. For this, you will have to pass an extra <code>rev</code>, <code>branch</code>, or <code>tag</code> field, respectively. For example, the following code imports the main branch of <em>alexandria_math</em> crate from <em>alexandria</em> package:</p>
+<p>You might need to use external packages to leverage the functionality provided
+by the community. Scarb allows you to use dependencies by cloning packages from
+their Git repositories. To use an external package in your project with Scarb,
+simply declare the Git repository URL of the dependency you want to add in a
+dedicated <code>[dependencies]</code> section in your <em>Scarb.toml</em> configuration file. Note
+that the URL might correspond to the main branch, or any specific commit, branch
+or tag. For this, you will have to pass an extra <code>rev</code>, <code>branch</code>, or <code>tag</code>
+field, respectively. For example, the following code imports the main branch of
+<em>alexandria_math</em> crate from <em>alexandria</em> package:</p>
 <pre><code class="language-cairo">[dependencies]
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
 </code></pre>
-<p>while the following code imports a specific branch (which is deprecated and should not be used):</p>
+<p>while the following code imports a specific branch (which is deprecated and
+should not be used):</p>
 <pre><code class="language-cairo">[dependencies]
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git", branch = "cairo-v2.3.0-rc0" }
 </code></pre>
-<p>If you want to import multiple packages in your project, you need to create only one <code>[dependencies]</code> section and list all the desired packages beneath it. You can also specify development dependencies by declaring a <code>[dev-dependencies]</code> section.</p>
-<p>After that, simply run <code>scarb build</code> to fetch all external dependencies and compile your package with all the dependencies included.</p>
-<p>Note that it is also possible to add dependencies with the <code>scarb add</code> command, which will automatically edit the <em>Scarb.toml</em> file for you. For development dependencies, just use the <code>scarb add --dev</code> command.</p>
-<p>To remove a dependency, simply remove the corresponding line from your <em>Scarb.toml</em> file, or use the <code>scarb rm</code> command.</p>
+<p>If you want to import multiple packages in your project, you need to create only
+one <code>[dependencies]</code> section and list all the desired packages beneath it. You
+can also specify development dependencies by declaring a <code>[dev-dependencies]</code>
+section.</p>
+<p>After that, simply run <code>scarb build</code> to fetch all external dependencies and
+compile your package with all the dependencies included.</p>
+<p>Note that it is also possible to add dependencies with the <code>scarb add</code> command,
+which will automatically edit the <em>Scarb.toml</em> file for you. For development
+dependencies, just use the <code>scarb add --dev</code> command.</p>
+<p>To remove a dependency, simply remove the corresponding line from your
+<em>Scarb.toml</em> file, or use the <code>scarb rm</code> command.</p>
 <h2 id="the-glob-operator"><a class="header" href="#the-glob-operator">The Glob Operator</a></h2>
 <p>If we want to bring <em>all</em> public items defined in a path into scope, we can
 specify that path followed by the <code>*</code> glob operator:</p>
@@ -477,10 +517,10 @@ specify that path followed by the <code>*</code> glob operator:</p>
 <span class="boring">}</span></code></pre></pre>
 <p>This <code>use</code> statement brings all public items defined in <code>core::num::traits</code> into
 the current scope. Be careful when using the glob operator! Glob can make it
-harder to tell what names are in scope and where a name used in your program
-was defined.</p>
-<p>The glob operator is often used when testing to bring everything under test
-into the <code>tests</code> module; we’ll talk about that in the <a href="./ch10-01-how-to-write-tests.html">“How to Write
+harder to tell what names are in scope and where a name used in your program was
+defined.</p>
+<p>The glob operator is often used when testing to bring everything under test into
+the <code>tests</code> module; we’ll talk about that in the <a href="./ch10-01-how-to-write-tests.html">“How to Write
 Tests”</a> section in Chapter 10.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch07-04-bringing-paths-into-scope&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;`use` allows references to items in the used path that are shorter than without `use`, reducing the verbosity of references.\n&quot;,&quot;id&quot;:&quot;446098fa-3695-43e9-8d70-a160188b1c30&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`use` reduces the verbosity of referring to items in the used path&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`use` copies the contents of an item from one module to another&quot;,&quot;`use` indicates to the compiler that an item will be used and should be optimized&quot;,&quot;`use` allows access to items that circumvents normal privacy rules&quot;],&quot;prompt&quot;:&quot;Which of the following statements best describes the function of the `use` keyword?\n&quot;}},{&quot;context&quot;:&quot;There are two paths to `a`: `parent::a` and `a`.\nThere is no path to `b`, because it is private.\nThere are two paths to `c`: `parent::child::c`, and `alias::c`.\n&quot;,&quot;id&quot;:&quot;21fd3314-cf90-4b32-9223-d5d773f484dd&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;4&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Consider this module and `use` statement:\n```\npub mod parent {\n    pub fn a() {}\n\n    fn b() {}\n\n    pub mod child {\n        pub fn c() {}\n    }\n}\n\nuse parent::{a, child as alias};\n\n#[executable]\nfn main() {\n    // here\n}\n```\nInside `main`, what is the total number of paths that can refer to `a`, `b`, or `c` (not including those that use `self` and `super`)?\nWrite your answer as a digit such as 0 or 1.\nFor example, if the only two valid paths were `a` and `parent::b`, then the answer would be 2.\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
@@ -518,24 +558,6 @@ Tests”</a> section in Chapter 10.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

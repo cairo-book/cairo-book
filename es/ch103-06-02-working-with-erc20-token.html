@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,11 +274,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="working-with-erc20-tokens"><a class="header" href="#working-with-erc20-tokens">Working with ERC20 Tokens</a></h1>
-<p>The ERC20 standard on Starknet provides a uniform interface for fungible tokens. This ensures that any fungible token can be used in a predictable way across the ecosystem. This section explores how to create ERC20 tokens using OpenZeppelin Contracts for Cairo, which is an audited implementation of the standard.</p>
+<p>The ERC20 standard on Starknet provides a uniform interface for fungible tokens.
+This ensures that any fungible token can be used in a predictable way across the
+ecosystem. This section explores how to create ERC20 tokens using OpenZeppelin
+Contracts for Cairo, which is an audited implementation of the standard.</p>
 <blockquote>
-<p>Note: While the Openzeppelin components are audited, you should always test and ensure that your code cannot be exploited. Examples provided in this section are for educational purposes only and cannot be used in production.</p>
+<p>Note: While the Openzeppelin components are audited, you should always test
+and ensure that your code cannot be exploited. Examples provided in this
+section are for educational purposes only and cannot be used in production.</p>
 </blockquote>
-<p>First, we will build a basic ERC20 token with a fixed supply. This contract demonstrates the core structure for creating a token using OpenZeppelin's components.</p>
+<p>First, we will build a basic ERC20 token with a fixed supply. This contract
+demonstrates the core structure for creating a token using OpenZeppelin's
+components.</p>
 <h2 id="the-basic-erc20-contract"><a class="header" href="#the-basic-erc20-contract">The Basic ERC20 Contract</a></h2>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 pub mod BasicERC20 {
@@ -314,15 +322,33 @@ pub mod BasicERC20 {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 17-9: A basic ERC20 token implementation using OpenZeppelin</span></p>
+<p>basic ERC20 token implementation using OpenZeppelin</span></p>
 <h3 id="understanding-the-implementation"><a class="header" href="#understanding-the-implementation">Understanding the Implementation</a></h3>
-<p>This contract is built using OpenZeppelin's component system. It embeds the <code>ERC20Component</code>, which contains all the core logic for an ERC20 token, including functions for transfers, approvals, and balance tracking. To make these functions directly available on the contract, we implement the <code>ERC20MixinImpl</code> trait. This pattern avoids the need to write boilerplate code for each function in the ERC20 interface.</p>
-<p>When the contract is deployed, its constructor is called. The constructor first initializes the token's metadata—its name and symbol—by calling the <code>initializer</code> function on the ERC20 component. It then mints the entire initial supply and assigns it to the address that deployed the contract. Since there are no other functions to create new tokens, the total supply is fixed from the moment of deployment.</p>
-<p>The contract's storage is minimal, and only contains the state of the <code>ERC20Component</code>. This includes mappings to track token balances and allowances, as well as the token's name, symbol, and total supply, but is abstracted from the perspective of the contract.</p>
-<p>The contract we just implemented is rather simple: it is a fixed-supply token, with no additional features. But we can also use the OpenZeppelin components libraries to build more complex tokens!</p>
-<p>The following examples show how to add new functionalities while maintaining compliance with the ERC20 standard.</p>
+<p>This contract is built using OpenZeppelin's component system. It embeds the
+<code>ERC20Component</code>, which contains all the core logic for an ERC20 token,
+including functions for transfers, approvals, and balance tracking. To make
+these functions directly available on the contract, we implement the
+<code>ERC20MixinImpl</code> trait. This pattern avoids the need to write boilerplate code
+for each function in the ERC20 interface.</p>
+<p>When the contract is deployed, its constructor is called. The constructor first
+initializes the token's metadata—its name and symbol—by calling the
+<code>initializer</code> function on the ERC20 component. It then mints the entire initial
+supply and assigns it to the address that deployed the contract. Since there are
+no other functions to create new tokens, the total supply is fixed from the
+moment of deployment.</p>
+<p>The contract's storage is minimal, and only contains the state of the
+<code>ERC20Component</code>. This includes mappings to track token balances and allowances,
+as well as the token's name, symbol, and total supply, but is abstracted from
+the perspective of the contract.</p>
+<p>The contract we just implemented is rather simple: it is a fixed-supply token,
+with no additional features. But we can also use the OpenZeppelin components
+libraries to build more complex tokens!</p>
+<p>The following examples show how to add new functionalities while maintaining
+compliance with the ERC20 standard.</p>
 <h3 id="mintable-and-burnable-token"><a class="header" href="#mintable-and-burnable-token">Mintable and Burnable Token</a></h3>
-<p>This extension adds functions to mint new tokens and burn existing ones, allowing the token supply to change after deployment. This is useful for tokens whose supply needs to be adjusted based on protocol activity or governance.</p>
+<p>This extension adds functions to mint new tokens and burn existing ones,
+allowing the token supply to change after deployment. This is useful for tokens
+whose supply needs to be adjusted based on protocol activity or governance.</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 pub mod MintableBurnableERC20 {
     use openzeppelin::access::ownable::OwnableComponent;
@@ -383,12 +409,22 @@ pub mod MintableBurnableERC20 {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 17-10: ERC20 with mint and burn capabilities</span></p>
-<p>This contract introduces the <code>OwnableComponent</code> to manage access control. The address that deploys the contract becomes its owner. The <code>mint</code> function is restricted to the owner, who can create new tokens and assign them to any address, thereby increasing the total supply.</p>
-<p>The <code>burn</code> function allows any token holder to destroy their own tokens. This action permanently removes the tokens from circulation and reduces the total supply.</p>
-<p>To make these functions exposed to the public, we simply mark them as <code>#[external]</code> in the contract. They become part of the contract's entrypoint, and anyone can call them.</p>
+<p>17-10: ERC20 with mint and burn capabilities</span></p>
+<p>This contract introduces the <code>OwnableComponent</code> to manage access control. The
+address that deploys the contract becomes its owner. The <code>mint</code> function is
+restricted to the owner, who can create new tokens and assign them to any
+address, thereby increasing the total supply.</p>
+<p>The <code>burn</code> function allows any token holder to destroy their own tokens. This
+action permanently removes the tokens from circulation and reduces the total
+supply.</p>
+<p>To make these functions exposed to the public, we simply mark them as
+<code>#[external]</code> in the contract. They become part of the contract's entrypoint,
+and anyone can call them.</p>
 <h3 id="pausable-token-with-access-control"><a class="header" href="#pausable-token-with-access-control">Pausable Token with Access Control</a></h3>
-<p>This second extension introduces a more complex security model with role-based permissions and an emergency pause feature. This pattern is useful for protocols that need fine-grained control over operations and a way to halt activities during a crisis (e.g. a security incident).</p>
+<p>This second extension introduces a more complex security model with role-based
+permissions and an emergency pause feature. This pattern is useful for protocols
+that need fine-grained control over operations and a way to halt activities
+during a crisis (e.g. a security incident).</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 pub mod PausableERC20 {
     use openzeppelin::access::accesscontrol::AccessControlComponent;
@@ -499,13 +535,30 @@ pub mod PausableERC20 {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 17-11: ERC20 with pausable transfers and role-based access control</span></p>
-<p>This implementation combines four components: <code>ERC20Component</code> for token functions, <code>AccessControlComponent</code> for managing roles, <code>PausableComponent</code> for the emergency stop mechanism, and <code>SRC5Component</code> for interface detection. The contract defines two roles: <code>PAUSER_ROLE</code>, which can pause and unpause the contract, and <code>MINTER_ROLE</code>, which can create new tokens.</p>
-<p>Unlike a single owner, this role-based system allows for the separation of administrative duties. The main administrator can grant the <code>PAUSER_ROLE</code> to a security team and the <code>MINTER_ROLE</code> to a treasury manager.</p>
-<p>The pause functionality is integrated into the token's transfer logic using a hook system. The contract implements the <code>ERC20HooksTrait</code>, and its <code>before_update</code> function is automatically called before any token transfer or approval. This function checks if the contract is paused. If an address with the <code>PAUSER_ROLE</code> has paused the contract, all transfers are blocked until it is unpaused. This hook system is an elegant way of extending the base functionalities of the ERC20 standard functions, without re-defining them.</p>
-<p>At deployment, the constructor grants all roles to the deployer, who can then delegate these roles to other addresses as needed.</p>
-<p>These extended implementations show how OpenZeppelin's components can be combined to build complex and secure contracts. By starting with standard, audited components, developers can add custom features without compromising on security or standards compliance.</p>
-<p>For more advanced features and detailed documentation, refer to the <a href="https://docs.openzeppelin.com/contracts-cairo/">OpenZeppelin Contracts for Cairo documentation</a>.</p>
+<p>ERC20 with pausable transfers and role-based access control</span></p>
+<p>This implementation combines four components: <code>ERC20Component</code> for token
+functions, <code>AccessControlComponent</code> for managing roles, <code>PausableComponent</code> for
+the emergency stop mechanism, and <code>SRC5Component</code> for interface detection. The
+contract defines two roles: <code>PAUSER_ROLE</code>, which can pause and unpause the
+contract, and <code>MINTER_ROLE</code>, which can create new tokens.</p>
+<p>Unlike a single owner, this role-based system allows for the separation of
+administrative duties. The main administrator can grant the <code>PAUSER_ROLE</code> to a
+security team and the <code>MINTER_ROLE</code> to a treasury manager.</p>
+<p>The pause functionality is integrated into the token's transfer logic using a
+hook system. The contract implements the <code>ERC20HooksTrait</code>, and its
+<code>before_update</code> function is automatically called before any token transfer or
+approval. This function checks if the contract is paused. If an address with the
+<code>PAUSER_ROLE</code> has paused the contract, all transfers are blocked until it is
+unpaused. This hook system is an elegant way of extending the base
+functionalities of the ERC20 standard functions, without re-defining them.</p>
+<p>At deployment, the constructor grants all roles to the deployer, who can then
+delegate these roles to other addresses as needed.</p>
+<p>These extended implementations show how OpenZeppelin's components can be
+combined to build complex and secure contracts. By starting with standard,
+audited components, developers can add custom features without compromising on
+security or standards compliance.</p>
+<p>For more advanced features and detailed documentation, refer to the
+<a href="https://docs.openzeppelin.com/contracts-cairo/">OpenZeppelin Contracts for Cairo documentation</a>.</p>
 
                     </main>
 
@@ -541,24 +594,6 @@ pub mod PausableERC20 {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

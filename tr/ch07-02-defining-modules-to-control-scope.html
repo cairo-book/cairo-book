@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -281,10 +282,10 @@ organizing your code in the future. Then we’ll explain each of the rules in
 detail.</p>
 <h2 id="modules-cheat-sheet"><a class="header" href="#modules-cheat-sheet">Modules Cheat Sheet</a></h2>
 <p>Here we provide a quick reference on how modules, paths and the <code>use</code> keyword
-work in the compiler, and how most developers organize their
-code. We’ll be going through examples of each of these rules throughout this
-chapter, but this is a great place to refer to as a reminder of how modules
-work. You can create a new Scarb project with <code>scarb new backyard</code> to follow along.</p>
+work in the compiler, and how most developers organize their code. We’ll be
+going through examples of each of these rules throughout this chapter, but this
+is a great place to refer to as a reminder of how modules work. You can create a
+new Scarb project with <code>scarb new backyard</code> to follow along.</p>
 <ul>
 <li>
 <p><strong>Start from the crate root</strong>: When compiling a crate, the compiler first
@@ -296,7 +297,8 @@ say, you declare a “garden” module with <code>mod garden;</code>. The compil
 for the module’s code in these places:</p>
 <ul>
 <li>
-<p>Inline, within curly brackets that replace the semicolon following <code>mod garden</code>.</p>
+<p>Inline, within curly brackets that replace the semicolon following
+<code>mod garden</code>.</p>
 <pre><code class="language-cairo noplayground">  // crate root file (src/lib.cairo)
   mod garden {
       // code defining the garden module goes here
@@ -330,13 +332,18 @@ mod vegetables {
 </li>
 <li>
 <p><strong>Paths to code in modules</strong>: Once a module is part of your crate, you can
-refer to code in that module from anywhere else in that same crate, using the path
-to the code. For example, an <code>Asparagus</code> type in the <code>vegetables</code> submodule would be found at
-<code>crate::garden::vegetables::Asparagus</code>.</p>
+refer to code in that module from anywhere else in that same crate, using the
+path to the code. For example, an <code>Asparagus</code> type in the <code>vegetables</code>
+submodule would be found at <code>crate::garden::vegetables::Asparagus</code>.</p>
 </li>
 <li>
-<p><strong>Private vs public</strong>: Code within a module is private from its parent modules by default. This means that it may only be
-accessed by the current module and its descendants. To make a module public, declare it with <code>pub mod</code> instead of <code>mod</code>. To make items within a public module public as well, use <code>pub</code> before their declarations. Cairo also provides the <code>pub(crate)</code> keyword, allowing an item or module to be only visible within the crate in which the definition is included.</p>
+<p><strong>Private vs public</strong>: Code within a module is private from its parent modules
+by default. This means that it may only be accessed by the current module and
+its descendants. To make a module public, declare it with <code>pub mod</code> instead of
+<code>mod</code>. To make items within a public module public as well, use <code>pub</code> before
+their declarations. Cairo also provides the <code>pub(crate)</code> keyword, allowing an
+item or module to be only visible within the crate in which the definition is
+included.</p>
 </li>
 <li>
 <p><strong>The <code>use</code> keyword</strong>: Within a scope, the <code>use</code> keyword creates shortcuts to
@@ -367,37 +374,45 @@ fn main() {
     println!("I'm growing {:?}!", plant);
 }
 </code></pre>
-<p>The <code>pub mod garden;</code> line imports the <code>garden</code> module. Using <code>pub</code> to make <code>garden</code> publicly accessible, or <code>pub(crate)</code> if you really want to make <code>garden</code> only available for your crate, is optional to run our program here, as the <code>main</code> function resides in the same module as <code>pub mod garden;</code> declaration. Nevertheless, not declaring <code>garden</code> as <code>pub</code> will make it not accessible from any other package.
-This line tells the compiler to include the code it finds in <em>src/garden.cairo</em>, which is:</p>
+<p>The <code>pub mod garden;</code> line imports the <code>garden</code> module. Using <code>pub</code> to make
+<code>garden</code> publicly accessible, or <code>pub(crate)</code> if you really want to make
+<code>garden</code> only available for your crate, is optional to run our program here, as
+the <code>main</code> function resides in the same module as <code>pub mod garden;</code> declaration.
+Nevertheless, not declaring <code>garden</code> as <code>pub</code> will make it not accessible from
+any other package. This line tells the compiler to include the code it finds in
+<em>src/garden.cairo</em>, which is:</p>
 <p><span class="filename">Filename: src/garden.cairo</span></p>
 <pre><code class="language-cairo noplayground">pub mod vegetables;
 </code></pre>
-<p>Here, <code>pub mod vegetables;</code> means the code in <em>src/garden/vegetables.cairo</em> is included too. That code is:</p>
+<p>Here, <code>pub mod vegetables;</code> means the code in <em>src/garden/vegetables.cairo</em> is
+included too. That code is:</p>
 <pre><code class="language-cairo noplayground">#[derive(Drop, Debug)]
 pub struct Asparagus {}
 </code></pre>
-<p>The line <code>use crate::garden::vegetables::Asparagus;</code> lets us bring the <code>Asparagus</code> type into scope,
-so we can use it in the <code>main</code> function.</p>
+<p>The line <code>use crate::garden::vegetables::Asparagus;</code> lets us bring the
+<code>Asparagus</code> type into scope, so we can use it in the <code>main</code> function.</p>
 <p>Now let’s get into the details of these rules and demonstrate them in action!</p>
 <h2 id="grouping-related-code-in-modules"><a class="header" href="#grouping-related-code-in-modules">Grouping Related Code in Modules</a></h2>
 <p><em>Modules</em> let us organize code within a crate for readability and easy reuse.
-Modules also allow us to control the privacy of items, because code within a module
-is private by default. Private items are internal implementation details not
-available for outside use. We can choose to make modules and the items within
-them public, which exposes them to allow external code to use and depend on them.</p>
+Modules also allow us to control the privacy of items, because code within a
+module is private by default. Private items are internal implementation details
+not available for outside use. We can choose to make modules and the items
+within them public, which exposes them to allow external code to use and depend
+on them.</p>
 <p>As an example, let’s write a library crate that provides the functionality of a
 restaurant. We’ll define the signatures of functions but leave their bodies
 empty to concentrate on the organization of the code, rather than the
 implementation of a restaurant.</p>
-<p>In the restaurant industry, some parts of a restaurant are referred to as
-<em>front of house</em> and others as <em>back of house</em>. Front of house is where
-customers are; this encompasses where the hosts seat customers, servers take
-orders and payment, and bartenders make drinks. Back of house is where the
-chefs and cooks work in the kitchen, dishwashers clean up, and managers do
-administrative work.</p>
+<p>In the restaurant industry, some parts of a restaurant are referred to as <em>front
+of house</em> and others as <em>back of house</em>. Front of house is where customers are;
+this encompasses where the hosts seat customers, servers take orders and
+payment, and bartenders make drinks. Back of house is where the chefs and cooks
+work in the kitchen, dishwashers clean up, and managers do administrative work.</p>
 <p>To structure our crate in this way, we can organize its functions into nested
-modules. Create a new package named <em>restaurant</em> by running <code>scarb new restaurant</code>; then enter the code in Listing 7-1 into <em>src/lib.cairo</em> to
-define some modules and function signatures. Here’s the front of house section:</p>
+modules. Create a new package named <em>restaurant</em> by running
+<code>scarb new restaurant</code>; then enter the code in Listing 7-1
+into <em>src/lib.cairo</em> to define some modules and function signatures. Here’s the
+front of house section:</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo noplayground">mod front_of_house {
     mod hosting {
@@ -415,20 +430,24 @@ define some modules and function signatures. Here’s the front of house section
     }
 }
 </code></pre>
-<p><span class="caption">Listing 7-1: A <code>front_of_house</code> module containing other modules that then contain functions</span></p>
-<p>We define a module with the <code>mod</code> keyword followed by the name of the module
-(in this case, <code>front_of_house</code>). The body of the module then goes inside curly
+<p>A <code>front_of_house</code> module containing other modules that then contain
+functions</span></p>
+<p>We define a module with the <code>mod</code> keyword followed by the name of the module (in
+this case, <code>front_of_house</code>). The body of the module then goes inside curly
 brackets. Inside modules, we can place other modules, as in this case with the
 modules <code>hosting</code> and <code>serving</code>. Modules can also hold definitions for other
 items, such as structs, enums, constants, traits, and functions.</p>
-<p>By using modules, we can group related definitions together and name why
-they’re related. Programmers using this code can navigate the code based on the
-groups rather than having to read through all the definitions, making it easier
-to find the definitions relevant to them. Programmers adding new functionality
-to this code would know where to place the code to keep the program organized.</p>
-<p>Earlier, we mentioned that <em>src/lib.cairo</em> is called the crate
-root. The reason for this name is that the content of this file forms a module named after the crate name at the root of the crate’s module structure, known as the <em>module tree</em>.</p>
-<p>Listing 7-2 shows the module tree for the structure in Listing 7-1.</p>
+<p>By using modules, we can group related definitions together and name why they’re
+related. Programmers using this code can navigate the code based on the groups
+rather than having to read through all the definitions, making it easier to find
+the definitions relevant to them. Programmers adding new functionality to this
+code would know where to place the code to keep the program organized.</p>
+<p>Earlier, we mentioned that <em>src/lib.cairo</em> is called the crate root. The reason
+for this name is that the content of this file forms a module named after the
+crate name at the root of the crate’s module structure, known as the <em>module
+tree</em>.</p>
+<p>Listing 7-2 shows the module tree for the structure in Listing
+7-1.</p>
 <pre><code class="language-text">restaurant
  └── front_of_house
      ├── hosting
@@ -439,7 +458,7 @@ root. The reason for this name is that the content of this file forms a module n
          ├── serve_order
          └── take_payment
 </code></pre>
-<p><span class="caption">Listing 7-2: The module tree for the code in Listing 7-1</span></p>
+<p>module tree for the code in Listing 7-1</span></p>
 <p>This tree shows how some of the modules nest inside one another; for example,
 <code>hosting</code> nests inside <code>front_of_house</code>. The tree also shows that some modules
 are <em>siblings</em> to each other, meaning they’re defined in the same module;
@@ -487,24 +506,6 @@ need a way to find our modules.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

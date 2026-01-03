@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -279,7 +280,8 @@ types, and traits that are automatically brought into scope of every module in a
 Cairo crate without needing explicit import statements. Cairo's prelude provides
 the basic building blocks developers need to start Cairo programs and writing
 smart contracts.</p>
-<p>The core library prelude is defined in the <em><a href="https://github.com/starkware-libs/cairo/blob/main/corelib/src/lib.cairo">lib.cairo</a></em>
+<p>The core library prelude is defined in the
+<em><a href="https://github.com/starkware-libs/cairo/blob/main/corelib/src/lib.cairo">lib.cairo</a></em>
 file of the corelib crate and contains Cairo's primitive data types, traits,
 operators, and utility functions. This includes:</p>
 <ul>
@@ -288,17 +290,24 @@ operators, and utility functions. This includes:</p>
 <li>Operators: arithmetic, logical, bitwise</li>
 <li>Utility functions - helpers for arrays, maps, boxing, etc.</li>
 </ul>
-<p>The core library prelude delivers the fundamental programming
-constructs and operations needed for basic Cairo programs, without requiring the
-explicit import of elements. Since the core library prelude is automatically
-imported, its contents are available for use in any Cairo crate without explicit
-imports. This prevents repetition and provides a better devX. This is what
-allows you to use <code>ArrayTrait::append()</code> or the <code>Default</code> trait without bringing
-them explicitly into scope.</p>
-<p>You can choose which prelude to use. For example, adding <code>edition = "2024_07"</code> in the <em>Scarb.toml</em> configuration file will load the prelude from July 2024. Note that when you create a new project using <code>scarb new</code> command, the <em>Scarb.toml</em> file will automatically include <code>edition = "2024_07"</code>.
-Different prelude versions will expose different functions and traits, so it is important to specify the correct edition in the <em>Scarb.toml</em> file. Generally, you want to start a new project using the latest edition, and migrate to newer editions as they are released.</p>
+<p>The core library prelude delivers the fundamental programming constructs and
+operations needed for basic Cairo programs, without requiring the explicit
+import of elements. Since the core library prelude is automatically imported,
+its contents are available for use in any Cairo crate without explicit imports.
+This prevents repetition and provides a better devX. This is what allows you to
+use <code>ArrayTrait::append()</code> or the <code>Default</code> trait without bringing them
+explicitly into scope.</p>
+<p>You can choose which prelude to use. For example, adding <code>edition = "2024_07"</code>
+in the <em>Scarb.toml</em> configuration file will load the prelude from July 2024.
+Note that when you create a new project using <code>scarb new</code> command, the
+<em>Scarb.toml</em> file will automatically include <code>edition = "2024_07"</code>. Different
+prelude versions will expose different functions and traits, so it is important
+to specify the correct edition in the <em>Scarb.toml</em> file. Generally, you want to
+start a new project using the latest edition, and migrate to newer editions as
+they are released.</p>
 <h2 id="cairo-editions"><a class="header" href="#cairo-editions">Cairo editions</a></h2>
-<p>Here is the list of available Cairo editions (i.e prelude versions) with their details:</p>
+<p>Here is the list of available Cairo editions (i.e prelude versions) with their
+details:</p>
 <div class="table-wrapper"><table><thead><tr><th>Version</th><th>Details</th></tr></thead><tbody>
 <tr><td><code>2024-07</code></td><td><a href="https://community.starknet.io/t/cairo-v2-7-0-is-coming/114362#the-2024_07-edition-3">details for 2024-07</a></td></tr>
 <tr><td><code>2023-11</code></td><td><a href="https://community.starknet.io/t/cairo-v2-5-0-is-out/112807#the-pub-keyword-9">details for 2023-11</a></td></tr>
@@ -339,24 +348,6 @@ Different prelude versions will expose different functions and traits, so it is 
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

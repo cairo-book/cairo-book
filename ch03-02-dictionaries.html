@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,16 +274,29 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dictionaries"><a class="header" href="#dictionaries">Dictionaries</a></h1>
-<p>Cairo provides in its core library a dictionary-like type. The <code>Felt252Dict&lt;T&gt;</code> data type represents a collection of key-value pairs where each key is unique and associated with a corresponding value. This type of data structure is known differently across different programming languages such as maps, hash tables, associative arrays and many others.</p>
-<p>The <code>Felt252Dict&lt;T&gt;</code> type is useful when you want to organize your data in a certain way for which using an <code>Array&lt;T&gt;</code> and indexing doesn't suffice. Cairo dictionaries also allow the programmer to easily simulate the existence of mutable memory when there is none.</p>
+<p>Cairo provides in its core library a dictionary-like type. The <code>Felt252Dict&lt;T&gt;</code>
+data type represents a collection of key-value pairs where each key is unique
+and associated with a corresponding value. This type of data structure is known
+differently across different programming languages such as maps, hash tables,
+associative arrays and many others.</p>
+<p>The <code>Felt252Dict&lt;T&gt;</code> type is useful when you want to organize your data in a
+certain way for which using an <code>Array&lt;T&gt;</code> and indexing doesn't suffice. Cairo
+dictionaries also allow the programmer to easily simulate the existence of
+mutable memory when there is none.</p>
 <h2 id="basic-use-of-dictionaries"><a class="header" href="#basic-use-of-dictionaries">Basic Use of Dictionaries</a></h2>
-<p>It is normal in other languages when creating a new dictionary to define the data types of both key and value. In Cairo, the key type is restricted to <code>felt252</code>, leaving only the possibility to specify the value data type, represented by <code>T</code> in <code>Felt252Dict&lt;T&gt;</code>.</p>
-<p>The core functionality of a <code>Felt252Dict&lt;T&gt;</code> is implemented in the trait <code>Felt252DictTrait</code> which includes all basic operations. Among them we can find:</p>
+<p>It is normal in other languages when creating a new dictionary to define the
+data types of both key and value. In Cairo, the key type is restricted to
+<code>felt252</code>, leaving only the possibility to specify the value data type,
+represented by <code>T</code> in <code>Felt252Dict&lt;T&gt;</code>.</p>
+<p>The core functionality of a <code>Felt252Dict&lt;T&gt;</code> is implemented in the trait
+<code>Felt252DictTrait</code> which includes all basic operations. Among them we can find:</p>
 <ol>
 <li><code>insert(felt252, T) -&gt; ()</code> to write values to a dictionary instance and</li>
 <li><code>get(felt252) -&gt; T</code> to read values from it.</li>
 </ol>
-<p>These functions allow us to manipulate dictionaries like in any other language. In the following example, we create a dictionary to represent a mapping between individuals and their balance:</p>
+<p>These functions allow us to manipulate dictionaries like in any other language.
+In the following example, we create a dictionary to represent a mapping between
+individuals and their balance:</p>
 <pre><code class="language-cairo">use core::dict::Felt252Dict;
 
 #[executable]
@@ -299,9 +313,17 @@ fn main() {
     assert!(maria_balance == 200, "Balance is not 200");
 }
 </code></pre>
-<p>We can create a new instance of <code>Felt252Dict&lt;u64&gt;</code> by using the <code>default</code> method of the <code>Default</code> trait and add two individuals, each one with their own balance, using the <code>insert</code> method. Finally, we check the balance of our users with the <code>get</code> method. These methods are defined in the <code>Felt252DictTrait</code> trait in the core library.</p>
-<p>Throughout the book we have talked about how Cairo's memory is immutable, meaning you can only write to a memory cell once but the <code>Felt252Dict&lt;T&gt;</code> type represents a way to overcome this obstacle. We will explain how this is implemented later on in <a href="./ch03-02-dictionaries.html#dictionaries-underneath">"Dictionaries Underneath"</a>.</p>
-<p>Building upon our previous example, let us show a code example where the balance of the same user changes:</p>
+<p>We can create a new instance of <code>Felt252Dict&lt;u64&gt;</code> by using the <code>default</code> method
+of the <code>Default</code> trait and add two individuals, each one with their own balance,
+using the <code>insert</code> method. Finally, we check the balance of our users with the
+<code>get</code> method. These methods are defined in the <code>Felt252DictTrait</code> trait in the
+core library.</p>
+<p>Throughout the book we have talked about how Cairo's memory is immutable,
+meaning you can only write to a memory cell once but the <code>Felt252Dict&lt;T&gt;</code> type
+represents a way to overcome this obstacle. We will explain how this is
+implemented later on in <a href="./ch03-02-dictionaries.html#dictionaries-underneath">"Dictionaries Underneath"</a>.</p>
+<p>Building upon our previous example, let us show a code example where the balance
+of the same user changes:</p>
 <pre><code class="language-cairo">use core::dict::Felt252Dict;
 
 #[executable]
@@ -321,30 +343,65 @@ fn main() {
     assert!(alex_balance_2 == 200, "Alex balance is not 200");
 }
 </code></pre>
-<p>Notice how in this example we added the 'Alex' individual twice, each time using a different balance and each time that we checked for its balance it had the last value inserted! <code>Felt252Dict&lt;T&gt;</code> effectively allows us to "rewrite" the stored value for any given key.</p>
-<p>Before heading on and explaining how dictionaries are implemented it is worth mentioning that once you instantiate a <code>Felt252Dict&lt;T&gt;</code>, behind the scenes all keys have their associated values initialized as zero. This means that if for example, you tried to get the balance of an inexistent user you will get 0 instead of an error or an undefined value. This also means there is no way to delete data from a dictionary. Something to take into account when incorporating this structure into your code.</p>
-<p>Until this point, we have seen all the basic features of <code>Felt252Dict&lt;T&gt;</code> and how it mimics the same behavior as the corresponding data structures in any other language, that is, externally of course. Cairo is at its core a non-deterministic Turing-complete programming language, very different from any other popular language in existence, which as a consequence means that dictionaries are implemented very differently as well!</p>
-<p>In the following sections, we are going to give some insights about <code>Felt252Dict&lt;T&gt;</code> inner mechanisms and the compromises that were taken to make them work. After that, we are going to take a look at how to use dictionaries with other data structures as well as use the <code>entry</code> method as another way to interact with them.</p>
+<p>Notice how in this example we added the 'Alex' individual twice, each time using
+a different balance and each time that we checked for its balance it had the
+last value inserted! <code>Felt252Dict&lt;T&gt;</code> effectively allows us to "rewrite" the
+stored value for any given key.</p>
+<p>Before heading on and explaining how dictionaries are implemented it is worth
+mentioning that once you instantiate a <code>Felt252Dict&lt;T&gt;</code>, behind the scenes all
+keys have their associated values initialized as zero. This means that if for
+example, you tried to get the balance of an inexistent user you will get 0
+instead of an error or an undefined value. This also means there is no way to
+delete data from a dictionary. Something to take into account when incorporating
+this structure into your code.</p>
+<p>Until this point, we have seen all the basic features of <code>Felt252Dict&lt;T&gt;</code> and
+how it mimics the same behavior as the corresponding data structures in any
+other language, that is, externally of course. Cairo is at its core a
+non-deterministic Turing-complete programming language, very different from any
+other popular language in existence, which as a consequence means that
+dictionaries are implemented very differently as well!</p>
+<p>In the following sections, we are going to give some insights about
+<code>Felt252Dict&lt;T&gt;</code> inner mechanisms and the compromises that were taken to make
+them work. After that, we are going to take a look at how to use dictionaries
+with other data structures as well as use the <code>entry</code> method as another way to
+interact with them.</p>
 <h2 id="dictionaries-underneath"><a class="header" href="#dictionaries-underneath">Dictionaries Underneath</a></h2>
-<p>One of the constraints of Cairo's non-deterministic design is that its memory system is immutable, so in order to simulate mutability, the language implements <code>Felt252Dict&lt;T&gt;</code> as a list of entries. Each of the entries represents a time when a dictionary was accessed for reading/updating/writing purposes. An entry has three fields:</p>
+<p>One of the constraints of Cairo's non-deterministic design is that its memory
+system is immutable, so in order to simulate mutability, the language implements
+<code>Felt252Dict&lt;T&gt;</code> as a list of entries. Each of the entries represents a time
+when a dictionary was accessed for reading/updating/writing purposes. An entry
+has three fields:</p>
 <ol>
-<li>A <code>key</code> field that identifies the key for this key-value pair of the dictionary.</li>
-<li>A <code>previous_value</code> field that indicates which previous value was held at <code>key</code>.</li>
+<li>A <code>key</code> field that identifies the key for this key-value pair of the
+dictionary.</li>
+<li>A <code>previous_value</code> field that indicates which previous value was held at
+<code>key</code>.</li>
 <li>A <code>new_value</code> field that indicates the new value that is held at <code>key</code>.</li>
 </ol>
-<p>If we try implementing <code>Felt252Dict&lt;T&gt;</code> using high-level structures we would internally define it as <code>Array&lt;Entry&lt;T&gt;&gt;</code> where each <code>Entry&lt;T&gt;</code> has information about what key-value pair it represents and the previous and new values it holds. The definition of <code>Entry&lt;T&gt;</code> would be:</p>
+<p>If we try implementing <code>Felt252Dict&lt;T&gt;</code> using high-level structures we would
+internally define it as <code>Array&lt;Entry&lt;T&gt;&gt;</code> where each <code>Entry&lt;T&gt;</code> has information
+about what key-value pair it represents and the previous and new values it
+holds. The definition of <code>Entry&lt;T&gt;</code> would be:</p>
 <pre><code class="language-cairo noplayground">struct Entry&lt;T&gt; {
     key: felt252,
     previous_value: T,
     new_value: T,
 }
 </code></pre>
-<p>For each time we interact with a <code>Felt252Dict&lt;T&gt;</code>, a new <code>Entry&lt;T&gt;</code> will be registered:</p>
+<p>For each time we interact with a <code>Felt252Dict&lt;T&gt;</code>, a new <code>Entry&lt;T&gt;</code> will be
+registered:</p>
 <ul>
-<li>A <code>get</code> would register an entry where there is no change in state, and previous and new values are stored with the same value.</li>
-<li>An <code>insert</code> would register a new <code>Entry&lt;T&gt;</code> where the <code>new_value</code> would be the element being inserted, and the <code>previous_value</code> the last element inserted before this. In case it is the first entry for a certain key, then the previous value will be zero.</li>
+<li>A <code>get</code> would register an entry where there is no change in state, and
+previous and new values are stored with the same value.</li>
+<li>An <code>insert</code> would register a new <code>Entry&lt;T&gt;</code> where the <code>new_value</code> would be the
+element being inserted, and the <code>previous_value</code> the last element inserted
+before this. In case it is the first entry for a certain key, then the
+previous value will be zero.</li>
 </ul>
-<p>The use of this entry list shows how there isn't any rewriting, just the creation of new memory cells per <code>Felt252Dict&lt;T&gt;</code> interaction. Let's show an example of this using the <code>balances</code> dictionary from the previous section and inserting the users 'Alex' and 'Maria':</p>
+<p>The use of this entry list shows how there isn't any rewriting, just the
+creation of new memory cells per <code>Felt252Dict&lt;T&gt;</code> interaction. Let's show an
+example of this using the <code>balances</code> dictionary from the previous section and
+inserting the users 'Alex' and 'Maria':</p>
 <pre><code class="language-cairo"><span class="boring">use core::dict::Felt252Dict;
 </span><span class="boring">
 </span><span class="boring">struct Entry&lt;T&gt; {
@@ -370,13 +427,32 @@ fn main() {
 <tr><td style="text-align: center">Maria</td><td>50</td><td>50</td></tr>
 </tbody></table>
 </div>
-<p>Notice that since 'Alex' was inserted twice, it appears twice and the <code>previous</code> and <code>current</code> values are set properly. Also reading from 'Maria' registered an entry with no change from previous to current values.</p>
-<p>This approach to implementing <code>Felt252Dict&lt;T&gt;</code> means that for each read/write operation, there is a scan for the whole entry list in search of the last entry with the same <code>key</code>. Once the entry has been found, its <code>new_value</code> is extracted and used on the new entry to be added as the <code>previous_value</code>. This means that interacting with <code>Felt252Dict&lt;T&gt;</code> has a worst-case time complexity of <code>O(n)</code> where <code>n</code> is the number of entries in the list.</p>
-<p>If you pour some thought into alternate ways of implementing <code>Felt252Dict&lt;T&gt;</code> you'd surely find them, probably even ditching completely the need for a <code>previous_value</code> field, nonetheless, since Cairo is not your normal language this won't work.
-One of the purposes of Cairo is, with the STARK proof system, to generate proofs of computational integrity. This means that you need to verify that program execution is correct and inside the boundaries of Cairo restrictions. One of those boundary checks consists of "dictionary squashing" and that requires information on both previous and new values for every entry.</p>
+<p>Notice that since 'Alex' was inserted twice, it appears twice and the <code>previous</code>
+and <code>current</code> values are set properly. Also reading from 'Maria' registered an
+entry with no change from previous to current values.</p>
+<p>This approach to implementing <code>Felt252Dict&lt;T&gt;</code> means that for each read/write
+operation, there is a scan for the whole entry list in search of the last entry
+with the same <code>key</code>. Once the entry has been found, its <code>new_value</code> is extracted
+and used on the new entry to be added as the <code>previous_value</code>. This means that
+interacting with <code>Felt252Dict&lt;T&gt;</code> has a worst-case time complexity of <code>O(n)</code>
+where <code>n</code> is the number of entries in the list.</p>
+<p>If you pour some thought into alternate ways of implementing <code>Felt252Dict&lt;T&gt;</code>
+you'd surely find them, probably even ditching completely the need for a
+<code>previous_value</code> field, nonetheless, since Cairo is not your normal language
+this won't work. One of the purposes of Cairo is, with the STARK proof system,
+to generate proofs of computational integrity. This means that you need to
+verify that program execution is correct and inside the boundaries of Cairo
+restrictions. One of those boundary checks consists of "dictionary squashing"
+and that requires information on both previous and new values for every entry.</p>
 <h2 id="squashing-dictionaries"><a class="header" href="#squashing-dictionaries">Squashing Dictionaries</a></h2>
-<p>To verify that the proof generated by a Cairo program execution that used a <code>Felt252Dict&lt;T&gt;</code> is correct, we need to check that there wasn't any illegal tampering with the dictionary. This is done through a method called <code>squash_dict</code> that reviews each entry of the entry list and checks that access to the dictionary remains coherent throughout the execution.</p>
-<p>The process of squashing is as follows: given all entries with certain key <code>k</code>, taken in the same order as they were inserted, verify that the ith entry <code>new_value</code> is equal to the ith + 1 entry <code>previous_value</code>.</p>
+<p>To verify that the proof generated by a Cairo program execution that used a
+<code>Felt252Dict&lt;T&gt;</code> is correct, we need to check that there wasn't any illegal
+tampering with the dictionary. This is done through a method called
+<code>squash_dict</code> that reviews each entry of the entry list and checks that access
+to the dictionary remains coherent throughout the execution.</p>
+<p>The process of squashing is as follows: given all entries with certain key <code>k</code>,
+taken in the same order as they were inserted, verify that the ith entry
+<code>new_value</code> is equal to the ith + 1 entry <code>previous_value</code>.</p>
 <p>For example, given the following entry list:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">key</th><th>previous</th><th>new</th></tr></thead><tbody>
 <tr><td style="text-align: center">Alex</td><td>0</td><td>150</td></tr>
@@ -396,26 +472,62 @@ One of the purposes of Cairo is, with the STARK proof system, to generate proofs
 <tr><td style="text-align: center">Charles</td><td>0</td><td>70</td></tr>
 </tbody></table>
 </div>
-<p>In case of a change on any of the values of the first table, squashing would have failed during runtime.</p>
+<p>In case of a change on any of the values of the first table, squashing would
+have failed during runtime.</p>
 <h2 id="dictionary-destruction"><a class="header" href="#dictionary-destruction">Dictionary Destruction</a></h2>
-<p>If you run the examples from <a href="./ch03-02-dictionaries.html#basic-use-of-dictionaries">"Basic Use of Dictionaries"</a> section, you'd notice that there was never a call to squash dictionary, but the program compiled successfully nonetheless. What happened behind the scene was that squash was called automatically via the <code>Felt252Dict&lt;T&gt;</code> implementation of the <code>Destruct&lt;T&gt;</code> trait. This call occurred just before the <code>balance</code> dictionary went out of scope.</p>
-<p>The <code>Destruct&lt;T&gt;</code> trait represents another way of removing instances out of scope apart from <code>Drop&lt;T&gt;</code>. The main difference between these two is that <code>Drop&lt;T&gt;</code> is treated as a no-op operation, meaning it does not generate new CASM while <code>Destruct&lt;T&gt;</code> does not have this restriction. The only type which actively uses the <code>Destruct&lt;T&gt;</code> trait is <code>Felt252Dict&lt;T&gt;</code>, for every other type <code>Destruct&lt;T&gt;</code> and <code>Drop&lt;T&gt;</code> are synonyms. You can read more about these traits in <a href="./appendix-03-derivable-traits.html#drop-and-destruct">Drop and Destruct</a> section of Appendix C.</p>
-<p>Later in <a href="./ch12-01-custom-data-structures.html#dictionaries-as-struct-members">"Dictionaries as Struct Members"</a> section, we will have a hands-on example where we implement the <code>Destruct&lt;T&gt;</code> trait for a custom type.</p>
+<p>If you run the examples from <a href="./ch03-02-dictionaries.html#basic-use-of-dictionaries">"Basic Use of Dictionaries"</a>
+section, you'd notice that there was never a call to squash dictionary, but the
+program compiled successfully nonetheless. What happened behind the scene was
+that squash was called automatically via the <code>Felt252Dict&lt;T&gt;</code> implementation of
+the <code>Destruct&lt;T&gt;</code> trait. This call occurred just before the <code>balance</code> dictionary
+went out of scope.</p>
+<p>The <code>Destruct&lt;T&gt;</code> trait represents another way of removing instances out of
+scope apart from <code>Drop&lt;T&gt;</code>. The main difference between these two is that
+<code>Drop&lt;T&gt;</code> is treated as a no-op operation, meaning it does not generate new CASM
+while <code>Destruct&lt;T&gt;</code> does not have this restriction. The only type which actively
+uses the <code>Destruct&lt;T&gt;</code> trait is <code>Felt252Dict&lt;T&gt;</code>, for every other type
+<code>Destruct&lt;T&gt;</code> and <code>Drop&lt;T&gt;</code> are synonyms. You can read more about these traits
+in <a href="./appendix-03-derivable-traits.html#drop-and-destruct">Drop and Destruct</a> section of Appendix C.</p>
+<p>Later in <a href="./ch12-01-custom-data-structures.html#dictionaries-as-struct-members">"Dictionaries as Struct Members"</a> section, we
+will have a hands-on example where we implement the <code>Destruct&lt;T&gt;</code> trait for a
+custom type.</p>
 <h2 id="more-dictionaries"><a class="header" href="#more-dictionaries">More Dictionaries</a></h2>
-<p>Up to this point, we have given a comprehensive overview of the functionality of <code>Felt252Dict&lt;T&gt;</code> as well as how and why it is implemented in a certain way. If you haven't understood all of it, don't worry because in this section we will have some more examples using dictionaries.</p>
-<p>We will start by explaining the <code>entry</code> method which is part of a dictionary basic functionality included in <code>Felt252DictTrait&lt;T&gt;</code> which we didn't mention at the beginning. Soon after, we will see examples of how to use <code>Felt252Dict&lt;T&gt;</code> with other <a href="./ch03-02-dictionaries.html#dictionaries-of-types-not-supported-natively">complex types</a> such as <code>Array&lt;T&gt;</code>.</p>
+<p>Up to this point, we have given a comprehensive overview of the functionality of
+<code>Felt252Dict&lt;T&gt;</code> as well as how and why it is implemented in a certain way. If
+you haven't understood all of it, don't worry because in this section we will
+have some more examples using dictionaries.</p>
+<p>We will start by explaining the <code>entry</code> method which is part of a dictionary
+basic functionality included in <code>Felt252DictTrait&lt;T&gt;</code> which we didn't mention at
+the beginning. Soon after, we will see examples of how to use <code>Felt252Dict&lt;T&gt;</code>
+with other <a href="./ch03-02-dictionaries.html#dictionaries-of-types-not-supported-natively">complex types</a> such as <code>Array&lt;T&gt;</code>.</p>
 <h2 id="entry-and-finalize"><a class="header" href="#entry-and-finalize">Entry and Finalize</a></h2>
-<p>In the <a href="./ch03-02-dictionaries.html#dictionaries-underneath">"Dictionaries Underneath"</a> section, we explained how <code>Felt252Dict&lt;T&gt;</code> internally worked. It was a list of entries for each time the dictionary was accessed in any manner. It would first find the last entry given a certain <code>key</code> and then update it accordingly to whatever operation it was executing. The Cairo language gives us the tools to replicate this ourselves through the <code>entry</code> and <code>finalize</code> methods.</p>
-<p>The <code>entry</code> method comes as part of <code>Felt252DictTrait&lt;T&gt;</code> with the purpose of creating a new entry given a certain key. Once called, this method takes ownership of the dictionary and returns the entry to update. The method signature is as follows:</p>
+<p>In the <a href="./ch03-02-dictionaries.html#dictionaries-underneath">"Dictionaries Underneath"</a> section, we explained how
+<code>Felt252Dict&lt;T&gt;</code> internally worked. It was a list of entries for each time the
+dictionary was accessed in any manner. It would first find the last entry given
+a certain <code>key</code> and then update it accordingly to whatever operation it was
+executing. The Cairo language gives us the tools to replicate this ourselves
+through the <code>entry</code> and <code>finalize</code> methods.</p>
+<p>The <code>entry</code> method comes as part of <code>Felt252DictTrait&lt;T&gt;</code> with the purpose of
+creating a new entry given a certain key. Once called, this method takes
+ownership of the dictionary and returns the entry to update. The method
+signature is as follows:</p>
 <pre><code class="language-cairo noplayground">fn entry(self: Felt252Dict&lt;T&gt;, key: felt252) -&gt; (Felt252DictEntry&lt;T&gt;, T) nopanic
 </code></pre>
-<p>The first input parameter takes ownership of the dictionary while the second one is used to create the appropriate entry. It returns a tuple containing a <code>Felt252DictEntry&lt;T&gt;</code>, which is the type used by Cairo to represent dictionary entries, and a <code>T</code> representing the value held previously.
-The <code>nopanic</code> notation simply indicates that the function is guaranteed to never panic.</p>
-<p>The next thing to do is to update the entry with the new value. For this, we use the <code>finalize</code> method which inserts the entry and returns ownership of the dictionary:</p>
+<p>The first input parameter takes ownership of the dictionary while the second one
+is used to create the appropriate entry. It returns a tuple containing a
+<code>Felt252DictEntry&lt;T&gt;</code>, which is the type used by Cairo to represent dictionary
+entries, and a <code>T</code> representing the value held previously. The <code>nopanic</code>
+notation simply indicates that the function is guaranteed to never panic.</p>
+<p>The next thing to do is to update the entry with the new value. For this, we use
+the <code>finalize</code> method which inserts the entry and returns ownership of the
+dictionary:</p>
 <pre><code class="language-cairo noplayground">fn finalize(self: Felt252DictEntry&lt;T&gt;, new_value: T) -&gt; Felt252Dict&lt;T&gt;
 </code></pre>
-<p>This method receives the entry and the new value as parameters, and returns the updated dictionary.</p>
-<p>Let us see an example using <code>entry</code> and <code>finalize</code>. Imagine we would like to implement our own version of the <code>get</code> method from a dictionary. We should then do the following:</p>
+<p>This method receives the entry and the new value as parameters, and returns the
+updated dictionary.</p>
+<p>Let us see an example using <code>entry</code> and <code>finalize</code>. Imagine we would like to
+implement our own version of the <code>get</code> method from a dictionary. We should then
+do the following:</p>
 <ol>
 <li>Create the new entry to add using the <code>entry</code> method.</li>
 <li>Insert back the entry where the <code>new_value</code> equals the <code>previous_value</code>.</li>
@@ -440,9 +552,12 @@ fn custom_get&lt;T, +Felt252DictValue&lt;T&gt;, +Drop&lt;T&gt;, +Copy&lt;T&gt;&g
     return_value
 }
 </code></pre>
-<p>The <code>ref</code> keyword means that the ownership of the variable will be given back at the end of
-the function. This concept will be explained in more detail in the <a href="./ch04-02-references-and-snapshots.html">"References and Snapshots"</a> section.</p>
-<p>Implementing the <code>insert</code> method would follow a similar workflow, except for inserting a new value when finalizing. If we were to implement it, it would look like the following:</p>
+<p>The <code>ref</code> keyword means that the ownership of the variable will be given back at
+the end of the function. This concept will be explained in more detail in the
+<a href="./ch04-02-references-and-snapshots.html">"References and Snapshots"</a> section.</p>
+<p>Implementing the <code>insert</code> method would follow a similar workflow, except for
+inserting a new value when finalizing. If we were to implement it, it would look
+like the following:</p>
 <pre><code class="language-cairo noplayground">use core::dict::{Felt252Dict, Felt252DictEntryTrait};
 
 fn custom_insert&lt;T, +Felt252DictValue&lt;T&gt;, +Destruct&lt;T&gt;, +Drop&lt;T&gt;&gt;(
@@ -458,7 +573,9 @@ fn custom_insert&lt;T, +Felt252DictValue&lt;T&gt;, +Destruct&lt;T&gt;, +Drop&lt;
     dict = entry.finalize(value);
 }
 </code></pre>
-<p>As a finalizing note, these two methods are implemented in a similar way to how <code>insert</code> and <code>get</code> are implemented for <code>Felt252Dict&lt;T&gt;</code>. This code shows some example usage:</p>
+<p>As a finalizing note, these two methods are implemented in a similar way to how
+<code>insert</code> and <code>get</code> are implemented for <code>Felt252Dict&lt;T&gt;</code>. This code shows some
+example usage:</p>
 <pre><code class="language-cairo"><span class="boring">use core::dict::{Felt252Dict, Felt252DictEntryTrait};
 </span><span class="boring">
 </span><span class="boring">fn custom_get&lt;T, +Felt252DictValue&lt;T&gt;, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt;(
@@ -504,13 +621,28 @@ fn main() {
 </span><span class="boring">
 </span></code></pre>
 <h2 id="dictionaries-of-types-not-supported-natively"><a class="header" href="#dictionaries-of-types-not-supported-natively">Dictionaries of Types not Supported Natively</a></h2>
-<p>One restriction of <code>Felt252Dict&lt;T&gt;</code> that we haven't talked about is the trait <code>Felt252DictValue&lt;T&gt;</code>.
-This trait defines the <code>zero_default</code> method which is the one that gets called when a value does not exist in the dictionary.
-This is implemented by some common data types, such as most unsigned integers, <code>bool</code> and <code>felt252</code> - but it is not implemented for more complex types such as arrays, structs (including <code>u256</code>), and other types from the core library.
-This means that making a dictionary of types not natively supported is not a straightforward task, because you would need to write a couple of trait implementations in order to make the data type a valid dictionary value type.
-To compensate this, you can wrap your type inside a <code>Nullable&lt;T&gt;</code>.</p>
-<p><code>Nullable&lt;T&gt;</code> is a smart pointer type that can either point to a value or be <code>null</code> in the absence of value. It is usually used in Object Oriented Programming Languages when a reference doesn't point anywhere. The difference with <code>Option</code> is that the wrapped value is stored inside a <code>Box&lt;T&gt;</code> data type. The <code>Box&lt;T&gt;</code> type is a smart pointer that allows us to use a dedicated <code>boxed_segment</code> memory segment for our data, and access this segment using a pointer that can only be manipulated in one place at a time. See <a href="./ch12-02-smart-pointers.html">Smart Pointers Chapter</a> for more information.</p>
-<p>Let's show using an example. We will try to store a <code>Span&lt;felt252&gt;</code> inside a dictionary. For that, we will use <code>Nullable&lt;T&gt;</code> and <code>Box&lt;T&gt;</code>. Also, we are storing a <code>Span&lt;T&gt;</code> and not an <code>Array&lt;T&gt;</code> because the latter does not implement the <code>Copy&lt;T&gt;</code> trait which is required for reading from a dictionary.</p>
+<p>One restriction of <code>Felt252Dict&lt;T&gt;</code> that we haven't talked about is the trait
+<code>Felt252DictValue&lt;T&gt;</code>. This trait defines the <code>zero_default</code> method which is the
+one that gets called when a value does not exist in the dictionary. This is
+implemented by some common data types, such as most unsigned integers, <code>bool</code>
+and <code>felt252</code> - but it is not implemented for more complex types such as arrays,
+structs (including <code>u256</code>), and other types from the core library. This means
+that making a dictionary of types not natively supported is not a
+straightforward task, because you would need to write a couple of trait
+implementations in order to make the data type a valid dictionary value type. To
+compensate this, you can wrap your type inside a <code>Nullable&lt;T&gt;</code>.</p>
+<p><code>Nullable&lt;T&gt;</code> is a smart pointer type that can either point to a value or be
+<code>null</code> in the absence of value. It is usually used in Object Oriented
+Programming Languages when a reference doesn't point anywhere. The difference
+with <code>Option</code> is that the wrapped value is stored inside a <code>Box&lt;T&gt;</code> data type.
+The <code>Box&lt;T&gt;</code> type is a smart pointer that allows us to use a dedicated
+<code>boxed_segment</code> memory segment for our data, and access this segment using a
+pointer that can only be manipulated in one place at a time. See
+<a href="./ch12-02-smart-pointers.html">Smart Pointers Chapter</a> for more information.</p>
+<p>Let's show using an example. We will try to store a <code>Span&lt;felt252&gt;</code> inside a
+dictionary. For that, we will use <code>Nullable&lt;T&gt;</code> and <code>Box&lt;T&gt;</code>. Also, we are
+storing a <code>Span&lt;T&gt;</code> and not an <code>Array&lt;T&gt;</code> because the latter does not implement
+the <code>Copy&lt;T&gt;</code> trait which is required for reading from a dictionary.</p>
 <pre><code class="language-cairo noplayground">use core::dict::Felt252Dict;
 use core::nullable::{FromNullableResult, NullableTrait, match_nullable};
 
@@ -527,9 +659,13 @@ fn main() {
 
 //...
 </code></pre>
-<p>In this code snippet, the first thing we did was to create a new dictionary <code>d</code>. We want it to hold a <code>Nullable&lt;Span&gt;</code>. After that, we created an array and filled it with values.</p>
-<p>The last step is inserting the array as a span inside the dictionary. Notice that we do this using the <code>new</code> function of the <code>NullableTrait</code>.</p>
-<p>Once the element is inside the dictionary, and we want to get it, we follow the same steps but in reverse order. The following code shows how to achieve that:</p>
+<p>In this code snippet, the first thing we did was to create a new dictionary <code>d</code>.
+We want it to hold a <code>Nullable&lt;Span&gt;</code>. After that, we created an array and
+filled it with values.</p>
+<p>The last step is inserting the array as a span inside the dictionary. Notice
+that we do this using the <code>new</code> function of the <code>NullableTrait</code>.</p>
+<p>Once the element is inside the dictionary, and we want to get it, we follow the
+same steps but in reverse order. The following code shows how to achieve that:</p>
 <pre><code class="language-cairo noplayground">//...
 
     // Get value back
@@ -585,9 +721,15 @@ fn main() {
 
 </code></pre>
 <h2 id="using-arrays-inside-dictionaries"><a class="header" href="#using-arrays-inside-dictionaries">Using Arrays inside Dictionaries</a></h2>
-<p>In the previous section, we explored how to store and retrieve complex types inside a dictionary using <code>Nullable&lt;T&gt;</code> and <code>Box&lt;T&gt;</code>. Now, let's take a look at how to store an array inside a dictionary and dynamically modify its contents.</p>
-<p>Storing arrays in dictionaries in Cairo is slightly different from storing other types. This is because arrays are more complex data structures that require special handling to avoid issues with memory copying and references.</p>
-<p>First, let's look at how to create a dictionary and insert an array into it. This process is pretty straightforward and follows a similar pattern to inserting other types of data:</p>
+<p>In the previous section, we explored how to store and retrieve complex types
+inside a dictionary using <code>Nullable&lt;T&gt;</code> and <code>Box&lt;T&gt;</code>. Now, let's take a look at
+how to store an array inside a dictionary and dynamically modify its contents.</p>
+<p>Storing arrays in dictionaries in Cairo is slightly different from storing other
+types. This is because arrays are more complex data structures that require
+special handling to avoid issues with memory copying and references.</p>
+<p>First, let's look at how to create a dictionary and insert an array into it.
+This process is pretty straightforward and follows a similar pattern to
+inserting other types of data:</p>
 <pre><code class="language-cairo">use core::dict::Felt252Dict;
 
 #[executable]
@@ -598,7 +740,11 @@ fn main() {
     println!("Array inserted successfully.");
 }
 </code></pre>
-<p>However, attempting to read an array from the dictionary using the <code>get</code> method will result in a compiler error. This is because <code>get</code> tries to copy the array in memory, which is not possible for arrays (as we've already mentioned in the <a href="./ch03-02-dictionaries.html#dictionaries-of-types-not-supported-natively">previous section</a>, <code>Array&lt;T&gt;</code> does not implement the <code>Copy&lt;T&gt;</code> trait):</p>
+<p>However, attempting to read an array from the dictionary using the <code>get</code> method
+will result in a compiler error. This is because <code>get</code> tries to copy the array
+in memory, which is not possible for arrays (as we've already mentioned in the
+<a href="./ch03-02-dictionaries.html#dictionaries-of-types-not-supported-natively">previous section</a>, <code>Array&lt;T&gt;</code> does not implement
+the <code>Copy&lt;T&gt;</code> trait):</p>
 <pre><code class="language-cairo">use core::dict::Felt252Dict;
 use core::nullable::{FromNullableResult, match_nullable};
 
@@ -630,7 +776,9 @@ error: could not compile `no_listing_15_dict_of_array_attempt_get` due to previo
 error: `scarb` command exited with error
 
 </code></pre>
-<p>To correctly read an array from the dictionary, we need to use dictionary entries. This allows us to get a reference to the array value without copying it:</p>
+<p>To correctly read an array from the dictionary, we need to use dictionary
+entries. This allows us to get a reference to the array value without copying
+it:</p>
 <pre><code class="language-cairo noplayground">fn get_array_entry(ref dict: Felt252Dict&lt;Nullable&lt;Array&lt;u8&gt;&gt;&gt;, index: felt252) -&gt; Span&lt;u8&gt; {
     let (entry, _arr) = dict.entry(index);
     let mut arr = _arr.deref_or(array![]);
@@ -640,9 +788,12 @@ error: `scarb` command exited with error
 }
 </code></pre>
 <blockquote>
-<p>Note: We must convert the array to a <code>Span</code> before finalizing the entry, because calling <code>NullableTrait::new(arr)</code> moves the array, thus making it impossible to return it from the function.</p>
+<p>Note: We must convert the array to a <code>Span</code> before finalizing the entry,
+because calling <code>NullableTrait::new(arr)</code> moves the array, thus making it
+impossible to return it from the function.</p>
 </blockquote>
-<p>To modify the stored array, such as appending a new value, we can use a similar approach. The following <code>append_value</code> function demonstrates this:</p>
+<p>To modify the stored array, such as appending a new value, we can use a similar
+approach. The following <code>append_value</code> function demonstrates this:</p>
 <pre><code class="language-cairo noplayground">fn append_value(ref dict: Felt252Dict&lt;Nullable&lt;Array&lt;u8&gt;&gt;&gt;, index: felt252, value: u8) {
     let (entry, arr) = dict.entry(index);
     let mut unboxed_val = arr.deref_or(array![]);
@@ -650,11 +801,14 @@ error: `scarb` command exited with error
     dict = entry.finalize(NullableTrait::new(unboxed_val));
 }
 </code></pre>
-<p>In the <code>append_value</code> function, we access the dictionary entry, dereference the array, append the new value, and finalize the entry with the updated array.</p>
+<p>In the <code>append_value</code> function, we access the dictionary entry, dereference the
+array, append the new value, and finalize the entry with the updated array.</p>
 <blockquote>
-<p>Note: Removing an item from a stored array can be implemented in a similar manner.</p>
+<p>Note: Removing an item from a stored array can be implemented in a similar
+manner.</p>
 </blockquote>
-<p>Below is the complete example demonstrating the creation, insertion, reading, and modification of an array in a dictionary:</p>
+<p>Below is the complete example demonstrating the creation, insertion, reading,
+and modification of an array in a dictionary:</p>
 <pre><code class="language-cairo">use core::dict::{Felt252Dict, Felt252DictEntryTrait};
 use core::nullable::NullableTrait;
 
@@ -721,24 +875,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

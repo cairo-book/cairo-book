@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,9 +274,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="starknet-types"><a class="header" href="#starknet-types">Starknet Types</a></h1>
-<p>When building smart contracts on Starknet, you'll work with specialized types that represent blockchain-specific concepts. These types allow you to interact with deployed contracts through their addresses, handle cross-chain communication, and handle contract-specific data types. This chapter introduces the Starknet-specific types provided by the Core library.</p>
+<p>When building smart contracts on Starknet, you'll work with specialized types
+that represent blockchain-specific concepts. These types allow you to interact
+with deployed contracts through their addresses, handle cross-chain
+communication, and handle contract-specific data types. This chapter introduces
+the Starknet-specific types provided by the Core library.</p>
 <h2 id="contract-address"><a class="header" href="#contract-address">Contract Address</a></h2>
-<p>The <code>ContractAddress</code> type represents the address of a deployed contract on Starknet. Every deployed contract has a unique address that identifies it on the network. You'll use it to call other contracts, check caller identities, manage access control, and anything that involves on-chain accounts.</p>
+<p>The <code>ContractAddress</code> type represents the address of a deployed contract on
+Starknet. Every deployed contract has a unique address that identifies it on the
+network. You'll use it to call other contracts, check caller identities, manage
+access control, and anything that involves on-chain accounts.</p>
 <pre><code class="language-cairo">use starknet::{ContractAddress, get_caller_address};
 
 #[starknet::interface]
@@ -313,9 +321,18 @@ mod AddressExample {
     }
 }
 </code></pre>
-<p>Contract addresses in Starknet have a value range of <code>[0, 2^251)</code>, which is enforced by the type system. You can create a <code>ContractAddress</code> from a <code>felt252</code> using the regular <code>TryInto</code> trait.</p>
+<p>Contract addresses in Starknet have a value range of <code>[0, 2^251)</code>, which is
+enforced by the type system. You can create a <code>ContractAddress</code> from a <code>felt252</code>
+using the regular <code>TryInto</code> trait.</p>
 <h2 id="storage-address"><a class="header" href="#storage-address">Storage Address</a></h2>
-<p>The <code>StorageAddress</code> type represents the location of a value within a contract's storage. While you typically won't create these addresses directly (the storage system handles this for you through types like <a href="./ch101-01-01-storage-mappings.html">Map</a> and <a href="./ch101-01-02-storage-vecs.html">Vec</a>), understanding this type is important for advanced storage patterns. Each value stored in the <code>Storage</code> struct has its own <code>StorageAddress</code>, and can be accessed directly following the rules defined in the <a href="./ch101-01-00-contract-storage.html">Storage</a> chapter.</p>
+<p>The <code>StorageAddress</code> type represents the location of a value within a contract's
+storage. While you typically won't create these addresses directly (the storage
+system handles this for you through types like
+<a href="./ch101-01-01-storage-mappings.html">Map</a> and
+<a href="./ch101-01-02-storage-vecs.html">Vec</a>), understanding this type is important for
+advanced storage patterns. Each value stored in the <code>Storage</code> struct has its own
+<code>StorageAddress</code>, and can be accessed directly following the rules defined in
+the <a href="./ch101-01-00-contract-storage.html">Storage</a> chapter.</p>
 <pre><code class="language-cairo">#[starknet::contract]
 mod StorageExample {
     use starknet::storage_access::StorageAddress;
@@ -332,9 +349,14 @@ mod StorageExample {
     }
 }
 </code></pre>
-<p>Storage addresses share the same value range as contract addresses <code>[0, 2^251)</code>. The related <code>StorageBaseAddress</code> type represents base addresses that can be combined with offsets, with a slightly smaller range of <code>[0, 2^251 - 256)</code> to accommodate offset calculations.</p>
+<p>Storage addresses share the same value range as contract addresses <code>[0, 2^251)</code>.
+The related <code>StorageBaseAddress</code> type represents base addresses that can be
+combined with offsets, with a slightly smaller range of <code>[0, 2^251 - 256)</code> to
+accommodate offset calculations.</p>
 <h2 id="ethereum-address"><a class="header" href="#ethereum-address">Ethereum Address</a></h2>
-<p>The <code>EthAddress</code> type represents a 20-byte Ethereum address and is used mostly for building cross-chain applications on Starknet. This type is used in L1-L2 messaging, token bridges, and any contract that needs to interact with Ethereum.</p>
+<p>The <code>EthAddress</code> type represents a 20-byte Ethereum address and is used mostly
+for building cross-chain applications on Starknet. This type is used in L1-L2
+messaging, token bridges, and any contract that needs to interact with Ethereum.</p>
 <pre><code class="language-cairo">use starknet::EthAddress;
 
 #[starknet::interface]
@@ -381,9 +403,14 @@ mod EthAddressExample {
 <li>Sending messages to Ethereum using <code>send_message_to_l1_syscall</code></li>
 <li>Receiving and validating messages from L1 with <code>#[l1_handler]</code></li>
 </ul>
-<p>The <code>EthAddress</code> type ensures type safety and can be converted to/from <code>felt252</code> for L1-L2 message serialization.</p>
+<p>The <code>EthAddress</code> type ensures type safety and can be converted to/from <code>felt252</code>
+for L1-L2 message serialization.</p>
 <h2 id="class-hash"><a class="header" href="#class-hash">Class Hash</a></h2>
-<p>The <code>ClassHash</code> type represents the hash of a contract class (the contract's code). In Starknet's architecture, contract classes are deployed separately from contract instances, allowing multiple contracts to share the same code. As such, you can use the same class hash to deploy multiple contracts, or to upgrade a contract to a new version.</p>
+<p>The <code>ClassHash</code> type represents the hash of a contract class (the contract's
+code). In Starknet's architecture, contract classes are deployed separately from
+contract instances, allowing multiple contracts to share the same code. As such,
+you can use the same class hash to deploy multiple contracts, or to upgrade a
+contract to a new version.</p>
 <pre><code class="language-cairo">use starknet::ClassHash;
 
 #[starknet::interface]
@@ -421,9 +448,13 @@ mod ClassHashExample {
     }
 }
 </code></pre>
-<p>Class hashes have the same value range as addresses <code>[0, 2^251)</code>. They uniquely identify a specific version of contract code and are used in deployment operations, proxy patterns, and upgrade mechanisms.</p>
+<p>Class hashes have the same value range as addresses <code>[0, 2^251)</code>. They uniquely
+identify a specific version of contract code and are used in deployment
+operations, proxy patterns, and upgrade mechanisms.</p>
 <h2 id="working-with-block-and-transaction-information"><a class="header" href="#working-with-block-and-transaction-information">Working with Block and Transaction Information</a></h2>
-<p>Starknet provides several functions to access information about the current execution context. These functions return specialized types or structures containing blockchain state information.</p>
+<p>Starknet provides several functions to access information about the current
+execution context. These functions return specialized types or structures
+containing blockchain state information.</p>
 <pre><code class="language-cairo">#[starknet::interface]
 pub trait IBlockInfo&lt;TContractState&gt; {
     fn get_block_info(self: @TContractState) -&gt; (u64, u64);
@@ -457,7 +488,9 @@ mod BlockInfoExample {
     }
 }
 </code></pre>
-<p>The <code>BlockInfo</code> structure contains details about the current block, including its number and timestamp. The <code>TxInfo</code> structure provides transaction-specific information, including the sender's address, transaction hash, and fee details.</p>
+<p>The <code>BlockInfo</code> structure contains details about the current block, including
+its number and timestamp. The <code>TxInfo</code> structure provides transaction-specific
+information, including the sender's address, transaction hash, and fee details.</p>
 
                     </main>
 
@@ -493,24 +526,6 @@ mod BlockInfoExample {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

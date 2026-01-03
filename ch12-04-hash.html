@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,17 +274,53 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="hashes"><a class="header" href="#hashes">Hashes</a></h1>
-<p>At its essence, hashing is a process of converting input data (often called a message) of any length into a fixed-size value, typically referred to as a "hash." This transformation is deterministic, meaning that the same input will always produce the same hash value. Hash functions are a fundamental component in various fields, including data storage, cryptography and data integrity verification. They are very often used when developing smart contracts, especially when working with <a href="https://en.wikipedia.org/wiki/Merkle_tree#Uses">Merkle trees</a>.</p>
-<p>In this chapter, we will present the two hash functions implemented natively in the Cairo core library: <code>Poseidon</code> and <code>Pedersen</code>. We will discuss when and how to use them, and see examples with Cairo programs.</p>
+<p>At its essence, hashing is a process of converting input data (often called a
+message) of any length into a fixed-size value, typically referred to as a
+"hash." This transformation is deterministic, meaning that the same input will
+always produce the same hash value. Hash functions are a fundamental component
+in various fields, including data storage, cryptography and data integrity
+verification. They are very often used when developing smart contracts,
+especially when working with <a href="https://en.wikipedia.org/wiki/Merkle_tree#Uses">Merkle trees</a>.</p>
+<p>In this chapter, we will present the two hash functions implemented natively in
+the Cairo core library: <code>Poseidon</code> and <code>Pedersen</code>. We will discuss when and how
+to use them, and see examples with Cairo programs.</p>
 <h3 id="hash-functions-in-cairo"><a class="header" href="#hash-functions-in-cairo">Hash Functions in Cairo</a></h3>
 <p>The Cairo core library provides two hash functions: Pedersen and Poseidon.</p>
-<p>Pedersen hash functions are cryptographic algorithms that rely on <a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">elliptic curve cryptography</a>. These functions perform operations on points along an elliptic curve — essentially, doing math with the locations of these points — which are easy to do in one direction and hard to undo. This one-way difficulty is based on the Elliptic Curve Discrete Logarithm Problem (ECDLP), which is a problem so hard to solve that it ensures the security of the hash function. The difficulty of reversing these operations is what makes the Pedersen hash function secure and reliable for cryptographic purposes.</p>
-<p>Poseidon is a family of hash functions designed to be very efficient as algebraic circuits. Its design is particularly efficient for Zero-Knowledge proof systems, including STARKs (so, Cairo). Poseidon uses a method called a 'sponge construction,' which soaks up data and transforms it securely using a process known as the Hades permutation. Cairo's version of Poseidon is based on a three-element state permutation with <a href="https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt">specific parameters</a>.</p>
+<p>Pedersen hash functions are cryptographic algorithms that rely on <a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">elliptic
+curve cryptography</a>. These functions perform operations on points along
+an elliptic curve — essentially, doing math with the locations of these points —
+which are easy to do in one direction and hard to undo. This one-way difficulty
+is based on the Elliptic Curve Discrete Logarithm Problem (ECDLP), which is a
+problem so hard to solve that it ensures the security of the hash function. The
+difficulty of reversing these operations is what makes the Pedersen hash
+function secure and reliable for cryptographic purposes.</p>
+<p>Poseidon is a family of hash functions designed to be very efficient as
+algebraic circuits. Its design is particularly efficient for Zero-Knowledge
+proof systems, including STARKs (so, Cairo). Poseidon uses a method called a
+'sponge construction,' which soaks up data and transforms it securely using a
+process known as the Hades permutation. Cairo's version of Poseidon is based on
+a three-element state permutation with <a href="https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt">specific
+parameters</a>.</p>
 <h4 id="when-to-use-them"><a class="header" href="#when-to-use-them">When to Use Them?</a></h4>
-<p>Pedersen was the first hash function used on Starknet, and is still used to compute the addresses of variables in storage (for example, <code>LegacyMap</code> uses Pedersen to hash the keys of a storage mapping on Starknet). However, as Poseidon is cheaper and faster than Pedersen when working with STARK proofs system, it's now the recommended hash function to use in Cairo programs.</p>
+<p>Pedersen was the first hash function used on Starknet, and is still used to
+compute the addresses of variables in storage (for example, <code>LegacyMap</code> uses
+Pedersen to hash the keys of a storage mapping on Starknet). However, as
+Poseidon is cheaper and faster than Pedersen when working with STARK proofs
+system, it's now the recommended hash function to use in Cairo programs.</p>
 <h3 id="working-with-hashes"><a class="header" href="#working-with-hashes">Working with Hashes</a></h3>
-<p>The core library makes it easy to work with hashes. The <code>Hash</code> trait is implemented for all types that can be converted to <code>felt252</code>, including <code>felt252</code> itself. For more complex types like structs, deriving <code>Hash</code> allows them to be hashed easily using the hash function of your choice - given that all of the struct's fields are themselves hashable. You cannot derive the <code>Hash</code> trait on a struct that contains un-hashable values, such as <code>Array&lt;T&gt;</code> or <code>Felt252Dict&lt;T&gt;</code>, even if <code>T</code> itself is hashable.</p>
-<p>The <code>Hash</code> trait is accompanied by the <code>HashStateTrait</code> and <code>HashStateExTrait</code> that define the basic methods to work with hashes. They allow you to initialize a hash state that will contain the temporary values of the hash after each application of the hash function, update the hash state and finalize it when the computation is completed. <code>HashStateTrait</code> and <code>HashStateExTrait</code> are defined as follows:</p>
+<p>The core library makes it easy to work with hashes. The <code>Hash</code> trait is
+implemented for all types that can be converted to <code>felt252</code>, including
+<code>felt252</code> itself. For more complex types like structs, deriving <code>Hash</code> allows
+them to be hashed easily using the hash function of your choice - given that all
+of the struct's fields are themselves hashable. You cannot derive the <code>Hash</code>
+trait on a struct that contains un-hashable values, such as <code>Array&lt;T&gt;</code> or
+<code>Felt252Dict&lt;T&gt;</code>, even if <code>T</code> itself is hashable.</p>
+<p>The <code>Hash</code> trait is accompanied by the <code>HashStateTrait</code> and <code>HashStateExTrait</code>
+that define the basic methods to work with hashes. They allow you to initialize
+a hash state that will contain the temporary values of the hash after each
+application of the hash function, update the hash state and finalize it when the
+computation is completed. <code>HashStateTrait</code> and <code>HashStateExTrait</code> are defined as
+follows:</p>
 <pre><code class="language-cairo noplayground">/// A trait for hash state accumulators.
 trait HashStateTrait&lt;S&gt; {
     fn update(self: S, value: felt252) -&gt; S;
@@ -302,8 +339,17 @@ trait Hash&lt;T, S, +HashStateTrait&lt;S&gt;&gt; {
     fn update_state(state: S, value: T) -&gt; S;
 }
 </code></pre>
-<p>To use hashes in your code, you must first import the relevant traits and functions. In the following example, we will demonstrate how to hash a struct using both the Pedersen and Poseidon hash functions.</p>
-<p>The first step is to initialize the hash with either <code>PoseidonTrait::new() -&gt; HashState</code> or <code>PedersenTrait::new(base: felt252) -&gt; HashState</code> depending on which hash function we want to work with. Then the hash state can be updated with the <code>update(self: HashState, value: felt252) -&gt; HashState</code> or <code>update_with(self: S, value: T) -&gt; S</code> functions as many times as required. Then the function <code>finalize(self: HashState) -&gt; felt252</code> is called on the hash state and it returns the value of the hash as a <code>felt252</code>.</p>
+<p>To use hashes in your code, you must first import the relevant traits and
+functions. In the following example, we will demonstrate how to hash a struct
+using both the Pedersen and Poseidon hash functions.</p>
+<p>The first step is to initialize the hash with either
+<code>PoseidonTrait::new() -&gt; HashState</code> or
+<code>PedersenTrait::new(base: felt252) -&gt; HashState</code> depending on which hash
+function we want to work with. Then the hash state can be updated with the
+<code>update(self: HashState, value: felt252) -&gt; HashState</code> or
+<code>update_with(self: S, value: T) -&gt; S</code> functions as many times as required. Then
+the function <code>finalize(self: HashState) -&gt; felt252</code> is called on the hash state
+and it returns the value of the hash as a <code>felt252</code>.</p>
 <pre><code class="language-cairo">use core::hash::{HashStateExTrait, HashStateTrait};
 use core::poseidon::PoseidonTrait;
 
@@ -323,7 +369,10 @@ fn main() -&gt; felt252 {
     hash
 }
 </code></pre>
-<p>Pedersen is different from Poseidon, as it starts with a base state. This base state must be of <code>felt252</code> type, which forces us to either hash the struct with an arbitrary base state using the <code>update_with</code> method, or serialize the struct into an array to loop through all of its fields and hash its elements together.</p>
+<p>Pedersen is different from Poseidon, as it starts with a base state. This base
+state must be of <code>felt252</code> type, which forces us to either hash the struct with
+an arbitrary base state using the <code>update_with</code> method, or serialize the struct
+into an array to loop through all of its fields and hash its elements together.</p>
 <p>Here is a short example of Pedersen hashing:</p>
 <pre><code class="language-cairo"><span class="boring">use core::hash::{HashStateExTrait, HashStateTrait};
 </span><span class="boring">use core::pedersen::PedersenTrait;
@@ -362,12 +411,17 @@ fn main() -&gt; (felt252, felt252) {
 </span></code></pre>
 <h3 id="advanced-hashing-hashing-arrays-with-poseidon"><a class="header" href="#advanced-hashing-hashing-arrays-with-poseidon">Advanced Hashing: Hashing Arrays with Poseidon</a></h3>
 <p>Let us look at an example of hashing a struct that contains a <code>Span&lt;felt252&gt;</code>.
-To hash a <code>Span&lt;felt252&gt;</code> or a struct that contains a <code>Span&lt;felt252&gt;</code> you can use the built-in function <code>poseidon_hash_span(mut span: Span&lt;felt252&gt;) -&gt; felt252</code>. Similarly, you can hash <code>Array&lt;felt252&gt;</code> by calling <code>poseidon_hash_span</code> on its span.</p>
+To hash a <code>Span&lt;felt252&gt;</code> or a struct that contains a <code>Span&lt;felt252&gt;</code> you can
+use the built-in function
+<code>poseidon_hash_span(mut span: Span&lt;felt252&gt;) -&gt; felt252</code>. Similarly, you can
+hash <code>Array&lt;felt252&gt;</code> by calling <code>poseidon_hash_span</code> on its span.</p>
 <p>First, let us import the following traits and function:</p>
 <pre><code class="language-cairo noplayground">use core::hash::{HashStateExTrait, HashStateTrait};
 use core::poseidon::{PoseidonTrait, poseidon_hash_span};
 </code></pre>
-<p>Now we define the struct. As you might have noticed, we didn't derive the <code>Hash</code> trait. If you attempt to derive the <code>Hash</code> trait for this struct, it will result in an error because the structure contains a field that is not hashable.</p>
+<p>Now we define the struct. As you might have noticed, we didn't derive the <code>Hash</code>
+trait. If you attempt to derive the <code>Hash</code> trait for this struct, it will result
+in an error because the structure contains a field that is not hashable.</p>
 <pre><code class="language-cairo  noplayground">#[derive(Drop)]
 struct StructForHashArray {
     first: felt252,
@@ -375,8 +429,10 @@ struct StructForHashArray {
     third: Array&lt;felt252&gt;,
 }
 </code></pre>
-<p>In this example, we initialized a <code>HashState</code> (<code>hash</code>), updated it and then called the function <code>finalize()</code> on the
-<code>HashState</code> to get the computed hash <code>hash_felt252</code>. We used <code>poseidon_hash_span</code> on the <code>Span</code> of the <code>Array&lt;felt252&gt;</code> to compute its hash.</p>
+<p>In this example, we initialized a <code>HashState</code> (<code>hash</code>), updated it and then
+called the function <code>finalize()</code> on the <code>HashState</code> to get the computed hash
+<code>hash_felt252</code>. We used <code>poseidon_hash_span</code> on the <code>Span</code> of the
+<code>Array&lt;felt252&gt;</code> to compute its hash.</p>
 <pre><code class="language-cairo"><span class="boring">use core::hash::{HashStateExTrait, HashStateTrait};
 </span><span class="boring">use core::poseidon::{PoseidonTrait, poseidon_hash_span};
 </span><span class="boring">
@@ -432,24 +488,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

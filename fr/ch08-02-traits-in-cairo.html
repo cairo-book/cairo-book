@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,16 +274,28 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="traits-in-cairo"><a class="header" href="#traits-in-cairo">Traits in Cairo</a></h1>
-<p>A trait defines a set of methods that can be implemented by a type. These methods can be called on instances of the type when this trait is implemented.
-A trait combined with a generic type defines functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way.
-We can use <em>trait bounds</em> to specify that a generic type can be any type that has certain behavior.</p>
+<p>A trait defines a set of methods that can be implemented by a type. These
+methods can be called on instances of the type when this trait is implemented. A
+trait combined with a generic type defines functionality a particular type has
+and can share with other types. We can use traits to define shared behavior in
+an abstract way. We can use <em>trait bounds</em> to specify that a generic type can be
+any type that has certain behavior.</p>
 <blockquote>
-<p>Note: Traits are similar to a feature often called interfaces in other languages, although with some differences.</p>
+<p>Note: Traits are similar to a feature often called interfaces in other
+languages, although with some differences.</p>
 </blockquote>
-<p>While traits can be written to not accept generic types, they are most useful when used with generic types. We already covered generics in the <a href="./ch08-01-generic-data-types.html">previous chapter</a>, and we will use them in this chapter to demonstrate how traits can be used to define shared behavior for generic types.</p>
+<p>While traits can be written to not accept generic types, they are most useful
+when used with generic types. We already covered generics in the <a href="./ch08-01-generic-data-types.html">previous
+chapter</a>, and we will use them in this chapter to demonstrate how
+traits can be used to define shared behavior for generic types.</p>
 <h2 id="defining-a-trait"><a class="header" href="#defining-a-trait">Defining a Trait</a></h2>
-<p>A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.</p>
-<p>For example, let’s say we have a struct <code>NewsArticle</code> that holds a news story in a particular location. We can define a trait <code>Summary</code> that describes the behavior of something that can summarize the <code>NewsArticle</code> type.</p>
+<p>A type’s behavior consists of the methods we can call on that type. Different
+types share the same behavior if we can call the same methods on all of those
+types. Trait definitions are a way to group method signatures together to define
+a set of behaviors necessary to accomplish some purpose.</p>
+<p>For example, let’s say we have a struct <code>NewsArticle</code> that holds a news story in
+a particular location. We can define a trait <code>Summary</code> that describes the
+behavior of something that can summarize the <code>NewsArticle</code> type.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">#[derive(Drop, Clone)]
 </span><span class="boring">struct NewsArticle {
 </span><span class="boring">    headline: ByteArray,
@@ -303,15 +316,29 @@ We can use <em>trait bounds</em> to specify that a generic type can be any type 
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption"> Listing 8-1: A <code>Summary</code> trait that consists of the behavior provided by a <code>summarize</code> method</span></p>
-<p>In Listing 8-1, we declare a trait using the <code>trait</code> keyword and then the trait’s name, which is <code>Summary</code> in this case.
-We’ve also declared the trait as <code>pub</code> so that crates depending on this crate can make use of this trait too, as we’ll see in a few examples.</p>
-<p>Inside the curly brackets, we declare the method signatures that describe the behaviors of the types that implement this trait, which in this case is <code>fn summarize(self: @NewsArticle) -&gt; ByteArray;</code>. After the method signature, instead of providing an implementation within curly brackets, we use a semicolon.</p>
+<p>8-1: A <code>Summary</code> trait that consists of the behavior
+provided by a <code>summarize</code> method</span></p>
+<p>In Listing 8-1, we declare a trait using the <code>trait</code>
+keyword and then the trait’s name, which is <code>Summary</code> in this case. We’ve also
+declared the trait as <code>pub</code> so that crates depending on this crate can make use
+of this trait too, as we’ll see in a few examples.</p>
+<p>Inside the curly brackets, we declare the method signatures that describe the
+behaviors of the types that implement this trait, which in this case is
+<code>fn summarize(self: @NewsArticle) -&gt; ByteArray;</code>. After the method signature,
+instead of providing an implementation within curly brackets, we use a
+semicolon.</p>
 <blockquote>
 <p>Note: the <code>ByteArray</code> type is the type used to represent strings in Cairo.</p>
 </blockquote>
-<p>As the trait is not generic, the <code>self</code> parameter is not generic either and is of type <code>@NewsArticle</code>. This means that the <code>summarize</code> method can only be called on instances of <code>NewsArticle</code>.</p>
-<p>Now, consider that we want to make a media aggregator library crate named <em>aggregator</em> that can display summaries of data that might be stored in a <code>NewsArticle</code> or <code>Tweet</code> instance. To do this, we need a summary from each type, and we’ll request that summary by calling a summarize method on an instance of that type. By defining the <code>Summary</code> trait on generic type <code>T</code>, we can implement the <code>summarize</code> method on any type we want to be able to summarize.</p>
+<p>As the trait is not generic, the <code>self</code> parameter is not generic either and is
+of type <code>@NewsArticle</code>. This means that the <code>summarize</code> method can only be
+called on instances of <code>NewsArticle</code>.</p>
+<p>Now, consider that we want to make a media aggregator library crate named
+<em>aggregator</em> that can display summaries of data that might be stored in a
+<code>NewsArticle</code> or <code>Tweet</code> instance. To do this, we need a summary from each type,
+and we’ll request that summary by calling a summarize method on an instance of
+that type. By defining the <code>Summary</code> trait on generic type <code>T</code>, we can implement
+the <code>summarize</code> method on any type we want to be able to summarize.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">mod aggregator {
 </span>    pub trait Summary&lt;T&gt; {
         fn summarize(self: @T) -&gt; ByteArray;
@@ -370,17 +397,22 @@ We’ve also declared the trait as <code>pub</code> so that crates depending on 
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption"> Listing 8-2: A <code>Summary</code> trait that consists of the behavior provided by a <code>summarize</code> method for a generic type</span></p>
-<p>Each type implementing this trait must provide its own custom behavior for the body of the method. The compiler will enforce that any type that implements the <code>Summary</code> trait will have the method <code>summarize</code> defined with this signature exactly.</p>
-<p>A trait can have multiple methods in its body: the method signatures are listed one per line and each line ends in a semicolon.</p>
+<p>8-2: A <code>Summary</code> trait that consists of the behavior
+provided by a <code>summarize</code> method for a generic type</span></p>
+<p>Each type implementing this trait must provide its own custom behavior for the
+body of the method. The compiler will enforce that any type that implements the
+<code>Summary</code> trait will have the method <code>summarize</code> defined with this signature
+exactly.</p>
+<p>A trait can have multiple methods in its body: the method signatures are listed
+one per line and each line ends in a semicolon.</p>
 <h2 id="implementing-a-trait-on-a-type"><a class="header" href="#implementing-a-trait-on-a-type">Implementing a Trait on a Type</a></h2>
 <p>Now that we’ve defined the desired signatures of the <code>Summary</code> trait’s methods,
-we can implement it on the types in our media aggregator. The following code shows
-an implementation of the <code>Summary</code> trait on the <code>NewsArticle</code> struct that uses
-the headline, the author, and the location to create the return value of
+we can implement it on the types in our media aggregator. The following code
+shows an implementation of the <code>Summary</code> trait on the <code>NewsArticle</code> struct that
+uses the headline, the author, and the location to create the return value of
 <code>summarize</code>. For the <code>Tweet</code> struct, we define <code>summarize</code> as the username
-followed by the entire text of the tweet, assuming that tweet content is
-already limited to 280 characters.</p>
+followed by the entire text of the tweet, assuming that tweet content is already
+limited to 280 characters.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">mod aggregator {
 </span><span class="boring">    pub trait Summary&lt;T&gt; {
 </span><span class="boring">        fn summarize(self: @T) -&gt; ByteArray;
@@ -439,16 +471,20 @@ already limited to 280 characters.</p>
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption"> Listing 8-3: Implementation of the <code>Summary</code> trait on <code>NewsArticle</code> and <code>Tweet</code></span></p>
+<p>Implementation of the <code>Summary</code> trait on <code>NewsArticle</code> and <code>Tweet</code></span></p>
 <p>Implementing a trait on a type is similar to implementing regular methods. The
-difference is that after <code>impl</code>, we put a name for the implementation,
-then use the <code>of</code> keyword, and then specify the name of the trait we are writing the implementation for.
-If the implementation is for a generic type, we place the generic type name in the angle brackets after the trait name.</p>
-<p>Note that for the trait method to be accessible, there must be an implementation of that trait visible from the scope where the method is called. If the trait is <code>pub</code> and the implementation is not, and the implementation is not visible in the scope where the trait method is called, this will cause a compilation error.</p>
-<p>Within the <code>impl</code> block, we put the method signatures
-that the trait definition has defined. Instead of adding a semicolon after each
-signature, we use curly brackets and fill in the method body with the specific
-behavior that we want the methods of the trait to have for the particular type.</p>
+difference is that after <code>impl</code>, we put a name for the implementation, then use
+the <code>of</code> keyword, and then specify the name of the trait we are writing the
+implementation for. If the implementation is for a generic type, we place the
+generic type name in the angle brackets after the trait name.</p>
+<p>Note that for the trait method to be accessible, there must be an implementation
+of that trait visible from the scope where the method is called. If the trait is
+<code>pub</code> and the implementation is not, and the implementation is not visible in
+the scope where the trait method is called, this will cause a compilation error.</p>
+<p>Within the <code>impl</code> block, we put the method signatures that the trait definition
+has defined. Instead of adding a semicolon after each signature, we use curly
+brackets and fill in the method body with the specific behavior that we want the
+methods of the trait to have for the particular type.</p>
 <p>Now that the library has implemented the <code>Summary</code> trait on <code>NewsArticle</code> and
 <code>Tweet</code>, users of the crate can call the trait methods on instances of
 <code>NewsArticle</code> and <code>Tweet</code> in the same way we call regular methods. The only
@@ -523,10 +559,16 @@ New tweet! EliBenSasson: Crypto is full of short-term maximizing projects.
 
 
 </code></pre>
-<p>Other crates that depend on the <em>aggregator</em> crate can also bring the <code>Summary</code> trait into scope to implement <code>Summary</code> on their own types.</p>
+<p>Other crates that depend on the <em>aggregator</em> crate can also bring the <code>Summary</code>
+trait into scope to implement <code>Summary</code> on their own types.</p>
 <h2 id="default-implementations"><a class="header" href="#default-implementations">Default Implementations</a></h2>
-<p>Sometimes it’s useful to have default behavior for some or all of the methods in a trait instead of requiring implementations for all methods on every type. Then, as we implement the trait on a particular type, we can keep or override each method’s default behavior.</p>
-<p>In Listing 8-5 we specify a default string for the <code>summarize</code> method of the <code>Summary</code> trait instead of only defining the method signature, as we did in Listing 8-2.</p>
+<p>Sometimes it’s useful to have default behavior for some or all of the methods in
+a trait instead of requiring implementations for all methods on every type.
+Then, as we implement the trait on a particular type, we can keep or override
+each method’s default behavior.</p>
+<p>In Listing 8-5 we specify a default string for the <code>summarize</code>
+method of the <code>Summary</code> trait instead of only defining the method signature, as
+we did in Listing 8-2.</p>
 <p><span class="caption">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo"><span class="boring">mod aggregator {
 </span>    pub trait Summary&lt;T&gt; {
@@ -576,9 +618,15 @@ New tweet! EliBenSasson: Crypto is full of short-term maximizing projects.
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption"> Listing 8-5: Defining a <code>Summary</code> trait with a default implementation of the <code>summarize</code> method</span></p>
-<p>To use a default implementation to summarize instances of <code>NewsArticle</code>, we specify an empty <code>impl</code> block with <code>impl NewsArticleSummary of Summary&lt;NewsArticle&gt; {}</code>.</p>
-<p>Even though we’re no longer defining the <code>summarize</code> method on <code>NewsArticle</code> directly, we’ve provided a default implementation and specified that <code>NewsArticle</code> implements the <code>Summary</code> trait. As a result, we can still call the <code>summarize</code> method on an instance of <code>NewsArticle</code>, like this:</p>
+<p>Defining a <code>Summary</code> trait with a default implementation of the <code>summarize</code>
+method</span></p>
+<p>To use a default implementation to summarize instances of <code>NewsArticle</code>, we
+specify an empty <code>impl</code> block with
+<code>impl NewsArticleSummary of Summary&lt;NewsArticle&gt; {}</code>.</p>
+<p>Even though we’re no longer defining the <code>summarize</code> method on <code>NewsArticle</code>
+directly, we’ve provided a default implementation and specified that
+<code>NewsArticle</code> implements the <code>Summary</code> trait. As a result, we can still call the
+<code>summarize</code> method on an instance of <code>NewsArticle</code>, like this:</p>
 <pre><code class="language-cairo"><span class="boring">mod aggregator {
 </span><span class="boring">    pub trait Summary&lt;T&gt; {
 </span><span class="boring">        fn summarize(self: @T) -&gt; ByteArray {
@@ -628,8 +676,17 @@ fn main() {
 </span><span class="boring">
 </span></code></pre>
 <p>This code prints <code>New article available! (Read more...)</code>.</p>
-<p>Creating a default implementation doesn’t require us to change anything about the previous implementation of <code>Summary</code> on <code>Tweet</code>. The reason is that the syntax for overriding a default implementation is the same as the syntax for implementing a trait method that doesn’t have a default implementation.</p>
-<p>Default implementations can call other methods in the same trait, even if those other methods don’t have a default implementation. In this way, a trait can provide a lot of useful functionality and only require implementors to specify a small part of it. For example, we could define the <code>Summary</code> trait to have a <code>summarize_author</code> method whose implementation is required, and then define a <code>summarize</code> method that has a default implementation that calls the <code>summarize_author</code> method:</p>
+<p>Creating a default implementation doesn’t require us to change anything about
+the previous implementation of <code>Summary</code> on <code>Tweet</code>. The reason is that the
+syntax for overriding a default implementation is the same as the syntax for
+implementing a trait method that doesn’t have a default implementation.</p>
+<p>Default implementations can call other methods in the same trait, even if those
+other methods don’t have a default implementation. In this way, a trait can
+provide a lot of useful functionality and only require implementors to specify a
+small part of it. For example, we could define the <code>Summary</code> trait to have a
+<code>summarize_author</code> method whose implementation is required, and then define a
+<code>summarize</code> method that has a default implementation that calls the
+<code>summarize_author</code> method:</p>
 <pre><code class="language-cairo"><span class="boring">mod aggregator {
 </span>    pub trait Summary&lt;T&gt; {
         fn summarize(
@@ -671,7 +728,8 @@ fn main() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>To use this version of <code>Summary</code>, we only need to define <code>summarize_author</code> when we implement the trait on a type:</p>
+<p>To use this version of <code>Summary</code>, we only need to define <code>summarize_author</code> when
+we implement the trait on a type:</p>
 <pre><code class="language-cairo"><span class="boring">mod aggregator {
 </span><span class="boring">    pub trait Summary&lt;T&gt; {
 </span><span class="boring">        fn summarize(
@@ -713,7 +771,11 @@ fn main() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>After we define <code>summarize_author</code>, we can call <code>summarize</code> on instances of the <code>Tweet</code> struct, and the default implementation of <code>summarize</code> will call the definition of <code>summarize_author</code> that we’ve provided. Because we’ve implemented <code>summarize_author</code>, the <code>Summary</code> trait has given us the behavior of the <code>summarize</code> method without requiring us to write any more code.</p>
+<p>After we define <code>summarize_author</code>, we can call <code>summarize</code> on instances of the
+<code>Tweet</code> struct, and the default implementation of <code>summarize</code> will call the
+definition of <code>summarize_author</code> that we’ve provided. Because we’ve implemented
+<code>summarize_author</code>, the <code>Summary</code> trait has given us the behavior of the
+<code>summarize</code> method without requiring us to write any more code.</p>
 <pre><code class="language-cairo"><span class="boring">mod aggregator {
 </span><span class="boring">    pub trait Summary&lt;T&gt; {
 </span><span class="boring">        fn summarize(
@@ -756,7 +818,8 @@ fn main() {
 </span><span class="boring">
 </span></code></pre>
 <p>This code prints <code>1 new tweet: (Read more from @EliBenSasson...)</code>.</p>
-<p>Note that it isn’t possible to call the default implementation from an overriding implementation of that same method.</p>
+<p>Note that it isn’t possible to call the default implementation from an
+overriding implementation of that same method.</p>
 <!-- TODO: NOT AVAILABLE IN CAIRO FOR NOW move traits as parameters here -->
 <!-- ## Traits as parameters
 
@@ -774,9 +837,16 @@ function with any other type, such as a `String` or an `i32`, won’t compile
 because those types don’t implement `Summary`. -->
 <!-- TODO NOT AVAILABLE IN CAIRO FOR NOW Using trait bounds to conditionally implement methods -->
 <h2 id="managing-and-using-external-trait"><a class="header" href="#managing-and-using-external-trait">Managing and Using External Trait</a></h2>
-<p>To use traits methods, you need to make sure the correct traits/implementation(s) are imported. In some cases you might need to import not only the trait but also the implementation if they are declared in separate modules.
-If <code>CircleGeometry</code> implementation was in a separate module/file named <em>circle</em>, then to define <code>boundary</code> method on <code>Circle</code> struct, we'd need to import <code>ShapeGeometry</code> trait in the <em>circle</em> module.</p>
-<p>If the code were to be organized into modules like in Listing 8-6 where the implementation of a trait is defined in a different module than the trait itself, explicitly importing the relevant trait or implementation would be required.</p>
+<p>To use traits methods, you need to make sure the correct
+traits/implementation(s) are imported. In some cases you might need to import
+not only the trait but also the implementation if they are declared in separate
+modules. If <code>CircleGeometry</code> implementation was in a separate module/file named
+<em>circle</em>, then to define <code>boundary</code> method on <code>Circle</code> struct, we'd need to
+import <code>ShapeGeometry</code> trait in the <em>circle</em> module.</p>
+<p>If the code were to be organized into modules like in Listing
+8-6 where the implementation of a trait is defined in a
+different module than the trait itself, explicitly importing the relevant trait
+or implementation would be required.</p>
 <pre><code class="language-cairo noplayground">// Here T is an alias type which will be provided during implementation
 pub trait ShapeGeometry&lt;T&gt; {
     fn boundary(self: T) -&gt; u64;
@@ -839,10 +909,20 @@ fn main() {
     println!("Circle boundary: {}", ShapeGeometry::boundary(circ)); //31
 }
 </code></pre>
-<p><span class="caption"> Listing 8-6: Implementing an external trait</span></p>
-<p>Note that in Listing 8-6, <code>CircleGeometry</code> and <code>RectangleGeometry</code> implementations don't need to be declared as <code>pub</code>. Indeed, <code>ShapeGeometry</code> trait, which is public, is used to print the result in the <code>main</code> function. The compiler will find the appropriate implementation for the <code>ShapeGeometry</code> public trait, regardless of the implementation visibility.</p>
+<p>8-6: Implementing an external trait</span></p>
+<p>Note that in Listing 8-6, <code>CircleGeometry</code> and
+<code>RectangleGeometry</code> implementations don't need to be declared as <code>pub</code>. Indeed,
+<code>ShapeGeometry</code> trait, which is public, is used to print the result in the
+<code>main</code> function. The compiler will find the appropriate implementation for the
+<code>ShapeGeometry</code> public trait, regardless of the implementation visibility.</p>
 <h2 id="impl-aliases"><a class="header" href="#impl-aliases">Impl Aliases</a></h2>
-<p>Implementations can be aliased when imported. This is most useful when you want to instantiate generic implementations with concrete types. For example, let's say we define a trait <code>Two</code> that is used to return the value <code>2</code> for a type <code>T</code>. We can write a trivial generic implementation of <code>Two</code> for all types that implement the <code>One</code> trait, simply by adding twice the value of <code>one</code> and returning it. However, in our public API, we may only want to expose the <code>Two</code> implementation for the <code>u8</code> and <code>u128</code> types.</p>
+<p>Implementations can be aliased when imported. This is most useful when you want
+to instantiate generic implementations with concrete types. For example, let's
+say we define a trait <code>Two</code> that is used to return the value <code>2</code> for a type <code>T</code>.
+We can write a trivial generic implementation of <code>Two</code> for all types that
+implement the <code>One</code> trait, simply by adding twice the value of <code>one</code> and
+returning it. However, in our public API, we may only want to expose the <code>Two</code>
+implementation for the <code>u8</code> and <code>u128</code> types.</p>
 <pre><code class="language-cairo noplayground">trait Two&lt;T&gt; {
     fn two() -&gt; T;
 }
@@ -860,15 +940,32 @@ mod one_based {
 pub impl U8Two = one_based::TwoImpl&lt;u8&gt;;
 pub impl U128Two = one_based::TwoImpl&lt;u128&gt;;
 </code></pre>
-<p><span class="caption"> Listing 8-7: Using impl aliases to instantiate generic impls with concrete types</span></p>
-<p>We can define the generic implementation in a private module, use an impl alias to instantiate the generic implementation for these two concrete types, and make these two implementations public, while keeping the generic implementation private and unexposed. This way, we can avoid code duplication using the generic implementation, while keeping the public API clean and simple.</p>
+<p>Using impl aliases to instantiate generic impls with concrete types</span></p>
+<p>We can define the generic implementation in a private module, use an impl alias
+to instantiate the generic implementation for these two concrete types, and make
+these two implementations public, while keeping the generic implementation
+private and unexposed. This way, we can avoid code duplication using the generic
+implementation, while keeping the public API clean and simple.</p>
 <h2 id="negative-impls"><a class="header" href="#negative-impls">Negative Impls</a></h2>
 <blockquote>
-<p>Note: This is still an experimental feature and can only be used if <code>experimental-features = ["negative_impls"]</code> is enabled in your <em>Scarb.toml</em> file, under the <code>[package]</code> section.</p>
+<p>Note: This is still an experimental feature and can only be used if
+<code>experimental-features = ["negative_impls"]</code> is enabled in your <em>Scarb.toml</em>
+file, under the <code>[package]</code> section.</p>
 </blockquote>
-<p>Negative implementations, also known as negative traits or negative bounds, are a mechanism that allows you to express that a type does not implement a certain trait when defining the implementation of a trait over a generic type. Negative impls enable you to write implementations that are applicable only when another implementation does not exist in the current scope.</p>
-<p>For example, let's say we have a trait <code>Producer</code> and a trait <code>Consumer</code>, and we want to define a generic behavior where all types implement the <code>Consumer</code> trait by default. However, we want to ensure that no type can be both a <code>Consumer</code> and a <code>Producer</code>. We can use negative impls to express this restriction.</p>
-<p>In Listing 8-8, we define a <code>ProducerType</code> that implements the <code>Producer</code> trait, and two other types, <code>AnotherType</code> and <code>AThirdType</code>, which do not implement the <code>Producer</code> trait. We then use negative impls to create a default implementation of the <code>Consumer</code> trait for all types that do not implement the <code>Producer</code> trait.</p>
+<p>Negative implementations, also known as negative traits or negative bounds, are
+a mechanism that allows you to express that a type does not implement a certain
+trait when defining the implementation of a trait over a generic type. Negative
+impls enable you to write implementations that are applicable only when another
+implementation does not exist in the current scope.</p>
+<p>For example, let's say we have a trait <code>Producer</code> and a trait <code>Consumer</code>, and we
+want to define a generic behavior where all types implement the <code>Consumer</code> trait
+by default. However, we want to ensure that no type can be both a <code>Consumer</code> and
+a <code>Producer</code>. We can use negative impls to express this restriction.</p>
+<p>In Listing 8-8, we define a <code>ProducerType</code> that implements
+the <code>Producer</code> trait, and two other types, <code>AnotherType</code> and <code>AThirdType</code>, which
+do not implement the <code>Producer</code> trait. We then use negative impls to create a
+default implementation of the <code>Consumer</code> trait for all types that do not
+implement the <code>Producer</code> trait.</p>
 <pre><code class="language-cairo">#[derive(Drop)]
 struct ProducerType {}
 
@@ -910,15 +1007,34 @@ fn main() {
     third_type.consume(production);
 }
 </code></pre>
-<p><span class="caption"> Listing 8-8: Using negative impls to enforce that a type cannot implement both <code>Producer</code> and <code>Consumer</code> traits simultaneously</span></p>
-<p>In the <code>main</code> function, we create instances of <code>ProducerType</code>, <code>AnotherType</code>, and <code>AThirdType</code>. We then call the <code>produce</code> method on the <code>producer</code> instance and pass the result to the <code>consume</code> method on the <code>another_type</code> and <code>third_type</code> instances. Finally, we try to call the <code>consume</code> method on the <code>producer</code> instance, which results in a compile-time error because <code>ProducerType</code> does not implement the <code>Consumer</code> trait.</p>
+<p>8-8: Using negative impls to enforce that a type cannot
+implement both <code>Producer</code> and <code>Consumer</code> traits simultaneously</span></p>
+<p>In the <code>main</code> function, we create instances of <code>ProducerType</code>, <code>AnotherType</code>,
+and <code>AThirdType</code>. We then call the <code>produce</code> method on the <code>producer</code> instance
+and pass the result to the <code>consume</code> method on the <code>another_type</code> and
+<code>third_type</code> instances. Finally, we try to call the <code>consume</code> method on the
+<code>producer</code> instance, which results in a compile-time error because
+<code>ProducerType</code> does not implement the <code>Consumer</code> trait.</p>
 <h2 id="constraint-traits-on-associated-items"><a class="header" href="#constraint-traits-on-associated-items">Constraint traits on associated items</a></h2>
 <blockquote>
-<p>Currently, associated items are considered an experimental feature. In order to use them, you need to add the following to your <code>Scarb.toml</code> under the <code>[package]</code> section: <code>experimental-features = ["associated_item_constraints"]</code>.</p>
+<p>Currently, associated items are considered an experimental feature. In order
+to use them, you need to add the following to your <code>Scarb.toml</code> under the
+<code>[package]</code> section:
+<code>experimental-features = ["associated_item_constraints"]</code>.</p>
 </blockquote>
-<p>In some cases, you may want to constrain the <a href="./ch12-10-associated-items.html">associated items</a> of a trait based on the type of the generic parameter. You can do this using the <code>[AssociatedItem: ConstrainedValue]</code> syntax after a trait bound.</p>
-<p>Let's say you want to implement an <code>extend</code> method for collections. This method takes an iterator and add its elements to the collection. To ensure type safety, we want the iterator's elements to match the collection's element type. We can achieve this by constraining the <code>Iterator::Item</code> associated type to match the collection's type.</p>
-<p>In Listing 8-9, we implement this by defining a trait <code>Extend&lt;T, A&gt;</code> and use <code>[Item: A]</code> as a constraint on the <code>extend</code> function's trait bound. Additionally, we use the <code>Destruct</code> trait to ensure that the iterator is consumed, and show an example implementation for <code>Extend&lt;Array&lt;T&gt;, T&gt;</code>.</p>
+<p>In some cases, you may want to constrain the <a href="./ch12-10-associated-items.html">associated items</a> of a trait based
+on the type of the generic parameter. You can do this using the
+<code>[AssociatedItem: ConstrainedValue]</code> syntax after a trait bound.</p>
+<p>Let's say you want to implement an <code>extend</code> method for collections. This method
+takes an iterator and add its elements to the collection. To ensure type safety,
+we want the iterator's elements to match the collection's element type. We can
+achieve this by constraining the <code>Iterator::Item</code> associated type to match the
+collection's type.</p>
+<p>In Listing 8-9, we implement this by defining
+a trait <code>Extend&lt;T, A&gt;</code> and use <code>[Item: A]</code> as a constraint on the <code>extend</code>
+function's trait bound. Additionally, we use the <code>Destruct</code> trait to ensure that
+the iterator is consumed, and show an example implementation for
+<code>Extend&lt;Array&lt;T&gt;, T&gt;</code>.</p>
 <pre><code class="language-cairo">trait Extend&lt;T, A&gt; {
     fn extend&lt;I, +core::iter::Iterator&lt;I&gt;[Item: A], +Destruct&lt;I&gt;&gt;(ref self: T, iterator: I);
 }
@@ -931,11 +1047,20 @@ impl ArrayExtend&lt;T, +Drop&lt;T&gt;&gt; of Extend&lt;Array&lt;T&gt;, T&gt; {
     }
 }
 </code></pre>
-<p><span class="caption"> Listing 8-9: Using associated items constraints to ensure that a type matches the associated type of another type</span></p>
+<p>8-9: Using associated items constraints to
+ensure that a type matches the associated type of another type</span></p>
 <h2 id="typeequal-trait-for-type-equality-constraints"><a class="header" href="#typeequal-trait-for-type-equality-constraints"><code>TypeEqual</code> Trait for type equality constraints</a></h2>
-<p>The <code>TypeEqual</code> trait from the <code>core::metaprogramming</code> module lets you create constraints based on type equality. In most of the cases, you don't need <code>+TypeEqual</code> and you can achieve the same using only generic arguments and associated type constraints, but <code>TypeEqual</code> can be useful in some advanced scenarios.</p>
-<p>The first use case is implementing a trait for all types that match certain conditions, except for specific types. We do this using a negative implementation on the <code>TypeEqual</code> trait.</p>
-<p>In Listing 8-10, we create a <code>SafeDefault</code> trait and implement it for any type <code>T</code> that implements <code>Default</code>. However, we exclude the <code>SensitiveData</code> type using <code>-TypeEqual&lt;T, SensitiveData&gt;</code>.</p>
+<p>The <code>TypeEqual</code> trait from the <code>core::metaprogramming</code> module lets you create
+constraints based on type equality. In most of the cases, you don't need
+<code>+TypeEqual</code> and you can achieve the same using only generic arguments and
+associated type constraints, but <code>TypeEqual</code> can be useful in some advanced
+scenarios.</p>
+<p>The first use case is implementing a trait for all types that match certain
+conditions, except for specific types. We do this using a negative
+implementation on the <code>TypeEqual</code> trait.</p>
+<p>In Listing 8-10, we create a <code>SafeDefault</code>
+trait and implement it for any type <code>T</code> that implements <code>Default</code>. However, we
+exclude the <code>SensitiveData</code> type using <code>-TypeEqual&lt;T, SensitiveData&gt;</code>.</p>
 <pre><code class="language-cairo">trait SafeDefault&lt;T&gt; {
     fn safe_default() -&gt; T;
 }
@@ -962,9 +1087,15 @@ fn main() {
 // let _dangerous: SensitiveData = SafeDefault::safe_default();
 }
 </code></pre>
-<p><span class="caption"> Listing 8-10: Using the <code>TypeEqual</code> trait to exclude a specific type from an implementation</span></p>
-<p>The second use case is ensuring that two types are equal, particularly useful when working with <a href="./ch12-10-associated-items.html#associated-types">associated types</a>.</p>
-<p>In Listing 8-11, we show this with a <code>StateMachine</code> trait that has an associated type <code>State</code>. We create two types, <code>TA</code> and <code>TB</code>, both using <code>StateCounter</code> as their <code>State</code>. Then we implement a <code>combine</code> function that works only when both state machines have the same state type, using the bound <code>TypeEqual&lt;A::State, B::State&gt;</code>.</p>
+<p>8-10: Using the <code>TypeEqual</code> trait to exclude
+a specific type from an implementation</span></p>
+<p>The second use case is ensuring that two types are equal, particularly useful
+when working with <a href="./ch12-10-associated-items.html#associated-types">associated types</a>.</p>
+<p>In Listing 8-11, we show this with a <code>StateMachine</code>
+trait that has an associated type <code>State</code>. We create two types, <code>TA</code> and <code>TB</code>,
+both using <code>StateCounter</code> as their <code>State</code>. Then we implement a <code>combine</code>
+function that works only when both state machines have the same state type,
+using the bound <code>TypeEqual&lt;A::State, B::State&gt;</code>.</p>
 <pre><code class="language-cairo">trait StateMachine {
     type State;
     fn transition(ref state: Self::State);
@@ -1006,7 +1137,8 @@ fn main() {
     combine::&lt;TA, TB&gt;(ref initial);
 }
 </code></pre>
-<p><span class="caption"> Listing 8-11: Using the <code>TypeEqual</code> trait to ensure two types have matching associated types</span></p>
+<p>8-11: Using the <code>TypeEqual</code> trait to ensure two types
+have matching associated types</span></p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch08-02-traits&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The `MakeNoise` trait is not implemented for the `Cat` type.\nTo make use of the default implementation for `Cat`, we would need to add `impl MakeNoiseImpl of MakeNoise&lt;Cat&gt; {}`.\nThe empty implementation block `{}` tells Cairo to use the default implementation from the trait\n&quot;,&quot;id&quot;:&quot;4120c3cf-a86a-4d30-b307-4a50b2e9d627&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false},&quot;prompt&quot;:{&quot;program&quot;:&quot;pub trait MakeNoise&lt;T&gt; {\n    fn make_noise(self: @T) {\n        println!(\&quot;noise\&quot;);\n    }\n}\n\npub mod dog {\n    use super::MakeNoise;\n\n    #[derive(Drop)]\n    pub struct Dog {}\n\n    impl Barking of MakeNoise&lt;Dog&gt; {\n        fn make_noise(self: @Dog) {\n            println!(\&quot;bark\&quot;);\n        }\n    }\n}\n\npub mod cat {\n    use super::MakeNoise;\n\n    #[derive(Drop)]\n    pub struct Cat {}\n}\n\n#[executable]\nfn main() {\n    let dog = dog::Dog {};\n    dog.make_noise();\n\n    let cat = cat::Cat {};\n    cat.make_noise();\n}\n&quot;}},{&quot;context&quot;:&quot;The `draw` method is a method implemented for the `Shape` type, so it should be called on the `my_shape` object.\nIt is also possible to call the method on the snapshot of the object by using the `@` operator, for example `Drawable::draw(@my_shape)`.\n&quot;,&quot;id&quot;:&quot;af789385-e4e4-4405-8fb7-049b9a51bc3b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`my_shape.draw();`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`draw(my_shape);`&quot;,&quot;`draw(@my_shape);`&quot;],&quot;prompt&quot;:&quot;What line of code is correct to draw the shape `my_shape` in the `main` function ?\n```\n#[derive(Drop)]\nstruct Shape {}\n\ntrait Drawable&lt;T&gt; {\n    fn draw(self: @T);\n}\n\nimpl DrawableShape of Drawable&lt;Shape&gt; {\n    fn draw(self: @Shape){\n        println!(\&quot;Drawing a shape!\&quot;);\n    }\n}\n\n#[executable]\nfn main() {\n    let my_shape = Shape{};\n    // the line goes here\n}\n```\n&quot;}},{&quot;context&quot;:&quot;The code doesn't compile because there are two implementations of the trait `Consumer&lt;T&gt;` for the type `AThirdType`.\nThe implementation `TConsumerImpl` is a negative implementation of the trait `Producer&lt;T&gt;`, implementing the trait `Consumer&lt;T&gt;` for all types `T` that don't implement the trait `Producer&lt;T&gt;`.\nThe implementation `ThirdConsumerImpl` is thus redundant.\n&quot;,&quot;id&quot;:&quot;26b22cf1-9a7f-4a2d-98f3-34dab7a6dfcd&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[derive(Drop)]\nstruct ProducerType {}\n\n#[derive(Drop, Debug)]\nstruct AnotherType {}\n\n#[derive(Drop, Debug)]\nstruct AThirdType {}\n\ntrait Producer&lt;T&gt; {\n    fn produce(self: T) -&gt; u32;\n}\n\ntrait Consumer&lt;T&gt; {\n    fn consume(self: T, input: u32);\n}\n\nimpl ProducerImpl of Producer&lt;ProducerType&gt; {\n    fn produce(self: ProducerType) -&gt; u32 {\n        42\n    }\n}\n\nimpl TConsumerImpl&lt;T, +core::fmt::Debug&lt;T&gt;, +Drop&lt;T&gt;, -Producer&lt;T&gt;&gt; of Consumer&lt;T&gt; {\n    fn consume(self: T, input: u32) {\n        println!(\&quot;{:?} consumed value: {}\&quot;, self, input);\n    }\n}\n\nimpl ThirdConsumerImpl of Consumer&lt;AThirdType&gt; {\n    fn consume(self: AThirdType, input: u32) {\n        println!(\&quot;{:?} consumed value: {}\&quot;, self, input);\n    }\n}\n\n#[executable]\nfn main() {\n    let producer = ProducerType {};\n    let another_type = AnotherType {};\n    let third_type = AThirdType {};\n    let production = producer.produce();\n    another_type.consume(production);\n    third_type.consume(production);\n}\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -1043,24 +1175,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

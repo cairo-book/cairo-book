@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,31 +274,63 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="the-cairo-book"><a class="header" href="#the-cairo-book">The Cairo Book</a></h1>
-<p><em>By the Cairo Community and its <a href="https://github.com/cairo-book/cairo-book.github.io">contributors</a>. Special thanks to <a href="https://starkware.co/">StarkWare</a> through <a href="https://www.onlydust.xyz/">OnlyDust</a>, and <a href="https://voyager.online/">Voyager</a> for supporting the creation of this book.</em></p>
-<p>This version of the text assumes you’re using <a href="https://github.com/starkware-libs/cairo">Cairo</a> <a href="https://github.com/starkware-libs/cairo/releases">version 2.13.1</a> and <a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry</a> <a href="https://github.com/foundry-rs/starknet-foundry/releases">version 0.51.1</a>. See the <a href="ch01-01-installation.html">Installation</a> section of Chapter 1 to install or update Cairo and Starknet Foundry.</p>
-<p>This book is open source. Find a typo or want to contribute? Check out the book's <a href="https://github.com/cairo-book/cairo-book">GitHub repository</a>.</p>
+<p><em>By the Cairo Community and its
+<a href="https://github.com/cairo-book/cairo-book.github.io">contributors</a>. Special
+thanks to <a href="https://starkware.co/">StarkWare</a> through
+<a href="https://www.onlydust.xyz/">OnlyDust</a>, and <a href="https://voyager.online/">Voyager</a>
+for supporting the creation of this book.</em></p>
+<p>This version of the text assumes you’re using
+<a href="https://github.com/starkware-libs/cairo">Cairo</a>
+<a href="https://github.com/starkware-libs/cairo/releases">version 2.13.1</a> and
+<a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry</a>
+<a href="https://github.com/foundry-rs/starknet-foundry/releases">version 0.51.1</a>. See
+the <a href="ch01-01-installation.html">Installation</a> section of Chapter
+1 to install or update Cairo and Starknet Foundry.</p>
+<p>This book is open source. Find a typo or want to contribute? Check out the
+book's <a href="https://github.com/cairo-book/cairo-book">GitHub repository</a>.</p>
 <p>Additional resources for mastering Cairo:</p>
 <ul>
 <li>
-<p><a href="https://www.cairo-lang.org/cairovm/">The Cairo Playground</a>: A browser-based playground for Cairo, enabling to explore and experiment with Cairo by writing, compiling, debugging, and proving Cairo code without any setup</p>
+<p><a href="https://www.cairo-lang.org/cairovm/">The Cairo Playground</a>: A browser-based
+playground for Cairo, enabling to explore and experiment with Cairo by
+writing, compiling, debugging, and proving Cairo code without any setup</p>
 <blockquote>
-<p>Note: You can use the Cairo Playground to experiment with the book's code snippets and see how they compile into Sierra (Intermediate Representation) and Casm (Cairo Assembly).</p>
+<p>Note: You can use the Cairo Playground to experiment with the book's code
+snippets and see how they compile into Sierra (Intermediate Representation)
+and Casm (Cairo Assembly).</p>
 </blockquote>
 </li>
 <li>
-<p><a href="https://docs.cairo-lang.org/core?_=60">The Cairo Core Library Docs</a>: The documentation for Cairo's Core library, the standard set of types, traits, and utilities built into the language which provides essential building blocks basic used throughout the Cairo ecosystem and is automatically available in every Cairo project</p>
+<p><a href="https://docs.cairo-lang.org/core?_=60">The Cairo Core Library Docs</a>: The
+documentation for Cairo's Core library, the standard set of types, traits, and
+utilities built into the language which provides essential building blocks
+basic used throughout the Cairo ecosystem and is automatically available in
+every Cairo project</p>
 </li>
 <li>
-<p><a href="https://scarbs.xyz/">The Cairo Package Registry</a>: The host for Cairo's growing collection of reusable libraries, including <a href="https://github.com/keep-starknet-strange/alexandria">Alexandria</a>, <a href="https://docs.openzeppelin.com/contracts-cairo/1.0.0/">Open Zeppelin Contracts for Cairo</a>, all of which can be easily integrated via Scarb, streamlining development and dependency management</p>
+<p><a href="https://scarbs.xyz/">The Cairo Package Registry</a>: The host for Cairo's
+growing collection of reusable libraries, including
+<a href="https://github.com/keep-starknet-strange/alexandria">Alexandria</a>,
+<a href="https://docs.openzeppelin.com/contracts-cairo/1.0.0/">Open Zeppelin Contracts for Cairo</a>,
+all of which can be easily integrated via Scarb, streamlining development and
+dependency management</p>
 </li>
 <li>
-<p><a href="https://docs.swmansion.com/scarb/docs.html">The Scarb documentation</a>: The official documentation for Cairo’s package manager and build tool, covering how to create and manage packages, use dependencies, run builds, and configure projects</p>
+<p><a href="https://docs.swmansion.com/scarb/docs.html">The Scarb documentation</a>: The
+official documentation for Cairo’s package manager and build tool, covering
+how to create and manage packages, use dependencies, run builds, and configure
+projects</p>
 </li>
 <li>
-<p><a href="https://eprint.iacr.org/2021/1063.pdf">The Cairo whitepaper</a>: The original paper introducing Cairo by StarkWare, which explains Cairo as a language for writing provable programs, details its architecture, and shows how it enables scalable, verifiable computation without relying on trusted setups</p>
+<p><a href="https://eprint.iacr.org/2021/1063.pdf">The Cairo whitepaper</a>: The original
+paper introducing Cairo by StarkWare, which explains Cairo as a language for
+writing provable programs, details its architecture, and shows how it enables
+scalable, verifiable computation without relying on trusted setups</p>
 </li>
 </ul>
-<p>If you have any questions, feedback or comments, you can reach out through <a href="https://github.com/cairo-book/cairo-book/issues">Github Issues</a> or directly to <a href="https://relens.ai/blog/author/eni">maintainers</a>.</p>
+<p>If you have any questions, feedback or comments, you can reach out through
+<a href="https://github.com/cairo-book/cairo-book/issues">Github Issues</a> or directly to
+<a href="https://relens.ai/blog/author/eni">maintainers</a>.</p>
 
                     </main>
 
@@ -325,24 +358,6 @@
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

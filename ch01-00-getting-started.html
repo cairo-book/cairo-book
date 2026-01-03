@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,17 +274,25 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
-<p>Let’s start your Cairo journey! There’s a lot to learn, but every journey starts somewhere. In this chapter, we’ll discuss:</p>
+<p>Let’s start your Cairo journey! There’s a lot to learn, but every journey starts
+somewhere. In this chapter, we’ll discuss:</p>
 <ul>
-<li>Installing Scarb, which is Cairo's build toolchain and package manager, on Linux, macOS, and Windows.</li>
-<li>Installing Starknet Foundry, which is the default test runner when creating a Cairo project.</li>
+<li>Installing Scarb, which is Cairo's build toolchain and package manager, on
+Linux, macOS, and Windows.</li>
+<li>Installing Starknet Foundry, which is the default test runner when creating a
+Cairo project.</li>
 <li>Writing a program that prints <code>Hello, world!</code>.</li>
 <li>Using basic Scarb commands to create a project and execute a program.</li>
 </ul>
 <h2 id="getting-help"><a class="header" href="#getting-help">Getting Help</a></h2>
-<p>If you have any questions about Starknet or Cairo, you can ask them in the <a href="https://discord.gg/starknet-community">Starknet Discord server</a>. The community is friendly and always willing to help.</p>
+<p>If you have any questions about Starknet or Cairo, you can ask them in the
+<a href="https://discord.gg/starknet-community">Starknet Discord server</a>. The community is friendly and always willing
+to help.</p>
 <h2 id="interacting-with-the-starknet-ai-agent"><a class="header" href="#interacting-with-the-starknet-ai-agent">Interacting with the Starknet AI Agent</a></h2>
-<p>Starknet proposes its own AI agent designed to assist with Cairo and Starknet-related questions. This AI agent is trained on the Cairo book and the Starknet documentation, using Retrieval-Augmented Generation (RAG) to efficiently retrieve information and provide accurate assistance.</p>
+<p>Starknet proposes its own AI agent designed to assist with Cairo and
+Starknet-related questions. This AI agent is trained on the Cairo book and the
+Starknet documentation, using Retrieval-Augmented Generation (RAG) to
+efficiently retrieve information and provide accurate assistance.</p>
 <p>You can find the Starknet Agent on the <a href="https://agent.starknet.id/">Starknet Agent</a> website.</p>
 
                     </main>
@@ -320,24 +329,6 @@
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

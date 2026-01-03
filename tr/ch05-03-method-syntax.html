@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,9 +274,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="method-syntax"><a class="header" href="#method-syntax">Method Syntax</a></h1>
-<p><em>Methods</em> are similar to functions: we declare them with the <code>fn</code> keyword and a name, they can have parameters and a return value, and they contain some code that’s run when the method is called from somewhere else. Unlike functions, methods are defined within the context of a struct (or an enum which we cover in <a href="./ch06-01-enums.html">Chapter 6</a>), and their first parameter is always <code>self</code>, which represents the instance of the type the method is being called on.</p>
+<p><em>Methods</em> are similar to functions: we declare them with the <code>fn</code> keyword and a
+name, they can have parameters and a return value, and they contain some code
+that’s run when the method is called from somewhere else. Unlike functions,
+methods are defined within the context of a struct (or an enum which we cover in
+<a href="./ch06-01-enums.html">Chapter 6</a>), and their first
+parameter is always <code>self</code>, which represents the instance of the type the method
+is being called on.</p>
 <h2 id="defining-methods"><a class="header" href="#defining-methods">Defining Methods</a></h2>
-<p>Let’s change the <code>area</code> function that has a <code>Rectangle</code> instance as a parameter and instead make an <code>area</code> method defined on the <code>Rectangle</code> struct, as shown in Listing 5-11</p>
+<p>Let’s change the <code>area</code> function that has a <code>Rectangle</code> instance as a parameter
+and instead make an <code>area</code> method defined on the <code>Rectangle</code> struct, as shown in
+Listing 5-11</p>
 <pre><code class="language-cairo  noplayground">#[derive(Copy, Drop)]
 struct Rectangle {
     width: u64,
@@ -298,19 +307,49 @@ fn main() {
     println!("Area is {}", rect1.area());
 }
 </code></pre>
-<p>Listing 5-11: Defining an <code>area</code> method on the <code>Rectangle</code> struct.</p>
-<p>To define the function within the context of <code>Rectangle</code>, we start an <code>impl</code> (implementation) block for a trait <code>RectangleTrait</code> that defines the methods that can be called on a <code>Rectangle</code> instance. As impl blocks can only be defined for traits and not types, we need to define this trait first - but it's not meant to be used for anything else.</p>
-<p>Everything within this <code>impl</code> block will be associated with the <code>Rectangle</code> type. Then we move the <code>area</code> function within the <code>impl</code> curly brackets and change the first (and in this case, only) parameter to be <code>self</code> in the signature and everywhere within the body. In <code>main</code>, where we called the <code>area</code> function and passed <code>rect1</code> as an argument, we can instead use <em>method syntax</em> to call the <code>area</code> method on our <code>Rectangle</code> instance. The method syntax goes after an instance: we add a dot followed by the method name, parentheses, and any arguments.</p>
-<p>In the signature for <code>area</code>, we use <code>self: @Rectangle</code> instead of <code>rectangle: @Rectangle</code>.
-Methods must have a parameter named <code>self</code>, for their first parameter, and the type of <code>self</code> indicates the type that method can be called on. Methods can take ownership of <code>self</code>, but <code>self</code> can also be passed by snapshot or by reference, just like any other parameter.</p>
+<p>on the <code>Rectangle</code> struct.</p>
+<p>To define the function within the context of <code>Rectangle</code>, we start an <code>impl</code>
+(implementation) block for a trait <code>RectangleTrait</code> that defines the methods
+that can be called on a <code>Rectangle</code> instance. As impl blocks can only be defined
+for traits and not types, we need to define this trait first - but it's not
+meant to be used for anything else.</p>
+<p>Everything within this <code>impl</code> block will be associated with the <code>Rectangle</code>
+type. Then we move the <code>area</code> function within the <code>impl</code> curly brackets and
+change the first (and in this case, only) parameter to be <code>self</code> in the
+signature and everywhere within the body. In <code>main</code>, where we called the <code>area</code>
+function and passed <code>rect1</code> as an argument, we can instead use <em>method syntax</em>
+to call the <code>area</code> method on our <code>Rectangle</code> instance. The method syntax goes
+after an instance: we add a dot followed by the method name, parentheses, and
+any arguments.</p>
+<p>In the signature for <code>area</code>, we use <code>self: @Rectangle</code> instead of
+<code>rectangle: @Rectangle</code>. Methods must have a parameter named <code>self</code>, for their
+first parameter, and the type of <code>self</code> indicates the type that method can be
+called on. Methods can take ownership of <code>self</code>, but <code>self</code> can also be passed
+by snapshot or by reference, just like any other parameter.</p>
 <blockquote>
-<p>There is no direct link between a type and a trait. Only the type of the <code>self</code> parameter of a method defines the type from which this method can be called. That means, it is technically possible to define methods on multiple types in a same trait (mixing <code>Rectangle</code> and <code>Circle</code> methods, for example). But <strong>this is not a recommended practice</strong> as it can lead to confusion.</p>
+<p>There is no direct link between a type and a trait. Only the type of the
+<code>self</code> parameter of a method defines the type from which this method can be
+called. That means, it is technically possible to define methods on multiple
+types in a same trait (mixing <code>Rectangle</code> and <code>Circle</code> methods, for example).
+But <strong>this is not a recommended practice</strong> as it can lead to confusion.</p>
 </blockquote>
-<p>The main reason for using methods instead of functions, in addition to providing method syntax, is for organization. We’ve put all the things we can do with an instance of a type in one <code>impl</code> block rather than making future users of our code search for capabilities of <code>Rectangle</code> in various places in the library we provide.</p>
+<p>The main reason for using methods instead of functions, in addition to providing
+method syntax, is for organization. We’ve put all the things we can do with an
+instance of a type in one <code>impl</code> block rather than making future users of our
+code search for capabilities of <code>Rectangle</code> in various places in the library we
+provide.</p>
 <h2 id="the-generate_trait-attribute"><a class="header" href="#the-generate_trait-attribute">The <code>generate_trait</code> Attribute</a></h2>
-<p>If you are familiar with Rust, you may find Cairo's approach confusing because methods cannot be defined directly on types. Instead, you must define a <a href="./ch08-02-traits-in-cairo.html">trait</a> and an implementation of this trait associated with the type for which the method is intended.
-However, defining a trait and then implementing it to define methods on a specific type is verbose, and unnecessary: the trait itself will not be reused.</p>
-<p>So, to avoid defining useless traits, Cairo provides the <code>#[generate_trait]</code> attribute to add above a trait implementation, which tells the compiler to generate the corresponding trait definition for you, and lets you focus on the implementation only. Both approaches are equivalent, but it's considered a best practice to not explicitly define traits in this case.</p>
+<p>If you are familiar with Rust, you may find Cairo's approach confusing because
+methods cannot be defined directly on types. Instead, you must define a
+<a href="./ch08-02-traits-in-cairo.html">trait</a> and an implementation of this trait
+associated with the type for which the method is intended. However, defining a
+trait and then implementing it to define methods on a specific type is verbose,
+and unnecessary: the trait itself will not be reused.</p>
+<p>So, to avoid defining useless traits, Cairo provides the <code>#[generate_trait]</code>
+attribute to add above a trait implementation, which tells the compiler to
+generate the corresponding trait definition for you, and lets you focus on the
+implementation only. Both approaches are equivalent, but it's considered a best
+practice to not explicitly define traits in this case.</p>
 <p>The previous example can also be written as follows:</p>
 <pre><code class="language-cairo">#[derive(Copy, Drop)]
 struct Rectangle {
@@ -331,10 +370,15 @@ fn main() {
     println!("Area is {}", rect1.area());
 }
 </code></pre>
-<p>Let's use this <code>#[generate_trait]</code> in the following chapters to make our code cleaner.</p>
+<p>Let's use this <code>#[generate_trait]</code> in the following chapters to make our code
+cleaner.</p>
 <h2 id="snapshots-and-references"><a class="header" href="#snapshots-and-references">Snapshots and References</a></h2>
-<p>As the <code>area</code> method does not modify the calling instance, <code>self</code> is declared as a snapshot of a <code>Rectangle</code> instance with the <code>@</code> snapshot operator. But, of course, we can also define some methods receiving a mutable reference of this instance, to be able to modify it.</p>
-<p>Let's write a new method <code>scale</code> which resizes a rectangle of a <code>factor</code> given as parameter:</p>
+<p>As the <code>area</code> method does not modify the calling instance, <code>self</code> is declared as
+a snapshot of a <code>Rectangle</code> instance with the <code>@</code> snapshot operator. But, of
+course, we can also define some methods receiving a mutable reference of this
+instance, to be able to modify it.</p>
+<p>Let's write a new method <code>scale</code> which resizes a rectangle of a <code>factor</code> given
+as parameter:</p>
 <pre><code class="language-cairo">#[generate_trait]
 impl RectangleImpl of RectangleTrait {
     fn area(self: @Rectangle) -&gt; u64 {
@@ -353,10 +397,17 @@ fn main() {
     println!("The new size is (width: {}, height: {})", rect2.width, rect2.height);
 }
 </code></pre>
-<p>It is also possible to define a method which takes ownership of the instance by using just <code>self</code> as the first parameter but it is rare. This technique is usually used when the method transforms <code>self</code> into something else and you want to prevent the caller from using the original instance after the transformation.</p>
-<p>Look at the <a href="ch04-00-understanding-ownership.html">Understanding Ownership</a> chapter for more details about these important notions.</p>
+<p>It is also possible to define a method which takes ownership of the instance by
+using just <code>self</code> as the first parameter but it is rare. This technique is
+usually used when the method transforms <code>self</code> into something else and you want
+to prevent the caller from using the original instance after the transformation.</p>
+<p>Look at the <a href="ch04-00-understanding-ownership.html">Understanding Ownership</a>
+chapter for more details about these important notions.</p>
 <h2 id="methods-with-several-parameters"><a class="header" href="#methods-with-several-parameters">Methods with Several Parameters</a></h2>
-<p>Let’s practice using methods by implementing another method on the <code>Rectangle</code> struct. This time we want to write the method <code>can_hold</code> which accepts another instance of <code>Rectangle</code> and returns <code>true</code> if this rectangle can fit completely within self; otherwise, it should return false.</p>
+<p>Let’s practice using methods by implementing another method on the <code>Rectangle</code>
+struct. This time we want to write the method <code>can_hold</code> which accepts another
+instance of <code>Rectangle</code> and returns <code>true</code> if this rectangle can fit completely
+within self; otherwise, it should return false.</p>
 <pre><code class="language-cairo">#[generate_trait]
 impl RectangleImpl of RectangleTrait {
     fn area(self: @Rectangle) -&gt; u64 {
@@ -385,16 +436,25 @@ fn main() {
 </code></pre>
 <p>Here, we expect that <code>rect1</code> can hold <code>rect2</code> but not <code>rect3</code>.</p>
 <h2 id="associated-functions"><a class="header" href="#associated-functions">Associated functions</a></h2>
-<p>We call <em>associated functions</em> all functions that are defined inside an <code>impl</code> block that are associated to a specific type. While this is not enforced by the compiler, it is a good practice to keep associated functions related to the same type in the same <code>impl</code> block - for example, all functions related to <code>Rectangle</code> will be grouped in the same <code>impl</code> block for <code>RectangleTrait</code>.</p>
-<p>Methods are a special kind of associated function, but we can also define associated functions that don’t have <code>self</code> as their first parameter (and thus are not methods) because they don’t need an instance of the type to work with, but are still associated with that type.</p>
+<p>We call <em>associated functions</em> all functions that are defined inside an <code>impl</code>
+block that are associated to a specific type. While this is not enforced by the
+compiler, it is a good practice to keep associated functions related to the same
+type in the same <code>impl</code> block - for example, all functions related to
+<code>Rectangle</code> will be grouped in the same <code>impl</code> block for <code>RectangleTrait</code>.</p>
+<p>Methods are a special kind of associated function, but we can also define
+associated functions that don’t have <code>self</code> as their first parameter (and thus
+are not methods) because they don’t need an instance of the type to work with,
+but are still associated with that type.</p>
 <p>Associated functions that aren’t methods are often used for constructors that
-will return a new instance of the type. These are often called <code>new</code>, but
-<code>new</code> isn’t a special name and isn’t built into the language. For example, we
-could choose to provide an associated function named <code>square</code> that would have
-one dimension parameter and use that as both width and height, thus making it
-easier to create a square <code>Rectangle</code> rather than having to specify the same
-value twice:</p>
-<p>Let's create the function <code>new</code> which creates a <code>Rectangle</code> from a <code>width</code> and a <code>height</code>, <code>square</code> which creates a square <code>Rectangle</code> from a <code>size</code> and <code>avg</code> which computes the average of two <code>Rectangle</code> instances:</p>
+will return a new instance of the type. These are often called <code>new</code>, but <code>new</code>
+isn’t a special name and isn’t built into the language. For example, we could
+choose to provide an associated function named <code>square</code> that would have one
+dimension parameter and use that as both width and height, thus making it easier
+to create a square <code>Rectangle</code> rather than having to specify the same value
+twice:</p>
+<p>Let's create the function <code>new</code> which creates a <code>Rectangle</code> from a <code>width</code> and a
+<code>height</code>, <code>square</code> which creates a square <code>Rectangle</code> from a <code>size</code> and <code>avg</code>
+which computes the average of two <code>Rectangle</code> instances:</p>
 <pre><code class="language-cairo">#[generate_trait]
 impl RectangleImpl of RectangleTrait {
     fn area(self: @Rectangle) -&gt; u64 {
@@ -429,15 +489,19 @@ fn main() {
     );
 }
 </code></pre>
-<p>To call the <code>square</code> associated function, we use the <code>::</code> syntax with the struct name;
-<code>let sq = RectangleTrait::square(3);</code> is an example. This function is namespaced by
-the trait: the <code>::</code> syntax is used for both associated functions and
-namespaces created by modules. We’ll discuss modules in <a href="./ch07-02-defining-modules-to-control-scope.html">Chapter
+<p>To call the <code>square</code> associated function, we use the <code>::</code> syntax with the struct
+name; <code>let sq = RectangleTrait::square(3);</code> is an example. This function is
+namespaced by the trait: the <code>::</code> syntax is used for both associated functions
+and namespaces created by modules. We’ll discuss modules in <a href="./ch07-02-defining-modules-to-control-scope.html">Chapter
 7</a>.</p>
-<p>Note that the <code>avg</code> function could also be written as a method with <code>self</code> as the first rectangle. In this case, instead of using the method with <code>RectangleTrait::avg(@rect1, @rect2)</code>, it would be called with <code>rect1.avg(rect2)</code>.</p>
+<p>Note that the <code>avg</code> function could also be written as a method with <code>self</code> as
+the first rectangle. In this case, instead of using the method with
+<code>RectangleTrait::avg(@rect1, @rect2)</code>, it would be called with
+<code>rect1.avg(rect2)</code>.</p>
 <h2 id="multiple-traits-and-impl-blocks"><a class="header" href="#multiple-traits-and-impl-blocks">Multiple Traits and <code>impl</code> Blocks</a></h2>
 <p>Each struct is allowed to have multiple <code>trait</code> and <code>impl</code> blocks. For example,
-the following code is equivalent to the code shown in the <em>Methods with several parameters</em> section, which has each method in its own <code>trait</code> and <code>impl</code> blocks.</p>
+the following code is equivalent to the code shown in the <em>Methods with several
+parameters</em> section, which has each method in its own <code>trait</code> and <code>impl</code> blocks.</p>
 <pre><code class="language-cairo">#[generate_trait]
 impl RectangleCalcImpl of RectangleCalc {
     fn area(self: @Rectangle) -&gt; u64 {
@@ -452,8 +516,8 @@ impl RectangleCmpImpl of RectangleCmp {
     }
 }
 </code></pre>
-<p>There’s no strong reason to separate these methods into multiple <code>trait</code> and <code>impl</code>
-blocks here, but this is valid syntax.</p>
+<p>There’s no strong reason to separate these methods into multiple <code>trait</code> and
+<code>impl</code> blocks here, but this is valid syntax.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch05-03-method-syntax&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;It compiles, because the type `Rectangle` on which we call the method on reference is implicitly passed as a `@Rectangle`\n&quot;,&quot;id&quot;:&quot;98bbc25c-80b2-4226-9219-a8d7b20fb991&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;false&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[derive(Copy, Drop)]\nstruct Rectangle {\n    width: u64,\n    height: u64,\n}\n\n#[generate_trait]\nimpl RectangleImpl of RectangleTrait {\n    fn area(self: @Rectangle) -&gt; u64 {\n        (*self.width) * (*self.height)\n    }\n    fn new(width: u64, height: u64) -&gt; Rectangle {\n        Rectangle { width, height }\n    }\n    fn compare_areas(self: @Rectangle, r2: @Rectangle) -&gt; bool {\n        self.area() == r2.area()\n    }\n}\n\n#[executable]\nfn main() {\n    let rect1 = Rectangle {width: 40, height: 50};\n    let rect2 = RectangleTrait::new(10, 40);\n    println!(\&quot;{}\&quot;, rect1.compare_areas(@rect2));\n}\n&quot;}},{&quot;context&quot;:&quot;Methods can only be called on the types they're defined for; here, we try to call `area()` on `Circle`, when it's defined for `Rectangle`.\n&quot;,&quot;id&quot;:&quot;1e4a5bff-dc92-4c09-9f04-1d95fcf039bb&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:25},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[derive(Drop)]\nstruct Rectangle {\n    width: u64,\n    height: u64,\n}\n\n#[derive(Drop)]\nstruct Circle {\n    radius: u64,\n}\n\ntrait RectangleTrait {\n    fn area(self: @Rectangle) -&gt; u64;\n}\n\nimpl RectangleImpl of RectangleTrait {\n    fn area(self: @Rectangle) -&gt; u64 {\n        return (*self.width) * (*self.height);\n    }\n}\n\n#[executable]\nfn main() {\n    let my_square = Rectangle { width: 30, height: 50 };\n    let my_circle = Circle { radius: 10 };\n    let area = my_circle.area();\n    println!(\&quot;{}\&quot;, area)\n}\n\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -490,24 +554,6 @@ blocks here, but this is valid syntax.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

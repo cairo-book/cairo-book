@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -285,17 +286,24 @@ level up. You might try to store the level of the players in an array:</p>
 <p>But then you realize you can't increase the level at a specific index once it's
 set. If a player dies, you cannot remove it from the array unless he happens to
 be in the first position.</p>
-<p>Fortunately, Cairo provides a handy built-in <a href="./ch03-02-dictionaries.html">dictionary type</a> called <code>Felt252Dict&lt;T&gt;</code> that allows us to
-simulate the behavior of mutable data structures. Let's first explore how to create a struct that contains, among others, a <code>Felt252Dict&lt;T&gt;</code>.</p>
+<p>Fortunately, Cairo provides a handy built-in
+<a href="./ch03-02-dictionaries.html">dictionary type</a> called <code>Felt252Dict&lt;T&gt;</code> that allows
+us to simulate the behavior of mutable data structures. Let's first explore how
+to create a struct that contains, among others, a <code>Felt252Dict&lt;T&gt;</code>.</p>
 <blockquote>
-<p>Note: Several concepts used in this chapter were already presented earlier in the book. We recommend checking out the following chapters if you need to revise them:
-<a href="ch05-00-using-structs-to-structure-related-data.html">Structs</a>,
+<p>Note: Several concepts used in this chapter were already presented earlier in
+the book. We recommend checking out the following chapters if you need to
+revise them: <a href="ch05-00-using-structs-to-structure-related-data.html">Structs</a>,
 <a href="./ch05-03-method-syntax.html">Methods</a>,
 <a href="./ch08-00-generic-types-and-traits.html">Generic types</a>,
 <a href="./ch08-02-traits-in-cairo.html">Traits</a>.</p>
 </blockquote>
 <h2 id="dictionaries-as-struct-members"><a class="header" href="#dictionaries-as-struct-members">Dictionaries as Struct Members</a></h2>
-<p>Defining dictionaries as struct members is possible in Cairo but correctly interacting with them may not be entirely seamless. Let's try implementing a custom <em>user database</em> that will allow us to add users and query them. We will need to define a struct to represent the new type and a trait to define its functionality:</p>
+<p>Defining dictionaries as struct members is possible in Cairo but correctly
+interacting with them may not be entirely seamless. Let's try implementing a
+custom <em>user database</em> that will allow us to add users and query them. We will
+need to define a struct to represent the new type and a trait to define its
+functionality:</p>
 <pre><code class="language-cairo noplayground">struct UserDatabase&lt;T&gt; {
     users_updates: u64,
     balances: Felt252Dict&lt;T&gt;,
@@ -307,22 +315,32 @@ trait UserDatabaseTrait&lt;T&gt; {
     fn get_balance&lt;+Copy&lt;T&gt;&gt;(ref self: UserDatabase&lt;T&gt;, name: felt252) -&gt; T;
 }
 </code></pre>
-<p>Our new type <code>UserDatabase&lt;T&gt;</code> represents a database of users. It is generic over the balances of the users, giving major flexibility to whoever uses our data type. Its two members are:</p>
+<p>Our new type <code>UserDatabase&lt;T&gt;</code> represents a database of users. It is generic
+over the balances of the users, giving major flexibility to whoever uses our
+data type. Its two members are:</p>
 <ul>
 <li><code>users_updates</code>, the number of users updates in the dictionary.</li>
 <li><code>balances</code>, a mapping of each user to its balance.</li>
 </ul>
-<p>The database core functionality is defined by <code>UserDatabaseTrait</code>. The following methods are defined:</p>
+<p>The database core functionality is defined by <code>UserDatabaseTrait</code>. The following
+methods are defined:</p>
 <ul>
 <li><code>new</code> for easily creating new <code>UserDatabase</code> types.</li>
 <li><code>update_user</code> to update the balance of users in the database.</li>
 <li><code>get_balance</code> to find user's balance in the database.</li>
 </ul>
-<p>The only remaining step is to implement each of the methods in <code>UserDatabaseTrait</code>, but since we are working with <a href="./ch08-00-generic-types-and-traits.html">Generic types</a> we also need to correctly establish the requirements of <code>T</code> so it can be a valid <code>Felt252Dict&lt;T&gt;</code> value type:</p>
+<p>The only remaining step is to implement each of the methods in
+<code>UserDatabaseTrait</code>, but since we are working with
+<a href="./ch08-00-generic-types-and-traits.html">Generic types</a> we also need to correctly
+establish the requirements of <code>T</code> so it can be a valid <code>Felt252Dict&lt;T&gt;</code> value
+type:</p>
 <ol>
-<li><code>T</code> should implement the <code>Copy&lt;T&gt;</code> since it's required for getting values from a <code>Felt252Dict&lt;T&gt;</code>.</li>
-<li>All value types of a dictionary implement the <code>Felt252DictValue&lt;T&gt;</code>, our generic type should do as well.</li>
-<li>To insert values, <code>Felt252DictTrait&lt;T&gt;</code> requires all value types to be droppable (implement the <code>Drop&lt;T&gt;</code> trait).</li>
+<li><code>T</code> should implement the <code>Copy&lt;T&gt;</code> since it's required for getting values
+from a <code>Felt252Dict&lt;T&gt;</code>.</li>
+<li>All value types of a dictionary implement the <code>Felt252DictValue&lt;T&gt;</code>, our
+generic type should do as well.</li>
+<li>To insert values, <code>Felt252DictTrait&lt;T&gt;</code> requires all value types to be
+droppable (implement the <code>Drop&lt;T&gt;</code> trait).</li>
 </ol>
 <p>The implementation, with all restrictions in place, would be as follows:</p>
 <pre><code class="language-cairo noplayground">impl UserDatabaseImpl&lt;T, +Felt252DictValue&lt;T&gt;&gt; of UserDatabaseTrait&lt;T&gt; {
@@ -343,16 +361,24 @@ trait UserDatabaseTrait&lt;T&gt; {
     }
 }
 </code></pre>
-<p>Our database implementation is almost complete, except for one thing: the compiler doesn't know how to make a <code>UserDatabase&lt;T&gt;</code> go out of scope, since it doesn't implement the <code>Drop&lt;T&gt;</code> trait, nor the <code>Destruct&lt;T&gt;</code> trait.
-Since it has a <code>Felt252Dict&lt;T&gt;</code> as a member, it cannot be dropped, so we are forced to implement the <code>Destruct&lt;T&gt;</code> trait manually (refer to the <a href="ch04-01-what-is-ownership.html#the-drop-trait">Ownership</a> chapter for more information).
-Using <code>#[derive(Destruct)]</code> on top of the <code>UserDatabase&lt;T&gt;</code> definition won't work because of the use of <a href="./ch08-00-generic-types-and-traits.html">Generic types</a> in the struct definition. We need to code the <code>Destruct&lt;T&gt;</code> trait implementation by ourselves:</p>
+<p>Our database implementation is almost complete, except for one thing: the
+compiler doesn't know how to make a <code>UserDatabase&lt;T&gt;</code> go out of scope, since it
+doesn't implement the <code>Drop&lt;T&gt;</code> trait, nor the <code>Destruct&lt;T&gt;</code> trait. Since it has
+a <code>Felt252Dict&lt;T&gt;</code> as a member, it cannot be dropped, so we are forced to
+implement the <code>Destruct&lt;T&gt;</code> trait manually (refer to the
+<a href="ch04-01-what-is-ownership.html#the-drop-trait">Ownership</a> chapter for more
+information). Using <code>#[derive(Destruct)]</code> on top of the <code>UserDatabase&lt;T&gt;</code>
+definition won't work because of the use of <a href="./ch08-00-generic-types-and-traits.html">Generic types</a> in the
+struct definition. We need to code the <code>Destruct&lt;T&gt;</code> trait implementation by
+ourselves:</p>
 <pre><code class="language-cairo noplayground">impl UserDatabaseDestruct&lt;T, +Drop&lt;T&gt;, +Felt252DictValue&lt;T&gt;&gt; of Destruct&lt;UserDatabase&lt;T&gt;&gt; {
     fn destruct(self: UserDatabase&lt;T&gt;) nopanic {
         self.balances.squash();
     }
 }
 </code></pre>
-<p>Implementing <code>Destruct&lt;T&gt;</code> for <code>UserDatabase</code> was our last step to get a fully functional database. We can now try it out:</p>
+<p>Implementing <code>Destruct&lt;T&gt;</code> for <code>UserDatabase</code> was our last step to get a fully
+functional database. We can now try it out:</p>
 <pre><code class="language-cairo"><span class="boring">use core::dict::Felt252Dict;
 </span><span class="boring">
 </span><span class="boring">struct UserDatabase&lt;T&gt; {
@@ -432,8 +458,10 @@ operations should it support?</p>
 <p>This provides a blueprint for the implementation of our dynamic array. We named
 it <em>MemoryVec</em> as it is similar to the <code>Vec&lt;T&gt;</code> data structure in Rust.</p>
 <blockquote>
-<p>Note: The core library of Cairo already includes a <code>Vec&lt;T&gt;</code> data structure, strictly used as a storage type in smart contracts.
-To differentiate our data structure from the core library's one, we named our implementation <em>MemoryVec</em>.</p>
+<p>Note: The core library of Cairo already includes a <code>Vec&lt;T&gt;</code> data structure,
+strictly used as a storage type in smart contracts. To differentiate our data
+structure from the core library's one, we named our implementation
+<em>MemoryVec</em>.</p>
 </blockquote>
 <h3 id="implementing-a-dynamic-array-in-cairo"><a class="header" href="#implementing-a-dynamic-array-in-cairo">Implementing a Dynamic Array in Cairo</a></h3>
 <p>To store our data, we'll use a <code>Felt252Dict&lt;T&gt;</code> which maps index numbers (felts)
@@ -499,7 +527,9 @@ pointer to allow using any type <code>T</code> in our data structure, as explain
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>Since we again have <code>Felt252Dict&lt;T&gt;</code> as a struct member, we need to implement the <code>Destruct&lt;T&gt;</code> trait to tell the compiler how to make <code>MemoryVec&lt;T&gt;</code> go out of scope.</p>
+<p>Since we again have <code>Felt252Dict&lt;T&gt;</code> as a struct member, we need to implement
+the <code>Destruct&lt;T&gt;</code> trait to tell the compiler how to make <code>MemoryVec&lt;T&gt;</code> go out
+of scope.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">
 </span><span class="boring">use core::dict::Felt252Dict;
 </span><span class="boring">use core::nullable::NullableTrait;
@@ -684,7 +714,8 @@ implementation of all the methods defined in our interface can be done as follow
 </span><span class="boring">
 </span></code></pre>
 <p>The full implementation of the <code>MemoryVec</code> structure can be found in the
-community-maintained library <a href="https://github.com/keep-starknet-strange/alexandria/blob/main/packages/data_structures/src/vec.cairo">Alexandria</a>.</p>
+community-maintained library
+<a href="https://github.com/keep-starknet-strange/alexandria/blob/main/packages/data_structures/src/vec.cairo">Alexandria</a>.</p>
 <h2 id="simulating-a-stack-with-dicts"><a class="header" href="#simulating-a-stack-with-dicts">Simulating a Stack with Dicts</a></h2>
 <p>We will now look at a second example and its implementation details: a Stack.</p>
 <p>A Stack is a LIFO (Last-In, First-Out) collection. The insertion of a new
@@ -759,21 +790,22 @@ length of the stack to iterate over it.</p>
 </span></code></pre>
 <p>The code uses the <code>insert</code> and <code>get</code> methods to access the values in the
 <code>Felt252Dict&lt;T&gt;</code>. To push an element to the top of the stack, the <code>push</code>
-function inserts the element in the dict at index <code>len</code> and increases the
-<code>len</code> field of the stack to keep track of the position of the stack top. To
-remove a value, the <code>pop</code> function decreases the value of <code>len</code> to update the
-position of the stack top and then retrieves the last value at position <code>len</code>.</p>
+function inserts the element in the dict at index <code>len</code> and increases the <code>len</code>
+field of the stack to keep track of the position of the stack top. To remove a
+value, the <code>pop</code> function decreases the value of <code>len</code> to update the position of
+the stack top and then retrieves the last value at position <code>len</code>.</p>
 <p>The full implementation of the Stack, along with more data structures that you
 can use in your code, can be found in the community-maintained
-<a href="https://github.com/keep-starknet-strange/alexandria/tree/main/packages/data_structures/src">Alexandria</a> library, in the "data_structures" crate.</p>
+<a href="https://github.com/keep-starknet-strange/alexandria/tree/main/packages/data_structures/src">Alexandria</a> library, in the "data_structures"
+crate.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch12-01-custom-structs&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;While Cairo has an immutable memory model, you can use the `Felt252Dict&lt;T&gt;` type to simulate mutable data structures.\n&quot;,&quot;id&quot;:&quot;43074990-3724-4818-94dd-eeac0c078780&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`Felt252Dict&lt;T&gt;`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`Array&lt;T&gt;`&quot;,&quot;`Box&lt;T&gt;`&quot;,&quot;Nothing in particular, just make sure to declare the structure as mutable.&quot;],&quot;prompt&quot;:&quot;What can you use to implement a mutable data structure?\n&quot;}},{&quot;context&quot;:&quot;The member of type `Felt252Dict&lt;T&gt;` can't be dropped so the struct has to implement the `Destruct&lt;T&gt;` trait.\nBecause the struct is working with generic types, the `Destruct` trait cannot be derived.\nThe elements stored in the dictionary must implement the `Copy&lt;T&gt;` trait to be read, but the struct type itself doesn't necessarily require this implementation.\n&quot;,&quot;id&quot;:&quot;76864942-6f11-4fbf-87a3-46480e26749a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`Destruct&lt;T&gt;`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`Drop&lt;T&gt;`&quot;,&quot;None, you can just derive the required traits&quot;,&quot;`Copy&lt;T&gt;` to read the value of the dictionary&quot;],&quot;prompt&quot;:&quot;When you have a member of type `Felt252Dict&lt;T&gt;` in your generic data structure, what trait do you **must** manually implement for that structure?\n&quot;}},{&quot;context&quot;:&quot;The `new` function should return a `NullableStack&lt;T&gt;` with an empty dictionary of type `Nullable&lt;T&gt;` and a length of 0.\n&quot;,&quot;id&quot;:&quot;743ccd28-548f-453c-a4a2-edfecc90ed37&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    let data: Felt252Dict&lt;Nullable&lt;T&gt;&gt; = Default::default();\n    NullableStack { data, len: 0 }\n}\n```&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    let data: Felt252Dict&lt;T&gt; = Default::default();\n    NullableStack { data, len: 0 }\n}\n```&quot;,&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    NullableStack {\n        data: Felt252Dict::default(),\n        len: 0,\n    }\n}\n```&quot;,&quot;```\nfn new() -&gt; NullableStack&lt;T&gt; {\n    NullableStack {\n        data: Default::default(),\n    }\n}\n```&quot;],&quot;prompt&quot;:&quot;Consider the following code snippet:\n```\nstruct NullableStack&lt;T&gt; {\n    data: Felt252Dict&lt;Nullable&lt;T&gt;&gt;,\n    len: usize,\n}\n\ntrait StackTrait&lt;S, T&gt; {\n    fn push(ref self: S, value: T);\n    fn pop(ref self: S) -&gt; Option&lt;T&gt;;\n    fn is_empty(self: @S) -&gt; bool;\n    fn new() -&gt; S;\n}\n\nimpl NullableStackImpl&lt;T, +Drop&lt;T&gt;, +Copy&lt;T&gt;&gt; of StackTrait&lt;NullableStack&lt;T&gt;, T&gt; {\n    fn push(ref self: NullableStack&lt;T&gt;, value: T) {\n        self.data.insert(self.len.into(), NullableTrait::new(value));\n        self.len += 1;\n    }\n\n    fn pop(ref self: NullableStack&lt;T&gt;) -&gt; Option&lt;T&gt; {\n        if self.is_empty() {\n            return None;\n        }\n        self.len -= 1;\n        Some(self.data.get(self.len.into()).deref())\n    }\n\n    fn is_empty(self: @NullableStack&lt;T&gt;) -&gt; bool {\n        *self.len == 0\n    }\n\n    // The implementation goes here\n}\n```\nWhat is the correct implementation of the function `fn new() -&gt; S` ?&quot;}}]}"></div>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Well done! Now you have knowledge of arrays, dictionaries and even custom data structures.
-While Cairo's memory model is immutable and can make it difficult to implement
-mutable data structures, we can fortunately use the <code>Felt252Dict&lt;T&gt;</code> type to
-simulate mutable data structures. This allows us to implement a wide range of
-data structures that are useful for many applications, effectively hiding the
-complexity of the underlying memory model.</p>
+<p>Well done! Now you have knowledge of arrays, dictionaries and even custom data
+structures. While Cairo's memory model is immutable and can make it difficult to
+implement mutable data structures, we can fortunately use the <code>Felt252Dict&lt;T&gt;</code>
+type to simulate mutable data structures. This allows us to implement a wide
+range of data structures that are useful for many applications, effectively
+hiding the complexity of the underlying memory model.</p>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
 
@@ -809,24 +841,6 @@ complexity of the underlying memory model.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -274,37 +275,72 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <h2 id="what-is-cairo"><a class="header" href="#what-is-cairo">What is Cairo?</a></h2>
-<p>Cairo is a programming language designed to leverage the power of mathematical proofs for computational integrity. Just as C.S. Lewis defined integrity as "doing the right thing, even when no one is watching," Cairo enables programs to prove they've done the right computation, even when executed on untrusted machines.</p>
-<p>The language is built on STARK technology, a modern evolution of PCP (Probabilistically Checkable Proofs) that transforms computational claims into constraint systems. While Cairo's ultimate purpose is to generate these mathematical proofs that can be verified efficiently and with absolute certainty.</p>
+<p>Cairo is a programming language designed to leverage the power of mathematical
+proofs for computational integrity. Just as C.S. Lewis defined integrity as
+"doing the right thing, even when no one is watching," Cairo enables programs to
+prove they've done the right computation, even when executed on untrusted
+machines.</p>
+<p>The language is built on STARK technology, a modern evolution of PCP
+(Probabilistically Checkable Proofs) that transforms computational claims into
+constraint systems. While Cairo's ultimate purpose is to generate these
+mathematical proofs that can be verified efficiently and with absolute
+certainty.</p>
 <h2 id="what-can-you-do-with-it"><a class="header" href="#what-can-you-do-with-it">What Can You Do with It?</a></h2>
-<p>Cairo enables a paradigm shift in how we think about trusted computation. Its primary application today is Starknet, a Layer 2 scaling solution for Ethereum that addresses one of blockchain's fundamental challenges: scalability without sacrificing security.</p>
-<p>In the traditional blockchain model, every participant must verify every computation. Starknet changes this by using Cairo's proof system: computations are executed off-chain by a prover who generates a STARK proof, which is then verified by an Ethereum smart contract. This verification requires significantly less computational power than re-executing the computations, enabling massive scalability while maintaining security.</p>
-<p>However, Cairo's potential extends beyond blockchain. Any scenario where computational integrity needs to be verified efficiently can benefit from Cairo's verifiable computation capabilities.</p>
+<p>Cairo enables a paradigm shift in how we think about trusted computation. Its
+primary application today is Starknet, a Layer 2 scaling solution for Ethereum
+that addresses one of blockchain's fundamental challenges: scalability without
+sacrificing security.</p>
+<p>In the traditional blockchain model, every participant must verify every
+computation. Starknet changes this by using Cairo's proof system: computations
+are executed off-chain by a prover who generates a STARK proof, which is then
+verified by an Ethereum smart contract. This verification requires significantly
+less computational power than re-executing the computations, enabling massive
+scalability while maintaining security.</p>
+<p>However, Cairo's potential extends beyond blockchain. Any scenario where
+computational integrity needs to be verified efficiently can benefit from
+Cairo's verifiable computation capabilities.</p>
 <h2 id="who-is-this-book-for"><a class="header" href="#who-is-this-book-for">Who Is This Book For?</a></h2>
 <p>This book caters to three main audiences, each with their own learning path:</p>
 <ol>
 <li>
-<p><strong>General-Purpose Developers</strong>: If you're interested in Cairo for its verifiable computation capabilities outside of blockchain, you'll want to focus on chapters 1-12. These chapters cover the core language features and programming concepts without diving deep into smart contract specifics.</p>
+<p><strong>General-Purpose Developers</strong>: If you're interested in Cairo for its
+verifiable computation capabilities outside of blockchain, you'll want to
+focus on chapters
+1-12. These chapters
+cover the core language features and programming concepts without diving deep
+into smart contract specifics.</p>
 </li>
 <li>
-<p><strong>New Smart Contract Developers</strong>: If you're new to both Cairo and smart contracts, we recommend reading the book front to back. This will give you a solid foundation in both the language fundamentals and smart contract development principles.</p>
+<p><strong>New Smart Contract Developers</strong>: If you're new to both Cairo and smart
+contracts, we recommend reading the book front to back. This will give you a
+solid foundation in both the language fundamentals and smart contract
+development principles.</p>
 </li>
 <li>
-<p><strong>Experienced Smart Contract Developers</strong>: If you're already familiar with smart contract development in other languages, or Rust, you might want to follow this focused path:</p>
+<p><strong>Experienced Smart Contract Developers</strong>: If you're already familiar with
+smart contract development in other languages, or Rust, you might want to
+follow this focused path:</p>
 <ul>
-<li>Chapters 1-3 for Cairo basics</li>
-<li>Chapter 8 for Cairo's trait and generics system</li>
-<li>Skip to Chapter 15 for smart contract development</li>
+<li>Chapters 1-3 for Cairo
+basics</li>
+<li>Chapter 8 for Cairo's trait and generics
+system</li>
+<li>Skip to Chapter 15 for smart
+contract development</li>
 <li>Reference other chapters as needed</li>
 </ul>
 </li>
 </ol>
-<p>Regardless of your background, this book assumes basic programming knowledge such as variables, functions, and common data structures. While prior experience with Rust can be helpful (as Cairo shares many similarities), it's not required.</p>
+<p>Regardless of your background, this book assumes basic programming knowledge
+such as variables, functions, and common data structures. While prior experience
+with Rust can be helpful (as Cairo shares many similarities), it's not required.</p>
 <h2 id="references"><a class="header" href="#references">References</a></h2>
 <ul>
 <li>Cairo CPU Architecture: <a href="https://eprint.iacr.org/2021/1063">https://eprint.iacr.org/2021/1063</a></li>
-<li>Cairo, Sierra and Casm: <a href="https://medium.com/nethermind-eth/under-the-hood-of-cairo-1-0-exploring-sierra-7f32808421f5">https://medium.com/nethermind-eth/under-the-hood-of-cairo-1-0-exploring-sierra-7f32808421f5</a></li>
-<li>State of non determinism: <a href="https://twitter.com/PapiniShahar/status/1638203716535713798">https://twitter.com/PapiniShahar/status/1638203716535713798</a></li>
+<li>Cairo, Sierra and Casm:
+<a href="https://medium.com/nethermind-eth/under-the-hood-of-cairo-1-0-exploring-sierra-7f32808421f5">https://medium.com/nethermind-eth/under-the-hood-of-cairo-1-0-exploring-sierra-7f32808421f5</a></li>
+<li>State of non determinism:
+<a href="https://twitter.com/PapiniShahar/status/1638203716535713798">https://twitter.com/PapiniShahar/status/1638203716535713798</a></li>
 </ul>
 
                     </main>
@@ -341,24 +377,6 @@
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -274,35 +275,49 @@
                     <main>
                         <h1 id="packages-and-crates"><a class="header" href="#packages-and-crates">Packages and Crates</a></h1>
 <h2 id="what-is-a-crate"><a class="header" href="#what-is-a-crate">What is a Crate?</a></h2>
-<p>A crate is a subset of a package that is used in the actual Cairo compilation. This includes:</p>
+<p>A crate is a subset of a package that is used in the actual Cairo compilation.
+This includes:</p>
 <ul>
-<li>The package source code, identified by the package name and the crate root, which is the main entry point of the package.</li>
-<li>A subset of the package metadata that identifies crate-level settings of the Cairo compiler, for example, the <code>edition</code> field in the <em>Scarb.toml</em> file.</li>
+<li>The package source code, identified by the package name and the crate root,
+which is the main entry point of the package.</li>
+<li>A subset of the package metadata that identifies crate-level settings of the
+Cairo compiler, for example, the <code>edition</code> field in the <em>Scarb.toml</em> file.</li>
 </ul>
-<p>Crates can contain modules, and the modules may be defined in other files that get compiled with the crate, as will be discussed in the subsequent sections.</p>
+<p>Crates can contain modules, and the modules may be defined in other files that
+get compiled with the crate, as will be discussed in the subsequent sections.</p>
 <h2 id="what-is-the-crate-root"><a class="header" href="#what-is-the-crate-root">What is the Crate Root?</a></h2>
-<p>The crate root is the <em>lib.cairo</em> source file that the Cairo compiler starts from and makes up the root module of your crate. We’ll explain modules in depth in the <a href="./ch07-02-defining-modules-to-control-scope.html">"Defining Modules to Control Scope"</a> chapter.</p>
+<p>The crate root is the <em>lib.cairo</em> source file that the Cairo compiler starts
+from and makes up the root module of your crate. We’ll explain modules in depth
+in the <a href="./ch07-02-defining-modules-to-control-scope.html">"Defining Modules to Control Scope"</a> chapter.</p>
 <h2 id="what-is-a-package"><a class="header" href="#what-is-a-package">What is a Package?</a></h2>
 <p>A Cairo package is a directory (or equivalent) containing:</p>
 <ul>
 <li>A <em>Scarb.toml</em> manifest file with a <code>[package]</code> section.</li>
 <li>Associated source code.</li>
 </ul>
-<p>This definition implies that a package might contain other packages, with a corresponding <em>Scarb.toml</em> file for each package.</p>
+<p>This definition implies that a package might contain other packages, with a
+corresponding <em>Scarb.toml</em> file for each package.</p>
 <h2 id="creating-a-package-with-scarb"><a class="header" href="#creating-a-package-with-scarb">Creating a Package with Scarb</a></h2>
-<p>You can create a new Cairo package using the Scarb command-line tool. To create a new package, run the following command:</p>
+<p>You can create a new Cairo package using the Scarb command-line tool. To create
+a new package, run the following command:</p>
 <pre><code class="language-bash">scarb new my_package
 </code></pre>
-<p>This command will generate a new package directory named <em>my_package</em> with the following structure:</p>
+<p>This command will generate a new package directory named <em>my_package</em> with the
+following structure:</p>
 <pre><code>my_package/
 ├── Scarb.toml
 └── src
     └── lib.cairo
 </code></pre>
 <ul>
-<li><em>src/</em> is the main directory where all the Cairo source files for the package will be stored.</li>
-<li><em>lib.cairo</em> is the default root module of the crate, which is also the main entry point of the package.</li>
-<li><em>Scarb.toml</em> is the package manifest file, which contains metadata and configuration options for the package, such as dependencies, package name, version, and authors. You can find documentation about it on the <a href="https://docs.swmansion.com/scarb/docs/reference/manifest.html">Scarb reference</a>.</li>
+<li><em>src/</em> is the main directory where all the Cairo source files for the package
+will be stored.</li>
+<li><em>lib.cairo</em> is the default root module of the crate, which is also the main
+entry point of the package.</li>
+<li><em>Scarb.toml</em> is the package manifest file, which contains metadata and
+configuration options for the package, such as dependencies, package name,
+version, and authors. You can find documentation about it on the <a href="https://docs.swmansion.com/scarb/docs/reference/manifest.html">Scarb
+reference</a>.</li>
 </ul>
 <pre><code class="language-toml">[package]
 name = "my_package"
@@ -317,7 +332,9 @@ enable-gas = false
 [dependencies]
 cairo_execute = "2.13.1"
 </code></pre>
-<p>As you develop your package, you may want to organize your code into multiple Cairo source files. You can do this by creating additional <em>.cairo</em> files within the <em>src</em> directory or its subdirectories.</p>
+<p>As you develop your package, you may want to organize your code into multiple
+Cairo source files. You can do this by creating additional <em>.cairo</em> files within
+the <em>src</em> directory or its subdirectories.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch07-01-packages-crates&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;A package is the top-level organizational unit, containing crates. A crate contains modules.\n&quot;,&quot;id&quot;:&quot;340f3191-f990-4a3d-89ab-7c98ac6ae0e3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;package &gt; crate &gt; module&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;crate &gt; package &gt; module&quot;,&quot;crate &gt; module &gt; package&quot;,&quot;package &gt; module &gt; crate&quot;],&quot;prompt&quot;:&quot;Which is the correct order, where \&quot;A &gt; B\&quot; means \&quot;A contains B\&quot;?\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -354,24 +371,6 @@ cairo_execute = "2.13.1"
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

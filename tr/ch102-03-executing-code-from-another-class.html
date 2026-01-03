@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,14 +274,32 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="executing-code-from-another-class"><a class="header" href="#executing-code-from-another-class">Executing Code from Another Class</a></h1>
-<p>In previous chapters, we explored how to call external <em>contracts</em> to execute their logic and update their state. But what if we want to execute code from another class without updating the state of another contract? Starknet makes this possible with <em>library calls</em>, which allow a contract to execute the logic of another class in its own context, updating its own state.</p>
+<p>In previous chapters, we explored how to call external <em>contracts</em> to execute
+their logic and update their state. But what if we want to execute code from
+another class without updating the state of another contract? Starknet makes
+this possible with <em>library calls</em>, which allow a contract to execute the logic
+of another class in its own context, updating its own state.</p>
 <h2 id="library-calls"><a class="header" href="#library-calls">Library calls</a></h2>
-<p>The key differences between <em>contract calls</em> and <em>library calls</em> lie in the execution context of the logic defined in the class. While contract calls are used to call functions from deployed <strong>contracts</strong>, library calls are used to call stateless <strong>classes</strong> in the context of the caller.</p>
+<p>The key differences between <em>contract calls</em> and <em>library calls</em> lie in the
+execution context of the logic defined in the class. While contract calls are
+used to call functions from deployed <strong>contracts</strong>, library calls are used to
+call stateless <strong>classes</strong> in the context of the caller.</p>
 <p>To illustrate this, let's consider two contracts <em>A</em> and <em>B</em>.</p>
-<p>When A performs a <em>contract call</em> to the <strong>contract</strong> B, the execution context of the logic defined in B is that of B. As such, the value returned by <code>get_caller_address()</code> in B will return the address of A, <code>get_contract_address()</code> in B will return the address of B, and any storage updates in B will update the storage of B.</p>
-<p>However, when A uses a <em>library call</em> to call the <strong>class</strong> of B, the execution context of the logic defined in B is that of A. This means that the value returned by <code>get_caller_address()</code> in B will be the address of the caller of A, <code>get_contract_address()</code> in B's class will return the address of A, and updating a storage variable in B's class will update the storage of A.</p>
-<p>Library calls can be performed using the dispatcher pattern presented in the previous chapter, only with a class hash instead of a contract address.</p>
-<p>Listing 16-5 describes the library dispatcher and its associated <code>IERC20DispatcherTrait</code> trait and impl using the same <code>IERC20</code> example:</p>
+<p>When A performs a <em>contract call</em> to the <strong>contract</strong> B, the execution context
+of the logic defined in B is that of B. As such, the value returned by
+<code>get_caller_address()</code> in B will return the address of A,
+<code>get_contract_address()</code> in B will return the address of B, and any storage
+updates in B will update the storage of B.</p>
+<p>However, when A uses a <em>library call</em> to call the <strong>class</strong> of B, the execution
+context of the logic defined in B is that of A. This means that the value
+returned by <code>get_caller_address()</code> in B will be the address of the caller of A,
+<code>get_contract_address()</code> in B's class will return the address of A, and updating
+a storage variable in B's class will update the storage of A.</p>
+<p>Library calls can be performed using the dispatcher pattern presented in the
+previous chapter, only with a class hash instead of a contract address.</p>
+<p>Listing 16-5 describes the library dispatcher and
+its associated <code>IERC20DispatcherTrait</code> trait and impl using the same <code>IERC20</code>
+example:</p>
 <pre><code class="language-cairo noplayground">use starknet::ContractAddress;
 
 trait IERC20DispatcherTrait&lt;T&gt; {
@@ -304,12 +323,23 @@ impl IERC20LibraryDispatcherImpl of IERC20DispatcherTrait&lt;IERC20LibraryDispat
     }
 }
 </code></pre>
-<p><span class="caption">Listing 16-5: A simplified example of the <code>IERC20DLibraryDispatcher</code> and its associated trait and impl</span></p>
-<p>One notable difference with the contract dispatcher is that the library dispatcher uses <code>library_call_syscall</code> instead of <code>call_contract_syscall</code>. Otherwise, the process is similar.</p>
-<p>Let's see how to use library calls to execute the logic of another class in the context of the current contract.</p>
+<p>16-5: A simplified example of the
+<code>IERC20DLibraryDispatcher</code> and its associated trait and impl</span></p>
+<p>One notable difference with the contract dispatcher is that the library
+dispatcher uses <code>library_call_syscall</code> instead of <code>call_contract_syscall</code>.
+Otherwise, the process is similar.</p>
+<p>Let's see how to use library calls to execute the logic of another class in the
+context of the current contract.</p>
 <h2 id="using-the-library-dispatcher"><a class="header" href="#using-the-library-dispatcher">Using the Library Dispatcher</a></h2>
-<p>Listing 16-6 defines two contracts: <code>ValueStoreLogic</code>, which defines the logic of our example, and <code>ValueStoreExecutor</code>, which simply executes the logic of <code>ValueStoreLogic</code>'s class.</p>
-<p>We first need to import the <code>IValueStoreDispatcherTrait</code> and <code>IValueStoreLibraryDispatcher</code> which were generated from our interface by the compiler. Then, we can create an instance of <code>IValueStoreLibraryDispatcher</code>, passing in the <code>class_hash</code> of the class we want to make library calls to. From there, we can call the functions defined in that class, executing its logic in the context of our contract.</p>
+<p>Listing 16-6 defines two contracts: <code>ValueStoreLogic</code>,
+which defines the logic of our example, and <code>ValueStoreExecutor</code>, which simply
+executes the logic of <code>ValueStoreLogic</code>'s class.</p>
+<p>We first need to import the <code>IValueStoreDispatcherTrait</code> and
+<code>IValueStoreLibraryDispatcher</code> which were generated from our interface by the
+compiler. Then, we can create an instance of <code>IValueStoreLibraryDispatcher</code>,
+passing in the <code>class_hash</code> of the class we want to make library calls to. From
+there, we can call the functions defined in that class, executing its logic in
+the context of our contract.</p>
 <pre><code class="language-cairo noplayground">#[starknet::interface]
 trait IValueStore&lt;TContractState&gt; {
     fn set_value(ref self: TContractState, value: u128);
@@ -373,12 +403,25 @@ mod ValueStoreExecutor {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 16-6: An example contract using a Library Dispatcher</span></p>
-<p>When we call the <code>set_value</code> function on <code>ValueStoreExecutor</code>, it will make a library call to the <code>set_value</code> function defined in <code>ValueStoreLogic</code>. Because we are using a library call, <code>ValueStoreExecutor</code>'s storage variable <code>value</code> will be updated. Similarly, when we call the <code>get_value</code> function, it will make a library call to the <code>get_value</code> function defined in <code>ValueStoreLogic</code>, returning the value of the storage variable <code>value</code> - still in the context of <code>ValueStoreExecutor</code>.</p>
-<p>As such, both <code>get_value</code> and <code>get_value_local</code> return the same value, as they are reading the same storage slot.</p>
+<p>16-6: An example contract using a Library
+Dispatcher</span></p>
+<p>When we call the <code>set_value</code> function on <code>ValueStoreExecutor</code>, it will make a
+library call to the <code>set_value</code> function defined in <code>ValueStoreLogic</code>. Because
+we are using a library call, <code>ValueStoreExecutor</code>'s storage variable <code>value</code>
+will be updated. Similarly, when we call the <code>get_value</code> function, it will make
+a library call to the <code>get_value</code> function defined in <code>ValueStoreLogic</code>,
+returning the value of the storage variable <code>value</code> - still in the context of
+<code>ValueStoreExecutor</code>.</p>
+<p>As such, both <code>get_value</code> and <code>get_value_local</code> return the same value, as they
+are reading the same storage slot.</p>
 <h2 id="calling-classes-using-low-level-calls"><a class="header" href="#calling-classes-using-low-level-calls">Calling Classes using Low-Level Calls</a></h2>
-<p>Another way to call classes is to directly use <code>library_call_syscall</code>. While less convenient than using the dispatcher pattern, this syscall provides more control over the serialization and deserialization process and allows for more customized error handling.</p>
-<p>Listing 16-7 shows an example demonstrating how to use a <code>library_call_syscall</code> to call the <code>set_value</code> function of <code>ValueStore</code> contract:</p>
+<p>Another way to call classes is to directly use <code>library_call_syscall</code>. While
+less convenient than using the dispatcher pattern, this syscall provides more
+control over the serialization and deserialization process and allows for more
+customized error handling.</p>
+<p>Listing 16-7 shows an example demonstrating how to use a
+<code>library_call_syscall</code> to call the <code>set_value</code> function of <code>ValueStore</code>
+contract:</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 mod ValueStore {
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
@@ -414,18 +457,30 @@ mod ValueStore {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 16-7: A sample contract using <code>library_call_syscall</code> system call</span></p>
-<p>To use this syscall, we passed in the class hash, the selector of the function we want to call and the call arguments.
-The call arguments must be provided as an array of arguments, serialized to a <code>Span&lt;felt252&gt;</code>. To serialize the arguments, we can simply use the <code>Serde</code> trait, provided that the types being serialized implement this trait. The call returns an array of serialized values, which we'll need to deserialize ourselves!</p>
+<p>16-7: A sample contract using <code>library_call_syscall</code> system
+call</span></p>
+<p>To use this syscall, we passed in the class hash, the selector of the function
+we want to call and the call arguments. The call arguments must be provided as
+an array of arguments, serialized to a <code>Span&lt;felt252&gt;</code>. To serialize the
+arguments, we can simply use the <code>Serde</code> trait, provided that the types being
+serialized implement this trait. The call returns an array of serialized values,
+which we'll need to deserialize ourselves!</p>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Congratulations for finishing this chapter! You have learned a lot of new concepts:</p>
+<p>Congratulations for finishing this chapter! You have learned a lot of new
+concepts:</p>
 <ul>
-<li>How <em>Contracts</em> differ from <em>Classes</em> and how the ABI describes them for external sources</li>
-<li>How to call functions from other contracts and classes using the <em>Dispatcher</em> pattern</li>
-<li>How to use <em>Library calls</em> to execute the logic of another class in the context of the caller</li>
+<li>How <em>Contracts</em> differ from <em>Classes</em> and how the ABI describes them for
+external sources</li>
+<li>How to call functions from other contracts and classes using the <em>Dispatcher</em>
+pattern</li>
+<li>How to use <em>Library calls</em> to execute the logic of another class in the
+context of the caller</li>
 <li>The two syscalls that Starknet provides to interact with contracts and classes</li>
 </ul>
-<p>You now have all the required tools to develop complex applications with logic spread across multiple contracts and classes. In the next chapter, we will explore more advanced topics that will help you unleash the full potential of Starknet.</p>
+<p>You now have all the required tools to develop complex applications with logic
+spread across multiple contracts and classes. In the next chapter, we will
+explore more advanced topics that will help you unleash the full potential of
+Starknet.</p>
 
                     </main>
 
@@ -461,24 +516,6 @@ The call arguments must be provided as an array of arguments, serialized to a <c
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

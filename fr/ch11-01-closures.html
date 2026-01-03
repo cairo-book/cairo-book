@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,14 +274,26 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="closures"><a class="header" href="#closures">Closures</a></h1>
-<p>Closures are anonymous functions you can save in a variable or pass as arguments to other functions. You can create the closure in one place and then call the closure elsewhere to evaluate it in a different context. Unlike functions, closures can capture values from the scope in which they’re defined. We’ll demonstrate how these closure features allow for code reuse and behavior customization.</p>
+<p>Closures are anonymous functions you can save in a variable or pass as arguments
+to other functions. You can create the closure in one place and then call the
+closure elsewhere to evaluate it in a different context. Unlike functions,
+closures can capture values from the scope in which they’re defined. We’ll
+demonstrate how these closure features allow for code reuse and behavior
+customization.</p>
 <blockquote>
 <p>Note: Closures were introduced in Cairo 2.9 and are still under development.
-Some new features will be introduced in future versions of Cairo, so this page will evolve accordingly.</p>
+Some new features will be introduced in future versions of Cairo, so this page
+will evolve accordingly.</p>
 </blockquote>
 <h2 id="understanding-closures"><a class="header" href="#understanding-closures">Understanding Closures</a></h2>
-<p>When writing Cairo programs, you'll often need to pass behavior as a parameter to another function. Closures provide a way to define this behavior inline, without creating a separate named function. They are particularly valuable when working with collections, error handling, and any scenario where you want to customize how a function behaves using a function as a parameter.</p>
-<p>Consider a simple example where we want to process numbers differently based on some condition. Instead of writing multiple functions, we can use closures to define the behavior where we need it:</p>
+<p>When writing Cairo programs, you'll often need to pass behavior as a parameter
+to another function. Closures provide a way to define this behavior inline,
+without creating a separate named function. They are particularly valuable when
+working with collections, error handling, and any scenario where you want to
+customize how a function behaves using a function as a parameter.</p>
+<p>Consider a simple example where we want to process numbers differently based on
+some condition. Instead of writing multiple functions, we can use closures to
+define the behavior where we need it:</p>
 <pre><code class="language-cairo"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
 </span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
@@ -355,12 +368,19 @@ Some new features will be introduced in future versions of Cairo, so this page w
 </span><span class="boring">    println!("even: {:?}", even);
 </span><span class="boring">}
 </span></code></pre>
-<p>The closure's arguments go between the pipes (<code>|</code>). Note that we don't have to specify the types of arguments and of the return value (see <code>double</code> closure), they will be inferred from the closure usage, as it is done for any variables.
-Of course, if you use a closure with different types, you will get a <code>Type annotations needed</code> error, telling you that you have to choose and specify the closure argument types.</p>
-<p>The body is an expression, on a single line without <code>{}</code> like <code>double</code> or on several lines with <code>{}</code> like <code>sum</code>.</p>
+<p>The closure's arguments go between the pipes (<code>|</code>). Note that we don't have to
+specify the types of arguments and of the return value (see <code>double</code> closure),
+they will be inferred from the closure usage, as it is done for any variables.
+Of course, if you use a closure with different types, you will get a
+<code>Type annotations needed</code> error, telling you that you have to choose and specify
+the closure argument types.</p>
+<p>The body is an expression, on a single line without <code>{}</code> like <code>double</code> or on
+several lines with <code>{}</code> like <code>sum</code>.</p>
 <h2 id="capturing-the-environment-with-closures"><a class="header" href="#capturing-the-environment-with-closures">Capturing the Environment with Closures</a></h2>
-<p>One of the interests of closures is that they can include bindings from their enclosing scope.</p>
-<p>In the following example, <code>my_closure</code> use a binding to <code>x</code> to compute <code>x + value * 3</code>.</p>
+<p>One of the interests of closures is that they can include bindings from their
+enclosing scope.</p>
+<p>In the following example, <code>my_closure</code> use a binding to <code>x</code> to compute
+<code>x + value * 3</code>.</p>
 <pre><code class="language-cairo"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
 </span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
@@ -436,7 +456,8 @@ Of course, if you use a closure with different types, you will get a <code>Type 
 </span><span class="boring">}
 </span></code></pre>
 <blockquote>
-<p>Note that, at the moment, closures are still not allowed to capture mutable variables, but this will be supported in future Cairo versions.</p>
+<p>Note that, at the moment, closures are still not allowed to capture mutable
+variables, but this will be supported in future Cairo versions.</p>
 </blockquote>
 <h2 id="closure-type-inference-and-annotation"><a class="header" href="#closure-type-inference-and-annotation">Closure Type Inference and Annotation</a></h2>
 <p>There are more differences between functions and closures. Closures don’t
@@ -455,9 +476,9 @@ needs closure type annotations too).</p>
 <p>As with variables, we can add type annotations if we want to increase
 explicitness and clarity at the cost of being more verbose than is strictly
 necessary. Annotating the types for a closure would look like the definition
-shown in Listing 11-1. In this example, we’re defining a closure and storing it
-in a variable rather than defining the closure in the spot we pass it as an
-argument as we did in Listing 13-1.</p>
+shown in Listing 11-1. In this example, we’re defining a
+closure and storing it in a variable rather than defining the closure in the
+spot we pass it as an argument as we did in Listing 13-1.</p>
 <pre><code class="language-cairo"><span class="boring">fn generate_workout(intensity: u32, random_number: u32) {
 </span>    let expensive_closure = |num: u32| -&gt; u32 {
         num
@@ -483,13 +504,13 @@ argument as we did in Listing 13-1.</p>
 </span><span class="boring">    generate_workout(simulated_user_specified_value, simulated_random_number);
 </span><span class="boring">}
 </span></code></pre>
-<p>Listing 11-1: Adding optional type annotations of the parameter and return value types in the closure</p>
+<p>annotations of the parameter and return value types in the closure</p>
 <!-- TODO: rework the example to add a println!(...) inside the closure -->
 <p>With type annotations added, the syntax of closures looks more similar to the
 syntax of functions. Here we define a function that adds 1 to its parameter and
-a closure that has the same behavior, for comparison. We’ve added some spaces
-to line up the relevant parts. This illustrates how closure syntax is similar
-to function syntax except for the use of pipes and the amount of syntax that is
+a closure that has the same behavior, for comparison. We’ve added some spaces to
+line up the relevant parts. This illustrates how closure syntax is similar to
+function syntax except for the use of pipes and the amount of syntax that is
 optional:</p>
 <pre><code class="language-cairo  ignore">fn  add_one_v1   (x: u32) -&gt; u32 { x + 1 }
 let add_one_v2 = |x: u32| -&gt; u32 { x + 1 };
@@ -504,15 +525,16 @@ valid definitions that will produce the same behavior when they’re called. The
 <code>add_one_v3</code> and <code>add_one_v4</code> lines require the closures to be evaluated to be
 able to compile because the types will be inferred from their usage. This is
 similar to <code>let array = array![];</code> needing either type annotations or values of
-some type to be inserted into the <code>array</code> for Cairo to be able to infer the type.</p>
+some type to be inserted into the <code>array</code> for Cairo to be able to infer the
+type.</p>
 <p>For closure definitions, the compiler will infer one concrete type for each of
-their parameters and for their return value. For instance, Listing 11-2 shows
-the definition of a short closure that just returns the value it receives as a
-parameter. This closure isn’t very useful except for the purposes of this
-example. Note that we haven’t added any type annotations to the definition.
-Because there are no type annotations, we can call the closure with any type,
-which we’ve done here with <code>u64</code> the first time. If we then try to call
-<code>example_closure</code> with a <code>u32</code>, we’ll get an error.</p>
+their parameters and for their return value. For instance, Listing
+11-2 shows the definition of a short closure that
+just returns the value it receives as a parameter. This closure isn’t very
+useful except for the purposes of this example. Note that we haven’t added any
+type annotations to the definition. Because there are no type annotations, we
+can call the closure with any type, which we’ve done here with <code>u64</code> the first
+time. If we then try to call <code>example_closure</code> with a <code>u32</code>, we’ll get an error.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">//TAG: does_not_compile
 </span><span class="boring">#[executable]
 </span><span class="boring">fn main() {
@@ -522,7 +544,7 @@ which we’ve done here with <code>u64</code> the first time. If we then try to 
     let n = example_closure(5_u32);
 <span class="boring">}
 </span></code></pre>
-<p>Listing 11-2: Attempting to call a closure whose types are inferred with two different types</p>
+<p>Attempting to call a closure whose types are inferred with two different types</p>
 <p>The compiler gives us this error:</p>
 <pre><code>$ scarb build 
    Compiling listing_closure_different_types v0.1.0 (listings/ch11-functional-features/listing_closure_different_types/Scarb.toml)
@@ -554,25 +576,25 @@ error when we next try to use a different type with the same closure.</p>
 the environment where the closure is defined (thus affecting what, if anything,
 is moved <em>into</em> the closure), the code in the body of the closure defines what
 happens to the references or values when the closure is evaluated later (thus
-affecting what, if anything, is moved <em>out of</em> the closure). A closure body can do any of the
-following: move a captured value out of the closure, neither move nor mutate the value, or capture
-nothing from the environment to begin with.</p>
+affecting what, if anything, is moved <em>out of</em> the closure). A closure body can
+do any of the following: move a captured value out of the closure, neither move
+nor mutate the value, or capture nothing from the environment to begin with.</p>
 <!-- TODO: later, closures will be able to do any of the followings: -->
 <!-- A closure body can
 do any of the following: move a captured value out of the closure, mutate the
 captured value, neither move nor mutate the value, or capture nothing from the
 environment to begin with. -->
-<p>The way a closure captures and handles values from the environment affects
-which traits the closure implements, and traits are how functions and structs
-can specify what kinds of closures they can use. Closures will automatically
+<p>The way a closure captures and handles values from the environment affects which
+traits the closure implements, and traits are how functions and structs can
+specify what kinds of closures they can use. Closures will automatically
 implement one, two, or all three of these <code>Fn</code> traits, in an additive fashion,
 depending on how the closure’s body handles the values:</p>
 <ol>
 <li>
 <p><code>FnOnce</code> applies to closures that can be called once. All closures implement
-at least this trait, because all closures can be called. A closure that
-moves captured values out of its body will only implement <code>FnOnce</code> and none
-of the other <code>Fn</code> traits, because it can only be called once.</p>
+at least this trait, because all closures can be called. A closure that moves
+captured values out of its body will only implement <code>FnOnce</code> and none of the
+other <code>Fn</code> traits, because it can only be called once.</p>
 </li>
 <li>
 <p><code>Fn</code> applies to closures that don’t move captured values out of their body
@@ -587,8 +609,8 @@ calling a closure multiple times concurrently.</p>
    body, but that might mutate the captured values. These closures can be
    called more than once.
 -->
-<p>Let’s look at the definition of the <code>unwrap_or_else</code> method on <code>OptionTrait&lt;T&gt;</code> that
-we used in Listing 13-1:</p>
+<p>Let’s look at the definition of the <code>unwrap_or_else</code> method on <code>OptionTrait&lt;T&gt;</code>
+that we used in Listing 13-1:</p>
 <pre><code class="language-cairo  ignore">pub impl OptionTraitImpl&lt;T&gt; of OptionTrait&lt;T&gt; {
     #[inline]
     fn unwrap_or_else&lt;F, +Drop&lt;F&gt;, impl func: core::ops::FnOnce&lt;F, ()&gt;[Output: T], +Drop&lt;func::Output&gt;&gt;(
@@ -606,16 +628,17 @@ we used in Listing 13-1:</p>
 <code>unwrap_or_else</code> function: code that calls <code>unwrap_or_else</code> on an
 <code>Option&lt;ByteArray&gt;</code>, for example, will get a <code>ByteArray</code>.</p>
 <p>Next, notice that the <code>unwrap_or_else</code> function has the additional generic type
-parameter <code>F</code>. The <code>F</code> type is the type of the parameter named <code>f</code>, which is
-the closure we provide when calling <code>unwrap_or_else</code>.</p>
-<p>The trait bound specified on the generic type <code>F</code> is <code>impl func: core::ops::FnOnce&lt;F, ()&gt;[Output: T]</code>,
-which means <code>F</code> must be able to be called once, take no arguments (the unit type <code>()</code> is used), and return a <code>T</code> as output.
-Using <code>FnOnce</code> in the trait bound expresses the constraint that
+parameter <code>F</code>. The <code>F</code> type is the type of the parameter named <code>f</code>, which is the
+closure we provide when calling <code>unwrap_or_else</code>.</p>
+<p>The trait bound specified on the generic type <code>F</code> is
+<code>impl func: core::ops::FnOnce&lt;F, ()&gt;[Output: T]</code>, which means <code>F</code> must be able
+to be called once, take no arguments (the unit type <code>()</code> is used), and return a
+<code>T</code> as output. Using <code>FnOnce</code> in the trait bound expresses the constraint that
 <code>unwrap_or_else</code> is only going to call <code>f</code> at most one time. In the body of
 <code>unwrap_or_else</code>, we can see that if the <code>Option</code> is <code>Some</code>, <code>f</code> won’t be
-called. If the <code>Option</code> is <code>None</code>, <code>f</code> will be called once. Because all
-closures implement <code>FnOnce</code>, <code>unwrap_or_else</code> accepts all two kinds of
-closures and is as flexible as it can be.</p>
+called. If the <code>Option</code> is <code>None</code>, <code>f</code> will be called once. Because all closures
+implement <code>FnOnce</code>, <code>unwrap_or_else</code> accepts all two kinds of closures and is as
+flexible as it can be.</p>
 <!-- TODO: all _three_ types of closures -->
 <!-- > Note: Functions can implement all two of the `Fn` traits too. If what we
 > want to do doesn’t require capturing a value from the environment, we can use
@@ -630,10 +653,15 @@ closures and is as flexible as it can be.</p>
 make use of closures. In the next section, we’ll discuss iterators. Many
 iterator methods take closure arguments, so keep these closure details in mind
 as we continue!</p>
-<p>Under the hood, closures are implemented through <code>FnOnce</code> and <code>Fn</code> traits. <code>FnOnce</code> is implemented for closures that may consume captured variables, where <code>Fn</code> is implemented for closures that capture only copyable variables.</p>
+<p>Under the hood, closures are implemented through <code>FnOnce</code> and <code>Fn</code> traits.
+<code>FnOnce</code> is implemented for closures that may consume captured variables, where
+<code>Fn</code> is implemented for closures that capture only copyable variables.</p>
 <h2 id="implementing-your-functional-programming-patterns-with-closures"><a class="header" href="#implementing-your-functional-programming-patterns-with-closures">Implementing Your Functional Programming Patterns with Closures</a></h2>
-<p>Another great interest of closures is that, like any type of variables, you can pass them as function arguments. This mechanism is massively used in functional programming, through classic functions like <code>map</code>, <code>filter</code> or <code>reduce</code>.</p>
-<p>Here is a potential implementation of <code>map</code> to apply a same function to all the items of an array:</p>
+<p>Another great interest of closures is that, like any type of variables, you can
+pass them as function arguments. This mechanism is massively used in functional
+programming, through classic functions like <code>map</code>, <code>filter</code> or <code>reduce</code>.</p>
+<p>Here is a potential implementation of <code>map</code> to apply a same function to all the
+items of an array:</p>
 <pre><code class="language-cairo  noplayground">#[generate_trait]
 impl ArrayExt of ArrayExtTrait {
     // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
@@ -709,10 +737,16 @@ impl ArrayExt of ArrayExtTrait {
 </span><span class="boring">}
 </span></code></pre>
 <blockquote>
-<p>Note that, due to a bug in inlining analysis, this analysis process should be disabled using <code>#[inline(never)]</code>.</p>
+<p>Note that, due to a bug in inlining analysis, this analysis process should be
+disabled using <code>#[inline(never)]</code>.</p>
 </blockquote>
-<p>In this implementation, you'll notice that, while <code>T</code> is the element type of the input array <code>self</code>, the element type of the output array is defined by the output type of the <code>f</code> closure (the associated type <code>func::Output</code> from the <code>Fn</code> trait).</p>
-<p>This means that your <code>f</code> closure can return the same type of elements like as for <code>_double</code> in the following code, or any other type of elements like as for <code>_another</code>:</p>
+<p>In this implementation, you'll notice that, while <code>T</code> is the element type of the
+input array <code>self</code>, the element type of the output array is defined by the
+output type of the <code>f</code> closure (the associated type <code>func::Output</code> from the <code>Fn</code>
+trait).</p>
+<p>This means that your <code>f</code> closure can return the same type of elements like as
+for <code>_double</code> in the following code, or any other type of elements like as for
+<code>_another</code>:</p>
 <pre><code class="language-cairo"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
 </span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
@@ -788,11 +822,16 @@ impl ArrayExt of ArrayExtTrait {
 </span><span class="boring">}
 </span></code></pre>
 <blockquote>
-<p>Currently, Cairo 2.9 provides an experimental feature allowing you to specify the associated type of trait, using <code>experimental-features = ["associated_item_constraints"]</code> in your <code>Scarb.toml</code>.</p>
+<p>Currently, Cairo 2.9 provides an experimental feature allowing you to specify
+the associated type of trait, using
+<code>experimental-features = ["associated_item_constraints"]</code> in your
+<code>Scarb.toml</code>.</p>
 </blockquote>
-<p>Let's say we want to implement the <code>filter</code> function for arrays, to filter out elements which do not match a criteria.
-This criteria will be provided through a closure which takes an element as input, and return <code>true</code> if the element has to be kept,
-<code>false</code> otherwise. That means, we need to specify that the closure must return a <code>boolean</code>.</p>
+<p>Let's say we want to implement the <code>filter</code> function for arrays, to filter out
+elements which do not match a criteria. This criteria will be provided through a
+closure which takes an element as input, and return <code>true</code> if the element has to
+be kept, <code>false</code> otherwise. That means, we need to specify that the closure must
+return a <code>boolean</code>.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
 </span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
@@ -976,24 +1015,6 @@ impl ArrayFilterExt of ArrayFilterExtTrait {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

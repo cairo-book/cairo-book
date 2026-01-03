@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,16 +274,26 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="contract-storage"><a class="header" href="#contract-storage">Contract Storage</a></h1>
-<p>The contract’s storage is a persistent storage space where you can read, write, modify, and persist data. The storage is a map with
-\(2^{251}\) slots, where each slot is a <code>felt252</code> initialized to 0.</p>
-<p>Each storage slot is identified by a <code>felt252</code> value, called the storage address, which is computed from the variable's name and parameters that depend on the variable's type, outlined in the <a href="./ch101-01-00-contract-storage.html#addresses-of-storage-variables">"Addresses of Storage Variables"</a> section.</p>
+<p>The contract’s storage is a persistent storage space where you can read, write,
+modify, and persist data. The storage is a map with \(2^{251}\) slots, where
+each slot is a <code>felt252</code> initialized to 0.</p>
+<p>Each storage slot is identified by a <code>felt252</code> value, called the storage
+address, which is computed from the variable's name and parameters that depend
+on the variable's type, outlined in the <a href="./ch101-01-00-contract-storage.html#addresses-of-storage-variables">"Addresses of Storage
+Variables"</a> section.</p>
 <p>We can interact with the contract's storage in two ways:</p>
 <ol>
-<li>Through high-level storage variables, which are declared in a special <code>Storage</code> struct annotated with the <code>#[storage]</code> attribute.</li>
-<li>Directly accessing storage slots using their computed address and the low-level <code>storage_read</code> and <code>storage_write</code> syscalls. This is useful when you need to perform custom storage operations that don't fit well with the structured approach of storage variables, but should generally be avoided; as such, we will not cover them in this chapter.</li>
+<li>Through high-level storage variables, which are declared in a special
+<code>Storage</code> struct annotated with the <code>#[storage]</code> attribute.</li>
+<li>Directly accessing storage slots using their computed address and the
+low-level <code>storage_read</code> and <code>storage_write</code> syscalls. This is useful when
+you need to perform custom storage operations that don't fit well with the
+structured approach of storage variables, but should generally be avoided; as
+such, we will not cover them in this chapter.</li>
 </ol>
 <h2 id="declaring-and-using-storage-variables"><a class="header" href="#declaring-and-using-storage-variables">Declaring and Using Storage Variables</a></h2>
-<p>Storage variables in Starknet contracts are stored in a special struct called <code>Storage</code>:</p>
+<p>Storage variables in Starknet contracts are stored in a special struct called
+<code>Storage</code>:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
 </span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
 </span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
@@ -356,10 +367,21 @@
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>The <code>Storage</code> struct is a <a href="./ch05-00-using-structs-to-structure-related-data.html">struct</a> like any other, except that it <strong>must</strong> be annotated with the <code>#[storage]</code> attribute. This annotation tells the compiler to generate the required code to interact with the blockchain state, and allows you to read and write data from and to storage. This struct can contain any type that implements the <code>Store</code> trait, including other structs, enums, as well as <a href="./ch101-01-01-storage-mappings.html">Storage Mappings</a>, <a href="./ch101-01-02-storage-vecs.html">Storage Vectors</a>, and <a href="./ch101-01-00-contract-storage.html#storage-nodes">Storage Nodes</a>. In this section, we'll focus on simple storage variables, and we'll see how to store more complex types in the next sections.</p>
+<p>The <code>Storage</code> struct is a <a href="./ch05-00-using-structs-to-structure-related-data.html">struct</a> like any other, except that it
+<strong>must</strong> be annotated with the <code>#[storage]</code> attribute. This annotation tells the
+compiler to generate the required code to interact with the blockchain state,
+and allows you to read and write data from and to storage. This struct can
+contain any type that implements the <code>Store</code> trait, including other structs,
+enums, as well as <a href="./ch101-01-01-storage-mappings.html">Storage Mappings</a>, <a href="./ch101-01-02-storage-vecs.html">Storage
+Vectors</a>, and <a href="./ch101-01-00-contract-storage.html#storage-nodes">Storage Nodes</a>. In this section,
+we'll focus on simple storage variables, and we'll see how to store more complex
+types in the next sections.</p>
 <h3 id="accessing-storage-variables"><a class="header" href="#accessing-storage-variables">Accessing Storage Variables</a></h3>
-<p>Variables stored in the <code>Storage</code> struct can be accessed and modified using the <code>read</code> and <code>write</code> functions, respectively. All these functions are automatically generated by the compiler for each storage variable.</p>
-<p>To read the value of the <code>owner</code> storage variable, which is of type <code>Person</code>, we call the <code>read</code> function on the <code>owner</code> variable, passing in no arguments.</p>
+<p>Variables stored in the <code>Storage</code> struct can be accessed and modified using the
+<code>read</code> and <code>write</code> functions, respectively. All these functions are
+automatically generated by the compiler for each storage variable.</p>
+<p>To read the value of the <code>owner</code> storage variable, which is of type <code>Person</code>, we
+call the <code>read</code> function on the <code>owner</code> variable, passing in no arguments.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
 </span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
 </span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
@@ -433,7 +455,9 @@
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>To write a new value to the storage slot of a storage variable, we call the <code>write</code> function, passing in the value as argument. Here, we only pass in the value to write to the <code>owner</code> variable as it is a simple variable.</p>
+<p>To write a new value to the storage slot of a storage variable, we call the
+<code>write</code> function, passing in the value as argument. Here, we only pass in the
+value to write to the <code>owner</code> variable as it is a simple variable.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
 </span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
 </span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
@@ -507,7 +531,14 @@
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>When working with compound types, instead of calling <code>read</code> and <code>write</code> on the struct variable itself, which would perform a storage operation for each member, you can call <code>read</code> and <code>write</code> on specific members of the struct. This allows you to access and modify the values of the struct members directly, minimizing the amount of storage operations performed. In the following example, the <code>owner</code> variable is of type <code>Person</code>. Thus, it has one attribute called <code>name</code>, on which we can call the <code>read</code> and <code>write</code> functions to access and modify its value.</p>
+<p>When working with compound types, instead of calling <code>read</code> and <code>write</code> on the
+struct variable itself, which would perform a storage operation for each member,
+you can call <code>read</code> and <code>write</code> on specific members of the struct. This allows
+you to access and modify the values of the struct members directly, minimizing
+the amount of storage operations performed. In the following example, the
+<code>owner</code> variable is of type <code>Person</code>. Thus, it has one attribute called <code>name</code>,
+on which we can call the <code>read</code> and <code>write</code> functions to access and modify its
+value.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
 </span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
 </span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
@@ -582,9 +613,22 @@
 </span><span class="boring">
 </span></code></pre>
 <h2 id="storing-custom-types-with-the-store-trait"><a class="header" href="#storing-custom-types-with-the-store-trait">Storing Custom Types with the <code>Store</code> Trait</a></h2>
-<p>The <code>Store</code> trait, defined in the <code>starknet::storage_access</code> module, is used to specify how a type should be stored in storage. In order for a type to be stored in storage, it <strong>must</strong> implement the <code>Store</code> trait. Most types from the core library, such as unsigned integers (<code>u8</code>, <code>u128</code>, <code>u256</code>...), <code>felt252</code>, <code>bool</code>, <code>ByteArray</code>, <code>ContractAddress</code>, etc. implement the <code>Store</code> trait and can thus be stored without further action. However, <strong>memory collections</strong>, such as <code>Array&lt;T&gt;</code> and <code>Felt252Dict&lt;T&gt;</code>, <strong>cannot</strong> be stored in contract storage - you will have to use the special types <code>Vec&lt;T&gt;</code> and <code>Map&lt;K, V&gt;</code> instead.</p>
-<p>But what if you wanted to store a type that you defined yourself, such as an enum or a struct? In that case, you have to explicitly tell the compiler how to store this type.</p>
-<p>In our example, we want to store a <code>Person</code> struct in storage, which is only possible by implementing the <code>Store</code> trait for the <code>Person</code> type. This can be simply achieved by adding a <code>#[derive(starknet::Store)]</code> attribute on top of our struct definition. Note that all the members of the struct need to implement the <code>Store</code> trait for the trait to be derived.</p>
+<p>The <code>Store</code> trait, defined in the <code>starknet::storage_access</code> module, is used to
+specify how a type should be stored in storage. In order for a type to be stored
+in storage, it <strong>must</strong> implement the <code>Store</code> trait. Most types from the core
+library, such as unsigned integers (<code>u8</code>, <code>u128</code>, <code>u256</code>...), <code>felt252</code>, <code>bool</code>,
+<code>ByteArray</code>, <code>ContractAddress</code>, etc. implement the <code>Store</code> trait and can thus be
+stored without further action. However, <strong>memory collections</strong>, such as
+<code>Array&lt;T&gt;</code> and <code>Felt252Dict&lt;T&gt;</code>, <strong>cannot</strong> be stored in contract storage - you
+will have to use the special types <code>Vec&lt;T&gt;</code> and <code>Map&lt;K, V&gt;</code> instead.</p>
+<p>But what if you wanted to store a type that you defined yourself, such as an
+enum or a struct? In that case, you have to explicitly tell the compiler how to
+store this type.</p>
+<p>In our example, we want to store a <code>Person</code> struct in storage, which is only
+possible by implementing the <code>Store</code> trait for the <code>Person</code> type. This can be
+simply achieved by adding a <code>#[derive(starknet::Store)]</code> attribute on top of our
+struct definition. Note that all the members of the struct need to implement the
+<code>Store</code> trait for the trait to be derived.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
 </span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
 </span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
@@ -658,8 +702,12 @@
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>Similarly, Enums can only be written to storage if they implement the <code>Store</code> trait, which can be trivially derived as long as all associated types implement the <code>Store</code> trait.</p>
-<p>Enums used in contract storage <strong>must</strong> define a default variant. This default variant is returned when reading an empty storage slot - otherwise, it will result in a runtime error.</p>
+<p>Similarly, Enums can only be written to storage if they implement the <code>Store</code>
+trait, which can be trivially derived as long as all associated types implement
+the <code>Store</code> trait.</p>
+<p>Enums used in contract storage <strong>must</strong> define a default variant. This default
+variant is returned when reading an empty storage slot - otherwise, it will
+result in a runtime error.</p>
 <p>Here's an example of how to properly define an enum for use in contract storage:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
 </span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
@@ -734,22 +782,38 @@
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>In this example, we've added the <code>#[default]</code> attribute to the <code>Infinite</code> variant. This tells the Cairo compiler that if we try to read an uninitialized enum from storage, the <code>Infinite</code> variant should be returned.</p>
-<p>You might have noticed that we also derived <code>Drop</code> and <code>Serde</code> on our custom types. Both of them are required for properly serializing arguments passed to entrypoints and deserializing their outputs.</p>
+<p>In this example, we've added the <code>#[default]</code> attribute to the <code>Infinite</code>
+variant. This tells the Cairo compiler that if we try to read an uninitialized
+enum from storage, the <code>Infinite</code> variant should be returned.</p>
+<p>You might have noticed that we also derived <code>Drop</code> and <code>Serde</code> on our custom
+types. Both of them are required for properly serializing arguments passed to
+entrypoints and deserializing their outputs.</p>
 <h2 id="structs-storage-layout"><a class="header" href="#structs-storage-layout">Structs Storage Layout</a></h2>
-<p>On Starknet, structs are stored in storage as a sequence of primitive types.
-The elements of the struct are stored in the same order as they are defined in the struct definition. The first element of the struct is stored at the base address of the struct, which is computed as specified in the <a href="./ch101-01-00-contract-storage.html#addresses-of-storage-variables">"Addresses of Storage Variables"</a> section and can be obtained with <code>var.__base_address__</code>. Subsequent elements are stored at addresses contiguous to the previous element.
-For example, the storage layout for the <code>owner</code> variable of type <code>Person</code> will result in the following layout:</p>
+<p>On Starknet, structs are stored in storage as a sequence of primitive types. The
+elements of the struct are stored in the same order as they are defined in the
+struct definition. The first element of the struct is stored at the base address
+of the struct, which is computed as specified in the <a href="./ch101-01-00-contract-storage.html#addresses-of-storage-variables">"Addresses of Storage
+Variables"</a> section and can be obtained with
+<code>var.__base_address__</code>. Subsequent elements are stored at addresses contiguous
+to the previous element. For example, the storage layout for the <code>owner</code>
+variable of type <code>Person</code> will result in the following layout:</p>
 <div class="table-wrapper"><table><thead><tr><th>Fields</th><th>Address</th></tr></thead><tbody>
 <tr><td>name</td><td><code>owner.__base_address__</code></td></tr>
 <tr><td>address</td><td><code>owner.__base_address__ +1</code></td></tr>
 </tbody></table>
 </div>
-<p>Note that tuples are similarly stored in contract's storage, with the first element of the tuple being stored at the base address, and subsequent elements stored contiguously.</p>
+<p>Note that tuples are similarly stored in contract's storage, with the first
+element of the tuple being stored at the base address, and subsequent elements
+stored contiguously.</p>
 <h2 id="enums-storage-layout"><a class="header" href="#enums-storage-layout">Enums Storage Layout</a></h2>
-<p>When you store an enum variant, what you're essentially storing is the variant's index and eventual associated values. This index starts at 0 for the first variant of your enum and increments by 1 for each subsequent variant.
-If your variant has an associated value, this value is stored starting from the address immediately following the address of the index of the variant.
-For example, suppose we have the <code>Expiration</code> enum with the <code>Finite</code> variant that carries an associated limit date, and the <code>Infinite</code> variant without associated data. The storage layout for the <code>Finite</code> variant would look like this:</p>
+<p>When you store an enum variant, what you're essentially storing is the variant's
+index and eventual associated values. This index starts at 0 for the first
+variant of your enum and increments by 1 for each subsequent variant. If your
+variant has an associated value, this value is stored starting from the address
+immediately following the address of the index of the variant. For example,
+suppose we have the <code>Expiration</code> enum with the <code>Finite</code> variant that carries an
+associated limit date, and the <code>Infinite</code> variant without associated data. The
+storage layout for the <code>Finite</code> variant would look like this:</p>
 <div class="table-wrapper"><table><thead><tr><th>Element</th><th>Address</th></tr></thead><tbody>
 <tr><td>Variant index (0 for Finite)</td><td><code>expiration.__base_address__</code></td></tr>
 <tr><td>Associated limit date</td><td><code>expiration.__base_address__ + 1</code></td></tr>
@@ -761,10 +825,23 @@ For example, suppose we have the <code>Expiration</code> enum with the <code>Fin
 </tbody></table>
 </div><!-- TODO: add example -->
 <h2 id="storage-nodes"><a class="header" href="#storage-nodes">Storage Nodes</a></h2>
-<p>A storage node is a special kind of struct that can contain storage-specific types, such as <a href="./ch101-01-01-storage-mappings.html"><code>Map</code></a>, <a href="./ch101-01-02-storage-vecs.html"><code>Vec</code></a>, or other storage nodes, as members. Unlike regular structs, storage nodes can only exist within contract storage and cannot be instantiated or used outside of it.
-You can think of storage nodes as intermediate nodes involved in address calculations within the tree representing the contract's storage space. In the next subsection, we will introduce how this concept is modeled in the core library.</p>
-<p>The main benefits of storage nodes is that they allow you to create more sophisticated storage layouts, including mappings or vectors inside custom types, and allow you to logically group related data, improving code readability and maintainability.</p>
-<p>Storage nodes are structs defined with the <code>#[starknet::storage_node]</code> attribute. In this new contract that implements a voting system, we implement a <code>ProposalNode</code> storage node containing a <code>Map&lt;ContractAddress, bool&gt;</code> to keep track of the voters of the proposal, along with other fields to store the proposal's metadata.</p>
+<p>A storage node is a special kind of struct that can contain storage-specific
+types, such as <a href="./ch101-01-01-storage-mappings.html"><code>Map</code></a>, <a href="./ch101-01-02-storage-vecs.html"><code>Vec</code></a>, or other
+storage nodes, as members. Unlike regular structs, storage nodes can only exist
+within contract storage and cannot be instantiated or used outside of it. You
+can think of storage nodes as intermediate nodes involved in address
+calculations within the tree representing the contract's storage space. In the
+next subsection, we will introduce how this concept is modeled in the core
+library.</p>
+<p>The main benefits of storage nodes is that they allow you to create more
+sophisticated storage layouts, including mappings or vectors inside custom
+types, and allow you to logically group related data, improving code readability
+and maintainability.</p>
+<p>Storage nodes are structs defined with the <code>#[starknet::storage_node]</code>
+attribute. In this new contract that implements a voting system, we implement a
+<code>ProposalNode</code> storage node containing a <code>Map&lt;ContractAddress, bool&gt;</code> to keep
+track of the voters of the proposal, along with other fields to store the
+proposal's metadata.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::contract]
 </span><span class="boring">mod VotingSystem {
 </span><span class="boring">    use starknet::storage::{
@@ -815,7 +892,10 @@ You can think of storage nodes as intermediate nodes involved in address calcula
 </span><span class="boring">    }
 </span><span class="boring">}
 </span></code></pre>
-<p>When accessing a storage node, you can't <code>read</code> or <code>write</code> it directly. Instead, you have to access its individual members. Here's an example from our <code>VotingSystem</code> contract that demonstrates how we populate each field of the <code>ProposalNode</code> storage node:</p>
+<p>When accessing a storage node, you can't <code>read</code> or <code>write</code> it directly. Instead,
+you have to access its individual members. Here's an example from our
+<code>VotingSystem</code> contract that demonstrates how we populate each field of the
+<code>ProposalNode</code> storage node:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::contract]
 </span><span class="boring">mod VotingSystem {
 </span><span class="boring">    use starknet::storage::{
@@ -866,7 +946,10 @@ You can think of storage nodes as intermediate nodes involved in address calcula
 </span><span class="boring">    }
 </span><span class="boring">}
 </span></code></pre>
-<p>Because no voter has voted on this proposal yet, we don't need to populate the <code>voters</code> map when creating the proposal. But we could very well access the <code>voters</code> map to check if a given address has already voted on this proposal when it tries to cast its vote:</p>
+<p>Because no voter has voted on this proposal yet, we don't need to populate the
+<code>voters</code> map when creating the proposal. But we could very well access the
+<code>voters</code> map to check if a given address has already voted on this proposal when
+it tries to cast its vote:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::contract]
 </span><span class="boring">mod VotingSystem {
 </span><span class="boring">    use starknet::storage::{
@@ -917,24 +1000,45 @@ You can think of storage nodes as intermediate nodes involved in address calcula
     }
 <span class="boring">}
 </span></code></pre>
-<p>In this example, we access the <code>ProposalNode</code> for a specific proposal ID. We then check if the caller has already voted by reading from the <code>voters</code> map within the storage node. If they haven't voted yet, we write to the <code>voters</code> map to mark that they have now voted.</p>
+<p>In this example, we access the <code>ProposalNode</code> for a specific proposal ID. We
+then check if the caller has already voted by reading from the <code>voters</code> map
+within the storage node. If they haven't voted yet, we write to the <code>voters</code> map
+to mark that they have now voted.</p>
 <h2 id="addresses-of-storage-variables"><a class="header" href="#addresses-of-storage-variables">Addresses of Storage Variables</a></h2>
 <p>The address of a storage variable is computed as follows:</p>
 <ul>
 <li>
-<p>If the variable is a single value, the address is the <code>sn_keccak</code> hash of the ASCII encoding of the variable's name. <code>sn_keccak</code> is Starknet's version of the Keccak256 hash function, whose output is truncated to 250 bits.</p>
+<p>If the variable is a single value, the address is the <code>sn_keccak</code> hash of the
+ASCII encoding of the variable's name. <code>sn_keccak</code> is Starknet's version of
+the Keccak256 hash function, whose output is truncated to 250 bits.</p>
 </li>
 <li>
-<p>If the variable is composed of multiple values (i.e., a tuple, a struct or an enum), we also use the <code>sn_keccak</code> hash of the ASCII encoding of the variable's name to determine the base address in storage. Then, depending on the type, the storage layout will differ. See the <a href="./ch101-01-00-contract-storage.html#storing-custom-types-with-the-store-trait">"Storing Custom Types"</a> section.</p>
+<p>If the variable is composed of multiple values (i.e., a tuple, a struct or an
+enum), we also use the <code>sn_keccak</code> hash of the ASCII encoding of the
+variable's name to determine the base address in storage. Then, depending on
+the type, the storage layout will differ. See the <a href="./ch101-01-00-contract-storage.html#storing-custom-types-with-the-store-trait">"Storing Custom
+Types"</a> section.</p>
 </li>
 <li>
-<p>If the variable is part of a <a href="./ch101-01-00-contract-storage.html#storage-nodes">storage node</a>, its address is based on a chain of hashes that reflects the structure of the node. For a storage node member <code>m</code> within a storage variable <code>variable_name</code>, the path to that member is computed as <code>h(sn_keccak(variable_name), sn_keccak(m))</code>, where <code>h</code> is the Pedersen hash. This process continues for nested storage nodes, building a chain of hashes that represents the path to a leaf node. Once a leaf node is reached, the storage calculation proceeds as it normally would for that type of variable.</p>
+<p>If the variable is part of a <a href="./ch101-01-00-contract-storage.html#storage-nodes">storage node</a>, its address is
+based on a chain of hashes that reflects the structure of the node. For a
+storage node member <code>m</code> within a storage variable <code>variable_name</code>, the path to
+that member is computed as <code>h(sn_keccak(variable_name), sn_keccak(m))</code>, where
+<code>h</code> is the Pedersen hash. This process continues for nested storage nodes,
+building a chain of hashes that represents the path to a leaf node. Once a
+leaf node is reached, the storage calculation proceeds as it normally would
+for that type of variable.</p>
 </li>
 <li>
-<p>If the variable is a <a href="./ch101-01-01-storage-mappings.html">Map</a> or a <a href="./ch101-01-02-storage-vecs.html">Vec</a>, the address is computed relative to the storage base address, which is the <code>sn_keccak</code> hash of the variable's name, and the keys of the mapping or indexes in the Vec. The exact computation is described in the <a href="./ch101-01-01-storage-mappings.html">"Storage Mappings"</a> and <a href="./ch101-01-02-storage-vecs.html">"Storage Vecs"</a> sections.</p>
+<p>If the variable is a <a href="./ch101-01-01-storage-mappings.html">Map</a> or a <a href="./ch101-01-02-storage-vecs.html">Vec</a>, the
+address is computed relative to the storage base address, which is the
+<code>sn_keccak</code> hash of the variable's name, and the keys of the mapping or
+indexes in the Vec. The exact computation is described in the <a href="./ch101-01-01-storage-mappings.html">"Storage
+Mappings"</a> and <a href="./ch101-01-02-storage-vecs.html">"Storage Vecs"</a> sections.</p>
 </li>
 </ul>
-<p>You can access the base address of a storage variable by accessing the <code>__base_address__</code> attribute on the variable, which returns a <code>felt252</code> value.</p>
+<p>You can access the base address of a storage variable by accessing the
+<code>__base_address__</code> attribute on the variable, which returns a <code>felt252</code> value.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -1009,15 +1113,24 @@ You can think of storage nodes as intermediate nodes involved in address calcula
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>This address calculation mechanism is performed through a modelisation of the contract storage space using a concept of StoragePointers and StoragePaths that we'll now introduce.</p>
+<p>This address calculation mechanism is performed through a modelisation of the
+contract storage space using a concept of StoragePointers and StoragePaths that
+we'll now introduce.</p>
 <h2 id="modeling-of-the-contract-storage-in-the-core-library"><a class="header" href="#modeling-of-the-contract-storage-in-the-core-library">Modeling of the Contract Storage in the Core Library</a></h2>
-<p>To understand how storage variables are stored in Cairo, it's important to note that they are not stored contiguously but in different locations in the contract's storage. To facilitate the retrieval of these addresses, the core library provides a model of the contract storage through a system of <code>StoragePointers</code> and <code>StoragePaths</code>.</p>
-<p>Each storage variable can be converted to a <code>StoragePointer</code>. This pointer contains two main fields:</p>
+<p>To understand how storage variables are stored in Cairo, it's important to note
+that they are not stored contiguously but in different locations in the
+contract's storage. To facilitate the retrieval of these addresses, the core
+library provides a model of the contract storage through a system of
+<code>StoragePointers</code> and <code>StoragePaths</code>.</p>
+<p>Each storage variable can be converted to a <code>StoragePointer</code>. This pointer
+contains two main fields:</p>
 <ul>
 <li>The base address of the storage variable in the contract's storage.</li>
-<li>The offset, relative to the base address, of the specific storage slot being pointed to.</li>
+<li>The offset, relative to the base address, of the specific storage slot being
+pointed to.</li>
 </ul>
-<p>An example is worth a thousand words. Let's consider the <code>Person</code> struct defined in the previous section:</p>
+<p>An example is worth a thousand words. Let's consider the <code>Person</code> struct defined
+in the previous section:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[starknet::interface]
 </span><span class="boring">pub trait ISimpleStorage&lt;TContractState&gt; {
 </span><span class="boring">    fn get_owner(self: @TContractState) -&gt; SimpleStorage::Person;
@@ -1091,29 +1204,56 @@ You can think of storage nodes as intermediate nodes involved in address calcula
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>When we write <code>let x = self.owner;</code>, we access a variable of type <code>StorageBase</code> that represents the base location of the <code>owner</code> variable in the contract's storage.
-From this base address, we can either get pointers to the struct's fields (like <code>name</code> or <code>address</code>) or a pointer to the struct itself. On these pointers, we can call <code>read</code> and <code>write</code>, defined in the <code>Store</code> trait, to read and write the values pointed to.</p>
-<p>Of course, all of this is transparent to the developer. We can read and write to the struct's fields as if we were accessing regular variables, but the compiler translates these accesses into the appropriate <code>StoragePointer</code> manipulations under the hood.</p>
-<p>For storage mappings, the process is similar, except that we introduce an intermediate type, <code>StoragePath</code>. A <code>StoragePath</code> is a chain of storage nodes and struct fields that form a path to a specific storage slot. For example, to access a value contained in a <code>Map&lt;ContractAddress, u128&gt;</code>, the process would be the following:</p>
+<p>When we write <code>let x = self.owner;</code>, we access a variable of type <code>StorageBase</code>
+that represents the base location of the <code>owner</code> variable in the contract's
+storage. From this base address, we can either get pointers to the struct's
+fields (like <code>name</code> or <code>address</code>) or a pointer to the struct itself. On these
+pointers, we can call <code>read</code> and <code>write</code>, defined in the <code>Store</code> trait, to read
+and write the values pointed to.</p>
+<p>Of course, all of this is transparent to the developer. We can read and write to
+the struct's fields as if we were accessing regular variables, but the compiler
+translates these accesses into the appropriate <code>StoragePointer</code> manipulations
+under the hood.</p>
+<p>For storage mappings, the process is similar, except that we introduce an
+intermediate type, <code>StoragePath</code>. A <code>StoragePath</code> is a chain of storage nodes
+and struct fields that form a path to a specific storage slot. For example, to
+access a value contained in a <code>Map&lt;ContractAddress, u128&gt;</code>, the process would be
+the following:</p>
 <ol>
 <li>Start at <code>StorageBase</code> of the <code>Map</code>, and convert it to a <code>StoragePath</code>.</li>
-<li>Walk the <code>StoragePath</code> to reach the desired value using the <code>entry</code> method, which, in the case of a <code>Map</code>, hashes the current path with the next key to
+<li>Walk the <code>StoragePath</code> to reach the desired value using the <code>entry</code> method,
+which, in the case of a <code>Map</code>, hashes the current path with the next key to
 generate the next <code>StoragePath</code>.</li>
-<li>Repeat step 2 until the <code>StoragePath</code> points to the desired value, converting the final value to a <code>StoragePointer</code></li>
+<li>Repeat step 2 until the <code>StoragePath</code> points to the desired value, converting
+the final value to a <code>StoragePointer</code></li>
 <li>Read or write the value at that pointer.</li>
 </ol>
-<p>Note that we need to convert the <code>ContractAddress</code> to a <code>StoragePointer</code> before being able to read or write to it.</p>
+<p>Note that we need to convert the <code>ContractAddress</code> to a <code>StoragePointer</code> before
+being able to read or write to it.</p>
 <p><img src="mermaid-storage-model.png" alt="Modelisation of the Storage Space in the Core Library" /></p>
 <!-- ./mermaid-storage-model.txt -->
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
 <p>In this chapter, we covered the following key points:</p>
 <ul>
-<li><strong>Storage Variables</strong>: These are used to store persistent data on the blockchain. They are defined in a special <code>Storage</code> struct annotated with the <code>#[storage]</code> attribute.</li>
-<li><strong>Accessing Storage Variables</strong>: You can read and write storage variables using automatically generated <code>read</code> and <code>write</code> functions. For structs, you can access individual members directly.</li>
-<li><strong>Custom Types with the <code>Store</code> Trait</strong>: To store custom types like structs and enums, they must implement the <code>Store</code> trait. This can be achieved using the <code>#[derive(starknet::Store)]</code> attribute or writing your own implementation.</li>
-<li><strong>Addresses of Storage Variables</strong>: The address of a storage variable is computed using the <code>sn_keccak</code> hash of its name, and additional steps for special types. For complex types, the storage layout is determined by the type's structure.</li>
-<li><strong>Structs and Enums Storage Layout</strong>: Structs are stored as a sequence of primitive types, while enums store the variant index and potential associated values.</li>
-<li><strong>Storage Nodes</strong>: Special structs that can contain storage-specific types like <code>Map</code> or <code>Vec</code>. They allow for more sophisticated storage layouts and can only exist within contract storage.</li>
+<li><strong>Storage Variables</strong>: These are used to store persistent data on the
+blockchain. They are defined in a special <code>Storage</code> struct annotated with the
+<code>#[storage]</code> attribute.</li>
+<li><strong>Accessing Storage Variables</strong>: You can read and write storage variables
+using automatically generated <code>read</code> and <code>write</code> functions. For structs, you
+can access individual members directly.</li>
+<li><strong>Custom Types with the <code>Store</code> Trait</strong>: To store custom types like structs
+and enums, they must implement the <code>Store</code> trait. This can be achieved using
+the <code>#[derive(starknet::Store)]</code> attribute or writing your own implementation.</li>
+<li><strong>Addresses of Storage Variables</strong>: The address of a storage variable is
+computed using the <code>sn_keccak</code> hash of its name, and additional steps for
+special types. For complex types, the storage layout is determined by the
+type's structure.</li>
+<li><strong>Structs and Enums Storage Layout</strong>: Structs are stored as a sequence of
+primitive types, while enums store the variant index and potential associated
+values.</li>
+<li><strong>Storage Nodes</strong>: Special structs that can contain storage-specific types
+like <code>Map</code> or <code>Vec</code>. They allow for more sophisticated storage layouts and can
+only exist within contract storage.</li>
 </ul>
 <p>Next, we'll focus on the <code>Map</code> and <code>Vec</code> types in depth.</p>
 
@@ -1151,24 +1291,6 @@ generate the next <code>StoragePath</code>.</li>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

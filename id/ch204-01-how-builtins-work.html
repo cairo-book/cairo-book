@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,28 +274,24 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="how-builtins-work"><a class="header" href="#how-builtins-work">How Builtins Work</a></h1>
-<p>A builtin enforces some constraints on the Cairo memory
-to perform specific tasks, such as computing a hash.</p>
-<p>Each builtin works on a dedicated memory segment,
-which represents in the end a fixed address range.
-This communication method is called <em>memory-mapped I/O</em>:
+<p>A builtin enforces some constraints on the Cairo memory to perform specific
+tasks, such as computing a hash.</p>
+<p>Each builtin works on a dedicated memory segment, which represents in the end a
+fixed address range. This communication method is called <em>memory-mapped I/O</em>:
 specific ranges of memory addresses dedicated to builtins.</p>
-<p>For a Cairo program to interact with a builtin, it simply
-needs to read or write to the corresponding memory cells.</p>
-<p>There are two main types of builtin constraints that we'll
-refer as <em>validation property</em> and <em>deduction property</em>.
-The builtins with a deduction property are usually split
-in block of cells where some cells are constrained by
-a validation property</p>
-<p>If the defined property doesn't hold, then the Cairo VM
-will panic.</p>
+<p>For a Cairo program to interact with a builtin, it simply needs to read or write
+to the corresponding memory cells.</p>
+<p>There are two main types of builtin constraints that we'll refer as <em>validation
+property</em> and <em>deduction property</em>. The builtins with a deduction property are
+usually split in block of cells where some cells are constrained by a validation
+property</p>
+<p>If the defined property doesn't hold, then the Cairo VM will panic.</p>
 <h2 id="validation-property"><a class="header" href="#validation-property">Validation Property</a></h2>
-<p>A validation property defines constraints a value must
-hold for it to be written to a builtin memory cell.</p>
-<p>For example, the <em>Range Check</em> builtin only accepts felts and verify
-that such a felt is within the range <code>[0, 2**128)</code>.
-A program can write a value to the Range Check builtin
-only if those two constraints hold. Those two constraints
+<p>A validation property defines constraints a value must hold for it to be written
+to a builtin memory cell.</p>
+<p>For example, the <em>Range Check</em> builtin only accepts felts and verify that such a
+felt is within the range <code>[0, 2**128)</code>. A program can write a value to the Range
+Check builtin only if those two constraints hold. Those two constraints
 represent the validation property of the Range Check builtin.</p>
 <div align="center">
   <img src="range-check-validation-property.png" alt="Diagram snapshot Cairo memory using the Range Check builtin" width="800px"/>
@@ -303,19 +300,18 @@ represent the validation property of the Range Check builtin.</p>
   <span class="caption">Diagram of the Cairo VM memory using the Range Check builtin</span>
 </div>
 <h2 id="deduction-property"><a class="header" href="#deduction-property">Deduction Property</a></h2>
-<p>A deduction property defines constraints on a block
-of cells, when reading or writing to a cell.</p>
+<p>A deduction property defines constraints on a block of cells, when reading or
+writing to a cell.</p>
 <p>A block of cells has two categories of cells:</p>
 <ul>
-<li><em>Input cells</em> - cells the program can write to,
-their constraints are similar to a validation property.</li>
-<li><em>Output cells</em> - cells the program must read,
-and their value is computed based on the deduction
-property and the input cells value.</li>
+<li><em>Input cells</em> - cells the program can write to, their constraints are similar
+to a validation property.</li>
+<li><em>Output cells</em> - cells the program must read, and their value is computed
+based on the deduction property and the input cells value.</li>
 </ul>
-<p>A program that only writes to the input cells, without
-ever reading the output cell, is valid as long as the constraints
-on those cells hold. Though, it is useless.</p>
+<p>A program that only writes to the input cells, without ever reading the output
+cell, is valid as long as the constraints on those cells hold. Though, it is
+useless.</p>
 <p>For example, the <em>Pedersen</em> builtin works with triplets of cells:</p>
 <ul>
 <li>Two input cells to store two felts, <code>a</code> and <code>b</code>.</li>
@@ -327,9 +323,9 @@ on those cells hold. Though, it is useless.</p>
 <li>Write <code>b</code> to the second cell</li>
 <li>Read the third cell, which will compute and write `Pedersen(a, b) to it.</li>
 </ul>
-<p>In the following diagram, the Pedersen builtin is used,
-highlighting its deduction property: the output cell <code>2:2</code>
-being read when writing its value to the cell <code>1:5</code>.</p>
+<p>In the following diagram, the Pedersen builtin is used, highlighting its
+deduction property: the output cell <code>2:2</code> being read when writing its value to
+the cell <code>1:5</code>.</p>
 <div align="center">
   <img src="pedersen-deduction-property.png" alt="Diagram of Cairo VM memory Pedersen builtins" width="800px"/>
 </div>
@@ -371,24 +367,6 @@ being read when writing its value to the cell <code>1:5</code>.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

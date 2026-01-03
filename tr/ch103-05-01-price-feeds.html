@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,24 +274,37 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="price-feeds"><a class="header" href="#price-feeds">Price Feeds</a></h1>
-<p>Price feeds enabled by an oracle serve as a bridge between real-world data feed and the blockchain. They provide real time pricing data that is aggregated from multiple trusted external sources ( e.g. crypto exchanges, financial data providers, etc. ) to the blockchain network.</p>
-<p>For the example in this book section, we will use Pragma Oracle to read the price feed for <code>ETH/USD</code> asset pair and also showcase a mini application that utilizes this feed.</p>
-<p><a href="https://www.pragma.build/">Pragma Oracle</a> is a leading zero knowledge oracle that provides access to off-chain data on Starknet blockchain in a verifiable way.</p>
+<p>Price feeds enabled by an oracle serve as a bridge between real-world data feed
+and the blockchain. They provide real time pricing data that is aggregated from
+multiple trusted external sources ( e.g. crypto exchanges, financial data
+providers, etc. ) to the blockchain network.</p>
+<p>For the example in this book section, we will use Pragma Oracle to read the
+price feed for <code>ETH/USD</code> asset pair and also showcase a mini application that
+utilizes this feed.</p>
+<p><a href="https://www.pragma.build/">Pragma Oracle</a> is a leading zero knowledge oracle
+that provides access to off-chain data on Starknet blockchain in a verifiable
+way.</p>
 <h2 id="setting-up-your-contract-for-price-feeds"><a class="header" href="#setting-up-your-contract-for-price-feeds">Setting Up Your Contract for Price Feeds</a></h2>
 <h3 id="add-pragma-as-a-project-dependency"><a class="header" href="#add-pragma-as-a-project-dependency">Add Pragma as a Project Dependency</a></h3>
-<p>To get started with integrating Pragma on your Cairo smart contract for price feed data, edit your project's <code>Scarb.toml</code> file to include the path to use Pragma.</p>
+<p>To get started with integrating Pragma on your Cairo smart contract for price
+feed data, edit your project's <code>Scarb.toml</code> file to include the path to use
+Pragma.</p>
 <pre><code class="language-toml">[dependencies]
 pragma_lib = { git = "https://github.com/astraly-labs/pragma-lib" }
 </code></pre>
 <h3 id="creating-a-price-feed-contract"><a class="header" href="#creating-a-price-feed-contract">Creating a Price Feed Contract</a></h3>
-<p>After adding the required dependencies for your project, you'll need to define a contract interface that includes the required pragma price feed entry point.</p>
+<p>After adding the required dependencies for your project, you'll need to define a
+contract interface that includes the required pragma price feed entry point.</p>
 <pre><code class="language-cairo noplayground">#[starknet::interface]
 pub trait IPriceFeedExample&lt;TContractState&gt; {
     fn buy_item(ref self: TContractState);
     fn get_asset_price(self: @TContractState, asset_id: felt252) -&gt; u128;
 }
 </code></pre>
-<p>Of the two public functions exposed in the <code>IPriceFeedExample</code>, the one necessary to interact with the pragma price feed oracle is the <code>get_asset_price</code> function, a view function that takes in the <code>asset_id</code> argument and returns a <code>u128</code> value.</p>
+<p>Of the two public functions exposed in the <code>IPriceFeedExample</code>, the one
+necessary to interact with the pragma price feed oracle is the <code>get_asset_price</code>
+function, a view function that takes in the <code>asset_id</code> argument and returns a
+<code>u128</code> value.</p>
 <h3 id="import-pragma-dependencies"><a class="header" href="#import-pragma-dependencies">Import Pragma Dependencies</a></h3>
 <pre><code class="language-cairo noplayground">    use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
     use pragma_lib::types::{DataType, PragmaPricesResponse};
@@ -358,7 +372,8 @@ pub trait IPriceFeedExample&lt;TContractState&gt; {
 
 
 </code></pre>
-<p>The snippet above shows the necessary imports you need to add to your contract module in order to interact with the Pragma oracle.</p>
+<p>The snippet above shows the necessary imports you need to add to your contract
+module in order to interact with the Pragma oracle.</p>
 <h3 id="required-price-feed-function-impl-in-contract"><a class="header" href="#required-price-feed-function-impl-in-contract">Required Price Feed Function Impl in Contract</a></h3>
 <pre><code class="language-cairo noplayground">        fn get_asset_price(self: @ContractState, asset_id: felt252) -&gt; u128 {
             // Retrieve the oracle dispatcher
@@ -373,7 +388,12 @@ pub trait IPriceFeedExample&lt;TContractState&gt; {
             return output.price;
         }
 </code></pre>
-<p>The <code>get_asset_price</code> function is responsible for retrieving the price of the asset specified by the <code>asset_id</code> argument from Pragma Oracle. The <code>get_data_median</code> method is called from the <code>IPragmaDispatcher</code> instance by passing the <code>DataType::SpotEntry(asset_id)</code> as an argument and its output is assigned to a variable named <code>output</code> of type <code>PragmaPricesResponse</code>. Finally, the function returns the price of the requested asset as a <code>u128</code>.</p>
+<p>The <code>get_asset_price</code> function is responsible for retrieving the price of the
+asset specified by the <code>asset_id</code> argument from Pragma Oracle. The
+<code>get_data_median</code> method is called from the <code>IPragmaDispatcher</code> instance by
+passing the <code>DataType::SpotEntry(asset_id)</code> as an argument and its output is
+assigned to a variable named <code>output</code> of type <code>PragmaPricesResponse</code>. Finally,
+the function returns the price of the requested asset as a <code>u128</code>.</p>
 <h2 id="example-application-using-pragma-price-feed"><a class="header" href="#example-application-using-pragma-price-feed">Example Application Using Pragma Price Feed</a></h2>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 mod PriceFeedExample {
@@ -443,13 +463,32 @@ mod PriceFeedExample {
 }
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: Pragma returns the value of different token pairs using the decimal factor of 6 or 8. You can convert the value to the required decimal factor by dividing the value by \( {10^{n}} \), where <code>n</code> is the decimal factor.</p>
+<p><strong>Note</strong>: Pragma returns the value of different token pairs using the decimal
+factor of 6 or 8. You can convert the value to the required decimal factor by
+dividing the value by \( {10^{n}} \), where <code>n</code> is the decimal factor.</p>
 </blockquote>
-<p>The code above is an example implementation of an applications consuming a price feed from the Pragma oracle. The contract imports necessary modules and interfaces, including the <code>IPragmaABIDispatcher</code> for interacting with the Pragma oracle contract and the <code>ERC20ABIDispatcher</code> for interacting with the ETH ERC20 token contract.</p>
-<p>The contract has a <code>const</code> that stores the token pair ID of <code>ETH/USD</code>, and a <code>Storage</code> struct that holds two fields <code>pragma_contract</code> and <code>product_price_in_usd</code>. The constructor function initializes the <code>pragma_contract</code> address and sets the <code>product_price_in_usd</code> to 100.</p>
-<p>The <code>buy_item</code> function is the main entry point for a user to purchase an item. It retrieves the caller's address. It calls the <code>get_asset_price</code> function to get the current price of ETH in USD using the <code>ETH_USD</code> asset ID. It calculates the amount of ETH needed to buy the product based on the product price in USD at the corresponding ETH price. It then checks if the caller has enough ETH by calling the <code>balance_of</code> method on the ERC20 ETH contract. If the caller has enough ETH, it calls the <code>transfer_from</code> method of the <code>eth_dispatcher</code> instance to transfer the required amount of ETH from the caller to another contract address.</p>
-<p>The <code>get_asset_price</code> function is the entry point to interact with the Pragma oracle and has been explained in the section above.</p>
-<p>You can get a detailed guide on consuming data using Pragma price feeds on their <a href="https://docs.pragma.build/Resources/Starknet/data-feeds/consuming-data">documentation</a>.</p>
+<p>The code above is an example implementation of an applications consuming a price
+feed from the Pragma oracle. The contract imports necessary modules and
+interfaces, including the <code>IPragmaABIDispatcher</code> for interacting with the Pragma
+oracle contract and the <code>ERC20ABIDispatcher</code> for interacting with the ETH ERC20
+token contract.</p>
+<p>The contract has a <code>const</code> that stores the token pair ID of <code>ETH/USD</code>, and a
+<code>Storage</code> struct that holds two fields <code>pragma_contract</code> and
+<code>product_price_in_usd</code>. The constructor function initializes the
+<code>pragma_contract</code> address and sets the <code>product_price_in_usd</code> to 100.</p>
+<p>The <code>buy_item</code> function is the main entry point for a user to purchase an item.
+It retrieves the caller's address. It calls the <code>get_asset_price</code> function to
+get the current price of ETH in USD using the <code>ETH_USD</code> asset ID. It calculates
+the amount of ETH needed to buy the product based on the product price in USD at
+the corresponding ETH price. It then checks if the caller has enough ETH by
+calling the <code>balance_of</code> method on the ERC20 ETH contract. If the caller has
+enough ETH, it calls the <code>transfer_from</code> method of the <code>eth_dispatcher</code> instance
+to transfer the required amount of ETH from the caller to another contract
+address.</p>
+<p>The <code>get_asset_price</code> function is the entry point to interact with the Pragma
+oracle and has been explained in the section above.</p>
+<p>You can get a detailed guide on consuming data using Pragma price feeds on their
+<a href="https://docs.pragma.build/Resources/Starknet/data-feeds/consuming-data">documentation</a>.</p>
 
                     </main>
 
@@ -485,24 +524,6 @@ mod PriceFeedExample {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

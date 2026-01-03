@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,53 +274,152 @@
                 <div id="content" class="content">
                     <main>
                         <hr />
-<h2 id="meta-explore-the-fundamentals-of-smart-contracts-in-this-comprehensive-introduction-tailored-for-developers-using-cairo-learn-how-smart-contracts-work-and-their-role-in-blockchain-technology"><a class="header" href="#meta-explore-the-fundamentals-of-smart-contracts-in-this-comprehensive-introduction-tailored-for-developers-using-cairo-learn-how-smart-contracts-work-and-their-role-in-blockchain-technology">meta: "Explore the fundamentals of smart contracts in this comprehensive introduction, tailored for developers using Cairo. Learn how smart contracts work and their role in blockchain technology."</a></h2>
+<h2>meta:
+"Explore the fundamentals of smart contracts in this comprehensive
+introduction, tailored for developers using Cairo. Learn how smart contracts
+work and their role in blockchain technology."</h2>
 <h1 id="introduction-to-smart-contracts"><a class="header" href="#introduction-to-smart-contracts">Introduction to Smart Contracts</a></h1>
-<p>This chapter will give you a high level introduction to what smart contracts are, what they are used for, and why blockchain developers would use Cairo and Starknet.
-If you are already familiar with blockchain programming, feel free to skip this chapter. The last part might still be interesting though.</p>
+<p>This chapter will give you a high level introduction to what smart contracts
+are, what they are used for, and why blockchain developers would use Cairo and
+Starknet. If you are already familiar with blockchain programming, feel free to
+skip this chapter. The last part might still be interesting though.</p>
 <h2 id="smart-contracts---introduction"><a class="header" href="#smart-contracts---introduction">Smart Contracts - Introduction</a></h2>
-<p>Smart contracts gained popularity and became more widespread with the birth of Ethereum. Smart contracts are essentially programs deployed on a blockchain. The term "smart contract" is somewhat misleading, as they are neither "smart" nor "contracts" but rather code and instructions that are executed based on specific inputs. They primarily consist of two components: storage and functions. Once deployed, users can interact with smart contracts by initiating blockchain transactions containing execution data (which function to call and with what input). Smart contracts can modify and read the storage of the underlying blockchain. A smart contract has its own address and is considered a blockchain account, meaning it can hold tokens.</p>
-<p>The programming language used to write smart contracts varies depending on the blockchain. For example, on Ethereum and the <a href="https://ethereum.org/en/developers/docs/evm/">EVM-compatible ecosystem</a>, the most commonly used language is Solidity, while on Starknet, it is Cairo. The way the code is compiled also differs based on the blockchain. On Ethereum, Solidity is compiled into bytecode. On Starknet, Cairo is compiled into Sierra and then into Cairo Assembly (CASM).</p>
-<p>Smart contracts possess several unique characteristics. They are <strong>permissionless</strong>, meaning anyone can deploy a smart contract on the network (within the context of a decentralized blockchain, of course). Smart contracts are also <strong>transparent</strong>; the data stored by the smart contract is accessible to anyone. The code that composes the contract can also be transparent, enabling <strong>composability</strong>. This allows developers to write smart contracts that use other smart contracts. Smart contracts can only access and interact with data from the blockchain they are deployed on. They require third-party software (called <em>oracles</em>) to access external data (the price of a token for instance).</p>
-<p>For developers to build smart contracts that can interact with each other, it is required to know what the other contracts look like. Hence, Ethereum developers started to build standards for smart contract development, the <code>ERCxx</code>. The two most used and famous standards are the <code>ERC20</code>, used to build tokens like <code>USDC</code>, <code>DAI</code> or <code>STARK</code>, and the <code>ERC721</code>, for NFTs (Non-Fungible Tokens) like <code>CryptoPunks</code> or <code>Everai</code>.</p>
+<p>Smart contracts gained popularity and became more widespread with the birth of
+Ethereum. Smart contracts are essentially programs deployed on a blockchain. The
+term "smart contract" is somewhat misleading, as they are neither "smart" nor
+"contracts" but rather code and instructions that are executed based on specific
+inputs. They primarily consist of two components: storage and functions. Once
+deployed, users can interact with smart contracts by initiating blockchain
+transactions containing execution data (which function to call and with what
+input). Smart contracts can modify and read the storage of the underlying
+blockchain. A smart contract has its own address and is considered a blockchain
+account, meaning it can hold tokens.</p>
+<p>The programming language used to write smart contracts varies depending on the
+blockchain. For example, on Ethereum and the <a href="https://ethereum.org/en/developers/docs/evm/">EVM-compatible ecosystem</a>,
+the most commonly used language is Solidity, while on Starknet, it is Cairo. The
+way the code is compiled also differs based on the blockchain. On Ethereum,
+Solidity is compiled into bytecode. On Starknet, Cairo is compiled into Sierra
+and then into Cairo Assembly (CASM).</p>
+<p>Smart contracts possess several unique characteristics. They are
+<strong>permissionless</strong>, meaning anyone can deploy a smart contract on the network
+(within the context of a decentralized blockchain, of course). Smart contracts
+are also <strong>transparent</strong>; the data stored by the smart contract is accessible to
+anyone. The code that composes the contract can also be transparent, enabling
+<strong>composability</strong>. This allows developers to write smart contracts that use
+other smart contracts. Smart contracts can only access and interact with data
+from the blockchain they are deployed on. They require third-party software
+(called <em>oracles</em>) to access external data (the price of a token for instance).</p>
+<p>For developers to build smart contracts that can interact with each other, it is
+required to know what the other contracts look like. Hence, Ethereum developers
+started to build standards for smart contract development, the <code>ERCxx</code>. The two
+most used and famous standards are the <code>ERC20</code>, used to build tokens like
+<code>USDC</code>, <code>DAI</code> or <code>STARK</code>, and the <code>ERC721</code>, for NFTs (Non-Fungible Tokens) like
+<code>CryptoPunks</code> or <code>Everai</code>.</p>
 <h2 id="smart-contracts---use-cases"><a class="header" href="#smart-contracts---use-cases">Smart Contracts - Use Cases</a></h2>
-<p>There are many possible use cases for smart contracts. The only limits are the technical constraints of the blockchain and the creativity of developers.</p>
+<p>There are many possible use cases for smart contracts. The only limits are the
+technical constraints of the blockchain and the creativity of developers.</p>
 <h3 id="defi"><a class="header" href="#defi">DeFi</a></h3>
-<p>For now, the principal use case for smart contracts is similar to that of Ethereum or Bitcoin, which is essentially handling money. In the context of the alternative payment system promised by Bitcoin, smart contracts on Ethereum enable the creation of decentralized financial applications that no longer rely on traditional financial intermediaries. This is what we call DeFi (decentralized finance). DeFi consists of various projects such as lending/borrowing applications, decentralized exchanges (DEX), on-chain derivatives, stablecoins, decentralized hedge funds, insurance, and many more.</p>
+<p>For now, the principal use case for smart contracts is similar to that of
+Ethereum or Bitcoin, which is essentially handling money. In the context of the
+alternative payment system promised by Bitcoin, smart contracts on Ethereum
+enable the creation of decentralized financial applications that no longer rely
+on traditional financial intermediaries. This is what we call DeFi
+(decentralized finance). DeFi consists of various projects such as
+lending/borrowing applications, decentralized exchanges (DEX), on-chain
+derivatives, stablecoins, decentralized hedge funds, insurance, and many more.</p>
 <h3 id="tokenization"><a class="header" href="#tokenization">Tokenization</a></h3>
-<p>Smart contracts can facilitate the tokenization of real-world assets, such as real estate, art, or precious metals. Tokenization divides an asset into digital tokens, which can be easily traded and managed on blockchain platforms. This can increase liquidity, enable fractional ownership, and simplify the buying and selling process.</p>
+<p>Smart contracts can facilitate the tokenization of real-world assets, such as
+real estate, art, or precious metals. Tokenization divides an asset into digital
+tokens, which can be easily traded and managed on blockchain platforms. This can
+increase liquidity, enable fractional ownership, and simplify the buying and
+selling process.</p>
 <h3 id="voting"><a class="header" href="#voting">Voting</a></h3>
-<p>Smart contracts can be used to create secure and transparent voting systems. Votes can be recorded on the blockchain, ensuring immutability and transparency. The smart contract can then automatically tally the votes and declare the results, minimizing the potential for fraud or manipulation.</p>
+<p>Smart contracts can be used to create secure and transparent voting systems.
+Votes can be recorded on the blockchain, ensuring immutability and transparency.
+The smart contract can then automatically tally the votes and declare the
+results, minimizing the potential for fraud or manipulation.</p>
 <h3 id="royalties"><a class="header" href="#royalties">Royalties</a></h3>
-<p>Smart contracts can automate royalty payments for artists, musicians, and other content creators. When a piece of content is consumed or sold, the smart contract can automatically calculate and distribute the royalties to the rightful owners, ensuring fair compensation and reducing the need for intermediaries.</p>
+<p>Smart contracts can automate royalty payments for artists, musicians, and other
+content creators. When a piece of content is consumed or sold, the smart
+contract can automatically calculate and distribute the royalties to the
+rightful owners, ensuring fair compensation and reducing the need for
+intermediaries.</p>
 <h3 id="decentralized-identities-dids"><a class="header" href="#decentralized-identities-dids">Decentralized Identities DIDs</a></h3>
-<p>Smart contracts can be used to create and manage digital identities, allowing individuals to control their personal information and share it with third parties securely. The smart contract could verify the authenticity of a user's identity and automatically grant or revoke access to specific services based on the user's credentials.</p>
+<p>Smart contracts can be used to create and manage digital identities, allowing
+individuals to control their personal information and share it with third
+parties securely. The smart contract could verify the authenticity of a user's
+identity and automatically grant or revoke access to specific services based on
+the user's credentials.</p>
 <br/>
 <br/>
 As Ethereum continues to mature, we can expect the use cases and applications of smart contracts to expand further, bringing about exciting new opportunities and reshaping traditional systems for the better.
 <h2 id="the-rise-of-starknet-and-cairo"><a class="header" href="#the-rise-of-starknet-and-cairo">The Rise of Starknet and Cairo</a></h2>
-<p>Ethereum, being the most widely used and resilient smart contract platform, became a victim of its own success. With the rapid adoption of some previously mentioned use cases, mainly DeFi, the cost of performing transactions became extremely high, rendering the network almost unusable. Engineers and researchers in the ecosystem began working on solutions to address this scalability issue.</p>
-<p>A famous trilemma called The Blockchain Trilemma in the blockchain space states that it is hard to achieve a high level of scalability, decentralization, and security simultaneously; trade-offs must be made. Ethereum is at the intersection of decentralization and security. Eventually, it was decided that Ethereum's purpose would be to serve as a secure settlement layer, while complex computations would be offloaded to other networks built on top of Ethereum. These are called Layer 2s (L2s).</p>
-<p>The two primary types of L2s are optimistic rollups and validity rollups. Both approaches involve compressing and batching numerous transactions together, computing the new state, and settling the result on Ethereum (L1). The difference lies in the way the result is settled on L1. For optimistic rollups, the new state is considered valid by default, but there is a 7-day window for nodes to identify malicious transactions.</p>
-<p>In contrast, validity rollups, such as Starknet, use cryptography to prove that the new state has been correctly computed. This is the purpose of STARKs, this cryptographic technology could permit validity rollups to scale significantly more than optimistic rollups. You can learn more about STARKs from Starkware's Medium <a href="https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a">article</a>, which serves as a good primer.</p>
+<p>Ethereum, being the most widely used and resilient smart contract platform,
+became a victim of its own success. With the rapid adoption of some previously
+mentioned use cases, mainly DeFi, the cost of performing transactions became
+extremely high, rendering the network almost unusable. Engineers and researchers
+in the ecosystem began working on solutions to address this scalability issue.</p>
+<p>A famous trilemma called The Blockchain Trilemma in the blockchain space states
+that it is hard to achieve a high level of scalability, decentralization, and
+security simultaneously; trade-offs must be made. Ethereum is at the
+intersection of decentralization and security. Eventually, it was decided that
+Ethereum's purpose would be to serve as a secure settlement layer, while complex
+computations would be offloaded to other networks built on top of Ethereum.
+These are called Layer 2s (L2s).</p>
+<p>The two primary types of L2s are optimistic rollups and validity rollups. Both
+approaches involve compressing and batching numerous transactions together,
+computing the new state, and settling the result on Ethereum (L1). The
+difference lies in the way the result is settled on L1. For optimistic rollups,
+the new state is considered valid by default, but there is a 7-day window for
+nodes to identify malicious transactions.</p>
+<p>In contrast, validity rollups, such as Starknet, use cryptography to prove that
+the new state has been correctly computed. This is the purpose of STARKs, this
+cryptographic technology could permit validity rollups to scale significantly
+more than optimistic rollups. You can learn more about STARKs from Starkware's
+Medium <a href="https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a">article</a>, which serves as a good primer.</p>
 <blockquote>
-<p>Starknet's architecture is thoroughly described in the <a href="https://docs.starknet.io/documentation/architecture_and_concepts/">Starknet documentation</a>, which is a great resource to learn more about the Starknet network.</p>
+<p>Starknet's architecture is thoroughly described in the
+<a href="https://docs.starknet.io/documentation/architecture_and_concepts/">Starknet documentation</a>,
+which is a great resource to learn more about the Starknet network.</p>
 </blockquote>
-<p>Remember Cairo? It is, in fact, a language developed specifically to work with STARKs and make them general-purpose. With Cairo, we can write <strong>provable code</strong>. In the context of Starknet, this allows proving the correctness of computations from one state to another.</p>
-<p>Unlike most (if not all) of Starknet's competitors that chose to use the EVM (either as-is or adapted) as a base layer, Starknet employs its own VM. This frees developers from the constraints of the EVM, opening up a broader range of possibilities. Coupled with decreased transaction costs, the combination of Starknet and Cairo creates an exciting playground for developers. Native account abstraction enables more complex logic for accounts, that we call "Smart Accounts", and transaction flows. Emerging use cases include <strong>transparent AI</strong> and machine learning applications. Finally, <strong>blockchain games</strong> can be developed entirely <strong>on-chain</strong>. Starknet has been specifically designed to maximize the capabilities of STARK proofs for optimal scalability.</p>
+<p>Remember Cairo? It is, in fact, a language developed specifically to work with
+STARKs and make them general-purpose. With Cairo, we can write <strong>provable
+code</strong>. In the context of Starknet, this allows proving the correctness of
+computations from one state to another.</p>
+<p>Unlike most (if not all) of Starknet's competitors that chose to use the EVM
+(either as-is or adapted) as a base layer, Starknet employs its own VM. This
+frees developers from the constraints of the EVM, opening up a broader range of
+possibilities. Coupled with decreased transaction costs, the combination of
+Starknet and Cairo creates an exciting playground for developers. Native account
+abstraction enables more complex logic for accounts, that we call "Smart
+Accounts", and transaction flows. Emerging use cases include <strong>transparent AI</strong>
+and machine learning applications. Finally, <strong>blockchain games</strong> can be
+developed entirely <strong>on-chain</strong>. Starknet has been specifically designed to
+maximize the capabilities of STARK proofs for optimal scalability.</p>
 <blockquote>
-<p>Learn more about Account Abstraction in the <a href="https://docs.starknet.io/documentation/architecture_and_concepts/Account_Abstraction/introduction/">Starknet documentation</a>.</p>
+<p>Learn more about Account Abstraction in the
+<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Account_Abstraction/introduction/">Starknet documentation</a>.</p>
 </blockquote>
 <h2 id="cairo-programs-and-starknet-smart-contracts-what-is-the-difference"><a class="header" href="#cairo-programs-and-starknet-smart-contracts-what-is-the-difference">Cairo Programs and Starknet Smart Contracts: What Is the Difference?</a></h2>
-<p>Starknet contracts are a special superset of Cairo programs, so the concepts previously learned in this book are still applicable to write Starknet contracts.
-As you may have already noticed, a Cairo program must always have a <code>main</code> function that serves as the entry point for this program:</p>
+<p>Starknet contracts are a special superset of Cairo programs, so the concepts
+previously learned in this book are still applicable to write Starknet
+contracts. As you may have already noticed, a Cairo program must always have a
+<code>main</code> function that serves as the entry point for this program:</p>
 <pre><code class="language-cairo">fn main() {}
 </code></pre>
-<p>Contracts deployed on the Starknet network are essentially programs that are run by the sequencer, and as such, have access to Starknet's state. Contracts do not have a <code>main</code> function but one or multiple functions that can serve as entry points.</p>
-<p>Starknet contracts are defined within <a href="./ch07-02-defining-modules-to-control-scope.html">modules</a>. For a module to be handled as a contract by the compiler, it must be annotated with the <code>#[starknet::contract]</code> attribute.</p>
+<p>Contracts deployed on the Starknet network are essentially programs that are run
+by the sequencer, and as such, have access to Starknet's state. Contracts do not
+have a <code>main</code> function but one or multiple functions that can serve as entry
+points.</p>
+<p>Starknet contracts are defined within <a href="./ch07-02-defining-modules-to-control-scope.html">modules</a>. For a module to
+be handled as a contract by the compiler, it must be annotated with the
+<code>#[starknet::contract]</code> attribute.</p>
 <h2 id="anatomy-of-a-simple-contract"><a class="header" href="#anatomy-of-a-simple-contract">Anatomy of a Simple Contract</a></h2>
-<p>This chapter will introduce you to the basics of Starknet contracts using a very simple smart contract as example. You will learn how to write a contract that allows anyone to store a single number on the Starknet blockchain.</p>
-<p>Let's consider the following contract for the whole chapter. It might not be easy to understand it all at once, but we will go through it step by step:</p>
+<p>This chapter will introduce you to the basics of Starknet contracts using a very
+simple smart contract as example. You will learn how to write a contract that
+allows anyone to store a single number on the Starknet blockchain.</p>
+<p>Let's consider the following contract for the whole chapter. It might not be
+easy to understand it all at once, but we will go through it step by step:</p>
 <pre><code class="language-cairo noplayground">#[starknet::interface]
 trait ISimpleStorage&lt;TContractState&gt; {
     fn set(ref self: TContractState, x: u128);
@@ -347,12 +447,19 @@ mod SimpleStorage {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 14-1: A simple storage contract</span></p>
+<p>14-1: A simple storage contract</span></p>
 <h3 id="what-is-this-contract"><a class="header" href="#what-is-this-contract">What Is this Contract?</a></h3>
-<p>Contracts are defined by encapsulating state and logic within a module annotated with the <code>#[starknet::contract]</code> attribute.</p>
-<p>The state is defined within the <code>Storage</code> struct, and is always initialized empty. Here, our struct contains a single field called <code>stored_data</code> of type <code>u128</code> (unsigned integer of 128 bits), indicating that our contract can store any number between 0 and \( {2^{128}} - 1 \).</p>
-<p>The logic is defined by functions that interact with the state. Here, our contract defines and publicly exposes the functions <code>set</code> and <code>get</code> that can be used to modify or retrieve the value of the stored variable.
-You can think of it as a single slot in a database that you can query and modify by calling functions of the code that manages the database.</p>
+<p>Contracts are defined by encapsulating state and logic within a module annotated
+with the <code>#[starknet::contract]</code> attribute.</p>
+<p>The state is defined within the <code>Storage</code> struct, and is always initialized
+empty. Here, our struct contains a single field called <code>stored_data</code> of type
+<code>u128</code> (unsigned integer of 128 bits), indicating that our contract can store
+any number between 0 and \( {2^{128}} - 1 \).</p>
+<p>The logic is defined by functions that interact with the state. Here, our
+contract defines and publicly exposes the functions <code>set</code> and <code>get</code> that can be
+used to modify or retrieve the value of the stored variable. You can think of it
+as a single slot in a database that you can query and modify by calling
+functions of the code that manages the database.</p>
 <h3 id="the-interface-the-contracts-blueprint"><a class="header" href="#the-interface-the-contracts-blueprint">The Interface: the Contract's Blueprint</a></h3>
 <pre><code class="language-cairo noplayground">#[starknet::interface]
 trait ISimpleStorage&lt;TContractState&gt; {
@@ -360,15 +467,37 @@ trait ISimpleStorage&lt;TContractState&gt; {
     fn get(self: @TContractState) -&gt; u128;
 }
 </code></pre>
-<p><span class="caption">Listing 14-2: A basic contract interface</span></p>
-<p>Interfaces represent the blueprint of the contract. They define the functions that the contract exposes to the outside world, without including the function body. In Cairo, they're defined by annotating a trait with the <code>#[starknet::interface]</code> attribute. All functions of the trait are considered public functions of any contract that implements this trait, and are callable from the outside world.</p>
+<p>contract interface</span></p>
+<p>Interfaces represent the blueprint of the contract. They define the functions
+that the contract exposes to the outside world, without including the function
+body. In Cairo, they're defined by annotating a trait with the
+<code>#[starknet::interface]</code> attribute. All functions of the trait are considered
+public functions of any contract that implements this trait, and are callable
+from the outside world.</p>
 <blockquote>
-<p>The contract constructor is not part of the interface. Nor are internal functions.</p>
+<p>The contract constructor is not part of the interface. Nor are internal
+functions.</p>
 </blockquote>
-<p>All contract interfaces use a generic type for the <code>self</code> parameter, representing the contract state. We chose to name this generic parameter <code>TContractState</code> in our interface, but this is not enforced and any name can be chosen.</p>
-<p>In our interface, note the generic type <code>TContractState</code> of the <code>self</code> argument which is passed by reference to the <code>set</code> function. Seeing the <code>self</code> argument passed in a contract function tells us that this function can access the state of the contract. The <code>ref</code> modifier implies that <code>self</code> may be modified, meaning that the storage variables of the contract may be modified inside the <code>set</code> function.</p>
-<p>On the other hand, the <code>get</code> function takes a snapshot of <code>TContractState</code>, which immediately tells us that it does not modify the state (and indeed, the compiler will complain if we try to modify storage inside the <code>get</code> function).</p>
-<p>By leveraging the <a href="./ch08-02-traits-in-cairo.html">traits &amp; impls</a> mechanism from Cairo, we can make sure that the actual implementation of the contract matches its interface. In fact, you will get a compilation error if your contract doesn’t conform with the declared interface. For example, Listing 14-3 shows a wrong implementation of the <code>ISimpleStorage</code> interface, containing a slightly different <code>set</code> function that doesn't have the same signature.</p>
+<p>All contract interfaces use a generic type for the <code>self</code> parameter,
+representing the contract state. We chose to name this generic parameter
+<code>TContractState</code> in our interface, but this is not enforced and any name can be
+chosen.</p>
+<p>In our interface, note the generic type <code>TContractState</code> of the <code>self</code> argument
+which is passed by reference to the <code>set</code> function. Seeing the <code>self</code> argument
+passed in a contract function tells us that this function can access the state
+of the contract. The <code>ref</code> modifier implies that <code>self</code> may be modified, meaning
+that the storage variables of the contract may be modified inside the <code>set</code>
+function.</p>
+<p>On the other hand, the <code>get</code> function takes a snapshot of <code>TContractState</code>,
+which immediately tells us that it does not modify the state (and indeed, the
+compiler will complain if we try to modify storage inside the <code>get</code> function).</p>
+<p>By leveraging the <a href="./ch08-02-traits-in-cairo.html">traits &amp; impls</a> mechanism from
+Cairo, we can make sure that the actual implementation of the contract matches
+its interface. In fact, you will get a compilation error if your contract
+doesn’t conform with the declared interface. For example, Listing
+14-3 shows a wrong implementation of the <code>ISimpleStorage</code>
+interface, containing a slightly different <code>set</code> function that doesn't have the
+same signature.</p>
 <pre><code class="language-cairo noplayground">    #[abi(embed_v0)]
     impl SimpleStorage of super::ISimpleStorage&lt;ContractState&gt; {
         fn set(ref self: ContractState) {}
@@ -377,8 +506,10 @@ trait ISimpleStorage&lt;TContractState&gt; {
         }
     }
 </code></pre>
-<p><span class="caption">Listing 14-3: A wrong implementation of the interface of the contract. This does not compile, as the signature of <code>set</code> doesn't match the trait's.</span></p>
-<p>Trying to compile a contract using this implementation will result in the following error:</p>
+<p>implementation of the interface of the contract. This does not compile, as the
+signature of <code>set</code> doesn't match the trait's.</span></p>
+<p>Trying to compile a contract using this implementation will result in the
+following error:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling listing_99_02 v0.1.0 (listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/Scarb.toml)
 error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
@@ -399,13 +530,21 @@ error: `scarb` command exited with error
 <p>Before we explore things further down, let's define some terminology.</p>
 <ul>
 <li>
-<p>In the context of Starknet, a <em>public function</em> is a function that is exposed to the outside world. A public function can be called by anyone, either from outside the contract or from within the contract itself. In the example above, <code>set</code> and <code>get</code> are public functions.</p>
+<p>In the context of Starknet, a <em>public function</em> is a function that is exposed
+to the outside world. A public function can be called by anyone, either from
+outside the contract or from within the contract itself. In the example above,
+<code>set</code> and <code>get</code> are public functions.</p>
 </li>
 <li>
-<p>What we call an <em>external</em> function is a public function that can be directly invoked through a Starknet transaction and that can mutate the state of the contract. <code>set</code> is an external function.</p>
+<p>What we call an <em>external</em> function is a public function that can be directly
+invoked through a Starknet transaction and that can mutate the state of the
+contract. <code>set</code> is an external function.</p>
 </li>
 <li>
-<p>A <em>view</em> function is a public function that is typically read-only and cannot mutate the state of the contract. However, this limitation is only enforced by the compiler, and not by Starknet itself. We will discuss the implications of this in a later section. <code>get</code> is a view function.</p>
+<p>A <em>view</em> function is a public function that is typically read-only and cannot
+mutate the state of the contract. However, this limitation is only enforced by
+the compiler, and not by Starknet itself. We will discuss the implications of
+this in a later section. <code>get</code> is a view function.</p>
 </li>
 </ul>
 <pre><code class="language-cairo noplayground">    #[abi(embed_v0)]
@@ -419,29 +558,56 @@ error: `scarb` command exited with error
         }
     }
 </code></pre>
-<p><span class="caption">Listing 14-4: <code>SimpleStorage</code> implementation</span></p>
-<p>Since the contract interface is defined as the <code>ISimpleStorage</code> trait, in order to match the interface, the public functions of the contract must be defined in an implementation of this trait — which allows us to make sure that the implementation of the contract matches its interface.</p>
-<p>However, simply defining the functions in the implementation block is not enough. The implementation block must be annotated with the <code>#[abi(embed_v0)]</code> attribute. This attribute exposes the functions defined in this implementation to the outside world — forget to add it and your functions will not be callable from the outside. All functions defined in a block marked as <code>#[abi(embed_v0)]</code> are consequently <em>public functions</em>.</p>
-<p>Because the <code>SimpleStorage</code> contract is defined as a module, we need to access the interface defined in the parent module. We can either bring it to the current scope with the <code>use</code> keyword, or refer to it directly using <code>super</code>.</p>
-<p>When writing the implementation of an interface, the <code>self</code> parameter in the trait methods <strong>must</strong> be of type <code>ContractState</code>. The <code>ContractState</code> type is generated by the compiler, and gives access to the storage variables defined in the <code>Storage</code> struct.
-Additionally, <code>ContractState</code> gives us the ability to emit events. The name <code>ContractState</code> is not surprising, as it’s a representation of the contract’s state, which is what we think of <code>self</code> in the contract interface trait.
-When <code>self</code> is a snapshot of <code>ContractState</code>, only read access is allowed, and emitting events is not possible.</p>
+<p><code>SimpleStorage</code> implementation</span></p>
+<p>Since the contract interface is defined as the <code>ISimpleStorage</code> trait, in order
+to match the interface, the public functions of the contract must be defined in
+an implementation of this trait — which allows us to make sure that the
+implementation of the contract matches its interface.</p>
+<p>However, simply defining the functions in the implementation block is not
+enough. The implementation block must be annotated with the <code>#[abi(embed_v0)]</code>
+attribute. This attribute exposes the functions defined in this implementation
+to the outside world — forget to add it and your functions will not be callable
+from the outside. All functions defined in a block marked as <code>#[abi(embed_v0)]</code>
+are consequently <em>public functions</em>.</p>
+<p>Because the <code>SimpleStorage</code> contract is defined as a module, we need to access
+the interface defined in the parent module. We can either bring it to the
+current scope with the <code>use</code> keyword, or refer to it directly using <code>super</code>.</p>
+<p>When writing the implementation of an interface, the <code>self</code> parameter in the
+trait methods <strong>must</strong> be of type <code>ContractState</code>. The <code>ContractState</code> type is
+generated by the compiler, and gives access to the storage variables defined in
+the <code>Storage</code> struct. Additionally, <code>ContractState</code> gives us the ability to emit
+events. The name <code>ContractState</code> is not surprising, as it’s a representation of
+the contract’s state, which is what we think of <code>self</code> in the contract interface
+trait. When <code>self</code> is a snapshot of <code>ContractState</code>, only read access is
+allowed, and emitting events is not possible.</p>
 <h3 id="accessing-and-modifying-the-contracts-state"><a class="header" href="#accessing-and-modifying-the-contracts-state">Accessing and Modifying the Contract's State</a></h3>
 <p>Two methods are commonly used to access or modify the state of a contract:</p>
 <ul>
-<li><code>read</code>, which returns the value of a storage variable. This method is called on the variable itself and does not take any argument.</li>
+<li><code>read</code>, which returns the value of a storage variable. This method is called
+on the variable itself and does not take any argument.</li>
 </ul>
 <pre><code class="language-cairo noplayground">            self.stored_data.read()
 </code></pre>
 <ul>
-<li><code>write</code>, which allows to write a new value in a storage slot. This method is also called on the variable itself and takes one argument, which is the value to be written. Note that <code>write</code> may take more than one argument, depending on the type of the storage variable. For example, writing on a mapping requires 2 arguments: the key and the value to be written.</li>
+<li><code>write</code>, which allows to write a new value in a storage slot. This method is
+also called on the variable itself and takes one argument, which is the value
+to be written. Note that <code>write</code> may take more than one argument, depending on
+the type of the storage variable. For example, writing on a mapping requires 2
+arguments: the key and the value to be written.</li>
 </ul>
 <pre><code class="language-cairo noplayground">            self.stored_data.write(x);
 </code></pre>
 <blockquote>
-<p>Reminder: if the contract state is passed as a snapshot with <code>@</code> instead of passed by reference with <code>ref</code>, attempting to modify the contract state will result in a compilation error.</p>
+<p>Reminder: if the contract state is passed as a snapshot with <code>@</code> instead of
+passed by reference with <code>ref</code>, attempting to modify the contract state will
+result in a compilation error.</p>
 </blockquote>
-<p>This contract does not do much apart from allowing anyone to store a single number that is accessible by anyone in the world. Anyone could call <code>set</code> again with a different value and overwrite the current number. Nevertheless, each value stored in the storage of the contract will still be stored in the history of the blockchain. Later in this book, you will see how you can impose access restrictions so that only you can alter the number.</p>
+<p>This contract does not do much apart from allowing anyone to store a single
+number that is accessible by anyone in the world. Anyone could call <code>set</code> again
+with a different value and overwrite the current number. Nevertheless, each
+value stored in the storage of the contract will still be stored in the history
+of the blockchain. Later in this book, you will see how you can impose access
+restrictions so that only you can alter the number.</p>
 
                     </main>
 
@@ -477,24 +643,6 @@ When <code>self</code> is a snapshot of <code>ContractState</code>, only read ac
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

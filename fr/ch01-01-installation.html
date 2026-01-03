@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,21 +274,41 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>The first step is to install Cairo. We'll download Cairo through <a href="https://github.com/software-mansion/starkup">starkup</a>, a command line tool for managing Cairo versions and associated tools. You'll need an internet connection for the download.</p>
-<p>The following steps install the latest stable version of the Cairo compiler through a binary called <a href="https://docs.swmansion.com/scarb/docs">Scarb</a>. Scarb bundles the Cairo compiler and the Cairo language server together in an easy-to-install package so that you can start writing Cairo code right away.</p>
-<p>Scarb is also Cairo's package manager and is heavily inspired by <a href="https://doc.rust-lang.org/cargo/">Cargo</a>, Rust's build system and package manager.</p>
-<p>Scarb handles a lot of tasks for you, such as building your code (either pure Cairo or Starknet contracts), downloading the libraries your code depends on, building those libraries, and provides LSP support for the VSCode Cairo 1 extension.</p>
-<p>As you write more complex Cairo programs, you might add dependencies, and if you start a project using Scarb, managing external code and dependencies will be a lot easier to do.</p>
-<p><a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry</a> is a toolchain for Cairo programs and Starknet smart contract development. It supports many features, including writing and running tests with advanced features, deploying contracts, interacting with the Starknet network, and more.</p>
-<p>Let's start by installing starkup, which will help us manage Cairo, Scarb, and Starknet Foundry.</p>
+<p>The first step is to install Cairo. We'll download Cairo through
+<a href="https://github.com/software-mansion/starkup">starkup</a>, a command line tool for managing Cairo versions and
+associated tools. You'll need an internet connection for the download.</p>
+<p>The following steps install the latest stable version of the Cairo compiler
+through a binary called <a href="https://docs.swmansion.com/scarb/docs">Scarb</a>. Scarb bundles the Cairo compiler and
+the Cairo language server together in an easy-to-install package so that you can
+start writing Cairo code right away.</p>
+<p>Scarb is also Cairo's package manager and is heavily inspired by
+<a href="https://doc.rust-lang.org/cargo/">Cargo</a>, Rust's build system and package manager.</p>
+<p>Scarb handles a lot of tasks for you, such as building your code (either pure
+Cairo or Starknet contracts), downloading the libraries your code depends on,
+building those libraries, and provides LSP support for the VSCode Cairo 1
+extension.</p>
+<p>As you write more complex Cairo programs, you might add dependencies, and if you
+start a project using Scarb, managing external code and dependencies will be a
+lot easier to do.</p>
+<p><a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry</a> is a toolchain for Cairo programs and Starknet
+smart contract development. It supports many features, including writing and
+running tests with advanced features, deploying contracts, interacting with the
+Starknet network, and more.</p>
+<p>Let's start by installing starkup, which will help us manage Cairo, Scarb, and
+Starknet Foundry.</p>
 <h2 id="installing-starkup-on-linux-or-macos"><a class="header" href="#installing-starkup-on-linux-or-macos">Installing <code>starkup</code> on Linux or MacOs</a></h2>
 <p>If you're using Linux or macOS, open a terminal and enter the following command:</p>
 <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.dev | sh
 </code></pre>
-<p>The command downloads a script and starts the installation of the starkup tool, which installs the latest stable version of Cairo and related toolings. You might be prompted for your password. If the install is successful, the following line will appear:</p>
+<p>The command downloads a script and starts the installation of the starkup tool,
+which installs the latest stable version of Cairo and related toolings. You
+might be prompted for your password. If the install is successful, the following
+line will appear:</p>
 <pre><code class="language-bash">starkup: Installation complete.
 </code></pre>
-<p>After installation, starkup will automatically install the latest stable versions of Cairo, Scarb, and Starknet Foundry. You can verify the installations by running the following commands in a new terminal session:</p>
+<p>After installation, starkup will automatically install the latest stable
+versions of Cairo, Scarb, and Starknet Foundry. You can verify the installations
+by running the following commands in a new terminal session:</p>
 <pre><code class="language-bash">$ scarb --version
 scarb 2.13.1 (639d0a65e 2025-08-04)
 cairo: 2.13.1 (https://crates.io/crates/cairo-lang-compiler/2.13.1)
@@ -296,10 +317,16 @@ sierra: 1.7.0
 $ snforge --version
 snforge 0.51.1
 </code></pre>
-<p>We'll describe Starknet Foundry in more detail in <a href="./ch10-01-how-to-write-tests.html">Chapter 10</a> for Cairo programs testing and in <a href="./ch104-02-testing-smart-contracts.html#testing-smart-contracts-with-starknet-foundry">Chapter 18</a> when discussing Starknet smart contract testing and security in the second part of the book.</p>
+<p>We'll describe Starknet Foundry in more detail in <a href="./ch10-01-how-to-write-tests.html">Chapter
+10</a> for Cairo programs testing and
+in <a href="./ch104-02-testing-smart-contracts.html#testing-smart-contracts-with-starknet-foundry">Chapter 18</a>
+when discussing Starknet smart contract testing and security in the second part
+of the book.</p>
 <h2 id="installing-the-vscode-extension"><a class="header" href="#installing-the-vscode-extension">Installing the VSCode Extension</a></h2>
-<p>Cairo has a VSCode extension that provides syntax highlighting, code completion, and other useful features. You can install it from the <a href="https://marketplace.visualstudio.com/items?itemName=starkware.cairo1">VSCode Marketplace</a>.
-Once installed, go into the extension settings, and make sure to tick the <code>Enable Language Server</code> and <code>Enable Scarb</code> options.</p>
+<p>Cairo has a VSCode extension that provides syntax highlighting, code completion,
+and other useful features. You can install it from the <a href="https://marketplace.visualstudio.com/items?itemName=starkware.cairo1">VSCode
+Marketplace</a>. Once installed, go into the extension settings, and
+make sure to tick the <code>Enable Language Server</code> and <code>Enable Scarb</code> options.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch01-01-installation&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;id&quot;:&quot;1b7c7edd-8c2c-418b-ad80-c0b37b8ae215&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Cairo's package manager and build system&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;a VS Code extension&quot;,&quot;the name of the VM that runs Cairo&quot;],&quot;prompt&quot;:&quot;What is Scarb?&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -336,24 +363,6 @@ Once installed, go into the extension settings, and make sure to tick the <code>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

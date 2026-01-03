@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,12 +274,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="ecdsa-builtin"><a class="header" href="#ecdsa-builtin">ECDSA Builtin</a></h1>
-<p>The <em>ECDSA</em> (Elliptic Curve Digital Signature Algorithm) builtin verifies cryptographic signatures on the STARK curve. This builtin is primarily used to validate that a message hash was signed by the holder of a specific private key.</p>
+<p>The <em>ECDSA</em> (Elliptic Curve Digital Signature Algorithm) builtin verifies
+cryptographic signatures on the STARK curve. This builtin is primarily used to
+validate that a message hash was signed by the holder of a specific private key.</p>
 <h2 id="memory-organization"><a class="header" href="#memory-organization">Memory Organization</a></h2>
-<p>The ECDSA builtin has a unique memory structure with two interconnected components:</p>
+<p>The ECDSA builtin has a unique memory structure with two interconnected
+components:</p>
 <ol>
-<li><strong>Memory Segment</strong>: A dedicated segment that stores public keys and message hashes as field elements</li>
-<li><strong>Signature Dictionary</strong>: A mapping that associates public key offsets with their corresponding signatures</li>
+<li><strong>Memory Segment</strong>: A dedicated segment that stores public keys and message
+hashes as field elements</li>
+<li><strong>Signature Dictionary</strong>: A mapping that associates public key offsets with
+their corresponding signatures</li>
 </ol>
 <h3 id="cell-layout-in-the-memory-segment"><a class="header" href="#cell-layout-in-the-memory-segment">Cell Layout in the Memory Segment</a></h3>
 <p>The ECDSA segment arranges cells in pairs:</p>
@@ -286,14 +292,20 @@
 <li><strong>Even offsets</strong> (0, 2, 4, ...) store public keys</li>
 <li><strong>Odd offsets</strong> (1, 3, 5, ...) store message hashes</li>
 </ul>
-<p>Each public key at offset <code>2n</code> is associated with a message hash at offset <code>2n+1</code>. For example, public key at offset 0 pairs with the hash at offset 1.</p>
+<p>Each public key at offset <code>2n</code> is associated with a message hash at offset
+<code>2n+1</code>. For example, public key at offset 0 pairs with the hash at offset 1.</p>
 <h3 id="signature-verification-process"><a class="header" href="#signature-verification-process">Signature Verification Process</a></h3>
-<p>Before using the ECDSA builtin, signatures must be explicitly registered in the signature dictionary. The VM performs signature verification when the program writes values to the ECDSA segment:</p>
+<p>Before using the ECDSA builtin, signatures must be explicitly registered in the
+signature dictionary. The VM performs signature verification when the program
+writes values to the ECDSA segment:</p>
 <ol>
-<li>When a public key is written at offset <code>2n</code>, the VM checks if it matches the key used to create the signature registered at that offset</li>
-<li>When a message hash is written at offset <code>2n+1</code>, the VM verifies that it matches the hash that was signed</li>
+<li>When a public key is written at offset <code>2n</code>, the VM checks if it matches the
+key used to create the signature registered at that offset</li>
+<li>When a message hash is written at offset <code>2n+1</code>, the VM verifies that it
+matches the hash that was signed</li>
 </ol>
-<p>If either check fails, the VM throws an error immediately - this is different from some other builtins that defer validation until output access.</p>
+<p>If either check fails, the VM throws an error immediately - this is different
+from some other builtins that defer validation until output access.</p>
 <h3 id="valid-usage-example"><a class="header" href="#valid-usage-example">Valid Usage Example</a></h3>
 <div align="center">
   <img src="ecdsa-full.png" alt="Valid ECDSA builtin segment with signatures"/>
@@ -303,9 +315,12 @@
 </div>
 <p>In this example:</p>
 <ul>
-<li>Public key_0 at offset 0 and hash_0 at offset 1 are verified against the signature stored at dictionary key 0</li>
-<li>Public key_1 at offset 2 and hash_1 at offset 3 are verified against the signature stored at dictionary key 2</li>
-<li>All verifications pass because the public keys and hashes match what was originally signed</li>
+<li>Public key_0 at offset 0 and hash_0 at offset 1 are verified against the
+signature stored at dictionary key 0</li>
+<li>Public key_1 at offset 2 and hash_1 at offset 3 are verified against the
+signature stored at dictionary key 2</li>
+<li>All verifications pass because the public keys and hashes match what was
+originally signed</li>
 </ul>
 <h3 id="error-conditions"><a class="header" href="#error-conditions">Error Conditions</a></h3>
 <h4 id="invalid-hash-error"><a class="header" href="#invalid-hash-error">Invalid Hash Error</a></h4>
@@ -315,7 +330,9 @@
 <div align="center">
   <span class="caption">Error: Hash doesn't match the signed message</span>
 </div>
-<p>When a program writes hash "1324" at offset 5, but the signature at dictionary key 4 was created for hash "2025", the VM throws an error because the hash doesn't match what was originally signed with that public key.</p>
+<p>When a program writes hash "1324" at offset 5, but the signature at dictionary
+key 4 was created for hash "2025", the VM throws an error because the hash
+doesn't match what was originally signed with that public key.</p>
 <h4 id="invalid-public-key-error"><a class="header" href="#invalid-public-key-error">Invalid Public Key Error</a></h4>
 <div align="center">
   <img src="ecdsa-invalid-key.png" alt="ECDSA error due to invalid public key"/>
@@ -323,7 +340,9 @@
 <div align="center">
   <span class="caption">Error: Public key doesn't match the signing key</span>
 </div>
-<p>When a program writes public key "0000" at offset 4, but the signature at dictionary key 4 was created using public key "1515", the VM throws an error because the public key doesn't match the one used to create the signature.</p>
+<p>When a program writes public key "0000" at offset 4, but the signature at
+dictionary key 4 was created using public key "1515", the VM throws an error
+because the public key doesn't match the one used to create the signature.</p>
 <h2 id="implementation-references"><a class="header" href="#implementation-references">Implementation References</a></h2>
 <p>These implementation references of the ecdsa builtin might not be exhaustive.</p>
 <ul>
@@ -333,10 +352,14 @@
 <li><a href="https://github.com/keep-starknet-strange/ziggy-starkdust/blob/55d83e61968336f6be93486d7acf8530ba868d7e/src/vm/builtins/builtin_runner/signature.zig">Zig Signature Builtin</a></li>
 </ul>
 <h2 id="resources-on-ecdsa-signature"><a class="header" href="#resources-on-ecdsa-signature">Resources on ECDSA signature</a></h2>
-<p>If you're interested about the ecdsa signature and its use, take a look at those references:</p>
+<p>If you're interested about the ecdsa signature and its use, take a look at those
+references:</p>
 <ul>
-<li>StarkNet, <a href="https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/">STARK curve</a></li>
-<li>Svetlin Nakov, <a href="https://cryptobook.nakov.com/digital-signatures/ecdsa-sign-verify-messages">ECDSA: Elliptic Curve Signatures</a>, 2020</li>
+<li>StarkNet,
+<a href="https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/">STARK curve</a></li>
+<li>Svetlin Nakov,
+<a href="https://cryptobook.nakov.com/digital-signatures/ecdsa-sign-verify-messages">ECDSA: Elliptic Curve Signatures</a>,
+2020</li>
 </ul>
 
                     </main>
@@ -373,24 +396,6 @@
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

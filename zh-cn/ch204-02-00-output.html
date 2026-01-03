@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,19 +274,36 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="output-builtin"><a class="header" href="#output-builtin">Output Builtin</a></h1>
-<p>In the Cairo Virtual Machine (VM), the <strong>Output Builtin</strong> is a built-in component that manages the output segment of the memory via the <code>output_ptr</code>. It's used as a bridge between a Cairo program's execution and the external world, using <strong>public memory</strong> to produce verifiable outputs.</p>
-<p>Represented by the <code>output_ptr</code>, the output builtin handles a dedicated memory region where a program writes its outputs. Its primary role is to store any value that must be made available in the proof system for verification, in what we call <strong>public memory</strong>. This segment grows as the program writes values.</p>
+<p>In the Cairo Virtual Machine (VM), the <strong>Output Builtin</strong> is a built-in
+component that manages the output segment of the memory via the <code>output_ptr</code>.
+It's used as a bridge between a Cairo program's execution and the external
+world, using <strong>public memory</strong> to produce verifiable outputs.</p>
+<p>Represented by the <code>output_ptr</code>, the output builtin handles a dedicated memory
+region where a program writes its outputs. Its primary role is to store any
+value that must be made available in the proof system for verification, in what
+we call <strong>public memory</strong>. This segment grows as the program writes values.</p>
 <h2 id="memory-organization"><a class="header" href="#memory-organization">Memory Organization</a></h2>
-<p>The output segment is a contiguous block of cells starting at a base address. All cells in the output segment are inherently public, accessible to verifiers. It's interactions are quite simple: it can be written to, and read from, without any specific requirements.</p>
+<p>The output segment is a contiguous block of cells starting at a base address.
+All cells in the output segment are inherently public, accessible to verifiers.
+It's interactions are quite simple: it can be written to, and read from, without
+any specific requirements.</p>
 <h2 id="role-in-stark-proofs"><a class="header" href="#role-in-stark-proofs">Role in STARK Proofs</a></h2>
-<p>The Output Builtin’s integration with public memory is required for STARK proof construction and verification:</p>
+<p>The Output Builtin’s integration with public memory is required for STARK proof
+construction and verification:</p>
 <ol>
-<li><strong>Public Commitment</strong>: Values written to <code>output_ptr</code> become part of the public memory, committing the program to those outputs in the proof.</li>
-<li><strong>Proof Structure</strong>: The output segment is included in the public input of a trace, with its boundaries tracked (e.g., <code>begin_addr</code> and <code>stop_ptr</code>) for verification.</li>
-<li><strong>Verification Process</strong>: The verifier extracts and hashes the output segment. Typically, all cells in the output segment are hashed together, creating a commitment which allows efficient verification without re-execution.</li>
+<li><strong>Public Commitment</strong>: Values written to <code>output_ptr</code> become part of the
+public memory, committing the program to those outputs in the proof.</li>
+<li><strong>Proof Structure</strong>: The output segment is included in the public input of a
+trace, with its boundaries tracked (e.g., <code>begin_addr</code> and <code>stop_ptr</code>) for
+verification.</li>
+<li><strong>Verification Process</strong>: The verifier extracts and hashes the output
+segment. Typically, all cells in the output segment are hashed together,
+creating a commitment which allows efficient verification without
+re-execution.</li>
 </ol>
 <h2 id="implementation-references"><a class="header" href="#implementation-references">Implementation References</a></h2>
-<p>These implementation references of the Output Builtin in various Cairo VM implementations:</p>
+<p>These implementation references of the Output Builtin in various Cairo VM
+implementations:</p>
 <ul>
 <li><a href="https://github.com/kkrt-labs/cairo-vm-ts/blob/main/src/builtins/output.ts#L4">TypeScript Output Builtin</a></li>
 <li><a href="https://github.com/starkware-libs/cairo-lang/blob/0e4dab8a6065d80d1c726394f5d9d23cb451706a/src/starkware/cairo/lang/vm/output_builtin_runner.py">Python Output Builtin</a></li>
@@ -325,24 +343,6 @@
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

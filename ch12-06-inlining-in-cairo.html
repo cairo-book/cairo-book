@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,32 +274,80 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="inlining-in-cairo"><a class="header" href="#inlining-in-cairo">Inlining in Cairo</a></h1>
-<p>Inlining is a common code optimization technique supported by most compilers. It involves replacing a function call at the call site with the actual code of the called function, eliminating the overhead associated with the function call itself. This can improve performance by reducing the number of instructions executed, but may increase the total size of the program. When you're thinking about whether to inline a function, take into account things like how big it is, what parameters it has, how often it gets called, and how it might affect the size of your compiled code.</p>
+<p>Inlining is a common code optimization technique supported by most compilers. It
+involves replacing a function call at the call site with the actual code of the
+called function, eliminating the overhead associated with the function call
+itself. This can improve performance by reducing the number of instructions
+executed, but may increase the total size of the program. When you're thinking
+about whether to inline a function, take into account things like how big it is,
+what parameters it has, how often it gets called, and how it might affect the
+size of your compiled code.</p>
 <h2 id="the-inline-attribute"><a class="header" href="#the-inline-attribute">The <code>inline</code> Attribute</a></h2>
-<p>In Cairo, the <code>inline</code> attribute suggests whether or not the Sierra code corresponding to the attributed function should be directly injected in the caller function's context, rather than using a <code>function_call</code> libfunc to execute that code.</p>
+<p>In Cairo, the <code>inline</code> attribute suggests whether or not the Sierra code
+corresponding to the attributed function should be directly injected in the
+caller function's context, rather than using a <code>function_call</code> libfunc to
+execute that code.</p>
 <p>There are three variants of the <code>inline</code> attribute that one can use:</p>
 <ul>
 <li><code>#[inline]</code> suggests performing an inline expansion.</li>
-<li><code>#[inline(always)]</code> suggests that an inline expansion should always be performed.</li>
-<li><code>#[inline(never)]</code> suggests that an inline expansion should never be performed.</li>
+<li><code>#[inline(always)]</code> suggests that an inline expansion should always be
+performed.</li>
+<li><code>#[inline(never)]</code> suggests that an inline expansion should never be
+performed.</li>
 </ul>
 <blockquote>
-<p>Note: the <code>inline</code> attribute in every form is a hint, with no requirements on the language to place a copy of the attributed function in the caller. This means that the attribute may be ignored by the compiler. In practice, <code>#[inline(always)]</code> will cause inlining in all but the most exceptional cases.</p>
+<p>Note: the <code>inline</code> attribute in every form is a hint, with no requirements on
+the language to place a copy of the attributed function in the caller. This
+means that the attribute may be ignored by the compiler. In practice,
+<code>#[inline(always)]</code> will cause inlining in all but the most exceptional cases.</p>
 </blockquote>
-<p>Many of the Cairo corelib functions are inlined. User-defined functions may also be annotated with the <code>inline</code> attribute. Annotating functions with the <code>#[inline(always)]</code> attribute reduces the total number of steps required when calling these attributed functions. Indeed, injecting the Sierra code at the caller site avoids the step-cost involved in calling functions and obtaining their arguments.</p>
-<p>However, inlining can also lead to increased code size. Whenever a function is inlined, the call site contains a copy of the function's Sierra code, potentially leading to duplication of code across the compiled code.</p>
-<p>Therefore, inlining should be applied with caution. Using <code>#[inline]</code> or <code>#[inline(always)]</code> indiscriminately will lead to increased compile time. It is particularly useful to inline small functions, ideally with many arguments. This is because inlining large functions will increase the code length of the program, and handling many arguments will increase the number of steps to execute these functions.</p>
-<p>The more frequently a function is called, the more beneficial inlining becomes in terms of performance. By doing so, the number of steps for the execution will be lower, while the code length will not grow that much or might even decrease in terms of total number of instructions.</p>
+<p>Many of the Cairo corelib functions are inlined. User-defined functions may also
+be annotated with the <code>inline</code> attribute. Annotating functions with the
+<code>#[inline(always)]</code> attribute reduces the total number of steps required when
+calling these attributed functions. Indeed, injecting the Sierra code at the
+caller site avoids the step-cost involved in calling functions and obtaining
+their arguments.</p>
+<p>However, inlining can also lead to increased code size. Whenever a function is
+inlined, the call site contains a copy of the function's Sierra code,
+potentially leading to duplication of code across the compiled code.</p>
+<p>Therefore, inlining should be applied with caution. Using <code>#[inline]</code> or
+<code>#[inline(always)]</code> indiscriminately will lead to increased compile time. It is
+particularly useful to inline small functions, ideally with many arguments. This
+is because inlining large functions will increase the code length of the
+program, and handling many arguments will increase the number of steps to
+execute these functions.</p>
+<p>The more frequently a function is called, the more beneficial inlining becomes
+in terms of performance. By doing so, the number of steps for the execution will
+be lower, while the code length will not grow that much or might even decrease
+in terms of total number of instructions.</p>
 <blockquote>
-<p>Inlining is often a tradeoff between number of steps and code length. Use the <code>inline</code> attribute cautiously where it is appropriate.</p>
+<p>Inlining is often a tradeoff between number of steps and code length. Use the
+<code>inline</code> attribute cautiously where it is appropriate.</p>
 </blockquote>
 <h2 id="inlining-decision-process"><a class="header" href="#inlining-decision-process">Inlining decision process</a></h2>
-<p>The Cairo compiler follows the <code>inline</code> attribute but for functions without explicit inline directives, it will use a heuristic approach. The decision to inline or not a function will be made depending on the complexity of the attributed function and mostly rely on the threshold <code>DEFAULT_INLINE_SMALL_FUNCTIONS_THRESHOLD</code>.</p>
-<p>The compiler calculates a function's "weight" using the <code>ApproxCasmInlineWeight</code> struct, which estimates the number of Cairo Assembly (CASM) statements the function will generate. This weight calculation provides a more nuanced view of the function's complexity than a simple statement count. If a function's weight falls below the threshold, it will be inlined.</p>
-<p>In addition to the weight-based approach, the compiler also considers the raw statement count. Functions with fewer statements than the threshold are typically inlined, promoting the optimization of small, frequently called functions.</p>
-<p>The inlining process also accounts for special cases. Very simple functions, such as those that only call another function or return a constant, are always inlined regardless of other factors. Conversely, functions with complex control flow structures like <code>Match</code> or those ending with a <code>Panic</code> are generally not inlined.</p>
+<p>The Cairo compiler follows the <code>inline</code> attribute but for functions without
+explicit inline directives, it will use a heuristic approach. The decision to
+inline or not a function will be made depending on the complexity of the
+attributed function and mostly rely on the threshold
+<code>DEFAULT_INLINE_SMALL_FUNCTIONS_THRESHOLD</code>.</p>
+<p>The compiler calculates a function's "weight" using the <code>ApproxCasmInlineWeight</code>
+struct, which estimates the number of Cairo Assembly (CASM) statements the
+function will generate. This weight calculation provides a more nuanced view of
+the function's complexity than a simple statement count. If a function's weight
+falls below the threshold, it will be inlined.</p>
+<p>In addition to the weight-based approach, the compiler also considers the raw
+statement count. Functions with fewer statements than the threshold are
+typically inlined, promoting the optimization of small, frequently called
+functions.</p>
+<p>The inlining process also accounts for special cases. Very simple functions,
+such as those that only call another function or return a constant, are always
+inlined regardless of other factors. Conversely, functions with complex control
+flow structures like <code>Match</code> or those ending with a <code>Panic</code> are generally not
+inlined.</p>
 <h2 id="inlining-example"><a class="header" href="#inlining-example">Inlining Example</a></h2>
-<p>Let's introduce a short example to illustrate the mechanisms of inlining in Cairo. Listing 12-5 shows a basic program allowing comparison between inlined and non-inlined functions.</p>
+<p>Let's introduce a short example to illustrate the mechanisms of inlining in
+Cairo. Listing 12-5 shows a basic program allowing comparison
+between inlined and non-inlined functions.</p>
 <pre><code class="language-cairo">#[executable]
 fn main() -&gt; felt252 {
     inlined() + not_inlined()
@@ -314,8 +363,10 @@ fn not_inlined() -&gt; felt252 {
     2
 }
 </code></pre>
-<p><span class="caption">Listing 12-5: A small Cairo program that adds the return value of 2 functions, with one of them being inlined</span></p>
-<p>Let's take a look at the corresponding Sierra code to see how inlining works under the hood:</p>
+<p>Cairo program that adds the return value of 2 functions, with one of them being
+inlined</span></p>
+<p>Let's take a look at the corresponding Sierra code to see how inlining works
+under the hood:</p>
 <pre><code class="language-cairo noplayground">// type declarations
 type felt252 = felt252 [storable: true, drop: true, dup: true, zero_sized: false]
 
@@ -351,13 +402,16 @@ main::main::not_inlined@9() -&gt; (felt252)
 <li>Statements that constitute the program.</li>
 <li>Declaration of the functions of the program.</li>
 </ul>
-<p>The Sierra code statements always match the order of function declarations in the Cairo program. Indeed, the declaration of the functions of the program tells us that:</p>
+<p>The Sierra code statements always match the order of function declarations in
+the Cairo program. Indeed, the declaration of the functions of the program tells
+us that:</p>
 <ul>
 <li><code>main</code> function starts at line 0, and returns a <code>felt252</code> on line 5.</li>
 <li><code>inlined</code> function starts at line 6, and returns a <code>felt252</code> on line 8.</li>
 <li><code>not_inlined</code> function starts at line 9, and returns a <code>felt252</code> on line 11.</li>
 </ul>
-<p>All statements corresponding to the <code>main</code> function are located between lines 0 and 5:</p>
+<p>All statements corresponding to the <code>main</code> function are located between lines 0
+and 5:</p>
 <pre><code class="language-cairo noplayground">00 function_call&lt;user@main::main::not_inlined&gt;() -&gt; ([0])
 01 felt252_const&lt;1&gt;() -&gt; ([1])
 02 store_temp&lt;felt252&gt;([1]) -&gt; ([1])
@@ -365,28 +419,42 @@ main::main::not_inlined@9() -&gt; (felt252)
 04 store_temp&lt;felt252&gt;([2]) -&gt; ([2])
 05 return([2])
 </code></pre>
-<p>The <code>function_call</code> libfunc is called on line 0 to execute the <code>not_inlined</code> function. This will execute the code from lines 9 to 10 and store the return value in the variable with id <code>0</code>.</p>
+<p>The <code>function_call</code> libfunc is called on line 0 to execute the <code>not_inlined</code>
+function. This will execute the code from lines 9 to 10 and store the return
+value in the variable with id <code>0</code>.</p>
 <pre><code class="language-cairo noplayground">09	felt252_const&lt;2&gt;() -&gt; ([0])
 10	store_temp&lt;felt252&gt;([0]) -&gt; ([0])
 </code></pre>
-<p>This code uses a single data type, <code>felt252</code>. It uses two library functions - <code>felt252_const&lt;2&gt;</code>, which returns the constant <code>felt252</code> 2, and <code>store_temp&lt;felt252&gt;</code>, which pushes a constant value to memory. The first line calls the <code>felt252_const&lt;2&gt;</code> libfunc to create a variable with id <code>0</code>. Then, the second line pushes this variable to memory for later use.</p>
-<p>After that, Sierra statements from line 1 to 2 are the actual body of the <code>inlined</code> function:</p>
+<p>This code uses a single data type, <code>felt252</code>. It uses two library functions
+- <code>felt252_const&lt;2&gt;</code>, which returns the constant <code>felt252</code> 2,
+and <code>store_temp&lt;felt252&gt;</code>, which pushes a constant value to memory. The first
+line calls the <code>felt252_const&lt;2&gt;</code> libfunc to create a variable with id <code>0</code>.
+Then, the second line pushes this variable to memory for later use.</p>
+<p>After that, Sierra statements from line 1 to 2 are the actual body of the
+<code>inlined</code> function:</p>
 <pre><code class="language-cairo noplayground">06	felt252_const&lt;1&gt;() -&gt; ([0])
 07	store_temp&lt;felt252&gt;([0]) -&gt; ([0])
 </code></pre>
-<p>The only difference is that the inlined code will store the <code>felt252_const</code> value in a variable with id <code>1</code>, because <code>[0]</code> refers to a variable previously assigned:</p>
+<p>The only difference is that the inlined code will store the <code>felt252_const</code>
+value in a variable with id <code>1</code>, because <code>[0]</code> refers to a variable previously
+assigned:</p>
 <pre><code class="language-cairo noplayground">01	felt252_const&lt;1&gt;() -&gt; ([1])
 02	store_temp&lt;felt252&gt;([1]) -&gt; ([1])
 </code></pre>
 <blockquote>
-<p>Note: in both cases (inlined or not), the <code>return</code> instruction of the function being called is not executed, as this would lead to prematurely end the execution of the <code>main</code> function. Instead, return values of <code>inlined</code> and <code>not_inlined</code> will be added and the result will be returned.</p>
+<p>Note: in both cases (inlined or not), the <code>return</code> instruction of the function
+being called is not executed, as this would lead to prematurely end the
+execution of the <code>main</code> function. Instead, return values of <code>inlined</code> and
+<code>not_inlined</code> will be added and the result will be returned.</p>
 </blockquote>
-<p>Lines 3 to 5 contain the Sierra statements that will add the values contained in variables with ids <code>0</code> and <code>1</code>, store the result in memory and return it:</p>
+<p>Lines 3 to 5 contain the Sierra statements that will add the values contained in
+variables with ids <code>0</code> and <code>1</code>, store the result in memory and return it:</p>
 <pre><code class="language-cairo noplayground">03	felt252_add([1], [0]) -&gt; ([2])
 04	store_temp&lt;felt252&gt;([2]) -&gt; ([2])
 05	return([2])
 </code></pre>
-<p>Now, let's take a look at the Casm code corresponding to this program to really understand the benefits of inlining.</p>
+<p>Now, let's take a look at the Casm code corresponding to this program to really
+understand the benefits of inlining.</p>
 <h2 id="casm-code-explanations"><a class="header" href="#casm-code-explanations">Casm Code Explanations</a></h2>
 <p>Here is the Casm code for our previous program example:</p>
 <pre><code class="language-cairo noplayground">1	call rel 3
@@ -401,37 +469,69 @@ main::main::not_inlined@9() -&gt; (felt252)
 10	ret
 11	ret
 </code></pre>
-<p>Don't hesitate to use <a href="https://cairovm.codes/">cairovm.codes</a> playground to follow along and see all the execution trace.</p>
-<p>Each instruction and each argument for any instruction increment the Program Counter (known as PC) by 1. This means that <code>ret</code> on line 2 is actually the instruction at <code>PC = 3</code>, as the argument <code>3</code> corresponds to <code>PC = 2</code>.</p>
+<p>Don't hesitate to use <a href="https://cairovm.codes/">cairovm.codes</a> playground to
+follow along and see all the execution trace.</p>
+<p>Each instruction and each argument for any instruction increment the Program
+Counter (known as PC) by 1. This means that <code>ret</code> on line 2 is actually the
+instruction at <code>PC = 3</code>, as the argument <code>3</code> corresponds to <code>PC = 2</code>.</p>
 <p>The <code>call</code> and <code>ret</code> instructions allow implementation of a function stack:</p>
 <ul>
-<li><code>call</code> instruction acts like a jump instruction, updating the PC to a given value, whether relatively to the current value using <code>rel</code> or absolutely using <code>abs</code>.</li>
-<li><code>ret</code> instruction jumps back right after the <code>call</code> instruction and continues the execution of the code.</li>
+<li><code>call</code> instruction acts like a jump instruction, updating the PC to a given
+value, whether relatively to the current value using <code>rel</code> or absolutely using
+<code>abs</code>.</li>
+<li><code>ret</code> instruction jumps back right after the <code>call</code> instruction and continues
+the execution of the code.</li>
 </ul>
-<p>We can now decompose how these instructions are executed to understand what this code does:</p>
+<p>We can now decompose how these instructions are executed to understand what this
+code does:</p>
 <ul>
-<li><code>call rel 3</code>: this instruction increments the PC by 3 and executes the instruction at this location, which is <code>call rel 9</code> at <code>PC = 4</code>.</li>
-<li><code>call rel 9</code> increments the PC by 9 and executes the instruction at <code>PC = 13</code>, which is actually line 9.</li>
-<li><code>[ap + 0] = 2, ap++</code>: <code>ap</code> stands for Allocation Pointer, which points to the first memory cell that has not been used by the program so far. This means we store the value <code>2</code> in the next free memory cell indicated by the current value of <code>ap</code>, after which we increment <code>ap</code> by 1. Then, we go to the next line which is <code>ret</code>.</li>
+<li><code>call rel 3</code>: this instruction increments the PC by 3 and executes the
+instruction at this location, which is <code>call rel 9</code> at <code>PC = 4</code>.</li>
+<li><code>call rel 9</code> increments the PC by 9 and executes the instruction at <code>PC = 13</code>,
+which is actually line 9.</li>
+<li><code>[ap + 0] = 2, ap++</code>: <code>ap</code> stands for Allocation Pointer, which points to the
+first memory cell that has not been used by the program so far. This means we
+store the value <code>2</code> in the next free memory cell indicated by the current
+value of <code>ap</code>, after which we increment <code>ap</code> by 1. Then, we go to the next
+line which is <code>ret</code>.</li>
 <li><code>ret</code>: jumps back to the line after <code>call rel 9</code>, so we go to line 4.</li>
-<li><code>[ap + 0] = 1, ap++</code> : we store the value <code>1</code> in <code>[ap]</code> and we apply <code>ap++</code> so that <code>[ap - 1] = 1</code>. This means we now have <code>[ap-1] = 1, [ap-2] = 2</code> and we go to the next line.</li>
-<li><code>[ap + 0] = [ap + -1] + [ap + -2], ap++</code>: we sum the values <code>1</code> and <code>2</code> and store the result in <code>[ap]</code>, and we apply <code>ap++</code> so the result is <code>[ap-1] = 3, [ap-2] = 1, [ap-3]=2</code>.</li>
+<li><code>[ap + 0] = 1, ap++</code> : we store the value <code>1</code> in <code>[ap]</code> and we apply <code>ap++</code> so
+that <code>[ap - 1] = 1</code>. This means we now have <code>[ap-1] = 1, [ap-2] = 2</code> and we go
+to the next line.</li>
+<li><code>[ap + 0] = [ap + -1] + [ap + -2], ap++</code>: we sum the values <code>1</code> and <code>2</code> and
+store the result in <code>[ap]</code>, and we apply <code>ap++</code> so the result is
+<code>[ap-1] = 3, [ap-2] = 1, [ap-3]=2</code>.</li>
 <li><code>ret</code>: jumps back to the line after <code>call rel 3</code>, so we go to line 2.</li>
-<li><code>ret</code>: last instruction executed as there is no more <code>call</code> instruction where to jump right after. This is the actual return instruction of the Cairo <code>main</code> function.</li>
+<li><code>ret</code>: last instruction executed as there is no more <code>call</code> instruction where
+to jump right after. This is the actual return instruction of the Cairo <code>main</code>
+function.</li>
 </ul>
 <p>To summarize:</p>
 <ul>
-<li><code>call rel 3</code> corresponds to the <code>main</code> function, which is obviously not inlined.</li>
-<li><code>call rel 9</code> triggers the call to the <code>not_inlined</code> function, which returns <code>2</code> and stores it at the final location <code>[ap-3]</code>.</li>
-<li>The line 4 is the inlined code of the <code>inlined</code> function, which returns <code>1</code> and stores it at the final location <code>[ap-2]</code>. We clearly see that there is no <code>call</code> instruction in this case, because the body of the function is inserted and directly executed.</li>
-<li>After that, the sum is computed and we ultimately go back to the line 2 which contains the final <code>ret</code> instruction that returns the sum, corresponding to the return value of the <code>main</code> function.</li>
+<li><code>call rel 3</code> corresponds to the <code>main</code> function, which is obviously not
+inlined.</li>
+<li><code>call rel 9</code> triggers the call to the <code>not_inlined</code> function, which returns
+<code>2</code> and stores it at the final location <code>[ap-3]</code>.</li>
+<li>The line 4 is the inlined code of the <code>inlined</code> function, which returns <code>1</code>
+and stores it at the final location <code>[ap-2]</code>. We clearly see that there is no
+<code>call</code> instruction in this case, because the body of the function is inserted
+and directly executed.</li>
+<li>After that, the sum is computed and we ultimately go back to the line 2 which
+contains the final <code>ret</code> instruction that returns the sum, corresponding to
+the return value of the <code>main</code> function.</li>
 </ul>
-<p>It is interesting to note that in both Sierra code and Casm code, the <code>not_inlined</code> function will be called and executed before the body of the <code>inlined</code> function, even though the Cairo program executes <code>inlined() + not_inlined()</code>.</p>
+<p>It is interesting to note that in both Sierra code and Casm code, the
+<code>not_inlined</code> function will be called and executed before the body of the
+<code>inlined</code> function, even though the Cairo program executes
+<code>inlined() + not_inlined()</code>.</p>
 <blockquote>
-<p>The Casm code of our program clearly shows that there is a function call for the <code>not_inlined</code> function, while the <code>inlined</code> function is correctly inlined.</p>
+<p>The Casm code of our program clearly shows that there is a function call for
+the <code>not_inlined</code> function, while the <code>inlined</code> function is correctly inlined.</p>
 </blockquote>
 <h2 id="additional-optimizations"><a class="header" href="#additional-optimizations">Additional Optimizations</a></h2>
-<p>Let's study another program that shows other benefits that inlining may sometimes provide. Listing 12-6 shows a Cairo program that calls 2 functions and doesn't return anything:</p>
+<p>Let's study another program that shows other benefits that inlining may
+sometimes provide. Listing 12-6 shows a Cairo program that
+calls 2 functions and doesn't return anything:</p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
     inlined();
@@ -448,7 +548,8 @@ fn not_inlined() -&gt; felt252 {
     'not inlined'
 }
 </code></pre>
-<p><span class="caption">Listing 12-6: A small Cairo program that calls <code>inlined</code> and <code>not_inlined</code> and doesn't return any value.</span></p>
+<p>small Cairo program that calls <code>inlined</code> and <code>not_inlined</code> and doesn't return
+any value.</span></p>
 <p>Here is the corresponding Sierra code:</p>
 <pre><code class="language-cairo noplayground">// type declarations
 type felt252 = felt252 [storable: true, drop: true, dup: true, zero_sized: false]
@@ -479,24 +580,46 @@ main::main::main@0() -&gt; (Unit)
 main::main::inlined@4() -&gt; (felt252)
 main::main::not_inlined@7() -&gt; (felt252)
 </code></pre>
-<p>In this specific case, we can observe that the compiler has applied additional optimizations to the <code>main</code> function of our code : the code of the <code>inlined</code> function, which is annotated with the <code>#[inline(always)]</code> attribute, is actually not copied in the <code>main</code> function. Instead, the <code>main</code> function starts with the <code>function_call</code> libfunc to call the <code>not_inlined</code> function, entirely omitting the code of the <code>inlined</code> function.</p>
+<p>In this specific case, we can observe that the compiler has applied additional
+optimizations to the <code>main</code> function of our code : the code of the <code>inlined</code>
+function, which is annotated with the <code>#[inline(always)]</code> attribute, is actually
+not copied in the <code>main</code> function. Instead, the <code>main</code> function starts with the
+<code>function_call</code> libfunc to call the <code>not_inlined</code> function, entirely omitting
+the code of the <code>inlined</code> function.</p>
 <blockquote>
-<p>Because <code>inlined</code> return value is never used, the compiler optimizes the <code>main</code> function by skipping the <code>inlined</code> function code. This will actually reduce the code length while reducing the number of steps required to execute <code>main</code>.</p>
+<p>Because <code>inlined</code> return value is never used, the compiler optimizes the
+<code>main</code> function by skipping the <code>inlined</code> function code. This will actually
+reduce the code length while reducing the number of steps required to execute
+<code>main</code>.</p>
 </blockquote>
-<p>In contrast, line 0 uses the <code>function_call</code> libfunc to execute the <code>not_inlined</code> function normally. This means that all the code from lines 7 to 8 will be executed:</p>
+<p>In contrast, line 0 uses the <code>function_call</code> libfunc to execute the
+<code>not_inlined</code> function normally. This means that all the code from lines 7 to 8
+will be executed:</p>
 <pre><code class="language-cairo noplayground">07 felt252_const&lt;133508164995039583817065828&gt;() -&gt; ([0])
 08 store_temp&lt;felt252&gt;([0]) -&gt; ([0])
 </code></pre>
-<p>This value stored in the variable with id <code>0</code> is then dropped on line 1, as it is not used in the <code>main</code> function:</p>
+<p>This value stored in the variable with id <code>0</code> is then dropped on line 1, as it
+is not used in the <code>main</code> function:</p>
 <pre><code class="language-cairo noplayground">01 drop&lt;felt252&gt;([0]) -&gt; ()
 </code></pre>
-<p>Finally, as the <code>main</code> function doesn't return any value, a variable of unit type <code>()</code> is created and returned:</p>
+<p>Finally, as the <code>main</code> function doesn't return any value, a variable of unit
+type <code>()</code> is created and returned:</p>
 <pre><code class="language-cairo noplayground">02 struct_construct&lt;Unit&gt;() -&gt; ([1])
 03 return([1])
 </code></pre>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Inlining is a compiler optimization technique that can be very useful in various situations. Inlining a function allows to get rid of the overhead of calling a function with the <code>function_call</code> libfunc by injecting the Sierra code directly in the caller function's context, while potentially optimizing the Sierra code executed to reduce the number of steps. If used effectively, inlining can even reduce code length as shown in the previous example.</p>
-<p>Nevertheless, applying the <code>inline</code> attribute to a function with a lot of code and few parameters might result in an increased code size, especially if the inlined function is used many times in the codebase. Use inlining only where it makes sense, and be aware that the compiler handles inlining by default. Therefore, manually applying inlining is not recommended in most situations, but can help improve and fine-tune your code's behavior.</p>
+<p>Inlining is a compiler optimization technique that can be very useful in various
+situations. Inlining a function allows to get rid of the overhead of calling a
+function with the <code>function_call</code> libfunc by injecting the Sierra code directly
+in the caller function's context, while potentially optimizing the Sierra code
+executed to reduce the number of steps. If used effectively, inlining can even
+reduce code length as shown in the previous example.</p>
+<p>Nevertheless, applying the <code>inline</code> attribute to a function with a lot of code
+and few parameters might result in an increased code size, especially if the
+inlined function is used many times in the codebase. Use inlining only where it
+makes sense, and be aware that the compiler handles inlining by default.
+Therefore, manually applying inlining is not recommended in most situations, but
+can help improve and fine-tune your code's behavior.</p>
 
                     </main>
 
@@ -532,24 +655,6 @@ main::main::not_inlined@7() -&gt; (felt252)
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

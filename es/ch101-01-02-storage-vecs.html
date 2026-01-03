@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,13 +274,29 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="storing-collections-with-vectors"><a class="header" href="#storing-collections-with-vectors">Storing Collections with Vectors</a></h1>
-<p>The <code>Vec</code> type provides a way to store collections of values in the contract's storage. In this section, we will explore how to declare, add elements to and retrieve elements from a <code>Vec</code>, as well as how the storage addresses for <code>Vec</code> variables are computed.</p>
-<p>The <code>Vec</code> type is provided by the Cairo core library, inside the <code>starknet::storage</code> module. Its associated methods are defined in the <code>VecTrait</code> and <code>MutableVecTrait</code> traits that you will also need to import for read and write operations on the <code>Vec</code> type.</p>
+<p>The <code>Vec</code> type provides a way to store collections of values in the contract's
+storage. In this section, we will explore how to declare, add elements to and
+retrieve elements from a <code>Vec</code>, as well as how the storage addresses for <code>Vec</code>
+variables are computed.</p>
+<p>The <code>Vec</code> type is provided by the Cairo core library, inside the
+<code>starknet::storage</code> module. Its associated methods are defined in the <code>VecTrait</code>
+and <code>MutableVecTrait</code> traits that you will also need to import for read and
+write operations on the <code>Vec</code> type.</p>
 <blockquote>
-<p>The <code>Array&lt;T&gt;</code> type is a <strong>memory</strong> type and cannot be directly stored in contract storage. For storage, use the <code>Vec&lt;T&gt;</code> type, which is a [phantom type][phantom types] designed specifically for contract storage. However, <code>Vec&lt;T&gt;</code> has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. To work with the full contents of a <code>Vec&lt;T&gt;</code>, you'll need to copy its elements to and from a memory <code>Array&lt;T&gt;</code>.</p>
+<p>The <code>Array&lt;T&gt;</code> type is a <strong>memory</strong> type and cannot be directly stored in
+contract storage. For storage, use the <code>Vec&lt;T&gt;</code> type, which is a [phantom
+type][phantom types] designed specifically for contract storage. However,
+<code>Vec&lt;T&gt;</code> has limitations: it can't be instantiated as a regular variable, used
+as a function parameter, or included as a member in regular structs. To work
+with the full contents of a <code>Vec&lt;T&gt;</code>, you'll need to copy its elements to and
+from a memory <code>Array&lt;T&gt;</code>.</p>
 </blockquote>
 <h2 id="declaring-and-using-storage-vectors"><a class="header" href="#declaring-and-using-storage-vectors">Declaring and Using Storage Vectors</a></h2>
-<p>To declare a Storage Vector, use the <code>Vec</code> type enclosed in angle brackets <code>&lt;&gt;</code>, specifying the type of elements it will store. In Listing 15-3, we create a simple contract that registers all the addresses that call it and stores them in a <code>Vec</code>. We can then retrieve the <code>n</code>-th registered address, or all registered addresses.</p>
+<p>To declare a Storage Vector, use the <code>Vec</code> type enclosed in angle brackets <code>&lt;&gt;</code>,
+specifying the type of elements it will store. In Listing 15-3,
+we create a simple contract that registers all the addresses that call it and
+stores them in a <code>Vec</code>. We can then retrieve the <code>n</code>-th registered address, or
+all registered addresses.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -460,8 +477,9 @@ pub mod AddressList {
 </span><span class="boring">    }
 </span><span class="boring">}
 </span></code></pre>
-<p><span class="caption">Listing 15-3: Declaring a storage <code>Vec</code> in the Storage struct</span></p>
-<p>To add an element to a <code>Vec</code>, you can use the <code>push</code> method to add an element to the end of the <code>Vec</code>.</p>
+<p>Declaring a storage <code>Vec</code> in the Storage struct</span></p>
+<p>To add an element to a <code>Vec</code>, you can use the <code>push</code> method to add an element to
+the end of the <code>Vec</code>.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -642,7 +660,10 @@ pub mod AddressList {
 </span><span class="boring">    }
 </span><span class="boring">}
 </span></code></pre>
-<p>To retrieve an element, you can use the indexing syntax (<code>vec[index]</code>) or the <code>at</code>/<code>get</code> methods to obtain a storage pointer to the element at the specified index, and then call <code>read()</code> to get the value. If the index is out of bounds, <code>at</code> (and indexing) panics, while <code>get</code> returns <code>None</code>.</p>
+<p>To retrieve an element, you can use the indexing syntax (<code>vec[index]</code>) or the
+<code>at</code>/<code>get</code> methods to obtain a storage pointer to the element at the specified
+index, and then call <code>read()</code> to get the value. If the index is out of bounds,
+<code>at</code> (and indexing) panics, while <code>get</code> returns <code>None</code>.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -823,9 +844,15 @@ pub mod AddressList {
 </span><span class="boring">    }
 </span><span class="boring">}
 </span></code></pre>
-<p>If you want to retrieve all the elements of the Vec, you can iterate over the indices of the storage <code>Vec</code>, read the value at each index, and append it to a memory <code>Array&lt;T&gt;</code>.
-Similarly, you can't store an <code>Array&lt;T&gt;</code> in storage: you would need to iterate over the elements of the array and append them to a storage <code>Vec&lt;T&gt;</code>.</p>
-<p>At this point, you should be familiar with the concept of storage pointers and storage paths introduced in the <a href="./ch101-01-00-contract-storage.html">"Contract Storage"</a> section and how they are used to access storage variables through a pointer-based model. Thus how would you modify the address stored at a specific index of a <code>Vec</code>?</p>
+<p>If you want to retrieve all the elements of the Vec, you can iterate over the
+indices of the storage <code>Vec</code>, read the value at each index, and append it to a
+memory <code>Array&lt;T&gt;</code>. Similarly, you can't store an <code>Array&lt;T&gt;</code> in storage: you
+would need to iterate over the elements of the array and append them to a
+storage <code>Vec&lt;T&gt;</code>.</p>
+<p>At this point, you should be familiar with the concept of storage pointers and
+storage paths introduced in the <a href="./ch101-01-00-contract-storage.html">"Contract Storage"</a> section
+and how they are used to access storage variables through a pointer-based model.
+Thus how would you modify the address stored at a specific index of a <code>Vec</code>?</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -1006,8 +1033,11 @@ Similarly, you can't store an <code>Array&lt;T&gt;</code> in storage: you would 
 </span><span class="boring">    }
 </span><span class="boring">}
 </span></code></pre>
-<p>The answer is fairly simple: get a mutable pointer to the storage pointer at the desired index, and use the <code>write</code> method to modify the value at that index.</p>
-<p>You can also remove the last element of a storage <code>Vec</code> using the <code>pop</code> method. It returns <code>Some(value)</code> if the vector is non-empty and <code>None</code> otherwise, and updates the stored length accordingly.</p>
+<p>The answer is fairly simple: get a mutable pointer to the storage pointer at the
+desired index, and use the <code>write</code> method to modify the value at that index.</p>
+<p>You can also remove the last element of a storage <code>Vec</code> using the <code>pop</code> method.
+It returns <code>Some(value)</code> if the vector is non-empty and <code>None</code> otherwise, and
+updates the stored length accordingly.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -1189,18 +1219,28 @@ Similarly, you can't store an <code>Array&lt;T&gt;</code> in storage: you would 
 </span><span class="boring">}
 </span></code></pre>
 <h2 id="storage-address-computation-for-vecs"><a class="header" href="#storage-address-computation-for-vecs">Storage Address Computation for Vecs</a></h2>
-<p>The address in storage of a variable stored in a <code>Vec</code> is computed according to the following rules:</p>
+<p>The address in storage of a variable stored in a <code>Vec</code> is computed according to
+the following rules:</p>
 <ul>
-<li>The length of the <code>Vec</code> is stored at the base address, computed as <code>sn_keccak(variable_name)</code>.</li>
-<li>The elements of the <code>Vec</code> are stored in addresses computed as <code>h(base_address, i)</code>, where <code>i</code> is the index of the element in the <code>Vec</code> and <code>h</code> is the Pedersen hash function.</li>
+<li>The length of the <code>Vec</code> is stored at the base address, computed as
+<code>sn_keccak(variable_name)</code>.</li>
+<li>The elements of the <code>Vec</code> are stored in addresses computed as
+<code>h(base_address, i)</code>, where <code>i</code> is the index of the element in the <code>Vec</code> and
+<code>h</code> is the Pedersen hash function.</li>
 </ul>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
 <ul>
 <li>Use the <code>Vec</code> type to store collections of values in contract storage</li>
-<li>Access Vecs using the <code>push</code> method to add elements, the <code>pop</code> method to remove the last element, and the <code>at</code>/indexing or <code>get</code> methods to read elements</li>
-<li>The address of a <code>Vec</code> variable is computed using the <code>sn_keccak</code> and the Pedersen hash functions</li>
+<li>Access Vecs using the <code>push</code> method to add elements, the <code>pop</code> method to
+remove the last element, and the <code>at</code>/indexing or <code>get</code> methods to read
+elements</li>
+<li>The address of a <code>Vec</code> variable is computed using the <code>sn_keccak</code> and the
+Pedersen hash functions</li>
 </ul>
-<p>This wraps up our tour of the Contract Storage! In the next section, we'll start looking at the different kind of functions defined in a contract. You already know most of them, as we used them in the previous chapters, but we'll explain them in more detail.</p>
+<p>This wraps up our tour of the Contract Storage! In the next section, we'll start
+looking at the different kind of functions defined in a contract. You already
+know most of them, as we used them in the previous chapters, but we'll explain
+them in more detail.</p>
 
                     </main>
 
@@ -1236,24 +1276,6 @@ Similarly, you can't store an <code>Array&lt;T&gt;</code> in storage: you would 
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

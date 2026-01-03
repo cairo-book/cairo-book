@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -278,8 +279,8 @@ important functions in the language: the <code>main</code> function, which is th
 point of many programs. You’ve also seen the <code>fn</code> keyword, which allows you to
 declare new functions.</p>
 <p>Cairo code uses <em>snake case</em> as the conventional style for function and variable
-names, in which all letters are lowercase and underscores separate words.
-Here’s a program that contains an example function definition:</p>
+names, in which all letters are lowercase and underscores separate words. Here’s
+a program that contains an example function definition:</p>
 <pre><code class="language-cairo">fn another_function() {
     println!("Another function.");
 }
@@ -291,10 +292,10 @@ fn main() {
 }
 </code></pre>
 <p>We define a function in Cairo by entering <code>fn</code> followed by a function name and a
-set of parentheses. The curly brackets tell the compiler where the function
-body begins and ends.</p>
-<p>We can call any function we’ve defined by entering its name followed by a set
-of parentheses. Because <code>another_function</code> is defined in the program, it can be
+set of parentheses. The curly brackets tell the compiler where the function body
+begins and ends.</p>
+<p>We can call any function we’ve defined by entering its name followed by a set of
+parentheses. Because <code>another_function</code> is defined in the program, it can be
 called from inside the <code>main</code> function. Note that we defined <code>another_function</code>
 <em>before</em> the <code>main</code> function in the source code; we could have defined it after
 as well. Cairo doesn’t care where you define your functions, only that they’re
@@ -319,8 +320,8 @@ and its message is printed.</p>
 are part of a function’s signature. When a function has parameters, you can
 provide it with concrete values for those parameters. Technically, the concrete
 values are called <em>arguments</em>, but in casual conversation, people tend to use
-the words <em>parameter</em> and <em>argument</em> interchangeably for either the variables
-in a function’s definition or the concrete values passed in when you call a
+the words <em>parameter</em> and <em>argument</em> interchangeably for either the variables in
+a function’s definition or the concrete values passed in when you call a
 function.</p>
 <p>In this version of <code>another_function</code> we add a parameter:</p>
 <pre><code class="language-cairo">#[executable]
@@ -343,9 +344,10 @@ The value of x is: 5
 </code></pre>
 <p>The declaration of <code>another_function</code> has one parameter named <code>x</code>. The type of
 <code>x</code> is specified as <code>felt252</code>. When we pass <code>5</code> in to <code>another_function</code>, the
-<code>println!</code> macro puts <code>5</code> where the pair of curly brackets containing <code>x</code> was in the format string.</p>
-<p>In function signatures, you <em>must</em> declare the type of each parameter. This is
-a deliberate decision in Cairo’s design: requiring type annotations in function
+<code>println!</code> macro puts <code>5</code> where the pair of curly brackets containing <code>x</code> was in
+the format string.</p>
+<p>In function signatures, you <em>must</em> declare the type of each parameter. This is a
+deliberate decision in Cairo’s design: requiring type annotations in function
 definitions means the compiler almost never needs you to use them elsewhere in
 the code to figure out what type you mean. The compiler is also able to give
 more helpful error messages if it knows what types the function expects.</p>
@@ -362,9 +364,12 @@ fn print_labeled_measurement(value: u128, unit_label: ByteArray) {
 </code></pre>
 <p>This example creates a function named <code>print_labeled_measurement</code> with two
 parameters. The first parameter is named <code>value</code> and is a <code>u128</code>. The second is
-named <code>unit_label</code> and is of type <code>ByteArray</code> - Cairo's internal type to represent string literals. The function then prints text containing both the <code>value</code> and the <code>unit_label</code>.</p>
+named <code>unit_label</code> and is of type <code>ByteArray</code> - Cairo's internal type to
+represent string literals. The function then prints text containing both the
+<code>value</code> and the <code>unit_label</code>.</p>
 <p>Let’s try running this code. Replace the program currently in your <em>functions</em>
-project’s <em>src/lib.cairo</em> file with the preceding example and run it using <code>scarb execute</code>:</p>
+project’s <em>src/lib.cairo</em> file with the preceding example and run it using
+<code>scarb execute</code>:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_17_multiple_params v0.1.0 (listings/ch02-common-programming-concepts/no_listing_17_multiple_params/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
@@ -373,10 +378,16 @@ The measurement is: 5h
 
 
 </code></pre>
-<p>Because we called the function with <code>5</code> as the value for value and <code>"h"</code> as the value for <code>unit_label</code>, the program output contains those values.</p>
+<p>Because we called the function with <code>5</code> as the value for value and <code>"h"</code> as the
+value for <code>unit_label</code>, the program output contains those values.</p>
 <h3 id="named-parameters"><a class="header" href="#named-parameters">Named Parameters</a></h3>
-<p>In Cairo, named parameters allow you to specify the names of arguments when you call a function. This makes the function calls more readable and self-descriptive.
-If you want to use named parameters, you need to specify the name of the parameter and the value you want to pass to it. The syntax is <code>parameter_name: value</code>. If you pass a variable that has the same name as the parameter, you can simply write <code>:parameter_name</code> instead of <code>parameter_name: variable_name</code>.</p>
+<p>In Cairo, named parameters allow you to specify the names of arguments when you
+call a function. This makes the function calls more readable and
+self-descriptive. If you want to use named parameters, you need to specify the
+name of the parameter and the value you want to pass to it. The syntax is
+<code>parameter_name: value</code>. If you pass a variable that has the same name as the
+parameter, you can simply write <code>:parameter_name</code> instead of
+<code>parameter_name: variable_name</code>.</p>
 <p>Here is an example:</p>
 <pre><code class="language-cairo">fn foo(x: u8, y: u8) {}
 
@@ -399,20 +410,21 @@ understand. Other languages don’t have the same distinctions, so let’s look 
 what statements and expressions are and how their differences affect the bodies
 of functions.</p>
 <ul>
-<li><strong>Statements</strong> are instructions that perform some action and do not return
-a value.</li>
+<li><strong>Statements</strong> are instructions that perform some action and do not return a
+value.</li>
 <li><strong>Expressions</strong> evaluate to a resultant value. Let’s look at some examples.</li>
 </ul>
 <p>We’ve actually already used statements and expressions. Creating a variable and
-assigning a value to it with the <code>let</code> keyword is a statement. In Listing 2-1,
-<code>let y = 6;</code> is a statement.</p>
+assigning a value to it with the <code>let</code> keyword is a statement. In Listing
+2-1, <code>let y = 6;</code> is a statement.</p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
     let y = 6;
 }
 </code></pre>
-<p><span class="caption">Listing 2-1: A <code>main</code> function declaration containing one statement</span></p>
-<p>Function definitions are also statements; the entire preceding example is a statement in itself.</p>
+<p>function declaration containing one statement</span></p>
+<p>Function definitions are also statements; the entire preceding example is a
+statement in itself.</p>
 <p>Statements do not return values. Therefore, you can’t assign a <code>let</code> statement
 to another variable, as the following code tries to do; you’ll get an error:</p>
 <pre><code class="language-cairo  noplayground">#[executable]
@@ -465,9 +477,11 @@ languages, you can write <code>x = y = 6</code> and have both <code>x</code> and
 <p>Expressions evaluate to a value and make up most of the rest of the code that
 you’ll write in Cairo. Consider a math operation, such as <code>5 + 6</code>, which is an
 expression that evaluates to the value <code>11</code>. Expressions can be part of
-statements: in Listing 2-1, the <code>6</code> in the statement <code>let y = 6;</code> is an
-expression that evaluates to the value <code>6</code>.</p>
-<p>Calling a function is an expression since it always evaluates to a value: the function's explicit return value, if specified, or the 'unit' type <code>()</code> otherwise.</p>
+statements: in Listing 2-1, the <code>6</code> in the statement <code>let y = 6;</code>
+is an expression that evaluates to the value <code>6</code>.</p>
+<p>Calling a function is an expression since it always evaluates to a value: the
+function's explicit return value, if specified, or the 'unit' type <code>()</code>
+otherwise.</p>
 <p>A new scope block created with curly brackets is an expression, for example:</p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
@@ -485,21 +499,20 @@ fn main() {
         x + 1
     };
 </code></pre>
-<p>is a block that, in this case, evaluates to <code>4</code>. That value gets bound to <code>y</code>
-as part of the <code>let</code> statement. Note that the <code>x + 1</code> line doesn’t have a
-semicolon at the end, which is unlike most of the lines you’ve seen so far.
-Expressions do not include ending semicolons. If you add a semicolon to the end
-of an expression, you turn it into a statement, and it will then not return a
-value. Keep this in mind as you explore function return values and expressions
-next.</p>
+<p>is a block that, in this case, evaluates to <code>4</code>. That value gets bound to <code>y</code> as
+part of the <code>let</code> statement. Note that the <code>x + 1</code> line doesn’t have a semicolon
+at the end, which is unlike most of the lines you’ve seen so far. Expressions do
+not include ending semicolons. If you add a semicolon to the end of an
+expression, you turn it into a statement, and it will then not return a value.
+Keep this in mind as you explore function return values and expressions next.</p>
 <h2 id="functions-with-return-values"><a class="header" href="#functions-with-return-values">Functions with Return Values</a></h2>
 <p>Functions can return values to the code that calls them. We don’t name return
 values, but we must declare their type after an arrow (<code>-&gt;</code>). In Cairo, the
 return value of the function is synonymous with the value of the final
 expression in the block of the body of a function. You can return early from a
 function by using the <code>return</code> keyword and specifying a value, but most
-functions return the last expression implicitly. Here’s an example of a
-function that returns a value:</p>
+functions return the last expression implicitly. Here’s an example of a function
+that returns a value:</p>
 <pre><code class="language-cairo">fn five() -&gt; u32 {
     5
 }
@@ -529,10 +542,9 @@ function to initialize a variable. Because the function <code>five</code> return
 that line is the same as the following:</p>
 <pre><code class="language-cairo  noplayground">let x = 5;
 </code></pre>
-<p>Second, the <code>five</code> function has no parameters and defines the type of the
-return value, but the body of the function is a lonely <code>5</code> with no semicolon
-because it’s an expression whose value we want to return.
-Let’s look at another example:</p>
+<p>Second, the <code>five</code> function has no parameters and defines the type of the return
+value, but the body of the function is a lonely <code>5</code> with no semicolon because
+it’s an expression whose value we want to return. Let’s look at another example:</p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
     let x = plus_one(5);
@@ -544,9 +556,9 @@ fn plus_one(x: u32) -&gt; u32 {
     x + 1
 }
 </code></pre>
-<p>Running this code will print <code>x = 6</code>. But if we place a
-semicolon at the end of the line containing <code>x + 1</code>, changing it from an
-expression to a statement, we’ll get an error:</p>
+<p>Running this code will print <code>x = 6</code>. But if we place a semicolon at the end of
+the line containing <code>x + 1</code>, changing it from an expression to a statement,
+we’ll get an error:</p>
 <pre><code class="language-cairo does_not_compile">#[executable]
 fn main() {
     let x = plus_one(5);
@@ -569,15 +581,19 @@ error: could not compile `no_listing_22_function_return_invalid` due to previous
 error: `scarb` command exited with error
 
 </code></pre>
-<p>The main error message, <code>Unexpected return type</code>, reveals the core issue with this
-code. The definition of the function <code>plus_one</code> says that it will return an
-<code>u32</code>, but statements don’t evaluate to a value, which is expressed by <code>()</code>,
-the unit type. Therefore, nothing is returned, which contradicts the function
+<p>The main error message, <code>Unexpected return type</code>, reveals the core issue with
+this code. The definition of the function <code>plus_one</code> says that it will return an
+<code>u32</code>, but statements don’t evaluate to a value, which is expressed by <code>()</code>, the
+unit type. Therefore, nothing is returned, which contradicts the function
 definition and results in an error.</p>
 <h3 id="const-functions"><a class="header" href="#const-functions">Const Functions</a></h3>
-<p>Functions that can be evaluated at compile time can be marked as <code>const</code> using the <code>const fn</code> syntax. This allows the function to be called from a constant context and interpreted by the compiler at compile time.</p>
-<p>Declaring a function as <code>const</code> restricts the types that arguments and the return type may use, and limits the function body to constant expressions.</p>
-<p>Several functions in the core library are marked as <code>const</code>. Here's an example from the core library showing the <code>pow</code> function implemented as a <code>const fn</code>:</p>
+<p>Functions that can be evaluated at compile time can be marked as <code>const</code> using
+the <code>const fn</code> syntax. This allows the function to be called from a constant
+context and interpreted by the compiler at compile time.</p>
+<p>Declaring a function as <code>const</code> restricts the types that arguments and the
+return type may use, and limits the function body to constant expressions.</p>
+<p>Several functions in the core library are marked as <code>const</code>. Here's an example
+from the core library showing the <code>pow</code> function implemented as a <code>const fn</code>:</p>
 <pre><code class="language-cairo">use core::num::traits::Pow;
 
 const BYTE_MASK: u16 = 2_u16.pow(8) - 1;
@@ -589,8 +605,11 @@ fn main() {
     println!("first_byte: {}", first_byte);
 }
 </code></pre>
-<p>In this example, <code>pow</code> is a <code>const</code> function, allowing it to be used in a constant expression to define <code>mask</code> at compile time. Here's a snippet of how <code>pow</code> is defined in the core library using <code>const fn</code>:</p>
-<p>Note that declaring a function as <code>const</code> has no effect on existing uses; it only imposes restrictions for constant contexts.</p>
+<p>In this example, <code>pow</code> is a <code>const</code> function, allowing it to be used in a
+constant expression to define <code>mask</code> at compile time. Here's a snippet of how
+<code>pow</code> is defined in the core library using <code>const fn</code>:</p>
+<p>Note that declaring a function as <code>const</code> has no effect on existing uses; it
+only imposes restrictions for constant contexts.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch02-03-functions&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;id&quot;:&quot;fa63d18f-fee3-4923-962b-bdeabbf61fbd&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;fn&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;The keyword for declaring a new function in Cairo is:&quot;}},{&quot;context&quot;:&quot;A function must declare the types of its parameters. In this case, function `f` could be corrected by adding `u8` type to the `x` parameter like this: `fn f(x:u8)`.\n&quot;,&quot;id&quot;:&quot;6343598f-380f-4a59-b6fb-7dfadc397f74&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:1},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn f(x) {\n  println!(\&quot;{x}\&quot;);\n}\n\n#[executable]\nfn main() {\n  f(0);\n}\n&quot;}},{&quot;context&quot;:&quot;A block is an expression (#1) that is allowed to contain statements. It also defines a syntactic scope for let-bindings inside it (#3).\n&quot;,&quot;id&quot;:&quot;695f318f-539b-4ce8-9c00-92e29f7f1bb3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;1 and 3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;1 only&quot;,&quot;2 only&quot;,&quot;2 and 3&quot;],&quot;prompt&quot;:&quot;In Cairo, a curly-brace block like `{ /* ... */ }` is:\n1. An expression\n2. A statement\n3. A syntactic scope\n&quot;}},{&quot;id&quot;:&quot;7bbc0afb-2ad7-4d8d-97fd-610a65a85e38&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;3&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn f(x: usize) -&gt; usize { x + 1 }\n#[executable]\nfn main() {\n  println!(\&quot;{}\&quot;, f({\n    let y = 1;\n    y + 1\n  }));\n}\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -627,24 +646,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

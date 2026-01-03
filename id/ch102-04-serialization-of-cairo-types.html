@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,9 +274,23 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="serialization-of-cairo-types"><a class="header" href="#serialization-of-cairo-types">Serialization of Cairo types</a></h1>
-<p>The field element (<code>felt252</code>), which contains 252 bits, is the only actual type in the Cairo VM, so <a href="#data-types-using-at-most-252-bits">all data types that fit in 252 bits</a> are represented by a single felt and <a href="#data-types-using-more-than-252-bits">all data types that are larger than 252 bits</a> are represented by a list of felts. Therefore, in order to interact with a contract, you must know how to <a href="#serialization-of-data-types-using-more-than-252-bits">serialize any arguments that are larger than 252 bits to lists of felts</a> so you can correctly formulate the calldata in the transaction.</p>
+<p>The field element (<code>felt252</code>), which contains 252 bits, is the only actual type
+in the Cairo VM, so
+<a href="#data-types-using-at-most-252-bits">all data types that fit in 252 bits</a> are
+represented by a single felt and
+<a href="#data-types-using-more-than-252-bits">all data types that are larger than 252 bits</a>
+are represented by a list of felts. Therefore, in order to interact with a
+contract, you must know how to
+<a href="#serialization-of-data-types-using-more-than-252-bits">serialize any arguments that are larger than 252 bits to lists of felts</a>
+so you can correctly formulate the calldata in the transaction.</p>
 <blockquote>
-<p>Note: For any developers that are not developing a Starknet library or SDK developer, using either one of the existing <a href="https://docs.starknet.io/tools/overview/">Starknet SDKs</a> or the <a href="https://foundry-rs.github.io/starknet-foundry/starknet/calldata-transformation.html#using---arguments"><code>--argument</code> flag of Starknet Foundry's <code>sncast</code></a> is highly recommend to greatly simply the serialization process. From <code>sncast</code> v0.43.0, results of <code>sncast call</code> are also parsed into readable information, demonstrated in the following example:</p>
+<p>Note: For any developers that are not developing a Starknet library or SDK
+developer, using either one of the existing
+<a href="https://docs.starknet.io/tools/overview/">Starknet SDKs</a> or the
+<a href="https://foundry-rs.github.io/starknet-foundry/starknet/calldata-transformation.html#using---arguments"><code>--argument</code> flag of Starknet Foundry's <code>sncast</code></a>
+is highly recommend to greatly simply the serialization process. From <code>sncast</code>
+v0.43.0, results of <code>sncast call</code> are also parsed into readable information,
+demonstrated in the following example:</p>
 <pre><code>sncast call \
   --contract-address=0x00e270c8396d333f88556edf143ac751240f050d907e5190525accbe275f2348 \
   --function=get_order \
@@ -300,18 +315,22 @@ response: Order {
 <li><code>EthAddress</code></li>
 <li><code>StorageAddress</code></li>
 <li><code>ClassHash</code></li>
-<li>Unsigned integers using at most 252 bits: <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>, and <code>usize</code></li>
+<li>Unsigned integers using at most 252 bits: <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>,
+and <code>usize</code></li>
 <li><code>bytes31</code></li>
 <li><code>felt252</code></li>
 <li>Signed integers: <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, and <code>i128</code>
 <blockquote>
-<p>Note: A negative value, \( -x \), is serialized as \( P-x \), where \( P = 2^{251} + 17*2^{192} + 1 \)</p>
+<p>Note: A negative value, \( -x \), is serialized as \( P-x \), where \(
+P = 2^{251} + 17*2^{192} + 1 \)</p>
 </blockquote>
 </li>
 </ul>
-<p>For these types, each value is serialized as a single-member list that contains one <code>felt252</code> value.</p>
+<p>For these types, each value is serialized as a single-member list that contains
+one <code>felt252</code> value.</p>
 <h2 id="data-types-using-more-than-252-bits"><a class="header" href="#data-types-using-more-than-252-bits">Data types using more than 252 bits</a></h2>
-<p>The following Cairo data types use more than 252 bits and therefore have non-trivial serialization:</p>
+<p>The following Cairo data types use more than 252 bits and therefore have
+non-trivial serialization:</p>
 <ul>
 <li>Unsigned integers larger than 252 bits: <code>u256</code> and <code>u512</code></li>
 <li>Arrays and spans</li>
@@ -323,27 +342,36 @@ response: Order {
 <h3 id="serialization-of-u256"><a class="header" href="#serialization-of-u256">Serialization of <code>u256</code></a></h3>
 <p>A <code>u256</code> value in Cairo is represented by two <code>felt252</code> values, as follows:</p>
 <ul>
-<li>The first <code>felt252</code> value contains the 128 least significant bits, usually referred to as the low part of the original <code>u256</code> value.</li>
-<li>The second <code>felt252</code> value contains the 128 most significant bits, usually referred to as the high part of the original <code>u256</code> value.</li>
+<li>The first <code>felt252</code> value contains the 128 least significant bits, usually
+referred to as the low part of the original <code>u256</code> value.</li>
+<li>The second <code>felt252</code> value contains the 128 most significant bits, usually
+referred to as the high part of the original <code>u256</code> value.</li>
 </ul>
 <p>For example:</p>
 <ul>
 <li>
-<p>A <code>u256</code> variable whose decimal value is 2 is serialized as <code>[2,0]</code>. To understand why, examine the binary representation of 2 and split it into two 128-bit parts, as follows:</p>
+<p>A <code>u256</code> variable whose decimal value is 2 is serialized as <code>[2,0]</code>. To
+understand why, examine the binary representation of 2 and split it into two
+128-bit parts, as follows:</p>
 <ul>
 <li>128 high bits: \(0 \cdots 0 \)</li>
 <li>128 low bits: \( 0 \cdots 10 \)</li>
 </ul>
 </li>
 <li>
-<p>A <code>u256</code> variable whose decimal value is \( 2^{128} \) is serialized as <code>[0,1]</code>. To understand why, examine the binary representation of \( 2^{128} \) and split it into two 128-bit parts, as follows:</p>
+<p>A <code>u256</code> variable whose decimal value is \( 2^{128} \) is serialized as
+<code>[0,1]</code>. To understand why, examine the binary representation of \( 2^{128}
+\) and split it into two 128-bit parts, as follows:</p>
 <ul>
 <li>128 high bits: \( 0 \cdots 01 \)</li>
 <li>128 low bits: \(0 \cdots 0 \)</li>
 </ul>
 </li>
 <li>
-<p>A <code>u256</code> variable whose decimal value is \( 2^{129}+2^{128}+20 \), is serialized as <code>[20,3]</code>. To understand why, examine the binary representation of the \( 2^{129}+2^{128}+20 \) and split it into two 128-bit parts, as follows:</p>
+<p>A <code>u256</code> variable whose decimal value is \( 2^{129}+2^{128}+20 \), is
+serialized as <code>[20,3]</code>. To understand why, examine the binary representation
+of the \( 2^{129}+2^{128}+20 \) and split it into two 128-bit parts, as
+follows:</p>
 <ul>
 <li>128 high bits: \( 0 \cdots 011 \)</li>
 <li>128 high bits: \( 0 \cdots 10100 \)</li>
@@ -351,7 +379,8 @@ response: Order {
 </li>
 </ul>
 <h3 id="serialization-of-u512"><a class="header" href="#serialization-of-u512">Serialization of <code>u512</code></a></h3>
-<p>The <code>u512</code> type in Cairo is a struct containing four <code>felt252</code> members, each representing a 128-bit limb of the original integer, similar to the <code>u256</code> type.</p>
+<p>The <code>u512</code> type in Cairo is a struct containing four <code>felt252</code> members, each
+representing a 128-bit limb of the original integer, similar to the <code>u256</code> type.</p>
 <h3 id="serialization-of-arrays-and-spans"><a class="header" href="#serialization-of-arrays-and-spans">Serialization of arrays and spans</a></h3>
 <p>Arrays and spans are serialized as follows:</p>
 <p><code>&lt;array/span_length&gt;, &lt;first_serialized_member&gt;,..., &lt;last_serialized_member&gt;</code></p>
@@ -359,7 +388,8 @@ response: Order {
 <pre><code class="language-cairo  noplayground">let POW_2_128: u256 = 0x100000000000000000000000000000000
 let array: Array&lt;u256&gt; = array![10, 20, POW_2_128]
 </code></pre>
-<p>Each <code>u256</code> value in the array is represented by two <code>felt252</code> values. So the array above is serialized as follows:</p>
+<p>Each <code>u256</code> value in the array is represented by two <code>felt252</code> values. So the
+array above is serialized as follows:</p>
 <ol>
 <li><code>3</code>: number of array members</li>
 <li><code>10,0</code>: serialized first member</li>
@@ -370,7 +400,9 @@ let array: Array&lt;u256&gt; = array![10, 20, POW_2_128]
 <h3 id="serialization-of-enums"><a class="header" href="#serialization-of-enums">Serialization of enums</a></h3>
 <p>An enum is serialized as follows:</p>
 <p><code>&lt;index_of_enum_variant&gt;,&lt;serialized_variant&gt;</code></p>
-<p>Note that enum variants indices are 0-based, not to confuse with their storage layout, which is 1-based, to distinguish the first variant from an uninitialized storage slot.</p>
+<p>Note that enum variants indices are 0-based, not to confuse with their storage
+layout, which is 1-based, to distinguish the first variant from an uninitialized
+storage slot.</p>
 <p><strong>Enum serialization example #1</strong></p>
 <p>Consider the following definition of an enum named <code>Week</code>:</p>
 <pre><code class="language-cairo noplayground">enum Week {
@@ -378,7 +410,8 @@ let array: Array&lt;u256&gt; = array![10, 20, POW_2_128]
     Monday: u256, // Index=1. The variant type is u256.
 }
 </code></pre>
-<p>Now consider instantiations of the <code>Week</code> enum's variants as shown in the table below:</p>
+<p>Now consider instantiations of the <code>Week</code> enum's variants as shown in the table
+below:</p>
 <div class="table-wrapper"><table><thead><tr><th>Instance</th><th>Index</th><th>Type</th><th>Serialization</th></tr></thead><tbody>
 <tr><td><code>Week::Sunday</code></td><td><code>0</code></td><td>unit</td><td><code>[0]</code></td></tr>
 <tr><td><code>Week::Monday(5)</code></td><td><code>1</code></td><td><code>u256</code></td><td><code>[1,5,0]</code></td></tr>
@@ -393,18 +426,21 @@ let array: Array&lt;u256&gt; = array![10, 20, POW_2_128]
     C
 }
 </code></pre>
-<p>Now consider instantiations of the <code>MessageType</code> enum's variants as shown in the table below:</p>
+<p>Now consider instantiations of the <code>MessageType</code> enum's variants as shown in the
+table below:</p>
 <div class="table-wrapper"><table><thead><tr><th>Instance</th><th>Index</th><th>Type</th><th>Serialization</th></tr></thead><tbody>
 <tr><td><code>MessageType::A</code></td><td><code>1</code></td><td>unit</td><td><code>[0]</code></td></tr>
 <tr><td><code>MessageType::B(6)</code></td><td><code>0</code></td><td><code>u128</code></td><td><code>[1,6]</code></td></tr>
 <tr><td><code>MessageType::C</code></td><td><code>2</code></td><td>unit</td><td><code>[2]</code></td></tr>
 </tbody></table>
 </div>
-<p>As you can see about, the <code>#[default]</code> attribute does not affect serialization. It only affects the storage layout of <code>MessageType</code>, where the default variant
+<p>As you can see about, the <code>#[default]</code> attribute does not affect serialization.
+It only affects the storage layout of <code>MessageType</code>, where the default variant
 <code>B</code> will be stored as <code>0</code>.</p>
 <h3 id="serialization-of-structs-and-tuples"><a class="header" href="#serialization-of-structs-and-tuples">Serialization of structs and tuples</a></h3>
 <p>Structs and tuples are serialized by serializing their members one at a time.</p>
-<p>A struct's members are serialized in the order in which they appear in its definition.</p>
+<p>A struct's members are serialized in the order in which they appear in its
+definition.</p>
 <p>For example, consider the following definition of the struct <code>MyStruct</code>:</p>
 <pre><code class="language-cairo noplayground">struct MyStruct {
     a: u256,
@@ -412,7 +448,8 @@ let array: Array&lt;u256&gt; = array![10, 20, POW_2_128]
     c: Array&lt;felt252&gt;
 }
 </code></pre>
-<p>The serialization is the same for both of the following instantiations of the struct's members:</p>
+<p>The serialization is the same for both of the following instantiations of the
+struct's members:</p>
 <pre><code class="language-cairo noplayground">let my_struct = MyStruct {
     a: 2, b: 5, c: [1,2,3]
 };
@@ -429,22 +466,29 @@ let my_struct = MyStruct {
 | <code>c: [1,2,3]</code> | <code>felt252</code> array of size 3 | <code>[3,1,2,3]</code>   |</p>
 <p>Combining the above, the struct is serialized as <code>[2,0,5,3,1,2,3]</code>.</p>
 <h3 id="serialization-of-byte-arrays"><a class="header" href="#serialization-of-byte-arrays">Serialization of byte arrays</a></h3>
-<p>A string is represented in Cairo as a <code>ByteArray</code> type. A byte array is actually a struct with the following members:</p>
+<p>A string is represented in Cairo as a <code>ByteArray</code> type. A byte array is actually
+a struct with the following members:</p>
 <ul>
-<li><code>data: Array&lt;felt252&gt;</code>: Contains 31-byte chunks of the byte array. Each <code>felt252</code> value has exactly 31 bytes. If the number of bytes in the byte array is less than 31, then this array is empty.</li>
-<li><code>pending_word: felt252</code>: The bytes that remain after filling the <code>data</code> array with full 31-byte chunks. The pending word consists of at most 30 bytes.</li>
+<li><code>data: Array&lt;felt252&gt;</code>: Contains 31-byte chunks of the byte array. Each
+<code>felt252</code> value has exactly 31 bytes. If the number of bytes in the byte array
+is less than 31, then this array is empty.</li>
+<li><code>pending_word: felt252</code>: The bytes that remain after filling the <code>data</code> array
+with full 31-byte chunks. The pending word consists of at most 30 bytes.</li>
 <li><code>pending_word_len: usize</code>: The number of bytes in <code>pending_word</code>.</li>
 </ul>
 <p><strong>Example #1: A string shorter than 31 characters</strong></p>
-<p>Consider the string <code>hello</code>, whose ASCII encoding is the 5-byte hex value <code>0x68656c6c6f</code>. The resulting byte array is serialized as follows:</p>
+<p>Consider the string <code>hello</code>, whose ASCII encoding is the 5-byte hex value
+<code>0x68656c6c6f</code>. The resulting byte array is serialized as follows:</p>
 <pre><code class="language-cairo noplayground">0, // Number of 31-byte words in the data array.
 0x68656c6c6f, // Pending word
 5 // Length of the pending word, in bytes
 </code></pre>
 <p><strong>Example 2: A string longer than 31 bytes</strong></p>
-<p>Consider the string <code>Long string, more than 31 characters.</code>, which is represented by the following hex values:</p>
+<p>Consider the string <code>Long string, more than 31 characters.</code>, which is
+represented by the following hex values:</p>
 <ul>
-<li><code>0x4c6f6e6720737472696e672c206d6f7265207468616e203331206368617261</code> (31-byte word)</li>
+<li><code>0x4c6f6e6720737472696e672c206d6f7265207468616e203331206368617261</code> (31-byte
+word)</li>
 <li><code>0x63746572732e</code> (6-byte pending word)</li>
 </ul>
 <p>The resulting byte array is serialized as follows:</p>
@@ -488,24 +532,6 @@ let my_struct = MyStruct {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

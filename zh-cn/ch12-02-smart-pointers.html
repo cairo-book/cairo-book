@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,35 +274,92 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="smart-pointers"><a class="header" href="#smart-pointers">Smart Pointers</a></h1>
-<p>A pointer is a general concept for a variable that contains a memory address. This address refers to, or “points at,” some other data. While pointers are a powerful feature, they can also be a source of bugs and security vulnerabilities. For example, a pointer can reference an unassigned memory cell, which means that attempting to access the data at that address would cause the program to crash, making it unprovable. To prevent such issues, Cairo uses <em>Smart Pointers</em>.</p>
-<p>Smart pointers are data structures that act like a pointer, but also have additional metadata and capabilities. The concept of smart pointers isn’t unique to Cairo: smart pointers originated in C++ and exist in other languages like Rust as well. In the specific case of Cairo, smart pointers ensure that memory is not addressed in an unsafe way that could cause a program to be unprovable, by providing a safe way to access memory through strict type checking and ownership rules.</p>
-<p>Though we didn’t call them as such at the time, we’ve already encountered a few smart pointers in this book, including <code>Felt252Dict&lt;T&gt;</code> and <code>Array&lt;T&gt;</code> in Chapter 3. Both these types count as smart pointers because they own a memory segment and allow you to manipulate it. They also have metadata and extra capabilities or guarantees. Arrays keep track of their current length to ensure that existing elements are not overwritten, and that new elements are only appended to the end.</p>
-<p>The Cairo VM memory is composed by multiple segments that can store data, each identified by a unique index. When you create an array, you allocate a new segment in the memory to store the future elements. The array itself is just a pointer to that segment where the elements are stored.</p>
+<p>A pointer is a general concept for a variable that contains a memory address.
+This address refers to, or “points at,” some other data. While pointers are a
+powerful feature, they can also be a source of bugs and security
+vulnerabilities. For example, a pointer can reference an unassigned memory cell,
+which means that attempting to access the data at that address would cause the
+program to crash, making it unprovable. To prevent such issues, Cairo uses
+<em>Smart Pointers</em>.</p>
+<p>Smart pointers are data structures that act like a pointer, but also have
+additional metadata and capabilities. The concept of smart pointers isn’t unique
+to Cairo: smart pointers originated in C++ and exist in other languages like
+Rust as well. In the specific case of Cairo, smart pointers ensure that memory
+is not addressed in an unsafe way that could cause a program to be unprovable,
+by providing a safe way to access memory through strict type checking and
+ownership rules.</p>
+<p>Though we didn’t call them as such at the time, we’ve already encountered a few
+smart pointers in this book, including <code>Felt252Dict&lt;T&gt;</code> and <code>Array&lt;T&gt;</code> in
+Chapter 3. Both these types count as smart pointers
+because they own a memory segment and allow you to manipulate it. They also have
+metadata and extra capabilities or guarantees. Arrays keep track of their
+current length to ensure that existing elements are not overwritten, and that
+new elements are only appended to the end.</p>
+<p>The Cairo VM memory is composed by multiple segments that can store data, each
+identified by a unique index. When you create an array, you allocate a new
+segment in the memory to store the future elements. The array itself is just a
+pointer to that segment where the elements are stored.</p>
 <h2 id="the-boxt-type-to-manipulate-pointers"><a class="header" href="#the-boxt-type-to-manipulate-pointers">The <code>Box&lt;T&gt;</code> Type to Manipulate Pointers</a></h2>
-<p>The principal smart pointer type in Cairo is a <em>box</em>, denoted as <code>Box&lt;T&gt;</code>. Manually defining boxes allow you to store data in a specific memory segment of the Cairo VM called the <em>boxed segment</em>. This segment is dedicated to store all boxed values, and what remains in the execution segment is only a pointer to the boxed segment. Whenever you instantiate a new pointer variable of type <code>Box&lt;T&gt;</code>, you append the data of type <code>T</code> to the boxed segment.</p>
-<p>Boxes have very little performance overhead, other than writing their inner values to the boxed segment. But they don’t have many extra capabilities either. You’ll use them most often in these situations:</p>
+<p>The principal smart pointer type in Cairo is a <em>box</em>, denoted as <code>Box&lt;T&gt;</code>.
+Manually defining boxes allow you to store data in a specific memory segment of
+the Cairo VM called the <em>boxed segment</em>. This segment is dedicated to store all
+boxed values, and what remains in the execution segment is only a pointer to the
+boxed segment. Whenever you instantiate a new pointer variable of type <code>Box&lt;T&gt;</code>,
+you append the data of type <code>T</code> to the boxed segment.</p>
+<p>Boxes have very little performance overhead, other than writing their inner
+values to the boxed segment. But they don’t have many extra capabilities either.
+You’ll use them most often in these situations:</p>
 <ul>
-<li>When you have a type whose size can’t be known at compile time and you want to use a value of that type in a context that requires an exact size</li>
-<li>When you have a large amount of data and you want to transfer ownership but ensure the data won’t be copied when you do so</li>
+<li>When you have a type whose size can’t be known at compile time and you want to
+use a value of that type in a context that requires an exact size</li>
+<li>When you have a large amount of data and you want to transfer ownership but
+ensure the data won’t be copied when you do so</li>
 </ul>
-<p>We’ll demonstrate the first situation in the <a href="./ch12-02-smart-pointers.html#enabling-recursive-types-with-nullable-boxes">“Enabling Recursive Types with Boxes”</a> section.
-In the second case, transferring ownership of a large amount of data can take a long time because the data is copied around in memory. To improve performance in this situation, we can store the large amount of data in the boxed segment using a box type. Then, only the small amount of pointer data is copied around in memory, while the data it references stays in one place on the boxed segment.</p>
+<p>We’ll demonstrate the first situation in the <a href="./ch12-02-smart-pointers.html#enabling-recursive-types-with-nullable-boxes">“Enabling Recursive Types with
+Boxes”</a> section. In the second case, transferring
+ownership of a large amount of data can take a long time because the data is
+copied around in memory. To improve performance in this situation, we can store
+the large amount of data in the boxed segment using a box type. Then, only the
+small amount of pointer data is copied around in memory, while the data it
+references stays in one place on the boxed segment.</p>
 <h3 id="using-a-boxt-to-store-data-in-the-boxed-segment"><a class="header" href="#using-a-boxt-to-store-data-in-the-boxed-segment">Using a <code>Box&lt;T&gt;</code> to Store Data in the Boxed Segment</a></h3>
-<p>Before we discuss the boxed segment storage use cases for <code>Box&lt;T&gt;</code>, we’ll cover the syntax and how to interact with values stored within a <code>Box&lt;T&gt;</code>.</p>
-<p>Listing 12-1 shows how to use a box to store a value in the boxed segment:</p>
+<p>Before we discuss the boxed segment storage use cases for <code>Box&lt;T&gt;</code>, we’ll cover
+the syntax and how to interact with values stored within a <code>Box&lt;T&gt;</code>.</p>
+<p>Listing 12-1 shows how to use a box to store a value in the boxed
+segment:</p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
     let b = BoxTrait::new(5_u128);
     println!("b = {}", b.unbox())
 }
 </code></pre>
-<p><span class="caption">Listing 12-1: Storing a <code>u128</code> value in the boxed segment using a box</span></p>
-<p>We define the variable <code>b</code> to have the value of a <code>Box</code> that points to the value <code>5</code>, which is stored in the boxed segment. This program will print <code>b = 5</code>; in this case, we can access the data in the box similar to how we would if this data was simply in the execution memory. Putting a single value in a box isn’t very useful, so you won’t use boxes by themselves in this way very often. Having values like a single <code>u128</code> in the execution memory, where they’re stored by default, is more appropriate in the majority of situations. Let’s look at a case where boxes allow us to define types that we wouldn’t be allowed to if we didn’t have boxes.</p>
+<p><code>u128</code> value in the boxed segment using a box</span></p>
+<p>We define the variable <code>b</code> to have the value of a <code>Box</code> that points to the value
+<code>5</code>, which is stored in the boxed segment. This program will print <code>b = 5</code>; in
+this case, we can access the data in the box similar to how we would if this
+data was simply in the execution memory. Putting a single value in a box isn’t
+very useful, so you won’t use boxes by themselves in this way very often. Having
+values like a single <code>u128</code> in the execution memory, where they’re stored by
+default, is more appropriate in the majority of situations. Let’s look at a case
+where boxes allow us to define types that we wouldn’t be allowed to if we didn’t
+have boxes.</p>
 <h3 id="enabling-recursive-types-with-boxes"><a class="header" href="#enabling-recursive-types-with-boxes">Enabling Recursive Types with Boxes</a></h3>
-<p>A value of recursive type can have another value of the same type as part of itself. Recursive types pose an issue because at compile time because Cairo needs to know how much space a type takes up. However, the nesting of values of recursive types could theoretically continue infinitely, so Cairo can’t know how much space the value needs. Because boxes have a known size, we can enable recursive types by inserting a box in the recursive type definition.</p>
-<p>As an example of a recursive type, let’s explore the implementation of a binary tree. The binary tree type we’ll define is straightforward except for the recursion; therefore, the concepts in the example we’ll work with will be useful any time you get into more complex situations involving recursive types.</p>
-<p>A binary tree is a tree data structure in which each node has at most two children, which are referred to as the left child and the right child. The last element of a branch is a leaf, which is a node without children.</p>
-<p>Listing 12-2 shows an attempt to implement a binary tree of <code>u32</code> values. Note that this code won’t compile yet because the <code>BinaryTree</code> type doesn’t have a known size, which we’ll demonstrate.</p>
+<p>A value of recursive type can have another value of the same type as part of
+itself. Recursive types pose an issue because at compile time because Cairo
+needs to know how much space a type takes up. However, the nesting of values of
+recursive types could theoretically continue infinitely, so Cairo can’t know how
+much space the value needs. Because boxes have a known size, we can enable
+recursive types by inserting a box in the recursive type definition.</p>
+<p>As an example of a recursive type, let’s explore the implementation of a binary
+tree. The binary tree type we’ll define is straightforward except for the
+recursion; therefore, the concepts in the example we’ll work with will be useful
+any time you get into more complex situations involving recursive types.</p>
+<p>A binary tree is a tree data structure in which each node has at most two
+children, which are referred to as the left child and the right child. The last
+element of a branch is a leaf, which is a node without children.</p>
+<p>Listing 12-2 shows an attempt to implement a binary
+tree of <code>u32</code> values. Note that this code won’t compile yet because the
+<code>BinaryTree</code> type doesn’t have a known size, which we’ll demonstrate.</p>
 <pre><code class="language-cairo  noplayground">#[derive(Copy, Drop)]
 enum BinaryTree {
     Leaf: u32,
@@ -317,12 +375,20 @@ fn main() {
     let _root = BinaryTree::Node((5, leaf1, node));
 }
 </code></pre>
-<p><span class="caption">Listing 12-2: The first attempt at implementing a binary tree of <code>u32</code> values</span></p>
+<p>12-2: The first attempt at implementing a binary tree
+of <code>u32</code> values</span></p>
 <blockquote>
-<p>Note: We’re implementing a binary tree that holds only u32 values for the purposes of this example. We could have implemented it using generics, as we discussed in Chapter 8, to define a binary tree that could store values of any type.</p>
+<p>Note: We’re implementing a binary tree that holds only u32 values for the
+purposes of this example. We could have implemented it using generics, as we
+discussed in Chapter 8, to define a binary
+tree that could store values of any type.</p>
 </blockquote>
-<p>The root node contains 5 and two child nodes. The left child is a leaf containing 1. The right child is another node containing 4, which in turn has two leaf children: one containing 2 and another containing 3. This structure forms a simple binary tree with a depth of 2.</p>
-<p>If we try to compile the code in listing 12-2, we get the following error:</p>
+<p>The root node contains 5 and two child nodes. The left child is a leaf
+containing 1. The right child is another node containing 4, which in turn has
+two leaf children: one containing 2 and another containing 3. This structure
+forms a simple binary tree with a depth of 2.</p>
+<p>If we try to compile the code in listing 12-2, we get
+the following error:</p>
 <pre><code class="language-plaintext">$ scarb build 
    Compiling listing_recursive_types_wrong v0.1.0 (listings/ch12-advanced-features/listing_recursive_types_wrong/Scarb.toml)
 error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::BinaryTree, listing_recursive_types_wrong::BinaryTree)" has infinite size.
@@ -343,10 +409,25 @@ error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::Binar
 error: could not compile `listing_recursive_types_wrong` due to previous error
 
 </code></pre>
-<p>The error shows this type “has infinite size.” The reason is that we’ve defined <code>BinaryTree</code> with a variant that is recursive: it holds another value of itself directly. As a result, Cairo can’t figure out how much space it needs to store a <code>BinaryTree</code> value.</p>
+<p>The error shows this type “has infinite size.” The reason is that we’ve defined
+<code>BinaryTree</code> with a variant that is recursive: it holds another value of itself
+directly. As a result, Cairo can’t figure out how much space it needs to store a
+<code>BinaryTree</code> value.</p>
 <!-- TODO: explain why we get this error? -->
-<p>Hopefully, we can fix this error by using a <code>Box&lt;T&gt;</code> to store the recursive variant of <code>BinaryTree</code>. Because a <code>Box&lt;T&gt;</code> is a pointer, Cairo always knows how much space a <code>Box&lt;T&gt;</code> needs: a pointer’s size doesn’t change based on the amount of data it’s pointing to. This means we can put a <code>Box&lt;T&gt;</code> inside the <code>Node</code> variant instead of another <code>BinaryTree</code> value directly. The <code>Box&lt;T&gt;</code> will point to the child <code>BinaryTree</code> values that will be stored in their own segment, rather than inside the <code>Node</code> variant. Conceptually, we still have a binary tree, created with binary trees holding other binary trees, but this implementation is now more like placing the items next to one another rather than inside one another.</p>
-<p>We can change the definition of the <code>BinaryTree</code> enum in Listing 12-2 and the usage of the <code>BinaryTree</code> in Listing 12-2 to the code in Listing 12-3, which will compile:</p>
+<p>Hopefully, we can fix this error by using a <code>Box&lt;T&gt;</code> to store the recursive
+variant of <code>BinaryTree</code>. Because a <code>Box&lt;T&gt;</code> is a pointer, Cairo always knows how
+much space a <code>Box&lt;T&gt;</code> needs: a pointer’s size doesn’t change based on the amount
+of data it’s pointing to. This means we can put a <code>Box&lt;T&gt;</code> inside the <code>Node</code>
+variant instead of another <code>BinaryTree</code> value directly. The <code>Box&lt;T&gt;</code> will point
+to the child <code>BinaryTree</code> values that will be stored in their own segment,
+rather than inside the <code>Node</code> variant. Conceptually, we still have a binary
+tree, created with binary trees holding other binary trees, but this
+implementation is now more like placing the items next to one another rather
+than inside one another.</p>
+<p>We can change the definition of the <code>BinaryTree</code> enum in Listing
+12-2 and the usage of the <code>BinaryTree</code> in Listing
+12-2 to the code in Listing 12-3,
+which will compile:</p>
 <pre><code class="language-cairo">mod display;
 use display::DebugBinaryTree;
 
@@ -368,15 +449,30 @@ fn main() {
     println!("{:?}", root);
 }
 </code></pre>
-<p><span class="caption">Listing 12-3: Defining a recursive Binary Tree using Boxes</span></p>
-<p>The <code>Node</code> variant now holds a <code>(u32, Box&lt;BinaryTree&gt;, Box&lt;BinaryTree&gt;)</code>, indicating that the <code>Node</code> variant will store a <code>u32</code> value, and two <code>Box&lt;BinaryTree&gt;</code> values. Now, we know that the <code>Node</code> variant will need a size of <code>u32</code> plus the size of the two <code>Box&lt;BinaryTree&gt;</code> values. By using a box, we’ve broken the infinite, recursive chain, so the compiler can figure out the size it needs to store a <code>BinaryTree</code> value.</p>
+<p>12-3: Defining a recursive Binary Tree using Boxes</span></p>
+<p>The <code>Node</code> variant now holds a <code>(u32, Box&lt;BinaryTree&gt;, Box&lt;BinaryTree&gt;)</code>,
+indicating that the <code>Node</code> variant will store a <code>u32</code> value, and two
+<code>Box&lt;BinaryTree&gt;</code> values. Now, we know that the <code>Node</code> variant will need a size
+of <code>u32</code> plus the size of the two <code>Box&lt;BinaryTree&gt;</code> values. By using a box,
+we’ve broken the infinite, recursive chain, so the compiler can figure out the
+size it needs to store a <code>BinaryTree</code> value.</p>
 <!--  Figure {{label Node-size}} shows what the Node variant looks like now. -->
 <h3 id="using-boxes-to-improve-performance"><a class="header" href="#using-boxes-to-improve-performance">Using Boxes to Improve Performance</a></h3>
-<p>Passing pointers between functions allows you to reference data without copying the data itself. Using boxes can improve performance as it allows you to pass a pointer to some data from one function to another, without the need to copy the entire data in memory before performing the function call. Instead of having to write <code>n</code> values into memory before calling a function, only a single value is written, corresponding to the pointer to the data. If the data stored in the box is very large, the performance improvement can be significant, as you would save <code>n-1</code> memory operations before each function call.</p>
+<p>Passing pointers between functions allows you to reference data without copying
+the data itself. Using boxes can improve performance as it allows you to pass a
+pointer to some data from one function to another, without the need to copy the
+entire data in memory before performing the function call. Instead of having to
+write <code>n</code> values into memory before calling a function, only a single value is
+written, corresponding to the pointer to the data. If the data stored in the box
+is very large, the performance improvement can be significant, as you would save
+<code>n-1</code> memory operations before each function call.</p>
 <blockquote>
-<p>Note: This only works if the data stored in the box is not mutated. If the data is mutated, a new <code>Box&lt;T&gt;</code> will be created, which will require copying the data to the new box.</p>
+<p>Note: This only works if the data stored in the box is not mutated. If the
+data is mutated, a new <code>Box&lt;T&gt;</code> will be created, which will require copying
+the data to the new box.</p>
 </blockquote>
-<p>Let's take a look at the code in Listing 12-4, which shows two ways of passing data to a function: by value and by pointer.</p>
+<p>Let's take a look at the code in Listing 12-4, which shows two ways of
+passing data to a function: by value and by pointer.</p>
 <pre><code class="language-cairo">#[derive(Drop)]
 struct Cart {
     paid: bool,
@@ -402,24 +498,43 @@ fn main() {
     pass_pointer(new_box);
 }
 </code></pre>
-<p><span class="caption">Listing 12-4: Storing large amounts of data in a box for performance.</span></p>
+<p>of data in a box for performance.</span></p>
 <p>The <code>main</code> function includes 2 function calls:</p>
 <ul>
 <li><code>pass_data</code> that takes a variable of type <code>Cart</code>.</li>
 <li><code>pass_pointer</code> that takes a pointer of type <code>Box&lt;Cart&gt;</code>.</li>
 </ul>
-<p>When passing data to a function, the entire data is copied into the last available memory cells right before the function call. Calling <code>pass_data</code> will copy all 3 fields of <code>Cart</code> to memory, while <code>pass_pointer</code> only requires the copy of the <code>new_box</code> pointer which is of size 1.</p>
+<p>When passing data to a function, the entire data is copied into the last
+available memory cells right before the function call. Calling <code>pass_data</code> will
+copy all 3 fields of <code>Cart</code> to memory, while <code>pass_pointer</code> only requires the
+copy of the <code>new_box</code> pointer which is of size 1.</p>
 <div align="center">
     <img src="box_memory.png" alt="box memory" width="500px"/>
 <div align="center">
     </div>
     <span class="caption">CairoVM Memory layout when using boxes</span>
 </div>
-<p>The illustration above demonstrates how the memory behaves in both cases. The first instance of <code>Cart</code> is stored in the execution segment, and we need to copy all its fields to memory before calling the <code>pass_data</code> function. The second instance of <code>Cart</code> is stored in the boxed segment, and the pointer to it is stored in the execution segment. When calling the <code>pass_pointer</code> function, only the pointer to the struct is copied to memory right before the function call. In both cases, however, instantiating the struct will store all its values in the execution segment: the boxed segment can only be filled with data taken from the execution segment.</p>
+<p>The illustration above demonstrates how the memory behaves in both cases. The
+first instance of <code>Cart</code> is stored in the execution segment, and we need to copy
+all its fields to memory before calling the <code>pass_data</code> function. The second
+instance of <code>Cart</code> is stored in the boxed segment, and the pointer to it is
+stored in the execution segment. When calling the <code>pass_pointer</code> function, only
+the pointer to the struct is copied to memory right before the function call. In
+both cases, however, instantiating the struct will store all its values in the
+execution segment: the boxed segment can only be filled with data taken from the
+execution segment.</p>
 <h2 id="the-nullablet-type-for-dictionaries"><a class="header" href="#the-nullablet-type-for-dictionaries">The <code>Nullable&lt;T&gt;</code> Type for Dictionaries</a></h2>
-<p><code>Nullable&lt;T&gt;</code> is another type of smart pointer that can either point to a value or be <code>null</code> in the absence of value. It is defined at the Sierra level. This type is mainly used in dictionaries that contain types that don't implement the <code>zero_default</code> method of the <code>Felt252DictValue&lt;T&gt;</code> trait (i.e., arrays and structs).</p>
-<p>If we try to access an element that does not exist in a dictionary, the code will fail if the <code>zero_default</code> method cannot be called.</p>
-<p><a href="./ch03-02-dictionaries.html#dictionaries-of-types-not-supported-natively">Chapter 3</a> about dictionaries thoroughly explains how to store a <code>Span&lt;felt252&gt;</code> variable inside a dictionary using the <code>Nullable&lt;T&gt;</code> type. Please refer to it for further information.</p>
+<p><code>Nullable&lt;T&gt;</code> is another type of smart pointer that can either point to a value
+or be <code>null</code> in the absence of value. It is defined at the Sierra level. This
+type is mainly used in dictionaries that contain types that don't implement the
+<code>zero_default</code> method of the <code>Felt252DictValue&lt;T&gt;</code> trait (i.e., arrays and
+structs).</p>
+<p>If we try to access an element that does not exist in a dictionary, the code
+will fail if the <code>zero_default</code> method cannot be called.</p>
+<p><a href="./ch03-02-dictionaries.html#dictionaries-of-types-not-supported-natively">Chapter 3</a> about
+dictionaries thoroughly explains how to store a <code>Span&lt;felt252&gt;</code> variable inside
+a dictionary using the <code>Nullable&lt;T&gt;</code> type. Please refer to it for further
+information.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch12-02-smart_pointers&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Smart pointers in Cairo possess additional metadata and capabilities beyond merely serving as a reference to a value.\nThey offer memory management features that extend beyond simple referencing, including strict type checking and ownership rules that enforce memory safety.\nCairo provides several explicit smart pointer types, such as `Box` and `Nullable`, but other types like `Array` of `Felt252Dict` are also a form of smart pointers.\nThese smart pointers ensure memory safety through strict ownership rules, preventing common issues like null dereferences.\n&quot;,&quot;id&quot;:&quot;dbf869eb-b27a-41d0-b428-20d9ae00498b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Smart pointers store a reference to a value but do not provide any automatic memory management or ownership tracking.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Smart pointers help prevent common memory issues such as dereferences unallocated memory and re-writing to existing cells.&quot;,&quot;Smart pointers ensure proper initialization and prevent access to uninitialized or invalid memory.&quot;,&quot;Smart pointers such as `Box` and `Nullable` enable efficient passing of large data by moving or sharing ownership without expensive copying.&quot;],&quot;prompt&quot;:&quot;Which one of the following is **NOT** true about smart pointers?&quot;}},{&quot;context&quot;:&quot;The `student1` variable was first instantiated as a smart pointer to an instance of the struct `Student`.\nWhen we assigned `student1` to a new variable `student2`, we merely copied the _smart pointer_ to the previously created struct,\nso both variables referred to the same struct in memory.\nOnce `student1` was reinstantiated with a new smart pointer to a new `Student` instance, the `student2` variable\nstill referred to the original struct, so printing `student2.name` displayed `\&quot;Peter\&quot;`.\n&quot;,&quot;id&quot;:&quot;8d7ac906-4579-4d47-8345-4ec30a5f41f3&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;Peter&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[derive(Drop)]\nstruct Student {\n    name: ByteArray,\n    age: u8,\n    id: u32\n}\n\n#[executable]\nfn main() {\n    let mut student1 = BoxTrait::new(Student { name: \&quot;Peter\&quot;, age: 12, id: 12345 });\n    let student2 = student1;\n    student1 = BoxTrait::new(Student { name: \&quot;James\&quot;, age: 18, id: 56789 });\n    println!(\&quot;{}\&quot;, student2.unbox().name);\n}\n&quot;}},{&quot;context&quot;:&quot;The `Index out of bounds` error occurs due to an attempt to access\nthe fifth element of a four-element array, which is an unallocated memory cell.\n&quot;,&quot;id&quot;:&quot;df5c2298-4896-459e-ac4a-bc5e47582a13&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Panics with an 'Index out of bounds' error&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Outputs `Exams 90`&quot;,&quot;Outputs 'No value found' panic because it implements the `zero_default` method&quot;,&quot;Fails to compile&quot;],&quot;prompt&quot;:&quot;Which of the following statement is TRUE when the following program is run with `scarb execute`?\n```\nuse core::nullable::{NullableTrait, match_nullable, FromNullableResult};\n\n#[executable]\nfn main() {\n    let mut scoreSheet: Felt252Dict&lt;Nullable&lt;Span&lt;felt252&gt;&gt;&gt; = Default::default();\n\n    let exams = array![60, 70, 80, 90];\n    scoreSheet.insert(0, NullableTrait::new(exams.span()));\n\n    let firstSession = scoreSheet.get(0);\n\n    let record = match match_nullable(firstSession) {\n        FromNullableResult::Null =&gt; panic!(\&quot;No value found\&quot;),\n        FromNullableResult::NotNull(firstSession) =&gt; firstSession.unbox(),\n    };\n    println!(\&quot;Exams {}\&quot;, *record.at(4));\n}\n```\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -456,24 +571,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,18 +274,37 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="storing-key-value-pairs-with-mappings"><a class="header" href="#storing-key-value-pairs-with-mappings">Storing Key-Value Pairs with Mappings</a></h1>
-<p>Storage mappings in Cairo provide a way to associate keys with values and persist them in the contract's storage. Unlike traditional hash tables, storage mappings do not store the key data itself; instead, they use the hash of the key to compute an address that corresponds to the storage slot where the corresponding value is stored. Therefore, it is not possible to iterate over the keys of a storage mapping.</p>
+<p>Storage mappings in Cairo provide a way to associate keys with values and
+persist them in the contract's storage. Unlike traditional hash tables, storage
+mappings do not store the key data itself; instead, they use the hash of the key
+to compute an address that corresponds to the storage slot where the
+corresponding value is stored. Therefore, it is not possible to iterate over the
+keys of a storage mapping.</p>
 <div align="center">
     <img src="mappings.png" alt="mappings" width="500px"/>
 <div align="center">
     </div>
     <span class="caption">Figure 15-1: Mapping keys to values in storage</span>
 </div>
-<p>Mappings do not have a concept of length or whether a key-value pair is set. All values are by default set to 0. As such, the only way to remove an entry from a mapping is to set its value to the default value for the type, which would be <code>0</code> for the <code>u64</code> type.</p>
-<p>The <code>Map</code> type, provided by the Cairo core library, inside the <code>core::starknet::storage</code> module, is used to declare mappings in contracts.</p>
-<p>To declare a mapping, use the <code>Map</code> type enclosed in angle brackets <code>&lt;&gt;</code>, specifying the key and value types. In Listing 15-2, we create a simple contract that stores values mapped to the caller's address.</p>
+<p>Mappings do not have a concept of length or whether a key-value pair is set. All
+values are by default set to 0. As such, the only way to remove an entry from a
+mapping is to set its value to the default value for the type, which would be
+<code>0</code> for the <code>u64</code> type.</p>
+<p>The <code>Map</code> type, provided by the Cairo core library, inside the
+<code>core::starknet::storage</code> module, is used to declare mappings in contracts.</p>
+<p>To declare a mapping, use the <code>Map</code> type enclosed in angle brackets <code>&lt;&gt;</code>,
+specifying the key and value types. In Listing 15-2, we
+create a simple contract that stores values mapped to the caller's address.</p>
 <blockquote>
-<p>The <code>Felt252Dict</code> type is a <strong>memory</strong> type that cannot be stored in contract storage. For persistent storage of key-value pairs, use the <code>Map</code> type, which is a [phantom type][phantom types] designed specifically for contract storage. However, <code>Map</code> has limitations: it can't be instantiated as a regular variable, used as a function parameter, or included as a member in regular structs. <code>Map</code> can only be used as a storage variable within a contract's storage struct. To work with the contents of a <code>Map</code> in memory or perform complex operations, you'll need to copy its elements to and from a <code>Felt252Dict</code> or other suitable data structure.</p>
+<p>The <code>Felt252Dict</code> type is a <strong>memory</strong> type that cannot be stored in contract
+storage. For persistent storage of key-value pairs, use the <code>Map</code> type, which
+is a [phantom type][phantom types] designed specifically for contract storage.
+However, <code>Map</code> has limitations: it can't be instantiated as a regular
+variable, used as a function parameter, or included as a member in regular
+structs. <code>Map</code> can only be used as a storage variable within a contract's
+storage struct. To work with the contents of a <code>Map</code> in memory or perform
+complex operations, you'll need to copy its elements to and from a
+<code>Felt252Dict</code> or other suitable data structure.</p>
 </blockquote>
 <h2 id="declaring-and-using-storage-mappings"><a class="header" href="#declaring-and-using-storage-mappings">Declaring and Using Storage Mappings</a></h2>
 <!-- TODO PHANTOM TYPES -->
@@ -326,8 +346,13 @@ mod UserValues {
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 15-2: Declaring a storage mapping in the Storage struct</span></p>
-<p>To read the value corresponding to a key in a mapping, you first need to retrieve the storage pointer associated with that key. This is done by calling the <code>entry</code> method on the storage mapping variable, passing in the key as a parameter. Once you have the entry path, you can call the <code>read</code> function on it to retrieve the stored value.</p>
+<p>15-2: Declaring a storage mapping in the Storage
+struct</span></p>
+<p>To read the value corresponding to a key in a mapping, you first need to
+retrieve the storage pointer associated with that key. This is done by calling
+the <code>entry</code> method on the storage mapping variable, passing in the key as a
+parameter. Once you have the entry path, you can call the <code>read</code> function on it
+to retrieve the stored value.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -365,7 +390,9 @@ mod UserValues {
 </span><span class="boring">mod tests;
 </span><span class="boring">
 </span></code></pre>
-<p>Similarly, to write a value in a storage mapping, you need to retrieve the storage pointer corresponding to the key. Once you have this storage pointer, you can call the <code>write</code> function on it with the value to write.</p>
+<p>Similarly, to write a value in a storage mapping, you need to retrieve the
+storage pointer corresponding to the key. Once you have this storage pointer,
+you can call the <code>write</code> function on it with the value to write.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -404,8 +431,15 @@ mod UserValues {
 </span><span class="boring">
 </span></code></pre>
 <h2 id="nested-mappings"><a class="header" href="#nested-mappings">Nested Mappings</a></h2>
-<p>You can also create more complex mappings with multiple keys. To illustrate this, we'll implement a contract representing warehouses assigned to users, where each user can store multiple items with their respective quantities.</p>
-<p>The <code>user_warehouse</code> mapping is a storage mapping that maps <code>ContractAddress</code> to another mapping that maps <code>u64</code> (item ID) to <code>u64</code> (quantity). This can be implemented by declaring a <code>Map&lt;ContractAddress, Map&lt;u64, u64&gt;&gt;</code> in the storage struct. Each <code>ContractAddress</code> key in the <code>user_warehouse</code> mapping corresponds to a user's warehouse, and each user's warehouse contains a mapping of item IDs to their respective quantities.</p>
+<p>You can also create more complex mappings with multiple keys. To illustrate
+this, we'll implement a contract representing warehouses assigned to users,
+where each user can store multiple items with their respective quantities.</p>
+<p>The <code>user_warehouse</code> mapping is a storage mapping that maps <code>ContractAddress</code> to
+another mapping that maps <code>u64</code> (item ID) to <code>u64</code> (quantity). This can be
+implemented by declaring a <code>Map&lt;ContractAddress, Map&lt;u64, u64&gt;&gt;</code> in the storage
+struct. Each <code>ContractAddress</code> key in the <code>user_warehouse</code> mapping corresponds
+to a user's warehouse, and each user's warehouse contains a mapping of item IDs
+to their respective quantities.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -509,7 +543,10 @@ mod UserValues {
 </span><span class="boring">    }
 </span><span class="boring">}
 </span></code></pre>
-<p>In this case, the same principle applies for accessing the stored values. You need to traverse the keys step by step, using the <code>entry</code> method to get the storage path to the next key in the sequence, and finally calling <code>read</code> or <code>write</code> on the innermost mapping.</p>
+<p>In this case, the same principle applies for accessing the stored values. You
+need to traverse the keys step by step, using the <code>entry</code> method to get the
+storage path to the next key in the sequence, and finally calling <code>read</code> or
+<code>write</code> on the innermost mapping.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
 </span><span class="boring">#[starknet::interface]
@@ -614,19 +651,27 @@ mod UserValues {
 </span><span class="boring">}
 </span></code></pre>
 <h2 id="storage-address-computation-for-mappings"><a class="header" href="#storage-address-computation-for-mappings">Storage Address Computation for Mappings</a></h2>
-<p>The address in storage of a variable stored in a mapping is computed according to the following rules:</p>
+<p>The address in storage of a variable stored in a mapping is computed according
+to the following rules:</p>
 <ul>
-<li>For a single key <code>k</code>, the address of the value at key <code>k</code> is <code>h(sn_keccak(variable_name), k)</code>, where <code>h</code> is the Pedersen hash and the final value is taken modulo \( {2^{251}} - 256\).</li>
-<li>For multiple keys, the address is computed as <code>h(...h(h(sn_keccak(variable_name), k_1), k_2), ..., k_n)</code>, with <code>k_1, ..., k_n</code> being all keys that constitute the mapping.</li>
+<li>For a single key <code>k</code>, the address of the value at key <code>k</code> is
+<code>h(sn_keccak(variable_name), k)</code>, where <code>h</code> is the Pedersen hash and the final
+value is taken modulo \( {2^{251}} - 256\).</li>
+<li>For multiple keys, the address is computed as
+<code>h(...h(h(sn_keccak(variable_name), k_1), k_2), ..., k_n)</code>, with
+<code>k_1, ..., k_n</code> being all keys that constitute the mapping.</li>
 </ul>
-<p>If the key of a mapping is a struct, each element of the struct constitutes a key. Moreover, the struct should implement the <code>Hash</code> trait, which can be derived with the <code>#[derive(Hash)]</code> attribute.</p>
+<p>If the key of a mapping is a struct, each element of the struct constitutes a
+key. Moreover, the struct should implement the <code>Hash</code> trait, which can be
+derived with the <code>#[derive(Hash)]</code> attribute.</p>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
 <ul>
 <li>Storage mappings allow you to map keys to values in contract storage.</li>
 <li>Use the <code>Map</code> type to declare mappings.</li>
 <li>Access mappings using the <code>entry</code> method and <code>read</code>/<code>write</code> functions.</li>
 <li>Mappings can contain other mappings, creating nested storage mappings.</li>
-<li>The address of a mapping variable is computed using the <code>sn_keccak</code> and the Pedersen hash functions.</li>
+<li>The address of a mapping variable is computed using the <code>sn_keccak</code> and the
+Pedersen hash functions.</li>
 </ul>
 
                     </main>
@@ -663,24 +708,6 @@ mod UserValues {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

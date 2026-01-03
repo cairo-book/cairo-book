@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -277,10 +278,10 @@
 project provides. We’ll look at automatic formatting, quick ways to apply
 warning fixes, a linter, and integrating with IDEs.</p>
 <h2 id="automatic-formatting-with-scarb-fmt"><a class="header" href="#automatic-formatting-with-scarb-fmt">Automatic Formatting with <code>scarb fmt</code></a></h2>
-<p>Scarb projects can be formatted using the <code>scarb fmt</code> command.
-If you're using the Cairo binaries directly, you can run <code>cairo-format</code> instead.
-Many collaborative projects use <code>scarb fmt</code> to prevent arguments about which
-style to use when writing Cairo: everyone formats their code using the tool.</p>
+<p>Scarb projects can be formatted using the <code>scarb fmt</code> command. If you're using
+the Cairo binaries directly, you can run <code>cairo-format</code> instead. Many
+collaborative projects use <code>scarb fmt</code> to prevent arguments about which style to
+use when writing Cairo: everyone formats their code using the tool.</p>
 <p>To format any Cairo project, enter the following inside the project directory:</p>
 <pre><code class="language-bash">scarb fmt
 </code></pre>
@@ -294,16 +295,18 @@ let table: Array&lt;ByteArray&gt; = array![
 </code></pre>
 <h2 id="ide-integration-using-cairo-language-server"><a class="header" href="#ide-integration-using-cairo-language-server">IDE Integration Using <code>cairo-language-server</code></a></h2>
 <p>To help IDE integration, the Cairo community recommends using the
-<a href="https://github.com/software-mansion/cairols"><code>cairo-language-server</code></a><!-- ignore -->. This tool is a set of
-compiler-centric utilities that speaks the <a href="http://langserver.org/">Language Server Protocol</a><!--
+<a href="https://github.com/software-mansion/cairols"><code>cairo-language-server</code></a><!-- ignore -->. This tool is a
+set of compiler-centric utilities that speaks the <a href="http://langserver.org/">Language Server
+Protocol</a><!--
 ignore -->, which is a specification for IDEs and programming languages to
-communicate with each other. Different clients can use <code>cairo-language-server</code>, such as
-<a href="https://marketplace.visualstudio.com/items?itemName=starkware.cairo1">the Cairo extension for Visual Studio Code</a>.</p>
-<p>Visit the <code>vscode-cairo</code> <a href="https://marketplace.visualstudio.com/items?itemName=starkware.cairo1">page</a><!-- ignore -->
-to install it on VSCode. You will get abilities such as autocompletion, jump to
-definition, and inline errors.</p>
+communicate with each other. Different clients can use <code>cairo-language-server</code>,
+such as <a href="https://marketplace.visualstudio.com/items?itemName=starkware.cairo1">the Cairo extension for Visual Studio Code</a>.</p>
+<p>Visit the <code>vscode-cairo</code> <a href="https://marketplace.visualstudio.com/items?itemName=starkware.cairo1">page</a><!-- ignore --> to install it on
+VSCode. You will get abilities such as autocompletion, jump to definition, and
+inline errors.</p>
 <blockquote>
-<p>Note: If you have Scarb installed, it should work out of the box with the Cairo VSCode extension, without a manual installation of the language server.</p>
+<p>Note: If you have Scarb installed, it should work out of the box with the
+Cairo VSCode extension, without a manual installation of the language server.</p>
 </blockquote>
 
                     </main>
@@ -340,24 +343,6 @@ definition, and inline errors.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

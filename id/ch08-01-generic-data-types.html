@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,11 +274,24 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="generic-data-types"><a class="header" href="#generic-data-types">Generic Data Types</a></h1>
-<p>We use generics to create definitions for item declarations, such as structs and functions, which we can then use with many different concrete data types. In Cairo, we can use generics when defining functions, structs, enums, traits, implementations and methods. In this chapter, we are going to take a look at how to effectively use generic types with all of them.</p>
-<p>Generics allow us to write reusable code that works with many types, thus avoiding code duplication, while enhancing code maintainability.</p>
+<p>We use generics to create definitions for item declarations, such as structs and
+functions, which we can then use with many different concrete data types. In
+Cairo, we can use generics when defining functions, structs, enums, traits,
+implementations and methods. In this chapter, we are going to take a look at how
+to effectively use generic types with all of them.</p>
+<p>Generics allow us to write reusable code that works with many types, thus
+avoiding code duplication, while enhancing code maintainability.</p>
 <h2 id="generic-functions"><a class="header" href="#generic-functions">Generic Functions</a></h2>
-<p>Making a function generic means it can operate on different types, avoiding the need for multiple, type-specific implementations. This leads to significant code reduction and increases the flexibility of the code.</p>
-<p>When defining a function that uses generics, we place the generics in the function signature, where we would usually specify the data types of the parameter and return value. For example, imagine we want to create a function which given two <code>Array</code> of items, will return the largest one. If we need to perform this operation for lists of different types, then we would have to redefine the function each time. Luckily we can implement the function once using generics and move on to other tasks.</p>
+<p>Making a function generic means it can operate on different types, avoiding the
+need for multiple, type-specific implementations. This leads to significant code
+reduction and increases the flexibility of the code.</p>
+<p>When defining a function that uses generics, we place the generics in the
+function signature, where we would usually specify the data types of the
+parameter and return value. For example, imagine we want to create a function
+which given two <code>Array</code> of items, will return the largest one. If we need to
+perform this operation for lists of different types, then we would have to
+redefine the function each time. Luckily we can implement the function once
+using generics and move on to other tasks.</p>
 <pre><code class="language-cairo">// Specify generic type T between the angulars
 fn largest_list&lt;T&gt;(l1: Array&lt;T&gt;, l2: Array&lt;T&gt;) -&gt; Array&lt;T&gt; {
     if l1.len() &gt; l2.len() {
@@ -297,7 +311,15 @@ fn main() {
     let l3 = largest_list(l1, l2);
 }
 </code></pre>
-<p>The <code>largest_list</code> function compares two lists of the same type and returns the one with more elements and drops the other. If you compile the previous code, you will notice that it will fail with an error saying that there are no traits defined for dropping an array of a generic type. This happens because the compiler has no way to guarantee that an <code>Array&lt;T&gt;</code> is droppable when executing the <code>main</code> function. In order to drop an array of <code>T</code>, the compiler must first know how to drop <code>T</code>. This can be fixed by specifying in the function signature of <code>largest_list</code> that <code>T</code> must implement the <code>Drop</code> trait. The correct function definition of <code>largest_list</code> is as follows:</p>
+<p>The <code>largest_list</code> function compares two lists of the same type and returns the
+one with more elements and drops the other. If you compile the previous code,
+you will notice that it will fail with an error saying that there are no traits
+defined for dropping an array of a generic type. This happens because the
+compiler has no way to guarantee that an <code>Array&lt;T&gt;</code> is droppable when executing
+the <code>main</code> function. In order to drop an array of <code>T</code>, the compiler must first
+know how to drop <code>T</code>. This can be fixed by specifying in the function signature
+of <code>largest_list</code> that <code>T</code> must implement the <code>Drop</code> trait. The correct function
+definition of <code>largest_list</code> is as follows:</p>
 <pre><code class="language-cairo">fn largest_list&lt;T, impl TDrop: Drop&lt;T&gt;&gt;(l1: Array&lt;T&gt;, l2: Array&lt;T&gt;) -&gt; Array&lt;T&gt; {
     if l1.len() &gt; l2.len() {
         l1
@@ -306,10 +328,23 @@ fn main() {
     }
 }
 </code></pre>
-<p>The new <code>largest_list</code> function includes in its definition the requirement that whatever generic type is placed there, it must be droppable. This is what we call <em>trait bounds</em>. The <code>main</code> function remains unchanged, the compiler is smart enough to deduce which concrete type is being used and if it implements the <code>Drop</code> trait.</p>
+<p>The new <code>largest_list</code> function includes in its definition the requirement that
+whatever generic type is placed there, it must be droppable. This is what we
+call <em>trait bounds</em>. The <code>main</code> function remains unchanged, the compiler is
+smart enough to deduce which concrete type is being used and if it implements
+the <code>Drop</code> trait.</p>
 <h3 id="constraints-for-generic-types"><a class="header" href="#constraints-for-generic-types">Constraints for Generic Types</a></h3>
-<p>When defining generic types, it is useful to have information about them. Knowing which traits a generic type implements allows us to use it more effectively in a function's logic at the cost of constraining the generic types that can be used with the function. We saw an example of this previously by adding the <code>TDrop</code> implementation as part of the generic arguments of <code>largest_list</code>. While <code>TDrop</code> was added to satisfy the compiler's requirements, we can also add constraints to benefit our function logic.</p>
-<p>Imagine we have a list of elements of some generic type <code>T</code>, and we want to find the smallest element among them. Initially, we know that for an element of type <code>T</code> to be comparable, it must implement the <code>PartialOrd</code> trait. The resulting function would be:</p>
+<p>When defining generic types, it is useful to have information about them.
+Knowing which traits a generic type implements allows us to use it more
+effectively in a function's logic at the cost of constraining the generic types
+that can be used with the function. We saw an example of this previously by
+adding the <code>TDrop</code> implementation as part of the generic arguments of
+<code>largest_list</code>. While <code>TDrop</code> was added to satisfy the compiler's requirements,
+we can also add constraints to benefit our function logic.</p>
+<p>Imagine we have a list of elements of some generic type <code>T</code>, and we want to find
+the smallest element among them. Initially, we know that for an element of type
+<code>T</code> to be comparable, it must implement the <code>PartialOrd</code> trait. The resulting
+function would be:</p>
 <pre><code class="language-cairo">// Given a list of T get the smallest one
 // The PartialOrd trait implements comparison operations for T
 fn smallest_element&lt;T, impl TPartialOrd: PartialOrd&lt;T&gt;&gt;(list: @Array&lt;T&gt;) -&gt; T {
@@ -340,8 +375,19 @@ fn main() {
     assert!(s == 3);
 }
 </code></pre>
-<p>The <code>smallest_element</code> function uses a generic type <code>T</code> that implements the <code>PartialOrd</code> trait, takes a snapshot of an <code>Array&lt;T&gt;</code> as a parameter and returns a copy of the smallest element. Because the parameter is of type <code>@Array&lt;T&gt;</code>, we no longer need to drop it at the end of the execution and so we are not required to implement the <code>Drop</code> trait for <code>T</code> as well. Why does it not compile then?</p>
-<p>When indexing on <code>list</code>, the value results in a snap of the indexed element, and unless <code>PartialOrd</code> is implemented for <code>@T</code> we need to desnap the element using <code>*</code>. The <code>*</code> operation requires a copy from <code>@T</code> to <code>T</code>, which means that <code>T</code> needs to implement the <code>Copy</code> trait. After copying an element of type <code>@T</code> to <code>T</code>, there are now variables with type <code>T</code> that need to be dropped, requiring <code>T</code> to implement the <code>Drop</code> trait as well. We must then add both <code>Drop</code> and <code>Copy</code> traits implementation for the function to be correct. After updating the <code>smallest_element</code> function the resulting code would be:</p>
+<p>The <code>smallest_element</code> function uses a generic type <code>T</code> that implements the
+<code>PartialOrd</code> trait, takes a snapshot of an <code>Array&lt;T&gt;</code> as a parameter and returns
+a copy of the smallest element. Because the parameter is of type <code>@Array&lt;T&gt;</code>, we
+no longer need to drop it at the end of the execution and so we are not required
+to implement the <code>Drop</code> trait for <code>T</code> as well. Why does it not compile then?</p>
+<p>When indexing on <code>list</code>, the value results in a snap of the indexed element, and
+unless <code>PartialOrd</code> is implemented for <code>@T</code> we need to desnap the element using
+<code>*</code>. The <code>*</code> operation requires a copy from <code>@T</code> to <code>T</code>, which means that <code>T</code>
+needs to implement the <code>Copy</code> trait. After copying an element of type <code>@T</code> to
+<code>T</code>, there are now variables with type <code>T</code> that need to be dropped, requiring
+<code>T</code> to implement the <code>Drop</code> trait as well. We must then add both <code>Drop</code> and
+<code>Copy</code> traits implementation for the function to be correct. After updating the
+<code>smallest_element</code> function the resulting code would be:</p>
 <pre><code class="language-cairo">fn smallest_element&lt;T, impl TPartialOrd: PartialOrd&lt;T&gt;, impl TCopy: Copy&lt;T&gt;, impl TDrop: Drop&lt;T&gt;&gt;(
     list: @Array&lt;T&gt;,
 ) -&gt; T {
@@ -359,9 +405,16 @@ fn main() {
 }
 </code></pre>
 <h3 id="anonymous-generic-implementation-parameter--operator"><a class="header" href="#anonymous-generic-implementation-parameter--operator">Anonymous Generic Implementation Parameter (<code>+</code> Operator)</a></h3>
-<p>Until now, we have always specified a name for each implementation of the required generic trait: <code>TPartialOrd</code> for <code>PartialOrd&lt;T&gt;</code>, <code>TDrop</code> for <code>Drop&lt;T&gt;</code>, and <code>TCopy</code> for <code>Copy&lt;T&gt;</code>.</p>
-<p>However, most of the time, we don't use the implementation in the function body; we only use it as a constraint. In these cases, we can use the <code>+</code> operator to specify that the generic type must implement a trait without naming the implementation. This is referred to as an <em>anonymous generic implementation parameter</em>.</p>
-<p>For example, <code>+PartialOrd&lt;T&gt;</code> is equivalent to <code>impl TPartialOrd: PartialOrd&lt;T&gt;</code>.</p>
+<p>Until now, we have always specified a name for each implementation of the
+required generic trait: <code>TPartialOrd</code> for <code>PartialOrd&lt;T&gt;</code>, <code>TDrop</code> for
+<code>Drop&lt;T&gt;</code>, and <code>TCopy</code> for <code>Copy&lt;T&gt;</code>.</p>
+<p>However, most of the time, we don't use the implementation in the function body;
+we only use it as a constraint. In these cases, we can use the <code>+</code> operator to
+specify that the generic type must implement a trait without naming the
+implementation. This is referred to as an <em>anonymous generic implementation
+parameter</em>.</p>
+<p>For example, <code>+PartialOrd&lt;T&gt;</code> is equivalent to
+<code>impl TPartialOrd: PartialOrd&lt;T&gt;</code>.</p>
 <p>We can rewrite the <code>smallest_element</code> function signature as follows:</p>
 <pre><code class="language-cairo">fn smallest_element&lt;T, +PartialOrd&lt;T&gt;, +Copy&lt;T&gt;, +Drop&lt;T&gt;&gt;(list: @Array&lt;T&gt;) -&gt; T {
 <span class="boring">    let mut smallest = *list[0];
@@ -374,7 +427,12 @@ fn main() {
 </span><span class="boring">}
 </span></code></pre>
 <h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
-<p>We can also define structs to use a generic type parameter for one or more fields using the <code>&lt;&gt;</code> syntax, similar to function definitions. First, we declare the name of the type parameter inside the angle brackets just after the name of the struct. Then we use the generic type in the struct definition where we would otherwise specify concrete data types. The next code example shows the definition <code>Wallet&lt;T&gt;</code> which has a <code>balance</code> field of type <code>T</code>.</p>
+<p>We can also define structs to use a generic type parameter for one or more
+fields using the <code>&lt;&gt;</code> syntax, similar to function definitions. First, we declare
+the name of the type parameter inside the angle brackets just after the name of
+the struct. Then we use the generic type in the struct definition where we would
+otherwise specify concrete data types. The next code example shows the
+definition <code>Wallet&lt;T&gt;</code> which has a <code>balance</code> field of type <code>T</code>.</p>
 <pre><code class="language-cairo">#[derive(Drop)]
 struct Wallet&lt;T&gt; {
     balance: T,
@@ -385,7 +443,8 @@ fn main() {
     let w = Wallet { balance: 3 };
 }
 </code></pre>
-<p>The above code derives the <code>Drop</code> trait for the <code>Wallet</code> type automatically. It is equivalent to writing the following code:</p>
+<p>The above code derives the <code>Drop</code> trait for the <code>Wallet</code> type automatically. It
+is equivalent to writing the following code:</p>
 <pre><code class="language-cairo">struct Wallet&lt;T&gt; {
     balance: T,
 }
@@ -397,8 +456,14 @@ fn main() {
     let w = Wallet { balance: 3 };
 }
 </code></pre>
-<p>We avoid using the <code>derive</code> macro for <code>Drop</code> implementation of <code>Wallet</code> and instead define our own <code>WalletDrop</code> implementation. Notice that we must define, just like functions, an additional generic type for <code>WalletDrop</code> saying that <code>T</code> implements the <code>Drop</code> trait as well. We are basically saying that the struct <code>Wallet&lt;T&gt;</code> is droppable as long as <code>T</code> is also droppable.</p>
-<p>Finally, if we want to add a field to <code>Wallet</code> representing its address and we want that field to be different than <code>T</code> but generic as well, we can simply add another generic type between the <code>&lt;&gt;</code>:</p>
+<p>We avoid using the <code>derive</code> macro for <code>Drop</code> implementation of <code>Wallet</code> and
+instead define our own <code>WalletDrop</code> implementation. Notice that we must define,
+just like functions, an additional generic type for <code>WalletDrop</code> saying that <code>T</code>
+implements the <code>Drop</code> trait as well. We are basically saying that the struct
+<code>Wallet&lt;T&gt;</code> is droppable as long as <code>T</code> is also droppable.</p>
+<p>Finally, if we want to add a field to <code>Wallet</code> representing its address and we
+want that field to be different than <code>T</code> but generic as well, we can simply add
+another generic type between the <code>&lt;&gt;</code>:</p>
 <pre><code class="language-cairo">#[derive(Drop)]
 struct Wallet&lt;T, U&gt; {
     balance: T,
@@ -410,24 +475,38 @@ fn main() {
     let w = Wallet { balance: 3, address: 14 };
 }
 </code></pre>
-<p>We add to the <code>Wallet</code> struct definition a new generic type <code>U</code> and then assign this type to the new field member <code>address</code>. Notice that the <code>derive</code> attribute for the <code>Drop</code> trait works for <code>U</code> as well.</p>
+<p>We add to the <code>Wallet</code> struct definition a new generic type <code>U</code> and then assign
+this type to the new field member <code>address</code>. Notice that the <code>derive</code> attribute
+for the <code>Drop</code> trait works for <code>U</code> as well.</p>
 <h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
-<p>As we did with structs, we can define enums to hold generic data types in their variants. For example the <code>Option&lt;T&gt;</code> enum provided by the Cairo core library:</p>
+<p>As we did with structs, we can define enums to hold generic data types in their
+variants. For example the <code>Option&lt;T&gt;</code> enum provided by the Cairo core library:</p>
 <pre><code class="language-cairo noplayground">enum Option&lt;T&gt; {
     Some: T,
     None,
 }
 </code></pre>
-<p>The <code>Option&lt;T&gt;</code> enum is generic over a type <code>T</code> and has two variants: <code>Some</code>, which holds one value of type <code>T</code> and <code>None</code> that doesn't hold any value. By using the <code>Option&lt;T&gt;</code> enum, it is possible for us to express the abstract concept of an optional value and because the value has a generic type <code>T</code> we can use this abstraction with any type.</p>
-<p>Enums can use multiple generic types as well, like the definition of the <code>Result&lt;T, E&gt;</code> enum that the core library provides:</p>
+<p>The <code>Option&lt;T&gt;</code> enum is generic over a type <code>T</code> and has two variants: <code>Some</code>,
+which holds one value of type <code>T</code> and <code>None</code> that doesn't hold any value. By
+using the <code>Option&lt;T&gt;</code> enum, it is possible for us to express the abstract
+concept of an optional value and because the value has a generic type <code>T</code> we can
+use this abstraction with any type.</p>
+<p>Enums can use multiple generic types as well, like the definition of the
+<code>Result&lt;T, E&gt;</code> enum that the core library provides:</p>
 <pre><code class="language-cairo noplayground">enum Result&lt;T, E&gt; {
     Ok: T,
     Err: E,
 }
 </code></pre>
-<p>The <code>Result&lt;T, E&gt;</code> enum has two generic types, <code>T</code> and <code>E</code>, and two variants: <code>Ok</code> which holds the value of type <code>T</code> and <code>Err</code> which holds the value of type <code>E</code>. This definition makes it convenient to use the <code>Result</code> enum anywhere we have an operation that might succeed (by returning a value of type <code>T</code>) or fail (by returning a value of type <code>E</code>).</p>
+<p>The <code>Result&lt;T, E&gt;</code> enum has two generic types, <code>T</code> and <code>E</code>, and two variants:
+<code>Ok</code> which holds the value of type <code>T</code> and <code>Err</code> which holds the value of type
+<code>E</code>. This definition makes it convenient to use the <code>Result</code> enum anywhere we
+have an operation that might succeed (by returning a value of type <code>T</code>) or fail
+(by returning a value of type <code>E</code>).</p>
 <h2 id="generic-methods"><a class="header" href="#generic-methods">Generic Methods</a></h2>
-<p>We can implement methods on structs and enums, and use the generic types in their definitions, too. Using our previous definition of <code>Wallet&lt;T&gt;</code> struct, we define a <code>balance</code> method for it:</p>
+<p>We can implement methods on structs and enums, and use the generic types in
+their definitions, too. Using our previous definition of <code>Wallet&lt;T&gt;</code> struct, we
+define a <code>balance</code> method for it:</p>
 <pre><code class="language-cairo">#[derive(Copy, Drop)]
 struct Wallet&lt;T&gt; {
     balance: T,
@@ -449,8 +528,14 @@ fn main() {
     assert!(w.balance() == 50);
 }
 </code></pre>
-<p>We first define <code>WalletTrait&lt;T&gt;</code> trait using a generic type <code>T</code> which defines a method that returns the value of the field <code>balance</code> from <code>Wallet</code>. Then we give an implementation for the trait in <code>WalletImpl&lt;T&gt;</code>. Note that you need to include a generic type in both definitions of the trait and the implementation.</p>
-<p>We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only for <code>Wallet&lt;u128&gt;</code> instances rather than <code>Wallet&lt;T&gt;</code>. In the code example, we define an implementation for wallets which have a concrete type of <code>u128</code> for the <code>balance</code> field.</p>
+<p>We first define <code>WalletTrait&lt;T&gt;</code> trait using a generic type <code>T</code> which defines a
+method that returns the value of the field <code>balance</code> from <code>Wallet</code>. Then we give
+an implementation for the trait in <code>WalletImpl&lt;T&gt;</code>. Note that you need to
+include a generic type in both definitions of the trait and the implementation.</p>
+<p>We can also specify constraints on generic types when defining methods on the
+type. We could, for example, implement methods only for <code>Wallet&lt;u128&gt;</code> instances
+rather than <code>Wallet&lt;T&gt;</code>. In the code example, we define an implementation for
+wallets which have a concrete type of <code>u128</code> for the <code>balance</code> field.</p>
 <pre><code class="language-cairo">#[derive(Copy, Drop)]
 struct Wallet&lt;T&gt; {
     balance: T,
@@ -487,8 +572,15 @@ fn main() {
     assert!(w.balance() == 150);
 }
 </code></pre>
-<p>The new method <code>receive</code> increments the size of <code>balance</code> of any instance of a <code>Wallet&lt;u128&gt;</code>. Notice that we changed the <code>main</code> function making <code>w</code> a mutable variable in order for it to be able to update its balance. If we were to change the initialization of <code>w</code> by changing the type of <code>balance</code> the previous code wouldn't compile.</p>
-<p>Cairo allows us to define generic methods inside generic traits as well. Using the past implementation from <code>Wallet&lt;U, V&gt;</code> we are going to define a trait that picks two wallets of different generic types and creates a new one with a generic type of each. First, let's rewrite the struct definition:</p>
+<p>The new method <code>receive</code> increments the size of <code>balance</code> of any instance of a
+<code>Wallet&lt;u128&gt;</code>. Notice that we changed the <code>main</code> function making <code>w</code> a mutable
+variable in order for it to be able to update its balance. If we were to change
+the initialization of <code>w</code> by changing the type of <code>balance</code> the previous code
+wouldn't compile.</p>
+<p>Cairo allows us to define generic methods inside generic traits as well. Using
+the past implementation from <code>Wallet&lt;U, V&gt;</code> we are going to define a trait that
+picks two wallets of different generic types and creates a new one with a
+generic type of each. First, let's rewrite the struct definition:</p>
 <pre><code class="language-cairo noplayground">struct Wallet&lt;T, U&gt; {
     balance: T,
     address: U,
@@ -507,7 +599,14 @@ impl WalletMixImpl&lt;T1, U1&gt; of WalletMixTrait&lt;T1, U1&gt; {
 }
 
 </code></pre>
-<p>We are creating a trait <code>WalletMixTrait&lt;T1, U1&gt;</code> with the <code>mixup&lt;T2, U2&gt;</code> method which given an instance of <code>Wallet&lt;T1, U1&gt;</code> and <code>Wallet&lt;T2, U2&gt;</code> creates a new <code>Wallet&lt;T1, U2&gt;</code>. As <code>mixup</code> signature specifies, both <code>self</code> and <code>other</code> are getting dropped at the end of the function, which is why this code does not compile. If you have been following from the start until now you would know that we must add a requirement for all the generic types specifying that they will implement the <code>Drop</code> trait for the compiler to know how to drop instances of <code>Wallet&lt;T, U&gt;</code>. The updated implementation is as follows:</p>
+<p>We are creating a trait <code>WalletMixTrait&lt;T1, U1&gt;</code> with the <code>mixup&lt;T2, U2&gt;</code> method
+which given an instance of <code>Wallet&lt;T1, U1&gt;</code> and <code>Wallet&lt;T2, U2&gt;</code> creates a new
+<code>Wallet&lt;T1, U2&gt;</code>. As <code>mixup</code> signature specifies, both <code>self</code> and <code>other</code> are
+getting dropped at the end of the function, which is why this code does not
+compile. If you have been following from the start until now you would know that
+we must add a requirement for all the generic types specifying that they will
+implement the <code>Drop</code> trait for the compiler to know how to drop instances of
+<code>Wallet&lt;T, U&gt;</code>. The updated implementation is as follows:</p>
 <pre><code class="language-cairo">trait WalletMixTrait&lt;T1, U1&gt; {
     fn mixup&lt;T2, +Drop&lt;T2&gt;, U2, +Drop&lt;U2&gt;&gt;(
         self: Wallet&lt;T1, U1&gt;, other: Wallet&lt;T2, U2&gt;,
@@ -522,7 +621,9 @@ impl WalletMixImpl&lt;T1, +Drop&lt;T1&gt;, U1, +Drop&lt;U1&gt;&gt; of WalletMixT
     }
 }
 </code></pre>
-<p>We add the requirements for <code>T1</code> and <code>U1</code> to be droppable on <code>WalletMixImpl</code> declaration. Then we do the same for <code>T2</code> and <code>U2</code>, this time as part of <code>mixup</code> signature. We can now try the <code>mixup</code> function:</p>
+<p>We add the requirements for <code>T1</code> and <code>U1</code> to be droppable on <code>WalletMixImpl</code>
+declaration. Then we do the same for <code>T2</code> and <code>U2</code>, this time as part of <code>mixup</code>
+signature. We can now try the <code>mixup</code> function:</p>
 <pre><code class="language-cairo noplayground">#[executable]
 fn main() {
     let w1: Wallet&lt;bool, u128&gt; = Wallet { balance: true, address: 10 };
@@ -534,7 +635,9 @@ fn main() {
     assert!(w3.address == 100);
 }
 </code></pre>
-<p>We first create two instances: one of <code>Wallet&lt;bool, u128&gt;</code> and the other of <code>Wallet&lt;felt252, u8&gt;</code>. Then, we call <code>mixup</code> and create a new <code>Wallet&lt;bool, u8&gt;</code> instance.</p>
+<p>We first create two instances: one of <code>Wallet&lt;bool, u128&gt;</code> and the other of
+<code>Wallet&lt;felt252, u8&gt;</code>. Then, we call <code>mixup</code> and create a new <code>Wallet&lt;bool, u8&gt;</code>
+instance.</p>
 
                     </main>
 
@@ -570,24 +673,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

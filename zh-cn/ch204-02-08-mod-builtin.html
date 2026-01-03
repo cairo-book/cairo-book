@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,16 +274,45 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="mod-builtin"><a class="header" href="#mod-builtin">Mod Builtin</a></h1>
-<p>In the Cairo Virtual Machine (VM), the <em>Mod Builtin</em> is a specialized builtin to handle modular arithmetic operations—specifically addition and multiplication—on field elements, or felts, within a given modulus. It’s built to compute expressions like <code>a + b (mod p)</code> and <code>a * b (mod p)</code> efficiently.</p>
-<p>To do this, it comes in two derivations: <code>AddModBuiltin</code> for addition and <code>MulModBuiltin</code> for multiplication.</p>
-<p>This builtin is a requirement for tasks like cryptographic applications or computations heavy with modular arithmetic, especially when dealing with large integers like <code>UInt384</code>.</p>
+<p>In the Cairo Virtual Machine (VM), the <em>Mod Builtin</em> is a specialized builtin to
+handle modular arithmetic operations—specifically addition and multiplication—on
+field elements, or felts, within a given modulus. It’s built to compute
+expressions like <code>a + b (mod p)</code> and <code>a * b (mod p)</code> efficiently.</p>
+<p>To do this, it comes in two derivations: <code>AddModBuiltin</code> for addition and
+<code>MulModBuiltin</code> for multiplication.</p>
+<p>This builtin is a requirement for tasks like cryptographic applications or
+computations heavy with modular arithmetic, especially when dealing with large
+integers like <code>UInt384</code>.</p>
 <h2 id="why-we-need-it"><a class="header" href="#why-we-need-it">Why We Need It</a></h2>
-<p>Modular arithmetic is at the heart of many cryptographic protocols and zero-knowledge proof systems. If you tried to implement these operations in pure Cairo code, you’d quickly run into a wall of computational overhead—repeated divisions and remainder checks considerably increasing the step count. The Mod Builtin offers an optimized solution for handling these operations efficiently. In practice, when manipulating <a href="./ch12-10-arithmetic-circuits.html">Arithmetic Circuits</a>, you're using the Mod Builtin under the hood.</p>
+<p>Modular arithmetic is at the heart of many cryptographic protocols and
+zero-knowledge proof systems. If you tried to implement these operations in pure
+Cairo code, you’d quickly run into a wall of computational overhead—repeated
+divisions and remainder checks considerably increasing the step count. The Mod
+Builtin offers an optimized solution for handling these operations efficiently.
+In practice, when manipulating
+<a href="./ch12-10-arithmetic-circuits.html">Arithmetic Circuits</a>, you're using the Mod
+Builtin under the hood.</p>
 <h2 id="how-its-structured"><a class="header" href="#how-its-structured">How It’s Structured</a></h2>
-<p>Every instance starts with seven input cells. Four of them—<code>p0</code>, <code>p1</code>, <code>p2</code>, and <code>p3</code>—define the modulus <code>p</code> as a multi-word integer, typically split into four 96-bit chunks for <code>UInt384</code> compatibility. Then, the operands and results are stored in the <code>values_ptr</code>, and <code>offsets_ptr</code> points to another table that tells the builtin where to read or write those values, relative to the <code>values_ptr</code>. Finally, <code>n</code> specifies how many operations to perform, and it needs to be a multiple of the batch size.</p>
-<p>The builtin’s core trick is deduction. Give it two parts of the triplet—like <code>a</code> and <code>b</code>—and it figures out the third, <code>c</code>, based on the operation and modulus. Or, if you provide <code>c</code> and one operand, it can solve for the other. It processes these triplets in batches (often just one at a time), ensuring that <code>op(a, b) = c + k * p</code> holds true, where <code>k</code> is a quotient within a specific bound—small for addition, larger for multiplication. In practice, you set this up with the <code>run_mod_p_circuit</code> function, which ties it all together. The values table often overlaps with the <code>range_check96_ptr</code> segment to keep each word under <code>2^96</code>, and offsets are defined as program literals using <code>dw</code> directives.</p>
+<p>Every instance starts with seven input cells. Four of them—<code>p0</code>, <code>p1</code>, <code>p2</code>, and
+<code>p3</code>—define the modulus <code>p</code> as a multi-word integer, typically split into four
+96-bit chunks for <code>UInt384</code> compatibility. Then, the operands and results are
+stored in the <code>values_ptr</code>, and <code>offsets_ptr</code> points to another table that tells
+the builtin where to read or write those values, relative to the <code>values_ptr</code>.
+Finally, <code>n</code> specifies how many operations to perform, and it needs to be a
+multiple of the batch size.</p>
+<p>The builtin’s core trick is deduction. Give it two parts of the triplet—like <code>a</code>
+and <code>b</code>—and it figures out the third, <code>c</code>, based on the operation and modulus.
+Or, if you provide <code>c</code> and one operand, it can solve for the other. It processes
+these triplets in batches (often just one at a time), ensuring that
+<code>op(a, b) = c + k * p</code> holds true, where <code>k</code> is a quotient within a specific
+bound—small for addition, larger for multiplication. In practice, you set this
+up with the <code>run_mod_p_circuit</code> function, which ties it all together. The values
+table often overlaps with the <code>range_check96_ptr</code> segment to keep each word
+under <code>2^96</code>, and offsets are defined as program literals using <code>dw</code> directives.</p>
 <h2 id="putting-it-to-work-modular-addition"><a class="header" href="#putting-it-to-work-modular-addition">Putting It to Work: Modular Addition</a></h2>
-<p>Let’s walk through an example of using the <code>AddMod</code> builtin to compute <code>x + y (mod p)</code> for two <code>UInt384</code> values. This Cairo Zero code shows how the Mod Builtin fits into a real program.</p>
+<p>Let’s walk through an example of using the <code>AddMod</code> builtin to compute
+<code>x + y (mod p)</code> for two <code>UInt384</code> values. This Cairo Zero code shows how the Mod
+Builtin fits into a real program.</p>
 <pre><code class="language-cairo">from starkware.cairo.common.cairo_builtins import UInt384, ModBuiltin
 from starkware.cairo.common.modulo import run_mod_p_circuit
 from starkware.cairo.lang.compiler.lib.registers import get_fp_and_pc
@@ -335,19 +365,65 @@ func add{range_check96_ptr: felt*, add_mod_ptr: ModBuiltin*, mul_mod_ptr: ModBui
     mul_offsets:
 }
 </code></pre>
-<p>In this function, we take two <code>UInt384</code> values, <code>x</code> and <code>y</code>, and a modulus <code>p</code>. We write <code>x</code> and <code>y</code> into the values table starting at <code>range_check96_ptr</code>, then use offsets—<code>[0, 4, 8]</code>—to tell the builtin where <code>x</code>, <code>y</code>, and the result <code>c</code> live. The <code>run_mod_p_circuit</code> call triggers the <code>AddMod</code> builtin to compute <code>x + y (mod p)</code> and store the result at offset 8. After adjusting the pointer, we return a pointer to that result. It's a straightforward setup, but the builtin handles the modular reduction for us, saving a ton of manual work.</p>
-<p>Imagine a simple case with <code>n_words = 1</code> and <code>batch_size = 1</code>. If <code>p = 5</code>, <code>x = 3</code>, and <code>y = 4</code>, the values table might hold <code>[3, 4, 2]</code>. The offsets <code>[0, 1, 2]</code> point to <code>a = 3</code>, <code>b = 4</code>, and <code>c = 2</code>. The builtin checks: <code>3 + 4 = 7</code>, and <code>7 mod 5 = 2</code>, which matches <code>c</code>. Everything checks out.</p>
-<p>If things go wrong—say <code>x</code> is missing a word—the builtin flags a <code>MissingOperand</code> error. For <code>MulMod</code>, if <code>b</code> and <code>p</code> aren't coprime and <code>a</code> is unknown, you'll get a <code>ZeroDivisor</code> error. And if any word exceeds <code>2^96</code>, the range check fails. These safeguards keep the operation reliable.</p>
+<p>In this function, we take two <code>UInt384</code> values, <code>x</code> and <code>y</code>, and a modulus <code>p</code>.
+We write <code>x</code> and <code>y</code> into the values table starting at <code>range_check96_ptr</code>, then
+use offsets—<code>[0, 4, 8]</code>—to tell the builtin where <code>x</code>, <code>y</code>, and the result <code>c</code>
+live. The <code>run_mod_p_circuit</code> call triggers the <code>AddMod</code> builtin to compute
+<code>x + y (mod p)</code> and store the result at offset 8. After adjusting the pointer,
+we return a pointer to that result. It's a straightforward setup, but the
+builtin handles the modular reduction for us, saving a ton of manual work.</p>
+<p>Imagine a simple case with <code>n_words = 1</code> and <code>batch_size = 1</code>. If <code>p = 5</code>,
+<code>x = 3</code>, and <code>y = 4</code>, the values table might hold <code>[3, 4, 2]</code>. The offsets
+<code>[0, 1, 2]</code> point to <code>a = 3</code>, <code>b = 4</code>, and <code>c = 2</code>. The builtin checks:
+<code>3 + 4 = 7</code>, and <code>7 mod 5 = 2</code>, which matches <code>c</code>. Everything checks out.</p>
+<p>If things go wrong—say <code>x</code> is missing a word—the builtin flags a
+<code>MissingOperand</code> error. For <code>MulMod</code>, if <code>b</code> and <code>p</code> aren't coprime and <code>a</code> is
+unknown, you'll get a <code>ZeroDivisor</code> error. And if any word exceeds <code>2^96</code>, the
+range check fails. These safeguards keep the operation reliable.</p>
 <h2 id="under-the-hood"><a class="header" href="#under-the-hood">Under the Hood</a></h2>
-<p>Let’s take a closer look at how the Mod Builtin is designed and why it’s built the way it is. The goal here is efficiency—making modular arithmetic fast and reliable in Cairo’s virtual machine—while keeping it practical for real-world use, like cryptographic programs. To understand that, we’ll explore a few key pieces of its structure and the thinking behind them.</p>
-<p>First, why does it break numbers into 96-bit chunks, typically four of them for a <code>UInt384</code>? That’s not an arbitrary choice. The Cairo VM already has a built-in system for checking that numbers stay within certain bounds, called <code>range_check96</code>, which works with 96-bit values. By aligning the Mod Builtin’s word size with that system, it can lean on the VM’s existing machinery to ensure each chunk of a number stays below <code>2^96</code>. For a <code>UInt384</code>, four 96-bit words add up to 384 bits, which is big enough for most cryptographic applications.</p>
-<p>Now, consider the difference between <code>AddMod</code> and <code>MulMod</code>. When you add two numbers close to the modulus <code>p</code>, the result tops out at <code>2p - 2</code>. That’s why <code>AddMod</code> limits its quotient <code>k</code>—the number of times <code>p</code> gets subtracted to wrap the result—to just 2. If <code>a + b</code> is, say, <code>1.5p</code>, then <code>k = 1</code> and <code>c = a + b - p</code> keeps everything in check. It’s a tight constraint because addition doesn’t produce wildly large numbers. Multiplication, though, is different. With <code>MulMod</code>, <code>a * b</code> could be enormous—think <code>p * p</code> or more—so the default quotient bound is set way higher, up to <code>2^384</code>. This ensures it can handle even the biggest products without running out of room to adjust.</p>
-<p>The real cleverness comes in how the builtin figures out missing values, a process called deduction. Instead of always starting from scratch, it works with what’s already in memory. For <code>AddMod</code>, if you give it <code>a</code> and <code>b</code>, it computes <code>c = a + b (mod p)</code>. If you give it <code>c</code> and <code>b</code>, it solves <code>a + b = c + k * p</code> to find <code>a</code>, testing <code>k = 0</code> or <code>1</code>.</p>
-<p>For <code>MulMod</code>, it’s trickier—multiplication isn’t as straightforward to reverse. Here, it uses a mathematical tool called the extended GCD algorithm to solve <code>a * b = c (mod p)</code>. If <code>b</code> and <code>p</code> share factors (their greatest common divisor isn’t 1), there’s no unique solution, and it flags a <code>ZeroDivisor</code> error. Otherwise, it finds the smallest <code>a</code> that fits.</p>
-<p>Another design choice is the batch size, which is often just 1 in practice. The builtin can process multiple operations at once—<code>batch_size</code> triplets of <code>a</code>, <code>b</code>, and <code>c</code>—but keeping it at 1 simplifies things for most cases. It’s like handling one addition or multiplication at a time, which is plenty for many programs, though the option to scale up is there if you need it.</p>
-<p>Why tie the values table to <code>range_check96_ptr</code>? It’s about efficiency again. The VM’s range-checking system is already set up to monitor that segment, so using it for the builtin’s values—like <code>a</code>, <code>b</code>, and <code>c</code>—means those numbers get validated automatically.</p>
+<p>Let’s take a closer look at how the Mod Builtin is designed and why it’s built
+the way it is. The goal here is efficiency—making modular arithmetic fast and
+reliable in Cairo’s virtual machine—while keeping it practical for real-world
+use, like cryptographic programs. To understand that, we’ll explore a few key
+pieces of its structure and the thinking behind them.</p>
+<p>First, why does it break numbers into 96-bit chunks, typically four of them for
+a <code>UInt384</code>? That’s not an arbitrary choice. The Cairo VM already has a built-in
+system for checking that numbers stay within certain bounds, called
+<code>range_check96</code>, which works with 96-bit values. By aligning the Mod Builtin’s
+word size with that system, it can lean on the VM’s existing machinery to ensure
+each chunk of a number stays below <code>2^96</code>. For a <code>UInt384</code>, four 96-bit words
+add up to 384 bits, which is big enough for most cryptographic applications.</p>
+<p>Now, consider the difference between <code>AddMod</code> and <code>MulMod</code>. When you add two
+numbers close to the modulus <code>p</code>, the result tops out at <code>2p - 2</code>. That’s why
+<code>AddMod</code> limits its quotient <code>k</code>—the number of times <code>p</code> gets subtracted to wrap
+the result—to just 2. If <code>a + b</code> is, say, <code>1.5p</code>, then <code>k = 1</code> and
+<code>c = a + b - p</code> keeps everything in check. It’s a tight constraint because
+addition doesn’t produce wildly large numbers. Multiplication, though, is
+different. With <code>MulMod</code>, <code>a * b</code> could be enormous—think <code>p * p</code> or more—so the
+default quotient bound is set way higher, up to <code>2^384</code>. This ensures it can
+handle even the biggest products without running out of room to adjust.</p>
+<p>The real cleverness comes in how the builtin figures out missing values, a
+process called deduction. Instead of always starting from scratch, it works with
+what’s already in memory. For <code>AddMod</code>, if you give it <code>a</code> and <code>b</code>, it computes
+<code>c = a + b (mod p)</code>. If you give it <code>c</code> and <code>b</code>, it solves <code>a + b = c + k * p</code>
+to find <code>a</code>, testing <code>k = 0</code> or <code>1</code>.</p>
+<p>For <code>MulMod</code>, it’s trickier—multiplication isn’t as straightforward to reverse.
+Here, it uses a mathematical tool called the extended GCD algorithm to solve
+<code>a * b = c (mod p)</code>. If <code>b</code> and <code>p</code> share factors (their greatest common divisor
+isn’t 1), there’s no unique solution, and it flags a <code>ZeroDivisor</code> error.
+Otherwise, it finds the smallest <code>a</code> that fits.</p>
+<p>Another design choice is the batch size, which is often just 1 in practice. The
+builtin can process multiple operations at once—<code>batch_size</code> triplets of <code>a</code>,
+<code>b</code>, and <code>c</code>—but keeping it at 1 simplifies things for most cases. It’s like
+handling one addition or multiplication at a time, which is plenty for many
+programs, though the option to scale up is there if you need it.</p>
+<p>Why tie the values table to <code>range_check96_ptr</code>? It’s about efficiency again.
+The VM’s range-checking system is already set up to monitor that segment, so
+using it for the builtin’s values—like <code>a</code>, <code>b</code>, and <code>c</code>—means those numbers get
+validated automatically.</p>
 <h2 id="implementation-references"><a class="header" href="#implementation-references">Implementation References</a></h2>
-<p>These implementation references of the Mod Builtin in various Cairo VM implementations:</p>
+<p>These implementation references of the Mod Builtin in various Cairo VM
+implementations:</p>
 <ul>
 <li><a href="https://github.com/starkware-libs/cairo-lang/blob/0e4dab8a6065d80d1c726394f5d9d23cb451706a/src/starkware/cairo/lang/builtins/modulo/mod_builtin_runner.py">Python Mod Builtin</a></li>
 </ul>
@@ -386,24 +462,6 @@ func add{range_check96_ptr: felt*, add_mod_ptr: ModBuiltin*, mul_mod_ptr: ModBui
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

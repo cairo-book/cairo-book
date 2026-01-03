@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,7 +274,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="arithmetic-circuits"><a class="header" href="#arithmetic-circuits">Arithmetic Circuits</a></h1>
-<p>Arithmetic circuits are mathematical models used to represent polynomial computations. They are defined over a field (typically a finite field \(F_p\) where \(p\) is prime) and consist of:</p>
+<p>Arithmetic circuits are mathematical models used to represent polynomial
+computations. They are defined over a field (typically a finite field \(F_p\)
+where \(p\) is prime) and consist of:</p>
 <ul>
 <li>Input signals (values in the range \([0, p-1]\))</li>
 <li>Arithmetic operations (addition and multiplication gates)</li>
@@ -284,10 +287,12 @@
 <ul>
 <li>Implementing verification for other proof systems</li>
 <li>Implementing cryptographic primitives</li>
-<li>Creating more low-level programs, with potential reduced overhead compared to standard Cairo constructs</li>
+<li>Creating more low-level programs, with potential reduced overhead compared to
+standard Cairo constructs</li>
 </ul>
 <h2 id="implementing-arithmetic-circuits-in-cairo"><a class="header" href="#implementing-arithmetic-circuits-in-cairo">Implementing Arithmetic Circuits in Cairo</a></h2>
-<p>Cairo's circuit constructs are available in the <code>core::circuit</code> module of the corelib.</p>
+<p>Cairo's circuit constructs are available in the <code>core::circuit</code> module of the
+corelib.</p>
 <p>Arithmetic circuits consist of:</p>
 <ul>
 <li>Addition modulo \(p\): <code>AddMod</code> builtin</li>
@@ -300,7 +305,8 @@
 <li>Multiplication: <code>MulModGate</code></li>
 <li>Inverse: <code>InvModGate</code></li>
 </ul>
-<p>Let's create a circuit that computes \(a \cdot (a + b)\) over the BN254 prime field.</p>
+<p>Let's create a circuit that computes \(a \cdot (a + b)\) over the BN254 prime
+field.</p>
 <p>We start from the empty struct <code>CircuitElement&lt;T&gt;</code>.</p>
 <p>The inputs of our circuit are defined as <code>CircuitInput</code>:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use core::circuit::{
@@ -347,9 +353,12 @@
 </span><span class="boring">    eval_circuit();
 </span><span class="boring">}
 </span></code></pre>
-<p>We can combine circuit inputs and gates: <code>CircuitElement&lt;a&gt;</code> and <code>CircuitElement&lt;b&gt;</code> combined with an addition gate gives <code>CircuitElement&lt;AddModGate&lt;a, b&gt;&gt;</code>.</p>
-<p>We can use <code>circuit_add</code>, <code>circuit_sub</code>, <code>circuit_mul</code> and <code>circuit_inverse</code> to directly combine circuit elements.
-For \(a * (a + b)\), the description of our circuit is:</p>
+<p>We can combine circuit inputs and gates: <code>CircuitElement&lt;a&gt;</code> and
+<code>CircuitElement&lt;b&gt;</code> combined with an addition gate gives
+<code>CircuitElement&lt;AddModGate&lt;a, b&gt;&gt;</code>.</p>
+<p>We can use <code>circuit_add</code>, <code>circuit_sub</code>, <code>circuit_mul</code> and <code>circuit_inverse</code> to
+directly combine circuit elements. For \(a * (a + b)\), the description of
+our circuit is:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use core::circuit::{
 </span><span class="boring">    AddInputResultTrait, CircuitElement, CircuitInput, CircuitInputs, CircuitModulus,
 </span><span class="boring">    CircuitOutputsTrait, EvalCircuitTrait, circuit_add, circuit_mul, u384,
@@ -394,9 +403,14 @@ For \(a * (a + b)\), the description of our circuit is:</p>
 </span><span class="boring">    eval_circuit();
 </span><span class="boring">}
 </span></code></pre>
-<p>Note that <code>a</code>, <code>b</code> and <code>add</code> are intermediate circuit elements and not specifically inputs or gates, which is why we need the distinction between the empty struct <code>CircuitElement&lt;T&gt;</code> and the circuit description specified by the type <code>T</code>.</p>
-<p>The outputs of the circuits are defined as a tuple of circuit elements. It's possible to add any intermediate gates of our circuit, but we must add all gates with degree 0 (gates where the output signal is not used as input of any other gate).
-In our case, we will only add the last gate <code>mul</code>:</p>
+<p>Note that <code>a</code>, <code>b</code> and <code>add</code> are intermediate circuit elements and not
+specifically inputs or gates, which is why we need the distinction between the
+empty struct <code>CircuitElement&lt;T&gt;</code> and the circuit description specified by the
+type <code>T</code>.</p>
+<p>The outputs of the circuits are defined as a tuple of circuit elements. It's
+possible to add any intermediate gates of our circuit, but we must add all gates
+with degree 0 (gates where the output signal is not used as input of any other
+gate). In our case, we will only add the last gate <code>mul</code>:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use core::circuit::{
 </span><span class="boring">    AddInputResultTrait, CircuitElement, CircuitInput, CircuitInputs, CircuitModulus,
 </span><span class="boring">    CircuitOutputsTrait, EvalCircuitTrait, circuit_add, circuit_mul, u384,
@@ -441,10 +455,10 @@ In our case, we will only add the last gate <code>mul</code>:</p>
 </span><span class="boring">    eval_circuit();
 </span><span class="boring">}
 </span></code></pre>
-<p>We now have a complete description of our circuit and its outputs.
-We now need to assign a value to each input.
-As circuits are defined with 384-bit modulus, a single <code>u384</code> value can be represented as a fixed array of four <code>u96</code>.
-We can initialize \(a\) and \(b\) to respectively \(10\) and \(20\):</p>
+<p>We now have a complete description of our circuit and its outputs. We now need
+to assign a value to each input. As circuits are defined with 384-bit modulus, a
+single <code>u384</code> value can be represented as a fixed array of four <code>u96</code>. We can
+initialize \(a\) and \(b\) to respectively \(10\) and \(20\):</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use core::circuit::{
 </span><span class="boring">    AddInputResultTrait, CircuitElement, CircuitInput, CircuitInputs, CircuitModulus,
 </span><span class="boring">    CircuitOutputsTrait, EvalCircuitTrait, circuit_add, circuit_mul, u384,
@@ -489,7 +503,8 @@ We can initialize \(a\) and \(b\) to respectively \(10\) and \(20\):</p>
 </span><span class="boring">    eval_circuit();
 </span><span class="boring">}
 </span></code></pre>
-<p>As the number of inputs can vary, Cairo use an accumulator and the <code>new_inputs</code> and <code>next</code> functions return a variant of the <code>AddInputResult</code> enum.</p>
+<p>As the number of inputs can vary, Cairo use an accumulator and the <code>new_inputs</code>
+and <code>next</code> functions return a variant of the <code>AddInputResult</code> enum.</p>
 <pre><code class="language-cairo  noplayground">pub enum AddInputResult&lt;C&gt; {
     /// All inputs have been filled.
     Done: CircuitData&lt;C&gt;,
@@ -497,9 +512,13 @@ We can initialize \(a\) and \(b\) to respectively \(10\) and \(20\):</p>
     More: CircuitInputAccumulator&lt;C&gt;,
 }
 </code></pre>
-<p>We have to assign a value to every input, by calling <code>next</code> on each <code>CircuitInputAccumulator</code> variant.
-After the inputs initialization, by calling the <code>done</code> function we get the complete circuit <code>CircuitData&lt;C&gt;</code>, where <code>C</code> is a long type that encodes the entire circuit instance.</p>
-<p>We then need to define what modulus our circuit is using (up to 384-bit modulus), by defining a <code>CircuitModulus</code>. We want to use BN254 prime field modulus:</p>
+<p>We have to assign a value to every input, by calling <code>next</code> on each
+<code>CircuitInputAccumulator</code> variant. After the inputs initialization, by calling
+the <code>done</code> function we get the complete circuit <code>CircuitData&lt;C&gt;</code>, where <code>C</code> is a
+long type that encodes the entire circuit instance.</p>
+<p>We then need to define what modulus our circuit is using (up to 384-bit
+modulus), by defining a <code>CircuitModulus</code>. We want to use BN254 prime field
+modulus:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use core::circuit::{
 </span><span class="boring">    AddInputResultTrait, CircuitElement, CircuitInput, CircuitInputs, CircuitModulus,
 </span><span class="boring">    CircuitOutputsTrait, EvalCircuitTrait, circuit_add, circuit_mul, u384,
@@ -544,8 +563,10 @@ After the inputs initialization, by calling the <code>done</code> function we ge
 </span><span class="boring">    eval_circuit();
 </span><span class="boring">}
 </span></code></pre>
-<p>The last part is the evaluation of the circuit, i.e. the actual process of passing the input signals correctly through each gate described by our circuit and getting the values of each output gate.
-We can evaluate and get the results for a given modulus as follows:</p>
+<p>The last part is the evaluation of the circuit, i.e. the actual process of
+passing the input signals correctly through each gate described by our circuit
+and getting the values of each output gate. We can evaluate and get the results
+for a given modulus as follows:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use core::circuit::{
 </span><span class="boring">    AddInputResultTrait, CircuitElement, CircuitInput, CircuitInputs, CircuitModulus,
 </span><span class="boring">    CircuitOutputsTrait, EvalCircuitTrait, circuit_add, circuit_mul, u384,
@@ -590,7 +611,9 @@ We can evaluate and get the results for a given modulus as follows:</p>
 </span><span class="boring">    eval_circuit();
 </span><span class="boring">}
 </span></code></pre>
-<p>To retrieve the value of a specific output, we can use the <code>get_output</code> function on our results with the <code>CircuitElement</code> instance of the output gate we want. We can also retrieve any intermediate gate value as well.</p>
+<p>To retrieve the value of a specific output, we can use the <code>get_output</code> function
+on our results with the <code>CircuitElement</code> instance of the output gate we want. We
+can also retrieve any intermediate gate value as well.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">use core::circuit::{
 </span><span class="boring">    AddInputResultTrait, CircuitElement, CircuitInput, CircuitInputs, CircuitModulus,
 </span><span class="boring">    CircuitOutputsTrait, EvalCircuitTrait, circuit_add, circuit_mul, u384,
@@ -691,18 +714,29 @@ fn eval_circuit() -&gt; (u384, u384) {
 </span><span class="boring">}
 </span></code></pre>
 <h2 id="arithmetic-circuits-in-zero-knowledge-proof-systems"><a class="header" href="#arithmetic-circuits-in-zero-knowledge-proof-systems">Arithmetic Circuits in Zero-Knowledge Proof Systems</a></h2>
-<p>In zero-knowledge proof systems, a prover creates a proof of computational statements, which a verifier can check without performing the full computation. However, these statements must first be converted into a suitable representation for the proof system.</p>
+<p>In zero-knowledge proof systems, a prover creates a proof of computational
+statements, which a verifier can check without performing the full computation.
+However, these statements must first be converted into a suitable representation
+for the proof system.</p>
 <h3 id="zk-snarks-approach"><a class="header" href="#zk-snarks-approach">zk-SNARKs Approach</a></h3>
-<p>Some proof systems, like zk-SNARKs, use arithmetic circuits over a finite field \(F_p\). These circuits include constraints at specific gates, represented as equations:</p>
-<p>\[
-(a_1 \cdot s_1 + ... + a_n \cdot s_n) \cdot (b_1 \cdot s_1 + ... + b_n \cdot s_n) + (c_1 \cdot s_1 + ... + c_n \cdot s_n) = 0 \mod p
-\]
-Where \(s_1, ..., s_n\) are signals, and \(a_i, b_i, c_i\) are coefficients.</p>
-<p>A witness is an assignment of signals that satisfies all constraints in a circuit. zk-SNARK proofs use these properties to prove knowledge of a witness without revealing private input signals, ensuring the prover's honesty while preserving privacy.</p>
-<p>Some work has already been done, such as <a href="https://felt.gitbook.io/garaga/deploy-your-snark-verifier-on-starknet/groth16/generate-and-deploy-your-verifier-contract">Garaga Groth16 verifier</a></p>
+<p>Some proof systems, like zk-SNARKs, use arithmetic circuits over a finite field
+\(F_p\). These circuits include constraints at specific gates, represented as
+equations:</p>
+<p>\[ (a_1 \cdot s_1 + ... + a_n \cdot s_n) \cdot (b_1 \cdot s_1 + ... + b_n \cdot
+s_n) + (c_1 \cdot s_1 + ... + c_n \cdot s_n) = 0 \mod p \] Where \(s_1, ...,
+s_n\) are signals, and \(a_i, b_i, c_i\) are coefficients.</p>
+<p>A witness is an assignment of signals that satisfies all constraints in a
+circuit. zk-SNARK proofs use these properties to prove knowledge of a witness
+without revealing private input signals, ensuring the prover's honesty while
+preserving privacy.</p>
+<p>Some work has already been done, such as
+<a href="https://felt.gitbook.io/garaga/deploy-your-snark-verifier-on-starknet/groth16/generate-and-deploy-your-verifier-contract">Garaga Groth16 verifier</a></p>
 <h3 id="zk-starks-approach"><a class="header" href="#zk-starks-approach">zk-STARKs Approach</a></h3>
-<p>STARKs (which Cairo uses) use an Algebraic Intermediate Representation (AIR) instead of arithmetic circuits. AIR describes computations as a set of polynomial constraints.</p>
-<p>By allowing emulated arithmetic circuits, Cairo can be used to implement zk-SNARKs proof verification inside STARK proofs.</p>
+<p>STARKs (which Cairo uses) use an Algebraic Intermediate Representation (AIR)
+instead of arithmetic circuits. AIR describes computations as a set of
+polynomial constraints.</p>
+<p>By allowing emulated arithmetic circuits, Cairo can be used to implement
+zk-SNARKs proof verification inside STARK proofs.</p>
 
                     </main>
 
@@ -738,24 +772,6 @@ Where \(s_1, ..., s_n\) are signals, and \(a_i, b_i, c_i\) are coefficients.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

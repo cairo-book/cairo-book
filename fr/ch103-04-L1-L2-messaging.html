@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -274,16 +275,40 @@
                     <main>
                         <h1 id="l1-l2-messaging"><a class="header" href="#l1-l2-messaging">L1-L2 Messaging</a></h1>
 <p>A crucial feature of a Layer 2 is its ability to interact with Layer 1.</p>
-<p>Starknet has its own <code>L1-L2</code> messaging system, which is different from its consensus mechanism and the submission of state updates on L1. Messaging is a way for smart-contracts on L1 to interact with smart-contracts on L2 (or the other way around), allowing us to do "cross-chain" transactions. For example, we can do some computations on one chain and use the result of this computation on the other chain.</p>
-<p>Bridges on Starknet all use <code>L1-L2</code> messaging. Let's say that you want to bridge tokens from Ethereum to Starknet. You will simply have to deposit your tokens into the L1 bridge contract, which will automatically trigger the minting of the same token on L2. Another good use case for <code>L1-L2</code> messaging would be <a href="https://starkware.co/resource/defi-pooling/">DeFi pooling</a>.</p>
-<p>On Starknet, it's important to note that the messaging system is <strong>asynchronous</strong> and <strong>asymmetric</strong>.</p>
+<p>Starknet has its own <code>L1-L2</code> messaging system, which is different from its
+consensus mechanism and the submission of state updates on L1. Messaging is a
+way for smart-contracts on L1 to interact with smart-contracts on L2 (or the
+other way around), allowing us to do "cross-chain" transactions. For example, we
+can do some computations on one chain and use the result of this computation on
+the other chain.</p>
+<p>Bridges on Starknet all use <code>L1-L2</code> messaging. Let's say that you want to bridge
+tokens from Ethereum to Starknet. You will simply have to deposit your tokens
+into the L1 bridge contract, which will automatically trigger the minting of the
+same token on L2. Another good use case for <code>L1-L2</code> messaging would be <a href="https://starkware.co/resource/defi-pooling/">DeFi
+pooling</a>.</p>
+<p>On Starknet, it's important to note that the messaging system is
+<strong>asynchronous</strong> and <strong>asymmetric</strong>.</p>
 <ul>
-<li><strong>Asynchronous</strong>: this means that in your contract code (being Solidity or Cairo), you can't await the result of the message being sent on the other chain within your contract code execution.</li>
-<li><strong>Asymmetric</strong>: sending a message from Ethereum to Starknet (<code>L1-&gt;L2</code>) is fully automated by the Starknet sequencer, which means that the message is being automatically delivered to the target contract on L2. However, when sending a message from Starknet to Ethereum (<code>L2-&gt;L1</code>), only the hash of the message is sent to L1 by the Starknet sequencer. You must then consume the message manually via a transaction on L1.</li>
+<li><strong>Asynchronous</strong>: this means that in your contract code (being Solidity or
+Cairo), you can't await the result of the message being sent on the other
+chain within your contract code execution.</li>
+<li><strong>Asymmetric</strong>: sending a message from Ethereum to Starknet (<code>L1-&gt;L2</code>) is
+fully automated by the Starknet sequencer, which means that the message is
+being automatically delivered to the target contract on L2. However, when
+sending a message from Starknet to Ethereum (<code>L2-&gt;L1</code>), only the hash of the
+message is sent to L1 by the Starknet sequencer. You must then consume the
+message manually via a transaction on L1.</li>
 </ul>
 <p>Let's dive into the details.</p>
 <h2 id="the-starknetmessaging-contract"><a class="header" href="#the-starknetmessaging-contract">The StarknetMessaging Contract</a></h2>
-<p>The crucial component of the <code>L1-L2</code> Messaging system is the <a href="https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4"><code>StarknetCore</code></a> contract. It is a set of Solidity contracts deployed on Ethereum that allows Starknet to function properly. One of the contracts of <code>StarknetCore</code> is called <code>StarknetMessaging</code> and it is the contract responsible for passing messages between Starknet and Ethereum. <code>StarknetMessaging</code> follows an <a href="https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6">interface</a> with functions allowing to send messages to L2, receiving messages on L1 from L2 and canceling messages.</p>
+<p>The crucial component of the <code>L1-L2</code> Messaging system is the
+<a href="https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4"><code>StarknetCore</code></a> contract. It is a set of Solidity
+contracts deployed on Ethereum that allows Starknet to function properly. One of
+the contracts of <code>StarknetCore</code> is called <code>StarknetMessaging</code> and it is the
+contract responsible for passing messages between Starknet and Ethereum.
+<code>StarknetMessaging</code> follows an <a href="https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6">interface</a> with functions
+allowing to send messages to L2, receiving messages on L1 from L2 and canceling
+messages.</p>
 <pre><code class="language-js">interface IStarknetMessaging is IStarknetMessagingEvents {
 
     function sendMessageToL2(
@@ -312,14 +337,27 @@
 }
 </code></pre>
 <p><span class="caption"> Starknet messaging contract interface</span></p>
-<p>In the case of <code>L1-&gt;L2</code> messages, the Starknet sequencer is constantly listening to the logs emitted by the <code>StarknetMessaging</code> contract on Ethereum.
-Once a message is detected in a log, the sequencer prepares and executes an <code>L1HandlerTransaction</code> to call the function on the target L2 contract. This takes up to 1-2 minutes to be done (few seconds for ethereum block to be mined, and then the sequencer must build and execute the transaction).</p>
-<p><code>L2-&gt;L1</code> messages are prepared by contract's execution on L2 and are part of the block produced. When the sequencer produces a block, it sends the hash of each message prepared by the contract's execution
-to the <code>StarknetCore</code> contract on L1, where they can then be consumed once the block they belong to is proven and verified on Ethereum (which for now is around 3-4 hours).</p>
+<p>In the case of <code>L1-&gt;L2</code> messages, the Starknet sequencer is constantly listening
+to the logs emitted by the <code>StarknetMessaging</code> contract on Ethereum. Once a
+message is detected in a log, the sequencer prepares and executes an
+<code>L1HandlerTransaction</code> to call the function on the target L2 contract. This
+takes up to 1-2 minutes to be done (few seconds for ethereum block to be mined,
+and then the sequencer must build and execute the transaction).</p>
+<p><code>L2-&gt;L1</code> messages are prepared by contract's execution on L2 and are part of the
+block produced. When the sequencer produces a block, it sends the hash of each
+message prepared by the contract's execution to the <code>StarknetCore</code> contract on
+L1, where they can then be consumed once the block they belong to is proven and
+verified on Ethereum (which for now is around 3-4 hours).</p>
 <h2 id="sending-messages-from-ethereum-to-starknet"><a class="header" href="#sending-messages-from-ethereum-to-starknet">Sending Messages from Ethereum to Starknet</a></h2>
-<p>If you want to send messages from Ethereum to Starknet, your Solidity contracts must call the <code>sendMessageToL2</code> function of the <code>StarknetMessaging</code> contract. To receive these messages on Starknet, you will need to annotate functions that can be called from L1 with the <code>#[l1_handler]</code> attribute.</p>
-<p>Let's take a simple contract taken from <a href="https://github.com/glihm/starknet-messaging-dev/blob/main/solidity/src/ContractMsg.sol">this tutorial</a> where we want to send a message to Starknet.
-The <code>_snMessaging</code> is a state variable already initialized with the address of the <code>StarknetMessaging</code> contract. You can check all Starknet contract and sequencer addresses <a href="https://docs.starknet.io/documentation/tools/important_addresses/">here</a>.</p>
+<p>If you want to send messages from Ethereum to Starknet, your Solidity contracts
+must call the <code>sendMessageToL2</code> function of the <code>StarknetMessaging</code> contract. To
+receive these messages on Starknet, you will need to annotate functions that can
+be called from L1 with the <code>#[l1_handler]</code> attribute.</p>
+<p>Let's take a simple contract taken from <a href="https://github.com/glihm/starknet-messaging-dev/blob/main/solidity/src/ContractMsg.sol">this tutorial</a>
+where we want to send a message to Starknet. The <code>_snMessaging</code> is a state
+variable already initialized with the address of the <code>StarknetMessaging</code>
+contract. You can check all Starknet contract and sequencer addresses
+<a href="https://docs.starknet.io/documentation/tools/important_addresses/">here</a>.</p>
 <pre><code class="language-js">// Sends a message on Starknet with a single felt.
 function sendMessageFelt(
     uint256 contractAddress,
@@ -341,14 +379,22 @@ function sendMessageFelt(
     );
 }
 </code></pre>
-<p>The function sends a message with a single felt value to the <code>StarknetMessaging</code> contract.
-Be aware that your Cairo contract will only understand <code>felt252</code> data type, so if you want to send more complex data, you must ensure that the data serialization into the <code>uint256</code> array follows the Cairo serialization scheme.</p>
-<p>It's important to note that we have <code>{value: msg.value}</code>. In fact, the minimum value we have to send here is <code>20k wei</code>, due to the fact that the <code>StarknetMessaging</code> contract will register
-the hash of our message in the storage of Ethereum.</p>
-<p>In addition to those <code>20k wei</code>, since the <code>L1HandlerTransaction</code> executed by the sequencer is not tied to any account (the message originates from L1), you must also ensure
-that you pay enough fees on L1 for your message to be deserialized and processed on L2.</p>
-<p>The fees of the <code>L1HandlerTransaction</code> are computed in a regular manner as it would be done for an <code>Invoke</code> transaction. For this, you can profile
-the gas consumption using <code>starkli</code> or <code>snforge</code> to estimate the cost of your message execution.</p>
+<p>The function sends a message with a single felt value to the <code>StarknetMessaging</code>
+contract. Be aware that your Cairo contract will only understand <code>felt252</code> data
+type, so if you want to send more complex data, you must ensure that the data
+serialization into the <code>uint256</code> array follows the Cairo serialization scheme.</p>
+<p>It's important to note that we have <code>{value: msg.value}</code>. In fact, the minimum
+value we have to send here is <code>20k wei</code>, due to the fact that the
+<code>StarknetMessaging</code> contract will register the hash of our message in the
+storage of Ethereum.</p>
+<p>In addition to those <code>20k wei</code>, since the <code>L1HandlerTransaction</code> executed by the
+sequencer is not tied to any account (the message originates from L1), you must
+also ensure that you pay enough fees on L1 for your message to be deserialized
+and processed on L2.</p>
+<p>The fees of the <code>L1HandlerTransaction</code> are computed in a regular manner as it
+would be done for an <code>Invoke</code> transaction. For this, you can profile the gas
+consumption using <code>starkli</code> or <code>snforge</code> to estimate the cost of your message
+execution.</p>
 <p>The signature of the <code>sendMessageToL2</code> is:</p>
 <pre><code class="language-js">function sendMessageToL2(
         uint256 toAddress,
@@ -359,9 +405,11 @@ the gas consumption using <code>starkli</code> or <code>snforge</code> to estima
 <p>The parameters are as follows:</p>
 <ul>
 <li><code>toAddress</code>: The contract address on L2 that will be called.</li>
-<li><code>selector</code>: The selector of the function of this contract at <code>toAddress</code>. This selector (function) must have the <code>#[l1_handler]</code> attribute to be callable.</li>
-<li><code>payload</code>: The payload is always an array of <code>felt252</code> (which are represented by <code>uint256</code> in Solidity). For this reason we've inserted the input <code>myFelt</code> into the array.
-This is why we need to insert the input data into an array.</li>
+<li><code>selector</code>: The selector of the function of this contract at <code>toAddress</code>. This
+selector (function) must have the <code>#[l1_handler]</code> attribute to be callable.</li>
+<li><code>payload</code>: The payload is always an array of <code>felt252</code> (which are represented
+by <code>uint256</code> in Solidity). For this reason we've inserted the input <code>myFelt</code>
+into the array. This is why we need to insert the input data into an array.</li>
 </ul>
 <p>On the Starknet side, to receive this message, we have:</p>
 <pre><code class="language-cairo noplayground">    #[l1_handler]
@@ -372,9 +420,19 @@ This is why we need to insert the input data into an array.</li>
         assert!(my_felt == 123, "Invalid value");
     }
 </code></pre>
-<p>We need to add the <code>#[l1_handler]</code> attribute to our function. L1 handlers are special functions that can only be executed by an <code>L1HandlerTransaction</code>. There is nothing particular to do to receive transactions from L1, as the message is relayed by the sequencer automatically. In your <code>#[l1_handler]</code> functions, it is important to verify the sender of the L1 message to ensure that our contract can only receive messages from a trusted L1 contract.</p>
+<p>We need to add the <code>#[l1_handler]</code> attribute to our function. L1 handlers are
+special functions that can only be executed by an <code>L1HandlerTransaction</code>. There
+is nothing particular to do to receive transactions from L1, as the message is
+relayed by the sequencer automatically. In your <code>#[l1_handler]</code> functions, it is
+important to verify the sender of the L1 message to ensure that our contract can
+only receive messages from a trusted L1 contract.</p>
 <h2 id="sending-messages-from-starknet-to-ethereum"><a class="header" href="#sending-messages-from-starknet-to-ethereum">Sending Messages from Starknet to Ethereum</a></h2>
-<p>When sending messages from Starknet to Ethereum, you will have to use the <code>send_message_to_l1</code> syscall in your Cairo contracts. This syscall allows you to send messages to the <code>StarknetMessaging</code> contract on L1. Unlike <code>L1-&gt;L2</code> messages, <code>L2-&gt;L1</code> messages must be consumed manually, which means that you will need your Solidity contract to explicitly call the <code>consumeMessageFromL2</code> function of the <code>StarknetMessaging</code> contract in order to consume the message.</p>
+<p>When sending messages from Starknet to Ethereum, you will have to use the
+<code>send_message_to_l1</code> syscall in your Cairo contracts. This syscall allows you to
+send messages to the <code>StarknetMessaging</code> contract on L1. Unlike <code>L1-&gt;L2</code>
+messages, <code>L2-&gt;L1</code> messages must be consumed manually, which means that you will
+need your Solidity contract to explicitly call the <code>consumeMessageFromL2</code>
+function of the <code>StarknetMessaging</code> contract in order to consume the message.</p>
 <p>To send a message from L2 to L1, what we would do on Starknet is:</p>
 <pre><code class="language-cairo noplayground">        fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {
             // Note here, we "serialize" my_felt, as the payload must be
@@ -383,8 +441,13 @@ This is why we need to insert the input data into an array.</li>
                 .unwrap();
         }
 </code></pre>
-<p>We simply build the payload and pass it, along with the L1 contract address, to the syscall function.</p>
-<p>On L1, the important part is to build the same payload sent by the L2. Then in your Solidity contract, you can call <code>consumeMessageFromL2</code> by passing the L2 contract address and the payload. Please be aware that the L2 contract address expected by the <code>consumeMessageFromL2</code> is the address of the contract that sends the message on the L2 by calling <code>send_message_to_l1_syscall</code>.</p>
+<p>We simply build the payload and pass it, along with the L1 contract address, to
+the syscall function.</p>
+<p>On L1, the important part is to build the same payload sent by the L2. Then in
+your Solidity contract, you can call <code>consumeMessageFromL2</code> by passing the L2
+contract address and the payload. Please be aware that the L2 contract address
+expected by the <code>consumeMessageFromL2</code> is the address of the contract that sends
+the message on the L2 by calling <code>send_message_to_l1_syscall</code>.</p>
 <pre><code class="language-js">function consumeMessageFelt(
     uint256 fromAddress,
     uint256[] calldata payload
@@ -404,28 +467,46 @@ This is why we need to insert the input data into an array.</li>
     require(my_felt &gt; 0, "Invalid value");
 }
 </code></pre>
-<p>As you can see, in this context we don't have to verify which contract from L2 is sending the message (as we do on the L2 to verify which contract from L1 is sending the message). But we are actually using the <code>consumeMessageFromL2</code> of the <code>StarknetCore</code> contract to validate the inputs (the contract address on L2 and the payload) to ensure we are only consuming valid messages.</p>
+<p>As you can see, in this context we don't have to verify which contract from L2
+is sending the message (as we do on the L2 to verify which contract from L1 is
+sending the message). But we are actually using the <code>consumeMessageFromL2</code> of
+the <code>StarknetCore</code> contract to validate the inputs (the contract address on L2
+and the payload) to ensure we are only consuming valid messages.</p>
 <blockquote>
-<p><strong>Note:</strong> The <code>consumeMessageFromL2</code> function of the <code>StarknetCore</code> contract is expected to be called from a Solidity contract, and not directly on the <code>StarknetCore</code> contract. The reason for that is because the <code>StarknetCore</code> contract is using <code>msg.sender</code> to actually compute the hash of the message. And this <code>msg.sender</code> must correspond to the <code>to_address</code> field that is given to the function <code>send_message_to_l1_syscall</code> that is called on Starknet.</p>
+<p><strong>Note:</strong> The <code>consumeMessageFromL2</code> function of the <code>StarknetCore</code> contract
+is expected to be called from a Solidity contract, and not directly on the
+<code>StarknetCore</code> contract. The reason for that is because the <code>StarknetCore</code>
+contract is using <code>msg.sender</code> to actually compute the hash of the message.
+And this <code>msg.sender</code> must correspond to the <code>to_address</code> field that is given
+to the function <code>send_message_to_l1_syscall</code> that is called on Starknet.</p>
 </blockquote>
 <h2 id="cairo-serde"><a class="header" href="#cairo-serde">Cairo Serde</a></h2>
-<p>Before sending messages between L1 and L2, you must remember that Starknet contracts, written in Cairo, can only understand serialized data. And serialized data is always an array of <code>felt252</code>.
-In Solidity we have <code>uint256</code> type, and <code>felt252</code> is approximately 4 bits smaller than <code>uint256</code>. So we have to pay attention to the values contained in the payload of the messages we are sending.
-If, on L1, we build a message with values above the maximum <code>felt252</code>, the message will be stuck and never consumed on L2.</p>
-<p>So for instance, an actual <code>uint256</code> value in Cairo is represented by a struct like:</p>
+<p>Before sending messages between L1 and L2, you must remember that Starknet
+contracts, written in Cairo, can only understand serialized data. And serialized
+data is always an array of <code>felt252</code>. In Solidity we have <code>uint256</code> type, and
+<code>felt252</code> is approximately 4 bits smaller than <code>uint256</code>. So we have to pay
+attention to the values contained in the payload of the messages we are sending.
+If, on L1, we build a message with values above the maximum <code>felt252</code>, the
+message will be stuck and never consumed on L2.</p>
+<p>So for instance, an actual <code>uint256</code> value in Cairo is represented by a struct
+like:</p>
 <pre><code class="language-cairo does_not_compile">struct u256 {
     low: u128,
     high: u128,
 }
 </code></pre>
-<p>which will be serialized as <strong>TWO</strong> felts, one for <code>low</code>, and one for <code>high</code>. This means that to send only one <code>u256</code> to Cairo, you'll need to send a payload from L1 with <strong>TWO</strong> values.</p>
+<p>which will be serialized as <strong>TWO</strong> felts, one for <code>low</code>, and one for <code>high</code>.
+This means that to send only one <code>u256</code> to Cairo, you'll need to send a payload
+from L1 with <strong>TWO</strong> values.</p>
 <pre><code class="language-js">uint256[] memory payload = new uint256[](2);
 // Let's send the value 1 as a u256 in cairo: low = 1, high = 0.
 payload[0] = 1;
 payload[1] = 0;
 </code></pre>
-<p>If you want to learn more about the messaging mechanism, you can visit the <a href="https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/">Starknet documentation</a>.</p>
-<p>You can also find a <a href="https://github.com/glihm/starknet-messaging-dev">detailed guide here</a> to test the messaging system locally.</p>
+<p>If you want to learn more about the messaging mechanism, you can visit the
+<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/">Starknet documentation</a>.</p>
+<p>You can also find a <a href="https://github.com/glihm/starknet-messaging-dev">detailed guide here</a> to test the
+messaging system locally.</p>
 
                     </main>
 
@@ -461,24 +542,6 @@ payload[1] = 0;
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

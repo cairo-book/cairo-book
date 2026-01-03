@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,10 +274,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="testing-smart-contracts"><a class="header" href="#testing-smart-contracts">Testing Smart Contracts</a></h1>
-<p>Testing smart contracts is a critical part of the development process. It is important to ensure that smart contracts behave as expected and that they are secure.</p>
-<p>In a previous section of the Cairo Book, we learned how to write and structure our tests for Cairo programs. We demonstrated how these tests could be run using the <code>scarb</code> command-line tool.
-While this approach is useful for testing standalone Cairo programs and functions, it lacks functionality for testing smart contracts that require control over the contract state and execution context. Therefore, in this section, we will introduce how to use Starknet Foundry, a smart contract development toolchain for Starknet, to test your Cairo contracts.</p>
-<p>Throughout this chapter, we will be using as an example the <code>PizzaFactory</code> contract in Listing 18-1 to demonstrate how to write tests with Starknet Foundry.</p>
+<p>Testing smart contracts is a critical part of the development process. It is
+important to ensure that smart contracts behave as expected and that they are
+secure.</p>
+<p>In a previous section of the Cairo Book, we learned how to write and structure
+our tests for Cairo programs. We demonstrated how these tests could be run using
+the <code>scarb</code> command-line tool. While this approach is useful for testing
+standalone Cairo programs and functions, it lacks functionality for testing
+smart contracts that require control over the contract state and execution
+context. Therefore, in this section, we will introduce how to use Starknet
+Foundry, a smart contract development toolchain for Starknet, to test your Cairo
+contracts.</p>
+<p>Throughout this chapter, we will be using as an example the <code>PizzaFactory</code>
+contract in Listing 18-1 to demonstrate how to write tests
+with Starknet Foundry.</p>
 <pre><code class="language-cairo noplayground">use starknet::ContractAddress;
 
 #[starknet::interface]
@@ -373,9 +384,12 @@ pub mod PizzaFactory {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 18-1: A pizza factory that needs to be tested</span></p>
+<p>pizza factory that needs to be tested</span></p>
 <h2 id="configuring-your-scarb-project-with-starknet-foundry"><a class="header" href="#configuring-your-scarb-project-with-starknet-foundry">Configuring your Scarb project with Starknet Foundry</a></h2>
-<p>The settings of your Scarb project can be configured in the <code>Scarb.toml</code> file. To use Starknet Foundry as your testing tool, you will need to add it as a dev dependency in your <code>Scarb.toml</code> file. At the time of writing, the latest version of Starknet Foundry is <code>v0.39.0</code> - but you should use the latest version.</p>
+<p>The settings of your Scarb project can be configured in the <code>Scarb.toml</code> file.
+To use Starknet Foundry as your testing tool, you will need to add it as a dev
+dependency in your <code>Scarb.toml</code> file. At the time of writing, the latest version
+of Starknet Foundry is <code>v0.39.0</code> - but you should use the latest version.</p>
 <pre><code class="language-toml noplayground">[dev-dependencies]
 snforge_std = "0.51.1"
 
@@ -385,10 +399,21 @@ test = "snforge test"
 [tool.scarb]
 allow-prebuilt-plugins = ["snforge_std"]
 </code></pre>
-<p>The <code>scarb test</code> command is configured to execute <code>scarb cairo-test</code> by default. In our settings, we have configured it to execute <code>snforge test</code> instead. This will allow us to run our tests using Starknet Foundry when we run the <code>scarb test</code> command.</p>
-<p>Once your project is configured, you will need to install Starknet Foundry by following the installation guide from the <a href="https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html">Starknet Foundry Documentation</a>. As usual, we recommend to use <code>asdf</code> to manage versions of your development tools.</p>
+<p>The <code>scarb test</code> command is configured to execute <code>scarb cairo-test</code> by default.
+In our settings, we have configured it to execute <code>snforge test</code> instead. This
+will allow us to run our tests using Starknet Foundry when we run the
+<code>scarb test</code> command.</p>
+<p>Once your project is configured, you will need to install Starknet Foundry by
+following the installation guide from the
+<a href="https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html">Starknet Foundry Documentation</a>.
+As usual, we recommend to use <code>asdf</code> to manage versions of your development
+tools.</p>
 <h2 id="testing-smart-contracts-with-starknet-foundry"><a class="header" href="#testing-smart-contracts-with-starknet-foundry">Testing Smart Contracts with Starknet Foundry</a></h2>
-<p>The usual command to run your tests using Starknet Foundry is <code>snforge test</code>. However, when we configured our projects, we defined that the <code>scarb test</code> command will run the <code>snforge test</code> command. Therefore, during the rest of this chapter, consider that the <code>scarb test</code> command will be using <code>snforge test</code> under the hood.</p>
+<p>The usual command to run your tests using Starknet Foundry is <code>snforge test</code>.
+However, when we configured our projects, we defined that the <code>scarb test</code>
+command will run the <code>snforge test</code> command. Therefore, during the rest of this
+chapter, consider that the <code>scarb test</code> command will be using <code>snforge test</code>
+under the hood.</p>
 <p>The usual testing flow of a contract is as follows:</p>
 <ol>
 <li>Declare the class of the contract to test, identified by its name</li>
@@ -397,7 +422,8 @@ allow-prebuilt-plugins = ["snforge_std"]
 <li>Interact with the contract's entrypoint to test various scenarios</li>
 </ol>
 <h3 id="deploying-the-contract-to-test"><a class="header" href="#deploying-the-contract-to-test">Deploying the Contract to Test</a></h3>
-<p>In Listing 18-2, we wrote a function that deploys the <code>PizzaFactory</code> contract and sets up the dispatcher for interactions.</p>
+<p>In Listing 18-2, we wrote a function that deploys the
+<code>PizzaFactory</code> contract and sets up the dispatcher for interactions.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
 </span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
@@ -497,13 +523,20 @@ allow-prebuilt-plugins = ["snforge_std"]
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 18-2 Deploying the contract to test</span></p>
+<p>18-2 Deploying the contract to test</span></p>
 <h3 id="testing-our-contract"><a class="header" href="#testing-our-contract">Testing our Contract</a></h3>
-<p>Determining the behavior that your contract should respect is the first step in writing tests. In the <code>PizzaFactory</code> contract, we determined that the contract should have the following behavior:</p>
+<p>Determining the behavior that your contract should respect is the first step in
+writing tests. In the <code>PizzaFactory</code> contract, we determined that the contract
+should have the following behavior:</p>
 <ul>
-<li>Upon deployment, the contract owner should be set to the address provided in the constructor, and the factory should have 10 units of pepperoni and pineapple, and no pizzas created.</li>
-<li>If someone tries to make a pizza and they are not the owner, the operation should fail. Otherwise, the pizza count should be incremented, and an event should be emitted.</li>
-<li>If someone tries to take ownership of the contract and they are not the owner, the operation should fail. Otherwise, the owner should be updated.</li>
+<li>Upon deployment, the contract owner should be set to the address provided in
+the constructor, and the factory should have 10 units of pepperoni and
+pineapple, and no pizzas created.</li>
+<li>If someone tries to make a pizza and they are not the owner, the operation
+should fail. Otherwise, the pizza count should be incremented, and an event
+should be emitted.</li>
+<li>If someone tries to take ownership of the contract and they are not the owner,
+the operation should fail. Otherwise, the owner should be updated.</li>
 </ul>
 <h4 id="accessing-storage-variables-with-load"><a class="header" href="#accessing-storage-variables-with-load">Accessing Storage Variables with <code>load</code></a></h4>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
@@ -605,10 +638,18 @@ fn test_constructor() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 18-3: Testing the initial state by loading storage variables </span></p>
-<p>Once our contract is deployed, we want to assert that the initial values are set as expected. If our contract has an entrypoint that returns the value of a storage variable, we can call this entrypoint. Otherwise, we can use the <code>load</code> function from <code>snforge</code> to load the value of a storage variable inside our contract, even if not exposed by an entrypoint.</p>
+<p>18-3: Testing the initial state by loading storage
+variables </span></p>
+<p>Once our contract is deployed, we want to assert that the initial values are set
+as expected. If our contract has an entrypoint that returns the value of a
+storage variable, we can call this entrypoint. Otherwise, we can use the <code>load</code>
+function from <code>snforge</code> to load the value of a storage variable inside our
+contract, even if not exposed by an entrypoint.</p>
 <h4 id="mocking-the-caller-address-with-start_cheat_caller_address"><a class="header" href="#mocking-the-caller-address-with-start_cheat_caller_address">Mocking the Caller Address with <code>start_cheat_caller_address</code></a></h4>
-<p>The security of our factory relies on the owner being the only one able to make pizzas and transfer ownership. To test this, we can use the <code>start_cheat_caller_address</code> function to mock the caller address and assert that the contract behaves as expected.</p>
+<p>The security of our factory relies on the owner being the only one able to make
+pizzas and transfer ownership. To test this, we can use the
+<code>start_cheat_caller_address</code> function to mock the caller address and assert that
+the contract behaves as expected.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
 </span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
@@ -708,10 +749,16 @@ fn test_change_owner_should_panic_when_not_owner() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 18-4: Testing ownership of the contract by mocking the caller address </span></p>
-<p>Using <code>start_cheat_caller_address</code>, we call the <code>change_owner</code> function first as the owner, and then as a different address. We assert that the operation fails when the caller is not the owner, and that the owner is updated when the caller is the owner.</p>
+<p>ownership of the contract by mocking the caller address </span></p>
+<p>Using <code>start_cheat_caller_address</code>, we call the <code>change_owner</code> function first as
+the owner, and then as a different address. We assert that the operation fails
+when the caller is not the owner, and that the owner is updated when the caller
+is the owner.</p>
 <h4 id="capturing-events-with-spy_events"><a class="header" href="#capturing-events-with-spy_events">Capturing Events with <code>spy_events</code></a></h4>
-<p>When a pizza is created, the contract emits an event. To test this, we can use the <code>spy_events</code> function to capture the emitted events and assert that the event was emitted with the expected parameters. Naturally, we can also assert that the pizza count was incremented, and that only the owner can make a pizza.</p>
+<p>When a pizza is created, the contract emits an event. To test this, we can use
+the <code>spy_events</code> function to capture the emitted events and assert that the
+event was emitted with the expected parameters. Naturally, we can also assert
+that the pizza count was incremented, and that only the owner can make a pizza.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
 </span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
@@ -811,11 +858,26 @@ fn test_make_pizza_should_increment_pizza_counter() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 18-5: Testing the events emitted when a pizza is created</span></p>
+<p>18-5: Testing the events emitted when a pizza
+is created</span></p>
 <h4 id="accessing-internal-functions-with-contract_state_for_testing"><a class="header" href="#accessing-internal-functions-with-contract_state_for_testing">Accessing Internal Functions with <code>contract_state_for_testing</code></a></h4>
-<p>All the tests we have seen so far have been using a workflow that involves deploying the contract and interacting with the contract's entrypoints. However, sometimes we may want to test the internals of the contract directly, without deploying the contract. How could this be done, if we were reasoning in purely Cairo terms?</p>
-<p>Recall the struct <code>ContractState</code>, which is used as a parameter to all the entrypoints of a contract. To make it short, this struct contains zero-sized fields, corresponding to the storage variables of the contract. The only purpose of these fields is to allow the Cairo compiler to generate the correct code for accessing the storage variables. If we could create an instance of this struct, we could access these storage variables directly, without deploying the contract...</p>
-<p>...and this is exactly what the <code>contract_state_for_testing</code> function does! It creates an instance of the <code>ContractState</code> struct, allowing us to call any function that takes as parameter a <code>ContractState</code> struct, without deploying the contract. To interact with the storage variables properly, we need to manually import the traits that define access to the storage variables.</p>
+<p>All the tests we have seen so far have been using a workflow that involves
+deploying the contract and interacting with the contract's entrypoints. However,
+sometimes we may want to test the internals of the contract directly, without
+deploying the contract. How could this be done, if we were reasoning in purely
+Cairo terms?</p>
+<p>Recall the struct <code>ContractState</code>, which is used as a parameter to all the
+entrypoints of a contract. To make it short, this struct contains zero-sized
+fields, corresponding to the storage variables of the contract. The only purpose
+of these fields is to allow the Cairo compiler to generate the correct code for
+accessing the storage variables. If we could create an instance of this struct,
+we could access these storage variables directly, without deploying the
+contract...</p>
+<p>...and this is exactly what the <code>contract_state_for_testing</code> function does! It
+creates an instance of the <code>ContractState</code> struct, allowing us to call any
+function that takes as parameter a <code>ContractState</code> struct, without deploying the
+contract. To interact with the storage variables properly, we need to manually
+import the traits that define access to the storage variables.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
 </span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
@@ -915,13 +977,16 @@ fn test_set_as_new_owner_direct() {
 
 
 </code></pre>
-<p><span class="caption">Listing 18-6: Unit testing our contract without deployment</span></p>
-<p>These imports give us access to our internal functions (notably, <code>set_owner</code>), as well as the
-read/write access to the <code>owner</code> storage variable. Once we have these, we can interact with the
-contract directly, changing the address of the owner by calling the <code>set_owner</code> method, accessible
-through <code>InternalTrait</code>, and reading the <code>owner</code> storage variable.</p>
+<p>Unit testing our contract without deployment</span></p>
+<p>These imports give us access to our internal functions (notably, <code>set_owner</code>),
+as well as the read/write access to the <code>owner</code> storage variable. Once we have
+these, we can interact with the contract directly, changing the address of the
+owner by calling the <code>set_owner</code> method, accessible through <code>InternalTrait</code>, and
+reading the <code>owner</code> storage variable.</p>
 <blockquote>
-<p>Note: Both approaches cannot be used at the same time. If you decide to deploy the contract, you interact with it using the dispatcher. If you decide to test the internal functions, you interact with the <code>ContractState</code> object directly.</p>
+<p>Note: Both approaches cannot be used at the same time. If you decide to deploy
+the contract, you interact with it using the dispatcher. If you decide to test
+the internal functions, you interact with the <code>ContractState</code> object directly.</p>
 </blockquote>
 <pre><code class="language-bash noplayground">$ scarb test 
      Running test listing_02_pizza_factory_snfoundry (snforge test)
@@ -948,10 +1013,16 @@ Tests: 6 passed, 0 failed, 0 ignored, 0 filtered out
 
 
 </code></pre>
-<p>The output of the tests shows that all the tests passed successfully, along with an estimation of the gas consumed by each test.</p>
+<p>The output of the tests shows that all the tests passed successfully, along with
+an estimation of the gas consumed by each test.</p>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>In this chapter, we learned how to test smart contracts using Starknet Foundry. We demonstrated how to deploy a contract and interact with it using the dispatcher. We also showed how to test the contract's behavior by mocking the caller address and capturing events. Finally, we demonstrated how to test the internal functions of the contract directly, without deploying the contract.</p>
-<p>To learn more about Starknet Foundry, refer to the <a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry documentation</a>.</p>
+<p>In this chapter, we learned how to test smart contracts using Starknet Foundry.
+We demonstrated how to deploy a contract and interact with it using the
+dispatcher. We also showed how to test the contract's behavior by mocking the
+caller address and capturing events. Finally, we demonstrated how to test the
+internal functions of the contract directly, without deploying the contract.</p>
+<p>To learn more about Starknet Foundry, refer to the
+<a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry documentation</a>.</p>
 
                     </main>
 
@@ -987,24 +1058,6 @@ Tests: 6 passed, 0 failed, 0 ignored, 0 filtered out
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

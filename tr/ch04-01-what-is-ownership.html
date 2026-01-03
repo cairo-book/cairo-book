@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,7 +274,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="ownership-using-a-linear-type-system"><a class="header" href="#ownership-using-a-linear-type-system">Ownership Using a Linear Type System</a></h1>
-<p>Cairo uses a linear type system. In such a type system, any value (a basic type, a struct, an enum) must be used and must only be used once. 'Used' here means that the value is either <em>destroyed</em> or <em>moved</em>.</p>
+<p>Cairo uses a linear type system. In such a type system, any value (a basic type,
+a struct, an enum) must be used and must only be used once. 'Used' here means
+that the value is either <em>destroyed</em> or <em>moved</em>.</p>
 <p><em>Destruction</em> can happen in several ways:</p>
 <ul>
 <li>a variable goes out of scope.</li>
@@ -281,33 +284,44 @@
 <li>explicit destruction using <code>destruct()</code>.</li>
 </ul>
 <p><em>Moving</em> a value simply means passing that value to another function.</p>
-<p>This results in somewhat similar constraints to the Rust ownership model, but there are some differences.
-In particular, the Rust ownership model exists (in part) to avoid data races and concurrent mutable access to a memory value. This is obviously impossible in Cairo since the memory is immutable.
-Instead, Cairo leverages its linear type system for two main purposes:</p>
+<p>This results in somewhat similar constraints to the Rust ownership model, but
+there are some differences. In particular, the Rust ownership model exists (in
+part) to avoid data races and concurrent mutable access to a memory value. This
+is obviously impossible in Cairo since the memory is immutable. Instead, Cairo
+leverages its linear type system for two main purposes:</p>
 <ul>
 <li>Ensuring that all code is provable and thus verifiable.</li>
 <li>Abstracting away the immutable memory of the Cairo VM.</li>
 </ul>
 <h3 id="ownership"><a class="header" href="#ownership">Ownership</a></h3>
-<p>In Cairo, ownership applies to <em>variables</em> and not to <em>values</em>. A value can safely be referred to by many different variables (even if they are mutable variables), as the value itself is always immutable.
-Variables however can be mutable, so the compiler must ensure that constant variables aren't accidentally modified by the programmer.
-This makes it possible to talk about ownership of a variable: the owner is the code that can read (and write if mutable) the variable.</p>
+<p>In Cairo, ownership applies to <em>variables</em> and not to <em>values</em>. A value can
+safely be referred to by many different variables (even if they are mutable
+variables), as the value itself is always immutable. Variables however can be
+mutable, so the compiler must ensure that constant variables aren't accidentally
+modified by the programmer. This makes it possible to talk about ownership of a
+variable: the owner is the code that can read (and write if mutable) the
+variable.</p>
 <p>This means that variables (not values) follow similar rules to Rust values:</p>
 <ul>
 <li>Each variable in Cairo has an owner.</li>
 <li>There can only be one owner at a time.</li>
 <li>When the owner goes out of scope, the variable is destroyed.</li>
 </ul>
-<p>Now that we’re past basic Cairo syntax, we won’t include all the <code>fn main() {</code> code in examples, so if you’re following along, make sure to put the following examples inside a main function manually. As a result, our examples will be a bit more concise, letting us focus on the actual details rather than boilerplate code.</p>
+<p>Now that we’re past basic Cairo syntax, we won’t include all the <code>fn main() {</code>
+code in examples, so if you’re following along, make sure to put the following
+examples inside a main function manually. As a result, our examples will be a
+bit more concise, letting us focus on the actual details rather than boilerplate
+code.</p>
 <h2 id="variable-scope"><a class="header" href="#variable-scope">Variable Scope</a></h2>
-<p>As a first example of the linear type system, we’ll look at the <em>scope</em> of some variables. A
-scope is the range within a program for which an item is valid. Take the
-following variable:</p>
+<p>As a first example of the linear type system, we’ll look at the <em>scope</em> of some
+variables. A scope is the range within a program for which an item is valid.
+Take the following variable:</p>
 <pre><code class="language-cairo noplayground">let s = 'hello';
 </code></pre>
-<p>The variable <code>s</code> refers to a short string. The variable is valid from the point at
-which it’s declared until the end of the current <em>scope</em>. Listing 4-1 shows a
-program with comments annotating where the variable <code>s</code> would be valid.</p>
+<p>The variable <code>s</code> refers to a short string. The variable is valid from the point
+at which it’s declared until the end of the current <em>scope</em>. Listing
+4-1 shows a program with comments annotating where the
+variable <code>s</code> would be valid.</p>
 <pre><code class="language-cairo"><span class="boring">//TAG: ignore_fmt
 </span><span class="boring">#[executable]
 </span><span class="boring">fn main() {
@@ -317,17 +331,23 @@ program with comments annotating where the variable <code>s</code> would be vali
     } // this scope is now over, and s is no longer valid
 <span class="boring">}
 </span></code></pre>
-<p><span class="caption">Listing 4-1: A variable and the scope in which it is valid</span></p>
+<p>A variable and the scope in which it is valid</span></p>
 <p>In other words, there are two important points in time here:</p>
 <ul>
 <li>When <code>s</code> comes <em>into</em> scope, it is valid.</li>
 <li>It remains valid until it goes <em>out of</em> scope.</li>
 </ul>
-<p>At this point, the relationship between scopes and when variables are valid is similar to that in other programming languages. Now we’ll build on top of this understanding by using the <code>Array</code> type we introduced in the previous <a href="./ch03-01-arrays.html">"Arrays"</a> section.</p>
+<p>At this point, the relationship between scopes and when variables are valid is
+similar to that in other programming languages. Now we’ll build on top of this
+understanding by using the <code>Array</code> type we introduced in the previous
+<a href="./ch03-01-arrays.html">"Arrays"</a> section.</p>
 <h3 id="moving-values"><a class="header" href="#moving-values">Moving values</a></h3>
-<p>As said earlier, <em>moving</em> a value simply means passing that value to another function. When that happens, the variable referring to that value in the original scope is destroyed and can no longer be used, and a new variable is created to hold the same value.</p>
-<p>Arrays are an example of a complex type that is moved when passing it to another function.
-Here is a short reminder of what an array looks like:</p>
+<p>As said earlier, <em>moving</em> a value simply means passing that value to another
+function. When that happens, the variable referring to that value in the
+original scope is destroyed and can no longer be used, and a new variable is
+created to hold the same value.</p>
+<p>Arrays are an example of a complex type that is moved when passing it to another
+function. Here is a short reminder of what an array looks like:</p>
 <pre><code class="language-cairo"><span class="boring">#[executable]
 </span>fn main() {
     let mut arr: Array&lt;u128&gt; = array![];
@@ -335,8 +355,9 @@ Here is a short reminder of what an array looks like:</p>
 <span class="boring">    arr.append(2);
 </span><span class="boring">}
 </span></code></pre>
-<p>How does the type system ensure that the Cairo program never tries to write to the same memory cell twice?
-Consider the following code, where we try to remove the front of the array twice:</p>
+<p>How does the type system ensure that the Cairo program never tries to write to
+the same memory cell twice? Consider the following code, where we try to remove
+the front of the array twice:</p>
 <pre><code class="language-cairo does_not_compile">fn foo(mut arr: Array&lt;u128&gt;) {
     arr.pop_front();
 }
@@ -348,8 +369,13 @@ fn main() {
     foo(arr);
 }
 </code></pre>
-<p>In this case, we try to pass the same value (the array in the <code>arr</code> variable) to both function calls. This means our code tries to remove the first element twice, which would try to write to the same memory cell twice - which is forbidden by the Cairo VM, leading to a runtime error.
-Thankfully, this code does not actually compile. Once we have passed the array to the <code>foo</code> function, the variable <code>arr</code> is no longer usable. We get this compile-time error, telling us that we would need Array to implement the Copy Trait:</p>
+<p>In this case, we try to pass the same value (the array in the <code>arr</code> variable) to
+both function calls. This means our code tries to remove the first element
+twice, which would try to write to the same memory cell twice - which is
+forbidden by the Cairo VM, leading to a runtime error. Thankfully, this code
+does not actually compile. Once we have passed the array to the <code>foo</code> function,
+the variable <code>arr</code> is no longer usable. We get this compile-time error, telling
+us that we would need Array to implement the Copy Trait:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_02_pass_array_by_value v0.1.0 (listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/Scarb.toml)
 warn: Unhandled `#[must_use]` type `core::option::Option::&lt;core::integer::u128&gt;`
@@ -372,10 +398,21 @@ error: `scarb` command exited with error
 
 </code></pre>
 <h2 id="the-copy-trait"><a class="header" href="#the-copy-trait">The <code>Copy</code> Trait</a></h2>
-<p>The <code>Copy</code> trait allows simple types to be duplicated by copying felts, without allocating new memory segments. This contrasts with Cairo's default "move" semantics, which transfer ownership of values to ensure memory safety and prevent issues like multiple writes to the same memory cell. <code>Copy</code> is implemented for types where duplication is safe and efficient, bypassing the need for move semantics. Types like <code>Array</code> and <code>Felt252Dict</code> cannot implement <code>Copy</code>, as manipulating them in different scopes is forbidden by the type system.</p>
-<p>All basic types previously described in <a href="./ch02-02-data-types.html">"Data Types"</a> implement by default the <code>Copy</code> trait.</p>
-<p>While Arrays and Dictionaries can't be copied, custom types that don't contain either of them can be.
-You can implement the <code>Copy</code> trait on your type by adding the <code>#[derive(Copy)]</code> annotation to your type definition. However, Cairo won't allow a type to be annotated with Copy if the type itself or any of its components doesn't implement the Copy trait.</p>
+<p>The <code>Copy</code> trait allows simple types to be duplicated by copying felts, without
+allocating new memory segments. This contrasts with Cairo's default "move"
+semantics, which transfer ownership of values to ensure memory safety and
+prevent issues like multiple writes to the same memory cell. <code>Copy</code> is
+implemented for types where duplication is safe and efficient, bypassing the
+need for move semantics. Types like <code>Array</code> and <code>Felt252Dict</code> cannot implement
+<code>Copy</code>, as manipulating them in different scopes is forbidden by the type
+system.</p>
+<p>All basic types previously described in <a href="./ch02-02-data-types.html">"Data Types"</a> implement by
+default the <code>Copy</code> trait.</p>
+<p>While Arrays and Dictionaries can't be copied, custom types that don't contain
+either of them can be. You can implement the <code>Copy</code> trait on your type by adding
+the <code>#[derive(Copy)]</code> annotation to your type definition. However, Cairo won't
+allow a type to be annotated with Copy if the type itself or any of its
+components doesn't implement the Copy trait.</p>
 <pre><code class="language-cairo ignore_format">#[derive(Copy, Drop)]
 struct Point {
     x: u128,
@@ -392,16 +429,25 @@ fn main() {
 fn foo(p: Point) { // do something with p
 }
 </code></pre>
-<p>In this example, we can pass <code>p1</code> twice to the foo function because the <code>Point</code> type implements the <code>Copy</code> trait. This means that when we pass <code>p1</code> to <code>foo</code>, we are actually passing a copy of <code>p1</code>, so <code>p1</code> remains valid. In ownership terms, this means that the ownership of <code>p1</code> remains with the <code>main</code> function.
-If you remove the <code>Copy</code> trait derivation from the <code>Point</code> type, you will get a compile-time error when trying to compile the code.</p>
-<p><em>Don't worry about the <code>Struct</code> keyword. We will introduce this in <a href="./ch05-00-using-structs-to-structure-related-data.html">Chapter 5</a>.</em></p>
+<p>In this example, we can pass <code>p1</code> twice to the foo function because the <code>Point</code>
+type implements the <code>Copy</code> trait. This means that when we pass <code>p1</code> to <code>foo</code>, we
+are actually passing a copy of <code>p1</code>, so <code>p1</code> remains valid. In ownership terms,
+this means that the ownership of <code>p1</code> remains with the <code>main</code> function. If you
+remove the <code>Copy</code> trait derivation from the <code>Point</code> type, you will get a
+compile-time error when trying to compile the code.</p>
+<p><em>Don't worry about the <code>Struct</code> keyword. We will introduce this in <a href="./ch05-00-using-structs-to-structure-related-data.html">Chapter
+5</a>.</em></p>
 <h2 id="destroying-values---example-with-feltdict"><a class="header" href="#destroying-values---example-with-feltdict">Destroying Values - Example with FeltDict</a></h2>
-<p>The other way linear types can be <em>used</em> is by being destroyed. Destruction must ensure that the 'resource' is now correctly released. In Rust, for example, this could be closing the access to a file, or locking a mutex.
-In Cairo, one type that has such behaviour is <code>Felt252Dict</code>. For provability, dicts must be 'squashed' when they are destructed.
-This would be very easy to forget, so it is enforced by the type system and the compiler.</p>
+<p>The other way linear types can be <em>used</em> is by being destroyed. Destruction must
+ensure that the 'resource' is now correctly released. In Rust, for example, this
+could be closing the access to a file, or locking a mutex. In Cairo, one type
+that has such behaviour is <code>Felt252Dict</code>. For provability, dicts must be
+'squashed' when they are destructed. This would be very easy to forget, so it is
+enforced by the type system and the compiler.</p>
 <h3 id="no-op-destruction-the-drop-trait"><a class="header" href="#no-op-destruction-the-drop-trait">No-op Destruction: the <code>Drop</code> Trait</a></h3>
-<p>You may have noticed that the <code>Point</code> type in the previous example also implements the <code>Drop</code> trait.
-For example, the following code will not compile, because the struct <code>A</code> is not moved or destroyed before it goes out of scope:</p>
+<p>You may have noticed that the <code>Point</code> type in the previous example also
+implements the <code>Drop</code> trait. For example, the following code will not compile,
+because the struct <code>A</code> is not moved or destroyed before it goes out of scope:</p>
 <pre><code class="language-cairo does_not_compile">struct A {}
 
 #[executable]
@@ -409,9 +455,14 @@ fn main() {
     A {}; // error: Variable not dropped.
 }
 </code></pre>
-<p>However, types that implement the <code>Drop</code> trait are automatically destroyed when going out of scope. This destruction does nothing, it is a no-op - simply a hint to the compiler that this type can safely be destroyed once it's no longer useful. We call this "dropping" a value.</p>
-<p>At the moment, the <code>Drop</code> implementation can be derived for all types, allowing them to be dropped when going out of scope, except for dictionaries (<code>Felt252Dict</code>) and types containing dictionaries.
-For example, the following code compiles:</p>
+<p>However, types that implement the <code>Drop</code> trait are automatically destroyed when
+going out of scope. This destruction does nothing, it is a no-op - simply a hint
+to the compiler that this type can safely be destroyed once it's no longer
+useful. We call this "dropping" a value.</p>
+<p>At the moment, the <code>Drop</code> implementation can be derived for all types, allowing
+them to be dropped when going out of scope, except for dictionaries
+(<code>Felt252Dict</code>) and types containing dictionaries. For example, the following
+code compiles:</p>
 <pre><code class="language-cairo">#[derive(Drop)]
 struct A {}
 
@@ -421,9 +472,14 @@ fn main() {
 }
 </code></pre>
 <h3 id="destruction-with-a-side-effect-the-destruct-trait"><a class="header" href="#destruction-with-a-side-effect-the-destruct-trait">Destruction with a Side-effect: the <code>Destruct</code> Trait</a></h3>
-<p>When a value is destroyed, the compiler first tries to call the <code>drop</code> method on that type. If it doesn't exist, then the compiler tries to call <code>destruct</code> instead. This method is provided by the <code>Destruct</code> trait.</p>
-<p>As said earlier, dictionaries in Cairo are types that must be "squashed" when destructed, so that the sequence of access can be proven. This is easy for developers to forget, so instead dictionaries implement the <code>Destruct</code> trait to ensure that all dictionaries are <em>squashed</em> when going out of scope.
-As such, the following example will not compile:</p>
+<p>When a value is destroyed, the compiler first tries to call the <code>drop</code> method on
+that type. If it doesn't exist, then the compiler tries to call <code>destruct</code>
+instead. This method is provided by the <code>Destruct</code> trait.</p>
+<p>As said earlier, dictionaries in Cairo are types that must be "squashed" when
+destructed, so that the sequence of access can be proven. This is easy for
+developers to forget, so instead dictionaries implement the <code>Destruct</code> trait to
+ensure that all dictionaries are <em>squashed</em> when going out of scope. As such,
+the following example will not compile:</p>
 <pre><code class="language-cairo does_not_compile">use core::dict::Felt252Dict;
 
 struct A {
@@ -449,7 +505,10 @@ error: could not compile `no_listing_06_no_destruct_compile_fails` due to previo
 error: `scarb` command exited with error
 
 </code></pre>
-<p>When <code>A</code> goes out of scope, it can't be dropped as it implements neither the <code>Drop</code> (as it contains a dictionary and can't <code>derive(Drop)</code>) nor the <code>Destruct</code> trait. To fix this, we can derive the <code>Destruct</code> trait implementation for the <code>A</code> type:</p>
+<p>When <code>A</code> goes out of scope, it can't be dropped as it implements neither the
+<code>Drop</code> (as it contains a dictionary and can't <code>derive(Drop)</code>) nor the <code>Destruct</code>
+trait. To fix this, we can derive the <code>Destruct</code> trait implementation for the
+<code>A</code> type:</p>
 <pre><code class="language-cairo">use core::dict::Felt252Dict;
 
 #[derive(Destruct)]
@@ -462,9 +521,14 @@ fn main() {
     A { dict: Default::default() }; // No error here
 }
 </code></pre>
-<p>Now, when <code>A</code> goes out of scope, its dictionary will be automatically <code>squashed</code>, and the program will compile.</p>
+<p>Now, when <code>A</code> goes out of scope, its dictionary will be automatically
+<code>squashed</code>, and the program will compile.</p>
 <h2 id="copy-array-data-with-clone"><a class="header" href="#copy-array-data-with-clone">Copy Array Data with <code>clone</code></a></h2>
-<p>If we <em>do</em> want to deeply copy the data of an <code>Array</code>, we can use a common method called <code>clone</code>. We’ll discuss method syntax in a dedicated section in <a href="./ch05-03-method-syntax.html">Chapter 5</a>, but because methods are a common feature in many programming languages, you’ve probably seen them before.</p>
+<p>If we <em>do</em> want to deeply copy the data of an <code>Array</code>, we can use a common
+method called <code>clone</code>. We’ll discuss method syntax in a dedicated section in
+<a href="./ch05-03-method-syntax.html">Chapter 5</a>, but
+because methods are a common feature in many programming languages, you’ve
+probably seen them before.</p>
 <p>Here’s an example of the <code>clone</code> method in action.</p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
@@ -472,11 +536,15 @@ fn main() {
     let arr2 = arr1.clone();
 }
 </code></pre>
-<p>When you see a call to <code>clone</code>, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.
-In this case, the <em>value</em> <code>arr1</code> refers to is being copied, resulting in new memory cells being used, and a new <em>variable</em> <code>arr2</code> is created, referring to the new copied value.</p>
+<p>When you see a call to <code>clone</code>, you know that some arbitrary code is being
+executed and that code may be expensive. It’s a visual indicator that something
+different is going on. In this case, the <em>value</em> <code>arr1</code> refers to is being
+copied, resulting in new memory cells being used, and a new <em>variable</em> <code>arr2</code> is
+created, referring to the new copied value.</p>
 <h2 id="return-values-and-scope"><a class="header" href="#return-values-and-scope">Return Values and Scope</a></h2>
-<p>Returning values is equivalent to <em>moving</em> them. Listing 4-2 shows an example of a
-function that returns some value, with similar annotations as those in Listing 4-1.</p>
+<p>Returning values is equivalent to <em>moving</em> them. Listing
+4-2 shows an example of a function that returns some
+value, with similar annotations as those in Listing 4-1.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">#[derive(Drop)]
 struct A {}
@@ -514,9 +582,14 @@ fn takes_and_gives_back(some_a: A) -&gt; A { // some_a comes into scope
                                           // function
 }
 </code></pre>
-<p><span class="caption">Listing 4-2: Moving return values</span></p>
-<p>While this works, moving into and out of every function is a bit tedious. What if we want to let a function use a value but not move the value? It’s quite annoying that anything we pass in also needs to be passed back if we want to use it again, in addition to any data resulting from the body of the function that we might want to return as well.</p>
-<p>Cairo does let us return multiple values using a tuple, as shown in Listing 4-3.</p>
+<p>4-2: Moving return values</span></p>
+<p>While this works, moving into and out of every function is a bit tedious. What
+if we want to let a function use a value but not move the value? It’s quite
+annoying that anything we pass in also needs to be passed back if we want to use
+it again, in addition to any data resulting from the body of the function that
+we might want to return as well.</p>
+<p>Cairo does let us return multiple values using a tuple, as shown in Listing
+4-3.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
@@ -531,8 +604,10 @@ fn calculate_length(arr: Array&lt;u128&gt;) -&gt; (Array&lt;u128&gt;, usize) {
     (arr, length)
 }
 </code></pre>
-<p><span class="caption">Listing 4-3: Returning many values</span></p>
-<p>But this is too much ceremony and a lot of work for a concept that should be common. Luckily for us, Cairo has two features for passing a value without destroying or moving it, called <em>references</em> and <em>snapshots</em>.</p>
+<p>4-3: Returning many values</span></p>
+<p>But this is too much ceremony and a lot of work for a concept that should be
+common. Luckily for us, Cairo has two features for passing a value without
+destroying or moving it, called <em>references</em> and <em>snapshots</em>.</p>
 
                     </main>
 
@@ -568,24 +643,6 @@ fn calculate_length(arr: Array&lt;u128&gt;) -&gt; (Array&lt;u128&gt;, usize) {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

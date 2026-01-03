@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,9 +274,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="the-match-control-flow-construct"><a class="header" href="#the-match-control-flow-construct">The Match Control Flow Construct</a></h1>
-<p>Cairo has an extremely powerful control flow construct called <code>match</code> that allows you to compare a value against a series of patterns and then execute code based on which pattern matches. Patterns can be made up of literal values, variable names, wildcards, and many other things. The power of <code>match</code> comes from the expressiveness of the patterns and the fact that the compiler confirms that all possible cases are handled.</p>
-<p>Think of a <code>match</code> expression as being like a coin-sorting machine: coins slide down a track with variously sized holes along it, and each coin falls through the first hole it encounters that it fits into. In the same way, values go through each pattern in a match, and at the first pattern the value “fits”, the value falls into the associated code block to be used during execution.</p>
-<p>Speaking of coins, let’s use them as an example using <code>match</code>! We can write a function that takes an unknown US coin and, in a similar way as the counting machine, determines which coin it is and returns its value in cents, as shown in Listing 6-1.</p>
+<p>Cairo has an extremely powerful control flow construct called <code>match</code> that
+allows you to compare a value against a series of patterns and then execute code
+based on which pattern matches. Patterns can be made up of literal values,
+variable names, wildcards, and many other things. The power of <code>match</code> comes
+from the expressiveness of the patterns and the fact that the compiler confirms
+that all possible cases are handled.</p>
+<p>Think of a <code>match</code> expression as being like a coin-sorting machine: coins slide
+down a track with variously sized holes along it, and each coin falls through
+the first hole it encounters that it fits into. In the same way, values go
+through each pattern in a match, and at the first pattern the value “fits”, the
+value falls into the associated code block to be used during execution.</p>
+<p>Speaking of coins, let’s use them as an example using <code>match</code>! We can write a
+function that takes an unknown US coin and, in a similar way as the counting
+machine, determines which coin it is and returns its value in cents, as shown in
+Listing 6-1.</p>
 <pre><code class="language-cairo noplayground">enum Coin {
     Penny,
     Nickel,
@@ -292,12 +305,33 @@ fn value_in_cents(coin: Coin) -&gt; felt252 {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 6-1: An enum and a <code>match</code> expression that has the variants of the enum as its patterns</span></p>
-<p>Let’s break down the <code>match</code> expression in the <code>value_in_cents</code> function. First, we list the <code>match</code> keyword followed by an expression, which in this case is the value <code>coin</code>. This seems very similar to a conditional expression used with the <code>if</code> statement, but there’s a big difference: with <code>if</code>, the condition needs to evaluate to a boolean value, but here it can be any type. The type of <code>coin</code> in this example is the <code>Coin</code> enum that we defined on the first line.</p>
-<p>Next are the <code>match</code> arms. An arm has two parts: a pattern and some code. The first arm here has a pattern that is the value <code>Coin::Penny</code> and then the <code>=&gt;</code> operator that separates the pattern and the code to run. The code in this case is just the value <code>1</code>. Each arm is separated from the next with a comma.</p>
-<p>When the <code>match</code> expression executes, it compares the resultant value against the pattern of each arm, in the order they are given. If a pattern matches the value, the code associated with that pattern is executed. If that pattern doesn’t match the value, execution continues to the next arm, much as in a coin-sorting machine. We can have as many arms as we need: in the above example, our <code>match</code> has four arms.</p>
-<p>The code associated with each arm is an expression, and the resultant value of the expression in the matching arm is the value that gets returned for the entire match expression.</p>
-<p>We don’t typically use curly brackets if the <code>match</code> arm code is short, as it is in our example where each arm just returns a value. If you want to run multiple lines of code in a <code>match</code> arm, you must use curly brackets, with a comma following the arm. For example, the following code prints “Lucky penny!” every time the method is called with a <code>Coin::Penny</code>, but still returns the last value of the block, <code>1</code>:</p>
+<p>and a <code>match</code> expression that has the variants of the enum as its
+patterns</span></p>
+<p>Let’s break down the <code>match</code> expression in the <code>value_in_cents</code> function. First,
+we list the <code>match</code> keyword followed by an expression, which in this case is the
+value <code>coin</code>. This seems very similar to a conditional expression used with the
+<code>if</code> statement, but there’s a big difference: with <code>if</code>, the condition needs to
+evaluate to a boolean value, but here it can be any type. The type of <code>coin</code> in
+this example is the <code>Coin</code> enum that we defined on the first line.</p>
+<p>Next are the <code>match</code> arms. An arm has two parts: a pattern and some code. The
+first arm here has a pattern that is the value <code>Coin::Penny</code> and then the <code>=&gt;</code>
+operator that separates the pattern and the code to run. The code in this case
+is just the value <code>1</code>. Each arm is separated from the next with a comma.</p>
+<p>When the <code>match</code> expression executes, it compares the resultant value against
+the pattern of each arm, in the order they are given. If a pattern matches the
+value, the code associated with that pattern is executed. If that pattern
+doesn’t match the value, execution continues to the next arm, much as in a
+coin-sorting machine. We can have as many arms as we need: in the above example,
+our <code>match</code> has four arms.</p>
+<p>The code associated with each arm is an expression, and the resultant value of
+the expression in the matching arm is the value that gets returned for the
+entire match expression.</p>
+<p>We don’t typically use curly brackets if the <code>match</code> arm code is short, as it is
+in our example where each arm just returns a value. If you want to run multiple
+lines of code in a <code>match</code> arm, you must use curly brackets, with a comma
+following the arm. For example, the following code prints “Lucky penny!” every
+time the method is called with a <code>Coin::Penny</code>, but still returns the last value
+of the block, <code>1</code>:</p>
 <pre><code class="language-cairo noplayground">fn value_in_cents(coin: Coin) -&gt; felt252 {
     match coin {
         Coin::Penny =&gt; {
@@ -311,8 +345,15 @@ fn value_in_cents(coin: Coin) -&gt; felt252 {
 }
 </code></pre>
 <h2 id="patterns-that-bind-to-values"><a class="header" href="#patterns-that-bind-to-values">Patterns That Bind to Values</a></h2>
-<p>Another useful feature of <code>match</code> arms is that they can bind to the parts of the values that match the pattern. This is how we can extract values out of enum variants.</p>
-<p>As an example, let’s change one of our enum variants to hold data inside it. From 1999 through 2008, the United States minted quarters with different designs for each of the 50 states on one side. No other coins got state designs, so only quarters have this extra value. We can add this information to our <code>enum</code> by changing the <code>Quarter</code> variant to include a <code>UsState</code> value stored inside it, which we’ve done in Listing 6-2.</p>
+<p>Another useful feature of <code>match</code> arms is that they can bind to the parts of the
+values that match the pattern. This is how we can extract values out of enum
+variants.</p>
+<p>As an example, let’s change one of our enum variants to hold data inside it.
+From 1999 through 2008, the United States minted quarters with different designs
+for each of the 50 states on one side. No other coins got state designs, so only
+quarters have this extra value. We can add this information to our <code>enum</code> by
+changing the <code>Quarter</code> variant to include a <code>UsState</code> value stored inside it,
+which we’ve done in Listing 6-2.</p>
 <pre><code class="language-cairo noplayground">
 #[derive(Drop, Debug)] // Debug so we can inspect the state in a minute
 enum UsState {
@@ -328,9 +369,16 @@ enum Coin {
     Quarter: UsState,
 }
 </code></pre>
-<p><span class="caption">Listing 6-2: A <code>Coin</code> enum in which the <code>Quarter</code> variant also holds a <code>UsState</code> value</span></p>
-<p>Let’s imagine that a friend is trying to collect all 50 state quarters. While we sort our loose change by coin type, we’ll also call out the name of the state associated with each quarter so that if it’s one our friend doesn’t have, they can add it to their collection.</p>
-<p>In the <code>match</code> expression for this code, we add a variable called <code>state</code> to the pattern that matches values of the variant <code>Coin::Quarter</code>. When a <code>Coin::Quarter</code> matches, the <code>state</code> variable will bind to the value of that quarter’s state. Then we can use <code>state</code> in the code for that arm, like so:</p>
+<p>6-2: A <code>Coin</code> enum in which the <code>Quarter</code> variant also
+holds a <code>UsState</code> value</span></p>
+<p>Let’s imagine that a friend is trying to collect all 50 state quarters. While we
+sort our loose change by coin type, we’ll also call out the name of the state
+associated with each quarter so that if it’s one our friend doesn’t have, they
+can add it to their collection.</p>
+<p>In the <code>match</code> expression for this code, we add a variable called <code>state</code> to the
+pattern that matches values of the variant <code>Coin::Quarter</code>. When a
+<code>Coin::Quarter</code> matches, the <code>state</code> variable will bind to the value of that
+quarter’s state. Then we can use <code>state</code> in the code for that arm, like so:</p>
 <pre><code class="language-cairo noplayground">fn value_in_cents(coin: Coin) -&gt; felt252 {
     match coin {
         Coin::Penny =&gt; 1,
@@ -343,15 +391,30 @@ enum Coin {
     }
 }
 </code></pre>
-<p>Because <code>state</code> is an <code>UsState</code> enum which implements the <code>Debug</code> trait, we can print <code>state</code> value with <code>println!</code> macro.</p>
+<p>Because <code>state</code> is an <code>UsState</code> enum which implements the <code>Debug</code> trait, we can
+print <code>state</code> value with <code>println!</code> macro.</p>
 <blockquote>
-<p>Note: <code>{:?}</code> is a special formatting syntax that allows to print a debug form of the parameter passed to the <code>println!</code> macro. You can find more information about it in <a href="./appendix-03-derivable-traits.html#debug-for-printing-and-debugging">Appendix C</a>.</p>
+<p>Note: <code>{:?}</code> is a special formatting syntax that allows to print a debug form
+of the parameter passed to the <code>println!</code> macro. You can find more information
+about it in <a href="./appendix-03-derivable-traits.html#debug-for-printing-and-debugging">Appendix C</a>.</p>
 </blockquote>
-<p>If we were to call <code>value_in_cents(Coin::Quarter(UsState::Alaska))</code>, <code>coin</code> would be <code>Coin::Quarter(UsState::Alaska)</code>. When we compare that value with each of the match arms, none of them match until we reach <code>Coin::Quarter(state)</code>. At that point, the binding for <code>state</code> will be the value <code>UsState::Alaska</code>. We can then use that binding in <code>println!</code> macro, thus getting the inner state value out of the <code>Coin</code> enum variant for <code>Quarter</code>.</p>
+<p>If we were to call <code>value_in_cents(Coin::Quarter(UsState::Alaska))</code>, <code>coin</code>
+would be <code>Coin::Quarter(UsState::Alaska)</code>. When we compare that value with each
+of the match arms, none of them match until we reach <code>Coin::Quarter(state)</code>. At
+that point, the binding for <code>state</code> will be the value <code>UsState::Alaska</code>. We can
+then use that binding in <code>println!</code> macro, thus getting the inner state value
+out of the <code>Coin</code> enum variant for <code>Quarter</code>.</p>
 <h2 id="matching-with-optiont"><a class="header" href="#matching-with-optiont">Matching with <code>Option&lt;T&gt;</code></a></h2>
-<p>In the previous section, we wanted to get the inner <code>T</code> value out of the <code>Some</code> case when using <code>Option&lt;T&gt;</code>; we can also handle <code>Option&lt;T&gt;</code> using <code>match</code>, as we did with the <code>Coin</code> enum! Instead of comparing coins, we’ll compare the variants of <code>Option&lt;T&gt;</code>, but the way the <code>match</code> expression works remains the same.</p>
-<p>Let’s say we want to write a function that takes an <code>Option&lt;u8&gt;</code> and, if there’s a value inside, adds <code>1</code> to that value. If there is no value inside, the function should return the <code>None</code> value and not attempt to perform any operations.</p>
-<p>This function is very easy to write, thanks to <code>match</code>, and will look like Listing 6-3.</p>
+<p>In the previous section, we wanted to get the inner <code>T</code> value out of the <code>Some</code>
+case when using <code>Option&lt;T&gt;</code>; we can also handle <code>Option&lt;T&gt;</code> using <code>match</code>, as we
+did with the <code>Coin</code> enum! Instead of comparing coins, we’ll compare the variants
+of <code>Option&lt;T&gt;</code>, but the way the <code>match</code> expression works remains the same.</p>
+<p>Let’s say we want to write a function that takes an <code>Option&lt;u8&gt;</code> and, if there’s
+a value inside, adds <code>1</code> to that value. If there is no value inside, the
+function should return the <code>None</code> value and not attempt to perform any
+operations.</p>
+<p>This function is very easy to write, thanks to <code>match</code>, and will look like
+Listing 6-3.</p>
 <pre><code class="language-cairo">fn plus_one(x: Option&lt;u8&gt;) -&gt; Option&lt;u8&gt; {
     match x {
         Some(val) =&gt; Some(val + 1),
@@ -366,29 +429,45 @@ fn main() {
     let none = plus_one(None);
 }
 </code></pre>
-<p><span class="caption">Listing 6-3: A function that uses a <code>match</code> expression on an <code>Option&lt;u8&gt;</code></span></p>
-<p>Let’s examine the first execution of <code>plus_one</code> in more detail. When we call <code>plus_one(five)</code>, the variable <code>x</code> in the body of <code>plus_one</code> will have the value <code>Some(5)</code>. We then compare that against each <code>match</code> arm:</p>
+<p>function that uses a <code>match</code> expression on an <code>Option&lt;u8&gt;</code></span></p>
+<p>Let’s examine the first execution of <code>plus_one</code> in more detail. When we call
+<code>plus_one(five)</code>, the variable <code>x</code> in the body of <code>plus_one</code> will have the value
+<code>Some(5)</code>. We then compare that against each <code>match</code> arm:</p>
 <pre><code class="language-cairo noplayground">        Some(val) =&gt; Some(val + 1),
 </code></pre>
-<p>Does <code>Some(5)</code> value match the pattern <code>Some(val)</code>? It does! We have the same variant. The <code>val</code> binds to the value contained in <code>Some</code>, so <code>val</code> takes the value <code>5</code>. The code in the <code>match</code> arm is then executed, so we add <code>1</code> to the value of <code>val</code> and create a new <code>Some</code> value with our total <code>6</code> inside. Because the first arm matched, no other arms are compared.</p>
-<p>Now let’s consider the second call of <code>plus_one</code> in our main function, where <code>x</code> is <code>None</code>. We enter the <code>match</code> and compare to the first arm:</p>
+<p>Does <code>Some(5)</code> value match the pattern <code>Some(val)</code>? It does! We have the same
+variant. The <code>val</code> binds to the value contained in <code>Some</code>, so <code>val</code> takes the
+value <code>5</code>. The code in the <code>match</code> arm is then executed, so we add <code>1</code> to the
+value of <code>val</code> and create a new <code>Some</code> value with our total <code>6</code> inside. Because
+the first arm matched, no other arms are compared.</p>
+<p>Now let’s consider the second call of <code>plus_one</code> in our main function, where <code>x</code>
+is <code>None</code>. We enter the <code>match</code> and compare to the first arm:</p>
 <pre><code class="language-cairo noplayground">        Some(val) =&gt; Some(val + 1),
 </code></pre>
-<p>The <code>Some(val)</code> value doesn’t match the pattern <code>None</code>, so we continue to the next arm:</p>
+<p>The <code>Some(val)</code> value doesn’t match the pattern <code>None</code>, so we continue to the
+next arm:</p>
 <pre><code class="language-cairo">        None =&gt; None,
 </code></pre>
-<p>It matches! There’s no value to add to, so the matching construct ends and returns the <code>None</code> value on the right side of <code>=&gt;</code>.</p>
-<p>Combining <code>match</code> and enums is useful in many situations. You’ll see this pattern a lot in Cairo code: <code>match</code> against an enum, bind a variable to the data inside, and then execute code based on it. It’s a bit tricky at first, but once you get used to it, you’ll wish you had it in all languages. It’s consistently a user favorite.</p>
+<p>It matches! There’s no value to add to, so the matching construct ends and
+returns the <code>None</code> value on the right side of <code>=&gt;</code>.</p>
+<p>Combining <code>match</code> and enums is useful in many situations. You’ll see this
+pattern a lot in Cairo code: <code>match</code> against an enum, bind a variable to the
+data inside, and then execute code based on it. It’s a bit tricky at first, but
+once you get used to it, you’ll wish you had it in all languages. It’s
+consistently a user favorite.</p>
 <h2 id="matches-are-exhaustive"><a class="header" href="#matches-are-exhaustive">Matches Are Exhaustive</a></h2>
-<p>There’s one other aspect of <code>match</code> we need to discuss: the arms’ patterns must cover all possibilities. Consider this version of our <code>plus_one</code> function, which has a bug and won’t compile:</p>
+<p>There’s one other aspect of <code>match</code> we need to discuss: the arms’ patterns must
+cover all possibilities. Consider this version of our <code>plus_one</code> function, which
+has a bug and won’t compile:</p>
 <pre><code class="language-cairo noplayground">fn plus_one(x: Option&lt;u8&gt;) -&gt; Option&lt;u8&gt; {
     match x {
         Some(val) =&gt; Some(val + 1),
     }
 }
 </code></pre>
-<p>We didn’t handle the <code>None</code> case, so this code will cause a bug.
-Luckily, it’s a bug Cairo knows how to catch. If we try to compile this code, we’ll get this error:</p>
+<p>We didn’t handle the <code>None</code> case, so this code will cause a bug. Luckily, it’s a
+bug Cairo knows how to catch. If we try to compile this code, we’ll get this
+error:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_08_missing_match_arm v0.1.0 (listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/Scarb.toml)
 error: Missing match arm: `None` not covered.
@@ -403,13 +482,22 @@ error: could not compile `no_listing_08_missing_match_arm` due to previous error
 error: `scarb` command exited with error
 
 </code></pre>
-<p>Cairo knows that we didn’t cover every possible case, and even knows which pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last possibility in order for the code to be valid. Especially in the case of <code>Option&lt;T&gt;</code>, when Cairo prevents us from forgetting to explicitly handle the <code>None</code> case, it protects us from assuming that we have a value when we might have null, thus making the <a href="https://en.wikipedia.org/wiki/Null_pointer#History">billion-dollar mistake</a> discussed earlier impossible.</p>
+<p>Cairo knows that we didn’t cover every possible case, and even knows which
+pattern we forgot! Matches in Cairo are exhaustive: we must exhaust every last
+possibility in order for the code to be valid. Especially in the case of
+<code>Option&lt;T&gt;</code>, when Cairo prevents us from forgetting to explicitly handle the
+<code>None</code> case, it protects us from assuming that we have a value when we might
+have null, thus making the <a href="https://en.wikipedia.org/wiki/Null_pointer#History">billion-dollar mistake</a> discussed
+earlier impossible.</p>
 <h2 id="catch-all-with-the-_-placeholder"><a class="header" href="#catch-all-with-the-_-placeholder">Catch-all with the <code>_</code> Placeholder</a></h2>
-<p>Using enums, we can also take special actions for a few particular values, but for all other values take one default action.
-<code>_</code> is a special pattern that matches any value and does not bind to that value.
-You can use it by simply adding a new arm with <code>_</code> as the pattern for the last arm of the <code>match</code> expression.</p>
-<p>Imagine we have a vending machine that only accepts Dime coins.
-We want to have a function that processes inserted coins and returns <code>true</code> only if the coin is accepted.</p>
+<p>Using enums, we can also take special actions for a few particular values, but
+for all other values take one default action. <code>_</code> is a special pattern that
+matches any value and does not bind to that value. You can use it by simply
+adding a new arm with <code>_</code> as the pattern for the last arm of the <code>match</code>
+expression.</p>
+<p>Imagine we have a vending machine that only accepts Dime coins. We want to have
+a function that processes inserted coins and returns <code>true</code> only if the coin is
+accepted.</p>
 <p>Here's a <code>vending_machine_accept</code> function that implements this logic:</p>
 <pre><code class="language-cairo noplayground">fn vending_machine_accept(coin: Coin) -&gt; bool {
     match coin {
@@ -418,16 +506,20 @@ We want to have a function that processes inserted coins and returns <code>true<
     }
 }
 </code></pre>
-<p>This example also meets the exhaustiveness requirement because we’re explicitly ignoring all other values in the last arm; we haven’t forgotten anything.</p>
+<p>This example also meets the exhaustiveness requirement because we’re explicitly
+ignoring all other values in the last arm; we haven’t forgotten anything.</p>
 <blockquote>
-<p>There's no catch-all pattern in Cairo that allows you to use the value of the pattern.</p>
+<p>There's no catch-all pattern in Cairo that allows you to use the value of the
+pattern.</p>
 </blockquote>
 <!--
   TODO move the following in a separate chapter when there's more pattern matching features in upcoming Cairo versions. cf rust book chapter 18
 -->
 <h2 id="multiple-patterns-with-the--operator"><a class="header" href="#multiple-patterns-with-the--operator">Multiple Patterns with the <code>|</code> Operator</a></h2>
-<p>In <code>match</code> expressions, you can match multiple patterns using the <code>|</code> syntax, which is the pattern <em>or</em> operator.</p>
-<p>For example, in the following code we modified the <code>vending_machine_accept</code> function to accept both <code>Dime</code> and <code>Quarter</code> coins in a single arm:</p>
+<p>In <code>match</code> expressions, you can match multiple patterns using the <code>|</code> syntax,
+which is the pattern <em>or</em> operator.</p>
+<p>For example, in the following code we modified the <code>vending_machine_accept</code>
+function to accept both <code>Dime</code> and <code>Quarter</code> coins in a single arm:</p>
 <pre><code class="language-cairo noplayground">fn vending_machine_accept(coin: Coin) -&gt; bool {
     match coin {
         Coin::Dime | Coin::Quarter =&gt; true,
@@ -436,8 +528,7 @@ We want to have a function that processes inserted coins and returns <code>true<
 }
 </code></pre>
 <h2 id="matching-tuples"><a class="header" href="#matching-tuples">Matching Tuples</a></h2>
-<p>It is possible to match tuples.
-Let's introduce a new <code>DayType</code> enum:</p>
+<p>It is possible to match tuples. Let's introduce a new <code>DayType</code> enum:</p>
 <pre><code class="language-cairo noplayground">#[derive(Drop)]
 enum DayType {
     Week,
@@ -445,8 +536,10 @@ enum DayType {
     Holiday,
 }
 </code></pre>
-<p>Now, let's suppose that our vending machine accepts any coin on weekdays, but only accepts quarters and dimes on weekends and holidays.
-We can modify the <code>vending_machine_accept</code> function to accept a tuple of a <code>Coin</code> and a <code>Weekday</code> and return <code>true</code> only if the given coin is accepted on the specified day:</p>
+<p>Now, let's suppose that our vending machine accepts any coin on weekdays, but
+only accepts quarters and dimes on weekends and holidays. We can modify the
+<code>vending_machine_accept</code> function to accept a tuple of a <code>Coin</code> and a <code>Weekday</code>
+and return <code>true</code> only if the given coin is accepted on the specified day:</p>
 <pre><code class="language-cairo noplayground">fn vending_machine_accept(c: (DayType, Coin)) -&gt; bool {
     match c {
         (DayType::Week, _) =&gt; true,
@@ -455,7 +548,9 @@ We can modify the <code>vending_machine_accept</code> function to accept a tuple
     }
 }
 </code></pre>
-<p>Writing <code>(_, _)</code> for the last arm of a tuple matching pattern might feel superfluous. Hence, we can use the <code>_ =&gt;</code> syntax if we want, for example, that our vending machine only accepts quarters on weekdays:</p>
+<p>Writing <code>(_, _)</code> for the last arm of a tuple matching pattern might feel
+superfluous. Hence, we can use the <code>_ =&gt;</code> syntax if we want, for example, that
+our vending machine only accepts quarters on weekdays:</p>
 <pre><code class="language-cairo noplayground">fn vending_week_machine(c: (DayType, Coin)) -&gt; bool {
     match c {
         (DayType::Week, Coin::Quarter) =&gt; true,
@@ -464,15 +559,17 @@ We can modify the <code>vending_machine_accept</code> function to accept a tuple
 }
 </code></pre>
 <h2 id="matching-felt252-and-integer-variables"><a class="header" href="#matching-felt252-and-integer-variables">Matching <code>felt252</code> and Integer Variables</a></h2>
-<p>You can also match <code>felt252</code> and integer variables. This is useful when you want to match against a range of values.
-However, there are some restrictions:</p>
+<p>You can also match <code>felt252</code> and integer variables. This is useful when you want
+to match against a range of values. However, there are some restrictions:</p>
 <ul>
-<li>Only integers that fit into a single <code>felt252</code> are supported (i.e. <code>u256</code> is not supported).</li>
+<li>Only integers that fit into a single <code>felt252</code> are supported (i.e. <code>u256</code> is
+not supported).</li>
 <li>The first arm must be 0.</li>
 <li>Each arm must cover a sequential segment, contiguously with other arms.</li>
 </ul>
-<p>Imagine we’re implementing a game where you roll a six-sided die to get a number between 0 and 5.
-If you have 0, 1 or 2 you win. If you have 3, you can roll again. For all other values you lose.</p>
+<p>Imagine we’re implementing a game where you roll a six-sided die to get a number
+between 0 and 5. If you have 0, 1 or 2 you win. If you have 3, you can roll
+again. For all other values you lose.</p>
 <p>Here's a match that implements that logic:</p>
 <pre><code class="language-cairo noplayground">fn roll(value: u8) {
     match value {
@@ -521,24 +618,6 @@ If you have 0, 1 or 2 you win. If you have 3, you can roll again. For all other 
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

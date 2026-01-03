@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -274,7 +275,11 @@
                     <main>
                         <h1 id="concise-control-flow-with-if-let-and-while-let"><a class="header" href="#concise-control-flow-with-if-let-and-while-let">Concise Control Flow with <code>if let</code> and <code>while let</code></a></h1>
 <h2 id="if-let"><a class="header" href="#if-let"><code>if let</code></a></h2>
-<p>The <code>if let</code> syntax lets you combine <code>if</code> and <code>let</code> into a less verbose way to handle values that match one pattern while ignoring the rest. Consider the program in Listing 6-4 that matches on an <code>Some&lt;u8&gt;</code> value in the <code>config_max</code> variable but only wants to execute code if the value is <code>Some</code> variant.</p>
+<p>The <code>if let</code> syntax lets you combine <code>if</code> and <code>let</code> into a less verbose way to
+handle values that match one pattern while ignoring the rest. Consider the
+program in Listing 6-4 that matches on an <code>Some&lt;u8&gt;</code> value in
+the <code>config_max</code> variable but only wants to execute code if the value is <code>Some</code>
+variant.</p>
 <pre><code class="language-cairo"><span class="boring">#[executable]
 </span><span class="boring">fn main() {
 </span>    let config_max = Some(5);
@@ -284,14 +289,14 @@
     }
 <span class="boring">}
 </span></code></pre>
-<p><span class="caption">Listing 6-4: A <code>match</code> that only cares about executing
-code when the value is <code>Some</code></span></p>
+<p><code>match</code> that only cares about executing code when the value is <code>Some</code></span></p>
 <p>If the value is <code>Some</code>, we print out the value in the <code>Some</code> variant by binding
 the value to the variable <code>max</code> in the pattern. We don’t want to do anything
-with the <code>None</code> value. To satisfy the <code>match</code> expression, we have to add <code>_ =&gt; ()</code> after processing just one variant, which is annoying boilerplate code to
-add.</p>
-<p>Instead, we could write this in a shorter way using <code>if let</code>. The following
-code behaves the same as the <code>match</code> in Listing 6-4:</p>
+with the <code>None</code> value. To satisfy the <code>match</code> expression, we have to add
+<code>_ =&gt; ()</code> after processing just one variant, which is annoying boilerplate code
+to add.</p>
+<p>Instead, we could write this in a shorter way using <code>if let</code>. The following code
+behaves the same as the <code>match</code> in Listing 6-4:</p>
 <pre><code class="language-cairo"><span class="boring">#[executable]
 </span><span class="boring">fn main() {
 </span>    let number = Some(5);
@@ -303,23 +308,24 @@ code behaves the same as the <code>match</code> in Listing 6-4:</p>
 <p>The syntax <code>if let</code> takes a pattern and an expression separated by an equal
 sign. It works the same way as a <code>match</code>, where the expression is given to the
 <code>match</code> and the pattern is its first arm. In this case, the pattern is
-<code>Some(max)</code>, and <code>max</code> binds to the value inside <code>Some</code>. We can then
-use <code>max</code> in the body of the <code>if let</code> block in the same way we used <code>max</code> in
-the corresponding <code>match</code> arm. The code in the <code>if let</code> block isn’t run if the
-value doesn’t match the pattern.</p>
+<code>Some(max)</code>, and <code>max</code> binds to the value inside <code>Some</code>. We can then use <code>max</code>
+in the body of the <code>if let</code> block in the same way we used <code>max</code> in the
+corresponding <code>match</code> arm. The code in the <code>if let</code> block isn’t run if the value
+doesn’t match the pattern.</p>
 <p>Using <code>if let</code> means less typing, less indentation, and less boilerplate code.
 However, you lose the exhaustive checking that <code>match</code> enforces. Choosing
 between <code>match</code> and <code>if let</code> depends on what you’re doing in your particular
-situation and whether gaining conciseness is an appropriate trade-off for
-losing exhaustive checking.</p>
+situation and whether gaining conciseness is an appropriate trade-off for losing
+exhaustive checking.</p>
 <p>In other words, you can think of <code>if let</code> as syntactic sugar for a <code>match</code> that
 runs code when the value matches one pattern and then ignores all other values.</p>
-<p>We can include an <code>else</code> with an <code>if let</code>. The block of code that goes with <code>else</code>
-is the same as the block of code that would go with the <code>_</code> case in the <code>match</code>
-expression. Recall the <code>Coin</code> enum definition in Listing 6-2,
-where the <code>Quarter</code> variant also held a <code>UsState</code> value. If we wanted to count
-all non-quarter coins we see while also announcing the state of the quarters,
-we could do that with a <code>match</code> expression, like this:</p>
+<p>We can include an <code>else</code> with an <code>if let</code>. The block of code that goes with
+<code>else</code> is the same as the block of code that would go with the <code>_</code> case in the
+<code>match</code> expression. Recall the <code>Coin</code> enum definition in Listing
+6-2, where the <code>Quarter</code> variant also held a <code>UsState</code>
+value. If we wanted to count all non-quarter coins we see while also announcing
+the state of the quarters, we could do that with a <code>match</code> expression, like
+this:</p>
 <pre><code class="language-cairo"><span class="boring">#[derive(Drop)]
 </span><span class="boring">enum Coin {
 </span><span class="boring">    Penny,
@@ -362,7 +368,10 @@ we could do that with a <code>match</code> expression, like this:</p>
 <p>If you have a situation in which your program has logic that is too verbose to
 express using <code>match</code>, remember that <code>if let</code> is in your Cairo toolbox as well.</p>
 <h2 id="while-let"><a class="header" href="#while-let"><code>while let</code></a></h2>
-<p>The <code>while let</code> syntax is similar to the <code>if let</code> syntax, but it allows you to loop over a collection of values and execute a block of code for each value that matches a specified pattern. In the case below, the pattern is <code>Some(x)</code>, which matches any <code>Some</code> variant of the <code>Option</code> enum.</p>
+<p>The <code>while let</code> syntax is similar to the <code>if let</code> syntax, but it allows you to
+loop over a collection of values and execute a block of code for each value that
+matches a specified pattern. In the case below, the pattern is <code>Some(x)</code>, which
+matches any <code>Some</code> variant of the <code>Option</code> enum.</p>
 <pre><code class="language-cairo">#[executable]
 fn main() {
     let mut arr = array![1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -373,9 +382,15 @@ fn main() {
     println!("{}", sum);
 }
 </code></pre>
-<p>Using <code>while let</code> provides a more concise and idiomatic way of writing this loop compared to a traditional <code>while</code> loop with explicit pattern matching or handling of the <code>Option</code> type. However, as with <code>if let</code>, you lose the exhaustive checking that a <code>match</code> expression provides, so you need to be careful to handle any remaining cases outside the <code>while let</code> loop if necessary.</p>
+<p>Using <code>while let</code> provides a more concise and idiomatic way of writing this loop
+compared to a traditional <code>while</code> loop with explicit pattern matching or
+handling of the <code>Option</code> type. However, as with <code>if let</code>, you lose the
+exhaustive checking that a <code>match</code> expression provides, so you need to be
+careful to handle any remaining cases outside the <code>while let</code> loop if necessary.</p>
 <h2 id="let-chains"><a class="header" href="#let-chains">Let Chains</a></h2>
-<p>Cairo supports let chains to combine multiple conditions involving <code>if let</code> or <code>while let</code> without nesting. This lets you pattern-match and apply additional boolean conditions in a single expression:</p>
+<p>Cairo supports let chains to combine multiple conditions involving <code>if let</code> or
+<code>while let</code> without nesting. This lets you pattern-match and apply additional
+boolean conditions in a single expression:</p>
 <pre><code class="language-cairo">fn get_x() -&gt; Option&lt;u32&gt; {
     Some(5)
 }
@@ -397,10 +412,13 @@ fn main() {
 }
 </code></pre>
 <blockquote>
-<p>Note: <code>else</code> is not yet supported for let chain expressions; this will be added in a later version.</p>
+<p>Note: <code>else</code> is not yet supported for let chain expressions; this will be
+added in a later version.</p>
 </blockquote>
 <h2 id="let-else"><a class="header" href="#let-else"><code>let else</code></a></h2>
-<p><code>let else</code> enables refutable pattern matching in a <code>let</code> binding and allows the <code>else</code> block to diverge (for example with <code>return</code>, <code>break</code>, <code>continue</code>, or <code>panic!</code>) when the pattern does not match:</p>
+<p><code>let else</code> enables refutable pattern matching in a <code>let</code> binding and allows the
+<code>else</code> block to diverge (for example with <code>return</code>, <code>break</code>, <code>continue</code>, or
+<code>panic!</code>) when the pattern does not match:</p>
 <pre><code class="language-cairo">#[derive(Drop)]
 enum MyEnum {
     A: u32,
@@ -457,24 +475,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

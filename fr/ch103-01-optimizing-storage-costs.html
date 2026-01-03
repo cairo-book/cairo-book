@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,21 +274,31 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="optimizing-storage-costs"><a class="header" href="#optimizing-storage-costs">Optimizing Storage Costs</a></h1>
-<p>Bit-packing is a simple concept: use as few bits as possible to store a piece of data. When done well, it can significantly reduce the size of the data you need to store. This is especially important in smart contracts, where storage is expensive.</p>
-<p>When writing Cairo smart contracts, it is important to optimize storage usage to reduce gas costs. Indeed, most of the cost associated with a transaction is related to storage updates; and each storage slot costs gas to write to.
-This means that by packing multiple values into fewer slots, you can decrease the gas cost incurred by the users of your smart contract.</p>
+<p>Bit-packing is a simple concept: use as few bits as possible to store a piece of
+data. When done well, it can significantly reduce the size of the data you need
+to store. This is especially important in smart contracts, where storage is
+expensive.</p>
+<p>When writing Cairo smart contracts, it is important to optimize storage usage to
+reduce gas costs. Indeed, most of the cost associated with a transaction is
+related to storage updates; and each storage slot costs gas to write to. This
+means that by packing multiple values into fewer slots, you can decrease the gas
+cost incurred by the users of your smart contract.</p>
 <h2 id="integer-structure-and-bitwise-operators"><a class="header" href="#integer-structure-and-bitwise-operators">Integer Structure and Bitwise Operators</a></h2>
-<p>An integer is coded on a certain number of bits, depending on its size (For example, a <code>u8</code> integer is coded on 8 bits).</p>
+<p>An integer is coded on a certain number of bits, depending on its size (For
+example, a <code>u8</code> integer is coded on 8 bits).</p>
 <div align="center">
     <img src="integer_in_bits.png" alt="a u8 integer in bits" width="500px"/>
 <div align="center">
 </div>
     <span class="caption">Representation of a u8 integer in bits</span>
 </div>
-<p>Intuitively, several integers can be combined into a single integer if the size of this single integer is greater than or equal to the sum of the sizes of the integers (For example, two <code>u8</code> and one <code>u16</code> in one <code>u32</code>).</p>
+<p>Intuitively, several integers can be combined into a single integer if the size
+of this single integer is greater than or equal to the sum of the sizes of the
+integers (For example, two <code>u8</code> and one <code>u16</code> in one <code>u32</code>).</p>
 <p>But, to do that, we need some bitwise operators:</p>
 <ul>
-<li>multiplying or dividing an integer by a power of 2 shifts the integer value to the left or to the right respectively</li>
+<li>multiplying or dividing an integer by a power of 2 shifts the integer value to
+the left or to the right respectively</li>
 </ul>
 <div align="center">
     <img src="shift.png" alt="shift operators" width="500px"/>
@@ -296,7 +307,8 @@ This means that by packing multiple values into fewer slots, you can decrease th
     <span class="caption">Shifting to the left or to the right an integer value</span>
 </div>
 <ul>
-<li>applying a mask (<code>AND</code> operator) on an integer value isolates some bits of this integer</li>
+<li>applying a mask (<code>AND</code> operator) on an integer value isolates some bits of
+this integer</li>
 </ul>
 <div align="center">
     <img src="mask.png" alt="applying a mask" width="500px"/>
@@ -305,7 +317,8 @@ This means that by packing multiple values into fewer slots, you can decrease th
     <span class="caption">Isolate bits with a mask</span>
 </div>
 <ul>
-<li>adding (<code>OR</code> operator) two integers will combine both values into a single one.</li>
+<li>adding (<code>OR</code> operator) two integers will combine both values into a single
+one.</li>
 </ul>
 <div align="center">
     <img src="combine.png" alt="combining two values" width="500px"/>
@@ -313,7 +326,9 @@ This means that by packing multiple values into fewer slots, you can decrease th
 </div>
     <span class="caption">Combining two integers</span>
 </div>
-<p>With these bitwise operators, let's see how to combine two <code>u8</code> integers into a single <code>u16</code> integer (called <code>packing</code>) and reversely (called <code>unpacking</code>) in the following example:</p>
+<p>With these bitwise operators, let's see how to combine two <code>u8</code> integers into a
+single <code>u16</code> integer (called <code>packing</code>) and reversely (called <code>unpacking</code>) in
+the following example:</p>
 <div align="center">
     <img src="pack.png" alt="packing and unpacking integer values" width="500px"/>
 <div align="center">
@@ -321,24 +336,32 @@ This means that by packing multiple values into fewer slots, you can decrease th
     <span class="caption">Packing and unpacking integer values</span>
 </div>
 <h2 id="bit-packing-in-cairo"><a class="header" href="#bit-packing-in-cairo">Bit-packing in Cairo</a></h2>
-<p>The storage of a Starknet smart contract is a map with 2<sup>251</sup> slots, where each slot is a <code>felt252</code> which is initialized to 0.</p>
-<p>As we saw earlier, to reduce gas costs due to storage updates, we have to use as few bits as possible, so we have to organize stored variables by packing them.</p>
-<p>For example, consider the following <code>Sizes</code> struct with 3 fields of different types: one <code>u8</code>, one <code>u32</code> and one <code>u64</code>. The total size is 8 + 32 + 64 = 104 bits. This is less than a slot size (i.e 251 bits) so we can pack them together to be stored into a single slot.</p>
-<p>Note that, as it also fits in a <code>u128</code>, it's a good practice to use the smallest type to pack all your variables, so here a <code>u128</code> should be used.</p>
+<p>The storage of a Starknet smart contract is a map with 2<sup>251</sup> slots,
+where each slot is a <code>felt252</code> which is initialized to 0.</p>
+<p>As we saw earlier, to reduce gas costs due to storage updates, we have to use as
+few bits as possible, so we have to organize stored variables by packing them.</p>
+<p>For example, consider the following <code>Sizes</code> struct with 3 fields of different
+types: one <code>u8</code>, one <code>u32</code> and one <code>u64</code>. The total size is 8 + 32 + 64 = 104
+bits. This is less than a slot size (i.e 251 bits) so we can pack them together
+to be stored into a single slot.</p>
+<p>Note that, as it also fits in a <code>u128</code>, it's a good practice to use the smallest
+type to pack all your variables, so here a <code>u128</code> should be used.</p>
 <pre><code class="language-cairo noplayground">struct Sizes {
     tiny: u8,
     small: u32,
     medium: u64,
 }
 </code></pre>
-<p>To pack these 3 variables into a <code>u128</code> we have to successively shift them to the left, and finally sum them.</p>
+<p>To pack these 3 variables into a <code>u128</code> we have to successively shift them to
+the left, and finally sum them.</p>
 <div align="center">
     <img src="sizes-packing.png" alt="Sizes packing" width="800px"/>
 <div align="center">
 </div>
     <span class="caption">Sizes packing</span>
 </div>
-<p>To unpack these 3 variables from a <code>u128</code> we have to successively shift them to the right and use a mask to isolate them.</p>
+<p>To unpack these 3 variables from a <code>u128</code> we have to successively shift them to
+the right and use a mask to isolate them.</p>
 <div align="center">
     <img src="sizes-unpacking.png" alt="Sizes unpacking" width="800px"/>
 <div align="center">
@@ -346,7 +369,10 @@ This means that by packing multiple values into fewer slots, you can decrease th
     <span class="caption">Sizes unpacking</span>
 </div>
 <h2 id="the-storepacking-trait"><a class="header" href="#the-storepacking-trait">The <code>StorePacking</code> Trait</a></h2>
-<p>Cairo provides the <code>StorePacking</code> trait to enable packing struct fields into fewer storage slots. <code>StorePacking&lt;T, PackedT&gt;</code> is a generic trait taking the type you want to pack (<code>T</code>) and the destination type (<code>PackedT</code>) as parameters. It provides two functions to implement: <code>pack</code> and <code>unpack</code>.</p>
+<p>Cairo provides the <code>StorePacking</code> trait to enable packing struct fields into
+fewer storage slots. <code>StorePacking&lt;T, PackedT&gt;</code> is a generic trait taking the
+type you want to pack (<code>T</code>) and the destination type (<code>PackedT</code>) as parameters.
+It provides two functions to implement: <code>pack</code> and <code>unpack</code>.</p>
 <p>Here is the implementation of the example of the previous chapter:</p>
 <pre><code class="language-cairo noplayground">use starknet::storage_access::StorePacking;
 
@@ -413,13 +439,27 @@ mod SizeFactory {
 </div>
 <p>In this code snippet, you see that:</p>
 <ul>
-<li><code>TWO_POW_8</code> and <code>TWO_POW_40</code> are used to shift left in the <code>pack</code> function and shift right in the <code>unpack</code>function,</li>
-<li><code>MASK_8</code> and <code>MASK_32</code> are used to isolate a variable in the <code>unpack</code> function,</li>
-<li>all the variables from the storage are converted to <code>u128</code> to be able to use bitwise operators.</li>
+<li><code>TWO_POW_8</code> and <code>TWO_POW_40</code> are used to shift left in the <code>pack</code> function and
+shift right in the <code>unpack</code>function,</li>
+<li><code>MASK_8</code> and <code>MASK_32</code> are used to isolate a variable in the <code>unpack</code>
+function,</li>
+<li>all the variables from the storage are converted to <code>u128</code> to be able to use
+bitwise operators.</li>
 </ul>
-<p>This technique can be used for any group of fields that fit within the bit size of the packed storage type. For example, if you have a struct with multiple fields whose bit sizes add up to 256 bits, you can pack them into a single <code>u256</code> variable. If the bit sizes add up to 512 bits, you can pack them into a single <code>u512</code> variable, and so on. You can define your own structs and logic to pack and unpack them.</p>
-<p>The rest of the work is done magically by the compiler - if a type implements the <code>StorePacking</code> trait, then the compiler will know it can use the <code>StoreUsingPacking</code> implementation of the <code>Store</code> trait in order to pack before writing and unpack after reading from storage.
-One important detail, however, is that the type that <code>StorePacking::pack</code> spits out also has to implement <code>Store</code> for <code>StoreUsingPacking</code> to work. Most of the time, we will want to pack into a felt252 or u256 - but if you want to pack into a type of your own, make sure that this one implements the <code>Store</code> trait.</p>
+<p>This technique can be used for any group of fields that fit within the bit size
+of the packed storage type. For example, if you have a struct with multiple
+fields whose bit sizes add up to 256 bits, you can pack them into a single
+<code>u256</code> variable. If the bit sizes add up to 512 bits, you can pack them into a
+single <code>u512</code> variable, and so on. You can define your own structs and logic to
+pack and unpack them.</p>
+<p>The rest of the work is done magically by the compiler - if a type implements
+the <code>StorePacking</code> trait, then the compiler will know it can use the
+<code>StoreUsingPacking</code> implementation of the <code>Store</code> trait in order to pack before
+writing and unpack after reading from storage. One important detail, however, is
+that the type that <code>StorePacking::pack</code> spits out also has to implement <code>Store</code>
+for <code>StoreUsingPacking</code> to work. Most of the time, we will want to pack into a
+felt252 or u256 - but if you want to pack into a type of your own, make sure
+that this one implements the <code>Store</code> trait.</p>
 
                     </main>
 
@@ -455,24 +495,6 @@ One important detail, however, is that the type that <code>StorePacking::pack</c
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

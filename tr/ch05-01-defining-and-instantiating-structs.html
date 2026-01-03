@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,8 +274,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="defining-and-instantiating-structs"><a class="header" href="#defining-and-instantiating-structs">Defining and Instantiating Structs</a></h1>
-<p>Structs are similar to tuples, discussed in the <a href="ch02-02-data-types.html">Data Types</a> section, in that both hold multiple related values. Like tuples, the pieces of a struct can be different types. Unlike with tuples, in a struct you’ll name each piece of data so it’s clear what the values mean. Adding these names means that structs are more flexible than tuples: you don’t have to rely on the order of the data to specify or access the values of an instance.</p>
-<p>To define a struct, we enter the keyword <code>struct</code> and name the entire struct. A struct’s name should describe the significance of the pieces of data being grouped together. Then, inside curly brackets, we define the names and types of the pieces of data, which we call fields. For example, Listing 5-1 shows a struct that stores information about a user account.</p>
+<p>Structs are similar to tuples, discussed in the
+<a href="ch02-02-data-types.html">Data Types</a> section, in that both hold multiple related
+values. Like tuples, the pieces of a struct can be different types. Unlike with
+tuples, in a struct you’ll name each piece of data so it’s clear what the values
+mean. Adding these names means that structs are more flexible than tuples: you
+don’t have to rely on the order of the data to specify or access the values of
+an instance.</p>
+<p>To define a struct, we enter the keyword <code>struct</code> and name the entire struct. A
+struct’s name should describe the significance of the pieces of data being
+grouped together. Then, inside curly brackets, we define the names and types of
+the pieces of data, which we call fields. For example, Listing
+5-1 shows a struct that stores information about a user
+account.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo  noplayground">#[derive(Drop)]
 struct User {
@@ -284,15 +296,25 @@ struct User {
     sign_in_count: u64,
 }
 </code></pre>
-<p><span class="caption">Listing 5-1: A <code>User</code> struct definition</span></p>
+<p><span class="caption">Listing 5-1: A <code>User</code> struct
+definition</span></p>
 <blockquote>
 <p><strong>Note :</strong><br />
-You can derive multiple traits on structs, such as <code>Drop</code>, <code>PartialEq</code> for comparison and <code>Debug</code> for debug-printing.<br />
-See the <a href="./appendix-03-derivable-traits.html">Appendix on Derivable Traits</a> for a complete list and examples.</p>
+You can derive multiple traits on structs, such as <code>Drop</code>, <code>PartialEq</code> for
+comparison and <code>Debug</code> for debug-printing.<br />
+See the <a href="./appendix-03-derivable-traits.html">Appendix on Derivable Traits</a> for
+a complete list and examples.</p>
 </blockquote>
-<p>To use a struct after we’ve defined it, we create an <em>instance</em> of that struct by specifying concrete values for each of the fields.
-We create an instance by stating the name of the struct and then add curly brackets containing <em>key: value</em> pairs, where the keys are the names of the fields and the values are the data we want to store in those fields. We don’t have to specify the fields in the same order in which we declared them in the struct. In other words, the struct definition is like a general template for the type, and instances fill in that template with particular data to create values of the type.</p>
-<p>For example, we can declare two particular users as shown in Listing 5-2.</p>
+<p>To use a struct after we’ve defined it, we create an <em>instance</em> of that struct
+by specifying concrete values for each of the fields. We create an instance by
+stating the name of the struct and then add curly brackets containing <em>key:
+value</em> pairs, where the keys are the names of the fields and the values are the
+data we want to store in those fields. We don’t have to specify the fields in
+the same order in which we declared them in the struct. In other words, the
+struct definition is like a general template for the type, and instances fill in
+that template with particular data to create values of the type.</p>
+<p>For example, we can declare two particular users as shown in Listing
+5-2.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo">#[derive(Drop)]
 struct User {
@@ -313,8 +335,12 @@ fn main() {
 }
 
 </code></pre>
-<p><span class="caption">Listing 5-2: Creating two instances of the <code>User</code> struct</span></p>
-<p>To get a specific value from a struct, we use dot notation. For example, to access <code>user1</code>'s email address, we use <code>user1.email</code>. If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field. Listing 5-3 shows how to change the value in the <code>email</code> field of a mutable <code>User</code> instance.</p>
+<p>Creating two instances of the <code>User</code> struct</span></p>
+<p>To get a specific value from a struct, we use dot notation. For example, to
+access <code>user1</code>'s email address, we use <code>user1.email</code>. If the instance is
+mutable, we can change a value by using the dot notation and assigning into a
+particular field. Listing 5-3 shows how to change the value in the
+<code>email</code> field of a mutable <code>User</code> instance.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo"><span class="boring">#[derive(Drop)]
 </span><span class="boring">struct User {
@@ -341,10 +367,14 @@ fn main() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 5-3: Changing the value in the email field of a <code>User</code> instance</span></p>
-<p>Note that the entire instance must be mutable; Cairo doesn’t allow us to mark only certain fields as mutable.</p>
-<p>As with any expression, we can construct a new instance of the struct as the last expression in the function body to implicitly return that new instance.</p>
-<p>Listing 5-4 shows a <code>build_user</code> function that returns a <code>User</code> instance with the given email and username. The <code>active</code> field gets the value of <code>true</code>, and the <code>sign_in_count</code> gets a value of <code>1</code>.</p>
+<p>the value in the email field of a <code>User</code> instance</span></p>
+<p>Note that the entire instance must be mutable; Cairo doesn’t allow us to mark
+only certain fields as mutable.</p>
+<p>As with any expression, we can construct a new instance of the struct as the
+last expression in the function body to implicitly return that new instance.</p>
+<p>Listing 5-4 shows a <code>build_user</code> function that returns a <code>User</code>
+instance with the given email and username. The <code>active</code> field gets the value of
+<code>true</code>, and the <code>sign_in_count</code> gets a value of <code>1</code>.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo"><span class="boring">#[derive(Drop)]
 </span><span class="boring">struct User {
@@ -371,10 +401,18 @@ fn main() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 5-4: A <code>build_user</code> function that takes an email and username and returns a <code>User</code> instance.</span></p>
-<p>It makes sense to name the function parameters with the same name as the struct fields, but having to repeat the <code>email</code> and <code>username</code> field names and variables is a bit tedious. If the struct had more fields, repeating each name would get even more annoying. Luckily, there’s a convenient shorthand!</p>
+<p><code>build_user</code> function that takes an email and username and returns a <code>User</code>
+instance.</span></p>
+<p>It makes sense to name the function parameters with the same name as the struct
+fields, but having to repeat the <code>email</code> and <code>username</code> field names and
+variables is a bit tedious. If the struct had more fields, repeating each name
+would get even more annoying. Luckily, there’s a convenient shorthand!</p>
 <h2 id="using-the-field-init-shorthand"><a class="header" href="#using-the-field-init-shorthand">Using the Field Init Shorthand</a></h2>
-<p>Because the parameter names and the struct field names are exactly the same in Listing 5-4, we can use the field init shorthand syntax to rewrite <code>build_user</code> so it behaves exactly the same but doesn’t have the repetition of <code>username</code> and <code>email</code>, as shown in Listing 5-5.</p>
+<p>Because the parameter names and the struct field names are exactly the same in
+Listing 5-4, we can use the field init shorthand syntax to
+rewrite <code>build_user</code> so it behaves exactly the same but doesn’t have the
+repetition of <code>username</code> and <code>email</code>, as shown in Listing
+5-5.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo"><span class="boring">#[derive(Drop)]
 </span><span class="boring">struct User {
@@ -401,15 +439,21 @@ fn main() {
 <span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 5-5: A <code>build_user</code> function that uses field init shorthand because the <code>username</code> and <code>email</code> parameters have the same name as struct fields.</span></p>
-<p>Here, we’re creating a new instance of the <code>User</code> struct, which has a field named <code>email</code>. We want to set the <code>email</code> field’s value to the value in the <code>email</code> parameter of the <code>build_user</code> function. Because the <code>email</code> field and the <code>email</code> parameter have the same name, we only need to write <code>email</code> rather than <code>email: email</code>.</p>
+<p>A <code>build_user</code> function that uses field init shorthand because the <code>username</code>
+and <code>email</code> parameters have the same name as struct fields.</span></p>
+<p>Here, we’re creating a new instance of the <code>User</code> struct, which has a field
+named <code>email</code>. We want to set the <code>email</code> field’s value to the value in the
+<code>email</code> parameter of the <code>build_user</code> function. Because the <code>email</code> field and
+the <code>email</code> parameter have the same name, we only need to write <code>email</code> rather
+than <code>email: email</code>.</p>
 <h2 id="creating-instances-from-other-instances-with-struct-update-syntax"><a class="header" href="#creating-instances-from-other-instances-with-struct-update-syntax">Creating Instances from Other Instances with Struct Update Syntax</a></h2>
-<p>It’s often useful to create a new instance of a struct that includes most of
-the values from another instance, but changes some. You can do this using
-<em>struct update syntax</em>.</p>
-<p>First, in Listing 5-6 we show how to create a new <code>User</code> instance in <code>user2</code>
-regularly, without the update syntax. We set a new value for <code>email</code> but
-otherwise use the same values from <code>user1</code> that we created in Listing 5-2.</p>
+<p>It’s often useful to create a new instance of a struct that includes most of the
+values from another instance, but changes some. You can do this using <em>struct
+update syntax</em>.</p>
+<p>First, in Listing 5-6 we show how to create a new
+<code>User</code> instance in <code>user2</code> regularly, without the update syntax. We set a new
+value for <code>email</code> but otherwise use the same values from <code>user1</code> that we created
+in Listing 5-2.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo"><span class="boring">#[derive(Drop)]
 </span><span class="boring">struct User {
@@ -437,10 +481,12 @@ fn main() {
 <span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 5-6: Creating a new <code>User</code> instance using all but one of the values from <code>user1</code></span></p>
+<p><span class="caption">Listing 5-6: Creating a new
+<code>User</code> instance using all but one of the values from <code>user1</code></span></p>
 <p>Using struct update syntax, we can achieve the same effect with less code, as
-shown in Listing 5-7. The syntax <code>..</code> specifies that the remaining fields not
-explicitly set should have the same value as the fields in the given instance.</p>
+shown in Listing 5-7. The syntax <code>..</code> specifies that the
+remaining fields not explicitly set should have the same value as the fields in
+the given instance.</p>
 <p><span class="filename">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo"><span class="boring">use core::byte_array;
 </span><span class="boring">#[derive(Drop)]
@@ -464,23 +510,25 @@ fn main() {
 <span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p><span class="caption">Listing 5-7: Using struct update syntax to set a new
-<code>email</code> value for a <code>User</code> instance but to use the rest of the values from <code>user1</code></span></p>
-<p>The code in Listing 5-7 also creates an instance of <code>user2</code> that has a
-different value for <code>email</code> but has the same values for the <code>username</code>,
-<code>active</code>, and <code>sign_in_count</code> fields as <code>user1</code>. The <code>..user1</code> part must come last
-to specify that any remaining fields should get their values from the
-corresponding fields in <code>user1</code>, but we can choose to specify values for as
+<p><span class="caption">Listing 5-7: Using struct update syntax
+to set a new <code>email</code> value for a <code>User</code> instance but to use the rest of the
+values from <code>user1</code></span></p>
+<p>The code in Listing 5-7 also creates an instance of <code>user2</code>
+that has a different value for <code>email</code> but has the same values for the
+<code>username</code>, <code>active</code>, and <code>sign_in_count</code> fields as <code>user1</code>. The <code>..user1</code> part
+must come last to specify that any remaining fields should get their values from
+the corresponding fields in <code>user1</code>, but we can choose to specify values for as
 many fields as we want in any order, regardless of the order of the fields in
 the struct’s definition.</p>
-<p>Note that the struct update syntax uses <code>=</code> like an assignment; this is because it moves the data,
-just as we saw in the <a href="ch04-01-what-is-ownership.html#moving-values">"Moving Values"</a><!-- ignore --> section. In this example, we can no
-longer use <code>user1</code> as a whole after creating <code>user2</code> because the <code>ByteArray</code> in the
-<code>username</code> field of <code>user1</code> was moved into <code>user2</code>. If we had given <code>user2</code> new
-<code>ByteArray</code> values for both <code>email</code> and <code>username</code>, and thus only used the
-<code>active</code> and <code>sign_in_count</code> values from <code>user1</code>, then <code>user1</code> would still be
-valid after creating <code>user2</code>. Both <code>active</code> and <code>sign_in_count</code> are types that
-implement the <code>Copy</code> trait, so the behavior we discussed in the <a href="ch04-01-what-is-ownership.html#the-copy-trait">"<code>Copy</code> Trait"</a><!-- ignore --> section would apply.</p>
+<p>Note that the struct update syntax uses <code>=</code> like an assignment; this is because
+it moves the data, just as we saw in the <a href="ch04-01-what-is-ownership.html#moving-values">"Moving Values"</a><!-- ignore -->
+section. In this example, we can no longer use <code>user1</code> as a whole after creating
+<code>user2</code> because the <code>ByteArray</code> in the <code>username</code> field of <code>user1</code> was moved
+into <code>user2</code>. If we had given <code>user2</code> new <code>ByteArray</code> values for both <code>email</code>
+and <code>username</code>, and thus only used the <code>active</code> and <code>sign_in_count</code> values from
+<code>user1</code>, then <code>user1</code> would still be valid after creating <code>user2</code>. Both <code>active</code>
+and <code>sign_in_count</code> are types that implement the <code>Copy</code> trait, so the behavior
+we discussed in the <a href="ch04-01-what-is-ownership.html#the-copy-trait">"<code>Copy</code> Trait"</a><!-- ignore --> section would apply.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch05-01-defining-and-instantiating-structs&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The `..a` syntax copies each field of `a` into `b` (except `y`), so the second `a.x += 1` has no effect on `b`.\n&quot;,&quot;id&quot;:&quot;bba8893d-f59f-492a-b639-ea04a5c8093b&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;2&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[derive(Copy, Drop)]\nstruct Point {\n  x: u32,\n  y: u32,\n}\n\n#[executable]\nfn main() {\n  let mut a = Point { x: 1, y: 2 };\n  a.x += 1;\n  let b = Point { y: 1, ..a };\n  a.x += 1;\n  println!(\&quot;{}\&quot;, b.x);\n}\n&quot;}},{&quot;context&quot;:&quot;`p.x` and `p.y` are __copied__ into new `x` and `y` variables, so the `x += 1` and `y += 1` lines have no effect on `p`.\n&quot;,&quot;id&quot;:&quot;77ef68d6-ee7f-4642-8817-73b846c46b2b&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;1 2&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[derive(Copy, Drop)]\nstruct Point {\n    x: u32,\n    y: u32,\n}\n\n#[executable]\nfn main() {\n    let mut p = Point { x: 1, y: 2 };\n    let mut x = p.x;\n    let mut y = p.y;\n    x += 1;\n    y += 1;\n    println!(\&quot;{} {}\&quot;, p.x, p.y);\n}\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -517,24 +565,6 @@ implement the <code>Copy</code> trait, so the behavior we discussed in the <a hr
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

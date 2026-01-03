@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,56 +274,64 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
-<p>Cairo is a STARK-friendly Von Neumann architecture capable of generating validity proofs
-for arbitrary computations. Being STARK-friendly means that Cairo's design is optimized for the STARK
-proof system, while remaining compatible with other proof system backends.
-It implements a Turing-complete process virtual machine.</p>
+<p>Cairo is a STARK-friendly Von Neumann architecture capable of generating
+validity proofs for arbitrary computations. Being STARK-friendly means that
+Cairo's design is optimized for the STARK proof system, while remaining
+compatible with other proof system backends. It implements a Turing-complete
+process virtual machine.</p>
 <p>Cairo consists of three main components:</p>
 <ol>
 <li>The Cairo compiler</li>
 <li>The Cairo Virtual Machine (CairoVM)</li>
 <li>The Cairo prover and verifier</li>
 </ol>
-<p>The Cairo compiler transforms Cairo source code into Cairo bytecode (encoded instructions and metadata).
-The compiler's output is commonly referred to as the <em>compilation artifacts</em>.</p>
-<p>The CairoVM implements the theoretical <em>Cairo machine</em>,
-processing the compilation artifacts and executing the instructions
-to produce two key outputs required for proof generation and verification:
-the <em>AIR (Arithmetic Intermediate Representation) private input</em> (witness) and <em>AIR public input</em>:</p>
+<p>The Cairo compiler transforms Cairo source code into Cairo bytecode (encoded
+instructions and metadata). The compiler's output is commonly referred to as the
+<em>compilation artifacts</em>.</p>
+<p>The CairoVM implements the theoretical <em>Cairo machine</em>, processing the
+compilation artifacts and executing the instructions to produce two key outputs
+required for proof generation and verification: the <em>AIR (Arithmetic
+Intermediate Representation) private input</em> (witness) and <em>AIR public input</em>:</p>
 <ul>
-<li>The AIR private input comprises the <em>execution trace</em> (or simply "trace") and the <em>memory</em>.</li>
-<li>The AIR public input includes the <em>initial and final states</em> (first and last entries of the trace),
-the <em>public memory</em> (a subset of the memory), and configuration data
-(e.g., layout) of the execution.</li>
+<li>The AIR private input comprises the <em>execution trace</em> (or simply "trace") and
+the <em>memory</em>.</li>
+<li>The AIR public input includes the <em>initial and final states</em> (first and last
+entries of the trace), the <em>public memory</em> (a subset of the memory), and
+configuration data (e.g., layout) of the execution.</li>
 </ul>
-<p>The prover takes the AIR's private and public inputs to generate a proof
-of the corresponding program execution.
-The verifier can then verify the proof's correctness asynchronously,
-given the proof and the AIR public input.</p>
+<p>The prover takes the AIR's private and public inputs to generate a proof of the
+corresponding program execution. The verifier can then verify the proof's
+correctness asynchronously, given the proof and the AIR public input.</p>
 <p>What are AIRs, though?</p>
 <h2 id="arithmetic-intermediate-representation---air"><a class="header" href="#arithmetic-intermediate-representation---air">Arithmetic Intermediate Representation - AIR</a></h2>
-<p>AIR stands for <em>Arithmetic Intermediate Representation</em>, which is an arithmetization
-technique. Arithmetization is the foundation of every proof system: STARK uses AIRs,
-while other proof systems might rely on different techniques (e.g., R1CS, PLONKish arithmetization).
-It allows converting a computational statement into a set of polynomial equations.
-These polynomial equations then represent the constraints of your system:
-if they all hold while following the proof system protocol, then the proof is valid;
-otherwise, it's invalid.</p>
-<p>At its core, Cairo is a set of AIRs that represent a Turing-complete machine for the Cairo ISA: the <em>Cairo machine</em>.
-This enables proving any statement (i.e., arbitrary code) through the Cairo machine.</p>
-<p>The Cairo machine abstracts away the need to write AIRs for the program you would like to prove,
-and Cairo, as a language, provides a human-readable interface to use the Cairo machine.</p>
-<p>Each component of the Cairo machine has its corresponding AIR: the CPU, the Memory, the Builtins...</p>
+<p>AIR stands for <em>Arithmetic Intermediate Representation</em>, which is an
+arithmetization technique. Arithmetization is the foundation of every proof
+system: STARK uses AIRs, while other proof systems might rely on different
+techniques (e.g., R1CS, PLONKish arithmetization). It allows converting a
+computational statement into a set of polynomial equations. These polynomial
+equations then represent the constraints of your system: if they all hold while
+following the proof system protocol, then the proof is valid; otherwise, it's
+invalid.</p>
+<p>At its core, Cairo is a set of AIRs that represent a Turing-complete machine for
+the Cairo ISA: the <em>Cairo machine</em>. This enables proving any statement (i.e.,
+arbitrary code) through the Cairo machine.</p>
+<p>The Cairo machine abstracts away the need to write AIRs for the program you
+would like to prove, and Cairo, as a language, provides a human-readable
+interface to use the Cairo machine.</p>
+<p>Each component of the Cairo machine has its corresponding AIR: the CPU, the
+Memory, the Builtins...</p>
 <p>Good AIRs are critical to the performance of proof generation and verification.
-While there can be many ways to express a computational statement into polynomials,
-not all are equally efficient. Writing optimal AIRs is a strong factor of performance.</p>
-<p>We won't go any further on AIRs here, but it's good to know that the CairoVM's purpose
-is to provide the required inputs to the Cairo prover for it to generate proof of the given Cairo program.
-In a nutshell, the Cairo prover and verifier job is to verify that the constraints
-defined by the Cairo AIR holds for the CairoVM outputs.</p>
+While there can be many ways to express a computational statement into
+polynomials, not all are equally efficient. Writing optimal AIRs is a strong
+factor of performance.</p>
+<p>We won't go any further on AIRs here, but it's good to know that the CairoVM's
+purpose is to provide the required inputs to the Cairo prover for it to generate
+proof of the given Cairo program. In a nutshell, the Cairo prover and verifier
+job is to verify that the constraints defined by the Cairo AIR holds for the
+CairoVM outputs.</p>
 <h2 id="cairo-machine"><a class="header" href="#cairo-machine">Cairo Machine</a></h2>
-<p>The Cairo machine is the theoretical model that defines the Von Neumann architecture to
-prove arbitrary computation.</p>
+<p>The Cairo machine is the theoretical model that defines the Von Neumann
+architecture to prove arbitrary computation.</p>
 <p>The machine is defined by two core models:</p>
 <ul>
 <li>CPU, or Execution model - The Instruction Set Architecture (ISA)</li>
@@ -334,38 +343,43 @@ prove arbitrary computation.</p>
 <li>The registers (<code>pc</code>, <code>ap</code>, <code>fp</code>)</li>
 <li>The state transition algorithm</li>
 </ul>
-<p>Unlike general-purpose ISAs such as RISC-V, Cairo implements its own ISA specifically optimized
-for proof generation and verification—a custom zero-knowledge ISA (ZK-ISA).
-The Memory model defines how the CPU interacts with the memory.
-Following Von Neumann architecture principles, a single memory stores both program and instruction data.</p>
+<p>Unlike general-purpose ISAs such as RISC-V, Cairo implements its own ISA
+specifically optimized for proof generation and verification—a custom
+zero-knowledge ISA (ZK-ISA). The Memory model defines how the CPU interacts with
+the memory. Following Von Neumann architecture principles, a single memory
+stores both program and instruction data.</p>
 <p>The Cairo machine exists in two versions:</p>
 <ol>
 <li>The <em>deterministic machine</em> (used by the prover)</li>
 <li>The <em>non-deterministic machine</em> (used by the verifier)</li>
 </ol>
-<p>Why are there two versions of the Cairo machine, one for the prover and one for the verifier?</p>
+<p>Why are there two versions of the Cairo machine, one for the prover and one for
+the verifier?</p>
 <h3 id="deterministic-and-non-deterministic-cairo-machine"><a class="header" href="#deterministic-and-non-deterministic-cairo-machine">Deterministic and Non-deterministic Cairo Machine</a></h3>
-<p>The deterministic machine takes a trace (a sequence of states) and the whole memory
-(a memory function), and verifies that the transition between two consecutive states is valid.
-It returns <code>accept</code> if all state transitions are valid and <code>reject</code> otherwise.
-This machine does not perform any computation, it only asserts the validity of a trace
-and its memory.</p>
-<p>The non-deterministic machine relies on the deterministic one: it only takes the initial
-state, the final state, and a partial memory function (i.e. the public memory)
-and returns <code>accept</code> if there exists a sequence of states (a trace)
-with the same initial and final states and a memory function that extends the partial memory
-(a whole memory that includes the public-memory) which is accepted by the deterministic machine.</p>
-<p>The deterministic machine allows the prover to generate a proof, while the non-deterministic
-machine allows the verifier to verify the proof succinctly in a zero-knowledge way
-(some data can be kept private from the verifier).</p>
-<p>The CairoVM is the implementation of this theoretical machine,
-including some functionalities to benefit from its design (<em>builtins</em> &amp; <em>hints</em>).
-Among the various implementations of the CairoVM, what we call the <em>Cairo Runner</em> is the
-entrypoint for running a Cairo program and generating the AIR inputs needed for proof.</p>
-<p>When a Cairo program is executed by the CairoVM, we could view the memory model as a Write-Once one.</p>
+<p>The deterministic machine takes a trace (a sequence of states) and the whole
+memory (a memory function), and verifies that the transition between two
+consecutive states is valid. It returns <code>accept</code> if all state transitions are
+valid and <code>reject</code> otherwise. This machine does not perform any computation, it
+only asserts the validity of a trace and its memory.</p>
+<p>The non-deterministic machine relies on the deterministic one: it only takes the
+initial state, the final state, and a partial memory function (i.e. the public
+memory) and returns <code>accept</code> if there exists a sequence of states (a trace) with
+the same initial and final states and a memory function that extends the partial
+memory (a whole memory that includes the public-memory) which is accepted by the
+deterministic machine.</p>
+<p>The deterministic machine allows the prover to generate a proof, while the
+non-deterministic machine allows the verifier to verify the proof succinctly in
+a zero-knowledge way (some data can be kept private from the verifier).</p>
+<p>The CairoVM is the implementation of this theoretical machine, including some
+functionalities to benefit from its design (<em>builtins</em> &amp; <em>hints</em>). Among the
+various implementations of the CairoVM, what we call the <em>Cairo Runner</em> is the
+entrypoint for running a Cairo program and generating the AIR inputs needed for
+proof.</p>
+<p>When a Cairo program is executed by the CairoVM, we could view the memory model
+as a Write-Once one.</p>
 <h4 id="recap---differences-between-the-two-cairo-machines"><a class="header" href="#recap---differences-between-the-two-cairo-machines">Recap - Differences between the two Cairo machines</a></h4>
-<p>We could recap in a table the key differences between the deterministic Cairo machine,
-and the non-deterministic one.</p>
+<p>We could recap in a table the key differences between the deterministic Cairo
+machine, and the non-deterministic one.</p>
 <div class="table-wrapper"><table><thead><tr><th></th><th>Deterministic Cairo Machine</th><th>Non-Deterministic Cairo Machine</th></tr></thead><tbody>
 <tr><td>Usage</td><td>Prover</td><td>Verifier</td></tr>
 <tr><td>Hints</td><td>Executed</td><td>Not aware of them</td></tr>
@@ -374,8 +388,8 @@ and the non-deterministic one.</p>
 </tbody></table>
 </div>
 <h2 id="cairo-virtual-machine-architecture-diagram"><a class="header" href="#cairo-virtual-machine-architecture-diagram">Cairo Virtual Machine Architecture Diagram</a></h2>
-<p>The following diagram represent the architecture of the CairoVM,
-to generate the AIR inputs for the proof system.</p>
+<p>The following diagram represent the architecture of the CairoVM, to generate the
+AIR inputs for the proof system.</p>
 <div align="center">
   <img src="cairo-vm-architecture.png" alt="CairoVM architecture" width="800px"/>
 </div>
@@ -414,24 +428,6 @@ to generate the AIR inputs for the proof system.</p>
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

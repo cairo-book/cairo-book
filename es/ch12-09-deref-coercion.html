@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,8 +274,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="deref-coercion"><a class="header" href="#deref-coercion">Deref Coercion</a></h1>
-<p>Deref coercion simplifies the way we interact with nested or wrapped data structures by allowing an instance of one type to behave like an instance of another type. This mechanism is enabled by implementing the <code>Deref</code> trait, which allows implicit conversion (or coercion) to a different type, providing direct access to the underlying data.</p>
-<p>Deref coercion is implemented via the <code>Deref</code> and <code>DerefMut</code> traits. When a type <code>T</code> implements <code>Deref</code> or <code>DerefMut</code> to type <code>K</code>, instances of <code>T</code> can access the members of <code>K</code> directly.</p>
+<p>Deref coercion simplifies the way we interact with nested or wrapped data
+structures by allowing an instance of one type to behave like an instance of
+another type. This mechanism is enabled by implementing the <code>Deref</code> trait, which
+allows implicit conversion (or coercion) to a different type, providing direct
+access to the underlying data.</p>
+<p>Deref coercion is implemented via the <code>Deref</code> and <code>DerefMut</code> traits. When a type
+<code>T</code> implements <code>Deref</code> or <code>DerefMut</code> to type <code>K</code>, instances of <code>T</code> can access
+the members of <code>K</code> directly.</p>
 <p>The <code>Deref</code> trait in Cairo is defined as follows:</p>
 <pre><code class="language-cairo  noplayground">pub trait Deref&lt;T&gt; {
     type Target;
@@ -288,9 +295,12 @@
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>The <code>Target</code> type specifies the result of dereferencing, and the <code>deref</code> method defines how to transform <code>T</code> into <code>K</code>.</p>
+<p>The <code>Target</code> type specifies the result of dereferencing, and the <code>deref</code> method
+defines how to transform <code>T</code> into <code>K</code>.</p>
 <h2 id="using-deref-coercion"><a class="header" href="#using-deref-coercion">Using Deref Coercion</a></h2>
-<p>To better understand how deref coercion works, let's look at a practical example. We'll create a simple generic wrapper type around a type <code>T</code> called <code>Wrapper&lt;T&gt;</code>, and use it to wrap a <code>UserProfile</code> struct.</p>
+<p>To better understand how deref coercion works, let's look at a practical
+example. We'll create a simple generic wrapper type around a type <code>T</code> called
+<code>Wrapper&lt;T&gt;</code>, and use it to wrap a <code>UserProfile</code> struct.</p>
 <pre><code class="language-cairo  noplayground">#[derive(Drop, Copy)]
 struct UserProfile {
     username: felt252,
@@ -322,7 +332,8 @@ struct Wrapper&lt;T&gt; {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>The <code>Wrapper</code> struct wraps a single value generic of type <code>T</code>. To simplify access to the wrapped value, we implement the <code>Deref</code> trait for <code>Wrapper&lt;T&gt;</code>.</p>
+<p>The <code>Wrapper</code> struct wraps a single value generic of type <code>T</code>. To simplify
+access to the wrapped value, we implement the <code>Deref</code> trait for <code>Wrapper&lt;T&gt;</code>.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[derive(Drop, Copy)]
 </span><span class="boring">struct UserProfile {
 </span><span class="boring">    username: felt252,
@@ -354,10 +365,11 @@ struct Wrapper&lt;T&gt; {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>This implementation is quite simple. The <code>deref</code> method returns the wrapped value, allowing instances of <code>Wrapper&lt;T&gt;</code> to access the members of <code>T</code> directly.</p>
-<p>In practice, this mechanism is totally transparent. The following example demonstrates how, holding
-an instance of <code>Wrapper&lt;UserProfile&gt;</code>, we can print the <code>username</code> and <code>age</code> fields of the underlying
-<code>UserProfile</code> instance.</p>
+<p>This implementation is quite simple. The <code>deref</code> method returns the wrapped
+value, allowing instances of <code>Wrapper&lt;T&gt;</code> to access the members of <code>T</code> directly.</p>
+<p>In practice, this mechanism is totally transparent. The following example
+demonstrates how, holding an instance of <code>Wrapper&lt;UserProfile&gt;</code>, we can print
+the <code>username</code> and <code>age</code> fields of the underlying <code>UserProfile</code> instance.</p>
 <pre><code class="language-cairo"><span class="boring">#[derive(Drop, Copy)]
 </span><span class="boring">struct UserProfile {
 </span><span class="boring">    username: felt252,
@@ -390,7 +402,9 @@ fn main() {
 </span><span class="boring">
 </span></code></pre>
 <h3 id="restricting-deref-coercion-to-mutable-variables"><a class="header" href="#restricting-deref-coercion-to-mutable-variables">Restricting Deref Coercion to Mutable Variables</a></h3>
-<p>While <code>Deref</code> works for both mutable and immutable variables, <code>DerefMut</code> will only be applicable to mutable variables. Contrary to what the name might suggest, <code>DerefMut</code> does not provide mutable access to the underlying data.</p>
+<p>While <code>Deref</code> works for both mutable and immutable variables, <code>DerefMut</code> will
+only be applicable to mutable variables. Contrary to what the name might
+suggest, <code>DerefMut</code> does not provide mutable access to the underlying data.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">//TAG: does_not_compile
 </span><span class="boring">
 </span><span class="boring">use core::ops::DerefMut;
@@ -434,7 +448,8 @@ fn main() {
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>If you try to use <code>DerefMut</code> with an immutable variable, the compiler would throw an error. Here’s an example:</p>
+<p>If you try to use <code>DerefMut</code> with an immutable variable, the compiler would
+throw an error. Here’s an example:</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">//TAG: does_not_compile
 </span><span class="boring">
 </span><span class="boring">use core::ops::DerefMut;
@@ -489,7 +504,8 @@ error: Type "no_listing_09_deref_coercion_example::Wrapper::&lt;no_listing_09_de
 error: could not compile `no_listing_09_deref_coercion_example` due to previous error
 
 </code></pre>
-<p>For the above code to work, we need to define <code>wrapped_profile</code> as a mutable variable.</p>
+<p>For the above code to work, we need to define <code>wrapped_profile</code> as a mutable
+variable.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">//TAG: does_not_compile
 </span><span class="boring">
 </span><span class="boring">use core::ops::DerefMut;
@@ -534,7 +550,9 @@ fn main() {
 </span><span class="boring">
 </span></code></pre>
 <h2 id="calling-methods-via-deref-coercion"><a class="header" href="#calling-methods-via-deref-coercion">Calling Methods via Deref Coercion</a></h2>
-<p>In addition to accessing members, deref coercion also allows calling methods defined on the target type directly on the source type instance. Let's illustrate this with an example:</p>
+<p>In addition to accessing members, deref coercion also allows calling methods
+defined on the target type directly on the source type instance. Let's
+illustrate this with an example:</p>
 <pre><code class="language-cairo">struct MySource {
     pub data: u8,
 }
@@ -565,9 +583,18 @@ fn main() {
     assert!(res == 5);
 }
 </code></pre>
-<p>In this example, <code>MySource</code> implements <code>Deref</code> to <code>MyTarget</code>. The <code>MyTarget</code> struct has an implementation <code>TargetImpl</code> of the trait <code>TargetTrait</code> which defines a method <code>foo</code>. Because <code>MySource</code> dereferences to <code>MyTarget</code>, we can call the <code>foo</code> method directly on an instance of <code>MySource</code>, as demonstrated in the <code>main</code> function.</p>
+<p>In this example, <code>MySource</code> implements <code>Deref</code> to <code>MyTarget</code>. The <code>MyTarget</code>
+struct has an implementation <code>TargetImpl</code> of the trait <code>TargetTrait</code> which
+defines a method <code>foo</code>. Because <code>MySource</code> dereferences to <code>MyTarget</code>, we can
+call the <code>foo</code> method directly on an instance of <code>MySource</code>, as demonstrated in
+the <code>main</code> function.</p>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>By using the <code>Deref</code> and <code>DerefMut</code> traits, we can transparently convert one type into another, simplifying the access to nested or wrapped data structures and enabling method calls defined on the target type. This feature is particularly useful when working with generic types or building abstractions that require easy access to the underlying data and can help reduce boilerplate code.</p>
+<p>By using the <code>Deref</code> and <code>DerefMut</code> traits, we can transparently convert one
+type into another, simplifying the access to nested or wrapped data structures
+and enabling method calls defined on the target type. This feature is
+particularly useful when working with generic types or building abstractions
+that require easy access to the underlying data and can help reduce boilerplate
+code.</p>
 
                     </main>
 
@@ -603,24 +630,6 @@ fn main() {
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

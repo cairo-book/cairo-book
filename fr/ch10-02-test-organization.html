@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -273,14 +274,31 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="test-organization"><a class="header" href="#test-organization">Test Organization</a></h1>
-<p>We'll think about tests in terms of two main categories: unit tests and integration tests. Unit tests are small and more focused, testing one module in isolation at a time, and can test private functions. Integration tests use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test.</p>
-<p>Writing both kinds of tests is important to ensure that the pieces of your library are doing what you expect them to, separately and together.</p>
+<p>We'll think about tests in terms of two main categories: unit tests and
+integration tests. Unit tests are small and more focused, testing one module in
+isolation at a time, and can test private functions. Integration tests use your
+code in the same way any other external code would, using only the public
+interface and potentially exercising multiple modules per test.</p>
+<p>Writing both kinds of tests is important to ensure that the pieces of your
+library are doing what you expect them to, separately and together.</p>
 <h2 id="unit-tests"><a class="header" href="#unit-tests">Unit Tests</a></h2>
-<p>The purpose of unit tests is to test each unit of code in isolation from the rest of the code to quickly pinpoint where code is and isn’t working as expected. You’ll put unit tests in the <code>src</code> directory in each file with the code that they’re testing.</p>
-<p>The convention is to create a module named <code>tests</code> in each file to contain the test functions and to annotate the module with <code>#[cfg(test)]</code> attribute.</p>
+<p>The purpose of unit tests is to test each unit of code in isolation from the
+rest of the code to quickly pinpoint where code is and isn’t working as
+expected. You’ll put unit tests in the <code>src</code> directory in each file with the
+code that they’re testing.</p>
+<p>The convention is to create a module named <code>tests</code> in each file to contain the
+test functions and to annotate the module with <code>#[cfg(test)]</code> attribute.</p>
 <h3 id="the-tests-module-and-cfgtest"><a class="header" href="#the-tests-module-and-cfgtest">The Tests Module and <code>#[cfg(test)]</code></a></h3>
-<p>The <code>#[cfg(test)]</code> annotation on the tests module tells Cairo to compile and run the test code only when you run <code>scarb test</code>, not when you run <code>scarb build</code>. This saves compile time when you only want to build the project and saves space in the resulting compiled artifact because the tests are not included. You’ll see that because integration tests go in a different directory, they don’t need the <code>#[cfg(test)]</code> annotation. However, because unit tests go in the same files as the code, you’ll use <code>#[cfg(test)]</code> to specify that they shouldn’t be included in the compiled result.</p>
-<p>Recall that when we created the new <code>adder</code> project in the first section of this chapter, we wrote this first test:</p>
+<p>The <code>#[cfg(test)]</code> annotation on the tests module tells Cairo to compile and run
+the test code only when you run <code>scarb test</code>, not when you run <code>scarb build</code>.
+This saves compile time when you only want to build the project and saves space
+in the resulting compiled artifact because the tests are not included. You’ll
+see that because integration tests go in a different directory, they don’t need
+the <code>#[cfg(test)]</code> annotation. However, because unit tests go in the same files
+as the code, you’ll use <code>#[cfg(test)]</code> to specify that they shouldn’t be
+included in the compiled result.</p>
+<p>Recall that when we created the new <code>adder</code> project in the first section of this
+chapter, we wrote this first test:</p>
 <pre><code class="language-cairo">pub fn add(left: usize, right: usize) -&gt; usize {
     left + right
 }
@@ -296,9 +314,19 @@ mod tests {
     }
 }
 </code></pre>
-<p>The attribute <code>cfg</code> stands for <em>configuration</em> and tells Cairo that the following item should only be included given a certain configuration option. In this case, the configuration option is <code>test</code>, which is provided by Cairo for compiling and running tests. By using the <code>cfg</code> attribute, Cairo compiles our test code only if we actively run the tests with <code>scarb test</code>. This includes any helper functions that might be within this module, in addition to the functions annotated with <code>#[test]</code>.</p>
+<p>The attribute <code>cfg</code> stands for <em>configuration</em> and tells Cairo that the
+following item should only be included given a certain configuration option. In
+this case, the configuration option is <code>test</code>, which is provided by Cairo for
+compiling and running tests. By using the <code>cfg</code> attribute, Cairo compiles our
+test code only if we actively run the tests with <code>scarb test</code>. This includes any
+helper functions that might be within this module, in addition to the functions
+annotated with <code>#[test]</code>.</p>
 <h3 id="testing-private-functions"><a class="header" href="#testing-private-functions">Testing Private Functions</a></h3>
-<p>There’s debate within the testing community about whether or not private functions should be tested directly, and other languages make it difficult or impossible to test private functions. Regardless of which testing ideology you adhere to, Cairo's privacy rules do allow you to test private functions. Consider the code below with the private function <code>internal_adder</code>.</p>
+<p>There’s debate within the testing community about whether or not private
+functions should be tested directly, and other languages make it difficult or
+impossible to test private functions. Regardless of which testing ideology you
+adhere to, Cairo's privacy rules do allow you to test private functions.
+Consider the code below with the private function <code>internal_adder</code>.</p>
 <p><span class="caption">Filename: src/lib.cairo</span></p>
 <pre><code class="language-cairo  noplayground">pub fn add(a: u32, b: u32) -&gt; u32 {
     internal_adder(a, 2)
@@ -318,13 +346,30 @@ mod tests {
     }
 }
 </code></pre>
-<p><span class="caption">Listing 10-10: Testing a private function</span></p>
-<p>Note that the <code>internal_adder</code> function is not marked as <code>pub</code>. Tests are just Cairo code, and the tests module is just another module. As we discussed in the <a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html">"Paths for Referring to an Item in the Module Tree"</a> section, items in child modules can use the items in their ancestor modules. In this test, we bring the <code>tests</code> module’s parent <code>internal_adder</code> into scope with <code>use super::internal_adder;</code> and then the test can call <code>internal_adder</code>. If you don’t think private functions should be tested, there’s nothing in Cairo that will compel you to do so.</p>
+<p>Testing a private function</span></p>
+<p>Note that the <code>internal_adder</code> function is not marked as <code>pub</code>. Tests are just
+Cairo code, and the tests module is just another module. As we discussed in the
+<a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html">"Paths for Referring to an Item in the Module Tree"</a>
+section, items in child modules can use the items in their ancestor modules. In
+this test, we bring the <code>tests</code> module’s parent <code>internal_adder</code> into scope with
+<code>use super::internal_adder;</code> and then the test can call <code>internal_adder</code>. If you
+don’t think private functions should be tested, there’s nothing in Cairo that
+will compel you to do so.</p>
 <h2 id="integration-tests"><a class="header" href="#integration-tests">Integration Tests</a></h2>
-<p>Integration tests use your library in the same way any other code would. Their purpose is to test whether many parts of your library work together correctly. Units of code that work correctly on their own could have problems when integrated, so test coverage of the integrated code is important as well. To create integration tests, you first need a <em>tests</em> directory.</p>
+<p>Integration tests use your library in the same way any other code would. Their
+purpose is to test whether many parts of your library work together correctly.
+Units of code that work correctly on their own could have problems when
+integrated, so test coverage of the integrated code is important as well. To
+create integration tests, you first need a <em>tests</em> directory.</p>
 <h3 id="the-tests-directory"><a class="header" href="#the-tests-directory">The <em>tests</em> Directory</a></h3>
-<p>We create a <em>tests</em> directory at the top level of our project directory, next to <em>src</em>. Scarb knows to look for integration test files in this directory. We can then make as many test files as we want, and Scarb will compile each of the files as an individual crate.</p>
-<p>Let’s create an integration test. With the code in Listing 10-10 still in the <em>src/lib.cairo</em> file, make a <em>tests</em> directory, and create a new file named <em>tests/integration_test.cairo</em>. Your directory structure should look like this:</p>
+<p>We create a <em>tests</em> directory at the top level of our project directory, next to
+<em>src</em>. Scarb knows to look for integration test files in this directory. We can
+then make as many test files as we want, and Scarb will compile each of the
+files as an individual crate.</p>
+<p>Let’s create an integration test. With the code in Listing
+10-10 still in the <em>src/lib.cairo</em> file, make a <em>tests</em>
+directory, and create a new file named <em>tests/integration_test.cairo</em>. Your
+directory structure should look like this:</p>
 <pre><code class="language-shell">adder
 ├── Scarb.lock
 ├── Scarb.toml
@@ -334,7 +379,8 @@ mod tests {
     └── integration_tests.cairo
 
 </code></pre>
-<p>Enter the code in Listing 10-11 into the <em>tests/integration_test.cairo</em> file:</p>
+<p>Enter the code in Listing 10-11 into the
+<em>tests/integration_test.cairo</em> file:</p>
 <p><span class="caption">Filename: tests/integration_tests.cairo</span></p>
 <pre><code class="language-cairo  noplayground">use adder::add_two;
 
@@ -343,9 +389,15 @@ fn it_adds_two() {
     assert_eq!(4, add_two(2));
 }
 </code></pre>
-<p><span class="caption">Listing 10-11: An integration test of a function in the <code>adder</code> crate</span></p>
-<p>Each file in the <code>tests</code> directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add <code>use adder::add_two</code> at the top of the code, which we didn’t need in the unit tests.</p>
-<p>We don’t need to annotate any code in <em>tests/integration_test.cairo</em> with <code>#[cfg(test)]</code>. Scarb treats the tests directory specially and compiles files in this directory only when we run <code>scarb test</code>. Run <code>scarb test</code> now:</p>
+<p>10-11: An integration test of a function in the <code>adder</code>
+crate</span></p>
+<p>Each file in the <code>tests</code> directory is a separate crate, so we need to bring our
+library into each test crate’s scope. For that reason we add
+<code>use adder::add_two</code> at the top of the code, which we didn’t need in the unit
+tests.</p>
+<p>We don’t need to annotate any code in <em>tests/integration_test.cairo</em> with
+<code>#[cfg(test)]</code>. Scarb treats the tests directory specially and compiles files in
+this directory only when we run <code>scarb test</code>. Run <code>scarb test</code> now:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test adder (snforge test)
     Blocking waiting for file lock on registry db cache
@@ -364,20 +416,48 @@ Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
 </code></pre>
-<p>The two sections of output include the unit tests and the integration tests. Note that if any test in a section fails, the following sections will not be run. For example, if a unit test fails, there won’t be any output for integration tests because those tests will only be run if all unit tests are passing.</p>
-<p>The first displayed section is for the integration tests.
-Each integration test file has its own section, so if we add more files in the <em>tests</em> directory, there will be more integration test sections.</p>
-<p>The second displayed section is the same as we’ve been seeing: one line for each unit test (one named add that we added just above) and then a summary line for the unit tests.</p>
-<p>We can still run a particular integration test function by specifying the test function’s name as an argument of the option -f to <code>scarb test</code> like for instance <code>scarb test -f integration_tests::internal</code>. To run all the tests in a particular integration test file, we use the same option of <code>scarb test</code> but using only the name of the file.</p>
-<p>Then, to run all of our integration tests, we can just add a filter to only run tests whose path contains <em>integration_tests</em>.</p>
+<p>The two sections of output include the unit tests and the integration tests.
+Note that if any test in a section fails, the following sections will not be
+run. For example, if a unit test fails, there won’t be any output for
+integration tests because those tests will only be run if all unit tests are
+passing.</p>
+<p>The first displayed section is for the integration tests. Each integration test
+file has its own section, so if we add more files in the <em>tests</em> directory,
+there will be more integration test sections.</p>
+<p>The second displayed section is the same as we’ve been seeing: one line for each
+unit test (one named add that we added just above) and then a summary line for
+the unit tests.</p>
+<p>We can still run a particular integration test function by specifying the test
+function’s name as an argument of the option -f to <code>scarb test</code> like for
+instance <code>scarb test -f integration_tests::internal</code>. To run all the tests in a
+particular integration test file, we use the same option of <code>scarb test</code> but
+using only the name of the file.</p>
+<p>Then, to run all of our integration tests, we can just add a filter to only run
+tests whose path contains <em>integration_tests</em>.</p>
 <pre><code class="language-shell">$ scarb test -f integration_tests
      Running test adder (snforge test)
 
 </code></pre>
-<p>We see that in the second section for the unit tests, 1 has been filtered out because it is not in the <em>integration_tests</em> file.</p>
+<p>We see that in the second section for the unit tests, 1 has been filtered out
+because it is not in the <em>integration_tests</em> file.</p>
 <h3 id="submodules-in-integration-tests"><a class="header" href="#submodules-in-integration-tests">Submodules in Integration Tests</a></h3>
-<p>As you add more integration tests, you might want to make more files in the <em>tests</em> directory to help organize them; for example, you can group the test functions by the functionality they’re testing. As mentioned earlier, each file in the tests directory is compiled as its own separate crate, which is useful for creating separate scopes to more closely imitate the way end users will be using your crate. However, this means files in the tests directory don’t share the same behavior as files in <em>src</em> do, as you learned in Chapter 7 regarding how to separate code into modules and files.</p>
-<p>The different behavior of tests directory files is most noticeable when you have a set of helper functions to use in multiple integration test files and you try to follow the steps in the <a href="ch07-05-separating-modules-into-different-files.html">Separating Modules into Different Files</a> section of Chapter 7 to extract them into a common module. For example, if we create <em>tests/common.cairo</em> and place a function named <code>setup</code> in it, we can add some code to <code>setup</code> that we want to call from multiple test functions in multiple test files:</p>
+<p>As you add more integration tests, you might want to make more files in the
+<em>tests</em> directory to help organize them; for example, you can group the test
+functions by the functionality they’re testing. As mentioned earlier, each file
+in the tests directory is compiled as its own separate crate, which is useful
+for creating separate scopes to more closely imitate the way end users will be
+using your crate. However, this means files in the tests directory don’t share
+the same behavior as files in <em>src</em> do, as you learned in Chapter
+7 regarding how to separate code into modules and
+files.</p>
+<p>The different behavior of tests directory files is most noticeable when you have
+a set of helper functions to use in multiple integration test files and you try
+to follow the steps in the
+<a href="ch07-05-separating-modules-into-different-files.html">Separating Modules into Different Files</a>
+section of Chapter 7 to extract them into a common
+module. For example, if we create <em>tests/common.cairo</em> and place a function
+named <code>setup</code> in it, we can add some code to <code>setup</code> that we want to call from
+multiple test functions in multiple test files:</p>
 <p><span class="caption">Filename: tests/common.cairo</span></p>
 <pre><code class="language-cairo  noplayground">pub fn setup() {
     println!("Setting up tests...");
@@ -404,7 +484,9 @@ mod tests {
     }
 }
 </code></pre>
-<p>When we run the tests with <code>scarb test</code>, we’ll see a new section in the test output for the <em>common.cairo</em> file, even though this file doesn’t contain any test functions nor did we call the setup function from anywhere:</p>
+<p>When we run the tests with <code>scarb test</code>, we’ll see a new section in the test
+output for the <em>common.cairo</em> file, even though this file doesn’t contain any
+test functions nor did we call the setup function from anywhere:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test adder (snforge test)
     Blocking waiting for file lock on registry db cache
@@ -423,7 +505,11 @@ Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
 </code></pre>
-<p>To avoid systematically getting a section for each file of the <em>tests</em> folder, we also have the option of making the <code>tests/</code> directory behave like a regular crate, by adding a <code>tests/lib.cairo</code> file. In that case, the <code>tests</code> directory will no longer compile as one crate per file, but as one crate for the whole directory.</p>
+<p>To avoid systematically getting a section for each file of the <em>tests</em> folder,
+we also have the option of making the <code>tests/</code> directory behave like a regular
+crate, by adding a <code>tests/lib.cairo</code> file. In that case, the <code>tests</code> directory
+will no longer compile as one crate per file, but as one crate for the whole
+directory.</p>
 <p>Let's create this <em>tests/lib.cairo</em> file :</p>
 <p><span class="caption">Filename: tests/lib.cairo</span></p>
 <pre><code class="language-cairo  noplayground">mod common;
@@ -459,9 +545,17 @@ Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
 </code></pre>
-<p>This way, only the test functions will be tested and the <code>setup</code> function can be imported without being tested.</p>
+<p>This way, only the test functions will be tested and the <code>setup</code> function can be
+imported without being tested.</p>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Cairo's testing features provide a way to specify how code should function to ensure it continues to work as you expect, even as you make changes. Unit tests exercise different parts of a library separately and can test private implementation details. Integration tests check that many parts of the library work together correctly, and they use the library’s public API to test the code in the same way external code will use it. Even though Cairo's type system and ownership rules help prevent some kinds of bugs, tests are still important to reduce logic bugs having to do with how your code is expected to behave.</p>
+<p>Cairo's testing features provide a way to specify how code should function to
+ensure it continues to work as you expect, even as you make changes. Unit tests
+exercise different parts of a library separately and can test private
+implementation details. Integration tests check that many parts of the library
+work together correctly, and they use the library’s public API to test the code
+in the same way external code will use it. Even though Cairo's type system and
+ownership rules help prevent some kinds of bugs, tests are still important to
+reduce logic bugs having to do with how your code is expected to behave.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch10-02-testing-organization&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;All unit tests in a given file have access to that file's private functions, regardless of being in `mod tests` or not.\n&quot;,&quot;id&quot;:&quot;3da96b29-d975-4cd8-a8eb-b1a6bd9b5c0a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;It gives your tests access to private functions&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;It can reduce the size of generated compiler artifacts&quot;,&quot;It can improve compile times&quot;,&quot;It separates test helper functions from library code&quot;],&quot;prompt&quot;:&quot;Which of the following is **NOT** a good reason to wrap unit tests in `#[cfg(test)] mod tests { ... }`?\n&quot;}},{&quot;context&quot;:&quot;To run all integration tests, add a filter to `scarb test` that contains the module path containing the integration tests.\n&quot;,&quot;id&quot;:&quot;2b553604-8201-4fad-90d6-1b63d99de219&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;By running `scarb test` with a filter for the integration tests&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;By running `scarb cairo-test`&quot;,&quot;By running `scarb cairo-build` with a filter for the test&quot;,&quot;By running `scarb execute`&quot;],&quot;prompt&quot;:&quot;How do you run integration tests in a Cairo project?&quot;}},{&quot;context&quot;:&quot;Unit tests and integration tests serve different purposes and have distinct characteristics:\n\n- Unit tests:\n\t- Focus on testing individual functions or modules in isolation.\n\t- Aim to ensure the correctness of small, self-contained units of code.\n\t- Often test private functions and implementation details.\n\t- Located in the same file as the code being tested, typically in a `#[cfg(test)]` module.\n\n- Integration tests:\n\t- Focus on testing the interaction and behavior of multiple modules or components working together.\n\t- Verify that different parts of the system integrate correctly and produce the expected results.\n\t- Use the public API of the library or application being tested.\n\t- Located in the _tests/_ directory, separate from the main code files.\n&quot;,&quot;id&quot;:&quot;93d3c7fb-14af-41f6-aba2-7ceff84a163b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Unit tests focus on testing individual functions or modules in isolation, while\nintegration tests verify the interaction and behavior of multiple modules or components working\ntogether.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Unit tests use the `#[test]` attribute, while integration tests use the `#[cfg(test)]` attribute.&quot;,&quot;Unit tests are limited to testing a single module, while integration tests can test multiple modules but not their interactions.&quot;,&quot;Unit tests are written in a separate file, while integration tests are written in the same file as the code being tested.&quot;],&quot;prompt&quot;:&quot;What is the difference between unit tests and integration tests?&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
@@ -498,24 +592,6 @@ Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>

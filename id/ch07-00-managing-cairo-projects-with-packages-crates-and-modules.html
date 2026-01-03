@@ -139,8 +139,9 @@
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
-            gtag('config', 'G-0ZJLBV4KE2');
-            gtag('config', 'G-WY42TERK5P')
+            gtag('config', 'G-0ZJLBV4KE2'); // lfg
+            gtag('config', 'G-WY42TERK5P') // starknet
+            gtag('config', 'G-1CHRL0BVJC'); // pers
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -275,31 +276,31 @@
                         <h1 id="managing-cairo-projects-with-packages-crates-and-modules"><a class="header" href="#managing-cairo-projects-with-packages-crates-and-modules">Managing Cairo Projects with Packages, Crates and Modules</a></h1>
 <p>As you write large programs, organizing your code will become increasingly
 important. By grouping related functionality and separating code with distinct
-features, you’ll clarify where to find code that implements a particular
-feature and where to go to change how a feature works.</p>
+features, you’ll clarify where to find code that implements a particular feature
+and where to go to change how a feature works.</p>
 <p>The programs we’ve written so far have been in one module in one file. As a
 project grows, you should organize code by splitting it into multiple modules
-and then multiple files. As a package grows, you can extract parts into
-separate crates that become external dependencies. This chapter covers all
-these techniques.</p>
+and then multiple files. As a package grows, you can extract parts into separate
+crates that become external dependencies. This chapter covers all these
+techniques.</p>
 <p>We’ll also discuss encapsulating implementation details, which lets you reuse
 code at a higher level: once you’ve implemented an operation, other code can
-call your code without having to know how the
-implementation works.</p>
+call your code without having to know how the implementation works.</p>
 <p>A related concept is scope: the nested context in which code is written has a
 set of names that are defined as “in scope”. When reading, writing, and
-compiling code, programmers and compilers need to know whether a particular
-name at a particular spot refers to a variable, function, struct, enum, module,
+compiling code, programmers and compilers need to know whether a particular name
+at a particular spot refers to a variable, function, struct, enum, module,
 constant, or other item and what that item means. You can create scopes and
 change which names are in or out of scope. You can’t have two items with the
 same name in the same scope.</p>
 <p>Cairo has a number of features that allow you to manage your code’s
-organization. These features, sometimes
-collectively referred to as the <em>module system</em>, include:</p>
+organization. These features, sometimes collectively referred to as the <em>module
+system</em>, include:</p>
 <ul>
 <li><strong>Packages:</strong> A Scarb feature that lets you build, test, and share crates.</li>
 <li><strong>Crates:</strong> A tree of modules that corresponds to a single compilation unit.
-It has a root directory, and a root module defined at the <em>lib.cairo</em> file under this directory.</li>
+It has a root directory, and a root module defined at the <em>lib.cairo</em> file
+under this directory.</li>
 <li><strong>Modules</strong> and <strong>use:</strong> Let you control the organization and scope of items.</li>
 <li><strong>Paths:</strong> A way of naming an item, such as a struct, function, or module.</li>
 </ul>
@@ -341,24 +342,6 @@ understanding of the module system and be able to work with scopes like a pro!</
         </div>
 
 
-        <!-- Google Analytics Tag -->
-        <script>
-            var localAddrs = ["localhost", "127.0.0.1", ""];
-
-            // make sure we don't activate google analytics if the developer is
-            // inspecting the book locally...
-            if (localAddrs.indexOf(document.location.hostname) === -1) {
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'G-WY42TERK5P', 'auto');
-                ga('send', 'pageview');
-            }
-        </script>
 
 
         <script>
