@@ -22,7 +22,6 @@ after = ["gettext"]
 git-repository-url = "https://github.com/cairo-book/cairo-book.github.io"
 edit-url-template = "https://github.com/cairo-book/cairo-book.github.io/edit/main/{path}"
 playground.runnable = true
-google-analytics = "G-WY42TERK5P"
 additional-css = [
   "theme/css/last-changed.css",
   "theme/css/chat.css",
