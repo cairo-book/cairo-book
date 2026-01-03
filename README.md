@@ -12,108 +12,29 @@
   <img src="assets/alexandria.jpg" height="400" width="400">
 </div>
 
-## Description
+## Read the Book
 
-This repository contains the source of "The Cairo Programming Language" book, a comprehensive documentation of the Cairo 1 programming language. This documentation is your go-to resource for mastering Cairo, created and maintained by the Starknet community. You can read the book [online](https://book.cairo-lang.org/).
+**[Read the Cairo Book online](https://www.starknet.io/cairo-book/)**
 
-<div align="center">
-  <h3> Created by builders, for builders 📜</h3>
-</div>
+The Cairo Programming Language Book is your comprehensive guide to mastering Cairo, the programming language for Starknet smart contracts and provable programs. Created and maintained by the Starknet community.
+
+## Features
+
+The online book includes several interactive features to enhance your learning experience:
+
+- **Run Code in Browser**: Execute Cairo code snippets directly in the browser without any local setup.
+- **AI Chat Assistant**: Ask questions and get help understanding concepts with the built-in AI assistant.
+- **Version Switcher**: Access documentation for previous Cairo versions to match your project's requirements.
+- **Code Folding**: Expand and collapse code sections to focus on what matters.
+- **Syntax Highlighting**: Proper Cairo syntax highlighting for better code readability.
+- **Full-Text Search**: Quickly find topics and concepts across the entire book.
+- **Multi-Language Support**: Available in English, Spanish, French, Chinese, Indonesian, and Turkish.
 
 ## Contribute
 
-### Setup
+We welcome contributions from the community! Whether you want to fix a typo, improve explanations, add examples, or translate content.
 
-1. Rust related packages:
-   - Install toolchain providing `cargo` using [rustup](https://rustup.rs/).
-   - Install [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html) and the required extensions:
-   ```
-   cargo install mdbook mdbook-i18n-helpers mdbook-last-changed
-   ```
-2. Host machine packages:
-
-   - Install [gettext](https://www.gnu.org/software/gettext/) for translations, usually available with regular package manager: `sudo apt install gettext`.
-   - Install [mdbook-quiz-cairo](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file) following the instructions [here](https://github.com/cairo-book/mdbook-quiz-cairo?tab=readme-ov-file#installation) to be able to add interactive quizzes.
-
-3. Clone this repository.
-
-4. Install [mdbook-cairo](https://github.com/enitrat/mdbook-cairo) to process references and labels, and custom tags.
-
-```bash
-cargo install --git https://github.com/enitrat/mdbook-cairo
-```
-
-### Guidelines
-
-Read the [CONTRIBUTING.md](./docs/CONTRIBUTING.md) file for more details on the style guide and guidelines for contributions to the book.
-
-### Work locally
-
-All the Markdown files **MUST** be edited in english. To work locally:
-
-- Start a local server with `mdbook serve` and visit [localhost:3000](http://localhost:3000) to view the book.
-  You can use the `--open` flag to open the browser automatically: `mdbook serve --open`.
-
-- Make changes to the book and refresh the browser to see the changes.
-
-- Open a PR with your changes.
-
-### Verifying your Cairo Programs
-
-The `cairo-listings` CLI tool is designed to wrap all Cairo and Starknet plugins for quickly verifying Cairo programs. You can verify that listings are correct with the `verify` argument, and generate the corresponding output with the `output` argument.
-Install this tool with:
-
-#### Setup
-
-Firstly, you need to have `scarb` resolved in your path. See [here][installation] for more details.
-
-To run the `cairo-listings` helper tool and verify Cairo programs, ensure that you are at the root of the repository (same directory of this `README.md` file).
-
-Install the tool with:
-
-```sh
-cargo install --git https://github.com/enitrat/cairo-listings --locked
-```
-
-and then run:
-
-```sh
-cairo-listings verify
-```
-
-[installation]: ./src/ch01-01-installation.md
-
-#### Usage
-
-The tool scans for all `*.cairo` files in the specified directory and performs the following actions:
-
-For a Starknet contract:
-
-- `scarb build`
-- If it has tests: `scarb test`
-
-Cairo program:
-
-- If it has a `main` function: `scarb execute --available-gas=200000000`
-- Else, `scarb build`
-- If it has tests: `scarb test`
-- `scarb fmt -c`
-
-To specify which tests to run, you can add a comment at the top of your file with the following format:
-
-```cairo
-// TAG: <tag1>
-// TAGS: <tag1>, <tag2>
-```
-
-Here is a list of available tags:
-
-- `does_not_compile`: don't run `scarb build`
-- `does_not_run`: don't run `scarb execute --available-gas=200000000`
-- `ignore_fmt`: don't run `scarb fmt`
-- `tests_fail`: don't run `scarb test`
-
-The mdbook-cairo is a mdbook preprocessor that only removes the `// TAG` lines in code blocks.
+**[Read the Development Guide](./docs/development.md)** to get started with contributing.
 
 ## Contributors
 
