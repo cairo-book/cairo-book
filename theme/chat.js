@@ -182,6 +182,16 @@
 				.addEventListener("keypress", (e) => {
 					if (e.key === "Enter") this.sendMessage();
 				});
+			// Prevent arrow keys from triggering mdBook navigation
+			document
+				.getElementById("message-input")
+				.addEventListener("keydown", (e) => {
+					if (
+						["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)
+					) {
+						e.stopPropagation();
+					}
+				});
 			document
 				.getElementById("clear-history")
 				.addEventListener("click", () => this.clearChatHistory());
