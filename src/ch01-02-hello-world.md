@@ -239,7 +239,7 @@ line as the function declaration, adding one space in between.
 > use the automatic formatter tool available with `scarb fmt` to format your
 > code in a particular style (more on `scarb fmt` in [Appendix F][devtools]).
 > The Cairo team has included this tool with the standard Cairo distribution, as
-> `cairo-run` is, so it should already be installed on your computer!
+> `scarb execute` is, so it should already be installed on your computer!
 
 The body of the `main` function holds the following code:
 
