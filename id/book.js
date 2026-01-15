@@ -199,7 +199,7 @@ function playground_text(playground, hidden = true) {
 						currentRequestResolve = null;
 						currentRequestReject = null;
 					}
-				}, 10000); // 10 second timeout
+				}, 20000); // 20 second timeout
 			} catch (error) {
 				isRequestInProgress = false;
 				currentRequestResolve = null;
