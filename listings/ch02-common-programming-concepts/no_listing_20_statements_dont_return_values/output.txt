@@ -30,6 +30,6 @@ warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
     let x = (let y = 6);
                  ^
 
-error: could not compile `no_listing_18_statements_dont_return_values` due to previous error
+error: could not compile `no_listing_18_statements_dont_return_values` due to 4 previous errors and 2 warnings
 error: `scarb` command exited with error
 

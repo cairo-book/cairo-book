@@ -1,6 +1,6 @@
 $ scarb execute 
    Compiling no_listing_08_missing_match_arm v0.1.0 (listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/Scarb.toml)
-error: Missing match arm: `None` not covered.
+error: Match is non-exhaustive: `None(_)` not covered.
  --> listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/src/lib.cairo:5:5-7:5
       match x {
  _____^
@@ -8,6 +8,6 @@ error: Missing match arm: `None` not covered.
 |     }
 |_____^
 
-error: could not compile `no_listing_08_missing_match_arm` due to previous error
+error: could not compile `no_listing_08_missing_match_arm` due to 1 previous error
 error: `scarb` command exited with error
 

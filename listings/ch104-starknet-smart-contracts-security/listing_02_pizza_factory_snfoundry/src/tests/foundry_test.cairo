@@ -2,14 +2,12 @@ use snforge_std::{
     ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
     start_cheat_caller_address, stop_cheat_caller_address,
 };
+// ANCHOR: test_internals_imports
 use starknet::storage::StoragePointerReadAccess;
-//ANCHOR_END: import_internal
-
 use starknet::{ContractAddress, contract_address_const};
-use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-//ANCHOR: import_internal
-use crate::pizza::PizzaFactory::{InternalTrait};
+use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
+// ANCHOR_END: test_internals_imports
 
 fn owner() -> ContractAddress {
     contract_address_const::<'owner'>()
@@ -97,14 +95,24 @@ fn test_make_pizza_should_increment_pizza_counter() {
 }
 //ANCHOR_END: test_make_pizza
 
-//ANCHOR: test_internals
+// ANCHOR: test_internals
 #[test]
-fn test_set_as_new_owner_direct() {
+fn test_storage_direct_access() {
+    // Get a ContractState instance without deploying the contract
     let mut state = PizzaFactory::contract_state_for_testing();
+
+    // Access storage directly - read initial value (default is 0)
+    assert_eq!(state.owner.read(), contract_address_const::<0>());
+
+    // Call internal function directly
     let owner: ContractAddress = contract_address_const::<'owner'>();
+    // Note: set_owner checks caller == current owner. Since both are zero address
+    // initially (no deployment context), this check passes.
     state.set_owner(owner);
+
+    // Verify storage was updated
     assert_eq!(state.owner.read(), owner);
 }
-//ANCHOR_END: test_internals
+// ANCHOR_END: test_internals
 
 

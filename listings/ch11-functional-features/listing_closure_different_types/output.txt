@@ -15,5 +15,5 @@ error: Trait has no implementation in context: core::ops::function::Fn::<{closur
     let n = example_closure(5_u32);
             ^^^^^^^^^^^^^^^^^^^^^^
 
-error: could not compile `listing_closure_different_types` due to previous error
+error: could not compile `listing_closure_different_types` due to 1 previous error and 2 warnings
 

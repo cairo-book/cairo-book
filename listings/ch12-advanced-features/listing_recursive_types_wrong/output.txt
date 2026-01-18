@@ -15,5 +15,5 @@ error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::Binar
     let node = BinaryTree::Node((4, leaf2, leaf3));
                                 ^^^^^^^^^^^^^^^^^
 
-error: could not compile `listing_recursive_types_wrong` due to previous error
+error: could not compile `listing_recursive_types_wrong` due to 3 previous errors
 

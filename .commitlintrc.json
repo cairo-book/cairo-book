@@ -5,6 +5,7 @@
 			2,
 			"always",
 			[
+				"dev",
 				"chore",
 				"ci",
 				"docs",

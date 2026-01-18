@@ -1,24 +1,9 @@
-$ scarb test 
-     Running test listing_02_pizza_factory_snfoundry (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
-   Compiling test(listing_02_pizza_factory_snfoundry_unittest) listing_02_pizza_factory_snfoundry v0.1.0 (listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/Scarb.toml)
-warn: Usage of deprecated feature `"deprecated-starknet-consts"` with no `#[feature("deprecated-starknet-consts")]` attribute. Note: "Use `TryInto::try_into` in const context instead."
- --> listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:8:33
-use starknet::{ContractAddress, contract_address_const};
-                                ^^^^^^^^^^^^^^^^^^^^^^
-
-    Finished `dev` profile target(s) in 1 second
-
-
-Collected 6 test(s) from listing_02_pizza_factory_snfoundry package
 Running 6 test(s) from src/
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_set_as_new_owner_direct (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~80000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~655360)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~640000)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_storage_direct_access (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~77820)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~437290)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~515170)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~692240)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360820)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~637040)
 Tests: 6 passed, 0 failed, 0 ignored, 0 filtered out
-
 

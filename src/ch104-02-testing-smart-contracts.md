@@ -21,15 +21,17 @@ with Starknet Foundry.
 {{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/pizza.cairo}}
 ```
 
-{{#label pizza-factory}} <span class="caption">Listing {{#ref pizza-factory}}: A
-pizza factory that needs to be tested</span>
+{{#label pizza-factory}}
+
+<span class="caption">Listing {{#ref pizza-factory}}: A pizza factory that needs
+to be tested</span>
 
 ## Configuring your Scarb project with Starknet Foundry
 
 The settings of your Scarb project can be configured in the `Scarb.toml` file.
 To use Starknet Foundry as your testing tool, you will need to add it as a dev
-dependency in your `Scarb.toml` file. At the time of writing, the latest version
-of Starknet Foundry is `v0.39.0` - but you should use the latest version.
+dependency in your `Scarb.toml` file. Adapt the version you use to the latest
+version.
 
 ```toml,noplayground
 [dev-dependencies]
@@ -42,9 +44,8 @@ test = "snforge test"
 allow-prebuilt-plugins = ["snforge_std"]
 ```
 
-The `scarb test` command is configured to execute `scarb cairo-test` by default.
-In our settings, we have configured it to execute `snforge test` instead. This
-will allow us to run our tests using Starknet Foundry when we run the
+The `scarb test` command is configured to execute `snforge test` by default.
+This allows us to run our tests using Starknet Foundry when we run the
 `scarb test` command.
 
 Once your project is configured, you will need to install Starknet Foundry by
@@ -56,10 +57,9 @@ tools.
 ## Testing Smart Contracts with Starknet Foundry
 
 The usual command to run your tests using Starknet Foundry is `snforge test`.
-However, when we configured our projects, we defined that the `scarb test`
-command will run the `snforge test` command. Therefore, during the rest of this
-chapter, consider that the `scarb test` command will be using `snforge test`
-under the hood.
+The `scarb test` command is an alias that executes `snforge test` under the
+hood. Therefore, during the rest of this chapter, we will use the `scarb test`
+command, which runs `snforge test`.
 
 The usual testing flow of a contract is as follows:
 
@@ -77,8 +77,10 @@ In Listing {{#ref contract-deployment}}, we wrote a function that deploys the
 {{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:deployment}}
 ```
 
-{{#label contract-deployment}} <span class="caption">Listing
-{{#ref contract-deployment}} Deploying the contract to test</span>
+{{#label contract-deployment}}
+
+<span class="caption">Listing {{#ref contract-deployment}}: Deploying the
+contract to test</span>
 
 ### Testing our Contract
 
@@ -101,9 +103,10 @@ should have the following behavior:
 {{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_constructor}}
 ```
 
-{{#label test-constructor}} <span class="caption">Listing
-{{#ref test-constructor}}: Testing the initial state by loading storage
-variables </span>
+{{#label test-constructor}}
+
+<span class="caption">Listing {{#ref test-constructor}}: Testing the initial
+state by loading storage variables </span>
 
 Once our contract is deployed, we want to assert that the initial values are set
 as expected. If our contract has an entrypoint that returns the value of a
@@ -141,48 +144,72 @@ that the pizza count was incremented, and that only the owner can make a pizza.
 {{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_make_pizza}}
 ```
 
-{{#label capture-pizza-emission-event}} <span class="caption">Listing
-{{#ref capture-pizza-emission-event}}: Testing the events emitted when a pizza
-is created</span>
+{{#label capture-pizza-emission-event}}
+
+<span class="caption">Listing {{#ref capture-pizza-emission-event}}: Testing the
+events emitted when a pizza is created</span>
 
 #### Accessing Internal Functions with `contract_state_for_testing`
 
 All the tests we have seen so far have been using a workflow that involves
 deploying the contract and interacting with the contract's entrypoints. However,
 sometimes we may want to test the internals of the contract directly, without
-deploying the contract. How could this be done, if we were reasoning in purely
-Cairo terms?
+deploying the contract.
 
 Recall the struct `ContractState`, which is used as a parameter to all the
-entrypoints of a contract. To make it short, this struct contains zero-sized
-fields, corresponding to the storage variables of the contract. The only purpose
-of these fields is to allow the Cairo compiler to generate the correct code for
-accessing the storage variables. If we could create an instance of this struct,
-we could access these storage variables directly, without deploying the
-contract...
+entrypoints of a contract. This struct contains zero-sized fields corresponding
+to the storage variables of the contract. The only purpose of these fields is to
+allow the Cairo compiler to generate the correct code for accessing the storage
+variables. If we could create an instance of this struct, we could access these
+storage variables directly, without deploying the contract.
 
-...and this is exactly what the `contract_state_for_testing` function does! It
-creates an instance of the `ContractState` struct, allowing us to call any
-function that takes as parameter a `ContractState` struct, without deploying the
-contract. To interact with the storage variables properly, we need to manually
-import the traits that define access to the storage variables.
+This is exactly what the `contract_state_for_testing` function does. When you
+define a contract with `#[starknet::contract]`, the Cairo compiler automatically
+generates a `contract_state_for_testing` function in the contract's module
+namespace. This function creates an instance of the `ContractState` struct,
+allowing you to call any function that takes a `ContractState` parameter without
+deploying the contract.
+
+To use this approach, you need to import a few things:
 
 ```cairo,noplayground
-{{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:import_internal}}
+{{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_internals_imports}}
 ```
 
-{{#label test-internal}} <span class="caption">Listing {{#ref test-internal}}:
-Unit testing our contract without deployment</span>
+{{#label test-internal-imports}}
 
-These imports give us access to our internal functions (notably, `set_owner`),
-as well as the read/write access to the `owner` storage variable. Once we have
-these, we can interact with the contract directly, changing the address of the
-owner by calling the `set_owner` method, accessible through `InternalTrait`, and
-reading the `owner` storage variable.
+<span class="caption">Listing {{#ref test-internal-imports}}: Imports needed for
+testing internals </span>
 
-> Note: Both approaches cannot be used at the same time. If you decide to deploy
-> the contract, you interact with it using the dispatcher. If you decide to test
-> the internal functions, you interact with the `ContractState` object directly.
+These imports give us:
+
+- `StoragePointerReadAccess` - to read storage variables directly
+- `InternalTrait` - to access internal functions like `set_owner`
+- `PizzaFactory` - to access `contract_state_for_testing()`
+
+Now we can write a test that interacts with the contract state directly:
+
+```cairo,noplayground
+{{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:test_internals}}
+```
+
+{{#label test-internal}}
+
+<span class="caption">Listing {{#ref test-internal}}: Unit testing our contract
+without deployment</span>
+
+The test creates a `ContractState` instance using
+`PizzaFactory::contract_state_for_testing()`, then directly reads and writes
+storage variables and calls internal functions.
+
+> **Important**: When using `contract_state_for_testing`, there is no actual
+> contract deployment context. Functions like `get_caller_address()` will return
+> the zero address. In the example above, `set_owner` checks that the caller
+> equals the current owner - since both are initially zero, the check passes.
+
+> **Note**: The two approaches cannot be mixed in the same test. If you deploy
+> the contract, you interact with it using the dispatcher. If you test internal
+> functions, you interact with the `ContractState` object directly.
 
 ```bash,noplayground
 {{#include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/output.txt}}
