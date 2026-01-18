@@ -56,7 +56,7 @@ small amount of pointer data is copied around in memory, while the data it
 references stays in one place on the boxed segment.
 
 [nullable recursive types]:
-  ./ch12-02-smart-pointers.md#enabling-recursive-types-with-nullable-boxes
+  ./ch12-02-smart-pointers.md#enabling-recursive-types-with-boxes
 
 ### Using a `Box<T>` to Store Data in the Boxed Segment
 

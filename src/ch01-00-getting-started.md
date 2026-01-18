@@ -27,4 +27,4 @@ efficiently retrieve information and provide accurate assistance.
 
 You can find the Starknet Agent on the [Starknet Agent][agent gpt] website.
 
-[agent gpt]: https://agent.starknet.id/
+[agent gpt]: https://ask.starknet.io/

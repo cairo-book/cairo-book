@@ -167,7 +167,7 @@ entrypoints of a contract (see [next section][abi per item section]).
 > defined in an impl block annotated with `#[generate_trait]` if this block is
 > also annotated with the `#[abi(per_item)]` attribute.
 
-[abi per item section]: ./ch101-02-contract-functions.md#4-abiper_item-attribute
+[abi per item section]: ./ch101-02-contract-functions.md#abiper_item-attribute
 
 ## `[abi(per_item)]` Attribute
 

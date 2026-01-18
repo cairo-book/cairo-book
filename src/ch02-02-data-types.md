@@ -377,4 +377,4 @@ below.
 [option]: ./ch06-01-enums.md#the-option-enum-and-its-advantages
 [custom-type-conversion]:
   ./ch05-02-an-example-program-using-structs.md#conversions-of-custom-types
-[span]: ./ch03-01-arrays.md#Span
+[span]: ./ch03-01-arrays.md#span
