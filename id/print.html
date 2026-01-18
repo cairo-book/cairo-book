@@ -432,7 +432,7 @@ to help.</p>
 Starknet-related questions. This AI agent is trained on the Cairo book and the
 Starknet documentation, using Retrieval-Augmented Generation (RAG) to
 efficiently retrieve information and provide accurate assistance.</p>
-<p>You can find the Starknet Agent on the <a href="https://agent.starknet.id/">Starknet Agent</a> website.</p>
+<p>You can find the Starknet Agent on the <a href="https://ask.starknet.io/">Starknet Agent</a> website.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <p>The first step is to install Cairo. We'll download Cairo through
 <a href="https://github.com/software-mansion/starkup">starkup</a>, a command line tool for managing Cairo versions and
@@ -1540,7 +1540,7 @@ fn main() {
 }
 </code></pre>
 <ul>
-<li>Converting the array to a <a href="./ch03-01-arrays.html#Span">Span</a>, that supports indexing. This operation
+<li>Converting the array to a <a href="./ch03-01-arrays.html#span">Span</a>, that supports indexing. This operation
 is <em>free</em> and doesn't incur any runtime cost.</li>
 </ul>
 <pre><code class="language-cairo">#[executable]
@@ -9988,11 +9988,11 @@ compiler doesn't know how to make a <code>UserDatabase&lt;T&gt;</code> go out of
 doesn't implement the <code>Drop&lt;T&gt;</code> trait, nor the <code>Destruct&lt;T&gt;</code> trait. Since it has
 a <code>Felt252Dict&lt;T&gt;</code> as a member, it cannot be dropped, so we are forced to
 implement the <code>Destruct&lt;T&gt;</code> trait manually (refer to the
-<a href="ch04-01-what-is-ownership.html#the-drop-trait">Ownership</a> chapter for more
-information). Using <code>#[derive(Destruct)]</code> on top of the <code>UserDatabase&lt;T&gt;</code>
-definition won't work because of the use of <a href="./ch08-00-generic-types-and-traits.html">Generic types</a> in the
-struct definition. We need to code the <code>Destruct&lt;T&gt;</code> trait implementation by
-ourselves:</p>
+<a href="ch04-01-what-is-ownership.html#no-op-destruction-the-drop-trait">Ownership</a>
+chapter for more information). Using <code>#[derive(Destruct)]</code> on top of the
+<code>UserDatabase&lt;T&gt;</code> definition won't work because of the use of <a href="./ch08-00-generic-types-and-traits.html">Generic
+types</a> in the struct definition. We need to code the <code>Destruct&lt;T&gt;</code>
+trait implementation by ourselves:</p>
 <pre><code class="language-cairo noplayground">impl UserDatabaseDestruct&lt;T, +Drop&lt;T&gt;, +Felt252DictValue&lt;T&gt;&gt; of Destruct&lt;UserDatabase&lt;T&gt;&gt; {
     fn destruct(self: UserDatabase&lt;T&gt;) nopanic {
         self.balances.squash();
@@ -10470,7 +10470,7 @@ use a value of that type in a context that requires an exact size</li>
 <li>When you have a large amount of data and you want to transfer ownership but
 ensure the data won’t be copied when you do so</li>
 </ul>
-<p>We’ll demonstrate the first situation in the <a href="./ch12-02-smart-pointers.html#enabling-recursive-types-with-nullable-boxes">“Enabling Recursive Types with
+<p>We’ll demonstrate the first situation in the <a href="./ch12-02-smart-pointers.html#enabling-recursive-types-with-boxes">“Enabling Recursive Types with
 Boxes”</a> section. In the second case, transferring
 ownership of a large amount of data can take a long time because the data is
 copied around in memory. To improve performance in this situation, we can store
@@ -13275,7 +13275,7 @@ need to manually implement extra code to print complex data types.</p>
 implement the <code>Debug</code> trait, as they also print the result in case of assertion
 failure.</p>
 <p>For more details about the <code>Debug</code> trait and its usage for printing values when
-debugging, please refer to the <a href="./appendix-03-derivable-traits.html#debug-trait-for-printing-and-debugging">Derivable Traits</a> appendix.</p>
+debugging, please refer to the <a href="./appendix-03-derivable-traits.html#debug-for-printing-and-debugging">Derivable Traits</a> appendix.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="arithmetic-circuits"><a class="header" href="#arithmetic-circuits">Arithmetic Circuits</a></h1>
 <p>Arithmetic circuits are mathematical models used to represent polynomial
 computations. They are defined over a field (typically a finite field \(F_p\)
@@ -18233,7 +18233,7 @@ implementation block directly, without any generic parameter, and use
 </blockquote>
 <p>The <code>#[generate_trait]</code> attribute is mostly used to define private impl blocks.
 It might also be used in addition to <code>#[abi(per_item)]</code> to define the various
-entrypoints of a contract (see <a href="./ch101-02-contract-functions.html#4-abiper_item-attribute">next section</a>).</p>
+entrypoints of a contract (see <a href="./ch101-02-contract-functions.html#abiper_item-attribute">next section</a>).</p>
 <blockquote>
 <p>Note: using <code>#[generate_trait]</code> in addition to the <code>#[abi(embed_v0)]</code>
 attribute for a public impl block is not recommended, as it will result in a
@@ -20536,7 +20536,7 @@ in a contract</span></p>
 <li>An <code>Upgraded</code> event emitted when the upgrade is successful</li>
 <li>Protection against upgrading to a zero class hash</li>
 </ul>
-<p>For more information, please refer to the <a href="https://docs.openzeppelin.com/contracts-cairo/alpha/api/upgrades">OpenZeppelin docs API
+<p>For more information, please refer to the <a href="https://docs.openzeppelin.com/contracts-cairo/0.18.0/upgrades">OpenZeppelin docs API
 reference</a>.</p>
 <h2 id="security-considerations"><a class="header" href="#security-considerations">Security Considerations</a></h2>
 <p>Upgrades can be very sensitive operations, and security should always be top of

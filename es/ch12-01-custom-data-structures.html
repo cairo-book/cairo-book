@@ -366,11 +366,11 @@ compiler doesn't know how to make a <code>UserDatabase&lt;T&gt;</code> go out of
 doesn't implement the <code>Drop&lt;T&gt;</code> trait, nor the <code>Destruct&lt;T&gt;</code> trait. Since it has
 a <code>Felt252Dict&lt;T&gt;</code> as a member, it cannot be dropped, so we are forced to
 implement the <code>Destruct&lt;T&gt;</code> trait manually (refer to the
-<a href="ch04-01-what-is-ownership.html#the-drop-trait">Ownership</a> chapter for more
-information). Using <code>#[derive(Destruct)]</code> on top of the <code>UserDatabase&lt;T&gt;</code>
-definition won't work because of the use of <a href="./ch08-00-generic-types-and-traits.html">Generic types</a> in the
-struct definition. We need to code the <code>Destruct&lt;T&gt;</code> trait implementation by
-ourselves:</p>
+<a href="ch04-01-what-is-ownership.html#no-op-destruction-the-drop-trait">Ownership</a>
+chapter for more information). Using <code>#[derive(Destruct)]</code> on top of the
+<code>UserDatabase&lt;T&gt;</code> definition won't work because of the use of <a href="./ch08-00-generic-types-and-traits.html">Generic
+types</a> in the struct definition. We need to code the <code>Destruct&lt;T&gt;</code>
+trait implementation by ourselves:</p>
 <pre><code class="language-cairo noplayground">impl UserDatabaseDestruct&lt;T, +Drop&lt;T&gt;, +Felt252DictValue&lt;T&gt;&gt; of Destruct&lt;UserDatabase&lt;T&gt;&gt; {
     fn destruct(self: UserDatabase&lt;T&gt;) nopanic {
         self.balances.squash();
