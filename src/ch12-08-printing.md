@@ -154,4 +154,4 @@ For more details about the `Debug` trait and its usage for printing values when
 debugging, please refer to the [Derivable Traits][debug trait] appendix.
 
 [debug trait]:
-  ./appendix-03-derivable-traits.md#debug-trait-for-printing-and-debugging
+  ./appendix-03-derivable-traits.md#debug-for-printing-and-debugging

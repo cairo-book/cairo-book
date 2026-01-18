@@ -3,7 +3,8 @@
 	"module": "index.ts",
 	"type": "module",
 	"scripts": {
-		"start": "bun run src/index.ts"
+		"start": "bun run src/index.ts",
+		"check-links": "bun run src/check-links.ts"
 	},
 	"devDependencies": {
 		"@types/bun": "latest",
@@ -14,7 +15,13 @@
 	},
 	"dependencies": {
 		"fuzzysort": "^2.0.4",
+		"github-slugger": "^2.0.0",
+		"mdast-util-to-string": "^4.0.0",
 		"prompts": "^2.4.2",
+		"remark-gfm": "^4.0.0",
+		"remark-parse": "^11.0.0",
+		"unified": "^11.0.4",
+		"unist-util-visit": "^5.0.0",
 		"yaml": "^2.6.1"
 	}
 }

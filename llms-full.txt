@@ -77,7 +77,7 @@ Starknet proposes its own AI agent designed to assist with Cairo and Starknet-re
 
 You can find the Starknet Agent on the [Starknet Agent][agent gpt] website.
 
-[agent gpt]: https://agent.starknet.id/
+[agent gpt]: https://ask.starknet.io/
 # Installation
 
 The first step is to install Cairo. We'll download Cairo through [starkup][starkup], a command line tool for managing Cairo versions and associated tools. You'll need an internet connection for the download.
