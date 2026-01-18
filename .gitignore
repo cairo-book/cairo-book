@@ -16,3 +16,6 @@ runner_crate/target
 
 .env
 thoughts/
+
+.tldr/
+.tldrignore

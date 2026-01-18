@@ -102,4 +102,4 @@ and their consequences before upgrading. Some aspects to consider are:
   OpenZeppelin Contracts.
 
 [oz upgradeability api]:
-  https://docs.openzeppelin.com/contracts-cairo/alpha/api/upgrades
+  https://docs.openzeppelin.com/contracts-cairo/0.18.0/upgrades

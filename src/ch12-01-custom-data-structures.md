@@ -81,11 +81,11 @@ compiler doesn't know how to make a `UserDatabase<T>` go out of scope, since it
 doesn't implement the `Drop<T>` trait, nor the `Destruct<T>` trait. Since it has
 a `Felt252Dict<T>` as a member, it cannot be dropped, so we are forced to
 implement the `Destruct<T>` trait manually (refer to the
-[Ownership](ch04-01-what-is-ownership.md#the-drop-trait) chapter for more
-information). Using `#[derive(Destruct)]` on top of the `UserDatabase<T>`
-definition won't work because of the use of [Generic types][generics] in the
-struct definition. We need to code the `Destruct<T>` trait implementation by
-ourselves:
+[Ownership](ch04-01-what-is-ownership.md#no-op-destruction-the-drop-trait)
+chapter for more information). Using `#[derive(Destruct)]` on top of the
+`UserDatabase<T>` definition won't work because of the use of [Generic
+types][generics] in the struct definition. We need to code the `Destruct<T>`
+trait implementation by ourselves:
 
 ```cairo,noplayground
 {{#include ../listings/ch12-advanced-features/no_listing_12_dict_struct_member/src/lib.cairo:destruct}}

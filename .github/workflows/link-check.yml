@@ -11,9 +11,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install markdown-link-check
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install link checker dependencies
+        working-directory: scripts
         run: |
-          npm install -g markdown-link-check
-      - name: Run markdown-link-check
+          bun install --frozen-lockfile
+      - name: Run link checker
+        working-directory: scripts
         run: |
-          find src -name "*.md" | xargs markdown-link-check
+          bun run check-links
