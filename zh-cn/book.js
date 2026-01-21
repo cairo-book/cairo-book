@@ -749,6 +749,69 @@ function playground_text(playground, hidden = true) {
 	var sidebarResizeHandle = document.getElementById("sidebar-resize-handle");
 	var firstContact = null;
 
+	function sidebarPathname(href) {
+		if (!href) return "";
+		try {
+			var url = new URL(href, window.location.href);
+			var pathname = url.pathname;
+			var file = pathname.substring(pathname.lastIndexOf("/") + 1);
+			return file || "index.html";
+		} catch (_e) {
+			return "";
+		}
+	}
+
+	function markActiveSidebarLink() {
+		var currentFile = sidebarPathname(window.location.href);
+		var activeLink = null;
+
+		Array.from(sidebarLinks).forEach((link) => {
+			link.classList.remove("active");
+			link.removeAttribute("aria-current");
+			if (!link.getAttribute("href")) {
+				return;
+			}
+			if (sidebarPathname(link.getAttribute("href")) === currentFile) {
+				activeLink = link;
+			}
+		});
+
+		if (!activeLink) {
+			return null;
+		}
+
+		activeLink.classList.add("active");
+		activeLink.setAttribute("aria-current", "page");
+
+		var activeLi = activeLink.closest("li");
+		if (activeLi) {
+			activeLi.classList.add("expanded");
+			expandParentSections(activeLi);
+		}
+
+		return activeLink;
+	}
+
+	function expandParentSections(activeLi) {
+		var currentLi = activeLi;
+		while (currentLi) {
+			var sectionOl = currentLi.parentElement;
+			if (!sectionOl || sectionOl.tagName !== "OL") {
+				break;
+			}
+			var containerLi = sectionOl.parentElement;
+			if (!containerLi || containerLi.tagName !== "LI") {
+				break;
+			}
+			var toggleLi = containerLi.previousElementSibling;
+			if (!toggleLi || toggleLi.tagName !== "LI") {
+				break;
+			}
+			toggleLi.classList.add("expanded");
+			currentLi = toggleLi;
+		}
+	}
+
 	function showSidebar() {
 		html.classList.remove("sidebar-hidden");
 		html.classList.add("sidebar-visible");
@@ -866,6 +929,8 @@ function playground_text(playground, hidden = true) {
 		},
 		{ passive: true },
 	);
+
+	markActiveSidebarLink();
 
 	// Scroll sidebar to current active section
 	var activeSection = document
