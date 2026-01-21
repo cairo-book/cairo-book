@@ -15,6 +15,7 @@ runner_crate/target
 *.snfoundry_cache
 
 .env
+thoughts/
 
 .tldr/
 .tldrignore

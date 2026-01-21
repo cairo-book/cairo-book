@@ -10,6 +10,6 @@ error: Function is declared as nopanic but calls a function that may panic.
     assert!(1 == 1, "what");
     ^^^^^^^^^^^^^^^^^^^^^^^
 
-error: could not compile `no_listing_04_nopanic_wrong` due to previous error
+error: could not compile `no_listing_04_nopanic_wrong` due to 2 previous errors
 error: `scarb` command exited with error
 

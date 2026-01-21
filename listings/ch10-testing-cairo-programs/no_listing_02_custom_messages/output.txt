@@ -1,7 +1,5 @@
 $ scarb test 
      Running test no_listing_02_custom_messages (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_02_custom_messages_unittest) no_listing_02_custom_messages v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 

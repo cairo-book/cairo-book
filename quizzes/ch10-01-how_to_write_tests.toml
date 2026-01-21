@@ -98,7 +98,7 @@ the same as the panic string `"ZeroDivisionError not allowed!"`
 id = "0b3385b4-069f-4883-ab3f-6feb8ebf72f8"
 type = "MultipleChoice"
 prompt.prompt = """
-What is the output when these tests are run with the command `scarb cairo-test -f test_`
+What is the output when these tests are run with the command `scarb test division_function`
 ```rust
 #[cfg(test)]
 mod tests {
@@ -118,7 +118,7 @@ mod tests {
         assert_ne!((3 * 2), 8);
         assert_eq!((5 * 5), 25);
     }
-    
+
     #[test]
     fn test_subtraction() {
         assert!((12 - 11) == 1, "The first argument was false");
@@ -128,10 +128,10 @@ mod tests {
 """
 prompt.distractors = [
   "Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;",
-  "test result: ok. 1 passed; 0 failed; 1 ignored; 2 filtered out;",
-  "test result: ok. 2 passed; 0 failed; 2 ignored; 0 filtered out;",
+  "Tests: 1 passed, 0 failed, 3 ignored, 0 filtered out",
+  "Tests: 3 passed, 0 failed, 1 ignored, 0 filtered out",
 ]
-answer.answer = "test result: ok. 2 passed; 0 failed; 1 ignored; 1 filtered out;"
+answer.answer = "Tests: 1 passed, 0 failed, 0 ignored, 3 filtered out"
 
 context = """
 One ignored: `test_addition`, because it has the `ignore` attribute\n
