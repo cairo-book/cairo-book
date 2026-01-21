@@ -358,8 +358,8 @@ following output:</p>
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -400,8 +400,8 @@ we haven’t filtered the tests being run, the end of the summary shows
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -551,8 +551,8 @@ supposed to return <code>true</code>, so our test should pass. Let’s find out!
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -615,8 +615,8 @@ result, our test will pass if <code>can_hold</code> returns <code>false</code>:<
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -641,12 +641,12 @@ method by replacing the <code>&gt;</code> sign with a <code>&lt;</code> sign whe
 
 Collected 2 test(s) from no_listing_01_wrong_can_hold_impl package
 Running 2 test(s) from src/
+[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 [FAIL] no_listing_01_wrong_can_hold_impl::tests::larger_can_hold_smaller
 
 Failure data:
     "rectangle cannot hold"
 
-[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Tests: 1 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -699,15 +699,14 @@ mod tests {
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_04 (snforge test)
     Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_unittest) listing_10_04 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_04 package
 Running 2 test(s) from src/
-[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15040)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -733,7 +732,6 @@ fails. Change the implementation of the <code>add_two</code> function to instead
 <p>Run the tests again:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_04_wong_add (snforge test)
-    Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_wong_add_unittest) listing_10_04_wong_add v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04_wong_add/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
@@ -881,8 +879,6 @@ function:</p>
 <p>Now when we run the test, we’ll get a more informative error message:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_02_custom_messages (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_02_custom_messages_unittest) no_listing_02_custom_messages v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -960,7 +956,7 @@ this test passes:</p>
 
 Collected 1 test(s) from listing_09_08 package
 Running 1 test(s) from src/
-[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~14440)
 Tests: 1 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -1004,7 +1000,6 @@ the <code>new</code> function will panic if the value is greater than <code>100<
 <p>When we run the test, it will fail:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_03_wrong_new_impl (snforge test)
-    Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_03_wrong_new_impl_unittest) no_listing_03_wrong_new_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_03_wrong_new_impl/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
@@ -1103,7 +1098,6 @@ mod tests {
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_04_new_bug (snforge test)
     Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_04_new_bug_unittest) no_listing_04_new_bug v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_04_new_bug/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -1154,15 +1148,13 @@ mod tests {
 <p>We can pass the name of any test function to <code>scarb test</code> to run only that test:</p>
 <pre><code class="language-shell">$ scarb test add_two_and_two
      Running test listing_10_07 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_07_unittest) listing_10_07 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_07/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 1 test(s) from listing_10_07 package
 Running 1 test(s) from src/
-[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
 Tests: 1 passed, 0 failed, 0 ignored, 1 filtered out
 
 
@@ -1211,7 +1203,7 @@ when we run our tests, <code>it_works</code> runs, but <code>expensive_test</cod
 Collected 2 test(s) from no_listing_05_ignore_tests package
 Running 2 test(s) from src/
 [IGNORE] no_listing_05_ignore_tests::tests::expensive_test
-[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 1 passed, 0 failed, 1 ignored, 0 filtered out
 
 
@@ -1310,7 +1302,7 @@ executing a test.</p>
 <p>Other information is also available such as memory holes (i.e., unused memory
 cells) or builtins usage. The Cairo Profiler is under active development, and
 many other features will be made available in the future.</p>
-<div class="quiz-placeholder" data-quiz-name="&quot;ch10-01-how_to_write_tests&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;This informs scarb to treat the function as a test and not source code.\n&quot;,&quot;id&quot;:&quot;c7365cd4-c0cf-4d92-8e42-c47ab8936775&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;#[test]&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;What is the annotation you add to a function to indicate that it's a test?&quot;}},{&quot;context&quot;:&quot;`should_err` does not exist in Cairo &amp;mdash; tests that return `Result` will pass even if the result is an `Err`.\n&quot;,&quot;id&quot;:&quot;cd77485f-723a-4978-8da6-c4ca3df44c44&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```\n#[test]\n#[should_err]\nfn test() -&gt; Result&lt;usize, String&gt; {\n    f(0)\n}\n```\n  &quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```\n#[test]\nfn test() {\n    assert!(f(0).is_err());\n}\n```\n&quot;,&quot;```\n#[test]\n#[should_panic]\nfn test() {\n    f(0).unwrap();\n}\n```\n  &quot;,&quot;```\n#[test]\nfn test() {\n    assert!(match f(0) {\n        Ok(_) =&gt; false,\n        Err(_) =&gt; true\n    });\n}\n```\n  &quot;],&quot;prompt&quot;:&quot;Let's say you have a function with the type signature:\n\n```\nfn f(x: usize) -&gt; Result&lt;usize, ByteArray&gt;;\n```\n\nAnd you want to test that `f(0)` should return `Err(_)`.\nWhich of the following is **NOT** a valid way to test that?\n&quot;}},{&quot;context&quot;:&quot;The expected string `\&quot;Zerodivisionerror not allowed!\&quot;` should be exactly\nthe same as the panic string `\&quot;ZeroDivisionError not allowed!\&quot;`\n&quot;,&quot;id&quot;:&quot;4becac9f-5173-4439-bd1f-e1e9958423ab&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;No&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Yes&quot;],&quot;prompt&quot;:&quot;Does the test pass?\n```\nfn division_operation(number1: u16, number2: u16) -&gt; u16 {\n    if number2 == 0 {\n        panic!(\&quot;ZeroDivisionError not allowed!\&quot;);\n    }\n    let result = number1 / number2;\n    result\n}\n\n#[cfg(test)]\nmod tests {\n    use super::{division_operation};\n\n    #[test]\n    #[should_panic(expected: (\&quot;Zerodivisionerror not allowed!\&quot;,))]\n    fn test_division_operation() {\n        division_operation(10, 0);\n    }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;One ignored: `test_addition`, because it has the `ignore` attribute\n\nOne filtered out: `division_with_available_gas`, because its name doesn't match the filter `test_`\n\nZero failed\n\nTwo passed: `test_multiplication` and `test_subtraction`, because all the conditions in the assertions are true\n&quot;,&quot;id&quot;:&quot;0b3385b4-069f-4883-ab3f-6feb8ebf72f8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;test result: ok. 2 passed; 0 failed; 1 ignored; 1 filtered out;&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;&quot;,&quot;test result: ok. 1 passed; 0 failed; 1 ignored; 2 filtered out;&quot;,&quot;test result: ok. 2 passed; 0 failed; 2 ignored; 0 filtered out;&quot;],&quot;prompt&quot;:&quot;What is the output when these tests are run with the command `scarb cairo-test -f test_`\n```rust\n#[cfg(test)]\nmod tests {\n    #[test]\n    #[ignore]\n    fn test_addition() {\n        assert_ne!((5 + 4), 5);\n    }\n\n    #[test]\n    fn division_function() {\n        assert_eq!((10_u8 / 5), 2);\n    }\n\n    #[test]\n    fn test_multiplication() {\n        assert_ne!((3 * 2), 8);\n        assert_eq!((5 * 5), 25);\n    }\n    \n    #[test]\n    fn test_subtraction() {\n        assert!((12 - 11) == 1, \&quot;The first argument was false\&quot;);\n    }\n}\n```\n&quot;}}]}"></div>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch10-01-how_to_write_tests&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;This informs scarb to treat the function as a test and not source code.\n&quot;,&quot;id&quot;:&quot;c7365cd4-c0cf-4d92-8e42-c47ab8936775&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;#[test]&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;What is the annotation you add to a function to indicate that it's a test?&quot;}},{&quot;context&quot;:&quot;`should_err` does not exist in Cairo &amp;mdash; tests that return `Result` will pass even if the result is an `Err`.\n&quot;,&quot;id&quot;:&quot;cd77485f-723a-4978-8da6-c4ca3df44c44&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```\n#[test]\n#[should_err]\nfn test() -&gt; Result&lt;usize, String&gt; {\n    f(0)\n}\n```\n  &quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```\n#[test]\nfn test() {\n    assert!(f(0).is_err());\n}\n```\n&quot;,&quot;```\n#[test]\n#[should_panic]\nfn test() {\n    f(0).unwrap();\n}\n```\n  &quot;,&quot;```\n#[test]\nfn test() {\n    assert!(match f(0) {\n        Ok(_) =&gt; false,\n        Err(_) =&gt; true\n    });\n}\n```\n  &quot;],&quot;prompt&quot;:&quot;Let's say you have a function with the type signature:\n\n```\nfn f(x: usize) -&gt; Result&lt;usize, ByteArray&gt;;\n```\n\nAnd you want to test that `f(0)` should return `Err(_)`.\nWhich of the following is **NOT** a valid way to test that?\n&quot;}},{&quot;context&quot;:&quot;The expected string `\&quot;Zerodivisionerror not allowed!\&quot;` should be exactly\nthe same as the panic string `\&quot;ZeroDivisionError not allowed!\&quot;`\n&quot;,&quot;id&quot;:&quot;4becac9f-5173-4439-bd1f-e1e9958423ab&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;No&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Yes&quot;],&quot;prompt&quot;:&quot;Does the test pass?\n```\nfn division_operation(number1: u16, number2: u16) -&gt; u16 {\n    if number2 == 0 {\n        panic!(\&quot;ZeroDivisionError not allowed!\&quot;);\n    }\n    let result = number1 / number2;\n    result\n}\n\n#[cfg(test)]\nmod tests {\n    use super::{division_operation};\n\n    #[test]\n    #[should_panic(expected: (\&quot;Zerodivisionerror not allowed!\&quot;,))]\n    fn test_division_operation() {\n        division_operation(10, 0);\n    }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;One ignored: `test_addition`, because it has the `ignore` attribute\n\nOne filtered out: `division_with_available_gas`, because its name doesn't match the filter `test_`\n\nZero failed\n\nTwo passed: `test_multiplication` and `test_subtraction`, because all the conditions in the assertions are true\n&quot;,&quot;id&quot;:&quot;0b3385b4-069f-4883-ab3f-6feb8ebf72f8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Tests: 1 passed, 0 failed, 0 ignored, 3 filtered out&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;&quot;,&quot;Tests: 1 passed, 0 failed, 3 ignored, 0 filtered out&quot;,&quot;Tests: 3 passed, 0 failed, 1 ignored, 0 filtered out&quot;],&quot;prompt&quot;:&quot;What is the output when these tests are run with the command `scarb test division_function`\n```rust\n#[cfg(test)]\nmod tests {\n    #[test]\n    #[ignore]\n    fn test_addition() {\n        assert_ne!((5 + 4), 5);\n    }\n\n    #[test]\n    fn division_function() {\n        assert_eq!((10_u8 / 5), 2);\n    }\n\n    #[test]\n    fn test_multiplication() {\n        assert_ne!((3 * 2), 8);\n        assert_eq!((5 * 5), 25);\n    }\n\n    #[test]\n    fn test_subtraction() {\n        assert!((12 - 11) == 1, \&quot;The first argument was false\&quot;);\n    }\n}\n```\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css">
                     </main>
 

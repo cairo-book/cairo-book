@@ -1037,7 +1037,7 @@ error: Cannot assign to an immutable variable.
     x = 6;
     ^^^^^
 
-error: could not compile `no_listing_01_variables_are_immutable` due to previous error
+error: could not compile `no_listing_01_variables_are_immutable` due to 1 previous error
 error: `scarb` command exited with error
 
 </code></pre>
@@ -1218,7 +1218,7 @@ error: Unexpected argument type. Expected: "core::integer::u64", found: "core::i
     x = 5_u8;
         ^^^^
 
-error: could not compile `no_listing_05_mut_cant_change_type` due to previous error
+error: could not compile `no_listing_05_mut_cant_change_type` due to 1 previous error
 error: `scarb` command exited with error
 
 </code></pre>
@@ -1800,7 +1800,7 @@ warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
     let x = (let y = 6);
                  ^
 
-error: could not compile `no_listing_18_statements_dont_return_values` due to previous error
+error: could not compile `no_listing_18_statements_dont_return_values` due to 4 previous errors and 2 warnings
 error: `scarb` command exited with error
 
 </code></pre>
@@ -1912,7 +1912,7 @@ error: Unexpected return type. Expected: "core::integer::u32", found: "()".
 fn plus_one(x: u32) -&gt; u32 {
                        ^^^
 
-error: could not compile `no_listing_22_function_return_invalid` due to previous error
+error: could not compile `no_listing_22_function_return_invalid` due to 1 previous error
 error: `scarb` command exited with error
 
 </code></pre>
@@ -2095,7 +2095,7 @@ error: Mismatched types. The type `core::bool` cannot be created from a numeric 
     let number = 3;
                  ^
 
-error: could not compile `no_listing_28_bis_if_not_bool` due to previous error
+error: could not compile `no_listing_28_bis_if_not_bool` due to 1 previous error
 
 </code></pre>
 <p>The error indicates that Cairo inferred the type of <code>number</code> to be a <code>bool</code>
@@ -3144,7 +3144,7 @@ error: Trait has no implementation in context: core::traits::Copy::&lt;core::nul
     let val = dict.get(0); // This will cause a compiler error
                    ^^^
 
-error: could not compile `no_listing_15_dict_of_array_attempt_get` due to previous error
+error: could not compile `no_listing_15_dict_of_array_attempt_get` due to 1 previous error
 error: `scarb` command exited with error
 
 </code></pre>
@@ -3340,7 +3340,7 @@ note: variable was previously used here:
         ^^^
 note: Trait has no implementation in context: core::traits::Copy::&lt;core::array::Array::&lt;core::integer::u128&gt;&gt;.
 
-error: could not compile `no_listing_02_pass_array_by_value` due to previous error
+error: could not compile `no_listing_02_pass_array_by_value` due to 1 previous error and 1 warning
 error: `scarb` command exited with error
 
 </code></pre>
@@ -3448,7 +3448,7 @@ error: Variable not dropped.
 note: Trait has no implementation in context: core::traits::Drop::&lt;no_listing_06_no_destruct_compile_fails::A&gt;.
 note: Trait has no implementation in context: core::traits::Destruct::&lt;no_listing_06_no_destruct_compile_fails::A&gt;.
 
-error: could not compile `no_listing_06_no_destruct_compile_fails` due to previous error
+error: could not compile `no_listing_06_no_destruct_compile_fails` due to 1 previous error
 error: `scarb` command exited with error
 
 </code></pre>
@@ -3719,7 +3719,7 @@ error: Invalid left-hand side of assignment.
     rec.width = temp;
     ^^^^^^^^^
 
-error: could not compile `listing_04_04` due to previous error
+error: could not compile `listing_04_04` due to 2 previous errors
 error: `scarb` command exited with error
 
 </code></pre>
@@ -4885,7 +4885,7 @@ bug Cairo knows how to catch. If we try to compile this code, we’ll get this
 error:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_08_missing_match_arm v0.1.0 (listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/Scarb.toml)
-error: Missing match arm: `None` not covered.
+error: Match is non-exhaustive: `None(_)` not covered.
  --&gt; listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/src/lib.cairo:5:5-7:5
       match x {
  _____^
@@ -4893,7 +4893,7 @@ error: Missing match arm: `None` not covered.
 |     }
 |_____^
 
-error: could not compile `no_listing_08_missing_match_arm` due to previous error
+error: could not compile `no_listing_08_missing_match_arm` due to 1 previous error
 error: `scarb` command exited with error
 
 </code></pre>
@@ -5546,7 +5546,7 @@ error: Item `listing_07_02::front_of_house::hosting::add_to_waitlist` is not vis
     front_of_house::hosting::add_to_waitlist();
                              ^^^^^^^^^^^^^^^
 
-error: could not compile `listing_07_02` due to previous error
+error: could not compile `listing_07_02` due to 4 previous errors
 error: `scarb` command exited with error
 
 </code></pre>
@@ -5745,7 +5745,7 @@ error[E0006]: Identifier not found.
         hosting::add_to_waitlist();
         ^^^^^^^
 
-error: could not compile `listing_07_05` due to previous error
+error: could not compile `listing_07_05` due to 1 previous error and 1 warning
 
 </code></pre>
 <h2 id="creating-idiomatic-use-paths"><a class="header" href="#creating-idiomatic-use-paths">Creating Idiomatic <code>use</code> Paths</a></h2>
@@ -7487,7 +7487,7 @@ error: Function is declared as nopanic but calls a function that may panic.
     assert!(1 == 1, "what");
     ^^^^^^^^^^^^^^^^^^^^^^^
 
-error: could not compile `no_listing_04_nopanic_wrong` due to previous error
+error: could not compile `no_listing_04_nopanic_wrong` due to 2 previous errors
 error: `scarb` command exited with error
 
 </code></pre>
@@ -7799,7 +7799,7 @@ warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
     let some_num = parse_u8(258)?;
         ^^^^^^^^
 
-error: could not compile `listing_invalid_qmark` due to previous error
+error: could not compile `listing_invalid_qmark` due to 1 previous error and 1 warning
 
 </code></pre>
 <p>This error points out that we’re only allowed to use the <code>?</code> operator in a
@@ -7925,8 +7925,8 @@ following output:</p>
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -7967,8 +7967,8 @@ we haven’t filtered the tests being run, the end of the summary shows
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -8118,8 +8118,8 @@ supposed to return <code>true</code>, so our test should pass. Let’s find out!
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -8182,8 +8182,8 @@ result, our test will pass if <code>can_hold</code> returns <code>false</code>:<
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -8208,12 +8208,12 @@ method by replacing the <code>&gt;</code> sign with a <code>&lt;</code> sign whe
 
 Collected 2 test(s) from no_listing_01_wrong_can_hold_impl package
 Running 2 test(s) from src/
+[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 [FAIL] no_listing_01_wrong_can_hold_impl::tests::larger_can_hold_smaller
 
 Failure data:
     "rectangle cannot hold"
 
-[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Tests: 1 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -8266,15 +8266,14 @@ mod tests {
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_04 (snforge test)
     Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_unittest) listing_10_04 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_04 package
 Running 2 test(s) from src/
-[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
-[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15040)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -8300,7 +8299,6 @@ fails. Change the implementation of the <code>add_two</code> function to instead
 <p>Run the tests again:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_04_wong_add (snforge test)
-    Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_wong_add_unittest) listing_10_04_wong_add v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04_wong_add/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
@@ -8448,8 +8446,6 @@ function:</p>
 <p>Now when we run the test, we’ll get a more informative error message:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_02_custom_messages (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_02_custom_messages_unittest) no_listing_02_custom_messages v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_02_custom_messages/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -8527,7 +8523,7 @@ this test passes:</p>
 
 Collected 1 test(s) from listing_09_08 package
 Running 1 test(s) from src/
-[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~14440)
 Tests: 1 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -8571,7 +8567,6 @@ the <code>new</code> function will panic if the value is greater than <code>100<
 <p>When we run the test, it will fail:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_03_wrong_new_impl (snforge test)
-    Blocking waiting for file lock on registry db cache
     Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_03_wrong_new_impl_unittest) no_listing_03_wrong_new_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_03_wrong_new_impl/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
@@ -8670,7 +8665,6 @@ mod tests {
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_04_new_bug (snforge test)
     Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_04_new_bug_unittest) no_listing_04_new_bug v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_04_new_bug/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -8721,15 +8715,13 @@ mod tests {
 <p>We can pass the name of any test function to <code>scarb test</code> to run only that test:</p>
 <pre><code class="language-shell">$ scarb test add_two_and_two
      Running test listing_10_07 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_07_unittest) listing_10_07 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_07/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 1 test(s) from listing_10_07 package
 Running 1 test(s) from src/
-[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
 Tests: 1 passed, 0 failed, 0 ignored, 1 filtered out
 
 
@@ -8778,7 +8770,7 @@ when we run our tests, <code>it_works</code> runs, but <code>expensive_test</cod
 Collected 2 test(s) from no_listing_05_ignore_tests package
 Running 2 test(s) from src/
 [IGNORE] no_listing_05_ignore_tests::tests::expensive_test
-[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 1 passed, 0 failed, 1 ignored, 0 filtered out
 
 
@@ -8877,7 +8869,7 @@ executing a test.</p>
 <p>Other information is also available such as memory holes (i.e., unused memory
 cells) or builtins usage. The Cairo Profiler is under active development, and
 many other features will be made available in the future.</p>
-<div class="quiz-placeholder" data-quiz-name="&quot;ch10-01-how_to_write_tests&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;This informs scarb to treat the function as a test and not source code.\n&quot;,&quot;id&quot;:&quot;c7365cd4-c0cf-4d92-8e42-c47ab8936775&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;#[test]&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;What is the annotation you add to a function to indicate that it's a test?&quot;}},{&quot;context&quot;:&quot;`should_err` does not exist in Cairo &amp;mdash; tests that return `Result` will pass even if the result is an `Err`.\n&quot;,&quot;id&quot;:&quot;cd77485f-723a-4978-8da6-c4ca3df44c44&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```\n#[test]\n#[should_err]\nfn test() -&gt; Result&lt;usize, String&gt; {\n    f(0)\n}\n```\n  &quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```\n#[test]\nfn test() {\n    assert!(f(0).is_err());\n}\n```\n&quot;,&quot;```\n#[test]\n#[should_panic]\nfn test() {\n    f(0).unwrap();\n}\n```\n  &quot;,&quot;```\n#[test]\nfn test() {\n    assert!(match f(0) {\n        Ok(_) =&gt; false,\n        Err(_) =&gt; true\n    });\n}\n```\n  &quot;],&quot;prompt&quot;:&quot;Let's say you have a function with the type signature:\n\n```\nfn f(x: usize) -&gt; Result&lt;usize, ByteArray&gt;;\n```\n\nAnd you want to test that `f(0)` should return `Err(_)`.\nWhich of the following is **NOT** a valid way to test that?\n&quot;}},{&quot;context&quot;:&quot;The expected string `\&quot;Zerodivisionerror not allowed!\&quot;` should be exactly\nthe same as the panic string `\&quot;ZeroDivisionError not allowed!\&quot;`\n&quot;,&quot;id&quot;:&quot;4becac9f-5173-4439-bd1f-e1e9958423ab&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;No&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Yes&quot;],&quot;prompt&quot;:&quot;Does the test pass?\n```\nfn division_operation(number1: u16, number2: u16) -&gt; u16 {\n    if number2 == 0 {\n        panic!(\&quot;ZeroDivisionError not allowed!\&quot;);\n    }\n    let result = number1 / number2;\n    result\n}\n\n#[cfg(test)]\nmod tests {\n    use super::{division_operation};\n\n    #[test]\n    #[should_panic(expected: (\&quot;Zerodivisionerror not allowed!\&quot;,))]\n    fn test_division_operation() {\n        division_operation(10, 0);\n    }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;One ignored: `test_addition`, because it has the `ignore` attribute\n\nOne filtered out: `division_with_available_gas`, because its name doesn't match the filter `test_`\n\nZero failed\n\nTwo passed: `test_multiplication` and `test_subtraction`, because all the conditions in the assertions are true\n&quot;,&quot;id&quot;:&quot;0b3385b4-069f-4883-ab3f-6feb8ebf72f8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;test result: ok. 2 passed; 0 failed; 1 ignored; 1 filtered out;&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;&quot;,&quot;test result: ok. 1 passed; 0 failed; 1 ignored; 2 filtered out;&quot;,&quot;test result: ok. 2 passed; 0 failed; 2 ignored; 0 filtered out;&quot;],&quot;prompt&quot;:&quot;What is the output when these tests are run with the command `scarb cairo-test -f test_`\n```rust\n#[cfg(test)]\nmod tests {\n    #[test]\n    #[ignore]\n    fn test_addition() {\n        assert_ne!((5 + 4), 5);\n    }\n\n    #[test]\n    fn division_function() {\n        assert_eq!((10_u8 / 5), 2);\n    }\n\n    #[test]\n    fn test_multiplication() {\n        assert_ne!((3 * 2), 8);\n        assert_eq!((5 * 5), 25);\n    }\n    \n    #[test]\n    fn test_subtraction() {\n        assert!((12 - 11) == 1, \&quot;The first argument was false\&quot;);\n    }\n}\n```\n&quot;}}]}"></div>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch10-01-how_to_write_tests&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;This informs scarb to treat the function as a test and not source code.\n&quot;,&quot;id&quot;:&quot;c7365cd4-c0cf-4d92-8e42-c47ab8936775&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;#[test]&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;What is the annotation you add to a function to indicate that it's a test?&quot;}},{&quot;context&quot;:&quot;`should_err` does not exist in Cairo &amp;mdash; tests that return `Result` will pass even if the result is an `Err`.\n&quot;,&quot;id&quot;:&quot;cd77485f-723a-4978-8da6-c4ca3df44c44&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```\n#[test]\n#[should_err]\nfn test() -&gt; Result&lt;usize, String&gt; {\n    f(0)\n}\n```\n  &quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```\n#[test]\nfn test() {\n    assert!(f(0).is_err());\n}\n```\n&quot;,&quot;```\n#[test]\n#[should_panic]\nfn test() {\n    f(0).unwrap();\n}\n```\n  &quot;,&quot;```\n#[test]\nfn test() {\n    assert!(match f(0) {\n        Ok(_) =&gt; false,\n        Err(_) =&gt; true\n    });\n}\n```\n  &quot;],&quot;prompt&quot;:&quot;Let's say you have a function with the type signature:\n\n```\nfn f(x: usize) -&gt; Result&lt;usize, ByteArray&gt;;\n```\n\nAnd you want to test that `f(0)` should return `Err(_)`.\nWhich of the following is **NOT** a valid way to test that?\n&quot;}},{&quot;context&quot;:&quot;The expected string `\&quot;Zerodivisionerror not allowed!\&quot;` should be exactly\nthe same as the panic string `\&quot;ZeroDivisionError not allowed!\&quot;`\n&quot;,&quot;id&quot;:&quot;4becac9f-5173-4439-bd1f-e1e9958423ab&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;No&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Yes&quot;],&quot;prompt&quot;:&quot;Does the test pass?\n```\nfn division_operation(number1: u16, number2: u16) -&gt; u16 {\n    if number2 == 0 {\n        panic!(\&quot;ZeroDivisionError not allowed!\&quot;);\n    }\n    let result = number1 / number2;\n    result\n}\n\n#[cfg(test)]\nmod tests {\n    use super::{division_operation};\n\n    #[test]\n    #[should_panic(expected: (\&quot;Zerodivisionerror not allowed!\&quot;,))]\n    fn test_division_operation() {\n        division_operation(10, 0);\n    }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;One ignored: `test_addition`, because it has the `ignore` attribute\n\nOne filtered out: `division_with_available_gas`, because its name doesn't match the filter `test_`\n\nZero failed\n\nTwo passed: `test_multiplication` and `test_subtraction`, because all the conditions in the assertions are true\n&quot;,&quot;id&quot;:&quot;0b3385b4-069f-4883-ab3f-6feb8ebf72f8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Tests: 1 passed, 0 failed, 0 ignored, 3 filtered out&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Error: test result: FAILED. 1 passed; 1 failed; 1 ignored;&quot;,&quot;Tests: 1 passed, 0 failed, 3 ignored, 0 filtered out&quot;,&quot;Tests: 3 passed, 0 failed, 1 ignored, 0 filtered out&quot;],&quot;prompt&quot;:&quot;What is the output when these tests are run with the command `scarb test division_function`\n```rust\n#[cfg(test)]\nmod tests {\n    #[test]\n    #[ignore]\n    fn test_addition() {\n        assert_ne!((5 + 4), 5);\n    }\n\n    #[test]\n    fn division_function() {\n        assert_eq!((10_u8 / 5), 2);\n    }\n\n    #[test]\n    fn test_multiplication() {\n        assert_ne!((3 * 2), 8);\n        assert_eq!((5 * 5), 25);\n    }\n\n    #[test]\n    fn test_subtraction() {\n        assert!((12 - 11) == 1, \&quot;The first argument was false\&quot;);\n    }\n}\n```\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="test-organization"><a class="header" href="#test-organization">Test Organization</a></h1>
 <p>We'll think about tests in terms of two main categories: unit tests and
 integration tests. Unit tests are small and more focused, testing one module in
@@ -9014,9 +9006,9 @@ this directory only when we run <code>scarb test</code>. Run <code>scarb test</c
 
 Collected 2 test(s) from adder package
 Running 1 test(s) from tests/
-[PASS] adder_integrationtest::integration_tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] adder_integrationtest::integration_tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from src/
-[PASS] adder::tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] adder::tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9095,7 +9087,6 @@ test functions nor did we call the setup function from anywhere:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test adder (snforge test)
     Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
    Compiling test(adder_integrationtest) adder_integrationtest v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
@@ -9103,9 +9094,9 @@ test functions nor did we call the setup function from anywhere:</p>
 
 Collected 2 test(s) from adder package
 Running 1 test(s) from tests/
-[PASS] adder_integrationtest::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] adder_integrationtest::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from src/
-[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9142,10 +9133,10 @@ mod integration_tests;
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from tests/
-[PASS] adder_tests::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
 Running 1 test(s) from src/
-[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~40000)
+[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+Running 1 test(s) from tests/
+[PASS] adder_tests::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9476,7 +9467,7 @@ error: Trait has no implementation in context: core::ops::function::Fn::&lt;{clo
     let n = example_closure(5_u32);
             ^^^^^^^^^^^^^^^^^^^^^^
 
-error: could not compile `listing_closure_different_types` due to previous error
+error: could not compile `listing_closure_different_types` due to 1 previous error and 2 warnings
 
 </code></pre>
 <p>The first time we call <code>example_closure</code> with the <code>u64</code> value, the compiler
@@ -10561,7 +10552,7 @@ error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::Binar
     let node = BinaryTree::Node((4, leaf2, leaf3));
                                 ^^^^^^^^^^^^^^^^^
 
-error: could not compile `listing_recursive_types_wrong` due to previous error
+error: could not compile `listing_recursive_types_wrong` due to 3 previous errors
 
 </code></pre>
 <p>The error shows this type “has infinite size.” The reason is that we’ve defined
@@ -10914,12 +10905,12 @@ throw an error. Here’s an example:</p>
 <p>Compiling this code will result in the following error:</p>
 <pre><code class="language-plaintext">$ scarb build 
    Compiling no_listing_09_deref_coercion_example v0.1.0 (listings/ch12-advanced-features/no_listing_09_deref_mut_example/Scarb.toml)
-error: Type "no_listing_09_deref_coercion_example::Wrapper::&lt;no_listing_09_deref_coercion_example::UserProfile&gt;" has no member "username"
+error[E0007]: Type "no_listing_09_deref_coercion_example::Wrapper::&lt;no_listing_09_deref_coercion_example::UserProfile&gt;" has no member "username"
  --&gt; listings/ch12-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:32:46
     println!("Username: {}", wrapped_profile.username);
                                              ^^^^^^^^
 
-error: could not compile `no_listing_09_deref_coercion_example` due to previous error
+error: could not compile `no_listing_09_deref_coercion_example` due to 1 previous error
 
 </code></pre>
 <p>For the above code to work, we need to define <code>wrapped_profile</code> as a mutable
@@ -14832,7 +14823,7 @@ error: Wrong number of arguments. Expected 2, found: 1
         fn set(ref self: ContractState) {}
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-error: could not compile `listing_99_02` due to previous error
+error: could not compile `listing_99_02` due to 2 previous errors
 error: `scarb` command exited with error
 
 </code></pre>
@@ -22254,12 +22245,13 @@ pub mod PizzaFactory {
     }
 }
 </code></pre>
-<p>pizza factory that needs to be tested</span></p>
+<p><span class="caption">Listing 18-1: A pizza factory that needs
+to be tested</span></p>
 <h2 id="configuring-your-scarb-project-with-starknet-foundry"><a class="header" href="#configuring-your-scarb-project-with-starknet-foundry">Configuring your Scarb project with Starknet Foundry</a></h2>
 <p>The settings of your Scarb project can be configured in the <code>Scarb.toml</code> file.
 To use Starknet Foundry as your testing tool, you will need to add it as a dev
-dependency in your <code>Scarb.toml</code> file. At the time of writing, the latest version
-of Starknet Foundry is <code>v0.39.0</code> - but you should use the latest version.</p>
+dependency in your <code>Scarb.toml</code> file. Adapt the version you use to the latest
+version.</p>
 <pre><code class="language-toml noplayground">[dev-dependencies]
 snforge_std = "0.51.1"
 
@@ -22269,9 +22261,8 @@ test = "snforge test"
 [tool.scarb]
 allow-prebuilt-plugins = ["snforge_std"]
 </code></pre>
-<p>The <code>scarb test</code> command is configured to execute <code>scarb cairo-test</code> by default.
-In our settings, we have configured it to execute <code>snforge test</code> instead. This
-will allow us to run our tests using Starknet Foundry when we run the
+<p>The <code>scarb test</code> command is configured to execute <code>snforge test</code> by default.
+This allows us to run our tests using Starknet Foundry when we run the
 <code>scarb test</code> command.</p>
 <p>Once your project is configured, you will need to install Starknet Foundry by
 following the installation guide from the
@@ -22280,10 +22271,9 @@ As usual, we recommend to use <code>asdf</code> to manage versions of your devel
 tools.</p>
 <h2 id="testing-smart-contracts-with-starknet-foundry"><a class="header" href="#testing-smart-contracts-with-starknet-foundry">Testing Smart Contracts with Starknet Foundry</a></h2>
 <p>The usual command to run your tests using Starknet Foundry is <code>snforge test</code>.
-However, when we configured our projects, we defined that the <code>scarb test</code>
-command will run the <code>snforge test</code> command. Therefore, during the rest of this
-chapter, consider that the <code>scarb test</code> command will be using <code>snforge test</code>
-under the hood.</p>
+The <code>scarb test</code> command is an alias that executes <code>snforge test</code> under the
+hood. Therefore, during the rest of this chapter, we will use the <code>scarb test</code>
+command, which runs <code>snforge test</code>.</p>
 <p>The usual testing flow of a contract is as follows:</p>
 <ol>
 <li>Declare the class of the contract to test, identified by its name</li>
@@ -22299,10 +22289,8 @@ under the hood.</p>
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -22384,16 +22372,27 @@ under the hood.</p>
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>18-2 Deploying the contract to test</span></p>
+<p><span class="caption">Listing 18-2: Deploying the
+contract to test</span></p>
 <h3 id="testing-our-contract"><a class="header" href="#testing-our-contract">Testing our Contract</a></h3>
 <p>Determining the behavior that your contract should respect is the first step in
 writing tests. In the <code>PizzaFactory</code> contract, we determined that the contract
@@ -22414,10 +22413,8 @@ the operation should fail. Otherwise, the owner should be updated.</li>
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -22499,17 +22496,27 @@ fn test_constructor() {
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>18-3: Testing the initial state by loading storage
-variables </span></p>
+<p><span class="caption">Listing 18-3: Testing the initial
+state by loading storage variables </span></p>
 <p>Once our contract is deployed, we want to assert that the initial values are set
 as expected. If our contract has an entrypoint that returns the value of a
 storage variable, we can call this entrypoint. Otherwise, we can use the <code>load</code>
@@ -22525,10 +22532,8 @@ the contract behaves as expected.</p>
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -22610,10 +22615,20 @@ fn test_change_owner_should_panic_when_not_owner() {
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
@@ -22634,10 +22649,8 @@ that the pizza count was incremented, and that only the owner can make a pizza.<
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -22719,168 +22732,292 @@ fn test_make_pizza_should_increment_pizza_counter() {
 }
 <span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>18-5: Testing the events emitted when a pizza
-is created</span></p>
+<p><span class="caption">Listing 18-5: Testing the
+events emitted when a pizza is created</span></p>
 <h4 id="accessing-internal-functions-with-contract_state_for_testing"><a class="header" href="#accessing-internal-functions-with-contract_state_for_testing">Accessing Internal Functions with <code>contract_state_for_testing</code></a></h4>
 <p>All the tests we have seen so far have been using a workflow that involves
 deploying the contract and interacting with the contract's entrypoints. However,
 sometimes we may want to test the internals of the contract directly, without
-deploying the contract. How could this be done, if we were reasoning in purely
-Cairo terms?</p>
+deploying the contract.</p>
 <p>Recall the struct <code>ContractState</code>, which is used as a parameter to all the
-entrypoints of a contract. To make it short, this struct contains zero-sized
-fields, corresponding to the storage variables of the contract. The only purpose
-of these fields is to allow the Cairo compiler to generate the correct code for
-accessing the storage variables. If we could create an instance of this struct,
-we could access these storage variables directly, without deploying the
-contract...</p>
-<p>...and this is exactly what the <code>contract_state_for_testing</code> function does! It
-creates an instance of the <code>ContractState</code> struct, allowing us to call any
-function that takes as parameter a <code>ContractState</code> struct, without deploying the
-contract. To interact with the storage variables properly, we need to manually
-import the traits that define access to the storage variables.</p>
+entrypoints of a contract. This struct contains zero-sized fields corresponding
+to the storage variables of the contract. The only purpose of these fields is to
+allow the Cairo compiler to generate the correct code for accessing the storage
+variables. If we could create an instance of this struct, we could access these
+storage variables directly, without deploying the contract.</p>
+<p>This is exactly what the <code>contract_state_for_testing</code> function does. When you
+define a contract with <code>#[starknet::contract]</code>, the Cairo compiler automatically
+generates a <code>contract_state_for_testing</code> function in the contract's module
+namespace. This function creates an instance of the <code>ContractState</code> struct,
+allowing you to call any function that takes a <code>ContractState</code> parameter without
+deploying the contract.</p>
+<p>To use this approach, you need to import a few things:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
+</span><span class="boring">};
+</span>use starknet::storage::StoragePointerReadAccess;
+use starknet::{ContractAddress, contract_address_const};
+use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
+use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
+<span class="boring">
+</span><span class="boring">fn owner() -&gt; ContractAddress {
+</span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
+</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">
+</span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    let constructor_calldata = array![owner.into()];
+</span><span class="boring">
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">
+</span><span class="boring">    let dispatcher = IPizzaFactoryDispatcher { contract_address };
+</span><span class="boring">
+</span><span class="boring">    (dispatcher, contract_address)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_constructor() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
+</span><span class="boring">    let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
+</span><span class="boring">    assert_eq!(pepperoni_count, array![10]);
+</span><span class="boring">    assert_eq!(pineapple_count, array![10]);
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_change_owner_should_change_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let new_owner: ContractAddress = contract_address_const::&lt;'new_owner'&gt;();
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.change_owner(new_owner);
+</span><span class="boring">
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), new_owner);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can set ownership")]
+</span><span class="boring">fn test_change_owner_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">    pizza_factory.change_owner(not_owner);
+</span><span class="boring">    stop_cheat_caller_address(pizza_factory_address);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can make pizza")]
+</span><span class="boring">fn test_make_pizza_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_make_pizza_should_increment_pizza_counter() {
+</span><span class="boring">    // Setup
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">    let mut spy = spy_events();
+</span><span class="boring">
+</span><span class="boring">    // When
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">
+</span><span class="boring">    // Then
+</span><span class="boring">    let expected_event = PizzaEvents::PizzaEmission(PizzaEmission { counter: 1 });
+</span><span class="boring">    assert_eq!(pizza_factory.count_pizza(), 1);
+</span><span class="boring">    spy.assert_emitted(@array![(pizza_factory_address, expected_event)]);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
+</span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
+</span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
+</span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
+</span><span class="boring">    assert_eq!(state.owner.read(), owner);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p><span class="caption">Listing 18-6: Imports needed for
+testing internals </span></p>
+<p>These imports give us:</p>
+<ul>
+<li><code>StoragePointerReadAccess</code> - to read storage variables directly</li>
+<li><code>InternalTrait</code> - to access internal functions like <code>set_owner</code></li>
+<li><code>PizzaFactory</code> - to access <code>contract_state_for_testing()</code></li>
+</ul>
+<p>Now we can write a test that interacts with the contract state directly:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
 </span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span>use crate::pizza::PizzaFactory::{InternalTrait};
-use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
-
-fn owner() -&gt; ContractAddress {
-    contract_address_const::&lt;'owner'&gt;()
-}
-
-fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-    let contract = declare("PizzaFactory").unwrap().contract_class();
-
-    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
-    let constructor_calldata = array![owner.into()];
-
-    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
-
-    let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-    (dispatcher, contract_address)
-}
-
-#[test]
-fn test_constructor() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-
-    let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
-    let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
-    assert_eq!(pepperoni_count, array![10]);
-    assert_eq!(pineapple_count, array![10]);
-    assert_eq!(pizza_factory.get_owner(), owner());
-}
-
-#[test]
-fn test_change_owner_should_change_owner() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-
-    let new_owner: ContractAddress = contract_address_const::&lt;'new_owner'&gt;();
-    assert_eq!(pizza_factory.get_owner(), owner());
-
-    start_cheat_caller_address(pizza_factory_address, owner());
-
-    pizza_factory.change_owner(new_owner);
-
-    assert_eq!(pizza_factory.get_owner(), new_owner);
-}
-
-#[test]
-#[should_panic(expected: "Only the owner can set ownership")]
-fn test_change_owner_should_panic_when_not_owner() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
-    start_cheat_caller_address(pizza_factory_address, not_owner);
-    pizza_factory.change_owner(not_owner);
-    stop_cheat_caller_address(pizza_factory_address);
-}
-
-#[test]
-#[should_panic(expected: "Only the owner can make pizza")]
-fn test_make_pizza_should_panic_when_not_owner() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
-    start_cheat_caller_address(pizza_factory_address, not_owner);
-
-    pizza_factory.make_pizza();
-}
-
-#[test]
-fn test_make_pizza_should_increment_pizza_counter() {
-    // Setup
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-    start_cheat_caller_address(pizza_factory_address, owner());
-    let mut spy = spy_events();
-
-    // When
-    pizza_factory.make_pizza();
-
-    // Then
-    let expected_event = PizzaEvents::PizzaEmission(PizzaEmission { counter: 1 });
-    assert_eq!(pizza_factory.count_pizza(), 1);
-    spy.assert_emitted(@array![(pizza_factory_address, expected_event)]);
-}
-
-#[test]
-fn test_set_as_new_owner_direct() {
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
+</span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
+</span><span class="boring">
+</span><span class="boring">fn owner() -&gt; ContractAddress {
+</span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
+</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">
+</span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    let constructor_calldata = array![owner.into()];
+</span><span class="boring">
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">
+</span><span class="boring">    let dispatcher = IPizzaFactoryDispatcher { contract_address };
+</span><span class="boring">
+</span><span class="boring">    (dispatcher, contract_address)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_constructor() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
+</span><span class="boring">    let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
+</span><span class="boring">    assert_eq!(pepperoni_count, array![10]);
+</span><span class="boring">    assert_eq!(pineapple_count, array![10]);
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_change_owner_should_change_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let new_owner: ContractAddress = contract_address_const::&lt;'new_owner'&gt;();
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.change_owner(new_owner);
+</span><span class="boring">
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), new_owner);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can set ownership")]
+</span><span class="boring">fn test_change_owner_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">    pizza_factory.change_owner(not_owner);
+</span><span class="boring">    stop_cheat_caller_address(pizza_factory_address);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can make pizza")]
+</span><span class="boring">fn test_make_pizza_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_make_pizza_should_increment_pizza_counter() {
+</span><span class="boring">    // Setup
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">    let mut spy = spy_events();
+</span><span class="boring">
+</span><span class="boring">    // When
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">
+</span><span class="boring">    // Then
+</span><span class="boring">    let expected_event = PizzaEvents::PizzaEmission(PizzaEmission { counter: 1 });
+</span><span class="boring">    assert_eq!(pizza_factory.count_pizza(), 1);
+</span><span class="boring">    spy.assert_emitted(@array![(pizza_factory_address, expected_event)]);
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[test]
+fn test_storage_direct_access() {
+    // Get a ContractState instance without deploying the contract
     let mut state = PizzaFactory::contract_state_for_testing();
+
+    // Access storage directly - read initial value (default is 0)
+    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+
+    // Call internal function directly
     let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+    // Note: set_owner checks caller == current owner. Since both are zero address
+    // initially (no deployment context), this check passes.
     state.set_owner(owner);
+
+    // Verify storage was updated
     assert_eq!(state.owner.read(), owner);
 }
-
-
-</code></pre>
-<p>Unit testing our contract without deployment</span></p>
-<p>These imports give us access to our internal functions (notably, <code>set_owner</code>),
-as well as the read/write access to the <code>owner</code> storage variable. Once we have
-these, we can interact with the contract directly, changing the address of the
-owner by calling the <code>set_owner</code> method, accessible through <code>InternalTrait</code>, and
-reading the <code>owner</code> storage variable.</p>
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p><span class="caption">Listing 18-7: Unit testing our contract
+without deployment</span></p>
+<p>The test creates a <code>ContractState</code> instance using
+<code>PizzaFactory::contract_state_for_testing()</code>, then directly reads and writes
+storage variables and calls internal functions.</p>
 <blockquote>
-<p>Note: Both approaches cannot be used at the same time. If you decide to deploy
-the contract, you interact with it using the dispatcher. If you decide to test
-the internal functions, you interact with the <code>ContractState</code> object directly.</p>
+<p><strong>Important</strong>: When using <code>contract_state_for_testing</code>, there is no actual
+contract deployment context. Functions like <code>get_caller_address()</code> will return
+the zero address. In the example above, <code>set_owner</code> checks that the caller
+equals the current owner - since both are initially zero, the check passes.</p>
 </blockquote>
-<pre><code class="language-bash noplayground">$ scarb test 
-     Running test listing_02_pizza_factory_snfoundry (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
-   Compiling test(listing_02_pizza_factory_snfoundry_unittest) listing_02_pizza_factory_snfoundry v0.1.0 (listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/Scarb.toml)
-warn: Usage of deprecated feature `"deprecated-starknet-consts"` with no `#[feature("deprecated-starknet-consts")]` attribute. Note: "Use `TryInto::try_into` in const context instead."
- --&gt; listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:8:33
-use starknet::{ContractAddress, contract_address_const};
-                                ^^^^^^^^^^^^^^^^^^^^^^
-
-    Finished `dev` profile target(s) in 1 second
-
-
-Collected 6 test(s) from listing_02_pizza_factory_snfoundry package
-Running 6 test(s) from src/
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_set_as_new_owner_direct (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~80000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~655360)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~640000)
+<blockquote>
+<p><strong>Note</strong>: The two approaches cannot be mixed in the same test. If you deploy
+the contract, you interact with it using the dispatcher. If you test internal
+functions, you interact with the <code>ContractState</code> object directly.</p>
+</blockquote>
+<pre><code class="language-bash noplayground">Running 6 test(s) from src/
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_storage_direct_access (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~77820)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~437290)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~515170)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~692240)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360820)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~637040)
 Tests: 6 passed, 0 failed, 0 ignored, 0 filtered out
-
 
 </code></pre>
 <p>The output of the tests shows that all the tests passed successfully, along with

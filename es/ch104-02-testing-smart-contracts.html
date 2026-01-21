@@ -384,12 +384,13 @@ pub mod PizzaFactory {
     }
 }
 </code></pre>
-<p>pizza factory that needs to be tested</span></p>
+<p><span class="caption">Listing 18-1: A pizza factory that needs
+to be tested</span></p>
 <h2 id="configuring-your-scarb-project-with-starknet-foundry"><a class="header" href="#configuring-your-scarb-project-with-starknet-foundry">Configuring your Scarb project with Starknet Foundry</a></h2>
 <p>The settings of your Scarb project can be configured in the <code>Scarb.toml</code> file.
 To use Starknet Foundry as your testing tool, you will need to add it as a dev
-dependency in your <code>Scarb.toml</code> file. At the time of writing, the latest version
-of Starknet Foundry is <code>v0.39.0</code> - but you should use the latest version.</p>
+dependency in your <code>Scarb.toml</code> file. Adapt the version you use to the latest
+version.</p>
 <pre><code class="language-toml noplayground">[dev-dependencies]
 snforge_std = "0.51.1"
 
@@ -399,9 +400,8 @@ test = "snforge test"
 [tool.scarb]
 allow-prebuilt-plugins = ["snforge_std"]
 </code></pre>
-<p>The <code>scarb test</code> command is configured to execute <code>scarb cairo-test</code> by default.
-In our settings, we have configured it to execute <code>snforge test</code> instead. This
-will allow us to run our tests using Starknet Foundry when we run the
+<p>The <code>scarb test</code> command is configured to execute <code>snforge test</code> by default.
+This allows us to run our tests using Starknet Foundry when we run the
 <code>scarb test</code> command.</p>
 <p>Once your project is configured, you will need to install Starknet Foundry by
 following the installation guide from the
@@ -410,10 +410,9 @@ As usual, we recommend to use <code>asdf</code> to manage versions of your devel
 tools.</p>
 <h2 id="testing-smart-contracts-with-starknet-foundry"><a class="header" href="#testing-smart-contracts-with-starknet-foundry">Testing Smart Contracts with Starknet Foundry</a></h2>
 <p>The usual command to run your tests using Starknet Foundry is <code>snforge test</code>.
-However, when we configured our projects, we defined that the <code>scarb test</code>
-command will run the <code>snforge test</code> command. Therefore, during the rest of this
-chapter, consider that the <code>scarb test</code> command will be using <code>snforge test</code>
-under the hood.</p>
+The <code>scarb test</code> command is an alias that executes <code>snforge test</code> under the
+hood. Therefore, during the rest of this chapter, we will use the <code>scarb test</code>
+command, which runs <code>snforge test</code>.</p>
 <p>The usual testing flow of a contract is as follows:</p>
 <ol>
 <li>Declare the class of the contract to test, identified by its name</li>
@@ -429,10 +428,8 @@ under the hood.</p>
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -514,16 +511,27 @@ under the hood.</p>
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>18-2 Deploying the contract to test</span></p>
+<p><span class="caption">Listing 18-2: Deploying the
+contract to test</span></p>
 <h3 id="testing-our-contract"><a class="header" href="#testing-our-contract">Testing our Contract</a></h3>
 <p>Determining the behavior that your contract should respect is the first step in
 writing tests. In the <code>PizzaFactory</code> contract, we determined that the contract
@@ -544,10 +552,8 @@ the operation should fail. Otherwise, the owner should be updated.</li>
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -629,17 +635,27 @@ fn test_constructor() {
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>18-3: Testing the initial state by loading storage
-variables </span></p>
+<p><span class="caption">Listing 18-3: Testing the initial
+state by loading storage variables </span></p>
 <p>Once our contract is deployed, we want to assert that the initial values are set
 as expected. If our contract has an entrypoint that returns the value of a
 storage variable, we can call this entrypoint. Otherwise, we can use the <code>load</code>
@@ -655,10 +671,8 @@ the contract behaves as expected.</p>
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -740,10 +754,20 @@ fn test_change_owner_should_panic_when_not_owner() {
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
@@ -764,10 +788,8 @@ that the pizza count was incremented, and that only the owner can make a pizza.<
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span><span class="boring">use crate::pizza::PizzaFactory::{InternalTrait};
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
 </span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
@@ -849,168 +871,292 @@ fn test_make_pizza_should_increment_pizza_counter() {
 }
 <span class="boring">
 </span><span class="boring">#[test]
-</span><span class="boring">fn test_set_as_new_owner_direct() {
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
 </span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
 </span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
 </span><span class="boring">    assert_eq!(state.owner.read(), owner);
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
-<p>18-5: Testing the events emitted when a pizza
-is created</span></p>
+<p><span class="caption">Listing 18-5: Testing the
+events emitted when a pizza is created</span></p>
 <h4 id="accessing-internal-functions-with-contract_state_for_testing"><a class="header" href="#accessing-internal-functions-with-contract_state_for_testing">Accessing Internal Functions with <code>contract_state_for_testing</code></a></h4>
 <p>All the tests we have seen so far have been using a workflow that involves
 deploying the contract and interacting with the contract's entrypoints. However,
 sometimes we may want to test the internals of the contract directly, without
-deploying the contract. How could this be done, if we were reasoning in purely
-Cairo terms?</p>
+deploying the contract.</p>
 <p>Recall the struct <code>ContractState</code>, which is used as a parameter to all the
-entrypoints of a contract. To make it short, this struct contains zero-sized
-fields, corresponding to the storage variables of the contract. The only purpose
-of these fields is to allow the Cairo compiler to generate the correct code for
-accessing the storage variables. If we could create an instance of this struct,
-we could access these storage variables directly, without deploying the
-contract...</p>
-<p>...and this is exactly what the <code>contract_state_for_testing</code> function does! It
-creates an instance of the <code>ContractState</code> struct, allowing us to call any
-function that takes as parameter a <code>ContractState</code> struct, without deploying the
-contract. To interact with the storage variables properly, we need to manually
-import the traits that define access to the storage variables.</p>
+entrypoints of a contract. This struct contains zero-sized fields corresponding
+to the storage variables of the contract. The only purpose of these fields is to
+allow the Cairo compiler to generate the correct code for accessing the storage
+variables. If we could create an instance of this struct, we could access these
+storage variables directly, without deploying the contract.</p>
+<p>This is exactly what the <code>contract_state_for_testing</code> function does. When you
+define a contract with <code>#[starknet::contract]</code>, the Cairo compiler automatically
+generates a <code>contract_state_for_testing</code> function in the contract's module
+namespace. This function creates an instance of the <code>ContractState</code> struct,
+allowing you to call any function that takes a <code>ContractState</code> parameter without
+deploying the contract.</p>
+<p>To use this approach, you need to import a few things:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
+</span><span class="boring">};
+</span>use starknet::storage::StoragePointerReadAccess;
+use starknet::{ContractAddress, contract_address_const};
+use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
+use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
+<span class="boring">
+</span><span class="boring">fn owner() -&gt; ContractAddress {
+</span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
+</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">
+</span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    let constructor_calldata = array![owner.into()];
+</span><span class="boring">
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">
+</span><span class="boring">    let dispatcher = IPizzaFactoryDispatcher { contract_address };
+</span><span class="boring">
+</span><span class="boring">    (dispatcher, contract_address)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_constructor() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
+</span><span class="boring">    let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
+</span><span class="boring">    assert_eq!(pepperoni_count, array![10]);
+</span><span class="boring">    assert_eq!(pineapple_count, array![10]);
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_change_owner_should_change_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let new_owner: ContractAddress = contract_address_const::&lt;'new_owner'&gt;();
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.change_owner(new_owner);
+</span><span class="boring">
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), new_owner);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can set ownership")]
+</span><span class="boring">fn test_change_owner_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">    pizza_factory.change_owner(not_owner);
+</span><span class="boring">    stop_cheat_caller_address(pizza_factory_address);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can make pizza")]
+</span><span class="boring">fn test_make_pizza_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_make_pizza_should_increment_pizza_counter() {
+</span><span class="boring">    // Setup
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">    let mut spy = spy_events();
+</span><span class="boring">
+</span><span class="boring">    // When
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">
+</span><span class="boring">    // Then
+</span><span class="boring">    let expected_event = PizzaEvents::PizzaEmission(PizzaEmission { counter: 1 });
+</span><span class="boring">    assert_eq!(pizza_factory.count_pizza(), 1);
+</span><span class="boring">    spy.assert_emitted(@array![(pizza_factory_address, expected_event)]);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_storage_direct_access() {
+</span><span class="boring">    // Get a ContractState instance without deploying the contract
+</span><span class="boring">    let mut state = PizzaFactory::contract_state_for_testing();
+</span><span class="boring">
+</span><span class="boring">    // Access storage directly - read initial value (default is 0)
+</span><span class="boring">    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+</span><span class="boring">
+</span><span class="boring">    // Call internal function directly
+</span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    // Note: set_owner checks caller == current owner. Since both are zero address
+</span><span class="boring">    // initially (no deployment context), this check passes.
+</span><span class="boring">    state.set_owner(owner);
+</span><span class="boring">
+</span><span class="boring">    // Verify storage was updated
+</span><span class="boring">    assert_eq!(state.owner.read(), owner);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p><span class="caption">Listing 18-6: Imports needed for
+testing internals </span></p>
+<p>These imports give us:</p>
+<ul>
+<li><code>StoragePointerReadAccess</code> - to read storage variables directly</li>
+<li><code>InternalTrait</code> - to access internal functions like <code>set_owner</code></li>
+<li><code>PizzaFactory</code> - to access <code>contract_state_for_testing()</code></li>
+</ul>
+<p>Now we can write a test that interacts with the contract state directly:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
 </span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
-</span><span class="boring">
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, PizzaEmission};
-</span>use crate::pizza::PizzaFactory::{InternalTrait};
-use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
-
-fn owner() -&gt; ContractAddress {
-    contract_address_const::&lt;'owner'&gt;()
-}
-
-fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-    let contract = declare("PizzaFactory").unwrap().contract_class();
-
-    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
-    let constructor_calldata = array![owner.into()];
-
-    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
-
-    let dispatcher = IPizzaFactoryDispatcher { contract_address };
-
-    (dispatcher, contract_address)
-}
-
-#[test]
-fn test_constructor() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-
-    let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
-    let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
-    assert_eq!(pepperoni_count, array![10]);
-    assert_eq!(pineapple_count, array![10]);
-    assert_eq!(pizza_factory.get_owner(), owner());
-}
-
-#[test]
-fn test_change_owner_should_change_owner() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-
-    let new_owner: ContractAddress = contract_address_const::&lt;'new_owner'&gt;();
-    assert_eq!(pizza_factory.get_owner(), owner());
-
-    start_cheat_caller_address(pizza_factory_address, owner());
-
-    pizza_factory.change_owner(new_owner);
-
-    assert_eq!(pizza_factory.get_owner(), new_owner);
-}
-
-#[test]
-#[should_panic(expected: "Only the owner can set ownership")]
-fn test_change_owner_should_panic_when_not_owner() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
-    start_cheat_caller_address(pizza_factory_address, not_owner);
-    pizza_factory.change_owner(not_owner);
-    stop_cheat_caller_address(pizza_factory_address);
-}
-
-#[test]
-#[should_panic(expected: "Only the owner can make pizza")]
-fn test_make_pizza_should_panic_when_not_owner() {
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
-    start_cheat_caller_address(pizza_factory_address, not_owner);
-
-    pizza_factory.make_pizza();
-}
-
-#[test]
-fn test_make_pizza_should_increment_pizza_counter() {
-    // Setup
-    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
-    start_cheat_caller_address(pizza_factory_address, owner());
-    let mut spy = spy_events();
-
-    // When
-    pizza_factory.make_pizza();
-
-    // Then
-    let expected_event = PizzaEvents::PizzaEmission(PizzaEmission { counter: 1 });
-    assert_eq!(pizza_factory.count_pizza(), 1);
-    spy.assert_emitted(@array![(pizza_factory_address, expected_event)]);
-}
-
-#[test]
-fn test_set_as_new_owner_direct() {
+</span><span class="boring">use crate::pizza::PizzaFactory::{Event as PizzaEvents, InternalTrait, PizzaEmission};
+</span><span class="boring">use crate::pizza::{IPizzaFactoryDispatcher, IPizzaFactoryDispatcherTrait, PizzaFactory};
+</span><span class="boring">
+</span><span class="boring">fn owner() -&gt; ContractAddress {
+</span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
+</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">
+</span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+</span><span class="boring">    let constructor_calldata = array![owner.into()];
+</span><span class="boring">
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">
+</span><span class="boring">    let dispatcher = IPizzaFactoryDispatcher { contract_address };
+</span><span class="boring">
+</span><span class="boring">    (dispatcher, contract_address)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_constructor() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let pepperoni_count = load(pizza_factory_address, selector!("pepperoni"), 1);
+</span><span class="boring">    let pineapple_count = load(pizza_factory_address, selector!("pineapple"), 1);
+</span><span class="boring">    assert_eq!(pepperoni_count, array![10]);
+</span><span class="boring">    assert_eq!(pineapple_count, array![10]);
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_change_owner_should_change_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">
+</span><span class="boring">    let new_owner: ContractAddress = contract_address_const::&lt;'new_owner'&gt;();
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), owner());
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.change_owner(new_owner);
+</span><span class="boring">
+</span><span class="boring">    assert_eq!(pizza_factory.get_owner(), new_owner);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can set ownership")]
+</span><span class="boring">fn test_change_owner_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">    pizza_factory.change_owner(not_owner);
+</span><span class="boring">    stop_cheat_caller_address(pizza_factory_address);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[should_panic(expected: "Only the owner can make pizza")]
+</span><span class="boring">fn test_make_pizza_should_panic_when_not_owner() {
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    let not_owner = contract_address_const::&lt;'not_owner'&gt;();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, not_owner);
+</span><span class="boring">
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_make_pizza_should_increment_pizza_counter() {
+</span><span class="boring">    // Setup
+</span><span class="boring">    let (pizza_factory, pizza_factory_address) = deploy_pizza_factory();
+</span><span class="boring">    start_cheat_caller_address(pizza_factory_address, owner());
+</span><span class="boring">    let mut spy = spy_events();
+</span><span class="boring">
+</span><span class="boring">    // When
+</span><span class="boring">    pizza_factory.make_pizza();
+</span><span class="boring">
+</span><span class="boring">    // Then
+</span><span class="boring">    let expected_event = PizzaEvents::PizzaEmission(PizzaEmission { counter: 1 });
+</span><span class="boring">    assert_eq!(pizza_factory.count_pizza(), 1);
+</span><span class="boring">    spy.assert_emitted(@array![(pizza_factory_address, expected_event)]);
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[test]
+fn test_storage_direct_access() {
+    // Get a ContractState instance without deploying the contract
     let mut state = PizzaFactory::contract_state_for_testing();
+
+    // Access storage directly - read initial value (default is 0)
+    assert_eq!(state.owner.read(), contract_address_const::&lt;0&gt;());
+
+    // Call internal function directly
     let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
+    // Note: set_owner checks caller == current owner. Since both are zero address
+    // initially (no deployment context), this check passes.
     state.set_owner(owner);
+
+    // Verify storage was updated
     assert_eq!(state.owner.read(), owner);
 }
-
-
-</code></pre>
-<p>Unit testing our contract without deployment</span></p>
-<p>These imports give us access to our internal functions (notably, <code>set_owner</code>),
-as well as the read/write access to the <code>owner</code> storage variable. Once we have
-these, we can interact with the contract directly, changing the address of the
-owner by calling the <code>set_owner</code> method, accessible through <code>InternalTrait</code>, and
-reading the <code>owner</code> storage variable.</p>
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p><span class="caption">Listing 18-7: Unit testing our contract
+without deployment</span></p>
+<p>The test creates a <code>ContractState</code> instance using
+<code>PizzaFactory::contract_state_for_testing()</code>, then directly reads and writes
+storage variables and calls internal functions.</p>
 <blockquote>
-<p>Note: Both approaches cannot be used at the same time. If you decide to deploy
-the contract, you interact with it using the dispatcher. If you decide to test
-the internal functions, you interact with the <code>ContractState</code> object directly.</p>
+<p><strong>Important</strong>: When using <code>contract_state_for_testing</code>, there is no actual
+contract deployment context. Functions like <code>get_caller_address()</code> will return
+the zero address. In the example above, <code>set_owner</code> checks that the caller
+equals the current owner - since both are initially zero, the check passes.</p>
 </blockquote>
-<pre><code class="language-bash noplayground">$ scarb test 
-     Running test listing_02_pizza_factory_snfoundry (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
-   Compiling test(listing_02_pizza_factory_snfoundry_unittest) listing_02_pizza_factory_snfoundry v0.1.0 (listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/Scarb.toml)
-warn: Usage of deprecated feature `"deprecated-starknet-consts"` with no `#[feature("deprecated-starknet-consts")]` attribute. Note: "Use `TryInto::try_into` in const context instead."
- --&gt; listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/tests/foundry_test.cairo:8:33
-use starknet::{ContractAddress, contract_address_const};
-                                ^^^^^^^^^^^^^^^^^^^^^^
-
-    Finished `dev` profile target(s) in 1 second
-
-
-Collected 6 test(s) from listing_02_pizza_factory_snfoundry package
-Running 6 test(s) from src/
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_set_as_new_owner_direct (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~80000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~655360)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360000)
-[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~640000)
+<blockquote>
+<p><strong>Note</strong>: The two approaches cannot be mixed in the same test. If you deploy
+the contract, you interact with it using the dispatcher. If you test internal
+functions, you interact with the <code>ContractState</code> object directly.</p>
+</blockquote>
+<pre><code class="language-bash noplayground">Running 6 test(s) from src/
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_storage_direct_access (l1_gas: ~0, l1_data_gas: ~160, l2_gas: ~77820)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~437290)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_panic_when_not_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~515170)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_make_pizza_should_increment_pizza_counter (l1_gas: ~0, l1_data_gas: ~480, l2_gas: ~692240)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_constructor (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~360820)
+[PASS] listing_02_pizza_factory_snfoundry::tests::foundry_test::test_change_owner_should_change_owner (l1_gas: ~0, l1_data_gas: ~384, l2_gas: ~637040)
 Tests: 6 passed, 0 failed, 0 ignored, 0 filtered out
-
 
 </code></pre>
 <p>The output of the tests shows that all the tests passed successfully, along with
