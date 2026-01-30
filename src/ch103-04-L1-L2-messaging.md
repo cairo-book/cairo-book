@@ -243,6 +243,124 @@ and the payload) to ensure we are only consuming valid messages.
 > And this `msg.sender` must correspond to the `to_address` field that is given
 > to the function `send_message_to_l1_syscall` that is called on Starknet.
 
+## Testing L1 Handlers
+
+Testing `#[l1_handler]` functions is critical because they are your contract's
+entry point for messages from L1. Without proper testing, vulnerabilities in
+`from_address` validation could allow attackers to forge deposits or mint
+unlimited tokens.
+
+Starknet Foundry provides the `L1HandlerTrait` to simulate L1 messages arriving
+at your contract—without needing actual L1 infrastructure.
+
+### Why `from_address` Validation is Critical
+
+Here's the key security insight: **anyone can call `sendMessageToL2` on the
+StarknetCore contract**. The `from_address` parameter is the _only_ defense
+against forged messages.
+
+```cairo,noplayground
+{{#rustdoc_include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_04_l1_handler_testing/src/bridge.cairo:l1_handler}}
+```
+
+{{#label l1-handler-validation}} <span class="caption">Listing
+{{#ref l1-handler-validation}}: An L1 handler with critical from_address
+validation</span>
+
+If you remove or weaken this check, an attacker could:
+
+1. Call `sendMessageToL2` with their own address as `from_address`
+2. Pass any payload they want
+3. Have your contract process the forged message as if it came from the
+   legitimate L1 bridge
+
+### Testing the Happy Path
+
+First, test that valid messages are processed correctly:
+
+```cairo,noplayground
+{{#rustdoc_include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_04_l1_handler_testing/src/tests/l1_handler_tests.cairo:test_valid_deposit}}
+```
+
+{{#label l1-handler-test-valid}} <span class="caption">Listing
+{{#ref l1-handler-test-valid}}: Testing that valid L1 messages are processed</span>
+
+The key steps:
+
+1. Deploy your contract with the expected L1 bridge address
+2. Create an `L1Handler` pointing to your handler function
+3. Serialize the payload (remember Cairo serde—`u256` needs two felts)
+4. Execute with the valid `from_address`
+5. Verify the state changed correctly
+
+### Testing Unauthorized Senders
+
+**This is the most important test.** Always verify that unauthorized addresses
+are rejected:
+
+```cairo,noplayground
+{{#rustdoc_include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_04_l1_handler_testing/src/tests/l1_handler_tests.cairo:test_unauthorized_rejected}}
+```
+
+{{#label l1-handler-test-reject}} <span class="caption">Listing
+{{#ref l1-handler-test-reject}}: Testing that unauthorized senders are rejected</span>
+
+Notice how we:
+
+1. Execute with an invalid `from_address`
+2. Check that the result is an error (`result.is_err()`)
+3. Verify no state changed (balance still zero)
+
+> **Security Note**: Always test multiple invalid addresses, including edge
+> cases like zero address, off-by-one from the valid address, and random
+> addresses. A single test isn't enough—ensure your validation is robust.
+
+### Testing Accumulated Operations
+
+For handlers that can be called multiple times, verify state accumulates
+correctly:
+
+```cairo,noplayground
+{{#rustdoc_include ../listings/ch103-building-advanced-starknet-smart-contracts/no_listing_04_l1_handler_testing/src/tests/l1_handler_tests.cairo:test_multiple_deposits}}
+```
+
+{{#label l1-handler-test-multiple}} <span class="caption">Listing
+{{#ref l1-handler-test-multiple}}: Testing multiple L1 messages accumulate
+correctly</span>
+
+### Payload Serialization in Tests
+
+Remember that Cairo serializes types according to the Serde specification. When
+building test payloads:
+
+- `felt252`: single element
+- `u256`: two elements (low, high)
+- `ContractAddress`: single element (as felt252)
+- Structs: serialize each field in order
+
+```cairo,noplayground
+// A u256 amount of 1000
+let amount: u256 = 1000;
+let payload = array![
+    recipient.into(),      // ContractAddress -> felt252
+    amount.low.into(),     // u256 low part
+    amount.high.into(),    // u256 high part
+];
+```
+
+### Best Practices
+
+1. **Test rejection first** — The security test (rejecting unauthorized
+   addresses) is more important than the happy path
+2. **Test multiple invalid addresses** — Zero, off-by-one, random values
+3. **Verify no side effects on rejection** — State shouldn't change when
+   messages are rejected
+4. **Document your L1 address** — Make it clear which Ethereum address is the
+   trusted source
+
+For more details on the `L1Handler` API, see the [Starknet Foundry cheatcodes
+documentation](https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html).
+
 ## Cairo Serde
 
 Before sending messages between L1 and L2, you must remember that Starknet
