@@ -481,6 +481,47 @@ starts by labeling the segment identifier with its own starting index.</p>
 
         <script src="clipboard.min.js"></script>
         <script src="highlight.js"></script>
+
+        <!-- Cairo WASM compiler for in-browser code execution (runs in Web Worker) -->
+        <script>
+            (function () {
+                var rootPath = "";
+                var workerUrl = "./" + rootPath + "wasm/cairo_worker.js";
+                var worker = new Worker(workerUrl, { type: "module" });
+                var nextId = 0;
+                var pending = {};
+
+                worker.onmessage = function (e) {
+                    if (e.data.type === "ready") {
+                        window.cairoWasmReady = true;
+                        console.log("Cairo WASM worker initialized");
+                        return;
+                    }
+                    if (e.data.type === "result") {
+                        var cb = pending[e.data.id];
+                        if (cb) {
+                            delete pending[e.data.id];
+                            if (e.data.error) {
+                                cb.reject(new Error(e.data.error));
+                            } else {
+                                cb.resolve(e.data.response);
+                            }
+                        }
+                    }
+                };
+
+                window.cairoWasm = {
+                    compile_and_run: function (requestJson) {
+                        var id = nextId++;
+                        return new Promise(function (resolve, reject) {
+                            pending[id] = { resolve: resolve, reject: reject };
+                            worker.postMessage({ type: "run", id: id, request: JSON.parse(requestJson) });
+                        });
+                    }
+                };
+            })();
+        </script>
+
         <script src="book.js"></script>
         <script>
             window.rootPath = "";
