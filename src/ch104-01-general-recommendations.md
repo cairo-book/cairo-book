@@ -16,7 +16,7 @@ We'll focus on:
 
 ## Access Control, Upgrades & Initializers
 
-The most common criticals in Starknet audits are still “who can call this?” and
+The most common critical findings in Starknet audits are still “who can call this?” and
 “can this be (re)initialized?” issues. Cairo has great simple building blocks
 whose logic you should reuse to focus on the core security aspects of your
 program.
