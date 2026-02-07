@@ -101,112 +101,22 @@ function playground_text(playground, hidden = true) {
 		}
 	}
 
-	// WebSocket connection for Cairo code execution
-	let cairoWS = null;
-	let isRequestInProgress = false;
-	let currentRequestResolve = null;
-	let currentRequestReject = null;
-
-	function initCairoWebSocket() {
-		if (cairoWS && cairoWS.readyState === WebSocket.OPEN) {
-			return Promise.resolve();
+	// Execute Cairo code using the local WASM compiler (via Web Worker)
+	async function executeCairoCode(code) {
+		if (!window.cairoWasm) {
+			throw new Error(
+				"Cairo WASM not initialized yet. Please wait and try again.",
+			);
 		}
 
-		return new Promise((resolve, reject) => {
-			cairoWS = new WebSocket("wss://api2.cairovm.codes/ws");
+		const request = {
+			crate_name: "cairo_book_playground",
+			files: { "lib.cairo": code },
+			available_gas: 999999999,
+			function: "::main",
+		};
 
-			cairoWS.onopen = () => {
-				console.log("Cairo WebSocket connected");
-				resolve();
-			};
-
-			cairoWS.onmessage = (event) => {
-				try {
-					console.log("Cairo WebSocket message:", event.data);
-					const response = JSON.parse(event.data);
-
-					if (isRequestInProgress && currentRequestResolve) {
-						currentRequestResolve(response);
-						isRequestInProgress = false;
-						currentRequestResolve = null;
-						currentRequestReject = null;
-					}
-				} catch (error) {
-					console.error("Error parsing WebSocket response:", error);
-					if (isRequestInProgress && currentRequestReject) {
-						currentRequestReject(error);
-						isRequestInProgress = false;
-						currentRequestResolve = null;
-						currentRequestReject = null;
-					}
-				}
-			};
-
-			cairoWS.onerror = (error) => {
-				console.error("Cairo WebSocket error:", error);
-				if (isRequestInProgress && currentRequestReject) {
-					currentRequestReject(error);
-					isRequestInProgress = false;
-					currentRequestResolve = null;
-					currentRequestReject = null;
-				}
-				reject(error);
-			};
-
-			cairoWS.onclose = () => {
-				console.log("Cairo WebSocket disconnected");
-				cairoWS = null;
-				if (isRequestInProgress && currentRequestReject) {
-					currentRequestReject(new Error("WebSocket connection closed"));
-					isRequestInProgress = false;
-					currentRequestResolve = null;
-					currentRequestReject = null;
-				}
-			};
-		});
-	}
-
-	function executeCairoCode(code) {
-		return new Promise(async (resolve, reject) => {
-			// Reject if another request is already in progress
-			if (isRequestInProgress) {
-				reject(new Error("Another request is already in progress"));
-				return;
-			}
-
-			try {
-				await initCairoWebSocket();
-
-				isRequestInProgress = true;
-				currentRequestResolve = resolve;
-				currentRequestReject = reject;
-
-				const message = {
-					cairo_program_code: code,
-					program_arguments: "",
-					proof_required: false,
-					verification_required: false,
-				};
-
-				console.log("Sending message to Cairo WebSocket:", message);
-				cairoWS.send(JSON.stringify(message));
-
-				// Set timeout for request
-				setTimeout(() => {
-					if (isRequestInProgress) {
-						reject(new Error("Request timeout"));
-						isRequestInProgress = false;
-						currentRequestResolve = null;
-						currentRequestReject = null;
-					}
-				}, 20000); // 20 second timeout
-			} catch (error) {
-				isRequestInProgress = false;
-				currentRequestResolve = null;
-				currentRequestReject = null;
-				reject(error);
-			}
-		});
+		return await window.cairoWasm.compile_and_run(JSON.stringify(request));
 	}
 
 	function run_cairo_code(code_block) {
@@ -229,110 +139,52 @@ function playground_text(playground, hidden = true) {
 
 		executeCairoCode(text)
 			.then((response) => {
-				if (response.RunnerResult) {
-					const result = response.RunnerResult;
-
-					// Check for compilation or execution errors
-					if (
-						!result.is_compilation_successful ||
-						!result.is_execution_successful
-					) {
-						let errorMsg = "";
-
-						// Check for compilation errors in logs
-						if (result.logs && result.logs.length > 0) {
-							const errorLogs = result.logs.filter(
-								(log) => log.log_type === "Error",
-							);
-							if (errorLogs.length > 0) {
-								errorMsg = errorLogs
-									.map((log) => {
-										// Sanitize the error message by removing the filename path
-										return log.message.replace(
-											/\/opt\/app\/[a-f0-9-]+\/main\.cairo/g,
-											"main.cairo",
-										);
-									})
-									.join("\n\n");
-							}
-						}
-
-						// Fallback to execution panic message or generic error
-						if (!errorMsg) {
-							errorMsg =
-								result.execution_panic_message ||
-								"Compilation or execution failed";
-						}
-
-						result_block.innerText = errorMsg;
-						result_block.classList.remove("result-no-output");
-						return;
-					}
-
-					// Combine output and stdout
-					let output = "";
-					if (
-						result.serialized_output &&
-						result.serialized_output.trim() !== ""
-					) {
-						output += result.serialized_output;
-					}
-					if (result.stdout_captured && result.stdout_captured.trim() !== "") {
-						if (output) output += "\n";
-						output += result.stdout_captured;
-					}
-
-					if (output.trim() === "") {
-						result_block.innerText = "No output";
-						result_block.classList.add("result-no-output");
-					} else {
-						result_block.innerText = output;
-						result_block.classList.remove("result-no-output");
-					}
-				} else if (response.CompilerAndRunnerError) {
-					// The CompilerAndRunnerError is a string that contains a Rust Debug format
-					// We need to extract the logs from it since it's not valid JSON
+				// WASM response shape: { success, panicked, values, stdout, gas_counter, diagnostics, error }
+				if (response.error) {
+					// Compilation or setup error
 					let errorMsg = "";
-
-					try {
-						const errorString = response.CompilerAndRunnerError;
-
-						// Try to extract error messages using regex patterns
-						// Look for error messages in the format: message: "error: ..."
-						const errorPattern = /message: "([^"]+)"/g;
-						const errorMatches = [...errorString.matchAll(errorPattern)];
-
-						if (errorMatches.length > 0) {
-							errorMsg = errorMatches
-								.map((match) => {
-									let message = match[1];
-									// Unescape the message and sanitize file paths
-									message = message.replace(/\\n/g, "\n");
-									message = message.replace(/\\\\/g, "\\");
-									message = message.replace(
-										/\/opt\/app\/[a-f0-9-]+\/main\.cairo/g,
-										"main.cairo",
-									);
-									return message;
-								})
-								.filter((msg) => msg.startsWith("error:")) // Only include actual errors
-								.join("\n\n");
-						}
-
-						// Fallback if no error messages found
-						if (!errorMsg) {
-							errorMsg = "Compilation or execution failed";
-						}
-
-						result_block.innerText = errorMsg;
-						result_block.classList.remove("result-no-output");
-					} catch (parseError) {
-						result_block.innerText =
-							"Error parsing compiler response: " + parseError.message;
-						result_block.classList.remove("result-no-output");
+					if (response.diagnostics && response.diagnostics.trim() !== "") {
+						errorMsg = response.diagnostics.trim();
 					}
+					if (response.error) {
+						if (errorMsg) errorMsg += "\n\n";
+						errorMsg += response.error;
+					}
+					result_block.innerText =
+						errorMsg || "Compilation or execution failed";
+					result_block.classList.remove("result-no-output");
+					return;
+				}
+
+				if (response.panicked) {
+					// Execution panic
+					let panicMsg = "Run panicked";
+					if (response.values && response.values.length > 0) {
+						panicMsg += ": " + response.values.join(", ");
+					}
+					if (response.stdout && response.stdout.trim() !== "") {
+						panicMsg = response.stdout.trim() + "\n" + panicMsg;
+					}
+					result_block.innerText = panicMsg;
+					result_block.classList.remove("result-no-output");
+					return;
+				}
+
+				// Successful execution - combine output and stdout
+				let output = "";
+				if (response.values && response.values.length > 0) {
+					output += response.values.join(", ");
+				}
+				if (response.stdout && response.stdout.trim() !== "") {
+					if (output) output += "\n";
+					output += response.stdout;
+				}
+
+				if (output.trim() === "") {
+					result_block.innerText = "No output";
+					result_block.classList.add("result-no-output");
 				} else {
-					result_block.innerText = "Unexpected response format";
+					result_block.innerText = output;
 					result_block.classList.remove("result-no-output");
 				}
 			})
