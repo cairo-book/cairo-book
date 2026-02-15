@@ -11,10 +11,12 @@ pub trait IBridge<TContractState> {
 // ANCHOR: contract
 #[starknet::contract]
 pub mod Bridge {
-    use starknet::storage::{Map, StorageMapReadAccess, StorageMapWriteAccess};
-    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
-    use starknet::ContractAddress;
     use core::num::traits::Zero;
+    use starknet::ContractAddress;
+    use starknet::storage::{
+        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+        StoragePointerWriteAccess,
+    };
 
     #[storage]
     struct Storage {
@@ -60,3 +62,5 @@ pub mod Bridge {
     }
 }
 // ANCHOR_END: contract
+
+

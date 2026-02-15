@@ -13,10 +13,12 @@ pub trait ISimpleToken<TContractState> {
 // ANCHOR: contract
 #[starknet::contract]
 pub mod SimpleToken {
-    use starknet::storage::{Map, StorageMapReadAccess, StorageMapWriteAccess};
-    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
-    use starknet::{ContractAddress, get_caller_address};
     use core::num::traits::Zero;
+    use starknet::storage::{
+        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+        StoragePointerWriteAccess,
+    };
+    use starknet::{ContractAddress, get_caller_address};
 
     #[storage]
     struct Storage {
@@ -76,3 +78,5 @@ pub mod SimpleToken {
     }
 }
 // ANCHOR_END: contract
+
+

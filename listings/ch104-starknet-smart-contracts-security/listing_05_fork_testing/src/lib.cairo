@@ -13,7 +13,9 @@ pub trait IDeployedProtocol<TContractState> {
 #[starknet::interface]
 pub trait IMyContract<TContractState> {
     fn set_oracle(ref self: TContractState, oracle: starknet::ContractAddress);
-    fn get_token_value(self: @TContractState, token: starknet::ContractAddress, amount: u256) -> u256;
+    fn get_token_value(
+        self: @TContractState, token: starknet::ContractAddress, amount: u256,
+    ) -> u256;
 }
 // ANCHOR_END: my_contract_interface
 

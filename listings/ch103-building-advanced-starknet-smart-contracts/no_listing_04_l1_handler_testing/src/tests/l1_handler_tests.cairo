@@ -1,6 +1,5 @@
 use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
 use starknet::{ContractAddress, contract_address_const};
-
 use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
 
 // ANCHOR: constants
@@ -108,3 +107,5 @@ fn test_l1_handler_accumulates_deposits() {
     assert_eq!(bridge.get_balance(recipient), 800);
 }
 // ANCHOR_END: test_multiple_deposits
+
+

@@ -3,7 +3,6 @@ use snforge_std::{
     stop_cheat_caller_address,
 };
 use starknet::{ContractAddress, contract_address_const};
-
 use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
 
 fn owner() -> ContractAddress {
@@ -118,3 +117,5 @@ fn test_fuzz_transfer_roundtrip(amount: u64) {
     assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
 }
 // ANCHOR_END: fuzz_roundtrip
+
+

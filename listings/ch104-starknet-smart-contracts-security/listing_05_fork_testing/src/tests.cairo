@@ -2,10 +2,12 @@
 // NOTE: These tests require RPC access and are marked with #[ignore]
 // to prevent CI failures. Run locally with: snforge test --ignored
 
-use starknet::ContractAddress;
 use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
-use super::{IDeployedProtocolDispatcher, IDeployedProtocolDispatcherTrait};
-use super::{IMyContractDispatcher, IMyContractDispatcherTrait};
+use starknet::ContractAddress;
+use super::{
+    IDeployedProtocolDispatcher, IDeployedProtocolDispatcherTrait, IMyContractDispatcher,
+    IMyContractDispatcherTrait,
+};
 
 // ANCHOR: fork_test_basic
 // For example only - replace addresses with real deployed contracts
@@ -73,3 +75,5 @@ fn test_historical_state() {
     assert!(reserve > 0, "Reserve should exist at this block");
 }
 // ANCHOR_END: fork_test_historical
+
+
