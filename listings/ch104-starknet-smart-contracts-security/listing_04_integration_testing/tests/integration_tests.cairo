@@ -1,20 +1,30 @@
+use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
+use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
 use snforge_std::{
     ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
     stop_cheat_caller_address,
 };
 use starknet::ContractAddress;
-use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
-use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
+
+fn owner() -> ContractAddress {
+    'owner'.try_into().unwrap()
+}
 
 fn user() -> ContractAddress {
     'user'.try_into().unwrap()
 }
 
+fn mint_tokens(token: ITokenDispatcher, to: ContractAddress, amount: u256) {
+    start_cheat_caller_address(token.contract_address, owner());
+    token.mint(to, amount);
+    stop_cheat_caller_address(token.contract_address);
+}
+
 // ANCHOR: setup
 fn deploy_token_and_staking() -> (ITokenDispatcher, IStakingDispatcher) {
-    // Deploy the token contract
+    // Deploy the token contract with an owner for access control
     let token_class = declare("Token").unwrap().contract_class();
-    let (token_address, _) = token_class.deploy(@array![]).unwrap();
+    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
     let token = ITokenDispatcher { contract_address: token_address };
 
     // Deploy the staking contract with the token address
@@ -32,8 +42,8 @@ fn test_staking_flow() {
     let (token, staking) = deploy_token_and_staking();
     let user = user();
 
-    // Mint tokens to user
-    token.mint(user, 1000);
+    // Mint tokens to user (only owner can mint)
+    mint_tokens(token, user, 1000);
 
     // User approves staking contract to spend tokens
     start_cheat_caller_address(token.contract_address, user);
@@ -60,8 +70,8 @@ fn test_multiple_stakers() {
     let user2: ContractAddress = 'user2'.try_into().unwrap();
 
     // Setup: mint and approve for both users
-    token.mint(user1, 1000);
-    token.mint(user2, 500);
+    mint_tokens(token, user1, 1000);
+    mint_tokens(token, user2, 500);
 
     start_cheat_caller_address(token.contract_address, user1);
     token.approve(staking.contract_address, 1000);
@@ -96,7 +106,7 @@ fn test_stake_fails_without_approval() {
     let user = user();
 
     // Mint tokens but don't approve
-    token.mint(user, 1000);
+    mint_tokens(token, user, 1000);
 
     // Try to stake without approval - should fail
     start_cheat_caller_address(staking.contract_address, user);
@@ -111,7 +121,7 @@ fn test_withdraw_flow() {
     let user = user();
 
     // Setup: mint, approve, and stake
-    token.mint(user, 1000);
+    mint_tokens(token, user, 1000);
     start_cheat_caller_address(token.contract_address, user);
     token.approve(staking.contract_address, 500);
     stop_cheat_caller_address(token.contract_address);
@@ -123,10 +133,11 @@ fn test_withdraw_flow() {
     staking.withdraw(250);
     stop_cheat_caller_address(staking.contract_address);
 
-    // Verify balances
+    // Verify balances across both contracts
     assert_eq!(staking.staked_amount(user), 250);
     assert_eq!(staking.total_staked(), 250);
     assert_eq!(token.balance_of(user), 750); // 500 remaining + 250 withdrawn
+    assert_eq!(token.balance_of(staking.contract_address), 250); // only 250 still staked
 }
 // ANCHOR_END: test_withdraw
 
@@ -140,7 +151,7 @@ fn test_stake_updates_both_contracts() {
     let user = user();
 
     // Setup
-    token.mint(user, 1000);
+    mint_tokens(token, user, 1000);
     start_cheat_caller_address(token.contract_address, user);
     token.approve(staking.contract_address, 1000);
     stop_cheat_caller_address(token.contract_address);
@@ -185,7 +196,7 @@ fn test_cheatcode_cleanup_pattern() {
     let (token, staking) = deploy_token_and_staking();
     let user = user();
 
-    token.mint(user, 1000);
+    mint_tokens(token, user, 1000);
 
     // Step 1: User approves staking contract
     start_cheat_caller_address(token.contract_address, user);
@@ -203,3 +214,4 @@ fn test_cheatcode_cleanup_pattern() {
     assert_eq!(staking.staked_amount(user), 500);
 }
 // ANCHOR_END: cheatcode_cleanup
+

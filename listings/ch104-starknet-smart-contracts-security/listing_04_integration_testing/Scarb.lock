@@ -5,8 +5,24 @@ version = 1
 name = "listing_04_integration_testing"
 version = "0.1.0"
 dependencies = [
+ "openzeppelin_access",
  "snforge_std",
 ]
+
+[[package]]
+name = "openzeppelin_access"
+version = "2.0.0"
+source = "registry+https://scarbs.xyz/"
+checksum = "sha256:511681dd26d814ee2bc996d44ff8cb4aaa5ae9d14272130def7eb901cf004850"
+dependencies = [
+ "openzeppelin_introspection",
+]
+
+[[package]]
+name = "openzeppelin_introspection"
+version = "2.0.0"
+source = "registry+https://scarbs.xyz/"
+checksum = "sha256:87773ed6cd2318f169283ecbbb161890d1996260a80302d81ec45b70ee5e54c1"
 
 [[package]]
 name = "snforge_scarb_plugin"

@@ -12,8 +12,10 @@ pub trait IStaking<TContractState> {
 #[starknet::contract]
 pub mod Staking {
     use starknet::ContractAddress;
-    use starknet::storage::{Map, StorageMapReadAccess, StorageMapWriteAccess};
-    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+    use starknet::storage::{
+        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+        StoragePointerWriteAccess,
+    };
     use crate::token::{ITokenDispatcher, ITokenDispatcherTrait};
 
     #[storage]
@@ -55,10 +57,9 @@ pub mod Staking {
             self.total_staked.write(self.total_staked.read() - amount);
 
             // Transfer tokens back to caller
-            // Note: In a real contract, you'd need a separate transfer function
-            // For simplicity, we mint back to the user (not production-ready)
             let token = self.token.read();
-            token.mint(caller, amount);
+            let success = token.transfer(caller, amount);
+            assert!(success, "Withdraw transfer failed");
         }
 
         fn staked_amount(self: @ContractState, account: ContractAddress) -> u256 {
@@ -71,3 +72,4 @@ pub mod Staking {
     }
 }
 // ANCHOR_END: staking_contract
+

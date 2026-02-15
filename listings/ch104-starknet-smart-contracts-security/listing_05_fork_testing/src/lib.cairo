@@ -1,3 +1,4 @@
+// TAG: does_not_run
 // ANCHOR: deployed_interface
 // Interface matching a deployed protocol (e.g., an oracle or DEX)
 #[starknet::interface]

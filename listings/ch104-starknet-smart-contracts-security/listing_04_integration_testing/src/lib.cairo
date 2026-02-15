@@ -1,2 +1,2 @@
-pub mod token;
 pub mod staking;
+pub mod token;

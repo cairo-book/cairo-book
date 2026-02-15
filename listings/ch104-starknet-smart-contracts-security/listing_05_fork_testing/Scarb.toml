@@ -1,4 +1,3 @@
-# TAG: does_not_run
 [package]
 name = "listing_05_fork_testing"
 version = "0.1.0"
