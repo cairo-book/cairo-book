@@ -45,12 +45,12 @@ tests.
 
 Each testing approach answers a different question about your contract:
 
-| Approach                                          | Speed       | Question It Answers                                           |
-| ------------------------------------------------- | ----------- | ------------------------------------------------------------- |
-| [Unit Testing](./ch104-02-01-unit-testing.md)     | Fast        | Does this single contract work correctly?                     |
-| [Integration Testing](./ch104-02-02-integration-testing.md) | Fast  | Do my contracts work together correctly?                      |
-| [Property-Based Testing](./ch104-02-03-fuzz-testing.md) | Medium | Does this invariant hold for any input, not just examples?    |
-| [Fork Testing](./ch104-02-04-fork-testing.md)     | Slow        | Does my contract work with real deployed protocols?           |
+| Approach                                                    | Speed  | Question It Answers                                        |
+| ----------------------------------------------------------- | ------ | ---------------------------------------------------------- |
+| [Unit Testing](./ch104-02-01-unit-testing.md)               | Fast   | Does this single contract work correctly?                  |
+| [Integration Testing](./ch104-02-02-integration-testing.md) | Fast   | Do my contracts work together correctly?                   |
+| [Property-Based Testing](./ch104-02-03-fuzz-testing.md)     | Medium | Does this invariant hold for any input, not just examples? |
+| [Fork Testing](./ch104-02-04-fork-testing.md)               | Slow   | Does my contract work with real deployed protocols?        |
 
 ### Which Approach to Use
 
@@ -70,10 +70,10 @@ integrates with deployed protocols you don't control.
 
 ## Setting Up Starknet Foundry
 
-All testing approaches in this chapter use [Starknet
-Foundry](https://foundry-rs.github.io/starknet-foundry/), the standard testing
-framework for Starknet smart contracts. If you haven't already, configure your
-`Scarb.toml`:
+All testing approaches in this chapter use
+[Starknet Foundry](https://foundry-rs.github.io/starknet-foundry/), the standard
+testing framework for Starknet smart contracts. If you haven't already,
+configure your `Scarb.toml`:
 
 ```toml
 [dev-dependencies]
@@ -93,13 +93,14 @@ enable-gas = true
 
 With this configuration, `scarb test` runs `snforge test` under the hood.
 
-Install Starknet Foundry by following the [installation
-guide](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html).
+Install Starknet Foundry by following the
+[installation guide](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html).
 We recommend using `asdf` to manage tool versions.
 
 > For basic Cairo testing concepts (test anatomy, `#[test]` attribute,
-> assertions), see [Testing Cairo Programs](./ch10-00-testing-cairo-programs.md).
-> This chapter focuses on smart contract-specific testing patterns.
+> assertions), see
+> [Testing Cairo Programs](./ch10-00-testing-cairo-programs.md). This chapter
+> focuses on smart contract-specific testing patterns.
 
 ## What's Next
 

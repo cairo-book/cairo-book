@@ -11,19 +11,19 @@ be non-deterministic. Use them for scenarios where mocks aren't sufficient.
 
 Fork testing works well in specific scenarios:
 
-| Good Fit                        | Why                                                    |
-| ------------------------------- | ------------------------------------------------------ |
+| Good Fit                            | Why                                                  |
+| ----------------------------------- | ---------------------------------------------------- |
 | Integration with deployed protocols | Test against actual DEX, oracle, or lending behavior |
-| Reproducing mainnet bugs        | Pin to the exact block where a bug occurred            |
-| Upgrade testing                 | Verify upgrades against real storage state             |
-| Composability testing           | Test complex multi-protocol interactions               |
+| Reproducing mainnet bugs            | Pin to the exact block where a bug occurred          |
+| Upgrade testing                     | Verify upgrades against real storage state           |
+| Composability testing               | Test complex multi-protocol interactions             |
 
-| Poor Fit                        | Why                                                    |
-| ------------------------------- | ------------------------------------------------------ |
-| Unit tests                      | Way too slow for isolated logic                        |
-| Fuzz testing                    | Burns RPC quota quickly                                |
-| Rapid development iteration     | Latency kills feedback loop                            |
-| Testing isolated contract logic | No benefit over regular tests                          |
+| Poor Fit                        | Why                             |
+| ------------------------------- | ------------------------------- |
+| Unit tests                      | Way too slow for isolated logic |
+| Fuzz testing                    | Burns RPC quota quickly         |
+| Rapid development iteration     | Latency kills feedback loop     |
+| Testing isolated contract logic | No benefit over regular tests   |
 
 If your contract doesn't interact with deployed protocols, you probably don't
 need fork testing.
@@ -62,11 +62,11 @@ changes.
 
 ### Pinning Strategies
 
-| Strategy             | Determinism     | Use Case                              |
-| -------------------- | --------------- | ------------------------------------- |
-| `block_id.number`    | ✅ Deterministic | CI, reproducible tests                |
-| `block_id.hash`      | ✅ Deterministic | Pin to specific state                 |
-| `block_id.tag = "latest"` | ❌ Non-deterministic | Manual exploration only         |
+| Strategy                  | Determinism          | Use Case                |
+| ------------------------- | -------------------- | ----------------------- |
+| `block_id.number`         | ✅ Deterministic     | CI, reproducible tests  |
+| `block_id.hash`           | ✅ Deterministic     | Pin to specific state   |
+| `block_id.tag = "latest"` | ❌ Non-deterministic | Manual exploration only |
 
 Always pin to a specific block number in CI. Using `latest` causes flaky tests
 that fail randomly as chain state evolves.
@@ -222,7 +222,8 @@ integration tests for your contract's interface, and fuzz tests for edge cases.
 Fork testing lets you test against real blockchain state. Use it for deployed
 protocol integrations, reproducing bugs, and upgrade testing. Don't use it for
 unit tests, fuzz tests, or rapid iteration. Always pin to a specific block for
-deterministic CI, and keep fork tests minimal—only where mocks aren't sufficient.
+deterministic CI, and keep fork tests minimal—only where mocks aren't
+sufficient.
 
-For detailed configuration options, see the [Starknet Foundry fork testing
-documentation](https://foundry-rs.github.io/starknet-foundry/snforge-advanced-features/fork-testing.html).
+For detailed configuration options, see the
+[Starknet Foundry fork testing documentation](https://foundry-rs.github.io/starknet-foundry/snforge-advanced-features/fork-testing.html).

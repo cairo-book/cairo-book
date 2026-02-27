@@ -15,10 +15,10 @@ when to use each, and the tools that make testing practical.
 
 Cairo offers two approaches to unit testing:
 
-| Approach                        | What You're Testing      | When to Use It             |
-| ------------------------------- | ------------------------ | -------------------------- |
-| `contract_state_for_testing`    | Internal functions       | Logic not in the ABI       |
-| Deploy + dispatcher             | External interface (ABI) | What users actually call   |
+| Approach                     | What You're Testing      | When to Use It           |
+| ---------------------------- | ------------------------ | ------------------------ |
+| `contract_state_for_testing` | Internal functions       | Logic not in the ABI     |
+| Deploy + dispatcher          | External interface (ABI) | What users actually call |
 
 Both test a single contract in isolation. The difference is whether you're
 testing through the public interface or reaching into the internals.
@@ -43,9 +43,9 @@ function that we don't expose publicly:
 {{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_02_pizza_factory_snfoundry/src/pizza.cairo}}
 ```
 
-{{#label pizza-factory-unit}}
-<span class="caption">Listing
-{{#ref pizza-factory-unit}}: A PizzaFactory contract with internal functions</span>
+{{#label pizza-factory-unit}} <span class="caption">Listing
+{{#ref pizza-factory-unit}}: A PizzaFactory contract with internal
+functions</span>
 
 The `InternalTrait` contains `set_owner`, which isn't part of the ABI. To test
 it, we import the trait and call it directly on a test state:
@@ -56,8 +56,8 @@ it, we import the trait and call it directly on a test state:
 
 {{#label test-unit-internal}}
 
-<span class="caption">Listing
-{{#ref test-unit-internal}}: Testing internal functions with contract_state_for_testing</span>
+<span class="caption">Listing {{#ref test-unit-internal}}: Testing internal
+functions with contract_state_for_testing</span>
 
 We import `InternalTrait` to access `set_owner` and `StoragePointerReadAccess`
 to read storage. Since there's no deployment, the test runs instantly.
@@ -79,16 +79,16 @@ constructor arguments, and interact through a dispatcher.
 
 {{#label unit-deployment}}
 
-<span class="caption">Listing {{#ref unit-deployment}}:
-Deploying a contract for unit testing</span>
+<span class="caption">Listing {{#ref unit-deployment}}: Deploying a contract for
+unit testing</span>
 
 This helper function handles the boilerplate: declaring, preparing calldata,
 deploying, and returning a dispatcher you can use in tests.
 
 ## Testing with Cheatcodes
 
-Here's where things get interesting. Real smart contracts don't run in a
-vacuum. They check who's calling them (`get_caller_address`), what time it is
+Here's where things get interesting. Real smart contracts don't run in a vacuum.
+They check who's calling them (`get_caller_address`), what time it is
 (`get_block_timestamp`), and other context that's hard to control in tests.
 
 Starknet Foundry provides _cheatcodes_ that let you manipulate this context.
@@ -106,12 +106,12 @@ to know who's calling it. In tests, you control this with
 
 {{#label unit-cheat-caller}}
 
-<span class="caption">Listing
-{{#ref unit-cheat-caller}}: Testing access control by mocking the caller</span>
+<span class="caption">Listing {{#ref unit-cheat-caller}}: Testing access control
+by mocking the caller</span>
 
-We deploy the contract, then use `start_cheat_caller_address` to impersonate
-the owner. Now `get_caller_address()` returns the owner's address for all calls
-to this contract.
+We deploy the contract, then use `start_cheat_caller_address` to impersonate the
+owner. Now `get_caller_address()` returns the owner's address for all calls to
+this contract.
 
 > Test both paths: the happy path where an authorized caller succeeds, and the
 > rejection path where an unauthorized caller fails. Many security bugs come
@@ -128,8 +128,8 @@ depend on them being correct. Use `spy_events` to capture and check them:
 
 {{#label unit-spy-events}}
 
-<span class="caption">Listing {{#ref unit-spy-events}}:
-Capturing and verifying events</span>
+<span class="caption">Listing {{#ref unit-spy-events}}: Capturing and verifying
+events</span>
 
 Create the spy before the action that emits events, then use
 `spy.assert_emitted` to check what was emitted.
@@ -145,39 +145,39 @@ Sometimes you need to verify storage values that don't have public getters. The
 
 {{#label unit-load-storage}}
 
-<span class="caption">Listing
-{{#ref unit-load-storage}}: Reading storage directly to verify initial state</span>
+<span class="caption">Listing {{#ref unit-load-storage}}: Reading storage
+directly to verify initial state</span>
 
-Pass the contract address, a storage key (use `selector!("variable_name")`),
-and how many felts to read.
+Pass the contract address, a storage key (use `selector!("variable_name")`), and
+how many felts to read.
 
 ## Cheatcode Reference
 
 Here are the cheatcodes you'll use most often:
 
-| Cheatcode                       | What It Does               | Common Use Case             |
-| ------------------------------- | -------------------------- | --------------------------- |
-| `start_cheat_caller_address`    | Mock `get_caller_address`  | Testing access control      |
-| `stop_cheat_caller_address`     | Stop mocking caller        | Reset after test            |
-| `start_cheat_block_timestamp`   | Mock block timestamp       | Time-dependent logic        |
-| `start_cheat_block_number`      | Mock block number          | Block-dependent logic       |
-| `spy_events`                    | Capture emitted events     | Verify event data           |
-| `load`                          | Read raw storage           | Verify internal state       |
-| `store`                         | Write raw storage          | Set up test preconditions   |
+| Cheatcode                     | What It Does              | Common Use Case           |
+| ----------------------------- | ------------------------- | ------------------------- |
+| `start_cheat_caller_address`  | Mock `get_caller_address` | Testing access control    |
+| `stop_cheat_caller_address`   | Stop mocking caller       | Reset after test          |
+| `start_cheat_block_timestamp` | Mock block timestamp      | Time-dependent logic      |
+| `start_cheat_block_number`    | Mock block number         | Block-dependent logic     |
+| `spy_events`                  | Capture emitted events    | Verify event data         |
+| `load`                        | Read raw storage          | Verify internal state     |
+| `store`                       | Write raw storage         | Set up test preconditions |
 
-For the full list, see the [Starknet Foundry cheatcode
-documentation](https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html).
+For the full list, see the
+[Starknet Foundry cheatcode documentation](https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html).
 
 ## Choosing Your Approach
 
-| What You're Testing              | Use                         |
-| -------------------------------- | --------------------------- |
-| Internal helper function         | `contract_state_for_testing` |
-| Pure calculation logic           | `contract_state_for_testing` |
-| Access control                   | Deploy + cheatcodes          |
-| Events                           | Deploy + spy_events          |
-| Constructor logic                | Deploy + assertions          |
-| Public function behavior         | Deploy + dispatcher          |
+| What You're Testing      | Use                          |
+| ------------------------ | ---------------------------- |
+| Internal helper function | `contract_state_for_testing` |
+| Pure calculation logic   | `contract_state_for_testing` |
+| Access control           | Deploy + cheatcodes          |
+| Events                   | Deploy + spy_events          |
+| Constructor logic        | Deploy + assertions          |
+| Public function behavior | Deploy + dispatcher          |
 
 One thing to know: you can't mix approaches in the same test. If you deploy and
 get a dispatcher, use the dispatcher. If you use `contract_state_for_testing`,
@@ -223,19 +223,19 @@ stop_cheat_caller_address(address);
 ```
 
 **Test edge cases.** Unit tests are perfect for boundary conditions: zero
-values, maximum values like `u256::MAX`, empty arrays, and off-by-one
-scenarios.
+values, maximum values like `u256::MAX`, empty arrays, and off-by-one scenarios.
 
 ## When Unit Tests Aren't Enough
 
 Unit tests verify single-contract behavior. When your contract talks to other
-contracts, you'll want [integration testing](./ch104-02-02-integration-testing.md)
-to test those interactions.
+contracts, you'll want
+[integration testing](./ch104-02-02-integration-testing.md) to test those
+interactions.
 
-For testing that properties hold across many random inputs, see [property-based
-testing](./ch104-02-03-fuzz-testing.md). And when you need to test against real
-deployed contracts like AMMs or lending protocols, [fork
-testing](./ch104-02-04-fork-testing.md) lets you do that.
+For testing that properties hold across many random inputs, see
+[property-based testing](./ch104-02-03-fuzz-testing.md). And when you need to
+test against real deployed contracts like AMMs or lending protocols,
+[fork testing](./ch104-02-04-fork-testing.md) lets you do that.
 
 ## Summary
 

@@ -283,7 +283,8 @@ First, test that valid messages are processed correctly:
 ```
 
 {{#label l1-handler-test-valid}} <span class="caption">Listing
-{{#ref l1-handler-test-valid}}: Testing that valid L1 messages are processed</span>
+{{#ref l1-handler-test-valid}}: Testing that valid L1 messages are
+processed</span>
 
 The key steps:
 
@@ -303,7 +304,8 @@ are rejected:
 ```
 
 {{#label l1-handler-test-reject}} <span class="caption">Listing
-{{#ref l1-handler-test-reject}}: Testing that unauthorized senders are rejected</span>
+{{#ref l1-handler-test-reject}}: Testing that unauthorized senders are
+rejected</span>
 
 Notice how we:
 
@@ -358,8 +360,8 @@ let payload = array![
 4. **Document your L1 address** — Make it clear which Ethereum address is the
    trusted source
 
-For more details on the `L1Handler` API, see the [Starknet Foundry cheatcodes
-documentation](https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html).
+For more details on the `L1Handler` API, see the
+[Starknet Foundry cheatcodes documentation](https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html).
 
 ## Cairo Serde
 

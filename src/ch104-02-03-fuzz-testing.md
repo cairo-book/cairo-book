@@ -29,12 +29,12 @@ user's balance is never negative." "Only the owner can call this function."
 An _invariant_ is a specific type of property: a condition that must hold before
 and after every operation. Smart contracts often have important invariants:
 
-| Invariant Type      | Example                                          |
-| ------------------- | ------------------------------------------------ |
-| Balance Preservation | `totalSupply == sum(all_balances)`              |
-| Access Control      | Only owner can call privileged functions         |
-| State Machine       | Cannot transition from "closed" to "pending"     |
-| Arithmetic Safety   | Balances cannot underflow to create tokens       |
+| Invariant Type       | Example                                      |
+| -------------------- | -------------------------------------------- |
+| Balance Preservation | `totalSupply == sum(all_balances)`           |
+| Access Control       | Only owner can call privileged functions     |
+| State Machine        | Cannot transition from "closed" to "pending" |
+| Arithmetic Safety    | Balances cannot underflow to create tokens   |
 
 ## Example-Based vs Property-Based Testing
 
@@ -61,8 +61,8 @@ amount:
 
 {{#label fuzz-invariant}}
 
-<span class="caption">Listing {{#ref fuzz-invariant}}:
-A fuzz test verifying the total supply invariant</span>
+<span class="caption">Listing {{#ref fuzz-invariant}}: A fuzz test verifying the
+total supply invariant</span>
 
 The `#[fuzzer(runs: 100, seed: 12345)]` attribute tells Starknet Foundry to run
 this test 100 times with different random `amount` values, using seed `12345`
@@ -92,8 +92,8 @@ Structure tests so the fuzzer can explore interesting cases:
 
 {{#label fuzz-conservation}}
 
-<span class="caption">Listing
-{{#ref fuzz-conservation}}: Testing balance conservation across transfers</span>
+<span class="caption">Listing {{#ref fuzz-conservation}}: Testing balance
+conservation across transfers</span>
 
 We deploy with maximum `u64` supply so any fuzzed `u64` amount is valid. Then we
 capture state before and after, and check that the sum of balances stayed the
@@ -109,8 +109,8 @@ Round-trip properties verify that operations can be "undone":
 
 {{#label fuzz-roundtrip}}
 
-<span class="caption">Listing {{#ref fuzz-roundtrip}}:
-Testing the transfer round-trip property</span>
+<span class="caption">Listing {{#ref fuzz-roundtrip}}: Testing the transfer
+round-trip property</span>
 
 ## Common Property Patterns
 
@@ -178,12 +178,12 @@ provide good coverage. Before audits, run 1000+ for thorough testing.
 
 Fuzzing pays off most for:
 
-| Scenario              | Why Fuzz                                              |
-| --------------------- | ----------------------------------------------------- |
-| Financial calculations | Edge cases in math can cause loss of funds           |
-| Access control        | Ensure no input bypasses authorization                |
-| State machines        | Find invalid state transitions                        |
-| Parsing/serialization | Malformed input handling                              |
+| Scenario               | Why Fuzz                                   |
+| ---------------------- | ------------------------------------------ |
+| Financial calculations | Edge cases in math can cause loss of funds |
+| Access control         | Ensure no input bypasses authorization     |
+| State machines         | Find invalid state transitions             |
+| Parsing/serialization  | Malformed input handling                   |
 
 Fuzzing may be overkill for simple getters with no logic, functions with no
 parameters, and already well-tested pure functions.
@@ -206,5 +206,5 @@ and use more runs in CI than during development.
 Combined with unit and integration tests, fuzzing catches edge cases that manual
 testing misses. For contracts handling real value, it's worth the setup.
 
-For detailed fuzzer options, see the [Starknet Foundry fuzz testing
-documentation](https://foundry-rs.github.io/starknet-foundry/snforge-advanced-features/fuzz-testing.html).
+For detailed fuzzer options, see the
+[Starknet Foundry fuzz testing documentation](https://foundry-rs.github.io/starknet-foundry/snforge-advanced-features/fuzz-testing.html).

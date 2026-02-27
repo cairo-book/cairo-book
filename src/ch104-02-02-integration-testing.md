@@ -11,10 +11,10 @@ Integration tests answer one question: do my contracts work together correctly?
 
 The distinction is about scope, not mechanism:
 
-| Test Type   | Scope                    | Example                                    |
-| ----------- | ------------------------ | ------------------------------------------ |
-| Unit test   | Single contract          | Testing your token's `transfer` function   |
-| Integration | Multiple contracts       | Testing your token with a DEX router       |
+| Test Type   | Scope              | Example                                  |
+| ----------- | ------------------ | ---------------------------------------- |
+| Unit test   | Single contract    | Testing your token's `transfer` function |
+| Integration | Multiple contracts | Testing your token with a DEX router     |
 
 Both types deploy contracts and use cheatcodes. The difference is whether you're
 testing one contract or multiple contracts interacting.
@@ -26,8 +26,8 @@ correctly, test contract composition (e.g., your protocol using OpenZeppelin
 contracts), validate callback patterns, or test complex multi-step flows
 involving multiple contracts.
 
-If you're testing a single contract's behavior, use [unit
-testing](./ch104-02-01-unit-testing.md) instead.
+If you're testing a single contract's behavior, use
+[unit testing](./ch104-02-01-unit-testing.md) instead.
 
 ## Test Organization in Starknet Foundry
 
@@ -163,6 +163,6 @@ Integration testing means testing multiple contracts interacting:
 - Use the `tests/` directory for integration tests (separate crate)
 - Test realistic multi-step flows
 
-If you're testing a single contract, it's a [unit
-test](./ch104-02-01-unit-testing.md). If you're testing multiple contracts
+If you're testing a single contract, it's a
+[unit test](./ch104-02-01-unit-testing.md). If you're testing multiple contracts
 together, it's an integration test.
