@@ -194,7 +194,7 @@ Here is the definition of the `Hello` trait :
 {{#rustdoc_include ../listings/ch12-advanced-features/no_listing_15_procedural_macro/src/lib.cairo:hello_trait}}
 ```
 
-Let's check the marcro implementation, first the `hello_derive` function parses
+Let's check the macro implementation, first the `hello_derive` function parses
 the input token stream and then extracts the `struct_name` to implement the
 trait for that specific struct.
 
