@@ -1,0 +1,32 @@
+[package]
+name = "listing_05_fork_testing"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = ">=2.13.1"
+
+[dev-dependencies]
+snforge_std = "0.51.1"
+assert_macros = "2.13.1"
+
+[[target.starknet-contract]]
+
+[scripts]
+test = "snforge test"
+
+[tool.scarb]
+allow-prebuilt-plugins = ["snforge_std"]
+
+# ANCHOR: fork_config
+# Fork configuration for testing against real networks
+[[tool.snforge.fork]]
+name = "MAINNET"
+url = "https://starknet-mainnet.public.blastapi.io/rpc/v0_7"
+block_id.number = "500000"
+
+[[tool.snforge.fork]]
+name = "SEPOLIA"
+url = "https://starknet-sepolia.public.blastapi.io/rpc/v0_7"
+block_id.number = "100000"
+# ANCHOR_END: fork_config

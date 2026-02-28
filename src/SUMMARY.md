@@ -153,6 +153,10 @@
 - [Starknet Smart Contracts Security](./ch104-00-starknet-smart-contracts-security.md)
   - [General Recommendations](./ch104-01-general-recommendations.md)
   - [Testing Smart Contracts](./ch104-02-testing-smart-contracts.md)
+    - [Unit Testing](./ch104-02-01-unit-testing.md)
+    - [Integration Testing](./ch104-02-02-integration-testing.md)
+    - [Property-Based Testing](./ch104-02-03-fuzz-testing.md)
+    - [Fork Testing](./ch104-02-04-fork-testing.md)
   - [Static Analysis Tools](./ch104-03-static-analysis-tools.md)
 
 ## Appendix

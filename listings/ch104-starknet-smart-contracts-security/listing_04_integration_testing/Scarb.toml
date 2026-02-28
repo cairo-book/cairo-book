@@ -1,0 +1,20 @@
+[package]
+name = "listing_04_integration_testing"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = ">=2.13.1"
+openzeppelin_access = "2.0.0"
+
+[dev-dependencies]
+snforge_std = "0.51.1"
+assert_macros = "2.13.1"
+
+[[target.starknet-contract]]
+
+[scripts]
+test = "snforge test"
+
+[tool.scarb]
+allow-prebuilt-plugins = ["snforge_std"]
