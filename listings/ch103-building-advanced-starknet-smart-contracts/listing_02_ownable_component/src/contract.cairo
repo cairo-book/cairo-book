@@ -6,7 +6,7 @@ mod OwnableCounter {
 
     component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);
 
-    //ANCHOR:  embedded_impl
+    //ANCHOR: embedded_impl
     #[abi(embed_v0)]
     impl OwnableImpl = OwnableComponent::OwnableImpl<ContractState>;
 
