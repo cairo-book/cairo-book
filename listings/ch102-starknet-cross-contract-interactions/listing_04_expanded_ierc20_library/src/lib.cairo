@@ -14,10 +14,10 @@ struct IERC20LibraryDispatcher {
 impl IERC20LibraryDispatcherImpl of IERC20DispatcherTrait<IERC20LibraryDispatcher> {
     fn name(
         self: IERC20LibraryDispatcher,
-    ) -> felt252 { // starknet::syscalls::library_call_syscall  is called in here
+    ) -> felt252 { // starknet::syscalls::library_call_syscall is called in here
     }
     fn transfer(
         self: IERC20LibraryDispatcher, recipient: ContractAddress, amount: u256,
-    ) { // starknet::syscalls::library_call_syscall  is called in here
+    ) { // starknet::syscalls::library_call_syscall is called in here
     }
 }
