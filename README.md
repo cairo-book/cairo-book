@@ -1,5 +1,5 @@
 <div align="center">
-<!-- Remember: Keep a span between the HTML tag and the markdown tag.  -->
+<!-- Remember: Keep a span between the HTML tag and the markdown tag. -->
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 

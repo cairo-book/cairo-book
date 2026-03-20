@@ -25,7 +25,7 @@ filesystem. By adding `use crate::front_of_house::hosting;` in the crate root,
 had been defined in the crate root.
 
 Note that `use` only creates the shortcut for the particular scope in which the
-`use` occurs. Listing {{#ref  use-scope}} moves the `eat_at_restaurant` function
+`use` occurs. Listing {{#ref use-scope}} moves the `eat_at_restaurant` function
 into a new child module named `customer`, which is then a different scope than
 the `use` statement, so the function body won’t compile:
 
@@ -35,7 +35,7 @@ the `use` statement, so the function body won’t compile:
 {{#include ../listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:wrong-path}}
 ```
 
-{{#label use-scope}} <span class="caption">Listing {{#ref  use-scope}}: A `use`
+{{#label use-scope}} <span class="caption">Listing {{#ref use-scope}}: A `use`
 statement only applies in the scope it’s in.</span>
 
 The compiler error shows that the shortcut no longer applies within the
