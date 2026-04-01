@@ -11,18 +11,28 @@ dependencies = [
 
 [[package]]
 name = "openzeppelin_access"
-version = "2.0.0"
+version = "3.0.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:511681dd26d814ee2bc996d44ff8cb4aaa5ae9d14272130def7eb901cf004850"
+checksum = "sha256:2c7fab22d2601fca4f456c81272637f2563a423652d1671383bbe3d007803977"
 dependencies = [
+ "openzeppelin_interfaces",
  "openzeppelin_introspection",
 ]
 
 [[package]]
-name = "openzeppelin_introspection"
-version = "2.0.0"
+name = "openzeppelin_interfaces"
+version = "2.1.0"
 source = "registry+https://scarbs.xyz/"
-checksum = "sha256:87773ed6cd2318f169283ecbbb161890d1996260a80302d81ec45b70ee5e54c1"
+checksum = "sha256:f69fdb36eb894a0e0732385e723c5ff56d8cb4c1d49b29446c77eefac00b02a5"
+
+[[package]]
+name = "openzeppelin_introspection"
+version = "3.0.0"
+source = "registry+https://scarbs.xyz/"
+checksum = "sha256:ee491981a69736cde220f8b7dd290b6d8620c85ee6b83c81f665f5bef78b62b1"
+dependencies = [
+ "openzeppelin_interfaces",
+]
 
 [[package]]
 name = "snforge_scarb_plugin"

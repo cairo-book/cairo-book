@@ -12,7 +12,7 @@ pub trait IPriceFeedExample<TContractState> {
 #[starknet::contract]
 mod PriceFeedExample {
     //ANCHOR_END: pragma_lib
-    use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
+    use openzeppelin::interfaces::token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
     //ANCHOR: pragma_lib
     use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
     use pragma_lib::types::{DataType, PragmaPricesResponse};
