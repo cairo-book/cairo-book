@@ -254,9 +254,9 @@ thanks to <a href="https://starkware.co/">StarkWare</a> through
 for supporting the creation of this book.</em></p>
 <p>This version of the text assumes you’re using
 <a href="https://github.com/starkware-libs/cairo">Cairo</a>
-<a href="https://github.com/starkware-libs/cairo/releases">version 2.13.1</a> and
+<a href="https://github.com/starkware-libs/cairo/releases">version 2.16.1</a> and
 <a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry</a>
-<a href="https://github.com/foundry-rs/starknet-foundry/releases">version 0.51.1</a>. See
+<a href="https://github.com/foundry-rs/starknet-foundry/releases">version 0.58.1</a>. See
 the <a href="ch01-01-installation.html">Installation</a> section of Chapter
 1 to install or update Cairo and Starknet Foundry.</p>
 <p>This book is open source. Find a typo or want to contribute? Check out the
@@ -470,12 +470,12 @@ line will appear:</p>
 versions of Cairo, Scarb, and Starknet Foundry. You can verify the installations
 by running the following commands in a new terminal session:</p>
 <pre><code class="language-bash">$ scarb --version
-scarb 2.13.1 (639d0a65e 2025-08-04)
-cairo: 2.13.1 (https://crates.io/crates/cairo-lang-compiler/2.13.1)
+scarb 2.16.1 (639d0a65e 2025-08-04)
+cairo: 2.16.1 (https://crates.io/crates/cairo-lang-compiler/2.16.1)
 sierra: 1.7.0
 
 $ snforge --version
-snforge 0.51.1
+snforge 0.58.1
 </code></pre>
 <p>We'll describe Starknet Foundry in more detail in <a href="./ch10-01-how-to-write-tests.html">Chapter
 10</a> for Cairo programs testing and
@@ -561,11 +561,11 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.13.1"
+starknet = "2.16.1"
 
 [dev-dependencies]
-snforge_std = "0.51.1"
-assert_macros = "2.13.1"
+snforge_std = "0.58.1"
+assert_macros = "2.16.1"
 
 [[target.starknet-contract]]
 sierra = true
@@ -616,7 +616,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.13.1"
+cairo_execute = "2.16.1"
 
 
 [[target.executable]]
@@ -754,7 +754,7 @@ performed correctly, so that anyone can verify your proof to trust that you
 found a prime number. The user will input a number, and we’ll output whether
 it’s prime, followed by generating and verifying a proof.</p>
 <h2 id="setting-up-a-new-project"><a class="header" href="#setting-up-a-new-project">Setting Up a New Project</a></h2>
-<p>To get started, ensure you have Scarb 2.13.1 or later installed (see
+<p>To get started, ensure you have Scarb 2.16.1 or later installed (see
 <a href="./ch01-01-installation.html">Installation</a> for details). We’ll use Scarb to create and manage
 our Cairo project.</p>
 <p>Open a terminal in your projects directory and create a new Scarb project:</p>
@@ -772,7 +772,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.13.1"
+cairo_test = "2.16.1"
 </code></pre>
 <p>This is a minimal manifest file for a Cairo project. However, since we want to
 create an executable program that we can prove, we need to modify it. Update
@@ -788,7 +788,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.13.1"
+cairo_execute = "2.16.1"
 
 
 [[target.executable]]
@@ -801,7 +801,7 @@ function = "prime_prover::main"
 executable (not a library or Starknet contract).</li>
 <li><code>[cairo] enable-gas = false</code> disables gas tracking, which is required for
 executable targets since gas is specific to Starknet contracts.
-<code>[dependencies] cairo_execute = "2.13.1"</code> adds the plugin needed to execute
+<code>[dependencies] cairo_execute = "2.16.1"</code> adds the plugin needed to execute
 and prove our program.</li>
 </ul>
 <p>Now, check the generated <code>src/lib.cairo</code>, which is a simple placeholder. Since
@@ -872,29 +872,30 @@ proving in Cairo.</p>
 <h2 id="executing-the-program"><a class="header" href="#executing-the-program">Executing the Program</a></h2>
 <p>Now let’s run the program with Scarb to test it. Use the scarb execute command
 and provide an input number as an argument:</p>
-<pre><code class="language-bash">scarb execute -p prime_prover --print-program-output --arguments 17
+<pre><code class="language-bash">scarb execute -p prime_prover --print-program-output --output standard --arguments 17
 </code></pre>
 <ul>
 <li><code>-p prime_prover</code> specifies the package name (matches Scarb.toml).</li>
 <li><code>--print-program-output</code> displays the result.</li>
+<li><code>--output standard</code> saves the execution artifacts (trace, memory,
+public/private inputs) needed for proving.</li>
 <li><code>--arguments 17</code> passes the number 17 as input.</li>
 </ul>
 <p>You should see output like this:</p>
-<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --arguments 17
+<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --arguments 17
    Compiling prime_prover v0.1.0 (listings/ch01-getting-started/prime_prover/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing prime_prover
 Program output:
 1
-
-
+Saving output to: target/execute/prime_prover/execution1
 </code></pre>
 <p>The output represents whether the program executed successfully and the result
 of the program. Here, <code>0</code> indicates success (no panic), and <code>1</code> represents true
 (17 is prime). Try a few more numbers:</p>
-<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --arguments 4
+<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --arguments 4
 [0, 0]  # 4 is not prime
-$ scarb execute -p prime_prover --print-program-output --arguments 23
+$ scarb execute -p prime_prover --print-program-output --output standard --arguments 23
 [0, 1]  # 23 is prime
 </code></pre>
 <p>The execution creates a folder under <code>./target/execute/prime_prover/execution1/</code>
@@ -5256,7 +5257,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.13.1"
+cairo_execute = "2.16.1"
 </code></pre>
 <p>As you develop your package, you may want to organize your code into multiple
 Cairo source files. You can do this by creating additional <em>.cairo</em> files within
@@ -12063,11 +12064,11 @@ experimental-features = ["user_defined_inline_macros"]
 # [cairo]
 # 
 # [dependencies]
-# cairo_execute = "2.13.1"
+# cairo_execute = "2.16.1"
 # 
 # [dev-dependencies]
-# snforge_std = "0.51.1"
-# assert_macros = "2.13.1"
+# snforge_std = "0.58.1"
+# assert_macros = "2.16.1"
 # 
 # [scripts]
 # test = "snforge test"
@@ -12381,8 +12382,8 @@ crate-type = ["cdylib"]
 [dependencies]
 bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1.1"
-cairo-lang-parser = "2.13.1"
-cairo-lang-syntax = "2.13.1"
+cairo-lang-parser = "2.16.1"
+cairo-lang-syntax = "2.16.1"
 
 [workspace]
 </code></pre>
@@ -12410,14 +12411,14 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-cairo_execute = "2.13.1"
+cairo_execute = "2.16.1"
 pow = { path = "../no_listing_16_procedural_macro_expression" }
 hello_macro = { path = "../no_listing_17_procedural_macro_derive" }
 rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.13.1"
+cairo_test = "2.16.1"
 
 [cairo]
 enable-gas = false
@@ -13778,7 +13779,7 @@ edition = "2024_07"
 publish = false
 
 [dependencies]
-cairo_execute = "2.13.1"
+cairo_execute = "2.16.1"
 oracle = "0.1.0-dev.4"
 
 [executable]
@@ -20470,8 +20471,8 @@ contract owner has the exclusive right to upgrade the contract.</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 mod UpgradeableContract {
     use openzeppelin::access::ownable::OwnableComponent;
-    use openzeppelin_upgrades::UpgradeableComponent;
-    use openzeppelin_upgrades::interface::IUpgradeable;
+    use openzeppelin::interfaces::upgrades::IUpgradeable;
+    use openzeppelin::upgrades::UpgradeableComponent;
     use starknet::{ClassHash, ContractAddress};
 
     component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);
@@ -21371,7 +21372,7 @@ the function returns the price of the requested asset as a <code>u128</code>.</p
 <h2 id="example-application-using-pragma-price-feed"><a class="header" href="#example-application-using-pragma-price-feed">Example Application Using Pragma Price Feed</a></h2>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 mod PriceFeedExample {
-    use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
+    use openzeppelin::interfaces::token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
     use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
     use pragma_lib::types::{DataType, PragmaPricesResponse};
     use starknet::contract_address::contract_address_const;
@@ -22648,7 +22649,7 @@ integrates with deployed protocols you don't control.</p>
 testing framework for Starknet smart contracts. If you haven't already,
 configure your <code>Scarb.toml</code>:</p>
 <pre><code class="language-toml">[dev-dependencies]
-snforge_std = "0.51.1"
+snforge_std = "0.58.1"
 
 [scripts]
 test = "snforge test"

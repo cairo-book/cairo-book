@@ -293,7 +293,7 @@ performed correctly, so that anyone can verify your proof to trust that you
 found a prime number. The user will input a number, and we’ll output whether
 it’s prime, followed by generating and verifying a proof.</p>
 <h2 id="setting-up-a-new-project"><a class="header" href="#setting-up-a-new-project">Setting Up a New Project</a></h2>
-<p>To get started, ensure you have Scarb 2.13.1 or later installed (see
+<p>To get started, ensure you have Scarb 2.16.1 or later installed (see
 <a href="./ch01-01-installation.html">Installation</a> for details). We’ll use Scarb to create and manage
 our Cairo project.</p>
 <p>Open a terminal in your projects directory and create a new Scarb project:</p>
@@ -311,7 +311,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.13.1"
+cairo_test = "2.16.1"
 </code></pre>
 <p>This is a minimal manifest file for a Cairo project. However, since we want to
 create an executable program that we can prove, we need to modify it. Update
@@ -327,7 +327,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.13.1"
+cairo_execute = "2.16.1"
 
 
 [[target.executable]]
@@ -340,7 +340,7 @@ function = "prime_prover::main"
 executable (not a library or Starknet contract).</li>
 <li><code>[cairo] enable-gas = false</code> disables gas tracking, which is required for
 executable targets since gas is specific to Starknet contracts.
-<code>[dependencies] cairo_execute = "2.13.1"</code> adds the plugin needed to execute
+<code>[dependencies] cairo_execute = "2.16.1"</code> adds the plugin needed to execute
 and prove our program.</li>
 </ul>
 <p>Now, check the generated <code>src/lib.cairo</code>, which is a simple placeholder. Since
@@ -411,29 +411,30 @@ proving in Cairo.</p>
 <h2 id="executing-the-program"><a class="header" href="#executing-the-program">Executing the Program</a></h2>
 <p>Now let’s run the program with Scarb to test it. Use the scarb execute command
 and provide an input number as an argument:</p>
-<pre><code class="language-bash">scarb execute -p prime_prover --print-program-output --arguments 17
+<pre><code class="language-bash">scarb execute -p prime_prover --print-program-output --output standard --arguments 17
 </code></pre>
 <ul>
 <li><code>-p prime_prover</code> specifies the package name (matches Scarb.toml).</li>
 <li><code>--print-program-output</code> displays the result.</li>
+<li><code>--output standard</code> saves the execution artifacts (trace, memory,
+public/private inputs) needed for proving.</li>
 <li><code>--arguments 17</code> passes the number 17 as input.</li>
 </ul>
 <p>You should see output like this:</p>
-<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --arguments 17
+<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --arguments 17
    Compiling prime_prover v0.1.0 (listings/ch01-getting-started/prime_prover/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing prime_prover
 Program output:
 1
-
-
+Saving output to: target/execute/prime_prover/execution1
 </code></pre>
 <p>The output represents whether the program executed successfully and the result
 of the program. Here, <code>0</code> indicates success (no panic), and <code>1</code> represents true
 (17 is prime). Try a few more numbers:</p>
-<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --arguments 4
+<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --arguments 4
 [0, 0]  # 4 is not prime
-$ scarb execute -p prime_prover --print-program-output --arguments 23
+$ scarb execute -p prime_prover --print-program-output --output standard --arguments 23
 [0, 1]  # 23 is prime
 </code></pre>
 <p>The execution creates a folder under <code>./target/execute/prime_prover/execution1/</code>

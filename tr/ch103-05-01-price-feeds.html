@@ -397,7 +397,7 @@ the function returns the price of the requested asset as a <code>u128</code>.</p
 <h2 id="example-application-using-pragma-price-feed"><a class="header" href="#example-application-using-pragma-price-feed">Example Application Using Pragma Price Feed</a></h2>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
 mod PriceFeedExample {
-    use openzeppelin::token::erc20::interface::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
+    use openzeppelin::interfaces::token::erc20::{ERC20ABIDispatcher, ERC20ABIDispatcherTrait};
     use pragma_lib::abi::{IPragmaABIDispatcher, IPragmaABIDispatcherTrait};
     use pragma_lib::types::{DataType, PragmaPricesResponse};
     use starknet::contract_address::contract_address_const;
