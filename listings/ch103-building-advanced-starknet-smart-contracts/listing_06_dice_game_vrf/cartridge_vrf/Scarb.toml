@@ -1,0 +1,9 @@
+[package]
+name = "cartridge_vrf"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = "2.16.1"
+
+[lib]

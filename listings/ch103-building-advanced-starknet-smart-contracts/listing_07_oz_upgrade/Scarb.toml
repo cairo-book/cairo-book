@@ -8,6 +8,7 @@ edition = "2024_07"
 [dependencies]
 openzeppelin = "2.0.0"
 openzeppelin_upgrades = "2.0.0"
+openzeppelin_utils = "=2.0.0"
 starknet = ">=2.16.1"
 
 [[target.starknet-contract]]
