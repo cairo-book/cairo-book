@@ -114,11 +114,13 @@ Now let’s run the program with Scarb to test it. Use the scarb execute command
 and provide an input number as an argument:
 
 ```bash
-scarb execute -p prime_prover --print-program-output --arguments 17
+scarb execute -p prime_prover --print-program-output --output standard --arguments 17
 ```
 
 - `-p prime_prover` specifies the package name (matches Scarb.toml).
 - `--print-program-output` displays the result.
+- `--output standard` saves the execution artifacts (trace, memory,
+  public/private inputs) needed for proving.
 - `--arguments 17` passes the number 17 as input.
 
 You should see output like this:
@@ -132,9 +134,9 @@ of the program. Here, `0` indicates success (no panic), and `1` represents true
 (17 is prime). Try a few more numbers:
 
 ```bash
-$ scarb execute -p prime_prover --print-program-output --arguments 4
+$ scarb execute -p prime_prover --print-program-output --output standard --arguments 4
 [0, 0]  # 4 is not prime
-$ scarb execute -p prime_prover --print-program-output --arguments 23
+$ scarb execute -p prime_prover --print-program-output --output standard --arguments 23
 [0, 1]  # 23 is prime
 ```
 
