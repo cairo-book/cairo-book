@@ -1,7 +1,7 @@
 #[starknet::contract]
 pub mod MintableBurnableERC20 {
-    use openzeppelin_access::ownable::OwnableComponent;
-    use openzeppelin_token::erc20::{DefaultConfig, ERC20Component, ERC20HooksEmptyImpl};
+    use openzeppelin::access::ownable::OwnableComponent;
+    use openzeppelin::token::erc20::{DefaultConfig, ERC20Component, ERC20HooksEmptyImpl};
     use starknet::ContractAddress;
 
     component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);

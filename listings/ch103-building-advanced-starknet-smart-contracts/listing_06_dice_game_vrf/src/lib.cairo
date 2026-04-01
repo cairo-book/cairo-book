@@ -24,7 +24,7 @@ mod DiceGame {
 
     // Cartridge VRF consumer component and types
     use cartridge_vrf::vrf_consumer::vrf_consumer_component::VrfConsumerComponent;
-    use openzeppelin_access::ownable::OwnableComponent;
+    use openzeppelin::access::ownable::OwnableComponent;
     use starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,
     };
