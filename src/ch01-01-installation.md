@@ -57,12 +57,12 @@ by running the following commands in a new terminal session:
 
 ```bash
 $ scarb --version
-scarb 2.13.1 (639d0a65e 2025-08-04)
-cairo: 2.13.1 (https://crates.io/crates/cairo-lang-compiler/2.13.1)
+scarb 2.16.1 (639d0a65e 2025-08-04)
+cairo: 2.16.1 (https://crates.io/crates/cairo-lang-compiler/2.16.1)
 sierra: 1.7.0
 
 $ snforge --version
-snforge 0.51.1
+snforge 0.58.1
 ```
 
 We'll describe Starknet Foundry in more detail in [Chapter

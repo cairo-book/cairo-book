@@ -4,11 +4,11 @@ version = "0.1.0"
 edition = "2024_07"
 
 [dependencies]
-starknet = ">=2.13.1"
+starknet = ">=2.16.1"
 
 [dev-dependencies]
-snforge_std = "0.51.1"
-assert_macros = "2.13.1"
+snforge_std = "0.58.1"
+assert_macros = "2.16.1"
 
 [[target.starknet-contract]]
 

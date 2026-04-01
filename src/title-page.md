@@ -8,9 +8,9 @@ for supporting the creation of this book._
 
 This version of the text assumes you’re using
 [Cairo](https://github.com/starkware-libs/cairo)
-[version 2.13.1](https://github.com/starkware-libs/cairo/releases) and
+[version 2.16.1](https://github.com/starkware-libs/cairo/releases) and
 [Starknet Foundry](https://foundry-rs.github.io/starknet-foundry/index.html)
-[version 0.51.1](https://github.com/foundry-rs/starknet-foundry/releases). See
+[version 0.58.1](https://github.com/foundry-rs/starknet-foundry/releases). See
 the [Installation](ch01-01-installation.md) section of Chapter
 {{#chap getting-started}} to install or update Cairo and Starknet Foundry.
 

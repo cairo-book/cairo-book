@@ -26,7 +26,7 @@ scripts/                → Helper scripts
 docs/                   → Developer documentation
 src/SUMMARY.md          → Table of contents (defines book structure)
 book.toml               → mdBook configuration
-.tool-versions          → Scarb 2.13.1, starknet-foundry 0.51.1
+.tool-versions          → Scarb 2.16.1, starknet-foundry 0.58.1
 ```
 
 ## Contributing to Book Content

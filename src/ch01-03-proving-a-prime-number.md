@@ -23,7 +23,7 @@ it’s prime, followed by generating and verifying a proof.
 
 ## Setting Up a New Project
 
-To get started, ensure you have Scarb 2.13.1 or later installed (see
+To get started, ensure you have Scarb 2.16.1 or later installed (see
 [Installation][installation] for details). We’ll use Scarb to create and manage
 our Cairo project.
 
@@ -48,7 +48,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.13.1"
+cairo_test = "2.16.1"
 ```
 
 This is a minimal manifest file for a Cairo project. However, since we want to
@@ -68,7 +68,7 @@ Here’s what we’ve added:
   executable (not a library or Starknet contract).
 - `[cairo] enable-gas = false` disables gas tracking, which is required for
   executable targets since gas is specific to Starknet contracts.
-  `[dependencies] cairo_execute = "2.13.1"` adds the plugin needed to execute
+  `[dependencies] cairo_execute = "2.16.1"` adds the plugin needed to execute
   and prove our program.
 
 Now, check the generated `src/lib.cairo`, which is a simple placeholder. Since
