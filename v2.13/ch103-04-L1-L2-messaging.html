@@ -1,0 +1,934 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>L1 &lt;&gt; L2 Messaging - The Cairo Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-cc3b6b41.svg">
+        <link rel="shortcut icon" href="favicon-49aa8fd0.png">
+        <link rel="stylesheet" href="css/variables-911a411d.css">
+        <link rel="stylesheet" href="css/general-0dec1c6d.css">
+        <link rel="stylesheet" href="css/chrome-7a2a5ef9.css">
+        <link rel="stylesheet" href="css/print-99287a32.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-5a33c36c.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-11bd09e3.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/css/last-changed-23dd9341.css">
+        <link rel="stylesheet" href="theme/css/chat-fc4b4660.css">
+        <link rel="stylesheet" href="theme/css/version-switcher-9f8a4361.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-f2210142.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-136cdb3f.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Cairo Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io/edit/main/src/ch103-04-L1-L2-messaging.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="l1-l2-messaging"><a class="header" href="#l1-l2-messaging">L1-L2 Messaging</a></h1>
+<p>A crucial feature of a Layer 2 is its ability to interact with Layer 1.</p>
+<p>Starknet has its own <code>L1-L2</code> messaging system, which is different from its
+consensus mechanism and the submission of state updates on L1. Messaging is a
+way for smart-contracts on L1 to interact with smart-contracts on L2 (or the
+other way around), allowing us to do “cross-chain” transactions. For example, we
+can do some computations on one chain and use the result of this computation on
+the other chain.</p>
+<p>Bridges on Starknet all use <code>L1-L2</code> messaging. Let’s say that you want to bridge
+tokens from Ethereum to Starknet. You will simply have to deposit your tokens
+into the L1 bridge contract, which will automatically trigger the minting of the
+same token on L2. Another good use case for <code>L1-L2</code> messaging would be <a href="https://starkware.co/resource/defi-pooling/">DeFi
+pooling</a>.</p>
+<p>On Starknet, it’s important to note that the messaging system is
+<strong>asynchronous</strong> and <strong>asymmetric</strong>.</p>
+<ul>
+<li><strong>Asynchronous</strong>: this means that in your contract code (being Solidity or
+Cairo), you can’t await the result of the message being sent on the other
+chain within your contract code execution.</li>
+<li><strong>Asymmetric</strong>: sending a message from Ethereum to Starknet (<code>L1-&gt;L2</code>) is
+fully automated by the Starknet sequencer, which means that the message is
+being automatically delivered to the target contract on L2. However, when
+sending a message from Starknet to Ethereum (<code>L2-&gt;L1</code>), only the hash of the
+message is sent to L1 by the Starknet sequencer. You must then consume the
+message manually via a transaction on L1.</li>
+</ul>
+<p>Let’s dive into the details.</p>
+<h2 id="the-starknetmessaging-contract"><a class="header" href="#the-starknetmessaging-contract">The StarknetMessaging Contract</a></h2>
+<p>The crucial component of the <code>L1-L2</code> Messaging system is the
+<a href="https://etherscan.io/address/0xc662c410C0ECf747543f5bA90660f6ABeBD9C8c4"><code>StarknetCore</code></a> contract. It is a set of Solidity
+contracts deployed on Ethereum that allows Starknet to function properly. One of
+the contracts of <code>StarknetCore</code> is called <code>StarknetMessaging</code> and it is the
+contract responsible for passing messages between Starknet and Ethereum.
+<code>StarknetMessaging</code> follows an <a href="https://github.com/starkware-libs/cairo-lang/blob/4e233516f52477ad158bc81a86ec2760471c1b65/src/starkware/starknet/eth/IStarknetMessaging.sol#L6">interface</a> with functions
+allowing to send messages to L2, receiving messages on L1 from L2 and canceling
+messages.</p>
+<pre><code class="language-js">interface IStarknetMessaging is IStarknetMessagingEvents {
+
+    function sendMessageToL2(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload
+    ) external returns (bytes32);
+
+    function consumeMessageFromL2(uint256 fromAddress, uint256[] calldata payload)
+        external
+        returns (bytes32);
+
+    function startL1ToL2MessageCancellation(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload,
+        uint256 nonce
+    ) external;
+
+    function cancelL1ToL2Message(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload,
+        uint256 nonce
+    ) external;
+}
+</code></pre>
+<p><span class="caption"> Starknet messaging contract interface</span></p>
+<p>In the case of <code>L1-&gt;L2</code> messages, the Starknet sequencer is constantly listening
+to the logs emitted by the <code>StarknetMessaging</code> contract on Ethereum. Once a
+message is detected in a log, the sequencer prepares and executes an
+<code>L1HandlerTransaction</code> to call the function on the target L2 contract. This
+takes up to 1-2 minutes to be done (few seconds for ethereum block to be mined,
+and then the sequencer must build and execute the transaction).</p>
+<p><code>L2-&gt;L1</code> messages are prepared by contract’s execution on L2 and are part of the
+block produced. When the sequencer produces a block, it sends the hash of each
+message prepared by the contract’s execution to the <code>StarknetCore</code> contract on
+L1, where they can then be consumed once the block they belong to is proven and
+verified on Ethereum (which for now is around 3-4 hours).</p>
+<h2 id="sending-messages-from-ethereum-to-starknet"><a class="header" href="#sending-messages-from-ethereum-to-starknet">Sending Messages from Ethereum to Starknet</a></h2>
+<p>If you want to send messages from Ethereum to Starknet, your Solidity contracts
+must call the <code>sendMessageToL2</code> function of the <code>StarknetMessaging</code> contract. To
+receive these messages on Starknet, you will need to annotate functions that can
+be called from L1 with the <code>#[l1_handler]</code> attribute.</p>
+<p>Let’s take a simple contract taken from <a href="https://github.com/glihm/starknet-messaging-dev/blob/main/solidity/src/ContractMsg.sol">this tutorial</a>
+where we want to send a message to Starknet. The <code>_snMessaging</code> is a state
+variable already initialized with the address of the <code>StarknetMessaging</code>
+contract. You can check all Starknet contract and sequencer addresses
+<a href="https://docs.starknet.io/documentation/tools/important_addresses/">here</a>.</p>
+<pre><code class="language-js">// Sends a message on Starknet with a single felt.
+function sendMessageFelt(
+    uint256 contractAddress,
+    uint256 selector,
+    uint256 myFelt
+)
+    external
+    payable
+{
+    // We "serialize" here the felt into a payload, which is an array of uint256.
+    uint256[] memory payload = new uint256[](1);
+    payload[0] = myFelt;
+
+    // msg.value must always be &gt;= 20_000 wei.
+    _snMessaging.sendMessageToL2{value: msg.value}(
+        contractAddress,
+        selector,
+        payload
+    );
+}
+</code></pre>
+<p>The function sends a message with a single felt value to the <code>StarknetMessaging</code>
+contract. Be aware that your Cairo contract will only understand <code>felt252</code> data
+type, so if you want to send more complex data, you must ensure that the data
+serialization into the <code>uint256</code> array follows the Cairo serialization scheme.</p>
+<p>It’s important to note that we have <code>{value: msg.value}</code>. In fact, the minimum
+value we have to send here is <code>20k wei</code>, due to the fact that the
+<code>StarknetMessaging</code> contract will register the hash of our message in the
+storage of Ethereum.</p>
+<p>In addition to those <code>20k wei</code>, since the <code>L1HandlerTransaction</code> executed by the
+sequencer is not tied to any account (the message originates from L1), you must
+also ensure that you pay enough fees on L1 for your message to be deserialized
+and processed on L2.</p>
+<p>The fees of the <code>L1HandlerTransaction</code> are computed in a regular manner as it
+would be done for an <code>Invoke</code> transaction. For this, you can profile the gas
+consumption using <code>starkli</code> or <code>snforge</code> to estimate the cost of your message
+execution.</p>
+<p>The signature of the <code>sendMessageToL2</code> is:</p>
+<pre><code class="language-js">function sendMessageToL2(
+        uint256 toAddress,
+        uint256 selector,
+        uint256[] calldata payload
+    ) external override returns (bytes32);
+</code></pre>
+<p>The parameters are as follows:</p>
+<ul>
+<li><code>toAddress</code>: The contract address on L2 that will be called.</li>
+<li><code>selector</code>: The selector of the function of this contract at <code>toAddress</code>. This
+selector (function) must have the <code>#[l1_handler]</code> attribute to be callable.</li>
+<li><code>payload</code>: The payload is always an array of <code>felt252</code> (which are represented
+by <code>uint256</code> in Solidity). For this reason we’ve inserted the input <code>myFelt</code>
+into the array. This is why we need to insert the input data into an array.</li>
+</ul>
+<p>On the Starknet side, to receive this message, we have:</p>
+<pre><code class="language-cairo noplayground">    #[l1_handler]
+    fn msg_handler_felt(ref self: ContractState, from_address: felt252, my_felt: felt252) {
+        assert!(from_address == self.allowed_message_sender.read(), "Invalid message sender");
+
+        // You can now use the data, automatically deserialized from the message payload.
+        assert!(my_felt == 123, "Invalid value");
+    }
+</code></pre>
+<p>We need to add the <code>#[l1_handler]</code> attribute to our function. L1 handlers are
+special functions that can only be executed by an <code>L1HandlerTransaction</code>. There
+is nothing particular to do to receive transactions from L1, as the message is
+relayed by the sequencer automatically. In your <code>#[l1_handler]</code> functions, it is
+important to verify the sender of the L1 message to ensure that our contract can
+only receive messages from a trusted L1 contract.</p>
+<h2 id="sending-messages-from-starknet-to-ethereum"><a class="header" href="#sending-messages-from-starknet-to-ethereum">Sending Messages from Starknet to Ethereum</a></h2>
+<p>When sending messages from Starknet to Ethereum, you will have to use the
+<code>send_message_to_l1</code> syscall in your Cairo contracts. This syscall allows you to
+send messages to the <code>StarknetMessaging</code> contract on L1. Unlike <code>L1-&gt;L2</code>
+messages, <code>L2-&gt;L1</code> messages must be consumed manually, which means that you will
+need your Solidity contract to explicitly call the <code>consumeMessageFromL2</code>
+function of the <code>StarknetMessaging</code> contract in order to consume the message.</p>
+<p>To send a message from L2 to L1, what we would do on Starknet is:</p>
+<pre><code class="language-cairo noplayground">        fn send_message_felt(ref self: ContractState, to_address: EthAddress, my_felt: felt252) {
+            // Note here, we "serialize" my_felt, as the payload must be
+            // a `Span&lt;felt252&gt;`.
+            syscalls::send_message_to_l1_syscall(to_address.into(), array![my_felt].span())
+                .unwrap();
+        }
+</code></pre>
+<p>We simply build the payload and pass it, along with the L1 contract address, to
+the syscall function.</p>
+<p>On L1, the important part is to build the same payload sent by the L2. Then in
+your Solidity contract, you can call <code>consumeMessageFromL2</code> by passing the L2
+contract address and the payload. Please be aware that the L2 contract address
+expected by the <code>consumeMessageFromL2</code> is the address of the contract that sends
+the message on the L2 by calling <code>send_message_to_l1_syscall</code>.</p>
+<pre><code class="language-js">function consumeMessageFelt(
+    uint256 fromAddress,
+    uint256[] calldata payload
+)
+    external
+{
+    let messageHash = _snMessaging.consumeMessageFromL2(fromAddress, payload);
+
+    // You can use the message hash if you want here.
+
+    // We expect the payload to contain only a felt252 value (which is a uint256 in Solidity).
+    require(payload.length == 1, "Invalid payload");
+
+    uint256 my_felt = payload[0];
+
+    // From here, you can safely use `my_felt` as the message has been verified by StarknetMessaging.
+    require(my_felt &gt; 0, "Invalid value");
+}
+</code></pre>
+<p>As you can see, in this context we don’t have to verify which contract from L2
+is sending the message (as we do on the L2 to verify which contract from L1 is
+sending the message). But we are actually using the <code>consumeMessageFromL2</code> of
+the <code>StarknetCore</code> contract to validate the inputs (the contract address on L2
+and the payload) to ensure we are only consuming valid messages.</p>
+<blockquote>
+<p><strong>Note:</strong> The <code>consumeMessageFromL2</code> function of the <code>StarknetCore</code> contract
+is expected to be called from a Solidity contract, and not directly on the
+<code>StarknetCore</code> contract. The reason for that is because the <code>StarknetCore</code>
+contract is using <code>msg.sender</code> to actually compute the hash of the message.
+And this <code>msg.sender</code> must correspond to the <code>to_address</code> field that is given
+to the function <code>send_message_to_l1_syscall</code> that is called on Starknet.</p>
+</blockquote>
+<h2 id="testing-l1-handlers"><a class="header" href="#testing-l1-handlers">Testing L1 Handlers</a></h2>
+<p>Testing <code>#[l1_handler]</code> functions is critical because they are your contract’s
+entry point for messages from L1. Without proper testing, vulnerabilities in
+<code>from_address</code> validation could allow attackers to forge deposits or mint
+unlimited tokens.</p>
+<p>Starknet Foundry provides the <code>L1HandlerTrait</code> to simulate L1 messages arriving
+at your contract—without needing actual L1 infrastructure.</p>
+<h3 id="why-from_address-validation-is-critical"><a class="header" href="#why-from_address-validation-is-critical">Why <code>from_address</code> Validation is Critical</a></h3>
+<p>Here’s the key security insight: <strong>anyone can call <code>sendMessageToL2</code> on the
+StarknetCore contract</strong>. The <code>from_address</code> parameter is the <em>only</em> defense
+against forged messages.</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use starknet::ContractAddress;
+</span><span class="boring">
+</span><span class="boring">#[starknet::interface]
+</span><span class="boring">pub trait IBridge&lt;TContractState&gt; {
+</span><span class="boring">    fn get_l1_bridge(self: @TContractState) -&gt; felt252;
+</span><span class="boring">    fn get_balance(self: @TContractState, account: ContractAddress) -&gt; u256;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[starknet::contract]
+</span><span class="boring">pub mod Bridge {
+</span><span class="boring">    use core::num::traits::Zero;
+</span><span class="boring">    use starknet::ContractAddress;
+</span><span class="boring">    use starknet::storage::{
+</span><span class="boring">        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+</span><span class="boring">        StoragePointerWriteAccess,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    #[storage]
+</span><span class="boring">    struct Storage {
+</span><span class="boring">        l1_bridge_address: felt252,
+</span><span class="boring">        balances: Map&lt;ContractAddress, u256&gt;,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[constructor]
+</span><span class="boring">    fn constructor(ref self: ContractState, l1_bridge_address: felt252) {
+</span><span class="boring">        self.l1_bridge_address.write(l1_bridge_address);
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    /// Handles deposit messages from L1.
+    /// CRITICAL: Always verify from_address to prevent unauthorized deposits.
+    #[l1_handler]
+    fn handle_deposit(
+        ref self: ContractState, from_address: felt252, recipient: ContractAddress, amount: u256,
+    ) {
+        // SECURITY: This check is the ONLY defense against forged messages.
+        // Anyone can call sendMessageToL2 on the Starknet Core Contract.
+        // Without this check, attackers could mint unlimited tokens.
+        assert!(from_address == self.l1_bridge_address.read(), "Unauthorized: invalid L1 sender");
+
+        // Validate recipient
+        assert!(!recipient.is_zero(), "Cannot deposit to zero address");
+
+        // Credit the recipient
+        let current_balance = self.balances.read(recipient);
+        self.balances.write(recipient, current_balance + amount);
+    }
+<span class="boring">
+</span><span class="boring">    #[abi(embed_v0)]
+</span><span class="boring">    impl BridgeImpl of super::IBridge&lt;ContractState&gt; {
+</span><span class="boring">        fn get_l1_bridge(self: @ContractState) -&gt; felt252 {
+</span><span class="boring">            self.l1_bridge_address.read()
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        fn get_balance(self: @ContractState, account: ContractAddress) -&gt; u256 {
+</span><span class="boring">            self.balances.read(account)
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>{{#label l1-handler-validation}} <span class="caption">Listing
+{{#ref l1-handler-validation}}: An L1 handler with critical from_address
+validation</span></p>
+<p>If you remove or weaken this check, an attacker could:</p>
+<ol>
+<li>Call <code>sendMessageToL2</code> with their own address as <code>from_address</code></li>
+<li>Pass any payload they want</li>
+<li>Have your contract process the forged message as if it came from the
+legitimate L1 bridge</li>
+</ol>
+<h3 id="testing-the-happy-path"><a class="header" href="#testing-the-happy-path">Testing the Happy Path</a></h3>
+<p>First, test that valid messages are processed correctly:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+</span><span class="boring">use starknet::{ContractAddress, contract_address_const};
+</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">
+</span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
+</span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
+</span><span class="boring">// An unauthorized L1 address
+</span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
+</span><span class="boring">
+</span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
+</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[test]
+fn test_l1_handler_valid_deposit() {
+    let (bridge, bridge_address) = deploy_bridge();
+    let recipient = contract_address_const::&lt;'recipient'&gt;();
+
+    // Initial balance should be zero
+    assert_eq!(bridge.get_balance(recipient), 0);
+
+    // Create an L1Handler to simulate message from L1
+    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+
+    // Serialize the payload: (recipient, amount_low, amount_high)
+    let amount: u256 = 1000;
+    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+
+    // Execute the L1 handler with the VALID L1 bridge address
+    l1_handler.execute(VALID_L1_BRIDGE, payload.span()).unwrap();
+
+    // Verify the deposit was credited
+    assert_eq!(bridge.get_balance(recipient), 1000);
+}
+<span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_rejects_unauthorized_sender() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">
+</span><span class="boring">    let amount: u256 = 1000;
+</span><span class="boring">    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+</span><span class="boring">
+</span><span class="boring">    // Attempt to execute from an UNAUTHORIZED address
+</span><span class="boring">    // This MUST fail - if it doesn't, the bridge is vulnerable!
+</span><span class="boring">    let result = l1_handler.execute(INVALID_L1_ADDRESS, payload.span());
+</span><span class="boring">
+</span><span class="boring">    // Verify the call failed (is_err() returns true)
+</span><span class="boring">    assert!(result.is_err(), "Should reject unauthorized sender");
+</span><span class="boring">
+</span><span class="boring">    // Verify balance wasn't credited
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 0, "Balance should remain zero");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_rejects_zero_address() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">
+</span><span class="boring">    let amount: u256 = 1000;
+</span><span class="boring">    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+</span><span class="boring">
+</span><span class="boring">    // Zero address should also be rejected
+</span><span class="boring">    let result = l1_handler.execute(0, payload.span());
+</span><span class="boring">
+</span><span class="boring">    // Verify the call failed
+</span><span class="boring">    assert!(result.is_err(), "Should reject zero address sender");
+</span><span class="boring">
+</span><span class="boring">    // Verify balance wasn't credited
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 0, "Balance should remain zero");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_accumulates_deposits() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    // First deposit
+</span><span class="boring">    let l1_handler1 = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">    let amount1: u256 = 500;
+</span><span class="boring">    let payload1 = array![recipient.into(), amount1.low.into(), amount1.high.into()];
+</span><span class="boring">    l1_handler1.execute(VALID_L1_BRIDGE, payload1.span()).unwrap();
+</span><span class="boring">
+</span><span class="boring">    // Second deposit (create new handler instance)
+</span><span class="boring">    let l1_handler2 = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">    let amount2: u256 = 300;
+</span><span class="boring">    let payload2 = array![recipient.into(), amount2.low.into(), amount2.high.into()];
+</span><span class="boring">    l1_handler2.execute(VALID_L1_BRIDGE, payload2.span()).unwrap();
+</span><span class="boring">
+</span><span class="boring">    // Total should be accumulated
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 800);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>{{#label l1-handler-test-valid}} <span class="caption">Listing
+{{#ref l1-handler-test-valid}}: Testing that valid L1 messages are
+processed</span></p>
+<p>The key steps:</p>
+<ol>
+<li>Deploy your contract with the expected L1 bridge address</li>
+<li>Create an <code>L1Handler</code> pointing to your handler function</li>
+<li>Serialize the payload (remember Cairo serde—<code>u256</code> needs two felts)</li>
+<li>Execute with the valid <code>from_address</code></li>
+<li>Verify the state changed correctly</li>
+</ol>
+<h3 id="testing-unauthorized-senders"><a class="header" href="#testing-unauthorized-senders">Testing Unauthorized Senders</a></h3>
+<p><strong>This is the most important test.</strong> Always verify that unauthorized addresses
+are rejected:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+</span><span class="boring">use starknet::{ContractAddress, contract_address_const};
+</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">
+</span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
+</span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
+</span><span class="boring">// An unauthorized L1 address
+</span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
+</span><span class="boring">
+</span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
+</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_valid_deposit() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    // Initial balance should be zero
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 0);
+</span><span class="boring">
+</span><span class="boring">    // Create an L1Handler to simulate message from L1
+</span><span class="boring">    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">
+</span><span class="boring">    // Serialize the payload: (recipient, amount_low, amount_high)
+</span><span class="boring">    let amount: u256 = 1000;
+</span><span class="boring">    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+</span><span class="boring">
+</span><span class="boring">    // Execute the L1 handler with the VALID L1 bridge address
+</span><span class="boring">    l1_handler.execute(VALID_L1_BRIDGE, payload.span()).unwrap();
+</span><span class="boring">
+</span><span class="boring">    // Verify the deposit was credited
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 1000);
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[test]
+fn test_l1_handler_rejects_unauthorized_sender() {
+    let (bridge, bridge_address) = deploy_bridge();
+    let recipient = contract_address_const::&lt;'recipient'&gt;();
+
+    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+
+    let amount: u256 = 1000;
+    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+
+    // Attempt to execute from an UNAUTHORIZED address
+    // This MUST fail - if it doesn't, the bridge is vulnerable!
+    let result = l1_handler.execute(INVALID_L1_ADDRESS, payload.span());
+
+    // Verify the call failed (is_err() returns true)
+    assert!(result.is_err(), "Should reject unauthorized sender");
+
+    // Verify balance wasn't credited
+    assert_eq!(bridge.get_balance(recipient), 0, "Balance should remain zero");
+}
+<span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_rejects_zero_address() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">
+</span><span class="boring">    let amount: u256 = 1000;
+</span><span class="boring">    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+</span><span class="boring">
+</span><span class="boring">    // Zero address should also be rejected
+</span><span class="boring">    let result = l1_handler.execute(0, payload.span());
+</span><span class="boring">
+</span><span class="boring">    // Verify the call failed
+</span><span class="boring">    assert!(result.is_err(), "Should reject zero address sender");
+</span><span class="boring">
+</span><span class="boring">    // Verify balance wasn't credited
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 0, "Balance should remain zero");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_accumulates_deposits() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    // First deposit
+</span><span class="boring">    let l1_handler1 = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">    let amount1: u256 = 500;
+</span><span class="boring">    let payload1 = array![recipient.into(), amount1.low.into(), amount1.high.into()];
+</span><span class="boring">    l1_handler1.execute(VALID_L1_BRIDGE, payload1.span()).unwrap();
+</span><span class="boring">
+</span><span class="boring">    // Second deposit (create new handler instance)
+</span><span class="boring">    let l1_handler2 = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">    let amount2: u256 = 300;
+</span><span class="boring">    let payload2 = array![recipient.into(), amount2.low.into(), amount2.high.into()];
+</span><span class="boring">    l1_handler2.execute(VALID_L1_BRIDGE, payload2.span()).unwrap();
+</span><span class="boring">
+</span><span class="boring">    // Total should be accumulated
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 800);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>{{#label l1-handler-test-reject}} <span class="caption">Listing
+{{#ref l1-handler-test-reject}}: Testing that unauthorized senders are
+rejected</span></p>
+<p>Notice how we:</p>
+<ol>
+<li>Execute with an invalid <code>from_address</code></li>
+<li>Check that the result is an error (<code>result.is_err()</code>)</li>
+<li>Verify no state changed (balance still zero)</li>
+</ol>
+<blockquote>
+<p><strong>Security Note</strong>: Always test multiple invalid addresses, including edge
+cases like zero address, off-by-one from the valid address, and random
+addresses. A single test isn’t enough—ensure your validation is robust.</p>
+</blockquote>
+<h3 id="testing-accumulated-operations"><a class="header" href="#testing-accumulated-operations">Testing Accumulated Operations</a></h3>
+<p>For handlers that can be called multiple times, verify state accumulates
+correctly:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+</span><span class="boring">use starknet::{ContractAddress, contract_address_const};
+</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">
+</span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
+</span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
+</span><span class="boring">// An unauthorized L1 address
+</span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
+</span><span class="boring">
+</span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
+</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_valid_deposit() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    // Initial balance should be zero
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 0);
+</span><span class="boring">
+</span><span class="boring">    // Create an L1Handler to simulate message from L1
+</span><span class="boring">    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">
+</span><span class="boring">    // Serialize the payload: (recipient, amount_low, amount_high)
+</span><span class="boring">    let amount: u256 = 1000;
+</span><span class="boring">    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+</span><span class="boring">
+</span><span class="boring">    // Execute the L1 handler with the VALID L1 bridge address
+</span><span class="boring">    l1_handler.execute(VALID_L1_BRIDGE, payload.span()).unwrap();
+</span><span class="boring">
+</span><span class="boring">    // Verify the deposit was credited
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 1000);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_rejects_unauthorized_sender() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">
+</span><span class="boring">    let amount: u256 = 1000;
+</span><span class="boring">    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+</span><span class="boring">
+</span><span class="boring">    // Attempt to execute from an UNAUTHORIZED address
+</span><span class="boring">    // This MUST fail - if it doesn't, the bridge is vulnerable!
+</span><span class="boring">    let result = l1_handler.execute(INVALID_L1_ADDRESS, payload.span());
+</span><span class="boring">
+</span><span class="boring">    // Verify the call failed (is_err() returns true)
+</span><span class="boring">    assert!(result.is_err(), "Should reject unauthorized sender");
+</span><span class="boring">
+</span><span class="boring">    // Verify balance wasn't credited
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 0, "Balance should remain zero");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_l1_handler_rejects_zero_address() {
+</span><span class="boring">    let (bridge, bridge_address) = deploy_bridge();
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let l1_handler = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+</span><span class="boring">
+</span><span class="boring">    let amount: u256 = 1000;
+</span><span class="boring">    let payload = array![recipient.into(), amount.low.into(), amount.high.into()];
+</span><span class="boring">
+</span><span class="boring">    // Zero address should also be rejected
+</span><span class="boring">    let result = l1_handler.execute(0, payload.span());
+</span><span class="boring">
+</span><span class="boring">    // Verify the call failed
+</span><span class="boring">    assert!(result.is_err(), "Should reject zero address sender");
+</span><span class="boring">
+</span><span class="boring">    // Verify balance wasn't credited
+</span><span class="boring">    assert_eq!(bridge.get_balance(recipient), 0, "Balance should remain zero");
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[test]
+fn test_l1_handler_accumulates_deposits() {
+    let (bridge, bridge_address) = deploy_bridge();
+    let recipient = contract_address_const::&lt;'recipient'&gt;();
+
+    // First deposit
+    let l1_handler1 = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+    let amount1: u256 = 500;
+    let payload1 = array![recipient.into(), amount1.low.into(), amount1.high.into()];
+    l1_handler1.execute(VALID_L1_BRIDGE, payload1.span()).unwrap();
+
+    // Second deposit (create new handler instance)
+    let l1_handler2 = L1HandlerTrait::new(bridge_address, selector!("handle_deposit"));
+    let amount2: u256 = 300;
+    let payload2 = array![recipient.into(), amount2.low.into(), amount2.high.into()];
+    l1_handler2.execute(VALID_L1_BRIDGE, payload2.span()).unwrap();
+
+    // Total should be accumulated
+    assert_eq!(bridge.get_balance(recipient), 800);
+}
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p>{{#label l1-handler-test-multiple}} <span class="caption">Listing
+{{#ref l1-handler-test-multiple}}: Testing multiple L1 messages accumulate
+correctly</span></p>
+<h3 id="payload-serialization-in-tests"><a class="header" href="#payload-serialization-in-tests">Payload Serialization in Tests</a></h3>
+<p>Remember that Cairo serializes types according to the Serde specification. When
+building test payloads:</p>
+<ul>
+<li><code>felt252</code>: single element</li>
+<li><code>u256</code>: two elements (low, high)</li>
+<li><code>ContractAddress</code>: single element (as felt252)</li>
+<li>Structs: serialize each field in order</li>
+</ul>
+<pre><code class="language-cairo noplayground">// A u256 amount of 1000
+let amount: u256 = 1000;
+let payload = array![
+    recipient.into(),      // ContractAddress -&gt; felt252
+    amount.low.into(),     // u256 low part
+    amount.high.into(),    // u256 high part
+];
+</code></pre>
+<h3 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h3>
+<ol>
+<li><strong>Test rejection first</strong> — The security test (rejecting unauthorized
+addresses) is more important than the happy path</li>
+<li><strong>Test multiple invalid addresses</strong> — Zero, off-by-one, random values</li>
+<li><strong>Verify no side effects on rejection</strong> — State shouldn’t change when
+messages are rejected</li>
+<li><strong>Document your L1 address</strong> — Make it clear which Ethereum address is the
+trusted source</li>
+</ol>
+<p>For more details on the <code>L1Handler</code> API, see the
+<a href="https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html">Starknet Foundry cheatcodes documentation</a>.</p>
+<h2 id="cairo-serde"><a class="header" href="#cairo-serde">Cairo Serde</a></h2>
+<p>Before sending messages between L1 and L2, you must remember that Starknet
+contracts, written in Cairo, can only understand serialized data. And serialized
+data is always an array of <code>felt252</code>. In Solidity we have <code>uint256</code> type, and
+<code>felt252</code> is approximately 4 bits smaller than <code>uint256</code>. So we have to pay
+attention to the values contained in the payload of the messages we are sending.
+If, on L1, we build a message with values above the maximum <code>felt252</code>, the
+message will be stuck and never consumed on L2.</p>
+<p>So for instance, an actual <code>uint256</code> value in Cairo is represented by a struct
+like:</p>
+<pre><code class="language-cairo does_not_compile">struct u256 {
+    low: u128,
+    high: u128,
+}
+</code></pre>
+<p>which will be serialized as <strong>TWO</strong> felts, one for <code>low</code>, and one for <code>high</code>.
+This means that to send only one <code>u256</code> to Cairo, you’ll need to send a payload
+from L1 with <strong>TWO</strong> values.</p>
+<pre><code class="language-js">uint256[] memory payload = new uint256[](2);
+// Let's send the value 1 as a u256 in cairo: low = 1, high = 0.
+payload[0] = 1;
+payload[1] = 0;
+</code></pre>
+<p>If you want to learn more about the messaging mechanism, you can visit the
+<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/">Starknet documentation</a>.</p>
+<p>You can also find a <a href="https://github.com/glihm/starknet-messaging-dev">detailed guide here</a> to test the
+messaging system locally.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch103-03-upgradeability.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch103-05-oracle-interactions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch103-03-upgradeability.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch103-05-oracle-interactions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-2ea63be0.js"></script>
+        <script src="book-3560cbe9.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/chat-9488d817.js"></script>
+        <script src="theme/js/version-switcher-f235208f.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

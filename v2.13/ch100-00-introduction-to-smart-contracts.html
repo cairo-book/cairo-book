@@ -1,0 +1,586 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction to Smart Contracts - The Cairo Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="The Cairo Programming Language. A comprehensive documentation for Cairo, the smart contract language for Starknet.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-cc3b6b41.svg">
+        <link rel="shortcut icon" href="favicon-49aa8fd0.png">
+        <link rel="stylesheet" href="css/variables-911a411d.css">
+        <link rel="stylesheet" href="css/general-0dec1c6d.css">
+        <link rel="stylesheet" href="css/chrome-7a2a5ef9.css">
+        <link rel="stylesheet" href="css/print-99287a32.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-5a33c36c.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-11bd09e3.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/css/last-changed-23dd9341.css">
+        <link rel="stylesheet" href="theme/css/chat-fc4b4660.css">
+        <link rel="stylesheet" href="theme/css/version-switcher-9f8a4361.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-f2210142.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-136cdb3f.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Cairo Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/cairo-book/cairo-book.github.io/edit/main/src/ch100-00-introduction-to-smart-contracts.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="meta-explore-the-fundamentals-of-smart-contracts-in-this-comprehensive-introduction-tailored-for-developers-using-cairo-learn-how-smart-contracts-work-and-their-role-in-blockchain-technology"><a class="header" href="#meta-explore-the-fundamentals-of-smart-contracts-in-this-comprehensive-introduction-tailored-for-developers-using-cairo-learn-how-smart-contracts-work-and-their-role-in-blockchain-technology">meta:
+“Explore the fundamentals of smart contracts in this comprehensive
+introduction, tailored for developers using Cairo. Learn how smart contracts
+work and their role in blockchain technology.”</a></h2>
+<h1 id="introduction-to-smart-contracts"><a class="header" href="#introduction-to-smart-contracts">Introduction to Smart Contracts</a></h1>
+<p>This chapter will give you a high level introduction to what smart contracts
+are, what they are used for, and why blockchain developers would use Cairo and
+Starknet. If you are already familiar with blockchain programming, feel free to
+skip this chapter. The last part might still be interesting though.</p>
+<h2 id="smart-contracts---introduction"><a class="header" href="#smart-contracts---introduction">Smart Contracts - Introduction</a></h2>
+<p>Smart contracts gained popularity and became more widespread with the birth of
+Ethereum. Smart contracts are essentially programs deployed on a blockchain. The
+term “smart contract” is somewhat misleading, as they are neither “smart” nor
+“contracts” but rather code and instructions that are executed based on specific
+inputs. They primarily consist of two components: storage and functions. Once
+deployed, users can interact with smart contracts by initiating blockchain
+transactions containing execution data (which function to call and with what
+input). Smart contracts can modify and read the storage of the underlying
+blockchain. A smart contract has its own address and is considered a blockchain
+account, meaning it can hold tokens.</p>
+<p>The programming language used to write smart contracts varies depending on the
+blockchain. For example, on Ethereum and the <a href="https://ethereum.org/en/developers/docs/evm/">EVM-compatible ecosystem</a>,
+the most commonly used language is Solidity, while on Starknet, it is Cairo. The
+way the code is compiled also differs based on the blockchain. On Ethereum,
+Solidity is compiled into bytecode. On Starknet, Cairo is compiled into Sierra
+and then into Cairo Assembly (CASM).</p>
+<p>Smart contracts possess several unique characteristics. They are
+<strong>permissionless</strong>, meaning anyone can deploy a smart contract on the network
+(within the context of a decentralized blockchain, of course). Smart contracts
+are also <strong>transparent</strong>; the data stored by the smart contract is accessible to
+anyone. The code that composes the contract can also be transparent, enabling
+<strong>composability</strong>. This allows developers to write smart contracts that use
+other smart contracts. Smart contracts can only access and interact with data
+from the blockchain they are deployed on. They require third-party software
+(called <em>oracles</em>) to access external data (the price of a token for instance).</p>
+<p>For developers to build smart contracts that can interact with each other, it is
+required to know what the other contracts look like. Hence, Ethereum developers
+started to build standards for smart contract development, the <code>ERCxx</code>. The two
+most used and famous standards are the <code>ERC20</code>, used to build tokens like
+<code>USDC</code>, <code>DAI</code> or <code>STARK</code>, and the <code>ERC721</code>, for NFTs (Non-Fungible Tokens) like
+<code>CryptoPunks</code> or <code>Everai</code>.</p>
+<h2 id="smart-contracts---use-cases"><a class="header" href="#smart-contracts---use-cases">Smart Contracts - Use Cases</a></h2>
+<p>There are many possible use cases for smart contracts. The only limits are the
+technical constraints of the blockchain and the creativity of developers.</p>
+<h3 id="defi"><a class="header" href="#defi">DeFi</a></h3>
+<p>For now, the principal use case for smart contracts is similar to that of
+Ethereum or Bitcoin, which is essentially handling money. In the context of the
+alternative payment system promised by Bitcoin, smart contracts on Ethereum
+enable the creation of decentralized financial applications that no longer rely
+on traditional financial intermediaries. This is what we call DeFi
+(decentralized finance). DeFi consists of various projects such as
+lending/borrowing applications, decentralized exchanges (DEX), on-chain
+derivatives, stablecoins, decentralized hedge funds, insurance, and many more.</p>
+<h3 id="tokenization"><a class="header" href="#tokenization">Tokenization</a></h3>
+<p>Smart contracts can facilitate the tokenization of real-world assets, such as
+real estate, art, or precious metals. Tokenization divides an asset into digital
+tokens, which can be easily traded and managed on blockchain platforms. This can
+increase liquidity, enable fractional ownership, and simplify the buying and
+selling process.</p>
+<h3 id="voting"><a class="header" href="#voting">Voting</a></h3>
+<p>Smart contracts can be used to create secure and transparent voting systems.
+Votes can be recorded on the blockchain, ensuring immutability and transparency.
+The smart contract can then automatically tally the votes and declare the
+results, minimizing the potential for fraud or manipulation.</p>
+<h3 id="royalties"><a class="header" href="#royalties">Royalties</a></h3>
+<p>Smart contracts can automate royalty payments for artists, musicians, and other
+content creators. When a piece of content is consumed or sold, the smart
+contract can automatically calculate and distribute the royalties to the
+rightful owners, ensuring fair compensation and reducing the need for
+intermediaries.</p>
+<h3 id="decentralized-identities-dids"><a class="header" href="#decentralized-identities-dids">Decentralized Identities DIDs</a></h3>
+<p>Smart contracts can be used to create and manage digital identities, allowing
+individuals to control their personal information and share it with third
+parties securely. The smart contract could verify the authenticity of a user’s
+identity and automatically grant or revoke access to specific services based on
+the user’s credentials.</p>
+<br />
+<br />
+As Ethereum continues to mature, we can expect the use cases and applications of smart contracts to expand further, bringing about exciting new opportunities and reshaping traditional systems for the better.
+<h2 id="the-rise-of-starknet-and-cairo"><a class="header" href="#the-rise-of-starknet-and-cairo">The Rise of Starknet and Cairo</a></h2>
+<p>Ethereum, being the most widely used and resilient smart contract platform,
+became a victim of its own success. With the rapid adoption of some previously
+mentioned use cases, mainly DeFi, the cost of performing transactions became
+extremely high, rendering the network almost unusable. Engineers and researchers
+in the ecosystem began working on solutions to address this scalability issue.</p>
+<p>A famous trilemma called The Blockchain Trilemma in the blockchain space states
+that it is hard to achieve a high level of scalability, decentralization, and
+security simultaneously; trade-offs must be made. Ethereum is at the
+intersection of decentralization and security. Eventually, it was decided that
+Ethereum’s purpose would be to serve as a secure settlement layer, while complex
+computations would be offloaded to other networks built on top of Ethereum.
+These are called Layer 2s (L2s).</p>
+<p>The two primary types of L2s are optimistic rollups and validity rollups. Both
+approaches involve compressing and batching numerous transactions together,
+computing the new state, and settling the result on Ethereum (L1). The
+difference lies in the way the result is settled on L1. For optimistic rollups,
+the new state is considered valid by default, but there is a 7-day window for
+nodes to identify malicious transactions.</p>
+<p>In contrast, validity rollups, such as Starknet, use cryptography to prove that
+the new state has been correctly computed. This is the purpose of STARKs, this
+cryptographic technology could permit validity rollups to scale significantly
+more than optimistic rollups. You can learn more about STARKs from Starkware’s
+Medium <a href="https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a">article</a>, which serves as a good primer.</p>
+<blockquote>
+<p>Starknet’s architecture is thoroughly described in the
+<a href="https://docs.starknet.io/documentation/architecture_and_concepts/">Starknet documentation</a>,
+which is a great resource to learn more about the Starknet network.</p>
+</blockquote>
+<p>Remember Cairo? It is, in fact, a language developed specifically to work with
+STARKs and make them general-purpose. With Cairo, we can write <strong>provable
+code</strong>. In the context of Starknet, this allows proving the correctness of
+computations from one state to another.</p>
+<p>Unlike most (if not all) of Starknet’s competitors that chose to use the EVM
+(either as-is or adapted) as a base layer, Starknet employs its own VM. This
+frees developers from the constraints of the EVM, opening up a broader range of
+possibilities. Coupled with decreased transaction costs, the combination of
+Starknet and Cairo creates an exciting playground for developers. Native account
+abstraction enables more complex logic for accounts, that we call “Smart
+Accounts”, and transaction flows. Emerging use cases include <strong>transparent AI</strong>
+and machine learning applications. Finally, <strong>blockchain games</strong> can be
+developed entirely <strong>on-chain</strong>. Starknet has been specifically designed to
+maximize the capabilities of STARK proofs for optimal scalability.</p>
+<blockquote>
+<p>Learn more about Account Abstraction in the
+<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Account_Abstraction/introduction/">Starknet documentation</a>.</p>
+</blockquote>
+<h2 id="cairo-programs-and-starknet-smart-contracts-what-is-the-difference"><a class="header" href="#cairo-programs-and-starknet-smart-contracts-what-is-the-difference">Cairo Programs and Starknet Smart Contracts: What Is the Difference?</a></h2>
+<p>Starknet contracts are a special superset of Cairo programs, so the concepts
+previously learned in this book are still applicable to write Starknet
+contracts. As you may have already noticed, a Cairo program must always have a
+<code>main</code> function that serves as the entry point for this program:</p>
+<pre><code class="language-cairo">fn main() {}
+</code></pre>
+<p>Contracts deployed on the Starknet network are essentially programs that are run
+by the sequencer, and as such, have access to Starknet’s state. Contracts do not
+have a <code>main</code> function but one or multiple functions that can serve as entry
+points.</p>
+<p>Starknet contracts are defined within <a href="./ch07-02-defining-modules-to-control-scope.html">modules</a>. For a module to
+be handled as a contract by the compiler, it must be annotated with the
+<code>#[starknet::contract]</code> attribute.</p>
+<h2 id="anatomy-of-a-simple-contract"><a class="header" href="#anatomy-of-a-simple-contract">Anatomy of a Simple Contract</a></h2>
+<p>This chapter will introduce you to the basics of Starknet contracts using a very
+simple smart contract as example. You will learn how to write a contract that
+allows anyone to store a single number on the Starknet blockchain.</p>
+<p>Let’s consider the following contract for the whole chapter. It might not be
+easy to understand it all at once, but we will go through it step by step:</p>
+<pre><code class="language-cairo noplayground">#[starknet::interface]
+trait ISimpleStorage&lt;TContractState&gt; {
+    fn set(ref self: TContractState, x: u128);
+    fn get(self: @TContractState) -&gt; u128;
+}
+
+#[starknet::contract]
+mod SimpleStorage {
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
+    #[storage]
+    struct Storage {
+        stored_data: u128,
+    }
+
+    #[abi(embed_v0)]
+    impl SimpleStorage of super::ISimpleStorage&lt;ContractState&gt; {
+        fn set(ref self: ContractState, x: u128) {
+            self.stored_data.write(x);
+        }
+
+        fn get(self: @ContractState) -&gt; u128 {
+            self.stored_data.read()
+        }
+    }
+}
+</code></pre>
+<p>{{#label simple-contract}} <span class="caption">Listing
+{{#ref simple-contract}}: A simple storage contract</span></p>
+<h3 id="what-is-this-contract"><a class="header" href="#what-is-this-contract">What Is this Contract?</a></h3>
+<p>Contracts are defined by encapsulating state and logic within a module annotated
+with the <code>#[starknet::contract]</code> attribute.</p>
+<p>The state is defined within the <code>Storage</code> struct, and is always initialized
+empty. Here, our struct contains a single field called <code>stored_data</code> of type
+<code>u128</code> (unsigned integer of 128 bits), indicating that our contract can store
+any number between 0 and \( {2^{128}} - 1 \).</p>
+<p>The logic is defined by functions that interact with the state. Here, our
+contract defines and publicly exposes the functions <code>set</code> and <code>get</code> that can be
+used to modify or retrieve the value of the stored variable. You can think of it
+as a single slot in a database that you can query and modify by calling
+functions of the code that manages the database.</p>
+<h3 id="the-interface-the-contracts-blueprint"><a class="header" href="#the-interface-the-contracts-blueprint">The Interface: the Contract’s Blueprint</a></h3>
+<pre><code class="language-cairo noplayground">#[starknet::interface]
+trait ISimpleStorage&lt;TContractState&gt; {
+    fn set(ref self: TContractState, x: u128);
+    fn get(self: @TContractState) -&gt; u128;
+}
+</code></pre>
+<p>{{#label interface}} <span class="caption">Listing {{#ref interface}}: A basic
+contract interface</span></p>
+<p>Interfaces represent the blueprint of the contract. They define the functions
+that the contract exposes to the outside world, without including the function
+body. In Cairo, they’re defined by annotating a trait with the
+<code>#[starknet::interface]</code> attribute. All functions of the trait are considered
+public functions of any contract that implements this trait, and are callable
+from the outside world.</p>
+<blockquote>
+<p>The contract constructor is not part of the interface. Nor are internal
+functions.</p>
+</blockquote>
+<p>All contract interfaces use a generic type for the <code>self</code> parameter,
+representing the contract state. We chose to name this generic parameter
+<code>TContractState</code> in our interface, but this is not enforced and any name can be
+chosen.</p>
+<p>In our interface, note the generic type <code>TContractState</code> of the <code>self</code> argument
+which is passed by reference to the <code>set</code> function. Seeing the <code>self</code> argument
+passed in a contract function tells us that this function can access the state
+of the contract. The <code>ref</code> modifier implies that <code>self</code> may be modified, meaning
+that the storage variables of the contract may be modified inside the <code>set</code>
+function.</p>
+<p>On the other hand, the <code>get</code> function takes a snapshot of <code>TContractState</code>,
+which immediately tells us that it does not modify the state (and indeed, the
+compiler will complain if we try to modify storage inside the <code>get</code> function).</p>
+<p>By leveraging the <a href="./ch08-02-traits-in-cairo.html">traits &amp; impls</a> mechanism from
+Cairo, we can make sure that the actual implementation of the contract matches
+its interface. In fact, you will get a compilation error if your contract
+doesn’t conform with the declared interface. For example, Listing
+{{#ref wrong-impl}} shows a wrong implementation of the <code>ISimpleStorage</code>
+interface, containing a slightly different <code>set</code> function that doesn’t have the
+same signature.</p>
+<pre><code class="language-cairo noplayground">    #[abi(embed_v0)]
+    impl SimpleStorage of super::ISimpleStorage&lt;ContractState&gt; {
+        fn set(ref self: ContractState) {}
+        fn get(self: @ContractState) -&gt; u128 {
+            self.stored_data.read()
+        }
+    }
+</code></pre>
+<p>{{#label wrong-impl}} <span class="caption">Listing {{#ref wrong-impl}}: A wrong
+implementation of the interface of the contract. This does not compile, as the
+signature of <code>set</code> doesn’t match the trait’s.</span></p>
+<p>Trying to compile a contract using this implementation will result in the
+following error:</p>
+<pre><code class="language-shell">$ scarb execute 
+   Compiling listing_99_02 v0.1.0 (listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/Scarb.toml)
+error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
+ --&gt; listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/src/lib.cairo:23:16
+        fn set(ref self: ContractState) {}
+               ^^^^^^^^^^^^^^^^^^^^^^^
+
+error: Wrong number of arguments. Expected 2, found: 1
+ --&gt; listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/src/lib.cairo:23:9
+        fn set(ref self: ContractState) {}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: could not compile `listing_99_02` due to 2 previous errors
+error: `scarb` command exited with error
+
+</code></pre>
+<h3 id="public-functions-defined-in-an-implementation-block"><a class="header" href="#public-functions-defined-in-an-implementation-block">Public Functions Defined in an Implementation Block</a></h3>
+<p>Before we explore things further down, let’s define some terminology.</p>
+<ul>
+<li>
+<p>In the context of Starknet, a <em>public function</em> is a function that is exposed
+to the outside world. A public function can be called by anyone, either from
+outside the contract or from within the contract itself. In the example above,
+<code>set</code> and <code>get</code> are public functions.</p>
+</li>
+<li>
+<p>What we call an <em>external</em> function is a public function that can be directly
+invoked through a Starknet transaction and that can mutate the state of the
+contract. <code>set</code> is an external function.</p>
+</li>
+<li>
+<p>A <em>view</em> function is a public function that is typically read-only and cannot
+mutate the state of the contract. However, this limitation is only enforced by
+the compiler, and not by Starknet itself. We will discuss the implications of
+this in a later section. <code>get</code> is a view function.</p>
+</li>
+</ul>
+<pre><code class="language-cairo noplayground">    #[abi(embed_v0)]
+    impl SimpleStorage of super::ISimpleStorage&lt;ContractState&gt; {
+        fn set(ref self: ContractState, x: u128) {
+            self.stored_data.write(x);
+        }
+
+        fn get(self: @ContractState) -&gt; u128 {
+            self.stored_data.read()
+        }
+    }
+</code></pre>
+<p>{{#label implementation}} <span class="caption">Listing {{#ref implementation}}:
+<code>SimpleStorage</code> implementation</span></p>
+<p>Since the contract interface is defined as the <code>ISimpleStorage</code> trait, in order
+to match the interface, the public functions of the contract must be defined in
+an implementation of this trait — which allows us to make sure that the
+implementation of the contract matches its interface.</p>
+<p>However, simply defining the functions in the implementation block is not
+enough. The implementation block must be annotated with the <code>#[abi(embed_v0)]</code>
+attribute. This attribute exposes the functions defined in this implementation
+to the outside world — forget to add it and your functions will not be callable
+from the outside. All functions defined in a block marked as <code>#[abi(embed_v0)]</code>
+are consequently <em>public functions</em>.</p>
+<p>Because the <code>SimpleStorage</code> contract is defined as a module, we need to access
+the interface defined in the parent module. We can either bring it to the
+current scope with the <code>use</code> keyword, or refer to it directly using <code>super</code>.</p>
+<p>When writing the implementation of an interface, the <code>self</code> parameter in the
+trait methods <strong>must</strong> be of type <code>ContractState</code>. The <code>ContractState</code> type is
+generated by the compiler, and gives access to the storage variables defined in
+the <code>Storage</code> struct. Additionally, <code>ContractState</code> gives us the ability to emit
+events. The name <code>ContractState</code> is not surprising, as it’s a representation of
+the contract’s state, which is what we think of <code>self</code> in the contract interface
+trait. When <code>self</code> is a snapshot of <code>ContractState</code>, only read access is
+allowed, and emitting events is not possible.</p>
+<h3 id="accessing-and-modifying-the-contracts-state"><a class="header" href="#accessing-and-modifying-the-contracts-state">Accessing and Modifying the Contract’s State</a></h3>
+<p>Two methods are commonly used to access or modify the state of a contract:</p>
+<ul>
+<li><code>read</code>, which returns the value of a storage variable. This method is called
+on the variable itself and does not take any argument.</li>
+</ul>
+<pre><code class="language-cairo noplayground">            self.stored_data.read()
+</code></pre>
+<ul>
+<li><code>write</code>, which allows to write a new value in a storage slot. This method is
+also called on the variable itself and takes one argument, which is the value
+to be written. Note that <code>write</code> may take more than one argument, depending on
+the type of the storage variable. For example, writing on a mapping requires 2
+arguments: the key and the value to be written.</li>
+</ul>
+<pre><code class="language-cairo noplayground">            self.stored_data.write(x);
+</code></pre>
+<blockquote>
+<p>Reminder: if the contract state is passed as a snapshot with <code>@</code> instead of
+passed by reference with <code>ref</code>, attempting to modify the contract state will
+result in a compilation error.</p>
+</blockquote>
+<p>This contract does not do much apart from allowing anyone to store a single
+number that is accessible by anyone in the world. Anyone could call <code>set</code> again
+with a different value and overwrite the current number. Nevertheless, each
+value stored in the storage of the contract will still be stored in the history
+of the blockchain. Later in this book, you will see how you can impose access
+restrictions so that only you can alter the number.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="appendix-06-useful-development-tools.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch100-01-contracts-classes-and-instances.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="appendix-06-useful-development-tools.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch100-01-contracts-classes-and-instances.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-2ea63be0.js"></script>
+        <script src="book-3560cbe9.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/chat-9488d817.js"></script>
+        <script src="theme/js/version-switcher-f235208f.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant User
+    participant Compiler
+    participant StorageBase
+    participant StoragePath
+    participant StoragePointer
+    participant ContractStorage
+
+    User->>Compiler: self.owner.name.read()
+    Compiler->>StorageBase: Get base address for 'owner'
+    StorageBase->>StoragePointer: Create pointer for 'name'
+    StoragePointer->>ContractStorage: Read value
+    ContractStorage-->>User: Return value
+
+    User->>Compiler: self.user_values.entry(addr).read()
+    Compiler->>StorageBase: Get base address for 'user_values'
+    StorageBase->>StoragePath: Create initial path
+    StoragePath->>StoragePath: Hash with 'addr'
+    StoragePath->>StoragePointer: Convert to pointer
+    StoragePointer->>ContractStorage: Read value
+    ContractStorage-->>User: Return value
+
+    User->>Compiler: self.user_values.entry(addr).write(value)
+    Compiler->>StorageBase: Get base address for 'user_values'
+    StorageBase->>StoragePath: Create initial path
+    StoragePath->>StoragePath: Hash with 'addr'
+    StoragePath->>StoragePointer: Convert to pointer
+    StoragePointer->>ContractStorage: Write value
+    ContractStorage-->>User: Confirm write
