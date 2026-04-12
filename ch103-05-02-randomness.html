@@ -468,7 +468,7 @@ mod DiceGame {
 
         // Settle randomness for the current round using Cartridge VRF.
         // Requires the caller to prefix the multicall with:
-        //   VRF.request_random(caller: &lt;this contract&gt;, source: Source::Nonce(&lt;this contract&gt;))
+        // VRF.request_random(caller: &lt;this contract&gt;, source: Source::Nonce(&lt;this contract&gt;))
         fn settle_random(ref self: ContractState) {
             self.ownable.assert_only_owner();
             // Consume a random value tied to this contract's own nonce

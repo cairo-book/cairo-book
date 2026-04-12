@@ -1347,8 +1347,8 @@ fn main() {
     let product = 4_u128 * 30_u128;
 
     // division
-    let quotient = 56_u128 / 32_u128; //result is 1
-    let quotient = 64_u128 / 32_u128; //result is 2
+    let quotient = 56_u128 / 32_u128; // result is 1
+    let quotient = 64_u128 / 32_u128; // result is 2
 
     // remainder
     let remainder = 43_u128 % 5_u128; // result is 3
@@ -19044,11 +19044,11 @@ struct IERC20LibraryDispatcher {
 impl IERC20LibraryDispatcherImpl of IERC20DispatcherTrait&lt;IERC20LibraryDispatcher&gt; {
     fn name(
         self: IERC20LibraryDispatcher,
-    ) -&gt; felt252 { // starknet::syscalls::library_call_syscall  is called in here
+    ) -&gt; felt252 { // starknet::syscalls::library_call_syscall is called in here
     }
     fn transfer(
         self: IERC20LibraryDispatcher, recipient: ContractAddress, amount: u256,
-    ) { // starknet::syscalls::library_call_syscall  is called in here
+    ) { // starknet::syscalls::library_call_syscall is called in here
     }
 }
 </code></pre>
@@ -21659,7 +21659,7 @@ mod DiceGame {
 
         // Settle randomness for the current round using Cartridge VRF.
         // Requires the caller to prefix the multicall with:
-        //   VRF.request_random(caller: &lt;this contract&gt;, source: Source::Nonce(&lt;this contract&gt;))
+        // VRF.request_random(caller: &lt;this contract&gt;, source: Source::Nonce(&lt;this contract&gt;))
         fn settle_random(ref self: ContractState) {
             self.ownable.assert_only_owner();
             // Consume a random value tied to this contract's own nonce
