@@ -31,13 +31,15 @@ if [[ ! -x ${MDBOOK_BIN} ]]; then
 	echo ""
 	echo "=== Downloading mdbook v${MDBOOK_VERSION} ==="
 	ARCH=$(uname -m)
-	OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+	OS=$(uname -s)
+	OS=$(tr '[:upper:]' '[:lower:]' <<<"${OS}")
 	if [[ ${OS} == "darwin" ]]; then
 		PLATFORM="${ARCH}-apple-darwin"
 	else
 		PLATFORM="${ARCH}-unknown-linux-gnu"
 	fi
-	curl -sSL "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-${PLATFORM}.tar.gz" | tar -xz -C /tmp/
+	curl -sSL "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-${PLATFORM}.tar.gz" -o /tmp/mdbook.tar.gz
+	tar -xzf /tmp/mdbook.tar.gz -C /tmp/
 	mv /tmp/mdbook "${MDBOOK_BIN}"
 fi
 echo "Using mdbook v${MDBOOK_VERSION}"
