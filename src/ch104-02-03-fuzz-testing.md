@@ -133,7 +133,7 @@ assert_eq!(result_ab, result_ba);
 ### Idempotence
 
 ```cairo,noplayground
-// Doing it twice is same as doing it once
+// Doing it twice is the same as doing it once
 contract.pause();
 contract.pause(); // Should not fail or change state
 assert!(contract.is_paused());

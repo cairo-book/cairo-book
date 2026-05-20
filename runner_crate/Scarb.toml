@@ -10,7 +10,7 @@ edition = "2024_07"
 [cairo]
 enable-gas = false
 
-# Dont make this executable - we use it for quiz validation.
+# Don't make this executable - we use it for quiz validation.
 [dependencies]
 cairo_execute = "2.16.1"
 
