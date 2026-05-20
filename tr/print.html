@@ -303,7 +303,7 @@ scalable, verifiable computation without relying on trusted setups</p>
 </ul>
 <p>If you have any questions, feedback or comments, you can reach out through
 <a href="https://github.com/cairo-book/cairo-book/issues">Github Issues</a> or directly to
-<a href="https://relens.ai/blog/author/eni">maintainers</a>.</p>
+<a href="https://lfglabs.dev/team/eni">maintainers</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="foreword"><a class="header" href="#foreword">Foreword</a></h1>
 <p>Zero-knowledge proofs have emerged as a transformative technology in the
 blockchain space, offering solutions for both privacy and scalability
@@ -25154,7 +25154,7 @@ let result_ba = calculate(b, a);
 assert_eq!(result_ab, result_ba);
 </code></pre>
 <h3 id="idempotence"><a class="header" href="#idempotence">Idempotence</a></h3>
-<pre><code class="language-cairo noplayground">// Doing it twice is same as doing it once
+<pre><code class="language-cairo noplayground">// Doing it twice is the same as doing it once
 contract.pause();
 contract.pause(); // Should not fail or change state
 assert!(contract.is_paused());
