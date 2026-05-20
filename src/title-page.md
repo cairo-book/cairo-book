@@ -52,4 +52,4 @@ Additional resources for mastering Cairo:
 
 If you have any questions, feedback or comments, you can reach out through
 [Github Issues](https://github.com/cairo-book/cairo-book/issues) or directly to
-[maintainers](https://relens.ai/blog/author/eni).
+[maintainers](https://lfglabs.dev/team/eni).
