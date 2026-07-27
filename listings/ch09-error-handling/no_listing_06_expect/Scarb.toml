@@ -1,5 +1,5 @@
 [package]
-name = "no_listing_05_panic_with"
+name = "no_listing_06_expect"
 version = "0.1.0"
 edition = "2024_07"
 
@@ -14,4 +14,4 @@ cairo_execute = "2.20.0"
 
 [[target.executable]]
 name = "main"
-function = "no_listing_05_panic_with::main"
+function = "no_listing_06_expect::main"
