@@ -247,6 +247,28 @@ same time. For example:
 {{#include ../listings/ch02-common-programming-concepts/no_listing_14_tuple_types/src/lib.cairo}}
 ```
 
+#### Accessing Tuple Elements
+
+Destructuring is convenient when we want every value at once, but we can also
+reach a single element directly by its position, writing a period (`.`) followed
+by the index of the value we want. As with most things in programming, indices
+start at `0`.
+
+A tuple element can itself be a tuple, in which case accesses chain:
+`nested.0.1` reads the second value of the tuple stored in the first position.
+And when a tuple is declared with `mut`, its elements can be assigned to
+individually:
+
+```cairo
+{{#include ../listings/ch02-common-programming-concepts/no_listing_14_bis_tuple_element_access/src/lib.cairo}}
+```
+
+Running this program prints:
+
+```shell
+{{#include ../listings/ch02-common-programming-concepts/no_listing_14_bis_tuple_element_access/output.txt}}
+```
+
 #### The Unit Type ()
 
 A _unit type_ is a type which has only one value `()`. It is represented by a
