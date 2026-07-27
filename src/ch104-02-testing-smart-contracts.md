@@ -77,7 +77,7 @@ configure your `Scarb.toml`:
 
 ```toml
 [dev-dependencies]
-snforge_std = "0.58.1"
+snforge_std = "0.62.1"
 
 [scripts]
 test = "snforge test"

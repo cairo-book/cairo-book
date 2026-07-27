@@ -5,13 +5,13 @@ edition = "2024_07"
 
 [dependencies]
 cartridge_vrf = { git = "https://github.com/cartridge-gg/vrf", rev = "f748d4a" }
-starknet = "2.16.1"
+starknet = "2.20.0"
 openzeppelin = "2.0.0"
 openzeppelin_utils = "=2.0.0"
 
 [dev-dependencies]
-snforge_std = "0.58.1"
-assert_macros = "2.16.1"
+snforge_std = "0.62.1"
+assert_macros = "2.20.0"
 
 [[target.starknet-contract]]
 sierra = true

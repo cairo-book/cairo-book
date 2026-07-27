@@ -320,7 +320,7 @@ Ensure your Scarb version matches `.tool-versions`:
 
 ```bash
 scarb --version
-# Should show: scarb 2.16.1
+# Should show: scarb 2.20.0
 ```
 
 ### Cairo Compilation Errors

@@ -25,6 +25,10 @@ lint:
         - "**/*.ts"
         - "**/*.tsx"
         - "**/*.css"
+    # Not valid TOML: carries `// ANCHOR:` markers so the book can include it.
+    - linters: [taplo]
+      paths:
+        - "**/initial_Scarb.toml"
   enabled:
     # Go tooling
     - bandit@1.9.2

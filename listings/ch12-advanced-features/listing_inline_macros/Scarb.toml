@@ -10,11 +10,11 @@ experimental-features = ["user_defined_inline_macros"]
 [cairo]
 
 [dependencies]
-cairo_execute = "2.16.1"
+cairo_execute = "2.20.0"
 
 [dev-dependencies]
-snforge_std = "0.58.1"
-assert_macros = "2.16.1"
+snforge_std = "0.62.1"
+assert_macros = "2.20.0"
 
 [scripts]
 test = "snforge test"

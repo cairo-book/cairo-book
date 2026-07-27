@@ -71,8 +71,8 @@ jobs:
       - name: Copy LLMs file
         run: cp llms.txt book/html/
 
-      - name: Copy summary.md to book/html/
-        run: cp summary.md book/html/llms-full.txt
+      - name: Generate llms-full.txt from the built book
+        run: ./scripts/combine-markdown.sh
 
       - name: Build all translations
         run: |

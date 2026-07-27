@@ -12,11 +12,11 @@ enable-gas = false
 
 # Don't make this executable - we use it for quiz validation.
 [dependencies]
-cairo_execute = "2.16.1"
+cairo_execute = "2.20.0"
 
 [dev-dependencies]
-snforge_std = "0.58.1"
-assert_macros = "2.16.1"
+snforge_std = "0.62.1"
+assert_macros = "2.20.0"
 
 [scripts]
 test = "snforge test"
