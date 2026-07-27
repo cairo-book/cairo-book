@@ -16155,9 +16155,19 @@ expensive.
 
 When writing Cairo smart contracts, it is important to optimize storage usage to
 reduce gas costs. Indeed, most of the cost associated with a transaction is
-related to storage updates; and each storage slot costs gas to write to. This
-means that by packing multiple values into fewer slots, you can decrease the gas
-cost incurred by the users of your smart contract.
+related to storage updates, and each slot is billed as a whole, no matter how
+many of its bits you actually use.
+
+As of Starknet v0.14.3, reading a slot costs 24,000 L2 gas and overwriting a
+slot that already holds a value costs 60,000. The first write to a slot that has
+never been written is by far the most expensive at 462,000, as it permanently
+grows the state that every node has to keep. See the [fee documentation][fees]
+for current figures.
+
+This means that by packing multiple values into fewer slots, you can decrease
+the gas cost incurred by the users of your smart contract.
+
+[fees]: https://docs.starknet.io/learn/protocol/fees/
 
 ## Integer Structure and Bitwise Operators
 
