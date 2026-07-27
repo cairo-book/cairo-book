@@ -1502,6 +1502,49 @@ fn main() {
 }
 ```
 
+#### Accessing Tuple Elements
+
+Destructuring is convenient when we want every value at once, but we can also
+reach a single element directly by its position, writing a period (`.`) followed
+by the index of the value we want. As with most things in programming, indices
+start at `0`.
+
+A tuple element can itself be a tuple, in which case accesses chain:
+`nested.0.1` reads the second value of the tuple stored in the first position.
+And when a tuple is declared with `mut`, its elements can be assigned to
+individually:
+
+```cairo
+#[executable]
+fn main() {
+    let tup = (500_u32, 6_u32, true);
+
+    println!("The second value is {}", tup.1);
+
+    let nested = ((1_u32, 2_u32), 3_u32);
+    println!("The inner second value is {}", nested.0.1);
+
+    let mut scores = (10_u32, 20_u32);
+    scores.0 = 15;
+    scores.1 += 5;
+    println!("Scores are now {} and {}", scores.0, scores.1);
+}
+```
+
+Running this program prints:
+
+```shell
+$ scarb execute
+   Compiling no_listing_14_bis_tuple_element_access v0.1.0 (listings/ch02-common-programming-concepts/no_listing_14_bis_tuple_element_access/Scarb.toml)
+    Finished `dev` profile target(s) in 1 second
+   Executing no_listing_14_bis_tuple_element_access
+The second value is 6
+The inner second value is 2
+Scores are now 15 and 25
+
+
+```
+
 #### The Unit Type ()
 
 A _unit type_ is a type which has only one value `()`. It is represented by a
