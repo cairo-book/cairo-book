@@ -28,6 +28,7 @@ Here is a list of the system calls available in Cairo 1.0:
 - [storage_write](#storage_write)
 - [keccak](#keccak)
 - [sha256_process_block](#sha256_process_block)
+- [sha512_process_block](#sha512_process_block)
 
 ## `get_block_hash`
 
@@ -512,6 +513,37 @@ with a 512-bit block of `input` data.
 #### Return Values
 
 Returns a new SHA-256 state of the `input` data.
+
+#### Common Library
+
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106)
+
+## `sha512_process_block`
+
+#### Syntax
+
+```cairo,noplayground
+pub extern fn sha512_process_block_syscall(
+    state: core::sha2_64_core::Sha512StateHandle, input: Box<[u64; 16]>,
+) -> SyscallResult<core::sha2_64_core::Sha512StateHandle> implicits(GasBuiltin, System) nopanic;
+```
+
+#### Description
+
+Computes the next SHA-512 state of the input with the given state.
+
+This syscall computes the next SHA-512 state by combining the current `state`
+with a 1024-bit block of `input` data. It also backs SHA-384, which uses the
+same block function with a different initial state.
+
+#### Arguments
+
+- _`state`_: The current SHA-512 state.
+- _`input`_: The value to be processed into SHA-512.
+
+#### Return Values
+
+Returns a new SHA-512 state of the `input` data.
 
 #### Common Library
 
