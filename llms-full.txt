@@ -3046,6 +3046,81 @@ fn main() {
 }
 ```
 
+### Destructuring a Span
+
+A `Span` can be destructured with a fixed-size array pattern, binding each of
+its elements to its own variable. A span's length is only known at runtime, so
+the pattern may not match, which means it has to appear somewhere failure is
+handled.
+
+Use `let ... else` when exactly one length is valid and anything else is an
+error:
+
+```cairo
+fn sum_of_three(span: Span<u64>) -> u64 {
+    let [a, b, c] = span else {
+        panic!("expected exactly three elements");
+    };
+    *a + *b + *c
+}
+# 
+# fn describe(span: Span<u64>) -> ByteArray {
+#     match span {
+#         [] => "nothing",
+#         [single] => format!("just {}", *single),
+#         [first, second] => format!("{} and {}", *first, *second),
+#         _ => "too many to list",
+#     }
+# }
+# 
+# #[executable]
+# fn main() {
+#     println!("{}", sum_of_three(array![10, 20, 30].span()));
+#     println!("{}", describe(array![].span()));
+#     println!("{}", describe(array![7].span()));
+#     println!("{}", describe(array![7, 8].span()));
+#     println!("{}", describe(array![7, 8, 9].span()));
+# }
+```
+
+Use a [`match`][match] to handle several lengths at once. The `_` arm is
+mandatory here: no finite list of patterns can cover every possible length, so
+the compiler rejects the `match` as non-exhaustive without it.
+
+```cairo
+# fn sum_of_three(span: Span<u64>) -> u64 {
+#     let [a, b, c] = span else {
+#         panic!("expected exactly three elements");
+#     };
+#     *a + *b + *c
+# }
+# 
+fn describe(span: Span<u64>) -> ByteArray {
+    match span {
+        [] => "nothing",
+        [single] => format!("just {}", *single),
+        [first, second] => format!("{} and {}", *first, *second),
+        _ => "too many to list",
+    }
+}
+# 
+# #[executable]
+# fn main() {
+#     println!("{}", sum_of_three(array![10, 20, 30].span()));
+#     println!("{}", describe(array![].span()));
+#     println!("{}", describe(array![7].span()));
+#     println!("{}", describe(array![7, 8].span()));
+#     println!("{}", describe(array![7, 8, 9].span()));
+# }
+```
+
+Because a span is itself a snapshot, these patterns bind _snapshots_ of the
+elements — `a` above is a `@u64`, hence the `*a` to read its value. Note also
+that only `Span` supports these patterns, not `Array<T>`: call `.span()` on an
+array first.
+
+[match]: ./ch06-02-the-match-control-flow-construct.md
+
 <div class="quiz-placeholder" data-quiz-name="&quot;ch03-01-arrays&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;If `til = 4`, then for an array of length 3, the loop will attempt to index the array with `i = 3`,\nwhich is out of bounds.  This function does not panic if `n = 1` because it returns before reaching\nthe out-of-bounds index.\n&quot;,&quot;id&quot;:&quot;dd16401e-9f74-4c86-a6ec-da2937cb26e5&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`find_until(array![1, 2, 3].span(), 4, 4);`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`find_until(array![1, 2, 3].span(), 0, 0);`&quot;,&quot;`find_until(array![1, 2, 3].span(), 3, 3);`&quot;,&quot;`find_until(array![1, 2, 3].span(), 1, 4);`&quot;],&quot;prompt&quot;:&quot;Which call to this `find_until` function will cause a runtime panic?\n\n```\nfn find_until(mut v: Span&lt;u64&gt;, n: u64, til: usize) -&gt; Option&lt;usize&gt; {\n    let mut i = 0;\n    loop {\n        if i == til {\n            break None;\n        }\n        if *v[i] == n {\n            break Some(i);\n        }\n        i += 1;\n    }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;As Cairo's memory layout is immutable, types cannot be moved out of an array by indexing. The only\npossibility is to copy the value to a new variable using the `*` (desnap) operator.  Therefore, as\nByteArray is not copyable, the line `let mut s = *v[0];` does not compile.\n&quot;,&quot;id&quot;:&quot;2e6570eb-8bf4-48b7-9032-5815475bc412&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:3},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[executable]\nfn main() {\n    let mut v: Array&lt;ByteArray&gt; = array![\&quot;Hello \&quot;];\n    let mut s = *v[0];\n    s.append(@\&quot;world\&quot;);\n    println!(\&quot;{s}\&quot;);\n}\n&quot;}},{&quot;context&quot;:&quot;`*v[0]` copies the value of the first element of the array to `i`. Therefore, `i` is a copy of the\nvalue of `v[0]`, and incrementing `i` does not affect `v[0]`.\n&quot;,&quot;id&quot;:&quot;95d528ee-ae78-4892-a438-a5d97f07f52a&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;2, 1&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[executable]\nfn main() {\n    let mut v: Array&lt;usize&gt; = array![1, 2, 3];\n    let mut i = *v[0];\n    i += 1;\n    println!(\&quot;{}, {}\&quot;, i, v[0]);\n}\n&quot;}}]}"></div>
 
 

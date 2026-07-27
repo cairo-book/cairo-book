@@ -2,5 +2,5 @@
 version = 1
 
 [[package]]
-name = "no_listing_08_array_span"
+name = "no_listing_08_bis_span_destructuring"
 version = "0.1.0"
