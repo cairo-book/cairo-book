@@ -29,6 +29,12 @@ lint:
     - linters: [taplo]
       paths:
         - "**/initial_Scarb.toml"
+    # Syscall reference: every entry repeats the same `#### Syntax` /
+    # `#### Description` / ... subheadings under an `##` heading, which trips
+    # MD024 (duplicate headings) and MD001 (heading increment) by design.
+    - linters: [markdownlint]
+      paths:
+        - src/appendix-08-system-calls.md
   enabled:
     # Go tooling
     - bandit@1.9.2

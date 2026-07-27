@@ -8,15 +8,19 @@ in various fields, including data storage, cryptography and data integrity
 verification. They are very often used when developing smart contracts,
 especially when working with [Merkle trees][merkle tree wiki].
 
-In this chapter, we will present the two hash functions implemented natively in
-the Cairo core library: `Poseidon` and `Pedersen`. We will discuss when and how
-to use them, and see examples with Cairo programs.
+In this chapter, we will present the hash functions available in the Cairo core
+library. We will focus on `Poseidon` and `Pedersen`, the two that integrate with
+the `Hash` trait, discuss when and how to use them, and see examples with Cairo
+programs. We will then look at the SHA-2 family, which serves a different
+purpose.
 
 [merkle tree wiki]: https://en.wikipedia.org/wiki/Merkle_tree#Uses
 
 ### Hash Functions in Cairo
 
-The Cairo core library provides two hash functions: Pedersen and Poseidon.
+The Cairo core library provides two hash functions designed for use inside
+proofs, Pedersen and Poseidon, alongside the SHA-2 family described
+[later in this chapter](#the-sha-2-family).
 
 Pedersen hash functions are cryptographic algorithms that rely on [elliptic
 curve cryptography][ec wiki]. These functions perform operations on points along
@@ -126,3 +130,21 @@ called the function `finalize()` on the `HashState` to get the computed hash
 ```cairo
 {{#rustdoc_include ../listings/ch12-advanced-features/no_listing_05_advanced_hash/src/lib.cairo:main}}
 ```
+
+### The SHA-2 Family
+
+Pedersen and Poseidon are cheap to prove, but nothing outside Cairo computes
+them. When you need a digest that other systems also understand, the core
+library provides the SHA-2 functions. These are not tied to the `Hash` trait:
+rather than building up a `HashState`, each takes the whole input at once —
+either a `ByteArray` or an array of words — and returns the digest as an array
+of words.
+
+| Module         | Functions                                               | Digest     |
+| -------------- | ------------------------------------------------------- | ---------- |
+| `core::sha256` | `compute_sha256_byte_array`, `compute_sha256_u32_array` | `[u32; 8]` |
+| `core::sha512` | `compute_sha512_byte_array`, `compute_sha512_u64_array` | `[u64; 8]` |
+| `core::sha384` | `compute_sha384_byte_array`, `compute_sha384_u64_array` | `[u64; 6]` |
+
+Note that these are backed by system calls, so they are available in smart
+contracts and in tests, but not in standalone executable programs.
