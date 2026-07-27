@@ -84,17 +84,17 @@ id = "b6ee33f0-5b70-4286-a6d9-a08aad66f9c8"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-What is the purpose of the `panic_with` attribute in Cairo?
+What does the `expect` method do when called on a value that is `None` or `Err`?
 
 """
 prompt.distractors = [
-  "To handle runtime errors gracefully",
-  "To indicate that a function may panic",
-  "To catch errors at compile time",
+  "It returns a default value for the wrapped type",
+  "It propagates the error to the calling function",
+  "It causes a compile-time error",
 ]
-answer.answer = "To create a wrapper function that panics if the annotated function returns `None` or `Err`"
+answer.answer = "It panics with the error message given as its argument"
 context = """
-If a function is annotated with `#[panic_with]`, a wrapper function is created that panics if the
-annotated function returns `None` or `Err`.
+`expect` extracts the inner value of an `Option` or a `Result`. If there is no such value, meaning
+the value is `None` or `Err`, it panics with the error message passed as its argument.
 """
-id = "f618cfc9-3419-4cde-962d-72210879b3b3"
+id = "e6081893-cfd6-4ef0-9290-a90a4d49ef3e"

@@ -101,18 +101,24 @@ Cairo Programs][assert macro] chapter.
 [assert macro]:
   ./ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro
 
-## `panic_with` Attribute
+## Panicking on `None` or `Err`
 
-You can use the `panic_with` attribute to mark a function that returns an
-`Option` or `Result`. This attribute takes two arguments, which are the data
-that is passed as the panic reason as well as the name for a wrapping function.
-It will create a wrapper for your annotated function which will panic if the
-function returns `None` or `Err`, with the given data as the panic error.
+Functions often return an `Option` or a `Result` rather than panicking
+themselves, leaving the decision to the caller. When the caller considers the
+absence of a value to be unrecoverable, it can use the `expect` method to
+extract the value and panic with a chosen error message otherwise.
 
 Example:
 
 ```cairo
-{{#include ../listings/ch09-error-handling/no_listing_06_panic_with/src/lib.cairo}}
+{{#include ../listings/ch09-error-handling/no_listing_06_expect/src/lib.cairo}}
 ```
+
+The first call returns `42`, as `wrap_if_not_zero` gives back `Some(42)`. The
+second one receives `None` and therefore panics with `'value is 0'`. We cover
+`expect` and its companion methods in more detail in the [Recoverable Errors
+with `Result`][recoverable errors] section.
+
+[recoverable errors]: ./ch09-02-recoverable-errors.md
 
 {{#quiz ../quizzes/ch09-01-unrecoverable-errors-with-panic.toml}}

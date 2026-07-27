@@ -8850,18 +8850,16 @@ Cairo Programs][assert macro] chapter.
 [assert macro]:
   ./ch10-01-how-to-write-tests.md#checking-results-with-the-assert-macro
 
-## `panic_with` Attribute
+## Panicking on `None` or `Err`
 
-You can use the `panic_with` attribute to mark a function that returns an
-`Option` or `Result`. This attribute takes two arguments, which are the data
-that is passed as the panic reason as well as the name for a wrapping function.
-It will create a wrapper for your annotated function which will panic if the
-function returns `None` or `Err`, with the given data as the panic error.
+Functions often return an `Option` or a `Result` rather than panicking
+themselves, leaving the decision to the caller. When the caller considers the
+absence of a value to be unrecoverable, it can use the `expect` method to
+extract the value and panic with a chosen error message otherwise.
 
 Example:
 
 ```cairo
-#[panic_with('value is 0', wrap_not_zero)]
 fn wrap_if_not_zero(value: u128) -> Option<u128> {
     if value == 0 {
         None
@@ -8872,12 +8870,20 @@ fn wrap_if_not_zero(value: u128) -> Option<u128> {
 
 #[executable]
 fn main() {
-    wrap_if_not_zero(0); // this returns None
-    wrap_not_zero(0); // this panics with 'value is 0'
+    let value = wrap_if_not_zero(42).expect('value is 0'); // this returns 42
+    println!("value: {}", value);
+    wrap_if_not_zero(0).expect('value is 0'); // this panics with 'value is 0'
 }
 ```
 
-<div class="quiz-placeholder" data-quiz-name="&quot;ch09-01-unrecoverable-errors-with-panic&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The macro `panic!` takes one and only one `ByteArray` argument.\nThe function `core::panic_with_felt252` takes one and only one `felt252` argument.\nThe function `panic` takes an array of `felt252` elements as an argument and returns it.\n&quot;,&quot;id&quot;:&quot;5bf03883-59ab-4063-85e8-8c1d2fafa3e3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`panic(array![2, 'This is the error message']);`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`panic(array![2, \&quot;This is the error message\&quot;]);`&quot;,&quot;`panic!(\&quot;2\&quot;, \&quot;This is the error message\&quot;);`&quot;,&quot;`core::panic_with_felt252(2, 'This is the error message');`&quot;],&quot;prompt&quot;:&quot;Which line of code is correct to return the error code `2` and the error message `This is the error message`?\n&quot;}},{&quot;context&quot;:&quot;A panic should not be used to communicate failure *within* the program, as it will terminate the program immediately.\n&quot;,&quot;id&quot;:&quot;0e7bb9f9-af5a-441d-83b4-bcd0a97daf70&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;The program has reached an error state which should be communicated to a caller function&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;The program is about to perform a dangerous operation&quot;,&quot;The program should stop executing as soon as possible&quot;,&quot;The program has reached an unrecoverable error state&quot;],&quot;prompt&quot;:&quot;Which of the following is **NOT** a good reason to use a panic?\n&quot;}},{&quot;context&quot;:&quot;Program 3 tries to access an element at an index that is out of bounds, but it matches the\nresulting `Option` and returns a default value `0` instead of panicking.\n&quot;,&quot;id&quot;:&quot;b6ee33f0-5b70-4286-a6d9-a08aad66f9c8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Program 3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Program 1&quot;,&quot;Program 2&quot;,&quot;Program 2 and Program 3&quot;],&quot;prompt&quot;:&quot;Which of the following programs will **NOT** cause a runtime panic?\n\n```\n#[executable]\nfn main() {\n    if true {\n        panic!(\&quot;2\&quot;);\n    }\n    println!(\&quot;This line shouldn't be reached\&quot;);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let arr = array![1, 2, 3];\n    let index = 5;\n\n    println!(\&quot;Value at index {}: {}\&quot;, index, arr[index]);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let mut arr: Array&lt;u128&gt; = array![5];\n    let index_to_access = 3;\n    let value = match arr.get(index_to_access) {\n        Some(x) =&gt; { *x.unbox() },\n        None =&gt; { 0 }\n    };\n\n    println!(\&quot;Value at index {} is {}\&quot;, index_to_access, value);\n}\n```\n&quot;}},{&quot;context&quot;:&quot;If a function is annotated with `#[panic_with]`, a wrapper function is created that panics if the\nannotated function returns `None` or `Err`.\n&quot;,&quot;id&quot;:&quot;f618cfc9-3419-4cde-962d-72210879b3b3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;To create a wrapper function that panics if the annotated function returns `None` or `Err`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;To handle runtime errors gracefully&quot;,&quot;To indicate that a function may panic&quot;,&quot;To catch errors at compile time&quot;],&quot;prompt&quot;:&quot;What is the purpose of the `panic_with` attribute in Cairo?\n\n&quot;}}]}"></div>
+The first call returns `42`, as `wrap_if_not_zero` gives back `Some(42)`. The
+second one receives `None` and therefore panics with `'value is 0'`. We cover
+`expect` and its companion methods in more detail in the [Recoverable Errors
+with `Result`][recoverable errors] section.
+
+[recoverable errors]: ./ch09-02-recoverable-errors.md
+
+<div class="quiz-placeholder" data-quiz-name="&quot;ch09-01-unrecoverable-errors-with-panic&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The macro `panic!` takes one and only one `ByteArray` argument.\nThe function `core::panic_with_felt252` takes one and only one `felt252` argument.\nThe function `panic` takes an array of `felt252` elements as an argument and returns it.\n&quot;,&quot;id&quot;:&quot;5bf03883-59ab-4063-85e8-8c1d2fafa3e3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`panic(array![2, 'This is the error message']);`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`panic(array![2, \&quot;This is the error message\&quot;]);`&quot;,&quot;`panic!(\&quot;2\&quot;, \&quot;This is the error message\&quot;);`&quot;,&quot;`core::panic_with_felt252(2, 'This is the error message');`&quot;],&quot;prompt&quot;:&quot;Which line of code is correct to return the error code `2` and the error message `This is the error message`?\n&quot;}},{&quot;context&quot;:&quot;A panic should not be used to communicate failure *within* the program, as it will terminate the program immediately.\n&quot;,&quot;id&quot;:&quot;0e7bb9f9-af5a-441d-83b4-bcd0a97daf70&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;The program has reached an error state which should be communicated to a caller function&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;The program is about to perform a dangerous operation&quot;,&quot;The program should stop executing as soon as possible&quot;,&quot;The program has reached an unrecoverable error state&quot;],&quot;prompt&quot;:&quot;Which of the following is **NOT** a good reason to use a panic?\n&quot;}},{&quot;context&quot;:&quot;Program 3 tries to access an element at an index that is out of bounds, but it matches the\nresulting `Option` and returns a default value `0` instead of panicking.\n&quot;,&quot;id&quot;:&quot;b6ee33f0-5b70-4286-a6d9-a08aad66f9c8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Program 3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Program 1&quot;,&quot;Program 2&quot;,&quot;Program 2 and Program 3&quot;],&quot;prompt&quot;:&quot;Which of the following programs will **NOT** cause a runtime panic?\n\n```\n#[executable]\nfn main() {\n    if true {\n        panic!(\&quot;2\&quot;);\n    }\n    println!(\&quot;This line shouldn't be reached\&quot;);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let arr = array![1, 2, 3];\n    let index = 5;\n\n    println!(\&quot;Value at index {}: {}\&quot;, index, arr[index]);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let mut arr: Array&lt;u128&gt; = array![5];\n    let index_to_access = 3;\n    let value = match arr.get(index_to_access) {\n        Some(x) =&gt; { *x.unbox() },\n        None =&gt; { 0 }\n    };\n\n    println!(\&quot;Value at index {} is {}\&quot;, index_to_access, value);\n}\n```\n&quot;}},{&quot;context&quot;:&quot;`expect` extracts the inner value of an `Option` or a `Result`. If there is no such value, meaning\nthe value is `None` or `Err`, it panics with the error message passed as its argument.\n&quot;,&quot;id&quot;:&quot;e6081893-cfd6-4ef0-9290-a90a4d49ef3e&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;It panics with the error message given as its argument&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;It returns a default value for the wrapped type&quot;,&quot;It propagates the error to the calling function&quot;,&quot;It causes a compile-time error&quot;],&quot;prompt&quot;:&quot;What does the `expect` method do when called on a value that is `None` or `Err`?\n\n&quot;}}]}"></div>
 
 
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css"># Recoverable Errors with `Result`
@@ -31008,32 +31014,31 @@ parameters.
 Table B-5 shows symbols that appear in the context of specifying attributes on
 an item.
 
-| Symbol                               | Explanation                                                                                                                                                                         |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `#[derive(...)]`                     | Automatically implements a trait for a type                                                                                                                                         |
-| `#[inline]`                          | Hint to the compiler to allow inlining of annotated function                                                                                                                        |
-| `#[inline(always)]`                  | Hint to the compiler to systematically inline annotated function                                                                                                                    |
-| `#[inline(never)]`                   | Hint to the compiler to never inline annotated function                                                                                                                             |
-| `#[must_use]`                        | Hint to the compiler that the return value of a function or a specific returned type must be used                                                                                   |
-| `#[generate_trait]`                  | Automatically generates a trait for an impl                                                                                                                                         |
-| `#[available_gas(...)]`              | Set the maximum amount of gas available to execute a function                                                                                                                       |
-| `#[panic_with('...', wrapper_name)]` | Creates a wrapper for the annotated function which will panic if the function returns `None` or `Err`, with the given data as the panic error                                       |
-| `#[test]`                            | Describe a function as a test function                                                                                                                                              |
-| `#[cfg(...)]`                        | Configuration attribute, especially used to configure a `tests` module with `#[cfg(test)]`                                                                                          |
-| `#[should_panic]`                    | Specifies that a test function should necessarily panic                                                                                                                             |
-| `#[starknet::contract]`              | Defines a Starknet smart contract                                                                                                                                                   |
-| `#[starknet::interface]`             | Defines a Starknet interface                                                                                                                                                        |
-| `#[starknet::component]`             | Defines a Starknet component                                                                                                                                                        |
-| `#[starknet::embeddable]`            | Defines an isolated embeddable implementation that can be injected in any smart contract                                                                                            |
-| `#[embeddable_as(...)]`              | Defines an embeddable implementation inside a component                                                                                                                             |
-| `#[storage]`                         | Defines the storage of a smart contract                                                                                                                                             |
-| `#[event]`                           | Defines an event in a smart contract                                                                                                                                                |
-| `#[constructor]`                     | Defines the constructor in a smart contract                                                                                                                                         |
-| `#[abi(embed_v0)]`                   | Defines an implementation of a trait, exposing the functions of the impl as entrypoints of a contract                                                                               |
-| `#[abi(per_item)]`                   | Allows individual definition of the entrypoint type of functions inside an impl                                                                                                     |
-| `#[external(v0)]`                    | Defines an external function when `#[abi(per_item)]` is used                                                                                                                        |
-| `#[flat]`                            | Defines a enum variant of the `Event` enum that is not nested, ignoring the variant name in the serialization process, very useful for composability when using Starknet components |
-| `#[key]`                             | Defines an indexed `Event` enum field, allowing for more efficient queries and filtering of events                                                                                  |
+| Symbol                    | Explanation                                                                                                                                                                         |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `#[derive(...)]`          | Automatically implements a trait for a type                                                                                                                                         |
+| `#[inline]`               | Hint to the compiler to allow inlining of annotated function                                                                                                                        |
+| `#[inline(always)]`       | Hint to the compiler to systematically inline annotated function                                                                                                                    |
+| `#[inline(never)]`        | Hint to the compiler to never inline annotated function                                                                                                                             |
+| `#[must_use]`             | Hint to the compiler that the return value of a function or a specific returned type must be used                                                                                   |
+| `#[generate_trait]`       | Automatically generates a trait for an impl                                                                                                                                         |
+| `#[available_gas(...)]`   | Set the maximum amount of gas available to execute a function                                                                                                                       |
+| `#[test]`                 | Describe a function as a test function                                                                                                                                              |
+| `#[cfg(...)]`             | Configuration attribute, especially used to configure a `tests` module with `#[cfg(test)]`                                                                                          |
+| `#[should_panic]`         | Specifies that a test function should necessarily panic                                                                                                                             |
+| `#[starknet::contract]`   | Defines a Starknet smart contract                                                                                                                                                   |
+| `#[starknet::interface]`  | Defines a Starknet interface                                                                                                                                                        |
+| `#[starknet::component]`  | Defines a Starknet component                                                                                                                                                        |
+| `#[starknet::embeddable]` | Defines an isolated embeddable implementation that can be injected in any smart contract                                                                                            |
+| `#[embeddable_as(...)]`   | Defines an embeddable implementation inside a component                                                                                                                             |
+| `#[storage]`              | Defines the storage of a smart contract                                                                                                                                             |
+| `#[event]`                | Defines an event in a smart contract                                                                                                                                                |
+| `#[constructor]`          | Defines the constructor in a smart contract                                                                                                                                         |
+| `#[abi(embed_v0)]`        | Defines an implementation of a trait, exposing the functions of the impl as entrypoints of a contract                                                                               |
+| `#[abi(per_item)]`        | Allows individual definition of the entrypoint type of functions inside an impl                                                                                                     |
+| `#[external(v0)]`         | Defines an external function when `#[abi(per_item)]` is used                                                                                                                        |
+| `#[flat]`                 | Defines a enum variant of the `Event` enum that is not nested, ignoring the variant name in the serialization process, very useful for composability when using Starknet components |
+| `#[key]`                  | Defines an indexed `Event` enum field, allowing for more efficient queries and filtering of events                                                                                  |
 
 <span class="caption">Table B-5: Attributes</span>
 
