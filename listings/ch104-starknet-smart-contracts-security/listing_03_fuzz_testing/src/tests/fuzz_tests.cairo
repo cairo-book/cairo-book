@@ -118,4 +118,38 @@ fn test_fuzz_transfer_roundtrip(amount: u64) {
 }
 // ANCHOR_END: fuzz_roundtrip
 
+// ANCHOR: fuzzable_derive
+/// A custom type the fuzzer knows how to generate, so one test can vary
+/// several related inputs together.
+#[derive(Drop, Debug, Fuzzable)]
+struct TransferPair {
+    first: u32,
+    second: u32,
+}
+
+#[test]
+#[fuzzer(runs: 100, seed: 22222)]
+fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+    let token = deploy_token(initial_supply);
+    let recipient = contract_address_const::<'recipient'>();
+
+    let supply_before = token.total_supply();
+
+    // Both amounts are u32, so their sum can never exceed the owner's balance.
+    start_cheat_caller_address(token.contract_address, owner());
+    token.transfer(recipient, pair.first.into());
+    token.transfer(recipient, pair.second.into());
+    stop_cheat_caller_address(token.contract_address);
+
+    // INVARIANT: moving tokens twice still creates and destroys nothing.
+    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+    assert_eq!(
+        token.balance_of(recipient),
+        pair.first.into() + pair.second.into(),
+        "Recipient balance does not match the two transfers",
+    );
+}
+// ANCHOR_END: fuzzable_derive
+
 
