@@ -167,4 +167,33 @@ To create a `Span` of an `Array`, call the `span()` method:
 {{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_array_span/src/lib.cairo}}
 ```
 
+### Destructuring a Span
+
+A `Span` can be destructured with a fixed-size array pattern, binding each of
+its elements to its own variable. A span's length is only known at runtime, so
+the pattern may not match, which means it has to appear somewhere failure is
+handled.
+
+Use `let ... else` when exactly one length is valid and anything else is an
+error:
+
+```cairo
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_bis_span_destructuring/src/lib.cairo:let_else}}
+```
+
+Use a [`match`][match] to handle several lengths at once. The `_` arm is
+mandatory here: no finite list of patterns can cover every possible length, so
+the compiler rejects the `match` as non-exhaustive without it.
+
+```cairo
+{{#rustdoc_include ../listings/ch03-common-collections/no_listing_08_bis_span_destructuring/src/lib.cairo:match}}
+```
+
+Because a span is itself a snapshot, these patterns bind _snapshots_ of the
+elements — `a` above is a `@u64`, hence the `*a` to read its value. Note also
+that only `Span` supports these patterns, not `Array<T>`: call `.span()` on an
+array first.
+
+[match]: ./ch06-02-the-match-control-flow-construct.md
+
 {{#quiz ../quizzes/ch03-01-arrays.toml}}
