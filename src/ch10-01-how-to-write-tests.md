@@ -487,8 +487,10 @@ small or too large:
 implementation that panics with different error messages</span>
 
 The test will pass because the value we put in the `should_panic` attribute’s
-`expected` parameter is the string that the `Guess::new` method panics with. We
-need to specify the entire panic message that we expect.
+`expected` parameter is the string that the `Guess::new` method panics with. It
+does not have to be the whole message: the harness only checks that the panic
+message _contains_ the expected string, so `expected: "must be <= 100"` would
+pass here too. The more of the message we specify, the more precise the test.
 
 To see what happens when a `should_panic` test with an expected message fails,
 let’s again introduce a bug into our code by swapping the bodies of the
