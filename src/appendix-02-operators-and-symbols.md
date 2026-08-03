@@ -17,23 +17,23 @@ overload that operator is listed.
 | `~`                       | `~expr`                                                 | Bitwise NOT                              | `BitNot`      |
 | `!=`                      | `expr != expr`                                          | Non-equality comparison                  | `PartialEq`   |
 | `%`                       | `expr % expr`                                           | Arithmetic remainder                     | `Rem`         |
-| `%=`                      | `var %= expr`                                           | Arithmetic remainder and assignment      | `RemEq`       |
+| `%=`                      | `var %= expr`                                           | Arithmetic remainder and assignment      | `RemAssign`   |
 | `&`                       | `expr & expr`                                           | Bitwise AND                              | `BitAnd`      |
 | `&&`                      | `expr && expr`                                          | Short-circuiting logical AND             |               |
 | `*`                       | `expr * expr`                                           | Arithmetic multiplication                | `Mul`         |
-| `*=`                      | `var *= expr`                                           | Arithmetic multiplication and assignment | `MulEq`       |
+| `*=`                      | `var *= expr`                                           | Arithmetic multiplication and assignment | `MulAssign`   |
 | `@`                       | `@var`                                                  | Snapshot                                 |               |
 | `*`                       | `*var`                                                  | Desnap                                   |               |
 | `+`                       | `expr + expr`                                           | Arithmetic addition                      | `Add`         |
-| `+=`                      | `var += expr`                                           | Arithmetic addition and assignment       | `AddEq`       |
+| `+=`                      | `var += expr`                                           | Arithmetic addition and assignment       | `AddAssign`   |
 | `,`                       | `expr, expr`                                            | Argument and element separator           |               |
 | `-`                       | `-expr`                                                 | Arithmetic negation                      | `Neg`         |
 | `-`                       | `expr - expr`                                           | Arithmetic subtraction                   | `Sub`         |
-| `-=`                      | `var -= expr`                                           | Arithmetic subtraction and assignment    | `SubEq`       |
+| `-=`                      | `var -= expr`                                           | Arithmetic subtraction and assignment    | `SubAssign`   |
 | `->`                      | `fn(...) -> type`, <code>&vert;...&vert; -> type</code> | Function and closure return type         |               |
 | `.`                       | `expr.ident`                                            | Member access                            |               |
 | `/`                       | `expr / expr`                                           | Arithmetic division                      | `Div`         |
-| `/=`                      | `var /= expr`                                           | Arithmetic division and assignment       | `DivEq`       |
+| `/=`                      | `var /= expr`                                           | Arithmetic division and assignment       | `DivAssign`   |
 | `:`                       | `pat: type`, `ident: type`                              | Constraints                              |               |
 | `:`                       | `ident: expr`                                           | Struct field initializer                 |               |
 | `;`                       | `expr;`                                                 | Statement and item terminator            |               |
