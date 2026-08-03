@@ -112,6 +112,29 @@ Round-trip properties verify that operations can be "undone":
 <span class="caption">Listing {{#ref fuzz-roundtrip}}: Testing the transfer
 round-trip property</span>
 
+### Fuzzing Custom Types
+
+The fuzzer can only generate arguments for types it knows how to build. Out of
+the box that covers `felt252`, the sized integers (`u8` through `u128`, `i8`
+through `i128`), `u256`, `bool`, `ByteArray`, and `ContractAddress`.
+
+For your own structs and enums, derive `Fuzzable` and the fuzzer will generate
+each field or variant for you. This is how one test varies several related
+inputs at once:
+
+```cairo,noplayground
+{{#rustdoc_include ../listings/ch104-starknet-smart-contracts-security/listing_03_fuzz_testing/src/tests/fuzz_tests.cairo:fuzzable_derive}}
+```
+
+{{#label fuzz-custom-type}}
+
+<span class="caption">Listing {{#ref fuzz-custom-type}}: Fuzzing a custom struct
+with `#[derive(Fuzzable)]`</span>
+
+`Fuzzable` requires `Drop` and `Debug` alongside it — `Debug` so the fuzzer can
+print the input that broke your test. Every field type must itself be fuzzable,
+so a struct of a type with no `Fuzzable` impl will not compile.
+
 ## Common Property Patterns
 
 ### Invariants (Always True)
