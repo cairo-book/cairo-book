@@ -81,6 +81,55 @@ returning the value of the storage variable `value` - still in the context of
 As such, both `get_value` and `get_value_local` return the same value, as they
 are reading the same storage slot.
 
+## Forwarding an Entire Interface
+
+Notice that every method of `ValueStoreExecutor` above has the same shape: build
+a library dispatcher from a stored class hash, then call the method of the same
+name on it. When a contract forwards an interface in its entirety — as a proxy
+does — the compiler can write those methods for you.
+
+For every `#[starknet::interface]` trait `IFoo`, the compiler generates an
+`IFooForwardImpl`. It implements `IFoo` by forwarding each method as a library
+call, and it works for any contract that supplies a class hash to forward to.
+You supply that hash by implementing `starknet::ForwardingClassHash`:
+
+```cairo,noplayground
+{{#include ../listings/ch102-starknet-cross-contract-interactions/listing_08_forward_impl/src/lib.cairo:forwarding_class_hash}}
+```
+
+Then embed the generated impl in the ABI, exactly as you would a hand-written
+one:
+
+```cairo,noplayground
+{{#include ../listings/ch102-starknet-cross-contract-interactions/listing_08_forward_impl/src/lib.cairo:embed}}
+```
+
+That is the whole contract body. Listing {{#ref forward-impl}} rewrites the
+executor above to forward `IValueStore` to the `ValueStoreLogic` class, with no
+method bodies of its own:
+
+```cairo,noplayground
+{{#include ../listings/ch102-starknet-cross-contract-interactions/listing_08_forward_impl/src/lib.cairo}}
+```
+
+{{#label forward-impl}} <span class="caption">Listing {{#ref forward-impl}}:
+Forwarding a whole interface with the generated `IValueStoreForwardImpl`</span>
+
+The resulting ABI is indistinguishable from the hand-written version: the same
+entry points, each keeping its `view` or `external` mutability. The calls are
+still library calls, so they execute in the forwarder's context and read and
+write its storage — which is why `ValueStoreForwarder` keeps a `value` slot for
+the forwarded logic to act on.
+
+> Note: `ForwardingClassHash` and the generated forwarding impls are unstable,
+> so the contract module must opt in with `#[feature("forward-impl")]`. Without
+> it the compiler only warns, but the attribute is required for the code to keep
+> compiling as the feature stabilizes.
+
+Reach for this when a contract forwards an interface wholesale. If you need to
+forward only some methods, or to run logic of your own around a forwarded call,
+use the library dispatcher directly as shown above.
+
 ## Calling Classes using Low-Level Calls
 
 Another way to call classes is to directly use `library_call_syscall`. While
@@ -118,6 +167,8 @@ concepts:
   pattern
 - How to use _Library calls_ to execute the logic of another class in the
   context of the caller
+- How to forward a whole interface to another class with the compiler-generated
+  forwarding impls
 - The two syscalls that Starknet provides to interact with contracts and classes
 
 You now have all the required tools to develop complex applications with logic
