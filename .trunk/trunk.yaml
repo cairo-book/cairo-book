@@ -35,6 +35,13 @@ lint:
     - linters: [markdownlint]
       paths:
         - src/appendix-08-system-calls.md
+    # wasm-bindgen output, copied verbatim from cairo-wasm's `wasm-pack build`.
+    # Generated code: it must not be reformatted or hand-edited, or the next
+    # update stops being a straight copy. biome also flags wasm-bindgen's own
+    # `handleError(..., arguments)` under noArguments, which we cannot fix here.
+    - linters: [biome]
+      paths:
+        - src/wasm/cairo_lang_runner_wasm.js
   enabled:
     # Go tooling
     - bandit@1.9.2
