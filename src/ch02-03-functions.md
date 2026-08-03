@@ -253,16 +253,13 @@ context and interpreted by the compiler at compile time.
 Declaring a function as `const` restricts the types that arguments and the
 return type may use, and limits the function body to constant expressions.
 
-Several functions in the core library are marked as `const`. Here's an example
-from the core library showing the `pow` function implemented as a `const fn`:
+Several functions in the core library are marked as `const`, among them `pow`.
+Because `pow` is a `const fn`, we can call it in a constant expression to
+compute `BYTE_MASK` at compile time:
 
 ```cairo
 {{#include ../listings/ch02-common-programming-concepts/no_listing_const_fn/src/lib.cairo}}
 ```
-
-In this example, `pow` is a `const` function, allowing it to be used in a
-constant expression to define `mask` at compile time. Here's a snippet of how
-`pow` is defined in the core library using `const fn`:
 
 Note that declaring a function as `const` has no effect on existing uses; it
 only imposes restrictions for constant contexts.
