@@ -85,7 +85,7 @@ jobs:
         run: cp llms.txt book/html/
 
       - name: Generate llms-full.txt from the built book
-        run: ./scripts/combine-markdown.sh
+        run: ./scripts/combine-markdown.sh book/html/llms-full.txt
 
       - name: Build all translations
         run: |
@@ -103,19 +103,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Save build output
-          mv book/html /tmp/book-html
-
-          # Checkout gh-pages branch. -f drops build byproducts in tracked files
-          # (combine-markdown.sh rewrites llms-full.txt); the deployed copy is
-          # already in /tmp/book-html.
-          git checkout -f gh-pages
+          # Publish from a separate gh-pages worktree, so build output in the
+          # source checkout can never collide with the site branch.
+          site="${RUNNER_TEMP}/gh-pages"
+          git worktree add -B gh-pages "${site}" origin/gh-pages
+          cd "${site}"
 
           # Remove old root content but preserve version directories and versions.json
           find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name 'v*' ! -name 'versions.json' ! -name '.nojekyll' ! -name 'CNAME' -exec rm -rf {} +
 
           # Copy new build content
-          cp -r /tmp/book-html/* .
+          cp -r "${GITHUB_WORKSPACE}/book/html/." .
 
           # Stage and commit
           git add -A
