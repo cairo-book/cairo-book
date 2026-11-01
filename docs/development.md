@@ -38,7 +38,9 @@ Install mdBook and required extensions:
 cargo install mdbook
 
 # Extensions
-cargo install mdbook-i18n-helpers --locked --version 0.3.5
+cargo install mdbook-i18n-helpers --locked --version 0.3.6
+# On GCC 15 (e.g. Ubuntu 26.04) this fails to build onig_sys; see
+# .github/workflows/install-mdbook/action.yml for the workaround.
 cargo install mdbook-last-changed
 
 # Custom Cairo preprocessor

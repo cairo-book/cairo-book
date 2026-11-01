@@ -84,7 +84,20 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
         shell: bash
 
+      # The quiz preprocessor builds every quiz from a copy of runner_crate.
+      # Fetch its dependencies once, with retries, so a bad registry download
+      # fails here instead of inside the book build.
+      - name: Prefetch quiz runner dependencies
+        working-directory: runner_crate
+        run: |
+          for attempt in 1 2 3; do
+            timeout 5m scarb fetch && exit 0
+            echo "scarb fetch attempt ${attempt} failed"; sleep 10
+          done
+          exit 1
+
       - name: Build book (English)
+        timeout-minutes: 30
         run: mdbook build -d book
 
       - name: Install cairo-listings
@@ -101,4 +114,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: crate-ci/typos@master
+      - uses: crate-ci/typos@v1.51.1

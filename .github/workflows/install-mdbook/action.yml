@@ -10,9 +10,16 @@ runs:
         curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.48/mdbook-v0.4.48-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory="${HOME}/.cargo/bin"
         echo "${HOME}/.cargo/bin" >> ${GITHUB_PATH}
 
+    # 0.3.6 is the last release built for mdbook 0.4. Its lockfile pins
+    # onig_sys 69.8.1, whose bundled C sources fail to compile under GCC 15
+    # (the default on ubuntu-26.04 runners); onig_sys 69.9.3 fixes them.
     - name: Install mdbook-i18n-helpers
       shell: bash
-      run: cargo install mdbook-i18n-helpers --locked --version 0.3.5
+      run: |
+        src="${RUNNER_TEMP}/mdbook-i18n-helpers"
+        git clone --depth 1 --branch mdbook-i18n-helpers-0.3.6 https://github.com/google/mdbook-i18n-helpers "${src}"
+        cargo update --manifest-path "${src}/Cargo.toml" -p onig_sys --precise 69.9.3
+        cargo install --locked --path "${src}/i18n-helpers"
 
     - name: Install mdbook-last-changed
       shell: bash

@@ -1,6 +1,10 @@
 [default]
 extend-ignore-identifiers-re = ["Groth16", "result_ba"]
 
+[default.extend-words]
+# Cairo keyword: `extern fn ... implicits(GasBuiltin, System)`.
+implicits = "implicits"
+
 [type.po]
 extend-glob = ["*.po", "*.css", "*.js"]
 check-file = false
