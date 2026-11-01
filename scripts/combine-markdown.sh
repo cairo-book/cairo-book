@@ -1,15 +1,18 @@
 #!/bin/bash
 
-# Script to combine all markdown files into a single llms-full.txt file
-# Ensures appendix files are placed at the end
+# Combine the built markdown book into a single llms-full.txt file, with the
+# appendix files at the end.
+#
+# Usage: scripts/combine-markdown.sh [output_file]
+#   Without an argument, regenerates the tracked llms-full.txt at the repo root.
+#   CI passes book/html/llms-full.txt so the deploy never touches tracked files.
 
-output_file="llms-full.txt"
+output_file="${1:-llms-full.txt}"
 markdown_dir="book/markdown"
 
 # Remove the output file if it already exists
 rm -f "${output_file}"
 
-# Function to process files and append to output
 echo "Combining markdown files into ${output_file}..."
 
 # First, process all non-appendix files
@@ -20,7 +23,3 @@ echo "Appending appendix files..."
 find "${markdown_dir}" -type f -name "appendix-*.md" -exec cat {} \; >>"${output_file}" 2>/dev/null
 
 echo "Combination complete. Output saved to ${output_file}"
-
-# Copy the result to book/html for online serving
-cp "${output_file}" "book/html/"
-echo "Copied ${output_file} to book/html for online serving"
