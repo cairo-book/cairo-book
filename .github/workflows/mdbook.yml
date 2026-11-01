@@ -106,8 +106,10 @@ jobs:
           # Save build output
           mv book/html /tmp/book-html
 
-          # Checkout gh-pages branch
-          git checkout gh-pages
+          # Checkout gh-pages branch. -f drops build byproducts in tracked files
+          # (combine-markdown.sh rewrites llms-full.txt); the deployed copy is
+          # already in /tmp/book-html.
+          git checkout -f gh-pages
 
           # Remove old root content but preserve version directories and versions.json
           find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name 'v*' ! -name 'versions.json' ! -name '.nojekyll' ! -name 'CNAME' -exec rm -rf {} +
