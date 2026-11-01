@@ -518,6 +518,41 @@ fn main() {
     let (x, y): (felt252, felt252) = (2, 3);
 }
 </code></pre>
+<h4 id="accessing-tuple-elements"><a class="header" href="#accessing-tuple-elements">Accessing Tuple Elements</a></h4>
+<p>Destructuring is convenient when we want every value at once, but we can also
+reach a single element directly by its position, writing a period (<code>.</code>) followed
+by the index of the value we want. As with most things in programming, indices
+start at <code>0</code>.</p>
+<p>A tuple element can itself be a tuple, in which case accesses chain:
+<code>nested.0.1</code> reads the second value of the tuple stored in the first position.
+And when a tuple is declared with <code>mut</code>, its elements can be assigned to
+individually:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let tup = (500_u32, 6_u32, true);
+
+    println!("The second value is {}", tup.1);
+
+    let nested = ((1_u32, 2_u32), 3_u32);
+    println!("The inner second value is {}", nested.0.1);
+
+    let mut scores = (10_u32, 20_u32);
+    scores.0 = 15;
+    scores.1 += 5;
+    println!("Scores are now {} and {}", scores.0, scores.1);
+}
+</code></pre>
+<p>Running this program prints:</p>
+<pre><code class="language-shell">$ scarb execute
+   Compiling no_listing_14_bis_tuple_element_access v0.1.0 (listings/ch02-common-programming-concepts/no_listing_14_bis_tuple_element_access/Scarb.toml)
+    Finished `dev` profile target(s) in 1 second
+   Executing no_listing_14_bis_tuple_element_access
+The second value is 6
+The inner second value is 2
+Scores are now 15 and 25
+
+
+</code></pre>
 <h4 id="the-unit-type-"><a class="header" href="#the-unit-type-">The Unit Type ()</a></h4>
 <p>A <em>unit type</em> is a type which has only one value <code>()</code>. It is represented by a
 tuple with no elements. Its size is always zero, and it is guaranteed to not

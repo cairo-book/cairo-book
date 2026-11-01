@@ -414,12 +414,87 @@ returning the value of the storage variable <code>value</code> - still in the co
 <code>ValueStoreExecutor</code>.</p>
 <p>As such, both <code>get_value</code> and <code>get_value_local</code> return the same value, as they
 are reading the same storage slot.</p>
+<h2 id="forwarding-an-entire-interface"><a class="header" href="#forwarding-an-entire-interface">Forwarding an Entire Interface</a></h2>
+<p>Notice that every method of <code>ValueStoreExecutor</code> above has the same shape: build
+a library dispatcher from a stored class hash, then call the method of the same
+name on it. When a contract forwards an interface in its entirety — as a proxy
+does — the compiler can write those methods for you.</p>
+<p>For every <code>#[starknet::interface]</code> trait <code>IFoo</code>, the compiler generates an
+<code>IFooForwardImpl</code>. It implements <code>IFoo</code> by forwarding each method as a library
+call, and it works for any contract that supplies a class hash to forward to.
+You supply that hash by implementing <code>starknet::ForwardingClassHash</code>:</p>
+<pre><code class="language-cairo noplayground">    impl ForwardingClassHashImpl of starknet::ForwardingClassHash&lt;ContractState&gt; {
+        fn class_hash(self: @ContractState) -&gt; ClassHash {
+            self.logic_library.read()
+        }
+    }
+</code></pre>
+<p>Then embed the generated impl in the ABI, exactly as you would a hand-written
+one:</p>
+<pre><code class="language-cairo noplayground">    #[abi(embed_v0)]
+    impl ValueStoreForwarded = super::IValueStoreForwardImpl&lt;ContractState&gt;;
+</code></pre>
+<p>That is the whole contract body. Listing 16-7 rewrites the
+executor above to forward <code>IValueStore</code> to the <code>ValueStoreLogic</code> class, with no
+method bodies of its own:</p>
+<pre><code class="language-cairo noplayground">#[starknet::interface]
+trait IValueStore&lt;TContractState&gt; {
+    fn set_value(ref self: TContractState, value: u128);
+    fn get_value(self: @TContractState) -&gt; u128;
+}
+
+#[starknet::contract]
+#[feature("forward-impl")]
+mod ValueStoreForwarder {
+    use starknet::ClassHash;
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
+    #[storage]
+    struct Storage {
+        logic_library: ClassHash,
+        value: u128,
+    }
+
+    #[constructor]
+    fn constructor(ref self: ContractState, logic_library: ClassHash) {
+        self.logic_library.write(logic_library);
+    }
+
+    // ANCHOR: forwarding_class_hash
+    impl ForwardingClassHashImpl of starknet::ForwardingClassHash&lt;ContractState&gt; {
+        fn class_hash(self: @ContractState) -&gt; ClassHash {
+            self.logic_library.read()
+        }
+    }
+    // ANCHOR_END: forwarding_class_hash
+
+    // ANCHOR: embed
+    #[abi(embed_v0)]
+    impl ValueStoreForwarded = super::IValueStoreForwardImpl&lt;ContractState&gt;;
+    // ANCHOR_END: embed
+}
+</code></pre>
+<p>Forwarding a whole interface with the generated <code>IValueStoreForwardImpl</code></span></p>
+<p>The resulting ABI is indistinguishable from the hand-written version: the same
+entry points, each keeping its <code>view</code> or <code>external</code> mutability. The calls are
+still library calls, so they execute in the forwarder's context and read and
+write its storage — which is why <code>ValueStoreForwarder</code> keeps a <code>value</code> slot for
+the forwarded logic to act on.</p>
+<blockquote>
+<p>Note: <code>ForwardingClassHash</code> and the generated forwarding impls are unstable,
+so the contract module must opt in with <code>#[feature("forward-impl")]</code>. Without
+it the compiler only warns, but the attribute is required for the code to keep
+compiling as the feature stabilizes.</p>
+</blockquote>
+<p>Reach for this when a contract forwards an interface wholesale. If you need to
+forward only some methods, or to run logic of your own around a forwarded call,
+use the library dispatcher directly as shown above.</p>
 <h2 id="calling-classes-using-low-level-calls"><a class="header" href="#calling-classes-using-low-level-calls">Calling Classes using Low-Level Calls</a></h2>
 <p>Another way to call classes is to directly use <code>library_call_syscall</code>. While
 less convenient than using the dispatcher pattern, this syscall provides more
 control over the serialization and deserialization process and allows for more
 customized error handling.</p>
-<p>Listing 16-7 shows an example demonstrating how to use a
+<p>Listing 16-8 shows an example demonstrating how to use a
 <code>library_call_syscall</code> to call the <code>set_value</code> function of <code>ValueStore</code>
 contract:</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
@@ -457,7 +532,7 @@ mod ValueStore {
     }
 }
 </code></pre>
-<p>16-7: A sample contract using <code>library_call_syscall</code> system
+<p>16-8: A sample contract using <code>library_call_syscall</code> system
 call</span></p>
 <p>To use this syscall, we passed in the class hash, the selector of the function
 we want to call and the call arguments. The call arguments must be provided as
@@ -475,6 +550,8 @@ external sources</li>
 pattern</li>
 <li>How to use <em>Library calls</em> to execute the logic of another class in the
 context of the caller</li>
+<li>How to forward a whole interface to another class with the compiler-generated
+forwarding impls</li>
 <li>The two syscalls that Starknet provides to interact with contracts and classes</li>
 </ul>
 <p>You now have all the required tools to develop complex applications with logic

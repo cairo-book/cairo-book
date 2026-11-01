@@ -416,6 +416,38 @@ fn test_transfer_updates_balances() {
 </span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
 </span><span class="boring">}
 </span><span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
 <p>This test verifies that transferring 100 tokens works. But it doesn't test
@@ -534,6 +566,38 @@ fn test_fuzz_transfer_preserves_total_supply(amount: u64) {
 </span><span class="boring">    // PROPERTY: Balances should return to original
 </span><span class="boring">    assert_eq!(token.balance_of(alice), alice_initial, "Alice balance not restored");
 </span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
@@ -666,6 +730,38 @@ fn test_fuzz_transfer_conserves_balances(amount: u64) {
 </span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
 </span><span class="boring">}
 </span><span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
 <p><span class="caption">Listing 18-8: Testing balance
@@ -787,10 +883,200 @@ fn test_fuzz_transfer_roundtrip(amount: u64) {
     assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
 }
 <span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
 <p><span class="caption">Listing 18-9: Testing the transfer
 round-trip property</span></p>
+<h3 id="fuzzing-custom-types"><a class="header" href="#fuzzing-custom-types">Fuzzing Custom Types</a></h3>
+<p>The fuzzer can only generate arguments for types it knows how to build. Out of
+the box that covers <code>felt252</code>, the sized integers (<code>u8</code> through <code>u128</code>, <code>i8</code>
+through <code>i128</code>), <code>u256</code>, <code>bool</code>, <code>ByteArray</code>, and <code>ContractAddress</code>.</p>
+<p>For your own structs and enums, derive <code>Fuzzable</code> and the fuzzer will generate
+each field or variant for you. This is how one test varies several related
+inputs at once:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">};
+</span><span class="boring">use starknet::{ContractAddress, contract_address_const};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">
+</span><span class="boring">fn owner() -&gt; ContractAddress {
+</span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
+</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let owner = owner();
+</span><span class="boring">    let constructor_calldata = array![
+</span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
+</span><span class="boring">    ];
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">    ISimpleTokenDispatcher { contract_address }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// A simple example-based test
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_transfer_updates_balances() {
+</span><span class="boring">    let token = deploy_token(1000);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, 100);
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    assert_eq!(token.balance_of(owner()), 900);
+</span><span class="boring">    assert_eq!(token.balance_of(recipient), 100);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// Invariant: Transfer preserves total supply
+</span><span class="boring">/// For any valid transfer, total_supply before == total_supply after
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 12345)]
+</span><span class="boring">fn test_fuzz_transfer_preserves_total_supply(amount: u64) {
+</span><span class="boring">    // Setup: deploy with enough balance for any fuzzed amount
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Transfer a fuzzed amount
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    let supply_after = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: total supply must not change
+</span><span class="boring">    assert_eq!(supply_before, supply_after, "Total supply changed after transfer!");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// Invariant: Transfer conserves balances
+</span><span class="boring">/// sender_balance_before + recipient_balance_before ==
+</span><span class="boring">/// sender_balance_after + recipient_balance_after
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 54321)]
+</span><span class="boring">fn test_fuzz_transfer_conserves_balances(amount: u64) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF;
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let sender_before = token.balance_of(owner());
+</span><span class="boring">    let recipient_before = token.balance_of(recipient);
+</span><span class="boring">    let sum_before = sender_before + recipient_before;
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    let sender_after = token.balance_of(owner());
+</span><span class="boring">    let recipient_after = token.balance_of(recipient);
+</span><span class="boring">    let sum_after = sender_after + recipient_after;
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: sum of involved balances must not change
+</span><span class="boring">    assert_eq!(sum_before, sum_after, "Balance conservation violated!");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// Property: Transfer round-trip
+</span><span class="boring">/// If A transfers X to B, and B transfers X back to A, balances return to original
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 11111)]
+</span><span class="boring">fn test_fuzz_transfer_roundtrip(amount: u64) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF;
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let alice = owner();
+</span><span class="boring">    let bob = contract_address_const::&lt;'bob'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let alice_initial = token.balance_of(alice);
+</span><span class="boring">    let bob_initial = token.balance_of(bob);
+</span><span class="boring">
+</span><span class="boring">    // Alice -&gt; Bob
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, alice);
+</span><span class="boring">    token.transfer(bob, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // Bob -&gt; Alice
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, bob);
+</span><span class="boring">    token.transfer(alice, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // PROPERTY: Balances should return to original
+</span><span class="boring">    assert_eq!(token.balance_of(alice), alice_initial, "Alice balance not restored");
+</span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// A custom type the fuzzer knows how to generate, so one test can vary
+/// several related inputs together.
+#[derive(Drop, Debug, Fuzzable)]
+struct TransferPair {
+    first: u32,
+    second: u32,
+}
+
+#[test]
+#[fuzzer(runs: 100, seed: 22222)]
+fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+    let token = deploy_token(initial_supply);
+    let recipient = contract_address_const::&lt;'recipient'&gt;();
+
+    let supply_before = token.total_supply();
+
+    // Both amounts are u32, so their sum can never exceed the owner's balance.
+    start_cheat_caller_address(token.contract_address, owner());
+    token.transfer(recipient, pair.first.into());
+    token.transfer(recipient, pair.second.into());
+    stop_cheat_caller_address(token.contract_address);
+
+    // INVARIANT: moving tokens twice still creates and destroys nothing.
+    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+    assert_eq!(
+        token.balance_of(recipient),
+        pair.first.into() + pair.second.into(),
+        "Recipient balance does not match the two transfers",
+    );
+}
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p><span class="caption">Listing 18-10: Fuzzing a custom struct
+with <code>#[derive(Fuzzable)]</code></span></p>
+<p><code>Fuzzable</code> requires <code>Drop</code> and <code>Debug</code> alongside it — <code>Debug</code> so the fuzzer can
+print the input that broke your test. Every field type must itself be fuzzable,
+so a struct of a type with no <code>Fuzzable</code> impl will not compile.</p>
 <h2 id="common-property-patterns"><a class="header" href="#common-property-patterns">Common Property Patterns</a></h2>
 <h3 id="invariants-always-true"><a class="header" href="#invariants-always-true">Invariants (Always True)</a></h3>
 <pre><code class="language-cairo noplayground">// After ANY operation, this should hold

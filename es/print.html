@@ -254,9 +254,9 @@ thanks to <a href="https://starkware.co/">StarkWare</a> through
 for supporting the creation of this book.</em></p>
 <p>This version of the text assumes you’re using
 <a href="https://github.com/starkware-libs/cairo">Cairo</a>
-<a href="https://github.com/starkware-libs/cairo/releases">version 2.16.1</a> and
+<a href="https://github.com/starkware-libs/cairo/releases">version 2.20.0</a> and
 <a href="https://foundry-rs.github.io/starknet-foundry/index.html">Starknet Foundry</a>
-<a href="https://github.com/foundry-rs/starknet-foundry/releases">version 0.58.1</a>. See
+<a href="https://github.com/foundry-rs/starknet-foundry/releases">version 0.62.1</a>. See
 the <a href="ch01-01-installation.html">Installation</a> section of Chapter
 1 to install or update Cairo and Starknet Foundry.</p>
 <p>This book is open source. Find a typo or want to contribute? Check out the
@@ -470,12 +470,12 @@ line will appear:</p>
 versions of Cairo, Scarb, and Starknet Foundry. You can verify the installations
 by running the following commands in a new terminal session:</p>
 <pre><code class="language-bash">$ scarb --version
-scarb 2.16.1 (639d0a65e 2025-08-04)
-cairo: 2.16.1 (https://crates.io/crates/cairo-lang-compiler/2.16.1)
-sierra: 1.7.0
+scarb 2.20.0 (f6832b048 2026-07-23)
+cairo: 2.20.0 (https://crates.io/crates/cairo-lang-compiler/2.20.0)
+sierra: 1.9.3
 
 $ snforge --version
-snforge 0.58.1
+snforge 0.62.1
 </code></pre>
 <p>We'll describe Starknet Foundry in more detail in <a href="./ch10-01-how-to-write-tests.html">Chapter
 10</a> for Cairo programs testing and
@@ -561,11 +561,11 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.16.1"
+starknet = "2.20.0"
 
 [dev-dependencies]
-snforge_std = "0.58.1"
-assert_macros = "2.16.1"
+snforge_std = "0.62.1"
+assert_macros = "2.20.0"
 
 [[target.starknet-contract]]
 sierra = true
@@ -616,7 +616,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.16.1"
+cairo_execute = "2.20.0"
 
 
 [[target.executable]]
@@ -754,7 +754,7 @@ performed correctly, so that anyone can verify your proof to trust that you
 found a prime number. The user will input a number, and we’ll output whether
 it’s prime, followed by generating and verifying a proof.</p>
 <h2 id="setting-up-a-new-project"><a class="header" href="#setting-up-a-new-project">Setting Up a New Project</a></h2>
-<p>To get started, ensure you have Scarb 2.16.1 or later installed (see
+<p>To get started, ensure you have Scarb 2.20.0 or later installed (see
 <a href="./ch01-01-installation.html">Installation</a> for details). We’ll use Scarb to create and manage
 our Cairo project.</p>
 <p>Open a terminal in your projects directory and create a new Scarb project:</p>
@@ -772,7 +772,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.16.1"
+cairo_test = "2.20.0"
 </code></pre>
 <p>This is a minimal manifest file for a Cairo project. However, since we want to
 create an executable program that we can prove, we need to modify it. Update
@@ -788,7 +788,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.16.1"
+cairo_execute = "2.20.0"
 
 
 [[target.executable]]
@@ -801,7 +801,7 @@ function = "prime_prover::main"
 executable (not a library or Starknet contract).</li>
 <li><code>[cairo] enable-gas = false</code> disables gas tracking, which is required for
 executable targets since gas is specific to Starknet contracts.
-<code>[dependencies] cairo_execute = "2.16.1"</code> adds the plugin needed to execute
+<code>[dependencies] cairo_execute = "2.20.0"</code> adds the plugin needed to execute
 and prove our program.</li>
 </ul>
 <p>Now, check the generated <code>src/lib.cairo</code>, which is a simple placeholder. Since
@@ -1471,6 +1471,41 @@ fn main() {
     let (x, y): (felt252, felt252) = (2, 3);
 }
 </code></pre>
+<h4 id="accessing-tuple-elements"><a class="header" href="#accessing-tuple-elements">Accessing Tuple Elements</a></h4>
+<p>Destructuring is convenient when we want every value at once, but we can also
+reach a single element directly by its position, writing a period (<code>.</code>) followed
+by the index of the value we want. As with most things in programming, indices
+start at <code>0</code>.</p>
+<p>A tuple element can itself be a tuple, in which case accesses chain:
+<code>nested.0.1</code> reads the second value of the tuple stored in the first position.
+And when a tuple is declared with <code>mut</code>, its elements can be assigned to
+individually:</p>
+<pre><code class="language-cairo">#[executable]
+fn main() {
+    let tup = (500_u32, 6_u32, true);
+
+    println!("The second value is {}", tup.1);
+
+    let nested = ((1_u32, 2_u32), 3_u32);
+    println!("The inner second value is {}", nested.0.1);
+
+    let mut scores = (10_u32, 20_u32);
+    scores.0 = 15;
+    scores.1 += 5;
+    println!("Scores are now {} and {}", scores.0, scores.1);
+}
+</code></pre>
+<p>Running this program prints:</p>
+<pre><code class="language-shell">$ scarb execute
+   Compiling no_listing_14_bis_tuple_element_access v0.1.0 (listings/ch02-common-programming-concepts/no_listing_14_bis_tuple_element_access/Scarb.toml)
+    Finished `dev` profile target(s) in 1 second
+   Executing no_listing_14_bis_tuple_element_access
+The second value is 6
+The inner second value is 2
+Scores are now 15 and 25
+
+
+</code></pre>
 <h4 id="the-unit-type-"><a class="header" href="#the-unit-type-">The Unit Type ()</a></h4>
 <p>A <em>unit type</em> is a type which has only one value <code>()</code>. It is represented by a
 tuple with no elements. Its size is always zero, and it is guaranteed to not
@@ -1928,8 +1963,9 @@ the <code>const fn</code> syntax. This allows the function to be called from a c
 context and interpreted by the compiler at compile time.</p>
 <p>Declaring a function as <code>const</code> restricts the types that arguments and the
 return type may use, and limits the function body to constant expressions.</p>
-<p>Several functions in the core library are marked as <code>const</code>. Here's an example
-from the core library showing the <code>pow</code> function implemented as a <code>const fn</code>:</p>
+<p>Several functions in the core library are marked as <code>const</code>, among them <code>pow</code>.
+Because <code>pow</code> is a <code>const fn</code>, we can call it in a constant expression to
+compute <code>BYTE_MASK</code> at compile time:</p>
 <pre><code class="language-cairo">use core::num::traits::Pow;
 
 const BYTE_MASK: u16 = 2_u16.pow(8) - 1;
@@ -1941,9 +1977,6 @@ fn main() {
     println!("first_byte: {}", first_byte);
 }
 </code></pre>
-<p>In this example, <code>pow</code> is a <code>const</code> function, allowing it to be used in a
-constant expression to define <code>mask</code> at compile time. Here's a snippet of how
-<code>pow</code> is defined in the core library using <code>const fn</code>:</p>
 <p>Note that declaring a function as <code>const</code> has no effect on existing uses; it
 only imposes restrictions for constant contexts.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch02-03-functions&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;id&quot;:&quot;fa63d18f-fee3-4923-962b-bdeabbf61fbd&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;fn&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;The keyword for declaring a new function in Cairo is:&quot;}},{&quot;context&quot;:&quot;A function must declare the types of its parameters. In this case, function `f` could be corrected by adding `u8` type to the `x` parameter like this: `fn f(x:u8)`.\n&quot;,&quot;id&quot;:&quot;6343598f-380f-4a59-b6fb-7dfadc397f74&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:1},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn f(x) {\n  println!(\&quot;{x}\&quot;);\n}\n\n#[executable]\nfn main() {\n  f(0);\n}\n&quot;}},{&quot;context&quot;:&quot;A block is an expression (#1) that is allowed to contain statements. It also defines a syntactic scope for let-bindings inside it (#3).\n&quot;,&quot;id&quot;:&quot;695f318f-539b-4ce8-9c00-92e29f7f1bb3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;1 and 3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;1 only&quot;,&quot;2 only&quot;,&quot;2 and 3&quot;],&quot;prompt&quot;:&quot;In Cairo, a curly-brace block like `{ /* ... */ }` is:\n1. An expression\n2. A statement\n3. A syntactic scope\n&quot;}},{&quot;id&quot;:&quot;7bbc0afb-2ad7-4d8d-97fd-610a65a85e38&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;3&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn f(x: usize) -&gt; usize { x + 1 }\n#[executable]\nfn main() {\n  println!(\&quot;{}\&quot;, f({\n    let y = 1;\n    y + 1\n  }));\n}\n&quot;}}]}"></div>
@@ -2645,6 +2678,70 @@ fn main() {
     array.span();
 }
 </code></pre>
+<h3 id="destructuring-a-span"><a class="header" href="#destructuring-a-span">Destructuring a Span</a></h3>
+<p>A <code>Span</code> can be destructured with a fixed-size array pattern, binding each of
+its elements to its own variable. A span's length is only known at runtime, so
+the pattern may not match, which means it has to appear somewhere failure is
+handled.</p>
+<p>Use <code>let ... else</code> when exactly one length is valid and anything else is an
+error:</p>
+<pre><code class="language-cairo">fn sum_of_three(span: Span&lt;u64&gt;) -&gt; u64 {
+    let [a, b, c] = span else {
+        panic!("expected exactly three elements");
+    };
+    *a + *b + *c
+}
+<span class="boring">
+</span><span class="boring">fn describe(span: Span&lt;u64&gt;) -&gt; ByteArray {
+</span><span class="boring">    match span {
+</span><span class="boring">        [] =&gt; "nothing",
+</span><span class="boring">        [single] =&gt; format!("just {}", *single),
+</span><span class="boring">        [first, second] =&gt; format!("{} and {}", *first, *second),
+</span><span class="boring">        _ =&gt; "too many to list",
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[executable]
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!("{}", sum_of_three(array![10, 20, 30].span()));
+</span><span class="boring">    println!("{}", describe(array![].span()));
+</span><span class="boring">    println!("{}", describe(array![7].span()));
+</span><span class="boring">    println!("{}", describe(array![7, 8].span()));
+</span><span class="boring">    println!("{}", describe(array![7, 8, 9].span()));
+</span><span class="boring">}
+</span></code></pre>
+<p>Use a <a href="./ch06-02-the-match-control-flow-construct.html"><code>match</code></a> to handle several lengths at once. The <code>_</code> arm is
+mandatory here: no finite list of patterns can cover every possible length, so
+the compiler rejects the <code>match</code> as non-exhaustive without it.</p>
+<pre><code class="language-cairo"><span class="boring">fn sum_of_three(span: Span&lt;u64&gt;) -&gt; u64 {
+</span><span class="boring">    let [a, b, c] = span else {
+</span><span class="boring">        panic!("expected exactly three elements");
+</span><span class="boring">    };
+</span><span class="boring">    *a + *b + *c
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn describe(span: Span&lt;u64&gt;) -&gt; ByteArray {
+    match span {
+        [] =&gt; "nothing",
+        [single] =&gt; format!("just {}", *single),
+        [first, second] =&gt; format!("{} and {}", *first, *second),
+        _ =&gt; "too many to list",
+    }
+}
+<span class="boring">
+</span><span class="boring">#[executable]
+</span><span class="boring">fn main() {
+</span><span class="boring">    println!("{}", sum_of_three(array![10, 20, 30].span()));
+</span><span class="boring">    println!("{}", describe(array![].span()));
+</span><span class="boring">    println!("{}", describe(array![7].span()));
+</span><span class="boring">    println!("{}", describe(array![7, 8].span()));
+</span><span class="boring">    println!("{}", describe(array![7, 8, 9].span()));
+</span><span class="boring">}
+</span></code></pre>
+<p>Because a span is itself a snapshot, these patterns bind <em>snapshots</em> of the
+elements — <code>a</code> above is a <code>@u64</code>, hence the <code>*a</code> to read its value. Note also
+that only <code>Span</code> supports these patterns, not <code>Array&lt;T&gt;</code>: call <code>.span()</code> on an
+array first.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch03-01-arrays&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;If `til = 4`, then for an array of length 3, the loop will attempt to index the array with `i = 3`,\nwhich is out of bounds.  This function does not panic if `n = 1` because it returns before reaching\nthe out-of-bounds index.\n&quot;,&quot;id&quot;:&quot;dd16401e-9f74-4c86-a6ec-da2937cb26e5&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`find_until(array![1, 2, 3].span(), 4, 4);`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`find_until(array![1, 2, 3].span(), 0, 0);`&quot;,&quot;`find_until(array![1, 2, 3].span(), 3, 3);`&quot;,&quot;`find_until(array![1, 2, 3].span(), 1, 4);`&quot;],&quot;prompt&quot;:&quot;Which call to this `find_until` function will cause a runtime panic?\n\n```\nfn find_until(mut v: Span&lt;u64&gt;, n: u64, til: usize) -&gt; Option&lt;usize&gt; {\n    let mut i = 0;\n    loop {\n        if i == til {\n            break None;\n        }\n        if *v[i] == n {\n            break Some(i);\n        }\n        i += 1;\n    }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;As Cairo's memory layout is immutable, types cannot be moved out of an array by indexing. The only\npossibility is to copy the value to a new variable using the `*` (desnap) operator.  Therefore, as\nByteArray is not copyable, the line `let mut s = *v[0];` does not compile.\n&quot;,&quot;id&quot;:&quot;2e6570eb-8bf4-48b7-9032-5815475bc412&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:3},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[executable]\nfn main() {\n    let mut v: Array&lt;ByteArray&gt; = array![\&quot;Hello \&quot;];\n    let mut s = *v[0];\n    s.append(@\&quot;world\&quot;);\n    println!(\&quot;{s}\&quot;);\n}\n&quot;}},{&quot;context&quot;:&quot;`*v[0]` copies the value of the first element of the array to `i`. Therefore, `i` is a copy of the\nvalue of `v[0]`, and incrementing `i` does not affect `v[0]`.\n&quot;,&quot;id&quot;:&quot;95d528ee-ae78-4892-a438-a5d97f07f52a&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;2, 1&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;#[executable]\nfn main() {\n    let mut v: Array&lt;usize&gt; = array![1, 2, 3];\n    let mut i = *v[0];\n    i += 1;\n    println!(\&quot;{}, {}\&quot;, i, v[0]);\n}\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="dictionaries"><a class="header" href="#dictionaries">Dictionaries</a></h1>
 <p>Cairo provides in its core library a dictionary-like type. The <code>Felt252Dict&lt;T&gt;</code>
@@ -5257,7 +5354,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.16.1"
+cairo_execute = "2.20.0"
 </code></pre>
 <p>As you develop your package, you may want to organize your code into multiple
 Cairo source files. You can do this by creating additional <em>.cairo</em> files within
@@ -6921,7 +7018,7 @@ syntax for overriding a default implementation is the same as the syntax for
 implementing a trait method that doesn’t have a default implementation.</p>
 <p>Default implementations can call other methods in the same trait, even if those
 other methods don’t have a default implementation. In this way, a trait can
-provide a lot of useful functionality and only require implementors to specify a
+provide a lot of useful functionality and only require implementers to specify a
 small part of it. For example, we could define the <code>Summary</code> trait to have a
 <code>summarize_author</code> method whose implementation is required, and then define a
 <code>summarize</code> method that has a default implementation that calls the
@@ -7496,15 +7593,13 @@ error: `scarb` command exited with error
 with <code>==</code>. We usually don't use <code>assert</code> function in practice and use <code>assert!</code>
 macro instead. We will discuss <code>assert!</code> macro in more detail in the <a href="./ch10-01-how-to-write-tests.html#checking-results-with-the-assert-macro">Testing
 Cairo Programs</a> chapter.</p>
-<h2 id="panic_with-attribute"><a class="header" href="#panic_with-attribute"><code>panic_with</code> Attribute</a></h2>
-<p>You can use the <code>panic_with</code> attribute to mark a function that returns an
-<code>Option</code> or <code>Result</code>. This attribute takes two arguments, which are the data
-that is passed as the panic reason as well as the name for a wrapping function.
-It will create a wrapper for your annotated function which will panic if the
-function returns <code>None</code> or <code>Err</code>, with the given data as the panic error.</p>
+<h2 id="panicking-on-none-or-err"><a class="header" href="#panicking-on-none-or-err">Panicking on <code>None</code> or <code>Err</code></a></h2>
+<p>Functions often return an <code>Option</code> or a <code>Result</code> rather than panicking
+themselves, leaving the decision to the caller. When the caller considers the
+absence of a value to be unrecoverable, it can use the <code>expect</code> method to
+extract the value and panic with a chosen error message otherwise.</p>
 <p>Example:</p>
-<pre><code class="language-cairo">#[panic_with('value is 0', wrap_not_zero)]
-fn wrap_if_not_zero(value: u128) -&gt; Option&lt;u128&gt; {
+<pre><code class="language-cairo">fn wrap_if_not_zero(value: u128) -&gt; Option&lt;u128&gt; {
     if value == 0 {
         None
     } else {
@@ -7514,11 +7609,16 @@ fn wrap_if_not_zero(value: u128) -&gt; Option&lt;u128&gt; {
 
 #[executable]
 fn main() {
-    wrap_if_not_zero(0); // this returns None
-    wrap_not_zero(0); // this panics with 'value is 0'
+    let value = wrap_if_not_zero(42).expect('value is 0'); // this returns 42
+    println!("value: {}", value);
+    wrap_if_not_zero(0).expect('value is 0'); // this panics with 'value is 0'
 }
 </code></pre>
-<div class="quiz-placeholder" data-quiz-name="&quot;ch09-01-unrecoverable-errors-with-panic&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The macro `panic!` takes one and only one `ByteArray` argument.\nThe function `core::panic_with_felt252` takes one and only one `felt252` argument.\nThe function `panic` takes an array of `felt252` elements as an argument and returns it.\n&quot;,&quot;id&quot;:&quot;5bf03883-59ab-4063-85e8-8c1d2fafa3e3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`panic(array![2, 'This is the error message']);`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`panic(array![2, \&quot;This is the error message\&quot;]);`&quot;,&quot;`panic!(\&quot;2\&quot;, \&quot;This is the error message\&quot;);`&quot;,&quot;`core::panic_with_felt252(2, 'This is the error message');`&quot;],&quot;prompt&quot;:&quot;Which line of code is correct to return the error code `2` and the error message `This is the error message`?\n&quot;}},{&quot;context&quot;:&quot;A panic should not be used to communicate failure *within* the program, as it will terminate the program immediately.\n&quot;,&quot;id&quot;:&quot;0e7bb9f9-af5a-441d-83b4-bcd0a97daf70&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;The program has reached an error state which should be communicated to a caller function&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;The program is about to perform a dangerous operation&quot;,&quot;The program should stop executing as soon as possible&quot;,&quot;The program has reached an unrecoverable error state&quot;],&quot;prompt&quot;:&quot;Which of the following is **NOT** a good reason to use a panic?\n&quot;}},{&quot;context&quot;:&quot;Program 3 tries to access an element at an index that is out of bounds, but it matches the\nresulting `Option` and returns a default value `0` instead of panicking.\n&quot;,&quot;id&quot;:&quot;b6ee33f0-5b70-4286-a6d9-a08aad66f9c8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Program 3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Program 1&quot;,&quot;Program 2&quot;,&quot;Program 2 and Program 3&quot;],&quot;prompt&quot;:&quot;Which of the following programs will **NOT** cause a runtime panic?\n\n```\n#[executable]\nfn main() {\n    if true {\n        panic!(\&quot;2\&quot;);\n    }\n    println!(\&quot;This line shouldn't be reached\&quot;);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let arr = array![1, 2, 3];\n    let index = 5;\n\n    println!(\&quot;Value at index {}: {}\&quot;, index, arr[index]);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let mut arr: Array&lt;u128&gt; = array![5];\n    let index_to_access = 3;\n    let value = match arr.get(index_to_access) {\n        Some(x) =&gt; { *x.unbox() },\n        None =&gt; { 0 }\n    };\n\n    println!(\&quot;Value at index {} is {}\&quot;, index_to_access, value);\n}\n```\n&quot;}},{&quot;context&quot;:&quot;If a function is annotated with `#[panic_with]`, a wrapper function is created that panics if the\nannotated function returns `None` or `Err`.\n&quot;,&quot;id&quot;:&quot;f618cfc9-3419-4cde-962d-72210879b3b3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;To create a wrapper function that panics if the annotated function returns `None` or `Err`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;To handle runtime errors gracefully&quot;,&quot;To indicate that a function may panic&quot;,&quot;To catch errors at compile time&quot;],&quot;prompt&quot;:&quot;What is the purpose of the `panic_with` attribute in Cairo?\n\n&quot;}}]}"></div>
+<p>The first call returns <code>42</code>, as <code>wrap_if_not_zero</code> gives back <code>Some(42)</code>. The
+second one receives <code>None</code> and therefore panics with <code>'value is 0'</code>. We cover
+<code>expect</code> and its companion methods in more detail in the <a href="./ch09-02-recoverable-errors.html">Recoverable Errors
+with <code>Result</code></a> section.</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch09-01-unrecoverable-errors-with-panic&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The macro `panic!` takes one and only one `ByteArray` argument.\nThe function `core::panic_with_felt252` takes one and only one `felt252` argument.\nThe function `panic` takes an array of `felt252` elements as an argument and returns it.\n&quot;,&quot;id&quot;:&quot;5bf03883-59ab-4063-85e8-8c1d2fafa3e3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;`panic(array![2, 'This is the error message']);`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`panic(array![2, \&quot;This is the error message\&quot;]);`&quot;,&quot;`panic!(\&quot;2\&quot;, \&quot;This is the error message\&quot;);`&quot;,&quot;`core::panic_with_felt252(2, 'This is the error message');`&quot;],&quot;prompt&quot;:&quot;Which line of code is correct to return the error code `2` and the error message `This is the error message`?\n&quot;}},{&quot;context&quot;:&quot;A panic should not be used to communicate failure *within* the program, as it will terminate the program immediately.\n&quot;,&quot;id&quot;:&quot;0e7bb9f9-af5a-441d-83b4-bcd0a97daf70&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;The program has reached an error state which should be communicated to a caller function&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;The program is about to perform a dangerous operation&quot;,&quot;The program should stop executing as soon as possible&quot;,&quot;The program has reached an unrecoverable error state&quot;],&quot;prompt&quot;:&quot;Which of the following is **NOT** a good reason to use a panic?\n&quot;}},{&quot;context&quot;:&quot;Program 3 tries to access an element at an index that is out of bounds, but it matches the\nresulting `Option` and returns a default value `0` instead of panicking.\n&quot;,&quot;id&quot;:&quot;b6ee33f0-5b70-4286-a6d9-a08aad66f9c8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Program 3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Program 1&quot;,&quot;Program 2&quot;,&quot;Program 2 and Program 3&quot;],&quot;prompt&quot;:&quot;Which of the following programs will **NOT** cause a runtime panic?\n\n```\n#[executable]\nfn main() {\n    if true {\n        panic!(\&quot;2\&quot;);\n    }\n    println!(\&quot;This line shouldn't be reached\&quot;);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let arr = array![1, 2, 3];\n    let index = 5;\n\n    println!(\&quot;Value at index {}: {}\&quot;, index, arr[index]);\n}\n```\n\n```\n#[executable]\nfn main() {\n    let mut arr: Array&lt;u128&gt; = array![5];\n    let index_to_access = 3;\n    let value = match arr.get(index_to_access) {\n        Some(x) =&gt; { *x.unbox() },\n        None =&gt; { 0 }\n    };\n\n    println!(\&quot;Value at index {} is {}\&quot;, index_to_access, value);\n}\n```\n&quot;}},{&quot;context&quot;:&quot;`expect` extracts the inner value of an `Option` or a `Result`. If there is no such value, meaning\nthe value is `None` or `Err`, it panics with the error message passed as its argument.\n&quot;,&quot;id&quot;:&quot;e6081893-cfd6-4ef0-9290-a90a4d49ef3e&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;It panics with the error message given as its argument&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;It returns a default value for the wrapped type&quot;,&quot;It propagates the error to the calling function&quot;,&quot;It causes a compile-time error&quot;],&quot;prompt&quot;:&quot;What does the `expect` method do when called on a value that is `None` or `Err`?\n\n&quot;}}]}"></div>
 <script type="text/javascript" src="quiz-cairo/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz-cairo/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="recoverable-errors-with-result"><a class="header" href="#recoverable-errors-with-result">Recoverable Errors with <code>Result</code></a></h1>
 <p>Most errors aren’t serious enough to require the program to stop entirely.
 Sometimes, when a function fails, it’s for a reason that you can easily
@@ -8634,8 +8734,10 @@ mod tests {
 </span></code></pre>
 <p>implementation that panics with different error messages</span></p>
 <p>The test will pass because the value we put in the <code>should_panic</code> attribute’s
-<code>expected</code> parameter is the string that the <code>Guess::new</code> method panics with. We
-need to specify the entire panic message that we expect.</p>
+<code>expected</code> parameter is the string that the <code>Guess::new</code> method panics with. It
+does not have to be the whole message: the harness only checks that the panic
+message <em>contains</em> the expected string, so <code>expected: "must be &lt;= 100"</code> would
+pass here too. The more of the message we specify, the more precise the test.</p>
 <p>To see what happens when a <code>should_panic</code> test with an expected message fails,
 let’s again introduce a bug into our code by swapping the bodies of the
 <code>if value &lt; 1</code> and the <code>else if value &gt; 100</code> blocks:</p>
@@ -9484,7 +9586,7 @@ happens to the references or values when the closure is evaluated later (thus
 affecting what, if anything, is moved <em>out of</em> the closure). A closure body can
 do any of the following: move a captured value out of the closure, neither move
 nor mutate the value, or capture nothing from the environment to begin with.</p>
-<!-- TODO: later, closures will be able to do any of the followings: -->
+<!-- TODO: later, closures will be able to do any of the following: -->
 <!-- A closure body can
 do any of the following: move a captured value out of the closure, mutate the
 captured value, neither move nor mutate the value, or capture nothing from the
@@ -11604,11 +11706,15 @@ always produce the same hash value. Hash functions are a fundamental component
 in various fields, including data storage, cryptography and data integrity
 verification. They are very often used when developing smart contracts,
 especially when working with <a href="https://en.wikipedia.org/wiki/Merkle_tree#Uses">Merkle trees</a>.</p>
-<p>In this chapter, we will present the two hash functions implemented natively in
-the Cairo core library: <code>Poseidon</code> and <code>Pedersen</code>. We will discuss when and how
-to use them, and see examples with Cairo programs.</p>
+<p>In this chapter, we will present the hash functions available in the Cairo core
+library. We will focus on <code>Poseidon</code> and <code>Pedersen</code>, the two that integrate with
+the <code>Hash</code> trait, discuss when and how to use them, and see examples with Cairo
+programs. We will then look at the SHA-2 family, which serves a different
+purpose.</p>
 <h3 id="hash-functions-in-cairo"><a class="header" href="#hash-functions-in-cairo">Hash Functions in Cairo</a></h3>
-<p>The Cairo core library provides two hash functions: Pedersen and Poseidon.</p>
+<p>The Cairo core library provides two hash functions designed for use inside
+proofs, Pedersen and Poseidon, alongside the SHA-2 family described
+<a href="ch12-04-hash.html#the-sha-2-family">later in this chapter</a>.</p>
 <p>Pedersen hash functions are cryptographic algorithms that rely on <a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">elliptic
 curve cryptography</a>. These functions perform operations on points along
 an elliptic curve — essentially, doing math with the locations of these points —
@@ -11776,6 +11882,21 @@ fn main() {
 <span class="boring">
 </span><span class="boring">
 </span></code></pre>
+<h3 id="the-sha-2-family"><a class="header" href="#the-sha-2-family">The SHA-2 Family</a></h3>
+<p>Pedersen and Poseidon are cheap to prove, but nothing outside Cairo computes
+them. When you need a digest that other systems also understand, the core
+library provides the SHA-2 functions. These are not tied to the <code>Hash</code> trait:
+rather than building up a <code>HashState</code>, each takes the whole input at once —
+either a <code>ByteArray</code> or an array of words — and returns the digest as an array
+of words.</p>
+<div class="table-wrapper"><table><thead><tr><th>Module</th><th>Functions</th><th>Digest</th></tr></thead><tbody>
+<tr><td><code>core::sha256</code></td><td><code>compute_sha256_byte_array</code>, <code>compute_sha256_u32_array</code></td><td><code>[u32; 8]</code></td></tr>
+<tr><td><code>core::sha512</code></td><td><code>compute_sha512_byte_array</code>, <code>compute_sha512_u64_array</code></td><td><code>[u64; 8]</code></td></tr>
+<tr><td><code>core::sha384</code></td><td><code>compute_sha384_byte_array</code>, <code>compute_sha384_u64_array</code></td><td><code>[u64; 6]</code></td></tr>
+</tbody></table>
+</div>
+<p>Note that these are backed by system calls, so they are available in smart
+contracts and in tests, but not in standalone executable programs.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="macros"><a class="header" href="#macros">Macros</a></h1>
 <p>We’ve used macros like <code>println!</code> throughout this book, but we haven’t fully
 explored what a macro is and how it works. The term <em>macro</em> refers to a family
@@ -12064,11 +12185,11 @@ experimental-features = ["user_defined_inline_macros"]
 # [cairo]
 # 
 # [dependencies]
-# cairo_execute = "2.16.1"
+# cairo_execute = "2.20.0"
 # 
 # [dev-dependencies]
-# snforge_std = "0.58.1"
-# assert_macros = "2.16.1"
+# snforge_std = "0.62.1"
+# assert_macros = "2.20.0"
 # 
 # [scripts]
 # test = "snforge test"
@@ -12382,8 +12503,8 @@ crate-type = ["cdylib"]
 [dependencies]
 bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1.1"
-cairo-lang-parser = "2.16.1"
-cairo-lang-syntax = "2.16.1"
+cairo-lang-parser = "2.20.0"
+cairo-lang-syntax = "2.20.0"
 
 [workspace]
 </code></pre>
@@ -12411,14 +12532,14 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-cairo_execute = "2.16.1"
+cairo_execute = "2.20.0"
 pow = { path = "../no_listing_16_procedural_macro_expression" }
 hello_macro = { path = "../no_listing_17_procedural_macro_derive" }
 rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.16.1"
+cairo_test = "2.20.0"
 
 [cairo]
 enable-gas = false
@@ -13779,7 +13900,7 @@ edition = "2024_07"
 publish = false
 
 [dependencies]
-cairo_execute = "2.16.1"
+cairo_execute = "2.20.0"
 oracle = "0.1.0-dev.4"
 
 [executable]
@@ -14031,23 +14152,23 @@ overload that operator is listed.</p>
 <tr><td><code>~</code></td><td><code>~expr</code></td><td>Bitwise NOT</td><td><code>BitNot</code></td></tr>
 <tr><td><code>!=</code></td><td><code>expr != expr</code></td><td>Non-equality comparison</td><td><code>PartialEq</code></td></tr>
 <tr><td><code>%</code></td><td><code>expr % expr</code></td><td>Arithmetic remainder</td><td><code>Rem</code></td></tr>
-<tr><td><code>%=</code></td><td><code>var %= expr</code></td><td>Arithmetic remainder and assignment</td><td><code>RemEq</code></td></tr>
+<tr><td><code>%=</code></td><td><code>var %= expr</code></td><td>Arithmetic remainder and assignment</td><td><code>RemAssign</code></td></tr>
 <tr><td><code>&amp;</code></td><td><code>expr &amp; expr</code></td><td>Bitwise AND</td><td><code>BitAnd</code></td></tr>
 <tr><td><code>&amp;&amp;</code></td><td><code>expr &amp;&amp; expr</code></td><td>Short-circuiting logical AND</td><td></td></tr>
 <tr><td><code>*</code></td><td><code>expr * expr</code></td><td>Arithmetic multiplication</td><td><code>Mul</code></td></tr>
-<tr><td><code>*=</code></td><td><code>var *= expr</code></td><td>Arithmetic multiplication and assignment</td><td><code>MulEq</code></td></tr>
+<tr><td><code>*=</code></td><td><code>var *= expr</code></td><td>Arithmetic multiplication and assignment</td><td><code>MulAssign</code></td></tr>
 <tr><td><code>@</code></td><td><code>@var</code></td><td>Snapshot</td><td></td></tr>
 <tr><td><code>*</code></td><td><code>*var</code></td><td>Desnap</td><td></td></tr>
 <tr><td><code>+</code></td><td><code>expr + expr</code></td><td>Arithmetic addition</td><td><code>Add</code></td></tr>
-<tr><td><code>+=</code></td><td><code>var += expr</code></td><td>Arithmetic addition and assignment</td><td><code>AddEq</code></td></tr>
+<tr><td><code>+=</code></td><td><code>var += expr</code></td><td>Arithmetic addition and assignment</td><td><code>AddAssign</code></td></tr>
 <tr><td><code>,</code></td><td><code>expr, expr</code></td><td>Argument and element separator</td><td></td></tr>
 <tr><td><code>-</code></td><td><code>-expr</code></td><td>Arithmetic negation</td><td><code>Neg</code></td></tr>
 <tr><td><code>-</code></td><td><code>expr - expr</code></td><td>Arithmetic subtraction</td><td><code>Sub</code></td></tr>
-<tr><td><code>-=</code></td><td><code>var -= expr</code></td><td>Arithmetic subtraction and assignment</td><td><code>SubEq</code></td></tr>
+<tr><td><code>-=</code></td><td><code>var -= expr</code></td><td>Arithmetic subtraction and assignment</td><td><code>SubAssign</code></td></tr>
 <tr><td><code>-&gt;</code></td><td><code>fn(...) -&gt; type</code>, <code>|...| -&gt; type</code></td><td>Function and closure return type</td><td></td></tr>
 <tr><td><code>.</code></td><td><code>expr.ident</code></td><td>Member access</td><td></td></tr>
 <tr><td><code>/</code></td><td><code>expr / expr</code></td><td>Arithmetic division</td><td><code>Div</code></td></tr>
-<tr><td><code>/=</code></td><td><code>var /= expr</code></td><td>Arithmetic division and assignment</td><td><code>DivEq</code></td></tr>
+<tr><td><code>/=</code></td><td><code>var /= expr</code></td><td>Arithmetic division and assignment</td><td><code>DivAssign</code></td></tr>
 <tr><td><code>:</code></td><td><code>pat: type</code>, <code>ident: type</code></td><td>Constraints</td><td></td></tr>
 <tr><td><code>:</code></td><td><code>ident: expr</code></td><td>Struct field initializer</td><td></td></tr>
 <tr><td><code>;</code></td><td><code>expr;</code></td><td>Statement and item terminator</td><td></td></tr>
@@ -14109,7 +14230,6 @@ an item.</p>
 <tr><td><code>#[must_use]</code></td><td>Hint to the compiler that the return value of a function or a specific returned type must be used</td></tr>
 <tr><td><code>#[generate_trait]</code></td><td>Automatically generates a trait for an impl</td></tr>
 <tr><td><code>#[available_gas(...)]</code></td><td>Set the maximum amount of gas available to execute a function</td></tr>
-<tr><td><code>#[panic_with('...', wrapper_name)]</code></td><td>Creates a wrapper for the annotated function which will panic if the function returns <code>None</code> or <code>Err</code>, with the given data as the panic error</td></tr>
 <tr><td><code>#[test]</code></td><td>Describe a function as a test function</td></tr>
 <tr><td><code>#[cfg(...)]</code></td><td>Configuration attribute, especially used to configure a <code>tests</code> module with <code>#[cfg(test)]</code></td></tr>
 <tr><td><code>#[should_panic]</code></td><td>Specifies that a test function should necessarily panic</td></tr>
@@ -14960,6 +15080,16 @@ domain separation between the hashes of classes and other objects). For more
 details, see the
 <a href="https://github.com/starkware-libs/cairo-lang/blob/7712b21fc3b1cb02321a58d0c0579f5370147a8b/src/starkware/starknet/core/os/contracts.cairo#L47">Cairo implementation</a>.</p>
 </blockquote>
+<h3 id="compiled-class-hash"><a class="header" href="#compiled-class-hash">Compiled class hash</a></h3>
+<p>The class hash above identifies a class by its Sierra program, which is the
+representation you declare. Before it can run, that Sierra is compiled to Cairo
+assembly (CASM), and that executable form is identified by its own <em>compiled
+class hash</em>.</p>
+<p>It is computed with the <code>blake2s</code> hash function over the compiled class's entry
+points and bytecode, in much the same chain hash style as the class hash
+(<a href="https://github.com/starkware-libs/sequencer/blob/8b140e199e21e87d0480d1c0a8f34b419801c1af/crates/starknet_api/src/contract_class/compiled_class_hash.rs">implementation</a>). A <code>DECLARE</code> transaction has to supply the
+<code>compiled_class_hash</code> of the class it declares, and Starknet's state maintains a
+mapping from each <code>class_hash</code> to it.</p>
 <h3 id="working-with-classes"><a class="header" href="#working-with-classes">Working with classes</a></h3>
 <ul>
 <li>Adding new classes: To introduce new classes to Starknet's state, use the
@@ -18282,7 +18412,7 @@ of smart contracts into real-world applications.</p>
 contract during its execution and stored in the corresponding transaction
 receipt, allowing any external tool to parse and index it (most commonly, a
 <a href="https://docs.starknet.io/tools/overview/">Starknet SDK</a> such as
-<a href="https://starknetjs.com/docs/guides/contracts/events/">Starknet.js</a>).</p>
+<a href="https://starknet-js.com/docs/guides/contracts/events/">Starknet.js</a>).</p>
 <h2 id="defining-events"><a class="header" href="#defining-events">Defining Events</a></h2>
 <p>The events of a smart contract are defined in an enum annotated with the
 attribute <code>#[event]</code>. This enum must be named <code>Event</code>.</p>
@@ -19143,12 +19273,87 @@ returning the value of the storage variable <code>value</code> - still in the co
 <code>ValueStoreExecutor</code>.</p>
 <p>As such, both <code>get_value</code> and <code>get_value_local</code> return the same value, as they
 are reading the same storage slot.</p>
+<h2 id="forwarding-an-entire-interface"><a class="header" href="#forwarding-an-entire-interface">Forwarding an Entire Interface</a></h2>
+<p>Notice that every method of <code>ValueStoreExecutor</code> above has the same shape: build
+a library dispatcher from a stored class hash, then call the method of the same
+name on it. When a contract forwards an interface in its entirety — as a proxy
+does — the compiler can write those methods for you.</p>
+<p>For every <code>#[starknet::interface]</code> trait <code>IFoo</code>, the compiler generates an
+<code>IFooForwardImpl</code>. It implements <code>IFoo</code> by forwarding each method as a library
+call, and it works for any contract that supplies a class hash to forward to.
+You supply that hash by implementing <code>starknet::ForwardingClassHash</code>:</p>
+<pre><code class="language-cairo noplayground">    impl ForwardingClassHashImpl of starknet::ForwardingClassHash&lt;ContractState&gt; {
+        fn class_hash(self: @ContractState) -&gt; ClassHash {
+            self.logic_library.read()
+        }
+    }
+</code></pre>
+<p>Then embed the generated impl in the ABI, exactly as you would a hand-written
+one:</p>
+<pre><code class="language-cairo noplayground">    #[abi(embed_v0)]
+    impl ValueStoreForwarded = super::IValueStoreForwardImpl&lt;ContractState&gt;;
+</code></pre>
+<p>That is the whole contract body. Listing 16-7 rewrites the
+executor above to forward <code>IValueStore</code> to the <code>ValueStoreLogic</code> class, with no
+method bodies of its own:</p>
+<pre><code class="language-cairo noplayground">#[starknet::interface]
+trait IValueStore&lt;TContractState&gt; {
+    fn set_value(ref self: TContractState, value: u128);
+    fn get_value(self: @TContractState) -&gt; u128;
+}
+
+#[starknet::contract]
+#[feature("forward-impl")]
+mod ValueStoreForwarder {
+    use starknet::ClassHash;
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
+    #[storage]
+    struct Storage {
+        logic_library: ClassHash,
+        value: u128,
+    }
+
+    #[constructor]
+    fn constructor(ref self: ContractState, logic_library: ClassHash) {
+        self.logic_library.write(logic_library);
+    }
+
+    // ANCHOR: forwarding_class_hash
+    impl ForwardingClassHashImpl of starknet::ForwardingClassHash&lt;ContractState&gt; {
+        fn class_hash(self: @ContractState) -&gt; ClassHash {
+            self.logic_library.read()
+        }
+    }
+    // ANCHOR_END: forwarding_class_hash
+
+    // ANCHOR: embed
+    #[abi(embed_v0)]
+    impl ValueStoreForwarded = super::IValueStoreForwardImpl&lt;ContractState&gt;;
+    // ANCHOR_END: embed
+}
+</code></pre>
+<p>Forwarding a whole interface with the generated <code>IValueStoreForwardImpl</code></span></p>
+<p>The resulting ABI is indistinguishable from the hand-written version: the same
+entry points, each keeping its <code>view</code> or <code>external</code> mutability. The calls are
+still library calls, so they execute in the forwarder's context and read and
+write its storage — which is why <code>ValueStoreForwarder</code> keeps a <code>value</code> slot for
+the forwarded logic to act on.</p>
+<blockquote>
+<p>Note: <code>ForwardingClassHash</code> and the generated forwarding impls are unstable,
+so the contract module must opt in with <code>#[feature("forward-impl")]</code>. Without
+it the compiler only warns, but the attribute is required for the code to keep
+compiling as the feature stabilizes.</p>
+</blockquote>
+<p>Reach for this when a contract forwards an interface wholesale. If you need to
+forward only some methods, or to run logic of your own around a forwarded call,
+use the library dispatcher directly as shown above.</p>
 <h2 id="calling-classes-using-low-level-calls"><a class="header" href="#calling-classes-using-low-level-calls">Calling Classes using Low-Level Calls</a></h2>
 <p>Another way to call classes is to directly use <code>library_call_syscall</code>. While
 less convenient than using the dispatcher pattern, this syscall provides more
 control over the serialization and deserialization process and allows for more
 customized error handling.</p>
-<p>Listing 16-7 shows an example demonstrating how to use a
+<p>Listing 16-8 shows an example demonstrating how to use a
 <code>library_call_syscall</code> to call the <code>set_value</code> function of <code>ValueStore</code>
 contract:</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
@@ -19186,7 +19391,7 @@ mod ValueStore {
     }
 }
 </code></pre>
-<p>16-7: A sample contract using <code>library_call_syscall</code> system
+<p>16-8: A sample contract using <code>library_call_syscall</code> system
 call</span></p>
 <p>To use this syscall, we passed in the class hash, the selector of the function
 we want to call and the call arguments. The call arguments must be provided as
@@ -19204,6 +19409,8 @@ external sources</li>
 pattern</li>
 <li>How to use <em>Library calls</em> to execute the logic of another class in the
 context of the caller</li>
+<li>How to forward a whole interface to another class with the compiler-generated
+forwarding impls</li>
 <li>The two syscalls that Starknet provides to interact with contracts and classes</li>
 </ul>
 <p>You now have all the required tools to develop complex applications with logic
@@ -19442,9 +19649,15 @@ to store. This is especially important in smart contracts, where storage is
 expensive.</p>
 <p>When writing Cairo smart contracts, it is important to optimize storage usage to
 reduce gas costs. Indeed, most of the cost associated with a transaction is
-related to storage updates; and each storage slot costs gas to write to. This
-means that by packing multiple values into fewer slots, you can decrease the gas
-cost incurred by the users of your smart contract.</p>
+related to storage updates, and each slot is billed as a whole, no matter how
+many of its bits you actually use.</p>
+<p>As of Starknet v0.14.3, reading a slot costs 24,000 L2 gas and overwriting a
+slot that already holds a value costs 60,000. The first write to a slot that has
+never been written is by far the most expensive at 462,000, as it permanently
+grows the state that every node has to keep. See the <a href="https://docs.starknet.io/learn/protocol/fees/">fee documentation</a>
+for current figures.</p>
+<p>This means that by packing multiple values into fewer slots, you can decrease
+the gas cost incurred by the users of your smart contract.</p>
 <h2 id="integer-structure-and-bitwise-operators"><a class="header" href="#integer-structure-and-bitwise-operators">Integer Structure and Bitwise Operators</a></h2>
 <p>An integer is coded on a certain number of bits, depending on its size (For
 example, a <code>u8</code> integer is coded on 8 bits).</p>
@@ -22649,7 +22862,7 @@ integrates with deployed protocols you don't control.</p>
 testing framework for Starknet smart contracts. If you haven't already,
 configure your <code>Scarb.toml</code>:</p>
 <pre><code class="language-toml">[dev-dependencies]
-snforge_std = "0.58.1"
+snforge_std = "0.62.1"
 
 [scripts]
 test = "snforge test"
@@ -24767,6 +24980,38 @@ fn test_transfer_updates_balances() {
 </span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
 </span><span class="boring">}
 </span><span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
 <p>This test verifies that transferring 100 tokens works. But it doesn't test
@@ -24885,6 +25130,38 @@ fn test_fuzz_transfer_preserves_total_supply(amount: u64) {
 </span><span class="boring">    // PROPERTY: Balances should return to original
 </span><span class="boring">    assert_eq!(token.balance_of(alice), alice_initial, "Alice balance not restored");
 </span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">
@@ -25017,6 +25294,38 @@ fn test_fuzz_transfer_conserves_balances(amount: u64) {
 </span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
 </span><span class="boring">}
 </span><span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
 <p><span class="caption">Listing 18-8: Testing balance
@@ -25138,10 +25447,200 @@ fn test_fuzz_transfer_roundtrip(amount: u64) {
     assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
 }
 <span class="boring">
+</span><span class="boring">/// A custom type the fuzzer knows how to generate, so one test can vary
+</span><span class="boring">/// several related inputs together.
+</span><span class="boring">#[derive(Drop, Debug, Fuzzable)]
+</span><span class="boring">struct TransferPair {
+</span><span class="boring">    first: u32,
+</span><span class="boring">    second: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 22222)]
+</span><span class="boring">fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Both amounts are u32, so their sum can never exceed the owner's balance.
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, pair.first.into());
+</span><span class="boring">    token.transfer(recipient, pair.second.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: moving tokens twice still creates and destroys nothing.
+</span><span class="boring">    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+</span><span class="boring">    assert_eq!(
+</span><span class="boring">        token.balance_of(recipient),
+</span><span class="boring">        pair.first.into() + pair.second.into(),
+</span><span class="boring">        "Recipient balance does not match the two transfers",
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
 </span><span class="boring">
 </span></code></pre>
 <p><span class="caption">Listing 18-9: Testing the transfer
 round-trip property</span></p>
+<h3 id="fuzzing-custom-types"><a class="header" href="#fuzzing-custom-types">Fuzzing Custom Types</a></h3>
+<p>The fuzzer can only generate arguments for types it knows how to build. Out of
+the box that covers <code>felt252</code>, the sized integers (<code>u8</code> through <code>u128</code>, <code>i8</code>
+through <code>i128</code>), <code>u256</code>, <code>bool</code>, <code>ByteArray</code>, and <code>ContractAddress</code>.</p>
+<p>For your own structs and enums, derive <code>Fuzzable</code> and the fuzzer will generate
+each field or variant for you. This is how one test varies several related
+inputs at once:</p>
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">};
+</span><span class="boring">use starknet::{ContractAddress, contract_address_const};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">
+</span><span class="boring">fn owner() -&gt; ContractAddress {
+</span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
+</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let owner = owner();
+</span><span class="boring">    let constructor_calldata = array![
+</span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
+</span><span class="boring">    ];
+</span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
+</span><span class="boring">    ISimpleTokenDispatcher { contract_address }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// A simple example-based test
+</span><span class="boring">#[test]
+</span><span class="boring">fn test_transfer_updates_balances() {
+</span><span class="boring">    let token = deploy_token(1000);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, 100);
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    assert_eq!(token.balance_of(owner()), 900);
+</span><span class="boring">    assert_eq!(token.balance_of(recipient), 100);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// Invariant: Transfer preserves total supply
+</span><span class="boring">/// For any valid transfer, total_supply before == total_supply after
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 12345)]
+</span><span class="boring">fn test_fuzz_transfer_preserves_total_supply(amount: u64) {
+</span><span class="boring">    // Setup: deploy with enough balance for any fuzzed amount
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let supply_before = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // Transfer a fuzzed amount
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    let supply_after = token.total_supply();
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: total supply must not change
+</span><span class="boring">    assert_eq!(supply_before, supply_after, "Total supply changed after transfer!");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// Invariant: Transfer conserves balances
+</span><span class="boring">/// sender_balance_before + recipient_balance_before ==
+</span><span class="boring">/// sender_balance_after + recipient_balance_after
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 54321)]
+</span><span class="boring">fn test_fuzz_transfer_conserves_balances(amount: u64) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF;
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let recipient = contract_address_const::&lt;'recipient'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let sender_before = token.balance_of(owner());
+</span><span class="boring">    let recipient_before = token.balance_of(recipient);
+</span><span class="boring">    let sum_before = sender_before + recipient_before;
+</span><span class="boring">
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, owner());
+</span><span class="boring">    token.transfer(recipient, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    let sender_after = token.balance_of(owner());
+</span><span class="boring">    let recipient_after = token.balance_of(recipient);
+</span><span class="boring">    let sum_after = sender_after + recipient_after;
+</span><span class="boring">
+</span><span class="boring">    // INVARIANT: sum of involved balances must not change
+</span><span class="boring">    assert_eq!(sum_before, sum_after, "Balance conservation violated!");
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">/// Property: Transfer round-trip
+</span><span class="boring">/// If A transfers X to B, and B transfers X back to A, balances return to original
+</span><span class="boring">#[test]
+</span><span class="boring">#[fuzzer(runs: 100, seed: 11111)]
+</span><span class="boring">fn test_fuzz_transfer_roundtrip(amount: u64) {
+</span><span class="boring">    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF;
+</span><span class="boring">    let token = deploy_token(initial_supply);
+</span><span class="boring">    let alice = owner();
+</span><span class="boring">    let bob = contract_address_const::&lt;'bob'&gt;();
+</span><span class="boring">
+</span><span class="boring">    let alice_initial = token.balance_of(alice);
+</span><span class="boring">    let bob_initial = token.balance_of(bob);
+</span><span class="boring">
+</span><span class="boring">    // Alice -&gt; Bob
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, alice);
+</span><span class="boring">    token.transfer(bob, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // Bob -&gt; Alice
+</span><span class="boring">    start_cheat_caller_address(token.contract_address, bob);
+</span><span class="boring">    token.transfer(alice, amount.into());
+</span><span class="boring">    stop_cheat_caller_address(token.contract_address);
+</span><span class="boring">
+</span><span class="boring">    // PROPERTY: Balances should return to original
+</span><span class="boring">    assert_eq!(token.balance_of(alice), alice_initial, "Alice balance not restored");
+</span><span class="boring">    assert_eq!(token.balance_of(bob), bob_initial, "Bob balance not restored");
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// A custom type the fuzzer knows how to generate, so one test can vary
+/// several related inputs together.
+#[derive(Drop, Debug, Fuzzable)]
+struct TransferPair {
+    first: u32,
+    second: u32,
+}
+
+#[test]
+#[fuzzer(runs: 100, seed: 22222)]
+fn test_fuzz_two_transfers_conserve_supply(pair: TransferPair) {
+    let initial_supply: u256 = 0xFFFFFFFFFFFFFFFF; // max u64 as u256
+    let token = deploy_token(initial_supply);
+    let recipient = contract_address_const::&lt;'recipient'&gt;();
+
+    let supply_before = token.total_supply();
+
+    // Both amounts are u32, so their sum can never exceed the owner's balance.
+    start_cheat_caller_address(token.contract_address, owner());
+    token.transfer(recipient, pair.first.into());
+    token.transfer(recipient, pair.second.into());
+    stop_cheat_caller_address(token.contract_address);
+
+    // INVARIANT: moving tokens twice still creates and destroys nothing.
+    assert_eq!(supply_before, token.total_supply(), "Total supply changed after transfers!");
+    assert_eq!(
+        token.balance_of(recipient),
+        pair.first.into() + pair.second.into(),
+        "Recipient balance does not match the two transfers",
+    );
+}
+<span class="boring">
+</span><span class="boring">
+</span></code></pre>
+<p><span class="caption">Listing 18-10: Fuzzing a custom struct
+with <code>#[derive(Fuzzable)]</code></span></p>
+<p><code>Fuzzable</code> requires <code>Drop</code> and <code>Debug</code> alongside it — <code>Debug</code> so the fuzzer can
+print the input that broke your test. Every field type must itself be fuzzable,
+so a struct of a type with no <code>Fuzzable</code> impl will not compile.</p>
 <h2 id="common-property-patterns"><a class="header" href="#common-property-patterns">Common Property Patterns</a></h2>
 <h3 id="invariants-always-true"><a class="header" href="#invariants-always-true">Invariants (Always True)</a></h3>
 <pre><code class="language-cairo noplayground">// After ANY operation, this should hold
@@ -25607,6 +26106,7 @@ variables that appear in the function’s scope.</p>
 <li><a href="appendix-08-system-calls.html#storage_write">storage_write</a></li>
 <li><a href="appendix-08-system-calls.html#keccak">keccak</a></li>
 <li><a href="appendix-08-system-calls.html#sha256_process_block">sha256_process_block</a></li>
+<li><a href="appendix-08-system-calls.html#sha512_process_block">sha512_process_block</a></li>
 </ul>
 <h2 id="get_block_hash"><a class="header" href="#get_block_hash"><code>get_block_hash</code></a></h2>
 <h4 id="syntax"><a class="header" href="#syntax">Syntax</a></h4>
@@ -25986,6 +26486,28 @@ with a 512-bit block of <code>input</code> data.</p>
 <h4 id="return-values-12"><a class="header" href="#return-values-12">Return Values</a></h4>
 <p>Returns a new SHA-256 state of the <code>input</code> data.</p>
 <h4 id="common-library-12"><a class="header" href="#common-library-12">Common Library</a></h4>
+<ul>
+<li><a href="https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106">syscalls.cairo</a></li>
+</ul>
+<h2 id="sha512_process_block"><a class="header" href="#sha512_process_block"><code>sha512_process_block</code></a></h2>
+<h4 id="syntax-13"><a class="header" href="#syntax-13">Syntax</a></h4>
+<pre><code class="language-cairo noplayground">pub extern fn sha512_process_block_syscall(
+    state: core::sha2_64_core::Sha512StateHandle, input: Box&lt;[u64; 16]&gt;,
+) -&gt; SyscallResult&lt;core::sha2_64_core::Sha512StateHandle&gt; implicits(GasBuiltin, System) nopanic;
+</code></pre>
+<h4 id="description-13"><a class="header" href="#description-13">Description</a></h4>
+<p>Computes the next SHA-512 state of the input with the given state.</p>
+<p>This syscall computes the next SHA-512 state by combining the current <code>state</code>
+with a 1024-bit block of <code>input</code> data. It also backs SHA-384, which uses the
+same block function with a different initial state.</p>
+<h4 id="arguments-12"><a class="header" href="#arguments-12">Arguments</a></h4>
+<ul>
+<li><em><code>state</code></em>: The current SHA-512 state.</li>
+<li><em><code>input</code></em>: The value to be processed into SHA-512.</li>
+</ul>
+<h4 id="return-values-13"><a class="header" href="#return-values-13">Return Values</a></h4>
+<p>Returns a new SHA-512 state of the <code>input</code> data.</p>
+<h4 id="common-library-13"><a class="header" href="#common-library-13">Common Library</a></h4>
 <ul>
 <li><a href="https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106">syscalls.cairo</a></li>
 </ul>

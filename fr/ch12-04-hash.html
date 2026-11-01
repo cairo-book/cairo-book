@@ -281,11 +281,15 @@ always produce the same hash value. Hash functions are a fundamental component
 in various fields, including data storage, cryptography and data integrity
 verification. They are very often used when developing smart contracts,
 especially when working with <a href="https://en.wikipedia.org/wiki/Merkle_tree#Uses">Merkle trees</a>.</p>
-<p>In this chapter, we will present the two hash functions implemented natively in
-the Cairo core library: <code>Poseidon</code> and <code>Pedersen</code>. We will discuss when and how
-to use them, and see examples with Cairo programs.</p>
+<p>In this chapter, we will present the hash functions available in the Cairo core
+library. We will focus on <code>Poseidon</code> and <code>Pedersen</code>, the two that integrate with
+the <code>Hash</code> trait, discuss when and how to use them, and see examples with Cairo
+programs. We will then look at the SHA-2 family, which serves a different
+purpose.</p>
 <h3 id="hash-functions-in-cairo"><a class="header" href="#hash-functions-in-cairo">Hash Functions in Cairo</a></h3>
-<p>The Cairo core library provides two hash functions: Pedersen and Poseidon.</p>
+<p>The Cairo core library provides two hash functions designed for use inside
+proofs, Pedersen and Poseidon, alongside the SHA-2 family described
+<a href="#the-sha-2-family">later in this chapter</a>.</p>
 <p>Pedersen hash functions are cryptographic algorithms that rely on <a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">elliptic
 curve cryptography</a>. These functions perform operations on points along
 an elliptic curve — essentially, doing math with the locations of these points —
@@ -453,6 +457,21 @@ fn main() {
 <span class="boring">
 </span><span class="boring">
 </span></code></pre>
+<h3 id="the-sha-2-family"><a class="header" href="#the-sha-2-family">The SHA-2 Family</a></h3>
+<p>Pedersen and Poseidon are cheap to prove, but nothing outside Cairo computes
+them. When you need a digest that other systems also understand, the core
+library provides the SHA-2 functions. These are not tied to the <code>Hash</code> trait:
+rather than building up a <code>HashState</code>, each takes the whole input at once —
+either a <code>ByteArray</code> or an array of words — and returns the digest as an array
+of words.</p>
+<div class="table-wrapper"><table><thead><tr><th>Module</th><th>Functions</th><th>Digest</th></tr></thead><tbody>
+<tr><td><code>core::sha256</code></td><td><code>compute_sha256_byte_array</code>, <code>compute_sha256_u32_array</code></td><td><code>[u32; 8]</code></td></tr>
+<tr><td><code>core::sha512</code></td><td><code>compute_sha512_byte_array</code>, <code>compute_sha512_u64_array</code></td><td><code>[u64; 8]</code></td></tr>
+<tr><td><code>core::sha384</code></td><td><code>compute_sha384_byte_array</code>, <code>compute_sha384_u64_array</code></td><td><code>[u64; 6]</code></td></tr>
+</tbody></table>
+</div>
+<p>Note that these are backed by system calls, so they are available in smart
+contracts and in tests, but not in standalone executable programs.</p>
 
                     </main>
 

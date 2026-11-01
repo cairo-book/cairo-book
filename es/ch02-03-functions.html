@@ -592,8 +592,9 @@ the <code>const fn</code> syntax. This allows the function to be called from a c
 context and interpreted by the compiler at compile time.</p>
 <p>Declaring a function as <code>const</code> restricts the types that arguments and the
 return type may use, and limits the function body to constant expressions.</p>
-<p>Several functions in the core library are marked as <code>const</code>. Here's an example
-from the core library showing the <code>pow</code> function implemented as a <code>const fn</code>:</p>
+<p>Several functions in the core library are marked as <code>const</code>, among them <code>pow</code>.
+Because <code>pow</code> is a <code>const fn</code>, we can call it in a constant expression to
+compute <code>BYTE_MASK</code> at compile time:</p>
 <pre><code class="language-cairo">use core::num::traits::Pow;
 
 const BYTE_MASK: u16 = 2_u16.pow(8) - 1;
@@ -605,9 +606,6 @@ fn main() {
     println!("first_byte: {}", first_byte);
 }
 </code></pre>
-<p>In this example, <code>pow</code> is a <code>const</code> function, allowing it to be used in a
-constant expression to define <code>mask</code> at compile time. Here's a snippet of how
-<code>pow</code> is defined in the core library using <code>const fn</code>:</p>
 <p>Note that declaring a function as <code>const</code> has no effect on existing uses; it
 only imposes restrictions for constant contexts.</p>
 <div class="quiz-placeholder" data-quiz-name="&quot;ch02-03-functions&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;id&quot;:&quot;fa63d18f-fee3-4923-962b-bdeabbf61fbd&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;fn&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;The keyword for declaring a new function in Cairo is:&quot;}},{&quot;context&quot;:&quot;A function must declare the types of its parameters. In this case, function `f` could be corrected by adding `u8` type to the `x` parameter like this: `fn f(x:u8)`.\n&quot;,&quot;id&quot;:&quot;6343598f-380f-4a59-b6fb-7dfadc397f74&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:1},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn f(x) {\n  println!(\&quot;{x}\&quot;);\n}\n\n#[executable]\nfn main() {\n  f(0);\n}\n&quot;}},{&quot;context&quot;:&quot;A block is an expression (#1) that is allowed to contain statements. It also defines a syntactic scope for let-bindings inside it (#3).\n&quot;,&quot;id&quot;:&quot;695f318f-539b-4ce8-9c00-92e29f7f1bb3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;1 and 3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;1 only&quot;,&quot;2 only&quot;,&quot;2 and 3&quot;],&quot;prompt&quot;:&quot;In Cairo, a curly-brace block like `{ /* ... */ }` is:\n1. An expression\n2. A statement\n3. A syntactic scope\n&quot;}},{&quot;id&quot;:&quot;7bbc0afb-2ad7-4d8d-97fd-610a65a85e38&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;3&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn f(x: usize) -&gt; usize { x + 1 }\n#[executable]\nfn main() {\n  println!(\&quot;{}\&quot;, f({\n    let y = 1;\n    y + 1\n  }));\n}\n&quot;}}]}"></div>

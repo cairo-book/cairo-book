@@ -287,23 +287,23 @@ overload that operator is listed.</p>
 <tr><td><code>~</code></td><td><code>~expr</code></td><td>Bitwise NOT</td><td><code>BitNot</code></td></tr>
 <tr><td><code>!=</code></td><td><code>expr != expr</code></td><td>Non-equality comparison</td><td><code>PartialEq</code></td></tr>
 <tr><td><code>%</code></td><td><code>expr % expr</code></td><td>Arithmetic remainder</td><td><code>Rem</code></td></tr>
-<tr><td><code>%=</code></td><td><code>var %= expr</code></td><td>Arithmetic remainder and assignment</td><td><code>RemEq</code></td></tr>
+<tr><td><code>%=</code></td><td><code>var %= expr</code></td><td>Arithmetic remainder and assignment</td><td><code>RemAssign</code></td></tr>
 <tr><td><code>&amp;</code></td><td><code>expr &amp; expr</code></td><td>Bitwise AND</td><td><code>BitAnd</code></td></tr>
 <tr><td><code>&amp;&amp;</code></td><td><code>expr &amp;&amp; expr</code></td><td>Short-circuiting logical AND</td><td></td></tr>
 <tr><td><code>*</code></td><td><code>expr * expr</code></td><td>Arithmetic multiplication</td><td><code>Mul</code></td></tr>
-<tr><td><code>*=</code></td><td><code>var *= expr</code></td><td>Arithmetic multiplication and assignment</td><td><code>MulEq</code></td></tr>
+<tr><td><code>*=</code></td><td><code>var *= expr</code></td><td>Arithmetic multiplication and assignment</td><td><code>MulAssign</code></td></tr>
 <tr><td><code>@</code></td><td><code>@var</code></td><td>Snapshot</td><td></td></tr>
 <tr><td><code>*</code></td><td><code>*var</code></td><td>Desnap</td><td></td></tr>
 <tr><td><code>+</code></td><td><code>expr + expr</code></td><td>Arithmetic addition</td><td><code>Add</code></td></tr>
-<tr><td><code>+=</code></td><td><code>var += expr</code></td><td>Arithmetic addition and assignment</td><td><code>AddEq</code></td></tr>
+<tr><td><code>+=</code></td><td><code>var += expr</code></td><td>Arithmetic addition and assignment</td><td><code>AddAssign</code></td></tr>
 <tr><td><code>,</code></td><td><code>expr, expr</code></td><td>Argument and element separator</td><td></td></tr>
 <tr><td><code>-</code></td><td><code>-expr</code></td><td>Arithmetic negation</td><td><code>Neg</code></td></tr>
 <tr><td><code>-</code></td><td><code>expr - expr</code></td><td>Arithmetic subtraction</td><td><code>Sub</code></td></tr>
-<tr><td><code>-=</code></td><td><code>var -= expr</code></td><td>Arithmetic subtraction and assignment</td><td><code>SubEq</code></td></tr>
+<tr><td><code>-=</code></td><td><code>var -= expr</code></td><td>Arithmetic subtraction and assignment</td><td><code>SubAssign</code></td></tr>
 <tr><td><code>-&gt;</code></td><td><code>fn(...) -&gt; type</code>, <code>|...| -&gt; type</code></td><td>Function and closure return type</td><td></td></tr>
 <tr><td><code>.</code></td><td><code>expr.ident</code></td><td>Member access</td><td></td></tr>
 <tr><td><code>/</code></td><td><code>expr / expr</code></td><td>Arithmetic division</td><td><code>Div</code></td></tr>
-<tr><td><code>/=</code></td><td><code>var /= expr</code></td><td>Arithmetic division and assignment</td><td><code>DivEq</code></td></tr>
+<tr><td><code>/=</code></td><td><code>var /= expr</code></td><td>Arithmetic division and assignment</td><td><code>DivAssign</code></td></tr>
 <tr><td><code>:</code></td><td><code>pat: type</code>, <code>ident: type</code></td><td>Constraints</td><td></td></tr>
 <tr><td><code>:</code></td><td><code>ident: expr</code></td><td>Struct field initializer</td><td></td></tr>
 <tr><td><code>;</code></td><td><code>expr;</code></td><td>Statement and item terminator</td><td></td></tr>
@@ -365,7 +365,6 @@ an item.</p>
 <tr><td><code>#[must_use]</code></td><td>Hint to the compiler that the return value of a function or a specific returned type must be used</td></tr>
 <tr><td><code>#[generate_trait]</code></td><td>Automatically generates a trait for an impl</td></tr>
 <tr><td><code>#[available_gas(...)]</code></td><td>Set the maximum amount of gas available to execute a function</td></tr>
-<tr><td><code>#[panic_with('...', wrapper_name)]</code></td><td>Creates a wrapper for the annotated function which will panic if the function returns <code>None</code> or <code>Err</code>, with the given data as the panic error</td></tr>
 <tr><td><code>#[test]</code></td><td>Describe a function as a test function</td></tr>
 <tr><td><code>#[cfg(...)]</code></td><td>Configuration attribute, especially used to configure a <code>tests</code> module with <code>#[cfg(test)]</code></td></tr>
 <tr><td><code>#[should_panic]</code></td><td>Specifies that a test function should necessarily panic</td></tr>

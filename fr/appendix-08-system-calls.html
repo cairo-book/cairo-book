@@ -299,6 +299,7 @@ variables that appear in the function’s scope.</p>
 <li><a href="#storage_write">storage_write</a></li>
 <li><a href="#keccak">keccak</a></li>
 <li><a href="#sha256_process_block">sha256_process_block</a></li>
+<li><a href="#sha512_process_block">sha512_process_block</a></li>
 </ul>
 <h2 id="get_block_hash"><a class="header" href="#get_block_hash"><code>get_block_hash</code></a></h2>
 <h4 id="syntax"><a class="header" href="#syntax">Syntax</a></h4>
@@ -678,6 +679,28 @@ with a 512-bit block of <code>input</code> data.</p>
 <h4 id="return-values-12"><a class="header" href="#return-values-12">Return Values</a></h4>
 <p>Returns a new SHA-256 state of the <code>input</code> data.</p>
 <h4 id="common-library-12"><a class="header" href="#common-library-12">Common Library</a></h4>
+<ul>
+<li><a href="https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106">syscalls.cairo</a></li>
+</ul>
+<h2 id="sha512_process_block"><a class="header" href="#sha512_process_block"><code>sha512_process_block</code></a></h2>
+<h4 id="syntax-13"><a class="header" href="#syntax-13">Syntax</a></h4>
+<pre><code class="language-cairo noplayground">pub extern fn sha512_process_block_syscall(
+    state: core::sha2_64_core::Sha512StateHandle, input: Box&lt;[u64; 16]&gt;,
+) -&gt; SyscallResult&lt;core::sha2_64_core::Sha512StateHandle&gt; implicits(GasBuiltin, System) nopanic;
+</code></pre>
+<h4 id="description-13"><a class="header" href="#description-13">Description</a></h4>
+<p>Computes the next SHA-512 state of the input with the given state.</p>
+<p>This syscall computes the next SHA-512 state by combining the current <code>state</code>
+with a 1024-bit block of <code>input</code> data. It also backs SHA-384, which uses the
+same block function with a different initial state.</p>
+<h4 id="arguments-12"><a class="header" href="#arguments-12">Arguments</a></h4>
+<ul>
+<li><em><code>state</code></em>: The current SHA-512 state.</li>
+<li><em><code>input</code></em>: The value to be processed into SHA-512.</li>
+</ul>
+<h4 id="return-values-13"><a class="header" href="#return-values-13">Return Values</a></h4>
+<p>Returns a new SHA-512 state of the <code>input</code> data.</p>
+<h4 id="common-library-13"><a class="header" href="#common-library-13">Common Library</a></h4>
 <ul>
 <li><a href="https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106">syscalls.cairo</a></li>
 </ul>

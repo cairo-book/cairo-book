@@ -1066,8 +1066,10 @@ mod tests {
 </span></code></pre>
 <p>implementation that panics with different error messages</span></p>
 <p>The test will pass because the value we put in the <code>should_panic</code> attribute’s
-<code>expected</code> parameter is the string that the <code>Guess::new</code> method panics with. We
-need to specify the entire panic message that we expect.</p>
+<code>expected</code> parameter is the string that the <code>Guess::new</code> method panics with. It
+does not have to be the whole message: the harness only checks that the panic
+message <em>contains</em> the expected string, so <code>expected: "must be &lt;= 100"</code> would
+pass here too. The more of the message we specify, the more precise the test.</p>
 <p>To see what happens when a <code>should_panic</code> test with an expected message fails,
 let’s again introduce a bug into our code by swapping the bodies of the
 <code>if value &lt; 1</code> and the <code>else if value &gt; 100</code> blocks:</p>

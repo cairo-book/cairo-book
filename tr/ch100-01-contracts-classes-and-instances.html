@@ -323,6 +323,16 @@ domain separation between the hashes of classes and other objects). For more
 details, see the
 <a href="https://github.com/starkware-libs/cairo-lang/blob/7712b21fc3b1cb02321a58d0c0579f5370147a8b/src/starkware/starknet/core/os/contracts.cairo#L47">Cairo implementation</a>.</p>
 </blockquote>
+<h3 id="compiled-class-hash"><a class="header" href="#compiled-class-hash">Compiled class hash</a></h3>
+<p>The class hash above identifies a class by its Sierra program, which is the
+representation you declare. Before it can run, that Sierra is compiled to Cairo
+assembly (CASM), and that executable form is identified by its own <em>compiled
+class hash</em>.</p>
+<p>It is computed with the <code>blake2s</code> hash function over the compiled class's entry
+points and bytecode, in much the same chain hash style as the class hash
+(<a href="https://github.com/starkware-libs/sequencer/blob/8b140e199e21e87d0480d1c0a8f34b419801c1af/crates/starknet_api/src/contract_class/compiled_class_hash.rs">implementation</a>). A <code>DECLARE</code> transaction has to supply the
+<code>compiled_class_hash</code> of the class it declares, and Starknet's state maintains a
+mapping from each <code>class_hash</code> to it.</p>
 <h3 id="working-with-classes"><a class="header" href="#working-with-classes">Working with classes</a></h3>
 <ul>
 <li>Adding new classes: To introduce new classes to Starknet's state, use the
