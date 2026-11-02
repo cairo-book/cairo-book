@@ -871,35 +871,51 @@ proving in Cairo.</p>
 <h2 id="executing-the-program"><a class="header" href="#executing-the-program">Executing the Program</a></h2>
 <p>Now let’s run the program with Scarb to test it. Use the scarb execute command
 and provide an input number as an argument:</p>
-<pre><code class="language-bash">scarb execute -p prime_prover --print-program-output --output standard --arguments 17
+<pre><code class="language-bash">scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 17
 </code></pre>
 <ul>
 <li><code>-p prime_prover</code> specifies the package name (matches Scarb.toml).</li>
 <li><code>--print-program-output</code> displays the result.</li>
-<li><code>--output standard</code> saves the execution artifacts (trace, memory,
-public/private inputs) needed for proving.</li>
+<li><code>--output standard</code> saves the execution artifacts needed for proving.</li>
+<li><code>--target bootloader</code> runs the program inside the <em>bootloader</em>, a Cairo
+program that executes other programs and records which program ran in its
+output. This is the form the Stwo prover expects.</li>
 <li><code>--arguments 17</code> passes the number 17 as input.</li>
 </ul>
+<blockquote>
+<p>Note: Scarb also offers a <code>standalone</code> target, which is the default. With
+current Scarb versions, <code>scarb verify</code> fails on standalone executions of most
+programs with <code>ECDSA segment is not empty</code>. This is a known Stwo issue
+(<a href="https://github.com/starkware-libs/stwo-cairo/issues/1733">stwo-cairo#1733</a>),
+so we use the bootloader target throughout this chapter.</p>
+</blockquote>
 <p>You should see output like this:</p>
-<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --arguments 17
+<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 17
    Compiling prime_prover v0.1.0 (listings/ch01-getting-started/prime_prover/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing prime_prover
 Program output:
 1
-Saving output to: target/execute/prime_prover/execution1
+3
+647976546035917987793552092135293121234959407911032472529096977007578643477
+1
+
+
 </code></pre>
-<p>The output represents whether the program executed successfully and the result
-of the program. Here, <code>0</code> indicates success (no panic), and <code>1</code> represents true
-(17 is prime). Try a few more numbers:</p>
-<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --arguments 4
-[0, 0]  # 4 is not prime
-$ scarb execute -p prime_prover --print-program-output --output standard --arguments 23
-[0, 1]  # 23 is prime
+<p>The last line is the result of our program: <code>1</code> represents true (17 is prime).
+The lines before it are written by the bootloader: the number of programs it ran
+(<code>1</code>), the size of that program's output section (<code>3</code>), and the hash of the
+program that was executed. Try a few more numbers:</p>
+<pre><code class="language-bash">$ scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 4
+...
+0  # 4 is not prime
+$ scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 23
+...
+1  # 23 is prime
 </code></pre>
-<p>The execution creates a folder under <code>./target/execute/prime_prover/execution1/</code>
-containing files like <code>air_public_input.json</code>, <code>air_private_input.json</code>,
-<code>trace.bin</code>, and <code>memory.bin</code>. These are the artifacts needed for proving.</p>
+<p>Each execution creates a new folder under <code>./target/execute/prime_prover/</code>
+(<code>execution1</code>, <code>execution2</code>, ...) containing a <code>prover_input.json</code> file: the
+execution trace and memory that the prover needs.</p>
 <h2 id="generating-a-zero-knowledge-proof"><a class="header" href="#generating-a-zero-knowledge-proof">Generating a Zero-Knowledge Proof</a></h2>
 <p>Now for the exciting part: proving that the primality check was computed
 correctly without revealing the input! Cairo 2.10 integrates the Stwo prover via
@@ -909,7 +925,7 @@ Scarb, allowing us to generate a proof directly. Run:</p>
 Saving proof to: target/execute/prime_prover/execution1/proof/proof.json
 
 </code></pre>
-<p><code>--execution_id 1</code> points to the first execution (from the <code>execution1</code> folder).</p>
+<p><code>--execution-id 1</code> points to the first execution (from the <code>execution1</code> folder).</p>
 <p>This command generates a <code>proof.json</code> file in
 <code>./target/execute/prime_prover/execution1/proof/</code>. The proof demonstrates that
 the program executed correctly for some input, producing a true or false output.</p>
