@@ -114,14 +114,22 @@ Now let’s run the program with Scarb to test it. Use the scarb execute command
 and provide an input number as an argument:
 
 ```bash
-scarb execute -p prime_prover --print-program-output --output standard --arguments 17
+scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 17
 ```
 
 - `-p prime_prover` specifies the package name (matches Scarb.toml).
 - `--print-program-output` displays the result.
-- `--output standard` saves the execution artifacts (trace, memory,
-  public/private inputs) needed for proving.
+- `--output standard` saves the execution artifacts needed for proving.
+- `--target bootloader` runs the program inside the _bootloader_, a Cairo
+  program that executes other programs and records which program ran in its
+  output. This is the form the Stwo prover expects.
 - `--arguments 17` passes the number 17 as input.
+
+> Note: Scarb also offers a `standalone` target, which is the default. With
+> current Scarb versions, `scarb verify` fails on standalone executions of most
+> programs with `ECDSA segment is not empty`. This is a known Stwo issue
+> ([stwo-cairo#1733](https://github.com/starkware-libs/stwo-cairo/issues/1733)),
+> so we use the bootloader target throughout this chapter.
 
 You should see output like this:
 
@@ -129,20 +137,23 @@ You should see output like this:
 {{#include ../listings/ch01-getting-started/prime_prover/output.txt}}
 ```
 
-The output represents whether the program executed successfully and the result
-of the program. Here, `0` indicates success (no panic), and `1` represents true
-(17 is prime). Try a few more numbers:
+The last line is the result of our program: `1` represents true (17 is prime).
+The lines before it are written by the bootloader: the number of programs it
+ran (`1`), the size of that program's output section (`3`), and the hash of the
+program that was executed. Try a few more numbers:
 
 ```bash
-$ scarb execute -p prime_prover --print-program-output --output standard --arguments 4
-[0, 0]  # 4 is not prime
-$ scarb execute -p prime_prover --print-program-output --output standard --arguments 23
-[0, 1]  # 23 is prime
+$ scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 4
+...
+0  # 4 is not prime
+$ scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 23
+...
+1  # 23 is prime
 ```
 
-The execution creates a folder under `./target/execute/prime_prover/execution1/`
-containing files like `air_public_input.json`, `air_private_input.json`,
-`trace.bin`, and `memory.bin`. These are the artifacts needed for proving.
+Each execution creates a new folder under `./target/execute/prime_prover/`
+(`execution1`, `execution2`, ...) containing a `prover_input.json` file: the
+execution trace and memory that the prover needs.
 
 ## Generating a Zero-Knowledge Proof
 
@@ -154,7 +165,7 @@ Scarb, allowing us to generate a proof directly. Run:
 {{#include ../listings/ch01-getting-started/prime_prover/output_prove.txt}}
 ```
 
-`--execution_id 1` points to the first execution (from the `execution1` folder).
+`--execution-id 1` points to the first execution (from the `execution1` folder).
 
 This command generates a `proof.json` file in
 `./target/execute/prime_prover/execution1/proof/`. The proof demonstrates that
