@@ -1,6 +1,5 @@
 $ scarb test 
      Running test listing_10_04_wong_add (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_wong_add_unittest) listing_10_04_wong_add v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04_wong_add/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -14,6 +13,7 @@ Failure data:
     4: 4
     add_two(2): 5"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:

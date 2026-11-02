@@ -1,6 +1,6 @@
 $ scarb build 
    Compiling listing_invalid_qmark v0.1.0 (listings/ch09-error-handling/listing_invalid_qmark/Scarb.toml)
-error: `?` can only be used in a function with `Option` or `Result` return type.
+error[E2061]: `?` can only be used in a function with `Option` or `Result` return type.
  --> listings/ch09-error-handling/listing_invalid_qmark/src/lib.cairo:6:20
     let some_num = parse_u8(258)?;
                    ^^^^^^^^^^^^^^

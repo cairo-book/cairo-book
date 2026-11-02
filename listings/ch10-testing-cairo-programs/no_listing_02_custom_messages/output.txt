@@ -13,6 +13,7 @@ Failure data:
     4: 4
     add_two(2): 5"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:

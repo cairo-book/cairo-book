@@ -4,4 +4,3 @@ $ scarb execute
    Executing listing_04_06_no_struct
 Area is 300
 
-

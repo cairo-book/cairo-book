@@ -4,4 +4,3 @@ $ scarb execute
    Executing no_listing_26_if_let
 condition was true and number is 5
 
-

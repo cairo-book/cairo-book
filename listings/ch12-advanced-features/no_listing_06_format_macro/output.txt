@@ -14,4 +14,3 @@ warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
    Executing no_listing_06_format_macro
 tic-tac-toe
 
-

@@ -5,4 +5,3 @@ $ scarb execute
 Inner scope x value is: 12
 Outer scope x value is: 6
 
-

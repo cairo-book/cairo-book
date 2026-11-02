@@ -4,4 +4,3 @@ $ scarb execute
    Executing no_listing_25_else_if
 number is 3
 
-

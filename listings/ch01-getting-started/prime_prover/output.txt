@@ -4,4 +4,5 @@ $ scarb execute -p prime_prover --print-program-output --output standard --argum
    Executing prime_prover
 Program output:
 1
-Saving output to: target/execute/prime_prover/execution1
+
+
