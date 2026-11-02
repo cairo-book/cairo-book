@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+env:
+  # Bumping this tag also invalidates the cached binaries below.
+  CAIRO_LISTINGS_VERSION: v0.1.0
+
 jobs:
   compile_and_verify:
     runs-on: ubuntu-latest
@@ -71,7 +75,8 @@ jobs:
             ~/.cargo/bin
             ~/.local/bin
           key:
-            mdbook-${{ runner.os }}-v4-${{ hashFiles('.tool-versions',
+            mdbook-${{ runner.os }}-v4-${{ env.CAIRO_LISTINGS_VERSION }}-${{
+            hashFiles('.tool-versions',
             '.github/workflows/install-mdbook/action.yml') }}
 
       - name: Install mdbook and dependencies
@@ -103,7 +108,8 @@ jobs:
       - name: Install cairo-listings
         if: steps.cache-mdbook.outputs.cache-hit != 'true'
         run:
-          cargo install --git https://github.com/enitrat/cairo-listings --locked
+          cargo install --git https://github.com/enitrat/cairo-listings --tag
+          "${CAIRO_LISTINGS_VERSION}" --locked
         shell: bash
 
       - name: Run cairo-listings and generate summary
