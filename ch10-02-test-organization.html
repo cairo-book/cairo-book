@@ -400,18 +400,16 @@ tests.</p>
 this directory only when we run <code>scarb test</code>. Run <code>scarb test</code> now:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test adder (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
    Compiling test(adder_integrationtest) adder_integrationtest v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from tests/
-[PASS] adder_integrationtest::integration_tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from src/
-[PASS] adder::tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] adder::tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+Running 1 test(s) from tests/
+[PASS] adder_integrationtest::integration_tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -489,17 +487,16 @@ output for the <em>common.cairo</em> file, even though this file doesn’t conta
 test functions nor did we call the setup function from anywhere:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test adder (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
    Compiling test(adder_integrationtest) adder_integrationtest v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from tests/
-[PASS] adder_integrationtest::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from src/
-[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+Running 1 test(s) from tests/
+[PASS] adder_integrationtest::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -528,18 +525,16 @@ mod integration_tests;
 <p>When we run the <code>scarb test</code> command again, here is the output :</p>
 <pre><code class="language-shell">$ scarb test 
      Running test adder (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
    Compiling test(adder_tests) adder_tests v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from src/
-[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from tests/
-[PASS] adder_tests::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] adder_tests::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+Running 1 test(s) from src/
+[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 

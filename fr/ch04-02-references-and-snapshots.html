@@ -331,7 +331,6 @@ next section.</p>
 The area of the rectangle when the snapshot was taken is 30
 The current area of the rectangle is 50
 
-
 </code></pre>
 <p>First, notice that all the tuple code in the variable declaration and the
 function return value is gone. Second, note that we pass <code>@rec</code> into
@@ -427,12 +426,12 @@ snapshot value</span></p>
 <p>Here’s the error:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling listing_04_04 v0.1.0 (listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/Scarb.toml)
-error: Invalid left-hand side of assignment.
+error[E2084]: Invalid left-hand side of assignment.
  --&gt; listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo:16:5
     rec.height = rec.width;
     ^^^^^^^^^^
 
-error: Invalid left-hand side of assignment.
+error[E2084]: Invalid left-hand side of assignment.
  --&gt; listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo:17:5
     rec.width = temp;
     ^^^^^^^^^
@@ -496,7 +495,6 @@ alternative, but for this example, the <code>ref</code> modifier suits our needs
     Finished `dev` profile target(s) in 1 second
    Executing listing_04_05
 height: 10, width: 3
-
 
 </code></pre>
 <p>As expected, the <code>height</code> and <code>width</code> fields of the <code>rec</code> variable have been

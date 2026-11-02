@@ -378,12 +378,12 @@ the variable <code>arr</code> is no longer usable. We get this compile-time erro
 us that we would need Array to implement the Copy Trait:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_02_pass_array_by_value v0.1.0 (listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/Scarb.toml)
-warn: Unhandled `#[must_use]` type `core::option::Option::&lt;core::integer::u128&gt;`
+warn[E2064]: Unhandled `#[must_use]` type `Option::&lt;u128&gt;`
  --&gt; listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:3:5
     arr.pop_front();
     ^^^^^^^^^^^^^^^
 
-error: Variable was previously moved.
+error[E3001]: Variable was previously moved.
  --&gt; listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:10:9
     foo(arr);
         ^^^
@@ -391,7 +391,7 @@ note: variable was previously used here:
   --&gt; listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:9:9
     foo(arr);
         ^^^
-note: Trait has no implementation in context: core::traits::Copy::&lt;core::array::Array::&lt;core::integer::u128&gt;&gt;.
+note: Trait has no implementation in context: Copy::&lt;Array::&lt;u128&gt;&gt;.
 
 error: could not compile `no_listing_02_pass_array_by_value` due to 1 previous error and 1 warning
 error: `scarb` command exited with error
@@ -494,12 +494,12 @@ fn main() {
 <p>If you try to run this code, you will get a compile-time error:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_06_no_destruct_compile_fails v0.1.0 (listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/Scarb.toml)
-error: Variable not dropped.
+error[E3002]: Variable not dropped.
  --&gt; listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo:10:5
     A { dict: Default::default() };
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-note: Trait has no implementation in context: core::traits::Drop::&lt;no_listing_06_no_destruct_compile_fails::A&gt;.
-note: Trait has no implementation in context: core::traits::Destruct::&lt;no_listing_06_no_destruct_compile_fails::A&gt;.
+note: Trait has no implementation in context: Drop::&lt;A&gt;.
+note: Trait has no implementation in context: Destruct::&lt;A&gt;.
 
 error: could not compile `no_listing_06_no_destruct_compile_fails` due to 1 previous error
 error: `scarb` command exited with error

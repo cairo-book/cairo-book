@@ -310,7 +310,6 @@ should see the following output:</p>
 Hello, world!
 Another function.
 
-
 </code></pre>
 <p>The lines execute in the order in which they appear in the <code>main</code> function.
 First the <code>Hello, world!</code> message prints, and then <code>another_function</code> is called
@@ -339,7 +338,6 @@ fn another_function(x: felt252) {
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_16_single_param
 The value of x is: 5
-
 
 </code></pre>
 <p>The declaration of <code>another_function</code> has one parameter named <code>x</code>. The type of
@@ -375,7 +373,6 @@ project’s <em>src/lib.cairo</em> file with the preceding example and run it us
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_17_multiple_params
 The measurement is: 5h
-
 
 </code></pre>
 <p>Because we called the function with <code>5</code> as the value for value and <code>"h"</code> as the
@@ -435,22 +432,22 @@ fn main() {
 <p>When you run this program, the error you’ll get looks like this:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_18_statements_dont_return_values v0.1.0 (listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/Scarb.toml)
-error: Missing token ')'.
+error[E1001]: Missing token ')'.
  --&gt; listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:14
     let x = (let y = 6);
              ^
 
-error: Missing token ';'.
+error[E1001]: Missing token ';'.
  --&gt; listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:14
     let x = (let y = 6);
              ^
 
-error: Missing token ';'.
+error[E1001]: Missing token ';'.
  --&gt; listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:23
     let x = (let y = 6);
                       ^
 
-error: Skipped tokens. Expected: statement.
+error[E1000]: Skipped tokens. Expected: statement.
  --&gt; listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:23
     let x = (let y = 6);
                       ^^
@@ -533,7 +530,6 @@ running this code; the output should look like this:</p>
    Executing no_listing_20_function_return_values
 The value of x is: 5
 
-
 </code></pre>
 <p>The <code>5</code> in <code>five</code> is the function’s return value, which is why the return type
 is <code>u32</code>. Let’s examine this in more detail. There are two important bits:
@@ -572,10 +568,13 @@ fn plus_one(x: u32) -&gt; u32 {
 </code></pre>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_22_function_return_invalid v0.1.0 (listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/Scarb.toml)
-error: Unexpected return type. Expected: "core::integer::u32", found: "()".
- --&gt; listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo:10:24
-fn plus_one(x: u32) -&gt; u32 {
-                       ^^^
+error[E2042]: Unexpected return type. Expected: "u32", found: "()".
+ --&gt; listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo:10:28-12:1
+  fn plus_one(x: u32) -&gt; u32 {
+ ____________________________^
+|     x + 1;
+| }
+|_^
 
 error: could not compile `no_listing_22_function_return_invalid` due to 1 previous error
 error: `scarb` command exited with error

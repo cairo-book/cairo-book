@@ -362,12 +362,12 @@ Conversely, the following function is not guaranteed to never panic:</p>
 get the following error:</p>
 <pre><code class="language-shell">$ scarb execute 
    Compiling no_listing_04_nopanic_wrong v0.1.0 (listings/ch09-error-handling/no_listing_05_nopanic_wrong/Scarb.toml)
-error: Function is declared as nopanic but calls a function that may panic.
+error[E2115]: Function is declared as nopanic but calls a function that may panic.
  --&gt; listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:4:13
     assert!(1 == 1, "what");
             ^^^^^^
 
-error: Function is declared as nopanic but calls a function that may panic.
+error[E2115]: Function is declared as nopanic but calls a function that may panic.
  --&gt; listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:4:5
     assert!(1 == 1, "what");
     ^^^^^^^^^^^^^^^^^^^^^^^

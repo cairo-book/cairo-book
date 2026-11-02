@@ -350,16 +350,14 @@ later in this chapter. Let’s run it to see that this test passes.</p>
 following output:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_01 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_01_unittest) listing_10_01 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -392,16 +390,14 @@ we haven’t filtered the tests being run, the end of the summary shows
 <code>it_works</code>:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_01 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_01_unittest) listing_10_01 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -543,16 +539,14 @@ passed it the result of calling <code>larger.can_hold(@smaller)</code>. This exp
 supposed to return <code>true</code>, so our test should pass. Let’s find out!</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_03 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_03_unittest) listing_10_03 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_03/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -607,16 +601,14 @@ we need to negate that result before we pass it to the <code>assert!</code> macr
 result, our test will pass if <code>can_hold</code> returns <code>false</code>:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_03 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_03_unittest) listing_10_03 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_03/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -633,20 +625,19 @@ method by replacing the <code>&gt;</code> sign with a <code>&lt;</code> sign whe
 <p>Running the tests now produces the following:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_01_wrong_can_hold_impl (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_01_wrong_can_hold_impl_unittest) no_listing_01_wrong_can_hold_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from no_listing_01_wrong_can_hold_impl package
 Running 2 test(s) from src/
-[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 [FAIL] no_listing_01_wrong_can_hold_impl::tests::larger_can_hold_smaller
 
 Failure data:
     "rectangle cannot hold"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 1 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -698,15 +689,14 @@ mod tests {
 <p>Let’s check that it passes!</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_04 (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_unittest) listing_10_04 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_04 package
 Running 2 test(s) from src/
-[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
-[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15040)
+[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~7210)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -732,7 +722,6 @@ fails. Change the implementation of the <code>add_two</code> function to instead
 <p>Run the tests again:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_10_04_wong_add (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_wong_add_unittest) listing_10_04_wong_add v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04_wong_add/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -746,6 +735,7 @@ Failure data:
     4: 4
     add_two(2): 5"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -892,6 +882,7 @@ Failure data:
     4: 4
     add_two(2): 5"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -948,15 +939,13 @@ before the test function it applies to. Let’s look at the result to see that
 this test passes:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test listing_09_08 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_09_08_unittest) listing_09_08 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_05/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 1 test(s) from listing_09_08 package
 Running 1 test(s) from src/
-[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~14440)
+[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~6910)
 Tests: 1 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -1000,7 +989,6 @@ the <code>new</code> function will panic if the value is greater than <code>100<
 <p>When we run the test, it will fail:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_03_wrong_new_impl (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_03_wrong_new_impl_unittest) no_listing_03_wrong_new_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_03_wrong_new_impl/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -1099,7 +1087,6 @@ mod tests {
 <p>This time when we run the <code>should_panic</code> test, it will fail:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_04_new_bug (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_04_new_bug_unittest) no_listing_04_new_bug v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_04_new_bug/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -1110,9 +1097,10 @@ Running 1 test(s) from src/
 
 Failure data:
     Incorrect panic data
-    Actual:    [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203e3d2031, 0x12] (Guess must be &gt;= 1)
-    Expected:  [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203c3d20313030, 0x14] (Guess must be &lt;= 100)
+    Actual:    ByteArray("Guess must be &gt;= 1")
+    Expected:  ByteArray("Guess must be &lt;= 100")
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -1156,7 +1144,7 @@ mod tests {
 
 Collected 1 test(s) from listing_10_07 package
 Running 1 test(s) from src/
-[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
+[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 1 passed, 0 failed, 0 ignored, 1 filtered out
 
 
@@ -1196,8 +1184,6 @@ mod tests {
 when we run our tests, <code>it_works</code> runs, but <code>expensive_test</code> doesn’t:</p>
 <pre><code class="language-shell">$ scarb test 
      Running test no_listing_05_ignore_tests (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_05_ignore_tests_unittest) no_listing_05_ignore_tests v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -1205,7 +1191,7 @@ when we run our tests, <code>it_works</code> runs, but <code>expensive_test</cod
 Collected 2 test(s) from no_listing_05_ignore_tests package
 Running 2 test(s) from src/
 [IGNORE] no_listing_05_ignore_tests::tests::expensive_test
-[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 1 passed, 0 failed, 1 ignored, 0 filtered out
 
 

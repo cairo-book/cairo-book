@@ -311,7 +311,6 @@ bit of code.</p>
    Executing no_listing_24_if
 condition was false and number = 3
 
-
 </code></pre>
 <p>Let’s try changing the value of <code>number</code> to a value that makes the condition
 <code>true</code> to see what happens:</p>
@@ -337,10 +336,10 @@ fn main() {
 error:</p>
 <pre><code class="language-shell">$ scarb build 
    Compiling no_listing_28_bis_if_not_bool v0.1.0 (listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/Scarb.toml)
-error: Mismatched types. The type `core::bool` cannot be created from a numeric literal.
- --&gt; listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo:5:18
-    let number = 3;
-                 ^
+error[E2315]: Mismatched types. The type `bool` cannot be created from a numeric literal.
+ --&gt; listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo:7:8
+    if number {
+       ^^^^^^
 
 error: could not compile `no_listing_28_bis_if_not_bool` due to 1 previous error
 
@@ -390,7 +389,6 @@ see the following output:</p>
    Executing no_listing_25_else_if
 number is 3
 
-
 </code></pre>
 <p>When this program executes, it checks each <code>if</code> expression in turn and executes
 the first body for which the condition evaluates to <code>true</code>. Note that even
@@ -424,7 +422,6 @@ fn main() {
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_26_if_let
 condition was true and number is 5
-
 
 </code></pre>
 <p>The <code>number</code> variable will be bound to a value based on the outcome of the <code>if</code>
@@ -602,7 +599,6 @@ the value is: 20
 the value is: 30
 the value is: 40
 the value is: 50
-
 
 </code></pre>
 <p>All five array values appear in the terminal, as expected. Even though <code>index</code>

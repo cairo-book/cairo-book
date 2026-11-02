@@ -209,12 +209,12 @@ by running the following commands in a new terminal session:
 
 ```bash
 $ scarb --version
-scarb 2.20.0 (f6832b048 2026-07-23)
-cairo: 2.20.0 (https://crates.io/crates/cairo-lang-compiler/2.20.0)
-sierra: 1.9.3
+scarb 2.21.0 (fbd5bd03d 2026-10-09)
+cairo: 2.21.0 (https://crates.io/crates/cairo-lang-compiler/2.21.0)
+sierra: 1.9.5
 
 $ snforge --version
-snforge 0.62.1
+snforge 0.64.1
 ```
 
 We'll describe Starknet Foundry in more detail in [Chapter
@@ -338,11 +338,11 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.20.0"
+starknet = "2.21.0"
 
 [dev-dependencies]
-snforge_std = "0.62.1"
-assert_macros = "2.20.0"
+snforge_std = "0.64.1"
+assert_macros = "2.21.0"
 
 [[target.starknet-contract]]
 sierra = true
@@ -406,7 +406,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.20.0"
+cairo_execute = "2.21.0"
 
 
 [[target.executable]]
@@ -491,7 +491,6 @@ $ scarb execute
     Finished `dev` profile target(s) in 1 second
    Executing hello_world
 Hello, World!
-
 
 ```
 
@@ -601,7 +600,7 @@ it’s prime, followed by generating and verifying a proof.
 
 ## Setting Up a New Project
 
-To get started, ensure you have Scarb 2.20.0 or later installed (see
+To get started, ensure you have Scarb 2.21.0 or later installed (see
 [Installation][installation] for details). We’ll use Scarb to create and manage
 our Cairo project.
 
@@ -626,7 +625,7 @@ edition = "2024_07"
 [dependencies]
 
 [dev-dependencies]
-cairo_test = "2.20.0"
+cairo_test = "2.21.0"
 ```
 
 This is a minimal manifest file for a Cairo project. However, since we want to
@@ -646,7 +645,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.20.0"
+cairo_execute = "2.21.0"
 
 
 [[target.executable]]
@@ -660,7 +659,7 @@ Here’s what we’ve added:
   executable (not a library or Starknet contract).
 - `[cairo] enable-gas = false` disables gas tracking, which is required for
   executable targets since gas is specific to Starknet contracts.
-  `[dependencies] cairo_execute = "2.20.0"` adds the plugin needed to execute
+  `[dependencies] cairo_execute = "2.21.0"` adds the plugin needed to execute
   and prove our program.
 
 Now, check the generated `src/lib.cairo`, which is a simple placeholder. Since
@@ -787,7 +786,6 @@ Scarb, allowing us to generate a proof directly. Run:
 ```bash
 $ scarb prove --execution-id 1
      Proving prime_prover
-warn: soundness of proof is not yet guaranteed by Stwo, use at your own risk
 Saving proof to: target/execute/prime_prover/execution1/proof/proof.json
 
 ```
@@ -945,7 +943,7 @@ message regarding an immutability error, as shown in this output:
 ```shell
 $ scarb execute 
    Compiling no_listing_01_variables_are_immutable v0.1.0 (listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/Scarb.toml)
-error: Cannot assign to an immutable variable.
+error[E2083]: Cannot assign to an immutable variable.
  --> listings/ch02-common-programming-concepts/no_listing_01_variables_are_immutable/src/lib.cairo:7:5
     x = 6;
     ^^^^^
@@ -1016,7 +1014,6 @@ $ scarb execute
    Executing no_listing_02_adding_mut
 The value of x is: 5
 The value of x is: 6
-
 
 ```
 
@@ -1122,7 +1119,6 @@ $ scarb execute
 Inner scope x value is: 12
 Outer scope x value is: 6
 
-
 ```
 
 Shadowing is different from marking a variable as `mut` because we’ll get a
@@ -1171,7 +1167,7 @@ different type:
 ```shell
 $ scarb execute 
    Compiling no_listing_05_mut_cant_change_type v0.1.0 (listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/Scarb.toml)
-error: Unexpected argument type. Expected: "core::integer::u64", found: "core::integer::u8".
+error[E2041]: Unexpected argument type. Expected: "u64", found: "u8".
  --> listings/ch02-common-programming-concepts/no_listing_05_mut_cant_change_type/src/lib.cairo:7:9
     x = 5_u8;
         ^^^^
@@ -1534,14 +1530,13 @@ fn main() {
 Running this program prints:
 
 ```shell
-$ scarb execute
+$ scarb execute 
    Compiling no_listing_14_bis_tuple_element_access v0.1.0 (listings/ch02-common-programming-concepts/no_listing_14_bis_tuple_element_access/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_14_bis_tuple_element_access
 The second value is 6
 The inner second value is 2
 Scores are now 15 and 25
-
 
 ```
 
@@ -1772,7 +1767,6 @@ $ scarb execute
 Hello, world!
 Another function.
 
-
 ```
 
 The lines execute in the order in which they appear in the `main` function.
@@ -1810,7 +1804,6 @@ $ scarb execute
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_16_single_param
 The value of x is: 5
-
 
 ```
 
@@ -1855,7 +1848,6 @@ $ scarb execute
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_17_multiple_params
 The measurement is: 5h
-
 
 ```
 
@@ -1933,22 +1925,22 @@ When you run this program, the error you’ll get looks like this:
 ```shell
 $ scarb execute 
    Compiling no_listing_18_statements_dont_return_values v0.1.0 (listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/Scarb.toml)
-error: Missing token ')'.
+error[E1001]: Missing token ')'.
  --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:14
     let x = (let y = 6);
              ^
 
-error: Missing token ';'.
+error[E1001]: Missing token ';'.
  --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:14
     let x = (let y = 6);
              ^
 
-error: Missing token ';'.
+error[E1001]: Missing token ';'.
  --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:23
     let x = (let y = 6);
                       ^
 
-error: Skipped tokens. Expected: statement.
+error[E1000]: Skipped tokens. Expected: statement.
  --> listings/ch02-common-programming-concepts/no_listing_20_statements_dont_return_values/src/lib.cairo:4:23
     let x = (let y = 6);
                       ^^
@@ -2048,7 +2040,6 @@ $ scarb execute
    Executing no_listing_20_function_return_values
 The value of x is: 5
 
-
 ```
 
 The `5` in `five` is the function’s return value, which is why the return type
@@ -2098,10 +2089,13 @@ fn plus_one(x: u32) -> u32 {
 ```shell
 $ scarb execute 
    Compiling no_listing_22_function_return_invalid v0.1.0 (listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/Scarb.toml)
-error: Unexpected return type. Expected: "core::integer::u32", found: "()".
- --> listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo:10:24
-fn plus_one(x: u32) -> u32 {
-                       ^^^
+error[E2042]: Unexpected return type. Expected: "u32", found: "()".
+ --> listings/ch02-common-programming-concepts/no_listing_24_function_return_invalid/src/lib.cairo:10:28-12:1
+  fn plus_one(x: u32) -> u32 {
+ ____________________________^
+|     x + 1;
+| }
+|_^
 
 error: could not compile `no_listing_22_function_return_invalid` due to 1 previous error
 error: `scarb` command exited with error
@@ -2299,7 +2293,6 @@ $ scarb execute
    Executing no_listing_24_if
 condition was false and number = 3
 
-
 ```
 
 Let’s try changing the value of `number` to a value that makes the condition
@@ -2336,10 +2329,10 @@ error:
 ```shell
 $ scarb build 
    Compiling no_listing_28_bis_if_not_bool v0.1.0 (listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/Scarb.toml)
-error: Mismatched types. The type `core::bool` cannot be created from a numeric literal.
- --> listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo:5:18
-    let number = 3;
-                 ^
+error[E2315]: Mismatched types. The type `bool` cannot be created from a numeric literal.
+ --> listings/ch02-common-programming-concepts/no_listing_28_bis_if_not_bool/src/lib.cairo:7:8
+    if number {
+       ^^^^^^
 
 error: could not compile `no_listing_28_bis_if_not_bool` due to 1 previous error
 
@@ -2400,7 +2393,6 @@ $ scarb execute
    Executing no_listing_25_else_if
 number is 3
 
-
 ```
 
 When this program executes, it checks each `if` expression in turn and executes
@@ -2443,7 +2435,6 @@ $ scarb execute
     Finished `dev` profile target(s) in 1 second
    Executing no_listing_26_if_let
 condition was true and number is 5
-
 
 ```
 
@@ -2660,7 +2651,6 @@ the value is: 20
 the value is: 30
 the value is: 40
 the value is: 50
-
 
 ```
 
@@ -3713,7 +3703,7 @@ fn get_array_entry(ref dict: Felt252Dict<Nullable<Array<u8>>>, index: felt252) -
 ```shell
 $ scarb execute 
    Compiling no_listing_15_dict_of_array_attempt_get v0.1.0 (listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/Scarb.toml)
-error: Trait has no implementation in context: core::traits::Copy::<core::nullable::Nullable::<core::array::Array::<core::integer::u8>>>.
+error[E2311]: Trait has no implementation in context: Copy::<Nullable::<Array::<u8>>>.
  --> listings/ch03-common-collections/no_listing_15_dict_of_array_attempt_get/src/lib.cairo:14:20
     let val = dict.get(0); // This will cause a compiler error
                    ^^^
@@ -3938,12 +3928,12 @@ us that we would need Array to implement the Copy Trait:
 ```shell
 $ scarb execute 
    Compiling no_listing_02_pass_array_by_value v0.1.0 (listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/Scarb.toml)
-warn: Unhandled `#[must_use]` type `core::option::Option::<core::integer::u128>`
+warn[E2064]: Unhandled `#[must_use]` type `Option::<u128>`
  --> listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:3:5
     arr.pop_front();
     ^^^^^^^^^^^^^^^
 
-error: Variable was previously moved.
+error[E3001]: Variable was previously moved.
  --> listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:10:9
     foo(arr);
         ^^^
@@ -3951,7 +3941,7 @@ note: variable was previously used here:
   --> listings/ch04-understanding-ownership/no_listing_02_pass_array_by_value/src/lib.cairo:9:9
     foo(arr);
         ^^^
-note: Trait has no implementation in context: core::traits::Copy::<core::array::Array::<core::integer::u128>>.
+note: Trait has no implementation in context: Copy::<Array::<u128>>.
 
 error: could not compile `no_listing_02_pass_array_by_value` due to 1 previous error and 1 warning
 error: `scarb` command exited with error
@@ -4083,12 +4073,12 @@ If you try to run this code, you will get a compile-time error:
 ```shell
 $ scarb execute 
    Compiling no_listing_06_no_destruct_compile_fails v0.1.0 (listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/Scarb.toml)
-error: Variable not dropped.
+error[E3002]: Variable not dropped.
  --> listings/ch04-understanding-ownership/no_listing_06_no_destruct_compile_fails/src/lib.cairo:10:5
     A { dict: Default::default() };
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-note: Trait has no implementation in context: core::traits::Drop::<no_listing_06_no_destruct_compile_fails::A>.
-note: Trait has no implementation in context: core::traits::Destruct::<no_listing_06_no_destruct_compile_fails::A>.
+note: Trait has no implementation in context: Drop::<A>.
+note: Trait has no implementation in context: Destruct::<A>.
 
 error: could not compile `no_listing_06_no_destruct_compile_fails` due to 1 previous error
 error: `scarb` command exited with error
@@ -4290,7 +4280,6 @@ $ scarb execute
 The area of the rectangle when the snapshot was taken is 30
 The current area of the rectangle is 50
 
-
 ```
 
 First, notice that all the tuple code in the variable declaration and the
@@ -4411,12 +4400,12 @@ Here’s the error:
 ```shell
 $ scarb execute 
    Compiling listing_04_04 v0.1.0 (listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/Scarb.toml)
-error: Invalid left-hand side of assignment.
+error[E2084]: Invalid left-hand side of assignment.
  --> listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo:16:5
     rec.height = rec.width;
     ^^^^^^^^^^
 
-error: Invalid left-hand side of assignment.
+error[E2084]: Invalid left-hand side of assignment.
  --> listings/ch04-understanding-ownership/listing_04_attempt_modifying_snapshot/src/lib.cairo:17:5
     rec.width = temp;
     ^^^^^^^^^
@@ -4491,7 +4480,6 @@ $ scarb execute
     Finished `dev` profile target(s) in 1 second
    Executing listing_04_05
 height: 10, width: 3
-
 
 ```
 
@@ -4879,7 +4867,6 @@ $ scarb execute
     Finished `dev` profile target(s) in 1 second
    Executing listing_04_06_no_struct
 Area is 300
-
 
 ```
 
@@ -5851,7 +5838,7 @@ error:
 ```shell
 $ scarb execute 
    Compiling no_listing_08_missing_match_arm v0.1.0 (listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/Scarb.toml)
-error: Match is non-exhaustive: `None(_)` not covered.
+error[E3004]: Match is non-exhaustive: `None(_)` not covered.
  --> listings/ch06-enums-and-pattern-matching/no_listing_09_missing_match_arm/src/lib.cairo:5:5-7:5
       match x {
  _____^
@@ -6306,7 +6293,7 @@ edition = "2024_07"
 enable-gas = false
 
 [dependencies]
-cairo_execute = "2.20.0"
+cairo_execute = "2.21.0"
 ```
 
 As you develop your package, you may want to organize your code into multiple
@@ -6619,22 +6606,22 @@ compile yet! We get the following error:
 ```shell
 $ scarb execute 
    Compiling listing_07_02 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/Scarb.toml)
-error: Item `listing_07_02::front_of_house::hosting` is not visible in this context.
+error[E2099]: Item `front_of_house::hosting` is not visible in this context.
  --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:22:28
     crate::front_of_house::hosting::add_to_waitlist();
                            ^^^^^^^
 
-error: Item `listing_07_02::front_of_house::hosting::add_to_waitlist` is not visible in this context.
+error[E2099]: Item `front_of_house::hosting::add_to_waitlist` is not visible in this context.
  --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:22:37
     crate::front_of_house::hosting::add_to_waitlist();
                                     ^^^^^^^^^^^^^^^
 
-error: Item `listing_07_02::front_of_house::hosting` is not visible in this context.
+error[E2099]: Item `front_of_house::hosting` is not visible in this context.
  --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:25:21
     front_of_house::hosting::add_to_waitlist();
                     ^^^^^^^
 
-error: Item `listing_07_02::front_of_house::hosting::add_to_waitlist` is not visible in this context.
+error[E2099]: Item `front_of_house::hosting::add_to_waitlist` is not visible in this context.
  --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_02_paths/src/lib.cairo:25:30
     front_of_house::hosting::add_to_waitlist();
                              ^^^^^^^^^^^^^^^
@@ -6879,7 +6866,7 @@ The compiler error shows that the shortcut no longer applies within the
 ```shell
 $ scarb build 
    Compiling listing_07_05 v0.1.0 (listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/Scarb.toml)
-warn: Unused import: `listing_07_05::hosting`
+warn[E2100]: Unused import: `listing_07_05::hosting`
  --> listings/ch07-managing-cairo-projects-with-packages-crates-and-modules/listing_07_use_and_scope/src/lib.cairo:9:28
 use crate::front_of_house::hosting;
                            ^^^^^^^
@@ -8154,7 +8141,6 @@ New article available! Cairo has become the most popular language for developers
 New tweet! EliBenSasson: Crypto is full of short-term maximizing projects. 
  @Starknet and @StarkWareLtd are about long-term vision maximization.
 
-
 ```
 
 Other crates that depend on the _aggregator_ crate can also bring the `Summary`
@@ -8942,12 +8928,12 @@ get the following error:
 ```shell
 $ scarb execute 
    Compiling no_listing_04_nopanic_wrong v0.1.0 (listings/ch09-error-handling/no_listing_05_nopanic_wrong/Scarb.toml)
-error: Function is declared as nopanic but calls a function that may panic.
+error[E2115]: Function is declared as nopanic but calls a function that may panic.
  --> listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:4:13
     assert!(1 == 1, "what");
             ^^^^^^
 
-error: Function is declared as nopanic but calls a function that may panic.
+error[E2115]: Function is declared as nopanic but calls a function that may panic.
  --> listings/ch09-error-handling/no_listing_05_nopanic_wrong/src/lib.cairo:4:5
     assert!(1 == 1, "what");
     ^^^^^^^^^^^^^^^^^^^^^^^
@@ -9336,7 +9322,7 @@ similar to this:
 ```text
 $ scarb build 
    Compiling listing_invalid_qmark v0.1.0 (listings/ch09-error-handling/listing_invalid_qmark/Scarb.toml)
-error: `?` can only be used in a function with `Option` or `Result` return type.
+error[E2061]: `?` can only be used in a function with `Option` or `Result` return type.
  --> listings/ch09-error-handling/listing_invalid_qmark/src/lib.cairo:6:20
     let some_num = parse_u8(258)?;
                    ^^^^^^^^^^^^^^
@@ -9491,16 +9477,14 @@ following output:
 ```shell
 $ scarb test 
      Running test listing_10_01 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_01_unittest) listing_10_01 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9541,16 +9525,14 @@ Then run `scarb test` again. The output now shows `exploration` instead of
 ```shell
 $ scarb test 
      Running test listing_10_01 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_01_unittest) listing_10_01 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_01/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_01 package
 Running 2 test(s) from src/
-[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
-[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_01::other_tests::exploration (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_01::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9720,16 +9702,14 @@ supposed to return `true`, so our test should pass. Let’s find out!
 ```shell
 $ scarb test 
      Running test listing_10_03 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_03_unittest) listing_10_03 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_03/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9792,16 +9772,14 @@ result, our test will pass if `can_hold` returns `false`:
 ```shell
 $ scarb test 
      Running test listing_10_03 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_03_unittest) listing_10_03 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_03/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_03 package
 Running 2 test(s) from src/
-[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
-[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] listing_10_03::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_03::tests::larger_can_hold_smaller (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9824,20 +9802,19 @@ Running the tests now produces the following:
 ```shell
 $ scarb test 
      Running test no_listing_01_wrong_can_hold_impl (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_01_wrong_can_hold_impl_unittest) no_listing_01_wrong_can_hold_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_01_wrong_can_hold_impl/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from no_listing_01_wrong_can_hold_impl package
 Running 2 test(s) from src/
-[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] no_listing_01_wrong_can_hold_impl::tests2::smaller_cannot_hold_larger (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 [FAIL] no_listing_01_wrong_can_hold_impl::tests::larger_can_hold_smaller
 
 Failure data:
     "rectangle cannot hold"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 1 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -9903,15 +9880,14 @@ Let’s check that it passes!
 ```shell
 $ scarb test 
      Running test listing_10_04 (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_unittest) listing_10_04 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from listing_10_04 package
 Running 2 test(s) from src/
-[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
-[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15040)
+[PASS] listing_10_04::tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+[PASS] listing_10_04::tests::wrong_check (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~7210)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -9945,7 +9921,6 @@ Run the tests again:
 ```shell
 $ scarb test 
      Running test listing_10_04_wong_add (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_10_04_wong_add_unittest) listing_10_04_wong_add v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_04_wong_add/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -9959,6 +9934,7 @@ Failure data:
     4: 4
     add_two(2): 5"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -10127,6 +10103,7 @@ Failure data:
     4: 4
     add_two(2): 5"
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -10199,15 +10176,13 @@ this test passes:
 ```shell
 $ scarb test 
      Running test listing_09_08 (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(listing_09_08_unittest) listing_09_08 v0.1.0 (listings/ch10-testing-cairo-programs/listing_10_05/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 1 test(s) from listing_09_08 package
 Running 1 test(s) from src/
-[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~14440)
+[PASS] listing_09_08::tests::greater_than_100 (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~6910)
 Tests: 1 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -10257,7 +10232,6 @@ When we run the test, it will fail:
 ```shell
 $ scarb test 
      Running test no_listing_03_wrong_new_impl (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_03_wrong_new_impl_unittest) no_listing_03_wrong_new_impl v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_03_wrong_new_impl/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -10369,7 +10343,6 @@ This time when we run the `should_panic` test, it will fail:
 ```shell
 $ scarb test 
      Running test no_listing_04_new_bug (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_04_new_bug_unittest) no_listing_04_new_bug v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_04_new_bug/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -10380,9 +10353,10 @@ Running 1 test(s) from src/
 
 Failure data:
     Incorrect panic data
-    Actual:    [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203e3d2031, 0x12] (Guess must be >= 1)
-    Expected:  [0x46a6158a16a947e5916b2a2ca68501a45e93d7110e81aa2d6438b1c57c879a3, 0x0, 0x4775657373206d757374206265203c3d20313030, 0x14] (Guess must be <= 100)
+    Actual:    ByteArray("Guess must be >= 1")
+    Expected:  ByteArray("Guess must be <= 100")
 
+note: run with `SNFORGE_BACKTRACE=1` environment variable to display a backtrace
 Tests: 0 passed, 1 failed, 0 ignored, 0 filtered out
 
 Failures:
@@ -10437,7 +10411,7 @@ $ scarb test add_two_and_two
 
 Collected 1 test(s) from listing_10_07 package
 Running 1 test(s) from src/
-[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~15240)
+[PASS] listing_10_07::tests::add_two_and_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 1 passed, 0 failed, 0 ignored, 1 filtered out
 
 
@@ -10486,8 +10460,6 @@ when we run our tests, `it_works` runs, but `expensive_test` doesn’t:
 ```shell
 $ scarb test 
      Running test no_listing_05_ignore_tests (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(no_listing_05_ignore_tests_unittest) no_listing_05_ignore_tests v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_05_ignore_tests/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
@@ -10495,7 +10467,7 @@ $ scarb test
 Collected 2 test(s) from no_listing_05_ignore_tests package
 Running 2 test(s) from src/
 [IGNORE] no_listing_05_ignore_tests::tests::expensive_test
-[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] no_listing_05_ignore_tests::tests::it_works (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 1 passed, 0 failed, 1 ignored, 0 filtered out
 
 
@@ -10780,18 +10752,16 @@ this directory only when we run `scarb test`. Run `scarb test` now:
 ```shell
 $ scarb test 
      Running test adder (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
    Compiling test(adder_integrationtest) adder_integrationtest v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_09_integration_test/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from tests/
-[PASS] adder_integrationtest::integration_tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from src/
-[PASS] adder::tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] adder::tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+Running 1 test(s) from tests/
+[PASS] adder_integrationtest::integration_tests::it_adds_two (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -10892,17 +10862,16 @@ test functions nor did we call the setup function from anywhere:
 ```shell
 $ scarb test 
      Running test adder (snforge test)
-    Blocking waiting for file lock on registry db cache
    Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
    Compiling test(adder_integrationtest) adder_integrationtest v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_12_submodules/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from tests/
-[PASS] adder_integrationtest::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from src/
-[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+Running 1 test(s) from tests/
+[PASS] adder_integrationtest::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -10942,18 +10911,16 @@ When we run the `scarb test` command again, here is the output :
 ```shell
 $ scarb test 
      Running test adder (snforge test)
-    Blocking waiting for file lock on registry db cache
-    Blocking waiting for file lock on registry db cache
    Compiling test(adder_unittest) adder v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
    Compiling test(adder_tests) adder_tests v0.1.0 (listings/ch10-testing-cairo-programs/no_listing_13_single_integration_crate/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
 
 
 Collected 2 test(s) from adder package
-Running 1 test(s) from src/
-[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
 Running 1 test(s) from tests/
-[PASS] adder_tests::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~13840)
+[PASS] adder_tests::integration_tests::internal (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
+Running 1 test(s) from src/
+[PASS] adder::tests::add (l1_gas: ~0, l1_data_gas: ~0, l2_gas: ~5910)
 Tests: 2 passed, 0 failed, 0 ignored, 0 filtered out
 
 
@@ -11278,15 +11245,15 @@ following error:
 ```shell
 $ scarb execute 
    Compiling listing_99_02 v0.1.0 (listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/Scarb.toml)
-error: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
+error[E2029]: The number of parameters in the impl function `SimpleStorage::set` is incompatible with `ISimpleStorage::set`. Expected: 2, actual: 1.
  --> listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/src/lib.cairo:23:16
         fn set(ref self: ContractState) {}
                ^^^^^^^^^^^^^^^^^^^^^^^
 
-error: Wrong number of arguments. Expected 2, found: 1
- --> listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/src/lib.cairo:23:9
-        fn set(ref self: ContractState) {}
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error[E2030]: Wrong number of arguments. Expected 2, found: 1
+ --> listings/ch100-introduction-to-smart-contracts/listing_02_wrong_impl/src/lib.cairo:21:5
+    #[abi(embed_v0)]
+    ^^^^^^^^^^^^^^^^
 
 error: could not compile `listing_99_02` due to 2 previous errors
 error: `scarb` command exited with error
@@ -23521,7 +23488,7 @@ configure your `Scarb.toml`:
 
 ```toml
 [dev-dependencies]
-snforge_std = "0.62.1"
+snforge_std = "0.64.1"
 
 [scripts]
 test = "snforge test"
@@ -23923,7 +23890,7 @@ warn[E0001]: Unused variable. Consider ignoring by prefixing with `_`.
     let n = example_closure(5_u32);
         ^
 
-error: Trait has no implementation in context: core::ops::function::Fn::<{closure@listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:5:27: 5:30}, (core::integer::u32,)>.
+error[E2311]: Trait has no implementation in context: core::ops::function::Fn::<listing_closure_different_types::main::{closure#0}, (u32,)>.
  --> listings/ch11-functional-features/listing_closure_different_types/src/lib.cairo:8:13
     let n = example_closure(5_u32);
             ^^^^^^^^^^^^^^^^^^^^^^
@@ -25127,22 +25094,12 @@ the following error:
 ```plaintext
 $ scarb build 
    Compiling listing_recursive_types_wrong v0.1.0 (listings/ch12-advanced-features/listing_recursive_types_wrong/Scarb.toml)
-error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::BinaryTree, listing_recursive_types_wrong::BinaryTree)" has infinite size.
+error[E2052]: Recursive type "(u32, BinaryTree, BinaryTree)" has infinite size.
  --> listings/ch12-advanced-features/listing_recursive_types_wrong/src/lib.cairo:6:5
     Node: (u32, BinaryTree, BinaryTree),
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-error: Recursive type "listing_recursive_types_wrong::BinaryTree" has infinite size.
- --> listings/ch12-advanced-features/listing_recursive_types_wrong/src/lib.cairo:11:17
-    let leaf1 = BinaryTree::Leaf(1);
-                ^^^^^^^^^^^^^^^^^^^
-
-error: Recursive type "(core::integer::u32, listing_recursive_types_wrong::BinaryTree, listing_recursive_types_wrong::BinaryTree)" has infinite size.
- --> listings/ch12-advanced-features/listing_recursive_types_wrong/src/lib.cairo:14:33
-    let node = BinaryTree::Node((4, leaf2, leaf3));
-                                ^^^^^^^^^^^^^^^^^
-
-error: could not compile `listing_recursive_types_wrong` due to 3 previous errors
+error: could not compile `listing_recursive_types_wrong` due to 1 previous error
 
 ```
 
@@ -25909,11 +25866,11 @@ experimental-features = ["user_defined_inline_macros"]
 # [cairo]
 # 
 # [dependencies]
-# cairo_execute = "2.20.0"
+# cairo_execute = "2.21.0"
 # 
 # [dev-dependencies]
-# snforge_std = "0.62.1"
-# assert_macros = "2.20.0"
+# snforge_std = "0.64.1"
+# assert_macros = "2.21.0"
 # 
 # [scripts]
 # test = "snforge test"
@@ -27035,7 +26992,7 @@ Compiling this code will result in the following error:
 ```plaintext
 $ scarb build 
    Compiling no_listing_09_deref_coercion_example v0.1.0 (listings/ch12-advanced-features/no_listing_09_deref_mut_example/Scarb.toml)
-error[E0007]: Type "no_listing_09_deref_coercion_example::Wrapper::<no_listing_09_deref_coercion_example::UserProfile>" has no member "username"
+error[E0007]: Type "Wrapper::<UserProfile>" has no member "username"
  --> listings/ch12-advanced-features/no_listing_09_deref_mut_example/src/lib.cairo:32:46
     println!("Username: {}", wrapped_profile.username);
                                              ^^^^^^^^
@@ -28361,8 +28318,8 @@ crate-type = ["cdylib"]
 [dependencies]
 bigdecimal = "0.4.5"
 cairo-lang-macro = "0.1.1"
-cairo-lang-parser = "2.20.0"
-cairo-lang-syntax = "2.20.0"
+cairo-lang-parser = "2.21.0"
+cairo-lang-syntax = "2.21.0"
 
 [workspace]
 ```
@@ -28399,14 +28356,14 @@ edition = "2024_07"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-cairo_execute = "2.20.0"
+cairo_execute = "2.21.0"
 pow = { path = "../no_listing_16_procedural_macro_expression" }
 hello_macro = { path = "../no_listing_17_procedural_macro_derive" }
 rename_macro = { path = "../no_listing_18_procedural_macro_attribute" }
 
 
 [dev-dependencies]
-cairo_test = "2.20.0"
+cairo_test = "2.21.0"
 
 [cairo]
 enable-gas = false
@@ -28826,7 +28783,7 @@ edition = "2024_07"
 publish = false
 
 [dependencies]
-cairo_execute = "2.20.0"
+cairo_execute = "2.21.0"
 oracle = "0.1.0-dev.4"
 
 [executable]
@@ -30702,9 +30659,9 @@ for supporting the creation of this book._
 
 This version of the text assumes you’re using
 [Cairo](https://github.com/starkware-libs/cairo)
-[version 2.20.0](https://github.com/starkware-libs/cairo/releases) and
+[version 2.21.0](https://github.com/starkware-libs/cairo/releases) and
 [Starknet Foundry](https://foundry-rs.github.io/starknet-foundry/index.html)
-[version 0.62.1](https://github.com/foundry-rs/starknet-foundry/releases). See
+[version 0.64.1](https://github.com/foundry-rs/starknet-foundry/releases). See
 the [Installation](ch01-01-installation.md) section of Chapter
 1 to install or update Cairo and Starknet Foundry.
 
