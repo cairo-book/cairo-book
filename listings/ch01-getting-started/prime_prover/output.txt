@@ -1,7 +1,11 @@
-$ scarb execute -p prime_prover --print-program-output --output standard --arguments 17
+$ scarb execute -p prime_prover --print-program-output --output standard --target bootloader --arguments 17
    Compiling prime_prover v0.1.0 (listings/ch01-getting-started/prime_prover/Scarb.toml)
     Finished `dev` profile target(s) in 1 second
    Executing prime_prover
 Program output:
 1
-Saving output to: target/execute/prime_prover/execution1
+3
+647976546035917987793552092135293121234959407911032472529096977007578643477
+1
+
+
