@@ -138,8 +138,8 @@ You should see output like this:
 ```
 
 The last line is the result of our program: `1` represents true (17 is prime).
-The lines before it are written by the bootloader: the number of programs it
-ran (`1`), the size of that program's output section (`3`), and the hash of the
+The lines before it are written by the bootloader: the number of programs it ran
+(`1`), the size of that program's output section (`3`), and the hash of the
 program that was executed. Try a few more numbers:
 
 ```bash
