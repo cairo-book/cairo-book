@@ -6,7 +6,7 @@ edition = "2024_07"
 experimental-features = ["associated_item_constraints"]
 
 [dependencies]
-cairo_execute = "2.20.0"
+cairo_execute = "2.21.0"
 
 [cairo]
 enable-gas = false

@@ -4,4 +4,3 @@ $ scarb execute
    Executing no_listing_24_if
 condition was false and number = 3
 
-

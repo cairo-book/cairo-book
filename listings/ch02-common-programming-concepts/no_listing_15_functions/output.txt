@@ -5,4 +5,3 @@ $ scarb execute
 Hello, world!
 Another function.
 
-

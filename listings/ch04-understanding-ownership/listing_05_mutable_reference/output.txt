@@ -4,4 +4,3 @@ $ scarb execute
    Executing listing_04_05
 height: 10, width: 3
 
-

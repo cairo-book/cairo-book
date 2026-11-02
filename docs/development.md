@@ -322,7 +322,7 @@ Ensure your Scarb version matches `.tool-versions`:
 
 ```bash
 scarb --version
-# Should show: scarb 2.20.0
+# Should show: scarb 2.21.0
 ```
 
 ### Cairo Compilation Errors

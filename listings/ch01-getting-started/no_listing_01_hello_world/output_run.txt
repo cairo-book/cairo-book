@@ -4,4 +4,3 @@ $ scarb execute
    Executing hello_world
 Hello, World!
 
-
