@@ -4,10 +4,6 @@ You might encounter error messages when writing Cairo code. Some of them occur
 very frequently, which is why we will be listing the most common error messages
 in this appendix to help you resolve common issues.
 
-The compiler prefixes each error with a code that identifies it, such as
-`error[E3002]` for `Variable not dropped.`. The message after the code is what
-we list below.
-
 - `Variable not dropped.`: this error message means that you are trying to make
   a variable with a type that do not implement the `Drop` trait go out of scope,
   without destroying it. Make sure that variables that need to be dropped at the
