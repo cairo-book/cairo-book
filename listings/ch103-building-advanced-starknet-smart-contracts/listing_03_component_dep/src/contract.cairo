@@ -1,6 +1,6 @@
 //ANCHOR: all
 #[starknet::contract]
-mod OwnableCounter {
+pub mod OwnableCounter {
     use listing_03_component_dep::counter::OwnableCounterComponent;
     use listing_03_component_dep::owner::OwnableComponent;
     use starknet::ContractAddress;

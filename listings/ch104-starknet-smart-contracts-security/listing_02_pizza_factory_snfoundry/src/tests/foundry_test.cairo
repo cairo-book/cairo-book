@@ -114,3 +114,5 @@ fn test_storage_direct_access() {
     assert_eq!(state.owner.read(), owner);
 }
 // ANCHOR_END: test_internals
+
+

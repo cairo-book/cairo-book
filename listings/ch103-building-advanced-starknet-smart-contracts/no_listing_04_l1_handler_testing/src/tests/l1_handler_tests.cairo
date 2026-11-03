@@ -1,6 +1,6 @@
-use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait};
 use starknet::{ContractAddress, contract_address_const};
-use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+use crate::bridge::{Bridge, IBridgeDispatcher, IBridgeDispatcherTrait};
 
 // ANCHOR: constants
 // The L1 bridge address (Ethereum address as felt252)
@@ -10,7 +10,7 @@ const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
 // ANCHOR_END: constants
 
 fn deploy_bridge() -> (IBridgeDispatcher, ContractAddress) {
-    let contract = declare("Bridge").unwrap().contract_class();
+    let contract = declare!(Bridge).unwrap().contract_class();
     let constructor_calldata = array![VALID_L1_BRIDGE];
     let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
     (IBridgeDispatcher { contract_address }, contract_address)

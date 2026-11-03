@@ -1,12 +1,12 @@
 use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, declare, mock_call, start_cheat_caller_address,
+    ContractClassTrait, DeclareResultTrait, mock_call, start_cheat_caller_address,
     stop_cheat_caller_address,
 };
 use starknet::ContractAddress;
-use super::{ITokenWrapperDispatcher, ITokenWrapperDispatcherTrait};
+use super::{ITokenWrapperDispatcher, ITokenWrapperDispatcherTrait, TokenWrapper};
 
 fn deploy_wrapper() -> ITokenWrapperDispatcher {
-    let contract = declare("TokenWrapper").unwrap().contract_class();
+    let contract = declare!(TokenWrapper).unwrap().contract_class();
     let (contract_address, _) = contract.deploy(@array![]).unwrap();
     ITokenWrapperDispatcher { contract_address }
 }

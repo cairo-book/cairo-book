@@ -1,16 +1,15 @@
 use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-    stop_cheat_caller_address,
+    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 };
 use starknet::{ContractAddress, contract_address_const};
-use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 
 fn owner() -> ContractAddress {
     contract_address_const::<'owner'>()
 }
 
 fn deploy_token(initial_supply: u256) -> ISimpleTokenDispatcher {
-    let contract = declare("SimpleToken").unwrap().contract_class();
+    let contract = declare!(SimpleToken).unwrap().contract_class();
     let owner = owner();
     let constructor_calldata = array![
         owner.into(), initial_supply.low.into(), initial_supply.high.into(),

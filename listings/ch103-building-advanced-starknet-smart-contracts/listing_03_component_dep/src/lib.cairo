@@ -1,4 +1,4 @@
-mod contract;
+pub mod contract;
 mod counter;
 mod owner;
 

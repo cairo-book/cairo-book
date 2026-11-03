@@ -1,12 +1,11 @@
 use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-    stop_cheat_caller_address,
+    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 };
 use starknet::ContractAddress;
-use super::{IUserValuesDispatcher, IUserValuesDispatcherTrait};
+use super::{IUserValuesDispatcher, IUserValuesDispatcherTrait, UserValues};
 
 fn deploy_contract() -> IUserValuesDispatcher {
-    let contract = declare("UserValues").unwrap().contract_class();
+    let contract = declare!(UserValues).unwrap().contract_class();
     let (contract_address, _) = contract.deploy(@array![]).unwrap();
     IUserValuesDispatcher { contract_address }
 }
