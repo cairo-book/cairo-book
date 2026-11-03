@@ -132,10 +132,9 @@ use the library dispatcher directly as shown above.
 
 ### Embedding the Class Hash at Compile Time
 
-`ValueStoreForwarder` reads its class hash from storage, so the deployer has to
-pass it to the constructor. When the target class is part of your own build,
-Scarb can embed its class hash at compile time instead. Enable `forwarding` on
-the contract target in _Scarb.toml_:
+`ValueStoreForwarder` reads its class hash from storage. When the target class
+is part of your own build, Scarb can embed its class hash at compile time
+instead. Enable `forwarding` on the contract target in _Scarb.toml_:
 
 ```toml
 {{#include ../listings/ch102-starknet-cross-contract-interactions/listing_09_static_forwarding/Scarb.toml:forwarding}}
@@ -153,11 +152,9 @@ Use it in place of a hand-written `ForwardingClassHash` impl:
 {{#ref static-forwarding}}: Forwarding to `ValueStoreLogic` with a class hash
 embedded at compile time</span>
 
-Scarb compiles `ValueStoreLogic` first and injects its class hash into
-`StaticValueStoreForwarder`, which needs neither a constructor nor a
-`logic_library` slot. The forwarded contract must be defined in the same package
-or listed in `build-external-contracts`, and forwarding cycles are compile
-errors.
+`StaticValueStoreForwarder` needs neither a constructor nor a `logic_library`
+slot. The forwarded contract must be defined in the same package or listed in
+`build-external-contracts`, and forwarding cycles are compile errors.
 
 ## Calling Classes using Low-Level Calls
 
