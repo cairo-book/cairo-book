@@ -489,12 +489,42 @@ compiling as the feature stabilizes.</p>
 <p>Reach for this when a contract forwards an interface wholesale. If you need to
 forward only some methods, or to run logic of your own around a forwarded call,
 use the library dispatcher directly as shown above.</p>
+<h3 id="embedding-the-class-hash-at-compile-time"><a class="header" href="#embedding-the-class-hash-at-compile-time">Embedding the Class Hash at Compile Time</a></h3>
+<p><code>ValueStoreForwarder</code> reads its class hash from storage. When the target class
+is part of your own build, Scarb can embed its class hash at compile time
+instead. Enable <code>forwarding</code> on the contract target in <em>Scarb.toml</em>:</p>
+<pre><code class="language-toml">[[target.starknet-contract]]
+forwarding = true
+</code></pre>
+<p>For every contract <code>Foo</code> in the build, Scarb then generates a
+<code>Foo__class_hash__::ForwardingClassHashImpl</code> that returns <code>Foo</code>'s class hash.
+Use it in place of a hand-written <code>ForwardingClassHash</code> impl:</p>
+<pre><code class="language-cairo noplayground">#[starknet::contract]
+#[feature("forward-impl")]
+pub mod StaticValueStoreForwarder {
+    #[storage]
+    struct Storage {
+        value: u128,
+    }
+
+    impl LogicClassHash =
+        super::ValueStoreLogic__class_hash__::ForwardingClassHashImpl&lt;ContractState&gt;;
+
+    #[abi(embed_v0)]
+    impl ValueStoreForwarded = super::IValueStoreForwardImpl&lt;ContractState&gt;;
+}
+</code></pre>
+<p>16-8: Forwarding to <code>ValueStoreLogic</code> with a class hash
+embedded at compile time</span></p>
+<p><code>StaticValueStoreForwarder</code> needs neither a constructor nor a <code>logic_library</code>
+slot. The forwarded contract must be defined in the same package or listed in
+<code>build-external-contracts</code>, and forwarding cycles are compile errors.</p>
 <h2 id="calling-classes-using-low-level-calls"><a class="header" href="#calling-classes-using-low-level-calls">Calling Classes using Low-Level Calls</a></h2>
 <p>Another way to call classes is to directly use <code>library_call_syscall</code>. While
 less convenient than using the dispatcher pattern, this syscall provides more
 control over the serialization and deserialization process and allows for more
 customized error handling.</p>
-<p>Listing 16-8 shows an example demonstrating how to use a
+<p>Listing 16-9 shows an example demonstrating how to use a
 <code>library_call_syscall</code> to call the <code>set_value</code> function of <code>ValueStore</code>
 contract:</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
@@ -532,7 +562,7 @@ mod ValueStore {
     }
 }
 </code></pre>
-<p>16-8: A sample contract using <code>library_call_syscall</code> system
+<p>16-9: A sample contract using <code>library_call_syscall</code> system
 call</span></p>
 <p>To use this syscall, we passed in the class hash, the selector of the function
 we want to call and the call arguments. The call arguments must be provided as
