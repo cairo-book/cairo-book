@@ -254,9 +254,6 @@ items of an array:
 {{#rustdoc_include ../listings/ch12-advanced-features/listing_closures/src/lib.cairo:array_map}}
 ```
 
-> Note that, due to a bug in inlining analysis, this analysis process should be
-> disabled using `#[inline(never)]`.
-
 In this implementation, you'll notice that, while `T` is the element type of the
 input array `self`, the element type of the output array is defined by the
 output type of the `f` closure (the associated type `func::Output` from the `Fn`
