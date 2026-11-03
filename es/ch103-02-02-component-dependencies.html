@@ -389,7 +389,7 @@ in the <code>OwnableCounterComponent</code> component: the host contract will ex
 through the <code>OwnableComponent</code>.</p>
 <p>The final host contract is shown in Listing 17-2.</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
-mod OwnableCounter {
+pub mod OwnableCounter {
     use listing_03_component_dep::counter::OwnableCounterComponent;
     use listing_03_component_dep::owner::OwnableComponent;
     use starknet::ContractAddress;

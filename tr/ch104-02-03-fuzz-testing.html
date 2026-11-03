@@ -305,18 +305,17 @@ and after every operation. Smart contracts often have important invariants:</p>
 <p>Let's compare approaches using a token transfer:</p>
 <h3 id="example-based-test"><a class="header" href="#example-based-test">Example-Based Test</a></h3>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -457,18 +456,17 @@ the balance, transferring to yourself, or large amounts near <code>u256::MAX</co
 <p>Instead of testing one amount, we test a <em>property</em> that should hold for <em>any</em>
 amount:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -619,18 +617,17 @@ ends, and the winner is the highest bidder.</p>
 <h3 id="design-for-fuzzability"><a class="header" href="#design-for-fuzzability">Design for Fuzzability</a></h3>
 <p>Structure tests so the fuzzer can explore interesting cases:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -772,18 +769,17 @@ same.</p>
 <h3 id="test-round-trip-properties"><a class="header" href="#test-round-trip-properties">Test Round-Trip Properties</a></h3>
 <p>Round-trip properties verify that operations can be "undone":</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -927,18 +923,17 @@ through <code>i128</code>), <code>u256</code>, <code>bool</code>, <code>ByteArra
 each field or variant for you. This is how one test varies several related
 inputs at once:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),

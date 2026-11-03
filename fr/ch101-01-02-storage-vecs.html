@@ -354,14 +354,14 @@ pub mod AddressList {
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -537,14 +537,14 @@ the end of the <code>Vec</code>.</p>
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -721,14 +721,14 @@ index, and then call <code>read()</code> to get the value. If the index is out o
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -910,14 +910,14 @@ Thus how would you modify the address stored at a specific index of a <code>Vec<
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -1095,14 +1095,14 @@ updates the stored length accordingly.</p>
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }

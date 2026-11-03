@@ -403,7 +403,7 @@ functions</span></p>
 <p>The <code>InternalTrait</code> contains <code>set_owner</code>, which isn't part of the ABI. To test
 it, we import the trait and call it directly on a test state:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -416,7 +416,7 @@ it, we import the trait and call it directly on a test state:</p>
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];
@@ -521,7 +521,7 @@ contract, which means these tests catch real-world bugs.</p>
 <p>The pattern is straightforward: declare the contract class, deploy it with
 constructor arguments, and interact through a dispatcher.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -534,7 +534,7 @@ constructor arguments, and interact through a dispatcher.</p>
 </span><span class="boring">}
 </span><span class="boring">
 </span>fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-    let contract = declare("PizzaFactory").unwrap().contract_class();
+    let contract = declare!(PizzaFactory).unwrap().contract_class();
 
     let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
     let constructor_calldata = array![owner.into()];
@@ -642,7 +642,7 @@ Think of them as ways to set up the exact scenario you want to test.</p>
 to know who's calling it. In tests, you control this with
 <code>start_cheat_caller_address</code>:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -655,7 +655,7 @@ to know who's calling it. In tests, you control this with
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];
@@ -762,7 +762,7 @@ from forgetting to check permissions in some code path.</p>
 <p>When your contract emits events, off-chain systems like indexers and frontends
 depend on them being correct. Use <code>spy_events</code> to capture and check them:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -775,7 +775,7 @@ depend on them being correct. Use <code>spy_events</code> to capture and check t
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];
@@ -876,7 +876,7 @@ events</span></p>
 <p>Sometimes you need to verify storage values that don't have public getters. The
 <code>load</code> function reads raw storage:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -889,7 +889,7 @@ events</span></p>
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];

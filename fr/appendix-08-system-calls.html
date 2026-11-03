@@ -284,7 +284,7 @@ System calls enable a contract to require services from the Starknet OS. You can
 use system calls in a function to get information that depends on the broader
 state of Starknet, which would otherwise be inaccessible, rather than local
 variables that appear in the function’s scope.</p>
-<p>Here is a list of the system calls available in Cairo 1.0:</p>
+<p>Here is a list of the system calls available in Cairo:</p>
 <ul>
 <li><a href="#get_block_hash">get_block_hash</a></li>
 <li><a href="#get_execution_info">get_execution_info</a></li>
@@ -300,6 +300,7 @@ variables that appear in the function’s scope.</p>
 <li><a href="#keccak">keccak</a></li>
 <li><a href="#sha256_process_block">sha256_process_block</a></li>
 <li><a href="#sha512_process_block">sha512_process_block</a></li>
+<li><a href="#meta_tx_v0">meta_tx_v0</a></li>
 </ul>
 <h2 id="get_block_hash"><a class="header" href="#get_block_hash"><code>get_block_hash</code></a></h2>
 <h4 id="syntax"><a class="header" href="#syntax">Syntax</a></h4>
@@ -324,23 +325,25 @@ variables that appear in the function’s scope.</p>
 </ul>
 <h2 id="get_execution_info"><a class="header" href="#get_execution_info"><code>get_execution_info</code></a></h2>
 <h4 id="syntax-1"><a class="header" href="#syntax-1">Syntax</a></h4>
-<pre><code class="language-cairo noplayground">pub extern fn get_execution_info_syscall() -&gt; SyscallResult&lt;
-    Box&lt;starknet::info::ExecutionInfo&gt;,
+<pre><code class="language-cairo noplayground">pub extern fn get_execution_info_v3_syscall() -&gt; SyscallResult&lt;
+    Box&lt;starknet::info::v3::ExecutionInfo&gt;,
 &gt; implicits(GasBuiltin, System) nopanic;
 </code></pre>
 <h4 id="description-1"><a class="header" href="#description-1">Description</a></h4>
 <p>Gets information about the original transaction.</p>
-<p>In Cairo 1.0, all block/transaction/execution context getters are batched into
-this single system call.</p>
+<p>All block, transaction and execution context getters are batched into this
+single system call. <code>starknet::get_execution_info()</code> calls it.
+<code>get_execution_info_syscall</code> and <code>get_execution_info_v2_syscall</code> return older
+versions of the same struct.</p>
 <h4 id="arguments"><a class="header" href="#arguments">Arguments</a></h4>
 <p>None.</p>
 <h4 id="return-values-1"><a class="header" href="#return-values-1">Return Values</a></h4>
 <p>Returns a
-<a href="https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60faa6e1363fd0152b8fcedbb00a/corelib/src/starknet/info.cairo#L8">struct</a>
+<a href="https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/info.cairo#L267">struct</a>
 containing the execution info.</p>
 <h4 id="common-library-1"><a class="header" href="#common-library-1">Common Library</a></h4>
 <ul>
-<li><a href="https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L35">syscalls.cairo</a></li>
+<li><a href="https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/syscalls.cairo#L110">syscalls.cairo</a></li>
 </ul>
 <h2 id="call_contract"><a class="header" href="#call_contract"><code>call_contract</code></a></h2>
 <h4 id="syntax-2"><a class="header" href="#syntax-2">Syntax</a></h4>
@@ -703,6 +706,35 @@ same block function with a different initial state.</p>
 <h4 id="common-library-13"><a class="header" href="#common-library-13">Common Library</a></h4>
 <ul>
 <li><a href="https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106">syscalls.cairo</a></li>
+</ul>
+<h2 id="meta_tx_v0"><a class="header" href="#meta_tx_v0"><code>meta_tx_v0</code></a></h2>
+<h4 id="syntax-14"><a class="header" href="#syntax-14">Syntax</a></h4>
+<pre><code class="language-cairo noplayground">pub extern fn meta_tx_v0_syscall(
+    address: ContractAddress,
+    entry_point_selector: felt252,
+    calldata: Span&lt;felt252&gt;,
+    signature: Span&lt;felt252&gt;,
+) -&gt; starknet::SyscallResult&lt;Span&lt;felt252&gt;&gt; implicits(GasBuiltin, System) nopanic;
+</code></pre>
+<h4 id="description-14"><a class="header" href="#description-14">Description</a></h4>
+<p>Invokes the given entry point as a version-0 meta transaction. Inside the called
+contract and the contracts it calls, the signature is replaced with the given
+one, the caller is the OS (address 0), the transaction version is 0, and the
+transaction hash is the corresponding version-0 hash.</p>
+<p>This system call exists to support old accounts bound to version-0 transactions.
+Don't use it for anything else.</p>
+<h4 id="arguments-13"><a class="header" href="#arguments-13">Arguments</a></h4>
+<ul>
+<li><em><code>address</code></em>: The address of the contract to call.</li>
+<li><em><code>entry_point_selector</code></em>: The selector of the function to call.</li>
+<li><em><code>calldata</code></em>: The calldata.</li>
+<li><em><code>signature</code></em>: The signature that replaces the transaction's signature.</li>
+</ul>
+<h4 id="return-values-14"><a class="header" href="#return-values-14">Return Values</a></h4>
+<p>Returns the call response, of type <code>Span&lt;felt252&gt;</code>.</p>
+<h4 id="common-library-14"><a class="header" href="#common-library-14">Common Library</a></h4>
+<ul>
+<li><a href="https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/syscalls.cairo#L254">syscalls.cairo</a></li>
 </ul>
 
                     </main>

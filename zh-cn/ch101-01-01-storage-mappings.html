@@ -476,14 +476,14 @@ to their respective quantities.</p>
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait};
+</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait, WarehouseContract};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IWarehouseContractDispatcher {
-</span><span class="boring">        let contract = declare("WarehouseContract").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(WarehouseContract).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IWarehouseContractDispatcher { contract_address }
 </span><span class="boring">    }
@@ -583,14 +583,14 @@ storage path to the next key in the sequence, and finally calling <code>read</co
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait};
+</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait, WarehouseContract};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IWarehouseContractDispatcher {
-</span><span class="boring">        let contract = declare("WarehouseContract").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(WarehouseContract).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IWarehouseContractDispatcher { contract_address }
 </span><span class="boring">    }

@@ -563,9 +563,9 @@ legitimate L1 bridge</li>
 </ol>
 <h3 id="testing-the-happy-path"><a class="header" href="#testing-the-happy-path">Testing the Happy Path</a></h3>
 <p>First, test that valid messages are processed correctly:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">use crate::bridge::{Bridge, IBridgeDispatcher, IBridgeDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
 </span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
@@ -573,7 +573,7 @@ legitimate L1 bridge</li>
 </span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
 </span><span class="boring">
 </span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(Bridge).unwrap().contract_class();
 </span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
 </span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 </span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
@@ -678,9 +678,9 @@ processed</span></p>
 <h3 id="testing-unauthorized-senders"><a class="header" href="#testing-unauthorized-senders">Testing Unauthorized Senders</a></h3>
 <p><strong>This is the most important test.</strong> Always verify that unauthorized addresses
 are rejected:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">use crate::bridge::{Bridge, IBridgeDispatcher, IBridgeDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
 </span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
@@ -688,7 +688,7 @@ are rejected:</p>
 </span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
 </span><span class="boring">
 </span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(Bridge).unwrap().contract_class();
 </span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
 </span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 </span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
@@ -796,9 +796,9 @@ addresses. A single test isn't enough—ensure your validation is robust.</p>
 <h3 id="testing-accumulated-operations"><a class="header" href="#testing-accumulated-operations">Testing Accumulated Operations</a></h3>
 <p>For handlers that can be called multiple times, verify state accumulates
 correctly:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">use crate::bridge::{Bridge, IBridgeDispatcher, IBridgeDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
 </span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
@@ -806,7 +806,7 @@ correctly:</p>
 </span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
 </span><span class="boring">
 </span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(Bridge).unwrap().contract_class();
 </span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
 </span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 </span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)

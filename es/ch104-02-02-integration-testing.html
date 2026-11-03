@@ -315,11 +315,10 @@ contracts through their public APIs.</p>
 <p>A typical integration test deploys multiple contracts and tests their
 interactions. Here's a setup function that deploys a Token and a Staking
 contract:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -339,12 +338,12 @@ contract:</p>
 </span><span class="boring">
 </span>fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
     // Deploy the token contract with an owner for access control
-    let token_class = declare("Token").unwrap().contract_class();
+    let token_class = declare!(Token).unwrap().contract_class();
     let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
     let token = ITokenDispatcher { contract_address: token_address };
 
     // Deploy the staking contract with the token address
-    let staking_class = declare("Staking").unwrap().contract_class();
+    let staking_class = declare!(Staking).unwrap().contract_class();
     let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
     let staking = IStakingDispatcher { contract_address: staking_address };
 
@@ -525,11 +524,10 @@ operations spanning contracts work correctly.</p>
 <h2 id="common-integration-test-scenarios"><a class="header" href="#common-integration-test-scenarios">Common Integration Test Scenarios</a></h2>
 <h3 id="testing-token--protocol-interactions"><a class="header" href="#testing-token--protocol-interactions">Testing Token + Protocol Interactions</a></h3>
 <p>Most DeFi protocols interact with tokens. Test the full flow:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -549,12 +547,12 @@ operations spanning contracts work correctly.</p>
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">
@@ -733,11 +731,10 @@ fn test_staking_flow() {
 <h3 id="testing-multi-contract-state-changes"><a class="header" href="#testing-multi-contract-state-changes">Testing Multi-Contract State Changes</a></h3>
 <p>When one action affects multiple contracts, capture state before and after to
 verify all contracts updated correctly:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -757,12 +754,12 @@ verify all contracts updated correctly:</p>
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">
@@ -942,11 +939,10 @@ fn test_stake_updates_both_contracts() {
 <p>Integration tests require careful cheatcode management. When contract A calls
 contract B, you must stop cheating contract B's caller before the cross-contract
 call happens:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -966,12 +962,12 @@ call happens:</p>
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">
@@ -1181,11 +1177,10 @@ fn test_liquidation_flow() {
 </code></pre>
 <h3 id="test-failure-modes"><a class="header" href="#test-failure-modes">Test Failure Modes</a></h3>
 <p>Test what happens when cross-contract calls fail:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -1205,12 +1200,12 @@ fn test_liquidation_flow() {
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">

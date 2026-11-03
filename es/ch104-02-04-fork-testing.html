@@ -392,11 +392,11 @@ pub trait IDeployedProtocol&lt;TContractState&gt; {
 </span><span class="boring">// NOTE: These tests require RPC access and are marked with #[ignore]
 </span><span class="boring">// to prevent CI failures. Run locally with: snforge test --ignored
 </span><span class="boring">
-</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
+</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">use super::{
 </span><span class="boring">    IDeployedProtocolDispatcher, IDeployedProtocolDispatcherTrait, IMyContractDispatcher,
-</span><span class="boring">    IMyContractDispatcherTrait,
+</span><span class="boring">    IMyContractDispatcherTrait, MyContract,
 </span><span class="boring">};
 </span><span class="boring">
 </span>// For example only - replace addresses with real deployed contracts
@@ -424,7 +424,7 @@ fn test_reads_from_deployed_protocol() {
 </span><span class="boring">#[ignore] // Requires RPC access
 </span><span class="boring">fn test_my_contract_with_deployed_oracle() {
 </span><span class="boring">    // Deploy your contract in the forked environment
-</span><span class="boring">    let contract_class = declare("MyContract").unwrap().contract_class();
+</span><span class="boring">    let contract_class = declare!(MyContract).unwrap().contract_class();
 </span><span class="boring">    let (contract_address, _) = contract_class.deploy(@array![]).unwrap();
 </span><span class="boring">    let my_contract = IMyContractDispatcher { contract_address };
 </span><span class="boring">
@@ -469,11 +469,11 @@ deployed protocols:</p>
 </span><span class="boring">// NOTE: These tests require RPC access and are marked with #[ignore]
 </span><span class="boring">// to prevent CI failures. Run locally with: snforge test --ignored
 </span><span class="boring">
-</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
+</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">use super::{
 </span><span class="boring">    IDeployedProtocolDispatcher, IDeployedProtocolDispatcherTrait, IMyContractDispatcher,
-</span><span class="boring">    IMyContractDispatcherTrait,
+</span><span class="boring">    IMyContractDispatcherTrait, MyContract,
 </span><span class="boring">};
 </span><span class="boring">
 </span><span class="boring">// For example only - replace addresses with real deployed contracts
@@ -501,7 +501,7 @@ deployed protocols:</p>
 #[ignore] // Requires RPC access
 fn test_my_contract_with_deployed_oracle() {
     // Deploy your contract in the forked environment
-    let contract_class = declare("MyContract").unwrap().contract_class();
+    let contract_class = declare!(MyContract).unwrap().contract_class();
     let (contract_address, _) = contract_class.deploy(@array![]).unwrap();
     let my_contract = IMyContractDispatcher { contract_address };
 

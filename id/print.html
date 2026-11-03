@@ -16544,14 +16544,14 @@ to their respective quantities.</p>
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait};
+</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait, WarehouseContract};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IWarehouseContractDispatcher {
-</span><span class="boring">        let contract = declare("WarehouseContract").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(WarehouseContract).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IWarehouseContractDispatcher { contract_address }
 </span><span class="boring">    }
@@ -16651,14 +16651,14 @@ storage path to the next key in the sequence, and finally calling <code>read</co
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait};
+</span><span class="boring">    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait, WarehouseContract};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IWarehouseContractDispatcher {
-</span><span class="boring">        let contract = declare("WarehouseContract").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(WarehouseContract).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IWarehouseContractDispatcher { contract_address }
 </span><span class="boring">    }
@@ -16822,14 +16822,14 @@ pub mod AddressList {
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -17005,14 +17005,14 @@ the end of the <code>Vec</code>.</p>
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -17189,14 +17189,14 @@ index, and then call <code>read()</code> to get the value. If the index is out o
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -17378,14 +17378,14 @@ Thus how would you modify the address stored at a specific index of a <code>Vec<
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -17563,14 +17563,14 @@ updates the stored length accordingly.</p>
 </span><span class="boring">#[cfg(test)]
 </span><span class="boring">mod tests {
 </span><span class="boring">    use snforge_std::{
-</span><span class="boring">        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+</span><span class="boring">        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
 </span><span class="boring">        stop_cheat_caller_address,
 </span><span class="boring">    };
 </span><span class="boring">    use starknet::ContractAddress;
-</span><span class="boring">    use super::{IAddressListDispatcher, IAddressListDispatcherTrait};
+</span><span class="boring">    use super::{AddressList, IAddressListDispatcher, IAddressListDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">    fn deploy_contract() -&gt; IAddressListDispatcher {
-</span><span class="boring">        let contract = declare("AddressList").unwrap().contract_class();
+</span><span class="boring">        let contract = declare!(AddressList).unwrap().contract_class();
 </span><span class="boring">        let (contract_address, _) = contract.deploy(@array![]).unwrap();
 </span><span class="boring">        IAddressListDispatcher { contract_address }
 </span><span class="boring">    }
@@ -20373,7 +20373,7 @@ in the <code>OwnableCounterComponent</code> component: the host contract will ex
 through the <code>OwnableComponent</code>.</p>
 <p>The final host contract is shown in Listing 17-2.</p>
 <pre><code class="language-cairo noplayground">#[starknet::contract]
-mod OwnableCounter {
+pub mod OwnableCounter {
     use listing_03_component_dep::counter::OwnableCounterComponent;
     use listing_03_component_dep::owner::OwnableComponent;
     use starknet::ContractAddress;
@@ -21027,9 +21027,9 @@ legitimate L1 bridge</li>
 </ol>
 <h3 id="testing-the-happy-path"><a class="header" href="#testing-the-happy-path">Testing the Happy Path</a></h3>
 <p>First, test that valid messages are processed correctly:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">use crate::bridge::{Bridge, IBridgeDispatcher, IBridgeDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
 </span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
@@ -21037,7 +21037,7 @@ legitimate L1 bridge</li>
 </span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
 </span><span class="boring">
 </span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(Bridge).unwrap().contract_class();
 </span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
 </span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 </span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
@@ -21142,9 +21142,9 @@ processed</span></p>
 <h3 id="testing-unauthorized-senders"><a class="header" href="#testing-unauthorized-senders">Testing Unauthorized Senders</a></h3>
 <p><strong>This is the most important test.</strong> Always verify that unauthorized addresses
 are rejected:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">use crate::bridge::{Bridge, IBridgeDispatcher, IBridgeDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
 </span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
@@ -21152,7 +21152,7 @@ are rejected:</p>
 </span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
 </span><span class="boring">
 </span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(Bridge).unwrap().contract_class();
 </span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
 </span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 </span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
@@ -21260,9 +21260,9 @@ addresses. A single test isn't enough—ensure your validation is robust.</p>
 <h3 id="testing-accumulated-operations"><a class="header" href="#testing-accumulated-operations">Testing Accumulated Operations</a></h3>
 <p>For handlers that can be called multiple times, verify state accumulates
 correctly:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait, declare};
+<pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, L1HandlerTrait};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::bridge::{IBridgeDispatcher, IBridgeDispatcherTrait};
+</span><span class="boring">use crate::bridge::{Bridge, IBridgeDispatcher, IBridgeDispatcherTrait};
 </span><span class="boring">
 </span><span class="boring">// The L1 bridge address (Ethereum address as felt252)
 </span><span class="boring">const VALID_L1_BRIDGE: felt252 = 0x1234567890ABCDEF;
@@ -21270,7 +21270,7 @@ correctly:</p>
 </span><span class="boring">const INVALID_L1_ADDRESS: felt252 = 0xDEADBEEF;
 </span><span class="boring">
 </span><span class="boring">fn deploy_bridge() -&gt; (IBridgeDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("Bridge").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(Bridge).unwrap().contract_class();
 </span><span class="boring">    let constructor_calldata = array![VALID_L1_BRIDGE];
 </span><span class="boring">    let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
 </span><span class="boring">    (IBridgeDispatcher { contract_address }, contract_address)
@@ -23014,7 +23014,7 @@ functions</span></p>
 <p>The <code>InternalTrait</code> contains <code>set_owner</code>, which isn't part of the ABI. To test
 it, we import the trait and call it directly on a test state:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -23027,7 +23027,7 @@ it, we import the trait and call it directly on a test state:</p>
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];
@@ -23132,7 +23132,7 @@ contract, which means these tests catch real-world bugs.</p>
 <p>The pattern is straightforward: declare the contract class, deploy it with
 constructor arguments, and interact through a dispatcher.</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -23145,7 +23145,7 @@ constructor arguments, and interact through a dispatcher.</p>
 </span><span class="boring">}
 </span><span class="boring">
 </span>fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-    let contract = declare("PizzaFactory").unwrap().contract_class();
+    let contract = declare!(PizzaFactory).unwrap().contract_class();
 
     let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
     let constructor_calldata = array![owner.into()];
@@ -23253,7 +23253,7 @@ Think of them as ways to set up the exact scenario you want to test.</p>
 to know who's calling it. In tests, you control this with
 <code>start_cheat_caller_address</code>:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -23266,7 +23266,7 @@ to know who's calling it. In tests, you control this with
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];
@@ -23373,7 +23373,7 @@ from forgetting to check permissions in some code path.</p>
 <p>When your contract emits events, off-chain systems like indexers and frontends
 depend on them being correct. Use <code>spy_events</code> to capture and check them:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -23386,7 +23386,7 @@ depend on them being correct. Use <code>spy_events</code> to capture and check t
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];
@@ -23487,7 +23487,7 @@ events</span></p>
 <p>Sometimes you need to verify storage values that don't have public getters. The
 <code>load</code> function reads raw storage:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
 </span><span class="boring">    start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::storage::StoragePointerReadAccess;
@@ -23500,7 +23500,7 @@ events</span></p>
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_pizza_factory() -&gt; (IPizzaFactoryDispatcher, ContractAddress) {
-</span><span class="boring">    let contract = declare("PizzaFactory").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(PizzaFactory).unwrap().contract_class();
 </span><span class="boring">
 </span><span class="boring">    let owner: ContractAddress = contract_address_const::&lt;'owner'&gt;();
 </span><span class="boring">    let constructor_calldata = array![owner.into()];
@@ -23725,11 +23725,10 @@ contracts through their public APIs.</p>
 <p>A typical integration test deploys multiple contracts and tests their
 interactions. Here's a setup function that deploys a Token and a Staking
 contract:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -23749,12 +23748,12 @@ contract:</p>
 </span><span class="boring">
 </span>fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
     // Deploy the token contract with an owner for access control
-    let token_class = declare("Token").unwrap().contract_class();
+    let token_class = declare!(Token).unwrap().contract_class();
     let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
     let token = ITokenDispatcher { contract_address: token_address };
 
     // Deploy the staking contract with the token address
-    let staking_class = declare("Staking").unwrap().contract_class();
+    let staking_class = declare!(Staking).unwrap().contract_class();
     let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
     let staking = IStakingDispatcher { contract_address: staking_address };
 
@@ -23935,11 +23934,10 @@ operations spanning contracts work correctly.</p>
 <h2 id="common-integration-test-scenarios"><a class="header" href="#common-integration-test-scenarios">Common Integration Test Scenarios</a></h2>
 <h3 id="testing-token--protocol-interactions"><a class="header" href="#testing-token--protocol-interactions">Testing Token + Protocol Interactions</a></h3>
 <p>Most DeFi protocols interact with tokens. Test the full flow:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -23959,12 +23957,12 @@ operations spanning contracts work correctly.</p>
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">
@@ -24143,11 +24141,10 @@ fn test_staking_flow() {
 <h3 id="testing-multi-contract-state-changes"><a class="header" href="#testing-multi-contract-state-changes">Testing Multi-Contract State Changes</a></h3>
 <p>When one action affects multiple contracts, capture state before and after to
 verify all contracts updated correctly:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -24167,12 +24164,12 @@ verify all contracts updated correctly:</p>
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">
@@ -24352,11 +24349,10 @@ fn test_stake_updates_both_contracts() {
 <p>Integration tests require careful cheatcode management. When contract A calls
 contract B, you must stop cheating contract B's caller before the cross-contract
 call happens:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -24376,12 +24372,12 @@ call happens:</p>
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">
@@ -24591,11 +24587,10 @@ fn test_liquidation_flow() {
 </code></pre>
 <h3 id="test-failure-modes"><a class="header" href="#test-failure-modes">Test Failure Modes</a></h3>
 <p>Test what happens when cross-contract calls fail:</p>
-<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+<pre><code class="language-cairo noplayground"><span class="boring">use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+</span><span class="boring">use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 </span><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">
@@ -24615,12 +24610,12 @@ fn test_liquidation_flow() {
 </span><span class="boring">
 </span><span class="boring">fn deploy_token_and_staking() -&gt; (ITokenDispatcher, IStakingDispatcher) {
 </span><span class="boring">    // Deploy the token contract with an owner for access control
-</span><span class="boring">    let token_class = declare("Token").unwrap().contract_class();
+</span><span class="boring">    let token_class = declare!(Token).unwrap().contract_class();
 </span><span class="boring">    let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
 </span><span class="boring">    let token = ITokenDispatcher { contract_address: token_address };
 </span><span class="boring">
 </span><span class="boring">    // Deploy the staking contract with the token address
-</span><span class="boring">    let staking_class = declare("Staking").unwrap().contract_class();
+</span><span class="boring">    let staking_class = declare!(Staking).unwrap().contract_class();
 </span><span class="boring">    let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
 </span><span class="boring">    let staking = IStakingDispatcher { contract_address: staking_address };
 </span><span class="boring">
@@ -24844,18 +24839,17 @@ and after every operation. Smart contracts often have important invariants:</p>
 <p>Let's compare approaches using a token transfer:</p>
 <h3 id="example-based-test"><a class="header" href="#example-based-test">Example-Based Test</a></h3>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -24996,18 +24990,17 @@ the balance, transferring to yourself, or large amounts near <code>u256::MAX</co
 <p>Instead of testing one amount, we test a <em>property</em> that should hold for <em>any</em>
 amount:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -25158,18 +25151,17 @@ ends, and the winner is the highest bidder.</p>
 <h3 id="design-for-fuzzability"><a class="header" href="#design-for-fuzzability">Design for Fuzzability</a></h3>
 <p>Structure tests so the fuzzer can explore interesting cases:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -25311,18 +25303,17 @@ same.</p>
 <h3 id="test-round-trip-properties"><a class="header" href="#test-round-trip-properties">Test Round-Trip Properties</a></h3>
 <p>Round-trip properties verify that operations can be "undone":</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -25466,18 +25457,17 @@ through <code>i128</code>), <code>u256</code>, <code>bool</code>, <code>ByteArra
 each field or variant for you. This is how one test varies several related
 inputs at once:</p>
 <pre><code class="language-cairo noplayground"><span class="boring">use snforge_std::{
-</span><span class="boring">    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-</span><span class="boring">    stop_cheat_caller_address,
+</span><span class="boring">    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 </span><span class="boring">};
 </span><span class="boring">use starknet::{ContractAddress, contract_address_const};
-</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait};
+</span><span class="boring">use crate::simple_token::{ISimpleTokenDispatcher, ISimpleTokenDispatcherTrait, SimpleToken};
 </span><span class="boring">
 </span><span class="boring">fn owner() -&gt; ContractAddress {
 </span><span class="boring">    contract_address_const::&lt;'owner'&gt;()
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">fn deploy_token(initial_supply: u256) -&gt; ISimpleTokenDispatcher {
-</span><span class="boring">    let contract = declare("SimpleToken").unwrap().contract_class();
+</span><span class="boring">    let contract = declare!(SimpleToken).unwrap().contract_class();
 </span><span class="boring">    let owner = owner();
 </span><span class="boring">    let constructor_calldata = array![
 </span><span class="boring">        owner.into(), initial_supply.low.into(), initial_supply.high.into(),
@@ -25801,11 +25791,11 @@ pub trait IDeployedProtocol&lt;TContractState&gt; {
 </span><span class="boring">// NOTE: These tests require RPC access and are marked with #[ignore]
 </span><span class="boring">// to prevent CI failures. Run locally with: snforge test --ignored
 </span><span class="boring">
-</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
+</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">use super::{
 </span><span class="boring">    IDeployedProtocolDispatcher, IDeployedProtocolDispatcherTrait, IMyContractDispatcher,
-</span><span class="boring">    IMyContractDispatcherTrait,
+</span><span class="boring">    IMyContractDispatcherTrait, MyContract,
 </span><span class="boring">};
 </span><span class="boring">
 </span>// For example only - replace addresses with real deployed contracts
@@ -25833,7 +25823,7 @@ fn test_reads_from_deployed_protocol() {
 </span><span class="boring">#[ignore] // Requires RPC access
 </span><span class="boring">fn test_my_contract_with_deployed_oracle() {
 </span><span class="boring">    // Deploy your contract in the forked environment
-</span><span class="boring">    let contract_class = declare("MyContract").unwrap().contract_class();
+</span><span class="boring">    let contract_class = declare!(MyContract).unwrap().contract_class();
 </span><span class="boring">    let (contract_address, _) = contract_class.deploy(@array![]).unwrap();
 </span><span class="boring">    let my_contract = IMyContractDispatcher { contract_address };
 </span><span class="boring">
@@ -25878,11 +25868,11 @@ deployed protocols:</p>
 </span><span class="boring">// NOTE: These tests require RPC access and are marked with #[ignore]
 </span><span class="boring">// to prevent CI failures. Run locally with: snforge test --ignored
 </span><span class="boring">
-</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
+</span><span class="boring">use snforge_std::{ContractClassTrait, DeclareResultTrait};
 </span><span class="boring">use starknet::ContractAddress;
 </span><span class="boring">use super::{
 </span><span class="boring">    IDeployedProtocolDispatcher, IDeployedProtocolDispatcherTrait, IMyContractDispatcher,
-</span><span class="boring">    IMyContractDispatcherTrait,
+</span><span class="boring">    IMyContractDispatcherTrait, MyContract,
 </span><span class="boring">};
 </span><span class="boring">
 </span><span class="boring">// For example only - replace addresses with real deployed contracts
@@ -25910,7 +25900,7 @@ deployed protocols:</p>
 #[ignore] // Requires RPC access
 fn test_my_contract_with_deployed_oracle() {
     // Deploy your contract in the forked environment
-    let contract_class = declare("MyContract").unwrap().contract_class();
+    let contract_class = declare!(MyContract).unwrap().contract_class();
     let (contract_address, _) = contract_class.deploy(@array![]).unwrap();
     let my_contract = IMyContractDispatcher { contract_address };
 
@@ -26066,7 +26056,7 @@ System calls enable a contract to require services from the Starknet OS. You can
 use system calls in a function to get information that depends on the broader
 state of Starknet, which would otherwise be inaccessible, rather than local
 variables that appear in the function’s scope.</p>
-<p>Here is a list of the system calls available in Cairo 1.0:</p>
+<p>Here is a list of the system calls available in Cairo:</p>
 <ul>
 <li><a href="appendix-08-system-calls.html#get_block_hash">get_block_hash</a></li>
 <li><a href="appendix-08-system-calls.html#get_execution_info">get_execution_info</a></li>
@@ -26082,6 +26072,7 @@ variables that appear in the function’s scope.</p>
 <li><a href="appendix-08-system-calls.html#keccak">keccak</a></li>
 <li><a href="appendix-08-system-calls.html#sha256_process_block">sha256_process_block</a></li>
 <li><a href="appendix-08-system-calls.html#sha512_process_block">sha512_process_block</a></li>
+<li><a href="appendix-08-system-calls.html#meta_tx_v0">meta_tx_v0</a></li>
 </ul>
 <h2 id="get_block_hash"><a class="header" href="#get_block_hash"><code>get_block_hash</code></a></h2>
 <h4 id="syntax"><a class="header" href="#syntax">Syntax</a></h4>
@@ -26106,23 +26097,25 @@ variables that appear in the function’s scope.</p>
 </ul>
 <h2 id="get_execution_info"><a class="header" href="#get_execution_info"><code>get_execution_info</code></a></h2>
 <h4 id="syntax-1"><a class="header" href="#syntax-1">Syntax</a></h4>
-<pre><code class="language-cairo noplayground">pub extern fn get_execution_info_syscall() -&gt; SyscallResult&lt;
-    Box&lt;starknet::info::ExecutionInfo&gt;,
+<pre><code class="language-cairo noplayground">pub extern fn get_execution_info_v3_syscall() -&gt; SyscallResult&lt;
+    Box&lt;starknet::info::v3::ExecutionInfo&gt;,
 &gt; implicits(GasBuiltin, System) nopanic;
 </code></pre>
 <h4 id="description-1"><a class="header" href="#description-1">Description</a></h4>
 <p>Gets information about the original transaction.</p>
-<p>In Cairo 1.0, all block/transaction/execution context getters are batched into
-this single system call.</p>
+<p>All block, transaction and execution context getters are batched into this
+single system call. <code>starknet::get_execution_info()</code> calls it.
+<code>get_execution_info_syscall</code> and <code>get_execution_info_v2_syscall</code> return older
+versions of the same struct.</p>
 <h4 id="arguments"><a class="header" href="#arguments">Arguments</a></h4>
 <p>None.</p>
 <h4 id="return-values-1"><a class="header" href="#return-values-1">Return Values</a></h4>
 <p>Returns a
-<a href="https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60faa6e1363fd0152b8fcedbb00a/corelib/src/starknet/info.cairo#L8">struct</a>
+<a href="https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/info.cairo#L267">struct</a>
 containing the execution info.</p>
 <h4 id="common-library-1"><a class="header" href="#common-library-1">Common Library</a></h4>
 <ul>
-<li><a href="https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L35">syscalls.cairo</a></li>
+<li><a href="https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/syscalls.cairo#L110">syscalls.cairo</a></li>
 </ul>
 <h2 id="call_contract"><a class="header" href="#call_contract"><code>call_contract</code></a></h2>
 <h4 id="syntax-2"><a class="header" href="#syntax-2">Syntax</a></h4>
@@ -26485,6 +26478,35 @@ same block function with a different initial state.</p>
 <h4 id="common-library-13"><a class="header" href="#common-library-13">Common Library</a></h4>
 <ul>
 <li><a href="https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106">syscalls.cairo</a></li>
+</ul>
+<h2 id="meta_tx_v0"><a class="header" href="#meta_tx_v0"><code>meta_tx_v0</code></a></h2>
+<h4 id="syntax-14"><a class="header" href="#syntax-14">Syntax</a></h4>
+<pre><code class="language-cairo noplayground">pub extern fn meta_tx_v0_syscall(
+    address: ContractAddress,
+    entry_point_selector: felt252,
+    calldata: Span&lt;felt252&gt;,
+    signature: Span&lt;felt252&gt;,
+) -&gt; starknet::SyscallResult&lt;Span&lt;felt252&gt;&gt; implicits(GasBuiltin, System) nopanic;
+</code></pre>
+<h4 id="description-14"><a class="header" href="#description-14">Description</a></h4>
+<p>Invokes the given entry point as a version-0 meta transaction. Inside the called
+contract and the contracts it calls, the signature is replaced with the given
+one, the caller is the OS (address 0), the transaction version is 0, and the
+transaction hash is the corresponding version-0 hash.</p>
+<p>This system call exists to support old accounts bound to version-0 transactions.
+Don't use it for anything else.</p>
+<h4 id="arguments-13"><a class="header" href="#arguments-13">Arguments</a></h4>
+<ul>
+<li><em><code>address</code></em>: The address of the contract to call.</li>
+<li><em><code>entry_point_selector</code></em>: The selector of the function to call.</li>
+<li><em><code>calldata</code></em>: The calldata.</li>
+<li><em><code>signature</code></em>: The signature that replaces the transaction's signature.</li>
+</ul>
+<h4 id="return-values-14"><a class="header" href="#return-values-14">Return Values</a></h4>
+<p>Returns the call response, of type <code>Span&lt;felt252&gt;</code>.</p>
+<h4 id="common-library-14"><a class="header" href="#common-library-14">Common Library</a></h4>
+<ul>
+<li><a href="https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/syscalls.cairo#L254">syscalls.cairo</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="sierra"><a class="header" href="#sierra">Sierra</a></h1>
 <p>Starting with Starknet Alpha v0.11.0, the contract class resulting from
