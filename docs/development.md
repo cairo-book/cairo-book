@@ -47,7 +47,7 @@ cargo install mdbook-last-changed
 cargo install --git https://github.com/enitrat/mdbook-cairo --locked
 
 # Cairo listings verification tool
-cargo install --git https://github.com/enitrat/cairo-listings --locked
+cargo install --git https://github.com/enitrat/cairo-listings --tag v0.1.0 --locked
 
 # Spell checker
 cargo install typos-cli
