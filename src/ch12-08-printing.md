@@ -62,7 +62,7 @@ with `print!` or `println!` macros, you'll get an error telling you that the
 `Display` trait is not implemented for your custom type:
 
 ```shell
-error: Trait has no implementation in context: core::fmt::Display::<package_name::struct_name>
+error[E2311]: Trait has no implementation in context: core::fmt::Display::<Point>.
 ```
 
 The `println!` macro can do many kinds of formatting, and by default, the curly
