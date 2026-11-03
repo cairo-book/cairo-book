@@ -13,7 +13,7 @@ use system calls in a function to get information that depends on the broader
 state of Starknet, which would otherwise be inaccessible, rather than local
 variables that appear in the function’s scope.
 
-Here is a list of the system calls available in Cairo 1.0:
+Here is a list of the system calls available in Cairo:
 
 - [get_block_hash](#get_block_hash)
 - [get_execution_info](#get_execution_info)
@@ -29,6 +29,7 @@ Here is a list of the system calls available in Cairo 1.0:
 - [keccak](#keccak)
 - [sha256_process_block](#sha256_process_block)
 - [sha512_process_block](#sha512_process_block)
+- [meta_tx_v0](#meta_tx_v0)
 
 ## `get_block_hash`
 
@@ -64,8 +65,8 @@ Returns the hash of the given block.
 #### Syntax
 
 ```cairo,noplayground
-pub extern fn get_execution_info_syscall() -> SyscallResult<
-    Box<starknet::info::ExecutionInfo>,
+pub extern fn get_execution_info_v3_syscall() -> SyscallResult<
+    Box<starknet::info::v3::ExecutionInfo>,
 > implicits(GasBuiltin, System) nopanic;
 ```
 
@@ -73,8 +74,10 @@ pub extern fn get_execution_info_syscall() -> SyscallResult<
 
 Gets information about the original transaction.
 
-In Cairo 1.0, all block/transaction/execution context getters are batched into
-this single system call.
+All block, transaction and execution context getters are batched into this
+single system call. `starknet::get_execution_info()` calls it.
+`get_execution_info_syscall` and `get_execution_info_v2_syscall` return older
+versions of the same struct.
 
 #### Arguments
 
@@ -83,12 +86,12 @@ None.
 #### Return Values
 
 Returns a
-[struct](https://github.com/starkware-libs/cairo/blob/efbf69d4e93a60faa6e1363fd0152b8fcedbb00a/corelib/src/starknet/info.cairo#L8)
+[struct](https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/info.cairo#L267)
 containing the execution info.
 
 #### Common Library
 
-- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/cca08c898f0eb3e58797674f20994df0ba641983/corelib/src/starknet/syscalls.cairo#L35)
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/syscalls.cairo#L110)
 
 ## `call_contract`
 
@@ -548,3 +551,41 @@ Returns a new SHA-512 state of the `input` data.
 #### Common Library
 
 - [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/3540731e5b0e78f2f5b1a51d3611418121c19e54/corelib/src/starknet/syscalls.cairo#L106)
+
+## `meta_tx_v0`
+
+#### Syntax
+
+```cairo,noplayground
+pub extern fn meta_tx_v0_syscall(
+    address: ContractAddress,
+    entry_point_selector: felt252,
+    calldata: Span<felt252>,
+    signature: Span<felt252>,
+) -> starknet::SyscallResult<Span<felt252>> implicits(GasBuiltin, System) nopanic;
+```
+
+#### Description
+
+Invokes the given entry point as a version-0 meta transaction. Inside the called
+contract and the contracts it calls, the signature is replaced with the given
+one, the caller is the OS (address 0), the transaction version is 0, and the
+transaction hash is the corresponding version-0 hash.
+
+This system call exists to support old accounts bound to version-0 transactions.
+Don't use it for anything else.
+
+#### Arguments
+
+- _`address`_: The address of the contract to call.
+- _`entry_point_selector`_: The selector of the function to call.
+- _`calldata`_: The calldata.
+- _`signature`_: The signature that replaces the transaction's signature.
+
+#### Return Values
+
+Returns the call response, of type `Span<felt252>`.
+
+#### Common Library
+
+- [syscalls.cairo](https://github.com/starkware-libs/cairo/blob/v2.21.0/corelib/src/starknet/syscalls.cairo#L254)
