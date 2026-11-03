@@ -99,8 +99,8 @@ implementations:
 
 If you're interested in the Poseidon hash function and its applications:
 
-- [StarkNet - Hash Functions: Poseidon Hash](https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#poseidon-hash)
-- [StarkWare - Poseidon Implementation](https://github.com/starkware-industries/poseidon/tree/main)
+- [StarkNet - Hash Functions: Poseidon Hash](https://docs.starknet.io/learn/protocol/cryptography#poseidon-hash)
+- [StarkWare - Poseidon Implementation](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/poseidon_utils.py)
 - [Poseidon: A New Hash Function for Zero-Knowledge Proof Systems](https://eprint.iacr.org/2019/458.pdf)
   (original paper)
 - [Poseidon: ZK-friendly Hashing](https://www.poseidon-hash.info/)

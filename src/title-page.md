@@ -36,7 +36,7 @@ Additional resources for mastering Cairo:
 - [The Cairo Package Registry](https://scarbs.xyz/): The host for Cairo's
   growing collection of reusable libraries, including
   [Alexandria](https://github.com/keep-starknet-strange/alexandria),
-  [Open Zeppelin Contracts for Cairo](https://docs.openzeppelin.com/contracts-cairo/1.0.0/),
+  [Open Zeppelin Contracts for Cairo](https://docs.openzeppelin.com/contracts-cairo),
   all of which can be easily integrated via Scarb, streamlining development and
   dependency management
 

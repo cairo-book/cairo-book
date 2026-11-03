@@ -20,10 +20,8 @@ declared.
 A contract instance is a deployed contract corresponding to a class, with its
 own storage.
 
-[class hash doc]:
-  https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/class-hash
-[syscalls doc]:
-  https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/
+[class hash doc]: ./ch100-01-contracts-classes-and-instances.md#class-hash
+[syscalls doc]: ./appendix-08-system-calls.md#replace_class
 
 ## Replacing Contract Classes
 
@@ -44,7 +42,7 @@ Exposing `replace_class_syscall` to update the contract's class</span>
 
 > **📌 Note**: If a contract is deployed without this mechanism, its class hash
 > can still be replaced through
-> [library calls](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/#library_call).
+> [library calls](./appendix-08-system-calls.md#library_call).
 
 > **⚠️ WARNING**: Thoroughly review changes and potential impacts before
 > upgrading, as it's a delicate procedure with security implications. Don't
@@ -102,4 +100,4 @@ and their consequences before upgrading. Some aspects to consider are:
   OpenZeppelin Contracts.
 
 [oz upgradeability api]:
-  https://docs.openzeppelin.com/contracts-cairo/0.18.0/upgrades
+  https://docs.openzeppelin.com/contracts-cairo/4.x/upgrades

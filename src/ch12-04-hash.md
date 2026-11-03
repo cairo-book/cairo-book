@@ -41,7 +41,7 @@ parameters][poseidon parameters].
 
 [ec wiki]: https://en.wikipedia.org/wiki/Elliptic-curve_cryptography
 [poseidon parameters]:
-  https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt
+  https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/poseidon_utils.py
 
 #### When to Use Them?
 

@@ -183,7 +183,7 @@ only receive messages from a trusted L1 contract.
 [messaging contract]:
   https://github.com/glihm/starknet-messaging-dev/blob/main/solidity/src/ContractMsg.sol
 [starknet addresses]:
-  https://docs.starknet.io/documentation/tools/important_addresses/
+  https://docs.starknet.io/learn/cheatsheets/chain-info#important-addresses
 
 ## Sending Messages from Starknet to Ethereum
 
@@ -400,6 +400,5 @@ If you want to learn more about the messaging mechanism, you can visit the
 You can also find a [detailed guide here][glihm messaging guide] to test the
 messaging system locally.
 
-[starknet messaging doc]:
-  https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/
+[starknet messaging doc]: https://docs.starknet.io/learn/protocol/messaging
 [glihm messaging guide]: https://github.com/glihm/starknet-messaging-dev

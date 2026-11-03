@@ -78,7 +78,7 @@ If you're interested in the Pedersen hash function and its applications in
 cryptography:
 
 - StarkNet,
-  [Hash Functions - Pedersen Hash](https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#pedersen-hash)
+  [Hash Functions - Pedersen Hash](https://docs.starknet.io/learn/protocol/cryptography#pedersen-hash)
 - nccgroup,
   [Breaking Pedersen Hashes in Practice](https://research.nccgroup.com/2023/03/22/breaking-pedersen-hashes-in-practice/),
   2023, March 22

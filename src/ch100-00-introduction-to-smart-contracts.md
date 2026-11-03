@@ -132,8 +132,8 @@ more than optimistic rollups. You can learn more about STARKs from Starkware's
 Medium [article][starks article], which serves as a good primer.
 
 > Starknet's architecture is thoroughly described in the
-> [Starknet documentation](https://docs.starknet.io/documentation/architecture_and_concepts/),
-> which is a great resource to learn more about the Starknet network.
+> [Starknet documentation](https://docs.starknet.io/learn/protocol/intro), which
+> is a great resource to learn more about the Starknet network.
 
 Remember Cairo? It is, in fact, a language developed specifically to work with
 STARKs and make them general-purpose. With Cairo, we can write **provable
@@ -152,7 +152,7 @@ developed entirely **on-chain**. Starknet has been specifically designed to
 maximize the capabilities of STARK proofs for optimal scalability.
 
 > Learn more about Account Abstraction in the
-> [Starknet documentation](https://docs.starknet.io/documentation/architecture_and_concepts/Account_Abstraction/introduction/).
+> [Starknet documentation](https://docs.starknet.io/learn/protocol/accounts).
 
 [starks article]:
   https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a

@@ -58,7 +58,7 @@ recommend using `katana` for local development and testing. You can find the
 complete tutorial for `katana` in the ["Using a development
 network"][katana chapter] chapter of the Starknet Docs.
 
-[katana chapter]: https://docs.starknet.io/quick-start/using_devnet/
+[katana chapter]: https://docs.starknet.io/build/quickstart/devnet
 
 ### The `katana` Local Starknet Node
 
@@ -117,8 +117,7 @@ Abstraction"][aa chapter] chapter of the Starknet Docs.
 [dojo katana]: https://book.dojoengine.org/toolchain/katana
 [katana installation]:
   https://book.dojoengine.org/toolchain/katana#getting-started
-[aa chapter]:
-  https://docs.starknet.io/architecture-and-concepts/accounts/introduction/#account_abstraction
+[aa chapter]: https://docs.starknet.io/learn/protocol/accounts
 
 ### Smart Wallets for Voting
 
@@ -146,7 +145,8 @@ and the RPC endpoint provided by `katana`:
 starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
 ```
 
-[starkli installation]: https://docs.starknet.io/quick-start/environment-setup/
+[starkli installation]:
+  https://docs.starknet.io/build/quickstart/environment-setup
 
 ### Contract Deployment
 
