@@ -1,5 +1,5 @@
 use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, load, spy_events,
+    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, load, spy_events,
     start_cheat_caller_address, stop_cheat_caller_address,
 };
 // ANCHOR: test_internals_imports
@@ -15,7 +15,7 @@ fn owner() -> ContractAddress {
 
 //ANCHOR: deployment
 fn deploy_pizza_factory() -> (IPizzaFactoryDispatcher, ContractAddress) {
-    let contract = declare("PizzaFactory").unwrap().contract_class();
+    let contract = declare!(PizzaFactory).unwrap().contract_class();
 
     let owner: ContractAddress = contract_address_const::<'owner'>();
     let constructor_calldata = array![owner.into()];
@@ -114,5 +114,3 @@ fn test_storage_direct_access() {
     assert_eq!(state.owner.read(), owner);
 }
 // ANCHOR_END: test_internals
-
-

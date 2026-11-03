@@ -83,7 +83,10 @@ constructor arguments, and interact through a dispatcher.
 unit testing</span>
 
 This helper function handles the boilerplate: declaring, preparing calldata,
-deploying, and returning a dispatcher you can use in tests.
+deploying, and returning a dispatcher you can use in tests. The `declare!` macro
+takes the contract's Cairo path and fails at compile time if no contract exists
+there. The `declare` function takes the contract name as a string, which is only
+checked when the test runs.
 
 ## Testing with Cheatcodes
 
