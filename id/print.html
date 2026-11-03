@@ -8892,7 +8892,7 @@ mod tests {
     use super::*;
 
     #[test]
-    #[available_gas(l2_gas: 2000000)]
+    #[available_gas(2000000)]
     fn test_sum_n() {
         let result = sum_n(10);
         assert!(result == 55, "result is not 55");
@@ -8933,7 +8933,7 @@ mod tests {
     use super::*;
 
     #[test]
-    #[available_gas(l2_gas: 2000000)]
+    #[available_gas(2000000)]
     fn test_sum_n() {
         let result = sum_n(10);
         assert!(result == 55, "result is not 55");
@@ -9286,8 +9286,6 @@ some condition. Instead of writing multiple functions, we can use closures to
 define the behavior where we need it:</p>
 <pre><code class="language-cairo"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn map&lt;T, +Drop&lt;T&gt;, F, +Drop&lt;F&gt;, impl func: core::ops::Fn&lt;F, (T,)&gt;, +Drop&lt;func::Output&gt;&gt;(
 </span><span class="boring">        self: Array&lt;T&gt;, f: F,
 </span><span class="boring">    ) -&gt; Array&lt;func::Output&gt; {
@@ -9301,8 +9299,6 @@ define the behavior where we need it:</p>
 </span><span class="boring">
 </span><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayFilterExt of ArrayFilterExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn filter&lt;
 </span><span class="boring">        T,
 </span><span class="boring">        +Copy&lt;T&gt;,
@@ -9373,8 +9369,6 @@ enclosing scope.</p>
 <code>x + value * 3</code>.</p>
 <pre><code class="language-cairo"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn map&lt;T, +Drop&lt;T&gt;, F, +Drop&lt;F&gt;, impl func: core::ops::Fn&lt;F, (T,)&gt;, +Drop&lt;func::Output&gt;&gt;(
 </span><span class="boring">        self: Array&lt;T&gt;, f: F,
 </span><span class="boring">    ) -&gt; Array&lt;func::Output&gt; {
@@ -9388,8 +9382,6 @@ enclosing scope.</p>
 </span><span class="boring">
 </span><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayFilterExt of ArrayFilterExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn filter&lt;
 </span><span class="boring">        T,
 </span><span class="boring">        +Copy&lt;T&gt;,
@@ -9654,8 +9646,6 @@ programming, through classic functions like <code>map</code>, <code>filter</code
 items of an array:</p>
 <pre><code class="language-cairo  noplayground">#[generate_trait]
 impl ArrayExt of ArrayExtTrait {
-    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-    #[inline(never)]
     fn map&lt;T, +Drop&lt;T&gt;, F, +Drop&lt;F&gt;, impl func: core::ops::Fn&lt;F, (T,)&gt;, +Drop&lt;func::Output&gt;&gt;(
         self: Array&lt;T&gt;, f: F,
     ) -&gt; Array&lt;func::Output&gt; {
@@ -9669,8 +9659,6 @@ impl ArrayExt of ArrayExtTrait {
 <span class="boring">
 </span><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayFilterExt of ArrayFilterExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn filter&lt;
 </span><span class="boring">        T,
 </span><span class="boring">        +Copy&lt;T&gt;,
@@ -9726,10 +9714,6 @@ impl ArrayExt of ArrayExtTrait {
 </span><span class="boring">    println!("even: {:?}", even);
 </span><span class="boring">}
 </span></code></pre>
-<blockquote>
-<p>Note that, due to a bug in inlining analysis, this analysis process should be
-disabled using <code>#[inline(never)]</code>.</p>
-</blockquote>
 <p>In this implementation, you'll notice that, while <code>T</code> is the element type of the
 input array <code>self</code>, the element type of the output array is defined by the
 output type of the <code>f</code> closure (the associated type <code>func::Output</code> from the <code>Fn</code>
@@ -9739,8 +9723,6 @@ for <code>_double</code> in the following code, or any other type of elements li
 <code>_another</code>:</p>
 <pre><code class="language-cairo"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn map&lt;T, +Drop&lt;T&gt;, F, +Drop&lt;F&gt;, impl func: core::ops::Fn&lt;F, (T,)&gt;, +Drop&lt;func::Output&gt;&gt;(
 </span><span class="boring">        self: Array&lt;T&gt;, f: F,
 </span><span class="boring">    ) -&gt; Array&lt;func::Output&gt; {
@@ -9754,8 +9736,6 @@ for <code>_double</code> in the following code, or any other type of elements li
 </span><span class="boring">
 </span><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayFilterExt of ArrayFilterExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn filter&lt;
 </span><span class="boring">        T,
 </span><span class="boring">        +Copy&lt;T&gt;,
@@ -9824,8 +9804,6 @@ be kept, <code>false</code> otherwise. That means, we need to specify that the c
 return a <code>boolean</code>.</p>
 <pre><code class="language-cairo  noplayground"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn map&lt;T, +Drop&lt;T&gt;, F, +Drop&lt;F&gt;, impl func: core::ops::Fn&lt;F, (T,)&gt;, +Drop&lt;func::Output&gt;&gt;(
 </span><span class="boring">        self: Array&lt;T&gt;, f: F,
 </span><span class="boring">    ) -&gt; Array&lt;func::Output&gt; {
@@ -9839,8 +9817,6 @@ return a <code>boolean</code>.</p>
 </span><span class="boring">
 </span>#[generate_trait]
 impl ArrayFilterExt of ArrayFilterExtTrait {
-    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-    #[inline(never)]
     fn filter&lt;
         T,
         +Copy&lt;T&gt;,
@@ -9898,8 +9874,6 @@ impl ArrayFilterExt of ArrayFilterExtTrait {
 </span></code></pre>
 <pre><code class="language-cairo"><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayExt of ArrayExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn map&lt;T, +Drop&lt;T&gt;, F, +Drop&lt;F&gt;, impl func: core::ops::Fn&lt;F, (T,)&gt;, +Drop&lt;func::Output&gt;&gt;(
 </span><span class="boring">        self: Array&lt;T&gt;, f: F,
 </span><span class="boring">    ) -&gt; Array&lt;func::Output&gt; {
@@ -9913,8 +9887,6 @@ impl ArrayFilterExt of ArrayFilterExtTrait {
 </span><span class="boring">
 </span><span class="boring">#[generate_trait]
 </span><span class="boring">impl ArrayFilterExt of ArrayFilterExtTrait {
-</span><span class="boring">    // Needed in Cairo 2.11.4 because of a bug in inlining analysis.
-</span><span class="boring">    #[inline(never)]
 </span><span class="boring">    fn filter&lt;
 </span><span class="boring">        T,
 </span><span class="boring">        +Copy&lt;T&gt;,
