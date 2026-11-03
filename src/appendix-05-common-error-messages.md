@@ -20,7 +20,7 @@ in this appendix to help you resolve common issues.
   its ownership has been transferred. It is often useful to use the `clone`
   method in this situation.
 
-- `error: Trait has no implementation in context: core::fmt::Display::<package_name::struct_name>`:
+- `Trait has no implementation in context: core::fmt::Display::<StructName>.`:
   this error message is encountered if you try to print an instance of a custom
   data type with `{}` placeholders in a `print!` or `println!` macro. To
   mitigate this issue, you need to either manually implement the `Display` trait
@@ -34,12 +34,12 @@ in this appendix to help you resolve common issues.
   variables, which are actually structs of 2 `u128`. Therefore, when calling a
   function that takes a `u256` as argument, you need to pass 2 values.
 
-- `Item path::item is not visible in this context.`: this error message lets us
-  know that the path to bring an item into scope is correct, but there is a
-  vibility issue. In cairo, all items are private to parent modules by default.
-  To resolve this issue, make sure that all the modules on the path to items and
-  items themselves are declared with `pub(crate)` or `pub` to have access to
-  them.
+- ``Item `path::item` is not visible in this context.``: this error message lets
+  us know that the path to bring an item into scope is correct, but there is a
+  visibility issue. In cairo, all items are private to parent modules by
+  default. To resolve this issue, make sure that all the modules on the path to
+  items and items themselves are declared with `pub(crate)` or `pub` to have
+  access to them.
 
 - `Identifier not found.`: this error message is a bit aspecific but might
   indicate that:
@@ -54,22 +54,24 @@ You might encounter some errors when trying to implement components.
 Unfortunately, some of them lack meaningful error messages to help debug. This
 section aims to provide you with some pointers to help you debug your code.
 
-- `Trait not found. Not a trait.`: this error can occur when you're not
-  importing the component's impl block correctly in your contract. Make sure to
-  respect the following syntax:
+- `Impl not found.` and `Trait not found.`: these errors can occur together when
+  you're not importing the component's impl block correctly in your contract.
+  Make sure to respect the following syntax:
 
   ```cairo,noplayground
   #[abi(embed_v0)]
   impl IMPL_NAME = PATH_TO_COMPONENT::EMBEDDED_NAME<ContractState>
   ```
 
-- `Plugin diagnostic: name is not a substorage member in the contract's Storage. Consider adding to Storage: (...)`:
-  the compiler helps you a lot debugging this by giving you recommendation on
-  the action to take. Basically, you forgot to add the component's storage to
-  your contract's storage. Make sure to add the path to the component's storage
-  annotated with the `#[substorage(v0)]` attribute to your contract's storage.
+- ``Plugin diagnostic: `name` is not a substorage member in the contract's `Storage`.``:
+  the compiler helps you a lot debugging this: the message continues with
+  ``Consider adding to `Storage`:`` and the exact field to add. Basically, you
+  forgot to add the component's storage to your contract's storage. Make sure to
+  add the path to the component's storage annotated with the `#[substorage(v0)]`
+  attribute to your contract's storage.
 
-- `Plugin diagnostic: name is not a nested event in the contract's Event enum. Consider adding to the Event enum:`
+- ``Plugin diagnostic: `name` is not a nested event in the contract's `Event` enum.``:
   similar to the previous error, the compiler tells you that you forgot to add
-  the component's events to your contract's events. Make sure to add the path to
-  the component's events to your contract's events.
+  the component's events to your contract's events, and suggests the variant to
+  add. Make sure to add the path to the component's events to your contract's
+  events.
