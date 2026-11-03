@@ -11,5 +11,5 @@ numbers in games.
 
 For further reading:
 
-- Pragma Oracle price feeds: https://docs.pragma.build/starknet/development
-- Cartridge VRF overview and usage: https://github.com/cartridge-gg/vrf
+- Pragma Oracle price feeds: <https://docs.pragma.build/starknet/development>
+- Cartridge VRF overview and usage: <https://github.com/cartridge-gg/vrf>
