@@ -1,8 +1,7 @@
-use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait};
-use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait};
+use listing_04_integration_testing::staking::{IStakingDispatcher, IStakingDispatcherTrait, Staking};
+use listing_04_integration_testing::token::{ITokenDispatcher, ITokenDispatcherTrait, Token};
 use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-    stop_cheat_caller_address,
+    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 };
 use starknet::ContractAddress;
 
@@ -23,12 +22,12 @@ fn mint_tokens(token: ITokenDispatcher, to: ContractAddress, amount: u256) {
 // ANCHOR: setup
 fn deploy_token_and_staking() -> (ITokenDispatcher, IStakingDispatcher) {
     // Deploy the token contract with an owner for access control
-    let token_class = declare("Token").unwrap().contract_class();
+    let token_class = declare!(Token).unwrap().contract_class();
     let (token_address, _) = token_class.deploy(@array![owner().into()]).unwrap();
     let token = ITokenDispatcher { contract_address: token_address };
 
     // Deploy the staking contract with the token address
-    let staking_class = declare("Staking").unwrap().contract_class();
+    let staking_class = declare!(Staking).unwrap().contract_class();
     let (staking_address, _) = staking_class.deploy(@array![token_address.into()]).unwrap();
     let staking = IStakingDispatcher { contract_address: staking_address };
 

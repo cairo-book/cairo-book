@@ -2,11 +2,11 @@
 // NOTE: These tests require RPC access and are marked with #[ignore]
 // to prevent CI failures. Run locally with: snforge test --ignored
 
-use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
+use snforge_std::{ContractClassTrait, DeclareResultTrait};
 use starknet::ContractAddress;
 use super::{
     IDeployedProtocolDispatcher, IDeployedProtocolDispatcherTrait, IMyContractDispatcher,
-    IMyContractDispatcherTrait,
+    IMyContractDispatcherTrait, MyContract,
 };
 
 // ANCHOR: fork_test_basic
@@ -37,7 +37,7 @@ fn test_reads_from_deployed_protocol() {
 #[ignore] // Requires RPC access
 fn test_my_contract_with_deployed_oracle() {
     // Deploy your contract in the forked environment
-    let contract_class = declare("MyContract").unwrap().contract_class();
+    let contract_class = declare!(MyContract).unwrap().contract_class();
     let (contract_address, _) = contract_class.deploy(@array![]).unwrap();
     let my_contract = IMyContractDispatcher { contract_address };
 

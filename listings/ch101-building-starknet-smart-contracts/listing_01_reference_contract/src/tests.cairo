@@ -1,15 +1,14 @@
 use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-    stop_cheat_caller_address,
+    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 };
 use starknet::ContractAddress;
-use super::{INameRegistryDispatcher, INameRegistryDispatcherTrait};
+use super::{INameRegistryDispatcher, INameRegistryDispatcherTrait, NameRegistry};
 
 fn deploy_contract() -> (INameRegistryDispatcher, ContractAddress) {
     let owner_address: ContractAddress = 0x123.try_into().unwrap();
     let owner_name = 'Alice';
 
-    let contract = declare("NameRegistry").unwrap().contract_class();
+    let contract = declare!(NameRegistry).unwrap().contract_class();
     let mut constructor_calldata = array![];
 
     constructor_calldata.append(owner_address.into());

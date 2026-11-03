@@ -1,14 +1,12 @@
-use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, spy_events,
-};
+use snforge_std::{ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, spy_events};
 use starknet::ContractAddress;
 use super::EventExample::{
     BookAdded, BookRemoved, Event, FieldUpdated, UpdatedAuthorData, UpdatedTitleData,
 };
-use super::{IEventExampleDispatcher, IEventExampleDispatcherTrait};
+use super::{EventExample, IEventExampleDispatcher, IEventExampleDispatcherTrait};
 
 fn deploy_contract() -> (IEventExampleDispatcher, ContractAddress) {
-    let contract = declare("EventExample").unwrap().contract_class();
+    let contract = declare!(EventExample).unwrap().contract_class();
     let (contract_address, _) = contract.deploy(@array![]).unwrap();
     (IEventExampleDispatcher { contract_address }, contract_address)
 }

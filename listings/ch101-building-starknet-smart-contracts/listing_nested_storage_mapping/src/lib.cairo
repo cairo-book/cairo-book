@@ -40,14 +40,14 @@ mod WarehouseContract {
 #[cfg(test)]
 mod tests {
     use snforge_std::{
-        ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
+        ContractClassTrait, DeclareResultTrait, start_cheat_caller_address,
         stop_cheat_caller_address,
     };
     use starknet::ContractAddress;
-    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait};
+    use super::{IWarehouseContractDispatcher, IWarehouseContractDispatcherTrait, WarehouseContract};
 
     fn deploy_contract() -> IWarehouseContractDispatcher {
-        let contract = declare("WarehouseContract").unwrap().contract_class();
+        let contract = declare!(WarehouseContract).unwrap().contract_class();
         let (contract_address, _) = contract.deploy(@array![]).unwrap();
         IWarehouseContractDispatcher { contract_address }
     }

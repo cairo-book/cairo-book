@@ -1,15 +1,15 @@
 // Since IOwnable is defined inside the component, we need to access it through the component
+use listing_03_component_dep::contract::OwnableCounter;
 use listing_03_component_dep::owner::{IOwnableDispatcher, IOwnableDispatcherTrait};
 use snforge_std::{
-    ContractClassTrait, DeclareResultTrait, declare, start_cheat_caller_address,
-    stop_cheat_caller_address,
+    ContractClassTrait, DeclareResultTrait, start_cheat_caller_address, stop_cheat_caller_address,
 };
 use starknet::ContractAddress;
 
 fn deploy_contract() -> (IOwnableDispatcher, ContractAddress) {
     let owner_address: ContractAddress = 0x123.try_into().unwrap();
 
-    let contract = declare("OwnableCounter").unwrap().contract_class();
+    let contract = declare!(OwnableCounter).unwrap().contract_class();
 
     // Deploy with owner initialization in mind
     let constructor_args = @array![owner_address.into()];

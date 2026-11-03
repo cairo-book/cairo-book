@@ -1,8 +1,8 @@
-use snforge_std::{ContractClassTrait, DeclareResultTrait, declare};
-use super::{ISimpleStorageDispatcher, ISimpleStorageDispatcherTrait};
+use snforge_std::{ContractClassTrait, DeclareResultTrait};
+use super::{ISimpleStorageDispatcher, ISimpleStorageDispatcherTrait, SimpleStorage};
 
 fn deploy_contract() -> ISimpleStorageDispatcher {
-    let contract = declare("SimpleStorage").unwrap().contract_class();
+    let contract = declare!(SimpleStorage).unwrap().contract_class();
     let constructor_calldata = array![];
     let (contract_address, _) = contract.deploy(@constructor_calldata).unwrap();
     ISimpleStorageDispatcher { contract_address }
