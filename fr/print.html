@@ -13243,7 +13243,7 @@ fn main() {
 <p>As previously explained, if you try to print the value of a custom data type
 with <code>print!</code> or <code>println!</code> macros, you'll get an error telling you that the
 <code>Display</code> trait is not implemented for your custom type:</p>
-<pre><code class="language-shell">error: Trait has no implementation in context: core::fmt::Display::&lt;package_name::struct_name&gt;
+<pre><code class="language-shell">error[E2311]: Trait has no implementation in context: core::fmt::Display::&lt;Point&gt;.
 </code></pre>
 <p>The <code>println!</code> macro can do many kinds of formatting, and by default, the curly
 brackets tell <code>println!</code> to use formatting known as <code>Display</code> - output intended
@@ -14572,7 +14572,7 @@ its ownership has been transferred. It is often useful to use the <code>clone</c
 method in this situation.</p>
 </li>
 <li>
-<p><code>error: Trait has no implementation in context: core::fmt::Display::&lt;package_name::struct_name&gt;</code>:
+<p><code>Trait has no implementation in context: core::fmt::Display::&lt;StructName&gt;.</code>:
 this error message is encountered if you try to print an instance of a custom
 data type with <code>{}</code> placeholders in a <code>print!</code> or <code>println!</code> macro. To
 mitigate this issue, you need to either manually implement the <code>Display</code> trait
@@ -14588,12 +14588,12 @@ variables, which are actually structs of 2 <code>u128</code>. Therefore, when ca
 function that takes a <code>u256</code> as argument, you need to pass 2 values.</p>
 </li>
 <li>
-<p><code>Item path::item is not visible in this context.</code>: this error message lets us
-know that the path to bring an item into scope is correct, but there is a
-vibility issue. In cairo, all items are private to parent modules by default.
-To resolve this issue, make sure that all the modules on the path to items and
-items themselves are declared with <code>pub(crate)</code> or <code>pub</code> to have access to
-them.</p>
+<p><code>Item `path::item` is not visible in this context.</code>: this error message lets
+us know that the path to bring an item into scope is correct, but there is a
+visibility issue. In cairo, all items are private to parent modules by
+default. To resolve this issue, make sure that all the modules on the path to
+items and items themselves are declared with <code>pub(crate)</code> or <code>pub</code> to have
+access to them.</p>
 </li>
 <li>
 <p><code>Identifier not found.</code>: this error message is a bit aspecific but might
@@ -14612,25 +14612,27 @@ Unfortunately, some of them lack meaningful error messages to help debug. This
 section aims to provide you with some pointers to help you debug your code.</p>
 <ul>
 <li>
-<p><code>Trait not found. Not a trait.</code>: this error can occur when you're not
-importing the component's impl block correctly in your contract. Make sure to
-respect the following syntax:</p>
+<p><code>Impl not found.</code> and <code>Trait not found.</code>: these errors can occur together when
+you're not importing the component's impl block correctly in your contract.
+Make sure to respect the following syntax:</p>
 <pre><code class="language-cairo noplayground">#[abi(embed_v0)]
 impl IMPL_NAME = PATH_TO_COMPONENT::EMBEDDED_NAME&lt;ContractState&gt;
 </code></pre>
 </li>
 <li>
-<p><code>Plugin diagnostic: name is not a substorage member in the contract's Storage. Consider adding to Storage: (...)</code>:
-the compiler helps you a lot debugging this by giving you recommendation on
-the action to take. Basically, you forgot to add the component's storage to
-your contract's storage. Make sure to add the path to the component's storage
-annotated with the <code>#[substorage(v0)]</code> attribute to your contract's storage.</p>
+<p><code>Plugin diagnostic: `name` is not a substorage member in the contract's `Storage`.</code>:
+the compiler helps you a lot debugging this: the message continues with
+<code>Consider adding to `Storage`:</code> and the exact field to add. Basically, you
+forgot to add the component's storage to your contract's storage. Make sure to
+add the path to the component's storage annotated with the <code>#[substorage(v0)]</code>
+attribute to your contract's storage.</p>
 </li>
 <li>
-<p><code>Plugin diagnostic: name is not a nested event in the contract's Event enum. Consider adding to the Event enum:</code>
+<p><code>Plugin diagnostic: `name` is not a nested event in the contract's `Event` enum.</code>:
 similar to the previous error, the compiler tells you that you forgot to add
-the component's events to your contract's events. Make sure to add the path to
-the component's events to your contract's events.</p>
+the component's events to your contract's events, and suggests the variant to
+add. Make sure to add the path to the component's events to your contract's
+events.</p>
 </li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="appendix-f---useful-development-tools"><a class="header" href="#appendix-f---useful-development-tools">Appendix F - Useful Development Tools</a></h1>
