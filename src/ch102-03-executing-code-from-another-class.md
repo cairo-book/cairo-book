@@ -130,6 +130,32 @@ Reach for this when a contract forwards an interface wholesale. If you need to
 forward only some methods, or to run logic of your own around a forwarded call,
 use the library dispatcher directly as shown above.
 
+### Embedding the Class Hash at Compile Time
+
+`ValueStoreForwarder` reads its class hash from storage. When the target class
+is part of your own build, Scarb can embed its class hash at compile time
+instead. Enable `forwarding` on the contract target in _Scarb.toml_:
+
+```toml
+{{#include ../listings/ch102-starknet-cross-contract-interactions/listing_09_static_forwarding/Scarb.toml:forwarding}}
+```
+
+For every contract `Foo` in the build, Scarb then generates a
+`Foo__class_hash__::ForwardingClassHashImpl` that returns `Foo`'s class hash.
+Use it in place of a hand-written `ForwardingClassHash` impl:
+
+```cairo,noplayground
+{{#include ../listings/ch102-starknet-cross-contract-interactions/listing_09_static_forwarding/src/lib.cairo:forwarder}}
+```
+
+{{#label static-forwarding}} <span class="caption">Listing
+{{#ref static-forwarding}}: Forwarding to `ValueStoreLogic` with a class hash
+embedded at compile time</span>
+
+`StaticValueStoreForwarder` needs neither a constructor nor a `logic_library`
+slot. The forwarded contract must be defined in the same package or listed in
+`build-external-contracts`, and forwarding cycles are compile errors.
+
 ## Calling Classes using Low-Level Calls
 
 Another way to call classes is to directly use `library_call_syscall`. While
