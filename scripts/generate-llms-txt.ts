@@ -15,28 +15,28 @@ const current = await Bun.file("llms.txt").text();
 
 const descriptions = new Map<string, string>();
 for (const [, slug, description] of current.matchAll(
-  /^- \[[^\]]*\]\(https:\/\/book\.cairo-lang\.org\/([^)]+)\): (.+)$/gm,
+	/^- \[[^\]]*\]\(https:\/\/book\.cairo-lang\.org\/([^)]+)\): (.+)$/gm,
 )) {
-  descriptions.set(slug, description);
+	descriptions.set(slug, description);
 }
 
 const optionalStart = current.indexOf("## Optional");
 const optional =
-  optionalStart === -1 ? "" : current.slice(optionalStart).trim();
+	optionalStart === -1 ? "" : current.slice(optionalStart).trim();
 
 const pages = summary
-  .replace(/<!--[\s\S]*?-->/g, "")
-  .matchAll(/\[([^\]]+)\]\((?:\.\/)?([^)]+)\.md\)/g);
+	.replace(/<!--[\s\S]*?-->/g, "")
+	.matchAll(/\[([^\]]+)\]\((?:\.\/)?([^)]+)\.md\)/g);
 
 const entries = [...pages].map(([, title, slug]) => {
-  const description = descriptions.get(slug);
-  const link = `- [${title}](${BASE_URL}/${slug})`;
-  return description ? `${link}: ${description}` : link;
+	const description = descriptions.get(slug);
+	const link = `- [${title}](${BASE_URL}/${slug})`;
+	return description ? `${link}: ${description}` : link;
 });
 
 const output = ["# Cairo book", "## Docs", entries.join("\n"), optional]
-  .filter(Boolean)
-  .join("\n\n");
+	.filter(Boolean)
+	.join("\n\n");
 
 await Bun.write(outputFile, `${output}\n`);
 console.log(`Wrote ${entries.length} pages to ${outputFile}`);
