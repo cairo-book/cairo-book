@@ -55,10 +55,10 @@ We will setup a local development node using `katana` to deploy the voting
 contract. Then, we'll interact with the contract by calling and invoking its
 functions. You can also use the Goerli Testnet instead of `katana`. However, we
 recommend using `katana` for local development and testing. You can find the
-complete tutorial for `katana` in the ["Using a development
-network"][katana chapter] chapter of the Starknet Docs.
+complete documentation for `katana` in the [Katana overview][katana chapter] of
+the Dojo documentation.
 
-[katana chapter]: https://docs.starknet.io/build/quickstart/devnet
+[katana chapter]: https://book.dojoengine.org/toolchain/katana
 
 ### The `katana` Local Starknet Node
 
@@ -111,8 +111,8 @@ PREFUNDED ACCOUNTS
 Before we can interact with the voting contract, we need to prepare the voter
 and admin accounts on Starknet. Each voter account must be registered and
 sufficiently funded for voting. For a more detailed understanding of how
-accounts operate with Account Abstraction, refer to the ["Account
-Abstraction"][aa chapter] chapter of the Starknet Docs.
+accounts operate with Account Abstraction, refer to the ["Accounts"][aa chapter]
+chapter of the Starknet Docs.
 
 [dojo katana]: https://book.dojoengine.org/toolchain/katana
 [katana installation]:
@@ -123,8 +123,7 @@ Abstraction"][aa chapter] chapter of the Starknet Docs.
 
 Aside from Scarb you will need to have Starkli installed. Starkli is a command
 line tool that allows you to interact with Starknet. You can find the
-installation instructions in the ["Setting up Starkli"][starkli installation]
-chapter of the Starknet Docs.
+installation instructions in the [Starkli book][starkli installation].
 
 > Note: Please verify that the version of `starkli` match the specified version
 > provided below.
@@ -145,8 +144,7 @@ and the RPC endpoint provided by `katana`:
 starkli class-hash-at <SMART_WALLET_ADDRESS> --rpc http://0.0.0.0:5050
 ```
 
-[starkli installation]:
-  https://docs.starknet.io/build/quickstart/environment-setup
+[starkli installation]: https://book.starkli.rs/installation
 
 ### Contract Deployment
 

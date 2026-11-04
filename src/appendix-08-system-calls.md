@@ -1,7 +1,9 @@
 # Appendix A - System Calls
 
-This chapter is based on the Starknet documentation available at
-[Starknet Docs](https://docs.starknet.io/build/corelib/core-starknet-syscalls).
+This chapter is based on the Starknet documentation. The signatures come from
+the corelib's
+[`core::starknet::syscalls`](https://docs.starknet.io/build/corelib/core-starknet-syscalls)
+module.
 
 Writing smart contracts requires various associated operations, such as calling
 another contract or accessing the contract’s storage, that standalone programs
