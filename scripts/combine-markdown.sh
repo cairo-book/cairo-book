@@ -4,10 +4,9 @@
 # appendix files at the end.
 #
 # Usage: scripts/combine-markdown.sh [output_file]
-#   Without an argument, regenerates the tracked llms-full.txt at the repo root.
-#   CI passes book/html/llms-full.txt so the deploy never touches tracked files.
+#   Run after `mdbook build`. Writes book/html/llms-full.txt by default.
 
-output_file="${1:-llms-full.txt}"
+output_file="${1:-book/html/llms-full.txt}"
 markdown_dir="book/markdown"
 
 # Remove the output file if it already exists
