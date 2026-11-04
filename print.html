@@ -284,7 +284,7 @@ every Cairo project</p>
 <p><a href="https://scarbs.xyz/">The Cairo Package Registry</a>: The host for Cairo's
 growing collection of reusable libraries, including
 <a href="https://github.com/keep-starknet-strange/alexandria">Alexandria</a>,
-<a href="https://docs.openzeppelin.com/contracts-cairo/1.0.0/">Open Zeppelin Contracts for Cairo</a>,
+<a href="https://docs.openzeppelin.com/contracts-cairo">Open Zeppelin Contracts for Cairo</a>,
 all of which can be easily integrated via Scarb, streamlining development and
 dependency management</p>
 </li>
@@ -427,12 +427,6 @@ Cairo project.</li>
 <p>If you have any questions about Starknet or Cairo, you can ask them in the
 <a href="https://discord.gg/starknet-community">Starknet Discord server</a>. The community is friendly and always willing
 to help.</p>
-<h2 id="interacting-with-the-starknet-ai-agent"><a class="header" href="#interacting-with-the-starknet-ai-agent">Interacting with the Starknet AI Agent</a></h2>
-<p>Starknet proposes its own AI agent designed to assist with Cairo and
-Starknet-related questions. This AI agent is trained on the Cairo book and the
-Starknet documentation, using Retrieval-Augmented Generation (RAG) to
-efficiently retrieve information and provide accurate assistance.</p>
-<p>You can find the Starknet Agent on the <a href="https://ask.starknet.io/">Starknet Agent</a> website.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <p>The first step is to install Cairo. We'll download Cairo through
 <a href="https://github.com/software-mansion/starkup">starkup</a>, a command line tool for managing Cairo versions and
@@ -479,7 +473,7 @@ snforge 0.64.1
 </code></pre>
 <p>We'll describe Starknet Foundry in more detail in <a href="./ch10-01-how-to-write-tests.html">Chapter
 10</a> for Cairo programs testing and
-in <a href="./ch104-02-testing-smart-contracts.html#testing-smart-contracts-with-starknet-foundry">Chapter 18</a>
+in <a href="./ch104-02-testing-smart-contracts.html">Chapter 18</a>
 when discussing Starknet smart contract testing and security in the second part
 of the book.</p>
 <h2 id="installing-the-vscode-extension"><a class="header" href="#installing-the-vscode-extension">Installing the VSCode Extension</a></h2>
@@ -11673,7 +11667,7 @@ algebraic circuits. Its design is particularly efficient for Zero-Knowledge
 proof systems, including STARKs (so, Cairo). Poseidon uses a method called a
 'sponge construction,' which soaks up data and transforms it securely using a
 process known as the Hades permutation. Cairo's version of Poseidon is based on
-a three-element state permutation with <a href="https://github.com/starkware-industries/poseidon/blob/main/poseidon3.txt">specific
+a three-element state permutation with <a href="https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/poseidon_utils.py">specific
 parameters</a>.</p>
 <h4 id="when-to-use-them"><a class="header" href="#when-to-use-them">When to Use Them?</a></h4>
 <p>Pedersen was the first hash function used on Starknet, and is still used to
@@ -14748,8 +14742,8 @@ more than optimistic rollups. You can learn more about STARKs from Starkware's
 Medium <a href="https://medium.com/starkware/starks-starkex-and-starknet-9a426680745a">article</a>, which serves as a good primer.</p>
 <blockquote>
 <p>Starknet's architecture is thoroughly described in the
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/">Starknet documentation</a>,
-which is a great resource to learn more about the Starknet network.</p>
+<a href="https://docs.starknet.io/learn/protocol/intro">Starknet documentation</a>, which
+is a great resource to learn more about the Starknet network.</p>
 </blockquote>
 <p>Remember Cairo? It is, in fact, a language developed specifically to work with
 STARKs and make them general-purpose. With Cairo, we can write <strong>provable
@@ -14767,7 +14761,7 @@ developed entirely <strong>on-chain</strong>. Starknet has been specifically des
 maximize the capabilities of STARK proofs for optimal scalability.</p>
 <blockquote>
 <p>Learn more about Account Abstraction in the
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Account_Abstraction/introduction/">Starknet documentation</a>.</p>
+<a href="https://docs.starknet.io/learn/protocol/accounts">Starknet documentation</a>.</p>
 </blockquote>
 <h2 id="cairo-programs-and-starknet-smart-contracts-what-is-the-difference"><a class="header" href="#cairo-programs-and-starknet-smart-contracts-what-is-the-difference">Cairo Programs and Starknet Smart Contracts: What Is the Difference?</a></h2>
 <p>Starknet contracts are a special superset of Cairo programs, so the concepts
@@ -20616,16 +20610,16 @@ upgrading.</p>
 <h2 id="how-upgradeability-works-in-starknet"><a class="header" href="#how-upgradeability-works-in-starknet">How Upgradeability Works in Starknet</a></h2>
 <p>To better comprehend how upgradeability works in Starknet, it's important to
 understand the difference between a contract and its contract class.</p>
-<p><a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/class-hash">Contract Classes</a> represent the source code of a program. All
+<p><a href="./ch100-01-contracts-classes-and-instances.html#class-hash">Contract Classes</a> represent the source code of a program. All
 contracts are associated to a class, and many contracts can be instances of the
-same one. Classes are usually represented by a <a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/class-hash">class hash</a>, and
+same one. Classes are usually represented by a <a href="./ch100-01-contracts-classes-and-instances.html#class-hash">class hash</a>, and
 before a contract of a class can be deployed, the class hash needs to be
 declared.</p>
 <p>A contract instance is a deployed contract corresponding to a class, with its
 own storage.</p>
 <h2 id="replacing-contract-classes"><a class="header" href="#replacing-contract-classes">Replacing Contract Classes</a></h2>
 <h3 id="the-replace_class_syscall"><a class="header" href="#the-replace_class_syscall">The <code>replace_class_syscall</code></a></h3>
-<p>The <code>replace_class</code> <a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/">syscall</a> allows a contract to update its
+<p>The <code>replace_class</code> <a href="./appendix-08-system-calls.html#replace_class">syscall</a> allows a contract to update its
 source code by replacing its class hash once deployed.</p>
 <p>To upgrade a contract, expose an entry point that executes
 <code>replace_class_syscall</code> with the new class hash as an argument:</p>
@@ -20641,7 +20635,7 @@ fn upgrade(new_class_hash: ClassHash) {
 <blockquote>
 <p><strong>📌 Note</strong>: If a contract is deployed without this mechanism, its class hash
 can still be replaced through
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/#library_call">library calls</a>.</p>
+<a href="./appendix-08-system-calls.html#library_call">library calls</a>.</p>
 </blockquote>
 <blockquote>
 <p><strong>⚠️ WARNING</strong>: Thoroughly review changes and potential impacts before
@@ -20718,7 +20712,7 @@ in a contract</span></p>
 <li>An <code>Upgraded</code> event emitted when the upgrade is successful</li>
 <li>Protection against upgrading to a zero class hash</li>
 </ul>
-<p>For more information, please refer to the <a href="https://docs.openzeppelin.com/contracts-cairo/0.18.0/upgrades">OpenZeppelin docs API
+<p>For more information, please refer to the <a href="https://docs.openzeppelin.com/contracts-cairo/4.x/upgrades">OpenZeppelin docs API
 reference</a>.</p>
 <h2 id="security-considerations"><a class="header" href="#security-considerations">Security Considerations</a></h2>
 <p>Upgrades can be very sensitive operations, and security should always be top of
@@ -20823,7 +20817,7 @@ be called from L1 with the <code>#[l1_handler]</code> attribute.</p>
 where we want to send a message to Starknet. The <code>_snMessaging</code> is a state
 variable already initialized with the address of the <code>StarknetMessaging</code>
 contract. You can check all Starknet contract and sequencer addresses
-<a href="https://docs.starknet.io/documentation/tools/important_addresses/">here</a>.</p>
+<a href="https://docs.starknet.io/learn/cheatsheets/chain-info#important-addresses">here</a>.</p>
 <pre><code class="language-js">// Sends a message on Starknet with a single felt.
 function sendMessageFelt(
     uint256 contractAddress,
@@ -21419,7 +21413,7 @@ payload[0] = 1;
 payload[1] = 0;
 </code></pre>
 <p>If you want to learn more about the messaging mechanism, you can visit the
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/">Starknet documentation</a>.</p>
+<a href="https://docs.starknet.io/learn/protocol/messaging">Starknet documentation</a>.</p>
 <p>You can also find a <a href="https://github.com/glihm/starknet-messaging-dev">detailed guide here</a> to test the
 messaging system locally.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="oracle-interactions"><a class="header" href="#oracle-interactions">Oracle Interactions</a></h1>
@@ -21428,15 +21422,13 @@ blockchain using oracles. Oracles are third-party services that serve as
 intermediaries, securely transmitting external data, such as asset prices,
 weather information, or other real-world data, to blockchains and smart
 contracts. It also provides practical examples and code snippets, including how
-to use
-<a href="https://docs.pragma.build/Resources/Starknet/data-feeds/consuming-data">Pragma price feeds</a>
-and <a href="https://github.com/cartridge-gg/vrf">Cartridge VRF</a> for verifiable random
+to use <a href="https://docs.pragma.build/starknet/development">Pragma price feeds</a> and
+<a href="https://github.com/cartridge-gg/vrf">Cartridge VRF</a> for verifiable random
 numbers in games.</p>
 <p>For further reading:</p>
 <ul>
-<li>Pragma Oracle price feeds:
-https://docs.pragma.build/Resources/Starknet/data-feeds/consuming-data</li>
-<li>Cartridge VRF overview and usage: https://github.com/cartridge-gg/vrf</li>
+<li>Pragma Oracle price feeds: <a href="https://docs.pragma.build/starknet/development">https://docs.pragma.build/starknet/development</a></li>
+<li>Cartridge VRF overview and usage: <a href="https://github.com/cartridge-gg/vrf">https://github.com/cartridge-gg/vrf</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="price-feeds"><a class="header" href="#price-feeds">Price Feeds</a></h1>
 <p>Price feeds enabled by an oracle serve as a bridge between real-world data feed
@@ -21653,7 +21645,7 @@ address.</p>
 <p>The <code>get_asset_price</code> function is the entry point to interact with the Pragma
 oracle and has been explained in the section above.</p>
 <p>You can get a detailed guide on consuming data using Pragma price feeds on their
-<a href="https://docs.pragma.build/Resources/Starknet/data-feeds/consuming-data">documentation</a>.</p>
+<a href="https://docs.pragma.build/starknet/development">documentation</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="randomness"><a class="header" href="#randomness">Randomness</a></h1>
 <p>Since all blockchains are fundamentally deterministic and most are public
 ledgers, generating truly unpredictatable randomness on-chain presents a
@@ -22106,8 +22098,8 @@ signing.</li>
 contract. Then, we'll interact with the contract by calling and invoking its
 functions. You can also use the Goerli Testnet instead of <code>katana</code>. However, we
 recommend using <code>katana</code> for local development and testing. You can find the
-complete tutorial for <code>katana</code> in the <a href="https://docs.starknet.io/quick-start/using_devnet/">"Using a development
-network"</a> chapter of the Starknet Docs.</p>
+complete documentation for <code>katana</code> in the <a href="https://book.dojoengine.org/toolchain/katana">Katana overview</a> of
+the Dojo documentation.</p>
 <h3 id="the-katana-local-starknet-node"><a class="header" href="#the-katana-local-starknet-node">The <code>katana</code> Local Starknet Node</a></h3>
 <p><code>katana</code> is designed to support local development by the <a href="https://book.dojoengine.org/toolchain/katana">Dojo
 team</a>. It will allow you to do everything you need to do with
@@ -22148,13 +22140,12 @@ PREFUNDED ACCOUNTS
 <p>Before we can interact with the voting contract, we need to prepare the voter
 and admin accounts on Starknet. Each voter account must be registered and
 sufficiently funded for voting. For a more detailed understanding of how
-accounts operate with Account Abstraction, refer to the <a href="https://docs.starknet.io/architecture-and-concepts/accounts/introduction/#account_abstraction">"Account
-Abstraction"</a> chapter of the Starknet Docs.</p>
+accounts operate with Account Abstraction, refer to the <a href="https://docs.starknet.io/learn/protocol/accounts">"Accounts"</a>
+chapter of the Starknet Docs.</p>
 <h3 id="smart-wallets-for-voting"><a class="header" href="#smart-wallets-for-voting">Smart Wallets for Voting</a></h3>
 <p>Aside from Scarb you will need to have Starkli installed. Starkli is a command
 line tool that allows you to interact with Starknet. You can find the
-installation instructions in the <a href="https://docs.starknet.io/quick-start/environment-setup/">"Setting up Starkli"</a>
-chapter of the Starknet Docs.</p>
+installation instructions in the <a href="https://book.starkli.rs/installation">Starkli book</a>.</p>
 <blockquote>
 <p>Note: Please verify that the version of <code>starkli</code> match the specified version
 provided below.</p>
@@ -26048,8 +26039,10 @@ standards.</p>
 <p>The following sections contain reference material you may find useful in your
 Starknet journey.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="appendix-a---system-calls"><a class="header" href="#appendix-a---system-calls">Appendix A - System Calls</a></h1>
-<p>This chapter is based on the Starknet documentation available at
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/">Starknet Docs</a>.</p>
+<p>This chapter is based on the Starknet documentation. The signatures come from
+the corelib's
+<a href="https://docs.starknet.io/build/corelib/core-starknet-syscalls"><code>core::starknet::syscalls</code></a>
+module.</p>
 <p>Writing smart contracts requires various associated operations, such as calling
 another contract or accessing the contract’s storage, that standalone programs
 do not require.</p>
@@ -26199,7 +26192,7 @@ type <code>Span::&lt;felt252&gt;</code>.</p>
 <h4 id="description-4"><a class="header" href="#description-4">Description</a></h4>
 <p>Emits an event with a given set of keys and data.</p>
 <p>For more information and a higher-level syntax for emitting events, see
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/starknet-events/">Starknet events</a>.</p>
+<a href="./ch101-03-contract-events.html">Starknet events</a>.</p>
 <h4 id="arguments-3"><a class="header" href="#arguments-3">Arguments</a></h4>
 <ul>
 <li>
@@ -26270,7 +26263,7 @@ computed with the <code>selector!</code> macro.</p>
 and exposes these parameters to the <code>StarknetCore</code> contract on L1 once the state
 update, including the transaction, is received.</p>
 <p>For more information, see Starknet’s
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/">messaging mechanism</a>.</p>
+<a href="https://docs.starknet.io/learn/protocol/messaging">messaging mechanism</a>.</p>
 <h4 id="arguments-5"><a class="header" href="#arguments-5">Arguments</a></h4>
 <ul>
 <li>
@@ -26353,7 +26346,7 @@ contract is called via the <code>call_contract</code> syscall in the same transa
 contrast with <code>var.read()</code>, which enables you to read storage variables that are
 defined explicitly in the contract.</p>
 <p>For information on accessing storage by using the storage variables, see
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables">storage variables</a>.</p>
+<a href="./ch101-01-00-contract-storage.html">storage variables</a>.</p>
 <h4 id="arguments-8"><a class="header" href="#arguments-8">Arguments</a></h4>
 <ul>
 <li>
@@ -26395,7 +26388,7 @@ storage_read_syscall(0, storage_address).unwrap_syscall()
 contrast with <code>var.write()</code>, which enables you to write to storage variables
 that are defined explicitly in the contract.</p>
 <p>For information on accessing storage by using the storage variables, see
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables">storage variables</a>.</p>
+<a href="./ch101-01-00-contract-storage.html">storage variables</a>.</p>
 <h4 id="arguments-9"><a class="header" href="#arguments-9">Arguments</a></h4>
 <ul>
 <li>
@@ -27314,7 +27307,7 @@ implementations:</p>
 cryptography:</p>
 <ul>
 <li>StarkNet,
-<a href="https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#pedersen-hash">Hash Functions - Pedersen Hash</a></li>
+<a href="https://docs.starknet.io/learn/protocol/cryptography#pedersen-hash">Hash Functions - Pedersen Hash</a></li>
 <li>nccgroup,
 <a href="https://research.nccgroup.com/2023/03/22/breaking-pedersen-hashes-in-practice/">Breaking Pedersen Hashes in Practice</a>,
 2023, March 22</li>
@@ -27492,7 +27485,7 @@ because the public key doesn't match the one used to create the signature.</p>
 references:</p>
 <ul>
 <li>StarkNet,
-<a href="https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/">STARK curve</a></li>
+<a href="https://docs.starknet.io/learn/protocol/cryptography#the-stark-curve">STARK curve</a></li>
 <li>Svetlin Nakov,
 <a href="https://cryptobook.nakov.com/digital-signatures/ecdsa-sign-verify-messages">ECDSA: Elliptic Curve Signatures</a>,
 2020</li>
@@ -27620,7 +27613,7 @@ valid field elements before reading the output.</p>
 applications:</p>
 <ul>
 <li>StarkNet,
-<a href="https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/">STARK Curve</a></li>
+<a href="https://docs.starknet.io/learn/protocol/cryptography#the-stark-curve">STARK Curve</a></li>
 <li>Andrea Corbellini,
 <a href="https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/">Elliptic Curve Cryptography: a gentle introduction</a></li>
 </ul>
@@ -27684,7 +27677,7 @@ implementations:</p>
 <p>If you're interested in the Keccak hash function and its applications:</p>
 <ul>
 <li>StarkNet,
-<a href="https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#starknet_keccak">Hash Functions - Starknet Keccak</a></li>
+<a href="https://docs.starknet.io/learn/protocol/cryptography#starknet-keccak">Hash Functions - Starknet Keccak</a></li>
 <li>NIST,
 <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf">SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions</a></li>
 <li>Wikipedia,
@@ -27783,8 +27776,8 @@ implementations:</p>
 <h2 id="resources-on-poseidon-hash"><a class="header" href="#resources-on-poseidon-hash">Resources on Poseidon Hash</a></h2>
 <p>If you're interested in the Poseidon hash function and its applications:</p>
 <ul>
-<li><a href="https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#poseidon-hash">StarkNet - Hash Functions: Poseidon Hash</a></li>
-<li><a href="https://github.com/starkware-industries/poseidon/tree/main">StarkWare - Poseidon Implementation</a></li>
+<li><a href="https://docs.starknet.io/learn/protocol/cryptography#poseidon-hash">StarkNet - Hash Functions: Poseidon Hash</a></li>
+<li><a href="https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/poseidon_utils.py">StarkWare - Poseidon Implementation</a></li>
 <li><a href="https://eprint.iacr.org/2019/458.pdf">Poseidon: A New Hash Function for Zero-Knowledge Proof Systems</a>
 (original paper)</li>
 <li><a href="https://www.poseidon-hash.info/">Poseidon: ZK-friendly Hashing</a></li>

@@ -357,7 +357,7 @@ be called from L1 with the <code>#[l1_handler]</code> attribute.</p>
 where we want to send a message to Starknet. The <code>_snMessaging</code> is a state
 variable already initialized with the address of the <code>StarknetMessaging</code>
 contract. You can check all Starknet contract and sequencer addresses
-<a href="https://docs.starknet.io/documentation/tools/important_addresses/">here</a>.</p>
+<a href="https://docs.starknet.io/learn/cheatsheets/chain-info#important-addresses">here</a>.</p>
 <pre><code class="language-js">// Sends a message on Starknet with a single felt.
 function sendMessageFelt(
     uint256 contractAddress,
@@ -953,7 +953,7 @@ payload[0] = 1;
 payload[1] = 0;
 </code></pre>
 <p>If you want to learn more about the messaging mechanism, you can visit the
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/">Starknet documentation</a>.</p>
+<a href="https://docs.starknet.io/learn/protocol/messaging">Starknet documentation</a>.</p>
 <p>You can also find a <a href="https://github.com/glihm/starknet-messaging-dev">detailed guide here</a> to test the
 messaging system locally.</p>
 

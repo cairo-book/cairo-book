@@ -274,8 +274,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="appendix-a---system-calls"><a class="header" href="#appendix-a---system-calls">Appendix A - System Calls</a></h1>
-<p>This chapter is based on the Starknet documentation available at
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/">Starknet Docs</a>.</p>
+<p>This chapter is based on the Starknet documentation. The signatures come from
+the corelib's
+<a href="https://docs.starknet.io/build/corelib/core-starknet-syscalls"><code>core::starknet::syscalls</code></a>
+module.</p>
 <p>Writing smart contracts requires various associated operations, such as calling
 another contract or accessing the contract’s storage, that standalone programs
 do not require.</p>
@@ -425,7 +427,7 @@ type <code>Span::&lt;felt252&gt;</code>.</p>
 <h4 id="description-4"><a class="header" href="#description-4">Description</a></h4>
 <p>Emits an event with a given set of keys and data.</p>
 <p>For more information and a higher-level syntax for emitting events, see
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/starknet-events/">Starknet events</a>.</p>
+<a href="./ch101-03-contract-events.html">Starknet events</a>.</p>
 <h4 id="arguments-3"><a class="header" href="#arguments-3">Arguments</a></h4>
 <ul>
 <li>
@@ -496,7 +498,7 @@ computed with the <code>selector!</code> macro.</p>
 and exposes these parameters to the <code>StarknetCore</code> contract on L1 once the state
 update, including the transaction, is received.</p>
 <p>For more information, see Starknet’s
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/">messaging mechanism</a>.</p>
+<a href="https://docs.starknet.io/learn/protocol/messaging">messaging mechanism</a>.</p>
 <h4 id="arguments-5"><a class="header" href="#arguments-5">Arguments</a></h4>
 <ul>
 <li>
@@ -579,7 +581,7 @@ contract is called via the <code>call_contract</code> syscall in the same transa
 contrast with <code>var.read()</code>, which enables you to read storage variables that are
 defined explicitly in the contract.</p>
 <p>For information on accessing storage by using the storage variables, see
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables">storage variables</a>.</p>
+<a href="./ch101-01-00-contract-storage.html">storage variables</a>.</p>
 <h4 id="arguments-8"><a class="header" href="#arguments-8">Arguments</a></h4>
 <ul>
 <li>
@@ -621,7 +623,7 @@ storage_read_syscall(0, storage_address).unwrap_syscall()
 contrast with <code>var.write()</code>, which enables you to write to storage variables
 that are defined explicitly in the contract.</p>
 <p>For information on accessing storage by using the storage variables, see
-<a href="https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables">storage variables</a>.</p>
+<a href="./ch101-01-00-contract-storage.html">storage variables</a>.</p>
 <h4 id="arguments-9"><a class="header" href="#arguments-9">Arguments</a></h4>
 <ul>
 <li>
