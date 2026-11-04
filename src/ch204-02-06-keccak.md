@@ -67,7 +67,7 @@ implementations:
 If you're interested in the Keccak hash function and its applications:
 
 - StarkNet,
-  [Hash Functions - Starknet Keccak](https://docs.starknet.io/architecture-and-concepts/cryptography/hash-functions/#starknet_keccak)
+  [Hash Functions - Starknet Keccak](https://docs.starknet.io/learn/protocol/cryptography#starknet-keccak)
 - NIST,
   [SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf)
 - Wikipedia,

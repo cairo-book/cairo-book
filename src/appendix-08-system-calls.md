@@ -1,7 +1,9 @@
 # Appendix A - System Calls
 
-This chapter is based on the Starknet documentation available at
-[Starknet Docs](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/system-calls-cairo1/).
+This chapter is based on the Starknet documentation. The signatures come from
+the corelib's
+[`core::starknet::syscalls`](https://docs.starknet.io/build/corelib/core-starknet-syscalls)
+module.
 
 Writing smart contracts requires various associated operations, such as calling
 another contract or accessing the contract’s storage, that standalone programs
@@ -191,7 +193,7 @@ pub extern fn emit_event_syscall(
 Emits an event with a given set of keys and data.
 
 For more information and a higher-level syntax for emitting events, see
-[Starknet events](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/starknet-events/).
+[Starknet events](./ch101-03-contract-events.md).
 
 #### Arguments
 
@@ -278,7 +280,7 @@ and exposes these parameters to the `StarknetCore` contract on L1 once the state
 update, including the transaction, is received.
 
 For more information, see Starknet’s
-[messaging mechanism](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/messaging-mechanism/).
+[messaging mechanism](https://docs.starknet.io/learn/protocol/messaging).
 
 #### Arguments
 
@@ -389,7 +391,7 @@ contrast with `var.read()`, which enables you to read storage variables that are
 defined explicitly in the contract.
 
 For information on accessing storage by using the storage variables, see
-[storage variables](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables).
+[storage variables](./ch101-01-00-contract-storage.md).
 
 #### Arguments
 
@@ -441,7 +443,7 @@ contrast with `var.write()`, which enables you to write to storage variables
 that are defined explicitly in the contract.
 
 For information on accessing storage by using the storage variables, see
-[storage variables](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-storage/#storage_variables).
+[storage variables](./ch101-01-00-contract-storage.md).
 
 #### Arguments
 

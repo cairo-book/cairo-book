@@ -72,8 +72,7 @@ when discussing Starknet smart contract testing and security in the second part
 of the book.
 
 [writing tests]: ./ch10-01-how-to-write-tests.md
-[testing with snfoundry]:
-  ./ch104-02-testing-smart-contracts.md#testing-smart-contracts-with-starknet-foundry
+[testing with snfoundry]: ./ch104-02-testing-smart-contracts.md
 
 ## Installing the VSCode Extension
 
