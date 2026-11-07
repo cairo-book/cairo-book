@@ -68,7 +68,6 @@ mathjax-support = true
 "/ch11-04-hash.html" = "/cairo-book/ch12-04-hash.html"
 "/ch11-05-macros.html" = "/cairo-book/ch12-05-macros.html"
 "/ch11-06-inlining-in-cairo.html" = "/cairo-book/ch12-06-inlining-in-cairo.html"
-"/ch11-07-gas-optimisation.html" = "/cairo-book/ch12-07-gas-optimisation.html"
 "/ch11-08-printing.html" = "/cairo-book/ch12-08-printing.html"
 "/ch11-09-deref-coercion.html" = "/cairo-book/ch12-09-deref-coercion.html"
 "/ch11-10-arithmetic-circuits.html" = "/cairo-book/ch12-10-arithmetic-circuits.html"
