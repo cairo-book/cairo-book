@@ -45,7 +45,6 @@ Usage: scripts/bump-versions.sh [options]
 
 Not handled by this script (deliberately):
   * Scarb.lock / Cargo.lock      -- run `scarb fetch` / `cargo update` instead.
-  * llms-full.txt, summary.md    -- generated; regenerate via their own scripts.
   * docs/upstream-gap-report-*   -- records old versions as a historical baseline.
   * "Needed in Cairo <v>" notes  -- factual claims about a past release.
   * Version banners with build hashes/dates -- paste real `scarb --version` output.

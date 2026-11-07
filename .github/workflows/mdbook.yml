@@ -81,8 +81,8 @@ jobs:
           echo "Updating meta descriptions..."
           bun run scripts/update-meta-descriptions.ts
 
-      - name: Copy LLMs file
-        run: cp llms.txt book/html/
+      - name: Generate llms.txt from SUMMARY.md
+        run: bun run scripts/generate-llms-txt.ts book/html/llms.txt
 
       - name: Generate llms-full.txt from the built book
         run: ./scripts/combine-markdown.sh book/html/llms-full.txt
