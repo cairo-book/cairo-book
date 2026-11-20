@@ -32,8 +32,9 @@ create a simple contract that stores values mapped to the caller's address.
 > is a [phantom type][phantom types] designed specifically for contract storage.
 > However, `Map` has limitations: it can't be instantiated as a regular
 > variable, used as a function parameter, or included as a member in regular
-> structs. `Map` can only be used as a storage variable within a contract's
-> storage struct. To work with the contents of a `Map` in memory or perform
+> structs. `Map` can be a storage variable in a contract's storage struct or a
+> member of a [storage node](./ch101-01-00-contract-storage.md#storage-nodes).
+> To work with the contents of a `Map` in memory or perform
 > complex operations, you'll need to copy its elements to and from a
 > `Felt252Dict` or other suitable data structure.
 

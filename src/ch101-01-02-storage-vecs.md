@@ -18,6 +18,10 @@ write operations on the `Vec` type.
 > with the full contents of a `Vec<T>`, you'll need to copy its elements to and
 > from a memory `Array<T>`.
 
+Like `Map`, a storage `Vec` can also be a member of a
+[storage node](./ch101-01-00-contract-storage.md#storage-nodes), allowing a
+contract to group storage collections with related fields.
+
 ## Declaring and Using Storage Vectors
 
 To declare a Storage Vector, use the `Vec` type enclosed in angle brackets `<>`,
